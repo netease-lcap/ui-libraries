@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "toExcel": "ts-node scripts/toExcel.ts"
+  },
+  "dependencies": {
+    "fs-extra": "^11.1.1",
+    "node-xlsx": "^0.23.0",
+    "xlsx-js-style": "^1.2.0",
+    "xlsx-populate": "^1.21.0",
+    "yaml": "^2.3.1"
+  }
+}
