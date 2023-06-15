@@ -346,6 +346,79 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
             verticalAlignment: 'center',
         });
     }
+
+    {
+        const sheet = workbook.addSheet('组件特性分析');
+        const firstRowData = [
+            '分类', '端', '组件标题', '子组件标题',
+            '数据源特性（data-source/data-schema）',
+            '分页特性（pageable/pagination/page-size/page-size-options/page-number）',
+            '链接特性（linkType/hrefAndTo/target）',
+            '值特性（value/values）'
+        ];
+        sheet.range(1, 1, 1, firstRowData.length).value([firstRowData]);
+        sheet.row(1).style({
+            bold: true,
+            fill: 'E1EAFF',
+        }).height(22);
+        [6, 4, 18, 14, 14, 14, 14, 14].forEach((width, index) => sheet.column(index + 1).width(width));
+
+        let rowNumber = 2;
+        let lastNumbers = [null];
+        const otherKeys = {};
+        components.forEach((component) => {
+            component.subs.forEach((sub) => {
+                const hasKeys = ['', '', '', ''];
+                sub.attrs?.filter((attr) => !attr.advanced).forEach((attr) => {
+                    if (['data-source', 'data-schema'].includes(attr.name))
+                        hasKeys[0] = true;
+                    else if (['pageable', 'pagination', 'page-size', 'page-size-options', 'page-number'].includes(attr.name))
+                        hasKeys[1] = true;
+                    else if (['linkType', 'hrefAndTo', 'target'].includes(attr.name))
+                        hasKeys[2] = true;
+                    else if (['value', 'values'].includes(attr.name))
+                        hasKeys[3] = true;
+                    else {
+                        // const index = Object.keys(otherKeys).indexOf(attr.name);
+                        // if (~index) {
+                        //     hasKeys[4 + index] = true;
+                        // } else {
+                        //     // hasKeys[4 + otherKeys.length] = true;
+                        //     otherKeys.push(attr.name);
+                        // }
+                        // console.log(hasKeys);
+                        if (otherKeys[attr.name])
+                            otherKeys[attr.name]++;
+                        else
+                            otherKeys[attr.name] = 1;
+                    }
+                });
+                sheet.range(rowNumber, 1, rowNumber, firstRowData.length + hasKeys.length).value([
+                    [groupMap[component.group], component.frontend.toUpperCase(), component.alias, sub.title, ...hasKeys.map((item) => item ? 'true' : '')],
+                ]);
+                [1].forEach((col) => mergeRows(sheet, lastNumbers, rowNumber, col));
+                mergeRows(sheet, lastNumbers, rowNumber, 2, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
+                                                        || sheet.cell(rowNumber, 3).value() !== sheet.cell(rowNumber - 1, 3).value());
+                mergeRows(sheet, lastNumbers, rowNumber, 3, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
+                                                        || sheet.cell(rowNumber, 3).value() !== sheet.cell(rowNumber - 1, 3).value());
+                mergeRows(sheet, lastNumbers, rowNumber, 4, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
+                                                        || sheet.cell(rowNumber, 3).value() !== sheet.cell(rowNumber - 1, 3).value()
+                                                        || sheet.cell(rowNumber, 4).value() !== sheet.cell(rowNumber - 1, 4).value());
+                rowNumber++;
+            });
+        });
+        [1, 2, 3, 4].forEach((col) => mergeRows(sheet, lastNumbers, rowNumber, col, true));
+        // sheet.range(1, firstRowData.length + 1, 1, firstRowData.length + 1 + otherKeys.length).value([otherKeys]);
+        Object.keys(otherKeys).forEach((key) => {
+            console.log(`${key}: ${otherKeys[key]}`);
+        });
+
+        const MERGE_COUNT = 4;
+        sheet.freezePanes(MERGE_COUNT, 1);
+        sheet.usedRange().style({
+            verticalAlignment: 'center',
+        });
+    }
     
     workbook.sheet(0).delete();
     
