@@ -96,6 +96,9 @@ h5Components.forEach((component) => {
     component.componentPath = componentPath;
     component.subs = YAML.parse(fs.readFileSync(componentPath, 'utf8'));
 });
+/**
+ * PC、H5 按组对齐，用于基本信息展示
+ */
 let components0 = pcComponents.slice();
 h5Components.forEach((item) => {
     let lastIndex = components0.length - 1;
@@ -108,6 +111,9 @@ h5Components.forEach((item) => {
     }
     components0.splice(lastIndex + 1, 0, item);
 });
+/**
+ * PC、H5 按名字对齐，方便属性、事件对比
+ */
 let components = pcComponents.slice();
 h5Components.forEach((item) => {
     let lastIndex = components.length - 1;
