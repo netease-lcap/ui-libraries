@@ -84,6 +84,7 @@ const pcComponents = require(`../pc-ui/scripts/lcap/config`);
 pcComponents.forEach((component) => {
     let componentPath = path.join(__dirname, `../pc-ui/src/components/${component.name}.vue/api.yaml`);
     component.frontend = 'pc';
+    component.componentPath = componentPath;
     component.subs = YAML.parse(fs.readFileSync(componentPath, 'utf8'));
 });
 const h5Components = require(`../h5-ui/scripts/lcap/config`);
@@ -92,6 +93,7 @@ h5Components.forEach((component) => {
     if (!fs.existsSync(componentPath))
         componentPath = path.join(__dirname, `../h5-ui/src-vusion/components/${component.name}/api.yaml`);
     component.frontend = 'h5';
+    component.componentPath = componentPath;
     component.subs = YAML.parse(fs.readFileSync(componentPath, 'utf8'));
 });
 let components0 = pcComponents.slice();
