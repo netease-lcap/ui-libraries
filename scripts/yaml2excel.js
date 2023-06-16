@@ -2,6 +2,7 @@ const YAML = require('yaml');
 const XlsxPopulate = require('xlsx-populate');
 const fs = require('fs-extra');
 const path = require('path');
+const { components, components0 } = require('./common/loadComponents');
 
 const groupMap = {
     Layout: '布局',
@@ -15,30 +16,6 @@ const groupMap = {
     Feedback: '反馈',
     Effects: '特效',
     Process: '流程',
-}
-
-function mergeSameRows(sheet, endColumnNumber) {
-    const usedRange = sheet.usedRange();
-    let startColumnNumber = usedRange.startCell().columnNumber();
-    let startRowNumber = usedRange.startCell().rowNumber();
-    endColumnNumber = endColumnNumber || usedRange.endCell().columnNumber();
-    let endRowNumber = usedRange.endCell().rowNumber();
-
-    for (let i = startColumnNumber; i <= endColumnNumber; i++) {
-        let lastValue;
-        let lastRowNumber = 1;
-        for (let j = startRowNumber; j <= endRowNumber; j++) {
-            const value = sheet.cell(j, i).value();
-            if (lastValue && lastValue !== value) {
-                j - 1 - lastRowNumber >= 1 && sheet.range(lastRowNumber, i, j - 1, i).merged(true);
-                lastRowNumber = j;
-            }
-            lastValue = value;
-        }
-        endRowNumber - lastRowNumber >= 1 && sheet.range(lastRowNumber, i, endRowNumber, i).merged(true);
-    }
-
-    return usedRange;
 }
 
 function mergeRows(sheet, lastNumbers, rowNumber, col, condition) {
@@ -65,76 +42,6 @@ function collectOtherKeys(obj, otherKeys, excludedKeys) {
     return hasKeys;
 }
 
-// function escape(str) {
-//     // const re = /[^\u3000-\u303f\u4e00-\u9fa5\uf900-\ufa2d\uff01-\uff5ea-zA-Z0-9_\s`"'-_\{\}<>~\.,%]/g;
-//     // const cap = re.exec(str);
-//     // if (cap)
-//     //     console.log(cap[0], cap[0].charCodeAt(0));
-//     // return str.replace(re, '_');
-//     return str.replace(/[\u0008]/g, '_');
-// }
-
-/**
- * - attr
- * - event
- * - method
- * - slot
- */
-const pcComponents = require(`../pc-ui/scripts/lcap/config`);
-pcComponents.forEach((component) => {
-    let componentPath = path.join(__dirname, `../pc-ui/src/components/${component.name}.vue/api.yaml`);
-    component.frontend = 'pc';
-    component.componentPath = componentPath;
-    component.subs = YAML.parse(fs.readFileSync(componentPath, 'utf8'));
-});
-const h5Components = require(`../h5-ui/scripts/lcap/config`);
-h5Components.forEach((component) => {
-    let componentPath = path.join(__dirname, `../h5-ui/src/${component.name}/api.yaml`);
-    if (!fs.existsSync(componentPath))
-        componentPath = path.join(__dirname, `../h5-ui/src-vusion/components/${component.name}/api.yaml`);
-    component.frontend = 'h5';
-    component.componentPath = componentPath;
-    component.subs = YAML.parse(fs.readFileSync(componentPath, 'utf8'));
-});
-/**
- * PC、H5 按组对齐，用于基本信息展示
- */
-let components0 = pcComponents.slice();
-h5Components.forEach((item) => {
-    let lastIndex = components0.length - 1;
-    for (let i = components0.length - 1; i >= 0; i--) {
-        const item2 = components0[i];
-        if (item2.group === item.group) {
-            lastIndex = i;
-            break;
-        }
-    }
-    components0.splice(lastIndex + 1, 0, item);
-});
-/**
- * PC、H5 按名字对齐，方便属性、事件对比
- */
-let components = pcComponents.slice();
-h5Components.forEach((item) => {
-    let lastIndex = components.length - 1;
-    for (let i = components.length - 1; i >= 0; i--) {
-        const item2 = components[i];
-        if (item2.alias === item.alias) {
-            lastIndex = i;
-            break;
-        }
-    }
-    if (lastIndex === components.length - 1) {
-        for (let i = components.length - 1; i >= 0; i--) {
-            const item2 = components[i];
-            if (item2.group === item.group) {
-                lastIndex = i;
-                break;
-            }
-        }
-    }
-    components.splice(lastIndex + 1, 0, item);
-});
 XlsxPopulate.fromBlankAsync().then((workbook) => {
         
     {
@@ -152,6 +59,8 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
         const otherKeys = [];
         components0.forEach((component) => {
             component.subs.forEach((sub) => {
+                if (sub.advanced)
+                    return;
                 const hasKeys = collectOtherKeys(sub, otherKeys, ['name', 'title', 'icon', 'description', 'labels', 'attrs', 'slots', 'events', 'methods', 'computed', 'aria']);
                 sheet.range(rowNumber, 1, rowNumber, firstRowData.length + hasKeys.length).value([
                     [groupMap[component.group], component.frontend.toUpperCase(), component.name, component.alias, sub.name, sub.title, sub.icon, sub.description, ...hasKeys.map((key) => key && JSON.stringify(sub[key]))],
@@ -187,6 +96,8 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
         const otherKeys = [];
         components.forEach((component) => {
             component.subs.forEach((sub) => {
+                if (sub.advanced)
+                    return;
                 sub.attrs && sub.attrs.forEach((attr) => {
                     if (attr.advanced)
                         return;
@@ -194,7 +105,7 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
                     if (/[\u0008]/g.test(attr.description))
                         console.log(sub.title, attr.name);
                     sheet.range(rowNumber, 1, rowNumber, firstRowData.length + hasKeys.length).value([
-                        [groupMap[component.group], component.frontend.toUpperCase(), component.alias, sub.title, attr.group || '主要属性', attr.name, attr.title, attr.description, `${attr.model || ''}/${attr.sync || ''}`, attr.type, JSON.stringify(attr.default), JSON.stringify(attr.options), attr.display, attr.bindHide, attr.tooltipLink, ...hasKeys.map((key) => key && JSON.stringify(attr[key]))],
+                        [groupMap[component.group], component.frontend.toUpperCase(), component.alias, sub.title, attr.group || '主要属性', attr.name, attr.title, attr.description, ({ '11': 'both', '10': 'onlyModel', '01': 'onlySync', '00': '' })[Number(!!attr.model) + '' + Number(!!attr.sync)], attr.type, JSON.stringify(attr.default), JSON.stringify(attr.options), attr.display, attr.bindHide, attr.tooltipLink, ...hasKeys.map((key) => key && JSON.stringify(attr[key]))],
                     ]);
                     [1].forEach((col) => mergeRows(sheet, lastNumbers, rowNumber, col));
                     mergeRows(sheet, lastNumbers, rowNumber, 2, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
@@ -237,6 +148,8 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
         const otherKeys = [];
         components.forEach((component) => {
             component.subs.forEach((sub) => {
+                if (sub.advanced)
+                    return;
                 sub.events && sub.events.forEach((event) => {
                     if (event.advanced)
                         return;
@@ -281,6 +194,8 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
         const otherKeys = [];
         components.forEach((component) => {
             component.subs.forEach((sub) => {
+                if (sub.advanced)
+                    return;
                 sub.methods && sub.methods.forEach((method) => {
                     if (method.advanced)
                         return;
@@ -325,6 +240,8 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
         const otherKeys = [];
         components.forEach((component) => {
             component.subs.forEach((sub) => {
+                if (sub.advanced)
+                    return;
                 sub.slots && sub.slots.forEach((slot) => {
                     if (slot.advanced)
                         return;
@@ -375,6 +292,8 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
         const otherKeys = {};
         components.forEach((component) => {
             component.subs.forEach((sub) => {
+                if (sub.advanced)
+                    return;
                 const hasKeys = ['', '', '', ''];
                 sub.attrs?.filter((attr) => !attr.advanced).forEach((attr) => {
                     if (['data-source', 'data-schema'].includes(attr.name))
@@ -416,9 +335,9 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
         });
         [1, 2, 3, 4].forEach((col) => mergeRows(sheet, lastNumbers, rowNumber, col, true));
         // sheet.range(1, firstRowData.length + 1, 1, firstRowData.length + 1 + otherKeys.length).value([otherKeys]);
-        Object.keys(otherKeys).forEach((key) => {
-            console.log(`${key}: ${otherKeys[key]}`);
-        });
+        // Object.keys(otherKeys).forEach((key) => {
+        //     console.log(`${key}: ${otherKeys[key]}`);
+        // });
 
         const MERGE_COUNT = 4;
         sheet.freezePanes(MERGE_COUNT, 1);

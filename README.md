@@ -18,6 +18,24 @@ flowchart BT
 ```
 
 - [ ] YAML --> dts
+  - [ ] 基本信息
+    - [x] name
+    - [x] title
+    - [x] icon
+    - [x] description
+    - [ ] labels
+    - [ ] docs
+    - [ ] blocks
+    - [x] advanced
+  - [ ] 组件属性
+    - [x] group
+    - [x] name
+    - [x] title
+    - [x] description
+    - [x] advanced
+    - [x] syncMode
+    - [x] default
+    - [x] options
 - [ ] dts --> Excel
 - [ ] dts --> usage.json
 - [ ] Excel --> dts
