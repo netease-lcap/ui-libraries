@@ -88,7 +88,7 @@ const replaceAtrr = (sheet, oldColName, newColName) => {
 
 const replaceText = (oldText, newText) => {
     let tempText = oldText
-    if (newText == '/') {
+    if (newText == '/' || newText == '-') {
         tempText = '';
     } else if (newText) {
         tempText = newText;
