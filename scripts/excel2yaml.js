@@ -148,7 +148,8 @@ XlsxPopulate.fromFileAsync(filePath).then((workbook) => {
     formateSheetData.forEach(sheet => {
         componentMap[sheet.comTitle]?.forEach(c => {
             c.attrs?.forEach((attr) => {
-                const sheetItem = formateSheetData.find(item => item.comTitle == sheet.comTitle && item.attrOldName == attr.name)
+                const items = formateSheetData.filter(item => item.childComTitle == c.title)
+                const sheetItem = items.find(item => item.attrOldName == attr.name)
                 if (sheetItem) {
                     attr.group = replaceText(attr.group, sheetItem.attrGroup);
                     attr.title = replaceText(attr.title, sheetItem.attrTitle);
@@ -157,7 +158,7 @@ XlsxPopulate.fromFileAsync(filePath).then((workbook) => {
                     attr.docDescription = sheetItem.docDescription || '';
                 }
             })
-        })
+        }) 
     })
     components.forEach(c => {
         const { alias } = c;
@@ -179,7 +180,7 @@ XlsxPopulate.fromFileAsync(filePath).then((workbook) => {
     // 生成 YAML
     components.forEach((component) => {
         component.subs.forEach((sub) => {
-            ['next', 'nested', 'accept-parent', 'control'].forEach((key) => {
+            ['next', 'nested', 'accept-parent', 'control', 'brifeDoc'].forEach((key) => {
                 if (sub.hasOwnProperty(key))
                     delete sub[key];
             });
