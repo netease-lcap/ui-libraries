@@ -116,11 +116,11 @@ XlsxPopulate.fromFileAsync(filePath).then((workbook) => {
     // sheetData[sheet1.cell('G1').columnNumber()] = repalcedAttrTitle;
     // sheetData[sheet1.cell('K1').columnNumber()] = repalcedAttrDesc;
     
-    const tooltipLink = sheet1.range(`M1:M${endRowNumber}`).value().flat(); // 释义文档链接
-    const docDescription = sheet1.range(`N1:N${endRowNumber}`).value().flat(); // 文档描述
+    const tooltipLink = sheet1.range(`N1:N${endRowNumber}`).value().flat(); // 释义文档链接
+    const docDescription = sheet1.range(`O1:O${endRowNumber}`).value().flat(); // 文档描述
     // 插入属性
     sheetData.splice(sheet1.cell('L1').columnNumber() + 1, 0, tooltipLink, docDescription)
-  
+    
     let formateSheetData = [];
     for (let row = 1; row < sheetData.length; row++) {
         let objMap = {
@@ -133,8 +133,8 @@ XlsxPopulate.fromFileAsync(filePath).then((workbook) => {
         //   "attrName": sheetData[row][8],
           "attrTitle": sheetData[row][9],
           "attrDescription": sheetData[row][11],
-          "tooltipLink": sheetData[row][12],
-          "docDescription": sheetData[row][13]
+          "tooltipLink": sheetData[row][13],
+          "docDescription": sheetData[row][14]
         }
         formateSheetData.push(objMap);
     }
@@ -155,7 +155,7 @@ XlsxPopulate.fromFileAsync(filePath).then((workbook) => {
                     attr.title = replaceText(attr.title, sheetItem.attrTitle);
                     attr.description = replaceText(attr.description, sheetItem.attrDescription);
                     attr.tooltipLink = sheetItem.tooltipLink || '';
-                    attr.docDescription = sheetItem.docDescription || '';
+                    attr.docDescription = sheetItem.docDescription || ''
                 }
             })
         }) 
@@ -168,6 +168,7 @@ XlsxPopulate.fromFileAsync(filePath).then((workbook) => {
             }
         }
     })
+
    let order = ['数据属性', '主要属性', '交互属性', '状态属性', '样式属性', '选择属性'];
     components.forEach(c => {
        c.subs?.forEach(s => {
