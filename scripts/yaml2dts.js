@@ -41,9 +41,9 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
                 console.log(component.yamlPath, option);
         });
     }
-    let ifthen = '';
+    let ifcondition = '';
     if (attr.dependency) {
-        ifthen = attr.dependency.map((dep) => {
+        ifcondition = attr.dependency.map((dep) => {
             return Object.keys(dep).map((key) => {
                 let first = key[0];
                 if (first === '!' || first === '+') {
@@ -54,17 +54,21 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
                 }
             }).join(' && ');
         }).join(' || ');
+    } else if (attr.depProp) {
+        ifcondition = attr.depProp.map((dep) => {
+            return `_.${kebab2Camel(dep.name)} === ${json5.stringify(dep.value)}`;
+        }).join(' || ');
     }
     let onToggle = '';
     if (attr.toggleclear) {
-        onToggle = `\n        @OnToggle<${className}, '${attr.name}'>({ ${attr.toggleclear.map((key) => `${key}: null`).join(', ')} })`;
+        onToggle = `\n                { update: { ${attr.toggleclear.map((key) => `${key}: null`).join(', ')} } }`;
     } else if (attr.toggleupdate) {
         attr.toggleupdate.forEach((item) => {
-            onToggle += `\n        @OnToggle<${className}, '${attr.name}'>(${json5.stringify(item.updateData, null, 4).replace(/\n/g, '\n        ')}, value => value === ${json5.stringify(item.value)})`;
+            onToggle += `\n                { update: ${json5.stringify(item.updateData)}, if: _ => _ === ${json5.stringify(item.value)} },`;
         });
     }
 
-    return `${indent(2)}@Prop({${attr.group ? `
+    return `${indent(2)}@Prop${attr.default || attr.display || ifcondition || onToggle ? `<${className}, ${attr.advanced || attr.hidden ? 'any' : `'${kebab2Camel(attr.name)}'`}>` : ''}({${attr.group ? `
             group: '${attr.group}',` : ''}
             title: '${attr.title}',${attr.description ? `
             description: '${attr.description}',` : ''}${syncMode ? `
@@ -72,27 +76,36 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
             tooltipLink: '${attr.tooltipLink}',` : ''}${attr.bindHide ? `
             bindHide: ${attr.bindHide},` : ''}${attr.bindOpen ? `
             bindOpen: ${attr.bindOpen},` : ''}${attr.default ? `
-            default: ${json5.stringify(attr.default)},` : ''}
-        })${attr.options && !attr.display ? `
-        @PropSetter('enumSelect', {
-            titles: [${attr.options.map((option) => (option.title || option.name).includes?.(`'`) ? `"${option.title || option.name}"` : json5.stringify(option.title || option.name)).join(', ')}],
-        })` : ''}${attr.display === 'capsules' ? `
-        @PropSetter('capsules', {
-            titles: [${attr.options.map((option) => (option.title || option.name).includes?.(`'`) ? `"${option.title || option.name}"` : json5.stringify(option.title || option.name)).join(', ')}],
-            icons: [${attr.options.map((option) =>json5.stringify(option.icon)).join(', ')}],
-            tooltips: [${attr.options.map((option) =>json5.stringify(option.tooltip)).join(', ')}],
-        })` : ''}${attr.display === 'number' ? `
-        @PropSetter('numberInput', {${attr.place ? `
-            placeholder: '${attr.place}',` : ''}${attr.min ? `
-            min: ${attr.min},` : ''}${attr.max ? `
-            max: ${attr.max},` : ''}${attr.precision ? `
-            precision: ${attr.precision},` : ''}
-        })` : ''}${attr.display === 'property-select' ? `
-        @PropSetter('propertySelect')` : ''}${!attr.display && attr.place ? `
-        @PropSetter('input', {
-            placeholder: '${attr.place}',
-        })` : ''}${ifthen ? `
-        @If<${className}>(_ => ${ifthen}${attr.dependencyDisplay ? `, '${attr.dependencyDisplay}'` : ''})` : ''}${onToggle ? onToggle : ''}
+            default: ${json5.stringify(attr.default)},` : ''}${attr.options && !attr.display ? `
+            setter: {
+                type: 'enumSelect',
+                titles: [${attr.options.map((option) => (option.title || option.name).includes?.(`'`) ? `"${option.title || option.name}"` : json5.stringify(option.title || option.name)).join(', ')}],
+            },` : ''}${attr.display === 'capsules' ? `
+            setter: {
+                type: 'capsules',
+                titles: [${attr.options.map((option) => (option.title || option.name).includes?.(`'`) ? `"${option.title || option.name}"` : json5.stringify(option.title || option.name)).join(', ')}],
+                icons: [${attr.options.map((option) =>json5.stringify(option.icon)).join(', ')}],
+                tooltips: [${attr.options.map((option) =>json5.stringify(option.tooltip)).join(', ')}],
+            },` : ''}${attr.display === 'number' ? `
+            setter: {
+                type: 'numberInput',${attr.place ? `
+                placeholder: '${attr.place}',` : ''}${attr.min ? `
+                min: ${attr.min},` : ''}${attr.max ? `
+                max: ${attr.max},` : ''}${attr.precision ? `
+                precision: ${attr.precision},` : ''}
+            },` : ''}${attr.display === 'property-select' ? `
+            setter: {
+                type: 'propertySelect',
+            },` : ''}${!attr.display && attr.place ? `
+            setter: {
+                type: 'input',
+                placeholder: '${attr.place}',
+            },` : ''}${ifcondition && !attr.dependencyDisplay ? `
+            if: _ => ${ifcondition},` : ''}${ifcondition && attr.dependencyDisplay ? `
+            disabledIf: _ => ${ifcondition},` : ''}${onToggle ? `
+            onToggle: [${onToggle}
+            ],` : ''}
+        })
         ${attr.advanced || attr.hidden ? 'private ' : ''}${kebab2Camel(attr.name)}: ${naslType};`
     }).join('\n\n')}
     }`;
