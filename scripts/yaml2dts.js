@@ -76,7 +76,8 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
             tooltipLink: '${attr.tooltipLink}',` : ''}${attr.bindHide ? `
             bindHide: ${attr.bindHide},` : ''}${attr.bindOpen ? `
             bindOpen: ${attr.bindOpen},` : ''}${attr.default ? `
-            default: ${json5.stringify(attr.default)},` : ''}${attr.options && !attr.display ? `
+            default: ${json5.stringify(attr.default)},` : ''}${attr['designer-value'] ? `
+            designerValue: ${attr['designer-value']},` : ''}${attr.options && !attr.display ? `
             setter: {
                 type: 'enumSelect',
                 titles: [${attr.options.map((option) => (option.title || option.name).includes?.(`'`) ? `"${option.title || option.name}"` : json5.stringify(option.title || option.name)).join(', ')}],
