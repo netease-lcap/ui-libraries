@@ -18,12 +18,14 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
     // labels
     components.forEach((component) => {
         const output = `declare namespace nasl.ui {
-${component.subs.map((sub) => `${indent(1)}@Component({
+${component.subs.map((sub) => {
+    const className = kebab2Pascal(sub.name);
+    return `${indent(1)}@Component({
         title: '${sub.title}',${sub.icon ? `
         icon: '${sub.icon}',` : ''}${sub.description ? `
         description: '${sub.description}',` : ''}
     })
-    ${sub.advanced ? '' : 'export '}class ${kebab2Pascal(sub.name)} extends VueComponent {
+    ${sub.advanced ? '' : 'export '}class ${className} extends VueComponent {
 ${!sub.attrs ? '' : sub.attrs.map((attr) => {
     const syncMode = ({ '11': 'both', '10': 'onlyModel', '01': 'onlySync', '00': '' })[Number(!!attr.model) + '' + Number(!!attr.sync)];
     let naslType = attr.type
@@ -39,17 +41,62 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
                 console.log(component.yamlPath, option);
         });
     }
+    let ifthen = '';
+    if (attr.dependency) {
+        ifthen = attr.dependency.map((dep) => {
+            return Object.keys(dep).map((key) => {
+                let first = key[0];
+                if (first === '!' || first === '+') {
+                    key = key.slice(1);
+                    return `_.${kebab2Camel(key)} !== ${json5.stringify(dep[key])}`;
+                } else {
+                    return `_.${kebab2Camel(key)} === ${json5.stringify(dep[key])}`;
+                }
+            }).join(' && ');
+        }).join(' || ');
+    }
+    let onToggle = '';
+    if (attr.toggleclear) {
+        onToggle = `\n        @OnToggle<${className}, '${attr.name}'>({ ${attr.toggleclear.map((key) => `${key}: null`).join(', ')} })`;
+    } else if (attr.toggleupdate) {
+        attr.toggleupdate.forEach((item) => {
+            onToggle += `\n        @OnToggle<${className}, '${attr.name}'>(${json5.stringify(item.updateData, null, 4).replace(/\n/g, '\n        ')}, value => value === ${json5.stringify(item.value)})`;
+        });
+    }
 
     return `${indent(2)}@Prop({${attr.group ? `
             group: '${attr.group}',` : ''}
             title: '${attr.title}',${attr.description ? `
             description: '${attr.description}',` : ''}${syncMode ? `
-            syncMode: '${syncMode}',` : ''}${attr.options ? `
-            enumItemTitles: [${attr.options.map((option) => (option.title || option.name).includes?.(`'`) ? `"${option.title || option.name}"` : `'${option.title || option.name}'`).join(', ')}],` : ''}
-        })
-        ${attr.advanced ? 'private ' : ''}${kebab2Camel(attr.name)}: ${naslType}${attr.default ? ' = ' + json5.stringify(attr.default) : ''};`
-    }).join('\n')}
-    }`).join('\n\n')}
+            syncMode: '${syncMode}',` : ''}${attr.tooltipLink ? `
+            tooltipLink: '${attr.tooltipLink}',` : ''}${attr.bindHide ? `
+            bindHide: ${attr.bindHide},` : ''}${attr.bindOpen ? `
+            bindOpen: ${attr.bindOpen},` : ''}${attr.default ? `
+            default: ${json5.stringify(attr.default)},` : ''}
+        })${attr.options && !attr.display ? `
+        @PropSetter('enumSelect', {
+            titles: [${attr.options.map((option) => (option.title || option.name).includes?.(`'`) ? `"${option.title || option.name}"` : json5.stringify(option.title || option.name)).join(', ')}],
+        })` : ''}${attr.display === 'capsules' ? `
+        @PropSetter('capsules', {
+            titles: [${attr.options.map((option) => (option.title || option.name).includes?.(`'`) ? `"${option.title || option.name}"` : json5.stringify(option.title || option.name)).join(', ')}],
+            icons: [${attr.options.map((option) =>json5.stringify(option.icon)).join(', ')}],
+            tooltips: [${attr.options.map((option) =>json5.stringify(option.tooltip)).join(', ')}],
+        })` : ''}${attr.display === 'number' ? `
+        @PropSetter('numberInput', {${attr.place ? `
+            placeholder: '${attr.place}',` : ''}${attr.min ? `
+            min: ${attr.min},` : ''}${attr.max ? `
+            max: ${attr.max},` : ''}${attr.precision ? `
+            precision: ${attr.precision},` : ''}
+        })` : ''}${attr.display === 'property-select' ? `
+        @PropSetter('propertySelect')` : ''}${!attr.display && attr.place ? `
+        @PropSetter('input', {
+            placeholder: '${attr.place}',
+        })` : ''}${ifthen ? `
+        @If<${className}>(_ => ${ifthen}${attr.dependencyDisplay ? `, '${attr.dependencyDisplay}'` : ''})` : ''}${onToggle ? onToggle : ''}
+        ${attr.advanced || attr.hidden ? 'private ' : ''}${kebab2Camel(attr.name)}: ${naslType};`
+    }).join('\n\n')}
+    }`;
+}).join('\n\n')}
 }
 `
 

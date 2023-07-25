@@ -33,9 +33,11 @@ flowchart BT
     - [x] title
     - [x] description
     - [x] advanced
+    - [x] hideBind
     - [x] syncMode
     - [x] default
     - [x] options
+    - [x] tooltipLink
 - [ ] dts --> Excel
 - [ ] dts --> usage.json
 - [ ] Excel --> dts
