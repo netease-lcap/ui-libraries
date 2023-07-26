@@ -123,7 +123,7 @@ ${!sub.events ? '' : sub.events.map((event) => {
             if (paramName === '$event')
                 paramName = 'event';
 
-            let paramType = !param.type ? '' : param.type
+            let paramType = !param.type ? 'BaseEvent' : param.type
                 .replace(/\bstring\b/g, 'nasl.core.String')
                 .replace(/\bnumber\b/g, 'nasl.core.Decimal')
                 .replace(/\bboolean\b/g, 'nasl.core.Boolean')
@@ -135,6 +135,17 @@ ${!sub.events ? '' : sub.events.map((event) => {
 
             return `${paramName}${param.required === false ? '?' : ''}: ${paramType}`;
             }).join(', ')}): void {}`
+        }).join('\n\n')}
+
+${!sub.slots ? '' : sub.slots.map((slot) => {
+        let paramName = slot.slotProps?.name;
+        let paramType = slot.slotProps?.typeAnnotation?.typeName;
+
+        return `${indent(2)}@Slot({
+            title: '${slot.title}',${slot.description ? `
+            description: '${slot.description}',` : ''}
+        })
+        ${slot.advanced ? 'private ' : ''}slot${kebab2Pascal(slot.name)}(${!slot.slotProps ? '' : `${paramName}: ${paramType}`}): void {}`
         }).join('\n\n')}
 
 ${!sub.methods ? '' : sub.methods.map((method) => {
