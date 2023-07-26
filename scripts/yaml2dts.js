@@ -12,12 +12,15 @@ const { components, components0 } = require('./common/loadComponents');
  */
 const kebab2Pascal = (name) => name.replace(/(?:^|-)([a-zA-Z0-9])/g, (m, $1) => $1.toUpperCase());
 const kebab2Camel = (name) => name.replace(/(?:-)([a-zA-Z0-9])/g, (m, $1) => $1.toUpperCase());
+const firstUpperCase = (name) => name.replace(/^[a-z]/, (m) => m.toUpperCase());
 const indent = (n) => '    '.repeat(n);
 
 XlsxPopulate.fromBlankAsync().then((workbook) => {
     // labels
     components.forEach((component) => {
-        const output = `declare namespace nasl.ui {
+        const output = `/// <reference types="nasl" />
+
+namespace nasl.ui {
 ${component.subs.map((sub) => {
     const className = kebab2Pascal(sub.name);
     return `${indent(1)}@Component({
@@ -28,14 +31,14 @@ ${component.subs.map((sub) => {
     ${sub.advanced ? '' : 'export '}class ${className} extends VueComponent {
 ${!sub.attrs ? '' : sub.attrs.map((attr) => {
     const syncMode = ({ '11': 'both', '10': 'onlyModel', '01': 'onlySync', '00': '' })[Number(!!attr.model) + '' + Number(!!attr.sync)];
-    let naslType = attr.type
+    let attrType = attr.type
         .replace(/\bstring\b/g, 'nasl.core.String')
         .replace(/\bnumber\b/g, 'nasl.core.Decimal')
         .replace(/\bboolean\b/g, 'nasl.core.Boolean')
         .replace(/\bany\b/g, 'nasl.core.Any')
         .replace(/\s*,\s*/g, ' | ');
     if (attr.options) {
-        naslType = attr.options.map((option) => `'${option.value}'`).join(' | ');
+        attrType = attr.options.map((option) => `'${option.value}'`).join(' | ');
         attr.options.forEach((option) => {
             if (!option.value)
                 console.log(component.yamlPath, option);
@@ -68,15 +71,14 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
         });
     }
 
-    return `${indent(2)}@Prop${attr.default || attr.display || ifcondition || onToggle ? `<${className}, ${attr.advanced || attr.hidden ? 'any' : `'${kebab2Camel(attr.name)}'`}>` : ''}({${attr.group ? `
+    return `${indent(2)}@Prop${attr.display || ifcondition || onToggle ? `<${className}, ${attr.advanced || attr.hidden ? 'any' : `'${kebab2Camel(attr.name)}'`}>` : ''}({${attr.group ? `
             group: '${attr.group}',` : ''}
             title: '${attr.title}',${attr.description ? `
             description: '${attr.description}',` : ''}${syncMode ? `
             syncMode: '${syncMode}',` : ''}${attr.tooltipLink ? `
             tooltipLink: '${attr.tooltipLink}',` : ''}${attr.bindHide ? `
             bindHide: ${attr.bindHide},` : ''}${attr.bindOpen ? `
-            bindOpen: ${attr.bindOpen},` : ''}${attr.default ? `
-            default: ${json5.stringify(attr.default)},` : ''}${attr['designer-value'] ? `
+            bindOpen: ${attr.bindOpen},` : ''}${attr['designer-value'] ? `
             designerValue: ${attr['designer-value']},` : ''}${attr.options && !attr.display ? `
             setter: {
                 type: 'enumSelect',
@@ -107,14 +109,70 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
             onToggle: [${onToggle}
             ],` : ''}
         })
-        ${attr.advanced || attr.hidden ? 'private ' : ''}${kebab2Camel(attr.name)}: ${naslType};`
+        ${attr.advanced || attr.hidden ? 'private ' : ''}${kebab2Camel(attr.name)}: ${attrType}${attr.default ? ` = ${json5.stringify(attr.default)}` : ''};`
     }).join('\n\n')}
+
+${!sub.events ? '' : sub.events.map((event) => {
+        return `${indent(2)}@Event({
+            title: '${event.title}',${event.description ? `
+            description: '${event.description}',` : ''}
+        })
+        ${event.advanced ? 'private ' : ''}on${kebab2Pascal(event.name)}(${!(event.params && event.params.length) ? '' : event.params
+            .slice(0, 1).filter((param) => !param.name.includes('.')).map((param) => {
+            let paramName = param.name;
+            if (paramName === '$event')
+                paramName = 'event';
+
+            let paramType = !param.type ? '' : param.type
+                .replace(/\bstring\b/g, 'nasl.core.String')
+                .replace(/\bnumber\b/g, 'nasl.core.Decimal')
+                .replace(/\bboolean\b/g, 'nasl.core.Boolean')
+                .replace(/\bany\b/g, 'nasl.core.Any')
+                .replace(/\s*,\s*/g, ' | ');
+            if (param.options) {
+                paramType = param.options.map((option) => `'${option.value}'`).join(' | ');
+            }
+
+            return `${paramName}${param.required === false ? '?' : ''}: ${paramType}`;
+            }).join(', ')}): void {}`
+        }).join('\n\n')}
+
+${!sub.methods ? '' : sub.methods.map((method) => {
+        return `${indent(2)}@Method({
+            title: '${method.title}',${method.description ? `
+            description: '${method.description}',` : ''}
+        })
+        ${method.advanced ? 'private ' : ''}${method.name}(${!(method.params && method.params.length) ? '' : method.params.map((param) => {
+            let paramType = param.type
+                .replace(/\bstring\b/g, 'nasl.core.String')
+                .replace(/\bnumber\b/g, 'nasl.core.Decimal')
+                .replace(/\bboolean\b/g, 'nasl.core.Boolean')
+                .replace(/\bany\b/g, 'nasl.core.Any')
+                .replace(/\s*,\s*/g, ' | ');
+            if (param.options) {
+                paramType = param.options.map((option) => `'${option.value}'`).join(' | ');
+            }
+
+            return `
+            @Param({
+                title: '${param.title}',${param.description ? `
+                description: '${param.description}',` : ''}${param.options ? `
+                setter: {
+                    type: 'enumSelect',
+                    titles: [${param.options.map((option) => (option.title || option.name).includes?.(`'`) ? `"${option.title || option.name}"` : json5.stringify(option.title || option.name)).join(', ')}],
+                },` : ''}
+            })
+            ${param.name}${param.required === false ? '?' : ''}: ${paramType}${param.default ? ` = ${json5.stringify(param.default)}` : ''},`;
+        }).join('') + '\n        '}): void {}`
+        }).join('\n\n')}
     }`;
 }).join('\n\n')}
 }
 `
 
+        const tsPath = component.yamlPath.replace(/\.yaml$/, '.ts');
         const dtsPath = component.yamlPath.replace(/\.yaml$/, '.d.ts');
-        fs.writeFileSync(dtsPath, output);
+        fs.removeSync(dtsPath);
+        fs.writeFileSync(tsPath, output);
     });
 });

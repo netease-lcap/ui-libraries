@@ -38,6 +38,28 @@ flowchart BT
     - [x] default
     - [x] options
     - [x] tooltipLink
+    - [x] hidden
+    - [x] display
+    - [x] clearable
+    - [x] place
+    - [x] dependency
+    - [x] toggleclear
+    - [x] toggleupdate
+    - [x] designer-value
+    - [x] schema
+    - [x] depProp
+    - [x] dependencyDisplay
+  - [x] 组件方法
+    - [x] name
+    - [x] title
+    - [x] description
+    - [x] params
+      - [x] name
+      - [x] title
+      - [x] description
+      - [x] default
+      - [x] required
+      - [x] options
 - [ ] dts --> Excel
 - [ ] dts --> usage.json
 - [ ] Excel --> dts
