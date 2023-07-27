@@ -18,9 +18,9 @@ const indent = (n) => '    '.repeat(n);
 XlsxPopulate.fromBlankAsync().then((workbook) => {
     // labels
     components.forEach((component) => {
-        const output = `/// <reference types="nasl" />
+        /// <reference types="nasl" />
 
-namespace nasl.ui {
+        const output = `namespace nasl.ui {
 ${component.subs.map((sub) => {
     const className = kebab2Pascal(sub.name);
     return `${indent(1)}@Component({

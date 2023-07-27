@@ -7,26 +7,27 @@
         "noImplicitThis": true,
         "skipLibCheck": true,
         "esModuleInterop": true,
-        "allowJs": true,
+        "allowJs": false,
+        "resolveJsonModule": true,
         "allowSyntheticDefaultImports": false,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "resolveJsonModule": true,
-        "sourceMap": true,
-        "baseUrl": ".",
+        "sourceMap": false,
         "pretty": true,
+        "baseUrl": ".",
+        "declaration": true,
+        "declarationDir": "../low-code-fe/packages/nasl/sandbox/stdlib/components",
+        "emitDeclarationOnly": true,
         "lib": [
             "esnext",
             "dom"
         ],
+        "types": ["nasl"],
         "paths": {
             "@/*": ["*"]
         }
     },
     "include": [
-        "scripts/**/*.ts"
-    ],
-    "exclude": [
-        "node_modules"
+        "./pc-ui/src/components/u-button.vue/api.ts"
     ]
 }
