@@ -15,9 +15,6 @@
         "sourceMap": false,
         "pretty": true,
         "baseUrl": ".",
-        "declaration": true,
-        "declarationDir": "../low-code-fe/packages/nasl/sandbox/stdlib/components",
-        "emitDeclarationOnly": true,
         "lib": [
             "esnext",
             "dom"
@@ -28,6 +25,6 @@
         }
     },
     "include": [
-        "./pc-ui/src/components/u-button.vue/api.ts"
+        "./pc-ui/src/components/**/*.ts"
     ]
 }

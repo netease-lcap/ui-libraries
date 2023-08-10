@@ -66,7 +66,7 @@ let components = pcComponents.slice();
 //     components.splice(lastIndex + 1, 0, item);
 // });
 
-const filePath = path.join(__dirname, `./组件属性优化.xlsx`)
+const filePath = path.join(__dirname, `./组件总表from交互.xlsx`)
 
 // 属性分组
 const replaceAtrr = (sheet, oldColName, newColName) => {
