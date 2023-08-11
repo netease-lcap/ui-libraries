@@ -46,13 +46,13 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
         
     {
         const sheet = workbook.addSheet('组件基本信息');
-        const firstRowData = ['分类', '端', '组件名称', '组件标题', '子组件名称', '子组件标题', '图标', '描述'];
+        const firstRowData = ['分类', '端', '组件名称', '组件标题', '子组件名称', '子组件标题', '图标', '描述', 'TS泛型参数'];
         sheet.range(1, 1, 1, firstRowData.length).value([firstRowData]);
         sheet.row(1).style({
             bold: true,
             fill: 'E1EAFF',
         }).height(22);
-        [6, 4, 22, 18, 30, 14, 18, 80].forEach((width, index) => sheet.column(index + 1).width(width));
+        [6, 4, 22, 18, 30, 14, 18, 80, 80].forEach((width, index) => sheet.column(index + 1).width(width));
 
         let rowNumber = 2;
         let lastNumbers = [null];
@@ -61,9 +61,9 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
             component.subs.forEach((sub) => {
                 if (sub.advanced)
                     return;
-                const hasKeys = collectOtherKeys(sub, otherKeys, ['name', 'title', 'icon', 'description', 'labels', 'attrs', 'slots', 'events', 'methods', 'computed', 'aria']);
+                const hasKeys = collectOtherKeys(sub, otherKeys, ['name', 'title', 'icon', 'description', 'tsTypeParams', 'labels', 'attrs', 'slots', 'events', 'methods', 'computed', 'aria', 'docs']);
                 sheet.range(rowNumber, 1, rowNumber, firstRowData.length + hasKeys.length).value([
-                    [groupMap[component.group], component.frontend.toUpperCase(), component.name, component.alias, sub.name, sub.title, sub.icon, sub.description, ...hasKeys.map((key) => key && JSON.stringify(sub[key]))],
+                    [groupMap[component.group], component.frontend.toUpperCase(), component.name, component.alias, sub.name, sub.title, sub.icon, sub.description, sub.tsTypeParams, ...hasKeys.map((key) => key && JSON.stringify(sub[key]))],
                 ]);
                 [1, 3, 4].forEach((col) => mergeRows(sheet, lastNumbers, rowNumber, col));
                 mergeRows(sheet, lastNumbers, rowNumber, 2, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
@@ -83,7 +83,7 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
 
     {
         const sheet = workbook.addSheet('组件属性汇总');
-        const firstRowData = ['分类', '端', '组件标题', '子组件标题', '属性分组', '属性名称', '属性标题', '属性描述', '双向绑定（model/sync）', '属性类型', 'default', 'options', 'display', 'bindHide', 'tooltipLink'];
+        const firstRowData = ['分类', '端', '组件标题', '子组件标题', '属性分组', '属性名称', '属性标题', '属性描述', '双向绑定（model/sync）', '属性类型', '默认值', '选项', '设置器', '隐藏绑定', '工具提示链接'];
         sheet.range(1, 1, 1, firstRowData.length).value([firstRowData]);
         sheet.row(1).style({
             bold: true,
@@ -245,7 +245,7 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
                 sub.slots && sub.slots.forEach((slot) => {
                     if (slot.advanced)
                         return;
-                    const hasKeys = collectOtherKeys(slot, otherKeys, ['name', 'title', 'description']);
+                    const hasKeys = collectOtherKeys(slot, otherKeys, ['name', 'title', 'description', 'concept']);
                     sheet.range(rowNumber, 1, rowNumber, firstRowData.length + hasKeys.length).value([
                         [groupMap[component.group], component.frontend.toUpperCase(), component.alias, sub.title, slot.name, slot.title, slot.description, ...hasKeys.map((key) => key && JSON.stringify(slot[key]))],
                     ]);
