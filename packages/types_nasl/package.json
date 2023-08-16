@@ -1,0 +1,9 @@
+{
+  "name": "@types/nasl",
+  "version": "0.1.0",
+  "description": "NASL types for TypeScript",
+  "main": "index.d.ts",
+  "scripts": {},
+  "author": "Forrest <rainforest92@126.com>",
+  "license": "ISC"
+}

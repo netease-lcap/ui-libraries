@@ -32,7 +32,23 @@ ${component.subs.map((sub) => {
         icon: '${sub.icon}',` : ''}${sub.description ? `
         description: '${sub.description}',` : ''}
     })
-    ${sub.advanced ? '' : 'export '}class ${className}${typeParamsStr} extends VueComponent {${''}${!sub.methods ? '' : `
+    ${sub.advanced ? '' : 'export '}class ${className}${typeParamsStr} extends VueComponent {
+${!sub.attrs ? '' : sub.attrs.filter((attr) => attr.readable).map((attr) => {
+    let attrType = attr.type
+        .replace(/\bstring\b/g, 'nasl.core.String')
+        .replace(/\bnumber\b/g, 'nasl.core.Decimal')
+        .replace(/\bboolean\b/g, 'nasl.core.Boolean')
+        .replace(/\bany\b/g, 'nasl.core.Any')
+        // .replace(/'/g, '\\\'');
+    if (/\{\[/.test(attrType))
+        attrType = attrType.replace(/\s*,\s*/g, ' | ');
+    const attrName = kebab2Camel(attr.readableName ? attr.readableName : attr.name);
+
+    return (attr.readableTitle ? `${indent(2)}@Prop${attr.display ? `<${className}Options${typeArgumentsStr}, ${attr.advanced || attr.hidden ? 'any' : `'${kebab2Camel(attr.name)}'`}>` : ''}({${attr.readableTitle ? `
+            title: '${attr.readableTitle}',` : ''}
+        })
+` : '') + `${indent(2)}${attr.advanced || attr.hidden ? 'private ' : ''}${attrName}: ${className}Options${typeArgumentsStr}['${kebab2Camel(attr.name)}'];`
+    }).join('\n\n')}${!sub.methods ? '' : `
 
 ` + sub.methods.map((method) => {
         return `${indent(2)}@Method({
@@ -113,10 +129,10 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
     return `${indent(2)}@Prop${attr.display || ifcondition || onToggle ? `<${className}Options${typeArgumentsStr}, ${attr.advanced || attr.hidden ? 'any' : `'${kebab2Camel(attr.name)}'`}>` : ''}({${attr.group ? `
             group: '${attr.group}',` : ''}
             title: '${attr.title}',${attr.description ? `
-            description: '${attr.description}',` : ''}${syncMode ? `
+            description: ${/[\n']/g.test(attr.description) ? `\`${attr.description}\`` : `'${attr.description}'`},` : ''}${syncMode ? `
             syncMode: '${syncMode}',` : ''}${attr.tooltipLink ? `
             tooltipLink: '${attr.tooltipLink}',` : ''}${attr.docDescription ? `
-            docDescription: '${attr.docDescription}',` : ''}${notNil(attr.bindHide) ? `
+            docDescription: ${/[\n']/g.test(attr.docDescription) ? `\`${attr.docDescription}\`` : `'${attr.docDescription}'`},` : ''}${notNil(attr.bindHide) ? `
             bindHide: ${attr.bindHide},` : ''}${notNil(attr.bindOpen) ? `
             bindOpen: ${attr.bindOpen},` : ''}${notNil(attr['designer-value']) ? `
             designerValue: ${attr['designer-value']},` : ''}${attr.setter ? `
@@ -160,7 +176,7 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
             title: '${event.title}',${event.description ? `
             description: '${event.description}',` : ''}
         })
-        ${event.advanced ? 'private ' : ''}on${kebab2Pascal(event.name)}(${!(event.params && event.params.length) ? '' : event.params
+        ${event.advanced ? 'private ' : ''}on${kebab2Pascal(event.name)}: (${!(event.params && event.params.length) ? '' : event.params
             .slice(0, 1).filter((param) => !param.name.includes('.')).map((param) => {
             let paramName = param.name;
             if (paramName === '$event')
@@ -182,7 +198,7 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
             }
 
             return `${paramName}${param.required === false ? '?' : ''}: ${paramType}`;
-            }).join(', ')}): void {}`
+            }).join(', ')}) => void;`
         }).join('\n\n')}${!sub.slots ? '' : `
 
 ` + sub.slots.map((slot) => {
@@ -199,7 +215,7 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
                 code: item.snippet,
             })), null, 4).replace(/\n/g, `\n${indent(3)}`)},`}
         })
-        ${slot.advanced ? 'private ' : ''}slot${kebab2Pascal(slot.name)}: (${!slot.slotProps ? '' : `${paramName}: ${paramType}`}) => Array<${slot.support ? slot.support.map((item) => kebab2Pascal(item.name) + (item.tsTypeArgument ? `<${item.tsTypeArgument}>` : '')).join(' | ') : 'VueComponent'}>;`
+        ${slot.advanced ? 'private ' : ''}slot${kebab2Pascal(slot.name)}: (${!slot.slotProps ? '' : `${paramName}: ${paramType}`}) => Array<${slot.support ? slot.support.map((item) => kebab2Pascal(item.name) + (item.tsTypeArguments ? `<${item.tsTypeArguments}>` : '')).join(' | ') : 'VueComponent'}>;`
         }).join('\n\n')}
     }`;
 }).join('\n\n')}

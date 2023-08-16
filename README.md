@@ -8,62 +8,25 @@
 flowchart BT
     YAML -- yaml2excel --> Excel
     Excel -- excel2yaml --> YAML
-    YAML -- TODO开发 --> dts
+    YAML -- 基本完成 --> ts
     YAML -- scripts/lcap --> usage.json
-    Excel -- TODO开发 --> dts
-    dts -- TODO开发 --> Excel
-    dts -- TODO开发 --> usage.json
+    Excel -- TODO开发 --> ts
+    ts -- 基本完成 --> usage.json
+    ts -- 基本完成 --> Excel
     usage.json -- createUiTs --> nasl.ui.definition.ts
-    dts -- TODO汇总 --> nasl.ui.definition.ts
+    ts -- 基本完成 --> nasl.ui.definition.ts
 ```
 
-- [ ] YAML --> dts
-  - [ ] 基本信息
-    - [x] name
-    - [x] title
-    - [x] icon
-    - [x] description
-    - [ ] labels
-    - [ ] docs
-    - [ ] blocks
-    - [x] advanced
-  - [ ] 组件属性
-    - [x] group
-    - [x] name
-    - [x] title
-    - [x] description
-    - [x] advanced
-    - [x] hideBind
-    - [x] syncMode
-    - [x] default
-    - [x] options
-    - [x] tooltipLink
-    - [x] hidden
-    - [x] display
-    - [x] clearable
-    - [x] place
-    - [x] dependency
-    - [x] toggleclear
-    - [x] toggleupdate
-    - [x] designer-value
-    - [x] schema
-    - [x] depProp
-    - [x] dependencyDisplay
+- [x] YAML --> ts
+  - [x] 基本信息
+  - [x] 组件属性
+  - [x] 可访问的组件属性
   - [x] 组件方法
-    - [x] name
-    - [x] title
-    - [x] description
-    - [x] params
-      - [x] name
-      - [x] title
-      - [x] description
-      - [x] default
-      - [x] required
-      - [x] options
-- [ ] dts --> Excel
-- [ ] dts --> usage.json
-- [ ] Excel --> dts
-- [ ] 汇总 ui.definition
+  - [x] 组件插槽
+- [x] ts --> usage.json
+- [x] ts --> Excel
+- [ ] Excel --> ts
+- [x] 测试 nasl.ui
 
 ## 目录
 
@@ -82,4 +45,10 @@ node scripts/yaml2excel.js
 
 ```shell
 node scripts/excel2yaml.js
+```
+
+### 从 TS 生成 Excel
+
+```shell
+node scripts/ts2excel.js
 ```

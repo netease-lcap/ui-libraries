@@ -19,12 +19,8 @@
             "esnext",
             "dom"
         ],
-        "types": ["nasl"],
         "paths": {
             "@/*": ["*"]
         }
-    },
-    "include": [
-        "./pc-ui/src/components/**/*.ts"
-    ]
+    }
 }
