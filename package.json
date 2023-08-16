@@ -1,5 +1,9 @@
 {
-  "scripts": {},
+  "scripts": {
+    "init:pc": "cd pc-ui/node_modules/@types && ln -s ../../../packages/types_nasl nasl",
+    "init:h5": "cd h5-ui/node_modules/@types && ln -s ../../../packages/types_nasl nasl",
+    "init": "npm run init:pc && npm run init:h5"
+  },
   "dependencies": {
     "@babel/core": "^7.22.10",
     "@babel/generator": "^7.22.10",
