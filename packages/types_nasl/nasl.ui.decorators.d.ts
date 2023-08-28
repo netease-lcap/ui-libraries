@@ -28,6 +28,9 @@ declare namespace nasl.ui {
     export interface IconSetter {
         type: 'iconSelect',
     }
+    export interface ImageSetter {
+        type: 'imageSelect',
+    }
     export interface PropertySelectSetter {
         type: 'propertySelect',
     }
@@ -49,7 +52,7 @@ declare namespace nasl.ui {
         docDescription?: string;
         bindHide?: boolean;
         bindOpen?: boolean;
-        setter?: InputSetter | EnumSelectSetter | CapsulesSetter | NumberInputSetter | IconSetter | PropertySelectSetter;
+        setter?: InputSetter | EnumSelectSetter | CapsulesSetter | NumberInputSetter | IconSetter | ImageSetter | PropertySelectSetter;
         designerValue?: any;
     }
     export function Prop(options?: PropOptions): (target: any, key: string) => void;
@@ -64,7 +67,7 @@ declare namespace nasl.ui {
         docDescription?: string;
         bindHide?: boolean;
         bindOpen?: boolean;
-        setter?: InputSetter | EnumSelectSetter | CapsulesSetter | NumberInputSetter | IconSetter | PropertySelectSetter;
+        setter?: InputSetter | EnumSelectSetter | CapsulesSetter | NumberInputSetter | IconSetter | ImageSetter | PropertySelectSetter;
         default?: T[K];
         designerValue?: any;
         if?: (target: T) => boolean;
