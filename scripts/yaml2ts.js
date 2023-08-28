@@ -105,10 +105,16 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
             return Object.keys(dep).map((key) => {
                 let first = key[0];
                 if (first === '!' || first === '+') {
-                    key = key.slice(1);
-                    return `_.${kebab2Camel(key)} !== ${json5.stringify(dep[key])}`;
+                    const newkey = key.slice(1);
+                    if (Array.isArray(dep[key])){
+                      return dep[key].map((item) => {
+                        return `_.${kebab2Camel(newkey)} !== ${json5.stringify(item)}`
+                      }).join(' && ');
+                    } else {
+                      return `_.${kebab2Camel(newkey)} !== ${json5.stringify(dep[key])}`
+                    }
                 } else {
-                    return `_.${kebab2Camel(key)} === ${json5.stringify(dep[key])}`;
+                    return `_.${kebab2Camel(key)} === ${json5.stringify(dep[key])}`
                 }
             }).join(' && ');
         }).join(' || ');
@@ -119,7 +125,7 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
     }
     let onToggle = '';
     if (attr.toggleclear) {
-        onToggle = `\n                { update: { ${attr.toggleclear.map((key) => `${key}: null`).join(', ')} } }`;
+        onToggle = `\n                { clear: ${json5.stringify(attr.toggleclear)} }`;
     } else if (attr.toggleupdate) {
         attr.toggleupdate.forEach((item) => {
             onToggle += `\n                { update: ${json5.stringify(item.updateData)}, if: _ => _ === ${json5.stringify(item.value)} },`;

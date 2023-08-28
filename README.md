@@ -52,3 +52,8 @@ node scripts/excel2yaml.js
 ```shell
 node scripts/ts2excel.js
 ```
+### 从 yaml 生成 ts
+
+```shell
+node scripts/yaml2ts.js
+```

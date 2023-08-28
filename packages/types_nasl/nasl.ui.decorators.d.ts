@@ -69,7 +69,7 @@ declare namespace nasl.ui {
         designerValue?: any;
         if?: (target: T) => boolean;
         disabledIf?: (target: T) => boolean;
-        onToggle?: Array<{ update: any, if?: (value: T[K]) => boolean }>,
+        onToggle?: Array<{ update: any, if?: (value: T[K]) => boolean } | { clear: string[], if?: (value: T[K]) => boolean }>,
     }
     export function Prop<T extends VueComponent, K extends keyof T>(options?: GenericPropOptions<T, K>): (target: T, key: K) => void;
 
