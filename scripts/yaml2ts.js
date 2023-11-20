@@ -164,6 +164,9 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
             },` : ''}${attr.display === 'property-select' ? `
             setter: {
                 type: 'propertySelect',
+            },` : ''}${attr.display === 'iconSelect' ? `
+            setter: {
+                type: 'iconSelect',
             },` : ''}${!attr.display && attr.place ? `
             setter: {
                 type: 'input',
@@ -209,8 +212,14 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
 
 ` + sub.slots.map((slot) => {
         let paramName = slot.slotProps?.name;
-        let paramTypeArg = slot.slotProps?.typeAnnotation?.typeArguments?.[0].typeName;
-        let paramType = slot.slotProps?.typeAnnotation?.typeName + (paramTypeArg ? `<${paramTypeArg}>` : '');
+        let paramTypeArgs = slot.slotProps?.typeAnnotation?.typeArguments;
+        let paramTypeArgArr = [];
+        if(paramTypeArgs) {
+            paramTypeArgs.forEach((item) => {
+                paramTypeArgArr.push(item.typeName);
+            })
+        }
+        let paramType = slot.slotProps?.typeAnnotation?.typeName + (paramTypeArgArr.length ? `<${paramTypeArgArr.join(', ')}>` : '');
 
         return `${indent(2)}@Slot({
             title: '${slot.title}',${slot.description ? `

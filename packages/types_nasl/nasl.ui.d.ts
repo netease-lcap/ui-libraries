@@ -7,6 +7,15 @@ declare namespace nasl.ui {
         value: nasl.core.String;
     }
 
+    export class CurrentDynamic<T, T1> {
+        item: T;
+        index: nasl.core.Long;
+        rowIndex: nasl.core.Long;
+        columnIndex: nasl.core.Long;
+        value: nasl.core.String;
+        columnItem: T1;
+    }
+
     export class DataSourceParams {
         page: nasl.core.Integer;
         size: nasl.core.Integer;
