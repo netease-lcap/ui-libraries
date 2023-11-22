@@ -15,6 +15,13 @@ const kebab2Camel = (name) => name.replace(/(?:-)([a-zA-Z0-9])/g, (m, $1) => $1.
 const firstUpperCase = (name) => name.replace(/^[a-z]/, (m) => m.toUpperCase());
 const notNil = (value) => value !== null && value !== undefined;
 const indent = (n) => '    '.repeat(n);
+const translateNumber = (attr) => {
+    if (attr.precision === 0) {
+        return 'nasl.core.Integer';
+    } else {
+        return 'nasl.core.Decimal';
+    }
+}
 
 XlsxPopulate.fromBlankAsync().then((workbook) => {
     // labels
@@ -36,7 +43,7 @@ ${component.subs.map((sub) => {
 ${!sub.attrs ? '' : sub.attrs.filter((attr) => attr.readable).map((attr) => {
     let attrType = attr.type
         .replace(/\bstring\b/g, 'nasl.core.String')
-        .replace(/\bnumber\b/g, 'nasl.core.Decimal')
+        .replace(/\bnumber\b/g, translateNumber(attr))
         .replace(/\bboolean\b/g, 'nasl.core.Boolean')
         .replace(/\bany\b/g, 'nasl.core.Any')
         // .replace(/'/g, '\\\'');
@@ -58,7 +65,7 @@ ${!sub.attrs ? '' : sub.attrs.filter((attr) => attr.readable).map((attr) => {
         ${method.advanced ? 'private ' : ''}${method.name}(${!(method.params && method.params.length) ? '' : method.params.map((param) => {
             let paramType = param.type
                 .replace(/\bstring\b/g, 'nasl.core.String')
-                .replace(/\bnumber\b/g, 'nasl.core.Decimal')
+                .replace(/\bnumber\b/g, translateNumber(param))
                 .replace(/\bboolean\b/g, 'nasl.core.Boolean')
                 .replace(/\bany\b/g, 'nasl.core.Any')
                 .replace(/\s*,\s*/g, ' | ');
@@ -86,7 +93,7 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
     const syncMode = ({ '11': 'both', '10': 'onlyModel', '01': 'onlySync', '00': '' })[Number(!!attr.model) + '' + Number(!!attr.sync)];
     let attrType = attr.type
         .replace(/\bstring\b/g, 'nasl.core.String')
-        .replace(/\bnumber\b/g, 'nasl.core.Decimal')
+        .replace(/\bnumber\b/g, translateNumber(attr))
         .replace(/\bboolean\b/g, 'nasl.core.Boolean')
         .replace(/\bany\b/g, 'nasl.core.Any')
         // .replace(/'/g, '\\\'');
@@ -143,7 +150,8 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
             bindOpen: ${attr.bindOpen},` : ''}${notNil(attr['designer-value']) ? `
             designerValue: ${attr['designer-value']},` : ''}${attr.setter ? `
             setter: {
-                type: '${attr.setter}',
+                type: '${attr.setter}',${attr.setterTitle ? `
+                title: ${attr.setterTitle},` : ''}
             },` : ''}${attr.options && !attr.display ? `
             setter: {
                 type: 'enumSelect',
@@ -154,19 +162,19 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
                 titles: [${attr.options.map((option) => (option.title || option.name).includes?.(`'`) ? `"${option.title || option.name}"` : json5.stringify(option.title || option.name)).join(', ')}],
                 icons: [${attr.options.map((option) =>json5.stringify(option.icon)).join(', ')}],
                 tooltips: [${attr.options.map((option) =>json5.stringify(option.tooltip)).join(', ')}],
-            },` : ''}${attr.display === 'number' ? `
+            },` : ''}${attr.display === 'number' || attr.type === 'number' ? `
             setter: {
                 type: 'numberInput',${attr.place ? `
-                placeholder: '${attr.place}',` : ''}${attr.min ? `
-                min: ${attr.min},` : ''}${attr.max ? `
-                max: ${attr.max},` : ''}${attr.precision ? `
+                placeholder: '${attr.place}',` : ''}${attr.min !== undefined ? `
+                min: ${attr.min},` : ''}${attr.max !== undefined ? `
+                max: ${attr.max},` : ''}${attr.precision !== undefined ? `
                 precision: ${attr.precision},` : ''}
             },` : ''}${attr.display === 'property-select' ? `
             setter: {
                 type: 'propertySelect',
-            },` : ''}${attr.display === 'iconSelect' ? `
+            },` : ''}${attr.type === 'boolean' ? `
             setter: {
-                type: 'iconSelect',
+                type: 'switch',
             },` : ''}${!attr.display && attr.place ? `
             setter: {
                 type: 'input',
