@@ -222,4 +222,15 @@ declare namespace nasl.ui {
         clientWidth: nasl.core.Integer;
         clientHeight: nasl.core.Integer;
     }
+
+    export class KeyboardEvent {
+        // altKey: nasl.core.Boolean;
+        // code: nasl.core.String;
+        // ctrlKey: nasl.core.Boolean;
+        // isComposing: nasl.core.Boolean;
+        // key: nasl.core.String;
+        // metaKey: nasl.core.Boolean;
+        // repeat: nasl.core.Boolean;
+        // shiftKey: nasl.core.Boolean;
+    }
 }

@@ -22,6 +22,24 @@ const translateNumber = (attr) => {
         return 'nasl.core.Decimal';
     }
 }
+const translateDefaultValue = (value, type) => {
+    let tempValue;
+    if(typeof value === 'string' && value.startsWith('{')){
+        tempValue = value;
+    } else {
+        tempValue = json5.stringify(value);
+    }
+    if(type.includes('=>') && value){
+        let tempType = type.split('=>')[0];
+        const tempTypeItemName = tempType.match(/(?<=\()(.+?)(?=\:)/g)[0];
+        tempType = tempType.replace(/(?<=\:)(.+?)(?=\))/g, ' any');
+        return `(${tempType} => ${tempTypeItemName}.${value}) as any`;
+    }
+    if(type.includes('nasl.collection.List') || type === 'M') {
+        return `${tempValue} as any`;
+    }
+    return tempValue;
+}
 
 XlsxPopulate.fromBlankAsync().then((workbook) => {
     // labels
@@ -82,7 +100,7 @@ ${!sub.attrs ? '' : sub.attrs.filter((attr) => attr.readable).map((attr) => {
                     titles: [${param.options.map((option) => (option.title || option.name).includes?.(`'`) ? `"${option.title || option.name}"` : json5.stringify(option.title || option.name)).join(', ')}],
                 },` : ''}
             })
-            ${param.name}${param.required === false && !notNil(param.default) ? '?' : ''}: ${paramType}${notNil(param.default) ? ` = ${json5.stringify(param.default)}` : ''},`;
+            ${param.name}${param.required === false && !notNil(param.default) ? '?' : ''}: ${paramType}${notNil(param.default) ? ` = ${translateDefaultValue(param.default, paramType)}` : ''},`;
         }).join('') + '\n        '}): void {}`;
     }).join('\n\n')}
         constructor(options?: Partial<${className}Options${typeArgumentsStr}>) { super(); }
@@ -151,7 +169,7 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
             designerValue: ${attr['designer-value']},` : ''}${attr.setter ? `
             setter: {
                 type: '${attr.setter}',${attr.setterTitle ? `
-                title: ${attr.setterTitle},` : ''}
+                title: '${attr.setterTitle}',` : ''}
             },` : ''}${attr.options && !attr.display ? `
             setter: {
                 type: 'enumSelect',
@@ -172,7 +190,7 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
             },` : ''}${attr.display === 'property-select' ? `
             setter: {
                 type: 'propertySelect',
-            },` : ''}${attr.type === 'boolean' ? `
+            },` : ''}${attr.type === 'boolean' && !attr.place ? `
             setter: {
                 type: 'switch',
             },` : ''}${!attr.display && attr.place ? `
@@ -185,7 +203,7 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
             onToggle: [${onToggle}
             ],` : ''}
         })
-        ${attr.advanced || attr.hidden ? 'private ' : ''}${kebab2Camel(attr.name)}: ${attrType}${notNil(attr.default) ? ` = ${json5.stringify(attr.default)}` : ''};`
+        ${attr.advanced || attr.hidden ? 'private ' : ''}${kebab2Camel(attr.name)}: ${attrType}${notNil(attr.default) ? ` = ${translateDefaultValue(attr.default, attrType)}` : ''};`
     }).join('\n\n')}${!sub.events ? '' : `
 
 ` + sub.events.map((event) => {

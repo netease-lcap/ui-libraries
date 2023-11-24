@@ -153,7 +153,7 @@ function transform(tsCode) {
         classDecl.body.body.forEach(function (member) {
             var _a;
             if (member.type === 'ClassProperty') {
-                member.decorators.forEach(function (decorator) {
+                member.decorators?.forEach(function (decorator) {
                     if (decorator.expression.type === 'CallExpression') {
                         var calleeName = decorator.expression.callee.name;
                         if (calleeName === 'Prop') {
