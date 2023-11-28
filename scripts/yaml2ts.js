@@ -38,6 +38,9 @@ const translateDefaultValue = (value, type) => {
     if(type.includes('nasl.collection.List') || type === 'M') {
         return `${tempValue} as any`;
     }
+    if(type === 'nasl.core.Date') {
+        return `${tempValue} as any`;
+    }
     return tempValue;
 }
 
