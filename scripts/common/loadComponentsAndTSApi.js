@@ -18,7 +18,7 @@ pcComponents.forEach((component) => {
         component.subs = ts2json.transform(fs.readFileSync(tsPath, 'utf8'));
     } catch (e) {
         console.log('找不到 TS 文件或 TS 报错', tsPath);
-        // console.log(e);
+        console.log(e);
     }
 });
 const h5Components = require(`../../h5-ui/scripts/lcap/config`);
@@ -33,7 +33,7 @@ h5Components.forEach((component) => {
         component.subs = ts2json.transform(fs.readFileSync(tsPath, 'utf8'));
     } catch (e) {
         console.log('找不到 TS 文件或 TS 报错', tsPath);
-        // console.log(e);
+        console.log(e);
     }
 });
 /**

@@ -51,7 +51,7 @@ declare namespace nasl.ui {
         title: string;
         icon?: string;
         description?: string;
-        syncMode?: 'both' | 'onlyModel' | 'onlySync';
+        sync?: boolean;
         tooltipLink?: string;
         docDescription?: string;
         bindHide?: boolean;
@@ -66,13 +66,12 @@ declare namespace nasl.ui {
         title: string;
         icon?: string;
         description?: string;
-        syncMode?: 'both' | 'onlyModel' | 'onlySync';
+        sync?: boolean;
         tooltipLink?: string;
         docDescription?: string;
         bindHide?: boolean;
         bindOpen?: boolean;
         setter?: InputSetter | EnumSelectSetter | CapsulesSetter | NumberInputSetter | IconSetter | ImageSetter | PropertySelectSetter | SwitchSetter;
-        default?: T[K];
         designerValue?: any;
         if?: (target: T) => boolean;
         disabledIf?: (target: T) => boolean;

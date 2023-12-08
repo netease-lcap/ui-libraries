@@ -111,7 +111,7 @@ ${!sub.attrs ? '' : sub.attrs.filter((attr) => attr.readable).map((attr) => {
 
     ${sub.advanced ? '' : 'export '}class ${className}Options${typeParamsStr} {
 ${!sub.attrs ? '' : sub.attrs.map((attr) => {
-    const syncMode = ({ '11': 'both', '10': 'onlyModel', '01': 'onlySync', '00': '' })[Number(!!attr.model) + '' + Number(!!attr.sync)];
+    const sync = !!(attr.model || attr.sync);
     let attrType = attr.type
         .replace(/\bstring\b/g, 'nasl.core.String')
         .replace(/\bnumber\b/g, translateNumber(attr))
@@ -163,8 +163,8 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
     return `${indent(2)}@Prop${attr.display || ifcondition || onToggle ? `<${className}Options${typeArgumentsStr}, ${attr.advanced || attr.hidden ? 'any' : `'${kebab2Camel(attr.name)}'`}>` : ''}({${attr.group ? `
             group: '${attr.group}',` : ''}
             title: '${attr.title}',${attr.description ? `
-            description: ${/[\n']/g.test(attr.description) ? `\`${attr.description}\`` : `'${attr.description}'`},` : ''}${syncMode ? `
-            syncMode: '${syncMode}',` : ''}${attr.tooltipLink ? `
+            description: ${/[\n']/g.test(attr.description) ? `\`${attr.description}\`` : `'${attr.description}'`},` : ''}${sync ? `
+            sync: ${sync},` : ''}${attr.tooltipLink ? `
             tooltipLink: '${attr.tooltipLink}',` : ''}${attr.docDescription ? `
             docDescription: ${/[\n']/g.test(attr.docDescription) ? `\`${attr.docDescription}\`` : `'${attr.docDescription}'`},` : ''}${notNil(attr.bindHide) ? `
             bindHide: ${attr.bindHide},` : ''}${notNil(attr.bindOpen) ? `

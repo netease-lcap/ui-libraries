@@ -89,6 +89,7 @@ export function transform(tsCode: string): apiTypes.ComponentAPI[] {
             description: '',
             icon: '',
             advanced: false,
+            typeParams: undefined,
             props: [],
             readableProps: [],
             events: [],
@@ -104,6 +105,25 @@ export function transform(tsCode: string): apiTypes.ComponentAPI[] {
                 });
             }
         });
+
+        {
+            const classTypeParams = generate(babelTypes.tsInterfaceDeclaration(
+                babelTypes.identifier('Wrapper'),
+                classDecl.typeParameters as babelTypes.TSTypeParameterDeclaration,
+                [],
+                babelTypes.tsInterfaceBody([]),
+            )).code.replace(/^interface Wrapper<?/, '').replace(/>? {}$/, '');
+            const optionsTypeParams = generate(babelTypes.tsInterfaceDeclaration(
+                babelTypes.identifier('Wrapper'),
+                optionsDecl.typeParameters as babelTypes.TSTypeParameterDeclaration,
+                [],
+                babelTypes.tsInterfaceBody([]),
+            )).code.replace(/^interface Wrapper<?/, '').replace(/>? {}$/, '');
+            if (classTypeParams !== optionsTypeParams)
+                throw new Error(`组件的${className}泛型类型参数不匹配！`);
+
+            component.typeParams = classTypeParams;
+        }
 
         optionsDecl.body.body.forEach((member) => {
             if (member.type === 'ClassProperty') {
@@ -153,7 +173,7 @@ export function transform(tsCode: string): apiTypes.ComponentAPI[] {
 
         classDecl.body.body.forEach((member) => {
             if (member.type === 'ClassProperty') {
-                member.decorators.forEach((decorator) => {
+                member.decorators?.forEach((decorator) => {
                     if (decorator.expression.type === 'CallExpression') {
                         const calleeName = (decorator.expression.callee as babelTypes.Identifier).name;
                         if (calleeName === 'Prop') {

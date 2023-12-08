@@ -18,6 +18,27 @@ const groupMap = {
     Process: '流程',
 }
 
+const setterMap = {
+    input: '输入框',
+    numberInput: '数字输入框',
+    enumSelect: '枚举选择器',
+    capsules: '胶囊选择器',
+    iconSelect: '图标选择器',
+    imageSelect: '图片选择器',
+    propertySelect: '属性选择器',
+}
+
+function excludeKeys(obj, keys) {
+    if (!obj)
+        return undefined;
+    const newObj = {};
+    Object.keys(obj).forEach((key) => {
+        if (!keys.includes(key))
+            newObj[key] = obj[key];
+    });
+    return newObj;
+}
+
 function mergeRows(sheet, lastNumbers, rowNumber, col, condition) {
     const lastNumber = lastNumbers[col];
     condition = condition || sheet.cell(rowNumber, col).value() !== sheet.cell(rowNumber - 1, col).value();
@@ -46,13 +67,13 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
         
     {
         const sheet = workbook.addSheet('组件基本信息');
-        const firstRowData = ['分类', '端', '组件名称', '组件标题', '子组件名称', '子组件标题', '图标', '描述', 'TS泛型参数'];
+        const firstRowData = ['分类', '端', '组件名称', '组件标题', '子组件名称', '子组件标题', '图标', '描述', '泛型参数', '属性类型依赖', '属性显隐依赖'];
         sheet.range(1, 1, 1, firstRowData.length).value([firstRowData]);
         sheet.row(1).style({
             bold: true,
             fill: 'E1EAFF',
         }).height(22);
-        [6, 4, 22, 18, 30, 14, 18, 80, 80].forEach((width, index) => sheet.column(index + 1).width(width));
+        [6, 4, 22, 18, 30, 14, 18, 80, 62, 14, 14].forEach((width, index) => sheet.column(index + 1).width(width));
 
         let rowNumber = 2;
         let lastNumbers = [null];
@@ -61,9 +82,9 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
             component.subs.forEach((sub) => {
                 if (sub.advanced)
                     return;
-                const hasKeys = collectOtherKeys(sub, otherKeys, ['name', 'title', 'icon', 'description', 'tsTypeParams', 'props', 'readableProps', 'events', 'slots', 'methods']);
+                const hasKeys = collectOtherKeys(sub, otherKeys, ['name', 'title', 'icon', 'description', 'typeParams', 'props', 'readableProps', 'events', 'slots', 'methods', 'advanced']);
                 sheet.range(rowNumber, 1, rowNumber, firstRowData.length + hasKeys.length).value([
-                    [groupMap[component.group], component.frontend.toUpperCase(), component.name, component.alias, sub.name, sub.title, sub.icon, sub.description, sub.tsTypeParams, ...hasKeys.map((key) => key && JSON.stringify(sub[key]))],
+                    [groupMap[component.group], component.frontend.toUpperCase(), component.name, component.alias, sub.name, sub.title, sub.icon, sub.description, sub.typeParams, '', '', ...hasKeys.map((key) => key && JSON.stringify(sub[key]))],
                 ]);
                 [1, 3, 4].forEach((col) => mergeRows(sheet, lastNumbers, rowNumber, col));
                 mergeRows(sheet, lastNumbers, rowNumber, 2, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
@@ -83,13 +104,13 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
 
     {
         const sheet = workbook.addSheet('组件属性汇总');
-        const firstRowData = ['分类', '端', '组件标题', '子组件标题', '属性分组', '属性名称', '属性标题', '属性描述', '双向绑定（model/sync）', '属性类型', '默认值', '设置器', '工具提示链接', '文档描述', '隐藏绑定弹窗', '打开绑定弹窗', '设计器的展示值'];
+        const firstRowData = ['分类', '端', '组件标题', '子组件标题', '泛型参数', '属性分组', '属性名称', '属性标题', '属性描述', '双向绑定（model/sync）', '属性类型', '默认值', '设计器的展示值', '设置器类型', '设置器参数', '工具提示链接', '文档描述', '隐藏绑定弹窗', '打开绑定弹窗', '显隐联动条件', '禁用联动条件', '当切换时'];
         sheet.range(1, 1, 1, firstRowData.length).value([firstRowData]);
         sheet.row(1).style({
             bold: true,
             fill: 'E1EAFF',
         }).height(22);
-        [6, 4, 18, 14, 10, 24, 28, 80, 20, 14].forEach((width, index) => sheet.column(index + 1).width(width));
+        [6, 4, 18, 14, 30, 10, 24, 28, 80, 20, 20, 30, 30, 10, 80, 12, 12, 12, 12, 40, 40, 40].forEach((width, index) => sheet.column(index + 1).width(width));
 
         let rowNumber = 2;
         let lastNumbers = [null];
@@ -101,9 +122,64 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
                 sub.props && sub.props.forEach((prop) => {
                     if (prop.advanced)
                         return;
-                    const hasKeys = collectOtherKeys(prop, otherKeys, ['group', 'name', 'title', 'description', 'syncMode', 'type', 'default', 'setter', 'tooltipLink', 'docDescription', 'bindHide', 'bindOpen', 'designerValue']);
+                    const hasKeys = collectOtherKeys(prop, otherKeys, ['group', 'name', 'title', 'description', 'sync', 'type', 'default', 'designerValue', 'setter', 'tooltipLink', 'docDescription', 'bindHide', 'bindOpen', 'if', 'disabledIf', 'onToggle']);
                     sheet.range(rowNumber, 1, rowNumber, firstRowData.length + hasKeys.length).value([
-                        [groupMap[component.group], component.frontend.toUpperCase(), component.alias, sub.title, prop.group || '主要属性', prop.name, prop.title, prop.description, prop.syncMode, prop.type, JSON.stringify(prop.default), JSON.stringify(prop.setter), prop.tooltipLink, prop.docDescription, prop.bindHide, prop.bindOpen, prop.designerValue, ...hasKeys.map((key) => key && JSON.stringify(prop[key]))],
+                        [groupMap[component.group], component.frontend.toUpperCase(), component.alias, sub.title, sub.typeParams, prop.group || '主要属性', prop.name, prop.title, prop.description, prop.sync, prop.type, JSON.stringify(prop.default), JSON.stringify(prop.designerValue), setterMap[prop.setter?.type], JSON.stringify(excludeKeys(prop.setter, 'type')),
+                            prop.tooltipLink, prop.docDescription, prop.bindHide, prop.bindOpen, prop.if, prop.disabledIf, JSON.stringify(prop.onToggle), ...hasKeys.map((key) => key && JSON.stringify(prop[key]))],
+                    ]);
+                    [1].forEach((col) => mergeRows(sheet, lastNumbers, rowNumber, col));
+                    mergeRows(sheet, lastNumbers, rowNumber, 2, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
+                                                            || sheet.cell(rowNumber, 3).value() !== sheet.cell(rowNumber - 1, 3).value());
+                    mergeRows(sheet, lastNumbers, rowNumber, 3, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
+                                                            || sheet.cell(rowNumber, 3).value() !== sheet.cell(rowNumber - 1, 3).value());
+                    mergeRows(sheet, lastNumbers, rowNumber, 4, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
+                                                            || sheet.cell(rowNumber, 3).value() !== sheet.cell(rowNumber - 1, 3).value()
+                                                            || sheet.cell(rowNumber, 4).value() !== sheet.cell(rowNumber - 1, 4).value());
+                    mergeRows(sheet, lastNumbers, rowNumber, 5, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
+                                                            || sheet.cell(rowNumber, 3).value() !== sheet.cell(rowNumber - 1, 3).value()
+                                                            || sheet.cell(rowNumber, 4).value() !== sheet.cell(rowNumber - 1, 4).value()
+                                                            || sheet.cell(rowNumber, 5).value() !== sheet.cell(rowNumber - 1, 5).value());
+                    mergeRows(sheet, lastNumbers, rowNumber, 6, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
+                                                            || sheet.cell(rowNumber, 3).value() !== sheet.cell(rowNumber - 1, 3).value()
+                                                            || sheet.cell(rowNumber, 4).value() !== sheet.cell(rowNumber - 1, 4).value()
+                                                            || sheet.cell(rowNumber, 6).value() !== sheet.cell(rowNumber - 1, 6).value());
+                    rowNumber++;
+                });
+            });
+        });
+        [1, 2, 3, 4, 5, 6].forEach((col) => mergeRows(sheet, lastNumbers, rowNumber, col, true));
+        sheet.range(1, firstRowData.length + 1, 1, firstRowData.length + 1 + otherKeys.length).value([otherKeys]);
+
+        const MERGE_COUNT = 5;
+        sheet.freezePanes(MERGE_COUNT, 1);
+        sheet.usedRange().style({
+            verticalAlignment: 'center',
+        });
+    }
+
+    {
+        const sheet = workbook.addSheet('组件可访问属性汇总');
+        const firstRowData = ['分类', '端', '组件标题', '子组件标题', '泛型参数', '属性名称', '属性标题', '属性描述', '属性类型'];
+        sheet.range(1, 1, 1, firstRowData.length).value([firstRowData]);
+        sheet.row(1).style({
+            bold: true,
+            fill: 'E1EAFF',
+        }).height(22);
+        [6, 4, 18, 14, 30, 24, 28, 80, 20].forEach((width, index) => sheet.column(index + 1).width(width));
+
+        let rowNumber = 2;
+        let lastNumbers = [null];
+        const otherKeys = [];
+        components.forEach((component) => {
+            component.subs.forEach((sub) => {
+                if (sub.advanced)
+                    return;
+                sub.readableProps && sub.readableProps.forEach((prop) => {
+                    if (prop.advanced)
+                        return;
+                    const hasKeys = collectOtherKeys(prop, otherKeys, ['name', 'title', 'description', 'type']);
+                    sheet.range(rowNumber, 1, rowNumber, firstRowData.length + hasKeys.length).value([
+                        [groupMap[component.group], component.frontend.toUpperCase(), component.alias, sub.title, sub.typeParams, prop.name, prop.title, prop.description, prop.type, ...hasKeys.map((key) => key && JSON.stringify(prop[key]))],
                     ]);
                     [1].forEach((col) => mergeRows(sheet, lastNumbers, rowNumber, col));
                     mergeRows(sheet, lastNumbers, rowNumber, 2, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
@@ -133,13 +209,13 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
 
     {
         const sheet = workbook.addSheet('组件事件汇总');
-        const firstRowData = ['分类', '端', '组件标题', '子组件标题', '事件名称', '事件标题', '事件描述'];
+        const firstRowData = ['分类', '端', '组件标题', '子组件标题', '泛型参数', '事件名称', '事件标题', '事件描述'];
         sheet.range(1, 1, 1, firstRowData.length).value([firstRowData]);
         sheet.row(1).style({
             bold: true,
             fill: 'E1EAFF',
         }).height(22);
-        [6, 4, 18, 14, 24, 30, 80].forEach((width, index) => sheet.column(index + 1).width(width));
+        [6, 4, 18, 14, 30, 24, 30, 80].forEach((width, index) => sheet.column(index + 1).width(width));
 
         let rowNumber = 2;
         let lastNumbers = [null];
@@ -153,7 +229,7 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
                         return;
                     const hasKeys = collectOtherKeys(event, otherKeys, ['name', 'title', 'description']);
                     sheet.range(rowNumber, 1, rowNumber, firstRowData.length + hasKeys.length).value([
-                        [groupMap[component.group], component.frontend.toUpperCase(), component.alias, sub.title, event.name, event.title, event.description, ...hasKeys.map((key) => key && JSON.stringify(event[key]))],
+                        [groupMap[component.group], component.frontend.toUpperCase(), component.alias, sub.title, sub.typeParams, event.name, event.title, event.description, ...hasKeys.map((key) => key && JSON.stringify(event[key]))],
                     ]);
                     [1].forEach((col) => mergeRows(sheet, lastNumbers, rowNumber, col));
                     mergeRows(sheet, lastNumbers, rowNumber, 2, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
@@ -163,11 +239,15 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
                     mergeRows(sheet, lastNumbers, rowNumber, 4, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
                                                             || sheet.cell(rowNumber, 3).value() !== sheet.cell(rowNumber - 1, 3).value()
                                                             || sheet.cell(rowNumber, 4).value() !== sheet.cell(rowNumber - 1, 4).value());
+                    mergeRows(sheet, lastNumbers, rowNumber, 5, sheet.cell(rowNumber, 2).value() !== sheet.cell(rowNumber - 1, 2).value()
+                                                            || sheet.cell(rowNumber, 3).value() !== sheet.cell(rowNumber - 1, 3).value()
+                                                            || sheet.cell(rowNumber, 4).value() !== sheet.cell(rowNumber - 1, 4).value()
+                                                            || sheet.cell(rowNumber, 5).value() !== sheet.cell(rowNumber - 1, 5).value());
                     rowNumber++;
                 });
             });
         });
-        [1, 2, 3, 4].forEach((col) => mergeRows(sheet, lastNumbers, rowNumber, col, true));
+        [1, 2, 3, 4, 5].forEach((col) => mergeRows(sheet, lastNumbers, rowNumber, col, true));
         sheet.range(1, firstRowData.length + 1, 1, firstRowData.length + 1 + otherKeys.length).value([otherKeys]);
 
         const MERGE_COUNT = 4;
