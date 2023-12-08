@@ -1,21 +1,27 @@
 declare namespace nasl.ui {
-    export class VueComponent {
-        // name: '__VueComponent';
+    export class ViewComponent {
+        // name: '__ViewComponent';
     }
 
     export interface InputSetter {
         type: 'input'
         placeholder: string;
     }
+
+    export interface SetterOption<T extends object = never, K extends keyof T = never> {
+        title: string;
+        icon?: string;
+        tooltip?: string;
+        if?: (target: T) => boolean;
+        disabledIf?: (target: T) => boolean;
+    }
     export interface EnumSelectSetter {
         type: 'enumSelect'
-        titles: string[];
+        options: SetterOption[];
     }
     export interface CapsulesSetter {
         type: 'capsules'
-        titles: string[];
-        icons: string[];
-        tooltips: string[];
+        options: SetterOption[];
     }
     export interface NumberInputSetter {
         type: 'numberInput'
@@ -61,23 +67,12 @@ declare namespace nasl.ui {
     }
     export function Prop(options?: PropOptions): (target: any, key: string) => void;
 
-    export interface GenericPropOptions<T extends VueComponent, K extends keyof T> {
-        group?: '基础信息' | '数据属性' | '主要属性' | '交互属性' | '状态属性' | '样式属性' | '工具属性';
-        title: string;
-        icon?: string;
-        description?: string;
-        sync?: boolean;
-        tooltipLink?: string;
-        docDescription?: string;
-        bindHide?: boolean;
-        bindOpen?: boolean;
-        setter?: InputSetter | EnumSelectSetter | CapsulesSetter | NumberInputSetter | IconSetter | ImageSetter | PropertySelectSetter | SwitchSetter;
-        designerValue?: any;
+    export type GenericPropOptions<T extends ViewComponent, K extends keyof T> = PropOptions & {
         if?: (target: T) => boolean;
         disabledIf?: (target: T) => boolean;
         onToggle?: Array<{ update: any, if?: (value: T[K]) => boolean } | { clear: string[], if?: (value: T[K]) => boolean }>,
     }
-    export function Prop<T extends VueComponent, K extends keyof T>(options?: GenericPropOptions<T, K>): (target: T, key: K) => void;
+    export function Prop<T extends object, K extends keyof T>(options?: GenericPropOptions<T, K>): (target: T, key: K) => void;
 
     export interface EventOptions {
         title: string;

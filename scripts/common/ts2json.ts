@@ -64,7 +64,7 @@ export function transform(tsCode: string): apiTypes.ComponentAPI[] {
             }
         } else {
             const className = classDecl.id.name;
-            if ((classDecl.superClass as babelTypes.Identifier).name === 'VueComponent') {
+            if ((classDecl.superClass as babelTypes.Identifier).name === 'ViewComponent') {
                 let classItem = classMap.get(className);
                 if (!classItem) {
                     classItem = [classDecl, null];

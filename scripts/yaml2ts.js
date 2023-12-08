@@ -15,6 +15,8 @@ const kebab2Camel = (name) => name.replace(/(?:-)([a-zA-Z0-9])/g, (m, $1) => $1.
 const firstUpperCase = (name) => name.replace(/^[a-z]/, (m) => m.toUpperCase());
 const notNil = (value) => value !== null && value !== undefined;
 const indent = (n) => '    '.repeat(n);
+const formatOptions = (options) => json5.stringify(options).replace(/[{:,]/g, '$& ').replace(/[}]/g, ' $&');
+
 const translateNumber = (attr) => {
     if (attr.precision === 0) {
         return 'nasl.core.Integer';
@@ -60,7 +62,7 @@ ${component.subs.map((sub) => {
         icon: '${sub.icon}',` : ''}${sub.description ? `
         description: '${sub.description}',` : ''}
     })
-    ${sub.advanced ? '' : 'export '}class ${className}${typeParamsStr} extends VueComponent {
+    ${sub.advanced ? '' : 'export '}class ${className}${typeParamsStr} extends ViewComponent {
 ${!sub.attrs ? '' : sub.attrs.filter((attr) => attr.readable).map((attr) => {
     let attrType = attr.type
         .replace(/\bstring\b/g, 'nasl.core.String')
@@ -100,7 +102,7 @@ ${!sub.attrs ? '' : sub.attrs.filter((attr) => attr.readable).map((attr) => {
                 description: '${param.description}',` : ''}${param.options ? `
                 setter: {
                     type: 'enumSelect',
-                    titles: [${param.options.map((option) => (option.title || option.name).includes?.(`'`) ? `"${option.title || option.name}"` : json5.stringify(option.title || option.name)).join(', ')}],
+                    options: ${formatOptions(param.options.map((option) => ({ title: option.title || option.name, icon: option.icon, tooltip: option.tooltip })))},
                 },` : ''}
             })
             ${param.name}${param.required === false && !notNil(param.default) ? '?' : ''}: ${paramType}${notNil(param.default) ? ` = ${translateDefaultValue(param.default, paramType)}` : ''},`;
@@ -176,13 +178,11 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
             },` : ''}${attr.options && !attr.display ? `
             setter: {
                 type: 'enumSelect',
-                titles: [${attr.options.map((option) => (option.title || option.name).includes?.(`'`) ? `"${option.title || option.name}"` : json5.stringify(option.title || option.name)).join(', ')}],
+                options: ${formatOptions(attr.options.map((option) => ({ title: option.title || option.name, icon: option.icon, tooltip: option.tooltip })))},
             },` : ''}${attr.display === 'capsules' ? `
             setter: {
                 type: 'capsules',
-                titles: [${attr.options.map((option) => (option.title || option.name).includes?.(`'`) ? `"${option.title || option.name}"` : json5.stringify(option.title || option.name)).join(', ')}],
-                icons: [${attr.options.map((option) =>json5.stringify(option.icon)).join(', ')}],
-                tooltips: [${attr.options.map((option) =>json5.stringify(option.tooltip)).join(', ')}],
+                options: ${formatOptions(attr.options.map((option) => ({ title: option.title || option.name, icon: option.icon, tooltip: option.tooltip })))},
             },` : ''}${attr.display === 'number' || attr.type === 'number' ? `
             setter: {
                 type: 'numberInput',${attr.place ? `
@@ -259,7 +259,7 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
                 code: item.snippet,
             })), null, 4).replace(/\n/g, `\n${indent(3)}`)},`}
         })
-        ${slot.advanced ? 'private ' : ''}slot${kebab2Pascal(slot.name)}: (${!slot.slotProps ? '' : `${paramName}: ${paramType}`}) => Array<${slot.support ? slot.support.map((item) => kebab2Pascal(item.name) + (item.tsTypeArguments ? `<${item.tsTypeArguments}>` : '')).join(' | ') : 'VueComponent'}>;`
+        ${slot.advanced ? 'private ' : ''}slot${kebab2Pascal(slot.name)}: (${!slot.slotProps ? '' : `${paramName}: ${paramType}`}) => Array<${slot.support ? slot.support.map((item) => kebab2Pascal(item.name) + (item.tsTypeArguments ? `<${item.tsTypeArguments}>` : '')).join(' | ') : 'ViewComponent'}>;`
         }).join('\n\n')}
     }`;
 }).join('\n\n')}

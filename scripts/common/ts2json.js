@@ -66,7 +66,7 @@ function transform(tsCode) {
         }
         else {
             var className = classDecl.id.name;
-            if (classDecl.superClass.name === 'VueComponent') {
+            if (classDecl.superClass.name === 'ViewComponent') {
                 var classItem = classMap.get(className);
                 if (!classItem) {
                     classItem = [classDecl, null];
