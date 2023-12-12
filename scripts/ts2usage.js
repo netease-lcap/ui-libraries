@@ -1,27 +1,139 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.transform = exports.evalOptions = void 0;
+var fs = require("fs-extra");
+var path = require("path");
 var babel = require("@babel/core");
 var babelTypes = require("@babel/types");
 var generator_1 = require("@babel/generator");
-function evalOptions(object) {
-    var code = (0, generator_1.default)(object).code;
-    var result = eval("(".concat(code, ")"));
-    if (result.if)
-        result.if = result.if.toString();
-    if (result.disabledIf)
-        result.disabledIf = result.disabledIf.toString();
-    if (result.onToggle) {
-        result.onToggle.forEach(function (item) {
-            if (item.if)
-                item.if = item.if.toString();
-        });
+var ts2json_1 = require("./common/ts2json");
+var MarkdownIt = require('markdown-it');
+var md = new MarkdownIt();
+var root = path.join(__dirname, "../../vant");
+var frontend = 'h5';
+var data = [];
+var pkg = require("".concat(root, "/package.json"));
+var libInfo = "".concat(pkg.name, "@").concat(pkg.version);
+var components = require("".concat(root, "/scripts/lcap/config.js"));
+components.forEach(function (component) {
+    var sourceDir = 'src';
+    var componentDir = path.join(root, "".concat(sourceDir, "/").concat(component.name));
+    if (!fs.existsSync(componentDir)) {
+        sourceDir = 'src-vusion/components';
+        componentDir = path.join(root, "".concat(sourceDir, "/").concat(component.name));
     }
-    return result;
+    component.symbol = component.name;
+    component.frontend = frontend;
+    // api.ts
+    try {
+        var tsPath = "".concat(componentDir, "/api.ts");
+        // component.tsPath = tsPath;
+        var info = transform(fs.readFileSync(tsPath, 'utf8'));
+        Object.assign(component, info);
+    }
+    catch (e) {
+        console.log('找不到 TS 文件或 TS 报错', componentDir);
+        console.log(e);
+    }
+    // blocks
+    try {
+        var blockPath = "".concat(componentDir, "/docs/blocks.md");
+        var blocks = getBlocks(fs.readFileSync(blockPath, 'utf8').toString());
+        Object.assign(component, { blocks: blocks });
+    }
+    catch (e) {
+        console.log('找不到 blocks.md 文件', componentDir);
+        console.log(e);
+    }
+    // screenShot
+    try {
+        var screenShotPath = "".concat(componentDir, "/screenshots");
+        var screenShot = [];
+        if (hasImg(screenShotPath)) {
+            screenShot = fs.readdirSync(screenShotPath)
+                .sort(function (a, b) { return parseInt(a) - parseInt(b); })
+                .filter(function (filename) { return filename.indexOf('.DS_Store') === -1; });
+            Object.assign(component, {
+                screenShot: screenShot.map(function (screen) {
+                    var prefix = "https://static-vusion.163yun.com/packages/".concat(libInfo, "/").concat(sourceDir);
+                    return "".concat(prefix, "/").concat(component.symbol, "/screenshots/").concat(screen);
+                }).join(','),
+            });
+        }
+    }
+    catch (e) {
+        console.log('找不到 screenShot 文件', componentDir);
+        console.log(e);
+    }
+    // drawings
+    try {
+        var drawingsPath = "".concat(componentDir, "/drawings");
+        var drawings = [];
+        if (hasSvg(drawingsPath)) {
+            drawings = fs.readdirSync(drawingsPath)
+                .sort(function (a, b) { return parseInt(a) - parseInt(b); })
+                .filter(function (filename) { return filename.indexOf('.DS_Store') === -1; });
+            Object.assign(component, {
+                drawings: drawings.map(function (drawing) {
+                    var prefix = "https://static-vusion.163yun.com/packages/".concat(libInfo, "/").concat(sourceDir);
+                    return "".concat(prefix, "/").concat(component.symbol, "/drawings/").concat(drawing);
+                }).join(','),
+            });
+        }
+    }
+    catch (e) {
+        console.log('找不到 drawings 文件', componentDir);
+        console.log(e);
+    }
+    data.push(component);
+});
+fs.writeFileSync(path.join(__dirname, "../".concat(frontend, ".json")), JSON.stringify(data, null, 2));
+function getBlocks(content) {
+    var tokens = md.parse(content, {});
+    var title = '';
+    var description = '';
+    var blocks = [];
+    tokens.forEach(function (token, index) {
+        if (token.type === 'heading_close' && token.tag === 'h3') {
+            var inline = tokens[index - 1];
+            if (inline && inline.type === 'inline')
+                title = inline.content;
+        }
+        else if (token.type === 'paragraph_close') {
+            var inline = tokens[index - 1];
+            if (inline && inline.type === 'inline')
+                description += inline.content + '\n';
+        }
+        else if (token.type === 'fence') {
+            var lang = token.info.trim().split(' ')[0];
+            if (lang === 'html') {
+                blocks.push({
+                    title: title,
+                    description: description,
+                    code: "<template>\n".concat(token.content, "</template>\n"),
+                });
+            }
+            else if (lang === 'vue') {
+                blocks.push({
+                    title: title,
+                    description: description,
+                    code: token.content,
+                });
+            }
+            description = '';
+        }
+    });
+    return blocks;
 }
-exports.evalOptions = evalOptions;
-function transform(tsCode) {
-    var root = babel.parseSync(tsCode, {
+function hasImg(dir) {
+    return fs.existsSync(path.join(dir, '0.png'));
+}
+;
+function hasSvg(dir) {
+    return fs.existsSync(path.join(dir, '0.svg'));
+}
+;
+function transform(code) {
+    var root = babel.parseSync(code, {
         filename: 'result.ts',
         presets: [
             require('@babel/preset-typescript'),
@@ -37,7 +149,7 @@ function transform(tsCode) {
         blockOrDecl = blockOrDecl.body;
     }
     if (!blockOrDecl)
-        return [];
+        return;
     var mainBody = blockOrDecl.body;
     /**
      * 组件名：[组件 class, 组件选项 class]
@@ -81,8 +193,10 @@ function transform(tsCode) {
     });
     // forEach classMap
     var result = [];
+    var idx = 0;
     classMap.forEach(function (classItem, className) {
         var classDecl = classItem[0], optionsDecl = classItem[1];
+        // console.log('classItem', classItem);
         if (!classDecl)
             return;
         var component = {
@@ -97,12 +211,13 @@ function transform(tsCode) {
             events: [],
             methods: [],
             slots: [],
+            children: [],
         };
         classDecl.decorators.forEach(function (decorator) {
             if (decorator.expression.type === 'CallExpression' && decorator.expression.callee.name === 'Component') {
                 decorator.expression.arguments.forEach(function (arg) {
                     if (arg.type === 'ObjectExpression')
-                        Object.assign(component, evalOptions(arg));
+                        Object.assign(component, (0, ts2json_1.evalOptions)(arg));
                 });
             }
         });
@@ -116,6 +231,7 @@ function transform(tsCode) {
         optionsDecl.body.body.forEach(function (member) {
             if (member.type === 'ClassProperty') {
                 member.decorators.forEach(function (decorator) {
+                    var _a, _b, _c, _d;
                     if (decorator.expression.type === 'CallExpression') {
                         var calleeName = decorator.expression.callee.name;
                         if (calleeName === 'Prop') {
@@ -128,8 +244,19 @@ function transform(tsCode) {
                             // @TODO: private
                             decorator.expression.arguments.forEach(function (arg) {
                                 if (arg.type === 'ObjectExpression')
-                                    Object.assign(prop_1, evalOptions(arg));
+                                    Object.assign(prop_1, (0, ts2json_1.evalOptions)(arg));
                             });
+                            // 枚举类型生成选项
+                            if (((_a = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _a === void 0 ? void 0 : _a.type) === 'enumSelect') {
+                                var types_1 = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.type.split('|').map(function (type) { return type.replace(/(\'|\")/g, '').trim(); });
+                                // @ts-ignore
+                                (_b = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _b === void 0 ? void 0 : _b.options = (_d = (_c = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _c === void 0 ? void 0 : _c.titles) === null || _d === void 0 ? void 0 : _d.map(function (title, idx) {
+                                    return {
+                                        title: title,
+                                        value: types_1[idx],
+                                    };
+                                });
+                            }
                             component.props.push(prop_1);
                         }
                         else if (calleeName === 'Event') {
@@ -140,7 +267,7 @@ function transform(tsCode) {
                             };
                             decorator.expression.arguments.forEach(function (arg) {
                                 if (arg.type === 'ObjectExpression')
-                                    Object.assign(event_1, evalOptions(arg));
+                                    Object.assign(event_1, (0, ts2json_1.evalOptions)(arg));
                             });
                             component.events.push(event_1);
                         }
@@ -152,7 +279,7 @@ function transform(tsCode) {
                             };
                             decorator.expression.arguments.forEach(function (arg) {
                                 if (arg.type === 'ObjectExpression')
-                                    Object.assign(slot_1, evalOptions(arg));
+                                    Object.assign(slot_1, (0, ts2json_1.evalOptions)(arg));
                             });
                             component.slots.push(slot_1);
                         }
@@ -176,7 +303,7 @@ function transform(tsCode) {
                             // @TODO: private
                             decorator.expression.arguments.forEach(function (arg) {
                                 if (arg.type === 'ObjectExpression')
-                                    Object.assign(prop_2, evalOptions(arg));
+                                    Object.assign(prop_2, (0, ts2json_1.evalOptions)(arg));
                             });
                             component.readableProps.push(prop_2);
                         }
@@ -197,7 +324,7 @@ function transform(tsCode) {
                             // @TODO: private
                             decorator.expression.arguments.forEach(function (arg) {
                                 if (arg.type === 'ObjectExpression')
-                                    Object.assign(method_1, evalOptions(arg));
+                                    Object.assign(method_1, (0, ts2json_1.evalOptions)(arg));
                             });
                             component.methods.push(method_1);
                         }
@@ -205,8 +332,14 @@ function transform(tsCode) {
                 });
             }
         });
-        result.push(component);
+        if (idx === 0) {
+            result.push(component);
+        }
+        else {
+            var parent_1 = result[0];
+            parent_1.children.push(component);
+        }
+        idx++;
     });
-    return result;
+    return result[0];
 }
-exports.transform = transform;
