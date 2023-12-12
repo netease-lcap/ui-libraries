@@ -55,3 +55,10 @@ export interface ComponentAPI {
     events?: Array<EventAPI>;
     methods?: Array<MethodAPI>;
 }
+
+
+export interface BlockAPI {
+    title: string;
+    description: string;
+    code: string;
+} 
