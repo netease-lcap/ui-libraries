@@ -8,18 +8,21 @@ const path = require('path');
  * - method
  * - slot
  */
-const pcComponents = require(`../../pc-ui/scripts/lcap/config`);
+const pcComponents = require('../../../cloud-ui/scripts/lcap/config');
 pcComponents.forEach((component) => {
-    let yamlPath = path.join(__dirname, `../../pc-ui/src/components/${component.name}.vue/api.yaml`);
+    let yamlPath = path.join(
+      __dirname,
+      `../../../cloud-ui/src/components/${component.name}.vue/api.yaml`
+    );
     component.frontend = 'pc';
     component.yamlPath = yamlPath;
     component.subs = YAML.parse(fs.readFileSync(yamlPath, 'utf8'));
 });
-const h5Components = require(`../../h5-ui/scripts/lcap/config`);
+const h5Components = require(`../../../vant/scripts/lcap/config`);
 h5Components.forEach((component) => {
-    let yamlPath = path.join(__dirname, `../../h5-ui/src/${component.name}/api.yaml`);
+    let yamlPath = path.join(__dirname, `../../../vant/src/${component.name}/api.yaml`);
     if (!fs.existsSync(yamlPath))
-        yamlPath = path.join(__dirname, `../../h5-ui/src-vusion/components/${component.name}/api.yaml`);
+        yamlPath = path.join(__dirname, `../../../vant/src-vusion/components/${component.name}/api.yaml`);
     component.frontend = 'h5';
     component.yamlPath = yamlPath;
     component.subs = YAML.parse(fs.readFileSync(yamlPath, 'utf8'));

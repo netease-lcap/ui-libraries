@@ -78,6 +78,7 @@ export function transform(tsCode: string): apiTypes.ComponentAPI[] {
 
     // forEach classMap
     const result: apiTypes.ComponentAPI[] = [];
+    let idx = 0;
     classMap.forEach((classItem, className) => {
         const [classDecl, optionsDecl] = classItem;
         if (!classDecl)
@@ -94,6 +95,7 @@ export function transform(tsCode: string): apiTypes.ComponentAPI[] {
             events: [],
             methods: [],
             slots: [],
+            children: [],
         };
 
         classDecl.decorators.forEach((decorator) => {
@@ -195,7 +197,14 @@ export function transform(tsCode: string): apiTypes.ComponentAPI[] {
             }
         });
 
-        result.push(component);
+        if (idx === 0) {
+            result.push(component);
+        } else {
+            const parent = result[0];
+            parent.children.push(component);
+        }
+
+        idx++;
     });
     return result;
 }

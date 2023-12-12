@@ -78,7 +78,7 @@ function transform(tsCode) {
         }
     });
     // forEach classMap
-    var result = [];
+    var result = [], idx = 0;
     classMap.forEach(function (classItem, className) {
         var classDecl = classItem[0], optionsDecl = classItem[1];
         if (!classDecl)
@@ -94,6 +94,7 @@ function transform(tsCode) {
             events: [],
             methods: [],
             slots: [],
+            children: [],
         };
         classDecl.decorators.forEach(function (decorator) {
             if (decorator.expression.type === 'CallExpression' && decorator.expression.callee.name === 'Component') {
@@ -195,7 +196,14 @@ function transform(tsCode) {
                 });
             }
         });
-        result.push(component);
+        if (idx === 0) {
+          result.push(component);
+        } else {
+          const parent = result[0];
+          parent.children.push(component);
+        }
+
+        idx++;
     });
     return result;
 }

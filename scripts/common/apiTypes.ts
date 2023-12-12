@@ -50,6 +50,7 @@ export interface ComponentAPI {
     props?: Array<PropAPI>;
     readableProps?: Array<PropAPI>;
     slots?: Array<SlotAPI>;
+    children?: Array<ComponentAPI>;
     events?: Array<EventAPI>;
     methods?: Array<MethodAPI>;
 }
