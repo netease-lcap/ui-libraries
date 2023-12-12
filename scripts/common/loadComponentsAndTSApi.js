@@ -8,21 +8,20 @@ const ts2json = require('./ts2json');
  * - method
  * - slot
  */
-const pcComponents = [];
-// const pcComponents = require(`../../../cloud-ui/scripts/lcap/config`);
-// pcComponents.forEach((component) => {
-//     let tsPath = path.join(__dirname, `../../../cloud-ui/src/components/${component.name}.vue/api.ts`);
-//     component.frontend = 'pc';
-//     component.tsPath = tsPath;
-//     component.subs = [];
-//     try {
-//         component.subs = ts2json.transform(fs.readFileSync(tsPath, 'utf8'));
-//     } catch (e) {
-//         console.log('找不到 TS 文件或 TS 报错', tsPath);
-//         // console.log(e);
-//     }
-// });
-const h5Components = require(`../../../vant/scripts/lcap/config`);
+const pcComponents = require(`../../pc-ui/scripts/lcap/config`);
+pcComponents.forEach((component) => {
+    let tsPath = path.join(__dirname, `../../pc-ui/src/components/${component.name}.vue/api.ts`);
+    component.frontend = 'pc';
+    component.tsPath = tsPath;
+    component.subs = [];
+    try {
+        component.subs = ts2json.transform(fs.readFileSync(tsPath, 'utf8'));
+    } catch (e) {
+        console.log('找不到 TS 文件或 TS 报错', tsPath);
+        console.log(e);
+    }
+});
+const h5Components = require(`../../h5-ui/scripts/lcap/config`);
 h5Components.forEach((component) => {
     let tsPath = path.join(__dirname, `../../../vant/src/${component.name}/api.ts`);
     if (!fs.existsSync(tsPath))
@@ -34,7 +33,7 @@ h5Components.forEach((component) => {
         component.subs = ts2json.transform(fs.readFileSync(tsPath, 'utf8'));
     } catch (e) {
         console.log('找不到 TS 文件或 TS 报错', tsPath);
-        // console.log(e);
+        console.log(e);
     }
 });
 /**

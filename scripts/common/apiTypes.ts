@@ -47,6 +47,7 @@ export interface ComponentAPI {
      * 在低代码 IDE 中不显示
      */
     advanced: boolean;
+    typeParams: string;
     props?: Array<PropAPI>;
     readableProps?: Array<PropAPI>;
     slots?: Array<SlotAPI>;

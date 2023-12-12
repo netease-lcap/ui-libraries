@@ -9,9 +9,9 @@ declare namespace nasl.ui {
 
     export class CurrentDynamic<T, T1> {
         item: T;
-        index: nasl.core.Long;
-        rowIndex: nasl.core.Long;
-        columnIndex: nasl.core.Long;
+        index: nasl.core.Integer;
+        rowIndex: nasl.core.Integer;
+        columnIndex: nasl.core.Integer;
         value: nasl.core.String;
         columnItem: T1;
     }

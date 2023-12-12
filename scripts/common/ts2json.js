@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.transform = void 0;
 var babel = require("@babel/core");
+var babelTypes = require("@babel/types");
 var generator_1 = require("@babel/generator");
 function evalOptions(object) {
     var code = (0, generator_1.default)(object).code;
@@ -65,7 +66,7 @@ function transform(tsCode) {
         }
         else {
             var className = classDecl.id.name;
-            if (classDecl.superClass.name === 'VueComponent') {
+            if (classDecl.superClass.name === 'ViewComponent') {
                 var classItem = classMap.get(className);
                 if (!classItem) {
                     classItem = [classDecl, null];
@@ -89,6 +90,7 @@ function transform(tsCode) {
             description: '',
             icon: '',
             advanced: false,
+            typeParams: undefined,
             props: [],
             readableProps: [],
             events: [],
@@ -104,6 +106,13 @@ function transform(tsCode) {
                 });
             }
         });
+        {
+            var classTypeParams = (0, generator_1.default)(babelTypes.tsInterfaceDeclaration(babelTypes.identifier('Wrapper'), classDecl.typeParameters, [], babelTypes.tsInterfaceBody([]))).code.replace(/^interface Wrapper<?/, '').replace(/>? {}$/, '');
+            var optionsTypeParams = (0, generator_1.default)(babelTypes.tsInterfaceDeclaration(babelTypes.identifier('Wrapper'), optionsDecl.typeParameters, [], babelTypes.tsInterfaceBody([]))).code.replace(/^interface Wrapper<?/, '').replace(/>? {}$/, '');
+            if (classTypeParams !== optionsTypeParams)
+                throw new Error("\u7EC4\u4EF6\u7684".concat(className, "\u6CDB\u578B\u7C7B\u578B\u53C2\u6570\u4E0D\u5339\u914D\uFF01"));
+            component.typeParams = classTypeParams;
+        }
         optionsDecl.body.body.forEach(function (member) {
             if (member.type === 'ClassProperty') {
                 member.decorators.forEach(function (decorator) {
@@ -152,9 +161,9 @@ function transform(tsCode) {
             }
         });
         classDecl.body.body.forEach(function (member) {
-            var _a;
+            var _a, _b;
             if (member.type === 'ClassProperty') {
-                member.decorators?.forEach(function (decorator) {
+                (_a = member.decorators) === null || _a === void 0 ? void 0 : _a.forEach(function (decorator) {
                     if (decorator.expression.type === 'CallExpression') {
                         var calleeName = decorator.expression.callee.name;
                         if (calleeName === 'Prop') {
@@ -175,7 +184,7 @@ function transform(tsCode) {
                 });
             }
             else if (member.type === 'ClassMethod') {
-                (_a = member.decorators) === null || _a === void 0 ? void 0 : _a.forEach(function (decorator) {
+                (_b = member.decorators) === null || _b === void 0 ? void 0 : _b.forEach(function (decorator) {
                     if (decorator.expression.type === 'CallExpression') {
                         var calleeName = decorator.expression.callee.name;
                         if (calleeName === 'Method') {
