@@ -367,15 +367,16 @@ function transform(code: string) {
                             });
 
                             // 枚举类型生成选项
-                            if (prop?.setter?.type === 'enumSelect') {
+                            if (['enumSelect', 'capsules'].includes(prop?.setter?.type)) {
                                 const types = prop?.type.split('|').map((type) => type.replace(/(\'|\")/g, '').trim());
                                 // @ts-ignore
-                                prop?.setter?.options = prop?.setter?.titles?.map((title: string, idx) => {
+                                prop?.setter?.options = prop?.setter?.options?.map((option: any, idx) => {
                                     return {
-                                        title,
+                                        ...option,
                                         value: types[idx],
                                     }
                                 })
+
                             }
 
                             component.props.push(prop);

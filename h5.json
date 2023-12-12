@@ -85,7 +85,7 @@
         "title": "展示弹层",
         "type": "nasl.core.Boolean",
         "group": "主要属性",
-        "syncMode": "onlySync",
+        "sync": true,
         "setter": {
           "type": "switch"
         }
@@ -98,12 +98,6 @@
         "description": "设置弹出位置",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "上",
-            "下",
-            "右",
-            "左"
-          ],
           "options": [
             {
               "title": "上",
@@ -227,7 +221,7 @@
         "type": "nasl.core.String",
         "group": "数据属性",
         "description": "用于标识折叠面板的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "accordion",
@@ -363,10 +357,6 @@
         "group": "交互属性",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "页面跳转",
-            "下载链接"
-          ],
           "options": [
             {
               "title": "页面跳转",
@@ -393,12 +383,6 @@
         "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "新窗口",
-            "当前窗口",
-            "父级窗口",
-            "顶级窗口"
-          ],
           "options": [
             {
               "title": "新窗口",
@@ -433,10 +417,6 @@
         "group": "样式属性",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "方角",
-            "圆角"
-          ],
           "options": [
             {
               "title": "方角",
@@ -576,10 +556,6 @@
         "description": "行内展示，或块级换行展示",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "行内",
-            "块级"
-          ],
           "options": [
             {
               "title": "行内",
@@ -600,13 +576,6 @@
         "description": "内容块间隙大小",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "收缩",
-            "无",
-            "小",
-            "正常",
-            "大"
-          ],
           "options": [
             {
               "title": "收缩",
@@ -640,11 +609,6 @@
         "description": "设置子元素行内展示或块级换行展示",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "子元素默认布局",
-            "子元素行内布局",
-            "子元素块级布局"
-          ],
           "options": [
             {
               "title": "子元素默认布局",
@@ -696,20 +660,25 @@
         "bindHide": true,
         "setter": {
           "type": "capsules",
-          "titles": [
-            "行内",
-            "块级",
-            "弹性"
-          ],
-          "icons": [
-            "layout-inline-block",
-            "layout-block",
-            "layout-flex"
-          ],
-          "tooltips": [
-            "内联布局",
-            "块级布局",
-            "弹性布局"
+          "options": [
+            {
+              "title": "行内",
+              "icon": "layout-inline-block",
+              "tooltip": "内联布局",
+              "value": "inline"
+            },
+            {
+              "title": "块级",
+              "icon": "layout-block",
+              "tooltip": "块级布局",
+              "value": "block"
+            },
+            {
+              "title": "弹性",
+              "icon": "layout-flex",
+              "tooltip": "弹性布局",
+              "value": "flex"
+            }
           ]
         },
         "onToggle": [
@@ -731,17 +700,19 @@
         "bindHide": true,
         "setter": {
           "type": "capsules",
-          "titles": [
-            "横向排列",
-            "纵向排列"
-          ],
-          "icons": [
-            "flex-horizontal",
-            "flex-vertical"
-          ],
-          "tooltips": [
-            "横向",
-            "纵向"
+          "options": [
+            {
+              "title": "横向排列",
+              "icon": "flex-horizontal",
+              "tooltip": "横向",
+              "value": "horizontal"
+            },
+            {
+              "title": "纵向排列",
+              "icon": "flex-vertical",
+              "tooltip": "纵向",
+              "value": "vertical"
+            }
           ]
         },
         "onToggle": [
@@ -762,26 +733,37 @@
         "bindHide": true,
         "setter": {
           "type": "capsules",
-          "titles": [
-            "左对齐",
-            "居中对齐",
-            "右对齐",
-            "平均分布(两端不留空)",
-            "平均分布"
-          ],
-          "icons": [
-            "horizontal-justify-start",
-            "horizontal-justify-center",
-            "horizontal-justify-end",
-            "horizontal-justify-space-between",
-            "horizontal-justify-space-around"
-          ],
-          "tooltips": [
-            "左对齐",
-            "居中对齐",
-            "右对齐",
-            "平均分布(两端不留空)",
-            "平均分布"
+          "options": [
+            {
+              "title": "左对齐",
+              "icon": "horizontal-justify-start",
+              "tooltip": "左对齐",
+              "value": "start"
+            },
+            {
+              "title": "居中对齐",
+              "icon": "horizontal-justify-center",
+              "tooltip": "居中对齐",
+              "value": "center"
+            },
+            {
+              "title": "右对齐",
+              "icon": "horizontal-justify-end",
+              "tooltip": "右对齐",
+              "value": "end"
+            },
+            {
+              "title": "平均分布(两端不留空)",
+              "icon": "horizontal-justify-space-between",
+              "tooltip": "平均分布(两端不留空)",
+              "value": "space-between"
+            },
+            {
+              "title": "平均分布",
+              "icon": "horizontal-justify-space-around",
+              "tooltip": "平均分布",
+              "value": "space-around"
+            }
           ]
         },
         "if": "_ => _.direction === 'horizontal' || _.mode === 'inline' && _.direction === 'vertical' || _.mode === 'block' && _.direction === 'vertical'",
@@ -809,26 +791,37 @@
         "bindHide": true,
         "setter": {
           "type": "capsules",
-          "titles": [
-            "顶对齐",
-            "垂直居中",
-            "底对齐",
-            "行内文字基线对齐",
-            "占满容器高度"
-          ],
-          "icons": [
-            "horizontal-alignment-start",
-            "horizontal-alignment-center",
-            "horizontal-alignment-end",
-            "horizontal-alignment-baseline",
-            "horizontal-alignment-stretch"
-          ],
-          "tooltips": [
-            "顶对齐",
-            "垂直居中",
-            "底对齐",
-            "行内文字基线对齐",
-            "占满容器高度"
+          "options": [
+            {
+              "title": "顶对齐",
+              "icon": "horizontal-alignment-start",
+              "tooltip": "顶对齐",
+              "value": "start"
+            },
+            {
+              "title": "垂直居中",
+              "icon": "horizontal-alignment-center",
+              "tooltip": "垂直居中",
+              "value": "center"
+            },
+            {
+              "title": "底对齐",
+              "icon": "horizontal-alignment-end",
+              "tooltip": "底对齐",
+              "value": "end"
+            },
+            {
+              "title": "行内文字基线对齐",
+              "icon": "horizontal-alignment-baseline",
+              "tooltip": "行内文字基线对齐",
+              "value": "baseline"
+            },
+            {
+              "title": "占满容器高度",
+              "icon": "horizontal-alignment-stretch",
+              "tooltip": "占满容器高度",
+              "value": "stretch"
+            }
           ]
         },
         "if": "_ => _.mode === 'flex' && _.direction === 'horizontal'"
@@ -842,23 +835,31 @@
         "bindHide": true,
         "setter": {
           "type": "capsules",
-          "titles": [
-            "左对齐",
-            "居中对齐",
-            "右对齐",
-            "拉伸子元素充满整个父元素空间"
-          ],
-          "icons": [
-            "vertical-alignment-start",
-            "vertical-alignment-center",
-            "vertical-alignment-end",
-            "vertical-alignment-stretch"
-          ],
-          "tooltips": [
-            "左对齐",
-            "居中对齐",
-            "右对齐",
-            "占满容器宽度"
+          "options": [
+            {
+              "title": "左对齐",
+              "icon": "vertical-alignment-start",
+              "tooltip": "左对齐",
+              "value": "start"
+            },
+            {
+              "title": "居中对齐",
+              "icon": "vertical-alignment-center",
+              "tooltip": "居中对齐",
+              "value": "center"
+            },
+            {
+              "title": "右对齐",
+              "icon": "vertical-alignment-end",
+              "tooltip": "右对齐",
+              "value": "end"
+            },
+            {
+              "title": "拉伸子元素充满整个父元素空间",
+              "icon": "vertical-alignment-stretch",
+              "tooltip": "占满容器宽度",
+              "value": "stretch"
+            }
           ]
         },
         "if": "_ => _.mode === 'flex' && _.direction === 'vertical'"
@@ -872,26 +873,37 @@
         "bindHide": true,
         "setter": {
           "type": "capsules",
-          "titles": [
-            "顶对齐",
-            "垂直居中",
-            "底对齐",
-            "平均分布(两端不留空)",
-            "平均分布"
-          ],
-          "icons": [
-            "vertical-justify-start",
-            "vertical-justify-center",
-            "vertical-justify-end",
-            "vertical-justify-space-between",
-            "vertical-justify-space-around"
-          ],
-          "tooltips": [
-            "顶对齐",
-            "垂直居中",
-            "底对齐",
-            "平均分布(两端不留空)",
-            "平均分布"
+          "options": [
+            {
+              "title": "顶对齐",
+              "icon": "vertical-justify-start",
+              "tooltip": "顶对齐",
+              "value": "start"
+            },
+            {
+              "title": "垂直居中",
+              "icon": "vertical-justify-center",
+              "tooltip": "垂直居中",
+              "value": "center"
+            },
+            {
+              "title": "底对齐",
+              "icon": "vertical-justify-end",
+              "tooltip": "底对齐",
+              "value": "end"
+            },
+            {
+              "title": "平均分布(两端不留空)",
+              "icon": "vertical-justify-space-between",
+              "tooltip": "平均分布(两端不留空)",
+              "value": "space-between"
+            },
+            {
+              "title": "平均分布",
+              "icon": "vertical-justify-space-around",
+              "tooltip": "平均分布",
+              "value": "space-around"
+            }
           ]
         },
         "if": "_ => _.mode === 'flex' && _.direction === 'vertical'",
@@ -1035,11 +1047,6 @@
         "description": "设置内容位置",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "居中",
-            "左",
-            "右"
-          ],
           "options": [
             {
               "title": "居中",
@@ -1069,10 +1076,6 @@
         "group": "主要属性",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "虚线",
-            "实线"
-          ],
           "options": [
             {
               "title": "虚线",
@@ -1205,12 +1208,6 @@
             "group": "主要属性",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "左",
-                "上",
-                "下",
-                "右"
-              ],
               "options": [
                 {
                   "title": "左",
@@ -1257,10 +1254,6 @@
             "group": "交互属性",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "页面跳转",
-                "下载链接"
-              ],
               "options": [
                 {
                   "title": "页面跳转",
@@ -1287,12 +1280,6 @@
             "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "新窗口",
-                "当前窗口",
-                "父级窗口",
-                "顶级窗口"
-              ],
               "options": [
                 {
                   "title": "新窗口",
@@ -1383,17 +1370,19 @@
         "bindHide": true,
         "setter": {
           "type": "capsules",
-          "titles": [
-            "正常",
-            "弹性布局"
-          ],
-          "icons": [
-            "layout-block",
-            "layout-flex"
-          ],
-          "tooltips": [
-            "块级布局",
-            "弹性布局"
+          "options": [
+            {
+              "title": "正常",
+              "icon": "layout-block",
+              "tooltip": "块级布局",
+              "value": "-"
+            },
+            {
+              "title": "弹性布局",
+              "icon": "layout-flex",
+              "tooltip": "弹性布局",
+              "value": "flex"
+            }
           ]
         }
       },
@@ -1405,26 +1394,37 @@
         "bindHide": true,
         "setter": {
           "type": "capsules",
-          "titles": [
-            "左对齐",
-            "居中对齐",
-            "右对齐",
-            "平均分布(两端不留空)",
-            "水平分布-左右留空"
-          ],
-          "icons": [
-            "horizontal-justify-start",
-            "horizontal-justify-center",
-            "horizontal-justify-end",
-            "horizontal-justify-space-between",
-            "horizontal-justify-space-around"
-          ],
-          "tooltips": [
-            "左对齐",
-            "居中对齐",
-            "右对齐",
-            "平均分布(两端不留空)",
-            "平均分布"
+          "options": [
+            {
+              "title": "左对齐",
+              "icon": "horizontal-justify-start",
+              "tooltip": "左对齐",
+              "value": "start"
+            },
+            {
+              "title": "居中对齐",
+              "icon": "horizontal-justify-center",
+              "tooltip": "居中对齐",
+              "value": "center"
+            },
+            {
+              "title": "右对齐",
+              "icon": "horizontal-justify-end",
+              "tooltip": "右对齐",
+              "value": "end"
+            },
+            {
+              "title": "平均分布(两端不留空)",
+              "icon": "horizontal-justify-space-between",
+              "tooltip": "平均分布(两端不留空)",
+              "value": "space-between"
+            },
+            {
+              "title": "水平分布-左右留空",
+              "icon": "horizontal-justify-space-around",
+              "tooltip": "平均分布",
+              "value": "space-around"
+            }
           ]
         },
         "if": "_ => _.type === 'flex'"
@@ -1437,26 +1437,37 @@
         "bindHide": true,
         "setter": {
           "type": "capsules",
-          "titles": [
-            "顶对齐",
-            "垂直居中",
-            "底对齐",
-            "行内文字基线对齐",
-            "占满容器高度"
-          ],
-          "icons": [
-            "horizontal-alignment-start",
-            "horizontal-alignment-center",
-            "horizontal-alignment-end",
-            "horizontal-alignment-baseline",
-            "horizontal-alignment-stretch"
-          ],
-          "tooltips": [
-            "顶对齐",
-            "垂直居中",
-            "底对齐",
-            "行内文字基线对齐",
-            "占满容器高度"
+          "options": [
+            {
+              "title": "顶对齐",
+              "icon": "horizontal-alignment-start",
+              "tooltip": "顶对齐",
+              "value": "start"
+            },
+            {
+              "title": "垂直居中",
+              "icon": "horizontal-alignment-center",
+              "tooltip": "垂直居中",
+              "value": "center"
+            },
+            {
+              "title": "底对齐",
+              "icon": "horizontal-alignment-end",
+              "tooltip": "底对齐",
+              "value": "end"
+            },
+            {
+              "title": "行内文字基线对齐",
+              "icon": "horizontal-alignment-baseline",
+              "tooltip": "行内文字基线对齐",
+              "value": "baseline"
+            },
+            {
+              "title": "占满容器高度",
+              "icon": "horizontal-alignment-stretch",
+              "tooltip": "占满容器高度",
+              "value": "stretch"
+            }
           ]
         },
         "if": "_ => _.type === 'flex'"
@@ -1469,12 +1480,6 @@
         "description": "列元素之间的间距，单位为 px。",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "无（0）",
-            "小（10）",
-            "正常（20）",
-            "大（30）"
-          ],
           "options": [
             {
               "title": "无（0）",
@@ -1530,17 +1535,19 @@
             "bindHide": true,
             "setter": {
               "type": "capsules",
-              "titles": [
-                "横向排列",
-                "纵向排列"
-              ],
-              "icons": [
-                "flex-horizontal",
-                "flex-vertical"
-              ],
-              "tooltips": [
-                "横向",
-                "纵向"
+              "options": [
+                {
+                  "title": "横向排列",
+                  "icon": "flex-horizontal",
+                  "tooltip": "横向",
+                  "value": "horizontal"
+                },
+                {
+                  "title": "纵向排列",
+                  "icon": "flex-vertical",
+                  "tooltip": "纵向",
+                  "value": "vertical"
+                }
               ]
             },
             "if": "_ => _.mode === 'flex'",
@@ -1562,26 +1569,37 @@
             "bindHide": true,
             "setter": {
               "type": "capsules",
-              "titles": [
-                "左对齐",
-                "居中对齐",
-                "右对齐",
-                "平均分布(两端不留空)",
-                "平均分布"
-              ],
-              "icons": [
-                "horizontal-justify-start",
-                "horizontal-justify-center",
-                "horizontal-justify-end",
-                "horizontal-justify-space-between",
-                "horizontal-justify-space-around"
-              ],
-              "tooltips": [
-                "左对齐",
-                "居中对齐",
-                "右对齐",
-                "平均分布(两端不留空)",
-                "平均分布"
+              "options": [
+                {
+                  "title": "左对齐",
+                  "icon": "horizontal-justify-start",
+                  "tooltip": "左对齐",
+                  "value": "start"
+                },
+                {
+                  "title": "居中对齐",
+                  "icon": "horizontal-justify-center",
+                  "tooltip": "居中对齐",
+                  "value": "center"
+                },
+                {
+                  "title": "右对齐",
+                  "icon": "horizontal-justify-end",
+                  "tooltip": "右对齐",
+                  "value": "end"
+                },
+                {
+                  "title": "平均分布(两端不留空)",
+                  "icon": "horizontal-justify-space-between",
+                  "tooltip": "平均分布(两端不留空)",
+                  "value": "space-between"
+                },
+                {
+                  "title": "平均分布",
+                  "icon": "horizontal-justify-space-around",
+                  "tooltip": "平均分布",
+                  "value": "space-around"
+                }
               ]
             },
             "if": "_ => _.mode === 'flex' && _.direction === 'horizontal'",
@@ -1609,26 +1627,37 @@
             "bindHide": true,
             "setter": {
               "type": "capsules",
-              "titles": [
-                "顶对齐",
-                "垂直居中",
-                "底对齐",
-                "行内文字基线对齐",
-                "占满容器高度"
-              ],
-              "icons": [
-                "horizontal-alignment-start",
-                "horizontal-alignment-center",
-                "horizontal-alignment-end",
-                "horizontal-alignment-baseline",
-                "horizontal-alignment-stretch"
-              ],
-              "tooltips": [
-                "顶对齐",
-                "垂直居中",
-                "底对齐",
-                "行内文字基线对齐",
-                "占满容器高度"
+              "options": [
+                {
+                  "title": "顶对齐",
+                  "icon": "horizontal-alignment-start",
+                  "tooltip": "顶对齐",
+                  "value": "start"
+                },
+                {
+                  "title": "垂直居中",
+                  "icon": "horizontal-alignment-center",
+                  "tooltip": "垂直居中",
+                  "value": "center"
+                },
+                {
+                  "title": "底对齐",
+                  "icon": "horizontal-alignment-end",
+                  "tooltip": "底对齐",
+                  "value": "end"
+                },
+                {
+                  "title": "行内文字基线对齐",
+                  "icon": "horizontal-alignment-baseline",
+                  "tooltip": "行内文字基线对齐",
+                  "value": "baseline"
+                },
+                {
+                  "title": "占满容器高度",
+                  "icon": "horizontal-alignment-stretch",
+                  "tooltip": "占满容器高度",
+                  "value": "stretch"
+                }
               ]
             },
             "if": "_ => _.mode === 'flex' && _.direction === 'horizontal'"
@@ -1642,23 +1671,31 @@
             "bindHide": true,
             "setter": {
               "type": "capsules",
-              "titles": [
-                "左对齐",
-                "居中对齐",
-                "右对齐",
-                "拉伸子元素充满整个父元素空间"
-              ],
-              "icons": [
-                "vertical-alignment-start",
-                "vertical-alignment-center",
-                "vertical-alignment-end",
-                "vertical-alignment-stretch"
-              ],
-              "tooltips": [
-                "左对齐",
-                "居中对齐",
-                "右对齐",
-                "占满容器宽度"
+              "options": [
+                {
+                  "title": "左对齐",
+                  "icon": "vertical-alignment-start",
+                  "tooltip": "左对齐",
+                  "value": "start"
+                },
+                {
+                  "title": "居中对齐",
+                  "icon": "vertical-alignment-center",
+                  "tooltip": "居中对齐",
+                  "value": "center"
+                },
+                {
+                  "title": "右对齐",
+                  "icon": "vertical-alignment-end",
+                  "tooltip": "右对齐",
+                  "value": "end"
+                },
+                {
+                  "title": "拉伸子元素充满整个父元素空间",
+                  "icon": "vertical-alignment-stretch",
+                  "tooltip": "占满容器宽度",
+                  "value": "stretch"
+                }
               ]
             },
             "if": "_ => _.mode === 'flex' && _.direction === 'vertical'"
@@ -1672,26 +1709,37 @@
             "bindHide": true,
             "setter": {
               "type": "capsules",
-              "titles": [
-                "顶对齐",
-                "垂直居中",
-                "底对齐",
-                "平均分布(两端不留空)",
-                "平均分布"
-              ],
-              "icons": [
-                "vertical-justify-start",
-                "vertical-justify-center",
-                "vertical-justify-end",
-                "vertical-justify-space-between",
-                "vertical-justify-space-around"
-              ],
-              "tooltips": [
-                "顶对齐",
-                "垂直居中",
-                "底对齐",
-                "平均分布(两端不留空)",
-                "平均分布"
+              "options": [
+                {
+                  "title": "顶对齐",
+                  "icon": "vertical-justify-start",
+                  "tooltip": "顶对齐",
+                  "value": "start"
+                },
+                {
+                  "title": "垂直居中",
+                  "icon": "vertical-justify-center",
+                  "tooltip": "垂直居中",
+                  "value": "center"
+                },
+                {
+                  "title": "底对齐",
+                  "icon": "vertical-justify-end",
+                  "tooltip": "底对齐",
+                  "value": "end"
+                },
+                {
+                  "title": "平均分布(两端不留空)",
+                  "icon": "vertical-justify-space-between",
+                  "tooltip": "平均分布(两端不留空)",
+                  "value": "space-between"
+                },
+                {
+                  "title": "平均分布",
+                  "icon": "vertical-justify-space-around",
+                  "tooltip": "平均分布",
+                  "value": "space-around"
+                }
               ]
             },
             "if": "_ => _.mode === 'flex' && _.direction === 'vertical'",
@@ -1727,13 +1775,6 @@
             "description": "内容块间隙大小",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "收缩",
-                "无",
-                "小",
-                "正常",
-                "大"
-              ],
               "options": [
                 {
                   "title": "收缩",
@@ -1793,17 +1834,19 @@
             "bindHide": true,
             "setter": {
               "type": "capsules",
-              "titles": [
-                "块级",
-                "弹性"
-              ],
-              "icons": [
-                "layout-inline-block",
-                "layout-flex"
-              ],
-              "tooltips": [
-                "内联布局",
-                "弹性布局"
+              "options": [
+                {
+                  "title": "块级",
+                  "icon": "layout-inline-block",
+                  "tooltip": "内联布局",
+                  "value": "inline"
+                },
+                {
+                  "title": "弹性",
+                  "icon": "layout-flex",
+                  "tooltip": "弹性布局",
+                  "value": "flex"
+                }
               ]
             },
             "onToggle": [
@@ -1865,7 +1908,7 @@
         "title": "菜单值",
         "type": "nasl.core.String",
         "description": "菜单值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "route",
@@ -1884,10 +1927,6 @@
         "description": "设置下拉菜单的展开方向",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "上",
-            "下"
-          ],
           "options": [
             {
               "title": "上",
@@ -1953,7 +1992,7 @@
             "type": "nasl.core.String",
             "group": "数据属性",
             "description": "用于标识菜单项的值",
-            "syncMode": "both"
+            "sync": true
           },
           {
             "name": "title",
@@ -2073,12 +2112,6 @@
             "description": "设置箭头方向",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "左",
-                "上",
-                "下",
-                "右"
-              ],
               "options": [
                 {
                   "title": "左",
@@ -2132,10 +2165,6 @@
             "group": "交互属性",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "页面跳转",
-                "下载链接"
-              ],
               "options": [
                 {
                   "title": "页面跳转",
@@ -2162,12 +2191,6 @@
             "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "新窗口",
-                "当前窗口",
-                "父级窗口",
-                "顶级窗口"
-              ],
               "options": [
                 {
                   "title": "新窗口",
@@ -2243,7 +2266,7 @@
         "type": "nasl.core.String",
         "group": "数据属性",
         "description": "用于标识菜单的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "route",
@@ -2296,7 +2319,7 @@
             "type": "nasl.core.String",
             "group": "数据属性",
             "description": "用于标识菜单项的值",
-            "syncMode": "both"
+            "sync": true
           },
           {
             "name": "showbaget",
@@ -2336,10 +2359,6 @@
             "group": "交互属性",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "页面跳转",
-                "下载链接"
-              ],
               "options": [
                 {
                   "title": "页面跳转",
@@ -2366,12 +2385,6 @@
             "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "新窗口",
-                "当前窗口",
-                "父级窗口",
-                "顶级窗口"
-              ],
               "options": [
                 {
                   "title": "新窗口",
@@ -2451,7 +2464,7 @@
         "type": "nasl.core.String",
         "group": "数据属性",
         "description": "用于标识标签栏的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "fixed",
@@ -2565,10 +2578,6 @@
             "group": "交互属性",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "页面跳转",
-                "下载链接"
-              ],
               "options": [
                 {
                   "title": "页面跳转",
@@ -2595,12 +2604,6 @@
             "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "新窗口",
-                "当前窗口",
-                "父级窗口",
-                "顶级窗口"
-              ],
               "options": [
                 {
                   "title": "新窗口",
@@ -2688,15 +2691,6 @@
         "description": "设置按钮主题颜色与样式类型",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "主要按钮",
-            "次要按钮",
-            "普通按钮",
-            "警告操作按钮",
-            "次要警告操作按钮",
-            "危险操作按钮",
-            "次要危险操作按钮"
-          ],
           "options": [
             {
               "title": "主要按钮",
@@ -2737,10 +2731,6 @@
         "description": "选择行内或块级展示",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "行内展示",
-            "块级展示"
-          ],
           "options": [
             {
               "title": "行内展示",
@@ -2770,10 +2760,6 @@
         "description": "设置图标居左或居右显示",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "左",
-            "右"
-          ],
           "options": [
             {
               "title": "左",
@@ -2793,10 +2779,6 @@
         "group": "交互属性",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "页面跳转",
-            "下载链接"
-          ],
           "options": [
             {
               "title": "页面跳转",
@@ -2823,12 +2805,6 @@
         "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "新窗口",
-            "当前窗口",
-            "父级窗口",
-            "顶级窗口"
-          ],
           "options": [
             {
               "title": "新窗口",
@@ -2883,13 +2859,6 @@
         "description": "设置按钮大小",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "大",
-            "中型",
-            "正常",
-            "小",
-            "迷你"
-          ],
           "options": [
             {
               "title": "大",
@@ -2922,10 +2891,6 @@
         "description": "设置按钮形状",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "方形",
-            "圆形"
-          ],
           "options": [
             {
               "title": "方形",
@@ -3004,11 +2969,6 @@
         "type": "'loading' | 'none' | 'placeholder'",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "Loading",
-            "不显示加载状态",
-            "自定义默认图"
-          ],
           "options": [
             {
               "title": "Loading",
@@ -3048,13 +3008,6 @@
         "description": "设置图片的填充方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "适应",
-            "适应（图片小于父元素时以原尺寸展示）",
-            "原尺寸",
-            "拉伸",
-            "填充"
-          ],
           "options": [
             {
               "title": "适应",
@@ -3087,10 +3040,6 @@
         "description": "选择图片为方形或圆形",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "方形",
-            "圆形"
-          ],
           "options": [
             {
               "title": "方形",
@@ -3283,7 +3232,7 @@
         "type": "nasl.core.String",
         "group": "数据属性",
         "description": "用于标识选项卡的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "type",
@@ -3293,10 +3242,6 @@
         "description": "设置选项卡为线条类型或胶囊类型",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "线条",
-            "胶囊"
-          ],
           "options": [
             {
               "title": "线条",
@@ -3326,10 +3271,6 @@
         "description": "设置选项卡的导航模式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "切换导航",
-            "滚动导航"
-          ],
           "options": [
             {
               "title": "切换导航",
@@ -3519,15 +3460,6 @@
         "description": "设置文本主题颜色",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "默认",
-            "主要色",
-            "辅助色",
-            "成功色",
-            "警告色",
-            "错误色",
-            "禁用色"
-          ],
           "options": [
             {
               "title": "默认",
@@ -3568,10 +3500,6 @@
         "description": "选择行内或块级展示",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "行内",
-            "块级"
-          ],
           "options": [
             {
               "title": "行内",
@@ -3592,12 +3520,6 @@
         "description": "设置文本过长时的处理方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "默认不处理",
-            "多余的文本省略",
-            "强制换行且英文自动添加换行符",
-            "始终不换行"
-          ],
           "options": [
             {
               "title": "默认不处理",
@@ -3626,12 +3548,6 @@
         "description": "设置文本大小",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "小",
-            "正常",
-            "大",
-            "巨大"
-          ],
           "options": [
             {
               "title": "小",
@@ -3781,13 +3697,6 @@
         "description": "设置链接主题颜色",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "默认",
-            "浅色",
-            "成功色",
-            "警告色",
-            "危险色"
-          ],
           "options": [
             {
               "title": "默认",
@@ -3820,10 +3729,6 @@
         "description": "选择行内或块级展示",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "行内展示",
-            "块级展示，宽度会充满父元素"
-          ],
           "options": [
             {
               "title": "行内展示",
@@ -3843,10 +3748,6 @@
         "group": "交互属性",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "页面跳转",
-            "下载链接"
-          ],
           "options": [
             {
               "title": "页面跳转",
@@ -3873,12 +3774,6 @@
         "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "新窗口",
-            "当前窗口",
-            "父级窗口",
-            "顶级窗口"
-          ],
           "options": [
             {
               "title": "新窗口",
@@ -4040,11 +3935,6 @@
         "description": "设置通知栏类型",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "可关闭",
-            "链接",
-            "普通"
-          ],
           "options": [
             {
               "title": "可关闭",
@@ -4087,10 +3977,6 @@
         "group": "交互属性",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "页面跳转",
-            "下载链接"
-          ],
           "options": [
             {
               "title": "页面跳转",
@@ -4117,12 +4003,6 @@
         "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "新窗口",
-            "当前窗口",
-            "父级窗口",
-            "顶级窗口"
-          ],
           "options": [
             {
               "title": "新窗口",
@@ -4221,7 +4101,7 @@
         "type": "nasl.core.Integer",
         "group": "数据属性",
         "description": "指定当前步骤，从0开始记数。",
-        "syncMode": "both",
+        "sync": true,
         "setter": {
           "type": "numberInput",
           "precision": 0,
@@ -4236,10 +4116,6 @@
         "description": "设置步骤条方向",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "横向",
-            "垂直"
-          ],
           "options": [
             {
               "title": "横向",
@@ -4321,12 +4197,6 @@
             "description": "设置步骤条的状态，分别为等待中、进行中、已完成、错误。",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "等待中",
-                "进行中",
-                "已完成",
-                "错误"
-              ],
               "options": [
                 {
                   "title": "等待中",
@@ -4439,10 +4309,6 @@
         "description": "设置计时器计时方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "正计时",
-            "倒计时"
-          ],
           "options": [
             {
               "title": "正计时",
@@ -4569,11 +4435,6 @@
         "description": "设置图标布局类型",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "仅图标",
-            "组合图标-上下",
-            "组合图标-左右"
-          ],
           "options": [
             {
               "title": "仅图标",
@@ -4597,10 +4458,6 @@
         "group": "交互属性",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "页面跳转",
-            "下载链接"
-          ],
           "options": [
             {
               "title": "页面跳转",
@@ -4627,12 +4484,6 @@
         "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "新窗口",
-            "当前窗口",
-            "父级窗口",
-            "顶级窗口"
-          ],
           "options": [
             {
               "title": "新窗口",
@@ -4713,12 +4564,6 @@
         "description": "设置主题颜色与样式类型",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "默认",
-            "成功",
-            "危险",
-            "警告"
-          ],
           "options": [
             {
               "title": "默认",
@@ -4765,11 +4610,6 @@
         "description": "设置标签大小",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "大型",
-            "中型",
-            "小型"
-          ],
           "options": [
             {
               "title": "大型",
@@ -4860,7 +4700,7 @@
         "title": "当前进度",
         "type": "nasl.core.Decimal",
         "group": "主要属性",
-        "syncMode": "both",
+        "sync": true,
         "setter": {
           "type": "numberInput",
           "min": 0
@@ -4954,7 +4794,7 @@
         "type": "nasl.core.Decimal",
         "group": "主要属性",
         "description": "用于标识进度条的值",
-        "syncMode": "both",
+        "sync": true,
         "setter": {
           "type": "numberInput",
           "min": 0
@@ -5083,11 +4923,6 @@
         "description": "复制提示反馈方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "工具提示",
-            "弹框提示",
-            "无反馈"
-          ],
           "options": [
             {
               "title": "工具提示",
@@ -5111,20 +4946,6 @@
         "description": "tooltip 提示框位置",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "上",
-            "下",
-            "左",
-            "右",
-            "上左",
-            "上右",
-            "下左",
-            "下右",
-            "左上",
-            "左下",
-            "右上",
-            "右下"
-          ],
           "options": [
             {
               "title": "上",
@@ -5342,13 +5163,6 @@
         "description": "大小扩展，支持一个值或两个值的组合，前者表示高度，后者表示宽度",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "占满",
-            "巨大",
-            "大",
-            "正常",
-            "自适应"
-          ],
           "options": [
             {
               "title": "占满",
@@ -5418,7 +5232,7 @@
         "type": "M extends true ? nasl.collection.List<V> : V",
         "group": "数据属性",
         "description": "用于标识数据列表的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "pageable",
@@ -5428,12 +5242,6 @@
         "description": "设置分页类型",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "不分页",
-            "滚动加载更多",
-            "点击加载更多",
-            "翻页器"
-          ],
           "options": [
             {
               "title": "不分页",
@@ -5618,12 +5426,6 @@
         "bindHide": true,
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "加载完成-有数据",
-            "加载完成-暂无数据",
-            "加载中",
-            "加载失败"
-          ],
           "options": [
             {
               "title": "加载完成-有数据",
@@ -5901,7 +5703,7 @@
         "title": "值",
         "type": "nasl.core.Any",
         "description": "当前选择的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "textField",
@@ -5972,11 +5774,6 @@
         "description": "设置分页方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "不分页",
-            "滚动加载更多",
-            "点击加载更多"
-          ],
           "options": [
             {
               "title": "不分页",
@@ -6265,11 +6062,6 @@
         "description": "标签对齐方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "左",
-            "中",
-            "右"
-          ],
           "options": [
             {
               "title": "左",
@@ -6293,11 +6085,6 @@
         "description": "输入框对齐方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "左",
-            "中",
-            "右"
-          ],
           "options": [
             {
               "title": "左",
@@ -6367,7 +6154,7 @@
             "title": "表单项值",
             "type": "nasl.core.Any",
             "description": "表单项值",
-            "syncMode": "both"
+            "sync": true
           },
           {
             "name": "name",
@@ -6382,14 +6169,6 @@
             "description": "input输入框类型",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "text",
-                "number",
-                "password",
-                "textarea",
-                "digit",
-                "tel"
-              ],
               "options": [
                 {
                   "title": "text",
@@ -6431,10 +6210,6 @@
             "description": "输入框左侧文本大小",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "正常",
-                "大"
-              ],
               "options": [
                 {
                   "title": "正常",
@@ -6460,10 +6235,6 @@
             "docDescription": "设置标签布局方式。行内展示、块级展示，标签与表单项分行展示。",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "行内展示",
-                "块级展示，标签与表单项分行展示"
-              ],
               "options": [
                 {
                   "title": "行内展示",
@@ -6546,10 +6317,6 @@
         "description": "前缀图标",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "搜索",
-            "暂无"
-          ],
           "options": [
             {
               "title": "搜索",
@@ -6569,10 +6336,6 @@
         "description": "后缀图标",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "搜索",
-            "暂无"
-          ],
           "options": [
             {
               "title": "搜索",
@@ -6591,7 +6354,7 @@
         "type": "nasl.core.String",
         "group": "数据属性",
         "description": "用于标识输入框的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "type",
@@ -6601,14 +6364,6 @@
         "description": "设置输入框的类型",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "文本",
-            "密码",
-            "整数",
-            "随机整数",
-            "小数",
-            "身份证"
-          ],
           "options": [
             {
               "title": "文本",
@@ -6680,10 +6435,6 @@
         "description": "设置完成按钮大小",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "默认",
-            "大号"
-          ],
           "options": [
             {
               "title": "默认",
@@ -6736,10 +6487,6 @@
         "description": "设置输入框样式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "默认",
-            "格子"
-          ],
           "options": [
             {
               "title": "默认",
@@ -6775,10 +6522,6 @@
         "description": "设置键盘样式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "默认键盘",
-            "定制键盘"
-          ],
           "options": [
             {
               "title": "默认键盘",
@@ -6798,10 +6541,6 @@
         "group": "样式属性",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "默认",
-            "右侧栏"
-          ],
           "options": [
             {
               "title": "默认",
@@ -6911,10 +6650,6 @@
         "description": "前缀图标",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "搜索",
-            "暂无"
-          ],
           "options": [
             {
               "title": "搜索",
@@ -6934,10 +6669,6 @@
         "description": "后缀图标",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "搜索",
-            "暂无"
-          ],
           "options": [
             {
               "title": "搜索",
@@ -6956,7 +6687,7 @@
         "type": "nasl.core.String",
         "group": "数据属性",
         "description": "用于标识多行输入的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "placeholder",
@@ -7125,7 +6856,7 @@
         "type": "nasl.core.String",
         "group": "数据属性",
         "description": "用于标识搜索框的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "maxlength",
@@ -7148,10 +6879,6 @@
         "group": "主要属性",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "一直显示",
-            "输入框获取焦点且不为空时展示"
-          ],
           "options": [
             {
               "title": "一直显示",
@@ -7172,11 +6899,6 @@
         "description": "设置对齐方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "左对齐",
-            "居中对齐",
-            "右对齐"
-          ],
           "options": [
             {
               "title": "左对齐",
@@ -7201,10 +6923,6 @@
         "description": "设置搜索图标位置",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "左",
-            "右"
-          ],
           "options": [
             {
               "title": "左",
@@ -7255,10 +6973,6 @@
         "description": "选择搜索框为方形或圆形",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "方形",
-            "圆形"
-          ],
           "options": [
             {
               "title": "方形",
@@ -7373,7 +7087,7 @@
         "type": "V",
         "group": "数据属性",
         "description": "用于标识单选组的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "icon",
@@ -7393,10 +7107,6 @@
         "description": "选择水平或垂直排列",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "水平",
-            "垂直"
-          ],
           "options": [
             {
               "title": "水平",
@@ -7513,10 +7223,6 @@
             "description": "设置文本居左或居右放置",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "右",
-                "左"
-              ],
               "options": [
                 {
                   "title": "右",
@@ -7581,7 +7287,7 @@
         "type": "nasl.core.Boolean",
         "group": "数据属性",
         "description": "用于标识开关的值",
-        "syncMode": "both",
+        "sync": true,
         "setter": {
           "type": "switch"
         }
@@ -7671,7 +7377,7 @@
         "type": "nasl.collection.List<V>",
         "group": "数据属性",
         "description": "用于标识多选组的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "max",
@@ -7713,10 +7419,6 @@
         "description": "设置多选组的排列方向",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "水平",
-            "垂直"
-          ],
           "options": [
             {
               "title": "水平",
@@ -7750,13 +7452,6 @@
         "bindHide": true,
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "以','连接",
-            "以'|'连接",
-            "以';'连接",
-            "json",
-            "无"
-          ],
           "options": [
             {
               "title": "以','连接",
@@ -7853,10 +7548,6 @@
             "description": "选择多选项为方形或圆形",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "方形",
-                "圆形"
-              ],
               "options": [
                 {
                   "title": "方形",
@@ -7877,10 +7568,6 @@
             "description": "设置文本居左或居右放置",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "右",
-                "左"
-              ],
               "options": [
                 {
                   "title": "右",
@@ -7899,7 +7586,7 @@
             "type": "nasl.core.Boolean",
             "group": "交互属性",
             "description": "是否选中选项",
-            "syncMode": "both",
+            "sync": true,
             "setter": {
               "type": "switch"
             }
@@ -7966,7 +7653,7 @@
         "type": "nasl.core.Decimal | nasl.core.Integer",
         "group": "数据属性",
         "description": "用于标识数字输入的值",
-        "syncMode": "both",
+        "sync": true,
         "setter": {
           "type": "numberInput"
         }
@@ -8118,10 +7805,6 @@
         "group": "样式属性",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "默认",
-            "圆角"
-          ],
           "options": [
             {
               "title": "默认",
@@ -8149,11 +7832,6 @@
         "description": "设置对齐方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "左对齐",
-            "居中对齐",
-            "右对齐"
-          ],
           "options": [
             {
               "title": "左对齐",
@@ -8222,7 +7900,7 @@
         "type": "nasl.core.Decimal",
         "group": "数据属性",
         "description": "用于标识评分的值",
-        "syncMode": "both",
+        "sync": true,
         "setter": {
           "type": "numberInput",
           "min": 0
@@ -8355,7 +8033,7 @@
         "type": "nasl.core.Decimal",
         "group": "数据属性",
         "description": "用于标识滑块的值",
-        "syncMode": "both",
+        "sync": true,
         "setter": {
           "type": "numberInput"
         }
@@ -8514,11 +8192,6 @@
         "description": "文件读取结果的类型，上传大文件时，建议使用 file 类型，避免卡顿",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "dataUrl",
-            "text",
-            "file"
-          ],
           "options": [
             {
               "title": "dataUrl",
@@ -8541,7 +8214,7 @@
         "type": "nasl.collection.List<{\n  name: nasl.core.String;\n  url: nasl.core.String;\n  size: nasl.core.Integer;\n}> | nasl.core.String",
         "group": "数据属性",
         "description": "用于标识文件上传的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "name",
@@ -8605,10 +8278,6 @@
         "description": "将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式。",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "JSON",
-            "URL字符串"
-          ],
           "options": [
             {
               "title": "JSON",
@@ -8670,10 +8339,6 @@
         "description": "设置图片选择模式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "图库",
-            "相机"
-          ],
           "options": [
             {
               "title": "图库",
@@ -8693,10 +8358,6 @@
         "group": "主要属性",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "任何人可访问",
-            "用户登录后可访问"
-          ],
           "options": [
             {
               "title": "任何人可访问",
@@ -8861,7 +8522,7 @@
         "type": "nasl.core.Any",
         "group": "数据属性",
         "description": "当前选中的值",
-        "syncMode": "both",
+        "sync": true,
         "docDescription": "当前选择的值"
       },
       {
@@ -9094,7 +8755,7 @@
         "type": "M extends true ? nasl.collection.List<V> : V",
         "group": "数据属性",
         "description": "用于标识选择器的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "dataSource",
@@ -9158,11 +8819,6 @@
         "description": "设置过滤时的匹配方法",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "包括",
-            "匹配开头",
-            "匹配结尾"
-          ],
           "options": [
             {
               "title": "包括",
@@ -9198,10 +8854,6 @@
         "description": "设置列表样式，仅列表展示时支持多选",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "选择器",
-            "列表"
-          ],
           "options": [
             {
               "title": "选择器",
@@ -9260,11 +8912,6 @@
         "description": "设置右侧内容的对齐方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "左",
-            "中",
-            "右"
-          ],
           "options": [
             {
               "title": "左",
@@ -9461,7 +9108,7 @@
         "type": "nasl.core.String",
         "group": "数据属性",
         "description": "用于标识地区选择的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "areaListprop",
@@ -9517,11 +9164,6 @@
         "description": "设置右侧内容的对齐方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "左",
-            "中",
-            "右"
-          ],
           "options": [
             {
               "title": "左",
@@ -9546,10 +9188,6 @@
         "description": "将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "地区名称",
-            "地区码"
-          ],
           "options": [
             {
               "title": "地区名称",
@@ -9671,7 +9309,7 @@
         "type": "V",
         "group": "数据属性",
         "description": "用于标识级联选择的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "dataSource",
@@ -9735,11 +9373,6 @@
         "description": "设置右侧内容的对齐方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "左",
-            "中",
-            "右"
-          ],
           "options": [
             {
               "title": "左",
@@ -9856,11 +9489,6 @@
         "description": "设置时间选择类型",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "时间选择",
-            "日期选择",
-            "日期时间选择"
-          ],
           "options": [
             {
               "title": "时间选择",
@@ -9891,15 +9519,6 @@
         "type": "'date' | 'week' | 'month' | 'quarter' | 'year' | 'minute' | 'second'",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "日期",
-            "周",
-            "月份",
-            "季度",
-            "年份",
-            "分",
-            "秒"
-          ],
           "options": [
             {
               "title": "日期",
@@ -9945,31 +9564,6 @@
         "type": "'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' | 'GGGG-W周' | 'GGGG年第W周' | 'GGGG-WWWW' | 'YYYY年M月' | 'YYYY-MM' | 'M/YYYY' | 'YYYY年第Q季度' | 'YYYY年QQ' | 'YYYY-QQ' | 'YYYY年' | 'YYYY' | 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' | 'YYYY-MM-DD HH:mm:ss' | 'YYYY年M月D日 HH时mm分ss秒' | 'YYYY-MM-DD HH:mm HH:mm' | 'YYYY年M月D日 HH时mm分'",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "中国（2023年7月26日）",
-            "ISO（2023-07-26）",
-            "US（7/26/2023）",
-            "EU（26/7/2023）",
-            "2023-28周",
-            "2023年第28周",
-            "2023-W28",
-            "中国（2023年7月）",
-            "ISO（2023-07）",
-            "US/EU（7/2023）",
-            "2023年第3季度",
-            "2023年Q3",
-            "2023-Q3",
-            "中国（2023年）",
-            "ISO（2023）",
-            "12:09:09",
-            "12时09分09秒",
-            "12:09",
-            "12时09分",
-            "2023-07-26 12:09:09",
-            "2023年7月26日 12时09分09秒",
-            "2023-07-26 12:09",
-            "2023年7月26日 12时09分"
-          ],
           "options": [
             {
               "title": "中国（2023年7月26日）",
@@ -10086,14 +9680,14 @@
         "name": "startValue",
         "title": "起始值",
         "type": "nasl.core.String",
-        "syncMode": "both",
+        "sync": true,
         "if": "_ => _.range === true"
       },
       {
         "name": "endValue",
         "title": "结束值",
         "type": "nasl.core.String",
-        "syncMode": "both",
+        "sync": true,
         "if": "_ => _.range === true"
       },
       {
@@ -10111,7 +9705,7 @@
         "type": "nasl.core.String",
         "group": "数据属性",
         "description": "用于标识时间选择的值",
-        "syncMode": "both",
+        "sync": true,
         "if": "_ => _.range !== true"
       },
       {
@@ -10184,12 +9778,6 @@
         "description": "将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "yyyy/MM/dd HH:mm:ss",
-            "Unix 时间戳",
-            "JSON",
-            "Date 对象"
-          ],
           "options": [
             {
               "title": "yyyy/MM/dd HH:mm:ss",
@@ -10232,11 +9820,6 @@
         "description": "设置右侧内容的对齐方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "左",
-            "中",
-            "右"
-          ],
           "options": [
             {
               "title": "左",
@@ -10341,10 +9924,6 @@
             "type": "'confirm' | 'cancel'",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "确认",
-                "取消"
-              ],
               "options": [
                 {
                   "title": "确认",
@@ -10378,10 +9957,6 @@
             "type": "'confirm' | 'cancel'",
             "setter": {
               "type": "enumSelect",
-              "titles": [
-                "确认",
-                "取消"
-              ],
               "options": [
                 {
                   "title": "确认",
@@ -10436,11 +10011,6 @@
         "description": "选择类型",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "single",
-            "multiple",
-            "range"
-          ],
           "options": [
             {
               "title": "single",
@@ -10472,7 +10042,7 @@
         "type": "nasl.core.String",
         "group": "数据属性",
         "description": "用于标识日期选择的值",
-        "syncMode": "both"
+        "sync": true
       },
       {
         "name": "minDate",
@@ -10502,11 +10072,6 @@
         "description": "设置右侧内容的对齐方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "左",
-            "中",
-            "右"
-          ],
           "options": [
             {
               "title": "左",
@@ -10626,13 +10191,6 @@
         "description": "弹出框的触发方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "点击",
-            "悬浮",
-            "右击",
-            "双击",
-            "手动"
-          ],
           "options": [
             {
               "title": "点击",
@@ -10693,7 +10251,7 @@
         "type": "nasl.core.Boolean",
         "group": "主要属性",
         "description": "弹出状态分为“True(弹出)/False(关闭)”，默认为“弹出”",
-        "syncMode": "onlySync",
+        "sync": true,
         "setter": {
           "type": "switch"
         }
@@ -10706,12 +10264,6 @@
         "description": "设置弹出位置",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "上",
-            "下",
-            "左",
-            "右"
-          ],
           "options": [
             {
               "title": "上",
@@ -10751,10 +10303,6 @@
         "description": "设置展示方式",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "行内展示",
-            "块级展示，宽度会充满父元素"
-          ],
           "options": [
             {
               "title": "行内展示",
@@ -10906,7 +10454,7 @@
         "title": "展示弹框",
         "type": "nasl.core.Boolean",
         "group": "主要属性",
-        "syncMode": "both",
+        "sync": true,
         "setter": {
           "type": "switch"
         }
@@ -11072,7 +10620,7 @@
         "title": "是否展示",
         "type": "nasl.core.Boolean",
         "description": "是否展示弹出消息",
-        "syncMode": "both",
+        "sync": true,
         "setter": {
           "type": "switch"
         }
@@ -11090,13 +10638,6 @@
         "description": "提示的类型",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "成功",
-            "警告",
-            "失败",
-            "加载中",
-            "自定义"
-          ],
           "options": [
             {
               "title": "成功",
@@ -11146,11 +10687,6 @@
         "type": "'top' | 'middle' | 'bottom'",
         "setter": {
           "type": "enumSelect",
-          "titles": [
-            "顶部",
-            "中间",
-            "底部"
-          ],
           "options": [
             {
               "title": "顶部",

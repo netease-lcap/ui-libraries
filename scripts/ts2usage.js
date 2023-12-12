@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs-extra");
 var path = require("path");
@@ -328,14 +339,11 @@ function transform(code) {
                                     Object.assign(prop_1, (0, ts2json_1.evalOptions)(arg));
                             });
                             // 枚举类型生成选项
-                            if (((_a = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _a === void 0 ? void 0 : _a.type) === 'enumSelect') {
+                            if (['enumSelect', 'capsules'].includes((_a = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _a === void 0 ? void 0 : _a.type)) {
                                 var types_1 = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.type.split('|').map(function (type) { return type.replace(/(\'|\")/g, '').trim(); });
                                 // @ts-ignore
-                                (_b = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _b === void 0 ? void 0 : _b.options = (_d = (_c = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _c === void 0 ? void 0 : _c.titles) === null || _d === void 0 ? void 0 : _d.map(function (title, idx) {
-                                    return {
-                                        title: title,
-                                        value: types_1[idx],
-                                    };
+                                (_b = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _b === void 0 ? void 0 : _b.options = (_d = (_c = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _c === void 0 ? void 0 : _c.options) === null || _d === void 0 ? void 0 : _d.map(function (option, idx) {
+                                    return __assign(__assign({}, option), { value: types_1[idx] });
                                 });
                             }
                             component.props.push(prop_1);
