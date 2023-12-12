@@ -8,85 +8,166 @@ var generator_1 = require("@babel/generator");
 var ts2json_1 = require("./common/ts2json");
 var MarkdownIt = require('markdown-it');
 var md = new MarkdownIt();
-var root = path.join(__dirname, "../../vant");
-var frontend = 'h5';
-var data = [];
-var pkg = require("".concat(root, "/package.json"));
-var libInfo = "".concat(pkg.name, "@").concat(pkg.version);
-var components = require("".concat(root, "/scripts/lcap/config.js"));
-components.forEach(function (component) {
-    var sourceDir = 'src';
-    var componentDir = path.join(root, "".concat(sourceDir, "/").concat(component.name));
-    if (!fs.existsSync(componentDir)) {
-        sourceDir = 'src-vusion/components';
-        componentDir = path.join(root, "".concat(sourceDir, "/").concat(component.name));
-    }
-    component.symbol = component.name;
-    component.frontend = frontend;
-    // api.ts
-    try {
-        var tsPath = "".concat(componentDir, "/api.ts");
-        // component.tsPath = tsPath;
-        var info = transform(fs.readFileSync(tsPath, 'utf8'));
-        Object.assign(component, info);
-    }
-    catch (e) {
-        console.log('找不到 TS 文件或 TS 报错', componentDir);
-        console.log(e);
-    }
-    // blocks
-    try {
-        var blockPath = "".concat(componentDir, "/docs/blocks.md");
-        var blocks = getBlocks(fs.readFileSync(blockPath, 'utf8').toString());
-        Object.assign(component, { blocks: blocks });
-    }
-    catch (e) {
-        console.log('找不到 blocks.md 文件', componentDir);
-        console.log(e);
-    }
-    // screenShot
-    try {
-        var screenShotPath = "".concat(componentDir, "/screenshots");
-        var screenShot = [];
-        if (hasImg(screenShotPath)) {
-            screenShot = fs.readdirSync(screenShotPath)
-                .sort(function (a, b) { return parseInt(a) - parseInt(b); })
-                .filter(function (filename) { return filename.indexOf('.DS_Store') === -1; });
-            Object.assign(component, {
-                screenShot: screenShot.map(function (screen) {
-                    var prefix = "https://static-vusion.163yun.com/packages/".concat(libInfo, "/").concat(sourceDir);
-                    return "".concat(prefix, "/").concat(component.symbol, "/screenshots/").concat(screen);
-                }).join(','),
-            });
+genH5();
+genPC();
+function genH5() {
+    var root = path.join(__dirname, "../../vant");
+    var frontend = 'h5';
+    var data = [];
+    var pkg = require("".concat(root, "/package.json"));
+    var libInfo = "".concat(pkg.name, "@").concat(pkg.version);
+    var components = require("".concat(root, "/scripts/lcap/config.js"));
+    components.forEach(function (component) {
+        var sourceDir = 'src';
+        var componentDir = path.join(root, "".concat(sourceDir, "/").concat(component.name));
+        if (!fs.existsSync(componentDir)) {
+            sourceDir = 'src-vusion/components';
+            componentDir = path.join(root, "".concat(sourceDir, "/").concat(component.name));
         }
-    }
-    catch (e) {
-        console.log('找不到 screenShot 文件', componentDir);
-        console.log(e);
-    }
-    // drawings
-    try {
-        var drawingsPath = "".concat(componentDir, "/drawings");
-        var drawings = [];
-        if (hasSvg(drawingsPath)) {
-            drawings = fs.readdirSync(drawingsPath)
-                .sort(function (a, b) { return parseInt(a) - parseInt(b); })
-                .filter(function (filename) { return filename.indexOf('.DS_Store') === -1; });
-            Object.assign(component, {
-                drawings: drawings.map(function (drawing) {
-                    var prefix = "https://static-vusion.163yun.com/packages/".concat(libInfo, "/").concat(sourceDir);
-                    return "".concat(prefix, "/").concat(component.symbol, "/drawings/").concat(drawing);
-                }).join(','),
-            });
+        component.symbol = component.name;
+        component.frontend = frontend;
+        // api.ts
+        try {
+            var tsPath = "".concat(componentDir, "/api.ts");
+            // component.tsPath = tsPath;
+            var info = transform(fs.readFileSync(tsPath, 'utf8'));
+            Object.assign(component, info);
         }
-    }
-    catch (e) {
-        console.log('找不到 drawings 文件', componentDir);
-        console.log(e);
-    }
-    data.push(component);
-});
-fs.writeFileSync(path.join(__dirname, "../".concat(frontend, ".json")), JSON.stringify(data, null, 2));
+        catch (e) {
+            console.log('找不到 TS 文件或 TS 报错', componentDir);
+            console.log(e);
+        }
+        // blocks
+        try {
+            var blockPath = "".concat(componentDir, "/docs/blocks.md");
+            var blocks = getBlocks(fs.readFileSync(blockPath, 'utf8').toString());
+            Object.assign(component, { blocks: blocks });
+        }
+        catch (e) {
+            console.log('找不到 blocks.md 文件', componentDir);
+            console.log(e);
+        }
+        // screenShot
+        try {
+            var screenShotPath = "".concat(componentDir, "/screenshots");
+            var screenShot = [];
+            if (hasImg(screenShotPath)) {
+                screenShot = fs.readdirSync(screenShotPath)
+                    .sort(function (a, b) { return parseInt(a) - parseInt(b); })
+                    .filter(function (filename) { return filename.indexOf('.DS_Store') === -1; });
+                Object.assign(component, {
+                    screenShot: screenShot.map(function (screen) {
+                        var prefix = "https://static-vusion.163yun.com/packages/".concat(libInfo, "/").concat(sourceDir);
+                        return "".concat(prefix, "/").concat(component.symbol, "/screenshots/").concat(screen);
+                    }).join(','),
+                });
+            }
+        }
+        catch (e) {
+            console.log('找不到 screenShot 文件', componentDir);
+            console.log(e);
+        }
+        // drawings
+        try {
+            var drawingsPath = "".concat(componentDir, "/drawings");
+            var drawings = [];
+            if (hasSvg(drawingsPath)) {
+                drawings = fs.readdirSync(drawingsPath)
+                    .sort(function (a, b) { return parseInt(a) - parseInt(b); })
+                    .filter(function (filename) { return filename.indexOf('.DS_Store') === -1; });
+                Object.assign(component, {
+                    drawings: drawings.map(function (drawing) {
+                        var prefix = "https://static-vusion.163yun.com/packages/".concat(libInfo, "/").concat(sourceDir);
+                        return "".concat(prefix, "/").concat(component.symbol, "/drawings/").concat(drawing);
+                    }).join(','),
+                });
+            }
+        }
+        catch (e) {
+            console.log('找不到 drawings 文件', componentDir);
+            console.log(e);
+        }
+        data.push(component);
+    });
+    fs.writeFileSync(path.join(__dirname, "../".concat(frontend, ".json")), JSON.stringify(data, null, 2));
+}
+function genPC() {
+    var root = path.join(__dirname, "../../cloud-ui");
+    var frontend = 'pc';
+    var data = [];
+    var pkg = require("".concat(root, "/package.json"));
+    var libInfo = "".concat(pkg.name, "@").concat(pkg.version);
+    var components = require("".concat(root, "/scripts/lcap/config.js"));
+    components.forEach(function (component) {
+        var sourceDir = 'src/components';
+        var componentDir = path.join(root, "".concat(sourceDir, "/").concat(component.name, ".vue"));
+        component.symbol = component.name;
+        component.frontend = frontend;
+        // api.ts
+        try {
+            var tsPath = "".concat(componentDir, "/api.ts");
+            // component.tsPath = tsPath;
+            var info = transform(fs.readFileSync(tsPath, 'utf8'));
+            Object.assign(component, info);
+        }
+        catch (e) {
+            console.log('找不到 TS 文件或 TS 报错', componentDir);
+            console.log(e);
+        }
+        // blocks
+        try {
+            var blockPath = "".concat(componentDir, "/docs/blocks.md");
+            var blocks = getBlocks(fs.readFileSync(blockPath, 'utf8').toString());
+            Object.assign(component, { blocks: blocks });
+        }
+        catch (e) {
+            console.log('找不到 blocks.md 文件', componentDir);
+            console.log(e);
+        }
+        // screenShot
+        try {
+            var screenShotPath = "".concat(componentDir, "/screenshots");
+            var screenShot = [];
+            if (hasImg(screenShotPath)) {
+                screenShot = fs.readdirSync(screenShotPath)
+                    .sort(function (a, b) { return parseInt(a) - parseInt(b); })
+                    .filter(function (filename) { return filename.indexOf('.DS_Store') === -1; });
+                Object.assign(component, {
+                    screenShot: screenShot.map(function (screen) {
+                        var prefix = "https://static-vusion.163yun.com/packages/".concat(libInfo, "/").concat(sourceDir);
+                        return "".concat(prefix, "/").concat(component.symbol, "/screenshots/").concat(screen);
+                    }).join(','),
+                });
+            }
+        }
+        catch (e) {
+            console.log('找不到 screenShot 文件', componentDir);
+            console.log(e);
+        }
+        // drawings
+        try {
+            var drawingsPath = "".concat(componentDir, "/drawings");
+            var drawings = [];
+            if (hasSvg(drawingsPath)) {
+                drawings = fs.readdirSync(drawingsPath)
+                    .sort(function (a, b) { return parseInt(a) - parseInt(b); })
+                    .filter(function (filename) { return filename.indexOf('.DS_Store') === -1; });
+                Object.assign(component, {
+                    drawings: drawings.map(function (drawing) {
+                        var prefix = "https://static-vusion.163yun.com/packages/".concat(libInfo, "/").concat(sourceDir);
+                        return "".concat(prefix, "/").concat(component.symbol, "/drawings/").concat(drawing);
+                    }).join(','),
+                });
+            }
+        }
+        catch (e) {
+            console.log('找不到 drawings 文件', componentDir);
+            console.log(e);
+        }
+        data.push(component);
+    });
+    fs.writeFileSync(path.join(__dirname, "../".concat(frontend, ".json")), JSON.stringify(data, null, 2));
+}
 function getBlocks(content) {
     var tokens = md.parse(content, {});
     var title = '';

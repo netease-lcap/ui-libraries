@@ -10,98 +10,188 @@ import { evalOptions } from './common/ts2json'
 const MarkdownIt = require('markdown-it');
 const md = new MarkdownIt();
 
-const root = path.join(__dirname, "../../vant");
-const frontend = 'h5';
-const data: apiTypes.ComponentAPI[] = []
+genH5();
+genPC();
 
+function genH5() {
+    const root = path.join(__dirname, "../../vant");
+    const frontend = 'h5';
+    const data: apiTypes.ComponentAPI[] = []
+    const pkg = require(`${root}/package.json`);
+    const libInfo = `${pkg.name}@${pkg.version}`;
 
-const pkg = require(`${root}/package.json`);
-const libInfo = `${pkg.name}@${pkg.version}`;
-
-const components = require(`${root}/scripts/lcap/config.js`);
-components.forEach((component: any) => {
-    let sourceDir = 'src'
-    let componentDir = path.join(root, `${sourceDir}/${component.name}`);
-    if (!fs.existsSync(componentDir)) {
-        sourceDir = 'src-vusion/components';
-        componentDir = path.join(root, `${sourceDir}/${component.name}`);
-    }
-
-    component.symbol = component.name;
-    component.frontend = frontend;
-
-    // api.ts
-    try {
-        const tsPath = `${componentDir}/api.ts`;
-        // component.tsPath = tsPath;
-        const info = transform(fs.readFileSync(tsPath, 'utf8'));
-        Object.assign(component, info);
-
-    } catch (e) {
-        console.log('找不到 TS 文件或 TS 报错', componentDir);
-        console.log(e);
-    }
-
-    // blocks
-    try {
-        const blockPath = `${componentDir}/docs/blocks.md`;
-        const blocks = getBlocks(fs.readFileSync(blockPath, 'utf8').toString());
-        Object.assign(component, { blocks });
-    } catch (e) {
-        console.log('找不到 blocks.md 文件', componentDir);
-        console.log(e);
-    }
-
-    // screenShot
-    try {
-        const screenShotPath = `${componentDir}/screenshots`;
-        let screenShot: string[] = [];
-        if (hasImg(screenShotPath)) {
-            screenShot = fs.readdirSync(screenShotPath)
-                .sort((a, b) => parseInt(a) - parseInt(b))
-                .filter((filename) => filename.indexOf('.DS_Store') === -1);
-
-            Object.assign(component, { 
-                screenShot: screenShot.map((screen) => {
-                    let prefix = `https://static-vusion.163yun.com/packages/${libInfo}/${sourceDir}`;
-                    return `${prefix}/${component.symbol}/screenshots/${screen}`;
-                }).join(','),
-            });
+    const components = require(`${root}/scripts/lcap/config.js`);
+    components.forEach((component: any) => {
+        let sourceDir = 'src'
+        let componentDir = path.join(root, `${sourceDir}/${component.name}`);
+        if (!fs.existsSync(componentDir)) {
+            sourceDir = 'src-vusion/components';
+            componentDir = path.join(root, `${sourceDir}/${component.name}`);
         }
 
-    } catch (e) {
-        console.log('找不到 screenShot 文件', componentDir);
-        console.log(e);
-    }
+        component.symbol = component.name;
+        component.frontend = frontend;
 
-    // drawings
-    try {
-        const drawingsPath = `${componentDir}/drawings`;
-        let drawings: string[] = [];
-        if (hasSvg(drawingsPath)) {
-            drawings = fs.readdirSync(drawingsPath)
-                .sort((a, b) => parseInt(a) - parseInt(b))
-                .filter((filename) => filename.indexOf('.DS_Store') === -1);
+        // api.ts
+        try {
+            const tsPath = `${componentDir}/api.ts`;
+            // component.tsPath = tsPath;
+            const info = transform(fs.readFileSync(tsPath, 'utf8'));
+            Object.assign(component, info);
 
-            Object.assign(component, { 
-                drawings: drawings.map((drawing) => {
-                    let prefix = `https://static-vusion.163yun.com/packages/${libInfo}/${sourceDir}`;
-                    return `${prefix}/${component.symbol}/drawings/${drawing}`;
-                }).join(','),
-            });
+        } catch (e) {
+            console.log('找不到 TS 文件或 TS 报错', componentDir);
+            console.log(e);
         }
-    } catch (e) {  
-        console.log('找不到 drawings 文件', componentDir);
-        console.log(e);
-    }
 
-    data.push(component);
-})
+        // blocks
+        try {
+            const blockPath = `${componentDir}/docs/blocks.md`;
+            const blocks = getBlocks(fs.readFileSync(blockPath, 'utf8').toString());
+            Object.assign(component, { blocks });
+        } catch (e) {
+            console.log('找不到 blocks.md 文件', componentDir);
+            console.log(e);
+        }
 
-fs.writeFileSync(
-  path.join(__dirname, `../${frontend}.json`),
-  JSON.stringify(data, null, 2)
-);
+        // screenShot
+        try {
+            const screenShotPath = `${componentDir}/screenshots`;
+            let screenShot: string[] = [];
+            if (hasImg(screenShotPath)) {
+                screenShot = fs.readdirSync(screenShotPath)
+                    .sort((a, b) => parseInt(a) - parseInt(b))
+                    .filter((filename) => filename.indexOf('.DS_Store') === -1);
+
+                Object.assign(component, {
+                    screenShot: screenShot.map((screen) => {
+                        let prefix = `https://static-vusion.163yun.com/packages/${libInfo}/${sourceDir}`;
+                        return `${prefix}/${component.symbol}/screenshots/${screen}`;
+                    }).join(','),
+                });
+            }
+
+        } catch (e) {
+            console.log('找不到 screenShot 文件', componentDir);
+            console.log(e);
+        }
+
+        // drawings
+        try {
+            const drawingsPath = `${componentDir}/drawings`;
+            let drawings: string[] = [];
+            if (hasSvg(drawingsPath)) {
+                drawings = fs.readdirSync(drawingsPath)
+                    .sort((a, b) => parseInt(a) - parseInt(b))
+                    .filter((filename) => filename.indexOf('.DS_Store') === -1);
+
+                Object.assign(component, {
+                    drawings: drawings.map((drawing) => {
+                        let prefix = `https://static-vusion.163yun.com/packages/${libInfo}/${sourceDir}`;
+                        return `${prefix}/${component.symbol}/drawings/${drawing}`;
+                    }).join(','),
+                });
+            }
+        } catch (e) {
+            console.log('找不到 drawings 文件', componentDir);
+            console.log(e);
+        }
+
+        data.push(component);
+    })
+    fs.writeFileSync(
+        path.join(__dirname, `../${frontend}.json`),
+        JSON.stringify(data, null, 2)
+    );
+}
+
+function genPC() {
+    const root = path.join(__dirname, "../../cloud-ui");
+    const frontend = 'pc';
+    const data: apiTypes.ComponentAPI[] = []
+    const pkg = require(`${root}/package.json`);
+    const libInfo = `${pkg.name}@${pkg.version}`;
+
+    const components = require(`${root}/scripts/lcap/config.js`);
+    components.forEach((component: any) => {
+        let sourceDir = 'src/components'
+        let componentDir = path.join(root, `${sourceDir}/${component.name}.vue`);
+
+        component.symbol = component.name;
+        component.frontend = frontend;
+
+        // api.ts
+        try {
+            const tsPath = `${componentDir}/api.ts`;
+            // component.tsPath = tsPath;
+            const info = transform(fs.readFileSync(tsPath, 'utf8'));
+            Object.assign(component, info);
+
+        } catch (e) {
+            console.log('找不到 TS 文件或 TS 报错', componentDir);
+            console.log(e);
+        }
+
+        // blocks
+        try {
+            const blockPath = `${componentDir}/docs/blocks.md`;
+            const blocks = getBlocks(fs.readFileSync(blockPath, 'utf8').toString());
+            Object.assign(component, { blocks });
+        } catch (e) {
+            console.log('找不到 blocks.md 文件', componentDir);
+            console.log(e);
+        }
+
+        // screenShot
+        try {
+            const screenShotPath = `${componentDir}/screenshots`;
+            let screenShot: string[] = [];
+            if (hasImg(screenShotPath)) {
+                screenShot = fs.readdirSync(screenShotPath)
+                    .sort((a, b) => parseInt(a) - parseInt(b))
+                    .filter((filename) => filename.indexOf('.DS_Store') === -1);
+
+                Object.assign(component, {
+                    screenShot: screenShot.map((screen) => {
+                        let prefix = `https://static-vusion.163yun.com/packages/${libInfo}/${sourceDir}`;
+                        return `${prefix}/${component.symbol}/screenshots/${screen}`;
+                    }).join(','),
+                });
+            }
+
+        } catch (e) {
+            console.log('找不到 screenShot 文件', componentDir);
+            console.log(e);
+        }
+
+        // drawings
+        try {
+            const drawingsPath = `${componentDir}/drawings`;
+            let drawings: string[] = [];
+            if (hasSvg(drawingsPath)) {
+                drawings = fs.readdirSync(drawingsPath)
+                    .sort((a, b) => parseInt(a) - parseInt(b))
+                    .filter((filename) => filename.indexOf('.DS_Store') === -1);
+
+                Object.assign(component, {
+                    drawings: drawings.map((drawing) => {
+                        let prefix = `https://static-vusion.163yun.com/packages/${libInfo}/${sourceDir}`;
+                        return `${prefix}/${component.symbol}/drawings/${drawing}`;
+                    }).join(','),
+                });
+            }
+        } catch (e) {
+            console.log('找不到 drawings 文件', componentDir);
+            console.log(e);
+        }
+
+        data.push(component);
+    })
+    fs.writeFileSync(
+        path.join(__dirname, `../${frontend}.json`),
+        JSON.stringify(data, null, 2)
+    );
+}
 
 function getBlocks(content: string): apiTypes.BlockAPI[] {
     const tokens = md.parse(content, {});
