@@ -1,4 +1,4 @@
-/// <reference types="../../packages/types_nasl" />
+/// <reference types="@nasl/types" />
 
 export type PropAPI = nasl.ui.PropOptions & {
     name: string;

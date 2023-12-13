@@ -49,7 +49,7 @@ const translateDefaultValue = (value, type) => {
 XlsxPopulate.fromBlankAsync().then((workbook) => {
     // labels
     components.forEach((component) => {
-        const output = `/// <reference types="nasl" />
+        const output = `/// <reference types="@nasl/types" />
 
 namespace nasl.ui {
 ${component.subs.map((sub) => {
@@ -153,16 +153,16 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
             return `_.${kebab2Camel(dep.name)} === ${json5.stringify(dep.value)}`;
         }).join(' || ');
     }
-    let onToggle = '';
+    let onChange = '';
     if (attr.toggleclear) {
-        onToggle = `\n                { clear: ${json5.stringify(attr.toggleclear)} }`;
+        onChange = `\n                { clear: ${json5.stringify(attr.toggleclear)} }`;
     } else if (attr.toggleupdate) {
         attr.toggleupdate.forEach((item) => {
-            onToggle += `\n                { update: ${json5.stringify(item.updateData)}, if: _ => _ === ${json5.stringify(item.value)} },`;
+            onChange += `\n                { update: ${json5.stringify(item.updateData)}, if: _ => _ === ${json5.stringify(item.value)} },`;
         });
     }
 
-    return `${indent(2)}@Prop${attr.display || ifcondition || onToggle ? `<${className}Options${typeArgumentsStr}, ${attr.advanced || attr.hidden ? 'any' : `'${kebab2Camel(attr.name)}'`}>` : ''}({${attr.group ? `
+    return `${indent(2)}@Prop${attr.display || ifcondition || onChange ? `<${className}Options${typeArgumentsStr}, ${attr.advanced || attr.hidden ? 'any' : `'${kebab2Camel(attr.name)}'`}>` : ''}({${attr.group ? `
             group: '${attr.group}',` : ''}
             title: '${attr.title}',${attr.description ? `
             description: ${/[\n']/g.test(attr.description) ? `\`${attr.description}\`` : `'${attr.description}'`},` : ''}${sync ? `
@@ -173,37 +173,37 @@ ${!sub.attrs ? '' : sub.attrs.map((attr) => {
             bindOpen: ${attr.bindOpen},` : ''}${notNil(attr['designer-value']) ? `
             designerValue: ${attr['designer-value']},` : ''}${attr.setter ? `
             setter: {
-                type: '${attr.setter}',${attr.setterTitle ? `
+                concept: '${attr.setter}',${attr.setterTitle ? `
                 title: '${attr.setterTitle}',` : ''}
             },` : ''}${attr.options && !attr.display ? `
             setter: {
-                type: 'enumSelect',
+                concept: 'EnumSelectSetter',
                 options: ${formatOptions(attr.options.map((option) => ({ title: option.title || option.name, icon: option.icon, tooltip: option.tooltip })))},
             },` : ''}${attr.display === 'capsules' ? `
             setter: {
-                type: 'capsules',
+                concept: 'CapsulesSetter',
                 options: ${formatOptions(attr.options.map((option) => ({ title: option.title || option.name, icon: option.icon, tooltip: option.tooltip })))},
             },` : ''}${attr.display === 'number' || attr.type === 'number' ? `
             setter: {
-                type: 'numberInput',${attr.place ? `
+                concept: 'NumberInputSetter',${attr.place ? `
                 placeholder: '${attr.place}',` : ''}${attr.min !== undefined ? `
                 min: ${attr.min},` : ''}${attr.max !== undefined ? `
                 max: ${attr.max},` : ''}${attr.precision !== undefined ? `
                 precision: ${attr.precision},` : ''}
             },` : ''}${attr.display === 'property-select' ? `
             setter: {
-                type: 'propertySelect',
+                concept: 'PropertySelectSetter',
             },` : ''}${attr.type === 'boolean' && !attr.place ? `
             setter: {
-                type: 'switch',
+                concept: 'SwitchSetter',
             },` : ''}${!attr.display && attr.place ? `
             setter: {
-                type: 'input',
+                concept: 'InputSetter',
                 placeholder: '${attr.place}',
             },` : ''}${ifcondition && !attr.dependencyDisplay ? `
             if: _ => ${ifcondition},` : ''}${ifcondition && attr.dependencyDisplay ? `
-            disabledIf: _ => ${ifcondition},` : ''}${onToggle ? `
-            onToggle: [${onToggle}
+            disabledIf: _ => ${ifcondition},` : ''}${onChange ? `
+            onChange: [${onChange}
             ],` : ''}
         })
         ${attr.advanced || attr.hidden ? 'private ' : ''}${kebab2Camel(attr.name)}: ${attrType}${notNil(attr.default) ? ` = ${translateDefaultValue(attr.default, attrType)}` : ''};`

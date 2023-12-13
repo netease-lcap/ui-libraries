@@ -1,10 +1,8 @@
 {
   "scripts": {
-    "init:pc": "cd pc-ui/node_modules/@types && ln -s ../../../packages/types_nasl nasl",
-    "init:h5": "cd h5-ui/node_modules/@types && ln -s ../../../packages/types_nasl nasl",
-    "init": "npm run init:pc && npm run init:h5",
     "dev": "tsc -w scripts/*.ts",
-    "build": "tsc scripts/*.ts"
+    "build": "tsc scripts/*.ts",
+    "validate": "node scripts/validateByJSONSchema.js pc.json && node scripts/validateByJSONSchema.js h5.json"
   },
   "dependencies": {
     "@babel/core": "^7.22.10",
@@ -25,6 +23,7 @@
     "@types/babel__generator": "^7.6.4",
     "@types/fs-extra": "^11.0.4",
     "@types/markdown-it": "^13.0.7",
-    "@types/node": "^20.5.0"
+    "@types/node": "^20.5.0",
+    "ajv": "^8.12.0"
   }
 }

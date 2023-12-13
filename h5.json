@@ -72,7 +72,7 @@
     "show": true,
     "name": "VanPopup",
     "alias": "弹出层",
-    "symbol": "popup",
+    "kebabName": "van-popup",
     "frontend": "h5",
     "title": "弹出层",
     "description": "弹出层容器，用于展示弹窗、信息提示等内容，支持多个弹出层叠加展示。",
@@ -1244,7 +1244,7 @@
             "type": "nasl.core.String",
             "group": "主要属性",
             "setter": {
-              "type": "iconSelect"
+              "type": "IconSetter"
             }
           },
           {
@@ -2155,7 +2155,7 @@
             "group": "主要属性",
             "description": "菜单子项的显示图标",
             "setter": {
-              "type": "iconSelect"
+              "type": "IconSetter"
             }
           },
           {
@@ -2568,7 +2568,7 @@
             "group": "主要属性",
             "description": "标签项的图标",
             "setter": {
-              "type": "iconSelect"
+              "type": "IconSetter"
             }
           },
           {
@@ -2749,7 +2749,7 @@
         "type": "nasl.core.String",
         "group": "主要属性",
         "setter": {
-          "type": "iconSelect"
+          "type": "IconSetter"
         }
       },
       {
@@ -2997,7 +2997,7 @@
         "type": "nasl.core.String",
         "group": "主要属性",
         "setter": {
-          "type": "imageSelect"
+          "type": "ImageSetter"
         }
       },
       {
@@ -4224,7 +4224,7 @@
             "group": "主要属性",
             "description": "自定义步骤的图标",
             "setter": {
-              "type": "iconSelect"
+              "type": "IconSetter"
             }
           },
           {
@@ -4424,7 +4424,7 @@
         "type": "nasl.core.String",
         "group": "主要属性",
         "setter": {
-          "type": "iconSelect"
+          "type": "IconSetter"
         }
       },
       {
@@ -5328,7 +5328,7 @@
         "type": "nasl.core.String",
         "group": "交互属性",
         "setter": {
-          "type": "iconSelect"
+          "type": "IconSetter"
         },
         "if": "_ => _.selectable === true"
       },
@@ -5338,7 +5338,7 @@
         "type": "nasl.core.String",
         "group": "交互属性",
         "setter": {
-          "type": "iconSelect"
+          "type": "IconSetter"
         },
         "if": "_ => _.selectable === true"
       },
@@ -7096,7 +7096,7 @@
         "group": "主要属性",
         "docDescription": "增加自定义图标显示",
         "setter": {
-          "type": "iconSelect"
+          "type": "IconSetter"
         }
       },
       {
@@ -7212,7 +7212,7 @@
             "group": "主要属性",
             "docDescription": "增加自定义图标显示",
             "setter": {
-              "type": "iconSelect"
+              "type": "IconSetter"
             }
           },
           {
@@ -7919,7 +7919,7 @@
         "type": "nasl.core.String",
         "group": "主要属性",
         "setter": {
-          "type": "iconSelect"
+          "type": "IconSetter"
         }
       },
       {
@@ -7928,7 +7928,7 @@
         "type": "nasl.core.String",
         "group": "主要属性",
         "setter": {
-          "type": "iconSelect"
+          "type": "IconSetter"
         }
       },
       {
@@ -10668,7 +10668,7 @@
         "type": "nasl.core.String",
         "if": "_ => _.type === 'custom'",
         "setter": {
-          "type": "iconSelect"
+          "type": "IconSetter"
         }
       },
       {

@@ -1,7 +1,7 @@
 import * as babel from '@babel/core';
 import * as babelTypes from '@babel/types';
 import generate from '@babel/generator';
-import * as apiTypes from './apiTypes';
+import * as astTypes from '@nasl/types/nasl.ui.ast';
 
 export function evalOptions(object: babelTypes.ObjectExpression) {
     const code = generate(object).code;
@@ -19,7 +19,7 @@ export function evalOptions(object: babelTypes.ObjectExpression) {
     return result;
 }
 
-export function transform(tsCode: string): apiTypes.ComponentAPI[] {
+export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
     const root = babel.parseSync(tsCode, {
         filename: 'result.ts',
         presets: [
@@ -77,19 +77,18 @@ export function transform(tsCode: string): apiTypes.ComponentAPI[] {
     });
 
     // forEach classMap
-    const result: apiTypes.ComponentAPI[] = [];
+    const result: astTypes.ViewComponentDeclaration[] = [];
     classMap.forEach((classItem, className) => {
         const [classDecl, optionsDecl] = classItem;
         if (!classDecl)
             return;
 
-        const component: apiTypes.ComponentAPI = {
+        const component: astTypes.ViewComponentDeclaration = {
             name: className,
             title: '',
             description: '',
             icon: '',
-            advanced: false,
-            typeParams: undefined,
+            tsTypeParams: undefined,
             props: [],
             readableProps: [],
             events: [],
@@ -122,7 +121,7 @@ export function transform(tsCode: string): apiTypes.ComponentAPI[] {
             if (classTypeParams !== optionsTypeParams)
                 throw new Error(`组件的${className}泛型类型参数不匹配！`);
 
-            component.typeParams = classTypeParams;
+            component.tsTypeParams = classTypeParams;
         }
 
         optionsDecl.body.body.forEach((member) => {
@@ -131,10 +130,10 @@ export function transform(tsCode: string): apiTypes.ComponentAPI[] {
                     if (decorator.expression.type === 'CallExpression') {
                         const calleeName = (decorator.expression.callee as babelTypes.Identifier).name;
                         if (calleeName === 'Prop') {
-                            const prop: apiTypes.PropAPI = {
+                            const prop: astTypes.PropDeclaration = {
                                 name: (member.key as babelTypes.Identifier).name,
                                 title: '',
-                                type: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
+                                tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
                             };
                             // @TODO: default
                             // @TODO: private
@@ -144,10 +143,10 @@ export function transform(tsCode: string): apiTypes.ComponentAPI[] {
                             });
                             component.props.push(prop);
                         } else if (calleeName === 'Event') {
-                            const event: apiTypes.EventAPI = {
+                            const event: astTypes.EventDeclaration = {
                                 name: (member.key as babelTypes.Identifier).name.replace(/^on(\w)/, (m, $1) => $1.toLowerCase()),
                                 title: '',
-                                type: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
+                                tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
                             };
                             decorator.expression.arguments.forEach((arg) => {
                                 if (arg.type === 'ObjectExpression')
@@ -155,10 +154,10 @@ export function transform(tsCode: string): apiTypes.ComponentAPI[] {
                             });
                             component.events.push(event);
                         } else if (calleeName === 'Slot') {
-                            const slot: apiTypes.SlotAPI = {
+                            const slot: astTypes.SlotDeclaration = {
                                 name: (member.key as babelTypes.Identifier).name.replace(/^slot(\w)/, (m, $1) => $1.toLowerCase()),
                                 title: '',
-                                type: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
+                                tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
                             };
                             decorator.expression.arguments.forEach((arg) => {
                                 if (arg.type === 'ObjectExpression')
@@ -177,10 +176,10 @@ export function transform(tsCode: string): apiTypes.ComponentAPI[] {
                     if (decorator.expression.type === 'CallExpression') {
                         const calleeName = (decorator.expression.callee as babelTypes.Identifier).name;
                         if (calleeName === 'Prop') {
-                            const prop: apiTypes.PropAPI = {
+                            const prop: astTypes.PropDeclaration = {
                                 name: (member.key as babelTypes.Identifier).name,
                                 title: '',
-                                type: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
+                                tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
                             };
                             // @TODO: default
                             // @TODO: private
@@ -197,10 +196,9 @@ export function transform(tsCode: string): apiTypes.ComponentAPI[] {
                     if (decorator.expression.type === 'CallExpression') {
                         const calleeName = (decorator.expression.callee as babelTypes.Identifier).name;
                         if (calleeName === 'Method') {
-                            const method: apiTypes.MethodAPI = {
+                            const method: astTypes.LogicDeclaration = {
                                 name: (member.key as babelTypes.Identifier).name,
                                 title: '',
-                                type: '',
                                 // type: generate((member. as babelTypes.TSTypeAnnotation).typeAnnotation).code,
                             };
                             // @TODO: private

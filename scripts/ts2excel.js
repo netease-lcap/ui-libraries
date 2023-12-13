@@ -23,8 +23,8 @@ const setterMap = {
     numberInput: '数字输入框',
     enumSelect: '枚举选择器',
     capsules: '胶囊选择器',
-    iconSelect: '图标选择器',
-    imageSelect: '图片选择器',
+    IconSetter: '图标选择器',
+    ImageSetter: '图片选择器',
     propertySelect: '属性选择器',
 }
 
