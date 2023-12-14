@@ -975,7 +975,7 @@
             }
           ]
         },
-        "name": "_alignment",
+        "name": "alignment",
         "title": "纵轴对齐",
         "tsType": "'start' | 'center' | 'end' | 'stretch'",
         "docDescription": "主轴方向为横向时：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。\n主轴方向为纵向时：支持顶对齐、垂直居中、底对齐、平均分布（两端不留空）、平均分布。",
@@ -1021,7 +1021,7 @@
             }
           ]
         },
-        "name": "_justify",
+        "name": "justify",
         "title": "横轴对齐",
         "tsType": "'start' | 'center' | 'end' | 'space-between' | 'space-around'",
         "docDescription": "主轴方向为横向时：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布，其中平均分布仅在弹性布局模式下展示。\n主轴方向为纵向时：支持左对齐、居中对齐、右对齐、占满容器宽度，其中占满容器宽度仅在弹性布局模式下展示。",
@@ -1808,7 +1808,7 @@
                 }
               ]
             },
-            "name": "_justify",
+            "name": "justify",
             "title": "横轴对齐",
             "tsType": "'start' | 'center' | 'end' | 'space-between' | 'space-around'",
             "docDescription": "主轴方向为横向时：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布。主轴方向为纵向时：支持左对齐、居中对齐、右对齐、占满容器宽度。",
@@ -1906,7 +1906,7 @@
                 }
               ]
             },
-            "name": "_alignment",
+            "name": "alignment",
             "title": "纵轴对齐",
             "tsType": "'start' | 'center' | 'end' | 'stretch'",
             "docDescription": "主轴方向为横向时：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。主轴方向为纵向时：支持顶对齐、垂直居中、底对齐、平均分布（两端不留空）、平均分布。",

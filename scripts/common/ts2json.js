@@ -165,6 +165,10 @@ function transform(tsCode) {
                                     return __assign(__assign({}, option), { value: types_1[idx] });
                                 });
                             }
+                            if (['_alignment', '_justify'].includes(prop_1.name)) {
+                                // 去掉_
+                                prop_1.name = prop_1.name.replace(/^_/, '');
+                            }
                             component.props.push(prop_1);
                         }
                         else if (calleeName === 'Event') {
@@ -236,6 +240,7 @@ function transform(tsCode) {
                             var method_1 = {
                                 concept: 'LogicDeclaration',
                                 description: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'description'),
+                                // TODO
                                 params: [],
                                 returns: [],
                                 name: member.key.name,

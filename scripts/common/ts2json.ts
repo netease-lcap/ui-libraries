@@ -170,6 +170,11 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
                                 })
                             }
 
+                            if (['_alignment', '_justify'].includes(prop.name)) {
+                                // 去掉_
+                                prop.name = prop.name.replace(/^_/, '');
+                            }
+
                             component.props.push(prop);
                         } else if (calleeName === 'Event') {
                             const event: astTypes.EventDeclaration = {
@@ -238,8 +243,11 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
                             const method: astTypes.LogicDeclaration = {
                                 concept: 'LogicDeclaration',
                                 description: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'description') as astTypes.LogicDeclaration['description'],
+                                
+                                // TODO
                                 params: [],
                                 returns: [],
+
                                 name: (member.key as babelTypes.Identifier).name,
                                 title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'title') as astTypes.LogicDeclaration['title'],
                                 // type: generate((member. as babelTypes.TSTypeAnnotation).typeAnnotation).code,
