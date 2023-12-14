@@ -78,13 +78,19 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
 
     // forEach classMap
     const result: astTypes.ViewComponentDeclaration[] = [];
+    let index = 0;
     classMap.forEach((classItem, className) => {
         const [classDecl, optionsDecl] = classItem;
         if (!classDecl)
             return;
 
         const component: astTypes.ViewComponentDeclaration = {
-            name: className,
+            concept: 'ViewComponentDeclaration',
+            group: '',
+            // VanRouterView
+            name: className, 
+            // van-router-view
+            kebabName: className.replace(/([A-Z])/g, (m, $1) => '-' + $1.toLowerCase()).replace(/^-/, ''),
             title: '',
             description: '',
             icon: '',
@@ -94,6 +100,9 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
             events: [],
             methods: [],
             slots: [],
+            children: [],
+            blocks: [],
+            themeVariables: [],
         };
 
         classDecl.decorators.forEach((decorator) => {
@@ -131,8 +140,15 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
                         const calleeName = (decorator.expression.callee as babelTypes.Identifier).name;
                         if (calleeName === 'Prop') {
                             const prop: astTypes.PropDeclaration = {
+                                concept: 'PropDeclaration',
+                                group: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'group') as astTypes.PropDeclaration['group'] || '主要属性',
+                                sync: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'sync') as astTypes.PropDeclaration['sync'],
+                                bindHide: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'bindHide') as astTypes.PropDeclaration['bindHide'],
+                                bindOpen: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'bindOpen') as astTypes.PropDeclaration['bindOpen'],
+                                tabKind: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'tabKind') as astTypes.PropDeclaration['tabKind'] || 'property',
+                                setter: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'setter') as astTypes.PropDeclaration['setter'],
                                 name: (member.key as babelTypes.Identifier).name,
-                                title: '',
+                                title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'title') as astTypes.PropDeclaration['title'],
                                 tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
                             };
                             // @TODO: default
@@ -141,9 +157,23 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
                                 if (arg.type === 'ObjectExpression')
                                     Object.assign(prop, evalOptions(arg));
                             });
+
+                            // 枚举类型生成选项
+                            if (['EnumSelectSetter', 'CapsulesSetter'].includes(prop?.setter?.concept)) {
+                                const types = prop?.tsType.split('|').map((type) => type.replace(/(\'|\")/g, '').trim());
+                                // @ts-ignore
+                                prop?.setter?.options = prop?.setter?.options?.map((option: any, idx) => {
+                                    return {
+                                        ...option,
+                                        value: types[idx],
+                                    }
+                                })
+                            }
+
                             component.props.push(prop);
                         } else if (calleeName === 'Event') {
                             const event: astTypes.EventDeclaration = {
+                                concept: 'EventDeclaration',
                                 name: (member.key as babelTypes.Identifier).name.replace(/^on(\w)/, (m, $1) => $1.toLowerCase()),
                                 title: '',
                                 tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
@@ -155,6 +185,8 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
                             component.events.push(event);
                         } else if (calleeName === 'Slot') {
                             const slot: astTypes.SlotDeclaration = {
+                                concept: 'SlotDeclaration',
+                                snippets: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'snippets') as astTypes.SlotDeclaration['snippets'],
                                 name: (member.key as babelTypes.Identifier).name.replace(/^slot(\w)/, (m, $1) => $1.toLowerCase()),
                                 title: '',
                                 tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
@@ -177,8 +209,15 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
                         const calleeName = (decorator.expression.callee as babelTypes.Identifier).name;
                         if (calleeName === 'Prop') {
                             const prop: astTypes.PropDeclaration = {
+                                concept: 'PropDeclaration',
+                                group: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'group') as astTypes.PropDeclaration['group'] || '主要属性',
+                                sync: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'sync') as astTypes.PropDeclaration['sync'],
+                                bindHide: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'bindHide') as astTypes.PropDeclaration['bindHide'],
+                                bindOpen: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'bindOpen') as astTypes.PropDeclaration['bindOpen'],
+                                tabKind: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'tabKind') as astTypes.PropDeclaration['tabKind'] || 'property',
+                                setter: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'setter') as astTypes.PropDeclaration['setter'],
                                 name: (member.key as babelTypes.Identifier).name,
-                                title: '',
+                                title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'title') as astTypes.PropDeclaration['title'],
                                 tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
                             };
                             // @TODO: default
@@ -197,8 +236,12 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
                         const calleeName = (decorator.expression.callee as babelTypes.Identifier).name;
                         if (calleeName === 'Method') {
                             const method: astTypes.LogicDeclaration = {
+                                concept: 'LogicDeclaration',
+                                description: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'description') as astTypes.LogicDeclaration['description'],
+                                params: [],
+                                returns: [],
                                 name: (member.key as babelTypes.Identifier).name,
-                                title: '',
+                                title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'title') as astTypes.LogicDeclaration['title'],
                                 // type: generate((member. as babelTypes.TSTypeAnnotation).typeAnnotation).code,
                             };
                             // @TODO: private
@@ -213,7 +256,21 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
             }
         });
 
-        result.push(component);
+        if (index === 0) {
+            result.push(component);
+        } else {
+            const parent = result[0];
+            parent.children.push(component);
+        }
+
+        index++;
     });
     return result;
+}
+
+function getValueFromObjectExpressionByKey(object: babelTypes.ObjectExpression, key: string): unknown {
+    const property = object.properties.find((prop) => prop.type === 'ObjectProperty' && (prop.key as babelTypes.Identifier).name === key) as babelTypes.ObjectProperty;
+    if (!property)
+        return undefined;
+    return generate(property.value).code;
 }

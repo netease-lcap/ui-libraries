@@ -7,10 +7,7 @@ var t = require("@babel/types");
 var generator_1 = require("@babel/generator");
 formatH5();
 function formatH5() {
-    var root = path.join(__dirname, "../../vant");
-    var frontend = 'h5';
-    var data = [];
-    var pkg = require("".concat(root, "/package.json"));
+    var root = path.join(__dirname, "../../../../vant");
     var components = require("".concat(root, "/scripts/lcap/config.js"));
     components.forEach(function (component) {
         var sourceDir = 'src';
@@ -19,8 +16,6 @@ function formatH5() {
             sourceDir = 'src-vusion/components';
             componentDir = path.join(root, "".concat(sourceDir, "/").concat(component.name));
         }
-        component.symbol = component.name;
-        component.frontend = frontend;
         // api.ts
         try {
             var tsPath = "".concat(componentDir, "/api.ts");
@@ -37,9 +32,7 @@ function formatH5() {
             console.log('找不到 TS 文件或 TS 报错', componentDir);
             console.log(e);
         }
-        data.push(component);
     });
-    fs.writeFileSync(path.join(__dirname, "../".concat(frontend, ".json")), JSON.stringify(data, null, 2));
 }
 function format(code) {
     // export class VanPopupCombinationOptions {
@@ -48,7 +41,6 @@ function format(code) {
     //         description: '弹出框的触发方式',
     //         setter: {
     //             type: 'enumSelect',
-    //             titles: ['点击', '悬浮', '右击', '双击', '手动'],
     //         },
     //     })
     //     private trigger: 'click' | 'hover' | 'right-click' | 'double-click' | 'manual' = 'click';
@@ -69,8 +61,7 @@ function format(code) {
     //         title: '触发方式',
     //         description: '弹出框的触发方式',
     //         setter: {
-    //             type: 'enumSelect',
-    //             options: [{ title: '点击' }, { title: '悬浮' }, { title: '右击' }, { title: '双击' }, { title: '手动' }]
+    //             concept: 'EnumSelectSetter',
     //         },
     //     })
     //     private trigger: 'click' | 'hover' | 'right-click' | 'double-click' | 'manual' = 'click';
@@ -93,24 +84,39 @@ function format(code) {
             var type = setter.value.properties.find(function (property) { return property.key.name === 'type'; });
             if (!type)
                 return;
-            if (type.value.value !== 'capsules')
-                return;
-            var titles = setter.value.properties.find(function (property) { return property.key.name === 'titles'; });
-            if (!titles)
-                return;
-            var icons = setter.value.properties.find(function (property) { return property.key.name === 'icons'; });
-            var tooltips = setter.value.properties.find(function (property) { return property.key.name === 'tooltips'; });
-            var optionsProperty = t.objectProperty(t.identifier('options'), t.arrayExpression(titles.value.elements.map(function (element, idx) {
-                var icon = icons.value.elements[idx];
-                var tooltip = tooltips.value.elements[idx];
-                return t.objectExpression([
-                    t.objectProperty(t.identifier('title'), element),
-                    t.objectProperty(t.identifier('icon'), icon),
-                    t.objectProperty(t.identifier('tooltip'), tooltip),
-                ]);
-            })));
-            setter.value.properties = setter.value.properties.filter(function (property) { return !['titles', 'icons', 'tooltips'].includes(property.key.name); });
-            setter.value.properties.push(optionsProperty);
+            type.key = t.identifier('concept');
+            // 首字母大写 尾部追加Setter
+            type.value = t.stringLiteral(type.value.value[0].toUpperCase() + type.value.value.slice(1) + 'Setter');
+            // if ((type.value as t.StringLiteral).value !== 'capsules') return;
+            // const titles = (setter.value as t.ObjectExpression).properties.find((property: any) => property.key.name === 'titles') as t.ObjectProperty;
+            // if (!titles) return;
+            // const icons = (setter.value as t.ObjectExpression).properties.find((property: any) => property.key.name === 'icons') as t.ObjectProperty;
+            // const tooltips = (setter.value as t.ObjectExpression).properties.find((property: any) => property.key.name === 'tooltips') as t.ObjectProperty;
+            // const optionsProperty = t.objectProperty(
+            //     t.identifier('options'),
+            //     t.arrayExpression(
+            //         (titles.value as t.ArrayExpression).elements.map((element: any, idx) => {
+            //             const icon = (icons.value as t.ArrayExpression).elements[idx] as any;
+            //             const tooltip = (tooltips.value as t.ArrayExpression).elements[idx] as any;
+            //             return t.objectExpression([
+            //                 t.objectProperty(
+            //                     t.identifier('title'),
+            //                     element
+            //                 ),
+            //                 t.objectProperty(
+            //                     t.identifier('icon'),
+            //                     icon
+            //                 ),
+            //                 t.objectProperty(
+            //                     t.identifier('tooltip'),
+            //                     tooltip
+            //                 ),
+            //             ])
+            //         })
+            //     )
+            // );
+            // (setter.value as t.ObjectExpression).properties = (setter.value as t.ObjectExpression).properties.filter((property: any) => !['titles', 'icons', 'tooltips'].includes(property.key.name));
+            // (setter.value as t.ObjectExpression).properties.push(optionsProperty);
             needFormat = true;
         }
     });

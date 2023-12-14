@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.transform = exports.evalOptions = void 0;
 var babel = require("@babel/core");
@@ -81,22 +92,30 @@ function transform(tsCode) {
     });
     // forEach classMap
     var result = [];
+    var index = 0;
     classMap.forEach(function (classItem, className) {
         var classDecl = classItem[0], optionsDecl = classItem[1];
         if (!classDecl)
             return;
         var component = {
+            concept: 'ViewComponentDeclaration',
+            group: '',
+            // VanRouterView
             name: className,
+            // van-router-view
+            kebabName: className.replace(/([A-Z])/g, function (m, $1) { return '-' + $1.toLowerCase(); }).replace(/^-/, ''),
             title: '',
             description: '',
             icon: '',
-            advanced: false,
-            typeParams: undefined,
+            tsTypeParams: undefined,
             props: [],
             readableProps: [],
             events: [],
             methods: [],
             slots: [],
+            children: [],
+            blocks: [],
+            themeVariables: [],
         };
         classDecl.decorators.forEach(function (decorator) {
             if (decorator.expression.type === 'CallExpression' && decorator.expression.callee.name === 'Component') {
@@ -111,18 +130,26 @@ function transform(tsCode) {
             var optionsTypeParams = (0, generator_1.default)(babelTypes.tsInterfaceDeclaration(babelTypes.identifier('Wrapper'), optionsDecl.typeParameters, [], babelTypes.tsInterfaceBody([]))).code.replace(/^interface Wrapper<?/, '').replace(/>? {}$/, '');
             if (classTypeParams !== optionsTypeParams)
                 throw new Error("\u7EC4\u4EF6\u7684".concat(className, "\u6CDB\u578B\u7C7B\u578B\u53C2\u6570\u4E0D\u5339\u914D\uFF01"));
-            component.typeParams = classTypeParams;
+            component.tsTypeParams = classTypeParams;
         }
         optionsDecl.body.body.forEach(function (member) {
             if (member.type === 'ClassProperty') {
                 member.decorators.forEach(function (decorator) {
+                    var _a, _b, _c, _d;
                     if (decorator.expression.type === 'CallExpression') {
                         var calleeName = decorator.expression.callee.name;
                         if (calleeName === 'Prop') {
                             var prop_1 = {
+                                concept: 'PropDeclaration',
+                                group: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'group') || '主要属性',
+                                sync: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'sync'),
+                                bindHide: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'bindHide'),
+                                bindOpen: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'bindOpen'),
+                                tabKind: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'tabKind') || 'property',
+                                setter: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'setter'),
                                 name: member.key.name,
-                                title: '',
-                                type: (0, generator_1.default)(member.typeAnnotation.typeAnnotation).code,
+                                title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'title'),
+                                tsType: (0, generator_1.default)(member.typeAnnotation.typeAnnotation).code,
                             };
                             // @TODO: default
                             // @TODO: private
@@ -130,13 +157,22 @@ function transform(tsCode) {
                                 if (arg.type === 'ObjectExpression')
                                     Object.assign(prop_1, evalOptions(arg));
                             });
+                            // 枚举类型生成选项
+                            if (['EnumSelectSetter', 'CapsulesSetter'].includes((_a = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _a === void 0 ? void 0 : _a.concept)) {
+                                var types_1 = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.tsType.split('|').map(function (type) { return type.replace(/(\'|\")/g, '').trim(); });
+                                // @ts-ignore
+                                (_b = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _b === void 0 ? void 0 : _b.options = (_d = (_c = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _c === void 0 ? void 0 : _c.options) === null || _d === void 0 ? void 0 : _d.map(function (option, idx) {
+                                    return __assign(__assign({}, option), { value: types_1[idx] });
+                                });
+                            }
                             component.props.push(prop_1);
                         }
                         else if (calleeName === 'Event') {
                             var event_1 = {
+                                concept: 'EventDeclaration',
                                 name: member.key.name.replace(/^on(\w)/, function (m, $1) { return $1.toLowerCase(); }),
                                 title: '',
-                                type: (0, generator_1.default)(member.typeAnnotation.typeAnnotation).code,
+                                tsType: (0, generator_1.default)(member.typeAnnotation.typeAnnotation).code,
                             };
                             decorator.expression.arguments.forEach(function (arg) {
                                 if (arg.type === 'ObjectExpression')
@@ -146,9 +182,11 @@ function transform(tsCode) {
                         }
                         else if (calleeName === 'Slot') {
                             var slot_1 = {
+                                concept: 'SlotDeclaration',
+                                snippets: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'snippets'),
                                 name: member.key.name.replace(/^slot(\w)/, function (m, $1) { return $1.toLowerCase(); }),
                                 title: '',
-                                type: (0, generator_1.default)(member.typeAnnotation.typeAnnotation).code,
+                                tsType: (0, generator_1.default)(member.typeAnnotation.typeAnnotation).code,
                             };
                             decorator.expression.arguments.forEach(function (arg) {
                                 if (arg.type === 'ObjectExpression')
@@ -168,9 +206,16 @@ function transform(tsCode) {
                         var calleeName = decorator.expression.callee.name;
                         if (calleeName === 'Prop') {
                             var prop_2 = {
+                                concept: 'PropDeclaration',
+                                group: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'group') || '主要属性',
+                                sync: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'sync'),
+                                bindHide: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'bindHide'),
+                                bindOpen: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'bindOpen'),
+                                tabKind: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'tabKind') || 'property',
+                                setter: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'setter'),
                                 name: member.key.name,
-                                title: '',
-                                type: (0, generator_1.default)(member.typeAnnotation.typeAnnotation).code,
+                                title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'title'),
+                                tsType: (0, generator_1.default)(member.typeAnnotation.typeAnnotation).code,
                             };
                             // @TODO: default
                             // @TODO: private
@@ -189,9 +234,12 @@ function transform(tsCode) {
                         var calleeName = decorator.expression.callee.name;
                         if (calleeName === 'Method') {
                             var method_1 = {
+                                concept: 'LogicDeclaration',
+                                description: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'description'),
+                                params: [],
+                                returns: [],
                                 name: member.key.name,
-                                title: '',
-                                type: '',
+                                title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'title'),
                                 // type: generate((member. as babelTypes.TSTypeAnnotation).typeAnnotation).code,
                             };
                             // @TODO: private
@@ -205,8 +253,21 @@ function transform(tsCode) {
                 });
             }
         });
-        result.push(component);
+        if (index === 0) {
+            result.push(component);
+        }
+        else {
+            var parent_1 = result[0];
+            parent_1.children.push(component);
+        }
+        index++;
     });
     return result;
 }
 exports.transform = transform;
+function getValueFromObjectExpressionByKey(object, key) {
+    var property = object.properties.find(function (prop) { return prop.type === 'ObjectProperty' && prop.key.name === key; });
+    if (!property)
+        return undefined;
+    return (0, generator_1.default)(property.value).code;
+}

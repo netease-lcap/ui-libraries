@@ -2,7 +2,8 @@
   "scripts": {
     "dev": "tsc -w scripts/*.ts",
     "build": "tsc scripts/*.ts",
-    "validate": "node scripts/validateByJSONSchema.js pc.json && node scripts/validateByJSONSchema.js h5.json"
+    "validate": "node scripts/validateByJSONSchema.js pc.json && node scripts/validateByJSONSchema.js h5.json",
+    "build:format": "tsc scripts/format/**/*.ts"
   },
   "dependencies": {
     "@babel/core": "^7.22.10",
