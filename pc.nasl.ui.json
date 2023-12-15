@@ -1,6 +1,6 @@
 [
   {
-    "group": "",
+    "group": "Layout",
     "name": "ULinearLayout",
     "alias": "线性布局",
     "concept": "ViewComponentDeclaration",
@@ -267,7 +267,7 @@
             }
           ]
         },
-        "name": "_alignment",
+        "name": "alignment",
         "title": "纵轴对齐",
         "tsType": "'start' | 'center' | 'end' | 'stretch'",
         "docDescription": "主轴方向为横向时：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。\n主轴方向为纵向时：支持顶对齐、垂直居中、底对齐、平均分布（两端不留空）、平均分布。",
@@ -313,7 +313,7 @@
             }
           ]
         },
-        "name": "_justify",
+        "name": "justify",
         "title": "横轴对齐",
         "tsType": "'start' | 'center' | 'end' | 'space-between' | 'space-around'",
         "docDescription": "主轴方向为横向时：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布，其中平均分布仅在弹性布局模式下展示。\n主轴方向为纵向时：支持左对齐、居中对齐、右对齐、占满容器宽度，其中占满容器宽度仅在弹性布局模式下展示。",
@@ -562,7 +562,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Layout",
     "name": "UAbsoluteLayout",
     "alias": "自由布局",
     "concept": "ViewComponentDeclaration",
@@ -648,7 +648,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Layout",
     "name": "UGridLayout",
     "alias": "栅格布局",
     "concept": "ViewComponentDeclaration",
@@ -723,7 +723,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Layout",
         "name": "UGridLayoutRow",
         "kebabName": "u-grid-layout-row",
         "title": "栅格行",
@@ -900,7 +900,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Layout",
         "name": "UGridLayoutColumn",
         "kebabName": "u-grid-layout-column",
         "title": "栅格列",
@@ -1082,7 +1082,7 @@
                 }
               ]
             },
-            "name": "_justify",
+            "name": "justify",
             "title": "横轴对齐",
             "tsType": "'start' | 'center' | 'end' | 'space-between' | 'space-around'",
             "docDescription": "主轴方向为横向时：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布。主轴方向为纵向时：支持左对齐、居中对齐、右对齐、占满容器宽度。",
@@ -1180,7 +1180,7 @@
                 }
               ]
             },
-            "name": "_alignment",
+            "name": "alignment",
             "title": "纵轴对齐",
             "tsType": "'start' | 'center' | 'end' | 'stretch'",
             "docDescription": "主轴方向为横向时：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。主轴方向为纵向时：支持顶对齐、垂直居中、底对齐、平均分布（两端不留空）、平均分布。",
@@ -1401,7 +1401,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Layout",
     "name": "UMultiLayout",
     "alias": "分栏布局",
     "concept": "ViewComponentDeclaration",
@@ -1564,7 +1564,7 @@
             }
           ]
         },
-        "name": "_alignment",
+        "name": "alignment",
         "title": "纵轴对齐",
         "tsType": "'start' | 'center' | 'end' | 'stretch'",
         "docDescription": "支持顶对齐、垂直居中、底对齐、平均分布（两端不留空）、平均分布。",
@@ -1610,7 +1610,7 @@
             }
           ]
         },
-        "name": "_justify",
+        "name": "justify",
         "title": "横轴对齐",
         "tsType": "'start' | 'center' | 'end' | 'space-between' | 'space-around'",
         "docDescription": "支持左对齐、居中对齐、右对齐、占满容器宽度。",
@@ -1730,7 +1730,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Layout",
         "name": "UMultiLayoutItem",
         "kebabName": "u-multi-layout-item",
         "title": "布局栏",
@@ -2006,7 +2006,7 @@
                 }
               ]
             },
-            "name": "_alignment",
+            "name": "alignment",
             "title": "纵轴对齐",
             "tsType": "'start' | 'center' | 'end' | 'stretch'",
             "docDescription": "主轴方向为横向时：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。主轴方向为纵向时：支持顶对齐、垂直居中、底对齐、平均分布（两端不留空）、平均分布。",
@@ -2052,7 +2052,7 @@
                 }
               ]
             },
-            "name": "_justify",
+            "name": "justify",
             "title": "横轴对齐",
             "tsType": "'start' | 'center' | 'end' | 'space-between' | 'space-around'",
             "docDescription": "主轴方向为横向时：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布。主轴方向为纵向时：支持左对齐、居中对齐、右对齐、占满容器宽度。",
@@ -2235,7 +2235,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Navigation",
     "name": "UCrumb",
     "alias": "面包屑",
     "concept": "ViewComponentDeclaration",
@@ -2315,7 +2315,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UCrumbItem",
         "kebabName": "u-crumb-item",
         "title": "面包屑选项",
@@ -2582,7 +2582,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Navigation",
     "name": "USidebar",
     "alias": "侧边栏",
     "concept": "ViewComponentDeclaration",
@@ -2915,7 +2915,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "USidebarItem",
         "kebabName": "u-sidebar-item",
         "title": "侧边栏项",
@@ -3154,7 +3154,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "USidebarGroup",
         "kebabName": "u-sidebar-group",
         "title": "侧边栏分组",
@@ -3258,7 +3258,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "USidebarDivider",
         "kebabName": "u-sidebar-divider",
         "title": "侧边栏分隔线",
@@ -3312,7 +3312,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Navigation",
     "name": "UNavbarMulti",
     "alias": "导航栏",
     "concept": "ViewComponentDeclaration",
@@ -3548,7 +3548,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarItemMulti",
         "kebabName": "u-navbar-item-multi",
         "title": "导航栏项",
@@ -3787,7 +3787,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarDividerMulti",
         "kebabName": "u-navbar-divider-multi",
         "title": "导航栏分割线",
@@ -3805,7 +3805,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarDropdownMulti",
         "kebabName": "u-navbar-dropdown-multi",
         "title": "导航栏下拉菜单",
@@ -3931,7 +3931,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarMenuMulti",
         "kebabName": "u-navbar-menu-multi",
         "title": "导航菜单",
@@ -3949,7 +3949,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarMenuGroupMulti",
         "kebabName": "u-navbar-menu-group-multi",
         "title": "导航菜单分组",
@@ -3967,7 +3967,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarMenuItemMulti",
         "kebabName": "u-navbar-menu-item-multi",
         "title": "导航菜单项",
@@ -3985,7 +3985,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarMenuDividerMulti",
         "kebabName": "u-navbar-menu-divider-multi",
         "title": "导航菜单分割线",
@@ -4003,7 +4003,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarSelectMulti",
         "kebabName": "u-navbar-select-multi",
         "title": "导航选择",
@@ -4021,7 +4021,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarSelectGroupMulti",
         "kebabName": "u-navbar-select-group-multi",
         "title": "导航选择分组",
@@ -4039,7 +4039,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarSelectItemMulti",
         "kebabName": "u-navbar-select-item-multi",
         "title": "导航选择项",
@@ -4057,7 +4057,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarSelectDividerMulti",
         "kebabName": "u-navbar-select-divider-multi",
         "title": "导航选择分割线",
@@ -4075,7 +4075,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarGroupMulti",
         "kebabName": "u-navbar-group-multi",
         "title": "导航栏分组",
@@ -4202,7 +4202,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Navigation",
     "name": "UNavbar",
     "alias": "导航栏(tradition)",
     "show": false,
@@ -4344,7 +4344,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarItem",
         "kebabName": "u-navbar-item",
         "title": "导航栏项",
@@ -4531,7 +4531,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarDivider",
         "kebabName": "u-navbar-divider",
         "title": "导航栏分割线",
@@ -4549,7 +4549,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarDropdown",
         "kebabName": "u-navbar-dropdown",
         "title": "导航栏下拉菜单",
@@ -4676,7 +4676,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarMenu",
         "kebabName": "u-navbar-menu",
         "title": "导航菜单",
@@ -4694,7 +4694,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarMenuGroup",
         "kebabName": "u-navbar-menu-group",
         "title": "导航菜单分组",
@@ -4712,7 +4712,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarMenuItem",
         "kebabName": "u-navbar-menu-item",
         "title": "导航菜单项",
@@ -4730,7 +4730,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarMenuDivider",
         "kebabName": "u-navbar-menu-divider",
         "title": "导航菜单分割线",
@@ -4748,7 +4748,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarSelect",
         "kebabName": "u-navbar-select",
         "title": "导航选择",
@@ -4766,7 +4766,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarSelectGroup",
         "kebabName": "u-navbar-select-group",
         "title": "导航选择分组",
@@ -4784,7 +4784,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarSelectItem",
         "kebabName": "u-navbar-select-item",
         "title": "导航选择项",
@@ -4802,7 +4802,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UNavbarSelectDivider",
         "kebabName": "u-navbar-select-divider",
         "title": "导航选择分割线",
@@ -4840,7 +4840,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Navigation",
     "name": "UDropdown",
     "alias": "下拉菜单",
     "concept": "ViewComponentDeclaration",
@@ -5202,7 +5202,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UDropdownItem",
         "kebabName": "u-dropdown-item",
         "title": "下拉菜单项",
@@ -5332,7 +5332,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UDropdownGroup",
         "kebabName": "u-dropdown-group",
         "title": "下拉菜单分组",
@@ -5488,7 +5488,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Navigation",
     "name": "UToc",
     "alias": "目录",
     "concept": "ViewComponentDeclaration",
@@ -5546,7 +5546,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "UTocItem",
         "kebabName": "u-toc-item",
         "title": "目录节点",
@@ -5703,7 +5703,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Navigation",
     "name": "UAnchor",
     "alias": "锚点",
     "concept": "ViewComponentDeclaration",
@@ -5742,7 +5742,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Container",
     "name": "URouterView",
     "alias": "子页面容器",
     "concept": "ViewComponentDeclaration",
@@ -5783,7 +5783,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Container",
     "name": "UIframe",
     "alias": "Iframe",
     "concept": "ViewComponentDeclaration",
@@ -5830,7 +5830,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Container",
     "name": "UPanel",
     "alias": "面板",
     "concept": "ViewComponentDeclaration",
@@ -5922,7 +5922,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Container",
         "name": "UPanelGroup",
         "kebabName": "u-panel-group",
         "title": "面板组",
@@ -5979,7 +5979,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Container",
     "name": "UCollapse",
     "alias": "折叠面板",
     "concept": "ViewComponentDeclaration",
@@ -6123,7 +6123,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Container",
         "name": "UCollapseItem",
         "kebabName": "u-collapse-item",
         "title": "折叠面板项",
@@ -6235,7 +6235,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Container",
     "name": "UCard",
     "alias": "卡片",
     "concept": "ViewComponentDeclaration",
@@ -6388,7 +6388,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Container",
         "name": "UCardGroup",
         "kebabName": "u-card-group",
         "title": "卡片组",
@@ -6458,7 +6458,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "name": "UText",
     "alias": "文本",
     "concept": "ViewComponentDeclaration",
@@ -6751,7 +6751,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "name": "ULink",
     "alias": "链接",
     "concept": "ViewComponentDeclaration",
@@ -7108,7 +7108,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "name": "UButton",
     "alias": "按钮",
     "concept": "ViewComponentDeclaration",
@@ -7545,7 +7545,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "name": "IIco",
     "alias": "图标",
     "concept": "ViewComponentDeclaration",
@@ -7732,7 +7732,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "name": "UGallery",
     "alias": "画廊",
     "concept": "ViewComponentDeclaration",
@@ -7851,7 +7851,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "name": "ULabel",
     "alias": "标签",
     "concept": "ViewComponentDeclaration",
@@ -8078,7 +8078,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "name": "UBadge",
     "alias": "徽章",
     "concept": "ViewComponentDeclaration",
@@ -8168,7 +8168,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "name": "UCarousel",
     "alias": "幻灯片",
     "concept": "ViewComponentDeclaration",
@@ -8334,7 +8334,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Display",
         "name": "UCarouselItem",
         "kebabName": "u-carousel-item",
         "title": "幻灯片选项",
@@ -8399,7 +8399,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "name": "UInfoList",
     "alias": "详情列表",
     "concept": "ViewComponentDeclaration",
@@ -8492,7 +8492,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Display",
         "name": "UInfoListItem",
         "kebabName": "u-info-list-item",
         "title": "详情列表项",
@@ -8590,7 +8590,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Display",
         "name": "UInfoListGroup",
         "kebabName": "u-info-list-group",
         "title": "详情列表组",
@@ -8709,7 +8709,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "name": "UImage",
     "alias": "图片展示",
     "concept": "ViewComponentDeclaration",
@@ -8993,7 +8993,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "name": "UAlert",
     "alias": "公告",
     "concept": "ViewComponentDeclaration",
@@ -9152,7 +9152,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "name": "UCountDown",
     "alias": "计时器",
     "concept": "ViewComponentDeclaration",
@@ -9292,7 +9292,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "name": "UDivider",
     "alias": "分割线",
     "concept": "ViewComponentDeclaration",
@@ -9416,7 +9416,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "name": "UTimeline",
     "alias": "时间线",
     "concept": "ViewComponentDeclaration",
@@ -9511,7 +9511,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Display",
         "name": "UTimelineItem",
         "kebabName": "u-timeline-item",
         "title": "时间线项",
@@ -9607,7 +9607,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Table",
     "name": "UTableView",
     "alias": "数据表格",
     "concept": "ViewComponentDeclaration",
@@ -10656,7 +10656,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Table",
         "name": "UTableViewColumn",
         "kebabName": "u-table-view-column",
         "title": "表格列",
@@ -10967,7 +10967,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Table",
         "name": "UTableViewColumnConfig",
         "kebabName": "u-table-view-column-config",
         "title": "表格配置列",
@@ -11083,7 +11083,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Table",
         "name": "UTableViewColumnDynamic",
         "kebabName": "u-table-view-column-dynamic",
         "title": "表格动态列",
@@ -11249,7 +11249,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Table",
         "name": "UTableViewColumnGroup",
         "kebabName": "u-table-view-column-group",
         "title": "表格列分组",
@@ -11298,7 +11298,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Table",
         "name": "UTableViewExpander",
         "kebabName": "u-table-view-expander",
         "title": "展开列图标",
@@ -11353,7 +11353,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Table",
     "name": "UListView",
     "alias": "数据列表",
     "concept": "ViewComponentDeclaration",
@@ -11964,7 +11964,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Table",
     "name": "UGridView",
     "alias": "数据网格",
     "concept": "ViewComponentDeclaration",
@@ -12549,7 +12549,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Table",
     "name": "UCalendarView",
     "alias": "日历",
     "concept": "ViewComponentDeclaration",
@@ -12780,7 +12780,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Table",
     "name": "UListComponents",
     "alias": "组件列表",
     "concept": "ViewComponentDeclaration",
@@ -12863,7 +12863,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "name": "UForm",
     "alias": "表单",
     "concept": "ViewComponentDeclaration",
@@ -13193,7 +13193,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Form",
         "name": "UFormItem",
         "kebabName": "u-form-item",
         "title": "表单项",
@@ -13577,7 +13577,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Form",
         "name": "UFormGroup",
         "kebabName": "u-form-group",
         "title": "表单分组",
@@ -13764,7 +13764,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "name": "UInput",
     "alias": "单行输入",
     "concept": "ViewComponentDeclaration",
@@ -14170,7 +14170,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "name": "UNumberInput",
     "alias": "数字输入",
     "concept": "ViewComponentDeclaration",
@@ -14568,7 +14568,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "name": "UTextarea",
     "alias": "多行输入",
     "concept": "ViewComponentDeclaration",
@@ -14915,7 +14915,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "name": "URadios",
     "alias": "单选组",
     "concept": "ViewComponentDeclaration",
@@ -15094,7 +15094,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Form",
         "name": "URadio",
         "kebabName": "u-radio",
         "title": "单选项",
@@ -15190,7 +15190,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "name": "USwitch",
     "alias": "开关",
     "concept": "ViewComponentDeclaration",
@@ -15315,7 +15315,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "name": "UCheckboxes",
     "alias": "多选组",
     "concept": "ViewComponentDeclaration",
@@ -15614,7 +15614,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Form",
         "name": "UCheckbox",
         "kebabName": "u-checkbox",
         "title": "多选项",
@@ -15740,7 +15740,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "name": "UCapsules",
     "alias": "胶囊",
     "concept": "ViewComponentDeclaration",
@@ -15877,7 +15877,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Form",
         "name": "UCapsule",
         "kebabName": "u-capsule",
         "title": "子选项",
@@ -15997,7 +15997,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Form",
         "name": "UCapsulesGroup",
         "kebabName": "u-capsules-group",
         "title": "子选项组",
@@ -16057,7 +16057,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "name": "URate",
     "alias": "评分",
     "concept": "ViewComponentDeclaration",
@@ -16204,7 +16204,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "name": "UComboSlider",
     "alias": "滑块",
     "concept": "ViewComponentDeclaration",
@@ -16460,7 +16460,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "name": "UUploader",
     "alias": "文件上传",
     "concept": "ViewComponentDeclaration",
@@ -17204,7 +17204,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "name": "UValidator",
     "alias": "验证器",
     "concept": "ViewComponentDeclaration",
@@ -17434,7 +17434,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "name": "UTabs",
     "alias": "选项卡",
     "concept": "ViewComponentDeclaration",
@@ -17770,7 +17770,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Selector",
         "name": "UTab",
         "kebabName": "u-tab",
         "title": "标签页",
@@ -18031,7 +18031,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "name": "USelectableSteps",
     "alias": "步骤条",
     "concept": "ViewComponentDeclaration",
@@ -18236,7 +18236,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Selector",
         "name": "USelectableStep",
         "kebabName": "u-selectable-step",
         "title": "步骤条项",
@@ -18374,7 +18374,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "name": "UPagination",
     "alias": "翻页器",
     "concept": "ViewComponentDeclaration",
@@ -18596,7 +18596,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "name": "USelect",
     "alias": "选择器",
     "concept": "ViewComponentDeclaration",
@@ -19420,7 +19420,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Selector",
         "name": "USelectItem",
         "kebabName": "u-select-item",
         "title": "选择项",
@@ -19507,7 +19507,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Selector",
         "name": "USelectGroup",
         "kebabName": "u-select-group",
         "title": "选择分组",
@@ -19563,7 +19563,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Selector",
         "name": "USelectDivider",
         "kebabName": "u-select-divider",
         "title": "分隔线",
@@ -19593,7 +19593,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "name": "UCascader",
     "alias": "级联选择",
     "concept": "ViewComponentDeclaration",
@@ -20025,7 +20025,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "name": "URegionSelect",
     "alias": "地区选择",
     "concept": "ViewComponentDeclaration",
@@ -20303,7 +20303,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "name": "UTreeViewNew",
     "alias": "树形视图",
     "concept": "ViewComponentDeclaration",
@@ -20603,7 +20603,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Selector",
         "name": "UTreeViewNodeNew",
         "kebabName": "u-tree-view-node-new",
         "title": "树形视图节点",
@@ -20741,7 +20741,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "name": "UTransfer",
     "alias": "穿梭框",
     "concept": "ViewComponentDeclaration",
@@ -21007,7 +21007,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "name": "UDatePicker",
     "alias": "日期选择",
     "concept": "ViewComponentDeclaration",
@@ -21568,7 +21568,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "name": "UTimePicker",
     "alias": "时间选择",
     "concept": "ViewComponentDeclaration",
@@ -22002,7 +22002,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "name": "UDateTimePicker",
     "alias": "日期时间选择",
     "concept": "ViewComponentDeclaration",
@@ -22543,7 +22543,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "name": "UTreeSelectNew",
     "alias": "树选择",
     "concept": "ViewComponentDeclaration",
@@ -22811,7 +22811,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "chart",
     "name": "ULinearProgress",
     "alias": "线形进度条",
     "concept": "ViewComponentDeclaration",
@@ -22923,7 +22923,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "chart",
     "name": "UCircularProgress",
     "alias": "圆型进度条",
     "concept": "ViewComponentDeclaration",
@@ -23004,7 +23004,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Feedback",
     "name": "UPopupCombination",
     "alias": "弹出框",
     "concept": "ViewComponentDeclaration",
@@ -23348,7 +23348,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Feedback",
     "name": "UModal",
     "alias": "弹窗",
     "concept": "ViewComponentDeclaration",
@@ -23636,7 +23636,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Feedback",
     "name": "UDrawer",
     "alias": "抽屉",
     "concept": "ViewComponentDeclaration",
@@ -23805,7 +23805,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Feedback",
     "name": "UToastSingle",
     "alias": "弹出消息",
     "concept": "ViewComponentDeclaration",
@@ -23999,7 +23999,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Effects",
     "name": "EWatermark",
     "alias": "水印",
     "concept": "ViewComponentDeclaration",
@@ -24060,7 +24060,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Effects",
     "name": "UCopy",
     "alias": "复制",
     "concept": "ViewComponentDeclaration",
@@ -24245,7 +24245,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Process",
     "name": "UTaskbox",
     "alias": "任务箱",
     "concept": "ViewComponentDeclaration",

@@ -26,6 +26,7 @@
     "@types/fs-extra": "^11.0.4",
     "@types/markdown-it": "^13.0.7",
     "@types/node": "^20.5.0",
-    "ajv": "^8.12.0"
+    "ajv": "^8.12.0",
+    "js-yaml": "^4.1.0"
   }
 }

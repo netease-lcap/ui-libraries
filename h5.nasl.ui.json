@@ -1,6 +1,6 @@
 [
   {
-    "group": "",
+    "group": "Container",
     "show": true,
     "name": "VanRouterView",
     "alias": "子页面",
@@ -29,7 +29,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Container",
     "show": false,
     "name": "VanIframe",
     "alias": "Iframe",
@@ -77,7 +77,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Container",
     "show": true,
     "name": "VanPopup",
     "alias": "弹出层",
@@ -238,7 +238,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Container",
     "show": true,
     "name": "VanCollapse",
     "alias": "折叠面板",
@@ -302,7 +302,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Container",
         "name": "VanCollapseItem",
         "kebabName": "van-collapse-item",
         "title": "面板项",
@@ -399,7 +399,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Container",
     "show": true,
     "name": "VanCardu",
     "alias": "卡片",
@@ -563,7 +563,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Container",
         "name": "VanCarduGroup",
         "kebabName": "van-cardu-group",
         "title": "卡片组",
@@ -634,7 +634,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Layout",
     "show": true,
     "name": "VanLinearLayout",
     "alias": "线性布局",
@@ -1120,7 +1120,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Layout",
     "show": true,
     "name": "VanAbsoluteLayout",
     "alias": "自由布局",
@@ -1166,7 +1166,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanDivider",
     "alias": "分割线",
@@ -1268,7 +1268,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanCellGroup",
     "alias": "单元格",
@@ -1314,7 +1314,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Display",
         "name": "VanCell",
         "kebabName": "van-cell",
         "title": "单元格",
@@ -1543,7 +1543,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Layout",
     "show": true,
     "name": "VanRow",
     "alias": "栅格",
@@ -1725,7 +1725,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Layout",
         "name": "VanCol",
         "kebabName": "van-col",
         "title": "栅格列",
@@ -2123,7 +2123,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Navigation",
     "show": true,
     "name": "VanDropdownMenu",
     "alias": "下拉菜单",
@@ -2224,7 +2224,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "VanDropdownItem",
         "kebabName": "van-dropdown-item",
         "title": "菜单项",
@@ -2331,7 +2331,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "VanDropdownItemSon",
         "kebabName": "van-dropdown-item-son",
         "title": "菜单子项",
@@ -2545,7 +2545,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Navigation",
     "show": true,
     "name": "VanSidebar",
     "alias": "侧边导航",
@@ -2609,7 +2609,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "VanSidebarItem",
         "kebabName": "van-sidebar-item",
         "title": "菜单项",
@@ -2776,7 +2776,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Navigation",
     "show": true,
     "name": "VanTabbar",
     "alias": "标签栏",
@@ -2862,7 +2862,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Navigation",
         "name": "VanTabbarItem",
         "kebabName": "van-tabbar-item",
         "title": "标签项",
@@ -3012,7 +3012,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanButton",
     "alias": "按钮",
@@ -3360,7 +3360,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanImage",
     "alias": "图片",
@@ -3543,7 +3543,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanSwipe",
     "alias": "幻灯片",
@@ -3625,7 +3625,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Display",
         "name": "VanSwipeItem",
         "kebabName": "van-swipe-item",
         "title": "幻灯片选项",
@@ -3671,7 +3671,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "show": true,
     "name": "VanTabs",
     "alias": "选项卡",
@@ -3819,7 +3819,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Selector",
         "name": "VanTab",
         "kebabName": "van-tab",
         "title": "标签页",
@@ -3930,7 +3930,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanText",
     "alias": "文本",
@@ -4173,7 +4173,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanLink",
     "alias": "链接",
@@ -4425,7 +4425,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanBadge",
     "alias": "徽标",
@@ -4497,7 +4497,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanNoticeBar",
     "alias": "通知栏",
@@ -4674,7 +4674,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanSteps",
     "alias": "步骤条",
@@ -4807,7 +4807,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Display",
         "name": "VanStep",
         "kebabName": "van-step",
         "title": "步骤条项",
@@ -4919,7 +4919,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanCountDownNew",
     "alias": "计时器",
@@ -5071,7 +5071,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanIconv",
     "alias": "图标",
@@ -5229,7 +5229,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanTag",
     "alias": "标签",
@@ -5381,7 +5381,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanCircle",
     "alias": "环形进度条",
@@ -5500,7 +5500,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanProgress",
     "alias": "进度条",
@@ -5640,7 +5640,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Effects",
     "show": true,
     "name": "VanCopy",
     "alias": "复制",
@@ -5825,7 +5825,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Table",
     "show": true,
     "name": "VanListView",
     "alias": "数据列表",
@@ -6468,7 +6468,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Table",
     "show": true,
     "name": "VanForComponents",
     "alias": "组件列表",
@@ -6575,7 +6575,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Table",
     "show": true,
     "name": "VanGridView",
     "alias": "数据网格",
@@ -6971,7 +6971,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanGallery",
     "alias": "画廊",
@@ -7010,7 +7010,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "show": true,
     "name": "VanForm",
     "alias": "表单",
@@ -7120,7 +7120,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Form",
         "name": "VanField",
         "kebabName": "van-field",
         "title": "表单项",
@@ -7310,7 +7310,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "show": true,
     "name": "VanFieldinput",
     "alias": "单行输入",
@@ -7689,7 +7689,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "show": true,
     "name": "VanFieldtextarea",
     "alias": "多行输入",
@@ -7925,7 +7925,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "show": true,
     "name": "VanSearch",
     "alias": "搜索框",
@@ -8177,7 +8177,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "show": true,
     "name": "VanRadioGroup",
     "alias": "单选组",
@@ -8330,7 +8330,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Form",
         "name": "VanRadio",
         "kebabName": "van-radio",
         "title": "单选项",
@@ -8433,7 +8433,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "show": true,
     "name": "VanSwitch",
     "alias": "开关",
@@ -8515,7 +8515,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "show": true,
     "name": "VanCheckboxGroup",
     "alias": "多选组",
@@ -8718,7 +8718,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Form",
         "name": "VanCheckbox",
         "kebabName": "van-checkbox",
         "title": "多选项",
@@ -8856,7 +8856,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "show": true,
     "name": "VanStepperNew",
     "alias": "数字输入",
@@ -9148,7 +9148,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanRate",
     "alias": "评分",
@@ -9309,7 +9309,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Display",
     "show": true,
     "name": "VanSlider",
     "alias": "滑块",
@@ -9498,7 +9498,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "show": true,
     "name": "VanUploader",
     "alias": "文件上传",
@@ -9887,7 +9887,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Form",
     "show": true,
     "name": "VanCapsules",
     "alias": "胶囊",
@@ -10002,7 +10002,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Form",
         "name": "VanCapsulesItem",
         "kebabName": "van-capsules-item",
         "title": "胶囊选项",
@@ -10075,7 +10075,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Form",
         "name": "VanCapsulesGroup",
         "kebabName": "van-capsules-group",
         "title": "胶囊选项组",
@@ -10135,7 +10135,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "show": true,
     "name": "VanPickerson",
     "alias": "picker选择器",
@@ -10565,7 +10565,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "show": true,
     "name": "VanArea",
     "alias": "地区选择",
@@ -10803,7 +10803,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "show": true,
     "name": "VanCascader",
     "alias": "级联选择",
@@ -11030,7 +11030,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "show": true,
     "name": "VanDatetimePicker",
     "alias": "时间选择",
@@ -11539,7 +11539,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Selector",
         "name": "VanDatetimePickerActionSlot",
         "kebabName": "van-datetime-picker-action-slot",
         "title": "时间选择事件插槽",
@@ -11579,7 +11579,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "",
+        "group": "Selector",
         "name": "VanPickerActionSlot",
         "kebabName": "van-picker-action-slot",
         "title": "事件插槽",
@@ -11631,7 +11631,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Selector",
     "show": true,
     "name": "VanCalendar",
     "alias": "日期选择",
@@ -11850,7 +11850,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Feedback",
     "show": true,
     "name": "VanPopupCombination",
     "alias": "气泡弹出框",
@@ -12143,7 +12143,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Feedback",
     "show": true,
     "name": "VanDialog",
     "alias": "弹出框",
@@ -12260,7 +12260,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Container",
     "show": true,
     "name": "VanSwipeCell",
     "alias": "滑动单元格",
@@ -12362,7 +12362,7 @@
     "themeVariables": []
   },
   {
-    "group": "",
+    "group": "Feedback",
     "show": true,
     "name": "VanToast",
     "alias": "轻提示",
