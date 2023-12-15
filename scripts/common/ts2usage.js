@@ -13,15 +13,17 @@ function gen(root) {
     components.forEach(function (component) {
         var sourceDir = 'src';
         var componentDir = path.join(root, "".concat(sourceDir, "/").concat(component.name));
+        component.symbol = component.name;
         if (!fs.existsSync(componentDir)) {
             sourceDir = 'src-vusion/components';
             componentDir = path.join(root, "".concat(sourceDir, "/").concat(component.name));
+            component.symbol = component.name;
         }
         if (!fs.existsSync(componentDir)) {
             sourceDir = 'src/components';
             componentDir = path.join(root, "".concat(sourceDir, "/").concat(component.name, ".vue"));
+            component.symbol = "".concat(component.name, ".vue");
         }
-        component.symbol = component.name;
         // api.ts
         try {
             var tsPath = "".concat(componentDir, "/api.ts");
@@ -56,10 +58,12 @@ function gen(root) {
 exports.default = gen;
 function getBlocks(content, options) {
     var screenShot = options.screenShot, drawings = options.drawings;
+    console.log(screenShot, drawings);
     var tokens = md.parse(content, {});
     var title = '';
     var description = '';
     var blocks = [];
+    var idx = 0;
     tokens.forEach(function (token, index) {
         if (token.type === 'heading_close' && token.tag === 'h3') {
             var inline = tokens[index - 1];
@@ -79,9 +83,10 @@ function getBlocks(content, options) {
                     title: title,
                     description: description,
                     code: "<template>\n".concat(token.content, "</template>\n"),
-                    screenshot: screenShot[index] || '',
-                    drawing: drawings[index] || '',
+                    screenshot: screenShot[idx] || '',
+                    drawing: drawings[idx] || '',
                 });
+                idx++;
             }
             else if (lang === 'vue') {
                 blocks.push({
@@ -89,9 +94,10 @@ function getBlocks(content, options) {
                     title: title,
                     description: description,
                     code: token.content,
-                    screenshot: screenShot[index] || '',
-                    drawing: drawings[index] || '',
+                    screenshot: screenShot[idx] || '',
+                    drawing: drawings[idx] || '',
                 });
+                idx++;
             }
             description = '';
         }

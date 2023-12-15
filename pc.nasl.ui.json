@@ -501,7 +501,7 @@
         "concept": "EventDeclaration",
         "name": "scroll",
         "title": "滚动时",
-        "tsType": "(event: nasl.ui.ScrollEvent) => void",
+        "tsType": "(event: {\n  scrollTop: nasl.core.Integer;\n  scrollLeft: nasl.core.Integer;\n  scrollWidth: nasl.core.Integer;\n  scrollHeight: nasl.core.Integer;\n  clientWidth: nasl.core.Integer;\n  clientHeight: nasl.core.Integer;\n}) => void",
         "description": "滚动时触发"
       }
     ],
@@ -539,24 +539,24 @@
         "title": "单行排布",
         "description": "",
         "code": "<template>\n<u-linear-layout direction=\"horizontal\">\n</u-linear-layout>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-linear-layout.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-linear-layout.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "多行排布",
         "description": "",
         "code": "<template>\n<u-linear-layout direction=\"vertical\">\n    <u-linear-layout>\n    </u-linear-layout>\n    <u-linear-layout>\n    </u-linear-layout>\n</u-linear-layout>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-linear-layout.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-linear-layout.vue/drawings/1.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "两端排布",
         "description": "",
         "code": "<template>\n<u-linear-layout justify=\"space-between\">\n    <u-linear-layout>\n    </u-linear-layout>\n    <u-linear-layout>\n    </u-linear-layout>\n</u-linear-layout>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-linear-layout.vue/screenshots/2.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-linear-layout.vue/drawings/2.svg"
       }
     ],
     "themeVariables": []
@@ -578,7 +578,7 @@
         "concept": "EventDeclaration",
         "name": "click",
         "title": "点击",
-        "tsType": "() => void",
+        "tsType": "(event: MouseEvent) => void",
         "description": "在元素上按下并释放任意鼠标按钮时触发。"
       },
       {
@@ -700,7 +700,7 @@
         "concept": "EventDeclaration",
         "name": "scroll",
         "title": "滚动时",
-        "tsType": "(event: nasl.ui.ScrollEvent) => void",
+        "tsType": "(event: {\n  scrollTop: nasl.core.Integer;\n  scrollLeft: nasl.core.Integer;\n  scrollWidth: nasl.core.Integer;\n  scrollHeight: nasl.core.Integer;\n  clientWidth: nasl.core.Integer;\n  clientHeight: nasl.core.Integer;\n}) => void",
         "description": "滚动时触发"
       }
     ],
@@ -723,7 +723,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Layout",
+        "group": "",
         "name": "UGridLayoutRow",
         "kebabName": "u-grid-layout-row",
         "title": "栅格行",
@@ -900,7 +900,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Layout",
+        "group": "",
         "name": "UGridLayoutColumn",
         "kebabName": "u-grid-layout-column",
         "title": "栅格列",
@@ -1378,16 +1378,16 @@
         "title": "3列样式（8:8:8）",
         "description": "",
         "code": "<template>\n<u-grid-layout>\n    <u-grid-layout-row :repeat=\"24\">\n        <u-grid-layout-column :span=\"8\"></u-grid-layout-column>\n        <u-grid-layout-column :span=\"8\"></u-grid-layout-column>\n        <u-grid-layout-column :span=\"8\"></u-grid-layout-column>\n    </u-grid-layout-row>\n</u-grid-layout>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-grid-layout.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-grid-layout.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "4列样式（2:4:8:10）",
         "description": "",
         "code": "<template>\n<u-grid-layout>\n    <u-grid-layout-row :repeat=\"24\">\n        <u-grid-layout-column :span=\"2\"></u-grid-layout-column>\n        <u-grid-layout-column :span=\"4\"></u-grid-layout-column>\n        <u-grid-layout-column :span=\"8\"></u-grid-layout-column>\n        <u-grid-layout-column :span=\"10\"></u-grid-layout-column>\n    </u-grid-layout-row>\n</u-grid-layout>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-grid-layout.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-grid-layout.vue/drawings/1.svg"
       },
       {
         "concept": "ViewBlockWithImage",
@@ -1395,7 +1395,7 @@
         "description": "",
         "code": "<template>\n<u-grid-layout>\n    <u-grid-layout-row :repeat=\"24\">\n        <u-grid-layout-column :span=\"8\"></u-grid-layout-column>\n        <u-grid-layout-column :span=\"16\"></u-grid-layout-column>\n    </u-grid-layout-row>\n</u-grid-layout>\n</template>\n",
         "screenshot": "",
-        "drawing": ""
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-grid-layout.vue/drawings/2.svg"
       }
     ],
     "themeVariables": []
@@ -1658,7 +1658,7 @@
         "concept": "EventDeclaration",
         "name": "scroll",
         "title": "滚动时",
-        "tsType": "(event: nasl.ui.ScrollEvent) => void",
+        "tsType": "(event: {\n  scrollTop: nasl.core.Integer;\n  scrollLeft: nasl.core.Integer;\n  scrollWidth: nasl.core.Integer;\n  scrollHeight: nasl.core.Integer;\n  clientWidth: nasl.core.Integer;\n  clientHeight: nasl.core.Integer;\n}) => void",
         "description": "滚动时触发"
       },
       {
@@ -1730,7 +1730,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Layout",
+        "group": "",
         "name": "UMultiLayoutItem",
         "kebabName": "u-multi-layout-item",
         "title": "布局栏",
@@ -2180,7 +2180,7 @@
         "title": "两栏-左侧固定",
         "description": "",
         "code": "<template>\n<u-multi-layout direction=\"vertical\">\n    <u-multi-layout-item style=\"height: 60px;\">\n    </u-multi-layout-item>\n    <u-multi-layout-item>\n        <u-multi-layout>\n            <u-multi-layout-item style=\"width: 200px;\">\n            </u-multi-layout-item>\n            <u-multi-layout-item>\n            </u-multi-layout-item>\n        </u-multi-layout>\n    </u-multi-layout-item>\n</u-multi-layout>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-multi-layout/screenshots/3.png",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-multi-layout.vue/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -2188,7 +2188,7 @@
         "title": "三栏-常规",
         "description": "",
         "code": "<template>\n<u-multi-layout direction=\"vertical\">\n    <u-multi-layout-item style=\"height: 60px;\">\n    </u-multi-layout-item>\n    <u-multi-layout-item>\n        <u-multi-layout>\n            <u-multi-layout-item style=\"width: 200px;\">\n            </u-multi-layout-item>\n            <u-multi-layout-item>\n            </u-multi-layout-item>\n            <u-multi-layout-item style=\"width: 200px;\">\n            </u-multi-layout-item>\n        </u-multi-layout>\n    </u-multi-layout-item>\n</u-multi-layout>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-multi-layout.vue/screenshots/1.png",
         "drawing": ""
       },
       {
@@ -2196,7 +2196,7 @@
         "title": "三栏-全部",
         "description": "",
         "code": "<template>\n<u-multi-layout direction=\"vertical\">\n    <u-multi-layout-item style=\"height: 60px;\">\n    </u-multi-layout-item>\n    <u-multi-layout-item>\n        <u-multi-layout>\n            <u-multi-layout-item style=\"width: 200px;\">\n            </u-multi-layout-item>\n            <u-multi-layout-item>\n            </u-multi-layout-item>\n            <u-multi-layout-item style=\"width: 200px;\">\n            </u-multi-layout-item>\n        </u-multi-layout>\n    </u-multi-layout-item>\n    <u-multi-layout-item style=\"height: 60px;\">\n    </u-multi-layout-item>\n</u-multi-layout>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-multi-layout.vue/screenshots/2.png",
         "drawing": ""
       },
       {
@@ -2204,7 +2204,7 @@
         "title": "通栏-纵向",
         "description": "",
         "code": "<template>\n<u-multi-layout direction=\"vertical\">\n    <u-multi-layout-item style=\"height: 60px;\">\n    </u-multi-layout-item>\n    <u-multi-layout-item>\n    </u-multi-layout-item>\n    <u-multi-layout-item style=\"height: 60px;\">\n    </u-multi-layout-item>\n</u-multi-layout>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-multi-layout.vue/screenshots/3.png",
         "drawing": ""
       },
       {
@@ -2212,7 +2212,7 @@
         "title": "通栏-横向",
         "description": "",
         "code": "<template>\n<u-multi-layout>\n    <u-multi-layout-item style=\"width: 200px;\">\n    </u-multi-layout-item>\n    <u-multi-layout-item>\n    </u-multi-layout-item>\n    <u-multi-layout-item style=\"width: 200px;\">\n    </u-multi-layout-item>\n</u-multi-layout>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-multi-layout.vue/screenshots/4.png",
         "drawing": ""
       },
       {
@@ -2220,7 +2220,7 @@
         "title": "两栏-右侧固定",
         "description": "",
         "code": "<template>\n<u-multi-layout direction=\"vertical\">\n    <u-multi-layout-item style=\"height: 60px;\">\n    </u-multi-layout-item>\n    <u-multi-layout-item>\n        <u-multi-layout>\n            <u-multi-layout-item style=\"width: 200px;\">\n            </u-multi-layout-item>\n            <u-multi-layout-item>\n            </u-multi-layout-item>\n        </u-multi-layout>\n    </u-multi-layout-item>\n</u-multi-layout>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-multi-layout.vue/screenshots/5.png",
         "drawing": ""
       },
       {
@@ -2228,7 +2228,7 @@
         "title": "三栏-双左栏",
         "description": "",
         "code": "<template>\n<u-multi-layout direction=\"vertical\">\n    <u-multi-layout-item style=\"height: 60px;\">\n    </u-multi-layout-item>\n    <u-multi-layout-item>\n        <u-multi-layout>\n            <u-multi-layout-item style=\"width: 400px;\">\n                <u-multi-layout>\n                    <u-multi-layout-item>\n                    </u-multi-layout-item>\n                    <u-multi-layout-item>\n                    </u-multi-layout-item>\n                </u-multi-layout>\n            </u-multi-layout-item>\n            <u-multi-layout-item>\n            </u-multi-layout-item>\n        </u-multi-layout>\n    </u-multi-layout-item>\n</u-multi-layout>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-multi-layout.vue/screenshots/6.png",
         "drawing": ""
       }
     ],
@@ -2315,7 +2315,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UCrumbItem",
         "kebabName": "u-crumb-item",
         "title": "面包屑选项",
@@ -2535,14 +2535,14 @@
             "concept": "EventDeclaration",
             "name": "beforeNavigate",
             "title": "导航前",
-            "tsType": "(event: nasl.ui.NavigateEvent) => void",
+            "tsType": "(event: {\n  to: nasl.core.String;\n  replace: nasl.core.Boolean;\n  append: nasl.core.Boolean;\n}) => void",
             "description": "使用 router 相关属性切换路由前触发"
           },
           {
             "concept": "EventDeclaration",
             "name": "navigate",
             "title": "导航",
-            "tsType": "(event: nasl.ui.NavigateEvent) => void",
+            "tsType": "(event: {\n  to: nasl.core.String;\n  replace: nasl.core.Boolean;\n  append: nasl.core.Boolean;\n}) => void",
             "description": "使用router相关属性切换路由时触发"
           }
         ],
@@ -2559,16 +2559,16 @@
         "title": "手动面包屑",
         "description": "",
         "code": "<template>\n<u-crumb :icon=\"false\">\n    <u-crumb-item icon=\"home\"><u-text text=\"主页面\"></u-text></u-crumb-item>\n    <u-crumb-item icon=\"user\"><u-text text=\"一级子页面\"></u-text></u-crumb-item>\n    <u-crumb-item icon=\"task\"><u-text text=\"二级子页面\"></u-text></u-crumb-item>\n</u-crumb>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-crumb.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-crumb.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "自动面包屑",
         "description": "",
         "code": "<template>\n<u-crumb auto></u-crumb>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-crumb.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-crumb.vue/drawings/1.svg"
       },
       {
         "concept": "ViewBlockWithImage",
@@ -2576,7 +2576,7 @@
         "description": "",
         "code": "<template>\n<u-crumb icon>\n    <u-crumb-item icon=\"home\"><u-text text=\"主页面\"></u-text></u-crumb-item>\n    <u-crumb-item icon=\"user\"><u-text text=\"一级子页面\"></u-text></u-crumb-item>\n    <u-crumb-item icon=\"task\"><u-text text=\"二级子页面\"></u-text></u-crumb-item>\n</u-crumb>\n</template>\n",
         "screenshot": "",
-        "drawing": ""
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-crumb.vue/drawings/2.svg"
       }
     ],
     "themeVariables": []
@@ -2875,7 +2875,7 @@
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: V;\n  oldValue: V;\n  items: nasl.collection.List<T>;\n  oldItems: nasl.collection.List<T>;\n}) => void",
         "description": "选择某一项后触发。"
       }
     ],
@@ -2915,7 +2915,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "USidebarItem",
         "kebabName": "u-sidebar-item",
         "title": "侧边栏项",
@@ -3142,7 +3142,7 @@
             "concept": "EventDeclaration",
             "name": "navigate",
             "title": "切换路由后",
-            "tsType": "(event: nasl.ui.NavigateEvent) => void",
+            "tsType": "(event: {\n  to: nasl.core.String;\n  replace: nasl.core.Boolean;\n  append: nasl.core.Boolean;\n}) => void",
             "description": "使用 router 相关属性切换路由后触发"
           }
         ],
@@ -3154,7 +3154,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "USidebarGroup",
         "kebabName": "u-sidebar-group",
         "title": "侧边栏分组",
@@ -3258,7 +3258,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "USidebarDivider",
         "kebabName": "u-sidebar-divider",
         "title": "侧边栏分隔线",
@@ -3281,7 +3281,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-sidebar value=\"3\" :router=\"true\">\n    <u-sidebar-item value=\"1\"><u-text text=\"导航一\"></u-text></u-sidebar-item>\n    <u-sidebar-item value=\"2\"><u-text text=\"导航二\"></u-text></u-sidebar-item>\n    <u-sidebar-item value=\"3\"><u-text text=\"导航三\"></u-text></u-sidebar-item>\n</u-sidebar>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-sidebar/screenshots/3.png",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-sidebar.vue/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -3289,7 +3289,7 @@
         "title": "折叠功能",
         "description": "",
         "code": "<template>\n<u-sidebar collapsible :router=\"true\">\n    <u-sidebar-group expanded>\n        <template #title><u-text text=\"导航一\"></u-text></template>\n        <u-sidebar-item><u-text text=\"选项一\"></u-text></u-sidebar-item>\n    </u-sidebar-group>\n    <u-sidebar-group expanded disabled>\n        <template #title><u-text text=\"导航二\"></u-text></template>\n        <u-sidebar-item><u-text text=\"选项一\"></u-text></u-sidebar-item>\n    </u-sidebar-group>\n</u-sidebar>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-sidebar.vue/screenshots/1.png",
         "drawing": ""
       },
       {
@@ -3297,7 +3297,7 @@
         "title": "分组",
         "description": "",
         "code": "<template>\n<u-sidebar :router=\"true\">\n    <u-sidebar-group expanded>\n        <template #title><u-text text=\"导航一\"></u-text></template>\n        <u-sidebar-item><u-text text=\"选项一\"></u-text></u-sidebar-item>\n    </u-sidebar-group>\n    <u-sidebar-group expanded>\n        <template #title><u-text text=\"导航二\"></u-text></template>\n        <u-sidebar-item><u-text text=\"选项一\"></u-text></u-sidebar-item>\n    </u-sidebar-group>\n</u-sidebar>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-sidebar.vue/screenshots/2.png",
         "drawing": ""
       },
       {
@@ -3305,7 +3305,7 @@
         "title": "手风琴模式",
         "description": "",
         "code": "<template>\n<u-sidebar collapsible accordion :router=\"true\">\n    <u-sidebar-group>\n        <template #title><u-text text=\"导航一\"></u-text></template>\n        <u-sidebar-item><u-text text=\"选项一\"></u-text></u-sidebar-item>\n    </u-sidebar-group>\n    <u-sidebar-group>\n        <template #title><u-text text=\"导航二\"></u-text></template>\n        <u-sidebar-item><u-text text=\"选项一\"></u-text></u-sidebar-item>\n    </u-sidebar-group>\n    <u-sidebar-group>\n        <template #title><u-text text=\"导航三\"></u-text></template>\n        <u-sidebar-item><u-text text=\"选项一\"></u-text></u-sidebar-item>\n    </u-sidebar-group>\n</u-sidebar>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-sidebar.vue/screenshots/3.png",
         "drawing": ""
       }
     ],
@@ -3517,7 +3517,7 @@
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: V;\n  oldValue: V;\n}) => void",
         "description": "选择某一项后触发。"
       }
     ],
@@ -3548,7 +3548,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarItemMulti",
         "kebabName": "u-navbar-item-multi",
         "title": "导航栏项",
@@ -3775,7 +3775,7 @@
             "concept": "EventDeclaration",
             "name": "navigate",
             "title": "切换路由后",
-            "tsType": "(event: nasl.ui.NavigateEvent) => void",
+            "tsType": "(event: {\n  to: nasl.core.String;\n  replace: nasl.core.Boolean;\n  append: nasl.core.Boolean;\n}) => void",
             "description": "使用 router 相关属性切换路由后触发"
           }
         ],
@@ -3787,7 +3787,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarDividerMulti",
         "kebabName": "u-navbar-divider-multi",
         "title": "导航栏分割线",
@@ -3805,7 +3805,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarDropdownMulti",
         "kebabName": "u-navbar-dropdown-multi",
         "title": "导航栏下拉菜单",
@@ -3931,7 +3931,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarMenuMulti",
         "kebabName": "u-navbar-menu-multi",
         "title": "导航菜单",
@@ -3949,7 +3949,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarMenuGroupMulti",
         "kebabName": "u-navbar-menu-group-multi",
         "title": "导航菜单分组",
@@ -3967,7 +3967,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarMenuItemMulti",
         "kebabName": "u-navbar-menu-item-multi",
         "title": "导航菜单项",
@@ -3985,7 +3985,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarMenuDividerMulti",
         "kebabName": "u-navbar-menu-divider-multi",
         "title": "导航菜单分割线",
@@ -4003,7 +4003,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarSelectMulti",
         "kebabName": "u-navbar-select-multi",
         "title": "导航选择",
@@ -4021,7 +4021,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarSelectGroupMulti",
         "kebabName": "u-navbar-select-group-multi",
         "title": "导航选择分组",
@@ -4039,7 +4039,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarSelectItemMulti",
         "kebabName": "u-navbar-select-item-multi",
         "title": "导航选择项",
@@ -4057,7 +4057,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarSelectDividerMulti",
         "kebabName": "u-navbar-select-divider-multi",
         "title": "导航选择分割线",
@@ -4075,7 +4075,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarGroupMulti",
         "kebabName": "u-navbar-group-multi",
         "title": "导航栏分组",
@@ -4194,8 +4194,8 @@
         "concept": "ViewBlockWithImage",
         "title": "导航栏",
         "description": "",
-        "code": "<template>\n<u-navbar-multi>\n    <template #left>\n        <u-multi-layout-item align-items=\"center\" style=\"width: 200px;\">\n            <u-image fit=\"cover\" src=\"/assets/lcap-logo-light.svg\"\n                    style=\"width: 28px; height: 28px; margin: 16px 14px; --custom-start: auto; vertical-align: middle;\"></u-image>\n            <u-text text=\"应用名称\" size=\"large\" style=\"--custom-start: auto; vertical-align: middle;\"></u-text>\n        </u-multi-layout-item>\n    </template>\n    <u-navbar-item-multi><u-text>导航项1</u-text></u-navbar-item-multi>\n    <u-navbar-item-multi><u-text>导航项2</u-text></u-navbar-item-multi>\n    <template #right>\n        <u-multi-layout-item align-items=\"center\" justify=\"end\">\n            <u-dropdown style=\"margin-right: 10px;\">\n                <template #title>\n                    <u-linear-layout gap=\"small\" v-if=\"$global.userInfo\">\n                        <u-image fit=\"cover\" src=\"/assets/avatar-default.svg\" style=\"width: 36px; height: 36px; vertical-align: middle;\"></u-image>\n                        <span style=\"display: inline-block; vertical-align: top; margin-left: 10px; margin-right: 10px;\">\n                            <u-text :text=\"$global.userInfo.UserName\"></u-text>\n                        </span>\n                    </u-linear-layout>\n                </template>\n                <template #default>\n                        <u-dropdown-item><u-text>安全退出</u-text></u-dropdown-item>\n                </template>\n            </u-dropdown>\n        </u-multi-layout-item>\n    </template>\n</u-navbar-multi>\n</template>\n",
-        "screenshot": "",
+        "code": "<template>\n<u-navbar-multi>\n    <template #left>\n        <u-multi-layout-item alignItems=\"center\" style=\"width: 200px;\">\n            <u-image fit=\"cover\" src=\"/assets/lcap-logo-light.svg\"\n                    style=\"width: 28px; height: 28px; margin: 16px 14px; --custom-start: auto; vertical-align: middle;\"></u-image>\n            <u-text text=\"应用名称\" size=\"large\" style=\"--custom-start: auto; vertical-align: middle;\"></u-text>\n        </u-multi-layout-item>\n    </template>\n    <u-navbar-item-multi><u-text>导航项1</u-text></u-navbar-item-multi>\n    <u-navbar-item-multi><u-text>导航项2</u-text></u-navbar-item-multi>\n    <template #right>\n        <u-multi-layout-item alignItems=\"center\" justify=\"end\">\n            <u-dropdown style=\"margin-right: 10px;\">\n                <template #title>\n                    <u-linear-layout gap=\"small\" v-if=\"$global.userInfo\">\n                        <u-image fit=\"cover\" src=\"/assets/avatar-default.svg\" style=\"width: 36px; height: 36px; vertical-align: middle;\"></u-image>\n                        <span style=\"display: inline-block; vertical-align: top; margin-left: 10px; margin-right: 10px;\">\n                            <u-text :text=\"$global.userInfo.UserName\"></u-text>\n                        </span>\n                    </u-linear-layout>\n                </template>\n                <template #default>\n                        <u-dropdown-item><u-text>安全退出</u-text></u-dropdown-item>\n                </template>\n            </u-dropdown>\n        </u-multi-layout-item>\n    </template>\n</u-navbar-multi>\n</template>\n",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-navbar-multi.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -4275,35 +4275,35 @@
         "concept": "EventDeclaration",
         "name": "click",
         "title": "点击",
-        "tsType": "(event: nasl.ui.MouseEvent) => void",
+        "tsType": "(event: {\n  altKey: nasl.core.Boolean;\n  button: nasl.core.Integer;\n  clientX: nasl.core.Integer;\n  clientY: nasl.core.Integer;\n  ctrlKey: nasl.core.Boolean;\n  metaKey: nasl.core.Boolean;\n  movementX: nasl.core.Integer;\n  movementY: nasl.core.Integer;\n  offsetX: nasl.core.Integer;\n  offsetY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  screenX: nasl.core.Integer;\n  screenY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "点击此项时触发，与原生 click 事件不同的是，它只会在非只读和禁用的情况下触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeSelect",
         "title": "输入前",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n  selectedItem: nasl.core.Any;\n  item: nasl.core.Any;\n  oldItem: nasl.core.Any;\n}) => void",
         "description": "选择某一项前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "input",
         "title": "输入时",
-        "tsType": "(event: String) => void",
+        "tsType": "(event: nasl.core.String) => void",
         "description": "选择某一项时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n  selectedItem: nasl.core.Any;\n  item: nasl.core.Any;\n  oldItem: nasl.core.Any;\n}) => void",
         "description": "选择某一项时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n  selectedItem: nasl.core.Any;\n  item: nasl.core.Any;\n  oldItem: nasl.core.Any;\n}) => void",
         "description": "选择值改变时触发"
       }
     ],
@@ -4344,7 +4344,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarItem",
         "kebabName": "u-navbar-item",
         "title": "导航栏项",
@@ -4505,21 +4505,21 @@
             "concept": "EventDeclaration",
             "name": "beforeSelect",
             "title": "选择前",
-            "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+            "tsType": "(event: {\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n  selectedItem: nasl.core.Any;\n  item: nasl.core.Any;\n  oldItem: nasl.core.Any;\n}) => void",
             "description": "选择此项前触发"
           },
           {
             "concept": "EventDeclaration",
             "name": "beforeNavigate",
             "title": "导航前",
-            "tsType": "(event: nasl.ui.NavigateEvent) => void",
+            "tsType": "(event: {\n  to: nasl.core.String;\n  replace: nasl.core.Boolean;\n  append: nasl.core.Boolean;\n}) => void",
             "description": "使用 router 相关属性切换路由前触发"
           },
           {
             "concept": "EventDeclaration",
             "name": "navigate",
             "title": "导航",
-            "tsType": "(event: nasl.ui.NavigateEvent) => void",
+            "tsType": "(event: {\n  to: nasl.core.String;\n  replace: nasl.core.Boolean;\n  append: nasl.core.Boolean;\n}) => void",
             "description": "使用router相关属性切换路由时触发"
           }
         ],
@@ -4531,7 +4531,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarDivider",
         "kebabName": "u-navbar-divider",
         "title": "导航栏分割线",
@@ -4549,7 +4549,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarDropdown",
         "kebabName": "u-navbar-dropdown",
         "title": "导航栏下拉菜单",
@@ -4676,7 +4676,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarMenu",
         "kebabName": "u-navbar-menu",
         "title": "导航菜单",
@@ -4694,7 +4694,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarMenuGroup",
         "kebabName": "u-navbar-menu-group",
         "title": "导航菜单分组",
@@ -4712,7 +4712,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarMenuItem",
         "kebabName": "u-navbar-menu-item",
         "title": "导航菜单项",
@@ -4730,7 +4730,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarMenuDivider",
         "kebabName": "u-navbar-menu-divider",
         "title": "导航菜单分割线",
@@ -4748,7 +4748,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarSelect",
         "kebabName": "u-navbar-select",
         "title": "导航选择",
@@ -4766,7 +4766,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarSelectGroup",
         "kebabName": "u-navbar-select-group",
         "title": "导航选择分组",
@@ -4784,7 +4784,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarSelectItem",
         "kebabName": "u-navbar-select-item",
         "title": "导航选择项",
@@ -4802,7 +4802,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UNavbarSelectDivider",
         "kebabName": "u-navbar-select-divider",
         "title": "导航选择分割线",
@@ -4825,7 +4825,7 @@
         "title": "基本用法",
         "description": "下面展示了导航条的一些基本特性，如配置链接、添加分隔线、禁用选项等。\n",
         "code": "<template>\n<u-navbar style=\"background: #4289db;\">\n    <u-navbar-item href=\"https://github.com/vusion/cloud-ui\" text=\"GitHub\"></u-navbar-item>\n    <u-navbar-item disabled text=\"指令\"></u-navbar-item>\n    <u-navbar-divider></u-navbar-divider>\n    <u-navbar-item text=\"配置\"></u-navbar-item>\n</u-navbar>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-navbar.vue/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -4833,7 +4833,7 @@
         "title": "选择控制",
         "description": "",
         "code": "<template>\n<u-navbar value=\"3\" :router=\"false\" style=\"background: #4289db;\">\n    <u-navbar-item value=\"1\" text=\"组件\"></u-navbar-item>\n    <u-navbar-item value=\"2\" text=\"备案管理\"></u-navbar-item>\n    <u-navbar-item value=\"3\" text=\"帮助\"></u-navbar-item>\n    <u-navbar-item value=\"4\" text=\"GitHub\"></u-navbar-item>\n</u-navbar>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-navbar.vue/screenshots/1.png",
         "drawing": ""
       }
     ],
@@ -5202,7 +5202,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UDropdownItem",
         "kebabName": "u-dropdown-item",
         "title": "下拉菜单项",
@@ -5332,7 +5332,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UDropdownGroup",
         "kebabName": "u-dropdown-group",
         "title": "下拉菜单分组",
@@ -5457,8 +5457,8 @@
         "title": "基础按钮样式",
         "description": "",
         "code": "<template>\n<u-dropdown>\n    <template #title><u-text text=\"下拉菜单\"></u-text></template>\n    <u-dropdown-item><u-text text=\"选项一\"></u-text></u-dropdown-item>\n    <u-dropdown-item><u-text text=\"选项二\"></u-text></u-dropdown-item>\n    <u-dropdown-item><u-text text=\"选项三\"></u-text></u-dropdown-item>\n</u-dropdown>\n</template>\n",
-        "screenshot": "",
-        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-dropdown/drawings/3.svg"
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-dropdown.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-dropdown.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
@@ -5466,7 +5466,7 @@
         "description": "",
         "code": "<template>\n<u-dropdown type=\"primary\">\n    <template #title><u-text text=\"下拉菜单\"></u-text></template>\n    <u-dropdown-item><u-text text=\"选项一\"></u-text></u-dropdown-item>\n    <u-dropdown-item><u-text text=\"选项二\"></u-text></u-dropdown-item>\n    <u-dropdown-item><u-text text=\"选项三\"></u-text></u-dropdown-item>\n</u-dropdown>\n</template>\n",
         "screenshot": "",
-        "drawing": ""
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-dropdown.vue/drawings/1.svg"
       },
       {
         "concept": "ViewBlockWithImage",
@@ -5474,7 +5474,7 @@
         "description": "",
         "code": "<template>\n<u-dropdown type=\"more\">\n    <template #title><u-text text=\"下拉菜单\"></u-text></template>\n    <u-dropdown-item><u-text text=\"选项一\"></u-text></u-dropdown-item>\n    <u-dropdown-item><u-text text=\"选项二\"></u-text></u-dropdown-item>\n    <u-dropdown-item><u-text text=\"选项三\"></u-text></u-dropdown-item>\n</u-dropdown>\n</template>\n",
         "screenshot": "",
-        "drawing": ""
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-dropdown.vue/drawings/2.svg"
       },
       {
         "concept": "ViewBlockWithImage",
@@ -5482,7 +5482,7 @@
         "description": "",
         "code": "<template>\n<u-dropdown>\n    <template #title><u-text text=\"下拉菜单\"></u-text></template>\n    <u-dropdown-item icon=\"menu\"><u-text text=\"选项一\"></u-text></u-dropdown-item>\n    <u-dropdown-item icon=\"menu\"><u-text text=\"选项二\"></u-text></u-dropdown-item>\n    <u-dropdown-item icon=\"menu\"><u-text text=\"选项三\"></u-text></u-dropdown-item>\n</u-dropdown>\n</template>\n",
         "screenshot": "",
-        "drawing": ""
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-dropdown.vue/drawings/3.svg"
       }
     ],
     "themeVariables": []
@@ -5516,14 +5516,14 @@
         "concept": "EventDeclaration",
         "name": "beforeSelect",
         "title": "选择前",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n  node: nasl.core.String;\n  oldNode: nasl.core.String;\n}) => void",
         "description": "选择某一项前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n  node: nasl.core.String;\n  oldNode: nasl.core.String;\n}) => void",
         "description": "选择某一项时触发"
       }
     ],
@@ -5546,7 +5546,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Navigation",
+        "group": "",
         "name": "UTocItem",
         "kebabName": "u-toc-item",
         "title": "目录节点",
@@ -5665,7 +5665,7 @@
             "concept": "EventDeclaration",
             "name": "click",
             "title": "点击",
-            "tsType": "(event: nasl.ui.MouseEvent) => void",
+            "tsType": "(event: {\n  altKey: nasl.core.Boolean;\n  button: nasl.core.Integer;\n  clientX: nasl.core.Integer;\n  clientY: nasl.core.Integer;\n  ctrlKey: nasl.core.Boolean;\n  metaKey: nasl.core.Boolean;\n  movementX: nasl.core.Integer;\n  movementY: nasl.core.Integer;\n  offsetX: nasl.core.Integer;\n  offsetY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  screenX: nasl.core.Integer;\n  screenY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
             "description": "点击此项时触发，与原生 click 事件不同的是，它只会在非只读和禁用的情况下触发。"
           }
         ],
@@ -5696,7 +5696,7 @@
         "title": "",
         "description": "",
         "code": "<template>\n<u-toc>\n    <u-toc-item>\n        <template #label>目录节点1</template>\n        <u-toc-item><template #label>目录节点1.1</template></u-toc-item>\n    </u-toc-item>\n    <u-toc-item><template #label>目录节点2</template></u-toc-item>\n    <u-toc-item><template #label>目录节点3</template></u-toc-item>\n</u-toc>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-toc.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -5735,7 +5735,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-anchor>\n</u-anchor>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-anchor.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -5776,8 +5776,8 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-router-view></u-router-view>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-router-view.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-router-view.vue/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -5823,8 +5823,8 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-iframe src=\"https://sf.163.com\" style=\"width: 100%; height: 400px;\"></u-iframe>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-iframe.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-iframe.vue/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -5922,7 +5922,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Container",
+        "group": "",
         "name": "UPanelGroup",
         "kebabName": "u-panel-group",
         "title": "面板组",
@@ -5964,16 +5964,16 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-panel><template #title><u-text>任务总览</u-text></template>任务内容</u-panel>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-panel.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-panel.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "面板分组",
         "description": "",
         "code": "<template>\n<u-panel title=\"服务\">\n    <template #title><u-text>任务总览</u-text></template>\n    <u-panel-group><template #title><u-text text=\"当天概览\"></u-text></template>概览内容</u-panel-group>\n    <u-panel-group><template #title><u-text text=\"事务分组\"></u-text></template>事务内容</u-panel-group>\n</u-panel>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-panel.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-panel.vue/drawings/1.svg"
       }
     ],
     "themeVariables": []
@@ -6093,14 +6093,14 @@
         "concept": "EventDeclaration",
         "name": "expand",
         "title": "展开时",
-        "tsType": "(event: nasl.ui.CollapseEvent) => void",
+        "tsType": "() => void",
         "description": "展开此面板时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "collapse",
         "title": "折叠时",
-        "tsType": "(event: nasl.ui.CollapseEvent) => void",
+        "tsType": "() => void",
         "description": "折叠某面板时触发"
       }
     ],
@@ -6123,7 +6123,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Container",
+        "group": "",
         "name": "UCollapseItem",
         "kebabName": "u-collapse-item",
         "title": "折叠面板项",
@@ -6174,14 +6174,14 @@
             "concept": "EventDeclaration",
             "name": "expand",
             "title": "展开时",
-            "tsType": "(event: nasl.ui.CollapseEvent) => void",
+            "tsType": "() => void",
             "description": "展开此面板时触发"
           },
           {
             "concept": "EventDeclaration",
             "name": "collapse",
             "title": "折叠时",
-            "tsType": "(event: nasl.ui.CollapseEvent) => void",
+            "tsType": "() => void",
             "description": "折叠某面板时触发"
           }
         ],
@@ -6220,16 +6220,16 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-collapse>\n    <u-collapse-item><template #title><u-text text=\"面板1\"></u-text></template>Content1</u-collapse-item>\n    <u-collapse-item expanded><template #title><u-text text=\"面板2\"></u-text></template>Content2</u-collapse-item>\n    <u-collapse-item><template #title><u-text text=\"面板3\"></u-text></template>Content3</u-collapse-item>\n</u-collapse>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-collapse/screenshots/3.png",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-collapse.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-collapse.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "额外插槽",
         "description": "对于一些操作项，可以使用 `extra` 插槽添加在详情列表组的右上角。\n",
-        "code": "<template>\n<u-collapse show-extra-empty-slot>\n    <u-collapse-item><template #title><u-text text=\"面板1\"></u-text></template><template #extra><u-link>设置</u-link></template>Content1</u-collapse-item>\n    <u-collapse-item expanded><template #title><u-text text=\"面板2\"></u-text></template><template #extra></template>Content2</u-collapse-item>\n    <u-collapse-item><template #title><u-text text=\"面板3\"></u-text></template><template #extra></template>Content3</u-collapse-item>\n</u-collapse>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "code": "<template>\n<u-collapse showExtraEmptySlot>\n    <u-collapse-item><template #title><u-text text=\"面板1\"></u-text></template><template #extra><u-link>设置</u-link></template>Content1</u-collapse-item>\n    <u-collapse-item expanded><template #title><u-text text=\"面板2\"></u-text></template><template #extra></template>Content2</u-collapse-item>\n    <u-collapse-item><template #title><u-text text=\"面板3\"></u-text></template><template #extra></template>Content3</u-collapse-item>\n</u-collapse>\n</template>\n",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-collapse.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-collapse.vue/drawings/1.svg"
       }
     ],
     "themeVariables": []
@@ -6388,7 +6388,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Container",
+        "group": "",
         "name": "UCardGroup",
         "kebabName": "u-card-group",
         "title": "卡片组",
@@ -6435,7 +6435,7 @@
         "title": "基本样式",
         "description": "",
         "code": "<template>\n<u-card><template #title><u-text text=\"卡片\"></u-text></template>卡片内容</u-card>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-card.vue/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -6443,7 +6443,7 @@
         "title": "带分割线样式",
         "description": "",
         "code": "<template>\n<u-card split><template #title><u-text text=\"卡片\"></u-text></template>卡片内容</u-card>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-card.vue/screenshots/1.png",
         "drawing": ""
       },
       {
@@ -6451,7 +6451,7 @@
         "title": "带图片样式",
         "description": "",
         "code": "<template>\n<u-card style=\"width: 280px\" cover-slot><template #title><u-text text=\"卡片\"></u-text></template><template #cover>\n        <u-image src=\"https://static-vusion.163yun.com/assets/cloud-ui/1.jpg\" fit=\"contain\"></u-image>\n</template>卡片内容</u-card>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-card.vue/screenshots/2.png",
         "drawing": ""
       }
     ],
@@ -6672,80 +6672,80 @@
         "title": "普通文本",
         "description": "",
         "code": "<template>\n<u-text text=\"普通文本\"></u-text>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text/screenshots/3.png",
-        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text/drawings/3.svg"
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "小号文本",
         "description": "",
         "code": "<template>\n<u-text size=\"small\" text=\"小号文本\"></u-text>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text/screenshots/7.png",
-        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text/drawings/7.svg"
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/drawings/1.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "大号文本",
         "description": "",
         "code": "<template>\n<u-text size=\"large\" text=\"大号文本\"></u-text>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/screenshots/2.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/drawings/2.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "主要文本",
         "description": "",
         "code": "<template>\n<u-text color=\"primary\" text=\"主要文本\"></u-text>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/screenshots/3.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/drawings/3.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "辅助文本",
         "description": "",
         "code": "<template>\n<u-text color=\"secondary\" text=\"辅助文本\"></u-text>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/screenshots/4.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/drawings/4.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "成功文本",
         "description": "",
         "code": "<template>\n<u-text color=\"success\" text=\"成功文本\"></u-text>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/screenshots/5.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/drawings/5.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "警告文本",
         "description": "",
         "code": "<template>\n<u-text color=\"warning\" text=\"警告文本\"></u-text>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/screenshots/6.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/drawings/6.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "错误文本",
         "description": "",
         "code": "<template>\n<u-text color=\"error\" text=\"错误文本\"></u-text>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/screenshots/7.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/drawings/7.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "禁用文本",
         "description": "",
         "code": "<template>\n<u-text color=\"disabled\" text=\"禁用文本\"></u-text>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/screenshots/8.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/drawings/8.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "文本过长省略",
         "description": "",
         "code": "<template>\n<u-text overflow=\"ellipsis\" text=\"文字过长省略过长省略过长省略过长省略过长省略。\"></u-text>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/screenshots/9.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-text.vue/drawings/9.svg"
       }
     ],
     "themeVariables": []
@@ -7049,14 +7049,14 @@
         "concept": "EventDeclaration",
         "name": "beforeNavigate",
         "title": "切换路由前",
-        "tsType": "(event: nasl.ui.NavigateEvent) => void",
+        "tsType": "(event: {\n  to: nasl.core.String;\n  replace: nasl.core.Boolean;\n  append: nasl.core.Boolean;\n}) => void",
         "description": "使用 router 相关属性切换路由前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "navigate",
         "title": "切换路由后",
-        "tsType": "(event: nasl.ui.NavigateEvent) => void",
+        "tsType": "(event: {\n  to: nasl.core.String;\n  replace: nasl.core.Boolean;\n  append: nasl.core.Boolean;\n}) => void",
         "description": "使用 router 相关属性切换路由后触发"
       }
     ],
@@ -7069,40 +7069,40 @@
         "title": "普通链接",
         "description": "",
         "code": "<template>\n<u-link text=\"普通链接\"></u-link>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-link/screenshots/3.png",
-        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-link/drawings/3.svg"
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-link.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-link.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "成功链接",
         "description": "",
         "code": "<template>\n<u-link color=\"success\" text=\"成功链接\"></u-link>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-link.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-link.vue/drawings/1.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "警告链接",
         "description": "",
         "code": "<template>\n<u-link color=\"warning\" text=\"警告链接\"></u-link>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-link.vue/screenshots/2.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-link.vue/drawings/2.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "危险链接",
         "description": "",
         "code": "<template>\n<u-link color=\"danger\" text=\"危险链接\"></u-link>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-link.vue/screenshots/3.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-link.vue/drawings/3.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "禁用链接",
         "description": "",
         "code": "<template>\n<u-link disabled text=\"禁用链接\"></u-link>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-link.vue/screenshots/4.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-link.vue/drawings/4.svg"
       }
     ],
     "themeVariables": []
@@ -7494,14 +7494,14 @@
         "concept": "EventDeclaration",
         "name": "beforeNavigate",
         "title": "切换路由前",
-        "tsType": "(event: nasl.ui.NavigateEvent) => void",
+        "tsType": "(event: {\n  to: nasl.core.String;\n  replace: nasl.core.Boolean;\n  append: nasl.core.Boolean;\n}) => void",
         "description": "使用 router 相关属性切换路由前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "navigate",
         "title": "切换路由后",
-        "tsType": "(event: nasl.ui.NavigateEvent) => void",
+        "tsType": "(event: {\n  to: nasl.core.String;\n  replace: nasl.core.Boolean;\n  append: nasl.core.Boolean;\n}) => void",
         "description": "使用 router 相关属性切换路由后触发"
       }
     ],
@@ -7514,32 +7514,32 @@
         "title": "主要按钮",
         "description": "",
         "code": "<template>\n<u-button color=\"primary\" text=\"确 定\"></u-button>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-button/screenshots/3.png",
-        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-button/drawings/3.svg"
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-button.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-button.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "次要按钮",
         "description": "",
         "code": "<template>\n<u-button text=\"确 定\" color=\"primary_secondary\"></u-button>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-button.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-button.vue/drawings/1.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "普通按钮",
         "description": "",
         "code": "<template>\n<u-button text=\"确 定\"></u-button>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-button.vue/screenshots/2.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-button.vue/drawings/2.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "图标按钮",
         "description": "",
         "code": "<template>\n<u-button color=\"primary\" icon=\"add\" text=\"创 建\"></u-button>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-button.vue/screenshots/3.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-button.vue/drawings/3.svg"
       }
     ],
     "themeVariables": []
@@ -7709,7 +7709,7 @@
         "title": "组合图标-上下",
         "description": "",
         "code": "<template>\n<i-ico name=\"default\">\n    <u-text>图标</u-text>\n</i-ico>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/i-ico.vue/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -7717,7 +7717,7 @@
         "title": "组合图标-左右",
         "description": "",
         "code": "<template>\n<i-ico name=\"default\" icotype=\"left\">\n    <u-text>图标</u-text>\n</i-ico>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/i-ico.vue/screenshots/1.png",
         "drawing": ""
       },
       {
@@ -7725,7 +7725,7 @@
         "title": "仅图标",
         "description": "",
         "code": "<template>\n<i-ico name=\"default\" icotype=\"only\">\n    <u-text>图标</u-text>\n</i-ico></template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/i-ico.vue/screenshots/2.png",
         "drawing": ""
       }
     ],
@@ -7815,14 +7815,14 @@
         "concept": "EventDeclaration",
         "name": "beforeLoad",
         "title": "加载前",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "() => void",
         "description": "加载前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "load",
         "title": "加载后",
-        "tsType": "(event: null) => void",
+        "tsType": "() => void",
         "description": "加载后触发"
       }
     ],
@@ -7844,7 +7844,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-gallery>\n    \n</u-gallery>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-gallery.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -8051,14 +8051,14 @@
         "concept": "EventDeclaration",
         "name": "beforeRemove",
         "title": "删除前触发",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "() => void",
         "description": "删除前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "remove",
         "title": "删除时触发",
-        "tsType": "(event: null) => void",
+        "tsType": "() => void",
         "description": "删除时触发"
       }
     ],
@@ -8071,8 +8071,8 @@
         "title": "主要标签",
         "description": "",
         "code": "<template>\n<u-label color=\"primary\" text=\"主要标签\"></u-label>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-label/screenshots/3.png",
-        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-label/drawings/3.svg"
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-label.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-label.vue/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -8153,16 +8153,16 @@
         "title": "数字徽章",
         "description": "",
         "code": "<template>\n<u-badge :value=\"3\" :corner=\"true\"><u-text>消息</u-text></u-badge>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-badge.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-badge.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "小圆点",
         "description": "",
         "code": "<template>\n<u-badge :value=\"3\" :dot=\"true\" :corner=\"true\"><u-text>消息</u-text></u-badge>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-badge.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-badge.vue/drawings/1.svg"
       }
     ],
     "themeVariables": []
@@ -8273,14 +8273,14 @@
         "concept": "EventDeclaration",
         "name": "beforeSelect",
         "title": "选择前",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n}) => void",
         "description": "选择某一页前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n}) => void",
         "description": "选择某一页时触发"
       },
       {
@@ -8334,7 +8334,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Display",
+        "group": "",
         "name": "UCarouselItem",
         "kebabName": "u-carousel-item",
         "title": "幻灯片选项",
@@ -8392,7 +8392,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-carousel style=\"width:100%\">\n    <template #item=\"current\"></template>\n</u-carousel>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-carousel.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -8492,7 +8492,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Display",
+        "group": "",
         "name": "UInfoListItem",
         "kebabName": "u-info-list-item",
         "title": "详情列表项",
@@ -8590,7 +8590,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Display",
+        "group": "",
         "name": "UInfoListGroup",
         "kebabName": "u-info-list-group",
         "title": "详情列表组",
@@ -8694,16 +8694,16 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-info-list>\n    <u-info-list-group>\n        <template #title><u-text text=\"基本信息\"></u-text></template>\n        <u-info-list-item><template #label><u-text text=\"名称\"></u-text></template><u-text text=\"张三\"></u-text></u-info-list-item>\n        <u-info-list-item><template #label><u-text text=\"ID\"></u-text></template><u-text text=\"152f36a3cfff4572a3a35\"></u-text></u-info-list-item>\n        <u-info-list-item><template #label><u-text text=\"创建时间\"></u-text></template><u-text text=\"2018-02-22\"></u-text></u-info-list-item>\n    </u-info-list-group>\n    <u-info-list-group>\n        <template #title><u-text text=\"基本信息\"></u-text></template>\n        <u-info-list-item><template #label><u-text text=\"名称\"></u-text></template><u-text text=\"张三\"></u-text></u-info-list-item>\n        <u-info-list-item><template #label><u-text text=\"ID\"></u-text></template><u-text text=\"152f36a3cfff4572a3a35\"></u-text></u-info-list-item>\n        <u-info-list-item><template #label><u-text text=\"创建时间\"></u-text></template><u-text text=\"2018-02-22\"></u-text></u-info-list-item>\n    </u-info-list-group>\n</u-info-list>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-info-list.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-info-list.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "额外插槽",
         "description": "对于一些操作项，可以使用`extra`插槽添加在详情列表组的右上角。\n",
         "code": "<template>\n<u-info-list>\n    <u-info-list-group>\n        <template #title><u-text text=\"基本信息\"></u-text></template>\n        <template #extra>\n            <u-link>设置</u-link>\n        </template>\n        <u-info-list-item><template #label><u-text text=\"名称\"></u-text></template><u-text text=\"张三\"></u-text></u-info-list-item>\n        <u-info-list-item><template #label><u-text text=\"ID\"></u-text></template><u-text text=\"152f36a3cfff4572a3a35\"></u-text></u-info-list-item>\n        <u-info-list-item><template #label><u-text text=\"创建时间\"></u-text></template><u-text text=\"2018-02-22\"></u-text></u-info-list-item>\n    </u-info-list-group>\n</u-info-list>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-info-list.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-info-list.vue/drawings/1.svg"
       }
     ],
     "themeVariables": []
@@ -8954,7 +8954,7 @@
         "title": "适应",
         "description": "",
         "code": "<template>\n<u-image src=\"https://static-vusion.163yun.com/assets/cloud-ui/1.jpg\" fit=\"contain\"></u-image>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-image/screenshots/3.png",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-image.vue/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -8962,7 +8962,7 @@
         "title": "适应（图片小于父元素时以原尺寸展示）",
         "description": "",
         "code": "<template>\n<u-image src=\"https://static-vusion.163yun.com/assets/cloud-ui/1.jpg\" fit=\"scale-down\"></u-image>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-image.vue/screenshots/1.png",
         "drawing": ""
       },
       {
@@ -8970,7 +8970,7 @@
         "title": "原尺寸",
         "description": "",
         "code": "<template>\n<u-image src=\"https://static-vusion.163yun.com/assets/cloud-ui/1.jpg\" fit=\"none\"></u-image>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-image.vue/screenshots/2.png",
         "drawing": ""
       },
       {
@@ -8978,7 +8978,7 @@
         "title": "拉伸",
         "description": "",
         "code": "<template>\n<u-image src=\"https://static-vusion.163yun.com/assets/cloud-ui/1.jpg\" fit=\"fill\"></u-image>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-image.vue/screenshots/3.png",
         "drawing": ""
       },
       {
@@ -8986,7 +8986,7 @@
         "title": "填充",
         "description": "",
         "code": "<template>\n<u-image src=\"https://static-vusion.163yun.com/assets/cloud-ui/1.jpg\" fit=\"cover\"></u-image>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-image.vue/screenshots/4.png",
         "drawing": ""
       }
     ],
@@ -9146,7 +9146,7 @@
         "description": "",
         "code": "<template>\n<u-alert type=\"info\"><template #title><u-text text=\"公告内容\"></u-text></template></u-alert>\n</template>\n",
         "screenshot": "",
-        "drawing": ""
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-alert.vue/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -9401,7 +9401,7 @@
         "title": "实线",
         "description": "",
         "code": "<template>\n<u-divider dashed=\"a\"><u-text text=\"文本\"></u-text></u-divider>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-divider.vue/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -9409,7 +9409,7 @@
         "title": "虚线",
         "description": "",
         "code": "<template>\n<u-divider dashed=\"b\"><u-text text=\"文本\"></u-text></u-divider>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-divider.vue/screenshots/1.png",
         "drawing": ""
       }
     ],
@@ -9511,7 +9511,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Display",
+        "group": "",
         "name": "UTimelineItem",
         "kebabName": "u-timeline-item",
         "title": "时间线项",
@@ -9599,7 +9599,7 @@
         "concept": "ViewBlockWithImage",
         "title": "普通用法",
         "description": "",
-        "code": "<template>\n<u-timeline :data-source=\"[{}, {}, {}]\">\n    <template #item=\"current\">\n        <u-timeline-item insource>\n            <template #label>\n            </template>\n        </u-timeline-item>\n    </template>\n</u-timeline>\n</template>\n",
+        "code": "<template>\n<u-timeline :dataSource=\"[{}, {}, {}]\">\n    <template #item=\"current\">\n        <u-timeline-item insource>\n            <template #label>\n            </template>\n        </u-timeline-item>\n    </template>\n</u-timeline>\n</template>\n",
         "screenshot": "",
         "drawing": ""
       }
@@ -10423,7 +10423,7 @@
         "concept": "EventDeclaration",
         "name": "beforeLoad",
         "title": "加载前",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "(event: null) => void",
         "description": "加载前触发"
       },
       {
@@ -10437,28 +10437,28 @@
         "concept": "EventDeclaration",
         "name": "beforePage",
         "title": "切换分页前",
-        "tsType": "(event: nasl.ui.PaginationEvent) => void",
+        "tsType": "(event: {\n  size: nasl.core.Integer;\n  oldSize: nasl.core.Integer;\n  number: nasl.core.Integer;\n  oldNumber: nasl.core.Integer;\n}) => void",
         "description": "切换分页前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "page",
         "title": "切换分页后",
-        "tsType": "(event: nasl.ui.PaginationEvent) => void",
+        "tsType": "(event: {\n  size: nasl.core.Integer;\n  oldSize: nasl.core.Integer;\n  number: nasl.core.Integer;\n  oldNumber: nasl.core.Integer;\n}) => void",
         "description": "切换分页或改变分页大小时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeSort",
         "title": "排序前",
-        "tsType": "(event: nasl.ui.SortEvent) => void",
+        "tsType": "(event: {\n  field: nasl.core.String;\n  order: nasl.core.String;\n  compare?: Function;\n}) => void",
         "description": "排序前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "sort",
         "title": "排序后",
-        "tsType": "(event: nasl.ui.SortEvent) => void",
+        "tsType": "(event: {\n  field: nasl.core.String;\n  order: nasl.core.String;\n  compare?: Function;\n}) => void",
         "description": "排序后触发"
       },
       {
@@ -10479,49 +10479,49 @@
         "concept": "EventDeclaration",
         "name": "clickRow",
         "title": "点击行",
-        "tsType": "(event: nasl.ui.OperatorItemEvent) => void",
+        "tsType": "(event: {\n  item: T;\n  index: nasl.core.Integer;\n  rowIndex: nasl.core.Integer;\n}) => void",
         "description": "点击某一行时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "dblclickRow",
         "title": "双击行",
-        "tsType": "(event: nasl.ui.OperatorItemEvent) => void",
+        "tsType": "(event: {\n  item: T;\n  index: nasl.core.Integer;\n  rowIndex: nasl.core.Integer;\n}) => void",
         "description": "双击某一行时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeSelect",
         "title": "选择前",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  oldValue: V;\n  item: T;\n  oldItem: T;\n}) => void",
         "description": "选择某一项前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "input",
         "title": "选择触发",
-        "tsType": "(event: any) => void",
+        "tsType": "(event: V) => void",
         "description": "选择某一项后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selectedItem: T;\n  value: V;\n  oldValue: V;\n  item: T;\n  oldItem: T;\n}) => void",
         "description": "选择某一项后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "check",
         "title": "多选后",
-        "tsType": "(event: nasl.ui.CheckedEvent) => void",
+        "tsType": "(event: {\n  checked: nasl.core.Boolean;\n  oldChecked: nasl.core.Boolean;\n  values: nasl.collection.List<V>;\n  oldValues: nasl.collection.List<V>;\n  item: T;\n}) => void",
         "description": "多选模式中，选中节点后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  oldValue: V;\n  item: T;\n  oldItem: T;\n  values: nasl.collection.List<V>;\n  oldValues: nasl.collection.List<V>;\n  items: nasl.collection.List<T>;\n}) => void",
         "description": "单选或多选值改变后触发"
       },
       {
@@ -10535,35 +10535,35 @@
         "concept": "EventDeclaration",
         "name": "beforeToggleExpanded",
         "title": "展开行前",
-        "tsType": "(event: nasl.ui.ExpandEvent) => void",
+        "tsType": "(event: {\n  item: T;\n  expanded: nasl.core.Boolean;\n  oldExpanded: nasl.core.Boolean;\n}) => void",
         "description": "点击展开按钮前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "toggleExpanded",
         "title": "展开行后",
-        "tsType": "(event: nasl.ui.ExpandEvent) => void",
+        "tsType": "(event: {\n  item: T;\n  expanded: nasl.core.Boolean;\n}) => void",
         "description": "点击展开按钮后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "dragstart",
         "title": "拖拽开始时",
-        "tsType": "(event: nasl.ui.DragAndDropEvent) => void",
+        "tsType": "(event: {\n  source: {\n    parent: T;\n    item: T;\n    level: nasl.core.Integer;\n    index: nasl.core.Integer;\n  };\n  target: {\n    parent: T;\n    item: T;\n    level: nasl.core.Integer;\n    index: nasl.core.Integer;\n  };\n  finalSource: {\n    parent: T;\n    item: T;\n    level: nasl.core.Integer;\n    index: nasl.core.Integer;\n  };\n  position: nasl.core.String;\n  updateData: {\n    sourceList: nasl.collection.List<T>;\n    targetList: nasl.collection.List<T>;\n  };\n}) => void",
         "description": "拖拽行时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "dragover",
         "title": "拖拽经过时",
-        "tsType": "(event: nasl.ui.DragAndDropEvent) => void",
+        "tsType": "(event: {\n  source: {\n    parent: T;\n    item: T;\n    level: nasl.core.Integer;\n    index: nasl.core.Integer;\n  };\n  target: {\n    parent: T;\n    item: T;\n    level: nasl.core.Integer;\n    index: nasl.core.Integer;\n  };\n  finalSource: {\n    parent: T;\n    item: T;\n    level: nasl.core.Integer;\n    index: nasl.core.Integer;\n  };\n  position: nasl.core.String;\n  updateData: {\n    sourceList: nasl.collection.List<T>;\n    targetList: nasl.collection.List<T>;\n  };\n}) => void",
         "description": "拖拽经过每一行时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "drop",
         "title": "拖拽放置时",
-        "tsType": "(event: nasl.ui.DragAndDropEvent) => void",
+        "tsType": "(event: {\n  source: {\n    parent: T;\n    item: T;\n    level: nasl.core.Integer;\n    index: nasl.core.Integer;\n  };\n  target: {\n    parent: T;\n    item: T;\n    level: nasl.core.Integer;\n    index: nasl.core.Integer;\n  };\n  finalSource: {\n    parent: T;\n    item: T;\n    level: nasl.core.Integer;\n    index: nasl.core.Integer;\n  };\n  position: nasl.core.String;\n  updateData: {\n    sourceList: nasl.collection.List<T>;\n    targetList: nasl.collection.List<T>;\n  };\n}) => void",
         "description": "拖拽结束时触发"
       }
     ],
@@ -10656,7 +10656,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Table",
+        "group": "",
         "name": "UTableViewColumn",
         "kebabName": "u-table-view-column",
         "title": "表格列",
@@ -10967,7 +10967,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Table",
+        "group": "",
         "name": "UTableViewColumnConfig",
         "kebabName": "u-table-view-column-config",
         "title": "表格配置列",
@@ -11058,7 +11058,7 @@
             "concept": "EventDeclaration",
             "name": "select",
             "title": "选择后",
-            "tsType": "(event: nasl.ui.ChangeItemEvent) => void"
+            "tsType": "(event: {\n  selectedItem: T;\n  value: V;\n  oldValue: V;\n  item: T;\n  oldItem: T;\n}) => void"
           }
         ],
         "methods": [],
@@ -11083,7 +11083,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Table",
+        "group": "",
         "name": "UTableViewColumnDynamic",
         "kebabName": "u-table-view-column-dynamic",
         "title": "表格动态列",
@@ -11249,7 +11249,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Table",
+        "group": "",
         "name": "UTableViewColumnGroup",
         "kebabName": "u-table-view-column-group",
         "title": "表格列分组",
@@ -11298,7 +11298,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Table",
+        "group": "",
         "name": "UTableViewExpander",
         "kebabName": "u-table-view-expander",
         "title": "展开列图标",
@@ -11345,8 +11345,8 @@
         "concept": "ViewBlockWithImage",
         "title": "普通数据表格",
         "description": "",
-        "code": "<template>\n<u-table-view :pagination=\"true\" :page-size=\"20\" :page-number=\"1\"></u-table-view>\n</template>\n",
-        "screenshot": "",
+        "code": "<template>\n<u-table-view :pagination=\"true\" :pageSize=\"20\" :pageNumber=\"1\"></u-table-view>\n</template>\n",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-table-view.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -11884,42 +11884,42 @@
         "concept": "EventDeclaration",
         "name": "beforeSelect",
         "title": "选择前",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: V;\n  oldValue: V;\n  items: nasl.collection.List<T>;\n  oldItems: nasl.collection.List<T>;\n}) => void",
         "description": "选择某一项前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "input",
         "title": "选择时",
-        "tsType": "(event: String) => void",
+        "tsType": "(event: V) => void",
         "description": "选择某一项时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: V;\n  oldValue: V;\n  items: nasl.collection.List<T>;\n  oldItems: nasl.collection.List<T>;\n}) => void",
         "description": "选择某一项时触发。单选模式中："
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: V;\n  oldValue: V;\n  items: nasl.collection.List<T>;\n  oldItems: nasl.collection.List<T>;\n}) => void",
         "description": "选择值改变时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeLoad",
         "title": "加载前",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "() => void",
         "description": "加载前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "load",
         "title": "加载后",
-        "tsType": "(event: nasl.ui.BaseEvent) => void",
+        "tsType": "() => void",
         "description": "加载时触发"
       }
     ],
@@ -11956,8 +11956,8 @@
         "concept": "ViewBlockWithImage",
         "title": "基本用法",
         "description": "",
-        "code": "<template>\n<u-list-view :page-number=\"1\" :page-size=\"50\"></u-list-view>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-list-view/screenshots/3.png",
+        "code": "<template>\n<u-list-view :pageNumber=\"1\" :pageSize=\"50\"></u-list-view>\n</template>\n",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-list-view.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -12469,28 +12469,28 @@
         "concept": "EventDeclaration",
         "name": "beforeSelect",
         "title": "选择前",
-        "tsType": "() => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: V;\n  oldValue: V;\n  items: nasl.collection.List<T>;\n  oldItems: nasl.collection.List<T>;\n}) => void",
         "description": "选择某一项前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "input",
         "title": "选择时",
-        "tsType": "(event: any) => void",
+        "tsType": "(event: V) => void",
         "description": "选择某一项时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "() => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: V;\n  oldValue: V;\n  items: nasl.collection.List<T>;\n  oldItems: nasl.collection.List<T>;\n}) => void",
         "description": "选择某一项时触发。单选模式中："
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "() => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: V;\n  oldValue: V;\n  items: nasl.collection.List<T>;\n  oldItems: nasl.collection.List<T>;\n}) => void",
         "description": "选择值改变时触发。单选模式中："
       },
       {
@@ -12504,7 +12504,7 @@
         "concept": "EventDeclaration",
         "name": "load",
         "title": "加载后",
-        "tsType": "(event: nasl.ui.BaseEvent) => void",
+        "tsType": "() => void",
         "description": "加载时触发"
       }
     ],
@@ -12541,9 +12541,9 @@
         "concept": "ViewBlockWithImage",
         "title": "普通数据网格",
         "description": "",
-        "code": "<template>\n<u-grid-view style=\"height:auto\" :page-number=\"1\" :page-size=\"50\"></u-grid-view>\n</template>\n",
+        "code": "<template>\n<u-grid-view style=\"height:auto\" :pageNumber=\"1\" :pageSize=\"50\"></u-grid-view>\n</template>\n",
         "screenshot": "",
-        "drawing": ""
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-grid-view.vue/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -12722,21 +12722,21 @@
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "() => void",
+        "tsType": "(event: {\n  date: nasl.core.Integer;\n  timestamp: nasl.core.Integer;\n  value: nasl.core.String | nasl.core.Date;\n  oldValue: nasl.core.String | nasl.core.Date;\n  week: nasl.core.Integer;\n}) => void",
         "description": "选择某一个日期时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "() => void",
+        "tsType": "(event: {\n  date: nasl.core.Integer;\n  timestamp: nasl.core.Integer;\n  week: nasl.core.Integer;\n}) => void",
         "description": "日期改变时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeLoad",
         "title": "加载前",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "(event: null) => void",
         "description": "加载前触发"
       },
       {
@@ -12773,7 +12773,7 @@
         "title": "普通日历",
         "description": "",
         "code": "<template>\n<u-calendar-view>\n    <template #default=\"current\">\n        <u-linear-layout gap=\"small\"></u-linear-layout>\n    </template>\n</u-calendar-view>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-calendar-view.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -12857,7 +12857,7 @@
         "description": "",
         "code": "<template>\n<u-list-components>\n  <template #default=\"current\">\n  </template>\n</u-list-components>\n</template>\n",
         "screenshot": "",
-        "drawing": ""
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-list-components.vue/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -13148,7 +13148,7 @@
         "concept": "EventDeclaration",
         "name": "validate",
         "title": "验证后",
-        "tsType": "(event: nasl.ui.ValidateEvent) => void",
+        "tsType": "(event: {\n  rawValue: nasl.core.String;\n  value: nasl.core.String;\n  trigger: nasl.core.String;\n  muted: nasl.core.String;\n  valid: nasl.core.Boolean;\n  touched: nasl.core.Boolean;\n  dirty: nasl.core.Boolean;\n  firstError: nasl.core.String;\n  triggerValid: nasl.core.Boolean;\n}) => void",
         "description": "验证时触发"
       }
     ],
@@ -13193,7 +13193,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Form",
+        "group": "",
         "name": "UFormItem",
         "kebabName": "u-form-item",
         "title": "表单项",
@@ -13527,7 +13527,7 @@
             "concept": "EventDeclaration",
             "name": "validate",
             "title": "验证后",
-            "tsType": "() => void",
+            "tsType": "(event: {\n  rawValue: nasl.core.String;\n  value: nasl.core.String;\n  trigger: nasl.core.String;\n  muted: nasl.core.String;\n  valid: nasl.core.Boolean;\n  touched: nasl.core.Boolean;\n  dirty: nasl.core.Boolean;\n  firstError: nasl.core.String;\n  triggerValid: nasl.core.Boolean;\n}) => void",
             "description": "对于第一个 Field 或者所有子 UValidator："
           }
         ],
@@ -13577,7 +13577,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Form",
+        "group": "",
         "name": "UFormGroup",
         "kebabName": "u-form-group",
         "title": "表单分组",
@@ -13689,14 +13689,14 @@
             "concept": "EventDeclaration",
             "name": "beforeToggle",
             "title": "展开折叠前",
-            "tsType": "(event: nasl.ui.CollapseEvent) => void",
+            "tsType": "(event: {\n  expanded: nasl.core.Boolean;\n}) => void",
             "description": "展开/折叠此分组前触发"
           },
           {
             "concept": "EventDeclaration",
             "name": "toggle",
             "title": "展开折叠后",
-            "tsType": "(event: nasl.ui.CollapseEvent) => void",
+            "tsType": "(event: {\n  expanded: nasl.core.Boolean;\n}) => void",
             "description": "展开/折叠某分组时触发"
           }
         ],
@@ -13741,24 +13741,24 @@
         "title": "基础表单",
         "description": "",
         "code": "<template>\n<u-form\n    ><u-form-item required layout=\"center\">\n        <template #label><u-text text=\"名称\"></u-text></template>\n        <u-input placeholder=\"由字母、数字和中划线组成\"></u-input>\n    </u-form-item\n    ><u-form-item required layout=\"center\">\n        <template #label><u-text text=\"类型\"></u-text></template>\n        <u-radios>\n            <u-radio label=\"A\"><template #item><u-text text=\"类型 A\"></u-text></template></u-radio>\n            <u-radio label=\"B\"><template #item><u-text text=\"类型 B\"></u-text></template></u-radio>\n        </u-radios>\n    </u-form-item\n    ><u-form-item layout=\"center\">\n        <u-button color=\"primary\">立即创建</u-button>\n    </u-form-item\n></u-form>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-form/screenshots/3.png",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-form.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-form.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "行内表单",
         "description": "",
         "code": "<template>\n<u-form layout=\"inline\">\n    <u-form-item layout=\"center\">\n        <template #label><u-text text=\"名称\"></u-text></template>\n        <u-input placeholder=\"请输入名称\"></u-input>\n    </u-form-item>\n    <u-form-item layout=\"center\">\n        <u-button color=\"primary\">查 询</u-button>\n    </u-form-item\n></u-form>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-form.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-form.vue/drawings/1.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "折叠分组",
         "description": "",
         "code": "<template>\n<u-form layout=\"inline\" collapsible\n    ><u-form-group expanded\n        ><template #title><u-text text=\"常用条件\"></u-text></template><u-form-item layout=\"center\">\n            <template #label><u-text text=\"名称\"></u-text></template>\n            <u-input placeholder=\"请输入名称\"></u-input>\n        </u-form-item\n        ><u-form-item layout=\"center\">\n            <template #label><u-text text=\"状态\"></u-text></template>\n            <u-select>\n                <u-select-item><u-text text=\"启用\"></u-text></u-select-item>\n                <u-select-item><u-text text=\"禁用\"></u-text></u-select-item>\n            </u-select>\n        </u-form-item\n    ></u-form-group\n    ><u-form-group expanded\n        ><template #title><u-text text=\"更多条件\"></u-text></template><u-form-item layout=\"center\">\n            <template #label><u-text text=\"名称\"></u-text></template>\n            <u-input placeholder=\"请输入名称\"></u-input>\n        </u-form-item\n        ><u-form-item layout=\"center\">\n            <template #label><u-text text=\"状态\"></u-text></template>\n            <u-select>\n                <u-select-item><u-text text=\"启用\"></u-text></u-select-item>\n                <u-select-item><u-text text=\"禁用\"></u-text></u-select-item>\n            </u-select>\n        </u-form-item\n    ></u-form-group\n></u-form>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-form.vue/screenshots/2.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-form.vue/drawings/2.svg"
       }
     ],
     "themeVariables": []
@@ -14047,77 +14047,77 @@
         "concept": "EventDeclaration",
         "name": "beforeInput",
         "title": "输入前",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n}) => void",
         "description": "输入前触发。可以在这个阶段阻止输入，或者修改输入的值 $event.value"
       },
       {
         "concept": "EventDeclaration",
         "name": "input",
         "title": "输入时",
-        "tsType": "(event: string) => void",
+        "tsType": "(event: nasl.core.String) => void",
         "description": "输入时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n}) => void",
         "description": "值变化时触发。（注意：与原生事件不同）"
       },
       {
         "concept": "EventDeclaration",
         "name": "focus",
         "title": "获得焦点",
-        "tsType": "(event: nasl.ui.FocusEvent) => void",
+        "tsType": "(event: {\n  cancelBubble: nasl.core.Boolean;\n  detail: nasl.core.String;\n  layerX: nasl.core.Integer;\n  layerY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "获得焦点时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "blur",
         "title": "失去焦点",
-        "tsType": "(event: nasl.ui.FocusEvent) => void",
+        "tsType": "(event: {\n  cancelBubble: nasl.core.Boolean;\n  detail: nasl.core.String;\n  layerX: nasl.core.Integer;\n  layerY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "失去焦点时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeClear",
         "title": "清空前",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n}) => void",
         "description": "清空前触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "clear",
         "title": "清空后",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n}) => void",
         "description": "清空后触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "clickPrefix",
         "title": "点击前缀图标",
-        "tsType": "(event: nasl.ui.MouseEvent) => void",
+        "tsType": "(event: {\n  altKey: nasl.core.Boolean;\n  button: nasl.core.Integer;\n  clientX: nasl.core.Integer;\n  clientY: nasl.core.Integer;\n  ctrlKey: nasl.core.Boolean;\n  metaKey: nasl.core.Boolean;\n  movementX: nasl.core.Integer;\n  movementY: nasl.core.Integer;\n  offsetX: nasl.core.Integer;\n  offsetY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  screenX: nasl.core.Integer;\n  screenY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "点击前缀图标后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "clickSuffix",
         "title": "点击后缀图标",
-        "tsType": "(event: nasl.ui.MouseEvent) => void",
+        "tsType": "(event: {\n  altKey: nasl.core.Boolean;\n  button: nasl.core.Integer;\n  clientX: nasl.core.Integer;\n  clientY: nasl.core.Integer;\n  ctrlKey: nasl.core.Boolean;\n  metaKey: nasl.core.Boolean;\n  movementX: nasl.core.Integer;\n  movementY: nasl.core.Integer;\n  offsetX: nasl.core.Integer;\n  offsetY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  screenX: nasl.core.Integer;\n  screenY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "点击后缀图标后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "keydown",
         "title": "键盘按下",
-        "tsType": "(event: nasl.ui.KeyboardEvent) => void",
+        "tsType": "(event: {\n  altKey: nasl.core.Boolean;\n  code: nasl.core.String;\n  ctrlKey: nasl.core.Boolean;\n  isComposing: nasl.core.Boolean;\n  key: nasl.core.String;\n  metaKey: nasl.core.Boolean;\n  repeat: nasl.core.Boolean;\n  shiftKey: nasl.core.Boolean;\n}) => void",
         "description": "键盘按键按下时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "keyup",
         "title": "键盘松开",
-        "tsType": "(event: nasl.ui.KeyboardEvent) => void",
+        "tsType": "(event: {\n  altKey: nasl.core.Boolean;\n  code: nasl.core.String;\n  ctrlKey: nasl.core.Boolean;\n  isComposing: nasl.core.Boolean;\n  key: nasl.core.String;\n  metaKey: nasl.core.Boolean;\n  repeat: nasl.core.Boolean;\n  shiftKey: nasl.core.Boolean;\n}) => void",
         "description": "键盘按键松开时触发"
       }
     ],
@@ -14163,7 +14163,7 @@
         "title": "",
         "description": "",
         "code": "<template>\n<u-input placeholder=\"请输入\"></u-input>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-input/screenshots/0.png",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-input.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -14497,42 +14497,42 @@
         "concept": "EventDeclaration",
         "name": "validate",
         "title": "验证时",
-        "tsType": "(event: nasl.ui.ValidateEvent) => void",
+        "tsType": "(event: {\n  trigger: nasl.core.String;\n  valid: nasl.core.Boolean;\n  triggerValid: nasl.core.Boolean;\n  touched: nasl.core.Boolean;\n  dirty: nasl.core.Boolean;\n  firstError: nasl.core.String;\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n}) => void",
         "description": "输入验证时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.Decimal;\n  oldValue: nasl.core.Decimal;\n  formattedValue: nasl.core.String;\n  valid: nasl.core.Boolean;\n}) => void",
         "description": "值变化时触发（与原生事件不同）"
       },
       {
         "concept": "EventDeclaration",
         "name": "focus",
         "title": "聚焦后",
-        "tsType": "(event: nasl.ui.FocusEvent) => void",
+        "tsType": "(event: {\n  cancelBubble: nasl.core.Boolean;\n  detail: nasl.core.String;\n  layerX: nasl.core.Integer;\n  layerY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "获得焦点时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "blur",
         "title": "失焦后",
-        "tsType": "(event: nasl.ui.FocusEvent) => void",
+        "tsType": "(event: {\n  cancelBubble: nasl.core.Boolean;\n  detail: nasl.core.String;\n  layerX: nasl.core.Integer;\n  layerY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "失去焦点时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "keydown",
         "title": "键盘按下",
-        "tsType": "(event: nasl.ui.KeyboardEvent) => void",
+        "tsType": "(event: {\n  altKey: nasl.core.Boolean;\n  code: nasl.core.String;\n  ctrlKey: nasl.core.Boolean;\n  isComposing: nasl.core.Boolean;\n  key: nasl.core.String;\n  metaKey: nasl.core.Boolean;\n  repeat: nasl.core.Boolean;\n  shiftKey: nasl.core.Boolean;\n}) => void",
         "description": "键盘按键按下时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "keyup",
         "title": "键盘松开",
-        "tsType": "(event: nasl.ui.KeyboardEvent) => void",
+        "tsType": "(event: {\n  altKey: nasl.core.Boolean;\n  code: nasl.core.String;\n  ctrlKey: nasl.core.Boolean;\n  isComposing: nasl.core.Boolean;\n  key: nasl.core.String;\n  metaKey: nasl.core.Boolean;\n  repeat: nasl.core.Boolean;\n  shiftKey: nasl.core.Boolean;\n}) => void",
         "description": "键盘按键松开时触发"
       }
     ],
@@ -14553,15 +14553,15 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-number-input></u-number-input>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-number-input.vue/screenshots/0.png",
         "drawing": ""
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "按钮样式",
         "description": "",
-        "code": "<template>\n<u-number-input button-display=\"bothEnds\"></u-number-input>\n</template>\n",
-        "screenshot": "",
+        "code": "<template>\n<u-number-input buttonDisplay=\"bothEnds\"></u-number-input>\n</template>\n",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-number-input.vue/screenshots/1.png",
         "drawing": ""
       }
     ],
@@ -14820,49 +14820,49 @@
         "concept": "EventDeclaration",
         "name": "beforeInput",
         "title": "输入前",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n}) => void",
         "description": "输入前触发。可以在这个阶段阻止输入，或者修改输入的值 $event.value"
       },
       {
         "concept": "EventDeclaration",
         "name": "input",
         "title": "输入时",
-        "tsType": "(event: String) => void",
+        "tsType": "(event: nasl.core.String) => void",
         "description": "输入时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n}) => void",
         "description": "值变化时触发。（注意：与原生事件不同）"
       },
       {
         "concept": "EventDeclaration",
         "name": "focus",
         "title": "聚焦后",
-        "tsType": "(event: nasl.ui.FocusEvent) => void",
+        "tsType": "(event: {\n  cancelBubble: nasl.core.Boolean;\n  detail: nasl.core.String;\n  layerX: nasl.core.Integer;\n  layerY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "获得焦点时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "blur",
         "title": "失焦后",
-        "tsType": "(event: nasl.ui.FocusEvent) => void",
+        "tsType": "(event: {\n  cancelBubble: nasl.core.Boolean;\n  detail: nasl.core.String;\n  layerX: nasl.core.Integer;\n  layerY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "失去焦点时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeClear",
         "title": "清空前",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n}) => void",
         "description": "清空前触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "clear",
         "title": "清空后",
-        "tsType": "() => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n}) => void",
         "description": "清空时触发。"
       }
     ],
@@ -14907,8 +14907,8 @@
         "concept": "ViewBlockWithImage",
         "title": "基本用法",
         "description": "大部分属性与`<textarea>`元素一致。\n",
-        "code": "<template>\n<u-textarea placeholder=\"请输入\" limit-position=\"outside\"></u-textarea>\n</template>\n",
-        "screenshot": "",
+        "code": "<template>\n<u-textarea placeholder=\"请输入\" limitPosition=\"outside\"></u-textarea>\n</template>\n",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-textarea.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -15019,7 +15019,7 @@
         "concept": "EventDeclaration",
         "name": "beforeSelect",
         "title": "选择前",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  oldValue: V;\n}) => void",
         "description": "选择某一项前触发"
       },
       {
@@ -15040,21 +15040,21 @@
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  oldValue: V;\n}) => void",
         "description": "选择值改变时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeLoad",
         "title": "加载前",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "() => void",
         "description": "加载前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "load",
         "title": "加载后",
-        "tsType": "(event: null) => void",
+        "tsType": "() => void",
         "description": "加载后触发"
       }
     ],
@@ -15094,7 +15094,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Form",
+        "group": "",
         "name": "URadio",
         "kebabName": "u-radio",
         "title": "单选项",
@@ -15166,7 +15166,7 @@
             "concept": "EventDeclaration",
             "name": "beforeSelect",
             "title": "选择前",
-            "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+            "tsType": "(event: {\n  value: V;\n  oldValue: V;\n}) => void",
             "description": "选择此项前触发"
           }
         ],
@@ -15183,7 +15183,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-radios>\n    <template #item=\"current\"></template>\n</u-radios>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-radios.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -15260,42 +15260,42 @@
         "concept": "EventDeclaration",
         "name": "beforeToggle",
         "title": "切换状态前",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.Boolean;\n  oldValue: nasl.core.Boolean;\n}) => void",
         "description": "切换开关状态前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "input",
         "title": "输入时",
-        "tsType": "(event: Boolean) => void",
+        "tsType": "(event: nasl.core.Boolean) => void",
         "description": "切换开关状态时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "on",
         "title": "打开时",
-        "tsType": "(event: Boolean) => void",
+        "tsType": "() => void",
         "description": "开关打开时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "off",
         "title": "关闭时",
-        "tsType": "(event: Boolean) => void",
+        "tsType": "() => void",
         "description": "开关关闭时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "toggle",
         "title": "切换状态后",
-        "tsType": "(event: nasl.ui.CollapseEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.Boolean;\n  oldValue: nasl.core.Boolean;\n}) => void",
         "description": "切换开关状态时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.CollapseEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.Boolean;\n  oldValue: nasl.core.Boolean;\n}) => void",
         "description": "开关状态改变时触发"
       }
     ],
@@ -15308,7 +15308,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-switch></u-switch>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-switch.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -15540,14 +15540,14 @@
         "concept": "EventDeclaration",
         "name": "check",
         "title": "选中后",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.collection.List<V> | nasl.core.String;\n  oldValue: nasl.collection.List<V> | nasl.core.String;\n}) => void",
         "description": "切换选项时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.collection.List<V> | nasl.core.String;\n  oldValue: nasl.collection.List<V> | nasl.core.String;\n}) => void",
         "description": "选中状态改变时触发"
       },
       {
@@ -15561,7 +15561,7 @@
         "concept": "EventDeclaration",
         "name": "load",
         "title": "加载后",
-        "tsType": "(event: nasl.ui.BaseEvent) => void",
+        "tsType": "() => void",
         "description": "加载后触发"
       }
     ],
@@ -15614,7 +15614,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Form",
+        "group": "",
         "name": "UCheckbox",
         "kebabName": "u-checkbox",
         "title": "多选项",
@@ -15695,28 +15695,28 @@
             "concept": "EventDeclaration",
             "name": "beforeCheck",
             "title": "选中前",
-            "tsType": "(event: nasl.ui.ChangeEvent) => void",
+            "tsType": "(event: {\n  value: nasl.core.Boolean;\n  oldValue: nasl.core.Boolean;\n}) => void",
             "description": "切换选中状态前触发"
           },
           {
             "concept": "EventDeclaration",
             "name": "input",
             "title": "输入时",
-            "tsType": "(event: Boolean) => void",
+            "tsType": "(event: V) => void",
             "description": "切换选中状态时触发"
           },
           {
             "concept": "EventDeclaration",
             "name": "check",
             "title": "选中后",
-            "tsType": "(event: nasl.ui.ChangeEvent) => void",
+            "tsType": "(event: {\n  value: V;\n}) => void",
             "description": "切换选中状态时触发"
           },
           {
             "concept": "EventDeclaration",
             "name": "change",
             "title": "改变后",
-            "tsType": "(event: nasl.ui.ChangeEvent) => void",
+            "tsType": "(event: {\n  value: V;\n  oldValue: V;\n}) => void",
             "description": "选中状态改变时触发"
           }
         ],
@@ -15733,7 +15733,7 @@
         "title": "基础用法",
         "description": "",
         "code": "<template>\n<u-checkboxes>\n    <template #item=\"current\"></template>\n</u-checkboxes>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-checkboxes.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -15833,28 +15833,28 @@
         "concept": "EventDeclaration",
         "name": "beforeSelect",
         "title": "选择前",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: nasl.core.String;\n  oldItem: nasl.core.String;\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n  items: nasl.collection.List<nasl.core.String>;\n  oldItems: nasl.collection.List<nasl.core.String>;\n}) => void",
         "description": "选择某一项前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "input",
         "title": "输入时",
-        "tsType": "(event: String) => void",
+        "tsType": "(event: nasl.core.String) => void",
         "description": "选择某一项时触发，仅在单选模式中生效"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: nasl.core.String;\n  oldItem: nasl.core.String;\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n  items: nasl.collection.List<nasl.core.String>;\n  oldItems: nasl.collection.List<nasl.core.String>;\n}) => void",
         "description": "选择某一项时触发。单选模式中："
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: nasl.core.String;\n  oldItem: nasl.core.String;\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n  items: nasl.collection.List<nasl.core.String>;\n  oldItems: nasl.collection.List<nasl.core.String>;\n}) => void",
         "description": "选择值改变时触发。单选模式中："
       }
     ],
@@ -15877,7 +15877,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Form",
+        "group": "",
         "name": "UCapsule",
         "kebabName": "u-capsule",
         "title": "子选项",
@@ -15970,14 +15970,14 @@
             "concept": "EventDeclaration",
             "name": "click",
             "title": "点击",
-            "tsType": "(event: nasl.ui.MouseEvent) => void",
+            "tsType": "(event: {\n  altKey: nasl.core.Boolean;\n  button: nasl.core.Integer;\n  clientX: nasl.core.Integer;\n  clientY: nasl.core.Integer;\n  ctrlKey: nasl.core.Boolean;\n  metaKey: nasl.core.Boolean;\n  movementX: nasl.core.Integer;\n  movementY: nasl.core.Integer;\n  offsetX: nasl.core.Integer;\n  offsetY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  screenX: nasl.core.Integer;\n  screenY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
             "description": "点击此项时触发，与原生 click 事件不同的是，它只会在非只读和禁用的情况下触发。"
           },
           {
             "concept": "EventDeclaration",
             "name": "beforeSelect",
             "title": "选择前",
-            "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+            "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: nasl.core.String;\n  oldItem: nasl.core.String;\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n  items: nasl.collection.List<nasl.core.String>;\n  oldItems: nasl.collection.List<nasl.core.String>;\n}) => void",
             "description": "选择此项前触发"
           }
         ],
@@ -15997,7 +15997,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Form",
+        "group": "",
         "name": "UCapsulesGroup",
         "kebabName": "u-capsules-group",
         "title": "子选项组",
@@ -16034,24 +16034,24 @@
         "title": "基础用法",
         "description": "",
         "code": "<template>\n<u-capsules>\n    <u-capsule>Option-A</u-capsule>\n    <u-capsule>Option-B</u-capsule>\n    <u-capsule>Option-C</u-capsule>\n</u-capsules>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-capsules.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-capsules.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "胶囊组",
         "description": "",
         "code": "<template>\n<u-capsules>\n    <u-capsules-group>\n        <u-capsule>Option-A</u-capsule>\n        <u-capsule>Option-B</u-capsule>\n    </u-capsules-group>\n    <u-capsules-group>\n        <u-capsule>Option-A</u-capsule>\n        <u-capsule>Option-B</u-capsule>\n    </u-capsules-group>\n</u-capsules>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-capsules.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-capsules.vue/drawings/1.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "标签",
         "description": "",
         "code": "<template>\n<u-capsules>\n    <u-capsule value=\"1\">1</u-capsule>\n    <u-capsule value=\"2\">2</u-capsule>\n    <u-capsule value=\"3\">3</u-capsule>\n    <u-capsule value=\"4\" label=\"88折\">4</u-capsule>\n    <u-capsule value=\"5\" label=\"88折\">5</u-capsule>\n    <u-capsule value=\"6\" label=\"88折\">6</u-capsule>\n</u-capsules>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-capsules.vue/screenshots/2.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-capsules.vue/drawings/2.svg"
       }
     ],
     "themeVariables": []
@@ -16184,7 +16184,7 @@
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "() => void",
+        "tsType": "(event: {\n  value: nasl.core.Decimal;\n  oldValue: nasl.core.Decimal;\n}) => void",
         "description": "修改时触发"
       }
     ],
@@ -16197,7 +16197,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-rate></u-rate>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-rate.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -16412,35 +16412,35 @@
         "concept": "EventDeclaration",
         "name": "input",
         "title": "值改变时",
-        "tsType": "(event: Integer) => void",
+        "tsType": "(event: nasl.core.Decimal) => void",
         "description": "滑块的值改变时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "slide",
         "title": "拖动滑块时",
-        "tsType": "(event: nasl.ui.SliderEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.Decimal;\n  oldValue: nasl.core.Decimal;\n  percent: nasl.core.Decimal;\n  index: nasl.core.Decimal;\n}) => void",
         "description": "拖动滑块时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "值改变后",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.Decimal;\n  oldValue: nasl.core.Decimal;\n}) => void",
         "description": "滑块的值改变后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "numberInput",
         "title": "改变数字输入框的值后",
-        "tsType": "() => void",
+        "tsType": "(event: nasl.core.Decimal) => void",
         "description": "改变数字输入框的值后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "slideEnd",
         "title": "拖动滑块结束后",
-        "tsType": "() => void",
+        "tsType": "(event: nasl.core.Decimal) => void",
         "description": "拖动滑块结束后触发"
       }
     ],
@@ -16453,7 +16453,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-combo-slider></u-combo-slider>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-combo-slider.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -17102,49 +17102,49 @@
         "concept": "EventDeclaration",
         "name": "beforeUpload",
         "title": "上传前",
-        "tsType": "(event: nasl.ui.UploadEvent) => void",
+        "tsType": "(event: {\n  file: File;\n}) => void",
         "description": "上传前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "progress",
         "title": "进度改变时",
-        "tsType": "(event: nasl.ui.UploadEvent) => void",
+        "tsType": "(event: {\n  item: {\n    name: nasl.core.String;\n    status: nasl.core.String;\n    url: nasl.core.String;\n  };\n  file: File;\n}) => void",
         "description": "发送进度改变时触发，在上传进度条时使用"
       },
       {
         "concept": "EventDeclaration",
         "name": "countExceed",
         "title": "文件数量超额",
-        "tsType": "(event: nasl.ui.UploadErrorEvent) => void",
+        "tsType": "(event: {\n  item: {\n    name: nasl.core.String;\n    status: nasl.core.String;\n    url: nasl.core.String;\n  };\n  file: File;\n}) => void",
         "description": "文件数量超额时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "sizeExceed",
         "title": "文件大小超额",
-        "tsType": "(event: nasl.ui.UploadErrorEvent) => void",
+        "tsType": "(event: {\n  maxSize: nasl.core.Decimal;\n  size: nasl.core.Decimal;\n  message: nasl.core.String;\n  name: nasl.core.String;\n  file: File;\n}) => void",
         "description": "文件大小超额时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "success",
         "title": "上传成功时",
-        "tsType": "(event: nasl.ui.UploadEvent) => void",
+        "tsType": "(event: {\n  item: {\n    name: nasl.core.String;\n    status: nasl.core.String;\n    url: nasl.core.String;\n  };\n  file: File;\n}) => void",
         "description": "上传成功时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "error",
         "title": "上传错误时",
-        "tsType": "(event: nasl.ui.UploadErrorEvent) => void",
+        "tsType": "(event: {\n  item: {\n    name: nasl.core.String;\n    status: nasl.core.String;\n    url: nasl.core.String;\n  };\n  file: File;\n}) => void",
         "description": "上传报错时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "remove",
         "title": "删除时",
-        "tsType": "(event: nasl.ui.OperatorItemEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n  item: {\n    name: nasl.core.String;\n    status: nasl.core.String;\n    url: nasl.core.String;\n  };\n  index: nasl.core.Integer;\n}) => void",
         "description": "点击删除按钮时触发"
       }
     ],
@@ -17180,25 +17180,25 @@
         "concept": "ViewBlockWithImage",
         "title": "单个文件按钮",
         "description": "下面的例子为单文件上传。\n",
-        "code": "<template>\n<u-uploader display=\"inline\"\n    url=\"/upload\" url-field=\"filePath\"\n    :limit=\"999\"\n    max-size=\"50MB\"\n    converter=\"json\">\n    <u-button color=\"primary\" icon=\"upload\">上传</u-button>\n    <template #file-list>\n        <i-ico style=\"margin: 0px 8px 0px 0px;\" flag=\"file-icon\" name=\"file-default\" icotype=\"only\"></i-ico>\n        <u-text style=\"margin: 0px 8px 0px 0px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inherit;\" flag=\"file-name\" text=\"文件名称\"></u-text>\n        <u-text style=\"margin: 0px 8px 0px 0px;\" flag=\"file-size\" text=\"文件大小\"></u-text>\n        <i-ico style=\"margin: 0px 8px 0px 0px;\" flag=\"download-icon\" name=\"download\" icotype=\"only\"></i-ico>\n    </template>\n</u-uploader>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "code": "<template>\n<u-uploader display=\"inline\"\n    url=\"/upload\" urlField=\"filePath\"\n    :limit=\"999\"\n    maxSize=\"50MB\"\n    converter=\"json\">\n    <u-button color=\"primary\" icon=\"upload\">上传</u-button>\n    <template #file-list>\n        <i-ico style=\"margin: 0px 8px 0px 0px;\" flag=\"file-icon\" name=\"file-default\" icotype=\"only\"></i-ico>\n        <u-text style=\"margin: 0px 8px 0px 0px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inherit;\" flag=\"file-name\" text=\"文件名称\"></u-text>\n        <u-text style=\"margin: 0px 8px 0px 0px;\" flag=\"file-size\" text=\"文件大小\"></u-text>\n        <i-ico style=\"margin: 0px 8px 0px 0px;\" flag=\"download-icon\" name=\"download\" icotype=\"only\"></i-ico>\n    </template>\n</u-uploader>\n</template>\n",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-uploader.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-uploader.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "单文件卡片",
         "description": "不使用`multiple`属性时，仅会显示一个卡片。可以用于头像上传、身份证上传等场景。\n",
-        "code": "<template>\n<u-uploader list-type=\"card\"\n    accept=\".png,.jpg,.jpeg,.gif,.bmp\"\n    url=\"/upload\" url-field=\"filePath\"\n    :limit=\"999\"\n    max-size=\"50MB\"\n    converter=\"json\">\n    <template #file-list>\n        <i-ico style=\"margin: 0px 8px 0px 0px;\" flag=\"file-icon\" name=\"file-default\" icotype=\"only\"></i-ico>\n        <u-text style=\"margin: 0px 8px 0px 0px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inherit;\" flag=\"file-name\" text=\"文件名称\"></u-text>\n        <u-text style=\"margin: 0px 8px 0px 0px;\" flag=\"file-size\" text=\"文件大小\"></u-text>\n        <i-ico style=\"margin: 0px 8px 0px 0px;\" flag=\"download-icon\" name=\"download\" icotype=\"only\"></i-ico>\n    </template>\n</u-uploader>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "code": "<template>\n<u-uploader list-type=\"card\"\n    accept=\".png,.jpg,.jpeg,.gif,.bmp\"\n    url=\"/upload\" urlField=\"filePath\"\n    :limit=\"999\"\n    maxSize=\"50MB\"\n    converter=\"json\">\n    <template #file-list>\n        <i-ico style=\"margin: 0px 8px 0px 0px;\" flag=\"file-icon\" name=\"file-default\" icotype=\"only\"></i-ico>\n        <u-text style=\"margin: 0px 8px 0px 0px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inherit;\" flag=\"file-name\" text=\"文件名称\"></u-text>\n        <u-text style=\"margin: 0px 8px 0px 0px;\" flag=\"file-size\" text=\"文件大小\"></u-text>\n        <i-ico style=\"margin: 0px 8px 0px 0px;\" flag=\"download-icon\" name=\"download\" icotype=\"only\"></i-ico>\n    </template>\n</u-uploader>\n</template>\n",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-uploader.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-uploader.vue/drawings/1.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "多图片按钮",
         "description": "",
-        "code": "<template>\n<u-uploader multiple list-type=\"image\"\n    accept=\".png,.jpg,.jpeg,.gif,.bmp\"\n    url=\"/upload\" url-field=\"filePath\"\n    :limit=\"999\"\n    max-size=\"50MB\"\n    converter=\"json\">\n    <u-button color=\"primary\" icon=\"upload\">上传</u-button>\n    <template #file-list>\n        <i-ico style=\"margin: 0px 8px 0px 0px;\" flag=\"file-icon\" name=\"file-default\" icotype=\"only\"></i-ico>\n        <u-text style=\"margin: 0px 8px 0px 0px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inherit;\" flag=\"file-name\" text=\"文件名称\"></u-text>\n        <u-text style=\"margin: 0px 8px 0px 0px;\" flag=\"file-size\" text=\"文件大小\"></u-text>\n        <i-ico style=\"margin: 0px 8px 0px 0px;\" flag=\"download-icon\" name=\"download\" icotype=\"only\"></i-ico>\n    </template>\n</u-uploader>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "code": "<template>\n<u-uploader multiple list-type=\"image\"\n    accept=\".png,.jpg,.jpeg,.gif,.bmp\"\n    url=\"/upload\" urlField=\"filePath\"\n    :limit=\"999\"\n    maxSize=\"50MB\"\n    converter=\"json\">\n    <u-button color=\"primary\" icon=\"upload\">上传</u-button>\n    <template #file-list>\n        <i-ico style=\"margin: 0px 8px 0px 0px;\" flag=\"file-icon\" name=\"file-default\" icotype=\"only\"></i-ico>\n        <u-text style=\"margin: 0px 8px 0px 0px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inherit;\" flag=\"file-name\" text=\"文件名称\"></u-text>\n        <u-text style=\"margin: 0px 8px 0px 0px;\" flag=\"file-size\" text=\"文件大小\"></u-text>\n        <i-ico style=\"margin: 0px 8px 0px 0px;\" flag=\"download-icon\" name=\"download\" icotype=\"only\"></i-ico>\n    </template>\n</u-uploader>\n</template>\n",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-uploader.vue/screenshots/2.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-uploader.vue/drawings/2.svg"
       }
     ],
     "themeVariables": []
@@ -17383,21 +17383,21 @@
         "concept": "EventDeclaration",
         "name": "validate",
         "title": "验证后",
-        "tsType": "(event: nasl.ui.ValidateEvent) => void",
+        "tsType": "(event: {\n  trigger: nasl.core.String;\n  valid: nasl.core.Boolean;\n  triggerValid: nasl.core.Boolean;\n  touched: nasl.core.Boolean;\n  dirty: nasl.core.Boolean;\n  firstError: nasl.core.String;\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n}) => void",
         "description": "对于第一个 Field 或者所有子 UValidator："
       },
       {
         "concept": "EventDeclaration",
         "name": "blurValid",
         "title": "失焦验证通过后",
-        "tsType": "(event: nasl.ui.ValidateEvent) => void",
+        "tsType": "(event: {\n  trigger: nasl.core.String;\n  valid: nasl.core.Boolean;\n  triggerValid: nasl.core.Boolean;\n  touched: nasl.core.Boolean;\n  dirty: nasl.core.Boolean;\n  firstError: nasl.core.String;\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n}) => void",
         "description": "对于第一个 Field 或者所有子 UValidator："
       },
       {
         "concept": "EventDeclaration",
         "name": "blurInvalid",
         "title": "失焦验证不通过后",
-        "tsType": "(event: nasl.ui.ValidateEvent) => void",
+        "tsType": "(event: {\n  trigger: nasl.core.String;\n  valid: nasl.core.Boolean;\n  triggerValid: nasl.core.Boolean;\n  touched: nasl.core.Boolean;\n  dirty: nasl.core.Boolean;\n  firstError: nasl.core.String;\n  value: nasl.core.String;\n  oldValue: nasl.core.String;\n}) => void",
         "description": "对于第一个 Field 或者所有子 UValidator："
       }
     ],
@@ -17427,7 +17427,7 @@
         "title": "",
         "description": "",
         "code": "<template>\n<u-validator label=\"用户名\"></u-validator>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-validator/screenshots/0.png",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-validator.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -17676,49 +17676,49 @@
         "concept": "EventDeclaration",
         "name": "click",
         "title": "点击后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  altKey: nasl.core.Boolean;\n  button: nasl.core.Integer;\n  clientX: nasl.core.Integer;\n  clientY: nasl.core.Integer;\n  ctrlKey: nasl.core.Boolean;\n  metaKey: nasl.core.Boolean;\n  movementX: nasl.core.Integer;\n  movementY: nasl.core.Integer;\n  offsetX: nasl.core.Integer;\n  offsetY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  screenX: nasl.core.Integer;\n  screenY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "点击某一项后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeSelect",
         "title": "选择前",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: V;\n  oldValue: V;\n  items: nasl.collection.List<T>;\n  oldItems: nasl.collection.List<T>;\n}) => void",
         "description": "选择某一页前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: V;\n  oldValue: V;\n  items: nasl.collection.List<T>;\n  oldItems: nasl.collection.List<T>;\n}) => void",
         "description": "选择某一项后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeClose",
         "title": "关闭前",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  oldValue: V;\n}) => void",
         "description": "关闭某一页前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "close",
         "title": "关闭后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  oldValue: V;\n}) => void",
         "description": "关闭某一页后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeLoad",
         "title": "加载前",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "() => void",
         "description": "加载前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "load",
         "title": "加载后",
-        "tsType": "(event: null) => void",
+        "tsType": "() => void",
         "description": "加载后触发"
       }
     ],
@@ -17770,7 +17770,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Selector",
+        "group": "",
         "name": "UTab",
         "kebabName": "u-tab",
         "title": "标签页",
@@ -17976,15 +17976,15 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-tabs value=\"B\">\n    <u-tab value=\"A\"><template #title><u-text text=\"选项卡A\"></u-text></template>选项卡 A 的内容</u-tab>\n    <u-tab value=\"B\"><template #title><u-text text=\"选项卡B\"></u-text></template>选项卡 B 的内容</u-tab>\n    <u-tab value=\"C\"><template #title><u-text text=\"选项卡C\"></u-text></template>选项卡 C 的内容</u-tab>\n</u-tabs>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-tabs/screenshots/3.png",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-tabs.vue/screenshots/0.png",
         "drawing": ""
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "动态数据源",
         "description": "",
-        "code": "<template>\n<u-tabs router :data-source=\"[{}]\"></u-tabs>\n</template>\n",
-        "screenshot": "",
+        "code": "<template>\n<u-tabs router :dataSource=\"[{}]\"></u-tabs>\n</template>\n",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-tabs.vue/screenshots/1.png",
         "drawing": ""
       },
       {
@@ -17992,7 +17992,7 @@
         "title": "外观-方形卡片（默认）",
         "description": "",
         "code": "<template>\n<u-tabs appear=\"square\">\n    <u-tab><template #title><u-text text=\"选项卡A\"></u-text></template>选项卡 A 的内容</u-tab>\n    <u-tab><template #title><u-text text=\"选项卡B\"></u-text></template>选项卡 B 的内容</u-tab>\n    <u-tab><template #title><u-text text=\"选项卡C\"></u-text></template>选项卡 C 的内容</u-tab>\n</u-tabs>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-tabs.vue/screenshots/2.png",
         "drawing": ""
       },
       {
@@ -18000,7 +18000,7 @@
         "title": "外观-圆形卡片（默认）",
         "description": "",
         "code": "<template>\n<u-tabs appear=\"round\" size=\"small\">\n    <u-tab><template #title><u-text text=\"选项卡A\"></u-text></template>选项卡 A 的内容</u-tab>\n    <u-tab><template #title><u-text text=\"选项卡B\"></u-text></template>选项卡 B 的内容</u-tab>\n    <u-tab><template #title><u-text text=\"选项卡C\"></u-text></template>选项卡 C 的内容</u-tab>\n</u-tabs>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-tabs.vue/screenshots/3.png",
         "drawing": ""
       },
       {
@@ -18008,7 +18008,7 @@
         "title": "外观-线条导航",
         "description": "",
         "code": "<template>\n<u-tabs appear=\"line\">\n    <u-tab><template #title><u-text text=\"选项卡A\"></u-text></template>选项卡 A 的内容</u-tab>\n    <u-tab><template #title><u-text text=\"选项卡B\"></u-text></template>选项卡 B 的内容</u-tab>\n    <u-tab><template #title><u-text text=\"选项卡C\"></u-text></template>选项卡 C 的内容</u-tab>\n</u-tabs>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-tabs.vue/screenshots/4.png",
         "drawing": ""
       },
       {
@@ -18016,7 +18016,7 @@
         "title": "外观-胶囊导航",
         "description": "",
         "code": "<template>\n<u-tabs appear=\"capsule\">\n    <u-tab><template #title><u-text text=\"选项卡A\"></u-text></template>选项卡 A 的内容</u-tab>\n    <u-tab><template #title><u-text text=\"选项卡B\"></u-text></template>选项卡 B 的内容</u-tab>\n    <u-tab><template #title><u-text text=\"选项卡C\"></u-text></template>选项卡 C 的内容</u-tab>\n</u-tabs>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-tabs.vue/screenshots/5.png",
         "drawing": ""
       },
       {
@@ -18024,7 +18024,7 @@
         "title": "外观-文本形态",
         "description": "",
         "code": "<template>\n<u-tabs appear=\"text\" size=\"mini\">\n    <u-tab><template #title><u-text text=\"选项卡A\"></u-text></template>选项卡 A 的内容</u-tab>\n    <u-tab><template #title><u-text text=\"选项卡B\"></u-text></template>选项卡 B 的内容</u-tab>\n    <u-tab><template #title><u-text text=\"选项卡C\"></u-text></template>选项卡 C 的内容</u-tab>\n</u-tabs>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-tabs.vue/screenshots/6.png",
         "drawing": ""
       }
     ],
@@ -18178,21 +18178,21 @@
         "concept": "EventDeclaration",
         "name": "beforeSelect",
         "title": "选择前",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.Integer;\n  oldValue: nasl.core.Integer;\n  item: T;\n}) => void",
         "description": "选择某一步骤前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.Integer;\n  oldValue: nasl.core.Integer;\n  item: T;\n}) => void",
         "description": "选择某一步骤时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.Integer;\n  oldValue: nasl.core.Integer;\n  item: T;\n  oldItem: T;\n}) => void",
         "description": "步骤数改变后触发"
       }
     ],
@@ -18236,7 +18236,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Selector",
+        "group": "",
         "name": "USelectableStep",
         "kebabName": "u-selectable-step",
         "title": "步骤条项",
@@ -18359,16 +18359,16 @@
         "title": "基本用法",
         "description": "步骤从`0`开始\n",
         "code": "<template>\n<u-selectable-steps :value=\"1\">\n    <u-selectable-step><template #title><u-text text=\"步骤1\"></u-text></template></u-selectable-step>\n    <u-selectable-step><template #title><u-text text=\"步骤2\"></u-text></template></u-selectable-step>\n    <u-selectable-step><template #title><u-text text=\"步骤3\"></u-text></template></u-selectable-step>\n</u-selectable-steps>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-selectable-steps.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-selectable-steps.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "禁用",
         "description": "",
         "code": "<template>\n<u-selectable-steps :value=\"0\" :readonly=\"false\">\n    <u-selectable-step><template #title><u-text text=\"步骤1\"></u-text></template></u-selectable-step>\n    <u-selectable-step disabled><template #title><u-text text=\"步骤2\"></u-text></template></u-selectable-step>\n    <u-selectable-step><template #title><u-text text=\"步骤3\"></u-text></template></u-selectable-step>\n</u-selectable-steps>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-selectable-steps.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-selectable-steps.vue/drawings/1.svg"
       }
     ],
     "themeVariables": []
@@ -18539,28 +18539,28 @@
         "concept": "EventDeclaration",
         "name": "beforeSelect",
         "title": "选择前",
-        "tsType": "(event: nasl.ui.PaginationEvent) => void",
+        "tsType": "(event: {\n  page: nasl.core.Integer;\n  oldPage: nasl.core.Integer;\n}) => void",
         "description": "选择分页前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.PaginationEvent) => void",
+        "tsType": "(event: {\n  page: nasl.core.Integer;\n  oldPage: nasl.core.Integer;\n}) => void",
         "description": "选择分页时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.PaginationEvent) => void",
+        "tsType": "(event: {\n  page: nasl.core.Integer;\n  oldPage: nasl.core.Integer;\n}) => void",
         "description": "页码改变时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "changePageSize",
         "title": "条数改变后",
-        "tsType": "(event: nasl.ui.PaginationEvent) => void",
+        "tsType": "(event: {\n  page: nasl.core.Integer;\n  oldPage: nasl.core.Integer;\n  pageSizeOptions: Array<nasl.core.Integer>;\n}) => void",
         "description": "每页条数改变时触发"
       }
     ],
@@ -18573,24 +18573,24 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-pagination :total=\"11\" :page=\"6\"></u-pagination>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-pagination.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-pagination.vue/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "全部配置",
         "description": "",
-        "code": "<template>\n<u-linear-layout direction=\"vertical\">\n    <u-pagination\n        :total-items=\"75\"\n        show-total\n        show-sizer\n        show-jumper\n        :page-size=\"10\"\n        :page-size-options=\"[40,50,100]\">\n    </u-pagination>\n</u-linear-layout>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "code": "<template>\n<u-linear-layout direction=\"vertical\">\n    <u-pagination\n        :totalItems=\"75\"\n        showTotal\n        showSizer\n        showJumper\n        :pageSize=\"10\"\n        :pageSizeOptions=\"[40,50,100]\">\n    </u-pagination>\n</u-linear-layout>\n</template>\n",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-pagination.vue/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-pagination.vue/drawings/1.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "简洁版",
         "description": "设置`simple`属性即可使用简洁版的分页，不支持显示总页数、切换每页大小、页面跳转功能\n",
         "code": "<template>\n<u-pagination :total=\"11\" :simple=\"true\"></u-pagination>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-pagination.vue/screenshots/2.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-pagination.vue/drawings/2.svg"
       }
     ],
     "themeVariables": []
@@ -19257,98 +19257,98 @@
         "concept": "EventDeclaration",
         "name": "beforeSelect",
         "title": "选择前",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: V;\n  oldValue: V;\n  items: nasl.collection.List<T>;\n  oldItems: nasl.collection.List<T>;\n}) => void",
         "description": "选择某一项前触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "input",
         "title": "选择时",
-        "tsType": "(event: String) => void",
+        "tsType": "(event: V) => void",
         "description": "选择某一项时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: V;\n  oldValue: V;\n  items: nasl.collection.List<T>;\n  oldItems: nasl.collection.List<T>;\n}) => void",
         "description": "选择某一项后触发。单选模式中："
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+        "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: V;\n  oldValue: V;\n  values: nasl.collection.List<V>;\n  items: nasl.collection.List<T>;\n  oldItems: nasl.collection.List<T>;\n}) => void",
         "description": "选择值改变时触发。单选模式中："
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeOpen",
         "title": "弹出前",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "() => void",
         "description": "弹出前触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "open",
         "title": "弹出后",
-        "tsType": "(event: nasl.ui.BaseEvent) => void",
+        "tsType": "() => void",
         "description": "弹出后触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeClose",
         "title": "关闭前",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "() => void",
         "description": "关闭前触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "close",
         "title": "关闭后",
-        "tsType": "(event: nasl.ui.BaseEvent) => void",
+        "tsType": "() => void",
         "description": "关闭时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeLoad",
         "title": "加载前",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "() => void",
         "description": "加载前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "load",
         "title": "加载后",
-        "tsType": "(event: nasl.ui.BaseEvent) => void",
+        "tsType": "() => void",
         "description": "加载后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "clickPrefix",
         "title": "点击前缀图标",
-        "tsType": "(event: nasl.ui.MouseEvent) => void",
+        "tsType": "(event: {\n  altKey: nasl.core.Boolean;\n  button: nasl.core.Integer;\n  clientX: nasl.core.Integer;\n  clientY: nasl.core.Integer;\n  ctrlKey: nasl.core.Boolean;\n  metaKey: nasl.core.Boolean;\n  movementX: nasl.core.Integer;\n  movementY: nasl.core.Integer;\n  offsetX: nasl.core.Integer;\n  offsetY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  screenX: nasl.core.Integer;\n  screenY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "点击前缀图标后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "clickSuffix",
         "title": "点击后缀图标",
-        "tsType": "(event: nasl.ui.MouseEvent) => void",
+        "tsType": "(event: {\n  altKey: nasl.core.Boolean;\n  button: nasl.core.Integer;\n  clientX: nasl.core.Integer;\n  clientY: nasl.core.Integer;\n  ctrlKey: nasl.core.Boolean;\n  metaKey: nasl.core.Boolean;\n  movementX: nasl.core.Integer;\n  movementY: nasl.core.Integer;\n  offsetX: nasl.core.Integer;\n  offsetY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  screenX: nasl.core.Integer;\n  screenY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "点击后缀图标后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "blur",
         "title": "失去焦点",
-        "tsType": "(event: nasl.ui.FocusEvent) => void",
+        "tsType": "(event: {\n  cancelBubble: nasl.core.Boolean;\n  detail: nasl.core.String;\n  layerX: nasl.core.Integer;\n  layerY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "失去焦点时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeFilter",
         "title": "搜索前",
-        "tsType": "(event: DataSourceParams) => void",
+        "tsType": "(event: {\n  filterText: nasl.core.String;\n}) => void",
         "description": "可搜索输入框，在输入搜索文字时"
       }
     ],
@@ -19420,7 +19420,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Selector",
+        "group": "",
         "name": "USelectItem",
         "kebabName": "u-select-item",
         "title": "选择项",
@@ -19487,7 +19487,7 @@
             "concept": "EventDeclaration",
             "name": "beforeSelect",
             "title": "选择前",
-            "tsType": "(event: nasl.ui.ChangeItemEvent) => void",
+            "tsType": "(event: {\n  selected: nasl.core.Boolean;\n  item: T;\n  oldItem: T;\n  value: V;\n  oldValue: V;\n  items: nasl.collection.List<T>;\n  oldItems: nasl.collection.List<T>;\n}) => void",
             "description": "选择此项前触发"
           }
         ],
@@ -19507,7 +19507,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Selector",
+        "group": "",
         "name": "USelectGroup",
         "kebabName": "u-select-group",
         "title": "选择分组",
@@ -19563,7 +19563,7 @@
       },
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Selector",
+        "group": "",
         "name": "USelectDivider",
         "kebabName": "u-select-divider",
         "title": "分隔线",
@@ -19585,8 +19585,8 @@
         "concept": "ViewBlockWithImage",
         "title": "数据选择框",
         "description": "",
-        "code": "<template>\n<u-select placeholder=\"请选择\" :pagination=\"true\" :page-size=\"50\"></u-select>\n</template>\n",
-        "screenshot": "",
+        "code": "<template>\n<u-select placeholder=\"请选择\" :pagination=\"true\" :pageSize=\"50\"></u-select>\n</template>\n",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-select.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -19930,42 +19930,42 @@
         "concept": "EventDeclaration",
         "name": "input",
         "title": "输入时",
-        "tsType": "(event: String) => void",
+        "tsType": "(event: V) => void",
         "description": "选择某一项时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.CascadeCapsulesEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  values: nasl.collection.List<V>;\n  items: nasl.collection.List<T>;\n}) => void",
         "description": "选择某一项时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "focus",
         "title": "获得焦点",
-        "tsType": "(event: nasl.ui.FocusEvent) => void",
+        "tsType": "(event: {\n  cancelBubble: nasl.core.Boolean;\n  detail: nasl.core.String;\n  layerX: nasl.core.Integer;\n  layerY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "获得焦点时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "blur",
         "title": "失去焦点",
-        "tsType": "(event: nasl.ui.FocusEvent) => void",
+        "tsType": "(event: {\n  cancelBubble: nasl.core.Boolean;\n  detail: nasl.core.String;\n  layerX: nasl.core.Integer;\n  layerY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "失去焦点时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "clear",
         "title": "清空后",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "() => void",
         "description": "清空后触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeLoad",
         "title": "加载前",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "() => void",
         "description": "加载前触发"
       },
       {
@@ -20017,9 +20017,9 @@
         "concept": "ViewBlockWithImage",
         "title": "基本用法",
         "description": "",
-        "code": "<template>\n<u-cascader :data-source=\"[\n    { text: '理学', value: '理学', children: [\n        { text: '物理学', value: '物理学', children: [\n            { text: '理论物理', value: '理论物理' },\n            { text: '凝聚态物理', value: '凝聚态物理' },\n            { text: '材料物理', value: '材料物理' },\n        ]},\n        { text: '数学', value: '数学', children: [\n            { text: '基础数学', value: '基础数学' },\n            { text: '计算数学', value: '计算数学' },\n            { text: '应用数学', value: '应用数学' },\n        ]},\n        { text: '化学', value: '化学' },\n    ]},\n    { text: '工学', value: '工学', children: [\n        { text: '计算机科学与技术', value: '计算机科学与技术', children: [\n            { text: '计算机系统结构', value: '计算机系统结构' },\n            { text: '计算机软件与理论', value: '计算机软件与理论', disabled: true },\n            { text: '计算机应用技术', value: '计算机应用技术' },\n        ] },\n        { text: '软件工程', value: '软件工程', disabled: true },\n        { text: '机械工程', value: '机械工程', children: [\n            { text: '机械制造及其自动化', value: '机械制造及其自动化' },\n            { text: '机械电子工程', value: '机械电子工程' },\n            { text: '机械设计及理论', value: '机械设计及理论', disabled: true },\n            { text: '车辆工程', value: '车辆工程', disabled: true },\n        ] },\n    ] },\n]\">\n</u-cascader>\n</template>\n",
+        "code": "<template>\n<u-cascader :dataSource=\"[\n    { text: '理学', value: '理学', children: [\n        { text: '物理学', value: '物理学', children: [\n            { text: '理论物理', value: '理论物理' },\n            { text: '凝聚态物理', value: '凝聚态物理' },\n            { text: '材料物理', value: '材料物理' },\n        ]},\n        { text: '数学', value: '数学', children: [\n            { text: '基础数学', value: '基础数学' },\n            { text: '计算数学', value: '计算数学' },\n            { text: '应用数学', value: '应用数学' },\n        ]},\n        { text: '化学', value: '化学' },\n    ]},\n    { text: '工学', value: '工学', children: [\n        { text: '计算机科学与技术', value: '计算机科学与技术', children: [\n            { text: '计算机系统结构', value: '计算机系统结构' },\n            { text: '计算机软件与理论', value: '计算机软件与理论', disabled: true },\n            { text: '计算机应用技术', value: '计算机应用技术' },\n        ] },\n        { text: '软件工程', value: '软件工程', disabled: true },\n        { text: '机械工程', value: '机械工程', children: [\n            { text: '机械制造及其自动化', value: '机械制造及其自动化' },\n            { text: '机械电子工程', value: '机械电子工程' },\n            { text: '机械设计及理论', value: '机械设计及理论', disabled: true },\n            { text: '车辆工程', value: '车辆工程', disabled: true },\n        ] },\n    ] },\n]\">\n</u-cascader>\n</template>\n",
         "screenshot": "",
-        "drawing": ""
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-cascader.vue/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -20230,35 +20230,35 @@
         "concept": "EventDeclaration",
         "name": "input",
         "title": "输入时",
-        "tsType": "(event: String) => void",
+        "tsType": "(event: nasl.core.String) => void",
         "description": "选择某一项时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.CascadeCapsulesEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  values: nasl.collection.List<V>;\n  items: nasl.collection.List<T>;\n}) => void",
         "description": "选择某一项时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "focus",
         "title": "获得焦点",
-        "tsType": "(event: nasl.ui.FocusEvent) => void",
+        "tsType": "(event: {\n  cancelBubble: nasl.core.Boolean;\n  detail: nasl.core.String;\n  layerX: nasl.core.Integer;\n  layerY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "获得焦点时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "blur",
         "title": "失去焦点",
-        "tsType": "(event: nasl.ui.FocusEvent) => void",
+        "tsType": "(event: {\n  cancelBubble: nasl.core.Boolean;\n  detail: nasl.core.String;\n  layerX: nasl.core.Integer;\n  layerY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "失去焦点时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "clear",
         "title": "清空后",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "() => void",
         "description": "清空后触发。"
       }
     ],
@@ -20296,8 +20296,8 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-region-select converter=\"name\"></u-region-select>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-region-select.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-region-select.vue/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -20483,56 +20483,56 @@
         "concept": "EventDeclaration",
         "name": "beforeSelect",
         "title": "选择前",
-        "tsType": "(event: nasl.ui.TreeChangeEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  oldValue: V;\n  node: T;\n  oldNode: T;\n}) => void",
         "description": "选择某一项前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "input",
         "title": "输入时",
-        "tsType": "(event: String) => void",
+        "tsType": "(event: V | nasl.collection.List<V>) => void",
         "description": "选择某一项时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.TreeChangeEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  oldValue: V;\n  node: T;\n  oldNode: T;\n}) => void",
         "description": "选择某一项时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.TreeChangeEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  oldValue: V;\n  node: T;\n  oldNode: T;\n}) => void",
         "description": "选择值改变时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "toggle",
         "title": "展开折叠后",
-        "tsType": "(event: nasl.ui.CollapseEvent) => void",
+        "tsType": "(event: {\n  expanded: nasl.core.Boolean;\n  node: T;\n}) => void",
         "description": "展开/折叠某节点时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "check",
         "title": "选中取消后",
-        "tsType": "(event: nasl.ui.CheckedEvent) => void",
+        "tsType": "(event: {\n  checked: nasl.core.Boolean;\n  oldChecked: nasl.core.Boolean;\n  node: T;\n  values: nasl.collection.List<V>;\n}) => void",
         "description": "选中/取消节点时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeLoad",
         "title": "加载前",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "() => void",
         "description": "加载前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "load",
         "title": "加载后",
-        "tsType": "(event: null) => void",
+        "tsType": "() => void",
         "description": "加载后触发"
       }
     ],
@@ -20603,7 +20603,7 @@
     "children": [
       {
         "concept": "ViewComponentDeclaration",
-        "group": "Selector",
+        "group": "",
         "name": "UTreeViewNodeNew",
         "kebabName": "u-tree-view-node-new",
         "title": "树形视图节点",
@@ -20689,21 +20689,21 @@
             "concept": "EventDeclaration",
             "name": "beforeToggle",
             "title": "展开折叠前",
-            "tsType": "() => void",
+            "tsType": "(event: {\n  expanded: nasl.core.Boolean;\n  node: T;\n}) => void",
             "description": "展开/折叠此节点前触发"
           },
           {
             "concept": "EventDeclaration",
             "name": "toggle",
             "title": "展开折叠后",
-            "tsType": "() => void",
+            "tsType": "(event: {\n  expanded: nasl.core.Boolean;\n  node: T;\n}) => void",
             "description": "展开/折叠某节点时触发"
           },
           {
             "concept": "EventDeclaration",
             "name": "check",
             "title": "选中后",
-            "tsType": "() => void",
+            "tsType": "(event: {\n  checked: nasl.core.Boolean;\n  oldChecked: nasl.core.Boolean;\n  node: T;\n}) => void",
             "description": "选中节点时触发"
           }
         ],
@@ -20734,7 +20734,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-tree-view-new>\n    <template #item=\"current\">\n    </template>\n</u-tree-view-new>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-tree-view-new.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -20940,14 +20940,14 @@
         "concept": "EventDeclaration",
         "name": "transfer",
         "title": "数据转移时",
-        "tsType": "(event: nasl.ui.TransferEvent) => void",
+        "tsType": "(event: {\n  source: nasl.collection.List<T>;\n  target: nasl.collection.List<T>;\n  transfer: nasl.collection.List<T>;\n  transferValues: nasl.collection.List<V>;\n}) => void",
         "description": "数据转移时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.TransferEvent) => void",
+        "tsType": "(event: {\n  source: nasl.collection.List<T>;\n  target: nasl.collection.List<T>;\n  transfer: nasl.collection.List<T>;\n  transferValues: nasl.collection.List<V>;\n}) => void",
         "description": "数据改变时触发"
       }
     ],
@@ -20999,9 +20999,9 @@
         "concept": "ViewBlockWithImage",
         "title": "基本用法",
         "description": "向`data-source`属性中传入`Array<Item>`格式的数组，每个`Item`为这样格式的对象`{ text: string, value: any, disabled: boolean, ... }`。\n",
-        "code": "<template>\n<u-transfer show-head source-title=\"左列表\" target-title=\"右列表\"\n:source=\"[{ text: 'SQL', value: 'sql' },{ text: 'JSON', value: 'json' },]\" :target=\"[{ text: 'CSS', value: 'css' },{ text: 'HTML', value: 'html' },{ text: 'JavaScript', value: 'javascript' },{ text: 'Vue', value: 'vue' },]\"></u-transfer>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "code": "<template>\n<u-transfer showHead sourceTitle=\"左列表\" targetTitle=\"右列表\"\n:source=\"[{ text: 'SQL', value: 'sql' },{ text: 'JSON', value: 'json' },]\" :target=\"[{ text: 'CSS', value: 'css' },{ text: 'HTML', value: 'html' },{ text: 'JavaScript', value: 'javascript' },{ text: 'Vue', value: 'vue' },]\"></u-transfer>\n</template>\n",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-transfer.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-transfer.vue/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -21527,28 +21527,28 @@
         "concept": "EventDeclaration",
         "name": "change",
         "title": "值变化时",
-        "tsType": "(event: nasl.ui.DateEvent) => void",
+        "tsType": "(event: {\n  date: nasl.core.String;\n  time: nasl.core.String;\n}) => void",
         "description": "值变化时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择时",
-        "tsType": "(event: nasl.ui.DateEvent) => void",
+        "tsType": "(event: {\n  date: nasl.core.String;\n  time: nasl.core.String;\n}) => void",
         "description": "选择日期时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "toggle",
         "title": "弹出/隐藏时",
-        "tsType": "(event: nasl.ui.CollapseEvent) => void",
+        "tsType": "(event: {\n  opened: nasl.core.Boolean;\n}) => void",
         "description": "弹出/隐藏时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "blur",
         "title": "失去焦点",
-        "tsType": "(event: nasl.ui.FocusEvent) => void",
+        "tsType": "(event: {\n  cancelBubble: nasl.core.Boolean;\n  detail: nasl.core.String;\n  layerX: nasl.core.Integer;\n  layerY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "失去焦点时触发。"
       }
     ],
@@ -21561,7 +21561,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-date-picker value=\"2018-08-08\"></u-date-picker>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-date-picker.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -21975,14 +21975,14 @@
         "concept": "EventDeclaration",
         "name": "change",
         "title": "改变后",
-        "tsType": "(event: nasl.ui.DateEvent) => void",
+        "tsType": "(event: {\n  date: nasl.core.String;\n  time: nasl.core.String;\n}) => void",
         "description": "时间改变时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "blur",
         "title": "失去焦点",
-        "tsType": "(event: nasl.ui.FocusEvent) => void",
+        "tsType": "(event: {\n  cancelBubble: nasl.core.Boolean;\n  detail: nasl.core.String;\n  layerX: nasl.core.Integer;\n  layerY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "失去焦点时触发。"
       }
     ],
@@ -21995,8 +21995,8 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-time-picker value=\"15:46:33\"></u-time-picker>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-time-picker.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-time-picker.vue/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -22509,21 +22509,21 @@
         "concept": "EventDeclaration",
         "name": "select",
         "title": "值选择时",
-        "tsType": "(event: nasl.ui.DateEvent) => void",
+        "tsType": "(event: {\n  date: nasl.core.String;\n  time: nasl.core.String;\n}) => void",
         "description": "日期值发生变化触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "change",
         "title": "值变化时",
-        "tsType": "(event: nasl.ui.DateEvent) => void",
+        "tsType": "(event: {\n  date: nasl.core.String;\n  time: nasl.core.String;\n}) => void",
         "description": "选择新时间触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "blur",
         "title": "失去焦点",
-        "tsType": "(event: nasl.ui.FocusEvent) => void",
+        "tsType": "(event: {\n  cancelBubble: nasl.core.Boolean;\n  detail: nasl.core.String;\n  layerX: nasl.core.Integer;\n  layerY: nasl.core.Integer;\n  pageX: nasl.core.Integer;\n  pageY: nasl.core.Integer;\n  which: nasl.core.Integer;\n}) => void",
         "description": "失去焦点时触发。"
       }
     ],
@@ -22536,7 +22536,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-date-time-picker value=\"2018-08-08\" converter=\"json\"></u-date-time-picker>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-date-time-picker.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -22719,49 +22719,49 @@
         "concept": "EventDeclaration",
         "name": "change",
         "title": "undefined",
-        "tsType": "(event: nasl.ui.TreeChangeEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  oldValue: V;\n  node: T;\n  oldNode: T;\n}) => void",
         "description": "修改时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "select",
         "title": "选择后",
-        "tsType": "(event: nasl.ui.TreeChangeEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  oldValue: V;\n  node: T;\n  oldNode: T;\n}) => void",
         "description": "选择某一项时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "check",
         "title": "选中或取消后",
-        "tsType": "(event: nasl.ui.CheckedEvent) => void",
+        "tsType": "(event: {\n  checked: nasl.core.Boolean;\n  oldChecked: nasl.core.Boolean;\n  node: T;\n  values: nasl.collection.List<V>;\n}) => void",
         "description": "选中/取消节点时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeLoad",
         "title": "加载前",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "() => void",
         "description": "加载前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "load",
         "title": "加载后",
-        "tsType": "(event: null) => void",
+        "tsType": "() => void",
         "description": "加载后触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeClear",
         "title": "清空前",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  oldValue: V;\n  values: nasl.collection.List<V>;\n  oldValues: nasl.collection.List<V>;\n}) => void",
         "description": "清空前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "clear",
         "title": "清空后",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: V;\n  oldValue: V;\n  values: nasl.collection.List<V>;\n  oldValues: nasl.collection.List<V>;\n}) => void",
         "description": "清空时触发"
       }
     ],
@@ -22804,14 +22804,14 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-tree-select-new placeholder=\"请选择\">\n    <template #item=\"current\">\n    </template>\n</u-tree-select-new>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-tree-select-new.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
     "themeVariables": []
   },
   {
-    "group": "chart",
+    "group": "Chart",
     "name": "ULinearProgress",
     "alias": "线形进度条",
     "concept": "ViewComponentDeclaration",
@@ -22916,14 +22916,14 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-linear-progress :percent=\"36\"></u-linear-progress>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-linear-progress.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
     "themeVariables": []
   },
   {
-    "group": "chart",
+    "group": "Chart",
     "name": "UCircularProgress",
     "alias": "圆型进度条",
     "concept": "ViewComponentDeclaration",
@@ -22996,8 +22996,8 @@
         "concept": "ViewBlockWithImage",
         "title": "基本用法",
         "description": "",
-        "code": "<template>\n<u-circular-progress :percent=\"45\" :show-percent-slot=\"true\">\n    <template #percent>\n        <u-text text=\"45%\"></u-text>\n    </template>\n</u-circular-progress>\n</template>\n",
-        "screenshot": "",
+        "code": "<template>\n<u-circular-progress :percent=\"45\" :showPercentSlot=\"true\">\n    <template #percent>\n        <u-text text=\"45%\"></u-text>\n    </template>\n</u-circular-progress>\n</template>\n",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-circular-progress.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -23237,42 +23237,42 @@
         "concept": "EventDeclaration",
         "name": "beforeOpen",
         "title": "弹出前",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "() => void",
         "description": "弹出前触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "open",
         "title": "弹出时",
-        "tsType": "(event: nasl.ui.BaseEvent) => void",
+        "tsType": "() => void",
         "description": "弹出时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeClose",
         "title": "隐藏前",
-        "tsType": "(event: EventTarget) => void",
+        "tsType": "() => void",
         "description": "隐藏前触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "close",
         "title": "隐藏后",
-        "tsType": "(event: nasl.ui.BaseEvent) => void",
+        "tsType": "() => void",
         "description": "隐藏时触发。"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeToggle",
         "title": "展开折叠前",
-        "tsType": "() => void",
+        "tsType": "(event: {\n  opened: nasl.core.Boolean;\n}) => void",
         "description": "@deprecated"
       },
       {
         "concept": "EventDeclaration",
         "name": "toggle",
         "title": "展开折叠后",
-        "tsType": "() => void",
+        "tsType": "(event: {\n  opened: nasl.core.Boolean;\n}) => void",
         "description": "@deprecated"
       }
     ],
@@ -23342,7 +23342,7 @@
         "description": "",
         "code": "<template>\n<u-popup-combination>\n    <template #reference>\n         <u-button color=\"primary\" text=\"触发弹出框组件，可删除替换\"></u-button>\n    </template>\n    <u-text>内容</u-text>\n</u-popup-combination>\n</template>\n",
         "screenshot": "",
-        "drawing": ""
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-popup-combination.vue/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -23535,14 +23535,14 @@
         "concept": "EventDeclaration",
         "name": "beforeOpen",
         "title": "打开前",
-        "tsType": "(senderVM: UModal) => void",
+        "tsType": "() => void",
         "description": "打开弹窗前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "open",
         "title": "打开后",
-        "tsType": "(senderVM: UModal) => void",
+        "tsType": "() => void",
         "description": "打开弹窗后触发"
       },
       {
@@ -23556,7 +23556,7 @@
         "concept": "EventDeclaration",
         "name": "close",
         "title": "关闭后",
-        "tsType": "() => void",
+        "tsType": "(event: {\n  ok: nasl.core.Boolean;\n}) => void",
         "description": "关闭弹窗时触发"
       }
     ],
@@ -23629,8 +23629,8 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-modal>\n    <template #title>\n        <u-text text=\"标题\"></u-text>\n    </template>\n    <template #body>\n        <u-text>内容</u-text>\n    </template>\n    <template #foot>\n        <u-linear-layout vusion-disabled-cut justify=\"center\">\n            <u-button color=\"primary\">确 定</u-button>\n            <u-button>取 消</u-button>\n        </u-linear-layout>\n    </template>\n</u-modal>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-modal.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-modal.vue/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -23754,21 +23754,21 @@
         "concept": "EventDeclaration",
         "name": "open",
         "title": "打开时",
-        "tsType": "(senderVM: UDrawer) => void",
+        "tsType": "() => void",
         "description": "打开抽屉时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "beforeClose",
         "title": "关闭前",
-        "tsType": "(ok: boolean) => void",
+        "tsType": "(event: {\n  ok: nasl.core.Boolean;\n}) => void",
         "description": "关闭抽屉前触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "close",
         "title": "关闭时",
-        "tsType": "(ok: boolean) => void",
+        "tsType": "(event: {\n  ok: nasl.core.Boolean;\n}) => void",
         "description": "关闭抽屉时触发"
       }
     ],
@@ -23798,7 +23798,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-drawer>\n    <template #title>\n        <u-text text=\"标题\"></u-text>\n    </template>\n    <template #body>\n        <u-text>内容</u-text>\n    </template>\n    <template #foot>\n        <u-linear-layout vusion-disabled-cut justify=\"start\">\n            <u-button color=\"primary\">确 定</u-button>\n            <u-button>取 消</u-button>\n        </u-linear-layout>\n    </template>\n</u-drawer>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-drawer.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -23955,14 +23955,14 @@
         "concept": "EventDeclaration",
         "name": "open",
         "title": "弹出后事件",
-        "tsType": "() => void",
+        "tsType": "(event: {\n  text: nasl.core.String;\n  color: nasl.core.String;\n  duration: nasl.core.Integer;\n  timestamp: nasl.core.Integer;\n}) => void",
         "description": "弹出提示时触发"
       },
       {
         "concept": "EventDeclaration",
         "name": "close",
         "title": "关闭后",
-        "tsType": "() => void",
+        "tsType": "(event: {\n  text: nasl.core.String;\n  color: nasl.core.String;\n  duration: nasl.core.Integer;\n  timestamp: nasl.core.Integer;\n}) => void",
         "description": "关闭提示时触发"
       }
     ],
@@ -23992,7 +23992,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<u-toast-single text=\"弹出消息\" :duration=\"2000\" color=\"custom\"></u-toast-single>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-toast.vue/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -24053,8 +24053,8 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<e-watermark text=\"水印\"></e-watermark>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/e-watermark.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/e-watermark.vue/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -24217,7 +24217,7 @@
         "concept": "EventDeclaration",
         "name": "copy",
         "title": "复制成功后",
-        "tsType": "(event: nasl.ui.ChangeEvent) => void",
+        "tsType": "(event: {\n  value: nasl.core.String;\n}) => void",
         "description": "内容复制成功后触发"
       }
     ],
@@ -24238,8 +24238,8 @@
         "title": "复制链接",
         "description": "",
         "code": "<template>\n<u-copy value=\"需要 copy 的内容\">\n    <u-link text=\"复制\"></u-link>\n</u-copy>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-copy.vue/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-copy.vue/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -24367,7 +24367,7 @@
         "title": "任务箱",
         "description": "",
         "code": "<template>\n<u-taskbox icon=\"notice\"></u-taskbox>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.19.0/src/components/u-taskbox.vue/screenshots/0.png",
         "drawing": ""
       }
     ],

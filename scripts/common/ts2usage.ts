@@ -16,18 +16,20 @@ export default function gen(root: string) {
     components.forEach((component: any) => {
         let sourceDir = 'src'
         let componentDir = path.join(root, `${sourceDir}/${component.name}`);
+        component.symbol = component.name;
         if (!fs.existsSync(componentDir)) {
             sourceDir = 'src-vusion/components';
             componentDir = path.join(root, `${sourceDir}/${component.name}`);
+            component.symbol = component.name;
         }
 
         if (!fs.existsSync(componentDir)) {
             sourceDir = 'src/components';
             componentDir = path.join(root, `${sourceDir}/${component.name}.vue`);
+            component.symbol = `${component.name}.vue`;
         }
 
-        component.symbol = component.name;
-
+        
         // api.ts
         try {
             const tsPath = `${componentDir}/api.ts`;
@@ -70,6 +72,8 @@ function getBlocks(content: string, options: { screenShot: string[], drawings: s
     let title = '';
     let description = '';
     let blocks: astTypes.ViewBlockWithImage[] = [];
+
+    let idx = 0;
     tokens.forEach((token, index) => {
         if (token.type === 'heading_close' && token.tag === 'h3') {
             const inline = tokens[index - 1];
@@ -88,18 +92,21 @@ function getBlocks(content: string, options: { screenShot: string[], drawings: s
                     title,
                     description,
                     code: `<template>\n${token.content}</template>\n`,
-                    screenshot: screenShot[index] || '',
-                    drawing: drawings[index] || '',
+                    screenshot: screenShot[idx] || '',
+                    drawing: drawings[idx] || '',
                 });
+
+                idx++;
             } else if (lang === 'vue') {
                 blocks.push({
                     concept: 'ViewBlockWithImage',
                     title,
                     description,
                     code: token.content,
-                    screenshot: screenShot[index] || '',
-                    drawing: drawings[index] || '',
+                    screenshot: screenShot[idx] || '',
+                    drawing: drawings[idx] || '',
                 });
+                idx++;
             }
             description = '';
         }
