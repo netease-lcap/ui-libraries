@@ -58,7 +58,6 @@ function gen(root) {
 exports.default = gen;
 function getBlocks(content, options) {
     var screenShot = options.screenShot, drawings = options.drawings;
-    console.log(screenShot, drawings);
     var tokens = md.parse(content, {});
     var title = '';
     var description = '';

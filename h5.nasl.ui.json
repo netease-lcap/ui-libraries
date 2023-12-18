@@ -207,7 +207,7 @@
         "title": "弹出位置下",
         "description": "",
         "code": "<template>\n<van-popup position=\"bottom\" safe-area-inset-bottom evn=\"picker\"><div vusion-slot-name=\"default\" style=\"min-height: 200px;width: 100vw;\" :vusion-disabled-cut=\"true\"></div></van-popup>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/popup/screenshots/3.png",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/popup/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -215,7 +215,7 @@
         "title": "弹出位置上",
         "description": "",
         "code": "<template>\n<van-popup safe-area-inset-bottom position=\"top\"><div vusion-slot-name=\"default\" style=\"min-height: 200px;width: 100vw;\" :vusion-disabled-cut=\"true\"></div></van-popup>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/popup/screenshots/1.png",
         "drawing": ""
       },
       {
@@ -223,7 +223,7 @@
         "title": "弹出位置左",
         "description": "",
         "code": "<template>\n<van-popup safe-area-inset-bottom position=\"left\" evn=\"picker\"><div vusion-slot-name=\"default\" style=\"min-width: 200px;heigth: 100vw;\" :vusion-disabled-cut=\"true\"></div></van-popup>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/popup/screenshots/2.png",
         "drawing": ""
       },
       {
@@ -231,7 +231,7 @@
         "title": "弹出位置右",
         "description": "",
         "code": "<template>\n<van-popup safe-area-inset-bottom position=\"right\" evn=\"picker\"><div vusion-slot-name=\"default\" style=\"min-width: 200px;height: 100vw;\" :vusion-disabled-cut=\"true\"></div></van-popup>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/popup/screenshots/3.png",
         "drawing": ""
       }
     ],
@@ -310,15 +310,6 @@
         "icon": "",
         "tsTypeParams": "",
         "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "标题",
-            "tsType": "nasl.core.String",
-            "description": "标题"
-          },
           {
             "concept": "PropDeclaration",
             "group": "数据属性",
@@ -473,15 +464,6 @@
         "concept": "PropDeclaration",
         "group": "样式属性",
         "tabKind": "property",
-        "name": "width",
-        "title": "宽度",
-        "tsType": "nasl.core.String",
-        "description": "卡片宽度：像素或百分比"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "样式属性",
-        "tabKind": "property",
         "setter": {
           "concept": "EnumSelectSetter",
           "options": [
@@ -611,7 +593,7 @@
         "title": "基本样式",
         "description": "",
         "code": "<template>\n<van-cardu>\n  <template #head>\n    <van-text text=\"标题\"></van-text>\n  </template>\n  卡片内容\n</van-cardu>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/cardu/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -619,7 +601,7 @@
         "title": "带分割线样式",
         "description": "",
         "code": "<template>\n<van-cardu split>\n  <template #head>\n    <van-text text=\"标题\"></van-text>\n  </template>\n  卡片内容\n</van-cardu>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/cardu/screenshots/1.png",
         "drawing": ""
       },
       {
@@ -627,7 +609,7 @@
         "title": "带图片样式",
         "description": "",
         "code": "<template>\n<van-cardu title=\"卡片\" cover-slot>\n  <template #cover>\n    <van-image :preview=\"false\" src=\"https://static-vusion.163yun.com/assets/cloud-ui/1.jpg\"></van-image>\n  </template>\n  <template #head>\n    <van-text text=\"标题\"></van-text>\n  </template>\n  卡片内容\n</van-cardu>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/cardu/screenshots/2.png",
         "drawing": ""
       }
     ],
@@ -645,28 +627,6 @@
     "icon": "linear-layout",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "行内",
-              "value": "inline"
-            },
-            {
-              "title": "块级",
-              "value": "block"
-            }
-          ]
-        },
-        "name": "display",
-        "title": "展示方式",
-        "tsType": "'inline' | 'block'",
-        "description": "行内展示，或块级换行展示"
-      },
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
@@ -1097,24 +1057,24 @@
         "title": "单行排布",
         "description": "",
         "code": "<template>\n<van-linear-layout direction=\"horizontal\">\n</van-linear-layout>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/linear-layout/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/linear-layout/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "多行排布",
         "description": "",
         "code": "<template>\n<van-linear-layout direction=\"vertical\">\n    <van-linear-layout>\n    </van-linear-layout>\n    <van-linear-layout>\n    </van-linear-layout>\n</van-linear-layout>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/linear-layout/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/linear-layout/drawings/1.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "两端排布",
         "description": "",
         "code": "<template>\n<van-linear-layout justify=\"space-between\">\n    <van-linear-layout>\n    </van-linear-layout>\n    <van-linear-layout>\n    </van-linear-layout>\n</van-linear-layout>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/linear-layout/screenshots/2.png",
+        "drawing": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/linear-layout/drawings/2.svg"
       }
     ],
     "themeVariables": []
@@ -1207,15 +1167,6 @@
         "concept": "PropDeclaration",
         "group": "主要属性",
         "tabKind": "property",
-        "name": "title",
-        "title": "文本",
-        "tsType": "nasl.core.String",
-        "description": "文本"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
         "setter": {
           "concept": "EnumSelectSetter",
           "options": [
@@ -1253,7 +1204,7 @@
         "title": "实线",
         "description": "",
         "code": "<template>\n<van-divider dashed=\"a\"> 文本 </van-divider>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/divider/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -1261,7 +1212,7 @@
         "title": "虚线",
         "description": "",
         "code": "<template>\n<van-divider dashed=\"b\"> 文本 </van-divider>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/divider/screenshots/1.png",
         "drawing": ""
       }
     ],
@@ -1322,33 +1273,6 @@
         "icon": "",
         "tsTypeParams": "",
         "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "左侧文本",
-            "tsType": "nasl.core.String",
-            "description": "左侧文本"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "rtitle",
-            "title": "右侧文本",
-            "tsType": "nasl.core.String",
-            "description": "右侧文本"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "label",
-            "title": "标题下方的描述信息",
-            "tsType": "nasl.core.String",
-            "description": "标题下方的描述信息"
-          },
           {
             "concept": "PropDeclaration",
             "group": "数据属性",
@@ -1520,7 +1444,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<van-cell-group>\n  <van-cell isLink center>\n    <template #title>\n      左侧文本\n    </template>\n    右侧文本\n  </van-cell>\n</van-cell-group>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/cell-group/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -1528,7 +1452,7 @@
         "title": "圆角风格",
         "description": "",
         "code": "<template>\n<van-cell-group inset>\n  <van-cell isLink center>\n    <template #title>\n      左侧文本\n    </template>\n    右侧文本\n  </van-cell>\n</van-cell-group>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/cell-group/screenshots/1.png",
         "drawing": ""
       },
       {
@@ -1536,7 +1460,7 @@
         "title": "垂直居中",
         "description": "",
         "code": "<template>\n<van-cell-group>\n  <van-cell isLink center>\n    <template #title>\n      左侧文本\n    </template>\n    右侧文本\n  </van-cell>\n</van-cell-group>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/cell-group/screenshots/2.png",
         "drawing": ""
       }
     ],
@@ -2108,16 +2032,16 @@
         "title": "3列样式（8:8:8）",
         "description": "",
         "code": "<template>\n  <van-row gutter=\"0\">\n    <van-col span=\"8\"></van-col>\n    <van-col span=\"8\"></van-col>\n    <van-col span=\"8\"></van-col>\n  </van-row>\n\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/row/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/row/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "2列样式（8:16）",
         "description": "",
         "code": "<template>\n<van-row gutter=\"0\">\n  <van-col span=\"8\"></van-col>\n  <van-col span=\"16\"></van-col>\n</van-row>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/row/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/row/drawings/1.svg"
       }
     ],
     "themeVariables": []
@@ -2134,28 +2058,6 @@
     "icon": "dropdown-menu",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "sync": true,
-        "tabKind": "property",
-        "name": "value",
-        "title": "菜单值",
-        "tsType": "nasl.core.String",
-        "description": "菜单值"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "route",
-        "title": "是否开启路由模式",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否开启路由模式"
-      },
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
@@ -2339,24 +2241,6 @@
         "icon": "",
         "tsTypeParams": "",
         "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "rtitle",
-            "title": "右侧文本",
-            "tsType": "nasl.core.String",
-            "description": "右侧文本"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "label",
-            "title": "标题下方的描述信息",
-            "tsType": "nasl.core.String",
-            "description": "标题下方的描述信息"
-          },
           {
             "concept": "PropDeclaration",
             "group": "数据属性",
@@ -2657,14 +2541,6 @@
             "name": "badgemax",
             "title": "请输入徽章最大值",
             "tsType": "nasl.core.Decimal"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "标题",
-            "tsType": "nasl.core.String"
           },
           {
             "concept": "PropDeclaration",
@@ -3025,15 +2901,6 @@
     "props": [
       {
         "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "to",
-        "title": "路由链接",
-        "tsType": "nasl.core.String",
-        "description": "需要 vue-router，与`<router-link>`的`to`属性相同。可以是一个字符串或者是描述目标位置的对象。"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "状态属性",
         "tabKind": "property",
         "setter": {
@@ -3330,7 +3197,7 @@
         "description": "",
         "code": "<template>\n<van-button type=\"info\" size=\"middle\" text=\"确定\" squareroud=\"round\"></van-button>\n</template>\n",
         "screenshot": "",
-        "drawing": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/button/drawings/3.svg"
+        "drawing": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/button/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
@@ -3338,7 +3205,7 @@
         "description": "",
         "code": "<template>\n<van-button type=\"info_secondary\" size=\"middle\" text=\"确定\" squareroud=\"round\"></van-button>\n</template>\n",
         "screenshot": "",
-        "drawing": ""
+        "drawing": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/button/drawings/1.svg"
       },
       {
         "concept": "ViewBlockWithImage",
@@ -3346,7 +3213,7 @@
         "description": "",
         "code": "<template>\n<van-button type=\"default\" size=\"middle\" text=\"确定\" squareroud=\"round\"></van-button>\n</template>\n",
         "screenshot": "",
-        "drawing": ""
+        "drawing": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/button/drawings/2.svg"
       },
       {
         "concept": "ViewBlockWithImage",
@@ -3354,7 +3221,7 @@
         "description": "",
         "code": "<template>\n<van-button  type=\"info\" size=\"middle\" text=\"确定\" icon=\"sure\" squareroud=\"round\"></van-button>\n</template>\n",
         "screenshot": "",
-        "drawing": ""
+        "drawing": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/button/drawings/3.svg"
       }
     ],
     "themeVariables": []
@@ -3504,7 +3371,7 @@
         "title": "适应",
         "description": "",
         "code": "<template>\n<van-image\n  src=\"http://ceph.lcap.hatest.163yun.com/lcap-test-static/h5-template/components/image_default.png\"\n  fit=\"contain\"\n  preview\n></van-image>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/image/screenshots/3.png",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/image/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -3512,7 +3379,7 @@
         "title": "适应（图片小于父元素时以原尺寸展示）",
         "description": "",
         "code": "<template>\n<van-image\n  src=\"http://ceph.lcap.hatest.163yun.com/lcap-test-static/h5-template/components/image_default.png\"\n  fit=\"scale-down\"\n  preview\n></van-image>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/image/screenshots/1.png",
         "drawing": ""
       },
       {
@@ -3520,7 +3387,7 @@
         "title": "原尺寸",
         "description": "",
         "code": "<template>\n<van-image\n  src=\"http://ceph.lcap.hatest.163yun.com/lcap-test-static/h5-template/components/image_default.png\"\n  fit=\"none\"\n  preview\n></van-image>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/image/screenshots/2.png",
         "drawing": ""
       },
       {
@@ -3528,7 +3395,7 @@
         "title": "拉伸",
         "description": "",
         "code": "<template>\n<van-image\n  src=\"http://ceph.lcap.hatest.163yun.com/lcap-test-static/h5-template/components/image_default.png\"\n  fit=\"fill\"\n  preview\n></van-image>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/image/screenshots/3.png",
         "drawing": ""
       },
       {
@@ -3536,7 +3403,7 @@
         "title": "填充",
         "description": "",
         "code": "<template>\n<van-image\n  src=\"http://ceph.lcap.hatest.163yun.com/lcap-test-static/h5-template/components/image_default.png\"\n  fit=\"cover\"\n  preview\n></van-image>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/image/screenshots/4.png",
         "drawing": ""
       }
     ],
@@ -3554,30 +3421,6 @@
     "icon": "swipe",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "loop",
-        "title": "循环播放",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否循环播放"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "showIndicators",
-        "title": "指示器",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否显示指示器"
-      },
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
@@ -3664,7 +3507,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<van-swipe class=\"my-swipe\" :autoplay=\"3000\" indicator-color=\"white\" style=\"height:200px;\">\n  <van-swipe-item vusion-slot-name=\"default\"><van-image style=\"width:100%;height:100%\" src=\"https://static-vusion.163yun.com/assets/cloud-ui/1.jpg\"></van-image></van-swipe-item>\n  <van-swipe-item vusion-slot-name=\"default\"><van-image style=\"width:100%;height:100%\" src=\"https://static-vusion.163yun.com/assets/cloud-ui/2.jpg\"></van-image></van-swipe-item>\n  <van-swipe-item vusion-slot-name=\"default\"><van-image style=\"width:100%;height:100%\" src=\"https://static-vusion.163yun.com/assets/cloud-ui/3.jpg\"></van-image></van-swipe-item>\n  <van-swipe-item vusion-slot-name=\"default\"><van-image style=\"width:100%;height:100%\" src=\"https://static-vusion.163yun.com/assets/cloud-ui/4.jpg\"></van-image></van-swipe-item>\n</van-swipe>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/swipe/screenshots/0.png",
         "drawing": ""
       }
     ],
@@ -3829,15 +3672,6 @@
         "props": [
           {
             "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "标题",
-            "tsType": "nasl.core.String",
-            "description": "自定义标题"
-          },
-          {
-            "concept": "PropDeclaration",
             "group": "数据属性",
             "tabKind": "property",
             "name": "name",
@@ -3915,7 +3749,7 @@
         "title": "外观-line",
         "description": "",
         "code": "<template>\n<van-tabs type=\"line\">\n  <van-tab><template #title><van-text text=\"标签 1\"></van-text></template>内容 1</van-tab>\n  <van-tab><template #title><van-text text=\"标签 2\"></van-text></template>内容 2</van-tab>\n  <van-tab><template #title><van-text text=\"标签 3\"></van-text></template>内容 3</van-tab>\n</van-tabs>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/tabs/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -3923,7 +3757,7 @@
         "title": "外观-card",
         "description": "",
         "code": "<template>\n<van-tabs type=\"card\">\n  <van-tab><template #title><van-text text=\"标签 1\"></van-text></template>内容 1</van-tab>\n  <van-tab><template #title><van-text text=\"标签 2\"></van-text></template>内容 2</van-tab>\n  <van-tab><template #title><van-text text=\"标签 3\"></van-text></template>内容 3</van-tab>\n</van-tabs>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/tabs/screenshots/1.png",
         "drawing": ""
       }
     ],
@@ -4094,7 +3928,7 @@
         "title": "普通文本",
         "description": "",
         "code": "<template>\n<van-text text=\"普通文本\"></van-text>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/text/screenshots/3.png",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/text/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -4102,7 +3936,7 @@
         "title": "小号文本",
         "description": "",
         "code": "<template>\n<van-text size=\"small\" text=\"小号文本\"></van-text>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/text/screenshots/7.png",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/text/screenshots/1.png",
         "drawing": ""
       },
       {
@@ -4110,7 +3944,7 @@
         "title": "大号文本",
         "description": "",
         "code": "<template>\n<van-text size=\"large\" text=\"大号文本\"></van-text>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/text/screenshots/2.png",
         "drawing": ""
       },
       {
@@ -4118,7 +3952,7 @@
         "title": "主要文本",
         "description": "",
         "code": "<template>\n<van-text color=\"primary\" text=\"主要文本\"></van-text>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/text/screenshots/3.png",
         "drawing": ""
       },
       {
@@ -4126,7 +3960,7 @@
         "title": "次要文本",
         "description": "",
         "code": "<template>\n<van-text color=\"secondary\" text=\"次要文本\"></van-text>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/text/screenshots/4.png",
         "drawing": ""
       },
       {
@@ -4134,7 +3968,7 @@
         "title": "成功文本",
         "description": "",
         "code": "<template>\n<van-text color=\"success\" text=\"成功文本\"></van-text>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/text/screenshots/5.png",
         "drawing": ""
       },
       {
@@ -4142,7 +3976,7 @@
         "title": "警告文本",
         "description": "",
         "code": "<template>\n<van-text color=\"warning\" text=\"警告文本\"></van-text>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/text/screenshots/6.png",
         "drawing": ""
       },
       {
@@ -4150,7 +3984,7 @@
         "title": "错误文本",
         "description": "",
         "code": "<template>\n<van-text color=\"error\" text=\"错误文本\"></van-text>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/text/screenshots/7.png",
         "drawing": ""
       },
       {
@@ -4158,7 +3992,7 @@
         "title": "禁默文本",
         "description": "",
         "code": "<template>\n<van-text color=\"disabled\" text=\"禁默文本\"></van-text>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/text/screenshots/8.png",
         "drawing": ""
       },
       {
@@ -4166,7 +4000,7 @@
         "title": "文本过长省略",
         "description": "",
         "code": "<template>\n<van-text overflow=\"ellipsis\" text=\"文字过长省略过长省略过长省略过长省略过长省略。\"></van-text>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/text/screenshots/9.png",
         "drawing": ""
       }
     ],
@@ -4185,51 +4019,6 @@
     "icon": "link",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "to",
-        "title": "路由链接",
-        "tsType": "nasl.core.String",
-        "description": "需要 vue-router，与`<router-link>`的`to`属性相同。可以是一个字符串或者是描述目标位置的对象。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "replace",
-        "title": "替换",
-        "tsType": "nasl.core.Boolean",
-        "description": "需要 vue-router，与`<router-link>`的`replace`属性相同。如果为`true`，当点击时，会调用`router.replace()`而不是`router.push()`，于是导航后不会留下`history `记录。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "append",
-        "title": "追加路径",
-        "tsType": "nasl.core.Boolean",
-        "description": "需要 vue-router，与`<router-link>`的`append`属性相同。如果为`true`，则在当前路径后追加`to`的路径。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "decoration",
-        "title": "下划线",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否显示下划线"
-      },
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
@@ -4386,7 +4175,7 @@
         "title": "普通链接",
         "description": "",
         "code": "<template>\n<van-link text=\"普通链接\"></van-link>\n</template>\n",
-        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src-vusion/components/link/screenshots/3.png",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src-vusion/components/link/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -4394,7 +4183,7 @@
         "title": "成功链接",
         "description": "",
         "code": "<template>\n<van-link color=\"success\" text=\"成功链接\"></van-link>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src-vusion/components/link/screenshots/1.png",
         "drawing": ""
       },
       {
@@ -4402,7 +4191,7 @@
         "title": "警告链接",
         "description": "",
         "code": "<template>\n<van-link color=\"warning\" text=\"警告链接\"></van-link>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src-vusion/components/link/screenshots/2.png",
         "drawing": ""
       },
       {
@@ -4410,7 +4199,7 @@
         "title": "危险链接",
         "description": "",
         "code": "<template>\n<van-link color=\"danger\" text=\"危险链接\"></van-link>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src-vusion/components/link/screenshots/3.png",
         "drawing": ""
       },
       {
@@ -4418,7 +4207,7 @@
         "title": "禁用链接",
         "description": "",
         "code": "<template>\n<van-link disabled text=\"禁用链接\"></van-link>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src-vusion/components/link/screenshots/4.png",
         "drawing": ""
       }
     ],
@@ -4508,15 +4297,6 @@
     "icon": "notice-bar",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "text",
-        "title": "通知文本内容",
-        "tsType": "nasl.core.String",
-        "description": "通知文本内"
-      },
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
@@ -5206,7 +4986,7 @@
         "title": "组合图标-上下",
         "description": "",
         "code": "<template>\n<van-iconv name=\"default\">\n  <van-text text=\"图标\"></van-text>\n</van-iconv>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/iconv/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -5214,7 +4994,7 @@
         "title": "组合图标-左右",
         "description": "",
         "code": "<template>\n<van-iconv name=\"default\" icotype=\"left\">\n  <van-text text=\"图标\"></van-text>\n</van-iconv>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/iconv/screenshots/1.png",
         "drawing": ""
       },
       {
@@ -5222,7 +5002,7 @@
         "title": "仅图标",
         "description": "",
         "code": "<template>\n<van-iconv name=\"default\" icotype=\"only\">\n  <van-text text=\"图标\"></van-text>\n</van-iconv>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/iconv/screenshots/2.png",
         "drawing": ""
       }
     ],
@@ -5392,14 +5172,6 @@
     "icon": "circular-progress",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "text",
-        "title": "文字",
-        "tsType": "nasl.core.String"
-      },
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
@@ -5653,124 +5425,6 @@
     "props": [
       {
         "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "text",
-        "title": "默认显示文本",
-        "tsType": "nasl.core.String",
-        "description": "默认显示的文本"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "successText",
-        "title": "复制成功提示文本",
-        "tsType": "nasl.core.String",
-        "description": "复制成功提示文本"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "工具提示",
-              "value": "tooltip"
-            },
-            {
-              "title": "弹框提示",
-              "value": "toast"
-            },
-            {
-              "title": "无反馈",
-              "value": "none"
-            }
-          ]
-        },
-        "name": "feedback",
-        "title": "复制提示反馈方式",
-        "tsType": "'tooltip' | 'toast' | 'none'",
-        "description": "复制提示反馈方式"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "上",
-              "value": "top"
-            },
-            {
-              "title": "下",
-              "value": "bottom"
-            },
-            {
-              "title": "左",
-              "value": "left"
-            },
-            {
-              "title": "右",
-              "value": "right"
-            },
-            {
-              "title": "上左",
-              "value": "top-start"
-            },
-            {
-              "title": "上右",
-              "value": "top-end"
-            },
-            {
-              "title": "下左",
-              "value": "bottom-start"
-            },
-            {
-              "title": "下右",
-              "value": "bottom-end"
-            },
-            {
-              "title": "左上",
-              "value": "left-start"
-            },
-            {
-              "title": "左下",
-              "value": "left-end"
-            },
-            {
-              "title": "右上",
-              "value": "right-start"
-            },
-            {
-              "title": "右下",
-              "value": "right-end"
-            }
-          ]
-        },
-        "name": "placement",
-        "title": "提示框位置",
-        "tsType": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end' | 'right-start' | 'right-end'",
-        "description": "tooltip 提示框位置"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "NumberInputSetter"
-        },
-        "name": "hideDelay",
-        "title": "提示框显示时长",
-        "tsType": "nasl.core.Decimal",
-        "description": "提示框显示时长"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "数据属性",
         "tabKind": "property",
         "name": "value",
@@ -5818,8 +5472,8 @@
         "title": "复制链接",
         "description": "",
         "code": "<template>\n<van-copy value=\"需要 copy 的内容\">\n  <van-link text=\"复制\"></van-link>\n</van-copy>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src-vusion/components/copy/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src-vusion/components/copy/drawings/0.svg"
       }
     ],
     "themeVariables": []
@@ -5837,158 +5491,6 @@
     "icon": "list-view",
     "tsTypeParams": "T, V, P, M",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "readonly",
-        "title": "只读",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否只读"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "disabled",
-        "title": "禁用",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否禁用"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "cancelable",
-        "title": "可取消",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否可以取消选择"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "showHead",
-        "title": "显示头部",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否显示头部"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "title",
-        "title": "列表标题",
-        "tsType": "nasl.core.String",
-        "description": "列表标题"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "showFoot",
-        "title": "显示底部",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否显示底部"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "remotePaging",
-        "title": "后端分页",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否使用后端分页",
-        "if": "_ => _.pageable !== ''"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "remoteFiltering",
-        "title": "后端筛选",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否使用后端过滤",
-        "if": "_ => _.filterable === true"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "matchMethod",
-        "title": "匹配方法",
-        "tsType": "nasl.core.String",
-        "description": "过滤时的匹配方法",
-        "if": "_ => _.filterable === true"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "caseSensitive",
-        "title": "大小写敏感",
-        "tsType": "nasl.core.Boolean",
-        "description": "过滤时大小写是否敏感",
-        "if": "_ => _.filterable === true"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "占满",
-              "value": "full"
-            },
-            {
-              "title": "巨大",
-              "value": "huge"
-            },
-            {
-              "title": "大",
-              "value": "large"
-            },
-            {
-              "title": "正常",
-              "value": "normal"
-            },
-            {
-              "title": "自适应",
-              "value": "auto"
-            }
-          ]
-        },
-        "name": "size",
-        "title": "尺寸",
-        "tsType": "'full' | 'huge' | 'large' | 'normal' | 'auto'",
-        "description": "大小扩展，支持一个值或两个值的组合，前者表示高度，后者表示宽度"
-      },
       {
         "concept": "PropDeclaration",
         "group": "数据属性",
@@ -6123,18 +5625,6 @@
         "tsType": "nasl.core.Boolean",
         "description": "搜索框是否展示清除按钮",
         "if": "_ => _.filterable === true"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "交互属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "selectable",
-        "title": "可选择",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否可以选择"
       },
       {
         "concept": "PropDeclaration",
@@ -6589,68 +6079,6 @@
     "props": [
       {
         "concept": "PropDeclaration",
-        "group": "主要属性",
-        "sync": true,
-        "tabKind": "property",
-        "name": "value",
-        "title": "值",
-        "tsType": "nasl.core.Any",
-        "description": "当前选择的值"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "textField",
-        "title": "文本字段名",
-        "tsType": "(item: T) => nasl.core.String",
-        "description": "选项文本的字段名"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "valueField",
-        "title": "值字段名",
-        "tsType": "(item: T) => V",
-        "description": "选项值的字段名"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "cancelable",
-        "title": "可取消",
-        "tsType": "nasl.core.Boolean"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "multiple",
-        "title": "可多选",
-        "tsType": "nasl.core.Boolean"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "clearable",
-        "title": "筛选清除按钮",
-        "tsType": "nasl.core.Boolean",
-        "description": "搜索框是否有清除按钮"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "数据属性",
         "tabKind": "property",
         "name": "dataSource",
@@ -6843,18 +6271,6 @@
         "concept": "PropDeclaration",
         "group": "状态属性",
         "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "error",
-        "title": "是否加载失败",
-        "tsType": "nasl.core.Boolean",
-        "description": "手动设置是否加载失败。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "状态属性",
-        "tabKind": "property",
         "name": "errorText",
         "title": "加载失败文案",
         "tsType": "nasl.core.String"
@@ -6890,28 +6306,6 @@
         "title": "网格数",
         "tsType": "nasl.core.Integer",
         "description": "设置每页排列几项"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "状态属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "readonly",
-        "title": "只读",
-        "tsType": "nasl.core.Boolean"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "状态属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "disabled",
-        "title": "禁用",
-        "tsType": "nasl.core.Boolean"
       }
     ],
     "readableProps": [],
@@ -7020,60 +6414,7 @@
     "description": "具有数据收集、校验和提交功能的表单，包含输入框、选择框、复选框、单选框等元素。",
     "icon": "form",
     "tsTypeParams": "",
-    "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "左",
-              "value": "left"
-            },
-            {
-              "title": "中",
-              "value": "center"
-            },
-            {
-              "title": "右",
-              "value": "right"
-            }
-          ]
-        },
-        "name": "labelAlign",
-        "title": "标签对齐方式",
-        "tsType": "'left' | 'center' | 'right'",
-        "description": "标签对齐方式"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "左",
-              "value": "left"
-            },
-            {
-              "title": "中",
-              "value": "center"
-            },
-            {
-              "title": "右",
-              "value": "right"
-            }
-          ]
-        },
-        "name": "inputAlign",
-        "title": "输入框对齐方式",
-        "tsType": "'left' | 'center' | 'right'",
-        "description": "输入框对齐方式"
-      }
-    ],
+    "props": [],
     "readableProps": [],
     "events": [
       {
@@ -7128,102 +6469,6 @@
         "icon": "",
         "tsTypeParams": "",
         "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "sync": true,
-            "tabKind": "property",
-            "name": "value",
-            "title": "表单项值",
-            "tsType": "nasl.core.Any",
-            "description": "表单项值"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "name",
-            "title": "提交表单的标识符",
-            "tsType": "nasl.core.String",
-            "description": "提交表单的标识符"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "EnumSelectSetter",
-              "options": [
-                {
-                  "title": "text",
-                  "value": "text"
-                },
-                {
-                  "title": "number",
-                  "value": "number"
-                },
-                {
-                  "title": "password",
-                  "value": "password"
-                },
-                {
-                  "title": "textarea",
-                  "value": "textarea"
-                },
-                {
-                  "title": "digit",
-                  "value": "digit"
-                },
-                {
-                  "title": "tel",
-                  "value": "tel"
-                }
-              ]
-            },
-            "name": "type",
-            "title": "输入框类型",
-            "tsType": "'text' | 'number' | 'password' | 'textarea' | 'digit' | 'tel'",
-            "description": "input输入框类型"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "label",
-            "title": "标签名称",
-            "tsType": "nasl.core.String",
-            "description": "输入框左侧文本"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "EnumSelectSetter",
-              "options": [
-                {
-                  "title": "正常",
-                  "value": "-"
-                },
-                {
-                  "title": "大",
-                  "value": "large"
-                }
-              ]
-            },
-            "name": "size",
-            "title": "标签大小",
-            "tsType": "'-' | 'large'",
-            "description": "输入框左侧文本大小"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "placeholder",
-            "title": "输入框占位提示文字",
-            "tsType": "nasl.core.String"
-          },
           {
             "concept": "PropDeclaration",
             "group": "主要属性",
@@ -7321,50 +6566,6 @@
     "icon": "input",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "搜索",
-              "value": "search"
-            },
-            {
-              "title": "暂无",
-              "value": ""
-            }
-          ]
-        },
-        "name": "prefix",
-        "title": "前缀图标",
-        "tsType": "'search' | ''",
-        "description": "前缀图标"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "搜索",
-              "value": "search"
-            },
-            {
-              "title": "暂无",
-              "value": ""
-            }
-          ]
-        },
-        "name": "suffix",
-        "title": "后缀图标",
-        "tsType": "'search' | ''",
-        "description": "后缀图标"
-      },
       {
         "concept": "PropDeclaration",
         "group": "数据属性",
@@ -7702,50 +6903,6 @@
     "props": [
       {
         "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "搜索",
-              "value": "search"
-            },
-            {
-              "title": "暂无",
-              "value": ""
-            }
-          ]
-        },
-        "name": "prefix",
-        "title": "前缀图标",
-        "tsType": "'search' | ''",
-        "description": "前缀图标"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "搜索",
-              "value": "search"
-            },
-            {
-              "title": "暂无",
-              "value": ""
-            }
-          ]
-        },
-        "name": "suffix",
-        "title": "后缀图标",
-        "tsType": "'search' | ''",
-        "description": "后缀图标"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "数据属性",
         "sync": true,
         "tabKind": "property",
@@ -7936,15 +7093,6 @@
     "icon": "search",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "actiontext",
-        "title": "按钮文字",
-        "tsType": "nasl.core.String",
-        "description": "按钮文字"
-      },
       {
         "concept": "PropDeclaration",
         "group": "数据属性",
@@ -8342,15 +7490,6 @@
             "concept": "PropDeclaration",
             "group": "数据属性",
             "tabKind": "property",
-            "name": "title",
-            "title": "文本",
-            "tsType": "nasl.core.String",
-            "description": "文本"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "数据属性",
-            "tabKind": "property",
             "name": "name",
             "title": "选项值",
             "tsType": "nasl.core.String",
@@ -8726,15 +7865,6 @@
         "icon": "",
         "tsTypeParams": "V",
         "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "文本",
-            "tsType": "nasl.core.String",
-            "description": "文本"
-          },
           {
             "concept": "PropDeclaration",
             "group": "数据属性",
@@ -9133,7 +8263,7 @@
         "title": "基本用法",
         "description": "",
         "code": "<template>\n<van-stepper-new :showPlus=\"false\" :showMinus=\"false\" placeholder=\"请输入\" align=\"left\"></van-stepper-new>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/stepper-new/screenshots/0.png",
         "drawing": ""
       },
       {
@@ -9141,7 +8271,7 @@
         "title": "步进模式",
         "description": "",
         "code": "<template>\n<van-stepper-new placeholder=\"请输入\"></van-stepper-new>\n</template>\n",
-        "screenshot": "",
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/stepper-new/screenshots/1.png",
         "drawing": ""
       }
     ],
@@ -9511,32 +8641,6 @@
     "props": [
       {
         "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "dataUrl",
-              "value": "dataUrl"
-            },
-            {
-              "title": "text",
-              "value": "text"
-            },
-            {
-              "title": "file",
-              "value": "file"
-            }
-          ]
-        },
-        "name": "resultType",
-        "title": "文件读取结果的类型",
-        "tsType": "'dataUrl' | 'text' | 'file'",
-        "description": "文件读取结果的类型，上传大文件时，建议使用 file 类型，避免卡顿"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "数据属性",
         "sync": true,
         "tabKind": "property",
@@ -9634,17 +8738,6 @@
         "title": "转换器",
         "tsType": "'json' | 'simple'",
         "description": "将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "autoUpload",
-        "title": "自动上传",
-        "tsType": "nasl.core.Boolean"
       },
       {
         "concept": "PropDeclaration",
@@ -10112,24 +9205,24 @@
         "title": "基础用法",
         "description": "",
         "code": "<template>\n<van-capsules>\n    <van-capsules-item>Option-A</van-capsules-item>\n    <van-capsules-item>Option-B</van-capsules-item>\n    <van-capsules-item>Option-C</van-capsules-item>\n</van-capsules>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/capsules/screenshots/0.png",
+        "drawing": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/capsules/drawings/0.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "胶囊组",
         "description": "",
         "code": "<template>\n<van-capsules>\n    <van-capsules-group>\n        <van-capsules-item>Option-A</van-capsules-item>\n        <van-capsules-item>Option-B</van-capsules-item>\n    </van-capsules-group>\n    <van-capsules-group>\n        <van-capsules-item>Option-A</van-capsules-item>\n        <van-capsules-item>Option-B</van-capsules-item>\n    </van-capsules-group>\n</van-capsules>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/capsules/screenshots/1.png",
+        "drawing": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/capsules/drawings/1.svg"
       },
       {
         "concept": "ViewBlockWithImage",
         "title": "标签",
         "description": "",
         "code": "<template>\n<van-capsules>\n    <van-capsules-item value=\"1\">1</van-capsules-item>\n    <van-capsules-item value=\"2\">2</van-capsules-item>\n    <van-capsules-item value=\"3\">3</van-capsules-item>\n    <van-capsules-item value=\"4\" label=\"88折\">4</van-capsules-item>\n    <van-capsules-item value=\"5\" label=\"88折\">5</van-capsules-item>\n    <van-capsules-item value=\"6\" label=\"88折\">6</van-capsules-item>\n</van-capsules>\n</template>\n",
-        "screenshot": "",
-        "drawing": ""
+        "screenshot": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/capsules/screenshots/2.png",
+        "drawing": "https://static-vusion.163yun.com/packages/@lcap/mobile-ui@0.17.0/src/capsules/drawings/2.svg"
       }
     ],
     "themeVariables": []
@@ -10146,27 +9239,6 @@
     "icon": "picker",
     "tsTypeParams": "T, V, M extends boolean, P extends boolean",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "labelField",
-        "title": "左侧标题",
-        "tsType": "nasl.core.String",
-        "description": "左侧标题"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "NumberInputSetter"
-        },
-        "name": "defaultIndex",
-        "title": "默认选中项的索引",
-        "tsType": "nasl.core.Decimal",
-        "description": "默认选中项的索引"
-      },
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
@@ -10580,15 +9652,6 @@
         "concept": "PropDeclaration",
         "group": "主要属性",
         "tabKind": "property",
-        "name": "labelField",
-        "title": "左侧标题",
-        "tsType": "nasl.core.String",
-        "description": "左侧标题"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
         "setter": {
           "concept": "SwitchSetter"
         },
@@ -10818,15 +9881,6 @@
         "concept": "PropDeclaration",
         "group": "主要属性",
         "tabKind": "property",
-        "name": "labelField",
-        "title": "左侧标题",
-        "tsType": "nasl.core.String",
-        "description": "左侧标题"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
         "setter": {
           "concept": "SwitchSetter"
         },
@@ -11041,15 +10095,6 @@
     "icon": "time-picker",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "labelField",
-        "title": "左侧标题",
-        "tsType": "nasl.core.String",
-        "description": "左侧文本插槽内容存在时优先展示插槽内容"
-      },
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
@@ -11411,15 +10456,6 @@
         "concept": "PropDeclaration",
         "group": "主要属性",
         "tabKind": "property",
-        "name": "displayFormat",
-        "title": "自定义展示格式",
-        "tsType": "nasl.core.String",
-        "description": "只用于页面上展示的格式，例如：yyyy年MM月dd日"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
         "name": "title",
         "title": "顶部栏标题",
         "tsType": "nasl.core.String"
@@ -11646,41 +10682,6 @@
         "concept": "PropDeclaration",
         "group": "主要属性",
         "tabKind": "property",
-        "name": "labelField",
-        "title": "左侧标题",
-        "tsType": "nasl.core.String",
-        "description": "左侧标题"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "single",
-              "value": "single"
-            },
-            {
-              "title": "multiple",
-              "value": "multiple"
-            },
-            {
-              "title": "range",
-              "value": "range"
-            }
-          ]
-        },
-        "name": "type",
-        "title": "类型",
-        "tsType": "'single' | 'multiple' | 'range'",
-        "description": "选择类型"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
         "setter": {
           "concept": "SwitchSetter"
         },
@@ -11866,73 +10867,6 @@
         "concept": "PropDeclaration",
         "group": "主要属性",
         "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "点击",
-              "value": "click"
-            },
-            {
-              "title": "悬浮",
-              "value": "hover"
-            },
-            {
-              "title": "右击",
-              "value": "right-click"
-            },
-            {
-              "title": "双击",
-              "value": "double-click"
-            },
-            {
-              "title": "手动",
-              "value": "manual"
-            }
-          ]
-        },
-        "name": "trigger",
-        "title": "触发方式",
-        "tsType": "'click' | 'hover' | 'right-click' | 'double-click' | 'manual'",
-        "description": "弹出框的触发方式"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "offset",
-        "title": "弹出层偏移",
-        "tsType": "nasl.core.String",
-        "description": "弹出层偏移，如：'10', '10px 10px', '10% 10%', 第一个值表示水平偏移，第二个值表示垂直位移, 默认单位是'px'"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "followCursor",
-        "title": "跟随鼠标",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否跟随鼠标"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "mergeBorders",
-        "title": "合并边框",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否自动合并内外边框"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
         "name": "title",
         "title": "标题",
         "tsType": "nasl.core.String"
@@ -12014,18 +10948,6 @@
         "title": "展示方式",
         "tsType": "'inline' | 'block'",
         "description": "设置展示方式"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "ellipsis",
-        "title": "省略显示",
-        "tsType": "nasl.core.Boolean",
-        "description": "文字过长时是否省略显示"
       },
       {
         "concept": "PropDeclaration",
@@ -12154,30 +11076,6 @@
     "icon": "dialog",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "showConfirmButton",
-        "title": "是否展示确认按钮",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否展示确认按钮"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "showCancelButton",
-        "title": "是否展示取消按钮",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否展示取消按钮"
-      },
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
@@ -12376,19 +11274,6 @@
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
-        "sync": true,
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "value",
-        "title": "是否展示",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否展示弹出消息"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
         "tabKind": "property",
         "name": "message",
         "title": "提示内容",
@@ -12453,31 +11338,6 @@
         "title": "停留时间",
         "tsType": "nasl.core.Integer",
         "description": "自动关闭的延时，单位毫秒。设为 0 时不自动关闭"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "顶部",
-              "value": "top"
-            },
-            {
-              "title": "中间",
-              "value": "middle"
-            },
-            {
-              "title": "底部",
-              "value": "bottom"
-            }
-          ]
-        },
-        "name": "position",
-        "title": "位置",
-        "tsType": "'top' | 'middle' | 'bottom'"
       }
     ],
     "readableProps": [],

@@ -175,7 +175,10 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
                                 prop.name = prop.name.replace(/^_/, '');
                             }
 
-                            component.props.push(prop);
+                            // 过滤private属性
+                            if (member.accessibility !== 'private') {
+                                component.props.push(prop);
+                            }
                         } else if (calleeName === 'Event') {
                             const event: astTypes.EventDeclaration = {
                                 concept: 'EventDeclaration',

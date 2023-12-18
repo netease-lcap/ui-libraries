@@ -13,46 +13,6 @@
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "行内",
-              "value": "inline"
-            },
-            {
-              "title": "块级",
-              "value": "block"
-            }
-          ]
-        },
-        "name": "display",
-        "title": "展示方式",
-        "tsType": "'inline' | 'block'",
-        "description": "行内展示，或块级换行展示"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "flex 布局模式",
-              "value": "flex"
-            }
-          ]
-        },
-        "name": "type",
-        "title": "布局模式",
-        "tsType": "'flex'",
-        "description": "布局模式"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
         "bindHide": true,
         "tabKind": "property",
         "setter": {
@@ -911,66 +871,6 @@
           {
             "concept": "PropDeclaration",
             "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "NumberInputSetter"
-            },
-            "name": "mediaHuge",
-            "title": "响应很大屏",
-            "tsType": "nasl.core.Decimal",
-            "description": "响应式布局`<=1440px`的列跨越栅格数"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "NumberInputSetter"
-            },
-            "name": "mediaLarge",
-            "title": "响应大屏",
-            "tsType": "nasl.core.Decimal",
-            "description": "响应式布局`<=1200px`的列跨越栅格数"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "NumberInputSetter"
-            },
-            "name": "mediaMedium",
-            "title": "响应中屏",
-            "tsType": "nasl.core.Decimal",
-            "description": "响应式布局`<=960px`的列跨越栅格数"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "NumberInputSetter"
-            },
-            "name": "mediaSmall",
-            "title": "响应小屏",
-            "tsType": "nasl.core.Decimal",
-            "description": "响应式布局`<=768px`的列跨越栅格数"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "NumberInputSetter"
-            },
-            "name": "mediaMini",
-            "title": "响应迷你屏",
-            "tsType": "nasl.core.Decimal",
-            "description": "响应式布局`<=480px`的列跨越栅格数"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
             "bindHide": true,
             "tabKind": "property",
             "setter": {
@@ -1741,62 +1641,6 @@
           {
             "concept": "PropDeclaration",
             "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "SwitchSetter"
-            },
-            "name": "fixed",
-            "title": "固定展示",
-            "tsType": "nasl.core.Boolean",
-            "description": "开启后滚动时该项固定显示"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "EnumSelectSetter",
-              "options": [
-                {
-                  "title": "左",
-                  "value": "left"
-                },
-                {
-                  "title": "右",
-                  "value": "right"
-                }
-              ]
-            },
-            "name": "fixdirec",
-            "title": "固定位置",
-            "tsType": "'left' | 'right'",
-            "description": "固定在左侧还是右侧"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "EnumSelectSetter",
-              "options": [
-                {
-                  "title": "块级",
-                  "value": "block"
-                },
-                {
-                  "title": "行内",
-                  "value": "inline"
-                }
-              ]
-            },
-            "name": "display",
-            "title": "展示方式",
-            "tsType": "'block' | 'inline'",
-            "description": "行内展示，或块级换行展示"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
             "bindHide": true,
             "tabKind": "property",
             "setter": {
@@ -2327,39 +2171,6 @@
             "concept": "PropDeclaration",
             "group": "主要属性",
             "tabKind": "property",
-            "name": "text",
-            "title": "文本",
-            "tsType": "nasl.core.String",
-            "description": "文本内容"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "SwitchSetter"
-            },
-            "name": "replace",
-            "title": "替换",
-            "tsType": "nasl.core.Boolean",
-            "description": "需要 vue-router，与`<router-link>`的`replace`属性相同。如果为`true`，当点击时，会调用`router.replace()`而不是`router.push()`，于是导航后不会留下`history `记录。"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "SwitchSetter"
-            },
-            "name": "append",
-            "title": "追加路径",
-            "tsType": "nasl.core.Boolean",
-            "description": "需要 vue-router，与`<router-link>`的`append`属性相同。如果为`true`，则在当前路径后追加`to`的路径。"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
             "setter": {
               "concept": "IconSetter"
             },
@@ -2367,27 +2178,6 @@
             "title": "图标",
             "tsType": "nasl.core.String",
             "docDescription": "支持从图标库选择或上传自定义图标。"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "EnumSelectSetter",
-              "options": [
-                {
-                  "title": "链接",
-                  "value": "link"
-                },
-                {
-                  "title": "显示为默认颜色文本，不可点",
-                  "value": "text"
-                }
-              ]
-            },
-            "name": "type",
-            "title": "类型",
-            "tsType": "'link' | 'text'"
           },
           {
             "concept": "PropDeclaration",
@@ -2925,57 +2715,6 @@
         "props": [
           {
             "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "text",
-            "title": "文本",
-            "tsType": "nasl.core.String",
-            "description": "文本内容"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "item",
-            "title": "相关对象",
-            "tsType": "nasl.core.Any",
-            "description": "相关对象。当选择此项时，抛出的事件会传递该对象，便于开发"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "to",
-            "title": "路由链接",
-            "tsType": "nasl.core.String",
-            "description": "需要 vue-router，与`<router-link>`的`to`属性相同。可以是一个字符串或者是描述目标位置的对象。"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "SwitchSetter"
-            },
-            "name": "replace",
-            "title": "替换",
-            "tsType": "nasl.core.Boolean",
-            "description": "需要 vue-router，与`<router-link>`的`replace`属性相同。如果为`true`，当点击时，会调用`router.replace()`而不是`router.push()`，于是导航后不会留下`history `记录。"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "SwitchSetter"
-            },
-            "name": "exact",
-            "title": "精确匹配",
-            "tsType": "nasl.core.Boolean",
-            "description": "需要 vue-router，与`<router-link>`的`exact`属性相同。是否与路由完全一致时才高亮显示。"
-          },
-          {
-            "concept": "PropDeclaration",
             "group": "数据属性",
             "tabKind": "property",
             "name": "value",
@@ -3162,15 +2901,6 @@
         "icon": "",
         "tsTypeParams": "",
         "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "标题",
-            "tsType": "nasl.core.String",
-            "description": "显示的标题"
-          },
           {
             "concept": "PropDeclaration",
             "group": "交互属性",
@@ -3474,18 +3204,6 @@
       },
       {
         "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "PropertySelectSetter"
-        },
-        "name": "field",
-        "title": "字段",
-        "tsType": "(item: T) => nasl.core.String",
-        "description": "显示文本字段"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "状态属性",
         "tabKind": "property",
         "setter": {
@@ -3556,57 +3274,6 @@
         "icon": "",
         "tsTypeParams": "",
         "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "text",
-            "title": "文本",
-            "tsType": "nasl.core.String",
-            "description": "文本内容"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "item",
-            "title": "相关对象",
-            "tsType": "nasl.core.Any",
-            "description": "相关对象。当选择此项时，抛出的事件会传递该对象，便于开发"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "to",
-            "title": "路由链接",
-            "tsType": "nasl.core.String",
-            "description": "需要 vue-router，与`<router-link>`的`to`属性相同。可以是一个字符串或者是描述目标位置的对象。"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "SwitchSetter"
-            },
-            "name": "replace",
-            "title": "替换地址",
-            "tsType": "nasl.core.Boolean",
-            "description": "需要 vue-router，与`<router-link>`的`replace`属性相同。如果为`true`，当点击时，会调用`router.replace()`而不是`router.push()`，于是导航后不会留下`history `记录。"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "SwitchSetter"
-            },
-            "name": "exact",
-            "title": "精确匹配",
-            "tsType": "nasl.core.Boolean",
-            "description": "需要 vue-router，与`<router-link>`的`exact`属性相同。是否与路由完全一致时才高亮显示。"
-          },
           {
             "concept": "PropDeclaration",
             "group": "数据属性",
@@ -4085,15 +3752,6 @@
         "props": [
           {
             "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "标题",
-            "tsType": "nasl.core.String",
-            "description": "显示的标题"
-          },
-          {
-            "concept": "PropDeclaration",
             "group": "交互属性",
             "tabKind": "property",
             "setter": {
@@ -4234,15 +3892,6 @@
         "title": "值",
         "tsType": "nasl.core.String",
         "description": "当前选择的值"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "field",
-        "title": "字段",
-        "tsType": "nasl.core.String",
-        "description": "显示文本字段"
       },
       {
         "concept": "PropDeclaration",
@@ -4397,15 +4046,6 @@
           {
             "concept": "PropDeclaration",
             "group": "主要属性",
-            "tabKind": "property",
-            "name": "item",
-            "title": "相关对象",
-            "tsType": "nasl.core.Any",
-            "description": "相关对象。当选择此项时，抛出的事件会传递该对象，便于开发"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
             "bindHide": true,
             "tabKind": "property",
             "setter": {
@@ -4464,39 +4104,6 @@
             "title": "打开方式",
             "tsType": "'_blank' | '_self' | '_parent' | '_top'",
             "description": "链接跳转方式"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "to",
-            "title": "路由链接",
-            "tsType": "nasl.core.String",
-            "description": "需要 vue-router，与`<router-link>`的`to`属性相同。可以是一个字符串或者是描述目标位置的对象。"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "SwitchSetter"
-            },
-            "name": "replace",
-            "title": "替换地址",
-            "tsType": "nasl.core.Boolean",
-            "description": "需要 vue-router，与`<router-link>`的`replace`属性相同。如果为`true`，当点击时，会调用`router.replace()`而不是`router.push()`，于是导航后不会留下`history `记录。"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "SwitchSetter"
-            },
-            "name": "exact",
-            "title": "精确匹配",
-            "tsType": "nasl.core.Boolean",
-            "description": "需要 vue-router，与`<router-link>`的`exact`属性相同。是否与路由完全一致时才高亮显示。"
           }
         ],
         "readableProps": [],
@@ -5214,24 +4821,6 @@
             "concept": "PropDeclaration",
             "group": "主要属性",
             "tabKind": "property",
-            "name": "text",
-            "title": "文本",
-            "tsType": "nasl.core.String",
-            "description": "显示文本内容"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "to",
-            "title": "路由链接",
-            "tsType": "nasl.core.String | Location",
-            "description": "需要 vue-router，与`<router-link>`的`to`属性相同。可以是一个字符串或者是描述目标位置的对象。"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
             "name": "icon",
             "title": "图标",
             "tsType": "nasl.core.String",
@@ -5340,15 +4929,6 @@
         "icon": "",
         "tsTypeParams": "",
         "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "标题",
-            "tsType": "nasl.core.String",
-            "description": "显示的标题"
-          },
           {
             "concept": "PropDeclaration",
             "group": "交互属性",
@@ -5558,29 +5138,11 @@
             "concept": "PropDeclaration",
             "group": "数据属性",
             "tabKind": "property",
-            "name": "label",
-            "title": "文本",
-            "tsType": "nasl.core.String",
-            "description": "集合的元素类型中，用于显示文本的属性名称"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "数据属性",
-            "tabKind": "property",
             "name": "value",
             "title": "值",
             "tsType": "nasl.core.String",
             "description": "集合的元素类型中，用于标识选中值的属性",
             "docDescription": "集合的元素类型中，用于标识选中值的属性"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "item",
-            "title": "相关对象",
-            "tsType": "nasl.core.Any",
-            "description": "相关对象。当选择此项时，抛出的事件会传递该对象，便于开发"
           },
           {
             "concept": "PropDeclaration",
@@ -5840,26 +5402,6 @@
     "icon": "panel",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "content",
-        "title": "内容",
-        "tsType": "nasl.core.String",
-        "description": "面板内容"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "title",
-        "title": "标题",
-        "tsType": "nasl.core.String",
-        "description": "面板项的标题",
-        "tooltipLink": "https://help.lcap.163yun.com/99.%E5%8F%82%E8%80%83/40.%E9%A1%B5%E9%9D%A2IDE/30.%E9%A1%B5%E9%9D%A2%E7%BB%84%E4%BB%B6/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/03.%E5%AE%B9%E5%99%A8/030.%E9%9D%A2%E6%9D%BF.html",
-        "docDescription": "面板组的标题"
-      },
       {
         "concept": "PropDeclaration",
         "group": "样式属性",
@@ -6133,15 +5675,6 @@
         "props": [
           {
             "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "标题",
-            "tsType": "nasl.core.String",
-            "description": "显示的标题"
-          },
-          {
-            "concept": "PropDeclaration",
             "group": "状态属性",
             "sync": true,
             "tabKind": "property",
@@ -6245,15 +5778,6 @@
     "icon": "card",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "title",
-        "title": "标题",
-        "tsType": "nasl.core.String",
-        "tooltipLink": "https://help.lcap.163yun.com/99.%E5%8F%82%E8%80%83/40.%E9%A1%B5%E9%9D%A2IDE/30.%E9%A1%B5%E9%9D%A2%E7%BB%84%E4%BB%B6/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/03.%E5%AE%B9%E5%99%A8/050.%E5%8D%A1%E7%89%87.html"
-      },
       {
         "concept": "PropDeclaration",
         "group": "样式属性",
@@ -6765,51 +6289,6 @@
         "concept": "PropDeclaration",
         "group": "主要属性",
         "tabKind": "property",
-        "name": "to",
-        "title": "路由链接",
-        "tsType": "nasl.core.String | Location",
-        "description": "需要 vue-router，与`<router-link>`的`to`属性相同。可以是一个字符串或者是描述目标位置的对象。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "replace",
-        "title": "替换",
-        "tsType": "nasl.core.Boolean",
-        "description": "需要 vue-router，与`<router-link>`的`replace`属性相同。如果为`true`，当点击时，会调用`router.replace()`而不是`router.push()`，于是导航后不会留下`history `记录。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "append",
-        "title": "追加路径",
-        "tsType": "nasl.core.Boolean",
-        "description": "需要 vue-router，与`<router-link>`的`append`属性相同。如果为`true`，则在当前路径后追加`to`的路径。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "decoration",
-        "title": "下划线",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否显示下划线"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
         "name": "text",
         "title": "文本",
         "tsType": "nasl.core.String",
@@ -7122,39 +6601,6 @@
         "concept": "PropDeclaration",
         "group": "主要属性",
         "tabKind": "property",
-        "name": "to",
-        "title": "路由链接",
-        "tsType": "nasl.core.String | Location",
-        "description": "需要 vue-router，与`<router-link>`的`to`属性相同。可以是一个字符串或者是描述目标位置的对象。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "replace",
-        "title": "替换",
-        "tsType": "nasl.core.Boolean",
-        "description": "需要 vue-router，与`<router-link>`的`replace`属性相同。如果为`true`，当点击时，会调用`router.replace()`而不是`router.push()`，于是导航后不会留下`history `记录。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "append",
-        "title": "追加路径",
-        "tsType": "nasl.core.Boolean",
-        "description": "需要 vue-router，与`<router-link>`的`append`属性相同。如果为`true`，则在当前路径后追加`to`的路径。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
         "name": "text",
         "title": "文本",
         "tsType": "nasl.core.String",
@@ -7328,18 +6774,6 @@
         "tsType": "nasl.core.Boolean",
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）",
         "docDescription": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "状态属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "loading",
-        "title": "加载中触发条件",
-        "tsType": "nasl.core.Boolean",
-        "description": "设置加载中状态的触发条件"
       },
       {
         "concept": "PropDeclaration",
@@ -8090,18 +7524,6 @@
     "props": [
       {
         "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "dot",
-        "title": "显示小圆点",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否显示为小圆点"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "数据属性",
         "tabKind": "property",
         "name": "value",
@@ -8180,36 +7602,6 @@
     "props": [
       {
         "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "loop",
-        "title": "循环播放",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否循环播放"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "direction",
-        "title": "播放方向",
-        "tsType": "nasl.core.String",
-        "description": "幻灯片播放方向"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "animation",
-        "title": "过度动画",
-        "tsType": "nasl.core.String",
-        "description": "幻灯片过渡动画"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "数据属性",
         "tabKind": "property",
         "name": "dataSource",
@@ -8229,16 +7621,6 @@
         "tsType": "T",
         "description": "数据源返回的数据结构的类型，自动识别类型进行展示说明",
         "docDescription": "IDE 根据配置的数据源动态计算返回内容的数据结构，用于动态配置项 current.item 的类型说明。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "sync": true,
-        "tabKind": "property",
-        "name": "value",
-        "title": "值",
-        "tsType": "nasl.core.Integer",
-        "description": "播放位置"
       },
       {
         "concept": "PropDeclaration",
@@ -8341,26 +7723,7 @@
         "description": "幻灯片选项",
         "icon": "",
         "tsTypeParams": "",
-        "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "标题",
-            "tsType": "nasl.core.String",
-            "description": "该项的标题"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "value",
-            "title": "值",
-            "tsType": "nasl.core.Any",
-            "description": "该项的值"
-          }
-        ],
+        "props": [],
         "readableProps": [],
         "events": [],
         "methods": [],
@@ -8504,14 +7867,6 @@
             "concept": "PropDeclaration",
             "group": "主要属性",
             "tabKind": "property",
-            "name": "label",
-            "title": "标签名",
-            "tsType": "nasl.core.String"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
             "setter": {
               "concept": "NumberInputSetter"
             },
@@ -8598,14 +7953,6 @@
         "icon": "",
         "tsTypeParams": "",
         "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "标签",
-            "tsType": "nasl.core.String"
-          },
           {
             "concept": "PropDeclaration",
             "group": "主要属性",
@@ -8719,15 +8066,6 @@
     "icon": "image",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "convertSrcFn",
-        "title": "图片地址转换器",
-        "tsType": "Function",
-        "description": "将传入的src转换为符合要求的字符串"
-      },
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
@@ -9007,46 +8345,6 @@
         "concept": "PropDeclaration",
         "group": "主要属性",
         "tabKind": "property",
-        "name": "title",
-        "title": "标题",
-        "tsType": "nasl.core.String",
-        "description": "公告标题"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "desc",
-        "title": "辅助文本",
-        "tsType": "nasl.core.String",
-        "description": "公告辅助文本"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "左对齐",
-              "value": "left"
-            },
-            {
-              "title": "居中对齐",
-              "value": "center"
-            }
-          ]
-        },
-        "name": "horizontal",
-        "title": "对其方式",
-        "tsType": "'left' | 'center'",
-        "description": "选择对齐方式"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
         "setter": {
           "concept": "EnumSelectSetter",
           "options": [
@@ -9302,15 +8600,6 @@
     "icon": "divider",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "title",
-        "title": "文本",
-        "tsType": "nasl.core.String",
-        "description": "文本"
-      },
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
@@ -9646,39 +8935,6 @@
         "concept": "PropDeclaration",
         "group": "数据属性",
         "tabKind": "property",
-        "name": "extraParams",
-        "title": "数据源参数",
-        "tsType": "object",
-        "description": "数据源除了DataSourceParams外还需要的参数",
-        "docDescription": "当数据源绑定的是逻辑，逻辑的第一个输入参数无法满足要求时，可绑定该字段值，传入更多的参数值。数据类型为对象{key:value}格式。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "pageable",
-        "title": "前端分页",
-        "tsType": "nasl.core.Boolean"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "remotePaging",
-        "title": "后端分页",
-        "tsType": "nasl.core.Boolean",
-        "if": "_ => _.pageable === true"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
         "setter": {
           "concept": "SwitchSetter"
         },
@@ -9776,60 +9032,6 @@
         "tsType": "{\n  field: nasl.core.String;\n  order: nasl.core.String;\n  compare?: Function;\n}",
         "description": "设置数据初始化时的排序字段和顺序规则",
         "docDescription": "支持选择数据表格数据源中的某一条数据，配置默认排序规则，支持升序和降序"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "remoteSorting",
-        "title": "排序",
-        "tsType": "nasl.core.Boolean"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "升序",
-              "value": "asc"
-            },
-            {
-              "title": "倒序",
-              "value": "desc"
-            }
-          ]
-        },
-        "name": "defaultOrder",
-        "title": "排序初始顺序",
-        "tsType": "'asc' | 'desc'",
-        "if": "_ => _.remoteSorting === true"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "sync": true,
-        "tabKind": "property",
-        "name": "filtering",
-        "title": "筛选参数",
-        "tsType": "object"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "remoteFiltering",
-        "title": "后端筛选",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否使用后端筛选"
       },
       {
         "concept": "PropDeclaration",
@@ -9997,18 +9199,6 @@
         "title": "表格头部吸顶偏移量",
         "tsType": "nasl.core.Decimal",
         "docDescription": "与\"表格头部吸顶\"选项配合使用，表示表格头吸顶时与顶部的距离"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "交互属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "hover",
-        "title": "悬浮高亮行",
-        "tsType": "nasl.core.Boolean",
-        "description": "表格行在悬浮时是否高亮显示"
       },
       {
         "concept": "PropDeclaration",
@@ -10366,18 +9556,6 @@
         "setter": {
           "concept": "SwitchSetter"
         },
-        "name": "border",
-        "title": "显示边框",
-        "tsType": "nasl.core.Boolean",
-        "docDescription": "表格是否展示边框。默认关闭"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "样式属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
         "name": "line",
         "title": "分隔线条",
         "tsType": "nasl.core.Boolean",
@@ -10666,24 +9844,6 @@
         "props": [
           {
             "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "formatter",
-            "title": "格式器",
-            "tsType": "nasl.core.String | object",
-            "description": "格式器"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "filters",
-            "title": "筛选项",
-            "tsType": "Array<{\n  text: nasl.core.String;\n  value: nasl.core.Any;\n}>",
-            "description": "筛选项的参数"
-          },
-          {
-            "concept": "PropDeclaration",
             "group": "数据属性",
             "tabKind": "property",
             "name": "field",
@@ -10804,26 +9964,6 @@
             "description": "序号列的起始序号",
             "docDescription": "当列类型为\"序号列\"时有效。默认值为1",
             "if": "_ => _.type === 'index' && _.autoIndex !== true"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "数据属性",
-            "tabKind": "property",
-            "name": "dblclickHandler",
-            "title": "双击处理函数",
-            "tsType": "Function",
-            "description": "用于可编辑表格，双击表格列时的处理函数",
-            "docDescription": "用于可编辑表格，双击表格列时的处理函数。在表格是\"可编辑\"的表格时有效"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "表格标题",
-            "tsType": "nasl.core.String",
-            "tooltipLink": "https://help.lcap.163yun.com/99.%E5%8F%82%E8%80%83/40.%E9%A1%B5%E9%9D%A2IDE/30.%E9%A1%B5%E9%9D%A2%E7%BB%84%E4%BB%B6/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/05.%E8%A1%A8%E6%A0%BC/100.%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BC.html",
-            "docDescription": "表格上方的标题信息。默认为空"
           },
           {
             "concept": "PropDeclaration",
@@ -10975,18 +10115,6 @@
         "icon": "",
         "tsTypeParams": "T, V",
         "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "PropertySelectSetter"
-            },
-            "name": "textField",
-            "title": "文本字段",
-            "tsType": "(item: T) => nasl.core.String",
-            "description": "配置列的下拉弹窗里，指定数据展示的字段"
-          },
           {
             "concept": "PropDeclaration",
             "group": "数据属性",
@@ -11256,16 +10384,7 @@
         "description": "",
         "icon": "",
         "tsTypeParams": "T, V, P extends boolean, M extends boolean",
-        "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "表格标题",
-            "tsType": "nasl.core.String"
-          }
-        ],
+        "props": [],
         "readableProps": [],
         "events": [],
         "methods": [],
@@ -11501,18 +10620,6 @@
         "tsType": "nasl.core.Boolean",
         "description": "是否使用后端分页。",
         "docDescription": "表示数据列表的分页由接口处理。分页参数传入后端接口，由后端接口返回相应的数据。默认开始。关闭后，如果\"可分页\"属性开启，分页将由列表组件处理，不会发送后端接口。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "remoteFiltering",
-        "title": "后端筛选",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否使用后端过滤"
       },
       {
         "concept": "PropDeclaration",
@@ -11976,56 +11083,6 @@
     "props": [
       {
         "concept": "PropDeclaration",
-        "group": "主要属性",
-        "sync": true,
-        "tabKind": "property",
-        "name": "value",
-        "title": "值",
-        "tsType": "M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V",
-        "description": "当前选择的值"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "field",
-        "title": "文本字段名",
-        "tsType": "(item: T) => nasl.core.String",
-        "description": "选项文本的字段名"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "cancelable",
-        "title": "可取消",
-        "tsType": "nasl.core.Boolean"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "multiple",
-        "title": "可多选",
-        "tsType": "M"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "clearable",
-        "title": "筛选清除按钮",
-        "tsType": "nasl.core.Boolean",
-        "description": "搜索框是否有清除按钮"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "数据属性",
         "tabKind": "property",
         "name": "dataSource",
@@ -12177,44 +11234,6 @@
         "title": "后端分页",
         "tsType": "nasl.core.Boolean",
         "docDescription": "数据网格内容展示，完全由数据源返回值控制，比如总条目数、数据展示条数等。默认开启。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "remoteFiltering",
-        "title": "后端筛选",
-        "tsType": "nasl.core.Boolean"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "name": "matchMethod",
-        "title": "匹配方法",
-        "tsType": "nasl.core.String",
-        "description": "过滤时的匹配方法"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "name": "caseSensitive",
-        "title": "大小写敏感",
-        "tsType": "nasl.core.String",
-        "description": "过滤时是否区分大小写"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "name": "placeholder",
-        "title": "搜索框占位符",
-        "tsType": "nasl.core.String",
-        "description": "开启筛选后，搜索框为空时的占位符提示文本"
       },
       {
         "concept": "PropDeclaration",
@@ -12393,74 +11412,6 @@
         "tsType": "nasl.core.Boolean",
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）",
         "docDescription": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "样式属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "占满",
-              "value": "full"
-            },
-            {
-              "title": "巨大",
-              "value": "huge"
-            },
-            {
-              "title": "大",
-              "value": "large"
-            },
-            {
-              "title": "正常",
-              "value": "normal"
-            },
-            {
-              "title": "自适应",
-              "value": "auto"
-            }
-          ]
-        },
-        "name": "width",
-        "title": "宽度",
-        "tsType": "'full' | 'huge' | 'large' | 'normal' | 'auto'",
-        "description": "设置数据网格宽度大小"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "样式属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "占满",
-              "value": "full"
-            },
-            {
-              "title": "巨大",
-              "value": "huge"
-            },
-            {
-              "title": "大",
-              "value": "large"
-            },
-            {
-              "title": "正常",
-              "value": "normal"
-            },
-            {
-              "title": "自适应",
-              "value": "auto"
-            }
-          ]
-        },
-        "name": "height",
-        "title": "高度",
-        "tsType": "'full' | 'huge' | 'large' | 'normal' | 'auto'",
-        "description": "设置数据网格高度大小"
       }
     ],
     "readableProps": [],
@@ -12877,48 +11828,6 @@
         "concept": "PropDeclaration",
         "group": "主要属性",
         "tabKind": "property",
-        "name": "model",
-        "title": "数据模型",
-        "tsType": "object",
-        "description": "表单数据模型"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "小",
-              "value": "small"
-            },
-            {
-              "title": "正常",
-              "value": "normal"
-            }
-          ]
-        },
-        "name": "size",
-        "title": "表单尺寸",
-        "tsType": "'small' | 'normal'"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "bindHide": true,
-        "tabKind": "property",
-        "name": "rules",
-        "title": "验证规则",
-        "tsType": "object",
-        "description": "验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型",
-        "tooltipLink": "https://help.lcap.163yun.com/99.%E5%8F%82%E8%80%83/40.%E9%A1%B5%E9%9D%A2IDE/30.%E9%A1%B5%E9%9D%A2%E7%BB%84%E4%BB%B6/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/06.%E8%A1%A8%E5%8D%95/121.%E8%A1%A8%E5%8D%95.html",
-        "docDescription": "验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型，详见[验证规则](#验证规则)。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
         "setter": {
           "concept": "EnumSelectSetter",
           "options": [
@@ -13201,111 +12110,6 @@
         "icon": "",
         "tsTypeParams": "",
         "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "name",
-            "title": "字段名称",
-            "tsType": "nasl.core.String",
-            "description": "表单项名称。已废弃"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "label",
-            "title": "标签名",
-            "tsType": "nasl.core.String",
-            "description": "用于左侧显示，同时用于提示消息的合成"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "EnumSelectSetter",
-              "options": [
-                {
-                  "title": "只静默消息提示",
-                  "value": "message"
-                },
-                {
-                  "title": "同时静默消息提示和红框提示",
-                  "value": "all"
-                },
-                {
-                  "title": "不作处理",
-                  "value": "none"
-                }
-              ]
-            },
-            "name": "muted",
-            "title": "验证是否静默",
-            "tsType": "'message' | 'all' | 'none'",
-            "description": "验证是否静默"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "EnumSelectSetter",
-              "options": [
-                {
-                  "title": "提示信息在右侧显示",
-                  "value": "right"
-                },
-                {
-                  "title": "提示信息在底部显示",
-                  "value": "bottom"
-                }
-              ]
-            },
-            "name": "placement",
-            "title": "提示信息位置",
-            "tsType": "'right' | 'bottom'",
-            "description": "改变提示信息显示位置"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "SwitchSetter"
-            },
-            "name": "ignoreRules",
-            "title": "忽略验证规则",
-            "tsType": "nasl.core.Boolean",
-            "description": "忽略验证规则。已废弃，同`ignore-validation`"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "validatingOptions",
-            "title": "验证辅助对象",
-            "tsType": "object",
-            "description": "验证辅助对象。在 Rule 的 `validate` 方法中使用"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "validatingValue",
-            "title": "修改验证值",
-            "tsType": "nasl.core.Any",
-            "description": "临时修改验证值"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "validatingProcess",
-            "title": "验证前预处理",
-            "tsType": "Function",
-            "description": "验证前对值进行预处理"
-          },
           {
             "concept": "PropDeclaration",
             "group": "主要属性",
@@ -13776,39 +12580,6 @@
     "props": [
       {
         "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "NumberInputSetter",
-          "precision": 0
-        },
-        "name": "minlength",
-        "title": "最小长度",
-        "tsType": "nasl.core.Integer"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "spellcheck",
-        "title": "拼写检查",
-        "tsType": "nasl.core.Boolean",
-        "description": "原生属性"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "maxlengthMessage",
-        "title": "长度上限提示",
-        "tsType": "nasl.core.String",
-        "description": "输入内容达到上限时的错误提示，且被 [FormItem](#/components/u-form) 包裹时生效"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "数据属性",
         "tabKind": "property",
         "setter": {
@@ -14182,15 +12953,6 @@
     "props": [
       {
         "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "formatter",
-        "title": "格式化",
-        "tsType": "nasl.core.String",
-        "description": "格式化字符串，具体参见示例。也可以传入一个包含`get`和`set`方法的格式化对象。"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "数据属性",
         "sync": true,
         "tabKind": "property",
@@ -14228,19 +12990,6 @@
         "tsType": "nasl.core.Decimal",
         "description": "最大可输入的值",
         "docDescription": "限制输入数值的最大值。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "NumberInputSetter"
-        },
-        "name": "precision",
-        "title": "精度",
-        "tsType": "nasl.core.Decimal",
-        "description": "限制数字输入要保留的最小精度单位，默认不限制精度，如需保留两位小数，则填入0.01",
-        "docDescription": "限制数字要保留的最小单位，整数、小数均可，如需要保留两位小数，则填入0.01。"
       },
       {
         "concept": "PropDeclaration",
@@ -14578,28 +13327,6 @@
     "icon": "textarea",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "NumberInputSetter"
-        },
-        "name": "minlength",
-        "title": "最小长度",
-        "tsType": "nasl.core.Decimal"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "spellcheck",
-        "title": "拼写检查",
-        "tsType": "nasl.core.Boolean"
-      },
       {
         "concept": "PropDeclaration",
         "group": "数据属性",
@@ -14957,18 +13684,6 @@
         "setter": {
           "concept": "PropertySelectSetter"
         },
-        "name": "textField",
-        "title": "选项文本",
-        "tsType": "(item: T) => nasl.core.String",
-        "description": "集合的元素类型中，用于显示文本的属性名称"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "PropertySelectSetter"
-        },
         "name": "valueField",
         "title": "选项值字段",
         "tsType": "(item: T) => V",
@@ -15102,15 +13817,6 @@
         "icon": "",
         "tsTypeParams": "V",
         "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "text",
-            "title": "文本",
-            "tsType": "nasl.core.String",
-            "description": "显示文本内容"
-          },
           {
             "concept": "PropDeclaration",
             "group": "数据属性",
@@ -15349,15 +14055,6 @@
         "tsType": "T",
         "description": "数据源返回的数据结构的类型，自动识别类型进行展示说明",
         "docDescription": "该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "name": "textField",
-        "title": "选项文本",
-        "tsType": "(item: T) => nasl.core.String",
-        "description": "集合的元素类型中，用于显示文本的属性名称"
       },
       {
         "concept": "PropDeclaration",
@@ -15624,15 +14321,6 @@
         "props": [
           {
             "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "text",
-            "title": "文本",
-            "tsType": "nasl.core.String",
-            "description": "显示文本内容"
-          },
-          {
-            "concept": "PropDeclaration",
             "group": "数据属性",
             "sync": true,
             "tabKind": "property",
@@ -15885,15 +14573,6 @@
         "icon": "",
         "tsTypeParams": "",
         "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "item",
-            "title": "相关对象",
-            "tsType": "object",
-            "description": "相关对象。当选择此项时，抛出的事件会传递该对象，便于开发"
-          },
           {
             "concept": "PropDeclaration",
             "group": "数据属性",
@@ -16216,14 +14895,6 @@
     "props": [
       {
         "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "tip",
-        "title": "提示",
-        "tsType": "nasl.core.String"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "数据属性",
         "sync": true,
         "tabKind": "property",
@@ -16291,15 +14962,6 @@
         "tsType": "Array<nasl.core.Decimal>",
         "description": "进一步对`value`限制，通常传入一个数组，第一个值表示范围开始值，第二个值表示范围的结束值",
         "docDescription": "进一步对`值`限制，通常传入一个数组，第一个值表示范围开始值，第二个值表示范围的结束值"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "name": "formatter",
-        "title": "格式化",
-        "tsType": "nasl.core.String | object",
-        "description": "格式化字符串，具体参见示例。也可以传入一个包含`get`和`set`方法的格式化对象"
       },
       {
         "concept": "PropDeclaration",
@@ -16472,26 +15134,6 @@
     "props": [
       {
         "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "dataType",
-        "title": "接收数据类型",
-        "tsType": "nasl.core.String",
-        "description": "接收数据类型。可选值：`text`、`xml`、`json`"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "pastable",
-        "title": "是否可以粘贴",
-        "tsType": "nasl.core.Boolean"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "数据属性",
         "sync": true,
         "tabKind": "property",
@@ -16629,14 +15271,6 @@
         "description": "是否展示文件图标",
         "docDescription": "是否展示文件图标",
         "if": "_ => _.listType === 'text'"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "iconMap",
-        "title": "undefined",
-        "tsType": "Object"
       },
       {
         "concept": "PropDeclaration",
@@ -16869,18 +15503,6 @@
         "name": "cropperTitle",
         "title": "图片裁剪框标题",
         "tsType": "nasl.core.String"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "autoUpload",
-        "title": "自动上传",
-        "tsType": "nasl.core.Boolean",
-        "docDescription": "开启后选择文件后会自动上传，默认开启"
       },
       {
         "concept": "PropDeclaration",
@@ -17446,32 +16068,6 @@
     "props": [
       {
         "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "有滚动的情况下显示",
-              "value": "auto"
-            },
-            {
-              "title": "始终显示",
-              "value": "always"
-            },
-            {
-              "title": "始终不显示",
-              "value": "never"
-            }
-          ]
-        },
-        "name": "showScrollButtons",
-        "title": "显示滚动按钮",
-        "tsType": "'auto' | 'always' | 'never'",
-        "description": "是否显示标签滚动左右箭头按钮"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "数据属性",
         "tabKind": "property",
         "name": "dataSource",
@@ -17494,16 +16090,6 @@
         "tsType": "T",
         "description": "数据源返回的数据结构的类型，自动识别类型进行展示说明",
         "docDescription": "集合类型每一元素的数据类型"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "name": "titleField",
-        "title": "标签项标题",
-        "tsType": "(item: T) => nasl.core.String",
-        "description": "数据源集合的元素，用于显示标签标题的属性",
-        "docDescription": "数据源集合的元素，用于显示标签标题的属性"
       },
       {
         "concept": "PropDeclaration",
@@ -17780,99 +16366,6 @@
         "props": [
           {
             "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "标题",
-            "tsType": "nasl.core.String",
-            "description": "标签页标题。"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "href",
-            "title": "链接",
-            "tsType": "nasl.core.String",
-            "description": "链接地址"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "EnumSelectSetter",
-              "options": [
-                {
-                  "title": "新窗口",
-                  "value": "_blank"
-                },
-                {
-                  "title": "当前窗口",
-                  "value": "_self"
-                },
-                {
-                  "title": "父级窗口",
-                  "value": "_parent"
-                },
-                {
-                  "title": "顶级窗口",
-                  "value": "_top"
-                }
-              ]
-            },
-            "name": "target",
-            "title": "打开方式",
-            "tsType": "'_blank' | '_self' | '_parent' | '_top'",
-            "description": "打开方式"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "to",
-            "title": "路由链接",
-            "tsType": "nasl.core.String | Location",
-            "description": "需要 router 为 true，与`<router-link>`的`to`属性相同。可以是一个字符串或者是描述目标位置的对象。"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "SwitchSetter"
-            },
-            "name": "replace",
-            "title": "替换",
-            "tsType": "nasl.core.Boolean",
-            "description": "需要 router 为 true，与`<router-link>`的`replace`属性相同。如果为`true`，当点击时，会调用`router.replace()`而不是`router.push()`，于是导航后不会留下`history `记录。"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "SwitchSetter"
-            },
-            "name": "append",
-            "title": "追加路径",
-            "tsType": "nasl.core.Boolean",
-            "description": "需要 router 为 true，与`<router-link>`的`append`属性相同。如果为`true`，则在当前路径后追加`to`的路径。"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "setter": {
-              "concept": "SwitchSetter"
-            },
-            "name": "exact",
-            "title": "精确匹配",
-            "tsType": "nasl.core.Boolean",
-            "description": "需要 router 为 true，与`<router-link>`的`exact`属性相同。是否与路由完全一致时才高亮显示。"
-          },
-          {
-            "concept": "PropDeclaration",
             "group": "数据属性",
             "tabKind": "property",
             "name": "value",
@@ -18067,30 +16560,6 @@
       {
         "concept": "PropDeclaration",
         "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "PropertySelectSetter"
-        },
-        "name": "titleField",
-        "title": "标签项标题",
-        "tsType": "(item: T) => nasl.core.String",
-        "description": "数据源集合的元素，用于显示步骤标题的属性"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "PropertySelectSetter"
-        },
-        "name": "descField",
-        "title": "描述项标题",
-        "tsType": "(item: T) => nasl.core.String",
-        "description": "数据源集合的元素，用于显示步骤描述的属性"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
         "sync": true,
         "tabKind": "property",
         "setter": {
@@ -18244,24 +16713,6 @@
         "icon": "",
         "tsTypeParams": "",
         "props": [
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "title",
-            "title": "标题",
-            "tsType": "nasl.core.String",
-            "description": "步骤标题文本"
-          },
-          {
-            "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "desc",
-            "title": "描述信息",
-            "tsType": "nasl.core.String",
-            "description": "步骤描述信息"
-          },
           {
             "concept": "PropDeclaration",
             "group": "数据属性",
@@ -18667,32 +17118,6 @@
         "concept": "PropDeclaration",
         "group": "数据属性",
         "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "pageable",
-        "title": "分页加载更多",
-        "tsType": "nasl.core.Boolean",
-        "description": "设置是否分页加载更多",
-        "docDescription": "是否使用分页功能加载更多"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "remotePaging",
-        "title": "后端分页",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否使用后端分页",
-        "docDescription": "控制是否使用后端分页，不支持自定义分页条数，默认为50条"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
         "name": "pagination",
         "title": "分页",
         "tsType": "P",
@@ -18762,16 +17187,6 @@
         "concept": "PropDeclaration",
         "group": "数据属性",
         "tabKind": "property",
-        "name": "selectedValuesData",
-        "title": "选中值完整数据",
-        "tsType": "nasl.collection.List<{\n  text: nasl.core.String;\n  value: V;\n}>",
-        "description": "当下拉列表是分页或加载更多时，需要使用该字段回显选择框内数据。",
-        "docDescription": "当下拉列表是分页或加载更多时，需要使用该字段回显选择框内数据。"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
         "setter": {
           "concept": "SwitchSetter"
         },
@@ -18780,18 +17195,6 @@
         "tsType": "nasl.core.Boolean",
         "description": "设置是否可以筛选，开启将会支持搜索。",
         "docDescription": "开启后选择框可输入文本进行筛选"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "remoteFiltering",
-        "title": "后端筛选",
-        "tsType": "nasl.core.Boolean",
-        "description": "设置是否使用后端筛选"
       },
       {
         "concept": "PropDeclaration",
@@ -19018,18 +17421,6 @@
         "concept": "PropDeclaration",
         "group": "交互属性",
         "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "cancelable",
-        "title": "可取消",
-        "tsType": "nasl.core.Boolean",
-        "description": "设置是否可以取消选择"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "交互属性",
-        "tabKind": "property",
         "name": "multiple",
         "title": "可多选",
         "tsType": "M",
@@ -19048,15 +17439,6 @@
         "tsType": "nasl.core.Boolean",
         "description": "设置初始时是否立即加载",
         "docDescription": "是否在初始时立即加载"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "状态属性",
-        "tabKind": "property",
-        "name": "loadingText",
-        "title": "加载中文字",
-        "tsType": "nasl.core.String",
-        "description": "正在加载中的文字，使用分页加载时才会出现"
       },
       {
         "concept": "PropDeclaration",
@@ -19219,27 +17601,6 @@
         "tsType": "'full' | 'huge' | 'large' | 'medium' | 'normal' | 'small' | 'mini'",
         "description": "设置选择框高度大小",
         "docDescription": "设置选择框高度大小，支持占满、巨大、大、中型、正常、小共6种模式"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "name": "caseSensitive",
-        "title": "大小写敏感",
-        "tsType": "nasl.core.String",
-        "description": "过滤时大小写是否敏感"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "autoComplete",
-        "title": "自动补全",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否开启自动补充模式，用于增加列表中没有的项"
       }
     ],
     "readableProps": [
@@ -19896,32 +18257,6 @@
         "tsType": "'full' | 'huge' | 'large' | 'medium' | 'normal' | 'small' | 'mini'",
         "description": "设置级联框高度大小",
         "docDescription": "设置级联框高度大小"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "以', '连接",
-              "value": ","
-            },
-            {
-              "title": "以'|'连接",
-              "value": ""
-            },
-            {
-              "title": "以' / '连接",
-              "value": ""
-            }
-          ]
-        },
-        "name": "join",
-        "title": "连接符",
-        "tsType": "',' | '|' | ' / '",
-        "description": "将选中的值以选择的符号作为连接符，转为字符串格式,不可为空值"
       }
     ],
     "readableProps": [],
@@ -20035,32 +18370,6 @@
     "icon": "region-select",
     "tsTypeParams": "T, V",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "以', '连接",
-              "value": ","
-            },
-            {
-              "title": "以'|'连接",
-              "value": ""
-            },
-            {
-              "title": "以' / '连接",
-              "value": ""
-            }
-          ]
-        },
-        "name": "join",
-        "title": "连接符",
-        "tsType": "',' | '|' | ' / '",
-        "description": "将选中的值以选择的符号作为连接符，转为字符串格式,不可为空值"
-      },
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
@@ -20622,15 +18931,6 @@
           },
           {
             "concept": "PropDeclaration",
-            "group": "主要属性",
-            "tabKind": "property",
-            "name": "node",
-            "title": "相关对象",
-            "tsType": "object",
-            "description": "当选择此节点时，抛出的事件会传递该对象，便于开发"
-          },
-          {
-            "concept": "PropDeclaration",
             "group": "数据属性",
             "tabKind": "property",
             "name": "value",
@@ -20751,38 +19051,6 @@
     "icon": "transfer",
     "tsTypeParams": "T, V",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "matchMethod",
-        "title": "过滤匹配方法",
-        "tsType": "nasl.core.String",
-        "description": "过滤时的匹配方法"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "pageable",
-        "title": "分页",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否需要分页"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "NumberInputSetter"
-        },
-        "name": "pageSize",
-        "title": "分页大小",
-        "tsType": "nasl.core.Decimal"
-      },
       {
         "concept": "PropDeclaration",
         "group": "数据属性",
@@ -21117,15 +19385,6 @@
         "tsType": "nasl.core.String | nasl.core.Decimal | nasl.core.Date",
         "description": "最大可选的日期值，默认为9年后，日期填写格式为“yyyy-mm-dd”",
         "docDescription": "设置日期范围，支持输入的最大日期"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "数据属性",
-        "tabKind": "property",
-        "name": "time",
-        "title": "时间格式",
-        "tsType": "nasl.core.String | nasl.core.Decimal",
-        "description": "输入对应格式的字符串（8:00:00）即可"
       },
       {
         "concept": "PropDeclaration",
@@ -21869,18 +20128,6 @@
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "状态属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "visible",
-        "title": "显示状态",
-        "tsType": "nasl.core.Boolean",
-        "description": "显示状态分为“True(打开)/False(关闭)”，默认为“打开”"
       },
       {
         "concept": "PropDeclaration",
@@ -22823,15 +21070,6 @@
     "props": [
       {
         "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "range",
-        "title": "百分比范围",
-        "tsType": "Array<nasl.core.Decimal>",
-        "description": "百分比范围限制"
-      },
-      {
-        "concept": "PropDeclaration",
         "group": "数据属性",
         "tabKind": "property",
         "setter": {
@@ -23014,27 +21252,6 @@
     "icon": "popup",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "offset",
-        "title": "弹出层偏移",
-        "tsType": "nasl.core.String",
-        "description": "弹出层偏移，如：'10', '10px 10px', '10% 10%', 第一个值表示水平偏移，第二个值表示垂直位移, 默认单位是'px'"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "mergeBorders",
-        "title": "合并边框",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否自动合并内外边框"
-      },
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
@@ -23358,63 +21575,6 @@
     "icon": "modal",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "title",
-        "title": "标题",
-        "tsType": "nasl.core.String",
-        "description": "弹窗的标题"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "content",
-        "title": "内容",
-        "tsType": "nasl.core.String",
-        "description": "弹窗的内容"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "description",
-        "title": "详情描述",
-        "tsType": "nasl.core.String",
-        "description": "弹窗的详情描述"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "okButton",
-        "title": "确定按钮",
-        "tsType": "nasl.core.String",
-        "description": "确定按钮文本，如果为空则不显示"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "cancelButton",
-        "title": "取消按钮",
-        "tsType": "nasl.core.String",
-        "description": "取消按钮文本，如果为空则不显示"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "static",
-        "title": "嵌入页面显示",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否嵌入页面显示"
-      },
       {
         "concept": "PropDeclaration",
         "group": "主要属性",
@@ -23881,72 +22041,6 @@
         "title": "停留时间",
         "tsType": "nasl.core.Decimal",
         "description": "自动关闭的延时，单位毫秒。设为 0 时不自动关闭"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "上中",
-              "value": "top-center"
-            },
-            {
-              "title": "上左",
-              "value": "top-left"
-            },
-            {
-              "title": "上右",
-              "value": "top-right"
-            },
-            {
-              "title": "下中",
-              "value": "bottom-center"
-            },
-            {
-              "title": "下左",
-              "value": "bottom-left"
-            },
-            {
-              "title": "下右",
-              "value": "bottom-right"
-            },
-            {
-              "title": "静态",
-              "value": "static"
-            }
-          ]
-        },
-        "name": "position",
-        "title": "位置",
-        "tsType": "'top-center' | 'top-left' | 'top-right' | 'bottom-center' | 'bottom-left' | 'bottom-right' | 'static'",
-        "description": "显示的位置"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "single",
-        "title": "合并",
-        "tsType": "nasl.core.Boolean",
-        "description": "多个提示会合并为一个"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "SwitchSetter"
-        },
-        "name": "closable",
-        "title": "关闭提示",
-        "tsType": "nasl.core.Boolean",
-        "description": "是否可以关闭提示"
       }
     ],
     "readableProps": [],
@@ -24013,15 +22107,6 @@
         "concept": "PropDeclaration",
         "group": "主要属性",
         "tabKind": "property",
-        "name": "image",
-        "title": "水印图案",
-        "tsType": "CanvasImageSource",
-        "description": "水印图案。如果没有，则默认按文本绘制"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
         "name": "text",
         "title": "文本",
         "tsType": "nasl.core.String",
@@ -24070,125 +22155,6 @@
     "icon": "copy",
     "tsTypeParams": "",
     "props": [
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "text",
-        "title": "默认显示文本",
-        "tsType": "nasl.core.String",
-        "description": "默认显示的文本"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "name": "successText",
-        "title": "复制成功提示文本",
-        "tsType": "nasl.core.String",
-        "description": "复制成功提示文本"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "工具提示",
-              "value": "tooltip"
-            },
-            {
-              "title": "弹框提示",
-              "value": "toast"
-            },
-            {
-              "title": "无反馈",
-              "value": "none"
-            }
-          ]
-        },
-        "name": "feedback",
-        "title": "复制提示反馈方式",
-        "tsType": "'tooltip' | 'toast' | 'none'",
-        "description": "复制提示反馈方式"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "EnumSelectSetter",
-          "options": [
-            {
-              "title": "上",
-              "value": "top"
-            },
-            {
-              "title": "下",
-              "value": "bottom"
-            },
-            {
-              "title": "左",
-              "value": "left"
-            },
-            {
-              "title": "右",
-              "value": "right"
-            },
-            {
-              "title": "上左",
-              "value": "top-start"
-            },
-            {
-              "title": "上右",
-              "value": "top-end"
-            },
-            {
-              "title": "下左",
-              "value": "bottom-start"
-            },
-            {
-              "title": "下右",
-              "value": "bottom-end"
-            },
-            {
-              "title": "左上",
-              "value": "left-start"
-            },
-            {
-              "title": "左下",
-              "value": "left-end"
-            },
-            {
-              "title": "右上",
-              "value": "right-start"
-            },
-            {
-              "title": "右下",
-              "value": "right-end"
-            }
-          ]
-        },
-        "name": "placement",
-        "title": "提示框位置",
-        "tsType": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end' | 'right-start' | 'right-end'",
-        "description": "tooltip 提示框位置"
-      },
-      {
-        "concept": "PropDeclaration",
-        "group": "主要属性",
-        "tabKind": "property",
-        "setter": {
-          "concept": "NumberInputSetter",
-          "precision": 0
-        },
-        "name": "hideDelay",
-        "title": "提示框显示时长",
-        "tsType": "nasl.core.Integer",
-        "description": "提示框显示时长"
-      },
       {
         "concept": "PropDeclaration",
         "group": "数据属性",

@@ -169,7 +169,10 @@ function transform(tsCode) {
                                 // 去掉_
                                 prop_1.name = prop_1.name.replace(/^_/, '');
                             }
-                            component.props.push(prop_1);
+                            // 过滤private属性
+                            if (member.accessibility !== 'private') {
+                                component.props.push(prop_1);
+                            }
                         }
                         else if (calleeName === 'Event') {
                             var event_1 = {
