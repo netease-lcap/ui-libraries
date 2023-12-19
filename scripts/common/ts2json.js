@@ -200,12 +200,14 @@ function transform(tsCode) {
                             component.events.push(event_1);
                         }
                         else if (calleeName === 'Slot') {
+                            var parameters = member.typeAnnotation.typeAnnotation.parameters;
                             var slot_1 = {
                                 concept: 'SlotDeclaration',
                                 snippets: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'snippets'),
                                 name: member.key.name.replace(/^slot(\w)/, function (m, $1) { return $1.toLowerCase(); }),
                                 title: '',
                                 tsType: (0, generator_1.default)(member.typeAnnotation.typeAnnotation).code,
+                                params: transformSlotParams(parameters),
                             };
                             decorator.expression.arguments.forEach(function (arg) {
                                 if (arg.type === 'ObjectExpression')
@@ -364,88 +366,56 @@ function transformValue(node, typeAnnotation) {
         };
     }
 }
-function transformTypeAnnotation(typeAnnotation) {
-    if (typeAnnotation.type === 'TSTypeReference') {
-        var typeName = typeAnnotation.typeName, typeParameters = typeAnnotation.typeParameters;
-        // nasl.core.Integer | nasl.collection.List<nasl.core.Integer>
-        if (typeName.type === 'TSQualifiedName') {
-            var left = typeName.left, right = typeName.right;
-            var primitive = isPrimitive(right.name);
-            var annotation = {
-                concept: 'TypeAnnotation',
-                typeKind: primitive ? 'primitive' : 'reference',
-                typeName: getTypeName(typeAnnotation).name,
-                typeNamespace: getTypeName(typeAnnotation).namespace,
-                inferred: false,
-                ruleMap: new Map(),
-            };
-            if (typeParameters) {
-                annotation.typeArguments = transformTypeParameters(typeParameters);
-            }
-            return annotation;
-        }
-        if (typeName.type === 'Identifier') {
-            if (['T', 'V'].includes(typeName.name)) {
-                return {
-                    concept: 'TypeAnnotation',
-                    typeKind: 'generic',
-                    typeName: typeName.name,
-                    typeNamespace: '',
-                    inferred: false,
-                    ruleMap: new Map(),
-                };
-            }
-        }
-        return {
-            concept: 'TypeAnnotation',
-            typeKind: 'primitive',
-            typeName: typeName.name,
-            typeNamespace: '',
-            inferred: false,
-            ruleMap: new Map(),
-        };
-    }
-    if (typeAnnotation.type === 'TSUnionType') {
-    }
-}
-function transformTypeParameters(typeParameters) {
-    return typeParameters.params.map(function (param) {
-        return {
-            concept: 'TypeAnnotation',
-            typeKind: 'typeParam',
-            typeName: getTypeName(param).name,
-            typeNamespace: getTypeName(param).namespace,
-            inferred: false,
-            ruleMap: new Map(),
-        };
-    });
-}
-function getTypeName(node) {
+function transformTypeAnnotation(node) {
+    var _a, _b;
     if (node.type === 'TSTypeReference') {
-        var typeName = node.typeName;
+        var typeName = node.typeName, typeParameters = node.typeParameters;
         if (typeName.type === 'TSQualifiedName') {
             var left = typeName.left, right = typeName.right;
             var primitive = isPrimitive(right.name);
             var namespace = left.left.name + '.' + left.right.name;
             return {
-                kind: primitive ? 'primitive' : 'reference',
-                name: right.name,
-                namespace: namespace,
+                typeKind: ((_a = typeParameters === null || typeParameters === void 0 ? void 0 : typeParameters.params) === null || _a === void 0 ? void 0 : _a.length)
+                    ? 'generic'
+                    : (primitive ? 'primitive' : 'reference'),
+                typeName: right.name,
+                typeNamespace: namespace,
+                concept: 'TypeAnnotation',
+                inferred: false,
+                ruleMap: new Map(),
+                typeArguments: transformTypeParameters(typeParameters)
             };
         }
         if (typeName.type === 'Identifier') {
-            if (['T', 'V'].includes(typeName.name)) {
-                return {
-                    kind: 'generic',
-                    name: typeName.name,
-                    namespace: '',
-                };
-            }
+            var primitive = isPrimitive(typeName.name);
+            return {
+                typeKind: ((_b = typeParameters === null || typeParameters === void 0 ? void 0 : typeParameters.params) === null || _b === void 0 ? void 0 : _b.length)
+                    ? 'generic'
+                    : (primitive ? 'primitive' : 'reference'),
+                typeName: typeName.name,
+                typeNamespace: ['Current', 'CurrentDynamic'].includes(typeName.name) ? 'nasl.ui' : '',
+                concept: 'TypeAnnotation',
+                inferred: false,
+                ruleMap: new Map(),
+                typeArguments: transformTypeParameters(typeParameters)
+            };
         }
-        return {
-            kind: 'primitive',
-            name: typeName.name,
-            namespace: '',
-        };
     }
+}
+function transformTypeParameters(typeParameters) {
+    var _a;
+    return ((_a = typeParameters === null || typeParameters === void 0 ? void 0 : typeParameters.params) === null || _a === void 0 ? void 0 : _a.map(function (param) {
+        return __assign(__assign({}, transformTypeAnnotation(param)), { concept: 'TypeAnnotation', typeKind: 'typeParam', inferred: false, ruleMap: new Map() });
+    })) || [];
+}
+function transformSlotParams(params) {
+    return params.map(function (param) {
+        var typeAnnotation = param.typeAnnotation;
+        return {
+            concept: 'Param',
+            name: param.name,
+            description: '',
+            typeAnnotation: transformTypeAnnotation(typeAnnotation.typeAnnotation),
+        };
+    });
 }

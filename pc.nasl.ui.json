@@ -589,6 +589,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "内容"
       }
     ],
@@ -691,6 +692,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "内容"
       }
     ],
@@ -785,6 +787,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UGridLayoutRow>",
+        "params": [],
         "description": "插入`<u-grid-layout-row>`或`<u-grid-layout-column>`子组件。"
       }
     ],
@@ -999,6 +1002,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<UGridLayoutColumn>",
+            "params": [],
             "description": "插入`<u-grid-layout-column>`子组件。"
           }
         ],
@@ -1544,6 +1548,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "插入需要布局的元素。"
           }
         ],
@@ -1952,6 +1957,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UMultiLayoutItem>",
+        "params": [],
         "description": "插入`<u-multi-layout-item>`子组件。"
       }
     ],
@@ -2398,6 +2404,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "内容"
           }
         ],
@@ -2565,6 +2572,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UCrumbItem>",
+        "params": [],
         "description": "插入`<u-crumb-item>`子组件。"
       }
     ],
@@ -3243,12 +3251,13 @@
             "name": "expanded",
             "description": "'展开/折叠'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "Boolean",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             }
           }
         ],
@@ -3277,6 +3286,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<USidebarGroup | USidebarItem | USidebarDivider>",
+        "params": [],
         "description": "插入`<u-sidebar-item>`、`<u-sidebar-divider>`或`<u-sidebar-group>`子组件。"
       }
     ],
@@ -3599,6 +3609,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<USidebarGroup | USidebarItem | USidebarDivider>",
+            "params": [],
             "description": "插入`<u-sidebar-item>`或`<u-sidebar-divider>`子组件。"
           },
           {
@@ -3606,6 +3617,7 @@
             "name": "title",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "自定义标题文本。"
           },
           {
@@ -3613,6 +3625,7 @@
             "name": "extra",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "在右侧可以附加内容。"
           }
         ],
@@ -3942,6 +3955,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UNavbarGroupMulti | UNavbarItemMulti | UNavbarDividerMulti>",
+        "params": [],
         "description": "插入`<u-navbar-multi>`子组件。"
       }
     ],
@@ -4609,6 +4623,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<UNavbarGroupMulti | UNavbarItemMulti>",
+            "params": [],
             "description": "插入`<u-navbar-multi>`子组件。"
           }
         ],
@@ -4767,6 +4782,7 @@
         "name": "default",
         "title": "链接区域",
         "tsType": "() => Array<UNavbarItem | UNavbarDivider>",
+        "params": [],
         "description": "链接区域"
       },
       {
@@ -4774,6 +4790,7 @@
         "name": "left",
         "title": "左部区域",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "左部区域，一般放置 logo 等"
       },
       {
@@ -4781,6 +4798,7 @@
         "name": "right",
         "title": "右部区域",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "右部区域，一般放置用户个人信息等"
       }
     ],
@@ -5733,6 +5751,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UDropdownGroup | UDropdownItem>",
+        "params": [],
         "description": "插入`<u-dropdown>`子组件。"
       }
     ],
@@ -6017,6 +6036,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<UDropdownGroup | UDropdownItem>",
+            "params": [],
             "description": "插入`<u-dropdown>`子组件。"
           }
         ],
@@ -6114,6 +6134,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UTocItem>",
+        "params": [],
         "description": "插入`<u-toc-item>`子组件。"
       }
     ],
@@ -6262,6 +6283,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<UTocItem>",
+            "params": [],
             "description": "插入`<u-toc-item>`子组件。"
           }
         ],
@@ -6500,6 +6522,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UPanelGroup>",
+        "params": [],
         "description": "插入`<u-panel-group>`子组件。"
       }
     ],
@@ -6534,6 +6557,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "插入默认的元素"
           }
         ],
@@ -6741,6 +6765,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UCollapseItem>",
+        "params": [],
         "description": "插入`<u-collapse-item>`子组件。"
       }
     ],
@@ -6823,6 +6848,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "插入文本或 HTML。"
           },
           {
@@ -6830,6 +6856,7 @@
             "name": "title",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "自定义标题文本。"
           },
           {
@@ -6837,6 +6864,7 @@
             "name": "extra",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "在右侧可以附加内容。"
           }
         ],
@@ -7021,6 +7049,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "插入默认的元素"
       },
       {
@@ -7028,6 +7057,7 @@
         "name": "cover",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "插入图片"
       }
     ],
@@ -7060,6 +7090,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "插入默认的元素"
           },
           {
@@ -7067,6 +7098,7 @@
             "name": "cover",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "插入图片"
           }
         ],
@@ -8982,6 +9014,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "插入需要附加徽章的元素。"
       }
     ],
@@ -9143,6 +9176,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UCarouselItem>",
+        "params": [],
         "description": "插入`<u-carousel-item>`子组件。",
         "emptyBackground": "add-sub-large"
       },
@@ -9151,6 +9185,32 @@
         "name": "item",
         "title": "undefined",
         "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ],
         "description": "自定义选项的结构和样式"
       }
     ],
@@ -9174,6 +9234,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "插入文本或 HTML。",
             "emptyBackground": "image"
           },
@@ -9182,6 +9243,7 @@
             "name": "title",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "自定义标题文本。"
           }
         ],
@@ -9322,6 +9384,7 @@
         "name": "default",
         "title": "默认",
         "tsType": "() => Array<UInfoListGroup | UInfoListItem>",
+        "params": [],
         "description": "插入`<u-info-list-item>`或`<u-info-list-group>`子组件。"
       }
     ],
@@ -9418,6 +9481,7 @@
             "name": "default",
             "title": "默认",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "插入文本或HTML。"
           },
           {
@@ -9425,6 +9489,7 @@
             "name": "label",
             "title": "自定义标签内容",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "用于自定义 label 内容。"
           }
         ],
@@ -9510,6 +9575,7 @@
             "name": "default",
             "title": "默认",
             "tsType": "() => Array<UInfoListItem>",
+            "params": [],
             "description": "插入`<u-info-list-item>`子组件"
           },
           {
@@ -9517,6 +9583,7 @@
             "name": "title",
             "title": "自定义标题",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "自定义标题。"
           },
           {
@@ -9524,6 +9591,7 @@
             "name": "extra",
             "title": "自定义额外操作项",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "自定义额外操作项。"
           }
         ],
@@ -10019,6 +10087,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "辅助文本"
       },
       {
@@ -10026,6 +10095,7 @@
         "name": "title",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "标题"
       }
     ],
@@ -10329,6 +10399,7 @@
         "name": "default",
         "title": "默认",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "显示的文本"
       }
     ],
@@ -10452,6 +10523,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UTimelineItem>",
+        "params": [],
         "description": "插入 `<u-timeline-item>` 子组件"
       },
       {
@@ -10459,6 +10531,32 @@
         "name": "item",
         "title": "undefined",
         "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ],
         "description": "自定义选项的结构和样式"
       }
     ],
@@ -10542,6 +10640,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "插入文本或 HTML"
           },
           {
@@ -10549,6 +10648,7 @@
             "name": "dot",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "自定义图标"
           },
           {
@@ -10556,6 +10656,7 @@
             "name": "label",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "自定义 `label` ，只在 `label` 模式下生效"
           }
         ],
@@ -10726,12 +10827,23 @@
               }
             ],
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
-              "typeKind": "primitive",
+              "typeKind": "generic",
               "typeName": "Array",
               "typeNamespace": "",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "Decimal",
+                  "typeNamespace": "nasl.core",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
             }
           },
           "playground": []
@@ -11797,12 +11909,13 @@
             "name": "page",
             "description": "'当前页码'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "Integer",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             },
             "defaultValue": {
               "concept": "DefaultValue",
@@ -11826,12 +11939,13 @@
             "name": "size",
             "description": "'每页条数'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "Integer",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             },
             "defaultValue": {
               "concept": "DefaultValue",
@@ -11855,12 +11969,13 @@
             "name": "filename",
             "description": "'导出文件名'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "String",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             }
           },
           {
@@ -11868,12 +11983,13 @@
             "name": "sort",
             "description": "'排序字段'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "String",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             }
           },
           {
@@ -11886,12 +12002,23 @@
             "name": "excludeColumns",
             "description": "'排除字段'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
-              "typeKind": "primitive",
+              "typeKind": "generic",
               "typeName": "Array",
               "typeNamespace": "",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "String",
+                  "typeNamespace": "nasl.core",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
             },
             "defaultValue": {
               "concept": "DefaultValue",
@@ -11899,12 +12026,23 @@
                 "concept": "NewList",
                 "items": [],
                 "typeAnnotation": {
-                  "concept": "TypeAnnotation",
-                  "typeKind": "primitive",
+                  "typeKind": "generic",
                   "typeName": "Array",
                   "typeNamespace": "",
+                  "concept": "TypeAnnotation",
                   "inferred": false,
-                  "ruleMap": {}
+                  "ruleMap": {},
+                  "typeArguments": [
+                    {
+                      "typeKind": "typeParam",
+                      "typeName": "String",
+                      "typeNamespace": "nasl.core",
+                      "concept": "TypeAnnotation",
+                      "inferred": false,
+                      "ruleMap": {},
+                      "typeArguments": []
+                    }
+                  ]
                 }
               },
               "playground": []
@@ -11950,6 +12088,7 @@
         "name": "default",
         "title": "默认",
         "tsType": "() => Array<UTableViewColumn<T, V, P, M> | UTableViewColumnDynamic<T, T1, V, P, M> | UTableViewColumnGroup<T, V, P, M>>",
+        "params": [],
         "description": "在表格中插入`<u-table-view-column>`子组件",
         "emptyBackground": "drag-entity-here"
       },
@@ -11958,6 +12097,7 @@
         "name": "loading",
         "title": "加载中内容",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "自定义加载中内容"
       },
       {
@@ -11965,6 +12105,7 @@
         "name": "error",
         "title": "加载错误内容",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "自定义加载错误内容"
       },
       {
@@ -11972,6 +12113,7 @@
         "name": "empty",
         "title": "暂无数据内容",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "自定义暂无数据内容"
       },
       {
@@ -11979,6 +12121,32 @@
         "name": "dragGhost",
         "title": "拖拽缩略图",
         "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ],
         "description": "自定义拖拽缩略图"
       }
     ],
@@ -12309,6 +12477,32 @@
             "name": "cell",
             "title": "单元格",
             "tsType": "(current: Current<T>) => Array<ViewComponent>",
+            "params": [
+              {
+                "concept": "Param",
+                "name": "current",
+                "description": "",
+                "typeAnnotation": {
+                  "typeKind": "generic",
+                  "typeName": "Current",
+                  "typeNamespace": "nasl.ui",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": [
+                    {
+                      "typeKind": "typeParam",
+                      "typeName": "T",
+                      "typeNamespace": "",
+                      "concept": "TypeAnnotation",
+                      "inferred": false,
+                      "ruleMap": {},
+                      "typeArguments": []
+                    }
+                  ]
+                }
+              }
+            ],
             "description": "对单元格的数据展示进行自定义"
           },
           {
@@ -12316,6 +12510,32 @@
             "name": "editcell",
             "title": "编辑单元格",
             "tsType": "(current: Current<T>) => Array<ViewComponent>",
+            "params": [
+              {
+                "concept": "Param",
+                "name": "current",
+                "description": "",
+                "typeAnnotation": {
+                  "typeKind": "generic",
+                  "typeName": "Current",
+                  "typeNamespace": "nasl.ui",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": [
+                    {
+                      "typeKind": "typeParam",
+                      "typeName": "T",
+                      "typeNamespace": "",
+                      "concept": "TypeAnnotation",
+                      "inferred": false,
+                      "ruleMap": {},
+                      "typeArguments": []
+                    }
+                  ]
+                }
+              }
+            ],
             "description": "对单元格的编辑数据展示进行自定义"
           },
           {
@@ -12323,6 +12543,7 @@
             "name": "title",
             "title": "标题",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "对标题进行自定义"
           },
           {
@@ -12330,6 +12551,32 @@
             "name": "expandContent",
             "title": "展开列内容",
             "tsType": "(current: Current<T>) => Array<ViewComponent>",
+            "params": [
+              {
+                "concept": "Param",
+                "name": "current",
+                "description": "",
+                "typeAnnotation": {
+                  "typeKind": "generic",
+                  "typeName": "Current",
+                  "typeNamespace": "nasl.ui",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": [
+                    {
+                      "typeKind": "typeParam",
+                      "typeName": "T",
+                      "typeNamespace": "",
+                      "concept": "TypeAnnotation",
+                      "inferred": false,
+                      "ruleMap": {},
+                      "typeArguments": []
+                    }
+                  ]
+                }
+              }
+            ],
             "description": "展开列的内容"
           },
           {
@@ -12337,6 +12584,32 @@
             "name": "expander",
             "title": "展开列图标",
             "tsType": "(current: Current<T>) => Array<ViewComponent>",
+            "params": [
+              {
+                "concept": "Param",
+                "name": "current",
+                "description": "",
+                "typeAnnotation": {
+                  "typeKind": "generic",
+                  "typeName": "Current",
+                  "typeNamespace": "nasl.ui",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": [
+                    {
+                      "typeKind": "typeParam",
+                      "typeName": "T",
+                      "typeNamespace": "",
+                      "concept": "TypeAnnotation",
+                      "inferred": false,
+                      "ruleMap": {},
+                      "typeArguments": []
+                    }
+                  ]
+                }
+              }
+            ],
             "description": "展开列图标"
           }
         ],
@@ -12442,13 +12715,40 @@
             "concept": "SlotDeclaration",
             "name": "title",
             "title": "配置列展示title",
-            "tsType": "() => Array<ViewComponent>"
+            "tsType": "() => Array<ViewComponent>",
+            "params": []
           },
           {
             "concept": "SlotDeclaration",
             "name": "item",
             "title": "配置列展示item",
             "tsType": "(current: Current<T>) => Array<ViewComponent>",
+            "params": [
+              {
+                "concept": "Param",
+                "name": "current",
+                "description": "",
+                "typeAnnotation": {
+                  "typeKind": "generic",
+                  "typeName": "Current",
+                  "typeNamespace": "nasl.ui",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": [
+                    {
+                      "typeKind": "typeParam",
+                      "typeName": "T",
+                      "typeNamespace": "",
+                      "concept": "TypeAnnotation",
+                      "inferred": false,
+                      "ruleMap": {},
+                      "typeArguments": []
+                    }
+                  ]
+                }
+              }
+            ],
             "description": "自定义选项的结构和样式"
           }
         ],
@@ -12652,13 +12952,74 @@
             "concept": "SlotDeclaration",
             "name": "title",
             "title": "配置列展示title",
-            "tsType": "(current: Current<T1>) => Array<ViewComponent>"
+            "tsType": "(current: Current<T1>) => Array<ViewComponent>",
+            "params": [
+              {
+                "concept": "Param",
+                "name": "current",
+                "description": "",
+                "typeAnnotation": {
+                  "typeKind": "generic",
+                  "typeName": "Current",
+                  "typeNamespace": "nasl.ui",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": [
+                    {
+                      "typeKind": "typeParam",
+                      "typeName": "T1",
+                      "typeNamespace": "",
+                      "concept": "TypeAnnotation",
+                      "inferred": false,
+                      "ruleMap": {},
+                      "typeArguments": []
+                    }
+                  ]
+                }
+              }
+            ]
           },
           {
             "concept": "SlotDeclaration",
             "name": "cell",
             "title": "配置列展示item",
             "tsType": "(current: CurrentDynamic<T, T1>) => Array<ViewComponent>",
+            "params": [
+              {
+                "concept": "Param",
+                "name": "current",
+                "description": "",
+                "typeAnnotation": {
+                  "typeKind": "generic",
+                  "typeName": "CurrentDynamic",
+                  "typeNamespace": "nasl.ui",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": [
+                    {
+                      "typeKind": "typeParam",
+                      "typeName": "T",
+                      "typeNamespace": "",
+                      "concept": "TypeAnnotation",
+                      "inferred": false,
+                      "ruleMap": {},
+                      "typeArguments": []
+                    },
+                    {
+                      "typeKind": "typeParam",
+                      "typeName": "T1",
+                      "typeNamespace": "",
+                      "concept": "TypeAnnotation",
+                      "inferred": false,
+                      "ruleMap": {},
+                      "typeArguments": []
+                    }
+                  ]
+                }
+              }
+            ],
             "description": "自定义选项的结构和样式"
           }
         ],
@@ -12691,6 +13052,7 @@
             "name": "default",
             "title": "默认",
             "tsType": "() => Array<UTableViewColumn<T, V, P, M>>",
+            "params": [],
             "description": "在表格中插入`<u-table-view-column>`子组件",
             "emptyBackground": "drag-entity-here"
           },
@@ -12699,6 +13061,7 @@
             "name": "title",
             "title": "标题",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "对标题进行自定义"
           }
         ],
@@ -12928,12 +13291,23 @@
               }
             ],
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
-              "typeKind": "primitive",
+              "typeKind": "generic",
               "typeName": "Array",
               "typeNamespace": "",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "Decimal",
+                  "typeNamespace": "nasl.core",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
             }
           },
           "playground": []
@@ -13618,6 +13992,7 @@
         "name": "default",
         "title": "默认",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "插入文本或 HTML",
         "emptyBackground": "drag-entity-here"
       },
@@ -13626,6 +14001,32 @@
         "name": "item",
         "title": "undefined",
         "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ],
         "description": "自定义选项的结构和样式"
       }
     ],
@@ -13845,12 +14246,23 @@
               }
             ],
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
-              "typeKind": "primitive",
+              "typeKind": "generic",
               "typeName": "Array",
               "typeNamespace": "",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "Decimal",
+                  "typeNamespace": "nasl.core",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
             }
           },
           "playground": []
@@ -14276,6 +14688,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "插入文本或 HTML",
         "emptyBackground": "drag-entity-here"
       },
@@ -14284,6 +14697,32 @@
         "name": "item",
         "title": "undefined",
         "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ],
         "description": "自定义选项的结构和样式"
       }
     ],
@@ -14583,6 +15022,32 @@
         "name": "default",
         "title": "undefined",
         "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ],
         "description": "插入文本或 HTML 至日期组件底部"
       }
     ],
@@ -14690,6 +15155,32 @@
         "name": "default",
         "title": "undefined",
         "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ],
         "description": "内容自定义"
       }
     ],
@@ -15052,12 +15543,13 @@
             "name": "trigger",
             "description": "'触发方式，可选值：`submit`、`blur`和`input`之一，或者它们的任意组合。'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "String",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             },
             "defaultValue": {
               "concept": "DefaultValue",
@@ -15073,12 +15565,13 @@
             "name": "muted",
             "description": "'是否验证后无提示'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "Boolean",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             },
             "defaultValue": {
               "concept": "DefaultValue",
@@ -15103,12 +15596,13 @@
             "name": "name",
             "description": "'表单项的 name'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "String",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             }
           },
           {
@@ -15116,12 +15610,13 @@
             "name": "trigger",
             "description": "'触发方式，可选值：`submit`、`blur`和`input`之一，或者它们的任意组合。'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "String",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             },
             "defaultValue": {
               "concept": "DefaultValue",
@@ -15137,12 +15632,13 @@
             "name": "muted",
             "description": "'是否验证后无提示'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "Boolean",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             },
             "defaultValue": {
               "concept": "DefaultValue",
@@ -15175,6 +15671,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UFormGroup | UFormItem>",
+        "params": [],
         "description": "插入`<u-form-item>`子组件。",
         "emptyBackground": "add-sub-large"
       }
@@ -15505,12 +16002,13 @@
                 "name": "trigger",
                 "description": "'触发方式，可选值：`submit`、`blur`和`input`之一，或者它们的任意组合。'",
                 "typeAnnotation": {
-                  "concept": "TypeAnnotation",
                   "typeKind": "primitive",
                   "typeName": "String",
                   "typeNamespace": "nasl.core",
+                  "concept": "TypeAnnotation",
                   "inferred": false,
-                  "ruleMap": {}
+                  "ruleMap": {},
+                  "typeArguments": []
                 },
                 "defaultValue": {
                   "concept": "DefaultValue",
@@ -15526,12 +16024,13 @@
                 "name": "muted",
                 "description": "'是否验证后无提示'",
                 "typeAnnotation": {
-                  "concept": "TypeAnnotation",
                   "typeKind": "primitive",
                   "typeName": "Boolean",
                   "typeNamespace": "nasl.core",
+                  "concept": "TypeAnnotation",
                   "inferred": false,
-                  "ruleMap": {}
+                  "ruleMap": {},
+                  "typeArguments": []
                 },
                 "defaultValue": {
                   "concept": "DefaultValue",
@@ -15554,6 +16053,7 @@
             "name": "default",
             "title": "默认",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "插入文本或 HTML。"
           },
           {
@@ -15561,6 +16061,7 @@
             "name": "label",
             "title": "标签自定义",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "插入自定义标签，代替`label`属性。"
           },
           {
@@ -15568,6 +16069,7 @@
             "name": "description",
             "title": "描述自定义",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "插入自定义描述内容，代替`description`属性。"
           },
           {
@@ -15575,6 +16077,7 @@
             "name": "extra",
             "title": "附加内容",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "自定义标签右侧额外内容。"
           }
         ],
@@ -15776,6 +16279,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<UFormItem>",
+            "params": [],
             "description": "插入`<u-form-item>`或`<u-form-divider>`子组件。"
           },
           {
@@ -15783,6 +16287,7 @@
             "name": "title",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "自定义标题文本。"
           },
           {
@@ -15790,6 +16295,7 @@
             "name": "extra",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "在右侧可以附加内容。"
           }
         ],
@@ -16255,6 +16761,7 @@
         "name": "default",
         "title": "默认",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "插入 HTML 或 `Component`, 可展示额外内容。"
       }
     ],
@@ -16723,6 +17230,7 @@
         "name": "default",
         "title": "默认",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "插入 HTML 或 `Component`, 可展示额外内容。"
       }
     ],
@@ -17105,6 +17613,7 @@
         "name": "default",
         "title": "默认",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "插入 HTML 或 `Component`, 可展示额外内容。"
       }
     ],
@@ -17291,6 +17800,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<URadio<V>>",
+        "params": [],
         "description": "插入`<u-radio>`子组件。",
         "emptyBackground": "add-sub"
       },
@@ -17299,6 +17809,32 @@
         "name": "item",
         "title": "undefined",
         "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ],
         "description": "自定义选项的结构和样式"
       }
     ],
@@ -17900,6 +18436,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UCheckbox<T, V>>",
+        "params": [],
         "description": "插入`<checkbox>`子组件。",
         "emptyBackground": "add-sub"
       },
@@ -17914,6 +18451,7 @@
         "name": "checkAll",
         "title": "undefined",
         "tsType": "() => Array<UText>",
+        "params": [],
         "description": "全选/反选"
       },
       {
@@ -17921,6 +18459,32 @@
         "name": "item",
         "title": "undefined",
         "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ],
         "description": "自定义选项的结构和样式"
       }
     ],
@@ -18247,6 +18811,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UCapsule>",
+        "params": [],
         "description": "插入`<u-capsule>`或`<u-capsules-group>`子组件。"
       }
     ],
@@ -18387,6 +18952,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "插入文本或 HTML。"
           }
         ],
@@ -18419,6 +18985,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<UCapsule>",
+            "params": [],
             "description": "插入`<u-capsule>`或`<u-capsules-group>`子组件。"
           }
         ],
@@ -18578,12 +19145,23 @@
               }
             ],
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
-              "typeKind": "primitive",
+              "typeKind": "generic",
               "typeName": "Array",
               "typeNamespace": "",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "String",
+                  "typeNamespace": "nasl.core",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
             }
           },
           "playground": []
@@ -18646,12 +19224,23 @@
               }
             ],
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
-              "typeKind": "primitive",
+              "typeKind": "generic",
               "typeName": "Array",
               "typeNamespace": "",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "String",
+                  "typeNamespace": "nasl.core",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
             }
           },
           "playground": []
@@ -18912,12 +19501,23 @@
             "concept": "NewList",
             "items": [],
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
-              "typeKind": "primitive",
+              "typeKind": "generic",
               "typeName": "Array",
               "typeNamespace": "",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "Decimal",
+                  "typeNamespace": "nasl.core",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
             }
           },
           "playground": []
@@ -20019,6 +20619,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "插入文本 或 HTML。"
       },
       {
@@ -20026,6 +20627,7 @@
         "name": "fileList",
         "title": "文件列表",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "文件列表。"
       }
     ],
@@ -20306,12 +20908,13 @@
             "name": "trigger",
             "description": "'触发方式，可选值：`submit`、`blur`和`input`之一，或者它们的任意组合。'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "String",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             },
             "defaultValue": {
               "concept": "DefaultValue",
@@ -20327,12 +20930,13 @@
             "name": "muted",
             "description": "'是否验证后无提示'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "Boolean",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             },
             "defaultValue": {
               "concept": "DefaultValue",
@@ -20355,6 +20959,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "插入继承了 MField 的组件，或子 UValidator，或其他 HTML 和文本。"
       }
     ],
@@ -20702,6 +21307,7 @@
         "name": "default",
         "title": "默认",
         "tsType": "() => Array<UTab<V>>",
+        "params": [],
         "description": "插入`<u-tab>`子组件。",
         "emptyBackground": "add-sub"
       },
@@ -20710,19 +21316,72 @@
         "name": "extra",
         "title": "右侧附加",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "在标签右侧可以附加的组件。"
       },
       {
         "concept": "SlotDeclaration",
         "name": "title",
         "title": "头部标题",
-        "tsType": "(current: Current<T>) => Array<ViewComponent>"
+        "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ]
       },
       {
         "concept": "SlotDeclaration",
         "name": "content",
         "title": "内容区",
-        "tsType": "(current: Current<T>) => Array<ViewComponent>"
+        "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ]
       }
     ],
     "children": [
@@ -20852,6 +21511,7 @@
             "name": "default",
             "title": "默认",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "该 tab 下的内容"
           },
           {
@@ -20859,6 +21519,7 @@
             "name": "title",
             "title": "标题",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "自定义标题"
           }
         ],
@@ -21139,19 +21800,72 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<USelectableStep>",
+        "params": [],
         "description": "插入`<u-selectable-step>`子组件。"
       },
       {
         "concept": "SlotDeclaration",
         "name": "title",
         "title": "头部标题",
-        "tsType": "(current: Current<T>) => Array<ViewComponent>"
+        "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ]
       },
       {
         "concept": "SlotDeclaration",
         "name": "desc",
         "title": "描述",
-        "tsType": "(current: Current<T>) => Array<ViewComponent>"
+        "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ]
       }
     ],
     "children": [
@@ -21265,6 +21979,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "插入文本或 HTML"
           },
           {
@@ -21272,6 +21987,7 @@
             "name": "title",
             "title": "undefined",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "自定义标题文本"
           }
         ],
@@ -21518,12 +22234,23 @@
               }
             ],
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
-              "typeKind": "primitive",
+              "typeKind": "generic",
               "typeName": "Array",
               "typeNamespace": "",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "Decimal",
+                  "typeNamespace": "nasl.core",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
             }
           },
           "playground": []
@@ -22580,12 +23307,13 @@
             "name": "opened",
             "description": "'可选。弹出/关闭状态'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "Boolean",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             }
           }
         ],
@@ -22610,12 +23338,13 @@
             "name": "item",
             "description": "'当前添加的项'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
-              "typeKind": "generic",
+              "typeKind": "reference",
               "typeName": "T",
               "typeNamespace": "",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             }
           },
           {
@@ -22623,12 +23352,13 @@
             "name": "inFirst",
             "description": "'是否添加到列表的第一项'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "Boolean",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             },
             "defaultValue": {
               "concept": "DefaultValue",
@@ -22665,6 +23395,7 @@
         "name": "default",
         "title": "默认",
         "tsType": "() => Array<USelectItem<T, V> | USelectGroup<T, V> | USelectDivider>",
+        "params": [],
         "description": "插入`<u-select-item>`、`<u-select-divider>`或`<u-select-group>`子组件。"
       }
     ],
@@ -22757,6 +23488,32 @@
             "name": "default",
             "title": "默认",
             "tsType": "(current: Current<T>) => Array<ViewComponent>",
+            "params": [
+              {
+                "concept": "Param",
+                "name": "current",
+                "description": "",
+                "typeAnnotation": {
+                  "typeKind": "generic",
+                  "typeName": "Current",
+                  "typeNamespace": "nasl.ui",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": [
+                    {
+                      "typeKind": "typeParam",
+                      "typeName": "T",
+                      "typeNamespace": "",
+                      "concept": "TypeAnnotation",
+                      "inferred": false,
+                      "ruleMap": {},
+                      "typeArguments": []
+                    }
+                  ]
+                }
+              }
+            ],
             "description": "插入文本或 HTML。"
           }
         ],
@@ -22799,6 +23556,7 @@
             "name": "default",
             "title": "默认",
             "tsType": "() => Array<USelectItem<T, V>>",
+            "params": [],
             "description": "插入`<u-select-item>`或`<u-select-divider>`子组件。"
           },
           {
@@ -22806,6 +23564,7 @@
             "name": "title",
             "title": "标题",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "自定义标题文本。"
           },
           {
@@ -22813,6 +23572,7 @@
             "name": "extra",
             "title": "附加内容",
             "tsType": "() => Array<ViewComponent>",
+            "params": [],
             "description": "在右侧可以附加内容。"
           }
         ],
@@ -23981,12 +24741,13 @@
             "name": "func",
             "description": "'遍历的处理函数'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
-              "typeKind": "primitive",
+              "typeKind": "reference",
               "typeName": "Function",
               "typeNamespace": "",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             }
           }
         ],
@@ -24003,12 +24764,13 @@
             "name": "func",
             "description": "'查找函数。找到第一个返回值为`true`的实例。'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
-              "typeKind": "primitive",
+              "typeKind": "reference",
               "typeName": "Function",
               "typeNamespace": "",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             }
           }
         ],
@@ -24025,12 +24787,13 @@
             "name": "expanded",
             "description": "'展开/折叠'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "Boolean",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             }
           }
         ],
@@ -24047,12 +24810,13 @@
             "name": "expanded",
             "description": "'选中/取消'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "Boolean",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             }
           }
         ],
@@ -24081,6 +24845,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UTreeViewNodeNew<T, V>>",
+        "params": [],
         "description": "插入`<u-tree-view-node-new>`子组件"
       },
       {
@@ -24088,6 +24853,32 @@
         "name": "item",
         "title": "undefined",
         "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ],
         "description": "自定义选项的结构和样式"
       }
     ],
@@ -24210,6 +25001,7 @@
             "name": "default",
             "title": "undefined",
             "tsType": "() => Array<UTreeViewNodeNew<T, V>>",
+            "params": [],
             "description": "插入子节点"
           }
         ],
@@ -24491,12 +25283,23 @@
             "name": "values",
             "description": "'指定转移选项值的列表。如果不填，则为按左列表框选中项值的列表。'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
-              "typeKind": "primitive",
+              "typeKind": "generic",
               "typeName": "Array",
               "typeNamespace": "",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "String",
+                  "typeNamespace": "nasl.core",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
             }
           }
         ],
@@ -24513,12 +25316,23 @@
             "name": "values",
             "description": "'指定转移选项值的列表。如果不填，则为按右列表框选中项值的列表。'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
-              "typeKind": "primitive",
+              "typeKind": "generic",
               "typeName": "Array",
               "typeNamespace": "",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "String",
+                  "typeNamespace": "nasl.core",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
             }
           }
         ],
@@ -24548,12 +25362,23 @@
             "name": "values",
             "description": "'指定转移选项值的列表。'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
-              "typeKind": "primitive",
+              "typeKind": "generic",
               "typeName": "Array",
               "typeNamespace": "",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "String",
+                  "typeNamespace": "nasl.core",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
             }
           }
         ],
@@ -24568,6 +25393,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "插入文本或 HTML"
       },
       {
@@ -24575,6 +25401,32 @@
         "name": "item",
         "title": "undefined",
         "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ],
         "description": "自定义选项的结构和样式"
       }
     ],
@@ -26891,6 +27743,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<UTreeViewNodeNew<T, V>>",
+        "params": [],
         "description": "插入`<u-tree-view-node-new>`子组件"
       },
       {
@@ -26898,6 +27751,32 @@
         "name": "item",
         "title": "undefined",
         "tsType": "(current: Current<T>) => Array<ViewComponent>",
+        "params": [
+          {
+            "concept": "Param",
+            "name": "current",
+            "description": "",
+            "typeAnnotation": {
+              "typeKind": "generic",
+              "typeName": "Current",
+              "typeNamespace": "nasl.ui",
+              "concept": "TypeAnnotation",
+              "inferred": false,
+              "ruleMap": {},
+              "typeArguments": [
+                {
+                  "typeKind": "typeParam",
+                  "typeName": "T",
+                  "typeNamespace": "",
+                  "concept": "TypeAnnotation",
+                  "inferred": false,
+                  "ruleMap": {},
+                  "typeArguments": []
+                }
+              ]
+            }
+          }
+        ],
         "description": "自定义选项的结构和样式"
       }
     ],
@@ -27033,6 +27912,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "插入文本或HTML。"
       }
     ],
@@ -27138,6 +28018,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "插入文本或 HTML。"
       }
     ],
@@ -27512,12 +28393,13 @@
             "name": "opened",
             "description": "'可选。弹出/关闭状态'",
             "typeAnnotation": {
-              "concept": "TypeAnnotation",
               "typeKind": "primitive",
               "typeName": "Boolean",
               "typeNamespace": "nasl.core",
+              "concept": "TypeAnnotation",
               "inferred": false,
-              "ruleMap": {}
+              "ruleMap": {},
+              "typeArguments": []
             }
           }
         ],
@@ -27548,6 +28430,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "自定义弹出的内容。"
       },
       {
@@ -27555,6 +28438,7 @@
         "name": "reference",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "弹出层触发节点。"
       }
     ],
@@ -27799,6 +28683,7 @@
         "name": "title",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "弹窗标题自定义"
       },
       {
@@ -27806,6 +28691,7 @@
         "name": "head",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "弹窗头部自定义"
       },
       {
@@ -27813,6 +28699,7 @@
         "name": "body",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "弹窗中部自定义"
       },
       {
@@ -27820,6 +28707,7 @@
         "name": "foot",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "弹窗尾部自定义"
       },
       {
@@ -27827,6 +28715,7 @@
         "name": "heading",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "弹框小标题自定义"
       },
       {
@@ -27834,6 +28723,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "弹窗内容自定义"
       }
     ],
@@ -28361,6 +29251,7 @@
         "name": "default",
         "title": "undefined",
         "tsType": "() => Array<ViewComponent>",
+        "params": [],
         "description": "修改默认触发元素"
       }
     ],

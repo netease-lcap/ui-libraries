@@ -205,13 +205,17 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
                             });
                             component.events.push(event);
                         } else if (calleeName === 'Slot') {
+                            const parameters = ((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation as babelTypes.TSFunctionType).parameters as babelTypes.Identifier[];
+
                             const slot: astTypes.SlotDeclaration = {
                                 concept: 'SlotDeclaration',
                                 snippets: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'snippets') as astTypes.SlotDeclaration['snippets'],
                                 name: (member.key as babelTypes.Identifier).name.replace(/^slot(\w)/, (m, $1) => $1.toLowerCase()),
                                 title: '',
                                 tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
+                                params: transformSlotParams(parameters),
                             };
+
                             decorator.expression.arguments.forEach((arg) => {
                                 if (arg.type === 'ObjectExpression')
                                     Object.assign(slot, evalOptions(arg));
@@ -241,6 +245,7 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
                                 title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'title') as astTypes.PropDeclaration['title'],
                                 tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
                             };
+
                             // @TODO: default
                             // @TODO: private
                             decorator.expression.arguments.forEach((arg) => {
@@ -378,101 +383,65 @@ function transformValue(node: DefaultValue, typeAnnotation?: Annotation): astTyp
     }
 }
 
-function transformTypeAnnotation(typeAnnotation: Annotation): astTypes.TypeAnnotation {
-    if (typeAnnotation.type === 'TSTypeReference') {
-        const { typeName, typeParameters } = typeAnnotation;
-
-        // nasl.core.Integer | nasl.collection.List<nasl.core.Integer>
-        if (typeName.type === 'TSQualifiedName') {
-            const { left, right } = typeName;
-            const primitive = isPrimitive(right.name);
-           
-            let annotation: astTypes.TypeAnnotation = {
-                concept: 'TypeAnnotation',
-                typeKind: primitive ? 'primitive' : 'reference',
-                typeName: getTypeName(typeAnnotation).name,
-                typeNamespace: getTypeName(typeAnnotation).namespace,
-                inferred: false,
-                ruleMap: new Map(),
-            }
-
-            if (typeParameters) {
-                annotation.typeArguments = transformTypeParameters(typeParameters)
-            }
-
-            return annotation;
-        }
-
-        if (typeName.type === 'Identifier') {
-            if (['T', 'V'].includes(typeName.name)) {
-                return {
-                    concept: 'TypeAnnotation',
-                    typeKind: 'generic',
-                    typeName: typeName.name,
-                    typeNamespace: '',
-                    inferred: false,
-                    ruleMap: new Map(),
-                }
-            }
-        }
-
-        return {
-            concept: 'TypeAnnotation',
-            typeKind: 'primitive',
-            typeName: typeName.name,
-            typeNamespace: '',
-            inferred: false,
-            ruleMap: new Map(),
-        }
-    }
-
-    if (typeAnnotation.type === 'TSUnionType') {
-
-    }
-}
-
-function transformTypeParameters(typeParameters: babelTypes.TSTypeParameterInstantiation): astTypes.TypeAnnotation[] {
-    return typeParameters.params.map((param) => {
-        return {
-            concept: 'TypeAnnotation',
-            typeKind: 'typeParam',
-            typeName: getTypeName(param as Annotation).name,
-            typeNamespace: getTypeName(param as Annotation).namespace,
-            inferred: false,
-            ruleMap: new Map(),
-        }
-    });
-}
-
-function getTypeName(node: Annotation): { kind: string, name: string, namespace: string } {
+function transformTypeAnnotation(node: Annotation): astTypes.TypeAnnotation {
     if (node.type === 'TSTypeReference') {
-        const { typeName } = node;
+        const { typeName, typeParameters } = node;
         if (typeName.type === 'TSQualifiedName') {
             const { left, right } = typeName;
             const primitive = isPrimitive(right.name);
             const namespace = ((left as babelTypes.TSQualifiedName).left as babelTypes.Identifier).name + '.' + (left as babelTypes.TSQualifiedName).right.name;
 
             return {
-                kind: primitive ? 'primitive' : 'reference',
-                name: right.name,
-                namespace: namespace,
+                typeKind: typeParameters?.params?.length
+                    ? 'generic'
+                    : (primitive ? 'primitive' : 'reference'),
+                typeName: right.name,
+                typeNamespace: namespace,
+                concept: 'TypeAnnotation',
+                inferred: false,
+                ruleMap: new Map(),
+                typeArguments: transformTypeParameters(typeParameters)
             };
         }
 
         if (typeName.type === 'Identifier') {
-            if (['T', 'V'].includes(typeName.name)) {
-                return {
-                    kind: 'generic',
-                    name: typeName.name,
-                    namespace: '',
-                }
+            const primitive = isPrimitive(typeName.name);
+
+            return {
+                typeKind: typeParameters?.params?.length
+                    ? 'generic'
+                    : (primitive ? 'primitive' : 'reference'),
+                typeName: typeName.name,
+                typeNamespace: ['Current', 'CurrentDynamic'].includes(typeName.name) ? 'nasl.ui' : '',
+                concept: 'TypeAnnotation',
+                inferred: false,
+                ruleMap: new Map(),
+                typeArguments: transformTypeParameters(typeParameters)
             }
         }
-
-        return {
-            kind: 'primitive',
-            name: typeName.name,
-            namespace: '',
-        }
     }
+}
+
+function transformTypeParameters(typeParameters: babelTypes.TSTypeParameterInstantiation): astTypes.TypeAnnotation[] {
+    return typeParameters?.params?.map((param) => {
+        return {
+            ...transformTypeAnnotation(param as Annotation),
+            concept: 'TypeAnnotation',
+            typeKind: 'typeParam',
+            inferred: false,
+            ruleMap: new Map(),
+        }
+    }) || [];
+}
+
+function transformSlotParams(params: babelTypes.Identifier[]): astTypes.Param[] {
+    return params.map((param) => {
+        const typeAnnotation = param.typeAnnotation as babelTypes.TSTypeAnnotation;
+        return {
+            concept: 'Param',
+            name: param.name,
+            description: '',
+            typeAnnotation: transformTypeAnnotation(typeAnnotation.typeAnnotation as Annotation),
+        }
+    });
 }
