@@ -22,8 +22,8 @@ function evalOptions(object) {
         result.if = result.if.toString();
     if (result.disabledIf)
         result.disabledIf = result.disabledIf.toString();
-    if (result.onToggle) {
-        result.onToggle.forEach(function (item) {
+    if (result.onChange) {
+        result.onChange.forEach(function (item) {
             if (item.if)
                 item.if = item.if.toString();
         });
@@ -133,12 +133,18 @@ function transform(tsCode) {
             component.tsTypeParams = classTypeParams;
         }
         optionsDecl.body.body.forEach(function (member) {
+            var _a, _b, _c, _d;
             if (member.type === 'ClassProperty') {
-                member.decorators.forEach(function (decorator) {
-                    var _a, _b, _c, _d;
+                var _loop_1 = function (i) {
+                    var decorator = member.decorators[i];
                     if (decorator.expression.type === 'CallExpression') {
                         var calleeName = decorator.expression.callee.name;
                         if (calleeName === 'Prop') {
+                            // 过滤private属性
+                            if (member.accessibility === 'private') {
+                                return "continue";
+                            }
+                            ;
                             var prop_1 = {
                                 concept: 'PropDeclaration',
                                 group: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'group') || '主要属性',
@@ -151,6 +157,15 @@ function transform(tsCode) {
                                 title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'title'),
                                 tsType: (0, generator_1.default)(member.typeAnnotation.typeAnnotation).code,
                             };
+                            // 默认值
+                            if (member.value) {
+                                var typeAnnotation = member.typeAnnotation;
+                                prop_1.defaultValue = {
+                                    concept: 'DefaultValue',
+                                    expression: transformValue(member.value, typeAnnotation.typeAnnotation),
+                                    playground: [],
+                                };
+                            }
                             // @TODO: default
                             // @TODO: private
                             decorator.expression.arguments.forEach(function (arg) {
@@ -169,10 +184,7 @@ function transform(tsCode) {
                                 // 去掉_
                                 prop_1.name = prop_1.name.replace(/^_/, '');
                             }
-                            // 过滤private属性
-                            if (member.accessibility !== 'private') {
-                                component.props.push(prop_1);
-                            }
+                            component.props.push(prop_1);
                         }
                         else if (calleeName === 'Event') {
                             var event_1 = {
@@ -202,7 +214,10 @@ function transform(tsCode) {
                             component.slots.push(slot_1);
                         }
                     }
-                });
+                };
+                for (var i = 0; i < member.decorators.length; i++) {
+                    _loop_1(i);
+                }
             }
         });
         classDecl.body.body.forEach(function (member) {
@@ -243,8 +258,36 @@ function transform(tsCode) {
                             var method_1 = {
                                 concept: 'LogicDeclaration',
                                 description: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'description'),
+                                params: member.params.map(function (param) {
+                                    var type = param.type;
+                                    // 有默认值
+                                    if (type === 'AssignmentPattern') {
+                                        var decorator_1 = param.left.decorators[0];
+                                        var typeAnnotation = param.left.typeAnnotation;
+                                        return {
+                                            concept: 'Param',
+                                            name: param.left.name,
+                                            description: getValueFromObjectExpressionByKey(decorator_1.expression.arguments[0], 'description'),
+                                            typeAnnotation: transformTypeAnnotation(typeAnnotation.typeAnnotation),
+                                            defaultValue: {
+                                                concept: 'DefaultValue',
+                                                expression: transformValue(param.right, typeAnnotation.typeAnnotation),
+                                                playground: [],
+                                            },
+                                        };
+                                    }
+                                    else {
+                                        var decorator_2 = param.decorators[0];
+                                        var typeAnnotation = param.typeAnnotation;
+                                        return {
+                                            concept: 'Param',
+                                            name: param.name,
+                                            description: getValueFromObjectExpressionByKey(decorator_2.expression.arguments[0], 'description'),
+                                            typeAnnotation: transformTypeAnnotation(typeAnnotation.typeAnnotation),
+                                        };
+                                    }
+                                }),
                                 // TODO
-                                params: [],
                                 returns: [],
                                 name: member.key.name,
                                 title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0], 'title'),
@@ -278,4 +321,131 @@ function getValueFromObjectExpressionByKey(object, key) {
     if (!property)
         return undefined;
     return (0, generator_1.default)(property.value).code;
+}
+var isPrimitive = function (name) { return ['String', 'Integer', 'Decimal', 'Boolean'].includes(name); };
+function transformValue(node, typeAnnotation) {
+    if (node.type === 'NullLiteral') {
+        return {
+            concept: 'NullLiteral',
+        };
+    }
+    if (node.type === 'StringLiteral') {
+        return {
+            concept: 'StringLiteral',
+            value: node.value,
+        };
+    }
+    if (node.type === 'BooleanLiteral') {
+        return {
+            concept: 'BooleanLiteral',
+            value: String(node.value),
+        };
+    }
+    if (node.type === 'NumericLiteral') {
+        var value = String(node.value);
+        return {
+            concept: 'NumericLiteral',
+            value: value,
+            typeAnnotation: {
+                concept: 'TypeAnnotation',
+                typeKind: 'primitive',
+                typeName: value.includes('.') ? 'Decimal' : 'Integer',
+                typeNamespace: 'nasl.core',
+                inferred: false,
+                ruleMap: new Map(),
+            },
+        };
+    }
+    if (node.type === 'ArrayExpression') {
+        return {
+            concept: 'NewList',
+            items: node.elements.map(function (item) { return transformValue(item); }),
+            typeAnnotation: transformTypeAnnotation(typeAnnotation)
+        };
+    }
+}
+function transformTypeAnnotation(typeAnnotation) {
+    if (typeAnnotation.type === 'TSTypeReference') {
+        var typeName = typeAnnotation.typeName, typeParameters = typeAnnotation.typeParameters;
+        // nasl.core.Integer | nasl.collection.List<nasl.core.Integer>
+        if (typeName.type === 'TSQualifiedName') {
+            var left = typeName.left, right = typeName.right;
+            var primitive = isPrimitive(right.name);
+            var annotation = {
+                concept: 'TypeAnnotation',
+                typeKind: primitive ? 'primitive' : 'reference',
+                typeName: getTypeName(typeAnnotation).name,
+                typeNamespace: getTypeName(typeAnnotation).namespace,
+                inferred: false,
+                ruleMap: new Map(),
+            };
+            if (typeParameters) {
+                annotation.typeArguments = transformTypeParameters(typeParameters);
+            }
+            return annotation;
+        }
+        if (typeName.type === 'Identifier') {
+            if (['T', 'V'].includes(typeName.name)) {
+                return {
+                    concept: 'TypeAnnotation',
+                    typeKind: 'generic',
+                    typeName: typeName.name,
+                    typeNamespace: '',
+                    inferred: false,
+                    ruleMap: new Map(),
+                };
+            }
+        }
+        return {
+            concept: 'TypeAnnotation',
+            typeKind: 'primitive',
+            typeName: typeName.name,
+            typeNamespace: '',
+            inferred: false,
+            ruleMap: new Map(),
+        };
+    }
+    if (typeAnnotation.type === 'TSUnionType') {
+    }
+}
+function transformTypeParameters(typeParameters) {
+    return typeParameters.params.map(function (param) {
+        return {
+            concept: 'TypeAnnotation',
+            typeKind: 'typeParam',
+            typeName: getTypeName(param).name,
+            typeNamespace: getTypeName(param).namespace,
+            inferred: false,
+            ruleMap: new Map(),
+        };
+    });
+}
+function getTypeName(node) {
+    if (node.type === 'TSTypeReference') {
+        var typeName = node.typeName;
+        if (typeName.type === 'TSQualifiedName') {
+            var left = typeName.left, right = typeName.right;
+            var primitive = isPrimitive(right.name);
+            var namespace = left.left.name + '.' + left.right.name;
+            return {
+                kind: primitive ? 'primitive' : 'reference',
+                name: right.name,
+                namespace: namespace,
+            };
+        }
+        if (typeName.type === 'Identifier') {
+            if (['T', 'V'].includes(typeName.name)) {
+                return {
+                    kind: 'generic',
+                    name: typeName.name,
+                    namespace: '',
+                };
+            }
+        }
+        return {
+            kind: 'primitive',
+            name: typeName.name,
+            namespace: '',
+        };
+    }
 }
