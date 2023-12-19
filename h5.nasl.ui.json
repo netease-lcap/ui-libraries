@@ -98,7 +98,15 @@
         },
         "name": "value",
         "title": "展示弹层",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -128,6 +136,14 @@
         "name": "position",
         "title": "弹出位置",
         "tsType": "'top' | 'bottom' | 'right' | 'left'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "bottom"
+          },
+          "playground": []
+        },
         "description": "设置弹出位置"
       },
       {
@@ -139,7 +155,15 @@
         },
         "name": "closeOnClickOverlay",
         "title": "点击遮罩层后关闭",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       }
     ],
     "readableProps": [],
@@ -269,6 +293,14 @@
         "name": "accordion",
         "title": "手风琴模式",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否开启手风琴模式"
       }
     ],
@@ -329,6 +361,14 @@
             "name": "isLink",
             "title": "箭头图标",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "true"
+              },
+              "playground": []
+            },
             "description": "是否显示箭头图标"
           },
           {
@@ -341,6 +381,14 @@
             "name": "disabled",
             "title": "禁用",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            },
             "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
           }
         ],
@@ -365,7 +413,21 @@
           {
             "concept": "LogicDeclaration",
             "description": "切换展开状态，传 true 为展开，false 为收起，不传参为切换",
-            "params": [],
+            "params": [
+              {
+                "concept": "Param",
+                "name": "expanded",
+                "description": "'展开'",
+                "typeAnnotation": {
+                  "concept": "TypeAnnotation",
+                  "typeKind": "primitive",
+                  "typeName": "Boolean",
+                  "typeNamespace": "nasl.core",
+                  "inferred": false,
+                  "ruleMap": {}
+                }
+              }
+            ],
             "returns": [],
             "name": "toggle",
             "title": "切换展开状态，传 true 为展开，false 为收起，不传参为切换"
@@ -420,7 +482,15 @@
         },
         "name": "linkType",
         "title": "链接类型",
-        "tsType": "'destination' | 'download'"
+        "tsType": "'destination' | 'download'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "destination"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -458,6 +528,14 @@
         "name": "target",
         "title": "打开方式",
         "tsType": "'_blank' | '_self' | '_parent' | '_top'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "_self"
+          },
+          "playground": []
+        },
         "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。"
       },
       {
@@ -479,7 +557,15 @@
         },
         "name": "sr",
         "title": "图片风格",
-        "tsType": "'s' | 'r'"
+        "tsType": "'s' | 'r'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "r"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -490,7 +576,15 @@
         },
         "name": "shadow",
         "title": "卡片阴影",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -501,7 +595,15 @@
         },
         "name": "border",
         "title": "卡片边框",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -512,7 +614,15 @@
         },
         "name": "split",
         "title": "分割线",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       }
     ],
     "readableProps": [],
@@ -659,6 +769,14 @@
         "name": "gap",
         "title": "内容间隙",
         "tsType": "'shrink' | 'none' | 'small' | 'normal' | 'large'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "normal"
+          },
+          "playground": []
+        },
         "description": "内容块间隙大小",
         "if": "_ => _.justify !== 'space-between' && _.justify !== 'space-around'"
       },
@@ -686,6 +804,14 @@
         "name": "layout",
         "title": "子元素展示方式",
         "tsType": "'none' | 'inline' | 'block'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "none"
+          },
+          "playground": []
+        },
         "description": "设置子元素行内展示或块级换行展示",
         "if": "_ => _.mode === 'inline' || _.mode === 'block'"
       },
@@ -696,6 +822,14 @@
         "name": "loadingIcon",
         "title": "加载中图标",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "loading"
+          },
+          "playground": []
+        },
         "description": "加载状态中显示的图标"
       },
       {
@@ -708,6 +842,14 @@
         "name": "loadingIconRotate",
         "title": "加载中图标旋转",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        },
         "description": "设置加载中图标是否旋转，默认开启。"
       },
       {
@@ -717,6 +859,14 @@
         "name": "loadingText",
         "title": "加载中文案",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": ""
+          },
+          "playground": []
+        },
         "description": "加载状态中显示的文案"
       },
       {
@@ -750,6 +900,14 @@
         "name": "mode",
         "title": "布局模式",
         "tsType": "'inline' | 'block' | 'flex'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "block"
+          },
+          "playground": []
+        },
         "description": "设置布局模式",
         "tooltipLink": "http://help.lcap.163yun.com/1.%E5%BC%80%E5%8F%91%E5%BA%94%E7%94%A8/2.%E9%A1%B5%E9%9D%A2/10.H5%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/01.%E5%B8%83%E5%B1%80/020.%E7%BA%BF%E6%80%A7%E5%B8%83%E5%B1%80.html",
         "onChange": [
@@ -788,6 +946,14 @@
         "name": "direction",
         "title": "主轴方向",
         "tsType": "'horizontal' | 'vertical'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "horizontal"
+          },
+          "playground": []
+        },
         "onChange": [
           {
             "clear": [
@@ -840,18 +1006,28 @@
         "name": "justify",
         "title": "横轴对齐",
         "tsType": "'start' | 'center' | 'end' | 'space-between' | 'space-around'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "start"
+          },
+          "playground": []
+        },
         "docDescription": "主轴方向为横向时：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布，其中平均分布仅在弹性布局模式下展示。\n主轴方向为纵向时：支持左对齐、居中对齐、右对齐、占满容器宽度，其中占满容器宽度仅在弹性布局模式下展示。",
         "if": "_ => _.direction === 'horizontal' || _.mode === 'inline' && _.direction === 'vertical' || _.mode === 'block' && _.direction === 'vertical'",
         "onChange": [
           {
             "update": {
               "gap": "normal"
-            }
+            },
+            "if": "_ => _ === 'space-between'"
           },
           {
             "update": {
               "gap": "normal"
-            }
+            },
+            "if": "_ => _ === 'space-around'"
           }
         ]
       },
@@ -898,6 +1074,14 @@
         "name": "alignment",
         "title": "纵轴对齐",
         "tsType": "'start' | 'center' | 'end' | 'baseline' | 'stretch'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "stretch"
+          },
+          "playground": []
+        },
         "docDescription": "主轴方向为横向时：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。\n主轴方向为纵向时：支持顶对齐、垂直居中、底对齐、平均分布（两端不留空）、平均分布。",
         "if": "_ => _.mode === 'flex' && _.direction === 'horizontal'"
       },
@@ -938,6 +1122,14 @@
         "name": "alignment",
         "title": "纵轴对齐",
         "tsType": "'start' | 'center' | 'end' | 'stretch'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "stretch"
+          },
+          "playground": []
+        },
         "docDescription": "主轴方向为横向时：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。\n主轴方向为纵向时：支持顶对齐、垂直居中、底对齐、平均分布（两端不留空）、平均分布。",
         "if": "_ => _.mode === 'flex' && _.direction === 'vertical'"
       },
@@ -984,18 +1176,28 @@
         "name": "justify",
         "title": "横轴对齐",
         "tsType": "'start' | 'center' | 'end' | 'space-between' | 'space-around'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "start"
+          },
+          "playground": []
+        },
         "docDescription": "主轴方向为横向时：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布，其中平均分布仅在弹性布局模式下展示。\n主轴方向为纵向时：支持左对齐、居中对齐、右对齐、占满容器宽度，其中占满容器宽度仅在弹性布局模式下展示。",
         "if": "_ => _.mode === 'flex' && _.direction === 'vertical'",
         "onChange": [
           {
             "update": {
               "gap": "normal"
-            }
+            },
+            "if": "_ => _ === 'space-between'"
           },
           {
             "update": {
               "gap": "normal"
-            }
+            },
+            "if": "_ => _ === 'space-around'"
           }
         ]
       },
@@ -1009,6 +1211,14 @@
         "name": "wrap",
         "title": "换行",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        },
         "description": "弹性布局下子元素总宽度超出父级时子元素是否换行展示",
         "if": "_ => _.mode === 'flex'"
       }
@@ -1161,6 +1371,14 @@
         "name": "contentPosition",
         "title": "内容位置",
         "tsType": "'center' | 'left' | 'right'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "center"
+          },
+          "playground": []
+        },
         "description": "设置内容位置"
       },
       {
@@ -1182,7 +1400,15 @@
         },
         "name": "dashed",
         "title": "线条类型",
-        "tsType": "'b' | 'a'"
+        "tsType": "'b' | 'a'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "a"
+          },
+          "playground": []
+        }
       }
     ],
     "readableProps": [],
@@ -1240,6 +1466,14 @@
         "name": "inset",
         "title": "卡片风格",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否显示为卡片风格"
       }
     ],
@@ -1292,6 +1526,14 @@
             "name": "isLink",
             "title": "箭头图标",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "true"
+              },
+              "playground": []
+            },
             "description": "是否显示箭头图标"
           },
           {
@@ -1321,7 +1563,15 @@
             },
             "name": "arrowDirection",
             "title": "箭头方向",
-            "tsType": "'left' | 'up' | 'down' | 'right'"
+            "tsType": "'left' | 'up' | 'down' | 'right'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "right"
+              },
+              "playground": []
+            }
           },
           {
             "concept": "PropDeclaration",
@@ -1333,6 +1583,14 @@
             "name": "center",
             "title": "垂直居中",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "true"
+              },
+              "playground": []
+            },
             "description": "是否垂直居中展示"
           },
           {
@@ -1365,7 +1623,15 @@
             },
             "name": "linkType",
             "title": "链接类型",
-            "tsType": "'destination' | 'download'"
+            "tsType": "'destination' | 'download'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "destination"
+              },
+              "playground": []
+            }
           },
           {
             "concept": "PropDeclaration",
@@ -1403,6 +1669,14 @@
             "name": "target",
             "title": "打开方式",
             "tsType": "'_blank' | '_self' | '_parent' | '_top'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "_self"
+              },
+              "playground": []
+            },
             "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。"
           }
         ],
@@ -1503,6 +1777,14 @@
         "name": "type",
         "title": "布局模式",
         "tsType": "'-' | 'flex'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "flex"
+          },
+          "playground": []
+        },
         "description": "设置布局模式",
         "tooltipLink": "http://help.lcap.163yun.com/1.%E5%BC%80%E5%8F%91%E5%BA%94%E7%94%A8/2.%E9%A1%B5%E9%9D%A2/10.H5%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/01.%E5%B8%83%E5%B1%80/030.%E6%A0%85%E6%A0%BC%E5%B8%83%E5%B1%80.html"
       },
@@ -1549,6 +1831,14 @@
         "name": "justify",
         "title": "横轴对齐",
         "tsType": "'start' | 'center' | 'end' | 'space-between' | 'space-around'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "start"
+          },
+          "playground": []
+        },
         "if": "_ => _.type === 'flex'"
       },
       {
@@ -1594,6 +1884,14 @@
         "name": "alignment",
         "title": "纵轴对齐",
         "tsType": "'start' | 'center' | 'end' | 'baseline' | 'stretch'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "stretch"
+          },
+          "playground": []
+        },
         "if": "_ => _.type === 'flex'"
       },
       {
@@ -1624,6 +1922,14 @@
         "name": "gutter",
         "title": "列间距",
         "tsType": "'0' | '10' | '20' | '30'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "0"
+          },
+          "playground": []
+        },
         "description": "列元素之间的间距，单位为 px。"
       }
     ],
@@ -1682,6 +1988,14 @@
             "name": "direction",
             "title": "主轴方向",
             "tsType": "'horizontal' | 'vertical'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "horizontal"
+              },
+              "playground": []
+            },
             "if": "_ => _.mode === 'flex'",
             "onChange": [
               {
@@ -1735,18 +2049,28 @@
             "name": "justify",
             "title": "横轴对齐",
             "tsType": "'start' | 'center' | 'end' | 'space-between' | 'space-around'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "start"
+              },
+              "playground": []
+            },
             "docDescription": "主轴方向为横向时：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布。主轴方向为纵向时：支持左对齐、居中对齐、右对齐、占满容器宽度。",
             "if": "_ => _.mode === 'flex' && _.direction === 'horizontal'",
             "onChange": [
               {
                 "update": {
                   "gap": "normal"
-                }
+                },
+                "if": "_ => _ === 'space-between'"
               },
               {
                 "update": {
                   "gap": "normal"
-                }
+                },
+                "if": "_ => _ === 'space-around'"
               }
             ]
           },
@@ -1793,6 +2117,14 @@
             "name": "alignment",
             "title": "纵轴对齐",
             "tsType": "'start' | 'center' | 'end' | 'baseline' | 'stretch'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "stretch"
+              },
+              "playground": []
+            },
             "docDescription": "主轴方向为横向时：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。主轴方向为纵向时：支持顶对齐、垂直居中、底对齐、平均分布（两端不留空）、平均分布。",
             "if": "_ => _.mode === 'flex' && _.direction === 'horizontal'"
           },
@@ -1833,6 +2165,14 @@
             "name": "alignment",
             "title": "纵轴对齐",
             "tsType": "'start' | 'center' | 'end' | 'stretch'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "stretch"
+              },
+              "playground": []
+            },
             "docDescription": "主轴方向为横向时：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。主轴方向为纵向时：支持顶对齐、垂直居中、底对齐、平均分布（两端不留空）、平均分布。",
             "if": "_ => _.mode === 'flex' && _.direction === 'vertical'"
           },
@@ -1879,18 +2219,28 @@
             "name": "justify",
             "title": "横轴对齐",
             "tsType": "'start' | 'center' | 'end' | 'space-between' | 'space-around'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "start"
+              },
+              "playground": []
+            },
             "docDescription": "主轴方向为横向时：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布。 主轴方向为纵向时：支持左对齐、居中对齐、右对齐、占满容器宽度。",
             "if": "_ => _.mode === 'flex' && _.direction === 'vertical'",
             "onChange": [
               {
                 "update": {
                   "gap": "normal"
-                }
+                },
+                "if": "_ => _ === 'space-between'"
               },
               {
                 "update": {
                   "gap": "normal"
-                }
+                },
+                "if": "_ => _ === 'space-around'"
               }
             ]
           },
@@ -1904,6 +2254,14 @@
             "name": "wrap",
             "title": "是否换行",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "true"
+              },
+              "playground": []
+            },
             "description": "弹性布局下子元素总宽度超出父级时子元素是否换行展示",
             "if": "_ => _.mode === 'flex'"
           },
@@ -1939,6 +2297,14 @@
             "name": "gap",
             "title": "内容间隙",
             "tsType": "'shrink' | 'none' | 'small' | 'normal' | 'large'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "normal"
+              },
+              "playground": []
+            },
             "description": "内容块间隙大小",
             "if": "_ => _.mode === 'flex' && _.justify !== 'space-between' && _.justify !== 'space-around'"
           },
@@ -1955,6 +2321,22 @@
             "name": "span",
             "title": "占据列数",
             "tsType": "nasl.core.Integer",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "NumericLiteral",
+                "value": "1",
+                "typeAnnotation": {
+                  "concept": "TypeAnnotation",
+                  "typeKind": "primitive",
+                  "typeName": "Integer",
+                  "typeNamespace": "nasl.core",
+                  "inferred": false,
+                  "ruleMap": {}
+                }
+              },
+              "playground": []
+            },
             "description": "栅格列宽度，栅格行最大为24列。"
           },
           {
@@ -1968,6 +2350,22 @@
             "name": "offset",
             "title": "偏移数",
             "tsType": "nasl.core.Integer",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "NumericLiteral",
+                "value": "0",
+                "typeAnnotation": {
+                  "concept": "TypeAnnotation",
+                  "typeKind": "primitive",
+                  "typeName": "Integer",
+                  "typeNamespace": "nasl.core",
+                  "inferred": false,
+                  "ruleMap": {}
+                }
+              },
+              "playground": []
+            },
             "description": "栅格列向右偏移列数"
           },
           {
@@ -1995,6 +2393,14 @@
             "name": "mode",
             "title": "布局模式",
             "tsType": "'inline' | 'flex'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "inline"
+              },
+              "playground": []
+            },
             "description": "设置布局模式",
             "tooltipLink": "http://help.lcap.163yun.com/1.%E5%BC%80%E5%8F%91%E5%BA%94%E7%94%A8/2.%E9%A1%B5%E9%9D%A2/10.H5%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/01.%E5%B8%83%E5%B1%80/030.%E6%A0%85%E6%A0%BC%E5%B8%83%E5%B1%80.html",
             "onChange": [
@@ -2078,6 +2484,14 @@
         "name": "direction",
         "title": "展开方向",
         "tsType": "'up' | 'down'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "down"
+          },
+          "playground": []
+        },
         "description": "设置下拉菜单的展开方向"
       },
       {
@@ -2089,7 +2503,15 @@
         },
         "name": "overlay",
         "title": "显示遮罩层",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -2101,6 +2523,14 @@
         "name": "closeOnClickOverlay",
         "title": "点击遮罩层后关闭",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        },
         "description": "是否点击遮罩层后关闭菜单"
       }
     ],
@@ -2150,7 +2580,15 @@
             "tabKind": "property",
             "name": "title",
             "title": "标题",
-            "tsType": "nasl.core.String"
+            "tsType": "nasl.core.String",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "标题"
+              },
+              "playground": []
+            }
           },
           {
             "concept": "PropDeclaration",
@@ -2162,6 +2600,14 @@
             "name": "shutself",
             "title": "点击菜单子项关闭",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "true"
+              },
+              "playground": []
+            },
             "description": "是否通过点击菜单子项关闭"
           },
           {
@@ -2174,6 +2620,14 @@
             "name": "disabled",
             "title": "禁用",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            },
             "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
           }
         ],
@@ -2205,7 +2659,21 @@
           {
             "concept": "LogicDeclaration",
             "description": "切换菜单展示状态",
-            "params": [],
+            "params": [
+              {
+                "concept": "Param",
+                "name": "show",
+                "description": "'展示'",
+                "typeAnnotation": {
+                  "concept": "TypeAnnotation",
+                  "typeKind": "primitive",
+                  "typeName": "Boolean",
+                  "typeNamespace": "nasl.core",
+                  "inferred": false,
+                  "ruleMap": {}
+                }
+              }
+            ],
             "returns": [],
             "name": "toggle",
             "title": "undefined"
@@ -2260,6 +2728,14 @@
             "name": "isLink",
             "title": "箭头",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "true"
+              },
+              "playground": []
+            },
             "description": "是否显示箭头图标"
           },
           {
@@ -2290,6 +2766,14 @@
             "name": "arrowDirection",
             "title": "箭头方向",
             "tsType": "'left' | 'up' | 'down' | 'right'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "right"
+              },
+              "playground": []
+            },
             "description": "设置箭头方向"
           },
           {
@@ -2301,7 +2785,15 @@
             },
             "name": "center",
             "title": "垂直居中",
-            "tsType": "nasl.core.Boolean"
+            "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "true"
+              },
+              "playground": []
+            }
           },
           {
             "concept": "PropDeclaration",
@@ -2343,7 +2835,15 @@
             },
             "name": "linkType",
             "title": "链接类型",
-            "tsType": "'destination' | 'download'"
+            "tsType": "'destination' | 'download'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "destination"
+              },
+              "playground": []
+            }
           },
           {
             "concept": "PropDeclaration",
@@ -2381,6 +2881,14 @@
             "name": "target",
             "title": "打开方式",
             "tsType": "'_blank' | '_self' | '_parent' | '_top'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "_self"
+              },
+              "playground": []
+            },
             "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。"
           }
         ],
@@ -2460,6 +2968,14 @@
         "name": "route",
         "title": "开启路由模式",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否开启路由模式"
       }
     ],
@@ -2521,6 +3037,14 @@
             "name": "showbaget",
             "title": "显示徽章",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "true"
+              },
+              "playground": []
+            },
             "description": "是否显示徽章"
           },
           {
@@ -2561,7 +3085,15 @@
             },
             "name": "linkType",
             "title": "链接类型",
-            "tsType": "'destination' | 'download'"
+            "tsType": "'destination' | 'download'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "destination"
+              },
+              "playground": []
+            }
           },
           {
             "concept": "PropDeclaration",
@@ -2599,6 +3131,14 @@
             "name": "target",
             "title": "打开方式",
             "tsType": "'_blank' | '_self' | '_parent' | '_top'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "_self"
+              },
+              "playground": []
+            },
             "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。"
           },
           {
@@ -2611,6 +3151,14 @@
             "name": "disabled",
             "title": "禁用",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            },
             "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
           }
         ],
@@ -2682,7 +3230,15 @@
         },
         "name": "fixed",
         "title": "固定底部",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -2694,6 +3250,14 @@
         "name": "route",
         "title": "开启路由模式",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否开启路由模式"
       },
       {
@@ -2705,7 +3269,15 @@
         },
         "name": "border",
         "title": "显示外边框",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        }
       }
     ],
     "readableProps": [],
@@ -2765,6 +3337,14 @@
             "name": "showbaget",
             "title": "显示徽章",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            },
             "description": "是否显示徽章"
           },
           {
@@ -2817,7 +3397,15 @@
             },
             "name": "linkType",
             "title": "链接类型",
-            "tsType": "'destination' | 'download'"
+            "tsType": "'destination' | 'download'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "destination"
+              },
+              "playground": []
+            }
           },
           {
             "concept": "PropDeclaration",
@@ -2855,6 +3443,14 @@
             "name": "target",
             "title": "打开方式",
             "tsType": "'_blank' | '_self' | '_parent' | '_top'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "_self"
+              },
+              "playground": []
+            },
             "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。"
           }
         ],
@@ -2909,6 +3505,14 @@
         "name": "replace",
         "title": "替换",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       },
       {
@@ -2960,6 +3564,14 @@
         "name": "type",
         "title": "样式类型",
         "tsType": "'info' | 'info_secondary' | 'default' | 'warning' | 'warning_secondary' | 'danger' | 'danger_secondary'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "info"
+          },
+          "playground": []
+        },
         "description": "设置按钮主题颜色与样式类型"
       },
       {
@@ -2982,6 +3594,14 @@
         "name": "block",
         "title": "展示方式",
         "tsType": "'spanb' | 'blockb'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "spanb"
+          },
+          "playground": []
+        },
         "description": "选择行内或块级展示"
       },
       {
@@ -3015,6 +3635,14 @@
         "name": "iconPosition",
         "title": "图标位置",
         "tsType": "'left' | 'right'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "left"
+          },
+          "playground": []
+        },
         "description": "设置图标居左或居右显示"
       },
       {
@@ -3036,7 +3664,15 @@
         },
         "name": "linkType",
         "title": "链接类型",
-        "tsType": "'destination' | 'download'"
+        "tsType": "'destination' | 'download'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "destination"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -3074,6 +3710,14 @@
         "name": "target",
         "title": "打开方式",
         "tsType": "'_blank' | '_self' | '_parent' | '_top'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "_self"
+          },
+          "playground": []
+        },
         "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。"
       },
       {
@@ -3086,6 +3730,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       },
       {
@@ -3098,6 +3750,14 @@
         "name": "loading",
         "title": "加载中",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否显示为加载中"
       },
       {
@@ -3106,7 +3766,15 @@
         "tabKind": "property",
         "name": "loadingText",
         "title": "加载中文案",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": ""
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -3140,6 +3808,14 @@
         "name": "size",
         "title": "尺寸",
         "tsType": "'large' | 'middle' | 'normal' | 'small' | 'mini'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "middle"
+          },
+          "playground": []
+        },
         "description": "设置按钮大小"
       },
       {
@@ -3162,6 +3838,14 @@
         "name": "squareroud",
         "title": "形状",
         "tsType": "'square' | 'round'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "round"
+          },
+          "playground": []
+        },
         "description": "设置按钮形状"
       },
       {
@@ -3174,6 +3858,14 @@
         "name": "hairline",
         "title": "显示为细边框",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否显示为细边框"
       }
     ],
@@ -3261,7 +3953,15 @@
         },
         "name": "loadingType",
         "title": "加载样式",
-        "tsType": "'loading' | 'none' | 'placeholder'"
+        "tsType": "'loading' | 'none' | 'placeholder'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "loading"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -3270,6 +3970,14 @@
         "name": "placeholderSrc",
         "title": "默认图地址",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "https://static-vusion.nos-eastchina1.126.net/h5-template/lietu.png"
+          },
+          "playground": []
+        },
         "if": "_ => _.loadingType === 'placeholder'"
       },
       {
@@ -3281,7 +3989,15 @@
         },
         "name": "src",
         "title": "图片地址",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": ""
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -3315,6 +4031,14 @@
         "name": "fit",
         "title": "填充方式",
         "tsType": "'contain' | 'scale-down' | 'none' | 'fill' | 'cover'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "contain"
+          },
+          "playground": []
+        },
         "description": "设置图片的填充方式"
       },
       {
@@ -3337,6 +4061,14 @@
         "name": "sr",
         "title": "图片风格",
         "tsType": "'s' | 'r'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "s"
+          },
+          "playground": []
+        },
         "description": "选择图片为方形或圆形"
       },
       {
@@ -3349,6 +4081,14 @@
         "name": "preview",
         "title": "点击放大",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否支持点击放大全屏展示"
       }
     ],
@@ -3431,6 +4171,22 @@
         "name": "duration",
         "title": "动画时间",
         "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "4000",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "单位：毫秒，幻灯片切换时间，如果设置值小于动画时长，会在动画完成后切换。"
       },
       {
@@ -3443,6 +4199,14 @@
         "name": "touchable",
         "title": "手势滑动",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        },
         "description": "是否支持手势滑动"
       }
     ],
@@ -3555,6 +4319,14 @@
         "name": "type",
         "title": "样式类型",
         "tsType": "'line' | 'card'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "line"
+          },
+          "playground": []
+        },
         "description": "设置选项卡为线条类型或胶囊类型"
       },
       {
@@ -3566,7 +4338,15 @@
         },
         "name": "sticky",
         "title": "自动吸顶",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -3588,6 +4368,14 @@
         "name": "scrollspystr",
         "title": "导航模式",
         "tsType": "'no' | 'scrollspy'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "no"
+          },
+          "playground": []
+        },
         "description": "设置选项卡的导航模式"
       },
       {
@@ -3599,7 +4387,15 @@
         },
         "name": "swipeable",
         "title": "滑动切换",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -3610,7 +4406,15 @@
         },
         "name": "animated",
         "title": "开启转场动画",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -3622,6 +4426,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
     ],
@@ -3688,7 +4500,15 @@
             },
             "name": "badgebtn",
             "title": "显示徽章",
-            "tsType": "nasl.core.Boolean"
+            "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            }
           },
           {
             "concept": "PropDeclaration",
@@ -3723,6 +4543,14 @@
             "name": "disabled",
             "title": "禁用",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            },
             "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
           }
         ],
@@ -3824,6 +4652,14 @@
         "name": "color",
         "title": "主题颜色",
         "tsType": "'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'disabled'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "default"
+          },
+          "playground": []
+        },
         "description": "设置文本主题颜色"
       },
       {
@@ -3846,6 +4682,14 @@
         "name": "display",
         "title": "展示方式",
         "tsType": "'inline' | 'block'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "inline"
+          },
+          "playground": []
+        },
         "description": "选择行内或块级展示"
       },
       {
@@ -3876,6 +4720,14 @@
         "name": "overflow",
         "title": "隐藏处理",
         "tsType": "'normal' | 'ellipsis' | 'break' | 'nowrap'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "normal"
+          },
+          "playground": []
+        },
         "description": "设置文本过长时的处理方式"
       },
       {
@@ -3906,6 +4758,14 @@
         "name": "size",
         "title": "尺寸",
         "tsType": "'small' | 'normal' | 'large' | 'huge'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "normal"
+          },
+          "playground": []
+        },
         "description": "设置文本大小"
       }
     ],
@@ -4060,6 +4920,14 @@
         "name": "color",
         "title": "主题颜色",
         "tsType": "'default' | 'light' | 'success' | 'warning' | 'danger'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "default"
+          },
+          "playground": []
+        },
         "description": "设置链接主题颜色"
       },
       {
@@ -4082,6 +4950,14 @@
         "name": "display",
         "title": "展示方式",
         "tsType": "'inline' | 'block'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "inline"
+          },
+          "playground": []
+        },
         "description": "选择行内或块级展示"
       },
       {
@@ -4103,7 +4979,15 @@
         },
         "name": "linkType",
         "title": "链接类型",
-        "tsType": "'destination' | 'download'"
+        "tsType": "'destination' | 'download'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "destination"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -4141,6 +5025,14 @@
         "name": "target",
         "title": "打开方式",
         "tsType": "'_blank' | '_self' | '_parent' | '_top'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "_self"
+          },
+          "playground": []
+        },
         "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。"
       },
       {
@@ -4153,6 +5045,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
     ],
@@ -4234,7 +5134,23 @@
         },
         "name": "content",
         "title": "徽章值",
-        "tsType": "nasl.core.Decimal"
+        "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "2",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -4257,7 +5173,15 @@
         },
         "name": "dot",
         "title": "显示徽章",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       }
     ],
     "readableProps": [],
@@ -4321,6 +5245,14 @@
         "name": "mode",
         "title": "类型",
         "tsType": "'closeable' | 'link' | 'normal'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "normal"
+          },
+          "playground": []
+        },
         "description": "设置通知栏类型"
       },
       {
@@ -4332,7 +5264,15 @@
         },
         "name": "scrollable",
         "title": "开启滚动播放",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -4344,6 +5284,14 @@
         "name": "wrapable",
         "title": "开启文本换行",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "关闭滚动播放时该属性即可生效"
       },
       {
@@ -4365,7 +5313,15 @@
         },
         "name": "linkType",
         "title": "链接类型",
-        "tsType": "'destination' | 'download'"
+        "tsType": "'destination' | 'download'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "destination"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -4403,6 +5359,14 @@
         "name": "target",
         "title": "打开方式",
         "tsType": "'_blank' | '_self' | '_parent' | '_top'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "_self"
+          },
+          "playground": []
+        },
         "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。"
       }
     ],
@@ -4501,6 +5465,22 @@
         "name": "value",
         "title": "当前步骤",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "0",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "指定当前步骤，从0开始记数。"
       },
       {
@@ -4523,6 +5503,14 @@
         "name": "direction",
         "title": "步骤条方向",
         "tsType": "'horizontal' | 'vertical'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "horizontal"
+          },
+          "playground": []
+        },
         "description": "设置步骤条方向"
       },
       {
@@ -4535,6 +5523,14 @@
         "name": "readonly",
         "title": "只读",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入"
       },
       {
@@ -4547,6 +5543,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
     ],
@@ -4647,6 +5651,14 @@
             "name": "readonly",
             "title": "只读",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            },
             "description": "正常显示，但禁止选择/输入"
           },
           {
@@ -4659,6 +5671,14 @@
             "name": "disabled",
             "title": "禁用",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            },
             "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
           }
         ],
@@ -4722,6 +5742,22 @@
         "name": "timer",
         "title": "计时器时长（秒）",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "60",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置定时时间"
       },
       {
@@ -4744,6 +5780,14 @@
         "name": "reverse",
         "title": "计时方式",
         "tsType": "'positive' | 'negative'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "positive"
+          },
+          "playground": []
+        },
         "description": "设置计时器计时方式"
       },
       {
@@ -4756,6 +5800,14 @@
         "name": "autostart",
         "title": "自动开始计时",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        },
         "description": "是否开启自动开始计时"
       },
       {
@@ -4768,6 +5820,14 @@
         "name": "hideMinute",
         "title": "隐藏分钟",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "设置是否隐藏分钟"
       }
     ],
@@ -4897,6 +5957,14 @@
         "name": "icotype",
         "title": "布局类型",
         "tsType": "'only' | 'top' | 'left'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "top"
+          },
+          "playground": []
+        },
         "description": "设置图标布局类型"
       },
       {
@@ -4918,7 +5986,15 @@
         },
         "name": "linkType",
         "title": "链接类型",
-        "tsType": "'destination' | 'download'"
+        "tsType": "'destination' | 'download'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "destination"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -4956,6 +6032,14 @@
         "name": "target",
         "title": "打开方式",
         "tsType": "'_blank' | '_self' | '_parent' | '_top'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "_self"
+          },
+          "playground": []
+        },
         "description": "父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。"
       }
     ],
@@ -5048,6 +6132,14 @@
         "name": "type",
         "title": "样式类型",
         "tsType": "'primary' | 'success' | 'danger' | 'warning'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "primary"
+          },
+          "playground": []
+        },
         "description": "设置主题颜色与样式类型"
       },
       {
@@ -5059,7 +6151,15 @@
         },
         "name": "mark",
         "title": "显示为标记样式",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -5070,7 +6170,15 @@
         },
         "name": "closeable",
         "title": "可关闭",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -5096,6 +6204,14 @@
         "name": "size",
         "title": "尺寸",
         "tsType": "'large' | 'medium' | 'small'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "medium"
+          },
+          "playground": []
+        },
         "description": "设置标签大小"
       },
       {
@@ -5107,7 +6223,15 @@
         },
         "name": "round",
         "title": "显示为圆角",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -5118,7 +6242,15 @@
         },
         "name": "plain",
         "title": "显示为空心",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       }
     ],
     "readableProps": [],
@@ -5195,6 +6327,14 @@
         "name": "clockwise",
         "title": "顺时针增加",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        },
         "description": "是否按照顺时针顺序增加"
       },
       {
@@ -5207,6 +6347,22 @@
         "name": "size",
         "title": "圆环直径",
         "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "100",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置圆环直径，单位为px。"
       },
       {
@@ -5243,7 +6399,23 @@
         },
         "name": "strokeWidth",
         "title": "进度条宽度",
-        "tsType": "nasl.core.Decimal"
+        "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "40",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        }
       }
     ],
     "readableProps": [],
@@ -5316,6 +6488,14 @@
         "name": "showPivot",
         "title": "显示文字",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        },
         "description": "是否显示进度条中的文字"
       },
       {
@@ -5327,7 +6507,15 @@
         },
         "name": "custom",
         "title": "自定义",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -5339,6 +6527,14 @@
         "name": "inactive",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       },
       {
@@ -5351,6 +6547,22 @@
         "name": "strokeWidth",
         "title": "进度条粗细",
         "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "4",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置进度条粗细，单位为px。"
       },
       {
@@ -5442,6 +6654,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
     ],
@@ -5576,6 +6796,14 @@
         "name": "pageable",
         "title": "分页",
         "tsType": "'' | 'auto-more' | 'load-more' | 'pagination'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": ""
+          },
+          "playground": []
+        },
         "description": "设置分页类型"
       },
       {
@@ -5589,6 +6817,22 @@
         "name": "pageSize",
         "title": "默认分页大小",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "20",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "分页过小可能会导致滚动加载更多失效",
         "if": "_ => _.pageable !== ''"
       },
@@ -5602,6 +6846,14 @@
         "name": "filterable",
         "title": "可筛选",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否可以过滤（搜索），开启将会显示搜索框。"
       },
       {
@@ -5611,6 +6863,14 @@
         "name": "placeholder",
         "title": "筛选输入框显示文字",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "请输入"
+          },
+          "playground": []
+        },
         "if": "_ => _.filterable === true"
       },
       {
@@ -5623,6 +6883,14 @@
         "name": "clearable",
         "title": "筛选清除按钮",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "搜索框是否展示清除按钮",
         "if": "_ => _.filterable === true"
       },
@@ -5636,6 +6904,14 @@
         "name": "multiple",
         "title": "多选",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "设置是否可以多选行，不开启则为单选。"
       },
       {
@@ -5672,6 +6948,14 @@
         "name": "pullRefresh",
         "title": "下拉刷新",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        },
         "description": "是否开启下拉刷新",
         "if": "_ => _.pageable !== 'pagination'"
       },
@@ -5682,6 +6966,14 @@
         "name": "pullingText",
         "title": "下拉过程中提示文案",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "下拉刷新"
+          },
+          "playground": []
+        },
         "if": "_ => _.pullRefresh === true && _.pageable !== 'pagination'"
       },
       {
@@ -5691,6 +6983,14 @@
         "name": "loosingText",
         "title": "释放过程中提示文案",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "释放刷新"
+          },
+          "playground": []
+        },
         "if": "_ => _.pullRefresh === true && _.pageable !== 'pagination'"
       },
       {
@@ -5700,6 +7000,14 @@
         "name": "successText",
         "title": "刷新成功提示文案",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "已刷新"
+          },
+          "playground": []
+        },
         "if": "_ => _.pullRefresh === true && _.pageable !== 'pagination'"
       },
       {
@@ -5713,6 +7021,22 @@
         "name": "successDuration",
         "title": "展示时长",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "500",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置刷新成功后提示展示时长，单位为ms。",
         "if": "_ => _.pullRefresh === true && _.pageable !== 'pagination'"
       },
@@ -5726,6 +7050,22 @@
         "name": "pullDistance",
         "title": "刷新距离",
         "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "50",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置触发下拉刷新的距离，单位为px。",
         "if": "_ => _.pullRefresh === true && _.pageable !== 'pagination'"
       },
@@ -5739,6 +7079,14 @@
         "name": "hiddenempty",
         "title": "隐藏空态文案",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否隐藏表格末尾“没有更多了”文案"
       },
       {
@@ -5751,6 +7099,14 @@
         "name": "initialLoad",
         "title": "初始加载",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        },
         "description": "是否在初始时立即加载"
       },
       {
@@ -5782,6 +7138,14 @@
         "name": "designerMode",
         "title": "加载状态",
         "tsType": "'success' | 'empty' | 'loading' | 'error'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "success"
+          },
+          "playground": []
+        },
         "description": "设置加载状态"
       },
       {
@@ -5791,6 +7155,14 @@
         "name": "loadingText",
         "title": "加载中文案",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "正在加载中..."
+          },
+          "playground": []
+        },
         "description": "加载中状态显示的文案",
         "docDescription": "当数据正在加载时展示的文字，默认为\"加载中...\"。",
         "if": "_ => _.designerMode === 'loading'"
@@ -5816,6 +7188,14 @@
         "name": "errorText",
         "title": "加载失败文案",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "加载失败，请重试"
+          },
+          "playground": []
+        },
         "description": "加载失败状态显示的提示文案",
         "docDescription": "加载失败的提示文字。默认\"加载失败，请重试\"",
         "if": "_ => _.designerMode === 'error'"
@@ -5842,6 +7222,14 @@
         "name": "emptyText",
         "title": "暂无数据文案",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "暂无数据"
+          },
+          "playground": []
+        },
         "description": "暂无数据状态显示的提示文案",
         "docDescription": "当列表为空时的提示文字。默认\"暂无数据\"",
         "if": "_ => _.designerMode === 'empty'"
@@ -5856,6 +7244,14 @@
         "name": "striped",
         "title": "斑马条纹",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否按斑马线条纹显示"
       }
     ],
@@ -6003,6 +7399,22 @@
         "name": "colnum",
         "title": "排列项数",
         "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "5",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置每行排列项数，为空时自适应宽度，自动换行。",
         "docDescription": "支持定义每一行排列的项数，为空时会自适应宽度并自动换行。"
       },
@@ -6016,6 +7428,14 @@
         "name": "wrap",
         "title": "自动换行",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        },
         "description": "是否自动换行，排列项数为空时生效。",
         "if": "_ => _.colnum === 0"
       },
@@ -6029,6 +7449,14 @@
         "name": "equalWidth",
         "title": "均分宽度",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        },
         "description": "是否均分宽度，排列项数不为空时生效。"
       }
     ],
@@ -6129,6 +7557,14 @@
         "name": "pageable",
         "title": "分页方式",
         "tsType": "'' | 'auto-more' | 'load-more'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": ""
+          },
+          "playground": []
+        },
         "description": "设置分页方式"
       },
       {
@@ -6142,6 +7578,22 @@
         "name": "pageSize",
         "title": "分页大小",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "20",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置分页大小，单位为px。"
       },
       {
@@ -6154,6 +7606,14 @@
         "name": "filterable",
         "title": "可筛选",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否可以过滤（搜索），开启将会显示搜索框。"
       },
       {
@@ -6165,7 +7625,15 @@
         },
         "name": "remotePaging",
         "title": "后端分页",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -6176,7 +7644,15 @@
         },
         "name": "remoteFiltering",
         "title": "后端筛选",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -6188,6 +7664,14 @@
         "name": "pullRefresh",
         "title": "下拉刷新",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        },
         "description": "是否开启下拉刷新"
       },
       {
@@ -6196,7 +7680,15 @@
         "tabKind": "property",
         "name": "pullingText",
         "title": "下拉过程中提示文案",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "下拉刷新"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -6204,7 +7696,15 @@
         "tabKind": "property",
         "name": "loosingText",
         "title": "释放过程中提示文案",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "释放刷新"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -6212,7 +7712,15 @@
         "tabKind": "property",
         "name": "successText",
         "title": "刷新成功提示文案",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "已刷新"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -6224,6 +7732,22 @@
         "name": "successDuration",
         "title": "展示时长",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "500",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置刷新成功后提示展示时长，单位为ms。"
       },
       {
@@ -6236,6 +7760,22 @@
         "name": "pullDistance",
         "title": "刷新距离",
         "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "50",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置触发下拉刷新的距离，单位为px。"
       },
       {
@@ -6245,6 +7785,14 @@
         "name": "placeholder",
         "title": "搜索框占位符",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "请输入"
+          },
+          "playground": []
+        },
         "description": "搜索框为空时的显示文本"
       },
       {
@@ -6257,6 +7805,14 @@
         "name": "initialLoad",
         "title": "初始加载",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        },
         "description": "设置初始时是否立即加载"
       },
       {
@@ -6265,7 +7821,15 @@
         "tabKind": "property",
         "name": "loadingText",
         "title": "加载中文案",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "加载中..."
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -6273,7 +7837,15 @@
         "tabKind": "property",
         "name": "errorText",
         "title": "加载失败文案",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "加载失败，请重试"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -6281,7 +7853,15 @@
         "tabKind": "property",
         "name": "emptyText",
         "title": "暂无数据文案",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "暂无数据"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -6293,6 +7873,14 @@
         "name": "iffall",
         "title": "瀑布模式",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否开启瀑布模式"
       },
       {
@@ -6305,6 +7893,22 @@
         "name": "col",
         "title": "网格数",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "2",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置每页排列几项"
       }
     ],
@@ -6436,7 +8040,13 @@
       {
         "concept": "LogicDeclaration",
         "description": "验证表单，支持传入 name 来验证单个或部分表单项",
-        "params": [],
+        "params": [
+          {
+            "concept": "Param",
+            "name": "name",
+            "description": "'可选。需要验证的表单项 name'"
+          }
+        ],
         "returns": [],
         "name": "validate",
         "title": "undefined"
@@ -6489,6 +8099,14 @@
             "name": "labelLayout",
             "title": "标签布局",
             "tsType": "'inline' | 'block'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "inline"
+              },
+              "playground": []
+            },
             "docDescription": "设置标签布局方式。行内展示、块级展示，标签与表单项分行展示。"
           },
           {
@@ -6500,7 +8118,15 @@
             },
             "name": "required",
             "title": "必填标记",
-            "tsType": "nasl.core.Boolean"
+            "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            }
           },
           {
             "concept": "PropDeclaration",
@@ -6522,6 +8148,14 @@
             "name": "border",
             "title": "显示底边框",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "true"
+              },
+              "playground": []
+            },
             "description": "是否显示底边框"
           }
         ],
@@ -6612,6 +8246,14 @@
         "name": "type",
         "title": "类型",
         "tsType": "'text' | 'password' | 'integer' | 'rndinteger' | 'point' | 'card'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "text"
+          },
+          "playground": []
+        },
         "description": "设置输入框的类型"
       },
       {
@@ -6636,6 +8278,22 @@
         "name": "maxlength",
         "title": "最大输入长度",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "6",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "if": "_ => _.inputstyle === 'password'"
       },
       {
@@ -6654,6 +8312,14 @@
         "name": "confirmText",
         "title": "按钮内容",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "完成"
+          },
+          "playground": []
+        },
         "description": "设置完成按钮文字内容",
         "if": "_ => _.keytheme === 'custom'"
       },
@@ -6677,6 +8343,14 @@
         "name": "confirmSize",
         "title": "按钮尺寸",
         "tsType": "'default' | 'large'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "default"
+          },
+          "playground": []
+        },
         "description": "设置完成按钮大小",
         "if": "_ => _.keytheme === 'custom' && _.keyboardTheme === 'custom'"
       },
@@ -6703,6 +8377,14 @@
         "name": "readonly",
         "title": "只读",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入。"
       },
       {
@@ -6715,6 +8397,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       },
       {
@@ -6737,18 +8427,28 @@
         "name": "inputstyle",
         "title": "输入框样式",
         "tsType": "'input' | 'password'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "input"
+          },
+          "playground": []
+        },
         "description": "设置输入框样式",
         "onChange": [
           {
             "update": {
               "maxlength": 10000
-            }
+            },
+            "if": "_ => _ === 'input'"
           },
           {
             "update": {
               "clearable": false,
               "maxlength": 6
-            }
+            },
+            "if": "_ => _ === 'password'"
           }
         ]
       },
@@ -6772,6 +8472,14 @@
         "name": "keytheme",
         "title": "键盘样式",
         "tsType": "'native' | 'custom'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "native"
+          },
+          "playground": []
+        },
         "description": "设置键盘样式"
       },
       {
@@ -6794,6 +8502,14 @@
         "name": "keyboardTheme",
         "title": "定制键盘布局",
         "tsType": "'default' | 'custom'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "default"
+          },
+          "playground": []
+        },
         "if": "_ => _.keytheme === 'custom'"
       }
     ],
@@ -6936,7 +8652,8 @@
           {
             "update": {
               "show-word-limit": false
-            }
+            },
+            "if": "_ => _ === 0"
           }
         ]
       },
@@ -6988,6 +8705,14 @@
         "name": "readonly",
         "title": "只读",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入"
       },
       {
@@ -7000,6 +8725,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
     ],
@@ -7246,6 +8979,14 @@
         "name": "shape",
         "title": "形状",
         "tsType": "'square' | 'round'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "square"
+          },
+          "playground": []
+        },
         "description": "选择搜索框为方形或圆形"
       }
     ],
@@ -7379,6 +9120,14 @@
         "name": "icon",
         "title": "单选项图标",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "sure"
+          },
+          "playground": []
+        },
         "docDescription": "增加自定义图标显示"
       },
       {
@@ -7401,6 +9150,14 @@
         "name": "direction",
         "title": "排列方向",
         "tsType": "'horizontal' | 'vertical'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "horizontal"
+          },
+          "playground": []
+        },
         "description": "选择水平或垂直排列"
       },
       {
@@ -7426,6 +9183,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入"
       },
       {
@@ -7438,6 +9203,14 @@
         "name": "readonly",
         "title": "只读",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
     ],
@@ -7505,6 +9278,14 @@
             "name": "icon",
             "title": "单选项图标",
             "tsType": "nasl.core.String",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "sure"
+              },
+              "playground": []
+            },
             "docDescription": "增加自定义图标显示"
           },
           {
@@ -7527,6 +9308,14 @@
             "name": "labelPosition",
             "title": "文本位置",
             "tsType": "'right' | 'left'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "right"
+              },
+              "playground": []
+            },
             "description": "设置文本居左或居右放置"
           },
           {
@@ -7539,6 +9328,14 @@
             "name": "disabled",
             "title": "禁用",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            },
             "description": "正常显示，但禁止选择/输入"
           }
         ],
@@ -7594,6 +9391,14 @@
         "name": "value",
         "title": "值",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "用于标识开关的值"
       },
       {
@@ -7606,6 +9411,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入"
       },
       {
@@ -7618,6 +9431,14 @@
         "name": "readonly",
         "title": "只读",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
     ],
@@ -7722,6 +9543,22 @@
         "name": "min",
         "title": "最小可选数量",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "0",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "最小可选数量(0为不限制)"
       },
       {
@@ -7756,6 +9593,14 @@
         "name": "direction",
         "title": "排列方向",
         "tsType": "'horizontal' | 'vertical'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "horizontal"
+          },
+          "playground": []
+        },
         "description": "设置多选组的排列方向"
       },
       {
@@ -7805,6 +9650,14 @@
         "name": "converter",
         "title": "转换器",
         "tsType": "'join' | 'join:|' | 'join:;' | 'json' | 'none'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "none"
+          },
+          "playground": []
+        },
         "description": "将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式。"
       },
       {
@@ -7817,6 +9670,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入"
       }
     ],
@@ -7894,6 +9755,14 @@
             "name": "shape",
             "title": "形状",
             "tsType": "'square' | 'round'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "square"
+              },
+              "playground": []
+            },
             "description": "选择多选项为方形或圆形"
           },
           {
@@ -7916,6 +9785,14 @@
             "name": "labelPosition",
             "title": "文本位置",
             "tsType": "'right' | 'left'",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "right"
+              },
+              "playground": []
+            },
             "description": "设置文本居左或居右放置"
           },
           {
@@ -7929,6 +9806,14 @@
             "name": "value",
             "title": "选中",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            },
             "description": "是否选中选项"
           },
           {
@@ -7941,6 +9826,14 @@
             "name": "disabled",
             "title": "禁用",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            },
             "description": "正常显示，但禁止选择/输入"
           },
           {
@@ -7953,6 +9846,14 @@
             "name": "readonly",
             "title": "只读",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            },
             "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
           }
         ],
@@ -8054,6 +9955,10 @@
         "name": "decimalPlaces",
         "title": "小数位数",
         "tsType": "{\n  places: nasl.core.Integer | nasl.core.String;\n  omit: nasl.core.Boolean;\n}",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "playground": []
+        },
         "description": "控制数据展示时小数点后保留几位，仅影响展示，不影响数据实际存储的值。例如：小数位数为2，则数据展示时小数点后保留2位。",
         "if": "_ => _.advancedFormat.enable === false"
       },
@@ -8068,6 +9973,14 @@
         "name": "thousandths",
         "title": "千位符",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "if": "_ => _.advancedFormat.enable === false"
       },
       {
@@ -8081,6 +9994,14 @@
         "name": "percentSign",
         "title": "百分号",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "if": "_ => _.advancedFormat.enable === false"
       },
       {
@@ -8091,6 +10012,10 @@
         "name": "unit",
         "title": "单位",
         "tsType": "{\n  type: nasl.core.String;\n  value: nasl.core.String;\n}",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "playground": []
+        },
         "description": "输入框中显示的单位"
       },
       {
@@ -8101,6 +10026,10 @@
         "name": "advancedFormat",
         "title": "高级格式化",
         "tsType": "{\n  enable: nasl.core.Boolean;\n  value: nasl.core.String;\n}",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "playground": []
+        },
         "description": "用来控制数字的展示格式"
       },
       {
@@ -8110,6 +10039,14 @@
         "name": "placeholder",
         "title": "占位符",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "请输入"
+          },
+          "playground": []
+        },
         "description": "输入框为空的显示文字"
       },
       {
@@ -8121,7 +10058,15 @@
         },
         "name": "showPlus",
         "title": "显示增加按钮",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -8132,7 +10077,15 @@
         },
         "name": "showMinus",
         "title": "显示减少按钮",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -8143,7 +10096,15 @@
         },
         "name": "disablePlus",
         "title": "禁用增加按钮",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -8154,7 +10115,15 @@
         },
         "name": "disableMinus",
         "title": "禁用减少按钮",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -8166,6 +10135,14 @@
         "name": "disableInput",
         "title": "只读",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入。"
       },
       {
@@ -8178,6 +10155,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       },
       {
@@ -8199,7 +10184,15 @@
         },
         "name": "theme",
         "title": "风格",
-        "tsType": "'fang' | 'round'"
+        "tsType": "'fang' | 'round'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "fang"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -8208,6 +10201,22 @@
         "name": "step",
         "title": "步长",
         "tsType": "nasl.core.String | nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "1",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "表示点击按钮或按上下键所增加或减少的量"
       },
       {
@@ -8234,6 +10243,14 @@
         "name": "align",
         "title": "对齐方式",
         "tsType": "'left' | 'center' | 'right'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "center"
+          },
+          "playground": []
+        },
         "description": "设置对齐方式"
       }
     ],
@@ -8310,6 +10327,22 @@
         "name": "count",
         "title": "图标总数",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "5",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置评分图标的总数"
       },
       {
@@ -8344,6 +10377,14 @@
         "name": "allowHalf",
         "title": "半选",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否支持半选"
       },
       {
@@ -8356,6 +10397,14 @@
         "name": "readonly",
         "title": "只读",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入"
       },
       {
@@ -8368,6 +10417,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       },
       {
@@ -8377,6 +10434,22 @@
         "name": "size",
         "title": "图标大小",
         "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "20",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置图标大小，单位为px。"
       },
       {
@@ -8386,6 +10459,22 @@
         "name": "gutter",
         "title": "图标间距",
         "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "4",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置图标间距，最小值为0。"
       },
       {
@@ -8472,7 +10561,23 @@
         },
         "name": "max",
         "title": "最大值",
-        "tsType": "nasl.core.Decimal"
+        "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "100",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -8483,7 +10588,23 @@
         },
         "name": "min",
         "title": "最小值",
-        "tsType": "nasl.core.Decimal"
+        "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "0",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -8495,6 +10616,14 @@
         "name": "range",
         "title": "双滑块模式",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否开启双滑块模式"
       },
       {
@@ -8506,7 +10635,15 @@
         },
         "name": "custom",
         "title": "自定义组件",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -8518,6 +10655,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       },
       {
@@ -8530,6 +10675,14 @@
         "name": "vertical",
         "title": "垂直展示",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否垂直展示"
       },
       {
@@ -8538,7 +10691,23 @@
         "tabKind": "property",
         "name": "step",
         "title": "步长",
-        "tsType": "nasl.core.Decimal | nasl.core.String"
+        "tsType": "nasl.core.Decimal | nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "0",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -8550,6 +10719,22 @@
         "name": "barHeight",
         "title": "进度条高度",
         "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "2",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置进度条高度，单位为px"
       },
       {
@@ -8562,6 +10747,22 @@
         "name": "buttonSize",
         "title": "滑块按钮大小",
         "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "24",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置滑块按钮大小，单位为px"
       },
       {
@@ -8656,6 +10857,14 @@
         "name": "name",
         "title": "字段名",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "file"
+          },
+          "playground": []
+        },
         "description": "当前上传的文件字段名"
       },
       {
@@ -8706,6 +10915,14 @@
         "name": "withCredentials",
         "title": "设置cookie值",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "通过设置 withCredentials 为 true 获得的第三方 cookies，将会依旧享受同源策略"
       },
       {
@@ -8715,6 +10932,14 @@
         "name": "urlField",
         "title": "URL 字段名",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "filePath"
+          },
+          "playground": []
+        },
         "description": "请求返回的 URL 字段名"
       },
       {
@@ -8737,6 +10962,14 @@
         "name": "converter",
         "title": "转换器",
         "tsType": "'json' | 'simple'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "json"
+          },
+          "playground": []
+        },
         "description": "将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式。"
       },
       {
@@ -8749,6 +10982,14 @@
         "name": "multiple",
         "title": "多文件上传",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否支持多文件上传"
       },
       {
@@ -8762,7 +11003,23 @@
         },
         "name": "maxCount",
         "title": "列表数量上限",
-        "tsType": "nasl.core.Integer"
+        "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "999",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -8775,6 +11032,22 @@
         "name": "maxSize",
         "title": "最大文件大小",
         "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "50",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置最大文件大小,单位为MB，默认为50MB"
       },
       {
@@ -8797,6 +11070,14 @@
         "name": "capture",
         "title": "图片选择模式",
         "tsType": "'waga' | 'camera'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "waga"
+          },
+          "playground": []
+        },
         "description": "设置图片选择模式"
       },
       {
@@ -8881,6 +11162,14 @@
         "name": "readonly",
         "title": "只读",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入"
       },
       {
@@ -8893,6 +11182,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
     ],
@@ -9012,6 +11309,14 @@
         "name": "cancelable",
         "title": "可取消",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否可以取消选择",
         "docDescription": "是否可以取消选择"
       },
@@ -9025,6 +11330,14 @@
         "name": "multiple",
         "title": "可多选",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否可以多选",
         "docDescription": "是否可以多选"
       },
@@ -9038,6 +11351,14 @@
         "name": "readonly",
         "title": "只读",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入",
         "docDescription": "正常显示，但禁止选择或输入。"
       },
@@ -9051,6 +11372,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）",
         "docDescription": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
@@ -9120,6 +11449,14 @@
             "name": "label",
             "title": "标签",
             "tsType": "nasl.core.String",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": ""
+              },
+              "playground": []
+            },
             "description": "顶部自定义提示文本",
             "docDescription": "顶部自定义提示文本"
           },
@@ -9133,6 +11470,14 @@
             "name": "flag",
             "title": "flag标志",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            },
             "description": "是否右上角有flag标志",
             "docDescription": "是否右上角有flag标志"
           },
@@ -9146,6 +11491,14 @@
             "name": "disabled",
             "title": "禁用",
             "tsType": "nasl.core.Boolean",
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "BooleanLiteral",
+                "value": "false"
+              },
+              "playground": []
+            },
             "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）",
             "docDescription": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
           }
@@ -9248,7 +11601,15 @@
         },
         "name": "isNew",
         "title": "是否使用新版外观",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -9315,6 +11676,22 @@
         "name": "pageSize",
         "title": "默认每页条数",
         "tsType": "nasl.core.Decimal",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "50",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "if": "_ => _.pageable === true"
       },
       {
@@ -9324,6 +11701,10 @@
         "name": "sorting",
         "title": "初始化排序规则",
         "tsType": "{\n  field: nasl.core.String;\n  order: nasl.core.String;\n}",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "playground": []
+        },
         "description": "设置数据初始化时的排序字段和顺序规则"
       },
       {
@@ -9350,6 +11731,14 @@
         "name": "matchMethod",
         "title": "匹配方法",
         "tsType": "'includes' | 'startsWith' | 'endsWith'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "includes"
+          },
+          "playground": []
+        },
         "description": "设置过滤时的匹配方法",
         "if": "_ => _.filterable === true"
       },
@@ -9363,6 +11752,14 @@
         "name": "pageable",
         "title": "分页加载更多",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "设置是否分页加载更多"
       },
       {
@@ -9385,6 +11782,14 @@
         "name": "type",
         "title": "列表样式",
         "tsType": "'picker' | 'list'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "picker"
+          },
+          "playground": []
+        },
         "description": "设置列表样式，仅列表展示时支持多选"
       },
       {
@@ -9393,7 +11798,15 @@
         "tabKind": "property",
         "name": "placeholder",
         "title": "占位提示",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "请选择"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -9401,7 +11814,15 @@
         "tabKind": "property",
         "name": "title",
         "title": "工具栏标题",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "标题"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -9410,6 +11831,14 @@
         "name": "confirmButtonText",
         "title": "确认按钮文字",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "确认"
+          },
+          "playground": []
+        },
         "if": "_ => _.isNew === false"
       },
       {
@@ -9419,6 +11848,14 @@
         "name": "cancelButtonText",
         "title": "取消按钮文字",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "取消"
+          },
+          "playground": []
+        },
         "if": "_ => _.isNew === false"
       },
       {
@@ -9432,6 +11869,22 @@
         "name": "visibleItemCount",
         "title": "可见选项个数",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "6",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "设置可见选项个数",
         "if": "_ => _.type === 'picker'"
       },
@@ -9470,7 +11923,15 @@
         },
         "name": "showToolbar",
         "title": "显示工具栏",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -9482,6 +11943,14 @@
         "name": "filterable",
         "title": "支持筛选",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "设置是否支持筛选，开启将会支持搜索。"
       },
       {
@@ -9493,7 +11962,15 @@
         },
         "name": "multiple",
         "title": "可多选",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -9505,6 +11982,14 @@
         "name": "enableSelectAll",
         "title": "全选",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "if": "_ => _.multiple === true"
       },
       {
@@ -9517,6 +12002,14 @@
         "name": "enableSelectedCount",
         "title": "已选中项数",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否显示当前已选中项数",
         "if": "_ => _.multiple === true"
       },
@@ -9529,7 +12022,15 @@
         },
         "name": "closeOnClickOverlay",
         "title": "点击遮罩层后关闭",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -9541,6 +12042,14 @@
         "name": "initialLoad",
         "title": "初始加载",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "true"
+          },
+          "playground": []
+        },
         "description": "是否在初始时立即加载"
       },
       {
@@ -9553,6 +12062,14 @@
         "name": "readonly",
         "title": "只读",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入"
       },
       {
@@ -9565,6 +12082,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
     ],
@@ -9658,6 +12183,14 @@
         "name": "isNew",
         "title": "是否使用新版外观",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否使用新版外观"
       },
       {
@@ -9668,6 +12201,14 @@
         "name": "value",
         "title": "值",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": ""
+          },
+          "playground": []
+        },
         "description": "用于标识地区选择的值"
       },
       {
@@ -9685,7 +12226,15 @@
         "tabKind": "property",
         "name": "title",
         "title": "顶部栏标题",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "标题"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -9693,7 +12242,15 @@
         "tabKind": "property",
         "name": "confirmButtonText",
         "title": "确认按钮文字",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "确认"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -9701,7 +12258,15 @@
         "tabKind": "property",
         "name": "cancelButtonText",
         "title": "取消按钮文字",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "取消"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -9713,7 +12278,23 @@
         },
         "name": "visibleItemCount",
         "title": "可见选项个数",
-        "tsType": "nasl.core.Integer"
+        "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "6",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -9726,6 +12307,22 @@
         "name": "columnsNum",
         "title": "显示列数",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "3",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "显示列数，3-省市区，2-省市，1-省"
       },
       {
@@ -9752,6 +12349,14 @@
         "name": "inputAlign",
         "title": "对齐方式",
         "tsType": "'left' | 'center' | 'right'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "left"
+          },
+          "playground": []
+        },
         "description": "设置右侧内容的对齐方式"
       },
       {
@@ -9785,7 +12390,15 @@
         },
         "name": "closeOnClickOverlay",
         "title": "点击遮罩层后关闭",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -9797,6 +12410,14 @@
         "name": "readonly",
         "title": "只读",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入"
       },
       {
@@ -9809,6 +12430,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
     ],
@@ -9887,6 +12516,14 @@
         "name": "treeDisplay",
         "title": "树形模式",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "将平铺数据转为树形结构数据"
       },
       {
@@ -9951,7 +12588,15 @@
         "tabKind": "property",
         "name": "placeholder",
         "title": "占位提示",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "请选择"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -9959,7 +12604,15 @@
         "tabKind": "property",
         "name": "title",
         "title": "顶部栏标题",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "标题"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -9967,7 +12620,15 @@
         "tabKind": "property",
         "name": "tabPlaceholder",
         "title": "未选中提示文案",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "请选择"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -10005,6 +12666,14 @@
         "name": "filterable",
         "title": "开启搜索框",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否开启搜索框进行过滤"
       },
       {
@@ -10017,6 +12686,14 @@
         "name": "closeOnClickOverlay",
         "title": "点击遮罩层后关闭",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否开启点击遮罩层后关闭"
       },
       {
@@ -10029,6 +12706,14 @@
         "name": "readonly",
         "title": "只读",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入"
       },
       {
@@ -10041,6 +12726,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
     ],
@@ -10119,6 +12812,14 @@
         "name": "type",
         "title": "时间类型",
         "tsType": "'time' | 'date' | 'datetime'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "datetime"
+          },
+          "playground": []
+        },
         "description": "设置时间选择类型",
         "onChange": [
           {
@@ -10290,7 +12991,11 @@
         "tabKind": "property",
         "name": "advancedFormat",
         "title": "高级格式化",
-        "tsType": "{\n  enable: nasl.core.Boolean;\n  value: nasl.core.String;\n}"
+        "tsType": "{\n  enable: nasl.core.Boolean;\n  value: nasl.core.String;\n}",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -10302,6 +13007,14 @@
         "name": "range",
         "title": "区间选择",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否支持区间选择"
       },
       {
@@ -10334,6 +13047,14 @@
         "name": "isNew",
         "title": "是否使用新版外观",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否使用新版外观"
       },
       {
@@ -10376,6 +13097,22 @@
         "name": "maxHour",
         "title": "最大小时",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "23",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "当时间选择类型为 time 时",
         "if": "_ => _.type === 'time'"
       },
@@ -10390,6 +13127,22 @@
         "name": "minHour",
         "title": "最小小时",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "0",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "当时间选择类型为 time 时",
         "if": "_ => _.type === 'time'"
       },
@@ -10404,6 +13157,22 @@
         "name": "maxMinute",
         "title": "最大分钟",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "59",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "当时间选择类型为 time 时",
         "if": "_ => _.type === 'time'"
       },
@@ -10418,6 +13187,22 @@
         "name": "minMinute",
         "title": "最小分钟",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "0",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "当时间选择类型为 time 时",
         "if": "_ => _.type === 'time'"
       },
@@ -10449,6 +13234,14 @@
         "name": "converter",
         "title": "转换器",
         "tsType": "'format' | 'timestamp' | 'json' | 'date'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "format"
+          },
+          "playground": []
+        },
         "description": "将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式",
         "if": "_ => _.type === 'datetime' || _.type === 'date'"
       },
@@ -10458,7 +13251,15 @@
         "tabKind": "property",
         "name": "title",
         "title": "顶部栏标题",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": ""
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -10484,6 +13285,14 @@
         "name": "inputAlign",
         "title": "对齐方式",
         "tsType": "'left' | 'center' | 'right'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "left"
+          },
+          "playground": []
+        },
         "description": "设置右侧内容的对齐方式"
       },
       {
@@ -10495,7 +13304,15 @@
         },
         "name": "closeOnClickOverlay",
         "title": "点击遮罩层后关闭",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -10507,6 +13324,14 @@
         "name": "readonly",
         "title": "只读",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入"
       },
       {
@@ -10519,6 +13344,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
     ],
@@ -10688,6 +13521,14 @@
         "name": "isNew",
         "title": "是否使用新版外观",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "是否使用新版外观"
       },
       {
@@ -10724,7 +13565,15 @@
         "tabKind": "property",
         "name": "title",
         "title": "日历标题",
-        "tsType": "nasl.core.String"
+        "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "选择日期"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -10750,6 +13599,14 @@
         "name": "inputAlign",
         "title": "对齐方式",
         "tsType": "'left' | 'center' | 'right'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "left"
+          },
+          "playground": []
+        },
         "description": "设置右侧内容的对齐方式"
       },
       {
@@ -10761,7 +13618,15 @@
         },
         "name": "closeOnClickOverlay",
         "title": "点击遮罩层后关闭",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -10773,6 +13638,14 @@
         "name": "readonly",
         "title": "只读",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "正常显示，但禁止选择/输入"
       },
       {
@@ -10785,6 +13658,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
     ],
@@ -10882,6 +13763,14 @@
         "name": "opened",
         "title": "弹出状态",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "弹出状态分为“True(弹出)/False(关闭)”，默认为“弹出”"
       },
       {
@@ -10912,6 +13801,14 @@
         "name": "placement",
         "title": "弹出位置",
         "tsType": "'top' | 'bottom' | 'left' | 'right'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "bottom"
+          },
+          "playground": []
+        },
         "description": "设置弹出位置"
       },
       {
@@ -10925,6 +13822,22 @@
         "name": "hideDelay",
         "title": "消失延迟时间",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "200",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "当触发方式为“悬浮”时，提示内容消失延迟时间，单位为ms。"
       },
       {
@@ -10947,6 +13860,14 @@
         "name": "display",
         "title": "展示方式",
         "tsType": "'inline' | 'block'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "inline"
+          },
+          "playground": []
+        },
         "description": "设置展示方式"
       },
       {
@@ -10959,6 +13880,14 @@
         "name": "disabled",
         "title": "禁用",
         "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        },
         "description": "置灰显示，且禁止任何交互（焦点、点击、选择、输入等）"
       }
     ],
@@ -11013,7 +13942,21 @@
       {
         "concept": "LogicDeclaration",
         "description": "切换弹出/关闭状态。",
-        "params": [],
+        "params": [
+          {
+            "concept": "Param",
+            "name": "opened",
+            "description": "'可选。弹出/关闭状态'",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Boolean",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          }
+        ],
         "returns": [],
         "name": "toggle",
         "title": "undefined"
@@ -11086,7 +14029,15 @@
         },
         "name": "value",
         "title": "展示弹框",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       },
       {
         "concept": "PropDeclaration",
@@ -11097,7 +14048,15 @@
         },
         "name": "closeOnClickOverlay",
         "title": "点击遮罩层后关闭",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       }
     ],
     "readableProps": [],
@@ -11200,7 +14159,15 @@
         },
         "name": "disabled",
         "title": "禁止滑动",
-        "tsType": "nasl.core.Boolean"
+        "tsType": "nasl.core.Boolean",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "BooleanLiteral",
+            "value": "false"
+          },
+          "playground": []
+        }
       }
     ],
     "readableProps": [],
@@ -11278,6 +14245,14 @@
         "name": "message",
         "title": "提示内容",
         "tsType": "nasl.core.String",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "弹出消息"
+          },
+          "playground": []
+        },
         "description": "默认提示内容"
       },
       {
@@ -11312,6 +14287,14 @@
         "name": "type",
         "title": "消息类型",
         "tsType": "'success' | 'warning' | 'fail' | 'loading' | 'custom'",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "StringLiteral",
+            "value": "custom"
+          },
+          "playground": []
+        },
         "description": "提示的类型"
       },
       {
@@ -11337,6 +14320,22 @@
         "name": "duration",
         "title": "停留时间",
         "tsType": "nasl.core.Integer",
+        "defaultValue": {
+          "concept": "DefaultValue",
+          "expression": {
+            "concept": "NumericLiteral",
+            "value": "2000",
+            "typeAnnotation": {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeName": "Integer",
+              "typeNamespace": "nasl.core",
+              "inferred": false,
+              "ruleMap": {}
+            }
+          },
+          "playground": []
+        },
         "description": "自动关闭的延时，单位毫秒。设为 0 时不自动关闭"
       }
     ],
