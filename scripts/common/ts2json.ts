@@ -179,6 +179,10 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
                                 const types = prop?.tsType.split('|').map((type) => type.replace(/(\'|\")/g, '').trim());
                                 // @ts-ignore
                                 prop?.setter?.options = prop?.setter?.options?.map((option: any, idx) => {
+                                    if (option.if)
+                                        option.if = option.if.toString();
+                                    if (option.disabledIf)
+                                    option.disabledIf = option.disabledIf.toString();
                                     return {
                                         ...option,
                                         value: types[idx],

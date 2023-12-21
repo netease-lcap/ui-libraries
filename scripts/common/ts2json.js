@@ -177,6 +177,10 @@ function transform(tsCode) {
                                 var types_1 = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.tsType.split('|').map(function (type) { return type.replace(/(\'|\")/g, '').trim(); });
                                 // @ts-ignore
                                 (_b = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _b === void 0 ? void 0 : _b.options = (_d = (_c = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _c === void 0 ? void 0 : _c.options) === null || _d === void 0 ? void 0 : _d.map(function (option, idx) {
+                                    if (option.if)
+                                        option.if = option.if.toString();
+                                    if (option.disabledIf)
+                                        option.disabledIf = option.disabledIf.toString();
                                     return __assign(__assign({}, option), { value: types_1[idx] });
                                 });
                             }
