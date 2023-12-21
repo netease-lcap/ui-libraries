@@ -176,7 +176,8 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
 
                             // 枚举类型生成选项
                             if (['EnumSelectSetter', 'CapsulesSetter'].includes(prop?.setter?.concept)) {
-                                const types = prop?.tsType.split('|').map((type) => type.replace(/(\'|\")/g, '').trim());
+                                // 因为converter里有'join:|'，所有这里的分割前后需要空格
+                                const types = prop?.tsType.split(' | ').map((type) => type.replace(/(\'|\")/g, '').trim());
                                 // @ts-ignore
                                 prop?.setter?.options = prop?.setter?.options?.map((option: any, idx) => {
                                     if (option.if)
@@ -337,9 +338,19 @@ function getValueFromObjectExpressionByKey(object: babelTypes.ObjectExpression, 
 }
 
 
-type DefaultValue = babelTypes.NullLiteral | babelTypes.BooleanLiteral | babelTypes.StringLiteral | babelTypes.NumericLiteral | babelTypes.ArrayExpression | babelTypes.ObjectExpression
+type DefaultValue = babelTypes.NullLiteral | babelTypes.BooleanLiteral | babelTypes.StringLiteral | babelTypes.NumericLiteral | babelTypes.ArrayExpression | babelTypes.ObjectExpression | babelTypes.TSAsExpression;
 type Annotation = babelTypes.TSTypeReference | babelTypes.TSUnionType;
 const isPrimitive = (name: string) => ['String', 'Integer', 'Decimal', 'Boolean'].includes(name);
+
+const getMemberExpressionName = (node: babelTypes.MemberExpression): string => {
+    if (node.object.type === 'MemberExpression') {
+        // @ts-ignore
+        return getMemberExpressionName(node.object) + '.' + node.property.name;
+    } else {
+        // @ts-ignore
+        return node.object.name + '.' + node.property.name;
+    }
+}
 
 function transformValue(node: DefaultValue, typeAnnotation?: Annotation): astTypes.LogicItem {
     if (node.type === 'NullLiteral') {
@@ -383,6 +394,24 @@ function transformValue(node: DefaultValue, typeAnnotation?: Annotation): astTyp
             concept: 'NewList',
             items: node.elements.map((item) => transformValue(item as DefaultValue)),
             typeAnnotation: transformTypeAnnotation(typeAnnotation)
+        }
+    }
+
+    if (node.type === 'TSAsExpression') {
+        if(node.expression) {
+            if(node.expression.type === 'ArrowFunctionExpression') {
+                const body = node.expression.body;
+                if(body.type === 'MemberExpression') {
+                    let value = getMemberExpressionName(body);
+                    value = value.split('.').slice(1).join('.');
+                    return {
+                        concept: 'StringLiteral',
+                        value,
+                    }
+                }
+            } else {
+                return transformValue(node.expression as DefaultValue, node.typeAnnotation as Annotation);
+            }
         }
     }
 }

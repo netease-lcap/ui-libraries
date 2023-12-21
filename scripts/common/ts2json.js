@@ -174,7 +174,8 @@ function transform(tsCode) {
                             });
                             // 枚举类型生成选项
                             if (['EnumSelectSetter', 'CapsulesSetter'].includes((_a = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _a === void 0 ? void 0 : _a.concept)) {
-                                var types_1 = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.tsType.split('|').map(function (type) { return type.replace(/(\'|\")/g, '').trim(); });
+                                // 因为converter里有'join:|'，所有这里的分割前后需要空格
+                                var types_1 = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.tsType.split(' | ').map(function (type) { return type.replace(/(\'|\")/g, '').trim(); });
                                 // @ts-ignore
                                 (_b = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _b === void 0 ? void 0 : _b.options = (_d = (_c = prop_1 === null || prop_1 === void 0 ? void 0 : prop_1.setter) === null || _c === void 0 ? void 0 : _c.options) === null || _d === void 0 ? void 0 : _d.map(function (option, idx) {
                                     if (option.if)
@@ -329,6 +330,16 @@ function getValueFromObjectExpressionByKey(object, key) {
     return (0, generator_1.default)(property.value).code;
 }
 var isPrimitive = function (name) { return ['String', 'Integer', 'Decimal', 'Boolean'].includes(name); };
+var getMemberExpressionName = function (node) {
+    if (node.object.type === 'MemberExpression') {
+        // @ts-ignore
+        return getMemberExpressionName(node.object) + '.' + node.property.name;
+    }
+    else {
+        // @ts-ignore
+        return node.object.name + '.' + node.property.name;
+    }
+};
 function transformValue(node, typeAnnotation) {
     if (node.type === 'NullLiteral') {
         return {
@@ -368,6 +379,24 @@ function transformValue(node, typeAnnotation) {
             items: node.elements.map(function (item) { return transformValue(item); }),
             typeAnnotation: transformTypeAnnotation(typeAnnotation)
         };
+    }
+    if (node.type === 'TSAsExpression') {
+        if (node.expression) {
+            if (node.expression.type === 'ArrowFunctionExpression') {
+                var body = node.expression.body;
+                if (body.type === 'MemberExpression') {
+                    var value = getMemberExpressionName(body);
+                    value = value.split('.').slice(1).join('.');
+                    return {
+                        concept: 'StringLiteral',
+                        value: value,
+                    };
+                }
+            }
+            else {
+                return transformValue(node.expression, node.typeAnnotation);
+            }
+        }
     }
 }
 function transformTypeAnnotation(node) {
