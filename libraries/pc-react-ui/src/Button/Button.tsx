@@ -41,7 +41,6 @@ export const Button: FC<ButtonProps> = ({
 };
 
 
-
 Button.defaultProps = {
   backgroundColor: '',
   label: '',
