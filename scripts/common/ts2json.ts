@@ -468,7 +468,7 @@ function transformTypeParameters(typeParameters: babelTypes.TSTypeParameterInsta
 }
 
 function transformSlotParams(params: babelTypes.Identifier[]): astTypes.Param[] {
-    return params.map((param) => {
+    return (params || []).map((param) => {
         const typeAnnotation = param.typeAnnotation as babelTypes.TSTypeAnnotation;
         return {
             concept: 'Param',

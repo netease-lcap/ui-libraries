@@ -442,7 +442,7 @@ function transformTypeParameters(typeParameters) {
     })) || [];
 }
 function transformSlotParams(params) {
-    return params.map(function (param) {
+    return (params || []).map(function (param) {
         var typeAnnotation = param.typeAnnotation;
         return {
             concept: 'Param',
