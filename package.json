@@ -21,7 +21,7 @@
     "components"
   ],
   "lint-staged": {
-    "*.{ts,tsx,js,vue}": [
+    "**/*.{ts,tsx,js,vue}": [
       "eslint --fix",
       "git add"
     ]
