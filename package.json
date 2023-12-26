@@ -9,11 +9,11 @@
     "postinstall": "husky install",
     "version-packages": "changeset version",
     "start": "pnpm dev:react-pc",
-    "dev:react-pc": "pnpm --dir ./components/pc-react-ui storybook",
-    "build": "pnpm --dir ./components/* build",
-    "test": "pnpm --dir ./components/* test",
+    "dev:react-pc": "pnpm --dir ./libraries/pc-react-ui storybook",
+    "build": "pnpm --dir ./libraries/* build",
+    "test": "pnpm --dir ./libraries/* test",
     "lint": "eslint --fix",
-    "coverage": "pnpm --dir ./components/* test:coverage"
+    "coverage": "pnpm --dir ./libraries/* test:coverage"
   },
   "keywords": [
     "codewave",
