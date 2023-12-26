@@ -40,7 +40,9 @@ function transform(tsCode) {
         plugins: [
             [require('@babel/plugin-proposal-decorators'), { legacy: true }],
             // 'babel-plugin-parameter-decorator'
-        ]
+        ],
+        rootMode: 'root',
+        root: __dirname,
     });
     var programBody = root.program.body;
     var blockOrDecl = programBody.find(function (stat) { return stat.type === 'TSModuleDeclaration'; });

@@ -2,3 +2,5 @@ pc-*
 h5-*
 node_modules
 ~$*
+
+dist/

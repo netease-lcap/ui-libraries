@@ -28,7 +28,9 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
         plugins: [
             [require('@babel/plugin-proposal-decorators'), { legacy: true }],
             // 'babel-plugin-parameter-decorator'
-        ]
+        ],
+        rootMode: 'root',
+        root: __dirname,
     }) as babelTypes.File;
 
     const programBody = root.program.body;

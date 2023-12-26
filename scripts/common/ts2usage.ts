@@ -9,10 +9,10 @@ const md = new MarkdownIt();
 
 export default function gen(root: string) {
     const data: astTypes.ViewComponentDeclaration[] = []
-    const pkg = require(`${root}/package.json`);
+    const pkg = eval('require')(`${root}/package.json`);
     const libInfo = `${pkg.name}@${pkg.version}`;
 
-    const components = require(`${root}/scripts/lcap/config.js`);
+    const components = eval('require')(`${root}/scripts/lcap/config.js`);
     components.forEach((component: any) => {
         let sourceDir = 'src'
         let componentDir = path.join(root, `${sourceDir}/${component.name}`);

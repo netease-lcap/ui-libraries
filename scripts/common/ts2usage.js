@@ -7,9 +7,9 @@ var MarkdownIt = require('markdown-it');
 var md = new MarkdownIt();
 function gen(root) {
     var data = [];
-    var pkg = require("".concat(root, "/package.json"));
+    var pkg = eval('require')("".concat(root, "/package.json"));
     var libInfo = "".concat(pkg.name, "@").concat(pkg.version);
-    var components = require("".concat(root, "/scripts/lcap/config.js"));
+    var components = eval('require')("".concat(root, "/scripts/lcap/config.js"));
     components.forEach(function (component) {
         var sourceDir = 'src';
         var componentDir = path.join(root, "".concat(sourceDir, "/").concat(component.name));
