@@ -1,0 +1,33 @@
+{
+  "name": "@lcap/pc-react-ui",
+  "version": "0.0.0",
+  "description": "Codewave Low Code AI Platform React Ant Design HOC UI Components",
+  "main": "src/index.ts",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "test": "vitest run",
+    "test:dev": "vitest dev",
+    "test:coverage": "vitest run --coverage",
+    "preview": "vite preview",
+    "build-storybook": "storybook build"
+  },
+  "keywords": [
+    "AntD",
+    "CodeWave",
+    "UI",
+    "Components"
+  ],
+  "author": "NetEase CodeWave Fe Team",
+  "license": "ISC",
+  "dependencies": {
+    "antd": "^5.12.4"
+  },
+  "devDependencies": {
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}

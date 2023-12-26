@@ -1,0 +1,78 @@
+{
+  "name": "lcap-ui",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Codewave Low Code AI Platform UI Components",
+  "main": "index.js",
+  "scripts": {
+    "commit": "cz",
+    "postinstall": "husky install",
+    "version-packages": "changeset version",
+    "start": "pnpm dev:react-pc",
+    "dev:react-pc": "pnpm --dir ./components/pc-react-ui storybook",
+    "build": "pnpm --dir ./components/* build",
+    "test": "pnpm --dir ./components/* test",
+    "lint": "eslint --fix",
+    "coverage": "pnpm --dir ./components/* test:coverage"
+  },
+  "keywords": [
+    "codewave",
+    "ui",
+    "components"
+  ],
+  "lint-staged": {
+    "*.{ts,tsx,js,vue}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">=18.17.0",
+    "pnpm": ">=8.12.1"
+  },
+  "packageManager": "pnpm@8.12.1",
+  "author": "NetEase CodeWave FE Team",
+  "license": "ISC",
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@storybook/addon-essentials": "^7.6.6",
+    "@storybook/addon-interactions": "^7.6.6",
+    "@storybook/addon-links": "^7.6.6",
+    "@storybook/addon-onboarding": "^1.0.10",
+    "@storybook/blocks": "^7.6.6",
+    "@storybook/react": "^7.6.6",
+    "@storybook/react-vite": "^7.6.6",
+    "@storybook/test": "^7.6.6",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@types/react-test-renderer": "^18.0.7",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^1.1.0",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-n": "^16.5.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "husky": "^8.0.3",
+    "jsdom": "^23.0.1",
+    "lint-staged": "^15.2.0",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-test-renderer": "^18.2.0",
+    "storybook": "^7.6.6",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vitest": "^1.1.0"
+  }
+}
