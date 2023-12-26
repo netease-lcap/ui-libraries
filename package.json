@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "commit": "cz",
+    "precommit": "pnpm lint-staged",
     "postinstall": "husky install",
     "version-packages": "changeset version",
     "start": "pnpm dev:react-pc",
