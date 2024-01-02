@@ -13,6 +13,7 @@
     "build": "pnpm --dir ./libraries/* build",
     "test": "pnpm --dir ./libraries/* test",
     "lint": "eslint --fix",
+    "changeset": "changeset",
     "coverage": "pnpm --dir ./libraries/* test:coverage"
   },
   "keywords": [
@@ -22,7 +23,7 @@
   ],
   "lint-staged": {
     "**/*.{ts,tsx,js,vue}": [
-      "eslint --fix",
+      "eslint --cache --fix",
       "git add"
     ]
   },
@@ -30,6 +31,7 @@
     "node": ">=18.17.0",
     "pnpm": ">=8.12.1"
   },
+  "repository": "https://github.com/netease-lcap/ui-libraries",
   "packageManager": "pnpm@8.12.1",
   "author": "NetEase CodeWave FE Team",
   "license": "ISC",

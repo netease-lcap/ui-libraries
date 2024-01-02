@@ -1,0 +1,30 @@
+{
+  "name": "@lcap-ui/shared",
+  "version": "0.0.0",
+  "description": "Lcap ui utils for internal use",
+  "type": "module",
+  "types": "./esm/index.d.ts",
+  "main": "./esm/index.js",
+  "exports": {
+    ".": "./esm/index.js"
+  },
+  "files": [
+    "esm",
+    "!esm/**/*.map"
+  ],
+  "author": "ICE",
+  "license": "MIT",
+  "repository": "https://github.com/netease-lcap/ui-libraries",
+  "bugs": "https://github.com/netease-lcap/ui-libraries/issues",
+  "scripts": {
+    "watch": "tsc -w --sourceMap",
+    "build": "tsc"
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
