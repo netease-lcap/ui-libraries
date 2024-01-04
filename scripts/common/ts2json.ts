@@ -202,7 +202,9 @@ export function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
                         } else if (calleeName === 'Event') {
                             const event: astTypes.EventDeclaration = {
                                 concept: 'EventDeclaration',
-                                name: (member.key as babelTypes.Identifier).name.replace(/^on(\w)/, (m, $1) => $1.toLowerCase()),
+                                name: (member.key as babelTypes.Identifier).name.replace(/^on(\w+)/, ($0, $1) => {
+                                    return $1.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+                                }),
                                 title: '',
                                 tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
                             };

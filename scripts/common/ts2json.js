@@ -196,7 +196,9 @@ function transform(tsCode) {
                         else if (calleeName === 'Event') {
                             var event_1 = {
                                 concept: 'EventDeclaration',
-                                name: member.key.name.replace(/^on(\w)/, function (m, $1) { return $1.toLowerCase(); }),
+                                name: member.key.name.replace(/^on(\w+)/, function ($0, $1) {
+                                    return $1.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+                                }),
                                 title: '',
                                 tsType: (0, generator_1.default)(member.typeAnnotation.typeAnnotation).code,
                             };
