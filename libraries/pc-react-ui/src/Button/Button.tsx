@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React, { FC, HTMLAttributes } from 'react';
-import './button.css';
+import styles from './button.module.css';
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /**
@@ -27,12 +27,12 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 export const Button: FC<ButtonProps> = ({
   primary, backgroundColor, size, label, ...rest
 }) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+  const mode = primary ? styles['storybook-button'] : styles['storybook-button--secondary'];
   return (
     <button
       {...rest}
       type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+      className={['storybook-button', `storybook-button--${size}`, mode].map((s) => styles[s]).join(' ')}
       style={backgroundColor ? { backgroundColor } : {}}
     >
       {label}
