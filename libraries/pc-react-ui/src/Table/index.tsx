@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Table } from 'antd';
 
 const withIDE = (Component: React.ElementType) => {
   return React.forwardRef((props, ref) => {
@@ -13,6 +13,6 @@ const withIDE = (Component: React.ElementType) => {
   });
 };
 
-const ButtonHoc = withIDE(Button);
+const ButtonHoc = withIDE(Table);
 
 export default ButtonHoc;

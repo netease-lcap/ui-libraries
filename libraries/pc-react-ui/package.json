@@ -22,7 +22,7 @@
   "author": "NetEase CodeWave Fe Team",
   "license": "ISC",
   "dependencies": {
-    "antd": "^5.12.4"
+    "antd": "5.12.4"
   },
   "devDependencies": {
   },
