@@ -165,6 +165,12 @@ importers:
       '@storybook/test':
         specifier: ^7.6.6
         version: 7.6.6(vitest@1.1.0)
+      '@storybook/testing-react':
+        specifier: ^2.0.1
+        version: 2.0.1(@storybook/client-logger@7.6.6)(@storybook/preview-api@7.6.6)(@storybook/react@7.6.6)(@storybook/types@7.6.6)(react@18.2.0)
+      '@testing-library/react':
+        specifier: ^14.1.2
+        version: 14.1.2(react-dom@18.2.0)(react@18.2.0)
       '@types/react':
         specifier: ^18.2.45
         version: 18.2.45
@@ -4156,6 +4162,25 @@ packages:
       - vitest
     dev: true
 
+  /@storybook/testing-react@2.0.1(@storybook/client-logger@7.6.6)(@storybook/preview-api@7.6.6)(@storybook/react@7.6.6)(@storybook/types@7.6.6)(react@18.2.0):
+    resolution: {integrity: sha512-D0fT7f0TUU8+usR+0NSyCYQCYDWernQqGZou32ISsoBkY9IiH1JMY4hQE8zUaGozu9eMlaa2wieWIMsjWovpdw==}
+    engines: {node: '>=10'}
+    deprecated: In Storybook 7, this package has been promoted to a first-class Storybook functionality. This means that you no longer need it! Instead, you can import the same utilities, but from the @storybook/react package. Please migrate when you can.
+    peerDependencies:
+      '@storybook/client-logger': ^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0
+      '@storybook/preview-api': ^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0
+      '@storybook/react': ^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0
+      '@storybook/types': ^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@storybook/client-logger': 7.6.6
+      '@storybook/csf': 0.1.2
+      '@storybook/preview-api': 7.6.6
+      '@storybook/react': 7.6.6(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+      '@storybook/types': 7.6.6
+      react: 18.2.0
+    dev: true
+
   /@storybook/theming@7.6.6(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-hNZOOxaF55iAGUEM0dvAIP6LfGMgPKCJQIk/qyotFk+SKkg3PBqzph89XfFl9yCD3KiX5cryqarULgVuNawLJg==}
     peerDependencies:
@@ -4220,6 +4245,20 @@ packages:
       lodash: 4.17.21
       redent: 3.0.0
       vitest: 1.1.0(@types/node@18.19.3)(jsdom@23.0.1)
+    dev: true
+
+  /@testing-library/react@14.1.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-z4p7DVBTPjKM5qDZ0t5ZjzkpSNb+fZy1u6bzO7kk8oeGagpPCAtgh4cx1syrfp7a+QWkM021jGqjJaxJJnXAZg==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    dependencies:
+      '@babel/runtime': 7.23.6
+      '@testing-library/dom': 9.3.3
+      '@types/react-dom': 18.2.18
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: true
 
   /@testing-library/user-event@14.3.0(@testing-library/dom@9.3.3):
