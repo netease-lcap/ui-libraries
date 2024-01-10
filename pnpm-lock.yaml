@@ -132,8 +132,14 @@ importers:
   libraries/pc-react-ui:
     dependencies:
       antd:
-        specifier: ^5.12.4
+        specifier: 5.12.4
         version: 5.12.4(react-dom@18.2.0)(react@18.2.0)
+      immutable:
+        specifier: 5.0.0-beta.4
+        version: 5.0.0-beta.4
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       react:
         specifier: ^18.0.0
         version: 18.2.0
@@ -7584,6 +7590,10 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /immutable@5.0.0-beta.4:
+    resolution: {integrity: sha512-sl9RE3lqd2LoQSESc8VV0k8qE9y57iT7dinq3Q+8mR2dqReHDZlgUrudzmFfZhDXBLXlNJMVWv3SG1YpQIokig==, tarball: https://registry.npmmirror.com/immutable/-/immutable-5.0.0-beta.4.tgz}
+    dev: false
+
   /import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -8474,8 +8484,7 @@ packages:
     dev: true
 
   /lodash@4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==, tarball: https://registry.npmmirror.com/lodash/-/lodash-4.17.21.tgz}
 
   /log-symbols@4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
@@ -10769,7 +10778,7 @@ packages:
     dev: true
 
   /source-map@0.6.1:
-    resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
+    resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==, tarball: https://registry.npmmirror.com/source-map/-/source-map-0.6.1.tgz}
     engines: {node: '>=0.10.0'}
     dev: true
 
