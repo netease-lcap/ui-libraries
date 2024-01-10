@@ -19,15 +19,24 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary = {
-  render: (args) => <Button {...args}>Button</Button>,
+  render: (args) => <Button {...args}>Button-loading</Button>,
   args: {
     type: 'primary',
+    asyncLoading: true,
+    onClick: () => new Promise((res) => {
+      setTimeout(() => {
+        res();
+      }, 3000);
+    }),
+    mySize: 'small',
+    // onClick: () => {},
   },
 };
 export const Secondary = {
   render: (args) => <Button {...args}>Button</Button>,
   args: {
     label: 'Button',
+    // mySize: 'small',
   },
 };
 
