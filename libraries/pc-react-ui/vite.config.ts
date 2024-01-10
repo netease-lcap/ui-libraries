@@ -13,6 +13,7 @@ export default defineConfig({
       formats: ['umd'],
       fileName: () => 'index.js',
     },
+    outDir: 'dist-theme',
     sourcemap: true,
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
