@@ -9,9 +9,11 @@ export default defineConfig({
     target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
     lib: {
       entry: 'src/index.ts',
-      formats: ['es', 'cjs'],
-      fileName: 'index',
+      name: 'antd',
+      formats: ['umd'],
+      fileName: () => 'index.js',
     },
+    sourcemap: true,
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: ['react', 'react-dom'],

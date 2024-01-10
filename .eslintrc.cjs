@@ -24,6 +24,7 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "semi": [2, "always"],
+    "@typescript-eslint/no-explicit-any": 0,
     'no-unused-vars': 1
   },
 };

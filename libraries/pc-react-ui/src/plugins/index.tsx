@@ -29,7 +29,7 @@ export class Plugin<T> {
   }
 
   setLocalPlugin(localPlugin: pluginType<T>['usePlugin'] = []) {
-    if (isArray(localPlugin)) this.localPlugin = localPlugin;
+    if (isArray(localPlugin)) this.localPlugin = localPlugin as any;
     else if (isPlainObject(localPlugin)) this.localPlugin = Object.values(localPlugin);
   }
 
