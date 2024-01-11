@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import React from 'react';
 import isFunction from 'lodash/isFunction';
+import zipObject from 'lodash/zipObject';
 
 const MAPPROPS = 'mapProps';
 
@@ -14,20 +15,22 @@ export function HandleAsyncLoading(props) {
   const [loading, setLoading] = React.useState(false);
   const onClick = props.get('onClick');
   const asyncLoadng = props.get('asyncLoading');
-  if (!asyncLoadng || isFunction(onClick)) return {};
+  if (!asyncLoadng || !isFunction(onClick)) return {};
   return {
     onClick: (...args) => {
       setLoading(true);
-      Promise.resolve().then(() => onClick(...args)).finally(() => {
-        setLoading(false);
-      });
+      Promise.resolve(onClick(...args))
+        .finally(() => setLoading(false));
     },
     loading,
   };
 }
 
-export function omitProps() {
+export function handleOmitProps(props) {
+  const omitProps = zipObject(Object.keys(props.get(MAPPROPS)), []);
   return {
     asyncLoading: undefined,
+    [MAPPROPS]: undefined,
+    ...omitProps,
   };
 }

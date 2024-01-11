@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { Map } from 'immutable';
 import isPlainObject from 'lodash/isPlainObject';
+import isObject from 'lodash/isObject';
 import isArray from 'lodash/isArray';
 import isUndefined from 'lodash/isUndefined';
 import attempt from 'lodash/attempt';
@@ -20,8 +21,8 @@ export class Plugin<T> {
   globalPlugin = [];
 
   constructor(plugin) {
-    if (isPlainObject(plugin)) this.plugin = Object.values(plugin);
     if (isArray(plugin)) this.plugin = plugin;
+    else if (isObject(plugin)) this.plugin = Object.values(plugin);
   }
 
   setBasicsPlugin(basicsPlugin) {
@@ -38,12 +39,14 @@ export class Plugin<T> {
   };
 
   getPlugin() {
+    console.log(this.plugin);
     return this.plugin.concat(this.basicsPlugin, this.localPlugin, this.globalPlugin);
   }
 }
 function HocComponet({
   props, plugins, ref, BaseComponent, mapProps,
 }) {
+  console.log(mapProps, 'mapProps333');
   const expandProps = plugins.reduce(
     (expandProps, handleFun) => expandProps.merge(attempt(handleFun, expandProps)),
     Map(props).set('mapProps', mapProps),
@@ -80,6 +83,7 @@ export function registerComponet<T, U extends pluginType<T>>(
   return React.forwardRef<T, U>((props, ref) => {
     plugin.setLocalPlugin(props?.usePlugin);
     const plugins = plugin.getPlugin();
+    console.log(plugins, 'plugin---');
     return HocBaseComponents(Component, {
       props, plugins, ref, mapProps,
     });
