@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect, test } from 'vitest';
 import renderer from 'react-test-renderer';
-import { composeStories } from '@storybook/testing-react';
+import { composeStories } from '@storybook/react';
 
 import * as stories from '../stories/Button.stories';
 

@@ -9,15 +9,7 @@
     "noEmit": true,
     "noImplicitThis": true,
     "esModuleInterop": true,
-    "moduleResolution": "node"
-  },
-  "include": [
-    "types/**/*",
-    "**/src/**/*",
-  ],
-  "exclude": [
-    "**/*.test.ts",
-    "**/*.test.js",
-    "node_modules"
-  ]
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true
+  }
 }

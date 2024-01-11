@@ -1,5 +1,5 @@
 {
-  "name": "@lcap-ui/shared",
+  "name": "@lcap/ui-shared",
   "version": "0.0.0",
   "description": "Lcap ui utils for internal use",
   "type": "module",
@@ -12,7 +12,7 @@
     "esm",
     "!esm/**/*.map"
   ],
-  "author": "ICE",
+  "author": "NetEase CodeWave Fe Team",
   "license": "MIT",
   "repository": "https://github.com/netease-lcap/ui-libraries",
   "bugs": "https://github.com/netease-lcap/ui-libraries/issues",
