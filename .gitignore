@@ -22,3 +22,5 @@ assets-package
 /site
 changelog.generated.md
 vetur
+
+*.tgz

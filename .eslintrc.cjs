@@ -12,6 +12,7 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'arrow-body-style': 0,
+    'no-param-reassign': 1,
     'import/no-extraneous-dependencies': 0,
     'import/extensions': 0,
     'import/no-unresolved': 0,
