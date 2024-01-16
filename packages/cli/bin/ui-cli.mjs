@@ -7,6 +7,7 @@ import semver from 'semver';
 import { program } from 'commander';
 import build from '../libs/commands/build/index.mjs';
 import { resolveConfig } from '../libs/config/index.js';
+import deploy from '../libs/commands/deploy/index.mjs';
 
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -46,10 +47,10 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'ice') {
   program.command('deploy')
     .description('发布流程')
     .option('--config <configPath>', '设置配置文件路径', 'lcap-ui.config.js')
-    .option('--env <platfrom>', '发布cdn 地址', 'http://defaulttenant.lcap.codewave-dev.163yun.com')
+    .option('--platfrom <platfrom>', '发布cdn 地址', 'http://defaulttenant.lcap.codewave-dev.163yun.com')
     .option('--rootDir <rootDir>', 'project root directory', cwd)
-    .action(async (args, ctx) => {
-      console.log(args, ctx);
+    .action(async ({ config, platfrom }) => {
+      await deploy(resolveConfig(path.join(cwd, config), cwd), platfrom);
     });
   program.parse(process.argv);
 
