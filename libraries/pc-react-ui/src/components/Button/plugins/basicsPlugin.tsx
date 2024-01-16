@@ -1,21 +1,18 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable react-refresh/only-export-components */
 import React from 'react';
-import isFunction from 'lodash/isFunction';
-import zipObject from 'lodash/zipObject';
+import _ from 'lodash';
+// import type { ButtonProps } from 'antd';
+// import { hookType } from '@/plugins/type';
 
-const MAPPROPS = 'mapProps';
-
-export function handleTransitionProps(props) {
-  if (!props.has(MAPPROPS)) return {};
-  const mapProps = props.get(MAPPROPS);
-  return Object.entries(mapProps)
-    .reduce((preProps, [key, value]) => preProps.set(value, preProps.get(key)), props);
-}
-export function HandleAsyncLoading(props) {
+// type ButtonImmutableProps = Map<keyof ButtonProps, ButtonProps[keyof ButtonProps]>
+function HandleAsyncLoading(props) {
   const [loading, setLoading] = React.useState(false);
   const onClick = props.get('onClick');
+  const deletePropsList = props.get('$deletePropsList', []);
+  const $deletePropsList = _.concat(deletePropsList, ['asyncLoading']);
   const asyncLoadng = props.get('asyncLoading');
-  if (!asyncLoadng || !isFunction(onClick)) return {};
+  if (!asyncLoadng || !_.isFunction(onClick)) return {};
   return {
     onClick: (...args) => {
       setLoading(true);
@@ -23,14 +20,18 @@ export function HandleAsyncLoading(props) {
         .finally(() => setLoading(false));
     },
     loading,
+    $deletePropsList,
   };
 }
-
-export function handleOmitProps(props) {
-  const omitProps = zipObject(Object.keys(props.get(MAPPROPS)), []);
-  return {
-    asyncLoading: undefined,
-    [MAPPROPS]: undefined,
-    ...omitProps,
-  };
-}
+export const handle = {
+  method: HandleAsyncLoading,
+  name: 'HandleAsyncLoading',
+};
+// const omitProps = {
+// name: 'omitProps',
+// deep: [],
+// componentsName:[],
+// methods: OmitProps,
+// handle: handleOmitProps,
+// order: 9,
+// };

@@ -1,10 +1,10 @@
 import React from 'react';
-import Button from '../index';
+import InputNumber from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
-  title: 'Example/Button/blocks',
-  component: Button,
+  title: 'Example/InputNumber',
+  component: InputNumber,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
@@ -19,38 +19,17 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary = {
-  render: (args) => <Button {...args}>Button-loading</Button>,
+  render: (args) => <InputNumber {...args} />,
   args: {
     type: 'primary',
-    asyncLoading: true,
+    formatType: 'thousandths',
     onClick: () => new Promise((res) => {
       setTimeout(() => {
         res();
       }, 3000);
     }),
-    mySize: 'small',
+    // mySize: 'small',
     // size: 'small',
     // onClick: () => {},
-  },
-};
-export const Secondary = {
-  render: (args) => <Button {...args}>Button</Button>,
-  args: {
-    label: 'Button',
-    // mySize: 'small',
-  },
-};
-
-export const Large = {
-  render: (args) => <Button {...args}>Button</Button>,
-  args: {
-    size: 'large',
-  },
-};
-
-export const Small = {
-  render: (args) => <Button {...args}>Button</Button>,
-  args: {
-    size: 'small',
   },
 };

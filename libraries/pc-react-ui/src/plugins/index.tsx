@@ -1,57 +1,84 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/no-shadow */
 import { Map } from 'immutable';
-import isPlainObject from 'lodash/isPlainObject';
-import isObject from 'lodash/isObject';
-import isArray from 'lodash/isArray';
-import isUndefined from 'lodash/isUndefined';
-import attempt from 'lodash/attempt';
 import React from 'react';
-import type { pluginType, hookType } from '@/plugins/type';
+import _ from 'lodash';
+import fp from 'lodash/fp';
+import type { pluginType } from '@/plugins/type';
 
 export class Plugin<T> {
-  plugin: hookType<T>[] = [];
+  plugin: any[] = [];
 
-  basicsPlugin = [];
+  private mapProps: Record<string, string> = {};
 
-  localPlugin: hookType<T>[] = [];
+  displayName: string;
 
   globalPlugin = [];
 
-  constructor(plugin) {
-    if (isArray(plugin)) this.plugin = plugin;
-    else if (isObject(plugin)) this.plugin = Object.values(plugin);
+  constructor(plugin: T, options: { displayName: string, mapProps: Record<string, string> }) {
+    this.displayName = options.displayName;
+    this.mapProps = options.mapProps || {};
+    this.setPlugin(plugin);
   }
 
-  setBasicsPlugin(basicsPlugin) {
-    this.basicsPlugin = basicsPlugin;
+  handleRule(plugin) {
+    const defaultOrderPlugin = plugin.map((plugin) => _.defaults(plugin, { order: 4 }));
+    const sortPlugin = _.orderBy(defaultOrderPlugin, ['order'], ['asc']);
+    const unionPlugin = _.unionBy(sortPlugin, 'name');
+    return unionPlugin;
   }
 
-  setLocalPlugin(localPlugin: pluginType<T>['usePlugin'] = []) {
-    if (isArray(localPlugin)) this.localPlugin = localPlugin as any;
-    else if (isPlainObject(localPlugin)) this.localPlugin = Object.values(localPlugin);
-  }
+  setPlugin(plugin) {
+    const resultPluginList = _.cond([
+      [_.isArray, _.identity],
+      [_.isObject, _.values],
+      [_.stubTrue, _.constant([])],
+    ]);
 
-  setGlobalPlugin = (globalPlugin = []) => {
-    this.globalPlugin = globalPlugin;
-  };
+    const pluginList = _.concat(this.plugin, resultPluginList(plugin));
+    this.plugin = this.handleRule(pluginList);
+  }
 
   getPlugin() {
-    console.log(this.plugin);
-    return this.plugin.concat(this.basicsPlugin, this.localPlugin, this.globalPlugin);
+    const handlePlgunHook = _.cond([
+      [_.isFunction, _.identity],
+      [_.flow([fp.get('method'), _.isFunction]), fp.get('method')],
+      [_.stubTrue, _.noop],
+    ]);
+    const pluginHook = _.map(this.plugin, handlePlgunHook);
+    return pluginHook;
+  }
+
+  getMapProps() {
+    return Map(this.mapProps);
   }
 }
-function HocComponet({
-  props, plugins, ref, BaseComponent, mapProps,
-}) {
-  console.log(mapProps, 'mapProps333');
-  const expandProps = plugins.reduce(
-    (expandProps, handleFun) => expandProps.merge(attempt(handleFun, expandProps)),
-    Map(props).set('mapProps', mapProps),
+
+export function HocBaseComponents(
+  BaseComponent,
+  {
+    props, plugin, ref,
+  },
+) {
+  const pluginHooks = plugin.getPlugin();
+  const mapProps = plugin.getMapProps();
+
+  const ImmutableProps = Map(props)
+    .reduce((result, value, key) => result.set(mapProps.get(key, key), value), Map());
+
+  const expandProps = pluginHooks.reduce(
+    (expandProps, handleFun) => expandProps.merge(_.attempt(handleFun, expandProps)),
+    ImmutableProps,
   );
-  const excludeProps = expandProps.filter((x) => !isUndefined(x)).toJS();
+
+  const excludeProps = expandProps
+    .deleteIn(_.keys(plugin.getMapProps().toJS()))
+    .deleteIn(expandProps.get('$deletePropsList', ['']))
+    .delete('$deletePropsList')
+    .toJS();
   return (
     <BaseComponent
       ref={ref}
@@ -59,33 +86,17 @@ function HocComponet({
     />
   );
 }
-export function HocBaseComponents(
-  BaseComponent,
-  {
-    props, plugins, ref, mapProps,
-  },
-) {
-  return (
-    <HocComponet
-      props={props}
-      plugins={plugins}
-      ref={ref}
-      mapProps={mapProps}
-      BaseComponent={BaseComponent}
-    />
-  );
-}
 export function registerComponet<T, U extends pluginType<T>>(
   Component: React.ElementType,
   plugin,
-  mapProps,
 ) {
   return React.forwardRef<T, U>((props, ref) => {
-    plugin.setLocalPlugin(props?.usePlugin);
-    const plugins = plugin.getPlugin();
-    console.log(plugins, 'plugin---');
+    React.useEffect(() => {
+      plugin.setPlugin(props?.usePlugin);
+    }, [props?.usePlugin]);
+
     return HocBaseComponents(Component, {
-      props, plugins, ref, mapProps,
+      props, plugin, ref,
     });
   });
 }
