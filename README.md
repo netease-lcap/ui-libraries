@@ -6,15 +6,15 @@
 
 ```mermaid
 flowchart BT
-    YAML -- yaml2excel --> Excel
-    Excel -- excel2yaml --> YAML
-    YAML -- 基本完成 --> ts
-    YAML -- scripts/lcap --> usage.json
-    Excel -- TODO开发 --> ts
-    ts -- 基本完成 --> usage.json
-    ts -- 基本完成 --> Excel
-    usage.json -- createUiTs --> nasl.ui.definition.ts
-    ts -- 基本完成 --> nasl.ui.definition.ts
+    YAML -- yaml2excel(已完成) --> Excel
+    Excel -- excel2yaml(已完成) --> YAML
+    YAML -- yaml2ts(已完成) --> ts
+    YAML -- scripts/lcap(已完成) --> usage.json
+    Excel -- TODO --> ts
+    ts -- ui-json(已完成) --> nasl.ui.json
+    ts -- ts2excel(已完成) --> Excel
+    usage.json -- createUiTs(已完成) --> nasl.ui.definition.ts
+    ts -- check:api(已完成) --> nasl.ui.definition.ts
 ```
 
 - [x] YAML --> ts
