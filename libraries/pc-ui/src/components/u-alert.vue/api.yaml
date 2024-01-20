@@ -1,0 +1,90 @@
+- name: u-alert
+  title: 公告
+  icon: alert
+  labels:
+    - Display
+  description: 公告。
+  attrs:
+    - name: title
+      title: 标题
+      type: string
+      default: ""
+      description: 公告标题
+      advanced: true
+    - name: desc
+      title: 辅助文本
+      type: string
+      default: ""
+      description: 公告辅助文本
+      advanced: true
+    - name: horizontal
+      title: 对其方式
+      type: string
+      default: left
+      options:
+        - value: left
+          title: 左对齐
+        - value: center
+          title: 居中对齐
+      description: 选择对齐方式
+      advanced: true
+    - name: type
+      title: 公告类型
+      type: string
+      options:
+        - value: info
+          title: 信息
+        - value: success
+          title: 成功
+        - value: warning
+          title: 警告
+        - value: error
+          title: 错误
+      default: info
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 信息、成功、警告、错误
+      tooltipLink: ""
+    - name: showIcon
+      title: 显示图标
+      type: boolean
+      default: true
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 是否展开图标
+      tooltipLink: ""
+    - name: closeable
+      title: 手动关闭
+      type: boolean
+      default: false
+      description: 是否可手动关闭公告
+      group: 交互属性
+      brifeDoc: ""
+      docDescription: 是否显示关闭按钮
+      tooltipLink: ""
+    - name: bordered
+      title: 显示边框
+      type: boolean
+      default: true
+      description: ""
+      group: 样式属性
+      brifeDoc: ""
+      docDescription: 是否显示边框
+      tooltipLink: ""
+  events:
+    - name: close
+      title: 关闭时
+      description: 关闭时触发
+      params:
+        - name: senderVM
+          type: UAlter
+          description: 发送事件实例
+  slots:
+    - concept: Slot
+      name: default
+      description: 辅助文本
+    - concept: Slot
+      name: title
+      description: 标题

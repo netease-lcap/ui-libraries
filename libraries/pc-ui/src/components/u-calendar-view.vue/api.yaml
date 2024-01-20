@@ -1,0 +1,314 @@
+- name: u-calendar-view
+  title: 日历
+  icon: calendar
+  labels:
+    - Table
+  description: 用于展示大量结构化数据。支持日历结构展示。
+  attrs:
+    - name: data-source
+      title: 数据源
+      type: Array<Item> | Function | object
+      designer-value: "[{}]"
+      description: 展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑
+      group: 数据属性
+      brifeDoc: ""
+      docDescription: 组件的数据源，配置内容为数据集对象或者返回数据集的逻辑。
+      tooltipLink: ""
+    - name: data-schema
+      title: 数据类型
+      type: schema
+      description: 数据源返回的数据结构的类型，自动识别类型进行展示说明
+      group: 数据属性
+      compType: dataTypeSelect
+      brifeDoc: ""
+      docDescription: IDE 根据配置的数据源动态计算返回内容的数据结构，用于动态配置项 current.item 的类型说明。
+      tooltipLink: ""
+    - name: start-key
+      type: string
+      title: 开始时间字段
+      default: startTime
+      description: 数据内表示开始时间的字段
+      group: 数据属性
+      display: property-select
+      brifeDoc: ""
+      docDescription: 数据内表示开始时间的字段，要求对应数据必须包含日期（日期/日期时间格式），**单独使用表示当天**；跟结束时间字段配合使用表示日期区间，组件根据日期区间判断展示在哪些日期内。
+      tooltipLink: ""
+    - name: end-key
+      type: string
+      title: 结束时间字段
+      default: endTime
+      description: 数据内表示结束时间的字段
+      group: 数据属性
+      display: property-select
+      brifeDoc: ""
+      docDescription: 数据内表示结束时间的字段，要求对应数据必须包含日期（日期/日期时间格式），跟开始时间字段配合使用表示日期区间，组件根据时间区间判断展示在哪些日期内。
+      tooltipLink: ""
+    - name: value
+      title: 选中值
+      type: Date | string ｜ number
+      sync: true
+      model: true
+      default: TODAY
+      description: 当前选中的日期
+      group: 数据属性
+      brifeDoc: ""
+      docDescription: 当前选择的日期。
+      tooltipLink: ""
+    - name: min-date
+      title: 最小日期值
+      type: Date | string ｜ number
+      description: 最小可选的日期值，默认为10年前，日期填写格式为“yyyy-mm-dd”
+      group: 数据属性
+      brifeDoc: ""
+      docDescription: 控制日历展示的日期范围，默认 10 年前。
+      tooltipLink: ""
+    - name: max-date
+      title: 最大日期值
+      type: Date | string ｜ number
+      description: 最大可选的日期值，默认为9年后，日期填写格式为“yyyy-mm-dd”
+      group: 数据属性
+      brifeDoc: ""
+      docDescription: 控制日历展示的日期范围，默认 9 年后。
+      tooltipLink: ""
+    - name: show-week-days
+      title: 展示周天
+      type: boolean
+      default: true
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 控制头部示例星期几信息展示，默认开启
+      tooltipLink: ""
+    - name: show-weeks
+      title: 展示周数
+      type: boolean
+      default: false
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 控制当前周为第几周信息展示，默认关闭。
+      tooltipLink: ""
+    - name: show-basic
+      title: 展示基础配置
+      type: boolean
+      default: true
+      description: 是否展示顶部左侧的 "<" "今天" ">" 等基础配置功能
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 控制顶部左侧 上个月、当天、下个月 的快捷操作入口展示，默认开启。
+      tooltipLink: ""
+    - name: show-advance
+      title: 展示高级配置
+      type: boolean
+      default: true
+      description: 是否展示顶部右侧的年份、月份选项高级配置
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 控制顶部右侧 年份、月份 快捷切换操作入口展示，默认开启。
+      tooltipLink: ""
+    - name: first-day-of-week
+      title: 首列星期
+      type: number
+      default: 1
+      description: 填写数字1~7，分别表示周一~周日
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 0～7 (周一～周日) 数字配置，自定义每行从周几开始展示，默认 1，**当开启展示周数时固定周一开始**。
+      tooltipLink: ""
+    - name: multiple
+      title: 可多选
+      type: boolean
+      default: false
+      description: 开启可多选后，可通过ctrl/command+鼠标多选
+      group: 交互属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入文本或 HTML 至日期组件底部
+      slotProps:
+        concept: Param
+        name: current
+        typeAnnotation:
+          concept: TypeAnnotation
+          typeKind: generic
+          typeNamespace: nasl.ui
+          typeName: Current
+          typeArguments:
+            - concept: TypeAnnotation
+              typeKind: typeParam
+              typeName: T
+  events:
+    - name: select
+      title: 选择后
+      description: 选择某一个日期时触发
+      params:
+        - name: $event.value
+          type: string
+          description: YYYY-MM-DD 格式的日期信息
+        - name: $event.oldValue
+          type: string
+          description: YYYY-MM-DD 格式的日期信息
+        - name: $event.date
+          type: number
+          description: 当月的日期信息
+        - name: $event.timestamp
+          type: number
+          description: 时间戳格式日期信息
+        - name: $event.disabled
+          type: boolean
+          description: 是否禁用
+        - name: $event.week
+          type: number
+          description: 周数信息
+        - name: $event.Date
+          type: object
+          description: dayjs 封装过后的日期信息
+    - name: change
+      title: 改变后
+      description: 日期改变时触发
+      params:
+        - name: $event.value
+          type: string
+          description: YYYY-MM-DD 格式的日期信息
+        - name: $event.oldValue
+          type: string
+          description: YYYY-MM-DD 格式的日期信息
+        - name: $event.date
+          type: number
+          description: 当月的日期信息
+        - name: $event.timestamp
+          type: number
+          description: 时间戳格式日期信息
+        - name: $event.disabled
+          type: boolean
+          description: 是否禁用
+        - name: $event.week
+          type: number
+          description: 周数信息
+        - name: $event.Date
+          type: object
+          description: dayjs 封装过后的日期信息
+    - name: before-load
+      title: 加载前
+      description: 加载前触发
+      advanced: true
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/EventTarget"
+        - name: $event.preventDefault
+          type: Function
+          description: 阻止加载流程
+        - name: senderVM
+          type: UTableView
+          description: 发送事件实例
+    - name: load
+      title: 加载后
+      description: 加载后触发
+      params:
+        - name: $event
+          type: "null"
+          description: 无
+        - name: senderVM
+          type: UTableView
+          description: 发送事件实例
+  methods:
+    - name: reload
+      description: 重新加载
+      params: []
+  i18n:
+    zh-CN:
+      uCalendarView_year: '年'
+      uCalendarView_month: '月'
+      uCalendarView_quarter: 'Q'
+      uCalendarView_Q1: '1'
+      uCalendarView_Q2: '2'
+      uCalendarView_Q3: '3'
+      uCalendarView_Q4: '4'
+      uCalendarView_Sunday: '日'
+      uCalendarView_Monday: '一'
+      uCalendarView_Tuesday: '二'
+      uCalendarView_Wednesday: '三'
+      uCalendarView_Thursday: '四'
+      uCalendarView_Friday: '五'
+      uCalendarView_Saturday: '六'
+      uCalendarView_January: '1'
+      uCalendarView_February: '2'
+      uCalendarView_March: '3'
+      uCalendarView_April: '4'
+      uCalendarView_May: '5'
+      uCalendarView_June: '6'
+      uCalendarView_July: '7'
+      uCalendarView_August: '8'
+      uCalendarView_September: '9'
+      uCalendarView_October: '10'
+      uCalendarView_November: '11'
+      uCalendarView_December: '12'
+      uCalendarView_PrevMonth: '上个月'
+      uCalendarView_NextMonth: '下个月'
+      uCalendarView_Today: '今天'
+      uCalendarView_Week: '周数'
+    en-US:
+      uCalendarView_year: ' '
+      uCalendarView_month: ' '
+      uCalendarView_Q1: 'One'
+      uCalendarView_Q2: 'Two'
+      uCalendarView_Q3: 'Three'
+      uCalendarView_Q4: 'Four'
+      uCalendarView_quarter: 'Q'
+      uCalendarView_Sunday: 'Sun'
+      uCalendarView_Monday: 'Mon'
+      uCalendarView_Tuesday: 'Tue'
+      uCalendarView_Wednesday: 'Wed'
+      uCalendarView_Thursday: 'Thu'
+      uCalendarView_Friday: 'Fri'
+      uCalendarView_Saturday: 'Sat'
+      uCalendarView_January: 'Jan'
+      uCalendarView_February: 'Feb'
+      uCalendarView_March: 'Mar'
+      uCalendarView_April: 'Apr'
+      uCalendarView_May: 'May'
+      uCalendarView_June: 'Jun'
+      uCalendarView_July: 'Jul'
+      uCalendarView_August: 'Aug'
+      uCalendarView_September: 'Sep'
+      uCalendarView_October: 'Oct'
+      uCalendarView_November: 'Nov'
+      uCalendarView_December: 'Dec'
+      uCalendarView_PrevMonth: 'Prev Month'
+      uCalendarView_NextMonth: 'Next Month'
+      uCalendarView_Today: 'Today'
+      uCalendarView_Week: 'Week'
+    ja:
+      uCalendarView_year: '年'
+      uCalendarView_month: '月'
+      uCalendarView_quarter: 'Q'
+      uCalendarView_Q1: '1'
+      uCalendarView_Q2: '2'
+      uCalendarView_Q3: '3'
+      uCalendarView_Q4: '4'
+      uCalendarView_Sunday: '日'
+      uCalendarView_Monday: '月'
+      uCalendarView_Tuesday: '火'
+      uCalendarView_Wednesday: '水'
+      uCalendarView_Thursday: '木'
+      uCalendarView_Friday: '金'
+      uCalendarView_Saturday: '土'
+      uCalendarView_January: '1'
+      uCalendarView_February: '2'
+      uCalendarView_March: '3'
+      uCalendarView_April: '4'
+      uCalendarView_May: '5'
+      uCalendarView_June: '6'
+      uCalendarView_July: '7'
+      uCalendarView_August: '8'
+      uCalendarView_September: '9'
+      uCalendarView_October: '10'
+      uCalendarView_November: '11'
+      uCalendarView_December: '12'
+      uCalendarView_PrevMonth: '前の月'
+      uCalendarView_NextMonth: '来月'
+      uCalendarView_Today: '今天'
+      uCalendarView_Week: '週'

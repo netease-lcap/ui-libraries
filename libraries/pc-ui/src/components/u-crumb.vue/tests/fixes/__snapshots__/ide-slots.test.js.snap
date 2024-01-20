@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Crumb IDE slots test > IDE 中空值渲染 1`] = `
+<nav class="root">
+  <div class="empty" s-empty="true"></div>
+</nav>
+`;

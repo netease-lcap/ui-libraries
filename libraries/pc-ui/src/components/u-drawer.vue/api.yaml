@@ -1,0 +1,132 @@
+- name: u-drawer
+  title: 抽屉
+  icon: drawer
+  description: 抽屉
+  labels:
+    - Feedback
+  attrs:
+    - name: placement
+      title: 抽屉位置
+      type: string
+      default: right
+      options:
+        - value: left
+          title: 左
+        - value: right
+          title: 右
+        - value: top
+          title: 上
+        - value: bottom
+          title: 下
+      description: 抽屉弹出的位置
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 支持选择抽屉的显示位置，支持左、右两个位置
+      tooltipLink: ""
+    - name: show-head
+      title: 显示顶部栏
+      type: boolean
+      default: true
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 控制抽屉顶部栏的开启和关闭
+      tooltipLink: ""
+    - name: show-foot
+      title: 显示底部栏
+      type: boolean
+      default: true
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 控制抽屉底部栏的开启和关闭
+      tooltipLink: ""
+    - name: maskClosable
+      title: 点击遮罩关闭
+      type: boolean
+      default: true
+      description: 点击遮罩关闭抽屉
+      group: 交互属性
+      brifeDoc: ""
+      docDescription: |-
+        控制抽屉打开时，点击遮罩区域的作用，默认开启。
+        - 开启：点击遮罩区域则自动关闭抽屉。
+        - 关闭：点击遮罩区域无实际作用
+      tooltipLink: ""
+    - name: visible
+      title: 显示状态
+      type: boolean
+      sync: true
+      default: false
+      description: 显示状态分为“True(打开)/False(关闭)”，默认为“打开”
+      group: 状态属性
+      brifeDoc: ""
+      docDescription: 控制抽屉是否进入页面时自动显示。开启表示自动显示，关闭表示不自动显示
+      tooltipLink: ""
+    - name: size
+      type: string
+      title: 尺寸
+      options:
+        - value: small
+          title: 小
+        - value: normal
+          title: 正常
+        - value: large
+          title: 大
+      default: normal
+      description: 抽屉的尺寸
+      group: 样式属性
+      brifeDoc: ""
+      docDescription: 支持配置抽屉的宽度或者高度，支持小、正常、大、三个尺寸
+      tooltipLink: ""
+  events:
+    - name: open
+      title: 打开时
+      description: 打开抽屉时触发
+      params:
+        - name: senderVM
+          type: UDrawer
+          description: 发送事件实例
+    - name: before-close
+      title: 关闭前
+      description: 关闭抽屉前触发
+      params:
+        - name: ok
+          type: boolean
+          description: 是否确定
+        - name: $event.preventDefault
+          type: Function
+          description: 阻止关闭流程
+        - name: senderVM
+          type: UDrawer
+          description: 发送事件实例
+    - name: close
+      title: 关闭时
+      description: 关闭抽屉时触发
+      params:
+        - name: ok
+          type: boolean
+          description: 是否确定
+        - name: senderVM
+          type: UDrawer
+          description: 发送事件实例
+  methods:
+    - name: open
+      description: 打开抽屉
+      params: []
+    - name: close
+      description: 关闭抽屉
+      params: []
+  i18n:
+    zh-CN:
+      uDrawer_dialog: '提示'
+      uDrawer_ok: '确定'
+      uDrawer_cancel: '取消'
+    en-US:
+      uDrawer_dialog: 'Dialog'
+      uDrawer_ok: 'OK'
+      uDrawer_cancel: 'Cancel'
+    ja:
+      uDrawer_dialog: 'ダイアログ'
+      uDrawer_ok: '確定'
+      uDrawer_cancel: 'キャンセル'

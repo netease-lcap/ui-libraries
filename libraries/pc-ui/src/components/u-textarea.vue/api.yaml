@@ -1,0 +1,300 @@
+- name: u-textarea
+  title: 多行输入
+  icon: textarea
+  labels:
+    - Form
+  description: 多行输入组件
+  attrs:
+    - name: minlength
+      title: 最小长度
+      type: number
+      description: ""
+      advanced: true
+    - name: spellcheck
+      title: 拼写检查
+      type: boolean
+      description: ""
+      advanced: true
+    - name: value
+      title: 值
+      type: string
+      sync: true
+      model: true
+      description: 输入的值
+      group: 数据属性
+      brifeDoc: ""
+      docDescription: 当前多行输入组件，输入框内的本文内容
+      tooltipLink: ""
+    - name: placeholder
+      title: 占位符
+      type: string
+      description: 为空时显示的占位符文本
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 输入框为空时的提示文本
+      tooltipLink: ""
+    - name: maxlength
+      title: 最大字符数
+      type: number
+      display: number
+      place: 不限制
+      description: 输入框内可输入的最大字符数，超过时不支持输入
+      toggleupdate:
+        - value: ""
+          updateData:
+            show-word-limit: false
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 输入框内可输入的最大字符数，超过时不支持输入
+      tooltipLink: ""
+    - name: show-word-limit
+      title: 显示字数统计
+      type: boolean
+      description: 设置是否显示「最大字符数」的字数统计
+      dependency:
+        - "!maxlength": ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 开启后，会在组件上显示当前输入字数以及最大字符数，当前输入字数超过最大字符数时，不支持输入。
+      tooltipLink: ""
+    - name: limit-position
+      title: 字数统计位置
+      type: string
+      options:
+        - value: inside
+          title: 输入框内
+        - value: outside
+          title: 输入框外
+      description: 设置字数统计位置
+      dependency:
+        - show-word-limit: true
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: "**显示字数统计**开启后，支持选择字数统计位置：输入框内、输入框外。"
+      tooltipLink: ""
+    - name: autofocus
+      title: 自动获取焦点
+      type: boolean
+      default: false
+      description: 设置是否自动获取焦点
+      designer-value: false
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 进入页面时，自动选中该输入框。
+      tooltipLink: ""
+    - name: clearable
+      title: 可清除
+      type: boolean
+      default: false
+      description: 可点击清除按钮一键清除内容
+      group: 交互属性
+      brifeDoc: ""
+      docDescription: 是否可清空。开启并在输入框有内容时会显示清空按钮
+      tooltipLink: ""
+    - name: resize
+      title: 可调整大小
+      type: string
+      options:
+        - value: none
+          title: 不可调整
+        - value: both
+          title: 可调整
+        - value: horizontal
+          title: 水平可调整
+        - value: vertical
+          title: 竖直可调整
+      default: vertical
+      description: 设置调整大小的方式
+      group: 交互属性
+      brifeDoc: ""
+      docDescription: 设置多行输入框是否可以调整大小。包括：不可调整，可调整，水平可调整，竖直可调整四种设置
+      tooltipLink: ""
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+      brifeDoc: ""
+      docDescription: 正常显示，但禁止选择或输入
+      tooltipLink: ""
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+      brifeDoc: ""
+      docDescription: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      tooltipLink: ""
+    - name: preview
+      title: 预览
+      type: boolean
+      default: false
+      description: 显示预览态
+      group: 状态属性
+    - name: size
+      title: 尺寸
+      type: string
+      options:
+        - value: full
+          title: 占满
+        - value: huge
+          title: 巨大
+        - value: large
+          title: 大
+        - value: medium
+          title: 中型
+        - value: normal
+          title: 正常
+      default: normal
+      description: 设置多行输入框大小
+      group: 样式属性
+      brifeDoc: ""
+      docDescription: "- 设置多行输入框大小。支持正常，中型，大，巨大，占满五种尺寸。"
+      tooltipLink: ""
+    - name: autosize
+      title: 自适应内容高度
+      type: boolean, object
+      place: 不设置则根据输入内容自适应
+      description: 可输入如{maxHeight:100,minHeight:50}，单位默认为px
+      group: 样式属性
+      brifeDoc: ""
+      docDescription: 可输入如{maxHeight:100,minHeight:50}，单位默认为px，不设置则根据输入内容自适应
+      tooltipLink: ""
+  slots:
+    - concept: Slot
+      name: default
+      title: 默认
+      description: 插入 HTML 或 `Component`, 可展示额外内容。
+      advanced: true
+      quick-add: never
+  events:
+    - name: before-input
+      title: 输入前
+      description: 输入前触发。可以在这个阶段阻止输入，或者修改输入的值 $event.value
+      advanced: true
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeEvent"
+        - name: $event.oldValue
+          type: string
+          description: 旧的值
+        - name: $event.value
+          type: string
+          description: 输入框的值
+        - name: $event.preventDefault
+          type: Function
+          description: 阻止输入流程
+        - name: senderVM
+          type: UInput
+          description: 发送事件实例
+    - name: input
+      title: 输入时
+      description: 输入时触发。
+      params:
+        - name: $event
+          type: string
+          description: 输入框的值
+          schema:
+            $ref: "#/basicTypes/String"
+        - name: senderVM
+          type: UTextarea
+          description: 发送事件实例
+    - name: change
+      title: 改变后
+      description: 值变化时触发。（注意：与原生事件不同）
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeEvent"
+        - name: $event.value
+          type: string
+          description: 改变后的值
+        - name: $event.oldValue
+          type: string
+          description: 旧的值
+        - name: senderVM
+          type: UTextarea
+          description: 发送事件实例
+    - name: focus
+      title: 聚焦后
+      description: 获得焦点时触发。
+      advanced: true
+      params:
+        - name: $event
+          type: FocusEvent
+          description: 原生事件对象
+          schema:
+            $ref: "#/systemTypes/FocusEvent"
+        - name: senderVM
+          type: UTextarea
+          description: 发送事件实例
+    - name: blur
+      title: 失焦后
+      description: 失去焦点时触发。
+      advanced: true
+      params:
+        - name: $event
+          type: Object
+          title: 原生事件对象
+          description: 原生事件对象
+          schema:
+            $ref: "#/systemTypes/FocusEvent"
+        - name: senderVM
+          title: 发送事件实例
+          type: UTextarea
+          description: 发送事件实例
+    - name: before-clear
+      advanced: true
+      title: 清空前
+      description: 清空前触发。
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeEvent"
+        - name: $event.value
+          type: string
+          description: 清空后的值
+        - name: $event.oldValue
+          type: string
+          description: 待清空的值
+        - name: $event.preventDefault
+          type: Function
+          description: 阻止清空流程
+        - name: senderVM
+          type: UTextarea
+          description: 发送事件实例
+    - name: clear
+      title: 清空后
+      description: 清空时触发。
+      params:
+        - name: $event.value
+          type: string
+          description: 清空后的值
+        - name: $event.oldValue
+          type: string
+          description: 旧的值
+        - name: senderVM
+          type: UTextarea
+          description: 发送事件实例
+  methods:
+    - name: focus
+      description: 让输入框获取焦点。
+      params: []
+      advanced: true
+    - name: blur
+      description: 让输入框失去焦点。
+      params: []
+      advanced: true
+    - name: clear
+      description: 清空输入框。
+      params: []
+      advanced: true

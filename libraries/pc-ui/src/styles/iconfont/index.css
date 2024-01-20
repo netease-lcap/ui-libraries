@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "lcap-ui-icons"; /* Project id 4413348 */
+  src: url('iconfont.eot?t=1705724688104'); /* IE9 */
+  src: url('iconfont.eot?t=1705724688104#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('iconfont.woff2?t=1705724688104') format('woff2'),
+       url('iconfont.woff?t=1705724688104') format('woff'),
+       url('iconfont.ttf?t=1705724688104') format('truetype'),
+       url('iconfont.svg?t=1705724688104#lcap-ui-icons') format('svg');
+}

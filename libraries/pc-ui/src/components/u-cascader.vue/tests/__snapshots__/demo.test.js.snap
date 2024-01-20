@@ -1,0 +1,1384 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`u-cascader.vue > Demo-Placeholder 1`] = `
+<div>
+  <div class="root">
+    <div class="root input" readonly="readonly">
+      <span class="baseline">b</span>
+      <span class="placeholder">placeholder自定义内容</span>
+      <!---->
+      <input class="input" readonly="readonly" type="text">
+      <transition-stub class="popperShape" name="fade">
+        <div class="root" style="display: none;">
+          <div class="root scrollShape" color="light" style="display: inline-block;">
+            <div class="wrap">
+              <div class="view">
+                <nav class="root umenuShape">
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 理学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 工学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                </nav>
+              </div>
+            </div>
+            <div class="root" direction="horizontal">
+              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+            </div>
+            <div class="root" direction="vertical">
+              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <span class="clearable" style="display: none;"></span>
+  </div>
+</div>
+`;
+
+exports[`u-cascader.vue > Demo-field 1`] = `
+<div class="root" direction="horizontal" type vusion-slot-name="default">
+  <div class="root">
+    <div class="root input" readonly="readonly">
+      <span class="baseline">b</span>
+      <span class="placeholder">请选择</span>
+      <!---->
+      <input class="input" readonly="readonly" type="text">
+      <transition-stub class="popperShape" name="fade">
+        <div class="root" style="display: none;">
+          <div class="root scrollShape" color="light" style="display: inline-block;">
+            <div class="wrap">
+              <div class="view">
+                <nav class="root umenuShape">
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 1
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 2
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                </nav>
+              </div>
+            </div>
+            <div class="root" direction="horizontal">
+              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+            </div>
+            <div class="root" direction="vertical">
+              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <span class="clearable" style="display: none;"></span>
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`u-cascader.vue > Demo-size 1`] = `
+<div class="root" direction="vertical" type vusion-slot-name="default">
+  <div class="root" direction="horizontal" type vusion-slot-name="default">
+    <div class="root" height="mini" width="mini">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="root scrollShape" color="light" style="display: inline-block;">
+              <div class="wrap">
+                <div class="view">
+                  <nav class="root umenuShape">
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 理学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 工学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              <div class="root" direction="horizontal">
+                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+              </div>
+              <div class="root" direction="vertical">
+                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <div class="root" height="normal" width="mini">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="root scrollShape" color="light" style="display: inline-block;">
+              <div class="wrap">
+                <div class="view">
+                  <nav class="root umenuShape">
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 理学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 工学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              <div class="root" direction="horizontal">
+                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+              </div>
+              <div class="root" direction="vertical">
+                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <div class="root" height="medium" width="mini">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="root scrollShape" color="light" style="display: inline-block;">
+              <div class="wrap">
+                <div class="view">
+                  <nav class="root umenuShape">
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 理学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 工学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              <div class="root" direction="horizontal">
+                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+              </div>
+              <div class="root" direction="vertical">
+                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <!---->
+    <!---->
+  </div>
+  <div class="root" direction="horizontal" type vusion-slot-name="default">
+    <div class="root" height="mini" width="small">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="root scrollShape" color="light" style="display: inline-block;">
+              <div class="wrap">
+                <div class="view">
+                  <nav class="root umenuShape">
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 理学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 工学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              <div class="root" direction="horizontal">
+                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+              </div>
+              <div class="root" direction="vertical">
+                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <div class="root" height="normal" width="small">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="root scrollShape" color="light" style="display: inline-block;">
+              <div class="wrap">
+                <div class="view">
+                  <nav class="root umenuShape">
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 理学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 工学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              <div class="root" direction="horizontal">
+                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+              </div>
+              <div class="root" direction="vertical">
+                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <div class="root" height="medium" width="small">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="root scrollShape" color="light" style="display: inline-block;">
+              <div class="wrap">
+                <div class="view">
+                  <nav class="root umenuShape">
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 理学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 工学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              <div class="root" direction="horizontal">
+                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+              </div>
+              <div class="root" direction="vertical">
+                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <!---->
+    <!---->
+  </div>
+  <div class="root" direction="horizontal" type vusion-slot-name="default">
+    <div class="root" height="mini" width="medium">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="root scrollShape" color="light" style="display: inline-block;">
+              <div class="wrap">
+                <div class="view">
+                  <nav class="root umenuShape">
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 理学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 工学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              <div class="root" direction="horizontal">
+                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+              </div>
+              <div class="root" direction="vertical">
+                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <div class="root" height="normal" width="medium">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="root scrollShape" color="light" style="display: inline-block;">
+              <div class="wrap">
+                <div class="view">
+                  <nav class="root umenuShape">
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 理学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 工学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              <div class="root" direction="horizontal">
+                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+              </div>
+              <div class="root" direction="vertical">
+                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <div class="root" height="medium" width="medium">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="root scrollShape" color="light" style="display: inline-block;">
+              <div class="wrap">
+                <div class="view">
+                  <nav class="root umenuShape">
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 理学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 工学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              <div class="root" direction="horizontal">
+                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+              </div>
+              <div class="root" direction="vertical">
+                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <!---->
+    <!---->
+  </div>
+  <div class="root" direction="horizontal" type vusion-slot-name="default">
+    <div class="root" height="large" width="large">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="root scrollShape" color="light" style="display: inline-block;">
+              <div class="wrap">
+                <div class="view">
+                  <nav class="root umenuShape">
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 理学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 工学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              <div class="root" direction="horizontal">
+                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+              </div>
+              <div class="root" direction="vertical">
+                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <div class="root" height="huge" width="huge">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="root scrollShape" color="light" style="display: inline-block;">
+              <div class="wrap">
+                <div class="view">
+                  <nav class="root umenuShape">
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 理学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 工学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              <div class="root" direction="horizontal">
+                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+              </div>
+              <div class="root" direction="vertical">
+                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <div class="root" height="full" width="full">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="root scrollShape" color="light" style="display: inline-block;">
+              <div class="wrap">
+                <div class="view">
+                  <nav class="root umenuShape">
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 理学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                    <a class="root select_item" target="_self">
+                      <span vusion-slot-name-edit="text"> 工学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              <div class="root" direction="horizontal">
+                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+              </div>
+              <div class="root" direction="vertical">
+                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <!---->
+    <!---->
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`u-cascader.vue > Demo-仅显示最后一级 1`] = `
+<div class="root" direction="horizontal" type vusion-slot-name="default">
+  <div class="root">
+    <div class="root input" readonly="readonly">
+      <span class="baseline">b</span>
+      <span class="placeholder">请选择</span>
+      <!---->
+      <input class="input" readonly="readonly" type="text">
+      <transition-stub class="popperShape" name="fade">
+        <div class="root" style="display: none;">
+          <div class="root scrollShape" color="light" style="display: inline-block;">
+            <div class="wrap">
+              <div class="view">
+                <nav class="root umenuShape">
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 理学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 工学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                </nav>
+              </div>
+            </div>
+            <div class="root" direction="horizontal">
+              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+            </div>
+            <div class="root" direction="vertical">
+              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <span class="clearable" style="display: none;"></span>
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`u-cascader.vue > Demo-动态加载 1`] = `
+<div class="root" direction="horizontal" type vusion-slot-name="default">
+  <div class="root">
+    <div class="root input" readonly="readonly">
+      <span class="baseline">b</span>
+      <span class="placeholder">请选择</span>
+      <!---->
+      <input class="input" readonly="readonly" type="text">
+      <transition-stub class="popperShape" name="fade">
+        <div class="root" style="display: none;">
+          <div class="root scrollShape" color="light" style="display: inline-block;">
+            <div class="wrap">
+              <div class="view">
+                <nav class="root umenuShape"></nav>
+              </div>
+            </div>
+            <div class="root" direction="horizontal">
+              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+            </div>
+            <div class="root" direction="vertical">
+              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <span class="clearable" style="display: none;"></span>
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`u-cascader.vue > Demo-双向绑定 1`] = `
+<div class="root" direction="horizontal" type vusion-slot-name="default">
+  <div class="root">
+    <div class="root input" readonly="readonly">
+      <span class="baseline">b</span>
+      <span class="placeholder">请选择</span>
+      <!---->
+      <input class="input" readonly="readonly" type="text">
+      <transition-stub class="popperShape" name="fade">
+        <div class="root" style="display: none;">
+          <div class="root scrollShape" color="light" style="display: inline-block;">
+            <div class="wrap">
+              <div class="view">
+                <nav class="root umenuShape">
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 理学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 工学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                </nav>
+              </div>
+            </div>
+            <div class="root" direction="horizontal">
+              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+            </div>
+            <div class="root" direction="vertical">
+              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <span class="clearable" style="display: none;"></span>
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`u-cascader.vue > Demo-可清空 1`] = `
+<div class="root" direction="horizontal" type vusion-slot-name="default">
+  <div class="root">
+    <div class="root input" readonly="readonly">
+      <span class="baseline">b</span>
+      <span class="placeholder">请选择</span>
+      <!---->
+      <input class="input" readonly="readonly" type="text">
+      <transition-stub class="popperShape" name="fade">
+        <div class="root" style="display: none;">
+          <div class="root scrollShape" color="light" style="display: inline-block;">
+            <div class="wrap">
+              <div class="view">
+                <nav class="root umenuShape">
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 理学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 工学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                </nav>
+              </div>
+            </div>
+            <div class="root" direction="horizontal">
+              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+            </div>
+            <div class="root" direction="vertical">
+              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <span class="clearable" style="display: none;"></span>
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`u-cascader.vue > Demo-基本用法 1`] = `
+<div class="root">
+  <div class="root input" readonly="readonly">
+    <span class="baseline">b</span>
+    <span class="placeholder">请选择</span>
+    <!---->
+    <input class="input" readonly="readonly" type="text">
+    <transition-stub class="popperShape" name="fade">
+      <div class="root" style="display: none;">
+        <div class="root scrollShape" color="light" style="display: inline-block;">
+          <div class="wrap">
+            <div class="view">
+              <nav class="root umenuShape">
+                <a class="root select_item" has-sub="true" target="_self">
+                  <span vusion-slot-name-edit="text"> 理学
+                    <!---->
+                  </span>
+                  <div class="sub"></div>
+                </a>
+                <a class="root select_item" has-sub="true" target="_self">
+                  <span vusion-slot-name-edit="text"> 工学
+                    <!---->
+                  </span>
+                  <div class="sub"></div>
+                </a>
+              </nav>
+            </div>
+          </div>
+          <div class="root" direction="horizontal">
+            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+          </div>
+          <div class="root" direction="vertical">
+            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+          </div>
+        </div>
+      </div>
+    </transition-stub>
+    <!---->
+  </div>
+  <span class="clearable" style="display: none;"></span>
+</div>
+`;
+
+exports[`u-cascader.vue > Demo-基本用法 2`] = `
+<div>
+  <div class="root">
+    <div class="root input" readonly="readonly">
+      <span class="baseline">b</span>
+      <span class="placeholder">请选择</span>
+      <!---->
+      <input class="input" readonly="readonly" type="text">
+      <transition-stub class="popperShape" name="fade">
+        <div class="root" style="display: none;">
+          <div class="root scrollShape" color="light" style="display: inline-block;">
+            <div class="wrap">
+              <div class="view">
+                <nav class="root umenuShape">
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 理学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 工学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                </nav>
+              </div>
+            </div>
+            <div class="root" direction="horizontal">
+              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+            </div>
+            <div class="root" direction="vertical">
+              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <span class="clearable" style="display: none;"></span>
+  </div>
+</div>
+`;
+
+exports[`u-cascader.vue > Demo-数据源开启搜索 1`] = `
+<div class="root" direction="vertical" type vusion-slot-name="default">
+  <div class="root" direction="horizontal" type vusion-slot-name="default">
+    <div class="root">
+      <div class="root input">
+        <span class="baseline">b</span>
+        <span class="placeholder"></span>
+        <!---->
+        <input class="input" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="loading">
+              <div class="root">
+                <div class="rotate">
+                  <span class="lcp-iconv icon">
+                    <span class="iconwrap">
+                      <svg aria-hidden="true" class="iconsvg">
+                        <use xlink:href="#pc-loading" />
+                      </svg>
+                    </span>
+                    <div class="icontext" vusion-slot-name="default">
+                      <!---->
+                    </div>
+                  </span>
+                </div>
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+      <!---->
+      click reload
+      <!---->
+    </a>
+    <!---->
+    <!---->
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`u-cascader.vue > Demo-数据源改造 1`] = `
+<div class="root" direction="vertical" type vusion-slot-name="default">
+  <div class="root" direction="horizontal" type vusion-slot-name="default">
+    <div class="root">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="root scrollShape" color="light" style="display: inline-block;">
+              <div class="wrap">
+                <div class="view">
+                  <nav class="root umenuShape">
+                    <a class="root select_item" has-sub="true" target="_self">
+                      <span vusion-slot-name-edit="text"> 理学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                    <a class="root select_item" has-sub="true" target="_self">
+                      <span vusion-slot-name-edit="text"> 工学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              <div class="root" direction="horizontal">
+                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+              </div>
+              <div class="root" direction="vertical">
+                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <!---->
+    <!---->
+  </div>
+  <div class="root" direction="horizontal" type vusion-slot-name="default">
+    <div class="root">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="root scrollShape" color="light" style="display: inline-block;">
+              <div class="wrap">
+                <div class="view">
+                  <nav class="root umenuShape">
+                    <a class="root select_item" has-sub="true" target="_self">
+                      <span vusion-slot-name-edit="text"> 理学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                    <a class="root select_item" has-sub="true" target="_self">
+                      <span vusion-slot-name-edit="text"> 工学
+                        <!---->
+                      </span>
+                      <div class="sub"></div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              <div class="root" direction="horizontal">
+                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+              </div>
+              <div class="root" direction="vertical">
+                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <!---->
+    <!---->
+  </div>
+  <div class="root" direction="horizontal" type vusion-slot-name="default">
+    <div class="root">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder"></span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="loading">
+              <div class="root">
+                <div class="rotate">
+                  <span class="lcp-iconv icon">
+                    <span class="iconwrap">
+                      <svg aria-hidden="true" class="iconsvg">
+                        <use xlink:href="#pc-loading" />
+                      </svg>
+                    </span>
+                    <div class="icontext" vusion-slot-name="default">
+                      <!---->
+                    </div>
+                  </span>
+                </div>
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <!---->
+    <!---->
+  </div>
+  <div class="root" direction="horizontal" type vusion-slot-name="default">
+    <div class="root">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder">请选择</span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="loading">
+              <div class="root">
+                <div class="rotate">
+                  <span class="lcp-iconv icon">
+                    <span class="iconwrap">
+                      <svg aria-hidden="true" class="iconsvg">
+                        <use xlink:href="#pc-loading" />
+                      </svg>
+                    </span>
+                    <div class="icontext" vusion-slot-name="default">
+                      <!---->
+                    </div>
+                  </span>
+                </div>
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <!---->
+    <!---->
+  </div>
+  <div class="root" direction="horizontal" type vusion-slot-name="default">
+    <div class="root">
+      <div class="root input" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder"></span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popperShape" name="fade">
+          <div class="root" style="display: none;">
+            <div class="loading">
+              <div class="root">
+                <div class="rotate">
+                  <span class="lcp-iconv icon">
+                    <span class="iconwrap">
+                      <svg aria-hidden="true" class="iconsvg">
+                        <use xlink:href="#pc-loading" />
+                      </svg>
+                    </span>
+                    <div class="icontext" vusion-slot-name="default">
+                      <!---->
+                    </div>
+                  </span>
+                </div>
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <span class="clearable" style="display: none;"></span>
+    </div>
+    <!---->
+    <!---->
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`u-cascader.vue > Demo-禁用某项 1`] = `
+<div class="root" direction="horizontal" type vusion-slot-name="default">
+  <div class="root" disabled="disabled">
+    <div class="root input" disabled="disabled" readonly="readonly">
+      <span class="baseline">b</span>
+      <span class="placeholder">请选择</span>
+      <!---->
+      <input class="input" disabled="disabled" readonly="readonly" type="text">
+      <!---->
+    </div>
+    <span class="clearable" style="display: none;"></span>
+  </div>
+  <div class="root">
+    <div class="root input" readonly="readonly">
+      <span class="baseline">b</span>
+      <span class="placeholder">请选择</span>
+      <!---->
+      <input class="input" readonly="readonly" type="text">
+      <transition-stub class="popperShape" name="fade">
+        <div class="root" style="display: none;">
+          <div class="root scrollShape" color="light" style="display: inline-block;">
+            <div class="wrap">
+              <div class="view">
+                <nav class="root umenuShape">
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 理学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 工学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                </nav>
+              </div>
+            </div>
+            <div class="root" direction="horizontal">
+              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+            </div>
+            <div class="root" direction="vertical">
+              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <span class="clearable" style="display: none;"></span>
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`u-cascader.vue > Demo-级联间连接字符 1`] = `
+<div class="root" direction="horizontal" type vusion-slot-name="default">
+  <div class="root">
+    <div class="root input" readonly="readonly">
+      <span class="baseline">b</span>
+      <span class="placeholder">请选择</span>
+      <!---->
+      <input class="input" readonly="readonly" type="text">
+      <transition-stub class="popperShape" name="fade">
+        <div class="root" style="display: none;">
+          <div class="root scrollShape" color="light" style="display: inline-block;">
+            <div class="wrap">
+              <div class="view">
+                <nav class="root umenuShape">
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 理学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 工学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                </nav>
+              </div>
+            </div>
+            <div class="root" direction="horizontal">
+              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+            </div>
+            <div class="root" direction="vertical">
+              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <span class="clearable" style="display: none;"></span>
+  </div>
+  <div class="root">
+    <div class="root input" readonly="readonly">
+      <span class="baseline">b</span>
+      <span class="placeholder">请选择</span>
+      <!---->
+      <input class="input" readonly="readonly" type="text">
+      <transition-stub class="popperShape" name="fade">
+        <div class="root" style="display: none;">
+          <div class="root scrollShape" color="light" style="display: inline-block;">
+            <div class="wrap">
+              <div class="view">
+                <nav class="root umenuShape">
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 理学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 工学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                </nav>
+              </div>
+            </div>
+            <div class="root" direction="horizontal">
+              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+            </div>
+            <div class="root" direction="vertical">
+              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <span class="clearable" style="display: none;"></span>
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`u-cascader.vue > Demo-触发方式 1`] = `
+<div class="root" direction="horizontal" type vusion-slot-name="default">
+  <div class="root">
+    <div class="root input" readonly="readonly">
+      <span class="baseline">b</span>
+      <span class="placeholder">默认click点击触发</span>
+      <!---->
+      <input class="input" readonly="readonly" type="text">
+      <transition-stub class="popperShape" name="fade">
+        <div class="root" style="display: none;">
+          <div class="root scrollShape" color="light" style="display: inline-block;">
+            <div class="wrap">
+              <div class="view">
+                <nav class="root umenuShape">
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 理学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 工学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                </nav>
+              </div>
+            </div>
+            <div class="root" direction="horizontal">
+              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+            </div>
+            <div class="root" direction="vertical">
+              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <span class="clearable" style="display: none;"></span>
+  </div>
+  <div class="root">
+    <div class="root input" readonly="readonly">
+      <span class="baseline">b</span>
+      <span class="placeholder">hover悬浮触发</span>
+      <!---->
+      <input class="input" readonly="readonly" type="text">
+      <transition-stub class="popperShape" name="fade">
+        <div class="root" style="display: none;">
+          <div class="root scrollShape" color="light" style="display: inline-block;">
+            <div class="wrap">
+              <div class="view">
+                <nav class="root umenuShape">
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 理学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 工学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                </nav>
+              </div>
+            </div>
+            <div class="root" direction="horizontal">
+              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+            </div>
+            <div class="root" direction="vertical">
+              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <span class="clearable" style="display: none;"></span>
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`u-cascader.vue > Demo-过滤（可搜索） 1`] = `
+<div class="root" direction="horizontal" type vusion-slot-name="default">
+  <div class="root">
+    <div class="root input">
+      <span class="baseline">b</span>
+      <span class="placeholder">请选择</span>
+      <!---->
+      <input class="input" type="text">
+      <transition-stub class="popperShape" name="fade">
+        <div class="root" style="display: none;">
+          <div class="root scrollShape" color="light" style="display: inline-block;">
+            <div class="wrap">
+              <div class="view">
+                <nav class="root umenuShape">
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 理学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                  <a class="root select_item" has-sub="true" target="_self">
+                    <span vusion-slot-name-edit="text"> 工学
+                      <!---->
+                    </span>
+                    <div class="sub"></div>
+                  </a>
+                </nav>
+              </div>
+            </div>
+            <div class="root" direction="horizontal">
+              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+            </div>
+            <div class="root" direction="vertical">
+              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <span class="clearable" style="display: none;"></span>
+  </div>
+  <!---->
+  <!---->
+</div>
+`;

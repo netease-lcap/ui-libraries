@@ -1,0 +1,271 @@
+<template>
+<div :class="$style.root">
+    <div :class="$style.body" name="realpostion">
+        <u-loading v-if="loading" size="small"></u-loading>
+        <u-carousel-item
+            v-for="(node, index) in currentDataSource.data"
+            dataSource="true"
+            :index="index"
+            :key="index"
+            :designer="$env.VUE_APP_DESIGNER"
+            :node="node"
+        >
+            <template #item="item">
+                <slot name="item" v-bind="item" :index="index">
+                    {{ $at(node, textField) }}
+                </slot>
+            </template>
+        </u-carousel-item>
+        <template v-if="$env.VUE_APP_DESIGNER && !dataSource && !$slots.default">
+            <span :class="$style.loadContent">{{ treeSelectTip }}</span>
+        </template>
+        <slot></slot>
+    </div>
+    <nav :class="$style.nav" v-if="$env.VUE_APP_DESIGNER">
+        <a :class="$style['nav-item']"
+            v-for="(itemVM, index) in itemVMs"
+            :title="itemVM.title"
+            :vusion-index="index"
+            findname="realpostion"
+            :selected="router ? itemVM.active : itemVM === selectedVM"
+            @click="select(itemVM)">
+        </a>
+    </nav>
+    <nav :class="$style.nav" v-else>
+        <a :class="$style['nav-item']"
+            v-for="itemVM in itemVMs"
+            :title="itemVM.title"
+            :selected="router ? itemVM.active : itemVM === selectedVM"
+            @click="select(itemVM)">
+        </a>
+    </nav>
+    <div v-show="!hideButtons && !(!loop && selectedIndex === 0)" :class="$style.button" findname="realpostion" :vusion-index="selectedIndex" role="prev" @click="prev()"></div>
+    <div v-show="!hideButtons && !(!loop && selectedIndex === itemVMs.length - 1)" :class="$style.button"  findname="realpostion" :vusion-index="selectedIndex" role="next" @click="next()"></div>
+</div>
+</template>
+
+<script>
+import { MSinglex } from '../m-singlex.vue';
+import SupportDataSource  from '../../mixins/support.datasource.js';
+import UCarouselItem from './item.vue';
+
+export default {
+    name: 'u-carousel',
+    childName: 'u-carousel-item',
+    extends: MSinglex,
+    mixins: [SupportDataSource],
+    components: {
+        UCarouselItem,
+    },
+    props: {
+        autoSelect: { type: Boolean, default: true },
+        value: null,
+        autoplay: { type: Boolean, default: true }, // Same with <video>
+        loop: { type: Boolean, default: true },
+        interval: {
+            type: Number,
+            default: 4000,
+            validator: (value) => Number.isInteger(value) && value >= 0,
+        },
+        direction: { type: String, default: 'right' },
+        animation: {
+            type: String,
+            default: 'fade',
+        }, // duration: { type: Number, default: 1000, validator: (value) => Number.isInteger(value) && value >= 0 },
+        router: { type: Boolean, default: false },
+        hideButtons: { type: Boolean, default: false },
+    },
+    data() {
+        return { animating: true };
+    },
+    computed: {
+        selectedIndex: {
+            get() {
+                return this.itemVMs.indexOf(this.selectedVM);
+            },
+            set(index) {
+                this.selectedVM = this.itemVMs[index];
+            },
+        },
+    },
+    watch: {
+        autoplay(value) {
+            if(value) this.next();
+            else clearTimeout(this.timer);
+        },
+    },
+    created() {
+        this.$on('select', ($event) => {
+            clearTimeout(this.timer);
+            this.router && $event.itemVM.navigate();
+            this.play();
+        });
+    },
+    mounted() {
+        this.play();
+    },
+    destroyed() {
+        clearTimeout(this.timer);
+    },
+    methods: {
+        prev() {
+            clearTimeout(this.timer);
+            const length = this.itemVMs.length;
+            this.selectedIndex = (this.selectedIndex - 1 + length) % length;
+            this.play();
+        },
+        next() {
+            clearTimeout(this.timer);
+            const length = this.itemVMs.length;
+            const index = this.selectedIndex + 1;
+
+            if (!this.loop && index >= length)
+                return;
+            this.selectedIndex = index % length;
+
+            this.play();
+        },
+        play() {
+            // 可视化的展示去掉动态播放
+            if (this.$env.VUE_APP_DESIGNER) {
+                clearTimeout(this.timer);
+                return;
+            }
+            if (!this.autoplay)
+                return;
+            this.timer = setTimeout(() => {
+                this.next();
+            }, this.interval);
+        },
+    },
+};
+</script>
+
+<style module>
+.root {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    width: var(--carousel-width);
+    height: var(--carousel-height);
+    min-width: 350px;
+}
+
+.body {
+    width: 100%;
+    height: 100%;
+}
+
+.nav {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: var(--carousel-nav-bottom);
+    text-align: center;
+}
+
+.nav-item {
+    display: inline-block;
+    cursor: var(--cursor-pointer);
+    box-sizing: content-box;
+    width: var(--carousel-nav-item-width);
+    height: var(--carousel-nav-item-height);
+    padding: var(--carousel-nav-item-padding);
+    margin-right: 4px;
+    background: var(--carousel-nav-item-background);
+}
+
+.nav-item:hover {
+    background: var(--carousel-nav-item-background-hover);
+}
+
+.nav-item[selected] {
+    width: 20px;
+    background: var(--carousel-nav-item-background-hover);
+}
+
+.nav-item {
+    background-clip: content-box;
+}
+
+.button {
+    position: absolute;
+    z-index: 100;
+    font-size: var(--carousel-button-font-size);
+    font-weight: var(--font-weight-bold);
+    color: var(--carousel-button-color);
+    transition: var(--carousel-button-transition);
+    top: 50%;
+    transform: translateY(calc(-50%));
+    display: none;
+}
+.root:hover .button {
+    display: block;
+}
+.button:hover {
+    color: var(--carousel-button-color-hover);
+    background: var(--carousel-button-background-hover);
+}
+
+.button[role='prev'], .button[role='next']{
+    width: calc(var(--carousel-button-font-size)*2);
+    height: calc(var(--carousel-button-font-size)*2);
+    border-radius: var(--carousel-button-font-size);
+    background: var(--carousel-button-background);
+}
+
+.button[role='prev'] {
+    left: var(--carousel-button-space);
+}
+
+.button[role='prev']::before {
+content: "\e675";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    position: absolute;
+    height: var(--carousel-button-font-size);
+    top: 36%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+}
+
+.button[role='next'] {
+    right: var(--carousel-button-space);
+}
+
+.button[role='next']::before {
+content: "\e664";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    position: absolute;
+    height: var(--carousel-button-font-size);
+    top: 36%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+}
+
+.root .loadContent {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+</style>

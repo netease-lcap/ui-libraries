@@ -1,0 +1,141 @@
+- name: u-switch
+  title: 开关
+  labels:
+    - Form
+  icon: switch
+  attrs:
+    - name: value
+      title: 值
+      type: boolean
+      sync: true
+      model: true
+      default: false
+      description: 标识开关状态的值
+      group: 数据属性
+      brifeDoc: ""
+      docDescription: 开关状态，返还true或者false。
+      tooltipLink: ""
+    - name: with-text
+      title: 显示开关文字
+      type: boolean
+      default: false
+      description: 是否显示开关`ON`和`OFF`文字
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 设置开关是否显示开关`ON`和`OFF`文字。
+      tooltipLink: ""
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+      brifeDoc: ""
+      docDescription: 正常显示，但禁止选择或输入。
+      tooltipLink: ""
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+      brifeDoc: ""
+      docDescription: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      tooltipLink: ""
+  slots: false
+  events:
+    - name: before-toggle
+      title: 切换状态前
+      description: 切换开关状态前触发
+      advanced: true
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeEvent"
+        - name: $event.value
+          type: boolean
+          description: 开关状态
+        - name: $event.oldValue
+          type: boolean
+          description: 旧的开关状态
+        - name: $event.preventDefault
+          type: Function
+          description: 阻止切换流程
+        - name: senderVM
+          type: USwitch
+          description: 发送事件实例
+    - name: input
+      title: 输入时
+      description: 切换开关状态时触发
+      params:
+        - name: $event
+          type: boolean
+          description: 切换后的开关状态
+          schema:
+            $ref: "#/basicTypes/Boolean"
+        - name: senderVM
+          type: USwitch
+          description: 发送事件实例
+    - name: on
+      title: 打开时
+      description: 开关打开时触发
+      params:
+        - name: $event
+          type: ""
+          description: 无
+          schema:
+            $ref: "#/basicTypes/Boolean"
+        - name: senderVM
+          type: USwitch
+          description: 发送事件实例
+    - name: off
+      title: 关闭时
+      description: 开关关闭时触发
+      params:
+        - name: $event
+          type: ""
+          description: 无
+          schema:
+            $ref: "#/basicTypes/Boolean"
+        - name: senderVM
+          type: USwitch
+          description: 发送事件实例
+    - name: toggle
+      title: 切换状态后
+      description: 切换开关状态时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/CollapseEvent"
+        - name: $event.value
+          type: boolean
+          description: 开关状态
+        - name: $event.oldValue
+          type: boolean
+          description: 旧的开关状态
+        - name: senderVM
+          type: USwitch
+          description: 发送事件实例
+    - name: change
+      title: 改变后
+      description: 开关状态改变时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/CollapseEvent"
+        - name: $event.value
+          type: boolean
+          description: 开关状态
+        - name: $event.oldValue
+          type: boolean
+          description: 旧的开关状态
+        - name: senderVM
+          type: USwitch
+          description: 发送事件实例
+  description: 开关

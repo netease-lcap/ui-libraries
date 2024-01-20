@@ -1,0 +1,380 @@
+<template>
+<transition-group tag="div" :class="$style.root" :position="position"
+    move-class="animate__move"
+    enter-active-class="animate__animated animate__fadeInUpSmall"
+    leave-active-class="animate__animated animate__fadeOutUpSmall fast animate__list-leave-active">
+    <div v-for="item in items" :key="item.timestamp" :class="$style['item-wrap']" :style="item.staticStyle || {}">
+        <div v-if="item.color === 'custom'" :class="$style.item" :position="position">
+            <div v-if="item.customIcon" :class="$style.customIcon">
+                <i-ico :name="item.customIcon"></i-ico>
+            </div>
+
+            <slot :item="item">{{ item.text }}</slot>
+            <a :class="$style.close" v-if="closable" @click="close(item)"></a>
+        </div>
+        <div v-else :class="$style.item" :color="item.color" :position="position">
+            <slot :item="item">{{ item.text }}</slot>
+            <a :class="$style.close" v-if="closable" @click="close(item)"></a>
+        </div>
+    </div>
+</transition-group>
+</template>
+
+<script>
+export default {
+    name: 'u-toast',
+    props: {
+        position: { type: String, default: 'top-center' },
+        single: { type: Boolean, default: false },
+        maxCount: { type: Number, default: 3 },
+        duration: { type: Number, default: 3000 },
+        color: { type: String },
+        text: String,
+        closable: { type: Boolean, default: false },
+
+        customIcon: { type: String },
+    },
+    data() {
+        return {
+            items: [],
+            itemsQueue: new Map(),
+
+            events: new Map(),
+        };
+    },
+    watch: {
+        text(newValue, oldValue) {
+            this.items.some((item, index) => {
+                if (item.text === oldValue) {
+                    item.text = newValue;
+                    return true;
+                }
+                return false;
+            });
+        },
+    },
+    mounted() {
+        if (this.position !== 'static') {
+            const container = window.LcapMicro && window.LcapMicro.appendTo ? window.LcapMicro.appendTo : document.body;
+            container.appendChild(this.$el);
+        }
+    },
+    destroyed() {
+        if (this.position !== 'static') {
+            const container = window.LcapMicro && window.LcapMicro.appendTo ? window.LcapMicro.appendTo : document.body;
+            container.removeChild(this.$el);
+        }
+    },
+    methods: {
+        show(text, duration, color) {
+            if (!this.$el)
+                this.$mount(document.createElement('div')); // Vue 加载完成后，触发某一事件后，先执行methods，再执行watch方法，会导致标签显示异常
+            this.$nextTick(() => {
+                this.open({
+                    text: String(text !== undefined ? text : (this.text || '')),
+                    color,
+                    duration: duration === undefined ? this.duration : duration,
+                    timestamp: +new Date(),
+                });
+            });
+        },
+        open(item) {
+            let maxCount = this.maxCount;
+            if (this.single)
+                maxCount = 1;
+            if (this.items.length >= maxCount)
+                this.close(this.items[0]);
+
+            this.items.push(item);
+            if (item.duration || item.duration === Infinity) {
+                setTimeout(() => {
+                    this.close(item);
+                }, item.duration);
+            }
+            this.$emit('open', item, this);
+            // 获取到当前key
+            const event = this.events.get(item.key);
+            if (event && event.onShow) {
+                event.onShow(item);
+            }
+        },
+        close(item) {
+            const index = this.items.indexOf(item);
+            if (!~index)
+                return;
+
+            let cancel = false;
+            this.$emit(
+                'before-close',
+                Object.assign({ preventDefault: () => (cancel = true) }, item),
+                this,
+            );
+            if (cancel)
+                return;
+            this.items.splice(index, 1);
+            this.$emit('close', item, this);
+
+            const event = this.events.get(item.key);
+            if (event && event.onHide) {
+                event.onHide(item);
+            }
+        },
+        /**
+         * @method closeAll() 关闭所有消息
+         * @return {void}
+         */
+        closeAll() {
+            this.items = [];
+        },
+        success(text, duration) {
+            this.show(text, duration, 'success');
+        },
+        warning(text, duration) {
+            this.show(text, duration, 'warning');
+        },
+        info(text, duration) {
+            this.show(text, duration, 'info');
+        },
+        error(text, duration) {
+            this.show(text, duration, 'error');
+        },
+
+        openToast(config) {
+            const { key, text, color, duration, customIcon, onShow, onHide, staticStyle } = config;
+
+            if (!this.$el)
+                this.$mount(document.createElement('div')); // Vue 加载完成后，触发某一事件后，先执行methods，再执行watch方法，会导致标签显示异常
+            this.$nextTick(() => {
+                this.events.set(key, {
+                    onShow,
+                    onHide,
+                });
+
+                this.open({
+                    key,
+                    text,
+                    color,
+                    duration,
+                    customIcon,
+                    timestamp: +new Date(),
+
+                    staticStyle,
+                });
+            });
+        },
+        closeToast(key) {
+            const target = this.items.find((item) => item.key === key);
+            this.close(target);
+        },
+    },
+    install(Vue, id) {
+        const Ctor = Vue.component(id);
+        if (!Ctor)
+            return;
+        const toast = (Vue.prototype.$toast = this.toast = new Ctor());
+        const METHODS = [
+            'show',
+            'closeAll',
+            'success',
+            'warning',
+            'info',
+            'error',
+        ];
+        METHODS.forEach((method) => (this[method] = toast[method].bind(toast)));
+    },
+};
+</script>
+
+<style module>
+.root {
+    position: fixed;
+    z-index: var(--z-index-toast);
+    top: var(--toast-top);
+    left: var(--toast-margin);
+    pointer-events: none;
+    word-break: break-all;
+}
+
+.root[position='top-center'], .root[position='bottom-center'] {
+    margin: 0 auto;
+    width: 0;
+    left: 0;
+    right: 0;
+}
+
+.root[position='bottom-center'], .root[position='bottom-left'], .root[position='bottom-right'] {
+    top: auto;
+    bottom: var(--toast-margin);
+}
+
+.root[position='top-right'], .root[position='bottom-right'] {
+    text-align: right;
+    left: auto;
+    right: var(--toast-margin);
+}
+
+.root[position='top-left'], .root[position='bottom-left'] {
+    text-align: left;
+    left: var(--toast-margin);
+    right: auto;
+}
+
+.root[position='top-left'], .root[position='top-center'], .root[position='top-right'] {
+    top: var(--toast-top);
+    bottom: auto;
+}
+
+.root[position="static"] {
+    position: static;
+    width: auto;
+}
+
+.item-wrap {
+    display: block;
+    width: 2000px;
+}
+
+.leave {
+    position: absolute;
+}
+
+.item {
+    display: inline-block;
+    pointer-events: all;
+    max-width: var(--toast-max-width);
+    margin-bottom: var(--toast-item-space);
+    padding: var(--toast-item-padding);
+    background: var(--toast-background-color);
+    color: var(--toast-item-color);
+    border-radius: var(--toast-item-border-radius);
+    text-align: var(--toast-item-icon-text-align);
+}
+
+.item[position='top-center'], .item[position='bottom-center'] {
+    transform: translateX(-50%);
+}
+
+.close {
+    float: right;
+    margin-left: 8px;
+    color: var(--toast-close-color);
+}
+
+.close::before {
+    content: '\00d7';
+    font-size: var(--toast-close-font-size);
+    line-height: 0.8;
+}
+
+.item::before {
+    /* background: radial-gradient(circle, #fff 45%, transparent 45%); */
+    font-size: var(--toast-item-icon-font-size);
+    vertical-align: var(--toast-item-icon-vertical-align);
+    margin-right: var(--toast-item-icon-margin-right);
+}
+.item[color="info"]::before {
+content: "\e67e";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    color: var(--toast-item-icon-color-info);
+}
+.item[color="success"]::before {
+content: "\e667";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    color: var(--toast-item-icon-color-success);
+    /* background: #00a65a;
+    color: white; */
+}
+.item[color="warning"]::before {
+content: "\e655";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    color: var(--toast-item-icon-color-warning);
+    /* background: #f39c12;
+    color: white; */
+}
+.item[color="error"]::before {
+content: "\e659";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    color: var(--toast-item-icon-color-error);
+    /* background: #dd4b39;
+    color: white; */
+}
+
+.item[color="loading"]::before {
+content: "\e64d";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    color: var(--toast-item-icon-color-info);
+    /* background: #dd4b39;
+    color: white; */
+
+    animation: circle 1s linear 0s infinite both;
+}
+
+@keyframes circle {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.item[color][class][class] {
+    padding: 9px 16px 9px 40px;
+}
+.item[color][class][class]::before {
+    position: absolute;
+    top: var(--toast-item-icon-top);
+    left: 16px;
+}
+
+.customIcon {
+    display: inline-block;
+    margin-right: var(--toast-item-icon-margin-right);
+    color: var(--toast-item-custom-icon-color);;
+}
+</style>

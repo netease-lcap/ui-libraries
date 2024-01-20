@@ -1,0 +1,101 @@
+- name: u-steps
+  title: 步骤条
+  labels:
+    - 块级展示
+  attrs:
+    - name: value
+      title: 值
+      type: number
+      sync: true
+      model: true
+      default: 0
+      description: 当前步骤数
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      description: 是否只读。非只读的情况下可以选择
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 是否禁用
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<u-step>`子组件。
+  events:
+    - name: before-select
+      title: 选择前
+      description: 选择某一步骤前触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeItemEvent"
+        - name: $event.value
+          type: any
+          description: 选中步骤的值
+        - name: $event.oldValue
+          type: any
+          description: 旧的值
+        - name: $event.itemVM
+          type: UStep
+          description: 选中步骤实例
+        - name: $event.oldVM
+          type: UStep
+          description: 旧的选中步骤实例
+        - name: $event.preventDefault
+          type: Function
+          description: 阻止选择流程
+        - name: senderVM
+          type: USteps
+          description: 发送事件实例
+    - name: select
+      title: 选择后
+      description: 选择某一步骤时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeItemEvent"
+        - name: $event.value
+          type: any
+          description: 选中步骤的值
+        - name: $event.oldValue
+          type: any
+          description: 旧的值
+        - name: $event.itemVM
+          type: UStep
+          description: 选中步骤实例
+        - name: $event.oldVM
+          type: UStep
+          description: 旧的选中步骤实例
+        - name: senderVM
+          type: USteps
+          description: 发送事件实例
+- name: u-step
+  is-sub: true
+  attrs:
+    - name: icon
+      title: 图标
+      type: icon
+      default: ""
+      description: "在该步骤展示的图标"
+    - name: title
+      title: 标题
+      type: string
+      description: 步骤名
+    - name: disabled
+      type: boolean
+      default: false
+      description: 是否禁用此标签页
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入文本或 HTML
+    - concept: Slot
+      name: title
+      description: 自定义标题文本

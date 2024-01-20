@@ -22,7 +22,11 @@
     "components"
   ],
   "lint-staged": {
-    "**/*.{ts,tsx,js,vue}": [
+    "libraries/pc-react-ui/**/*.{ts,tsx,js,vue}": [
+      "eslint --cache --fix",
+      "git add"
+    ],
+    "packages/**/*.{ts,tsx,js,vue}": [
       "eslint --cache --fix",
       "git add"
     ]

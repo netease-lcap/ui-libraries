@@ -1,0 +1,341 @@
+- name: u-menu
+  title: 菜单
+  labels:
+    - 路由链接
+    - 块级展示
+  description: 菜单组件支持路由、触发关闭、多级菜单等功能。
+  attrs:
+    - name: router
+      title: 使用路由
+      type: boolean
+      default: true
+      description: 是否根据 vue-router 来控制选择哪一项
+    - name: value
+      title: 值
+      type: any
+      sync: true
+      model: true
+      description: 当前选择的值
+    - name: collapsible
+      title: 折叠
+      type: boolean
+      default: false
+      description: 分组是否可以折叠
+    - name: accordion
+      title: 展开分组
+      type: boolean
+      default: false
+      description: 是否每次只会展开一个分组
+    - name: expand-trigger
+      title: 触发方式
+      type: string
+      default: click
+      description: 展开/折叠的触发方式。可选值：`'click'`表示整行点击均可触发、`'click-expander'`表示仅点击小箭头时触发
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      description: 是否只读
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 是否禁用
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<u-menu-item>`、`<u-menu-divider>`或`<u-menu-group>`子组件。
+  events:
+    - name: before-select
+      title: 选择前
+      description: 选择某一项前触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeItemEvent"
+        - name: $event.value
+          type: any
+          description: 选择项的值
+        - name: $event.oldValue
+          type: any
+          description: 旧的值
+        - name: $event.item
+          type: object
+          description: 选择项相关对象
+        - name: $event.itemVM
+          type: UMenuItem
+          description: 选择项子组件
+        - name: $event.preventDefault
+          type: Function
+          description: 阻止选择流程
+    - name: input
+      title: 输入时
+      description: 选择某一项时触发
+      params:
+        - name: $event
+          type: any
+          description: 选择项的值
+          schema:
+            $ref: "#/basicTypes/String"
+    - name: select
+      title: 选择后
+      description: 选择某一项时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeItemEvent"
+        - name: $event.value
+          type: any
+          description: 改变后的值
+        - name: $event.oldValue
+          type: any
+          description: 旧的值
+        - name: $event.item
+          type: object
+          description: 选择项相关对象
+        - name: $event.oldItem
+          type: object
+          description: 旧的选择项相关对象
+        - name: $event.itemVM
+          type: UMenuItem
+          description: 选择项子组件
+        - name: $event.oldVM
+          type: UMenuItem
+          description: 旧的选择项子组件
+        - name: senderVM
+          type: UMenu
+          description: 发送事件实例
+    - name: toggle
+      title: 展开折叠后
+      description: 展开/折叠某分组时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/CollapseEvent"
+        - name: $event.expanded
+          type: boolean
+          description: 展开/折叠状态
+        - name: $event.groupVM
+          type: UMenuGroup
+          description: 分组组件
+  methods:
+    - name: toggleAll
+      description: 展开/折叠所有分组
+      params:
+        - name: expanded
+          type: boolean
+          description: 展开/折叠
+          schema:
+            $ref: "#/systemTypes/CollapseEvent"
+- name: u-menu-item
+  attrs:
+    - name: text
+      title: 文本
+      type: string
+      description: 文本内容
+    - name: value
+      title: 值
+      type: any
+      description: 此项的值
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 禁用此项
+    - name: item
+      title: 相关对象
+      type: object
+      description: 相关对象。当选择此项时，抛出的事件会传递该对象，便于开发
+    - name: linkType
+      title: 链接类型
+      type: string
+      options:
+        - value: destination
+          title: 页面跳转
+        - value: download
+          title: 下载链接
+      default: destination
+      description: 链接类型
+      compType: linkTypeSelect
+      bindHide: true
+    - name: hrefAndTo
+      title: 链接
+      type: string
+      description: 链接地址
+      compType: linkHrefInput
+    - name: target
+      title: 打开方式
+      type: string
+      options:
+        - value: _blank
+          title: 新窗口
+        - value: _self
+          title: 当前窗口
+        - value: _parent
+          title: 父级窗口
+          advanced: true
+        - value: _top
+          title: 顶级窗口
+          advanced: true
+      default: _self
+      description: 父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。
+    - name: replace
+      type: boolean
+      default: false
+      description: 需要
+        vue-router，与`<router-link>`的`replace`属性相同。如果为`true`，当点击时，会调用`router.replace()`而不是`router.push()`，于是导航后不会留下`history
+        `记录。
+    - name: exact
+      title: 精确匹配
+      type: boolean
+      default: false
+      description: 需要 vue-router，与`<router-link>`的`exact`属性相同。是否与路由完全一致时才高亮显示。
+  events:
+    - name: click
+      title: 点击
+      description: 点击此项时触发，与原生 click 事件不同的是，它只会在非只读和禁用的情况下触发。
+      params:
+        - name: $event
+          type: MouseEvent
+          description: 鼠标事件对象
+          schema:
+            $ref: "#/systemTypes/MouseEvent"
+        - name: senderVM
+          type: Vue
+          description: 发送事件实例
+    - name: before-select
+      title: 选择前
+      description: 选择此项前触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeItemEvent"
+        - name: $event.value
+          type: any
+          description: 此项的值
+        - name: $event.item
+          type: object
+          description: 此项的相关对象
+        - name: $event.itemVM
+          type: UMenuItem
+          description: 此组件
+        - name: $event.preventDefault
+          type: Function
+          description: 阻止选择流程
+        - name: senderVM
+          type: Vue
+          description: 发送事件实例
+    - name: before-navigate
+      title: 导航前
+      description: 使用 router 相关属性切换路由前触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/NavigateEvent"
+        - name: $event.to
+          type: string, Location
+          description: "`to`属性的值"
+        - name: $event.replace
+          type: boolean
+          description: "`replace`属性的值"
+        - name: $event.exact
+          type: boolean
+          description: "`exact`属性的值"
+        - name: $event.preventDefault
+          type: Function
+          description: 阻止切换流程
+        - name: senderVM
+          type: Vue
+          description: 发送事件实例
+    - name: navigate
+      title: 导航
+      advanced: true
+      description: 使用router相关属性切换路由时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/NavigateEvent"
+        - name: $event.to
+          type: string, Location
+          description: "`to`属性的值"
+        - name: $event.replace
+          type: boolean
+          description: "`replace`属性的值"
+        - name: $event.exact
+          type: boolean
+          description: "`exact`属性的值"
+        - name: senderVM
+          type: Vue
+          description: 发送事件实例
+- name: u-menu-group
+  attrs:
+    - name: title
+      title: 标题
+      type: string
+      description: 显示的标题
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<u-menu-item>`或`<u-menu-divider>`子组件。
+    - concept: Slot
+      name: sub
+      description: 插入子菜单`<u-menu>`。
+    - concept: Slot
+      name: title
+      description: 自定义标题文本。
+    - concept: Slot
+      name: extra
+      description: 在右侧可以附加内容。
+  events:
+    - name: before-toggle
+      title: 展开折叠前
+      description: 展开/折叠此分组前触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/CollapseEvent"
+        - name: $event.expanded
+          type: boolean
+          description: 展开/折叠状态
+        - name: $event.groupVM
+          type: UMenuGroup
+          description: 分组组件
+        - name: $event.preventDefault
+          type: Function
+          description: 阻止展开/折叠流程
+        - name: senderVM
+          type: Vue
+          description: 发送事件实例
+    - name: toggle
+      title: 展开折叠后
+      description: 展开/折叠某分组时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/CollapseEvent"
+        - name: $event.expanded
+          type: boolean
+          description: 展开/折叠状态
+        - name: $event.groupVM
+          type: UMenuGroup
+          description: 分组组件
+        - name: senderVM
+          type: Vue
+          description: 发送事件实例
+- name: u-menu-divider
