@@ -26,6 +26,7 @@ module.exports = {
     ],
     "semi": [2, "always"],
     "@typescript-eslint/no-explicit-any": 0,
-    'no-unused-vars': 1
+    'no-unused-vars': 1,
+    'max-len': 200,
   },
 };

@@ -143,6 +143,9 @@ importers:
       '@vue/babel-helper-vue-jsx-merge-props':
         specifier: ^1.0.0
         version: 1.4.0
+      '@vusion/utils':
+        specifier: 0.4.11
+        version: 0.4.11
       '@vusion/validator':
         specifier: ^0.4.6
         version: 0.4.12
@@ -173,6 +176,9 @@ importers:
       vue-month-picker:
         specifier: ^1.6.0
         version: 1.7.2
+      whatwg-fetch:
+        specifier: 3.6.2
+        version: 3.6.2
     devDependencies:
       '@lcap/ui-cli':
         specifier: workspace:^1.0.0
@@ -192,6 +198,9 @@ importers:
       '@storybook/addon-onboarding':
         specifier: ^1.0.10
         version: 1.0.10(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/addon-viewport':
+        specifier: ^7.6.10
+        version: 7.6.10
       '@storybook/blocks':
         specifier: ^7.6.7
         version: 7.6.7(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
@@ -237,6 +246,9 @@ importers:
       glob:
         specifier: ^10.3.10
         version: 10.3.10
+      jest-serializer-vue:
+        specifier: ^3.1.0
+        version: 3.1.0
       jest-serializer-vue-tjw:
         specifier: ^3.20.0
         version: 3.20.0
@@ -270,154 +282,9 @@ importers:
       vitest:
         specifier: ^1.1.0
         version: 1.1.0(@types/node@18.19.3)(jsdom@23.0.1)(less@4.2.0)
-      vue:
-        specifier: 2.7.16
-        version: 2.7.16
-      vue-i18n:
-        specifier: ^8.15.5
-        version: 8.28.2(vue@2.7.16)
-      vue-router:
-        specifier: 3.3.4
-        version: 3.3.4(vue@2.7.16)
-      vue-template-compiler:
-        specifier: 2.7.16
-        version: 2.7.16
-
-  libraries/pc-mobile-ui:
-    dependencies:
-      '@babel/runtime':
-        specifier: 7.x
-        version: 7.23.6
-      '@vant/icons':
-        specifier: ^1.7.1
-        version: 1.8.0
-      '@vant/popperjs':
-        specifier: ^1.1.0
-        version: 1.3.0
-      '@vue/babel-helper-vue-jsx-merge-props':
-        specifier: ^1.0.0
-        version: 1.4.0
-      '@vusion/validator':
-        specifier: ^0.4.6
-        version: 0.4.12
-      clipboard:
-        specifier: ^2.0.11
-        version: 2.0.11
-      cloud-ui.vusion:
-        specifier: ^0.14.36-beta.1
-        version: 0.14.140(@vue/cli-service@5.0.8)(@vusion/utils@0.4.11)(vue-cli-plugin-vusion@0.10.13)(vue@2.7.16)
-      dayjs:
-        specifier: ^1.11.9
-        version: 1.11.10
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
-      online-svg-icon-vue2:
-        specifier: ^1.2.3
-        version: 1.2.3
-      postcss:
-        specifier: 7.0.0
-        version: 7.0.0
-      vconsole:
-        specifier: ^3.9.3
-        version: 3.15.1
-      vue-lazyload:
-        specifier: 1.2.3
-        version: 1.2.3
-      vue-month-picker:
-        specifier: ^1.6.0
-        version: 1.7.2
-    devDependencies:
-      '@lcap/ui-cli':
-        specifier: workspace:^1.0.0
-        version: link:../../packages/cli
-      '@nasl/types':
-        specifier: ^0.1.6
-        version: 0.1.6
-      '@storybook/addon-essentials':
-        specifier: ^7.6.7
-        version: 7.6.7(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/addon-interactions':
-        specifier: ^7.6.7
-        version: 7.6.7
-      '@storybook/addon-links':
-        specifier: ^7.6.7
-        version: 7.6.7(react@18.2.0)
-      '@storybook/addon-onboarding':
-        specifier: ^1.0.10
-        version: 1.0.10(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/blocks':
-        specifier: ^7.6.7
-        version: 7.6.7(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/builder-vite':
-        specifier: ^7.6.7
-        version: 7.6.7(typescript@5.3.3)(vite@5.0.10)
-      '@storybook/test':
-        specifier: ^7.6.7
-        version: 7.6.7(vitest@1.1.0)
-      '@storybook/vue':
-        specifier: ^7.6.7
-        version: 7.6.7(@babel/core@7.23.6)(css-loader@6.9.0)(vue@2.7.16)
-      '@storybook/vue-vite':
-        specifier: ^7.6.7
-        version: 7.6.7(@babel/core@7.23.6)(css-loader@6.9.0)(typescript@5.3.3)(vite@5.0.10)(vue@2.7.16)
-      '@types/fs-extra':
-        specifier: ^11.0.4
-        version: 11.0.4
-      '@vant/area-data':
-        specifier: 1.1.1
-        version: 1.1.1
-      '@vitejs/plugin-react':
-        specifier: ^4.2.1
-        version: 4.2.1(vite@5.0.10)
-      '@vitejs/plugin-vue2':
-        specifier: ^2.3.1
-        version: 2.3.1(vite@5.0.10)(vue@2.7.16)
-      '@vitejs/plugin-vue2-jsx':
-        specifier: ^1.1.1
-        version: 1.1.1(vite@5.0.10)(vue@2.7.16)
-      '@vitest/coverage-v8':
-        specifier: ^1.1.0
-        version: 1.1.0(vitest@1.1.0)
-      '@vue/test-utils':
-        specifier: ^1.3.5
-        version: 1.3.6(vue-template-compiler@2.7.16)(vue@2.7.16)
-      autoprefixer:
-        specifier: ^10.4.16
-        version: 10.4.16(postcss@7.0.0)
-      glob:
-        specifier: ^10.3.10
-        version: 10.3.10
-      jest-serializer-vue-tjw:
-        specifier: ^3.20.0
-        version: 3.20.0
-      jsdom:
-        specifier: ^23.0.1
-        version: 23.0.1
-      loader-utils:
-        specifier: ^3.2.1
-        version: 3.2.1
-      remark-parse:
-        specifier: ^11.0.0
-        version: 11.0.0
-      rimraf:
-        specifier: ^5.0.5
-        version: 5.0.5
-      storybook:
-        specifier: ^7.6.7
-        version: 7.6.7
-      typescript:
-        specifier: ^5.3.3
-        version: 5.3.3
-      unified:
-        specifier: ^11.0.4
-        version: 11.0.4
-      vite:
-        specifier: ^5.0.10
-        version: 5.0.10(@types/node@18.19.3)
-      vitest:
-        specifier: ^1.1.0
-        version: 1.1.0(@types/node@18.19.3)(jsdom@23.0.1)
+      vitest-canvas-mock:
+        specifier: ^0.3.3
+        version: 0.3.3(vitest@1.1.0)
       vue:
         specifier: 2.7.16
         version: 2.7.16
@@ -443,6 +310,9 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
     devDependencies:
+      '@nasl/types':
+        specifier: ^0.1.6
+        version: 0.1.6
       '@storybook/addon-essentials':
         specifier: ^7.6.7
         version: 7.6.7(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
@@ -4165,6 +4035,12 @@ packages:
     resolution: {integrity: sha512-vT+YMzw8yVwndhJglI0XtELfXWq1M0HEy5ST3XPzbjmsJ54LgTf1b29UMkh0E/05qBQNFCcbT9B/tLxqWezxlg==}
     dev: true
 
+  /@storybook/addon-viewport@7.6.10:
+    resolution: {integrity: sha512-+bA6juC/lH4vEhk+w0rXakaG8JgLG4MOYrIudk5vJKQaC6X58LIM9N4kzIS2KSExRhkExXBPrWsnMfCo7uxmKg==}
+    dependencies:
+      memoizerific: 1.11.3
+    dev: true
+
   /@storybook/addon-viewport@7.6.7:
     resolution: {integrity: sha512-Q/BKjJaKzl4RWxH45K2iIXwkicj4ReVAUIpIyd7dPBb/Bx+hEDYZxR5dDg82AMkZdA71x5ttMnuDSuVpmWAE6g==}
     dependencies:
@@ -6003,7 +5879,7 @@ packages:
       webpack-dev-server: 4.15.1(webpack@5.89.0)
       webpack-merge: 5.10.0
       webpack-virtual-modules: 0.4.6
-      whatwg-fetch: 3.6.20
+      whatwg-fetch: 3.6.2
     transitivePeerDependencies:
       - '@parcel/css'
       - '@rspack/core'
@@ -13388,6 +13264,12 @@ packages:
       lodash.clonedeep: 4.5.0
     dev: true
 
+  /jest-serializer-vue@3.1.0:
+    resolution: {integrity: sha512-vXz9/3IgBbLhsaVANYLG4ROCQd+Wg3qbB6ICofzFL+fbhSFPlqb0/MMGXcueVsjaovdWlYiRaLQLpdi1PTcoRQ==}
+    dependencies:
+      pretty: 2.0.0
+    dev: true
+
   /jest-util@29.7.0:
     resolution: {integrity: sha512-z6EbKajIpqGKU56y5KBUgy1dt1ihhQJgWzUlZHArA/+X2ad7Cb5iF+AK1EWVL/Bo7Rz9uurpqw6SiBCefUbCGA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -15694,7 +15576,7 @@ packages:
     dependencies:
       core-js: 3.35.0
       vue: 2.7.16
-      whatwg-fetch: 3.6.20
+      whatwg-fetch: 3.6.2
     dev: false
 
   /open@6.4.0:
@@ -21093,42 +20975,6 @@ packages:
       - terser
     dev: true
 
-  /vite@5.0.10(@types/node@18.19.3):
-    resolution: {integrity: sha512-2P8J7WWgmc355HUMlFrwofacvr98DAjoE52BfdbwQtyLH06XKwaL/FMnmKM2crF0iX4MpmMKoDlNCB1ok7zHCw==}
-    engines: {node: ^18.0.0 || >=20.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': ^18.0.0 || >=20.0.0
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': 18.19.3
-      esbuild: 0.19.10
-      postcss: 8.4.32
-      rollup: 4.9.1
-    optionalDependencies:
-      fsevents: 2.3.3
-    dev: true
-
   /vite@5.0.10(@types/node@18.19.3)(less@4.2.0):
     resolution: {integrity: sha512-2P8J7WWgmc355HUMlFrwofacvr98DAjoE52BfdbwQtyLH06XKwaL/FMnmKM2crF0iX4MpmMKoDlNCB1ok7zHCw==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -21173,64 +21019,6 @@ packages:
     dependencies:
       jest-canvas-mock: 2.5.2
       vitest: 1.1.0(@types/node@18.19.3)(jsdom@23.0.1)(less@4.2.0)
-    dev: true
-
-  /vitest@1.1.0(@types/node@18.19.3)(jsdom@23.0.1):
-    resolution: {integrity: sha512-oDFiCrw7dd3Jf06HoMtSRARivvyjHJaTxikFxuqJjO76U436PqlVw1uLn7a8OSPrhSfMGVaRakKpA2lePdw79A==}
-    engines: {node: ^18.0.0 || >=20.0.0}
-    hasBin: true
-    peerDependencies:
-      '@edge-runtime/vm': '*'
-      '@types/node': ^18.0.0 || >=20.0.0
-      '@vitest/browser': ^1.0.0
-      '@vitest/ui': ^1.0.0
-      happy-dom: '*'
-      jsdom: '*'
-    peerDependenciesMeta:
-      '@edge-runtime/vm':
-        optional: true
-      '@types/node':
-        optional: true
-      '@vitest/browser':
-        optional: true
-      '@vitest/ui':
-        optional: true
-      happy-dom:
-        optional: true
-      jsdom:
-        optional: true
-    dependencies:
-      '@types/node': 18.19.3
-      '@vitest/expect': 1.1.0
-      '@vitest/runner': 1.1.0
-      '@vitest/snapshot': 1.1.0
-      '@vitest/spy': 1.1.0
-      '@vitest/utils': 1.1.0
-      acorn-walk: 8.3.1
-      cac: 6.7.14
-      chai: 4.3.10
-      debug: 4.3.4
-      execa: 8.0.1
-      jsdom: 23.0.1
-      local-pkg: 0.5.0
-      magic-string: 0.30.5
-      pathe: 1.1.1
-      picocolors: 1.0.0
-      std-env: 3.6.0
-      strip-literal: 1.3.0
-      tinybench: 2.5.1
-      tinypool: 0.8.1
-      vite: 5.0.10(@types/node@18.19.3)(less@4.2.0)
-      vite-node: 1.1.0(@types/node@18.19.3)(less@4.2.0)
-      why-is-node-running: 2.2.2
-    transitivePeerDependencies:
-      - less
-      - lightningcss
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
     dev: true
 
   /vitest@1.1.0(@types/node@18.19.3)(jsdom@23.0.1)(less@4.2.0):
@@ -21956,8 +21744,8 @@ packages:
       iconv-lite: 0.6.3
     dev: true
 
-  /whatwg-fetch@3.6.20:
-    resolution: {integrity: sha512-EqhiFU6daOA8kpjOWTL0olhVOF3i7OrFzSYiGsEMB8GcXS+RrzauAERX65xMeNWVqxA6HXH2m69Z9LaKKdisfg==}
+  /whatwg-fetch@3.6.2:
+    resolution: {integrity: sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA==}
     dev: false
 
   /whatwg-mimetype@4.0.0:
