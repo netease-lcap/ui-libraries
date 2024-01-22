@@ -33,7 +33,7 @@
 //     })
 //     close(): void {}
 
-//     @  thod({
+//     @thod({
 //        itle: "undefined",
 //       description: "切换弹出/关闭状态。",
 //     }  )

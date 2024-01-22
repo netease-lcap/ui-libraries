@@ -25,10 +25,14 @@
       "@components/*": ["./src/components/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["src/**/api.ts"],
   "references": [
     {
       "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.api.json"
     }
   ]
 }
