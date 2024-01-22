@@ -6,6 +6,7 @@ import fp from 'lodash/fp';
 import { Modal, Popconfirm } from 'antd';
 import type { ButtonProps } from 'antd';
 import type { StateMap } from '@/types/immutable';
+import { $deletePropsList as delist } from '@/plugins/constants';
 
 // interface StateMap<T, F> extends Map<string, any> {
 //   get<K extends keyof (T & F), L>(key: K, defaultValue?: L):
@@ -20,6 +21,7 @@ function useHandleAsyncLoading(props: StateMap<
 >) {
   const [loading, setLoading] = React.useState(false);
 
+  console.log(props.get(delist));
   const onClick = props.get('onClick');
   const asyncLoading = props.get('asyncLoading');
   const $deletePropsList = props.get('$deletePropsList', []).concat(['asyncLoading']);

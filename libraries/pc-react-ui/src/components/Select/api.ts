@@ -15,72 +15,6 @@ namespace nasl.ui {
     C extends string
   > extends ViewComponent {
     @Prop({
-      title: "数据",
-    })
-    data: SelectOptions<T, V, P, M, C>["dataSource"];
-
-    value: SelectOptions<T, V, P, M, C>["value"];
-
-    @Method({
-      title: "undefined",
-      description: "弹出选择框。",
-    })
-    open(): void {}
-
-    @Method({
-      title: "undefined",
-      description: "关闭选择框。",
-    })
-    close(): void {}
-
-    @Method({
-      title: "undefined",
-      description: "切换弹出/关闭状态。",
-    })
-    toggle(
-      @Param({
-        title: "undefined",
-        description: "可选。弹出/关闭状态",
-      })
-      opened?: nasl.core.Boolean
-    ): void {}
-
-    @Method({
-      title: "undefined",
-      description: "清除缓存，重新加载",
-    })
-    reload(): void {}
-
-    @Method({
-      title: "undefined",
-      description: "添加项",
-    })
-    addItem(
-      @Param({
-        title: "undefined",
-        description: "当前添加的项",
-      })
-      item: T,
-      @Param({
-        title: "undefined",
-        description: "是否添加到列表的第一项",
-      })
-      inFirst: nasl.core.Boolean = false
-    ): void {}
-
-    constructor(options?: Partial<SelectOptions<T, V, P, M, C>>) {
-      super();
-    }
-  }
-
-  export class SelectOptions<
-    T,
-    V,
-    P extends boolean,
-    M extends boolean,
-    C extends string
-  > {
-    @Prop({
       group: "数据属性",
       title: "数据源",
       description:
@@ -114,7 +48,7 @@ namespace nasl.ui {
         : nasl.core.String
       : V;
 
-    @Prop<SelectOptions<T, V, P, M, C>, "textField">({
+    @Prop<Select<T, V, P, M, C>, "textField">({
       group: "数据属性",
       title: "文本字段",
       description: "集合的元素类型中，用于显示文本的属性名称",
@@ -126,7 +60,7 @@ namespace nasl.ui {
     })
     textField: (item: T) => nasl.core.String;
 
-    @Prop<SelectOptions<T, V, P, M, C>, "valueField">({
+    @Prop<Select<T, V, P, M, C>, "valueField">({
       group: "数据属性",
       title: "值字段",
       description: "集合的元素类型中，用于标识选中值的属性",
@@ -276,8 +210,7 @@ namespace nasl.ui {
       group: "样式属性",
       title: "宽度",
       description: "设置选择框宽度大小",
-      docDescription:
-        "设置选择框宽度大小，支持大、中、小共3种模式",
+      docDescription: "设置选择框宽度大小，支持大、中、小共3种模式",
       setter: {
         concept: "EnumSelectSetter",
         options: [{ title: "小" }, { title: "中型" }, { title: "大" }],
