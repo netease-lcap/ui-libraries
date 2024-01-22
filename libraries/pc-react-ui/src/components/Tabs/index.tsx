@@ -17,7 +17,7 @@ const Tabs = registerComponet<
   pluginType<TabsProps>
 >(
   AntdTabs,
-  { plugin, displayName: 'Tabs', mapProps },
+  { plugin, displayName: AntdTabs.displayName, mapProps },
 );
 
 export default Tabs;

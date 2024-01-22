@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from '../index';
+import Button from '@/components/Button/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -23,7 +24,30 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <Modal {...args} />,
+  render: (args) => {
+    const modalRef = React.useRef(false);
+    // const [ open,setOpen ]=React.useState(false)
+    const showModal = () => {
+      modalRef.current.setOpen(!modalRef.current.open);
+    };
+    return (
+      <div>
+        <Button type="primary" onClick={showModal}>
+          Open Modal
+        </Button>
+        <Modal
+          title="Basic Modal"
+          ref={modalRef}
+          onOk={() => modalRef.current.setOpen(false)}
+          onCancel={() => modalRef.current.setOpen(false)}
+        >
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
+      </div>
+    );
+  },
   args: {
     color: 'magenta',
     children: 'Tag',

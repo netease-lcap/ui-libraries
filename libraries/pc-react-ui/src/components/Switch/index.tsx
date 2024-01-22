@@ -17,7 +17,7 @@ const Switch = registerComponet<
   pluginType<SwitchProps>
 >(
   AntdSwitch,
-  { plugin, displayName: 'Tabs', mapProps },
+  { plugin, displayName: AntdSwitch.displayName, mapProps },
 );
 
 export default Switch;

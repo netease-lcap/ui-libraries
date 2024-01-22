@@ -70,6 +70,7 @@ export function HocBaseComponents(
   const ImmutableProps = Map(props)
     .reduce((result, value, key) => result.set(mapProps.get(key, key), value), Map())
     .set('render', BaseComponent)
+    .set('ref', ref)
     .set('$deletePropsList', []);
 
   const expandProps = pluginHooks.reduce(
@@ -87,7 +88,6 @@ export function HocBaseComponents(
 
   return (
     <Component
-      ref={ref}
       {...excludeProps}
     />
   );

@@ -3,7 +3,7 @@ import { expect, test } from 'vitest';
 import renderer from 'react-test-renderer';
 import { composeStories } from '@storybook/testing-react';
 
-import * as stories from '../stories/Tag.stories';
+import * as stories from '../stories/Modal.stories';
 
 const {
   Primary, Secondary, Large, Small,

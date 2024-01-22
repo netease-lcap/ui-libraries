@@ -17,7 +17,7 @@ const Transfer = registerComponet<
   pluginType<TransferProps<TransferItem>>
 >(
   AntdTransfer,
-  { plugin, displayName: 'Transfer', mapProps },
+  { plugin, displayName: AntdTransfer.displayName, mapProps },
 );
 
 export default Transfer;

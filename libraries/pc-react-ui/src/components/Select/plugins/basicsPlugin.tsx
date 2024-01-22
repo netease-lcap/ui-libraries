@@ -14,13 +14,14 @@ export function useHandleTransformOption(props) {
   const transformOption = _.cond([
     [_.isArray, _.constant(() => Promise.resolve(options))],
     [_.isFunction, _.constant(() => Promise.resolve(options()))],
+    [_.stubTrue, _.constant(() => Promise.resolve([]))],
   ]);
   const conformsArray = _.cond([
     [Array.isArray, _.identity],
     [_.stubTrue, _.stubArray],
   ]);
   const { data, loading } = useRequest(transformOption(options));
-  return { options: conformsArray(data), loading };
+  return _.isNil(options) ? {} : { options: conformsArray(data), loading };
 }
 
 export function useHandleTextAndValueField(props) {

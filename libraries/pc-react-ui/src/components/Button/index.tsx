@@ -15,7 +15,7 @@ const mapProps = {
 
 const Button = registerComponet<ButtonProps, pluginType<ButtonProps>>(
   AntdButton,
-  { plugin: basicsPlugin, displayName: 'Button', mapProps },
+  { plugin: basicsPlugin, displayName: AntdButton.displayName, mapProps },
 );
 
 export default Button;

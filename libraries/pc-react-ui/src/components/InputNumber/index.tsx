@@ -14,7 +14,7 @@ const mapProps = {
 
 const InputNumber = registerComponet<InputNumberProps, pluginType<InputNumberProps>>(
   AntdInputNumber,
-  { plugin: basicsPlugin, displayName: 'InputNumber', mapProps },
+  { plugin: basicsPlugin, displayName: AntdInputNumber.displayName, mapProps },
 );
 
 export default InputNumber;
