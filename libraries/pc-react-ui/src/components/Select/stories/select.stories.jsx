@@ -25,7 +25,6 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 异步函数 = {
   render: (args) => {
-    // const Option = () => <div />;
     return (
       <Select {...args}>
         <SelectOption key="1" label="1" value="1" />
@@ -34,36 +33,6 @@ export const 异步函数 = {
     );
   },
   args: {
-    style: { width: '100px' },
-    // options: [
-    // { label: 'Option 1', value: '1' },
-    // { label: 'Option 2', value: '2' },
-    // { label: 'Option 3', value: '3' },
-    // ],
-  },
-};
-export const 同步函数 = {
-  render: (args) => <Select {...args} />,
-  args: {
-    style: { width: '100px' },
-
-    options: () => [
-      { label: 'Option 1', value: '1' },
-      { label: 'Option 2', value: '2' },
-      { label: 'Option 3', value: '3' },
-    ],
-  },
-};
-
-export const 数组 = {
-  render: (args) => <Select {...args} />,
-  args: {
-    style: { width: '100px' },
-
-    options: [
-      { label: 'Option 1', value: '1' },
-      { label: 'Option 2', value: '2' },
-      { label: 'Option 3', value: '3' },
-    ],
+    style: { width: '256px' },
   },
 };

@@ -7,7 +7,7 @@ namespace nasl.ui {
     description: "下拉选择器，支持单选、多选、搜索等功能",
     group: "Selector",
   })
-  export class USelect<
+  export class Select<
     T,
     V,
     P extends boolean,
@@ -17,9 +17,9 @@ namespace nasl.ui {
     @Prop({
       title: "数据",
     })
-    data: USelectOptions<T, V, P, M, C>["dataSource"];
+    data: SelectOptions<T, V, P, M, C>["dataSource"];
 
-    value: USelectOptions<T, V, P, M, C>["value"];
+    value: SelectOptions<T, V, P, M, C>["value"];
 
     @Method({
       title: "undefined",
@@ -68,12 +68,12 @@ namespace nasl.ui {
       inFirst: nasl.core.Boolean = false
     ): void {}
 
-    constructor(options?: Partial<USelectOptions<T, V, P, M, C>>) {
+    constructor(options?: Partial<SelectOptions<T, V, P, M, C>>) {
       super();
     }
   }
 
-  export class USelectOptions<
+  export class SelectOptions<
     T,
     V,
     P extends boolean,
@@ -114,7 +114,7 @@ namespace nasl.ui {
         : nasl.core.String
       : V;
 
-    @Prop<USelectOptions<T, V, P, M, C>, "textField">({
+    @Prop<SelectOptions<T, V, P, M, C>, "textField">({
       group: "数据属性",
       title: "文本字段",
       description: "集合的元素类型中，用于显示文本的属性名称",
@@ -126,7 +126,7 @@ namespace nasl.ui {
     })
     textField: (item: T) => nasl.core.String;
 
-    @Prop<USelectOptions<T, V, P, M, C>, "valueField">({
+    @Prop<SelectOptions<T, V, P, M, C>, "valueField">({
       group: "数据属性",
       title: "值字段",
       description: "集合的元素类型中，用于标识选中值的属性",
@@ -277,13 +277,13 @@ namespace nasl.ui {
       title: "宽度",
       description: "设置选择框宽度大小",
       docDescription:
-        "设置选择框宽度大小，支持占满、巨大、大、中型、正常、小共6种模式",
+        "设置选择框宽度大小，支持大、中、小共3种模式",
       setter: {
         concept: "EnumSelectSetter",
         options: [{ title: "小" }, { title: "中型" }, { title: "大" }],
       },
     })
-    width: "small" | "middle" | "large";
+    size: "small" | "middle" | "large";
 
     @Event({
       title: "按下时",
@@ -360,7 +360,7 @@ namespace nasl.ui {
     description: "选择分组",
   })
   export class SelectOptGroup<T, V> extends ViewComponent {
-    constructor(options?: Partial<USelectGroupOptions<T, V>>) {
+    constructor(options?: Partial<SelectOptGroup<T, V>>) {
       super();
     }
   }

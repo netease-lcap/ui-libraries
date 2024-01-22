@@ -28,16 +28,17 @@ export function useHandleTextAndValueField(props) {
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
   const $deletePropsList = props.get('$deletePropsList', []).concat(['textField', 'valueField']);
-  const option = props.get('option');
+  const options = props.get('options');
 
   const convertOption = React.useMemo(() => {
-    const logicFn = _.map(option, (item) => ({ label: item[textField], value: item[valueField] }));
+    const logicFn = _.map(options, (item) => ({ label: item[textField], value: item[valueField] }));
     const decisionCallback = _.cond([
       [_.matches({ textField: _.isString }), _.constant(logicFn)],
       [_.matches({ valueField: _.isString }), _.constant(logicFn)],
-      [_.stubTrue, _.constant(option)],
+      [_.stubTrue, _.constant(options)],
     ]);
     return decisionCallback({ textField, valueField });
-  }, [option, textField, valueField]);
-  return { option: convertOption, $deletePropsList };
+  }, [options, textField, valueField]);
+
+  return _.isNil(options) ? { $deletePropsList } : { options: convertOption, $deletePropsList };
 }
