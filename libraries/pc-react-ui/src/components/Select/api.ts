@@ -14,6 +14,18 @@ namespace nasl.ui {
     M extends boolean,
     C extends string
   > extends ViewComponent {
+    constructor(options?: Partial<SelectOptions<T, V, P, M, C>>) {
+      super();
+    }
+  }
+
+  export class SelectOptions<
+    T,
+    V,
+    P extends boolean,
+    M extends boolean,
+    C extends string
+  > extends ViewComponentOptions {
     @Prop({
       group: "数据属性",
       title: "数据源",
@@ -257,11 +269,17 @@ namespace nasl.ui {
     }) => void;
   }
 
+  export class SelectOption<T, V> extends ViewComponent {
+    constructor(options?: Partial<SelectOptionOptions<T, V>>) {
+      super();
+    }
+  }
+
   @Component({
     title: "选择项",
     description: "选择项",
   })
-  export class SelectOption<T, V> {
+  export class SelectOptionOptions<T, V> extends ViewComponentOptions {
     @Prop({
       title: "选项文本",
       description: "此项的显示值",
