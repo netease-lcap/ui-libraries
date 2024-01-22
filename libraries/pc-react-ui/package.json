@@ -30,6 +30,7 @@
     "numbro": "^2.4.0"
   },
   "devDependencies": {
+    "@lcap/ui-cli": "workspace:^1.0.0",
     "@nasl/types": "^0.1.6",
     "@storybook/addon-essentials": "^7.6.7",
     "@storybook/addon-interactions": "^7.6.7",

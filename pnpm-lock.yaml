@@ -325,6 +325,9 @@ importers:
         specifier: ^2.4.0
         version: 2.4.0
     devDependencies:
+      '@lcap/ui-cli':
+        specifier: workspace:^1.0.0
+        version: link:../../packages/cli
       '@nasl/types':
         specifier: ^0.1.6
         version: 0.1.6
