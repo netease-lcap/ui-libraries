@@ -10,6 +10,7 @@ import _ from 'lodash';
 import fp from 'lodash/fp';
 // import { useWhyDidYouUpdate } from 'ahooks';
 import type { pluginType } from '@/plugins/type';
+import { $deletePropsList } from '@/plugins/constants';
 
 export class Plugin {
   plugin: any[] = [];
@@ -71,7 +72,8 @@ export function HocBaseComponents(
     .reduce((result, value, key) => result.set(mapProps.get(key, key), value), Map())
     .set('render', BaseComponent)
     .set('ref', ref)
-    .set('$deletePropsList', []);
+    .set('$deletePropsList', [])
+    .set($deletePropsList, [1, 2]);
 
   const expandProps = pluginHooks.reduce(
     (expandProps, handleFun) => expandProps.merge(_.attempt(handleFun, expandProps)),
