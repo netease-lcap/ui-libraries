@@ -123,6 +123,7 @@ function genUsageByTs(config) {
       const info = transform(fs.readFileSync(tsPath, 'utf8'));
       Object.assign(component, info[0]);
     } catch (e) {
+      console.log(e);
       console.log('找不到 TS 文件或 TS 报错', componentDir);
     }
 
