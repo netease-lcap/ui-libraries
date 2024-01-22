@@ -1,0 +1,46 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>地区</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" readonly="readonly" placeholder="请选择所在地区" class="van-field__control"></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>地区</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" readonly="readonly" placeholder="请选择所在地区" class="van-field__control"></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>地区</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" readonly="readonly" placeholder="请选择所在地区" class="van-field__control"></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>地区</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" readonly="readonly" placeholder="请选择所在地区" class="van-field__control"></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>地区</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" readonly="readonly" placeholder="请选择所在地区" class="van-field__control"></div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

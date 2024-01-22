@@ -1,0 +1,45 @@
+- name: van-for-components
+  title: 组件列表
+  icon: forcom
+  labels:
+    - Table
+  description: 组件列表
+  attrs:
+    - name: data-source
+      title: 数据源
+      type: array
+      description: 展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑。
+      group: 数据属性
+    - name: data-schema
+      title: 数据类型
+      type: schema
+      description: 数据源返回的数据结构的类型，自动识别类型进行展示说明。
+      compType: dataTypeComsItem
+      group: 数据属性
+    - name: colnum
+      title: 排列项数
+      type: number
+      default: 5
+      min: 0
+      description: 设置每行排列项数，为空时自适应宽度，自动换行。
+      group: 主要属性
+      tooltipLink: ""
+      docDescription: 支持定义每一行排列的项数，为空时会自适应宽度并自动换行。
+    - name: wrap
+      title: 自动换行
+      type: boolean
+      default: true
+      description: 是否自动换行，排列项数为空时生效。
+      dependency:
+        - colnum: 0
+      group: 主要属性
+    - name: equalWidth
+      title: 均分宽度
+      type: boolean
+      default: true
+      description: 是否均分宽度，排列项数不为空时生效。
+      group: 主要属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 内容自定义

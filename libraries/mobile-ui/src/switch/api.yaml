@@ -1,0 +1,37 @@
+- name: van-switch
+  title: 开关
+  labels:
+    - Form
+  icon: switch
+  attrs:
+    - name: value
+      title: 值
+      type: boolean
+      sync: true
+      model: true
+      default: false
+      description: 用于标识开关的值
+      group: 数据属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+  slots: false
+  events:
+    - name: click
+      title: 点击
+      description: 点击时触发
+      params: []
+    - name: change
+      title: 状态切换
+      description: 开关状态切换时触发
+      params: []
+  description: 开关

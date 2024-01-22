@@ -1,0 +1,36 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+      <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">空心样式</div>
+      <div class="van-cell__value">
+        <transition-stub><span class="van-tag van-tag--plain van-tag--primary">标签</span></transition-stub>
+      </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+        <!----></i>
+    </div>
+    <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+      <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">圆角样式</div>
+      <div class="van-cell__value">
+        <transition-stub><span class="van-tag van-tag--round van-tag--primary">标签</span></transition-stub>
+      </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+        <!----></i>
+    </div>
+    <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+      <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">标记样式</div>
+      <div class="van-cell__value">
+        <transition-stub><span class="van-tag van-tag--mark van-tag--primary">标签</span></transition-stub>
+      </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+        <!----></i>
+    </div>
+    <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+      <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">可关闭标签</div>
+      <div class="van-cell__value">
+        <transition-stub name="van-fade"><span class="van-tag van-tag--medium van-tag--primary"> 标签 <i class="van-icon van-icon-cross van-tag__close"><!----></i></span></transition-stub>
+      </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+        <!----></i>
+    </div>
+  </div>
+</div>
+`;

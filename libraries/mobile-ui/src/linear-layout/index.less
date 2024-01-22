@@ -1,0 +1,294 @@
+.van-linear-layout {
+  position: relative;
+}
+
+/* 默认为 block */
+.van-linear-layout[display="inline"],
+.van-linear-layout[inline] {
+  display: inline-block;
+}
+
+/* @trap: 不能自动添加`display: block`了，因为`display`有好多种如`table``flex``grid`，有覆盖掉的风险。
+ * 用一个属性来添加是否使用`block`
+ */
+.van-linear-layout[layout="block"]>* {
+  display: block;
+}
+
+.van-linear-layout[layout="inline"]>* {
+  display: inline-block;
+}
+
+
+.van-linear-layout[direction="horizontal"]>*:not(:last-child) {
+  margin-right: var(--van-space-base);
+}
+
+.van-linear-layout[direction="vertical"]>*:not(:last-child) {
+  margin-bottom: var(--van-space-base);
+}
+
+.van-linear-layout[direction="horizontal"][gap="shrink"]>*:not(:last-child) {
+  margin-right: var(--van-space-shrink);
+}
+
+.van-linear-layout[direction="vertical"][gap="shrink"]>*:not(:last-child) {
+  margin-bottom: var(--van-space-shrink);
+}
+
+.van-linear-layout[direction="horizontal"][gap="shrink"]>*:hover {
+  position: relative;
+}
+
+.van-linear-layout[direction="horizontal"][gap="none"]>*:not(:last-child) {
+  margin-right: 0;
+}
+
+.van-linear-layout[direction="vertical"][gap="none"]>*:not(:last-child) {
+  margin-bottom: 0;
+}
+
+.van-linear-layout[direction="horizontal"][gap="mini"]>*:not(:last-child) {
+  margin-right: var(--van-space-mini);
+}
+
+.van-linear-layout[direction="vertical"][gap="mini"]>*:not(:last-child) {
+  margin-bottom: var(--van-space-mini);
+}
+
+.van-linear-layout[direction="horizontal"][gap="small"]>*:not(:last-child) {
+  margin-right: var(--van-space-small);
+}
+
+.van-linear-layout[direction="vertical"][gap="small"]>*:not(:last-child) {
+  margin-bottom: var(--van-space-small);
+}
+
+.van-linear-layout[direction="horizontal"][gap="large"]>*:not(:last-child) {
+  margin-right: var(--van-space-large);
+}
+
+.van-linear-layout[direction="vertical"][gap="large"]>*:not(:last-child) {
+  margin-bottom: var(--van-space-large);
+}
+
+/* @deprecated */
+.van-linear-layout[alignment="left"] {
+  text-align: left;
+}
+
+.van-linear-layout[alignment="center"] {
+  text-align: center;
+}
+
+.van-linear-layout[alignment="right"] {
+  text-align: right;
+}
+
+/* @TRAP: 使用 text-align 可能会造成使用子元素的默认对齐方式不是左对齐 */
+.van-linear-layout[justify="start"] {
+  text-align: left;
+}
+
+.van-linear-layout[justify="center"] {
+  text-align: center;
+}
+
+.van-linear-layout[justify="end"] {
+  text-align: right;
+}
+
+.van-linear-layout[justify="space-between"]>*:first-child {
+  float: left;
+}
+
+.van-linear-layout[justify="space-between"]>*:last-child {
+  float: right;
+}
+
+/* stylelint-disable-next-line declaration-block-single-line-max-declarations */
+.van-linear-layout[justify="space-between"]::after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+.van-linear-layout[type="flex"] {
+  display: flex;
+  text-align: inherit;
+}
+
+.van-linear-layout[type="flex"][direction="vertical"] {
+  flex-direction: column;
+}
+
+.van-linear-layout[type="flex"][justify="start"] {
+  justify-content: flex-start;
+}
+
+.van-linear-layout[type="flex"][justify="center"] {
+  justify-content: center;
+}
+
+.van-linear-layout[type="flex"][justify="end"] {
+  justify-content: flex-end;
+}
+
+.van-linear-layout[type="flex"][justify="space-between"] {
+  justify-content: space-between;
+}
+
+.van-linear-layout[type="flex"][justify="space-between"]::after {
+  display: none;
+}
+
+.van-linear-layout[type="flex"][justify="space-around"] {
+  justify-content: space-around;
+}
+
+.van-linear-layout[type="flex"][alignment="start"] {
+  align-items: flex-start;
+}
+
+.van-linear-layout[type="flex"][alignment="center"] {
+  align-items: center;
+}
+
+.van-linear-layout[type="flex"][alignment="end"] {
+  align-items: flex-end;
+}
+
+.van-linear-layout[type="flex"][alignment="baseline"] {
+  align-items: baseline;
+}
+
+.van-linear-layout[type="flex"][alignment="stretch"] {
+  align-items: stretch;
+}
+
+.van-linear-layout[mode="inline"] {
+  display: inline-block;
+}
+
+.van-linear-layout[mode="block"] {
+  display: block;
+}
+
+.van-linear-layout[mode="flex"] {
+  display: flex;
+  text-align: inherit;
+  flex-wrap: wrap;
+}
+
+/* 与主轴同向用 flex，否则用 align-self */
+.van-linear-layout[mode="flex"][direction="horizontal"]>[width-stretch="true"],
+.van-linear-layout[mode="flex"][direction="horizontal"]>[widthstretch="true"],
+.van-linear-layout[mode="flex"]:not([direction])>[width-stretch="true"],
+.van-linear-layout[mode="flex"]:not([direction])>[widthstretch="true"],
+.van-linear-layout[mode="flex"][direction="vertical"]>[height-stretch="true"],
+.van-linear-layout[mode="flex"][direction="vertical"]>[heightstretch="true"] {
+  flex: 1 0 0;
+}
+
+.van-linear-layout[mode="flex"][direction="vertical"]>[width-stretch="true"],
+.van-linear-layout[mode="flex"][direction="vertical"]>[widthstretch="true"],
+.van-linear-layout[mode="flex"]:not([direction])>[height-stretch="true"],
+.van-linear-layout[mode="flex"]:not([direction])>[heightstretch="true"],
+.van-linear-layout[mode="flex"][direction="horizontal"]>[height-stretch="true"],
+.van-linear-layout[mode="flex"][direction="horizontal"]>[heightstretch="true"] {
+  align-self: stretch;
+}
+
+/* width-stretch 强制 width 为 unset */
+.van-linear-layout[mode="flex"]>[width-stretch="true"],
+.van-linear-layout[mode="flex"]>[widthstretch="true"] {
+  width: unset !important;
+}
+
+/* height-stretch 强制 height 为 unset */
+.van-linear-layout[mode="flex"]>[height-stretch="true"],
+.van-linear-layout[mode="flex"]>[heightstretch="true"] {
+  height: unset !important;
+}
+
+.van-linear-layout[mode="flex"][nowrap] {
+  flex-wrap: nowrap;
+}
+
+.van-linear-layout[mode="flex"][direction="vertical"] {
+  flex-direction: column;
+}
+
+.van-linear-layout[mode="flex"][justify="start"] {
+  justify-content: flex-start;
+}
+
+.van-linear-layout[mode="flex"][justify="center"] {
+  justify-content: center;
+}
+
+.van-linear-layout[mode="flex"][justify="end"] {
+  justify-content: flex-end;
+}
+
+.van-linear-layout[mode="flex"][justify="space-between"] {
+  justify-content: space-between;
+}
+
+.van-linear-layout[mode="flex"][justify="space-between"]::after {
+  display: none;
+}
+
+.van-linear-layout[mode="flex"][justify="space-around"] {
+  justify-content: space-around;
+}
+
+.van-linear-layout[mode="flex"][alignment="start"] {
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.van-linear-layout[mode="flex"][alignment="center"] {
+  align-items: center;
+  align-content: center;
+}
+
+.van-linear-layout[mode="flex"][alignment="end"] {
+  align-items: flex-end;
+  align-content: flex-end;
+}
+
+.van-linear-layout[mode="flex"][alignment="baseline"] {
+  align-items: baseline;
+  align-content: baseline;
+}
+
+.van-linear-layout[mode="flex"][alignment="stretch"] {
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.van-linear-layout__emptyTip {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #666666;
+  font-size: 18px;
+}
+
+.van-linear-layout__mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.van-linear-layout__loading {
+  position: absolute !important;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

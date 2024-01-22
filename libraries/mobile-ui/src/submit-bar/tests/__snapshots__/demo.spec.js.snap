@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <van-submit-bar price="3050" button-text="提交订单"></van-submit-bar>
+  </div>
+  <div>
+    <van-submit-bar disabled="" price="3050" button-text="提交订单" tip="你的收货地址不支持同城送, 我们已为你推荐快递" tip-icon="info-o"></van-submit-bar>
+  </div>
+  <div>
+    <van-submit-bar loading="" price="3050" button-text="提交订单"></van-submit-bar>
+  </div>
+  <div>
+    <van-submit-bar price="3050" button-text="提交订单">
+      <div role="checkbox" tabindex="0" aria-checked="true" class="van-checkbox">
+        <div class="van-checkbox__icon van-checkbox__icon--round van-checkbox__icon--checked"><i class="van-icon van-icon-success">
+            <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">全选</span>
+      </div>
+    </van-submit-bar>
+  </div>
+</div>
+`;

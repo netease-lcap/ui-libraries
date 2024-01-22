@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <van-skeleton title="" row="3"></van-skeleton>
+  </div>
+  <div>
+    <van-skeleton title="" avatar="" row="3"></van-skeleton>
+  </div>
+  <div>
+    <div role="switch" aria-checked="false" class="van-switch" style="font-size: 24px;">
+      <div class="van-switch__node"></div>
+    </div>
+    <van-skeleton title="" avatar="" row="3" loading="true">
+      <div class="demo-preview"><img src="https://img01.yzcdn.cn/vant/logo.png">
+        <div class="demo-content">
+          <h3>关于 Vant</h3>
+          <p>Vant 是一套轻量、可靠的移动端 Vue 组件库，提供了丰富的基础组件和业务组件，帮助开发者快速搭建移动应用。</p>
+        </div>
+      </div>
+    </van-skeleton>
+  </div>
+</div>
+`;

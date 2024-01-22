@@ -1,0 +1,56 @@
+- name: van-swipe
+  title: 幻灯片
+  icon: swipe
+  description: 用于循环播放一组图片或内容
+  labels:
+    - Display
+  nexted: false
+  attrs:
+    - name: loop
+      title: 循环播放
+      type: boolean
+      default: true
+      description: 是否循环播放
+      advanced: true
+    - name: show-indicators
+      title: 指示器
+      type: boolean
+      default: true
+      description: 是否显示指示器
+      advanced: true
+    - name: duration
+      title: 动画时间
+      type: number
+      default: 4000
+      description: 单位：毫秒，幻灯片切换时间，如果设置值小于动画时长，会在动画完成后切换。
+      group: 主要属性
+    - name: touchable
+      title: 手势滑动
+      type: boolean
+      default: true
+      description: 是否支持手势滑动
+      group: 交互属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`van-swipe-item`子组件。
+      empty-background: add-sub-large
+      support:
+        - name: van-swipe-item
+          title: 幻灯片子项
+          snippet: <van-swipe-item vusion-slot-name="default"><van-image
+            style="width:100%;height:100%"
+            src="https://static-vusion.163yun.com/assets/cloud-ui/1.jpg"></van-image></van-swipe-item>
+- name: van-swipe-item
+  title: 幻灯片选项
+  attrs: []
+  description: 幻灯片选项
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入幻灯片内容，如图片
+  events:
+    - name: click
+      title: 点击后
+      description: 点击某一项后触发
+      params: []

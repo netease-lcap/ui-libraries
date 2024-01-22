@@ -1,0 +1,143 @@
+- name: van-radio-group
+  title: 单选组
+  labels:
+    - Form
+  icon: radios
+  description: 多项中选择一个时使用
+  attrs:
+    - name: data-source
+      title: 数据源
+      type: Array<Item> | Function
+      description: 展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。
+      designer-value: "[{}, {}, {}]"
+      group: 数据属性
+    - name: data-schema
+      title: 数据类型
+      type: schema
+      description: 数据源返回的数据结构的类型，自动识别类型进行展示说明。
+      compType: dataTypeSelect
+      group: 数据属性
+    - name: value
+      title: 值
+      type: any
+      sync: true
+      model: true
+      description: 用于标识单选组的值
+      group: 数据属性
+    - name: icon
+      title: 单选项图标
+      clearable: true
+      type: icon
+      default: sure
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 增加自定义图标显示
+      tooltipLink: ""
+    - name: direction
+      title: 排列方向
+      type: string
+      options:
+        - value: horizontal
+          title: 水平
+        - value: vertical
+          title: 垂直
+      default: horizontal
+      description: 选择水平或垂直排列
+      group: 主要属性
+    - name: column
+      title: 每行排列数
+      type: number
+      description: 水平排列时每行展示的选项数量
+      dependency:
+        - direction: horizontal
+      group: 主要属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<van-radio>`子组件。
+      empty-background: add-sub
+      support:
+        - name: van-radio
+          title: 单选项
+          snippet: <van-radio icon="sure"><van-text text="节点"></van-text></van-radio>
+    - concept: Slot
+      name: item
+      description: 自定义选项的结构和样式
+      slotProps:
+        concept: Param
+        name: current
+        typeAnnotation:
+          concept: TypeAnnotation
+          typeKind: generic
+          typeNamespace: nasl.ui
+          typeName: Current
+          typeArguments:
+            - concept: TypeAnnotation
+              typeKind: typeParam
+              typeName: T
+  events:
+    - name: change
+      title: 值改变时
+      description: 选择值改变时触发
+      params: []
+- name: van-radio
+  title: 单选项
+  is-sub: true
+  attrs:
+    - name: title
+      title: 文本
+      type: string
+      description: 文本
+      advanced: true
+      group: 数据属性
+    - name: name
+      title: 选项值
+      type: string
+      description: 当前选中的值
+      group: 数据属性
+    - name: icon
+      title: 单选项图标
+      clearable: true
+      default: sure
+      type: icon
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 增加自定义图标显示
+      tooltipLink: ""
+    - name: label-position
+      title: 文本位置
+      type: string
+      options:
+        - value: right
+          title: 右
+        - value: left
+          title: 左
+      default: right
+      description: 设置文本居左或居右放置
+      group: 主要属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+  slots: false
+  events:
+    - name: click
+      title: 点击后
+      description: 点击某一项后触发
+      params: []

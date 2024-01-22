@@ -1,0 +1,73 @@
+- name: van-tag
+  icon: label
+  title: 标签
+  labels:
+    - Display
+  description: 用于标记关键词和概括主要内容。
+  attrs:
+    - name: type
+      title: 样式类型
+      type: string
+      options:
+        - value: primary
+          title: 默认
+        - value: success
+          title: 成功
+        - value: danger
+          title: 危险
+        - value: warning
+          title: 警告
+      default: primary
+      group: 主要属性
+      description: 设置主题颜色与样式类型
+    - name: mark
+      title: 显示为标记样式
+      type: boolean
+      default: false
+      group: 主要属性
+      description: ""
+    - name: closeable
+      title: 可关闭
+      type: boolean
+      default: false
+      group: 交互属性
+      description: ""
+    - name: size
+      title: 尺寸
+      type: string
+      options:
+        - value: large
+          title: 大型
+        - value: medium
+          title: 中型
+        - value: small
+          title: 小型
+      default: medium
+      group: 样式属性
+      description: 设置标签大小
+    - name: round
+      title: 显示为圆角
+      type: boolean
+      default: false
+      group: 样式属性
+      description: ""
+    - name: plain
+      title: 显示为空心
+      type: boolean
+      default: false
+      group: 样式属性
+      description: ""
+  slots: false
+  events:
+    - name: click
+      title: 点击时
+      description: 点击时触发
+      params: []
+    - name: before-close
+      title: 关闭前
+      description: 点击标签删除图标前触发，使用event.preventDefault可以阻止删除事件触发
+      params: []
+    - name: close
+      title: 关闭时
+      description: 点击标签删除图标时触发
+      params: []

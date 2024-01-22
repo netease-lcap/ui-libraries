@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div role="separator" class="u-code-example_demo_ van-divider van-divider--hairline van-divider--content-center"><span vusion-slot-name-edit="title">waga77</span></div>
+  </div>
+  <div>
+    <div role="separator" class="u-code-example_demo_ van-divider van-divider--dashed van-divider--hairline"></div>
+  </div>
+  <div>
+    <div role="separator" class="u-code-example_demo_ van-divider van-divider--hairline van-divider--content-center"> 文本 </div>
+  </div>
+  <div>
+    <div role="separator" class="van-divider van-divider--hairline van-divider--content-left"> 文本 </div>
+    <div role="separator" class="van-divider van-divider--hairline van-divider--content-right"> 文本 </div>
+  </div>
+  <div>
+    <div role="separator" class="van-divider van-divider--dashed van-divider--content-center"><span vusion-slot-name-edit="title">waga</span></div>
+  </div>
+  <div>
+    <div role="separator" class="van-divider van-divider--hairline van-divider--content-center" style="border-color: #1989fa; color: rgb(25, 137, 250); padding: 0px 16px;"> 文本 </div>
+  </div>
+</div>
+`;

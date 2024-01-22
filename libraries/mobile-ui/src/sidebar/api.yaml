@@ -1,0 +1,113 @@
+- name: van-sidebar
+  title: 侧边导航
+  icon: sidebarh5
+  labels:
+    - Navigation
+  description: 侧边导航
+  attrs:
+    - name: value
+      title: 值
+      type: number,string
+      sync: true
+      model: true
+      description: 用于标识菜单的值
+      group: 数据属性
+    - name: route
+      title: 开启路由模式
+      type: boolean
+      default: false
+      description: 是否开启路由模式
+      group: 主要属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<van-sidebar-item>`子组件。
+      empty-background: add-sub
+      support:
+        - name: van-sidebar-item
+          title: 菜单项
+          snippet: "<van-sidebar-item><template
+            #title>标签名称n</template></van-sidebar-item>"
+  events:
+    - name: change
+      title: 切换导航时
+      description: 切换导航时
+- name: van-sidebar-item
+  title: 菜单项
+  attrs:
+    - name: value
+      title: 值
+      type: number,string
+      sync: true
+      model: true
+      description: 用于标识菜单项的值
+      group: 数据属性
+    - name: showbaget
+      title: 显示徽章
+      type: boolean
+      default: true
+      description: 是否显示徽章
+      group: 数据属性
+    - name: badge
+      title: 徽章值
+      type: string, number
+      default: ""
+      description: ""
+      group: 数据属性
+    - name: badgemax
+      title: 请输入徽章最大值
+      type: number
+      description: ""
+      group: 数据属性
+    - name: title
+      title: 标题
+      type: string
+      default: 标题
+      description: ""
+      advanced: true
+      group: 主要属性
+    - name: linkType
+      title: 链接类型
+      type: string
+      options:
+        - value: destination
+          title: 页面跳转
+        - value: download
+          title: 下载链接
+      default: destination
+      description: ""
+      compType: linkTypeSelect
+      group: 交互属性
+    - name: hrefAndTo
+      title: 链接地址
+      type: string
+      description: ""
+      compType: linkHrefInput
+      group: 交互属性
+    - name: target
+      title: 打开方式
+      type: string
+      options:
+        - value: _blank
+          title: 新窗口
+        - value: _self
+          title: 当前窗口
+        - value: _parent
+          title: 父级窗口
+          advanced: true
+        - value: _top
+          title: 顶级窗口
+          advanced: true
+      default: _self
+      description: 父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。
+      group: 交互属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+  events:
+    - name: click
+      title: 点击菜单项
+      description: 点击选项导致 value 变化时触发

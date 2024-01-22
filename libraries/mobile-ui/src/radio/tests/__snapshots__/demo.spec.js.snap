@@ -1,0 +1,82 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div class="demo-radio-group van-radio-group van-radio-group--horizontal">
+      <div style="position: relative; width: 33.333333333333336%;">
+        <div role="radio" tabindex="-1" aria-checked="false" class="van-radio van-radio--horizontal">
+          <div class="van-radio__icon van-radio__icon--round"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-sure" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div><span vusion-slot-name="default" class="van-radio__label">选框1</span>
+        </div>
+      </div>
+      <div style="position: relative; width: 33.333333333333336%;">
+        <div role="radio" tabindex="-1" aria-checked="false" class="van-radio van-radio--horizontal">
+          <div class="van-radio__icon van-radio__icon--round"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-sure" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div><span vusion-slot-name="default" class="van-radio__label">选框2</span>
+        </div>
+      </div>
+      <div style="position: relative; width: 33.333333333333336%;">
+        <div role="radio" tabindex="-1" aria-checked="false" class="van-radio van-radio--horizontal">
+          <div class="van-radio__icon van-radio__icon--round"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-sure" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div><span vusion-slot-name="default" class="van-radio__label">选框3</span>
+        </div>
+      </div>
+      <div style="position: relative; width: 33.333333333333336%;">
+        <div role="radio" tabindex="-1" aria-checked="false" class="van-radio van-radio--horizontal">
+          <div class="van-radio__icon van-radio__icon--round"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-sure" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div><span vusion-slot-name="default" class="van-radio__label">选框4</span>
+        </div>
+      </div>
+      <div style="position: relative; width: 33.333333333333336%;">
+        <div role="radio" tabindex="-1" aria-checked="false" class="van-radio van-radio--horizontal">
+          <div class="van-radio__icon van-radio__icon--round"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-sure" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div><span vusion-slot-name="default" class="van-radio__label">选框500</span>
+        </div>
+      </div>
+      <div style="position: relative; width: 33.333333333333336%;">
+        <div role="radio" tabindex="-1" aria-checked="false" class="van-radio van-radio--horizontal">
+          <div class="van-radio__icon van-radio__icon--round"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-sure" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div><span vusion-slot-name="default" class="van-radio__label">选框6</span>
+        </div>
+      </div>
+      <div style="position: relative; width: 33.333333333333336%;">
+        <div role="radio" tabindex="-1" aria-checked="false" class="van-radio van-radio--horizontal">
+          <div class="van-radio__icon van-radio__icon--round"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-sure" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div><span vusion-slot-name="default" class="van-radio__label">选框7</span>
+        </div>
+      </div>
+      <div style="position: relative; width: 33.333333333333336%;">
+        <div role="radio" tabindex="-1" aria-checked="false" class="van-radio van-radio--horizontal">
+          <div class="van-radio__icon van-radio__icon--round"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-sure" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div><span vusion-slot-name="default" class="van-radio__label">选框8</span>
+        </div>
+      </div>
+      <div style="position: relative; width: 33.333333333333336%;">
+        <div role="radio" tabindex="-1" aria-checked="false" class="van-radio van-radio--horizontal">
+          <div class="van-radio__icon van-radio__icon--round"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-sure" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div><span vusion-slot-name="default" class="van-radio__label">选框9</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

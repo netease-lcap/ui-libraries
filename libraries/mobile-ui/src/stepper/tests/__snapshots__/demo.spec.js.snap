@@ -1,0 +1,83 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+    <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">基础用法</div>
+    <div class="van-cell__value">
+      <div class="van-stepper"><button type="button" class="van-stepper__minus van-stepper__minus--disabled"></button><input type="text" role="spinbutton" inputmode="decimal" aria-valuemax="Infinity" aria-valuemin="1" aria-valuenow="" class="van-stepper__input"><button type="button" class="van-stepper__plus"></button></div>
+    </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+      <!----></i>
+  </div>
+  <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+    <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">基础用法</div>
+    <div class="van-cell__value">
+      <div class="van-stepper"><button type="button" class="van-stepper__minus van-stepper__minus--disabled"></button><input type="text" role="spinbutton" inputmode="decimal" aria-valuemax="Infinity" aria-valuemin="1" aria-valuenow="1" class="van-stepper__input"><button type="button" class="van-stepper__plus"></button></div>
+    </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+      <!----></i>
+  </div>
+  <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+    <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">步长设置</div>
+    <div class="van-cell__value">
+      <div class="van-stepper"><button type="button" class="van-stepper__minus van-stepper__minus--disabled"></button><input type="text" role="spinbutton" inputmode="decimal" aria-valuemax="Infinity" aria-valuemin="1" aria-valuenow="1" class="van-stepper__input"><button type="button" class="van-stepper__plus"></button></div>
+    </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+      <!----></i>
+  </div>
+  <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+    <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">限制输入范围</div>
+    <div class="van-cell__value">
+      <div class="van-stepper"><button type="button" class="van-stepper__minus van-stepper__minus--disabled"></button><input type="text" role="spinbutton" inputmode="decimal" aria-valuemax="8" aria-valuemin="5" aria-valuenow="5" class="van-stepper__input"><button type="button" class="van-stepper__plus"></button></div>
+    </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+      <!----></i>
+  </div>
+  <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+    <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">限制输入整数</div>
+    <div class="van-cell__value">
+      <div class="van-stepper"><button type="button" class="van-stepper__minus van-stepper__minus--disabled"></button><input type="tel" role="spinbutton" inputmode="numeric" aria-valuemax="Infinity" aria-valuemin="1" aria-valuenow="1" class="van-stepper__input"><button type="button" class="van-stepper__plus"></button></div>
+    </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+      <!----></i>
+  </div>
+  <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+    <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">禁用状态</div>
+    <div class="van-cell__value">
+      <div class="van-stepper"><button type="button" class="van-stepper__minus van-stepper__minus--disabled"></button><input type="text" role="spinbutton" disabled="disabled" inputmode="decimal" aria-valuemax="Infinity" aria-valuemin="1" aria-valuenow="1" class="van-stepper__input"><button type="button" class="van-stepper__plus van-stepper__plus--disabled"></button></div>
+    </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+      <!----></i>
+  </div>
+  <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+    <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">禁用输入框</div>
+    <div class="van-cell__value">
+      <div class="van-stepper"><button type="button" class="van-stepper__minus van-stepper__minus--disabled"></button><input type="text" role="spinbutton" readonly="readonly" inputmode="decimal" aria-valuemax="Infinity" aria-valuemin="1" aria-valuenow="1" class="van-stepper__input"><button type="button" class="van-stepper__plus"></button></div>
+    </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+      <!----></i>
+  </div>
+  <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+    <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">固定小数位数</div>
+    <div class="van-cell__value">
+      <div class="van-stepper"><button type="button" class="van-stepper__minus van-stepper__minus--disabled"></button><input type="text" role="spinbutton" inputmode="decimal" aria-valuemax="Infinity" aria-valuemin="1" aria-valuenow="1.0" class="van-stepper__input"><button type="button" class="van-stepper__plus"></button></div>
+    </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+      <!----></i>
+  </div>
+  <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+    <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">自定义大小</div>
+    <div class="van-cell__value">
+      <div class="van-stepper"><button type="button" class="van-stepper__minus van-stepper__minus--disabled" style="width: 32px; height: 32px;"></button><input type="text" role="spinbutton" inputmode="decimal" aria-valuemax="Infinity" aria-valuemin="1" aria-valuenow="1" class="van-stepper__input" style="width: 40px; height: 32px;"><button type="button" class="van-stepper__plus" style="width: 32px; height: 32px;"></button></div>
+    </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+      <!----></i>
+  </div>
+  <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+    <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">异步变更</div>
+    <div class="van-cell__value">
+      <div class="van-stepper"><button type="button" class="van-stepper__minus van-stepper__minus--disabled"></button><input type="text" role="spinbutton" inputmode="decimal" aria-valuemax="Infinity" aria-valuemin="1" aria-valuenow="1" class="van-stepper__input"><button type="button" class="van-stepper__plus"></button></div>
+    </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+      <!----></i>
+  </div>
+  <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+    <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">圆角风格</div>
+    <div class="van-cell__value">
+      <div class="van-stepper van-stepper--round"><button type="button" class="van-stepper__minus van-stepper__minus--disabled" style="width: 22px; height: 22px;"></button><input type="text" role="spinbutton" readonly="readonly" inputmode="decimal" aria-valuemax="Infinity" aria-valuemin="1" aria-valuenow="1" class="van-stepper__input" style="height: 22px;"><button type="button" class="van-stepper__plus" style="width: 22px; height: 22px;"></button></div>
+    </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+      <!----></i>
+  </div>
+</div>
+`;

@@ -1,0 +1,352 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div class="van-hairline--top-bottom van-tabbar van-tabbar--unfit">
+      <div class="van-tabbar-item van-tabbar-item--active">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text">标签</div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-search" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text">标签</div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text">标签</div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text">标签</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-hairline--top-bottom van-tabbar van-tabbar--unfit">
+      <div class="van-tabbar-item van-tabbar-item--active">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-search" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-hairline--top-bottom van-tabbar van-tabbar--unfit">
+      <div class="van-tabbar-item van-tabbar-item--active">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-search" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-hairline--top-bottom van-tabbar van-tabbar--unfit">
+      <div class="van-tabbar-item van-tabbar-item--active">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-search" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-hairline--top-bottom van-tabbar van-tabbar--unfit">
+      <div class="van-tabbar-item van-tabbar-item--active">
+        <div class="van-tabbar-item__icon"><img src="https://img01.yzcdn.cn/vant/user-active.png"></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"><span>自定义</span></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-search" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-hairline--top-bottom van-tabbar van-tabbar--unfit">
+      <div class="van-tabbar-item van-tabbar-item--active" style="color: rgb(238, 10, 36);">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item" style="color: rgb(0, 0, 0);">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-search" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item" style="color: rgb(0, 0, 0);">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item" style="color: rgb(0, 0, 0);">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-hairline--top-bottom van-tabbar van-tabbar--unfit">
+      <div class="van-tabbar-item van-tabbar-item--active">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text">标签1</div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-search" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text">标签2</div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text">标签3</div>
+        </div>
+      </div>
+      <div class="van-tabbar-item">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text">标签4</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-hairline--top-bottom van-tabbar van-tabbar--unfit">
+      <div class="van-tabbar-item van-tabbar-item--active" style="font-size: 24px;">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-frontpage" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"><span vusion-slot-name-edit="text" class="root">标签</span></div>
+        </div>
+      </div>
+      <div class="van-tabbar-item" style="font-size: 24px;">
+        <div class="van-tabbar-item__icon"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+              <use xlink:href="#h5-contact" class="van-shoud-pa"></use>
+            </svg>
+            <div class="van-iconv__slot"></div>
+            <!---->
+          </i></div>
+        <div vusion-slot-name="default">
+          <div vusion-slot-name-edit="text" class="van-tabbar-item__text"><span vusion-slot-name-edit="text" class="root">标签</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,136 @@
+- name: van-area
+  title: 地区选择
+  icon: region-select
+  labels:
+    - Selector
+  description: 省市区三级联动选择
+  attrs:
+    - name: labelField
+      title: 左侧标题
+      type: string
+      description: 左侧标题
+      advanced: true
+    - name: isNew
+      title: 是否使用新版外观
+      type: boolean
+      default: false
+      description: 是否使用新版外观
+    - name: value
+      title: 值
+      type: string
+      sync: true
+      model: true
+      default: ""
+      description: 用于标识地区选择的值
+      group: 数据属性
+    - name: areaListprop
+      title: 数据源
+      type: array
+      default: '{"province_list":{"110000":"北京市"},"city_list":{"110100":"北京市"},"county_list":{"110101":"东城区","110102":"西城区","110105":"朝阳区","110106":"丰台区","110107":"石景山区","110108":"海淀区","110109":"门头沟区","110111":"房山区","110112":"通州区","110113":"顺义区","110114":"昌平区","110115":"大兴区","110116":"怀柔区","110117":"平谷区","110118":"密云区","110119":"延庆区"}}'
+      description: 展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑。
+      group: 数据属性
+    - name: title
+      title: 顶部栏标题
+      type: string
+      default: 标题
+      description: ""
+      group: 主要属性
+    - name: confirm-button-text
+      title: 确认按钮文字
+      type: string
+      default: 确认
+      description: ""
+      group: 主要属性
+    - name: cancel-button-text
+      title: 取消按钮文字
+      type: string
+      default: 取消
+      description: ""
+      group: 主要属性
+    - name: visible-item-count
+      title: 可见选项个数
+      type: number
+      default: 6
+      description: ""
+      group: 主要属性
+    - name: columns-num
+      title: 显示列数
+      type: number
+      default: 3
+      description: 显示列数，3-省市区，2-省市，1-省
+      group: 主要属性
+    - name: input-align
+      title: 对齐方式
+      type: string
+      options:
+        - value: left
+          title: 左
+        - value: center
+          title: 中
+        - value: right
+          title: 右
+      default: left
+      description: 设置右侧内容的对齐方式
+      group: 主要属性
+    - name: converter
+      title: 转换器
+      type: string
+      options:
+        - value: name
+          title: 地区名称
+        - value: code
+          title: 地区码
+      description: 将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式
+      group: 主要属性
+    - name: close-on-click-overlay
+      title: 点击遮罩层后关闭
+      type: boolean
+      default: false
+      description: ""
+      group: 交互属性
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      group: 状态属性
+      description: 正常显示，但禁止选择/输入
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      group: 状态属性
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<van-picker-action-slot>`子组件
+      support:
+        - name: van-picker-action-slot
+          title: 事件插槽
+          snippet: <van-picker-action-slot
+            target-method="confirm"></van-picker-action-slot>
+    - concept: Slot
+      name: option
+      title: option
+      slotProps:
+        concept: Param
+        name: current
+        typeAnnotation:
+          concept: TypeAnnotation
+          typeKind: generic
+          typeNamespace: nasl.ui
+          typeName: Current
+          typeArguments:
+            - concept: TypeAnnotation
+              typeKind: typeParam
+              typeName: T
+  events:
+    - name: confirm
+      title: 点击右上方完成按钮
+      description: 点击右上方完成按钮
+    - name: cancel
+      title: 点击取消按钮时
+      description: 点击取消按钮时
+    - name: change
+      title: 选项改变时触发
+      description: 选项改变时触发

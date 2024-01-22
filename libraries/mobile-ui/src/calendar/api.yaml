@@ -1,0 +1,121 @@
+- name: van-calendar
+  title: 日期选择
+  labels:
+    - Selector
+  icon: date-time-picker
+  attrs:
+    - name: labelField
+      title: 左侧标题
+      type: string
+      description: 左侧标题
+      advanced: true
+    - name: type
+      title: 类型
+      type: string
+      options:
+        - title: single
+          value: single
+        - title: multiple
+          value: multiple
+        - title: range
+          value: range
+      default: single
+      advanced: true
+      description: 选择类型
+    - name: isNew
+      title: 是否使用新版外观
+      type: boolean
+      default: false
+      description: 是否使用新版外观
+    - name: value
+      title: 值
+      type: string, Date, Array
+      sync: true
+      model: true
+      default: null
+      description: 用于标识日期选择的值
+      group: 数据属性
+    - name: minDate
+      title: 最小日期
+      type: Date,String
+      description: 最小日期，默认为一年前。
+      group: 数据属性
+    - name: maxDate
+      title: 最大日期
+      type: Date,String
+      description: 最大日期，默认为一年后。
+      group: 数据属性
+    - name: title
+      title: 日历标题
+      type: string
+      default: 选择日期
+      group: 主要属性
+      description: ""
+    - name: input-align
+      title: 对齐方式
+      type: string
+      options:
+        - value: left
+          title: 左
+        - value: center
+          title: 中
+        - value: right
+          title: 右
+      default: left
+      description: 设置右侧内容的对齐方式
+      group: 主要属性
+    - name: close-on-click-overlay
+      title: 点击遮罩层后关闭
+      type: boolean
+      default: false
+      description: ""
+      group: 交互属性
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      group: 状态属性
+      description: 正常显示，但禁止选择/输入
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<van-picker-action-slot>`子组件
+      support:
+        - name: van-picker-action-slot
+          title: 事件插槽
+          snippet: <van-picker-action-slot
+            target-method="confirm"></van-picker-action-slot>
+  events:
+    - name: confirm
+      title: 确认
+      description: 点击完成按钮时触发的事件
+      params: []
+    - name: select
+      title: 点击
+      description: 点击并选中任意日期时触发
+      params: []
+    - name: cancel
+      title: 取消
+      description: 点击完成取消时触发的事件
+      params: []
+  methods:
+    - name: reset
+      title: 日期重置
+      description: 将选中的日期重置到指定日期，未传参时会重置到默认日期
+      params: []
+  description: 日历组件用于选择日期或日期区间
+  i18n:
+    zh-CN:
+      vanCalendar_title: 日期选择
+      vanCalendar_confirm: 确定
+      vanCalendar_weekdays: 日,一,二,三,四,五,六
+      vanCalendar_monthTitle: "{year}年{month}月"
+      vanCalendar_end: 结束
+      vanCalendar_start: 开始
+      vanCalendar_startEnd: 开始/结束

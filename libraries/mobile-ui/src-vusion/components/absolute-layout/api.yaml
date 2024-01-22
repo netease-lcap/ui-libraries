@@ -1,0 +1,15 @@
+- name: van-absolute-layout
+  title: 自由布局
+  description: 拖拽内部元素到任意位置
+  icon: absolute-layout
+  labels:
+    - Layout
+  slots:
+    - concept: Slot
+      name: default
+      description: 内容
+  events:
+    - name: click
+      title: 点击后
+      description: 点击此项时触发
+      params: []

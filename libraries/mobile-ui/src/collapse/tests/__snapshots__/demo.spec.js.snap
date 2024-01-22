@@ -1,0 +1,50 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div noallow="" class="van-cell van-cell--center">
+      <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title"><span vusion-slot-name-edit="text" class="root">值</span></div>
+      <div class="van-cell__value"> </div>
+    </div>
+    <div class="van-collapse van-hairline--top-bottom">
+      <div class="van-collapse-item">
+        <div aria-expanded="false" noallow="" class="van-cell van-cell--clickable van-cell--center van-collapse-item__title van-collapse-item__title--hideLink" role="button" tabindex="0">
+          <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">
+            <div class="van-row van-row--flex" style="text-align: center;">
+              <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8"><span vusion-slot-name-edit="text" class="root">普通文本</span></div>
+              <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8"><span vusion-slot-name-edit="text" class="root">普通文本</span></div>
+              <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8"><span vusion-slot-name-edit="text" class="root">普通文本</span></div>
+            </div>
+          </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+            <!----></i>
+        </div>
+      </div>
+      <div class="van-collapse-item van-collapse-item--border">
+        <div aria-expanded="false" noallow="" class="van-cell van-cell--clickable van-cell--center van-collapse-item__title van-collapse-item__title--hideLink" role="button" tabindex="0">
+          <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">
+            <div class="van-row van-row--flex" style="text-align: center;">
+              <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8"><span vusion-slot-name-edit="text" class="root">普通文本</span></div>
+              <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8"><span vusion-slot-name-edit="text" class="root">普通文本</span></div>
+              <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8"><span vusion-slot-name-edit="text" class="root">普通文本</span></div>
+            </div>
+          </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+            <!----></i>
+        </div>
+      </div>
+      <div class="van-collapse-item van-collapse-item--border">
+        <div role="button" tabindex="0" aria-expanded="false" noallow="" class="van-cell van-cell--clickable van-cell--center van-collapse-item__title">
+          <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">
+            <div class="van-row van-row--flex" style="text-align: center;">
+              <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8"><span vusion-slot-name-edit="text" class="root">普通文本</span></div>
+              <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8"><span vusion-slot-name-edit="text" class="root">普通文本</span></div>
+              <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8"><span vusion-slot-name-edit="text" class="root">普通文本</span></div>
+            </div>
+          </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+            <!----></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

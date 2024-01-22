@@ -1,0 +1,104 @@
+- name: van-cardu
+  title: 卡片
+  icon: card
+  labels:
+    - Container
+  description: 用于快速布局
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入默认的元素
+    - concept: Slot
+      name: cover
+      description: 插入图片
+  attrs:
+    - name: linkType
+      title: 链接类型
+      type: string
+      options:
+        - value: destination
+          title: 页面跳转
+        - value: download
+          title: 下载链接
+      default: destination
+      description: ""
+      compType: linkTypeSelect
+      group: 交互属性
+    - name: hrefAndTo
+      title: 链接地址
+      type: string
+      description: ""
+      compType: linkHrefInput
+      group: 交互属性
+    - name: target
+      title: 打开方式
+      type: string
+      options:
+        - value: _blank
+          title: 新窗口
+        - value: _self
+          title: 当前窗口
+        - value: _parent
+          title: 父级窗口
+          advanced: true
+        - value: _top
+          title: 顶级窗口
+          advanced: true
+      default: _self
+      description: 父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。
+      group: 交互属性
+    - name: width
+      title: 宽度
+      type: string
+      advanced: true
+      description: 卡片宽度：像素或百分比
+      group: 样式属性
+    - name: sr
+      title: 图片风格
+      type: string
+      options:
+        - value: s
+          title: 方角
+        - value: r
+          title: 圆角
+      default: r
+      description: ""
+      group: 样式属性
+    - name: shadow
+      title: 卡片阴影
+      type: boolean
+      description: ""
+      default: true
+      group: 样式属性
+    - name: border
+      title: 卡片边框
+      type: boolean
+      default: true
+      description: ""
+      group: 样式属性
+    - name: split
+      title: 分割线
+      type: boolean
+      default: false
+      description: ""
+      group: 样式属性
+  events:
+    - name: click
+      title: 点击后
+      description: 点击事件
+      params: []
+- name: van-cardu-group
+  advanced: true
+  title: 卡片组
+  nexted: false
+  attrs:
+    - name: title
+      title: 标题
+      type: string
+      description: 卡片组的标题
+  description: 卡片组
+  slots:
+    - name: default
+      description: 插入默认的元素
+    - name: cover
+      description: 插入图片

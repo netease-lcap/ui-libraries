@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+      <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">基础用法</div><i class="van-icon van-icon-arrow van-cell__right-icon">
+        <!----></i>
+    </div>
+    <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+      <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">展示取消按钮</div><i class="van-icon van-icon-arrow van-cell__right-icon">
+        <!----></i>
+    </div>
+    <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+      <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">展示描述信息</div><i class="van-icon van-icon-arrow van-cell__right-icon">
+        <!----></i>
+    </div>
+  </div>
+  <div>
+    <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+      <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">选项状态</div><i class="van-icon van-icon-arrow van-cell__right-icon">
+        <!----></i>
+    </div>
+  </div>
+  <div>
+    <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+      <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">自定义面板</div><i class="van-icon van-icon-arrow van-cell__right-icon">
+        <!----></i>
+    </div>
+  </div>
+  <van-action-sheet actions="[object Object],[object Object],[object Object]"></van-action-sheet>
+  <van-action-sheet actions="[object Object],[object Object],[object Object]" close-on-click-action="" cancel-text="取消"></van-action-sheet>
+  <van-action-sheet actions="[object Object],[object Object],[object Object]" close-on-click-action="" cancel-text="取消" description="这是一段描述信息"></van-action-sheet>
+  <van-action-sheet close-on-click-action="" actions="[object Object],[object Object],[object Object]" cancel-text="取消"></van-action-sheet>
+  <van-action-sheet title="标题">
+    <div class="demo-action-sheet-content">内容</div>
+  </van-action-sheet>
+</div>
+`;

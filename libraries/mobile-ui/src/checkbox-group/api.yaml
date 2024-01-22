@@ -1,0 +1,189 @@
+- name: van-checkbox-group
+  title: 多选组
+  labels:
+    - Form
+  icon: checkboxes
+  description: 多项中选择一个或多个时使用
+  attrs:
+    - name: data-source
+      title: 数据源
+      type: Array<Item> | Function
+      description: 展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑。
+      designer-value: "[{}, {}, {}]"
+      group: 数据属性
+    - name: data-schema
+      title: 数据类型
+      type: schema
+      description: 数据源返回的数据结构的类型，自动识别类型进行展示说明。
+      compType: dataTypeSelect
+      group: 数据属性
+    - name: value
+      title: 值
+      type: any
+      sync: true
+      model: true
+      description: 用于标识多选组的值
+      group: 数据属性
+    - name: max
+      title: 最大可选数量
+      type: number
+      description: 最大可选数量(0为不限制)
+      group: 数据属性
+    - name: min
+      title: 最小可选数量
+      type: number
+      default: 0
+      description: 最小可选数量(0为不限制)
+      group: 数据属性
+    - name: value-field
+      title: 值字段
+      type: string
+      default: value
+      description: 用于标识选中值的字段
+      display: property-select
+      group: 数据属性
+    - name: direction
+      title: 排列方向
+      type: string
+      options:
+        - value: horizontal
+          title: 水平
+        - value: vertical
+          title: 垂直
+      default: horizontal
+      description: 设置多选组的排列方向
+      group: 主要属性
+    - name: column
+      title: 排列数
+      type: number
+      description: 水平排列时每行展示的选项数量
+      dependency:
+        - direction: horizontal
+      group: 主要属性
+    - name: converter
+      title: 转换器
+      type: string
+      options:
+        - value: join
+          title: 以','连接
+        - value: join:|
+          title: 以'|'连接
+        - value: join:;
+          title: 以';'连接
+        - value: json
+          title: json
+        - value: none
+          title: 无
+      default: none
+      description: 将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式。
+      bindHide: true
+      group: 主要属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<van-checkbox>`子组件。
+      empty-background: add-sub
+      support:
+        - name: van-checkbox
+          title: 多选项
+          snippet: <van-checkbox name="n" shape="square"><van-text
+            text="节点"></van-text></van-checkbox>
+    - concept: Slot
+      name: item
+      description: 自定义选项的结构和样式
+      slotProps:
+        concept: Param
+        name: current
+        typeAnnotation:
+          concept: TypeAnnotation
+          typeKind: generic
+          typeNamespace: nasl.ui
+          typeName: Current
+          typeArguments:
+            - concept: TypeAnnotation
+              typeKind: typeParam
+              typeName: T
+  events:
+    - name: change
+      title: 值改变
+      description: 选择值改变时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeEvent"
+        - name: $event.value
+          type: Array<string>
+          description: 选中状态
+        - name: $event.oldValue
+          type: Array<string>
+          description: 旧的选中状态
+- name: van-checkbox
+  title: 多选项
+  is-sub: true
+  attrs:
+    - name: title
+      title: 文本
+      type: string
+      description: 文本
+      advanced: true
+    - name: label
+      title: 选中值
+      type: any
+      description: 当前选中的值
+      group: 数据属性
+    - name: shape
+      title: 形状
+      type: string
+      options:
+        - value: square
+          title: 方形
+        - value: round
+          title: 圆形
+      default: square
+      description: 选择多选项为方形或圆形
+      group: 主要属性
+    - name: label-position
+      title: 文本位置
+      type: string
+      options:
+        - value: right
+          title: 右
+        - value: left
+          title: 左
+      default: right
+      description: 设置文本居左或居右放置
+      group: 主要属性
+    - name: value
+      title: 选中
+      type: boolean
+      sync: true
+      model: true
+      default: false
+      description: 是否选中选项
+      group: 交互属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+  slots: false
+  events:
+    - name: click
+      title: 点击后
+      description: 点击某一项后触发
+      params: []

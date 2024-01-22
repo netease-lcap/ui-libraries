@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <van-nav-bar title="标题" left-text="返回" right-text="按钮" left-arrow=""></van-nav-bar>
+  </div>
+  <div>
+    <van-nav-bar title="标题" left-text="返回" left-arrow=""></van-nav-bar>
+  </div>
+</div>
+`;

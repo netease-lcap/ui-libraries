@@ -1,0 +1,119 @@
+- name: van-steps
+  title: 步骤条
+  icon: steps
+  labels:
+    - Display
+  description: 用于展示操作流程的各个环节，让用户了解当前的操作在整体流程中的位置。
+  attrs:
+    - name: data-source
+      title: 数据源
+      type: Array<Item> | Function
+      description: 展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑。
+      designer-value: "[{}, {}, {}]"
+      group: 数据属性
+    - name: data-schema
+      title: 数据类型
+      type: schema
+      description: 集合类型每一元素的数据类型
+      compType: dataTypeSelect
+      group: 数据属性
+    - name: value
+      title: 当前步骤
+      type: number,string
+      sync: true
+      model: true
+      default: 0
+      description: 指定当前步骤，从0开始记数。
+      group: 数据属性
+    - name: direction
+      title: 步骤条方向
+      type: string
+      options:
+        - value: horizontal
+          title: 横向
+        - value: vertical
+          title: 垂直
+      default: horizontal
+      group: 主要属性
+      description: 设置步骤条方向
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<van-step>`子组件。
+      empty-background: add-sub
+      support:
+        - name: van-step
+          title: 步骤条项
+          snippet: <van-step>stepn</van-step>
+    - concept: Slot
+      name: item
+      description: 自定义选项的结构和样式
+      slotProps:
+        concept: Param
+        name: current
+        typeAnnotation:
+          concept: TypeAnnotation
+          typeKind: generic
+          typeNamespace: nasl.ui
+          typeName: Current
+          typeArguments:
+            - concept: TypeAnnotation
+              typeKind: typeParam
+              typeName: T
+  events:
+    - name: changestep
+      title: 切换步骤时
+      description: 切换步骤时
+- name: van-step
+  title: 步骤条项
+  attrs:
+    - name: status
+      title: 状态
+      type: string
+      options:
+        - value: wait
+          title: 等待中
+        - value: process
+          title: 进行中
+        - value: finish
+          title: 已完成
+        - value: error
+          title: 错误
+      description: 设置步骤条的状态，分别为等待中、进行中、已完成、错误。
+      group: 主要属性
+    - name: icon
+      title: 图标
+      type: icon
+      description: 自定义步骤的图标
+      group: 主要属性
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+  events:
+    - name: clicktitle
+      title: 点击标题
+      description: 点击标题
+    - name: clickicon
+      title: 点击图标
+      description: 点击图标

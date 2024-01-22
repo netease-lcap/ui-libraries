@@ -1,0 +1,48 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div class="van-progress-room">
+      <div class="van-progress"><span class="van-progress__portion" style="width: 0px;"><span class="van-progress__pivot" style="left: 0px;">50%</span></span></div>
+    </div>
+  </div>
+  <div>
+    <div class="van-progress-room">
+      <div class="van-progress" style="height: 8px;"><span class="van-progress__portion" style="width: 0px;"><span class="van-progress__pivot" style="left: 0px;">50%</span></span></div>
+    </div>
+  </div>
+  <div>
+    <div class="van-progress-room">
+      <div class="van-progress"><span class="van-progress__portion" style="background: rgb(202, 202, 202); width: 0px;"><span class="van-progress__pivot" style="left: 0px; background: rgb(202, 202, 202);">50%</span></span></div>
+    </div>
+  </div>
+  <div>
+    <div class="van-progress-room">
+      <div class="van-progress"><span class="van-progress__portion" style="background: rgb(242, 130, 106); width: 0px;"><span class="van-progress__pivot" style="left: 0px; background: rgb(242, 130, 106);">橙色</span></span></div>
+    </div>
+    <div class="van-progress-room">
+      <div class="van-progress"><span class="van-progress__portion" style="background: rgb(238, 10, 36); width: 0px;"><span class="van-progress__pivot" style="left: 0px; background: rgb(238, 10, 36);">红色</span></span></div>
+    </div>
+    <div class="van-progress-room">
+      <div class="van-progress"><span class="van-progress__portion" style="width: 0px;"><span class="van-progress__pivot" style="left: 0px; background: rgb(114, 50, 221);">紫色</span></span></div>
+    </div>
+  </div>
+  <div>
+    <form class="van-form">
+      <div label-layout="inline" is-sub="" class="van-cellson van-cellson--center van-cellson--required van-field">
+        <div vusion-slot-name="title" class="van-cellson__title van-field__label van-field__labelhasslots"><span vusion-slot-name-edit="text" class="root">名称</span></div>
+        <div class="van-cellson__value van-field__value">
+          <div class="van-field__body">
+            <div class="van-field__control van-field__control--custom">
+              <div class="van-progress-room">
+                <div class="van-progress"><span class="van-progress__portion" style="width: 0px;"><span class="van-progress__pivot" style="left: 0px;">50%</span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+`;

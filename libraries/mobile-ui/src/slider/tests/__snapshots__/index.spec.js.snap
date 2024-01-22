@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`slider-width style 1`] = `
+<div class="van-slider-room " style="width: 100px; height: 50px; padding: 10px;">
+  <div class="van-slider">
+    <div class="van-slider__bar" style="width: 0%;">
+      <div role="slider" tabindex="0" aria-valuemin="0" aria-valuenow="0" aria-valuemax="100" aria-orientation="horizontal" class="van-slider__button-wrapper">
+        <div class="van-slider__button"></div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

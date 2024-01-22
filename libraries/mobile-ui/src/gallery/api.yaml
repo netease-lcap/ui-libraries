@@ -1,0 +1,15 @@
+- name: van-gallery
+  title: 画廊
+  icon: gallery
+  labels:
+    - Display
+  description: 画廊
+  attrs:
+    - name: data-source
+      title: 数据源
+      type: Array<Item> | Function | object
+      value: https://static-vusion.163yun.com/h5-template/cat.jpeg
+      description: 展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑。
+      group: 数据属性
+  slots: false
+  events: null

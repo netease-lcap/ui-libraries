@@ -1,0 +1,214 @@
+- name: van-dropdown-menu
+  title: 下拉菜单
+  icon: dropdown-menu
+  labels:
+    - Navigation
+  description: 向下弹出的菜单列表。
+  attrs:
+    - name: value
+      title: 菜单值
+      type: number,string
+      sync: true
+      model: true
+      advanced: true
+      description: 菜单值
+    - name: route
+      title: 是否开启路由模式
+      type: boolean
+      default: false
+      advanced: true
+      description: 是否开启路由模式
+    - name: direction
+      title: 展开方向
+      type: string
+      options:
+        - value: up
+          title: 上
+        - value: down
+          title: 下
+      default: down
+      description: 设置下拉菜单的展开方向
+      group: 主要属性
+    - name: overlay
+      title: 显示遮罩层
+      type: boolean
+      default: true
+      description: ""
+      group: 交互属性
+    - name: close-on-click-overlay
+      title: 点击遮罩层后关闭
+      type: boolean
+      default: true
+      description: 是否点击遮罩层后关闭菜单
+      group: 交互属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<van-dropdown-menu>`子组件。
+      empty-background: add-sub
+      support:
+        - name: van-dropdown-menu
+          title: 菜单项
+          snippet: '<van-dropdown-item title="标题"><van-dropdown-item-son clickable
+            :isLink="false"><template
+            #title>标题1</template></van-dropdown-item-son></van-dropdown-item>'
+- name: van-dropdown-item
+  title: 菜单项
+  attrs:
+    - name: value
+      title: 值
+      type: number,string
+      sync: true
+      model: true
+      description: 用于标识菜单项的值
+      group: 数据属性
+    - name: title
+      title: 标题
+      type: string
+      default: 标题
+      description: ""
+      group: 主要属性
+    - name: shutself
+      title: 点击菜单子项关闭
+      type: boolean
+      default: true
+      description: 是否通过点击菜单子项关闭
+      group: 交互属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<van-dropdown-item-son>`子组件。
+      empty-background: add-sub
+      support:
+        - name: van-dropdown-item-son
+          title: 菜单项
+          snippet: <van-dropdown-item-son clickable :isLink="false" notitle
+            title="标题n"></van-dropdown-item-son>
+  events:
+    - name: change
+      title: 点击选项导致 value 变化时触发
+      description: 点击选项导致 value 变化时触发
+      params: []
+    - name: open
+      title: 打开菜单栏时触发
+      description: 打开菜单栏时触发
+      params: []
+    - name: close
+      title: 关闭菜单栏时触发
+      description: 关闭菜单栏时触发
+      params: []
+  methods:
+    - name: toggle
+      description: 切换菜单展示状态
+- name: van-dropdown-item-son
+  title: 菜单子项
+  attrs:
+    - name: rtitle
+      title: 右侧文本
+      type: string
+      advanced: true
+      description: 右侧文本
+    - name: label
+      title: 标题下方的描述信息
+      type: string
+      default: 这是单元格
+      advanced: true
+      description: 标题下方的描述信息
+    - name: value
+      title: 值
+      type: string, number
+      default2: 内容
+      description: 用于标识菜单子项的值
+      group: 数据属性
+    - name: isLink
+      title: 箭头
+      type: boolean
+      default: true
+      description: 是否显示箭头图标
+      group: 主要属性
+    - name: arrow-direction
+      title: 箭头方向
+      type: string
+      options:
+        - value: left
+          title: 左
+        - value: up
+          title: 上
+        - value: down
+          title: 下
+        - value: right
+          title: 右
+      default: right
+      description: 设置箭头方向
+      group: 主要属性
+    - name: center
+      title: 垂直居中
+      type: boolean
+      default: true
+      description: ""
+      group: 主要属性
+    - name: title
+      title: 文本
+      type: string
+      description: 菜单子项的左侧文本
+      group: 主要属性
+    - name: icon
+      title: 图标
+      type: icon
+      default: ""
+      description: 菜单子项的显示图标
+      group: 主要属性
+    - name: linkType
+      title: 链接类型
+      type: string
+      options:
+        - value: destination
+          title: 页面跳转
+        - value: download
+          title: 下载链接
+      default: destination
+      description: ""
+      compType: linkTypeSelect
+      group: 交互属性
+    - name: hrefAndTo
+      title: 链接地址
+      type: string
+      description: ""
+      compType: linkHrefInput
+      group: 交互属性
+    - name: target
+      title: 打开方式
+      type: string
+      options:
+        - value: _blank
+          title: 新窗口
+        - value: _self
+          title: 当前窗口
+        - value: _parent
+          title: 父级窗口
+          advanced: true
+        - value: _top
+          title: 顶级窗口
+          advanced: true
+      default: _self
+      description: 父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。
+      group: 交互属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入文本或 HTML。
+    - concept: Slot
+      name: right-icon
+      description: 右侧图标。
+      advanced: true
+  events:
+    - name: click
+      title: 点击后
+      description: 点击某一项后触发
+      params: []

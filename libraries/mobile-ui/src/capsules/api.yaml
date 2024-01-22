@@ -1,0 +1,143 @@
+- name: van-capsules
+  title: 胶囊
+  icon: capsules
+  description: 多项中选择一项
+  labels:
+    - Form
+  attrs:
+    - name: value
+      title: 选中值
+      type: any
+      sync: true
+      model: true
+      description: 当前选中的值
+      group: 数据属性
+      brifeDoc: ""
+      docDescription: 当前选择的值
+      tooltipLink: ""
+    - name: cancelable
+      title: 可取消
+      type: boolean
+      default: false
+      description: 是否可以取消选择
+      group: 交互属性
+      brifeDoc: ""
+      docDescription: 是否可以取消选择
+      tooltipLink: ""
+    - name: multiple
+      title: 可多选
+      type: boolean
+      default: false
+      description: 是否可以多选
+      group: 交互属性
+      brifeDoc: ""
+      docDescription: 是否可以多选
+      tooltipLink: ""
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+      brifeDoc: ""
+      docDescription: 正常显示，但禁止选择或输入。
+      tooltipLink: ""
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+      brifeDoc: ""
+      docDescription: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      tooltipLink: ""
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<van-capsules-item>`或`<van-capsules-group>`子组件。
+      support:
+        - name: van-capsules-item
+          title: 胶囊选项
+          snippet: <van-capsules-item>选项</van-capsules-item>
+        - name: van-capsules-group
+          title: 胶囊选项组
+          snippet: <van-capsules-group><van-capsules-item>选项</van-capsules-item><van-capsules-item>选项</van-capsules-item></van-capsules-group>
+  events:
+    - name: select
+      title: 选择后
+      description: 选择某一项时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeItemEvent"
+        - name: $event.value
+          type: any
+          description: 改变后的值
+    - name: change
+      title: 改变后
+      description: 选择值改变时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeItemEvent"
+        - name: $event.value
+          type: any
+          description: 选择项的值
+- name: van-capsules-item
+  title: 胶囊选项
+  description: 胶囊选项
+  attrs:
+    - name: value
+      title: 值
+      type: any
+      description: 此项的值
+      group: 数据属性
+      brifeDoc: ""
+      docDescription: 此项的值
+      tooltipLink: ""
+    - name: label
+      title: 标签
+      type: string
+      default: ""
+      description: 顶部自定义提示文本
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 顶部自定义提示文本
+      tooltipLink: ""
+    - name: flag
+      title: flag标志
+      type: boolean
+      default: false
+      description: 是否右上角有flag标志
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 是否右上角有flag标志
+      tooltipLink: ""
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+      brifeDoc: ""
+      docDescription: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      tooltipLink: ""
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入文本或 HTML。
+- name: van-capsules-group
+  title: 胶囊选项组
+  description: 胶囊选项组
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<van-capsules-item>`子组件。
+      support:
+        - name: u-capsules-item
+          title: 胶囊选项
+          snippet: <van-capsules-item>选项</van-capsules-item>

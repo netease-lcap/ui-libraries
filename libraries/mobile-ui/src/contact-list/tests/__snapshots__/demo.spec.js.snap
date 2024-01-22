@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <van-contact-list list="[object Object],[object Object]" default-tag-text="默认"></van-contact-list>
+  </div>
+</div>
+`;

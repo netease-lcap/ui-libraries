@@ -1,0 +1,86 @@
+- name: van-notice-bar
+  title: 通知栏
+  icon: notice-bar
+  labels:
+    - Display
+  description: 用于循环播放展示一组消息通知。
+  attrs:
+    - name: text
+      title: 通知文本内容
+      type: string
+      description: 通知文本内
+      advanced: true
+    - name: mode
+      title: 类型
+      type: string
+      options:
+        - value: closeable
+          title: 可关闭
+        - value: link
+          title: 链接
+        - value: normal
+          title: 普通
+      default: normal
+      description: 设置通知栏类型
+      group: 主要属性
+    - name: scrollable
+      title: 开启滚动播放
+      type: boolean
+      default: true
+      description: ""
+      group: 主要属性
+    - name: wrapable
+      title: 开启文本换行
+      type: boolean
+      default: false
+      description: 关闭滚动播放时该属性即可生效
+      group: 主要属性
+    - name: linkType
+      title: 链接类型
+      type: string
+      options:
+        - value: destination
+          title: 页面跳转
+        - value: download
+          title: 下载链接
+      default: destination
+      description: ""
+      compType: linkTypeSelect
+      group: 交互属性
+    - name: hrefAndTo
+      title: 链接地址
+      type: string
+      description: ""
+      compType: linkHrefInput
+      group: 交互属性
+    - name: target
+      title: 打开方式
+      type: string
+      options:
+        - value: _blank
+          title: 新窗口
+        - value: _self
+          title: 当前窗口
+        - value: _parent
+          title: 父级窗口
+          advanced: true
+        - value: _top
+          title: 顶级窗口
+          advanced: true
+      default: _self
+      description: 父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。
+      group: 交互属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 文本插槽
+  events:
+    - name: click
+      title: 点击通知栏时触发
+      description: 点击通知栏时触发
+    - name: close
+      title: 关闭通知栏时触发
+      description: 关闭通知栏时触发
+    - name: rout
+      title: 点击链接
+      description: 点击链接

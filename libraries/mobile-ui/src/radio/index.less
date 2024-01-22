@@ -1,0 +1,120 @@
+@import '../style/var';
+
+.van-radio {
+  display: flex;
+  align-items: center;
+  min-width: 72px;
+  padding: @radio-padding;
+  overflow: hidden;
+  background-color: @radio-background-color;
+  border: @radio-border-width solid @radio-border-color; 
+  border-radius: @radio-border-radius;
+  cursor: pointer;
+  user-select: none;
+  // margin-bottom: 8px;
+
+
+  &--noIcon {
+    justify-content: center;
+
+    .van-radio__label{
+      margin-left: 0;
+    }
+  }
+
+  &--checked {
+    background-color: @radio-checked-background-color;
+    border: @radio-border-width solid @radio-checked-border-color;
+
+    .van-radio__label{
+      color: @radio-checked-label-color;
+    }
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+  }
+
+  &--label-disabled {
+    cursor: default;
+  }
+
+  &--horizontal {
+    margin-right: @padding-sm;
+  }
+
+  &__icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    height: 1em;
+    font-size: @radio-size;
+    line-height: 1em;
+    cursor: pointer;
+
+    .van-iconv {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      width: 1.25em;
+      height: 1.25em;
+      color: transparent;
+      font-size: 0.8em;
+      line-height: 1.25;
+      text-align: center;
+      border: @radio-icon-border-width solid @radio-border-color;
+      transition-duration: @radio-transition-duration;
+      transition-property: color, border-color, background-color;
+    }
+
+    &--round {
+      .van-iconv {
+        border-radius: 100%;
+      }
+    }
+
+    &--checked {
+      .van-iconv {
+        color: @radio-checked-icon-label-color;
+        background-color: @radio-checked-icon-color;
+        border-color: @radio-checked-icon-color;
+      }
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+
+      .van-iconv {
+        background-color: @radio-disabled-background-color;
+        border-color: @radio-disabled-icon-color;
+      }
+    }
+
+    &--disabled&--checked {
+      .van-iconv {
+        color: @radio-disabled-icon-label-color;
+      }
+    }
+  }
+
+  &__label {
+    margin-left: @radio-label-margin;
+    color: @radio-label-color;
+    line-height: @radio-size;
+
+    &--left {
+      margin: 0 @radio-label-margin 0 0;
+    }
+
+    &--disabled {
+      color: @radio-disabled-label-color;
+    }
+  }
+}
+
+// 对于图片形式的图标，强制使其在非选中状态为空
+.van-radio__icon:not(.van-radio__icon--checked) .van-iconv div.icon{
+  background: unset !important;
+}

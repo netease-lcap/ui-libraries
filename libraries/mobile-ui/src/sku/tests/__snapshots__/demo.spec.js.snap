@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div class="sku-container">
+      <van-sku sku="[object Object]" quota="5" goods="[object Object]" goods-id="1" quota-used="0" properties="[object Object],[object Object],[object Object]" message-config="[object Object]" start-sale-num="2" custom-sku-validator="() => '请选择xxx'" disable-stepper-input="" reset-stepper-on-hide="" safe-area-inset-bottom="" reset-selected-sku-on-hide=""></van-sku><button class="van-button van-button--primary van-button--normal van-button--square">
+        <div class="van-button__content"><span class="van-button__text"> 基础用法 </span></div>
+      </button>
+    </div>
+  </div>
+  <div>
+    <div class="sku-container">
+      <van-sku sku="[object Object]" quota="5" goods="[object Object]" goods-id="1" quota-used="0" properties="[object Object],[object Object],[object Object]" start-sale-num="2" message-config="[object Object]" custom-stepper-config="[object Object]" hide-quota-text="" safe-area-inset-bottom=""></van-sku><button class="van-button van-button--primary van-button--normal van-button--square">
+        <div class="van-button__content"><span class="van-button__text"> 自定义步进器 </span></div>
+      </button>
+    </div>
+  </div>
+  <div>
+    <div class="sku-container">
+      <van-sku sku="[object Object]" quota="5" goods="[object Object]" goods-id="1" quota-used="0" properties="[object Object],[object Object],[object Object]" message-config="[object Object]" start-sale-num="2" custom-stepper-config="[object Object]" hide-quota-text="" safe-area-inset-bottom=""></van-sku><button class="van-button van-button--primary van-button--normal van-button--square">
+        <div class="van-button__content"><span class="van-button__text"> 隐藏售罄规格 </span></div>
+      </button>
+    </div>
+  </div>
+  <div>
+    <div class="sku-container">
+      <van-sku sku="[object Object]" quota="5" goods="[object Object]" goods-id="1" properties="[object Object],[object Object],[object Object]" quota-used="0" message-config="[object Object]" start-sale-num="2" custom-sku-validator="() => '请选择xxx'" disable-stepper-input="" reset-stepper-on-hide="" safe-area-inset-bottom="" reset-selected-sku-on-hide=""></van-sku><button class="van-button van-button--primary van-button--normal van-button--square">
+        <div class="van-button__content"><span class="van-button__text"> 大图预览模式 </span></div>
+      </button>
+    </div>
+  </div>
+  <div>
+    <div class="sku-container">
+      <van-sku stepper-title="我要买" sku="[object Object]" goods="[object Object]" goods-id="1" quota="5" quota-used="0" start-sale-num="2" properties="[object Object],[object Object],[object Object]" show-add-cart-btn="" reset-stepper-on-hide="" safe-area-inset-bottom="" initial-sku="[object Object]" message-config="[object Object]"></van-sku><button class="van-button van-button--primary van-button--normal van-button--square">
+        <div class="van-button__content"><span class="van-button__text"> 通过插槽定制 </span></div>
+      </button>
+    </div>
+  </div>
+</div>
+`;

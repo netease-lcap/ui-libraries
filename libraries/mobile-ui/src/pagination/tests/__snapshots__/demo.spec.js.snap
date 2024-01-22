@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <van-pagination total-items="24" items-per-page="5" prev-text="上一页" next-text="下一页"></van-pagination>
+  </div>
+  <div>
+    <van-pagination page-count="12" prev-text="上一页" next-text="下一页" mode="simple" size="small"></van-pagination>
+  </div>
+  <div>
+    <van-pagination force-ellipses="" total-items="125" show-page-size="3" prev-text="上一页" next-text="下一页"></van-pagination>
+  </div>
+  <div>
+    <van-pagination total-items="125" show-page-size="5"></van-pagination>
+  </div>
+</div>
+`;
