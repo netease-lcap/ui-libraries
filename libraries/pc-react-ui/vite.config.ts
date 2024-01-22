@@ -1,6 +1,7 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -35,6 +36,13 @@ export default defineConfig({
       reportsDirectory: './test/coverage',
       include: ['src/**/*.?(c|m)[jt]s?(x)'],
       exclude: ['**/stories/**'],
+    },
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'), // 把 src 的别名设置为 @
+      '@components': path.resolve(__dirname, './src/components'), // 把 src 的别名设置为 @
+      '@plugins': path.resolve(__dirname, './src/plugins'), // 把 src 的别名设置为 @
     },
   },
 });
