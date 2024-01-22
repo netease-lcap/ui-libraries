@@ -22,11 +22,15 @@
   "author": "NetEase CodeWave Fe Team",
   "license": "ISC",
   "dependencies": {
+    "ahooks": "^3.7.8",
     "antd": "5.12.4",
+    "futil": "^1.76.0",
     "immutable": "5.0.0-beta.4",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "numbro": "^2.4.0"
   },
   "devDependencies": {
+    "@nasl/types": "^0.1.6",
     "@storybook/addon-essentials": "^7.6.7",
     "@storybook/addon-interactions": "^7.6.7",
     "@storybook/addon-links": "^7.6.7",
@@ -42,6 +46,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-v8": "^1.1.0",
     "jsdom": "^23.0.1",
+    "less": "^4.2.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
