@@ -277,13 +277,13 @@ namespace nasl.ui {
       title: "宽度",
       description: "设置选择框宽度大小",
       docDescription:
-        "设置选择框宽度大小，支持占满、巨大、大、中型、正常、小共6种模式",
+        "设置选择框宽度大小，支持大、中、小共3种模式",
       setter: {
         concept: "EnumSelectSetter",
         options: [{ title: "小" }, { title: "中型" }, { title: "大" }],
       },
     })
-    width: "small" | "middle" | "large";
+    size: "small" | "middle" | "large";
 
     @Event({
       title: "按下时",
@@ -360,7 +360,7 @@ namespace nasl.ui {
     description: "选择分组",
   })
   export class SelectOptGroup<T, V> extends ViewComponent {
-    constructor(options?: Partial<USelectGroupOptions<T, V>>) {
+    constructor(options?: Partial<SelectOptGroup<T, V>>) {
       super();
     }
   }

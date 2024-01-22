@@ -20,23 +20,24 @@ export function useHandleTransformOption(props) {
     [_.stubTrue, _.stubArray],
   ]);
   const { data, loading } = useRequest(transformOption(options));
-  return { options: conformsArray(data), loading };
+
+  return _.isNil(options) ? {} : { options: conformsArray(data), loading };
 }
 
 export function useHandleTextAndValueField(props) {
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
   const $deletePropsList = props.get('$deletePropsList', []).concat(['textField', 'valueField']);
-  const option = props.get('option');
+  const options = props.get('options');
 
   const convertOption = React.useMemo(() => {
-    const logicFn = _.map(option, (item) => ({ label: item[textField], value: item[valueField] }));
+    const logicFn = _.map(options, (item) => ({ label: item[textField], value: item[valueField] }));
     const decisionCallback = _.cond([
       [_.matches({ textField: _.isString }), _.constant(logicFn)],
       [_.matches({ valueField: _.isString }), _.constant(logicFn)],
-      [_.stubTrue, _.constant(option)],
+      [_.stubTrue, _.constant(options)],
     ]);
     return decisionCallback({ textField, valueField });
-  }, [option, textField, valueField]);
+  }, [options, textField, valueField]);
   return { option: convertOption, $deletePropsList };
 }
