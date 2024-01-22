@@ -10,8 +10,8 @@
     "version-packages": "changeset version",
     "start": "pnpm dev:react-pc",
     "dev:react-pc": "pnpm --dir ./libraries/pc-react-ui storybook",
-    "build": "pnpm --dir ./libraries/* build",
-    "test": "pnpm --dir ./libraries/* test",
+    "build": "pnpm --filter \"./libraries/*\" build",
+    "test": "pnpm --filter \"./libraries/*\" test",
     "lint": "eslint --fix",
     "changeset": "changeset",
     "coverage": "pnpm --dir ./libraries/* test:coverage"

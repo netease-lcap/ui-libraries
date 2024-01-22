@@ -1,6 +1,10 @@
 /** @type { import('@storybook/vue-vite').StorybookConfig } */
+import Config from '../lcap-ui.config.js';
+
 const config = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  stories: [
+    ...Config.components.map(c => [`../src/components/${c.name}.vue/**/*.mdx`, `../src/components/${c.name}.vue/**/*.stories.@(js|jsx|mjs|ts|tsx)`]).flat(),
+  ],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
