@@ -31,7 +31,7 @@ function getScreenShot(
       });
     }
   } catch (e) {
-    console.log('找不到 screenShot 文件', componentDir);
+    logger.warn(`找不到 screenShot 文件 ${componentDir}/screenshots`);
     // console.log(e);
   }
   return screenShot;
@@ -52,8 +52,7 @@ function getDrawings(componentDir, component, libInfo, sourceDir, publicPath) {
       });
     }
   } catch (e) {
-    console.log('找不到 drawings 文件', componentDir);
-    console.log(e);
+    logger.warn(`找不到 drawings 文件 ${componentDir}/drawings`);
   }
   return drawings;
 }
@@ -116,15 +115,20 @@ function genUsageByTs(config) {
       component.symbol = `${component.name}.vue`;
     }
 
+    const tsPath = `${componentDir}/api.ts`;
+    if (!fs.existsSync(componentDir)) {
+      logger.error(`未找到组件 ${component.name} 的描述文件（api.ts）`);
+      process.exit(1);
+    }
+
     // api.ts
     try {
-      const tsPath = `${componentDir}/api.ts`;
       // component.tsPath = tsPath;
       const info = transform(fs.readFileSync(tsPath, 'utf8'));
       Object.assign(component, info[0]);
     } catch (e) {
-      console.log(e);
-      console.log('找不到 TS 文件或 TS 报错', componentDir);
+      logger.error(`解析 ${tsPath} 失败，${e.message}`);
+      process.exit(1);
     }
 
     const screenShot = getScreenShot(
@@ -150,9 +154,7 @@ function genUsageByTs(config) {
       });
       Object.assign(component, { blocks });
     } catch (e) {
-      logger.error('处理 block 异常');
-      console.log(e);
-      return;
+      logger.error(`处理 block 异常 ${e.message}`);
     }
 
     delete component.symbol;
