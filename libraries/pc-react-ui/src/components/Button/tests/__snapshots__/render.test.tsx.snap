@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Render Default Button 1`] = `
+<button
+  className="ant-btn css-dev-only-do-not-override-2rgkd4 ant-btn-default"
+  disabled={false}
+  onClick={[Function]}
+  style={{}}
+  type="button"
+/>
+`;

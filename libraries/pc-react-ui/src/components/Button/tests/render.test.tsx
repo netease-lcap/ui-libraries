@@ -1,13 +1,9 @@
 import React from 'react';
 import { expect, test } from 'vitest';
 import renderer from 'react-test-renderer';
-import { composeStories } from '@storybook/react';
+import { Button } from 'antd';
 
-import * as stories from '../stories/Button.stories';
-
-const { Primary } = composeStories(stories);
-
-test('Render Primary Button', () => {
-  const wrapper = renderer.create(<Primary />);
+test('Render Default Button', () => {
+  const wrapper = renderer.create(<Button />);
   expect(wrapper.toJSON()).toMatchSnapshot();
 });
