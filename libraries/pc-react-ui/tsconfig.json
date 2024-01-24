@@ -19,7 +19,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
-    "types": ["@nasl/types"],
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"]
@@ -30,9 +29,6 @@
   "references": [
     {
       "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.api.json"
     }
   ]
 }

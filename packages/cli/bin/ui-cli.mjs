@@ -47,10 +47,10 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'ice') {
   program.command('deploy')
     .description('发布流程')
     .option('--config <configPath>', '设置配置文件路径', 'lcap-ui.config.js')
-    .option('--platfrom <platfrom>', '发布cdn 地址', 'http://defaulttenant.lcap.codewave-dev.163yun.com')
+    .option('--platform <platform>', '发布cdn 地址', 'http://defaulttenant.lcap.codewave-dev.163yun.com')
     .option('--rootDir <rootDir>', 'project root directory', cwd)
-    .action(async ({ config, platfrom }) => {
-      await deploy(resolveConfig(path.join(cwd, config), cwd), platfrom);
+    .action(async ({ config, platform }) => {
+      await deploy(resolveConfig(path.join(cwd, config), cwd), platform);
     });
   program.parse(process.argv);
 

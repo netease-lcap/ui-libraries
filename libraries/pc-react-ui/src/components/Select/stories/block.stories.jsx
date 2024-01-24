@@ -11,7 +11,7 @@ export default {
     layout: 'centered',
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
-  tags: ['autodocs'],
+  tags: [],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
@@ -24,15 +24,12 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 异步函数 = {
-  render: (args) => {
+  render: () => {
     return (
-      <Select {...args}>
+      <Select style={{ width: 256 }} placeholder="请选择">
         <SelectOption key="1" label="1" value="1" />
         <SelectOption key="2" label="2" value="2" disabled />
       </Select>
     );
-  },
-  args: {
-    style: { width: '256px' },
   },
 };

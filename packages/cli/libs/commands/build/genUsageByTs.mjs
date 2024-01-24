@@ -1,7 +1,9 @@
+/* eslint-disable no-param-reassign */
 import fs from 'fs-extra';
 import path from 'path';
 import { transform } from '../../transforms/naslTs2Json.js';
 import * as logger from '../../utils/logger.mjs';
+import transformStory2Blocks from '../../transforms/story2block.mjs';
 
 function hasImg(dir) {
   return fs.existsSync(path.join(dir, '0.png'));
@@ -57,7 +59,8 @@ function getDrawings(componentDir, component, libInfo, sourceDir, publicPath) {
   return drawings;
 }
 
-function getBlocks(dir, { screenShot, drawings }) {
+function getBlocksByDemo(componentDir, { screenshots, drawings }) {
+  const dir = `${componentDir}/demos/blocks`;
   if (!fs.existsSync(dir)) {
     logger.warn('未找到 blocks: ', dir);
     return [];
@@ -80,12 +83,32 @@ function getBlocks(dir, { screenShot, drawings }) {
       title,
       description: '',
       code,
-      screenshot: screenShot[index] || '',
+      screenshot: screenshots[index] || '',
       drawing: drawings[index] || '',
     });
   });
 
   return blocks;
+}
+
+function getBlocksByStory(componentDir, { screenshots, drawings }) {
+  const storyFilePath = `${componentDir}/stories/block.stories.jsx`;
+  if (!fs.existsSync(storyFilePath)) {
+    logger.warn(`未找到blocks 文件, ${storyFilePath}`);
+    return [];
+  }
+
+  const code = fs.readFileSync(storyFilePath);
+  const blocks = transformStory2Blocks(code.toString());
+
+  return blocks.map(({ name, template }, index) => ({
+    concept: 'ViewBlockWithImage',
+    title: name,
+    description: '',
+    code: template,
+    screenshot: screenshots[index] || '',
+    drawing: drawings[index] || '',
+  }));
 }
 
 /**
@@ -99,6 +122,7 @@ function genUsageByTs(config) {
     destPath,
     componentsPath,
     components,
+    blockGenerateType,
   } = config;
   const data = [];
   const packageInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
@@ -131,7 +155,7 @@ function genUsageByTs(config) {
       process.exit(1);
     }
 
-    const screenShot = getScreenShot(
+    const screenshots = getScreenShot(
       componentDir,
       component,
       libInfo,
@@ -148,10 +172,9 @@ function genUsageByTs(config) {
 
     // blocks
     try {
-      const blocks = getBlocks(`${componentDir}/demos/blocks`, {
-        screenShot,
-        drawings,
-      });
+      const blocks = blockGenerateType === 'story'
+        ? getBlocksByStory(componentDir, { screenshots, drawings })
+        : getBlocksByDemo(componentDir, { screenshots, drawings });
       Object.assign(component, { blocks });
     } catch (e) {
       logger.error(`处理 block 异常 ${e.message}`);

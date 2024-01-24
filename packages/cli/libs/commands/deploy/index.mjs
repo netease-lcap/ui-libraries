@@ -5,7 +5,7 @@ import * as logger from '../../utils/logger.mjs';
 
 function deployTgz(rootPath, platform) {
   const pkgInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
-  const tgz = `${pkgInfo.name}-${pkgInfo.version}.tgz`;
+  const tgz = `${pkgInfo.name.replace('@lcap/', 'lcap-')}-${pkgInfo.version}.tgz`;
   // tgz 是否存在
   if (!fs.existsSync(tgz)) {
     logger.error(`${tgz} not found`);
