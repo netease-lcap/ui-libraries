@@ -4,30 +4,28 @@ import _ from 'lodash';
 import React from 'react';
 // import moduleName from 'module';
 import { useRequest } from 'ahooks';
-// import {renm} from 'futil';
-// import type { ButtonProps } from 'antd';
-// import F from 'futil';
-// import { hookType } from '@/plugins/type';
+import { $deletePropsList } from '@/plugins/constants';
 
 export function useHandleTransformOption(props) {
-  const options = props.get('options');
+  const dataSourceField = props.get('dataSourceField', 'options');
+  const dataSource = props.get(dataSourceField);
   const transformOption = _.cond([
-    [_.isArray, _.constant(() => Promise.resolve(options))],
-    [_.isFunction, _.constant(() => Promise.resolve(options()))],
+    [_.isArray, _.constant(() => Promise.resolve(dataSource))],
+    [_.isFunction, _.constant(() => Promise.resolve(dataSource()))],
   ]);
   const conformsArray = _.cond([
     [Array.isArray, _.identity],
     [_.stubTrue, _.stubArray],
   ]);
-  const { data, loading } = useRequest(transformOption(options));
+  const { data, loading } = useRequest(transformOption(dataSource));
 
-  return _.isNil(options) ? {} : { options: conformsArray(data), loading };
+  return _.isNil(dataSource) ? {} : { [dataSourceField]: conformsArray(data), loading };
 }
 
 export function useHandleTextAndValueField(props) {
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
-  const $deletePropsList = props.get('$deletePropsList', []).concat(['textField', 'valueField']);
+  const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField']);
   const options = props.get('options');
 
   const convertOption = React.useMemo(() => {
@@ -39,5 +37,7 @@ export function useHandleTextAndValueField(props) {
     ]);
     return decisionCallback({ textField, valueField });
   }, [options, textField, valueField]);
-  return { option: convertOption, $deletePropsList };
+  return _.isNil(options)
+    ? { [$deletePropsList]: deletePropsList }
+    : { options: convertOption, [$deletePropsList]: deletePropsList };
 }

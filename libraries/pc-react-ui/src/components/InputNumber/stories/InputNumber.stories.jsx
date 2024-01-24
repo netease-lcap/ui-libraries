@@ -14,10 +14,10 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
-  },
-  formatType: {
-    options: ['无', 'thousandths', 'percentSign'],
-    control: { type: 'select' }, // Automatically inferred when 'options' is defined
+    formatType: {
+      options: ['无', 'thousandths', 'percentSign'],
+      control: { type: 'select' }, // Automatically inferred when 'options' is defined
+    },
   },
 };
 
@@ -26,6 +26,7 @@ export const Primary = {
   render: (args) => <InputNumber {...args} />,
   args: {
     type: 'primary',
+    style: { width: '256px' },
     onClick: () => new Promise((res) => {
       setTimeout(() => {
         res();

@@ -1,5 +1,5 @@
 import { Tabs as AntdTabs } from 'antd';
-import type { TabsProps } from 'antd/lib/tabs';
+import type { TabsProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import type { pluginType } from '@/plugins/type';

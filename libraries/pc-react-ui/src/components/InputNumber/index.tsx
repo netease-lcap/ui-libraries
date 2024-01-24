@@ -1,5 +1,5 @@
 import { InputNumber as AntdInputNumber } from 'antd';
-import type { InputNumberProps as AntdInputNumberProps } from 'antd/lib/input-number';
+import type { InputNumberProps as AntdInputNumberProps } from 'antd';
 import * as basicsPlugin from './plugins/basicsPlugin';
 import type { pluginType } from '@/plugins/type';
 import { registerComponet } from '../../plugins/index';

@@ -1,5 +1,5 @@
 import { Select as AntdSelect } from 'antd';
-import type { SelectProps as AntdSelectProps } from 'antd/lib/select';
+import type { SelectProps as AntdSelectProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import type { pluginType } from '@/plugins/type';

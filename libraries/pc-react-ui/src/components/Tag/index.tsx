@@ -1,5 +1,5 @@
 import { Tag as AntdTag } from 'antd';
-import type { TagProps } from 'antd/lib/tag';
+import type { TagProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import type { pluginType } from '@/plugins/type';
