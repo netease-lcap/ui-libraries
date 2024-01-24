@@ -1,87 +1,122 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/no-shadow */
+
 import { Map } from 'immutable';
-import isPlainObject from 'lodash/isPlainObject';
-import isArray from 'lodash/isArray';
-import isUndefined from 'lodash/isUndefined';
-import attempt from 'lodash/attempt';
 import React from 'react';
-import type { pluginType, hookType } from '@/plugins/type';
+import _ from 'lodash';
+import fp from 'lodash/fp';
+// import { useWhyDidYouUpdate } from 'ahooks';
+import type { pluginType } from '@/plugins/type';
+import { $deletePropsList } from '@/plugins/constants';
 
-export class Plugin<T> {
-  plugin: hookType<T>[] = [];
+export class Plugin {
+  plugin: any[] = [];
 
-  basicsPlugin = [];
+  private mapProps: Record<string, string> = {};
 
-  localPlugin: hookType<T>[] = [];
+  displayName: string;
 
   globalPlugin = [];
 
-  constructor(plugin) {
-    if (isPlainObject(plugin)) this.plugin = Object.values(plugin);
-    if (isArray(plugin)) this.plugin = plugin;
+  constructor(options: { displayName: string, mapProps: Record<string, string>, plugin }) {
+    this.displayName = options.displayName;
+    this.mapProps = options.mapProps || {};
+    this.setPlugin(options.plugin);
   }
 
-  setBasicsPlugin(basicsPlugin) {
-    this.basicsPlugin = basicsPlugin;
-  }
-
-  setLocalPlugin(localPlugin: pluginType<T>['usePlugin'] = []) {
-    if (isArray(localPlugin)) this.localPlugin = localPlugin as any;
-    else if (isPlainObject(localPlugin)) this.localPlugin = Object.values(localPlugin);
-  }
-
-  setGlobalPlugin = (globalPlugin = []) => {
-    this.globalPlugin = globalPlugin;
+  handleRule = (plugin) => {
+    const defaultOrderPlugin = _.map(plugin, (plugin) => _.defaults(plugin, { order: 4 }));
+    const sortPlugin = _.orderBy(defaultOrderPlugin, ['order'], ['asc']);
+    const unionPlugin = _.unionBy(sortPlugin, 'name');
+    return unionPlugin;
   };
 
-  getPlugin() {
-    return this.plugin.concat(this.basicsPlugin, this.localPlugin, this.globalPlugin);
-  }
+  setPlugin = (plugin) => {
+    const handlePluginList = _.cond([
+      [_.isArray, _.identity],
+      [_.isObject, _.values],
+      [_.stubTrue, _.stubArray],
+    ]);
+
+    this.plugin = this.handleRule(_.concat(this.plugin, handlePluginList(plugin)));
+  };
+
+  getPluginMethod = () => {
+    const handlePlgunMethod = _.cond([
+      [_.isFunction, _.identity],
+      [_.flow([fp.get('method'), _.isFunction]), fp.get('method')],
+      [_.stubTrue, _.noop],
+    ]);
+    const pluginMethod = _.map(this.plugin, handlePlgunMethod);
+    return pluginMethod;
+  };
+
+  getMapProps = () => {
+    return Map(this.mapProps);
+  };
 }
-function HocComponet({
-  props, plugins, ref, BaseComponent, mapProps,
-}) {
-  const expandProps = plugins.reduce(
-    (expandProps, handleFun) => expandProps.merge(attempt(handleFun, expandProps)),
-    Map(props).set('mapProps', mapProps),
-  );
-  const excludeProps = expandProps.filter((x) => !isUndefined(x)).toJS();
-  return (
-    <BaseComponent
-      ref={ref}
-      {...excludeProps}
-    />
-  );
-}
+
 export function HocBaseComponents(
   BaseComponent,
   {
-    props, plugins, ref, mapProps,
+    props, plugin, ref,
   },
 ) {
+  const pluginHooks = plugin.getPluginMethod();
+  const mapProps = plugin.getMapProps();
+
+  const ImmutableProps = Map(props)
+    .reduce((result, value, key) => result.set(mapProps.get(key, key), value), Map())
+    .set('render', BaseComponent)
+    .set('ref', ref)
+    .set('$deletePropsList', [])
+    .set($deletePropsList, [1, 2]);
+
+  const expandProps = pluginHooks.reduce(
+    (expandProps, handleFun) => expandProps.merge(_.attempt(handleFun, expandProps)),
+    ImmutableProps,
+  );
+  const Component = expandProps.get('render');
+  const jsProps = expandProps.toJS();
+
+  const excludeProps = _.omit(jsProps, _.concat(
+    _.keys(plugin.getMapProps().toJS()),
+    expandProps.get('$deletePropsList', []),
+    ['$deletePropsList', 'render', 'usePlugin'],
+  ));
+
   return (
-    <HocComponet
-      props={props}
-      plugins={plugins}
-      ref={ref}
-      mapProps={mapProps}
-      BaseComponent={BaseComponent}
+    <Component
+      {...excludeProps}
     />
   );
 }
 export function registerComponet<T, U extends pluginType<T>>(
   Component: React.ElementType,
-  plugin,
-  mapProps,
+  pluginOption,
 ) {
   return React.forwardRef<T, U>((props, ref) => {
-    plugin.setLocalPlugin(props?.usePlugin);
-    const plugins = plugin.getPlugin();
+    const [plugin, setPlugin] = React.useState(new Plugin(pluginOption));
+
+    // React.useEffect(() => {
+    //   if (props.appType === 'lowCode') {
+    //     import('http://localhost:3030/app.js').then((_) => {
+    //       plugin.setPlugin(_);
+    //       setPlugin({ ...plugin });
+    //     });
+    //   }
+    // }, [props.appType]);
+
+    React.useEffect(() => {
+      plugin.setPlugin(props.usePlugin);
+      setPlugin({ ...(plugin as any) });
+    }, [props.usePlugin]);
+
     return HocBaseComponents(Component, {
-      props, plugins, ref, mapProps,
+      props, plugin, ref,
     });
   });
 }

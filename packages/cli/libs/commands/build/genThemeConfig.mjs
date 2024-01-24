@@ -2,6 +2,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import * as postcss from 'postcss';
+import * as logger from '../../utils/logger.mjs';
 
 export default (config) => {
   const {
@@ -12,9 +13,15 @@ export default (config) => {
   } = config;
 
   const themeFilePath = path.join(rootPath, themePath);
+  const resultPath = path.join(rootPath, themeConfigPath);
 
   const themeComponentsMap = {};
   const themePropertiesMap = {};
+
+  if (!fs.existsSync(resultPath)) {
+    logger.warn(`未找到主题样式配置文件：${themeConfigPath}`);
+    return;
+  }
 
   const cssContent = fs.readFileSync(themeFilePath, 'utf-8');
   const root = postcss.parse(cssContent);
@@ -143,7 +150,6 @@ export default (config) => {
     };
   }
 
-  const resultPath = path.join(rootPath, themeConfigPath);
   const resultList = fs.readJSONSync(resultPath);
 
   if (Array.isArray(resultList)) {

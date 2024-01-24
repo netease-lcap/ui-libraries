@@ -14,28 +14,52 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
+    confirm: {
+      options: ['无', 'modalConfirm', 'popConfirm'],
+      control: { type: 'select' }, // Automatically inferred when 'options' is defined
+    },
   },
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary = {
-  render: (args) => <Button {...args}>Button-loading</Button>,
+  render: (args) => <Button {...args}> Button-loading</Button>,
   args: {
     type: 'primary',
     asyncLoading: true,
+    children: '123',
     onClick: () => new Promise((res) => {
       setTimeout(() => {
         res();
-      }, 3000);
+        alert('点击了按钮');
+      }, 1000);
     }),
     mySize: 'small',
+    // appType: '',
+    // usePlugin: ['lowCode'],
+    // size: 'small',
     // onClick: () => {},
   },
 };
-export const Secondary = {
+export const 单实例插件 = {
   render: (args) => <Button {...args}>Button</Button>,
   args: {
     label: 'Button',
+    usePlugin: {
+      scopePlugin(props) {
+        return {
+          render(scopeProps) {
+            const Component = props.get('render');
+            return (
+              <div>
+                <p>use Plugin</p>
+                <Component {...scopeProps} />
+              </div>
+            );
+          },
+        };
+      },
+    },
     // mySize: 'small',
   },
 };

@@ -1,5 +1,6 @@
 import fse from 'fs-extra';
 import path from 'path';
+import * as logger from '../../utils/logger.mjs';
 
 export default async (config) => {
   const {
@@ -13,6 +14,7 @@ export default async (config) => {
 
   const langs = Object.keys(i18n);
   if (!langs || langs.length === 0) {
+    logger.warn('未找到i18n 配置文件');
     return;
   }
 

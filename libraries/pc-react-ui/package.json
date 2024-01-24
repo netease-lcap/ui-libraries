@@ -3,9 +3,17 @@
   "version": "0.0.0",
   "description": "Codewave Low Code AI Platform React Ant Design HOC UI Components",
   "main": "src/index.ts",
+  "files": [
+    "dist-theme",
+    "src",
+    "index.js",
+    "README.md"
+  ],
   "scripts": {
+    "dev": "npm run storybook",
     "storybook": "storybook dev -p 6006",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && tsc -p tsconfig.api.json && lcap-ui build && npm pack",
+    "deploy:test": "lcap-ui deploy --platform http://defaulttenant.lcap.hatest.163yun.com",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "test": "vitest run",
     "test:dev": "vitest dev",
@@ -22,11 +30,17 @@
   "author": "NetEase CodeWave Fe Team",
   "license": "ISC",
   "dependencies": {
+    "ahooks": "^3.7.8",
     "antd": "5.12.4",
+    "futil": "^1.76.0",
     "immutable": "5.0.0-beta.4",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "numbro": "^2.4.0"
   },
   "devDependencies": {
+    "@babel/parser": "^7.23.6",
+    "@lcap/ui-cli": "workspace:^1.0.0",
+    "@nasl/types": "^0.1.6",
     "@storybook/addon-essentials": "^7.6.7",
     "@storybook/addon-interactions": "^7.6.7",
     "@storybook/addon-links": "^7.6.7",
@@ -42,6 +56,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-v8": "^1.1.0",
     "jsdom": "^23.0.1",
+    "less": "^4.2.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
