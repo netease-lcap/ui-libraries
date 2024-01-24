@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-shadow */
@@ -59,12 +60,8 @@ export class Plugin {
   };
 }
 
-export function HocBaseComponents(
-  BaseComponent,
-  {
-    props, plugin, ref,
-  },
-) {
+export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
+  const { BaseComponent, props, plugin } = myProps;
   const pluginHooks = plugin.getPluginMethod();
   const mapProps = plugin.getMapProps();
 
@@ -72,8 +69,7 @@ export function HocBaseComponents(
     .reduce((result, value, key) => result.set(mapProps.get(key, key), value), Map())
     .set('render', BaseComponent)
     .set('ref', ref)
-    .set('$deletePropsList', [])
-    .set($deletePropsList, [1, 2]);
+    .set($deletePropsList, []);
 
   const expandProps = pluginHooks.reduce(
     (expandProps, handleFun) => expandProps.merge(_.attempt(handleFun, expandProps)),
@@ -81,26 +77,26 @@ export function HocBaseComponents(
   );
   const Component = expandProps.get('render');
   const jsProps = expandProps.toJS();
-
   const excludeProps = _.omit(jsProps, _.concat(
     _.keys(plugin.getMapProps().toJS()),
-    expandProps.get('$deletePropsList', []),
-    ['$deletePropsList', 'render', 'usePlugin'],
+    expandProps.get($deletePropsList, []),
+    [$deletePropsList, 'render', 'usePlugin', $deletePropsList],
   ));
 
+  console.log(excludeProps, 'excludeProps');
+  console.log(pluginHooks, 'pluginHooks');
   return (
     <Component
       {...excludeProps}
     />
   );
-}
+});
 export function registerComponet<T, U extends pluginType<T>>(
   Component: React.ElementType,
   pluginOption,
 ) {
   return React.forwardRef<T, U>((props, ref) => {
     const [plugin, setPlugin] = React.useState(new Plugin(pluginOption));
-
     // React.useEffect(() => {
     //   if (props.appType === 'lowCode') {
     //     import('http://localhost:3030/app.js').then((_) => {
@@ -114,9 +110,6 @@ export function registerComponet<T, U extends pluginType<T>>(
       plugin.setPlugin(props.usePlugin);
       setPlugin({ ...plugin });
     }, [props.usePlugin]);
-
-    return HocBaseComponents(Component, {
-      props, plugin, ref,
-    });
+    return <HocBaseComponents BaseComponent={Component} props={props} plugin={plugin} ref={ref} />;
   });
 }

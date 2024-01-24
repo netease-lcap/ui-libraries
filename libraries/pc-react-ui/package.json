@@ -22,8 +22,11 @@
   "author": "NetEase CodeWave Fe Team",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "@ant-design/pro-components": "^2.6.48",
     "ahooks": "^3.7.8",
     "antd": "5.12.4",
+    "dayjs": "^1.11.10",
     "futil": "^1.76.0",
     "immutable": "5.0.0-beta.4",
     "lodash": "^4.17.21",

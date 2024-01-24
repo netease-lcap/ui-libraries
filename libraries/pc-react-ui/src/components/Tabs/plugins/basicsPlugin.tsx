@@ -3,6 +3,7 @@
 import _ from 'lodash';
 import React from 'react';
 import { useRequest } from 'ahooks';
+import { $deletePropsList } from '@/plugins/constants';
 
 export function useHandleTransformOption(props) {
   const items = props.get('items');
@@ -15,23 +16,25 @@ export function useHandleTransformOption(props) {
     [_.stubTrue, _.stubArray],
   ]);
   const { data } = useRequest(transformOption(items));
-  return { items: conformsArray(data) };
+  return _.isNil(items) ? {} : { items: conformsArray(data) };
 }
 
 export function useHandleTextAndValueField(props) {
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'key');
-  const $deletePropsList = props.get('$deletePropsList', []).concat(['textField', 'valueField']);
-  const option = props.get('option');
+  const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField']);
+  const items = props.get('items');
 
   const convertOption = React.useMemo(() => {
-    const logicFn = _.map(option, (item) => ({ label: item[textField], value: item[valueField] }));
+    const logicFn = _.map(items, (item) => ({ label: item[textField], value: item[valueField] }));
     const decisionCallback = _.cond([
       [_.matches({ textField: _.isString }), _.constant(logicFn)],
       [_.matches({ valueField: _.isString }), _.constant(logicFn)],
-      [_.stubTrue, _.constant(option)],
+      [_.stubTrue, _.constant(items)],
     ]);
     return decisionCallback({ textField, valueField });
-  }, [option, textField, valueField]);
-  return { option: convertOption, $deletePropsList };
+  }, [items, textField, valueField]);
+  return _.isNil(items)
+    ? { [$deletePropsList]: deletePropsList }
+    : { options: convertOption, [$deletePropsList]: deletePropsList };
 }

@@ -2,8 +2,8 @@
 /* eslint-disable react-refresh/only-export-components */
 import _ from 'lodash';
 import React from 'react';
-// import moduleName from 'module';
 import { useRequest } from 'ahooks';
+import { $deletePropsList } from '@/plugins/constants';
 // import {renm} from 'futil';
 // import type { ButtonProps } from 'antd';
 // import F from 'futil';
@@ -27,7 +27,7 @@ export function useHandleTransformOption(props) {
 export function useHandleTextAndValueField(props) {
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
-  const $deletePropsList = props.get('$deletePropsList', []).concat(['textField', 'valueField']);
+  const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField']);
   const options = props.get('options');
 
   const convertOption = React.useMemo(() => {
@@ -40,5 +40,7 @@ export function useHandleTextAndValueField(props) {
     return decisionCallback({ textField, valueField });
   }, [options, textField, valueField]);
 
-  return _.isNil(options) ? { $deletePropsList } : { options: convertOption, $deletePropsList };
+  return _.isNil(options)
+    ? { [$deletePropsList]: deletePropsList }
+    : { options: convertOption, [$deletePropsList]: deletePropsList };
 }
