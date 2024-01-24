@@ -1,0 +1,63 @@
+- name: u-divider
+  title: 分隔线
+  icon: divider
+  labels:
+    - Display
+  description: 用于将内容分隔为多个区域
+  attrs:
+    - name: title
+      title: 文本
+      type: string
+      description: 文本
+      advanced: true
+    - name: dashed
+      title: 线条类型
+      type: string
+      options:
+        - value: b
+          title: 虚线
+        - value: a
+          title: 实线
+      default: a
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 实线、虚线
+      tooltipLink: ""
+    - name: content-position
+      title: 内容位置
+      type: string
+      options:
+        - value: center
+          title: 居中
+        - value: left
+          title: 左
+        - value: right
+          title: 右
+      default: center
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 居中、左、右
+      tooltipLink: ""
+    - name: direction
+      title: 方向
+      type: string
+      options:
+        - value: horizontal
+          title: 横向
+        - value: column
+          title: 竖向
+      default: horizontal
+      group: 主要属性
+      description: ""
+      brifeDoc: ""
+      docDescription: 横向、竖向
+      tooltipLink: ""
+  slots:
+    - concept: Slot
+      name: default
+      title: 默认
+      description: 显示的文本
+      advanced: true
+  events: []

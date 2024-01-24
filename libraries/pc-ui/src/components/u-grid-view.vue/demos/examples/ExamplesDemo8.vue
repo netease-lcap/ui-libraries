@@ -1,0 +1,81 @@
+<!-- 添加尾部 -->
+<template>
+<u-grid-layout :repeat="3">
+    <u-grid-layout-column>
+        <u-grid-view show-head show-foot title="单选列表" :data-source="list">
+            <div slot="foot">
+                <u-button size="small">操作</u-button>
+            </div>
+        </u-grid-view>
+    </u-grid-layout-column>
+    <u-grid-layout-column>
+        <u-grid-view multiple show-head show-foot title="多选列表" :data-source="list">
+            <div slot="foot">
+                <u-button size="small">操作</u-button>
+            </div>
+        </u-grid-view>
+    </u-grid-layout-column>
+</u-grid-layout>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            list: [
+                { text: 'Batch', value: 'bat' },
+                { text: 'C', value: 'c' },
+                { text: 'C#', value: 'csharp' },
+                { text: 'C++', value: 'cpp' },
+                { text: 'CSS', value: 'css' },
+                { text: 'Clojure', value: 'clojure' },
+                { text: 'CoffeeScript', value: 'coffeescript' },
+                { text: 'Coq', value: 'coq' },
+                { text: 'Diff', value: 'diff' },
+                { text: 'Dockerfile', value: 'dockerfile' },
+                { text: 'F#', value: 'fshape' },
+                { text: 'Go', value: 'go' },
+                { text: 'Groovy', value: 'groovy' },
+                { text: 'HLSL', value: 'hlsl' },
+                { text: 'HTML', value: 'html' },
+                { text: 'Handlebars', value: 'Handlebars' },
+                { text: 'Ignore', value: 'ignore' },
+                { text: 'Ini', value: 'ini' },
+                { text: 'JSON', value: 'json' },
+                { text: 'Java', value: 'java' },
+                { text: 'JavaScript', value: 'javascript' },
+                { text: 'Jinja', value: 'jinja' },
+                { text: 'Jupyter', value: 'jupyter' },
+                { text: 'Less', value: 'less' },
+                { text: 'Log', value: 'log' },
+                { text: 'Lua', value: 'lua' },
+                { text: 'Makefile', value: 'makefile' },
+                { text: 'Markdown', value: 'markdown' },
+                { text: 'Objective-C', value: 'objective-c' },
+                { text: 'Objective-C++', value: 'objective-cpp' },
+                { text: 'PHP', value: 'php' },
+                { text: 'Perl', value: 'perl' },
+                { text: 'PowerShell', value: 'powershell' },
+                { text: 'Properties', value: 'properties' },
+                { text: 'Pug', value: 'jade' },
+                { text: 'Python', value: 'python' },
+                { text: 'R', value: 'r' },
+                { text: 'Razor', value: 'razor' },
+                { text: 'Ruby', value: 'ruby' },
+                { text: 'Rust', value: 'rust' },
+                { text: 'SCSS', value: 'scss' },
+                { text: 'SQL', value: 'sql' },
+                { text: 'SVG', value: 'svg' },
+                { text: 'Shaderlab', value: 'shaderlab' },
+                { text: 'Shell Script', value: 'shellscript' },
+                { text: 'Swift', value: 'swift' },
+                { text: 'TypeScript', value: 'typescript' },
+                { text: 'Visual Basic', value: 'vb' },
+                { text: 'Vue', value: 'vue' },
+                { text: 'XML', value: 'xml' },
+                { text: 'XSL', value: 'xsl' },
+                { text: 'YAML', value: 'yaml' },
+            ],
+        };
+    },
+};
+</script>

@@ -1,0 +1,7 @@
+- name: l-root
+  title: 界面根节点
+  description: 默认布局的根节点。
+  slots:
+    - concept: Slot
+      name: default
+      description: 主内容区。

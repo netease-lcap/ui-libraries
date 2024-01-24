@@ -1,0 +1,382 @@
+- name: van-datetime-picker
+  title: 时间选择
+  labels:
+    - Selector
+  icon: time-picker
+  attrs:
+    - name: labelField
+      title: 左侧标题
+      type: string
+      description: 左侧文本插槽内容存在时优先展示插槽内容
+      advanced: true
+    - name: type
+      title: 时间类型
+      type: string
+      options:
+        - value: time
+          title: 时间选择
+        - value: date
+          title: 日期选择
+        - value: datetime
+          title: 日期时间选择
+      default: datetime
+      toggleclear:
+        - unit
+        - show-formatter
+      group: 主要属性
+      description: 设置时间选择类型
+    - name: unit
+      title: 最小单位
+      type: string
+      options:
+        - title: 日期
+          value: date
+          dependency:
+            - type: date
+        - title: 周
+          value: week
+          dependency:
+            - type: date
+        - title: 月份
+          value: month
+          dependency:
+            - type: date
+        - title: 季度
+          value: quarter
+          dependency:
+            - type: date
+        - title: 年份
+          value: year
+          dependency:
+            - type: date
+        - title: 分
+          value: minute
+          dependency:
+            - "!type": date
+        - title: 秒
+          value: second
+          dependency:
+            - "!type": date
+      toggleclear:
+        - show-formatter
+    - name: show-formatter
+      title: 展示格式
+      type: string
+      options:
+        - value: YYYY年M月D日
+          title: 中国（2023年7月26日）
+          dependency:
+            - unit: date
+              type: date
+        - value: YYYY-MM-DD
+          title: ISO（2023-07-26）
+          dependency:
+            - unit: date
+              type: date
+        - value: M/D/YYYY
+          title: US（7/26/2023）
+          dependency:
+            - unit: date
+              type: date
+        - value: D/M/YYYY
+          title: EU（26/7/2023）
+          dependency:
+            - unit: date
+              type: date
+        - value: GGGG-W周
+          title: 2023-28周
+          dependency:
+            - unit: week
+              type: date
+        - value: GGGG年第W周
+          title: 2023年第28周
+          dependency:
+            - unit: week
+              type: date
+        - value: GGGG-WWWW
+          title: 2023-W28
+          dependency:
+            - unit: week
+              type: date
+        - value: YYYY年M月
+          title: 中国（2023年7月）
+          dependency:
+            - unit: month
+              type: date
+        - value: YYYY-MM
+          title: ISO（2023-07）
+          dependency:
+            - unit: month
+              type: date
+        - value: M/YYYY
+          title: US/EU（7/2023）
+          dependency:
+            - unit: month
+              type: date
+        - value: YYYY年第Q季度
+          title: 2023年第3季度
+          dependency:
+            - unit: quarter
+              type: date
+        - value: YYYY年QQ
+          title: 2023年Q3
+          dependency:
+            - unit: quarter
+              type: date
+        - value: YYYY-QQ
+          title: 2023-Q3
+          dependency:
+            - unit: quarter
+              type: date
+        - value: YYYY年
+          title: 中国（2023年）
+          dependency:
+            - unit: year
+              type: date
+        - value: YYYY
+          title: ISO（2023）
+          dependency:
+            - unit: year
+              type: date
+        - value: HH:mm:ss
+          title: "12:09:09"
+          dependency:
+            - unit: second
+              type: time
+        - value: HH时mm分ss秒
+          title: 12时09分09秒
+          dependency:
+            - unit: second
+              type: time
+        - value: HH:mm
+          title: "12:09"
+          dependency:
+            - unit: minute
+              type: time
+        - value: HH时mm分
+          title: 12时09分
+          dependency:
+            - unit: minute
+              type: time
+        - value: YYYY-MM-DD HH:mm:ss
+          title: "2023-07-26 12:09:09"
+          dependency:
+            - unit: second
+              type: datetime
+        - value: YYYY年M月D日 HH时mm分ss秒
+          title: 2023年7月26日 12时09分09秒
+          dependency:
+            - unit: second
+              type: datetime
+        - value: YYYY-MM-DD HH:mm HH:mm
+          title: 2023-07-26 12:09
+          dependency:
+            - unit: minute
+              type: datetime
+        - value: YYYY年M月D日 HH时mm分
+          title: 2023年7月26日 12时09分
+          dependency:
+            - unit: minute
+              type: datetime
+      dependency:
+        - advanced-format.enable: false
+    - name: advanced-format
+      title: 高级格式化
+      type: "{ enable: boolean, value: string }"
+      default: "{ enable: false, value: '' }"
+      description: ""
+      brifeDoc: ""
+      docDescription: ""
+      tooltipLink: ""
+      bindHide: true
+    - name: range
+      title: 区间选择
+      type: boolean
+      default: false
+      description: 是否支持区间选择
+    - name: start-value
+      title: 起始值
+      type: string,number,Date
+      sync: true
+      model: true
+      dependency:
+        - range: true
+    - name: end-value
+      title: 结束值
+      type: string,number,Date
+      sync: true
+      model: true
+      dependency:
+        - range: true
+    - name: isNew
+      title: 是否使用新版外观
+      type: boolean
+      default: false
+      description: 是否使用新版外观
+    - name: value
+      title: 值
+      type: string,number,Date
+      sync: true
+      model: true
+      default: null
+      description: 用于标识时间选择的值
+      dependency:
+        - "!range": true
+      group: 数据属性
+    - name: min-date
+      title: 最小日期
+      type: Date
+      description: 当时间选择类型为datetime时可选的最小时间，精确到分钟, 默认为十年前
+      group: 数据属性
+    - name: max-date
+      title: 最大日期
+      type: Date
+      description: 当时间选择类型为datetime时可选的最大时间，精确到分钟, 默认为十年后
+      group: 数据属性
+    - name: max-hour
+      title: 最大小时
+      type: string, number
+      default: 23
+      description: 当时间选择类型为 time 时
+      dependency:
+        - type: time
+      group: 数据属性
+    - name: min-hour
+      title: 最小小时
+      type: string, number
+      default: 0
+      description: 当时间选择类型为 time 时
+      dependency:
+        - type: time
+      group: 数据属性
+    - name: max-minute
+      title: 最大分钟
+      type: string, number
+      default: 59
+      description: 当时间选择类型为 time 时
+      dependency:
+        - type: time
+      group: 数据属性
+    - name: min-minute
+      title: 最小分钟
+      type: string, number
+      default: 0
+      description: 当时间选择类型为 time 时
+      dependency:
+        - type: time
+      group: 数据属性
+    - name: converter
+      title: 转换器
+      type: string
+      description: 将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式
+      options:
+        - title: yyyy/MM/dd HH:mm:ss
+          value: format
+        - title: Unix 时间戳
+          value: timestamp
+        - title: JSON
+          value: json
+        - title: Date 对象
+          value: date
+      default: format
+      group: 主要属性
+      dependency:
+        - "!type": datetime
+    - name: displayFormat
+      title: 自定义展示格式
+      type: string
+      description: 只用于页面上展示的格式，例如：yyyy年MM月dd日
+      advanced: true
+      group: 主要属性
+    - name: title
+      title: 顶部栏标题
+      type: string
+      default: ""
+      description: ""
+      group: 主要属性
+    - name: input-align
+      title: 对齐方式
+      type: string
+      options:
+        - value: left
+          title: 左
+        - value: center
+          title: 中
+        - value: right
+          title: 右
+      default: left
+      description: 设置右侧内容的对齐方式
+      group: 主要属性
+    - name: close-on-click-overlay
+      title: 点击遮罩层后关闭
+      type: boolean
+      default: false
+      description: ""
+      group: 交互属性
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<van-picker-action-slot>`子组件
+      support:
+        - name: van-picker-action-slot
+          title: 事件插槽
+          snippet: <van-picker-action-slot
+            target-method="confirm"></van-picker-action-slot>
+  events:
+    - name: confirm
+      title: 确认
+      description: 点击完成按钮时触发的事件
+      params: []
+    - name: cancel
+      title: 取消
+      description: 点击完成取消时触发的事件
+      params: []
+  description: 时间选择，支持日期、年月、时分等维度
+  methods:
+    - name: open
+      description: 打开
+    - name: close
+      description: 关闭
+  i18n:
+    zh-CN:
+      vanDatetimePicker_confirm: 确定
+      vanDatetimePicker_cancel: 取消
+      vanDatetimePicker_rangeTabStart: 开始
+      vanDatetimePicker_rangeTabTo: 至
+      vanDatetimePicker_rangeTabEnd: 结束
+- name: van-datetime-picker-action-slot
+  title: 时间选择事件插槽
+  is-sub: true
+  attrs:
+    - name: target-method
+      title: 触发的事件名称
+      type: string
+      options:
+        - value: confirm
+          title: 确认
+        - value: cancel
+          title: 取消
+- name: van-picker-action-slot
+  title: 事件插槽
+  is-sub: true
+  attrs:
+    - name: target-method
+      title: 触发的事件名称
+      type: string
+      options:
+        - value: confirm
+          title: 确认
+        - value: cancel
+          title: 取消

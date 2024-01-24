@@ -1,0 +1,152 @@
+@import '../style/var';
+
+.van-col {
+  float: left;
+  box-sizing: border-box;
+  min-height: 1px;
+}
+
+.generate-col(24);
+.generate-col(@n, @i: 1) when (@i =< @n) {
+  .van-col--@{i} {
+    width: (@i * 100% / 24);
+  }
+
+  .van-col--offset-@{i} {
+    margin-left: (@i * 100% / 24);
+  }
+
+  .generate-col(@n, (@i + 1));
+}
+.van-col[empty] .van-col-empty {
+  background: #F7F8FA;
+  text-align: center;
+  color: #ccc;
+}
+/* 与主轴同向用 flex，否则用 align-self */
+.van-col--direction-horizontal > [width-stretch="true"],
+.van-col--direction-horizontal > [widthstretch="true"],
+.van-col--direction-vertical > [height-stretch="true"],
+.van-col--direction-vertical > [heightstretch="true"] { flex: 1 0 0; }
+.van-col--direction-vertical > [width-stretch="true"],
+.van-col--direction-vertical > [widthstretch="true"],
+.van-col--direction-horizontal > [height-stretch="true"],
+.van-col--direction-horizontal > [heightstretch="true"] { align-self: stretch; }
+/* width-stretch 强制 width 为 unset */
+.van-col--flex > [width-stretch="true"],
+.van-col--flex > [widthstretch="true"] { width: unset !important; }
+/* height-stretch 强制 height 为 unset */
+.van-col--flex > [height-stretch="true"],
+.van-col--flex > [heightstretch="true"] { height: unset !important; }
+.van-col {
+  &--flex {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &--direction-vertical {
+    flex-direction: column;
+    &-gap-normal {
+      *:not(:last-child) {
+        margin-bottom: var(--van-space-base);
+      }
+    }
+    &-gap-shrink {
+      *:not(:last-child) {
+        margin-bottom: var(--space-shrink);
+      }
+    }
+    &-gap-none {
+      *:not(:last-child) {
+        margin-bottom: 0;
+      }
+    }
+    &-gap-mini {
+      *:not(:last-child) {
+        margin-bottom: var(--space-mini);
+      }
+    }
+    &-gap-small {
+      *:not(:last-child) {
+        margin-bottom: var(--space-small);
+      }
+    }
+    &-gap-large {
+      *:not(:last-child) {
+        margin-bottom: var(--space-large);
+      }
+    }
+  }
+
+  &--direction-horizontal {
+    &-gap-normal  {
+      *:not(:last-child) {
+        margin-right: var(--van-space-base);
+      }
+    }
+    &-gap-shrink {
+      *:not(:last-child) {
+        margin-right: var(--space-shrink);
+      }
+    }
+    &-gap-none {
+      *:not(:last-child) {
+        margin-right: 0;
+      }
+    }
+    &-gap-mini {
+      *:not(:last-child) {
+        margin-right: var(--space-mini);
+      }
+    }
+    &-gap-small {
+      *:not(:last-child) {
+        margin-right: var(--space-small);
+      }
+    }
+    &-gap-large {
+      *:not(:last-child) {
+        margin-right: var(--space-large);
+      }
+    }
+  }
+
+  &--justify-center {
+    justify-content: center;
+  }
+
+  &--justify-end {
+    justify-content: flex-end;
+  }
+
+  &--justify-space-between {
+    justify-content: space-between;
+  }
+
+  &--justify-space-around {
+    justify-content: space-around;
+  }
+
+  &--align-start {
+    align-items: flex-start; align-content: flex-start; 
+  }
+
+  &--align-center {
+    align-items: center; align-content: center; 
+  }
+
+  &--align-end {
+    align-items: flex-end; align-content: flex-end; 
+  }
+
+  &--align-baseline {
+    align-items: baseline; align-content: baseline; 
+  }
+
+  &--align-stretch {
+    align-items: stretch; align-content: stretch; 
+  }
+  &--nowrap {
+    flex-wrap: nowrap
+  }
+}

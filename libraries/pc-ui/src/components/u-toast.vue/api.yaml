@@ -1,0 +1,85 @@
+- name: u-toast-single
+  icon: toast
+  title: 弹出消息
+  description: 弹出消息
+  labels:
+    - Feedback
+  attrs:
+    - name: text
+      title: 提示内容
+      type: string
+      default: 弹出消息
+      description: 默认提示内容
+    - name: color
+      title: 消息类型
+      type: string
+      options:
+        - value: success
+          title: 成功
+        - value: warning
+          title: 警告
+        - value: error
+          title: 错误
+        - value: loading
+          title: 加载中
+        - value: custom
+          title: 自定义
+      default: custom
+      description: 提示的类型
+    - name: custom-icon
+      title: 自定义图标
+      type: icon
+      dependency:
+        - color: custom
+    - name: duration
+      title: 停留时间
+      type: number
+      default: 2000
+      description: 自动关闭的延时，单位毫秒。设为 0 时不自动关闭
+    - name: position
+      title: 位置
+      type: string
+      options:
+        - value: top-center
+          title: 上中
+        - value: top-left
+          title: 上左
+        - value: top-right
+          title: 上右
+        - value: bottom-center
+          title: 下中
+        - value: bottom-left
+          title: 下左
+        - value: bottom-right
+          title: 下右
+        - value: static
+          title: 静态
+      default: top-center
+      description: 显示的位置
+      advanced: true
+    - name: single
+      title: 合并
+      type: boolean
+      default: false
+      description: 多个提示会合并为一个
+      advanced: true
+    - name: closable
+      title: 关闭提示
+      type: boolean
+      default: false
+      description: 是否可以关闭提示
+      advanced: true
+  events:
+    - name: open
+      title: 弹出后事件
+      description: 弹出提示时触发
+      params: []
+    - name: close
+      title: 关闭后
+      description: 关闭提示时触发
+      params: []
+  methods:
+  - name: open
+    description: 打开轻提示
+  - name: close
+    description: 关闭轻提示

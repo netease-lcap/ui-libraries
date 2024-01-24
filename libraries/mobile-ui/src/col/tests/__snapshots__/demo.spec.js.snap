@@ -1,0 +1,78 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div class="van-row van-row--flex">
+      <div empty="true" vusion-slot-name="default" allowchild="true" class="van-col van-col--12 van-col--offset-12"></div>
+    </div>
+    <div class="van-row van-row--flex">
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8">span: 8</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8">span: 8</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8">span: 8</div>
+    </div>
+    <div class="van-row van-row--flex">
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--4">span: 4</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--10 van-col--offset-4"> offset: 4, span: 10 </div>
+    </div>
+    <div class="van-row van-row--flex">
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--12 van-col--offset-12"> offset: 12, span: 12 </div>
+    </div>
+    <div class="van-row van-row--flex">
+      <div class="van-row van-row--flex">
+        <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8">8</div>
+        <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8">8</div>
+        <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8">8</div>
+      </div>
+      <div class="van-row van-row--flex">
+        <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8">8</div>
+        <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8">8</div>
+        <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8">8</div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-row van-row--flex">
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8" style="padding-right: 13.333333333333334px;">span: 8</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8" style="padding-left: 6.666666666666666px; padding-right: 6.666666666666668px;">span: 8</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8" style="padding-left: 13.333333333333332px;">span: 8</div>
+    </div>
+  </div>
+  <div>
+    <div class="van-row van-row--flex">
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+    </div>
+    <div class="van-row van-row--flex van-row--justify-center">
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+    </div>
+    <div class="van-row van-row--flex van-row--justify-end">
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+    </div>
+    <div class="van-row van-row--flex van-row--justify-space-between">
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+    </div>
+    <div class="van-row van-row--flex van-row--justify-space-around">
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--6">span: 6</div>
+    </div>
+    <div class="van-row van-row--flex van-row--align-end">
+      <div vusion-slot-name="default" allowchild="true" class="van-col van-col--18 van-col--flex van-col--align-end van-col--direction-horizontal"><button class="van-button van-button--default van-button--normal van-button--square">
+          <div class="van-button__content"><span class="van-button__text">1</span></div>
+        </button><button class="van-button van-button--default van-button--normal van-button--square">
+          <div class="van-button__content"><span class="van-button__text">2</span></div>
+        </button><button class="van-button van-button--default van-button--normal van-button--square">
+          <div class="van-button__content"><span class="van-button__text">3</span></div>
+        </button></div>
+    </div>
+  </div>
+</div>
+`;

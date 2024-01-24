@@ -1,0 +1,65 @@
+- name: u-count-down
+  title: 计时器
+  labels:
+    - Display
+  icon: countdown
+  description: 用于计时
+  attrs:
+    - name: timer
+      title: 定时时长（秒）
+      type: number
+      default: 60
+      description: 设置定时时间
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 计时器的总时长，单位为秒。支持手动输入或是动态绑定。
+      tooltipLink: ""
+    - name: reverse
+      title: 计时方式
+      type: string
+      options:
+        - value: positive
+          title: 正计时
+        - value: negative
+          title: 倒计时
+      default: positive
+      description: 设置计时器计时方式
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 可选择正计时和倒计时
+      tooltipLink: ""
+    - name: autostart
+      title: 自动计时
+      type: boolean
+      default: true
+      description: 设置是否自动开始计时
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 默认自动开始计时，支持动态绑定布尔类型（Boolean）的变量
+      tooltipLink: ""
+  events:
+    - name: start
+      title: 计时器开始
+      description: 计时器开始时触发
+    - name: pause
+      title: 计时器暂停
+      description: 计时器暂停时触发
+    - name: continue
+      title: 计时器继续
+      description: 计时器继续时触发
+    - name: stop
+      title: 计时器结束
+      description: 计时器结束时触发
+  methods:
+    - name: start
+      description: 开始计时器
+      params: []
+    - name: pause
+      description: 暂停计时器
+      params: []
+    - name: continue
+      description: 继续计时器
+      params: []
+    - name: stop
+      description: 停止计时器
+      params: []

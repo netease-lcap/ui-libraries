@@ -1,0 +1,210 @@
+<template>
+    <div
+        v-if="currentVisible"
+        :class="$style.root"
+        :type="type"
+        :bordered="bordered"
+    >
+        <div :class="$style.content" :horizontal="horizontal">
+            <i v-if="showIcon" :class="$style.icon"></i>
+            <div>
+                <div :class="$style.title" vusion-slot-name="title" vusion-slot-name-edit="title">
+                    <slot name="title">
+                        {{ title }}
+                        <s-empty
+                            v-if="!$slots.title
+                                && !title
+                                && $env.VUE_APP_DESIGNER
+                                && !!$attrs['vusion-node-path']">
+                        </s-empty>
+                    </slot>
+                </div>
+                <div :class="$style.desc" vusion-slot-name="default">
+                    <slot>{{ desc }}</slot>
+                    <s-empty v-if="(!$slots.default) && !desc && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']"></s-empty>
+                </div>
+            </div>
+        </div>
+        <a :class="$style.close" v-if="closeable" @click="close"></a>
+    </div>
+</template>
+
+<script>
+import SEmpty from '../s-empty.vue';
+
+export default {
+    name: 'u-alert',
+    components: { SEmpty },
+    props: {
+        type: {
+            type: String,
+            default: 'info',
+        },
+        title: {
+            type: String,
+            default: '',
+        },
+        desc: {
+            type: String,
+            default: '',
+        },
+        bordered: {
+            type: Boolean,
+            default: true,
+        },
+        closeable: {
+            type: Boolean,
+            default: false,
+        },
+        showIcon: {
+            type: Boolean,
+            default: true,
+        },
+        horizontal: {
+            type: String,
+            default: 'left',
+        },
+    },
+    data() {
+        return {
+            currentVisible: true,
+        };
+    },
+    methods: {
+        close() {
+            this.$emit('close', this);
+            this.currentVisible = false;
+            this.$nextTick(() => this.$destroy());
+        },
+    },
+};
+</script>
+
+<style module>
+.root {
+    display: flex;
+    padding: 4px 16px;
+    border-radius: 2px;
+}
+.root[bordered] {
+    border: 1px solid currentColor;
+}
+.content {
+    display: flex;
+    flex: 1;
+    font-size: 14px;
+}
+.icon {
+    align-self: flex-start;
+    margin-right: 8px;
+}
+.icon::after {
+    background: radial-gradient(circle, #fff 45%, transparent 45%);
+}
+.title {
+    display: inline;
+    color: var(--alert-title-color);
+}
+.desc {
+    color: var(--alert-desc-color);
+}
+.close {
+    align-self: flex-start;
+    font-size: 16px;
+    line-height: 1.4;
+    margin-left: 8px;
+    color: var(--alert-close-color);
+}
+.close::after {
+content: "\e64b";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+.close:hover::after {
+    color: var(--alert-close-hover-color);
+}
+.content[horizontal="left"] {
+    justify-content: flex-start;
+    text-align: left;
+}
+.content[horizontal="center"] {
+    justify-content: center;
+    text-align: center;
+}
+.root[type="info"] {
+    background: var(--alert-background-color-info);
+    color: var(--alert-color-info);
+}
+.root[type="success"] {
+    background: var(--alert-background-color-success);
+    color: var(--alert-color-success);
+}
+.root[type="warning"] {
+    background: var(--alert-background-color-warning);
+    color: var(--alert-color-warning);
+}
+.root[type="error"] {
+    background: var(--alert-background-color-error);
+    color: var(--alert-color-error);
+}
+.root[type="info"] .icon::after {
+content: "\e67e";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+.root[type="success"] .icon::after {
+content: "\e667";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+.root[type="warning"] .icon::after {
+content: "\e655";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+.root[type="error"] .icon::after {
+content: "\e659";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+</style>

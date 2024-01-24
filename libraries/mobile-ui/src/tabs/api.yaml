@@ -1,0 +1,121 @@
+- name: van-tabs
+  title: 选项卡
+  icon: tabsh5
+  labels:
+    - Selector
+  description: 选项卡切换组件，常用于平级区域大块内容的收纳和展现
+  attrs:
+    - name: value
+      title: 值
+      type: any
+      sync: true
+      model: true
+      description: 用于标识选项卡的值
+      group: 数据属性
+    - name: type
+      title: 样式类型
+      type: string
+      options:
+        - value: line
+          title: 线条
+        - value: card
+          title: 胶囊
+      default: line
+      description: 设置选项卡为线条类型或胶囊类型
+      group: 主要属性
+    - name: sticky
+      title: 自动吸顶
+      type: boolean
+      default: false
+      description: ""
+      group: 主要属性
+    - name: scrollspystr
+      title: 导航模式
+      type: string
+      default: no
+      options:
+        - value: no
+          title: 切换导航
+        - value: scrollspy
+          title: 滚动导航
+      description: 设置选项卡的导航模式
+      group: 主要属性
+    - name: swipeable
+      title: 滑动切换
+      type: boolean
+      default: false
+      description: ""
+      group: 交互属性
+    - name: animated
+      title: 开启转场动画
+      type: boolean
+      default: false
+      description: ""
+      group: 交互属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+  slots:
+    - concept: Slot
+      name: default
+      title: 默认
+      description: 插入`<van-tab>`子组件。
+      empty-background: add-sub
+      support:
+        - name: van-tab
+          title: 子选项
+          snippet: <van-tab title="标签页">内容</van-tab>
+  events:
+    - name: click
+      title: 点击标签
+      description: 点击标签时触发
+      params: []
+    - name: change
+      title: 标签改变
+      description: 当前激活的标签改变时触发
+      params: []
+- name: van-tab
+  title: 标签页
+  is-sub: true
+  attrs:
+    - name: title
+      title: 标题
+      type: string
+      default: 标题
+      description: 自定义标题
+      advanced: true
+    - name: name
+      title: 选项值
+      type: string
+      description: 用于标识选项的值
+      group: 数据属性
+    - name: badgebtn
+      title: 显示徽章
+      type: boolean
+      default: false
+      description: ""
+      group: 数据属性
+    - name: badge
+      title: 徽章值
+      type: string, number
+      description: ""
+      group: 数据属性
+    - name: badgemax
+      title: 徽章最大值
+      type: number
+      description: 徽章内容为数字时显示的最大值
+      group: 数据属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+  slots:
+    - concept: Slot
+      name: default
+      title: 默认
+      description: 显示的内容

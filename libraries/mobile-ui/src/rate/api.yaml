@@ -1,0 +1,85 @@
+- name: van-rate
+  icon: rate
+  title: 评分
+  labels:
+    - Display
+  description: 用于对事物进行评级操作。
+  attrs:
+    - name: value
+      title: 值
+      type: number
+      sync: true
+      model: true
+      min: 0
+      max: 20
+      group: 数据属性
+      description: 用于标识评分的值
+    - name: count
+      title: 图标总数
+      type: number
+      default: 5
+      min: 0
+      max: 20
+      group: 数据属性
+      description: 设置评分图标的总数
+    - name: icon
+      title: 选中时的图标名称或图片链接
+      type: icon
+      group: 主要属性
+      description: ""
+    - name: void-icon
+      title: 未选中时的图标名称或图片链接
+      type: icon
+      group: 主要属性
+      description: ""
+    - name: allow-half
+      title: 半选
+      type: boolean
+      default: false
+      group: 交互属性
+      description: 是否支持半选
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      group: 状态属性
+      description: 正常显示，但禁止选择/输入
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      group: 状态属性
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+    - name: size
+      title: 图标大小
+      type: number
+      default: 20
+      group: 样式属性
+      description: 设置图标大小，单位为px。
+    - name: gutter
+      title: 图标间距
+      type: number | string
+      default: 4
+      group: 样式属性
+      description: 设置图标间距，最小值为0。
+    - name: color
+      title: 选中颜色
+      type: string
+      group: 样式属性
+      description: ""
+    - name: void-color
+      title: 未选中颜色
+      type: string
+      group: 样式属性
+      description: ""
+    - name: disabled-color
+      title: 禁用颜色
+      type: string
+      group: 样式属性
+      description: ""
+  slots: false
+  events:
+    - name: change
+      title: 分值变化时
+      description: 分值变化时
+      params: []

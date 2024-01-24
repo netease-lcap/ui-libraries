@@ -1,0 +1,218 @@
+- name: u-pagination
+  title: 翻页器
+  icon: pagination
+  labels:
+    - Selector
+  description: 展示多页列表时使用
+  attrs:
+    - name: page
+      title: 当前页数
+      type: number
+      sync: true
+      default: 1
+      description: 当前默认展示在第几页
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 翻页器的当前页
+      tooltipLink: ""
+    - name: total
+      title: 总页数
+      type: number
+      default: 11
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 翻页器的总页数
+      tooltipLink: ""
+    - name: side
+      title: 两端页码数量
+      type: number
+      default: 2
+      description: 当页数多时，两端恒定显示的页码数量
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 当页数多时，两边恒定显示的数量
+      tooltipLink: ""
+    - name: around
+      title: 中间页码数量
+      type: number
+      default: 5
+      description: 当页数多时，中间恒定显示的页码数量
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 当页数多时，左侧恒定显示的数量，若和两边的显示数量不一致，则取两者之间的最大值
+      tooltipLink: ""
+    - name: total-items
+      title: 总条数
+      type: number
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 数据的总条数目
+      tooltipLink: ""
+    - name: page-size
+      title: 默认每页条数
+      type: number
+      sync: true
+      default: 20
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 每页展示数据的条目数，默认为[10,20,50]
+      tooltipLink: ""
+    - name: page-size-options
+      title: 每页条数选项
+      type: Array
+      default:
+        - 10
+        - 20
+        - 50
+      description: 每页条数切换器的选项
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 每页条数选项列表
+      tooltipLink: ""
+    - name: show-total
+      title: 显示总条数
+      type: boolean
+      default: false
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: ""
+      tooltipLink: ""
+    - name: show-sizer
+      title: 显示每页条数
+      type: boolean
+      default: false
+      description: 显示每页条数切换器
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 是否显示切换每页条数选项
+      tooltipLink: ""
+    - name: show-jumper
+      title: 显示跳转输入
+      type: boolean
+      default: false
+      description: 显示页面跳转输入框
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 是否显示页面跳转输入框
+      tooltipLink: ""
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+      brifeDoc: ""
+      docDescription: ""
+      tooltipLink: ""
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+      brifeDoc: ""
+      docDescription: ""
+      tooltipLink: ""
+  events:
+    - name: before-select
+      title: 选择前
+      description: 选择分页前触发
+      advanced: true
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/PaginationEvent"
+        - name: $event.page
+          type: number
+          description: 选择的页码
+        - name: $event.oldPage
+          type: number
+          description: 旧的页码
+        - name: $event.preventDefault
+          type: Function
+          description: 阻止选择流程
+        - name: senderVM
+          type: UPagination
+          description: 发送事件实例
+    - name: select
+      title: 选择后
+      description: 选择分页时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/PaginationEvent"
+        - name: $event.page
+          type: number
+          description: 选择的页码
+        - name: $event.oldPage
+          type: number
+          description: 旧的页码
+        - name: senderVM
+          type: UPagination
+          description: 发送事件实例
+    - name: change
+      title: 改变后
+      description: 页码改变时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/PaginationEvent"
+        - name: $event.page
+          type: number
+          description: 当前页码
+        - name: $event.oldPage
+          type: number
+          description: 旧的页码
+        - name: senderVM
+          type: UPagination
+          description: 发送事件实例
+    - name: change-page-size
+      title: 条数改变后
+      description: 每页条数改变时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/PaginationEvent"
+        - name: $event.pageSize
+          type: number
+          description: 当前每页条数
+        - name: $event.oldPageSize
+          type: number
+          description: 旧的每页条数
+        - name: senderVM
+          type: UPagination
+          description: 发送事件实例
+  i18n:
+    zh-CN:
+      uPagination_pageSizeUnit: '条'
+      uPagination_pageSize: '条/页'
+      uPagination_pageUnit: '页'
+      uPagination_total: '共 {totalItems} 条'
+      uPagination_goto: '跳至'
+      uPagination_gotoPageUnit: '页'
+    en-US:
+      uPagination_pageSizeUnit: 'items'
+      uPagination_pageSize: '/page'
+      uPagination_pageUnit: 'page'
+      uPagination_total: 'Total {totalItems} items'
+      uPagination_goto: 'Go to'
+      uPagination_gotoPageUnit: 'page'
+    ja:
+      uPagination_pageSizeUnit: '行'
+      uPagination_pageSize: '/ページ'
+      uPagination_pageUnit: 'ページ'
+      uPagination_total: '合計 {totalItems} 行'
+      uPagination_goto: ''
+      uPagination_gotoPageUnit: 'ページへ'

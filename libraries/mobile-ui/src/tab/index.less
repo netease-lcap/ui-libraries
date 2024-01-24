@@ -1,0 +1,23 @@
+@import '../style/var';
+
+.van-tab {
+  &__pane {
+    &,
+    &-wrapper {
+      flex-shrink: 0;
+      box-sizing: border-box;
+      width: 100%;
+
+      text-align: center;
+      // padding-top: 28px;
+
+      // display: flex;
+      // justify-content: center;
+    }
+
+    &-wrapper--inactive {
+      height: 0;
+      overflow: visible;
+    }
+  }
+}

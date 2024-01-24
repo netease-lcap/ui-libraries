@@ -1,0 +1,72 @@
+- name: van-image
+  icon: image
+  title: 图片展示
+  labels:
+    - Display
+  description: 可以用来展示一张图片，支持设置图片地址。
+  attrs:
+    - name: loading-type
+      title: 加载样式
+      type: string
+      default: loading
+      options:
+        - value: loading
+          title: Loading
+        - value: none
+          title: 不显示加载状态
+        - value: placeholder
+          title: 自定义默认图
+    - name: placeholder-src
+      title: 默认图地址
+      type: string
+      default: https://static-vusion.nos-eastchina1.126.net/h5-template/lietu.png
+      required: true
+      dependency:
+        - loading-type: placeholder
+    - name: src
+      title: 图片地址
+      type: image
+      default: ""
+      description: ""
+      compType: linkInput
+      group: 主要属性
+    - name: fit
+      title: 填充方式
+      type: string
+      options:
+        - value: contain
+          title: 适应
+        - value: scale-down
+          title: 适应（图片小于父元素时以原尺寸展示）
+        - value: none
+          title: 原尺寸
+        - value: fill
+          title: 拉伸
+        - value: cover
+          title: 填充
+      default: contain
+      description: 设置图片的填充方式
+      group: 主要属性
+    - name: sr
+      title: 图片风格
+      type: string
+      options:
+        - value: s
+          title: 方形
+        - value: r
+          title: 圆形
+      default: s
+      description: 选择图片为方形或圆形
+      group: 主要属性
+    - name: preview
+      title: 点击放大
+      type: boolean
+      default: false
+      description: 是否支持点击放大全屏展示
+      group: 交互属性
+  slots: false
+  events:
+    - name: click
+      title: 点击后
+      description: 点击此项时触发
+      params: []

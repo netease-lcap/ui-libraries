@@ -1,0 +1,9 @@
+
+/* 为了斑马纹能生效 */
+.list-view-item {
+  position: relative;
+}
+
+.list-view-item > .van-cell {
+  background: transparent;
+}

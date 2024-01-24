@@ -1,0 +1,72 @@
+.van-capsules-item {
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+  font-size: var(--van-capsules-item-font-size);
+  text-align: center;
+  padding: var(--van-capsules-item-padding);
+  border: 1px solid var(--van-capsules-item-border-color);
+  border-left-color: transparent;
+  background: var(--van-capsules-item-background);
+  color: var(--van-capsules-item-color);
+
+  &:first-child {
+    border-top-left-radius: var(--van-capsules-border-radius);
+    border-bottom-left-radius: var(--van-capsules-border-radius);
+    border-left-color: var(--van-capsules-item-border-color);
+  }
+
+  &:last-child {
+    border-top-right-radius: var(--van-capsules-border-radius);
+    border-bottom-right-radius: var(--van-capsules-border-radius);
+  }
+
+  &[active] {
+    z-index: 1;
+    border-color: var(--van-capsules-item-active-border-color);
+    background: var(--van-capsules-item-active-background);
+    color: var(--van-capsules-item-active-color);
+  }
+
+  &[disabled] {
+    color: var(--van-capsules-item-disabled-color);
+    background: var(--van-capsules-item-disabled-background);
+  }
+
+  &[active][disabled] {
+    color: var(--van-capsules-item-active-disabled-color);
+    background: var(--van-capsules-item-active-disabled-background);
+    border-color: var(--van-capsules-item-active-disabled-border-color);
+  }
+
+  &__label {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: var(--van-capsules-item-label-font-size);
+    padding: 0 4px;
+    border-radius: 2px;
+    white-space: nowrap;
+    background: var(--van-capsules-item-label-background);
+    color: var(--van-capsules-item-label-color);
+
+    max-width: var(--van-capsules-item-label-max-width);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &[flag]::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 5px solid;
+    border-color: var(--van-capsules-item-flag-color) var(--van-capsules-item-flag-color) transparent transparent;
+  }
+
+  &:last-child[flag]::after {
+    border-top-right-radius: var(--van-capsules-border-radius);
+  }
+}

@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <van-loading icon="qrcode"></van-loading>
+    <van-loading type="spinner"></van-loading>
+  </div>
+  <div>
+    <van-loading color="#1989fa"></van-loading>
+    <van-loading type="spinner" color="#1989fa"></van-loading>
+  </div>
+  <div>
+    <van-loading size="24"></van-loading>
+    <van-loading type="spinner" size="24"></van-loading>
+  </div>
+  <div>
+    <van-loading size="24px"> 加载中... </van-loading>
+  </div>
+  <div>
+    <van-loading size="24px" vertical=""> 加载中... </van-loading>
+  </div>
+  <div>
+    <van-loading size="24px" vertical="" color="#0094ff"> 加载中... </van-loading>
+    <van-loading size="24px" vertical="" text-color="#0094ff"> 加载中... </van-loading>
+  </div>
+</div>
+`;

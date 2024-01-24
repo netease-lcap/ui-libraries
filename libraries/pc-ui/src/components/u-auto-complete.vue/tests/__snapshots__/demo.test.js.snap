@@ -1,0 +1,1835 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`u-auto-complete.vue > Demo- 1`] = `
+<div class="root">
+  <span class="baseline">b</span>
+  <span class="placeholder">普通输入框</span>
+  <!---->
+  <input class="input" type="text">
+  <transition-stub class="popper" name="fade">
+    <div class="root" style="display: none;">
+      <span class="arrow" style="display: none;"></span>
+      <div border="true" class="root listview" tabindex="0">
+        <div class="head" style="display: none;">
+          <!---->
+          <span class="title" vusion-slot-name="title">列表</span>
+          <div class="extra">
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class="body">
+          <!---->
+          <!---->
+        </div>
+        <div class="foot" style="display: none;">
+          <!---->
+        </div>
+      </div>
+    </div>
+  </transition-stub>
+  <!---->
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo- 2`] = `
+<div class="root">
+  <span class="baseline">b</span>
+  <span class="placeholder">加密输入框</span>
+  <!---->
+  <input class="input" type="text">
+  <transition-stub class="popper" name="fade">
+    <div class="root" style="display: none;">
+      <span class="arrow" style="display: none;"></span>
+      <div border="true" class="root listview" tabindex="0">
+        <div class="head" style="display: none;">
+          <!---->
+          <span class="title" vusion-slot-name="title">列表</span>
+          <div class="extra">
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class="body">
+          <!---->
+          <!---->
+        </div>
+        <div class="foot" style="display: none;">
+          <!---->
+        </div>
+      </div>
+    </div>
+  </transition-stub>
+  <!---->
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo- 3`] = `
+<div class="root" clearable="可清除输入框">
+  <span class="baseline">b</span>
+  <span class="placeholder" style="display: none;"></span>
+  <!---->
+  <input class="input" type="text">
+  <transition-stub class="popper" name="fade">
+    <div class="root" style="display: none;">
+      <span class="arrow" style="display: none;"></span>
+      <div border="true" class="root listview" tabindex="0">
+        <div class="head" style="display: none;">
+          <!---->
+          <span class="title" vusion-slot-name="title">列表</span>
+          <div class="extra">
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class="body">
+          <!---->
+          <!---->
+        </div>
+        <div class="foot" style="display: none;">
+          <!---->
+        </div>
+      </div>
+    </div>
+  </transition-stub>
+  <span class="suffix">
+    <!---->
+    <!---->
+    <span class="clearable"></span>
+  </span>
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo- 4`] = `
+<div class="root" size="huge">
+  <span class="baseline">b</span>
+  <span class="placeholder">大输入框</span>
+  <!---->
+  <input class="input" size="huge" type="text">
+  <transition-stub class="popper" name="fade">
+    <div class="root" style="display: none;">
+      <span class="arrow" style="display: none;"></span>
+      <div border="true" class="root listview" tabindex="0">
+        <div class="head" style="display: none;">
+          <!---->
+          <span class="title" vusion-slot-name="title">列表</span>
+          <div class="extra">
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class="body">
+          <!---->
+          <!---->
+        </div>
+        <div class="foot" style="display: none;">
+          <!---->
+        </div>
+      </div>
+    </div>
+  </transition-stub>
+  <!---->
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo- 5`] = `
+<div class="root" size="medium">
+  <span class="baseline">b</span>
+  <span class="placeholder">中等输入框</span>
+  <!---->
+  <input class="input" size="medium" type="text">
+  <transition-stub class="popper" name="fade">
+    <div class="root" style="display: none;">
+      <span class="arrow" style="display: none;"></span>
+      <div border="true" class="root listview" tabindex="0">
+        <div class="head" style="display: none;">
+          <!---->
+          <span class="title" vusion-slot-name="title">列表</span>
+          <div class="extra">
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class="body">
+          <!---->
+          <!---->
+        </div>
+        <div class="foot" style="display: none;">
+          <!---->
+        </div>
+      </div>
+    </div>
+  </transition-stub>
+  <!---->
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo- 6`] = `
+<div class="root" size="small">
+  <span class="baseline">b</span>
+  <span class="placeholder">小输入框</span>
+  <!---->
+  <input class="input" size="small" type="text">
+  <transition-stub class="popper" name="fade">
+    <div class="root" style="display: none;">
+      <span class="arrow" style="display: none;"></span>
+      <div border="true" class="root listview" tabindex="0">
+        <div class="head" style="display: none;">
+          <!---->
+          <span class="title" vusion-slot-name="title">列表</span>
+          <div class="extra">
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class="body">
+          <!---->
+          <!---->
+        </div>
+        <div class="foot" style="display: none;">
+          <!---->
+        </div>
+      </div>
+    </div>
+  </transition-stub>
+  <!---->
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo- 7`] = `
+<div class="root" prefix="search" size="normal medium">
+  <span class="baseline">b</span>
+  <span class="placeholder">搜索框</span>
+  <!---->
+  <input class="input" size="normal medium" type="text">
+  <transition-stub class="popper" name="fade">
+    <div class="root" style="display: none;">
+      <span class="arrow" style="display: none;"></span>
+      <div border="true" class="root listview" tabindex="0">
+        <div class="head" style="display: none;">
+          <!---->
+          <span class="title" vusion-slot-name="title">列表</span>
+          <div class="extra">
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class="body">
+          <!---->
+          <!---->
+        </div>
+        <div class="foot" style="display: none;">
+          <!---->
+        </div>
+      </div>
+    </div>
+  </transition-stub>
+  <span class="suffix">
+    <!---->
+    <!---->
+    <!---->
+  </span>
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo- 8`] = `
+<div class="root" size="normal medium" suffix="search">
+  <span class="baseline">b</span>
+  <span class="placeholder">搜索框</span>
+  <!---->
+  <input class="input" size="normal medium" type="text">
+  <transition-stub class="popper" name="fade">
+    <div class="root" style="display: none;">
+      <span class="arrow" style="display: none;"></span>
+      <div border="true" class="root listview" tabindex="0">
+        <div class="head" style="display: none;">
+          <!---->
+          <span class="title" vusion-slot-name="title">列表</span>
+          <div class="extra">
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class="body">
+          <!---->
+          <!---->
+        </div>
+        <div class="foot" style="display: none;">
+          <!---->
+        </div>
+      </div>
+    </div>
+  </transition-stub>
+  <span class="suffix">
+    <!---->
+    <!---->
+    <!---->
+  </span>
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo-@deprecated 搜索图标 1`] = `
+<div>
+  <div class="root" direction="horizontal" type vusion-slot-name="default">
+    <div class="root" search="left" size="normal medium">
+      <span class="baseline">b</span>
+      <span class="placeholder">1~12位小写字母</span>
+      <!---->
+      <input class="input" size="normal medium" type="text">
+      <transition-stub class="popper" name="fade">
+        <div class="root" style="display: none;">
+          <span class="arrow" style="display: none;"></span>
+          <div border="true" class="root listview" tabindex="0">
+            <div class="head" style="display: none;">
+              <!---->
+              <span class="title" vusion-slot-name="title">列表</span>
+              <div class="extra">
+                <!---->
+              </div>
+            </div>
+            <!---->
+            <div class="body">
+              <!---->
+              <!---->
+            </div>
+            <div class="foot" style="display: none;">
+              <!---->
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <span class="suffix">
+        <!---->
+        <!---->
+        <!---->
+      </span>
+    </div>
+    <div class="root" search="right" size="normal medium">
+      <span class="baseline">b</span>
+      <span class="placeholder">1~12位小写字母</span>
+      <!---->
+      <input class="input" size="normal medium" type="text">
+      <transition-stub class="popper" name="fade">
+        <div class="root" style="display: none;">
+          <span class="arrow" style="display: none;"></span>
+          <div border="true" class="root listview" tabindex="0">
+            <div class="head" style="display: none;">
+              <!---->
+              <span class="title" vusion-slot-name="title">列表</span>
+              <div class="extra">
+                <!---->
+              </div>
+            </div>
+            <!---->
+            <div class="body">
+              <!---->
+              <!---->
+            </div>
+            <div class="foot" style="display: none;">
+              <!---->
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <span class="suffix">
+        <!---->
+        <!---->
+        <!---->
+      </span>
+    </div>
+    <!---->
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo-data-source 函数 1`] = `
+<div class="root">
+  <span class="baseline">b</span>
+  <span class="placeholder" style="display: none;"></span>
+  <!---->
+  <input class="input" type="text">
+  <transition-stub class="popper" name="fade">
+    <div class="root" style="display: none;">
+      <span class="arrow" style="display: none;"></span>
+      <div border="true" class="root listview" tabindex="0">
+        <div class="head" style="display: none;">
+          <!---->
+          <span class="title" vusion-slot-name="title">列表</span>
+          <div class="extra">
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class="body">
+          <!---->
+          <div class="status" status="loading" vusion-slot-name="loading">
+            <div class="root"></div> 正在加载中...
+            <!---->
+          </div>
+        </div>
+        <div class="foot" style="display: none;">
+          <!---->
+        </div>
+      </div>
+    </div>
+  </transition-stub>
+  <!---->
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo-data-source 数组 1`] = `
+<div class="root">
+  <span class="baseline">b</span>
+  <span class="placeholder" style="display: none;"></span>
+  <!---->
+  <input class="input" type="text">
+  <transition-stub class="popper" name="fade">
+    <div class="root" style="display: none;">
+      <span class="arrow" style="display: none;"></span>
+      <div border="true" class="root listview" tabindex="0">
+        <div class="head" style="display: none;">
+          <!---->
+          <span class="title" vusion-slot-name="title">列表</span>
+          <div class="extra">
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div class="body">
+          <div class style="padding-top: 0px; padding-bottom: 0px;">
+            <div class="root" index="0" vusion-slot-name="item">
+              <!---->
+              Batch
+              <!---->
+            </div>
+            <div class="root" index="1" vusion-slot-name="item">
+              <!---->
+              C
+              <!---->
+            </div>
+            <div class="root" index="2" vusion-slot-name="item">
+              <!---->
+              C#
+              <!---->
+            </div>
+            <div class="root" index="3" vusion-slot-name="item">
+              <!---->
+              C++
+              <!---->
+            </div>
+            <div class="root" index="4" vusion-slot-name="item">
+              <!---->
+              CSS
+              <!---->
+            </div>
+            <div class="root" index="5" vusion-slot-name="item">
+              <!---->
+              Clojure
+              <!---->
+            </div>
+            <div class="root" index="6" vusion-slot-name="item">
+              <!---->
+              CoffeeScript
+              <!---->
+            </div>
+            <div class="root" index="7" vusion-slot-name="item">
+              <!---->
+              Coq
+              <!---->
+            </div>
+            <div class="root" index="8" vusion-slot-name="item">
+              <!---->
+              Diff
+              <!---->
+            </div>
+            <div class="root" index="9" vusion-slot-name="item">
+              <!---->
+              Dockerfile
+              <!---->
+            </div>
+            <div class="root" index="10" vusion-slot-name="item">
+              <!---->
+              F#
+              <!---->
+            </div>
+            <div class="root" index="11" vusion-slot-name="item">
+              <!---->
+              Go
+              <!---->
+            </div>
+            <div class="root" index="12" vusion-slot-name="item">
+              <!---->
+              Groovy
+              <!---->
+            </div>
+            <div class="root" index="13" vusion-slot-name="item">
+              <!---->
+              HLSL
+              <!---->
+            </div>
+            <div class="root" index="14" vusion-slot-name="item">
+              <!---->
+              HTML
+              <!---->
+            </div>
+            <div class="root" index="15" vusion-slot-name="item">
+              <!---->
+              Handlebars
+              <!---->
+            </div>
+            <div class="root" index="16" vusion-slot-name="item">
+              <!---->
+              Ignore
+              <!---->
+            </div>
+            <div class="root" index="17" vusion-slot-name="item">
+              <!---->
+              Ini
+              <!---->
+            </div>
+            <div class="root" index="18" vusion-slot-name="item">
+              <!---->
+              JSON
+              <!---->
+            </div>
+            <div class="root" index="19" vusion-slot-name="item">
+              <!---->
+              Java
+              <!---->
+            </div>
+            <div class="root" index="20" vusion-slot-name="item">
+              <!---->
+              JavaScript
+              <!---->
+            </div>
+            <div class="root" index="21" vusion-slot-name="item">
+              <!---->
+              Jinja
+              <!---->
+            </div>
+            <div class="root" index="22" vusion-slot-name="item">
+              <!---->
+              Jupyter
+              <!---->
+            </div>
+            <div class="root" index="23" vusion-slot-name="item">
+              <!---->
+              Less
+              <!---->
+            </div>
+            <div class="root" index="24" vusion-slot-name="item">
+              <!---->
+              Log
+              <!---->
+            </div>
+            <div class="root" index="25" vusion-slot-name="item">
+              <!---->
+              Lua
+              <!---->
+            </div>
+            <div class="root" index="26" vusion-slot-name="item">
+              <!---->
+              Makefile
+              <!---->
+            </div>
+            <div class="root" index="27" vusion-slot-name="item">
+              <!---->
+              Markdown
+              <!---->
+            </div>
+            <div class="root" index="28" vusion-slot-name="item">
+              <!---->
+              Objective-C
+              <!---->
+            </div>
+            <div class="root" index="29" vusion-slot-name="item">
+              <!---->
+              Objective-C++
+              <!---->
+            </div>
+            <div class="root" index="30" vusion-slot-name="item">
+              <!---->
+              PHP
+              <!---->
+            </div>
+            <div class="root" index="31" vusion-slot-name="item">
+              <!---->
+              Perl
+              <!---->
+            </div>
+            <div class="root" index="32" vusion-slot-name="item">
+              <!---->
+              PowerShell
+              <!---->
+            </div>
+            <div class="root" index="33" vusion-slot-name="item">
+              <!---->
+              Properties
+              <!---->
+            </div>
+            <div class="root" index="34" vusion-slot-name="item">
+              <!---->
+              Pug
+              <!---->
+            </div>
+            <div class="root" index="35" vusion-slot-name="item">
+              <!---->
+              Python
+              <!---->
+            </div>
+            <div class="root" index="36" vusion-slot-name="item">
+              <!---->
+              R
+              <!---->
+            </div>
+            <div class="root" index="37" vusion-slot-name="item">
+              <!---->
+              Razor
+              <!---->
+            </div>
+            <div class="root" index="38" vusion-slot-name="item">
+              <!---->
+              Ruby
+              <!---->
+            </div>
+            <div class="root" index="39" vusion-slot-name="item">
+              <!---->
+              Rust
+              <!---->
+            </div>
+            <div class="root" index="40" vusion-slot-name="item">
+              <!---->
+              SCSS
+              <!---->
+            </div>
+            <div class="root" index="41" vusion-slot-name="item">
+              <!---->
+              SQL
+              <!---->
+            </div>
+            <div class="root" index="42" vusion-slot-name="item">
+              <!---->
+              SVG
+              <!---->
+            </div>
+            <div class="root" index="43" vusion-slot-name="item">
+              <!---->
+              Shaderlab
+              <!---->
+            </div>
+            <div class="root" index="44" vusion-slot-name="item">
+              <!---->
+              Shell Script
+              <!---->
+            </div>
+            <div class="root" index="45" vusion-slot-name="item">
+              <!---->
+              Swift
+              <!---->
+            </div>
+            <div class="root" index="46" vusion-slot-name="item">
+              <!---->
+              TypeScript
+              <!---->
+            </div>
+            <div class="root" index="47" vusion-slot-name="item">
+              <!---->
+              Visual Basic
+              <!---->
+            </div>
+            <div class="root" index="48" vusion-slot-name="item">
+              <!---->
+              Vue
+              <!---->
+            </div>
+            <div class="root" index="49" vusion-slot-name="item">
+              <!---->
+              XML
+              <!---->
+            </div>
+            <div class="root" index="50" vusion-slot-name="item">
+              <!---->
+              XSL
+              <!---->
+            </div>
+            <div class="root" index="51" vusion-slot-name="item">
+              <!---->
+              YAML
+              <!---->
+            </div>
+          </div>
+          <!---->
+        </div>
+        <div class="foot" style="display: none;">
+          <!---->
+        </div>
+      </div>
+    </div>
+  </transition-stub>
+  <!---->
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo-加密 1`] = `
+<div>
+  <div class="root" maxlength="12" type="password">
+    <span class="baseline">b</span>
+    <span class="placeholder">请输入密码</span>
+    <!---->
+    <input class="input" type="text">
+    <transition-stub class="popper" name="fade">
+      <div class="root" style="display: none;">
+        <span class="arrow" style="display: none;"></span>
+        <div border="true" class="root listview" tabindex="0">
+          <div class="head" style="display: none;">
+            <!---->
+            <span class="title" vusion-slot-name="title">列表</span>
+            <div class="extra">
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div class="body">
+            <!---->
+            <!---->
+          </div>
+          <div class="foot" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
+    </transition-stub>
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo-双向绑定 1`] = `
+<div class="root" direction="horizontal" type vusion-slot-name="default">
+  <div class="root" maxlength="12">
+    <span class="baseline">b</span>
+    <span class="placeholder"></span>
+    <!---->
+    <input class="input" type="text">
+    <transition-stub class="popper" name="fade">
+      <div class="root" style="display: none;">
+        <span class="arrow" style="display: none;"></span>
+        <div border="true" class="root listview" tabindex="0">
+          <div class="head" style="display: none;">
+            <!---->
+            <span class="title" vusion-slot-name="title">列表</span>
+            <div class="extra">
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div class="body">
+            <!---->
+            <!---->
+          </div>
+          <div class="foot" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
+    </transition-stub>
+    <!---->
+  </div>
+  <div class="root" maxlength="12">
+    <span class="baseline">b</span>
+    <span class="placeholder"></span>
+    <!---->
+    <input class="input" type="text">
+    <transition-stub class="popper" name="fade">
+      <div class="root" style="display: none;">
+        <span class="arrow" style="display: none;"></span>
+        <div border="true" class="root listview" tabindex="0">
+          <div class="head" style="display: none;">
+            <!---->
+            <span class="title" vusion-slot-name="title">列表</span>
+            <div class="extra">
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div class="body">
+            <!---->
+            <!---->
+          </div>
+          <div class="foot" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
+    </transition-stub>
+    <!---->
+  </div>
+  <div class="root" maxlength="12">
+    <span class="baseline">b</span>
+    <span class="placeholder"></span>
+    <!---->
+    <input class="input" type="text">
+    <transition-stub class="popper" name="fade">
+      <div class="root" style="display: none;">
+        <span class="arrow" style="display: none;"></span>
+        <div border="true" class="root listview" tabindex="0">
+          <div class="head" style="display: none;">
+            <!---->
+            <span class="title" vusion-slot-name="title">列表</span>
+            <div class="extra">
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div class="body">
+            <!---->
+            <!---->
+          </div>
+          <div class="foot" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
+    </transition-stub>
+    <!---->
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo-只读和禁用 1`] = `
+<div>
+  <div class="root" direction="horizontal" type vusion-slot-name="default">
+    <div class="root" readonly="readonly">
+      <span class="baseline">b</span>
+      <span class="placeholder" style="display: none;"></span>
+      <!---->
+      <input class="input" readonly="readonly" type="text">
+      <transition-stub class="popper" name="fade">
+        <div class="root" style="display: none;">
+          <span class="arrow" style="display: none;"></span>
+          <div border="true" class="root listview" tabindex="0">
+            <div class="head" style="display: none;">
+              <!---->
+              <span class="title" vusion-slot-name="title">列表</span>
+              <div class="extra">
+                <!---->
+              </div>
+            </div>
+            <!---->
+            <div class="body">
+              <!---->
+              <!---->
+            </div>
+            <div class="foot" style="display: none;">
+              <!---->
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <div class="root" disabled="disabled">
+      <span class="baseline">b</span>
+      <span class="placeholder" style="display: none;"></span>
+      <!---->
+      <input class="input" disabled="disabled" type="text">
+      <transition-stub class="popper" name="fade">
+        <div class="root" style="display: none;">
+          <span class="arrow" style="display: none;"></span>
+          <div border="true" class="root listview" tabindex="0">
+            <div class="head" style="display: none;">
+              <!---->
+              <span class="title" vusion-slot-name="title">列表</span>
+              <div class="extra">
+                <!---->
+              </div>
+            </div>
+            <!---->
+            <div class="body">
+              <!---->
+              <!---->
+            </div>
+            <div class="foot" style="display: none;">
+              <!---->
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <!---->
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo-可清空 1`] = `
+<div>
+  <div class="root" clearable="可清空">
+    <span class="baseline">b</span>
+    <span class="placeholder" style="display: none;"></span>
+    <!---->
+    <input class="input" type="text">
+    <transition-stub class="popper" name="fade">
+      <div class="root" style="display: none;">
+        <span class="arrow" style="display: none;"></span>
+        <div border="true" class="root listview" tabindex="0">
+          <div class="head" style="display: none;">
+            <!---->
+            <span class="title" vusion-slot-name="title">列表</span>
+            <div class="extra">
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div class="body">
+            <!---->
+            <!---->
+          </div>
+          <div class="foot" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
+    </transition-stub>
+    <span class="suffix">
+      <!---->
+      <!---->
+      <span class="clearable"></span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo-基本用法 1`] = `
+<div>
+  <div class="root" maxlength="12">
+    <span class="baseline">b</span>
+    <span class="placeholder">请输入</span>
+    <!---->
+    <input class="input" type="text">
+    <transition-stub class="popper" name="fade">
+      <div class="root" style="display: none;">
+        <span class="arrow" style="display: none;"></span>
+        <div border="true" class="root listview" tabindex="0">
+          <div class="head" style="display: none;">
+            <!---->
+            <span class="title" vusion-slot-name="title">列表</span>
+            <div class="extra">
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div class="body">
+            <!---->
+            <!---->
+          </div>
+          <div class="foot" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
+    </transition-stub>
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo-大小扩展 1`] = `
+<div>
+  <div class="root" direction="vertical" type vusion-slot-name="default">
+    <div class="root" direction="horizontal" type vusion-slot-name="default">
+      <div class="root" readonly="readonly" size="mini">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="mini" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <div class="root" readonly="readonly" size="mini small">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="mini small" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <div class="root" readonly="readonly" size="mini normal">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="mini normal" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <div class="root" readonly="readonly" size="mini medium">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="mini medium" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+    <div class="root" direction="horizontal" type vusion-slot-name="default">
+      <div class="root" readonly="readonly" size="small mini">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="small mini" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <div class="root" readonly="readonly" size="small">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="small" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <div class="root" readonly="readonly" size="small normal">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="small normal" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <div class="root" readonly="readonly" size="small medium">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="small medium" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+    <div class="root" direction="horizontal" type vusion-slot-name="default">
+      <div class="root" readonly="readonly" size="normal mini">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="normal mini" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <div class="root" readonly="readonly" size="normal small">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="normal small" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <div class="root" readonly="readonly">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <div class="root" readonly="readonly" size="normal medium">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="normal medium" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+    <div class="root" direction="horizontal" type vusion-slot-name="default">
+      <div class="root" readonly="readonly" size="medium mini">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="medium mini" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <div class="root" readonly="readonly" size="medium small">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="medium small" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <div class="root" readonly="readonly" size="medium normal">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="medium normal" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <div class="root" readonly="readonly" size="medium">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="medium" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+    <div class="root" direction="horizontal" type vusion-slot-name="default">
+      <div class="root" readonly="readonly" size="large">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="large" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+    <div class="root" direction="horizontal" type vusion-slot-name="default">
+      <div class="root" readonly="readonly" size="huge">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="huge" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+    <div class="root" direction="horizontal" type vusion-slot-name="default">
+      <div class="root" readonly="readonly" size="huge full">
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" readonly="readonly" size="huge full" type="text">
+        <transition-stub class="popper" name="fade">
+          <div class="root" style="display: none;">
+            <span class="arrow" style="display: none;"></span>
+            <div border="true" class="root listview" tabindex="0">
+              <div class="head" style="display: none;">
+                <!---->
+                <span class="title" vusion-slot-name="title">列表</span>
+                <div class="extra">
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <div class="body">
+                <!---->
+                <!---->
+              </div>
+              <div class="foot" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </transition-stub>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+    <!---->
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo-展示方式 1`] = `
+<div>
+  <div class="root" direction="vertical" gap="small" type vusion-slot-name="default">
+    <div class="root" maxlength="12">
+      <span class="baseline">b</span>
+      <span class="placeholder">行内展示（默认）</span>
+      <!---->
+      <input class="input" type="text">
+      <transition-stub class="popper" name="fade">
+        <div class="root" style="display: none;">
+          <span class="arrow" style="display: none;"></span>
+          <div border="true" class="root listview" tabindex="0">
+            <div class="head" style="display: none;">
+              <!---->
+              <span class="title" vusion-slot-name="title">列表</span>
+              <div class="extra">
+                <!---->
+              </div>
+            </div>
+            <!---->
+            <div class="body">
+              <!---->
+              <!---->
+            </div>
+            <div class="foot" style="display: none;">
+              <!---->
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div> 与文字对齐 <div class="root" display="block" maxlength="12">
+      <span class="baseline">b</span>
+      <span class="placeholder">块级展示</span>
+      <!---->
+      <input class="input" type="text">
+      <transition-stub class="popper" name="fade">
+        <div class="root" style="display: none;">
+          <span class="arrow" style="display: none;"></span>
+          <div border="true" class="root listview" tabindex="0">
+            <div class="head" style="display: none;">
+              <!---->
+              <span class="title" vusion-slot-name="title">列表</span>
+              <div class="extra">
+                <!---->
+              </div>
+            </div>
+            <!---->
+            <div class="body">
+              <!---->
+              <!---->
+            </div>
+            <div class="foot" style="display: none;">
+              <!---->
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <!---->
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo-展示方式 2`] = `
+<div>
+  <div class="root" direction="vertical" gap="small" type vusion-slot-name="default">
+    <div class="root" maxlength="12">
+      <span class="baseline">b</span>
+      <span class="placeholder">行内展示（默认）</span>
+      <!---->
+      <input class="input" type="text">
+      <transition-stub class="popper" name="fade">
+        <div class="root" style="display: none;">
+          <span class="arrow" style="display: none;"></span>
+          <div border="true" class="root listview" tabindex="0">
+            <div class="head" style="display: none;">
+              <!---->
+              <span class="title" vusion-slot-name="title">列表</span>
+              <div class="extra">
+                <!---->
+              </div>
+            </div>
+            <!---->
+            <div class="body">
+              <!---->
+              <!---->
+            </div>
+            <div class="foot" style="display: none;">
+              <!---->
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div> 与文字对齐 <div class="root" display="block" maxlength="12">
+      <span class="baseline">b</span>
+      <span class="placeholder">块级展示</span>
+      <!---->
+      <input class="input" type="text">
+      <transition-stub class="popper" name="fade">
+        <div class="root" style="display: none;">
+          <span class="arrow" style="display: none;"></span>
+          <div border="true" class="root listview" tabindex="0">
+            <div class="head" style="display: none;">
+              <!---->
+              <span class="title" vusion-slot-name="title">列表</span>
+              <div class="extra">
+                <!---->
+              </div>
+            </div>
+            <!---->
+            <div class="body">
+              <!---->
+              <!---->
+            </div>
+            <div class="foot" style="display: none;">
+              <!---->
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+    <!---->
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo-添加图标 1`] = `
+<div>
+  <div class="root" direction="horizontal" type vusion-slot-name="default">
+    <div class="root" prefix="search" size="normal medium">
+      <span class="baseline">b</span>
+      <span class="placeholder">1~12位小写字母</span>
+      <!---->
+      <input class="input" size="normal medium" type="text">
+      <transition-stub class="popper" name="fade">
+        <div class="root" style="display: none;">
+          <span class="arrow" style="display: none;"></span>
+          <div border="true" class="root listview" tabindex="0">
+            <div class="head" style="display: none;">
+              <!---->
+              <span class="title" vusion-slot-name="title">列表</span>
+              <div class="extra">
+                <!---->
+              </div>
+            </div>
+            <!---->
+            <div class="body">
+              <!---->
+              <!---->
+            </div>
+            <div class="foot" style="display: none;">
+              <!---->
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <span class="suffix">
+        <!---->
+        <!---->
+        <!---->
+      </span>
+    </div>
+    <div class="root" size="normal medium" suffix="search">
+      <span class="baseline">b</span>
+      <span class="placeholder">1~12位小写字母</span>
+      <!---->
+      <input class="input" size="normal medium" type="text">
+      <transition-stub class="popper" name="fade">
+        <div class="root" style="display: none;">
+          <span class="arrow" style="display: none;"></span>
+          <div border="true" class="root listview" tabindex="0">
+            <div class="head" style="display: none;">
+              <!---->
+              <span class="title" vusion-slot-name="title">列表</span>
+              <div class="extra">
+                <!---->
+              </div>
+            </div>
+            <!---->
+            <div class="body">
+              <!---->
+              <!---->
+            </div>
+            <div class="foot" style="display: none;">
+              <!---->
+            </div>
+          </div>
+        </div>
+      </transition-stub>
+      <span class="suffix">
+        <!---->
+        <!---->
+        <!---->
+      </span>
+    </div>
+    <!---->
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo-自动扩展大小 1`] = `
+<div class="root" direction="horizontal" type vusion-slot-name="default">
+  <div auto-size="horizontal" class="root">
+    <span class="baseline">b</span>
+    <span class="placeholder" style="display: none;"></span>
+    <!---->
+    <input class="input" type="text">
+    <transition-stub class="popper" name="fade">
+      <div class="root" style="display: none;">
+        <span class="arrow" style="display: none;"></span>
+        <div border="true" class="root listview" tabindex="0">
+          <div class="head" style="display: none;">
+            <!---->
+            <span class="title" vusion-slot-name="title">列表</span>
+            <div class="extra">
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div class="body">
+            <!---->
+            <!---->
+          </div>
+          <div class="foot" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
+    </transition-stub>
+    <!---->
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`u-auto-complete.vue > Demo-自定义样式 1`] = `
+<div class="root" direction="horizontal" type vusion-slot-name="default">
+  <div class="root custom" maxlength="12">
+    <span class="baseline">b</span>
+    <span class="placeholder">class</span>
+    <!---->
+    <input class="input" type="text">
+    <transition-stub class="popper" name="fade">
+      <div class="root" style="display: none;">
+        <span class="arrow" style="display: none;"></span>
+        <div border="true" class="root listview" tabindex="0">
+          <div class="head" style="display: none;">
+            <!---->
+            <span class="title" vusion-slot-name="title">列表</span>
+            <div class="extra">
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div class="body">
+            <!---->
+            <!---->
+          </div>
+          <div class="foot" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
+    </transition-stub>
+    <!---->
+  </div>
+  <div class="root" maxlength="12" style="background: rgb(247, 248, 252); width: 200px;">
+    <span class="baseline">b</span>
+    <span class="placeholder">style</span>
+    <!---->
+    <input class="input" type="text">
+    <transition-stub class="popper" name="fade">
+      <div class="root" style="display: none;">
+        <span class="arrow" style="display: none;"></span>
+        <div border="true" class="root listview" tabindex="0">
+          <div class="head" style="display: none;">
+            <!---->
+            <span class="title" vusion-slot-name="title">列表</span>
+            <div class="extra">
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div class="body">
+            <!---->
+            <!---->
+          </div>
+          <div class="foot" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
+    </transition-stub>
+    <!---->
+  </div>
+  <!---->
+  <!---->
+</div>
+`;

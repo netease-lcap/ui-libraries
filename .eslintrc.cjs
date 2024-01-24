@@ -12,6 +12,7 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'arrow-body-style': 0,
+    'no-param-reassign': 1,
     'import/no-extraneous-dependencies': 0,
     'import/extensions': 0,
     'import/no-unresolved': 0,
@@ -25,6 +26,7 @@ module.exports = {
     ],
     "semi": [2, "always"],
     "@typescript-eslint/no-explicit-any": 0,
-    'no-unused-vars': 1
+    'no-unused-vars': 1,
+    'max-len': [1, { code: 200 }],
   },
 };

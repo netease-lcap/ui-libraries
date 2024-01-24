@@ -1,0 +1,71 @@
+- name: van-stepper
+  title: 步进器
+  labels:
+    - Form
+  icon: stepper
+  attrs:
+    - name: value
+      title: 值
+      type: number
+      sync: true
+      model: true
+      default: 1
+      description: 用于标识步进器的值
+      group: 数据属性
+    - name: min
+      title: 最小值
+      type: string, number
+      default: 1
+      description: ""
+      group: 数据属性
+    - name: max
+      title: 最大值
+      type: string, number
+      description: ""
+      group: 数据属性
+    - name: theme
+      title: 样式风格
+      type: string
+      options:
+        - value: fang
+          title: 默认
+        - value: round
+          title: 圆角
+      default: fang
+      description: 设置样式风格
+      group: 主要属性
+    - name: disable-plus
+      title: 禁用增加按钮
+      type: boolean
+      default: false
+      description: 是否禁用增加按钮
+      group: 交互属性
+    - name: disable-minus
+      title: 禁用减少按钮
+      type: boolean
+      default: false
+      description: 是否禁用减少按钮
+      group: 交互属性
+    - name: disableInput
+      title: 只读
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+  slots: false
+  events:
+    - name: click
+      title: 点击
+      description: 点击时触发
+      params: []
+    - name: change
+      title: 状态切换
+      description: 开关状态切换时触发
+      params: []
+  description: 开关

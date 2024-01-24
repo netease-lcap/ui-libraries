@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`u-if.vue > Demo-基础示例 1`] = `<span class="root" vusion-slot-name-edit="text">成功</span>`;
+
+exports[`u-if.vue > Demo-基础示例 2`] = `
+<div>
+  <span class="root" vusion-slot-name-edit="text">成功</span>
+</div>
+`;

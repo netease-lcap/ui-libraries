@@ -1,0 +1,114 @@
+- name: van-search
+  title: 搜索框
+  description: 内部元素按照一定的规则布局
+  icon: search
+  labels:
+    - Form
+  attrs:
+    - name: actiontext
+      title: 按钮文字
+      type: string
+      description: 按钮文字
+      advanced: true
+    - name: value
+      title: 值
+      type: any
+      sync: true
+      model: true
+      description: 用于标识搜索框的值
+      group: 数据属性
+    - name: maxlength
+      title: 最大字符数
+      type: string | number
+      description: 输入框内输入的最大字符数
+      group: 数据属性
+    - name: placeholder
+      title: 占位符
+      type: string
+      description: 搜索框为空的显示文字
+      group: 主要属性
+    - name: cleartrigger
+      title: 显示清除图标
+      type: string
+      options:
+        - value: always
+          title: 一直显示
+        - value: focus
+          title: 输入框获取焦点且不为空时展示
+      description: ""
+      group: 主要属性
+    - name: input-align
+      title: 对齐方式
+      type: string
+      options:
+        - value: left
+          title: 左对齐
+        - value: center
+          title: 居中对齐
+        - value: right
+          title: 右对齐
+      description: 设置对齐方式
+      group: 主要属性
+    - name: iconalign
+      title: 搜索图标位置
+      type: string
+      options:
+        - value: left
+          title: 左
+        - value: right
+          title: 右
+      description: 设置搜索图标位置
+      group: 主要属性
+    - name: clearable
+      title: 可清除
+      type: boolean
+      description: 是否启用清除图标，点击清除图标后会清空输入框
+      group: 交互属性
+    - name: readonly
+      title: 只读
+      type: boolean
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+    - name: shape
+      title: 形状
+      type: string
+      options:
+        - value: square
+          title: 方形
+        - value: round
+          title: 圆形
+      default: square
+      description: 选择搜索框为方形或圆形
+      group: 样式属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 内容
+      advanced: true
+  events:
+    - name: search
+      title: 确定搜索时触发
+      description: 确定搜索时触发
+    - name: iconsearch
+      title: 点击搜索图标时触发
+      description: 点击搜索图标时触发
+    - name: input
+      title: 输入框内容变化时触发
+      description: 输入框内容变化时触发
+    - name: focus
+      title: 输入框获得焦点时触发
+      description: 输入框获得焦点时触发
+    - name: blur
+      title: 输入框失去焦点时触发
+      description: 输入框失去焦点时触发
+    - name: clickinput
+      title: 点击输入区域时触发
+      description: 点击输入区域时触发
+    - name: clear
+      title: 点击清除图标时触发
+      description: 点击清除图标时触发

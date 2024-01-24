@@ -1,0 +1,70 @@
+- name: van-progress
+  icon: linear-progress
+  title: 进度条
+  labels:
+    - Display
+  description: 用于展示操作的当前进度。
+  attrs:
+    - name: value
+      title: 值
+      type: number | string
+      sync: true
+      model: true
+      description: 用于标识进度条的值
+      group: 主要属性
+    - name: pivot-text
+      title: 文字内容
+      type: string
+      group: 主要属性
+      description: 进度条中的显示文字
+    - name: show-pivot
+      title: 显示文字
+      type: boolean
+      default: true
+      description: 是否显示进度条中的文字
+      group: 主要属性
+    - name: custom
+      title: 自定义
+      type: boolean
+      default: false
+      description: ""
+      group: 主要属性
+    - name: inactive
+      title: 禁用
+      type: boolean
+      default: false
+      group: 状态属性
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+    - name: stroke-width
+      title: 进度条粗细
+      type: number
+      default: 4
+      group: 样式属性
+      description: 设置进度条粗细，单位为px。
+    - name: color
+      title: 进度条颜色
+      type: string
+      group: 样式属性
+      description: ""
+    - name: track-color
+      title: 轨道颜色
+      type: string
+      group: 样式属性
+      description: ""
+    - name: text-color
+      title: 文字颜色
+      type: string
+      group: 样式属性
+      description: ""
+    - name: pivot-color
+      title: 文字背景色
+      type: string
+      group: 样式属性
+      description: ""
+  slots:
+    - concept: Slot
+      name: default
+      title: 默认
+      description: 显示的文本
+      advanced: true
+  events: null

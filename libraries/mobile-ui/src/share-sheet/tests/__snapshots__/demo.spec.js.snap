@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+      <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">显示分享面板</div><i class="van-icon van-icon-arrow van-cell__right-icon">
+        <!----></i>
+    </div>
+    <van-share-sheet title="立即分享给好友" options="[object Object],[object Object],[object Object],[object Object],[object Object]"></van-share-sheet>
+  </div>
+  <div>
+    <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+      <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">显示分享面板</div><i class="van-icon van-icon-arrow van-cell__right-icon">
+        <!----></i>
+    </div>
+    <van-share-sheet title="立即分享给好友" options="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"></van-share-sheet>
+  </div>
+  <div>
+    <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+      <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">显示分享面板</div><i class="van-icon van-icon-arrow van-cell__right-icon">
+        <!----></i>
+    </div>
+    <van-share-sheet options="[object Object],[object Object],[object Object]"></van-share-sheet>
+  </div>
+  <div>
+    <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+      <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">显示分享面板</div><i class="van-icon van-icon-arrow van-cell__right-icon">
+        <!----></i>
+    </div>
+    <van-share-sheet title="立即分享给好友" options="[object Object],[object Object],[object Object],[object Object],[object Object]" description="描述信息"></van-share-sheet>
+  </div>
+</div>
+`;

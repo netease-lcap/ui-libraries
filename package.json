@@ -1,5 +1,5 @@
 {
-  "name": "lcap-ui",
+  "name": "lcap-ui-monorepo",
   "version": "0.0.0",
   "private": true,
   "description": "Codewave Low Code AI Platform UI Components",
@@ -10,8 +10,8 @@
     "version-packages": "changeset version",
     "start": "pnpm dev:react-pc",
     "dev:react-pc": "pnpm --dir ./libraries/pc-react-ui storybook",
-    "build": "pnpm --dir ./libraries/* build",
-    "test": "pnpm --dir ./libraries/* test",
+    "build": "pnpm --filter \"./libraries/*\" build",
+    "test": "pnpm --filter \"./libraries/*\" test",
     "lint": "eslint --fix",
     "changeset": "changeset",
     "coverage": "pnpm --dir ./libraries/* test:coverage"
@@ -22,7 +22,11 @@
     "components"
   ],
   "lint-staged": {
-    "**/*.{ts,tsx,js,vue}": [
+    "libraries/pc-react-ui/**/*.{ts,tsx,js,vue}": [
+      "eslint --cache --fix",
+      "git add"
+    ],
+    "packages/**/*.{ts,tsx,js,vue}": [
       "eslint --cache --fix",
       "git add"
     ]
@@ -39,14 +43,14 @@
     "@changesets/cli": "^2.27.1",
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
-    "@storybook/addon-essentials": "^7.6.6",
-    "@storybook/addon-interactions": "^7.6.6",
-    "@storybook/addon-links": "^7.6.6",
+    "@storybook/addon-essentials": "^7.6.7",
+    "@storybook/addon-interactions": "^7.6.7",
+    "@storybook/addon-links": "^7.6.7",
     "@storybook/addon-onboarding": "^1.0.10",
-    "@storybook/blocks": "^7.6.6",
-    "@storybook/react": "^7.6.6",
-    "@storybook/react-vite": "^7.6.6",
-    "@storybook/test": "^7.6.6",
+    "@storybook/blocks": "^7.6.7",
+    "@storybook/react": "^7.6.7",
+    "@storybook/react-vite": "^7.6.7",
+    "@storybook/test": "^7.6.7",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
     "@types/react-test-renderer": "^18.0.7",
@@ -72,7 +76,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.2.0",
-    "storybook": "^7.6.6",
+    "storybook": "^7.6.7",
     "typescript": "^5.3.3",
     "vite": "^5.0.10",
     "vitest": "^1.1.0"

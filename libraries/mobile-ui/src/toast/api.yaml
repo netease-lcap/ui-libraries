@@ -1,0 +1,72 @@
+- name: van-toast
+  title: 弹出消息
+  icon: toast
+  labels:
+    - Feedback
+  description: 在页面中间弹出黑色半透明提示，用于消息通知、加载提示、操作结果提示等场景。
+  attrs:
+    - name: value
+      title: 是否展示
+      type: boolean
+      sync: true
+      model: true
+      default: false
+      description: 是否展示弹出消息
+      advanced: true
+    - name: message
+      title: 提示内容
+      type: string
+      default: 弹出消息
+      description: 默认提示内容
+    - name: type
+      title: 消息类型
+      type: string
+      description: 提示的类型
+      default: custom
+      options:
+        - value: success
+          title: 成功
+        - value: warning
+          title: 警告
+        - value: fail
+          title: 失败
+        - value: loading
+          title: 加载中
+        - value: custom
+          title: 自定义
+    - name: custom-icon
+      title: 自定义图标
+      type: icon
+      dependency:
+        - type: custom
+    - name: duration
+      title: 停留时间
+      type: number
+      default: 2000
+      description: 自动关闭的延时，单位毫秒。设为 0 时不自动关闭
+    - name: position
+      title: 位置
+      type: string
+      default: middle
+      options:
+        - value: top
+          title: 顶部
+        - value: middle
+          title: 中间
+        - value: bottom
+          title: 底部
+      advanced: true
+  events:
+    - name: open
+      title: 打开弹出消息后
+      description: 打开弹出消息时触发
+      params: []
+    - name: close
+      title: 关闭弹出消息后
+      description: 关闭弹出消息时触发
+      params: []
+  methods:
+    - name: open
+      description: 打开弹出消息
+    - name: close
+      description: 关闭弹出消息

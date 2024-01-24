@@ -108,7 +108,7 @@ export function registerComponet<T, U extends pluginType<T>>(
 
     React.useEffect(() => {
       plugin.setPlugin(props.usePlugin);
-      setPlugin({ ...plugin });
+      setPlugin({ ...(plugin as any) });
     }, [props.usePlugin]);
     return <HocBaseComponents BaseComponent={Component} props={props} plugin={plugin} ref={ref} />;
   });

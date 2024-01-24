@@ -1,0 +1,96 @@
+- name: van-slider
+  icon: slider
+  title: 滑块
+  labels:
+    - Display
+  description: 滑动输入条，用于在给定的范围内选择一个值。
+  attrs:
+    - name: value
+      title: 值
+      type: number
+      sync: true
+      model: true
+      group: 数据属性
+      description: 用于标识滑块的值
+    - name: max
+      title: 最大值
+      type: number
+      default: 100
+      group: 数据属性
+      description: ""
+    - name: min
+      title: 最小值
+      type: number
+      default: 0
+      group: 数据属性
+      description: ""
+    - name: range
+      title: 双滑块模式
+      type: boolean
+      default: false
+      group: 主要属性
+      description: 是否开启双滑块模式
+    - name: custom
+      title: 自定义组件
+      type: boolean
+      default: false
+      group: 主要属性
+      description: ""
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      group: 交互属性
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+    - name: vertical
+      title: 垂直展示
+      type: boolean
+      default: false
+      group: 交互属性
+      description: 是否垂直展示
+    - name: step
+      title: 步长
+      type: number | string
+      default: 0
+      group: 样式属性
+      description: ""
+    - name: bar-height
+      title: 进度条高度
+      type: number
+      default: 2
+      group: 样式属性
+      description: 设置进度条高度，单位为px
+    - name: button-size
+      title: 滑块按钮大小
+      type: number
+      default: 24
+      group: 样式属性
+      description: 设置滑块按钮大小，单位为px
+    - name: active-color
+      title: 进度条激活态颜色
+      type: string
+      group: 样式属性
+      description: ""
+    - name: inactive-color
+      title: 进度条非激活态颜色
+      type: string
+      group: 样式属性
+      description: ""
+  slots: false
+  events:
+    - name: input
+      title: 改变时
+      description: 进度变化时实时触发
+      params: []
+    - name: change
+      title: 改变后
+      description: 进度变化且结束拖动后触发
+      params: []
+    - name: drag-start
+      title: 开始拖动时触发
+      description: 开始拖动时触发
+      params: []
+    - name: drag-end
+      title: 结束拖动时触发
+      description: 结束拖动时触发
+      params: []

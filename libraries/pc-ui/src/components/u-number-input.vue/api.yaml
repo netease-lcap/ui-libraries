@@ -1,0 +1,360 @@
+- name: u-number-input
+  title: 数字输入
+  icon: number
+  labels:
+    - Form
+  description: 输入数字时使用
+  attrs:
+    - name: formatter
+      title: 格式化
+      type: string, object
+      description: 格式化字符串，具体参见示例。也可以传入一个包含`get`和`set`方法的格式化对象。
+      advanced: true
+    - name: value
+      title: 值
+      type: number
+      sync: true
+      model: true
+      default: 0
+      description: 输入的值
+      group: 数据属性
+      brifeDoc: ""
+      docDescription: 输入框的值。
+      tooltipLink: ""
+    - name: min
+      title: 最小值
+      type: number
+      default: ""
+      description: 最小可输入的值
+      group: 数据属性
+      brifeDoc: ""
+      docDescription: 限制输入数值的最小值。
+      tooltipLink: ""
+    - name: max
+      title: 最大值
+      type: number
+      default: ""
+      description: 最大可输入的值
+      group: 数据属性
+      brifeDoc: ""
+      docDescription: 限制输入数值的最大值。
+      tooltipLink: ""
+    - name: precision
+      title: 精度
+      type: number
+      default: 1
+      description: 限制数字输入要保留的最小精度单位，默认不限制精度，如需保留两位小数，则填入0.01
+      group: 数据属性
+      brifeDoc: ""
+      docDescription: 限制数字要保留的最小单位，整数、小数均可，如需要保留两位小数，则填入0.01。
+      tooltipLink: ""
+      advanced: true
+    - name: decimal-length
+      title: 精度
+      type: number
+      description: 控制数据存储时小数点后保留几位。例如：精度为2，则数据存储时小数点后保留2位。
+      group: 数据属性
+      brifeDoc: ""
+      docDescription: 限制值要保留的小数位数。默认0，不保留小数位
+      tooltipLink: ""
+    - name: decimal-places
+      title: 小数位数
+      type: "{ places: number, omit: boolean }"
+      default: "{ places: '', omit: true }"
+      compose:
+        - key: places
+          type: number
+          min: 0
+        - key: omit
+          type: switch
+          suffix: 隐藏末尾0
+      description: 控制数据展示时小数点后保留几位，仅影响展示，不影响数据实际存储的值。例如：小数位数为2，则数据展示时小数点后保留2位。
+      dependency:
+        - advanced-format.enable: false
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: ""
+      tooltipLink: ""
+    - name: thousandths
+      title: 千位符
+      type: boolean
+      default: false
+      desciption: 是否显示千位符
+      dependency:
+        - advanced-format.enable: false
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: ""
+      tooltipLink: ""
+    - name: percent-sign
+      title: 百分号
+      type: boolean
+      default: false
+      desciption: 是否显示百分号
+      dependency:
+        - advanced-format.enable: false
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: ""
+      tooltipLink: ""
+    - name: unit
+      title: 单位
+      type: "{ type: string, value: string }"
+      default: "{ type: 'prefix', value: '' }"
+      compose:
+        - key: type
+          type: select
+          options:
+            - value: prefix
+              title: 前缀
+            - value: suffix
+              title: 后缀
+        - key: value
+          type: text
+      description: 输入框中显示的单位
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: ""
+      tooltipLink: ""
+    - name: advanced-format
+      title: 高级格式化
+      type: "{ enable: boolean, value: string }"
+      default: "{ enable: false, value: '' }"
+      description: 用来控制数字的展示格式
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: ""
+      tooltipLink: ""
+      bindHide: true
+    - name: placeholder
+      title: 占位符
+      type: string
+      description: 为空时显示的占位符文本
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 为空时的提示文本。
+      tooltipLink: ""
+    - name: autofocus
+      title: 自动获取焦点
+      type: boolean
+      description: 设置是否自动获取焦点
+      designer-value: false
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 是否自动获取输入框的焦点。
+      tooltipLink: ""
+    - name: hide-buttons
+      title: 隐藏按钮
+      type: boolean
+      default: false
+      description: 是否隐藏上下点击按钮
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 是否隐藏数值加减按钮
+      tooltipLink: ""
+    - name: clearable
+      title: 可清除
+      type: boolean
+      description: 可点击清除按钮一键清除内容
+      group: 交互属性
+      brifeDoc: ""
+      docDescription: 开启并在输入框有内容时会显示清除按钮
+      tooltipLink: ""
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入
+      group: 状态属性
+      brifeDoc: ""
+      docDescription: 正常显示，但禁止选择或输入
+      tooltipLink: ""
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+      brifeDoc: ""
+      docDescription: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      tooltipLink: ""
+    - name: preview
+      title: 预览
+      type: boolean
+      default: false
+      description: 显示预览态
+      group: 状态属性
+    - name: step
+      title: 间隔
+      type: number
+      default: 1
+      description: 间隔，表示点击按钮或按上下键所增加或减少的量
+      group: 样式属性
+      brifeDoc: ""
+      docDescription: 限制点击按钮或按上下键所增加或减少的量。
+      tooltipLink: ""
+    - name: width
+      title: 宽度
+      type: string
+      options:
+        - value: full
+          title: 占满
+        - value: huge
+          title: 巨大
+        - value: large
+          title: 大
+        - value: medium
+          title: 中型
+        - value: normal
+          title: 正常
+        - value: small
+          title: 小
+        - value: mini
+          title: 迷你
+      default: normal
+      description: 设置数字输入框宽度大小
+      group: 样式属性
+      brifeDoc: ""
+      docDescription: 设置数字输入框宽度大小，可选占满、巨大、大、中型、正常、小、迷你。
+      tooltipLink: ""
+    - name: height
+      title: 高度
+      type: string
+      options:
+        - value: full
+          title: 占满
+        - value: huge
+          title: 巨大
+        - value: large
+          title: 大
+        - value: medium
+          title: 中型
+        - value: normal
+          title: 正常
+        - value: small
+          title: 小
+        - value: mini
+          title: 迷你
+      default: normal
+      description: 设置数字输入框高度大小
+      group: 样式属性
+      brifeDoc: ""
+      docDescription: 设置数字输入框高度大小，可选占满、巨大、大、中型、正常、小、迷你。
+      tooltipLink: ""
+  slots:
+    - concept: Slot
+      name: default
+      advanced: true
+      title: 默认
+      description: 插入 HTML 或 `Component`, 可展示额外内容。
+      quick-add: never
+  events:
+    - name: input
+      title: 输入时
+      description: 输入时触发
+      params:
+        - name: $event
+          type: string
+          description: 输入框的值
+          schema:
+            $ref: "#/basicTypes/String"
+        - name: senderVM
+          type: UNumberInput
+          description: 发送事件实例
+    - name: validate
+      title: 验证时
+      description: 输入验证时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ValidateEvent"
+        - name: $event.rawValue
+          type: string
+          description: 用户输入的原始值
+        - name: $event.value
+          type: number
+          description: 验证修复的值
+        - name: $event.valid
+          type: boolean
+          description: 原始值是否合法
+        - name: senderVM
+          type: UNumberInput
+          description: 发送事件实例
+    - name: change
+      title: 改变后
+      description: 值变化时触发（与原生事件不同）
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeEvent"
+        - name: $event.value
+          type: number
+          description: 改变后的值
+        - name: $event.oldValue
+          type: number
+          description: 旧的值
+        - name: $event.formattedValue
+          type: string
+          description: 格式化后的值
+        - name: $event.valid
+          type: boolean
+          description: 改变后的值是否合法
+        - name: senderVM
+          type: UNumberInput
+          description: 发送事件实例
+    - name: focus
+      title: 聚焦后
+      description: 获得焦点时触发
+      params:
+        - name: $event
+          type: string
+          description: 原生事件对象
+          schema:
+            $ref: "#/systemTypes/FocusEvent"
+        - name: senderVM
+          type: UNumberInput
+          description: 发送事件实例
+    - name: blur
+      title: 失焦后
+      description: 失去焦点时触发
+      params:
+        - name: $event
+          type: string
+          description: 原生事件对象
+          schema:
+            $ref: "#/systemTypes/FocusEvent"
+        - name: senderVM
+          type: UNumberInput
+          description: 发送事件实例
+    - name: keydown
+      title: 键盘按下
+      description: 键盘按键按下时触发
+      params:
+        - name: $event
+          type: object
+          description: 键盘按键事件对象
+          schema:
+            $ref: "#/systemTypes/KeyboardEvent"
+    - name: keyup
+      title: 键盘松开
+      description: 键盘按键松开时触发
+      params:
+        - name: $event
+          type: object
+          description: 键盘按键事件对象
+          schema:
+            $ref: "#/systemTypes/KeyboardEvent"
+  aria:
+    - key: ↑
+      description: 按`step`量增加值
+      advanced: true
+    - key: ↓
+      description: 按`step`量减小值
+      advanced: true
+    - key: Enter
+      description: 自动修复为合法的值，并且应用更改
+      advanced: true

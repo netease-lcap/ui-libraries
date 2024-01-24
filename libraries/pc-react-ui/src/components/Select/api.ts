@@ -60,7 +60,7 @@ namespace nasl.ui {
         : nasl.core.String
       : V;
 
-    @Prop<Select<T, V, P, M, C>, "textField">({
+    @Prop<SelectOptions<T, V, P, M, C>, "textField">({
       group: "数据属性",
       title: "文本字段",
       description: "集合的元素类型中，用于显示文本的属性名称",
@@ -72,7 +72,7 @@ namespace nasl.ui {
     })
     textField: (item: T) => nasl.core.String;
 
-    @Prop<Select<T, V, P, M, C>, "valueField">({
+    @Prop<SelectOptions<T, V, P, M, C>, "valueField">({
       group: "数据属性",
       title: "值字段",
       description: "集合的元素类型中，用于标识选中值的属性",
@@ -89,7 +89,7 @@ namespace nasl.ui {
       description: "设置数据初始化时的排序字段和顺序规则",
     })
     sorting: { field: nasl.core.String; order: "asc" | "desc" } = {
-      field: null,
+      field: '',
       order: "desc",
     };
 
@@ -269,6 +269,10 @@ namespace nasl.ui {
     }) => void;
   }
 
+  @Component({
+    title: "选择项",
+    description: "选择项",
+  })
   export class SelectOption<T, V> extends ViewComponent {
     constructor(options?: Partial<SelectOptionOptions<T, V>>) {
       super();
@@ -311,16 +315,20 @@ namespace nasl.ui {
     description: "选择分组",
   })
   export class SelectOptGroup<T, V> extends ViewComponent {
-    constructor(options?: Partial<SelectGroupOptions<T, V>>) {
+
+    constructor(options?: Partial<SelectOptGroupOptions<T, V>>) {
+
       super();
     }
   }
 
-  export class SelectGroupOptions<T, V> extends ViewComponentOptions {
+
+  export class SelectOptGroupOptions<T, V> extends ViewComponentOptions {
     @Prop({
-      group: "主要属性",
-      title: "标题",
-      docDescription: "选择分组的标题，标题只有在没有文本插槽的时候生效",
+        group: '主要属性',
+        title: '标题',
+        docDescription: '选择分组的标题，标题只有在没有文本插槽的时候生效',
+
     })
     title: nasl.core.String;
   }

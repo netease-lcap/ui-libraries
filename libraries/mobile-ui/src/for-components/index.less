@@ -1,0 +1,23 @@
+.van-for-com-frag {
+  display: flex;
+  flex-basis: auto;
+  flex-wrap: wrap;
+}
+
+.van-for-com-frag.nowrap {
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
+
+.van-for-components {
+  &__frag {
+    display: flex;
+    flex-basis: auto;
+    flex-wrap: wrap;
+
+    &--nowrap {
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+    }
+  }
+}

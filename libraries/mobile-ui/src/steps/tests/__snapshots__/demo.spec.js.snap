@@ -1,0 +1,125 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div>0</div>
+    <div class="van-steps van-steps--vertical" active="0">
+      <div child-cut-disabled="true" class="van-steps__items">
+        <div class="van-hairline van-step van-step--vertical van-step--process">
+          <div vusion-slot-name="default" class="van-step__title van-step__title--active">步骤1</div>
+          <div class="van-step__circle-container"><i class="van-iconv van-step__icon van-step__icon--active"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-steps-process" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div>
+          <div class="van-step__line"></div>
+        </div>
+        <div class="van-hairline van-step van-step--vertical van-step--wait">
+          <div vusion-slot-name="default" class="van-step__title">步骤2</div>
+          <div class="van-step__circle-container"><i class="van-iconv van-step__icon"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-steps-wait" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div>
+          <div class="van-step__line"></div>
+        </div>
+        <div class="van-hairline van-step van-step--vertical van-step--disabled van-step--finish">
+          <div vusion-slot-name="default" class="van-step__title">步骤3</div>
+          <div class="van-step__circle-container"><i class="van-iconv van-step__icon van-step__icon--finish"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-steps-finish" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div>
+          <div class="van-step__line"></div>
+        </div>
+        <div class="van-hairline van-step van-step--vertical van-step--error">
+          <div vusion-slot-name="default" class="van-step__title">步骤41111111111顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶</div>
+          <div class="van-step__circle-container"><i class="van-iconv van-step__icon van-step__icon--error"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-steps-error" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div>
+          <div class="van-step__line"></div>
+        </div>
+        <div class="van-hairline van-step van-step--vertical van-step--finish">
+          <div vusion-slot-name="default" class="van-step__title">步骤5</div>
+          <div class="van-step__circle-container"><i class="van-iconv van-step__icon van-step__icon--finish"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-steps-finish" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div>
+          <div class="van-step__line"></div>
+        </div>
+        <div class="van-hairline van-step van-step--vertical van-step--wait">
+          <div vusion-slot-name="default" class="van-step__title">步骤6</div>
+          <div class="van-step__circle-container"><i class="van-iconv van-step__icon"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-steps-wait" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div>
+          <div class="van-step__line"></div>
+        </div>
+        <div class="van-hairline van-step van-step--vertical van-step--wait">
+          <div vusion-slot-name="default" class="van-step__title">步骤7</div>
+          <div class="van-step__circle-container"><i class="van-iconv van-step__icon"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-steps-wait" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div>
+          <div class="van-step__line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="van-steps van-steps--horizontal">
+      <div class="van-steps__items">
+        <div class="van-hairline van-step van-step--horizontal van-step--process">
+          <div vusion-slot-name="default" class="van-step__title van-step__title--active">sadsdfsadsafdasafasd阿斯顿发生发顺丰阿斯顿发送到发的是分身乏术的阿斯顿夫妇撒地方水电费水电费是大丰收打发分身乏术地方</div>
+          <div class="van-step__circle-container"><i class="van-iconv van-step__icon van-step__icon--active"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-steps-process" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div>
+          <div class="van-step__line"></div>
+        </div>
+        <div class="van-hairline van-step van-step--horizontal van-step--wait">
+          <div vusion-slot-name="default" class="van-step__title">2</div>
+          <div class="van-step__circle-container"><i class="van-iconv van-step__icon van-step__icon--wait"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-sure" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div>
+          <div class="van-step__line"></div>
+        </div>
+        <div class="van-hairline van-step van-step--horizontal van-step--wait">
+          <div vusion-slot-name="default" class="van-step__title">3</div>
+          <div class="van-step__circle-container"><i class="van-iconv van-step__icon"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-steps-wait" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div>
+          <div class="van-step__line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="van-steps van-steps--vertical">
+      <div class="van-steps__items">
+        <div class="van-hairline van-step van-step--vertical van-step--process">
+          <div vusion-slot-name="default" class="van-step__title van-step__title--active">sadsdfsadsafdasafasd阿斯顿发生发顺丰阿斯顿发送到发的是分身乏术的阿斯顿夫妇撒地方水电费水电费是大丰收打发分身乏术地方</div>
+          <div class="van-step__circle-container"><i class="van-iconv van-step__icon van-step__icon--active"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-steps-process" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div>
+          <div class="van-step__line"></div>
+        </div>
+        <div class="van-hairline van-step van-step--vertical van-step--wait">
+          <div vusion-slot-name="default" class="van-step__title">2</div>
+          <div class="van-step__circle-container"><i class="van-iconv van-step__icon van-step__icon--wait"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-sure" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div>
+          <div class="van-step__line"></div>
+        </div>
+        <div class="van-hairline van-step van-step--vertical van-step--wait">
+          <div vusion-slot-name="default" class="van-step__title">3</div>
+          <div class="van-step__circle-container"><i class="van-iconv van-step__icon"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                <use xlink:href="#h5-steps-wait" class="van-shoud-pa"></use>
+              </svg>
+              <!----></i></div>
+          <div class="van-step__line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

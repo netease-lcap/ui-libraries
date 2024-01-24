@@ -1,0 +1,57 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div class="van-address-edit">
+      <div class="van-address-edit__fields">
+        <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+          <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>姓名</span></div>
+          <div class="van-cellson__value van-field__value">
+            <div class="van-field__body"><input type="text" placeholder="" class="van-field__control"></div>
+          </div>
+        </div>
+        <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+          <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>电话</span></div>
+          <div class="van-cellson__value van-field__value">
+            <div class="van-field__body"><input type="tel" placeholder="" class="van-field__control"></div>
+          </div>
+        </div>
+        <div label-layout="inline" noallow="" role="button" tabindex="0" class="van-cellson van-cellson--clickable van-cellson--center van-field">
+          <div class="van-cellson__value van-field__value">
+            <div class="van-field__body"><input type="text" readonly="readonly" placeholder="" class="van-field__control">
+              <div class="van-field__right-icon"><i class="van-icon van-icon-arrow">
+                  <!----></i></div>
+            </div>
+          </div>
+        </div>
+        <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center van-address-edit-detail">
+          <div class="van-cell__value">
+            <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+              <div class="van-cellson__value van-field__value">
+                <div class="van-field__body"><textarea rows="1" placeholder="" class="van-field__control" style="height: auto;"></textarea></div>
+              </div>
+            </div>
+          </div><i class="van-icon van-icon-arrow van-cell__right-icon">
+            <!----></i>
+        </div>
+        <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+          <div class="van-cellson__value van-field__value">
+            <div class="van-field__body"><input type="tel" placeholder="" class="van-field__control"></div>
+          </div>
+        </div>
+      </div>
+      <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center van-cell--nocontentforlink van-address-edit__default">
+        <div role="switch" aria-checked="false" class="van-switch" style="font-size: 24px;">
+          <div class="van-switch__node"></div>
+        </div>
+      </div>
+      <div class="van-address-edit__buttons"><button round="true" class="van-button van-button--danger van-button--normal van-button--square">
+          <div class="van-button__content"><span class="van-button__text">保存</span></div>
+        </button><button round="true" class="van-button van-button--default van-button--normal van-button--square">
+          <div class="van-button__content"><span class="van-button__text">删除</span></div>
+        </button></div>
+    </div>
+  </div>
+</div>
+`;

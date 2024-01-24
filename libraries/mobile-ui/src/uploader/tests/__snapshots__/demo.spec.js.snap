@@ -1,0 +1,148 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div class="van-uploader">
+      <div class="van-uploader__wrapper van-uploader__wrapper--empty">
+        <div class="van-uploader__upload van-uploader__upload--empty">
+          <div vusion-slot-name="default" class="van-uploader__upload-icon-slot"><i class="van-icon van-icon-photograph van-uploader__upload-icon">
+              <!----></i></div><input type="file" class="van-uploader__input">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div multiple="multiple" class="van-uploader">
+      <div class="van-uploader__wrapper van-uploader__wrapper--empty">
+        <div class="van-uploader__upload van-uploader__upload--empty">
+          <div vusion-slot-name="default" class="van-uploader__upload-icon-slot"><i class="van-icon van-icon-photograph van-uploader__upload-icon">
+              <!----></i></div><input multiple="multiple" type="file" accept="*" class="van-uploader__input">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-uploader">
+      <div class="van-uploader__wrapper van-uploader__wrapper--empty">
+        <div class="van-uploader__upload van-uploader__upload--empty">
+          <div vusion-slot-name="default" class="van-uploader__upload-icon-slot"><i class="van-icon van-icon-photograph van-uploader__upload-icon">
+              <!----></i></div><input type="file" class="van-uploader__input">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div multiple="multiple" class="van-uploader">
+      <div class="van-uploader__wrapper van-uploader__wrapper--empty">
+        <div class="van-uploader__upload van-uploader__upload--empty">
+          <div vusion-slot-name="default" class="van-uploader__upload-icon-slot"><i class="van-icon van-icon-photograph van-uploader__upload-icon">
+              <!----></i></div><input multiple="multiple" type="file" class="van-uploader__input">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div multiple="multiple" class="van-uploader">
+      <div class="van-uploader__wrapper van-uploader__wrapper--empty">
+        <div class="van-uploader__upload van-uploader__upload--empty">
+          <div vusion-slot-name="default" class="van-uploader__upload-icon-slot"><i class="van-icon van-icon-photograph van-uploader__upload-icon">
+              <!----></i></div><input multiple="multiple" type="file" class="van-uploader__input">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-uploader">
+      <div class="van-uploader__wrapper van-uploader__wrapper--empty">
+        <div class="van-uploader__upload van-uploader__upload--empty">
+          <div vusion-slot-name="default" class="van-uploader__upload-icon-slot"><button class="van-button van-button--primary van-button--normal van-button--square">
+              <div class="van-button__content"><i class="van-iconv van-button__icon van-shoud-pa"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                    <use xlink:href="#h5-default" class="van-shoud-pa"></use>
+                  </svg>
+                  <div class="van-iconv__slot"></div>
+                  <!---->
+                </i><span class="van-button__text"> 上传文件 </span></div>
+            </button></div><input type="file" class="van-uploader__input">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-uploader">
+      <div class="van-uploader__wrapper van-uploader__wrapper--empty">
+        <div class="van-uploader__upload van-uploader__upload--empty">
+          <div vusion-slot-name="default" class="van-uploader__upload-icon-slot"><i class="van-icon van-icon-photograph van-uploader__upload-icon">
+              <!----></i></div><input type="file" class="van-uploader__input">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-uploader">
+      <div class="van-uploader__wrapper van-uploader__wrapper--empty">
+        <div class="van-uploader__upload van-uploader__upload--empty">
+          <div vusion-slot-name="default" class="van-uploader__upload-icon-slot"><i class="van-icon van-icon-photograph van-uploader__upload-icon">
+              <!----></i></div><input type="file" class="van-uploader__input">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-uploader">
+      <div class="van-uploader__wrapper van-uploader__wrapper--disabled van-uploader__wrapper--empty">
+        <div class="van-uploader__upload van-uploader__upload--empty">
+          <div vusion-slot-name="default" class="van-uploader__upload-icon-slot"><i class="van-icon van-icon-photograph van-uploader__upload-icon">
+              <!----></i></div><input type="file" disabled="disabled" class="van-uploader__input">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div multiple="multiple" class="van-uploader">
+      <div class="van-uploader__wrapper van-uploader__wrapper--empty">
+        <div class="van-uploader__upload van-uploader__upload--empty">
+          <div vusion-slot-name="default" class="van-uploader__upload-icon-slot"><i class="van-icon van-icon-photograph van-uploader__upload-icon">
+              <!----></i></div><input multiple="multiple" type="file" accept="*" class="van-uploader__input">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div multiple="multiple" class="van-uploader">
+      <div class="van-uploader__wrapper van-uploader__wrapper--empty">
+        <div class="van-uploader__upload van-uploader__upload--empty">
+          <div vusion-slot-name="default" class="van-uploader__upload-icon-slot"><i class="van-icon van-icon-photograph van-uploader__upload-icon">
+              <!----></i></div><input multiple="multiple" type="file" class="van-uploader__input">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div multiple="multiple" class="van-uploader">
+      <div class="van-uploader__wrapper van-uploader__wrapper--empty">
+        <div class="van-uploader__upload van-uploader__upload--empty">
+          <div vusion-slot-name="default" class="van-uploader__upload-icon-slot"><i class="van-icon van-icon-photograph van-uploader__upload-icon">
+              <!----></i></div><input multiple="multiple" type="file" class="van-uploader__input">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>表单项</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" class="van-field__control"></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" is-sub="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>表单项</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" class="van-field__control"></div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

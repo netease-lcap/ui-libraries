@@ -1,0 +1,506 @@
+- name: u-grid-layout
+  icon: grid-layout
+  title: 栅格布局
+  description: 内部元素按照一定的规则布局
+  labels:
+    - Layout
+  attrs:
+    - name: gap
+      title: 行间隔
+      type: string
+      options:
+        - value: compact
+          title: 紧凑（-1）
+        - value: none
+          title: 无（0）
+        - value: small
+          title: 小（8）
+        - value: normal
+          title: 正常（16）
+        - value: large
+          title: 大（32）
+      default: normal
+      description: 栅格行之间的间隔
+      group: 样式属性
+      brifeDoc: ""
+      docDescription: 支持修改栅格行之间的间隔，支持紧凑（-1）、无（0）、小（8）、正常（16）、大（32）共6种间隔模式。
+      tooltipLink: ""
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<u-grid-layout-row>`或`<u-grid-layout-column>`子组件。
+      common-empty-background: true
+      support:
+        - name: u-grid-layout-row
+          title: 插入一行
+          snippet: <u-grid-layout-row :repeat="24"><u-grid-layout-column
+            :span="8"></u-grid-layout-column><u-grid-layout-column
+            :span="8"></u-grid-layout-column><u-grid-layout-column
+            :span="8"></u-grid-layout-column></u-grid-layout-row>
+  events:
+    - name: scroll
+      title: 滚动时
+      description: 滚动时触发
+      params:
+        - name: $event
+          type: object
+          description: 滚动事件对象
+          schema:
+            $ref: "#/systemTypes/ScrollEvent"
+        - name: $event.scrollHeight
+          type: any
+          description: 滚动内容高度
+        - name: $event.scrollWidth
+          type: any
+          description: 滚动内容宽度
+        - name: $event.scrollTop
+          type: any
+          description: 滚动内容距离顶部高度
+        - name: $event.scrollLeft
+          type: any
+          description: 滚动内容距离左侧宽度
+        - name: $event.clientHeight
+          type: any
+          description: 可视区域高度
+        - name: $event.clientWidth
+          type: any
+          description: 可视区域宽度
+- name: u-grid-layout-row
+  title: 栅格行
+  description: 内部元素行布局
+  attrs:
+    - name: justify
+      title: 横轴对齐
+      type: string
+      display: capsules
+      bindHide: true
+      options:
+        - value: start
+          title: 左对齐
+          icon: horizontal-justify-start
+          tooltip: 左对齐
+        - value: center
+          title: 居中对齐
+          icon: horizontal-justify-center
+          tooltip: 居中对齐
+        - value: end
+          title: 右对齐
+          icon: horizontal-justify-end
+          tooltip: 右对齐
+        - value: space-between
+          title: 平均分布(两端不留空)
+          icon: horizontal-justify-space-between
+          tooltip: 平均分布(两端不留空)
+        - value: space-around
+          title: 水平分布-左右留空
+          icon: horizontal-justify-space-around
+          tooltip: 平均分布
+      default: start
+      group: 主要属性
+      description: ""
+      brifeDoc: ""
+      docDescription: 支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布。
+      tooltipLink: ""
+    - name: alignment
+      title: 纵轴对齐
+      type: string
+      display: capsules
+      bindHide: true
+      options:
+        - value: start
+          title: 顶对齐
+          icon: horizontal-alignment-start
+          tooltip: 顶对齐
+        - value: center
+          title: 垂直居中
+          icon: horizontal-alignment-center
+          tooltip: 垂直居中
+        - value: end
+          title: 底对齐
+          icon: horizontal-alignment-end
+          tooltip: 底对齐
+        - value: baseline
+          title: 行内文字基线对齐
+          icon: horizontal-alignment-baseline
+          tooltip: 行内文字基线对齐
+        - value: stretch
+          title: 占满容器高度
+          icon: horizontal-alignment-stretch
+          tooltip: 占满容器高度
+      default: stretch
+      group: 主要属性
+      description: ""
+      brifeDoc: ""
+      docDescription: 支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。
+      tooltipLink: ""
+    - name: repeat
+      title: 栅格数
+      type: number
+      display: number
+      default: 12
+      description: 默认24，可设置栅格行大小
+      min: 1
+      max: 24
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 支持设置栅格行大小，默认为24。
+      tooltipLink: ""
+    - name: gap
+      title: 列间隔
+      type: string
+      options:
+        - value: none
+          title: 无（0）
+        - value: mini
+          title: 迷你（4）
+        - value: small
+          title: 小（8）
+        - value: normal
+          title: 正常（16）
+        - value: large
+          title: 大（24）
+        - value: huge
+          title: 巨大（32）
+      default: normal
+      description: 栅格列之间的间隔
+      group: 样式属性
+      brifeDoc: ""
+      docDescription: 栅格列之间的间隔，支持无（0）、迷你（4）、小（8）、正常（16）、巨大（32）共6种间隔模式。
+      tooltipLink: ""
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<u-grid-layout-column>`子组件。
+      support:
+        - name: u-grid-layout-column
+          title: 插入一列
+          snippet: <u-grid-layout-column :span="1"></u-grid-layout-column>
+- name: u-grid-layout-column
+  title: 栅格列
+  description: 内部元素行内列布局
+  attrs:
+    - name: media-huge
+      title: 响应很大屏
+      type: number
+      description: 响应式布局`<=1440px`的列跨越栅格数
+      advanced: true
+    - name: media-large
+      title: 响应大屏
+      type: number
+      description: 响应式布局`<=1200px`的列跨越栅格数
+      advanced: true
+    - name: media-medium
+      title: 响应中屏
+      type: number
+      description: 响应式布局`<=960px`的列跨越栅格数
+      advanced: true
+    - name: media-small
+      title: 响应小屏
+      type: number
+      description: 响应式布局`<=768px`的列跨越栅格数
+      advanced: true
+    - name: media-mini
+      title: 响应迷你屏
+      type: number
+      description: 响应式布局`<=480px`的列跨越栅格数
+      advanced: true
+    - name: mode
+      title: 布局模式
+      type: string
+      display: capsules
+      bindHide: true
+      description: ""
+      tooltipLink: http://help.lcap.163yun.com/1.%E5%BC%80%E5%8F%91%E5%BA%94%E7%94%A8/2.%E9%A1%B5%E9%9D%A2/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/01.%E5%B8%83%E5%B1%80/030.%E6%A0%85%E6%A0%BC%E5%B8%83%E5%B1%80.html
+      options:
+        - value: inline
+          title: 块级
+          icon: layout-inline-block
+          tooltip: 内联布局
+        - value: flex
+          title: 弹性
+          icon: layout-flex
+          tooltip: 弹性布局
+      default: inline
+      toggleclear:
+        - justify
+        - alignment
+        - wrap
+        - gap
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 内联布局：将当前元素修改为内联布局模式，各个内联布局模式的元素将默认排布在同一行中，若空间不足以排布下一个内联布局元素，则该元素将会换行。弹性布局：在弹性布局模式中，子元素可以在任何方向上排布，也可以“弹性伸缩”其尺寸，既可以增加尺寸以填满未使用的空间，也可以收缩尺寸以避免溢出父元素。
+    - name: direction
+      title: 主轴方向
+      type: string
+      display: capsules
+      bindHide: true
+      options:
+        - value: horizontal
+          title: 横向排列
+          icon: flex-horizontal
+          tooltip: 横向
+        - value: vertical
+          title: 纵向排列
+          icon: flex-vertical
+          tooltip: 纵向
+      default: horizontal
+      toggleclear:
+        - justify
+        - alignment
+      dependency:
+        - mode: flex
+      group: 主要属性
+      description: ""
+      brifeDoc: ""
+      docDescription: 横向：内部子元素进行横向排布，建议内部子元素使用行内布局。纵向：内部子元素进行纵向排布，建议内部子元素使用块级布局。
+      tooltipLink: ""
+    - name: justify
+      title: 横轴对齐
+      type: string
+      display: capsules
+      bindHide: true
+      options:
+        - value: start
+          title: 左对齐
+          icon: horizontal-justify-start
+          tooltip: 左对齐
+        - value: center
+          title: 居中对齐
+          icon: horizontal-justify-center
+          tooltip: 居中对齐
+        - value: end
+          title: 右对齐
+          icon: horizontal-justify-end
+          tooltip: 右对齐
+        - value: space-between
+          title: 平均分布(两端不留空)
+          icon: horizontal-justify-space-between
+          tooltip: 平均分布(两端不留空)
+        - value: space-around
+          title: 平均分布
+          icon: horizontal-justify-space-around
+          tooltip: 平均分布
+      default: start
+      dependency:
+        - mode: flex
+          direction: horizontal
+      toggleupdate:
+        - value: space-between
+          updateData:
+            gap: normal
+        - value: space-around
+          updateData:
+            gap: normal
+      group: 主要属性
+      description: ""
+      brifeDoc: ""
+      docDescription: 主轴方向为横向时：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布。主轴方向为纵向时：支持左对齐、居中对齐、右对齐、占满容器宽度。
+      tooltipLink: ""
+    - name: alignment
+      title: 纵轴对齐
+      type: string
+      display: capsules
+      bindHide: true
+      options:
+        - value: start
+          title: 顶对齐
+          icon: horizontal-alignment-start
+          tooltip: 顶对齐
+        - value: center
+          title: 垂直居中
+          icon: horizontal-alignment-center
+          tooltip: 垂直居中
+        - value: end
+          title: 底对齐
+          icon: horizontal-alignment-end
+          tooltip: 底对齐
+        - value: baseline
+          title: 行内文字基线对齐
+          icon: horizontal-alignment-baseline
+          tooltip: 行内文字基线对齐
+        - value: stretch
+          title: 占满容器高度
+          icon: horizontal-alignment-stretch
+          tooltip: 占满容器高度
+      default: stretch
+      dependency:
+        - mode: flex
+          direction: horizontal
+      group: 主要属性
+      description: ""
+      brifeDoc: ""
+      docDescription: 主轴方向为横向时：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。主轴方向为纵向时：支持顶对齐、垂直居中、底对齐、平均分布（两端不留空）、平均分布。
+      tooltipLink: ""
+    - name: alignment
+      title: 纵轴对齐
+      type: string
+      display: capsules
+      bindHide: true
+      options:
+        - value: start
+          title: 左对齐
+          icon: vertical-alignment-start
+          tooltip: 左对齐
+        - value: center
+          title: 居中对齐
+          icon: vertical-alignment-center
+          tooltip: 居中对齐
+        - value: end
+          title: 右对齐
+          icon: vertical-alignment-end
+          tooltip: 右对齐
+        - value: stretch
+          title: 拉伸子元素充满整个父元素空间
+          icon: vertical-alignment-stretch
+          tooltip: 占满容器宽度
+      default: stretch
+      dependency:
+        - mode: flex
+          direction: vertical
+      group: 主要属性
+      description: ""
+      brifeDoc: ""
+      docDescription: 主轴方向为横向时：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。主轴方向为纵向时：支持顶对齐、垂直居中、底对齐、平均分布（两端不留空）、平均分布。
+      tooltipLink: ""
+    - name: justify
+      title: 横轴对齐
+      type: string
+      display: capsules
+      bindHide: true
+      options:
+        - value: start
+          title: 顶对齐
+          icon: vertical-justify-start
+          tooltip: 顶对齐
+        - value: center
+          title: 垂直居中
+          icon: vertical-justify-center
+          tooltip: 垂直居中
+        - value: end
+          title: 底对齐
+          icon: vertical-justify-end
+          tooltip: 底对齐
+        - value: space-between
+          title: 平均分布(两端不留空)
+          icon: vertical-justify-space-between
+          tooltip: 平均分布(两端不留空)
+        - value: space-around
+          title: 平均分布
+          icon: vertical-justify-space-around
+          tooltip: 平均分布
+      default: start
+      dependency:
+        - mode: flex
+          direction: vertical
+      toggleupdate:
+        - value: space-between
+          updateData:
+            gap: normal
+        - value: space-around
+          updateData:
+            gap: normal
+      group: 主要属性
+      description: ""
+      brifeDoc: ""
+      docDescription: 主轴方向为横向时：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布。 主轴方向为纵向时：支持左对齐、居中对齐、右对齐、占满容器宽度。
+      tooltipLink: ""
+    - name: span
+      title: 占据栅格数
+      type: number
+      display: number
+      default: 1
+      description: 列占据栅格行的栅格数
+      step: 1
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 支持设置当前栅格列占据的栅格数，不能超过当前栅格行栅格数。
+      tooltipLink: ""
+    - name: offset
+      title: 偏移栅格数
+      type: number
+      display: number
+      description: 列偏移的栅格数
+      default: 0
+      step: 1
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 支持设置栅格列偏移数，控制当前栅格列与其左侧栅格列的距离，处于当前栅格列右侧的栅格列也会同步偏移。
+      tooltipLink: ""
+    - name: pull
+      title: 左移动栅格数
+      type: number
+      display: number
+      description: 列向左移动的栅格数
+      default: 0
+      step: 1
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 向左移动的栅格数，支持栅格互相重合。
+      tooltipLink: ""
+    - name: push
+      title: 右移动栅格数
+      type: number
+      display: number
+      description: 列向右移动的栅格数
+      default: 0
+      step: 1
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 向右移动的栅格数，支持栅格互相重合。
+      tooltipLink: ""
+    - name: wrap
+      title: 换行
+      type: boolean
+      default: true
+      description: 设置弹性布局下子元素总宽度超出父级时子元素是否换行展示
+      dependency:
+        - mode: flex
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 支持控制弹性布局模式下，子元素总宽度超过父级时是否换行展示，默认开启。
+      tooltipLink: ""
+    - name: gap
+      title: 内容间隙
+      type: string
+      options:
+        - value: shrink
+          title: 收缩
+          advanced: true
+        - value: none
+          title: 无
+        - value: small
+          title: 小
+        - value: normal
+          title: 正常
+        - value: large
+          title: 大
+      default: normal
+      description: 内容块间隙大小
+      dependency:
+        - mode: flex
+          "!justify":
+            - space-between
+            - space-around
+      group: 样式属性
+      brifeDoc: ""
+      docDescription: 布局内各个组件之间的间隔，通常有收缩、无、小、正常、大，默认为正常。
+      tooltipLink: ""
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入需要布局的元素。
+  events:
+    - name: responsive
+      title: 响应窗口变化时
+      description: 响应式布局引发栅格变化时触发
+      advanced: true
+      params:
+        - name: $event.span
+          type: number
+          description: 列跨越的栅格数
+        - name: $event.oldSpan
+          type: number
+          description: 旧的列跨越的栅格数
+        - name: senderVM
+          type: Vue
+          description: 发送事件实例

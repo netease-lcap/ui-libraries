@@ -1,0 +1,148 @@
+- name: u-icon-tooltip
+  title: 图标提示
+  description: 图标与`<u-tooltip>`的组合。
+  labels:
+    - 弹出层
+    - 行内展示
+  attrs:
+    - name: type
+      type: string
+      options:
+        - value: info
+          title: 信息
+        - value: help
+          title: 帮助
+        - value: detail
+          title: 详情
+      default: info
+      description: 图标类型
+    - name: size
+      type: string
+      options:
+        - value: mini
+          title: 迷你
+        - value: normal
+          title: 正常
+        - value: large
+          title: 大
+      default: normal
+      description: 提示大小
+    - name: opened
+      type: boolean
+      sync: true
+      default: false
+      description: 弹出/关闭状态
+    - name: trigger
+      type: string
+      options:
+        - value: click
+          title: 点击
+        - value: hover
+          title: 悬浮
+        - value: right-click
+          title: 右击
+        - value: double-click
+          title: 双击
+        - value: manual
+          title: 手动
+      default: hover
+      description: 工具提示的触发方式
+    - name: placement
+      type: string
+      options:
+        - value: top
+          name: 上
+        - value: bottom
+          name: 下
+        - value: left
+          name: 左
+        - value: right
+          name: 右
+        - value: top-start
+          name: 上左
+        - value: top-end
+          name: 上右
+        - value: bottom-start
+          name: 下左
+        - value: bottom-end
+          name: 下右
+        - value: left-start
+          name: 左上
+        - value: left-end
+          name: 左下
+        - value: right-start
+          name: 右上
+        - value: right-end
+          name: 右下
+      default: bottom
+      description: 工具提示的弹出方向
+    - name: hide-delay
+      type: number
+      default: 200
+      description: 提示内容消失延迟时间，单位是 ms
+    - name: offset
+      type: string
+      default: "0"
+      description: 弹出层偏移，如：'10', '10px 10px', '10% 10%', 第一个值表示水平偏移，第二个值表示垂直位移, 默认单位是`px`
+    - name: follow-cursor
+      type: boolean
+      default: false
+      description: 是否跟随鼠标
+    - name: disabled
+      type: boolean
+      default: false
+      description: 是否禁用
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入需要弹出的内容。
+  events:
+    - name: before-open
+      description: 弹出前触发。
+      params:
+        - name: $event.preventDefault
+          type: Function
+          description: 阻止弹出流程
+        - name: senderVM
+          type: UTooltip
+          description: 发送事件实例
+    - name: open
+      description: 弹出时触发。
+      params:
+        - name: $event
+          type: ""
+          description: 空
+        - name: senderVM
+          type: UTooltip
+          description: 发送事件实例
+    - name: before-close
+      description: 隐藏前触发。
+      params:
+        - name: $event.preventDefault
+          type: Function
+          description: 阻止隐藏流程
+        - name: senderVM
+          type: UTooltip
+          description: 发送事件实例
+    - name: close
+      description: 隐藏时触发。
+      params:
+        - name: $event
+          type: ""
+          description: 空
+        - name: senderVM
+          type: UTooltip
+          description: 发送事件实例
+    - name: before-toggle
+      description: "@deprecated"
+      params: []
+    - name: toggle
+      description: "@deprecated"
+      params: []
+  methods:
+    - name: open
+      description: 弹出实例。
+      params: []
+    - name: close
+      description: 关闭实例。
+      params: []

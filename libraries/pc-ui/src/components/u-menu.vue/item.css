@@ -1,0 +1,74 @@
+
+.root {
+    display: block;
+    position: relative;
+    cursor: var(--cursor-pointer);
+    z-index: 1;
+    overflow: visible;
+    padding: var(--menu-item-padding);
+    color: var(--menu-item-color);
+    white-space: nowrap;
+}
+
+.root:hover {
+    background: var(--menu-background-hover);
+}
+
+.root {
+    padding-right: var(--menu-item-size);
+}
+
+.root[readonly] {
+    cursor: default;
+    background: none;
+}
+
+.root[selected] {
+    color: var(--brand-primary);
+}
+
+.root[disabled] {
+    /* @Private */
+    cursor: var(--cursor-not-allowed);
+    background: none;
+    color: var(--color-light);
+}
+
+.root[selected][disabled] {
+    background: var(--gray-lighter);
+}
+
+.root[has-sub]::after {
+    display: inline-block;
+content: "\e679";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: var(--menu-item-size);
+    height: var(--menu-item-size);
+    line-height: var(--menu-item-size);
+    text-align: center;
+}
+
+.sub {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    margin-left: 1px;
+    margin-top: -1px;
+}
+
+.root:hover > .sub {
+    display: block;
+}

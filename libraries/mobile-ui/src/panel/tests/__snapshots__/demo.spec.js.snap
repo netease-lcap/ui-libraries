@@ -1,0 +1,33 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div class="van-cell-group van-hairline--top-bottom van-panel">
+      <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center van-panel__header">
+        <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">标题</div><i class="van-icon van-icon-arrow van-cell__right-icon">
+          <!----></i>
+      </div>
+      <div class="van-panel__content">
+        <div>内容</div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-cell-group van-hairline--top-bottom van-panel">
+      <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center van-panel__header">
+        <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">标题</div><i class="van-icon van-icon-arrow van-cell__right-icon">
+          <!----></i>
+      </div>
+      <div class="van-panel__content">
+        <div>内容</div>
+      </div>
+      <div class="van-panel__footer van-hairline--top"><button class="van-button van-button--default van-button--small van-button--square">
+          <div class="van-button__content"><span class="van-button__text">按钮</span></div>
+        </button><button class="van-button van-button--danger van-button--small van-button--square">
+          <div class="van-button__content"><span class="van-button__text"> 按钮 </span></div>
+        </button></div>
+    </div>
+  </div>
+</div>
+`;

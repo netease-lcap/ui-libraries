@@ -1,0 +1,70 @@
+- name: van-collapse
+  title: 折叠面板
+  icon: collapse
+  labels:
+    - Container
+  description: 将一组内容放置在多个折叠面板中，点击面板的标题可以展开或收缩其内容。
+  attrs:
+    - name: value
+      title: 值
+      type: number,string
+      sync: true
+      model: true
+      description: 用于标识折叠面板的值
+      group: 数据属性
+    - name: accordion
+      title: 手风琴模式
+      type: boolean
+      default: false
+      description: 是否开启手风琴模式
+      group: 交互属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<van-collapse-item>`子组件。
+      empty-background: add-sub-large
+      support:
+        - name: van-collapse-item
+          title: 菜单项
+          snippet: "<van-collapse-item><template
+            #title>标签名称n</template></van-collapse-item>"
+  events:
+    - name: change
+      title: 切换时
+      description: 切换时
+- name: van-collapse-item
+  title: 面板项
+  attrs:
+    - name: title
+      title: 标题
+      type: string
+      description: 标题
+      advanced: true
+    - name: name
+      title: 值
+      type: number,string
+      description: 用于标识面板项的值
+      group: 数据属性
+    - name: is-link
+      title: 箭头图标
+      type: boolean
+      default: true
+      description: 是否显示箭头图标
+      group: 主要属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+  events:
+    - name: open
+      title: 展开
+      description: 展开
+    - name: close
+      title: 收起
+      description: 收起
+  methods:
+    - name: toggle
+      title: 切换展开状态，传 true 为展开，false 为收起，不传参为切换
+      description: 切换展开状态，传 true 为展开，false 为收起，不传参为切换

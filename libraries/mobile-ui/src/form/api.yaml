@@ -1,0 +1,149 @@
+- name: van-form
+  title: 表单
+  icon: form
+  labels:
+    - Form
+  description: 具有数据收集、校验和提交功能的表单，包含输入框、选择框、复选框、单选框等元素。
+  attrs:
+    - name: label-align
+      title: 标签对齐方式
+      type: string
+      advanced: true
+      options:
+        - value: left
+          title: 左
+        - value: center
+          title: 中
+        - value: right
+          title: 右
+      default: left
+      description: 标签对齐方式
+    - name: input-align
+      title: 输入框对齐方式
+      type: string
+      advanced: true
+      options:
+        - value: left
+          title: 左
+        - value: center
+          title: 中
+        - value: right
+          title: 右
+      default: left
+      description: 输入框对齐方式
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<van-field>`子组件。
+      empty-background: add-sub-large
+      support:
+        - name: van-field
+          title: 表单项
+          snippet: '<van-field drole="other"><template #title><van-text
+            text="表单项"><van-text></template><template
+            #input></template></van-field>'
+  events:
+    - name: submit
+      title: 验证通过
+      description: 提交表单且验证通过后触发
+    - name: failed
+      title: 验证不通过
+      description: 提交表单且验证不通过后触发
+  methods:
+    - name: validate
+      description: 验证表单，支持传入 name 来验证单个或部分表单项
+- name: van-field
+  title: 表单项
+  attrs:
+    - name: value
+      title: 表单项值
+      type: any
+      sync: true
+      model: true
+      default: ""
+      advanced: true
+      description: 表单项值
+    - name: name
+      title: 提交表单的标识符
+      type: string
+      advanced: true
+      description: 提交表单的标识符
+    - name: type
+      title: 输入框类型
+      type: string
+      advanced: true
+      options:
+        - value: text
+          title: text
+        - value: number
+          title: number
+        - value: password
+          title: password
+        - value: textarea
+          title: textarea
+        - value: digit
+          title: digit
+        - value: tel
+          title: tel
+      default: text
+      description: input输入框类型
+    - name: label
+      title: 标签名称
+      type: string
+      default: 表单项
+      advanced: true
+      description: 输入框左侧文本
+    - name: size
+      title: 标签大小
+      type: string
+      advanced: true
+      options:
+        - value: "-"
+          title: 正常
+        - value: large
+          title: 大
+      default: "-"
+      description: 输入框左侧文本大小
+    - name: placeholder
+      title: 输入框占位提示文字
+      type: string
+      advanced: true
+    - name: label-layout
+      title: 标签布局
+      type: string
+      options:
+        - value: inline
+          title: 行内展示
+        - value: block
+          title: 块级展示，标签与表单项分行展示
+      default: inline
+      description: ""
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: 设置标签布局方式。行内展示、块级展示，标签与表单项分行展示。
+      tooltipLink: ""
+    - name: required
+      title: 必填标记
+      type: boolean
+      default: false
+      group: 主要属性
+      description: ""
+    - name: rules
+      title: 验证规则
+      type: string | Array
+      description: 设置验证规则，简写格式为字符串类型，完整格式或混合格式为数组类型
+      compType: validationRulesSelect
+      group: 主要属性
+    - name: border
+      title: 显示底边框
+      type: boolean
+      default: true
+      description: 是否显示底边框
+      group: 样式属性
+  slots:
+    - concept: Slot
+      name: input
+      description: 插入自定义输入框
+  i18n:
+    zh-CN:
+      validateLabel: 字段

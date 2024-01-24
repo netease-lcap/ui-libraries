@@ -1,0 +1,485 @@
+- name: van-list-view
+  title: 数据列表
+  icon: list-view
+  labels:
+    - Table
+  description: 用于列举大量数据的列表框，支持单选、多选、过滤（搜索）、分页等功能。
+  attrs:
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      description: 是否只读
+      advanced: true
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 是否禁用
+      advanced: true
+    - name: cancelable
+      title: 可取消
+      type: boolean
+      default: false
+      advanced: true
+      description: 是否可以取消选择
+    - name: show-head
+      title: 显示头部
+      type: boolean
+      default: false
+      advanced: true
+      description: 是否显示头部
+    - name: title
+      title: 列表标题
+      type: string
+      default: 列表
+      advanced: true
+      description: 列表标题
+    - name: show-foot
+      title: 显示底部
+      type: boolean
+      default: false
+      description: 是否显示底部
+      advanced: true
+    - name: remote-paging
+      title: 后端分页
+      type: boolean
+      default: false
+      description: 是否使用后端分页
+      advanced: true
+      dependency:
+        - "!pageable": ""
+    - name: remote-filtering
+      title: 后端筛选
+      type: boolean
+      default: false
+      description: 是否使用后端过滤
+      dependency:
+        - filterable: true
+      advanced: true
+    - name: match-method
+      title: 匹配方法
+      type: string, Function
+      default: includes
+      advanced: true
+      description: 过滤时的匹配方法
+      dependency:
+        - filterable: true
+    - name: case-sensitive
+      title: 大小写敏感
+      type: boolean
+      default: false
+      advanced: true
+      description: 过滤时大小写是否敏感
+      dependency:
+        - filterable: true
+    - name: size
+      title: 尺寸
+      type: string
+      options:
+        - value: full
+          title: 占满
+        - value: huge
+          title: 巨大
+        - value: large
+          title: 大
+        - value: normal
+          title: 正常
+        - value: auto
+          title: 自适应
+      default: normal
+      description: 大小扩展，支持一个值或两个值的组合，前者表示高度，后者表示宽度
+      multi: true
+      maxSelect: 2
+      advanced: true
+    - name: data-source
+      title: 数据源
+      type: Array<Item> | Function | object | DataSource
+      designer-value: "[{}, {}, {}]"
+      description: 列表的数据源。数组方式表示直接的数据，函数需要返回一个 Promise。
+      group: 数据属性
+    - name: data-schema
+      title: 数据类型
+      type: schema
+      description: 数据源返回的数据结构的类型，自动识别类型进行展示说明。
+      compType: dataTypeSelect
+      group: 数据属性
+    - name: value
+      title: 值
+      type: any
+      sync: true
+      model: true
+      advanced: true
+      description: 用于标识数据列表的值
+      group: 数据属性
+    - name: value-field
+      title: 值字段名
+      type: string
+      display: property-select
+      default: value
+      description: 选项值的字段名
+      group: 数据属性
+    - name: text-field
+      title: 文本字段名
+      type: string
+      display: property-select
+      default: text
+      description: 选项文本的字段名，可用于前端筛选时的匹配
+      group: 数据属性
+    - name: value
+      title: 值
+      type: any
+      sync: true
+      model: true
+      group: 数据属性
+      description: 用于标识数据列表的值
+    - name: pageable
+      title: 分页
+      type: string
+      default: ""
+      options:
+        - value: ""
+          title: 不分页
+        - value: auto-more
+          title: 滚动加载更多
+        - value: load-more
+          title: 点击加载更多
+        - value: pagination
+          title: 翻页器
+      description: 设置分页类型
+      group: 主要属性
+    - name: page-size
+      title: 默认分页大小
+      type: number
+      default: 20
+      min: 1
+      description: 分页过小可能会导致滚动加载更多失效
+      dependency:
+        - "!pageable": ""
+      group: 主要属性
+    - name: filterable
+      title: 可筛选
+      type: boolean
+      default: false
+      description: 是否可以过滤（搜索），开启将会显示搜索框。
+      group: 主要属性
+    - name: placeholder
+      title: 筛选输入框显示文字
+      type: string
+      default: 请输入
+      description: ""
+      dependency:
+        - filterable: true
+      group: 主要属性
+    - name: clearable
+      title: 筛选清除按钮
+      type: boolean
+      default: false
+      description: 搜索框是否展示清除按钮
+      dependency:
+        - filterable: true
+      group: 主要属性
+    - name: selectable
+      title: 可选择
+      type: boolean
+      default: true
+      description: 是否可以选择
+      group: 交互属性
+      advanced: true
+    - name: multiple
+      title: 多选
+      type: boolean
+      default: false
+      description: 设置是否可以多选行，不开启则为单选。
+      group: 交互属性
+    - name: selected-icon
+      title: 已选图标
+      type: icon
+      default: ""
+      dependency:
+        - selectable: true
+      group: 交互属性
+      description: ""
+    - name: unselected-icon
+      title: 未选图标
+      type: icon
+      default: ""
+      dependency:
+        - selectable: true
+      group: 交互属性
+      description: ""
+    - name: pull-refresh
+      title: 下拉刷新
+      type: boolean
+      default: true
+      description: 是否开启下拉刷新
+      dependency:
+        - "!pageable": pagination
+      group: 交互属性
+    - name: pulling-text
+      title: 下拉过程中提示文案
+      type: string
+      default: 下拉刷新
+      dependency:
+        - pull-refresh: true
+          "!pageable": pagination
+      group: 交互属性
+      description: ""
+    - name: loosing-text
+      title: 释放过程中提示文案
+      type: string
+      default: 释放刷新
+      dependency:
+        - pull-refresh: true
+          "!pageable": pagination
+      group: 交互属性
+      description: ""
+    - name: success-text
+      title: 刷新成功提示文案
+      type: string
+      default: 已刷新
+      dependency:
+        - pull-refresh: true
+          "!pageable": pagination
+      group: 交互属性
+      description: ""
+    - name: success-duration
+      title: 展示时长
+      type: number
+      default: 500
+      dependency:
+        - pull-refresh: true
+          "!pageable": pagination
+      group: 交互属性
+      description: 设置刷新成功后提示展示时长，单位为ms。
+    - name: pull-distance
+      title: 刷新距离
+      type: number
+      default: 50
+      dependency:
+        - pull-refresh: true
+          "!pageable": pagination
+      group: 交互属性
+      description: 设置触发下拉刷新的距离，单位为px。
+    - name: hiddenempty
+      title: 隐藏空态文案
+      type: boolean
+      default: false
+      description: 是否隐藏表格末尾“没有更多了”文案
+      group: 交互属性
+    - name: initial-load
+      type: boolean
+      title: 初始加载
+      default: true
+      description: 是否在初始时立即加载
+      group: 状态属性
+    - name: designer-mode
+      title: 加载状态
+      type: string
+      options:
+        - value: success
+          title: 加载完成-有数据
+        - value: empty
+          title: 加载完成-暂无数据
+        - value: loading
+          title: 加载中
+        - value: error
+          title: 加载失败
+      default: success
+      description: 设置加载状态
+      bindHide: true
+      group: 状态属性
+      tooltipLink: ""
+      docDescription: ""
+    - name: loading-text
+      title: 加载中文案
+      type: string
+      default: 正在加载中...
+      description: 加载中状态显示的文案
+      group: 状态属性
+      dependency:
+        - designer-mode: loading
+      brifeDoc: ""
+      docDescription: 当数据正在加载时展示的文字，默认为"加载中..."。
+      tooltipLink: ""
+    - name: loading
+      title: 加载中触发条件
+      type: boolean
+      description: 加载中状态的触发条件，未设置则默认为系统定义条件。
+      bindOpen: true
+      group: 状态属性
+      dependency:
+        - designer-mode: loading
+    - name: error-text
+      title: 加载失败文案
+      type: string
+      default: 加载失败，请重试
+      description: 加载失败状态显示的提示文案
+      group: 状态属性
+      dependency:
+        - designer-mode: error
+      brifeDoc: ""
+      docDescription: 加载失败的提示文字。默认"加载失败，请重试"
+      tooltipLink: ""
+    - name: error
+      title: 加载失败触发条件
+      type: boolean
+      description: 加载失败状态的触发条件，未设置则默认为系统定义条件。
+      bindOpen: true
+      group: 状态属性
+      dependency:
+        - designer-mode: error
+      brifeDoc: ""
+      docDescription: 控制表格加载失败的展示时机。默认关闭。
+      tooltipLink: ""
+    - name: empty-text
+      title: 暂无数据文案
+      type: string
+      default: 暂无数据
+      description: 暂无数据状态显示的提示文案
+      group: 状态属性
+      dependency:
+        - designer-mode: empty
+      brifeDoc: ""
+      docDescription: 当列表为空时的提示文字。默认"暂无数据"
+      tooltipLink: ""
+    - name: striped
+      title: 斑马条纹
+      type: boolean
+      default: false
+      description: 是否按斑马线条纹显示
+      group: 样式属性
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入<van-cell />
+      empty-background: drag-entity-here
+      support:
+        - name: van-cell
+          title: 单元格
+          snippet: '<template #item="current"><van-cell isLink><template
+            #title>文本</template></van-cell></template>'
+      advanced: true
+    - concept: Slot
+      name: item
+      description: 自定义选项的结构和样式
+      slotProps:
+        concept: Param
+        name: current
+        typeAnnotation:
+          concept: TypeAnnotation
+          typeKind: generic
+          typeNamespace: nasl.ui
+          typeName: Current
+          typeArguments:
+            - concept: TypeAnnotation
+              typeKind: typeParam
+              typeName: T
+    - concept: Slot
+      name: prev
+      description: 自定义上一页
+    - concept: Slot
+      name: next
+      description: 自定义下一页
+  events:
+    - name: input
+      title: 选择时
+      description: 选择某一项时触发
+      params:
+        - name: $event
+          type: any
+          description: 选择项的值
+          schema:
+            $ref: "#/basicTypes/String"
+        - name: senderVM
+          type: UListView
+          description: 发送事件实例
+    - name: select
+      title: 选择后
+      description: 选择某一项时触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeItemEvent"
+        - name: $event.value
+          type: any
+          description: 改变后的值
+        - name: $event.oldValue
+          type: any
+          description: 旧的值
+        - name: $event.item
+          type: object
+          description: 选择项相关对象
+        - name: $event.oldItem
+          type: object
+          description: 旧的选择项相关对象
+        - name: $event.itemVM
+          type: UListViewItem
+          description: 选择项子组件
+        - name: $event.oldVM
+          type: UListViewItem
+          description: 旧的选择项子组件
+        - name: senderVM
+          type: UListView
+          description: 发送事件实例
+    - name: change
+      title: 改变后
+      description: 选择值改变时触发。
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/ChangeItemEvent"
+        - name: $event.value
+          type: any
+          description: 选择项的值
+        - name: $event.oldValue
+          type: any
+          description: 旧的值
+        - name: $event.item
+          type: object
+          description: 选择项相关对象
+        - name: $event.oldItem
+          type: object
+          description: 旧的选择项相关对象
+        - name: $event.itemVM
+          type: UListViewItem
+          description: 选择项子组件
+        - name: $event.oldVM
+          type: UListViewItem
+          description: 旧的选择项子组件
+        - name: senderVM
+          type: UListView
+          description: 发送事件实例
+    - name: before-load
+      title: 加载前
+      description: 加载前触发
+      params:
+        - name: $event
+          type: object
+          description: 自定义事件对象
+          schema:
+            $ref: "#/systemTypes/EventTarget"
+        - name: $event.preventDefault
+          type: Function
+          description: 阻止加载流程
+        - name: senderVM
+          type: UTableView
+          description: 发送事件实例
+    - name: load
+      title: 加载后
+      description: 加载时触发
+      params:
+        - name: $event
+          type: ""
+          description: 空
+        - name: senderVM
+          type: UTableView
+          description: 发送事件实例
+  methods:
+    - name: reload
+      description: 清除缓存，重新加载
+      params: []

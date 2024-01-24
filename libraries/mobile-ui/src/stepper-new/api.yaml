@@ -1,0 +1,185 @@
+- name: van-stepper-new
+  title: 数字输入
+  labels:
+    - Form
+  icon: numberh5
+  attrs:
+    - name: value
+      title: 值
+      type: number
+      sync: true
+      model: true
+      description: 用于标识数字输入的值
+      group: 数据属性
+    - name: min
+      title: 最小值
+      type: string, number
+      description: ""
+      group: 数据属性
+    - name: max
+      title: 最大值
+      type: string, number
+      description: ""
+      group: 数据属性
+    - name: decimalLength
+      title: 精度
+      type: number
+      min: 0
+      description: 固定显示的小数位数
+      group: 数据属性
+    - name: decimal-places
+      title: 小数位数
+      type: "{ places: number, omit: boolean }"
+      default: "{ places: '', omit: true }"
+      compose:
+        - key: places
+          type: number
+          min: 0
+        - key: omit
+          type: switch
+          suffix: 隐藏末尾0
+      description: 控制数据展示时小数点后保留几位，仅影响展示，不影响数据实际存储的值。例如：小数位数为2，则数据展示时小数点后保留2位。
+      dependency:
+        - advanced-format.enable: false
+      group: 主要属性
+      bindHide: true
+      brifeDoc: ""
+      docDescription: ""
+      tooltipLink: ""
+    - name: thousandths
+      title: 千位符
+      type: boolean
+      default: false
+      desciption: 是否显示千位符
+      dependency:
+        - advanced-format.enable: false
+      group: 主要属性
+      bindHide: true
+      brifeDoc: ""
+      docDescription: ""
+      tooltipLink: ""
+    - name: percent-sign
+      title: 百分号
+      type: boolean
+      default: false
+      desciption: 是否显示百分号
+      dependency:
+        - advanced-format.enable: false
+      group: 主要属性
+      bindHide: true
+      brifeDoc: ""
+      docDescription: ""
+      tooltipLink: ""
+    - name: unit
+      title: 单位
+      type: "{ type: string, value: string }"
+      default: "{ type: 'prefix', value: '' }"
+      compose:
+        - key: type
+          type: select
+          options:
+            - value: prefix
+              title: 前缀
+            - value: suffix
+              title: 后缀
+        - key: value
+          type: text
+      description: 输入框中显示的单位
+      group: 主要属性
+      bindHide: true
+      brifeDoc: ""
+      docDescription: ""
+      tooltipLink: ""
+    - name: advanced-format
+      title: 高级格式化
+      type: "{ enable: boolean, value: string }"
+      default: "{ enable: false, value: '' }"
+      description: 用来控制数字的展示格式
+      group: 主要属性
+      brifeDoc: ""
+      docDescription: ""
+      tooltipLink: ""
+      bindHide: true
+    - name: placeholder
+      title: 占位符
+      type: string
+      default: 请输入
+      description: 输入框为空的显示文字
+      group: 主要属性
+    - name: showPlus
+      title: 显示增加按钮
+      type: boolean
+      default: true
+      description: ""
+      group: 交互属性
+    - name: showMinus
+      title: 显示减少按钮
+      type: boolean
+      default: true
+      description: ""
+      group: 交互属性
+    - name: disablePlus
+      title: 禁用增加按钮
+      type: boolean
+      default: false
+      description: ""
+      group: 交互属性
+    - name: disableMinus
+      title: 禁用减少按钮
+      type: boolean
+      default: false
+      description: ""
+      group: 交互属性
+    - name: disableInput
+      title: 只读
+      type: boolean
+      default: false
+      description: 正常显示，但禁止选择/输入。
+      group: 状态属性
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+      group: 状态属性
+    - name: theme
+      title: 风格
+      type: string
+      options:
+        - value: fang
+          title: 默认
+        - value: round
+          title: 圆角
+      default: fang
+      description: ""
+      group: 样式属性
+    - name: step
+      title: 步长
+      type: string, number
+      default: 1
+      description: 表示点击按钮或按上下键所增加或减少的量
+      group: 样式属性
+    - name: align
+      title: 对齐方式
+      type: string
+      options:
+        - value: left
+          title: 左对齐
+        - value: center
+          title: 居中对齐
+        - value: right
+          title: 右对齐
+      default: center
+      description: 设置对齐方式
+      group: 样式属性
+  slots: false
+  events:
+    - name: click
+      title: 点击按钮
+      description: 点击加减按钮时触发
+      params: []
+    - name: change
+      title: 值改变
+      description: 值改变时触发
+      params: []
+  description: 数字输入框

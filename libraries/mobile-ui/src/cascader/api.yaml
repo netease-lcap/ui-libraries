@@ -1,0 +1,142 @@
+- name: van-cascader
+  title: 级联选择
+  icon: cascade-select
+  labels:
+    - Selector
+  description: 级联选择框，用于多层级数据的选择，典型场景为省市区选择
+  attrs:
+    - name: labelField
+      title: 左侧标题
+      type: string
+      description: 左侧标题
+      advanced: true
+    - name: tree-display
+      title: 树形模式
+      type: boolean
+      default: false
+      description: 将平铺数据转为树形结构数据
+    - name: field-namesp
+      title: 自定义 options 结构中的字段
+      type: string, object
+      default: "{'text':'','value':'','children':'children'}"
+      description: 自定义 options 结构中的字段
+      advanced: true
+    - name: value
+      title: 值
+      type: string, number
+      sync: true
+      model: true
+      default: ""
+      description: 用于标识级联选择的值
+      group: 数据属性
+    - name: data-source
+      title: 数据源
+      type: array
+      default2: '[{"text":"理学","value":"理学","children":[{"text":"物理学","value":"物理学","children":[{"text":"理论物理","value":"理论物理"},{"text":"凝聚态物理","value":"凝聚态物理"},{"text":"材料物理","value":"材料物理"}]},{"text":"数学","value":"数学","children":[{"text":"基础数学","value":"基础数学"},{"text":"计算数学","value":"计算数学"},{"text":"应用数学","value":"应用数学"}]},{"text":"化学","value":"化学"}]},{"text":"工学","value":"工学","children":[{"text":"计算机科学与技术","value":"计算机科学与技术","children":[{"text":"计算机系统结构","value":"计算机系统结构"},{"text":"计算机软件与理论","value":"计算机软件与理论","disabled":true},{"text":"计算机应用技术","value":"计算机应用技术"}]},{"text":"软件工程","value":"软件工程","disabled":true},{"text":"机械工程","value":"机械工程","children":[{"text":"机械制造及其自动化","value":"机械制造及其自动化"},{"text":"机械电子工程","value":"机械电子工程"},{"text":"机械设计及理论","value":"机械设计及理论","disabled":true},{"text":"车辆工程","value":"车辆工程","disabled":true}]}]}]'
+      description: 展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑。
+      designer-value: "[{}]"
+      group: 数据属性
+    - name: text-field
+      title: 文本字段名
+      type: string
+      default: text
+      description: 文本的字段名
+      group: 数据属性
+    - name: value-field
+      title: 值字段名
+      type: string
+      default: value
+      description: 选项值的字段名
+      group: 数据属性
+    - name: parent-field
+      title: 父级值字段名
+      type: string
+      default: parentId
+      description: ""
+      group: 数据属性
+    - name: children-field
+      title: 子级值字段名
+      type: string
+      default: children
+      description: ""
+      group: 数据属性
+    - name: placeholder
+      title: 占位提示
+      type: string
+      default: 请选择
+      group: 主要属性
+      description: ""
+    - name: title
+      title: 顶部栏标题
+      type: string
+      default: 标题
+      description: ""
+      group: 主要属性
+    - name: tab-placeholder
+      title: 未选中提示文案
+      type: string
+      default: 请选择
+      description: ""
+      group: 主要属性
+    - name: input-align
+      title: 对齐方式
+      type: string
+      options:
+        - value: left
+          title: 左
+        - value: center
+          title: 中
+        - value: right
+          title: 右
+      description: 设置右侧内容的对齐方式
+      group: 主要属性
+    - name: filterable
+      title: 开启搜索框
+      type: boolean
+      default: false
+      description: 是否开启搜索框进行过滤
+      group: 交互属性
+    - name: close-on-click-overlay
+      title: 点击遮罩层后关闭
+      type: boolean
+      default: false
+      description: 是否开启点击遮罩层后关闭
+      group: 交互属性
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      group: 状态属性
+      description: 正常显示，但禁止选择/输入
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      group: 状态属性
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+  slots:
+    - concept: Slot
+      name: option
+      title: option
+      slotProps:
+        concept: Param
+        name: current
+        typeAnnotation:
+          concept: TypeAnnotation
+          typeKind: generic
+          typeNamespace: nasl.ui
+          typeName: Current
+          typeArguments:
+            - concept: TypeAnnotation
+              typeKind: typeParam
+              typeName: T
+  events:
+    - name: finish
+      title: 全部选项选择完成后触发
+      description: 全部选项选择完成后触发
+    - name: change
+      title: 选中项变化时触发
+      description: 选中项变化时触发
+  i18n:
+    zh-CN:
+      vanCascader_select: 请选择

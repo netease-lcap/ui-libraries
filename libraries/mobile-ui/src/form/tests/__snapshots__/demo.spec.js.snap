@@ -1,0 +1,69 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div>ipRangeLength: <div class="van-stepper-new"><button type="button" class="van-stepper-new__minus"></button><input type="text" role="spinbutton" inputmode="decimal" class="van-stepper-new__input"><button type="button" class="van-stepper-new__plus"></button></div>
+    </div>
+    <form class="van-form">
+      <div label-layout="inline" is-sub="" class="van-cellson van-cellson--center van-cellson--required van-field">
+        <div vusion-slot-name="title" class="van-cellson__title van-field__label van-field__labelhasslots"><span vusion-slot-name-edit="text" class="root">名称</span></div>
+        <div class="van-cellson__value van-field__value">
+          <div class="van-field__body">
+            <div class="van-fieldinput__newwrap van-fieldinput__newwrap--clearwrap"><input type="integer" role="fieldinput" placeholder="请输入" vusion-click-enabled="true" class="van-fieldinput__control van-fieldinput__control--custom" style="height: auto;"></div>
+          </div>
+        </div>
+      </div>
+      <div label-layout="inline" is-sub="" class="van-cellson van-cellson--center van-cellson--required van-field">
+        <div vusion-slot-name="title" class="van-cellson__title van-field__label van-field__labelhasslots"><span vusion-slot-name-edit="text" class="root">单选框</span></div>
+        <div class="van-cellson__value van-field__value">
+          <div class="van-field__body">
+            <div class="van-field__control van-field__control--custom">
+              <div class="van-radio-group van-radio-group--horizontal">
+                <div role="radio" tabindex="-1" aria-checked="false" class="van-radio van-radio--horizontal">
+                  <div class="van-radio__icon van-radio__icon--round"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                        <use xlink:href="#h5-sure" class="van-shoud-pa"></use>
+                      </svg>
+                      <!----></i></div><span vusion-slot-name="default" class="van-radio__label">单选框 1</span>
+                </div>
+                <div role="radio" tabindex="-1" aria-checked="false" class="van-radio van-radio--horizontal">
+                  <div class="van-radio__icon van-radio__icon--round"><i class="van-iconv"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                        <use xlink:href="#h5-sure" class="van-shoud-pa"></use>
+                      </svg>
+                      <!----></i></div><span vusion-slot-name="default" class="van-radio__label">单选框 2</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div label-layout="inline" is-sub="" class="van-cellson van-cellson--center van-cellson--required van-field">
+        <div vusion-slot-name="title" class="van-cellson__title van-field__label van-field__labelhasslots"><span vusion-slot-name-edit="text" class="root">多选框</span></div>
+        <div class="van-cellson__value van-field__value">
+          <div class="van-field__body">
+            <div class="van-field__control van-field__control--custom">
+              <div class="van-checkbox-group van-checkbox-group--horizontal">
+                <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox van-checkbox--horizontal">
+                  <div class="van-checkbox__icon van-checkbox__icon--square"><i class="van-icon van-icon-success">
+                      <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label"><span vusion-slot-name-edit="text" class="root">节点</span></span>
+                </div>
+                <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox van-checkbox--horizontal">
+                  <div class="van-checkbox__icon van-checkbox__icon--square"><i class="van-icon van-icon-success">
+                      <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label"><span vusion-slot-name-edit="text" class="root">节点</span></span>
+                </div>
+                <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox van-checkbox--horizontal">
+                  <div class="van-checkbox__icon van-checkbox__icon--square"><i class="van-icon van-icon-success">
+                      <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label"><span vusion-slot-name-edit="text" class="root">节点</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin: 16px 16px 0px;"><button type="submit" round="" class="van-button van-button--info van-button--normal van-button--block van-button--square">
+          <div class="van-button__content"><span class="van-button__text">提交</span></div>
+        </button></div>
+    </form>
+  </div>
+</div>
+`;

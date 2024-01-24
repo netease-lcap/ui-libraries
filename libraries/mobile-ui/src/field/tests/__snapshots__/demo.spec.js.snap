@@ -1,0 +1,181 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div class="van-cell-group van-hairline--top-bottom">
+      <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+        <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>文本</span></div>
+        <div class="van-cellson__value van-field__value">
+          <div class="van-field__body"><input type="text" placeholder="请输入文本" class="van-field__control"></div>
+        </div>
+      </div>
+    </div>
+    <div class="van-cell-group van-hairline--top-bottom">
+      <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+        <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>文本</span></div>
+        <div class="van-cellson__value van-field__value">
+          <div class="van-field__body"><input type="text" placeholder="请输入文本" class="van-field__control"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>短信验证码</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body">
+          <div class="van-fieldinput__newwrap van-fieldinput__newwrap--clearwrap"><input type="text" role="fieldinput" placeholder="" vusion-click-enabled="true" class="van-fieldinput__control van-fieldinput__control--custom" style="height: auto;"></div>
+        </div>
+      </div>
+    </div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>短信验证码</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body">
+          <div class="van-fieldtextarea__newwrap van-fieldtextarea__newwrap--clearwrap van-fieldtextarea__newwrap--limit">
+            <div class="van-fieldtextarea__wrap-con"><textarea role="fieldtextarea" placeholder="" class="van-fieldtextarea__control van-fieldtextarea__control--custom" style="height: auto;"></textarea></div>
+            <div class="van-fieldtextarea__word-limit"><span class="van-fieldtextarea__word-num">0</span>/100</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>文本</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" placeholder="请输入文本" class="van-field__control"></div>
+      </div>
+    </div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>手机号</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="tel" placeholder="请输入手机号" class="van-field__control"></div>
+      </div>
+    </div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>整数</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="tel" inputmode="numeric" placeholder="请输入整数" class="van-field__control"></div>
+      </div>
+    </div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>数字</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" inputmode="decimal" placeholder="请输入数字（支持小数）" class="van-field__control"></div>
+      </div>
+    </div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>密码</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="password" placeholder="请输入密码" class="van-field__control">
+          <div class="van-field__right-icon"><i class="van-icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAKNSURBVHgB7ZbdbRpBEMeHAx5AQiEV5FKBSQXBFSQRAsSTQwV2B+AOoALwEwIkSCoIqQBcgS8VhCBAQnzlP+QWLeju9mIwfpmfdNqbvb2dmd2Z2SUSBEEQBEEQBEEQXoeI34dut/t7u92mXTFbKBR+0gVptVp2NBp9csUx9L/1Gmf5TQDjR5pYpQsD4yua+M1vnK8DdGh0tt1uV+hCuLq+KhnOVP3G+jrAIROJRGpKxnsVE9/QC8M6WJeuN5fL/fIbHyEDnU5niCajZIRWtVgs3tMLAF23aGpa1wgL+SHonxgZiMfj18vlkp2wWXZ3Ij2fz+/L5fKYzkCj0Ugnk0kOmzut20HofDb9a9wBxq0IfTrcCQcN78YDnQBW/SPmamJhbK17xMYHhY7CohCUSiUHSg4qASvE08RuPD0nN9hwPD/wOjgynheHJpPJnzDzhNoBrgpHiTXWzgil1EH/AC0b5Mxms0cVYhwiiUTiHfozeLLo4tA4+P94Ti7jCNNrU5gaHfAwvrparR5isdgtlNzRGcA8Nc6pVCp1s9ls9CRuIonLQf8GOuBlfD6f31cgzg0k+ScoZUds+g94xdHUptNpXV9l3AAqXOkopBOBVciyrF08ehnPcG6gqSOW+Zox1AzjfluFhBseY7Rp1Ye5M15JyjrgBCknOBwpgEAH1GTq3W8clF1B0e4duzFAZfriNQ6ONsg9YdfrNedB/RS9RgfCTMDA+H29Rvnzv7dY1ggOKjFDJ+rdzUlnADuwN2axWDz6jcOB+F0TjYdUGEKV0SAQFmz80BUdJNz7oPH6NR27ZYc5rII4xw68oX9Je3wF90Q7EJ3jA+xV4ZLKj2lcr9e76vf7xnGCIAiCIAiCmb/8EzBWv90CKwAAAABJRU5ErkJggg==" class="van-icon__image">
+              <!----></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>文本</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" readonly="readonly" class="van-field__control"></div>
+      </div>
+    </div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field van-field--disabled">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>文本</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" disabled="disabled" class="van-field__control"></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div class="van-field__left-icon"><i class="van-icon van-icon-smile-o">
+          <!----></i></div>
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>文本</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" placeholder="显示图标" class="van-field__control">
+          <div class="van-field__right-icon"><i class="van-icon van-icon-warning-o">
+              <!----></i></div>
+        </div>
+      </div>
+    </div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div class="van-field__left-icon"><i class="van-icon van-icon-music-o">
+          <!----></i></div>
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>文本</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" placeholder="显示清除图标" class="van-field__control"></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-cellson--required van-field van-field--error">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>用户名</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" placeholder="请输入用户名" class="van-field__control"></div>
+      </div>
+    </div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-cellson--required van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>手机号</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" placeholder="请输入手机号" class="van-field__control"></div>
+        <div class="van-field__error-message">手机号格式错误</div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>短信验证码</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" placeholder="请输入短信验证码" class="van-field__control">
+          <div class="van-field__button"><button class="van-button van-button--primary van-button--small van-button--square">
+              <div class="van-button__content"><span class="van-button__text"> 发送验证码 </span></div>
+            </button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>文本</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" placeholder="在输入时执行格式化" class="van-field__control"></div>
+      </div>
+    </div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>文本</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" placeholder="在失焦时执行格式化" class="van-field__control"></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>留言</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><textarea rows="1" placeholder="请输入留言" class="van-field__control" style="height: auto;"></textarea></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>留言</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><textarea rows="2" placeholder="请输入留言" class="van-field__control" style="height: auto;"></textarea></div>
+        <div class="van-field__word-limit"><span class="van-field__word-num">0</span>/50</div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-field">
+      <div vusion-slot-name="title" class="van-cellson__title van-field__label"><span>文本</span></div>
+      <div class="van-cellson__value van-field__value">
+        <div class="van-field__body"><input type="text" placeholder="输入框内容右对齐" class="van-field__control van-field__control--right"></div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

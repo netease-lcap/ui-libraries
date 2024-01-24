@@ -1,0 +1,244 @@
+.root {
+    font-style: normal;
+}
+
+.root[name="arrow-up"]::before {
+content: "\e672";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.root[name="arrow-down"]::before {
+content: "\e66c";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.root[name="arrow-left"]::before {
+content: "\e66d";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.root[name="arrow-right"]::before {
+content: "\e681";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.root[name="angle-up"]::before {
+content: "\e669";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.root[name="angle-down"]::before {
+content: "\e65a";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.root[name="angle-left"]::before {
+content: "\e680";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.root[name="angle-right"]::before {
+content: "\e64c";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.root[name="close"]::before {
+content: "\e663";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.root[name="close-solid"]::before {
+content: "\e66e";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.root[name="filter"]::before {
+content: "\e665";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.root[name="github"]::before {
+content: "\e658";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.root[size="small"]::before {
+    font-size: 14px;
+}
+
+.root::before {}
+
+.root[size="large"]::before {
+    font-size: 32px;
+    vertical-align: -8px;
+}
+
+.root[hover] {
+    cursor: pointer;
+    transition: color var(--transition-duration-fast);
+}
+
+.root[hover]:hover {
+    color: var(--brand-primary);
+}
+
+.root[color="primary"] {
+    color: var(--brand-primary);
+}
+
+.root[color="success"] {
+    color: var(--brand-success);
+}
+
+.root[color="normal"] {
+    color: var(--brand-normal);
+}
+
+.root[color="problem"] {
+    color: var(--brand-problem);
+}
+
+.root[color="warning"] {
+    color: var(--brand-warning);
+}
+
+.root[color="error"] {
+    color: var(--brand-error);
+}
+
+.root[color="assist"] {
+    color: var(--brand-assist);
+}
+
+.root[disabled][class], .root[color="disabled"][class] {
+    cursor: var(--cursor-disabled);
+    color: var(--brand-disabled);
+}
+
+.root[size="small"] {
+    font-size: 12px;
+}
+
+.root[size="normal"] {
+    font-size: 14px;
+}
+
+.root[size="medium"] {
+    font-size: 16px;
+}
+
+.root[size="large"] {
+    font-size: 24px;
+}
+
+.root[size="huge"] {
+    font-size: 32px;
+}

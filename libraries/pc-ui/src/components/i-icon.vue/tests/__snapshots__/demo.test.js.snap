@@ -1,0 +1,46 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`i-icon.vue > Demo-基本用法 1`] = `<i class="root" name="arrow-up"></i>`;
+
+exports[`i-icon.vue > Demo-基本用法 2`] = `<i class="root" name="arrow-down"></i>`;
+
+exports[`i-icon.vue > Demo-基本用法 3`] = `<i class="root" name="arrow-left"></i>`;
+
+exports[`i-icon.vue > Demo-基本用法 4`] = `<i class="root" name="arrow-right"></i>`;
+
+exports[`i-icon.vue > Demo-基本用法 5`] = `<i class="root" name="angle-up"></i>`;
+
+exports[`i-icon.vue > Demo-基本用法 6`] = `<i class="root" name="angle-down"></i>`;
+
+exports[`i-icon.vue > Demo-基本用法 7`] = `<i class="root" name="angle-left"></i>`;
+
+exports[`i-icon.vue > Demo-基本用法 8`] = `<i class="root" name="angle-right"></i>`;
+
+exports[`i-icon.vue > Demo-基本用法 9`] = `<i class="root" name="close"></i>`;
+
+exports[`i-icon.vue > Demo-基本用法 10`] = `<i class="root" name="close-solid"></i>`;
+
+exports[`i-icon.vue > Demo-基本用法 11`] = `
+<div>
+  <div class="root" direction="horizontal" type vusion-slot-name="default">
+    <i class="root" name="area">area</i>
+    <i class="root" name="portrait">portrait</i>
+    <i class="root" name="angle-left">left</i>
+    <i class="root" name="angle-right">right</i>
+    <i class="root" name="arrow-down">arrow-down</i>
+    <i class="root" name="arrow-up">arrow-up</i>
+    <i class="root" name="refresh">refresh</i>
+    <i class="root" name="search">search</i>
+    <i class="root" name="apm-alert">alert</i>
+    <i class="root" name="logout" size="small">logout</i>
+    <i class="root" name="dropdown" size="large">dropdown</i>
+    <i class="root" name="angle-down">down</i>
+    <i class="root" name="angle-up">up</i>
+    <i class="root" name="chart-refresh">chart-refresh</i>
+    <i class="root" name="chart-zoom">chart-zoom</i>
+    <i class="root" name="close">close</i>
+    <!---->
+    <!---->
+  </div>
+</div>
+`;

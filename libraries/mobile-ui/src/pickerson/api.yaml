@@ -1,0 +1,268 @@
+- name: van-pickerson
+  title: 选择器
+  icon: picker
+  labels:
+    - Selector
+  description: 提供多个选项集合供用户选择，支持单列选择和多列级联。
+  attrs:
+    - name: labelField
+      title: 左侧标题
+      type: string
+      description: 左侧标题
+      advanced: true
+    - name: columnsprop
+      title: 数据源(一维数组)
+      type: array
+      description: 一个包含字符串或对象的数组
+      advanced: true
+    - name: value-key
+      title: 选项对象中，选项文字对应的键名
+      type: string
+      default: text
+      description: 选项对象中，选项文字对应的键名
+      advanced: true
+    - name: default-index
+      title: 默认选中项的索引
+      type: number
+      default: 0
+      description: 默认选中项的索引
+      advanced: true
+    - name: isNew
+      title: 是否使用新版外观
+      type: boolean
+      default: false
+    - name: value
+      title: 值
+      type: string, number
+      sync: true
+      model: true
+      default: ""
+      description: 用于标识选择器的值
+      group: 数据属性
+    - name: data-source
+      title: 数据源
+      type: Array<Item> | Function | object | DataSource
+      designer-value: "[{}, {}, {}, {}, {}, {}]"
+      description: 展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑
+      group: 数据属性
+    - name: data-schema
+      title: 数据类型
+      type: schema
+      description: 集合类型每一元素的数据类型
+      compType: dataTypeSelect
+      group: 数据属性
+    - name: value-field
+      title: 值字段
+      type: string
+      default: value
+      description: 选项值的字段名
+      group: 数据属性
+    - name: text-field
+      title: 文本字段
+      type: string
+      default: text
+      description: 选项文本的字段名
+      group: 数据属性
+    - name: page-size
+      title: 默认每页条数
+      type: number
+      display: number
+      default: 50
+      min: 10
+      dependency:
+        - pageable: true
+      group: 数据属性
+      description: ""
+    - name: sorting
+      title: 初始化排序规则
+      type: "{ field: string, order: string, compare: Function }"
+      default: "{ field: undefined, order: 'desc' }"
+      description: 设置数据初始化时的排序字段和顺序规则
+      group: 数据属性
+    - name: match-method
+      title: 匹配方法
+      type: string
+      options:
+        - value: includes
+          title: 包括
+        - value: startsWith
+          title: 匹配开头
+        - value: endsWith
+          title: 匹配结尾
+      default: includes
+      description: 设置过滤时的匹配方法
+      group: 数据属性
+      dependency:
+        - filterable: true
+    - name: pageable
+      title: 分页加载更多
+      type: boolean
+      default: false
+      description: 设置是否分页加载更多
+      group: 主要属性
+    - name: type
+      title: 列表样式
+      type: string
+      options:
+        - value: picker
+          title: 选择器
+          dependency:
+            - "!multiple": true
+        - value: list
+          title: 列表
+      default: picker
+      description: 设置列表样式，仅列表展示时支持多选
+      group: 主要属性
+    - name: placeholder
+      title: 占位提示
+      type: string
+      default: 请选择
+      group: 主要属性
+      description: ""
+    - name: title
+      title: 工具栏标题
+      type: string
+      default: 标题
+      description: ""
+      group: 主要属性
+    - name: confirm-button-text
+      title: 确认按钮文字
+      type: string
+      default: 确认
+      description: ""
+      dependency:
+        - isNew: false
+      group: 主要属性
+    - name: cancel-button-text
+      title: 取消按钮文字
+      type: string
+      default: 取消
+      description: ""
+      dependency:
+        - isNew: false
+      group: 主要属性
+    - name: visible-item-count
+      title: 可见选项个数
+      type: number
+      default: 6
+      description: 设置可见选项个数
+      dependency:
+        - type: picker
+      group: 主要属性
+    - name: input-align
+      title: 对齐方式
+      type: string
+      options:
+        - value: left
+          title: 左
+        - value: center
+          title: 中
+        - value: right
+          title: 右
+      description: 设置右侧内容的对齐方式
+      group: 主要属性
+    - name: show-toolbar
+      title: 显示工具栏
+      type: boolean
+      default: true
+      description: ""
+      group: 主要属性
+    - name: filterable
+      title: 支持筛选
+      type: boolean
+      default: false
+      description: 设置是否支持筛选，开启将会支持搜索。
+      group: 交互属性
+    - name: multiple
+      title: 可多选
+      type: boolean
+      default: false
+      group: 交互属性
+      description: ""
+    - name: enable-select-all
+      title: 全选
+      type: boolean
+      default: false
+      dependency:
+        - multiple: true
+      group: 交互属性
+      description: ""
+    - name: enable-selected-count
+      title: 已选中项数
+      type: boolean
+      default: false
+      dependency:
+        - multiple: true
+      group: 交互属性
+      description: 是否显示当前已选中项数
+    - name: close-on-click-overlay
+      title: 点击遮罩层后关闭
+      type: boolean
+      default: false
+      description: ""
+      group: 交互属性
+    - name: initial-load
+      type: boolean
+      title: 初始加载
+      default: true
+      description: 是否在初始时立即加载
+      group: 状态属性
+    - name: readonly
+      title: 只读
+      type: boolean
+      default: false
+      group: 状态属性
+      description: 正常显示，但禁止选择/输入
+    - name: disabled
+      title: 禁用
+      type: boolean
+      default: false
+      group: 状态属性
+      description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+  slots:
+    - concept: Slot
+      name: default
+      description: 插入`<van-picker-action-slot>`子组件
+      support:
+        - name: van-picker-action-slot
+          title: 事件插槽
+          snippet: <van-picker-action-slot
+            target-method="confirm"></van-picker-action-slot>
+    - concept: Slot
+      name: option
+      title: option
+      slotProps:
+        concept: Param
+        name: current
+        typeAnnotation:
+          concept: TypeAnnotation
+          typeKind: generic
+          typeNamespace: nasl.ui
+          typeName: Current
+          typeArguments:
+            - concept: TypeAnnotation
+              typeKind: typeParam
+              typeName: T
+  events:
+    - name: confirm
+      title: 点击完成按钮时触发
+      description: 回调参数：选中值，选中值对应的索引
+    - name: cancel
+      title: 点击取消按钮时触发
+      description: 回调参数：选中值，选中值对应的索引
+    - name: change
+      title: 选项改变时触发
+      description: 回调参数：Picker 实例，选中值，选中值对应的索引
+  methods:
+    - name: reload
+      description: 重新加载数据
+  i18n:
+    zh-CN:
+      vanPickerson_confirm: 确定
+      vanPickerson_cancel: 取消
+      vanPickerson_searchPlaceholder: 请输入搜索关键词
+      vanPickerPick_confirm: 确定
+      vanPickerPick_cancel: 取消
+      vanPickerList_selected: 当前已选中
+      vanPickerList_selectAll: 全选
+      vanPickerList_cancelSelectAll: 取消全选
