@@ -9,15 +9,18 @@
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noEmit": true,
     "jsx": "react",
     "jsxFactory": "React.createElement",
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
     "noFallthroughCasesInSwitch": true,
+    "emitDecoratorMetadata": true,
     "noImplicitAny": false,
     "paths": {
       "@/*": ["./src/*"],
@@ -25,7 +28,6 @@
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["src/**/api.ts"],
   "references": [
     {
       "path": "./tsconfig.node.json"
