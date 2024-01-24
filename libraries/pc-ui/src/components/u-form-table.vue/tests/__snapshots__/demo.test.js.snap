@@ -5,10 +5,10 @@ exports[`u-form-table.vue > Demo-动态按钮 1`] = `
   <table class="root">
     <thead>
       <tr>
-        <th width="170">区域</th>
-        <th width="170">VPC</th>
-        <th width="200">关联描述</th>
-        <th width="40"></th>
+        <th width>区域</th>
+        <th width>VPC</th>
+        <th width>关联描述</th>
+        <th width></th>
       </tr>
     </thead>
     <tbody>
@@ -135,10 +135,10 @@ exports[`u-form-table.vue > Demo-基本用法 1`] = `
   <table class="root">
     <thead>
       <tr>
-        <th width="20%">序号</th>
-        <th width="20%">姓名</th>
+        <th width>序号</th>
+        <th width>姓名</th>
         <th>地址</th>
-        <th width="20%">出生日期</th>
+        <th width>出生日期</th>
       </tr>
     </thead>
     <tbody>
@@ -181,9 +181,9 @@ exports[`u-form-table.vue > Demo-基本用法 2`] = `
 <table class="root">
   <thead>
     <tr>
-      <th width="170">区域</th>
-      <th width="170">VPC</th>
-      <th width="200">关联描述</th>
+      <th width>区域</th>
+      <th width>VPC</th>
+      <th width>关联描述</th>
     </tr>
   </thead>
   <tbody>
@@ -286,10 +286,10 @@ exports[`u-form-table.vue > Demo-悬浮高亮 1`] = `
   <table class="root" hover>
     <thead>
       <tr>
-        <th width="20%">序号</th>
-        <th width="20%">姓名</th>
+        <th width>序号</th>
+        <th width>姓名</th>
         <th>地址</th>
-        <th width="20%">出生日期</th>
+        <th width>出生日期</th>
       </tr>
     </thead>
     <tbody>
@@ -333,10 +333,10 @@ exports[`u-form-table.vue > Demo-条纹展示 1`] = `
   <table class="root" striped>
     <thead>
       <tr>
-        <th width="20%">序号</th>
-        <th width="20%">姓名</th>
+        <th width>序号</th>
+        <th width>姓名</th>
         <th>地址</th>
-        <th width="20%">出生日期</th>
+        <th width>出生日期</th>
       </tr>
     </thead>
     <tbody>
@@ -380,10 +380,10 @@ exports[`u-form-table.vue > Demo-组合修饰 1`] = `
   <table class="root" hover line="both" striped>
     <thead>
       <tr>
-        <th width="20%">序号</th>
-        <th width="20%">姓名</th>
+        <th width>序号</th>
+        <th width>姓名</th>
         <th>地址</th>
-        <th width="20%">出生日期</th>
+        <th width>出生日期</th>
       </tr>
     </thead>
     <tbody>
@@ -427,10 +427,10 @@ exports[`u-form-table.vue > Demo-表格线条 1`] = `
   <table class="root" line="both">
     <thead>
       <tr>
-        <th width="20%">序号</th>
-        <th width="20%">姓名</th>
+        <th width>序号</th>
+        <th width>姓名</th>
         <th>地址</th>
-        <th width="20%">出生日期</th>
+        <th width>出生日期</th>
       </tr>
     </thead>
     <tbody>
@@ -474,10 +474,10 @@ exports[`u-form-table.vue > Demo-表格线条 2`] = `
   <table class="root" line="horizontal">
     <thead>
       <tr>
-        <th width="20%">序号</th>
-        <th width="20%">姓名</th>
+        <th width>序号</th>
+        <th width>姓名</th>
         <th>地址</th>
-        <th width="20%">出生日期</th>
+        <th width>出生日期</th>
       </tr>
     </thead>
     <tbody>

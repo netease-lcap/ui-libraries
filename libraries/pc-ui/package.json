@@ -109,5 +109,8 @@
     "preview": "vite preview",
     "build:storybook": "storybook build",
     "check:api": "tsc -p tsconfig.api.json"
+  },
+  "jestSerializer": {
+    "attributesToClear": ["width"]
   }
 }

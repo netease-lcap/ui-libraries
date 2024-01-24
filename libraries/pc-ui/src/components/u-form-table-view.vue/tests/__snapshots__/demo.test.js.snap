@@ -5,13 +5,13 @@ exports[`u-form-table-view.vue > Demo-动态表格 1`] = `
   <table class="root table">
     <thead>
       <tr>
-        <th width="20%">
+        <th width>
           <span>URL</span>
         </th>
-        <th width="20%">
+        <th width>
           <span>服务</span>
         </th>
-        <th width="20%">
+        <th width>
           <span>端口</span>
         </th>
         <th>
@@ -241,13 +241,13 @@ exports[`u-form-table-view.vue > Demo-在表单中使用 1`] = `
           <table class="root table">
             <thead>
               <tr>
-                <th width="20%">
+                <th width>
                   <span>URL</span>
                 </th>
-                <th width="20%">
+                <th width>
                   <span>服务</span>
                 </th>
-                <th width="20%">
+                <th width>
                   <span>端口</span>
                 </th>
                 <th>
@@ -462,13 +462,13 @@ exports[`u-form-table-view.vue > Demo-基本用法 1`] = `
   <table class="root table">
     <thead>
       <tr>
-        <th width="20%">
+        <th width>
           <span>URL</span>
         </th>
-        <th width="20%">
+        <th width>
           <span>服务</span>
         </th>
-        <th width="20%">
+        <th width>
           <span>端口</span>
         </th>
         <th>
@@ -569,13 +569,13 @@ exports[`u-form-table-view.vue > Demo-基本用法 2`] = `
   <table class="root table">
     <thead>
       <tr>
-        <th width="20%">
+        <th width>
           <span>URL</span>
         </th>
-        <th width="20%">
+        <th width>
           <span>服务</span>
         </th>
-        <th width="20%">
+        <th width>
           <span>端口</span>
         </th>
         <th>
@@ -784,13 +784,13 @@ exports[`u-form-table-view.vue > Demo-自定义操作列 1`] = `
   <table class="root table">
     <thead>
       <tr>
-        <th width="20%">
+        <th width>
           <span>URL</span>
         </th>
-        <th width="20%">
+        <th width>
           <span>服务</span>
         </th>
-        <th width="20%">
+        <th width>
           <span>端口</span>
         </th>
         <th>
@@ -978,13 +978,13 @@ exports[`u-form-table-view.vue > Demo-表单验证 1`] = `
   <table class="root table">
     <thead>
       <tr>
-        <th width="20%">
+        <th width>
           <span>URL</span>
         </th>
-        <th width="20%">
+        <th width>
           <span>服务</span>
         </th>
-        <th width="20%">
+        <th width>
           <span>端口</span>
         </th>
         <th>
@@ -1203,13 +1203,13 @@ exports[`u-form-table-view.vue > Demo-表单验证 2`] = `
   <table class="root table">
     <thead>
       <tr>
-        <th width="20%">
+        <th width>
           <span>URL</span>
         </th>
-        <th width="20%">
+        <th width>
           <span>服务</span>
         </th>
-        <th width="20%">
+        <th width>
           <span>端口</span>
         </th>
         <th>
@@ -1326,13 +1326,13 @@ exports[`u-form-table-view.vue > Demo-限制数量 1`] = `
   <table class="root table">
     <thead>
       <tr>
-        <th width="20%">
+        <th width>
           <span>URL</span>
         </th>
-        <th width="20%">
+        <th width>
           <span>服务</span>
         </th>
-        <th width="20%">
+        <th width>
           <span>端口</span>
         </th>
         <th>

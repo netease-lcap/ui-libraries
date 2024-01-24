@@ -4,7 +4,7 @@ exports[`u-time-picker.vue > Demo-只读和禁用 1`] = `
 <div>
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <span class="root">
-      <div class="root input" clearable="15:46:33" height="full" prefix="time" readonly="readonly" width="full">
+      <div class="root input" clearable="15:46:33" height="full" prefix="time" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder"></span>
         <span class="prefix" name="time">
@@ -19,7 +19,7 @@ exports[`u-time-picker.vue > Demo-只读和禁用 1`] = `
             </div>
           </span>
         </span>
-        <input class="input" height="full" readonly="readonly" type="text" width="full">
+        <input class="input" height="full" readonly="readonly" type="text" width>
         <span class="suffix">
           <!---->
           <!---->
@@ -261,7 +261,7 @@ exports[`u-time-picker.vue > Demo-只读和禁用 1`] = `
       </transition-stub>
     </span>
     <span class="root">
-      <div class="root input" clearable="15:46:33" disabled="disabled" height="full" prefix="time" width="full">
+      <div class="root input" clearable="15:46:33" disabled="disabled" height="full" prefix="time" width>
         <span class="baseline">b</span>
         <span class="placeholder"></span>
         <span class="prefix" name="time">
@@ -276,7 +276,7 @@ exports[`u-time-picker.vue > Demo-只读和禁用 1`] = `
             </div>
           </span>
         </span>
-        <input class="input" disabled="disabled" height="full" type="text" width="full">
+        <input class="input" disabled="disabled" height="full" type="text" width>
         <span class="suffix">
           <!---->
           <!---->
@@ -525,7 +525,7 @@ exports[`u-time-picker.vue > Demo-只读和禁用 1`] = `
 
 exports[`u-time-picker.vue > Demo-基本用法 1`] = `
 <span class="root">
-  <div class="root input" clearable="15:46:33" height="full" prefix="time" width="full">
+  <div class="root input" clearable="15:46:33" height="full" prefix="time" width>
     <span class="baseline">b</span>
     <span class="placeholder"></span>
     <span class="prefix" name="time">
@@ -540,7 +540,7 @@ exports[`u-time-picker.vue > Demo-基本用法 1`] = `
         </div>
       </span>
     </span>
-    <input class="input" height="full" type="text" width="full">
+    <input class="input" height="full" type="text" width>
     <span class="suffix">
       <!---->
       <!---->
@@ -786,7 +786,7 @@ exports[`u-time-picker.vue > Demo-基本用法 1`] = `
 exports[`u-time-picker.vue > Demo-基本用法 2`] = `
 <div>
   <span class="root">
-    <div class="root input" clearable="15:46:33" height="full" prefix="time" width="full">
+    <div class="root input" clearable="15:46:33" height="full" prefix="time" width>
       <span class="baseline">b</span>
       <span class="placeholder"></span>
       <span class="prefix" name="time">
@@ -801,7 +801,7 @@ exports[`u-time-picker.vue > Demo-基本用法 2`] = `
           </div>
         </span>
       </span>
-      <input class="input" height="full" type="text" width="full">
+      <input class="input" height="full" type="text" width>
       <span class="suffix">
         <!---->
         <!---->
@@ -1047,7 +1047,7 @@ exports[`u-time-picker.vue > Demo-基本用法 2`] = `
 
 exports[`u-time-picker.vue > Demo-方法 1`] = `
 <span class="root">
-  <div class="root input" clearable="20:12:12" height="full" prefix="time" width="full">
+  <div class="root input" clearable="20:12:12" height="full" prefix="time" width>
     <span class="baseline">b</span>
     <span class="placeholder"></span>
     <span class="prefix" name="time">
@@ -1062,7 +1062,7 @@ exports[`u-time-picker.vue > Demo-方法 1`] = `
         </div>
       </span>
     </span>
-    <input class="input" height="full" type="text" width="full">
+    <input class="input" height="full" type="text" width>
     <span class="suffix">
       <!---->
       <!---->
@@ -1307,7 +1307,7 @@ exports[`u-time-picker.vue > Demo-方法 1`] = `
 
 exports[`u-time-picker.vue > Demo-日期最小单位 1`] = `
 <span class="root">
-  <div class="root input" clearable="13:12" height="full" prefix="time" width="full">
+  <div class="root input" clearable="13:12" height="full" prefix="time" width>
     <span class="baseline">b</span>
     <span class="placeholder"></span>
     <span class="prefix" name="time">
@@ -1322,7 +1322,7 @@ exports[`u-time-picker.vue > Demo-日期最小单位 1`] = `
         </div>
       </span>
     </span>
-    <input class="input" height="full" type="text" width="full">
+    <input class="input" height="full" type="text" width>
     <span class="suffix">
       <!---->
       <!---->
@@ -1491,7 +1491,7 @@ exports[`u-time-picker.vue > Demo-日期最小单位 1`] = `
 exports[`u-time-picker.vue > Demo-日期范围 1`] = `
 <div>
   <span class="root">
-    <div class="root input" clearable="15:46:33" height="full" prefix="time" width="full">
+    <div class="root input" clearable="15:46:33" height="full" prefix="time" width>
       <span class="baseline">b</span>
       <span class="placeholder"></span>
       <span class="prefix" name="time">
@@ -1506,7 +1506,7 @@ exports[`u-time-picker.vue > Demo-日期范围 1`] = `
           </div>
         </span>
       </span>
-      <input class="input" height="full" type="text" width="full">
+      <input class="input" height="full" type="text" width>
       <span class="suffix">
         <!---->
         <!---->
@@ -1753,7 +1753,7 @@ exports[`u-time-picker.vue > Demo-日期范围 1`] = `
 exports[`u-time-picker.vue > Demo-日期范围 2`] = `
 <div>
   <span class="root">
-    <div class="root input" clearable="15:46:33" height="full" prefix="time" width="full">
+    <div class="root input" clearable="15:46:33" height="full" prefix="time" width>
       <span class="baseline">b</span>
       <span class="placeholder"></span>
       <span class="prefix" name="time">
@@ -1768,7 +1768,7 @@ exports[`u-time-picker.vue > Demo-日期范围 2`] = `
           </div>
         </span>
       </span>
-      <input class="input" height="full" type="text" width="full">
+      <input class="input" height="full" type="text" width>
       <span class="suffix">
         <!---->
         <!---->
@@ -2014,7 +2014,7 @@ exports[`u-time-picker.vue > Demo-日期范围 2`] = `
 
 exports[`u-time-picker.vue > Demo-时间单位容错 1`] = `
 <span class="root">
-  <div class="root input" clearable="02:02:00" height="full" prefix="time" width="full">
+  <div class="root input" clearable="02:02:00" height="full" prefix="time" width>
     <span class="baseline">b</span>
     <span class="placeholder"></span>
     <span class="prefix" name="time">
@@ -2029,7 +2029,7 @@ exports[`u-time-picker.vue > Demo-时间单位容错 1`] = `
         </div>
       </span>
     </span>
-    <input class="input" height="full" type="text" width="full">
+    <input class="input" height="full" type="text" width>
     <span class="suffix">
       <!---->
       <!---->
@@ -2198,7 +2198,7 @@ exports[`u-time-picker.vue > Demo-时间单位容错 1`] = `
 exports[`u-time-picker.vue > Demo-格式化 1`] = `
 <div>
   <span class="root">
-    <div class="root input" clearable height="full" prefix="time" width="full">
+    <div class="root input" clearable height="full" prefix="time" width>
       <span class="baseline">b</span>
       <span class="placeholder">请选择时间</span>
       <span class="prefix" name="time">
@@ -2213,7 +2213,7 @@ exports[`u-time-picker.vue > Demo-格式化 1`] = `
           </div>
         </span>
       </span>
-      <input class="input" height="full" type="text" width="full">
+      <input class="input" height="full" type="text" width>
       <span class="suffix">
         <!---->
         <!---->
@@ -2456,7 +2456,7 @@ exports[`u-time-picker.vue > Demo-格式化 1`] = `
   </span>
   <span class="root">
     <div class="root input" prefix="time">
-      <div class="root input" height="full" prefix="calendar" width="full">
+      <div class="root input" height="full" prefix="calendar" width>
         <span class="baseline">b</span>
         <span class="placeholder"></span>
         <span class="prefix" name="calendar">
@@ -2471,15 +2471,15 @@ exports[`u-time-picker.vue > Demo-格式化 1`] = `
             </div>
           </span>
         </span>
-        <input class="input" height="full" type="text" width="full">
+        <input class="input" height="full" type="text" width>
         <!---->
       </div>
       <span class="toIcon"></span>
-      <div class="root input" clearable="18时18分33秒" height="full" width="full">
+      <div class="root input" clearable="18时18分33秒" height="full" width>
         <span class="baseline">b</span>
         <span class="placeholder"></span>
         <!---->
-        <input class="input" height="full" type="text" width="full">
+        <input class="input" height="full" type="text" width>
         <span class="suffix">
           <!---->
           <!---->
@@ -2961,7 +2961,7 @@ exports[`u-time-picker.vue > Demo-自定义底部文案 1`] = `
 <div>
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <span class="root">
-      <div class="root input" clearable height="full" prefix="time" width="full">
+      <div class="root input" clearable height="full" prefix="time" width>
         <span class="baseline">b</span>
         <span class="placeholder">请选择时间</span>
         <span class="prefix" name="time">
@@ -2976,7 +2976,7 @@ exports[`u-time-picker.vue > Demo-自定义底部文案 1`] = `
             </div>
           </span>
         </span>
-        <input class="input" height="full" type="text" width="full">
+        <input class="input" height="full" type="text" width>
         <span class="suffix">
           <!---->
           <!---->
@@ -3227,7 +3227,7 @@ exports[`u-time-picker.vue > Demo-范围选择 1`] = `
 <div>
   <span class="root">
     <div class="root input" prefix="time">
-      <div class="root input" height="full" prefix="calendar" width="full">
+      <div class="root input" height="full" prefix="calendar" width>
         <span class="baseline">b</span>
         <span class="placeholder"></span>
         <span class="prefix" name="calendar">
@@ -3242,15 +3242,15 @@ exports[`u-time-picker.vue > Demo-范围选择 1`] = `
             </div>
           </span>
         </span>
-        <input class="input" height="full" type="text" width="full">
+        <input class="input" height="full" type="text" width>
         <!---->
       </div>
       <span class="toIcon"></span>
-      <div class="root input" clearable="18:18:33" height="full" width="full">
+      <div class="root input" clearable="18:18:33" height="full" width>
         <span class="baseline">b</span>
         <span class="placeholder"></span>
         <!---->
-        <input class="input" height="full" type="text" width="full">
+        <input class="input" height="full" type="text" width>
         <span class="suffix">
           <!---->
           <!---->
@@ -3732,7 +3732,7 @@ exports[`u-time-picker.vue > Demo-范围选择分钟 1`] = `
 <div>
   <span class="root">
     <div class="root input" prefix="time">
-      <div class="root input" height="full" prefix="calendar" width="full">
+      <div class="root input" height="full" prefix="calendar" width>
         <span class="baseline">b</span>
         <span class="placeholder"></span>
         <span class="prefix" name="calendar">
@@ -3747,15 +3747,15 @@ exports[`u-time-picker.vue > Demo-范围选择分钟 1`] = `
             </div>
           </span>
         </span>
-        <input class="input" height="full" type="text" width="full">
+        <input class="input" height="full" type="text" width>
         <!---->
       </div>
       <span class="toIcon"></span>
-      <div class="root input" clearable="18:18" height="full" width="full">
+      <div class="root input" clearable="18:18" height="full" width>
         <span class="baseline">b</span>
         <span class="placeholder"></span>
         <!---->
-        <input class="input" height="full" type="text" width="full">
+        <input class="input" height="full" type="text" width>
         <span class="suffix">
           <!---->
           <!---->
@@ -4082,7 +4082,7 @@ exports[`u-time-picker.vue > Demo-范围选择分钟 1`] = `
 exports[`u-time-picker.vue > Demo-范围选择变量绑定 1`] = `
 <span class="root">
   <div class="root input" prefix="time">
-    <div class="root input" height="full" prefix="calendar" width="full">
+    <div class="root input" height="full" prefix="calendar" width>
       <span class="baseline">b</span>
       <span class="placeholder"></span>
       <span class="prefix" name="calendar">
@@ -4097,15 +4097,15 @@ exports[`u-time-picker.vue > Demo-范围选择变量绑定 1`] = `
           </div>
         </span>
       </span>
-      <input class="input" height="full" type="text" width="full">
+      <input class="input" height="full" type="text" width>
       <!---->
     </div>
     <span class="toIcon"></span>
-    <div class="root input" clearable="18:18:33" height="full" width="full">
+    <div class="root input" clearable="18:18:33" height="full" width>
       <span class="baseline">b</span>
       <span class="placeholder"></span>
       <!---->
-      <input class="input" height="full" type="text" width="full">
+      <input class="input" height="full" type="text" width>
       <span class="suffix">
         <!---->
         <!---->
@@ -4596,7 +4596,7 @@ exports[`u-time-picker.vue > Demo-表单验证 1`] = `
         <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
         <div class="wrap" vusion-slot-name="default">
           <span class="root">
-            <div class="root input" clearable="15:46:33" height="full" prefix="time" width="full">
+            <div class="root input" clearable="15:46:33" height="full" prefix="time" width>
               <span class="baseline">b</span>
               <span class="placeholder"></span>
               <span class="prefix" name="time">
@@ -4611,7 +4611,7 @@ exports[`u-time-picker.vue > Demo-表单验证 1`] = `
                   </div>
                 </span>
               </span>
-              <input class="input" height="full" type="text" width="full">
+              <input class="input" height="full" type="text" width>
               <span class="suffix">
                 <!---->
                 <!---->
@@ -4869,7 +4869,7 @@ exports[`u-time-picker.vue > Demo-表单验证 1`] = `
         <div class="wrap" vusion-slot-name="default">
           <span class="root">
             <div class="root input" color prefix="time">
-              <div class="root input" height="full" prefix="calendar" width="full">
+              <div class="root input" height="full" prefix="calendar" width>
                 <span class="baseline">b</span>
                 <span class="placeholder"></span>
                 <span class="prefix" name="calendar">
@@ -4884,15 +4884,15 @@ exports[`u-time-picker.vue > Demo-表单验证 1`] = `
                     </div>
                   </span>
                 </span>
-                <input class="input" height="full" type="text" width="full">
+                <input class="input" height="full" type="text" width>
                 <!---->
               </div>
               <span class="toIcon"></span>
-              <div class="root input" clearable="18:18:33" height="full" width="full">
+              <div class="root input" clearable="18:18:33" height="full" width>
                 <span class="baseline">b</span>
                 <span class="placeholder"></span>
                 <!---->
-                <input class="input" height="full" type="text" width="full">
+                <input class="input" height="full" type="text" width>
                 <span class="suffix">
                   <!---->
                   <!---->
@@ -5380,7 +5380,7 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
 <div>
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <span class="root">
-      <div class="root input" clearable="15:46:33" height="full" prefix="time" width="full">
+      <div class="root input" clearable="15:46:33" height="full" prefix="time" width>
         <span class="baseline">b</span>
         <span class="placeholder"></span>
         <span class="prefix" name="time">
@@ -5395,7 +5395,7 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
             </div>
           </span>
         </span>
-        <input class="input" height="full" type="text" width="full">
+        <input class="input" height="full" type="text" width>
         <span class="suffix">
           <!---->
           <!---->
@@ -5624,7 +5624,7 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
       </transition-stub>
     </span>
     <span class="root">
-      <div class="root input" clearable="15:46:33" height="full" prefix="time" width="full">
+      <div class="root input" clearable="15:46:33" height="full" prefix="time" width>
         <span class="baseline">b</span>
         <span class="placeholder"></span>
         <span class="prefix" name="time">
@@ -5639,7 +5639,7 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
             </div>
           </span>
         </span>
-        <input class="input" height="full" type="text" width="full">
+        <input class="input" height="full" type="text" width>
         <span class="suffix">
           <!---->
           <!---->
@@ -5876,7 +5876,7 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
       </transition-stub>
     </span>
     <span class="root">
-      <div class="root input" clearable="15:46:33" height="full" prefix="time" width="full">
+      <div class="root input" clearable="15:46:33" height="full" prefix="time" width>
         <span class="baseline">b</span>
         <span class="placeholder"></span>
         <span class="prefix" name="time">
@@ -5891,7 +5891,7 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
             </div>
           </span>
         </span>
-        <input class="input" height="full" type="text" width="full">
+        <input class="input" height="full" type="text" width>
         <span class="suffix">
           <!---->
           <!---->

@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`u-switch.vue > Demo-Value 绑定 1`] = `
-<label checked="checked" class="root" disabled="disabled" tabindex="0" width="wide">
+<label checked="checked" class="root" disabled="disabled" tabindex="0" width>
   <span class="button"></span>
   <span class="text" vusion-slot-name="default">ON</span>
 </label>

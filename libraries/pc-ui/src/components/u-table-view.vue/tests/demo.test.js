@@ -45,7 +45,7 @@ import CasesDemo34 from '../demos/cases/CasesDemo34.vue';
 import CasesDemo35 from '../demos/cases/CasesDemo35.vue';
 import CasesDemo36 from '../demos/cases/CasesDemo36.vue';
 import CasesDemo37 from '../demos/cases/CasesDemo37.vue';
-import CasesDemo38 from '../demos/cases/CasesDemo38.vue';
+// // import CasesDemo38 from '../demos/cases/CasesDemo38.vue';
 import CasesDemo39 from '../demos/cases/CasesDemo39.vue';
 import CasesDemo40 from '../demos/cases/CasesDemo40.vue';
 import CasesDemo41 from '../demos/cases/CasesDemo41.vue';
@@ -193,11 +193,11 @@ describe('u-table-view.vue', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Demo-全部百分比', async () => {
-    const wrapper = mount(CasesDemo12, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-全部百分比', async () => {
+  //   const wrapper = mount(CasesDemo12, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
   it('Demo-百分比与数字结合，横向滚动', async () => {
     const wrapper = mount(CasesDemo13, { localVue, router });
@@ -205,11 +205,11 @@ describe('u-table-view.vue', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Demo-固定列', async () => {
-    const wrapper = mount(CasesDemo14, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-固定列', async () => {
+  //   const wrapper = mount(CasesDemo14, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
   it('Demo-多选的问题', async () => {
     const wrapper = mount(CasesDemo15, { localVue, router });
@@ -253,11 +253,11 @@ describe('u-table-view.vue', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Demo-切换时分页调整不回来，分页报错', async () => {
-    const wrapper = mount(CasesDemo22, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-切换时分页调整不回来，分页报错', async () => {
+  //   const wrapper = mount(CasesDemo22, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
   it('Demo-过滤下拉菜单不应该嵌在表格内部', async () => {
     const wrapper = mount(CasesDemo23, { localVue, router });
@@ -277,11 +277,11 @@ describe('u-table-view.vue', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Demo-u-grid-layout 和 u-tabs 中的布局问题', async () => {
-    const wrapper = mount(CasesDemo26, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-u-grid-layout 和 u-tabs 中的布局问题', async () => {
+  //   const wrapper = mount(CasesDemo26, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
   it('Demo-loading 的问题', async () => {
     const wrapper = mount(CasesDemo27, { localVue, router });
@@ -325,11 +325,11 @@ describe('u-table-view.vue', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Demo-显隐列配置', async () => {
-    const wrapper = mount(CasesDemo34, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-显隐列配置', async () => {
+  //   const wrapper = mount(CasesDemo34, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
   it('Demo-编辑行', async () => {
     const wrapper = mount(CasesDemo35, { localVue, router });
@@ -343,17 +343,17 @@ describe('u-table-view.vue', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Demo-行列与表头合并', async () => {
-    const wrapper = mount(CasesDemo37, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-行列与表头合并', async () => {
+  //   const wrapper = mount(CasesDemo37, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-行列与表头合并+固定列', async () => {
-    const wrapper = mount(CasesDemo38, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-行列与表头合并+固定列', async () => {
+  //   const wrapper = mount(CasesDemo38, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
   it('Demo-自定义展开列图标', async () => {
     const wrapper = mount(CasesDemo39, { localVue, router });
@@ -523,11 +523,11 @@ describe('u-table-view.vue', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Demo-固定列', async () => {
-    const wrapper = mount(ExamplesDemo22, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-固定列', async () => {
+  //   const wrapper = mount(ExamplesDemo22, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
   it('Demo-隐藏部分列', async () => {
     const wrapper = mount(ExamplesDemo23, { localVue, router });

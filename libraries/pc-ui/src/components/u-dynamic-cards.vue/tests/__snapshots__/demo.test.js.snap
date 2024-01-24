@@ -507,13 +507,13 @@ exports[`u-dynamic-cards.vue > Demo-表单验证 2`] = `
         <table class="root table">
           <thead>
             <tr>
-              <th width="20%">
+              <th width>
                 <span>URL</span>
               </th>
-              <th width="20%">
+              <th width>
                 <span>服务</span>
               </th>
-              <th width="20%">
+              <th width>
                 <span>端口</span>
               </th>
               <th>
