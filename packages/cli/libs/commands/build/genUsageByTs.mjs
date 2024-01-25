@@ -129,18 +129,27 @@ function genUsageByTs(config) {
   const libInfo = [packageInfo.name, '@', packageInfo.version].join('');
 
   components.map((obj) => ({ ...obj })).forEach((component) => {
-    const sourceDir = path.join(rootPath, componentsPath);
-    let componentDir = path.join(sourceDir, `${component.name}`);
+    const rootComponentDir = path.join(rootPath, componentsPath);
+    let componentDir = path.join(rootComponentDir, `${component.name}`);
+
+    // 兼容 mobile-ui 处理
+    const srcCompDir = path.join(rootPath, `./src/${component.name}`);
+    let sourceDir = componentsPath;
     component.symbol = component.name;
 
     if (!fs.existsSync(componentDir)) {
-      const name = `${componentDir}.vue`;
-      componentDir = name;
-      component.symbol = `${component.name}.vue`;
+      if (fs.existsSync(srcCompDir)) {
+        componentDir = srcCompDir;
+        sourceDir = 'src';
+      } else {
+        const name = `${componentDir}.vue`;
+        componentDir = name;
+        component.symbol = `${component.name}.vue`;
+      }
     }
 
     const tsPath = `${componentDir}/api.ts`;
-    if (!fs.existsSync(componentDir)) {
+    if (!fs.existsSync(tsPath)) {
       logger.error(`未找到组件 ${component.name} 的描述文件（api.ts）`);
       process.exit(1);
     }
@@ -159,14 +168,14 @@ function genUsageByTs(config) {
       componentDir,
       component,
       libInfo,
-      componentsPath,
+      sourceDir,
       assetsPublicPath,
     );
     const drawings = getDrawings(
       componentDir,
       component,
       libInfo,
-      componentsPath,
+      sourceDir,
       assetsPublicPath,
     );
 

@@ -4,16 +4,19 @@
     "jsx": "preserve",
     "target": "esnext",
     "module": "esnext",
+    "skipLibCheck": true,
     "strict": true,
     "strictPropertyInitialization": false,
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "noEmit": true,
+    "noImplicitAny": false,
     "noImplicitThis": true,
     "esModuleInterop": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
   },
   "include": [
     "types/**/*",
