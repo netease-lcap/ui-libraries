@@ -93,7 +93,6 @@ export default defineConfig({
   },
   build: {
     cssCodeSplit: false,
-    minify: false,
     cssTarget: ['> 1%', 'last 2 versions', 'ie >= 9'],
     target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
     lib: {

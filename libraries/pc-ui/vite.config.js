@@ -8,7 +8,15 @@ import { getHashDigest } from 'loader-utils';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue2(), vue2jsx()],
+  plugins: [
+    vue2(),
+    vue2jsx({
+      include: /.(jsx|tsx)$/,
+      babelPlugins: ['@babel/plugin-proposal-optional-chaining', '@babel/plugin-proposal-nullish-coalescing-operator'],
+      vModel: true,
+      vOn: true,
+    }),
+  ],
   resolve: {
     extensions: ['.js', '.ts', '.tsx', '.jsx', '.vue', '.mjs', '.cjs', '.json'],
     alias: {
@@ -61,8 +69,6 @@ export default defineConfig({
   },
   build: {
     cssCodeSplit: false,
-    minify: false,
-    cssTarget: ['> 1%', 'last 2 versions', 'ie >= 9'],
     target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
     lib: {
       entry: 'src/index',

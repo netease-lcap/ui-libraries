@@ -57,11 +57,15 @@ export default (config, platform) => {
   const {
     rootPath,
     componentsPath,
+    destPath,
     components,
   } = config;
 
   logger.done('Start deploy');
   deployTgz(rootPath, platform);
+
+  api.cli.execSync(`npx lcap deploy ${destPath} --platform ${platform}`);
+
   deployImages(components, rootPath, componentsPath, platform);
   logger.done('Deploy successed!');
 };

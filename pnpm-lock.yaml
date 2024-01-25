@@ -473,6 +473,12 @@ importers:
         specifier: ^16.2.0
         version: 16.2.0
     devDependencies:
+      '@babel/plugin-proposal-nullish-coalescing-operator':
+        specifier: ^7.18.6
+        version: 7.18.6(@babel/core@7.23.6)
+      '@babel/plugin-proposal-optional-chaining':
+        specifier: ^7.21.0
+        version: 7.21.0(@babel/core@7.23.6)
       '@lcap/ui-cli':
         specifier: workspace:^1.0.0
         version: link:../../packages/cli
