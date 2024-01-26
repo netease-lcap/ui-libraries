@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VueI18N from 'vue-i18n';
 import * as CloudUI from '@/index.js';
 import Component from '../index.js';
 import CasesDemo1 from '../demos/cases/CasesDemo1.vue';
@@ -7,6 +8,7 @@ import CasesDemo3 from '../demos/cases/CasesDemo3.vue';
 import CasesDemo4 from '../demos/cases/CasesDemo4.vue';
 import CasesDemo5 from '../demos/cases/CasesDemo5.vue';
 
+Vue.use(VueI18N);
 Vue.use(CloudUI);
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export

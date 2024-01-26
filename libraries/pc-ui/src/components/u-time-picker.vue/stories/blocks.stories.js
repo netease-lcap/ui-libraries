@@ -1,8 +1,10 @@
 import Vue from 'vue';
+import VueI18N from 'vue-i18n';
 import * as CloudUI from '@/index.js';
 import Component from '../index.js';
 import BlocksDemo1 from '../demos/blocks/BlocksDemo1.vue';
 
+Vue.use(VueI18N);
 Vue.use(CloudUI);
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export

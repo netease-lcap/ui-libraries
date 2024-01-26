@@ -53,6 +53,11 @@ export default {
             type: String,
         },
     },
+    data: () => {
+        return {
+            borderColor: '',
+        };
+    },
 };
 </script>
 <style module>
