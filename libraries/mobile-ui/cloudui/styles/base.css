@@ -1,0 +1,47 @@
+@import './typography.css';
+@import './animation.css';
+@import './iconfont/index.css';
+
+ul[class], ol[class] {
+    list-style: none;
+    padding-left: 0;
+}
+
+::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: var(--scrollbar-border-radius);
+    background-color: var(--scrollbar-background);
+    transition: background-color var(--transition-duration-base);
+    border: var(--scrollbar-border-width) solid var(--scrollbar-border-color);
+    background-clip: unset;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-background-hover);
+}
+
+[color="inverse"] div::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-background-inverse);
+}
+
+[color="inverse"] div::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-background-hover-inverse);
+}
+
+
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-corner {
+    display: none;
+}
+
+input::-ms-clear, input::-ms-reveal {
+    display: none;
+}

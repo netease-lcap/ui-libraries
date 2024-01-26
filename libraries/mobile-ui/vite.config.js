@@ -30,6 +30,10 @@ export default defineConfig({
         replacement: path.resolve(__dirname, './demo-entry/index.js'),
       },
       {
+        find: 'cloud-ui.vusion/src',
+        replacement: path.resolve(__dirname, './cloudui'),
+      },
+      {
         find: /^~/,
         replacement: '',
       },
@@ -93,7 +97,6 @@ export default defineConfig({
   },
   build: {
     cssCodeSplit: false,
-    cssTarget: ['> 1%', 'last 2 versions', 'ie >= 9'],
     target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
     lib: {
       entry: 'src-vusion/index',

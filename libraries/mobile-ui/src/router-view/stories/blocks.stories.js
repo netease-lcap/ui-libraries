@@ -1,7 +1,10 @@
 import Vue from 'vue';
+// import VueRouter from 'vue-router';
 import '__demo-entry__';
 import Component from '../index';
 import BlocksDemo1 from '../demos/blocks/BlocksDemo1.vue';
+
+// Vue.use(VueRouter);
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {

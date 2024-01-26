@@ -42,7 +42,17 @@ export default {
     color: #999;
 }
 .emptyTip::before {
-    icon-font: url("./assets/drag-in-copy.svg");
+    content: "\e666";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
     font-size: 12px;
     margin-right: 5px;
     position: relative;

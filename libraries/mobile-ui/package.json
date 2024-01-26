@@ -17,7 +17,7 @@
   },
   "scripts": {
     "dev": "npm run storybook",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 8008",
     "build": "vite build && tsc -p tsconfig.api.json && lcap-ui build && npm pack",
     "deploy:test": "lcap-ui deploy --platform http://defaulttenant.lcap.hatest.163yun.com",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -45,20 +45,23 @@
   "license": "LSC",
   "dependencies": {
     "@babel/runtime": "7.x",
+    "@popperjs/core": "^2.10.2",
     "@vant/icons": "^1.7.1",
     "@vant/popperjs": "^1.1.0",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vusion/utils": "0.4.11",
     "@vusion/validator": "^0.4.6",
+    "animate.css": "^4.1.1",
     "clipboard": "^2.0.11",
-    "cloud-ui.vusion": "^0.14.36-beta.1",
     "dayjs": "^1.11.9",
     "lodash": "^4.17.21",
     "online-svg-icon-vue2": "^1.2.3",
     "postcss": "7.0.0",
+    "resize-observer-polyfill": "^1.5.1",
     "vconsole": "^3.9.3",
     "vue-lazyload": "1.2.3",
     "vue-month-picker": "^1.6.0",
+    "normalize.css": "^7.0.0",
     "whatwg-fetch": "3.6.2"
   },
   "peerDependencies": {
