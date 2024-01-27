@@ -106,8 +106,8 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       reportsDirectory: './test/coverage',
-      include: ['src/**/*.?(c|m)[jt]s?(x)'],
-      exclude: ['**/stories/**'],
+      include: ['src/components/**/*.?(c|m)[jt]s?(x)', 'src/components/**/*.vue'],
+      exclude: ['src/**/stories/**', 'src/**/tests/*', 'src/**/demos/*', 'src/**/api.ts', 'src/components/*/index.js'],
     },
     setupFiles: ['./test/setup.js'],
     environmentOptions: {
