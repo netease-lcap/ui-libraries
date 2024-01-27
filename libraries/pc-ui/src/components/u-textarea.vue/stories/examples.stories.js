@@ -26,6 +26,7 @@ export default {
 };
 
 export const Demo0 = {
+  name: '基本用法',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo1,
@@ -35,6 +36,7 @@ export const Demo0 = {
 };
 
 export const Demo1 = {
+  name: '双向绑定',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo2,
@@ -44,6 +46,7 @@ export const Demo1 = {
 };
 
 export const Demo2 = {
+  name: '只读与禁用',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo3,
@@ -53,6 +56,7 @@ export const Demo2 = {
 };
 
 export const Demo3 = {
+  name: '调整大小',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo4,
@@ -62,6 +66,7 @@ export const Demo3 = {
 };
 
 export const Demo4 = {
+  name: '可清空',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo5,
@@ -71,6 +76,7 @@ export const Demo4 = {
 };
 
 export const Demo5 = {
+  name: '展示方式',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo6,
@@ -80,6 +86,7 @@ export const Demo5 = {
 };
 
 export const Demo6 = {
+  name: '设置大小',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo7,

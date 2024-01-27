@@ -33,6 +33,7 @@ export const Demo0 = {
     },
     template: '<deprecated-demo />',
   }),
+  name: '基本用法',
 };
 
 export const Demo1 = {
@@ -42,6 +43,7 @@ export const Demo1 = {
     },
     template: '<deprecated-demo />',
   }),
+  name: '双向绑定',
 };
 
 export const Demo2 = {
@@ -51,6 +53,7 @@ export const Demo2 = {
     },
     template: '<deprecated-demo />',
   }),
+  name: '只读与禁用',
 };
 
 export const Demo3 = {
@@ -60,6 +63,7 @@ export const Demo3 = {
     },
     template: '<deprecated-demo />',
   }),
+  name: '调整大小',
 };
 
 export const Demo4 = {
@@ -69,6 +73,7 @@ export const Demo4 = {
     },
     template: '<deprecated-demo />',
   }),
+  name: '可清空',
 };
 
 export const Demo5 = {
@@ -78,6 +83,7 @@ export const Demo5 = {
     },
     template: '<deprecated-demo />',
   }),
+  name: '展示方式',
 };
 
 export const Demo6 = {
@@ -87,6 +93,7 @@ export const Demo6 = {
     },
     template: '<deprecated-demo />',
   }),
+  name: '自定义样式',
 };
 
 export const Demo7 = {
@@ -96,4 +103,5 @@ export const Demo7 = {
     },
     template: '<deprecated-demo />',
   }),
+  name: '自动调整',
 };
