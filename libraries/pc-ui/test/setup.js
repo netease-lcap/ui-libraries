@@ -1,9 +1,12 @@
 import Vue from 'vue';
 import { vi, expect } from 'vitest';
+import VueI18N from 'vue-i18n';
 import vueSnapshotSerializer from 'jest-serializer-vue-tjw';
 import * as CloudUI from '../src/index.js';
+import './dom';
 
 expect.addSnapshotSerializer(vueSnapshotSerializer);
+Vue.use(VueI18N);
 Vue.use(CloudUI);
 
 const mutationObserverMock = vi.fn(function MutationObserver(callback) {
