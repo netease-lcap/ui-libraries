@@ -39,121 +39,121 @@ const router = new VueRouter();
 describe('u-input.vue', () => {
   it('Demo-', async () => {
     const wrapper = mount(BlocksDemo1, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-基本用法', async () => {
     const wrapper = mount(CasesDemo1, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-加密', async () => {
     const wrapper = mount(CasesDemo2, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-双向绑定', async () => {
     const wrapper = mount(CasesDemo3, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-只读和禁用', async () => {
     const wrapper = mount(CasesDemo4, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-可清空', async () => {
     const wrapper = mount(CasesDemo5, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-展示方式', async () => {
     const wrapper = mount(CasesDemo6, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-自定义样式', async () => {
     const wrapper = mount(CasesDemo7, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-自动扩展大小', async () => {
     const wrapper = mount(CasesDemo8, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-@deprecated 搜索图标', async () => {
     const wrapper = mount(CasesDemo9, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-和倒计时一起使用', async () => {
     const wrapper = mount(CasesDemo10, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-键盘事件', async () => {
     const wrapper = mount(CasesDemo11, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-基本用法', async () => {
     const wrapper = mount(ExamplesDemo1, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-加密', async () => {
     const wrapper = mount(ExamplesDemo2, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-双向绑定', async () => {
     const wrapper = mount(ExamplesDemo3, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-只读和禁用', async () => {
     const wrapper = mount(ExamplesDemo4, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-可清除', async () => {
     const wrapper = mount(ExamplesDemo5, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-展示方式', async () => {
     const wrapper = mount(ExamplesDemo6, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-大小扩展', async () => {
     const wrapper = mount(ExamplesDemo7, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Demo-添加图标', async () => {
     const wrapper = mount(ExamplesDemo8, { localVue, router });
-    await sleep(16);
+    await sleep(5);
     expect(wrapper.html()).toMatchSnapshot();
   });
 });

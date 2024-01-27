@@ -21,6 +21,7 @@ export default {
 };
 
 export const Demo0 = {
+  name: '基本用法',
   render: () => ({
     components: {
       DeprecatedDemo: BlocksDemo1,
@@ -30,6 +31,7 @@ export const Demo0 = {
 };
 
 export const Demo1 = {
+  name: '按钮样式',
   render: () => ({
     components: {
       DeprecatedDemo: BlocksDemo2,

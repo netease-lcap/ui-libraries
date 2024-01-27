@@ -112,14 +112,6 @@ export default {
             });
             return listeners;
         },
-        showPasswordBtn() {
-            return (
-                this.type === 'password'
-                && this.password
-                && !this.disabled
-                && !this.readonly
-            );
-        },
         valueEmpty() {
             const { currentValue } = this;
             if (this.compositionInputing) {

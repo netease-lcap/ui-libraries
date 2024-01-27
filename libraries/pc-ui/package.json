@@ -71,6 +71,7 @@
     "@storybook/test": "^7.6.7",
     "@storybook/vue": "^7.6.7",
     "@storybook/vue-vite": "^7.6.7",
+    "@testing-library/vue": "5",
     "@types/fs-extra": "^11.0.4",
     "@vant/area-data": "1.1.1",
     "@vitejs/plugin-react": "^4.2.1",

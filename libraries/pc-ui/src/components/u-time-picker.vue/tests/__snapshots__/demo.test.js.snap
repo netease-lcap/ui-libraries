@@ -26,7 +26,7 @@ exports[`u-time-picker.vue > Demo-只读和禁用 1`] = `
           <!---->
         </span>
       </div>
-      <transition-stub class="popper" name="fade" style="width: 0px;">
+      <transition-stub class="popper" name="fade" style="width: 100px;">
         <div class="root" style="display: none;">
           <div class="panel" type="second">
             <div class="spinner">
@@ -283,7 +283,7 @@ exports[`u-time-picker.vue > Demo-只读和禁用 1`] = `
           <!---->
         </span>
       </div>
-      <transition-stub class="popper" name="fade" style="width: 0px;">
+      <transition-stub class="popper" name="fade" style="width: 100px;">
         <div class="root" style="display: none;">
           <div class="panel" type="second">
             <div class="spinner">
@@ -547,7 +547,7 @@ exports[`u-time-picker.vue > Demo-基本用法 1`] = `
       <span class="clearable"></span>
     </span>
   </div>
-  <transition-stub class="popper" name="fade" style="width: 0px;">
+  <transition-stub class="popper" name="fade" style="width: 100px;">
     <div class="root" style="display: none;">
       <div class="panel" type="second">
         <div class="spinner">
@@ -808,7 +808,7 @@ exports[`u-time-picker.vue > Demo-基本用法 2`] = `
         <span class="clearable"></span>
       </span>
     </div>
-    <transition-stub class="popper" name="fade" style="width: 0px;">
+    <transition-stub class="popper" name="fade" style="width: 100px;">
       <div class="root" style="display: none;">
         <div class="panel" type="second">
           <div class="spinner">
@@ -1069,7 +1069,7 @@ exports[`u-time-picker.vue > Demo-方法 1`] = `
       <span class="clearable"></span>
     </span>
   </div>
-  <transition-stub class="popper" name="fade" style="width: 0px;">
+  <transition-stub class="popper" name="fade" style="width: 100px;">
     <div class="root" style="display: none;">
       <div class="panel" type="second">
         <div class="spinner">
@@ -1329,7 +1329,7 @@ exports[`u-time-picker.vue > Demo-日期最小单位 1`] = `
       <span class="clearable"></span>
     </span>
   </div>
-  <transition-stub class="popper" name="fade" style="width: 0px;">
+  <transition-stub class="popper" name="fade" style="width: 100px;">
     <div class="root" style="display: none;">
       <div class="panel" type="minute">
         <div class="spinner">
@@ -1513,7 +1513,7 @@ exports[`u-time-picker.vue > Demo-日期范围 1`] = `
         <span class="clearable"></span>
       </span>
     </div>
-    <transition-stub class="popper" name="fade" style="width: 0px;">
+    <transition-stub class="popper" name="fade" style="width: 100px;">
       <div class="root" style="display: none;">
         <div class="panel" type="second">
           <div class="spinner">
@@ -1775,7 +1775,7 @@ exports[`u-time-picker.vue > Demo-日期范围 2`] = `
         <span class="clearable"></span>
       </span>
     </div>
-    <transition-stub class="popper" name="fade" style="width: 0px;">
+    <transition-stub class="popper" name="fade" style="width: 100px;">
       <div class="root" style="display: none;">
         <div class="panel" type="second">
           <div class="spinner">
@@ -2036,7 +2036,7 @@ exports[`u-time-picker.vue > Demo-时间单位容错 1`] = `
       <span class="clearable"></span>
     </span>
   </div>
-  <transition-stub class="popper" name="fade" style="width: 0px;">
+  <transition-stub class="popper" name="fade" style="width: 100px;">
     <div class="root" style="display: none;">
       <div class="panel" type="minute">
         <div class="spinner">
@@ -2220,7 +2220,7 @@ exports[`u-time-picker.vue > Demo-格式化 1`] = `
         <!---->
       </span>
     </div>
-    <transition-stub class="popper" name="fade" style="width: 0px;">
+    <transition-stub class="popper" name="fade" style="width: 100px;">
       <div class="root" style="display: none;">
         <div class="panel" type="second">
           <div class="spinner">
@@ -2487,7 +2487,7 @@ exports[`u-time-picker.vue > Demo-格式化 1`] = `
         </span>
       </div>
     </div>
-    <transition-stub class="popper" name="fade" style="width: 0px;">
+    <transition-stub class="popper" name="fade" style="width: 100px;">
       <div class="root" style="display: none;">
         <div class="panel" type="second">
           <div class="spinner">
@@ -2720,7 +2720,7 @@ exports[`u-time-picker.vue > Demo-格式化 1`] = `
         </div>
       </div>
     </transition-stub>
-    <transition-stub class="popper" name="fade" style="width: 0px;">
+    <transition-stub class="popper" name="fade" style="width: 100px;">
       <div class="root" style="display: none;">
         <div class="panel" type="second">
           <div class="spinner">
@@ -2983,7 +2983,7 @@ exports[`u-time-picker.vue > Demo-自定义底部文案 1`] = `
           <!---->
         </span>
       </div>
-      <transition-stub class="popper" name="fade" style="width: 0px;">
+      <transition-stub class="popper" name="fade" style="width: 100px;">
         <div class="root" style="display: none;">
           <div class="panel" type="second">
             <div class="spinner">
@@ -3258,7 +3258,7 @@ exports[`u-time-picker.vue > Demo-范围选择 1`] = `
         </span>
       </div>
     </div>
-    <transition-stub class="popper" name="fade" style="width: 0px;">
+    <transition-stub class="popper" name="fade" style="width: 100px;">
       <div class="root" style="display: none;">
         <div class="panel" type="second">
           <div class="spinner">
@@ -3491,7 +3491,7 @@ exports[`u-time-picker.vue > Demo-范围选择 1`] = `
         </div>
       </div>
     </transition-stub>
-    <transition-stub class="popper" name="fade" style="width: 0px;">
+    <transition-stub class="popper" name="fade" style="width: 100px;">
       <div class="root" style="display: none;">
         <div class="panel" type="second">
           <div class="spinner">
@@ -3763,7 +3763,7 @@ exports[`u-time-picker.vue > Demo-范围选择分钟 1`] = `
         </span>
       </div>
     </div>
-    <transition-stub class="popper" name="fade" style="width: 0px;">
+    <transition-stub class="popper" name="fade" style="width: 100px;">
       <div class="root" style="display: none;">
         <div class="panel" type="minute">
           <div class="spinner">
@@ -3919,7 +3919,7 @@ exports[`u-time-picker.vue > Demo-范围选择分钟 1`] = `
         </div>
       </div>
     </transition-stub>
-    <transition-stub class="popper" name="fade" style="width: 0px;">
+    <transition-stub class="popper" name="fade" style="width: 100px;">
       <div class="root" style="display: none;">
         <div class="panel" type="minute">
           <div class="spinner">
@@ -4113,7 +4113,7 @@ exports[`u-time-picker.vue > Demo-范围选择变量绑定 1`] = `
       </span>
     </div>
   </div>
-  <transition-stub class="popper" name="fade" style="width: 0px;">
+  <transition-stub class="popper" name="fade" style="width: 100px;">
     <div class="root" style="display: none;">
       <div class="panel" type="second">
         <div class="spinner">
@@ -4346,7 +4346,7 @@ exports[`u-time-picker.vue > Demo-范围选择变量绑定 1`] = `
       </div>
     </div>
   </transition-stub>
-  <transition-stub class="popper" name="fade" style="width: 0px;">
+  <transition-stub class="popper" name="fade" style="width: 100px;">
     <div class="root" style="display: none;">
       <div class="panel" type="second">
         <div class="spinner">
@@ -4618,7 +4618,7 @@ exports[`u-time-picker.vue > Demo-表单验证 1`] = `
                 <span class="clearable"></span>
               </span>
             </div>
-            <transition-stub class="popper" name="fade" style="width: 0px;">
+            <transition-stub class="popper" name="fade" style="width: 100px;">
               <div class="root" style="display: none;">
                 <div class="panel" type="second">
                   <div class="spinner">
@@ -4900,7 +4900,7 @@ exports[`u-time-picker.vue > Demo-表单验证 1`] = `
                 </span>
               </div>
             </div>
-            <transition-stub class="popper" name="fade" style="width: 0px;">
+            <transition-stub class="popper" name="fade" style="width: 100px;">
               <div class="root" style="display: none;">
                 <div class="panel" type="second">
                   <div class="spinner">
@@ -5133,7 +5133,7 @@ exports[`u-time-picker.vue > Demo-表单验证 1`] = `
                 </div>
               </div>
             </transition-stub>
-            <transition-stub class="popper" name="fade" style="width: 0px;">
+            <transition-stub class="popper" name="fade" style="width: 100px;">
               <div class="root" style="display: none;">
                 <div class="panel" type="second">
                   <div class="spinner">
@@ -5402,7 +5402,7 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
           <span class="clearable"></span>
         </span>
       </div>
-      <transition-stub class="popper" name="fade" style="width: 0px;">
+      <transition-stub class="popper" name="fade" style="width: 100px;">
         <div class="root" style="display: none;">
           <div class="panel" type="second">
             <div class="spinner">
@@ -5646,7 +5646,7 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
           <span class="clearable"></span>
         </span>
       </div>
-      <transition-stub class="popper" name="fade" style="width: 0px;">
+      <transition-stub class="popper" name="fade" style="width: 100px;">
         <div class="root" style="display: none;">
           <div class="panel" type="second">
             <div class="spinner">
@@ -5898,7 +5898,7 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
           <span class="clearable"></span>
         </span>
       </div>
-      <transition-stub class="popper" name="fade" style="width: 0px;">
+      <transition-stub class="popper" name="fade" style="width: 100px;">
         <div class="root" style="display: none;">
           <div class="panel" type="second">
             <div class="spinner">

@@ -137,8 +137,21 @@ export default defineConfig({
       },
       reporter: ['text', 'json', 'html'],
       reportsDirectory: './test/coverage',
-      include: ['src/**/*.?(c|m)[jt]s?(x)'],
-      exclude: ['**/stories/**', '**/api.ts'],
+      include: [
+        'src/**/*.?(c|m)[jt]s?(x)',
+        'src/**/*.vue',
+        'src-vusion/**/*.?(c|m)[jt]s?(x)',
+        'src-vusion/**/*.vue',
+      ],
+      exclude: [
+        '**/stories/**',
+        '**/tests/*',
+        '**/demos/*',
+        '**/api.ts',
+        'cloudui/**/*',
+        'src-vusion/components/*/index.js',
+        'src-vusion/index.js',
+      ],
     },
     setupFiles: ['./test/setup.js'],
     environmentOptions: {
