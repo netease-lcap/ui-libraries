@@ -115,7 +115,9 @@ export function useHandleSorter(props) {
     ]);
     return fp.cond([[isSorter, handleSorter], [fp.stubTrue, fp.identity]])(item);
   }), [columnsProps]);
-  return {
-    columns,
-  };
+  const result = fp.cond([
+    [fp.isNil, fp.stubObject],
+    [fp.stubTrue, fp.constant({ columns })],
+  ])(columnsProps);
+  return result;
 }

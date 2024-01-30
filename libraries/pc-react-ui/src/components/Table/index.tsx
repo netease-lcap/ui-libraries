@@ -1,4 +1,5 @@
 import { ProTable as AntdTable } from '@ant-design/pro-components';
+import { Table as selfTable } from 'antd';
 import type { ProTableProps } from '@ant-design/pro-components';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
@@ -22,4 +23,5 @@ const Table = registerComponet<
 
 export default Table;
 
+export const { Column } = selfTable;
 // export const DescriptionsItem = AntdTable.Item;
