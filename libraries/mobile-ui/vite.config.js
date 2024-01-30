@@ -7,6 +7,9 @@ import autoprefixer from 'autoprefixer';
 import { getHashDigest } from 'loader-utils';
 import px2vw from './postcss-plugins/px2vw';
 
+// 设置测试运行的时区
+process.env.TZ = 'Asia/Shanghai';
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -28,6 +31,10 @@ export default defineConfig({
       {
         find: '__demo-entry__',
         replacement: path.resolve(__dirname, './demo-entry/index.js'),
+      },
+      {
+        find: 'cloud-ui.vusion/src',
+        replacement: path.resolve(__dirname, './cloudui'),
       },
       {
         find: /^~/,
@@ -93,8 +100,6 @@ export default defineConfig({
   },
   build: {
     cssCodeSplit: false,
-    minify: false,
-    cssTarget: ['> 1%', 'last 2 versions', 'ie >= 9'],
     target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
     lib: {
       entry: 'src-vusion/index',
@@ -135,8 +140,21 @@ export default defineConfig({
       },
       reporter: ['text', 'json', 'html'],
       reportsDirectory: './test/coverage',
-      include: ['src/**/*.?(c|m)[jt]s?(x)'],
-      exclude: ['**/stories/**', '**/api.ts'],
+      include: [
+        'src/**/*.?(c|m)[jt]s?(x)',
+        'src/**/*.vue',
+        'src-vusion/**/*.?(c|m)[jt]s?(x)',
+        'src-vusion/**/*.vue',
+      ],
+      exclude: [
+        '**/stories/**',
+        '**/tests/*',
+        '**/demos/*',
+        '**/api.ts',
+        'cloudui/**/*',
+        'src-vusion/components/*/index.js',
+        'src-vusion/index.js',
+      ],
     },
     setupFiles: ['./test/setup.js'],
     environmentOptions: {

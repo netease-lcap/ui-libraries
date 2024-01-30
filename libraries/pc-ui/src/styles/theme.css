@@ -1248,7 +1248,7 @@
     --checkbox-font-color-disabled: #999; /* @hidden */
     --checkbox-font-color: #333; /* @hidden */
     --checkbox-box-shadow-active: var(--button-box-shadow-active); /* @hidden */
-    --checkbox-icon: '\ff01'; /* @hidden */
+    --checkbox-icon: '\e649'; /* @hidden */
     --checkbox-icon-size: var(--font-size-small); /* @hidden */
     --checkbox-icon-left: 0; /* @hidden */
     --checkbox-icon-top: 0; /* @hidden */

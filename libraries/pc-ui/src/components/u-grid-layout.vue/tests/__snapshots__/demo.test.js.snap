@@ -20,10 +20,10 @@ exports[`u-grid-layout.vue > Demo- 1`] = `
       <div class="head" style="top: 0px;">
         <table class="root head-table" sticky-fixed="true">
           <colgroup>
-            <col width="0">
-            <col width="0">
+            <col width>
+            <col width>
             <col>
-            <col width="0">
+            <col width>
           </colgroup>
           <thead>
             <tr>
@@ -74,10 +74,10 @@ exports[`u-grid-layout.vue > Demo- 1`] = `
             <div class="view">
               <table class="root body-table" sticky-fixed="true">
                 <colgroup>
-                  <col width="0">
-                  <col width="0">
+                  <col width>
+                  <col width>
                   <col>
-                  <col width="0">
+                  <col width>
                 </colgroup>
                 <tbody>
                   <!---->

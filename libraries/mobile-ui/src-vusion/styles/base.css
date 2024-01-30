@@ -1,4 +1,5 @@
 
+@import '../../cloudui/styles/iconfont/index.css';
 ul[class],
 ol[class] {
   list-style: none;

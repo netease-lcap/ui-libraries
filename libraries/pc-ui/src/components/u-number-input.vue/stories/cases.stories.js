@@ -23,6 +23,7 @@ export default {
 };
 
 export const Demo0 = {
+  name: '基本用法',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo1,
@@ -32,6 +33,7 @@ export const Demo0 = {
 };
 
 export const Demo1 = {
+  name: '键盘事件',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo2,
@@ -41,6 +43,7 @@ export const Demo1 = {
 };
 
 export const Demo2 = {
+  name: '单位展示',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo3,
@@ -50,6 +53,7 @@ export const Demo2 = {
 };
 
 export const Demo3 = {
+  name: '高级格式化',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo4,

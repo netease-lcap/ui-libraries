@@ -1,6 +1,7 @@
 module.exports = {
-  themePath: './src/styles/theme.css',
+  themePath: './src-vusion/styles/theme.css',
   themeConfigPath: 'lcap-ui.theme.json',
+  componentsPath: 'src-vusion/components',
   i18n: {
     'zh-CN': './src/locale/lang/zh-CN/data.json',
   },

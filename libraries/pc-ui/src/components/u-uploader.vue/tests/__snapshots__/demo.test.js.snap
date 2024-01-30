@@ -29,8 +29,8 @@ exports[`u-uploader.vue > Demo-一次性上传多文件 1`] = `
             <!---->
           </div>
         </span>
-        <!---->
       </div>
+      <!---->
     </div>
     <div class="item">
       <div>
@@ -48,8 +48,8 @@ exports[`u-uploader.vue > Demo-一次性上传多文件 1`] = `
             <!---->
           </div>
         </span>
-        <!---->
       </div>
+      <!---->
     </div>
     <span style="display: none;" vusion-slot-name="file-list"></span>
   </div>
@@ -341,8 +341,8 @@ exports[`u-uploader.vue > Demo-图片列表 1`] = `
             <!---->
           </div>
         </span>
-        <!---->
       </div>
+      <!---->
     </div>
     <div class="item">
       <div>
@@ -360,8 +360,8 @@ exports[`u-uploader.vue > Demo-图片列表 1`] = `
             <!---->
           </div>
         </span>
-        <!---->
       </div>
+      <!---->
     </div>
     <span style="display: none;" vusion-slot-name="file-list"></span>
   </div>
@@ -545,8 +545,8 @@ exports[`u-uploader.vue > Demo-多文件上传 1`] = `
             <!---->
           </div>
         </span>
-        <!---->
       </div>
+      <!---->
     </div>
     <div class="item">
       <div>
@@ -564,8 +564,8 @@ exports[`u-uploader.vue > Demo-多文件上传 1`] = `
             <!---->
           </div>
         </span>
-        <!---->
       </div>
+      <!---->
     </div>
     <span style="display: none;" vusion-slot-name="file-list"></span>
   </div>

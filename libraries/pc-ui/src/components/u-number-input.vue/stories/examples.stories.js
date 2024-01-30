@@ -28,6 +28,7 @@ export default {
 };
 
 export const Demo0 = {
+  name: '基本用法',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo1,
@@ -37,6 +38,7 @@ export const Demo0 = {
 };
 
 export const Demo1 = {
+  name: '按钮为两端分布',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo2,
@@ -46,6 +48,7 @@ export const Demo1 = {
 };
 
 export const Demo2 = {
+  name: '双向绑定',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo3,
@@ -55,6 +58,7 @@ export const Demo2 = {
 };
 
 export const Demo3 = {
+  name: '最大值和最小值',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo4,
@@ -64,6 +68,7 @@ export const Demo3 = {
 };
 
 export const Demo4 = {
+  name: '精度与间隔',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo5,
@@ -73,6 +78,7 @@ export const Demo4 = {
 };
 
 export const Demo5 = {
+  name: '精度与间隔',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo6,
@@ -82,6 +88,7 @@ export const Demo5 = {
 };
 
 export const Demo6 = {
+  name: '精度与间隔',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo7,
@@ -91,6 +98,7 @@ export const Demo6 = {
 };
 
 export const Demo7 = {
+  name: '格式化',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo8,
@@ -100,6 +108,7 @@ export const Demo7 = {
 };
 
 export const Demo8 = {
+  name: '只读和禁用',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo9,

@@ -9,7 +9,7 @@
         <slot name="title">{{ title }}</slot>
     </div>
     <slot name="config-columns"></slot>
-    <div :class="$style.table" v-for="(tableMeta, tableMetaIndex) in tableMetaList" :key="tableMeta.position" :position="tableMeta.position"
+    <div :class="$style.table" ref="tablewrap" v-for="(tableMeta, tableMetaIndex) in tableMetaList" :key="tableMeta.position" :position="tableMeta.position"
         :style="{ width: tableMeta.position !== 'static' && number2Pixel(tableMeta.width), height: number2Pixel(tableHeight)}"
         @scroll="onTableScroll" :shadow="(tableMeta.position === 'left' && !scrollXStart) || (tableMeta.position === 'right' && !scrollXEnd)">
         <div v-if="showHead" :class="$style.head" ref="head" :stickingHead="stickingHead" :style="{ width: stickingHead ? number2Pixel(tableMeta.width) : '', top: number2Pixel(stickingHeadTop) }">
@@ -171,7 +171,7 @@
                                             </template>
                                             <!-- Normal text -->
                                             <f-slot name="cell" :vm="columnVM" :props="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex, columnIndex, index: rowIndex, columnItem: columnVM.columnItem }">
-                                                <span v-if="columnVM.field" vusion-slot-name="cell" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field) || item) }}</span>
+                                                <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)" vusion-slot-name="cell" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field) || item) }}</span>
                                             </f-slot>
                                             <!-- type === 'dragHandler' -->
                                             <span v-if="columnVM.type === 'dragHandler'">
@@ -274,12 +274,12 @@
                                                     <div>
                                                         <template v-if="item.editing === columnVM.field">
                                                             <f-slot name="editcell" :vm="columnVM" :props="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex }">
-                                                                <span v-if="columnVM.field" vusion-slot-name="editcell" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
+                                                                <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
                                                             </f-slot>
                                                         </template>
                                                         <template v-else>
                                                             <f-slot name="cell" :vm="columnVM" :props="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex, columnItem: columnVM.columnItem }">
-                                                                <span v-if="columnVM.field" vusion-slot-name="cell" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
+                                                                <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
                                                             </f-slot>
                                                         </template>
                                                     </div>
@@ -287,7 +287,7 @@
                                             </template>
                                             <template v-else>
                                                 <f-slot name="cell" :vm="columnVM" :props="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex, columnItem: columnVM.columnItem }">
-                                                    <span v-if="columnVM.field" vusion-slot-name="cell" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
+                                                    <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
                                                 </f-slot>
                                             </template>
 
@@ -448,7 +448,7 @@ import throttle from 'lodash/throttle';
 import FVirtualTable from './f-virtual-table.vue';
 import i18nMixin from '../../mixins/i18n';
 import flatMap from 'lodash/flatMap';
-import { createTableHeaderExportHelper } from './createTableHeadExporter';
+import { createTableHeaderExportHelper, getXslxStyle } from './helper';
 import * as xlsxUtils from '../../utils/xlsx';
 
 export default {
@@ -1085,7 +1085,12 @@ export default {
             this.timer = setTimeout(() => {
                 this.timer = undefined;
 
+                // 当最外层加了border后，会导致内部的宽度大于tablewrap的宽度，会出滚动条：Bug-2792431057259520
                 let rootWidth = this.$el.offsetWidth;
+                const tablewrapWidth = this.$refs.tablewrap[0] && this.$refs.tablewrap[0].offsetWidth;
+                if (tablewrapWidth) {
+                    rootWidth = tablewrapWidth;
+                }
                 if (!rootWidth) {
                     // 初始表格隐藏时，上面的值为0，需要特殊处理
                     let parentEl = this.$el && this.$el.parentElement;
@@ -1446,7 +1451,7 @@ export default {
                 .filter((item) => !!item)
                 .join(',');
         },
-        async exportExcel(page = 1, size = 2000, filename, sort, order, excludeColumns = []) {
+        async exportExcel(page = 1, size = 2000, filename, sort, order, excludeColumns = [], includeStyles = false) {
             if (this.currentDataSource.sorting && this.currentDataSource.sorting.field) {
                 const { sorting } = this.currentDataSource;
                 sort = sort || sorting.field;
@@ -1483,7 +1488,7 @@ export default {
                 let content = [];
                 let mergesMap = [];
                 if (!this.currentDataSource._load) {
-                    const result = await this.getRenderResult(this.currentDataSource.data, excludeColumns, hasHeader);
+                    const result = await this.getRenderResult(this.currentDataSource.data, excludeColumns, hasHeader, includeStyles);
                     content = result[0];
                     mergesMap = result[1];
                 } else {
@@ -1504,15 +1509,26 @@ export default {
                         return;
                     }
 
-                    const result = await this.getRenderResult(res, excludeColumns, hasHeader);
+                    const result = await this.getRenderResult(res, excludeColumns, hasHeader, includeStyles);
                     content = result[0];
                     mergesMap = result[1];
                 }
 
                 // console.time('生成文件');
                 const sheetTitle = this.title || undefined;
-                const { exportExcel } = xlsxUtils;
-                exportExcel(content, 'Sheet1', filename, sheetTitle, (content[0] || []).length, hasHeader, mergesMap);
+                const sheetTitleData = {
+                    title: sheetTitle,
+                };
+                if (sheetTitle && includeStyles) {
+                    const titleNode = this.$el.querySelector('[class^="u-table-view_title__"]');
+                    if (titleNode) {
+                        const style = getXslxStyle(titleNode);
+                        sheetTitleData.s = style.s;
+                        sheetTitleData.rect = style.rect;
+                    }
+                }
+
+                xlsxUtils.exportExcel(content, 'Sheet1', filename, sheetTitleData, (content[0] || []).length, hasHeader, mergesMap, includeStyles);
                 // console.timeEnd('生成文件');
             } catch (err) {
                 console.error(err);
@@ -1524,7 +1540,7 @@ export default {
             document.removeEventListener('click', fn, true);
             document.removeEventListener('keydown', fn, true);
         },
-        async getRenderResult(arr = [], excludeColumns = [], hasHeader = true) {
+        async getRenderResult(arr = [], excludeColumns = [], hasHeader = true, includeStyles = false) {
             let mergesMap = [];
             if (arr.length === 0) {
                 if (!hasHeader)
@@ -1553,7 +1569,17 @@ export default {
                             title = node.innerText;
                         }
                     }
-                    const cols = helper.setCell(title, colIndex + 1 === currentArr.length, rowspan, colspan);
+                    const data = {
+                        v: title,
+                    };
+                    if (includeStyles) {
+                        const style = getXslxStyle(node);
+                        Object.assign(data, {
+                            s: style.s,
+                            rect: style.rect,
+                        });
+                    }
+                    const cols = helper.setCell(data, colIndex + 1 === currentArr.length, rowspan, colspan);
                     const realColIndex = cols[0];
                     if (rowspan !== 1 || colspan !== 1) {
                         mergesMap.push({
@@ -1564,7 +1590,7 @@ export default {
                         });
                     }
                     titleColIndexRelations.push([title, cols]);
-                    return title;
+                    return data;
                 } else {
                     return null;
                 }
@@ -1614,7 +1640,17 @@ export default {
                                     colspan,
                                 });
                             }
-                            return title;
+                            const data = {
+                                v: title,
+                            };
+                            if (includeStyles) {
+                                const style = getXslxStyle(node);
+                                Object.assign(data, {
+                                    s: style.s,
+                                    rect: style.rect,
+                                });
+                            }
+                            return data;
                         } else {
                             return null;
                         }
@@ -1627,15 +1663,43 @@ export default {
                 const item = res[rowIndex];
                 for (let j = 0; j < item.length; j++) {
                     if (startIndexes[j] !== undefined)
-                        item[j] = startIndexes[j] + (hasHeader ? rowIndex - headerRowCount : rowIndex);
+                        item[j] = {
+                            v: startIndexes[j] + (hasHeader ? rowIndex - headerRowCount : rowIndex),
+                            s: item[j].s,
+                        };
                 }
             }
-
             const newResult = this.removeExcludeColumns(res, excludeColumns, mergesMap, titleColIndexRelations);
             res = newResult[0];
             mergesMap = newResult[1];
-
-            // console.timeEnd('渲染数据');
+            // 解决边框不展示问题，被合并的单元格需要补充样式
+            mergesMap.forEach((item) => {
+                const colspan = item.colspan;
+                const rowspan = item.rowspan;
+                const colItem = res[item.row][item.col];
+                if (colItem.rect) {
+                    colItem.rect.width = +colItem.rect.width / colspan;
+                    colItem.rect.height = +colItem.rect.height / rowspan;
+                }
+                for (let i = item.col + 1; i < item.col + colspan; i++) {
+                    if (!res[item.row][i]) {
+                        res[item.row][i] = {
+                            t: 's',
+                            v: '', // 必须设置，单设置s没有效果
+                            s: colItem.s,
+                        };
+                    }
+                }
+                for (let i = item.row + 1; i < item.row + rowspan; i++) {
+                    if (!res[i][item.col]) {
+                        res[i][item.col] = {
+                            t: 's',
+                            v: '',
+                            s: colItem.s,
+                        };
+                    }
+                }
+            });
 
             // console.time('复原表格');
             this.exportData = undefined;
@@ -3161,6 +3225,7 @@ export default {
     },
 };
 </script>
+
 
 <style module>
 .root {

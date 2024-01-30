@@ -31,9 +31,15 @@ function deployTgz(rootPath, platform) {
 function deployImages(components, rootPath, componentsPath, platform) {
   components.forEach((component) => {
     const dir = path.join(rootPath, componentsPath, component.name);
+    const srcDir = path.join(rootPath, 'src', component.name);
     let { name } = component;
     if (!fs.existsSync(dir)) {
-      name = `${name}.vue`;
+      // 兼容 mobile-ui
+      if (fs.existsSync(srcDir)) {
+        componentsPath = 'src';
+      } else {
+        name = `${name}.vue`;
+      }
     }
 
     const command = `npx lcap deploy ${componentsPath}/${name}/screenshots --platform ${platform}`;
@@ -51,11 +57,15 @@ export default (config, platform) => {
   const {
     rootPath,
     componentsPath,
+    destPath,
     components,
   } = config;
 
   logger.done('Start deploy');
   deployTgz(rootPath, platform);
+
+  api.cli.execSync(`npx lcap deploy ${destPath} --platform ${platform}`);
+
   deployImages(components, rootPath, componentsPath, platform);
   logger.done('Deploy successed!');
 };

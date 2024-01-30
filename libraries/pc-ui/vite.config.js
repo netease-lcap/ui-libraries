@@ -6,9 +6,20 @@ import vue2jsx from '@vitejs/plugin-vue2-jsx';
 import autoprefixer from 'autoprefixer';
 import { getHashDigest } from 'loader-utils';
 
+// 设置测试运行的时区
+process.env.TZ = 'Asia/Shanghai';
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue2(), vue2jsx()],
+  plugins: [
+    vue2(),
+    vue2jsx({
+      include: /.(jsx|tsx)$/,
+      babelPlugins: ['@babel/plugin-proposal-optional-chaining', '@babel/plugin-proposal-nullish-coalescing-operator'],
+      vModel: true,
+      vOn: true,
+    }),
+  ],
   resolve: {
     extensions: ['.js', '.ts', '.tsx', '.jsx', '.vue', '.mjs', '.cjs', '.json'],
     alias: {
@@ -61,8 +72,6 @@ export default defineConfig({
   },
   build: {
     cssCodeSplit: false,
-    minify: false,
-    cssTarget: ['> 1%', 'last 2 versions', 'ie >= 9'],
     target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
     lib: {
       entry: 'src/index',
@@ -100,8 +109,8 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       reportsDirectory: './test/coverage',
-      include: ['src/**/*.?(c|m)[jt]s?(x)'],
-      exclude: ['**/stories/**'],
+      include: ['src/components/**/*.?(c|m)[jt]s?(x)', 'src/components/**/*.vue'],
+      exclude: ['src/**/stories/**', 'src/**/tests/*', 'src/**/demos/*', 'src/**/api.ts', 'src/components/*/index.js'],
     },
     setupFiles: ['./test/setup.js'],
     environmentOptions: {
