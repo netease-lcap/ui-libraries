@@ -7,6 +7,9 @@ import autoprefixer from 'autoprefixer';
 import { getHashDigest } from 'loader-utils';
 import px2vw from './postcss-plugins/px2vw';
 
+// 设置测试运行的时区
+process.env.TZ = 'Asia/Shanghai';
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
