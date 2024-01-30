@@ -34,6 +34,7 @@ export default {
 };
 
 export const Demo0 = {
+  name: '基本用法',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo1,
@@ -43,6 +44,7 @@ export const Demo0 = {
 };
 
 export const Demo1 = {
+  name: '自动对焦',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo2,
@@ -52,6 +54,7 @@ export const Demo1 = {
 };
 
 export const Demo2 = {
+  name: '弹窗对其方式',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo3,
@@ -61,6 +64,7 @@ export const Demo2 = {
 };
 
 export const Demo3 = {
+  name: '最大值和最小值',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo4,
@@ -70,6 +74,7 @@ export const Demo3 = {
 };
 
 export const Demo4 = {
+  name: '只读和禁用',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo5,
@@ -79,6 +84,7 @@ export const Demo4 = {
 };
 
 export const Demo5 = {
+  name: '方法',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo6,
@@ -88,6 +94,7 @@ export const Demo5 = {
 };
 
 export const Demo6 = {
+  name: '周选择',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo7,
@@ -97,6 +104,7 @@ export const Demo6 = {
 };
 
 export const Demo7 = {
+  name: '月份选择',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo8,
@@ -106,6 +114,7 @@ export const Demo7 = {
 };
 
 export const Demo8 = {
+  name: '季度选择',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo9,
@@ -115,6 +124,7 @@ export const Demo8 = {
 };
 
 export const Demo9 = {
+  name: '年份选择',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo10,
@@ -124,6 +134,7 @@ export const Demo9 = {
 };
 
 export const Demo10 = {
+  name: '日期范围选择',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo11,
@@ -133,6 +144,7 @@ export const Demo10 = {
 };
 
 export const Demo11 = {
+  name: '周范围选择',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo12,
@@ -142,6 +154,7 @@ export const Demo11 = {
 };
 
 export const Demo12 = {
+  name: '月份范围选择',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo13,
@@ -151,6 +164,7 @@ export const Demo12 = {
 };
 
 export const Demo13 = {
+  name: '季度范围选择',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo14,
@@ -160,6 +174,7 @@ export const Demo13 = {
 };
 
 export const Demo14 = {
+  name: '年度范围选择',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo15,

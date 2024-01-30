@@ -24,6 +24,7 @@ export default {
 };
 
 export const Demo0 = {
+  name: '日期范围复杂情况',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo1,
@@ -33,6 +34,7 @@ export const Demo0 = {
 };
 
 export const Demo1 = {
+  name: '日期范围禁用',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo2,
@@ -42,6 +44,7 @@ export const Demo1 = {
 };
 
 export const Demo2 = {
+  name: '日期范围只读',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo3,
@@ -51,6 +54,7 @@ export const Demo2 = {
 };
 
 export const Demo3 = {
+  name: '表单验证',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo4,
@@ -60,6 +64,7 @@ export const Demo3 = {
 };
 
 export const Demo4 = {
+  name: '格式化',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo5,

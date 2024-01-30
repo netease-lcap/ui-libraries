@@ -3,6 +3,9 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
+// 设置测试运行的时区
+process.env.TZ = 'Asia/Shanghai';
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
