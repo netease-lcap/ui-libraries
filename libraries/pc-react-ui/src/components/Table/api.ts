@@ -7,13 +7,13 @@ namespace nasl.ui {
     description: '用于展示大量结构化数据。支持排序、过滤（筛选）、分页、自定义操作等复杂功能。',
     group: 'Table',
   })
-  export class UTableView<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
-    constructor(options?: Partial<UTableViewOptions<T, V, P, M>>) {
+  export class Table<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
+    constructor(options?: Partial<TableOptions<T, V, P, M>>) {
       super();
     }
   }
 
-  export class UTableViewOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
+  export class TableOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -69,7 +69,7 @@ namespace nasl.ui {
     })
     pagination: nasl.core.Boolean;
 
-    @Prop<UTableViewOptions<T, V, P, M>, 'pageSize'>({
+    @Prop<TableOptions<T, V, P, M>, 'pageSize'>({
       group: '数据属性',
       title: '默认每页条数',
       docDescription: '每页的数据条数。默认20条。在"分页"属性开启时有效',
@@ -80,7 +80,7 @@ namespace nasl.ui {
     })
     pageSize: nasl.core.Integer = 20;
 
-    @Prop<UTableViewOptions<T, V, P, M>, 'showSizeChanger'>({
+    @Prop<TableOptions<T, V, P, M>, 'showSizeChanger'>({
       group: '数据属性',
       title: '显示每页条数',
       description: '显示每页条数切换器',
@@ -92,7 +92,7 @@ namespace nasl.ui {
     })
     showSizeChanger: nasl.core.Boolean = true;
 
-    @Prop<UTableViewOptions<T, V, P, M>, 'pageSizeOptions'>({
+    @Prop<TableOptions<T, V, P, M>, 'pageSizeOptions'>({
       group: '数据属性',
       title: '每页条数选项',
       description: '每页条数切换器的选项',
@@ -101,7 +101,7 @@ namespace nasl.ui {
     })
     pageSizeOptions: Array<nasl.core.Integer> = [10, 20, 50];
 
-    @Prop<UTableViewOptions<T, V, P, M>, 'current'>({
+    @Prop<TableOptions<T, V, P, M>, 'current'>({
       group: '数据属性',
       title: '当前页数',
       description: '当前默认展示在第几页',
@@ -113,7 +113,7 @@ namespace nasl.ui {
     })
     current: nasl.core.Integer = 1;
 
-    @Prop<UTableViewOptions<T, V, P, M>, 'showTotal'>({
+    @Prop<TableOptions<T, V, P, M>, 'showTotal'>({
       group: '数据属性',
       title: '显示总条数',
       docDescription: '分页组件处是否显示表格总数。默认关闭。在"分页"属性开启时有效',
@@ -124,7 +124,7 @@ namespace nasl.ui {
     })
     showTotal: nasl.core.Boolean = false;
 
-    @Prop<UTableViewOptions<T, V, P, M>, 'showQuickJumper'>({
+    @Prop<TableOptions<T, V, P, M>, 'showQuickJumper'>({
       group: '数据属性',
       title: '显示跳转输入',
       description: '显示页面跳转输入框',
@@ -181,7 +181,7 @@ namespace nasl.ui {
     // })
     // private remoteFiltering: nasl.core.Boolean = false;
 
-    @Prop<UTableViewOptions<T, V, P, M>, 'rowKey'>({
+    @Prop<TableOptions<T, V, P, M>, 'rowKey'>({
       group: '数据属性',
       title: '值字段',
       description: '在单选、多选操作、渲染树形数据中，指定数据唯一值的字段',
@@ -297,7 +297,7 @@ namespace nasl.ui {
     })
     sticky: nasl.core.Boolean = false;
 
-    @Prop<UTableViewOptions<T, V, P, M>, 'stickyOffsetTop'>({
+    @Prop<TableOptions<T, V, P, M>, 'stickyOffsetTop'>({
       group: '主要属性',
       title: '表格头部吸顶偏移量',
       docDescription: '与"表格头部吸顶"选项配合使用，表示表格头吸顶时与顶部的距离',
@@ -502,7 +502,7 @@ namespace nasl.ui {
     // })
     // designerMode: 'success' | 'empty' | 'loading' | 'error' = 'success';
 
-    @Prop<UTableViewOptions<T, V, P, M>, 'loadingText'>({
+    @Prop<TableOptions<T, V, P, M>, 'loadingText'>({
       group: '状态属性',
       title: '加载中文案',
       description: '加载中状态显示的提示文案',
@@ -511,7 +511,7 @@ namespace nasl.ui {
     })
     loadingText: nasl.core.String = '正在加载中...';
 
-    @Prop<UTableViewOptions<T, V, P, M>, 'loading'>({
+    @Prop<TableOptions<T, V, P, M>, 'loading'>({
       group: '状态属性',
       title: '加载中触发条件',
       description: '加载中状态的触发条件，未设置则默认为系统定义条件',
@@ -546,7 +546,7 @@ namespace nasl.ui {
     // })
     // error: nasl.core.Boolean;
 
-    @Prop<UTableViewOptions<T, V, P, M>, 'emptyText'>({
+    @Prop<TableOptions<T, V, P, M>, 'emptyText'>({
       group: '状态属性',
       title: '暂无数据文案',
       description: '暂无数据状态显示的提示文案',
@@ -892,13 +892,13 @@ namespace nasl.ui {
     title: '表格列',
     description: '表格列',
   })
-  export class UTableViewColumn<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
-    constructor(options?: Partial<UTableViewColumnOptions<T, V, P, M>>) {
+  export class Column<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
+    constructor(options?: Partial<ColumnOptions<T, V, P, M>>) {
       super();
     }
   }
 
-  export class UTableViewColumnOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
+  export class ColumnOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
     @Prop({
       title: '格式器',
       description: '格式器',
@@ -930,7 +930,7 @@ namespace nasl.ui {
     })
     sorter: nasl.core.Boolean = false;
 
-    @Prop<UTableViewColumnOptions<T, V, P, M>, 'defaultSortOrder'>({
+    @Prop<ColumnOptions<T, V, P, M>, 'defaultSortOrder'>({
       group: '数据属性',
       title: '排序初始顺序',
       description: '该列首次点击时的排序顺序',
