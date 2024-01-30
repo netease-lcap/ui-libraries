@@ -892,13 +892,13 @@ namespace nasl.ui {
     title: '表格列',
     description: '表格列',
   })
-  export class Column<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
-    constructor(options?: Partial<ColumnOptions<T, V, P, M>>) {
+  export class TableColumn<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
+    constructor(options?: Partial<TableColumnOptions<T, V, P, M>>) {
       super();
     }
   }
 
-  export class ColumnOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
+  export class TableColumnOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
     @Prop({
       title: '格式器',
       description: '格式器',
@@ -930,7 +930,7 @@ namespace nasl.ui {
     })
     sorter: nasl.core.Boolean = false;
 
-    @Prop<ColumnOptions<T, V, P, M>, 'defaultSortOrder'>({
+    @Prop<TableColumnOptions<T, V, P, M>, 'defaultSortOrder'>({
       group: '数据属性',
       title: '排序初始顺序',
       description: '该列首次点击时的排序顺序',

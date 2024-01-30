@@ -1,5 +1,5 @@
 import React from 'react';
-import Table, { Column } from '../index';
+import Table, { TableColumn } from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -45,10 +45,10 @@ export const 默认 = {
           },
         ]}
       >
-        <Column key="money" title="金额" dataIndex="money" />
-        <Column key="createdAt" title="创建时间" dataIndex="createdAt" />
-        <Column key="updatedAt" title="更新时间" dataIndex="updatedAt" />
-        <Column key="name" title="名称" dataIndex="name" />
+        <TableColumn key="money" title="金额" dataIndex="money" />
+        <TableColumn key="createdAt" title="创建时间" dataIndex="createdAt" />
+        <TableColumn key="updatedAt" title="更新时间" dataIndex="updatedAt" />
+        <TableColumn key="name" title="名称" dataIndex="name" />
       </Table>
     );
   },

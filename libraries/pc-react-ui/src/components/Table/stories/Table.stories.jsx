@@ -2,7 +2,7 @@ import React from 'react';
 import { Table as AntdTable } from 'antd';
 import Table from '../index';
 
-const { Column, ColumnGroup } = AntdTable;
+const { Column } = AntdTable;
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {

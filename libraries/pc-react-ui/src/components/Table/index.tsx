@@ -23,5 +23,5 @@ const Table = registerComponet<
 
 export default Table;
 
-export const { Column } = selfTable;
+export const TableColumn = selfTable.Column;
 // export const DescriptionsItem = AntdTable.Item;
