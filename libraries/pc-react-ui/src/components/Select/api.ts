@@ -315,16 +315,20 @@ namespace nasl.ui {
     description: "选择分组",
   })
   export class SelectOptGroup<T, V> extends ViewComponent {
+
     constructor(options?: Partial<SelectOptGroupOptions<T, V>>) {
+
       super();
     }
   }
+
 
   export class SelectOptGroupOptions<T, V> extends ViewComponentOptions {
     @Prop({
         group: '主要属性',
         title: '标题',
         docDescription: '选择分组的标题，标题只有在没有文本插槽的时候生效',
+
     })
     title: nasl.core.String;
   }

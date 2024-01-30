@@ -6,7 +6,7 @@ import fp from 'lodash/fp';
 import { Modal, Popconfirm } from 'antd';
 import type { ButtonProps } from 'antd';
 import type { StateMap } from '@/types/immutable';
-// import { $deletePropsList as delist } from '@/plugins/constants';
+import { $deletePropsList } from '@/plugins/constants';
 
 // interface StateMap<T, F> extends Map<string, any> {
 //   get<K extends keyof (T & F), L>(key: K, defaultValue?: L):
@@ -17,14 +17,13 @@ const { confirm } = Modal;
 // console.log(React.useEffectEvent);
 function useHandleAsyncLoading(props: StateMap<
   ButtonProps,
-  { asyncLoading: boolean, $deletePropsList: string[] }
+  { asyncLoading: boolean, [$deletePropsList]: string[] }
 >) {
   const [loading, setLoading] = React.useState(false);
 
-  // console.log(props.get(delist)); // 影响编译
   const onClick = props.get('onClick');
   const asyncLoading = props.get('asyncLoading');
-  const $deletePropsList = props.get('$deletePropsList', []).concat(['asyncLoading']);
+  const deletePropsList = props.get($deletePropsList, []).concat(['asyncLoading']);
   const warpperOnClick = React.useCallback((fn, ...args) => {
     setLoading(true);
     return Promise.resolve(fn(...args)).finally(() => setLoading(false));
@@ -41,16 +40,15 @@ function useHandleAsyncLoading(props: StateMap<
     [asyncLoadingConforms, _.constant(asyncLoadingResult)],
     [_.stubTrue, _.stubObject],
   ]);
-  return _.assign(condHandle({ asyncLoading, onClick }), { $deletePropsList });
+  return _.assign({ [$deletePropsList]: deletePropsList }, condHandle({ asyncLoading, onClick }));
 }
 
 export function useHandleConfirm(props) {
   const confirmProps = props.get('confirm');
   const onClick = props.get('onClick');
   const loading = props.get('loading');
-  const $deletePropsList = props.get('$deletePropsList', []).concat(['confirm']);
+  const deletePropsList = props.get($deletePropsList, []).concat(['confirm']);
   const warpperOnClick = (fn, ...args) => {
-    // const [loading, setLoading] = React.useState(false);
     confirm({
       title: 'Do you Want to delete these items?',
       content: 'Some descriptions',
@@ -88,23 +86,23 @@ export function useHandleConfirm(props) {
     [_.matches('popConfirm'), _.constant(popConfirmResult)],
     [_.stubTrue, _.stubObject],
   ]);
-  return _.assign(condHandle(confirmProps), { $deletePropsList });
+  return _.assign({ [$deletePropsList]: deletePropsList }, condHandle(confirmProps));
 }
 useHandleConfirm.order = 4;
 
-export function useHandWarpperSecond(props) {
-  return {
-    render(propss) {
-      const Compoent = props.get('render');
-      return (
-        <div>
-          <p>2</p>
-          <Compoent {...propss} />
-        </div>
-      );
-    },
-  };
-}
+// export function useHandWarpperSecond(props) {
+//   return {
+//     render(propss) {
+//       const Compoent = props.get('render');
+//       return (
+//         <div>
+//           <p>2</p>
+//           <Compoent {...propss} />
+//         </div>
+//       );
+//     },
+//   };
+// }
 export const handle = {
   method: useHandleAsyncLoading,
   name: 'HandleAsyncLoading',

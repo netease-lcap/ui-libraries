@@ -1,5 +1,8 @@
 import React from 'react';
+import { Table as AntdTable } from 'antd';
 import Table from '../index';
+
+const { Column, ColumnGroup } = AntdTable;
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -14,13 +17,32 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
+    originDataSource: {
+      options: ['无', 'employee', 'department'],
+      control: { type: 'select' }, // Automatically inferred when 'options' is defined
+    },
   },
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Primary = {
-  render: (args) => <Table {...args} />,
-  args: {
-    type: 'primary',
+export const 默认 = {
+  render: (args) => {
+    const tableListDataSource = [];
+    for (let i = 0; i < 209; i += 1) {
+      tableListDataSource.push({
+        key: i,
+        name: `TradeCode ${i}`,
+        updatedAt: Date.now() - Math.floor(Math.random() * 1000),
+        createdAt: Date.now() - Math.floor(Math.random() * 2000),
+        money: Math.floor(Math.random() * 2000) * i,
+      });
+    }
+    return (
+      <Table {...args} rowKey="key" pagination pageSize={10} showQuickJumper search={false} options={false} dataSource={tableListDataSource}>
+        <Column sorter defaultSortOrder="descend" key="updatedAt" title="1" dataIndex="updatedAt" />
+        <Column key="name" title="2" dataIndex="name" />
+      </Table>
+    );
   },
+  args: {},
 };

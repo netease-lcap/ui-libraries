@@ -1,17 +1,25 @@
-import React from 'react';
-import { Table } from 'antd';
+import { ProTable as AntdTable } from '@ant-design/pro-components';
+import type { ProTableProps } from '@ant-design/pro-components';
+import { registerComponet } from '@/plugins/index';
+import * as plugin from './plugins';
+import type { pluginType } from '@/plugins/type';
 
-const withIDE = (Component: React.ElementType) => {
-  return React.forwardRef((props, ref) => {
-    return (
-      <Component
-        {...props}
-        ref={ref}
-      />
-    );
-  });
+import './index.module.less';
+
+// type TransferProps = AntdTransferProps
+
+const mapProps = {
+  mySize: 'size',
 };
 
-const TableHoc = withIDE(Table);
+const Table = registerComponet<
+  ProTableProps,
+  pluginType<ProTableProps>
+>(
+  AntdTable,
+  { plugin, displayName: 'descriptions', mapProps },
+);
 
-export default TableHoc;
+export default Table;
+
+// export const DescriptionsItem = AntdTable.Item;

@@ -1,5 +1,5 @@
 import { Modal as AntdModal } from 'antd';
-import type { ModalProps } from 'antd/lib/modal';
+import type { ModalProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import type { pluginType } from '@/plugins/type';

@@ -23,7 +23,15 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary = {
-  render: (args) => <Button {...args}> Button-loading</Button>,
+  render: (args) => {
+    const refss = React.useRef();
+    return (
+      <Button {...args} ref={refss}>
+        {' '}
+        Button-loading
+      </Button>
+    );
+  },
   args: {
     type: 'primary',
     asyncLoading: true,
