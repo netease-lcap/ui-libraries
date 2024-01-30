@@ -85,6 +85,7 @@ export default {
     display: flex;
     padding: 4px 16px;
     border-radius: 2px;
+    align-items: center; /* 默认垂直居中 */
 }
 .root[bordered] {
     border: 1px solid currentColor;
@@ -133,11 +134,12 @@ content: "\e64b";
 }
 .content[horizontal="left"] {
     justify-content: flex-start;
-    text-align: left;
 }
 .content[horizontal="center"] {
     justify-content: center;
-    text-align: center;
+}
+.content[horizontal="right"] {
+    justify-content: right;
 }
 .root[type="info"] {
     background: var(--alert-background-color-info);

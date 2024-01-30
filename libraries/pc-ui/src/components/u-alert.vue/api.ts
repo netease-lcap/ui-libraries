@@ -26,16 +26,6 @@ namespace nasl.ui {
         private desc: nasl.core.String = '';
 
         @Prop({
-            title: '对其方式',
-            description: '选择对齐方式',
-            setter: {
-                concept: 'EnumSelectSetter',
-                options: [{ title: '左对齐' }, { title: '居中对齐' }],
-            },
-        })
-        private horizontal: 'left' | 'center' = 'left';
-
-        @Prop({
             group: '主要属性',
             title: '公告类型',
             docDescription: '信息、成功、警告、错误',
@@ -55,6 +45,17 @@ namespace nasl.ui {
             },
         })
         showIcon: nasl.core.Boolean = true;
+
+        @Prop({
+            group: '样式属性',
+            title: '对其方式',
+            description: '选择对齐方式',
+            setter: {
+                concept: 'EnumSelectSetter',
+                options: [{ title: '左对齐' }, { title: '居中对齐' }, { title: '右对齐' }],
+            },
+        })
+        horizontal: 'left' | 'center' | 'right' = 'left';
 
         @Prop({
             group: '交互属性',
