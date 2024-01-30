@@ -1,13 +1,11 @@
 import React from 'react';
-import { Table as AntdTable } from 'antd';
-import Table from '../index';
-
-const { Column, ColumnGroup } = AntdTable;
+import { ProFormDatePicker, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components';
+import Form from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
-  title: 'Example/Table',
-  component: Table,
+  title: 'Example/Form',
+  component: Form,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
@@ -26,22 +24,33 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => {
-    const tableListDataSource = [];
-    for (let i = 0; i < 209; i += 1) {
-      tableListDataSource.push({
-        key: i,
-        name: `TradeCode ${i}`,
-        updatedAt: Date.now() - Math.floor(Math.random() * 1000),
-        createdAt: Date.now() - Math.floor(Math.random() * 2000),
-        money: Math.floor(Math.random() * 2000) * i,
-      });
-    }
+  render: () => {
     return (
-      <Table {...args} rowKey="key" pagination pageSize={10} showQuickJumper search={false} options={false} dataSource={tableListDataSource}>
-        <Column sorter defaultSortOrder="descend" key="updatedAt" title="1" dataIndex="updatedAt" />
-        <Column key="name" title="2" dataIndex="name" />
-      </Table>
+      <Form>
+        <ProFormSelect
+          options={[
+            {
+              value: 'chapter',
+              label: '盖章后生效',
+            },
+          ]}
+          width="sm"
+          name="useMode"
+          label="合同约定生效方式"
+        />
+        <ProFormDateRangePicker
+          transform={(values) => {
+            return {
+              startTime: values ? values[0] : undefined,
+              endTime: values ? values[1] : undefined,
+            };
+          }}
+          width="md"
+          name="createTimeRanger"
+          label="合同生效时间"
+        />
+        <ProFormDatePicker width="md" name="expirationTime" label="合同失效时间" />
+      </Form>
     );
   },
   args: {},

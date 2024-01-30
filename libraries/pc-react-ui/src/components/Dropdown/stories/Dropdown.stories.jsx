@@ -1,5 +1,6 @@
 import React from 'react';
 import Dropdown from '../index';
+// import { Dropdown } from 'antd';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -14,50 +15,35 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
-    originDataSource: {
-      options: ['无', 'employee', 'department'],
-      control: { type: 'select' }, // Automatically inferred when 'options' is defined
-    },
   },
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => (
-    <Dropdown
-      menu={[
-        {
-          key: '1',
-          label: (
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.antgroup.com"
-            >
-              1st menu item
-            </a>
-          ),
-        },
-        {
-          key: '2',
-          label: (
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.aliyun.com"
-            >
-              2nd menu item (disabled)
-            </a>
-          ),
-          disabled: true,
-        },
-      ]}
-    >
-      <a>Hover me</a>
-    </Dropdown>
-  ),
-  args: {
-    color: 'magenta',
-    children: 'Tag',
+  render: () => {
+    const items = [
+      {
+        key: '1',
+        label: (
+          <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+            1st menu item
+          </a>
+        ),
+      },
+      {
+        key: '2',
+        label: (
+          <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+            2nd menu item
+          </a>
+        ),
+      },
+    ];
+    return (
+      <Dropdown menu={{ items }}>
+        <button type="button">Hover me</button>
+      </Dropdown>
+    );
   },
+  args: {},
 };

@@ -7,5 +7,5 @@ export type hookType<T> = Array<
     Record<string, string>
 >;
 export type pluginType<T> = {
-  usePlugin: hookType<T>[] | Record<string, hookType<T>>;
+  usePlugin?: hookType<T>[] | Record<string, hookType<T>>;
 };

@@ -1,10 +1,11 @@
 import React from 'react';
-import Breadcrumb, { BreadcrumbItem } from '../index';
+// import Router from '../index';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
-  title: 'Example/Breadcrumb',
-  component: Breadcrumb,
+  title: 'Example/Router',
+  component: RouterProvider,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
@@ -12,24 +13,22 @@ export default {
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
-  argTypes: {
-    backgroundColor: { control: 'color' },
-    originDataSource: {
-      options: ['无', 'employee', 'department'],
-      control: { type: 'select' }, // Automatically inferred when 'options' is defined
-    },
-  },
+  argTypes: {},
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: () => (
-    <Breadcrumb>
-      <BreadcrumbItem>sample</BreadcrumbItem>
-    </Breadcrumb>
+    <React.StrictMode>
+      <RouterProvider
+        router={createBrowserRouter([
+          {
+            path: '/',
+            element: <div>Hello world!</div>,
+          },
+        ])}
+      />
+    </React.StrictMode>
   ),
-  args: {
-    color: 'magenta',
-    children: 'Tag',
-  },
+  args: {},
 };

@@ -12,6 +12,7 @@ import fp from 'lodash/fp';
 // import { useWhyDidYouUpdate } from 'ahooks';
 import type { pluginType } from '@/plugins/type';
 import { $deletePropsList } from '@/plugins/constants';
+import '@/utils/index';
 
 export class Plugin {
   plugin: any[] = [];
@@ -83,8 +84,6 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     [$deletePropsList, 'render', 'usePlugin', $deletePropsList],
   ));
 
-  console.log(excludeProps, 'excludeProps');
-  console.log(pluginHooks, 'pluginHooks');
   return (
     <Component
       {...excludeProps}

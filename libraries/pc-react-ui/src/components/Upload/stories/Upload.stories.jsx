@@ -1,10 +1,10 @@
 import React from 'react';
-import Breadcrumb, { BreadcrumbItem } from '../index';
+import Upload from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
-  title: 'Example/Breadcrumb',
-  component: Breadcrumb,
+  title: 'Example/Upload',
+  component: Upload,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
@@ -23,13 +23,9 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: () => (
-    <Breadcrumb>
-      <BreadcrumbItem>sample</BreadcrumbItem>
-    </Breadcrumb>
-  ),
+  render: (args) => <Upload {...args} />,
   args: {
     color: 'magenta',
-    children: 'Tag',
+    children: 'Upload',
   },
 };
