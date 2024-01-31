@@ -14,7 +14,6 @@ import { $deletePropsList } from '@/plugins/constants';
 // }
 const { confirm } = Modal;
 
-// console.log(React.useEffectEvent);
 function useHandleAsyncLoading(props: StateMap<
   ButtonProps,
   { asyncLoading: boolean, [$deletePropsList]: string[] }
@@ -60,7 +59,6 @@ export function useHandleConfirm(props) {
       },
     });
   };
-  // }, [onClick]);
   const confirmResult = {
     onClick: _.wrap(onClick, warpperOnClick),
   };
@@ -90,19 +88,6 @@ export function useHandleConfirm(props) {
 }
 useHandleConfirm.order = 4;
 
-// export function useHandWarpperSecond(props) {
-//   return {
-//     render(propss) {
-//       const Compoent = props.get('render');
-//       return (
-//         <div>
-//           <p>2</p>
-//           <Compoent {...propss} />
-//         </div>
-//       );
-//     },
-//   };
-// }
 export const handle = {
   method: useHandleAsyncLoading,
   name: 'HandleAsyncLoading',

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table as AntdTable } from 'antd';
+import { ProTable } from '@ant-design/pro-components';
 import Table from '../index';
 
 const { Column } = AntdTable;
@@ -27,6 +28,7 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
+    const ref = React.useRef();
     const tableListDataSource = [];
     for (let i = 0; i < 209; i += 1) {
       tableListDataSource.push({
@@ -37,8 +39,11 @@ export const 默认 = {
         money: Math.floor(Math.random() * 2000) * i,
       });
     }
+    React.useEffect(() => {
+      console.log(ref, 'ref');
+    }, []);
     return (
-      <Table {...args} rowKey="key" pagination pageSize={10} showQuickJumper search={false} options={false} dataSource={tableListDataSource}>
+      <Table {...args} rowKey="key" ref={ref} pagination pageSize={10} showQuickJumper search={false} options={false} dataSource={tableListDataSource}>
         <Column sorter defaultSortOrder="descend" key="updatedAt" title="1" dataIndex="updatedAt" />
         <Column key="name" title="2" dataIndex="name" />
       </Table>

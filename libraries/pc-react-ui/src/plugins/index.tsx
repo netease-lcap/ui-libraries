@@ -65,10 +65,19 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   const { BaseComponent, props, plugin } = myProps;
   const pluginHooks = plugin.getPluginMethod();
   const mapProps = plugin.getMapProps();
-
+  function handleMutableProps() {
+    const obj = Object.create(null);
+    return {
+      setState: (state) => _.assign(obj, state),
+      getState: (state) => obj[state],
+      getObj: () => obj,
+    };
+  }
+  const mutableProps = handleMutableProps();
   const ImmutableProps = Map(props)
     .reduce((result, value, key) => result.set(mapProps.get(key, key), value), Map())
     .set('render', BaseComponent)
+    .set('mutableProps', mutableProps)
     .set('ref', ref)
     .set($deletePropsList, []);
 
@@ -81,12 +90,12 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   const excludeProps = _.omit(jsProps, _.concat(
     _.keys(plugin.getMapProps().toJS()),
     expandProps.get($deletePropsList, []),
-    [$deletePropsList, 'render', 'usePlugin', $deletePropsList],
+    [$deletePropsList, 'render', 'usePlugin', 'mutableProps', $deletePropsList],
   ));
-
   return (
     <Component
       {...excludeProps}
+      {...mutableProps.getObj()}
     />
   );
 });
