@@ -92,6 +92,13 @@ export default defineConfig({
           'vue-router': 'VueRouter',
           'vue-i18n': 'VueI18n',
         },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'style.css') {
+            return 'index.css';
+          }
+
+          return '[name][extname]';
+        },
       },
     },
     commonjsOptions: {

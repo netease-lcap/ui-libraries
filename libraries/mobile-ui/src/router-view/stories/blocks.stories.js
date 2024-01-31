@@ -1,11 +1,12 @@
 import Vue from 'vue';
-// import VueRouter from 'vue-router';
+
 import '__demo-entry__';
 import Component from '../index';
 import BlocksDemo1 from '../demos/blocks/BlocksDemo1.vue';
 
-// Vue.use(VueRouter);
-
+Vue.component('router-view', {
+  render: () => null,
+});
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
   title: 'Example/router-view/blocks',
@@ -26,5 +27,17 @@ export const Demo0 = {
       DeprecatedDemo: BlocksDemo1,
     },
     template: '<deprecated-demo />',
+  }),
+};
+
+export const Demo1 = {
+  render: () => ({
+    template: '<van-absolute-layout style="width: 100%; height: 400px;"><van-router-view designer /></van-absolute-layout>',
+    created() {
+      Vue.prototype.$env.VUE_APP_DESIGNER = true;
+    },
+    destroyed() {
+      Vue.prototype.$env.VUE_APP_DESIGNER = false;
+    },
   }),
 };
