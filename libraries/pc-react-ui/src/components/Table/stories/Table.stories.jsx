@@ -27,6 +27,7 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
+    const [value, setValue] = React.useState(0);
     const tableListDataSource = [];
     for (let i = 0; i < 209; i += 1) {
       tableListDataSource.push({
@@ -37,11 +38,22 @@ export const 默认 = {
         money: Math.floor(Math.random() * 2000) * i,
       });
     }
+
     return (
-      <Table data-nodePath="12341" rowKey="key" pagination pageSize={10} showQuickJumper search={false} options={false} dataSource={tableListDataSource}>
-        <Column sorter defaultSortOrder="descend" key="updatedAt" title="1" dataIndex="updatedAt" />
-        <Column key="name" title="2" dataIndex="name" />
-      </Table>
+      <>
+        <button
+          onClick={() => {
+            setValue((value) => ++value);
+            console.log(value);
+          }}
+        >
+          1234
+        </button>
+        <Table value={value} data-nodepath="12341" rowKey="key" pagination pageSize={10} showQuickJumper search={false} options={false} dataSource={tableListDataSource}>
+          <Column sorter defaultSortOrder="descend" key="updatedAt" title="1" dataIndex="updatedAt" />
+          <Column key="name" title="2" dataIndex="name" />
+        </Table>
+      </>
     );
   },
   args: {},

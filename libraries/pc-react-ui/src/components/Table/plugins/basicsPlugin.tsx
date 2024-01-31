@@ -56,7 +56,7 @@ export function useHandleRoowSelection(props) {
   const onChange = props.get('onChange');
   const result = fp.cond([
     [fp.isEqual({}), fp.constant({})],
-    [fp.stubTrue, fp.constant({ rowSelection: { selectedRowKeys: valueProps, onChange } })],
+    [fp.stubTrue, fp.constant({ rowSelection: { selectedRowKeys: Array.from(valueProps), onChange } })],
   ])(_.filterUnderfinedValue({ value: valueProps, onChange }));
   return result;
 }
