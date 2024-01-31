@@ -9,7 +9,6 @@ export function useHandleRef(props) {
   const ref = props.get('ref');
   const mutableProps = props.get('mutableProps');
   const deletePropsList = props.get($deletePropsList, []).concat(['ref']);
-
   const actionRef = React.useRef({});
   React.useImperativeHandle(ref, () => ({
     ...actionRef.current,

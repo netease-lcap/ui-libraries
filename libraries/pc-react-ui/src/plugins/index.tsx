@@ -9,7 +9,7 @@ import { Map } from 'immutable';
 import React from 'react';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-// import { useWhyDidYouUpdate } from 'ahooks';
+import { useWhyDidYouUpdate } from 'ahooks';
 import type { pluginType } from '@/plugins/type';
 import { $deletePropsList } from '@/plugins/constants';
 import '@/utils/index';
@@ -92,6 +92,8 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     expandProps.get($deletePropsList, []),
     [$deletePropsList, 'render', 'usePlugin', 'mutableProps', $deletePropsList],
   ));
+  useWhyDidYouUpdate('useWhyDidYouUpdateComponent', { ...excludeProps });
+
   return (
     <Component
       {...excludeProps}
