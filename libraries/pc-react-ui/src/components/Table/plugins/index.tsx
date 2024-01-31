@@ -1,2 +1,2 @@
 export * from './basicsPlugin';
-// export * from './lowCodePlugin';
+export * from './lowCodePlugin';

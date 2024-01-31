@@ -13,11 +13,11 @@ export function useHandleRef(props) {
   const actionRef = React.useRef({});
   React.useImperativeHandle(ref, () => ({
     ...actionRef.current,
-    add: () => { console.log(1234); },
+    // add: () => { console.log(1234); },
   }), [actionRef]);
-  React.useEffect(() => {
-    console.log(actionRef, 'actionRef1234');
-  }, []);
+  // React.useEffect(() => {
+  //   console.log(actionRef, 'actionRef1234');
+  // }, []);
   mutableProps.setState({ actionRef });
   return { [$deletePropsList]: deletePropsList };
 }

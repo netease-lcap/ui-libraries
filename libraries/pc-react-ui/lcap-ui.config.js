@@ -7,5 +7,7 @@ module.exports = {
     { group: 'Table', name: 'Table', alias: '数据表格' },
 
     { group: 'Display', name: 'Text', alias: '文本' },
+
+    { group: 'Layout', name: 'Flex', alias: '线性布局' },
   ],
 };
