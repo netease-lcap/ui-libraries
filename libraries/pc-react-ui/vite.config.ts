@@ -2,13 +2,29 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import autoprefixer from 'autoprefixer';
 
 // 设置测试运行的时区
 process.env.TZ = 'Asia/Shanghai';
 
 // https://vitejs.dev/config/
+
 export default defineConfig({
   plugins: [react()],
+  css: {
+    postcss: {
+      plugins: [
+        autoprefixer({
+          overrideBrowserslist: [
+            '> 1%',
+            'last 2 versions',
+            'ie >= 9',
+          ],
+          grid: true,
+        }) as any,
+      ],
+    },
+  },
   build: {
     target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
     lib: {
@@ -27,6 +43,13 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'style.css') {
+            return 'index.css';
+          }
+
+          return '[name][extname]';
         },
       },
     },
