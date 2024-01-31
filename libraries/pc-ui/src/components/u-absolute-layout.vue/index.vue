@@ -11,6 +11,11 @@
 
 export default {
     name: 'u-absolute-layout',
+    provide() {
+      return {
+        inAbsoluteLayout: true,
+      };
+    },
 };
 </script>
 
