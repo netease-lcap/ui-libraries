@@ -8,7 +8,7 @@
           <div :class="$style.tooltip" v-if="inAbsoluteLayout">
             <span :class="$style.tooltipIcon"></span>
             <span>温馨提示</span>
-            <u-tooltip :class="$style.tooltipContent" trigger="hover" size="large">
+            <u-tooltip :class="$style.tooltipContent" trigger="click" size="large">
               <div>
                 自由布局中子组件相互独立。若希望下方内容位置随子页面发布后实际高度变化，可将其放入自由布局容器，再将容器和子页面设置为“纵向线性布局”。
               </div>

@@ -6,18 +6,29 @@ import vue2jsx from '@vitejs/plugin-vue2-jsx';
 import autoprefixer from 'autoprefixer';
 import { getHashDigest } from 'loader-utils';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const VueTplCompiler = require('./vue-template-compiler');
+
+VueTplCompiler.parse = VueTplCompiler.parseComponent;
 // 设置测试运行的时区
 process.env.TZ = 'Asia/Shanghai';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue2(),
+    vue2({
+      template: {
+        compiler: VueTplCompiler,
+      },
+    }),
     vue2jsx({
       include: /.(jsx|tsx)$/,
       babelPlugins: ['@babel/plugin-proposal-optional-chaining', '@babel/plugin-proposal-nullish-coalescing-operator'],
       vModel: true,
+      functional: false,
+      injectH: true,
       vOn: true,
+      compositionAPI: false,
     }),
   ],
   resolve: {
@@ -52,6 +63,7 @@ export default defineConfig({
           scopedName = `${scopedName}_${name}`;
         }
 
+        // eslint-disable-next-line prefer-regex-literals
         scopedName = `${scopedName}__${hash}`.replace(new RegExp('[^a-zA-Z0-9\\-_\u00A0-\uFFFF]', 'g'), '-').replace(/^((-?[0-9])|--)/, '_$1');
 
         return scopedName;
@@ -82,6 +94,7 @@ export default defineConfig({
     outDir: 'dist-theme',
     modulePreload: false,
     sourcemap: true,
+    minify: true,
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: ['vue', 'vue-router', 'vue-i18n'],
