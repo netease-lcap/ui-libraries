@@ -23,7 +23,8 @@ exports[`u-table.vue > Demo-单行颜色 1`] = `
             <!---->
             详情
             <!---->
-          </a>&nbsp;<a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+          </a>
+          <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
             <!---->
             设置
             <!---->
@@ -40,7 +41,8 @@ exports[`u-table.vue > Demo-单行颜色 1`] = `
             <!---->
             详情
             <!---->
-          </a>&nbsp;<a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+          </a>
+          <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
             <!---->
             设置
             <!---->
@@ -57,7 +59,8 @@ exports[`u-table.vue > Demo-单行颜色 1`] = `
             <!---->
             详情
             <!---->
-          </a>&nbsp;<a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+          </a>
+          <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
             <!---->
             设置
             <!---->
@@ -74,7 +77,8 @@ exports[`u-table.vue > Demo-单行颜色 1`] = `
             <!---->
             详情
             <!---->
-          </a>&nbsp;<a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+          </a>
+          <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
             <!---->
             设置
             <!---->
@@ -91,7 +95,8 @@ exports[`u-table.vue > Demo-单行颜色 1`] = `
             <!---->
             详情
             <!---->
-          </a>&nbsp;<a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+          </a>
+          <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
             <!---->
             设置
             <!---->
