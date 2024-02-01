@@ -1,8 +1,9 @@
 import React from 'react';
 import fp from 'lodash/fp';
 import _ from 'lodash';
+import { useRequest } from 'ahooks';
 
-export function useHandle(props) {
+function useHandle(props) {
   const children = props.get('children');
   const columns = props.get('columns');
   const columnsChildren = fp.filter((item: Record<string, any>) => item.type?.name === 'Column3');
@@ -23,7 +24,12 @@ export function useHandleTransformOption(props) {
     [fp.isFunction, fp.constant(() => Promise.resolve(dataSource()))],
     [fp.stubTrue, fp.constant(() => Promise.resolve([]))],
   ]);
-  return fp.isNil(dataSource) ? {} : { request: transformOption(dataSource) };
+  const { data, loading } = useRequest(transformOption(dataSource));
+  const conformsArray = _.cond([
+    [Array.isArray, _.identity],
+    [_.stubTrue, _.stubArray],
+  ]);
+  return fp.isNil(dataSource) ? {} : { dataSource: conformsArray(data), loading };
 }
 
 export function useHandlePagination(props) {

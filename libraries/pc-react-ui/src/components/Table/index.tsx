@@ -1,6 +1,7 @@
-import { ProTable as AntdTable } from '@ant-design/pro-components';
-import { Table as selfTable } from 'antd';
-import type { ProTableProps } from '@ant-design/pro-components';
+// import { ProTable as AntdTable } from '@ant-design/pro-components';
+import { Table as AntdTable } from 'antd';
+import type { TableProps } from 'antd';
+// import type { ProTableProps as TableProps } from '@ant-design/pro-components';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import type { pluginType } from '@/plugins/type';
@@ -14,8 +15,8 @@ const mapProps = {
 };
 
 const Table = registerComponet<
-  ProTableProps,
-  pluginType<ProTableProps>
+  TableProps,
+  pluginType<TableProps>
 >(
   AntdTable,
   { plugin, displayName: 'descriptions', mapProps },
@@ -23,5 +24,5 @@ const Table = registerComponet<
 
 export default Table;
 
-export const TableColumn = selfTable.Column;
+export const TableColumn = AntdTable.Column;
 // export const DescriptionsItem = AntdTable.Item;
