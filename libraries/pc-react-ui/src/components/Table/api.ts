@@ -1096,7 +1096,7 @@ namespace nasl.ui {
       title: '单元格',
       description: '对单元格的数据展示进行自定义',
     })
-    slotCell: (current: Current<T>) => Array<ViewComponent>;
+    slotRender: (current: Current<T>) => Array<ViewComponent>;
 
     @Slot({
       title: '编辑单元格',

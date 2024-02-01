@@ -19,11 +19,15 @@ function useHandle(props) {
 
 function useHandleTransformOption(props) {
   const dataSource = props.get('dataSource');
-  const transformOption = fp.cond([
-    [fp.isArray, fp.constant(() => Promise.resolve(dataSource))],
-    [fp.isFunction, fp.constant(() => Promise.resolve(dataSource()))],
-    [fp.stubTrue, fp.constant(() => Promise.resolve([]))],
-  ]);
+  const transformOption = React.useMemo(
+    () => fp.cond([
+      [fp.isArray, fp.constant(() => Promise.resolve(dataSource))],
+      [fp.isFunction, fp.constant(() => Promise.resolve(dataSource()))],
+      [fp.stubTrue, fp.constant(() => Promise.resolve([]))],
+    ]),
+    [dataSource],
+  );
+
   const { data, loading } = useRequest(transformOption(dataSource));
   const conformsArray = _.cond([
     [Array.isArray, _.identity],

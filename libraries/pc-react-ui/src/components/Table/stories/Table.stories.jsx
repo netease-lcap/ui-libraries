@@ -82,6 +82,7 @@ export const 默认 = {
             <TableColumn
               key="26"
               ref={ref3}
+              render={() => <span>1234</span>}
               ide-iscontainer="true"
               title={() => (
                 <div ide-draggable="false">
