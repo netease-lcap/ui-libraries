@@ -52,10 +52,10 @@ namespace nasl.ui {
             description: '选择对齐方式',
             setter: {
                 concept: 'EnumSelectSetter',
-                options: [{ title: '左对齐' }, { title: '居中对齐' }, { title: '右对齐' }],
+                options: [{ title: '左对齐' }, { title: '居中对齐' }],
             },
         })
-        horizontal: 'left' | 'center' | 'right' = 'left';
+        horizontal: 'left' | 'center' = 'left';
 
         @Prop({
             group: '交互属性',

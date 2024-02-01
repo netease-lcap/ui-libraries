@@ -138,9 +138,6 @@ content: "\e64b";
 .content[horizontal="center"] {
     justify-content: center;
 }
-.content[horizontal="right"] {
-    justify-content: right;
-}
 .root[type="info"] {
     background: var(--alert-background-color-info);
     color: var(--alert-color-info);
