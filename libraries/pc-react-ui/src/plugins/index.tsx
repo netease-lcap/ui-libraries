@@ -92,7 +92,7 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     expandProps.get($deletePropsList, []),
     [$deletePropsList, 'render', 'usePlugin', 'mutableProps', $deletePropsList],
   ));
-  useWhyDidYouUpdate('useWhyDidYouUpdateComponent', { ...excludeProps });
+  // useWhyDidYouUpdate('useWhyDidYouUpdateComponent', { ...excludeProps });
 
   return (
     <Component

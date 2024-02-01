@@ -17,7 +17,7 @@ function useHandle(props) {
   return columnsCond({ columns, children });
 }
 
-export function useHandleTransformOption(props) {
+function useHandleTransformOption(props) {
   const dataSource = props.get('dataSource');
   const transformOption = fp.cond([
     [fp.isArray, fp.constant(() => Promise.resolve(dataSource))],
