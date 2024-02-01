@@ -53,7 +53,7 @@ namespace nasl.ui {
           title: 'undefined',
           description: '获取所有表格列的 field',
       })
-      getFields(): any {}
+      getFields(): nasl.core.String { return '' }
 
       @Method({
           title: 'undefined',

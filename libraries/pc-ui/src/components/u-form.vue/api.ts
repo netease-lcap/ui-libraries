@@ -25,7 +25,18 @@ namespace nasl.ui {
                 description: '是否验证后无提示',
             })
             muted: nasl.core.Boolean = false,
-        ): any {}
+        ): ValidateResult {
+            return {
+                rawValue: '',
+                value: '',
+                trigger: '',
+                muted:'',
+                valid: true,
+                touched: true,
+                dirty: true,
+                firstError: ''
+             };
+        }
 
         @Method({
             title: 'undefined',
@@ -47,7 +58,18 @@ namespace nasl.ui {
                 description: '是否验证后无提示',
             })
             muted: nasl.core.Boolean = false,
-        ): any {}
+        ): ValidateResult {
+            return {
+                rawValue: '',
+                value: '',
+                trigger: '',
+                muted:'',
+                valid: true,
+                touched: true,
+                dirty: true,
+                firstError: ''
+             };
+        }
         constructor(options?: Partial<UFormOptions>) { super(); }
     }
 
