@@ -69,6 +69,16 @@
     margin-right: 8px;
 }
 
+.root[isShowMultipleIcon][selected] {
+    color: var(--select-multiple-popper-item-color-selected);
+    background: var(--select-multiple-popper-item-background-selected);
+}
+
+.root[isShowMultipleIcon][selected]:hover {
+  color: var(--select-popper-item-color-duplicated-hover);
+  background: var(--select-popper-item-background-duplicated-hover);
+}
+
 .root[isShowMultipleIcon][selected]:before {
     border-color: transparent;
     background-color: var(--select-multiple-background-color);
