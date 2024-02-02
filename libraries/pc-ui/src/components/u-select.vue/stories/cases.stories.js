@@ -53,6 +53,7 @@ export default {
 };
 
 export const Demo0 = {
+  name: '基本用法',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo1,
@@ -62,6 +63,7 @@ export const Demo0 = {
 };
 
 export const Demo1 = {
+  name: 'appendTo:body',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo2,
@@ -71,6 +73,7 @@ export const Demo1 = {
 };
 
 export const Demo2 = {
+  name: '双向绑定',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo3,
@@ -80,6 +83,7 @@ export const Demo2 = {
 };
 
 export const Demo3 = {
+  name: '双向绑定',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo4,
@@ -89,6 +93,7 @@ export const Demo3 = {
 };
 
 export const Demo4 = {
+  name: '只读、禁用、禁用某一项',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo5,
@@ -98,6 +103,7 @@ export const Demo4 = {
 };
 
 export const Demo5 = {
+  name: '分隔符',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo6,
@@ -107,6 +113,7 @@ export const Demo5 = {
 };
 
 export const Demo6 = {
+  name: '定位',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo7,
@@ -116,6 +123,7 @@ export const Demo6 = {
 };
 
 export const Demo7 = {
+  name: '分组',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo8,
@@ -125,6 +133,7 @@ export const Demo7 = {
 };
 
 export const Demo8 = {
+  name: '可清除',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo9,
@@ -134,6 +143,7 @@ export const Demo8 = {
 };
 
 export const Demo9 = {
+  name: 'Layer',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo10,
@@ -143,6 +153,7 @@ export const Demo9 = {
 };
 
 export const Demo10 = {
+  name: '数据源',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo11,
@@ -152,6 +163,7 @@ export const Demo10 = {
 };
 
 export const Demo11 = {
+  name: '基本用法',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo12,
@@ -161,6 +173,7 @@ export const Demo11 = {
 };
 
 export const Demo12 = {
+  name: '双向绑定',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo13,
@@ -170,6 +183,7 @@ export const Demo12 = {
 };
 
 export const Demo13 = {
+  name: 'Tags 风格',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo14,
@@ -179,6 +193,7 @@ export const Demo13 = {
 };
 
 export const Demo14 = {
+  name: 'Tags 风格',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo15,
@@ -188,6 +203,7 @@ export const Demo14 = {
 };
 
 export const Demo15 = {
+  name: 'Tags 展示icon',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo16,
@@ -197,6 +213,7 @@ export const Demo15 = {
 };
 
 export const Demo16 = {
+  name: '对齐和清空问题',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo17,
@@ -206,6 +223,7 @@ export const Demo16 = {
 };
 
 export const Demo17 = {
+  name: '保持顺序',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo18,
@@ -215,6 +233,7 @@ export const Demo17 = {
 };
 
 export const Demo18 = {
+  name: '选项初始值',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo19,
@@ -224,6 +243,7 @@ export const Demo18 = {
 };
 
 export const Demo19 = {
+  name: '前端过滤',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo20,
@@ -233,6 +253,7 @@ export const Demo19 = {
 };
 
 export const Demo20 = {
+  name: '有空的项',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo21,
@@ -242,6 +263,7 @@ export const Demo20 = {
 };
 
 export const Demo21 = {
+  name: '清除缓存',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo22,
@@ -251,6 +273,7 @@ export const Demo21 = {
 };
 
 export const Demo22 = {
+  name: 'Tag 方式',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo23,
@@ -260,6 +283,7 @@ export const Demo22 = {
 };
 
 export const Demo23 = {
+  name: 'Data 方式',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo24,
@@ -269,6 +293,7 @@ export const Demo23 = {
 };
 
 export const Demo24 = {
+  name: '列表与 value 同时改变的问题',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo25,
@@ -278,6 +303,7 @@ export const Demo24 = {
 };
 
 export const Demo25 = {
+  name: '一次性后端数据，前端过滤',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo26,
@@ -287,6 +313,7 @@ export const Demo25 = {
 };
 
 export const Demo26 = {
+  name: '后端过滤，后端分页',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo27,
@@ -296,6 +323,7 @@ export const Demo26 = {
 };
 
 export const Demo27 = {
+  name: '一次性后端数据，前端分页',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo28,
@@ -305,6 +333,7 @@ export const Demo27 = {
 };
 
 export const Demo28 = {
+  name: 'prefix, suffix',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo29,
@@ -314,6 +343,7 @@ export const Demo28 = {
 };
 
 export const Demo29 = {
+  name: '反色',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo30,
@@ -323,6 +353,7 @@ export const Demo29 = {
 };
 
 export const Demo30 = {
+  name: '标签和数据源混合使用',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo31,
@@ -332,6 +363,7 @@ export const Demo30 = {
 };
 
 export const Demo31 = {
+  name: '自定义选中值的展示形式，项可添加描述',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo32,
@@ -341,6 +373,7 @@ export const Demo31 = {
 };
 
 export const Demo32 = {
+  name: '自定义可扩展下拉项',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo33,
@@ -350,6 +383,7 @@ export const Demo32 = {
 };
 
 export const Demo33 = {
+  name: '选中值是下一页数据的选中处理',
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo34,

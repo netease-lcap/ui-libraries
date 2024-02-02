@@ -47,6 +47,7 @@ export default {
 };
 
 export const Demo0 = {
+  name: 'tag 方式',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo1,
@@ -56,6 +57,7 @@ export const Demo0 = {
 };
 
 export const Demo1 = {
+  name: 'data-source 数组',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo2,
@@ -65,6 +67,7 @@ export const Demo1 = {
 };
 
 export const Demo2 = {
+  name: 'data-source 函数',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo3,
@@ -74,6 +77,7 @@ export const Demo2 = {
 };
 
 export const Demo3 = {
+  name: '指定选项字段名',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo4,
@@ -83,6 +87,7 @@ export const Demo3 = {
 };
 
 export const Demo4 = {
+  name: '禁用状态、禁用某一项',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo5,
@@ -92,6 +97,7 @@ export const Demo4 = {
 };
 
 export const Demo5 = {
+  name: '为空禁用',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo6,
@@ -101,6 +107,7 @@ export const Demo5 = {
 };
 
 export const Demo6 = {
+  name: 'autofocus',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo7,
@@ -110,6 +117,7 @@ export const Demo6 = {
 };
 
 export const Demo7 = {
+  name: '分隔符',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo8,
@@ -119,6 +127,7 @@ export const Demo7 = {
 };
 
 export const Demo8 = {
+  name: '分组',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo9,
@@ -128,6 +137,7 @@ export const Demo8 = {
 };
 
 export const Demo9 = {
+  name: '可清除',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo10,
@@ -137,6 +147,7 @@ export const Demo9 = {
 };
 
 export const Demo10 = {
+  name: '多项选择',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo11,
@@ -146,6 +157,7 @@ export const Demo10 = {
 };
 
 export const Demo11 = {
+  name: '多项选择',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo12,
@@ -155,6 +167,7 @@ export const Demo11 = {
 };
 
 export const Demo12 = {
+  name: '多项选择',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo13,
@@ -164,6 +177,7 @@ export const Demo12 = {
 };
 
 export const Demo13 = {
+  name: '多项选择',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo14,
@@ -173,6 +187,7 @@ export const Demo13 = {
 };
 
 export const Demo14 = {
+  name: 'Tags 风格',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo15,
@@ -182,6 +197,7 @@ export const Demo14 = {
 };
 
 export const Demo15 = {
+  name: '可以重复',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo16,
@@ -191,6 +207,7 @@ export const Demo15 = {
 };
 
 export const Demo16 = {
+  name: 'Flag',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo17,
@@ -200,6 +217,7 @@ export const Demo16 = {
 };
 
 export const Demo17 = {
+  name: 'Label',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo18,
@@ -209,6 +227,7 @@ export const Demo17 = {
 };
 
 export const Demo18 = {
+  name: '修改尺寸',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo19,
@@ -218,6 +237,7 @@ export const Demo18 = {
 };
 
 export const Demo19 = {
+  name: '前端过滤（搜索）',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo20,
@@ -227,6 +247,7 @@ export const Demo19 = {
 };
 
 export const Demo20 = {
+  name: '匹配方式',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo21,
@@ -236,6 +257,7 @@ export const Demo20 = {
 };
 
 export const Demo21 = {
+  name: '区分大小写',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo22,
@@ -245,6 +267,7 @@ export const Demo21 = {
 };
 
 export const Demo22 = {
+  name: '后端过滤（搜索）',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo23,
@@ -254,6 +277,7 @@ export const Demo22 = {
 };
 
 export const Demo23 = {
+  name: '自动补充',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo24,
@@ -263,6 +287,7 @@ export const Demo23 = {
 };
 
 export const Demo24 = {
+  name: '前端加载更多',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo25,
@@ -272,6 +297,7 @@ export const Demo24 = {
 };
 
 export const Demo25 = {
+  name: '后端加载更多',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo26,
@@ -281,6 +307,7 @@ export const Demo25 = {
 };
 
 export const Demo26 = {
+  name: '前缀方式',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo27,
@@ -290,6 +317,7 @@ export const Demo26 = {
 };
 
 export const Demo27 = {
+  name: '自定义可扩展下拉项',
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo28,
