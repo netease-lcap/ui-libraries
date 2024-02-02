@@ -19,14 +19,3 @@ Vue.prototype.$at2 = function (obj, propertyPath) {
         return obj;
     return this.$at(obj, propertyPath);
 };
-
-function getAsyncPublicPath() {
-    const script = document.querySelector('script[src*="cloud-ui.vusion"]');
-    if (!script)
-        return;
-
-    const src = script.src;
-    const publicPath = src.replace(/\/[^/]+$/, '/');
-    __webpack_public_path__ = publicPath;
-}
-getAsyncPublicPath();

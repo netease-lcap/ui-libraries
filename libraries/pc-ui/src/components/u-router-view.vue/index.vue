@@ -8,12 +8,12 @@
           <div :class="$style.tooltip" v-if="inAbsoluteLayout">
             <span :class="$style.tooltipIcon"></span>
             <span>温馨提示</span>
-            <u-tooltip :class="$style.tooltipContent" trigger="hover" size="large">
+            <div :class="$style.tooltipContent">
               <div>
                 自由布局中子组件相互独立。若希望下方内容位置随子页面发布后实际高度变化，可将其放入自由布局容器，再将容器和子页面设置为“纵向线性布局”。
               </div>
               <div :class="$style.tipImg"></div>
-            </u-tooltip>
+            </div>
           </div>
         </div>
     </div>
@@ -72,6 +72,7 @@ export default {
   border-radius: 4px;
   cursor: pointer;
   transition: all 150ms;
+  position: relative;
 }
 
 .tooltip:hover {
@@ -79,10 +80,49 @@ export default {
   background-color: var(--brand-primary-lightest);
 }
 
-.tooltipContent [class^=u-tooltip_body] {
-  max-width: 456px !important;
-  max-height: 285px !important;
+.tooltip:hover .tooltipContent {
+  display: block;
 }
+
+.tooltip > span {
+  white-space: nowrap;
+}
+
+.tooltipContent {
+  width: 456px;
+  height: 297px;
+  position: absolute;
+  left: -186px;
+  top: 28px;
+  background: #000;
+  padding: 12px;
+  border-radius: 4px;
+  color: #fff;
+  text-align: left;
+  display: none;
+  cursor: default;
+}
+
+.tooltipContent::before {
+  content: '';
+  position: absolute;
+  height: 6px;
+  top: -6px;
+  left: 0;
+  right: 0;
+}
+
+.tooltipContent::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: -4px;
+  left: 224px;
+  background-color: #000;
+  transform: rotate(45deg);
+}
+
 .tooltipIcon {
   background: url(./assets/info.png) no-repeat;
   background-size: cover;

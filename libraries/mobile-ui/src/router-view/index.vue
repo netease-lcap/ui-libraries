@@ -5,10 +5,10 @@
     </div>
     <div :class="$style.fakeEmpty">
       <span>此容器为子页面呈现占位，可在子页面编辑内容</span>
-      <div :class="$style.tooltip" v-if="inAbsoluteLayout" v-click-outside="closeTooltip">
-        <span @click="toggleTooltip" :class="$style.tooltipIcon"></span>
-        <span @click="toggleTooltip">温馨提示</span>
-        <div :class="$style.tooltipContent" v-show="showToolTip">
+      <div :class="$style.tooltip" v-if="inAbsoluteLayout">
+        <span :class="$style.tooltipIcon"></span>
+        <span>温馨提示</span>
+        <div :class="$style.tooltipContent">
           <div>
             自由布局中子组件相互独立。若希望下方内容位置随子页面发布后实际高度变化，可将其放入自由布局容器，再将容器和子页面设置为“纵向线性布局”。
           </div>
@@ -21,12 +21,8 @@
 </template>
 
 <script>
-import { clickOutside } from '../../cloudui/directives/v-click-outside';
 export default {
   name: 'VanRouterView',
-  directives: {
-    clickOutside,
-  },
   inject: {
     inAbsoluteLayout: {
       type: Boolean,
@@ -35,19 +31,6 @@ export default {
   },
   props: {
     designer: { type: Boolean, default: true },
-  },
-  data() {
-    return {
-      showToolTip: false,
-    };
-  },
-  methods: {
-    toggleTooltip() {
-      this.showToolTip = !this.showToolTip;
-    },
-    closeTooltip() {
-      this.showToolTip = false;
-    },
   },
 };
 </script>
@@ -93,17 +76,48 @@ export default {
   background-color: var(--brand-primary-lightest);
 }
 
+.tooltip:hover .tooltipContent {
+  display: block;
+}
+
+.tooltip > span {
+  white-space: nowrap;
+}
+
 .tooltipContent {
   width: 320px;
   position: absolute;
   left: -244px;
-  top: 22px;
+  top: 28px;
   background: #000;
   padding: 12px;
   border-radius: 4px;
   color: #fff;
   text-align: left;
+  display: none;
+  cursor: default;
 }
+
+.tooltipContent::before {
+  content: '';
+  position: absolute;
+  height: 6px;
+  top: -6px;
+  left: 0;
+  right: 0;
+}
+
+.tooltipContent::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: -4px;
+  right: 32px;
+  background-color: #000;
+  transform: rotate(45deg);
+}
+
 .tooltipIcon {
   background: url(./assets/info.png) no-repeat;
   background-size: cover;

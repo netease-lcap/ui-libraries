@@ -229,7 +229,8 @@ exports[`u-copy.vue > Demo-基本用法 1`] = `
         <div class="body wrap" size="normal"> 无复制对象 </div>
       </div>
     </transition-stub>
-  </div>&nbsp; <div class="root">
+  </div>
+  <div class="root">
     <div vusion-slot-name="default">
       <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
         <!---->
