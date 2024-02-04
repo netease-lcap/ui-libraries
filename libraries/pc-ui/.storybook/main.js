@@ -4,6 +4,7 @@ import Config from '../lcap-ui.config.js';
 const config = {
   stories: [
     ...Config.components.map(c => [`../src/components/${c.name}.vue/**/*.mdx`, `../src/components/${c.name}.vue/**/*.stories.@(js|jsx|mjs|ts|tsx)`]).flat(),
+    '../theme/theme.stories.js',
   ],
   addons: [
     "@storybook/addon-links",
