@@ -2,11 +2,11 @@ import React from 'react';
 import { TableProps } from 'antd';
 import { $deletePropsList } from '@/plugins/constants';
 
-export function useHandleNodePath(props) {
+function useHandleNodePath(props) {
   console.log(props.toJS());
 }
 
-export function useHandleRef(props) {
+function useHandleRef(props) {
   const ref = props.get('ref');
   const mutableProps = props.get('mutableProps');
   const deletePropsList = props.get($deletePropsList, []).concat(['ref', 'data-nodepath']);
@@ -17,7 +17,7 @@ export function useHandleRef(props) {
     add: () => { console.log(1234); },
   }), [actionRef]);
   React.useEffect(() => {
-    console.log(actionRef.current.nativeElement, 'actionRef1234');
+    // console.log(actionRef.current.nativeElement, 'actionRef1234');
     actionRef.current.nativeElement.setAttribute('data-nodepath', nodePath);
   }, []);
   mutableProps.setState({ ref: actionRef });

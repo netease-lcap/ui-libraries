@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from '../index';
+import Text from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -26,5 +26,32 @@ export const 默认 = {
   render: (args) => <Text {...args} />,
   args: {
     color: 'magenta',
+    children: '123',
+  },
+};
+export const 默认1 = {
+  render: (args) => (
+    <Text
+      {...args}
+      usePlugin={{
+        a(props) {
+          return {
+            render: (_props) => {
+              const Compoent = props.get('render');
+              return (
+                <div>
+                  1234
+                  <Compoent {..._props} />
+                </div>
+              );
+            },
+          };
+        },
+      }}
+    />
+  ),
+  args: {
+    color: 'magenta',
+    children: '222',
   },
 };

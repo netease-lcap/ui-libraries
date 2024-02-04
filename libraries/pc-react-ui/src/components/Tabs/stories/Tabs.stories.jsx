@@ -25,7 +25,7 @@ export default {
 export const 异步函数 = {
   render: (args) => <Tabs {...args} />,
   args: {
-    items: () => new Promise((res) => {
+    dataSource: () => new Promise((res) => {
       setTimeout(() => {
         res([
           { label: 'Option 1', key: '1' },
@@ -39,8 +39,7 @@ export const 异步函数 = {
 export const 同步函数 = {
   render: (args) => <Tabs {...args} />,
   args: {
-
-    items: () => [
+    dataSource: () => [
       { label: 'Option 1', key: '1' },
       { label: 'Option 2', key: '2' },
       { label: 'Option 3', key: '3' },
@@ -51,8 +50,7 @@ export const 同步函数 = {
 export const 数组 = {
   render: (args) => <Tabs {...args} />,
   args: {
-
-    items: [
+    dataSource: [
       { label: 'Option 1', key: '1' },
       { label: 'Option 2', key: '2' },
       { label: 'Option 3', key: '3' },

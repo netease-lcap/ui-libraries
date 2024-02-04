@@ -1,7 +1,20 @@
 export { default as Button } from './components/Button/index';
+
 export { default as Select } from './components/Select/index';
+export * from './components/InputNumber/index';
 export { default as Text } from './components/Text/index';
 export { default as Table } from './components/Table/index';
 export { default as Flex } from './components/Flex/index';
 export { TableColumn } from './components/Table/index';
+export * from './components/Transfer/index';
+export * from './components/Tabs/index';
+export * from './components/Switch/index';
+export * from './components/Grid/index';
+export * from './components/Modal/index';
+export * from './components/Message/index';
+export * from './components/Drawer/index';
+export * from './components/Tree/index';
+export * from './components/Popover/index';
+export * from './components/Image/index';
 // export * from './components/Typography/index';
+// export * from 'antd';

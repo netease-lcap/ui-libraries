@@ -1,10 +1,10 @@
 import { Typography as AntdTypography } from 'antd';
 import React from 'react';
-import { registerComponet } from '@/plugins/index';
+import { registerComponet, Plugin } from '@/plugins/index';
 import * as plugin from './plugins';
 import type { pluginType } from '@/plugins/type';
 
-import './index.module.less';
+// import './index.module.less';
 
 const {
   // Title: AntdTitle,
@@ -29,13 +29,14 @@ const mapProps = {
 //   AntdTitle,
 //   { plugin, displayName: AntdTitle.displayName, mapProps },
 // );
-
+// const myPlugin = new Plugin({ plugin, displayName: 'Text', mapProps });
+// clg
 const Text = registerComponet<
   TextProps,
   pluginType<TextProps>
 >(
   AntdText,
-  { plugin, displayName: AntdText.displayName, mapProps },
+  { plugin, displayName: 'Text', mapProps },
 );
 export default Text;
 

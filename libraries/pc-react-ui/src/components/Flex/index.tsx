@@ -1,6 +1,6 @@
 import { Flex as AntdFlex } from 'antd';
 import type { FlexProps } from 'antd';
-import { registerComponet } from '@/plugins/index';
+import { registerComponet, Plugin } from '@/plugins/index';
 import * as plugin from './plugins';
 import type { pluginType } from '@/plugins/type';
 
@@ -15,7 +15,7 @@ const Flex = registerComponet<
   pluginType<FlexProps>
 >(
   AntdFlex,
-  { plugin, displayName: AntdFlex.displayName, mapProps },
+  { plugin, displayName: 'Flex', mapProps },
 );
 
 export default Flex;

@@ -1,39 +1,53 @@
 import React from 'react';
 import fp from 'lodash/fp';
 import _ from 'lodash';
-import { useRequest } from 'ahooks';
+import { useAntdTable } from 'ahooks';
 
 function useHandle(props) {
   const children = props.get('children');
   const columns = props.get('columns');
-  const columnsChildren = fp.filter((item: Record<string, any>) => item.type?.name === 'Column3');
-  const omitColumnsProps = fp.map((item: Record<string, any>) => item.props);
-  const childrenFlow = fp.flow(columnsChildren, omitColumnsProps);
-  const columnsCond = fp.cond([
-    [fp.conforms({ columns: fp.isArray, children: fp.stubTrue }), fp.constant({ columns })],
-    [fp.conforms({ children: fp.isArray }), fp.constant({ columns: childrenFlow(children) })],
-    [fp.stubTrue, fp.stubObject],
-  ]);
-  return columnsCond({ columns, children });
+  const result = React.useMemo(() => {
+    const columnsChildren = fp.filter((item: Record<string, any>) => item.type?.name === 'Column');
+    const omitColumnsProps = fp.map((item: Record<string, any>) => item.props);
+    const childrenFlow = fp.flow(columnsChildren, omitColumnsProps);
+
+    const columnsCond = fp.cond([
+      [fp.conforms({ columns: fp.isArray, children: fp.stubTrue }), fp.constant({ columns })],
+      [fp.conforms({ children: fp.isArray }), fp.constant({ columns: childrenFlow(children) })],
+      [fp.stubTrue, fp.stubObject],
+    ]);
+    return columnsCond({ columns, children });
+  }, [children, columns]);
+  // return {};
+  return result;
+  // const columnsChildren = fp.filter((item: Record<string, any>) => item.type?.name === 'Column3');
+  // const omitColumnsProps = fp.map((item: Record<string, any>) => item.props);
+  // const childrenFlow = fp.flow(columnsChildren, omitColumnsProps);
+  // const columnsCond = fp.cond([
+  //   [fp.conforms({ columns: fp.isArray, children: fp.stubTrue }), fp.constant({ columns })],
+  //   [fp.conforms({ children: fp.isArray }), fp.constant({ columns: childrenFlow(children) })],
+  //   [fp.stubTrue, fp.stubObject],
+  // ]);
+  // return columnsCond({ columns, children });
 }
 
-function useHandleTransformOption(props) {
+export function useHandleTransformOption(props) {
   const dataSource = props.get('dataSource');
   const transformOption = React.useMemo(
     () => fp.cond([
-      [fp.isArray, fp.constant(() => Promise.resolve(dataSource))],
+      [fp.isArray, fp.constant(() => Promise.resolve({ list: dataSource, total: dataSource.length }))],
       [fp.isFunction, fp.constant(() => Promise.resolve(dataSource()))],
-      [fp.stubTrue, fp.constant(() => Promise.resolve([]))],
+      [fp.stubTrue, fp.constant(() => Promise.resolve({ list: [], total: 0 }))],
     ]),
     [dataSource],
   );
 
-  const { data, loading } = useRequest(transformOption(dataSource));
-  const conformsArray = _.cond([
-    [Array.isArray, _.identity],
-    [_.stubTrue, _.stubArray],
-  ]);
-  return fp.isNil(dataSource) ? {} : { dataSource: conformsArray(data), loading };
+  const { tableProps } = useAntdTable(transformOption(dataSource));
+  // const conformsArray = _.cond([
+  //   [Array.isArray, _.identity],
+  //   [_.stubTrue, _.stubArray],
+  // ]);
+  return fp.isNil(dataSource) ? {} : tableProps;
 }
 
 export function useHandlePagination(props) {
@@ -50,15 +64,25 @@ export function useHandlePagination(props) {
   ])(showTotal);
   const showQuickJumper = props.get('showQuickJumper');
   const paginationConfig = {
-    pageSize, showSizeChanger, pageSizeOptions, current, showTotal: showTotalText, showQuickJumper, onChange,
+    ...(fp.isPlainObject(pagination) ? pagination : {}),
+    ...(_.filterUnderfinedValue({
+      pageSize,
+      showSizeChanger,
+      pageSizeOptions,
+      current,
+      showTotal: showTotalText,
+      showQuickJumper,
+      onChange,
+    })),
   };
-  return fp.cond([
+  const paginationProps = fp.cond([
     [fp.matches({ pagination: false }), fp.constant({ pagination: false })],
     [fp.matches({ pagination: true }), fp.constant({ pagination: paginationConfig })],
     [fp.stubTrue, fp.stubObject],
   ])({
     pagination,
   });
+  return paginationProps;
 }
 
 export function useHandleRoowSelection(props) {
@@ -81,7 +105,6 @@ export function useHandleSticky(props) {
   ])({ sticky, stickyOffsetTop });
   return result;
 }
-
 export function useHandleLoading(props) {
   const loading = props.get('loading');
   const loadingText = props.get('loadingText');

@@ -61,7 +61,7 @@ export class Plugin {
   };
 }
 
-export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
+export const HocBaseComponents = React.memo(React.forwardRef((myProps: any, ref) => {
   const { BaseComponent, props, plugin } = myProps;
   const pluginHooks = plugin.getPluginMethod();
   const mapProps = plugin.getMapProps();
@@ -87,26 +87,29 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   );
   const Component = expandProps.get('render');
   const jsProps = expandProps.toJS();
+  console.log(jsProps, 'jsProps');
   const excludeProps = _.omit(jsProps, _.concat(
     _.keys(plugin.getMapProps().toJS()),
     expandProps.get($deletePropsList, []),
     [$deletePropsList, 'render', 'usePlugin', 'mutableProps', $deletePropsList],
   ));
-  // useWhyDidYouUpdate('useWhyDidYouUpdateComponent', { ...excludeProps });
+  // useWhyDidYouUpdate('useWhyDidYouUpdateComponent', { ...jsProps });
 
+  // return <BaseComponent {...props} ref={ref} />;
   return (
     <Component
       {...excludeProps}
       {...mutableProps.getObj()}
     />
   );
-});
+}));
 export function registerComponet<T, U extends pluginType<T>>(
   Component: React.ElementType,
   pluginOption,
 ) {
-  return React.forwardRef<T, U>((props, ref) => {
+  return React.memo(React.forwardRef<T, U>((props, ref) => {
     const [plugin, setPlugin] = React.useState(new Plugin(pluginOption));
+    console.count('text');
     // React.useEffect(() => {
     //   if (props.appType === 'lowCode') {
     //     import('http://localhost:3030/app.js').then((_) => {
@@ -116,10 +119,12 @@ export function registerComponet<T, U extends pluginType<T>>(
     //   }
     // }, [props.appType]);
 
-    React.useEffect(() => {
-      plugin.setPlugin(props.usePlugin);
-      setPlugin({ ...(plugin as any) });
-    }, [props.usePlugin]);
+    // React.useEffect(() => {
+    //   plugin.setPlugin(props.usePlugin);
+    //   setPlugin({ ...(plugin as any) });
+    //   console.log(plugin.plugin, 'plugin.plugin');
+    // }, [props.usePlugin]);
+
     return <HocBaseComponents BaseComponent={Component} props={props} plugin={plugin} ref={ref} />;
-  });
+  }));
 }

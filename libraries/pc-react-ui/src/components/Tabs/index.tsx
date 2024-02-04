@@ -20,4 +20,7 @@ const Tabs = registerComponet<
   { plugin, displayName: AntdTabs.displayName, mapProps },
 );
 
+// console.log(AntdTabs.TabPane);
 export default Tabs;
+
+export const { TabPane } = AntdTabs;
