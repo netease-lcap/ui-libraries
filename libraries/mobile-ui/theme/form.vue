@@ -13,13 +13,13 @@
   </div>
   <div class="content">
     <div class="form-card">
-      <van-cell :isLink="false" :center="true">
+      <van-cell :is-link="false" :center="true">
         <template #title>
             <van-text text="访客姓名"></van-text>
         </template>
         <van-fieldinput placeholder="请输入"></van-fieldinput>
       </van-cell>
-      <van-cell :isLink="false" :center="true">
+      <van-cell :is-link="false" :center="true">
         <template #title>
             <van-text text="来访目的"></van-text>
         </template>
@@ -30,49 +30,49 @@
           :data-source="[{ text: '逛逛', value: 1 }, { text: '看看', value: 3 }, { text: '瞅瞅', value: 2 }]"
         />
       </van-cell>
-      <van-cell :isLink="false" :center="true">
+      <van-cell :is-link="false" :center="true">
         <template #title>
             <van-text text="约见时间"></van-text>
         </template>
-        <van-datetime-picker :type="`datetime`" placeholder="请选择时间" :title="`顶部标题`">
+        <van-datetime-picker type="datetime" placeholder="请选择时间" title="顶部标题">
           <template #picker-bottom>
-              <van-picker-action-slot :targetMethod="`cancel`">
-                  <van-button :type="`info_secondary`" :size="`normal`" :text="`取消`" :squareroud="`round`"></van-button>
+              <van-picker-action-slot target-method="cancel">
+                  <van-button type="info_secondary" size="normal" text="取消" squareroud="round"></van-button>
               </van-picker-action-slot>
-              <van-picker-action-slot :targetMethod="`confirm`">
-                  <van-button :type="`info`" :size="`normal`" :text="`确认`" :squareroud="`round`"></van-button>
+              <van-picker-action-slot target-method="confirm">
+                  <van-button type="info" size="normal" text="确认" squareroud="round"></van-button>
               </van-picker-action-slot>
           </template>
           <template #picker-top>
-              <van-picker-action-slot :targetMethod="`cancel`">
-                  <van-iconv :name="`left-arrow`" :icotype="`only`"></van-iconv>
+              <van-picker-action-slot target-method="cancel">
+                  <van-iconv name="left-arrow" icotype="only"></van-iconv>
               </van-picker-action-slot>
-              <van-picker-action-slot :targetMethod="`confirm`"></van-picker-action-slot>
+              <van-picker-action-slot target-method="confirm"></van-picker-action-slot>
           </template>
         </van-datetime-picker>
       </van-cell>
-      <van-cell :isLink="false" :center="true">
+      <van-cell :is-link="false" center="true">
         <template #title>
             <van-text text="结束时间"></van-text>
         </template>
-        <van-datetime-picker :type="`datetime`" placeholder="请选择时间" :title="`顶部标题`">
+        <van-datetime-picker type="datetime" placeholder="请选择时间" title="顶部标题">
           <template #picker-bottom>
-              <van-picker-action-slot :targetMethod="`cancel`">
-                  <van-button :type="`info_secondary`" :size="`normal`" :text="`取消`" :squareroud="`round`"></van-button>
+              <van-picker-action-slot target-method="cancel">
+                  <van-button type="info_secondary" size="normal" text="取消" squareroud="round"></van-button>
               </van-picker-action-slot>
-              <van-picker-action-slot :targetMethod="`confirm`">
-                  <van-button :type="`info`" :size="`normal`" :text="`确认`" :squareroud="`round`"></van-button>
+              <van-picker-action-slot target-method="confirm">
+                  <van-button type="info" size="normal" text="确认" squareroud="round"></van-button>
               </van-picker-action-slot>
           </template>
           <template #picker-top>
-              <van-picker-action-slot :targetMethod="`cancel`">
-                  <van-iconv :name="`left-arrow`" :icotype="`only`"></van-iconv>
+              <van-picker-action-slot target-method="cancel">
+                  <van-iconv name="left-arrow" icotype="only"></van-iconv>
               </van-picker-action-slot>
-              <van-picker-action-slot :targetMethod="`confirm`"></van-picker-action-slot>
+              <van-picker-action-slot target-method="confirm"></van-picker-action-slot>
           </template>
         </van-datetime-picker>
       </van-cell>
-      <van-cell :isLink="false" :center="true">
+      <van-cell :is-link="false" :center="true">
         <template #title>
             <van-text text="联系电话"></van-text>
         </template>
@@ -84,7 +84,7 @@
         来访理由
       </div>
       <div class="card-content">
-        <van-fieldtextarea :placeholder="`请输入来访理由`" :maxlength="150" :showWordLimit="true"></van-fieldtextarea>
+        <van-fieldtextarea placeholder="请输入来访理由" :maxlength="150" :show-word-limit="true"></van-fieldtextarea>
       </div>
     </div>
     <div class="form-card">
@@ -92,11 +92,11 @@
         上传附件
       </div>
       <div class="card-content">
-        <van-uploader :converter="`json`" :url="`/upload`" :urlField="`filePath`"></van-uploader>
+        <van-uploader converter="json" url="/upload" url-field="filePath"></van-uploader>
       </div>
     </div>
     <div class="form-card">
-      <van-cell :isLink="false" :center="true">
+      <van-cell :is-link="false" :center="true">
         <template #title>
             <van-text text="审批人"></van-text>
         </template>
@@ -110,7 +110,7 @@
   </div>
   <div class="footer">
     <div class="bottom-bar">
-      <van-button type="info" :square="false" size="middle" :squareroud="`round`" text="提交" :block="`blockb`"></van-button>
+      <van-button type="info" :square="false" size="middle" squareroud="round" text="提交" block="blockb"></van-button>
     </div>
   </div>
 </div>

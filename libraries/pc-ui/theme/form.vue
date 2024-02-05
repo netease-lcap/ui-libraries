@@ -8,7 +8,7 @@
                 <u-dropdown style="margin-right: 10px;">
                     <template #default>
                         <u-dropdown-item>
-                            <u-text :text="`安全退出`"></u-text>
+                            <u-text text="安全退出"></u-text>
                         </u-dropdown-item>
                     </template>
                     <template #title>
@@ -21,16 +21,16 @@
             </u-multi-layout-item>
         </template>
         <template #left>
-            <u-multi-layout-item :alignItems="`center`" style="width:200px;">
-                <u-image :fit="`cover`" :src="`/assets/lcap-logo-light.svg`" style="width: 28px; height: 28px; margin: 16px 14px; --custom-start: auto; vertical-align: middle;"></u-image>
-                <u-text :size="`large`" :text="`应用名称`" style="--custom-start: auto; vertical-align: middle;"></u-text>
+            <u-multi-layout-item align-items="center" style="width:200px;">
+                <u-image fit="cover" src="/assets/lcap-logo-light.svg" style="width: 28px; height: 28px; margin: 16px 14px; --custom-start: auto; vertical-align: middle;"></u-image>
+                <u-text size="large" text="应用名称" style="--custom-start: auto; vertical-align: middle;"></u-text>
             </u-multi-layout-item>
         </template>
-        <u-navbar-item-multi destination="" :target="`_self`">
-            <u-text :text="`顶部导航1`"></u-text>
+        <u-navbar-item-multi destination="">
+            <u-text text="顶部导航1"></u-text>
         </u-navbar-item-multi>
-        <u-navbar-item-multi target="_self">
-            <u-text :text="`顶部导航2`"></u-text>
+        <u-navbar-item-multi>
+            <u-text text="顶部导航2"></u-text>
         </u-navbar-item-multi>
       </u-navbar-multi>
     </u-multi-layout-item>

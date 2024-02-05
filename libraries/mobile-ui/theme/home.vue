@@ -80,8 +80,8 @@
             </div>
           </div>
           <div class="info-card-footer">
-            <van-button :type="`info_secondary`" :size="`small`" :text="`取消`" :squareroud="`round`" :destination="``" :loading="false" :disabled="false" :replace="false"></van-button>
-            <van-button :type="`info`" :size="`small`" :text="`确定`" :squareroud="`round`" :destination="``" :loading="false" :disabled="false" :replace="false"></van-button>
+            <van-button type="info_secondary" size="small" text="取消" squareroud="round" destination="" :loading="false" :disabled="false" :replace="false"></van-button>
+            <van-button type="info" size="small" text="确定" squareroud="round" destination="" :loading="false" :disabled="false" :replace="false"></van-button>
           </div>
         </div>
 
@@ -109,25 +109,25 @@
             </div>
           </div>
           <div class="info-card-footer">
-            <van-button :type="`info_secondary`" :size="`small`" :text="`取消`" :squareroud="`round`" :destination="``" :loading="false" :disabled="false" :replace="false"></van-button>
-            <van-button :type="`info`" :size="`small`" :text="`确定`" :squareroud="`round`" :destination="``" :loading="false" :disabled="false" :replace="false"></van-button>
+            <van-button type="info_secondary" size="small" text="取消" squareroud="round" destination="" :loading="false" :disabled="false" :replace="false"></van-button>
+            <van-button type="info" size="small" text="确定" squareroud="round" destination="" :loading="false" :disabled="false" :replace="false"></van-button>
           </div>
         </div>
       </van-linear-layout>
     </div>
     <div class="footer">
       <div class="bottom-bar">
-        <van-button type="info" :square="false" size="middle" :squareroud="`round`" text="邀请访客" :block="`blockb`"></van-button>
+        <van-button type="info" :square="false" size="middle" squareroud="round" text="邀请访客" block="blockb"></van-button>
       </div>
       <van-tabbar>
-        <van-tabbar-item :icon="`frontpage`" style="font-size:24px">
+        <van-tabbar-item icon="frontpage" style="font-size:24px">
             <van-text text="首页"></van-text>
         </van-tabbar-item>
-        <van-tabbar-item :icon="`contact`" style="font-size:24px">
-            <van-text :text="`标签`"></van-text>
+        <van-tabbar-item icon="contact" style="font-size:24px">
+            <van-text text="标签"></van-text>
         </van-tabbar-item>
-        <van-tabbar-item :icon="`location`" style="font-size:24px">
-            <van-text :text="`标签`"></van-text>
+        <van-tabbar-item icon="location" style="font-size:24px">
+            <van-text text="标签"></van-text>
         </van-tabbar-item>
     </van-tabbar>
     </div>
