@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-function filterUnderfinedValue(object) {
-  return Object.entries(object).reduce((pre, [key, value]) => (_.isUndefined(value) ? pre : _.assign(pre, { [key]: value })), {});
+function filterUnderfinedValue(object: Record<string, string>) {
+  return Object.fromEntries(Object.entries(object).filter(([, value]) => !_.isUndefined(value)));
 }
 _.mixin({ filterUnderfinedValue });
 

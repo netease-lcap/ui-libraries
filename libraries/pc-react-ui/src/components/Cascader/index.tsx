@@ -9,7 +9,7 @@ import './index.module.less';
 // type TransferProps = AntdTransferProps
 
 const mapProps = {
-  dataSource: 'options',
+  // dataSource: 'options',
 };
 
 const Cascader = registerComponet<

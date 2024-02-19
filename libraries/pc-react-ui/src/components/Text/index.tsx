@@ -29,7 +29,7 @@ const mapProps = {
 //   AntdTitle,
 //   { plugin, displayName: AntdTitle.displayName, mapProps },
 // );
-// const myPlugin = new Plugin({ plugin, displayName: 'Text', mapProps });
+const myPlugin = new Plugin({ plugin, displayName: 'Text', mapProps });
 // clg
 const Text = registerComponet<
   TextProps,

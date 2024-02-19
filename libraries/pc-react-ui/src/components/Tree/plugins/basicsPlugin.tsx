@@ -5,14 +5,14 @@ import { $deletePropsList, $dataSourceField } from '@/plugins/constants';
 
 export function useHandleTransform(props) {
   const textField = props.get('textField', 'title');
-  const valueField = props.get('valueField', 'key');
+  const valueField = props.get('valueField', 'value');
   const childrenField = props.get('childrenField', 'children');
   const fieldNames = props.get('fieldNames');
   return {
     [$dataSourceField]: 'treeData',
     fieldNames: {
-      title: textField,
-      key: valueField,
+      label: textField,
+      value: valueField,
       children: childrenField,
       ...fieldNames,
     },

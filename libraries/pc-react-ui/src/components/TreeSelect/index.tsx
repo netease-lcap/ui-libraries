@@ -9,7 +9,7 @@ import './index.module.less';
 // type TransferProps = AntdTransferProps
 
 const mapProps = {
-  dataSource: 'treeData',
+  // dataSource: 'treeData',
 };
 
 const TreeSelect = registerComponet<

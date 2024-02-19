@@ -56,7 +56,7 @@ export function useHandleTextAndValueField(props) {
       [_.stubTrue, _.constant(options)],
     ]);
     return decisionCallback({ textField, valueField });
-  }, [options, textField, valueField]);
+  }, [options, textField, valueField, labelKey, valueKey]);
   return _.isNil(options)
     ? { [$deletePropsList]: deletePropsList }
     : { options: convertOption, [$deletePropsList]: deletePropsList };

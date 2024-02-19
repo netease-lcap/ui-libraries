@@ -73,6 +73,7 @@ export const HocBaseComponents = React.memo(React.forwardRef((myProps: any, ref)
       getObj: () => obj,
     };
   }
+
   const mutableProps = handleMutableProps();
   const ImmutableProps = Map(props)
     .reduce((result, value, key) => result.set(mapProps.get(key, key), value), Map())
@@ -87,7 +88,7 @@ export const HocBaseComponents = React.memo(React.forwardRef((myProps: any, ref)
   );
   const Component = expandProps.get('render');
   const jsProps = expandProps.toJS();
-  console.log(jsProps, 'jsProps');
+  // console.log(jsProps, 'jsProps');
   const excludeProps = _.omit(jsProps, _.concat(
     _.keys(plugin.getMapProps().toJS()),
     expandProps.get($deletePropsList, []),
@@ -109,7 +110,8 @@ export function registerComponet<T, U extends pluginType<T>>(
 ) {
   return React.memo(React.forwardRef<T, U>((props, ref) => {
     const [plugin, setPlugin] = React.useState(new Plugin(pluginOption));
-    console.count('text');
+    console.count(pluginOption.displayName);
+    console.log(1990098773);
     // React.useEffect(() => {
     //   if (props.appType === 'lowCode') {
     //     import('http://localhost:3030/app.js').then((_) => {

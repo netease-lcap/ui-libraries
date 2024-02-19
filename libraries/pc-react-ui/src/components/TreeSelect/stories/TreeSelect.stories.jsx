@@ -38,6 +38,7 @@ export const 异步函数 = {
         ]);
       }, 3000);
     }),
+    treeCheckable: true,
     valueField: 'key',
     textField: 'label',
   },

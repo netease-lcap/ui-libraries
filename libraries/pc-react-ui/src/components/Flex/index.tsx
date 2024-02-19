@@ -10,6 +10,7 @@ const mapProps = {
   mySize: 'size',
 };
 
+// const myPlugin = new Plugin({ plugin, displayName: 'Flex', mapProps });
 const Flex = registerComponet<
   FlexProps,
   pluginType<FlexProps>

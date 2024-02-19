@@ -85,7 +85,7 @@ export function useHandlePagination(props) {
   return paginationProps;
 }
 
-export function useHandleRoowSelection(props) {
+export function useHandleRowSelection(props) {
   const valueProps = props.get('value');
   const onChange = props.get('onChange');
   const result = fp.cond([

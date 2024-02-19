@@ -15,6 +15,7 @@ const mapProps = {
   mySize: 'size',
 };
 
+// const myPlugin = new Plugin({ plugin, displayName: 'Table', mapProps });
 const Table = registerComponet<
   TableProps,
   pluginType<TableProps>
