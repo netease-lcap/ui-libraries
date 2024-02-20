@@ -1,5 +1,5 @@
 import React from 'react';
-import Menu, { MenuItem } from '../index';
+import { Menu, MenuItem } from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {

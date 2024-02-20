@@ -1,6 +1,6 @@
 import React from 'react';
-import Drawer from '../index';
-import Button from '@/components/Button/index';
+import { Drawer } from '../index';
+import { Button } from '@/components/Button/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -35,11 +35,7 @@ export const 默认 = {
         <Button type="primary" onClick={showModal}>
           Open Modal
         </Button>
-        <Drawer
-          title="Basic Modal"
-          ref={modalRef}
-          onClose={() => modalRef.current.setOpen(false)}
-        >
+        <Drawer title="Basic Modal" ref={modalRef} onClose={() => modalRef.current.setOpen(false)}>
           <p key={1}>Some contents...</p>
           <p key={2}>Some contents...</p>
           <p key={3}>Some contents...</p>

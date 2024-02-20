@@ -12,7 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Menu = registerComponet<
+export const Menu = registerComponet<
   MenuProps,
   pluginType<MenuProps>
 >(
@@ -20,7 +20,7 @@ const Menu = registerComponet<
   { plugin, displayName: AntdMenu.displayName, mapProps },
 );
 
-export default Menu;
+// export default Menu;
 export const MenuItem = AntdMenu.Item;
 export const MenuItemGroup = AntdMenu.ItemGroup;
 export const MenuSubMenu = AntdMenu.SubMenu;

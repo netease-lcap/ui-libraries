@@ -12,7 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Tabs = registerComponet<
+export const Tabs = registerComponet<
   TabsProps,
   pluginType<TabsProps>
 >(
@@ -21,6 +21,6 @@ const Tabs = registerComponet<
 );
 
 // console.log(AntdTabs.TabPane);
-export default Tabs;
+// export default Tabs;
 
 export const { TabPane } = AntdTabs;

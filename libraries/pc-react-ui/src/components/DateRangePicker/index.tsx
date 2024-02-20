@@ -14,12 +14,10 @@ const mapProps = {
   mySize: 'size',
 };
 
-const DateRangePicker = registerComponet<
+export const DateRangePicker = registerComponet<
   RangePickerProps,
   pluginType<RangePickerProps>
 >(
   AntdRangePicker,
   { plugin, displayName: AntdRangePicker.displayName, mapProps },
 );
-
-export default DateRangePicker;

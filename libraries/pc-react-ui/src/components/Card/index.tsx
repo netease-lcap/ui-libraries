@@ -12,15 +12,13 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Card = registerComponet<
+export const Card = registerComponet<
   ProCardProps,
   pluginType<ProCardProps>
 >(
   AntdCard,
   { plugin, displayName: 'descriptions', mapProps },
 );
-
-export default Card;
 
 export const CardTabPane = AntdCard.TabPane;
 export const CardDivider = AntdCard.Divider;

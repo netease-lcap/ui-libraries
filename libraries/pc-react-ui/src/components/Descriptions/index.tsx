@@ -12,14 +12,12 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Descriptions = registerComponet<
+export const Descriptions = registerComponet<
   ProDescriptionsProps,
   pluginType<ProDescriptionsProps>
 >(
   AntdDescriptions,
   { plugin, displayName: 'descriptions', mapProps },
 );
-
-export default Descriptions;
 
 export const DescriptionsItem = AntdDescriptions.Item;

@@ -111,7 +111,6 @@ export function registerComponet<T, U extends pluginType<T>>(
   return React.memo(React.forwardRef<T, U>((props, ref) => {
     const [plugin, setPlugin] = React.useState(new Plugin(pluginOption));
     console.count(pluginOption.displayName);
-    console.log(1990098773);
     // React.useEffect(() => {
     //   if (props.appType === 'lowCode') {
     //     import('http://localhost:3030/app.js').then((_) => {

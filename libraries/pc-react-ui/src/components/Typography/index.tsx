@@ -54,9 +54,9 @@ const Link = registerComponet<
   { plugin, displayName: AntdLink.displayName, mapProps },
 );
 
-export default {
-  Title, Text, Paragraph, Link,
-};
+// export default {
+//   Title, Text, Paragraph, Link,
+// };
 export {
   Title, Text, Paragraph, Link,
 };

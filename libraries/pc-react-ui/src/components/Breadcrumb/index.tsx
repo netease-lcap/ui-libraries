@@ -12,7 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Breadcrumb = registerComponet<
+export const Breadcrumb = registerComponet<
   BreadcrumbProps,
   pluginType<BreadcrumbProps>
 >(
@@ -20,5 +20,4 @@ const Breadcrumb = registerComponet<
   { plugin, displayName: AntdBreadcrumb.displayName, mapProps },
 );
 
-export default Breadcrumb;
 export const BreadcrumbItem = AntdBreadcrumb.Item;

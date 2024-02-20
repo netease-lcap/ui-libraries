@@ -1,28 +1,20 @@
-import { Radio as AntdRadio } from 'antd';
-import antdIcon from '@ant-design/icons';
+import React from 'react';
+import * as AntdIcon from '@ant-design/icons';
 
-import { registerComponet } from '@/plugins/index';
-import * as plugin from './plugins';
-import type { pluginType } from '@/plugins/type';
+const iconType = 'MessageOutlined';
 
-import './index.module.less';
-
-// type TransferProps = AntdTransferProps
-
-type IconProps = typeof antdIcon;
-const mapProps = {
-  mySize: 'size',
-};
-
-const Icon = registerComponet<
-  IconProps,
-  pluginType<IconProps>
->(
-  AntdRadio,
-  { plugin, displayName: antdIcon.displayName, mapProps },
-);
-
-export default Icon;
-
-export const RadioGroup = AntdRadio.Group;
-export const RadioButton = AntdRadio.Button;
+export function Icon(props) {
+  return (
+    <div>
+      {
+        React.createElement(
+          AntdIcon[props!.iconType ?? 'MessageOutlined'],
+          {
+            style: { fontSize: '16px', color: '#08c' },
+            ...props,
+          },
+        )
+      }
+    </div>
+  );
+}

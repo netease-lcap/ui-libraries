@@ -12,7 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const TimePicker = registerComponet<
+export const TimePicker = registerComponet<
   TimePickerProps,
   pluginType<TimePickerProps>
 >(
@@ -20,4 +20,4 @@ const TimePicker = registerComponet<
   { plugin, displayName: AntdTimePicker.displayName, mapProps },
 );
 
-export default TimePicker;
+// export default TimePicker;

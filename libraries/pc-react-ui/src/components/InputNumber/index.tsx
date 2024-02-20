@@ -12,9 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const InputNumber = registerComponet<InputNumberProps, pluginType<InputNumberProps>>(
+export const InputNumber = registerComponet<InputNumberProps, pluginType<InputNumberProps>>(
   AntdInputNumber,
   { plugin: basicsPlugin, displayName: AntdInputNumber.displayName, mapProps },
 );
-
-export default InputNumber;

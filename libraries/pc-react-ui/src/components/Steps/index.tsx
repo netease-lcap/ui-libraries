@@ -12,7 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Steps = registerComponet<
+export const Steps = registerComponet<
   StepProps,
   pluginType<StepProps>
 >(
@@ -20,6 +20,6 @@ const Steps = registerComponet<
   { plugin, displayName: AntdSteps.displayName, mapProps },
 );
 
-export default Steps;
+// export default Steps;
 
 export const StepsItem = AntdSteps.Step;

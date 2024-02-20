@@ -10,7 +10,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Input = registerComponet<
+export const Input = registerComponet<
   InputProps,
   pluginType<InputProps>
 >(
@@ -18,6 +18,6 @@ const Input = registerComponet<
   { plugin, displayName: AntdInput.displayName, mapProps },
 );
 
-export default Input;
+// export default Input;
 
-export const { TextArea } = AntdInput;
+// export const { TextArea } = AntdInput;

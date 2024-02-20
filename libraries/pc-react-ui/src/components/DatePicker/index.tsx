@@ -11,13 +11,10 @@ import './index.module.less';
 const mapProps = {
   mySize: 'size',
 };
-
-const DatePicker = registerComponet<
+export const DatePicker = registerComponet<
   DatePickerProps,
   pluginType<DatePickerProps>
 >(
   AntdDatePicker,
   { plugin, displayName: AntdDatePicker.displayName, mapProps },
 );
-
-export default DatePicker;

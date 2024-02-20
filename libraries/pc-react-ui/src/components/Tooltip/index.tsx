@@ -10,7 +10,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Tooltip = registerComponet<
+export const Tooltip = registerComponet<
   TooltipProps,
   pluginType<TooltipProps>
 >(
@@ -18,4 +18,4 @@ const Tooltip = registerComponet<
   { plugin, displayName: AntdTooltip.displayName, mapProps },
 );
 
-export default Tooltip;
+// export default Tooltip;

@@ -12,7 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Drawer = registerComponet<
+export const Drawer = registerComponet<
   DrawerProps,
   pluginType<DrawerProps>
 >(
@@ -20,4 +20,4 @@ const Drawer = registerComponet<
   { plugin, displayName: AntdDrawer.displayName, mapProps },
 );
 
-export default Drawer;
+// export default Drawer;

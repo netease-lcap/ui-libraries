@@ -14,7 +14,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Router = registerComponet<
+export const Router = registerComponet<
   BrowserRouterProps,
   pluginType<BrowserRouterProps>
 >(
@@ -22,4 +22,4 @@ const Router = registerComponet<
   { plugin, displayName: 'router', mapProps },
 );
 
-export default Router;
+// export Router;

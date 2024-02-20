@@ -2,6 +2,7 @@ import { Checkbox as AntdCheckbox } from 'antd';
 import type { CheckboxProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
+import * as groupPlugin from './plugins/groupPlugin';
 import type { pluginType } from '@/plugins/type';
 
 import './index.module.less';
@@ -12,7 +13,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Checkbox = registerComponet<
+export const Checkbox = registerComponet<
   CheckboxProps,
   pluginType<CheckboxProps>
 >(
@@ -20,5 +21,10 @@ const Checkbox = registerComponet<
   { plugin, displayName: AntdCheckbox.displayName, mapProps },
 );
 
-export default Checkbox;
-export const checkboxGroup = AntdCheckbox.Group;
+export const checkboxGroup = registerComponet<
+  CheckboxProps,
+  pluginType<CheckboxProps>
+>(
+  AntdCheckbox.Group,
+  { groupPlugin, displayName: AntdCheckbox.Group.displayName, mapProps },
+);

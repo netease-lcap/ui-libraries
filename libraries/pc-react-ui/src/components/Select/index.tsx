@@ -15,12 +15,12 @@ const mapProps = {
   dataSource: 'options',
 };
 
-const Select = registerComponet<SelectProps, pluginType<SelectProps>>(
+export const Select = registerComponet<SelectProps, pluginType<SelectProps>>(
   AntdSelect,
   { plugin, displayName: AntdSelect.displayName, mapProps },
 );
 
-export default Select;
+// export default Select;
 export const SelectOption = AntdSelect.Option;
 
 export const SelectOptGroup = AntdSelect.OptGroup;

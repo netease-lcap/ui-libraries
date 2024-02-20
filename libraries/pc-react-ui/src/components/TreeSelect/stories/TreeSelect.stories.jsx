@@ -1,5 +1,5 @@
 import React from 'react';
-import TreeSelect from '../index';
+import { TreeSelect } from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -26,18 +26,19 @@ export const 异步函数 = {
   render: (args) => <TreeSelect {...args} />,
   args: {
     style: { width: 300 },
-    dataSource: () => new Promise((res) => {
-      setTimeout(() => {
-        res([
-          { label: 'Option 1', key: '1' },
-          {
-            label: 'Option 2',
-            key: '2',
-            children: [{ label: 'Option 3', key: '3' }],
-          },
-        ]);
-      }, 3000);
-    }),
+    dataSource: () =>
+      new Promise((res) => {
+        setTimeout(() => {
+          res([
+            { label: 'Option 1', key: '1' },
+            {
+              label: 'Option 2',
+              key: '2',
+              children: [{ label: 'Option 3', key: '3' }],
+            },
+          ]);
+        }, 3000);
+      }),
     treeCheckable: true,
     valueField: 'key',
     textField: 'label',

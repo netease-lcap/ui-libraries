@@ -12,7 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Switch = registerComponet<
+export const Switch = registerComponet<
   SwitchProps,
   pluginType<SwitchProps>
 >(
@@ -20,4 +20,4 @@ const Switch = registerComponet<
   { plugin, displayName: AntdSwitch.displayName, mapProps },
 );
 
-export default Switch;
+// export default Switch;

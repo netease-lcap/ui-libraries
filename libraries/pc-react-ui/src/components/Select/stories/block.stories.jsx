@@ -1,5 +1,5 @@
 import React from 'react';
-import Select, { SelectOption } from '../index';
+import { Select, SelectOption } from '../index';
 // import Select from 'antd';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export

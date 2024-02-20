@@ -12,7 +12,7 @@ const mapProps = {
   // dataSource: 'treeData',
 };
 
-const Tree = registerComponet<
+export const Tree = registerComponet<
   TreeProps,
   pluginType<TreeProps>
 >(
@@ -20,5 +20,5 @@ const Tree = registerComponet<
   { plugin, displayName: 'Tree', mapProps },
 );
 
-export default Tree;
+// export default Tree;
 export const { TreeNode } = AntdTree;

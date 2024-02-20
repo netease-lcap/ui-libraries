@@ -12,12 +12,10 @@ const mapProps = {
   // dataSource: 'options',
 };
 
-const Cascader = registerComponet<
+export const Cascader = registerComponet<
   CascaderProps,
   pluginType<CascaderProps>
 >(
   AntdCascader,
   { plugin, displayName: AntdCascader.displayName, mapProps },
 );
-
-export default Cascader;

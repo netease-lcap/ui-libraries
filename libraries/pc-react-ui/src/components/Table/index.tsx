@@ -16,7 +16,7 @@ const mapProps = {
 };
 
 // const myPlugin = new Plugin({ plugin, displayName: 'Table', mapProps });
-const Table = registerComponet<
+export const Table = registerComponet<
   TableProps,
   pluginType<TableProps>
 >(
@@ -28,7 +28,7 @@ const Table = registerComponet<
 //   search: false,
 //   options: false,
 // };
-export default Table;
+// export default Table;
 // AntdTable.Column.displayName = 'TableColumn';
 export const TableColumn = AntdTable.Column;
 // export const DescriptionsItem = AntdTable.Item;

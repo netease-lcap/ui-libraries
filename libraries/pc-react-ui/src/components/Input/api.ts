@@ -7,7 +7,7 @@ namespace nasl.ui {
 			description: '基本的表单输入组件',
 			group: 'Form'
 	})
-	export class UInput extends ViewComponent {
+	export class Input extends ViewComponent {
 
 
 			@Method({
@@ -27,33 +27,33 @@ namespace nasl.ui {
 					description: '清空输入框。',
 			})
 			clear(): void {}
-			constructor(options?: Partial<UInputOptions>) { super(); }
+			constructor(options?: Partial<InputOptions>) { super(); }
 	}
 
-	export class UInputOptions  extends ViewComponentOptions {
-			@Prop({
-					title: '最小长度',
-					setter: {
-							concept: 'NumberInputSetter',
-							precision: 0,
-					},
-			})
-			private minlength: nasl.core.Integer;
+	export class InputOptions  extends ViewComponentOptions {
+			// @Prop({
+			// 		title: '最小长度',
+			// 		setter: {
+			// 				concept: 'NumberInputSetter',
+			// 				precision: 0,
+			// 		},
+			// })
+			// private minlength: nasl.core.Integer;
 
-			@Prop({
-					title: '拼写检查',
-					description: '原生属性',
-					setter: {
-							concept: 'SwitchSetter',
-					},
-			})
-			private spellcheck: nasl.core.Boolean;
+			// @Prop({
+			// 		title: '拼写检查',
+			// 		description: '原生属性',
+			// 		setter: {
+			// 				concept: 'SwitchSetter',
+			// 		},
+			// })
+			// private spellcheck: nasl.core.Boolean;
 
-			@Prop({
-					title: '长度上限提示',
-					description: '输入内容达到上限时的错误提示，且被 [FormItem](#/components/u-form) 包裹时生效',
-			})
-			private maxlengthMessage: nasl.core.String;
+			// @Prop({
+			// 		title: '长度上限提示',
+			// 		description: '输入内容达到上限时的错误提示，且被 [FormItem](#/components/u-form) 包裹时生效',
+			// })
+			// private maxlengthMessage: nasl.core.String;
 
 			@Prop({
 					group: '数据属性',
@@ -149,16 +149,16 @@ namespace nasl.ui {
 			})
 			password: nasl.core.Boolean = false;
 
-			@Prop({
-					group: '状态属性',
-					title: '只读',
-					description: '正常显示，但禁止选择/输入',
-					docDescription: '正常显示，但禁止选择或输入。',
-					setter: {
-							concept: 'SwitchSetter',
-					},
-			})
-			readonly: nasl.core.Boolean = false;
+			// @Prop({
+			// 		group: '状态属性',
+			// 		title: '只读',
+			// 		description: '正常显示，但禁止选择/输入',
+			// 		docDescription: '正常显示，但禁止选择或输入。',
+			// 		setter: {
+			// 				concept: 'SwitchSetter',
+			// 		},
+			// })
+			// readonly: nasl.core.Boolean = false;
 
 			@Prop({
 					group: '状态属性',
@@ -182,44 +182,44 @@ namespace nasl.ui {
 			})
 			disabled: nasl.core.Boolean = false;
 
-			@Prop({
-					group: '样式属性',
-					title: '宽度',
-					description: '设置单行输入框宽度大小',
-					docDescription: '设置单行输入框宽度大小，可选占满、巨大、大、中型、正常、小、迷你',
-					setter: {
-							concept: 'EnumSelectSetter',
-							options: [{ title: '占满' }, { title: '巨大' }, { title: '大' }, { title: '中型' }, { title: '正常' }, { title: '小' }, { title: '迷你' }],
-					},
-			})
-			width: 'full' | 'huge' | 'large' | 'medium' | 'normal' | 'small' | 'mini' = 'normal';
+			// @Prop({
+			// 		group: '样式属性',
+			// 		title: '宽度',
+			// 		description: '设置单行输入框宽度大小',
+			// 		docDescription: '设置单行输入框宽度大小，可选占满、巨大、大、中型、正常、小、迷你',
+			// 		setter: {
+			// 				concept: 'EnumSelectSetter',
+			// 				options: [{ title: '占满' }, { title: '巨大' }, { title: '大' }, { title: '中型' }, { title: '正常' }, { title: '小' }, { title: '迷你' }],
+			// 		},
+			// })
+			// width: 'full' | 'huge' | 'large' | 'medium' | 'normal' | 'small' | 'mini' = 'normal';
 
-			@Prop({
-					group: '样式属性',
-					title: '高度',
-					description: '设置单行输入框高度大小',
-					docDescription: '设置单行输入框高度大小，可选占满、巨大、大、中型、正常、小、迷你。',
-					setter: {
-							concept: 'EnumSelectSetter',
-							options: [{ title: '占满' }, { title: '巨大' }, { title: '大' }, { title: '中型' }, { title: '正常' }, { title: '小' }, { title: '迷你' }],
-					},
-			})
-			height: 'full' | 'huge' | 'large' | 'medium' | 'normal' | 'small' | 'mini' = 'normal';
+			// @Prop({
+			// 		group: '样式属性',
+			// 		title: '高度',
+			// 		description: '设置单行输入框高度大小',
+			// 		docDescription: '设置单行输入框高度大小，可选占满、巨大、大、中型、正常、小、迷你。',
+			// 		setter: {
+			// 				concept: 'EnumSelectSetter',
+			// 				options: [{ title: '占满' }, { title: '巨大' }, { title: '大' }, { title: '中型' }, { title: '正常' }, { title: '小' }, { title: '迷你' }],
+			// 		},
+			// })
+			// height: 'full' | 'huge' | 'large' | 'medium' | 'normal' | 'small' | 'mini' = 'normal';
 
-			@Event({
-					title: '输入前',
-					description: '输入前触发。可以在这个阶段阻止输入，或者修改输入的值 $event.value',
-			})
-			onBeforeInput: (event: {
-					value: nasl.core.String;
-					oldValue: nasl.core.String;
-			}) => any;
+			// @Event({
+			// 		title: '输入前',
+			// 		description: '输入前触发。可以在这个阶段阻止输入，或者修改输入的值 $event.value',
+			// })
+			// onBeforeInput: (event: {
+			// 		value: nasl.core.String;
+			// 		oldValue: nasl.core.String;
+			// }) => any;
 
-			@Event({
-					title: '输入时',
-					description: '输入时触发。',
-			})
-			onInput: (event: nasl.core.String) => any;
+			// @Event({
+			// 		title: '输入时',
+			// 		description: '输入时触发。',
+			// })
+			// onInput: (event: nasl.core.String) => any;
 
 			@Event({
 					title: '改变后',
@@ -258,67 +258,67 @@ namespace nasl.ui {
 					which: nasl.core.Integer;
 			}) => any;
 
-			@Event({
-					title: '清空前',
-					description: '清空前触发。',
-			})
-			onBeforeClear: (event: {
-					value: nasl.core.String;
-					oldValue: nasl.core.String;
-			}) => any;
+			// @Event({
+			// 		title: '清空前',
+			// 		description: '清空前触发。',
+			// })
+			// onBeforeClear: (event: {
+			// 		value: nasl.core.String;
+			// 		oldValue: nasl.core.String;
+			// }) => any;
 
-			@Event({
-					title: '清空后',
-					description: '清空后触发。',
-			})
-			onClear: (event: {
-					value: nasl.core.String;
-					oldValue: nasl.core.String;
-			}) => any;
+			// @Event({
+			// 		title: '清空后',
+			// 		description: '清空后触发。',
+			// })
+			// onClear: (event: {
+			// 		value: nasl.core.String;
+			// 		oldValue: nasl.core.String;
+			// }) => any;
 
-			@Event({
-					title: '点击前缀图标',
-					description: '点击前缀图标后触发',
-			})
-			onClickPrefix: (event: {
-					altKey: nasl.core.Boolean;
-					button: nasl.core.Integer;
-					clientX: nasl.core.Integer;
-					clientY: nasl.core.Integer;
-					ctrlKey: nasl.core.Boolean;
-					metaKey: nasl.core.Boolean;
-					movementX: nasl.core.Integer;
-					movementY: nasl.core.Integer;
-					offsetX: nasl.core.Integer;
-					offsetY: nasl.core.Integer;
-					pageX: nasl.core.Integer;
-					pageY: nasl.core.Integer;
-					screenX: nasl.core.Integer;
-					screenY: nasl.core.Integer;
-					which: nasl.core.Integer;
-			}) => any;
+			// @Event({
+			// 		title: '点击前缀图标',
+			// 		description: '点击前缀图标后触发',
+			// })
+			// onClickPrefix: (event: {
+			// 		altKey: nasl.core.Boolean;
+			// 		button: nasl.core.Integer;
+			// 		clientX: nasl.core.Integer;
+			// 		clientY: nasl.core.Integer;
+			// 		ctrlKey: nasl.core.Boolean;
+			// 		metaKey: nasl.core.Boolean;
+			// 		movementX: nasl.core.Integer;
+			// 		movementY: nasl.core.Integer;
+			// 		offsetX: nasl.core.Integer;
+			// 		offsetY: nasl.core.Integer;
+			// 		pageX: nasl.core.Integer;
+			// 		pageY: nasl.core.Integer;
+			// 		screenX: nasl.core.Integer;
+			// 		screenY: nasl.core.Integer;
+			// 		which: nasl.core.Integer;
+			// }) => any;
 
-			@Event({
-					title: '点击后缀图标',
-					description: '点击后缀图标后触发',
-			})
-			onClickSuffix: (event: {
-					altKey: nasl.core.Boolean;
-					button: nasl.core.Integer;
-					clientX: nasl.core.Integer;
-					clientY: nasl.core.Integer;
-					ctrlKey: nasl.core.Boolean;
-					metaKey: nasl.core.Boolean;
-					movementX: nasl.core.Integer;
-					movementY: nasl.core.Integer;
-					offsetX: nasl.core.Integer;
-					offsetY: nasl.core.Integer;
-					pageX: nasl.core.Integer;
-					pageY: nasl.core.Integer;
-					screenX: nasl.core.Integer;
-					screenY: nasl.core.Integer;
-					which: nasl.core.Integer;
-			}) => any;
+			// @Event({
+			// 		title: '点击后缀图标',
+			// 		description: '点击后缀图标后触发',
+			// })
+			// onClickSuffix: (event: {
+			// 		altKey: nasl.core.Boolean;
+			// 		button: nasl.core.Integer;
+			// 		clientX: nasl.core.Integer;
+			// 		clientY: nasl.core.Integer;
+			// 		ctrlKey: nasl.core.Boolean;
+			// 		metaKey: nasl.core.Boolean;
+			// 		movementX: nasl.core.Integer;
+			// 		movementY: nasl.core.Integer;
+			// 		offsetX: nasl.core.Integer;
+			// 		offsetY: nasl.core.Integer;
+			// 		pageX: nasl.core.Integer;
+			// 		pageY: nasl.core.Integer;
+			// 		screenX: nasl.core.Integer;
+			// 		screenY: nasl.core.Integer;
+			// 		which: nasl.core.Integer;
+			// }) => any;
 
 			@Event({
 					title: '键盘按下',
@@ -350,16 +350,16 @@ namespace nasl.ui {
 					shiftKey: nasl.core.Boolean;
 			}) => any;
 
-			@Slot({
-					title: '前缀图标',
-					description: '前缀图标自定义',
-			})
-			slotPrefix: () => Array<ViewComponent>;
+			// @Slot({
+			// 		title: '前缀图标',
+			// 		description: '前缀图标自定义',
+			// })
+			// slotPrefix: () => Array<ViewComponent>;
 
-			@Slot({
-					title: '后缀图标',
-					description: '后缀图标自定义',
-			})
-			slotSuffix: () => Array<ViewComponent>;
+			// @Slot({
+			// 		title: '后缀图标',
+			// 		description: '后缀图标自定义',
+			// })
+			// slotSuffix: () => Array<ViewComponent>;
 	}
 }

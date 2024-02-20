@@ -114,7 +114,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    open: nasl.core.Boolean = false;
+    open: nasl.core.Boolean;
 
     @Prop({
       group: '样式属性',

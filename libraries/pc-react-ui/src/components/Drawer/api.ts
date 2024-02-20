@@ -80,7 +80,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    open: nasl.core.Boolean = false;
+    open: nasl.core.Boolean;
 
     @Prop({
       group: '样式属性',
@@ -99,7 +99,6 @@ namespace nasl.ui {
       description: '切换抽屉时动画结束后的回调',
     })
     afterOpenChange: (event: any) => any;
-
 
     @Event({
       title: '关闭时',

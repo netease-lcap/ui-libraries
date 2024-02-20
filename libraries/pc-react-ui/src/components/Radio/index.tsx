@@ -12,7 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Radio = registerComponet<
+export const Radio = registerComponet<
   RadioProps,
   pluginType<RadioProps>
 >(
@@ -20,7 +20,7 @@ const Radio = registerComponet<
   { plugin, displayName: AntdRadio.displayName, mapProps },
 );
 
-export default Radio;
+// export default Radio;
 
 export const RadioGroup = AntdRadio.Group;
 export const RadioButton = AntdRadio.Button;

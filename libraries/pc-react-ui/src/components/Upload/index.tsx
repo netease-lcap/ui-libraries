@@ -12,7 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Upload = registerComponet<
+export const Upload = registerComponet<
   UploadProps,
   pluginType<UploadProps>
 >(
@@ -20,4 +20,4 @@ const Upload = registerComponet<
   { plugin, displayName: AntdUpload.displayName, mapProps },
 );
 
-export default Upload;
+// export default Upload;

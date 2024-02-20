@@ -14,7 +14,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const TimeRangePicker = registerComponet<
+export const TimeRangePicker = registerComponet<
   TimeRangePickerProps,
   pluginType<TimeRangePickerProps>
 >(
@@ -22,4 +22,4 @@ const TimeRangePicker = registerComponet<
   { plugin, displayName: AntdRangePicker.displayName, mapProps },
 );
 
-export default TimeRangePicker;
+// export default TimeRangePicker;

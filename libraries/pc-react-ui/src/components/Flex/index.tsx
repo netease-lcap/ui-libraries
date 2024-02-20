@@ -11,7 +11,7 @@ const mapProps = {
 };
 
 // const myPlugin = new Plugin({ plugin, displayName: 'Flex', mapProps });
-const Flex = registerComponet<
+export const Flex = registerComponet<
   FlexProps,
   pluginType<FlexProps>
 >(
@@ -19,4 +19,4 @@ const Flex = registerComponet<
   { plugin, displayName: 'Flex', mapProps },
 );
 
-export default Flex;
+// export default Flex;

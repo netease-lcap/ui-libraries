@@ -10,7 +10,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Popover = registerComponet<
+export const Popover = registerComponet<
   PopoverProps,
   pluginType<PopoverProps>
 >(
@@ -18,4 +18,4 @@ const Popover = registerComponet<
   { plugin, displayName: AntdPopover.displayName, mapProps },
 );
 
-export default Popover;
+// export default Popover;

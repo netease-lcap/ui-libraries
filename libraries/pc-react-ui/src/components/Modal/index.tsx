@@ -12,7 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Modal = registerComponet<
+export const Modal = registerComponet<
   ModalProps,
   pluginType<ModalProps>
 >(
@@ -20,4 +20,4 @@ const Modal = registerComponet<
   { plugin, displayName: AntdModal.displayName, mapProps },
 );
 
-export default Modal;
+// export default Modal;

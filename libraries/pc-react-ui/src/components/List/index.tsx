@@ -14,7 +14,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const List = registerComponet<
+export const List = registerComponet<
   ListProps<ListItemProps>,
   pluginType<ListProps<ListItemProps>>
 >(
@@ -22,5 +22,5 @@ const List = registerComponet<
   { plugin, displayName: 'List', mapProps },
 );
 
-export default List;
+// export default List;
 export const ListItem = AntdList.Item;

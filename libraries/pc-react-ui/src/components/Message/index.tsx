@@ -56,7 +56,7 @@ function ToastMessageFragment(props) {
   return <div>{contextHolder}</div>;
 }
 ToastMessageFragment.displayName = 'message';
-const ToastMessage = registerComponet<
+export const ToastMessage = registerComponet<
   ArgsProps,
   pluginType<ArgsProps>
 >(
@@ -64,5 +64,5 @@ const ToastMessage = registerComponet<
   { plugin, displayName: ToastMessageFragment.displayName, mapProps },
 );
 
-export default ToastMessage;
+// export default ToastMessage;
 export const message = AntdMessage;

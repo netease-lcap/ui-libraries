@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../index';
+import { Card } from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -24,13 +24,7 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: () => (
-    <Card
-      title="带卡片阴影"
-      extra="extra"
-      tooltip="这是提示"
-      style={{ width: 501 }}
-      boxShadow
-    >
+    <Card title="带卡片阴影" extra="extra" tooltip="这是提示" style={{ width: 501 }} boxShadow>
       <div>Card content</div>
       <div>Card content</div>
       <div>Card content</div>

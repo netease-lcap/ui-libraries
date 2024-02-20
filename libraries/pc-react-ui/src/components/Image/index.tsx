@@ -12,7 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Image = registerComponet<
+export const Image = registerComponet<
   ImageProps,
   pluginType<ImageProps>
 >(
@@ -20,4 +20,4 @@ const Image = registerComponet<
   { plugin, displayName: AntdImage.displayName, mapProps },
 );
 
-export default Image;
+// export default Image;

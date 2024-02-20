@@ -1,6 +1,6 @@
 import React from 'react';
-import Modal from '../index';
-import Button from '@/components/Button/index';
+import { Modal } from '../index';
+import { Button } from '@/components/Button/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -35,12 +35,7 @@ export const 默认 = {
         <Button type="primary" onClick={showModal}>
           Open Modal
         </Button>
-        <Modal
-          title="Basic Modal"
-          ref={modalRef}
-          onOk={() => modalRef.current.setOpen(false)}
-          onCancel={() => modalRef.current.setOpen(false)}
-        >
+        <Modal title="Basic Modal" ref={modalRef} onOk={() => modalRef.current.setOpen(false)} onCancel={() => modalRef.current.setOpen(false)}>
           <p>Some contents...</p>
           <p>Some contents...</p>
           <p>Some contents...</p>

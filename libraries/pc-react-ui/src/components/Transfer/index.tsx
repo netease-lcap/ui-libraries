@@ -12,7 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Transfer = registerComponet<
+export const Transfer = registerComponet<
   TransferProps<TransferItem>,
   pluginType<TransferProps<TransferItem>>
 >(
@@ -20,4 +20,4 @@ const Transfer = registerComponet<
   { plugin, displayName: AntdTransfer.displayName, mapProps },
 );
 
-export default Transfer;
+// export default Transfer;

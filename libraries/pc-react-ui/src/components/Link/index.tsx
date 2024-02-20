@@ -22,7 +22,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Link = registerComponet<
+export const Link = registerComponet<
   LinkProps,
   pluginType<LinkProps>
 >(
@@ -30,7 +30,7 @@ const Link = registerComponet<
   { plugin, displayName: AntdLink.displayName, mapProps },
 );
 
-export default Link;
+// export default Link;
 // export {
 //   Title, Text, Paragraph, Link,
 // };

@@ -12,7 +12,7 @@ const mapProps = {
   // dataSource: 'treeData',
 };
 
-const TreeSelect = registerComponet<
+export const TreeSelect = registerComponet<
   TreeSelectProps,
   pluginType<TreeSelectProps>
 >(
@@ -20,4 +20,4 @@ const TreeSelect = registerComponet<
   { plugin, displayName: AntdTreeSelect.displayName, mapProps },
 );
 
-export default TreeSelect;
+// export default TreeSelect;

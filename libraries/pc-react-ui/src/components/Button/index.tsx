@@ -13,8 +13,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Button = registerComponet<ButtonProps, pluginType<ButtonProps>>(
+export const Button = registerComponet<ButtonProps, pluginType<ButtonProps>>(
   AntdButton,
   { plugin: basicsPlugin, displayName: AntdButton.displayName, mapProps },
 );
-export default Button;

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { Table as AntdTable } from 'antd';
-import Table, { TableColumn } from '../index';
-import Text from '../../Text';
-import Select from '../../Select';
+import { Table, TableColumn } from '../index';
+import { Text } from '../../Text';
+import { Select } from '../../Select';
 
 const { Column, ColumnGroup } = AntdTable;
 

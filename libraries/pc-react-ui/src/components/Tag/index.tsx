@@ -12,7 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Tag = registerComponet<
+export const Tag = registerComponet<
   TagProps,
   pluginType<TagProps>
 >(
@@ -20,4 +20,4 @@ const Tag = registerComponet<
   { plugin, displayName: AntdTag.displayName, mapProps },
 );
 
-export default Tag;
+// export default Tag;

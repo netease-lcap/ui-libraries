@@ -29,16 +29,16 @@ const mapProps = {
 //   AntdTitle,
 //   { plugin, displayName: AntdTitle.displayName, mapProps },
 // );
-const myPlugin = new Plugin({ plugin, displayName: 'Text', mapProps });
+// const myPlugin = new Plugin({ plugin, displayName: 'Text', mapProps });
 // clg
-const Text = registerComponet<
+export const Text = registerComponet<
   TextProps,
   pluginType<TextProps>
 >(
   AntdText,
   { plugin, displayName: 'Text', mapProps },
 );
-export default Text;
+// export default Text;
 
 // const Paragraph = registerComponet<
 //   ParagraphProps,
