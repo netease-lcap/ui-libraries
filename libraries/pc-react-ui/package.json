@@ -19,7 +19,8 @@
     "test:dev": "vitest dev",
     "test:coverage": "vitest run --coverage",
     "preview": "vite preview",
-    "build:storybook": "storybook build"
+    "build:storybook": "storybook build",
+    "mergeusage": "node ./usage-script.js > nasl.ui.json"
   },
   "keywords": [
     "AntD",

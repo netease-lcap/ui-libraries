@@ -1,0 +1,417 @@
+[
+    {
+        "name": "Select",
+        "ideusage": {
+            "idetype": "popover",
+            "structured": true,
+            "childAccept": "target.tag === 'SelectOption' || target.tag === 'SelectOptGroup'"
+        },
+        "blocks": []
+    },
+    {
+        "name": "SelectOption",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'Select' || target.tag === 'SelectOptGroup'"
+        }
+    },
+    {
+        "name": "SelectOptGroup",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "parentAccept": "target.tag === 'Select'",
+            "childAccept": "target.tag === 'SelectOption'"
+        }
+    },
+    {
+        "name": "InputNumber",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "Transfer",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "Switch",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "Input",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "TextArea",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "checkboxGroup",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'Checkbox'"
+        }
+    },
+    {
+        "name": "Checkbox",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "Radio",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "Form",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'FormItem'"
+        }
+    },
+    {
+        "name": "FormItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'Form'"
+        }
+    },
+    {
+        "name": "Button",
+        "ideusage": {
+            "idetype": "element",
+            "editable": "children"
+        }
+    },
+    {
+        "name": "Descriptions",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'DescriptionsItem'"
+        }
+    },
+    {
+        "name": "DescriptionsItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'Descriptions'"
+        }
+    },
+    {
+        "name": "Flex",
+        "ideusage": {
+            "idetype": "container",
+            "containerDirection": "this.getAttribute('direction')?.value ? 'column' : 'row' "
+        },
+        "blocks": [
+            {
+              "concept": "ViewBlockWithImage",
+              "title": "单行排布",
+              "description": "",
+              "code": "<template>\n<Flex>\n</Flex>\n</template>\n",
+              "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.20.0/src/components/u-linear-layout.vue/screenshots/0.png",
+              "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.20.0/src/components/u-linear-layout.vue/drawings/0.svg"
+            },
+            {
+              "concept": "ViewBlockWithImage",
+              "title": "多行排布",
+              "description": "",
+              "code": "<template>\n<Flex vertical>\n    <Flex>\n    </Flex>\n    <Flex>\n    </Flex>\n</Flex>\n</template>\n",
+              "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.20.0/src/components/u-linear-layout.vue/screenshots/1.png",
+              "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.20.0/src/components/u-linear-layout.vue/drawings/1.svg"
+            },
+            {
+              "concept": "ViewBlockWithImage",
+              "title": "两端排布",
+              "description": "",
+              "code": "<template>\n<Flex justify=\"space-between\">\n    <Flex>\n    </Flex>\n    <Flex>\n    </Flex>\n</Flex>\n</template>\n",
+              "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.20.0/src/components/u-linear-layout.vue/screenshots/2.png",
+              "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.20.0/src/components/u-linear-layout.vue/drawings/2.svg"
+            }
+        ]
+    },
+    {
+        "name": "Table",
+        "ideusage": {
+            "idetype": "container",
+            "containerDirection": "row",
+            "structured": true,
+            "dataSource": {
+              "display": 3,
+              "loopElem": "table > tbody > tr",
+              "emptySlot": {
+                "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
+                "component": "TableSlot",
+                "accept": "target.concept === 'Entity'"
+              }
+            },
+            "childAccept": "target.tag === 'Column'"
+        },
+        "slots": [
+            {
+                "name": "default",
+                "snippets": [
+                    {
+                      "title": "表格列",
+                      "code": "<TableColumn><template #render=\"current\"></template> <template #title><Text children=\"表格列\"></Text></template> </TableColumn>"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "TableColumn",
+        "ideusage": {
+            "idetype": "container",
+            "childAccept": false,
+            "parentAccept": "target.tag === 'Table'",
+            "containerDirection": "row",
+            "selector": {
+              "expression": "this.getElement(el => el.slotTarget === 'title')",
+              "cssSelector": "th"
+            }
+        }
+    },
+    {
+        "name": "List",
+        "ideusage": {
+            "idetype": "container",
+            "containerDirection": "row",
+            "dataSource": {
+              "display": 8,
+              "loopElem": "table > tbody > tr",
+              "emptySlot": {
+                "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
+                "component": "listSlot",
+                "accept": "target.concept === 'Entity'"
+              }
+            }
+        }
+    },
+    {
+        "name": "Row",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'Col'"
+        }
+    },
+    {
+        "name": "Col",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'Row'"
+        }
+    },
+    {
+        "name": "Tabs",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'TabPane'"
+        }
+    },
+    {
+        "name": "TabPane",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'Tabs'"
+        }
+    }, 
+    {
+        "name": "Tree",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'TreeNode'"
+        }
+    },
+    {
+        "name": "TreeNode",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'Tree'"
+        }
+    },
+    {
+        "name": "TreeSelect",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "Cascader",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "DatePicker",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "DateRangerPicker",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "TimePicker",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "TimeRangePicker",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "Steps",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'StepsItem'"
+        }
+    },
+    {
+        "name": "StepsItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'Steps'"
+        }
+    },
+    {
+        "name": "UModal",
+        "ideusage": {
+            "idetype": "modal",
+            "selector": {
+              "expression": "this",
+              "cssSelector": "div[class='ant-modal-content']"
+            }
+        }
+    },
+    {
+        "name": "UDrawer",
+        "ideusage": {
+            "idetype": "modal",
+            "selector": {
+              "expression": "this",
+              "cssSelector": "div[class='ant-drawer-wrapper-body']"
+            }
+        }
+    },
+    {
+        "name": "UToastSingle",
+        "ideusage": {
+            "idetype": "modal",
+            "selector": {
+              "expression": "this",
+              "cssSelector": "div[class='ant-drawer-wrapper-body']"
+            }
+        }
+    },
+    {
+        "name": "Popover",
+        "ideusage": {
+            "idetype": "popover",
+            "triggerSlot": "children",
+            "selector": {
+              "expression": "this.getElement(el => el.slotTarget === 'content')",
+              "cssSelector": "div[class='ant-popover-content']"
+            }
+        }
+    },
+    {
+        "name": "Image",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "Card",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "Router",
+        "ideusage": {
+            "idetype": "router"
+        }
+    },
+    {
+        "name": "Breadcrumb",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'BreadcrumbItem'"
+        }
+    },
+    {
+        "name": "BreadcrumbItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'Breadcrumb'"
+        }
+    },
+    {
+        "name": "Dropdown",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "Menu",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'MenuItem' || target.tag === 'MenuDivider' || target.tag === 'MenuItemGroup'"
+        }
+    },
+    {
+        "name": "MenuItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'Menu'"
+        }
+    },
+    {
+        "name": "MenuDivider",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "MenuItemGroup",
+        "ideusage": {
+            "idetype": "container",
+            "childAccept": "target.tag === 'MenuItem'",
+            "parentAccept": "target.tag === 'Menu'"
+        }
+    },
+    {
+        "name": "Text",
+        "ideusage": {
+            "idetype": "element",
+            "editable": "children"
+        }
+    }
+]
