@@ -218,7 +218,7 @@ namespace nasl.ui {
         },
       ],
     })
-    children: () => Array<Checkbox<T, V>>;
+    slotDefault: () => Array<Checkbox<T, V>>;
 
     // @Slot({
     //   title: 'undefined',

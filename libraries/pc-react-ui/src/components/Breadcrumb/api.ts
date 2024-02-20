@@ -57,7 +57,7 @@ namespace nasl.ui {
         },
       ],
     })
-    children: () => Array<BreadcrumbItem>;
+    slotDefault: () => Array<BreadcrumbItem>;
   }
 
   @Component({

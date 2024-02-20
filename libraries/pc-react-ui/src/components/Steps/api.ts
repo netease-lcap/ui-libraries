@@ -137,7 +137,7 @@ namespace nasl.ui {
         },
       ],
     })
-    children: () => Array<StepsItem>;
+    slotDefault: () => Array<StepsItem>;
 
     // @Slot({
     //   title: '头部标题',

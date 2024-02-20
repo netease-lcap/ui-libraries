@@ -58,7 +58,7 @@ namespace nasl.ui {
         },
       ],
     })
-    children: () => Array<DescriptionsItem>;
+    slotDefault: () => Array<DescriptionsItem>;
   }
 
   @Component({

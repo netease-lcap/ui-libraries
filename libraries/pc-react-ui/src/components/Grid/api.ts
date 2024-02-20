@@ -94,7 +94,7 @@ namespace nasl.ui {
         },
       ],
     })
-    slotChildren: () => Array<Col>;
+    slotDefault: () => Array<Col>;
   }
 
   @Component({

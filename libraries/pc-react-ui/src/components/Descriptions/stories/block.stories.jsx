@@ -19,35 +19,37 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 基本用法 = {
-  render: () => (
-    <Descriptions column={2} title="高级定义列表">
-      <DescriptionsItem
-        label="日期"
-        fieldProps={{
-          format: 'YYYY.MM.DD',
-        }}
-        valueType="date"
-      >
-        2024/2/20
-      </DescriptionsItem>
-      <DescriptionsItem
-        label="日期区间"
-        fieldProps={{
-          format: 'YYYY.MM.DD HH:mm:ss',
-        }}
-        valueType="dateTimeRange"
-      >
-        2024/2/20- 2024/2/21
-      </DescriptionsItem>
-      <DescriptionsItem
-        label="时间"
-        fieldProps={{
-          format: 'YYYY.MM.DD',
-        }}
-        valueType="time"
-      >
-        2024/2/20: 12:00:00
-      </DescriptionsItem>
-    </Descriptions>
-  ),
+  render: () => {
+    return (
+      <Descriptions column={2} title="高级定义列表">
+        <DescriptionsItem
+          label="日期"
+          fieldProps={{
+            format: 'YYYY.MM.DD',
+          }}
+          valueType="date"
+        >
+          2024/2/20
+        </DescriptionsItem>
+        <DescriptionsItem
+          label="日期区间"
+          fieldProps={{
+            format: 'YYYY.MM.DD HH:mm:ss',
+          }}
+          valueType="dateTimeRange"
+        >
+          2024/2/20- 2024/2/21
+        </DescriptionsItem>
+        <DescriptionsItem
+          label="时间"
+          fieldProps={{
+            format: 'YYYY.MM.DD',
+          }}
+          valueType="time"
+        >
+          2024/2/20: 12:00:00
+        </DescriptionsItem>
+      </Descriptions>
+    );
+  },
 };
