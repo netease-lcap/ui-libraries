@@ -84,136 +84,137 @@ namespace nasl.ui {
       docDescription: '更改表单的布局方式。行内展示，标签与表单项在一行展示。块级展示，宽度会充满父元素。栅格展示，可设置列数。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '行内展示' }, { title: '块级展示，宽度会充满父元素' }, { title: '栅格展示，可设置列数' }],
+        // options: [{ title: '行内展示' }, { title: '块级展示，宽度会充满父元素' }, { title: '栅格展示，可设置列数' }],
+        options: [{ title: '行内展示' }, { title: '水平展示' }, { title: '竖向展示' }],
       },
       onChange: [{ clear: ['repeat'] }],
     })
-    layout: 'inline' | 'block' | 'inline-flex' = 'block';
+    layout: 'inline' | 'horizontal' | 'vertical' = 'inline';
 
-    @Prop<FormOptions, 'repeat'>({
-      group: '主要属性',
-      title: '列数',
-      description: '整个表单的划分列数',
-      docDescription: '整个表单的划分列数，此项需要设置表单布局为“栅格展示”。',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 1,
-      },
-      if: (_) => _.layout === 'inline-flex' || _.repeat !== 1,
-    })
-    repeat: nasl.core.Decimal = 1;
+    // @Prop<FormOptions, 'repeat'>({
+    //   group: '主要属性',
+    //   title: '列数',
+    //   description: '整个表单的划分列数',
+    //   docDescription: '整个表单的划分列数，此项需要设置表单布局为“栅格展示”。',
+    //   setter: {
+    //     concept: 'NumberInputSetter',
+    //     min: 1,
+    //   },
+    //   if: (_) => _.layout === 'inline-flex' || _.repeat !== 1,
+    // })
+    // repeat: nasl.core.Decimal = 1;
 
-    @Prop({
-      group: '主要属性',
-      title: '标签布局',
-      docDescription: '设置标签布局方式。行内展示；块级展示，标签与单项分行展示- ',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '行内展示' }, { title: '块级展示，标签与表单项分行展示' }],
-      },
-    })
-    labelLayout: 'inline' | 'block' = 'inline';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '标签布局',
+    //   docDescription: '设置标签布局方式。行内展示；块级展示，标签与单项分行展示- ',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '行内展示' }, { title: '水平展示' }, { title: '竖向展示' }],
+    //   },
+    // })
+    // labelLayout: 'inline' | 'horizontal' | 'vertical' = 'inline';
 
-    @Prop({
-      group: '主要属性',
-      title: '标签过长省略',
-      description: '文字过长是否省略显示。默认文字超出时会换行。',
-      docDescription: '文字过长是否省略显示，默认文字超出时会换行。',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    labelEllipsis: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '标签过长省略',
+    //   description: '文字过长是否省略显示。默认文字超出时会换行。',
+    //   docDescription: '文字过长是否省略显示，默认文字超出时会换行。',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // labelEllipsis: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '交互属性',
-      title: '可折叠',
-      description: '设置是否可以展开/折叠',
-      docDescription: '分组是否可以折叠。',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    collapsible: nasl.core.Boolean = false;
+    //     @Prop({
+    //       group: '交互属性',
+    //       title: '可折叠',
+    //       description: '设置是否可以展开/折叠',
+    //       docDescription: '分组是否可以折叠。',
+    //       setter: {
+    //         concept: 'SwitchSetter',
+    //       },
+    //     })
+    //     collapsible: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '交互属性',
-      title: '手风琴模式',
-      description: '设置是否每次只展开一个',
-      docDescription: '是否每次只会展开一个分组。',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    accordion: nasl.core.Boolean = false;
+    //     @Prop({
+    //       group: '交互属性',
+    //       title: '手风琴模式',
+    //       description: '设置是否每次只展开一个',
+    //       docDescription: '是否每次只会展开一个分组。',
+    //       setter: {
+    //         concept: 'SwitchSetter',
+    //       },
+    //     })
+    //     accordion: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '交互属性',
-      title: '展开触发方式',
-      description: '展开/折叠操作的触发方式',
-      docDescription: `展开/折叠的触发方式。
-- 整行点击均可触发。
-- 仅点击小箭头时触发。`,
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '整行点击均可触发' }, { title: '仅点击小箭头时触发' }],
-      },
-    })
-    expandTrigger: 'click' | 'click-expander' = 'click';
+    //     @Prop({
+    //       group: '交互属性',
+    //       title: '展开触发方式',
+    //       description: '展开/折叠操作的触发方式',
+    //       docDescription: `展开/折叠的触发方式。
+    // - 整行点击均可触发。
+    // - 仅点击小箭头时触发。`,
+    //       setter: {
+    //         concept: 'EnumSelectSetter',
+    //         options: [{ title: '整行点击均可触发' }, { title: '仅点击小箭头时触发' }],
+    //       },
+    //     })
+    //     expandTrigger: 'click' | 'click-expander' = 'click';
 
-    @Prop({
-      group: '状态属性',
-      title: '预览',
-      description: '显示预览态',
-      docDescription: '',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    preview: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '状态属性',
+    //   title: '预览',
+    //   description: '显示预览态',
+    //   docDescription: '',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // preview: nasl.core.Boolean = false;
 
-    @Prop<FormOptions, 'gapWidth'>({
-      group: '样式属性',
-      title: '列间隔',
-      description: '设置表单列间隔大小',
-      docDescription: '设置表单项间隔大小。支持无、小、正常、大四个级别，此项需要设置表单布局为“行内展示”。',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '无' }, { title: '小' }, { title: '正常' }, { title: '大' }],
-      },
-      if: (_) => _.layout === 'inline',
-    })
-    gapWidth: 'none' | 'small' | 'normal' | 'large' = 'normal';
+    // @Prop<FormOptions, 'gapWidth'>({
+    //   group: '样式属性',
+    //   title: '列间隔',
+    //   description: '设置表单列间隔大小',
+    //   docDescription: '设置表单项间隔大小。支持无、小、正常、大四个级别，此项需要设置表单布局为“行内展示”。',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '无' }, { title: '小' }, { title: '正常' }, { title: '大' }],
+    //   },
+    //   if: (_) => _.layout === 'inline',
+    // })
+    // gapWidth: 'none' | 'small' | 'normal' | 'large' = 'normal';
 
-    @Prop({
-      group: '样式属性',
-      title: '行间隔',
-      description: '设置表单行间隔大小',
-      docDescription: '设置表单行间隔大小。支持无、小、正常、大四个级别。',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '无' }, { title: '小' }, { title: '正常' }, { title: '大' }],
-      },
-    })
-    gapHeight: 'none' | 'small' | 'normal' | 'large' = 'normal';
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '行间隔',
+    //   description: '设置表单行间隔大小',
+    //   docDescription: '设置表单行间隔大小。支持无、小、正常、大四个级别。',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '无' }, { title: '小' }, { title: '正常' }, { title: '大' }],
+    //   },
+    // })
+    // gapHeight: 'none' | 'small' | 'normal' | 'large' = 'normal';
 
-    @Prop<FormOptions, 'labelSize'>({
-      group: '样式属性',
-      title: '标签宽度',
-      docDescription: '设置标签宽度。支持迷你、小、正常、大四个级别。',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '迷你' }, { title: '小' }, { title: '正常' }, { title: '大' }],
-      },
-      if: (_) => _.labelLayout === 'inline',
-    })
-    labelSize: 'mini' | 'small' | 'normal' | 'large' = 'normal';
+    // @Prop<FormOptions, 'labelSize'>({
+    //   group: '样式属性',
+    //   title: '标签宽度',
+    //   docDescription: '设置标签宽度。支持迷你、小、正常、大四个级别。',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '迷你' }, { title: '小' }, { title: '正常' }, { title: '大' }],
+    //   },
+    //   if: (_) => _.labelLayout === 'inline',
+    // })
+    // labelSize: 'mini' | 'small' | 'normal' | 'large' = 'normal';
 
     @Event({
       title: '验证后',
       description: '验证时触发',
     })
-    onValidate: (event: {
+    onFinish: (event: {
       rawValue: nasl.core.String;
       value: nasl.core.String;
       trigger: nasl.core.String;
@@ -227,49 +228,49 @@ namespace nasl.ui {
 
     @Slot({
       title: 'undefined',
-      description: '插入`<u-form-item>`子组件。',
+      description: '插入`<FormItem>`子组件。',
       emptyBackground: 'add-sub-large',
       snippets: [
-        {
-          title: '表单分组',
-          code: '<u-form-group><template #title><u-text text="分组"></u-text></template><u-form-item><template #label><u-text text="表单项"></u-text></template></u-form-item></u-form-group>',
-        },
+        // {
+        //   title: '表单分组',
+        //   code: '<u-form-group><template #title><u-text text="分组"></u-text></template><u-form-item><template #label><u-text text="表单项"></u-text></template></u-form-item></u-form-group>',
+        // },
         {
           title: '表单项',
-          code: '<u-form-item><template #label><u-text text="表单项"></u-text></template></u-form-item>',
+          code: '<FormItem><template #label><Text children="表单项"></Text></template></FormItem>',
         },
       ],
     })
-    slotDefault: () => Array<UFormGroup | UFormItem>;
+    slotDefault: () => Array<FormItem>;
   }
 
   @Component({
     title: '表单项',
     description: '表单项',
   })
-  export class UFormItem extends ViewComponent {
-    @Method({
-      title: 'undefined',
-      description: '验证此表单项。',
-    })
-    validate(
-      @Param({
-        title: 'undefined',
-        description: '触发方式，可选值：`submit`、`blur`和`input`之一，或者它们的任意组合。',
-      })
-      trigger: nasl.core.String = 'submit',
-      @Param({
-        title: 'undefined',
-        description: '是否验证后无提示',
-      })
-      muted: nasl.core.Boolean = false,
-    ): any {}
-    constructor(options?: Partial<UFormItemOptions>) {
+  export class FormItem extends ViewComponent {
+    // @Method({
+    //   title: 'undefined',
+    //   description: '验证此表单项。',
+    // })
+    // validate(
+    //   @Param({
+    //     title: 'undefined',
+    //     description: '触发方式，可选值：`submit`、`blur`和`input`之一，或者它们的任意组合。',
+    //   })
+    //   trigger: nasl.core.String = 'submit',
+    //   @Param({
+    //     title: 'undefined',
+    //     description: '是否验证后无提示',
+    //   })
+    //   muted: nasl.core.Boolean = false,
+    // ): any {}
+    constructor(options?: Partial<FormItemOptions>) {
       super();
     }
   }
 
-  export class UFormItemOptions extends ViewComponentOptions {
+  export class FormItemOptions extends ViewComponentOptions {
     @Prop({
       title: '字段名称',
       description: '表单项名称。已废弃',
@@ -329,38 +330,38 @@ namespace nasl.ui {
     })
     private validatingProcess: Function;
 
-    @Prop({
-      group: '主要属性',
-      title: '占据数',
-      description: '列跨越的格数',
-      docDescription: '列跨越的格数。',
-      setter: {
-        concept: 'NumberInputSetter',
-      },
-    })
-    span: nasl.core.Decimal = 1;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '占据数',
+    //   description: '列跨越的格数',
+    //   docDescription: '列跨越的格数。',
+    //   setter: {
+    //     concept: 'NumberInputSetter',
+    //   },
+    // })
+    // span: nasl.core.Decimal = 1;
 
-    @Prop({
-      group: '主要属性',
-      title: '标签布局',
-      docDescription: '设置标签布局方式，行内展示、块级展示，标签与表单项分行展示',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '行内展示' }, { title: '块级展示，标签与表单项分行展示' }],
-      },
-    })
-    labelLayout: 'inline' | 'block' = 'inline';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '标签布局',
+    //   docDescription: '设置标签布局方式，行内展示、块级展示，标签与表单项分行展示',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '行内展示' }, { title: '块级展示，标签与表单项分行展示' }],
+    //   },
+    // })
+    // labelLayout: 'inline' | 'block' = 'inline';
 
-    @Prop({
-      group: '主要属性',
-      title: '标签过长省略',
-      description: '文字过长是否省略显示。默认文字超出时会换行。',
-      docDescription: '文字过长是否省略显示，默认文字超出时会换行。',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    labelEllipsis: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '标签过长省略',
+    //   description: '文字过长是否省略显示。默认文字超出时会换行。',
+    //   docDescription: '文字过长是否省略显示，默认文字超出时会换行。',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // labelEllipsis: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -373,16 +374,16 @@ namespace nasl.ui {
     })
     required: nasl.core.Boolean = false;
 
-    @Prop<UFormItemOptions, 'requiredPosition'>({
-      group: '主要属性',
-      title: '必填标记位置',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '文本左侧' }, { title: '文本右侧' }],
-      },
-      if: (_) => _.required === true,
-    })
-    requiredPosition: 'left' | 'right' = 'right';
+    // @Prop<FormItemOptions, 'requiredPosition'>({
+    //   group: '主要属性',
+    //   title: '必填标记位置',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '文本左侧' }, { title: '文本右侧' }],
+    //   },
+    //   if: (_) => _.required === true,
+    // })
+    // requiredPosition: 'left' | 'right' = 'right';
 
     @Prop({
       group: '主要属性',
@@ -390,27 +391,27 @@ namespace nasl.ui {
       description: '鼠标悬浮标签后的图标显示释义提示信息',
       docDescription: '默认提示消息。',
     })
-    message: nasl.core.String;
+    tooltip: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '辅助文本',
-      description: '辅助说明的文本信息',
-      docDescription: '添加描述内容。',
-    })
-    description: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '辅助文本',
+    //   description: '辅助说明的文本信息',
+    //   docDescription: '添加描述内容。',
+    // })
+    // description: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '标签纵轴对齐',
-      description: '标签与表单元素的纵轴对齐方式，默认为顶对齐',
-      docDescription: '标签与表单元素的纵轴对齐方式，默认为顶对齐。',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '顶对齐' }, { title: '居中对齐' }, { title: '尾对齐' }],
-      },
-    })
-    layout: 'block' | 'center' | 'end' = 'center';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '标签纵轴对齐',
+    //   description: '标签与表单元素的纵轴对齐方式，默认为顶对齐',
+    //   docDescription: '标签与表单元素的纵轴对齐方式，默认为顶对齐。',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '顶对齐' }, { title: '居中对齐' }, { title: '尾对齐' }],
+    //   },
+    // })
+    // layout: 'block' | 'center' | 'end' = 'center';
 
     @Prop({
       group: '主要属性',
@@ -421,54 +422,54 @@ namespace nasl.ui {
     })
     rules: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '忽略验证',
-      docDescription: '设置是否忽略验证。',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    ignoreValidation: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '忽略验证',
+    //   docDescription: '设置是否忽略验证。',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // ignoreValidation: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '样式属性',
-      title: '字段大小',
-      description: '单独设置表单项的内容大小',
-      docDescription: '单独设置表单项的内容大小。',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '迷你' }, { title: '小' }, { title: '正常' }, { title: '大' }],
-      },
-    })
-    fieldSize: 'mini' | 'small' | 'normal' | 'large' = 'normal';
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '字段大小',
+    //   description: '单独设置表单项的内容大小',
+    //   docDescription: '单独设置表单项的内容大小。',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '迷你' }, { title: '小' }, { title: '正常' }, { title: '大' }],
+    //   },
+    // })
+    // fieldSize: 'mini' | 'small' | 'normal' | 'large' = 'normal';
 
-    @Prop({
-      group: '样式属性',
-      title: '表单项标题宽度',
-      docDescription: '单独设置表单项的标签宽度大小。支持迷你、小、正常、大四个级别。',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '迷你' }, { title: '小' }, { title: '正常' }, { title: '大' }],
-      },
-    })
-    labelSize: 'mini' | 'small' | 'normal' | 'large' = 'normal';
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '表单项标题宽度',
+    //   docDescription: '单独设置表单项的标签宽度大小。支持迷你、小、正常、大四个级别。',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '迷你' }, { title: '小' }, { title: '正常' }, { title: '大' }],
+    //   },
+    // })
+    // labelSize: 'mini' | 'small' | 'normal' | 'large' = 'normal';
 
-    @Event({
-      title: '验证后',
-      description: '对于第一个 Field 或者所有子 UValidator：',
-    })
-    onValidate: (event: {
-      rawValue: nasl.core.String;
-      value: nasl.core.String;
-      trigger: nasl.core.String;
-      muted: nasl.core.String;
-      valid: nasl.core.Boolean;
-      touched: nasl.core.Boolean;
-      dirty: nasl.core.Boolean;
-      firstError: nasl.core.String;
-      triggerValid: nasl.core.Boolean;
-    }) => any;
+    // @Event({
+    //   title: '验证后',
+    //   description: '对于第一个 Field 或者所有子 UValidator：',
+    // })
+    // onValidate: (event: {
+    //   rawValue: nasl.core.String;
+    //   value: nasl.core.String;
+    //   trigger: nasl.core.String;
+    //   muted: nasl.core.String;
+    //   valid: nasl.core.Boolean;
+    //   touched: nasl.core.Boolean;
+    //   dirty: nasl.core.Boolean;
+    //   firstError: nasl.core.String;
+    //   triggerValid: nasl.core.Boolean;
+    // }) => any;
 
     @Slot({
       title: '默认',
@@ -495,125 +496,125 @@ namespace nasl.ui {
     slotExtra: () => Array<ViewComponent>;
   }
 
-  @Component({
-    title: '表单分组',
-    description: '展开折叠前',
-  })
-  export class UFormGroup extends ViewComponent {
-    constructor(options?: Partial<UFormGroupOptions>) {
-      super();
-    }
-  }
+  // @Component({
+  //   title: '表单分组',
+  //   description: '展开折叠前',
+  // })
+  // export class UFormGroup extends ViewComponent {
+  //   constructor(options?: Partial<UFormGroupOptions>) {
+  //     super();
+  //   }
+  // }
 
-  export class UFormGroupOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '标题',
-      docDescription: '显示的标题。',
-    })
-    title: nasl.core.String;
+  // export class UFormGroupOptions extends ViewComponentOptions {
+  //   @Prop({
+  //     group: '主要属性',
+  //     title: '标题',
+  //     docDescription: '显示的标题。',
+  //   })
+  //   title: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '列数',
-      description: '整个表单的划分列数',
-      docDescription: '整个表单的划分列数。',
-      setter: {
-        concept: 'NumberInputSetter',
-      },
-    })
-    repeat: nasl.core.Decimal = 1;
+  //   @Prop({
+  //     group: '主要属性',
+  //     title: '列数',
+  //     description: '整个表单的划分列数',
+  //     docDescription: '整个表单的划分列数。',
+  //     setter: {
+  //       concept: 'NumberInputSetter',
+  //     },
+  //   })
+  //   repeat: nasl.core.Decimal = 1;
 
-    @Prop({
-      group: '主要属性',
-      title: '标签布局',
-      docDescription: '设置标签布局方式。行内展示、块级展示，标签与表单项分行展示。',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '行内展示' }, { title: '块级展示，标签与表单项分行展示' }],
-      },
-    })
-    labelLayout: 'inline' | 'block' = 'inline';
+  //   @Prop({
+  //     group: '主要属性',
+  //     title: '标签布局',
+  //     docDescription: '设置标签布局方式。行内展示、块级展示，标签与表单项分行展示。',
+  //     setter: {
+  //       concept: 'EnumSelectSetter',
+  //       options: [{ title: '行内展示' }, { title: '块级展示，标签与表单项分行展示' }],
+  //     },
+  //   })
+  //   labelLayout: 'inline' | 'block' = 'inline';
 
-    @Prop({
-      group: '主要属性',
-      title: '标签过长省略',
-      description: '文字过长是否省略显示。默认文字超出时会换行。',
-      docDescription: '文字过长是否省略显示。默认文字超出时会换行。',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    labelEllipsis: nasl.core.Boolean = false;
+  //   @Prop({
+  //     group: '主要属性',
+  //     title: '标签过长省略',
+  //     description: '文字过长是否省略显示。默认文字超出时会换行。',
+  //     docDescription: '文字过长是否省略显示。默认文字超出时会换行。',
+  //     setter: {
+  //       concept: 'SwitchSetter',
+  //     },
+  //   })
+  //   labelEllipsis: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '交互属性',
-      title: '可折叠',
-      description: '设置是否可以展开/折叠',
-      docDescription: '分组是否可以折叠。',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    collapsible: nasl.core.Boolean = false;
+  //   @Prop({
+  //     group: '交互属性',
+  //     title: '可折叠',
+  //     description: '设置是否可以展开/折叠',
+  //     docDescription: '分组是否可以折叠。',
+  //     setter: {
+  //       concept: 'SwitchSetter',
+  //     },
+  //   })
+  //   collapsible: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '状态属性',
-      title: '展开状态',
-      description: '展开状态分为“True(展开)/False(折叠)”，默认为“展开”',
-      sync: true,
-      docDescription: '绑定展开/折叠状态的值',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    expanded: nasl.core.Boolean = false;
+  //   @Prop({
+  //     group: '状态属性',
+  //     title: '展开状态',
+  //     description: '展开状态分为“True(展开)/False(折叠)”，默认为“展开”',
+  //     sync: true,
+  //     docDescription: '绑定展开/折叠状态的值',
+  //     setter: {
+  //       concept: 'SwitchSetter',
+  //     },
+  //   })
+  //   expanded: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '状态属性',
-      title: '禁用',
-      description: '置灰显示，且禁止展开/折叠操作',
-      docDescription: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    disabled: nasl.core.Boolean = false;
+  //   @Prop({
+  //     group: '状态属性',
+  //     title: '禁用',
+  //     description: '置灰显示，且禁止展开/折叠操作',
+  //     docDescription: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
+  //     setter: {
+  //       concept: 'SwitchSetter',
+  //     },
+  //   })
+  //   disabled: nasl.core.Boolean = false;
 
-    @Event({
-      title: '展开折叠前',
-      description: '展开/折叠此分组前触发',
-    })
-    onBeforeToggle: (event: { expanded: nasl.core.Boolean }) => any;
+  //   @Event({
+  //     title: '展开折叠前',
+  //     description: '展开/折叠此分组前触发',
+  //   })
+  //   onBeforeToggle: (event: { expanded: nasl.core.Boolean }) => any;
 
-    @Event({
-      title: '展开折叠后',
-      description: '展开/折叠某分组时触发',
-    })
-    onToggle: (event: { expanded: nasl.core.Boolean }) => any;
+  //   @Event({
+  //     title: '展开折叠后',
+  //     description: '展开/折叠某分组时触发',
+  //   })
+  //   onToggle: (event: { expanded: nasl.core.Boolean }) => any;
 
-    @Slot({
-      title: 'undefined',
-      description: '插入`<u-form-item>`或`<u-form-divider>`子组件。',
-      snippets: [
-        {
-          title: '表单项',
-          code: '<u-form-item><template #label><u-text text="表单项"></u-text></template></u-form-item>',
-        },
-      ],
-    })
-    slotDefault: () => Array<UFormItem>;
+  //   @Slot({
+  //     title: 'undefined',
+  //     description: '插入`<u-form-item>`或`<u-form-divider>`子组件。',
+  //     snippets: [
+  //       {
+  //         title: '表单项',
+  //         code: '<u-form-item><template #label><u-text text="表单项"></u-text></template></u-form-item>',
+  //       },
+  //     ],
+  //   })
+  //   slotDefault: () => Array<FormItem>;
 
-    @Slot({
-      title: 'undefined',
-      description: '自定义标题文本。',
-    })
-    slotTitle: () => Array<ViewComponent>;
+  //   @Slot({
+  //     title: 'undefined',
+  //     description: '自定义标题文本。',
+  //   })
+  //   slotTitle: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'undefined',
-      description: '在右侧可以附加内容。',
-    })
-    slotExtra: () => Array<ViewComponent>;
-  }
+  //   @Slot({
+  //     title: 'undefined',
+  //     description: '在右侧可以附加内容。',
+  //   })
+  //   slotExtra: () => Array<ViewComponent>;
+  // }
 }

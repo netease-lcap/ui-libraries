@@ -39,6 +39,7 @@ export * from './components/List/index';
 export * from './components/Steps/index';
 export * from './components/Router/index';
 export * from './components/Menu/index';
+export * from './components/Form/index';
 
 // export * from './components/Typography/index';
 // export * from 'antd';

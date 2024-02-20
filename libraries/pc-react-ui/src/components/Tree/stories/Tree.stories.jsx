@@ -25,19 +25,18 @@ export default {
 export const 异步函数 = {
   render: (args) => <Tree {...args} />,
   args: {
-    dataSource: () =>
-      new Promise((res) => {
-        setTimeout(() => {
-          res([
-            { label: 'Option 1', key: '1' },
-            {
-              label: 'Option 2',
-              key: '2',
-              children: [{ label: 'Option 3', key: '3' }],
-            },
-          ]);
-        }, 3000);
-      }),
+    dataSource: () => new Promise((res) => {
+      setTimeout(() => {
+        res([
+          { label: 'Option 1', key: '1' },
+          {
+            label: 'Option 2',
+            key: '2',
+            children: [{ label: 'Option 3', key: '3' }],
+          },
+        ]);
+      }, 3000);
+    }),
     valueField: 'key',
     textField: 'label',
   },

@@ -11,16 +11,13 @@ process.env.TZ = 'Asia/Shanghai';
 
 export default defineConfig(({ command }) => {
   return {
+    publicDir: 'dist-theme',
     plugins: [react()],
     css: {
       postcss: {
         plugins: [
           autoprefixer({
-            overrideBrowserslist: [
-              '> 1%',
-              'last 2 versions',
-              'ie >= 9',
-            ],
+            overrideBrowserslist: ['> 1%', 'last 2 versions', 'ie >= 9'],
             grid: true,
           }) as any,
         ],

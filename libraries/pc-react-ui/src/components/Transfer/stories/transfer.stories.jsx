@@ -27,16 +27,15 @@ export const 异步函数 = {
   args: {
     style: { width: '100px' },
 
-    options: () =>
-      new Promise((res) => {
-        setTimeout(() => {
-          res([
-            { label: 'Option 1', value: '1' },
-            { label: 'Option 2', value: '2' },
-            { label: 'Option 3', value: '3' },
-          ]);
-        }, 3000);
-      }),
+    options: () => new Promise((res) => {
+      setTimeout(() => {
+        res([
+          { label: 'Option 1', value: '1' },
+          { label: 'Option 2', value: '2' },
+          { label: 'Option 3', value: '3' },
+        ]);
+      }, 3000);
+    }),
     // options: () => [
     //   { label: 'Option 1', value: '1' },
     //   { label: 'Option 2', value: '2' },
