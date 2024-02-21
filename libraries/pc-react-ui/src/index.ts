@@ -40,6 +40,8 @@ export * from './components/Steps/index';
 export * from './components/Router/index';
 export * from './components/Menu/index';
 export * from './components/Form/index';
+export * from './components/Upload/index';
+export * from './components/Icon/index';
 
 // export * from './components/Typography/index';
 // export * from 'antd';

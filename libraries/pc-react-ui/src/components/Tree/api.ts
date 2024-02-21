@@ -253,7 +253,7 @@ namespace nasl.ui {
 
     @Slot({
       title: 'undefined',
-      description: '插入`<u-tree-view-node-new>`子组件',
+      description: '插入`<TreeNode>`子组件',
       snippets: [
         {
           title: '子节点',

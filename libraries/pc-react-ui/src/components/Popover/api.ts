@@ -236,6 +236,6 @@ namespace nasl.ui {
       title: 'undefined',
       description: '弹出层触发节点。',
     })
-    slotChildren: () => Array<ViewComponent>;
+    slotDefault: () => Array<ViewComponent>;
   }
 }

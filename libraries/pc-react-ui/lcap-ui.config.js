@@ -12,6 +12,7 @@ module.exports = {
     { group: 'Form', name: 'Checkbox', alias: '多选框' },
     { group: 'Form', name: 'Radio', alias: '单选框' },
     { group: 'Form', name: 'Form', alias: '表单' },
+    { group: 'Form', name: 'Upload', alias: '文件上传' },
 
     { group: 'Table', name: 'Table', alias: '数据表格' },
 

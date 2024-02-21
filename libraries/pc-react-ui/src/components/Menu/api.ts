@@ -249,7 +249,7 @@ namespace nasl.ui {
       title: '默认',
       description: '导航项自定义',
     })
-    children: () => Array<ViewComponent>;
+    slotDefault: () => Array<ViewComponent>;
   }
 
   @Component({
@@ -358,7 +358,65 @@ namespace nasl.ui {
     }
   }
 
-  export class MenuItemGroupOptions extends ViewComponentOptions {}
+  export class MenuItemGroupOptions extends ViewComponentOptions {
+    @Prop({
+      title: '文本',
+      description: '文本内容',
+    })
+    title: nasl.core.String;
+
+    @Prop({
+      title: '值',
+      description: '此项的值',
+    })
+    key: nasl.core.Any;
+
+    @Prop({
+      title: '图标',
+      description: '图标',
+      setter: {
+        concept: 'IconSetter',
+      },
+    })
+    icon: nasl.core.String = '';
+    @Slot({
+      title: '默认',
+      description: '导航项自定义',
+    })
+    slotDefault: () => Array<ViewComponent>;
+  }
+  export class MenuSubMenu extends ViewComponent {
+    constructor(options?: Partial<MenuItemGroupOptions>) {
+      super();
+    }
+  }
+
+  export class MenuSubMenuOptions extends ViewComponentOptions {
+    @Prop({
+      title: '文本',
+      description: '文本内容',
+    })
+    title: nasl.core.String;
+    @Prop({
+      title: '值',
+      description: '此项的值',
+    })
+    key: nasl.core.Any;
+
+    @Prop({
+      title: '图标',
+      description: '图标',
+      setter: {
+        concept: 'IconSetter',
+      },
+    })
+    icon: nasl.core.String = '';
+    @Slot({
+      title: '默认',
+      description: '导航项自定义',
+    })
+    slotDefault: () => Array<ViewComponent>;
+  }
 
   // @Component({
   //   title: '导航菜单项',
