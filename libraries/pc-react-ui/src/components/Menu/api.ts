@@ -379,14 +379,19 @@ namespace nasl.ui {
       },
     })
     icon: nasl.core.String = '';
+
     @Slot({
       title: '默认',
       description: '导航项自定义',
     })
     slotDefault: () => Array<ViewComponent>;
   }
+  @Component({
+    title: '导航菜单组',
+    description: '导航菜单组',
+  })
   export class MenuSubMenu extends ViewComponent {
-    constructor(options?: Partial<MenuItemGroupOptions>) {
+    constructor(options?: Partial<MenuSubMenuOptions>) {
       super();
     }
   }
@@ -397,6 +402,7 @@ namespace nasl.ui {
       description: '文本内容',
     })
     title: nasl.core.String;
+
     @Prop({
       title: '值',
       description: '此项的值',
@@ -411,6 +417,7 @@ namespace nasl.ui {
       },
     })
     icon: nasl.core.String = '';
+
     @Slot({
       title: '默认',
       description: '导航项自定义',
