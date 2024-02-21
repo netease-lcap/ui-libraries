@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import React from 'react';
 import { Button } from '../index';
 
@@ -24,28 +25,28 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 主要按钮 = {
   render: () => {
-    return <Button type="primary">确定</Button>;
+    return <Button type="primary" children="确定" />;
   },
 };
 export const 次要按钮 = {
   render: () => {
-    return <Button>确定</Button>;
+    return <Button children="确定"> </Button>;
   },
 };
 
 export const 虚线按钮 = {
   render: () => {
-    return <Button type="dashed">确定</Button>;
+    return <Button type="dashed" children="确定" />;
   },
 };
 export const 文本按钮 = {
   render: () => {
-    return <Button type="text">确定</Button>;
+    return <Button type="text" children="确定" />;
   },
 };
 
 export const 链接按钮 = {
   render: () => {
-    return <Button type="link">确定</Button>;
+    return <Button type="link" children="确定" />;
   },
 };

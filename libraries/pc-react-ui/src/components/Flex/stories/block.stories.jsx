@@ -1,5 +1,6 @@
 import React from 'react';
 import { Flex } from '../index';
+import { Text } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -21,8 +22,8 @@ export default {
 export const 单行排布 = {
   render: () => {
     return (
-      <Flex style={{ width: '1000px' }}>
-        <div style={{ width: '100%', height: 54, backgroundColor: '#1677ffbf' }} />
+      <Flex style={{ width: '1000px', height: 54 }}>
+        <Text style={{ width: '1000px', height: 54, backgroundColor: '#1677ffbf' }} />
       </Flex>
     );
   },
@@ -32,8 +33,8 @@ export const 多行排布 = {
   render: () => {
     return (
       <Flex vertical style={{ width: '1000px' }}>
-        <div style={{ width: '100%', height: 54, backgroundColor: '#1677ffbf' }} />
-        <div
+        <Text style={{ width: '100%', height: 54, backgroundColor: '#1677ffbf' }} />
+        <Text
           style={{
             width: '100%',
             height: 54,

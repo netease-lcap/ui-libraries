@@ -20,72 +20,72 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 普通文本 = {
   render: () => {
-    return <Text>普通文本</Text>;
+    return <Text children="普通文本" />;
   },
 };
 
 export const 辅助文本 = {
   render: () => {
-    return <Text type="secondary">辅助文本</Text>;
+    return <Text type="secondary" children="辅助文本" />;
   },
 };
 
 export const 成功文本 = {
   render: () => {
-    return <Text type="success">成功文本</Text>;
+    return <Text type="success" children="成功文本" />;
   },
 };
 export const 警告文本 = {
   render: () => {
-    return <Text type="warning">警告文本</Text>;
+    return <Text type="warning" children="警告文本" />;
   },
 };
 
 export const 危险文本 = {
   render: () => {
-    return <Text type="danger">危险文本</Text>;
+    return <Text type="danger" children="危险文本" />;
   },
 };
 export const 禁用文本 = {
   render: () => {
-    return <Text disabled>禁用文本</Text>;
+    return <Text disabled children="禁用文本" />;
   },
 };
 
 export const 记号文本 = {
   render: () => {
-    return <Text mark>记号文本</Text>;
+    return <Text mark children="记号文本" />;
   },
 };
 
 export const 代码文本 = {
   render: () => {
-    return <Text code>代码文本</Text>;
+    return <Text code children="代码文本" />;
   },
 };
 export const 键盘文本 = {
   render: () => {
-    return <Text keyboard>键盘文本</Text>;
+    return <Text keyboard children="键盘文本" />;
   },
 };
 export const 下划线文本 = {
   render: () => {
-    return <Text underline>下划线文本</Text>;
+    return <Text underline children="下划线文本" />;
   },
 };
 export const 删除文本 = {
   render: () => {
-    return <Text delete>删除文本</Text>;
+    return <Text delete children="删除文本" />;
   },
 };
 export const 加粗文本 = {
   render: () => {
-    return <Text strong>加粗文本</Text>;
+    return <Text strong children="加粗文本" />;
   },
 };
 
 export const 斜体文本 = {
   render: () => {
-    return <Text italic>斜体文本</Text>;
+    return <Text italic children="斜体文本" />;
   },
 };

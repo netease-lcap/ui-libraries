@@ -6,7 +6,7 @@ function useHandleNodePath(props) {
   console.log(props.toJS());
 }
 
-function useHandleRef(props) {
+export function useHandleRef(props) {
   const ref = props.get('ref');
   const mutableProps = props.get('mutableProps');
   const deletePropsList = props.get($deletePropsList, []).concat(['ref', 'data-nodepath']);

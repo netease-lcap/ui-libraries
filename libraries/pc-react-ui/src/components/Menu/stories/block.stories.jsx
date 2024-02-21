@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Menu, MenuItem, MenuSubMenu, MenuItemGroup,
+  Menu, MenuItem, MenuSubMenu, MenuItemGroup, Text,
 } from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -24,8 +24,12 @@ export const 基本用法 = {
   render: () => {
     return (
       <Menu mode="inline" theme="dark">
-        <MenuItem key="mail"> Navigation Four - LinkM</MenuItem>
-        <MenuItem key="app">Navigation</MenuItem>
+        <MenuItem key="mail">
+          <Text> Navigation Four - LinkM</Text>
+        </MenuItem>
+        <MenuItem key="app">
+          <Text>Navigation</Text>
+        </MenuItem>
       </Menu>
     );
   },
@@ -35,10 +39,14 @@ export const 折叠功能 = {
     return (
       <Menu mode="inline" theme="dark" defaultOpenKeys={['sub1', 'sub2']}>
         <MenuSubMenu key="sub1" title="Navigation Four">
-          <MenuItem key="mail"> Navigation Four - LinkM</MenuItem>
+          <MenuItem key="mail">
+            <Text> Navigation Four - LinkM</Text>
+          </MenuItem>
         </MenuSubMenu>
         <MenuSubMenu title="Navigation" key="sub2">
-          <MenuItem key="app">Navigation</MenuItem>
+          <MenuItem key="app">
+            <Text>Navigation</Text>
+          </MenuItem>
         </MenuSubMenu>
       </Menu>
     );
@@ -49,10 +57,14 @@ export const 分组 = {
     return (
       <Menu mode="inline" theme="dark" defaultOpenKeys={['sub1', 'sub2']}>
         <MenuItemGroup key="sub1" title="Navigation Four">
-          <MenuItem key="mail"> Navigation Four - LinkM</MenuItem>
+          <MenuItem key="mail">
+            <Text> Navigation Four - LinkM</Text>
+          </MenuItem>
         </MenuItemGroup>
         <MenuItemGroup title="Navigation" key="sub2">
-          <MenuItem key="app">Navigation</MenuItem>
+          <MenuItem key="app">
+            <Text>Navigation</Text>
+          </MenuItem>
         </MenuItemGroup>
       </Menu>
     );

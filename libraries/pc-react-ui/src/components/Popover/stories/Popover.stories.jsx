@@ -1,5 +1,6 @@
 import React from 'react';
 import { Popover } from '../index';
+import { Button } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -24,8 +25,10 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => (
-    <Popover content={<div>1234</div>} {...args} title="Title">
-      <button type="button">Hover me</button>
+    <Popover trigger="click" content={<div>1234</div>} onOpenChange={console.log} data-nodepath="12234" title="Title">
+      <Button data-nodepath="1234" type="button">
+        Hover me
+      </Button>
     </Popover>
   ),
   args: {

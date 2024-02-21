@@ -18,36 +18,18 @@ export default {
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const 默认 = {
+export const 基本样式 = {
   render: () => {
-    return (
-      <Card title="带卡片阴影" style={{ width: 501 }} bordered>
-        <div>Card content</div>
-        <div>Card content</div>
-        <div>Card content</div>
-      </Card>
-    );
+    return <Card title="带卡片阴影" style={{ width: 501 }} bordered />;
   },
 };
-export const w默认 = {
+export const 分割线样式 = {
   render: () => {
-    return (
-      <Card title="Card title" headerBordered bordered style={{ width: 300 }}>
-        <p>Card content</p>
-        <p>Card content</p>
-        <p>Card content</p>
-      </Card>
-    );
+    return <Card title="Card title" headerBordered bordered style={{ width: 300 }} />;
   },
 };
-export const s默认 = {
+export const 无标题样式 = {
   render: () => {
-    return (
-      <Card cover={<img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />} headerBordered bordered style={{ width: 300 }}>
-        <p>Card content</p>
-        <p>Card content</p>
-        <p>Card content</p>
-      </Card>
-    );
+    return <Card cover={<img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />} headerBordered bordered style={{ width: 300 }} />;
   },
 };

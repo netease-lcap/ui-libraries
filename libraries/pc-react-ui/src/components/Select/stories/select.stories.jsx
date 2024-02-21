@@ -1,5 +1,6 @@
 import React from 'react';
-import { Select, SelectOption } from '../index';
+import { Select, SelectOption, SelectOptGroup } from '../index';
+import { Text } from '@/index';
 // import Select from 'antd';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -29,6 +30,29 @@ export const 异步函数 = {
       <Select {...args}>
         <SelectOption key="1" label="1" value="1" />
         <SelectOption key="2" label="2" value="2" disabled />
+      </Select>
+    );
+  },
+  args: {
+    style: { width: '256px' },
+  },
+};
+export const 异步函数1 = {
+  render: (args) => {
+    return (
+      <Select {...args}>
+        <SelectOptGroup
+          label={(() => (
+            <Text>1234</Text>
+          ))()}
+        >
+          <SelectOption key="1" label="1" value="1" />
+          <SelectOption key="2" label="2" value="2" disabled />
+        </SelectOptGroup>
+        <SelectOptGroup label={<Text>1234</Text>}>
+          <SelectOption key="1" label="1" value="1" />
+          <SelectOption key="2" label="2" value="2" disabled />
+        </SelectOptGroup>
       </Select>
     );
   },
