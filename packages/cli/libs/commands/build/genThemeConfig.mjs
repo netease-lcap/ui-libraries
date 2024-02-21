@@ -186,7 +186,7 @@ export default (config) => {
   });
 
   const theme = {
-    defaultTheme: JSON.stringify(themeComponentsMap),
+    defaultTheme: JSON.stringify(themePropertiesMap),
     themeConfig: JSON.stringify(resultList),
   };
 
