@@ -35,7 +35,7 @@ jobs:
 
       # 创建一个临时目录
       - name: Create Assets
-        run: LCAP_LIB_VERSION=${{ env.VERSION }} node scripts/assets.js
+        run: LCAP_LIB_VERSION=${{ env.VERSION }} node scripts/assets.mjs
 
       - name: Upload
         uses: actions/upload-artifact@v4
