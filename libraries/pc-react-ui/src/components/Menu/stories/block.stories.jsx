@@ -25,10 +25,10 @@ export const 基本用法 = {
     return (
       <Menu mode="inline" theme="dark">
         <MenuItem key="mail">
-          <Text> Navigation Four - LinkM</Text>
+          <Text children=" Navigation Four - LinkM" />
         </MenuItem>
         <MenuItem key="app">
-          <Text>Navigation</Text>
+          <Text children="Navigation" />
         </MenuItem>
       </Menu>
     );
@@ -40,12 +40,12 @@ export const 折叠功能 = {
       <Menu mode="inline" theme="dark" defaultOpenKeys={['sub1', 'sub2']}>
         <MenuSubMenu key="sub1" title="Navigation Four">
           <MenuItem key="mail">
-            <Text> Navigation Four - LinkM</Text>
+            <Text children=" Navigation Four - LinkM" />
           </MenuItem>
         </MenuSubMenu>
         <MenuSubMenu title="Navigation" key="sub2">
           <MenuItem key="app">
-            <Text>Navigation</Text>
+            <Text children="Navigation" />
           </MenuItem>
         </MenuSubMenu>
       </Menu>
@@ -58,12 +58,12 @@ export const 分组 = {
       <Menu mode="inline" theme="dark" defaultOpenKeys={['sub1', 'sub2']}>
         <MenuItemGroup key="sub1" title="Navigation Four">
           <MenuItem key="mail">
-            <Text> Navigation Four - LinkM</Text>
+            <Text children=" Navigation Four - LinkM" />
           </MenuItem>
         </MenuItemGroup>
         <MenuItemGroup title="Navigation" key="sub2">
           <MenuItem key="app">
-            <Text>Navigation</Text>
+            <Text children="Navigation" />
           </MenuItem>
         </MenuItemGroup>
       </Menu>

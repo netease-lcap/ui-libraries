@@ -40,7 +40,7 @@ export const 默认 = {
       },
     ];
     return (
-      <Dropdown menu={{ items }}>
+      <Dropdown dataSource={items}>
         <button type="button">Hover me</button>
       </Dropdown>
     );

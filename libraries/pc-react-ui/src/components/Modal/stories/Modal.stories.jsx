@@ -28,14 +28,14 @@ export const 默认 = {
     const modalRef = React.useRef(false);
     // const [ open,setOpen ]=React.useState(false)
     const showModal = () => {
-      modalRef.current.setOpen(!modalRef.current.open);
+      modalRef.current.open();
     };
     return (
       <div>
         <Button type="primary" onClick={showModal}>
           Open Modal
         </Button>
-        <Modal title="Basic Modal" ref={modalRef} onOk={() => modalRef.current.setOpen(false)} onCancel={() => modalRef.current.setOpen(false)}>
+        <Modal title="Basic Modal" ref={modalRef} defaultOpen>
           <p>Some contents...</p>
           <p>Some contents...</p>
           <p>Some contents...</p>

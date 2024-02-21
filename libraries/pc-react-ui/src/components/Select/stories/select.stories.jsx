@@ -43,13 +43,13 @@ export const 异步函数1 = {
       <Select {...args}>
         <SelectOptGroup
           label={(() => (
-            <Text>1234</Text>
+            <Text children="1234" />
           ))()}
         >
           <SelectOption key="1" label="1" value="1" />
           <SelectOption key="2" label="2" value="2" disabled />
         </SelectOptGroup>
-        <SelectOptGroup label={<Text>1234</Text>}>
+        <SelectOptGroup label={<Text children="1234" />}>
           <SelectOption key="1" label="1" value="1" />
           <SelectOption key="2" label="2" value="2" disabled />
         </SelectOptGroup>
