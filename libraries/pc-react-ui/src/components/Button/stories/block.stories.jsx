@@ -30,7 +30,7 @@ export const 主要按钮 = {
 };
 export const 次要按钮 = {
   render: () => {
-    return <Button children="确定"> </Button>;
+    return <Button children="确定" />;
   },
 };
 
