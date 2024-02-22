@@ -20,6 +20,7 @@ export default {
 };
 
 export const Demo0 = {
+  name: '数据选择框',
   render: () => ({
     components: {
       DeprecatedDemo: BlocksDemo1,
