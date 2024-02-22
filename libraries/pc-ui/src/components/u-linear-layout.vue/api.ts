@@ -90,18 +90,18 @@ namespace nasl.ui {
             setter: {
                 concept: 'CapsulesSetter',
                 options: [
-                    { title: '左对齐', icon: 'horizontal-justify-start', tooltip: '左对齐' }, 
-                    { title: '居中对齐', icon: 'horizontal-justify-center', tooltip: '居中对齐' }, 
-                    { title: '右对齐', icon: 'horizontal-justify-end', tooltip: '右对齐' }, 
-                    { 
-                        title: '平均分布(两端不留空)', 
-                        icon: 'horizontal-justify-space-between', 
+                    { title: '左对齐', icon: 'horizontal-justify-start', tooltip: '左对齐' },
+                    { title: '居中对齐', icon: 'horizontal-justify-center', tooltip: '居中对齐' },
+                    { title: '右对齐', icon: 'horizontal-justify-end', tooltip: '右对齐' },
+                    {
+                        title: '平均分布(两端不留空)',
+                        icon: 'horizontal-justify-space-between',
                         tooltip: '平均分布(两端不留空)' ,
                         if: _  => _.mode === 'flex' || _.direction === 'horizontal'
-                    }, 
-                    { 
-                        title: '平均分布', 
-                        icon: 'horizontal-justify-space-around', 
+                    },
+                    {
+                        title: '平均分布',
+                        icon: 'horizontal-justify-space-around',
                         tooltip: '平均分布',
                         if: _  => _.mode === 'flex'
                     }],
@@ -226,6 +226,7 @@ namespace nasl.ui {
             title: '内容间隙',
             description: '内容块间隙大小',
             docDescription: '布局内各个组件之间的间隔，通常有收缩、无、小、正常、大，默认为正常。',
+            tabKind: 'style',
             setter: {
                 concept: 'EnumSelectSetter',
                 options: [{ title: '收缩' }, { title: '无' }, { title: '小' }, { title: '正常' }, { title: '大' }],

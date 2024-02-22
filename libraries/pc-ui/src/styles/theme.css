@@ -1319,8 +1319,10 @@
     --select-padding-x-large: 10px; /* @hidden */
     --select-padding-x-huge: 10px; /* @hidden */
     --select-padding-x-full: 10px; /* @hidden */
-    --select-multiple-background-color: white; /* @type color */ /* @group 多选状态 */ /* @desc 选择项checkbox的背景颜色 */
-    --select-multiple-icon-color: #517cff; /* @type color */ /* @group 多选状态 */ /* @desc 选择项checkbox的选中图标颜色 */
+    --select-multiple-popper-item-background-selected: #fff; /* @type color */ /* @group 多选状态 */ /* @desc 选择项的背景颜色 */
+    --select-multiple-popper-item-color-selected: inherit; /* @type color */ /* @group 多选状态 */ /* @desc 选择项的文字颜色 */
+    --select-multiple-background-color: var(--brand-primary); /* @type color */ /* @group 多选状态 */ /* @desc 选择项checkbox的背景颜色 */
+    --select-multiple-icon-color: #fff; /* @type color */ /* @group 多选状态 */ /* @desc 选择项checkbox的选中图标颜色 */
     --select-multiple-partial-icon-color: #517cff; /* @type color */ /* @group 多选状态 */ /* @desc 选择项checkbox的半选择图标颜色 */
     --select-border-color-hover: var(--brand-primary); /* @hidden */
     --select-border-color-inverse: var(--border-color-base-inverse); /* @hidden */

@@ -10,15 +10,25 @@ import px2vw from './postcss-plugins/px2vw';
 // 设置测试运行的时区
 process.env.TZ = 'Asia/Shanghai';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const VueTplCompiler = require('./vue-template-compiler');
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue2(),
+    vue2({
+      template: {
+        compiler: VueTplCompiler,
+      },
+    }),
     vue2jsx({
       include: /.(js|ts|jsx|tsx)$/,
       babelPlugins: ['@babel/plugin-proposal-optional-chaining', '@babel/plugin-proposal-nullish-coalescing-operator'],
       vModel: true,
+      functional: false,
+      injectH: true,
       vOn: true,
+      compositionAPI: false,
     }),
   ],
   resolve: {
@@ -110,6 +120,7 @@ export default defineConfig({
     outDir: 'dist-theme',
     modulePreload: false,
     sourcemap: true,
+    minify: true,
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: ['vue', 'vue-router', 'vue-i18n'],
@@ -119,6 +130,13 @@ export default defineConfig({
           vue: 'Vue',
           'vue-router': 'VueRouter',
           'vue-i18n': 'VueI18n',
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'style.css') {
+            return 'index.css';
+          }
+
+          return '[name][extname]';
         },
       },
     },

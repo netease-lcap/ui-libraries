@@ -314,6 +314,7 @@ namespace nasl.ui {
     @Prop<VanColOptions, 'gap'>({
       title: '内容间隙',
       description: '内容块间隙大小',
+      tabKind: 'style',
       setter: {
         concept: "EnumSelectSetter",
         options: [{

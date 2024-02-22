@@ -82,6 +82,7 @@ namespace nasl.ui {
             title: '内容间隙',
             description: '布局中各分栏间的空隙大小',
             docDescription: '分栏布局中各分栏间的空隙大小，缺省为无，支持收缩、无、小、正常、大共5个级别。',
+            tabKind: 'style',
             setter: {
                 concept: 'EnumSelectSetter',
                 options: [{ title: '收缩' }, { title: '无' }, { title: '小' }, { title: '正常' }, { title: '大' }],
@@ -407,6 +408,7 @@ namespace nasl.ui {
             title: '内容间隙',
             description: '内容块间隙大小',
             docDescription: '布局内各个组件之间的间隔，通常有收缩、无、小、正常、大，默认为无。',
+            tabKind: 'style',
             setter: {
                 concept: 'EnumSelectSetter',
                 options: [{ title: '收缩' }, { title: '无' }, { title: '小' }, { title: '正常' }, { title: '大' }],

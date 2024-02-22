@@ -14,6 +14,7 @@ yarn-lock.json
 **/test/coverage
 
 # dist file
+lcap-ui@*
 es
 lib
 dist

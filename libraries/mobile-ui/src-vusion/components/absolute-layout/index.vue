@@ -11,6 +11,11 @@
 
 export default {
     name: 'van-absolute-layout',
+    provide() {
+      return {
+        inAbsoluteLayout: true,
+      };
+    },
 };
 </script>
 

@@ -28,7 +28,8 @@ exports[`u-link.vue > Demo-基本用法 1`] = `
     <!---->
     普通链接
     <!---->
-  </a>&nbsp; <a class="root" hovertype="underline" href="#/components/u-button" tabindex="0" target="_self" vusion-slot-name-edit="text">
+  </a>
+  <a class="root" hovertype="underline" href="#/components/u-button" tabindex="0" target="_self" vusion-slot-name-edit="text">
     <!---->
     路由链接
     <!---->
@@ -92,7 +93,8 @@ exports[`u-link.vue > Demo-设置颜色 1`] = `
     <!---->
     默认颜色
     <!---->
-  </a>&nbsp; <a class="root" color="light" hovertype="underline" href="#" tabindex="0" target="_self" vusion-slot-name-edit="text">
+  </a>
+  <a class="root" color="light" hovertype="underline" href="#" tabindex="0" target="_self" vusion-slot-name-edit="text">
     <!---->
     <transition-stub name="fade-fast">
       <div arraw-size="normal" class="root" style="display: none;">
@@ -107,19 +109,22 @@ exports[`u-link.vue > Demo-设置颜色 1`] = `
       </div>
     </transition-stub>
     <!---->
-  </a>&nbsp; <a class="root" color="success" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+  </a>
+  <a class="root" color="success" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
     <!---->
     成功链接
     <!---->
-  </a>&nbsp; <a class="root" color="warning" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+  </a>
+  <a class="root" color="warning" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
     <!---->
     警告链接
     <!---->
-  </a>&nbsp; <a class="root" color="danger" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+  </a>
+  <a class="root" color="danger" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
     <!---->
     危险链接
     <!---->
-  </a>&nbsp;
+  </a>
 </div>
 `;
 
@@ -129,7 +134,8 @@ exports[`u-link.vue > Demo-鼠标悬停状态为颜色变化 1`] = `
     <!---->
     默认颜色
     <!---->
-  </a>&nbsp; <a class="root" color="light" hovertype="color" href="#" tabindex="0" target="_self" vusion-slot-name-edit="text">
+  </a>
+  <a class="root" color="light" hovertype="color" href="#" tabindex="0" target="_self" vusion-slot-name-edit="text">
     <!---->
     <transition-stub name="fade-fast">
       <div arraw-size="normal" class="root" style="display: none;">
@@ -144,18 +150,21 @@ exports[`u-link.vue > Demo-鼠标悬停状态为颜色变化 1`] = `
       </div>
     </transition-stub>
     <!---->
-  </a>&nbsp; <a class="root" color="success" hovertype="color" tabindex="0" target="_self" vusion-slot-name-edit="text">
+  </a>
+  <a class="root" color="success" hovertype="color" tabindex="0" target="_self" vusion-slot-name-edit="text">
     <!---->
     成功链接
     <!---->
-  </a>&nbsp; <a class="root" color="warning" hovertype="color" tabindex="0" target="_self" vusion-slot-name-edit="text">
+  </a>
+  <a class="root" color="warning" hovertype="color" tabindex="0" target="_self" vusion-slot-name-edit="text">
     <!---->
     警告链接
     <!---->
-  </a>&nbsp; <a class="root" color="danger" hovertype="color" tabindex="0" target="_self" vusion-slot-name-edit="text">
+  </a>
+  <a class="root" color="danger" hovertype="color" tabindex="0" target="_self" vusion-slot-name-edit="text">
     <!---->
     危险链接
     <!---->
-  </a>&nbsp;
+  </a>
 </div>
 `;

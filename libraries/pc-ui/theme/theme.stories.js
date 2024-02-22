@@ -1,17 +1,15 @@
 import Vue from 'vue';
 import * as CloudUI from '@/index.js';
-import Component from '../index.js';
-import BlocksDemo1 from '../demos/blocks/BlocksDemo1.vue';
+import ThemeDashboard from './dashboard.vue';
+import ThemeForm from './form.vue';
 
 Vue.use(CloudUI);
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
-  title: 'Example/u-select.vue/blocks',
-  component: Component,
+  title: '主题设置/全局主题配置',
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    layout: 'padded',
+    layout: 'fullscreen',
   },
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
@@ -19,12 +17,22 @@ export default {
   },
 };
 
-export const Demo0 = {
-  name: '数据选择框',
+export const Dashboard = {
+  name: 'Dashboard',
   render: () => ({
     components: {
-      DeprecatedDemo: BlocksDemo1,
+      ThemeDashboard,
     },
-    template: '<deprecated-demo />',
+    template: '<theme-dashboard />',
+  }),
+};
+
+export const Form = {
+  name: '表单页',
+  render: () => ({
+    components: {
+      ThemeForm,
+    },
+    template: '<theme-form />',
   }),
 };
