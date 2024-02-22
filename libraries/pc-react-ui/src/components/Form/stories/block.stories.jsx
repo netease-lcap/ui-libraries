@@ -36,5 +36,4 @@ export const 默认 = {
       </Form>
     );
   },
-  args: {},
 };

@@ -24,7 +24,7 @@ module.exports = {
 
     { group: 'Layout', name: 'Flex', alias: '线性布局' },
 
-    { group: 'Layout', name: 'Grid', alias: '栅格布局' },
+    { group: 'Layout', name: 'Row', alias: '栅格布局' },
 
     { group: 'Selector', name: 'Tabs', alias: '选项卡' },
     { group: 'Selector', name: 'Tree', alias: '树形视图' },

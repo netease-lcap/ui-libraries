@@ -1,10 +1,10 @@
 import React from 'react';
-import Dropdown from '../index';
-// import { Dropdown } from 'antd';
+import { Dropdown } from '../index';
+import { Button, Text } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
-  title: 'Example/Dropdown',
+  title: 'Example/Dropdown/blocks',
   component: Dropdown,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -21,31 +21,9 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: () => {
-    const ref = React.useRef();
-    const items = [
-      {
-        key: '1',
-        label: (
-          <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-            1st menu item
-          </a>
-        ),
-      },
-      {
-        key: '2',
-        label: (
-          <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-            2nd menu item
-          </a>
-        ),
-      },
-    ];
-    React.useEffect(() => {
-      console.log(ref);
-    }, []);
     return (
-      <Dropdown dataSource={items} defaultOpen ref={ref}>
-        <button type="button">Hover me</button>
+      <Dropdown >
+        <Button type="primary" children="按钮" />
       </Dropdown>
     );
   },

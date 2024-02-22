@@ -18,5 +18,7 @@ export const Flex = registerComponet<
   AntdFlex,
   { plugin, displayName: 'Flex', mapProps },
 );
-
+Flex.defaultProps = {
+  wrap: 'wrap',
+};
 // export default Flex;

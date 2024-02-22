@@ -1,11 +1,10 @@
 import React from 'react';
-import { Breadcrumb, BreadcrumbItem } from '../index';
-import { Text } from '@/index';
+import { List, ListItem } from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
-  title: 'Example/Breadcrumb/blocks',
-  component: Breadcrumb,
+  title: 'Example/List/blocks',
+  component: List,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
@@ -22,11 +21,11 @@ export default {
 export const 默认 = {
   render: () => {
     return (
-      <Breadcrumb>
-        <BreadcrumbItem>
-          <Text children="sample" />
-        </BreadcrumbItem>
-      </Breadcrumb>
+      <List title="带卡片阴影" extra="extra" tooltip="这是提示">
+        <ListItem key={1} children="第一条数据" />
+        <ListItem key={2} children="第二条数据" />
+        <ListItem key={3} children="第三条数据" />
+      </List>
     );
   },
 };

@@ -3,7 +3,9 @@
 namespace nasl.ui {
   @Component({
     title: '栅格行',
-    description: '内部元素行布局',
+    description: '内部元素按照一定的规则布局',
+    icon: 'grid-layout',
+    group: 'Layout',
   })
   export class Row extends ViewComponent {
     constructor(options?: Partial<RowOptions>) {

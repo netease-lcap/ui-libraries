@@ -45,40 +45,50 @@ namespace nasl.ui {
     })
     private type: 'flex';
 
-    @Prop<FlexOptions, 'mode'>({
-      group: '主要属性',
-      title: '布局模式',
-      tooltipLink:
-        'http://help.lcap.163yun.com/1.%E5%BC%80%E5%8F%91%E5%BA%94%E7%94%A8/2.%E9%A1%B5%E9%9D%A2/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/01.%E5%B8%83%E5%B1%80/020.%E7%BA%BF%E6%80%A7%E5%B8%83%E5%B1%80.html',
-      docDescription: `内联布局：将当前元素修改为内联布局模式，各个内联布局模式的元素将默认排布在同一行中，若空间不足以排布下一个内联布局元素，则该元素将会换行。
-块级布局：将当前元素修改为块级布局模式，各个块级布局模式的元素之前和之后均会换行。
-弹性布局：在弹性布局模式中，子元素可以在任何方向上排布，也可以“弹性伸缩”其尺寸，既可以增加尺寸以填满未使用的空间，也可以收缩尺寸以避免溢出父元素。`,
-      bindHide: true,
-      setter: {
-        concept: 'CapsulesSetter',
-        options: [
-          { title: '行内', icon: 'layout-inline-block', tooltip: '内联布局' },
-          { title: '块级', icon: 'layout-block', tooltip: '块级布局' },
-          { title: '弹性', icon: 'layout-flex', tooltip: '弹性布局' },
-        ],
-      },
-      onChange: [{ clear: ['justify', 'alignment', 'wrap', 'layout'] }],
-      tabKind: 'style',
-    })
-    mode: 'inline' | 'block' | 'flex' = 'block';
+    //     @Prop<FlexOptions, 'mode'>({
+    //       group: '主要属性',
+    //       title: '布局模式',
+    //       tooltipLink:
+    //         'http://help.lcap.163yun.com/1.%E5%BC%80%E5%8F%91%E5%BA%94%E7%94%A8/2.%E9%A1%B5%E9%9D%A2/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/01.%E5%B8%83%E5%B1%80/020.%E7%BA%BF%E6%80%A7%E5%B8%83%E5%B1%80.html',
+    //       docDescription: `内联布局：将当前元素修改为内联布局模式，各个内联布局模式的元素将默认排布在同一行中，若空间不足以排布下一个内联布局元素，则该元素将会换行。
+    // 块级布局：将当前元素修改为块级布局模式，各个块级布局模式的元素之前和之后均会换行。
+    // 弹性布局：在弹性布局模式中，子元素可以在任何方向上排布，也可以“弹性伸缩”其尺寸，既可以增加尺寸以填满未使用的空间，也可以收缩尺寸以避免溢出父元素。`,
+    //       bindHide: true,
+    //       setter: {
+    //         concept: 'CapsulesSetter',
+    //         options: [
+    //           { title: '行内', icon: 'layout-inline-block', tooltip: '内联布局' },
+    //           { title: '块级', icon: 'layout-block', tooltip: '块级布局' },
+    //           { title: '弹性', icon: 'layout-flex', tooltip: '弹性布局' },
+    //         ],
+    //       },
+    //       onChange: [{ clear: ['justify', 'alignment', 'wrap', 'layout'] }],
+    //       tabKind: 'style',
+    //     })
+    //     mode: 'inline' | 'block' | 'flex' = 'block';
 
     @Prop<FlexOptions, 'direction'>({
       group: '主要属性',
       title: '主轴方向',
       docDescription: ` 主轴的方向是否垂直`,
       bindHide: true,
+      // setter: {
+      //   concept: 'SwitchSetter',
+      // },
       setter: {
-        concept: 'SwitchSetter',
+        concept: 'CapsulesSetter',
+        options: [
+          { title: '横向排列', icon: 'flex-horizontal', tooltip: '横向' },
+          { title: '纵向排列', icon: 'flex-vertical', tooltip: '纵向' },
+        ],
       },
-      // onChange: [{ clear: ['justify', 'alignment'] }],
+      onChange: [{ clear: ['justify', 'alignment'] }],
       tabKind: 'style',
+      // onChange: [{ clear: ['justify', 'alignment'] }],
+      // tabKind: 'style',
     })
-    direction: nasl.core.Boolean;
+    // direction: 'horizontal' | 'vertical' = 'horizontal';
+    direction: nasl.core.Boolean = false;
 
     @Prop<FlexOptions, 'justify'>({
       group: '主要属性',
@@ -134,11 +144,12 @@ namespace nasl.ui {
       description: '设置弹性布局下子元素总宽度超出父级时子元素是否换行展示',
       docDescription: '支持控制弹性布局模式下，子元素总宽度超过父级时是否换行展示，默认开启。',
       setter: {
-        concept: 'SwitchSetter',
+        concept: 'EnumSelectSetter',
+        options: [{ title: '换行' }, { title: '不换行' }],
       },
       tabKind: 'style',
     })
-    wrap: nasl.core.Boolean = true;
+    wrap: 'wrap' | 'nowrap' = 'wrap';
 
     @Prop({
       group: '状态属性',
@@ -177,10 +188,10 @@ namespace nasl.ui {
       docDescription: '布局内各个组件之间的间隔，通常有收缩、无、小、正常、大，默认为正常。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '小' }, { title: '正常' }, { title: '大' }],
+        options: [{ title: '小' }, { title: '正常' }, { title: '大' }, { title: '无' }],
       },
     })
-    gap: 'small' | 'normal' | 'large' = 'normal';
+    gap: 'small' | 'middle' | 'large' | 0 = 0;
 
     @Event({
       title: '点击',
