@@ -97,7 +97,7 @@ export const HocBaseComponents = React.memo(React.forwardRef((myProps: any, ref)
   // useWhyDidYouUpdate('useWhyDidYouUpdateComponent', { ...jsProps });
 
   // return <BaseComponent {...props} ref={ref} />;
-  console.log(excludeProps, 'excludeProps');
+  // console.log(excludeProps, 'excludeProps');
   return (
     <Component
       {...excludeProps}

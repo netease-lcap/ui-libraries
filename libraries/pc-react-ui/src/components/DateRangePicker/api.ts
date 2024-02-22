@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @Component({
-    title: '日期选择',
+    title: '日期范围选择',
     icon: 'date-picker',
     description: '日期选择',
     group: 'Selector',
