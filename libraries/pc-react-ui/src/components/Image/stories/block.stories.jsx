@@ -1,11 +1,10 @@
 import React from 'react';
-import { Breadcrumb, BreadcrumbItem } from '../index';
-import { Text } from '@/index';
+import { Image } from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
-  title: 'Example/Breadcrumb/blocks',
-  component: Breadcrumb,
+  title: 'Example/Image/blocks',
+  component: Image,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
@@ -19,14 +18,8 @@ export default {
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const 默认 = {
+export const 普通图片 = {
   render: () => {
-    return (
-      <Breadcrumb>
-        <BreadcrumbItem>
-          <Text children="sample" />
-        </BreadcrumbItem>
-      </Breadcrumb>
-    );
+    return <Image width="200px" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />;
   },
 };

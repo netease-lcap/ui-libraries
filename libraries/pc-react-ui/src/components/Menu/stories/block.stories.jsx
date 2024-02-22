@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  Menu, MenuItem, MenuSubMenu, MenuItemGroup, Text,
+  Menu, MenuItem, MenuSubMenu, MenuItemGroup,
 } from '../index';
+import { Text } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -23,7 +24,7 @@ export default {
 export const 基本用法 = {
   render: () => {
     return (
-      <Menu mode="inline" theme="dark">
+      <Menu mode="horizontal">
         <MenuItem key="mail">
           <Text children=" Navigation Four - LinkM" />
         </MenuItem>
@@ -37,7 +38,7 @@ export const 基本用法 = {
 export const 折叠功能 = {
   render: () => {
     return (
-      <Menu mode="inline" theme="dark" defaultOpenKeys={['sub1', 'sub2']}>
+      <Menu mode="horizontal" defaultOpenKeys={['sub1', 'sub2']}>
         <MenuSubMenu key="sub1" title="Navigation Four">
           <MenuItem key="mail">
             <Text children=" Navigation Four - LinkM" />
@@ -55,7 +56,7 @@ export const 折叠功能 = {
 export const 分组 = {
   render: () => {
     return (
-      <Menu mode="inline" theme="dark" defaultOpenKeys={['sub1', 'sub2']}>
+      <Menu mode="horizontal" defaultOpenKeys={['sub1', 'sub2']}>
         <MenuItemGroup key="sub1" title="Navigation Four">
           <MenuItem key="mail">
             <Text children=" Navigation Four - LinkM" />

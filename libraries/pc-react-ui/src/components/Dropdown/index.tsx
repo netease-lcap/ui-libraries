@@ -12,12 +12,10 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Dropdown = registerComponet<
+export const Dropdown = registerComponet<
   DropDownProps,
   pluginType<DropDownProps>
 >(
   AntdDropdown,
   { plugin, displayName: AntdDropdown.displayName, mapProps },
 );
-
-export default Dropdown;

@@ -21,7 +21,7 @@ export const Checkbox = registerComponet<
   { plugin, displayName: AntdCheckbox.displayName, mapProps },
 );
 
-export const checkboxGroup = registerComponet<
+export const CheckboxGroup = registerComponet<
   CheckboxProps,
   pluginType<CheckboxProps>
 >(

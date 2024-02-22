@@ -471,6 +471,26 @@ namespace nasl.ui {
       title: '项',
       description: '自定义选项的结构和样式',
     })
-    chilren: (current: Current<T>) => Array<ViewComponent>;
+    slotDefault: (current: Current<T>) => Array<ViewComponent>;
+  }
+  @Component({
+    title: '列表项',
+    description: '列表项',
+  })
+  export class ListItem<T, V> extends ViewComponent {
+    constructor(options?: Partial<ListItemOptions<T, V>>) {
+      super();
+    }
+  }
+  @Component({
+    title: '列表项',
+    description: '列表项',
+  })
+  export class ListItemOptions<T, V> extends ViewComponentOptions {
+    @Slot({
+      title: '项',
+      description: '自定义选项的结构和样式',
+    })
+    slotDefault: (current: Current<T>) => Array<ViewComponent>;
   }
 }

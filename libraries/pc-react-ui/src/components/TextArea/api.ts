@@ -2,8 +2,8 @@
 
 namespace nasl.ui {
 	@Component({
-			title: '单行输入',
-			icon: 'input',
+			title: '多行输入',
+			icon: 'textarea',
 			description: '基本的表单输入组件',
 			group: 'Form'
 	})

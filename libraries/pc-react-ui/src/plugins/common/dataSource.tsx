@@ -12,11 +12,12 @@ import {
 export function useHandleTransformOption(props) {
   const dataSourceField = props.get($dataSourceField, 'options');
   const deletePropsList = props.get($deletePropsList, []).concat([$dataSourceField]);
-  const dataSource = props.get('dataSource', []);
+  const dataSource = props.get('dataSource');
   const requestDataSource = React.useMemo(() => {
     const wrapDataSource = _.cond([
       [_.isArray, _.constant(() => Promise.resolve(dataSource))],
       [_.isFunction, _.constant(() => Promise.resolve(dataSource()))],
+      [_.stubTrue, _.constant(() => Promise.resolve([]))],
     ]);
     return wrapDataSource(dataSource);
   }, [dataSource]);

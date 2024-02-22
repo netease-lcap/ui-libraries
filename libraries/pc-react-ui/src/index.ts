@@ -13,7 +13,7 @@ export { TableColumn } from './components/Table/index';
 export * from './components/Transfer/index';
 export * from './components/Tabs/index';
 export * from './components/Switch/index';
-export * from './components/Grid/index';
+export * from './components/Row/index';
 export * from './components/Modal/index';
 export * from './components/Message/index';
 export * from './components/Drawer/index';
