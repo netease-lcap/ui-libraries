@@ -24,13 +24,13 @@ export const 默认 = {
   render: () => {
     return (
       <Form>
-        <FormItem label="Username" name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
+        <FormItem label="Username" name="username">
           <Input />
         </FormItem>
-        <FormItem label="Password" name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
+        <FormItem label="Password" name="password">
           <Input />
         </FormItem>
-        <FormItem wrapperCol={{ offset: 8, span: 16 }}>
+        <FormItem>
           <Button type="primary" htmlType="submit" children="Submit" />
         </FormItem>
       </Form>
