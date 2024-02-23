@@ -238,47 +238,6 @@ export default createComponent({
   },
 
   render() {
-    const styletemp = {
-      background: '#FAFAFA',
-      border: '1px dashed #CCCCCC',
-      height: '14.93333vw',
-      alignItems: 'center',
-      justifyContent: 'center',
-      display: 'flex',
-      fontSize: '4.26667vw',
-      color: '#666666',
-    }
-    if (this.ifDesigner()) {
-      return (
-        <div style={styletemp} ref="wrappertemp">
-          <span ref="wrapper" class={bem('wrapper')} onClick={this.onClickWrapper}>
-            <Popup
-              ref="popover"
-              value={this.valued}
-              class={bem([this.theme])}
-              overlay={this.overlay}
-              position={null}
-              transition="van-popover-zoom"
-              lockScroll={false}
-              // getContainer={this.getContainer}
-              onOpen={this.onOpen}
-              onClose={this.onClose}
-              onInput={this.onToggle}
-              onOpened={this.onOpened}
-              onClosed={this.onClosed}
-              nativeOnTouchstart={this.onTouchstart}
-            >
-              <div class={bem('arrow')} />
-              <div class={bem('content')} role="menu">
-                {this.slots('default') || this.actions.map(this.renderAction)}
-              </div>
-            </Popup>
-          </span>
-          <div>双击打开/关闭气泡框</div>
-        </div>
-      )
-    }
-
     return (
       <span ref="wrapper" class={bem('wrapper')} onClick={this.onClickWrapper}>
         <Popup

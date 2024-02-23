@@ -1,6 +1,13 @@
 {
   "confirm": "确定",
   "cancel": "取消",
+
+  "loading": "正在加载中...",
+  "error": "加载失败，请重试",
+  "empty": "暂无数据",
+  "loadMore": "加载更多",
+  "noMore": "没有更多了",
+
   "vanCalendar_title": "日期选择",
   "vanCalendar_confirm": "确定",
   "vanCalendar_weekdays": "日,一,二,三,四,五,六",
@@ -28,5 +35,39 @@
   "vanUploader_typeError": "文件类型不匹配，请上传{accept}的文件类型",
   "vanUploader_maxSize": "文件{name}超出大小{size}MB！",
   "vanCopy_fail": "无复制对象",
-  "vanGridView_loading": "加载中"
+  "vanGridView_loading": "加载中",
+
+
+  "vanMyProcess_todo": "我的待办",
+  "vanMyProcess_done": "我的已办",
+  "vanMyProcess_initiate": "我的发起",
+  "vanMyProcess_type": "流程类型",
+  "vanMyProcess_currentNode": "当前节点",
+  "vanMyProcess_currentAssignee": "当前处理人",
+  "vanMyProcess_initiator": "发起人",
+  "vanMyProcess_startTime": "发起时间",
+
+  "vanMyProcessToolbar_process": "流程",
+  "vanMyProcessToolbar_initiator": "发起人",
+  "vanMyProcessToolbar_startTime": "发起时间",
+
+  "vanProcessButton_submit": "提交",
+  "vanProcessButton_reject": "回退",
+  "vanProcessButton_transmit": "转交",
+  "vanProcessButton_more": "更多",
+  "vanProcessButton_agree": "同意",
+  "vanProcessButton_disagree": "不同意",
+
+  "vanProcessInfo_initiator": "发起人",
+  "vanProcessInfo_startTime": "发起时间",
+  "vanProcessInfo_status": "当前状态",
+  "vanProcessInfo_node": "当前节点",
+  "vanProcessInfo_assignee": "参与人",
+
+  "vanProcessRecord_node": "流程节点",
+  "vanProcessRecord_assignee": "处理人",
+  "vanProcessRecord_time": "处理时间",
+  "vanProcessRecord_status": "审批结果",
+  "vanProcessRecord_comment": "审批意见",
+  "vanProcessRecord_more": "查看更多"
 }

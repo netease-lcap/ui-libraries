@@ -92,6 +92,7 @@ export default createComponent({
             }
           ></div>
         )}
+        {this.slots('extra')}
       </div>
     );
   },

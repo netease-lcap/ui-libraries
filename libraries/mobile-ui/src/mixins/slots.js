@@ -23,6 +23,9 @@ export const SlotsMixin = {
       }
 
       return this.$env && this.$env.VUE_APP_DESIGNER;
-    }
+    },
+    isDev() {
+      return process.env.NODE_ENV !== 'production';
+    },
   },
 };
