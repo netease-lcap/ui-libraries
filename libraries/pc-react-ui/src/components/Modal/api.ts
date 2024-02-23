@@ -161,7 +161,7 @@ namespace nasl.ui {
       title: 'undefined',
       description: '弹窗中部自定义',
     })
-    slotChildren: () => Array<ViewComponent>;
+    slotDefault: () => Array<ViewComponent>;
 
     @Slot({
       title: 'undefined',

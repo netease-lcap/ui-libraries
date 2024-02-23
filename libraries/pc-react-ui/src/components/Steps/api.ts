@@ -222,7 +222,7 @@ namespace nasl.ui {
       title: '默认',
       description: '插入文本或 HTML',
     })
-    children: () => Array<ViewComponent>;
+    slotDefault: () => Array<ViewComponent>;
 
     @Slot({
       title: '标题',
