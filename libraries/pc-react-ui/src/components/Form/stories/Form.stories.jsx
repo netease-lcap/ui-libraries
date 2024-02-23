@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProFormDatePicker, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components';
 import {
-  Input, Button, Form, FormItem,
+  Input, Button, Form, FormItem, Text,
 } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -38,7 +38,7 @@ export const 默认 = {
           ]}
           width="sm"
           name="useMode"
-          label="合同约定生效方式"
+          label={<Text children="表单项" />}
         />
         <ProFormDateRangePicker
           transform={(values) => {
@@ -52,25 +52,6 @@ export const 默认 = {
           label="合同生效时间"
         />
         <ProFormDatePicker width="md" name="expirationTime" label="合同失效时间" />
-      </Form>
-    );
-  },
-  args: {},
-};
-
-export const 默认2 = {
-  render: () => {
-    return (
-      <Form key="782" data-nodepath="rootview.5" ide-iscontainer="true">
-        <FormItem key="783" data-nodepath="rootview.5.0" ide-iscontainer="true" label="Username" name="username" rules="[{validate: 'undefined',message: `undefined`,trigger: 'input+blur'}]">
-          <Input key="784" data-nodepath="rootview.5.0.0" />
-        </FormItem>
-        <FormItem key="785" data-nodepath="rootview.5.1" ide-iscontainer="true" label="Password" name="password" rules="[{validate: 'undefined',message: `undefined`,trigger: 'input+blur'}]">
-          <Input key="786" data-nodepath="rootview.5.1.0" />
-        </FormItem>
-        <FormItem key="787" data-nodepath="rootview.5.2" ide-iscontainer="true" wrapperCol="{   offset: 8,   span: 16 }">
-          <Button key="788" data-nodepath="rootview.5.2.0" type="primary" htmlType="submit" children="Submit" />
-        </FormItem>
       </Form>
     );
   },

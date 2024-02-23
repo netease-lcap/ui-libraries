@@ -7,18 +7,18 @@ namespace nasl.ui {
     description: '通过点击或者拖拽上传文件。',
     group: 'Form',
   })
-  export class Uploader extends ViewComponent {
+  export class Upload extends ViewComponent {
     // @Method({
     //   title: '选择',
     //   description: '选择文件上传',
     // })
     // select(): void {}
-    constructor(options?: Partial<UploaderOptions>) {
+    constructor(options?: Partial<UploadOptions>) {
       super();
     }
   }
 
-  export class UploaderOptions extends ViewComponentOptions {
+  export class UploadOptions extends ViewComponentOptions {
     @Prop({
       title: '接收数据类型',
       description: '接收数据类型。可选值：`text`、`xml`、`json`',
