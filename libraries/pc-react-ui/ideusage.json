@@ -411,5 +411,11 @@
             "idetype": "element",
             "editable": "children"
         }
+    },
+    {
+        "name": "Upload",
+        "ideusage": {
+            "idetype": "container"
+        }
     }
 ]
