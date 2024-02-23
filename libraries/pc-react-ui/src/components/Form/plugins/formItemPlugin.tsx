@@ -4,7 +4,6 @@ import _ from 'lodash';
 import { Col } from '@/index';
 
 export function useHandle(props) {
-  console.log('object');
   return {
     render(selfProps) {
       const Compoent = props.get('render');

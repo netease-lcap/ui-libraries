@@ -23,7 +23,7 @@ export const 单个文件按钮 = {
   render: () => {
     return (
       <Upload>
-        <Button icon={<Icon iconType="UploadOutlined" />} children="上传" />
+        <Button icon="UploadOutlined" children="上传" />
       </Upload>
     );
   },
@@ -45,7 +45,7 @@ export const 多图片按钮 = {
   render: () => {
     return (
       <Upload action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188" listType="picture">
-        <Button icon={<Icon iconType="UploadOutlined" />} children="上传" />
+        <Button icon="UploadOutlined" children="上传" />
       </Upload>
     );
   },

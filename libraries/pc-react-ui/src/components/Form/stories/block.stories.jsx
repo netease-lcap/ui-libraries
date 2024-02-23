@@ -24,7 +24,7 @@ export const 默认 = {
   render: () => {
     return (
       <Form>
-        <FormItem label="Username" name="username">
+        <FormItem span={12} label="Username" name="username">
           <Input />
         </FormItem>
         <FormItem label="Password" name="password">

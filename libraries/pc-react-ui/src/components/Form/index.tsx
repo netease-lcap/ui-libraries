@@ -25,14 +25,14 @@ export const Form = registerComponet<
 // export default Form;
 // console.log(formItemPlugin, 'formItemPlugin');
 
-// export const FormItem = registerComponet<
-//   FormProps,
-//   pluginType<FormProps>
-// >(
-//   AntdForm.Item,
-//   { formItemPlugin, displayName: 'FormItem', mapProps },
-// );
-export const FormItem = AntdForm.Item;
+export const FormItem = registerComponet<
+  FormProps,
+  pluginType<FormProps>
+>(
+  AntdForm.Item,
+  { plugin: formItemPlugin, displayName: 'FormItem', mapProps },
+);
+// export const FormItem = AntdForm.Item;
 export const FormList = AntdForm.List;
 // export const FormItemProps = AntdForm.ItemProps;
 // export const FormLGroup = AntdForm.Group;

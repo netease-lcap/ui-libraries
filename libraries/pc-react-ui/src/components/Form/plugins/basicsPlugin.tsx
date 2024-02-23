@@ -8,7 +8,7 @@ export function useHandle(props) {
       const Compoent = props.get('render');
       return (
         <Compoent key="component" {...selfProps}>
-          <Row vertical key="row">{selfProps.children}</Row>
+          <Row key="row">{selfProps.children}</Row>
         </Compoent>
       );
     },
