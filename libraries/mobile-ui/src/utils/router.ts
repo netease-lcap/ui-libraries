@@ -21,6 +21,7 @@ function isRedundantNavigation(err: Error) {
 
 export function route(router: VueRouter, config: RouteConfig) {
   const { to, url, replace } = config;
+
   if (to && router) {
     const promise = router[replace ? 'replace' : 'push'](to);
 

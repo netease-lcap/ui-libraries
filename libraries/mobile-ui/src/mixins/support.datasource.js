@@ -2,11 +2,12 @@ import { formatResult } from "../utils/format/data-source";
 
 export default {
   props: {
-    dataSource: [Array, Function, Object],
+    dataSource: [Array, Function, Object], /* 数据源 */
+    titleField: { type: String, default: 'title' }, /* 标签项标题 */
+    urlField: { type: String, default: 'url' }, /* 标签项内容值字段 */
     dataSchema: { type: String, default: 'entity' },
-    valueField: { type: String, default: 'value' },
+    valueField: { type: String, default: 'value' }, /* 标签项标题值字段 */
     textField: { type: String, default: 'text' },
-
     parentField: { type: String, default: 'parentId' },
     childrenField: { type: String, default: 'children' },
   },
