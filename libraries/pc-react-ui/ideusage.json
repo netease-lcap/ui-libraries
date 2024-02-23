@@ -195,7 +195,6 @@
               "loopElem": "table > tbody > tr",
               "emptySlot": {
                 "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
-                "component": "listSlot",
                 "accept": "target.concept === 'Entity'"
               }
             }
