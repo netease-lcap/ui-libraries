@@ -229,9 +229,8 @@ export default createComponent({
   render() {
     return (
       <div class={bem()}>
-        {this.type === 'list'
-          ? this.renderList()
-          : this.renderTimeline()}
+        {this.type === 'list' ? this.renderList() : null}
+        {this.type === 'timeline' ? this.renderTimeline() : null}
       </div>
     );
   },

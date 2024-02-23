@@ -20,7 +20,6 @@ namespace nasl.ui {
       group: '主要属性',
       title: '展示类型',
       description: '',
-      sync: true,
       setter: {
         concept: "EnumSelectSetter",
         options: [{
