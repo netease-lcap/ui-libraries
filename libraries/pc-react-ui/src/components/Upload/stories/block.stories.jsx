@@ -15,10 +15,6 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
-    originDataSource: {
-      options: ['无', 'employee', 'department'],
-      control: { type: 'select' }, // Automatically inferred when 'options' is defined
-    },
   },
 };
 
@@ -27,46 +23,29 @@ export const 单个文件按钮 = {
   render: () => {
     return (
       <Upload>
-        <Button icon={<Icon iconType="UploadOutlined" />}>Click to Upload</Button>
+        <Button icon={<Icon iconType="UploadOutlined" />} children="上传" />
       </Upload>
     );
   },
 };
-export const 单文件卡片 = {
-  render: () => {
-    return (
-      <Upload action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188" listType="picture-card">
-        <button style={{ border: 0, background: 'none' }} type="button">
-          <Icon iconType="PlusOutlined" />
-          <div style={{ marginTop: 8 }}>Upload</div>
-        </button>
-      </Upload>
-    );
-  },
-};
+// export const 单文件卡片 = {
+//   render: () => {
+//     return (
+//       <Upload action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188" listType="picture-card">
+//         <button style={{ border: 0, background: 'none' }} type="button">
+//           <Icon iconType="PlusOutlined" />
+//           <div style={{ marginTop: 8 }}>Upload</div>
+//         </button>
+//       </Upload>
+//     );
+//   },
+// };
 
 export const 多图片按钮 = {
   render: () => {
     return (
-      <Upload
-        action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-        listType="picture"
-        defaultFileList={[
-          {
-            uid: '-1',
-            name: 'yyy.png',
-            status: 'done',
-            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-            thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-          },
-          {
-            uid: '-2',
-            name: 'zzz.png',
-            status: 'error',
-          },
-        ]}
-      >
-        <Button icon={<Icon iconType="UploadOutlined" />}>Upload</Button>
+      <Upload action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188" listType="picture">
+        <Button icon={<Icon iconType="UploadOutlined" />} children="上传" />
       </Upload>
     );
   },

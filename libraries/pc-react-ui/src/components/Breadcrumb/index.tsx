@@ -12,12 +12,13 @@ const mapProps = {
   mySize: 'size',
 };
 
-export const Breadcrumb = registerComponet<
-  BreadcrumbProps,
-  pluginType<BreadcrumbProps>
->(
-  AntdBreadcrumb,
-  { plugin, displayName: AntdBreadcrumb.displayName, mapProps },
-);
+// export const Breadcrumb = registerComponet<
+//   BreadcrumbProps,
+//   pluginType<BreadcrumbProps>
+// >(
+//   AntdBreadcrumb,
+//   { plugin, displayName: AntdBreadcrumb.displayName, mapProps },
+// );
 
+export const Breadcrumb = AntdBreadcrumb;
 export const BreadcrumbItem = AntdBreadcrumb.Item;

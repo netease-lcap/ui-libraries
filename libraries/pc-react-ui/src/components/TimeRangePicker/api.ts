@@ -2,9 +2,9 @@
 
 namespace nasl.ui {
   @Component({
-    title: '时间选择',
+    title: '时间范围选择',
     icon: 'time-picker',
-    description: '时间选择',
+    description: '时间范围选择',
     group: 'Selector',
   })
   export class TimeRangePicker extends ViewComponent {

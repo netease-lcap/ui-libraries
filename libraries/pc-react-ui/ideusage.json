@@ -266,7 +266,7 @@
         }
     },
     {
-        "name": "DateRangerPicker",
+        "name": "DateRangePicker",
         "ideusage": {
             "idetype": "element"
         }
