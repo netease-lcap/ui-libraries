@@ -367,6 +367,6 @@ namespace nasl.ui {
       title: 'undefined',
       description: '插入需要布局的元素。',
     })
-    slotChildren: () => Array<ViewComponent>;
+    slotDefault: () => Array<ViewComponent>;
   }
 }

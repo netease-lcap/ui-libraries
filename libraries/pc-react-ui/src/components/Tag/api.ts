@@ -244,6 +244,6 @@ namespace nasl.ui {
       title: '默认',
       description: '插入文本或 HTML',
     })
-    sloteChildren: () => Array<ViewComponent>;
+    slotDefault: () => Array<ViewComponent>;
   }
 }
