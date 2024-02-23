@@ -155,7 +155,6 @@
               "loopElem": "table > tbody > tr",
               "emptySlot": {
                 "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
-                "component": "TableSlot",
                 "accept": "target.concept === 'Entity'"
               }
             },
@@ -299,7 +298,7 @@
         }
     },
     {
-        "name": "UModal",
+        "name": "Modal",
         "ideusage": {
             "idetype": "modal",
             "selector": {
@@ -309,7 +308,7 @@
         }
     },
     {
-        "name": "UDrawer",
+        "name": "Drawer",
         "ideusage": {
             "idetype": "modal",
             "selector": {
@@ -319,7 +318,7 @@
         }
     },
     {
-        "name": "UToastSingle",
+        "name": "Message",
         "ideusage": {
             "idetype": "modal",
             "selector": {
@@ -375,7 +374,7 @@
     {
         "name": "Dropdown",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "popover"
         }
     },
     {
