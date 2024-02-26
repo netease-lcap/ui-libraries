@@ -80,7 +80,7 @@
       {
         "id": "30da96f6-b7b6-4bae-9409-3bd1b8139e9b",
         "name": "van-popup",
-        "title": "弹出层",
+        "title": "抽屉",
         "toPosition": "popup",
         "type": [],
         "cssProperty": {
@@ -1435,7 +1435,7 @@
       {
         "id": "4fcd4dfd-683b-4d7e-920f-a6d1a0cabd36",
         "name": "van-dialog",
-        "title": "弹出框",
+        "title": "弹窗",
         "toPosition": "dialog",
         "type": [],
         "cssProperty": {
@@ -2098,7 +2098,7 @@
       {
         "id": "4fcd4dfd-683b-4d7e-9211f-gv9sdf08e0899nbnanb112eeeea3",
         "name": "van-popup-combination",
-        "title": "气泡弹出框",
+        "title": "弹出框",
         "toPosition": "popup-combination",
         "type": [],
         "preview": {
