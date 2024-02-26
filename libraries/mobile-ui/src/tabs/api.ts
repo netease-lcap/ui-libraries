@@ -39,7 +39,7 @@ namespace nasl.ui {
           concept: 'PropertySelectSetter',
       },
     })
-    titleField: (item: T) => any = ((item: any)  => item.title) as any;
+    textField: (item: T) => any = ((item: any)  => item.title) as any;
 
     @Prop<VanTabsOptions<T, V>, 'urlField'>({
       group: '数据属性',

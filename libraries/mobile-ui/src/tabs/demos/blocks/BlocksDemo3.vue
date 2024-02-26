@@ -2,7 +2,7 @@
 <template>
   <div>
     <h3>slots</h3>
-    <van-tabs titleField="title2">
+    <van-tabs textField="title2">
       <template #nav-left>left</template>
       <template #nav-right>right</template>
       <van-tab title="AAA">test1</van-tab>
@@ -11,13 +11,13 @@
     </van-tabs>
 
     <h3>dataSource: list</h3>
-    <van-tabs :dataSource="tabList" titleField="title2">
+    <van-tabs :dataSource="tabList" textField="title2">
       <template #nav-left>left</template>
       <template #nav-right>right</template>
     </van-tabs>
   
     <h3>dataSource: Promise</h3>
-    <van-tabs :dataSource="load" titleField="title2">
+    <van-tabs :dataSource="load" textField="title2">
       <template #nav-left>left</template>
       <template #nav-right>right</template>
     </van-tabs>
@@ -32,22 +32,21 @@ export default {
           tabList: [
             {
                 title2: 'AAA-',
-                // value: 1,
+                value: 1,
                 contentUrl: '/components/u-tabs/cases',
-                // disabled: true,
-                titleField: 'title2',
+                textField: 'title2',
             },
             {
                 title2: 'BBB-',
-                // value: 2,
+                value: 2,
                 contentUrl: '/components/u-tabs/cases#形态',
-                titleField: 'title2',
+                textField: 'title2',
             },
             {
                 title2: '标签页-',
-                // value: 3,
+                value: 3,
                 contentUrl: '/components/u-tabs/cases#添加',
-                titleField: 'title2',
+                textField: 'title2',
             }
           ]
         };
