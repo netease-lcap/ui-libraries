@@ -123,6 +123,7 @@
   align-items: stretch;
   height: 100vh;
   background-color: var(--van-component-background-color);
+  font-family: var(--van-base-font-family);
 }
 
 .header,
