@@ -189,9 +189,7 @@ export default createComponent({
     },
 
     tabDataSource() {
-      // setTimeout(() => {
-        this.setCurrentIndexByName(this.value ?? this.active);
-      // }, 3000)
+      this.setCurrentIndexByName(this.value ?? this.active);
     },
 
     currentIndex() {

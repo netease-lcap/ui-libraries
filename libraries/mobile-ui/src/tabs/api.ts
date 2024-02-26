@@ -7,12 +7,12 @@ namespace nasl.ui {
     description: '选项卡切换组件，常用于平级区域大块内容的收纳和展现',
     group: "Selector"
   })
-  export class VanTabs extends ViewComponent {
-    constructor(options?: Partial<VanTabsOptions>) {
+  export class VanTabs<T, V> extends ViewComponent {
+    constructor(options?: Partial<VanTabsOptions<T, V>>) {
       super();
     }
   }
-  export class VanTabsOptions extends ViewComponentOptions {
+  export class VanTabsOptions<T, V> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '值',
@@ -20,6 +20,38 @@ namespace nasl.ui {
       sync: true
     })
     value: nasl.core.String;
+
+    @Prop({
+      group: '数据属性',
+      title: '数据源',
+      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription: '集合类型变量或者输出参数为集合类型的逻辑',
+      designerValue: [{}, {}, {}],
+    })
+    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+
+    @Prop({
+      group: '数据属性',
+      title: '标签项标题',
+      description: '数据源集合的元素，用于显示标签标题的属性',
+      docDescription: '数据源集合的元素，用于显示标签标题的属性',
+      setter: {
+          concept: 'PropertySelectSetter',
+      },
+    })
+    titleField: (item: T) => any = ((item: any)  => item.title) as any;
+
+    @Prop<VanTabsOptions<T, V>, 'urlField'>({
+      group: '数据属性',
+      title: '标签项内容值字段',
+      description: '数据源集合的元素，用于标识当前打开的标签项',
+      docDescription: '数据源集合的元素，用于标识当前打开的标签项',
+      setter: {
+          concept: 'PropertySelectSetter',
+      },
+    })
+    urlField: (item: T) => any = ((item: any)  => item.url) as any;
+    
     @Prop({
       group: '主要属性',
       title: '样式类型',
