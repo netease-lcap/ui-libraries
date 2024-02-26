@@ -320,7 +320,7 @@
 .statist-item .desc {
   margin-top: 4px;
   line-height: 22px;
-  font-size: 14px;
+  font-size: var(--font-size-base);
   color: var(--font-second-color);
   text-align: center;
 }
@@ -341,7 +341,7 @@
 
 .progress-item .text {
   margin-top: 8px;
-  font-size: 14px;
+  font-size: var(--font-size-base);
   color: var(--font-second-color);
   text-align: center;
 }
