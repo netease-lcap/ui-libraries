@@ -10,7 +10,7 @@
       <van-tab title="标签页">test3</van-tab>
     </van-tabs>
 
-    <h3 @click="onClick">dataSource: list</h3>
+    <h3>dataSource: list</h3>
     <van-tabs :dataSource="tabList" titleField="title2">
       <template #nav-left>left</template>
       <template #nav-right>right</template>
@@ -69,10 +69,6 @@ export default {
                     }));
                 }, 200);
             });
-        },
-
-        onClick() {
-        // 
         },
     },
 };
