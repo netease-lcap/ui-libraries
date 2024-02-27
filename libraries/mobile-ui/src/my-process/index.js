@@ -10,7 +10,7 @@ import Iconv from '../iconv';
 
 import Toolbar from './toolbar';
 
-import mockData from './mock.json';
+import mockData from './mock';
 
 const [createComponent, bem, t] = createNamespace('my-process');
 

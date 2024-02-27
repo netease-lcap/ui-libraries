@@ -85,7 +85,7 @@ export default createComponent({
   },
 
   created() {
-    location.search
+    window.location.search
       .replace('?', '')
       .split('&')
       .forEach((item) => {
@@ -156,7 +156,7 @@ export default createComponent({
 
       // 转交人
       if (item.name === 'transfer') {
-        body.transferTargetUser = this.dialog.transfer;
+        body.userForReassign = this.dialog.transfer;
       }
 
       const operate = `${item.name}Task`;

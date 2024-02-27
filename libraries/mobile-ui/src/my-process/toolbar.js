@@ -7,7 +7,7 @@ import Iconv from '../iconv';
 import DateTimePicker from '../datetime-picker';
 import Picker from '../pickerson';
 
-import mockData from './mock.json';
+import mockData from './mock';
 
 const [createComponent, bem, t] = createNamespace('my-process-toolbar');
 

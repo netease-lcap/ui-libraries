@@ -6,17 +6,18 @@ const [createComponent, bem, t] = createNamespace('process-info');
 const mockData = {
   detail: {
     procInstId: 'ac33c3f2-ba69-11ee-bb3f-fa9450476323',
-    procInstStartBy: '张三',
+    procInstInitiator: '张三',
     procInstStartTime: '2024-01-24T03:35:52.000Z',
-    procInstStatus: 'approved',
-    procInstCurNodes: [
+    procInstEndTime: '2024-01-24T03:35:52.000Z',
+    procInstStatus: 'approving',
+    procInstCurrNodes: [
       {
-        curNodeTitle: '多人审批任务',
-        curNodeParticipants: ['李四', '王五'],
+        currNodeTitle: '多人审批任务',
+        currNodeParticipants: ['李四', '王五'],
       },
       {
-        curNodeTitle: '多人审批任务',
-        curNodeParticipants: ['赵六'],
+        currNodeTitle: '多人审批任务',
+        currNodeParticipants: ['赵六'],
       },
     ],
   },
@@ -65,17 +66,17 @@ export default createComponent({
 
   render() {
     const {
-      procInstStartBy: startBy,
+      procInstInitiator: startBy,
       procInstStartTime: startTime,
       procInstStatus: status,
-      procInstCurNodes: currentNodeList,
+      procInstCurrNodes: currentNodeList,
     } = this.detail;
 
     const nodes = (currentNodeList || [])
-      .map((item) => item.curNodeTitle)
+      .map((item) => item.currNodeTitle)
       .join('，');
     const assignees = (currentNodeList || [])
-      .map((item) => (item.curNodeParticipants || []).join('，'))
+      .map((item) => (item.currNodeParticipants || []).join('，'))
       .join('，');
 
     const statusMap = {
