@@ -21,11 +21,9 @@ export default {
 export const 默认 = {
   render: () => {
     return (
-      <List title="带卡片阴影" extra="extra" tooltip="这是提示">
-        <ListItem key={1} children="第一条数据" />
-        <ListItem key={2} children="第二条数据" />
-        <ListItem key={3} children="第三条数据" />
-      </List>
+      <template>
+        <List title="带卡片阴影" extra="extra" tooltip="这是提示" />
+      </template>
     );
   },
 };

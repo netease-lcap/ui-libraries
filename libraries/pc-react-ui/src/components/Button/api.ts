@@ -70,15 +70,15 @@ namespace nasl.ui {
     // })
     // display: 'inline' | 'block' = 'inline';
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '图标',
-    //   docDescription: '支持从图标库选择图标或上传自定义图标。',
-    //   setter: {
-    //     concept: 'IconSetter',
-    //   },
-    // })
-    // icon: nasl.core.String = '';
+    @Prop({
+      group: '主要属性',
+      title: '图标',
+      docDescription: '支持从图标库选择图标或上传自定义图标。',
+      // setter: {
+      //   concept: 'IconSetter',
+      // },
+    })
+    icon: nasl.core.String = '';
 
     // @Prop({
     //   title: '图标位置',
@@ -176,6 +176,8 @@ namespace nasl.ui {
       },
     })
     shape: 'default' | 'round' | 'circle' = 'default';
+
+  
 
     @Event({
       title: '点击',

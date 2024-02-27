@@ -331,6 +331,6 @@ namespace nasl.ui {
       title: '项',
       description: '插入文本或 HTML。',
     })
-    children: () => Array<ViewComponent>;
+    slotDefault: () => Array<ViewComponent>;
   }
 }

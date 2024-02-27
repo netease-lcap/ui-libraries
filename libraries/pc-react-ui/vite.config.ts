@@ -36,7 +36,13 @@ export default defineConfig(({ command }) => {
         formats: ['umd'],
         fileName: () => 'index.js',
       },
-      minify: false,
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        },
+      },
       outDir: 'dist-theme',
       sourcemap: true,
       rollupOptions: {

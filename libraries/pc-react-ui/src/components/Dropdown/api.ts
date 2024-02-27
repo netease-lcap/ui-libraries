@@ -223,7 +223,7 @@ namespace nasl.ui {
       title: '标题',
       description: '内容自定义',
     })
-    children: () => Array<ViewComponent>;
+    slotDefault: () => Array<ViewComponent>;
   }
 
   // @Component({

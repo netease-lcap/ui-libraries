@@ -1,5 +1,6 @@
 import React from 'react';
 import { TimePicker } from '../index';
+import 'dayjs/locale/zh-cn';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -27,5 +28,8 @@ export const 默认 = {
   args: {
     color: 'magenta',
     children: 'Tag',
+    locale: {
+      placeholder: '请选择日期',
+    },
   },
 };

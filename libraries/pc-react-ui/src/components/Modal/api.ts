@@ -7,7 +7,7 @@ namespace nasl.ui {
     description: '弹窗',
     group: 'Feedback',
   })
-  export class UModal extends ViewComponent {
+  export class Modal extends ViewComponent {
     @Method({
       title: 'undefined',
       description: '打开弹窗',
@@ -19,12 +19,12 @@ namespace nasl.ui {
       description: '关闭弹窗',
     })
     close(): void {}
-    constructor(options?: Partial<UModalOptions>) {
+    constructor(options?: Partial<ModalOptions>) {
       super();
     }
   }
 
-  export class UModalOptions extends ViewComponentOptions {
+  export class ModalOptions extends ViewComponentOptions {
     @Prop({
       title: '标题',
       description: '弹窗的标题',
@@ -161,7 +161,7 @@ namespace nasl.ui {
       title: 'undefined',
       description: '弹窗中部自定义',
     })
-    slotChildren: () => Array<ViewComponent>;
+    slotDefault: () => Array<ViewComponent>;
 
     @Slot({
       title: 'undefined',

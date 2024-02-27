@@ -82,20 +82,20 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    preview: nasl.core.Boolean = false;
+    preview: nasl.core.Boolean = true;
 
-    @Prop({
-      title: '加载样式',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: 'Loading' }, { title: '不显示加载状态' }, { title: '自定义默认图' }],
-      },
-    })
-    loadingType: 'loading' | 'none' | 'placeholder' = 'loading';
+    // @Prop({
+    //   title: '加载样式',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: 'Loading' }, { title: '不显示加载状态' }, { title: '自定义默认图' }],
+    //   },
+    // })
+    // loadingType: 'loading' | 'none' | 'placeholder' = 'none';
 
     @Prop<ImageOptions, 'fallback'>({
       title: '加载失败后显示的图片地址',
-      if: (_) => _.loadingType === 'placeholder',
+      // if: (_) => _.loadingType === 'placeholder',
     })
     fallback: nasl.core.String = 'https://static-vusion.nos-eastchina1.126.net/h5-template/lietu.png';
 

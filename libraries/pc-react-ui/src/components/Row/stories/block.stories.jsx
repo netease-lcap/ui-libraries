@@ -24,9 +24,9 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 三栏布局 = {
-  render: (args) => {
+  render: () => {
     return (
-      <Row style={{ width: '1000px' }} data-nodepath="1234">
+      <Row style={{ width: '1000px' }}>
         <Col style={{ backgroundColor: '#1677ffbf', height: 54 }} span={8} />
         <Col style={{ backgroundColor: '#1677ff', height: 54 }} span={8} />
         <Col style={{ backgroundColor: '#1677ffbf', height: 54 }} span={8} />

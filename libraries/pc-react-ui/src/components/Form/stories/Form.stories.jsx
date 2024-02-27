@@ -1,6 +1,8 @@
 import React from 'react';
 import { ProFormDatePicker, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components';
-import Form from '../index';
+import {
+  Input, Button, Form, FormItem, Text,
+} from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -36,7 +38,7 @@ export const 默认 = {
           ]}
           width="sm"
           name="useMode"
-          label="合同约定生效方式"
+          label={<Text children="表单项" />}
         />
         <ProFormDateRangePicker
           transform={(values) => {

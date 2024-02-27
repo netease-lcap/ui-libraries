@@ -155,11 +155,10 @@
               "loopElem": "table > tbody > tr",
               "emptySlot": {
                 "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
-                "component": "TableSlot",
                 "accept": "target.concept === 'Entity'"
               }
             },
-            "childAccept": "target.tag === 'Column'"
+            "childAccept": "target.tag === 'TableColumn'"
         },
         "slots": [
             {
@@ -196,7 +195,6 @@
               "loopElem": "table > tbody > tr",
               "emptySlot": {
                 "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
-                "component": "listSlot",
                 "accept": "target.concept === 'Entity'"
               }
             }
@@ -266,7 +264,7 @@
         }
     },
     {
-        "name": "DateRangerPicker",
+        "name": "DateRangePicker",
         "ideusage": {
             "idetype": "element"
         }
@@ -299,7 +297,7 @@
         }
     },
     {
-        "name": "UModal",
+        "name": "Modal",
         "ideusage": {
             "idetype": "modal",
             "selector": {
@@ -309,7 +307,7 @@
         }
     },
     {
-        "name": "UDrawer",
+        "name": "Drawer",
         "ideusage": {
             "idetype": "modal",
             "selector": {
@@ -319,7 +317,7 @@
         }
     },
     {
-        "name": "UToastSingle",
+        "name": "Message",
         "ideusage": {
             "idetype": "modal",
             "selector": {
@@ -375,7 +373,7 @@
     {
         "name": "Dropdown",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "popover"
         }
     },
     {
@@ -412,6 +410,12 @@
         "ideusage": {
             "idetype": "element",
             "editable": "children"
+        }
+    },
+    {
+        "name": "Upload",
+        "ideusage": {
+            "idetype": "container"
         }
     }
 ]

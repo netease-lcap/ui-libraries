@@ -2,18 +2,18 @@
 
 namespace nasl.ui {
   @Component({
-    title: '日期选择',
+    title: '日期范围选择',
     icon: 'date-picker',
     description: '日期选择',
     group: 'Selector',
   })
-  export class DateRangerPicker extends ViewComponent {
+  export class DateRangePicker extends ViewComponent {
     constructor(options?: Partial<DatePickerOptions>) {
       super();
     }
   }
 
-  export class DateRangerPickerOptions extends ViewComponentOptions {
+  export class DateRangePickerOptions extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '日期类型',
@@ -37,7 +37,7 @@ namespace nasl.ui {
     // })
     // range: nasl.core.Boolean = false;
 
-    @Prop<DateRangerPickerOptions, 'value'>({
+    @Prop<DateRangePickerOptions, 'value'>({
       group: '数据属性',
       title: '值',
       description: '默认显示的日期值，格式如2018-08-08',

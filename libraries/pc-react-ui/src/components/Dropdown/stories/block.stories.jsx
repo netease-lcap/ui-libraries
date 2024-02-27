@@ -22,7 +22,7 @@ export default {
 export const 默认 = {
   render: () => {
     return (
-      <Dropdown >
+      <Dropdown>
         <Button type="primary" children="按钮" />
       </Dropdown>
     );

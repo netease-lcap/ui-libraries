@@ -7,6 +7,7 @@ import { Modal, Popconfirm } from 'antd';
 import type { ButtonProps } from 'antd';
 import type { StateMap } from '@/types/immutable';
 import { $deletePropsList } from '@/plugins/constants';
+import { Icon } from '@/index';
 
 // interface StateMap<T, F> extends Map<string, any> {
 //   get<K extends keyof (T & F), L>(key: K, defaultValue?: L):
@@ -40,6 +41,10 @@ function useHandleAsyncLoading(props: StateMap<
     [_.stubTrue, _.stubObject],
   ]);
   return _.assign({ [$deletePropsList]: deletePropsList }, condHandle({ asyncLoading, onClick }));
+}
+export function useHandleIcon(props) {
+  const icon = props.get('icon');
+  return _.isString(icon) ? { icon: <Icon iconType={icon} /> } : {};
 }
 
 export function useHandleConfirm(props) {
