@@ -108,7 +108,11 @@
         "name": "DescriptionsItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'Descriptions'"
+            "parentAccept": "target.tag === 'Descriptions'",
+            "selector": {
+                "expression": "this",
+                "cssSelector": ".ant-descriptions-item"
+            }
         }
     },
     {
@@ -116,33 +120,7 @@
         "ideusage": {
             "idetype": "container",
             "containerDirection": "this.getAttribute('direction')?.value ? 'column' : 'row' "
-        },
-        "blocks": [
-            {
-              "concept": "ViewBlockWithImage",
-              "title": "单行排布",
-              "description": "",
-              "code": "<template>\n<Flex>\n</Flex>\n</template>\n",
-              "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.20.0/src/components/u-linear-layout.vue/screenshots/0.png",
-              "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.20.0/src/components/u-linear-layout.vue/drawings/0.svg"
-            },
-            {
-              "concept": "ViewBlockWithImage",
-              "title": "多行排布",
-              "description": "",
-              "code": "<template>\n<Flex vertical>\n    <Flex>\n    </Flex>\n    <Flex>\n    </Flex>\n</Flex>\n</template>\n",
-              "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.20.0/src/components/u-linear-layout.vue/screenshots/1.png",
-              "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.20.0/src/components/u-linear-layout.vue/drawings/1.svg"
-            },
-            {
-              "concept": "ViewBlockWithImage",
-              "title": "两端排布",
-              "description": "",
-              "code": "<template>\n<Flex justify=\"space-between\">\n    <Flex>\n    </Flex>\n    <Flex>\n    </Flex>\n</Flex>\n</template>\n",
-              "screenshot": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.20.0/src/components/u-linear-layout.vue/screenshots/2.png",
-              "drawing": "https://static-vusion.163yun.com/packages/cloud-ui.vusion@0.20.0/src/components/u-linear-layout.vue/drawings/2.svg"
-            }
-        ]
+        }
     },
     {
         "name": "Table",
@@ -159,18 +137,7 @@
               }
             },
             "childAccept": "target.tag === 'TableColumn'"
-        },
-        "slots": [
-            {
-                "name": "default",
-                "snippets": [
-                    {
-                      "title": "表格列",
-                      "code": "<TableColumn><template #render=\"current\"></template> <template #title><Text children=\"表格列\"></Text></template> </TableColumn>"
-                    }
-                ]
-            }
-        ]
+        }
     },
     {
         "name": "TableColumn",
