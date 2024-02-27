@@ -82,7 +82,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    preview: nasl.core.Boolean = true;
+    preview: nasl.core.Boolean = false;
 
     // @Prop({
     //   title: '加载样式',

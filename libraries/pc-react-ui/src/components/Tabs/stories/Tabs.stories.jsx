@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs } from '../index';
+import { Tabs, TabPane } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -23,17 +23,30 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 异步函数 = {
-  render: (args) => <Tabs {...args} />,
+  render: (args) => {
+    const ref = React.useRef();
+    React.useEffect(() => {
+      console.log(ref, ref, 'ref');
+    }, []);
+    return (
+      <Tabs>
+        {/* <TabPanePane key"1" ></TabPanePane> */}
+        <TabPane key="2" tab="选项卡2" data-nodepath="12" />
+        <TabPane key="3" tab="选项卡3" data-nodepath="123" />
+        <TabPane key="1" tab="选项卡1" data-nodepath="1234" />
+      </Tabs>
+    );
+  },
   args: {
-    dataSource: () => new Promise((res) => {
-      setTimeout(() => {
-        res([
-          { label: 'Option 1', key: '1' },
-          { label: 'Option 2', key: '2' },
-          { label: 'Option 3', key: '3' },
-        ]);
-      }, 3000);
-    }),
+    // dataSource: () => new Promise((res) => {
+    //   setTimeout(() => {
+    //     res([
+    //       { label: `Option 1${Math.random()}`, key: '1' },
+    //       { label: 'Option 2', key: '2' },
+    //       { label: 'Option 3', key: '3' },
+    //     ]);
+    //   }, 3000);
+    // }),
   },
 };
 export const 同步函数 = {

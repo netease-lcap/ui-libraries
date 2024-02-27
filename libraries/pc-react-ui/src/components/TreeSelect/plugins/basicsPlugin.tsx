@@ -4,7 +4,7 @@
 import { $deletePropsList, $dataSourceField } from '@/plugins/constants';
 
 export function useHandleTransform(props) {
-  const deletePropsList = props.get($deletePropsList, []).concat(['dataSourceField', 'textField', 'valueField', 'childrenField']);
+  const deletePropsList = props.get($deletePropsList, []).concat(['dataSource', 'textField', 'valueField', 'childrenField']);
   const textField = props.get('textField', 'title');
   const valueField = props.get('valueField', 'value');
   const childrenField = props.get('childrenField', 'children');
@@ -21,4 +21,4 @@ export function useHandleTransform(props) {
   };
 }
 
-useHandleTransform.order = 3;
+// useHandleTransform.order = 3;

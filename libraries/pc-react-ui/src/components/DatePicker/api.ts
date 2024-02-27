@@ -26,17 +26,6 @@ namespace nasl.ui {
     })
     picker: 'date' | 'week' | 'month' | 'quarter' | 'year' = 'date';
 
-    // @Prop({
-    //   group: '数据属性',
-    //   title: '区间选择',
-    //   description: '是否支持进行日期区间选择，关闭则为日期点选择',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    //   onChange: [{ clear: ['placeholderRight'] }],
-    // })
-    // range: nasl.core.Boolean = false;
-
     @Prop<DatePickerOptions, 'value'>({
       group: '数据属性',
       title: '值',
@@ -110,12 +99,16 @@ namespace nasl.ui {
     // })
     // yearAdd: nasl.core.Decimal = 20;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '高级格式化',
-    //   bindHide: true,
-    // })
-    // advancedFormat: { enable: nasl.core.Boolean; value: nasl.core.String } = { enable: false, value: '' };
+    @Prop<DatePickerOptions, 'showTime'>({
+      group: '主要属性',
+      title: '时间是选择',
+      // bindHide: true,
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      if: (_) => _.picker === 'date',
+    })
+    showTime: nasl.core.Boolean = false;
 
     // @Prop<UDatePickerOptions, 'showFormatter'>({
     //   group: '主要属性',
@@ -223,16 +216,16 @@ namespace nasl.ui {
     // })
     // preIcon: 'calendar' = 'calendar';
 
-    @Prop({
-      group: '主要属性',
-      title: '后缀图标',
-      docDescription: '支持添加后缀图标，如搜索图标',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '日历' }],
-      },
-    })
-    suffixIcon: 'calendar';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '后缀图标',
+    //   docDescription: '支持添加后缀图标，如搜索图标',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '日历' }],
+    //   },
+    // })
+    // suffixIcon: 'calendar';
 
     // @Prop({
     //   group: '主要属性',

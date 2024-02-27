@@ -61,7 +61,7 @@ export class Plugin {
   };
 }
 
-export const HocBaseComponents = React.memo(React.forwardRef((myProps: any, ref) => {
+export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   const { BaseComponent, props, plugin } = myProps;
   const pluginHooks = plugin.getPluginMethod();
   const mapProps = plugin.getMapProps();
@@ -73,7 +73,6 @@ export const HocBaseComponents = React.memo(React.forwardRef((myProps: any, ref)
       getObj: () => obj,
     };
   }
-
   const mutableProps = handleMutableProps();
   const ImmutableProps = Map(props)
     .reduce((result, value, key) => result.set(mapProps.get(key, key), value), Map())
@@ -81,7 +80,6 @@ export const HocBaseComponents = React.memo(React.forwardRef((myProps: any, ref)
     .set('mutableProps', mutableProps)
     .set('ref', ref)
     .set($deletePropsList, []);
-
   const expandProps = pluginHooks.reduce(
     (expandProps, handleFun) => expandProps.merge(_.attempt(handleFun, expandProps)),
     ImmutableProps,
@@ -97,19 +95,20 @@ export const HocBaseComponents = React.memo(React.forwardRef((myProps: any, ref)
   // useWhyDidYouUpdate('useWhyDidYouUpdateComponent', { ...jsProps });
 
   // return <BaseComponent {...props} ref={ref} />;
-  console.log(excludeProps, 'excludeProps');
+  // console.log(mutableProps.getObj(), 'mutableProps');
   return (
     <Component
       {...excludeProps}
       {...mutableProps.getObj()}
     />
   );
-}));
-export function registerComponet<T, U extends pluginType<T>>(
+});
+// extends pluginType<T>
+export function registerComponet<T, U >(
   Component: React.ElementType,
   pluginOption,
 ) {
-  return React.memo(React.forwardRef<T, U>((props, ref) => {
+  return React.forwardRef<T, U>((props, ref) => {
     const [plugin, setPlugin] = React.useState(new Plugin(pluginOption));
     console.count(pluginOption.displayName);
     // React.useEffect(() => {
@@ -128,5 +127,5 @@ export function registerComponet<T, U extends pluginType<T>>(
     // }, [props.usePlugin]);
 
     return <HocBaseComponents BaseComponent={Component} props={props} plugin={plugin} ref={ref} />;
-  }));
+  });
 }

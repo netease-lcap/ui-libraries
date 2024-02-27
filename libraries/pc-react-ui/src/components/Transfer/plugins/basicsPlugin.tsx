@@ -1,16 +1,22 @@
-import { $deletePropsList } from '@/plugins/constants';
+import {
+  $deletePropsList, $dataSourceField, $labelKey, $valueKey,
+} from '@/plugins/constants';
 
 export function useHandleTransform(props) {
   const deletePropsList = props.get($deletePropsList, []).concat(['dataSourceField']);
-  const textField = props.get('textField', 'title');
-  const valueField = props.get('valueField', 'key');
+  // const textField = props.get(textField, 'title');
+  // const valueField = props.get('valueField', 'key');
   // const childrenField = props.get('childrenField', 'children');
   // const fieldNames = props.get('fieldNames');
   return {
     [$deletePropsList]: deletePropsList,
-    dataSourceField: 'dataSource',
-    textField,
-    valueField,
+    [$dataSourceField]: 'dataSource',
+    [$labelKey]: 'title',
+    [$valueKey]: 'key',
+    // render: (item) => item.title,
+
+    // textField,
+    // valueField,
     // fieldNames: {
     //   title: textField,
     //   key: valueField,

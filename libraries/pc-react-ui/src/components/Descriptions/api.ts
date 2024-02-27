@@ -116,11 +116,11 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
 
-    // @Slot({
-    //   title: '自定义标签内容',
-    //   description: '用于自定义 label 内容。',
-    // })
-    // slotLabel: () => Array<ViewComponent>;
+    @Slot({
+      title: '自定义标签内容',
+      description: '用于自定义 label 内容。',
+    })
+    slotLabel: () => Array<ViewComponent>;
   }
 
   // @Component({

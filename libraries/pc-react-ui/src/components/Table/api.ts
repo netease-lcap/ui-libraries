@@ -277,15 +277,15 @@ namespace nasl.ui {
     })
     title: nasl.core.String;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '显示表格头部',
-    //   docDescription: '是否显示表格头。默认开启',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    // })
-    // showHead: nasl.core.Boolean = true;
+    @Prop({
+      group: '主要属性',
+      title: '显示表格头部',
+      docDescription: '是否显示表格头。默认开启',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    showHeader: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
@@ -308,27 +308,27 @@ namespace nasl.ui {
     })
     stickyOffsetTop: nasl.core.Decimal = 0;
 
-    @Prop({
-      group: '主要属性',
-      title: '表头文本过长省略',
-      description: '文字过长是否省略显示。默认文字超出时会换行。',
-      docDescription: '开启后，该列表头文本过长会省略显示，否则换行显示，默认关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    thEllipsis: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '表头文本过长省略',
+    //   description: '文字过长是否省略显示。默认文字超出时会换行。',
+    //   docDescription: '开启后，该列表头文本过长会省略显示，否则换行显示，默认关闭',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // thEllipsis: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '内容区文本过长省略',
-      description: '文字过长是否省略显示。默认文字超出时会换行。',
-      docDescription: '开启后，该列文本过长会省略显示，否则换行显示，默认关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    ellipsis: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '内容区文本过长省略',
+    //   description: '文字过长是否省略显示。默认文字超出时会换行。',
+    //   docDescription: '开启后，该列文本过长会省略显示，否则换行显示，默认关闭',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // ellipsis: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '交互属性',
@@ -446,15 +446,15 @@ namespace nasl.ui {
     // })
     // configurable: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   group: '交互属性',
-    //   title: '虚拟滚动',
-    //   description: '虚拟滚动表示不展示所有的数据，只展示默认条数的数据，当滚动时再展示剩余的数据。当表格数据量大时，可设置为虚拟滚动，提高性能。默认关闭。',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    // })
-    // virtual: nasl.core.Boolean = false;
+    @Prop({
+      group: '交互属性',
+      title: '虚拟滚动',
+      description: '虚拟滚动表示不展示所有的数据，只展示默认条数的数据，当滚动时再展示剩余的数据。当表格数据量大时，可设置为虚拟滚动，提高性能。默认关闭。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    virtual: nasl.core.Boolean = false;
 
     // @Prop<UTableViewOptions<T, V, P, M>, 'itemHeight'>({
     //   group: '交互属性',
@@ -577,16 +577,16 @@ namespace nasl.ui {
     // })
     // disabled: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '样式属性',
-      title: '标题对齐方式',
-      docDescription: '表格上方的标题信息的对齐方式。默认"居中对齐"。',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '左对齐' }, { title: '居中对齐' }, { title: '右对齐' }],
-      },
-    })
-    titleAlignment: 'left' | 'center' | 'right' = 'center';
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '标题对齐方式',
+    //   docDescription: '表格上方的标题信息的对齐方式。默认"居中对齐"。',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '左对齐' }, { title: '居中对齐' }, { title: '右对齐' }],
+    //   },
+    // })
+    // titleAlignment: 'left' | 'center' | 'right' = 'center';
 
     // @Prop({
     //   group: '样式属性',
@@ -606,7 +606,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    private bordered: nasl.core.Boolean = false;
+    bordered: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '样式属性',
@@ -630,25 +630,25 @@ namespace nasl.ui {
     // })
     // striped: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '样式属性',
-      title: '默认列宽度',
-      description: '表格的默认列宽度，可设置为数字或百分比',
-      docDescription: '表格每列的默认宽度。',
-    })
-    defaultColumnWidth: nasl.core.String | nasl.core.Decimal;
-
-    // @Event({
-    //   title: '加载前',
-    //   description: '加载前触发',
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '默认列宽度',
+    //   description: '表格的默认列宽度，可设置为数字或百分比',
+    //   docDescription: '表格每列的默认宽度。',
     // })
-    // onBeforeLoad: (event: any) => any;
+    // defaultColumnWidth: nasl.core.String | nasl.core.Decimal;
+
+    @Event({
+      title: '加载前',
+      description: '加载前触发',
+    })
+    onBefore: (event: any) => any;
 
     @Event({
       title: '加载后',
       description: '加载后触发',
     })
-    onLoad: (event: any) => any;
+    onSuccess: (event: any) => any;
 
     // @Event({
     //   title: '切换分页前',
@@ -836,26 +836,18 @@ namespace nasl.ui {
     //   };
     // }) => any;
 
-    // @Slot({
-    //   title: '默认',
-    //   description: '在表格中插入`<u-table-view-column>`子组件',
-    //   emptyBackground: 'drag-entity-here',
-    //   snippets: [
-    //     {
-    //       title: '表格列',
-    //       code: '<u-table-view-column> <template #cell="current"></template> <template #title><u-text text="表格列"></u-text></template> <template #expander="current"><u-table-view-expander :item="current.item" @toggle="current.toggle"></u-table-view-expander></template> </u-table-view-column>',
-    //     },
-    //     {
-    //       title: '表格动态列',
-    //       code: '<u-table-view-column-dynamic><template #cell="current"></template><template #title="current"><u-text text="表格动态列"></u-text></template></u-table-view-column-dynamic>',
-    //     },
-    //     {
-    //       title: '表格列分组',
-    //       code: '<u-table-view-column-group> <template #title><u-text text="表格列分组"></u-text></template> <u-table-view-column> <template #cell="current"></template> <template #title><u-text text="表格列"></u-text></template> <template #expander="current"><u-table-view-expander :item="current.item" @toggle="current.toggle"></u-table-view-expander></template> </u-table-view-column> </u-table-view-column-group>',
-    //     },
-    //   ],
-    // })
-    // slotDefault: () => Array<UTableViewColumn<T, V, P, M> | UTableViewColumnDynamic<T, V, P, M, unknown> | UTableViewColumnGroup<T, V, P, M>>;
+    @Slot({
+      title: '默认',
+      description: '在表格中插入`<u-table-view-column>`子组件',
+      emptyBackground: 'drag-entity-here',
+      snippets: [
+        {
+          title: '表格列',
+          code: '<tableColumn><template #title><Text children="表格列"></Text></template> </TableColumn>',
+        },
+      ],
+    })
+    slotDefault: () => Array<TableColumn<T, V, P, M>>;
 
     // @Slot({
     //   title: '加载中内容',
@@ -917,7 +909,7 @@ namespace nasl.ui {
       description: 'data 项中的字段',
       docDescription: '数据项中对应的字段名，如createdTime',
     })
-    field: (item: T) => any;
+    dataIndex: (item: T) => any;
 
     @Prop({
       group: '数据属性',
@@ -1098,28 +1090,28 @@ namespace nasl.ui {
     })
     slotRender: (current: Current<T>) => Array<ViewComponent>;
 
-    @Slot({
-      title: '编辑单元格',
-      description: '对单元格的编辑数据展示进行自定义',
-    })
-    slotEditcell: (current: Current<T>) => Array<ViewComponent>;
+    // @Slot({
+    //   title: '编辑单元格',
+    //   description: '对单元格的编辑数据展示进行自定义',
+    // })
+    // slotEditcell: (current: Current<T>) => Array<ViewComponent>;
 
-    @Slot({
-      title: '标题',
-      description: '对标题进行自定义',
-    })
-    slotTitle: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: '标题',
+    //   description: '对标题进行自定义',
+    // })
+    // slotTitle: (current: Current<T>) => Array<ViewComponent>;
 
-    @Slot({
-      title: '展开列内容',
-      description: '展开列的内容',
-    })
-    slotExpandContent: (current: Current<T>) => Array<ViewComponent>;
+    // @Slot({
+    //   title: '展开列内容',
+    //   description: '展开列的内容',
+    // })
+    // slotExpandContent: (current: Current<T>) => Array<ViewComponent>;
 
-    @Slot({
-      title: '展开列图标',
-      description: '展开列图标',
-    })
-    slotExpander: (current: Current<T>) => Array<ViewComponent>;
+    // @Slot({
+    //   title: '展开列图标',
+    //   description: '展开列图标',
+    // })
+    // slotExpander: (current: Current<T>) => Array<ViewComponent>;
   }
 }

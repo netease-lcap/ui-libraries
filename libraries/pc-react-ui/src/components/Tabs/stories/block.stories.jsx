@@ -1,8 +1,8 @@
 import React from 'react';
-// import { Tabs, TabPane } from '../index';
-import { Tabs } from 'antd';
+import { Tabs, TabPane, Text } from '@/index';
+// import { Tabs } from 'antd';
 
-const { TabPane } = Tabs;
+// const { TabPane } = Tabs;
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -25,9 +25,9 @@ export const 基本用法 = {
   render: () => {
     return (
       <Tabs>
-        <TabPane key="1" tab="选项卡1" />
-        <TabPane key="2" tab="选项卡2" />
-        <TabPane key="3" tab="选项卡3" />
+        <TabPane key="1" tab={<Text children="选项卡1" />} />
+        <TabPane key="2" tab={<Text children="选项卡2" />} />
+        <TabPane key="3" tab={<Text children="选项卡3" />} />
       </Tabs>
     );
   },
@@ -36,9 +36,9 @@ export const 卡片效果 = {
   render: () => {
     return (
       <Tabs type="card">
-        <TabPane key="1" tab="选项卡1" />
-        <TabPane key="2" tab="选项卡2" />
-        <TabPane key="3" tab="选项卡3" />
+        <TabPane key="1" tab={<Text children="选项卡1" />} />
+        <TabPane key="2" tab={<Text children="选项卡2" />} />
+        <TabPane key="3" tab={<Text children="选项卡3" />} />
       </Tabs>
     );
   },
@@ -47,9 +47,9 @@ export const 动态卡片 = {
   render: () => {
     return (
       <Tabs type="editable-card">
-        <TabPane key="1" tab="选项卡1" />
-        <TabPane key="2" tab="选项卡2" />
-        <TabPane key="3" tab="选项卡3" />
+        <TabPane key="1" tab={<Text children="选项卡1" />} />
+        <TabPane key="2" tab={<Text children="选项卡2" />} />
+        <TabPane key="3" tab={<Text children="选项卡3" />} />
       </Tabs>
     );
   },

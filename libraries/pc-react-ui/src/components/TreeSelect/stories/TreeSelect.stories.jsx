@@ -53,6 +53,8 @@ export const 同步函数 = {
       { label: 'Option 3', key: '3' },
     ],
     valueField: 'key',
+
+    style: { width: 300 },
     textField: 'label',
   },
 };
@@ -66,6 +68,8 @@ export const 数组 = {
       { label: 'Option 3', key: '3' },
     ],
     valueField: 'key',
+
+    style: { width: 300 },
     textField: 'label',
   },
 };

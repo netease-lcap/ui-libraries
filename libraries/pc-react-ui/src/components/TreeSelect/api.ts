@@ -8,15 +8,15 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class TreeSelect<T, V, M extends nasl.core.Boolean> extends ViewComponent {
-    @Prop({
-      title: '数据',
-    })
-    data: TreeSelectOptions<T, V, M>['dataSource'];
+    // @Prop({
+    //   title: '数据',
+    // })
+    // data: TreeSelectOptions<T, V, M>['dataSource'];
 
-    @Prop({
-      title: '选中值',
-    })
-    value: TreeSelectOptions<T, V, M>['value'];
+    // @Prop({
+    //   title: '选中值',
+    // })
+    // value: TreeSelectOptions<T, V, M>['value'];
 
     @Method({
       title: 'undefined',

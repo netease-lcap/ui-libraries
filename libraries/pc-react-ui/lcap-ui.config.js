@@ -5,26 +5,29 @@ module.exports = {
   components: [
     { group: 'Form', name: 'Select', alias: '选择器' },
     { group: 'Form', name: 'InputNumber', alias: '数字输入' },
-    { group: 'Form', name: 'Transfer', alias: '穿梭框' },
+    // { group: 'Form', name: 'Transfer', alias: '穿梭框' },
     { group: 'Form', name: 'Switch', alias: '开关' },
     { group: 'Form', name: 'Input', alias: '单行输入' },
     { group: 'Form', name: 'Textarea', alias: '多行输入' },
     { group: 'Form', name: 'Checkbox', alias: '多选框' },
     { group: 'Form', name: 'Radio', alias: '单选框' },
     { group: 'Form', name: 'Form', alias: '表单' },
-    { group: 'Form', name: 'Upload', alias: '文件上传' },
+    // { group: 'Form', name: 'Upload', alias: '文件上传' },
 
     { group: 'Table', name: 'Table', alias: '数据表格' },
 
     { group: 'Display', name: 'Text', alias: '文本' },
+    { group: 'Display', name: 'Link', alias: '链接' },
     { group: 'Display', name: 'Button', alias: '按钮' },
     { group: 'Display', name: 'Descriptions', alias: '详情列表' },
     { group: 'Display', name: 'Image', alias: '图片展示' },
+    { group: 'Display', name: 'Tag', alias: '标签' },
     { group: 'Table', name: 'List', alias: '数据列表' },
 
     { group: 'Layout', name: 'Flex', alias: '线性布局' },
 
     { group: 'Layout', name: 'Row', alias: '栅格布局' },
+    { group: 'Layout', name: 'Layout', alias: '布局' },
 
     { group: 'Selector', name: 'Tabs', alias: '选项卡' },
     { group: 'Selector', name: 'Tree', alias: '树形视图' },

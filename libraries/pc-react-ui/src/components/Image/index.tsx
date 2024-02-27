@@ -14,10 +14,14 @@ const mapProps = {
 
 export const Image = registerComponet<
   ImageProps,
-  pluginType<ImageProps>
+  ImageProps
+// pluginType<ImageProps>
 >(
   AntdImage,
   { plugin, displayName: AntdImage.displayName, mapProps },
 );
+Image.defaultProps = {
+  preview: false,
+};
 
 // export default Image;

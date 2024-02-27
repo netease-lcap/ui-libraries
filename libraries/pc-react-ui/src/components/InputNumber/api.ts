@@ -34,7 +34,7 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
       },
     })
-    value: nasl.core.Decimal = 0;
+    value: nasl.core.Decimal;
 
     @Prop({
       group: '数据属性',
@@ -69,16 +69,16 @@ namespace nasl.ui {
     })
     private precision: nasl.core.Decimal = 1;
 
-    @Prop({
-      group: '数据属性',
-      title: '精度',
-      description: '控制数据存储时小数点后保留几位。例如：精度为2，则数据存储时小数点后保留2位。',
-      docDescription: '限制值要保留的小数位数。默认0，不保留小数位',
-      setter: {
-        concept: 'NumberInputSetter',
-      },
-    })
-    decimalLength: nasl.core.Decimal;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '精度',
+    //   description: '控制数据存储时小数点后保留几位。例如：精度为2，则数据存储时小数点后保留2位。',
+    //   docDescription: '限制值要保留的小数位数。默认0，不保留小数位',
+    //   setter: {
+    //     concept: 'NumberInputSetter',
+    //   },
+    // })
+    // decimalSeparator: nasl.core.Decimal;
 
     // @Prop<InputNumberOptions, 'decimalPlaces'>({
     // 		group: '主要属性',
@@ -233,26 +233,26 @@ namespace nasl.ui {
     // })
     // height: 'full' | 'huge' | 'large' | 'medium' | 'normal' | 'small' | 'mini' = 'normal';
 
-    @Event({
-      title: '输入时',
-      description: '输入时触发',
-    })
-    onInput: (event: nasl.core.String) => any;
+    // @Event({
+    //   title: '输入时',
+    //   description: '输入时触发',
+    // })
+    // onInput: (event: nasl.core.String) => any;
 
-    @Event({
-      title: '验证时',
-      description: '输入验证时触发',
-    })
-    onValidate: (event: {
-      trigger: nasl.core.String;
-      valid: nasl.core.Boolean;
-      triggerValid: nasl.core.Boolean;
-      touched: nasl.core.Boolean;
-      dirty: nasl.core.Boolean;
-      firstError: nasl.core.String;
-      value: nasl.core.String;
-      oldValue: nasl.core.String;
-    }) => any;
+    // @Event({
+    //   title: '验证时',
+    //   description: '输入验证时触发',
+    // })
+    // onValidate: (event: {
+    //   trigger: nasl.core.String;
+    //   valid: nasl.core.Boolean;
+    //   triggerValid: nasl.core.Boolean;
+    //   touched: nasl.core.Boolean;
+    //   dirty: nasl.core.Boolean;
+    //   firstError: nasl.core.String;
+    //   value: nasl.core.String;
+    //   oldValue: nasl.core.String;
+    // }) => any;
 
     @Event({
       title: '改变后',

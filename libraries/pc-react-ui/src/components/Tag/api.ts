@@ -19,7 +19,7 @@ namespace nasl.ui {
       title: '文本',
       docDescription: '标签显示的文本内容',
     })
-   children: nasl.core.String;
+    children: nasl.core.String;
 
     // @Prop({
     //   group: '主要属性',
@@ -40,10 +40,10 @@ namespace nasl.ui {
       docDescription: '支持定义标签颜色，包括默认、主题色、成功色、警告色和错误色',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '默认' }, { title: '主题色' }, { title: '成功色' }, { title: '警告色' }, { title: '错误色' }],
+        options: [{ title: '主题色' }, { title: '成功色' }, { title: '警告色' }, { title: '错误色' }],
       },
     })
-    color: 'default' | 'primary' | 'success' | 'warning' | 'error' = 'default';
+    color: 'primary' | 'success' | 'warning' | 'error' = 'primary';
 
     // @Prop({
     //   group: '主要属性',
@@ -238,7 +238,7 @@ namespace nasl.ui {
       title: '删除时触发',
       description: '删除时触发',
     })
-    onClose	: (event: any) => any;
+    onClose: (event: any) => any;
 
     @Slot({
       title: '默认',

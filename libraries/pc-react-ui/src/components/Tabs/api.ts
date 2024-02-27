@@ -8,11 +8,11 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class Tabs<T, V> extends ViewComponent {
-    // @Method({
-    //   title: 'undefined',
-    //   description: '重新加载数据',
-    // })
-    // reload(): void {}
+    @Method({
+      title: 'undefined',
+      description: '重新加载数据',
+    })
+    reload(): void {}
     constructor(options?: Partial<TabsOptions<T, V>>) {
       super();
     }
@@ -212,12 +212,12 @@ namespace nasl.ui {
 
     @Slot({
       title: '默认',
-      description: '插入`<tab>`子组件。',
+      description: '插入`<TabPane>`子组件。',
       emptyBackground: 'add-sub',
       snippets: [
         {
           title: '子选项',
-          code: '<TabPane>内容</TabPane>',
+          code: '<TabPane><template #tab><Text children="选项卡"></Text></TabPane>',
         },
       ],
     })
@@ -384,6 +384,6 @@ namespace nasl.ui {
       title: '标题',
       description: '自定义标题',
     })
-    slotLabel: () => Array<ViewComponent>;
+    slotTab: () => Array<ViewComponent>;
   }
 }

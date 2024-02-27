@@ -1,5 +1,7 @@
 import React from 'react';
+// import { Input } from 'antd';
 import { TextArea } from '../index';
+// const {TextArea}=Input
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -23,7 +25,15 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <TextArea {...args} />,
+  render: (args) => {
+    const ref = React.useRef();
+    React.useEffect(() => {
+      setTimeout(() => {
+        console.log(ref, 'ref');
+      }, 1000);
+    }, []);
+    return <TextArea {...args} ref={ref} />;
+  },
   args: {
     color: 'magenta',
   },

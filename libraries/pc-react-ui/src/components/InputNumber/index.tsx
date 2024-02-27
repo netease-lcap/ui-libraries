@@ -9,7 +9,7 @@ import './index.module.less';
 type InputNumberProps = AntdInputNumberProps
 
 const mapProps = {
-  mySize: 'size',
+  // mySize: 'size',
 };
 
 export const InputNumber = registerComponet<InputNumberProps, pluginType<InputNumberProps>>(

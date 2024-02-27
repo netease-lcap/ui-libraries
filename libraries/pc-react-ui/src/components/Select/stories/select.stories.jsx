@@ -5,7 +5,7 @@ import { Text } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
-  title: 'Example/Select/block',
+  title: 'Example/Select',
   component: Select,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -28,13 +28,22 @@ export const 异步函数 = {
   render: (args) => {
     return (
       <Select {...args}>
-        <SelectOption key="1" label="1" value="1" />
-        <SelectOption key="2" label="2" value="2" disabled />
+        {/* <SelectOption key="1" label="1" value="1" />
+        <SelectOption key="2" label="2" value="2" disabled /> */}
       </Select>
     );
   },
   args: {
     style: { width: '256px' },
+    dataSource: () => new Promise((res) => {
+      setTimeout(() => {
+        res([
+          { label: 'Option 1', value: '1' },
+          { label: 'Option 2', value: '2' },
+          { label: 'Option 3', value: '3' },
+        ]);
+      }, 3000);
+    }),
   },
 };
 export const 异步函数1 = {

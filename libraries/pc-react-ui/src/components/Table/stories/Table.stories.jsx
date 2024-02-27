@@ -82,6 +82,7 @@ export const 默认 = {
             <TableColumn
               key="26"
               ref={ref3}
+              data-nodepath="12"
               render={() => <span>1234</span>}
               ide-iscontainer="true"
               title={() => (
@@ -93,6 +94,7 @@ export const 默认 = {
             <TableColumn
               key="32"
               ref={ref5}
+              data-nodepath="13"
               ide-iscontainer="true"
               title={() => (
                 <div ide-draggable="false">
@@ -103,6 +105,7 @@ export const 默认 = {
             <TableColumn
               key="38"
               ref={ref7}
+              data-nodepath="15"
               ide-iscontainer="true"
               title={() => (
                 <div ide-draggable="false">
@@ -113,6 +116,7 @@ export const 默认 = {
             <TableColumn
               key="44"
               ref={ref9}
+              data-nodepath="14"
               ide-iscontainer="true"
               title={() => (
                 <div ide-draggable="false">
@@ -123,6 +127,7 @@ export const 默认 = {
             <TableColumn
               key="50"
               ref={ref11}
+              data-nodepath="16"
               ide-iscontainer="true"
               title={() => (
                 <div ide-draggable="false">
@@ -133,6 +138,7 @@ export const 默认 = {
             <TableColumn
               key="56"
               ref={ref13}
+              data-nodepath="17"
               ide-iscontainer="true"
               title={() => (
                 <div ide-draggable="false">
@@ -143,6 +149,7 @@ export const 默认 = {
             <TableColumn
               key="62"
               ref={ref15}
+              data-nodepath="18"
               ide-iscontainer="true"
               title={() => (
                 <div ide-draggable="false">
@@ -153,6 +160,7 @@ export const 默认 = {
             <TableColumn
               key="68"
               ref={ref17}
+              data-nodepath="19"
               ide-iscontainer="true"
               title={() => (
                 <div ide-draggable="false">
@@ -167,4 +175,83 @@ export const 默认 = {
     return <View />;
   },
   args: {},
+};
+
+export const 异步 = {
+  render: (args) => <Table {...args} />,
+  args: {
+    async dataSource(params) {
+      return {
+        list: [
+          {
+            key: '1',
+            name: '胡彦斌',
+            age: 32,
+            address: '西湖区湖底公园1号',
+          },
+          {
+            key: '2',
+            name: '胡彦祖',
+            age: 42,
+            address: '西湖区湖底公园1号',
+          },
+        ],
+      };
+    },
+    columns: [
+      {
+        title: '姓名',
+        dataIndex: 'name',
+        key: 'name',
+      },
+      {
+        title: '年龄',
+        dataIndex: 'age',
+        key: 'age',
+      },
+      {
+        title: '住址',
+        dataIndex: 'address',
+        key: 'address',
+      },
+    ],
+  },
+};
+export const 同步 = {
+  render: (args) => <Table {...args} />,
+  args: {
+    dataSource() {
+      return [
+        {
+          key: '1',
+          name: '胡彦斌',
+          age: 32,
+          address: '西湖区湖底公园1号',
+        },
+        {
+          key: '2',
+          name: '胡彦祖',
+          age: 42,
+          address: '西湖区湖底公园1号',
+        },
+      ];
+    },
+    columns: [
+      {
+        title: '姓名',
+        dataIndex: 'name',
+        key: 'name',
+      },
+      {
+        title: '年龄',
+        dataIndex: 'age',
+        key: 'age',
+      },
+      {
+        title: '住址',
+        dataIndex: 'address',
+        key: 'address',
+      },
+    ],
+  },
 };

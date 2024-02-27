@@ -1,5 +1,6 @@
 import React from 'react';
 import { DatePicker } from '../index';
+// import { DatePicker } from 'antd';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -23,7 +24,13 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <DatePicker {...args} />,
+  render: (args) => {
+    const ref = React.useRef({});
+    React.useEffect(() => {
+      console.log(ref, 'ref');
+    }, []);
+    return <DatePicker {...args} ref={ref} data-nodepath="12213" />;
+  },
   args: {
     color: 'magenta',
     children: 'Tag',

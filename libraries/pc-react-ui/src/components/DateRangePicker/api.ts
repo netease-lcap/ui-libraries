@@ -159,6 +159,17 @@ namespace nasl.ui {
     //   | 'YYYY年'
     //   | 'YYYY';
 
+    @Prop<DateRangePickerOptions, 'showTime'>({
+      group: '主要属性',
+      title: '时间是选择',
+      // bindHide: true,
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      if: (_) => _.picker === 'date',
+    })
+    showTime: nasl.core.Boolean = false;
+
     @Prop({
       group: '主要属性',
       title: '自动获取焦点',
@@ -223,16 +234,16 @@ namespace nasl.ui {
     // })
     // preIcon: 'calendar' = 'calendar';
 
-    @Prop({
-      group: '主要属性',
-      title: '后缀图标',
-      docDescription: '支持添加后缀图标，如搜索图标',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '日历' }],
-      },
-    })
-    suffixIcon: 'calendar';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '后缀图标',
+    //   docDescription: '支持添加后缀图标，如搜索图标',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '日历' }],
+    //   },
+    // })
+    // suffixIcon: 'calendar';
 
     // @Prop({
     //   group: '主要属性',

@@ -23,12 +23,23 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 异步函数 = {
-  render: (args) => <Tree {...args} />,
+  render: (args) => {
+    const ref = React.useRef();
+    React.useEffect(() => {
+      console.log(ref, 'ref');
+    }, []);
+    return (
+      <div>
+        <button onClick={() => ref.current.reload()}>1234</button>
+        <Tree {...args} ref={ref} />
+      </div>
+    );
+  },
   args: {
     dataSource: () => new Promise((res) => {
       setTimeout(() => {
         res([
-          { label: 'Option 1', key: '1' },
+          { label: `Option 1${Math.random()}`, key: '1' },
           {
             label: 'Option 2',
             key: '2',

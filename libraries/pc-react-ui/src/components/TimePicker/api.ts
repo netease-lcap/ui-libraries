@@ -45,6 +45,37 @@ namespace nasl.ui {
     })
     placeholder: nasl.core.String = '请选择时间';
 
+    @Prop({
+      group: '数据属性',
+      title: '小时选项间隔',
+      description: '小时选项间隔',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    minuteStep: nasl.core.Integer;
+    
+    @Prop({
+      group: '状态属性',
+      title: '弹出状态',
+      description: '弹出状态分为“True(弹出)/False(关闭)”，默认为“关闭”',
+      docDescription: '开启时加载时间组件时，下拉框自动弹出，默认关闭',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    open: nasl.core.Boolean;
+
+    @Prop({
+      group: '数据属性',
+      title: '秒选项间隔',
+      description: '秒选项间隔',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    secondStep: nasl.core.Integer;
+
     // @Prop<TimePickerOptions, 'placeholderRight'>({
     //   group: '主要属性',
     //   title: '右侧占位符',
@@ -138,6 +169,16 @@ namespace nasl.ui {
       },
     })
     showNow: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '状态属性',
+      title: '使用 12 小时制',
+      description: '使用 12 小时制',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    preview: nasl.core.Boolean = false;
 
     // @Prop<TimePickerOptions, 'rightNowTitle'>({
     //   group: '主要属性',
@@ -240,26 +281,26 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean = false;
 
-  //  @Prop({
-  //     group: '状态属性',
-  //     title: '预览',
-  //     description: '显示预览态',
-  //     docDescription: '',
-  //     setter: {
-  //       concept: 'SwitchSetter',
-  //     },
-  //   })
-  //   preview: nasl.core.Boolean = false;
+    //  @Prop({
+    //     group: '状态属性',
+    //     title: '预览',
+    //     description: '显示预览态',
+    //     docDescription: '',
+    //     setter: {
+    //       concept: 'SwitchSetter',
+    //     },
+    //   })
+    //   preview: nasl.core.Boolean = false;
 
-  //   @Prop({
-  //     group: '状态属性',
-  //     title: '显示状态',
-  //     description: '显示状态分为“True(打开)/False(关闭)”，默认为“打开”',
-  //     setter: {
-  //       concept: 'SwitchSetter',
-  //     },
-  //   })
-  //   private visible: nasl.core.Boolean = true;
+    //   @Prop({
+    //     group: '状态属性',
+    //     title: '显示状态',
+    //     description: '显示状态分为“True(打开)/False(关闭)”，默认为“打开”',
+    //     setter: {
+    //       concept: 'SwitchSetter',
+    //     },
+    //   })
+    //   private visible: nasl.core.Boolean = true;
 
     // @Prop({
     //   group: '样式属性',
@@ -290,6 +331,8 @@ namespace nasl.ui {
       description: '时间改变时触发',
     })
     onChange: (event: { date: nasl.core.String; time: nasl.core.String }) => any;
+    
+    
 
     @Event({
       title: '失去焦点',

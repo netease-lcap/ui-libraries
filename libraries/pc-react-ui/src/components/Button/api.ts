@@ -38,13 +38,13 @@ namespace nasl.ui {
     // })
     // private append: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '文本',
-      description: '显示文本内容',
-      docDescription: '显示的文本内容',
-    })
-    children: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '文本',
+    //   description: '显示文本内容',
+    //   docDescription: '显示的文本内容',
+    // })
+    // children: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -177,7 +177,11 @@ namespace nasl.ui {
     })
     shape: 'default' | 'round' | 'circle' = 'default';
 
-  
+    @Slot({
+      title: 'undefined',
+      description: '插入文本或 HTML。',
+    })
+    slotDefault: () => Array<ViewComponent>;
 
     @Event({
       title: '点击',

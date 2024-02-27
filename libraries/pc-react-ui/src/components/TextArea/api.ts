@@ -10,17 +10,17 @@ namespace nasl.ui {
 	export class TextArea extends ViewComponent {
 
 
-			// @Method({
-			// 		title: 'undefined',
-			// 		description: '让输入框获取焦点。',
-			// })
-			// focus(): void {}
+			@Method({
+					title: 'undefined',
+					description: '让输入框获取焦点。',
+			})
+			focus(): void {}
 
-			// @Method({
-			// 		title: 'undefined',
-			// 		description: '让输入框失去焦点。',
-			// })
-			// blur(): void {}
+			@Method({
+					title: 'undefined',
+					description: '让输入框失去焦点。',
+			})
+			blur(): void {}
 
 			// @Method({
 			// 		title: 'undefined',
@@ -95,17 +95,17 @@ namespace nasl.ui {
 			})
 			maxlength: nasl.core.Integer;
 
-			@Prop({
-					group: '主要属性',
-					title: '自动获取焦点',
-					description: '设置是否自动获取焦点',
-					docDescription: '是否自动获取输入框焦点。',
-					designerValue: false,
-					setter: {
-							concept: 'SwitchSetter',
-					},
-			})
-			autofocus: nasl.core.Boolean = false;
+			// @Prop({
+			// 		group: '主要属性',
+			// 		title: '自动获取焦点',
+			// 		description: '设置是否自动获取焦点',
+			// 		docDescription: '是否自动获取输入框焦点。',
+			// 		designerValue: false,
+			// 		setter: {
+			// 				concept: 'SwitchSetter',
+			// 		},
+			// })
+			// autofocus: nasl.core.Boolean = false;
 
 			@Prop({
 					group: '主要属性',
@@ -138,16 +138,16 @@ namespace nasl.ui {
 			})
 			clearable: nasl.core.Boolean;
 
-			@Prop({
-					group: '状态属性',
-					title: '显示状态',
-					description: '显示状态分为“True(显示)/False(隐藏)”，默认为“隐藏”',
-					docDescription: '切换密码的显示/隐藏。',
-					setter: {
-							concept: 'SwitchSetter',
-					},
-			})
-			password: nasl.core.Boolean = false;
+			// @Prop({
+			// 		group: '状态属性',
+			// 		title: '显示状态',
+			// 		description: '显示状态分为“True(显示)/False(隐藏)”，默认为“隐藏”',
+			// 		docDescription: '切换密码的显示/隐藏。',
+			// 		setter: {
+			// 				concept: 'SwitchSetter',
+			// 		},
+			// })
+			// password: nasl.core.Boolean = false;
 
 			// @Prop({
 			// 		group: '状态属性',

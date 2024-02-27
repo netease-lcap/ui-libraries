@@ -47,13 +47,13 @@ namespace nasl.ui {
       title: '确定按钮',
       description: '确定按钮文本，如果为空则不显示',
     })
-    private okButton: nasl.core.String = '确定';
+    okText: nasl.core.String = '确定';
 
     @Prop({
       title: '取消按钮',
       description: '取消按钮文本，如果为空则不显示',
     })
-    private cancelButton: nasl.core.String = '取消';
+    cancelText: nasl.core.String = '取消';
 
     @Prop({
       title: '嵌入页面显示',
@@ -65,33 +65,51 @@ namespace nasl.ui {
     private static: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: '显示头部栏',
+      title: '是否显示右上角的关闭按钮',
+      description: '是否显示右上角的关闭按钮',
       setter: {
         concept: 'SwitchSetter',
       },
     })
-    showHead: nasl.core.Boolean = true;
+    closable: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: '显示底部栏',
+      title: '是否支持键盘 esc 关闭',
+      description: '是否支持键盘 esc 关闭',
       setter: {
         concept: 'SwitchSetter',
       },
     })
-    showFoot: nasl.core.Boolean = true;
+    keyboard: nasl.core.Boolean = true;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '显示头部栏',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // showHead: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
-      title: '提示图标',
-      docDescription: '可设置成功、警告、错误，弹窗中会自动添加图标',
+      title: '是否展示遮罩',
       setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '暂无' }, { title: '成功' }, { title: '警告' }, { title: '错误' }],
+        concept: 'SwitchSetter',
       },
     })
-    icon: '' | 'success' | 'warning' | 'error' = '';
+    mask: nasl.core.Boolean = true;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '提示图标',
+    //   docDescription: '可设置成功、警告、错误，弹窗中会自动添加图标',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '暂无' }, { title: '成功' }, { title: '警告' }, { title: '错误' }],
+    //   },
+    // })
+    // icon: '' | 'success' | 'warning' | 'error' = '';
 
     @Prop({
       group: '交互属性',
@@ -167,7 +185,7 @@ namespace nasl.ui {
       title: 'undefined',
       description: '弹窗尾部自定义',
     })
-    slotFooter: () => Array<ViewComponent>;
+    slotFooter: (event: any) => Array<ViewComponent>;
 
     // @Slot({
     //   title: 'undefined',

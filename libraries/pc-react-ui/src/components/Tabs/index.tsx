@@ -19,8 +19,15 @@ export const Tabs = registerComponet<
   AntdTabs,
   { plugin, displayName: AntdTabs.displayName, mapProps },
 );
-
-// console.log(AntdTabs.TabPane);
+// export const TabPane = registerComponet<
+//   TabsProps,
+//   pluginType<TabsProps>
+// >(
+//   AntdTabs.Tab,
+//   { plugin, displayName: AntdTabs.displayName, mapProps },
+// );
+// // console.log(AntdTabs.TabPane);
+// export const Tabs = AntdTabs;
 // export default Tabs;
 
 export const { TabPane } = AntdTabs;

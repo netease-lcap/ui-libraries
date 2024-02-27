@@ -95,7 +95,7 @@ namespace nasl.ui {
       title: '链接地址',
       docDescription: '链接的详细地址',
     })
-    hrefAndTo: nasl.core.String;
+    href: nasl.core.String;
 
     @Prop({
       group: '交互属性',

@@ -106,7 +106,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '导航项',
-          code: '<MenuItem>导航项</MenuItem>',
+          code: '<MenuItem style="line-height:60px"><Text children="导航项目" style="color:inherit" /></MenuItem>',
         },
         {
           title: '分隔线',
@@ -147,8 +147,8 @@ namespace nasl.ui {
     label: nasl.core.String;
 
     @Prop({
-      title: '值',
-      description: '此项的值',
+      title: '链接地址',
+      description: '链接地址',
     })
     key: nasl.core.Any;
 
@@ -366,8 +366,8 @@ namespace nasl.ui {
     title: nasl.core.String;
 
     @Prop({
-      title: '值',
-      description: '此项的值',
+      title: '链接地址',
+      description: '链接地址',
     })
     key: nasl.core.Any;
 

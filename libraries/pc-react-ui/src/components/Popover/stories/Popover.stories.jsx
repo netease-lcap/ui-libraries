@@ -24,13 +24,23 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => (
-    <Popover trigger="click" content={<div>1234</div>} onOpenChange={console.log} data-nodepath="12234" title="Title">
-      <Button data-nodepath="1234" type="button">
-        Hover me
-      </Button>
-    </Popover>
-  ),
+  render: (args) => {
+    const ref = React.useRef();
+    React.useEffect(() => {
+      console.log(ref, 'ref');
+    }, []);
+    return (
+      <div>
+        {' '}
+        <button onClick={() => ref.current.open()}>1234</button>
+        <Popover ref={ref} trigger="click" content={<div>1234</div>} data-nodepath="12234" title="Title">
+          <Button data-nodepath="1234" type="button">
+            Hover me
+          </Button>
+        </Popover>
+      </div>
+    );
+  },
   args: {
     color: 'magenta',
     children: 'Tag',

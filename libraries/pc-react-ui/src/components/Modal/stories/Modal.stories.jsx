@@ -26,7 +26,7 @@ export default {
 export const 默认 = {
   render: (args) => {
     const modalRef = React.useRef(false);
-    // const [ open,setOpen ]=React.useState(false)
+    const [open, setOpen] = React.useState(false);
     const showModal = () => {
       modalRef.current.open();
     };

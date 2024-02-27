@@ -91,18 +91,16 @@ namespace nasl.ui {
     })
     layout: 'inline' | 'horizontal' | 'vertical' = 'inline';
 
-    // @Prop<FormOptions, 'repeat'>({
-    //   group: '主要属性',
-    //   title: '列数',
-    //   description: '整个表单的划分列数',
-    //   docDescription: '整个表单的划分列数，此项需要设置表单布局为“栅格展示”。',
-    //   setter: {
-    //     concept: 'NumberInputSetter',
-    //     min: 1,
-    //   },
-    //   if: (_) => _.layout === 'inline-flex' || _.repeat !== 1,
-    // })
-    // repeat: nasl.core.Decimal = 1;
+    @Prop<FormOptions, 'gutter'>({
+      group: '主要属性',
+      title: '栅格间隔',
+      description: '栅格间隔',
+      // docDescription: '整个表单的划分列数，此项需要设置表单布局为“栅格展示”。',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    gutter: nasl.core.Decimal = 0;
 
     // @Prop({
     //   group: '主要属性',
@@ -330,16 +328,16 @@ namespace nasl.ui {
     })
     private validatingProcess: Function;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '占据数',
-    //   description: '列跨越的格数',
-    //   docDescription: '列跨越的格数。',
-    //   setter: {
-    //     concept: 'NumberInputSetter',
-    //   },
-    // })
-    // span: nasl.core.Decimal = 1;
+    @Prop({
+      group: '主要属性',
+      title: '占据数',
+      description: '列跨越的格数',
+      docDescription: '列跨越的格数。',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    span: nasl.core.Decimal = 24;
 
     // @Prop({
     //   group: '主要属性',

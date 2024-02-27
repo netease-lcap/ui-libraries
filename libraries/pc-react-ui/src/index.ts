@@ -1,4 +1,9 @@
 // export { default as Button } from './components/Button/index';
+
+import { Layout } from 'antd';
+
+export { Layout } from 'antd';
+export const { Header } = Layout;
 export * from './components/Button/index';
 // export { default as Select } from './components/Select/index';
 export * from './components/Select/index';
@@ -42,6 +47,8 @@ export * from './components/Menu/index';
 export * from './components/Form/index';
 export * from './components/Upload/index';
 export * from './components/Icon/index';
+export * from './components/Tag/index';
+export * from './components/Link/index';
 
 // export * from './components/Typography/index';
 // export * from 'antd';

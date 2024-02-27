@@ -9,15 +9,15 @@ import './index.module.less';
 // type TransferProps = AntdTransferProps
 
 const mapProps = {
-  mySize: 'size',
+  // mySize: 'size',
 };
 
-export const Transfer = registerComponet<
-  TransferProps<TransferItem>,
-  pluginType<TransferProps<TransferItem>>
->(
-  AntdTransfer,
-  { plugin, displayName: AntdTransfer.displayName, mapProps },
-);
+// export const Transfer = registerComponet<
+//   TransferProps<TransferItem>,
+//   pluginType<TransferProps<TransferItem>>
+// >(
+//   AntdTransfer,
+//   { plugin, displayName: AntdTransfer.displayName, mapProps },
+// );
 
-// export default Transfer;
+export const Transfer = AntdTransfer;

@@ -50,30 +50,40 @@ namespace nasl.ui {
     })
     align: 'top' | 'middle' | 'bottom' | 'stretch' | 'stretch' = 'stretch';
 
-    @Prop<RowOptions, 'gutter'>({
-      group: '主要属性',
-      title: '栅格数',
-      description: '默认24，可设置栅格行大小',
-      docDescription: '支持设置栅格行大小，默认为24。',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 1,
-        max: 24,
-      },
-    })
-    gutter: nasl.core.Decimal = 12;
+    // @Prop<RowOptions, 'gutter'>({
+    //   group: '主要属性',
+    //   title: '栅格数',
+    //   description: '默认24，可设置栅格行大小',
+    //   docDescription: '支持设置栅格行大小，默认为24。',
+    //   setter: {
+    //     concept: 'NumberInputSetter',
+    //     min: 1,
+    //     max: 24,
+    //   },
+    // })
+    // gutter: nasl.core.Decimal = 12;
 
     @Prop({
       group: '样式属性',
-      title: '列间隔',
+      title: '栅格水平间隔',
       description: '栅格列之间的间隔',
       docDescription: '栅格列之间的间隔，支持无（0）、迷你（4）、小（8）、正常（16）、巨大（32）共6种间隔模式。',
       setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '无（0）' }, { title: '迷你（4）' }, { title: '小（8）' }, { title: '正常（16）' }, { title: '大（24）' }, { title: '巨大（32）' }],
+        concept: 'NumberInputSetter',
       },
     })
-    gap: 'none' | 'mini' | 'small' | 'normal' | 'large' | 'huge' = 'normal';
+    gutterJustify: nasl.core.Decimal = 0;
+
+    @Prop({
+      group: '样式属性',
+      title: '栅格垂直间隔',
+      description: '栅格列之间的间隔',
+      docDescription: '栅格列之间的间隔，支持无（0）、迷你（4）、小（8）、正常（16）、巨大（32）共6种间隔模式。',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    gutterAlign: nasl.core.Decimal = 0;
 
     @Prop<RowOptions, 'wrap'>({
       group: '主要属性',
@@ -92,7 +102,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '插入一列',
-          code: '<col :span="1"></col>',
+          code: '<Col :span="4"></Col>',
         },
       ],
     })
@@ -357,11 +367,11 @@ namespace nasl.ui {
     // })
     // gap: 'shrink' | 'none' | 'small' | 'normal' | 'large' = 'normal';
 
-    @Event({
-      title: '响应窗口变化时',
-      description: '响应式布局引发栅格变化时触发',
-    })
-    onResponsive: (event: any) => any;
+    // @Event({
+    //   title: '响应窗口变化时',
+    //   description: '响应式布局引发栅格变化时触发',
+    // })
+    // onResponsive: (event: any) => any;
 
     @Slot({
       title: 'undefined',

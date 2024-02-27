@@ -20,10 +20,6 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: () => {
-    return (
-      <template>
-        <List title="带卡片阴影" extra="extra" tooltip="这是提示" />
-      </template>
-    );
+    return <List title="带卡片阴影" extra="extra" tooltip="这是提示" />;
   },
 };

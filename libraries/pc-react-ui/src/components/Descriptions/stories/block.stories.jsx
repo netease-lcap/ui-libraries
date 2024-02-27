@@ -1,5 +1,6 @@
 import React from 'react';
 import { Descriptions, DescriptionsItem } from '../index';
+import { Text } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -22,32 +23,11 @@ export const 基本用法 = {
   render: () => {
     return (
       <Descriptions column={2} title="高级定义列表">
-        <DescriptionsItem
-          label="日期"
-          fieldProps={{
-            format: 'YYYY.MM.DD',
-          }}
-          valueType="date"
-        >
-          2024/2/20
+        <DescriptionsItem label={<Text children="日期" />} valueType="text">
+          <Text children="2024-0222" />
         </DescriptionsItem>
-        <DescriptionsItem
-          label="日期区间"
-          fieldProps={{
-            format: 'YYYY.MM.DD HH:mm:ss',
-          }}
-          valueType="dateTimeRange"
-        >
-          2024/2/20- 2024/2/21
-        </DescriptionsItem>
-        <DescriptionsItem
-          label="时间"
-          fieldProps={{
-            format: 'YYYY.MM.DD',
-          }}
-          valueType="time"
-        >
-          2024/2/20: 12:00:00
+        <DescriptionsItem label={<Text children="日期" />} valueType="text">
+          <Text children="2024/2/20- 2024/2/21" />
         </DescriptionsItem>
       </Descriptions>
     );

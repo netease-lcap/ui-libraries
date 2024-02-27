@@ -7,7 +7,7 @@ namespace nasl.ui {
     description: '抽屉',
     group: 'Feedback',
   })
-  export class UDrawer extends ViewComponent {
+  export class Drawer extends ViewComponent {
     @Method({
       title: 'undefined',
       description: '打开抽屉',
@@ -19,12 +19,12 @@ namespace nasl.ui {
       description: '关闭抽屉',
     })
     close(): void {}
-    constructor(options?: Partial<UDrawerOptions>) {
+    constructor(options?: Partial<DrawerOptions>) {
       super();
     }
   }
 
-  export class UDrawerOptions extends ViewComponentOptions {
+  export class DrawerOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
       title: '抽屉位置',
@@ -56,6 +56,14 @@ namespace nasl.ui {
     //   },
     // })
     // showFoot: nasl.core.Boolean = true;
+    @Prop({
+      group: '主要属性',
+      title: '是否展示遮罩',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    mask: nasl.core.Boolean = true;
 
     @Prop({
       group: '交互属性',
@@ -123,5 +131,11 @@ namespace nasl.ui {
       description: '插入文本或 HTML。',
     })
     slotFooter: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '抽屉右上角的操作区域',
+      description: '抽屉右上角的操作区域',
+    })
+    slotExtra: () => Array<ViewComponent>;
   }
 }

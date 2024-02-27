@@ -11,8 +11,10 @@ import {
 
 export function useHandleTransformOption(props) {
   const dataSourceField = props.get($dataSourceField, 'options');
-  const deletePropsList = props.get($deletePropsList, []).concat([$dataSourceField]);
+  const deletePropsList = props.get($deletePropsList, []).concat([$dataSourceField], 'reload');
   const dataSource = props.get('dataSource');
+  const ref = props.get('ref');
+  const myRef = React.useRef({});
   const requestDataSource = React.useMemo(() => {
     const wrapDataSource = _.cond([
       [_.isArray, _.constant(() => Promise.resolve(dataSource))],
@@ -21,7 +23,7 @@ export function useHandleTransformOption(props) {
     ]);
     return wrapDataSource(dataSource);
   }, [dataSource]);
-  const { data, loading } = useRequest(requestDataSource);
+  const { data, run, loading } = useRequest(requestDataSource);
   const resultData = React.useMemo(() => {
     const conformsArray = _.cond([
       [Array.isArray, _.identity],
@@ -30,10 +32,17 @@ export function useHandleTransformOption(props) {
     ]);
     return conformsArray(data);
   }, [data]);
+  React.useImperativeHandle(ref, () => ({
+    reload: run,
+    ...myRef.current,
+  }), [myRef, run]);
   return _.isNil(dataSource) ? {
     [$deletePropsList]: deletePropsList,
+    ref: myRef,
   } : {
     [dataSourceField]: resultData,
+    reload: run,
+    ref: myRef,
     [$deletePropsList]: deletePropsList,
     loading,
   };
@@ -45,21 +54,24 @@ export function useHandleTextAndValueField(props) {
   const labelKey = props.get($labelKey, 'label');
   const valueKey = props.get($valueKey, 'value');
   const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField', $labelKey, $valueKey]);
-  const dataSourceFieldProps = props.get($dataSourceField);
-  const dataSourceField = props.get(dataSourceFieldProps, 'options');
-  const options = props.get(dataSourceField);
-
+  const dataSourceField = props.get($dataSourceField, 'options');
+  // const dataSourceField = props.get(dataSourceFieldProps, 'options');
+  const dataSource = props.get(dataSourceField);
+  // console.log(labelKey, valueKey);
   const convertOption = React.useMemo(() => {
-    const logicFn = _.map(options, (item) => ({ [labelKey]: item[textField], [valueKey]: item[valueField] }));
-    const decisionCallback = _.cond([
-      [_.matches({ textField: _.isString }), _.constant(logicFn)],
-      [_.matches({ valueField: _.isString }), _.constant(logicFn)],
-      [_.stubTrue, _.constant(options)],
-    ]);
-    return decisionCallback({ textField, valueField });
-  }, [options, textField, valueField, labelKey, valueKey]);
-  return _.isNil(options)
+    const logicFn = _.map(dataSource, (item) => ({ [labelKey]: item[textField], [valueKey]: item[valueField] }));
+    // console.log(logicFn, 'fn');
+    return logicFn;
+    // const decisionCallback = _.cond([
+    //   [_.matches({ textField: _.isString }), _.constant(logicFn)],
+    //   [_.matches({ valueField: _.isString }), _.constant(logicFn)],
+    //   [_.stubTrue, _.constant(dataSource)],
+    // ]);
+    // return decisionCallback({ textField, valueField });
+  }, [dataSource, textField, valueField, labelKey, valueKey]);
+  // console.log(convertOption, 'convertOption');
+  return _.isNil(dataSource)
     ? { [$deletePropsList]: deletePropsList }
-    : { options: convertOption, [$deletePropsList]: deletePropsList };
+    : { [dataSourceField]: convertOption, [$deletePropsList]: deletePropsList };
 }
-useHandleTextAndValueField.order = 5;
+useHandleTextAndValueField.order = 6;

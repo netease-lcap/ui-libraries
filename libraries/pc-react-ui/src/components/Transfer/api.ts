@@ -8,46 +8,46 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class Transfer<T, V> extends ViewComponent {
-    @Method({
-      title: 'undefined',
-      description: '从左向右转移数据。',
-    })
-    forward(
-      @Param({
-        title: 'undefined',
-        description: '指定转移选项值的列表。如果不填，则为按左列表框选中项值的列表。',
-      })
-      values: Array<nasl.core.String>,
-    ): void {}
+    // @Method({
+    //   title: 'undefined',
+    //   description: '从左向右转移数据。',
+    // })
+    // forward(
+    //   @Param({
+    //     title: 'undefined',
+    //     description: '指定转移选项值的列表。如果不填，则为按左列表框选中项值的列表。',
+    //   })
+    //   values: Array<nasl.core.String>,
+    // ): void {}
 
-    @Method({
-      title: 'undefined',
-      description: '从右向左转移数据。',
-    })
-    reverse(
-      @Param({
-        title: 'undefined',
-        description: '指定转移选项值的列表。如果不填，则为按右列表框选中项值的列表。',
-      })
-      values: Array<nasl.core.String>,
-    ): void {}
+    // @Method({
+    //   title: 'undefined',
+    //   description: '从右向左转移数据。',
+    // })
+    // reverse(
+    //   @Param({
+    //     title: 'undefined',
+    //     description: '指定转移选项值的列表。如果不填，则为按右列表框选中项值的列表。',
+    //   })
+    //   values: Array<nasl.core.String>,
+    // ): void {}
 
-    @Method({
-      title: 'undefined',
-      description: '转移指定项的数据。',
-    })
-    transfer(
-      @Param({
-        title: 'undefined',
-        description: '方向',
-      })
-      direction: 'forward' | 'reverse' = 'forward',
-      @Param({
-        title: 'undefined',
-        description: '指定转移选项值的列表。',
-      })
-      values: Array<nasl.core.String>,
-    ): void {}
+    // @Method({
+    //   title: 'undefined',
+    //   description: '转移指定项的数据。',
+    // })
+    // transfer(
+    //   @Param({
+    //     title: 'undefined',
+    //     description: '方向',
+    //   })
+    //   direction: 'forward' | 'reverse' = 'forward',
+    //   @Param({
+    //     title: 'undefined',
+    //     description: '指定转移选项值的列表。',
+    //   })
+    //   values: Array<nasl.core.String>,
+    // ): void {}
     constructor(options?: Partial<TransferOptions<T, V>>) {
       super();
     }

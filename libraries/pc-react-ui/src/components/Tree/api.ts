@@ -8,53 +8,53 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class Tree<T, V, M extends nasl.core.Boolean> extends ViewComponent {
-    @Method({
-      title: 'undefined',
-      description: '广度优先遍历树。当`func`函数有返回值时，停止遍历。',
-    })
-    private walk(
-      @Param({
-        title: 'undefined',
-        description: '遍历的处理函数',
-      })
-      func: Function,
-    ): void {}
+    // @Method({
+    //   title: 'undefined',
+    //   description: '广度优先遍历树。当`func`函数有返回值时，停止遍历。',
+    // })
+    // private walk(
+    //   @Param({
+    //     title: 'undefined',
+    //     description: '遍历的处理函数',
+    //   })
+    //   func: Function,
+    // ): void {}
 
-    @Method({
-      title: 'undefined',
-      description: '查找节点实例。',
-    })
-    private find(
-      @Param({
-        title: 'undefined',
-        description: '查找函数。找到第一个返回值为`true`的实例。',
-      })
-      func: Function,
-    ): void {}
+    // @Method({
+    //   title: 'undefined',
+    //   description: '查找节点实例。',
+    // })
+    // private find(
+    //   @Param({
+    //     title: 'undefined',
+    //     description: '查找函数。找到第一个返回值为`true`的实例。',
+    //   })
+    //   func: Function,
+    // ): void {}
 
-    @Method({
-      title: 'undefined',
-      description: '展开/折叠所有节点',
-    })
-    private toggleAll(
-      @Param({
-        title: 'undefined',
-        description: '展开/折叠',
-      })
-      expanded: nasl.core.Boolean,
-    ): void {}
+    // @Method({
+    //   title: 'undefined',
+    //   description: '展开/折叠所有节点',
+    // })
+    // private toggleAll(
+    //   @Param({
+    //     title: 'undefined',
+    //     description: '展开/折叠',
+    //   })
+    //   expanded: nasl.core.Boolean,
+    // ): void {}
 
-    @Method({
-      title: 'undefined',
-      description: '选中/取消所有节点',
-    })
-    private checkAll(
-      @Param({
-        title: 'undefined',
-        description: '选中/取消',
-      })
-      expanded: nasl.core.Boolean,
-    ): void {}
+    // @Method({
+    //   title: 'undefined',
+    //   description: '选中/取消所有节点',
+    // })
+    // private checkAll(
+    //   @Param({
+    //     title: 'undefined',
+    //     description: '选中/取消',
+    //   })
+    //   expanded: nasl.core.Boolean,
+    // ): void {}
 
     @Method({
       title: 'undefined',
@@ -116,16 +116,16 @@ namespace nasl.ui {
     })
     childrenField: (item: T) => nasl.collection.List<any> = ((item: any) => item.children) as any;
 
-    @Prop({
-      group: '数据属性',
-      title: '父级值字段',
-      description: '集合的元素类型中，用于标识父节点的属性',
-      docDescription: '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
-      setter: {
-        concept: 'PropertySelectSetter',
-      },
-    })
-    parentField: (item: T) => any;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '父级值字段',
+    //   description: '集合的元素类型中，用于标识父节点的属性',
+    //   docDescription: '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
+    //   setter: {
+    //     concept: 'PropertySelectSetter',
+    //   },
+    // })
+    // parentField: (item: T) => any;
 
     @Prop({
       group: '数据属性',
@@ -257,7 +257,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '子节点',
-          code: '<Tree><TreeNode title="节点" key="1"></Tree>',
+          code: '<TreeNode title="节点" key="1"></TreeNode>',
         },
       ],
     })
@@ -354,6 +354,17 @@ namespace nasl.ui {
     //   description: '选中节点时触发',
     // })
     // onCheck: (event: { checked: nasl.core.Boolean; oldChecked: nasl.core.Boolean; node: T }) => any;
+    @Slot({
+      title: 'undefined',
+      description: '插入`<TreeNode>`子组件',
+      snippets: [
+        {
+          title: '子节点',
+          code: '<TreeNode title="节点" key="1"></TreeNode>',
+        },
+      ],
+    })
+    slotDefault: () => Array<TreeNode<T, V>>;
 
     @Slot({
       title: '默认',

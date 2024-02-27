@@ -32,17 +32,17 @@ namespace nasl.ui {
       opened?: nasl.core.Boolean,
     ): void {}
 
-    @Method({
-      title: 'undefined',
-      description: '更新 popper 实例。参考 [Popper.update()](https://popper.js.org/popper-documentation.html#Popper.update)。',
-    })
-    update(): void {}
+    // @Method({
+    //   title: 'undefined',
+    //   description: '更新 popper 实例。参考 [Popper.update()](https://popper.js.org/popper-documentation.html#Popper.update)。',
+    // })
+    // update(): void {}
 
-    @Method({
-      title: 'undefined',
-      description: '在下次 UI 渲染时一块更新 popper 实例，比`update()`性能要好。参考 [Popper.scheduleUpdate()](https://popper.js.org/popper-documentation.html#Popper.scheduleUpdate)。',
-    })
-    scheduleUpdate(): void {}
+    // @Method({
+    //   title: 'undefined',
+    //   description: '在下次 UI 渲染时一块更新 popper 实例，比`update()`性能要好。参考 [Popper.scheduleUpdate()](https://popper.js.org/popper-documentation.html#Popper.scheduleUpdate)。',
+    // })
+    // scheduleUpdate(): void {}
     constructor(options?: Partial<PopoverOptions>) {
       super();
     }
@@ -95,7 +95,7 @@ namespace nasl.ui {
         ],
       },
     })
-    placement: 'top' | 'bottom' | 'left' | 'right' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom' = 'bottom';
+    placement: 'top' | 'bottom' | 'left' | 'right' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom' = 'top';
 
     @Prop({
       group: '主要属性',
@@ -227,13 +227,19 @@ namespace nasl.ui {
     // onToggle: (event: { opened: nasl.core.Boolean }) => any;
 
     @Slot({
-      title: 'undefined',
+      title: '弹出框内容',
       description: '自定义弹出的内容。',
     })
     slotContent: () => Array<ViewComponent>;
 
     @Slot({
-      title: 'undefined',
+      title: '标题',
+      description: '弹出框标题。',
+    })
+    slotTitle: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '弹出框触发节点',
       description: '弹出层触发节点。',
     })
     slotDefault: () => Array<ViewComponent>;

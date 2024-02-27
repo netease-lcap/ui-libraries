@@ -23,7 +23,7 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <TimeRangePicker {...args} />,
+  render: (args) => <TimeRangePicker {...args} data-nodepath="1234" />,
   args: {
     color: 'magenta',
     children: 'Tag',

@@ -1,7 +1,9 @@
 import React from 'react';
 // import { ProFormDatePicker, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components';
 import { Form, FormItem } from '../index';
-import { Input, Button, Col } from '@/index';
+import {
+  Input, Button, Col, Text,
+} from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -24,14 +26,14 @@ export const 默认 = {
   render: () => {
     return (
       <Form>
-        <FormItem span={12} label="Username" name="username">
+        <FormItem label={<Text children="账号" />} name="username">
           <Input />
         </FormItem>
-        <FormItem label="Password" name="password">
+        <FormItem label={<Text children="密码" />} name="password">
           <Input />
         </FormItem>
         <FormItem>
-          <Button type="primary" htmlType="submit" children="Submit" />
+          <Button type="primary" htmlType="submit" children="提交" />
         </FormItem>
       </Form>
     );

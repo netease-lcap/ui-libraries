@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from '../index';
+import { Text } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -20,12 +21,12 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 基本样式 = {
   render: () => {
-    return <Card title="带卡片阴影" style={{ width: 501 }} bordered />;
+    return <Card title={<Text children="标题" style="font-size:inherit" />} style={{ width: 501 }} bordered />;
   },
 };
 export const 分割线样式 = {
   render: () => {
-    return <Card title="Card title" headerBordered bordered style={{ width: 300 }} />;
+    return <Card title={<Text children="标题" style="font-size:inherit"  />} headerBordered bordered style={{ width: 300 }} />;
   },
 };
 export const 无标题样式 = {
