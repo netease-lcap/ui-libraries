@@ -20,6 +20,7 @@ export default createComponent({
     },
     readonly: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
+    designerMask: { type: Boolean, default: true },
   },
 
   data() {
@@ -76,7 +77,7 @@ export default createComponent({
             )}
         </div>
         {/* ide 蒙层 */}
-        {this.inDesigner && this.dataSource !== undefined && (
+        {this.inDesigner && this.dataSource !== undefined && this.designerMask && (
           <div
             class={bem('mantle')}
             style={

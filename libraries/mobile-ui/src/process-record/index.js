@@ -149,16 +149,10 @@ export default createComponent({
           dataSource={this.records}
           value={this.records.length - 1}
           direction="vertical"
+          designerMask={false}
           scopedSlots={{
             item: ({ item }) => {
-              const {
-                nodeTitle,
-                userName,
-                recordCreateTime,
-                nodeOperation,
-                nodeOperationText,
-                comment,
-              } = item;
+              const { nodeTitle, userName, recordCreateTime, nodeOperation, nodeOperationText, comment } = item;
 
               let status = 'process';
 
@@ -177,7 +171,7 @@ export default createComponent({
                     '--van-step-line-color': '#337EFF',
                     '--van-step-finish-line-color': '#337EFF',
                     '--van-step-active-color': '#337EFF',
-                    '--van-step-text-color': '#333'
+                    '--van-step-text-color': '#333',
                   }}
                 >
                   <div class={bem('card')}>
@@ -188,19 +182,11 @@ export default createComponent({
                     </div>
                     <div class={bem('card-line')}>
                       <div class={bem('card-label')}>{t('time')}</div>
-                      <div class={bem('card-content')}>
-                        {recordCreateTime
-                          ? dayjs(recordCreateTime).format(
-                              'YYYY-MM-DD HH:mm:ss'
-                            )
-                          : '-'}
-                      </div>
+                      <div class={bem('card-content')}>{recordCreateTime ? dayjs(recordCreateTime).format('YYYY-MM-DD HH:mm:ss') : '-'}</div>
                     </div>
                     <div class={bem('card-line')}>
                       <div class={bem('card-label')}>{t('status')}</div>
-                      <div class={bem('card-content')}>
-                        {nodeOperationText || '-'}
-                      </div>
+                      <div class={bem('card-content')}>{nodeOperationText || '-'}</div>
                     </div>
                     <div class={bem('card-line')}>
                       <div class={bem('card-label')}>{t('comment')}</div>

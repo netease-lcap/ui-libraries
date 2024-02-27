@@ -67,7 +67,7 @@
   "vanProcessRecord_node": "流程节点",
   "vanProcessRecord_assignee": "处理人",
   "vanProcessRecord_time": "处理时间",
-  "vanProcessRecord_status": "审批结果",
+  "vanProcessRecord_status": "审批操作",
   "vanProcessRecord_comment": "审批意见",
   "vanProcessRecord_more": "查看更多"
 }
