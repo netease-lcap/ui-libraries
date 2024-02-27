@@ -1,6 +1,6 @@
 
 <template>
-<u-multi-layout direction="vertical" style="height: 100vh;">
+<u-multi-layout direction="vertical" style="height: 100vh;font-family: var(--font-family-zh-CN);">
     <u-multi-layout-item style="height: 60px;background-color: #000;">
       <u-navbar-multi>
         <template #right>

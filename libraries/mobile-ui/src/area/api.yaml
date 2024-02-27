@@ -100,6 +100,11 @@
       default: false
       group: 状态属性
       description: 置灰显示，且禁止任何交互（焦点、点击、选择、输入等）
+    - name: placeholder
+      title: 占位提示
+      type: string
+      group: 主要属性
+      description: ""
   slots:
     - concept: Slot
       name: default
