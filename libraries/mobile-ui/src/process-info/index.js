@@ -55,7 +55,7 @@ export default createComponent({
         return;
       }
 
-      const result = await this.$processV2.getProcessInstanceInfo({
+      const result = await this.$processV2.getProcInstInfo({
         body: {
           taskId,
         },

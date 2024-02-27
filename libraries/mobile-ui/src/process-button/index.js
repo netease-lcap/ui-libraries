@@ -106,7 +106,7 @@ export default createComponent({
       }
 
       try {
-        const res = await this.$processV2.operationPermissionDetail({
+        const res = await this.$processV2.getTaskOperationPermissions({
           body: {
             taskId,
           },
