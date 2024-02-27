@@ -76,9 +76,9 @@ export default createComponent({
   methods: {
     async fetchData(type) {
       const typeMap = {
-        myPendingTaskList: 'getMyPendingTaskList',
-        myCompletedTaskList: 'getMyCompletedTaskList',
-        myLaunchList: 'getMyInitiateTaskList',
+        myPendingTaskList: 'getMyPendingTasks',
+        myCompletedTaskList: 'getMyCompletedTasks',
+        myLaunchList: 'getMyInitiateTasks',
       };
 
       const filter = this[`${type}Filter`];
@@ -179,23 +179,19 @@ export default createComponent({
         taskId,
         procInstTitle: title,
         procDefTitle: type,
-        procInstCurNodes: currentNodeList,
-        procInstStartBy: initiator,
+        procInstCurrNodes: currentNodeList,
+        procInstInitiator: initiator,
         procInstStartTime: startTime,
       } = data || {};
 
-      const nodes = (currentNodeList || [])
-        .map((item) => item.curNodeTitle)
-        .join('，');
-      const assignees = (currentNodeList || [])
-        .map((item) => (item.curNodeParticipants || []).join('，'))
-        .join('，');
+      const nodes = (currentNodeList || []).map((item) => item.currNodeTitle).join('，');
+      const assignees = (currentNodeList || []).map((item) => (item.currNodeParticipants || []).join('，')).join('，');
 
       return (
         <div class={bem('item-card')} onClick={() => this.onGotoDetail(taskId)}>
           <div class={bem('item-card-title')}>
-            {title}
-            <Iconv name="right-arrow" size={12} icotype="only"></Iconv>
+            <div class={bem('item-card-title-text')}>{title}</div>
+            <Iconv class={bem('item-card-title-icon')} name="right-arrow" size={12} icotype="only"></Iconv>
           </div>
 
           <div class={bem('item-card-line')}>
@@ -216,9 +212,7 @@ export default createComponent({
           </div>
           <div class={bem('item-card-line')}>
             <div class={bem('item-card-label')}>{t('startTime')}</div>
-            <div class={bem('item-card-content')}>
-              {dayjs(startTime).format('YYYY-MM-DD HH:mm:ss')}
-            </div>
+            <div class={bem('item-card-content')}>{dayjs(startTime).format('YYYY-MM-DD HH:mm:ss')}</div>
           </div>
         </div>
       );
@@ -253,39 +247,48 @@ export default createComponent({
           </Tab>
           <Tab title={t('done')} name="myCompletedTaskList">
             {this.toolbarRender()}
-
-            <List
-              class={bem('list-view')}
-              onLoad={() => this.onLoad('myCompletedTaskList')}
-              offset={50}
-              finished={this.myCompletedTaskListFinished}
+            <PullRefresh
+              vModel={this.myCompletedTaskListRefresh}
+              onRefresh={() => this.reload('myCompletedTaskList')}
             >
-              {this.myCompletedTaskList.map((item) => {
-                return this.cardRender(item);
-              })}
+              <List
+                class={bem('list-view')}
+                onLoad={() => this.onLoad('myCompletedTaskList')}
+                offset={50}
+                finished={this.myCompletedTaskListFinished}
+              >
+                {this.myCompletedTaskList.map((item) => {
+                  return this.cardRender(item);
+                })}
 
-              {!this.myCompletedTaskList.length ? (
-                <div class={bem('list-view-empty')}>{t('empty')}</div>
-              ) : null}
-            </List>
+                {!this.myCompletedTaskList.length ? (
+                  <div class={bem('list-view-empty')}>{t('empty')}</div>
+                ) : null}
+              </List>
+            </PullRefresh>
+
           </Tab>
           <Tab title={t('initiate')} name="myLaunchList">
             {this.toolbarRender()}
-
-            <List
-              class={bem('list-view')}
-              onLoad={() => this.onLoad('myLaunchList')}
-              offset={50}
-              finished={this.myLaunchListFinished}
+            <PullRefresh
+              vModel={this.myLaunchListRefresh}
+              onRefresh={() => this.reload('myLaunchList')}
             >
-              {this.myLaunchList.map((item) => {
-                return this.cardRender(item);
-              })}
+              <List
+                class={bem('list-view')}
+                onLoad={() => this.onLoad('myLaunchList')}
+                offset={50}
+                finished={this.myLaunchListFinished}
+              >
+                {this.myLaunchList.map((item) => {
+                  return this.cardRender(item);
+                })}
 
-              {!this.myLaunchList.length ? (
-                <div class={bem('list-view-empty')}>{t('empty')}</div>
-              ) : null}
-            </List>
+                {!this.myLaunchList.length ? (
+                  <div class={bem('list-view-empty')}>{t('empty')}</div>
+                ) : null}
+              </List>
+            </PullRefresh>
           </Tab>
         </Tabs>
       </div>

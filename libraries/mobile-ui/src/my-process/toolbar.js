@@ -47,7 +47,7 @@ export default createComponent({
         return mockData.allProcess;
       }
 
-      const { data } = await this.$processV2.getProcDefList();
+      const { data } = await this.$processV2.getProcDefInfos();
       const result = data;
 
       return result;
@@ -58,7 +58,7 @@ export default createComponent({
         return mockData.allInitiator;
       }
 
-      const { data } = await this.$processV2.getProcInstStartByList();
+      const { data } = await this.$processV2.getProcInstInitiators();
       const result = data;
 
       return result;
