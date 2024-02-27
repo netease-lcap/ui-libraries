@@ -1,5 +1,5 @@
 - name: van-button
-  title: 按钮
+  title: 按 钮
   icon: button
   labels:
     - Display
