@@ -149,12 +149,14 @@
   "uProcessMyprocess_operator": "操作",
   "uProcessMyprocess_approval": "审批",
   "uProcessMyprocess_check": "查看",
+  "uProcessMyprocess_search": "查 询",
   "uProcessRecord_currentNode": "流程节点",
   "uProcessRecord_assignee": "处理人",
   "uProcessRecord_recordCreateTime": "处理时间",
-  "uProcessRecord_nodeOperation": "审批结果",
+  "uProcessRecord_nodeOperation": "审批操作",
   "uProcessRecord_comment": "审批意见",
   "uProcessRecord_loading": "加载中",
   "uProcessRecord_loadMore": "查看更多",
-  "uProcessRecord_noMore": "已经到底了"
+  "uProcessRecord_noMore": "已经到底了",
+  "uProcessRecord_empty": "暂无流程记录"
 }

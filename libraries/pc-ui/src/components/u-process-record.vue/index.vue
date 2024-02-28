@@ -3,7 +3,10 @@
         <template v-if="type === 'timeline'">
             <u-timeline :data-source="list">
                 <template #item="current">
-                    <u-timeline-item>
+                    <u-timeline-item :class="$style.titem">
+                        <template #dot>
+                            <div :class="$style.dot" :status="getDotStatus(current.item)"></div>
+                        </template>
                         <div :class="$style.title">{{ current.item.nodeTitle }}</div>
                         <div :class="$style.item">
                             <div :class="$style.left">
@@ -22,9 +25,15 @@
                     </u-timeline-item>
                 </template>
             </u-timeline>
-            <u-text v-if="currentLoading">{{ $tt('loading') }}</u-text>
-            <u-link v-else-if="hasMore" @click="loadMore">{{ $tt('loadMore') }}</u-link>
-            <u-text v-else-if="list.length > 0">{{ $tt('noMore') }}</u-text>
+            <div :class="$style.dstatus">
+                <template v-if="currentLoading">
+                    <u-loading icon="loading" size="small"></u-loading>
+                    <div><u-text v-if="currentLoading">{{ $tt('loading') }}</u-text></div>
+                </template>
+                <u-link v-else-if="hasMore" @click="loadMore">{{ $tt('loadMore') }}</u-link>
+                <u-text v-else-if="list.length > 0">{{ $tt('noMore') }}</u-text>
+                <u-text v-else-if="list.length === 0">{{ $tt('empty') }}</u-text>
+            </div>
         </template>
         <template v-else>
             <u-table-view :data-source="loadTable" ref="tableview" :page-size="20" :page-number="1" pagination :initial-load="initialLoad">
@@ -41,7 +50,7 @@
                     <template #cell="current"> {{ current.item.nodeOperationText || '-' }}</template>
                 </u-table-view-column>
                 <u-table-view-column :title="$tt('comment')">
-                    <template #cell="current"> {{ current.item.nodeComment }}</template>
+                    <template #cell="current"> {{ current.item.nodeComment || '-' }}</template>
                 </u-table-view-column>
             </u-table-view>
         </template>
@@ -137,7 +146,7 @@ export default {
         async loadList() {
             this.currentLoading = true;
             if (this.$processV2) {
-                this.currentLoading = true;
+                
                 try {
                     const result = await this.$processV2.getProcInstRecords({
                         body: {
@@ -149,6 +158,7 @@ export default {
                     const list = result.data.list || [];
                     this.list = this.list.concat(list);
                     this.paging.total = result.data.total;
+                    this.currentLoading = false;
                 } finally {
                     this.currentLoading = false;
                 }
@@ -175,11 +185,23 @@ export default {
                 };
             }
         },
+        getDotStatus(item) {
+            if(['revert', 'reject'].includes(item.nodeOperation)) {
+                return 'error';
+            }
+            if(['approve', 'submit'].includes(item.nodeOperation)) {
+                return 'success';
+            }
+            return 'normal';
+        }
     },
 };
 </script>
 
 <style module>
+.titem div[uname="tail"]{
+    border-left: 1px solid #337EFF;
+}
 .item {
     display: flex;
 }
@@ -199,5 +221,53 @@ export default {
 .title {
     font-weight: 500;
     color: var(--process-record-title-color);
+    padding-top: 3px;
+}
+
+.dot {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    color: white;
+}
+.dot[status="success"] {
+    background-color: #337EFF;
+}
+.dot[status="error"] {
+    background-color: #F24957;
+}
+.dot[status="success"]::before,
+.dot[status="error"]::before{
+    display: inline-block;
+    position: relative;
+    top: -1px;
+    
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    font-size: 8px;
+}
+.dot[status="success"]::before {
+    content: "\e648";
+}
+.dot[status="error"]::before {
+    content: "\e662";
+}
+.dot[status="normal"] {
+    background-color: white;
+    border: 2px solid #337EFF;
+}
+.dstatus {
+    width: 240px;
+    text-align: center;
+    color: #999;
 }
 </style>

@@ -2,7 +2,7 @@
     <div>
         <div :class="$style.item">
             <div :class="$style.label">{{ $tt('startBy') }}：</div>
-            <div :class="$style.value" v-ellipsis-title>{{ detail.procInstStartBy || '-' }}</div>
+            <div :class="$style.value" v-ellipsis-title>{{ detail.procInstInitiator || '-' }}</div>
         </div>
         <div :class="$style.item">
             <div :class="$style.label">{{ $tt('processStartTime') }}：</div>
@@ -31,10 +31,10 @@ export default {
     data() {
         return {
             detail: {
-                procInstStartBy: '',
+                procInstInitiator: '',
                 procInstStartTime: '',
-                procInstStatus: false,
-                procInstCurNodes: [],
+                procInstStatus: '',
+                procInstCurrNodes: [],
             },
             taskId: undefined,
         };
@@ -66,31 +66,30 @@ export default {
             return this.$utils ? this.$utils.FormatDateTime(value) : value;
         },
         formatStatus(value) {
-            if (value === null || value === undefined) {
+            if (value === null || value === undefined || value === '') {
                 return '-';
             }
-            if (value === 'approved') {
+            if (value.toLowerCase() === 'approved') {
                 return '审批通过';
-            } else if (value === 'approving') {
+            } else if (value.toLowerCase() === 'approving') {
                 return '审批中';
             } else {
                 return value;
             }
         },
         formatCurrentNodes(item) {
-            console.log('dddd');
-            const procInstCurNodes = item.procInstCurNodes || [];
-            const set = new Set(procInstCurNodes.map((task) => task.currNodeTitle));
+            const procInstCurrNodes = item.procInstCurrNodes || [];
+            const set = new Set(procInstCurrNodes.map((task) => task.currNodeTitle));
             return Array.from(set).join('，');
         },
         formatCurrentAssignee(item) {
-            const procInstCurNodes = item.procInstCurNodes || [];
+            const procInstCurrNodes = item.procInstCurrNodes || [];
             let currNodeParticipants = [];
-            procInstCurNodes.forEach((task) => {
+            procInstCurrNodes.forEach((task) => {
                 currNodeParticipants = currNodeParticipants.concat(task.currNodeParticipants);
             });
             const set = new Set(currNodeParticipants);
-            return Array.from(set).join('，');
+            return Array.from(set).join('，') || '-';
         },
     },
 };

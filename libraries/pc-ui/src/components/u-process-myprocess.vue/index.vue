@@ -171,18 +171,18 @@ export default {
             return this.$utils ? this.$utils.FormatDateTime(value) : value;
         },
         formatCurrentNodes(item) {
-            const procInstCurNodes = item.procInstCurNodes || [];
-            const set = new Set(procInstCurNodes.map((task) => task.currNodeTitle));
+            const procInstCurrNodes = item.procInstCurrNodes || [];
+            const set = new Set(procInstCurrNodes.map((task) => task.currNodeTitle));
             return Array.from(set).join('，') || '-';
         },
         formatCurrentAssignee(item) {
-            const procInstCurNodes = item.procInstCurNodes || [];
+            const procInstCurrNodes = item.procInstCurrNodes || [];
             let currNodeParticipants = [];
-            procInstCurNodes.forEach((task) => {
+            procInstCurrNodes.forEach((task) => {
                 currNodeParticipants = currNodeParticipants.concat(task.currNodeParticipants);
             });
             const set = new Set(currNodeParticipants);
-            return Array.from(set).join('，');
+            return Array.from(set).join('，') || '-';
         },
     },
 };
