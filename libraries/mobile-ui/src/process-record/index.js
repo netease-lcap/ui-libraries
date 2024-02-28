@@ -37,9 +37,7 @@ export default createComponent({
   created() {
     this.taskId = this.getTaskId();
 
-    if (this.type === 'timeline') {
-      this.onLoad();
-    }
+    this.onLoad();
   },
 
   methods: {
@@ -97,12 +95,14 @@ export default createComponent({
           class={bem('list')}
           onLoad={this.onLoad}
           finished={this.finished}
+          immediateCheck={false}
         >
           {this.records.map((item) => {
             const {
               nodeTitle,
               userName,
               recordCreateTime,
+              nodeOperation,
               nodeOperationText,
               comment,
             } = item;
@@ -128,7 +128,7 @@ export default createComponent({
                 <div class={bem('card-line')}>
                   <div class={bem('card-label')}>{t('status')}</div>
                   <div class={bem('card-content')}>
-                    {nodeOperationText || '-'}
+                    <span class={nodeOperation}>{nodeOperationText || '-'}</span>
                   </div>
                 </div>
                 <div class={bem('card-line')}>
