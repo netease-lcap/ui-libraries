@@ -9,7 +9,7 @@ const mockData = {
     procInstInitiator: '张三',
     procInstStartTime: '2024-01-24T03:35:52.000Z',
     procInstEndTime: '2024-01-24T03:35:52.000Z',
-    procInstStatus: 'approving',
+    procInstStatus: 'Approving',
     procInstCurrNodes: [
       {
         currNodeTitle: '多人审批任务',
@@ -80,8 +80,8 @@ export default createComponent({
       .join('，');
 
     const statusMap = {
-      approved: '审批通过',
-      approving: '审批中',
+      Approved: '审批通过',
+      Approving: '审批中',
     };
 
     return (

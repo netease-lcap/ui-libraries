@@ -277,10 +277,7 @@ export default createComponent({
           }}
         >
           {rest.map((item) => (
-            <div
-              class={bem('popover-item')}
-              onClick={() => this.onClickItem(item)}
-            >
+            <div class={bem('popover-item')} onClick={() => this.onClickItem(item)}>
               {item.showText}
             </div>
           ))}
@@ -288,21 +285,12 @@ export default createComponent({
       ),
       <div class={bem('operation', { center: !hasMore })}>
         {second && (
-          <Button
-            type="default"
-            squareroud="round"
-            onClick={() => this.onClickItem(second)}
-          >
+          <Button type="default" squareroud="round" onClick={() => this.onClickItem(second)}>
             {second.showText}
           </Button>
         )}
         {first && (
-          <Button
-            type="info"
-            size={second ? 'normal' : 'large'}
-            squareroud="round"
-            onClick={() => this.onClickItem(first)}
-          >
+          <Button type="info" size={second ? 'normal' : 'large'} squareroud="round" onClick={() => this.onClickItem(first)}>
             {first.showText}
           </Button>
         )}

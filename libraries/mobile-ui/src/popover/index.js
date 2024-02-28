@@ -248,7 +248,7 @@ export default createComponent({
           position={null}
           transition="van-popover-zoom"
           lockScroll={false}
-          // getContainer={this.getContainer}
+          getContainer={this.getContainer}
           onOpen={this.onOpen}
           onClose={this.onClose}
           onInput={this.onToggle}
