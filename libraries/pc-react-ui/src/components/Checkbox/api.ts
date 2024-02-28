@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @Component({
-    title: '多选组',
+    title: '多选框',
     icon: 'checkboxes',
     description: '多项中选择多个时使用',
     group: 'Form',
@@ -258,28 +258,31 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
-      title: '值',
-      description: '标志选中状态的值，`null`表示不确定状态',
+      title: '指定当前是否选中	',
+      description: '标志选中状态的值',
       sync: true,
       docDescription: '选项返还的选项值。',
-    })
-    value: nasl.core.Boolean | null = false;
-
-    @Prop({
-      group: '数据属性',
-      title: '选项值',
-      description: '用于标识选项的值',
-    })
-    label: V;
-
-    @Prop({
-      group: '主要属性',
-      title: '自动获取焦点',
       setter: {
         concept: 'SwitchSetter',
       },
     })
-    autofocus: nasl.core.Boolean = false;
+    checked: nasl.core.Boolean | null = false;
+
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '选项值',
+    //   description: '用于标识选项的值',
+    // })
+    // label: V;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '自动获取焦点',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // autofocus: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '状态属性',

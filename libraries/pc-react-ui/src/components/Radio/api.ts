@@ -23,6 +23,17 @@ namespace nasl.ui {
     })
     value: nasl.core.Any;
 
+    @Prop({
+      group: '数据属性',
+      title: '指定当前是否选中	',
+      description: '标志选中状态的值',
+      sync: true,
+      docDescription: '选项返还的选项值。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    checked: nasl.core.Boolean | null = false;
     // @Prop({
     //   group: '主要属性',
     //   title: '自动选择',
@@ -144,115 +155,143 @@ namespace nasl.ui {
     // slotDefault: () => Array<UCapsule>;
   }
 
-  // @Component({
-  //   title: '子选项',
-  //   description: '子选项',
-  // })
-  // export class UCapsule extends ViewComponent {
-  //   constructor(options?: Partial<UCapsuleOptions>) {
-  //     super();
-  //   }
-  // }
+  @Component({
+    title: '子选项',
+    description: '子选项',
+  })
+  export class RadioGroup extends ViewComponent {
+    constructor(options?: Partial<RadioGroupOptions>) {
+      super();
+    }
+  }
 
-  // export class UCapsuleOptions extends ViewComponentOptions {
-  //   @Prop({
-  //     title: '相关对象',
-  //     description: '相关对象。当选择此项时，抛出的事件会传递该对象，便于开发',
-  //   })
-  //   private item: object;
+  export class RadioGroupOptions extends ViewComponentOptions {
+    @Prop({
+      title: '相关对象',
+      description: '相关对象。当选择此项时，抛出的事件会传递该对象，便于开发',
+    })
+    private item: object;
 
-  //   @Prop({
-  //     group: '数据属性',
-  //     title: '值',
-  //     description: '此项的值',
-  //     docDescription: '此项的值',
-  //   })
-  //   value: nasl.core.Any;
+    @Prop({
+      group: '数据属性',
+      title: '值',
+      description: '此项的值',
+      docDescription: '此项的值',
+    })
+    value: nasl.core.Any;
 
-  //   @Prop({
-  //     group: '主要属性',
-  //     title: '标签',
-  //     description: '顶部自定义提示文本',
-  //     docDescription: '顶部自定义提示文本',
-  //   })
-  //   label: nasl.core.String = '';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '标签',
+    //   description: '顶部自定义提示文本',
+    //   docDescription: '顶部自定义提示文本',
+    // })
+    // label: nasl.core.String = '';
 
-  //   @Prop({
-  //     group: '主要属性',
-  //     title: 'flag标志',
-  //     description: '是否右上角有flag标志',
-  //     docDescription: '是否右上角有flag标志',
-  //     setter: {
-  //       concept: 'SwitchSetter',
-  //     },
-  //   })
-  //   flag: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'flag标志',
+    //   description: '是否右上角有flag标志',
+    //   docDescription: '是否右上角有flag标志',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // flag: nasl.core.Boolean = false;
 
-  //   @Prop({
-  //     group: '状态属性',
-  //     title: '禁用',
-  //     description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
-  //     docDescription: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
-  //     setter: {
-  //       concept: 'SwitchSetter',
-  //     },
-  //   })
-  //   disabled: nasl.core.Boolean = false;
+    @Prop({
+      group: '状态属性',
+      title: '禁用',
+      description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
+      docDescription: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    disabled: nasl.core.Boolean = false;
 
-  //   @Prop({
-  //     group: '样式属性',
-  //     title: '尺寸',
-  //     description: '胶囊大小',
-  //     docDescription: '支持小尺寸和正常尺寸',
-  //     setter: {
-  //       concept: 'EnumSelectSetter',
-  //       options: [{ title: '小' }, { title: '正常' }],
-  //     },
-  //   })
-  //   private size: 'small' | 'normal' = 'normal';
+    @Prop({
+      group: '样式属性',
+      title: '尺寸',
+      description: '只对按钮样式生效',
+      docDescription: '只对按钮样式生效',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '小' }, { title: '正常' }, { title: '大' }],
+      },
+    })
+    size: 'small' | 'middle' | 'large';
 
-  //   @Event({
-  //     title: '点击',
-  //     description: '点击此项时触发，与原生 click 事件不同的是，它只会在非只读和禁用的情况下触发。',
-  //   })
-  //   onClick: (event: {
-  //     altKey: nasl.core.Boolean;
-  //     button: nasl.core.Integer;
-  //     clientX: nasl.core.Integer;
-  //     clientY: nasl.core.Integer;
-  //     ctrlKey: nasl.core.Boolean;
-  //     metaKey: nasl.core.Boolean;
-  //     movementX: nasl.core.Integer;
-  //     movementY: nasl.core.Integer;
-  //     offsetX: nasl.core.Integer;
-  //     offsetY: nasl.core.Integer;
-  //     pageX: nasl.core.Integer;
-  //     pageY: nasl.core.Integer;
-  //     screenX: nasl.core.Integer;
-  //     screenY: nasl.core.Integer;
-  //     which: nasl.core.Integer;
-  //   }) => any;
+    @Prop({
+      group: '样式属性',
+      title: '尺寸',
+      description: '只对按钮样式生效',
+      docDescription: '只对按钮样式生效',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '默认' }, { title: '按钮' }],
+      },
+    })
+    optionType: 'default' | 'button';
 
-  //   @Event({
-  //     title: '选择前',
-  //     description: '选择此项前触发',
-  //   })
-  //   onBeforeSelect: (event: {
-  //     selected: nasl.core.Boolean;
-  //     item: nasl.core.String;
-  //     oldItem: nasl.core.String;
-  //     value: nasl.core.String;
-  //     oldValue: nasl.core.String;
-  //     items: nasl.collection.List<nasl.core.String>;
-  //     oldItems: nasl.collection.List<nasl.core.String>;
-  //   }) => any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '后缀图标',
+    //   docDescription: '支持添加后缀图标，如搜索图标',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '日历' }],
+    //   },
+    // })
+    // suffixIcon: 'calendar';
+    // @Event({
+    //   title: '点击',
+    //   description: '点击此项时触发，与原生 click 事件不同的是，它只会在非只读和禁用的情况下触发。',
+    // })
+    // onClick: (event: {
+    //   altKey: nasl.core.Boolean;
+    //   button: nasl.core.Integer;
+    //   clientX: nasl.core.Integer;
+    //   clientY: nasl.core.Integer;
+    //   ctrlKey: nasl.core.Boolean;
+    //   metaKey: nasl.core.Boolean;
+    //   movementX: nasl.core.Integer;
+    //   movementY: nasl.core.Integer;
+    //   offsetX: nasl.core.Integer;
+    //   offsetY: nasl.core.Integer;
+    //   pageX: nasl.core.Integer;
+    //   pageY: nasl.core.Integer;
+    //   screenX: nasl.core.Integer;
+    //   screenY: nasl.core.Integer;
+    //   which: nasl.core.Integer;
+    // }) => any;
 
-  //   @Slot({
-  //     title: 'undefined',
-  //     description: '插入文本或 HTML。',
-  //   })
-  //   slotDefault: () => Array<ViewComponent>;
-  // }
+    @Event({
+      title: '选项变化时',
+      description: '选项变化时',
+    })
+    onChange: (event: {
+      selected: nasl.core.Boolean;
+      item: nasl.core.String;
+      oldItem: nasl.core.String;
+      value: nasl.core.String;
+      oldValue: nasl.core.String;
+      items: nasl.collection.List<nasl.core.String>;
+      oldItems: nasl.collection.List<nasl.core.String>;
+    }) => any;
+
+    @Slot({
+      title: 'undefined',
+      description: '插入文本或 HTML。',
+      snippets: [
+        {
+          title: '选项',
+          code: '<Radio><Text children="单选项"></Text></Radio>',
+        },
+      ],
+    })
+    slotDefault: () => Array<ViewComponent>;
+  }
 
   // @Component({
   //   title: '子选项组',

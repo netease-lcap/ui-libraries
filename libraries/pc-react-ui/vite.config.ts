@@ -9,7 +9,8 @@ process.env.TZ = 'Asia/Shanghai';
 
 // https://vitejs.dev/config/
 
-export default defineConfig(({ command }) => {
+export default defineConfig(({ mode, command }) => {
+  console.log(mode, 'command---');
   return {
     publicDir: 'dist-theme',
     plugins: [react()],
@@ -36,7 +37,7 @@ export default defineConfig(({ command }) => {
         formats: ['umd'],
         fileName: () => 'index.js',
       },
-      minify: 'esbuild',
+      minify: mode === 'development' ? 'esbuild' : 'terser',
       terserOptions: {
         compress: {
           drop_console: true,

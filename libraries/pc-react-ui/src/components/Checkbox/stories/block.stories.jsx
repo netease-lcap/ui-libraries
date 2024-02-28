@@ -1,5 +1,6 @@
 import React from 'react';
-import { Checkbox, CheckboxGroup } from '../index';
+import { Text, Checkbox, CheckboxGroup } from '@/index';
+// import { Checkbox, CheckboxGroup } from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -24,20 +25,25 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 多选框 = {
   render: () => {
-    return <Checkbox children="多选框" />;
-  },
-};
-export const 多选组 = {
-  render: () => {
     return (
-      <CheckboxGroup
-        options={[
-          { label: '苹果', value: 'Apple' },
-          { label: '梨', value: 'Pear' },
-          { label: '句子', value: 'Orange' },
-        ]}
-        children="多选框"
-      />
+      <Checkbox>
+        <Text children="多选框" />
+      </Checkbox>
     );
   },
 };
+// export const 多选组 = {
+
+//   render: () => {
+//     return (
+//       <CheckboxGroup
+//         options={[
+//           { label: '苹果', value: 'Apple' },
+//           { label: '梨', value: 'Pear' },
+//           { label: '句子', value: 'Orange' },
+//         ]}
+//         children="多选框"
+//       />
+//     );
+//   },
+// };
