@@ -14,13 +14,13 @@ namespace nasl.ui {
   }
 
   export class TextOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '文本',
-      description: '显示文本内容',
-      docDescription: '显示的文本内容',
-    })
-    children: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '文本',
+    //   description: '显示文本内容',
+    //   docDescription: '显示的文本内容',
+    // })
+    // children: nasl.core.String;
 
     // @Prop({
     //   group: '主要属性',
@@ -56,6 +56,108 @@ namespace nasl.ui {
       },
     })
     ellipsis: nasl.core.Boolean;
+
+    @Prop({
+      group: '主要属性',
+      title: '是否可编辑',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    editable: nasl.core.Boolean;
+
+    @Prop({
+      group: '主要属性',
+      title: '是否可拷贝，为对象时可进行各种自定义',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    copyable: nasl.core.Boolean;
+
+    @Prop({
+      group: '样式属性',
+      title: '尺寸',
+      description: '设置文本大小',
+      docDescription: '文本框尺寸，支持小、正常、大、巨大',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '辅助文本' }, { title: '成功文本' }, { title: '警告文本' }, { title: '危险文本' }],
+      },
+    })
+    type: 'scondary' | 'success' | 'warning' | 'danger';
+
+    @Prop({
+      group: '样式属性',
+      title: '添加代码样式',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    code: nasl.core.Boolean;
+
+    @Prop({
+      group: '样式属性',
+      title: '添加删除线样式',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    delete: nasl.core.Boolean;
+
+    @Prop({
+      group: '样式属性',
+      title: '禁用文本',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      group: '样式属性',
+      title: '添加键盘样式',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    keyboard: nasl.core.Boolean;
+
+    @Prop({
+      group: '样式属性',
+      title: '添加标记样式',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    mark: nasl.core.Boolean;
+
+    @Prop({
+      group: '样式属性',
+      title: '是否加粗',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    strong: nasl.core.Boolean;
+
+    @Prop({
+      group: '样式属性',
+      title: '是否斜体',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    italic: nasl.core.Boolean;
+
+    @Prop({
+      group: '样式属性',
+      title: '添加下划线样式',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    underline: nasl.core.Boolean;
 
     // @Prop({
     //   group: '样式属性',

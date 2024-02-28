@@ -41,19 +41,20 @@ namespace nasl.ui {
     })
     bordered: nasl.core.Boolean = true;
 
-    //     @Prop({
-    //       group: '样式属性',
-    //       title: '阴影',
-    //       description: '阴影显示方式',
-    //       docDescription: `支持配置面板阴影状态，默认为一直显示。- 一直显示：常态显示面板阴影。
-    // - hover时显示：鼠标悬停在面板区域时显示面板阴影。
-    // - 不显示：不显示面板阴影`,
-    //       setter: {
-    //         concept: 'EnumSelectSetter',
-    //         options: [{ title: '一直显示' }, { title: 'hover时显示' }, { title: '不显示' }],
-    //       },
-    //     })
-    //     shadow: 'always' | 'hover' | 'never' = 'always';
+    @Prop({
+      group: '样式属性',
+      title: '阴影',
+      description: '是否显示阴影',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      // setter: {
+      //   concept: 'EnumSelectSetter',
+      //   options: [{ title: '一直显示' }, { title: 'hover时显示' }, { title: '不显示' }],
+      // },
+    })
+    boxShadow: nasl.core.Boolean = true;
+    // shadow: 'always' | 'hover' | 'never' = 'always';
 
     @Slot({
       title: '默认',
@@ -73,11 +74,11 @@ namespace nasl.ui {
     })
     slotTitle: () => Array<ViewComponent>;
 
-    // @Slot({
-    //   title: '额外信息',
-    //   description: '额外信息自定义',
-    // })
-    // slotExtra: () => Array<ViewComponent>;
+    @Slot({
+      title: '额外信息',
+      description: '额外信息自定义',
+    })
+    slotExtra: () => Array<ViewComponent>;
   }
 
   // @Component({

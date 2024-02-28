@@ -126,6 +126,11 @@ namespace nasl.ui {
       values: nasl.collection.List<nasl.core.String>;
     }) => any;
 
+    @Slot({
+      title: 'undefined',
+      description: '插入文本或 HTML。',
+    })
+    slotDefault: () => Array<ViewComponent>;
     // @Slot({
     //   title: 'undefined',
     //   description: '插入`<u-capsule>`或`<u-capsules-group>`子组件。',
