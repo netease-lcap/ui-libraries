@@ -37,7 +37,7 @@ const mockData = {
       opinionsEnable: true, // 意见开关
     },
     {
-      name: 'transfer',
+      name: 'reassign',
       operateEnable: true, // 操作权限开关
       showText: '转交', // 操作按钮文本
       opinionsEnable: true, // 意见开关
@@ -79,7 +79,7 @@ export default createComponent({
       dialog: {
         item: null,
         opinions: '',
-        transfer: '',
+        reassign: '',
       },
     };
   },
@@ -124,7 +124,7 @@ export default createComponent({
       }
 
       try {
-        const res = await this.$processV2.getTransferTargetUserList({
+        const res = await this.$processV2.getUsersForReassign({
           body: {
             taskId,
           },
@@ -155,8 +155,8 @@ export default createComponent({
       }
 
       // 转交人
-      if (item.name === 'transfer') {
-        body.userForReassign = this.dialog.transfer;
+      if (item.name === 'reassign') {
+        body.userForReassign = this.dialog.reassign;
       }
 
       const operate = `${item.name}Task`;
@@ -179,10 +179,11 @@ export default createComponent({
       const { name, opinionsEnable } = item;
 
       // 需要弹出框的情况opinionsEnable和name是transfer
-      if (opinionsEnable || name === 'transfer') {
+      if (opinionsEnable || name === 'reassign') {
         this.dialog = {
           item,
         };
+        this.showPopover = false;
         this.showDialog = true;
       } else {
         await this.submit(item);
@@ -238,14 +239,14 @@ export default createComponent({
     },
 
     onTransferPickerConfirm(value) {
-      this.dialog.transfer = value;
+      this.dialog.reassign = value;
     },
 
     resetDialog() {
       this.dialog = {
         item: null,
         opinions: '',
-        transfer: '',
+        reassign: '',
       };
     },
   },
@@ -322,7 +323,7 @@ export default createComponent({
         >
           <div class={bem('dialog')}>
             <Form ref="form">
-              {['transfer'].includes(this.dialog.item?.name) && (
+              {['reassign'].includes(this.dialog.item?.name) && (
                 <Field
                   border={false}
                   rules={[
@@ -336,7 +337,7 @@ export default createComponent({
                   scopedSlots={{
                     input: () => (
                       <Picker
-                        value={this.dialog.transfer}
+                        value={this.dialog.reassign}
                         valueField="userId"
                         textField="userName"
                         class={bem('dialog-picker')}

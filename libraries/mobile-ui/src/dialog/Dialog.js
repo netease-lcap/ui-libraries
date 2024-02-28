@@ -275,7 +275,7 @@ export default createComponent({
       <Text
         class={bem('header', { isolated: !message && !messageSlot })}
         style={{ display: 'block' }}
-        title={title}
+        text={title}
       />
     );
     const empty = [h('van-empty-col', {}, [])];
