@@ -392,6 +392,14 @@
         }
     },
     {
+        "name": "MenuSubMenu",
+        "ideusage": {
+            "idetype": "container",
+            "childAccept": "target.tag === 'MenuItem'",
+            "parentAccept": "target.tag === 'Menu'"
+        }
+    },
+    {
         "name": "Text",
         "ideusage": {
             "idetype": "element",
