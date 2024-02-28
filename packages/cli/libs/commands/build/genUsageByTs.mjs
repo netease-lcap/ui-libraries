@@ -4,7 +4,8 @@ import path from 'path';
 import { transform } from '../../transforms/naslTs2Json.js';
 import * as logger from '../../utils/logger.mjs';
 import transformStory2Blocks from '../../transforms/story2block.mjs';
-import { getComponentPathInfo } from '../../index.mjs';
+import { getComponentPathInfo } from '../../utils/index.mjs';
+import snippetCode2NASL from '../../transforms/snippetCode2NASL.mjs';
 
 function hasImg(dir) {
   return fs.existsSync(path.join(dir, '0.png'));
@@ -164,6 +165,18 @@ function genUsageByTs(config) {
       // component.tsPath = tsPath;
       const info = transform(fs.readFileSync(tsPath, 'utf8'));
       Object.assign(component, info[0]);
+      if (packageInfo.name === '@lcap/pc-react-ui' && component.slots && component.slots.length > 0) {
+        component.slots.forEach((slotConfig) => {
+          if (!slotConfig.snippets || slotConfig.snippets.length === 0) {
+            return;
+          }
+
+          slotConfig.snippets = slotConfig.snippets.map((snippetConfig) => ({
+            ...snippetConfig,
+            code: snippetCode2NASL(snippetConfig.code),
+          }));
+        });
+      }
     } catch (e) {
       logger.error(`解析 ${tsPath} 失败，${e.message}`);
       process.exit(1);

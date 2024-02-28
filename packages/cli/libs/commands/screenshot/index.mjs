@@ -4,7 +4,7 @@ import puppeteer from 'puppeteer';
 import fs from 'fs-extra';
 import path from 'path';
 import transformStory2Blocks from '../../transforms/story2block.mjs';
-import { getComponentPathInfo } from '../../index.mjs';
+import { getComponentPathInfo } from '../../utils/index.mjs';
 import * as logger from '../../utils/logger.mjs';
 
 // eslint-disable-next-line no-promise-executor-return
