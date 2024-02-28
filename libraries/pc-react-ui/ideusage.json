@@ -2,11 +2,16 @@
     {
         "name": "Select",
         "ideusage": {
-            "idetype": "popover",
+            "idetype": "container",
             "structured": true,
-            "childAccept": "target.tag === 'SelectOption' || target.tag === 'SelectOptGroup'"
-        },
-        "blocks": []
+            "childAccept": "target.tag === 'SelectOption' || target.tag === 'SelectOptGroup'",
+            "actions": {
+                "click": {
+                    "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
+                    "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+                }
+            }
+        }
     },
     {
         "name": "SelectOption",
@@ -65,13 +70,21 @@
     {
         "name": "Checkbox",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "selector": {
+                "expression": "this",
+                "cssSelector": "label.ant-checkbox-wrapper"
+            }
         }
     },
     {
         "name": "Radio",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "selector": {
+                "expression": "this",
+                "cssSelector": "label.ant-radio-wrapper"
+            }
         }
     },
     {
@@ -194,7 +207,13 @@
         "name": "TabPane",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'Tabs'"
+            "parentAccept": "target.tag === 'Tabs'",
+            "actions": {
+                "click": {
+                    "status": "this.getParent().setCacheStatus('defaultActiveKey', !this.getAttribute('activeKey').value)",
+                    "effect": "this.getParent().callComponentMethod('change', this.getAttribute('activeKey'))"
+                }
+            }
         }
     }, 
     {
