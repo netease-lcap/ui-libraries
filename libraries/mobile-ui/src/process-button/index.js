@@ -58,8 +58,8 @@ const mockData = {
   }, {
     userName: '王五',
     userId: '3',
-  }]
-} ;
+  }],
+};
 
 export default createComponent({
   props: {
@@ -135,7 +135,6 @@ export default createComponent({
         console.log(error);
         return [];
       }
-
     },
 
     async submit(item) {
@@ -178,16 +177,31 @@ export default createComponent({
     async onClickItem(item) {
       const { name, opinionsEnable } = item;
 
+      // 表单检验
+      if (['approve', 'reject', 'submit'].includes(name)) {
+        const dynamicRenderContainer = document.getElementById('dynamicRenderContainer');
+        if (dynamicRenderContainer && dynamicRenderContainer.__vue__) {
+          const formRefName = dynamicRenderContainer.getAttribute('ref-name');
+          const formRef = dynamicRenderContainer.__vue__.$refs[formRefName];
+          if (formRef && formRef.validate) {
+            const validateResult = await formRef.validate();
+            if (!validateResult.valid) {
+              return;
+            }
+          }
+        }
+      }
+
       // 需要弹出框的情况opinionsEnable和name是transfer
       if (opinionsEnable || name === 'reassign') {
         this.dialog = {
           item,
         };
-        this.showPopover = false;
         this.showDialog = true;
       } else {
         await this.submit(item);
       }
+      this.showPopover = false;
     },
 
     async confirm() {
