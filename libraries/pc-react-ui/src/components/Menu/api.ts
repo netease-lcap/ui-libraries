@@ -109,8 +109,8 @@ namespace nasl.ui {
           code: '<MenuItem style="line-height:60px"><Text children="导航项目" style="color:inherit" /></MenuItem>',
         },
         {
-          title: '分隔线',
-          code: '<MenuDivider></MenuDivider>',
+          title: '导航组',
+          code: '<MenuItemGroup  style="line-height:60px"><template #title><<Text children="导航组" style="color:inherit" />></template><MenuItem style="line-height:60px"><Text children="导航项目" style="color:inherit" /></MenuItem></MenuItemGroup>',
         },
       ],
     })

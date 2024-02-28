@@ -26,11 +26,20 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 异步函数 = {
   render: (args) => {
+    const ref = React.useRef({});
+      console.log(ref, 'ref');
+    React.useEffect(() => {
+      console.log(ref, 'ref');
+    }, []);
     return (
-      <Select {...args}>
-        {/* <SelectOption key="1" label="1" value="1" />
+      <div>
+        <button onClick={() => ref.current.open()}>1234</button>
+
+        <Select {...args} ref={ref}>
+          {/* <SelectOption key="1" label="1" value="1" />
         <SelectOption key="2" label="2" value="2" disabled /> */}
-      </Select>
+        </Select>
+      </div>
     );
   },
   args: {

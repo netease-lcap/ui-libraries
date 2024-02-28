@@ -21,27 +21,15 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 单行排布 = {
   render: () => {
-    return (
-      <Flex style={{ width: '1000px', height: 54 }}>
-        <Text style={{ width: '1000px', height: 54, backgroundColor: '#1677ffbf' }} />
-      </Flex>
-    );
+    return <Flex />;
   },
 };
-
 export const 多行排布 = {
   render: () => {
     return (
-      <Flex vertical style={{ width: '1000px' }}>
-        <Text style={{ width: '100%', height: 54, backgroundColor: '#1677ffbf' }} />
-        <Text
-          style={{
-            width: '100%',
-            height: 54,
-            backgroundColor: '#1677ff',
-            marginTop: 3,
-          }}
-        />
+      <Flex vertical gap="small">
+        <Flex />
+        <Flex />
       </Flex>
     );
   },

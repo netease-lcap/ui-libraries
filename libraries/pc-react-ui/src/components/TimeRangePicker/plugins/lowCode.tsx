@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import { useControllableValue } from 'ahooks';
 import { $deletePropsList } from '@/plugins/constants';
 
 function useHandleNodePath(props) {
@@ -15,5 +16,32 @@ function useHandleNodePath(props) {
   return {
     'data-node-id': id,
     [$deletePropsList]: deletePropsList,
+  };
+}
+
+export function useHandleOpenRef(props) {
+  const openProps = props.get('open');
+  const defaultOpen = props.get('defaultOpen');
+  const onOpenChangeProps = props.get('onOpenChange');
+  const ref = props.get('ref');
+  const deletePropsList = props.get($deletePropsList, []).concat(['ref', 'defaultOpen']);
+  const modalRef = React.useRef();
+  const [open, setOpen] = useControllableValue(_.filterUnderfinedValue({
+    value: openProps,
+    defaultValue: defaultOpen,
+    onChange: onOpenChangeProps,
+  }));
+  React.useImperativeHandle(ref, () => ({
+    open: () => setOpen(true),
+    close: () => setOpen(false),
+    visible: !!open,
+  }), [modalRef]);
+  return {
+    [$deletePropsList]: deletePropsList,
+    open,
+    onOpenChange: _.wrap(onOpenChangeProps, (...args) => {
+      setOpen(false);
+      _.attempt(onOpenChangeProps, ...args);
+    }),
   };
 }
