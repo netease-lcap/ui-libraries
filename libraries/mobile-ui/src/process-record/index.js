@@ -23,7 +23,7 @@ export default createComponent({
       records: [],
       total: 0,
       page: 1,
-      size: 5,
+      size: this.inDesigner() ? 3 : 5,
       finished: false,
     };
   },
@@ -46,7 +46,7 @@ export default createComponent({
     getTaskId() {
       let id = null;
 
-      location.search
+      window.location.search
         .replace('?', '')
         .split('&')
         .forEach((item) => {
@@ -186,7 +186,9 @@ export default createComponent({
                     </div>
                     <div class={bem('card-line')}>
                       <div class={bem('card-label')}>{t('status')}</div>
-                      <div class={bem('card-content')}>{nodeOperationText || '-'}</div>
+                      <div class={bem('card-content')}>
+                        <span class={nodeOperation}>{nodeOperationText || '-'}</span>
+                      </div>
                     </div>
                     <div class={bem('card-line')}>
                       <div class={bem('card-label')}>{t('comment')}</div>
