@@ -23,9 +23,9 @@ export function useHandleOpenRef(props) {
   return {
     [$deletePropsList]: deletePropsList,
     open,
-    onDropdownVisibleChange: _.wrap(onDropdownVisibleChangeProps, (...args) => {
-      setOpen(false);
-      _.attempt(onDropdownVisibleChangeProps, ...args);
+    onDropdownVisibleChange: _.wrap(onDropdownVisibleChangeProps, (visible) => {
+      setOpen(visible);
+      _.attempt(onDropdownVisibleChangeProps, visible);
     }),
   };
 }

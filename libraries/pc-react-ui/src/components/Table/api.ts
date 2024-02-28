@@ -1096,11 +1096,11 @@ namespace nasl.ui {
     // })
     // slotEditcell: (current: Current<T>) => Array<ViewComponent>;
 
-    // @Slot({
-    //   title: '标题',
-    //   description: '对标题进行自定义',
-    // })
-    // slotTitle: (current: Current<T>) => Array<ViewComponent>;
+    @Slot({
+      title: '标题',
+      description: '对标题进行自定义',
+    })
+    slotTitle: (current: Current<T>) => Array<ViewComponent>;
 
     // @Slot({
     //   title: '展开列内容',

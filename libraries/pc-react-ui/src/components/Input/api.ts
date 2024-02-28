@@ -22,11 +22,11 @@ namespace nasl.ui {
 			})
 			blur(): void {}
 
-			@Method({
-					title: 'undefined',
-					description: '清空输入框。',
-			})
-			clear(): void {}
+			// @Method({
+			// 		title: 'undefined',
+			// 		description: '清空输入框。',
+			// })
+			// clear(): void {}
 			constructor(options?: Partial<InputOptions>) { super(); }
 	}
 
@@ -95,17 +95,29 @@ namespace nasl.ui {
 			})
 			maxlength: nasl.core.Integer;
 
+
 			@Prop({
 					group: '主要属性',
-					title: '自动获取焦点',
-					description: '设置是否自动获取焦点',
-					docDescription: '是否自动获取输入框焦点。',
+					title: '是否展示字数',
+					description: '是否展示字数',
 					designerValue: false,
 					setter: {
 							concept: 'SwitchSetter',
 					},
 			})
-			autofocus: nasl.core.Boolean = false;
+			showCount: nasl.core.Boolean = false;
+
+			// @Prop({
+			// 		group: '主要属性',
+			// 		title: '自动获取焦点',
+			// 		description: '设置是否自动获取焦点',
+			// 		docDescription: '是否自动获取输入框焦点。',
+			// 		designerValue: false,
+			// 		setter: {
+			// 				concept: 'SwitchSetter',
+			// 		},
+			// })
+			// autofocus: nasl.core.Boolean = false;
 
 			@Prop({
 					group: '主要属性',
@@ -136,18 +148,18 @@ namespace nasl.ui {
 							concept: 'SwitchSetter',
 					},
 			})
-			clearable: nasl.core.Boolean;
+			allowClear: nasl.core.Boolean;
 
-			@Prop({
-					group: '状态属性',
-					title: '显示状态',
-					description: '显示状态分为“True(显示)/False(隐藏)”，默认为“隐藏”',
-					docDescription: '切换密码的显示/隐藏。',
-					setter: {
-							concept: 'SwitchSetter',
-					},
-			})
-			password: nasl.core.Boolean = false;
+			// @Prop({
+			// 		group: '状态属性',
+			// 		title: '显示状态',
+			// 		description: '显示状态分为“True(显示)/False(隐藏)”，默认为“隐藏”',
+			// 		docDescription: '切换密码的显示/隐藏。',
+			// 		setter: {
+			// 				concept: 'SwitchSetter',
+			// 		},
+			// })
+			// password: nasl.core.Boolean = false;
 
 			// @Prop({
 			// 		group: '状态属性',
@@ -160,16 +172,16 @@ namespace nasl.ui {
 			// })
 			// readonly: nasl.core.Boolean = false;
 
-			@Prop({
-					group: '状态属性',
-					title: '预览',
-					description: '显示预览态',
-					docDescription: '',
-					setter: {
-							concept: 'SwitchSetter',
-					},
-			})
-			preview: nasl.core.Boolean = false;
+			// @Prop({
+			// 		group: '状态属性',
+			// 		title: '预览',
+			// 		description: '显示预览态',
+			// 		docDescription: '',
+			// 		setter: {
+			// 				concept: 'SwitchSetter',
+			// 		},
+			// })
+			// preview: nasl.core.Boolean = false;
 
 			@Prop({
 					group: '状态属性',

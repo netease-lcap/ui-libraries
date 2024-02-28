@@ -1,11 +1,7 @@
 import React from 'react';
 import { theme, Layout } from 'antd';
-import {
-  Menu, MenuItem, MenuSubMenu, MenuItemGroup,
-} from '../index';
-import {
-  Text, Image, Dropdown, Button, Flex,
-} from '@/index';
+import { Menu, MenuItem, MenuSubMenu, MenuItemGroup } from '../index';
+import { Text, Image, Dropdown, Button, Flex } from '@/index';
 
 const { Header } = Layout;
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -39,7 +35,7 @@ export const 基本用法 = {
     );
   },
 };
- const 模版 = {
+const 模版 = {
   render: () => {
     return (
       <Layout>

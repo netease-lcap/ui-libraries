@@ -36,7 +36,7 @@ export default defineConfig(({ command }) => {
         formats: ['umd'],
         fileName: () => 'index.js',
       },
-      minify: 'terser',
+      minify: 'esbuild',
       terserOptions: {
         compress: {
           drop_console: true,

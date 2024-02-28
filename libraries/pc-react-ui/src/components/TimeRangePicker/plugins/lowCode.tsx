@@ -39,9 +39,9 @@ export function useHandleOpenRef(props) {
   return {
     [$deletePropsList]: deletePropsList,
     open,
-    onOpenChange: _.wrap(onOpenChangeProps, (...args) => {
-      setOpen(false);
-      _.attempt(onOpenChangeProps, ...args);
+    onOpenChange: _.wrap(onOpenChangeProps, (visible) => {
+      setOpen(visible);
+      _.attempt(onOpenChangeProps, visible);
     }),
   };
 }

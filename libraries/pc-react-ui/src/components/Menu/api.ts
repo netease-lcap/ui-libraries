@@ -110,7 +110,14 @@ namespace nasl.ui {
         },
         {
           title: '导航组',
-          code: '<MenuItemGroup  style="line-height:60px"><template #title><<Text children="导航组" style="color:inherit" />></template><MenuItem style="line-height:60px"><Text children="导航项目" style="color:inherit" /></MenuItem></MenuItemGroup>',
+          code: `<MenuSubMenu style="line-height:60px">
+                    <template #title>
+                      <Text children="导航组" style="color:inherit" />
+                    </template>
+                    <MenuItem style="line-height:60px">
+                    <Text children="导航项目" style="color:inherit" />
+                    </MenuItem>
+                  </MenuSubMenu>`,
         },
       ],
     })
@@ -417,6 +424,12 @@ namespace nasl.ui {
       },
     })
     icon: nasl.core.String = '';
+
+    @Slot({
+      title: '导航组自定义',
+      description: '导航组自定义',
+    })
+    slotTitle: () => Array<ViewComponent>;
 
     @Slot({
       title: '默认',

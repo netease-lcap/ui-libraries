@@ -8,17 +8,17 @@ namespace nasl.ui {
     group: 'Layout',
   })
   export class Flex extends ViewComponent {
-    @Method({
-      title: '打开加载中',
-      description: '打开加载中',
-    })
-    openLoading(): void {}
+    // @Method({
+    //   title: '打开加载中',
+    //   description: '打开加载中',
+    // })
+    // openLoading(): void {}
 
-    @Method({
-      title: '关闭加载中',
-      description: '关闭加载中',
-    })
-    closeLoading(): void {}
+    // @Method({
+    //   title: '关闭加载中',
+    //   description: '关闭加载中',
+    // })
+    // closeLoading(): void {}
     constructor(options?: Partial<FlexOptions>) {
       super();
     }
@@ -92,9 +92,8 @@ namespace nasl.ui {
 
     @Prop<FlexOptions, 'justify'>({
       group: '主要属性',
-      title: '横轴对齐',
-      docDescription: `主轴方向为横向时：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布，其中平均分布仅在弹性布局模式下展示。
-主轴方向为纵向时：支持左对齐、居中对齐、右对齐、占满容器宽度，其中占满容器宽度仅在弹性布局模式下展示。`,
+      title: '主轴对齐',
+      docDescription: `设置元素在主轴方向上的对齐方式	：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布，。 `,
       bindHide: true,
       setter: {
         concept: 'CapsulesSetter',
@@ -120,9 +119,8 @@ namespace nasl.ui {
 
     @Prop<FlexOptions, 'align'>({
       group: '主要属性',
-      title: '纵轴对齐',
-      docDescription: `主轴方向为横向时：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。
-主轴方向为纵向时：支持顶对齐、垂直居中、底对齐、平均分布（两端不留空）、平均分布。`,
+      title: '交叉轴对齐',
+      docDescription: `设置元素在交叉轴方向上的对齐方式：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。`,
       bindHide: true,
       setter: {
         concept: 'CapsulesSetter',
@@ -151,35 +149,35 @@ namespace nasl.ui {
     })
     wrap: 'wrap' | 'nowrap' = 'wrap';
 
-    @Prop({
-      group: '状态属性',
-      title: '加载中图标',
-      description: '加载中状态显示的图标',
-      docDescription: '支持从图标库选择图标或上传自定义图标。',
-      setter: {
-        concept: 'IconSetter',
-      },
-    })
-    loadingIcon: nasl.core.String = 'loading';
+    // @Prop({
+    //   group: '状态属性',
+    //   title: '加载中图标',
+    //   description: '加载中状态显示的图标',
+    //   docDescription: '支持从图标库选择图标或上传自定义图标。',
+    //   setter: {
+    //     concept: 'IconSetter',
+    //   },
+    // })
+    // loadingIcon: nasl.core.String = 'loading';
 
-    @Prop({
-      group: '状态属性',
-      title: '加载中图标旋转',
-      description: '设置加载中图标是否旋转，默认开启。',
-      docDescription: '支持控制加载中图标是否旋转，默认开启。',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    loadingIconRotate: nasl.core.Boolean = true;
+    // @Prop({
+    //   group: '状态属性',
+    //   title: '加载中图标旋转',
+    //   description: '设置加载中图标是否旋转，默认开启。',
+    //   docDescription: '支持控制加载中图标是否旋转，默认开启。',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // loadingIconRotate: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '状态属性',
-      title: '加载中文案',
-      description: '加载中状态显示的提示文案',
-      docDescription: '支持编辑组件加载中情况显示文案。',
-    })
-    loadingText: nasl.core.String = '';
+    // @Prop({
+    //   group: '状态属性',
+    //   title: '加载中文案',
+    //   description: '加载中状态显示的提示文案',
+    //   docDescription: '支持编辑组件加载中情况显示文案。',
+    // })
+    // loadingText: nasl.core.String = '';
 
     @Prop<FlexOptions, 'gap'>({
       group: '样式属性',

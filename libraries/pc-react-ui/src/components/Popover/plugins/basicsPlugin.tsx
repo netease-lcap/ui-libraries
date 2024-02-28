@@ -15,9 +15,9 @@ export function useHandleOpenRef(props) {
   }), [modalRef]);
   return {
     open,
-    onOpenChange: _.wrap(onOpenChange, (...args) => {
-      setOpen(args[1]);
-      _.attempt(onOpenChange, ...args);
+    onOpenChange: _.wrap(onOpenChange, (fn, visible) => {
+      setOpen(visible);
+      _.attempt(onOpenChange, visible);
     }),
     // ref: modalRef,
   };

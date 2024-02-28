@@ -10,9 +10,15 @@ import React from 'react';
 import _ from 'lodash';
 import fp from 'lodash/fp';
 import { useWhyDidYouUpdate } from 'ahooks';
+import { ErrorBoundary } from 'react-error-boundary';
 import type { pluginType } from '@/plugins/type';
 import { $deletePropsList } from '@/plugins/constants';
 import '@/utils/index';
+
+// try {
+// console.log(ErrorBoundary, 'withErrorBoundary');
+// } catch (error) {
+// }
 
 export class Plugin {
   plugin: any[] = [];
@@ -96,6 +102,12 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
 
   // return <BaseComponent {...props} ref={ref} />;
   // console.log(mutableProps.getObj(), 'mutableProps');
+  // const ComponentWithErrorBoundary = withErrorBoundary(Component, {
+  //   fallback: <div>Something went wrong</div>,
+  //   onError(error, info) {
+  //     console.log(error, info, '组件出错啦----');
+  //   },
+  // });
   return (
     <Component
       {...excludeProps}
@@ -104,7 +116,13 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   );
 });
 // extends pluginType<T>
-export function registerComponet<T, U >(
+// const ComponentWithErrorBoundary = withErrorBoundary(HocBaseComponents, {
+//   fallback: <div>Something went wrong</div>,
+//   onError(error, info) {
+//     console.log(error, info, '组件出错啦----');
+//   },
+// });
+export function registerComponet<T, U>(
   Component: React.ElementType,
   pluginOption,
 ) {
