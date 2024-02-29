@@ -208,10 +208,14 @@
         "ideusage": {
             "idetype": "container",
             "parentAccept": "target.tag === 'Tabs'",
+            "selector": {
+                "expression": "this.getElement(el => el.slotTarget === 'tab')",
+                "cssSelector": ".ant-tabs-tab"
+            },
             "actions": {
                 "click": {
-                    "status": "this.getParent().setCacheStatus('defaultActiveKey', !this.getAttribute('activeKey').value)",
-                    "effect": "this.getParent().callComponentMethod('change', this.getAttribute('activeKey'))"
+                    "status": "this.getParent().setCacheStatus('defaultActiveKey', this.getParent().getAttribute('defaultActiveKey').value) || this.getAttribute('key').value)",
+                    "effect": "this.getParent().callComponentMethod('setValue', this.getAttribute('key'))"
                 }
             }
         }
@@ -359,7 +363,14 @@
     {
         "name": "Dropdown",
         "ideusage": {
-            "idetype": "popover"
+            "idetype": "container",
+            "structured": true,
+            "actions": {
+                "click": {
+                    "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
+                    "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+                }
+            }
         }
     },
     {
