@@ -23,27 +23,31 @@ export default {
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const 多选框 = {
-  render: () => {
-    return (
-      <Checkbox>
-        <Text children="多选框" />
-      </Checkbox>
-    );
-  },
-};
-// export const 多选组 = {
-
+// export const 多选框 = {
 //   render: () => {
 //     return (
-//       <CheckboxGroup
-//         options={[
-//           { label: '苹果', value: 'Apple' },
-//           { label: '梨', value: 'Pear' },
-//           { label: '句子', value: 'Orange' },
-//         ]}
-//         children="多选框"
-//       />
+//       <Checkbox>
+//         <Text children="多选框" />
+//       </Checkbox>
 //     );
 //   },
 // };
+export const 动态数据源 = {
+  render: () => {
+    return <CheckboxGroup />;
+  },
+};
+export const 静态数据 = {
+  render: () => {
+    return (
+      <CheckboxGroup>
+        <Checkbox value="C">
+          <Text children="多选框" />
+        </Checkbox>
+        <Checkbox value="A">
+          <Text children="多选框1" />
+        </Checkbox>
+      </CheckboxGroup>
+    );
+  },
+};

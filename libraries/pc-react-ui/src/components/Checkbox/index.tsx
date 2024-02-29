@@ -10,7 +10,7 @@ import './index.module.less';
 // type TransferProps = AntdTransferProps
 
 const mapProps = {
-  mySize: 'size',
+  // mySize: 'size',
 };
 
 export const Checkbox = registerComponet<
@@ -26,5 +26,5 @@ export const CheckboxGroup = registerComponet<
   pluginType<CheckboxProps>
 >(
   AntdCheckbox.Group,
-  { groupPlugin, displayName: AntdCheckbox.Group.displayName, mapProps },
+  { plugin: groupPlugin, displayName: AntdCheckbox.Group.displayName, mapProps },
 );

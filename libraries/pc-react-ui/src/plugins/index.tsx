@@ -71,15 +71,15 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   const { BaseComponent, props, plugin } = myProps;
   const pluginHooks = plugin.getPluginMethod();
   const mapProps = plugin.getMapProps();
-  function handleMutableProps() {
-    const obj = Object.create(null);
+  function handleMutableProps(ref) {
+    const obj = { ref };
     return {
       setState: (state) => _.assign(obj, state),
       getState: (state) => obj[state],
       getObj: () => obj,
     };
   }
-  const mutableProps = handleMutableProps();
+  const mutableProps = React.useMemo(() => handleMutableProps(ref), [ref]);
   const ImmutableProps = Map(props)
     .reduce((result, value, key) => result.set(mapProps.get(key, key), value), Map())
     .set('render', BaseComponent)
@@ -108,6 +108,8 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   //     console.log(error, info, '组件出错啦----');
   //   },
   // });
+  // console.log(mutableProps.getObj(), 'obj');
+  console.log(excludeProps, 'excludeProps');
   return (
     <Component
       {...excludeProps}

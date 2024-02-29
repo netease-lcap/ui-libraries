@@ -8,8 +8,8 @@ function useHandleNodePath(props) {
 }
 
 export function useHandleRef(props) {
-  const ref = props.get('ref');
   const mutableProps = props.get('mutableProps');
+  const ref = mutableProps.getState('ref');
   const deletePropsList = props.get($deletePropsList, []).concat(['ref', 'data-nodepath']);
   const nodePath = props.get('data-nodepath');
   const actionRef = React.useRef<any>({});
@@ -23,18 +23,18 @@ export function useHandleRef(props) {
   return { [$deletePropsList]: deletePropsList };
 }
 
-export function useHandleColumnsNodePath(props) {
-  const children = props.get('children');
-  const columns = props.get('column');
-  const mutableProps = props.get('mutableProps');
-  const mutableRef = mutableProps.getObj();
-  React.useEffect(() => {
-    if (_.isNil(mutableRef.ref)) return;
-    const { ref } = mutableRef;
-    const tableColumns = _.isNil(columns) ? _.map(children, (item) => item.props) : columns;
-    const tableCell = ref.current?.nativeElement?.querySelectorAll('.ant-table-cell');
-    _.forEach(tableColumns, (columnsProps, index) => {
-      tableCell[index]?.setAttribute('data-nodepath', columnsProps['data-nodepath']);
-    });
-  }, [children, columns, mutableRef]);
-}
+// export function useHandleColumnsNodePath(props) {
+//   const children = props.get('children');
+//   const columns = props.get('column');
+//   const mutableProps = props.get('mutableProps');
+//   const mutableRef = mutableProps.getObj();
+//   React.useEffect(() => {
+//     if (_.isNil(mutableRef.ref)) return;
+//     const { ref } = mutableRef;
+//     const tableColumns = _.isNil(columns) ? _.map(children, (item) => item.props) : columns;
+//     const tableCell = ref.current?.nativeElement?.querySelectorAll('.ant-table-cell');
+//     _.forEach(tableColumns, (columnsProps, index) => {
+//       tableCell[index]?.setAttribute('data-nodepath', columnsProps['data-nodepath']);
+//     });
+//   }, [children, columns, mutableRef]);
+// }

@@ -54,7 +54,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    private textField: (item: T) => any;
+    textField: (item: T) => any;
 
     @Prop<checkboxGroupOptions<T, V, C>, 'valueField'>({
       group: '数据属性',
@@ -258,6 +258,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
+      title: '值',
+      description: '此项的值',
+      docDescription: '此项的值',
+    })
+    value: nasl.core.Any;
+
+    @Prop({
+      group: '数据属性',
       title: '指定当前是否选中	',
       description: '标志选中状态的值',
       sync: true,
@@ -305,24 +313,6 @@ namespace nasl.ui {
       },
     })
     disabled: nasl.core.Boolean = false;
-
-    // @Event({
-    //   title: '选中前',
-    //   description: '切换选中状态前触发',
-    // })
-    // onBeforeCheck: (event: { value: nasl.core.Boolean; oldValue: nasl.core.Boolean }) => any;
-
-    // @Event({
-    //   title: '输入时',
-    //   description: '切换选中状态时触发',
-    // })
-    // onInput: (event: V) => any;
-
-    // @Event({
-    //   title: '选中后',
-    //   description: '切换选中状态时触发',
-    // })
-    // onCheck: (event: { value: V }) => any;
 
     @Event({
       title: '改变后',
