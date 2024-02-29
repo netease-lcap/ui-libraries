@@ -8,7 +8,11 @@ namespace nasl.ui {
         group: 'Process'
     })
     export class UProcessGraph extends ViewComponent {
-
+        @Method({
+            title: 'undefined',
+            description: '清除缓存，重新加载',
+        })
+        reload(): void {}
         constructor(options?: Partial<UProcessGraphOptions>) { super(); }
     }
 
@@ -25,6 +29,5 @@ namespace nasl.ui {
             description: '',
         })
         initialZoom: nasl.core.String;
-
     }
 }

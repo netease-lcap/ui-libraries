@@ -38,7 +38,6 @@
     "@joskii/jflow-core": "^0.1.22",
     "@joskii/jflow-vue2-plugin": "^0.1.0",
     "@popperjs/core": "^2.10.2",
-    "axios": "^1.5.1",
     "@vusion/utils": "0.4.11",
     "@vusion/validator": "0.4.12",
     "animate.css": "^4.1.1",

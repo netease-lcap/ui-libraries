@@ -15,7 +15,6 @@
 
 <script>
 import Graph from './graph.vue';
-import axios from 'axios';
 import leftBottomImg from './assets/leftbottom.png';
 import middleImg from './assets/middle.png';
 import rightTopImg from './assets/righttop.png';
@@ -30,7 +29,7 @@ export default {
     props:{
       taskId:{
         type: String,
-        default: "63755d0d-d6b3-11ee-86b2-2e236991a5ca"
+        default: ""
       },
       initialZoom: {
         type: String,
@@ -48,7 +47,7 @@ export default {
         }
     },
     watch: {
-      processId(){
+        taskId(){
         this.loadProcess();
       }
     },
@@ -59,11 +58,14 @@ export default {
       async loadProcess() {
         this.loading = true;
         this.noData = false;
-        debugger
+        console.log('loadProcess:', this.taskId)
         try{
-            const result = await axios.post('/api/processV2/getProcInstGraph?taskId=' + this.taskId);
-            const data = result.data;
-            console.log(data)
+            const result = await this.$processV2.getProcInstGraph({
+                body: {
+                    taskId: this.taskId
+                },
+            });
+            const data = result?.data;
             if(data && data.procInstId) {
                 this.ast = data;
             } else {
