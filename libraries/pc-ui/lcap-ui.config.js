@@ -98,5 +98,6 @@ module.exports = {
     { group: 'Process', name: 'u-process-info', alias: '流程信息' },
     { group: 'Process', name: 'u-process-record', alias: '流程记录' },
     { group: 'Process', name: 'u-process-myprocess', alias: '我的流程' },
+    { group: 'Process', name: 'u-process-graph', alias: '流程图' },
   ],
 };

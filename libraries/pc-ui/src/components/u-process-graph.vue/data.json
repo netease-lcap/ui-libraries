@@ -1,0 +1,123 @@
+{
+    "message": "200",
+    "code": null,
+    "data": {
+        "procInstId": "4f5d7749-d6c9-11ee-86b2-2e236991a5ca",
+        "elements": [
+            {
+                "current": false,
+                "completed": true,
+                "name": "Start",
+                "title": "开始",
+                "type": "InitiateTask",
+                "incomingFlows": [
+                    "Process_1c4db695_Start_to_InitiateTask"
+                ],
+                "outcomingFlows": [
+                    "SequenceFlow"
+                ],
+                "completeInfos": [
+                    {
+                        "assignee": "DEVACC-xbtest",
+                        "completeTime": "2024-02-29 14:11:34",
+                        "completed": true,
+                        "candidates": [
+                            "DEVACC-xbtest"
+                        ]
+                    }
+                ],
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            },
+            {
+                "current": true,
+                "completed": false,
+                "name": "ApprovalTask",
+                "title": "审批任务任务箱内容",
+                "type": "ApprovalTask",
+                "incomingFlows": [
+                    "SequenceFlow"
+                ],
+                "outcomingFlows": [
+                    "SequenceFlow1"
+                ],
+                "completeInfos": [
+                    {
+                        "assignee": "DEVACC-xbtest",
+                        "completeTime": "",
+                        "completed": false,
+                        "candidates": [
+                            "DEVACC-xbtest"
+                        ]
+                    }
+                ],
+                "x": 0.0,
+                "y": 150.0,
+                "width": 0.0,
+                "height": 0.0
+            },
+            {
+                "current": false,
+                "completed": false,
+                "name": "End",
+                "title": null,
+                "type": "EndEvent",
+                "incomingFlows": [
+                    "SequenceFlow1"
+                ],
+                "outcomingFlows": [],
+                "completeInfos": null,
+                "x": 0.0,
+                "y": 500.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        ],
+        "flows": [
+            {
+                "current": false,
+                "completed": true,
+                "name": null,
+                "title": "SequenceFlow",
+                "type": "sequenceFlow",
+                "sourceRef": "Start",
+                "targetRef": "ApprovalTask",
+                "wayPoints": [
+                    {
+                        "x": 0.0,
+                        "y": 1.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": -1.0
+                    }
+                ]
+            },
+            {
+                "current": false,
+                "completed": false,
+                "name": null,
+                "title": "SequenceFlow1",
+                "type": "sequenceFlow",
+                "sourceRef": "ApprovalTask",
+                "targetRef": "End",
+                "wayPoints": [
+                    {
+                        "x": 0.0,
+                        "y": 1.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": -1.0
+                    }
+                ]
+            }
+        ],
+        "diagramBeginX": 0.0,
+        "diagramBeginY": -1.0,
+        "diagramWidth": 0.0,
+        "diagramHeight": 500.0
+    }
+}
