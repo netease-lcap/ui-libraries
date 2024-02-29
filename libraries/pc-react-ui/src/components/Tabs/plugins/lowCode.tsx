@@ -22,24 +22,19 @@ export function useHandleOpenRef(props) {
   const activeKey = props.get('activeKey');
   const defaultActiveKey = props.get('defaultActiveKey');
   const onChangeProps = props.get('onChange');
-  // const ref = props.get('ref');
-  const mutableProps = props.get('mutableProps');
-  const ref = mutableProps.getState('ref');
-  console.log(ref, 'tabref');
-  const deletePropsList = props.get($deletePropsList, []).concat(['ref']);
-  const modalRef = React.useRef({});
+  const ref = props.get('ref');
   const [value, setValue] = useControllableValue(_.filterUnderfinedValue({
     value: activeKey,
     defaultValue: defaultActiveKey,
     onChange: onChangeProps,
   }));
-  React.useImperativeHandle(ref, () => ({
+  const selfRef = React.useMemo(() => ({
     setValue,
-    ...modalRef.current,
-  }), [modalRef]);
-  mutableProps.setState({ ref: modalRef });
+    value,
+    ...ref,
+  }), [ref, setValue, value]);
   return {
-    [$deletePropsList]: deletePropsList,
+    ref: selfRef,
     value,
   };
 }

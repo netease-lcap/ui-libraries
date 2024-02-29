@@ -1,5 +1,5 @@
 import React from 'react';
-import { Radio } from '../index';
+import { Radio, RadioGroup } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -27,5 +27,15 @@ export const 默认 = {
   args: {
     color: 'magenta',
     children: 'Tag',
+  },
+};
+export const 数据源 = {
+  render: (args) => <RadioGroup {...args} />,
+  args: {
+    dataSource: [
+      { label: 'Apple', value: 'Apple' },
+      { label: 'Pear', value: 'Pear' },
+      { label: 'Orange', value: 'Orange', title: 'Orange' },
+    ],
   },
 };

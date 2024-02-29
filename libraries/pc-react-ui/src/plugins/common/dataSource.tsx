@@ -13,9 +13,7 @@ export function useHandleTransformOption(props) {
   const dataSourceField = props.get($dataSourceField, 'options');
   const deletePropsList = props.get($deletePropsList, []).concat([$dataSourceField], 'reload');
   const dataSource = props.get('dataSource');
-  const mutableProps = props.get('mutableProps');
-  const ref = mutableProps.getState('ref');
-  const myRef = React.useRef({});
+  const ref = props.get('ref');
   const requestDataSource = React.useMemo(() => {
     const wrapDataSource = _.cond([
       [_.isArray, _.constant(() => Promise.resolve(dataSource))],
@@ -33,16 +31,18 @@ export function useHandleTransformOption(props) {
     ]);
     return conformsArray(data);
   }, [data]);
-  React.useImperativeHandle(ref, () => ({
+  const selfRef = React.useMemo(() => ({
+    ...ref,
     reload: run,
-    ...myRef.current,
-  }), [myRef, run]);
-  mutableProps.setState({ ref: myRef });
+    data,
+  }), [data, run, ref]);
+
   return _.isNil(dataSource) ? {
     [$deletePropsList]: deletePropsList,
   } : {
     [dataSourceField]: resultData,
     reload: run,
+    ref: selfRef,
     [$deletePropsList]: deletePropsList,
     loading,
   };

@@ -3,24 +3,15 @@ import { TableProps } from 'antd';
 import _ from 'lodash';
 import { $deletePropsList } from '@/plugins/constants';
 
-function useHandleNodePath(props) {
-  console.log(props.toJS());
-}
-
 export function useHandleRef(props) {
-  const mutableProps = props.get('mutableProps');
-  const ref = mutableProps.getState('ref');
-  const deletePropsList = props.get($deletePropsList, []).concat(['ref', 'data-nodepath']);
+  const nodeId = _.uniqueId('table_');
+  const deletePropsList = props.get($deletePropsList, []).concat(['data-nodepath']);
   const nodePath = props.get('data-nodepath');
-  const actionRef = React.useRef<any>({});
-  React.useImperativeHandle(ref, () => ({
-    ...actionRef.current,
-  }), [actionRef]);
   React.useEffect(() => {
-    actionRef.current!.nativeElement.setAttribute('data-nodepath', nodePath);
+    const myTable = document.querySelector(`[data-node-id=${nodeId}]`);
+    myTable?.setAttribute('data-nodepath', nodePath);
   }, []);
-  mutableProps.setState({ ref: actionRef });
-  return { [$deletePropsList]: deletePropsList };
+  return { [$deletePropsList]: deletePropsList, 'data-node-id': nodeId };
 }
 
 // export function useHandleColumnsNodePath(props) {

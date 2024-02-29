@@ -13,15 +13,13 @@ namespace nasl.ui {
     })
     data: CascaderOptions<T, V>['dataSource'];
 
-    @Prop({
-      title: '选中值',
-    })
-    value: CascaderOptions<T, V>['value'];
+    // @Prop({
+    //   title: '选中值',
+    // })
+    // value: CascaderOptions<T, V>['value'];
 
-    @Prop({
-      title: '过滤文本',
-    })
-    filterText: nasl.core.String;
+    // })
+    // filterText: nasl.core.String;
 
     @Method({
       title: 'undefined',
@@ -35,11 +33,11 @@ namespace nasl.ui {
     })
     close(): void {}
 
-    @Method({
-      title: 'undefined',
-      description: '清空输入框。',
-    })
-    clear(): void {}
+    // @Method({
+    //   title: 'undefined',
+    //   description: '清空输入框。',
+    // })
+    // clear(): void {}
 
     @Method({
       title: 'undefined',

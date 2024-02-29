@@ -39,11 +39,11 @@ namespace nasl.ui {
     // })
     // filterText: nasl.core.String;
 
-    // @Method({
-    //   title: 'undefined',
-    //   description: '清除缓存，重新加载',
-    // })
-    // reload(): void {}
+    @Method({
+      title: 'undefined',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void {}
     constructor(options?: Partial<ListOptions<T, V, P, M, C>>) {
       super();
     }
@@ -359,14 +359,14 @@ namespace nasl.ui {
     // })
     // error: nasl.core.Boolean;
 
-    @Prop<ListOptions<T, V, P, M, C>, 'emptyText'>({
-      group: '状态属性',
-      title: '暂无数据文案',
-      description: '暂无数据状态显示的提示文案',
-      docDescription: '当列表为空时的提示文字。默认"暂无数据"',
-      // if: (_) => _.designerMode === 'empty',
-    })
-    emptyText: nasl.core.String = '暂无数据';
+    // @Prop<ListOptions<T, V, P, M, C>, 'emptyText'>({
+    //   group: '状态属性',
+    //   title: '暂无数据文案',
+    //   description: '暂无数据状态显示的提示文案',
+    // docDescription: '当列表为空时的提示文字。默认"暂无数据"',
+    // if: (_) => _.designerMode === 'empty',
+    // })
+    // emptyText: nasl.core.String = '暂无数据';
 
     // @Prop({
     //   group: '状态属性',
@@ -468,8 +468,14 @@ namespace nasl.ui {
     // slotDefault: () => Array<ViewComponent>;
 
     @Slot({
-      title: '项',
-      description: '自定义选项的结构和样式',
+      title: '列表项',
+      description: '列表项',
+      snippets: [
+        {
+          title: '列表项',
+          code: '<ListItem><Text>列表项</Text></ListItem>',
+        },
+      ],
     })
     slotDefault: (current: Current<T>) => Array<ViewComponent>;
   }
@@ -488,9 +494,27 @@ namespace nasl.ui {
   })
   export class ListItemOptions<T, V> extends ViewComponentOptions {
     @Slot({
-      title: '项',
-      description: '自定义选项的结构和样式',
+      title: '列表项',
+      description: '列表项',
     })
     slotDefault: (current: Current<T>) => Array<ViewComponent>;
+
+    @Slot({
+      title: '列表元素的图标',
+      description: '列表元素的图标',
+    })
+    slotAvatar: (current: Current<T>) => Array<ViewComponent>;
+
+    @Slot({
+      title: '列表元素的描述内容',
+      description: '列表元素的描述内容',
+    })
+    slotDescription: (current: Current<T>) => Array<ViewComponent>;
+
+    @Slot({
+      title: '列表元素的标题',
+      description: '列表元素的标题',
+    })
+    slotTitle: (current: Current<T>) => Array<ViewComponent>;
   }
 }

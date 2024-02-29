@@ -33,8 +33,8 @@ function useHandle(props) {
 
 export function useHandleTransformOption(props) {
   const dataSource = props.get('dataSource');
-  const onBefore = props.get('onBefore');
-  const onSuccess = props.get('onSuccess');
+  const onBefore = props.get('onBefore', () => { });
+  const onSuccess = props.get('onSuccess', () => { });
   const warpList = _.cond([
     [Array.isArray, (list) => ({ list, total: list.length })],
     [_.conforms({ list: _.isArray }), _.identity],

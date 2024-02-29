@@ -25,19 +25,20 @@ export function useHandleOpenRef(props) {
   const onOpenChangeProps = props.get('onOpenChange');
   const ref = props.get('ref');
   const deletePropsList = props.get($deletePropsList, []).concat(['ref', 'defaultOpen']);
-  const modalRef = React.useRef();
   const [open, setOpen] = useControllableValue(_.filterUnderfinedValue({
     value: openProps,
     defaultValue: defaultOpen,
     onChange: onOpenChangeProps,
   }));
-  React.useImperativeHandle(ref, () => ({
+  const selfRef = React.useMemo(() => ({
+    ...ref,
     open: () => setOpen(true),
     close: () => setOpen(false),
     visible: !!open,
-  }), [modalRef]);
+  }), [ref, open, setOpen]);
   return {
     [$deletePropsList]: deletePropsList,
+    ref: selfRef,
     open,
     onOpenChange: _.wrap(onOpenChangeProps, (visible) => {
       setOpen(visible);

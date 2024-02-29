@@ -20,25 +20,21 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
-    return (
-      <Radio>
-        <Text children="单选项" />
-      </Radio>
-    );
+    return <RadioGroup />;
   },
 };
 
-export const 单选组 = {
-  render: (args) => {
-    return (
-      <RadioGroup>
-        <Radio value={1}>
-          <Text children="单选项1" />
-        </Radio>
-        <Radio value={2}>
-          <Text children="单选项2" />
-        </Radio>
-      </RadioGroup>
-    );
-  },
-};
+// export const 单选组 = {
+//   render: (args) => {
+//     return (
+//       <RadioGroup>
+//         <Radio value={1}>
+//           <Text children="单选项1" />
+//         </Radio>
+//         <Radio value={2}>
+//           <Text children="单选项2" />
+//         </Radio>
+//       </RadioGroup>
+//     );
+//   },
+// };

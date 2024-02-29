@@ -1,4 +1,5 @@
 import { Cascader as AntdCascader } from 'antd';
+import React from 'react';
 import type { CascaderProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';

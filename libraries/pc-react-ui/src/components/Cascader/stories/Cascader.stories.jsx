@@ -29,17 +29,17 @@ export const 异步函数 = {
     dataSource: () => new Promise((res) => {
       setTimeout(() => {
         res([
-          { label: 'Option 1', key: '1' },
+          { labels: 'Option 1', key: '1' },
           {
-            label: 'Option 2',
+            labels: 'Option 2',
             key: '2',
-            children: [{ label: 'Option 3', key: '3' }],
+            children: [{ labels: 'Option 3', key: '3' }],
           },
         ]);
       }, 3000);
     }),
     valueField: 'key',
-    textField: 'label',
+    textField: 'labels',
   },
 };
 export const 同步函数 = {
@@ -65,5 +65,33 @@ export const 数组 = {
     ],
     valueField: 'key',
     textField: 'label',
+  },
+};
+export const ref = {
+  render: (args) => {
+    const ref = React.useRef({});
+    React.useEffect(() => {
+      setTimeout(() => {
+        console.log(ref, 'ref---');
+      }, 1000);
+    }, []);
+    return <Cascader {...args} ref={ref} />;
+  },
+  args: {
+    style: { width: 300 },
+    dataSource: () => new Promise((res) => {
+      setTimeout(() => {
+        res([
+          { labels: 'Option 1', key: '1' },
+          {
+            labels: 'Option 2',
+            key: '2',
+            children: [{ labels: 'Option 3', key: '3' }],
+          },
+        ]);
+      }, 3000);
+    }),
+    valueField: 'key',
+    textField: 'labels',
   },
 };

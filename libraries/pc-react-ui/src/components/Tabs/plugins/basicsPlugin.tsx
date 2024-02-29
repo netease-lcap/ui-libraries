@@ -13,15 +13,3 @@ export function useHandleTransform(props) {
     valueField: 'key',
   };
 }
-
-// export function useHandleRef(props) {
-//   const reload = props.get('reload');
-//   const ref = props.get('ref');
-//   const myRef = React.useRef({});
-//   React.useImperativeHandle(ref, () => ({
-//     reload,
-//     ...myRef.current,
-//   }), [myRef, reload]);
-//   return {};
-// }
-// useHandleRef.order = 6;

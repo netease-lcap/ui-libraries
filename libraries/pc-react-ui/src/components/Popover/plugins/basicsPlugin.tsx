@@ -6,15 +6,17 @@ export function useHandleOpenRef(props) {
   const openProps = props.get('open');
   const onOpenChange = props.get('onOpenChange');
   const ref = props.get('ref');
-  const modalRef = React.useRef();
+  // const modalRef = React.useRef();
   const [open, setOpen] = useControllableValue(_.filterUnderfinedValue({ value: openProps, onChange: onOpenChange }));
-  React.useImperativeHandle(ref, () => ({
+  const selfRef = React.useMemo(() => ({
     toggle: setOpen,
     open: () => setOpen(true),
     close: () => setOpen(false),
-  }), [modalRef]);
+    ...ref,
+  }), [ref, open, setOpen]);
   return {
     open,
+    ref: selfRef,
     onOpenChange: _.wrap(onOpenChange, (fn, visible) => {
       setOpen(visible);
       _.attempt(onOpenChange, visible);

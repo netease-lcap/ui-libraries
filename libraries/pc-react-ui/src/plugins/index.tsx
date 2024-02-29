@@ -69,6 +69,7 @@ export class Plugin {
 
 export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   const { BaseComponent, props, plugin } = myProps;
+  const baseRef = React.useRef({});
   const pluginHooks = plugin.getPluginMethod();
   const mapProps = plugin.getMapProps();
   function handleMutableProps(ref) {
@@ -84,7 +85,7 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     .reduce((result, value, key) => result.set(mapProps.get(key, key), value), Map())
     .set('render', BaseComponent)
     .set('mutableProps', mutableProps)
-    .set('ref', ref)
+    .set('ref', {})
     .set($deletePropsList, []);
   const expandProps = pluginHooks.reduce(
     (expandProps, handleFun) => expandProps.merge(_.attempt(handleFun, expandProps)),
@@ -92,11 +93,11 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   );
   const Component = expandProps.get('render');
   const jsProps = expandProps.toJS();
-  // console.log(jsProps, 'jsProps');
+  const componentRef = jsProps.ref;
   const excludeProps = _.omit(jsProps, _.concat(
     _.keys(plugin.getMapProps().toJS()),
     expandProps.get($deletePropsList, []),
-    [$deletePropsList, 'render', 'usePlugin', 'mutableProps', $deletePropsList],
+    [$deletePropsList, 'render', 'usePlugin', 'mutableProps', $deletePropsList, 'ref'],
   ));
   // useWhyDidYouUpdate('useWhyDidYouUpdateComponent', { ...jsProps });
 
@@ -109,11 +110,19 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   //   },
   // });
   // console.log(mutableProps.getObj(), 'obj');
-  console.log(excludeProps, 'excludeProps');
+  console.log(ref, 'pluginref');
+  React.useImperativeHandle(ref, () => {
+    return {
+      ...componentRef,
+      ...baseRef.current,
+    };
+  }, [componentRef, baseRef]);
+  mutableProps.setState({ ref });
   return (
     <Component
       {...excludeProps}
-      {...mutableProps.getObj()}
+      ref={baseRef}
+    // {...mutableProps.getObj()}
     />
   );
 });

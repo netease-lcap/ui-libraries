@@ -8,6 +8,15 @@ namespace nasl.ui {
     group: 'Table',
   })
   export class Table<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
+    // @Prop({
+    //   title: '数据',
+    // })
+    // data: TableOptions<T, V, P, M>['dataSource'];
+    @Method({
+      title: 'undefined',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void {}
     constructor(options?: Partial<TableOptions<T, V, P, M>>) {
       super();
     }
