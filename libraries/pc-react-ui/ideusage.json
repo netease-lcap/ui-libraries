@@ -214,10 +214,10 @@
             },
             "actions": {
                 "click": {
-                    "status": "this.getParent().setCacheStatus('defaultActiveKey', this.getParent().getAttribute('defaultActiveKey').value) || this.getAttribute('key').value)",
-                    "effect": "this.getParent().callComponentMethod('setValue', this.getAttribute('key'))"
+                    "status": "this.getParent().setCacheStatus('defaultActiveKey', this.getAttribute('key')?.value)",
+                    "effect": "this.getParent().callComponentMethod('setValue', this.getAttribute('key')?.value)"
                 }
-            }
+               }
         }
     }, 
     {
