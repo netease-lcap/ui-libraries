@@ -60,11 +60,21 @@
         }
     },
     {
-        "name": "checkboxGroup",
+        "name": "CheckboxGroup",
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "target.tag === 'Checkbox'"
+            "childAccept": "target.tag === 'Checkbox'",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+                "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
+                "loopElem": "> label.ant-checkbox-wrapper",
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": "false"
+                }
+            }
         }
     },
     {
@@ -84,6 +94,24 @@
             "selector": {
                 "expression": "this",
                 "cssSelector": "label.ant-radio-wrapper"
+            }
+        }
+    },
+    {
+        "name": "RadioGroup",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'Radio'",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+                "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
+                "loopElem": "> label.ant-radio-wrapper",
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": "false"
+                }
             }
         }
     },
@@ -208,16 +236,19 @@
         "ideusage": {
             "idetype": "container",
             "parentAccept": "target.tag === 'Tabs'",
-            "selector": {
+            "selector": [{
                 "expression": "this.getElement(el => el.slotTarget === 'tab')",
                 "cssSelector": ".ant-tabs-tab"
-            },
+            },{
+                "expression": "this",
+                "cssSelector": ".ant-tabs-tabpane"
+            }],
             "actions": {
                 "click": {
-                    "status": "this.getParent().setCacheStatus('defaultActiveKey', this.getAttribute('key')?.value)",
-                    "effect": "this.getParent().callComponentMethod('setValue', this.getAttribute('key')?.value)"
+                "status": "this.getParent().setCacheStatus('defaultActiveKey', this.getAttribute('key')?.value)",
+                "effect": "this.getParent().callComponentMethod('setValue', this.getAttribute('key')?.value)"
                 }
-               }
+            }
         }
     }, 
     {
