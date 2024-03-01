@@ -22,12 +22,6 @@ module.exports = {
     {
       group: 'Container',
       show: true,
-      name: 'popup',
-      alias: '弹出层',
-    },
-    {
-      group: 'Container',
-      show: true,
       name: 'collapse',
       alias: '折叠面板',
     },
@@ -321,10 +315,16 @@ module.exports = {
       vusion: true,
     },
     {
-      group: 'Feedback', show: true, name: 'dialog', alias: '弹窗',
+      group: 'Feedback',
+      show: true,
+      name: 'dialog',
+      alias: '弹窗',
     },
     {
-      group: 'Container', show: true, name: 'popup', alias: '抽屉',
+      group: 'Container',
+      show: true,
+      name: 'popup',
+      alias: '抽屉',
     },
     {
       group: 'Feedback',
