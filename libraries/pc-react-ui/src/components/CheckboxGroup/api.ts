@@ -240,8 +240,10 @@ namespace nasl.ui {
   }
 
   @Component({
-    title: '多选项',
-    description: '多选项',
+    title: '多选框组',
+    icon: 'checkboxes',
+    description: '多项中选择多个时使用',
+    group: 'Form',
   })
   export class Checkbox<T, V> extends ViewComponent {
     constructor(options?: Partial<CheckboxOptions<T, V>>) {

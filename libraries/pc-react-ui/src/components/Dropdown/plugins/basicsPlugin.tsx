@@ -20,9 +20,10 @@ export function useHandleTransform(props) {
 // }
 
 export function useMergeMenu(props) {
+  const menuItem = props.get('menuItem');
+  console.log(menuItem, 'munuItem');
   const menu = props.get('menu');
   const items = props.get('items', []);
-  console.log(props.toJS(), 'tojhs');
   return {
     menu: {
       ...menu,

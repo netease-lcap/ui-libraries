@@ -9,8 +9,8 @@ module.exports = {
     { group: 'Form', name: 'Switch', alias: '开关' },
     { group: 'Form', name: 'Input', alias: '单行输入' },
     { group: 'Form', name: 'Textarea', alias: '多行输入' },
-    { group: 'Form', name: 'Checkbox', alias: '多选框' },
-    { group: 'Form', name: 'Radio', alias: '单选框' },
+    { group: 'Form', name: 'CheckboxGroup', alias: '多选框' },
+    { group: 'Form', name: 'RadioGroup', alias: '单选框' },
     { group: 'Form', name: 'Form', alias: '表单' },
     // { group: 'Form', name: 'Upload', alias: '文件上传' },
 

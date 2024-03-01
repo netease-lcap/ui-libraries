@@ -23,12 +23,12 @@ namespace nasl.ui {
     // })
     // router: nasl.core.Boolean = true;
 
-    // @Prop({
-    //   title: '值',
-    //   description: '当前选择的值',
-    //   sync: true,
-    // })
-    // value: nasl.core.String;
+    @Prop({
+      title: '值',
+      description: '当前选择的值',
+      sync: true,
+    })
+    openKeys: nasl.core.String;
 
     // @Prop({
     //   title: '字段',
@@ -89,16 +89,16 @@ namespace nasl.ui {
     // onInput: (event: nasl.core.String) => any;
 
     @Event({
-      title: '选择后',
+      title: '被选中时',
       description: '选择某一项时触发',
     })
     onSelect: (event: { value: nasl.core.String; oldValue: nasl.core.String; selectedItem: nasl.core.Any; item: nasl.core.Any; oldItem: nasl.core.Any }) => any;
 
-    @Event({
-      title: '改变后',
-      description: '选择值改变时触发',
-    })
-    onChange: (event: { value: nasl.core.String; oldValue: nasl.core.String; selectedItem: nasl.core.Any; item: nasl.core.Any; oldItem: nasl.core.Any }) => any;
+    // @Event({
+    //   title: '改变后',
+    //   description: '选择值改变时触发',
+    // })
+    // onChange: (event: { value: nasl.core.String; oldValue: nasl.core.String; selectedItem: nasl.core.Any; item: nasl.core.Any; oldItem: nasl.core.Any }) => any;
 
     @Slot({
       title: '链接区域',

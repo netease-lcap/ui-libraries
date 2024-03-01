@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown from '../index';
+import { Dropdown, MenuItem } from '@/index';
 // import { Dropdown } from 'antd';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export

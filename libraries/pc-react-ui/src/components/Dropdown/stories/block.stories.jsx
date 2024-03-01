@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dropdown } from '../index';
-import { Button, Text } from '@/index';
+import { Button, Text, MenuItem } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {

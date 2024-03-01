@@ -259,17 +259,17 @@ namespace nasl.ui {
     })
     private join: ',' | '|' | ' / ' = ' / ';
 
-    // @Event({
-    //   title: '输入时',
-    //   description: '选择某一项时触发',
-    // })
-    // onInput: (event: V) => any;
-
     @Event({
       title: '搜索时',
-      description: '监听搜索，返回输入的值',
+      description: '监听搜索，返回输入的值	',
     })
-    onSelect: (event: { value: V; values: nasl.collection.List<V>; items: nasl.collection.List<T> }) => any;
+    onSearch: (event: V) => any;
+
+    @Event({
+      title: '选择完成后',
+      description: '选择完成后的回调',
+    })
+    onChange: (event: { value: V; values: nasl.collection.List<V>; items: nasl.collection.List<T> }) => any;
 
     @Event({
       title: '获得焦点',

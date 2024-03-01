@@ -3,7 +3,6 @@
 namespace nasl.ui {
   @Component({
     title: '单选框',
-    icon: 'capsules',
     description: '多项中选择一项',
     group: 'Form',
   })
@@ -156,8 +155,10 @@ namespace nasl.ui {
   }
 
   @Component({
-    title: '子选项',
-    description: '子选项',
+    title: '单选框组',
+    icon: 'capsules',
+    description: '多项中选择一项',
+    group: 'Form',
   })
   export class RadioGroup extends ViewComponent {
     constructor(options?: Partial<RadioGroupOptions>) {

@@ -80,7 +80,16 @@ export const Large = {
 };
 
 export const Small = {
-  render: (args) => <Button {...args}>Button</Button>,
+  render: (args) => {
+    // return <Button {...args}>Button</Button>;
+    return (
+      <div>
+        <svg width="100" height="100">
+          <image xlinkHref="http://minio-api.react01-lowcode.com/lowcode-static/user/defaulttenant/1709200203232_account-book.svg" width="100" height="100" />
+        </svg>
+      </div>
+    );
+  },
   args: {
     size: 'small',
   },
