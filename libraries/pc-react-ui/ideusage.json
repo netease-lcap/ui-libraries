@@ -351,10 +351,15 @@
         "name": "Popover",
         "ideusage": {
             "idetype": "popover",
-            "triggerSlot": "children",
             "selector": {
               "expression": "this.getElement(el => el.slotTarget === 'content')",
               "cssSelector": "div[class='ant-popover-content']"
+            },
+            "actions": {
+                "click": {
+                    "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
+                    "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+                }
             }
         }
     },
@@ -394,7 +399,7 @@
     {
         "name": "Dropdown",
         "ideusage": {
-            "idetype": "container",
+            "idetype": "popover",
             "structured": true,
             "actions": {
                 "click": {
