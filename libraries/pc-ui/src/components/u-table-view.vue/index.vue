@@ -3733,6 +3733,12 @@ content: "\e679";
     width: 0;
 }
 
+/** fix 固定列滚动条看不见 */
+.scrollcview [class^="f-scroll-view_wrap__"] {
+    position: relative;
+    z-index: 0;
+}
+
 .dropghost {
     position: absolute;
 }
