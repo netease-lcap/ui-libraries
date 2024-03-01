@@ -22,7 +22,7 @@
                         alignment="center"
                         :class="$style.line"
                     >
-                        <span :class="$style.title">{{ task.procInstTitle }}</span>
+                        <span :class="$style.title">{{ task.taskBoxTitle }}</span>
                         <span :class="$style.time">{{ dateFormatter(task.procInstStartTime) }}</span>
                     </u-linear-layout>
                 </u-list-item>
@@ -82,7 +82,7 @@ export default {
 
             if (this.$processV2) {
                 this.setTime();
-                const { data = {} } = await this.$processV2.getMyPendingTaskList({
+                const { data = {} } = await this.$processV2.getMyPendingTasks({
                     body: {
                         page: this.page - 1,
                         size: this.size,
@@ -105,10 +105,10 @@ export default {
             await this.getTasks();
         },
         async clickTask(task) {
-            const { id } = task;
+            const { taskId } = task;
             const result = await this.$processV2.getTaskDestinationUrl({
                 body: {
-                    taskId: id,
+                    taskId,
                 },
             });
             location.href = result.data;
@@ -175,6 +175,10 @@ export default {
 
 .title {
     font-size: 14px;
+}
+.title:hover {
+    color: var(--brand-primary);
+    cursor: pointer;
 }
 
 .time {

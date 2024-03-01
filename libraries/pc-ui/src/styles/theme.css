@@ -2037,6 +2037,11 @@
     /* @component u-process-record @hidden*/
     --process-record-label-color: var(--color-light);
     --process-record-title-color: #333;
+    --process-record-tail-border-color: #337EFF;
+    --process-record-dot-success-backgroundcolor: #337EFF;
+    --process-record-dot-error-backgroundcolor: #F24957;
+    --process-record-dot-normal-backgroundcolor: white;
+    --process-record-dot-normal-border-color: #337EFF;
 }
 
 @custom-media --mini-window (max-width: 479px);

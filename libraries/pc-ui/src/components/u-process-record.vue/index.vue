@@ -200,7 +200,7 @@ export default {
 
 <style module>
 .titem div[uname="tail"]{
-    border-left: 1px solid #337EFF;
+    border-left: 1px solid var(--process-record-tail-border-color);
 }
 .item {
     display: flex;
@@ -232,10 +232,10 @@ export default {
     color: white;
 }
 .dot[status="success"] {
-    background-color: #337EFF;
+    background-color: var(--process-record-dot-success-backgroundcolor);
 }
 .dot[status="error"] {
-    background-color: #F24957;
+    background-color: var(--process-record-dot-error-backgroundcolor);
 }
 .dot[status="success"]::before,
 .dot[status="error"]::before{
@@ -262,8 +262,8 @@ export default {
     content: "\e662";
 }
 .dot[status="normal"] {
-    background-color: white;
-    border: 2px solid #337EFF;
+    background-color: var(--process-record-dot-normal-backgroundcolor);
+    border: 2px solid var(--process-record-dot-normal-border-color);
 }
 .dstatus {
     width: 240px;
