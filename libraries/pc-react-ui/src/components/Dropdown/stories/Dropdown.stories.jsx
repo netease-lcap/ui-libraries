@@ -44,7 +44,7 @@ export const 默认 = {
       console.log(ref);
     }, []);
     return (
-      <Dropdown dataSource={items} defaultOpen ref={ref}>
+      <Dropdown dataSource={items} menuItem={[<MenuItem key="1" label="Navigation One" />, <MenuItem key="2" label="Navigation One" />]} defaultOpen ref={ref}>
         <button type="button">Hover me</button>
       </Dropdown>
     );

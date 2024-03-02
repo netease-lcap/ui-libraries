@@ -44,8 +44,9 @@ function useHandleAsyncLoading(props: StateMap<
 }
 export function useHandleIcon(props) {
   const icon = props.get('icon');
-  console.log(icon, 'icon');
+  // console.log(icon, 'icon');
   // return _.isString(icon) ? { icon: <Icon iconType={icon} /> } : {};
+  // return _.isNil(icon) ? {} : { icon: <Icon iconName={icon} /> };
 }
 
 export function useHandleConfirm(props) {

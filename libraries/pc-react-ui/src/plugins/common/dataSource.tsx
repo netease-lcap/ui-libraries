@@ -2,48 +2,44 @@
 /* eslint-disable react-refresh/only-export-components */
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import React from 'react';
+import { useMemo } from 'react';
 // import moduleName from 'module';
 import { useRequest } from 'ahooks';
 import {
   $deletePropsList, $dataSourceField, $labelKey, $valueKey,
 } from '@/plugins/constants';
 
+function formatData(data) {
+  const conformsArray = _.cond([
+    [Array.isArray, _.identity],
+    [_.conforms({ list: _.isArray }), fp.get('list')],
+    [_.stubTrue, _.stubArray],
+  ]);
+  return conformsArray(data);
+}
+function wrapDataToRequest(dataSource) {
+  const wrapDataSource = _.cond([
+    [_.isArray, _.constant(() => Promise.resolve(dataSource))],
+    [_.isFunction, _.constant(() => Promise.resolve(dataSource()))],
+    [_.stubTrue, _.constant(() => Promise.resolve([]))],
+  ]);
+  return wrapDataSource(dataSource);
+}
 export function useHandleTransformOption(props) {
   const dataSourceField = props.get($dataSourceField, 'options');
-  const deletePropsList = props.get($deletePropsList, []).concat([$dataSourceField], 'reload');
+  const deletePropsList = props.get($deletePropsList, []).concat([$dataSourceField]);
   const dataSource = props.get('dataSource');
   const ref = props.get('ref');
-  const requestDataSource = React.useMemo(() => {
-    const wrapDataSource = _.cond([
-      [_.isArray, _.constant(() => Promise.resolve(dataSource))],
-      [_.isFunction, _.constant(() => Promise.resolve(dataSource()))],
-      [_.stubTrue, _.constant(() => Promise.resolve([]))],
-    ]);
-    return wrapDataSource(dataSource);
-  }, [dataSource]);
-  const { data, run, loading } = useRequest(requestDataSource);
-  const resultData = React.useMemo(() => {
-    const conformsArray = _.cond([
-      [Array.isArray, _.identity],
-      [_.conforms({ list: _.isArray }), fp.get('list')],
-      [_.stubTrue, _.stubArray],
-    ]);
-    return conformsArray(data);
-  }, [data]);
-  const selfRef = React.useMemo(() => ({
-    ...ref,
-    reload: run,
-    data,
-  }), [data, run, ref]);
-
+  const requestDataSource = useMemo(() => wrapDataToRequest(dataSource), [dataSource]);
+  const { data, run: reload, loading } = useRequest(requestDataSource);
+  const resultData = useMemo(() => formatData(data), [data]);
+  const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
   return _.isNil(dataSource) ? {
     [$deletePropsList]: deletePropsList,
   } : {
-    [dataSourceField]: resultData,
-    reload: run,
-    ref: selfRef,
     [$deletePropsList]: deletePropsList,
+    [dataSourceField]: resultData,
+    ref: selfRef,
     loading,
   };
 }
@@ -56,7 +52,7 @@ export function useHandleTextAndValueField(props) {
   const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField', $labelKey, $valueKey]);
   const dataSourceField = props.get($dataSourceField, 'options');
   const dataSource = props.get(dataSourceField);
-  const convertOption = React.useMemo(() => {
+  const convertOption = useMemo(() => {
     const logicFn = _.map(dataSource, (item) => ({ [labelKey]: item[textField], [valueKey]: item[valueField] }));
     return logicFn;
   }, [dataSource, textField, valueField, labelKey, valueKey]);

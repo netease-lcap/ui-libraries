@@ -6,13 +6,13 @@ import { $deletePropsList } from '@/plugins/constants';
 export function useHandleOpenRef(props) {
   const openProps = props.get('open');
   const defaultOpen = props.get('defaultOpen');
-  const onDropdownVisibleChangeProps = props.get('onDropdownVisibleChange', () => { });
+  const onOpenChangeProps = props.get('onOpenChange');
   const ref = props.get('ref');
   const deletePropsList = props.get($deletePropsList, []).concat(['ref', 'defaultOpen']);
   const [open, setOpen] = useControllableValue(_.filterUnderfinedValue({
     value: openProps,
     defaultValue: defaultOpen,
-    onChange: onDropdownVisibleChangeProps,
+    onChange: onOpenChangeProps,
   }));
 
   const selfRef = React.useMemo(() => ({
@@ -25,9 +25,9 @@ export function useHandleOpenRef(props) {
     [$deletePropsList]: deletePropsList,
     open,
     ref: selfRef,
-    onDropdownVisibleChange: _.wrap(onDropdownVisibleChangeProps, (fn, visible) => {
+    onDropdownVisibleChange: _.wrap(onOpenChangeProps, (fn, visible) => {
       setOpen(visible);
-      _.attempt(onDropdownVisibleChangeProps, visible);
+      _.attempt(onOpenChangeProps, visible);
     }),
   };
 }

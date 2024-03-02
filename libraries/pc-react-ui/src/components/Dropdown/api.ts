@@ -203,21 +203,17 @@ namespace nasl.ui {
     })
     open: nasl.core.Boolean;
 
-    // @Slot({
-    //   title: 'undefined',
-    //   description: '插入`<u-dropdown>`子组件。',
-    //   snippets: [
-    //     {
-    //       title: '下拉菜单分组',
-    //       code: '<u-dropdown-group><template #title><u-text text="菜单分组"></u-text></template><u-dropdown-item><u-text text="菜单项"></u-text></u-dropdown-item></u-dropdown-group>',
-    //     },
-    //     {
-    //       title: '菜单项',
-    //       code: '<u-dropdown-item><u-text text="菜单项"></u-text></u-dropdown-item>',
-    //     },
-    //   ],
-    // })
-    // slotDefault: () => Array<UDropdownGroup | UDropdownItem>;
+    @Slot({
+      title: 'undefined',
+      description: '插入`<Dropdown>`子组件。',
+      snippets: [
+        {
+          title: '下拉项',
+          code: '<MenuItem ><Text children="导航项目"  /></MenuItem>',
+        },
+      ],
+    })
+    slotMenuItem: () => Array<ViewComponent>;
 
     @Slot({
       title: '标题',

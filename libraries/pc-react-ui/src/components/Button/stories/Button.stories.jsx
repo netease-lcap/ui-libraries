@@ -36,12 +36,13 @@ export const Primary = {
     type: 'primary',
     asyncLoading: true,
     children: '123',
-    onClick: () => new Promise((res) => {
-      setTimeout(() => {
-        res();
-        alert('点击了按钮');
-      }, 1000);
-    }),
+    onClick: () =>
+      new Promise((res) => {
+        setTimeout(() => {
+          res();
+          alert('点击了按钮');
+        }, 1000);
+      }),
     mySize: 'small',
     // appType: '',
     // usePlugin: ['lowCode'],

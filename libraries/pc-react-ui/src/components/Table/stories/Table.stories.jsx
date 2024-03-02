@@ -218,23 +218,32 @@ export const 异步 = {
   },
 };
 export const 同步 = {
-  render: (args) => <Table {...args} />,
+  render: (args) => {
+    const ref = React.useRef({});
+    React.useEffect(() => {
+      console.log(ref, 'ref');
+    }, []);
+    return <Table {...args} ref={ref} />;
+  },
   args: {
-    dataSource() {
-      return [
-        {
-          key: '1',
-          name: '胡彦斌',
-          age: 32,
-          address: '西湖区湖底公园1号',
-        },
-        {
-          key: '2',
-          name: '胡彦祖',
-          age: 42,
-          address: '西湖区湖底公园1号',
-        },
-      ];
+    async dataSource() {
+      return {
+        list: [
+          {
+            key: '1',
+            name: '胡彦斌',
+            age: 32,
+            address: '西湖区湖底公园3号',
+          },
+          {
+            key: '2',
+            name: '胡彦祖',
+            age: 42,
+            address: '西湖区湖底公园1号',
+          },
+        ],
+        total: 10,
+      };
     },
     columns: [
       {

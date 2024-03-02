@@ -5,6 +5,7 @@ import { useAntdTable } from 'ahooks';
 
 export function useHandleTransformOption(props) {
   const dataSource = props.get('dataSource');
+  const ref = props.get('ref');
   const warpList = _.cond([
     [Array.isArray, (list) => ({ list, total: list.length })],
     [_.conforms({ list: _.isArray }), _.identity],
@@ -24,8 +25,10 @@ export function useHandleTransformOption(props) {
     [dataSource],
   );
 
-  const { tableProps } = useAntdTable(transformOption(dataSource));
-  return fp.isNil(dataSource) ? {} : tableProps;
+  const { tableProps, run } = useAntdTable(transformOption(dataSource));
+  const { pagination, dataSource: data } = tableProps;
+  return fp.isNil(dataSource) ? {} : _.assign(tableProps, _.assign(ref, { reload: run, data, pageSize: pagination?.pageSize }));
+  // return fp.isNil(dataSource) ? {} : tableProps;
 }
 
 export function useHandlePagination(props) {

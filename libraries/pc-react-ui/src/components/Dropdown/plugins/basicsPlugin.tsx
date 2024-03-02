@@ -21,9 +21,12 @@ export function useHandleTransform(props) {
 
 export function useMergeMenu(props) {
   const menuItem = props.get('menuItem');
-  console.log(menuItem, 'munuItem');
+  // console.log(menuItem, 'munuItem');
+
+  const ItemsProps = React.Children.map(menuItem, ((item) => item?.props));
   const menu = props.get('menu');
-  const items = props.get('items', []);
+  const items = props.get('items', ItemsProps);
+  // console.log(items);
   return {
     menu: {
       ...menu,

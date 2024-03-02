@@ -33,8 +33,10 @@ function useHandle(props) {
 
 export function useHandleTransformOption(props) {
   const dataSource = props.get('dataSource');
+  // console.log(dataSource,'dataSource===');
   const onBefore = props.get('onBefore', () => { });
   const onSuccess = props.get('onSuccess', () => { });
+  const ref = props.get('ref');
   const warpList = _.cond([
     [Array.isArray, (list) => ({ list, total: list.length })],
     [_.conforms({ list: _.isArray }), _.identity],
@@ -54,13 +56,13 @@ export function useHandleTransformOption(props) {
     [dataSource],
   );
 
-  const { tableProps } = useAntdTable(transformOption(dataSource), {
+  const { tableProps, run } = useAntdTable(transformOption(dataSource), {
     onBefore: (params) => _.attempt(onBefore, params),
     onSuccess: (data, params) => _.attempt(onSuccess, data, params),
-
   });
-
-  return fp.isNil(dataSource) ? {} : tableProps;
+  // console.log(tableProps, 'tableProps');
+  const { pagination, dataSource: data } = tableProps;
+  return fp.isNil(dataSource) ? {} : _.assign(tableProps, _.assign(ref, { reload: run, data, pageSize: pagination?.pageSize }));
 }
 
 export function useHandlePagination(props) {

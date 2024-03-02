@@ -52,3 +52,7 @@ export * from './components/Link/index';
 
 // export * from './components/Typography/index';
 // export * from 'antd';
+// if (window.parent !== window) {
+//   window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.parent.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+// }
+// [{validate: 'email',message: `请输入正确的邮箱`,trigger: 'input+blur'}]

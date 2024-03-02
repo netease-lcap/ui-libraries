@@ -1,4 +1,5 @@
 import { Modal as AntdModal } from 'antd';
+import React from 'react';
 import type { ModalProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
@@ -21,3 +22,13 @@ export const Modal = registerComponet<
 );
 
 // export default Modal;
+// export function Add(props) {
+//   const { children } = props;
+//   return (
+
+//     <div>
+
+//       {children}
+//     </div>
+//   );
+// }

@@ -318,6 +318,27 @@ namespace nasl.ui {
     stickyOffsetTop: nasl.core.Decimal = 0;
 
     // @Prop({
+    //   group: '数据属性',
+    //   title: '初始化排序规则',
+    //   description: '设置数据初始化时的排序字段和顺序规则',
+    //   docDescription: '支持选择数据表格数据源中的某一条数据，配置默认排序规则，支持升序和降序',
+    // })
+    // sorting: { field?: nasl.core.String; order: nasl.core.String; compare?: Function } = { field: undefined, order: 'desc' };
+
+    // @Prop<UTableViewColumnOptions<T, V, P, M>, 'defaultOrder'>({
+    //   group: '数据属性',
+    //   title: '排序初始顺序',
+    //   description: '该列首次点击时的排序顺序',
+    //   docDescription: '该列首次点击时的排序顺序。与表格属性中的"默认排序顺序"相同',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '升序' }, { title: '倒序' }],
+    //   },
+    //   if: (_) => _.sortable === true,
+    // })
+    // defaultOrder: 'asc' | 'desc' = 'asc';
+    // @Prop({
+
     //   group: '主要属性',
     //   title: '表头文本过长省略',
     //   description: '文字过长是否省略显示。默认文字超出时会换行。',
@@ -852,7 +873,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '表格列',
-          code: '<tableColumn><template #title><Text children="表格列"></Text></template> </TableColumn>',
+          code: '<TableColumn><template #title><Text children="表格列"></Text></template> </TableColumn>',
         },
       ],
     })

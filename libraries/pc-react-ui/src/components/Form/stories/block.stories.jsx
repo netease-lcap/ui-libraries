@@ -24,17 +24,22 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: () => {
+    const ref = React.useRef({});
+    React.useEffect(() => {
+      console.log(ref, 'ref');
+    }, []);
     return (
-      <Form>
+      <Form ref={ref}>
         <FormItem label={<Text children="账号" />} name="username">
           <Input />
         </FormItem>
-        <FormItem label={<Text children="密码" />} name="password">
-          <Input />
-        </FormItem>
-        <FormItem>
-          <Button type="primary" htmlType="submit" children="提交" />
-        </FormItem>
+        <button
+          onClick={() => {
+            console.log(ref.current.getValue());
+          }}
+        >
+          123
+        </button>
       </Form>
     );
   },

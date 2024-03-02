@@ -10,7 +10,6 @@ process.env.TZ = 'Asia/Shanghai';
 // https://vitejs.dev/config/
 
 export default defineConfig(({ mode, command }) => {
-  console.log(mode, 'command---');
   return {
     publicDir: 'dist-theme',
     plugins: [react()],
@@ -30,14 +29,34 @@ export default defineConfig(({ mode, command }) => {
       },
     },
     build: {
+      commonjsOptions: {
+        transformMixedEsModules: true,
+      },
       target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
+      // lib: {
+      //   entry: 'src/index.ts',
+      //   name: 'antd',
+      //   formats: ['umd'],
+      //   fileName: () => 'index.js',
+      // },
       lib: {
         entry: 'src/index.ts',
         name: 'antd',
-        formats: ['umd'],
-        fileName: () => 'index.js',
+        formats: ['es', 'cjs', 'umd'],
+        fileName: (format, entryName) => {
+          switch (format) {
+            case 'es':
+              return `${entryName}.mjs`;
+            case 'cjs':
+              return `${entryName}.cjs`;
+            default:
+              return `${entryName}.js`;
+          }
+        },
       },
-      minify: mode === 'development' ? 'esbuild' : 'terser',
+      minify: 'esbuild',
+      // minify: mode === 'development' ? 'esbuild' : 'terser',
+      // minify: false,
       terserOptions: {
         compress: {
           drop_console: true,

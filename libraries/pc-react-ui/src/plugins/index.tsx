@@ -10,7 +10,7 @@ import React from 'react';
 import _ from 'lodash';
 import fp from 'lodash/fp';
 import { useWhyDidYouUpdate } from 'ahooks';
-import { ErrorBoundary } from 'react-error-boundary';
+import { withErrorBoundary } from 'react-error-boundary';
 import type { pluginType } from '@/plugins/type';
 import { $deletePropsList } from '@/plugins/constants';
 import '@/utils/index';
@@ -110,7 +110,7 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   //   },
   // });
   // console.log(mutableProps.getObj(), 'obj');
-  console.log(ref, 'pluginref');
+  // console.log(ref, 'pluginref');
   React.useImperativeHandle(ref, () => {
     return {
       ...componentRef,
@@ -118,28 +118,32 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     };
   }, [componentRef, baseRef]);
   mutableProps.setState({ ref });
+  // console.log(ref, 'ref');
+  // console.log(excludeProps, 'excludeProps');
   return (
     <Component
       {...excludeProps}
       ref={baseRef}
     // {...mutableProps.getObj()}
-    />
+    >
+      {props.children}
+    </Component>
   );
 });
 // extends pluginType<T>
-// const ComponentWithErrorBoundary = withErrorBoundary(HocBaseComponents, {
-//   fallback: <div>Something went wrong</div>,
-//   onError(error, info) {
-//     console.log(error, info, '组件出错啦----');
-//   },
-// });
+const ComponentWithErrorBoundary = withErrorBoundary(HocBaseComponents, {
+  fallback: <div>Something went wrong</div>,
+  onError(error, info) {
+    console.log(error, info, '组件出错啦----');
+  },
+});
 export function registerComponet<T, U>(
   Component: React.ElementType,
   pluginOption,
 ) {
   return React.forwardRef<T, U>((props, ref) => {
     const [plugin, setPlugin] = React.useState(new Plugin(pluginOption));
-    console.count(pluginOption.displayName);
+    // console.count(pluginOption.displayName);
     // React.useEffect(() => {
     //   if (props.appType === 'lowCode') {
     //     import('http://localhost:3030/app.js').then((_) => {
@@ -155,6 +159,6 @@ export function registerComponet<T, U>(
     //   console.log(plugin.plugin, 'plugin.plugin');
     // }, [props.usePlugin]);
 
-    return <HocBaseComponents BaseComponent={Component} props={props} plugin={plugin} ref={ref} />;
+    return <ComponentWithErrorBoundary BaseComponent={Component} props={props} plugin={plugin} ref={ref} />;
   });
 }

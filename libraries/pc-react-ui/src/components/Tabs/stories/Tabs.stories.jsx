@@ -29,12 +29,21 @@ export const 异步函数 = {
       console.log(ref, ref, 'ref');
     }, []);
     return (
-      <Tabs ref={ref}>
-        {/* <TabPanePane key"1" ></TabPanePane> */}
-        <TabPane key="2" tab="选项卡2" data-nodepath="12" />
-        <TabPane key="3" tab="选项卡3" data-nodepath="123" />
-        <TabPane key="1" tab="选项卡1" data-nodepath="1234" />
-      </Tabs>
+      <div>
+        <button
+          onClick={() => {
+            ref.current.setValue('3');
+          }}
+        >
+          1234
+        </button>
+        <Tabs ref={ref}>
+          {/* <TabPanePane key"1" ></TabPanePane> */}
+          <TabPane key="2" tab="选项卡2" data-nodepath="12" />
+          <TabPane key="3" tab="选项卡3" data-nodepath="123" />
+          <TabPane key="1" tab="选项卡1" data-nodepath="1234" />
+        </Tabs>
+      </div>
     );
   },
   args: {

@@ -11,8 +11,8 @@ import './index.module.less';
 type SelectProps = AntdSelectProps
 
 const mapProps = {
-  mySize: 'size',
-  dataSource: 'options',
+  // mySize: 'size',
+  // dataSource: 'options',
 };
 
 export const Select = registerComponet<SelectProps, pluginType<SelectProps>>(

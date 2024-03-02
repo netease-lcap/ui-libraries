@@ -3,7 +3,7 @@
 import _ from 'lodash';
 import React from 'react';
 import { useRequest } from 'ahooks';
-import { $deletePropsList } from '@/plugins/constants';
+import { $deletePropsList, $dataSourceField } from '@/plugins/constants';
 // import moduleName from 'antd/lib/select/';
 
 // import {renm} from 'futil';
@@ -11,7 +11,29 @@ import { $deletePropsList } from '@/plugins/constants';
 // import F from 'futil';
 // import { hookType } from '@/plugins/type';
 
-export function useHandleTransformOption(props) {
+export { useHandleTextAndValueField, useHandleTransformOption } from '@/plugins/common/dataSource';
+
+export function useHandleTransform(props) {
+  const deletePropsList = props.get($deletePropsList, []).concat(['dataSource', 'childrenField']);
+  const textField = props.get('textField', 'label');
+  const valueField = props.get('valueField', 'value');
+  const childrenField = props.get('childrenField', 'children');
+  const fieldNames = props.get('fieldNames');
+  return {
+    [$deletePropsList]: deletePropsList,
+    [$dataSourceField]: 'options',
+    fieldNames: {
+      label: textField,
+      value: valueField,
+      children: childrenField,
+      ...fieldNames,
+    },
+  };
+}
+
+useHandleTransform.order = 3;
+
+function useHandleTransformOption1(props) {
   const options = props.get('options');
   const transformOption = _.cond([
     [_.isArray, _.constant(() => Promise.resolve(options))],
@@ -26,7 +48,7 @@ export function useHandleTransformOption(props) {
   return _.isNil(options) ? {} : { options: conformsArray(data), loading };
 }
 
-export function useHandleTextAndValueField(props) {
+function useHandleTextAndValueField1(props) {
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
   const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField']);
