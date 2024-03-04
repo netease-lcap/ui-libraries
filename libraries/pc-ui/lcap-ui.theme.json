@@ -3331,6 +3331,12 @@
             "group": "阴影效果",
             "prefix": "checkbox",
             "desc": "多选项按钮的阴影效果,如 2px 2px 2px 1px rgba(0, 0, 0, 0.2)"
+          },
+          "--checkbox-label-width": {
+            "type": "input",
+            "group": "选项宽度",
+            "prefix": "checkbox",
+            "desc": "多选项按钮的选项宽度,如 100px"
           }
         }
       },
