@@ -23,7 +23,13 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 异步函数 = {
-  render: (args) => <Image {...args} />,
+  render: (args) => {
+    const ref = React.useRef({});
+    React.useEffect(() => {
+      console.log(ref, 'ref');
+    }, []);
+    return [<Image {...args} style={{ marginRight: '100px' }} />, <Image {...args} />];
+  },
   args: {
     width: 200,
     src: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
