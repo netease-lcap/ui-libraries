@@ -15,11 +15,11 @@ export function useHandleRef(props) {
 useHandleRef.order = 1;
 
 export function useHandlePrefix(props) {
-  const prefixProps = props.get('prefixProps');
-  return _.isNil(prefixProps) ? {} : { icon: Icon(prefixProps) };
+  const prefixProps = props.get('prefix');
+  return _.isNil(prefixProps) ? {} : { prefix: Icon(prefixProps) };
 }
 // const icon = props.get('icon');
 export function useHandleSuffix(props) {
   const suffixProps = props.get('suffix');
-  return _.isNil(suffixProps) ? {} : { icon: Icon(suffixProps) };
+  return _.isNil(suffixProps) ? {} : { suffix: Icon(suffixProps) };
 }
