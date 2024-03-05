@@ -26,7 +26,6 @@ export function useMergeMenu(props) {
   const menu = props.get('menu');
   const items = props.get('items', ItemsProps);
   // console.log(ItemsProps, 'iteems');
-  // console.log(ItemsProps, 'iteems');
   return {
     menu: {
       ...menu,

@@ -38,6 +38,7 @@ module.exports = {
     { group: 'Selector', name: 'TimePicker', alias: '时间选择' },
     { group: 'Selector', name: 'TimeRangePicker', alias: '时间范围选择' },
     // { group: 'Selector', name: 'Steps', alias: '步骤条' },
+    //
 
     { group: 'Feedback', name: 'Modal', alias: '弹窗' },
 
