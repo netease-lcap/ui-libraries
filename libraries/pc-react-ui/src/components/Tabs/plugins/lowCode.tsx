@@ -36,5 +36,6 @@ export function useHandleOpenRef(props) {
   return {
     ref: selfRef,
     activeKey: value,
+    onChange: setValue,
   };
 }

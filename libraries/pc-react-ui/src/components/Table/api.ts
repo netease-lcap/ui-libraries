@@ -8,10 +8,26 @@ namespace nasl.ui {
     group: 'Table',
   })
   export class Table<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
-    // @Prop({
-    //   title: '数据',
-    // })
-    // data: TableOptions<T, V, P, M>['dataSource'];
+    @Prop({
+      title: '数据',
+    })
+    data: TableOptions<T, V, P, M>['dataSource'];
+
+    @Prop({
+      title: '分页大小',
+    })
+    pageSize: TableOptions<T, V, P, M>['pageSize'];
+
+    @Prop({
+      title: '当前页数',
+    })
+    current: TableOptions<T, V, P, M>['current'];
+
+    @Prop({
+      title: '排序属性',
+    })
+    order: nasl.core.String;
+
     @Method({
       title: 'undefined',
       description: '清除缓存，重新加载',

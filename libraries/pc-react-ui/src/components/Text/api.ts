@@ -14,13 +14,13 @@ namespace nasl.ui {
   }
 
   export class TextOptions extends ViewComponentOptions {
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '文本',
-    //   description: '显示文本内容',
-    //   docDescription: '显示的文本内容',
-    // })
-    // children: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '文本',
+      description: '显示文本内容',
+      docDescription: '显示的文本内容',
+    })
+    children: nasl.core.String;
 
     // @Prop({
     //   group: '主要属性',

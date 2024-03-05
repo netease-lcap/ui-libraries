@@ -7,7 +7,7 @@ namespace nasl.ui {
     description: '多项中选择多个时使用',
     group: 'Form',
   })
-  export class checkboxGroup<T, V, C extends string> extends ViewComponent {
+  export class CheckboxGroup<T, V, C extends string> extends ViewComponent {
     // @Prop({
     //   title: '数据',
     // })
@@ -23,12 +23,12 @@ namespace nasl.ui {
     //   description: '清除缓存，重新加载',
     // })
     // reload(): void {}
-    constructor(options?: Partial<checkboxGroupOptions<T, V, C>>) {
+    constructor(options?: Partial<CheckboxGroupOptions<T, V, C>>) {
       super();
     }
   }
 
-  export class checkboxGroupOptions<T, V, C extends string> extends ViewComponentOptions {
+  export class CheckboxGroupOptions<T, V, C extends string> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -56,7 +56,7 @@ namespace nasl.ui {
     })
     textField: (item: T) => any;
 
-    @Prop<checkboxGroupOptions<T, V, C>, 'valueField'>({
+    @Prop<CheckboxGroupOptions<T, V, C>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
       description: '用于标识选中值的字段',

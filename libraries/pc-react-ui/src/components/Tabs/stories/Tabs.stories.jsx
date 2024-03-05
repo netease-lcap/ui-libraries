@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, TabPane } from '@/index';
+import { Tabs, TabPane, Text } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -70,7 +70,37 @@ export const 同步函数 = {
 };
 
 export const 数组 = {
-  render: (args) => <Tabs {...args} />,
+  render: (args) => {
+    return (
+      <Tabs data-nodepath="rootview.11" ide-iscontainer="true" defaultActiveKey="2">
+        <TabPane
+          ide-iscontainer="true"
+          key={1}
+          tab={(() => (
+            <Text data-nodepath="rootview.11.0.0.0" children="选项卡1" />
+          ))()}
+        >
+          <Text data-nodepath="rootview.11.0.2" children="普通文本" />
+        </TabPane>
+        <TabPane
+          ide-iscontainer="true"
+          key={2}
+          tab={(() => (
+            <Text data-nodepath="rootview.11.1.0.0" children="选项卡2" />
+          ))()}
+        >
+          <Text data-nodepath="rootview.11.1.1" children="普通文本" />
+        </TabPane>
+        <TabPane
+          ide-iscontainer="true"
+          key={3}
+          tab={(() => (
+            <Text data-nodepath="rootview.11.2.0.0" children="选项卡3" />
+          ))()}
+        />
+      </Tabs>
+    );
+  },
   args: {
     dataSource: [
       { label: 'Option 1', key: '1' },

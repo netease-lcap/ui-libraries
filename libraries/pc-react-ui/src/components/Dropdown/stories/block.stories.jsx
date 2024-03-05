@@ -22,7 +22,7 @@ export default {
 export const 默认 = {
   render: () => {
     return (
-      <Dropdown menuItem={<MenuItem label={<Text children="导航项目" />} />}>
+      <Dropdown menuItem={<MenuItem label={<Text>导航项目</Text>} />}>
         <Button type="primary" children="按钮" />
       </Dropdown>
     );

@@ -204,6 +204,22 @@ namespace nasl.ui {
     // labelSize: 'mini' | 'small' | 'normal' | 'large' = 'normal';
 
     @Event({
+      title: '表单值改变',
+      description: '表单值改变后',
+    })
+    onChange: (event: {
+      rawValue: nasl.core.String;
+      value: nasl.core.String;
+      trigger: nasl.core.String;
+      muted: nasl.core.String;
+      valid: nasl.core.Boolean;
+      touched: nasl.core.Boolean;
+      dirty: nasl.core.Boolean;
+      firstError: nasl.core.String;
+      triggerValid: nasl.core.Boolean;
+    }) => any;
+
+    @Event({
       title: '验证后',
       description: '验证时触发',
     })

@@ -7,16 +7,17 @@ import { Col } from '@/index';
 // import { $deletePropsList } from '@/plugins/constants';
 
 export function useHandleCol(props) {
+  const Compoent = props.get('render');
+  const render = React.useCallback((selfProps) => {
+    const ColPorps = ['offset', 'span'];
+    return (
+      <Col span={24} {..._.pick(selfProps, ColPorps)}>
+        <Compoent {...selfProps}>{selfProps.children}</Compoent>
+      </Col>
+    );
+  }, [Compoent]);
   return {
-    render: (selfProps) => {
-      const Compoent = props.get('render');
-      const ColPorps = ['offset', 'span'];
-      return (
-        <Col span={24} {..._.pick(selfProps, ColPorps)}>
-          <Compoent {...selfProps}>{selfProps.children}</Compoent>
-        </Col>
-      );
-    },
+    render,
   };
 }
 export function useHandleRule(props) {

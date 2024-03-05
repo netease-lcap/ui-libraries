@@ -14,7 +14,7 @@ const mapProps = {
 
 const Row = registerComponet<
   RowProps,
-  pluginType<RowProps>
+  RowProps
 >(
   AntdRow,
   { plugin, displayName: AntdRow.displayName, mapProps },

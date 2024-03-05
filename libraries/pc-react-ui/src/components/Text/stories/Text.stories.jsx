@@ -30,26 +30,7 @@ export const 默认 = {
   },
 };
 export const 默认1 = {
-  render: (args) => (
-    <Text
-      {...args}
-      usePlugin={{
-        a(props) {
-          return {
-            render: (_props) => {
-              const Compoent = props.get('render');
-              return (
-                <div>
-                  1234
-                  <Compoent {..._props} />
-                </div>
-              );
-            },
-          };
-        },
-      }}
-    />
-  ),
+  render: (args) => <Text {...args}>22233333</Text>,
   args: {
     color: 'magenta',
     children: '222',
