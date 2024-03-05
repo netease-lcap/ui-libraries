@@ -889,7 +889,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '表格列',
-          code: '<TableColumn><template #title><Text children="表格列"></Text></template> </TableColumn>',
+          code: '<TableColumn><template #title><Text children="表格列"></Text></template> <template #render></template></TableColumn>',
         },
       ],
     })
