@@ -69,6 +69,10 @@ export const 默认 = {
 export const 异步 = {
   render: (args) => <Table {...args} />,
   args: {
+    style: {
+      width: '200px',
+    },
+    scrollX: 500,
     async dataSource(params) {
       return {
         list: [

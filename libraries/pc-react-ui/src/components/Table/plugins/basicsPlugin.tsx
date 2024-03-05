@@ -3,6 +3,7 @@ import fp from 'lodash/fp';
 import _ from 'lodash';
 import { useAntdTable } from 'ahooks';
 import { TableColumn } from '@/index';
+import { $deletePropsList } from '@/plugins/constants';
 
 export function useHandle(props) {
   const childrenProps = props.get('children');
@@ -179,6 +180,12 @@ export function useHandleSorter(props) {
 export function useHandleScroll(props) {
   const scrollX = props.get('scrollX');
   const scrollY = props.get('scrollY');
-  const scroll = { x: scrollX, y: scrollY };
-  return _.filterUnderfinedValue(scroll);
+  const deletePropsList = props.get($deletePropsList).concat('scrollX', 'scrollY');
+  const scrollTep = { x: scrollX, y: scrollY };
+  const scroll = _.filterUnderfinedValue(scrollTep);
+  const result = _.isEmpty(scroll) ? {} : { scroll };
+  return {
+    [$deletePropsList]: deletePropsList,
+    ...result,
+  };
 }
