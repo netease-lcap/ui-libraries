@@ -141,7 +141,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    autofocus: nasl.core.Boolean;
+    autoFocus: nasl.core.Boolean;
 
     @Prop({
       group: '主要属性',
