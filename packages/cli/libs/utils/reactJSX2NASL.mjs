@@ -292,7 +292,7 @@ const jsxAST2NASL = (astNode) => {
 
       switch (result.type) {
         case 'slot':
-          elementAST.children.push(result.value.map((elAst) => {
+          elementAST.children.push(...result.value.map((elAst) => {
             const childElementAST = {
               ...elAst,
               slotTarget: attrName,
