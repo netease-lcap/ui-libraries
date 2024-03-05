@@ -292,18 +292,23 @@ const jsxAST2NASL = (astNode) => {
 
       switch (result.type) {
         case 'slot':
-          elementAST.children.push(...result.value.map((elAst) => {
-            const childElementAST = {
-              ...elAst,
-              slotTarget: attrName,
-            };
+          const templateAST = {
+            concept: 'ViewElement',
+            tag: 'template',
+            name: '',
+            bindAttrs: [],
+            bindEvents: [],
+            bindDirectives: [],
+            bindRoles: [],
+            bindStyles: [],
+            children: [...result.value],
+            slotTarget: attrName,
+          };
 
-            if (result.argName) {
-              childElementAST.slotScope = result.argName;
-            }
-
-            return childElementAST;
-          }));
+          if (result.argName) {
+            templateAST.slotScope = result.argName;
+          }
+          elementAST.children.push(templateAST);
           break;
         case 'number':
         case 'boolean':
@@ -335,12 +340,18 @@ const jsxAST2NASL = (astNode) => {
     }
   });
 
+  const childNodes = [];
   astNode.children.forEach((childNode) => {
     const result = parseChildNode(childNode);
     if (result) {
-      elementAST.children.push(result);
+      childNodes.push(result);
     }
   });
+
+  if (elementAST.tag === 'Text' && childNodes.length === 1) {
+    return childNodes[0];
+  }
+  elementAST.children.push(...childNodes);
 
   return elementAST;
 };
