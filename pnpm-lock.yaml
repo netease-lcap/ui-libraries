@@ -333,6 +333,12 @@ importers:
       '@ant-design/pro-components':
         specifier: ^2.6.48
         version: 2.6.48(antd@5.12.4)(rc-field-form@1.41.0)(react-dom@18.2.0)(react@18.2.0)
+      '@types/lodash':
+        specifier: ^4.14.202
+        version: 4.14.202
+      '@vusion/validator':
+        specifier: ^0.4.14
+        version: 0.4.14
       ahooks:
         specifier: ^3.7.8
         version: 3.7.8(react@18.2.0)
@@ -6704,6 +6710,15 @@ packages:
       '@types/lodash': 4.14.202
       '@types/validator': 13.11.8
       decimal.js: 10.4.3
+      lodash: 4.17.21
+      validator: 13.11.0
+    dev: false
+
+  /@vusion/validator@0.4.14:
+    resolution: {integrity: sha512-M6oper6nP+8wh1TCQdxBnDkGHIe0ExpO7GKlKai//Q5rKfmEhF/jYm5aJa9i6vHKGDZA7o8601UVF9O0hqvt0g==, tarball: https://registry.npmmirror.com/@vusion/validator/-/validator-0.4.14.tgz}
+    dependencies:
+      '@types/lodash': 4.14.202
+      '@types/validator': 13.11.8
       lodash: 4.17.21
       validator: 13.11.0
     dev: false
