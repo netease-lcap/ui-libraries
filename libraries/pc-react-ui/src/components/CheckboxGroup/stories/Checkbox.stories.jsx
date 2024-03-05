@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checkbox } from '../index';
+import { Checkbox, CheckboxGroup, Text } from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -23,6 +23,22 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <Checkbox {...args} />,
-
+  render: (args) => <CheckboxGroup {...args} />,
+  args: {
+    dataSource: [{ value: 1, label: '3' }],
+  },
+};
+export const 静态数据 = {
+  render: () => {
+    return (
+      <CheckboxGroup>
+        <Checkbox value="C">
+          <Text children="多选框" />
+        </Checkbox>
+        <Checkbox value="A">
+          <Text children="多选框1" />
+        </Checkbox>
+      </CheckboxGroup>
+    );
+  },
 };

@@ -72,7 +72,7 @@ export const 异步 = {
     style: {
       width: '200px',
     },
-    scrollX: 500,
+    scrollY: 500,
     async dataSource(params) {
       return {
         list: [
