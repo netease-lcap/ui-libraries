@@ -67,7 +67,7 @@ namespace nasl.ui {
     //     })
     //     mode: 'inline' | 'block' | 'flex' = 'block';
 
-    @Prop<FlexOptions, 'direction'>({
+    @Prop<FlexOptions, 'vertical'>({
       group: '主要属性',
       title: '主轴方向',
       docDescription: ` 主轴的方向是否垂直`,

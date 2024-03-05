@@ -25,8 +25,8 @@ export function useMergeMenu(props) {
   const ItemsProps = _.filter(menuItem, (item) => React.isValidElement(item) && item.type === MenuItem).map((item) => item.props);
   const menu = props.get('menu');
   const items = props.get('items', ItemsProps);
-  console.log(ItemsProps, 'iteems');
-  console.log(ItemsProps, 'iteems');
+  // console.log(ItemsProps, 'iteems');
+  // console.log(ItemsProps, 'iteems');
   return {
     menu: {
       ...menu,
