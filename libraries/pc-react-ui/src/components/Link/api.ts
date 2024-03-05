@@ -47,13 +47,13 @@ namespace nasl.ui {
     // })
     // private decoration: nasl.core.Boolean = true;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '文本',
-    //   description: '显示文本内容',
-    //   docDescription: '显示的文本内容',
-    // })
-    // children: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '文本',
+      description: '显示文本内容',
+      docDescription: '显示的文本内容',
+    })
+    children: nasl.core.String;
 
     // @Prop({
     //   group: '主要属性',
@@ -165,7 +165,7 @@ namespace nasl.ui {
       title: '双击',
       description: '在元素上双击鼠标按钮时触发。',
     })
-    onDblclick: (event: {
+    onDoubleClick: (event: {
       altKey: nasl.core.Boolean;
       button: nasl.core.Integer;
       clientX: nasl.core.Integer;
@@ -187,7 +187,7 @@ namespace nasl.ui {
       title: '右键点击',
       description: '在右键菜单显示前触发。',
     })
-    onContextmenu: (event: {
+    onContextMenu: (event: {
       altKey: nasl.core.Boolean;
       button: nasl.core.Integer;
       clientX: nasl.core.Integer;
@@ -209,7 +209,7 @@ namespace nasl.ui {
       title: '鼠标按下',
       description: '在元素上按下任意鼠标按钮时触发。',
     })
-    onMousedown: (event: {
+    onMouseDown: (event: {
       altKey: nasl.core.Boolean;
       button: nasl.core.Integer;
       clientX: nasl.core.Integer;
@@ -231,7 +231,7 @@ namespace nasl.ui {
       title: '鼠标释放',
       description: '在元素上释放任意鼠标按钮时触发。',
     })
-    onMouseup: (event: {
+    onMouseUp: (event: {
       altKey: nasl.core.Boolean;
       button: nasl.core.Integer;
       clientX: nasl.core.Integer;
@@ -253,7 +253,7 @@ namespace nasl.ui {
       title: '鼠标移入',
       description: '鼠标移入元素时触发。',
     })
-    onMouseenter: (event: {
+    onMouseEnter: (event: {
       altKey: nasl.core.Boolean;
       button: nasl.core.Integer;
       clientX: nasl.core.Integer;
@@ -275,7 +275,7 @@ namespace nasl.ui {
       title: '鼠标移出',
       description: '鼠标移出元素时触发。',
     })
-    onMouseleave: (event: {
+    onMouseLeave: (event: {
       altKey: nasl.core.Boolean;
       button: nasl.core.Integer;
       clientX: nasl.core.Integer;
@@ -293,44 +293,44 @@ namespace nasl.ui {
       which: nasl.core.Integer;
     }) => any;
 
-    @Event({
-      title: '获得焦点',
-      description: '获得焦点时触发。',
-    })
-    onFocus: (event: {
-      cancelBubble: nasl.core.Boolean;
-      detail: nasl.core.String;
-      layerX: nasl.core.Integer;
-      layerY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    // @Event({
+    //   title: '获得焦点',
+    //   description: '获得焦点时触发。',
+    // })
+    // onFocus: (event: {
+    //   cancelBubble: nasl.core.Boolean;
+    //   detail: nasl.core.String;
+    //   layerX: nasl.core.Integer;
+    //   layerY: nasl.core.Integer;
+    //   pageX: nasl.core.Integer;
+    //   pageY: nasl.core.Integer;
+    //   which: nasl.core.Integer;
+    // }) => any;
 
-    @Event({
-      title: '失去焦点',
-      description: '失去焦点时触发。',
-    })
-    onBlur: (event: {
-      cancelBubble: nasl.core.Boolean;
-      detail: nasl.core.String;
-      layerX: nasl.core.Integer;
-      layerY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    // @Event({
+    //   title: '失去焦点',
+    //   description: '失去焦点时触发。',
+    // })
+    // onBlur: (event: {
+    //   cancelBubble: nasl.core.Boolean;
+    //   detail: nasl.core.String;
+    //   layerX: nasl.core.Integer;
+    //   layerY: nasl.core.Integer;
+    //   pageX: nasl.core.Integer;
+    //   pageY: nasl.core.Integer;
+    //   which: nasl.core.Integer;
+    // }) => any;
 
-    @Event({
-      title: '切换路由前',
-      description: '使用 router 相关属性切换路由前触发',
-    })
-    onBeforeNavigate: (event: { to: nasl.core.String; replace: nasl.core.Boolean; append: nasl.core.Boolean }) => any;
+    // @Event({
+    //   title: '切换路由前',
+    //   description: '使用 router 相关属性切换路由前触发',
+    // })
+    // onBeforeNavigate: (event: { to: nasl.core.String; replace: nasl.core.Boolean; append: nasl.core.Boolean }) => any;
 
-    @Event({
-      title: '切换路由后',
-      description: '使用 router 相关属性切换路由后触发',
-    })
-    onNavigate: (event: { to: nasl.core.String; replace: nasl.core.Boolean; append: nasl.core.Boolean }) => any;
+    // @Event({
+    //   title: '切换路由后',
+    //   description: '使用 router 相关属性切换路由后触发',
+    // })
+    // onNavigate: (event: { to: nasl.core.String; replace: nasl.core.Boolean; append: nasl.core.Boolean }) => any;
   }
 }

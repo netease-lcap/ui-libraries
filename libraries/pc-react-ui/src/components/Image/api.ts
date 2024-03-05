@@ -131,7 +131,7 @@ namespace nasl.ui {
       title: '双击',
       description: '在元素上双击鼠标按钮时触发。',
     })
-    onDblclick: (event: {
+    onDoubleClick: (event: {
       altKey: nasl.core.Boolean;
       button: nasl.core.Integer;
       clientX: nasl.core.Integer;
@@ -153,7 +153,7 @@ namespace nasl.ui {
       title: '右键点击',
       description: '在右键菜单显示前触发。',
     })
-    onContextmenu: (event: {
+    onContextMenu: (event: {
       altKey: nasl.core.Boolean;
       button: nasl.core.Integer;
       clientX: nasl.core.Integer;
@@ -175,7 +175,7 @@ namespace nasl.ui {
       title: '鼠标按下',
       description: '在元素上按下任意鼠标按钮时触发。',
     })
-    onMousedown: (event: {
+    onMouseDown: (event: {
       altKey: nasl.core.Boolean;
       button: nasl.core.Integer;
       clientX: nasl.core.Integer;
@@ -197,7 +197,7 @@ namespace nasl.ui {
       title: '鼠标释放',
       description: '在元素上释放任意鼠标按钮时触发。',
     })
-    onMouseup: (event: {
+    onMouseUp: (event: {
       altKey: nasl.core.Boolean;
       button: nasl.core.Integer;
       clientX: nasl.core.Integer;
@@ -219,7 +219,7 @@ namespace nasl.ui {
       title: '鼠标移入',
       description: '鼠标移入元素时触发。',
     })
-    onMouseenter: (event: {
+    onMouseEnter: (event: {
       altKey: nasl.core.Boolean;
       button: nasl.core.Integer;
       clientX: nasl.core.Integer;
@@ -241,7 +241,7 @@ namespace nasl.ui {
       title: '鼠标移出',
       description: '鼠标移出元素时触发。',
     })
-    onMouseleave: (event: {
+    onMouseLeave: (event: {
       altKey: nasl.core.Boolean;
       button: nasl.core.Integer;
       clientX: nasl.core.Integer;

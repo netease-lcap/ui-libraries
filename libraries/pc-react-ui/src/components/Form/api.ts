@@ -18,7 +18,7 @@ namespace nasl.ui {
       title: 'undefined',
       description: '获取表单值。',
     })
-    getValue(): any {}
+    getValues(): any {}
 
     // @Method({
     //   title: 'undefined',

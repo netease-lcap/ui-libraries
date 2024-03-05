@@ -23,8 +23,13 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <Link {...args} />,
+  render: (args) => {
+    return <Link {...args}>asdf</Link>;
+  },
   args: {
     color: 'magenta',
+    onFocus: (e) => {
+      console.log(23);
+    },
   },
 };
