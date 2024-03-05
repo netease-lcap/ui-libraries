@@ -132,12 +132,12 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   );
 });
 // extends pluginType<T>
-// const ComponentWithErrorBoundary = withErrorBoundary(HocBaseComponents, {
-//   fallback: <div>Something went wrong</div>,
-//   onError(error, info) {
-//     console.log(error, info, '组件出错啦----');
-//   },
-// });
+const ComponentWithErrorBoundary = withErrorBoundary(HocBaseComponents, {
+  fallback: <div>Something went wrong</div>,
+  onError(error, info) {
+    console.log(error, info, '组件出错啦----');
+  },
+});
 export function registerComponet<T, U>(
   Component: React.ElementType,
   pluginOption,
@@ -160,6 +160,6 @@ export function registerComponet<T, U>(
     //   console.log(plugin.plugin, 'plugin.plugin');
     // }, [props.usePlugin]);
 
-    return <HocBaseComponents BaseComponent={Component} props={props} plugin={plugin} ref={ref} />;
+    return <ComponentWithErrorBoundary BaseComponent={Component} props={props} plugin={plugin} ref={ref} />;
   });
 }
