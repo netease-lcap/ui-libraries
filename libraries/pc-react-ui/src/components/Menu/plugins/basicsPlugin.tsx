@@ -61,7 +61,6 @@ function useHandle(props) {
 export function useHandleRouter(props) {
   const onClickPorps = props.get('onClick');
   const navigate = useNavigate();
-
   return {
     onClick: _.wrap(onClickPorps, (fn, arg) => {
       fn(arg);

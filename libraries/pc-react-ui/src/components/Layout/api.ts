@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @Component({
-    title: '标签',
+    title: '布局',
     icon: 'label',
     description: '用于展示状态、标签、分类等',
     group: 'Display',
