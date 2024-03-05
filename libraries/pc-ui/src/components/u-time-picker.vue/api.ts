@@ -187,10 +187,10 @@ namespace nasl.ui {
           docDescription: '支持配置选择框前缀图标，仅支持时间图标',
           setter: {
               concept: 'EnumSelectSetter',
-              options: [{ title: '时间' }],
+              options: [{ title: '时间' }, { title: '暂无' }],
           },
       })
-      preIcon: 'time' = 'time';
+      preIcon: 'time' | '' = 'time';
 
       @Prop({
           group: '主要属性',
@@ -198,10 +198,10 @@ namespace nasl.ui {
           docDescription: '支持配置选择框后缀图标，仅支持时间图标',
           setter: {
               concept: 'EnumSelectSetter',
-              options: [{ title: '时间' }],
+              options: [{ title: '时间' }, { title: '暂无' }],
           },
       })
-      suffixIcon: 'time';
+      suffixIcon: 'time' | '' = '';
 
       @Prop({
           group: '主要属性',
