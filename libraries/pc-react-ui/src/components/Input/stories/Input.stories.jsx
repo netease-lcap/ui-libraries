@@ -28,7 +28,7 @@ export const 默认 = {
     const onchange = React.useCallback((e) => {
       setValue(e.target.value);
     });
-    return <Input value={value} onChange={onchange} />;
+    return <Input value={value} prefix="BorderInnerOutlined" onChange={onchange} />;
   },
   args: {
     color: 'magenta',

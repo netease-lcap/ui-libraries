@@ -32,6 +32,7 @@ export const Primary = {
         res();
       }, 3000);
     }),
+    'data-nodepath': '1234',
     // mySize: 'small',
     // size: 'small',
     // onClick: () => {},

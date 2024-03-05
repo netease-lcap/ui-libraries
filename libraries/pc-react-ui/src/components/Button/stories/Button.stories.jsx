@@ -36,7 +36,7 @@ export const Primary = {
     type: 'primary',
     asyncLoading: true,
     // icon: 'AimOutli2ned',
-    icon: 'http://minio-api.react01-lowcode.com/lowcode-static/user/defaulttenant/1709200203232_account-book.svg',
+    icon: 'BorderInnerOutlined',
     children: '123',
     onClick: () => new Promise((res) => {
       setTimeout(() => {

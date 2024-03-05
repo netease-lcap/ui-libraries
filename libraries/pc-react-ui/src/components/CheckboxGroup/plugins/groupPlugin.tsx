@@ -28,3 +28,14 @@ export function useHandleRef(props) {
 }
 useHandleRef.order = 1;
 export { useHandleTransformOption, useHandleTextAndValueField } from '@/plugins/common/dataSource';
+
+export function useHandleValue(props) {
+  const valueProps = props.get('value');
+  const onChangeProps = props.get('onChange');
+  const defaultValue = props.get('defaultValue');
+  const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueProps, onChange: onChangeProps, defaultValue }));
+  return {
+    value,
+    onChange,
+  };
+}

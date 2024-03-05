@@ -136,7 +136,7 @@ namespace nasl.ui {
 							concept: 'SwitchSetter',
 					},
 			})
-			clearable: nasl.core.Boolean;
+			allowClear: nasl.core.Boolean;
 
 			// @Prop({
 			// 		group: '状态属性',
