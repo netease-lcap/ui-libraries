@@ -28,3 +28,4 @@ export const CheckboxGroup = registerComponet<
   AntdCheckbox.Group,
   { plugin: groupPlugin, displayName: AntdCheckbox.Group.displayName, mapProps },
 );
+// export const CheckboxGroup = AntdCheckbox.Group;
