@@ -27,10 +27,10 @@ export default {
       'process-graph': Graph,
     },
     props:{
-      taskId:{
-        type: String,
-        default: ""
-      },
+      // taskId:{
+      //   type: String,
+      //   default: ""
+      // },
       initialZoom: {
         type: String,
         default: undefined,
@@ -42,14 +42,23 @@ export default {
           noData: false,
           ast: undefined, 
           leftBottomImg,
-        middleImg,
-        rightTopImg
+          middleImg,
+          rightTopImg,
+          taskId: undefined,
         }
     },
     watch: {
         taskId(){
         this.loadProcess();
       }
+    },
+    created() {
+        location.search.replace('?', '').split('&').forEach((item) => {
+            const [key, value] = item.split('=');
+            if (key === 'taskId') {
+                this.taskId = value;
+            }
+        });
     },
     mounted() {
       this.loadProcess();

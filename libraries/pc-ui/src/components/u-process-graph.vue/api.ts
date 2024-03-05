@@ -17,12 +17,12 @@ namespace nasl.ui {
     }
 
     export class UProcessGraphOptions  extends ViewComponentOptions {
-        @Prop({
-            group: '主要属性',
-            title: '流程任务ID',
-            description: '',
-        })
-        taskId: nasl.core.String;
+        // @Prop({
+        //     group: '主要属性',
+        //     title: '流程任务ID',
+        //     description: '',
+        // })
+        // taskId: nasl.core.String;
 
         @Prop({
             title: '初始缩放比',
