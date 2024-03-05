@@ -28,14 +28,12 @@ function wrapDataToRequest(dataSource) {
 export function useHandleTransformOption(props) {
   const dataSourceField = props.get($dataSourceField, 'options');
   const deletePropsList = props.get($deletePropsList, []).concat([$dataSourceField]);
-  console.log(props.toJS());
   const dataSource = props.get('dataSource');
   const ref = props.get('ref');
   const requestDataSource = useMemo(() => wrapDataToRequest(dataSource), [dataSource]);
   const { data, run: reload, loading } = useRequest(requestDataSource);
   const resultData = useMemo(() => formatData(data), [data]);
   const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
-  console.log(dataSource, 'resultData');
   return _.isNil(dataSource) ? {
     [$deletePropsList]: deletePropsList,
   } : {

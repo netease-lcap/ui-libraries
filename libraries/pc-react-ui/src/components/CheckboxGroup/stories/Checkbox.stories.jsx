@@ -27,8 +27,7 @@ export const 默认 = {
   render: (args) => {
     return (
       <CheckboxGroup
-        disabled
-        options={[
+        dataSource={async () => [
           { label: 'Apple', value: 'Apple' },
           { label: 'Pear', value: 'Pear' },
           { label: 'Orange', value: 'Orange', disabled: false },
@@ -43,7 +42,7 @@ export const 默认 = {
 export const 静态数据 = {
   render: () => {
     return (
-      <CheckboxGroup >
+      <CheckboxGroup>
         <Checkbox value="C">
           <Text children="多选框" />
         </Checkbox>

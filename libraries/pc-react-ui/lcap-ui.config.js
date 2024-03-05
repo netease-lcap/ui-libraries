@@ -43,7 +43,7 @@ module.exports = {
     { group: 'Feedback', name: 'Modal', alias: '弹窗' },
 
     { group: 'Feedback', name: 'Drawer', alias: '抽屉' },
-    { group: 'Feedback', name: 'Message', alias: '弹出消息' },
+    // { group: 'Feedback', name: 'Message', alias: '弹出消息' },
     { group: 'Feedback', name: 'Popover', alias: '弹出框' },
 
     { group: 'Container', name: 'Card', alias: '卡片' },
