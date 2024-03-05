@@ -45,7 +45,7 @@
                     </template>
                 </u-table-view-column>
                 <u-table-view-column :title="$tt('comment')">
-                    <template #cell="current"> {{ current.item.comment }}</template>
+                    <template #cell="current"> {{ current.item.comment || '-' }}</template>
                 </u-table-view-column>
             </u-table-view>
         </template>
