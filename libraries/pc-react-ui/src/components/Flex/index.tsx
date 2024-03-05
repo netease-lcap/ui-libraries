@@ -13,7 +13,7 @@ const mapProps = {
 // const myPlugin = new Plugin({ plugin, displayName: 'Flex', mapProps });
 export const Flex = registerComponet<
   FlexProps,
-  pluginType<FlexProps>
+  FlexProps
 >(
   AntdFlex,
   { plugin, displayName: 'Flex', mapProps },

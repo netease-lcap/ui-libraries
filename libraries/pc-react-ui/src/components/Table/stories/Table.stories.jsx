@@ -40,7 +40,7 @@ export const 默认 = {
             console.log(current, '====');
             return (
               <Flex gap="small">
-                <Text children={current?.item?.entity1?.createdTime} />
+                <Text  children={current?.item?.entity1?.createdTime} />
               </Flex>
             );
           }}
