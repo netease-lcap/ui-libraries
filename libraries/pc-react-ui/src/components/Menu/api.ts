@@ -251,6 +251,11 @@ namespace nasl.ui {
     //   description: '使用router相关属性切换路由时触发',
     // })
     // onNavigate: (event: { to: nasl.core.String; replace: nasl.core.Boolean; append: nasl.core.Boolean }) => any;
+    @Slot({
+      title: '导航名称',
+      description: '导航项自定义',
+    })
+    slotLabel: () => Array<ViewComponent>;
 
     @Slot({
       title: '默认',

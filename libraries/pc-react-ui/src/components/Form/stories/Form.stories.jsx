@@ -27,33 +27,32 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: () => {
+    const ref = React.useRef({});
+    React.useEffect(() => {
+      console.log(ref, 'ref');
+    }, []);
     return (
-      <Form>
-        <ProFormSelect
-          options={[
+      <Form ref={ref}>
+        <FormItem
+          label={<Text children="账号" />}
+          rules={[
+            { validate: 'lowerCase', message: '不能出现大写字母', trigger: 'input+blur' },
+            { validate: 'integer', message: '请输入整数', trigger: 'input+blur' },
             {
-              value: 'chapter',
-              label: '盖章后生效',
+              validate: 'max', args: [30], message: `不能大于${30}`, trigger: 'input+blur',
             },
           ]}
-          width="sm"
-          name="useMode"
-          label={<Text children="表单项" />}
-        />
-        <ProFormDateRangePicker
-          transform={(values) => {
-            return {
-              startTime: values ? values[0] : undefined,
-              endTime: values ? values[1] : undefined,
-            };
+        >
+          <Input />
+        </FormItem>
+        <button
+          onClick={async () => {
+            console.log(await ref.current.validate());
           }}
-          width="md"
-          name="createTimeRanger"
-          label="合同生效时间"
-        />
-        <ProFormDatePicker width="md" name="expirationTime" label="合同失效时间" />
+        >
+          123
+        </button>
       </Form>
     );
   },
-  args: {},
 };

@@ -22,7 +22,7 @@ const Row = registerComponet<
 
 const Col = registerComponet<
   ColProps,
-  pluginType<ColProps>
+  ColProps
 >(
   AntdCol,
   { plugin, displayName: AntdCol.displayName, mapProps },

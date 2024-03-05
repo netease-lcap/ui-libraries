@@ -20,9 +20,13 @@ export function useHandle(props) {
 
 export function useHandleRef(props) {
   const ref = props.get('ref');
-  const [form] = Form.useForm();
+  const [myForm] = Form.useForm();
+  const form = props.get('form', myForm);
+  const add = Form.useWatch('username', form);
+  console.log(add, 'add');
+  const validate = async () => form.validateFields().then(() => true, () => false);
   return {
     form,
-    ref: _.assign(ref, { validate: form.validateFields, getValue: form.getFieldsValue }),
+    ref: _.assign(ref, { validate, getValue: form.getFieldsValue }),
   };
 }

@@ -23,7 +23,6 @@ export const Form = registerComponet<
 );
 
 // export default Form;
-// console.log(formItemPlugin, 'formItemPlugin');
 
 export const FormItem = registerComponet<
   FormProps,

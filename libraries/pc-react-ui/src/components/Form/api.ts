@@ -8,22 +8,17 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class Form extends ViewComponent {
-    // @Method({
-    //   title: 'undefined',
-    //   description: '手动验证。',
-    // })
-    // validate(
-    //   @Param({
-    //     title: 'undefined',
-    //     description: '触发方式，可选值：`submit`、`blur`和`input`之一，或者它们的任意组合。',
-    //   })
-    //   trigger: nasl.core.String = 'submit',
-    //   @Param({
-    //     title: 'undefined',
-    //     description: '是否验证后无提示',
-    //   })
-    //   muted: nasl.core.Boolean = false,
-    // ): any {}
+    @Method({
+      title: 'undefined',
+      description: '手动验证。',
+    })
+    validate(): any {}
+
+    @Method({
+      title: 'undefined',
+      description: '获取表单值。',
+    })
+    getValue(): any {}
 
     // @Method({
     //   title: 'undefined',
@@ -271,9 +266,9 @@ namespace nasl.ui {
   export class FormItemOptions extends ViewComponentOptions {
     @Prop({
       title: '字段名称',
-      description: '表单项名称。已废弃',
+      description: '表单项名称。',
     })
-    private name: nasl.core.String;
+    name: nasl.core.String;
 
     @Prop({
       title: '标签名',

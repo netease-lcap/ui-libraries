@@ -6,15 +6,14 @@ import VusionValidator, { localizeRules } from '@vusion/validator';
 import { Col } from '@/index';
 // import { $deletePropsList } from '@/plugins/constants';
 
-// console.log(ErrorBoundary);
 export function useHandleCol(props) {
   return {
-    render(selfProps) {
+    render: (selfProps) => {
       const Compoent = props.get('render');
       const ColPorps = ['offset', 'span'];
       return (
         <Col span={24} {..._.pick(selfProps, ColPorps)}>
-          <Compoent key="component" {...selfProps}>{selfProps.children}</Compoent>
+          <Compoent {...selfProps}>{selfProps.children}</Compoent>
         </Col>
       );
     },

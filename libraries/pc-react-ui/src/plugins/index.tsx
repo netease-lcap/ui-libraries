@@ -16,7 +16,6 @@ import { $deletePropsList } from '@/plugins/constants';
 import '@/utils/index';
 
 // try {
-// console.log(ErrorBoundary, 'withErrorBoundary');
 // } catch (error) {
 // }
 
@@ -73,14 +72,14 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   const pluginHooks = plugin.getPluginMethod();
   const mapProps = plugin.getMapProps();
   function handleMutableProps(ref) {
-    const obj = { ref };
+    const obj = { ref, render: BaseComponent };
     return {
       setState: (state) => _.assign(obj, state),
       getState: (state) => obj[state],
       getObj: () => obj,
     };
   }
-  const mutableProps = React.useMemo(() => handleMutableProps(ref), [ref]);
+  const mutableProps = handleMutableProps(ref);
   const ImmutableProps = Map(props)
     .reduce((result, value, key) => result.set(mapProps.get(key, key), value), Map())
     .set('render', BaseComponent)
@@ -92,6 +91,7 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     ImmutableProps,
   );
   const Component = expandProps.get('render');
+  // const Component = mutableProps.getState('render');
   const jsProps = expandProps.toJS();
   const componentRef = jsProps.ref;
   const excludeProps = _.omit(jsProps, _.concat(
@@ -120,6 +120,7 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   mutableProps.setState({ ref });
   // console.log(ref, 'ref');
   // console.log(excludeProps, 'excludeProps');
+  // useWhyDidYouUpdate('name', excludeProps);
   return (
     <Component
       {...excludeProps}
@@ -131,12 +132,12 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   );
 });
 // extends pluginType<T>
-const ComponentWithErrorBoundary = withErrorBoundary(HocBaseComponents, {
-  fallback: <div>Something went wrong</div>,
-  onError(error, info) {
-    console.log(error, info, '组件出错啦----');
-  },
-});
+// const ComponentWithErrorBoundary = withErrorBoundary(HocBaseComponents, {
+//   fallback: <div>Something went wrong</div>,
+//   onError(error, info) {
+//     console.log(error, info, '组件出错啦----');
+//   },
+// });
 export function registerComponet<T, U>(
   Component: React.ElementType,
   pluginOption,
@@ -159,6 +160,6 @@ export function registerComponet<T, U>(
     //   console.log(plugin.plugin, 'plugin.plugin');
     // }, [props.usePlugin]);
 
-    return <ComponentWithErrorBoundary BaseComponent={Component} props={props} plugin={plugin} ref={ref} />;
+    return <HocBaseComponents BaseComponent={Component} props={props} plugin={plugin} ref={ref} />;
   });
 }

@@ -19,9 +19,9 @@ function formatData(data) {
 }
 function wrapDataToRequest(dataSource) {
   const wrapDataSource = _.cond([
-    [_.isArray, _.constant(() => Promise.resolve(dataSource))],
-    [_.isFunction, _.constant(() => Promise.resolve(dataSource()))],
-    [_.stubTrue, _.constant(() => Promise.resolve([]))],
+    [_.isArray, _.constant(async () => dataSource)],
+    [_.isFunction, _.constant(async (...arg) => dataSource(...arg))],
+    [_.stubTrue, _.constant(async () => [])],
   ]);
   return wrapDataSource(dataSource);
 }

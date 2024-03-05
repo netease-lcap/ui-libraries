@@ -37,13 +37,11 @@ function TextIcon(text) {
 // export const Icon = React.forwardRef<typeof AndtIconProps, IconProps>((props, ref) => {
 //   const { iconName } = props;
 //   const isAntIcon = _.curry(_.get)(AntdIcon)(_, false);
-//   console.log(isAntIcon, 'isAntIcon==');
 //   const result = _.cond([
 //     [_.isValidLink, SvgComponent],
 //     [isAntIcon, isAntIcon],
 //     [_.stubTrue, TextIcon],
 //   ]);
-//   console.log(result(iconName),'result=--');
 //   // /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i
 //   // const Icon = AntdIcon[iconName];
 //   return result(iconName) as React.ReactNode;

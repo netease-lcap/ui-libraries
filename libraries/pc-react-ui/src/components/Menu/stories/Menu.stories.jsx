@@ -25,7 +25,7 @@ export default {
 export const 默认 = {
   render: () => (
     <Menu mode="horizontal">
-      <MenuItem key="mail"> Navigation Four - LinkM</MenuItem>
+      <MenuItem key="mail" label="21"> Navigation Four - LinkM</MenuItem>
       <MenuItem key="app">Navigation</MenuItem>
     </Menu>
   ),

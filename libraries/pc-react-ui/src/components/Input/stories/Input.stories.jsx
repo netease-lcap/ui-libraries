@@ -23,7 +23,13 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <Input {...args} />,
+  render: (args) => {
+    const [value, setValue] = React.useState(1);
+    const onchange = React.useCallback((e) => {
+      setValue(e.target.value);
+    });
+    return <Input value={value} onChange={onchange} />;
+  },
   args: {
     color: 'magenta',
   },

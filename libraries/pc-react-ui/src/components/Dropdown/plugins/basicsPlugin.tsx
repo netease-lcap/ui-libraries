@@ -1,6 +1,7 @@
 import React from 'react';
 import { useControllableValue } from 'ahooks';
 import _ from 'lodash';
+import { MenuItem } from '@/index';
 import { $deletePropsList, $dataSourceField } from '@/plugins/constants';
 
 export function useHandleTransform(props) {
@@ -20,13 +21,12 @@ export function useHandleTransform(props) {
 // }
 
 export function useMergeMenu(props) {
-  const menuItem = props.get('menuItem');
-  // console.log(menuItem, 'munuItem');
-
-  const ItemsProps = React.Children.map(menuItem, ((item) => item?.props));
+  const menuItem = React.Children.toArray(props.get('menuItem'));
+  const ItemsProps = _.filter(menuItem, (item) => React.isValidElement(item) && item.type === MenuItem).map((item) => item.props);
   const menu = props.get('menu');
   const items = props.get('items', ItemsProps);
-  // console.log(items);
+  console.log(ItemsProps, 'iteems');
+  console.log(ItemsProps, 'iteems');
   return {
     menu: {
       ...menu,

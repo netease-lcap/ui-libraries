@@ -1,6 +1,7 @@
 import React from 'react';
 // import { ProFormDatePicker, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components';
-import { Form, FormItem } from '../index';
+import { Form } from 'antd';
+import { FormItem } from '../index';
 import {
   Input, Button, Col, Text,
 } from '@/index';
@@ -24,23 +25,32 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: () => {
-    const ref = React.useRef({});
-    React.useEffect(() => {
-      console.log(ref, 'ref');
-    }, []);
+    const [form] = Form.useForm();
+    // const add = Form.useWatch('username', form);
+    // console.log(add, 'add');
+    const nameValue = Form.useWatch('name', form);
+    // The selector is static and does not support closures.
+    const customValue = Form.useWatch((values) => `name: ${values.name || ''}`, form);
     return (
-      <Form ref={ref}>
-        <FormItem label={<Text children="账号" />} name="username">
-          <Input />
-        </FormItem>
-        <button
-          onClick={() => {
-            console.log(ref.current.getValue());
-          }}
-        >
-          123
-        </button>
-      </Form>
+      <div>
+        <Form form={form} layout="vertical" autoComplete="off">
+          <FormItem name="name" label="Name (Watch to trigger rerender)">
+            <Input />
+          </FormItem>
+          <Form.Item name="age" label="Age (Not Watch)">
+            {/* <InputNumber /> */}
+          </Form.Item>
+        </Form>
+
+        <pre>
+          Name Value:
+          {nameValue}
+        </pre>
+        <pre>
+          Custom Value:
+          {customValue}
+        </pre>
+      </div>
     );
   },
 };

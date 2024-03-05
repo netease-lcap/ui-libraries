@@ -2,23 +2,32 @@ import React from 'react';
 import fp from 'lodash/fp';
 import _ from 'lodash';
 import { useAntdTable } from 'ahooks';
+import { TableColumn } from '@/index';
 
-function useHandle(props) {
-  const children = props.get('children');
+export function useHandle(props) {
+  const childrenProps = props.get('children');
+  const childrenList = React.Children.toArray(childrenProps).filter(React.isValidElement);
+  const children = _.isEmpty(childrenList) ? false : childrenList;
   const columns = props.get('columns');
   const result = React.useMemo(() => {
-    const columnsChildren = fp.filter((item: Record<string, any>) => item.type?.name === 'Column');
+    const columnsChildren = fp.filter((item: Record<string, any>) => {
+      return React.isValidElement(item) && item.type === TableColumn;
+    });
     const omitColumnsProps = fp.map((item: Record<string, any>) => item.props);
     const childrenFlow = fp.flow(columnsChildren, omitColumnsProps);
-
+    const warpColumns = fp.map((item: any) => {
+      const { render } = item;
+      return _.isFunction(render) ? _.assign({}, item, {
+        render: (text, record, index) => _.attempt(render, { item: record, text, index }),
+      }) : item;
+    });
     const columnsCond = fp.cond([
-      [fp.conforms({ columns: fp.isArray, children: fp.stubTrue }), fp.constant({ columns })],
-      [fp.conforms({ children: fp.isArray }), fp.constant({ columns: childrenFlow(children) })],
+      [fp.conforms({ columns: fp.isArray, children: fp.stubTrue }), fp.constant({ columns: warpColumns(columns) })],
+      [fp.conforms({ children: fp.isArray }), fp.constant({ columns: warpColumns(childrenFlow(children as Array<any>)) })],
       [fp.stubTrue, fp.stubObject],
     ]);
     return columnsCond({ columns, children });
   }, [children, columns]);
-  // return {};
   return result;
   // const columnsChildren = fp.filter((item: Record<string, any>) => item.type?.name === 'Column3');
   // const omitColumnsProps = fp.map((item: Record<string, any>) => item.props);
@@ -33,7 +42,6 @@ function useHandle(props) {
 
 export function useHandleTransformOption(props) {
   const dataSource = props.get('dataSource');
-  // console.log(dataSource,'dataSource===');
   const onBefore = props.get('onBefore', () => { });
   const onSuccess = props.get('onSuccess', () => { });
   const ref = props.get('ref');
@@ -49,9 +57,9 @@ export function useHandleTransformOption(props) {
   };
   const transformOption = React.useMemo(
     () => fp.cond([
-      [fp.isArray, fp.constant(() => Promise.resolve({ list: dataSource, total: dataSource.length }))],
-      [fp.isFunction, fp.constant(() => Promise.resolve(dataSource()).then(warpList))],
-      [fp.stubTrue, fp.constant(() => Promise.resolve({ list: [], total: 0 }))],
+      [fp.isArray, fp.constant(async () => ({ list: dataSource, total: dataSource.length }))],
+      [fp.isFunction, fp.constant((...arg) => Promise.resolve(dataSource(...arg)).then(warpList))],
+      [fp.stubTrue, fp.constant(async () => ({ list: [], total: 0 }))],
     ]),
     [dataSource],
   );
@@ -60,7 +68,6 @@ export function useHandleTransformOption(props) {
     onBefore: (params) => _.attempt(onBefore, params),
     onSuccess: (data, params) => _.attempt(onSuccess, data, params),
   });
-  // console.log(tableProps, 'tableProps');
   const { pagination, dataSource: data } = tableProps;
   return fp.isNil(dataSource) ? {} : _.assign(tableProps, _.assign(ref, { reload: run, data, pageSize: pagination?.pageSize }));
 }
