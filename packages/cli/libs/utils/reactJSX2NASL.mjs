@@ -58,7 +58,7 @@ function transAstNodeToNaslNode(astNode, namespace = '') {
     node = {
       concept: 'Unparsed',
       label: '原子项',
-      code: astNode.value,
+      code: getNodeCode(astNode),
     };
   } else if (astNode.type === 'TemplateLiteral') {
     // 模板字符串翻译成字符串插值
