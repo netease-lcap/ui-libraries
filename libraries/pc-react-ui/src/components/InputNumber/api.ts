@@ -145,14 +145,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '隐藏按钮',
-      description: '是否隐藏上下点击按钮',
-      docDescription: '是否隐藏数值加减按钮',
+      title: '显示按钮',
+      description: '是否显示上下点击按钮',
+      docDescription: '是否显示数值加减按钮',
       setter: {
         concept: 'SwitchSetter',
       },
     })
-    controls: nasl.core.Boolean = false;
+    controls: nasl.core.Boolean = true;
 
     // @Prop({
     //   group: '交互属性',
