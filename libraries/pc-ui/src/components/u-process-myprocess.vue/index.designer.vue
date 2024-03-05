@@ -21,23 +21,15 @@ export default {
                     {
                         taskId: '3df4ffc2-ba8f-11ee-94b2-aa63f0d148e3',
                         taskBoxTitle: 'x',
-                        procInstTitle: '张三申请事件1天',
-                        procDefTitle: '会签流程1',
-                        procInstStartBy: null,
+                        procInstTitle: '张三申请事假1天',
+                        procDefTitle: '请假流程',
+                        procInstInitiator: '张三',
                         procInstStartTime: '2024-01-24 10:00:00',
-                        procInstCurNodes: [
+                        procInstCurrNodes: [
                             {
-                                currNodeTitle: '多人审批任务',
+                                currNodeTitle: '主管审批',
                                 currNodeParticipants: [
-                                    'xb1',
-                                    'xb2',
-                                ],
-                            },
-                            {
-                                currNodeTitle: '审批任务1',
-                                currNodeParticipants: [
-                                    'xb3',
-                                    'xb4',
+                                    '主管A',
                                 ],
                             },
                         ],
@@ -45,23 +37,15 @@ export default {
                     {
                         taskId: '219ea9dd-ba8f-11ee-a35a-a2041721ddc7',
                         taskBoxTitle: 'x',
-                        procInstTitle: '李四申请事件1天',
-                        procDefTitle: '会签流程1',
-                        procInstStartBy: null,
+                        procInstTitle: '张三申请事假1天',
+                        procDefTitle: '请假流程',
+                        procInstInitiator: '张三',
                         procInstStartTime: '2024-01-24 10:00:00',
-                        procInstCurNodes: [
+                        procInstCurrNodes: [
                             {
-                                currNodeTitle: '多人审批任务',
+                                currNodeTitle: '主管审批',
                                 currNodeParticipants: [
-                                    'xb1',
-                                    'xb2',
-                                ],
-                            },
-                            {
-                                currNodeTitle: '审批任务1',
-                                currNodeParticipants: [
-                                    'xb3',
-                                    'xb4',
+                                    '主管A',
                                 ],
                             },
                         ],
@@ -69,23 +53,15 @@ export default {
                     {
                         taskId: '219ea9dd-ba8f-11ee-a35a-a2041721ddc7',
                         taskBoxTitle: 'x',
-                        procInstTitle: '张三申请事件1天',
-                        procDefTitle: '会签流程1',
-                        procInstStartBy: null,
+                        procInstTitle: '张三申请事假1天',
+                        procDefTitle: '请假流程',
+                        procInstInitiator: '张三',
                         procInstStartTime: '2024-01-24 10:00:00',
-                        procInstCurNodes: [
+                        procInstCurrNodes: [
                             {
-                                currNodeTitle: '多人审批任务',
+                                currNodeTitle: '主管审批',
                                 currNodeParticipants: [
-                                    'xb1',
-                                    'xb2',
-                                ],
-                            },
-                            {
-                                currNodeTitle: '审批任务1',
-                                currNodeParticipants: [
-                                    'xb3',
-                                    'xb4',
+                                    '主管A',
                                 ],
                             },
                         ],

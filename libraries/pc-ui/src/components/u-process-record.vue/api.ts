@@ -15,11 +15,11 @@ namespace nasl.ui {
     export class UProcessRecordOptions  extends ViewComponentOptions {
         @Prop({
             group: '交互属性',
-            title: '显示方式',
+            title: '展示类型',
             docDescription: '',
             setter: {
                 concept: 'EnumSelectSetter',
-                options: [{ title: '表格显示' }, { title: '时间线显示' }],
+                options: [{ title: '表格' }, { title: '时间线' }],
             },
         })
         type: 'table' | 'timeline' = 'table';

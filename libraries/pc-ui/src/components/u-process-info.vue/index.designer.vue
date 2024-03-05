@@ -14,11 +14,11 @@
         </div>
         <div :class="$style.item">
             <div :class="$style.label">{{ $tt('currentNodes') }}：</div>
-            <div :class="$style.value" v-ellipsis-title>多人审批任务, 审批任务1（示例）</div>
+            <div :class="$style.value" v-ellipsis-title>领导审批（示例）</div>
         </div>
         <div :class="$style.item">
             <div :class="$style.label">{{ $tt('currentCandidateUsers') }}：</div>
-            <div :class="$style.value" v-ellipsis-title>xb1, xb2（示例）</div>
+            <div :class="$style.value" v-ellipsis-title>李四、王五（示例）</div>
         </div>
     </div>
     <component

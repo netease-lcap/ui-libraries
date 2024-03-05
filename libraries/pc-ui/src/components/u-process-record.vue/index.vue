@@ -1,7 +1,7 @@
 <template>
     <div>
         <template v-if="type === 'timeline'">
-            <u-timeline :data-source="list">
+            <u-timeline :data-source="list" :class="$style.timeline">
                 <template #item="current">
                     <u-timeline-item :class="$style.titem">
                         <template #dot>
@@ -18,7 +18,9 @@
                             <div :class="$style.content">
                                 <div :class="$style.value">{{ current.item.userName || '-' }}</div>
                                 <div :class="$style.value">{{ dateFormatter(current.item.recordCreateTime) || '-' }}</div>
-                                <div :class="$style.value">{{ current.item.nodeOperationText || '-' }}</div>
+                                <div :class="$style.value">
+                                    <span :class="$style.statuslabel" :status="current.item.nodeOperation">{{ current.item.nodeOperationText || '-' }}</span>
+                                </div>
                                 <div :class="$style.value">{{ current.item.nodeComment || '-' }}</div>
                             </div>
                         </div>
@@ -31,7 +33,7 @@
                     <div><u-text v-if="currentLoading">{{ $tt('loading') }}</u-text></div>
                 </template>
                 <u-link v-else-if="hasMore" @click="loadMore">{{ $tt('loadMore') }}</u-link>
-                <u-text v-else-if="list.length > 0">{{ $tt('noMore') }}</u-text>
+                <!-- <u-text v-else-if="list.length > 0">{{ $tt('noMore') }}</u-text> -->
                 <u-text v-else-if="list.length === 0">{{ $tt('empty') }}</u-text>
             </div>
         </template>
@@ -47,7 +49,9 @@
                     <template #cell="current"> {{ dateFormatter(current.item.recordCreateTime) }}</template>
                 </u-table-view-column>
                 <u-table-view-column :title="$tt('nodeOperation')">
-                    <template #cell="current"> {{ current.item.nodeOperationText || '-' }}</template>
+                    <template #cell="current">
+                        <span :class="$style.statuslabel" :status="current.item.nodeOperation">{{ current.item.nodeOperationText || '-' }}</span>
+                    </template>
                 </u-table-view-column>
                 <u-table-view-column :title="$tt('comment')">
                     <template #cell="current"> {{ current.item.nodeComment || '-' }}</template>
@@ -198,76 +202,4 @@ export default {
 };
 </script>
 
-<style module>
-.titem div[uname="tail"]{
-    border-left: 1px solid var(--process-record-tail-border-color);
-}
-.item {
-    display: flex;
-}
-.left {
-    min-width: 9%;
-    margin-right: 10px;
-}
-.label {
-    color: var(--process-record-label-color);
-}
-.value {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.title {
-    font-weight: 500;
-    color: var(--process-record-title-color);
-    padding-top: 3px;
-}
-
-.dot {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border-radius: 100%;
-    color: white;
-}
-.dot[status="success"] {
-    background-color: var(--process-record-dot-success-backgroundcolor);
-}
-.dot[status="error"] {
-    background-color: var(--process-record-dot-error-backgroundcolor);
-}
-.dot[status="success"]::before,
-.dot[status="error"]::before{
-    display: inline-block;
-    position: relative;
-    top: -1px;
-    
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-    font-size: 8px;
-}
-.dot[status="success"]::before {
-    content: "\e648";
-}
-.dot[status="error"]::before {
-    content: "\e662";
-}
-.dot[status="normal"] {
-    background-color: var(--process-record-dot-normal-backgroundcolor);
-    border: 2px solid var(--process-record-dot-normal-border-color);
-}
-.dstatus {
-    width: 240px;
-    text-align: center;
-    color: #999;
-}
-</style>
+<style module src="./index.css"></style>

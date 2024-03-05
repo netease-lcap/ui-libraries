@@ -1,10 +1,13 @@
 <template>
-    <div v-if="$env.VUE_APP_DESIGNER">
+    <div v-if="$env.VUE_APP_DESIGNER" :designer="$env.VUE_APP_DESIGNER">
         <template v-if="type === 'timeline'">
-            <u-timeline :data-source="list">
+            <u-timeline :data-source="list" :class="$style.timeline">
                 <template #item="current">
-                    <u-timeline-item>
-                        <div :class="$style.title">{{ current.item.nodeTitle }}</div>
+                    <u-timeline-item :class="$style.titem">
+                        <template #dot>
+                            <div :class="$style.dot" :status="getDotStatus(current.item)"></div>
+                        </template>
+                        <div :class="$style.title">{{ current.item.nodeTitle }}（示例）</div>
                         <div :class="$style.item">
                             <div :class="$style.left">
                                 <div :class="$style.label">{{ $tt('assignee') }}</div>
@@ -15,7 +18,9 @@
                             <div :class="$style.content">
                                 <div :class="$style.value">{{ current.item.userName || '-' }}</div>
                                 <div :class="$style.value">{{ current.item.recordCreateTime || '-' }}</div>
-                                <div :class="$style.value">{{ current.item.nodeOperation || '-' }}</div>
+                                <div :class="$style.value">
+                                    <span :class="$style.statuslabel" :status="current.item.nodeOperation">{{ current.item.nodeOperationText || '-' }}</span>
+                                </div>
                                 <div :class="$style.value">{{ current.item.comment || '-' }}</div>
                             </div>
                         </div>
@@ -35,7 +40,9 @@
                     <template #cell="current"> {{ current.item.recordCreateTime }}</template>
                 </u-table-view-column>
                 <u-table-view-column :title="$tt('nodeOperation')">
-                    <template #cell="current"> {{ current.item.nodeOperation || '-' }}</template>
+                    <template #cell="current">
+                        <span :class="$style.statuslabel" :status="current.item.nodeOperation">{{ current.item.nodeOperationText || '-' }}</span>
+                    </template>
                 </u-table-view-column>
                 <u-table-view-column :title="$tt('comment')">
                     <template #cell="current"> {{ current.item.comment }}</template>
@@ -64,54 +71,44 @@ export default {
         return {
             list: [
                 {
-                    nodeTitle: '发起任务',
-                    userName: '章三',
+                    nodeTitle: '开始',
+                    userName: '张三',
                     recordCreateTime: '2023-12-21 10:20:20',
                     nodeOperation: 'submit',
-                    nodeOperationText: '提交了一个任务',
-                    nodeComment: '无',
+                    nodeOperationText: '',
+                    nodeComment: '',
                 },
                 {
-                    nodeTitle: '审批任务',
-                    userName: '李四',
+                    nodeTitle: '领导审批',
+                    userName: '李领导',
                     recordCreateTime: '2023-12-21 10:20:20',
-                    nodeOperation: 'consent',
-                    nodeOperationText: '通过了一个任务',
-                    nodeComment: '无',
+                    nodeOperation: 'approve',
+                    nodeOperationText: '同意',
+                    nodeComment: '',
                 },
                 {
-                    nodeTitle: '审批任务',
-                    userName: '李四',
+                    nodeTitle: '总监审批',
+                    userName: '王总监',
                     recordCreateTime: '2023-12-21 10:20:20',
-                    nodeOperation: 'consent',
-                    nodeOperationText: '通过了一个任务',
-                    nodeComment: '无',
+                    nodeOperation: 'reject',
+                    nodeOperationText: '不同意',
+                    nodeComment: '请做好交接工作再提交审批',
                 },
             ],
         };
     },
+    methods: {
+        getDotStatus(item) {
+            if(['revert', 'reject'].includes(item.nodeOperation)) {
+                return 'error';
+            }
+            if(['approve', 'submit'].includes(item.nodeOperation)) {
+                return 'success';
+            }
+            return 'normal';
+        }
+    }
 };
 </script>
 
-<style module>
-.item {
-    display: flex;
-}
-.left {
-    min-width: 9%;
-    margin-right: 10px;
-}
-.label {
-    color: var(--process-record-label-color);
-}
-.value {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.title {
-    font-weight: 500;
-    color: var(--process-record-title-color);
-}
-</style>
+<style module src="./index.css"></style>
