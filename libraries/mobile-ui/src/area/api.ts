@@ -140,6 +140,15 @@ namespace nasl.ui {
       }
     })
     disabled: nasl.core.Boolean = false;
+    @Prop({
+      group: '主要属性',
+      title: '占位提示',
+      description: '',
+      setter: {
+        concept: "InputSetter"
+      }
+    })
+    placeholder: nasl.core.String;
     @Event({
       title: '点击右上方完成按钮',
       description: '点击右上方完成按钮'

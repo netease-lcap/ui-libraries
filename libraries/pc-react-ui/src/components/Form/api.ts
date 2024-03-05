@@ -246,7 +246,7 @@ namespace nasl.ui {
         // },
         {
           title: '表单项',
-          code: '<FormItem><template #label><Text children="表单项"></Text></template></FormItem>',
+          code: '<FormItem label={<Text children="表单项"></Text>}></FormItem>',
         },
       ],
     })

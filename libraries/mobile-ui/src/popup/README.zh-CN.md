@@ -1,8 +1,8 @@
-# Popup 弹出层
+# Popup 抽屉
 
 ### 介绍
 
-弹出层容器，用于展示弹窗、信息提示等内容，支持多个弹出层叠加展示。
+抽屉容器，用于展示弹窗、信息提示等内容，支持多个抽屉叠加展示。
 
 ### 引入
 
@@ -17,10 +17,10 @@ Vue.use(Popup);
 
 ### 基础用法
 
-通过 `v-model` 控制弹出层是否展示。
+通过 `v-model` 控制抽屉是否展示。
 
 ```html
-<van-cell is-link @click="showPopup">展示弹出层</van-cell>
+<van-cell is-link @click="showPopup">展示抽屉</van-cell>
 <van-popup v-model="show">内容</van-popup>
 ```
 
@@ -50,7 +50,7 @@ export default {
 
 ### 关闭图标
 
-设置 `closeable` 属性后，会在弹出层的右上角显示关闭图标，并且可以通过 `close-icon` 属性自定义图标，使用 `close-icon-position` 属性可以自定义图标位置。
+设置 `closeable` 属性后，会在抽屉的右上角显示关闭图标，并且可以通过 `close-icon` 属性自定义图标，使用 `close-icon-position` 属性可以自定义图标位置。
 
 ```html
 <van-popup
@@ -87,7 +87,7 @@ export default {
 
 ### 指定挂载位置
 
-弹出层默认挂载到组件所在位置，可以通过 `get-container` 属性指定挂载位置。
+抽屉默认挂载到组件所在位置，可以通过 `get-container` 属性指定挂载位置。
 
 ```html
 <!-- 挂载到 body 节点下 -->
@@ -119,7 +119,7 @@ export default {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| v-model (value) | 是否显示弹出层 | _boolean_ | `false` |
+| v-model (value) | 是否显示抽屉 | _boolean_ | `false` |
 | overlay | 是否显示遮罩层 | _boolean_ | `true` |
 | position | 弹出位置，可选值为 `top` `bottom` `right` `left` | _string_ | `center` |
 | overlay-class | 自定义遮罩层类名 | _string_ | - |
@@ -142,13 +142,13 @@ export default {
 
 | 事件名                     | 说明                       | 回调参数       |
 | -------------------------- | -------------------------- | -------------- |
-| click                      | 点击弹出层时触发           | _event: Event_ |
+| click                      | 点击抽屉时触发           | _event: Event_ |
 | click-overlay              | 点击遮罩层时触发           | -              |
 | click-close-icon `v2.11.0` | 点击关闭图标时触发         | _event: Event_ |
-| open                       | 打开弹出层时触发           | -              |
-| close                      | 关闭弹出层时触发           | -              |
-| opened                     | 打开弹出层且动画结束后触发 | -              |
-| closed                     | 关闭弹出层且动画结束后触发 | -              |
+| open                       | 打开抽屉时触发           | -              |
+| close                      | 关闭抽屉时触发           | -              |
+| opened                     | 打开抽屉且动画结束后触发 | -              |
+| closed                     | 关闭抽屉且动画结束后触发 | -              |
 
 ### 样式变量
 

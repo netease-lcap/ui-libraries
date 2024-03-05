@@ -48,6 +48,9 @@ export default createComponent({
     rowHeight: [Number, String],
     confirmText: String,
     rangePrompt: String,
+    placeholder: {
+      type: String,
+    },
     labelField: {
       type: String,
       default: '',
@@ -286,7 +289,9 @@ export default createComponent({
       this.currentValue = val;
 
       const date = dayjs(this.currentValue);
-      const value = date.isValid() ? date.format('YYYY-MM-DD') : this.currentValue;
+      const value = date.isValid()
+        ? date.format('YYYY-MM-DD')
+        : this.currentValue;
       this.$emit('update:value', value);
       this.$emit('update:default-date', value);
     },
@@ -307,7 +312,9 @@ export default createComponent({
       this.currentValue = val;
 
       const date = dayjs(this.currentValue);
-      const value = date.isValid() ? date.format('YYYY-MM-DD') : this.currentValue;
+      const value = date.isValid()
+        ? date.format('YYYY-MM-DD')
+        : this.currentValue;
       this.$emit('update:value', value);
       this.$emit('update:default-date', value);
       this.scrollIntoView();
@@ -455,7 +462,9 @@ export default createComponent({
       this.currentValue = this.currentDate;
 
       const date = dayjs(this.currentValue);
-      const value = date.isValid() ? date.format('YYYY-MM-DD') : this.currentValue;
+      const value = date.isValid()
+        ? date.format('YYYY-MM-DD')
+        : this.currentValue;
       this.$emit('update:value', value);
       this.$emit('update:default-date', value);
 
@@ -634,6 +643,7 @@ export default createComponent({
             scopedSlots={tempSlot}
             readonly
             disabled={this.disabled}
+            placeholder={this.placeholder}
             isLink
             input-align={this.inputAlign || 'right'}
             onClick={this.inDesigner() ? this.designerOpen : this.togglePopup}

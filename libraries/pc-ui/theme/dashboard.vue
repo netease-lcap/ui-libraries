@@ -1,6 +1,6 @@
 
 <template>
-<u-multi-layout direction="vertical" style="height: 100vh;">
+<u-multi-layout direction="vertical" style="height: 100vh;font-family: var(--font-family-zh-CN);">
   <u-multi-layout-item style="height: 60px;background-color: #000;">
     <u-navbar-multi>
       <template #right>
@@ -320,7 +320,7 @@
 .statist-item .desc {
   margin-top: 4px;
   line-height: 22px;
-  font-size: 14px;
+  font-size: var(--font-size-base);
   color: var(--font-second-color);
   text-align: center;
 }
@@ -341,7 +341,7 @@
 
 .progress-item .text {
   margin-top: 8px;
-  font-size: 14px;
+  font-size: var(--font-size-base);
   color: var(--font-second-color);
   text-align: center;
 }

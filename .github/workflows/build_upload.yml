@@ -42,3 +42,8 @@ jobs:
         with:
           name: lcap-ui@${{ env.VERSION }}
           path: lcap-ui@${{ env.VERSION }}
+
+  call-tyler:
+    needs: build
+    uses: netease-lcap/tyler/.github/workflows/release-ui-libraries.yml@master
+    secrets: inherit

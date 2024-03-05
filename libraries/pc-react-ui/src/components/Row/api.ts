@@ -102,7 +102,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '插入一列',
-          code: '<Col :span="4"></Col>',
+          code: '<Col span={4}></Col>',
         },
       ],
     })

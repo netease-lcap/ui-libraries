@@ -54,7 +54,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '详情列表项',
-          code: '<DescriptionsItem><template #label><Text children="基本信息"></Text></template><Text children="张三"></Text></DescriptionsItem>',
+          code: '<DescriptionsItem label={<Text children="基本信息"></Text>}><Text children="张三"></Text></DescriptionsItem>',
         },
       ],
     })
