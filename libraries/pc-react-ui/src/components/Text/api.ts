@@ -77,9 +77,9 @@ namespace nasl.ui {
 
     @Prop({
       group: '样式属性',
-      title: '尺寸',
-      description: '设置文本大小',
-      docDescription: '文本框尺寸，支持小、正常、大、巨大',
+      title: '文本类型',
+      description: '设置文本类型',
+      docDescription: '设置文本类型',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '辅助文本' }, { title: '成功文本' }, { title: '警告文本' }, { title: '危险文本' }],

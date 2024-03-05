@@ -54,7 +54,7 @@ namespace nasl.ui {
       },
     })
     minuteStep: nasl.core.Integer;
-    
+
     @Prop({
       group: '状态属性',
       title: '弹出状态',
@@ -93,7 +93,7 @@ namespace nasl.ui {
       docDescription: '默认显示的日期值。',
       // if: (_) => _.range !== true,
     })
-    value: nasl.core.String = '';
+    value: nasl.core.Time;
 
     // @Prop<TimePickerOptions, 'startTime'>({
     //   group: '数据属性',
@@ -331,8 +331,6 @@ namespace nasl.ui {
       description: '时间改变时触发',
     })
     onChange: (event: { date: nasl.core.String; time: nasl.core.String }) => any;
-    
-    
 
     @Event({
       title: '失去焦点',

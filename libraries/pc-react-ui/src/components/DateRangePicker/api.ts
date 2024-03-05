@@ -44,7 +44,7 @@ namespace nasl.ui {
       sync: true,
       docDescription: '当前选择的值',
     })
-    value: Array<nasl.core.String | nasl.core.Decimal | nasl.core.Date>;
+    value: Array<nasl.core.Date>;
 
     // @Prop<UDatePickerOptions, 'startDate'>({
     //   group: '数据属性',

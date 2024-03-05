@@ -1,5 +1,6 @@
 import {
   RouterProvider,
+  Outlet,
 } from 'react-router-dom';
 import type { BrowserRouterProps } from 'react-router-dom';
 import { registerComponet } from '@/plugins/index';
@@ -18,8 +19,8 @@ export const Router = registerComponet<
   BrowserRouterProps,
   pluginType<BrowserRouterProps>
 >(
-  RouterProvider,
+  Outlet,
   { plugin, displayName: 'router', mapProps },
 );
 
-// export Router;
+// export default Router;
