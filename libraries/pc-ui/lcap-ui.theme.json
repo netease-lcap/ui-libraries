@@ -3336,7 +3336,7 @@
             "type": "input",
             "group": "选项宽度",
             "prefix": "checkbox",
-            "desc": "多选项按钮的选项宽度,如 100px"
+            "desc": "多选项按钮的宽度，如 100px"
           }
         }
       },

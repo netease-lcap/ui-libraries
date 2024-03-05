@@ -124,6 +124,7 @@ export default {
     user-select: none;
     cursor: var(--cursor-pointer);
     color: var(--checkbox-font-color);
+    opacity: 1;
 }
 
 .root:focus {
