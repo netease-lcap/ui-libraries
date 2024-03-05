@@ -601,6 +601,27 @@ namespace nasl.ui {
     })
     emptyText: nasl.core.String = '暂无数据';
 
+    @Prop({
+      group: '样式属性',
+      title: '横向内容区宽度',
+      description: '内容区横向宽度,超出表格横向宽度则出现滚动',
+      docDescription: '指定列宽，可以是数字或百分比，如100，或10%。',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    scrollX?: nasl.core.Integer = undefined;
+    @Prop({
+      group: '样式属性',
+      title: '竖向内容区宽度',
+      description: '内容区竖向宽度,超出表格竖向宽度则出现滚动',
+      // docDescription: '指定列宽，可以是数字或百分比，如100，或10%。',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    scrollY?: nasl.core.Integer = undefined;
+
     // @Prop({
     //   group: '状态属性',
     //   title: '只读',

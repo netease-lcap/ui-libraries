@@ -176,3 +176,9 @@ export function useHandleSorter(props) {
   ])(columnsProps);
   return result;
 }
+export function useHandleScroll(props) {
+  const scrollX = props.get('scrollX');
+  const scrollY = props.get('scrollY');
+  const scroll = { x: scrollX, y: scrollY };
+  return _.filterUnderfinedValue(scroll);
+}
