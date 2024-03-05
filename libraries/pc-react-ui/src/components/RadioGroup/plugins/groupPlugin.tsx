@@ -14,16 +14,25 @@ export function useHandleTransform(props) {
     [$dataSourceField]: 'options',
   };
 }
+export function useHandleValue(props) {
+  const onChangeProps = props.get('onChange');
+  return {
+    onChange: _.wrap(onChangeProps, (fn, e) => {
+      _.attempt(fn, e.target.value, e);
+    }),
+  };
+}
 
 export function useHandleRef(props) {
   const ref = props.get('ref');
   const valueProps = props.get('value');
-  const onChange = props.get('onChange');
+  const onChangeProps = props.get('onChange');
   const defaultValue = props.get('defaultValue');
-  const [value, setValue] = useControllableValue(_.filterUnderfinedValue({ value: valueProps, onChange, defaultValue }));
+  const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueProps, onChange: onChangeProps, defaultValue }));
   return {
     value,
-    ref: _.assign(ref, { value, setValue }),
+    onChange,
+    ref: _.assign(ref, { value, setValue: onChange }),
   };
 }
 useHandleRef.order = 1;
