@@ -35,14 +35,15 @@ export const Primary = {
   args: {
     type: 'primary',
     asyncLoading: true,
+    // icon: 'AimOutli2ned',
+    icon: 'http://minio-api.react01-lowcode.com/lowcode-static/user/defaulttenant/1709200203232_account-book.svg',
     children: '123',
-    onClick: () =>
-      new Promise((res) => {
-        setTimeout(() => {
-          res();
-          alert('点击了按钮');
-        }, 1000);
-      }),
+    onClick: () => new Promise((res) => {
+      setTimeout(() => {
+        res();
+        alert('点击了按钮');
+      }, 1000);
+    }),
     mySize: 'small',
     // appType: '',
     // usePlugin: ['lowCode'],

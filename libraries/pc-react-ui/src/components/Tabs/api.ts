@@ -217,7 +217,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '子选项',
-          code: '<TabPane><template #tab><Text children="选项卡"></Text></TabPane>',
+          code: '<TabPane tab={<Text children="选项卡"></Text>}></TabPane>',
         },
       ],
     })

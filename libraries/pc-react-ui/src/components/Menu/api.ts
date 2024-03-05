@@ -110,10 +110,7 @@ namespace nasl.ui {
         },
         {
           title: '导航组',
-          code: `<MenuSubMenu style="line-height:60px">
-                    <template #title>
-                      <Text children="导航组" style="color:inherit" />
-                    </template>
+          code: `<MenuSubMenu style="line-height:60px" title={ <Text children="导航组" style="color:inherit" /> }>
                     <MenuItem style="line-height:60px">
                     <Text children="导航项目" style="color:inherit" />
                     </MenuItem>

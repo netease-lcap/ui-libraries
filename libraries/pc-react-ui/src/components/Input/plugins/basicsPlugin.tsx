@@ -2,8 +2,7 @@ import { useControllableValue, useWhyDidYouUpdate } from 'ahooks';
 import React from 'react';
 import _ from 'lodash';
 
-function useHandleRef(props) {
-  const ref = props.get('ref');
+export function useHandleRef(props) {
   const onChangeProps = props.get('onChange');
   const result = {
     onChange: _.wrap(onChangeProps, (fn, e) => {
