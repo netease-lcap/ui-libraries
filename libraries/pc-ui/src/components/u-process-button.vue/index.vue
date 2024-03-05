@@ -1,5 +1,5 @@
 <template>
-    <u-linear-layout mode="inline">
+    <u-linear-layout mode="inline" :class="$style.root">
         <u-button v-for="item in permissionDetails" :key="item.name" :color="getColor(item)" @click="onClickButton(item)">
             {{ item.showText }}
         </u-button>
@@ -30,7 +30,7 @@
                 </u-linear-layout>
             </template>
         </u-modal>
-        <u-link ref="link" :destination="destination" :target="target" :link="link"></u-link>
+        <u-link ref="link" :target="target" :link="link || destination"></u-link>
     </u-linear-layout>
 </template>
 
@@ -145,6 +145,8 @@ export default {
                         if (validateResult.valid) {
                             this.openModal(item);
                         }
+                    } else {
+                        this.openModal(item);
                     }
                 } else {
                     this.openModal(item);
@@ -218,3 +220,5 @@ export default {
     },
 };
 </script>
+
+<style module src="./index.css"></style>

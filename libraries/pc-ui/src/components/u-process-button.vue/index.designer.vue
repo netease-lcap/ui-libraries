@@ -1,10 +1,10 @@
 <template>
-    <u-linear-layout v-if="$env.VUE_APP_DESIGNER" mode="inline">
+    <u-linear-layout v-if="$env.VUE_APP_DESIGNER" mode="inline" :class="$style.root">
         <u-button color="primary">提交</u-button>
         <u-button color="primary">同意</u-button>
         <u-button>不同意</u-button>
         <u-button>回退</u-button>
-        <u-button>转交</u-button>
+        <u-button></u-button>
     </u-linear-layout>
     <component
         v-else
@@ -22,3 +22,5 @@ export default {
     },
 };
 </script>
+
+<style module src="./index.css"></style>
