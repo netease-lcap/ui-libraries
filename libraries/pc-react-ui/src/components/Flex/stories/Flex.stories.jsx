@@ -33,5 +33,6 @@ export const 默认 = {
   },
   args: {
     color: 'magenta',
+    vertical: true,
   },
 };
