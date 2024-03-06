@@ -2,6 +2,7 @@
 /* eslint-disable react-refresh/only-export-components */
 // import React from 'react';
 import { useControllableValue } from 'ahooks';
+import React from 'reacT';
 import _ from 'lodash';
 import {
   $deletePropsList, $dataSourceField,
@@ -17,8 +18,8 @@ export function useHandleTransform(props) {
 export function useHandleValue(props) {
   const onChangeProps = props.get('onChange');
   return {
-    onChange: _.wrap(onChangeProps, (fn, e) => {
-      _.attempt(fn, e.target.value, e);
+    onChange: _.wrap(onChangeProps, (fn, e: React.ChangeEvent<HTMLInputElement>) => {
+      _.attempt(fn, e?.target?.value, e);
     }),
   };
 }

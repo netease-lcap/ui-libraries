@@ -27,7 +27,7 @@ export const 默认 = {
   render: () => {
     return (
       <Popover trigger="click" content={<Text children="内容" />} title={<Text children="标题" />}>
-        <Button type="primary" children="出发弹出框组件,可删除替换" />
+        <Button type="primary" children="触发弹出框组件,可删除替换" />
       </Popover>
     );
   },
