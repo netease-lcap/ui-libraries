@@ -397,16 +397,16 @@ namespace nasl.ui {
     // })
     // private hover: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '交互属性',
-      title: '可选行',
-      description: '设置是否可以单选行',
-      docDescription: '表格行是否可点击选中，该取值由值字段名决定，一般会是id等能唯一标识每一行数据的值。默认关闭。',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    rowSelection: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '交互属性',
+    //   title: '可选行',
+    //   description: '设置是否可以单选行',
+    //   docDescription: '表格行是否可点击选中，该取值由值字段名决定，一般会是id等能唯一标识每一行数据的值。默认关闭。',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // rowSelection: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '交互属性',

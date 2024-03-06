@@ -33,6 +33,9 @@ export const Primary = {
       }, 3000);
     }),
     'data-nodepath': '1234',
+    onKeyup: (e) => {
+      console.log(1234);
+    },
     // mySize: 'small',
     // size: 'small',
     // onClick: () => {},

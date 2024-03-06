@@ -292,7 +292,7 @@ namespace nasl.ui {
       title: '键盘按下',
       description: '键盘按键按下时触发',
     })
-    onKeydown: (event: {
+    onKeyDown: (event: {
       altKey: nasl.core.Boolean;
       code: nasl.core.String;
       ctrlKey: nasl.core.Boolean;
@@ -307,7 +307,7 @@ namespace nasl.ui {
       title: '键盘松开',
       description: '键盘按键松开时触发',
     })
-    onKeyup: (event: {
+    onKeyUp: (event: {
       altKey: nasl.core.Boolean;
       code: nasl.core.String;
       ctrlKey: nasl.core.Boolean;
