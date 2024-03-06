@@ -49,7 +49,6 @@ export const 默认 = {
         menuItem={(
           <>
             <MenuItem key="1" label="Navigation One" />
-            ,
             <MenuItem key="2" label="Navigation One" />
           </>
         )}

@@ -107,25 +107,25 @@ namespace nasl.ui {
 			// })
 			// autofocus: nasl.core.Boolean = false;
 
-			@Prop({
-					group: '主要属性',
-					title: '前缀图标',
-					docDescription: '设置输入框的前缀图标。',
-					setter: {
-							concept: 'IconSetter',
-					},
-			})
-			prefix: nasl.core.String = '';
+			// @Prop({
+			// 		group: '主要属性',
+			// 		title: '前缀图标',
+			// 		docDescription: '设置输入框的前缀图标。',
+			// 		setter: {
+			// 				concept: 'IconSetter',
+			// 		},
+			// })
+			// prefix: nasl.core.String = '';
 
-			@Prop({
-					group: '主要属性',
-					title: '后缀图标',
-					docDescription: '设置输入框的后缀图标。',
-					setter: {
-							concept: 'IconSetter',
-					},
-			})
-			suffix: nasl.core.String = '';
+			// @Prop({
+			// 		group: '主要属性',
+			// 		title: '后缀图标',
+			// 		docDescription: '设置输入框的后缀图标。',
+			// 		setter: {
+			// 				concept: 'IconSetter',
+			// 		},
+			// })
+			// suffix: nasl.core.String = '';
 
 			@Prop({
 					group: '交互属性',
