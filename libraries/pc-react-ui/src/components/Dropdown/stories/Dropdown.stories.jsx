@@ -49,7 +49,6 @@ export const 默认 = {
       <Dropdown
         data-nodepath="rootview.0"
         trigger="click"
-        // defaultOpen
         menuItem={(() => (
           <>
             <MenuItem
@@ -58,14 +57,18 @@ export const 默认 = {
               label={(() => (
                 <Text data-nodepath="rootview.0.0.0.0.0" children="导航项目" />
               ))()}
-            />
+            >
+              <div />
+            </MenuItem>
             <MenuItem
               data-nodepath="rootview.0.0.1"
               ide-iscontainer="true"
               label={(() => (
                 <Text data-nodepath="rootview.0.0.1.0.0" children="导航项目2" />
               ))()}
-            />
+            >
+              <div />
+            </MenuItem>
           </>
         ))()}
       >

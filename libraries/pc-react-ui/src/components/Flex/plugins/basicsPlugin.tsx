@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 
 function useHandle(props) {
   return {
@@ -21,4 +22,9 @@ function useHandle(props) {
       );
     }),
   };
+}
+export function useHandleScroll(props) {
+  const styleProps = props.get('style');
+  const style = _.assign(styleProps, { overflow: 'scroll' });
+  return { style };
 }

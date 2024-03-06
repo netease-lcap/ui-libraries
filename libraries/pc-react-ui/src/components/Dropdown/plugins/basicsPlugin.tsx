@@ -24,9 +24,11 @@ export function useMergeMenu(props) {
   const fragment = props.get('menuItem');
   const menuItem = React.Children.toArray(_.get(fragment, 'props.children', []));
   // console.log(menuItem.props.children, 'menuItem');
-  const ItemsProps = _.filter(menuItem, (item) => React.isValidElement(item) && item.type === MenuItem).map((item) => item.props);
+  // console.log(menuItem, 'menuItem');
+  const ItemsProps = _.filter(menuItem, (item) => React.isValidElement(item) && item.type === MenuItem)?.map((item) => _.omit(item.props, 'children'));
   const menu = props.get('menu');
   const items = props.get('items', ItemsProps);
+  // console.log(items, 'items');
   return {
     menu: {
       ...menu,

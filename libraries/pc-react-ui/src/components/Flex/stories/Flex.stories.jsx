@@ -26,13 +26,27 @@ export const 默认 = {
   render: (args) => {
     return (
       <Flex {...args}>
-        <Button>b</Button>
-        <Button>b1</Button>
+        {/* <div style={{ height: '500px', border: '1px solid red' }} /> */}
+        <div style={{ height: '500px', border: '1px solid red' }}>
+          <Button>1234</Button>
+        </div>
+        <div>
+          <Button>1234</Button>
+        </div>
+        <Button>1234</Button>
+        <Button>1234</Button>
+        <Button>1234</Button>
+        <Button>1234</Button>
+        <Button>1234</Button>
       </Flex>
     );
   },
   args: {
     color: 'magenta',
-    vertical: false,
+    // vertical: true,
+    style: {
+      border: '1px solid black',
+      height: '200px',
+    },
   },
 };
