@@ -136,6 +136,7 @@ export default {
 .root[direction="horizontal"] {
     height: var(--scrollbar-size);
     left: var(--scrollbar-size);
+    bottom: 0;
 }
 
 .root[direction="horizontal"] > div {
@@ -145,6 +146,7 @@ export default {
 .root[direction="vertical"] {
     width: var(--scrollbar-size);
     top: var(--scrollbar-size);
+    right: 0;
 }
 
 .root[direction="vertical"] > div {
