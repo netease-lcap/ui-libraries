@@ -21,7 +21,9 @@ export function useHandleTransform(props) {
 // }
 
 export function useMergeMenu(props) {
-  const menuItem = React.Children.toArray(props.get('menuItem'));
+  const fragment = props.get('menuItem');
+  const menuItem = React.Children.toArray(_.get(fragment, 'props.children', []));
+  // console.log(menuItem.props.children, 'menuItem');
   const ItemsProps = _.filter(menuItem, (item) => React.isValidElement(item) && item.type === MenuItem).map((item) => item.props);
   const menu = props.get('menu');
   const items = props.get('items', ItemsProps);

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Dropdown, MenuItem } from '@/index';
+import {
+  Dropdown, MenuItem, Text, Button,
+} from '@/index';
 // import { Dropdown } from 'antd';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -45,17 +47,31 @@ export const 默认 = {
     }, []);
     return (
       <Dropdown
-        dataSource={items}
-        menuItem={(
+        data-nodepath="rootview.0"
+        trigger="click"
+        // defaultOpen
+        menuItem={(() => (
           <>
-            <MenuItem key="1" label="Navigation One" />
-            <MenuItem key="2" label="Navigation One" />
+            <MenuItem
+              data-nodepath="rootview.0.0.0"
+              ide-iscontainer="true"
+              label={(() => (
+                <Text data-nodepath="rootview.0.0.0.0.0" children="导航项目" />
+              ))()}
+            />
+            <MenuItem
+              data-nodepath="rootview.0.0.1"
+              ide-iscontainer="true"
+              label={(() => (
+                <Text data-nodepath="rootview.0.0.1.0.0" children="导航项目2" />
+              ))()}
+            />
           </>
-        )}
-        defaultOpen
-        ref={ref}
+        ))()}
       >
-        <button type="button">Hover me</button>
+        <div style={{ display: 'inline-block' }} ide-iscontainer="true" data-nodepath="rootview.0">
+          <Button data-nodepath="rootview.0.1" type="primary" children="按钮" />
+        </div>
       </Dropdown>
     );
   },
