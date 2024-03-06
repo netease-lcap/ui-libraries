@@ -194,7 +194,7 @@ const parseJSXExpression = (expressionNode) => {
     case 'JSXFragment':
       return {
         type: 'slot',
-        value: [parseJSXFragment(expressionNode)],
+        value: parseJSXFragment(expressionNode),
       };
     case 'NumericLiteral':
       return {
