@@ -50,6 +50,9 @@ export const 异步函数 = {
         ]);
       }, 3000);
     }),
+    onDropdownVisibleChange(e) {
+      console.log(1);
+    },
   },
 };
 export const 异步函数1 = {

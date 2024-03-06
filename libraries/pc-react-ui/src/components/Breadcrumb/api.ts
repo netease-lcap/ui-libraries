@@ -179,165 +179,165 @@ namespace nasl.ui {
       which: nasl.core.Integer;
     }) => any;
 
-    @Event({
-      title: '双击',
-      description: '在元素上双击鼠标按钮时触发。',
-    })
-    onDoubleClick: (event: {
-      altKey: nasl.core.Boolean;
-      button: nasl.core.Integer;
-      clientX: nasl.core.Integer;
-      clientY: nasl.core.Integer;
-      ctrlKey: nasl.core.Boolean;
-      metaKey: nasl.core.Boolean;
-      movementX: nasl.core.Integer;
-      movementY: nasl.core.Integer;
-      offsetX: nasl.core.Integer;
-      offsetY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      screenX: nasl.core.Integer;
-      screenY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    // @Event({
+    //   title: '双击',
+    //   description: '在元素上双击鼠标按钮时触发。',
+    // })
+    // onDoubleClick: (event: {
+    //   altKey: nasl.core.Boolean;
+    //   button: nasl.core.Integer;
+    //   clientX: nasl.core.Integer;
+    //   clientY: nasl.core.Integer;
+    //   ctrlKey: nasl.core.Boolean;
+    //   metaKey: nasl.core.Boolean;
+    //   movementX: nasl.core.Integer;
+    //   movementY: nasl.core.Integer;
+    //   offsetX: nasl.core.Integer;
+    //   offsetY: nasl.core.Integer;
+    //   pageX: nasl.core.Integer;
+    //   pageY: nasl.core.Integer;
+    //   screenX: nasl.core.Integer;
+    //   screenY: nasl.core.Integer;
+    //   which: nasl.core.Integer;
+    // }) => any;
 
-    @Event({
-      title: '右键点击',
-      description: '在右键菜单显示前触发。',
-    })
-    onContextMenu: (event: {
-      altKey: nasl.core.Boolean;
-      button: nasl.core.Integer;
-      clientX: nasl.core.Integer;
-      clientY: nasl.core.Integer;
-      ctrlKey: nasl.core.Boolean;
-      metaKey: nasl.core.Boolean;
-      movementX: nasl.core.Integer;
-      movementY: nasl.core.Integer;
-      offsetX: nasl.core.Integer;
-      offsetY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      screenX: nasl.core.Integer;
-      screenY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    // @Event({
+    //   title: '右键点击',
+    //   description: '在右键菜单显示前触发。',
+    // })
+    // onContextMenu: (event: {
+    //   altKey: nasl.core.Boolean;
+    //   button: nasl.core.Integer;
+    //   clientX: nasl.core.Integer;
+    //   clientY: nasl.core.Integer;
+    //   ctrlKey: nasl.core.Boolean;
+    //   metaKey: nasl.core.Boolean;
+    //   movementX: nasl.core.Integer;
+    //   movementY: nasl.core.Integer;
+    //   offsetX: nasl.core.Integer;
+    //   offsetY: nasl.core.Integer;
+    //   pageX: nasl.core.Integer;
+    //   pageY: nasl.core.Integer;
+    //   screenX: nasl.core.Integer;
+    //   screenY: nasl.core.Integer;
+    //   which: nasl.core.Integer;
+    // }) => any;
 
-    @Event({
-      title: '鼠标按下',
-      description: '在元素上按下任意鼠标按钮时触发。',
-    })
-    onMouseDown: (event: {
-      altKey: nasl.core.Boolean;
-      button: nasl.core.Integer;
-      clientX: nasl.core.Integer;
-      clientY: nasl.core.Integer;
-      ctrlKey: nasl.core.Boolean;
-      metaKey: nasl.core.Boolean;
-      movementX: nasl.core.Integer;
-      movementY: nasl.core.Integer;
-      offsetX: nasl.core.Integer;
-      offsetY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      screenX: nasl.core.Integer;
-      screenY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    // @Event({
+    //   title: '鼠标按下',
+    //   description: '在元素上按下任意鼠标按钮时触发。',
+    // })
+    // onMouseDown: (event: {
+    //   altKey: nasl.core.Boolean;
+    //   button: nasl.core.Integer;
+    //   clientX: nasl.core.Integer;
+    //   clientY: nasl.core.Integer;
+    //   ctrlKey: nasl.core.Boolean;
+    //   metaKey: nasl.core.Boolean;
+    //   movementX: nasl.core.Integer;
+    //   movementY: nasl.core.Integer;
+    //   offsetX: nasl.core.Integer;
+    //   offsetY: nasl.core.Integer;
+    //   pageX: nasl.core.Integer;
+    //   pageY: nasl.core.Integer;
+    //   screenX: nasl.core.Integer;
+    //   screenY: nasl.core.Integer;
+    //   which: nasl.core.Integer;
+    // }) => any;
 
-    @Event({
-      title: '鼠标释放',
-      description: '在元素上释放任意鼠标按钮时触发。',
-    })
-    onMouseUp: (event: {
-      altKey: nasl.core.Boolean;
-      button: nasl.core.Integer;
-      clientX: nasl.core.Integer;
-      clientY: nasl.core.Integer;
-      ctrlKey: nasl.core.Boolean;
-      metaKey: nasl.core.Boolean;
-      movementX: nasl.core.Integer;
-      movementY: nasl.core.Integer;
-      offsetX: nasl.core.Integer;
-      offsetY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      screenX: nasl.core.Integer;
-      screenY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    // @Event({
+    //   title: '鼠标释放',
+    //   description: '在元素上释放任意鼠标按钮时触发。',
+    // })
+    // onMouseUp: (event: {
+    //   altKey: nasl.core.Boolean;
+    //   button: nasl.core.Integer;
+    //   clientX: nasl.core.Integer;
+    //   clientY: nasl.core.Integer;
+    //   ctrlKey: nasl.core.Boolean;
+    //   metaKey: nasl.core.Boolean;
+    //   movementX: nasl.core.Integer;
+    //   movementY: nasl.core.Integer;
+    //   offsetX: nasl.core.Integer;
+    //   offsetY: nasl.core.Integer;
+    //   pageX: nasl.core.Integer;
+    //   pageY: nasl.core.Integer;
+    //   screenX: nasl.core.Integer;
+    //   screenY: nasl.core.Integer;
+    //   which: nasl.core.Integer;
+    // }) => any;
 
-    @Event({
-      title: '鼠标移入',
-      description: '鼠标移入元素时触发。',
-    })
-    onMouseEnter: (event: {
-      altKey: nasl.core.Boolean;
-      button: nasl.core.Integer;
-      clientX: nasl.core.Integer;
-      clientY: nasl.core.Integer;
-      ctrlKey: nasl.core.Boolean;
-      metaKey: nasl.core.Boolean;
-      movementX: nasl.core.Integer;
-      movementY: nasl.core.Integer;
-      offsetX: nasl.core.Integer;
-      offsetY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      screenX: nasl.core.Integer;
-      screenY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    // @Event({
+    //   title: '鼠标移入',
+    //   description: '鼠标移入元素时触发。',
+    // })
+    // onMouseEnter: (event: {
+    //   altKey: nasl.core.Boolean;
+    //   button: nasl.core.Integer;
+    //   clientX: nasl.core.Integer;
+    //   clientY: nasl.core.Integer;
+    //   ctrlKey: nasl.core.Boolean;
+    //   metaKey: nasl.core.Boolean;
+    //   movementX: nasl.core.Integer;
+    //   movementY: nasl.core.Integer;
+    //   offsetX: nasl.core.Integer;
+    //   offsetY: nasl.core.Integer;
+    //   pageX: nasl.core.Integer;
+    //   pageY: nasl.core.Integer;
+    //   screenX: nasl.core.Integer;
+    //   screenY: nasl.core.Integer;
+    //   which: nasl.core.Integer;
+    // }) => any;
 
-    @Event({
-      title: '鼠标移出',
-      description: '鼠标移出元素时触发。',
-    })
-    onMouseLeave: (event: {
-      altKey: nasl.core.Boolean;
-      button: nasl.core.Integer;
-      clientX: nasl.core.Integer;
-      clientY: nasl.core.Integer;
-      ctrlKey: nasl.core.Boolean;
-      metaKey: nasl.core.Boolean;
-      movementX: nasl.core.Integer;
-      movementY: nasl.core.Integer;
-      offsetX: nasl.core.Integer;
-      offsetY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      screenX: nasl.core.Integer;
-      screenY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    // @Event({
+    //   title: '鼠标移出',
+    //   description: '鼠标移出元素时触发。',
+    // })
+    // onMouseLeave: (event: {
+    //   altKey: nasl.core.Boolean;
+    //   button: nasl.core.Integer;
+    //   clientX: nasl.core.Integer;
+    //   clientY: nasl.core.Integer;
+    //   ctrlKey: nasl.core.Boolean;
+    //   metaKey: nasl.core.Boolean;
+    //   movementX: nasl.core.Integer;
+    //   movementY: nasl.core.Integer;
+    //   offsetX: nasl.core.Integer;
+    //   offsetY: nasl.core.Integer;
+    //   pageX: nasl.core.Integer;
+    //   pageY: nasl.core.Integer;
+    //   screenX: nasl.core.Integer;
+    //   screenY: nasl.core.Integer;
+    //   which: nasl.core.Integer;
+    // }) => any;
 
-    @Event({
-      title: '获得焦点',
-      description: '获得焦点时触发。',
-    })
-    onFocus: (event: {
-      cancelBubble: nasl.core.Boolean;
-      detail: nasl.core.String;
-      layerX: nasl.core.Integer;
-      layerY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    // @Event({
+    //   title: '获得焦点',
+    //   description: '获得焦点时触发。',
+    // })
+    // onFocus: (event: {
+    //   cancelBubble: nasl.core.Boolean;
+    //   detail: nasl.core.String;
+    //   layerX: nasl.core.Integer;
+    //   layerY: nasl.core.Integer;
+    //   pageX: nasl.core.Integer;
+    //   pageY: nasl.core.Integer;
+    //   which: nasl.core.Integer;
+    // }) => any;
 
-    @Event({
-      title: '失去焦点',
-      description: '失去焦点时触发。',
-    })
-    onBlur: (event: {
-      cancelBubble: nasl.core.Boolean;
-      detail: nasl.core.String;
-      layerX: nasl.core.Integer;
-      layerY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    // @Event({
+    //   title: '失去焦点',
+    //   description: '失去焦点时触发。',
+    // })
+    // onBlur: (event: {
+    //   cancelBubble: nasl.core.Boolean;
+    //   detail: nasl.core.String;
+    //   layerX: nasl.core.Integer;
+    //   layerY: nasl.core.Integer;
+    //   pageX: nasl.core.Integer;
+    //   pageY: nasl.core.Integer;
+    //   which: nasl.core.Integer;
+    // }) => any;
 
     // @Event({
     //   title: '导航前',

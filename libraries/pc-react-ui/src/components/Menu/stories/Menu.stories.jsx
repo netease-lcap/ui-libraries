@@ -24,8 +24,11 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: () => (
-    <Menu mode="horizontal">
-      <MenuItem key="mail" label="21"> Navigation Four - LinkM</MenuItem>
+    <Menu mode="horizontal" onClick={(e) => console.log(3)} onSelect={(e) => console.log(4)}>
+      <MenuItem key="mail" label="21">
+        {' '}
+        Navigation Four - LinkM
+      </MenuItem>
       <MenuItem key="app">Navigation</MenuItem>
     </Menu>
   ),

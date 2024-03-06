@@ -258,25 +258,25 @@ namespace nasl.ui {
     })
     private text: nasl.core.String;
 
-    @Prop({
-      group: '数据属性',
-      title: '值',
-      description: '此项的值',
-      docDescription: '此项的值',
-    })
-    value: nasl.core.Any;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '值',
+    //   description: '此项的值',
+    //   docDescription: '此项的值',
+    // })
+    // value: nasl.core.Any;
 
-    @Prop({
-      group: '数据属性',
-      title: '指定当前是否选中	',
-      description: '标志选中状态的值',
-      sync: true,
-      docDescription: '选项返还的选项值。',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    checked: nasl.core.Boolean | null = false;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '指定当前是否选中	',
+    //   description: '标志选中状态的值',
+    //   sync: true,
+    //   docDescription: '选项返还的选项值。',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // checked: nasl.core.Boolean | null = false;
 
     // @Prop({
     //   group: '数据属性',

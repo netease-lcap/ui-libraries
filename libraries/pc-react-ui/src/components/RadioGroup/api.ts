@@ -13,26 +13,26 @@ namespace nasl.ui {
   }
 
   export class RadioOptions extends ViewComponentOptions {
-    @Prop({
-      group: '数据属性',
-      title: '选中值',
-      description: '当前选中的值',
-      sync: true,
-      docDescription: '当前选择的值',
-    })
-    value: nasl.core.Any;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '选中值',
+    //   description: '当前选中的值',
+    //   sync: true,
+    //   docDescription: '当前选择的值',
+    // })
+    // value: nasl.core.Any;
 
-    @Prop({
-      group: '数据属性',
-      title: '指定当前是否选中	',
-      description: '标志选中状态的值',
-      sync: true,
-      docDescription: '选项返还的选项值。',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    checked: nasl.core.Boolean | null = false;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '指定当前是否选中	',
+    //   description: '标志选中状态的值',
+    //   sync: true,
+    //   docDescription: '选项返还的选项值。',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // checked: nasl.core.Boolean | null = false;
     // @Prop({
     //   group: '主要属性',
     //   title: '自动选择',
@@ -211,7 +211,7 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean = false;
 
-    @Prop({
+    @Prop<RadioGroupOptions, 'size'>({
       group: '样式属性',
       title: '尺寸',
       description: '只对按钮样式生效',
@@ -220,12 +220,13 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '小' }, { title: '正常' }, { title: '大' }],
       },
+      if: (_) => _.optionType === 'button',
     })
     size: 'small' | 'middle' | 'large';
 
     @Prop({
       group: '样式属性',
-      title: '尺寸',
+      title: '单选样式',
       description: '只对按钮样式生效',
       docDescription: '只对按钮样式生效',
       setter: {

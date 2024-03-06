@@ -244,7 +244,7 @@ namespace nasl.ui {
       title: '下拉框改变',
       description: '展开下拉菜单的回调',
     })
-    private onDropdownVisibleChange: (open: Boolean) => void;
+    onDropdownVisibleChange: (open: Boolean) => void;
 
     @Event({
       title: '失去焦点',

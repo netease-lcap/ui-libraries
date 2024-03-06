@@ -23,12 +23,22 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: () => (
+  render: (...arg) => (
     <Breadcrumb>
-      <BreadcrumbItem>sample</BreadcrumbItem>
+      <BreadcrumbItem
+        onDoubleClick={(e) => {
+          console.log('cicl');
+        }}
+        {...arg}
+      >
+        sample
+      </BreadcrumbItem>
     </Breadcrumb>
   ),
   args: {
+    onDoubleClick: (e) => {
+      console.log(1234);
+    },
     color: 'magenta',
     children: 'Tag',
   },
