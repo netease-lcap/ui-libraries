@@ -43,7 +43,7 @@ namespace nasl.ui {
         options: [{ title: '主题色' }, { title: '成功色' }, { title: '警告色' }, { title: '错误色' }],
       },
     })
-    color: 'primary' | 'success' | 'warning' | 'error' = 'primary';
+    color: 'default' | 'success' | 'warning' | 'error' = 'default';
 
     // @Prop({
     //   group: '主要属性',
