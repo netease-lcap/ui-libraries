@@ -146,16 +146,16 @@ namespace nasl.ui {
     })
     target: '_blank' | '_self' | '_parent' | '_top' = '_self';
 
-    @Prop({
-      group: '状态属性',
-      title: '禁用',
-      description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
-      docDescription: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）。',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    disabled: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '状态属性',
+    //   title: '禁用',
+    //   description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
+    //   docDescription: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）。',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // disabled: nasl.core.Boolean = false;
 
     @Event({
       title: '点击',
