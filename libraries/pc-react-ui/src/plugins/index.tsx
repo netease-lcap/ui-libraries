@@ -99,18 +99,7 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     expandProps.get($deletePropsList, []),
     [$deletePropsList, 'render', 'usePlugin', 'mutableProps', $deletePropsList, 'ref'],
   ));
-  // useWhyDidYouUpdate('useWhyDidYouUpdateComponent', { ...jsProps });
 
-  // return <BaseComponent {...props} ref={ref} />;
-  // console.log(mutableProps.getObj(), 'mutableProps');
-  // const ComponentWithErrorBoundary = withErrorBoundary(Component, {
-  //   fallback: <div>Something went wrong</div>,
-  //   onError(error, info) {
-  //     console.log(error, info, '组件出错啦----');
-  //   },
-  // });
-  // console.log(mutableProps.getObj(), 'obj');
-  // console.log(ref, 'pluginref');
   React.useImperativeHandle(ref, () => {
     return {
       ...componentRef,
@@ -118,14 +107,10 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     };
   }, [componentRef, baseRef]);
   mutableProps.setState({ ref });
-  // console.log(ref, 'ref');
-  // console.log(excludeProps, 'excludeProps');
-  // useWhyDidYouUpdate('name', excludeProps);
   return (
     <Component
       {...excludeProps}
       ref={baseRef}
-    // {...mutableProps.getObj()}
     >
       {props.children}
     </Component>
@@ -157,7 +142,6 @@ export function registerComponet<T, U>(
     // React.useEffect(() => {
     //   plugin.setPlugin(props.usePlugin);
     //   setPlugin({ ...(plugin as any) });
-    //   console.log(plugin.plugin, 'plugin.plugin');
     // }, [props.usePlugin]);
 
     return <ComponentWithErrorBoundary BaseComponent={Component} props={props} plugin={plugin} ref={ref} />;
