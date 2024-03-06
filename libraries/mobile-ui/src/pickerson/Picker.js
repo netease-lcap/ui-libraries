@@ -82,7 +82,7 @@ export default createComponent({
           (x) => _get(x, this.valueField) === this.currentValue
         );
       }
-      this.defaultIndex = index;
+      this.defaultIndex = index > -1 ? index : 0;
     },
     format() {
       this.columns = this.columnsprop || [];

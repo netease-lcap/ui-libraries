@@ -96,10 +96,6 @@
     padding: 10px 10px 10px 0;
     line-height: @line-height-sm;
 
-    &:not(:last-child)::after {
-      border-bottom-width: 1px;
-    }
-
     .van-step__circle-container {
       position: absolute;
       top: 19px;
@@ -127,6 +123,12 @@
   &:last-child {
     .van-step__line {
       width: 0;
+    }
+  }
+
+  &--border {
+    &:not(:last-child)::after {
+      border-bottom-width: 1px;
     }
   }
 

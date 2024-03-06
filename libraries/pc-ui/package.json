@@ -35,6 +35,8 @@
     "README.md"
   ],
   "dependencies": {
+    "@joskii/jflow-core": "^0.1.22",
+    "@joskii/jflow-vue2-plugin": "^0.1.0",
     "@popperjs/core": "^2.10.2",
     "@vusion/utils": "0.4.11",
     "@vusion/validator": "0.4.12",
