@@ -28,10 +28,10 @@ export const 异步函数 = {
     React.useEffect(() => {
       console.log(ref, 'ref');
     }, []);
-    return [<Image {...args} style={{ marginRight: '100px' }} />, <Image {...args} />];
+    return [<Image {...args} style={{ width: '200px', marginRight: '100px' }} />, <Image {...args} />];
   },
   args: {
-    width: 200,
+    width: '200px',
     src: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
   },
 };
