@@ -217,14 +217,25 @@ namespace nasl.ui {
     })
     rowKey: (item: T) => V;
 
-    @Prop({
+    @Prop<TableOptions<T, V, P, M>, 'value'>({
       group: '数据属性',
       title: '选择值',
       description: '用于标识单选选项的值',
       sync: true,
-      docDescription: '当表格设置了单选列，或开启了可选行，选中某一行时的值。该取值由值字段名决定。一般会是id等能唯一标识每一行数据的值',
+      docDescription: '当表格设置了选则列，或开启了可选行，选中的值。该取值由值字段名决定。一般会是id等能唯一标识每一行数据的值',
+      if: (_) => _.rowSelection === true,
     })
-    value: T;
+    value: T | nasl.collection.List<T>;
+
+    @Prop({
+      group: '数据属性',
+      title: '开启多选',
+      description: '开启表格多选',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    rowSelection: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '数据属性',
@@ -792,7 +803,7 @@ namespace nasl.ui {
     @Event({
       title: '多选改变后',
       description: '多选值变后触发设定事件',
-       // if: (_) => _.designerMode === 'empty',
+      // if: (_) => _.designerMode === 'empty',
     })
     onChange: (event: { value: V; oldValue: V; item: T; oldItem: T; values: nasl.collection.List<V>; oldValues: nasl.collection.List<V>; items: nasl.collection.List<T> }) => any;
 

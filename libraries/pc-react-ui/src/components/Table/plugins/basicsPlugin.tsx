@@ -109,9 +109,9 @@ export function useHandleRowSelection(props) {
   const onChange = props.get('onChange');
   const rowSelection = props.get('rowSelection');
   const result = fp.cond([
-    [fp.isNil, fp.constant({})],
+    [fp.isEqual(false), fp.constant({})],
     [fp.stubTrue, fp.constant({ rowSelection: { selectedRowKeys: fp.concat([], valueProps), onChange } })],
-  ])(rowSelection);
+  ])(!!rowSelection);
   return result;
 }
 
