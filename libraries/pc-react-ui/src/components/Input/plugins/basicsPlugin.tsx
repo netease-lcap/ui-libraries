@@ -6,7 +6,7 @@ import { Icon } from '@/index';
 export function useHandleRef(props) {
   const onChangeProps = props.get('onChange');
   const result = {
-    onChange: _.wrap(onChangeProps, (fn, e) => {
+    onChange: _.wrap(onChangeProps, (fn, e: React.ChangeEvent<HTMLInputElement>) => {
       fn(e?.target?.value, e);
     }),
   };

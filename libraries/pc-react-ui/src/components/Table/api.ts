@@ -757,13 +757,13 @@ namespace nasl.ui {
       title: '点击行',
       description: '点击某一行时触发',
     })
-    onClickRow: (event: { item: T; index: nasl.core.Integer; rowIndex: nasl.core.Integer }) => any;
+    onRowClick: (event: { item: T; index: nasl.core.Integer; rowIndex: nasl.core.Integer }) => any;
 
     @Event({
       title: '双击行',
       description: '双击某一行时触发',
     })
-    onDblclickRow: (event: { item: T; index: nasl.core.Integer; rowIndex: nasl.core.Integer }) => any;
+    onDoubleClick: (event: { item: T; index: nasl.core.Integer; rowIndex: nasl.core.Integer }) => any;
 
     // @Event({
     //   title: '选择前',

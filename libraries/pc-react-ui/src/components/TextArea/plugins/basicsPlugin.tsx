@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import React from 'react';
 
 export function useHandle() {
   return {};
@@ -6,7 +7,7 @@ export function useHandle() {
 export function useHandleRef(props) {
   const onChangeProps = props.get('onChange');
   const result = {
-    onChange: _.wrap(onChangeProps, (fn, e) => {
+    onChange: _.wrap(onChangeProps, (fn, e: React.ChangeEvent<HTMLInputElement>) => {
       fn(e?.target?.value, e);
     }),
   };

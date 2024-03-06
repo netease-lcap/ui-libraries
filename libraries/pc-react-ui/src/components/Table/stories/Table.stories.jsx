@@ -40,7 +40,7 @@ export const 默认 = {
             console.log(current, '====');
             return (
               <Flex gap="small">
-                <Text  children={current?.item?.entity1?.createdTime} />
+                <Text children={current?.item?.entity1?.createdTime} />
               </Flex>
             );
           }}
@@ -70,25 +70,27 @@ export const 异步 = {
   render: (args) => <Table {...args} />,
   args: {
     style: {
-      width: '200px',
+      width: '1200px',
     },
     scrollY: 500,
+    // pagination: false,
+    onBefore: (...e) => {
+      // console.log(...e, '==');
+    },
+    onSuccess: (...e) => {
+      // console.log(...e, 'success');
+    },
+    onDoubleClick: (...e) => {
+      console.log(...e, 'onClickRow');
+    },
     async dataSource(params) {
       return {
-        list: [
-          {
-            key: '1',
-            name: '胡彦斌',
-            age: 32,
-            address: '西湖区湖底公园1号',
-          },
-          {
-            key: '2',
-            name: '胡彦祖',
-            age: 42,
-            address: '西湖区湖底公园1号',
-          },
-        ],
+        list: new Array(50).fill(1).map((item, index) => ({
+          key: index,
+          name: '胡彦斌',
+          age: 32,
+          address: '西湖区湖底公园1号',
+        })),
       };
     },
     columns: [

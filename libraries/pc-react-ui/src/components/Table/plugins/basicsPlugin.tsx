@@ -30,22 +30,16 @@ export function useHandle(props) {
     return columnsCond({ columns, children });
   }, [children, columns]);
   return result;
-  // const columnsChildren = fp.filter((item: Record<string, any>) => item.type?.name === 'Column3');
-  // const omitColumnsProps = fp.map((item: Record<string, any>) => item.props);
-  // const childrenFlow = fp.flow(columnsChildren, omitColumnsProps);
-  // const columnsCond = fp.cond([
-  //   [fp.conforms({ columns: fp.isArray, children: fp.stubTrue }), fp.constant({ columns })],
-  //   [fp.conforms({ children: fp.isArray }), fp.constant({ columns: childrenFlow(children) })],
-  //   [fp.stubTrue, fp.stubObject],
-  // ]);
-  // return columnsCond({ columns, children });
 }
 
 export function useHandleTransformOption(props) {
   const dataSource = props.get('dataSource');
+  const pagination = props.get('pagination');
   const onBefore = props.get('onBefore', () => { });
   const onSuccess = props.get('onSuccess', () => { });
-  const ref = props.get('ref');
+  const current = props.get('current', 1);
+  const pageSizeProps = props.get('pageSize');
+  const refProps = props.get('ref');
   const warpList = _.cond([
     [Array.isArray, (list) => ({ list, total: list.length })],
     [_.conforms({ list: _.isArray }), _.identity],
@@ -68,18 +62,21 @@ export function useHandleTransformOption(props) {
   const { tableProps, run } = useAntdTable(transformOption(dataSource), {
     onBefore: (params) => _.attempt(onBefore, params),
     onSuccess: (data, params) => _.attempt(onSuccess, data, params),
+    defaultParams: [
+      { current, pageSize: pageSizeProps },
+    ],
   });
-  const { pagination, dataSource: data } = tableProps;
-  return fp.isNil(dataSource) ? {} : _.assign(tableProps, _.assign(ref, { reload: run, data, pageSize: pagination?.pageSize }));
+  const { dataSource: data, pagination: { pageSize } } = tableProps;
+  const ref = _.assign(refProps, { reload: run, data, pageSize });
+  const resultTableProps = _.isEqual(pagination, false) ? _.assign(tableProps, { pagination: false }) : tableProps;
+  return fp.isNil(dataSource) ? {} : _.assign(resultTableProps, ref);
 }
 
 export function useHandlePagination(props) {
   const pagination = props.get('pagination');
-  const pageSize = props.get('pageSize');
   const showSizeChanger = props.get('showSizeChanger');
   const pageSizeOptions = props.get('pageSizeOptions');
   const onChange = props.get('onPageonChange');
-  const current = props.get('current');
   const showTotal = props.get('showTotal');
   const showTotalText = fp.cond([
     [fp.isEqual(true), fp.constant((total) => `共 ${total} 条`)],
@@ -89,24 +86,23 @@ export function useHandlePagination(props) {
   const paginationConfig = {
     ...(fp.isPlainObject(pagination) ? pagination : {}),
     ...(_.filterUnderfinedValue({
-      pageSize,
       showSizeChanger,
       pageSizeOptions,
-      current,
       showTotal: showTotalText,
       showQuickJumper,
-      onChange,
+      onChange: _.wrap(pagination.onChange, (fn, ...arg) => {
+        _.attempt(fn, arg);
+        _.attempt(onChange, arg);
+      }),
     })),
   };
   const paginationProps = fp.cond([
-    [fp.matches({ pagination: false }), fp.constant({ pagination: false })],
-    [fp.matches({ pagination: true }), fp.constant({ pagination: paginationConfig })],
-    [fp.stubTrue, fp.stubObject],
-  ])({
-    pagination,
-  });
+    [fp.isEqual(false), fp.constant({ pagination: false })],
+    [fp.stubTrue, fp.constant({ pagination: paginationConfig })],
+  ])(pagination);
   return paginationProps;
 }
+useHandlePagination.order = 5;
 
 export function useHandleRowSelection(props) {
   const valueProps = props.get('value');
@@ -150,7 +146,7 @@ export function useHandleEmptyText(props) {
 
 export function useHandleOnRow(props) {
   const onRowClick = props.get('onRowClick', () => { });
-  const onRowDbClick = props.get('onRowDbClick', () => { });
+  const onRowDbClick = props.get('onDoubleClick', () => { });
   return {
     onRow: (record, index) => ({
       onClick: () => _.attempt(onRowClick, record, index),
