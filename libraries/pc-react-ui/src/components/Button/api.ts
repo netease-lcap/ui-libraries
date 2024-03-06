@@ -231,7 +231,7 @@ namespace nasl.ui {
       title: '右键点击',
       description: '在右键菜单显示前触发。',
     })
-    onContextmenu: (event: {
+    onContextMenu: (event: {
       altKey: nasl.core.Boolean;
       button: nasl.core.Integer;
       clientX: nasl.core.Integer;

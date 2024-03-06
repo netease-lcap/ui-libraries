@@ -30,39 +30,36 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
-    return (
-      <Table {...args}>
-        <TableColumn dataIndex="name" title="name" key="11" />
-        <TableColumn
-          key="2"
-          field="entity1.createdTime"
-          render={(current) => {
-            console.log(current, '====');
-            return (
-              <Flex gap="small">
-                <Text children={current?.item?.entity1?.createdTime} />
-              </Flex>
-            );
-          }}
-          title={<Text children="创建时间" />}
-        />
-      </Table>
-    );
+    return <Table {...args} />;
   },
   args: {
     async dataSource(params) {
-      console.log(params, 'params');
       return {
-        list: [
-          {
-            entity1: {
-              createdTime: 'Assdad',
-            },
-          },
-        ],
-        total: 10,
+        list: new Array(50).fill(1).map((item, index) => ({
+          key: index,
+          name: '胡彦斌',
+          age: 32,
+          address: '西湖区湖底公园1号',
+        })),
       };
     },
+    columns: [
+      {
+        title: '姓名',
+        dataIndex: 'name',
+        key: 'name',
+      },
+      {
+        title: '年龄',
+        dataIndex: 'age',
+        key: 'age',
+      },
+      {
+        title: '住址',
+        dataIndex: 'address',
+        key: 'address',
+      },
+    ],
   },
 };
 

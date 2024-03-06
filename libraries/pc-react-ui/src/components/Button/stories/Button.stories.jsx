@@ -36,14 +36,15 @@ export const Primary = {
     type: 'primary',
     asyncLoading: true,
     // icon: 'AimOutli2ned',
+    onContextMenu: (e) => console.log(1),
     icon: 'BorderInnerOutlined',
     children: '123',
-    onClick: () => new Promise((res) => {
-      setTimeout(() => {
-        res();
-        alert('点击了按钮');
-      }, 1000);
-    }),
+    // onClick: () => new Promise((res) => {
+    //   setTimeout(() => {
+    //     res();
+    //     alert('点击了按钮');
+    //   }, 1000);
+    // }),
     mySize: 'small',
     // appType: '',
     // usePlugin: ['lowCode'],
