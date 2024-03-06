@@ -111,10 +111,11 @@ export function useHandlePagination(props) {
 export function useHandleRowSelection(props) {
   const valueProps = props.get('value');
   const onChange = props.get('onChange');
+  const rowSelection = props.get('rowSelection');
   const result = fp.cond([
-    [fp.isEqual({}), fp.constant({})],
+    [fp.isNil, fp.constant({})],
     [fp.stubTrue, fp.constant({ rowSelection: { selectedRowKeys: fp.concat([], valueProps), onChange } })],
-  ])(_.filterUnderfinedValue({ value: valueProps, onChange }));
+  ])(rowSelection);
   return result;
 }
 

@@ -386,16 +386,16 @@ namespace nasl.ui {
     // })
     // private hover: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   group: '交互属性',
-    //   title: '可选行',
-    //   description: '设置是否可以单选行',
-    //   docDescription: '表格行是否可点击选中，该取值由值字段名决定，一般会是id等能唯一标识每一行数据的值。默认关闭。',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    // })
-    // selectable: nasl.core.Boolean = false;
+    @Prop({
+      group: '交互属性',
+      title: '可选行',
+      description: '设置是否可以单选行',
+      docDescription: '表格行是否可点击选中，该取值由值字段名决定，一般会是id等能唯一标识每一行数据的值。默认关闭。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    rowSelection: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '交互属性',
@@ -790,8 +790,9 @@ namespace nasl.ui {
     // onCheck: (event: { checked: nasl.core.Boolean; oldChecked: nasl.core.Boolean; values: nasl.collection.List<V>; oldValues: nasl.collection.List<V>; item: T }) => any;
 
     @Event({
-      title: '改变后',
-      description: '单选或多选值改变后触发',
+      title: '多选改变后',
+      description: '多选值变后触发设定事件',
+       // if: (_) => _.designerMode === 'empty',
     })
     onChange: (event: { value: V; oldValue: V; item: T; oldItem: T; values: nasl.collection.List<V>; oldValues: nasl.collection.List<V>; items: nasl.collection.List<T> }) => any;
 
