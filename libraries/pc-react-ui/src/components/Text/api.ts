@@ -85,7 +85,7 @@ namespace nasl.ui {
         options: [{ title: '辅助文本' }, { title: '成功文本' }, { title: '警告文本' }, { title: '危险文本' }],
       },
     })
-    type: 'scondary' | 'success' | 'warning' | 'danger';
+    type: 'secondary' | 'success' | 'warning' | 'danger';
 
     @Prop({
       group: '样式属性',
