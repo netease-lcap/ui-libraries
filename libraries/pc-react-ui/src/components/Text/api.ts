@@ -82,10 +82,10 @@ namespace nasl.ui {
       docDescription: '设置文本类型',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '辅助文本' }, { title: '成功文本' }, { title: '警告文本' }, { title: '危险文本' }],
+        options: [{ title: '普通文本' }, { title: '辅助文本' }, { title: '成功文本' }, { title: '警告文本' }, { title: '危险文本' }],
       },
     })
-    type: 'scondary' | 'success' | 'warning' | 'danger';
+    type?: 'default' | 'secondary' | 'success' | 'warning' | 'danger' = 'default';
 
     @Prop({
       group: '样式属性',
