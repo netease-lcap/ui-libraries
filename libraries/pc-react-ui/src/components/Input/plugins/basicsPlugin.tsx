@@ -1,7 +1,8 @@
-import { useControllableValue, useWhyDidYouUpdate } from 'ahooks';
 import React from 'react';
 import _ from 'lodash';
+import classnames from 'classnames';
 import { Icon } from '@/index';
+import style from '../index.module.less';
 
 export function useHandleRef(props) {
   const onChangeProps = props.get('onChange');
@@ -22,4 +23,10 @@ export function useHandlePrefix(props) {
 export function useHandleSuffix(props) {
   const suffixProps = props.get('suffix');
   return _.isNil(suffixProps) ? {} : { suffix: Icon(suffixProps) };
+}
+export function useHandleStyle(props) {
+  const className = props.get('className');
+  return {
+    className: classnames(style.input, className),
+  };
 }

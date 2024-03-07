@@ -1,6 +1,6 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable react-refresh/only-export-components */
-// import React from 'react';
+import classnames from 'classnames';
+import style from '../index.module.less';
+
 import { $deletePropsList, $dataSourceField } from '@/plugins/constants';
 
 export function useHandleTransform(props) {
@@ -21,4 +21,9 @@ export function useHandleTransform(props) {
   };
 }
 
-// useHandleTransform.order = 3;
+export function useHandleStyle(props) {
+  const className = props.get('className');
+  return {
+    className: classnames(style.treeSelect, className),
+  };
+}

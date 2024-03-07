@@ -1,5 +1,6 @@
-import React from 'react';
-import _ from 'lodash';
+import classnames from 'classnames';
+import style from '../index.module.less';
+
 import {
   $labelKey, $valueKey, $dataSourceField, $deletePropsList,
 } from '@/plugins/constants';
@@ -11,5 +12,11 @@ export function useHandleTransform(props) {
     [$labelKey]: 'label',
     [$valueKey]: 'key',
     valueField: 'key',
+  };
+}
+export function useHandleStyle(props) {
+  const className = props.get('className');
+  return {
+    className: classnames(style.tabs, className),
   };
 }

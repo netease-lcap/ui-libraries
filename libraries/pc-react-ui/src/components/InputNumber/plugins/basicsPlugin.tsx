@@ -1,9 +1,8 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable react-refresh/only-export-components */
-// import React from 'react';
 import numbro from 'numbro';
 import _ from 'lodash';
+import classnames from 'classnames';
 import { $deletePropsList } from '@/plugins/constants';
+import style from '../index.module.less';
 
 export function Handleformat(props: any & { formatType: 'thousandths' | 'percentSign' }) {
   const formatType = props.get('formatType');
@@ -22,4 +21,10 @@ export function Handleformat(props: any & { formatType: 'thousandths' | 'percent
     [_.stubTrue, _.stubObject],
   ]);
   return _.assign({ [$deletePropsList]: deletePropsList }, result(formatType));
+}
+export function useHandleStyle(props) {
+  const className = props.get('className');
+  return {
+    className: classnames(style.inputNumber, className),
+  };
 }
