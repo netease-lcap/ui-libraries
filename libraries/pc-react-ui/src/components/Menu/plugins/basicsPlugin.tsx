@@ -13,6 +13,9 @@ export function useHandleRouter(props) {
       _.attempt(fn, arg);
       // console.log(arg.key);
       // navigate(arg.key);
+      if (_.isValidLink(arg.key)) {
+        window.location.href = arg.key;
+      }
       window.history.pushState({}, '', arg.key);
       // windowhistory.push("/index/goodsinfo/goodsdetail")
     }),

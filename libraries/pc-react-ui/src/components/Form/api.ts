@@ -95,7 +95,7 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
       },
     })
-    gap: nasl.core.Decimal = 0;
+    gutter: nasl.core.Decimal = 0;
 
     // @Prop({
     //   group: '主要属性',

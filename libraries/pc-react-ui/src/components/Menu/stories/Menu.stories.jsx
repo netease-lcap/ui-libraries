@@ -25,7 +25,7 @@ export default {
 export const 默认 = {
   render: () => (
     <Menu mode="horizontal" onClick={(e) => console.log(3)} onSelect={(e) => console.log(4)}>
-      <MenuItem key="/mail" label="21" icon="BorderInnerOutlined">
+      <MenuItem key="https://dev.zzdemo.defaulttenant.lcap.codewave-test.163yun.com/crumb" label="21" icon="BorderInnerOutlined">
         Navigation Four - LinkM
       </MenuItem>
       <MenuItem key="/app">Navigation</MenuItem>

@@ -5,10 +5,7 @@ import type { pluginType } from '@/plugins/type';
 
 import './index.module.less';
 
-export {
-  RouterProvider,
-  Outlet as Router,
-} from 'react-router-dom';
+export { RouterProvider, Outlet as Router } from 'react-router-dom';
 
 // type TransferProps = AntdTransferProps
 
