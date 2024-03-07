@@ -111,16 +111,24 @@ namespace nasl.ui {
                   { title: '12时09分', if: _ => _.minUnit === 'minute' }
               ],
           },
-          if: _ => _.advancedFormat.enable === false,
+          if: _ => _.advancedFormatEnable === false,
       })
       showFormatter: 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分';
 
       @Prop({
           group: '主要属性',
           title: '高级格式化',
-          bindHide: true,
       })
-      advancedFormat: { enable: nasl.core.Boolean, value: nasl.core.String } = { enable: false, value: '' };
+      advancedFormatEnable: nasl.core.Boolean = false;
+
+      @Prop<UTimePickerOptions, 'advancedFormatValue'>({
+            group: '主要属性',
+            title: '高级格式化内容',
+            description: '用来控制时间的展示格式',
+            bindHide: true,
+            if: _ => _.advancedFormatEnable === true,
+        })
+        advancedFormatValue: nasl.core.String;
 
       @Prop({
           group: '主要属性',

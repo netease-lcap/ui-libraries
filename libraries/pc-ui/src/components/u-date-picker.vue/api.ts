@@ -118,7 +118,16 @@ namespace nasl.ui {
           title: '高级格式化',
           bindHide: true,
       })
-      advancedFormat: { enable: nasl.core.Boolean, value: nasl.core.String } = { enable: false, value: '' };
+      advancedFormatEnable: nasl.core.Boolean = false;
+
+      @Prop<UDatePickerOptions, 'advancedFormatValue'>({
+            group: '主要属性',
+            title: '高级格式化内容',
+            description: '用来控制日期的展示格式',
+            bindHide: true,
+            if: _ => _.advancedFormatEnable === true,
+        })
+      advancedFormatValue: nasl.core.String;
 
       @Prop<UDatePickerOptions, 'showFormatter'>({
           group: '主要属性',
@@ -143,7 +152,7 @@ namespace nasl.ui {
                   { title: 'ISO（2023）', if: _ => _.picker === 'year' }
               ],
           },
-          if: _ => _.advancedFormat.enable === false,
+          if: _ => _.advancedFormatEnable === false,
       })
       showFormatter: 'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' | 'GGGG-W周' | 'GGGG年第W周' | 'GGGG-WWWW' | 'YYYY年M月' | 'YYYY-MM' | 'M/YYYY' | 'YYYY年第Q季度' | 'YYYY年QQ' | 'YYYY-QQ' | 'YYYY年' | 'YYYY';
 
