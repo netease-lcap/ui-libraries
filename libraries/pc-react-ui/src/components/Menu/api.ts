@@ -144,11 +144,11 @@ namespace nasl.ui {
   }
 
   export class MenuItemOptions extends ViewComponentOptions {
-    @Prop({
-      title: '文本',
-      description: '文本内容',
-    })
-    label: nasl.core.String;
+    // @Prop({
+    //   title: '文本',
+    //   description: '文本内容',
+    // })
+    // label: nasl.core.String;
 
     @Prop({
       title: '链接地址',

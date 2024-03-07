@@ -286,11 +286,11 @@ namespace nasl.ui {
     })
     name: nasl.core.String;
 
-    @Prop({
-      title: '标签名',
-      description: '用于左侧显示，同时用于提示消息的合成',
-    })
-    private label: nasl.core.String;
+    // @Prop({
+    //   title: '标签名',
+    //   description: '用于左侧显示，同时用于提示消息的合成',
+    // })
+    // private label: nasl.core.String;
 
     @Prop({
       title: '验证是否静默',

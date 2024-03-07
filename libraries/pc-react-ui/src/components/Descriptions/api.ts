@@ -72,10 +72,10 @@ namespace nasl.ui {
   }
 
   export class DescriptionsItemOptions extends ViewComponentOptions {
-    @Prop({
-      title: '标签名',
-    })
-    private label: nasl.core.String;
+    // @Prop({
+    //   title: '标签名',
+    // })
+    // private label: nasl.core.String;
 
     @Prop({
       group: '主要属性',
