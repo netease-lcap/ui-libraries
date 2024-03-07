@@ -112,17 +112,17 @@ namespace nasl.ui {
     })
     trigger: 'click' | 'hover' | 'contextMenu' = 'click';
 
-    @Prop({
-      group: '主要属性',
-      title: '样式类型',
-      description: '设置主题颜色和按钮样式类型',
-      docDescription: '- 支持定义按钮样式，包括主要按钮、次要按钮、普通按钮、危险操作按钮和次要危险操作按钮。',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '主要按钮' }, { title: '虚线按钮' }, { title: '普通按钮' }, { title: '文字' }, { title: '链接' }],
-      },
-    })
-    type: 'primary' | 'dashed' | 'default' | 'text' | 'link' = 'default';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '样式类型',
+    //   description: '设置主题颜色和按钮样式类型',
+    //   docDescription: '- 支持定义按钮样式，包括主要按钮、次要按钮、普通按钮、危险操作按钮和次要危险操作按钮。',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '主要按钮' }, { title: '虚线按钮' }, { title: '普通按钮' }, { title: '文字' }, { title: '链接' }],
+    //   },
+    // })
+    // type: 'primary' | 'dashed' | 'default' | 'text' | 'link' = 'default';
 
     // @Prop({
     //   group: '主要属性',
