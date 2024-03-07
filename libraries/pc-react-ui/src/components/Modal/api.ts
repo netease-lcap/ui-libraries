@@ -43,17 +43,17 @@ namespace nasl.ui {
     })
     private description: nasl.core.String = '详情描述';
 
-    @Prop({
-      title: '确定按钮',
-      description: '确定按钮文本，如果为空则不显示',
-    })
-    okText: nasl.core.String = '确定';
+    // @Prop({
+    //   title: '确定按钮',
+    //   description: '确定按钮文本，如果为空则不显示',
+    // })
+    // okText: nasl.core.String = '确定';
 
-    @Prop({
-      title: '取消按钮',
-      description: '取消按钮文本，如果为空则不显示',
-    })
-    cancelText: nasl.core.String = '取消';
+    // @Prop({
+    //   title: '取消按钮',
+    //   description: '取消按钮文本，如果为空则不显示',
+    // })
+    // cancelText: nasl.core.String = '取消';
 
     @Prop({
       title: '嵌入页面显示',
