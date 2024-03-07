@@ -25,19 +25,48 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
-    return (
-      <CheckboxGroup
-        dataSource={async () => [
-          { label: 'Apple', value: 'Apple' },
-          { label: 'Pear', value: 'Pear' },
-          { label: 'Orange', value: 'Orange', disabled: false },
-        ]}
-      />
-    );
+    return <CheckboxGroup {...args} />;
   },
-  // args: {
-  //   dataSource: [{ value: 1, label: '3' }],
-  // },
+  args: {
+    dataSource: async () => ({
+      list: [
+        {
+          checkbox: {
+            id: 1,
+            createdTime: null,
+            updatedTime: null,
+            createdBy: null,
+            updatedBy: null,
+            name: '苹果',
+          },
+        },
+        {
+          checkbox: {
+            id: 2,
+            createdTime: null,
+            updatedTime: null,
+            createdBy: null,
+            updatedBy: null,
+            name: '香蕉',
+          },
+        },
+        {
+          checkbox: {
+            id: 3,
+            createdTime: null,
+            updatedTime: null,
+            createdBy: null,
+            updatedBy: null,
+            name: '橘子',
+          },
+        },
+      ],
+      total: 3,
+    }),
+    // dataSource: ['1', 2, 3],
+    // textField: 'name',
+    // valueField: 'id',
+  },
 };
 export const 静态数据 = {
   render: () => {

@@ -32,10 +32,43 @@ export const 默认 = {
 export const 数据源 = {
   render: (args) => <RadioGroup {...args} />,
   args: {
-    dataSource: [
-      { label: 'Apple', value: 'Apple' },
-      { label: 'Pear', value: 'Pear' },
-      { label: 'Orange', value: 'Orange', title: 'Orange' },
-    ],
+    // dataSource: async () => ({
+    //   list: [
+    //     {
+    //       checkbox: {
+    //         id: 1,
+    //         createdTime: null,
+    //         updatedTime: null,
+    //         createdBy: null,
+    //         updatedBy: null,
+    //         name: '苹果',
+    //       },
+    //     },
+    //     {
+    //       checkbox: {
+    //         id: 2,
+    //         createdTime: null,
+    //         updatedTime: null,
+    //         createdBy: null,
+    //         updatedBy: null,
+    //         name: '香蕉',
+    //       },
+    //     },
+    //     {
+    //       checkbox: {
+    //         id: 3,
+    //         createdTime: null,
+    //         updatedTime: null,
+    //         createdBy: null,
+    //         updatedBy: null,
+    //         name: '橘子',
+    //       },
+    //     },
+    //   ],
+    //   total: 3,
+    // }),
+    dataSource: ['1', 2, 3],
+    // textField: 'name',
+    // valueField: 'id',
   },
 };

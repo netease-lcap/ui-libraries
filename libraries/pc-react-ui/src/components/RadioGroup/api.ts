@@ -13,14 +13,14 @@ namespace nasl.ui {
   }
 
   export class RadioOptions extends ViewComponentOptions {
-    // @Prop({
-    //   group: '数据属性',
-    //   title: '选中值',
-    //   description: '当前选中的值',
-    //   sync: true,
-    //   docDescription: '当前选择的值',
-    // })
-    // value: nasl.core.Any;
+    @Prop({
+      group: '数据属性',
+      title: '选中值',
+      description: '当前选中的值',
+      sync: true,
+      docDescription: '当前选择的值',
+    })
+    value: nasl.core.Any;
 
     // @Prop({
     //   group: '数据属性',
@@ -160,18 +160,27 @@ namespace nasl.ui {
     description: '多项中选择一项',
     group: 'Form',
   })
-  export class RadioGroup extends ViewComponent {
-    constructor(options?: Partial<RadioGroupOptions>) {
+  export class RadioGroup<T, V, C extends string> extends ViewComponent {
+    constructor(options?: Partial<RadioGroupOptions<T, V, C>>) {
       super();
     }
   }
 
-  export class RadioGroupOptions extends ViewComponentOptions {
+  export class RadioGroupOptions<T, V, C extends string> extends ViewComponentOptions {
     @Prop({
       title: '相关对象',
       description: '相关对象。当选择此项时，抛出的事件会传递该对象，便于开发',
     })
     private item: object;
+
+    @Prop({
+      group: '数据属性',
+      title: '数据源',
+      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      designerValue: [{}, {}, {}],
+    })
+    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
     @Prop({
       group: '数据属性',
@@ -211,7 +220,7 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean = false;
 
-    @Prop<RadioGroupOptions, 'size'>({
+    @Prop<RadioGroupOptions<T, V, C>, 'size'>({
       group: '样式属性',
       title: '尺寸',
       description: '只对按钮样式生效',

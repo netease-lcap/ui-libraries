@@ -258,13 +258,13 @@ namespace nasl.ui {
     })
     private text: nasl.core.String;
 
-    // @Prop({
-    //   group: '数据属性',
-    //   title: '值',
-    //   description: '此项的值',
-    //   docDescription: '此项的值',
-    // })
-    // value: nasl.core.Any;
+    @Prop({
+      group: '数据属性',
+      title: '值',
+      description: '此项的值',
+      docDescription: '此项的值',
+    })
+    value: nasl.core.Any;
 
     // @Prop({
     //   group: '数据属性',
@@ -316,11 +316,11 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean = false;
 
-    @Event({
-      title: '改变后',
-      description: '选中状态改变时触发',
-    })
-    onChange: (event: { value: V; oldValue: V }) => any;
+    // @Event({
+    //   title: '改变后',
+    //   description: '选中状态改变时触发',
+    // })
+    // onChange: (event: { value: V; oldValue: V }) => any;
 
     @Slot({
       title: '项',
