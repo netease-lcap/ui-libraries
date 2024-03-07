@@ -161,7 +161,7 @@ namespace nasl.ui {
 
     @Prop<DateRangePickerOptions, 'showTime'>({
       group: '主要属性',
-      title: '时间是选择',
+      title: '显示时间选择',
       // bindHide: true,
       setter: {
         concept: 'SwitchSetter',
