@@ -10,7 +10,7 @@ export function useHandleRouter(props) {
   // const navigate = useNavigate();
   return {
     onClick: _.wrap(onClickPorps, (fn, arg) => {
-      fn(arg);
+      _.attempt(fn, arg);
       // console.log(arg.key);
       // navigate(arg.key);
       window.history.pushState({}, '', arg.key);
