@@ -281,11 +281,11 @@ namespace nasl.ui {
   }
 
   export class TreeNodeOptions<T, V> extends ViewComponentOptions {
-    @Prop({
-      title: '文本',
-      description: '节点的文本',
-    })
-    title: nasl.core.String;
+    // @Prop({
+    //   title: '文本',
+    //   description: '节点的文本',
+    // })
+    // title: nasl.core.String;
 
     @Prop({
       title: '相关对象',

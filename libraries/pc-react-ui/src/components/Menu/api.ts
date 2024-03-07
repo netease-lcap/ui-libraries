@@ -406,11 +406,11 @@ namespace nasl.ui {
   }
 
   export class MenuSubMenuOptions extends ViewComponentOptions {
-    @Prop({
-      title: '文本',
-      description: '文本内容',
-    })
-    title: nasl.core.String;
+    // @Prop({
+    //   title: '文本',
+    //   description: '文本内容',
+    // })
+    // title: nasl.core.String;
 
     @Prop({
       title: '值',

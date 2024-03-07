@@ -1,7 +1,6 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable react-refresh/only-export-components */
-// import React from 'react';
+import classnames from 'classnames';
 import { $deletePropsList, $dataSourceField } from '@/plugins/constants';
+import style from '../index.module.less';
 
 export function useHandleTransform(props) {
   const deletePropsList = props.get($deletePropsList, []).concat(['dataSource', 'childrenField']);
@@ -21,4 +20,9 @@ export function useHandleTransform(props) {
   };
 }
 
-// useHandleTransform.order = 3;
+export function useHandleStyle(props) {
+  const className = props.get('className');
+  return {
+    className: classnames(style.cascader, className),
+  };
+}

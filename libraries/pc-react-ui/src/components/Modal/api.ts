@@ -25,11 +25,11 @@ namespace nasl.ui {
   }
 
   export class ModalOptions extends ViewComponentOptions {
-    @Prop({
-      title: '标题',
-      description: '弹窗的标题',
-    })
-    private title: nasl.core.String = '提示';
+    // @Prop({
+    //   title: '标题',
+    //   description: '弹窗的标题',
+    // })
+    // private title: nasl.core.String = '提示';
 
     @Prop({
       title: '内容',

@@ -64,13 +64,13 @@ namespace nasl.ui {
     })
     private mergeBorders: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: '标题',
-      description: '弹出框标题',
-      docDescription: '弹出框的标题，显示在弹出框内容上方',
-    })
-    title: nasl.core.String = '标题';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '标题',
+    //   description: '弹出框标题',
+    //   docDescription: '弹出框的标题，显示在弹出框内容上方',
+    // })
+    // title: nasl.core.String = '标题';
 
     @Prop({
       group: '主要属性',
