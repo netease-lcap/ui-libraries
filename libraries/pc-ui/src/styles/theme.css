@@ -2032,7 +2032,21 @@
     --grid-layout-column-content-gap-normal: var(--space-base);
     --grid-layout-column-content-gap-large: var(--space-large);
 
+    /* @component u-process-info @hidden*/
+    --process-info-label-color: var(--color-light);
 
+    /* @component u-process-record @hidden*/
+    --process-record-label-color: var(--color-light);
+    --process-record-title-color: #333;
+    --process-record-tail-border-color: #337EFF;
+    --process-record-dot-success-backgroundcolor: #337EFF;
+    --process-record-dot-error-backgroundcolor: #F24957;
+    --process-record-dot-normal-backgroundcolor: white;
+    --process-record-dot-normal-border-color: #337EFF;
+    --process-record-statuslabel-success-backgroundcolor: rgba(38, 189, 113, 0.1);
+    --process-record-statuslabel-success-color: #26BD71;
+    --process-record-statuslabel-error-backgroundcolor: rgba(242, 73, 87, 0.1);
+    --process-record-statuslabel-error-color: #F24957;
 }
 
 @custom-media --mini-window (max-width: 479px);
