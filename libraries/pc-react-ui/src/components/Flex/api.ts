@@ -88,7 +88,7 @@ namespace nasl.ui {
       // tabKind: 'style',
     })
     // direction: 'horizontal' | 'vertical' = 'horizontal';
-    vertical: true | false = true;
+    vertical: false | true = false;
 
     @Prop<FlexOptions, 'justify'>({
       group: '主要属性',
