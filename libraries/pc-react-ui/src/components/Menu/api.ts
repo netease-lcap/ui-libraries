@@ -231,6 +231,12 @@ namespace nasl.ui {
     })
     private exact: nasl.core.Boolean = false;
 
+    @Event({
+      title: '点击',
+      description: '点击此项时触发',
+    })
+    onClick: (event: any) => any;
+
     // @Event({
     //   title: '选择前',
     //   description: '选择此项前触发',
