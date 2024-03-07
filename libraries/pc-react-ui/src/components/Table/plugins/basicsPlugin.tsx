@@ -7,6 +7,10 @@ import { TableColumn } from '@/index';
 import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
 
+export function useHandleTitle(props) {
+  const title = props.get('title');
+  return _.isNil(title) ? {} : { title: () => title };
+}
 export function useHandle(props) {
   const childrenProps = props.get('children');
   const childrenList = React.Children.toArray(childrenProps).filter(React.isValidElement);

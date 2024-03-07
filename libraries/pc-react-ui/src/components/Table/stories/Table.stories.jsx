@@ -34,6 +34,7 @@ export const 默认 = {
     return <Table {...args} />;
   },
   args: {
+    title: '12',
     async dataSource(params) {
       return {
         list: new Array(50).fill(1).map((item, index) => ({
