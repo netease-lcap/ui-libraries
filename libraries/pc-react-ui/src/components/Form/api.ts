@@ -86,7 +86,7 @@ namespace nasl.ui {
     })
     layout: 'inline' | 'horizontal' | 'vertical' = 'inline';
 
-    @Prop<FormOptions, 'gutter'>({
+    @Prop<FormOptions, 'gap'>({
       group: '主要属性',
       title: '栅格间隔',
       description: '栅格间隔',
@@ -95,7 +95,7 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
       },
     })
-    gutter: nasl.core.Decimal = 0;
+    gap: nasl.core.Decimal = 0;
 
     // @Prop({
     //   group: '主要属性',
