@@ -2,8 +2,10 @@ import React from 'react';
 import fp from 'lodash/fp';
 import _ from 'lodash';
 import { useAntdTable } from 'ahooks';
+import classnames from 'classnames';
 import { TableColumn } from '@/index';
 import { $deletePropsList } from '@/plugins/constants';
+import style from '../index.module.less';
 
 export function useHandle(props) {
   const childrenProps = props.get('children');
@@ -184,5 +186,12 @@ export function useHandleScroll(props) {
   return {
     [$deletePropsList]: deletePropsList,
     ...result,
+  };
+}
+
+export function useHandleStyle(props) {
+  const className = props.get('className');
+  return {
+    className: classnames(style.table, className),
   };
 }

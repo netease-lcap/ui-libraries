@@ -33,7 +33,7 @@ namespace nasl.ui {
       designerValue: [{}, {}, {}],
       // if: (_) => _.hasDataSource === true,
     })
-      dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
     @Prop<DropdownOptions<T, V>, 'dataSchema'>({
       group: '数据属性',
@@ -42,7 +42,7 @@ namespace nasl.ui {
       docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示',
       // if: (_) => _.hasDataSource === true,
     })
-      dataSchema: T;
+    dataSchema: T;
 
     @Prop<DropdownOptions<T, V>, 'textField'>({
       group: '数据属性',
@@ -53,7 +53,7 @@ namespace nasl.ui {
       },
       // if: (_) => _.hasDataSource === true,
     })
-      textField: (item: T) => any = ((item: any) => item.text) as any;
+    textField: (item: T) => any = ((item: any) => item.text) as any;
 
     @Prop<DropdownOptions<T, V>, 'valueField'>({
       group: '数据属性',
@@ -65,7 +65,7 @@ namespace nasl.ui {
       },
       // if: (_) => _.hasDataSource === true,
     })
-      valueField: (item: T) => V = ((item: any) => item.value) as any;
+    valueField: (item: T) => V = ((item: any) => item.value) as any;
 
     // @Prop<DropdownOptions<T, V>, 'iconField'>({
     //   group: '数据属性',
@@ -110,7 +110,7 @@ namespace nasl.ui {
         options: [{ title: '点击' }, { title: '悬浮' }, { title: '右击' }],
       },
     })
-      trigger: 'click' | 'hover' | 'contextMenu' = 'click';
+    trigger: 'click' | 'hover' | 'contextMenu' = 'click';
 
     @Prop({
       group: '主要属性',
@@ -122,7 +122,7 @@ namespace nasl.ui {
         options: [{ title: '主要按钮' }, { title: '虚线按钮' }, { title: '普通按钮' }, { title: '文字' }, { title: '链接' }],
       },
     })
-      type: 'primary' | 'dashed' | 'default' | 'text' | 'link' = 'default';
+    type: 'primary' | 'dashed' | 'default' | 'text' | 'link' = 'default';
 
     // @Prop({
     //   group: '主要属性',
@@ -191,20 +191,20 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-      disabled: nasl.core.Boolean = false;
+    disabled: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '状态属性',
-      title: '显示状态',
-      docDescription: '开启时进入页面即展示下拉菜单，默认关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-      open: nasl.core.Boolean;
+    // @Prop({
+    //   group: '状态属性',
+    //   title: '显示状态',
+    //   docDescription: '开启时进入页面即展示下拉菜单，默认关闭',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    //   open: nasl.core.Boolean;
 
     @Slot({
-      title: 'undefined',
+      title: '下拉菜单项',
       description: '插入`<Dropdown>`子组件。',
       snippets: [
         {
@@ -213,13 +213,13 @@ namespace nasl.ui {
         },
       ],
     })
-      slotMenuItem: () => Array<ViewComponent>;
+    slotMenuItem: () => Array<ViewComponent>;
 
     @Slot({
       title: '标题',
       description: '内容自定义',
     })
-      slotDefault: () => Array<ViewComponent>;
+    slotDefault: () => Array<ViewComponent>;
   }
 
   // @Component({

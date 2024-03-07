@@ -1,5 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
+import classnames from 'classnames';
+import style from '../index.module.less';
+// import ess from '../index.less';
 
 function useHandle(props) {
   return {
@@ -25,6 +28,13 @@ function useHandle(props) {
 }
 export function useHandleScroll(props) {
   const styleProps = props.get('style');
-  const style = _.assign(styleProps, { overflow: 'scroll' });
-  return { style };
+  const selfStyle = _.assign(styleProps, { overflow: 'scroll' });
+  return { style: selfStyle };
+}
+
+export function useHandleClassName(props) {
+  const cls = classnames(style.flex, props.className);
+  return {
+    className: cls,
+  };
 }

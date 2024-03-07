@@ -32,7 +32,7 @@ export const Primary = {
         res();
       }, 3000);
     }),
-    'data-nodepath': '1234',
+    // controls: false,
     onKeyup: (e) => {
       console.log(1234);
     },
