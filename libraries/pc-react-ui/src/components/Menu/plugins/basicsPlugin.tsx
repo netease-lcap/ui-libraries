@@ -1,19 +1,19 @@
-import React from 'react';
+// import React from 'react';
 import _ from 'lodash';
-import { theme, Layout } from 'antd';
-import { useLocation, useNavigate } from 'react-router-dom';
+// import { theme, Layout } from 'antd';
+// import { useLocation, useNavigate } from 'react-router-dom';
 
-const { Header, Content, Footer } = Layout;
+// const { Header, Content, Footer } = Layout;
 
 export function useHandleRouter(props) {
   const onClickPorps = props.get('onClick');
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return {
     onClick: _.wrap(onClickPorps, (fn, arg) => {
       fn(arg);
-      console.log(arg.key);
-      navigate(arg.key);
-
+      // console.log(arg.key);
+      // navigate(arg.key);
+      window.history.pushState({}, '', arg.key);
       // windowhistory.push("/index/goodsinfo/goodsdetail")
     }),
   };

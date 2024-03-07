@@ -25,10 +25,10 @@ export const 基本用法 = {
   render: () => {
     return (
       <Menu mode="horizontal" style="height: 60px" theme="dark">
-        <MenuItem key="mail" style="line-height:60px">
+        <MenuItem key="/mail" style="line-height:60px">
           <Text children="导航项目一" style="color:inherit" />
         </MenuItem>
-        <MenuItem key="app" style="line-height:60px">
+        <MenuItem key="/app" style="line-height:60px">
           <Text children="导航项目二" style="color:inherit" />
         </MenuItem>
       </Menu>
