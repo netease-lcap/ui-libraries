@@ -35,6 +35,7 @@ export const 默认 = {
   },
   args: {
     title: '12',
+    showQuickJumper: true,
     async dataSource(params) {
       return {
         list: new Array(50).fill(1).map((item, index) => ({

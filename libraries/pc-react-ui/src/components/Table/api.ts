@@ -115,7 +115,7 @@ namespace nasl.ui {
       },
       if: (_) => _.pagination === true,
     })
-    showSizeChanger: nasl.core.Boolean = true;
+    showSizeChanger: nasl.core.Boolean = false;
 
     @Prop<TableOptions<T, V, P, M>, 'pageSizeOptions'>({
       group: '数据属性',
