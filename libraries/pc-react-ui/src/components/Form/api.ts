@@ -86,7 +86,7 @@ namespace nasl.ui {
     })
     layout: 'inline' | 'horizontal' | 'vertical' = 'inline';
 
-    @Prop<FormOptions, 'gap'>({
+    @Prop<FormOptions, 'gutter'>({
       group: '主要属性',
       title: '栅格间隔',
       description: '栅格间隔',

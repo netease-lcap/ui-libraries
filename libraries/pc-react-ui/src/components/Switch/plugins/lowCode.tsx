@@ -6,11 +6,11 @@ export function useHandleRef(props) {
   const nodeId = _.uniqueId('switch_');
   const ref = props.get('ref');
   React.useEffect(() => {
-    const switchElement = document.querySelector(`[data-nodeId=${nodeId}]`);
+    const switchElement = document.querySelector(`[data-nodeid=${nodeId}]`);
     setElement({ switch: switchElement }!);
   }, []);
   return {
-    'data-nodeId': nodeId,
+    'data-nodeid': nodeId,
     ref: _.assign(ref, element),
   };
 }
