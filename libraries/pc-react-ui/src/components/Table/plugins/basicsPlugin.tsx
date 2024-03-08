@@ -1,7 +1,7 @@
 import React from 'react';
 import fp from 'lodash/fp';
 import _ from 'lodash';
-import { useAntdTable } from 'ahooks';
+import { useAntdTable, useControllableValue } from 'ahooks';
 import classnames from 'classnames';
 import { TableColumn } from '@/index';
 import { $deletePropsList } from '@/plugins/constants';
@@ -112,11 +112,15 @@ useHandlePagination.order = 5;
 
 export function useHandleRowSelection(props) {
   const valueProps = props.get('value');
-  const onChange = props.get('onChange');
+  const onChangeProps = props.get('onChange');
   const rowSelection = props.get('rowSelection');
+  const [selectedRowKeys, onChange] = useControllableValue(_.filterUnderfinedValue({
+    value: valueProps,
+    onChange: onChangeProps,
+  }));
   const result = fp.cond([
     [fp.isEqual(false), fp.constant({})],
-    [fp.stubTrue, fp.constant({ rowSelection: { selectedRowKeys: fp.concat([], valueProps), onChange } })],
+    [fp.stubTrue, fp.constant({ rowSelection: { type: 'checkbox', selectedRowKeys, onChange } })],
   ])(!!rowSelection);
   return result;
 }

@@ -35,7 +35,12 @@ export const 默认 = {
   },
   args: {
     title: '12',
+    rowSelection: true,
+    rowKey: 'key',
     showQuickJumper: true,
+    onChange(e) {
+      console.log(e, '3');
+    },
     async dataSource(params) {
       return {
         list: new Array(50).fill(1).map((item, index) => ({
