@@ -22,6 +22,7 @@ export const Image = registerComponet<
 );
 Image.defaultProps = {
   preview: false,
+  fallback: 'xxx/xxxx.jpg',
 };
 
 // export default Image;

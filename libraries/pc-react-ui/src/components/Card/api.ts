@@ -53,7 +53,7 @@ namespace nasl.ui {
       //   options: [{ title: '一直显示' }, { title: 'hover时显示' }, { title: '不显示' }],
       // },
     })
-    boxShadow: nasl.core.Boolean = true;
+    boxShadow: nasl.core.Boolean = false;
     // shadow: 'always' | 'hover' | 'never' = 'always';
 
     @Slot({

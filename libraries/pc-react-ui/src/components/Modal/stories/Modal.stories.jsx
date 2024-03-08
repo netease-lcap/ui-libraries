@@ -44,11 +44,11 @@ export const 默认 = {
         </Button>
         <Flex ref={flexRef}>
           <Input ref={modalRef} />
-          {/* <Modal title="Basic Modal" ref={modalRef} defaultOpen>
+          <Modal title="Basic Modal" {...args} ref={modalRef} defaultOpen>
             <p>Some contents...</p>
             <p>Some contents...</p>
             <p>Some contents...</p>
-          </Modal> */}
+          </Modal>
         </Flex>
       </div>
     );
@@ -56,5 +56,8 @@ export const 默认 = {
   args: {
     color: 'magenta',
     children: 'Tag',
+    afterOpenChange: (e) => {
+      console.log(e, '-----');
+    },
   },
 };
