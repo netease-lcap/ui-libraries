@@ -145,11 +145,11 @@ namespace nasl.ui {
     })
     width: nasl.core.Integer;
 
-    @Event({
-      title: '点击确定',
-      description: '点击确定回调，参数为关闭函数，返回 promise 时 resolve 后自动关闭	',
-    })
-    onOk: (event: any) => any;
+    // @Event({
+    //   title: '点击确定',
+    //   description: '点击确定回调，参数为关闭函数，返回 promise 时 resolve 后自动关闭	',
+    // })
+    // onOk: (event: any) => any;
 
     @Event({
       title: '打开关闭后',

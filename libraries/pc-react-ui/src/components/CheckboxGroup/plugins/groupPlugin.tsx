@@ -68,7 +68,6 @@ export function useHandleTransformOption(props) {
   const { data, run: reload, loading } = useRequest(requestDataSource);
   const resultData = useMemo(() => formatData(data), [data]);
   const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
-  console.log(resultData, resultData);
   return _.isNil(dataSource) ? {
     [$deletePropsList]: deletePropsList,
   } : {

@@ -64,8 +64,8 @@ export const 默认 = {
       total: 3,
     }),
     // dataSource: ['1', 2, 3],
-    // textField: 'name',
-    // valueField: 'id',
+    textField: 'name',
+    valueField: 'id',
   },
 };
 export const 静态数据 = {
