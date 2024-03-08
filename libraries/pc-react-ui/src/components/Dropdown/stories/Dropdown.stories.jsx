@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Dropdown, MenuItem, Text, Button,
-} from '@/index';
+import { Dropdown, MenuItem, Text, Button } from '@/index';
 // import { Dropdown } from 'antd';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -52,6 +50,7 @@ export const 默认 = {
         menuItem={(() => (
           <>
             <MenuItem
+              key="/www.baidu.com"
               data-nodepath="rootview.0.0.0"
               ide-iscontainer="true"
               label={(() => (
