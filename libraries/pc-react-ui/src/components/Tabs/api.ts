@@ -266,7 +266,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    closable: nasl.core.Boolean = false;
+    closable: nasl.core.Boolean = true;
 
     // @Prop({
     //   title: '链接',
