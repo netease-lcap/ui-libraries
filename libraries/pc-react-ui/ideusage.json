@@ -401,6 +401,7 @@
         "ideusage": {
             "idetype": "popover",
             "structured": true,
+            "namedSlotOmitWrapper": ["menuItem"],
             "actions": {
                 "click": {
                     "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
