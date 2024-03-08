@@ -166,7 +166,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    preview: nasl.core.Boolean = false;
+    use12Hours: nasl.core.Boolean = false;
 
     // @Prop<TimePickerOptions, 'rightNowTitle'>({
     //   group: '主要属性',
