@@ -11,10 +11,10 @@ export function useHandleTransform(props) {
   return {
     [$deletePropsList]: deletePropsList,
     [$dataSourceField]: 'items',
-    fieldNames: {
-      label: textField,
-      value: valueField,
-    },
+    // fieldNames: {
+    //   label: textField,
+    //   value: valueField,
+    // },
   };
 }
 

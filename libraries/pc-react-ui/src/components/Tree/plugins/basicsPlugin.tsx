@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react-refresh/only-export-components */
 // import React from 'react';
-import { $dataSourceField } from '@/plugins/constants';
+import { $dataSourceField, $labelKey, $valueKey } from '@/plugins/constants';
 
 export function useHandleTransform(props) {
   const textField = props.get('textField', 'title');
@@ -10,11 +10,13 @@ export function useHandleTransform(props) {
   const fieldNames = props.get('fieldNames');
   return {
     [$dataSourceField]: 'treeData',
-    fieldNames: {
-      title: textField,
-      key: valueField,
-      children: childrenField,
-      ...fieldNames,
-    },
+    [$labelKey]: 'title',
+    [$valueKey]: 'key',
+    // fieldNames: {
+    //   title: textField,
+    //   key: valueField,
+    //   children: childrenField,
+    //   ...fieldNames,
+    // },
   };
 }

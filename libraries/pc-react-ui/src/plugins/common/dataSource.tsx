@@ -56,6 +56,7 @@ export function useHandleTextAndValueField(props) {
     const logicFn = _.map(dataSource, (item) => ({ [labelKey]: _.get(item, textField), [valueKey]: _.get(item, valueField) }));
     return logicFn;
   }, [dataSource, textField, valueField, labelKey, valueKey]);
+  console.log(convertOption, 'con');
   return _.isNil(dataSource)
     ? { [$deletePropsList]: deletePropsList }
     : { [dataSourceField]: convertOption, [$deletePropsList]: deletePropsList };

@@ -41,14 +41,35 @@ export const 异步函数 = {
   },
   args: {
     style: { width: '256px' },
+    textField: 'entity1.name',
+    valueField: 'entity1.id',
     dataSource: () => new Promise((res) => {
       setTimeout(() => {
         res([
-          { label: 'Option 1', value: '1' },
-          { label: 'Option 2', value: '2' },
-          { label: 'Option 3', value: '3' },
+          {
+            entity1: {
+              id: 1,
+              createdTime: null,
+              updatedTime: null,
+              createdBy: null,
+              updatedBy: null,
+              fid: 0,
+              name: '选项1',
+            },
+          },
+          {
+            entity1: {
+              id: 2,
+              createdTime: null,
+              updatedTime: null,
+              createdBy: null,
+              updatedBy: null,
+              fid: 0,
+              name: '选项2',
+            },
+          },
         ]);
-      }, 3000);
+      }, 300);
     }),
     onDropdownVisibleChange(e) {
       console.log(1);

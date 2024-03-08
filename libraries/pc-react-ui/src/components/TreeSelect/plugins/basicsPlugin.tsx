@@ -12,12 +12,12 @@ export function useHandleTransform(props) {
   return {
     [$deletePropsList]: deletePropsList,
     [$dataSourceField]: 'treeData',
-    fieldNames: {
-      label: textField,
-      value: valueField,
-      children: childrenField,
-      ...fieldNames,
-    },
+    // fieldNames: {
+    //   label: textField,
+    //   value: valueField,
+    //   children: childrenField,
+    //   ...fieldNames,
+    // },
   };
 }
 

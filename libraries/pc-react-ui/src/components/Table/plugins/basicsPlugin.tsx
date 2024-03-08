@@ -182,6 +182,7 @@ export function useHandleSorter(props) {
     [fp.isNil, fp.stubObject],
     [fp.stubTrue, fp.constant({ columns })],
   ])(columnsProps);
+  console.log(result, 'result');
   return result;
 }
 export function useHandleScroll(props) {

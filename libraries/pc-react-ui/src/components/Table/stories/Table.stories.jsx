@@ -41,12 +41,14 @@ export const 默认 = {
     onChange(e) {
       console.log(e, '3');
     },
+
     async dataSource(params) {
       return {
         list: new Array(50).fill(1).map((item, index) => ({
           key: index,
           name: '胡彦斌',
-          age: 32,
+
+          age: Math.random(),
           address: '西湖区湖底公园1号',
         })),
       };
@@ -58,10 +60,13 @@ export const 默认 = {
       {
         title: '姓名',
         dataIndex: 'name',
+
         key: 'name',
       },
       {
         title: '年龄',
+        sorter: true,
+        defaultSortOrder: 'ascend',
         dataIndex: 'age',
         key: 'age',
       },

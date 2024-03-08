@@ -33,6 +33,9 @@ export const 默认 = {
   },
   args: {
     color: 'magenta',
+    onChange(e) {
+      console.log(e);
+    },
     onOpenChange() {
       console.log(2134);
     },
