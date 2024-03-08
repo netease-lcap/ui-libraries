@@ -23,10 +23,12 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <Radio {...args} />,
+  render: (args) => <RadioGroup {...args} />,
   args: {
     color: 'magenta',
-    children: 'Tag',
+    // children: 'Tag',
+    dataSource: ['1', 2, 3],
+
   },
 };
 export const 数据源 = {
@@ -68,7 +70,7 @@ export const 数据源 = {
     //   total: 3,
     // }),
     dataSource: ['1', 2, 3],
-    // textField: 'name',
-    // valueField: 'id',
+    textField: 'name',
+    valueField: 'id',
   },
 };

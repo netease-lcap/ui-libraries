@@ -122,17 +122,17 @@ namespace nasl.ui {
     })
     maskClosable: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '状态属性',
-      title: '显示状态',
-      description: '显示状态分为“True(打开)/False(关闭)”，默认为“打开”',
-      sync: true,
-      docDescription: '开启时进入页面即显示弹窗，默认关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    open: nasl.core.Boolean;
+    // @Prop({
+    //   group: '状态属性',
+    //   title: '显示状态',
+    //   description: '显示状态分为“True(打开)/False(关闭)”，默认为“打开”',
+    //   sync: true,
+    //   docDescription: '开启时进入页面即显示弹窗，默认关闭',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // open: nasl.core.Boolean;
 
     @Prop({
       group: '样式属性',
