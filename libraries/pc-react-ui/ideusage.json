@@ -441,9 +441,17 @@
     {
         "name": "MenuSubMenu",
         "ideusage": {
-            "idetype": "container",
-            "childAccept": "target.tag === 'MenuItem'",
-            "parentAccept": "target.tag === 'Menu'"
+            "idetype": "popover",
+            "selector": {
+              "expression": "this.getElement(el => el.slotTarget === 'default' || el.slotTarget === '')",
+              "cssSelector": "div[class='ant-menu-submenu-popup']"
+            },
+            "actions": {
+                "click": {
+                    "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
+                    "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+                }
+            }
         }
     },
     {
