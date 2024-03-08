@@ -92,7 +92,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    pagination: nasl.core.Boolean;
+    pagination: nasl.core.Boolean=true;
 
     @Prop<TableOptions<T, V, P, M>, 'pageSize'>({
       group: '数据属性',

@@ -260,7 +260,7 @@ namespace nasl.ui {
     @Prop({
       group: '交互属性',
       title: '可关闭',
-      description: '设置标签是否可关闭',
+      description: '设置标签是否可关闭,仅仅在选项卡类型为可编辑卡片时开启生效',
       docDescription: '是否可以关闭',
       setter: {
         concept: 'SwitchSetter',

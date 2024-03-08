@@ -9,3 +9,10 @@ export function useHandleClassName(props) {
     className: cls,
   };
 }
+
+export function useHandleScroll(props) {
+  const scroll = props.get('scroll');
+  const result = scroll ? { style: { overflow: 'scroll' } } : {};
+  console.log(result, 'result===');
+  return result;
+}

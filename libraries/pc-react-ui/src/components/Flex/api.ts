@@ -45,6 +45,19 @@ namespace nasl.ui {
     })
     private type: 'flex';
 
+    @Prop({
+      group: '主要属性',
+      title: '开启滚动',
+      description: '超出高度后开启滚动',
+      // docDescription: '控制是否在进入页面时聚焦到该组件',
+      designerValue: false,
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    scroll: nasl.core.Boolean = false;
+
+
     //     @Prop<FlexOptions, 'mode'>({
     //       group: '主要属性',
     //       title: '布局模式',

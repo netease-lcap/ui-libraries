@@ -26,8 +26,7 @@ export const 默认 = {
   render: (args) => {
     return (
       <Flex {...args}>
-        {/* <div style={{ height: '500px', border: '1px solid red' }} /> */}
-        <div style={{ height: '500px', border: '1px solid red' }}>
+        <div style={{ height: '500px' }}>
           <Button>1234</Button>
         </div>
         <div>
