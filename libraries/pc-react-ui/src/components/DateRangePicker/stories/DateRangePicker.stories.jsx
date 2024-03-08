@@ -1,5 +1,8 @@
 import React from 'react';
 // import { DateRangePicker } from '../index';
+
+
+import {DatePicker} from 'antd';
 import { DateRangePicker } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -24,8 +27,9 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <DateRangePicker {...args} />,
+  render: (args) => <DatePicker.RangePicker {...args} />,
   args: {
+    placeholder: 'xuanz选择',
     color: 'magenta',
     children: 'Tag',
   },

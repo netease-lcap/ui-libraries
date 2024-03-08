@@ -180,15 +180,15 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    autofocus: nasl.core.Boolean = false;
+    autoFocus: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '占位符',
-      description: '为空时显示的占位符文本',
-      docDescription: '日期选择框无内容时的提示信息，支持自定义编辑，默认为请输入',
-    })
-    placeholder: nasl.core.String = '请选择日期';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '占位符',
+    //   description: '为空时显示的占位符文本',
+    //   docDescription: '日期选择框无内容时的提示信息，支持自定义编辑，默认为请输入',
+    // })
+    // placeholder: nasl.core.String = '请选择日期';
 
     // @Prop<UDatePickerOptions, 'placeholderRight'>({
     //   group: '主要属性',
