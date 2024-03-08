@@ -1,4 +1,7 @@
 import classnames from 'classnames';
+import dayjs from 'dayjs';
+import { useControllableValue } from 'ahooks';
+import _ from 'lodash';
 import locale from 'antd/lib/date-picker/locale/zh_CN';
 import style from '../index.module.less';
 import 'dayjs/locale/zh-cn';
@@ -6,6 +9,19 @@ import 'dayjs/locale/zh-cn';
 export function useHandleLocale() {
   return {
     locale,
+  };
+}
+export function useHandleValue(props) {
+  const valueProps = props.get('value');
+  const onChangeProps = props.get('onChange');
+  const valueFormat = _.isNil(valueProps) ? valueProps : dayjs(valueProps);
+  const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueFormat }));
+  return {
+    value,
+    onChange(time) {
+      _.attempt(onChangeProps, time.format('DD/MM/YYYY'));
+      onChange(value);
+    },
   };
 }
 export function useHandleStyle(props) {

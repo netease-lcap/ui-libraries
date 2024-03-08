@@ -29,7 +29,7 @@ export const 默认 = {
     React.useEffect(() => {
       console.log(ref, 'ref');
     }, []);
-    return <DatePicker {...args} ref={ref} data-nodepath="12213" />;
+    return <DatePicker {...args} ref={ref} value="08/03/2024" data-nodepath="12213" />;
   },
   args: {
     color: 'magenta',
