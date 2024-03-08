@@ -162,10 +162,10 @@ namespace nasl.ui {
 - 手动：无法直接通过弹出框组件触发，需要手动配置弹出框调用逻辑。`,
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '点击' }, { title: '悬浮' }, { title: '聚焦' }, { title: '手动' }],
+        options: [{ title: '点击' }, { title: '悬浮' }, { title: '手动' }],
       },
     })
-    trigger: 'click' | 'hover' | 'focus' | 'manual' = 'click';
+    trigger: 'click' | 'hover' | 'manual' = 'click';
 
     @Prop({
       group: '状态属性',
