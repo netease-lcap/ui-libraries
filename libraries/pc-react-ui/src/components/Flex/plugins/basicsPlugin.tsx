@@ -13,6 +13,6 @@ export function useHandleClassName(props) {
 export function useHandleScroll(props) {
   const scroll = props.get('scroll');
   const result = scroll ? { style: { overflow: 'scroll' } } : {};
-  console.log(result, 'result===');
+  // console.log(result, 'result===');
   return result;
 }
