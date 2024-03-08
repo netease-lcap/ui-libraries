@@ -103,9 +103,8 @@ export default {
             const body = {
                 taskId: this.taskId,
             };
-            const dynamicRenderContainer = document.getElementById('dynamicRenderContainer');
-            if (dynamicRenderContainer && dynamicRenderContainer.__vue__) {
-                body.data = dynamicRenderContainer.__vue__.processDetailFormData;
+            if (window.__processDetailFromMixinFormData__) {
+                body.data = window.__processDetailFromMixinFormData__;
             }
             if (name === 'reassign') {
                 body.userForReassign = this.model.userName;
@@ -135,20 +134,9 @@ export default {
                 return this.withdrawOperator();
             }
             // 表单验证后打开弹窗
-            const dynamicRenderContainer = document.getElementById('dynamicRenderContainer');
-            if (dynamicRenderContainer && dynamicRenderContainer.__vue__) {
-                const formRefName = dynamicRenderContainer.getAttribute('ref-name');
-                if (formRefName) {
-                    const formRef = dynamicRenderContainer.__vue__.$refs[formRefName];
-                    if (formRef && formRef.validate) {
-                        const validateResult = await formRef.validate();
-                        if (validateResult.valid) {
-                            this.openModal(item);
-                        }
-                    } else {
-                        this.openModal(item);
-                    }
-                } else {
+            if (window.__processDetailFromMixinFormVm__ && window.__processDetailFromMixinFormVm__.validate) {
+                const validateResult = await window.__processDetailFromMixinFormVm__.validate();
+                if (validateResult.valid) {
                     this.openModal(item);
                 }
             } else {
