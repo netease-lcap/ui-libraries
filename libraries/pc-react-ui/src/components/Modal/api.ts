@@ -120,7 +120,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    maskClosable: nasl.core.Boolean = false;
+    maskClosable: nasl.core.Boolean = true;
 
     // @Prop({
     //   group: '状态属性',
