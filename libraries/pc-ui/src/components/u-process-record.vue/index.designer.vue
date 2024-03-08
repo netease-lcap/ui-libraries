@@ -1,5 +1,5 @@
 <template>
-    <div v-if="$env.VUE_APP_DESIGNER" :designer="$env.VUE_APP_DESIGNER">
+    <div v-if="$env.VUE_APP_DESIGNER" :designer="$env.VUE_APP_DESIGNER" vusion-disabled-duplicate="true" vusion-disabled-copy="true">
         <template v-if="type === 'timeline'">
             <u-timeline :data-source="list" :class="$style.timeline">
                 <template #item="current">

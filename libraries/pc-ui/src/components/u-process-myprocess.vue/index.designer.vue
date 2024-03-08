@@ -1,5 +1,5 @@
 <template>
-    <u-process-myprocess-real v-if="$env.VUE_APP_DESIGNER" ref="myprocess" :initial-load="false"></u-process-myprocess-real>
+    <u-process-myprocess-real v-if="$env.VUE_APP_DESIGNER" ref="myprocess" :initial-load="false" vusion-disabled-duplicate="true" vusion-disabled-copy="true"></u-process-myprocess-real>
     <component
         v-else
         is="u-process-myprocess-real"
