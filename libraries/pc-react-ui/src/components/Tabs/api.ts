@@ -186,11 +186,11 @@ namespace nasl.ui {
     })
     onChange: (event: { selected: nasl.core.Boolean; item: T; oldItem: T; value: V; oldValue: V; items: nasl.collection.List<T>; oldItems: nasl.collection.List<T> }) => any;
 
-    @Event({
-      title: '新增和删除页签的回调',
-      description: '新增和删除页签的回调',
-    })
-    onEdit: (event: { value: V; oldValue: V }) => any;
+    // @Event({
+    //   title: '新增和删除页签的回调',
+    //   description: '新增和删除页签的回调',
+    // })
+    // onEdit: (event: { value: V; oldValue: V }) => any;
 
     // @Event({
     //   title: '关闭后',
