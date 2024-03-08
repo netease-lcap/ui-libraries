@@ -66,7 +66,7 @@
             "structured": true,
             "childAccept": "target.tag === 'Checkbox'",
             "dataSource": {
-                "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+                "dismiss": "!this.getAttribute('dataSource') && this.filterElement(el => el.tag !== 'template') > 0",
                 "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
                 "loopElem": "> label.ant-checkbox-wrapper",
                 "emptySlot": {
