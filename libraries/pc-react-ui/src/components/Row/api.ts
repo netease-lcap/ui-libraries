@@ -43,7 +43,7 @@ namespace nasl.ui {
           { title: '顶对齐', icon: 'horizontal-alignment-start', tooltip: '顶对齐' },
           { title: '垂直居中', icon: 'horizontal-alignment-center', tooltip: '垂直居中' },
           { title: '底对齐', icon: 'horizontal-alignment-end', tooltip: '底对齐' },
-          { title: '行内文字基线对齐', icon: 'horizontal-alignment-baseline', tooltip: '行内文字基线对齐' },
+          // { title: '行内文字基线对齐', icon: 'horizontal-alignment-baseline', tooltip: '行内文字基线对齐' },
           { title: '占满容器高度', icon: 'horizontal-alignment-stretch', tooltip: '占满容器高度' },
         ],
       },
