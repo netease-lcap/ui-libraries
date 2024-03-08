@@ -340,7 +340,7 @@ namespace nasl.ui {
       title: '弹出/隐藏时',
       description: '弹出/隐藏时触发',
     })
-    onPanelChange: (event: { opened: nasl.core.Boolean }) => any;
+    onOpenChange: (event: { opened: nasl.core.Boolean }) => any;
 
     @Event({
       title: '失去焦点',

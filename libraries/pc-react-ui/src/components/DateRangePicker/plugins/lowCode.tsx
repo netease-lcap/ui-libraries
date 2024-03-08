@@ -40,9 +40,6 @@ export function useHandleOpenRef(props) {
     [$deletePropsList]: deletePropsList,
     open,
     ref: selfRef,
-    onOpenChange: _.wrap(onOpenChangeProps, (fn, visible) => {
-      setOpen(visible);
-      _.attempt(onOpenChangeProps, visible);
-    }),
+    onOpenChange: setOpen,
   };
 }
