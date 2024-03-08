@@ -72,6 +72,16 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
       },
     })
+    hourStep: nasl.core.Integer;
+
+    @Prop({
+      group: '数据属性',
+      title: '分钟选项间隔',
+      description: '分钟选项间隔',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
     minuteStep: nasl.core.Integer;
 
     @Prop({
