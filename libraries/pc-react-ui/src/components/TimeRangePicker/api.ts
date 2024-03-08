@@ -156,7 +156,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    showNow: nasl.core.Boolean = true;
+    showNow: nasl.core.Boolean = false;
 
     @Prop({
       group: '状态属性',
