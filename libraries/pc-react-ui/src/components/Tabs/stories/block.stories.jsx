@@ -43,14 +43,14 @@ export const 卡片效果 = {
     );
   },
 };
-export const 动态卡片 = {
-  render: () => {
-    return (
-      <Tabs type="editable-card">
-        <TabPane key="1" tab={<Text children="选项卡1" />} />
-        <TabPane key="2" tab={<Text children="选项卡2" />} />
-        <TabPane key="3" tab={<Text children="选项卡3" />} />
-      </Tabs>
-    );
-  },
-};
+// export const 动态卡片 = {
+//   render: () => {
+//     return (
+//       <Tabs type="editable-card">
+//         <TabPane key="1" tab={<Text children="选项卡1" />} />
+//         <TabPane key="2" tab={<Text children="选项卡2" />} />
+//         <TabPane key="3" tab={<Text children="选项卡3" />} />
+//       </Tabs>
+//     );
+//   },
+// };

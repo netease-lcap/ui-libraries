@@ -136,10 +136,10 @@ namespace nasl.ui {
       docDescription: '标签展示的外观',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '线条' }, { title: '卡片' }, { title: '编辑卡片' }],
+        options: [{ title: '线条' }, { title: '卡片' }],
       },
     })
-    type: 'line' | 'card' | 'editable-card' = 'line';
+    type: 'line' | 'card';
 
     @Prop({
       group: '样式属性',
@@ -257,16 +257,16 @@ namespace nasl.ui {
     })
     private title: nasl.core.String;
 
-    @Prop({
-      group: '交互属性',
-      title: '可关闭',
-      description: '设置标签是否可关闭,仅仅在选项卡类型为可编辑卡片时开启生效',
-      docDescription: '是否可以关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    closable: nasl.core.Boolean = true;
+    // @Prop({
+    //   group: '交互属性',
+    //   title: '可关闭',
+    //   description: '设置标签是否可关闭,仅仅在选项卡类型为可编辑卡片时开启生效',
+    //   docDescription: '是否可以关闭',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // closable: nasl.core.Boolean = true;
 
     // @Prop({
     //   title: '链接',
