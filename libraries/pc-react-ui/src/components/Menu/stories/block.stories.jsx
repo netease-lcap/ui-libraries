@@ -1,7 +1,11 @@
 import React from 'react';
 import { theme, Layout } from 'antd';
-import { Menu, MenuItem, MenuSubMenu, MenuItemGroup } from '../index';
-import { Text, Image, Dropdown, Button, Flex } from '@/index';
+import {
+  Menu, MenuItem, MenuSubMenu, MenuItemGroup,
+} from '../index';
+import {
+  Text, Image, Dropdown, Button, Flex,
+} from '@/index';
 
 const { Header } = Layout;
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -62,12 +66,12 @@ export const 折叠功能 = {
   render: () => {
     return (
       <Menu mode="horizontal" defaultOpenKeys={['sub1', 'sub2']}>
-        <MenuSubMenu key="sub1" title="Navigation Four">
+        <MenuSubMenu key="sub1" title={<Text children="Navigation Four"> </Text>}>
           <MenuItem key="mail">
             <Text> Navigation Four - LinkM</Text>
           </MenuItem>
         </MenuSubMenu>
-        <MenuSubMenu title="Navigation" key="sub2">
+        <MenuSubMenu title={<Text children="Navigation"> </Text>} key="sub2">
           <MenuItem key="app">
             <Text children="Navigation" />
           </MenuItem>
@@ -80,12 +84,12 @@ export const 分组 = {
   render: () => {
     return (
       <Menu mode="horizontal" defaultOpenKeys={['sub1', 'sub2']}>
-        <MenuItemGroup key="sub1" title="Navigation Four">
+        <MenuItemGroup key="sub1" title={<Text children="Navigation Four"> </Text>}>
           <MenuItem key="mail">
             <Text children=" Navigation Four - LinkM" />
           </MenuItem>
         </MenuItemGroup>
-        <MenuItemGroup title="Navigation" key="sub2">
+        <MenuItemGroup title={<Text children="Navigation"> </Text>} key="sub2">
           <MenuItem key="app">
             <Text children="Navigation" />
           </MenuItem>
