@@ -15,14 +15,8 @@ function formatData(data) {
     [_.conforms({ list: _.isArray }), fp.get('list')],
     [_.stubTrue, _.stubArray],
   ]);
-  function handleModelObjrrToArray(item) {
-    return Object.entries(item).reduce((pre, [key, value]) => _.assign(pre, _.isObject(value) ? value : { [key]: value }), {});
-  }
-
-  return _.map(conformsArray(data), (item: any) => (_.isObject(item) ? handleModelObjrrToArray(item) : { label: item, value: item }));
+  return conformsArray(data);
 }
-//   return conformsArray(data);
-// }
 function wrapDataToRequest(dataSource) {
   const wrapDataSource = _.cond([
     [_.isArray, _.constant(async () => dataSource)],
@@ -59,7 +53,7 @@ export function useHandleTextAndValueField(props) {
   const dataSourceField = props.get($dataSourceField, 'options');
   const dataSource = props.get(dataSourceField);
   const convertOption = useMemo(() => {
-    const logicFn = _.map(dataSource, (item) => ({ [labelKey]: item[textField], [valueKey]: item[valueField] }));
+    const logicFn = _.map(dataSource, (item) => ({ [labelKey]: _.get(item, textField), [valueKey]: _.get(item, valueField) }));
     return logicFn;
   }, [dataSource, textField, valueField, labelKey, valueKey]);
   return _.isNil(dataSource)

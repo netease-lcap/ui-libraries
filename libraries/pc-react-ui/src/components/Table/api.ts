@@ -103,7 +103,7 @@ namespace nasl.ui {
       },
       if: (_) => _.pagination === true,
     })
-    pageSize: nasl.core.Integer = 20;
+    pageSize: nasl.core.Integer = 10;
 
     @Prop<TableOptions<T, V, P, M>, 'showSizeChanger'>({
       group: '数据属性',

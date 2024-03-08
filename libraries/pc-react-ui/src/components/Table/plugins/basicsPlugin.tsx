@@ -44,7 +44,7 @@ export function useHandleTransformOption(props) {
   const onBefore = props.get('onBefore', () => { });
   const onSuccess = props.get('onSuccess', () => { });
   const current = props.get('current', 1);
-  const pageSizeProps = props.get('pageSize');
+  const pageSizeProps = props.get('pageSize', 10);
   const refProps = props.get('ref');
   const warpList = _.cond([
     [Array.isArray, (list) => ({ list, total: list.length })],

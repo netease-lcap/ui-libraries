@@ -46,7 +46,8 @@ export const 默认 = {
         })),
       };
     },
-    pageSize: 5,
+    // pageSize: 5,
+    // pagination: false,
     // scrollY:1000,
     columns: [
       {
