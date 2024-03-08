@@ -147,16 +147,16 @@ namespace nasl.ui {
     })
     autofocus: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '此刻按钮',
-      description: '点击可快捷选择当前时间',
-      docDescription: '是否展示此刻按钮',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    showNow: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '此刻按钮',
+    //   description: '点击可快捷选择当前时间',
+    //   docDescription: '是否展示此刻按钮',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // showNow: nasl.core.Boolean = false;
 
     @Prop({
       group: '状态属性',

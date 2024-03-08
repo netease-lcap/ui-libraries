@@ -4,7 +4,6 @@ import { useControllableValue } from 'ahooks';
 import { $deletePropsList } from '@/plugins/constants';
 
 function useHandleNodePath(props) {
-  // const children = props.get('children');
   const id = _.uniqueId('contact_');
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
   const nodePath = props.get('data-nodepath');
