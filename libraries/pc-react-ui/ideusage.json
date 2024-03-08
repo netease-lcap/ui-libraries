@@ -443,7 +443,7 @@
         "ideusage": {
             "idetype": "popover",
             "selector": {
-              "expression": "this.getElement(el => el.slotTarget === 'default' || el.slotTarget === '')",
+              "expression": "this.getElement(el => el.slotTarget === 'default' || !el.slotTarget)",
               "cssSelector": "div[class='ant-menu-submenu-popup']"
             },
             "actions": {
