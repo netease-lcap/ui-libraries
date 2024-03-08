@@ -15,8 +15,14 @@ function formatData(data) {
     [_.conforms({ list: _.isArray }), fp.get('list')],
     [_.stubTrue, _.stubArray],
   ]);
-  return conformsArray(data);
+  function handleModelObjrrToArray(item) {
+    return Object.entries(item).reduce((pre, [key, value]) => _.assign(pre, _.isObject(value) ? value : { [key]: value }), {});
+  }
+
+  return _.map(conformsArray(data), (item: any) => (_.isObject(item) ? handleModelObjrrToArray(item) : { label: item, value: item }));
 }
+//   return conformsArray(data);
+// }
 function wrapDataToRequest(dataSource) {
   const wrapDataSource = _.cond([
     [_.isArray, _.constant(async () => dataSource)],
