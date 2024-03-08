@@ -23,15 +23,20 @@ export function useHandleTransform(props) {
 export function useMergeMenu(props) {
   const fragment = props.get('menuItem');
   const menuItem = React.Children.toArray(_.get(fragment, 'props.children', []));
+  console.log(menuItem, 'menuItem');
   const ItemsProps = _.filter(menuItem, (item) => React.isValidElement(item) && item.type === MenuItem)?.map((item) => ({ ..._.omit(item.props, 'children'), key: item.key }));
   const menu = props.get('menu');
   const items = props.get('items', ItemsProps);
   return {
     menu: {
       onClick(arg) {
+        console.log(arg);
         if (!arg.key) return;
         const url = arg.key?.slice(2);
+        console.log(_.isValidLink(url), '-=--');
+        console.log(url);
         if (_.isValidLink(url)) {
+          console.log(url);
           window.location.href = url;
         }
         window.history.pushState({}, '', url);

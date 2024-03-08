@@ -187,6 +187,7 @@ namespace nasl.ui {
       title: '值',
       description: '此项的值',
       docDescription: '此项的值',
+      sync:true,
     })
     value: nasl.core.Any;
 
