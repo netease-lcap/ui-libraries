@@ -28,7 +28,6 @@ export const 默认 = {
     color: 'magenta',
     // children: 'Tag',
     dataSource: ['1', 2, 3],
-
   },
 };
 export const 数据源 = {
@@ -69,8 +68,8 @@ export const 数据源 = {
     //   ],
     //   total: 3,
     // }),
-    dataSource: ['1', 2, 3],
-    textField: 'name',
-    valueField: 'id',
+    dataSource: ['苹果', '香蕉', '橘子'],
+    // textField: 'name',
+    // valueField: 'id',
   },
 };

@@ -21,7 +21,7 @@ export function useHandleRef(props) {
   const valueProps = props.get('value');
   const onChange = props.get('onChange');
   const defaultValue = props.get('defaultValue');
-  const [value, setValue] = useControllableValue(_.filterUnderfinedValue({ value: valueProps, onChange, defaultValue }));
+  const [value, setValue] = useControllableValue(_.filterUnderfinedValue({ value: React.Children.toArray(valueProps), onChange, defaultValue }));
   return {
     value,
     ref: _.assign(ref, { value, setValue }),

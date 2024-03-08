@@ -50,7 +50,7 @@ export const 默认 = {
         menuItem={(() => (
           <>
             <MenuItem
-              key="/www.baidu.com"
+              key="www.baidu.com"
               data-nodepath="rootview.0.0.0"
               ide-iscontainer="true"
               label={(() => (
@@ -62,6 +62,7 @@ export const 默认 = {
             <MenuItem
               data-nodepath="rootview.0.0.1"
               ide-iscontainer="true"
+              key="/app"
               label={(() => (
                 <Text data-nodepath="rootview.0.0.1.0.0" children="导航项目2" />
               ))()}
