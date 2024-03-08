@@ -134,17 +134,17 @@ namespace nasl.ui {
     })
     href: nasl.core.String;
 
-    @Prop({
-      group: '交互属性',
-      title: '链接打开方式',
-      description: '链接打开后的展示方式，父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则其打开方式同当前窗口。',
-      docDescription: '可选新窗口、当前窗口、父级窗口或顶级窗口，父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '新窗口' }, { title: '当前窗口' }, { title: '父级窗口' }, { title: '顶级窗口' }],
-      },
-    })
-    target: '_blank' | '_self' | '_parent' | '_top' = '_self';
+    // @Prop({
+    //   group: '交互属性',
+    //   title: '链接打开方式',
+    //   description: '链接打开后的展示方式，父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则其打开方式同当前窗口。',
+    //   docDescription: '可选新窗口、当前窗口、父级窗口或顶级窗口，父级窗口和顶级窗口仅适用于iframe组件嵌套的情况，若不存在嵌套，则打开方式同当前窗口。',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '新窗口' }, { title: '当前窗口' }, { title: '父级窗口' }, { title: '顶级窗口' }],
+    //   },
+    // })
+    // target: '_blank' | '_self' | '_parent' | '_top' = '_self';
 
     // @Prop({
     //   group: '状态属性',
