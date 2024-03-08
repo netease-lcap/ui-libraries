@@ -8,20 +8,20 @@ namespace nasl.ui {
     group: 'Table',
   })
   export class List<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C extends string> extends ViewComponent {
-    // @Prop({
-    //   title: '数据',
-    // })
-    // data: UListViewOptions<T, V, P, M, C>['dataSource'];
+    @Prop({
+      title: '数据',
+    })
+    data: ListOptions<T, V, P, M, C>['dataSource'];
 
-    // @Prop({
-    //   title: '分页大小',
-    // })
-    // size: UListViewOptions<T, V, P, M, C>['pageSize'];
+    @Prop({
+      title: '分页大小',
+    })
+    size: ListOptions<T, V, P, M, C>['pageSize'];
 
-    // @Prop({
-    //   title: '当前页数',
-    // })
-    // page: UListViewOptions<T, V, P, M, C>['pageNumber'];
+    @Prop({
+      title: '当前页数',
+    })
+    current: ListOptions<T, V, P, M, C>['current'];
 
     // // 由于之前误开放出去了，有历史数据，防止ts报错临时补上
     // @Prop({

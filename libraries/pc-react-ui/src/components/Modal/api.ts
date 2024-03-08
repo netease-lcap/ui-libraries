@@ -164,7 +164,7 @@ namespace nasl.ui {
     onCancel: (event: { ok: nasl.core.Boolean }) => any;
 
     @Slot({
-      title: 'undefined',
+      title: '弹窗标题',
       description: '弹窗标题自定义',
     })
     slotTitle: () => Array<ViewComponent>;
@@ -176,13 +176,13 @@ namespace nasl.ui {
     // slotHead: () => Array<ViewComponent>;
 
     @Slot({
-      title: 'undefined',
-      description: '弹窗中部自定义',
+      title: '弹窗内容',
+      description: '弹窗内容自定义',
     })
     slotDefault: () => Array<ViewComponent>;
 
     @Slot({
-      title: 'undefined',
+      title: '弹窗尾部',
       description: '弹窗尾部自定义',
     })
     slotFooter: (event: any) => Array<ViewComponent>;

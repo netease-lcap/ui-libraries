@@ -926,7 +926,7 @@ namespace nasl.ui {
         },
       ],
     })
-    slotDefault: () => Array<TableColumn<T, V, P, M>>;
+    slotDefault: (current: Current<T>) => Array<TableColumn<T, V, P, M>>;
 
     // @Slot({
     //   title: '加载中内容',
