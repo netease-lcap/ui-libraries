@@ -15,12 +15,14 @@ export function useHandleLocale() {
 export function useHandleValue(props) {
   const valueProps = props.get('value');
   const onChangeProps = props.get('onChange');
+  const showTime = props.get('showTime');
   const valueFormat = _.isNil(valueProps) ? valueProps : dayjs(valueProps);
   const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueFormat }));
   return {
     value,
     onChange(time) {
-      _.attempt(onChangeProps, time.format('DD/MM/YYYY'));
+      const formatTime = showTime ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD';
+      _.attempt(onChangeProps, time.format(formatTime));
       onChange(value);
     },
   };

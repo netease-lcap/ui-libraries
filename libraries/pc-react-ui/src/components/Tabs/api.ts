@@ -86,7 +86,7 @@ namespace nasl.ui {
       sync: true,
       docDescription: '指当前打开标签的标签项',
     })
-    activeKey: V;
+    activeKey: nasl.core.String ;
 
     // @Prop({
     //   group: '数据属性',

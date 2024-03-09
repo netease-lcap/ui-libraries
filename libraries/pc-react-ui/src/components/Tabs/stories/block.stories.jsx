@@ -25,9 +25,9 @@ export const 基本用法 = {
   render: () => {
     return (
       <Tabs>
-        <TabPane key={1} tab={<Text children="选项卡1" />} />
-        <TabPane key={2} tab={<Text children="选项卡2" />} />
-        <TabPane key={3} tab={<Text children="选项卡3" />} />
+        <TabPane key="1" tab={<Text children="选项卡1" />} />
+        <TabPane key="2" tab={<Text children="选项卡2" />} />
+        <TabPane key="3" tab={<Text children="选项卡3" />} />
       </Tabs>
     );
   },
@@ -36,9 +36,9 @@ export const 卡片效果 = {
   render: () => {
     return (
       <Tabs type="card">
-        <TabPane key={1} tab={<Text children="选项卡1" />} />
-        <TabPane key={2} tab={<Text children="选项卡2" />} />
-        <TabPane key={3} tab={<Text children="选项卡3" />} />
+        <TabPane key="1" tab={<Text children="选项卡1" />} />
+        <TabPane key="2" tab={<Text children="选项卡2" />} />
+        <TabPane key="3" tab={<Text children="选项卡3" />} />
       </Tabs>
     );
   },

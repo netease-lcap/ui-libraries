@@ -45,12 +45,15 @@ export const 同步函数 = {
   render: (args) => <Cascader {...args} />,
   args: {
     dataSource: () => [
-      { label: 'Option 1', key: '1' },
-      { label: 'Option 2', key: '2' },
-      { label: 'Option 3', key: '3' },
+      { id: 1, parentId: null, name: 'Root' },
+      { id: 2, parentId: 1, name: 'Child 1' },
+      { id: 3, parentId: 1, name: 'Child 2' },
+      { id: 4, parentId: 2, name: 'Grandchild 1' },
+      { id: 5, parentId: 3, name: 'Grandchild 2' },
     ],
-    valueField: 'key',
-    textField: 'label',
+    valueField: 'id',
+    textField: 'name',
+    parentField: 'parentId',
   },
 };
 

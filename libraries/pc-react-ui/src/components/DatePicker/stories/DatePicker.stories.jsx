@@ -33,6 +33,7 @@ export const 默认 = {
   },
   args: {
     color: 'magenta',
+    showTime: true,
     onChange(e) {
       console.log(e);
     },

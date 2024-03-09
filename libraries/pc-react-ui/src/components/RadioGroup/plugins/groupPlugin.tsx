@@ -64,6 +64,7 @@ export function useHandleTransformOption(props) {
   const ref = props.get('ref');
   const requestDataSource = useMemo(() => wrapDataToRequest(dataSource), [dataSource]);
   const { data, run: reload, loading } = useRequest(requestDataSource);
+  React.useEffect(() => { reload(); }, [dataSource]);
   const resultData = useMemo(() => formatData(data), [data]);
   const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
   return _.isNil(dataSource) ? {

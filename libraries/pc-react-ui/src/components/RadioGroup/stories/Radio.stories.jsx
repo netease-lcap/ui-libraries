@@ -23,11 +23,32 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <RadioGroup {...args} />,
+  render: (args) => {
+    const ref = React.useRef({});
+    const [value, setValue] = React.useState(undefined);
+    React.useEffect(() => {
+      setTimeout(() => {
+        setValue([1, 2, 3]);
+      }, 300);
+    }, []);
+    return [
+      <button
+        onClick={() => {
+          ref.current.reload();
+        }}
+      >
+        11
+      </button>,
+      <RadioGroup dataSource={value} ref={ref} />,
+    ];
+  },
   args: {
     color: 'magenta',
+    // dataSource: undefined,
     // children: 'Tag',
-    dataSource: ['1', 2, 3],
+    // dataSource: async () => {
+    //   return ;
+    // },
   },
 };
 export const 数据源 = {

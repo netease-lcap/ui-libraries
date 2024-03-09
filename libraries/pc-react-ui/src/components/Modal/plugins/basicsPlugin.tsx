@@ -6,7 +6,7 @@ import { $deletePropsList } from '@/plugins/constants';
 export function useHandleOpenRef(props) {
   const openProps = props.get('open');
   const defaultOpen = props.get('defaultOpen');
-  const afterOpenChange = props.get('afterOpenChange');
+  const afterOpenChange = props.get('onAfterOpenChange');
   const onCancelProps = props.get('onCancel');
   const onOkProps = props.get('onOk');
   const ref = props.get('ref');
@@ -22,7 +22,7 @@ export function useHandleOpenRef(props) {
     [$deletePropsList]: deletePropsList,
     ref: selfRef,
     open,
-    // afterOpenChange,
+    afterOpenChange,
     onCancel: _.wrap(onCancelProps, (...args) => {
       setOpen(false);
       _.attempt(onCancelProps, ...args);

@@ -64,6 +64,59 @@ namespace nasl.ui {
     })
     value: Array<nasl.core.Time>;
 
+    // ======================
+    // @Prop<TimeRangePickerOptions, 'startDate'>({
+    //   group: '数据属性',
+    //   title: '起始值',
+    //   description: '默认显示的起始日期值，格式如2018-08-08',
+    //   sync: true,
+    // })
+    // startDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+
+    // @Prop<TimeRangePickerOptions, 'endDate'>({
+    //   group: '数据属性',
+    //   title: '结束值',
+    //   description: '默认显示的结束日期值，格式如2018-08-08',
+    //   sync: true,
+    // })
+    // endDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+
+    // @Prop<TimeRangePickerOptions, 'defaultStartDate'>({
+    //   group: '数据属性',
+    //   title: '默认起始值',
+    //   description: '默认显示的起始日期值，格式如2018-08-08',
+    //   sync: true,
+    // })
+    // defaultStartDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+
+    // @Prop<TimeRangePickerOptions, 'defaultEndDate'>({
+    //   group: '数据属性',
+    //   title: '默认结束值',
+    //   description: '默认显示的结束日期值，格式如2018-08-08',
+    //   sync: true,
+    // })
+    // defaultEndDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+
+    // @Prop<TimeRangePickerOptions, 'startEmpty'>({
+    //   group: '主要属性',
+    //   title: '开始时间可为空',
+    //   // bindHide: true,
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // startEmpty: nasl.core.Boolean = false;
+
+    // @Prop<TimeRangePickerOptions, 'endEmpty'>({
+    //   group: '主要属性',
+    //   title: '结束时间可为空',
+    //   // bindHide: true,
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // endEmpty: nasl.core.Boolean = false;
+// =================
     @Prop({
       group: '数据属性',
       title: '小时选项间隔',

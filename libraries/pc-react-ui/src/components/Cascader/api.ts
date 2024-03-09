@@ -99,6 +99,17 @@ namespace nasl.ui {
     })
     childrenField: (item: T) => nasl.collection.List<any> = ((item: any) => item.children) as any;
 
+    @Prop({
+      group: '数据属性',
+      title: '父级值字段',
+      description: '集合的元素类型中，用于标识父节点的属性',
+      docDescription: '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    parentField: (item: T) => any;
+
     // @Prop<CascaderOptions<T, V>, 'parentField'>({
     //   group: '数据属性',
     //   title: '父级值字段',

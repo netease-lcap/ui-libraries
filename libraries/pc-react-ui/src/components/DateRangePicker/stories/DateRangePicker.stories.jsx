@@ -1,8 +1,7 @@
 import React from 'react';
 // import { DateRangePicker } from '../index';
 
-
-import {DatePicker} from 'antd';
+import { DatePicker } from 'antd';
 import { DateRangePicker } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -27,10 +26,19 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <DatePicker.RangePicker {...args} />,
+  render: (args) => <DateRangePicker {...args} />,
   args: {
-    placeholder: 'xuanz选择',
     color: 'magenta',
     children: 'Tag',
+    defaultStartDate: '2024-03-03',
+    // defaultEndDate: '2024-03-03',
+    // endEmpty: true,
+    // endDate: '2024-03-04',
+    onEndDateChange(e) {
+      console.log(e);
+    },
+    onStartDateChange(e) {
+      console.log(e);
+    },
   },
 };

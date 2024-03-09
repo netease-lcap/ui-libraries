@@ -31,6 +31,7 @@ export function useHandleTransformOption(props) {
   const ref = props.get('ref');
   const requestDataSource = useMemo(() => wrapDataToRequest(dataSource), [dataSource]);
   const { data, run: reload, loading } = useRequest(requestDataSource);
+  React.useEffect(() => { reload(); }, [dataSource]);
   const resultData = useMemo(() => formatData(data), [data]);
   const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
   return _.isNil(dataSource) ? {
@@ -73,6 +74,7 @@ export function useHandleMapField(filedInfo) {
   } = filedInfo;
   return useMemo(() => {
     return _.map(dataSource, (item) => ({
+      ...item,
       [label]: _.get(item, textField),
       [value]: _.get(item, valueField),
     }));
@@ -94,4 +96,24 @@ export function useFormatDataSource(dataSource) {
     [_.stubTrue, _.stubArray],
   ]);
   return useMemo(() => conformsArray(dataSource), [dataSource]);
+}
+
+export function useDataSourceToTree(dataSource, parentField, valueField = 'value') {
+  return useMemo(() => {
+    if (_.isNil(parentField)) return dataSource;
+    const map = new Map<string, Record<string, any>>(dataSource.map((item) => [item[valueField], item]));
+    const tree = [] as any[];
+    dataSource.forEach((item) => {
+      if (item[parentField]) {
+        const parent = map.get(item.parentId);
+        if (parent) {
+          if (!Array.isArray(parent.children)) parent.children = [];
+          parent.children.push(map.get(item[valueField]));
+        }
+      } else {
+        tree.push(map.get(item[valueField]));
+      }
+    });
+    return tree;
+  }, [dataSource, parentField, valueField]);
 }
