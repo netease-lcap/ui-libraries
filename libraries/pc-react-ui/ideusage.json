@@ -197,15 +197,22 @@
         "name": "List",
         "ideusage": {
             "idetype": "container",
-            "containerDirection": "row",
+            "containerDirection": "column",
             "dataSource": {
-              "display": 8,
-              "loopElem": "table > tbody > tr",
-              "emptySlot": {
-                "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
-                "accept": "target.concept === 'Entity'"
-              }
+                "display": 3,
+                "loopElem": "ul > div",
+                "emptySlot": {
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": "target.concept === 'Entity'"
+                }
             }
+        }
+    },
+    {
+        "name": "ListItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'List'"
         }
     },
     {
