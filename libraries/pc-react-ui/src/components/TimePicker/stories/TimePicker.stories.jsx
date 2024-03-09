@@ -31,5 +31,8 @@ export const 默认 = {
     locale: {
       placeholder: '请选择日期',
     },
+    onChange(e) {
+      console.log(e);
+    },
   },
 };
