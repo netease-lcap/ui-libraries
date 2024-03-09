@@ -160,7 +160,7 @@
         "name": "Flex",
         "ideusage": {
             "idetype": "container",
-            "containerDirection": "this.getAttribute('direction')?.value ? 'column' : 'row' "
+            "containerDirection": "this.getAttribute('direction')?.value === 'true' ? 'column' : 'row' "
         }
     },
     {
