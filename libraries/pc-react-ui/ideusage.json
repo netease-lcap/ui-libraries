@@ -340,7 +340,7 @@
             "idetype": "modal",
             "selector": {
               "expression": "this",
-              "cssSelector": "div[class='ant-drawer-wrapper-body']"
+              "cssSelector": "div[class='ant-drawer-content']"
             }
         }
     },
