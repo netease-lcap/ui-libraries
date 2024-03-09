@@ -60,13 +60,15 @@ export const 默认 = {
       {
         title: '姓名',
         dataIndex: 'name',
-
+        sorter: true,
+        // defaultSortOrder: 'ascend',
+        // dataIndex: 'age',
         key: 'name',
       },
       {
         title: '年龄',
         sorter: true,
-        defaultSortOrder: 'ascend',
+        // defaultSortOrder: 'ascend',
         dataIndex: 'age',
         key: 'age',
       },

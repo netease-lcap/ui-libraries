@@ -169,12 +169,16 @@ export function useHandleSorter(props) {
   const columnsProps = props.get('columns');
   const columns = React.useMemo(() => _.map(columnsProps, (item) => {
     const isSorter = fp.conforms({ sorter: fp.isEqual(true) });
-    const handleAscend = (a, b) => a[item.dataIndex] > b[item.dataIndex];
-    const handleDescend = (a, b) => a[item.dataIndex] < b[item.dataIndex];
+    const handleAscend = {
+      multiple: item.multiple ?? 1, compare: (a, b) => a[item.dataIndex] > b[item.ataIndex],
+    };
+    const handleDescend = {
+      multiple: item.multiple ?? 1, compare: (a, b) => a[item.dataIndex] < b[item.ataIndex],
+    };
     const handleSorter = fp.cond([
       [fp.matches({ defaultSortOrder: 'ascend' }), fp.constant({ ...item, sorter: handleAscend })],
       [fp.matches({ defaultSortOrder: 'descend' }), fp.constant({ ...item, sorter: handleDescend })],
-      [fp.stubTrue, fp.constant(fp.constant({ ...item, sorter: handleAscend }))],
+      [fp.stubTrue, fp.constant({ ...item, sorter: handleAscend })],
     ]);
     return fp.cond([[isSorter, handleSorter], [fp.stubTrue, fp.identity]])(item);
   }), [columnsProps]);
@@ -182,6 +186,7 @@ export function useHandleSorter(props) {
     [fp.isNil, fp.stubObject],
     [fp.stubTrue, fp.constant({ columns })],
   ])(columnsProps);
+  // console.log(result, 'result');
   return result;
 }
 export function useHandleScroll(props) {

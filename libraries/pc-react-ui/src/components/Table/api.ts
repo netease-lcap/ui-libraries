@@ -1017,6 +1017,18 @@ namespace nasl.ui {
     })
     defaultSortOrder: 'ascend' | 'descend' = 'ascend';
 
+    @Prop<TableColumnOptions<T, V, P, M>, 'multiple'>({
+      group: '数据属性',
+      title: '排序优先级',
+      description: '该列的排序优先级',
+      docDescription: '该列的排序优先级',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+      if: (_) => _.sorter === true,
+    })
+    multiple: nasl.core.Integer = 1;
+
     // @Prop<UTableViewColumnOptions<T, V, P, M>, 'type'>({
     //   group: '数据属性',
     //   title: '列类型',
