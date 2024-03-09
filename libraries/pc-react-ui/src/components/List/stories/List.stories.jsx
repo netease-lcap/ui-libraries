@@ -25,13 +25,11 @@ export default {
 export const 默认 = {
   render: () => (
     <List title="带卡片阴影" extra="extra" tooltip="这是提示" style={{ width: 501 }}>
-      <ListItem key={1}> Card content</ListItem>
-      <ListItem key={2}>Card content</ListItem>
-      <ListItem key={3}>Card content</ListItem>
     </List>
   ),
   args: {
     color: 'magenta',
     children: 'Tag',
+    dataSource: [{}, {}, {}],
   },
 };

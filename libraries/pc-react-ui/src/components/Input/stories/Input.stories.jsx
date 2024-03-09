@@ -32,7 +32,7 @@ export const 默认 = {
     React.useEffect(() => {
       console.log(ref, 'ref');
     }, []);
-    return <Input ref={ref} value={value} prefix="BorderInnerOutlined" onChange={onchange} />;
+    return <Input ref={ref} value={value} allowClear prefix="BorderInnerOutlined" onChange={onchange} />;
   },
   args: {
     color: 'magenta',

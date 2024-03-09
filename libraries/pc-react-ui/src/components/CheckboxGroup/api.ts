@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @Component({
-    title: '多选框',
+    title: '多选框组',
     icon: 'checkboxes',
     description: '多项中选择多个时使用',
     group: 'Form',
@@ -208,7 +208,7 @@ namespace nasl.ui {
     // onLoad: (event: any) => any;
 
     @Slot({
-      title: 'undefined',
+      title: '多选框',
       description: '插入`<checkbox>`子组件。',
       emptyBackground: 'add-sub',
       snippets: [

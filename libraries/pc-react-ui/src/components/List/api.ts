@@ -473,11 +473,11 @@ namespace nasl.ui {
       snippets: [
         {
           title: '列表项',
-          code: '<ListItem><Text>列表项</Text></ListItem>',
+          code: '<Text>列表项</Text>',
         },
       ],
     })
-    slotDefault: (current: Current<T>) => Array<ViewComponent>;
+    slotRenderItem: (current: Current<T>) => Array<ViewComponent>;
   }
   @Component({
     title: '列表项',

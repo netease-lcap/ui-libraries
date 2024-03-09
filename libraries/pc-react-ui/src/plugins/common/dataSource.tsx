@@ -1,9 +1,8 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react-refresh/only-export-components */
 import _ from 'lodash';
+import React, { useMemo } from 'react';
 import fp from 'lodash/fp';
-import { useMemo } from 'react';
-// import moduleName from 'module';
 import { useRequest } from 'ahooks';
 import {
   $deletePropsList, $dataSourceField, $labelKey, $valueKey,
@@ -43,6 +42,7 @@ export function useHandleTransformOption(props) {
     loading,
   };
 }
+
 useHandleTransformOption.order = 5;
 export function useHandleTextAndValueField(props) {
   const textField = props.get('textField', 'label');
@@ -56,9 +56,42 @@ export function useHandleTextAndValueField(props) {
     const logicFn = _.map(dataSource, (item) => ({ [labelKey]: _.get(item, textField), [valueKey]: _.get(item, valueField) }));
     return logicFn;
   }, [dataSource, textField, valueField, labelKey, valueKey]);
-  console.log(convertOption, 'con');
   return _.isNil(dataSource)
     ? { [$deletePropsList]: deletePropsList }
     : { [dataSourceField]: convertOption, [$deletePropsList]: deletePropsList };
 }
 useHandleTextAndValueField.order = 6;
+// const nodeId = React.useMemo(() => _.uniqueId('button_'), []);
+
+export function useHandleMapField(filedInfo) {
+  const {
+    label = 'label',
+    value = 'value',
+    textField = 'label',
+    valueField = 'value',
+    dataSource,
+  } = filedInfo;
+  return useMemo(() => {
+    return _.map(dataSource, (item) => ({
+      [label]: _.get(item, textField),
+      [value]: _.get(item, valueField),
+    }));
+  }, [label, value, textField, valueField, dataSource]);
+}
+export function useHandleDataSourceToRequest(dataSource) {
+  const wrapDataSource = _.cond([
+    [_.isArray, _.constant(async () => dataSource)],
+    [_.isFunction, _.constant(async (...arg) => dataSource(...arg))],
+    [_.stubTrue, _.constant(async () => [])],
+  ]);
+  return useMemo(() => wrapDataSource(dataSource), [dataSource]);
+}
+
+export function useFormatDataSource(dataSource) {
+  const conformsArray = _.cond([
+    [Array.isArray, _.identity],
+    [_.conforms({ list: _.isArray }), fp.get('list')],
+    [_.stubTrue, _.stubArray],
+  ]);
+  return useMemo(() => conformsArray(dataSource), [dataSource]);
+}

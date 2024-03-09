@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 export function useHandleRef(props) {
   const [element, setElement] = React.useState({});
-  const nodeId = _.uniqueId('button_');
+  const nodeId = React.useMemo(() => _.uniqueId('button_'), []);
   const ref = props.get('ref');
   React.useEffect(() => {
     const switchElement = document.querySelector(`[data-nodeid=${nodeId}]`);
