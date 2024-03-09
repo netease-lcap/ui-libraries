@@ -1098,7 +1098,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '固定列',
-      description: '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
+      description: '固定列,需要表格设置横向内容宽度后生效',
       setter: {
         concept: 'SwitchSetter',
       },

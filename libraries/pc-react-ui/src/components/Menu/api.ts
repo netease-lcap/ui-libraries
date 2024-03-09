@@ -151,8 +151,8 @@ namespace nasl.ui {
     // label: nasl.core.String;
 
     @Prop({
-      title: '链接地址',
-      description: '链接地址',
+      title: '唯一标识',
+      description: '在导航中使用可以用来跳转或标识选中状态',
     })
     key: nasl.core.Any;
 

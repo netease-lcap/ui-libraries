@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, MenuItem } from '../index';
+import { Menu, MenuItem, Text, MenuSubMenu } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -25,10 +25,18 @@ export default {
 export const 默认 = {
   render: () => (
     <Menu mode="horizontal" onClick={(e) => console.log(3)} onSelect={(e) => console.log(4)}>
-      <MenuItem key="https://dev.zzdemo.defaulttenant.lcap.codewave-test.163yun.com/crumb" label="21" icon="BorderInnerOutlined">
+      <MenuItem path="/app" label="21" icon="BorderInnerOutlined">
         Navigation Four - LinkM
       </MenuItem>
       <MenuItem key="/app">Navigation</MenuItem>
+      <MenuSubMenu title={'subtitle'} key="sub2">
+        <MenuItem key="/2app">
+          <Text children="1Navigation" />
+        </MenuItem>
+        <MenuItem key="/app1">
+          <Text children="1Navigation" />
+        </MenuItem>
+      </MenuSubMenu>
     </Menu>
   ),
   args: {

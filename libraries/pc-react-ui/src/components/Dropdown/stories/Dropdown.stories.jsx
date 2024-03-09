@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Dropdown, MenuItem, Text, Button,
+  Dropdown, MenuItem, Text, Button, Link,
 } from '@/index';
 // import { Dropdown } from 'antd';
 
@@ -48,39 +48,24 @@ export const 默认 = {
     return (
       <Dropdown
         style={{
-          marginLeft: '20px', '--update-key': 'y2xu', marginTop: '20px', marginBottom: '20px', color: '#583838',
+          marginLeft: '20px',
+          '--update-key': 'y2xu',
+          marginTop: '20px',
+          marginBottom: '20px',
+          color: '#583838',
         }}
         type="dashed"
         menuItem={(
           <>
-            <MenuItem
-              key="https://www.sf.163.com/"
-              icon="file-jpg"
-              label={(
-                <Text>图标+外部链接</Text>
-              )}
-            />
-            <MenuItem
-              key="/navbar"
-              icon=""
-              label={(
-                <Text>内部链接</Text>
-              )}
-            />
+            <MenuItem key="https://www.sf.163.com/" icon="file-jpg" label={<Link href="https://www.baidu.com">图标+外部链接</Link>} />
+            <MenuItem key="/navbar" icon="" label={<Link href="/app">内部链接</Link>} />
             <MenuItem
               // onClick={localStore.MenuItem55Click}
               key=""
               icon=""
-              label={(
-                <Text>事件</Text>
-              )}
+              label={<Text>事件</Text>}
             />
-            <MenuItem
-              disabled
-              label={(
-                <Text>禁用</Text>
-              )}
-            />
+            <MenuItem disabled label={<Text>禁用</Text>} />
           </>
         )}
       >
