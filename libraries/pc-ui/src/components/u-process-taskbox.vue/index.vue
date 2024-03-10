@@ -23,7 +23,7 @@
                         alignment="center"
                         :class="$style.line"
                     >
-                        <span :class="$style.title">{{ task.taskBoxTitle }}</span>
+                        <span :class="$style.title">{{ task.taskTitle }}</span>
                         <span :class="$style.time">{{ dateFormatter(task.procInstStartTime) }}</span>
                     </u-linear-layout>
                 </u-list-item>

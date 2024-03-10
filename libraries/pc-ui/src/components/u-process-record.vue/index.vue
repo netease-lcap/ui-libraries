@@ -17,11 +17,11 @@
                             </div>
                             <div :class="$style.content">
                                 <div :class="$style.value">{{ current.item.userName || '-' }}</div>
-                                <div :class="$style.value">{{ dateFormatter(current.item.recordCreateTime) || '-' }}</div>
+                                <div :class="$style.value">{{ dateFormatter(current.item.recordCreatedTime) || '-' }}</div>
                                 <div :class="$style.value">
-                                    <span :class="$style.statuslabel" :status="current.item.nodeOperation">{{ current.item.nodeOperationText || '-' }}</span>
+                                    <span :class="$style.statuslabel" :status="current.item.nodeOperation">{{ current.item.nodeOperationDisplayText || '-' }}</span>
                                 </div>
-                                <div :class="$style.value">{{ current.item.nodeComment || '-' }}</div>
+                                <div :class="$style.value">{{ current.item.nodeOperationComment || '-' }}</div>
                             </div>
                         </div>
                     </u-timeline-item>
@@ -46,15 +46,15 @@
                     <template #cell="current"> {{ current.item.userName || '-' }}</template>
                 </u-table-view-column>
                 <u-table-view-column :title="$tt('recordCreateTime')">
-                    <template #cell="current"> {{ dateFormatter(current.item.recordCreateTime) }}</template>
+                    <template #cell="current"> {{ dateFormatter(current.item.recordCreatedTime) }}</template>
                 </u-table-view-column>
                 <u-table-view-column :title="$tt('nodeOperation')">
                     <template #cell="current">
-                        <span :class="$style.statuslabel" :status="current.item.nodeOperation">{{ current.item.nodeOperationText || '-' }}</span>
+                        <span :class="$style.statuslabel" :status="current.item.nodeOperation">{{ current.item.nodeOperationDisplayText || '-' }}</span>
                     </template>
                 </u-table-view-column>
                 <u-table-view-column :title="$tt('comment')">
-                    <template #cell="current"> {{ current.item.nodeComment || '-' }}</template>
+                    <template #cell="current"> {{ current.item.nodeOperationComment || '-' }}</template>
                 </u-table-view-column>
             </u-table-view>
         </template>

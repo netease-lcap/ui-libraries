@@ -20,7 +20,7 @@ export default {
                 this.$refs.myprocess.$refs.tableview.currentDataSource.arrangedData = [
                     {
                         taskId: '3df4ffc2-ba8f-11ee-94b2-aa63f0d148e3',
-                        taskBoxTitle: 'x',
+                        taskTitle: 'x',
                         procInstTitle: '张三申请事假1天',
                         procDefTitle: '请假流程',
                         procInstInitiator: '张三',
@@ -36,7 +36,7 @@ export default {
                     },
                     {
                         taskId: '219ea9dd-ba8f-11ee-a35a-a2041721ddc7',
-                        taskBoxTitle: 'x',
+                        taskTitle: 'x',
                         procInstTitle: '张三申请事假1天',
                         procDefTitle: '请假流程',
                         procInstInitiator: '张三',
@@ -52,7 +52,7 @@ export default {
                     },
                     {
                         taskId: '219ea9dd-ba8f-11ee-a35a-a2041721ddc7',
-                        taskBoxTitle: 'x',
+                        taskTitle: 'x',
                         procInstTitle: '张三申请事假1天',
                         procDefTitle: '请假流程',
                         procInstInitiator: '张三',
