@@ -292,17 +292,17 @@ export default createComponent({
           trigger="click"
           placement={this.placement}
           scopedSlots={{
-            reference: () => <div className={bem('more')}>{t('more')}</div>,
+            reference: () => <div class={bem('more')}>{t('more')}</div>,
           }}
         >
           {rest.map((item) => (
-            <div className={bem('popover-item')} onClick={() => this.onClickItem(item)}>
+            <div class={bem('popover-item')} onClick={() => this.onClickItem(item)}>
               {item.displayText}
             </div>
           ))}
         </Popover>
       ),
-      <div className={bem('operation', { center: !hasMore })}>
+      <div class={bem('operation', { center: !hasMore })}>
         {second && (
           <Button type="default" squareroud="round" onClick={() => this.onClickItem(second)}>
             {second.displayText}
@@ -317,7 +317,7 @@ export default createComponent({
     ].filter(Boolean);
 
     return (
-      <div className={bem('wrap')} vusion-disabled-duplicate="true" vusion-disabled-copy="true">
+      <div class={bem('wrap')} vusion-disabled-duplicate="true" vusion-disabled-copy="true">
         {btns}
 
         <van-link ref="link" class={bem('link')} destination={this.destination} target={this.target} link={this.link} />
@@ -333,7 +333,7 @@ export default createComponent({
           closeOnClickOverlay
           nomattershowfoot
         >
-          <div className={bem('dialog')}>
+          <div class={bem('dialog')}>
             <Form ref="form">
               {['reassign'].includes(this.dialog.item?.name) && (
                 <Field
