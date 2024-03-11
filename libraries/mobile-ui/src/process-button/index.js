@@ -14,37 +14,37 @@ const mockData = {
   permissionDetails: [
     {
       name: 'submit',
-      operatationEnabled: true, // 操作权限开关
+      operationEnabled: true, // 操作权限开关
       displayText: '提交', // 操作按钮文本
       commentRequired: false, // 意见开关
     },
     {
       name: 'approve',
-      operatationEnabled: true, // 操作权限开关
+      operationEnabled: true, // 操作权限开关
       displayText: '同意', // 操作按钮文本
       commentRequired: true, // 意见开关
     },
     {
       name: 'reject',
-      operatationEnabled: true, // 操作权限开关
+      operationEnabled: true, // 操作权限开关
       displayText: '拒绝', // 操作按钮文本
       commentRequired: true, // 意见开关
     },
     {
       name: 'revert',
-      operatationEnabled: true, // 操作权限开关
+      operationEnabled: true, // 操作权限开关
       displayText: '回退', // 操作按钮文本
       commentRequired: true, // 意见开关
     },
     {
       name: 'reassign',
-      operatationEnabled: true, // 操作权限开关
+      operationEnabled: true, // 操作权限开关
       displayText: '转交', // 操作按钮文本
       commentRequired: true, // 意见开关
     },
     {
       name: 'withdraw',
-      operatationEnabled: true, // 操作权限开关
+      operationEnabled: true, // 操作权限开关
       displayText: '撤回', // 操作按钮文本
       commentRequired: true, // 意见开关
     },
@@ -273,7 +273,7 @@ export default createComponent({
     const { permissionDetails } = this;
 
     // 有权限的操作
-    const permissions = permissionDetails?.filter((item) => item.operatationEnabled);
+    const permissions = permissionDetails?.filter((item) => item.operationEnabled);
     const hasPermission = permissions?.length > 0;
 
     if (!hasPermission) {
@@ -292,17 +292,17 @@ export default createComponent({
           trigger="click"
           placement={this.placement}
           scopedSlots={{
-            reference: () => <div class={bem('more')}>{t('more')}</div>,
+            reference: () => <div className={bem('more')}>{t('more')}</div>,
           }}
         >
           {rest.map((item) => (
-            <div class={bem('popover-item')} onClick={() => this.onClickItem(item)}>
+            <div className={bem('popover-item')} onClick={() => this.onClickItem(item)}>
               {item.displayText}
             </div>
           ))}
         </Popover>
       ),
-      <div class={bem('operation', { center: !hasMore })}>
+      <div className={bem('operation', { center: !hasMore })}>
         {second && (
           <Button type="default" squareroud="round" onClick={() => this.onClickItem(second)}>
             {second.displayText}
@@ -317,7 +317,7 @@ export default createComponent({
     ].filter(Boolean);
 
     return (
-      <div class={bem('wrap')} vusion-disabled-duplicate="true" vusion-disabled-copy="true">
+      <div className={bem('wrap')} vusion-disabled-duplicate="true" vusion-disabled-copy="true">
         {btns}
 
         <van-link ref="link" class={bem('link')} destination={this.destination} target={this.target} link={this.link} />
@@ -333,7 +333,7 @@ export default createComponent({
           closeOnClickOverlay
           nomattershowfoot
         >
-          <div class={bem('dialog')}>
+          <div className={bem('dialog')}>
             <Form ref="form">
               {['reassign'].includes(this.dialog.item?.name) && (
                 <Field
