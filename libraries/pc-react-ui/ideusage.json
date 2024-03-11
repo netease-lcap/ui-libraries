@@ -331,6 +331,10 @@
             "selector": {
               "expression": "this",
               "cssSelector": "div[class='ant-modal-content']"
+            },
+            "additionalAttribute": {
+                "transitionName": "''",
+                "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
             }
         }
     },
@@ -341,6 +345,10 @@
             "selector": {
               "expression": "this",
               "cssSelector": "div[class='ant-drawer-content']"
+            },
+            "additionalAttribute": {
+                "transitionName": "''",
+                "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
             }
         }
     },
