@@ -27,7 +27,7 @@
       "@components/*": ["./src/components/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/components/Table/stories/Table.stories.tsx"],
   "references": [
     {
       "path": "./tsconfig.node.json"

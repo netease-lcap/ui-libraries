@@ -6,8 +6,8 @@ export function useHandleRef(props) {
   const nodeId = React.useMemo(() => _.uniqueId('button_'), []);
   const ref = props.get('ref');
   React.useEffect(() => {
-    const switchElement = document.querySelector(`[data-nodeid=${nodeId}]`);
-    setElement({ button: switchElement }!);
+    const buttonElement = document.querySelector(`[data-nodeid=${nodeId}]`);
+    setElement({ button: buttonElement }!);
   }, []);
   return {
     'data-nodeid': nodeId,

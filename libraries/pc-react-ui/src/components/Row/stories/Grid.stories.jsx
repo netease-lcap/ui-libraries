@@ -23,7 +23,9 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <Row {...args} />,
+  render: (args) => {
+    return <Row {...args} />;
+  },
   args: {
     color: 'magenta',
   },

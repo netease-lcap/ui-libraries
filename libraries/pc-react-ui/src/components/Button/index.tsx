@@ -1,6 +1,6 @@
 import { Button as AntdButton } from 'antd';
 import type { ButtonProps as AntdButtonProps } from 'antd';
-import * as basicsPlugin from './plugins/basicsPlugin';
+import * as basicsPlugin from './plugins/index';
 import type { pluginType } from '@/plugins/type';
 import { registerComponet } from '@/plugins/index';
 import type { BasePlugin } from '@/types/plugins';

@@ -17,9 +17,9 @@ function SvgComponent(src) {
 export function Icon(props) {
   const isAntIcon = _.curry(_.get)(AntdIcon)(_, false);
   const result = _.cond([
-    [_.isValidLink, SvgComponent],
+    // [_.isValidLink, SvgComponent],
     [isAntIcon, _.constant(React.createElement(AntdIcon[props]))],
-    [_.stubTrue, _.identity],
+    [_.stubTrue, SvgComponent],
   ]);
   // const Icon = AntdIcon[iconName];
   return result(props);

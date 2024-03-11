@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from '../index';
-import { Text } from '@/index';
+import { Text, Image } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -26,10 +26,10 @@ export default {
 export const 三栏布局 = {
   render: () => {
     return (
-      <Row style={{ width: '1000px' }}>
-        <Col style={{ backgroundColor: '#1677ffbf', height: 54 }} span={8} />
-        <Col style={{ backgroundColor: '#1677ff', height: 54 }} span={8} />
-        <Col style={{ backgroundColor: '#1677ffbf', height: 54 }} span={8} />
+      <Row style={{ width: '100%' }}>
+        <Col span={8} />
+        <Col span={8} />
+        <Col span={8} />
       </Row>
     );
   },

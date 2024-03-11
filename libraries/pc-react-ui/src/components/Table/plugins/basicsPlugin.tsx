@@ -37,6 +37,7 @@ export function useHandle(props) {
   }, [children, columns]);
   return result;
 }
+useHandle.order = 3;
 
 export function useHandleTransformOption(props) {
   const dataSource = props.get('dataSource');
@@ -170,10 +171,10 @@ export function useHandleSorter(props) {
   const columns = React.useMemo(() => _.map(columnsProps, (item) => {
     const isSorter = fp.conforms({ sorter: fp.isEqual(true) });
     const handleAscend = {
-      multiple: item.multiple ?? 1, compare: (a, b) => a[item.dataIndex] > b[item.ataIndex],
+      multiple: item.multiple ?? 1, compare: (a, b) => _.get(a, item.dataIndex) > _.get(b, item.dataIndex),
     };
     const handleDescend = {
-      multiple: item.multiple ?? 1, compare: (a, b) => a[item.dataIndex] < b[item.ataIndex],
+      multiple: item.multiple ?? 1, compare: (a, b) => _.get(a, item.dataIndex) < _.get(b, item.dataIndex),
     };
     const handleSorter = fp.cond([
       [fp.matches({ defaultSortOrder: 'ascend' }), fp.constant({ ...item, sorter: handleAscend })],

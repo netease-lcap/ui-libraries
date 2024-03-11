@@ -25,6 +25,9 @@ export default {
 export const Primary = {
   render: (args) => {
     const refss = React.useRef();
+    React.useEffect(() => {
+      console.log(refss, 'refss');
+    }, []);
     return (
       <Button {...args} ref={refss}>
         {' '}
@@ -37,7 +40,7 @@ export const Primary = {
     asyncLoading: true,
     // icon: 'AimOutli2ned',
     onContextMenu: (e) => console.log(1),
-    icon: 'BorderInnerOutlined',
+    icon: '//minio-api.codewave-test.163yun.com/lowcode-static/user/defaulttenant/1709717732938_%E5%A4%AA%E9%98%B3.svg',
     children: '123',
     // onClick: () => new Promise((res) => {
     //   setTimeout(() => {
