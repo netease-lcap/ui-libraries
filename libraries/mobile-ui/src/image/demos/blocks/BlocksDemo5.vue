@@ -2,7 +2,7 @@
 
 <template>
   <van-image
-  src="http://ceph.lcap.hatest.163yun.com/lcap-test-static/h5-template/components/image_default.png"
+  src="https://static-vusion.163yun.com/assets/cloud-ui/1.jpg"
   fit="cover"
   preview
 ></van-image>
