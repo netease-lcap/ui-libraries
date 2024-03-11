@@ -85,7 +85,7 @@ export default createComponent({
     };
 
     return (
-      <div class={bem()}>
+      <div class={bem()} vusion-disabled-duplicate="true" vusion-disabled-copy="true">
         <div class={bem('card')}>
           <div class={bem('card-line')}>
             <div class={bem('card-label')}>{t('initiator')}</div>

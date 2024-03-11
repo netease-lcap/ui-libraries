@@ -1,5 +1,5 @@
 <template>
-<div :class="[$style.root, isPreview ? $style.preview : '']" :color="color || formItemVM && formItemVM.color" :readonly="readonly" :disabled="currentDisabled" :opened="popperOpened"
+<div :class="[$style.root, isPreview ? $style.preview : '', isPreview && !$env.VUE_APP_DESIGNER ? $style.disEvent: '']" :color="color || formItemVM && formItemVM.color" :readonly="readonly" :disabled="currentDisabled" :opened="popperOpened"
     :clearable="clearable && !!(filterable ? filterText ||currentText : currentText)" :multiple="multiple" :multiple-tags="multiple && multipleAppearance === 'tags'"
     :prefix="prefix ? prefix : undefined" :suffix="suffix ? suffix : undefined"
     :start="!!prefix"
@@ -303,6 +303,15 @@ export default {
         },
         value(value) {
             this.setSelectedDataQueue(value);
+
+            if (this.filterable && !this.multiple && this.currentDataSource && Array.isArray(this.currentDataSource.data)) {
+              const selectedItem = this.currentDataSource.data.find((d) => this.$at2(d, this.valueField) === value);
+
+              const filterText = selectedItem ? this.$at2(selectedItem, this.field || this.valueField) : '';
+              if (filterText !== this.filterText) {
+                this.filterText = filterText;
+              }
+            }
         },
         selectedDataQueue(value) {
             // 当value有值，并且已经加载过一次数据才能开启判断
@@ -533,6 +542,7 @@ export default {
             this.$refs.popper && this.$refs.popper.close();
         },
         toggle(opened) {
+            if (this.isPreview) return;
             this.$refs.popper && this.$refs.popper.toggle(opened);
         },
         designerControl() {

@@ -2,6 +2,7 @@
 <span
     :class="{ [$style.root]: true, [$style.active]: active }"
     @click="onClick"
+    vusion-disabled-duplicate="true" vusion-disabled-copy="true"
 >
     <u-badge corner :value="total" :class="$style.badge">
         <i-ico v-if="icon" :name="icon" :class="$style.taskicon" notext></i-ico>
@@ -22,7 +23,7 @@
                         alignment="center"
                         :class="$style.line"
                     >
-                        <span :class="$style.title">{{ task.taskBoxTitle }}</span>
+                        <span :class="$style.title">{{ task.taskTitle }}</span>
                         <span :class="$style.time">{{ dateFormatter(task.procInstStartTime) }}</span>
                     </u-linear-layout>
                 </u-list-item>

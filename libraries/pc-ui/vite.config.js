@@ -38,6 +38,8 @@ export default defineConfig(({ command }) => {
         '@': path.resolve(__dirname, './src'),
         'cloud-ui.vusion': path.resolve(__dirname, './src'),
         'swiper/swiper-bundle.esm.js': path.resolve(__dirname, './node_modules/swiper/swiper-bundle.esm.js'),
+        '@joskii/jflow-core': path.resolve(__dirname, './node_modules/@joskii/jflow-core/dist/jflow.es.min.js'),
+        '@joskii/jflow-vue2-plugin': path.resolve(__dirname, './node_modules/@joskii/jflow-vue2-plugin/dist/jflow-vue2-plugin.es.min.js'),
       },
     },
     define: {
@@ -127,6 +129,9 @@ export default defineConfig(({ command }) => {
         modules: {
           classNameStrategy: 'non-scoped',
         },
+      },
+      deps: {
+        inline: ['vitest-canvas-mock'],
       },
       coverage: {
         provider: 'v8',
