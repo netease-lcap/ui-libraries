@@ -74,7 +74,7 @@ export default {
                         taskId: this.taskId,
                     },
                 });
-                this.permissionDetails = (res.data || []).filter((item) => item.operatationEnabled);
+                this.permissionDetails = (res.data || []).filter((item) => item.operationEnabled);
             }
         },
         getColor(item) {
