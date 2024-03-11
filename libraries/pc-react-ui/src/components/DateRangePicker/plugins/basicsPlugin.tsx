@@ -18,19 +18,26 @@ export function useHandleStyle(props) {
   };
 }
 
-// export function useHandleValue(props) {
-//   const valueProps = props.get('value');
-//   const onChangeProps = props.get('onChange');
-//   const valueFormat = _.isNil(valueProps) ? valueProps : dayjs(valueProps);
-//   const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueFormat }));
-//   return {
-//     value,
-//     onChange(time) {
-//       _.attempt(onChangeProps, time.format('DD/MM/YYYY'));
-//       onChange(value);
-//     },
-//   };
-// }
+function useHandleValue(props) {
+  const valueProps = props.get('value');
+  const onChangeProps = props.get('onChange');
+  // const valueFormat = _.isNil(valueProps) ? valueProps : dayjs(valueProps);
+  const startDate = _.isNil(_.get(valueProps, '0')) ? undefined : dayjs(_.get(valueProps, '0'));
+  const endDate = _.isNil(_.get(valueProps, '1')) ? undefined : dayjs(_.get(valueProps, '1'));
+  const valueFormat = _.isEmpty([startDate, endDate].filter(Boolean)) ? undefined : [startDate, endDate];
+  const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueFormat }));
+  return {
+    value,
+    onChange(time) {
+      if (_.isNil(time)) {
+        _.attempt(onChangeProps, time);
+        onChange(value);
+      }
+      // _.attempt(onChangeProps, time.format('DD/MM/YYYY'));
+      // onChange(value);
+    },
+  };
+}
 
 function useHandleValueToStartAndEnd(props) {
   const startDateProps = props.get('startDate');
@@ -49,10 +56,10 @@ function useHandleValueToStartAndEnd(props) {
   });
   const startDate = _.isNil(startDateProps) ? undefined : dayjs(startDateProps);
   const endDate = _.isNil(endDateProps) ? undefined : dayjs(endDateProps);
+  const valueProps = _.isEmpty([startDate, endDate].filter(Boolean)) ? undefined : [startDate, endDate];
   const defaultStartDate = _.isNil(defaultStartDateProps) ? undefined : dayjs(defaultStartDateProps);
   const defaultEndDate = _.isNil(defaultEndDateProps) ? undefined : dayjs(defaultEndDateProps);
   const defaultValue = _.isEmpty([defaultStartDate, defaultEndDate].filter(Boolean)) ? undefined : [defaultStartDate, defaultEndDate];
-  const valueProps = _.isEmpty([startDate, endDate].filter(Boolean)) ? undefined : [startDate, endDate];
   const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueProps, defaultValue, onChange: wrapChange }));
   return {
     value,
