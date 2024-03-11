@@ -105,17 +105,17 @@ export function useFormatDataSource(dataSource) {
 export function useDataSourceToTree(dataSource, parentField, valueField = 'value') {
   return useMemo(() => {
     if (_.isNil(parentField)) return dataSource;
-    const map = new Map<string, Record<string, any>>(dataSource.map((item) => [item[valueField], item]));
+    const map = new Map<string, Record<string, any>>(dataSource.map((item) => [_.get(item, valueField), item]));
     const tree = [] as any[];
     dataSource.forEach((item) => {
-      if (item[parentField]) {
-        const parent = map.get(item.parentId);
+      if (_.get(item, parentField)) {
+        const parent = map.get(_.get(item, parentField));
         if (parent) {
           if (!Array.isArray(parent.children)) parent.children = [];
-          parent.children.push(map.get(item[valueField]));
+          parent.children.push(map.get(_.get(item, valueField)));
         }
       } else {
-        tree.push(map.get(item[valueField]));
+        tree.push(map.get(_.get(item, valueField)));
       }
     });
     return tree;

@@ -25,18 +25,19 @@ export default {
 export const 异步函数 = {
   render: (args) => <Cascader {...args} />,
   args: {
-    dataSource: () => new Promise((res) => {
-      setTimeout(() => {
-        res([
-          { labels: 'Option 1', key: '1' },
-          {
-            labels: 'Option 2',
-            key: '2',
-            children: [{ labels: 'Option 3', key: '3' }],
-          },
-        ]);
-      }, 3000);
-    }),
+    dataSource: () =>
+      new Promise((res) => {
+        setTimeout(() => {
+          res([
+            { labels: 'Option 1', key: '1' },
+            {
+              labels: 'Option 2',
+              key: '2',
+              children: [{ labels: 'Option 3', key: '3' }],
+            },
+          ]);
+        }, 3000);
+      }),
     valueField: 'key',
     textField: 'labels',
   },
@@ -45,15 +46,15 @@ export const 同步函数 = {
   render: (args) => <Cascader {...args} />,
   args: {
     dataSource: () => [
-      { id: 1, parentId: null, name: 'Root' },
-      { id: 2, parentId: 1, name: 'Child 1' },
-      { id: 3, parentId: 1, name: 'Child 2' },
-      { id: 4, parentId: 2, name: 'Grandchild 1' },
-      { id: 5, parentId: 3, name: 'Grandchild 2' },
+      { a: { id: 1, parentId: null, name: 'Root' } },
+      { a: { id: 2, parentId: 1, name: 'Child 1' } },
+      { a: { id: 3, parentId: 1, name: 'Child 2' } },
+      { a: { id: 4, parentId: 2, name: 'Grandchild 1' } },
+      { a: { id: 5, parentId: 3, name: 'Grandchild 2' } },
     ],
-    valueField: 'id',
-    textField: 'name',
-    parentField: 'parentId',
+    valueField: 'a.id',
+    textField: 'a.name',
+    parentField: 'a.parentId',
   },
 };
 
@@ -81,18 +82,19 @@ export const ref = {
   },
   args: {
     style: { width: 300 },
-    dataSource: () => new Promise((res) => {
-      setTimeout(() => {
-        res([
-          { labels: 'Option 1', key: '1' },
-          {
-            labels: 'Option 2',
-            key: '2',
-            children: [{ labels: 'Option 3', key: '3' }],
-          },
-        ]);
-      }, 3000);
-    }),
+    dataSource: () =>
+      new Promise((res) => {
+        setTimeout(() => {
+          res([
+            { labels: 'Option 1', key: '1' },
+            {
+              labels: 'Option 2',
+              key: '2',
+              children: [{ labels: 'Option 3', key: '3' }],
+            },
+          ]);
+        }, 3000);
+      }),
     valueField: 'key',
     textField: 'labels',
   },

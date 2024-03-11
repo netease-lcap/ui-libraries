@@ -172,6 +172,16 @@ namespace nasl.ui {
     })
     placeholder: nasl.core.String = '请选择日期';
 
+    @Prop({
+      group: '交互属性',
+      title: '可清除',
+      description: '可点击清除按钮一键清除内容',
+      docDescription: '是否展示清除按钮',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    allowClear: nasl.core.Boolean = true;
     // @Prop<UDatePickerOptions, 'placeholderRight'>({
     //   group: '主要属性',
     //   title: '右侧占位符',

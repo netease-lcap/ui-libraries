@@ -1,13 +1,10 @@
 import _ from 'lodash';
 import { useControllableValue } from 'ahooks';
-import F from 'futil';
 import React from 'react';
 import {
   useRequestDataSource, useHandleMapField, useFormatDataSource, useDataSourceToTree,
 } from '@/plugins/common/dataSource';
 import { $deletePropsList } from '@/plugins/constants';
-
-console.log(F, 'F');
 
 export function useHandleValue(props) {
   const valueProps = props.get('value');

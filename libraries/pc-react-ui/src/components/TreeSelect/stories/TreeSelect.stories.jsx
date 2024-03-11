@@ -26,22 +26,16 @@ export const 异步函数 = {
   render: (args) => <TreeSelect {...args} />,
   args: {
     style: { width: 300 },
-    dataSource: () =>
-      new Promise((res) => {
-        setTimeout(() => {
-          res([
-            { label: 'Option 1', key: '1' },
-            {
-              label: 'Option 2',
-              key: '2',
-              children: [{ label: 'Option 3', key: '3' }],
-            },
-          ]);
-        }, 3000);
-      }),
-    treeCheckable: true,
-    valueField: 'key',
-    textField: 'label',
+    dataSource: () => [
+      { a: { id: 1, parentId: null, name: 'Root' } },
+      { a: { id: 2, parentId: 1, name: 'Child 1' } },
+      { a: { id: 3, parentId: 1, name: 'Child 2' } },
+      { a: { id: 4, parentId: 2, name: 'Grandchild 1' } },
+      { a: { id: 5, parentId: 3, name: 'Grandchild 2' } },
+    ],
+    valueField: 'a.id',
+    textField: 'a.name',
+    parentField: 'a.parentId',
   },
 };
 export const 同步函数 = {
