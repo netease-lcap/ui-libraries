@@ -101,10 +101,10 @@ export default createComponent({
             const {
               nodeTitle,
               userName,
-              recordCreateTime,
+              recordCreatedTime,
               nodeOperation,
-              nodeOperationText,
-              comment,
+              nodeOperationDisplayText,
+              nodeOperationComment: comment,
             } = item;
 
             return (
@@ -120,15 +120,15 @@ export default createComponent({
                 <div class={bem('card-line')}>
                   <div class={bem('card-label')}>{t('time')}</div>
                   <div class={bem('card-content')}>
-                    {recordCreateTime
-                      ? dayjs(recordCreateTime).format('YYYY-MM-DD HH:mm:ss')
+                    {recordCreatedTime
+                      ? dayjs(recordCreatedTime).format('YYYY-MM-DD HH:mm:ss')
                       : '-'}
                   </div>
                 </div>
                 <div class={bem('card-line')}>
                   <div class={bem('card-label')}>{t('status')}</div>
                   <div class={bem('card-content')}>
-                    <span class={nodeOperation}>{nodeOperationText || '-'}</span>
+                    <span class={nodeOperation}>{nodeOperationDisplayText || '-'}</span>
                   </div>
                 </div>
                 <div class={bem('card-line')}>
@@ -152,7 +152,7 @@ export default createComponent({
           designerMask={false}
           scopedSlots={{
             item: ({ item }) => {
-              const { nodeTitle, userName, recordCreateTime, nodeOperation, nodeOperationText, comment } = item;
+              const { nodeTitle, userName, recordCreatedTime, nodeOperation, nodeOperationDisplayText, nodeOperationComment: comment } = item;
 
               let status = 'process';
 
@@ -182,12 +182,12 @@ export default createComponent({
                     </div>
                     <div class={bem('card-line')}>
                       <div class={bem('card-label')}>{t('time')}</div>
-                      <div class={bem('card-content')}>{recordCreateTime ? dayjs(recordCreateTime).format('YYYY-MM-DD HH:mm:ss') : '-'}</div>
+                      <div class={bem('card-content')}>{recordCreatedTime ? dayjs(recordCreatedTime).format('YYYY-MM-DD HH:mm:ss') : '-'}</div>
                     </div>
                     <div class={bem('card-line')}>
                       <div class={bem('card-label')}>{t('status')}</div>
                       <div class={bem('card-content')}>
-                        <span class={nodeOperation}>{nodeOperationText || '-'}</span>
+                        <span class={nodeOperation}>{nodeOperationDisplayText || '-'}</span>
                       </div>
                     </div>
                     <div class={bem('card-line')}>

@@ -14,39 +14,39 @@ const mockData = {
   permissionDetails: [
     {
       name: 'submit',
-      operateEnable: true, // 操作权限开关
-      showText: '提交', // 操作按钮文本
-      opinionsEnable: false, // 意见开关
+      operatationEnabled: true, // 操作权限开关
+      displayText: '提交', // 操作按钮文本
+      commentRequired: false, // 意见开关
     },
     {
       name: 'approve',
-      operateEnable: true, // 操作权限开关
-      showText: '同意', // 操作按钮文本
-      opinionsEnable: true, // 意见开关
+      operatationEnabled: true, // 操作权限开关
+      displayText: '同意', // 操作按钮文本
+      commentRequired: true, // 意见开关
     },
     {
       name: 'reject',
-      operateEnable: true, // 操作权限开关
-      showText: '拒绝', // 操作按钮文本
-      opinionsEnable: true, // 意见开关
+      operatationEnabled: true, // 操作权限开关
+      displayText: '拒绝', // 操作按钮文本
+      commentRequired: true, // 意见开关
     },
     {
       name: 'revert',
-      operateEnable: true, // 操作权限开关
-      showText: '回退', // 操作按钮文本
-      opinionsEnable: true, // 意见开关
+      operatationEnabled: true, // 操作权限开关
+      displayText: '回退', // 操作按钮文本
+      commentRequired: true, // 意见开关
     },
     {
       name: 'reassign',
-      operateEnable: true, // 操作权限开关
-      showText: '转交', // 操作按钮文本
-      opinionsEnable: true, // 意见开关
+      operatationEnabled: true, // 操作权限开关
+      displayText: '转交', // 操作按钮文本
+      commentRequired: true, // 意见开关
     },
     {
       name: 'withdraw',
-      operateEnable: true, // 操作权限开关
-      showText: '撤回', // 操作按钮文本
-      opinionsEnable: true, // 意见开关
+      operatationEnabled: true, // 操作权限开关
+      displayText: '撤回', // 操作按钮文本
+      commentRequired: true, // 意见开关
     },
   ],
   allTransferUserList: [{
@@ -143,7 +143,7 @@ export default createComponent({
       };
 
       // 意见
-      if (item.operateEnable) {
+      if (item.commentRequired) {
         body.comment = this.dialog.opinions;
       }
 
@@ -175,7 +175,7 @@ export default createComponent({
     },
 
     async onClickItem(item) {
-      const { name, opinionsEnable } = item;
+      const { name, commentRequired } = item;
 
       // 表单检验
       if (['approve', 'reject', 'submit'].includes(name)) {
@@ -193,7 +193,7 @@ export default createComponent({
       }
 
       // 需要弹出框的情况opinionsEnable和name是transfer
-      if (opinionsEnable || name === 'reassign') {
+      if (commentRequired || name === 'reassign') {
         this.dialog = {
           item,
         };
@@ -269,7 +269,7 @@ export default createComponent({
     const { permissionDetails } = this;
 
     // 有权限的操作
-    const permissions = permissionDetails?.filter((item) => item.operateEnable);
+    const permissions = permissionDetails?.filter((item) => item.operatationEnabled);
     const hasPermission = permissions?.length > 0;
 
     if (!hasPermission) {
@@ -293,7 +293,7 @@ export default createComponent({
         >
           {rest.map((item) => (
             <div class={bem('popover-item')} onClick={() => this.onClickItem(item)}>
-              {item.showText}
+              {item.displayText}
             </div>
           ))}
         </Popover>
@@ -301,12 +301,12 @@ export default createComponent({
       <div class={bem('operation', { center: !hasMore })}>
         {second && (
           <Button type="default" squareroud="round" onClick={() => this.onClickItem(second)}>
-            {second.showText}
+            {second.displayText}
           </Button>
         )}
         {first && (
           <Button type="info" size={second ? 'normal' : 'large'} squareroud="round" onClick={() => this.onClickItem(first)}>
-            {first.showText}
+            {first.displayText}
           </Button>
         )}
       </div>,
@@ -322,11 +322,11 @@ export default createComponent({
           destination={this.destination}
           target={this.target}
           link={this.link}
-        ></van-link>
+        />
 
         <Dialog
           vModel={this.showDialog}
-          title={this.dialog.item?.showText}
+          title={this.dialog.item?.displayText}
           onConfirm={this.confirm}
           onClosed={this.resetDialog}
           beforeClose={this.beforeClose}
@@ -343,7 +343,7 @@ export default createComponent({
                   rules={[
                     {
                       validate: 'filled',
-                      message: `选择框不得为空`,
+                      message: '选择框不得为空',
                       trigger: 'input+blur',
                       required: true,
                     },
@@ -368,13 +368,13 @@ export default createComponent({
                 />
               )}
 
-              {this.dialog.item?.opinionsEnable && (
+              {this.dialog.item?.commentRequired && (
                 <Field
                   border={false}
                   rules={[
                     {
                       validate: 'filled',
-                      message: `输入框不得为空`,
+                      message: '输入框不得为空',
                       trigger: 'input+blur',
                       required: true,
                     },
@@ -390,7 +390,7 @@ export default createComponent({
                       />
                     ),
                   }}
-                ></Field>
+                />
               )}
             </Form>
           </div>
