@@ -152,7 +152,7 @@ namespace nasl.ui {
     // onOk: (event: any) => any;
 
     @Event({
-      title: '打开关闭后',
+      title: '打开/关闭后',
       description: '打开和关闭 Modal 时动画结束后的回调	',
     })
     afterOpenChange: (event: any) => any;
