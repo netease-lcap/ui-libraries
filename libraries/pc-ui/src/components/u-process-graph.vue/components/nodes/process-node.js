@@ -27,14 +27,15 @@ function getComponent(type, node) {
         case 'UserTask':
         case 'AutoTask':
         case 'ApprovalTask':
-        case 'InitiateTask':
+        case 'ServiceTask':
             return taskNodeWrapped;
         case 'ExclusiveGateway':
         case 'ParallelGateway':
         case 'InclusiveGateway':
             return gatewayNodeWrapped;
         default:
-            return null;
+            throw `type: ${type} 的节点没有定义渲染方法`
+            // return null;
     }
 }
 
