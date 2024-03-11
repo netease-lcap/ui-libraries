@@ -313,7 +313,7 @@ export default createComponent({
     ].filter(Boolean);
 
     return (
-      <div class={bem('wrap')}>
+      <div class={bem('wrap')} vusion-disabled-duplicate="true" vusion-disabled-copy="true">
         {btns}
 
         <van-link

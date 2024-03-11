@@ -1,5 +1,5 @@
 <template>
-    <div v-if="$env.VUE_APP_DESIGNER" :designer="$env.VUE_APP_DESIGNER">
+    <div v-if="$env.VUE_APP_DESIGNER" :designer="$env.VUE_APP_DESIGNER" vusion-disabled-duplicate="true" vusion-disabled-copy="true">
         <template v-if="type === 'timeline'">
             <u-timeline :data-source="list" :class="$style.timeline">
                 <template #item="current">
@@ -17,9 +17,9 @@
                             </div>
                             <div :class="$style.content">
                                 <div :class="$style.value">{{ current.item.userName || '-' }}</div>
-                                <div :class="$style.value">{{ current.item.recordCreateTime || '-' }}</div>
+                                <div :class="$style.value">{{ current.item.recordCreatedTime || '-' }}</div>
                                 <div :class="$style.value">
-                                    <span :class="$style.statuslabel" :status="current.item.nodeOperation">{{ current.item.nodeOperationText || '-' }}</span>
+                                    <span :class="$style.statuslabel" :status="current.item.nodeOperation">{{ current.item.nodeOperationDisplayText || '-' }}</span>
                                 </div>
                                 <div :class="$style.value">{{ current.item.comment || '-' }}</div>
                             </div>
@@ -37,11 +37,11 @@
                     <template #cell="current"> {{ current.item.userName || '-' }}</template>
                 </u-table-view-column>
                 <u-table-view-column :title="$tt('recordCreateTime')">
-                    <template #cell="current"> {{ current.item.recordCreateTime }}</template>
+                    <template #cell="current"> {{ current.item.recordCreatedTime }}</template>
                 </u-table-view-column>
                 <u-table-view-column :title="$tt('nodeOperation')">
                     <template #cell="current">
-                        <span :class="$style.statuslabel" :status="current.item.nodeOperation">{{ current.item.nodeOperationText || '-' }}</span>
+                        <span :class="$style.statuslabel" :status="current.item.nodeOperation">{{ current.item.nodeOperationDisplayText || '-' }}</span>
                     </template>
                 </u-table-view-column>
                 <u-table-view-column :title="$tt('comment')">
@@ -73,26 +73,26 @@ export default {
                 {
                     nodeTitle: '开始',
                     userName: '张三',
-                    recordCreateTime: '2023-12-21 10:20:20',
+                    recordCreatedTime: '2023-12-21 10:20:20',
                     nodeOperation: 'submit',
-                    nodeOperationText: '',
-                    nodeComment: '',
+                    nodeOperationDisplayText: '',
+                    nodeOperationComment: '',
                 },
                 {
                     nodeTitle: '领导审批',
                     userName: '李领导',
-                    recordCreateTime: '2023-12-21 10:20:20',
+                    recordCreatedTime: '2023-12-21 10:20:20',
                     nodeOperation: 'approve',
-                    nodeOperationText: '同意',
-                    nodeComment: '',
+                    nodeOperationDisplayText: '同意',
+                    nodeOperationComment: '',
                 },
                 {
                     nodeTitle: '总监审批',
                     userName: '王总监',
-                    recordCreateTime: '2023-12-21 10:20:20',
+                    recordCreatedTime: '2023-12-21 10:20:20',
                     nodeOperation: 'reject',
-                    nodeOperationText: '不同意',
-                    nodeComment: '请做好交接工作再提交审批',
+                    nodeOperationDisplayText: '不同意',
+                    nodeOperationComment: '请做好交接工作再提交审批',
                 },
             ],
         };

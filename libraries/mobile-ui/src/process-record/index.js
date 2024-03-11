@@ -216,7 +216,7 @@ export default createComponent({
 
   render() {
     return (
-      <div class={bem()}>
+      <div class={bem()} vusion-disabled-duplicate="true" vusion-disabled-copy="true">
         {this.type === 'list' ? this.renderList() : null}
         {this.type === 'timeline' ? this.renderTimeline() : null}
       </div>

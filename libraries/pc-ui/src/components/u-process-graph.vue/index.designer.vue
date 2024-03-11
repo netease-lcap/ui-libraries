@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.root">
+    <div :class="$style.root" vusion-disabled-duplicate="true" vusion-disabled-copy="true">
         <div :class="$style.designerImage" v-if="$env.VUE_APP_DESIGNER">
           <img :class="[$style.img, $style.lb]" :src="leftBottomImg" />
           <img :class="[$style.img, $style.rt]" :src="rightTopImg" />

@@ -1,15 +1,15 @@
 <template>
     <u-linear-layout mode="inline" :class="$style.root">
         <u-button v-for="item in permissionDetails" :key="item.name" :color="getColor(item)" @click="onClickButton(item)">
-            {{ item.showText }}
+            {{ item.displayText }}
         </u-button>
         <u-modal v-if="currentItem"
-            :title="currentItem.showText"
+            :title="currentItem.displayText"
             :visible="!!currentItem"
             ref="modal"
             @close="currentItem = undefined">
             <u-form label-layout="block" ref="form">
-                <u-form-item :label="$tt('approvalComments')" :required="currentItem.opinionsEnable" :rules="currentItem.opinionsEnable?'required':''" v-if="currentItem.name !== 'reassign'">
+                <u-form-item :label="$tt('approvalComments')" :required="currentItem.commentRequired" :rules="currentItem.commentRequired?'required':''" v-if="currentItem.name !== 'reassign'">
                     <u-textarea v-model="model.comment" size="normal full" :placeholder="$tt('placeholder')">
                     </u-textarea>
                 </u-form-item>
@@ -74,7 +74,7 @@ export default {
                         taskId: this.taskId,
                     },
                 });
-                this.permissionDetails = (res.data || []).filter((item) => item.operateEnable);
+                this.permissionDetails = (res.data || []).filter((item) => item.operatationEnabled);
             }
         },
         getColor(item) {

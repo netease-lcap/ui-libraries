@@ -28,8 +28,8 @@
                                 :placeholder="$tt('createTimeAfter')"
                                 :placeholder-right="$tt('createTimeBefore')"
                                 converter="json"
-                                :start-date.sync="filter.createTimeAfter"
-                                :end-date.sync="filter.createTimeBefore">
+                                :start-date.sync="filter.procInstStartTimeAfter"
+                                :end-date.sync="filter.procInstStartTimeBefore">
                             </u-date-picker>
                         </u-form-item>
                         <u-form-item :label="$tt('startBy')" v-if="tabValue !== 'intiationProcess'">
@@ -96,8 +96,8 @@ export default {
             tabValue: 'pendingTasks',
             filter: {
                 procDefKey: '',
-                createTimeAfter: '',
-                createTimeBefore: '',
+                procInstStartTimeAfter: '',
+                procInstStartTimeBefore: '',
                 procInstStartBy: '',
             },
         };
@@ -107,7 +107,7 @@ export default {
             const typeMap = {
                 pendingTasks: 'getMyPendingTasks',
                 processedTasks: 'getMyCompletedTasks',
-                intiationProcess: 'getMyInitiateTasks',
+                intiationProcess: 'getMyInitiatedTasks',
             };
             if (this.$processV2) {
                 const body = {
