@@ -41,17 +41,20 @@ export const 异步函数 = {
     dataSource: () => new Promise((res) => {
       setTimeout(() => {
         res([
-          { label: `Option 1${Math.random()}`, key: '1' },
+          { a: { label: `Option 1${Math.random()}`, key: '1' } },
           {
-            label: 'Option 2',
-            key: '2',
-            children: [{ label: 'Option 3', key: '3' }],
+            a: {
+              label: 'Option 2',
+              key: '2',
+              children: [{ label: 'Option 3', key: '3' }],
+            },
           },
         ]);
       }, 3000);
     }),
-    valueField: 'key',
-    textField: 'label',
+    valueField: 'a.key',
+    textField: 'a.label',
+    childrenField: 'a.children',
   },
 };
 export const 同步函数 = {

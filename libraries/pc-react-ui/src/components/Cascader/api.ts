@@ -11,12 +11,12 @@ namespace nasl.ui {
     @Prop({
       title: '数据',
     })
-      data: CascaderOptions<T, V>['dataSource'];
+    data: CascaderOptions<T, V>['dataSource'];
 
-    // @Prop({
-    //   title: '选中值',
-    // })
-    // value: CascaderOptions<T, V>['value'];
+    @Prop({
+      title: '选中值',
+    })
+    value: CascaderOptions<T, V>['value'];
 
     // })
     // filterText: nasl.core.String;
@@ -57,7 +57,7 @@ namespace nasl.ui {
       description: '展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑',
       docDescription: '数据列表，支持直接放置多层的数据源也支持通过单层的数据和`父节点字段名`或`子节点字段名`构建树形',
     })
-      dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
     @Prop({
       group: '数据属性',
@@ -65,7 +65,7 @@ namespace nasl.ui {
       description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
       docDescription: '集合类型每一元素的数据类型',
     })
-      dataSchema: T;
+    dataSchema: T;
 
     @Prop<CascaderOptions<T, V>, 'textfield'>({
       group: '数据属性',
@@ -76,7 +76,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-      textfield: (item: T) => any = ((item: any) => item.text) as any;
+    textfield: (item: T) => any = ((item: any) => item.text) as any;
 
     @Prop<CascaderOptions<T, V>, 'valueField'>({
       group: '数据属性',
@@ -87,7 +87,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-      valueField: (item: T) => V = ((item: any) => item.value) as any;
+    valueField: (item: T) => V = ((item: any) => item.value) as any;
 
     @Prop<CascaderOptions<T, V>, 'childrenField'>({
       group: '数据属性',
@@ -98,7 +98,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-      childrenField: (item: T) => nasl.collection.List<any> = ((item: any) => item.children) as any;
+    childrenField: (item: T) => nasl.collection.List<any> = ((item: any) => item.children) as any;
 
     @Prop({
       group: '数据属性',
@@ -109,7 +109,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-      parentField: (item: T) => any;
+    parentField: (item: T) => any;
 
     // @Prop<CascaderOptions<T, V>, 'parentField'>({
     //   group: '数据属性',
@@ -128,7 +128,7 @@ namespace nasl.ui {
       sync: true,
       docDescription: '选择器的值',
     })
-      value: V;
+    value: V;
 
     // @Prop({
     //   group: '数据属性',
@@ -150,7 +150,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-      showSearch: nasl.core.Boolean = false;
+    showSearch: nasl.core.Boolean = false;
 
     // @Prop<CascaderOptions<T, V>, 'filterHightlighterColor'>({
     //   group: '主要属性',
@@ -167,7 +167,7 @@ namespace nasl.ui {
       description: '为空时显示的占位符文本',
       docDescription: '搜索框为空时提示文本',
     })
-      placeholder: nasl.core.String = '请选择';
+    placeholder: nasl.core.String = '请选择';
 
     // @Prop({
     //   group: '主要属性',
@@ -190,7 +190,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-      autoFocus: nasl.core.Boolean = false;
+    autoFocus: nasl.core.Boolean = false;
 
     @Prop({
       group: '交互属性',
@@ -201,7 +201,7 @@ namespace nasl.ui {
         options: [{ title: '点击' }, { title: '悬浮' }],
       },
     })
-      expandTrigger: 'click' | 'hover' = 'click';
+    expandTrigger: 'click' | 'hover' = 'click';
 
     @Prop({
       group: '交互属性',
@@ -212,7 +212,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-      allowClear: nasl.core.Boolean = false;
+    allowClear: nasl.core.Boolean = false;
 
     @Prop({
       group: '状态属性',
@@ -223,7 +223,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-      disabled: nasl.core.Boolean = false;
+    disabled: nasl.core.Boolean = false;
 
     @Prop({
       group: '状态属性',
@@ -234,7 +234,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-      open: nasl.core.Boolean;
+    open: nasl.core.Boolean;
 
     // @Prop({
     //   group: '样式属性',
@@ -275,19 +275,19 @@ namespace nasl.ui {
       title: '搜索时',
       description: '监听搜索，返回输入的值	',
     })
-      onSearch: (event: V) => any;
+    onSearch: (event: V) => any;
 
     @Event({
       title: '选择完成后',
       description: '选择完成后的回调',
     })
-      onChange: (event: { value: V; values: nasl.collection.List<V>; items: nasl.collection.List<T> }) => any;
+    onChange: (event: { value: V; values: nasl.collection.List<V>; items: nasl.collection.List<T> }) => any;
 
     @Event({
       title: '获得焦点',
       description: '获得焦点时触发。',
     })
-      onFocus: (event: {
+    onFocus: (event: {
       cancelBubble: nasl.core.Boolean;
       detail: nasl.core.String;
       layerX: nasl.core.Integer;
@@ -301,7 +301,7 @@ namespace nasl.ui {
       title: '失去焦点',
       description: '失去焦点时触发。',
     })
-      onBlur: (event: {
+    onBlur: (event: {
       cancelBubble: nasl.core.Boolean;
       detail: nasl.core.String;
       layerX: nasl.core.Integer;

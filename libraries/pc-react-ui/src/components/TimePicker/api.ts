@@ -188,7 +188,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    preview: nasl.core.Boolean = false;
+    use12Hours: nasl.core.Boolean = false;
 
     // @Prop<TimePickerOptions, 'rightNowTitle'>({
     //   group: '主要属性',
@@ -256,7 +256,7 @@ namespace nasl.ui {
     //   setter: {
     //     concept: 'EnumSelectSetter',
     //     options: [{ title: '引用元素下' }, { title: '全局body' }],
-    
+
     //   },
     // })
     // appendTo: 'reference' | 'body' = 'body';

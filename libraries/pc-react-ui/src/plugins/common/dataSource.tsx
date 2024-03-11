@@ -80,13 +80,17 @@ export function useHandleMapField(filedInfo) {
     }));
   }, [label, value, textField, valueField, dataSource]);
 }
-export function useHandleDataSourceToRequest(dataSource) {
+export function useRequestDataSource(dataSource) {
   const wrapDataSource = _.cond([
     [_.isArray, _.constant(async () => dataSource)],
     [_.isFunction, _.constant(async (...arg) => dataSource(...arg))],
     [_.stubTrue, _.constant(async () => [])],
   ]);
-  return useMemo(() => wrapDataSource(dataSource), [dataSource]);
+  const dataSourceRequest = useMemo(() => wrapDataSource(dataSource), [dataSource]);
+  const requestResult = useRequest(dataSourceRequest);
+  const { run } = requestResult;
+  React.useEffect(() => run(), [dataSource]);
+  return requestResult;
 }
 
 export function useFormatDataSource(dataSource) {

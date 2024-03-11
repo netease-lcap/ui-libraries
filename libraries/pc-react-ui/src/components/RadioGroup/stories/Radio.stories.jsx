@@ -54,43 +54,43 @@ export const 默认 = {
 export const 数据源 = {
   render: (args) => <RadioGroup {...args} />,
   args: {
-    // dataSource: async () => ({
-    //   list: [
-    //     {
-    //       checkbox: {
-    //         id: 1,
-    //         createdTime: null,
-    //         updatedTime: null,
-    //         createdBy: null,
-    //         updatedBy: null,
-    //         name: '苹果',
-    //       },
-    //     },
-    //     {
-    //       checkbox: {
-    //         id: 2,
-    //         createdTime: null,
-    //         updatedTime: null,
-    //         createdBy: null,
-    //         updatedBy: null,
-    //         name: '香蕉',
-    //       },
-    //     },
-    //     {
-    //       checkbox: {
-    //         id: 3,
-    //         createdTime: null,
-    //         updatedTime: null,
-    //         createdBy: null,
-    //         updatedBy: null,
-    //         name: '橘子',
-    //       },
-    //     },
-    //   ],
-    //   total: 3,
-    // }),
-    dataSource: ['苹果', '香蕉', '橘子'],
-    // textField: 'name',
-    // valueField: 'id',
+    dataSource: async () => ({
+      list: [
+        {
+          checkbox: {
+            id: 1,
+            createdTime: null,
+            updatedTime: null,
+            createdBy: null,
+            updatedBy: null,
+            name: '苹果',
+          },
+        },
+        {
+          checkbox: {
+            id: 2,
+            createdTime: null,
+            updatedTime: null,
+            createdBy: null,
+            updatedBy: null,
+            name: '香蕉',
+          },
+        },
+        {
+          checkbox: {
+            id: 3,
+            createdTime: null,
+            updatedTime: null,
+            createdBy: null,
+            updatedBy: null,
+            name: '橘子',
+          },
+        },
+      ],
+      total: 3,
+    }),
+    // dataSource: ['苹果', '香蕉', '橘子'],
+    textField: 'checkbox.id',
+    valueField: 'checkbox.id',
   },
 };

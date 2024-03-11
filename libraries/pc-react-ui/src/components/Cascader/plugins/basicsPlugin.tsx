@@ -1,11 +1,11 @@
 import classnames from 'classnames';
-import { useRequest } from 'ahooks';
 import _ from 'lodash';
 import React from 'react';
+import { useControllableValue } from 'ahooks';
 import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
 import {
-  useHandleDataSourceToRequest, useHandleMapField, useFormatDataSource, useDataSourceToTree,
+  useRequestDataSource, useHandleMapField, useFormatDataSource, useDataSourceToTree,
 } from '@/plugins/common/dataSource';
 
 export function useHandleStyle(props) {
@@ -14,6 +14,20 @@ export function useHandleStyle(props) {
     className: classnames(style.cascader, className),
   };
 }
+export function useHandleValue(props) {
+  const valueProps = props.get('value');
+  const onChangeProps = props.get('onChange');
+  const refProps = props.get('ref');
+  const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueProps, onChange: onChangeProps }));
+  const ref = _.assign(refProps, { value });
+  return {
+    value,
+    onChange,
+    ref,
+  };
+}
+useHandleValue.order = 1;
+
 export function useHandleDataSource(props) {
   const dataSourceProps = props.get('dataSource');
   const textField = props.get('textField', 'label');
@@ -22,9 +36,7 @@ export function useHandleDataSource(props) {
   const childrenField = props.get('childrenField');
   const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField', 'dataSource', 'parentField', 'childrenField']);
   const ref = props.get('ref');
-  const dataSourceRequest = useHandleDataSourceToRequest(dataSourceProps);
-  const { data, run: reload, loading } = useRequest(dataSourceRequest);
-  React.useEffect(() => { reload(); }, [dataSourceProps]);
+  const { data, run: reload, loading } = useRequestDataSource(dataSourceProps);
   const dataSourceFormat = useFormatDataSource(data);
   const dataSource = useHandleMapField({ textField, valueField, dataSource: dataSourceFormat });
   const TreeData = useDataSourceToTree(dataSource, parentField, valueField);

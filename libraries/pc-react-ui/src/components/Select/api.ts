@@ -235,7 +235,7 @@ namespace nasl.ui {
     onSelect: (event: { value: V; items: nasl.collection.List<T> }) => void;
 
     @Event({
-      title: '选中 option',
+      title: '选中 option或输入变化时',
       description: '选中 option，或 input 的 value 变化时，调用此函数	',
     })
     onChange: (event: { value: V; items: nasl.collection.List<T> }) => void;

@@ -1,31 +1,11 @@
-// import _ from 'lodash';
-// import React from 'react';
-// import { useRequest } from 'ahooks';
+import _ from 'lodash';
+import React from 'react';
 import classnames from 'classnames';
-import { $deletePropsList, $dataSourceField } from '@/plugins/constants';
+import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
-
-export { useHandleTextAndValueField, useHandleTransformOption } from '@/plugins/common/dataSource';
-
-export function useHandleTransform(props) {
-  const deletePropsList = props.get($deletePropsList, []).concat(['dataSource', 'childrenField']);
-  const textField = props.get('textField', 'label');
-  const valueField = props.get('valueField', 'value');
-  const childrenField = props.get('childrenField', 'children');
-  const fieldNames = props.get('fieldNames');
-  return {
-    [$deletePropsList]: deletePropsList,
-    [$dataSourceField]: 'options',
-    // fieldNames: {
-    // label: textField,
-    // value: valueField,
-    // children: childrenField,
-    // ...fieldNames,
-    // },
-  };
-}
-
-useHandleTransform.order = 3;
+import {
+  useRequestDataSource, useHandleMapField, useFormatDataSource,
+} from '@/plugins/common/dataSource';
 
 export function useHandleStyle(props) {
   const className = props.get('className');
@@ -33,39 +13,21 @@ export function useHandleStyle(props) {
     className: classnames(style.select, className),
   };
 }
-
-// function useHandleTransformOption1(props) {
-//   const options = props.get('options');
-//   const transformOption = _.cond([
-//     [_.isArray, _.constant(() => Promise.resolve(options))],
-//     [_.isFunction, _.constant(() => Promise.resolve(options()))],
-//     [_.stubTrue, _.constant(() => Promise.resolve([]))],
-//   ]);
-//   const conformsArray = _.cond([
-//     [Array.isArray, _.identity],
-//     [_.stubTrue, _.stubArray],
-//   ]);
-//   const { data, loading } = useRequest(transformOption(options));
-//   return _.isNil(options) ? {} : { options: conformsArray(data), loading };
-// }
-
-// function useHandleTextAndValueField1(props) {
-//   const textField = props.get('textField', 'label');
-//   const valueField = props.get('valueField', 'value');
-//   const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField']);
-//   const options = props.get('options');
-
-//   const convertOption = React.useMemo(() => {
-//     const logicFn = _.map(options, (item) => ({ label: item[textField], value: item[valueField] }));
-//     const decisionCallback = _.cond([
-//       [_.matches({ textField: _.isString }), _.constant(logicFn)],
-//       [_.matches({ valueField: _.isString }), _.constant(logicFn)],
-//       [_.stubTrue, _.constant(options)],
-//     ]);
-//     return decisionCallback({ textField, valueField });
-//   }, [options, textField, valueField]);
-
-//   return _.isNil(options)
-//     ? { [$deletePropsList]: deletePropsList }
-//     : { options: convertOption, [$deletePropsList]: deletePropsList };
-// }
+export function useHandleDataSource(props) {
+  const dataSourceProps = props.get('dataSource');
+  const textField = props.get('textField', 'label');
+  const valueField = props.get('valueField', 'value');
+  const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField', 'dataSource', 'parentField', 'childrenField']);
+  const ref = props.get('ref');
+  const { data, run: reload, loading } = useRequestDataSource(dataSourceProps);
+  const dataSourceFormat = useFormatDataSource(data);
+  const dataSource = useHandleMapField({ textField, valueField, dataSource: dataSourceFormat });
+  const selfRef = React.useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
+  const dataSourceResult = _.isEmpty(dataSource) ? {} : { options: dataSource };
+  return {
+    [$deletePropsList]: deletePropsList,
+    ref: selfRef,
+    loading,
+    ...dataSourceResult,
+  };
+}

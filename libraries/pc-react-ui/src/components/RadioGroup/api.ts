@@ -187,9 +187,31 @@ namespace nasl.ui {
       title: '值',
       description: '此项的值',
       docDescription: '此项的值',
-      sync:true,
+      sync: true,
     })
     value: nasl.core.Any;
+
+    @Prop<RadioGroupOptions<T, V, C>, 'textField'>({
+      group: '数据属性',
+      title: '文本字段',
+      description: '集合的元素类型中，用于显示文本的属性名称',
+      docDescription: '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    textField: (item: T) => nasl.core.String;
+
+    @Prop<RadioGroupOptions<T, V, C>, 'valueField'>({
+      group: '数据属性',
+      title: '值字段',
+      description: '集合的元素类型中，用于标识选中值的属性',
+      docDescription: '集合的元素类型中，用于标识选中值的属性，支持自定义变更',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    valueField: (item: T) => V;
 
     // @Prop({
     //   group: '主要属性',

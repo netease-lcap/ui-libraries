@@ -78,20 +78,17 @@ export const 异步函数 = {
 };
 export const 异步函数1 = {
   render: (args) => {
+    function EmptySlot() {
+      return <span>1234</span>;
+    }
     return (
-      <Select {...args}>
-        <SelectOptGroup
-          label={(() => (
-            <Text children="1234" />
-          ))()}
-        >
-          <SelectOption key="1" label="1" value="1" />
-          <SelectOption key="2" label="2" value="2" disabled />
-        </SelectOptGroup>
-        <SelectOptGroup label={<Text children="1234" />}>
-          <SelectOption key="1" label="1" value="1" />
-          <SelectOption key="2" label="2" value="2" disabled />
-        </SelectOptGroup>
+      <Select data-nodepath="rootview.0.0.0.0.1" ide-iscontainer="true" allowClear placeholder="请输入property1" key="component-61" defaultOpen={false}>
+        <SelectOption data-nodepath="rootview.0.0.0.0.1.0" ide-iscontainer="true" value label="是" key="component-62">
+          <EmptySlot key="16" />
+        </SelectOption>
+        <SelectOption data-nodepath="rootview.0.0.0.0.1.1" ide-iscontainer="true" value={false} label="否" key="component-63">
+          <EmptySlot key="17" />
+        </SelectOption>
       </Select>
     );
   },

@@ -1,21 +1,14 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react-refresh/only-export-components */
 // import React from 'react';
-import { useControllableValue, useRequest } from 'ahooks';
-import React, { useMemo } from 'react';
+import { useControllableValue } from 'ahooks';
+import React from 'react';
 import _ from 'lodash';
-import fp from 'lodash/fp';
+import { $deletePropsList } from '@/plugins/constants';
 import {
-  $deletePropsList, $dataSourceField,
-} from '@/plugins/constants';
+  useRequestDataSource, useHandleMapField, useFormatDataSource,
+} from '@/plugins/common/dataSource';
 
-export function useHandleTransform(props) {
-  const deletePropsList = props.get($deletePropsList, []).concat(['dataSource', 'loading', 'textField', 'valueField', 'childrenField']);
-  return {
-    [$deletePropsList]: deletePropsList,
-    [$dataSourceField]: 'options',
-  };
-}
 export function useHandleValue(props) {
   const onChangeProps = props.get('onChange');
   return {
@@ -38,43 +31,26 @@ export function useHandleRef(props) {
   };
 }
 useHandleRef.order = 1;
-function formatData(data) {
-  const conformsArray = _.cond([
-    [Array.isArray, _.identity],
-    [_.conforms({ list: _.isArray }), fp.get('list')],
-    [_.stubTrue, _.stubArray],
-  ]);
-  function handleModelObjrrToArray(item) {
-    return Object.entries(item).reduce((pre, [key, value]) => _.assign(pre, _.isObject(value) ? value : { [key]: value }), {});
-  }
 
-  return _.map(conformsArray(data), (item: any) => (_.isObject(item) ? handleModelObjrrToArray(item) : { label: item, value: item }));
-}
-function wrapDataToRequest(dataSource) {
-  const wrapDataSource = _.cond([
-    [_.isFunction, _.constant(async (...arg) => dataSource(...arg))],
-    [_.stubTrue, _.constant(async () => dataSource)],
-  ]);
-  return wrapDataSource(dataSource);
-}
-export function useHandleTransformOption(props) {
-  const dataSourceField = props.get($dataSourceField, 'options');
-  const deletePropsList = props.get($deletePropsList, []).concat([$dataSourceField]);
-  const dataSource = props.get('dataSource');
+export function useHandleDataSource(props) {
+  const dataSourceProps = props.get('dataSource');
+  const textField = props.get('textField', 'label');
+  const valueField = props.get('valueField', 'value');
+  const childrenField = props.get('childrenField');
+  const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField', 'dataSource', 'parentField', 'childrenField']);
   const ref = props.get('ref');
-  const requestDataSource = useMemo(() => wrapDataToRequest(dataSource), [dataSource]);
-  const { data, run: reload, loading } = useRequest(requestDataSource);
-  React.useEffect(() => { reload(); }, [dataSource]);
-  const resultData = useMemo(() => formatData(data), [data]);
-  const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
-  return _.isNil(dataSource) ? {
+  const { data, run: reload, loading } = useRequestDataSource(dataSourceProps);
+  const dataSourceFormat = useFormatDataSource(data);
+  const dataSource = useHandleMapField({ textField, valueField, dataSource: dataSourceFormat });
+  const selfRef = React.useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
+  const dataSourceResult = _.isEmpty(dataSource) ? {} : { options: dataSource };
+  return {
     [$deletePropsList]: deletePropsList,
-  } : {
-    [$deletePropsList]: deletePropsList,
-    [dataSourceField]: resultData,
     ref: selfRef,
     loading,
+    ...dataSourceResult,
+    fieldNames: {
+      children: childrenField,
+    },
   };
 }
-
-export { useHandleTextAndValueField } from '@/plugins/common/dataSource';
