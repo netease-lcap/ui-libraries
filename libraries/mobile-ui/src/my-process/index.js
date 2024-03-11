@@ -78,7 +78,7 @@ export default createComponent({
       const typeMap = {
         myPendingTaskList: 'getMyPendingTasks',
         myCompletedTaskList: 'getMyCompletedTasks',
-        myLaunchList: 'getMyInitiateTasks',
+        myLaunchList: 'getMyInitiatedTasks',
       };
 
       const filter = this[`${type}Filter`];
