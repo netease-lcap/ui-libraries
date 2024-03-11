@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @Component({
-    title: '按 钮',
+    title: '按钮',
     icon: 'button',
     description: '按钮用于触发一个操作，如提交表单。',
     group: "Display"
@@ -35,7 +35,7 @@ namespace nasl.ui {
     text: nasl.core.String;
     @Prop({
       group: '主要属性',
-      title: '样式 类型',
+      title: '样式类型',
       description: '设置按钮主题颜色与样式类型',
       setter: {
         concept: "EnumSelectSetter",
@@ -59,7 +59,7 @@ namespace nasl.ui {
     type: 'info' | 'info_secondary' | 'default' | 'warning' | 'warning_secondary' | 'danger' | 'danger_secondary' = 'info';
     @Prop({
       group: '主要属性',
-      title: '展示 方式',
+      title: '展示方式',
       description: '选择行内或块级展示',
       setter: {
         concept: "EnumSelectSetter",

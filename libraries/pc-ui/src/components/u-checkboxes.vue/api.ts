@@ -30,7 +30,7 @@ namespace nasl.ui {
         @Prop({
             group: '数据属性',
             title: '数据源',
-            description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑 。',
+            description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
             docDescription: '支持动态绑定集合类型变量（List\<T>）或输出参数为集合类型的逻辑',
             designerValue: [{}, {}, {}],
         })
