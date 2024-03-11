@@ -208,3 +208,10 @@ export function useHandleStyle(props) {
     className: classnames(style.table, className),
   };
 }
+
+export function useHandleRowKey(props) {
+  const rowKey = props.get('rowKey', 'key');
+  return {
+    rowKey: (record) => _.get(record, rowKey, 'key'),
+  };
+}

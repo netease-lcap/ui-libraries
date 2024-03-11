@@ -1101,10 +1101,10 @@ namespace nasl.ui {
       description: '固定列,需要表格设置横向内容宽度后生效',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '左侧' }, { title: '右侧' }],
+        options: [{ title: '左侧' }, { title: '右侧' }, { title: '不固定' }],
       },
     })
-    fixed: 'left' | 'right';
+    fixed: 'left' | 'right' | false;
 
     // @Prop({
     //   group: '主要属性',
