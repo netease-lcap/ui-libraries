@@ -66,6 +66,10 @@ export default createComponent({
     target: { type: String, default: '_self' },
     destination: String,
     link: [String, Function],
+    placement: {
+      type: String,
+      default: 'top-start',
+    },
   },
 
   data() {
@@ -286,7 +290,7 @@ export default createComponent({
         <Popover
           vModel={this.showPopover}
           trigger="click"
-          placement="top-start"
+          placement={this.placement}
           scopedSlots={{
             reference: () => <div class={bem('more')}>{t('more')}</div>,
           }}
@@ -316,13 +320,7 @@ export default createComponent({
       <div class={bem('wrap')} vusion-disabled-duplicate="true" vusion-disabled-copy="true">
         {btns}
 
-        <van-link
-          ref="link"
-          class={bem('link')}
-          destination={this.destination}
-          target={this.target}
-          link={this.link}
-        />
+        <van-link ref="link" class={bem('link')} destination={this.destination} target={this.target} link={this.link} />
 
         <Dialog
           vModel={this.showDialog}
@@ -380,15 +378,7 @@ export default createComponent({
                     },
                   ]}
                   scopedSlots={{
-                    input: () => (
-                      <TextArea
-                        value={this.dialog.opinions}
-                        onInput={this.onOpinionsInput}
-                        class={bem('dialog-input')}
-                        placeholder="请输入审批意见"
-                        inputAlign="left"
-                      />
-                    ),
+                    input: () => <TextArea value={this.dialog.opinions} onInput={this.onOpinionsInput} class={bem('dialog-input')} placeholder="请输入审批意见" inputAlign="left" />,
                   }}
                 />
               )}
