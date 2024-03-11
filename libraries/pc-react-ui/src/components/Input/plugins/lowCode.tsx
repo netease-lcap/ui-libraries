@@ -2,16 +2,17 @@ import React from 'react';
 import _ from 'lodash';
 
 export function useHandleNodePath(props) {
-  const Compoent = props.get('render');
+  const nodeId = React.useMemo(() => _.uniqueId('input_'), []);
   const nodePath = props.get('data-nodepath');
-  const render = React.useCallback((selfProps) => {
-    return (
-      <span data-nodepath={nodePath}>
-        <Compoent {..._.omit(selfProps, ['data-nodepath'])}>{selfProps.children}</Compoent>
-      </span>
-    );
-  }, [Compoent]);
+  React.useEffect(() => {
+    const inputElement = document.querySelector(`[data-node-id=${nodeId}]`);
+    const inputParent = inputElement?.closest('.ant-input-affix-wrapper');
+    console.log(inputParent, 'input_');
+    if (inputParent) {
+      inputParent?.setAttribute('data-nodepath', nodePath);
+    }
+  }, []);
   return {
-    render,
+    'data-node-id': nodeId,
   };
 }

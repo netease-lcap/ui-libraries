@@ -31,6 +31,8 @@ export const 异步函数 = {
     return <Switch {...args} ref={ref} />;
   },
   args: {
-    defaultChecked: true,
+    // defaultChecked: true,
+    checkedChildren: 1,
+    unCheckedChildren: 2,
   },
 };

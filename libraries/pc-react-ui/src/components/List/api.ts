@@ -16,7 +16,7 @@ namespace nasl.ui {
     @Prop({
       title: '分页大小',
     })
-    size: ListOptions<T, V, P, M, C>['pageSize'];
+    pageSize: ListOptions<T, V, P, M, C>['pageSize'];
 
     @Prop({
       title: '当前页数',

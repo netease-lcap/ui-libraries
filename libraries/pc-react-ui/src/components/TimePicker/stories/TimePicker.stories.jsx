@@ -24,7 +24,19 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <TimePicker {...args} data-nodepath="1234" />,
+  render: (args) => {
+    const [value, setValue] = React.useState();
+    return (
+      <TimePicker
+        {...args}
+        value={value}
+        onChange={(e) => {
+          console.log(e);
+          setValue(e);
+        }}
+      />
+    );
+  },
   args: {
     color: 'magenta',
     children: 'Tag',

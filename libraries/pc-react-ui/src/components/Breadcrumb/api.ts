@@ -133,7 +133,7 @@ namespace nasl.ui {
       docDescription: '设置链接路径。',
     })
     href: nasl.core.String;
-
+    
     // @Prop({
     //   group: '交互属性',
     //   title: '链接打开方式',
