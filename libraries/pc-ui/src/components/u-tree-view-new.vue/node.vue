@@ -50,7 +50,7 @@
             </span>
         </div>
     </div>
-    <div :class="$style.sub" v-if="rootVM.ifExpanded && !childrenRendered && node && !node.childrenRendered ? currentExpanded : true" v-show="currentExpanded">
+    <div :class="$style.sub" v-if="childrenNodeRenderedStatus">
         <template v-if="node && $at(node, currentChildrenField) && !rootVM.excludeFields.includes(currentChildrenField)">
             <u-tree-view-node-new
                 v-for="(subNode, subNodeIndex) in $at(node, currentChildrenField)"
@@ -233,6 +233,10 @@ export default {
         paddingLeft() {
             return this.rootVM && this.rootVM.paddingLeft || 0;
         },
+        childrenNodeRenderedStatus() {
+            const childrenExist = this.rootVM.ifExpanded && !this.childrenRendered && this.node && !this.node.childrenRendered ? this.currentExpanded : true
+            return childrenExist && this.currentExpanded
+        }
     },
 
     watch: {
