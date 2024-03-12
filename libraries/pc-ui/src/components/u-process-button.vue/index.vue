@@ -13,8 +13,9 @@
                     <u-textarea v-model="model.comment" size="normal full" :placeholder="$tt('placeholder')">
                     </u-textarea>
                 </u-form-item>
-                <u-form-item :label="$tt('selectTransfer')" required rules="required" v-if="currentItem.name === 'reassign'">
+                <u-form-item :label="$tt('selectTransfer')" required :rules="`required #${$tt('selectTransferEmpty')}`" v-if="currentItem.name === 'reassign'">
                     <u-select
+                        size="full"
                         text-field="userName"
                         value-field="userName"
                         :data-source="getUsersForReassign"
@@ -128,10 +129,10 @@ export default {
         },
         async onClickButton(item) {
             if (item.name === 'revert') {
-                return this.revertOperator();
+                return this.revertOperator(item);
             }
             if (item.name === 'withdraw') {
-                return this.withdrawOperator();
+                return this.withdrawOperator(item);
             }
             // 表单验证后打开弹窗
             if (window.__processDetailFromMixinFormVm__ && window.__processDetailFromMixinFormVm__.validate) {
@@ -153,10 +154,10 @@ export default {
         /**
          * 回退
          */
-        revertOperator() {
+        revertOperator(item) {
             return this.$confirm({
                 title: this.$tt('revertTitle'),
-                content: this.$tt('revertContent'),
+                content: this.$tt('revertContent',  { revertDisplayText: item.displayText }),
                 okButton: this.$tt('revertOK'),
                 cancelButton: this.$tt('revertCancel'),
             }).then(async () => {
@@ -176,10 +177,10 @@ export default {
         /**
          * 撤回
          */
-        withdrawOperator() {
+        withdrawOperator(item) {
             return this.$confirm({
                 title: this.$tt('withdrawTitle'),
-                content: this.$tt('withdrawContent'),
+                content: this.$tt('withdrawContent', { withdrawDisplayText: item.displayText }),
                 okButton: this.$tt('withdrawOK'),
                 cancelButton: this.$tt('withdrawCancel'),
             }).then(async () => {
