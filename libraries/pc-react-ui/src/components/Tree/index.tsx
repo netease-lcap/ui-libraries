@@ -20,5 +20,5 @@ export const Tree = registerComponet<
   { plugin, displayName: 'Tree', mapProps },
 );
 
-// export default Tree;
+// export const Tree = AntdTree;
 export const { TreeNode } = AntdTree;

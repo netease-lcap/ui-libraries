@@ -313,12 +313,12 @@ namespace nasl.ui {
     })
     private node: object;
 
-    @Prop({
-      group: '数据属性',
-      title: '值',
-      description: '节点的值',
-    })
-    key: V;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '值',
+    //   description: '节点的值',
+    // })
+    // key: V;
 
     // @Prop({
     //   group: '交互属性',
@@ -380,7 +380,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '子节点',
-          code: '<TreeNode title="节点" key="1"></TreeNode>',
+          code: '<TreeNode title="节点" ></TreeNode>',
         },
       ],
     })
