@@ -1,0 +1,43 @@
+{
+  "name": "@lcap/builder",
+  "version": "1.0.0-beta.0",
+  "description": "lcap builder utils",
+  "files": [
+    "bin",
+    "lib",
+    "input"
+  ],
+  "bin": {},
+  "scripts": {
+    "watch": "tsc -w --sourceMap",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netease-lcap/ui-libraries.git"
+  },
+  "keywords": [
+    "LCAP",
+    "UI",
+    "Builder"
+  ],
+  "author": "NetEase CodeWave Fe Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/netease-lcap/ui-libraries/issues"
+  },
+  "homepage": "https://github.com/netease-lcap/ui-libraries#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10"
+  },
+  "peerDependencies": {
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "consola": "^2.15.3"
+  }
+}
