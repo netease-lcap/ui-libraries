@@ -87,7 +87,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    childrenField: (item: T) => nasl.collection.List<any> = ((item: any) => item.children) as any;
+    childrenField: (item: T) => any;
 
     @Prop({
       group: '数据属性',

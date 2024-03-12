@@ -3,18 +3,11 @@ import fp from 'lodash/fp';
 import _ from 'lodash';
 import { useAntdTable, useControllableValue } from 'ahooks';
 import classnames from 'classnames';
-import zhCh from 'antd/locale/zh_CN';
 import { TableColumn } from '@/index';
 import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
 // import moduleName from 'antd/lib/t';
 
-export function useHandleLocale(props) {
-  // console.log(object);
-  return {
-    locale: zhCh,
-  };
-}
 export function useHandleTitle(props) {
   const title = props.get('title');
   return _.isNil(title) ? {} : { title: () => title };
