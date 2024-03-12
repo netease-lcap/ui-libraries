@@ -478,14 +478,16 @@
         "name": "Text",
         "ideusage": {
             "idetype": "element",
-            "editable": "children"
+            "editable": "children",
+            "textholder": "children"
         }
     },
     {
         "name": "Link",
         "ideusage": {
             "idetype": "element",
-            "editable": "children"
+            "editable": "children",
+            "textholder": "children"
         }
     },
     {
