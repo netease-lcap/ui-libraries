@@ -2135,6 +2135,10 @@ export default {
                     this.$setAt(item, this.hasChildrenField, true);
                     item.expanded = item.expanded || false;
                     item.treeExpanded = item.treeExpanded || false;
+                } else {
+                    this.$setAt(item, this.hasChildrenField, false);
+                    item.expanded = false;
+                    item.treeExpanded = false;
                 }
                 if (parent) {
                     this.$set(item, 'display', needHidden(ancestors) ? 'none' : '');
