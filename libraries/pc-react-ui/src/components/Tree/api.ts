@@ -384,7 +384,7 @@ namespace nasl.ui {
         },
       ],
     })
-    slotDefault: () => Array<TreeNode<T, V>>;
+    slotDefault: (current: Current<T>) => Array<TreeNode<T, V>>;
 
     @Slot({
       title: '默认',
