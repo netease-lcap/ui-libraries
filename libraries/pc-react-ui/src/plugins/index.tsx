@@ -92,6 +92,7 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     (expandProps, handleFun) => expandProps.merge(_.attempt(handleFun, expandProps)),
     ImmutableProps,
   );
+  // return <BaseComponent {...props} />;
   const Component = expandProps.get('render');
   // const Component = mutableProps.getState('render');
   const jsProps = expandProps.toJS();
@@ -109,6 +110,8 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     };
   }, [componentRef, baseRef]);
   mutableProps.setState({ ref });
+
+  // console.log(props.children, 'children');
   // console.log(excludeProps, 'excludeProps');
   return (
     <ConfigProvider locale={zhCN}>
