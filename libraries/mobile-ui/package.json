@@ -19,6 +19,7 @@
     "dev": "npm run storybook",
     "storybook": "storybook dev -p 8008",
     "build": "vite build && tsc -p tsconfig.api.json && lcap-ui build && npm pack",
+    "deploy:dev": "lcap-ui deploy --platform http://defaulttenant.lcap.codewave-dev.163yun.com/",
     "deploy:test": "lcap-ui deploy --platform http://defaulttenant.lcap.codewave-test.163yun.com/",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "test": "vitest run",

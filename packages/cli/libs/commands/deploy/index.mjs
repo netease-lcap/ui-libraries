@@ -30,23 +30,23 @@ function deployTgz(rootPath, platform) {
 
 function deployImages(components, rootPath, componentsPath, platform) {
   components.forEach((component) => {
-    const dir = path.join(rootPath, componentsPath, component.name);
+    let compPath = componentsPath;
+    const dir = path.join(rootPath, compPath, component.name);
     const srcDir = path.join(rootPath, 'src', component.name);
     let { name } = component;
+
     if (!fs.existsSync(dir)) {
       // 兼容 mobile-ui
       if (fs.existsSync(srcDir)) {
-        componentsPath = 'src';
+        compPath = 'src';
       } else {
         name = `${name}.vue`;
       }
     }
 
-    const command = `npx lcap deploy ${componentsPath}/${name}/screenshots --platform ${platform}`;
-    const commandDrawings = `npx lcap deploy ${componentsPath}/${name}/drawings --platform ${platform}`;
+    const command = `npx lcap deploy ${compPath}/${name}/screenshots --platform ${platform}`;
+    const commandDrawings = `npx lcap deploy ${compPath}/${name}/drawings --platform ${platform}`;
 
-    // logger.info('exect command: ', command);
-    // logger.info('exect command: ', commandDrawings);
     api.cli.execSync(command);
     api.cli.execSync(commandDrawings);
     api.cli.done(name);

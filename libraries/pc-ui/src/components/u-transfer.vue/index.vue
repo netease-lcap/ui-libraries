@@ -25,7 +25,7 @@
             empty-text="请从右侧添加"
             :readonly="readonly"
             :disabled="disabled"
-        >   
+        >
             <template #item="props">
                 <slot name="item" v-bind="props"></slot>
             </template>
@@ -185,6 +185,10 @@ export default {
     margin-bottom: var(--transfer-button-space);
 }
 
+/* 修复穿梭框ide 样式问题 */
+.button span:empty::after {
+  content: none !important;
+}
 .root[size^="normal"] .listView {
     height: var(--transfer-height);
 }

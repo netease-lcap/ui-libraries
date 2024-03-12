@@ -124,7 +124,7 @@ export default createComponent({
       }
       this.updateValue(event.target.value);
 
-      this.$emit('input', event);
+      this.$emit('input', event.target.value);
     },
 
     onFocus(event) {

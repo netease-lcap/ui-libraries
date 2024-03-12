@@ -16,13 +16,16 @@ export const SlotsMixin = {
     },
     inDesigner() {
       // 开发态
-      if (process.env.NODE_ENV !== 'production') {
+      if (process.env.NODE_ENV === 'development') {
         const searchParams = new URLSearchParams(window.location.search);
         // eslint-disable-next-line eqeqeq
         return searchParams.get('VUE_APP_DESIGNER') == 1;
       }
 
       return this.$env && this.$env.VUE_APP_DESIGNER;
-    }
+    },
+    isDev() {
+      return process.env.NODE_ENV === 'development';
+    },
   },
 };
