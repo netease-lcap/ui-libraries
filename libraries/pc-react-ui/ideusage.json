@@ -50,7 +50,8 @@
     {
         "name": "Input",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "textholder": "value"
         }
     },
     {
