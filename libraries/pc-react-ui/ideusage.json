@@ -66,7 +66,7 @@
             "structured": true,
             "childAccept": "target.tag === 'Checkbox'",
             "dataSource": {
-                "dismiss": "!this.getAttribute('dataSource') && this.filterElement(el => el.tag !== 'template') > 0",
+                "dismiss": "!this.getAttribute('dataSource') && (this.filterElement(el => el.tag !== 'template').length > 0)",
                 "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
                 "loopElem": "> label.ant-checkbox-wrapper",
                 "emptySlot": {
@@ -252,8 +252,8 @@
             }],
             "actions": {
                 "click": {
-                "status": "this.getParent().setCacheStatus('defaultActiveKey', this.getAttribute('key')?.value)",
-                "effect": "this.getParent().callComponentMethod('setValue', this.getAttribute('key')?.value)"
+                    "status": "this.getParent().setCacheStatus('defaultActiveKey', '\"' + this.getAttribute('key')?.value + '\"') ",
+                    "effect": "this.getParent().callComponentMethod('setValue', this.getAttribute('key')?.value)"
                 }
             }
         }
@@ -349,6 +349,9 @@
             "additionalAttribute": {
                 "transitionName": "''",
                 "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
+            },
+            "sutando": {
+
             }
         }
     },
