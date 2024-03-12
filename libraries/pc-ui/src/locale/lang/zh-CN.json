@@ -127,7 +127,7 @@
   "uProcessButton_revertOK": "确 定",
   "uProcessButton_revertCancel": "取 消",
   "uProcessButton_withdrawTitle": "撤回",
-  "uProcessButton_withdrawContent": "请确认是否{widthdrawDisplayText}流程？",
+  "uProcessButton_withdrawContent": "请确认是否{withdrawDisplayText}流程？",
   "uProcessButton_withdrawOK": "确 定",
   "uProcessButton_withdrawCancel": "取 消",
   "uProcessInfo_startBy": "发起人",
