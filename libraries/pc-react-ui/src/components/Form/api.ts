@@ -20,6 +20,22 @@ namespace nasl.ui {
     })
     getValues(): any {}
 
+    @Method({
+      title: 'undefined',
+      description: '获取表单值。',
+    })
+    setValue(
+      @Param({
+        title: 'undefined',
+        description: '表单项的 name',
+      })
+      name: nasl.core.String,
+      @Param({
+        title: 'undefined',
+        description: '表单值',
+      })
+      value: any,
+    ): any {}
     // @Method({
     //   title: 'undefined',
     //   description: '验证表单中的某一项，已废弃。表单中的项是嵌套的，用 name 层级较深，而且可能有重名。',
@@ -86,16 +102,27 @@ namespace nasl.ui {
     })
     layout: 'inline' | 'horizontal' | 'vertical' = 'inline';
 
-    @Prop<FormOptions, 'gutter'>({
-      group: '主要属性',
-      title: '栅格间隔',
-      description: '栅格间隔',
-      // docDescription: '整个表单的划分列数，此项需要设置表单布局为“栅格展示”。',
+    @Prop({
+      group: '样式属性',
+      title: '栅格水平间隔',
+      description: '栅格列之间的间隔',
+      docDescription: '栅格列之间的间隔，支持无（0）、迷你（4）、小（8）、正常（16）、巨大（32）共6种间隔模式。',
       setter: {
         concept: 'NumberInputSetter',
       },
     })
-    gutter: nasl.core.Decimal = 0;
+    gutterJustify: nasl.core.Decimal = 0;
+
+    @Prop({
+      group: '样式属性',
+      title: '栅格垂直间隔',
+      description: '栅格列之间的间隔',
+      docDescription: '栅格列之间的间隔，支持无（0）、迷你（4）、小（8）、正常（16）、巨大（32）共6种间隔模式。',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    gutterAlign: nasl.core.Decimal = 0;
 
     // @Prop({
     //   group: '主要属性',

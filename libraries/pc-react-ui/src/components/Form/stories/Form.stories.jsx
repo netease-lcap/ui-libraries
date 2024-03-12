@@ -34,12 +34,16 @@ export const 默认 = {
     return (
       <Form ref={ref}>
         <FormItem
+          span={25}
           label={<Text children="账号" />}
           rules={[
             { validate: 'lowerCase', message: '不能出现大写字母', trigger: 'input+blur' },
             { validate: 'integer', message: '请输入整数', trigger: 'input+blur' },
             {
-              validate: 'max', args: [30], message: `不能大于${30}`, trigger: 'input+blur',
+              validate: 'max',
+              args: [30],
+              message: `不能大于${30}`,
+              trigger: 'input+blur',
             },
           ]}
         >

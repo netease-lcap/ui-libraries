@@ -155,13 +155,13 @@ namespace nasl.ui {
       title: '打开/关闭后',
       description: '打开和关闭 Modal 时动画结束后的回调	',
     })
-    afterOpenChange: (event: any) => any;
+    afterOpenChange: (event: Boolean) => any;
 
     @Event({
       title: '关闭时',
       description: '点击遮罩层或右上角叉或取消按钮的回调',
     })
-    onCancel: (event: { ok: nasl.core.Boolean }) => any;
+    onCancel: () => any;
 
     @Slot({
       title: '弹窗标题',
@@ -185,7 +185,7 @@ namespace nasl.ui {
       title: '弹窗尾部',
       description: '弹窗尾部自定义',
     })
-    slotFooter: (event: any) => Array<ViewComponent>;
+    slotFooter: () => Array<ViewComponent>;
 
     // @Slot({
     //   title: 'undefined',

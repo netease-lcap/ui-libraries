@@ -7,7 +7,7 @@ import { Row } from '@/index';
 export function useHandle(props) {
   const Compoent = props.get('render');
   const render = React.useCallback((selfProps) => {
-    const rowProps = ['gutter', 'align', 'justify', 'wrap'];
+    const rowProps = ['gutter', 'align', 'justify', 'wrap', 'gutterJustify', 'gutterAlign'];
     return (
       <Compoent key="component" {..._.omit(selfProps, rowProps)}>
         <Row key="row" {..._.pick(selfProps, rowProps)}>{selfProps.children}</Row>
@@ -29,6 +29,8 @@ export function useHandleRef(props) {
   const validate = async () => form.validateFields().then(() => true, () => false);
   return {
     form,
-    ref: _.assign(ref, { validate, getValues: form.getFieldsValue, setValue: Form.useWatch }),
+    ref: _.assign(ref, {
+      validate, getValues: form.getFieldsValue, setValue: form.setFieldValue, setValues: form.setFieldsValue,
+    }),
   };
 }

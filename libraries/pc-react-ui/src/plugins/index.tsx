@@ -11,6 +11,8 @@ import _ from 'lodash';
 import fp from 'lodash/fp';
 import { useWhyDidYouUpdate } from 'ahooks';
 import { withErrorBoundary } from 'react-error-boundary';
+import zhCN from 'antd/locale/zh_CN';
+import { ConfigProvider } from 'antd';
 import type { pluginType } from '@/plugins/type';
 import { $deletePropsList } from '@/plugins/constants';
 import '@/utils/index';
@@ -109,12 +111,14 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   mutableProps.setState({ ref });
   // console.log(excludeProps, 'excludeProps');
   return (
-    <Component
-      {...excludeProps}
-      ref={baseRef}
-    >
-      {props.children}
-    </Component>
+    <ConfigProvider locale={zhCN}>
+      <Component
+        {...excludeProps}
+        ref={baseRef}
+      >
+        {props.children}
+      </Component>
+    </ConfigProvider>
   );
 });
 // extends pluginType<T>

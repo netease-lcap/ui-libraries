@@ -17,10 +17,11 @@ export function useHandleOpenRef(props) {
   return {
     open,
     ref: selfRef,
-    onOpenChange: _.wrap(onOpenChange, (fn, visible) => {
-      setOpen(visible);
-      _.attempt(onOpenChange, visible);
-    }),
+    onOpenChange: setOpen,
+    // onOpenChange: _.wrap(onOpenChange, (fn, visible) => {
+    //   setOpen(visible);
+    //   _.attempt(onOpenChange, visible);
+    // }),
     // ref: modalRef,
   };
 }

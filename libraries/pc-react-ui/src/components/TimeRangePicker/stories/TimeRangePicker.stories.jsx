@@ -1,6 +1,6 @@
 import React from 'react';
-import { TimeRangePicker } from '../index';
 import { TimePicker } from 'antd';
+import { TimeRangePicker } from '../index';
 
 // const TimeRangePicker = TimePicker.RangePicker;
 
@@ -26,9 +26,12 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <TimeRangePicker use12Hours showNow data-nodepath="1234" />,
+  render: (args) => <TimeRangePicker {...args} use12Hours showNow data-nodepath="1234" />,
   args: {
     color: 'magenta',
+    onChange(e) {
+      console.log(e);
+    },
     showNow: true,
     children: 'Tag',
   },

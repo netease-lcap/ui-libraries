@@ -18,7 +18,7 @@ export function useHandleOpenRef(props) {
   const selfRef = React.useMemo(() => ({
     open: () => setOpen(true),
     close: () => setOpen(false),
-    visible: !!open,
+    opened: !!open,
     ...ref,
   }), [ref, open, setOpen]);
   return {

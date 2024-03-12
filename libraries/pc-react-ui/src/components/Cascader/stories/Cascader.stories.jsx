@@ -25,36 +25,94 @@ export default {
 export const 异步函数 = {
   render: (args) => <Cascader {...args} />,
   args: {
-    dataSource: () =>
-      new Promise((res) => {
-        setTimeout(() => {
-          res([
-            { labels: 'Option 1', key: '1' },
-            {
-              labels: 'Option 2',
-              key: '2',
-              children: [{ labels: 'Option 3', key: '3' }],
-            },
-          ]);
-        }, 3000);
-      }),
+    dataSource: () => new Promise((res) => {
+      setTimeout(() => {
+        res([
+          { labels: 'Option 1', key: '1' },
+          {
+            labels: 'Option 2',
+            key: '2',
+            children: [{ labels: 'Option 3', key: '3' }],
+          },
+        ]);
+      }, 3000);
+    }),
     valueField: 'key',
     textField: 'labels',
   },
 };
 export const 同步函数 = {
-  render: (args) => <Cascader {...args} />,
+  render: (args) => (
+    <Cascader
+      dataSource={async () => {
+        return [
+          {
+            entity1: {
+              id: 1,
+              createdTime: null,
+              updatedTime: null,
+              createdBy: null,
+              updatedBy: null,
+              fid: 0,
+              name: '选项1',
+              sonid: [],
+            },
+          },
+          {
+            entity1: {
+              id: 2,
+              createdTime: null,
+              updatedTime: null,
+              createdBy: null,
+              updatedBy: null,
+              fid: 0,
+              name: '选项2',
+              sonid: [],
+            },
+          },
+        ];
+      }}
+      valueField="entity1.id"
+      textField="entity1.name"
+      parentField="entity1.fid"
+      // valueField="entity1.id"
+      // textfield="entity1.name"
+      // parentField="entity1.fid"
+    />
+  ),
   args: {
-    dataSource: () => [
-      { a: { id: 1, parentId: null, name: 'Root' } },
-      { a: { id: 2, parentId: 1, name: 'Child 1' } },
-      { a: { id: 3, parentId: 1, name: 'Child 2' } },
-      { a: { id: 4, parentId: 2, name: 'Grandchild 1' } },
-      { a: { id: 5, parentId: 3, name: 'Grandchild 2' } },
+    dataSource: async () => [
+      {
+        entity1: {
+          id: 1,
+          createdTime: null,
+          updatedTime: null,
+          createdBy: null,
+          updatedBy: null,
+          fid: 0,
+          name: '选项1',
+          sonid: [],
+        },
+        value: 1,
+      },
+      {
+        entity1: {
+          id: 2,
+          createdTime: null,
+          updatedTime: null,
+          createdBy: null,
+          updatedBy: null,
+          fid: 0,
+          name: '选项2',
+          sonid: [],
+        },
+        value: 2,
+      },
     ],
-    valueField: 'a.id',
-    textField: 'a.name',
-    parentField: 'a.parentId',
+    valueField: 'entity1.id',
+    textField: 'entity1.name',
+    parentField: 'entity1.fid',
+    // parentField: 'a.parentId',
   },
 };
 
@@ -82,19 +140,18 @@ export const ref = {
   },
   args: {
     style: { width: 300 },
-    dataSource: () =>
-      new Promise((res) => {
-        setTimeout(() => {
-          res([
-            { labels: 'Option 1', key: '1' },
-            {
-              labels: 'Option 2',
-              key: '2',
-              children: [{ labels: 'Option 3', key: '3' }],
-            },
-          ]);
-        }, 3000);
-      }),
+    dataSource: () => new Promise((res) => {
+      setTimeout(() => {
+        res([
+          { labels: 'Option 1', key: '1' },
+          {
+            labels: 'Option 2',
+            key: '2',
+            children: [{ labels: 'Option 3', key: '3' }],
+          },
+        ]);
+      }, 3000);
+    }),
     valueField: 'key',
     textField: 'labels',
   },

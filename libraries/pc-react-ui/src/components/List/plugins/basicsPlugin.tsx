@@ -74,3 +74,12 @@ export function useHandlePagination(props) {
   return paginationProps;
 }
 useHandlePagination.order = 5;
+
+export function useHandleRenderItem(props) {
+  const renderItemProps = props.get('renderItem');
+  return {
+    renderItem(item) {
+      return renderItemProps({ item });
+    },
+  };
+}
