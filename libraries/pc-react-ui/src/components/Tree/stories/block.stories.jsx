@@ -26,12 +26,12 @@ export const 默认 = {
   render: () => {
     return (
       <Tree>
-        <TreeNode key={1}>
-          <TreeNode key={5} />
-          <TreeNode key={6} />
+        <TreeNode>
+          <TreeNode />
+          <TreeNode />
         </TreeNode>
-        <TreeNode key={2} />
-        <TreeNode key={4} />
+        <TreeNode />
+        <TreeNode />
       </Tree>
     );
   },

@@ -277,7 +277,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '子节点',
-          code: '<TreeNode title="节点" key="1"></TreeNode>',
+          code: '<TreeNode title="节点" ></TreeNode>',
         },
       ],
     })
