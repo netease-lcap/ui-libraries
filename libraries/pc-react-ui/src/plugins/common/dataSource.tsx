@@ -80,7 +80,7 @@ export function useHandleMapField(filedInfo) {
     }));
   }, [label, value, textField, valueField, dataSource]);
 }
-export function useRequestDataSource(dataSource, options) {
+export function useRequestDataSource(dataSource, options = {}) {
   const wrapDataSource = _.cond([
     [_.isArray, _.constant(async () => dataSource)],
     [_.isFunction, _.constant(async (...arg) => dataSource(...arg))],

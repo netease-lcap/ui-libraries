@@ -16,6 +16,7 @@ export function useHandleRef(props) {
   const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueProps, onChange: onChangeProps, defaultValue }));
   return {
     value,
+    baseNoRef: true,
     ref: _.assign(ref, { value, setValue: onChange }),
     onChange,
   };
@@ -47,7 +48,6 @@ export function useHandleDataSource(props) {
   const dataSource = useHandleMapField({ textField, valueField, dataSource: dataSourceFormat });
   const selfRef = React.useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
   const dataSourceResult = _.isEmpty(dataSource) ? {} : { options: dataSource };
-  console.log(dataSourceResult, ';;;;');
   return {
     [$deletePropsList]: deletePropsList,
     ref: selfRef,

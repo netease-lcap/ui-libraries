@@ -5,7 +5,6 @@ import { usePagination } from 'ahooks';
 
 export function useHandleTransformOption(props) {
   const dataSource = props.get('dataSource');
-  console.log(dataSource, 'datas');
   const paginationProps = props.get('pagination');
   const onBefore = props.get('onBefore', () => { });
   const onSuccess = props.get('onSuccess', () => { });
@@ -61,8 +60,6 @@ function useHandlePagination(props) {
       showTotal: showTotalText,
       showQuickJumper,
       onChange: _.wrap(pagination.onChange, (fn, ...arg) => {
-        console.log(fn, onChange);
-        console.log(arg);
         _.attempt(fn, arg);
         _.attempt(onChange, arg);
       }),

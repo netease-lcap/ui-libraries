@@ -26,6 +26,7 @@ export function useHandleRef(props) {
   const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueProps, onChange: onChangeProps, defaultValue }));
   return {
     value,
+    baseNoRef: true,
     onChange,
     ref: _.assign(ref, { value, setValue: onChange }),
   };

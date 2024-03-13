@@ -32,11 +32,7 @@ export const 默认 = {
       dataSource={args.dataSource}
       pageSize={5}
       renderItem={({ item }) => {
-        return (
-          <Flex>
-            <Text>{item.dataEntity.name}</Text>
-          </Flex>
-        );
+        return <Text>{item.dataEntity.name}</Text>;
       }}
       tooltip="这是提示"
       style={{ width: 501 }}

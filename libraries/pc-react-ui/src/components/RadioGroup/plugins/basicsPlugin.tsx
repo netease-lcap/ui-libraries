@@ -1,3 +1,5 @@
 export function useHandle() {
-  return {};
+  return {
+    baseNoRef: true,
+  };
 }
