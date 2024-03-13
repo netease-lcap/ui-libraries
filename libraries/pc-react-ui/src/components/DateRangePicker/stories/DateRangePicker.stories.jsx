@@ -26,15 +26,22 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <DateRangePicker {...args} />,
+  render: (args) => {
+    const [value, setValue] = React.useState(['2024-03-11T11:34:40.334Z', '2024-03-11T11:34:40.334Z']);
+    setTimeout(() => {
+      console.log('---');
+      setValue(null);
+    }, 3000);
+    return <DateRangePicker {...args} value={value} />;
+  },
   args: {
     color: 'magenta',
     children: 'Tag',
     onChange(e) {
       console.log(e);
     },
-    // value: ['2024-03-11T11:34:40.334Z', '2024-03-11T11:34:40.334Z'],
-    defaultStartDate: '2024-03-03',
+    value: ['2024-03-11T11:34:40.334Z', '2024-03-11T11:34:40.334Z'],
+    // defaultStartDate: '2024-03-03',
     showTime: true,
     // defaultEndDate: '2024-03-03',
     // endEmpty: true,
