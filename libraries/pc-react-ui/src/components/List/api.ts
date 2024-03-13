@@ -34,10 +34,10 @@ namespace nasl.ui {
     // })
     // order: nasl.core.String;
 
-    // @Prop({
-    //   title: '过滤文本',
-    // })
-    // filterText: nasl.core.String;
+    @Prop({
+      title: '过滤文本',
+    })
+    filterText: nasl.core.String;
 
     @Method({
       title: 'undefined',
