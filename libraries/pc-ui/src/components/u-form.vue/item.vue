@@ -255,7 +255,6 @@ export default {
 }
 .root[label-size$="normal"] > .field {
     max-width: calc(100% - var(--form-item-label-width));
-    width: 100%;
 }
 
 .root[label-size$="large"] > .label {
@@ -325,7 +324,6 @@ export default {
     position: relative;
     display: inline-block;
     max-width: 100%;
-    width: 100%;
 }
 
 .root[field-size="full"] .wrap {
