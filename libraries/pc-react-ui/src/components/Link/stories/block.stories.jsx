@@ -24,6 +24,6 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
-    return <Link children="链接" href="https://sf.163.com/" />;
+    return <Link children="链接" />;
   },
 };

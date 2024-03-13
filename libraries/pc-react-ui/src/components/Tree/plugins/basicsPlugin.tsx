@@ -54,9 +54,10 @@ export function useHandleDataSource(props) {
   const valueField = props.get('valueField', 'value');
   const parentField = props.get('parentField');
   const childrenField = props.get('childrenField');
+  const onSuccess = props.get('onLoad');
   const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField', 'dataSource', 'parentField', 'childrenField']);
   const ref = props.get('ref');
-  const { data, run: reload, loading } = useRequestDataSource(dataSourceProps);
+  const { data, run: reload, loading } = useRequestDataSource(dataSourceProps, { onSuccess });
   const dataSourceFormat = useFormatDataSource(data);
   const dataSource = useHandleMapField({
     textField, valueField, dataSource: dataSourceFormat, label: 'title', value: 'key',
