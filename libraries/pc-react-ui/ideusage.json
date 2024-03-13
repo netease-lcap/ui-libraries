@@ -271,6 +271,7 @@
         "name": "TreeNode",
         "ideusage": {
             "idetype": "container",
+            "structured": true,
             "parentAccept": "target.tag === 'Tree'"
         }
     },
