@@ -13,6 +13,12 @@ namespace nasl.ui {
     })
     opened: Boolean;
     current: TableOptions<T, V, P, M>['current'];
+
+    @Method({
+      title: 'undefined',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void {}
     constructor(options?: Partial<SelectOptions<T, V, P, M, C>>) {
       super();
     }

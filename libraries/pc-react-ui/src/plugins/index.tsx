@@ -12,7 +12,7 @@ import fp from 'lodash/fp';
 import { useWhyDidYouUpdate } from 'ahooks';
 import { withErrorBoundary } from 'react-error-boundary';
 import zhCN from 'antd/locale/zh_CN';
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, Tree } from 'antd';
 import type { pluginType } from '@/plugins/type';
 import { $deletePropsList } from '@/plugins/constants';
 import '@/utils/index';
@@ -74,7 +74,7 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   const pluginHooks = plugin.getPluginMethod();
   const mapProps = plugin.getMapProps();
   function handleMutableProps(ref) {
-    const obj = { ref, render: BaseComponent };
+    const obj = { ref, render: BaseComponent, children: props.children };
     return {
       setState: (state) => _.assign(obj, state),
       getState: (state) => obj[state],
@@ -92,9 +92,7 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     (expandProps, handleFun) => expandProps.merge(_.attempt(handleFun, expandProps)),
     ImmutableProps,
   );
-  // return <BaseComponent {...props} />;
   const Component = expandProps.get('render');
-  // const Component = mutableProps.getState('render');
   const jsProps = expandProps.toJS();
   const componentRef = jsProps.ref;
   const excludeProps = _.omit(jsProps, _.concat(
@@ -110,17 +108,26 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     };
   }, [componentRef, baseRef]);
   mutableProps.setState({ ref });
-
-  // console.log(props.children, 'children');
-  // console.log(excludeProps, 'excludeProps');
+  // if (plugin.displayName === 'Tree') {
+  //   console.log(BaseComponent === Component, Tree === Component, '???===', plugin.displayName);
+  //   return (
+  //     <Component
+  //       {...excludeProps}
+  //       ref={baseRef}
+  //     >
+  //       {props.children}
+  //     </Component>
+  //   );
+  // }
+  const hasRef = excludeProps?.baseNoRef ? {} : baseRef;
   return (
     <ConfigProvider locale={zhCN}>
       <Component
         {...excludeProps}
-        ref={baseRef}
-      />
-      {/* {props.children} */}
-      {/* </Component> */}
+        ref={hasRef}
+      >
+        {props.children}
+      </Component>
     </ConfigProvider>
   );
 });

@@ -22,8 +22,8 @@ export function useHandleStyle(props) {
 export function useHandleValue(props) {
   const valueProps = props.get('value');
   const onChangeProps = props.get('onChange');
-  const startDate = _.isNil(_.get(valueProps, '0')) ? undefined : dayjs(_.get(valueProps, '0'));
-  const endDate = _.isNil(_.get(valueProps, '1')) ? undefined : dayjs(_.get(valueProps, '1'));
+  const startDate = _.isNil(_.get(valueProps, '0')) ? undefined : dayjs(_.get(valueProps, '0'), 'HH:mm:ss');
+  const endDate = _.isNil(_.get(valueProps, '1')) ? undefined : dayjs(_.get(valueProps, '1'), 'HH:mm:ss');
   const valueFormat = _.isEmpty([startDate, endDate].filter(Boolean)) ? undefined : [startDate, endDate];
   const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueFormat }));
   return {

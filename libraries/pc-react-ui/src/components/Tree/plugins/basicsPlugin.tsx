@@ -67,6 +67,7 @@ export function useHandleDataSource(props) {
   return {
     [$deletePropsList]: deletePropsList,
     ref: selfRef,
+    baseNoRef: true,
     loading,
     ...dataSourceResult,
     fieldNames: {

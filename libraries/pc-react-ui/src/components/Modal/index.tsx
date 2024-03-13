@@ -18,7 +18,7 @@ export const Modal = registerComponet<
   pluginType<ModalProps>
 >(
   AntdModal,
-  { plugin, displayName: AntdModal.displayName, mapProps },
+  { plugin, displayName: 'Modal', mapProps },
 );
 
 // export default Modal;

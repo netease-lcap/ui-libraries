@@ -17,7 +17,7 @@ export const Drawer = registerComponet<
   pluginType<DrawerProps>
 >(
   AntdDrawer,
-  { plugin, displayName: AntdDrawer.displayName, mapProps },
+  { plugin, displayName: 'Drawer', mapProps },
 );
 
 // export default Drawer;

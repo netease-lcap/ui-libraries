@@ -33,7 +33,7 @@ export const 异步函数 = {
     return (
       <div>
         <button onClick={() => ref.current.reload()}>1234</button>
-        <Tree {...args} />
+        <Tree {...args} ref={ref} />
       </div>
     );
   },
