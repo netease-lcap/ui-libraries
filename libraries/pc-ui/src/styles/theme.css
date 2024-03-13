@@ -2022,7 +2022,7 @@
     --grid-layout-column-gap-none: 0;
     --grid-layout-column-gap-mini: 4px;
     --grid-layout-column-gap-small: 8px;
-    --grid-layout-column-gap-normal: 16px;
+    --grid-layout-column-gap-normal: var(--space-base);
     --grid-layout-column-gap-large: 24px;
     --grid-layout-column-gap-huge: 32px;
     --grid-layout-column-content-gap-shrink: var(--space-shrink);
