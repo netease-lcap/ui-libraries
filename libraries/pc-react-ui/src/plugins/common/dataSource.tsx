@@ -108,7 +108,7 @@ export function useDataSourceToTree(dataSource, parentField, valueField = 'value
     const map = new Map<string, Record<string, any>>(dataSource.map((item) => [_.get(item, valueField), item]));
     const tree = [] as any[];
     dataSource.forEach((item) => {
-      if (_.get(item, parentField)) {
+      if (map.get(_.get(item, parentField))) {
         const parent = map.get(_.get(item, parentField));
         if (parent) {
           if (!Array.isArray(parent.children)) parent.children = [];

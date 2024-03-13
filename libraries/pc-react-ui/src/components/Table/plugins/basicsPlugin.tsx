@@ -175,16 +175,16 @@ export function useHandleSorter(props) {
     const handleAscend = {
       multiple: item.multiple ?? 1,
       compare: (a, b) => {
-        const itemA = _.isNumber(_.get(a, item.dataIndex)) ? _.get(a, item.dataIndex) : String(_.get(a, item.dataIndex)).charCodeAt(0);
-        const itemB = _.isNumber(_.get(b, item.dataIndex)) ? _.get(b, item.dataIndex) : String(_.get(b, item.dataIndex)).charCodeAt(0);
+        const itemA = _.isNumber(_.get(a, item.dataIndex)) ? _.get(a, item.dataIndex) : _.stringToAscii(_.get(a, item.dataIndex));
+        const itemB = _.isNumber(_.get(b, item.dataIndex)) ? _.get(b, item.dataIndex) : _.stringToAscii(_.get(b, item.dataIndex));
         return itemA - itemB;
       },
     };
     const handleDescend = {
       multiple: item.multiple ?? 1,
       compare: (a, b) => {
-        const itemA = _.isNumber(_.get(a, item.dataIndex)) ? _.get(a, item.dataIndex) : String(_.get(a, item.dataIndex)).charCodeAt(0);
-        const itemB = _.isNumber(_.get(b, item.dataIndex)) ? _.get(b, item.dataIndex) : String(_.get(b, item.dataIndex)).charCodeAt(0);
+        const itemA = _.isNumber(_.get(a, item.dataIndex)) ? _.get(a, item.dataIndex) : _.stringToAscii(_.get(a, item.dataIndex));
+        const itemB = _.isNumber(_.get(b, item.dataIndex)) ? _.get(b, item.dataIndex) : _.stringToAscii(_.get(b, item.dataIndex));
         return itemB - itemA;
       },
     };
