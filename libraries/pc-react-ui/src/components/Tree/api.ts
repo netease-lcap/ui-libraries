@@ -123,7 +123,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    childrenField: (item: T) => nasl.collection.List<any> = ((item: any) => item.children) as any;
+    childrenField: any;
 
     @Prop({
       group: '数据属性',
@@ -134,7 +134,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    parentField: (item: T) => any;
+    parentField: any;
 
     // @Prop({
     //   group: '数据属性',
@@ -147,14 +147,14 @@ namespace nasl.ui {
     // })
     // parentField: (item: T) => any;
 
-    @Prop({
-      group: '数据属性',
-      title: '选中值',
-      description: '选择后，所选中的值',
-      sync: true,
-      docDescription: '当前选择的值',
-    })
-    value: V;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '选中值',
+    //   description: '选择后，所选中的值',
+    //   sync: true,
+    //   docDescription: '当前选择的值',
+    // })
+    // value: V;
 
     @Prop({
       group: '交互属性',
