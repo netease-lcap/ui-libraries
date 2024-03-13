@@ -12,7 +12,7 @@ export function useHandleTitle(props) {
   const title = props.get('title');
   return _.isNil(title) ? {} : { title: () => title };
 }
-export function useHandle(props) {
+export function useHandleColumns(props) {
   const childrenProps = props.get('children');
   const childrenList = React.Children.toArray(childrenProps).filter(React.isValidElement);
   const children = _.isEmpty(childrenList) ? false : childrenList;
@@ -38,7 +38,7 @@ export function useHandle(props) {
   }, [children, columns]);
   return result;
 }
-useHandle.order = 3;
+useHandleColumns.order = 3;
 
 export function useHandleTransformOption(props) {
   const dataSource = props.get('dataSource');

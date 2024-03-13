@@ -1,11 +1,12 @@
 import React from 'react';
 import fp from 'lodash/fp';
 import _ from 'lodash';
-import { useAntdTable } from 'ahooks';
+import { usePagination } from 'ahooks';
 
 export function useHandleTransformOption(props) {
   const dataSource = props.get('dataSource');
-  const pagination = props.get('pagination');
+  console.log(dataSource, 'datas');
+  const paginationProps = props.get('pagination');
   const onBefore = props.get('onBefore', () => { });
   const onSuccess = props.get('onSuccess', () => { });
   const current = props.get('current', 1);
@@ -24,30 +25,28 @@ export function useHandleTransformOption(props) {
   const transformOption = React.useMemo(
     () => fp.cond([
       [fp.isArray, fp.constant(async () => ({ list: dataSource, total: dataSource.length }))],
-      [fp.isFunction, fp.constant((...arg) => Promise.resolve(dataSource(...arg)).then(warpList))],
+      [fp.isFunction, fp.constant(async (...arg) => Promise.resolve(dataSource(...arg)).then(warpList))],
       [fp.stubTrue, fp.constant(async () => ({ list: [], total: 0 }))],
     ]),
     [dataSource],
   );
-
-  const { tableProps, run } = useAntdTable(transformOption(dataSource), {
+  const { data, pagination, run } = usePagination(transformOption(dataSource), {
     onBefore: (params) => _.attempt(onBefore, params),
-    onSuccess: (data, params) => _.attempt(onSuccess, data, params),
+    onSuccess: (datas, params) => _.attempt(onSuccess, datas, params),
     defaultParams: [
       { current, pageSize: pageSizeProps },
     ],
   });
-  const { dataSource: data, pagination: { pageSize } } = tableProps;
-  const ref = _.assign(refProps, { reload: run, data, pageSize });
-  const resultTableProps = _.isEqual(pagination, false) ? _.assign(tableProps, { pagination: false }) : tableProps;
+  const ref = _.assign(refProps, { reload: run, data: data?.list, pageSize: pagination?.pageSize });
+  const resultTableProps = _.isEqual(paginationProps, false) ? { dataSource: data?.list, pagination: false } : { dataSource: data?.list, pagination };
   return fp.isNil(dataSource) ? {} : _.assign(resultTableProps, ref);
 }
 
-export function useHandlePagination(props) {
+function useHandlePagination(props) {
   const pagination = props.get('pagination');
   const showSizeChanger = props.get('showSizeChanger');
   const pageSizeOptions = props.get('pageSizeOptions');
-  const onChange = props.get('onPageonChange');
+  const onChange = props.get('onChange');
   const showTotal = props.get('showTotal');
   const showTotalText = fp.cond([
     [fp.isEqual(true), fp.constant((total) => `共 ${total} 条`)],
@@ -62,6 +61,8 @@ export function useHandlePagination(props) {
       showTotal: showTotalText,
       showQuickJumper,
       onChange: _.wrap(pagination.onChange, (fn, ...arg) => {
+        console.log(fn, onChange);
+        console.log(arg);
         _.attempt(fn, arg);
         _.attempt(onChange, arg);
       }),
