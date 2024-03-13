@@ -173,10 +173,20 @@ export function useHandleSorter(props) {
   const columns = React.useMemo(() => _.map(columnsProps, (item) => {
     const isSorter = fp.conforms({ sorter: fp.isEqual(true) });
     const handleAscend = {
-      multiple: item.multiple ?? 1, compare: (a, b) => _.get(a, item.dataIndex) > _.get(b, item.dataIndex),
+      multiple: item.multiple ?? 1,
+      compare: (a, b) => {
+        const itemA = _.isNumber(_.get(a, item.dataIndex)) ? _.get(a, item.dataIndex) : String(_.get(a, item.dataIndex)).charCodeAt(0);
+        const itemB = _.isNumber(_.get(b, item.dataIndex)) ? _.get(b, item.dataIndex) : String(_.get(b, item.dataIndex)).charCodeAt(0);
+        return itemA - itemB;
+      },
     };
     const handleDescend = {
-      multiple: item.multiple ?? 1, compare: (a, b) => _.get(a, item.dataIndex) < _.get(b, item.dataIndex),
+      multiple: item.multiple ?? 1,
+      compare: (a, b) => {
+        const itemA = _.isNumber(_.get(a, item.dataIndex)) ? _.get(a, item.dataIndex) : String(_.get(a, item.dataIndex)).charCodeAt(0);
+        const itemB = _.isNumber(_.get(b, item.dataIndex)) ? _.get(b, item.dataIndex) : String(_.get(b, item.dataIndex)).charCodeAt(0);
+        return itemB - itemA;
+      },
     };
     const handleSorter = fp.cond([
       [fp.matches({ defaultSortOrder: 'ascend' }), fp.constant({ ...item, sorter: handleAscend })],
