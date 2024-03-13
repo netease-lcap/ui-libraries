@@ -21,4 +21,5 @@ export const Flex = registerComponet<
 Flex.defaultProps = {
   wrap: 'wrap',
 };
+// export const Flex = AntdFlex;
 // export default Flex;

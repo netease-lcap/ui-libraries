@@ -118,9 +118,9 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
       <Component
         {...excludeProps}
         ref={baseRef}
-      >
-        {props.children}
-      </Component>
+      />
+      {/* {props.children} */}
+      {/* </Component> */}
     </ConfigProvider>
   );
 });
