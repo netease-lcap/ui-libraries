@@ -336,7 +336,8 @@
             "additionalAttribute": {
                 "transitionName": "''",
                 "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
-            }
+            },
+            "cacheOpenKey": "defaultOpen"
         }
     },
     {
@@ -351,9 +352,7 @@
                 "transitionName": "''",
                 "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
             },
-            "sutando": {
-
-            }
+            "cacheOpenKey": "defaultOpen"
         }
     },
     {
