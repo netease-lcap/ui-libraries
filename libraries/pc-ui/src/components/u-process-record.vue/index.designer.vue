@@ -91,7 +91,7 @@ export default {
                     userName: '王总监',
                     recordCreatedTime: '2023-12-21 10:20:20',
                     nodeOperation: 'reject',
-                    nodeOperationDisplayText: '不同意',
+                    nodeOperationDisplayText: '拒绝',
                     nodeOperationComment: '请做好交接工作再提交审批',
                 },
             ],
