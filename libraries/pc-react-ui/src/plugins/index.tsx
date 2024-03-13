@@ -12,7 +12,7 @@ import fp from 'lodash/fp';
 import { useWhyDidYouUpdate } from 'ahooks';
 import { withErrorBoundary } from 'react-error-boundary';
 import zhCN from 'antd/locale/zh_CN';
-import { ConfigProvider, Tree } from 'antd';
+import { ConfigProvider } from 'antd';
 import type { pluginType } from '@/plugins/type';
 import { $deletePropsList } from '@/plugins/constants';
 import '@/utils/index';
