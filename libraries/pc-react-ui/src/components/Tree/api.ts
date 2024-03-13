@@ -101,7 +101,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    textField: (item: T) => any = ((item: any) => item.text) as any;
+    textField: any;
 
     @Prop({
       group: '数据属性',
@@ -112,7 +112,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    valueField: (item: T) => V = ((item: any) => item.value) as any;
+    valueField: any;
 
     @Prop({
       group: '数据属性',
@@ -239,7 +239,7 @@ namespace nasl.ui {
       title: '选择后',
       description: '选择某一项时触发',
     })
-    onSelect: (event: { value: V; oldValue: V; node: T; oldNode: T }) => any;
+    onSelect: (value: V, event: { selected: V; selectedNodes: V; node: T; event: any }) => any;
 
     // @Event({
     //   title: '改变后',
