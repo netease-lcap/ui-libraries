@@ -124,7 +124,7 @@ export default {
     user-select: none;
     cursor: var(--cursor-pointer);
     color: var(--checkbox-font-color);
-    width: var(--checkbox-label-width);
+    min-width: var(--checkbox-label-width);
     display: inline-block;
 }
 
