@@ -75,8 +75,8 @@ export function useHandleMapField(filedInfo) {
   return useMemo(() => {
     return _.map(dataSource, (item) => ({
       ...item,
-      [label]: _.get(item, textField, item),
-      [value]: _.get(item, valueField, item),
+      [label]: _.isString(item) ? item : _.get(item, textField, ''),
+      [value]: _.isString(item) ? item : _.get(item, valueField, ''),
     }));
   }, [label, value, textField, valueField, dataSource]);
 }
