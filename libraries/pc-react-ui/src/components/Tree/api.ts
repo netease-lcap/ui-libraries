@@ -318,7 +318,7 @@ namespace nasl.ui {
       title: '值',
       description: '节点的值',
     })
-    key: V;
+    key: any;
 
     // @Prop({
     //   group: '交互属性',
