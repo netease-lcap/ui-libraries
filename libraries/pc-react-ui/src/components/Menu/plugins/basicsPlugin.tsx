@@ -15,7 +15,7 @@ export function useHandleRouter(props) {
         window.location.href = arg.key;
         return;
       }
-      const event = new CustomEvent('watchWebsocket', { url: arg.key });
+      const event = new CustomEvent('pageNavigation', { url: arg.key });
       window.dispatchEvent(event);
     }),
   };
