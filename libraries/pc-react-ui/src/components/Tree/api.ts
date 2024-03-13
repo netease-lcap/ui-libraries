@@ -13,10 +13,10 @@ namespace nasl.ui {
     })
     data: TreeOptions<T, V, M>['dataSource'];
 
-    @Prop({
-      title: '值',
-    })
-    value: TreeOptions<T, V, M>['value'];
+    // @Prop({
+    //   title: '值',
+    // })
+    // value: TreeOptions<T, V, M>['value'];
     // @Method({
     //   title: 'undefined',
     //   description: '广度优先遍历树。当`func`函数有返回值时，停止遍历。',
