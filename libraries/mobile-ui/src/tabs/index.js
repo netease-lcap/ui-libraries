@@ -254,7 +254,7 @@ export default createComponent({
 
       this.$nextTick(() => {
         const { titles } = this.$refs;
-      
+
         if (!titles || !titles[this.currentIndex] || this.type !== 'line' || isHidden(this.$el)) {
           return;
         }
@@ -470,6 +470,7 @@ export default createComponent({
         );
       });
     },
+
     getDataSourceNav(dataSource) {
       return dataSource.map((item, index) => {
         const inDesigner = this.inDesigner && index >= 1;
@@ -490,12 +491,11 @@ export default createComponent({
               if (item.disabled) return;
               this.onClick(item, index);
             }}
-
             scopedSlots={{
-              // default: () => item.slots('title'),
+              default: () => this.slots('title'),
             }}
           >
-            
+
           </Title>
         )
       })
