@@ -490,7 +490,12 @@ export default createComponent({
               if (item.disabled) return;
               this.onClick(item, index);
             }}
+
+            scopedSlots={{
+              // default: () => item.slots('title'),
+            }}
           >
+            
           </Title>
         )
       })
