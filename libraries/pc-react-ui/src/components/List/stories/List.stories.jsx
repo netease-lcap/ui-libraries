@@ -25,19 +25,22 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => (
-    <List
-      title="带卡片阴影"
-      extra="extra"
-      dataSource={args.dataSource}
-      pageSize={5}
-      renderItem={({ item }) => {
-        return <Text>{item.dataEntity.name}</Text>;
-      }}
-      tooltip="这是提示"
-      style={{ width: 501 }}
-    />
-  ),
+  render: (args) => {
+    const [data, setData] = React.useState([]);
+    return (
+      <List
+        title="带卡片阴影"
+        extra="extra"
+        dataSource={data}
+        pageSize={5}
+        renderItem={({ item }) => {
+          return <Text>{item.dataEntity.name}</Text>;
+        }}
+        tooltip="这是提示"
+        style={{ width: 501 }}
+      />
+    );
+  },
   args: {
     color: 'magenta',
     children: 'Tag',

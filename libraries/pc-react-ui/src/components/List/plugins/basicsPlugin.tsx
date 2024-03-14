@@ -29,23 +29,26 @@ export function useHandleTransformOption(props) {
     ]),
     [dataSource],
   );
-  const { data, pagination, run } = usePagination(transformOption(dataSource), {
+  const {
+    data, pagination, run, refresh,
+  } = usePagination(transformOption(dataSource), {
     onBefore: (params) => _.attempt(onBefore, params),
     onSuccess: (datas, params) => _.attempt(onSuccess, datas, params),
     defaultParams: [
       { current, pageSize: pageSizeProps },
     ],
   });
+  React.useEffect(() => refresh(), [dataSource]);
+
   const ref = _.assign(refProps, { reload: run, data: data?.list, pageSize: pagination?.pageSize });
   const resultTableProps = _.isEqual(paginationProps, false) ? { dataSource: data?.list, pagination: false } : { dataSource: data?.list, pagination };
   return fp.isNil(dataSource) ? {} : _.assign(resultTableProps, ref);
 }
 
-function useHandlePagination(props) {
+export function useHandlePagination(props) {
   const pagination = props.get('pagination');
   const showSizeChanger = props.get('showSizeChanger');
   const pageSizeOptions = props.get('pageSizeOptions');
-  const onChange = props.get('onChange');
   const showTotal = props.get('showTotal');
   const showTotalText = fp.cond([
     [fp.isEqual(true), fp.constant((total) => `共 ${total} 条`)],
@@ -59,10 +62,6 @@ function useHandlePagination(props) {
       pageSizeOptions,
       showTotal: showTotalText,
       showQuickJumper,
-      onChange: _.wrap(pagination.onChange, (fn, ...arg) => {
-        _.attempt(fn, arg);
-        _.attempt(onChange, arg);
-      }),
     })),
   };
   const paginationProps = fp.cond([

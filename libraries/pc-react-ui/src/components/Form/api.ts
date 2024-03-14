@@ -21,6 +21,17 @@ namespace nasl.ui {
     getValues(): any {}
 
     @Method({
+      title: '获取表单值',
+      description: '获取表单值。',
+    })
+    getValue(
+      @Param({
+        title: 'undefined',
+        description: '表单项的 name',
+      })
+      name: nasl.core.String,
+    ): any {}
+    @Method({
       title: 'undefined',
       description: '获取表单值。',
     })

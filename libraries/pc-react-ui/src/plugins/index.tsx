@@ -9,11 +9,9 @@ import { Map } from 'immutable';
 import React from 'react';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { useWhyDidYouUpdate } from 'ahooks';
 import { withErrorBoundary } from 'react-error-boundary';
 import zhCN from 'antd/locale/zh_CN';
 import { ConfigProvider } from 'antd';
-import type { pluginType } from '@/plugins/type';
 import { $deletePropsList } from '@/plugins/constants';
 import '@/utils/index';
 
@@ -131,7 +129,6 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     </ConfigProvider>
   );
 });
-// extends pluginType<T>
 const ComponentWithErrorBoundary = withErrorBoundary(HocBaseComponents, {
   fallback: <div>Something went wrong</div>,
   onError(error, info) {

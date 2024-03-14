@@ -161,7 +161,7 @@ namespace nasl.ui {
       title: '关闭时',
       description: '点击遮罩层或右上角叉或取消按钮的回调',
     })
-    onCancel: () => any;
+    onCancel: (event: any) => any;
 
     @Slot({
       title: '弹窗标题',
