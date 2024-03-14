@@ -188,10 +188,14 @@
             "childAccept": false,
             "parentAccept": "target.tag === 'Table'",
             "containerDirection": "row",
-            "selector": {
-              "expression": "this.getElement(el => el.slotTarget === 'title')",
-              "cssSelector": "th"
-            }
+            "selector": [{
+                    "expression": "this.getElement(el => el.slotTarget === 'title')",
+                    "cssSelector": "th"
+                }, {
+                    "expression": "this.getElement(el => el.slotTarget === 'render')",
+                    "cssSelector": "td"
+                }
+            ]
         }
     },
     {
