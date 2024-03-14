@@ -43,5 +43,17 @@ namespace nasl.ui {
       },
     })
     target: '_blank' | '_self' | '_parent' | '_top' = '_self';
+
+    @Prop({
+      group: '样式属性',
+      title: '更多气泡弹出位置',
+      description: '设置更多选项的气泡弹出位置',
+      docDescription: '设置更多选项的气泡弹出位置',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '上方' }, { title: '下方' }],
+      }
+    })
+    placement: 'top-start' | 'bottom-start'
   }
 }

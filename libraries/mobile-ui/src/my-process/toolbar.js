@@ -79,8 +79,8 @@ export default createComponent({
     onStartTimePickerChange(value) {
       const { start, end } = value;
       this.$emit('change', {
-        createTimeAfter: dayjs(`${start} 00:00:00`).toISOString(),
-        createTimeBefore: dayjs(`${end} 23:59:59`).toISOString(),
+        procInstStartTimeAfter: dayjs(`${start} 00:00:00`).toISOString(),
+        procInstStartTimeBefore: dayjs(`${end} 23:59:59`).toISOString(),
       }, this.tab);
     },
   },

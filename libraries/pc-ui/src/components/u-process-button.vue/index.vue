@@ -1,20 +1,21 @@
 <template>
     <u-linear-layout mode="inline" :class="$style.root">
         <u-button v-for="item in permissionDetails" :key="item.name" :color="getColor(item)" @click="onClickButton(item)">
-            {{ item.showText }}
+            {{ item.displayText }}
         </u-button>
         <u-modal v-if="currentItem"
-            :title="currentItem.showText"
+            :title="currentItem.displayText"
             :visible="!!currentItem"
             ref="modal"
             @close="currentItem = undefined">
             <u-form label-layout="block" ref="form">
-                <u-form-item :label="$tt('approvalComments')" :required="currentItem.opinionsEnable" :rules="currentItem.opinionsEnable?'required':''" v-if="currentItem.name !== 'reassign'">
+                <u-form-item :label="$tt('approvalComments')" :required="currentItem.commentRequired" :rules="currentItem.commentRequired?'required':''" v-if="currentItem.name !== 'reassign'">
                     <u-textarea v-model="model.comment" size="normal full" :placeholder="$tt('placeholder')">
                     </u-textarea>
                 </u-form-item>
-                <u-form-item :label="$tt('selectTransfer')" required rules="required" v-if="currentItem.name === 'reassign'">
+                <u-form-item :label="$tt('selectTransfer')" required :rules="`required #${$tt('selectTransferEmpty')}`" v-if="currentItem.name === 'reassign'">
                     <u-select
+                        size="full"
                         text-field="userName"
                         value-field="userName"
                         :data-source="getUsersForReassign"
@@ -74,7 +75,7 @@ export default {
                         taskId: this.taskId,
                     },
                 });
-                this.permissionDetails = (res.data || []).filter((item) => item.operateEnable);
+                this.permissionDetails = (res.data || []).filter((item) => item.operationEnabled);
             }
         },
         getColor(item) {
@@ -94,22 +95,22 @@ export default {
                 this.$refs.modal.close();
             }
         },
-        async submit() {
+        async submit(item) {
             if (!this.$processV2) {
                 return;
             }
-            const { name } = this.currentItem;
+            const currentItem = item || this.currentItem;
+            const { name } = currentItem;
             const operate = `${name}Task`;
             const body = {
                 taskId: this.taskId,
             };
-            const dynamicRenderContainer = document.getElementById('dynamicRenderContainer');
-            if (dynamicRenderContainer && dynamicRenderContainer.__vue__) {
-                body.data = dynamicRenderContainer.__vue__.processDetailFormData;
+            if (window.__processDetailFromMixinFormData__) {
+                body.data = window.__processDetailFromMixinFormData__;
             }
             if (name === 'reassign') {
                 body.userForReassign = this.model.userName;
-            } else {
+            } else if(name !== 'submit') {
                 body.comment = this.model.comment;
             }
             await this.$processV2.setTaskInstance({
@@ -129,27 +130,22 @@ export default {
         },
         async onClickButton(item) {
             if (item.name === 'revert') {
-                return this.revertOperator();
+                this.revertOperator(item);
+                return;
             }
             if (item.name === 'withdraw') {
-                return this.withdrawOperator();
+                this.withdrawOperator(item);
+                return;
             }
             // 表单验证后打开弹窗
-            const dynamicRenderContainer = document.getElementById('dynamicRenderContainer');
-            if (dynamicRenderContainer && dynamicRenderContainer.__vue__) {
-                const formRefName = dynamicRenderContainer.getAttribute('ref-name');
-                if (formRefName) {
-                    const formRef = dynamicRenderContainer.__vue__.$refs[formRefName];
-                    if (formRef && formRef.validate) {
-                        const validateResult = await formRef.validate();
-                        if (validateResult.valid) {
-                            this.openModal(item);
-                        }
+            if (window.__processDetailFromMixinFormVm__ && window.__processDetailFromMixinFormVm__.validate) {
+                const validateResult = await window.__processDetailFromMixinFormVm__.validate();
+                if (validateResult.valid) {
+                    if (item.name === 'submit') {
+                        return this.submit(item);
                     } else {
                         this.openModal(item);
                     }
-                } else {
-                    this.openModal(item);
                 }
             } else {
                 this.openModal(item);
@@ -165,10 +161,10 @@ export default {
         /**
          * 回退
          */
-        revertOperator() {
+        revertOperator(item) {
             return this.$confirm({
-                title: this.$tt('revertTitle'),
-                content: this.$tt('revertContent'),
+                title: item.displayText,
+                content: this.$tt('revertContent',  { revertDisplayText: item.displayText }),
                 okButton: this.$tt('revertOK'),
                 cancelButton: this.$tt('revertCancel'),
             }).then(async () => {
@@ -188,10 +184,10 @@ export default {
         /**
          * 撤回
          */
-        withdrawOperator() {
+        withdrawOperator(item) {
             return this.$confirm({
-                title: this.$tt('withdrawTitle'),
-                content: this.$tt('withdrawContent'),
+                title: item.displayText,
+                content: this.$tt('withdrawContent', { withdrawDisplayText: item.displayText }),
                 okButton: this.$tt('withdrawOK'),
                 cancelButton: this.$tt('withdrawCancel'),
             }).then(async () => {
