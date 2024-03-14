@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div class="van-process-info">
+      <div class="van-process-info__card">
+        <div class="van-process-info__card-line">
+          <div class="van-process-info__card-label">发起人</div>
+          <div class="van-process-info__card-content">张三</div>
+        </div>
+        <div class="van-process-info__card-line">
+          <div class="van-process-info__card-label">发起时间</div>
+          <div class="van-process-info__card-content">2024-01-24 11:35:52</div>
+        </div>
+        <div class="van-process-info__card-line">
+          <div class="van-process-info__card-label">当前状态</div>
+          <div class="van-process-info__card-content">审批通过</div>
+        </div>
+        <div class="van-process-info__card-line">
+          <div class="van-process-info__card-label">当前节点</div>
+          <div class="van-process-info__card-content">多人审批任务，多人审批任务</div>
+        </div>
+        <div class="van-process-info__card-line">
+          <div class="van-process-info__card-label">参与人</div>
+          <div class="van-process-info__card-content">李四，王五，赵六</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

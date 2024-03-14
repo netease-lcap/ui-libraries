@@ -1,5 +1,5 @@
 <template>
-<div :class="[$style.root, isPreview ? $style.preview : '']" :color="color || formItemVM && formItemVM.color" :readonly="readonly" :disabled="currentDisabled" :opened="popperOpened"
+<div :class="[$style.root, isPreview ? $style.preview : '', isPreview && !$env.VUE_APP_DESIGNER ? $style.disEvent: '']" :color="color || formItemVM && formItemVM.color" :readonly="readonly" :disabled="currentDisabled" :opened="popperOpened"
     :clearable="clearable && !!(filterable ? filterText ||currentText : currentText)" :multiple="multiple" :multiple-tags="multiple && multipleAppearance === 'tags'"
     :prefix="prefix ? prefix : undefined" :suffix="suffix ? suffix : undefined"
     :start="!!prefix"
@@ -303,6 +303,15 @@ export default {
         },
         value(value) {
             this.setSelectedDataQueue(value);
+
+            if (this.filterable && !this.multiple && this.currentDataSource && Array.isArray(this.currentDataSource.data)) {
+              const selectedItem = this.currentDataSource.data.find((d) => this.$at2(d, this.valueField) === value);
+
+              const filterText = selectedItem ? this.$at2(selectedItem, this.field || this.valueField) : '';
+              if (filterText !== this.filterText) {
+                this.filterText = filterText;
+              }
+            }
         },
         selectedDataQueue(value) {
             // 当value有值，并且已经加载过一次数据才能开启判断
@@ -319,12 +328,20 @@ export default {
     },
     created() {
         this.$watch('selectedVM', (selectedVM, oldVM) => {
-            if (selectedVM && oldVM && selectedVM.currentText === oldVM.currentText)
+            if (selectedVM && oldVM && selectedVM.currentText === oldVM.currentText) {
                 return;
-            if (this.filterable)
-                this.filterText = this.selectedVM ? this.selectedVM.currentText : '';
-            else
+            }
+            if (this.filterable) {
+                if (this.selectedVM) {
+                    this.filterText = this.selectedVM.currentText;
+                } else if (!this.value) { // 响应this.value 的变化 = '' 时处理 清空
+                    this.filterText = '';
+                }
+                // blur 事件会处理这个未搜索到置空的问题
+                // this.filterText = ? this.selectedVM.currentText : '';
+            } else {
                 this.currentText = this.selectedVM ? this.selectedVM.currentText : '';
+            }
         });
         this.$watch('selectedVMs', (selectedVMs) => {
             this.currentText = selectedVMs
@@ -525,12 +542,17 @@ export default {
             this.$refs.popper && this.$refs.popper.close();
         },
         toggle(opened) {
+            if (this.isPreview) return;
             this.$refs.popper && this.$refs.popper.toggle(opened);
         },
         designerControl() {
             this.toggle();
         },
         onOpen($event) {
+            // 有时候加载时机问题(v-show 导致的disply:none)，popperWidth会没有获取到，重新获取
+            if (this.currentPopperWidth === '0px') {
+                this.setPopperWidth();
+            }
             this.popperOpened = true; // 刚打开时，除非是没有加载，否则保留上次的 filter 过的数据
             if (this.filterable && this.currentDataSource && !this.currentDataSource.initialLoaded) {
                 this.load().then(() => {

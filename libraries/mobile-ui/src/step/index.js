@@ -19,6 +19,7 @@ export default createComponent({
     status: String,
     readonly: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
+    border: { type: Boolean, default: true },
   },
   computed: {
     isDisabled() {
@@ -161,16 +162,23 @@ export default createComponent({
   },
 
   render() {
-    const { currentStatus, active } = this;
+    const { currentStatus, active, border } = this;
     const { direction } = this.parent;
 
     return (
       <div
         key={this.index}
-        class={[BORDER, bem([direction, {
-          disabled: this.isDisabled,
-          [currentStatus]: currentStatus
-        }])]}
+        class={[
+          BORDER,
+          bem([
+            direction,
+            {
+              disabled: this.isDisabled,
+              [currentStatus]: currentStatus,
+              border,
+            },
+          ]),
+        ]}
       >
         <div
           class={bem('title', { active })}

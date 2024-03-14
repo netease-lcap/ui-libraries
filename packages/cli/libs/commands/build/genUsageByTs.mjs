@@ -4,6 +4,7 @@ import path from 'path';
 import { transform } from '../../transforms/naslTs2Json.js';
 import * as logger from '../../utils/logger.mjs';
 import transformStory2Blocks from '../../transforms/story2block.mjs';
+import { getComponentPathInfo } from '../../index.mjs';
 
 function hasImg(dir) {
   return fs.existsSync(path.join(dir, '0.png'));
@@ -129,24 +130,28 @@ function genUsageByTs(config) {
   const libInfo = [packageInfo.name, '@', packageInfo.version].join('');
 
   components.map((obj) => ({ ...obj })).forEach((component) => {
-    const rootComponentDir = path.join(rootPath, componentsPath);
-    let componentDir = path.join(rootComponentDir, `${component.name}`);
+    const { componentDir, symbol, sourceDir } = getComponentPathInfo(component.name, rootPath, componentsPath);
 
-    // 兼容 mobile-ui 处理
-    const srcCompDir = path.join(rootPath, `./src/${component.name}`);
-    let sourceDir = componentsPath;
-    component.symbol = component.name;
+    component.symbol = symbol;
 
-    if (!fs.existsSync(componentDir)) {
-      if (fs.existsSync(srcCompDir)) {
-        componentDir = srcCompDir;
-        sourceDir = 'src';
-      } else {
-        const name = `${componentDir}.vue`;
-        componentDir = name;
-        component.symbol = `${component.name}.vue`;
-      }
-    }
+    // const rootComponentDir = path.join(rootPath, componentsPath);
+    // let componentDir = path.join(rootComponentDir, `${component.name}`);
+
+    // // 兼容 mobile-ui 处理
+    // const srcCompDir = path.join(rootPath, `./src/${component.name}`);
+    // let sourceDir = componentsPath;
+    // component.symbol = component.name;
+
+    // if (!fs.existsSync(componentDir)) {
+    //   if (fs.existsSync(srcCompDir)) {
+    //     componentDir = srcCompDir;
+    //     sourceDir = 'src';
+    //   } else {
+    //     const name = `${componentDir}.vue`;
+    //     componentDir = name;
+    //     component.symbol = `${component.name}.vue`;
+    //   }
+    // }
 
     const tsPath = `${componentDir}/api.ts`;
     if (!fs.existsSync(tsPath)) {
