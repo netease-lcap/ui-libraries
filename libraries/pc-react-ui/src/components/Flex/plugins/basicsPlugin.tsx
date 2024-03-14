@@ -15,3 +15,15 @@ export function useHandleScroll(props) {
   const result = scroll ? { style: { overflow: 'scroll' } } : {};
   return result;
 }
+
+export function useHandleMatchProps(props) {
+  const directionProps = props.get('direction');
+  const verticalProps = props.get('vertical');
+  const direction = directionProps === 'vertical';
+  const alignmentProps = props.get('alignment');
+  const align = props.get('align');
+  return {
+    vertical: verticalProps ?? direction,
+    align: align ?? alignmentProps,
+  };
+}

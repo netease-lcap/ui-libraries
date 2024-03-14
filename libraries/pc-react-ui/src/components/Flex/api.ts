@@ -57,7 +57,6 @@ namespace nasl.ui {
     })
     scroll: nasl.core.Boolean = false;
 
-
     //     @Prop<FlexOptions, 'mode'>({
     //       group: '主要属性',
     //       title: '布局模式',
@@ -80,7 +79,7 @@ namespace nasl.ui {
     //     })
     //     mode: 'inline' | 'block' | 'flex' = 'block';
 
-    @Prop<FlexOptions, 'vertical'>({
+    @Prop<FlexOptions, 'direction'>({
       group: '主要属性',
       title: '主轴方向',
       docDescription: ` 主轴的方向是否垂直`,
@@ -100,8 +99,8 @@ namespace nasl.ui {
       // onChange: [{ clear: ['justify', 'alignment'] }],
       // tabKind: 'style',
     })
-    // direction: 'horizontal' | 'vertical' = 'horizontal';
-    vertical: false | true = false;
+    direction: 'horizontal' | 'vertical' = 'horizontal';
+    // vertical: false | true = false;
 
     @Prop<FlexOptions, 'justify'>({
       group: '主要属性',
@@ -130,7 +129,7 @@ namespace nasl.ui {
     })
     justify: 'start' | 'center' | 'end' | 'space-between' | 'space-around' = 'start';
 
-    @Prop<FlexOptions, 'align'>({
+    @Prop<FlexOptions, 'alignment'>({
       group: '主要属性',
       title: '交叉轴对齐',
       docDescription: `设置元素在交叉轴方向上的对齐方式：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。`,
@@ -147,7 +146,7 @@ namespace nasl.ui {
       },
       tabKind: 'style',
     })
-    align: 'start' | 'center' | 'end' | 'baseline' | 'stretch' = 'stretch';
+    alignment: 'start' | 'center' | 'end' | 'baseline' | 'stretch' = 'stretch';
 
     @Prop<FlexOptions, 'wrap'>({
       group: '主要属性',
