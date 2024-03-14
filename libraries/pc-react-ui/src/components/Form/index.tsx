@@ -31,7 +31,4 @@ export const FormItem = registerComponet<
   AntdForm.Item,
   { plugin: formItemPlugin, displayName: 'FormItem', mapProps },
 );
-// export const FormItem = AntdForm.Item;
 export const FormList = AntdForm.List;
-// export const FormItemProps = AntdForm.ItemProps;
-// export const FormLGroup = AntdForm.Group;

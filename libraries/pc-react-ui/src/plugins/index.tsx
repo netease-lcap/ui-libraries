@@ -15,10 +15,6 @@ import { ConfigProvider } from 'antd';
 import { $deletePropsList } from '@/plugins/constants';
 import '@/utils/index';
 
-// try {
-// } catch (error) {
-// }
-
 export class Plugin {
   plugin: any[] = [];
 

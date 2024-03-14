@@ -44,7 +44,6 @@ export const 异步函数 = {
     textField: 'entity1.name',
     valueField: 'entity1.id',
     prefix: '1',
-    // prefix
     dataSource: () => new Promise((res) => {
       setTimeout(() => {
         res([
