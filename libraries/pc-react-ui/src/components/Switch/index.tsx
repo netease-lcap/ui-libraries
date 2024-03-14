@@ -1,3 +1,4 @@
+import './theme/vars.css';
 import { Switch as AntdSwitch } from 'antd';
 import type { SwitchProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

@@ -1,0 +1,125 @@
+/**
+ * @component Select
+ * @useGlobalTokens ["--cw-padding-sm","--cw-control-height","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-motion-duration-mid","--cw-motion-ease-in-out","--cw-color-text-placeholder","--cw-font-size-icon","--cw-color-text-quaternary","--cw-motion-duration-slow","--cw-color-text-tertiary","--cw-padding-xs","--cw-control-padding-horizontal-sm","--cw-line-width","--cw-border-radius","--cw-control-height-sm","--cw-border-radius-sm","--cw-font-size-lg","--cw-border-radius-lg","--cw-control-height-xs","--cw-border-radius-xs","--cw-control-height-lg","--cw-control-padding-horizontal","--cw-color-icon","--cw-color-icon-hover","--cw-padding-xxs","--cw-color-bg-elevated","--cw-box-shadow-secondary","--cw-color-text-description","--cw-font-size-sm","--cw-color-primary","--cw-color-bg-container-disabled","--cw-color-text-disabled","--cw-motion-ease-out-quint","--cw-motion-ease-in-quint","--cw-motion-ease-out-circ","--cw-motion-ease-in-out-circ","--cw-color-border","--cw-color-primary-hover","--cw-control-outline","--cw-control-outline-width","--cw-line-type","--cw-color-error","--cw-color-error-hover","--cw-color-error-outline","--cw-color-warning","--cw-color-warning-hover","--cw-color-warning-outline","--cw-color-fill-tertiary","--cw-color-fill-secondary","--cw-color-error-bg","--cw-color-error-bg-hover","--cw-color-warning-bg","--cw-color-warning-bg-hover","--cw-color-bg-container","--cw-color-split"]
+ */
+.cw-nasl.cw-select,
+.cw-nasl.cw-select-css-var {
+  /**
+   * @desc 清空按钮背景色
+   * @type color
+   */
+  --cw-select-clear-bg: #ffffff;
+
+  /**
+   * @desc 多选标签背景色
+   * @type color
+   */
+  --cw-select-multiple-item-bg: rgba(0, 0, 0, 0.06);
+
+  /**
+   * @desc 多选标签边框色
+   * @type input
+   */
+  --cw-select-multiple-item-border-color: transparent;
+
+  /**
+   * @desc 多选标签禁用边框色
+   * @type input
+   */
+  --cw-select-multiple-item-border-color-disabled: transparent;
+
+  /**
+   * @desc 多选标签禁用文本颜色
+   * @type color
+   */
+  --cw-select-multiple-item-color-disabled: rgba(0, 0, 0, 0.25);
+
+  /**
+   * @desc 多选标签高度
+   * @type size
+   */
+  --cw-select-multiple-item-height: 24px;
+
+  /**
+   * @desc 大号多选标签高度
+   * @type size
+   */
+  --cw-select-multiple-item-height-lg: 32px;
+
+  /**
+   * @desc 多选框禁用背景
+   * @type color
+   */
+  --cw-select-multiple-selector-bg-disabled: rgba(0, 0, 0, 0.04);
+
+  /**
+   * @desc 选项激活态时背景色
+   * @type color
+   */
+  --cw-select-option-active-bg: rgba(0, 0, 0, 0.04);
+
+  /**
+   * @desc 选项字体大小
+   * @type size
+   */
+  --cw-select-option-font-size: 14px;
+
+  /**
+   * @desc 选项高度
+   * @type size
+   */
+  --cw-select-option-height: 32px;
+
+  /**
+   * @desc 选项行高
+   * @type input
+   */
+  --cw-select-option-line-height: 1.5714285714285714;
+
+  /**
+   * @desc 选项内间距
+   * @type size
+   */
+  --cw-select-option-padding: 5px 12px;
+
+  /**
+   * @desc 选项选中时背景色
+   * @type color
+   */
+  --cw-select-option-selected-bg: #e6f4ff;
+
+  /**
+   * @desc 选项选中时文本颜色
+   * @type color
+   */
+  --cw-select-option-selected-color: rgba(0, 0, 0, 0.88);
+
+  /**
+   * @desc 选项选中时文本字重
+   * @type input
+   */
+  --cw-select-option-selected-font-weight: 600;
+
+  /**
+   * @desc 选框背景色
+   * @type color
+   */
+  --cw-select-selector-bg: #ffffff;
+
+  /**
+   * @type size
+   */
+  --cw-select-show-arrow-padding-inline-end: 18px;
+
+  /**
+   * @desc 单选大号回填项高度
+   * @type size
+   */
+  --cw-select-single-item-height-lg: 40px;
+
+  /**
+   * @desc 下拉菜单 z-index
+   * @type input
+   */
+  --cw-select-z-index-popup: 1050;
+}

@@ -1,3 +1,4 @@
+import './theme/vars.css';
 import { InputNumber as AntdInputNumber } from 'antd';
 import type { InputNumberProps as AntdInputNumberProps } from 'antd';
 import * as basicsPlugin from './plugins/index';

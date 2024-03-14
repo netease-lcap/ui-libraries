@@ -1,4 +1,5 @@
 // import { ProTable as AntdTable } from '@ant-design/pro-components';
+import './theme/vars.css';
 import React from 'react';
 import { Table as AntdTable } from 'antd';
 import type { TableProps } from 'antd';

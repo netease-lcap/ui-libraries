@@ -1,3 +1,4 @@
+import './theme/vars.css';
 import { Dropdown as AntdDropdown } from 'antd';
 import type { DropDownProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

@@ -1,3 +1,4 @@
+import './theme/vars.css';
 import { Typography as AntdTypography } from 'antd';
 import React from 'react';
 import { registerComponet } from '@/plugins/index';

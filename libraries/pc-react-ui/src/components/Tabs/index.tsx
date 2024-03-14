@@ -1,3 +1,4 @@
+import './theme/vars.css';
 import { Tabs as AntdTabs } from 'antd';
 import type { TabsProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

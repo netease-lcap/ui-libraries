@@ -1,3 +1,4 @@
+import './theme/vars.css';
 import { DatePicker as AntdDatePicker } from 'antd';
 import type { DatePickerProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

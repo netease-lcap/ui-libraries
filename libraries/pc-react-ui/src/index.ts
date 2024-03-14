@@ -1,6 +1,14 @@
 // export { default as Button } from './components/Button/index';
+import './index.css';
+import './theme/vars.css';
+import { Layout, ConfigProvider } from 'antd';
 
-import { Layout } from 'antd';
+ConfigProvider.config({
+  theme: {
+    cssVar: { prefix: 'cw', key: 'cw-nasl' },
+  },
+  prefixCls: 'cw',
+});
 
 export { Layout } from 'antd';
 export const { Header } = Layout;

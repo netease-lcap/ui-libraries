@@ -1,0 +1,24 @@
+/**
+ * @component Drawer
+ * @useGlobalTokens ["--cw-color-bg-mask","--cw-color-bg-elevated","--cw-motion-duration-slow","--cw-motion-duration-mid","--cw-padding","--cw-padding-lg","--cw-font-size-lg","--cw-line-height-lg","--cw-line-width","--cw-line-type","--cw-color-split","--cw-margin-sm","--cw-color-icon","--cw-color-icon-hover","--cw-color-text","--cw-font-weight-strong","--cw-box-shadow-drawer-left","--cw-box-shadow-drawer-right","--cw-box-shadow-drawer-up","--cw-box-shadow-drawer-down"]
+ */
+.cw-nasl.cw-drawer,
+.cw-nasl.cw-drawer-css-var {
+  /**
+   * @desc 底部区域纵向内间距
+   * @type size
+   */
+  --cw-drawer-footer-padding-block: 8px;
+
+  /**
+   * @desc 底部区域横向内间距
+   * @type size
+   */
+  --cw-drawer-footer-padding-inline: 16px;
+
+  /**
+   * @desc 弹窗 z-index
+   * @type input
+   */
+  --cw-drawer-z-index-popup: 1000;
+}

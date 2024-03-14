@@ -1,3 +1,4 @@
+import './theme/vars.css';
 import { Image as AntdImage } from 'antd';
 import type { ImageProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

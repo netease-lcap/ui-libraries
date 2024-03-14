@@ -1,3 +1,4 @@
+import './theme/vars.css';
 // import { ProForm as AntdForm } from '@ant-design/pro-components';
 import { Form as AntdForm, FormProps } from 'antd';
 // import { FormProps } from 'antd';

@@ -1,3 +1,4 @@
+import './theme/vars.css';
 import { Drawer as AntdDrawer } from 'antd';
 import type { DrawerProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

@@ -1,3 +1,4 @@
+import './theme/vars.css';
 import { Cascader as AntdCascader } from 'antd';
 import React from 'react';
 import type { CascaderProps } from 'antd';

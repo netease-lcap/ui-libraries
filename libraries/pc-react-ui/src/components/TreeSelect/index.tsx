@@ -1,3 +1,4 @@
+import './theme/vars.css';
 import { TreeSelect as AntdTreeSelect } from 'antd';
 import type { TreeSelectProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
