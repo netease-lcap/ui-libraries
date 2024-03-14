@@ -1,5 +1,8 @@
 import React from 'react';
-import { ProFormDatePicker, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components';
+import {
+  ProFormDatePicker, QueryFilter, ProFormDateRangePicker, ProFormSelect,
+} from '@ant-design/pro-components';
+import { Form as AntdForm } from 'antd';
 import {
   Input, Button, Form, FormItem, Text,
 } from '@/index';
@@ -32,31 +35,31 @@ export const 默认 = {
       console.log(ref, 'ref');
     }, []);
     return (
-      <Form ref={ref}>
-        <FormItem
-          span={25}
-          label={<Text children="账号" />}
-          rules={[
-            { validate: 'lowerCase', message: '不能出现大写字母', trigger: 'input+blur' },
-            { validate: 'integer', message: '请输入整数', trigger: 'input+blur' },
-            {
-              validate: 'max',
-              args: [30],
-              message: `不能大于${30}`,
-              trigger: 'input+blur',
-            },
-          ]}
-        >
-          <Input />
-        </FormItem>
-        <button
-          onClick={async () => {
-            console.log(await ref.current.validate());
-          }}
-        >
-          123
-        </button>
-      </Form>
+      <div style={{ width: '1000px' }}>
+        <QueryFilter defaultCollapsed split>
+          <AntdForm.Item label="名字">
+            <Input />
+          </AntdForm.Item>
+          <AntdForm.Item label="名字">
+            <Input />
+          </AntdForm.Item>
+          <AntdForm.Item label="名字">
+            <Input />
+          </AntdForm.Item>
+          <AntdForm.Item label="名字">
+            <Input />
+          </AntdForm.Item>
+          <AntdForm.Item label="名字">
+            <Input />
+          </AntdForm.Item>
+          <AntdForm.Item label="名字">
+            <Input />
+          </AntdForm.Item>
+          <AntdForm.Item label="名字">
+            <Input />
+          </AntdForm.Item>
+        </QueryFilter>
+      </div>
     );
   },
 };

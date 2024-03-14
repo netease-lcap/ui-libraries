@@ -114,11 +114,12 @@ useHandlePagination.order = 5;
 
 export function useHandleRowSelection(props) {
   const valueProps = props.get('value');
+  const value = _.isNil(valueProps) ? valueProps : React.Children.toArray(valueProps);
   const onChangeProps = props.get('onChange');
   const rowSelection = props.get('rowSelection');
   const rowSelectionType = props.get('rowSelectionType');
   const [selectedRowKeys, onChange] = useControllableValue(_.filterUnderfinedValue({
-    value: valueProps,
+    value,
     onChange: onChangeProps,
   }));
   const result = fp.cond([

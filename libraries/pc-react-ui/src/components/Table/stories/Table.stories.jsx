@@ -31,11 +31,14 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
-    return <Table {...args} />;
+    const [value, onChange] = React.useState(3);
+    return <Table {...args} value={value} onChange={onChange} />;
   },
   args: {
     title: '12',
     rowSelection: true,
+    rowSelectionType: 'radio',
+    value: 3,
     rowKey: 'key',
     showQuickJumper: true,
     onChange(e) {
