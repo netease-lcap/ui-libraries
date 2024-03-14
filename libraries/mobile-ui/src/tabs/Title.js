@@ -58,9 +58,6 @@ export default createComponent({
 
     genText() {
       const ifDesigner = (this.$env && this.$env.VUE_APP_DESIGNER);
-      
-      console.log('-------------------------')
-      console.log(this.slots(), this.title)
 
       const Text = (
         <span class={bem('text', { ellipsis: !this.scrollable })} vusion-slot-name-edit="title">

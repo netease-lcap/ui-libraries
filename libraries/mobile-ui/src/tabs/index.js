@@ -472,6 +472,7 @@ export default createComponent({
     },
 
     getDataSourceNav(dataSource) {
+      console.log(dataSource, 11)
       return dataSource.map((item, index) => {
         const inDesigner = this.inDesigner && index >= 1;
         return (
@@ -492,7 +493,7 @@ export default createComponent({
               this.onClick(item, index);
             }}
             scopedSlots={{
-              default: () => this.slots('title'),
+              default: () => item[this.textField] || this.slots('title'),
             }}
           >
 
@@ -542,6 +543,7 @@ export default createComponent({
         ) : (
           Wrap
         )}
+    
         <Content
           count={this.children.length}
           animated={animated}

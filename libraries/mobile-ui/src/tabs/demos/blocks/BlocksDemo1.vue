@@ -8,13 +8,11 @@
 
 
     <template #title="current">
-      <van-text text="标签 3"></van-text>
+      <van-text text="标签"></van-text>
     </template>
 
     <template #content="current">
-      <van-tab>
-        内容 3
-      </van-tab>
+      <van-tab>内容</van-tab>
     </template>
 
   </van-tabs>
