@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { Checkbox as AntdCheckbox } from 'antd';
 import type { CheckboxProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

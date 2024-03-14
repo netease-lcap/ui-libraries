@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { Flex as AntdFlex } from 'antd';
 import type { FlexProps } from 'antd';
 import { registerComponet, Plugin } from '@/plugins/index';

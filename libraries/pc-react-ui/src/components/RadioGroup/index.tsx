@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { Radio as AntdRadio } from 'antd';
 import type { RadioProps, RadioGroupProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

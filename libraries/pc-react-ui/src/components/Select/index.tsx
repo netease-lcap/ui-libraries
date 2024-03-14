@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { Select as AntdSelect } from 'antd';
 import type { SelectProps as AntdSelectProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

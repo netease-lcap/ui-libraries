@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { Menu as AntdMenu } from 'antd';
 import type { MenuProps, MenuItemProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

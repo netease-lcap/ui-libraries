@@ -1,0 +1,48 @@
+/**
+ * @component Breadcrumb
+ * @useGlobalTokens ["--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-motion-duration-mid","--cw-padding-xxs","--cw-border-radius-sm","--cw-font-height","--cw-margin-xxs","--cw-color-bg-text-hover","--cw-line-width-focus","--cw-color-primary-border","--cw-font-size-icon"]
+ */
+.cw-nasl.cw-breadcrumb,
+.cw-nasl.cw-breadcrumb-css-var {
+  /**
+   * @desc 图标大小
+   * @type size
+   */
+  --cw-breadcrumb-icon-font-size: 14px;
+
+  /**
+   * @desc 面包屑项文字颜色
+   * @type color
+   */
+  --cw-breadcrumb-item-color: rgba(0, 0, 0, 0.45);
+
+  /**
+   * @desc 最后一项文字颜色
+   * @type color
+   */
+  --cw-breadcrumb-last-item-color: rgba(0, 0, 0, 0.88);
+
+  /**
+   * @desc 链接文字颜色
+   * @type color
+   */
+  --cw-breadcrumb-link-color: rgba(0, 0, 0, 0.45);
+
+  /**
+   * @desc 链接文字悬浮颜色
+   * @type color
+   */
+  --cw-breadcrumb-link-hover-color: rgba(0, 0, 0, 0.88);
+
+  /**
+   * @desc 分隔符颜色
+   * @type color
+   */
+  --cw-breadcrumb-separator-color: rgba(0, 0, 0, 0.45);
+
+  /**
+   * @desc 分隔符外间距
+   * @type size
+   */
+  --cw-breadcrumb-separator-margin: 8px;
+}

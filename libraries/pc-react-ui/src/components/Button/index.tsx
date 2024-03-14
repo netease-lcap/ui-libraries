@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { Button as AntdButton } from 'antd';
 import type { ButtonProps as AntdButtonProps } from 'antd';
 import * as basicsPlugin from './plugins/index';

@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { Tag as AntdTag } from 'antd';
 import type { TagProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

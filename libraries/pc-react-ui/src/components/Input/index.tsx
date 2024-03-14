@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { Input as AntdInput } from 'antd';
 import type { InputProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

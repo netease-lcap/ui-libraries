@@ -1,6 +1,5 @@
 // export { default as Button } from './components/Button/index';
-import './index.css';
-import './theme/vars.css';
+// import './index.css';
 import { Layout, ConfigProvider } from 'antd';
 
 ConfigProvider.config({
@@ -57,6 +56,9 @@ export * from './components/Upload/index';
 export * from './components/Icon/index';
 export * from './components/Tag/index';
 export * from './components/Link/index';
+
+// eslint-disable-next-line import/first
+import 'virtual:theme.css';
 
 // export * from './components/Typography/index';
 // export * from 'antd';

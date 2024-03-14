@@ -1,7 +1,9 @@
 {
   "name": "@lcap/builder",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0",
   "description": "lcap builder utils",
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
   "files": [
     "bin",
     "lib",
@@ -38,6 +40,7 @@
     "vite": "^5.0.0"
   },
   "dependencies": {
-    "consola": "^2.15.3"
+    "consola": "^2.15.3",
+    "fast-glob": "^3.3.2"
   }
 }

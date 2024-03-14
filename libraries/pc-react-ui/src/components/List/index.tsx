@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { List as AntdList } from 'antd';
 import type { ListProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

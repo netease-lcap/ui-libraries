@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { Breadcrumb as AntdBreadcrumb } from 'antd';
 import type { BreadcrumbProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

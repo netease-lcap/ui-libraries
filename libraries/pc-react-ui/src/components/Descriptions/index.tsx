@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { ProDescriptions as AntdDescriptions } from '@ant-design/pro-components';
 import type { ProDescriptionsProps } from '@ant-design/pro-components';
 import { registerComponet } from '@/plugins/index';

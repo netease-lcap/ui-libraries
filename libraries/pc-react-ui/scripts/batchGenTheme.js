@@ -9,7 +9,7 @@ const defaultToken = require('./defaultToken.json');
 const { genCssVarCode, valueAddPx, getCssVarType } = require('./utils');
 
 const cwd = process.cwd();
-const componentFolderPath = path.resolve(cwd, 'src/components');
+const componentFolderPath = path.resolve(cwd, 'src/theme/components');
 const themePath = path.resolve(cwd, 'src/theme');
 
 const globalVars = Object.keys(tokenMeta.global).map((name) => {
@@ -49,22 +49,19 @@ const componentAntMap = {
   'Textarea': 'Input',
   'CheckboxGroup': 'Checkbox',
   'RadioGroup': 'Radio',
+  'Row': 'Grid',
   'DateRangePicker': 'DatePicker'
 };
 
 async function genComponentVars(name) {
   const compPath = path.resolve(componentFolderPath, name);
-  if (!fs.existsSync(compPath)) {
-    console.log('找不到组件文件夹', compPath);
-    return;
-  }
 
   if (!tokenMeta.components[name] && (!componentAntMap[name] || !tokenMeta.components[componentAntMap[name]])) {
-    console.log('Ant Design 中找不到组件', name);
+    console.log('Ant Design Token 中找不到组件', name);
     return;
   }
 
-  const compThemePath = `${compPath}/theme`;
+  const compThemePath = `${compPath}`;
   if (!fs.existsSync(compThemePath)) {
     await fs.mkdir(compThemePath, { recursive: true });
   }
@@ -92,9 +89,45 @@ async function genComponentVars(name) {
     };
   });
 
-  fs.writeFile(themeVarPath, genCssVarCode(vars, mapName || name, compDefaultToken.global));
+  await fs.writeFile(themeVarPath, genCssVarCode(vars, mapName || name, compDefaultToken.global));
 }
 
+async function genComponentThemePreview(name) {
+  const compPath = path.resolve(componentFolderPath, name);
+  const compThemePath = `${compPath}`;
+  if (!fs.existsSync(compThemePath)) {
+    await fs.mkdir(compThemePath, { recursive: true });
+  }
+
+  const themePreviewPath = `${compThemePath}/index.tsx`;
+  const mapName = componentAntMap[name];
+
+  if (!fs.existsSync(`${cwd}/node_modules/antd-token-previewer/es/previews/components/${mapName || name}`)) {
+    console.log('找不到 ant design token preview', mapName || name);
+    return;
+  }
+
+  if (fs.existsSync(themePreviewPath)) {
+    console.log(name, 'theme/index.jsx 已存在，无需重复创建');
+    return;
+  }
+
+  const themePreviewCode = [
+    `import React from 'react';`,
+    `import { Space } from 'antd';`,
+    `import PreviewDemos from 'antd-token-previewer/es/previews/components/${lodash.lowerFirst(mapName || name)}';`,
+    '',
+    'export default () => {',
+    '  return (',
+    '    <Space direction="vertical" style={{ width: '100%' }} size={24}>',
+    '      {...PreviewDemos.map(({ demo }) => demo)}',
+    '    </Space>',
+    '  );',
+    '};',
+    '',
+  ].join('\n');
+  await fs.writeFileSync(themePreviewPath, themePreviewCode);
+}
 
 (async function() {
   await genGlobalVars();
@@ -102,7 +135,8 @@ async function genComponentVars(name) {
     const compInfo = lcapUIConfig.components[i];
 
     if (compInfo && compInfo.name) {
-      genComponentVars(compInfo.name);
+      await genComponentVars(compInfo.name);
+      await genComponentThemePreview(compInfo.name);
     }
   }
 })();

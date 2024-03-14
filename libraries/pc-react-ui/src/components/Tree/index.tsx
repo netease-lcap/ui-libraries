@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { Tree as AntdTree } from 'antd';
 import type { TreeProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

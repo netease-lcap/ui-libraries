@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { Modal as AntdModal } from 'antd';
 import React from 'react';
 import type { ModalProps } from 'antd';

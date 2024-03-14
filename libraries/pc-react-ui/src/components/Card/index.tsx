@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { ProCard as AntdCard } from '@ant-design/pro-components';
 import type { ProCardProps } from '@ant-design/pro-components';
 import { registerComponet } from '@/plugins/index';

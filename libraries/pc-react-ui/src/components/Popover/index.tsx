@@ -1,4 +1,3 @@
-import './theme/vars.css';
 import { Popover as AntdPopover } from 'antd';
 import type { PopoverProps } from 'antd';
 import { registerComponet } from '@/plugins/index';

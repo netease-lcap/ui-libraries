@@ -1,7 +1,7 @@
 /** @type { import('@storybook/react').Preview } */
-import '../src/index.css';
 import React from 'react';
 import { ConfigProvider } from 'antd';
+import 'virtual:theme.css';
 
 const preview = {
   parameters: {

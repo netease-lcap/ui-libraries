@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import autoprefixer from 'autoprefixer';
+import { lcapThemePlugin } from '@lcap/builder';
 
 // 设置测试运行的时区
 process.env.TZ = 'Asia/Shanghai';
@@ -12,7 +13,7 @@ process.env.TZ = 'Asia/Shanghai';
 export default defineConfig(({ mode, command }) => {
   return {
     publicDir: 'dist-theme',
-    plugins: [react()],
+    plugins: [react(), lcapThemePlugin()],
     css: {
       postcss: {
         plugins: [
