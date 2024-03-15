@@ -4,6 +4,13 @@ module.exports = {
   blockGenerateType: 'story',
   components: [
     { group: 'Form', name: 'Select', alias: '选择器' },
+    {
+      group: 'Form',
+      name: 'FormSelect',
+      alias: '表单选择器',
+      apiPath: 'Select/FormSelect.api.ts',
+      show: false,
+    },
     { group: 'Form', name: 'InputNumber', alias: '数字输入' },
     // { group: 'Form', name: 'Transfer', alias: '穿梭框' },
     { group: 'Form', name: 'Switch', alias: '开关' },
