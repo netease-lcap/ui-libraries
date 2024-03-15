@@ -97,10 +97,6 @@ export default createComponent({
       type: String,
       default: 'json',
     },
-    readonly: {
-      type: Boolean,
-      default: false,
-    },
     access: {
       type: String,
       default: null,
@@ -398,6 +394,11 @@ export default createComponent({
     },
 
     onDelete(file, index) {
+      // 禁用、只读状态下不可删除
+      if (this.disabled || this.readonly) {
+        return;
+      }
+
       const beforeDelete = file.beforeDelete ?? this.beforeDelete;
       if (beforeDelete) {
         const response = beforeDelete(file, this.getDetail(index));
@@ -585,7 +586,7 @@ export default createComponent({
           {Preview}
           {this.genPreviewMask(item)}
           {DeleteIcon}
-         
+
         </div>
          {item.errorMsg && getErrMsg(item.errorMsg) && <div class={bem("err-info")}>
           <Icon class={bem('err-info-icon')} name="info" />
@@ -599,7 +600,7 @@ export default createComponent({
           </PopoverCombination>
         </div>}
         </div>
-      ); 
+      );
     },
 
     genPreviewList() {
@@ -654,7 +655,7 @@ export default createComponent({
           {this.uploadText && (
             <span class={bem('upload-text')}>{this.uploadText}</span>
           )}
-          
+
           {Input}
         </div>
       );
