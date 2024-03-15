@@ -3,7 +3,7 @@
   <u-loading v-if="loading" size="small"></u-loading>
   <template v-else>
     <div :class="$style[checkAllDisplay]">
-      <div v-if="checkAll" :style="{ width: checkAllWidth, 'flex-shrink': 0 }">
+      <div v-if="checkAll" :style="{ 'min-width': checkAllWidth, 'flex-shrink': 0 }">
         <u-checkbox label="check-all" :value="all" :disabled="disabled" :readonly="readonly">
           <slot name="check-all">
             <u-text :text="checkAllText"></u-text>
