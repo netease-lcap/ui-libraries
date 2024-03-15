@@ -32,17 +32,24 @@ exports.genCssVarCode = (vars, compName, useGlobalTokens) => {
     return codes.join('\n');
   });
 
-  let dependencyAnnotaton = '';
-  if (compName && useGlobalTokens && useGlobalTokens.length > 0) {
+  let dependencyAnnotaton = [];
+  if (compName) {
     dependencyAnnotaton = [
       '/**',
       ` * @component ${compName}`,
-      ` * @useGlobalTokens ${JSON.stringify(useGlobalTokens.map((token) => `--${prefix}${lodash.kebabCase(token)}`))}`,
       ' */\n',
-    ].join('\n');
+    ];
   }
 
-  return `${dependencyAnnotaton}${cssNames.join('')} {\n${varCodes.join('\n\n')}\n}`;
+  if (useGlobalTokens && useGlobalTokens.length > 0) {
+    dependencyAnnotaton.splice(
+      dependencyAnnotaton.length - 2,
+      0,
+      ` * @useGlobalTokens ${JSON.stringify(useGlobalTokens.map((token) => `--${prefix}${lodash.kebabCase(token)}`))}`,
+    );
+  }
+
+  return `${dependencyAnnotaton.join('\n')}${cssNames.join('')} {\n${varCodes.join('\n\n')}\n}`;
 }
 
 const isUnitlessNumber = {

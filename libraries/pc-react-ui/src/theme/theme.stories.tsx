@@ -1,6 +1,5 @@
 import React from 'react';
-import { Card, Flex } from 'antd';
-import ComponentPreivews from 'virtual:lcap-theme-component-previews.js';
+import ComponentPreivew, { demos } from 'virtual:lcap-theme-component-previews.js';
 import Dashboard from './previews/dashboard';
 import Form from './previews/form';
 
@@ -8,7 +7,16 @@ import Form from './previews/form';
 export default {
   title: 'ThemePreviews',
   parameters: {
-    layout: 'fullscreen',
+    // layout: 'fullscreen',
+    backgrounds: {
+      default: 'twitter',
+      values: [
+        {
+          name: 'twitter',
+          value: '#f5f5f5',
+        },
+      ],
+    },
   },
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
@@ -32,25 +40,13 @@ export const FormPage = {
 
 export const Components = {
   name: '组件预览',
-  render: ({ componentNames }) => (
-    <Flex gap={24} vertical style={{ backgroundColor: '#f5f5f5', padding: 20 }}>
-      {
-        ...(ComponentPreivews as any[]).filter((c) => componentNames.includes(c.name)).map((c) => {
-          return (
-            <Card title={c.name}>
-              <c.demo />
-            </Card>
-          );
-        })
-      }
-    </Flex>
-  ),
+  render: ComponentPreivew,
   args: {
     componentNames: ['Button', 'List', 'Tree'],
   },
   argTypes: {
     componentNames: {
-      options: ComponentPreivews.map((c) => c.name),
+      options: demos.map((c) => c.name),
       control: { type: 'multi-select' }, // Automatically inferred when 'options' is defined
     },
   },

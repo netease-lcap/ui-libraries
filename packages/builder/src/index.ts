@@ -1,6 +1,5 @@
-import lcapThemePlugin, { LcapThemePluginOption } from './plugins/lcap-theme';
+import lcapPlugin from './plugins';
 
 export {
-  LcapThemePluginOption,
-  lcapThemePlugin,
+  lcapPlugin,
 };

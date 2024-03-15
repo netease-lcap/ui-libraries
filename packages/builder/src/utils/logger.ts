@@ -109,4 +109,4 @@ export const createLogger: CreateLogger = (namespace) => {
   return extendLoggerInstance(consola.withTag(namespace));
 };
 
-export const logger = createLogger();
+export default createLogger();
