@@ -1,11 +1,20 @@
 import path from 'path';
 import glob from 'fast-glob';
+import fs from 'fs-extra';
 import { Plugin } from 'vite';
-import { virtualThemeCSSFileId, virtualThemeComponentStoriesFileId } from '../constants/virtual-file-names';
+import {
+  virtualThemeCSSFileId,
+  virtualThemeComponentStoriesFileId,
+  virtualThemePagePreviewFileId,
+  virtualThemeEntryFileId,
+  virtualReactUIFileId,
+} from '../constants/virtual-file-names';
+import { themePath } from '../constants/input-paths';
 
 export interface LcapCodeGenOption {
   themeVarCssPath?: string;
   themeComponentFolder?: string;
+  previewPages?: Array<{ name: string; title: string }>;
   framework?: 'react' | 'vue2' | 'taro' | 'vue3',
 }
 
@@ -55,13 +64,54 @@ function genComponentStoriesCode(componentFolder, framework) {
   ].join('\n\n');
 }
 
+function genThemePagePreviewMapCode(componentFolder, previewPages: Array<{ name: string; title: string }> = []) {
+  const importCodes: string[] = [];
+  const exportCodes: string[] = [];
+
+  previewPages.forEach(({ name }) => {
+    importCodes.push(`import ${name} from '${path.resolve(componentFolder, `../previews/${name}`)}';`);
+    exportCodes.push(`  ${name},`);
+  });
+
+  exportCodes.unshift('export default {');
+  exportCodes.push('};');
+
+  return [
+    importCodes.join('\n'),
+    exportCodes.join('\n'),
+  ].join('\n\n');
+}
+
+function genThemeEntryCode(framework) {
+  const importCodes: string[] = [
+    'import React from \'react\';',
+    'import ReactDOM from \'react-dom/client\'',
+    `import App from '${path.resolve(__dirname, `../../input/${framework}/App`)}';`,
+  ];
+
+  const bodyCodes: string[] = [
+    'const root = ReactDOM.createRoot(document.getElementById("app"));',
+    'root.render(React.createElement(App, {}))',
+  ];
+
+  return [
+    importCodes.join('\n'),
+    bodyCodes.join('\n'),
+  ].join('\n\n');
+}
+
 export default (options: LcapCodeGenOption = {}) => {
   const cwd = process.cwd();
+  let themeId;
   const themeVarCssPath = path.resolve(cwd, options.themeVarCssPath || defaultOptions.themeVarCssPath);
   const componentFolder = path.resolve(cwd, options.themeComponentFolder || defaultOptions.themeComponentFolder);
 
   return {
     name: 'vite-lcap:code-gen', // 必须的，将会在 warning 和 error 中显示
+    enforce: 'pre',
+    configResolved(config) {
+      themeId = `${config.root}/index.html`;
+    },
     resolveId(source) {
       if (source === virtualThemeCSSFileId) {
         return virtualThemeCSSFileId;
@@ -69,6 +119,22 @@ export default (options: LcapCodeGenOption = {}) => {
 
       if (source === virtualThemeComponentStoriesFileId) {
         return virtualThemeComponentStoriesFileId;
+      }
+
+      if (source === virtualThemePagePreviewFileId) {
+        return virtualThemePagePreviewFileId;
+      }
+
+      if (source === virtualThemeEntryFileId) {
+        return virtualThemeEntryFileId;
+      }
+
+      if (source === themePath) {
+        return themeId;
+      }
+
+      if (source === virtualReactUIFileId) {
+        return virtualReactUIFileId;
       }
 
       return undefined;
@@ -80,6 +146,21 @@ export default (options: LcapCodeGenOption = {}) => {
 
       if (id === virtualThemeComponentStoriesFileId) {
         return genComponentStoriesCode(componentFolder, options.framework);
+      }
+
+      if (id === virtualThemePagePreviewFileId) {
+        return genThemePagePreviewMapCode(componentFolder, options.previewPages);
+      }
+
+      if (id === virtualThemeEntryFileId) {
+        return genThemeEntryCode(options.framework);
+      }
+
+      if (id === themeId) {
+        return fs.readFileSync(
+          themePath,
+          'utf-8',
+        );
       }
 
       return undefined;

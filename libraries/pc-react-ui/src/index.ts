@@ -2,14 +2,7 @@
 // import './index.css';
 import { Layout, ConfigProvider } from 'antd';
 
-ConfigProvider.config({
-  theme: {
-    cssVar: { prefix: 'cw', key: 'cw-nasl' },
-  },
-  prefixCls: 'cw',
-});
-
-export { Layout } from 'antd';
+export { Layout, ConfigProvider };
 export const { Header } = Layout;
 export * from './components/Button/index';
 // export { default as Select } from './components/Select/index';

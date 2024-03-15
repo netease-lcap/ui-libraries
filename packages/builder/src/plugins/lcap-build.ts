@@ -1,6 +1,7 @@
 import type { Plugin } from 'vite';
 import fs from 'fs-extra';
 import genThemeConfig from '../nasl/gen-theme-config';
+import { buildTheme } from '../build/vite-build-theme';
 import logger from '../utils/logger';
 
 export interface LcapThemeOptions {
@@ -30,6 +31,10 @@ export default (options: ViteLcapPluginOptions = {}) => {
 
       logger.success('生成 theme.config.json 成功！');
       await fs.writeJSONSync('dist-theme/theme.config.json', themeConfig, { spaces: 2 });
+      logger.start('开始构建 theme');
+
+      await buildTheme(themeConfig);
+      logger.success('构建theme 成功');
     },
   } as Plugin;
 };

@@ -9,6 +9,16 @@
     "lib",
     "input"
   ],
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "node": "./lib/index.js",
+      "require": "./lib/index.js",
+      "import": "./lib/index.js"
+    },
+    "./input/theme.html": "./input/theme.html",
+    "./package.json": "./package.json"
+  },
   "bin": {},
   "scripts": {
     "watch": "tsc -w --sourceMap",
