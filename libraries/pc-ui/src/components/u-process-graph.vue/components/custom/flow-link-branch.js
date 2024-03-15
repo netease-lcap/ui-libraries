@@ -1,4 +1,3 @@
-import { toRaw } from 'vue';
 import { BaseLink } from '@joskii/jflow-core';
 import {
     isHorizontal,
@@ -94,7 +93,7 @@ class FlowLink extends BaseLink {
         this.radius = configs.radius || 0;
         this.lineDash = configs.lineDash;
         // middle bend points
-        this.waypoints = toRaw(configs.waypoints || []);
+        this.waypoints = (configs.waypoints || []);
         this.showLineSeg = configs.showLineSeg;
         this.showAdd = configs.showAdd;
         this.showContent = configs.showContent;
