@@ -289,6 +289,7 @@ namespace nasl.ui {
       ],
     })
     slotDefault: () => Array<FormItem>;
+    // slotDefault: () => Array<ViewComponent>;
   }
 
   @Component({

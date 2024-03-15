@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select, SelectOption } from '../index';
+import { Select, SelectOption, FormSelect } from '../index';
 // import Select from 'antd';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -29,6 +29,14 @@ export const 异步函数 = {
         <SelectOption key="1" label="1" value="1" />
         <SelectOption key="2" label="2" value="2" disabled />
       </Select>
+    );
+  },
+};
+
+export const 表单 = {
+  render: () => {
+    return (
+      <FormSelect />
     );
   },
 };

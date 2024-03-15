@@ -4,7 +4,7 @@ import {
 } from '@ant-design/pro-components';
 import { Form as AntdForm } from 'antd';
 import {
-  Input, Button, Form, FormItem, Text,
+  Input, Button, Form, FormItem, Text, Select,
 } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -35,31 +35,16 @@ export const 默认 = {
       console.log(ref, 'ref');
     }, []);
     return (
-      <div style={{ width: '1000px' }}>
-        <QueryFilter defaultCollapsed split>
-          <AntdForm.Item label="名字">
-            <Input />
-          </AntdForm.Item>
-          <AntdForm.Item label="名字">
-            <Input />
-          </AntdForm.Item>
-          <AntdForm.Item label="名字">
-            <Input />
-          </AntdForm.Item>
-          <AntdForm.Item label="名字">
-            <Input />
-          </AntdForm.Item>
-          <AntdForm.Item label="名字">
-            <Input />
-          </AntdForm.Item>
-          <AntdForm.Item label="名字">
-            <Input />
-          </AntdForm.Item>
-          <AntdForm.Item label="名字">
-            <Input />
-          </AntdForm.Item>
-        </QueryFilter>
-      </div>
+      <Form>
+        <FormItem name="sex">
+          <Select
+            dataSource={[
+              { value: 1, label: '男' },
+              { value: 2, label: '女' },
+            ]}
+          />
+        </FormItem>
+      </Form>
     );
   },
 };

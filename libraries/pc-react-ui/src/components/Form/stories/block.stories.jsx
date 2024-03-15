@@ -2,7 +2,7 @@ import React from 'react';
 // import { ProFormDatePicker, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components';
 import { Form, FormItem } from '../index';
 import {
-  Input, Button, Col, Text,
+  Input, Button, Col, Text, Select, FormSelect,
 } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export

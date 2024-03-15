@@ -26,7 +26,7 @@ export const Form = registerComponet<
 
 export const FormItem = registerComponet<
   FormProps,
-  pluginType<FormProps>
+  FormProps
 >(
   AntdForm.Item,
   { plugin: formItemPlugin, displayName: 'FormItem', mapProps },
