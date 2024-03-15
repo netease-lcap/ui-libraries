@@ -13,7 +13,91 @@ exports[`u-tree-view-new.vue > Demo-Data 方式 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.3
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.4
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -25,7 +109,9 @@ exports[`u-tree-view-new.vue > Demo-Data 方式 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -37,7 +123,36 @@ exports[`u-tree-view-new.vue > Demo-Data 方式 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 3.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 3.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <!---->
   </div>
@@ -49,7 +164,7 @@ exports[`u-tree-view-new.vue > Demo-Data 方式 2`] = `
   <div class="root">
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
-        <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+        <div class="expander" expand-trigger="click" expanded="true" style="width: 30px;"></div>
         <div class="text" draggable="false" style="margin-left: 30px;">
           <!---->
           <span vusion-slot-name="item">节点 1
@@ -57,7 +172,91 @@ exports[`u-tree-view-new.vue > Demo-Data 方式 2`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" selected="selected" style="padding-left: 30px;" tabindex="0">
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.3
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.4
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -69,7 +268,9 @@ exports[`u-tree-view-new.vue > Demo-Data 方式 2`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -81,7 +282,36 @@ exports[`u-tree-view-new.vue > Demo-Data 方式 2`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 3.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 3.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <!---->
   </div>
@@ -101,7 +331,91 @@ exports[`u-tree-view-new.vue > Demo-Data 方式 3`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" disabled="disabled" style="padding-left: 30px;" tabindex>
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <div class="root">
+              <div class="item" disabled="disabled" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" disabled="disabled" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" disabled="disabled" style="padding-left: 30px;" tabindex>
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.3
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.4
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <div class="root">
       <div class="item" disabled="disabled" style="padding-left: 0px;" tabindex>
@@ -113,7 +427,9 @@ exports[`u-tree-view-new.vue > Demo-Data 方式 3`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -125,7 +441,36 @@ exports[`u-tree-view-new.vue > Demo-Data 方式 3`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 3.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 3.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <!---->
   </div>
@@ -145,7 +490,9 @@ exports[`u-tree-view-new.vue > Demo-Tag 和 Data 混合 1`] = `
         </span>
       </div>
     </div>
-    <!---->
+    <div class="sub" style="display: none;">
+      <!---->
+    </div>
   </div>
   <div class="root">
     <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -157,7 +504,9 @@ exports[`u-tree-view-new.vue > Demo-Tag 和 Data 混合 1`] = `
         </span>
       </div>
     </div>
-    <!---->
+    <div class="sub" style="display: none;">
+      <!---->
+    </div>
   </div>
   <!---->
   <div class="root">
@@ -170,7 +519,9 @@ exports[`u-tree-view-new.vue > Demo-Tag 和 Data 混合 1`] = `
         </span>
       </div>
     </div>
-    <!---->
+    <div class="sub" style="display: none;">
+      <!---->
+    </div>
   </div>
 </div>
 `;
@@ -181,7 +532,7 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 1`] = `
     <!---->
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
-        <!---->
+        <div class="expander" expand-trigger="click" style="width: 30px;"></div>
         <div class="text" draggable="false" style="margin-left: 30px;">
           <!---->
           <span vusion-slot-name="item">节点 1
@@ -189,7 +540,93 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.3
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.4
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -201,11 +638,13 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
-        <!---->
+        <div class="expander" expand-trigger="click" style="width: 30px;"></div>
         <div class="text" draggable="false" style="margin-left: 30px;">
           <!---->
           <span vusion-slot-name="item">节点 3
@@ -213,7 +652,37 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 3.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 3.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -225,7 +694,7 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 2`] = `
     <!---->
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
-        <!---->
+        <div class="expander" expand-trigger="click" expanded="true" style="width: 30px;"></div>
         <div class="text" draggable="false" style="margin-left: 30px;">
           <!---->
           <span vusion-slot-name="item">节点 1
@@ -233,7 +702,93 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 2`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style>
+        <!---->
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" selected="selected" style="padding-left: 30px;" tabindex="0">
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.3
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.4
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -245,11 +800,13 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 2`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
-        <!---->
+        <div class="expander" expand-trigger="click" style="width: 30px;"></div>
         <div class="text" draggable="false" style="margin-left: 30px;">
           <!---->
           <span vusion-slot-name="item">节点 3
@@ -257,7 +814,37 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 2`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 3.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 3.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -271,7 +858,7 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 3`] = `
         <!---->
         <div class="root">
           <div class="item" readonly="readonly" style="padding-left: 0px;" tabindex>
-            <!---->
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
             <div class="text" draggable="false" style="margin-left: 30px;">
               <!---->
               <span vusion-slot-name="item">节点 1
@@ -279,7 +866,93 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 3`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" readonly="readonly" style="padding-left: 30px;" tabindex>
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" readonly="readonly" style="padding-left: 30px;" tabindex>
+                <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+                <div class="root">
+                  <div class="item" readonly="readonly" style="padding-left: 60px;" tabindex>
+                    <!---->
+                    <div class="text" draggable="false" style="margin-left: 30px;">
+                      <!---->
+                      <span vusion-slot-name="item">节点 1.2.1
+                        <!---->
+                      </span>
+                    </div>
+                  </div>
+                  <div class="sub" style="display: none;">
+                    <!---->
+                  </div>
+                </div>
+                <div class="root">
+                  <div class="item" readonly="readonly" style="padding-left: 60px;" tabindex>
+                    <!---->
+                    <div class="text" draggable="false" style="margin-left: 30px;">
+                      <!---->
+                      <span vusion-slot-name="item">节点 1.2.2
+                        <!---->
+                      </span>
+                    </div>
+                  </div>
+                  <div class="sub" style="display: none;">
+                    <!---->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" readonly="readonly" style="padding-left: 30px;" tabindex>
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.3
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" readonly="readonly" style="padding-left: 30px;" tabindex>
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.4
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
         </div>
         <div class="root">
           <div class="item" readonly="readonly" style="padding-left: 0px;" tabindex>
@@ -291,11 +964,13 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 3`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
         </div>
         <div class="root">
           <div class="item" readonly="readonly" style="padding-left: 0px;" tabindex>
-            <!---->
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
             <div class="text" draggable="false" style="margin-left: 30px;">
               <!---->
               <span vusion-slot-name="item">节点 3
@@ -303,7 +978,37 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 3`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" readonly="readonly" style="padding-left: 30px;" tabindex>
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 3.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" readonly="readonly" style="padding-left: 30px;" tabindex>
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 3.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!---->
@@ -313,7 +1018,7 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 3`] = `
         <!---->
         <div class="root">
           <div class="item" disabled="disabled" style="padding-left: 0px;" tabindex>
-            <!---->
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
             <div class="text" draggable="false" style="margin-left: 30px;">
               <!---->
               <span vusion-slot-name="item">节点 1
@@ -321,7 +1026,93 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 3`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" disabled="disabled" style="padding-left: 30px;" tabindex>
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" disabled="disabled" style="padding-left: 30px;" tabindex>
+                <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+                <div class="root">
+                  <div class="item" disabled="disabled" style="padding-left: 60px;" tabindex>
+                    <!---->
+                    <div class="text" draggable="false" style="margin-left: 30px;">
+                      <!---->
+                      <span vusion-slot-name="item">节点 1.2.1
+                        <!---->
+                      </span>
+                    </div>
+                  </div>
+                  <div class="sub" style="display: none;">
+                    <!---->
+                  </div>
+                </div>
+                <div class="root">
+                  <div class="item" disabled="disabled" style="padding-left: 60px;" tabindex>
+                    <!---->
+                    <div class="text" draggable="false" style="margin-left: 30px;">
+                      <!---->
+                      <span vusion-slot-name="item">节点 1.2.2
+                        <!---->
+                      </span>
+                    </div>
+                  </div>
+                  <div class="sub" style="display: none;">
+                    <!---->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" disabled="disabled" style="padding-left: 30px;" tabindex>
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.3
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" disabled="disabled" style="padding-left: 30px;" tabindex>
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.4
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
         </div>
         <div class="root">
           <div class="item" disabled="disabled" style="padding-left: 0px;" tabindex>
@@ -333,11 +1124,13 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 3`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
         </div>
         <div class="root">
           <div class="item" disabled="disabled" style="padding-left: 0px;" tabindex>
-            <!---->
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
             <div class="text" draggable="false" style="margin-left: 30px;">
               <!---->
               <span vusion-slot-name="item">节点 3
@@ -345,7 +1138,37 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 3`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" disabled="disabled" style="padding-left: 30px;" tabindex>
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 3.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" disabled="disabled" style="padding-left: 30px;" tabindex>
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 3.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!---->
@@ -355,7 +1178,7 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 3`] = `
         <!---->
         <div class="root">
           <div class="item" style="padding-left: 0px;" tabindex="0">
-            <!---->
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
             <div class="text" draggable="false" style="margin-left: 30px;">
               <!---->
               <span vusion-slot-name="item">节点 1
@@ -363,7 +1186,93 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 3`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" style="padding-left: 30px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" disabled="disabled" style="padding-left: 30px;" tabindex>
+                <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+                <div class="root">
+                  <div class="item" disabled="disabled" style="padding-left: 60px;" tabindex="0">
+                    <!---->
+                    <div class="text" draggable="false" style="margin-left: 30px;">
+                      <!---->
+                      <span vusion-slot-name="item">节点 1.2.1
+                        <!---->
+                      </span>
+                    </div>
+                  </div>
+                  <div class="sub" style="display: none;">
+                    <!---->
+                  </div>
+                </div>
+                <div class="root">
+                  <div class="item" disabled="disabled" style="padding-left: 60px;" tabindex="0">
+                    <!---->
+                    <div class="text" draggable="false" style="margin-left: 30px;">
+                      <!---->
+                      <span vusion-slot-name="item">节点 1.2.2
+                        <!---->
+                      </span>
+                    </div>
+                  </div>
+                  <div class="sub" style="display: none;">
+                    <!---->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" disabled="disabled" style="padding-left: 30px;" tabindex>
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.3
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 30px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.4
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
         </div>
         <div class="root">
           <div class="item" disabled="disabled" style="padding-left: 0px;" tabindex>
@@ -375,11 +1284,13 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 3`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
         </div>
         <div class="root">
           <div class="item" style="padding-left: 0px;" tabindex="0">
-            <!---->
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
             <div class="text" draggable="false" style="margin-left: 30px;">
               <!---->
               <span vusion-slot-name="item">节点 3
@@ -387,7 +1298,37 @@ exports[`u-tree-view-new.vue > Demo-Tag 方式 3`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" style="padding-left: 30px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 3.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 30px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 3.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!---->
@@ -409,7 +1350,45 @@ exports[`u-tree-view-new.vue > Demo-一维Data 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点6
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点5
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;"></div>
+        </div>
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -421,7 +1400,7 @@ exports[`u-tree-view-new.vue > Demo-一维Data 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;"></div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -433,7 +1412,7 @@ exports[`u-tree-view-new.vue > Demo-一维Data 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;"></div>
     </div>
     <!---->
   </div>
@@ -454,7 +1433,97 @@ exports[`u-tree-view-new.vue > Demo-动态数据支持下拉框选择属性 1`] 
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">节点 1.1 - 1.1</span>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">节点 1.2 - 1.2</span>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">
+                    <span class="root" vusion-slot-name-edit="text">节点 1.2.1 - 1.2.1</span>
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">
+                    <span class="root" vusion-slot-name-edit="text">节点 1.2.2 - 1.2.2</span>
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">节点 1.3 - 1.3</span>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">节点 1.4 - 1.4</span>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -467,7 +1536,9 @@ exports[`u-tree-view-new.vue > Demo-动态数据支持下拉框选择属性 1`] 
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -480,7 +1551,38 @@ exports[`u-tree-view-new.vue > Demo-动态数据支持下拉框选择属性 1`] 
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">节点 3.1 - 3.1</span>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">节点 3.2 - 3.2</span>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <!---->
   </div>
@@ -501,7 +1603,97 @@ exports[`u-tree-view-new.vue > Demo-动态数据支持插槽 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">节点 1.1 - 1.1</span>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">节点 1.2 - 1.2</span>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">
+                    <span class="root" vusion-slot-name-edit="text">节点 1.2.1 - 1.2.1</span>
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">
+                    <span class="root" vusion-slot-name-edit="text">节点 1.2.2 - 1.2.2</span>
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">节点 1.3 - 1.3</span>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">节点 1.4 - 1.4</span>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -514,7 +1706,9 @@ exports[`u-tree-view-new.vue > Demo-动态数据支持插槽 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -527,7 +1721,38 @@ exports[`u-tree-view-new.vue > Demo-动态数据支持插槽 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">节点 3.1 - 3.1</span>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">节点 3.2 - 3.2</span>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <!---->
   </div>
@@ -540,7 +1765,7 @@ exports[`u-tree-view-new.vue > Demo-可取消 1`] = `
     <!---->
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
-        <!---->
+        <div class="expander" expand-trigger="click" style="width: 30px;"></div>
         <div class="text" draggable="false" style="margin-left: 30px;">
           <!---->
           <span vusion-slot-name="item">节点 1
@@ -548,7 +1773,93 @@ exports[`u-tree-view-new.vue > Demo-可取消 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.3
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.4
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -560,11 +1871,13 @@ exports[`u-tree-view-new.vue > Demo-可取消 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
-        <!---->
+        <div class="expander" expand-trigger="click" style="width: 30px;"></div>
         <div class="text" draggable="false" style="margin-left: 30px;">
           <!---->
           <span vusion-slot-name="item">节点 3
@@ -572,7 +1885,37 @@ exports[`u-tree-view-new.vue > Demo-可取消 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 3.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 3.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -617,7 +1960,9 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
             </span>
           </div>
         </div>
-        <!---->
+        <div class="sub" style="display: none;">
+          <!---->
+        </div>
       </div>
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
@@ -650,7 +1995,9 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
                 </span>
               </div>
             </div>
-            <!---->
+            <div class="sub" style="display: none;">
+              <!---->
+            </div>
           </div>
           <div class="root">
             <div class="item" style="padding-left: 60px;" tabindex="0">
@@ -667,7 +2014,9 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
                 </span>
               </div>
             </div>
-            <!---->
+            <div class="sub" style="display: none;">
+              <!---->
+            </div>
           </div>
         </div>
       </div>
@@ -686,7 +2035,9 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
             </span>
           </div>
         </div>
-        <!---->
+        <div class="sub" style="display: none;">
+          <!---->
+        </div>
       </div>
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
@@ -703,7 +2054,9 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
             </span>
           </div>
         </div>
-        <!---->
+        <div class="sub" style="display: none;">
+          <!---->
+        </div>
       </div>
     </div>
   </div>
@@ -722,7 +2075,9 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
         </span>
       </div>
     </div>
-    <!---->
+    <div class="sub" style="display: none;">
+      <!---->
+    </div>
   </div>
   <div class="root">
     <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -739,7 +2094,9 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
         </span>
       </div>
     </div>
-    <!---->
+    <div class="sub" style="display: none;">
+      <!---->
+    </div>
   </div>
   <!---->
 </div>
@@ -778,7 +2135,9 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
             </span>
           </div>
         </div>
-        <!---->
+        <div class="sub" style="display: none;">
+          <!---->
+        </div>
       </div>
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
@@ -811,7 +2170,9 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
                 </span>
               </div>
             </div>
-            <!---->
+            <div class="sub" style="display: none;">
+              <!---->
+            </div>
           </div>
           <div class="root">
             <div class="item" style="padding-left: 60px;" tabindex="0">
@@ -828,7 +2189,9 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
                 </span>
               </div>
             </div>
-            <!---->
+            <div class="sub" style="display: none;">
+              <!---->
+            </div>
           </div>
         </div>
       </div>
@@ -847,7 +2210,9 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
             </span>
           </div>
         </div>
-        <!---->
+        <div class="sub" style="display: none;">
+          <!---->
+        </div>
       </div>
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
@@ -864,7 +2229,9 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
             </span>
           </div>
         </div>
-        <!---->
+        <div class="sub" style="display: none;">
+          <!---->
+        </div>
       </div>
     </div>
   </div>
@@ -883,7 +2250,9 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
         </span>
       </div>
     </div>
-    <!---->
+    <div class="sub" style="display: none;">
+      <!---->
+    </div>
   </div>
   <div class="root">
     <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -900,7 +2269,9 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
         </span>
       </div>
     </div>
-    <!---->
+    <div class="sub" style="display: none;">
+      <!---->
+    </div>
   </div>
   <!---->
 </div>
@@ -939,7 +2310,9 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
             </span>
           </div>
         </div>
-        <!---->
+        <div class="sub" style="display: none;">
+          <!---->
+        </div>
       </div>
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
@@ -972,7 +2345,9 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
                 </span>
               </div>
             </div>
-            <!---->
+            <div class="sub" style="display: none;">
+              <!---->
+            </div>
           </div>
           <div class="root">
             <div class="item" style="padding-left: 60px;" tabindex="0">
@@ -989,7 +2364,9 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
                 </span>
               </div>
             </div>
-            <!---->
+            <div class="sub" style="display: none;">
+              <!---->
+            </div>
           </div>
         </div>
       </div>
@@ -1008,7 +2385,9 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
             </span>
           </div>
         </div>
-        <!---->
+        <div class="sub" style="display: none;">
+          <!---->
+        </div>
       </div>
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
@@ -1025,7 +2404,9 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
             </span>
           </div>
         </div>
-        <!---->
+        <div class="sub" style="display: none;">
+          <!---->
+        </div>
       </div>
     </div>
   </div>
@@ -1044,7 +2425,9 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
         </span>
       </div>
     </div>
-    <!---->
+    <div class="sub" style="display: none;">
+      <!---->
+    </div>
   </div>
   <div class="root">
     <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -1061,7 +2444,9 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
         </span>
       </div>
     </div>
-    <!---->
+    <div class="sub" style="display: none;">
+      <!---->
+    </div>
   </div>
   <!---->
 </div>
@@ -1102,7 +2487,35 @@ exports[`u-tree-view-new.vue > Demo-实例 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">二级部门a</span>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">
+                    <span class="root" vusion-slot-name-edit="text">三级部门a</span>
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -1115,7 +2528,7 @@ exports[`u-tree-view-new.vue > Demo-实例 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;"></div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -1128,7 +2541,7 @@ exports[`u-tree-view-new.vue > Demo-实例 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;"></div>
     </div>
     <!---->
   </div>
@@ -1155,7 +2568,46 @@ exports[`u-tree-view-new.vue > Demo-实例 2`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">DEV-AdminRole</span>
+                <span class="root" vusion-slot-name-edit="text">普通文本</span>
+                <a class="root" color="primary" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+                  <!---->
+                  确定
+                  <!---->
+                </a>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;"></div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">
+                <span class="root" vusion-slot-name-edit="text">test</span>
+                <span class="root" vusion-slot-name-edit="text">普通文本</span>
+                <a class="root" color="primary" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+                  <!---->
+                  确定
+                  <!---->
+                </a>
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;"></div>
+        </div>
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -1174,7 +2626,7 @@ exports[`u-tree-view-new.vue > Demo-实例 2`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;"></div>
     </div>
     <!---->
     <div class="root">
@@ -1188,7 +2640,9 @@ exports[`u-tree-view-new.vue > Demo-实例 2`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
   </div>
 </div>
@@ -1249,7 +2703,9 @@ exports[`u-tree-view-new.vue > Demo-展开/折叠触发方式 1`] = `
                       </span>
                     </div>
                   </div>
-                  <!---->
+                  <div class="sub" style="display: none;">
+                    <!---->
+                  </div>
                 </div>
                 <div class="root">
                   <div class="item" style="padding-left: 60px;" tabindex="0">
@@ -1261,7 +2717,9 @@ exports[`u-tree-view-new.vue > Demo-展开/折叠触发方式 1`] = `
                       </span>
                     </div>
                   </div>
-                  <!---->
+                  <div class="sub" style="display: none;">
+                    <!---->
+                  </div>
                 </div>
               </div>
             </div>
@@ -1275,7 +2733,9 @@ exports[`u-tree-view-new.vue > Demo-展开/折叠触发方式 1`] = `
                   </span>
                 </div>
               </div>
-              <!---->
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
             </div>
             <div class="root">
               <div class="item" style="padding-left: 30px;" tabindex="0">
@@ -1287,7 +2747,9 @@ exports[`u-tree-view-new.vue > Demo-展开/折叠触发方式 1`] = `
                   </span>
                 </div>
               </div>
-              <!---->
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
             </div>
           </div>
         </div>
@@ -1301,11 +2763,13 @@ exports[`u-tree-view-new.vue > Demo-展开/折叠触发方式 1`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
         </div>
         <div class="root">
           <div class="item" style="padding-left: 0px;" tabindex="0">
-            <!---->
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
             <div class="text" draggable="false" style="margin-left: 30px;">
               <!---->
               <span vusion-slot-name="item">节点 3
@@ -1313,7 +2777,37 @@ exports[`u-tree-view-new.vue > Demo-展开/折叠触发方式 1`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" style="padding-left: 30px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 3.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 30px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 3.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!---->
@@ -1370,7 +2864,9 @@ exports[`u-tree-view-new.vue > Demo-展开/折叠触发方式 1`] = `
                       </span>
                     </div>
                   </div>
-                  <!---->
+                  <div class="sub" style="display: none;">
+                    <!---->
+                  </div>
                 </div>
                 <div class="root">
                   <div class="item" style="padding-left: 60px;" tabindex="0">
@@ -1382,7 +2878,9 @@ exports[`u-tree-view-new.vue > Demo-展开/折叠触发方式 1`] = `
                       </span>
                     </div>
                   </div>
-                  <!---->
+                  <div class="sub" style="display: none;">
+                    <!---->
+                  </div>
                 </div>
               </div>
             </div>
@@ -1396,7 +2894,9 @@ exports[`u-tree-view-new.vue > Demo-展开/折叠触发方式 1`] = `
                   </span>
                 </div>
               </div>
-              <!---->
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
             </div>
             <div class="root">
               <div class="item" style="padding-left: 30px;" tabindex="0">
@@ -1408,7 +2908,9 @@ exports[`u-tree-view-new.vue > Demo-展开/折叠触发方式 1`] = `
                   </span>
                 </div>
               </div>
-              <!---->
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
             </div>
           </div>
         </div>
@@ -1422,11 +2924,13 @@ exports[`u-tree-view-new.vue > Demo-展开/折叠触发方式 1`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
         </div>
         <div class="root">
           <div class="item" style="padding-left: 0px;" tabindex="0">
-            <!---->
+            <div class="expander" expand-trigger="click-expander" style="width: 30px;"></div>
             <div class="text" draggable="false" style="margin-left: 30px;">
               <!---->
               <span vusion-slot-name="item">节点 3
@@ -1434,7 +2938,37 @@ exports[`u-tree-view-new.vue > Demo-展开/折叠触发方式 1`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" style="padding-left: 30px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 3.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 30px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 3.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!---->
@@ -1470,7 +3004,7 @@ exports[`u-tree-view-new.vue > Demo-手风琴 1`] = `
     <!---->
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
-        <!---->
+        <div class="expander" expand-trigger="click" style="width: 30px;"></div>
         <div class="text" draggable="false" style="margin-left: 30px;">
           <!---->
           <span vusion-slot-name="item">节点 1
@@ -1478,7 +3012,149 @@ exports[`u-tree-view-new.vue > Demo-手风琴 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.1.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.1.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.2.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.3
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.3.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点 1.3.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 1.4
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -1502,7 +3178,9 @@ exports[`u-tree-view-new.vue > Demo-手风琴 1`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
         </div>
         <div class="root">
           <div class="item" style="padding-left: 30px;" tabindex="0">
@@ -1514,13 +3192,15 @@ exports[`u-tree-view-new.vue > Demo-手风琴 1`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
         </div>
       </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
-        <!---->
+        <div class="expander" expand-trigger="click" style="width: 30px;"></div>
         <div class="text" draggable="false" style="margin-left: 30px;">
           <!---->
           <span vusion-slot-name="item">节点 3
@@ -1528,7 +3208,37 @@ exports[`u-tree-view-new.vue > Demo-手风琴 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 3.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点 3.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1568,7 +3278,9 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
         </div>
         <div class="root">
           <div class="item" disabled="disabled" style="padding-left: 30px;" tabindex>
@@ -1601,7 +3313,9 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
                   </span>
                 </div>
               </div>
-              <!---->
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
             </div>
             <div class="root">
               <div class="item" disabled="disabled" style="padding-left: 60px;" tabindex="0">
@@ -1618,7 +3332,9 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
                   </span>
                 </div>
               </div>
-              <!---->
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
             </div>
           </div>
         </div>
@@ -1637,7 +3353,9 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
         </div>
         <div class="root">
           <div class="item" style="padding-left: 30px;" tabindex="0">
@@ -1654,7 +3372,9 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
         </div>
       </div>
     </div>
@@ -1673,7 +3393,9 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -1690,7 +3412,9 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
     <!---->
   </div>
@@ -1736,7 +3460,91 @@ exports[`u-tree-view-new.vue > Demo-自定义模板 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">文件夹1.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">文件夹1.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">文件1.2.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">文件1.2.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">文件1.3
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">文件1.4
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -1748,7 +3556,9 @@ exports[`u-tree-view-new.vue > Demo-自定义模板 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -1760,7 +3570,36 @@ exports[`u-tree-view-new.vue > Demo-自定义模板 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">文件3.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">文件3.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <!---->
   </div>
@@ -1773,7 +3612,7 @@ exports[`u-tree-view-new.vue > Demo-节点显示/隐藏 1`] = `
     <!---->
     <div class="root" style="display: none;">
       <div class="item" style="padding-left: 0px;" tabindex="0">
-        <!---->
+        <div class="expander" expand-trigger="click" style="width: 30px;"></div>
         <div class="text" draggable="false" style="margin-left: 30px;">
           <!---->
           <span vusion-slot-name="item">节点1
@@ -1781,7 +3620,93 @@ exports[`u-tree-view-new.vue > Demo-节点显示/隐藏 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点1.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <div class="expander" expand-trigger="click" style="width: 30px;"></div>
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点1.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点1.2.1
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+            <div class="root">
+              <div class="item" style="padding-left: 60px;" tabindex="0">
+                <!---->
+                <div class="text" draggable="false" style="margin-left: 30px;">
+                  <!---->
+                  <span vusion-slot-name="item">节点1.2.2
+                    <!---->
+                  </span>
+                </div>
+              </div>
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点1.3
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点1.4
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -1793,11 +3718,13 @@ exports[`u-tree-view-new.vue > Demo-节点显示/隐藏 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
-        <!---->
+        <div class="expander" expand-trigger="click" style="width: 30px;"></div>
         <div class="text" draggable="false" style="margin-left: 30px;">
           <!---->
           <span vusion-slot-name="item">节点3
@@ -1805,7 +3732,37 @@ exports[`u-tree-view-new.vue > Demo-节点显示/隐藏 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+        <div class="root" style="display: none;">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点3.1
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+        <div class="root">
+          <div class="item" style="padding-left: 30px;" tabindex="0">
+            <!---->
+            <div class="text" draggable="false" style="margin-left: 30px;">
+              <!---->
+              <span vusion-slot-name="item">节点3.2
+                <!---->
+              </span>
+            </div>
+          </div>
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1835,7 +3792,9 @@ exports[`u-tree-view-new.vue > Demo-遍历和查找 1`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
         </div>
         <div class="root">
           <div class="item" disabled="disabled" style="padding-left: 30px;" tabindex>
@@ -1858,7 +3817,9 @@ exports[`u-tree-view-new.vue > Demo-遍历和查找 1`] = `
                   </span>
                 </div>
               </div>
-              <!---->
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
             </div>
             <div class="root">
               <div class="item" disabled="disabled" style="padding-left: 60px;" tabindex="0">
@@ -1870,7 +3831,9 @@ exports[`u-tree-view-new.vue > Demo-遍历和查找 1`] = `
                   </span>
                 </div>
               </div>
-              <!---->
+              <div class="sub" style="display: none;">
+                <!---->
+              </div>
             </div>
           </div>
         </div>
@@ -1884,7 +3847,9 @@ exports[`u-tree-view-new.vue > Demo-遍历和查找 1`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
         </div>
         <div class="root">
           <div class="item" style="padding-left: 30px;" tabindex="0">
@@ -1896,7 +3861,9 @@ exports[`u-tree-view-new.vue > Demo-遍历和查找 1`] = `
               </span>
             </div>
           </div>
-          <!---->
+          <div class="sub" style="display: none;">
+            <!---->
+          </div>
         </div>
       </div>
     </div>
@@ -1910,7 +3877,9 @@ exports[`u-tree-view-new.vue > Demo-遍历和查找 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
@@ -1922,7 +3891,9 @@ exports[`u-tree-view-new.vue > Demo-遍历和查找 1`] = `
           </span>
         </div>
       </div>
-      <!---->
+      <div class="sub" style="display: none;">
+        <!---->
+      </div>
     </div>
     <!---->
   </div>
