@@ -21,7 +21,7 @@
   },
   "bin": {},
   "scripts": {
-    "watch": "tsc -w --sourceMap",
+    "watch": "tsc -w",
     "build": "tsc"
   },
   "repository": {
