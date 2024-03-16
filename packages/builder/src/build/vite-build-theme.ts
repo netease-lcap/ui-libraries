@@ -1,6 +1,6 @@
 import { loadConfigFromFile, build } from 'vite';
 import logger from '../utils/logger';
-import type { ThemeConfig } from '../nasl/gen-theme-config';
+import type { ThemeConfig } from './gen-theme-config';
 import { themePath } from '../constants/input-paths';
 
 export async function buildTheme(themeConfig: ThemeConfig) {

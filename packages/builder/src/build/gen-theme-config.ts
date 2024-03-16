@@ -1,6 +1,6 @@
 import glob from 'fast-glob';
 import fs from 'fs-extra';
-import parseCssVars, { ThemeComponentVars, ThemeGlobalVars } from './parse-css-vars';
+import parseCssVars, { ThemeComponentVars, ThemeGlobalVars } from '../nasl/parse-css-vars';
 
 export interface ThemeOptions {
   themeVarCssPath: string;

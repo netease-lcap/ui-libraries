@@ -1,6 +1,6 @@
 import * as parser from '@babel/parser';
 import babelTraverse from '@babel/traverse';
-import reactJSX2NASL from '../utils/reactJSX2NASL.mjs';
+import { transformJsx2Nasl } from '@lcap/builder';
 
 const traverse = babelTraverse.default;
 
@@ -41,7 +41,7 @@ const getBlocksFromStory = (code) => {
             return;
           }
 
-          block.template = reactJSX2NASL(p.node);
+          block.template = transformJsx2Nasl(p.node);
           p.skip();
         },
       });

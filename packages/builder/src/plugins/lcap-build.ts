@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite';
 import fs from 'fs-extra';
-import genThemeConfig from '../nasl/gen-theme-config';
+import genThemeConfig from '../build/gen-theme-config';
 import { buildTheme } from '../build/vite-build-theme';
 import logger from '../utils/logger';
 
