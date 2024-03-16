@@ -1,5 +1,4 @@
 import * as postcss from 'postcss';
-import fs from 'fs-extra';
 
 export interface ThemeVariable {
   title?: string;

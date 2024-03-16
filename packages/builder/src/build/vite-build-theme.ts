@@ -27,7 +27,7 @@ export async function buildTheme(themeConfig: ThemeConfig) {
   config.plugins?.push({
     name: 'vite:lcap-theme-html',
     async transformIndexHtml(html, ctx) {
-      return html.replace('[THEME INFO HERE]', JSON.stringify({
+      return html.replace('\'[THEME INFO HERE]\'', JSON.stringify({
         previewPages: themeConfig.previewPages,
         components: themeConfig.components.map((c) => ({ name: c.name, title: c.title, group: c.group })),
       }));

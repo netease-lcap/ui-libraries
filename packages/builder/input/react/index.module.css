@@ -20,6 +20,15 @@
   background: var(--cw-color-bg-container);
   border-radius: var(--cw-border-radius-lg);
   box-shadow: var(--cw-box-shadow-tertiary);
+  border: 1px solid transparent;
+}
+
+.componentCard:hover {
+  box-shadow: var(--cw-box-shadow-card);
+}
+
+.componentCard.active {
+  border-color: var(--cw-color-primary);
 }
 
 .componentCardTitle {

@@ -7,7 +7,6 @@ import {
   virtualThemeComponentStoriesFileId,
   virtualThemePagePreviewFileId,
   virtualThemeEntryFileId,
-  virtualReactUIFileId,
 } from '../constants/virtual-file-names';
 import { themePath } from '../constants/input-paths';
 
@@ -131,10 +130,6 @@ export default (options: LcapCodeGenOption = {}) => {
 
       if (source === themePath) {
         return themeId;
-      }
-
-      if (source === virtualReactUIFileId) {
-        return virtualReactUIFileId;
       }
 
       return undefined;
