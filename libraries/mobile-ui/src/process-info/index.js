@@ -55,12 +55,12 @@ export default createComponent({
         return;
       }
 
-      const result = await this.$processV2.getProcInstInfo({
+      const result = await this.$processV2?.getProcInstInfo({
         body: {
           taskId,
         },
       });
-      this.detail = result.data || {};
+      this.detail = result?.data || {};
     },
   },
 
