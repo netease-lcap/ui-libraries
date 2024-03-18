@@ -1,0 +1,192 @@
+/**
+ * @component Table
+ * @useGlobalTokens ["--cw-color-text-heading","--cw-color-split","--cw-color-bg-container","--cw-control-interactive-size","--cw-padding","--cw-font-weight-strong","--cw-line-width","--cw-line-type","--cw-motion-duration-mid","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-margin","--cw-padding-xs","--cw-margin-xxs","--cw-font-size-icon","--cw-motion-duration-slow","--cw-color-primary","--cw-padding-xxs","--cw-font-size-sm","--cw-border-radius","--cw-color-text-description","--cw-color-text-disabled","--cw-control-item-bg-hover","--cw-control-item-bg-active","--cw-box-shadow-secondary","--cw-color-link","--cw-color-link-hover","--cw-color-link-active","--cw-opacity-loading"]
+ */
+.cw-nasl.cw-table,
+.cw-nasl.cw-table-css-var {
+  /**
+   * @desc 表格排序列背景色
+   * @type color
+   */
+  --cw-table-body-sort-bg: #fafafa;
+
+  /**
+   * @desc 表格边框/分割线颜色
+   * @type color
+   */
+  --cw-table-border-color: #f0f0f0;
+
+  /**
+   * @desc 单元格文字大小（默认大尺寸）
+   * @type size
+   */
+  --cw-table-cell-font-size: 14px;
+
+  /**
+   * @desc 单元格文字大小（中等尺寸）
+   * @type size
+   */
+  --cw-table-cell-font-size-md: 14px;
+
+  /**
+   * @desc 单元格文字大小（小尺寸）
+   * @type size
+   */
+  --cw-table-cell-font-size-sm: 14px;
+
+  /**
+   * @desc 单元格纵向内间距
+   * @type size
+   */
+  --cw-table-cell-padding-block: 16px;
+
+  /**
+   * @desc 单元格纵向内间距（中等尺寸）
+   * @type size
+   */
+  --cw-table-cell-padding-block-md: 12px;
+
+  /**
+   * @desc 单元格纵向内间距（小尺寸）
+   * @type size
+   */
+  --cw-table-cell-padding-block-sm: 8px;
+
+  /**
+   * @desc 单元格横向内间距（默认大尺寸）
+   * @type size
+   */
+  --cw-table-cell-padding-inline: 16px;
+
+  /**
+   * @desc 单元格横向内间距（中等尺寸）
+   * @type size
+   */
+  --cw-table-cell-padding-inline-md: 8px;
+
+  /**
+   * @desc 单元格横向内间距（小尺寸）
+   * @type size
+   */
+  --cw-table-cell-padding-inline-sm: 8px;
+
+  /**
+   * @desc 展开按钮背景色
+   * @type color
+   */
+  --cw-table-expand-icon-bg: #ffffff;
+
+  /**
+   * @desc 过滤下拉菜单颜色
+   * @type color
+   */
+  --cw-table-filter-dropdown-bg: #ffffff;
+
+  /**
+   * @desc 过滤下拉菜单选项背景
+   * @type color
+   */
+  --cw-table-filter-dropdown-menu-bg: #ffffff;
+
+  /**
+   * @desc 固定表头排序激活态背景色
+   * @type color
+   */
+  --cw-table-fixed-header-sort-active-bg: #f0f0f0;
+
+  /**
+   * @desc 表格底部背景色
+   * @type color
+   */
+  --cw-table-footer-bg: #fafafa;
+
+  /**
+   * @desc 表格底部文字颜色
+   * @type color
+   */
+  --cw-table-footer-color: rgba(0, 0, 0, 0.88);
+
+  /**
+   * @desc 表头背景
+   * @type color
+   */
+  --cw-table-header-bg: #fafafa;
+
+  /**
+   * @desc 表头圆角
+   * @type size
+   */
+  --cw-table-header-border-radius: 8px;
+
+  /**
+   * @desc 表头文字颜色
+   * @type color
+   */
+  --cw-table-header-color: rgba(0, 0, 0, 0.88);
+
+  /**
+   * @desc 表头过滤按钮悬浮背景色
+   * @type color
+   */
+  --cw-table-header-filter-hover-bg: rgba(0, 0, 0, 0.06);
+
+  /**
+   * @desc 表头排序激活态背景色
+   * @type color
+   */
+  --cw-table-header-sort-active-bg: #f0f0f0;
+
+  /**
+   * @desc 表头排序激活态悬浮背景色
+   * @type color
+   */
+  --cw-table-header-sort-hover-bg: #f0f0f0;
+
+  /**
+   * @desc 表头分割线颜色
+   * @type color
+   */
+  --cw-table-header-split-color: #f0f0f0;
+
+  /**
+   * @desc 表格行展开背景色
+   * @type color
+   */
+  --cw-table-row-expanded-bg: rgba(0, 0, 0, 0.02);
+
+  /**
+   * @desc 表格行悬浮背景色
+   * @type color
+   */
+  --cw-table-row-hover-bg: #fafafa;
+
+  /**
+   * @desc 表格行选中背景色
+   * @type color
+   */
+  --cw-table-row-selected-bg: #e6f4ff;
+
+  /**
+   * @desc 表格行选中悬浮背景色
+   * @type color
+   */
+  --cw-table-row-selected-hover-bg: #bae0ff;
+
+  /**
+   * @desc 选择列宽度
+   * @type size
+   */
+  --cw-table-selection-column-width: 32px;
+
+  /**
+   * @desc Sticky 模式下滚动条背景色
+   * @type color
+   */
+  --cw-table-sticky-scroll-bar-bg: rgba(0, 0, 0, 0.25);
+
+  /**
+   * @desc Sticky 模式下滚动条圆角
+   * @type size
+   */
+  --cw-table-sticky-scroll-bar-border-radius: 100px;
+}

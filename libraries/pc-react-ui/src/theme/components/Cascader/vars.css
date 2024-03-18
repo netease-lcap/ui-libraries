@@ -1,0 +1,48 @@
+/**
+ * @component Cascader
+ * @useGlobalTokens ["--cw-control-interactive-size","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-margin-xs","--cw-border-radius-sm","--cw-line-width-focus","--cw-color-primary-border","--cw-color-bg-container","--cw-line-width","--cw-line-type","--cw-color-border","--cw-motion-duration-slow","--cw-line-width-bold","--cw-color-white","--cw-motion-duration-fast","--cw-motion-ease-in-back","--cw-padding-xs","--cw-color-primary","--cw-color-primary-hover","--cw-motion-duration-mid","--cw-motion-ease-out-back","--cw-font-size-lg","--cw-color-bg-container-disabled","--cw-color-text-disabled","--cw-color-split","--cw-control-item-bg-hover","--cw-padding-xxs","--cw-color-text-description","--cw-font-size-icon","--cw-color-highlight"]
+ */
+.cw-nasl.cw-cascader,
+.cw-nasl.cw-cascader-css-var {
+  /**
+   * @desc 选项宽度
+   * @type size
+   */
+  --cw-cascader-control-item-width: 111px;
+
+  /**
+   * @desc 选择器宽度
+   * @type size
+   */
+  --cw-cascader-control-width: 184px;
+
+  /**
+   * @desc 下拉菜单高度
+   * @type size
+   */
+  --cw-cascader-dropdown-height: 180px;
+
+  /**
+   * @desc 选项菜单（单列）内间距
+   * @type size
+   */
+  --cw-cascader-menu-padding: 4px;
+
+  /**
+   * @desc 选项内间距
+   * @type size
+   */
+  --cw-cascader-option-padding: 5px 12px;
+
+  /**
+   * @desc 选项选中时背景色
+   * @type color
+   */
+  --cw-cascader-option-selected-bg: #e6f4ff;
+
+  /**
+   * @desc 选项选中时字重
+   * @type input
+   */
+  --cw-cascader-option-selected-font-weight: 600;
+}

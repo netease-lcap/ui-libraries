@@ -1,0 +1,36 @@
+/**
+ * @component Tree
+ * @useGlobalTokens ["--cw-control-interactive-size","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-margin-xs","--cw-border-radius-sm","--cw-line-width-focus","--cw-color-primary-border","--cw-color-bg-container","--cw-line-width","--cw-line-type","--cw-color-border","--cw-motion-duration-slow","--cw-line-width-bold","--cw-color-white","--cw-motion-duration-fast","--cw-motion-ease-in-back","--cw-padding-xs","--cw-color-primary","--cw-color-primary-hover","--cw-motion-duration-mid","--cw-motion-ease-out-back","--cw-font-size-lg","--cw-color-bg-container-disabled","--cw-color-text-disabled","--cw-border-radius","--cw-control-item-bg-hover","--cw-color-bg-text-hover","--cw-margin-xxs","--cw-motion-ease-in-out"]
+ */
+.cw-nasl.cw-tree,
+.cw-nasl.cw-tree-css-var {
+  /**
+   * @desc 目录树节点选中背景色
+   * @type color
+   */
+  --cw-tree-directory-node-selected-bg: #1677ff;
+
+  /**
+   * @desc 目录树节点选中文字颜色
+   * @type color
+   */
+  --cw-tree-directory-node-selected-color: #fff;
+
+  /**
+   * @desc 节点悬浮态背景色
+   * @type color
+   */
+  --cw-tree-node-hover-bg: rgba(0, 0, 0, 0.04);
+
+  /**
+   * @desc 节点选中态背景色
+   * @type color
+   */
+  --cw-tree-node-selected-bg: #e6f4ff;
+
+  /**
+   * @desc 节点标题高度
+   * @type size
+   */
+  --cw-tree-title-height: 24px;
+}

@@ -1,0 +1,159 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div value="myPendingTaskList" class="van-my-process">
+      <div class="van-tabs van-tabs--line">
+        <div class="van-tabs__wrap">
+          <div role="tablist" class="van-tabs__nav van-tabs__nav--line">
+            <div role="tab" aria-selected="true" class="van-tab van-tab--active" undefined="" vusion-slot-name="title"><span vusion-slot-name-edit="title" class="van-tab__text van-tab__text--ellipsis">我的待办</span></div>
+            <div role="tab" class="van-tab" undefined="" vusion-slot-name="title"><span vusion-slot-name-edit="title" class="van-tab__text van-tab__text--ellipsis">我的已办</span></div>
+            <div role="tab" class="van-tab" undefined="" vusion-slot-name="title"><span vusion-slot-name-edit="title" class="van-tab__text van-tab__text--ellipsis">我的发起</span></div>
+            <div class="van-tabs__line" style="transform: translateX(0px) translateX(-50%);"></div>
+          </div>
+        </div>
+        <div class="van-tabs__content">
+          <div role="tabpanel" vusion-slot-name="default" class="van-tab__pane" style="">
+            <div>
+              <div class="van-row van-row--flex van-row--align-center van-my-process-toolbar">
+                <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8">
+                  <div class="van-my-process-toolbar__button">流程<i class="van-iconv van-my-process-toolbar__button-icon" style="font-size: 12px;"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                        <use xlink:href="#h5-bottom-triangle" class="van-shoud-pa"></use>
+                      </svg>
+                      <!----></i></div>
+                </div>
+                <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8">
+                  <div class="van-my-process-toolbar__button">发起人<i class="van-iconv van-my-process-toolbar__button-icon" style="font-size: 12px;"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                        <use xlink:href="#h5-bottom-triangle" class="van-shoud-pa"></use>
+                      </svg>
+                      <!----></i></div>
+                </div>
+                <div vusion-slot-name="default" allowchild="true" class="van-col van-col--8">
+                  <div class="van-my-process-toolbar__button">发起时间<i class="van-iconv van-my-process-toolbar__button-icon" style="font-size: 12px;"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                        <use xlink:href="#h5-bottom-triangle" class="van-shoud-pa"></use>
+                      </svg>
+                      <!----></i></div>
+                </div>
+              </div>
+              <div vusion-click-enabled="true" class="van-pickerson__wrap" style="display: none;">
+                <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-cellson--insel van-field">
+                  <div class="van-cellson__value van-field__value">
+                    <div class="van-field__body"><input type="text" readonly="readonly" placeholder="请选择" class="van-field__control van-field__control--right"></div>
+                  </div>
+                </div>
+              </div>
+              <div vusion-click-enabled="true" class="van-pickerson__wrap" style="display: none;">
+                <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-cellson--insel van-field">
+                  <div class="van-cellson__value van-field__value">
+                    <div class="van-field__body"><input type="text" readonly="readonly" placeholder="请选择" class="van-field__control van-field__control--right"></div>
+                  </div>
+                </div>
+              </div>
+              <div vusion-click-enabled="true" class="van-datetime-picker__wrapppdtpicker" style="display: none;">
+                <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-cellson--insel van-field">
+                  <div class="van-cellson__value van-field__value">
+                    <div class="van-field__body"><input type="text" readonly="readonly" class="van-field__control van-field__control--right"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="van-pull-refresh">
+              <div class="van-pull-refresh__track" style="transition-duration: 0ms;">
+                <div class="van-pull-refresh__head"></div>
+                <div role="feed" class="van-list van-my-process__list-view">
+                  <div class="van-my-process__item-card">
+                    <div class="van-my-process__item-card-title">张三申请事假1天<i class="van-iconv" style="font-size: 12px;"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                          <use xlink:href="#h5-right-arrow" class="van-shoud-pa"></use>
+                        </svg>
+                        <!----></i></div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">流程类型</div>
+                      <div class="van-my-process__item-card-content">请假流程</div>
+                    </div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">当前节点</div>
+                      <div class="van-my-process__item-card-content">主管审批</div>
+                    </div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">当前处理人</div>
+                      <div class="van-my-process__item-card-content">主管A</div>
+                    </div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">发起人</div>
+                      <div class="van-my-process__item-card-content">张三</div>
+                    </div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">发起时间</div>
+                      <div class="van-my-process__item-card-content">2024-01-24 11:35:52</div>
+                    </div>
+                  </div>
+                  <div class="van-my-process__item-card">
+                    <div class="van-my-process__item-card-title">张三申请事假1天<i class="van-iconv" style="font-size: 12px;"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                          <use xlink:href="#h5-right-arrow" class="van-shoud-pa"></use>
+                        </svg>
+                        <!----></i></div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">流程类型</div>
+                      <div class="van-my-process__item-card-content">请假流程</div>
+                    </div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">当前节点</div>
+                      <div class="van-my-process__item-card-content">主管审批</div>
+                    </div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">当前处理人</div>
+                      <div class="van-my-process__item-card-content">主管A</div>
+                    </div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">发起人</div>
+                      <div class="van-my-process__item-card-content">张三</div>
+                    </div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">发起时间</div>
+                      <div class="van-my-process__item-card-content">2024-01-24 11:35:52</div>
+                    </div>
+                  </div>
+                  <div class="van-my-process__item-card">
+                    <div class="van-my-process__item-card-title">张三申请事假1天<i class="van-iconv" style="font-size: 12px;"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                          <use xlink:href="#h5-right-arrow" class="van-shoud-pa"></use>
+                        </svg>
+                        <!----></i></div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">流程类型</div>
+                      <div class="van-my-process__item-card-content">请假流程</div>
+                    </div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">当前节点</div>
+                      <div class="van-my-process__item-card-content">主管审批</div>
+                    </div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">当前处理人</div>
+                      <div class="van-my-process__item-card-content">主管A</div>
+                    </div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">发起人</div>
+                      <div class="van-my-process__item-card-content">张三</div>
+                    </div>
+                    <div class="van-my-process__item-card-line">
+                      <div class="van-my-process__item-card-label">发起时间</div>
+                      <div class="van-my-process__item-card-content">2024-01-24 11:35:52</div>
+                    </div>
+                  </div>
+                  <div class="van-list__placeholder"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" vusion-slot-name="default" class="van-tab__pane" style="display: none;">
+            <!---->
+          </div>
+          <div role="tabpanel" vusion-slot-name="default" class="van-tab__pane" style="display: none;">
+            <!---->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

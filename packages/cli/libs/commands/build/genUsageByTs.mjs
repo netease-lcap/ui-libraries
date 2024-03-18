@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import fs from 'fs-extra';
 import path from 'path';
-import { transform } from '../../transforms/naslTs2Json.js';
+import { parseComponentAPI as transform } from '@lcap/builder';
 import * as logger from '../../utils/logger.mjs';
 import transformStory2Blocks from '../../transforms/story2block.mjs';
 import { getComponentPathInfo } from '../../utils/index.mjs';

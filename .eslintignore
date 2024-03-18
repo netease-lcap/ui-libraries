@@ -5,3 +5,4 @@ node_modules
 demo
 *api.ts
 scripts/*.mjs
+**/scripts/*.js

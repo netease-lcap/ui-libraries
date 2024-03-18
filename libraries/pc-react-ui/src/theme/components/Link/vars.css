@@ -1,0 +1,18 @@
+/**
+ * @component Typography
+ * @useGlobalTokens ["--cw-color-text","--cw-line-height","--cw-color-text-description","--cw-color-success","--cw-color-warning","--cw-color-error","--cw-color-error-active","--cw-color-error-hover","--cw-color-text-disabled","--cw-font-size-heading-1","--cw-line-height-heading-1","--cw-color-text-heading","--cw-font-weight-strong","--cw-font-size-heading-2","--cw-line-height-heading-2","--cw-font-size-heading-3","--cw-line-height-heading-3","--cw-font-size-heading-4","--cw-line-height-heading-4","--cw-font-size-heading-5","--cw-line-height-heading-5","--cw-font-family-code","--cw-color-link","--cw-motion-duration-slow","--cw-color-link-hover","--cw-color-link-active","--cw-link-decoration","--cw-link-hover-decoration","--cw-margin-xxs","--cw-padding-sm","--cw-margin-xs","--cw-font-size"]
+ */
+.cw-nasl.cw-typography,
+.cw-nasl.cw-typography-css-var {
+  /**
+   * @desc 标题下间距
+   * @type input
+   */
+  --cw-typography-title-margin-bottom: 0.5em;
+
+  /**
+   * @desc 标题上间距
+   * @type input
+   */
+  --cw-typography-title-margin-top: 1.2em;
+}

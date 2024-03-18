@@ -35,6 +35,8 @@
     "README.md"
   ],
   "dependencies": {
+    "@joskii/jflow-core": "^0.1.22",
+    "@joskii/jflow-vue2-plugin": "^0.1.0",
     "@popperjs/core": "^2.10.2",
     "@vusion/utils": "0.4.11",
     "@vusion/validator": "0.4.12",
@@ -105,6 +107,7 @@
     "dev": "npm run storybook",
     "storybook": "storybook dev -p 6006",
     "build": "vite build && tsc -p tsconfig.api.json && lcap-ui build && npm pack",
+    "deploy:dev": "lcap-ui deploy --platform http://defaulttenant.lcap.codewave-dev.163yun.com/",
     "deploy:test": "lcap-ui deploy --platform http://defaulttenant.lcap.codewave-test.163yun.com/",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "test": "vitest run",

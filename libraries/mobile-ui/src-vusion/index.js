@@ -131,6 +131,10 @@ import '../src/tag/index.less';
 import '../src/toast/index.less';
 import '../src/tree-select/index.less';
 import '../src/uploader/index.less';
+import '../src/my-process/index.less';
+import '../src/process-button/index.less';
+import '../src/process-info/index.less';
+import '../src/process-record/index.less';
 
 // 保证在H5样式之后
 /* 引入cloud-ui theme */

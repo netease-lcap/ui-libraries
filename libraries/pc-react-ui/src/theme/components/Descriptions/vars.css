@@ -1,0 +1,54 @@
+/**
+ * @component Descriptions
+ * @useGlobalTokens ["--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-line-width","--cw-line-type","--cw-color-split","--cw-padding","--cw-padding-lg","--cw-color-text-secondary","--cw-padding-sm","--cw-padding-xs","--cw-font-weight-strong","--cw-font-size-lg","--cw-line-height-lg","--cw-border-radius-lg","--cw-color-text-tertiary"]
+ */
+.cw-nasl.cw-descriptions,
+.cw-nasl.cw-descriptions-css-var {
+  /**
+   * @desc 冒号左间距
+   * @type size
+   */
+  --cw-descriptions-colon-margin-left: 2px;
+
+  /**
+   * @desc 冒号右间距
+   * @type size
+   */
+  --cw-descriptions-colon-margin-right: 8px;
+
+  /**
+   * @desc 内容区域文字颜色
+   * @type color
+   */
+  --cw-descriptions-content-color: rgba(0, 0, 0, 0.88);
+
+  /**
+   * @desc 额外区域文字颜色
+   * @type color
+   */
+  --cw-descriptions-extra-color: rgba(0, 0, 0, 0.88);
+
+  /**
+   * @desc 子项下间距
+   * @type size
+   */
+  --cw-descriptions-item-padding-bottom: 16px;
+
+  /**
+   * @desc 标签背景色
+   * @type color
+   */
+  --cw-descriptions-label-bg: rgba(0, 0, 0, 0.02);
+
+  /**
+   * @desc 标题文字颜色
+   * @type color
+   */
+  --cw-descriptions-title-color: rgba(0, 0, 0, 0.88);
+
+  /**
+   * @desc 标题下间距
+   * @type size
+   */
+  --cw-descriptions-title-margin-bottom: 20px;
+}

@@ -1,0 +1,60 @@
+/**
+ * @component Form
+ * @useGlobalTokens ["--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-margin-lg","--cw-color-text-description","--cw-font-size-lg","--cw-line-width","--cw-line-type","--cw-color-border","--cw-control-outline-width","--cw-control-outline","--cw-padding-sm","--cw-control-height-sm","--cw-control-height-lg","--cw-color-error","--cw-color-warning","--cw-margin-xxs","--cw-control-height","--cw-motion-duration-mid","--cw-motion-ease-out","--cw-motion-ease-out-back","--cw-color-success","--cw-color-primary","--cw-motion-duration-slow","--cw-motion-ease-in-out","--cw-margin","--cw-screen-xs-max","--cw-screen-sm-max","--cw-screen-md-max","--cw-screen-lg-max"]
+ */
+.cw-nasl.cw-form,
+.cw-nasl.cw-form-css-var {
+  /**
+   * @desc 表单项间距
+   * @type size
+   */
+  --cw-form-item-margin-bottom: 24px;
+
+  /**
+   * @desc 标签冒号后间距
+   * @type size
+   */
+  --cw-form-label-colon-margin-inline-end: 8px;
+
+  /**
+   * @desc 标签冒号前间距
+   * @type size
+   */
+  --cw-form-label-colon-margin-inline-start: 2px;
+
+  /**
+   * @desc 标签颜色
+   * @type color
+   */
+  --cw-form-label-color: rgba(0, 0, 0, 0.88);
+
+  /**
+   * @desc 标签字体大小
+   * @type size
+   */
+  --cw-form-label-font-size: 14px;
+
+  /**
+   * @desc 标签高度
+   * @type size
+   */
+  --cw-form-label-height: 32px;
+
+  /**
+   * @desc 必填项标记颜色
+   * @type color
+   */
+  --cw-form-label-required-mark-color: #ff4d4f;
+
+  /**
+   * @desc 垂直布局标签外边距
+   * @type input
+   */
+  --cw-form-vertical-label-margin: 0;
+
+  /**
+   * @desc 垂直布局标签内边距
+   * @type size
+   */
+  --cw-form-vertical-label-padding: 0 0 8px;
+}
