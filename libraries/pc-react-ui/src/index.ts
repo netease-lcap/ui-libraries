@@ -1,8 +1,8 @@
 // export { default as Button } from './components/Button/index';
+// import './index.css';
+import { Layout, ConfigProvider } from 'antd';
 
-import { Layout } from 'antd';
-
-export { Layout } from 'antd';
+export { Layout, ConfigProvider };
 export const { Header } = Layout;
 export * from './components/Button/index';
 // export { default as Select } from './components/Select/index';
@@ -49,6 +49,9 @@ export * from './components/Upload/index';
 export * from './components/Icon/index';
 export * from './components/Tag/index';
 export * from './components/Link/index';
+
+// eslint-disable-next-line import/first
+import 'virtual:theme.css';
 
 // export * from './components/Typography/index';
 // export * from 'antd';

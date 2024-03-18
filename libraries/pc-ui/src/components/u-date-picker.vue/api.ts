@@ -203,24 +203,24 @@ namespace nasl.ui {
       @Prop({
           group: '主要属性',
           title: '前缀图标',
-          docDescription: '支持添加前缀图标，如搜索图标',
+          docDescription: '支持添加前缀图标',
           setter: {
               concept: 'EnumSelectSetter',
-              options: [{ title: '日历' }],
+              options: [{ title: '日历' }, { title: '暂无' }],
           },
       })
-      preIcon: 'calendar' = 'calendar';
+      preIcon: 'calendar' | '' = 'calendar';
 
       @Prop({
           group: '主要属性',
           title: '后缀图标',
-          docDescription: '支持添加后缀图标，如搜索图标',
+          docDescription: '支持添加后缀图标',
           setter: {
               concept: 'EnumSelectSetter',
-              options: [{ title: '日历' }],
+              options: [{ title: '日历' }, { title: '暂无' }],
           },
       })
-      suffixIcon: 'calendar';
+      suffixIcon: 'calendar' | '' = '';
 
       @Prop({
           group: '主要属性',

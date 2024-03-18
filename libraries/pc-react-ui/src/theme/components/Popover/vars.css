@@ -1,0 +1,18 @@
+/**
+ * @component Popover
+ * @useGlobalTokens ["--cw-color-bg-elevated","--cw-color-text","--cw-font-weight-strong","--cw-box-shadow-secondary","--cw-color-text-heading","--cw-border-radius-lg","--cw-font-size","--cw-line-height","--cw-font-family","--cw-box-shadow-popover-arrow","--cw-size-popup-arrow","--cw-border-radius-xs","--cw-blue-6","--cw-purple-6","--cw-cyan-6","--cw-green-6","--cw-magenta-6","--cw-pink-6","--cw-red-6","--cw-orange-6","--cw-yellow-6","--cw-volcano-6","--cw-geekblue-6","--cw-lime-6","--cw-gold-6","--cw-motion-duration-mid","--cw-motion-ease-out-circ","--cw-motion-ease-in-out-circ"]
+ */
+.cw-nasl.cw-popover,
+.cw-nasl.cw-popover-css-var {
+  /**
+   * @desc 气泡卡片标题最小宽度
+   * @type size
+   */
+  --cw-popover-title-min-width: 177px;
+
+  /**
+   * @desc 气泡卡片 z-index
+   * @type input
+   */
+  --cw-popover-z-index-popup: 1030;
+}

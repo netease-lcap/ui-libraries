@@ -1,0 +1,162 @@
+/**
+ * @component InputNumber
+ * @useGlobalTokens ["--cw-padding-xxs","--cw-line-width","--cw-line-type","--cw-border-radius","--cw-font-size-lg","--cw-control-height-lg","--cw-control-height-sm","--cw-color-error","--cw-color-text-description","--cw-motion-duration-mid","--cw-color-text-disabled","--cw-border-radius-sm","--cw-border-radius-lg","--cw-line-height-lg","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-color-text-placeholder","--cw-control-height","--cw-motion-duration-slow","--cw-color-border","--cw-color-bg-container","--cw-color-bg-container-disabled","--cw-color-error-border-hover","--cw-color-warning","--cw-color-warning-border-hover","--cw-color-fill-tertiary","--cw-color-fill-secondary","--cw-color-primary","--cw-color-error-bg","--cw-color-error-bg-hover","--cw-color-error-text","--cw-color-warning-bg","--cw-color-warning-bg-hover","--cw-color-warning-text","--cw-padding-xs","--cw-color-split"]
+ */
+.cw-nasl.cw-input-number,
+.cw-nasl.cw-input-number-css-var {
+  /**
+   * @desc 输入框激活状态时背景颜色
+   * @type color
+   */
+  --cw-input-number-active-bg: #ffffff;
+
+  /**
+   * @desc 激活态边框色
+   * @type color
+   */
+  --cw-input-number-active-border-color: #1677ff;
+
+  /**
+   * @desc 激活态阴影
+   * @type input
+   */
+  --cw-input-number-active-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+
+  /**
+   * @desc 前/后置标签背景色
+   * @type color
+   */
+  --cw-input-number-addon-bg: rgba(0, 0, 0, 0.02);
+
+  /**
+   * @desc 输入框宽度
+   * @type size
+   */
+  --cw-input-number-control-width: 90px;
+
+  /**
+   * @desc 错误状态时激活态阴影
+   * @type input
+   */
+  --cw-input-number-error-active-shadow: 0 0 0 2px rgba(255, 38, 5, 0.06);
+
+  /**
+   * @desc 面性变体操作按钮背景色
+   * @type color
+   */
+  --cw-input-number-filled-handle-bg: #f0f0f0;
+
+  /**
+   * @desc 操作按钮激活背景色
+   * @type color
+   */
+  --cw-input-number-handle-active-bg: rgba(0, 0, 0, 0.02);
+
+  /**
+   * @desc 操作按钮背景色
+   * @type color
+   */
+  --cw-input-number-handle-bg: #ffffff;
+
+  /**
+   * @desc 操作按钮边框颜色
+   * @type color
+   */
+  --cw-input-number-handle-border-color: #d9d9d9;
+
+  /**
+   * @desc 操作按钮图标大小
+   * @type size
+   */
+  --cw-input-number-handle-font-size: 7px;
+
+  /**
+   * @desc 操作按钮悬浮颜色
+   * @type color
+   */
+  --cw-input-number-handle-hover-color: #1677ff;
+
+  /**
+   * @desc 操作按钮可见性
+   * @type input
+   */
+  --cw-input-number-handle-visible: auto;
+
+  /**
+   * @desc 操作按钮宽度
+   * @type size
+   */
+  --cw-input-number-handle-width: 22px;
+
+  /**
+   * @desc 输入框hover状态时背景颜色
+   * @type color
+   */
+  --cw-input-number-hover-bg: #ffffff;
+
+  /**
+   * @desc 悬浮态边框色
+   * @type color
+   */
+  --cw-input-number-hover-border-color: #4096ff;
+
+  /**
+   * @desc 字体大小
+   * @type size
+   */
+  --cw-input-number-input-font-size: 14px;
+
+  /**
+   * @desc 大号字体大小
+   * @type size
+   */
+  --cw-input-number-input-font-size-lg: 16px;
+
+  /**
+   * @desc 小号字体大小
+   * @type size
+   */
+  --cw-input-number-input-font-size-sm: 14px;
+
+  /**
+   * @desc 输入框纵向内边距
+   * @type size
+   */
+  --cw-input-number-padding-block: 4px;
+
+  /**
+   * @desc 大号输入框纵向内边距
+   * @type size
+   */
+  --cw-input-number-padding-block-lg: 7px;
+
+  /**
+   * @desc 小号输入框纵向内边距
+   * @type input
+   */
+  --cw-input-number-padding-block-sm: 0;
+
+  /**
+   * @desc 输入框横向内边距
+   * @type size
+   */
+  --cw-input-number-padding-inline: 11px;
+
+  /**
+   * @desc 大号输入框横向内边距
+   * @type size
+   */
+  --cw-input-number-padding-inline-lg: 11px;
+
+  /**
+   * @desc 小号输入框横向内边距
+   * @type size
+   */
+  --cw-input-number-padding-inline-sm: 7px;
+
+  /**
+   * @desc 警告状态时激活态阴影
+   * @type input
+   */
+  --cw-input-number-warning-active-shadow: 0 0 0 2px rgba(255, 215, 5, 0.1);
+}

@@ -562,8 +562,11 @@ content: "\e67f";
 
 .preview {
     border: none;
+    background: transparent;   
+}
+
+.disEvent{
     pointer-events: none;
-    background: transparent;
 }
 
 .preview::after {
@@ -586,4 +589,8 @@ content: "\e67f";
 
 .preview .placeholder {
     color: var(--select-color);
+}
+
+.preview.root {
+    padding-left: 0;
 }

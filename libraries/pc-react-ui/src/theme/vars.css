@@ -1,0 +1,1452 @@
+.cw-nasl {
+  /**
+   * @desc 基础组件的圆角大小，例如按钮、输入框、卡片等
+   * @title 基础圆角
+   * @type size
+   */
+  --cw-border-radius: 6px;
+
+  /**
+   * @desc 用于派生背景色梯度的基础变量，v5 中我们添加了一层背景色的派生算法可以产出梯度明确的背景色的梯度变量。但请不要在代码中直接使用该 Seed Token ！
+   * @title 基础背景色
+   * @type color
+   */
+  --cw-color-bg-base: #fff;
+
+  /**
+   * @desc 用于表示操作失败的 Token 序列，如失败按钮、错误状态提示（Result）组件等。
+   * @title 错误色
+   * @type color
+   */
+  --cw-color-error: #ff4d4f;
+
+  /**
+   * @desc 用于表示操作信息的 Token 序列，如 Alert 、Tag、 Progress 等组件都有用到该组梯度变量。
+   * @title 信息色
+   * @type color
+   */
+  --cw-color-info: #1677ff;
+
+  /**
+   * @desc 控制超链接的颜色。
+   * @title 超链接颜色
+   * @type color
+   */
+  --cw-color-link: #1677ff;
+
+  /**
+   * @desc 品牌色是体现产品特性和传播理念最直观的视觉元素之一。在你完成品牌主色的选取之后，我们会自动帮你生成一套完整的色板，并赋予它们有效的设计语义
+   * @title 品牌主色
+   * @type color
+   */
+  --cw-color-primary: #1677ff;
+
+  /**
+   * @desc 用于表示操作成功的 Token 序列，如 Result、Progress 等组件会使用该组梯度变量。
+   * @title 成功色
+   * @type color
+   */
+  --cw-color-success: #52c41a;
+
+  /**
+   * @desc 用于派生文本色梯度的基础变量，v5 中我们添加了一层文本色的派生算法可以产出梯度明确的文本色的梯度变量。但请不要在代码中直接使用该 Seed Token ！
+   * @title 基础文本色
+   * @type color
+   */
+  --cw-color-text-base: #000;
+
+  /**
+   * @desc 用于表示操作警告的 Token 序列，如 Notification、 Alert等警告类组件或 Input 输入类等组件会使用该组梯度变量。
+   * @title 警戒色
+   * @type color
+   */
+  --cw-color-warning: #faad14;
+
+  /**
+   * @desc Ant Design 中按钮和输入框等基础控件的高度
+   * @title 基础高度
+   * @type size
+   */
+  --cw-control-height: 32px;
+
+  /**
+   * @desc Ant Design 的字体家族中优先使用系统默认的界面字体，同时提供了一套利于屏显的备用字体库，来维护在不同平台以及浏览器的显示下，字体始终保持良好的易读性和可读性，体现了友好、稳定和专业的特性。
+   * @title 字体
+   * @type input
+   */
+  --cw-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+'Noto Color Emoji';
+
+  /**
+   * @desc 代码字体，用于 Typography 内的 code、pre 和 kbd 类型的元素
+   * @title 代码字体
+   * @type input
+   */
+  --cw-font-family-code: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+
+  /**
+   * @desc 设计系统中使用最广泛的字体大小，文本梯度也将基于该字号进行派生。
+   * @title 默认字号
+   * @type size
+   */
+  --cw-font-size: 14px;
+
+  /**
+   * @desc 用于控制组件边框、分割线等的样式，默认是实线
+   * @title 线条样式
+   * @type input
+   */
+  --cw-line-type: solid;
+
+  /**
+   * @desc 用于控制组件边框、分割线等的宽度
+   * @title 基础线宽
+   * @type size
+   */
+  --cw-line-width: 1px;
+
+  /**
+   * @desc 用于配置动画效果，为 `false` 时则关闭动画
+   * @title 动画风格
+   * @type input
+   */
+  --cw-motion: true;
+
+  /**
+   * @title 动画基础时长。
+   * @type input
+   */
+  --cw-motion-base: 0;
+
+  /**
+   * @desc 预设动效曲率
+   * @type input
+   */
+  --cw-motion-ease-in-back: cubic-bezier(0.71, -0.46, 0.88, 0.6);
+
+  /**
+   * @desc 预设动效曲率
+   * @type input
+   */
+  --cw-motion-ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  /**
+   * @desc 预设动效曲率
+   * @type input
+   */
+  --cw-motion-ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
+
+  /**
+   * @desc 预设动效曲率
+   * @type input
+   */
+  --cw-motion-ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+
+  /**
+   * @desc 预设动效曲率
+   * @type input
+   */
+  --cw-motion-ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  /**
+   * @desc 预设动效曲率
+   * @type input
+   */
+  --cw-motion-ease-out-back: cubic-bezier(0.12, 0.4, 0.29, 1.46);
+
+  /**
+   * @desc 预设动效曲率
+   * @type input
+   */
+  --cw-motion-ease-out-circ: cubic-bezier(0.08, 0.82, 0.17, 1);
+
+  /**
+   * @desc 预设动效曲率
+   * @type input
+   */
+  --cw-motion-ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+
+  /**
+   * @desc 用于控制动画时长的变化单位
+   * @title 动画时长变化单位
+   * @type size
+   */
+  --cw-motion-unit: 0.1px;
+
+  /**
+   * @title 图片不透明度
+   * @type input
+   */
+  --cw-opacity-image: 1;
+
+  /**
+   * @desc 组件箭头的尺寸
+   * @title 组件箭头尺寸
+   * @type size
+   */
+  --cw-size-popup-arrow: 16px;
+
+  /**
+   * @desc 用于控制组件尺寸的基础步长，尺寸步长结合尺寸变化单位，就可以派生各种尺寸梯度。通过调整步长即可得到不同的布局模式，例如 V5 紧凑模式下的尺寸步长为 2
+   * @title 尺寸步长
+   * @type size
+   */
+  --cw-size-step: 4px;
+
+  /**
+   * @desc 用于控制组件尺寸的变化单位，在 Ant Design 中我们的基础单位为 4 ，便于更加细致地控制尺寸梯度
+   * @title 尺寸变化单位
+   * @type size
+   */
+  --cw-size-unit: 4px;
+
+  /**
+   * @desc 用于将组件的视觉效果变为线框化，如果需要使用 V4 的效果，需要开启配置项
+   * @title 线框风格
+   * @type input
+   */
+  --cw-wireframe: false;
+
+  /**
+   * @desc 所有组件的基础 Z 轴值，用于一些悬浮类的组件的可以基于该值 Z 轴控制层级，例如 BackTop、 Affix 等
+   * @title 基础 zIndex
+   * @type input
+   */
+  --cw-z-index-base: 0;
+
+  /**
+   * @desc 浮层类组件的基础 Z 轴值，用于一些悬浮类的组件的可以基于该值 Z 轴控制层级，例如 FloatButton、 Affix、Modal 等
+   * @title 浮层基础 zIndex
+   * @type input
+   */
+  --cw-z-index-popup-base: 1000;
+
+  /**
+   * @desc LG号圆角，用于组件中的一些大圆角，如 Card、Modal 等一些组件样式。
+   * @title LG号圆角
+   * @type size
+   */
+  --cw-border-radius-lg: 8px;
+
+  /**
+   * @desc 外部圆角
+   * @title 外部圆角
+   * @type size
+   */
+  --cw-border-radius-outer: 4px;
+
+  /**
+   * @desc SM号圆角，用于组件小尺寸下的圆角，如 Button、Input、Select 等输入类控件在 small size 下的圆角
+   * @title SM号圆角
+   * @type size
+   */
+  --cw-border-radius-sm: 4px;
+
+  /**
+   * @desc XS号圆角，用于组件中的一些小圆角，如 Segmented 、Arrow 等一些内部圆角的组件样式中。
+   * @title XS号圆角
+   * @type size
+   */
+  --cw-border-radius-xs: 2px;
+
+  /**
+   * @desc 控制毛玻璃容器的背景色，通常为透明色。
+   * @title 毛玻璃容器背景色
+   * @type input
+   */
+  --cw-color-bg-blur: transparent;
+
+  /**
+   * @desc 组件的容器背景色，例如：默认按钮、输入框等。务必不要将其与 `colorBgElevated` 混淆。
+   * @title 组件容器背景色
+   * @type color
+   */
+  --cw-color-bg-container: #ffffff;
+
+  /**
+   * @desc 浮层容器背景色，在暗色模式下该 token 的色值会比 `colorBgContainer` 要亮一些。例如：模态框、弹出框、菜单等。
+   * @title 浮层容器背景色
+   * @type color
+   */
+  --cw-color-bg-elevated: #ffffff;
+
+  /**
+   * @desc 该色用于页面整体布局的背景色，只有需要在页面中处于 B1 的视觉层级时才会使用该 token，其他用法都是错误的
+   * @title 布局背景色
+   * @type color
+   */
+  --cw-color-bg-layout: #f5f5f5;
+
+  /**
+   * @desc 浮层的背景蒙层颜色，用于遮罩浮层下面的内容，Modal、Drawer 等组件的蒙层使用的是该 token
+   * @title 浮层的背景蒙层颜色
+   * @type color
+   */
+  --cw-color-bg-mask: rgba(0, 0, 0, 0.45);
+
+  /**
+   * @desc 该色用于引起用户强烈关注注意的背景色，目前只用在 Tooltip 的背景色上。
+   * @title 引起注意的背景色
+   * @type color
+   */
+  --cw-color-bg-spotlight: rgba(0, 0, 0, 0.85);
+
+  /**
+   * @desc 默认使用的边框颜色, 用于分割不同的元素，例如：表单的分割线、卡片的分割线等。
+   * @title 一级边框色
+   * @type color
+   */
+  --cw-color-border: #d9d9d9;
+
+  /**
+   * @desc 比默认使用的边框色要浅一级，此颜色和 colorSplit 的颜色一致。使用的是实色。
+   * @title 二级边框色
+   * @type color
+   */
+  --cw-color-border-secondary: #f0f0f0;
+
+  /**
+   * @desc 错误色的深色激活态
+   * @title 错误色的深色激活态
+   * @type color
+   */
+  --cw-color-error-active: #d9363e;
+
+  /**
+   * @desc 错误色的浅色背景颜色
+   * @title 错误色的浅色背景颜色
+   * @type color
+   */
+  --cw-color-error-bg: #fff2f0;
+
+  /**
+   * @desc 错误色的浅色背景色悬浮态
+   * @title 错误色的浅色背景色悬浮态
+   * @type color
+   */
+  --cw-color-error-bg-hover: #fff1f0;
+
+  /**
+   * @desc 错误色的描边色
+   * @title 错误色的描边色
+   * @type color
+   */
+  --cw-color-error-border: #ffccc7;
+
+  /**
+   * @desc 错误色的描边色悬浮态
+   * @title 错误色的描边色悬浮态
+   * @type color
+   */
+  --cw-color-error-border-hover: #ffa39e;
+
+  /**
+   * @desc 错误色的深色悬浮态
+   * @title 错误色的深色悬浮态
+   * @type color
+   */
+  --cw-color-error-hover: #ff7875;
+
+  /**
+   * @desc 错误色的文本默认态
+   * @title 错误色的文本默认态
+   * @type color
+   */
+  --cw-color-error-text: #ff4d4f;
+
+  /**
+   * @desc 错误色的文本激活态
+   * @title 错误色的文本激活态
+   * @type color
+   */
+  --cw-color-error-text-active: #d9363e;
+
+  /**
+   * @desc 错误色的文本悬浮态
+   * @title 错误色的文本悬浮态
+   * @type color
+   */
+  --cw-color-error-text-hover: #ff7875;
+
+  /**
+   * @desc 最深的填充色，用于拉开与二、三级填充色的区分度，目前只用在 Slider 的 hover 效果。
+   * @title 一级填充色
+   * @type color
+   */
+  --cw-color-fill: rgba(0, 0, 0, 0.15);
+
+  /**
+   * @desc 最弱一级的填充色，适用于不易引起注意的色块，例如斑马纹、区分边界的色块等。
+   * @title 四级填充色
+   * @type color
+   */
+  --cw-color-fill-quaternary: rgba(0, 0, 0, 0.02);
+
+  /**
+   * @desc 二级填充色可以较为明显地勾勒出元素形体，如 Rate、Skeleton 等。也可以作为三级填充色的 Hover 状态，如 Table 等。
+   * @title 二级填充色
+   * @type color
+   */
+  --cw-color-fill-secondary: rgba(0, 0, 0, 0.06);
+
+  /**
+   * @desc 三级填充色用于勾勒出元素形体的场景，如 Slider、Segmented 等。如无强调需求的情况下，建议使用三级填色作为默认填色。
+   * @title 三级填充色
+   * @type color
+   */
+  --cw-color-fill-tertiary: rgba(0, 0, 0, 0.04);
+
+  /**
+   * @desc 信息色的深色激活态。
+   * @title 信息色的深色激活态
+   * @type color
+   */
+  --cw-color-info-active: #0958d9;
+
+  /**
+   * @desc 信息色的浅色背景颜色。
+   * @title 信息色的浅色背景颜色
+   * @type color
+   */
+  --cw-color-info-bg: #e6f4ff;
+
+  /**
+   * @desc 信息色的浅色背景色悬浮态。
+   * @title 信息色的浅色背景色悬浮态
+   * @type color
+   */
+  --cw-color-info-bg-hover: #bae0ff;
+
+  /**
+   * @desc 信息色的描边色。
+   * @title 信息色的描边色
+   * @type color
+   */
+  --cw-color-info-border: #91caff;
+
+  /**
+   * @desc 信息色的描边色悬浮态。
+   * @title 信息色的描边色悬浮态
+   * @type color
+   */
+  --cw-color-info-border-hover: #69b1ff;
+
+  /**
+   * @desc 信息色的深色悬浮态。
+   * @title 信息色的深色悬浮态
+   * @type color
+   */
+  --cw-color-info-hover: #69b1ff;
+
+  /**
+   * @desc 信息色的文本默认态。
+   * @title 信息色的文本默认态
+   * @type color
+   */
+  --cw-color-info-text: #1677ff;
+
+  /**
+   * @desc 信息色的文本激活态。
+   * @title 信息色的文本激活态
+   * @type color
+   */
+  --cw-color-info-text-active: #0958d9;
+
+  /**
+   * @desc 信息色的文本悬浮态。
+   * @title 信息色的文本悬浮态
+   * @type color
+   */
+  --cw-color-info-text-hover: #4096ff;
+
+  /**
+   * @desc 控制超链接被点击时的颜色。
+   * @title 超链接激活颜色
+   * @type color
+   */
+  --cw-color-link-active: #0958d9;
+
+  /**
+   * @desc 控制超链接悬浮时的颜色。
+   * @title 超链接悬浮颜色
+   * @type color
+   */
+  --cw-color-link-hover: #69b1ff;
+
+  /**
+   * @desc 主色梯度下的深色激活态。
+   * @title 主色激活态
+   * @type color
+   */
+  --cw-color-primary-active: #0958d9;
+
+  /**
+   * @desc 主色浅色背景颜色，一般用于视觉层级较弱的选中状态。
+   * @title 主色浅色背景色
+   * @type color
+   */
+  --cw-color-primary-bg: #e6f4ff;
+
+  /**
+   * @desc 与主色浅色背景颜色相对应的悬浮态颜色。
+   * @title 主色浅色背景悬浮态
+   * @type color
+   */
+  --cw-color-primary-bg-hover: #bae0ff;
+
+  /**
+   * @desc 主色梯度下的描边用色，用在 Slider 等组件的描边上。
+   * @title 主色描边色
+   * @type color
+   */
+  --cw-color-primary-border: #91caff;
+
+  /**
+   * @desc 主色梯度下的描边用色的悬浮态，Slider 、Button 等组件的描边 Hover 时会使用。
+   * @title 主色描边色悬浮态
+   * @type color
+   */
+  --cw-color-primary-border-hover: #69b1ff;
+
+  /**
+   * @desc 主色梯度下的悬浮态。
+   * @title 主色悬浮态
+   * @type color
+   */
+  --cw-color-primary-hover: #4096ff;
+
+  /**
+   * @desc 主色梯度下的文本颜色。
+   * @title 主色文本
+   * @type color
+   */
+  --cw-color-primary-text: #1677ff;
+
+  /**
+   * @desc 主色梯度下的文本激活态。
+   * @title 主色文本激活态
+   * @type color
+   */
+  --cw-color-primary-text-active: #0958d9;
+
+  /**
+   * @desc 主色梯度下的文本悬浮态。
+   * @title 主色文本悬浮态
+   * @type color
+   */
+  --cw-color-primary-text-hover: #4096ff;
+
+  /**
+   * @desc 成功色的深色激活态
+   * @title 成功色的深色激活态
+   * @type color
+   */
+  --cw-color-success-active: #389e0d;
+
+  /**
+   * @desc 成功色的浅色背景颜色，用于 Tag 和 Alert 的成功态背景色
+   * @title 成功色的浅色背景颜色
+   * @type color
+   */
+  --cw-color-success-bg: #f6ffed;
+
+  /**
+   * @desc 成功色浅色背景颜色，一般用于视觉层级较弱的选中状态，不过 antd 目前没有使用到该 token
+   * @title 成功色的浅色背景色悬浮态
+   * @type color
+   */
+  --cw-color-success-bg-hover: #d9f7be;
+
+  /**
+   * @desc 成功色的描边色，用于 Tag 和 Alert 的成功态描边色
+   * @title 成功色的描边色
+   * @type color
+   */
+  --cw-color-success-border: #b7eb8f;
+
+  /**
+   * @desc 成功色的描边色悬浮态
+   * @title 成功色的描边色悬浮态
+   * @type color
+   */
+  --cw-color-success-border-hover: #95de64;
+
+  /**
+   * @desc 成功色的深色悬浮态
+   * @title 成功色的深色悬浮态
+   * @type color
+   */
+  --cw-color-success-hover: #95de64;
+
+  /**
+   * @desc 成功色的文本默认态
+   * @title 成功色的文本默认态
+   * @type color
+   */
+  --cw-color-success-text: #52c41a;
+
+  /**
+   * @desc 成功色的文本激活态
+   * @title 成功色的文本激活态
+   * @type color
+   */
+  --cw-color-success-text-active: #389e0d;
+
+  /**
+   * @desc 成功色的文本悬浮态
+   * @title 成功色的文本悬浮态
+   * @type color
+   */
+  --cw-color-success-text-hover: #73d13d;
+
+  /**
+   * @desc 最深的文本色。为了符合W3C标准，默认的文本颜色使用了该色，同时这个颜色也是最深的中性色。
+   * @title 一级文本色
+   * @type color
+   */
+  --cw-color-text: rgba(0, 0, 0, 0.88);
+
+  /**
+   * @desc 第四级文本色是最浅的文本色，例如表单的输入提示文本、禁用色文本等。
+   * @title 四级文本色
+   * @type color
+   */
+  --cw-color-text-quaternary: rgba(0, 0, 0, 0.25);
+
+  /**
+   * @desc 作为第二梯度的文本色，一般用在不那么需要强化文本颜色的场景，例如 Label 文本、Menu 的文本选中态等场景。
+   * @title 二级文本色
+   * @type color
+   */
+  --cw-color-text-secondary: rgba(0, 0, 0, 0.65);
+
+  /**
+   * @desc 第三级文本色一般用于描述性文本，例如表单的中的补充说明文本、列表的描述性文本等场景。
+   * @title 三级文本色
+   * @type color
+   */
+  --cw-color-text-tertiary: rgba(0, 0, 0, 0.45);
+
+  /**
+   * @desc 警戒色的深色激活态
+   * @title 警戒色的深色激活态
+   * @type color
+   */
+  --cw-color-warning-active: #d48806;
+
+  /**
+   * @desc 警戒色的浅色背景颜色
+   * @title 警戒色的浅色背景颜色
+   * @type color
+   */
+  --cw-color-warning-bg: #fffbe6;
+
+  /**
+   * @desc 警戒色的浅色背景色悬浮态
+   * @title 警戒色的浅色背景色悬浮态
+   * @type color
+   */
+  --cw-color-warning-bg-hover: #fff1b8;
+
+  /**
+   * @desc 警戒色的描边色
+   * @title 警戒色的描边色
+   * @type color
+   */
+  --cw-color-warning-border: #ffe58f;
+
+  /**
+   * @desc 警戒色的描边色悬浮态
+   * @title 警戒色的描边色悬浮态
+   * @type color
+   */
+  --cw-color-warning-border-hover: #ffd666;
+
+  /**
+   * @desc 警戒色的深色悬浮态
+   * @title 警戒色的深色悬浮态
+   * @type color
+   */
+  --cw-color-warning-hover: #ffd666;
+
+  /**
+   * @desc 警戒色的文本默认态
+   * @title 警戒色的文本默认态
+   * @type color
+   */
+  --cw-color-warning-text: #faad14;
+
+  /**
+   * @desc 警戒色的文本激活态
+   * @title 警戒色的文本激活态
+   * @type color
+   */
+  --cw-color-warning-text-active: #d48806;
+
+  /**
+   * @desc 警戒色的文本悬浮态
+   * @title 警戒色的文本悬浮态
+   * @type color
+   */
+  --cw-color-warning-text-hover: #ffc53d;
+
+  /**
+   * @desc 不随主题变化的纯白色
+   * @title 纯白色
+   * @type color
+   */
+  --cw-color-white: #fff;
+
+  /**
+   * @desc 较高的组件高度
+   * @title 较高的组件高度
+   * @type size
+   */
+  --cw-control-height-lg: 40px;
+
+  /**
+   * @desc 较小的组件高度
+   * @title 较小的组件高度
+   * @type size
+   */
+  --cw-control-height-sm: 24px;
+
+  /**
+   * @desc 更小的组件高度
+   * @title 更小的组件高度
+   * @type size
+   */
+  --cw-control-height-xs: 16px;
+
+  /**
+   * @desc H1 标签所使用的字号
+   * @title 一级标题字号
+   * @type size
+   */
+  --cw-font-size-heading-1: 38px;
+
+  /**
+   * @desc h2 标签所使用的字号
+   * @title 二级标题字号
+   * @type size
+   */
+  --cw-font-size-heading-2: 30px;
+
+  /**
+   * @desc h3 标签使用的字号
+   * @title 三级标题字号
+   * @type size
+   */
+  --cw-font-size-heading-3: 24px;
+
+  /**
+   * @desc h4 标签使用的字号
+   * @title 四级标题字号
+   * @type size
+   */
+  --cw-font-size-heading-4: 20px;
+
+  /**
+   * @desc h5 标签使用的字号
+   * @title 五级标题字号
+   * @type size
+   */
+  --cw-font-size-heading-5: 16px;
+
+  /**
+   * @desc 大号字体大小
+   * @type size
+   */
+  --cw-font-size-lg: 16px;
+
+  /**
+   * @desc 小号字体大小
+   * @type size
+   */
+  --cw-font-size-sm: 12px;
+
+  /**
+   * @desc 超大号字体大小
+   * @type size
+   */
+  --cw-font-size-xl: 20px;
+
+  /**
+   * @desc 文本行高
+   * @type input
+   */
+  --cw-line-height: 1.5714285714285714;
+
+  /**
+   * @desc H1 标签所使用的行高
+   * @title 一级标题行高
+   * @type input
+   */
+  --cw-line-height-heading-1: 1.2105263157894737;
+
+  /**
+   * @desc h2 标签所使用的行高
+   * @title 二级标题行高
+   * @type input
+   */
+  --cw-line-height-heading-2: 1.2666666666666666;
+
+  /**
+   * @desc h3 标签所使用的行高
+   * @title 三级标题行高
+   * @type input
+   */
+  --cw-line-height-heading-3: 1.3333333333333333;
+
+  /**
+   * @desc h4 标签所使用的行高
+   * @title 四级标题行高
+   * @type input
+   */
+  --cw-line-height-heading-4: 1.4;
+
+  /**
+   * @desc h5 标签所使用的行高
+   * @title 五级标题行高
+   * @type input
+   */
+  --cw-line-height-heading-5: 1.5;
+
+  /**
+   * @desc 大型文本行高
+   * @type input
+   */
+  --cw-line-height-lg: 1.5;
+
+  /**
+   * @desc 小型文本行高
+   * @type input
+   */
+  --cw-line-height-sm: 1.6666666666666667;
+
+  /**
+   * @desc 描边类组件的默认线宽，如 Button、Input、Select 等输入类控件。
+   * @title 线宽
+   * @type size
+   */
+  --cw-line-width-bold: 2px;
+
+  /**
+   * @desc 动效播放速度，快速。用于小型元素动画交互
+   * @type input
+   */
+  --cw-motion-duration-fast: 0.1s;
+
+  /**
+   * @desc 动效播放速度，中速。用于中型元素动画交互
+   * @type input
+   */
+  --cw-motion-duration-mid: 0.2s;
+
+  /**
+   * @desc 动效播放速度，慢速。用于大型元素如面板动画交互
+   * @type input
+   */
+  --cw-motion-duration-slow: 0.3s;
+
+  /**
+   * @desc 默认尺寸
+   * @title 默认
+   * @type size
+   */
+  --cw-size: 16px;
+
+  /**
+   * @title LG
+   * @type size
+   */
+  --cw-size-lg: 24px;
+
+  /**
+   * @title MD
+   * @type size
+   */
+  --cw-size-md: 20px;
+
+  /**
+   * @type size
+   */
+  --cw-size-ms: 16px;
+
+  /**
+   * @title SM
+   * @type size
+   */
+  --cw-size-sm: 12px;
+
+  /**
+   * @title XL
+   * @type size
+   */
+  --cw-size-xl: 32px;
+
+  /**
+   * @title XS
+   * @type size
+   */
+  --cw-size-xs: 8px;
+
+  /**
+   * @title XXL
+   * @type size
+   */
+  --cw-size-xxl: 48px;
+
+  /**
+   * @title XXS
+   * @type size
+   */
+  --cw-size-xxs: 4px;
+
+  /**
+   * @desc 控制元素阴影样式。
+   * @title 一级阴影
+   * @type input
+   */
+  --cw-box-shadow: 
+      0 6px 16px 0 rgba(0, 0, 0, 0.08),
+      0 3px 6px -4px rgba(0, 0, 0, 0.12),
+      0 9px 28px 8px rgba(0, 0, 0, 0.05)
+    ;
+
+  /**
+   * @desc 控制元素二级阴影样式。
+   * @title 二级阴影
+   * @type input
+   */
+  --cw-box-shadow-secondary: 
+      0 6px 16px 0 rgba(0, 0, 0, 0.08),
+      0 3px 6px -4px rgba(0, 0, 0, 0.12),
+      0 9px 28px 8px rgba(0, 0, 0, 0.05)
+    ;
+
+  /**
+   * @desc 控制元素三级盒子阴影样式。
+   * @title 三级阴影
+   * @type input
+   */
+  --cw-box-shadow-tertiary: 
+      0 1px 2px 0 rgba(0, 0, 0, 0.03),
+      0 1px 6px -1px rgba(0, 0, 0, 0.02),
+      0 2px 4px 0 rgba(0, 0, 0, 0.02)
+    ;
+
+  /**
+   * @desc 控制容器在禁用状态下的背景色。
+   * @title 容器禁用态下的背景色
+   * @type color
+   */
+  --cw-color-bg-container-disabled: rgba(0, 0, 0, 0.04);
+
+  /**
+   * @desc 控制文本在激活状态下的背景色。
+   * @title 文本激活态背景色
+   * @type color
+   */
+  --cw-color-bg-text-active: rgba(0, 0, 0, 0.15);
+
+  /**
+   * @desc 控制文本在悬停状态下的背景色。
+   * @title 文本悬停态背景色
+   * @type color
+   */
+  --cw-color-bg-text-hover: rgba(0, 0, 0, 0.06);
+
+  /**
+   * @desc 控制元素背景边框的颜色。
+   * @title 背景边框颜色
+   * @type color
+   */
+  --cw-color-border-bg: #ffffff;
+
+  /**
+   * @desc 控制输入组件错误状态下的外轮廓线颜色。
+   * @title 错误状态下的 Outline 颜色
+   * @type color
+   */
+  --cw-color-error-outline: rgba(255, 38, 5, 0.06);
+
+  /**
+   * @desc 控制元素替代背景色。
+   * @title 替代背景色
+   * @type color
+   */
+  --cw-color-fill-alter: rgba(0, 0, 0, 0.02);
+
+  /**
+   * @desc 控制内容区域的背景色。
+   * @title 内容区域背景色
+   * @type color
+   */
+  --cw-color-fill-content: rgba(0, 0, 0, 0.06);
+
+  /**
+   * @desc 控制内容区域背景色在鼠标悬停时的样式。
+   * @title 内容区域背景色（悬停）
+   * @type color
+   */
+  --cw-color-fill-content-hover: rgba(0, 0, 0, 0.15);
+
+  /**
+   * @desc 控制页面元素高亮时的颜色。
+   * @title 高亮颜色
+   * @type color
+   */
+  --cw-color-highlight: #ff4d4f;
+
+  /**
+   * @desc 控制弱操作图标的颜色，例如 allowClear 或 Alert 关闭按钮。
+ *
+   * @title 弱操作图标颜色
+ *
+   * @type color
+   */
+  --cw-color-icon: rgba(0, 0, 0, 0.45);
+
+  /**
+   * @desc 控制弱操作图标在悬浮状态下的颜色，例如 allowClear 或 Alert 关闭按钮。
+   * @title 弱操作图标悬浮态颜色
+   * @type color
+   */
+  --cw-color-icon-hover: rgba(0, 0, 0, 0.88);
+
+  /**
+   * @desc 用于作为分割线的颜色，此颜色和 colorBorderSecondary 的颜色一致，但是用的是透明色。
+   * @title 分割线颜色
+   * @type color
+   */
+  --cw-color-split: rgba(5, 5, 5, 0.06);
+
+  /**
+   * @desc 控制文本描述字体颜色。
+   * @title 文本描述字体颜色
+   * @type color
+   */
+  --cw-color-text-description: rgba(0, 0, 0, 0.45);
+
+  /**
+   * @desc 控制禁用状态下的字体颜色。
+   * @title 禁用字体颜色
+   * @type color
+   */
+  --cw-color-text-disabled: rgba(0, 0, 0, 0.25);
+
+  /**
+   * @desc 控制标题字体颜色。
+   * @title 标题字体颜色
+   * @type color
+   */
+  --cw-color-text-heading: rgba(0, 0, 0, 0.88);
+
+  /**
+   * @desc 控制文本标签字体颜色。
+   * @title 文本标签字体颜色
+   * @type color
+   */
+  --cw-color-text-label: rgba(0, 0, 0, 0.65);
+
+  /**
+   * @desc 控制带背景色的文本，例如 Primary Button 组件中的文本高亮颜色。
+   * @title 固定文本高亮颜色
+   * @type color
+   */
+  --cw-color-text-light-solid: #fff;
+
+  /**
+   * @desc 控制占位文本的颜色。
+   * @title 占位文本颜色
+   * @type color
+   */
+  --cw-color-text-placeholder: rgba(0, 0, 0, 0.25);
+
+  /**
+   * @desc 控制输入组件警告状态下的外轮廓线颜色。
+   * @title 警告状态下的 Outline 颜色
+   * @type color
+   */
+  --cw-color-warning-outline: rgba(255, 215, 5, 0.1);
+
+  /**
+   * @desc 控制组件的交互大小。
+   * @title 控制组件的交互大小
+   * @type size
+   */
+  --cw-control-interactive-size: 16px;
+
+  /**
+   * @desc 控制组件项在激活状态下的背景颜色。
+   * @title 控制组件项在激活状态下的背景颜色
+   * @type color
+   */
+  --cw-control-item-bg-active: #e6f4ff;
+
+  /**
+   * @desc 控制组件项在禁用状态下的激活背景颜色。
+   * @title 控制组件项在禁用状态下的激活背景颜色
+   * @type color
+   */
+  --cw-control-item-bg-active-disabled: rgba(0, 0, 0, 0.15);
+
+  /**
+   * @desc 控制组件项在鼠标悬浮且激活状态下的背景颜色。
+   * @title 控制组件项在鼠标悬浮且激活状态下的背景颜色
+   * @type color
+   */
+  --cw-control-item-bg-active-hover: #bae0ff;
+
+  /**
+   * @desc 控制组件项在鼠标悬浮时的背景颜色。
+   * @title 控制组件项在鼠标悬浮时的背景颜色
+   * @type color
+   */
+  --cw-control-item-bg-hover: rgba(0, 0, 0, 0.04);
+
+  /**
+   * @desc 控制输入组件的外轮廓线颜色。
+   * @title 输入组件的 Outline 颜色
+   * @type color
+   */
+  --cw-control-outline: rgba(5, 145, 255, 0.1);
+
+  /**
+   * @desc 控制输入组件的外轮廓线宽度。
+   * @title 输入组件的外轮廓线宽度
+   * @type size
+   */
+  --cw-control-outline-width: 2px;
+
+  /**
+   * @desc 控制元素水平内间距。
+   * @title 控制水平内间距
+   * @type size
+   */
+  --cw-control-padding-horizontal: 12px;
+
+  /**
+   * @desc 控制元素中小尺寸水平内间距。
+   * @title 控制中小尺寸水平内间距
+   * @type size
+   */
+  --cw-control-padding-horizontal-sm: 8px;
+
+  /**
+   * @desc 控制选择器、级联选择器等中的操作图标字体大小。正常情况下与 fontSizeSM 相同。
+   * @title 选择器、级联选择器等中的操作图标字体大小
+   * @type size
+   */
+  --cw-font-size-icon: 12px;
+
+  /**
+   * @desc 控制标题类组件（如 h1、h2、h3）或选中项的字体粗细。
+   * @title 标题类组件（如 h1、h2、h3）或选中项的字体粗细
+   * @type input
+   */
+  --cw-font-weight-strong: 600;
+
+  /**
+   * @desc 控制线条的宽度，当组件处于聚焦态时。
+   * @title 线条宽度(聚焦态)
+   * @type size
+   */
+  --cw-line-width-focus: 4px;
+
+  /**
+   * @desc 控制链接文本的装饰样式。
+   * @title 链接文本装饰
+   * @type input
+   */
+  --cw-link-decoration: none;
+
+  /**
+   * @desc 控制链接聚焦时文本的装饰样式。
+   * @title 链接聚焦时文本装饰
+   * @type input
+   */
+  --cw-link-focus-decoration: none;
+
+  /**
+   * @desc 控制链接鼠标悬浮时文本的装饰样式。
+   * @title 链接鼠标悬浮时文本装饰
+   * @type input
+   */
+  --cw-link-hover-decoration: none;
+
+  /**
+   * @desc 控制元素外边距，中等尺寸。
+   * @title 外边距
+   * @type size
+   */
+  --cw-margin: 16px;
+
+  /**
+   * @desc 控制元素外边距，大尺寸。
+   * @title 外边距 LG
+   * @type size
+   */
+  --cw-margin-lg: 24px;
+
+  /**
+   * @desc 控制元素外边距，中大尺寸。
+   * @title 外边距 MD
+   * @type size
+   */
+  --cw-margin-md: 20px;
+
+  /**
+   * @desc 控制元素外边距，中小尺寸。
+   * @title 外边距 SM
+   * @type size
+   */
+  --cw-margin-sm: 12px;
+
+  /**
+   * @desc 控制元素外边距，超大尺寸。
+   * @title 外边距 XL
+   * @type size
+   */
+  --cw-margin-xl: 32px;
+
+  /**
+   * @desc 控制元素外边距，小尺寸。
+   * @title 外边距 XS
+   * @type size
+   */
+  --cw-margin-xs: 8px;
+
+  /**
+   * @desc 控制元素外边距，最大尺寸。
+   * @title 外边距 XXL
+   * @type size
+   */
+  --cw-margin-xxl: 48px;
+
+  /**
+   * @desc 控制元素外边距，最小尺寸。
+   * @title 外边距 XXS
+   * @type size
+   */
+  --cw-margin-xxs: 4px;
+
+  /**
+   * @desc 控制加载状态的透明度。
+   * @title 加载状态透明度
+   * @type input
+   */
+  --cw-opacity-loading: 0.65;
+
+  /**
+   * @desc 控制元素的内间距。
+   * @title 内间距
+   * @type size
+   */
+  --cw-padding: 16px;
+
+  /**
+   * @desc 控制内容元素水平内间距。
+   * @title 内容水平内间距
+   * @type size
+   */
+  --cw-padding-content-horizontal: 16px;
+
+  /**
+   * @desc 控制内容元素水平内间距，适用于大屏幕设备。
+   * @title 内容水平内间距（LG）
+   * @type size
+   */
+  --cw-padding-content-horizontal-lg: 24px;
+
+  /**
+   * @desc 控制内容元素水平内间距，适用于小屏幕设备。
+   * @title 内容水平内间距（SM）
+   * @type size
+   */
+  --cw-padding-content-horizontal-sm: 16px;
+
+  /**
+   * @desc 控制内容元素垂直内间距。
+   * @title 内容垂直内间距
+   * @type size
+   */
+  --cw-padding-content-vertical: 12px;
+
+  /**
+   * @desc 控制内容元素垂直内间距，适用于大屏幕设备。
+   * @title 内容垂直内间距（LG）
+   * @type size
+   */
+  --cw-padding-content-vertical-lg: 16px;
+
+  /**
+   * @desc 控制内容元素垂直内间距，适用于小屏幕设备。
+   * @title 内容垂直内间距（SM）
+   * @type size
+   */
+  --cw-padding-content-vertical-sm: 8px;
+
+  /**
+   * @desc 控制元素的大内间距。
+   * @title 大内间距
+   * @type size
+   */
+  --cw-padding-lg: 24px;
+
+  /**
+   * @desc 控制元素的中等内间距。
+   * @title 中等内间距
+   * @type size
+   */
+  --cw-padding-md: 20px;
+
+  /**
+   * @desc 控制元素的小内间距。
+   * @title 小内间距
+   * @type size
+   */
+  --cw-padding-sm: 12px;
+
+  /**
+   * @desc 控制元素的特大内间距。
+   * @title 特大内间距
+   * @type size
+   */
+  --cw-padding-xl: 32px;
+
+  /**
+   * @desc 控制元素的特小内间距。
+   * @title 特小内间距
+   * @type size
+   */
+  --cw-padding-xs: 8px;
+
+  /**
+   * @desc 控制元素的极小内间距。
+   * @title 极小内间距
+   * @type size
+   */
+  --cw-padding-xxs: 4px;
+
+  /**
+   * @desc 控制大屏幕的屏幕宽度。
+   * @title 屏幕宽度（像素） - 大屏幕
+   * @type size
+   */
+  --cw-screen-lg: 992px;
+
+  /**
+   * @desc 控制大屏幕的最大宽度。
+   * @title 屏幕宽度（像素） - 大屏幕最大值
+   * @type size
+   */
+  --cw-screen-lg-max: 1199px;
+
+  /**
+   * @desc 控制大屏幕的最小宽度。
+   * @title 屏幕宽度（像素） - 大屏幕最小值
+   * @type size
+   */
+  --cw-screen-lg-min: 992px;
+
+  /**
+   * @desc 控制中等屏幕的屏幕宽度。
+   * @title 屏幕宽度（像素） - 中等屏幕
+   * @type size
+   */
+  --cw-screen-md: 768px;
+
+  /**
+   * @desc 控制中等屏幕的最大宽度。
+   * @title 屏幕宽度（像素） - 中等屏幕最大值
+   * @type size
+   */
+  --cw-screen-md-max: 991px;
+
+  /**
+   * @desc 控制中等屏幕的最小宽度。
+   * @title 屏幕宽度（像素） - 中等屏幕最小值
+   * @type size
+   */
+  --cw-screen-md-min: 768px;
+
+  /**
+   * @desc 控制小屏幕的屏幕宽度。
+   * @title 屏幕宽度（像素） - 小屏幕
+   * @type size
+   */
+  --cw-screen-sm: 576px;
+
+  /**
+   * @desc 控制小屏幕的最大宽度。
+   * @title 屏幕宽度（像素） - 小屏幕最大值
+   * @type size
+   */
+  --cw-screen-sm-max: 767px;
+
+  /**
+   * @desc 控制小屏幕的最小宽度。
+   * @title 屏幕宽度（像素） - 小屏幕最小值
+   * @type size
+   */
+  --cw-screen-sm-min: 576px;
+
+  /**
+   * @desc 控制超大屏幕的屏幕宽度。
+   * @title 屏幕宽度（像素） - 超大屏幕
+   * @type size
+   */
+  --cw-screen-xl: 1200px;
+
+  /**
+   * @desc 控制超大屏幕的最大宽度。
+   * @title 屏幕宽度（像素） - 超大屏幕最大值
+   * @type size
+   */
+  --cw-screen-xl-max: 1599px;
+
+  /**
+   * @desc 控制超大屏幕的最小宽度。
+   * @title 屏幕宽度（像素） - 超大屏幕最小值
+   * @type size
+   */
+  --cw-screen-xl-min: 1200px;
+
+  /**
+   * @desc 控制超小屏幕的屏幕宽度。
+   * @title 屏幕宽度（像素） - 超小屏幕
+   * @type size
+   */
+  --cw-screen-xs: 480px;
+
+  /**
+   * @desc 控制超小屏幕的最大宽度。
+   * @title 屏幕宽度（像素） - 超小屏幕最大值
+   * @type size
+   */
+  --cw-screen-xs-max: 575px;
+
+  /**
+   * @desc 控制超小屏幕的最小宽度。
+   * @title 屏幕宽度（像素） - 超小屏幕最小值
+   * @type size
+   */
+  --cw-screen-xs-min: 480px;
+
+  /**
+   * @desc 控制超超大屏幕的屏幕宽度。
+   * @title 屏幕宽度（像素） - 超超大屏幕
+   * @type size
+   */
+  --cw-screen-xxl: 1600px;
+
+  /**
+   * @desc 控制超超大屏幕的最小宽度。
+   * @title 屏幕宽度（像素） - 超超大屏幕最小值
+   * @type size
+   */
+  --cw-screen-xxl-min: 1600px;
+}

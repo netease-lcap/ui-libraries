@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import autoprefixer from 'autoprefixer';
+import { lcapPlugin } from '@lcap/builder';
 
 // 设置测试运行的时区
 process.env.TZ = 'Asia/Shanghai';
@@ -12,7 +13,7 @@ process.env.TZ = 'Asia/Shanghai';
 export default defineConfig(({ mode, command }) => {
   return {
     publicDir: 'dist-theme',
-    plugins: [react()],
+    plugins: [react(), lcapPlugin()],
     css: {
       postcss: {
         plugins: [
@@ -33,12 +34,6 @@ export default defineConfig(({ mode, command }) => {
         transformMixedEsModules: true,
       },
       target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
-      // lib: {
-      //   entry: 'src/index.ts',
-      //   name: 'antd',
-      //   formats: ['umd'],
-      //   fileName: () => 'index.js',
-      // },
       lib: {
         entry: 'src/index.ts',
         name: 'antd',

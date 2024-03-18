@@ -1,0 +1,18 @@
+/**
+ * @component Dropdown
+ * @useGlobalTokens ["--cw-margin-xxs","--cw-size-popup-arrow","--cw-padding-xxs","--cw-motion-duration-mid","--cw-font-size","--cw-color-text-disabled","--cw-font-size-icon","--cw-control-padding-horizontal","--cw-color-bg-elevated","--cw-color-text","--cw-line-height","--cw-font-family","--cw-box-shadow-popover-arrow","--cw-border-radius-xs","--cw-border-radius-lg","--cw-box-shadow-secondary","--cw-line-width-focus","--cw-color-primary-border","--cw-color-text-description","--cw-margin-xs","--cw-font-size-sm","--cw-border-radius-sm","--cw-control-item-bg-hover","--cw-color-primary","--cw-control-item-bg-active","--cw-control-item-bg-active-hover","--cw-color-split","--cw-padding-xs","--cw-motion-ease-out-quint","--cw-motion-ease-in-quint","--cw-motion-ease-out-circ","--cw-motion-ease-in-out-circ","--cw-color-error","--cw-color-text-light-solid"]
+ */
+.cw-nasl.cw-dropdown,
+.cw-nasl.cw-dropdown-css-var {
+  /**
+   * @desc 下拉菜单纵向内边距
+   * @type size
+   */
+  --cw-dropdown-padding-block: 5px;
+
+  /**
+   * @desc 下拉菜单 z-index
+   * @type input
+   */
+  --cw-dropdown-z-index-popup: 1050;
+}

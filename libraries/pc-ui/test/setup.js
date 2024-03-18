@@ -1,3 +1,5 @@
+import 'vitest-canvas-mock';
+import './win.js';
 import Vue from 'vue';
 import { vi, expect } from 'vitest';
 import VueI18N from 'vue-i18n';
@@ -18,7 +20,6 @@ const mutationObserverMock = vi.fn(function MutationObserver(callback) {
   };
 });
 window.MutationObserver = mutationObserverMock;
-
 // 将模拟对象赋值给实际的 VisualViewport 属性
 Object.defineProperty(window, 'VisualViewport', { value: function() {} });
 Object.assign(window.VisualViewport.prototype, {

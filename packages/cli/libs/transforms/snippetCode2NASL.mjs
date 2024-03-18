@@ -1,6 +1,6 @@
 import * as parser from '@babel/parser';
 import babelTraverse from '@babel/traverse';
-import reactJSX2NASL from '../utils/reactJSX2NASL.mjs';
+import { transformJsx2Nasl } from '@lcap/builder';
 
 const traverse = babelTraverse.default;
 
@@ -13,7 +13,7 @@ export default (code) => {
   let nasl = '';
   traverse(ast, {
     JSXElement: (p) => {
-      nasl = reactJSX2NASL(p.node);
+      nasl = transformJsx2Nasl(p.node);
       p.stop();
     },
   });
