@@ -118,6 +118,12 @@ namespace nasl.ui {
       @Prop({
           group: '主要属性',
           title: '高级格式化',
+          onChange: [
+            { clear: ['advancedFormatValue'] }
+          ],
+          setter: {
+            concept: 'SwitchSetter',
+          },
       })
       advancedFormatEnable: nasl.core.Boolean = false;
 

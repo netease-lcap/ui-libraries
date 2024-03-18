@@ -88,6 +88,9 @@ namespace nasl.ui {
             title: '隐藏末尾0',
             description: '控制数据展示时最后一个是否展示0，仅影响展示，不影响数据实际存储的值。',
             if: _ => _.advancedFormatEnable === false,
+            setter: {
+                concept: 'SwitchSetter',
+            },
         })
         decimalPlacesOmitZero: nasl.core.Boolean = false;
 
@@ -116,8 +119,12 @@ namespace nasl.ui {
             title: '单位显示位置',
             description: '输入框中显示的单位',
             bindHide: true,
+            setter: {
+                concept: 'EnumSelectSetter',
+                options: [{ title: '前缀' }, { title: '后缀' }],
+            },
         })
-        unitType:nasl.core.String = 'prefix';
+        unitType: 'prefix' | 'suffix' = 'prefix';
 
         @Prop({
             group: '主要属性',
@@ -130,10 +137,12 @@ namespace nasl.ui {
             group: '主要属性',
             title: '高级格式化',
             description: '用来控制数字的展示格式',
-            bindHide: true,
             onChange: [
                 { clear: ['advancedFormatValue'] }
             ],
+            setter: {
+                concept: 'SwitchSetter',
+            },
         })
         advancedFormatEnable: nasl.core.Boolean = false;
 
@@ -141,10 +150,10 @@ namespace nasl.ui {
             group: '主要属性',
             title: '高级格式化内容',
             description: '用来控制数字的展示格式',
-            bindHide: true,
             if: _ => _.advancedFormatEnable === true,
+            bindHide: true,
         })
-        advancedFormatValue: value: nasl.core.String;
+        advancedFormatValue: nasl.core.String;
 
         @Prop({
             group: '主要属性',
