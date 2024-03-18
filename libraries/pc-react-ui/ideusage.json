@@ -1,503 +1,518 @@
 [
-    {
-        "name": "Select",
-        "ideusage": {
-            "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'SelectOption' || target.tag === 'SelectOptGroup'",
-            "actions": {
-                "click": {
-                    "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-                    "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
-                }
-            }
+  {
+    "name": "Select",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'SelectOption' || target.tag === 'SelectOptGroup'",
+      "actions": {
+        "click": {
+          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
+          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
         }
-    },
-    {
-        "name": "SelectOption",
-        "ideusage": {
-            "idetype": "container",
-            "parentAccept": "target.tag === 'Select' || target.tag === 'SelectOptGroup'"
-        }
-    },
-    {
-        "name": "SelectOptGroup",
-        "ideusage": {
-            "idetype": "container",
-            "structured": true,
-            "parentAccept": "target.tag === 'Select'",
-            "childAccept": "target.tag === 'SelectOption'"
-        }
-    },
-    {
-        "name": "InputNumber",
-        "ideusage": {
-            "idetype": "element"
-        }
-    },
-    {
-        "name": "Transfer",
-        "ideusage": {
-            "idetype": "container"
-        }
-    },
-    {
-        "name": "Switch",
-        "ideusage": {
-            "idetype": "element"
-        }
-    },
-    {
-        "name": "Input",
-        "ideusage": {
-            "idetype": "element",
-            "textholder": "value"
-        }
-    },
-    {
-        "name": "TextArea",
-        "ideusage": {
-            "idetype": "element"
-        }
-    },
-    {
-        "name": "CheckboxGroup",
-        "ideusage": {
-            "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'Checkbox'",
-            "dataSource": {
-                "dismiss": "!this.getAttribute('dataSource') && (this.filterElement(el => el.tag !== 'template').length > 0)",
-                "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
-                "loopElem": "> label.ant-checkbox-wrapper",
-                "emptySlot": {
-                    "display": "inline",
-                    "condition": "!this.getAttribute('dataSource')",
-                    "accept": "false"
-                }
-            }
-        }
-    },
-    {
-        "name": "Checkbox",
-        "ideusage": {
-            "idetype": "container",
-            "selector": {
-                "expression": "this",
-                "cssSelector": "label.ant-checkbox-wrapper"
-            }
-        }
-    },
-    {
-        "name": "Radio",
-        "ideusage": {
-            "idetype": "container",
-            "selector": {
-                "expression": "this",
-                "cssSelector": "label.ant-radio-wrapper"
-            }
-        }
-    },
-    {
-        "name": "RadioGroup",
-        "ideusage": {
-            "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'Radio'",
-            "dataSource": {
-                "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
-                "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
-                "loopElem": "> label.ant-radio-wrapper",
-                "emptySlot": {
-                    "display": "inline",
-                    "condition": "!this.getAttribute('dataSource')",
-                    "accept": "false"
-                }
-            }
-        }
-    },
-    {
-        "name": "Form",
-        "ideusage": {
-            "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'FormItem'"
-        }
-    },
-    {
-        "name": "FormItem",
-        "ideusage": {
-            "idetype": "container",
-            "parentAccept": "target.tag === 'Form'"
-        }
-    },
-    {
-        "name": "Button",
-        "ideusage": {
-            "idetype": "element",
-            "editable": "children"
-        }
-    },
-    {
-        "name": "Descriptions",
-        "ideusage": {
-            "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'DescriptionsItem'"
-        }
-    },
-    {
-        "name": "DescriptionsItem",
-        "ideusage": {
-            "idetype": "container",
-            "parentAccept": "target.tag === 'Descriptions'",
-            "selector": {
-                "expression": "this",
-                "cssSelector": ".ant-descriptions-item"
-            }
-        }
-    },
-    {
-        "name": "Flex",
-        "ideusage": {
-            "idetype": "container",
-            "containerDirection": "this.getAttribute('direction')?.value === 'true' ? 'column' : 'row' "
-        }
-    },
-    {
-        "name": "Table",
-        "ideusage": {
-            "idetype": "container",
-            "containerDirection": "row",
-            "structured": true,
-            "dataSource": {
-              "display": 3,
-              "loopElem": "table > tbody > tr",
-              "emptySlot": {
-                "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
-                "accept": "target.concept === 'Entity'"
-              }
-            },
-            "childAccept": "target.tag === 'TableColumn'"
-        }
-    },
-    {
-        "name": "TableColumn",
-        "ideusage": {
-            "idetype": "container",
-            "childAccept": false,
-            "parentAccept": "target.tag === 'Table'",
-            "containerDirection": "row",
-            "selector": [{
-                    "expression": "this.getElement(el => el.slotTarget === 'title')",
-                    "cssSelector": "th"
-                }, {
-                    "expression": "this.getElement(el => el.slotTarget === 'render')",
-                    "cssSelector": "td"
-                }
-            ]
-        }
-    },
-    {
-        "name": "List",
-        "ideusage": {
-            "idetype": "container",
-            "containerDirection": "column",
-            "dataSource": {
-                "display": 3,
-                "loopElem": "ul > div",
-                "emptySlot": {
-                    "condition": "!this.getAttribute('dataSource')",
-                    "accept": "target.concept === 'Entity'"
-                }
-            }
-        }
-    },
-    {
-        "name": "ListItem",
-        "ideusage": {
-            "idetype": "container",
-            "parentAccept": "target.tag === 'List'"
-        }
-    },
-    {
-        "name": "Row",
-        "ideusage": {
-            "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'Col'"
-        }
-    },
-    {
-        "name": "Col",
-        "ideusage": {
-            "idetype": "container",
-            "parentAccept": "target.tag === 'Row'"
-        }
-    },
-    {
-        "name": "Tabs",
-        "ideusage": {
-            "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'TabPane'"
-        }
-    },
-    {
-        "name": "TabPane",
-        "ideusage": {
-            "idetype": "container",
-            "parentAccept": "target.tag === 'Tabs'",
-            "selector": [{
-                "expression": "this.getElement(el => el.slotTarget === 'tab')",
-                "cssSelector": ".ant-tabs-tab"
-            },{
-                "expression": "this",
-                "cssSelector": ".ant-tabs-tabpane"
-            }],
-            "actions": {
-                "click": {
-                    "status": "this.getParent().setCacheStatus('defaultActiveKey', '\"' + this.getAttribute('key')?.value + '\"') ",
-                    "effect": "this.getParent().callComponentMethod('setValue', this.getAttribute('key')?.value)"
-                }
-            }
-        }
-    }, 
-    {
-        "name": "Tree",
-        "ideusage": {
-            "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'TreeNode'"
-        }
-    },
-    {
-        "name": "TreeNode",
-        "ideusage": {
-            "idetype": "container",
-            "structured": true,
-            "parentAccept": "target.tag === 'Tree'"
-        }
-    },
-    {
-        "name": "TreeSelect",
-        "ideusage": {
-            "idetype": "element"
-        }
-    },
-    {
-        "name": "Cascader",
-        "ideusage": {
-            "idetype": "element"
-        }
-    },
-    {
-        "name": "DatePicker",
-        "ideusage": {
-            "idetype": "element"
-        }
-    },
-    {
-        "name": "DateRangePicker",
-        "ideusage": {
-            "idetype": "element"
-        }
-    },
-    {
-        "name": "TimePicker",
-        "ideusage": {
-            "idetype": "element"
-        }
-    },
-    {
-        "name": "TimeRangePicker",
-        "ideusage": {
-            "idetype": "element"
-        }
-    },
-    {
-        "name": "Steps",
-        "ideusage": {
-            "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'StepsItem'"
-        }
-    },
-    {
-        "name": "StepsItem",
-        "ideusage": {
-            "idetype": "container",
-            "parentAccept": "target.tag === 'Steps'"
-        }
-    },
-    {
-        "name": "Modal",
-        "ideusage": {
-            "idetype": "modal",
-            "selector": {
-              "expression": "this",
-              "cssSelector": "div[class='ant-modal-content']"
-            },
-            "additionalAttribute": {
-                "transitionName": "''",
-                "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
-            },
-            "cacheOpenKey": "defaultOpen"
-        }
-    },
-    {
-        "name": "Drawer",
-        "ideusage": {
-            "idetype": "modal",
-            "selector": {
-              "expression": "this",
-              "cssSelector": "div[class='ant-drawer-content']"
-            },
-            "additionalAttribute": {
-                "transitionName": "''",
-                "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
-            },
-            "cacheOpenKey": "defaultOpen"
-        }
-    },
-    {
-        "name": "Message",
-        "ideusage": {
-            "idetype": "modal",
-            "selector": {
-              "expression": "this",
-              "cssSelector": "div[class='ant-drawer-wrapper-body']"
-            }
-        }
-    },
-    {
-        "name": "Popover",
-        "ideusage": {
-            "idetype": "popover",
-            "selector": {
-              "expression": "this.getElement(el => el.slotTarget === 'content')",
-              "cssSelector": "div[class='ant-popover-content']"
-            },
-            "actions": {
-                "click": {
-                    "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-                    "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
-                }
-            }
-        }
-    },
-    {
-        "name": "Image",
-        "ideusage": {
-            "idetype": "element"
-        }
-    },
-    {
-        "name": "Card",
-        "ideusage": {
-            "idetype": "container"
-        }
-    },
-    {
-        "name": "Router",
-        "ideusage": {
-            "idetype": "router"
-        }
-    },
-    {
-        "name": "Breadcrumb",
-        "ideusage": {
-            "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'BreadcrumbItem'"
-        }
-    },
-    {
-        "name": "BreadcrumbItem",
-        "ideusage": {
-            "idetype": "container",
-            "parentAccept": "target.tag === 'Breadcrumb'"
-        }
-    },
-    {
-        "name": "Dropdown",
-        "ideusage": {
-            "idetype": "popover",
-            "structured": true,
-            "namedSlotOmitWrapper": ["menuItem"],
-            "actions": {
-                "click": {
-                    "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-                    "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
-                }
-            }
-        }
-    },
-    {
-        "name": "Menu",
-        "ideusage": {
-            "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'MenuItem' || target.tag === 'MenuDivider' || target.tag === 'MenuItemGroup'"
-        }
-    },
-    {
-        "name": "MenuItem",
-        "ideusage": {
-            "idetype": "container",
-            "parentAccept": "target.tag === 'Menu'"
-        }
-    },
-    {
-        "name": "MenuDivider",
-        "ideusage": {
-            "idetype": "element"
-        }
-    },
-    {
-        "name": "MenuItemGroup",
-        "ideusage": {
-            "idetype": "container",
-            "childAccept": "target.tag === 'MenuItem'",
-            "parentAccept": "target.tag === 'Menu'"
-        }
-    },
-    {
-        "name": "MenuSubMenu",
-        "ideusage": {
-            "idetype": "popover",
-            "selector": {
-              "expression": "this.getElement(el => el.slotTarget === 'default' || !el.slotTarget)",
-              "cssSelector": "div[class='ant-menu-submenu-popup']"
-            },
-            "actions": {
-                "click": {
-                    "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-                    "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
-                }
-            }
-        }
-    },
-    {
-        "name": "Text",
-        "ideusage": {
-            "idetype": "element",
-            "editable": "children",
-            "textholder": "children"
-        }
-    },
-    {
-        "name": "Link",
-        "ideusage": {
-            "idetype": "element",
-            "editable": "children",
-            "textholder": "children"
-        }
-    },
-    {
-        "name": "Upload",
-        "ideusage": {
-            "idetype": "container"
-        }
+      }
     }
+  },
+  {
+    "name": "SelectOption",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Select' || target.tag === 'SelectOptGroup'"
+    }
+  },
+  {
+    "name": "SelectOptGroup",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "parentAccept": "target.tag === 'Select'",
+      "childAccept": "target.tag === 'SelectOption'"
+    }
+  },
+  {
+    "name": "FormSelect",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
+    "name": "FormInput",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
+    "name": "InputNumber",
+    "ideusage": {
+      "idetype": "element"
+    }
+  },
+  {
+    "name": "Transfer",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
+    "name": "Switch",
+    "ideusage": {
+      "idetype": "element"
+    }
+  },
+  {
+    "name": "Input",
+    "ideusage": {
+      "idetype": "element",
+      "textholder": "value"
+    }
+  },
+  {
+    "name": "TextArea",
+    "ideusage": {
+      "idetype": "element"
+    }
+  },
+  {
+    "name": "CheckboxGroup",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'Checkbox'",
+      "dataSource": {
+        "dismiss": "!this.getAttribute('dataSource') && (this.filterElement(el => el.tag !== 'template').length > 0)",
+        "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
+        "loopElem": "> label.ant-checkbox-wrapper",
+        "emptySlot": {
+          "display": "inline",
+          "condition": "!this.getAttribute('dataSource')",
+          "accept": "false"
+        }
+      }
+    }
+  },
+  {
+    "name": "Checkbox",
+    "ideusage": {
+      "idetype": "container",
+      "selector": {
+        "expression": "this",
+        "cssSelector": "label.ant-checkbox-wrapper"
+      }
+    }
+  },
+  {
+    "name": "Radio",
+    "ideusage": {
+      "idetype": "container",
+      "selector": {
+        "expression": "this",
+        "cssSelector": "label.ant-radio-wrapper"
+      }
+    }
+  },
+  {
+    "name": "RadioGroup",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'Radio'",
+      "dataSource": {
+        "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+        "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
+        "loopElem": "> label.ant-radio-wrapper",
+        "emptySlot": {
+          "display": "inline",
+          "condition": "!this.getAttribute('dataSource')",
+          "accept": "false"
+        }
+      }
+    }
+  },
+  {
+    "name": "Form",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
+    "name": "FormItem",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Form'"
+    }
+  },
+  {
+    "name": "Button",
+    "ideusage": {
+      "idetype": "element",
+      "editable": "children"
+    }
+  },
+  {
+    "name": "Descriptions",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'DescriptionsItem'"
+    }
+  },
+  {
+    "name": "DescriptionsItem",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Descriptions'",
+      "selector": {
+        "expression": "this",
+        "cssSelector": ".ant-descriptions-item"
+      }
+    }
+  },
+  {
+    "name": "Flex",
+    "ideusage": {
+      "idetype": "container",
+      "containerDirection": "this.getAttribute('direction')?.value === 'true' ? 'column' : 'row' "
+    }
+  },
+  {
+    "name": "Table",
+    "ideusage": {
+      "idetype": "container",
+      "containerDirection": "row",
+      "structured": true,
+      "dataSource": {
+        "display": 3,
+        "loopElem": "table > tbody > tr",
+        "emptySlot": {
+          "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
+          "accept": "target.concept === 'Entity'"
+        }
+      },
+      "childAccept": "target.tag === 'TableColumn'"
+    }
+  },
+  {
+    "name": "TableColumn",
+    "ideusage": {
+      "idetype": "container",
+      "childAccept": false,
+      "parentAccept": "target.tag === 'Table'",
+      "containerDirection": "row",
+      "selector": [
+        {
+          "expression": "this.getElement(el => el.slotTarget === 'title')",
+          "cssSelector": "th"
+        },
+        {
+          "expression": "this.getElement(el => el.slotTarget === 'render')",
+          "cssSelector": "td"
+        }
+      ]
+    }
+  },
+  {
+    "name": "List",
+    "ideusage": {
+      "idetype": "container",
+      "containerDirection": "column",
+      "dataSource": {
+        "display": 3,
+        "loopElem": "ul > div",
+        "emptySlot": {
+          "condition": "!this.getAttribute('dataSource')",
+          "accept": "target.concept === 'Entity'"
+        }
+      }
+    }
+  },
+  {
+    "name": "ListItem",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'List'"
+    }
+  },
+  {
+    "name": "Row",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'Col'"
+    }
+  },
+  {
+    "name": "Col",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Row'"
+    }
+  },
+  {
+    "name": "Tabs",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'TabPane'"
+    }
+  },
+  {
+    "name": "TabPane",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Tabs'",
+      "selector": [
+        {
+          "expression": "this.getElement(el => el.slotTarget === 'tab')",
+          "cssSelector": ".ant-tabs-tab"
+        },
+        {
+          "expression": "this",
+          "cssSelector": ".ant-tabs-tabpane"
+        }
+      ],
+      "actions": {
+        "click": {
+          "status": "this.getParent().setCacheStatus('defaultActiveKey', '\"' + this.getAttribute('key')?.value + '\"') ",
+          "effect": "this.getParent().callComponentMethod('setValue', this.getAttribute('key')?.value)"
+        }
+      }
+    }
+  },
+  {
+    "name": "Tree",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'TreeNode'"
+    }
+  },
+  {
+    "name": "TreeNode",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "parentAccept": "target.tag === 'Tree'"
+    }
+  },
+  {
+    "name": "TreeSelect",
+    "ideusage": {
+      "idetype": "element"
+    }
+  },
+  {
+    "name": "Cascader",
+    "ideusage": {
+      "idetype": "element"
+    }
+  },
+  {
+    "name": "DatePicker",
+    "ideusage": {
+      "idetype": "element"
+    }
+  },
+  {
+    "name": "DateRangePicker",
+    "ideusage": {
+      "idetype": "element"
+    }
+  },
+  {
+    "name": "TimePicker",
+    "ideusage": {
+      "idetype": "element"
+    }
+  },
+  {
+    "name": "TimeRangePicker",
+    "ideusage": {
+      "idetype": "element"
+    }
+  },
+  {
+    "name": "Steps",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'StepsItem'"
+    }
+  },
+  {
+    "name": "StepsItem",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Steps'"
+    }
+  },
+  {
+    "name": "Modal",
+    "ideusage": {
+      "idetype": "modal",
+      "selector": {
+        "expression": "this",
+        "cssSelector": "div[class='ant-modal-content']"
+      },
+      "additionalAttribute": {
+        "transitionName": "''",
+        "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
+      },
+      "cacheOpenKey": "defaultOpen"
+    }
+  },
+  {
+    "name": "Drawer",
+    "ideusage": {
+      "idetype": "modal",
+      "selector": {
+        "expression": "this",
+        "cssSelector": "div[class='ant-drawer-content']"
+      },
+      "additionalAttribute": {
+        "transitionName": "''",
+        "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
+      },
+      "cacheOpenKey": "defaultOpen"
+    }
+  },
+  {
+    "name": "Message",
+    "ideusage": {
+      "idetype": "modal",
+      "selector": {
+        "expression": "this",
+        "cssSelector": "div[class='ant-drawer-wrapper-body']"
+      }
+    }
+  },
+  {
+    "name": "Popover",
+    "ideusage": {
+      "idetype": "popover",
+      "selector": {
+        "expression": "this.getElement(el => el.slotTarget === 'content')",
+        "cssSelector": "div[class='ant-popover-content']"
+      },
+      "actions": {
+        "click": {
+          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
+          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+        }
+      }
+    }
+  },
+  {
+    "name": "Image",
+    "ideusage": {
+      "idetype": "element"
+    }
+  },
+  {
+    "name": "Card",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
+    "name": "Router",
+    "ideusage": {
+      "idetype": "router"
+    }
+  },
+  {
+    "name": "Breadcrumb",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'BreadcrumbItem'"
+    }
+  },
+  {
+    "name": "BreadcrumbItem",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Breadcrumb'"
+    }
+  },
+  {
+    "name": "Dropdown",
+    "ideusage": {
+      "idetype": "popover",
+      "structured": true,
+      "namedSlotOmitWrapper": ["menuItem"],
+      "actions": {
+        "click": {
+          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
+          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+        }
+      }
+    }
+  },
+  {
+    "name": "Menu",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'MenuItem' || target.tag === 'MenuDivider' || target.tag === 'MenuItemGroup'"
+    }
+  },
+  {
+    "name": "MenuItem",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Menu'"
+    }
+  },
+  {
+    "name": "MenuDivider",
+    "ideusage": {
+      "idetype": "element"
+    }
+  },
+  {
+    "name": "MenuItemGroup",
+    "ideusage": {
+      "idetype": "container",
+      "childAccept": "target.tag === 'MenuItem'",
+      "parentAccept": "target.tag === 'Menu'"
+    }
+  },
+  {
+    "name": "MenuSubMenu",
+    "ideusage": {
+      "idetype": "popover",
+      "selector": {
+        "expression": "this.getElement(el => el.slotTarget === 'default' || !el.slotTarget)",
+        "cssSelector": "div[class='ant-menu-submenu-popup']"
+      },
+      "actions": {
+        "click": {
+          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
+          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+        }
+      }
+    }
+  },
+  {
+    "name": "Text",
+    "ideusage": {
+      "idetype": "element",
+      "editable": "children",
+      "textholder": "children"
+    }
+  },
+  {
+    "name": "Link",
+    "ideusage": {
+      "idetype": "element",
+      "editable": "children",
+      "textholder": "children"
+    }
+  },
+  {
+    "name": "Upload",
+    "ideusage": {
+      "idetype": "container"
+    }
+  }
 ]

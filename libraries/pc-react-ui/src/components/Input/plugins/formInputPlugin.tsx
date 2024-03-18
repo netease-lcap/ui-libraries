@@ -1,8 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
-import { Select, Col, FormItem } from '@/index';
+import { Input } from 'antd';
+import { Col, FormItem } from '@/index';
 
 export function useHandleFormItem(props) {
+  const BaseComponent = props.get('render');
   const render = React.useCallback((selfProps) => {
     const nodepath = selfProps['data-nodepath'];
     const formItemPropsName = ['label', 'name', 'required', 'tooltip', 'rules'];
@@ -13,11 +15,11 @@ export function useHandleFormItem(props) {
     return (
       <Col span={24} {..._.pick(selfProps, colPropsName)} data-nodepath={nodepath}>
         <FormItem {...formItemProps}>
-          <Select {..._.omit(selfProps, [...formItemPropsName, ...colPropsName, 'data-nodepath'])} />
+          <BaseComponent {..._.omit(selfProps, [...formItemPropsName, ...colPropsName, 'data-nodepath', 'children'])} />
         </FormItem>
       </Col>
     );
-  }, []);
+  }, [BaseComponent]);
   return {
     render,
   };

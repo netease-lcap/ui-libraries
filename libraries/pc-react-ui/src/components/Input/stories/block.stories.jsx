@@ -1,17 +1,16 @@
 import React from 'react';
-import { Select, SelectOption, FormSelect } from '../index';
-// import Select from 'antd';
+import { Input, FormInput } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
-  title: 'Example/Select/blocks',
-  component: Select,
+  title: 'Example/Input/blocks',
+  component: Input,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
-  tags: [],
+  tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
@@ -21,20 +20,16 @@ export default {
     },
   },
 };
+
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const 选择器 = {
+export const 默认 = {
   render: () => {
-    return (
-      <Select style={{ width: 256 }} placeholder="请选择">
-        <SelectOption key="1" label="1" value="1" />
-        <SelectOption key="2" label="2" value="2" disabled />
-      </Select>
-    );
+    return <Input />;
   },
 };
 
-export const 表单选择器 = {
+export const 表单输入框 = {
   render: () => {
-    return <FormSelect labelText="表单项" />;
+    return <FormInput labelText="输入框表单项" />;
   },
 };

@@ -48,3 +48,25 @@ export const 默认 = {
     );
   },
 };
+export const 默认1 = {
+  render: () => {
+    const ref = React.useRef({});
+    return (
+      <Form ref={ref}>
+        <FormItem label={<Text children="账号" />} name="username">
+          <Input />
+        </FormItem>
+        <FormItem label={<Text children="密码" />} name="password">
+          <Input
+            onChange={() => {
+              console.log(1234);
+            }}
+          />
+        </FormItem>
+        <FormItem>
+          <Button onClick={() => console.log(ref.current.getValues())} type="primary" htmlType="submit" children="提交" />
+        </FormItem>
+      </Form>
+    );
+  },
+};

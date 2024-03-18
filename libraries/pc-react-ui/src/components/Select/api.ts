@@ -113,7 +113,7 @@ namespace nasl.ui {
     placeholder: nasl.core.String = '请选择';
 
     @Prop({
-      group: '主要属性',
+      group: '交互属性',
       title: '自动获取焦点',
       description: '设置是否自动获取焦点',
       docDescription: '控制是否在进入页面时聚焦到该组件',

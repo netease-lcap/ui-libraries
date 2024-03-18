@@ -15,6 +15,13 @@ module.exports = {
     // { group: 'Form', name: 'Transfer', alias: '穿梭框' },
     { group: 'Form', name: 'Switch', alias: '开关' },
     { group: 'Form', name: 'Input', alias: '单行输入' },
+    {
+      group: 'Form',
+      name: 'FormInput',
+      alias: '表单输入框',
+      apiPath: 'Input/FormInput.api.ts',
+      show: false,
+    },
     { group: 'Form', name: 'Textarea', alias: '多行输入' },
     { group: 'Form', name: 'CheckboxGroup', alias: '多选框' },
     { group: 'Form', name: 'RadioGroup', alias: '单选框' },
