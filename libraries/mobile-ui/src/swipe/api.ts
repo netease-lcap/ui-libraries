@@ -72,6 +72,11 @@ namespace nasl.ui {
       }]
     })
     slotDefault: () => Array<VanSwipeItem>;
+    @Slot({
+      title: 'undefined',
+      description: '自定义选项的结构和样式'
+    })
+    slotItem: (current: Current<T>) => Array<ViewComponent>;
   }
   @Component({
     title: '幻灯片选项',
