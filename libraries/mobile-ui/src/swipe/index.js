@@ -9,11 +9,13 @@ import { range } from '../utils/format/number';
 import { TouchMixin } from '../mixins/touch';
 import { ParentMixin } from '../mixins/relation';
 import { BindEventMixin } from '../mixins/bind-event';
+import DataSourceMixin from '../mixins/DataSource';
 
 const [createComponent, bem] = createNamespace('swipe');
 
 export default createComponent({
   mixins: [
+    DataSourceMixin,
     TouchMixin,
     ParentMixin('vanSwipe'),
     BindEventMixin(function (bind, isBind) {
@@ -385,8 +387,8 @@ export default createComponent({
     },
 
     autoPlay() {
-      if (this.$env && this.$env.VUE_APP_DESIGNER) {
-        return
+      if (this.inDesigner()) {
+        return;
       }
       const { autoplay } = this;
 
@@ -402,16 +404,15 @@ export default createComponent({
       this.swipeTo(index);
     },
     genIndicator() {
-      const designer = this.$env && this.$env.VUE_APP_DESIGNER;
       const { count, activeIndicator } = this;
       const slot = this.slots('indicator');
       const _this = this;
       if (slot) {
         return slot;
       }
-      const _scopeId = this.$vnode.context.$options._scopeId;
+
       if (this.showIndicators && count > 1) {
-        if (designer) {
+        if (this.inDesigner()) {
           return (
             <div class={bem('indicators', { vertical: this.vertical })}>
               {Array(...Array(count)).map((empty, index) => (
@@ -441,10 +442,19 @@ export default createComponent({
         );
       }
     },
+
+    renderDataSource() {
+      return this.currentData?.map((item, index) => {
+        return this.slots('item', { item, index });
+      });
+    },
+
+    renderNormal() {
+      return this.slots();
+    },
   },
 
   render() {
-    const designer = this.$env && this.$env.VUE_APP_DESIGNER;
     return (
       <div class={bem()}>
         <div
@@ -452,13 +462,18 @@ export default createComponent({
           style={this.trackStyle}
           class={bem('track', { vertical: this.vertical })}
         >
-          {this.slots()}
+          {this.dataSource !== undefined
+            ? this.renderDataSource()
+            : this.renderNormal()}
         </div>
+        {!this.slots() &&
+            this.dataSource === undefined &&
+            this.inDesigner() && (
+              <div style="text-align: center; width:100%; position: absolute; top: 50%;">
+                请绑定数据源或插入子节点
+              </div>
+            )}
         {this.genIndicator()}
-        {/* {designer ? <Icon name="arrow" class={bem('iconarrow', { right: true })} onClick={this.next} vusion-index="0"
-            findname="realpostionicon"></Icon> : null}
-        {designer ? <Icon name="arrow-left" class={bem('iconarrow', { left: true })} onClick={this.prev} vusion-index="1"
-            findname="realpostionicon"></Icon> : null} */}
       </div>
     );
   },
