@@ -3,7 +3,7 @@
 exports[`renders demo correctly 1`] = `
 <div>
   <div>
-    <div value="myPendingTaskList" class="van-my-process">
+    <div value="myPendingTaskList" vusion-disabled-duplicate="true" vusion-disabled-copy="true" class="van-my-process">
       <div class="van-tabs van-tabs--line">
         <div class="van-tabs__wrap">
           <div role="tablist" class="van-tabs__nav van-tabs__nav--line">
@@ -62,84 +62,7 @@ exports[`renders demo correctly 1`] = `
               <div class="van-pull-refresh__track" style="transition-duration: 0ms;">
                 <div class="van-pull-refresh__head"></div>
                 <div role="feed" class="van-list van-my-process__list-view">
-                  <div class="van-my-process__item-card">
-                    <div class="van-my-process__item-card-title">张三申请事假1天<i class="van-iconv" style="font-size: 12px;"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
-                          <use xlink:href="#h5-right-arrow" class="van-shoud-pa"></use>
-                        </svg>
-                        <!----></i></div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">流程类型</div>
-                      <div class="van-my-process__item-card-content">请假流程</div>
-                    </div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">当前节点</div>
-                      <div class="van-my-process__item-card-content">主管审批</div>
-                    </div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">当前处理人</div>
-                      <div class="van-my-process__item-card-content">主管A</div>
-                    </div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">发起人</div>
-                      <div class="van-my-process__item-card-content">张三</div>
-                    </div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">发起时间</div>
-                      <div class="van-my-process__item-card-content">2024-01-24 11:35:52</div>
-                    </div>
-                  </div>
-                  <div class="van-my-process__item-card">
-                    <div class="van-my-process__item-card-title">张三申请事假1天<i class="van-iconv" style="font-size: 12px;"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
-                          <use xlink:href="#h5-right-arrow" class="van-shoud-pa"></use>
-                        </svg>
-                        <!----></i></div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">流程类型</div>
-                      <div class="van-my-process__item-card-content">请假流程</div>
-                    </div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">当前节点</div>
-                      <div class="van-my-process__item-card-content">主管审批</div>
-                    </div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">当前处理人</div>
-                      <div class="van-my-process__item-card-content">主管A</div>
-                    </div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">发起人</div>
-                      <div class="van-my-process__item-card-content">张三</div>
-                    </div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">发起时间</div>
-                      <div class="van-my-process__item-card-content">2024-01-24 11:35:52</div>
-                    </div>
-                  </div>
-                  <div class="van-my-process__item-card">
-                    <div class="van-my-process__item-card-title">张三申请事假1天<i class="van-iconv" style="font-size: 12px;"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
-                          <use xlink:href="#h5-right-arrow" class="van-shoud-pa"></use>
-                        </svg>
-                        <!----></i></div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">流程类型</div>
-                      <div class="van-my-process__item-card-content">请假流程</div>
-                    </div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">当前节点</div>
-                      <div class="van-my-process__item-card-content">主管审批</div>
-                    </div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">当前处理人</div>
-                      <div class="van-my-process__item-card-content">主管A</div>
-                    </div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">发起人</div>
-                      <div class="van-my-process__item-card-content">张三</div>
-                    </div>
-                    <div class="van-my-process__item-card-line">
-                      <div class="van-my-process__item-card-label">发起时间</div>
-                      <div class="van-my-process__item-card-content">2024-01-24 11:35:52</div>
-                    </div>
-                  </div>
+                  <div class="van-my-process__list-view-empty">暂无数据</div>
                   <div class="van-list__placeholder"></div>
                 </div>
               </div>
