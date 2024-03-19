@@ -10,7 +10,7 @@ process.env.TZ = 'Asia/Shanghai';
 export default defineConfig({
   plugins: [react()],
   build: {
-    target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
+    target: ['es2020', 'edge88', 'firefox78', 'chrome56', 'safari14'],
     lib: {
       entry: 'src/index.ts',
       name: 'antd',
