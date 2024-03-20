@@ -309,7 +309,7 @@ export default createComponent({
 
         return (
           <li {...data} vusion-slot-name="option">
-            {this.slots('option', { item: option }) ||
+            {this.slots('option', { ...option, item: option }) ||
               (isInDesigner ? <EmptyCol></EmptyCol> : <div {...childData} />)}
           </li>
         );
