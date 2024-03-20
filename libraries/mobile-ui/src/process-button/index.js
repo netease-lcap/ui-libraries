@@ -116,7 +116,7 @@ export default createComponent({
       }
 
       try {
-        const res = await this.$processV2.getTaskOperationPermissions({
+        const res = await this.$processV2?.getTaskOperationPermissions({
           body: {
             taskId,
           },
@@ -134,7 +134,7 @@ export default createComponent({
       }
 
       try {
-        const res = await this.$processV2.getUsersForReassign({
+        const res = await this.$processV2?.getUsersForReassign({
           body: {
             taskId,
           },
@@ -170,7 +170,7 @@ export default createComponent({
       const operate = `${item.name}Task`;
 
       try {
-        await this.$processV2.setTaskInstance({
+        await this.$processV2?.setTaskInstance({
           path: {
             operate,
           },

@@ -1,153 +1,17 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`renders demo correctly 1`] = `
 <div>
   <div>
-    <div class="van-process-record">
+    <div vusion-disabled-duplicate="true" vusion-disabled-copy="true" class="van-process-record">
       <div class="van-steps van-steps--vertical van-process-record__timeline">
-        <div child-cut-disabled="true" class="van-steps__items">
-          <div class="van-hairline van-step van-step--vertical van-step--error" style="--van-step-line-color: #337EFF; --van-step-finish-line-color: #337EFF; --van-step-active-color: #337EFF; --van-step-text-color: #333;">
-            <div vusion-slot-name="default" class="van-step__title">
-              <div class="van-process-record__card">
-                <div class="van-process-record__card-title">发起任务</div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">处理人</div>
-                  <div class="van-process-record__card-content">章三</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">处理时间</div>
-                  <div class="van-process-record__card-content">2023-12-21 15:40:04</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">审批结果</div>
-                  <div class="van-process-record__card-content">提交了一个任务</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">审批意见</div>
-                  <div class="van-process-record__card-content">无</div>
-                </div>
-              </div>
-            </div>
-            <div class="van-step__circle-container">
-              <!---->
-            </div>
-            <div class="van-step__line"></div>
-          </div>
-          <div class="van-hairline van-step van-step--vertical van-step--finish" style="--van-step-line-color: #337EFF; --van-step-finish-line-color: #337EFF; --van-step-active-color: #337EFF; --van-step-text-color: #333;">
-            <div vusion-slot-name="default" class="van-step__title">
-              <div class="van-process-record__card">
-                <div class="van-process-record__card-title">发起任务</div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">处理人</div>
-                  <div class="van-process-record__card-content">章三</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">处理时间</div>
-                  <div class="van-process-record__card-content">2023-12-21 15:40:04</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">审批结果</div>
-                  <div class="van-process-record__card-content">提交了一个任务</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">审批意见</div>
-                  <div class="van-process-record__card-content">无</div>
-                </div>
-              </div>
-            </div>
-            <div class="van-step__circle-container">
-              <!---->
-            </div>
-            <div class="van-step__line"></div>
-          </div>
-          <div class="van-hairline van-step van-step--vertical van-step--error" style="--van-step-line-color: #337EFF; --van-step-finish-line-color: #337EFF; --van-step-active-color: #337EFF; --van-step-text-color: #333;">
-            <div vusion-slot-name="default" class="van-step__title">
-              <div class="van-process-record__card">
-                <div class="van-process-record__card-title">发起任务</div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">处理人</div>
-                  <div class="van-process-record__card-content">章三</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">处理时间</div>
-                  <div class="van-process-record__card-content">2023-12-21 15:40:04</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">审批结果</div>
-                  <div class="van-process-record__card-content">提交了一个任务</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">审批意见</div>
-                  <div class="van-process-record__card-content">无</div>
-                </div>
-              </div>
-            </div>
-            <div class="van-step__circle-container">
-              <!---->
-            </div>
-            <div class="van-step__line"></div>
-          </div>
-          <div class="van-hairline van-step van-step--vertical van-step--process" style="--van-step-line-color: #337EFF; --van-step-finish-line-color: #337EFF; --van-step-active-color: #337EFF; --van-step-text-color: #333;">
-            <div vusion-slot-name="default" class="van-step__title van-step__title--active">
-              <div class="van-process-record__card">
-                <div class="van-process-record__card-title">发起任务</div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">处理人</div>
-                  <div class="van-process-record__card-content">章三</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">处理时间</div>
-                  <div class="van-process-record__card-content">2023-12-21 15:40:04</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">审批结果</div>
-                  <div class="van-process-record__card-content">提交了一个任务</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">审批意见</div>
-                  <div class="van-process-record__card-content">无</div>
-                </div>
-              </div>
-            </div>
-            <div class="van-step__circle-container">
-              <!---->
-            </div>
-            <div class="van-step__line"></div>
-          </div>
-          <div class="van-hairline van-step van-step--vertical van-step--process" style="--van-step-line-color: #337EFF; --van-step-finish-line-color: #337EFF; --van-step-active-color: #337EFF; --van-step-text-color: #333;">
-            <div vusion-slot-name="default" class="van-step__title van-step__title--active">
-              <div class="van-process-record__card">
-                <div class="van-process-record__card-title">发起任务</div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">处理人</div>
-                  <div class="van-process-record__card-content">章三</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">处理时间</div>
-                  <div class="van-process-record__card-content">2023-12-21 15:40:04</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">审批结果</div>
-                  <div class="van-process-record__card-content">提交了一个任务</div>
-                </div>
-                <div class="van-process-record__card-line">
-                  <div class="van-process-record__card-label">审批意见</div>
-                  <div class="van-process-record__card-content">无</div>
-                </div>
-              </div>
-            </div>
-            <div class="van-step__circle-container">
-              <!---->
-            </div>
-            <div class="van-step__line"></div>
-          </div>
-        </div>
-        <div class="van-process-record__timeline-more">查看更多</div>
+        <div child-cut-disabled="true" class="van-steps__items"></div>
+        <div class="van-process-record__timeline-noMore">没有更多了</div>
       </div>
     </div>
   </div>
   <div>
-    <div class="van-process-record">
+    <div vusion-disabled-duplicate="true" vusion-disabled-copy="true" class="van-process-record">
       <div role="feed" class="van-list van-process-record__list">
         <div class="van-list__placeholder"></div>
       </div>
