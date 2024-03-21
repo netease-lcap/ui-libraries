@@ -133,13 +133,18 @@ namespace nasl.ui {
     @Slot({
       title: '默认',
       description: '插入`<van-tab>`子组件。',
-      emptyBackground: 'add-sub',
+      // emptyBackground: 'add-sub',
       snippets: [{
         title: '子选项',
         code: '<van-tab title="标签页">内容</van-tab>'
       }]
     })
     slotDefault: () => Array<VanTab>;
+    @Slot({
+      title: '',
+      description: ''
+    })
+    slotTitle: () => Array<ViewComponent>;
   }
   @Component({
     title: '标签页',
@@ -206,11 +211,5 @@ namespace nasl.ui {
       description: '显示的内容'
     })
     slotDefault: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '',
-      description: ''
-    })
-    slotTitle: () => Array<ViewComponent>;
   }
 }

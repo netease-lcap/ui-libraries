@@ -493,7 +493,7 @@ export default createComponent({
               this.onClick(item, index);
             }}
             scopedSlots={{
-              default: () => item[this.textField] || this.slots('title'),
+              default: () => item[this.textField] || this.slots('title', {item}),
             }}
           >
 
