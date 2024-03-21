@@ -8,47 +8,47 @@
    * @desc 冒号左间距
    * @type size
    */
-  --cw-descriptions-colon-margin-left: 2px;
+  --cw-descriptions-colon-margin-left: calc(var(--cw-margin-xxs) / 2);
 
   /**
    * @desc 冒号右间距
    * @type size
    */
-  --cw-descriptions-colon-margin-right: 8px;
+  --cw-descriptions-colon-margin-right: var(--cw-margin-xs);
 
   /**
    * @desc 内容区域文字颜色
    * @type color
    */
-  --cw-descriptions-content-color: rgba(0, 0, 0, 0.88);
+  --cw-descriptions-content-color: var(--cw-color-text);
 
   /**
    * @desc 额外区域文字颜色
    * @type color
    */
-  --cw-descriptions-extra-color: rgba(0, 0, 0, 0.88);
+  --cw-descriptions-extra-color: var(--cw-color-text);
 
   /**
    * @desc 子项下间距
    * @type size
    */
-  --cw-descriptions-item-padding-bottom: 16px;
+  --cw-descriptions-item-padding-bottom: var(--cw-padding);
 
   /**
    * @desc 标签背景色
    * @type color
    */
-  --cw-descriptions-label-bg: rgba(0, 0, 0, 0.02);
+  --cw-descriptions-label-bg: var(--cw-color-fill-alter);
 
   /**
    * @desc 标题文字颜色
    * @type color
    */
-  --cw-descriptions-title-color: rgba(0, 0, 0, 0.88);
+  --cw-descriptions-title-color: var(--cw-color-text);
 
   /**
    * @desc 标题下间距
    * @type size
    */
-  --cw-descriptions-title-margin-bottom: 20px;
+  --cw-descriptions-title-margin-bottom: calc(var(--cw-font-size-sm) * var(--cw-line-height-sm));
 }

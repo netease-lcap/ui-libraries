@@ -8,13 +8,13 @@
    * @desc 清空按钮背景色
    * @type color
    */
-  --cw-select-clear-bg: #ffffff;
+  --cw-select-clear-bg: var(--cw-color-bg-container);
 
   /**
    * @desc 多选标签背景色
    * @type color
    */
-  --cw-select-multiple-item-bg: rgba(0, 0, 0, 0.06);
+  --cw-select-multiple-item-bg: var(--cw-color-fill-secondary);
 
   /**
    * @desc 多选标签边框色
@@ -32,94 +32,94 @@
    * @desc 多选标签禁用文本颜色
    * @type color
    */
-  --cw-select-multiple-item-color-disabled: rgba(0, 0, 0, 0.25);
+  --cw-select-multiple-item-color-disabled: var(--cw-color-text-disabled);
 
   /**
    * @desc 多选标签高度
    * @type size
    */
-  --cw-select-multiple-item-height: 24px;
+  --cw-select-multiple-item-height: var(--cw-control-height-sm);
 
   /**
    * @desc 大号多选标签高度
    * @type size
    */
-  --cw-select-multiple-item-height-lg: 32px;
+  --cw-select-multiple-item-height-lg: var(--cw-control-height);
 
   /**
    * @desc 多选框禁用背景
    * @type color
    */
-  --cw-select-multiple-selector-bg-disabled: rgba(0, 0, 0, 0.04);
+  --cw-select-multiple-selector-bg-disabled: var(--cw-color-bg-container-disabled);
 
   /**
    * @desc 选项激活态时背景色
    * @type color
    */
-  --cw-select-option-active-bg: rgba(0, 0, 0, 0.04);
+  --cw-select-option-active-bg: var(--cw-control-item-bg-hover);
 
   /**
    * @desc 选项字体大小
    * @type size
    */
-  --cw-select-option-font-size: 14px;
+  --cw-select-option-font-size: var(--cw-font-size);
 
   /**
    * @desc 选项高度
    * @type size
    */
-  --cw-select-option-height: 32px;
+  --cw-select-option-height: var(--cw-control-height);
 
   /**
    * @desc 选项行高
    * @type input
    */
-  --cw-select-option-line-height: 1.5714285714285714;
+  --cw-select-option-line-height: var(--cw-line-height);
 
   /**
    * @desc 选项内间距
    * @type size
    */
-  --cw-select-option-padding: 5px 12px;
+  --cw-select-option-padding: calc(calc(var(--cw-control-height) - calc(var(--cw-font-size) * var(--cw-line-height))) / 2) var(--cw-control-padding-horizontal);
 
   /**
    * @desc 选项选中时背景色
    * @type color
    */
-  --cw-select-option-selected-bg: #e6f4ff;
+  --cw-select-option-selected-bg: var(--cw-control-item-bg-active);
 
   /**
    * @desc 选项选中时文本颜色
    * @type color
    */
-  --cw-select-option-selected-color: rgba(0, 0, 0, 0.88);
+  --cw-select-option-selected-color: var(--cw-color-text);
 
   /**
    * @desc 选项选中时文本字重
    * @type input
    */
-  --cw-select-option-selected-font-weight: 600;
+  --cw-select-option-selected-font-weight: var(--cw-font-weight-strong);
 
   /**
    * @desc 选框背景色
    * @type color
    */
-  --cw-select-selector-bg: #ffffff;
+  --cw-select-selector-bg: var(--cw-color-bg-container);
 
   /**
    * @type size
    */
-  --cw-select-show-arrow-padding-inline-end: 18px;
+  --cw-select-show-arrow-padding-inline-end: calc(var(--cw-font-size) * 1.25);
 
   /**
    * @desc 单选大号回填项高度
    * @type size
    */
-  --cw-select-single-item-height-lg: 40px;
+  --cw-select-single-item-height-lg: var(--cw-control-height-lg);
 
   /**
    * @desc 下拉菜单 z-index
    * @type input
    */
-  --cw-select-z-index-popup: 1050;
+  --cw-select-z-index-popup: calc(var(--cw-z-index-popup-base) + 50);
 }

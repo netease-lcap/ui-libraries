@@ -8,43 +8,43 @@
    * @desc 表单项间距
    * @type size
    */
-  --cw-form-item-margin-bottom: 24px;
+  --cw-form-item-margin-bottom: var(--cw-margin-lg);
 
   /**
    * @desc 标签冒号后间距
    * @type size
    */
-  --cw-form-label-colon-margin-inline-end: 8px;
+  --cw-form-label-colon-margin-inline-end: var(--cw-margin-xs);
 
   /**
    * @desc 标签冒号前间距
    * @type size
    */
-  --cw-form-label-colon-margin-inline-start: 2px;
+  --cw-form-label-colon-margin-inline-start: calc(var(--cw-margin-xxs) / 2);
 
   /**
    * @desc 标签颜色
    * @type color
    */
-  --cw-form-label-color: rgba(0, 0, 0, 0.88);
+  --cw-form-label-color: var(--cw-color-text-heading);
 
   /**
    * @desc 标签字体大小
    * @type size
    */
-  --cw-form-label-font-size: 14px;
+  --cw-form-label-font-size: var(--cw-font-size);
 
   /**
    * @desc 标签高度
    * @type size
    */
-  --cw-form-label-height: 32px;
+  --cw-form-label-height: var(--cw-control-height);
 
   /**
    * @desc 必填项标记颜色
    * @type color
    */
-  --cw-form-label-required-mark-color: #ff4d4f;
+  --cw-form-label-required-mark-color: var(--cw-color-error);
 
   /**
    * @desc 垂直布局标签外边距
@@ -56,5 +56,5 @@
    * @desc 垂直布局标签内边距
    * @type size
    */
-  --cw-form-vertical-label-padding: 0 0 8px;
+  --cw-form-vertical-label-padding: 0 0 var(--cw-padding-xs);
 }

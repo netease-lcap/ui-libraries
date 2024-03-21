@@ -8,13 +8,13 @@
    * @desc 菜单项指示条边框宽度
    * @type size
    */
-  --cw-menu-active-bar-border-width: 1px;
+  --cw-menu-active-bar-border-width: var(--cw-line-width);
 
   /**
    * @desc 菜单项指示条高度
    * @type size
    */
-  --cw-menu-active-bar-height: 2px;
+  --cw-menu-active-bar-height: var(--cw-line-width-bold);
 
   /**
    * @desc 菜单项指示条宽度
@@ -26,79 +26,79 @@
    * @desc 收起时图标尺寸
    * @type size
    */
-  --cw-menu-collapsed-icon-size: 16px;
+  --cw-menu-collapsed-icon-size: var(--cw-font-size-lg);
 
   /**
    * @desc 收起后的宽度
    * @type size
    */
-  --cw-menu-collapsed-width: 80px;
+  --cw-menu-collapsed-width: calc(var(--cw-control-height-lg) * 2);
 
   /**
    * @desc 危险菜单项文字激活颜色
    * @type color
    */
-  --cw-menu-danger-item-active-bg: #fff2f0;
+  --cw-menu-danger-item-active-bg: var(--cw-color-error-bg);
 
   /**
    * @desc 危险菜单项文字颜色
    * @type color
    */
-  --cw-menu-danger-item-color: #ff4d4f;
+  --cw-menu-danger-item-color: var(--cw-color-error);
 
   /**
    * @desc 危险菜单项文字悬浮颜色
    * @type color
    */
-  --cw-menu-danger-item-hover-color: #ff4d4f;
+  --cw-menu-danger-item-hover-color: var(--cw-color-error);
 
   /**
    * @desc 危险菜单项文字选中颜色
    * @type color
    */
-  --cw-menu-danger-item-selected-bg: #fff2f0;
+  --cw-menu-danger-item-selected-bg: var(--cw-color-error-bg);
 
   /**
    * @desc 危险菜单项文字选中颜色
    * @type color
    */
-  --cw-menu-danger-item-selected-color: #ff4d4f;
+  --cw-menu-danger-item-selected-color: var(--cw-color-error);
 
   /**
    * @desc 暗色模式下的危险菜单项激活态背景
    * @type color
    */
-  --cw-menu-dark-danger-item-active-bg: #ff4d4f;
+  --cw-menu-dark-danger-item-active-bg: var(--cw-color-error);
 
   /**
    * @desc 暗色模式下的危险菜单项文字颜色
    * @type color
    */
-  --cw-menu-dark-danger-item-color: #ff4d4f;
+  --cw-menu-dark-danger-item-color: var(--cw-color-error);
 
   /**
    * @desc 暗色模式下的危险菜单项悬浮文字背景
    * @type color
    */
-  --cw-menu-dark-danger-item-hover-color: #ff7875;
+  --cw-menu-dark-danger-item-hover-color: var(--cw-color-error-hover);
 
   /**
    * @desc 暗色模式下的危险菜单项选中背景
    * @type color
    */
-  --cw-menu-dark-danger-item-selected-bg: #ff4d4f;
+  --cw-menu-dark-danger-item-selected-bg: var(--cw-color-error);
 
   /**
    * @desc 暗色模式下的危险菜单项选中文字颜色
    * @type color
    */
-  --cw-menu-dark-danger-item-selected-color: #fff;
+  --cw-menu-dark-danger-item-selected-color: var(--cw-color-text-light-solid);
 
   /**
    * @desc 暗色模式下的分组标题文字颜色
    * @type color
    */
-  --cw-menu-dark-group-title-color: rgba(255, 255, 255, 0.65);
+  --cw-menu-dark-group-title-color: var(--cw-color-text-dark);
 
   /**
    * @desc 暗色模式下的菜单项背景
@@ -110,7 +110,7 @@
    * @desc 暗色模式下的菜单项文字颜色
    * @type color
    */
-  --cw-menu-dark-item-color: rgba(255, 255, 255, 0.65);
+  --cw-menu-dark-item-color: var(--cw-color-text-dark);
 
   /**
    * @desc 暗色模式下的菜单项禁用颜色
@@ -128,19 +128,19 @@
    * @desc 暗色模式下的菜单项悬浮颜色
    * @type color
    */
-  --cw-menu-dark-item-hover-color: #fff;
+  --cw-menu-dark-item-hover-color: var(--cw-color-text-light-solid);
 
   /**
    * @desc 暗色模式下的菜单项选中背景
    * @type color
    */
-  --cw-menu-dark-item-selected-bg: #1677ff;
+  --cw-menu-dark-item-selected-bg: var(--cw-color-primary);
 
   /**
    * @desc 暗色模式下的菜单项选中颜色
    * @type color
    */
-  --cw-menu-dark-item-selected-color: #fff;
+  --cw-menu-dark-item-selected-color: var(--cw-color-text-light-solid);
 
   /**
    * @desc 暗色模式下的浮层菜单的背景颜色
@@ -164,19 +164,19 @@
    * @desc 分组标题文字颜色
    * @type color
    */
-  --cw-menu-group-title-color: rgba(0, 0, 0, 0.45);
+  --cw-menu-group-title-color: var(--cw-color-text-description);
 
   /**
    * @desc 分组标题文字大小
    * @type size
    */
-  --cw-menu-group-title-font-size: 14px;
+  --cw-menu-group-title-font-size: var(--cw-font-size);
 
   /**
    * @desc 分组标题文字高度
    * @type input
    */
-  --cw-menu-group-title-line-height: 1.5714285714285714;
+  --cw-menu-group-title-line-height: var(--cw-line-height);
 
   /**
    * @desc 横向菜单项圆角
@@ -194,7 +194,7 @@
    * @desc 水平菜单项文字悬浮颜色
    * @type color
    */
-  --cw-menu-horizontal-item-hover-color: #1677ff;
+  --cw-menu-horizontal-item-hover-color: var(--cw-color-primary);
 
   /**
    * @desc 水平菜单项选中态背景色
@@ -206,125 +206,125 @@
    * @desc 水平菜单项文字选中颜色
    * @type color
    */
-  --cw-menu-horizontal-item-selected-color: #1677ff;
+  --cw-menu-horizontal-item-selected-color: var(--cw-color-primary);
 
   /**
    * @desc 横向菜单行高
    * @type size
    */
-  --cw-menu-horizontal-line-height: 46px;
+  --cw-menu-horizontal-line-height: calc(var(--cw-control-height-lg) * 1.15);
 
   /**
    * @desc 图标与文字间距
    * @type size
    */
-  --cw-menu-icon-margin-inline-end: 10px;
+  --cw-menu-icon-margin-inline-end: calc(var(--cw-control-height-sm) - var(--cw-font-size));
 
   /**
    * @desc 图标尺寸
    * @type size
    */
-  --cw-menu-icon-size: 14px;
+  --cw-menu-icon-size: var(--cw-font-size);
 
   /**
    * @desc 菜单项激活态背景色
    * @type color
    */
-  --cw-menu-item-active-bg: #e6f4ff;
+  --cw-menu-item-active-bg: var(--cw-control-item-bg-active);
 
   /**
    * @desc 菜单项背景色
    * @type color
    */
-  --cw-menu-item-bg: #ffffff;
+  --cw-menu-item-bg: var(--cw-color-bg-container);
 
   /**
    * @desc 菜单项的圆角
    * @type size
    */
-  --cw-menu-item-border-radius: 8px;
+  --cw-menu-item-border-radius: var(--cw-border-radius-lg);
 
   /**
    * @desc 菜单项文字颜色
    * @type color
    */
-  --cw-menu-item-color: rgba(0, 0, 0, 0.88);
+  --cw-menu-item-color: var(--cw-color-text);
 
   /**
    * @desc 菜单项文字禁用颜色
    * @type color
    */
-  --cw-menu-item-disabled-color: rgba(0, 0, 0, 0.25);
+  --cw-menu-item-disabled-color: var(--cw-color-text-disabled);
 
   /**
    * @desc 菜单项高度
    * @type size
    */
-  --cw-menu-item-height: 40px;
+  --cw-menu-item-height: var(--cw-control-height-lg);
 
   /**
    * @desc 菜单项悬浮态背景色
    * @type color
    */
-  --cw-menu-item-hover-bg: rgba(0, 0, 0, 0.06);
+  --cw-menu-item-hover-bg: var(--cw-color-bg-text-hover);
 
   /**
    * @desc 菜单项文字悬浮颜色
    * @type color
    */
-  --cw-menu-item-hover-color: rgba(0, 0, 0, 0.88);
+  --cw-menu-item-hover-color: var(--cw-color-text);
 
   /**
    * @desc 菜单项纵向外间距
    * @type size
    */
-  --cw-menu-item-margin-block: 4px;
+  --cw-menu-item-margin-block: var(--cw-margin-xxs);
 
   /**
    * @desc 菜单项横向外间距
    * @type size
    */
-  --cw-menu-item-margin-inline: 4px;
+  --cw-menu-item-margin-inline: var(--cw-margin-xxs);
 
   /**
    * @desc 菜单项横向内间距
    * @type size
    */
-  --cw-menu-item-padding-inline: 16px;
+  --cw-menu-item-padding-inline: var(--cw-padding);
 
   /**
    * @desc 菜单项选中态背景色
    * @type color
    */
-  --cw-menu-item-selected-bg: #e6f4ff;
+  --cw-menu-item-selected-bg: var(--cw-control-item-bg-active);
 
   /**
    * @desc 菜单项文字选中颜色
    * @type color
    */
-  --cw-menu-item-selected-color: #1677ff;
+  --cw-menu-item-selected-color: var(--cw-color-primary);
 
   /**
    * @desc 弹出框背景色
    * @type color
    */
-  --cw-menu-popup-bg: #ffffff;
+  --cw-menu-popup-bg: var(--cw-color-bg-elevated);
 
   /**
    * @desc 子菜单项背景色
    * @type color
    */
-  --cw-menu-sub-menu-item-bg: rgba(0, 0, 0, 0.02);
+  --cw-menu-sub-menu-item-bg: var(--cw-color-fill-alter);
 
   /**
    * @desc 子菜单项的圆角
    * @type size
    */
-  --cw-menu-sub-menu-item-border-radius: 4px;
+  --cw-menu-sub-menu-item-border-radius: var(--cw-border-radius-sm);
 
   /**
    * @desc 弹出菜单的 z-index
    * @type input
    */
-  --cw-menu-z-index-popup: 1050;
+  --cw-menu-z-index-popup: calc(var(--cw-z-index-popup-base) + 50);
 }

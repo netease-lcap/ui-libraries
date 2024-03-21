@@ -119,7 +119,7 @@ async function genComponentThemePreview(name) {
     '',
     'export default () => {',
     '  return (',
-    '    <Space direction="vertical" style={{ width: '100%' }} size={24}>',
+    '    <Space direction="vertical" style={{ width: \'100%\' }} size={24}>',
     '      {...PreviewDemos.map(({ demo }) => demo)}',
     '    </Space>',
     '  );',

@@ -8,41 +8,41 @@
    * @desc 图标大小
    * @type size
    */
-  --cw-breadcrumb-icon-font-size: 14px;
+  --cw-breadcrumb-icon-font-size: var(--cw-font-size);
 
   /**
    * @desc 面包屑项文字颜色
    * @type color
    */
-  --cw-breadcrumb-item-color: rgba(0, 0, 0, 0.45);
+  --cw-breadcrumb-item-color: var(--cw-color-text-description);
 
   /**
    * @desc 最后一项文字颜色
    * @type color
    */
-  --cw-breadcrumb-last-item-color: rgba(0, 0, 0, 0.88);
+  --cw-breadcrumb-last-item-color: var(--cw-color-text);
 
   /**
    * @desc 链接文字颜色
    * @type color
    */
-  --cw-breadcrumb-link-color: rgba(0, 0, 0, 0.45);
+  --cw-breadcrumb-link-color: var(--cw-color-text-description);
 
   /**
    * @desc 链接文字悬浮颜色
    * @type color
    */
-  --cw-breadcrumb-link-hover-color: rgba(0, 0, 0, 0.88);
+  --cw-breadcrumb-link-hover-color: var(--cw-color-text);
 
   /**
    * @desc 分隔符颜色
    * @type color
    */
-  --cw-breadcrumb-separator-color: rgba(0, 0, 0, 0.45);
+  --cw-breadcrumb-separator-color: var(--cw-color-text-description);
 
   /**
    * @desc 分隔符外间距
    * @type size
    */
-  --cw-breadcrumb-separator-margin: 8px;
+  --cw-breadcrumb-separator-margin: var(--cw-margin-xs);
 }

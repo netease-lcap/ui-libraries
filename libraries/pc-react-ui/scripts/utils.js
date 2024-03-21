@@ -1,4 +1,5 @@
 const lodash = require('lodash');
+const aliasTokens = require('./aliasTokens');
 const prefix = 'cw-';
 const css = 'cw-nasl';
 
@@ -26,8 +27,9 @@ exports.genCssVarCode = (vars, compName, useGlobalTokens) => {
 
 
     const varName = `--${prefix}${compName ? `${lodash.kebabCase(compName)}-` : '' }${lodash.kebabCase(cssVar.name)}`;
+    const value = aliasTokens[varName] || cssVar.value;
 
-    codes.push(`  ${varName}: ${cssVar.value};`)
+    codes.push(`  ${varName}: ${value};`)
 
     return codes.join('\n');
   });
@@ -43,7 +45,7 @@ exports.genCssVarCode = (vars, compName, useGlobalTokens) => {
 
   if (useGlobalTokens && useGlobalTokens.length > 0) {
     dependencyAnnotaton.splice(
-      dependencyAnnotaton.length - 2,
+      dependencyAnnotaton.length - 1,
       0,
       ` * @useGlobalTokens ${JSON.stringify(useGlobalTokens.map((token) => `--${prefix}${lodash.kebabCase(token)}`))}`,
     );

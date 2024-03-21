@@ -20,61 +20,61 @@
    * @desc 开关把手大小
    * @type size
    */
-  --cw-switch-handle-size: 18px;
+  --cw-switch-handle-size: calc(var(--cw-font-size) * var(--cw-line-height) - 4px);
 
   /**
    * @desc 小号开关把手大小
    * @type size
    */
-  --cw-switch-handle-size-sm: 12px;
+  --cw-switch-handle-size-sm: calc(var(--cw-control-height) / 2 - 4px);
 
   /**
    * @desc 内容区域最大边距
    * @type size
    */
-  --cw-switch-inner-max-margin: 24px;
+  --cw-switch-inner-max-margin: calc(calc(var(--cw-font-size) * var(--cw-line-height) - 4px) + 6px);
 
   /**
    * @desc 小号开关内容区域最大边距
    * @type size
    */
-  --cw-switch-inner-max-margin-sm: 18px;
+  --cw-switch-inner-max-margin-sm: calc(calc(var(--cw-control-height) / 2 - 4px) + 6px);
 
   /**
    * @desc 内容区域最小边距
    * @type size
    */
-  --cw-switch-inner-min-margin: 9px;
+  --cw-switch-inner-min-margin: calc(calc(var(--cw-font-size) * var(--cw-line-height) - 4px) / 2);
 
   /**
    * @desc 小号开关内容区域最小边距
    * @type size
    */
-  --cw-switch-inner-min-margin-sm: 6px;
+  --cw-switch-inner-min-margin-sm: calc(calc(var(--cw-control-height) / 2 - 4px) / 2);
 
   /**
    * @desc 开关高度
    * @type size
    */
-  --cw-switch-track-height: 22px;
+  --cw-switch-track-height: calc(var(--cw-font-size) * var(--cw-line-height));
 
   /**
    * @desc 小号开关高度
    * @type size
    */
-  --cw-switch-track-height-sm: 16px;
+  --cw-switch-track-height-sm: calc(var(--cw-control-height) / 2);
 
   /**
    * @desc 开关最小宽度
    * @type size
    */
-  --cw-switch-track-min-width: 44px;
+  --cw-switch-track-min-width: calc(calc(calc(var(--cw-font-size) * var(--cw-line-height) - 4px) * 2) + 8px);
 
   /**
    * @desc 小号开关最小宽度
    * @type size
    */
-  --cw-switch-track-min-width-sm: 28px;
+  --cw-switch-track-min-width-sm: calc(calc(var(--cw-control-height) / 2 - 4px) * 2 + 4px);
 
   /**
    * @desc 开关内边距

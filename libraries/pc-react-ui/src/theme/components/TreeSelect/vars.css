@@ -8,17 +8,17 @@
    * @desc 节点悬浮态背景色
    * @type color
    */
-  --cw-tree-select-node-hover-bg: rgba(0, 0, 0, 0.04);
+  --cw-tree-select-node-hover-bg: var(--cw-control-item-bg-hover);
 
   /**
    * @desc 节点选中态背景色
    * @type color
    */
-  --cw-tree-select-node-selected-bg: #e6f4ff;
+  --cw-tree-select-node-selected-bg: var(--cw-control-item-bg-active);
 
   /**
    * @desc 节点标题高度
    * @type size
    */
-  --cw-tree-select-title-height: 24px;
+  --cw-tree-select-title-height: var(--cw-control-height-sm);
 }

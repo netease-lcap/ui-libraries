@@ -8,61 +8,61 @@
    * @desc 输入框激活状态时背景颜色
    * @type color
    */
-  --cw-input-active-bg: #ffffff;
+  --cw-input-active-bg: var(--cw-color-bg-container);
 
   /**
    * @desc 激活态边框色
    * @type color
    */
-  --cw-input-active-border-color: #1677ff;
+  --cw-input-active-border-color: var(--cw-color-primary);
 
   /**
    * @desc 激活态阴影
    * @type input
    */
-  --cw-input-active-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+  --cw-input-active-shadow: 0 0 0 var(--cw-control-outline-width) var(--cw-control-outline);
 
   /**
    * @desc 前/后置标签背景色
    * @type color
    */
-  --cw-input-addon-bg: rgba(0, 0, 0, 0.02);
+  --cw-input-addon-bg: var(--cw-color-fill-alter);
 
   /**
    * @desc 错误状态时激活态阴影
    * @type input
    */
-  --cw-input-error-active-shadow: 0 0 0 2px rgba(255, 38, 5, 0.06);
+  --cw-input-error-active-shadow: 0 0 0 var(--cw-control-outline-width) var(--cw-color-error-outline);
 
   /**
    * @desc 输入框hover状态时背景颜色
    * @type color
    */
-  --cw-input-hover-bg: #ffffff;
+  --cw-input-hover-bg: var(--cw-color-bg-container);
 
   /**
    * @desc 悬浮态边框色
    * @type color
    */
-  --cw-input-hover-border-color: #4096ff;
+  --cw-input-hover-border-color: var(--cw-color-primary-hover);
 
   /**
    * @desc 字体大小
    * @type size
    */
-  --cw-input-input-font-size: 14px;
+  --cw-input-input-font-size: var(--cw-font-size);
 
   /**
    * @desc 大号字体大小
    * @type size
    */
-  --cw-input-input-font-size-lg: 16px;
+  --cw-input-input-font-size-lg: var(--cw-font-size-lg);
 
   /**
    * @desc 小号字体大小
    * @type size
    */
-  --cw-input-input-font-size-sm: 14px;
+  --cw-input-input-font-size-sm: var(--cw-font-size);
 
   /**
    * @desc 输入框纵向内边距
@@ -86,23 +86,23 @@
    * @desc 输入框横向内边距
    * @type size
    */
-  --cw-input-padding-inline: 11px;
+  --cw-input-padding-inline: calc(var(--cw-padding-sm) - var(--cw-line-width));
 
   /**
    * @desc 大号输入框横向内边距
    * @type size
    */
-  --cw-input-padding-inline-lg: 11px;
+  --cw-input-padding-inline-lg: calc(var(--cw-control-padding-horizontal) - var(--cw-line-width));
 
   /**
    * @desc 小号输入框横向内边距
    * @type size
    */
-  --cw-input-padding-inline-sm: 7px;
+  --cw-input-padding-inline-sm: calc(var(--cw-control-padding-horizontal-sm) - var(--cw-line-width));
 
   /**
    * @desc 警告状态时激活态阴影
    * @type input
    */
-  --cw-input-warning-active-shadow: 0 0 0 2px rgba(255, 215, 5, 0.1);
+  --cw-input-warning-active-shadow: 0 0 0 var(--cw-control-outline-width) var(--cw-color-warning-outline);
 }
