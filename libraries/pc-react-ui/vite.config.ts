@@ -20,14 +20,14 @@ export default defineConfig(({ mode, command }) => {
           title: 'Dashboard',
           viewport: {
             width: 1440,
-            height: 1480,
+            height: 1600,
           },
         }, {
           name: 'form',
           title: '表单页',
           viewport: {
             width: 1940,
-            height: 1580,
+            height: 1700,
           },
         }],
       },
