@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import { $deletePropsList } from '@/plugins/constants';
 
 export function useHandleLink(props) {
@@ -7,5 +8,12 @@ export function useHandleLink(props) {
   return {
     [$deletePropsList]: deletePropsList,
     href: destination ?? link,
+  };
+}
+
+export function useHandleThemeStyle(props) {
+  const className = props.get('className');
+  return {
+    className: classnames('cw-link cw-link-css-var', className),
   };
 }

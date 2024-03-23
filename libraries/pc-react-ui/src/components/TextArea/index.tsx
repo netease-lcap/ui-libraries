@@ -1,5 +1,5 @@
 import { Input as AntdInput } from 'antd';
-import type { InputProps } from 'antd';
+import type { TextAreaProps } from 'antd/es/input/TextArea';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import type { pluginType } from '@/plugins/type';
@@ -13,8 +13,8 @@ const mapProps = {
 };
 
 export const TextArea = registerComponet<
-  InputProps,
-  pluginType<InputProps>
+  TextAreaProps,
+  pluginType<TextAreaProps>
 >(
   AntdTextArea,
   { plugin, displayName: AntdTextArea.displayName, mapProps },

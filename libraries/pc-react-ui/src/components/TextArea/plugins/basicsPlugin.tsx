@@ -18,3 +18,10 @@ export function useHandleStyle(props) {
     className: classnames(style.textArea, className),
   };
 }
+
+export function useHandleThemeStyle(props) {
+  const className = props.get('rootClassName');
+  return {
+    rootClassName: classnames('cw-textarea cw-textarea-css-var', className),
+  };
+}
