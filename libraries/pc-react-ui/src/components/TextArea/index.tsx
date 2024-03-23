@@ -1,5 +1,5 @@
 import { Input as AntdInput } from 'antd';
-import type { InputProps } from 'antd';
+import type { TextAreaProps } from 'antd/es/input/TextArea';
 
 import { ProFormTextArea } from '@ant-design/pro-components';
 import { registerComponet } from '@/plugins/index';
@@ -15,8 +15,8 @@ const mapProps = {
 };
 
 export const TextArea = registerComponet<
-  InputProps,
-  pluginType<InputProps>
+  TextAreaProps,
+  pluginType<TextAreaProps>
 >(
   ProFormTextArea,
   { plugin, displayName: AntdTextArea.displayName, mapProps },

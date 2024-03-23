@@ -8,17 +8,17 @@
    * @desc 底部区域纵向内间距
    * @type size
    */
-  --cw-drawer-footer-padding-block: 8px;
+  --cw-drawer-footer-padding-block: var(--cw-padding-xs);
 
   /**
    * @desc 底部区域横向内间距
    * @type size
    */
-  --cw-drawer-footer-padding-inline: 16px;
+  --cw-drawer-footer-padding-inline: var(--cw-padding);
 
   /**
    * @desc 弹窗 z-index
    * @type input
    */
-  --cw-drawer-z-index-popup: 1000;
+  --cw-drawer-z-index-popup: var(--cw-z-index-popup-base);
 }

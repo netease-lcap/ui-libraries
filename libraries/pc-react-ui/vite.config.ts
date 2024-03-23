@@ -13,7 +13,25 @@ process.env.TZ = 'Asia/Shanghai';
 export default defineConfig(({ mode, command }) => {
   return {
     publicDir: 'dist-theme',
-    plugins: [react(), lcapPlugin()],
+    plugins: [react(), lcapPlugin({
+      theme: {
+        previewPages: [{
+          name: 'dashboard',
+          title: 'Dashboard',
+          viewport: {
+            width: 1440,
+            height: 1600,
+          },
+        }, {
+          name: 'form',
+          title: '表单页',
+          viewport: {
+            width: 1940,
+            height: 1700,
+          },
+        }],
+      },
+    })],
     css: {
       postcss: {
         plugins: [
@@ -49,7 +67,7 @@ export default defineConfig(({ mode, command }) => {
           }
         },
       },
-      minify: 'esbuild',
+      minify: 'terser',
       // minify: mode === 'development' ? 'esbuild' : 'terser',
       // minify: false,
       terserOptions: {
@@ -94,6 +112,7 @@ export default defineConfig(({ mode, command }) => {
         '@': path.resolve(__dirname, './src'), // 把 src 的别名设置为 @
         '@components': path.resolve(__dirname, './src/components'), // 把 src 的别名设置为 @
         '@plugins': path.resolve(__dirname, './src/plugins'), // 把 src 的别名设置为 @
+        '../_util/PurePanel': path.resolve(__dirname, './src/theme/PurePanel'),
       },
     },
   };

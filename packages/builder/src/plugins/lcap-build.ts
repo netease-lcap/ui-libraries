@@ -7,7 +7,7 @@ import logger from '../utils/logger';
 export interface LcapThemeOptions {
   themeVarCssPath?: string;
   themeComponentFolder?: string;
-  previewPages?: Array<{ name: string; title: string }>;
+  previewPages?: Array<{ name: string; title: string; viewport?: { width: number; height: number } }>;
 }
 
 export interface ViteLcapPluginOptions {

@@ -10,7 +10,9 @@
   "bin": {
     "lcap-ui": "./bin/ui-cli.mjs"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "echo \"no build config\""
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/netease-lcap/ui-libraries.git"

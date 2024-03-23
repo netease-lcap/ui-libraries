@@ -22,7 +22,7 @@ export interface ThemeConfig {
   defaultTheme: {
     [key: string]: any;
   };
-  previewPages: Array<{ name: string, title: string }>;
+  previewPages: Array<{ name: string, title: string; viewport?: { width: number; height: number } }>;
   components: ThemeComponentConfig[];
   global: ThemeGlobalConfig;
 }
@@ -82,6 +82,8 @@ export default function genThemeConfig(options: ThemeOptions) {
       title,
       group,
     };
+  }).sort((a: any, b: any) => {
+    return `${a.group}-${a.name}`.localeCompare(`${b.group}-${b.name}`);
   });
 
   themeConfig.global.selector = themeInfo.global.selector;

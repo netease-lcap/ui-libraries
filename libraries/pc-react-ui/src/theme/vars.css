@@ -909,7 +909,7 @@
    * @title 一级阴影
    * @type input
    */
-  --cw-box-shadow: 
+  --cw-box-shadow:
       0 6px 16px 0 rgba(0, 0, 0, 0.08),
       0 3px 6px -4px rgba(0, 0, 0, 0.12),
       0 9px 28px 8px rgba(0, 0, 0, 0.05)
@@ -920,7 +920,7 @@
    * @title 二级阴影
    * @type input
    */
-  --cw-box-shadow-secondary: 
+  --cw-box-shadow-secondary:
       0 6px 16px 0 rgba(0, 0, 0, 0.08),
       0 3px 6px -4px rgba(0, 0, 0, 0.12),
       0 9px 28px 8px rgba(0, 0, 0, 0.05)
@@ -931,7 +931,7 @@
    * @title 三级阴影
    * @type input
    */
-  --cw-box-shadow-tertiary: 
+  --cw-box-shadow-tertiary:
       0 1px 2px 0 rgba(0, 0, 0, 0.03),
       0 1px 6px -1px rgba(0, 0, 0, 0.02),
       0 2px 4px 0 rgba(0, 0, 0, 0.02)
@@ -942,28 +942,28 @@
    * @title 容器禁用态下的背景色
    * @type color
    */
-  --cw-color-bg-container-disabled: rgba(0, 0, 0, 0.04);
+  --cw-color-bg-container-disabled: var(--cw-color-fill-tertiary);
 
   /**
    * @desc 控制文本在激活状态下的背景色。
    * @title 文本激活态背景色
    * @type color
    */
-  --cw-color-bg-text-active: rgba(0, 0, 0, 0.15);
+  --cw-color-bg-text-active: var(--cw-color-fill);
 
   /**
    * @desc 控制文本在悬停状态下的背景色。
    * @title 文本悬停态背景色
    * @type color
    */
-  --cw-color-bg-text-hover: rgba(0, 0, 0, 0.06);
+  --cw-color-bg-text-hover: var(--cw-color-fill-secondary);
 
   /**
    * @desc 控制元素背景边框的颜色。
    * @title 背景边框颜色
    * @type color
    */
-  --cw-color-border-bg: #ffffff;
+  --cw-color-border-bg: var(--cw-color-bg-container);
 
   /**
    * @desc 控制输入组件错误状态下的外轮廓线颜色。
@@ -977,28 +977,28 @@
    * @title 替代背景色
    * @type color
    */
-  --cw-color-fill-alter: rgba(0, 0, 0, 0.02);
+  --cw-color-fill-alter: var(--cw-color-fill-quaternary);
 
   /**
    * @desc 控制内容区域的背景色。
    * @title 内容区域背景色
    * @type color
    */
-  --cw-color-fill-content: rgba(0, 0, 0, 0.06);
+  --cw-color-fill-content: var(--cw-color-fill-secondary);
 
   /**
    * @desc 控制内容区域背景色在鼠标悬停时的样式。
    * @title 内容区域背景色（悬停）
    * @type color
    */
-  --cw-color-fill-content-hover: rgba(0, 0, 0, 0.15);
+  --cw-color-fill-content-hover: var(--cw-color-fill);
 
   /**
    * @desc 控制页面元素高亮时的颜色。
    * @title 高亮颜色
    * @type color
    */
-  --cw-color-highlight: #ff4d4f;
+  --cw-color-highlight: var(--cw-color-error);
 
   /**
    * @desc 控制弱操作图标的颜色，例如 allowClear 或 Alert 关闭按钮。
@@ -1007,14 +1007,14 @@
  *
    * @type color
    */
-  --cw-color-icon: rgba(0, 0, 0, 0.45);
+  --cw-color-icon: var(--cw-color-text-tertiary);
 
   /**
    * @desc 控制弱操作图标在悬浮状态下的颜色，例如 allowClear 或 Alert 关闭按钮。
    * @title 弱操作图标悬浮态颜色
    * @type color
    */
-  --cw-color-icon-hover: rgba(0, 0, 0, 0.88);
+  --cw-color-icon-hover: var(--cw-color-text);
 
   /**
    * @desc 用于作为分割线的颜色，此颜色和 colorBorderSecondary 的颜色一致，但是用的是透明色。
@@ -1028,42 +1028,42 @@
    * @title 文本描述字体颜色
    * @type color
    */
-  --cw-color-text-description: rgba(0, 0, 0, 0.45);
+  --cw-color-text-description: var(--cw-color-text-tertiary);
 
   /**
    * @desc 控制禁用状态下的字体颜色。
    * @title 禁用字体颜色
    * @type color
    */
-  --cw-color-text-disabled: rgba(0, 0, 0, 0.25);
+  --cw-color-text-disabled: var(--cw-color-text-quaternary);
 
   /**
    * @desc 控制标题字体颜色。
    * @title 标题字体颜色
    * @type color
    */
-  --cw-color-text-heading: rgba(0, 0, 0, 0.88);
+  --cw-color-text-heading: var(--cw-color-text);
 
   /**
    * @desc 控制文本标签字体颜色。
    * @title 文本标签字体颜色
    * @type color
    */
-  --cw-color-text-label: rgba(0, 0, 0, 0.65);
+  --cw-color-text-label: var(--cw-color-text-secondary);
 
   /**
    * @desc 控制带背景色的文本，例如 Primary Button 组件中的文本高亮颜色。
    * @title 固定文本高亮颜色
    * @type color
    */
-  --cw-color-text-light-solid: #fff;
+  --cw-color-text-light-solid: var(--cw-color-white);
 
   /**
    * @desc 控制占位文本的颜色。
    * @title 占位文本颜色
    * @type color
    */
-  --cw-color-text-placeholder: rgba(0, 0, 0, 0.25);
+  --cw-color-text-placeholder: var(--cw-color-text-quaternary);
 
   /**
    * @desc 控制输入组件警告状态下的外轮廓线颜色。
@@ -1077,35 +1077,35 @@
    * @title 控制组件的交互大小
    * @type size
    */
-  --cw-control-interactive-size: 16px;
+  --cw-control-interactive-size: calc(var(--cw-control-height) / 2);
 
   /**
    * @desc 控制组件项在激活状态下的背景颜色。
    * @title 控制组件项在激活状态下的背景颜色
    * @type color
    */
-  --cw-control-item-bg-active: #e6f4ff;
+  --cw-control-item-bg-active: var(--cw-color-primary-bg);
 
   /**
    * @desc 控制组件项在禁用状态下的激活背景颜色。
    * @title 控制组件项在禁用状态下的激活背景颜色
    * @type color
    */
-  --cw-control-item-bg-active-disabled: rgba(0, 0, 0, 0.15);
+  --cw-control-item-bg-active-disabled: var(--cw-color-fill);
 
   /**
    * @desc 控制组件项在鼠标悬浮且激活状态下的背景颜色。
    * @title 控制组件项在鼠标悬浮且激活状态下的背景颜色
    * @type color
    */
-  --cw-control-item-bg-active-hover: #bae0ff;
+  --cw-control-item-bg-active-hover: var(--cw-color-primary-bg-hover);
 
   /**
    * @desc 控制组件项在鼠标悬浮时的背景颜色。
    * @title 控制组件项在鼠标悬浮时的背景颜色
    * @type color
    */
-  --cw-control-item-bg-hover: rgba(0, 0, 0, 0.04);
+  --cw-control-item-bg-hover: var(--cw-color-fill-tertiary);
 
   /**
    * @desc 控制输入组件的外轮廓线颜色。
@@ -1119,7 +1119,7 @@
    * @title 输入组件的外轮廓线宽度
    * @type size
    */
-  --cw-control-outline-width: 2px;
+  --cw-control-outline-width: calc(var(--cw-line-width) * 2);
 
   /**
    * @desc 控制元素水平内间距。
@@ -1140,7 +1140,7 @@
    * @title 选择器、级联选择器等中的操作图标字体大小
    * @type size
    */
-  --cw-font-size-icon: 12px;
+  --cw-font-size-icon: var(--cw-font-size-sm);
 
   /**
    * @desc 控制标题类组件（如 h1、h2、h3）或选中项的字体粗细。
@@ -1154,7 +1154,7 @@
    * @title 线条宽度(聚焦态)
    * @type size
    */
-  --cw-line-width-focus: 4px;
+  --cw-line-width-focus: calc(var(--cw-line-width) * 4);
 
   /**
    * @desc 控制链接文本的装饰样式。
@@ -1182,56 +1182,56 @@
    * @title 外边距
    * @type size
    */
-  --cw-margin: 16px;
+  --cw-margin: var(--cw-size);
 
   /**
    * @desc 控制元素外边距，大尺寸。
    * @title 外边距 LG
    * @type size
    */
-  --cw-margin-lg: 24px;
+  --cw-margin-lg: var(--cw-size-lg);
 
   /**
    * @desc 控制元素外边距，中大尺寸。
    * @title 外边距 MD
    * @type size
    */
-  --cw-margin-md: 20px;
+  --cw-margin-md: var(--cw-size-md);
 
   /**
    * @desc 控制元素外边距，中小尺寸。
    * @title 外边距 SM
    * @type size
    */
-  --cw-margin-sm: 12px;
+  --cw-margin-sm: var(--cw-size-sm);
 
   /**
    * @desc 控制元素外边距，超大尺寸。
    * @title 外边距 XL
    * @type size
    */
-  --cw-margin-xl: 32px;
+  --cw-margin-xl: var(--cw-size-xl);
 
   /**
    * @desc 控制元素外边距，小尺寸。
    * @title 外边距 XS
    * @type size
    */
-  --cw-margin-xs: 8px;
+  --cw-margin-xs: var(--cw-size-xs);
 
   /**
    * @desc 控制元素外边距，最大尺寸。
    * @title 外边距 XXL
    * @type size
    */
-  --cw-margin-xxl: 48px;
+  --cw-margin-xxl: var(--cw-size-xxl);
 
   /**
    * @desc 控制元素外边距，最小尺寸。
    * @title 外边距 XXS
    * @type size
    */
-  --cw-margin-xxs: 4px;
+  --cw-margin-xxs: var(--cw-size-xxs);
 
   /**
    * @desc 控制加载状态的透明度。
@@ -1245,91 +1245,91 @@
    * @title 内间距
    * @type size
    */
-  --cw-padding: 16px;
+  --cw-padding: var(--cw-size);
 
   /**
    * @desc 控制内容元素水平内间距。
    * @title 内容水平内间距
    * @type size
    */
-  --cw-padding-content-horizontal: 16px;
+  --cw-padding-content-horizontal: var(--cw-size-ms);
 
   /**
    * @desc 控制内容元素水平内间距，适用于大屏幕设备。
    * @title 内容水平内间距（LG）
    * @type size
    */
-  --cw-padding-content-horizontal-lg: 24px;
+  --cw-padding-content-horizontal-lg: var(--cw-size-lg);
 
   /**
    * @desc 控制内容元素水平内间距，适用于小屏幕设备。
    * @title 内容水平内间距（SM）
    * @type size
    */
-  --cw-padding-content-horizontal-sm: 16px;
+  --cw-padding-content-horizontal-sm: var(--cw-size);
 
   /**
    * @desc 控制内容元素垂直内间距。
    * @title 内容垂直内间距
    * @type size
    */
-  --cw-padding-content-vertical: 12px;
+  --cw-padding-content-vertical: var(--cw-size-sm);
 
   /**
    * @desc 控制内容元素垂直内间距，适用于大屏幕设备。
    * @title 内容垂直内间距（LG）
    * @type size
    */
-  --cw-padding-content-vertical-lg: 16px;
+  --cw-padding-content-vertical-lg: var(--cw-size-ms);
 
   /**
    * @desc 控制内容元素垂直内间距，适用于小屏幕设备。
    * @title 内容垂直内间距（SM）
    * @type size
    */
-  --cw-padding-content-vertical-sm: 8px;
+  --cw-padding-content-vertical-sm: var(--cw-size-xs);
 
   /**
    * @desc 控制元素的大内间距。
    * @title 大内间距
    * @type size
    */
-  --cw-padding-lg: 24px;
+  --cw-padding-lg: var(--cw-size-lg);
 
   /**
    * @desc 控制元素的中等内间距。
    * @title 中等内间距
    * @type size
    */
-  --cw-padding-md: 20px;
+  --cw-padding-md: var(--cw-size-md);
 
   /**
    * @desc 控制元素的小内间距。
    * @title 小内间距
    * @type size
    */
-  --cw-padding-sm: 12px;
+  --cw-padding-sm: var(--cw-size-sm);
 
   /**
    * @desc 控制元素的特大内间距。
    * @title 特大内间距
    * @type size
    */
-  --cw-padding-xl: 32px;
+  --cw-padding-xl: var(--cw-size-xl);
 
   /**
    * @desc 控制元素的特小内间距。
    * @title 特小内间距
    * @type size
    */
-  --cw-padding-xs: 8px;
+  --cw-padding-xs: var(--cw-size-xs);
 
   /**
    * @desc 控制元素的极小内间距。
    * @title 极小内间距
    * @type size
    */
-  --cw-padding-xxs: 4px;
+  --cw-padding-xxs: var(--cw-size-xxs);
 
   /**
    * @desc 控制大屏幕的屏幕宽度。

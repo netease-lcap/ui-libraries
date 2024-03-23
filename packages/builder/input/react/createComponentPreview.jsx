@@ -13,9 +13,14 @@ export default (stories) => {
             return {
               ...c,
               title: it ? it.title : '',
+              group: it ? it.group : '',
             };
           }
           return c;
+        }).sort((a, b) => {
+          const sortValueA = `${a.group || ''}-${a.name}`;
+          const sortValueb = `${b.group || ''}-${b.name}`;
+          return sortValueA.localeCompare(sortValueb);
         });
       }
 
@@ -25,6 +30,7 @@ export default (stories) => {
           return {
             ...c,
             title: it ? it.title : '',
+            group: it ? it.group : '',
           };
         }
         return c;

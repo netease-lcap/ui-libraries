@@ -1,11 +1,13 @@
 import React from 'react';
 import { Space } from 'antd';
-import PreviewDemos from 'antd-token-previewer/es/previews/components/input';
+import { TextArea } from '@/index';
 
 export default () => {
   return (
     <Space direction="vertical" style={{ width: '100%' }} size={24}>
-      {...PreviewDemos.map(({ demo }) => demo)}
+      <TextArea rows={4} />
+      <TextArea status="error" placeholder="Error" />
+      <TextArea status="warning" placeholder="Warning" />
     </Space>
   );
 };

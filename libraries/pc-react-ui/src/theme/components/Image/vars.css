@@ -26,7 +26,7 @@
    * @desc 预览操作图标大小
    * @type size
    */
-  --cw-image-preview-operation-size: 18px;
+  --cw-image-preview-operation-size: calc(var(--cw-font-size-icon) * 1.5);
 
   /**
    * @desc 预览浮层 z-index

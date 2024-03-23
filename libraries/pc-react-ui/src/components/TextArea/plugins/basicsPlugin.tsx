@@ -24,6 +24,13 @@ export function useHandleStyle(props) {
   };
 }
 
+export function useHandleThemeStyle(props) {
+  const className = props.get('rootClassName');
+  return {
+    rootClassName: classnames('cw-textarea cw-textarea-css-var', className),
+  };
+}
+
 function useHandleFormWarp(props) {
   const { isForm } = React.useContext(FormContext);
   const BaseComponent = props.get('render');

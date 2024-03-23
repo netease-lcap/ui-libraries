@@ -8,7 +8,7 @@
    * @desc 头像右间距
    * @type size
    */
-  --cw-list-avatar-margin-right: 16px;
+  --cw-list-avatar-margin-right: var(--cw-padding);
 
   /**
    * @desc 内容宽度
@@ -20,13 +20,13 @@
    * @desc 描述文字大小
    * @type size
    */
-  --cw-list-description-font-size: 14px;
+  --cw-list-description-font-size: var(--cw-font-size);
 
   /**
    * @desc 空文本内边距
    * @type size
    */
-  --cw-list-empty-text-padding: 16px;
+  --cw-list-empty-text-padding: var(--cw-padding);
 
   /**
    * @desc 底部区域背景色
@@ -44,29 +44,29 @@
    * @desc 列表项内间距
    * @type input
    */
-  --cw-list-item-padding: 12px 0;
+  --cw-list-item-padding: var(--cw-padding-content-vertical) 0;
 
   /**
    * @desc 大号列表项内间距
    * @type size
    */
-  --cw-list-item-padding-lg: 16px 24px;
+  --cw-list-item-padding-lg: var(--cw-padding-content-vertical-lg) var(--cw-padding-content-horizontal-lg);
 
   /**
    * @desc 小号列表项内间距
    * @type size
    */
-  --cw-list-item-padding-sm: 8px 16px;
+  --cw-list-item-padding-sm: var(--cw-padding-content-vertical-sm) var(--cw-padding-content-horizontal);
 
   /**
    * @desc Meta 下间距
    * @type size
    */
-  --cw-list-meta-margin-bottom: 16px;
+  --cw-list-meta-margin-bottom: var(--cw-padding);
 
   /**
    * @desc 标题下间距
    * @type size
    */
-  --cw-list-title-margin-bottom: 12px;
+  --cw-list-title-margin-bottom: var(--cw-padding-sm);
 }

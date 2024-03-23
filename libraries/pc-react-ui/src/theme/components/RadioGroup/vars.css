@@ -1,5 +1,5 @@
 /**
- * @component Radio
+ * @component RadioGroup
  * @useGlobalTokens ["--cw-control-outline","--cw-control-outline-width","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-color-primary","--cw-motion-duration-slow","--cw-motion-duration-mid","--cw-motion-ease-in-out-circ","--cw-color-bg-container","--cw-color-border","--cw-line-width","--cw-color-bg-container-disabled","--cw-color-text-disabled","--cw-padding-xs","--cw-line-type","--cw-line-width-focus","--cw-color-primary-border","--cw-control-height","--cw-font-size-lg","--cw-control-height-lg","--cw-control-height-sm","--cw-border-radius","--cw-border-radius-sm","--cw-border-radius-lg","--cw-color-primary-hover","--cw-color-primary-active"]
  */
 .cw-nasl.cw-radio,
@@ -8,83 +8,83 @@
    * @desc 单选框按钮背景色
    * @type color
    */
-  --cw-radio-button-bg: #ffffff;
+  --cw-radio-button-bg: var(--cw-color-bg-container);
 
   /**
    * @desc 单选框按钮选中背景色
    * @type color
    */
-  --cw-radio-button-checked-bg: #ffffff;
+  --cw-radio-button-checked-bg: var(--cw-color-bg-container);
 
   /**
    * @desc 单选框按钮选中并禁用时的背景色
    * @type color
    */
-  --cw-radio-button-checked-bg-disabled: rgba(0, 0, 0, 0.15);
+  --cw-radio-button-checked-bg-disabled: var(--cw-control-item-bg-active-disabled);
 
   /**
    * @desc 单选框按钮选中并禁用时的文本颜色
    * @type color
    */
-  --cw-radio-button-checked-color-disabled: rgba(0, 0, 0, 0.25);
+  --cw-radio-button-checked-color-disabled: var(--cw-color-text-disabled);
 
   /**
    * @desc 单选框按钮文本颜色
    * @type color
    */
-  --cw-radio-button-color: rgba(0, 0, 0, 0.88);
+  --cw-radio-button-color: var(--cw-color-text);
 
   /**
    * @desc 单选框按钮横向内间距
    * @type size
    */
-  --cw-radio-button-padding-inline: 15px;
+  --cw-radio-button-padding-inline: calc(var(--cw-padding) - var(--cw-line-width));
 
   /**
    * @desc 单选框实色按钮选中时的激活态背景色
    * @type color
    */
-  --cw-radio-button-solid-checked-active-bg: #0958d9;
+  --cw-radio-button-solid-checked-active-bg: var(--cw-color-primary-active);
 
   /**
    * @desc 单选框实色按钮选中时的背景色
    * @type color
    */
-  --cw-radio-button-solid-checked-bg: #1677ff;
+  --cw-radio-button-solid-checked-bg: var(--cw-color-primary);
 
   /**
    * @desc 单选框实色按钮选中时的文本颜色
    * @type color
    */
-  --cw-radio-button-solid-checked-color: #fff;
+  --cw-radio-button-solid-checked-color: var(--cw-color-text-light-solid);
 
   /**
    * @desc 单选框实色按钮选中时的悬浮态背景色
    * @type color
    */
-  --cw-radio-button-solid-checked-hover-bg: #4096ff;
+  --cw-radio-button-solid-checked-hover-bg: var(--cw-color-primary-hover);
 
   /**
    * @desc 单选框圆点禁用颜色
    * @type color
    */
-  --cw-radio-dot-color-disabled: rgba(0, 0, 0, 0.25);
+  --cw-radio-dot-color-disabled: var(--cw-color-text-disabled);
 
   /**
    * @desc 单选框圆点大小
    * @type size
    */
-  --cw-radio-dot-size: 8px;
+  --cw-radio-dot-size: 8;
 
   /**
    * @desc 单选框大小
    * @type size
    */
-  --cw-radio-radio-size: 16px;
+  --cw-radio-radio-size: 16;
 
   /**
    * @desc 单选框右间距
    * @type size
    */
-  --cw-radio-wrapper-margin-inline-end: 8px;
+  --cw-radio-wrapper-margin-inline-end: var(--cw-margin-xs);
 }

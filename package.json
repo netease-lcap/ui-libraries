@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "commit": "cz",
-    "postinstall": "husky install",
+    "postinstall": "husky install && pnpm --filter \"./packages/*\" build",
     "version-packages": "changeset version",
     "start": "pnpm dev:react-pc",
     "dev:react-pc": "pnpm --dir ./libraries/pc-react-ui storybook",

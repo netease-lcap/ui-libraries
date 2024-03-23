@@ -1,5 +1,5 @@
 /**
- * @component Checkbox
+ * @component CheckboxGroup
  * @useGlobalTokens ["--cw-control-interactive-size","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-margin-xs","--cw-border-radius-sm","--cw-line-width-focus","--cw-color-primary-border","--cw-color-bg-container","--cw-line-width","--cw-line-type","--cw-color-border","--cw-motion-duration-slow","--cw-line-width-bold","--cw-color-white","--cw-motion-duration-fast","--cw-motion-ease-in-back","--cw-padding-xs","--cw-color-primary","--cw-color-primary-hover","--cw-motion-duration-mid","--cw-motion-ease-out-back","--cw-font-size-lg","--cw-color-bg-container-disabled","--cw-color-text-disabled"]
  */
 .cw-nasl.cw-checkbox,

@@ -9,7 +9,7 @@
    * @desc 内容区域背景色
    * @type color
    */
-  --cw-modal-content-bg: #ffffff;
+  --cw-modal-content-bg: var(--cw-color-bg-elevated);
 
   /**
    * @desc 底部区域背景色
@@ -21,23 +21,23 @@
    * @desc 顶部背景色
    * @type color
    */
-  --cw-modal-header-bg: #ffffff;
+  --cw-modal-header-bg: var(--cw-color-bg-elevated);
 
   /**
    * @desc 标题字体颜色
    * @type color
    */
-  --cw-modal-title-color: rgba(0, 0, 0, 0.88);
+  --cw-modal-title-color: var(--cw-color-text-heading);
 
   /**
    * @desc 标题字体大小
    * @type size
    */
-  --cw-modal-title-font-size: 16px;
+  --cw-modal-title-font-size: var(--cw-font-size-heading-5);
 
   /**
    * @desc 标题行高
    * @type input
    */
-  --cw-modal-title-line-height: 1.5;
+  --cw-modal-title-line-height: var(--cw-line-height-heading-5);
 }

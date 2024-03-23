@@ -135,6 +135,9 @@ export default (options: LcapCodeGenOption = {}) => {
       return undefined;
     },
     load: (id) => {
+      if (id.indexOf('_util/PurePanel') !== -1) {
+        console.log(id);
+      }
       if (id === virtualThemeCSSFileId) {
         return genVarCssCode(themeVarCssPath, componentFolder);
       }

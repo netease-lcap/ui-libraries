@@ -56,8 +56,8 @@
   "devDependencies": {
     "@ant-design/static-style-extract": "^1.0.2",
     "@babel/parser": "^7.23.6",
-    "@lcap/ui-cli": "workspace:^1.0.0",
     "@lcap/builder": "workspace:^1.0.0",
+    "@lcap/ui-cli": "workspace:^1.0.0",
     "@nasl/types": "^0.1.6",
     "@storybook/addon-essentials": "^7.6.7",
     "@storybook/addon-interactions": "^7.6.7",
@@ -78,6 +78,8 @@
     "jsdom": "^23.0.1",
     "less": "^4.2.0",
     "prop-types": "^15.8.1",
+    "rc-dialog": "^9.4.0",
+    "rc-util": "^5.39.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.2.0",

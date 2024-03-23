@@ -1,5 +1,5 @@
 /**
- * @component DatePicker
+ * @component DateRangePicker
  * @useGlobalTokens ["--cw-padding-xxs","--cw-control-height-lg","--cw-padding","--cw-padding-sm","--cw-control-height","--cw-line-width","--cw-color-primary","--cw-color-primary-border","--cw-line-type","--cw-color-split","--cw-color-text-disabled","--cw-color-border","--cw-border-radius","--cw-motion-duration-mid","--cw-color-text-placeholder","--cw-font-size-lg","--cw-control-height-sm","--cw-padding-xs","--cw-margin-xs","--cw-color-text-description","--cw-line-width-bold","--cw-motion-duration-slow","--cw-size-popup-arrow","--cw-color-bg-elevated","--cw-border-radius-lg","--cw-box-shadow-secondary","--cw-border-radius-sm","--cw-box-shadow-popover-arrow","--cw-font-height","--cw-font-height-lg","--cw-line-height-lg","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-color-bg-container","--cw-color-text-heading","--cw-color-icon","--cw-color-icon-hover","--cw-font-weight-strong","--cw-color-text-light-solid","--cw-control-item-bg-active","--cw-margin-xxs","--cw-color-fill-secondary","--cw-color-text-tertiary","--cw-border-radius-xs","--cw-motion-ease-out-quint","--cw-motion-ease-in-quint","--cw-motion-ease-out-circ","--cw-motion-ease-in-out-circ","--cw-color-bg-container-disabled","--cw-color-error","--cw-color-error-border-hover","--cw-color-warning","--cw-color-warning-border-hover","--cw-color-fill-tertiary","--cw-color-error-bg","--cw-color-error-bg-hover","--cw-color-error-text","--cw-color-warning-bg","--cw-color-warning-bg-hover","--cw-color-warning-text","--cw-control-height-xs"]
  */
 .cw-nasl.cw-date-picker,
@@ -8,49 +8,49 @@
    * @desc 输入框激活状态时背景颜色
    * @type color
    */
-  --cw-date-picker-active-bg: #ffffff;
+  --cw-date-picker-active-bg: var(--cw-color-bg-container);
 
   /**
    * @desc 激活态边框色
    * @type color
    */
-  --cw-date-picker-active-border-color: #1677ff;
+  --cw-date-picker-active-border-color: var(--cw-color-primary);
 
   /**
    * @desc 激活态阴影
    * @type input
    */
-  --cw-date-picker-active-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+  --cw-date-picker-active-shadow: 0 0 0 var(--cw-control-outline-width) var(--cw-control-outline);
 
   /**
    * @desc 前/后置标签背景色
    * @type color
    */
-  --cw-date-picker-addon-bg: rgba(0, 0, 0, 0.02);
+  --cw-date-picker-addon-bg: var(--cw-color-fill-alter);
 
   /**
    * @desc 选取范围内的单元格背景色
    * @type color
    */
-  --cw-date-picker-cell-active-with-range-bg: #e6f4ff;
+  --cw-date-picker-cell-active-with-range-bg: var(--cw-control-item-bg-active);
 
   /**
    * @desc 单元格禁用态背景色
    * @type color
    */
-  --cw-date-picker-cell-bg-disabled: rgba(0, 0, 0, 0.04);
+  --cw-date-picker-cell-bg-disabled: var(--cw-color-bg-container-disabled);
 
   /**
    * @desc 单元格高度
    * @type size
    */
-  --cw-date-picker-cell-height: 24px;
+  --cw-date-picker-cell-height: var(--cw-control-height-sm);
 
   /**
    * @desc 单元格悬浮态背景色
    * @type color
    */
-  --cw-date-picker-cell-hover-bg: rgba(0, 0, 0, 0.04);
+  --cw-date-picker-cell-hover-bg: var(--cw-control-item-bg-hover);
 
   /**
    * @desc 选取范围内的单元格悬浮态背景色
@@ -68,49 +68,49 @@
    * @desc 单元格宽度
    * @type size
    */
-  --cw-date-picker-cell-width: 36px;
+  --cw-date-picker-cell-width: calc(var(--cw-control-height-sm) * 1.5);
 
   /**
    * @desc 错误状态时激活态阴影
    * @type input
    */
-  --cw-date-picker-error-active-shadow: 0 0 0 2px rgba(255, 38, 5, 0.06);
+  --cw-date-picker-error-active-shadow: 0 0 0 var(--cw-control-outline-width) var(--cw-color-error-outline);
 
   /**
    * @desc 输入框hover状态时背景颜色
    * @type color
    */
-  --cw-date-picker-hover-bg: #ffffff;
+  --cw-date-picker-hover-bg: var(--cw-color-bg-container);
 
   /**
    * @desc 悬浮态边框色
    * @type color
    */
-  --cw-date-picker-hover-border-color: #4096ff;
+  --cw-date-picker-hover-border-color: var(--cw-color-primary-hover);
 
   /**
    * @desc 字体大小
    * @type size
    */
-  --cw-date-picker-input-font-size: 14px;
+  --cw-date-picker-input-font-size: var(--cw-font-size);
 
   /**
    * @desc 大号字体大小
    * @type size
    */
-  --cw-date-picker-input-font-size-lg: 16px;
+  --cw-date-picker-input-font-size-lg: var(--cw-font-size-lg);
 
   /**
    * @desc 小号字体大小
    * @type size
    */
-  --cw-date-picker-input-font-size-sm: 14px;
+  --cw-date-picker-input-font-size-sm: var(--cw-font-size);
 
   /**
    * @desc 多选标签背景色
    * @type color
    */
-  --cw-date-picker-multiple-item-bg: rgba(0, 0, 0, 0.06);
+  --cw-date-picker-multiple-item-bg: var(--cw-color-fill-secondary);
 
   /**
    * @desc 多选标签边框色
@@ -128,25 +128,25 @@
    * @desc 多选标签禁用文本颜色
    * @type color
    */
-  --cw-date-picker-multiple-item-color-disabled: rgba(0, 0, 0, 0.25);
+  --cw-date-picker-multiple-item-color-disabled: var(--cw-color-text-disabled);
 
   /**
    * @desc 多选标签高度
    * @type size
    */
-  --cw-date-picker-multiple-item-height: 24px;
+  --cw-date-picker-multiple-item-height: var(--cw-control-height-sm);
 
   /**
    * @desc 大号多选标签高度
    * @type size
    */
-  --cw-date-picker-multiple-item-height-lg: 32px;
+  --cw-date-picker-multiple-item-height-lg: var(--cw-control-height);
 
   /**
    * @desc 多选框禁用背景
    * @type color
    */
-  --cw-date-picker-multiple-selector-bg-disabled: rgba(0, 0, 0, 0.04);
+  --cw-date-picker-multiple-selector-bg-disabled: var(--cw-color-bg-container-disabled);
 
   /**
    * @desc 输入框纵向内边距
@@ -170,19 +170,19 @@
    * @desc 输入框横向内边距
    * @type size
    */
-  --cw-date-picker-padding-inline: 11px;
+  --cw-date-picker-padding-inline: calc(var(--cw-padding-sm) - var(--cw-line-width));
 
   /**
    * @desc 大号输入框横向内边距
    * @type size
    */
-  --cw-date-picker-padding-inline-lg: 11px;
+  --cw-date-picker-padding-inline-lg: calc(var(--cw-control-padding-horizontal) - var(--cw-line-width));
 
   /**
    * @desc 小号输入框横向内边距
    * @type size
    */
-  --cw-date-picker-padding-inline-sm: 7px;
+  --cw-date-picker-padding-inline-sm: calc(var(--cw-control-padding-horizontal-sm) - var(--cw-line-width));
 
   /**
    * @desc 预设区域最大宽度
@@ -200,7 +200,7 @@
    * @desc 单元格文本高度
    * @type size
    */
-  --cw-date-picker-text-height: 40px;
+  --cw-date-picker-text-height: var(--cw-control-height-lg);
 
   /**
    * @desc 时间单元格高度
@@ -218,19 +218,19 @@
    * @desc 时间列宽度
    * @type size
    */
-  --cw-date-picker-time-column-width: 56px;
+  --cw-date-picker-time-column-width: calc(var(--cw-control-height-lg) * 1.4);
 
   /**
    * @desc 警告状态时激活态阴影
    * @type input
    */
-  --cw-date-picker-warning-active-shadow: 0 0 0 2px rgba(255, 215, 5, 0.1);
+  --cw-date-picker-warning-active-shadow: 0 0 0 var(--cw-control-outline-width) var(--cw-color-warning-outline);
 
   /**
    * @desc 十年/年/季/月/周单元格高度
    * @type size
    */
-  --cw-date-picker-without-time-cell-height: 66px;
+  --cw-date-picker-without-time-cell-height: calc(var(--cw-control-height-lg) * 1.65);
 
   /**
    * @desc 弹窗 z-index

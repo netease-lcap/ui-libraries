@@ -26,23 +26,23 @@
    * @desc 选项菜单（单列）内间距
    * @type size
    */
-  --cw-cascader-menu-padding: 4px;
+  --cw-cascader-menu-padding: var(--cw-padding-xxs);
 
   /**
    * @desc 选项内间距
    * @type size
    */
-  --cw-cascader-option-padding: 5px 12px;
+  --cw-cascader-option-padding: calc(calc(var(--cw-control-height) - calc(var(--cw-font-size) * var(--cw-line-height))) / 2) var(--cw-padding-sm);
 
   /**
    * @desc 选项选中时背景色
    * @type color
    */
-  --cw-cascader-option-selected-bg: #e6f4ff;
+  --cw-cascader-option-selected-bg: var(--cw-control-item-bg-active);
 
   /**
    * @desc 选项选中时字重
    * @type input
    */
-  --cw-cascader-option-selected-font-weight: 600;
+  --cw-cascader-option-selected-font-weight: var(--cw-font-weight-strong);
 }
