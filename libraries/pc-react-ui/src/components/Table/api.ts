@@ -229,13 +229,24 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
-      title: '开启多选',
-      description: '开启表格多选',
+      title: '开启选择',
+      description: '开启选则',
       setter: {
         concept: 'SwitchSetter',
       },
     })
     rowSelection: nasl.core.Boolean = false;
+
+    @Prop<TableOptions<T, V, P, M>, any>({
+      group: '数据属性',
+      title: '排序初始顺序',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '多选' }, { title: '单选' }],
+      },
+      if: (_) => _.rowSelection === true,
+    })
+    rowSelectionType: 'checkbox' | 'radio' = 'checkbox';
 
     // @Prop({
     //   group: '数据属性',
@@ -926,7 +937,7 @@ namespace nasl.ui {
         },
       ],
     })
-    slotDefault: (current: Current<T>) => Array<TableColumn<T, V, P, M>>;
+    slotDefault: () => Array<TableColumn<T, V, P, M>>;
 
     // @Slot({
     //   title: '加载中内容',

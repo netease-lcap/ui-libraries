@@ -70,15 +70,28 @@ export const 默认 = {
 };
 export const 静态数据 = {
   render: () => {
+    function EmptySlot(params) {
+      return <div />;
+    }
     return (
-      <CheckboxGroup>
-        <Checkbox value="C">
-          <Text children="多选框" />
-        </Checkbox>
-        <Checkbox value="A">
-          <Text children="多选框1" />
-        </Checkbox>
-      </CheckboxGroup>
+      <CheckboxGroup
+        data-nodepath="rootview.6.2"
+        ide-iscontainer="true"
+        key="component-57"
+        dataSource={[
+          { label: '根据', value: '根据' },
+          { label: '数据', value: '数据' },
+          { label: '生成', value: '生成' },
+        ]}
+        textField="entitytestradio.name"
+        valueField="entitytestradio.name"
+        className="ide-style1"
+        item={() => (
+          <div ide-draggable="false" data-nodepath="rootview.6.2.0">
+            <EmptySlot key="30" />
+          </div>
+        )}
+      />
     );
   },
 };

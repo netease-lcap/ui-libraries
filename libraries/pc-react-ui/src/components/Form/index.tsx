@@ -1,5 +1,5 @@
 // import { ProForm as AntdForm } from '@ant-design/pro-components';
-import { Form as AntdForm, FormProps } from 'antd';
+import { Form as AntdForm, FormProps, FormItemProps } from 'antd';
 // import { FormProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
@@ -25,13 +25,10 @@ export const Form = registerComponet<
 // export default Form;
 
 export const FormItem = registerComponet<
-  FormProps,
-  pluginType<FormProps>
+  FormItemProps,
+  FormItemProps
 >(
   AntdForm.Item,
   { plugin: formItemPlugin, displayName: 'FormItem', mapProps },
 );
-// export const FormItem = AntdForm.Item;
 export const FormList = AntdForm.List;
-// export const FormItemProps = AntdForm.ItemProps;
-// export const FormLGroup = AntdForm.Group;

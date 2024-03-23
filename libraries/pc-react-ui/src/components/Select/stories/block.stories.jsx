@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select, SelectOption } from '../index';
+import { Select, SelectOption, FormSelect } from '../index';
 // import Select from 'antd';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -22,7 +22,7 @@ export default {
   },
 };
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const 异步函数 = {
+export const 选择器 = {
   render: () => {
     return (
       <Select style={{ width: 256 }} placeholder="请选择">
@@ -30,5 +30,11 @@ export const 异步函数 = {
         <SelectOption key="2" label="2" value="2" disabled />
       </Select>
     );
+  },
+};
+
+export const 表单选择器 = {
+  render: () => {
+    return <FormSelect labelText="表单项" />;
   },
 };

@@ -31,11 +31,14 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
-    return <Table {...args} />;
+    const [value, onChange] = React.useState(3);
+    return <Table {...args} value={value} onChange={onChange} />;
   },
   args: {
     title: '12',
     rowSelection: true,
+    rowSelectionType: 'radio',
+    value: 3,
     rowKey: 'key',
     showQuickJumper: true,
     onChange(e) {
@@ -184,164 +187,299 @@ export const 同步33 = {
     const [x, setX] = React.useState(null);
     React.useEffect(() => {
       console.log(ref, 'ref');
-      setTimeout(() => {
-        setX(2000);
-        console.log('2000');
-      }, 3000);
-      setTimeout(() => {
-        setX(null);
-        console.log('null');
-      }, 16000);
     }, []);
-
+    function HoistNodePath(params) {
+      return <div />;
+    }
     return (
       <Table
-        data-nodepath="rootview.0"
+        data-nodepath="rootview.1.2"
         ide-iscontainer="true"
-        dataSource={[{}, {}, {}]}
+        key="component-133"
+        dataSource={() => ({
+          list: [
+            {
+              testEntity1: {
+                id: 2,
+                createdTime: null,
+                updatedTime: '2024-03-09T14:05:06.000Z',
+                createdBy: 'testuser',
+                updatedBy: 'testuser',
+                boolean1: false,
+                text1: '测试文本2',
+                int1: 22222,
+                deci1: 2.22,
+                date1: '2024-03-03',
+                time1: '00:00:03',
+                datetime1: '2024-03-09T06:05:05.000Z',
+              },
+            },
+            {
+              testEntity1: {
+                id: 3,
+                createdTime: null,
+                updatedTime: '2024-03-09T14:04:56.000Z',
+                createdBy: null,
+                updatedBy: null,
+                boolean1: true,
+                text1: '测试文本3',
+                int1: 333,
+                deci1: 3.33,
+                date1: '2024-03-08',
+                time1: '00:00:04',
+                datetime1: '2024-03-09T06:03:44.000Z',
+              },
+            },
+            {
+              testEntity1: {
+                id: 2824250327277056,
+                createdTime: '2024-03-11T02:40:16.000Z',
+                updatedTime: '2024-03-11T02:40:16.000Z',
+                createdBy: null,
+                updatedBy: null,
+                boolean1: true,
+                text1: '测试文本4',
+                int1: 444,
+                deci1: 4.44,
+                date1: '2024-03-11',
+                time1: '10:39:56',
+                datetime1: '2024-03-11T02:39:59.000Z',
+              },
+            },
+            {
+              testEntity1: {
+                id: 2824337469390336,
+                createdTime: '2024-03-11T05:37:33.000Z',
+                updatedTime: '2024-03-11T05:37:33.000Z',
+                createdBy: null,
+                updatedBy: null,
+                boolean1: false,
+                text1: '测试文本5',
+                int1: 555,
+                deci1: 5.55,
+                date1: '2024-03-11',
+                time1: '13:37:27',
+                datetime1: '2024-03-11T05:37:32.000Z',
+              },
+            },
+            {
+              testEntity1: {
+                id: 2824337732861440,
+                createdTime: '2024-03-11T05:38:06.000Z',
+                updatedTime: '2024-03-11T05:38:06.000Z',
+                createdBy: null,
+                updatedBy: null,
+                boolean1: true,
+                text1: '测试文本6',
+                int1: 666,
+                deci1: 6.66,
+                date1: '2024-03-11',
+                time1: '13:38:01',
+                datetime1: '2024-03-11T05:38:05.000Z',
+              },
+            },
+            {
+              testEntity1: {
+                id: 2824337915305472,
+                createdTime: '2024-03-11T05:38:28.000Z',
+                updatedTime: '2024-03-11T05:38:28.000Z',
+                createdBy: null,
+                updatedBy: null,
+                boolean1: false,
+                text1: '测试文本7',
+                int1: 777,
+                deci1: 7.77,
+                date1: '2024-03-11',
+                time1: '13:38:23',
+                datetime1: '2024-03-11T05:38:26.000Z',
+              },
+            },
+            {
+              testEntity1: {
+                id: 2824507131035136,
+                createdTime: '2024-03-11T11:22:44.000Z',
+                updatedTime: '2024-03-11T11:22:44.000Z',
+                createdBy: null,
+                updatedBy: null,
+                boolean1: true,
+                text1: '测试文本8',
+                int1: 888,
+                deci1: 8.88,
+                date1: '2024-03-11',
+                time1: '19:22:39',
+                datetime1: '2024-03-11T11:22:42.000Z',
+              },
+            },
+          ],
+          total: 7,
+        })}
         search={false}
         options={false}
-        bordered
-        virtual={false}
-        scrollX={x}
-        scrollY={null}
-        rowSelection={false}
-        pagination
-        pageSizeOptions={[5, 20, 50]}
-        pageSize={5}
+        rowKey="testEntity1.id"
+        rowSelection
         className="ide-style0"
       >
         <TableColumn
           ide-iscontainer="true"
-          field="swjhTestData1.createdTime"
-          fixed
-          width={203}
-          colSpan={1}
+          dataIndex="testEntity1.boolean1"
+          key="component-134"
           render={() => (
-            <Flex data-nodepath="rootview.0.0.0.0" ide-iscontainer="true" gap="small">
-              <Text data-nodepath="rootview.0.0.0.0.0" children="{{current.item.swjhTestData1.createdTime}}" />
-            </Flex>
+            <div ide-draggable="false" data-nodepath="rootview.1.2.0.0">
+              <Flex data-nodepath="rootview.1.2.0.0.0" ide-iscontainer="true" gap="small" key="component-135">
+                <Text data-nodepath="rootview.1.2.0.0.0.0" children="是" key="component-136" data-editable="true" />
+                <Text data-nodepath="rootview.1.2.0.0.0.1" children="否" key="component-137" data-editable="true" />
+              </Flex>
+            </div>
           )}
-          title={() => <Text data-nodepath="rootview.0.0.1.0" children="创建时间" />}
+          title={() => (
+            <>
+              <HoistNodePath key="57" nodePath="rootview.1.2.0" topSelector="th" />
+              <div ide-draggable="false" data-nodepath="rootview.1.2.0.1">
+                <Text data-nodepath="rootview.1.2.0.1.0" children="布尔值" key="component-138" data-editable="true" />
+              </div>
+            </>
+          )}
         />
         <TableColumn
           ide-iscontainer="true"
-          field="swjhTestData1.updatedTime"
-          fixed
-          width={200}
-          colSpan={1}
+          dataIndex="testEntity1.text1"
+          key="component-139"
           render={() => (
-            <Flex data-nodepath="rootview.0.1.0.0" ide-iscontainer="true" gap="small">
-              <Text data-nodepath="rootview.0.1.0.0.0" children="{{current.item.swjhTestData1.updatedTime}}" />
-            </Flex>
+            <div ide-draggable="false" data-nodepath="rootview.1.2.1.0">
+              <Flex data-nodepath="rootview.1.2.1.0.0" ide-iscontainer="true" gap="small" key="component-140">
+                <Text data-nodepath="rootview.1.2.1.0.0.0" children="{{current.item.testEntity1.text1}}" key="component-141" data-editable="true" />
+              </Flex>
+            </div>
           )}
-          title={() => <Text data-nodepath="rootview.0.1.1.0" children="更新时间" />}
+          title={() => (
+            <>
+              <HoistNodePath key="58" nodePath="rootview.1.2.1" topSelector="th" />
+              <div ide-draggable="false" data-nodepath="rootview.1.2.1.1">
+                <Text data-nodepath="rootview.1.2.1.1.0" children="文本" key="component-142" data-editable="true" />
+              </div>
+            </>
+          )}
         />
         <TableColumn
           ide-iscontainer="true"
-          field="swjhTestData1.createdBy"
-          width={200}
-          colSpan={1}
-          render={() => (
-            <Flex data-nodepath="rootview.0.2.0.0" ide-iscontainer="true" gap="small">
-              <Text data-nodepath="rootview.0.2.0.0.0" children="{{current.item.swjhTestData1.createdBy}}" />
-            </Flex>
+          dataIndex="testEntity1.int1"
+          sorter
+          key="component-143"
+          render={(current) => (
+            <div ide-draggable="false" data-nodepath="rootview.1.2.2.0">
+              <Flex data-nodepath="rootview.1.2.2.0.0" ide-iscontainer="true" gap="small" key="component-144">
+                <Text data-nodepath="rootview.1.2.2.0.0.0" children={current.item.testEntity1.int1} key="component-145" data-editable="true" />
+              </Flex>
+            </div>
           )}
-          title={() => <Text data-nodepath="rootview.0.2.1.0" children="创建者" />}
+          title={() => (
+            <>
+              <HoistNodePath key="59" nodePath="rootview.1.2.2" topSelector="th" />
+              <div ide-draggable="false" data-nodepath="rootview.1.2.2.1">
+                <Text data-nodepath="rootview.1.2.2.1.0" children="整数" key="component-146" data-editable="true" />
+              </div>
+            </>
+          )}
         />
         <TableColumn
           ide-iscontainer="true"
-          field="swjhTestData1.updatedBy"
-          width={200}
-          colSpan={1}
-          dataIndex=""
+          dataIndex="testEntity1.deci1"
+          key="component-147"
           render={() => (
-            <Flex data-nodepath="rootview.0.3.0.0" ide-iscontainer="true" gap="small">
-              <Text data-nodepath="rootview.0.3.0.0.0" children="{{current.item.swjhTestData1.updatedBy}}" />
-            </Flex>
+            <div ide-draggable="false" data-nodepath="rootview.1.2.3.0">
+              <Flex data-nodepath="rootview.1.2.3.0.0" ide-iscontainer="true" gap="small" key="component-148">
+                <Text data-nodepath="rootview.1.2.3.0.0.0" children="{{current.item.testEntity1.deci1}}" key="component-149" data-editable="true" />
+              </Flex>
+            </div>
           )}
-          title={() => <Text data-nodepath="rootview.0.3.1.0" children="更新者" />}
+          title={() => (
+            <>
+              <HoistNodePath key="60" nodePath="rootview.1.2.3" topSelector="th" />
+              <div ide-draggable="false" data-nodepath="rootview.1.2.3.1">
+                <Text data-nodepath="rootview.1.2.3.1.0" children="小数" key="component-150" data-editable="true" />
+              </div>
+            </>
+          )}
         />
         <TableColumn
           ide-iscontainer="true"
-          field="swjhTestData1.testProperty1"
-          dataIndex=""
-          width={1000}
-          colSpan={1}
+          dataIndex="testEntity1.date1"
+          key="component-151"
           render={() => (
-            <Flex data-nodepath="rootview.0.4.0.0" ide-iscontainer="true" gap="small">
-              <Text data-nodepath="rootview.0.4.0.0.0" children="{{current.item.swjhTestData1.testProperty1}}" />
-            </Flex>
+            <div ide-draggable="false" data-nodepath="rootview.1.2.4.0">
+              <Flex data-nodepath="rootview.1.2.4.0.0" ide-iscontainer="true" gap="small" key="component-152">
+                <Text data-nodepath="rootview.1.2.4.0.0.0" children="{{current.item.testEntity1.date1}}" key="component-153" data-editable="true" />
+              </Flex>
+            </div>
           )}
-          title={() => <Text data-nodepath="rootview.0.4.1.0" children="testProperty1" />}
+          title={() => (
+            <>
+              <HoistNodePath key="61" nodePath="rootview.1.2.4" topSelector="th" />
+              <div ide-draggable="false" data-nodepath="rootview.1.2.4.1">
+                <Text data-nodepath="rootview.1.2.4.1.0" children="日期" key="component-154" data-editable="true" />
+              </div>
+            </>
+          )}
         />
         <TableColumn
           ide-iscontainer="true"
-          field="swjhTestData1.testProperty2"
-          width={1000}
-          dataIndex=""
-          colSpan={1}
+          dataIndex="testEntity1.time1"
+          key="component-155"
           render={() => (
-            <Flex data-nodepath="rootview.0.5.0.0" ide-iscontainer="true" gap="small">
-              <Text data-nodepath="rootview.0.5.0.0.0" children="{{current.item.swjhTestData1.testProperty2}}" />
-            </Flex>
+            <div ide-draggable="false" data-nodepath="rootview.1.2.5.0">
+              <Flex data-nodepath="rootview.1.2.5.0.0" ide-iscontainer="true" gap="small" key="component-156">
+                <Text data-nodepath="rootview.1.2.5.0.0.0" children="{{current.item.testEntity1.time1}}" key="component-157" data-editable="true" />
+              </Flex>
+            </div>
           )}
-          title={() => <Text data-nodepath="rootview.0.5.1.0" children="testProperty2" />}
+          title={() => (
+            <>
+              <HoistNodePath key="62" nodePath="rootview.1.2.5" topSelector="th" />
+              <div ide-draggable="false" data-nodepath="rootview.1.2.5.1">
+                <Text data-nodepath="rootview.1.2.5.1.0" children="时间" key="component-158" data-editable="true" />
+              </div>
+            </>
+          )}
         />
         <TableColumn
           ide-iscontainer="true"
-          field="swjhTestData1.testProperty2"
-          colSpan={1}
-          width={200}
+          dataIndex="testEntity1.datetime1"
+          key="component-159"
           render={() => (
-            <Flex data-nodepath="rootview.0.6.0.0" ide-iscontainer="true" gap="small">
-              <Text data-nodepath="rootview.0.6.0.0.0" children="{{current.item.swjhTestData1.testProperty2}}" />
-            </Flex>
+            <div ide-draggable="false" data-nodepath="rootview.1.2.6.0">
+              <Flex data-nodepath="rootview.1.2.6.0.0" ide-iscontainer="true" gap="small" key="component-160">
+                <Text data-nodepath="rootview.1.2.6.0.0.0" children="{{current.item.testEntity1.datetime1}}" key="component-161" data-editable="true" />
+              </Flex>
+            </div>
           )}
-          title={() => <Text data-nodepath="rootview.0.6.1.0" children="testProperty2" />}
+          title={() => (
+            <>
+              <HoistNodePath key="63" nodePath="rootview.1.2.6" topSelector="th" />
+              <div ide-draggable="false" data-nodepath="rootview.1.2.6.1">
+                <Text data-nodepath="rootview.1.2.6.1.0" children="日期时间" key="component-162" data-editable="true" />
+              </div>
+            </>
+          )}
         />
         <TableColumn
           ide-iscontainer="true"
-          field="swjhTestData1.testProperty2"
-          width={200}
-          colSpan={1}
+          key="component-163"
           render={() => (
-            <Flex data-nodepath="rootview.0.7.0.0" ide-iscontainer="true" gap="small">
-              <Text data-nodepath="rootview.0.7.0.0.0" children="{{current.item.swjhTestData1.testProperty2}}" />
-            </Flex>
+            <div ide-draggable="false" data-nodepath="rootview.1.2.7.0">
+              <Flex data-nodepath="rootview.1.2.7.0.0" ide-iscontainer="true" key="component-164">
+                <Link data-nodepath="rootview.1.2.7.0.0.0" children="修改" key="component-165" data-editable="true" />
+                <Link data-nodepath="rootview.1.2.7.0.0.1" children="删除" key="component-166" data-editable="true" />
+              </Flex>
+            </div>
           )}
-          title={() => <Text data-nodepath="rootview.0.7.1.0" children="testProperty2" />}
-        />
-        <TableColumn
-          ide-iscontainer="true"
-          field="swjhTestData1.testProperty2"
-          width={200}
-          colSpan={1}
-          render={() => (
-            <Flex data-nodepath="rootview.0.8.0.0" ide-iscontainer="true" gap="small">
-              <Text data-nodepath="rootview.0.8.0.0.0" children="{{current.item.swjhTestData1.testProperty2}}" />
-            </Flex>
+          title={() => (
+            <>
+              <HoistNodePath key="64" nodePath="rootview.1.2.7" topSelector="th" />
+              <div ide-draggable="false" data-nodepath="rootview.1.2.7.1">
+                <Text data-nodepath="rootview.1.2.7.1.0" children="操作" key="component-167" data-editable="true" />
+              </div>
+            </>
           )}
-          title={() => <Text data-nodepath="rootview.0.8.1.0" children="testProperty2" />}
-        />
-        <TableColumn
-          ide-iscontainer="true"
-          field="swjhTestData1.testProperty2"
-          width={200}
-          colSpan={1}
-          render={() => (
-            <Flex data-nodepath="rootview.0.9.0.0" ide-iscontainer="true" gap="small">
-              <Text data-nodepath="rootview.0.9.0.0.0" children="{{current.item.swjhTestData1.testProperty2}}" />
-            </Flex>
-          )}
-          title={() => <Text data-nodepath="rootview.0.9.1.0" children="testProperty2" />}
-        />
-        <TableColumn
-          ide-iscontainer="true"
-          width={200}
-          colSpan={1}
-          render={() => <Flex data-nodepath="rootview.0.10.0.0" ide-iscontainer="true" />}
-          title={() => <Text data-nodepath="rootview.0.10.1.0" children="操作" />}
         />
       </Table>
     );

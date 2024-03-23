@@ -22,6 +22,7 @@ export function useHandleOpenRef(props) {
   const activeKey = props.get('activeKey');
   const defaultActiveKey = props.get('defaultActiveKey');
   const onChangeProps = props.get('onChange');
+  const onActiveKeyChange = props.get('onActiveKeyChange', () => { });
   const ref = props.get('ref');
   const [value, setValue] = useControllableValue(_.filterUnderfinedValue({
     value: activeKey,
@@ -36,6 +37,9 @@ export function useHandleOpenRef(props) {
   return {
     ref: selfRef,
     activeKey: value,
-    onChange: setValue,
+    onChange: (...e) => {
+      setValue(...e);
+      _.attempt(onActiveKeyChange, ...e);
+    },
   };
 }

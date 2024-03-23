@@ -3,13 +3,26 @@ import React from 'react';
 import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@vusion/validator';
 // import { ErrorBoundary } from 'react-error-boundary';
-import { Col } from '@/index';
+import {
+  ProFormDatePicker, QueryFilter, ProFormDateRangePicker, ProFormSelect,
+} from '@ant-design/pro-components';
+import {
+  Col, Select, Input,
+} from '@/index';
 // import { $deletePropsList } from '@/plugins/constants';
 
 export function useHandleCol(props) {
   const Compoent = props.get('render');
   const render = React.useCallback((selfProps) => {
     const ColPorps = ['offset', 'span'];
+    // if (selfProps.children.type === Select) {
+    //   const nodepath = selfProps['data-nodepath'];
+    //   console.log(nodepath, 'selfAttempt');
+    //   return (
+    //     <Input data-nodepath={nodepath} />
+    //   );
+    // }
+
     return (
       <Col span={24} {..._.pick(selfProps, ColPorps)}>
         <Compoent {...selfProps}>{selfProps.children}</Compoent>

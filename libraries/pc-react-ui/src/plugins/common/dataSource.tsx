@@ -75,19 +75,19 @@ export function useHandleMapField(filedInfo) {
   return useMemo(() => {
     return _.map(dataSource, (item) => ({
       ...item,
-      [label]: _.get(item, textField),
-      [value]: _.get(item, valueField),
+      [label]: _.isString(item) ? item : _.get(item, textField, ''),
+      [value]: _.isString(item) ? item : _.get(item, valueField, ''),
     }));
   }, [label, value, textField, valueField, dataSource]);
 }
-export function useRequestDataSource(dataSource) {
+export function useRequestDataSource(dataSource, options = {}) {
   const wrapDataSource = _.cond([
     [_.isArray, _.constant(async () => dataSource)],
     [_.isFunction, _.constant(async (...arg) => dataSource(...arg))],
     [_.stubTrue, _.constant(async () => [])],
   ]);
   const dataSourceRequest = useMemo(() => wrapDataSource(dataSource), [dataSource]);
-  const requestResult = useRequest(dataSourceRequest);
+  const requestResult = useRequest(dataSourceRequest, options);
   const { run } = requestResult;
   React.useEffect(() => run(), [dataSource]);
   return requestResult;
@@ -108,7 +108,7 @@ export function useDataSourceToTree(dataSource, parentField, valueField = 'value
     const map = new Map<string, Record<string, any>>(dataSource.map((item) => [_.get(item, valueField), item]));
     const tree = [] as any[];
     dataSource.forEach((item) => {
-      if (_.get(item, parentField)) {
+      if (map.get(_.get(item, parentField))) {
         const parent = map.get(_.get(item, parentField));
         if (parent) {
           if (!Array.isArray(parent.children)) parent.children = [];

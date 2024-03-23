@@ -35,7 +35,7 @@ export const 异步函数 = {
     return (
       <div>
         <button onClick={() => ref.current.open()}>1234</button>
-        <Select {...args} ref={ref} />
+        <Select {...args} prefix="a" ref={ref} />
       </div>
     );
   },
@@ -43,6 +43,7 @@ export const 异步函数 = {
     style: { width: '256px' },
     textField: 'entity1.name',
     valueField: 'entity1.id',
+    prefix: '1',
     dataSource: () => new Promise((res) => {
       setTimeout(() => {
         res([

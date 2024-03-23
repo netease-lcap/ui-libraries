@@ -13,6 +13,17 @@ export function useHandleClassName(props) {
 export function useHandleScroll(props) {
   const scroll = props.get('scroll');
   const result = scroll ? { style: { overflow: 'scroll' } } : {};
-  // console.log(result, 'result===');
   return result;
+}
+
+export function useHandleMatchProps(props) {
+  const directionProps = props.get('direction');
+  const verticalProps = props.get('vertical');
+  const direction = directionProps === 'vertical';
+  const alignmentProps = props.get('alignment');
+  const align = props.get('align');
+  return {
+    vertical: verticalProps ?? direction,
+    align: align ?? alignmentProps,
+  };
 }

@@ -1,14 +1,10 @@
 import React from 'react';
-// import { ProFormDatePicker, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components';
-import { Form, FormItem } from '../index';
-import {
-  Input, Button, Col, Text, Select, FormSelect,
-} from '@/index';
+import { Input, FormInput } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
-  title: 'Example/Form/blocks',
-  component: Form,
+  title: 'Example/Input/blocks',
+  component: Input,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
@@ -18,24 +14,22 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
+    originDataSource: {
+      options: ['无', 'employee', 'department'],
+      control: { type: 'select' }, // Automatically inferred when 'options' is defined
+    },
   },
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: () => {
-    return (
-      <Form>
-        <FormItem label={<Text children="账号" />} name="username">
-          <Input />
-        </FormItem>
-        <FormItem label={<Text children="密码" />} name="password">
-          <Input />
-        </FormItem>
-        <FormItem>
-          <Button type="primary" htmlType="submit" children="提交" />
-        </FormItem>
-      </Form>
-    );
+    return <Input />;
+  },
+};
+
+export const 表单输入框 = {
+  render: () => {
+    return <FormInput labelText="输入框表单项" />;
   },
 };

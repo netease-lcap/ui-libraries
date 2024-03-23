@@ -9,15 +9,11 @@ import { Map } from 'immutable';
 import React from 'react';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { useWhyDidYouUpdate } from 'ahooks';
 import { withErrorBoundary } from 'react-error-boundary';
-import type { pluginType } from '@/plugins/type';
+import zhCN from 'antd/locale/zh_CN';
+import { ConfigProvider } from 'antd';
 import { $deletePropsList } from '@/plugins/constants';
 import '@/utils/index';
-
-// try {
-// } catch (error) {
-// }
 
 export class Plugin {
   plugin: any[] = [];
@@ -72,7 +68,7 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   const pluginHooks = plugin.getPluginMethod();
   const mapProps = plugin.getMapProps();
   function handleMutableProps(ref) {
-    const obj = { ref, render: BaseComponent };
+    const obj = { ref, render: BaseComponent, children: props.children };
     return {
       setState: (state) => _.assign(obj, state),
       getState: (state) => obj[state],
@@ -91,7 +87,6 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     ImmutableProps,
   );
   const Component = expandProps.get('render');
-  // const Component = mutableProps.getState('render');
   const jsProps = expandProps.toJS();
   const componentRef = jsProps.ref;
   const excludeProps = _.omit(jsProps, _.concat(
@@ -107,17 +102,29 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     };
   }, [componentRef, baseRef]);
   mutableProps.setState({ ref });
-  // console.log(excludeProps, 'excludeProps');
+  // if (plugin.displayName === 'Tree') {
+  //   console.log(BaseComponent === Component, Tree === Component, '???===', plugin.displayName);
+  //   return (
+  //     <Component
+  //       {...excludeProps}
+  //       ref={baseRef}
+  //     >
+  //       {props.children}
+  //     </Component>
+  //   );
+  // }
+  const hasRef = excludeProps?.baseNoRef ? {} : baseRef;
   return (
-    <Component
-      {...excludeProps}
-      ref={baseRef}
-    >
-      {props.children}
-    </Component>
+    <ConfigProvider locale={zhCN}>
+      <Component
+        {...excludeProps}
+        ref={hasRef}
+      >
+        {props.children}
+      </Component>
+    </ConfigProvider>
   );
 });
-// extends pluginType<T>
 const ComponentWithErrorBoundary = withErrorBoundary(HocBaseComponents, {
   fallback: <div>Something went wrong</div>,
   onError(error, info) {

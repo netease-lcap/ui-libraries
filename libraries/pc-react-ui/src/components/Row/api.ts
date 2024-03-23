@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @Component({
-    title: '栅格行',
+    title: '栅格布局',
     description: '内部元素按照一定的规则布局',
     icon: 'grid-layout',
     group: 'Layout',

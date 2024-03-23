@@ -7,6 +7,7 @@ export function useHandleOpenRef(props) {
   const openProps = props.get('open');
   const defaultOpen = props.get('defaultOpen');
   const onCloseProps = props.get('onClose');
+  const afterOpenChange = props.get('onAfterOpenChange');
   const ref = props.get('ref');
   const deletePropsList = props.get($deletePropsList, []).concat(['ref', 'defaultOpen']);
   const [open, setOpen] = useControllableValue(_.filterUnderfinedValue({
@@ -23,6 +24,7 @@ export function useHandleOpenRef(props) {
     [$deletePropsList]: deletePropsList,
     open,
     ref: selfRef,
+    afterOpenChange,
     setOpen,
     onClose: _.wrap(onCloseProps, (...args) => {
       setOpen(false);

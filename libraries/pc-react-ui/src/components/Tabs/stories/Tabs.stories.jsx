@@ -25,6 +25,7 @@ export default {
 export const 异步函数 = {
   render: (args) => {
     const ref = React.useRef();
+    const [value, setValue] = React.useState();
     React.useEffect(() => {
       console.log(ref, ref, 'ref');
     }, []);
@@ -32,12 +33,13 @@ export const 异步函数 = {
       <div>
         <button
           onClick={() => {
-            ref.current.setValue(3);
+            // ref.current.setValue(3);
+            setValue('1');
           }}
         >
           1234
         </button>
-        <Tabs ref={ref}>
+        <Tabs ref={ref} activeKey={value} onActiveKeyChange={setValue}>
           {/* <TabPanePane key"1" ></TabPanePane> */}
           <TabPane key="2" tab="选项卡2" data-nodepath="12" />
           <TabPane key={3} tab="选项卡3" data-nodepath="123" />

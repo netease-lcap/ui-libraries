@@ -65,7 +65,7 @@ namespace nasl.ui {
     })
     mask: nasl.core.Boolean = true;
 
-    @Prop({
+    @Prop<DrawerOptions, 'maskClosable'>({
       group: '交互属性',
       title: '点击遮罩关闭',
       description: '点击遮罩关闭抽屉',
@@ -75,6 +75,8 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+
+      if: (_) => _.mask === true,
     })
     maskClosable: nasl.core.Boolean = true;
 

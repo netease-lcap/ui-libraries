@@ -311,16 +311,16 @@ namespace nasl.ui {
     // })
     // appendTo: 'reference' | 'body' = 'body';
 
-    // @Prop({
-    //   group: '交互属性',
-    //   title: '可清除',
-    //   description: '可点击清除按钮一键清除内容',
-    //   docDescription: '控制是否显示清除按钮，支持一键清除所选内容',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    // })
-    // clearable: nasl.core.Boolean;
+    @Prop({
+      group: '交互属性',
+      title: '可清除',
+      description: '可点击清除按钮一键清除内容',
+      docDescription: '控制是否显示清除按钮，支持一键清除所选内容',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    allowClear: nasl.core.Boolean = true;
 
     // @Prop({
     //   group: '状态属性',

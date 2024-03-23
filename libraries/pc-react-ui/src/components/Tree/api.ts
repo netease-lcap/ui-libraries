@@ -13,10 +13,10 @@ namespace nasl.ui {
     })
     data: TreeOptions<T, V, M>['dataSource'];
 
-    @Prop({
-      title: '值',
-    })
-    value: TreeOptions<T, V, M>['value'];
+    // @Prop({
+    //   title: '值',
+    // })
+    // value: TreeOptions<T, V, M>['value'];
     // @Method({
     //   title: 'undefined',
     //   description: '广度优先遍历树。当`func`函数有返回值时，停止遍历。',
@@ -101,7 +101,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    textField: (item: T) => any = ((item: any) => item.text) as any;
+    textField: any;
 
     @Prop({
       group: '数据属性',
@@ -112,7 +112,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    valueField: (item: T) => V = ((item: any) => item.value) as any;
+    valueField: any;
 
     @Prop({
       group: '数据属性',
@@ -123,7 +123,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    childrenField: (item: T) => nasl.collection.List<any> = ((item: any) => item.children) as any;
+    childrenField: any;
 
     @Prop({
       group: '数据属性',
@@ -134,7 +134,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    parentField: (item: T) => any;
+    parentField: any;
 
     // @Prop({
     //   group: '数据属性',
@@ -147,14 +147,14 @@ namespace nasl.ui {
     // })
     // parentField: (item: T) => any;
 
-    @Prop({
-      group: '数据属性',
-      title: '选中值',
-      description: '选择后，所选中的值',
-      sync: true,
-      docDescription: '当前选择的值',
-    })
-    value: V;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '选中值',
+    //   description: '选择后，所选中的值',
+    //   sync: true,
+    //   docDescription: '当前选择的值',
+    // })
+    // value: V;
 
     @Prop({
       group: '交互属性',
@@ -239,7 +239,7 @@ namespace nasl.ui {
       title: '选择后',
       description: '选择某一项时触发',
     })
-    onSelect: (event: { value: V; oldValue: V; node: T; oldNode: T }) => any;
+    onSelect: (value: V, event: { selected: V; selectedNodes: V; node: T; event: any }) => any;
 
     // @Event({
     //   title: '改变后',
@@ -277,7 +277,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '子节点',
-          code: '<TreeNode title="节点" key="1"></TreeNode>',
+          code: '<TreeNode title="节点" ></TreeNode>',
         },
       ],
     })
@@ -318,7 +318,7 @@ namespace nasl.ui {
       title: '值',
       description: '节点的值',
     })
-    key: V;
+    key: any;
 
     // @Prop({
     //   group: '交互属性',
@@ -380,11 +380,11 @@ namespace nasl.ui {
       snippets: [
         {
           title: '子节点',
-          code: '<TreeNode title="节点" key="1"></TreeNode>',
+          code: '<TreeNode title="节点" ></TreeNode>',
         },
       ],
     })
-    slotDefault: () => Array<TreeNode<T, V>>;
+    slotDefault: (current: Current<T>) => Array<TreeNode<T, V>>;
 
     @Slot({
       title: '默认',

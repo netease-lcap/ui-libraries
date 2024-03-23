@@ -135,26 +135,7 @@ function genUsageByTs(config) {
 
     component.symbol = symbol;
 
-    // const rootComponentDir = path.join(rootPath, componentsPath);
-    // let componentDir = path.join(rootComponentDir, `${component.name}`);
-
-    // // 兼容 mobile-ui 处理
-    // const srcCompDir = path.join(rootPath, `./src/${component.name}`);
-    // let sourceDir = componentsPath;
-    // component.symbol = component.name;
-
-    // if (!fs.existsSync(componentDir)) {
-    //   if (fs.existsSync(srcCompDir)) {
-    //     componentDir = srcCompDir;
-    //     sourceDir = 'src';
-    //   } else {
-    //     const name = `${componentDir}.vue`;
-    //     componentDir = name;
-    //     component.symbol = `${component.name}.vue`;
-    //   }
-    // }
-
-    const tsPath = `${componentDir}/api.ts`;
+    const tsPath = component.apiPath ? path.resolve(rootPath, componentsPath, component.apiPath) : `${componentDir}/api.ts`;
     if (!fs.existsSync(tsPath)) {
       logger.error(`未找到组件 ${component.name} 的描述文件（api.ts）`);
       process.exit(1);
@@ -180,6 +161,16 @@ function genUsageByTs(config) {
     } catch (e) {
       logger.error(`解析 ${tsPath} 失败，${e.message}`);
       process.exit(1);
+    }
+
+    if (component.apiPath && !component.show) {
+      delete component.symbol;
+      delete component.apiPath;
+      data.push({
+        ...component,
+        blocks: [],
+      });
+      return;
     }
 
     const screenshots = getScreenShot(

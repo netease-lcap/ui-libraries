@@ -23,7 +23,7 @@ export function useHandleValue(props) {
     onChange(time) {
       const formatTime = _.cond([
         [_.conforms({ time: _.isNil, showTime: _.stubTrue }), _.constant(time)],
-        [_.conforms({ showTime: Boolean }), _.constant(new Date().toJSON())],
+        [_.conforms({ showTime: Boolean }), _.constant(new Date(time?.format()).toJSON())],
         [_.stubTrue, _.constant(time?.format('YYYY-MM-DD'))],
       ])({ time, showTime });
       _.attempt(onChangeProps, formatTime);

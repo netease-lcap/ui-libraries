@@ -1,7 +1,10 @@
 import React from 'react';
-import { ProFormDatePicker, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components';
 import {
-  Input, Button, Form, FormItem, Text,
+  ProFormDatePicker, QueryFilter, ProFormDateRangePicker, ProFormSelect,
+} from '@ant-design/pro-components';
+import { Form as AntdForm } from 'antd';
+import {
+  Input, Button, Form, FormItem, Text, Select,
 } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -32,26 +35,37 @@ export const 默认 = {
       console.log(ref, 'ref');
     }, []);
     return (
+      <Form>
+        <FormItem name="sex">
+          <Select
+            dataSource={[
+              { value: 1, label: '男' },
+              { value: 2, label: '女' },
+            ]}
+          />
+        </FormItem>
+      </Form>
+    );
+  },
+};
+export const 默认1 = {
+  render: () => {
+    const ref = React.useRef({});
+    return (
       <Form ref={ref}>
-        <FormItem
-          label={<Text children="账号" />}
-          rules={[
-            { validate: 'lowerCase', message: '不能出现大写字母', trigger: 'input+blur' },
-            { validate: 'integer', message: '请输入整数', trigger: 'input+blur' },
-            {
-              validate: 'max', args: [30], message: `不能大于${30}`, trigger: 'input+blur',
-            },
-          ]}
-        >
+        <FormItem label={<Text children="账号" />} name="username">
           <Input />
         </FormItem>
-        <button
-          onClick={async () => {
-            console.log(await ref.current.validate());
-          }}
-        >
-          123
-        </button>
+        <FormItem label={<Text children="密码" />} name="password">
+          <Input
+            onChange={() => {
+              console.log(1234);
+            }}
+          />
+        </FormItem>
+        <FormItem>
+          <Button onClick={() => console.log(ref.current.getValues())} type="primary" htmlType="submit" children="提交" />
+        </FormItem>
       </Form>
     );
   },

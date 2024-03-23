@@ -2,6 +2,7 @@ import { Input as AntdInput } from 'antd';
 import type { InputProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
+import * as formInputPlugin from './plugins/formInputPlugin';
 import type { pluginType } from '@/plugins/type';
 
 import './index.module.less';
@@ -16,6 +17,14 @@ export const Input = registerComponet<
 >(
   AntdInput,
   { plugin, displayName: AntdInput.displayName, mapProps },
+);
+
+export const FormInput = registerComponet<
+  InputProps,
+  pluginType<InputProps>
+>(
+  Input,
+  { plugin: formInputPlugin, displayName: AntdInput.displayName, mapProps },
 );
 
 // export default Input;

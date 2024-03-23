@@ -2,29 +2,80 @@
 
 namespace nasl.ui {
   @Component({
-    title: '选择器',
-    icon: 'select',
-    description: '下拉选择器，支持单选、多选、搜索等功能',
-    group: 'Selector',
+    title: '表单选择器',
+    description: '表单选择器',
   })
-  export class Select<T, V, P extends boolean, M extends boolean, C extends string> extends ViewComponent {
-    @Prop({
-      title: '弹出状态',
-    })
-    opened: Boolean;
-    current: TableOptions<T, V, P, M>['current'];
-
-    @Method({
-      title: 'undefined',
-      description: '清除缓存，重新加载',
-    })
-    reload(): void {}
-    constructor(options?: Partial<SelectOptions<T, V, P, M, C>>) {
+  export class FormSelect<T, V, P extends boolean, M extends boolean, C extends string> extends ViewComponent {
+    constructor(options?: Partial<FormSelectOptions<T, V, P, M, C>>) {
       super();
     }
   }
 
-  export class SelectOptions<T, V, P extends boolean, M extends boolean, C extends string> extends ViewComponentOptions {
+  export class FormSelectOptions<T, V, P extends boolean, M extends boolean, C extends string> extends ViewComponentOptions {
+    @Prop({
+      group: '主要属性',
+      title: '标题自定义',
+      description: '开启标题自定义后,标题去会变成插槽,可以自由拖入组件定义标题',
+      docDescription: '开启标题自定义后,标题去会变成插槽,可以自由拖入组件定义标题',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    labelIsSlot: nasl.core.Boolean = false;
+
+    @Prop<FormSelectOptions<T, V, P, M, C>, 'labelText'>({
+      group: '主要属性',
+      title: '标题',
+      docDescription: '选择分组的标题，标题只有在没有文本插槽的时候生效',
+      if: (_) => _.labelIsSlot === false,
+    })
+    labelText: nasl.core.String;
+
+    @Prop({
+      title: '字段名称',
+      description: '表单项名称。',
+    })
+    name: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '占据数',
+      description: '列跨越的格数',
+      docDescription: '列跨越的格数。',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    span: nasl.core.Decimal = 24;
+
+    @Prop({
+      group: '主要属性',
+      title: '必填标记',
+      description: '是否必填。仅显示样式，如果要验证必填项，需要在`rules`中添加必填规则。',
+      docDescription: '是否必填。仅显示样式，如果要验证必填项，需要在rules中添加必填规则。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    required: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '释义提示',
+      description: '鼠标悬浮标签后的图标显示释义提示信息',
+      docDescription: '默认提示消息。',
+    })
+    tooltip: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '验证规则',
+      description: '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型',
+      docDescription: '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型，详见[验证规则](#验证规则)。',
+      bindHide: true,
+    })
+    rules: nasl.core.String;
+
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -41,16 +92,7 @@ namespace nasl.ui {
     })
     dataSchema: T;
 
-    @Prop({
-      group: '数据属性',
-      title: '选中值',
-      description: '当前选中的值',
-      sync: true,
-      docDescription: '当前选择的值',
-    })
-    value: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
-
-    @Prop<SelectOptions<T, V, P, M, C>, 'textField'>({
+    @Prop<FormSelectOptions<T, V, P, M, C>, 'textField'>({
       group: '数据属性',
       title: '文本字段',
       description: '集合的元素类型中，用于显示文本的属性名称',
@@ -61,7 +103,7 @@ namespace nasl.ui {
     })
     textField: (item: T) => nasl.core.String;
 
-    @Prop<SelectOptions<T, V, P, M, C>, 'valueField'>({
+    @Prop<FormSelectOptions<T, V, P, M, C>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
       description: '集合的元素类型中，用于标识选中值的属性',
@@ -134,28 +176,6 @@ namespace nasl.ui {
       },
     })
     allowClear: nasl.core.Boolean = false;
-
-    // @Prop({
-    //   group: '交互属性',
-    //   title: '多选项展示形式',
-    //   description: '多选项过多时的展示形式',
-    //   setter: {
-    //     concept: 'EnumSelectSetter',
-    //     options: [{ title: '过多时省略' }, { title: '过多时收缩' }, { title: '过多时显示' }],
-    //   },
-    // })
-    // tagsOverflow: 'hidden' | 'collapse' | 'visible' = 'collapse';
-
-    @Prop({
-      group: '交互属性',
-      title: '可取消',
-      description: '设置是否可以取消选择',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    private cancelable: nasl.core.Boolean = false;
-
     @Prop({
       group: '交互属性',
       title: '可多选',
@@ -167,28 +187,6 @@ namespace nasl.ui {
       },
     })
     mode: 'single' | 'multiple';
-
-    // @Prop({
-    //   group: '状态属性',
-    //   title: '初始即加载',
-    //   description: '设置初始时是否立即加载',
-    //   docDescription: '是否在初始时立即加载',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    // })
-    // initialLoad: nasl.core.Boolean = true;
-
-    // @Prop({
-    //   group: '状态属性',
-    //   title: '展示暂无数据文案',
-    //   description: '是否在数据为空时展示暂无数据的文字提示',
-    //   docDescription: '是否在数据为空时展示暂无数据的文字提示',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    // })
-    // showEmptyText: nasl.core.Boolean = true;
 
     @Prop({
       group: '状态属性',
@@ -212,27 +210,6 @@ namespace nasl.ui {
       },
     })
     size: 'small' | 'middle' | 'large';
-
-    @Slot({
-      title: '默认',
-      description: '插入`<SelectOption>``子组件。',
-      snippets: [
-        {
-          title: '选项',
-          code: '<SelectOption><Text children="选项"></Text></SelectOption>',
-        },
-        // {
-        //   title: '分组',
-        //   code: '<u-select-group><template #title><u-text text="分组"></u-text></template><u-select-item><u-text text="选项"></u-text></u-select-item></u-select-group>',
-        // },
-        // {
-        //   title: '分隔线',
-        //   code: '<u-select-divider></u-select-divider>',
-        // },
-      ],
-    })
-    slotDefault: () => Array<SelectOption<T, V>>;
-
     @Event({
       title: '按下时',
       description: '按键按下时回调',
@@ -270,71 +247,31 @@ namespace nasl.ui {
       pageY: nasl.core.Integer;
       which: nasl.core.Integer;
     }) => void;
-  }
-
-  @Component({
-    title: '选择项',
-    description: '选择项',
-  })
-  export class SelectOption<T, V> extends ViewComponent {
-    constructor(options?: Partial<ListItemOptions<T, V>>) {
-      super();
-    }
-  }
-
-  @Component({
-    title: '选择项',
-    description: '选择项',
-  })
-  export class SelectOptionOptions<T, V> extends ViewComponentOptions {
-    @Prop({
-      title: '选项文本',
-      description: '此项的显示值',
-    })
-    label: nasl.core.String;
-
-    @Prop({
-      group: '数据属性',
-      title: '值',
-      description: '此项的值。',
-      docDescription: '此项的值',
-    })
-    value: V;
-
-    @Prop({
-      group: '状态属性',
-      title: '禁用',
-      description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
-      docDescription: '该项不可选，默认关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    disabled: nasl.core.Boolean = false;
 
     @Slot({
       title: '默认',
-      description: '插入文本或 HTML。',
+      description: '插入`<SelectOption>``子组件。',
+      snippets: [
+        {
+          title: '选项',
+          code: '<SelectOption><Text children="选项"></Text></SelectOption>',
+        },
+        // {
+        //   title: '分组',
+        //   code: '<u-select-group><template #title><u-text text="分组"></u-text></template><u-select-item><u-text text="选项"></u-text></u-select-item></u-select-group>',
+        // },
+        // {
+        //   title: '分隔线',
+        //   code: '<u-select-divider></u-select-divider>',
+        // },
+      ],
     })
-    slotDefault: () => Array<ViewComponent>;
-  }
+    slotDefault: () => Array<SelectOption<T, V>>;
 
-  @Component({
-    title: '选择分组',
-    description: '选择分组',
-  })
-  export class SelectOptGroup<T, V> extends ViewComponent {
-    constructor(options?: Partial<SelectOptGroupOptions<T, V>>) {
-      super();
-    }
-  }
-
-  export class SelectOptGroupOptions<T, V> extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '标题',
-      docDescription: '选择分组的标题，标题只有在没有文本插槽的时候生效',
+    @Slot({
+      title: '标签自定义',
+      description: '插入自定义标签，代替`label`属性。',
     })
-    title: nasl.core.String;
+    slotLabel: () => Array<ViewComponent>;
   }
 }

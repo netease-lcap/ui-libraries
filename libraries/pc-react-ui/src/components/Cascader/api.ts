@@ -67,7 +67,7 @@ namespace nasl.ui {
     })
     dataSchema: T;
 
-    @Prop<CascaderOptions<T, V>, 'textfield'>({
+    @Prop<CascaderOptions<T, V>, 'textField'>({
       group: '数据属性',
       title: '文本字段',
       description: '集合的元素类型中，用于显示文本的属性名称',
@@ -76,7 +76,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    textfield: (item: T) => any = ((item: any) => item.text) as any;
+    textField: (item: T) => any = ((item: any) => item.text) as any;
 
     @Prop<CascaderOptions<T, V>, 'valueField'>({
       group: '数据属性',

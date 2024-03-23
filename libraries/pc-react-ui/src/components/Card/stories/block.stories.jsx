@@ -21,11 +21,11 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 基本样式 = {
   render: () => {
-    return <Card title={<Text children="标题" style={{ fontSize: 'inherit' }} />} style={{ width: 501 }} bordered />;
+    return <Card title={<Text children="标题" style={{ fontSize: 'inherit' }} />} bordered />;
   },
 };
 export const 分割线样式 = {
   render: () => {
-    return <Card title={<Text children="标题" style={{ fontSize: 'inherit' }} />} headerBordered bordered style={{ width: 300 }} />;
+    return <Card title={<Text children="标题" style={{ fontSize: 'inherit' }} />} headerBordered bordered />;
   },
 };
