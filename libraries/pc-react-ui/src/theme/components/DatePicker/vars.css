@@ -3,7 +3,7 @@
  * @useGlobalTokens ["--cw-padding-xxs","--cw-control-height-lg","--cw-padding","--cw-padding-sm","--cw-control-height","--cw-line-width","--cw-color-primary","--cw-color-primary-border","--cw-line-type","--cw-color-split","--cw-color-text-disabled","--cw-color-border","--cw-border-radius","--cw-motion-duration-mid","--cw-color-text-placeholder","--cw-font-size-lg","--cw-control-height-sm","--cw-padding-xs","--cw-margin-xs","--cw-color-text-description","--cw-line-width-bold","--cw-motion-duration-slow","--cw-size-popup-arrow","--cw-color-bg-elevated","--cw-border-radius-lg","--cw-box-shadow-secondary","--cw-border-radius-sm","--cw-box-shadow-popover-arrow","--cw-font-height","--cw-font-height-lg","--cw-line-height-lg","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-color-bg-container","--cw-color-text-heading","--cw-color-icon","--cw-color-icon-hover","--cw-font-weight-strong","--cw-color-text-light-solid","--cw-control-item-bg-active","--cw-margin-xxs","--cw-color-fill-secondary","--cw-color-text-tertiary","--cw-border-radius-xs","--cw-motion-ease-out-quint","--cw-motion-ease-in-quint","--cw-motion-ease-out-circ","--cw-motion-ease-in-out-circ","--cw-color-bg-container-disabled","--cw-color-error","--cw-color-error-border-hover","--cw-color-warning","--cw-color-warning-border-hover","--cw-color-fill-tertiary","--cw-color-error-bg","--cw-color-error-bg-hover","--cw-color-error-text","--cw-color-warning-bg","--cw-color-warning-bg-hover","--cw-color-warning-text","--cw-control-height-xs"]
  */
 .cw-nasl.cw-date-picker,
-.cw-nasl.cw-date-picker-css-var {
+.cw-nasl.cw-date-picker-css-var, .cw-picker-css-var {
   /**
    * @desc 输入框激活状态时背景颜色
    * @type color

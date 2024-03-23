@@ -1,5 +1,6 @@
 import React from 'react';
 import { Space } from 'antd';
+import '../../reset-antd';
 import PreviewDemos from 'antd-token-previewer/es/previews/components/treeSelect';
 
 export default () => {

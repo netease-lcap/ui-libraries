@@ -1,5 +1,6 @@
 import React from 'react';
 import { Space } from 'antd';
+import '../reset-antd';
 import {
   Primary,
   Success,
@@ -9,7 +10,7 @@ import {
 
 export default () => {
   return (
-    <Space size={24} style={{ width: 1940 }}>
+    <Space size={24} style={{ width: 1940 }} align="start">
       <Space size={24} direction="vertical">
         <Primary id="overview-primary" />
         <Success id="overview-success" />
