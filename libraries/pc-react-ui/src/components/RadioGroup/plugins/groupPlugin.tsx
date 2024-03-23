@@ -41,7 +41,6 @@ export function useHandleRef(props) {
   const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueProps, onChange: onChangeProps, defaultValue }));
   return {
     value,
-    setRef: (selfProps) => selfProps,
     onChange,
     ref: _.assign(ref, { value, setValue: onChange }),
   };
@@ -111,8 +110,18 @@ export function useHandleFormItemProps(props) {
   const BaseComponent = props.get('render');
   const render = React.useCallback((selfProps) => {
     const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
-    const fieldProps = _.omit(selfProps, FORMITEMPROPSFIELDS);
-    return <BaseComponent {...{ ...formItemProps, fieldProps }} />;
+    const colProps = _.pick(selfProps, COLPROPSFIELDS);
+    const fieldProps = _.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]);
+    return <BaseComponent {...{ ...formItemProps, fieldProps, colProps }} />;
+  }, [BaseComponent]);
+  return {
+    render,
+  };
+}
+export function useHandleRemoveRef(props) {
+  const BaseComponent = props.get('ref');
+  const render = React.useCallback((selfProps) => {
+    return <BaseComponent {..._.omit(selfProps, 'ref')}>{selfProps.children}</BaseComponent>;
   }, [BaseComponent]);
   return {
     render,

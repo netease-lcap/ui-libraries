@@ -16,6 +16,7 @@ export function useHandleNodepath(props) {
     inputNumber?.setAttribute('data-nodepath', nodepath);
     if (!isForm) return;
     inputNumber?.setAttribute('data-tag-name', 'FormInputNumber');
+    inputNumber?.setAttribute('data-has-mutation', 'true');
   }, []);
   return {
     'data-node-id': nodeid,

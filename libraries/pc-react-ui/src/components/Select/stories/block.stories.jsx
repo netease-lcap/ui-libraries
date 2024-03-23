@@ -25,7 +25,7 @@ export default {
 export const 选择器 = {
   render: () => {
     return (
-      <Select style={{ width: 256 }} placeholder="请选择">
+      <Select placeholder="请选择">
         <SelectOption key="1" label="1" value="1" />
         <SelectOption key="2" label="2" value="2" disabled />
       </Select>

@@ -35,6 +35,7 @@ export function useHandleNodePath(props) {
     inputParent?.setAttribute('data-nodepath', nodePath);
     if (!isForm) return;
     inputParent?.setAttribute('data-tag-name', 'FormCheckboxGroup');
+    inputParent?.setAttribute('data-has-mutation', 'true');
   }, [prefixCls, isForm, nodePath, nodeId]);
   return {
     'data-node-id': nodeId,

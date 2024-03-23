@@ -68,11 +68,19 @@ export function useHandleDataSource(props) {
   return {
     [$deletePropsList]: deletePropsList,
     ref: selfRef,
-    setRef: (selfProps) => selfProps,
     loading,
     ...dataSourceResult,
     fieldNames: {
       children: childrenField,
     },
+  };
+}
+export function useHandleRemoveRef(props) {
+  const BaseComponent = props.get('ref');
+  const render = React.useCallback((selfProps) => {
+    return <BaseComponent {..._.omit(selfProps, 'ref')}>{selfProps.children}</BaseComponent>;
+  }, [BaseComponent]);
+  return {
+    render,
   };
 }

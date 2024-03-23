@@ -42,6 +42,7 @@ export function useHandleNodePath(props) {
     inputParent?.setAttribute('data-nodepath', nodePath);
     if (!isForm) return;
     inputParent?.setAttribute('data-tag-name', 'FormTreeSelect');
+    inputParent?.setAttribute('data-has-mutation', 'true');
   }, [nodePath, isForm, nodeId, prefixCls]);
   return {
     'data-node-id': nodeId,

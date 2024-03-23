@@ -1,7 +1,9 @@
-// import { ProForm as AntdForm } from '@ant-design/pro-components';
+// import { ProForm } from '@ant-design/pro-components';
 import { Form as AntdForm, FormProps, FormItemProps } from 'antd';
 // import { FormProps } from 'antd';
-import { QueryFilter, QueryFilterProps } from '@ant-design/pro-components';
+import {
+  QueryFilter, QueryFilterProps, ProForm, ProFormProps,
+} from '@ant-design/pro-components';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import * as formItemPlugin from './plugins/formItemPlugin';
@@ -18,11 +20,14 @@ const mapProps = {
 
 export const Form = registerComponet<
   FormProps,
-  pluginType<FormProps>
+  ProFormProps
 >(
-  AntdForm,
+  ProForm,
   { plugin, displayName: AntdForm.displayName, mapProps },
 );
+Form.defaultProps = {
+  layout: 'horizontal',
+};
 
 export const FormItem = registerComponet<
   FormItemProps,

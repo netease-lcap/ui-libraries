@@ -4,7 +4,8 @@ namespace nasl.ui {
   @Component({
     title: '表单',
     icon: 'form',
-    description: '具有数据收集、校验和提交功能的表单，包含输入框、选择框、复选框、单选框等元素。',
+    description:
+      '具有数据收集、校验和提交功能的表单，包含输入框、选择框、复选框、单选框等元素。',
     group: 'Form',
   })
   export class Form extends ViewComponent {
@@ -92,10 +93,12 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '验证规则',
-      description: '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型',
+      description:
+        '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型',
       tooltipLink:
         'https://help.lcap.163yun.com/99.%E5%8F%82%E8%80%83/40.%E9%A1%B5%E9%9D%A2IDE/30.%E9%A1%B5%E9%9D%A2%E7%BB%84%E4%BB%B6/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/06.%E8%A1%A8%E5%8D%95/121.%E8%A1%A8%E5%8D%95.html',
-      docDescription: '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型，详见[验证规则](#验证规则)。',
+      docDescription:
+        '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型，详见[验证规则](#验证规则)。',
       bindHide: true,
     })
     private rules: object;
@@ -103,11 +106,16 @@ namespace nasl.ui {
     @Prop<FormOptions, 'layout'>({
       group: '主要属性',
       title: '表单布局',
-      docDescription: '更改表单的布局方式。行内展示，标签与表单项在一行展示。块级展示，宽度会充满父元素。栅格展示，可设置列数。',
+      docDescription:
+        '更改表单的布局方式。行内展示，标签与表单项在一行展示。块级展示，宽度会充满父元素。栅格展示，可设置列数。',
       setter: {
         concept: 'EnumSelectSetter',
         // options: [{ title: '行内展示' }, { title: '块级展示，宽度会充满父元素' }, { title: '栅格展示，可设置列数' }],
-        options: [{ title: '行内展示' }, { title: '水平展示' }, { title: '竖向展示' }],
+        options: [
+          { title: '行内展示' },
+          { title: '水平展示' },
+          { title: '竖向展示' },
+        ],
       },
       onChange: [{ clear: ['repeat'] }],
     })
@@ -117,7 +125,8 @@ namespace nasl.ui {
       group: '样式属性',
       title: '栅格水平间隔',
       description: '栅格列之间的间隔',
-      docDescription: '栅格列之间的间隔，支持无（0）、迷你（4）、小（8）、正常（16）、巨大（32）共6种间隔模式。',
+      docDescription:
+        '栅格列之间的间隔，支持无（0）、迷你（4）、小（8）、正常（16）、巨大（32）共6种间隔模式。',
       setter: {
         concept: 'NumberInputSetter',
       },
@@ -126,9 +135,36 @@ namespace nasl.ui {
 
     @Prop({
       group: '样式属性',
+      title: '标签布局',
+      description: '标签布局',
+      docDescription: '标签布局',
+      setter: {
+        max: 24,
+        min: 0,
+        concept: 'NumberInputSetter',
+      },
+    })
+    labelColSpan?: nasl.core.Decimal = undefined;
+
+    @Prop({
+      group: '样式属性',
+      title: '控件布局',
+      description: '入控件设置布局样式',
+      docDescription: '入控件设置布局样式',
+      setter: {
+        max: 24,
+        min: 0,
+        concept: 'NumberInputSetter',
+      },
+    })
+    wrapperColSpan?: nasl.core.Decimal = undefined;
+
+    @Prop({
+      group: '样式属性',
       title: '栅格垂直间隔',
       description: '栅格列之间的间隔',
-      docDescription: '栅格列之间的间隔，支持无（0）、迷你（4）、小（8）、正常（16）、巨大（32）共6种间隔模式。',
+      docDescription:
+        '栅格列之间的间隔，支持无（0）、迷你（4）、小（8）、正常（16）、巨大（32）共6种间隔模式。',
       setter: {
         concept: 'NumberInputSetter',
       },
@@ -143,9 +179,21 @@ namespace nasl.ui {
       setter: {
         concept: 'CapsulesSetter',
         options: [
-          { title: '左对齐', icon: 'horizontal-justify-start', tooltip: '左对齐' },
-          { title: '居中对齐', icon: 'horizontal-justify-center', tooltip: '居中对齐' },
-          { title: '右对齐', icon: 'horizontal-justify-end', tooltip: '右对齐' },
+          {
+            title: '左对齐',
+            icon: 'horizontal-justify-start',
+            tooltip: '左对齐',
+          },
+          {
+            title: '居中对齐',
+            icon: 'horizontal-justify-center',
+            tooltip: '居中对齐',
+          },
+          {
+            title: '右对齐',
+            icon: 'horizontal-justify-end',
+            tooltip: '右对齐',
+          },
           {
             title: '平均分布(两端不留空)',
             icon: 'horizontal-justify-space-between',
@@ -160,7 +208,8 @@ namespace nasl.ui {
       },
       tabKind: 'style',
     })
-    justify: 'start' | 'center' | 'end' | 'space-between' | 'space-around' = 'start';
+    justify: 'start' | 'center' | 'end' | 'space-between' | 'space-around' =
+      'start';
 
     @Prop<FormOptions, 'alignment'>({
       group: '主要属性',
@@ -170,11 +219,31 @@ namespace nasl.ui {
       setter: {
         concept: 'CapsulesSetter',
         options: [
-          { title: '顶对齐', icon: 'horizontal-alignment-start', tooltip: '顶对齐' },
-          { title: '垂直居中', icon: 'horizontal-alignment-center', tooltip: '垂直居中' },
-          { title: '底对齐', icon: 'horizontal-alignment-end', tooltip: '底对齐' },
-          { title: '行内文字基线对齐', icon: 'horizontal-alignment-baseline', tooltip: '行内文字基线对齐' },
-          { title: '占满容器高度', icon: 'horizontal-alignment-stretch', tooltip: '占满容器高度' },
+          {
+            title: '顶对齐',
+            icon: 'horizontal-alignment-start',
+            tooltip: '顶对齐',
+          },
+          {
+            title: '垂直居中',
+            icon: 'horizontal-alignment-center',
+            tooltip: '垂直居中',
+          },
+          {
+            title: '底对齐',
+            icon: 'horizontal-alignment-end',
+            tooltip: '底对齐',
+          },
+          {
+            title: '行内文字基线对齐',
+            icon: 'horizontal-alignment-baseline',
+            tooltip: '行内文字基线对齐',
+          },
+          {
+            title: '占满容器高度',
+            icon: 'horizontal-alignment-stretch',
+            tooltip: '占满容器高度',
+          },
         ],
       },
       tabKind: 'style',
@@ -185,7 +254,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '换行',
       description: '设置弹性布局下子元素总宽度超出父级时子元素是否换行展示',
-      docDescription: '支持控制弹性布局模式下，子元素总宽度超过父级时是否换行展示，默认开启。',
+      docDescription:
+        '支持控制弹性布局模式下，子元素总宽度超过父级时是否换行展示，默认开启。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '换行' }, { title: '不换行' }],
@@ -304,33 +374,19 @@ namespace nasl.ui {
       title: '表单值改变',
       description: '表单值改变后',
     })
-    onChange: (event: {
-      rawValue: nasl.core.String;
-      value: nasl.core.String;
-      trigger: nasl.core.String;
-      muted: nasl.core.String;
-      valid: nasl.core.Boolean;
-      touched: nasl.core.Boolean;
-      dirty: nasl.core.Boolean;
-      firstError: nasl.core.String;
-      triggerValid: nasl.core.Boolean;
-    }) => any;
+    onValuesChange: (changedValues, allValues) => any;
 
     @Event({
-      title: '验证后',
+      title: '提交表单且数据验证成功后',
       description: '验证时触发',
     })
-    onFinish: (event: {
-      rawValue: nasl.core.String;
-      value: nasl.core.String;
-      trigger: nasl.core.String;
-      muted: nasl.core.String;
-      valid: nasl.core.Boolean;
-      touched: nasl.core.Boolean;
-      dirty: nasl.core.Boolean;
-      firstError: nasl.core.String;
-      triggerValid: nasl.core.Boolean;
-    }) => any;
+    onFinish: (value: any) => any;
+
+    @Event({
+      title: '提交表单且数据验证失败后',
+      description: '验证时触发',
+    })
+    onFinishFailed: (value: any) => any;
 
     @Slot({
       title: 'undefined',
@@ -348,8 +404,13 @@ namespace nasl.ui {
       ],
     })
     slotDefault: () => Array<FormItem>;
-    // slotDefault: () => Array<ViewComponent>;
   }
+
+  //   @Event({
+  //     title: '展开折叠后',
+  //     description: '展开/折叠某分组时触发',
+  //   })
+  //   onToggle: (event: { expanded: nasl.core.Boolean }) => any;
 
   // @Component({
   //   title: '表单分组',
@@ -436,12 +497,11 @@ namespace nasl.ui {
   //   })
   //   disabled: nasl.core.Boolean = false;
 
-  //   @Event({
-  //     title: '展开折叠前',
-  //     description: '展开/折叠此分组前触发',
-  //   })
-  //   onBeforeToggle: (event: { expanded: nasl.core.Boolean }) => any;
-
+  // @Event({
+  //   title: '展开折叠前',
+  //   description: '展开/折叠此分组前触发',
+  // })
+  // onBeforeToggle: (event: { expanded: nasl.core.Boolean }) => any;
   //   @Event({
   //     title: '展开折叠后',
   //     description: '展开/折叠某分组时触发',

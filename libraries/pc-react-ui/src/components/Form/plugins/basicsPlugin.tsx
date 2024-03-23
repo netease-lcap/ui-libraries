@@ -21,7 +21,7 @@ export function useHandleContext(props) {
     render,
   };
 }
-export function useHandle(props) {
+function useHandle(props) {
   const Compoent = props.get('render');
   const render = React.useCallback((selfProps) => {
     const rowProps = ['gutter', 'alignment', 'justify', 'wrap', 'gutterJustify', 'gutterAlign', 'direction'];
@@ -47,14 +47,24 @@ export function useHandleRef(props) {
   const ref = props.get('ref');
   const [myForm] = Form.useForm();
   const form = props.get('form', myForm);
-  const onChange = props.get('onChange', () => { });
-  const formValue = Form.useWatch((value) => value, form);
-  React.useEffect(() => onChange(formValue), [formValue, onChange]);
   const validate = async () => form.validateFields().then(() => true, () => false);
   return {
     form,
     ref: _.assign(ref, {
       validate, getValues: form.getFieldsValue, setValue: form.setFieldValue, setValues: form.setFieldsValue,
     }),
+    grid: true,
+  };
+}
+export function useHandleGutter(props) {
+  const gutterJustify = props.get('gutterJustify', 0);
+  const gutterAlign = props.get('gutterAlign', 0);
+  const wrapperColSpan = props.get('wrapperColSpan');
+  const labelColSpan = props.get('labelColSpan');
+  return {
+    gutter: [gutterJustify, gutterAlign],
+    labelCol: { span: labelColSpan },
+    wrapperCol: { span: wrapperColSpan },
+
   };
 }

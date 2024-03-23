@@ -17,6 +17,7 @@ export function useHandleNodePath(props) {
     datePicker?.setAttribute('data-nodepath', nodePath);
     if (!isForm) return;
     datePicker?.setAttribute('data-tag-name', 'FormDatePicker');
+    datePicker?.setAttribute('data-has-mutation', 'true');
   }, []);
   return {
     'data-node-id': id,

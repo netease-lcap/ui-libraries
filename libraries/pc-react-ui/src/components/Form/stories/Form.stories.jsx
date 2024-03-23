@@ -5,6 +5,7 @@ import {
   ProForm,
   ProFormText,
   ProFormCascader,
+  QueryFilter,
 } from '@ant-design/pro-components';
 import {
   Input,
@@ -43,17 +44,28 @@ export const 默认 = {
   render: () => {
     const ref = React.useRef({});
     React.useEffect(() => {
-      console.log(ref, 'ref');
+      console.log(ref, 'ref----');
     }, []);
     return (
-      <Form>
-        <Select
-          dataSource={[
-            { value: 1, label: '男' },
-            { value: 2, label: '女' },
-          ]}
-        />
-      </Form>
+      <div style={{ width: '1200px' }}>
+        <Select width="xl" />
+        <Form ref={ref} layout="horizontal">
+          {/* <button onClick={() => console.log(ref.current.getValues())}>
+            1234
+          </button> */}
+          <ProFormText label="1234" width="md" colProps={{ span: 8 }} />
+          <Select
+            labelText="1234"
+            name="ag"
+            span={16}
+            // colProps={{ span: 16 }}
+            dataSource={[
+              { value: 1, label: '男' },
+              { value: 2, label: '女' },
+            ]}
+          />
+        </Form>
+      </div>
     );
   },
 };
@@ -90,17 +102,20 @@ export const 默认1 = {
 export const 查询表单 = {
   render: () => {
     return (
-      <div style={{ width: '1000px' }}>
+      <div style={{ width: '1500px' }}>
         <QueryForm>
-          <ProFormCascader label="pro" />
           <Cascader labelText="123" />
-          <Cascader />
-          <Cascader />
-          {/* <Input label="11xx" /> */}
-          <ProFormText label="132" width="lg" />
-          <ProFormText label="132" width="xl" />
+          {/* <ProFormCascader label="pro" /> */}
+          <Cascader labelText="123" />
+          <Cascader labelText="23" />
+          <Cascader labelText="23" />
+          <Cascader labelText="23" />
+          <Cascader labelText="23" />
+          <Cascader labelText="23" />
+          {/* <ProFormCascader label="pro" /> */}
+          {/* <ProFormText label="132" width="xl" />
           <ProFormText label="132" width="sm" />
-          <ProFormText label="132" width="700" />
+          <ProFormText label="132" width="700" /> */}
           {/* <Input />
         <Input />
         <Input /> */}

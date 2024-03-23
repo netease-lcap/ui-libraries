@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { Select, Col, FormItem } from '@/index';
 
-export function useHandleFormItem(props) {
+function useHandleFormItem(props) {
   const render = React.useCallback((selfProps) => {
     const nodepath = selfProps['data-nodepath'];
     const formItemPropsName = ['label', 'name', 'required', 'tooltip', 'rules'];

@@ -8,4 +8,8 @@ export const FORMITEMPROPSFIELDS = [
   'required',
   'tooltip',
   'rules',
+  'width',
+  'hidden',
+  'colProps',
+  'className',
 ];
