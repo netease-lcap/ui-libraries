@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
-import { Input } from 'antd';
 import { Col, FormItem } from '@/index';
+import FormContext from '@/components/Form/form-context';
 
 export function useHandleFormItem(props) {
   const BaseComponent = props.get('render');
@@ -10,10 +10,10 @@ export function useHandleFormItem(props) {
     const formItemPropsName = ['label', 'name', 'required', 'tooltip', 'rules'];
     const colPropsName = ['span'];
     const { labelIsSlot } = selfProps;
-    const label = labelIsSlot ? selfProps.abel : selfProps.labelText;
+    const label = labelIsSlot ? selfProps.label : selfProps.labelText;
     const formItemProps = { ..._.pick(selfProps, formItemPropsName), label };
     return (
-      <Col span={24} {..._.pick(selfProps, colPropsName)} data-nodepath={nodepath}>
+      <Col {..._.pick(selfProps, colPropsName)} data-nodepath={nodepath} data-tag-name="FormInput">
         <FormItem {...formItemProps}>
           <BaseComponent {..._.omit(selfProps, [...formItemPropsName, ...colPropsName, 'data-nodepath', 'children'])} />
         </FormItem>

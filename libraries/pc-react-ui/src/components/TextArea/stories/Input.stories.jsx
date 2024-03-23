@@ -32,7 +32,7 @@ export const 默认 = {
         console.log(ref, 'ref');
       }, 1000);
     }, []);
-    return <TextArea {...args} ref={ref} />;
+    return <TextArea {...args} ref={ref} data-nodepath="1234234" />;
   },
   args: {
     color: 'magenta',

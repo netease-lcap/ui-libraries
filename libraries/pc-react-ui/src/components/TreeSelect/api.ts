@@ -67,17 +67,6 @@ namespace nasl.ui {
     })
     valueField: (item: T) => V = ((item: any) => item.value) as any;
 
-    // @Prop({
-    //   group: '数据属性',
-    //   title: '父级值字段',
-    //   description: '集合的元素类型中，用于标识父节点的属性',
-    //   docDescription: '集合的元素类型中，用于标识父节点的属性',
-    //   setter: {
-    //     concept: 'PropertySelectSetter',
-    //   },
-    // })
-    // parentField: (item: T) => any;
-
     @Prop({
       group: '数据属性',
       title: '子级值字段',

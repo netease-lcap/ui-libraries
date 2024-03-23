@@ -27,9 +27,3 @@ export const 默认 = {
     return <Input />;
   },
 };
-
-export const 表单输入框 = {
-  render: () => {
-    return <FormInput labelText="输入框表单项" />;
-  },
-};

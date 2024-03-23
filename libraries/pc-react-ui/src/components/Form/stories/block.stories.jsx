@@ -1,9 +1,7 @@
 import React from 'react';
-// import { ProFormDatePicker, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components';
+import { QueryFilter, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components';
 import { Form, FormItem } from '../index';
-import {
-  Input, Button, Col, Text, Select, FormSelect,
-} from '@/index';
+import { Input, Button, Text } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -37,5 +35,15 @@ export const 默认 = {
         </FormItem>
       </Form>
     );
+  },
+};
+export const 自由表单 = {
+  render: () => {
+    return <Form />;
+  },
+};
+export const 查询表单 = {
+  render: () => {
+    return <QueryFilter />;
   },
 };

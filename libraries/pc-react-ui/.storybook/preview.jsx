@@ -21,7 +21,7 @@ const preview = {
             cssVar: { prefix: 'cw', key: 'cw-nasl' },
           }
         }
-        prefixCls="cw"
+        // prefixCls="cw"
       >
         {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
         <Story />

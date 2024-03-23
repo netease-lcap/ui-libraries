@@ -8,7 +8,7 @@ export function useHandleFormItem(props) {
     const formItemPropsName = ['label', 'name', 'required', 'tooltip', 'rules'];
     const colPropsName = ['span'];
     const { labelIsSlot } = selfProps;
-    const label = labelIsSlot ? selfProps.abel : selfProps.labelText;
+    const label = labelIsSlot ? selfProps.label : selfProps.labelText;
     const formItemProps = { ..._.pick(selfProps, formItemPropsName), label };
     return (
       <Col span={24} {..._.pick(selfProps, colPropsName)} data-nodepath={nodepath}>

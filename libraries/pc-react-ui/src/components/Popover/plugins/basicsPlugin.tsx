@@ -18,10 +18,5 @@ export function useHandleOpenRef(props) {
     open,
     ref: selfRef,
     onOpenChange: setOpen,
-    // onOpenChange: _.wrap(onOpenChange, (fn, visible) => {
-    //   setOpen(visible);
-    //   _.attempt(onOpenChange, visible);
-    // }),
-    // ref: modalRef,
   };
 }

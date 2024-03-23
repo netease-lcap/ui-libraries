@@ -1,7 +1,10 @@
 import _ from 'lodash';
 import React from 'react';
+import { ConfigProvider } from 'antd';
 
-export function useHandleStyle(props) {
+export function useHandleNodepath(props) {
+  const { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+  const prefix = getPrefixCls();
   const nodepath = props.get('data-nodepath');
   const nodeId = _.uniqueId('image_');
   const style = props.get('style');
@@ -10,7 +13,7 @@ export function useHandleStyle(props) {
     if (!element) return;
     element.style.width = '';
     element.removeAttribute('data-nodepath');
-    element.querySelector('.ant-image-img')?.setAttribute('data-nodepath', nodepath);
+    element.querySelector(`.${prefix}-image-img`)?.setAttribute('data-nodepath', nodepath);
   }, [style]);
   return {
     'data-node-id': nodeId,

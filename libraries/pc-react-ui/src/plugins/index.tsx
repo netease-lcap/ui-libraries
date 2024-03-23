@@ -89,10 +89,11 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   const Component = expandProps.get('render');
   const jsProps = expandProps.toJS();
   const componentRef = jsProps.ref;
+  const { setRef } = _.defaults(jsProps, { setRef: (object, ref) => _.set(object, 'ref', ref) });
   const excludeProps = _.omit(jsProps, _.concat(
     _.keys(plugin.getMapProps().toJS()),
     expandProps.get($deletePropsList, []),
-    [$deletePropsList, 'render', 'usePlugin', 'mutableProps', $deletePropsList, 'ref'],
+    [$deletePropsList, 'render', 'usePlugin', 'mutableProps', $deletePropsList, 'ref', 'setRef'],
   ));
 
   React.useImperativeHandle(ref, () => {
@@ -113,14 +114,16 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   //     </Component>
   //   );
   // }
-  const hasRef = excludeProps?.baseNoRef ? {} : baseRef;
+  setRef(excludeProps, baseRef);
+  // console.log(excludeProps, 'ex');
   return (
     <ConfigProvider locale={zhCN}>
       <Component
         {...excludeProps}
-        ref={hasRef}
+      // {...refObj}
       >
-        {props.children}
+        {/* 修复radioPro 子组件透传的问题 */}
+        {excludeProps.children}
       </Component>
     </ConfigProvider>
   );

@@ -27,7 +27,7 @@ namespace nasl.ui {
 			// 		description: '清空输入框。',
 			// })
 			// clear(): void {}
-			constructor(options?: Partial<InputOptions>) { super(); }
+			constructor(options?: Partial<TextAreaOptions>) { super(); }
 	}
 
 	export class TextAreaOptions  extends ViewComponentOptions {

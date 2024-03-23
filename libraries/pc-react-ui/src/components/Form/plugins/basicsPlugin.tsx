@@ -2,17 +2,29 @@
 import React from 'react';
 import _ from 'lodash';
 import { Form } from 'antd';
+import FormContext from '../form-context';
 import {
-  ProFormDatePicker, QueryFilter, ProFormDateRangePicker, ProFormSelect,
-} from '@ant-design/pro-components';
-import {
-  Row, FormSelect, Col, Select,
+  Row, FormSelect,
 } from '@/index';
 
+export function useHandleContext(props) {
+  const BaseComponents = props.get('render');
+  const render = React.useCallback((selfProps) => {
+    const colSpan = selfProps.span;
+    return (
+      <FormContext.Provider value={{ colSpan, isForm: true }}>
+        <BaseComponents {...selfProps}>{selfProps.children}</BaseComponents>
+      </FormContext.Provider>
+    );
+  }, [BaseComponents]);
+  return {
+    render,
+  };
+}
 export function useHandle(props) {
   const Compoent = props.get('render');
   const render = React.useCallback((selfProps) => {
-    const rowProps = ['gutter', 'align', 'justify', 'wrap', 'gutterJustify', 'gutterAlign'];
+    const rowProps = ['gutter', 'alignment', 'justify', 'wrap', 'gutterJustify', 'gutterAlign', 'direction'];
     const children = React.Children.map(selfProps.children, (item) => {
       if (item.type === FormSelect) {
         return <FormSelect {...item.props} />;

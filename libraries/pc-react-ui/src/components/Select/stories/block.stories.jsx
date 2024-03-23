@@ -33,8 +33,8 @@ export const 选择器 = {
   },
 };
 
-export const 表单选择器 = {
-  render: () => {
-    return <FormSelect labelText="表单项" />;
-  },
-};
+// export const 表单选择器 = {
+//   render: () => {
+//     return <FormSelect labelText="表单项" />;
+//   },
+// };

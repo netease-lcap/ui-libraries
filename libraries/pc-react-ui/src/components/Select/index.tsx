@@ -1,5 +1,6 @@
 import { Select as AntdSelect } from 'antd';
 import type { SelectProps as AntdSelectProps } from 'antd';
+import { ProFormSelect } from '@ant-design/pro-components';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import * as formSelectPlugin from './plugins/formSelect';
@@ -17,7 +18,7 @@ const mapProps = {
 };
 
 export const Select = registerComponet<SelectProps, pluginType<SelectProps>>(
-  AntdSelect,
+  ProFormSelect,
   { plugin, displayName: AntdSelect.displayName, mapProps },
 );
 export const FormSelect = registerComponet<SelectProps, pluginType<SelectProps>>(

@@ -28,15 +28,14 @@ export default {
 export const 默认 = {
   render: (args) => {
     const [value, setValue] = React.useState(['2024-03-11T11:34:40.334Z', '2024-03-11T11:34:40.334Z']);
-    setTimeout(() => {
-      console.log('---');
-      setValue(null);
-    }, 3000);
-    return <DateRangePicker {...args} value={value} />;
+    // setTimeout(() => {
+    //   console.log('---');
+    //   setValue(null);
+    // }, 3000);
+    return <DateRangePicker {...args} value={value} data-nodepath="123433" />;
   },
   args: {
     color: 'magenta',
-    children: 'Tag',
     onChange(e) {
       console.log(e);
     },
@@ -47,10 +46,10 @@ export const 默认 = {
     // endEmpty: true,
     // endDate: '2024-03-04',
     onEndDateChange(e) {
-      console.log(e);
+      // console.log(e);
     },
     onStartDateChange(e) {
-      console.log(e);
+      // console.log(e);
     },
   },
 };

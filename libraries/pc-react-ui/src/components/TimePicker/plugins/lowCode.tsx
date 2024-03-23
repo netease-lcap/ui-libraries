@@ -1,23 +1,30 @@
 import React from 'react';
 import _ from 'lodash';
 import { useControllableValue } from 'ahooks';
+import { ConfigProvider } from 'antd';
+import FormContext from '@/components/Form/form-context';
 import { $deletePropsList } from '@/plugins/constants';
 
 export function useHandleNodePath(props) {
-  // const children = props.get('children');
-  const id = _.uniqueId('contact_');
+  const { isForm } = React.useContext(FormContext);
+  const { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls();
+  const nodeId = React.useMemo(() => _.uniqueId('input_'), []);
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
   const nodePath = props.get('data-nodepath');
   React.useEffect(() => {
-    const mytab = document.querySelector(`[data-node-id=${id}]`);
-    const pickerElement = mytab?.parentNode?.parentNode as Element;
-    pickerElement?.setAttribute('data-nodepath', nodePath);
-  }, []);
+    const inputElement = document.querySelector(`[data-node-id=${nodeId}]`);
+    const inputParent = inputElement?.closest(`.${prefixCls}-form-item-row`);
+    inputParent?.setAttribute('data-nodepath', nodePath);
+    if (!isForm) return;
+    inputParent?.setAttribute('data-tag-name', 'FormInput');
+  }, [nodePath, isForm, nodeId, prefixCls]);
   return {
-    'data-node-id': id,
+    'data-node-id': nodeId,
     [$deletePropsList]: deletePropsList,
   };
 }
+
 export function useHandleOpenRef(props) {
   const openProps = props.get('open');
   const defaultOpen = props.get('defaultOpen');
@@ -39,9 +46,6 @@ export function useHandleOpenRef(props) {
     [$deletePropsList]: deletePropsList,
     open,
     ref: selfRef,
-    onOpenChange: _.wrap(onOpenChangeProps, (fn, visible) => {
-      setOpen(visible);
-      _.attempt(onOpenChangeProps, visible);
-    }),
+    onOpenChange: setOpen,
   };
 }

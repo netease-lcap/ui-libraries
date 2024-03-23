@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @Component({
-    title: '多选框组',
+    title: '多选项组',
     icon: 'checkboxes',
     description: '多项中选择多个时使用',
     group: 'Form',
@@ -240,7 +240,7 @@ namespace nasl.ui {
   }
 
   @Component({
-    title: '多选框组',
+    title: '多选项',
     icon: 'checkboxes',
     description: '多项中选择多个时使用',
     group: 'Form',

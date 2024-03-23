@@ -20,10 +20,6 @@ module.exports = {
     'react/jsx-filename-extension': 0,
     'react/jsx-props-no-spreading': 0,
     'import/prefer-default-export': 0,
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
     "semi": [2, "always"],
     '@typescript-eslint/no-var-requires': 0,
     "@typescript-eslint/no-explicit-any": 0,

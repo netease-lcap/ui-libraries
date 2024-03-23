@@ -62,16 +62,13 @@ export function useHandleDataSource(props) {
   const dataSource = useHandleMapField({
     textField, valueField, dataSource: dataSourceFormat, label: 'title', value: 'key',
   });
-  console.log(_.cloneDeep(dataSource), 'dataSource');
   const TreeData = useDataSourceToTree(dataSource, parentField, valueField);
-  console.log(TreeData, '--');
   const selfRef = React.useMemo(() => _.assign(ref, { reload, data: TreeData }), [TreeData, reload, ref]);
   const dataSourceResult = _.isEmpty(dataSource) ? {} : { treeData: TreeData };
-  console.log(dataSourceResult);
   return {
     [$deletePropsList]: deletePropsList,
     ref: selfRef,
-    baseNoRef: true,
+    setRef: (selfProps) => selfProps,
     loading,
     ...dataSourceResult,
     fieldNames: {

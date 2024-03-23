@@ -1,5 +1,5 @@
 export function useHandle() {
   return {
-    baseNoRef: true,
+    setRef: (selfProps, ref) => selfProps,
   };
 }

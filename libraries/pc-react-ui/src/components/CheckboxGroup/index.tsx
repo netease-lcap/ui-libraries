@@ -1,4 +1,6 @@
 import { Checkbox as AntdCheckbox } from 'antd';
+
+import { ProFormCheckbox, ProFormCheckboxGroupProps } from '@ant-design/pro-components';
 import type { CheckboxProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
@@ -23,10 +25,10 @@ export const Checkbox = registerComponet<
 
 export const CheckboxGroup = registerComponet<
   CheckboxProps,
-  pluginType<CheckboxProps>
+  ProFormCheckboxGroupProps
 >(
-  AntdCheckbox.Group,
-  { plugin: groupPlugin, displayName: AntdCheckbox.Group.displayName, mapProps },
+  ProFormCheckbox.Group,
+  { plugin: groupPlugin, displayName: 'CheckboxGroup', mapProps },
 );
 // export const CheckboxGroup = AntdCheckbox.Group;
 

@@ -1,30 +1,30 @@
 // import fp from 'lodash/fp';
+import classnames from 'classnames';
 import React from 'react';
 import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@vusion/validator';
-// import { ErrorBoundary } from 'react-error-boundary';
+import FormContext from '../form-context';
+
+import style from '../index.module.less';
 import {
-  ProFormDatePicker, QueryFilter, ProFormDateRangePicker, ProFormSelect,
-} from '@ant-design/pro-components';
-import {
-  Col, Select, Input,
+  Col,
 } from '@/index';
 // import { $deletePropsList } from '@/plugins/constants';
 
+export function useHandleStyle(props) {
+  const className = props.get('className');
+  return {
+    className: classnames(style.formItem, className),
+  };
+}
 export function useHandleCol(props) {
   const Compoent = props.get('render');
+  const { colSpan } = React.useContext(FormContext);
   const render = React.useCallback((selfProps) => {
     const ColPorps = ['offset', 'span'];
-    // if (selfProps.children.type === Select) {
-    //   const nodepath = selfProps['data-nodepath'];
-    //   console.log(nodepath, 'selfAttempt');
-    //   return (
-    //     <Input data-nodepath={nodepath} />
-    //   );
-    // }
-
+    const span = _.assign({ span: 24 }, _.filterUnderfinedValue({ span: colSpan }), _.filterUnderfinedValue({ span: selfProps.span }));
     return (
-      <Col span={24} {..._.pick(selfProps, ColPorps)}>
+      <Col {..._.pick(selfProps, ColPorps)} {...span}>
         <Compoent {...selfProps}>{selfProps.children}</Compoent>
       </Col>
     );
