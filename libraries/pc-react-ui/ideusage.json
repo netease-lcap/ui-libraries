@@ -10,7 +10,8 @@
           "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
           "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
         }
-      }
+      },
+      "mutations": ["FormSelect"]
     }
   },
   {
@@ -32,7 +33,19 @@
   {
     "name": "FormSelect",
     "ideusage": {
-      "idetype": "container"
+      "idetype": "container",
+      "actions": {
+        "click": {
+          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
+          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+        }
+      },
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
@@ -64,6 +77,19 @@
     "ideusage": {
       "idetype": "element",
       "textholder": "value"
+    }
+  },
+  {
+    "name": "FormInput",
+    "ideusage": {
+      "idetype": "container",
+      "textholder": "value",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {

@@ -14,3 +14,10 @@ export function useHandleStyle(props) {
     style,
   };
 }
+export function useHandleMatchProps(props) {
+  const alignmentProps = props.get('alignment');
+  const align = props.get('align');
+  return {
+    align: align ?? alignmentProps,
+  };
+}

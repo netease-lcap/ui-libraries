@@ -67,19 +67,19 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   const baseRef = React.useRef({});
   const pluginHooks = plugin.getPluginMethod();
   const mapProps = plugin.getMapProps();
-  function handleMutableProps(ref) {
-    const obj = { ref, render: BaseComponent, children: props.children };
-    return {
-      setState: (state) => _.assign(obj, state),
-      getState: (state) => obj[state],
-      getObj: () => obj,
-    };
-  }
-  const mutableProps = handleMutableProps(ref);
+  // function handleMutableProps(ref) {
+  //   const obj = { ref, render: BaseComponent, children: props.children };
+  //   return {
+  //     setState: (state) => _.assign(obj, state),
+  //     getState: (state) => obj[state],
+  //     getObj: () => obj,
+  //   };
+  // }
+  // const mutableProps = handleMutableProps(ref);
   const ImmutableProps = Map(props)
     .reduce((result, value, key) => result.set(mapProps.get(key, key), value), Map())
     .set('render', BaseComponent)
-    .set('mutableProps', mutableProps)
+    // .set('mutableProps', mutableProps)
     .set('ref', {})
     .set($deletePropsList, []);
   const expandProps = pluginHooks.reduce(
@@ -94,14 +94,13 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     expandProps.get($deletePropsList, []),
     [$deletePropsList, 'render', 'usePlugin', 'mutableProps', $deletePropsList, 'ref'],
   ));
-
   React.useImperativeHandle(ref, () => {
     return {
       ...componentRef,
       ...baseRef.current,
     };
   }, [componentRef, baseRef]);
-  mutableProps.setState({ ref });
+  // mutableProps.setState({ ref });
   // if (plugin.displayName === 'Tree') {
   //   console.log(BaseComponent === Component, Tree === Component, '???===', plugin.displayName);
   //   return (
@@ -113,14 +112,17 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   //     </Component>
   //   );
   // }
-  const hasRef = excludeProps?.baseNoRef ? {} : baseRef;
+  // console.log(excludeProps,'ex');
+  // console.log(excludeProps, 'ex');
   return (
     <ConfigProvider locale={zhCN}>
       <Component
         {...excludeProps}
-        ref={hasRef}
+      // ref={baseRef}
+      // {...refObj}
       >
-        {props.children}
+        {/* 修复radioPro 子组件透传的问题 */}
+        {excludeProps.children}
       </Component>
     </ConfigProvider>
   );

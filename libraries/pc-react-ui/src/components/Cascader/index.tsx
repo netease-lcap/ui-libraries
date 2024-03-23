@@ -1,5 +1,7 @@
 import { Cascader as AntdCascader } from 'antd';
 import React from 'react';
+
+import { ProFormCascader, ProFormCaptchaProps } from '@ant-design/pro-components';
 import type { CascaderProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
@@ -14,9 +16,9 @@ const mapProps = {
 };
 
 export const Cascader = registerComponet<
-  CascaderProps,
-  pluginType<CascaderProps>
+  ProFormCaptchaProps,
+  CascaderProps
 >(
-  AntdCascader,
+  ProFormCascader,
   { plugin, displayName: AntdCascader.displayName, mapProps },
 );

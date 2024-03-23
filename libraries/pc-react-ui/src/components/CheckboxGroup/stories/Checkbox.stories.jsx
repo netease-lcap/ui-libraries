@@ -95,3 +95,22 @@ export const 静态数据 = {
     );
   },
 };
+export const 静态数据元素 = {
+  render: () => {
+    function EmptySlot(params) {
+      return <div />;
+    }
+    return (
+      <CheckboxGroup
+        data-nodepath="rootview.6.2"
+      >
+        <Checkbox value={1} label={1} id="checkbox" data-nodepath="checkbox">
+          1
+        </Checkbox>
+        <Checkbox value={2} label={2}>
+          2
+        </Checkbox>
+      </CheckboxGroup>
+    );
+  },
+};

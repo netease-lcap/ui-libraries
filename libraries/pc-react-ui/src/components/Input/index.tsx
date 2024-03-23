@@ -1,5 +1,6 @@
 import { Input as AntdInput } from 'antd';
 import type { InputProps } from 'antd';
+import { ProForm, ProFormText } from '@ant-design/pro-components';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import * as formInputPlugin from './plugins/formInputPlugin';
@@ -15,7 +16,7 @@ export const Input = registerComponet<
   InputProps,
   pluginType<InputProps>
 >(
-  AntdInput,
+  ProFormText,
   { plugin, displayName: AntdInput.displayName, mapProps },
 );
 

@@ -33,6 +33,5 @@ export const 默认 = {
       console.log(e);
     },
     showNow: true,
-    children: 'Tag',
   },
 };

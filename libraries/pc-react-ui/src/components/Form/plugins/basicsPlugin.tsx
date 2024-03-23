@@ -2,17 +2,29 @@
 import React from 'react';
 import _ from 'lodash';
 import { Form } from 'antd';
+import FormContext from '../form-context';
 import {
-  ProFormDatePicker, QueryFilter, ProFormDateRangePicker, ProFormSelect,
-} from '@ant-design/pro-components';
-import {
-  Row, FormSelect, Col, Select,
+  Row, FormSelect,
 } from '@/index';
 
-export function useHandle(props) {
+export function useHandleContext(props) {
+  const BaseComponents = props.get('render');
+  const render = React.useCallback((selfProps) => {
+    const colSpan = selfProps.span;
+    return (
+      <FormContext.Provider value={{ colSpan, isForm: true }}>
+        <BaseComponents {...selfProps}>{selfProps.children}</BaseComponents>
+      </FormContext.Provider>
+    );
+  }, [BaseComponents]);
+  return {
+    render,
+  };
+}
+function useHandle(props) {
   const Compoent = props.get('render');
   const render = React.useCallback((selfProps) => {
-    const rowProps = ['gutter', 'align', 'justify', 'wrap', 'gutterJustify', 'gutterAlign'];
+    const rowProps = ['gutter', 'alignment', 'justify', 'wrap', 'gutterJustify', 'gutterAlign', 'direction'];
     const children = React.Children.map(selfProps.children, (item) => {
       if (item.type === FormSelect) {
         return <FormSelect {...item.props} />;
@@ -35,14 +47,24 @@ export function useHandleRef(props) {
   const ref = props.get('ref');
   const [myForm] = Form.useForm();
   const form = props.get('form', myForm);
-  const onChange = props.get('onChange', () => { });
-  const formValue = Form.useWatch((value) => value, form);
-  React.useEffect(() => onChange(formValue), [formValue, onChange]);
   const validate = async () => form.validateFields().then(() => true, () => false);
   return {
     form,
     ref: _.assign(ref, {
       validate, getValues: form.getFieldsValue, setValue: form.setFieldValue, setValues: form.setFieldsValue,
     }),
+    grid: true,
+  };
+}
+export function useHandleGutter(props) {
+  const gutterJustify = props.get('gutterJustify', 0);
+  const gutterAlign = props.get('gutterAlign', 0);
+  const wrapperColSpan = props.get('wrapperColSpan');
+  const labelColSpan = props.get('labelColSpan');
+  return {
+    gutter: [gutterJustify, gutterAlign],
+    labelCol: { span: labelColSpan },
+    wrapperCol: { span: wrapperColSpan },
+
   };
 }

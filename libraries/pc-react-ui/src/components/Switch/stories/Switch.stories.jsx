@@ -28,7 +28,7 @@ export const 异步函数 = {
     React.useEffect(() => {
       console.log(ref, 'ref');
     }, []);
-    return <Switch {...args} ref={ref} />;
+    return <Switch {...args} ref={ref} data-nodepath="1234" />;
   },
   args: {
     // defaultChecked: true,

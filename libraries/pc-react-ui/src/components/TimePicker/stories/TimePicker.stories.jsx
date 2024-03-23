@@ -29,6 +29,7 @@ export const 默认 = {
     return (
       <TimePicker
         {...args}
+        data-nodepath="1234‰"
         value={value}
         onChange={(e) => {
           console.log(e);
@@ -39,7 +40,6 @@ export const 默认 = {
   },
   args: {
     color: 'magenta',
-    children: 'Tag',
     locale: {
       placeholder: '请选择日期',
     },

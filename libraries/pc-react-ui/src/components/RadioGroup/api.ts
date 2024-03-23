@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @Component({
-    title: '单选框',
+    title: '单选项',
     description: '多项中选择一项',
     group: 'Form',
   })
@@ -155,7 +155,7 @@ namespace nasl.ui {
   }
 
   @Component({
-    title: '单选框组',
+    title: '单选组',
     icon: 'capsules',
     description: '多项中选择一项',
     group: 'Form',

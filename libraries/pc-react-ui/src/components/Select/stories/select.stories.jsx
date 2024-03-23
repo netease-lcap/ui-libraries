@@ -83,7 +83,7 @@ export const 异步函数1 = {
       return <span>1234</span>;
     }
     return (
-      <Select data-nodepath="rootview.0.0.0.0.1" ide-iscontainer="true" allowClear placeholder="请输入property1" key="component-61" defaultOpen={false}>
+      <Select labelText="1234" data-nodepath="rootview.0.0.0.0.1" ide-iscontainer="true" allowClear placeholder="请输入property1" key="component-61" defaultOpen={false}>
         <SelectOption data-nodepath="rootview.0.0.0.0.1.0" ide-iscontainer="true" value label="是" key="component-62">
           <EmptySlot key="16" />
         </SelectOption>

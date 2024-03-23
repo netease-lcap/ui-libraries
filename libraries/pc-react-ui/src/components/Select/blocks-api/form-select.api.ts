@@ -6,76 +6,70 @@ namespace nasl.ui {
     description: '表单选择器',
   })
   export class FormSelect<T, V, P extends boolean, M extends boolean, C extends string> extends ViewComponent {
-    constructor(options?: Partial<FormSelectOptions<T, V, P, M, C>>) {
+    constructor(options?: Partial<FormSelectOptions<T, V, P, M, C> & SelectOptions<T, V, P, M, C> & FormItemOptions>) {
       super();
     }
   }
 
   export class FormSelectOptions<T, V, P extends boolean, M extends boolean, C extends string> extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '标题自定义',
-      description: '开启标题自定义后,标题去会变成插槽,可以自由拖入组件定义标题',
-      docDescription: '开启标题自定义后,标题去会变成插槽,可以自由拖入组件定义标题',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    labelIsSlot: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '标题自定义',
+    //   description: '开启标题自定义后,标题去会变成插槽,可以自由拖入组件定义标题',
+    //   docDescription: '开启标题自定义后,标题去会变成插槽,可以自由拖入组件定义标题',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // labelIsSlot: nasl.core.Boolean = false;
 
-    @Prop<FormSelectOptions<T, V, P, M, C>, 'labelText'>({
-      group: '主要属性',
-      title: '标题',
-      docDescription: '选择分组的标题，标题只有在没有文本插槽的时候生效',
-      if: (_) => _.labelIsSlot === false,
-    })
-    labelText: nasl.core.String;
-
-    @Prop({
-      title: '字段名称',
-      description: '表单项名称。',
-    })
-    name: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '占据数',
-      description: '列跨越的格数',
-      docDescription: '列跨越的格数。',
-      setter: {
-        concept: 'NumberInputSetter',
-      },
-    })
-    span: nasl.core.Decimal = 24;
-
-    @Prop({
-      group: '主要属性',
-      title: '必填标记',
-      description: '是否必填。仅显示样式，如果要验证必填项，需要在`rules`中添加必填规则。',
-      docDescription: '是否必填。仅显示样式，如果要验证必填项，需要在rules中添加必填规则。',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    required: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '释义提示',
-      description: '鼠标悬浮标签后的图标显示释义提示信息',
-      docDescription: '默认提示消息。',
-    })
-    tooltip: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '验证规则',
-      description: '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型',
-      docDescription: '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型，详见[验证规则](#验证规则)。',
-      bindHide: true,
-    })
-    rules: nasl.core.String;
-
+    // @Prop<FormSelectOptions<T, V, P, M, C>, 'labelText'>({
+    //   group: '主要属性',
+    //   title: '标题',
+    //   docDescription: '选择分组的标题，标题只有在没有文本插槽的时候生效',
+    //   if: (_) => _.labelIsSlot === false,
+    // })
+    // labelText: nasl.core.String;
+    // @Prop({
+    //   title: '字段名称',
+    //   description: '表单项名称。',
+    // })
+    // name: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '占据数',
+    //   description: '列跨越的格数',
+    //   docDescription: '列跨越的格数。',
+    //   setter: {
+    //     concept: 'NumberInputSetter',
+    //   },
+    // })
+    // span: nasl.core.Decimal = 24;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '必填标记',
+    //   description: '是否必填。仅显示样式，如果要验证必填项，需要在`rules`中添加必填规则。',
+    //   docDescription: '是否必填。仅显示样式，如果要验证必填项，需要在rules中添加必填规则。',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // required: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '释义提示',
+    //   description: '鼠标悬浮标签后的图标显示释义提示信息',
+    //   docDescription: '默认提示消息。',
+    // })
+    // tooltip: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '验证规则',
+    //   description: '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型',
+    //   docDescription: '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型，详见[验证规则](#验证规则)。',
+    //   bindHide: true,
+    // })
+    // rules: nasl.core.String;
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -102,7 +96,6 @@ namespace nasl.ui {
       },
     })
     textField: (item: T) => nasl.core.String;
-
     @Prop<FormSelectOptions<T, V, P, M, C>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
@@ -116,24 +109,10 @@ namespace nasl.ui {
 
     // @Prop({
     //   group: '数据属性',
-    //   title: '初始化排序规则',
-    //   description: '设置数据初始化时的排序字段和顺序规则',
+    //   title: '选中值完整数据',
+    //   description: '当下拉列表是分页或加载更多时，需要使用该字段回显选择框内数据。',
+    //   docDescription: '当下拉列表是分页或加载更多时，需要使用该字段回显选择框内数据。',
     // })
-    // sorting: { field: nasl.core.String; order: 'asc' | 'desc' } = {
-    //   field: '',
-    //   order: 'desc',
-    // };
-
-    @Prop({
-      group: '数据属性',
-      title: '选中值完整数据',
-      description: '当下拉列表是分页或加载更多时，需要使用该字段回显选择框内数据。',
-      docDescription: '当下拉列表是分页或加载更多时，需要使用该字段回显选择框内数据。',
-    })
-    private labelInValue: nasl.collection.List<{
-      text: nasl.core.String;
-      value: V;
-    }>;
 
     @Prop({
       group: '数据属性',
@@ -176,6 +155,7 @@ namespace nasl.ui {
       },
     })
     allowClear: nasl.core.Boolean = false;
+
     @Prop({
       group: '交互属性',
       title: '可多选',
@@ -210,6 +190,7 @@ namespace nasl.ui {
       },
     })
     size: 'small' | 'middle' | 'large';
+
     @Event({
       title: '按下时',
       description: '按键按下时回调',
@@ -256,14 +237,6 @@ namespace nasl.ui {
           title: '选项',
           code: '<SelectOption><Text children="选项"></Text></SelectOption>',
         },
-        // {
-        //   title: '分组',
-        //   code: '<u-select-group><template #title><u-text text="分组"></u-text></template><u-select-item><u-text text="选项"></u-text></u-select-item></u-select-group>',
-        // },
-        // {
-        //   title: '分隔线',
-        //   code: '<u-select-divider></u-select-divider>',
-        // },
       ],
     })
     slotDefault: () => Array<SelectOption<T, V>>;

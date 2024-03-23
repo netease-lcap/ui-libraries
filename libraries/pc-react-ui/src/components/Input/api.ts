@@ -362,6 +362,12 @@ namespace nasl.ui {
 					shiftKey: nasl.core.Boolean;
 			}) => any;
 
+			@Slot({
+				title: '标签自定义',
+				description: '插入自定义标签，代替`label`属性。',
+			})
+			slotLabel: () => Array<ViewComponent>;
+
 			// @Slot({
 			// 		title: '前缀图标',
 			// 		description: '前缀图标自定义',

@@ -18,7 +18,14 @@ function getValueFromObjectExpressionByKey(object: babelTypes.ObjectExpression, 
   return generate(property.value).code;
 }
 
-type DefaultValue = babelTypes.NullLiteral | babelTypes.BooleanLiteral | babelTypes.StringLiteral | babelTypes.NumericLiteral | babelTypes.ArrayExpression | babelTypes.ObjectExpression | babelTypes.TSAsExpression;
+type DefaultValue =
+  | babelTypes.NullLiteral
+  | babelTypes.BooleanLiteral
+  | babelTypes.StringLiteral
+  | babelTypes.NumericLiteral
+  | babelTypes.ArrayExpression
+  | babelTypes.ObjectExpression
+  | babelTypes.TSAsExpression;
 type Annotation = babelTypes.TSTypeReference | babelTypes.TSUnionType;
 const isPrimitive = (name: string) => ['String', 'Integer', 'Decimal', 'Boolean'].includes(name);
 
@@ -42,9 +49,7 @@ function transformTypeAnnotation(node: Annotation): astTypes.TypeAnnotation | un
       const namespace = `${((left as babelTypes.TSQualifiedName).left as babelTypes.Identifier).name}.${(left as babelTypes.TSQualifiedName).right.name}`;
 
       return {
-        typeKind: typeParameters?.params?.length
-          ? 'generic'
-          : (primitive ? 'primitive' : 'reference'),
+        typeKind: typeParameters?.params?.length ? 'generic' : primitive ? 'primitive' : 'reference',
         typeName: right.name,
         typeNamespace: namespace,
         concept: 'TypeAnnotation',
@@ -58,9 +63,7 @@ function transformTypeAnnotation(node: Annotation): astTypes.TypeAnnotation | un
       const primitive = isPrimitive(typeName.name);
 
       return {
-        typeKind: typeParameters?.params?.length
-          ? 'generic'
-          : (primitive ? 'primitive' : 'reference'),
+        typeKind: typeParameters?.params?.length ? 'generic' : primitive ? 'primitive' : 'reference',
         typeName: typeName.name,
         typeNamespace: ['Current', 'CurrentDynamic'].includes(typeName.name) ? 'nasl.ui' : '',
         concept: 'TypeAnnotation',
@@ -73,15 +76,17 @@ function transformTypeAnnotation(node: Annotation): astTypes.TypeAnnotation | un
 }
 
 function transformTypeParameters(typeParameters: babelTypes.TSTypeParameterInstantiation): astTypes.TypeAnnotation[] | any {
-  return typeParameters?.params?.map((param) => {
-    return {
-      ...transformTypeAnnotation(param as Annotation),
-      concept: 'TypeAnnotation',
-      typeKind: 'typeParam',
-      inferred: false,
-      ruleMap: new Map(),
-    };
-  }) || [];
+  return (
+    typeParameters?.params?.map((param) => {
+      return {
+        ...transformTypeAnnotation(param as Annotation),
+        concept: 'TypeAnnotation',
+        typeKind: 'typeParam',
+        inferred: false,
+        ruleMap: new Map(),
+      };
+    }) || []
+  );
 }
 
 function transformSlotParams(params: babelTypes.Identifier[]): astTypes.Param[] | any {
@@ -147,7 +152,10 @@ function transformValue(node: DefaultValue, typeAnnotation?: Annotation): any {
         const { body } = node.expression;
         if (body.type === 'MemberExpression') {
           let value = getMemberExpressionName(body);
-          value = value.split('.').slice(1).join('.');
+          value = value
+            .split('.')
+            .slice(1)
+            .join('.');
           return {
             concept: 'StringLiteral',
             value,
@@ -163,9 +171,7 @@ function transformValue(node: DefaultValue, typeAnnotation?: Annotation): any {
 export default function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
   const root = babel.parseSync(tsCode, {
     filename: 'result.ts',
-    presets: [
-      require('@babel/preset-typescript'),
-    ],
+    presets: [require('@babel/preset-typescript')],
     plugins: [
       [require('@babel/plugin-proposal-decorators'), { legacy: true }],
       // 'babel-plugin-parameter-decorator'
@@ -173,7 +179,6 @@ export default function transform(tsCode: string): astTypes.ViewComponentDeclara
     rootMode: 'root',
     root: __dirname,
   }) as babelTypes.File;
-
   const programBody = root.program.body;
   let blockOrDecl: babelTypes.TSModuleDeclaration | babelTypes.TSModuleBlock = programBody.find((stat) => stat.type === 'TSModuleDeclaration') as babelTypes.TSModuleDeclaration;
   while (blockOrDecl && blockOrDecl.type === 'TSModuleDeclaration') {
@@ -183,8 +188,8 @@ export default function transform(tsCode: string): astTypes.ViewComponentDeclara
 
   const mainBody = (blockOrDecl as babelTypes.TSModuleBlock).body;
   /**
-     * 组件名：[组件 class, 组件选项 class]
-     */
+   * 组件名：[组件 class, 组件选项 class]
+   */
   const classMap: Map<string, [babelTypes.ClassDeclaration, babelTypes.ClassDeclaration]> = new Map();
   mainBody.forEach((statement) => {
     let classDecl: babelTypes.ClassDeclaration;
@@ -255,18 +260,16 @@ export default function transform(tsCode: string): astTypes.ViewComponentDeclara
     });
 
     {
-      const classTypeParams = generate(babelTypes.tsInterfaceDeclaration(
-        babelTypes.identifier('Wrapper'),
-                classDecl.typeParameters as babelTypes.TSTypeParameterDeclaration,
-                [],
-                babelTypes.tsInterfaceBody([]),
-      )).code.replace(/^interface Wrapper<?/, '').replace(/>? {}$/, '');
-      const optionsTypeParams = generate(babelTypes.tsInterfaceDeclaration(
-        babelTypes.identifier('Wrapper'),
-                optionsDecl.typeParameters as babelTypes.TSTypeParameterDeclaration,
-                [],
-                babelTypes.tsInterfaceBody([]),
-      )).code.replace(/^interface Wrapper<?/, '').replace(/>? {}$/, '');
+      const classTypeParams = generate(
+        babelTypes.tsInterfaceDeclaration(babelTypes.identifier('Wrapper'), classDecl.typeParameters as babelTypes.TSTypeParameterDeclaration, [], babelTypes.tsInterfaceBody([])),
+      )
+        .code.replace(/^interface Wrapper<?/, '')
+        .replace(/>? {}$/, '');
+      const optionsTypeParams = generate(
+        babelTypes.tsInterfaceDeclaration(babelTypes.identifier('Wrapper'), optionsDecl.typeParameters as babelTypes.TSTypeParameterDeclaration, [], babelTypes.tsInterfaceBody([])),
+      )
+        .code.replace(/^interface Wrapper<?/, '')
+        .replace(/>? {}$/, '');
       if (classTypeParams !== optionsTypeParams) throw new Error(`组件的${className}泛型类型参数不匹配！`);
 
       component.tsTypeParams = classTypeParams;
@@ -287,11 +290,11 @@ export default function transform(tsCode: string): astTypes.ViewComponentDeclara
 
               const prop: astTypes.PropDeclaration = {
                 concept: 'PropDeclaration',
-                group: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'group') as astTypes.PropDeclaration['group'] || '主要属性',
+                group: (getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'group') as astTypes.PropDeclaration['group']) || '主要属性',
                 sync: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'sync') as astTypes.PropDeclaration['sync'],
                 bindHide: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'bindHide') as astTypes.PropDeclaration['bindHide'],
                 bindOpen: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'bindOpen') as astTypes.PropDeclaration['bindOpen'],
-                tabKind: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'tabKind') as astTypes.PropDeclaration['tabKind'] || 'property',
+                tabKind: (getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'tabKind') as astTypes.PropDeclaration['tabKind']) || 'property',
                 setter: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'setter') as astTypes.PropDeclaration['setter'],
                 name: (member.key as babelTypes.Identifier).name,
                 title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'title') as astTypes.PropDeclaration['title'],
@@ -377,11 +380,11 @@ export default function transform(tsCode: string): astTypes.ViewComponentDeclara
             if (calleeName === 'Prop') {
               const prop: astTypes.PropDeclaration = {
                 concept: 'PropDeclaration',
-                group: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'group') as astTypes.PropDeclaration['group'] || '主要属性',
+                group: (getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'group') as astTypes.PropDeclaration['group']) || '主要属性',
                 sync: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'sync') as astTypes.PropDeclaration['sync'],
                 bindHide: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'bindHide') as astTypes.PropDeclaration['bindHide'],
                 bindOpen: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'bindOpen') as astTypes.PropDeclaration['bindOpen'],
-                tabKind: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'tabKind') as astTypes.PropDeclaration['tabKind'] || 'property',
+                tabKind: (getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'tabKind') as astTypes.PropDeclaration['tabKind']) || 'property',
                 setter: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'setter') as astTypes.PropDeclaration['setter'],
                 name: (member.key as babelTypes.Identifier).name,
                 title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'title') as astTypes.PropDeclaration['title'],
@@ -415,7 +418,10 @@ export default function transform(tsCode: string): astTypes.ViewComponentDeclara
                     return {
                       concept: 'Param',
                       name: (param.left as babelTypes.Identifier).name,
-                      description: getValueFromObjectExpressionByKey((decorator.expression as babelTypes.CallExpression).arguments[0] as babelTypes.ObjectExpression, 'description') as astTypes.LogicDeclaration['description'],
+                      description: getValueFromObjectExpressionByKey(
+                        (decorator.expression as babelTypes.CallExpression).arguments[0] as babelTypes.ObjectExpression,
+                        'description',
+                      ) as astTypes.LogicDeclaration['description'],
                       typeAnnotation: transformTypeAnnotation(typeAnnotation.typeAnnotation as Annotation),
                       defaultValue: {
                         concept: 'DefaultValue',
@@ -430,7 +436,10 @@ export default function transform(tsCode: string): astTypes.ViewComponentDeclara
                   return {
                     concept: 'Param',
                     name: (param as babelTypes.Identifier).name,
-                    description: getValueFromObjectExpressionByKey((decorator.expression as babelTypes.CallExpression).arguments[0] as babelTypes.ObjectExpression, 'description') as astTypes.LogicDeclaration['description'],
+                    description: getValueFromObjectExpressionByKey(
+                      (decorator.expression as babelTypes.CallExpression).arguments[0] as babelTypes.ObjectExpression,
+                      'description',
+                    ) as astTypes.LogicDeclaration['description'],
                     typeAnnotation: transformTypeAnnotation(typeAnnotation.typeAnnotation as Annotation),
                   } as any;
                 }),

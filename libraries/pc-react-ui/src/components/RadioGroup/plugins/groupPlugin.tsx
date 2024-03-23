@@ -5,6 +5,10 @@ import { useControllableValue } from 'ahooks';
 import React from 'react';
 import _ from 'lodash';
 import { $deletePropsList } from '@/plugins/constants';
+import FormContext from '@/components/Form/form-context';
+import { Col, FormItem, Radio } from '@/index';
+import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
+import { COLPROPSFIELDS } from '@/components/Row/constants';
 import {
   useRequestDataSource, useHandleMapField, useFormatDataSource,
 } from '@/plugins/common/dataSource';
@@ -17,6 +21,17 @@ export function useHandleValue(props) {
     }),
   };
 }
+function useHandleChildren(props) {
+  const childrenProps = props.get('children');
+  const dataSourceProps = props.get('dataSource');
+  const dataSource = React.useMemo(() => React.Children.map(childrenProps, (item) => {
+    if (item.type === Radio) {
+      return item.props;
+    }
+    return null;
+  })?.filter(Boolean), [childrenProps]);
+  return { dataSource: dataSourceProps ?? dataSource, children: null };
+}
 
 export function useHandleRef(props) {
   const ref = props.get('ref');
@@ -26,7 +41,6 @@ export function useHandleRef(props) {
   const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueProps, onChange: onChangeProps, defaultValue }));
   return {
     value,
-    baseNoRef: true,
     onChange,
     ref: _.assign(ref, { value, setValue: onChange }),
   };
@@ -55,3 +69,63 @@ export function useHandleDataSource(props) {
     },
   };
 }
+
+function useHandleFormWarp(props) {
+  const { isForm } = React.useContext(FormContext);
+  const BaseComponent = props.get('render');
+  const FormRadioGroup = React.useCallback((selfProps) => {
+    const nodepath = selfProps['data-nodepath'];
+    return (
+      <Col
+        span={24}
+        {..._.pick(selfProps, COLPROPSFIELDS)}
+        data-nodepath={nodepath}
+        data-tag-name="FormRadioGroup"
+        data-has-mutation="true"
+      >
+        <FormItem {..._.pick(selfProps, FORMITEMPROPSFIELDS)}>
+          <BaseComponent {..._.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS, 'data-nodepath', 'children'])} />
+        </FormItem>
+      </Col>
+    );
+  }, [BaseComponent]);
+  const render = isForm ? FormRadioGroup : BaseComponent;
+  return {
+    render,
+  };
+}
+
+export function useHandleFormWarplabel(props) {
+  const deletePropsList = props.get($deletePropsList).concat('labelIsSlot', 'labelText');
+  const labelIsSlot = props.get('labelIsSlot');
+  const labelProps = props.get('label');
+  const labelText = props.get('labelText');
+  const label = labelIsSlot ? labelProps : labelText;
+  return {
+    [$deletePropsList]: deletePropsList,
+    label,
+  };
+}
+export function useHandleFormItemProps(props) {
+  const BaseComponent = props.get('render');
+  const render = React.useCallback((selfProps) => {
+    const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
+    const colProps = _.pick(selfProps, COLPROPSFIELDS);
+    const fieldProps = _.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]);
+    return <BaseComponent {...{ ...formItemProps, fieldProps, colProps }} />;
+  }, [BaseComponent]);
+  return {
+    render,
+  };
+}
+export function useHandleRemoveRef(props) {
+  const BaseComponent = props.get('ref');
+  const render = React.useCallback((selfProps) => {
+    return <BaseComponent {..._.omit(selfProps, 'ref')}>{selfProps.children}</BaseComponent>;
+  }, [BaseComponent]);
+  return {
+    render,
+  };
+}
+
+export * from './lowCode';

@@ -75,6 +75,8 @@ export const 同步函数 = {
       valueField="entity1.id"
       textField="entity1.name"
       parentField="entity1.fid"
+      data-nodepath="1234"
+      labelText="234"
       // valueField="entity1.id"
       // textfield="entity1.name"
       // parentField="entity1.fid"
@@ -117,13 +119,15 @@ export const 同步函数 = {
 };
 
 export const 数组 = {
-  render: (args) => <Cascader {...args} />,
+  render: (args) => <Cascader {...args} width="ml" />,
   args: {
     dataSource: [
       { label: 'Option 1', key: '1' },
       { label: 'Option 2', key: '2' },
       { label: 'Option 3', key: '3' },
     ],
+
+    'data-nodepath': 1234,
     valueField: 'key',
     textField: 'label',
   },
@@ -136,7 +140,7 @@ export const ref = {
         console.log(ref, 'ref---');
       }, 1000);
     }, []);
-    return <Cascader {...args} ref={ref} />;
+    return <Cascader {...args} ref={ref} width="ml" />;
   },
   args: {
     style: { width: 300 },

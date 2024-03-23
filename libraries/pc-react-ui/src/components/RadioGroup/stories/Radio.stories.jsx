@@ -29,18 +29,18 @@ export const 默认 = {
     React.useEffect(() => {
       setTimeout(() => {
         setValue([1, 2, 3]);
+        console.log(ref, 'ref---');
       }, 300);
     }, []);
-    return [
-      <button
-        onClick={() => {
-          ref.current.reload();
-        }}
-      >
-        11
-      </button>,
-      <RadioGroup dataSource={value} ref={ref} />,
-    ];
+    return (
+      <RadioGroup data-nodepath="1234" className="1234" labelText="123">
+        <Radio value={1} label="44" data-nodepath="ccccc1">
+          1
+        </Radio>
+        <Radio value={2}>2</Radio>
+        <Radio value={3}>4</Radio>
+      </RadioGroup>
+    );
   },
   args: {
     color: 'magenta',
@@ -52,7 +52,7 @@ export const 默认 = {
   },
 };
 export const 数据源 = {
-  render: (args) => <RadioGroup {...args} />,
+  render: (args) => <RadioGroup {...args} className="1234" />,
   args: {
     dataSource: async () => ({
       list: [
@@ -90,7 +90,7 @@ export const 数据源 = {
       total: 3,
     }),
     // dataSource: ['苹果', '香蕉', '橘子'],
-    textField: 'checkbox.id',
+    textField: 'checkbox.name',
     valueField: 'checkbox.id',
   },
 };

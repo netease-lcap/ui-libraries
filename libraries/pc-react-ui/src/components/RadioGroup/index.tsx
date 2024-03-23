@@ -1,6 +1,8 @@
 import { Radio as AntdRadio } from 'antd';
 import type { RadioProps, RadioGroupProps } from 'antd';
+import { ProFormRadio } from '@ant-design/pro-components';
 import { registerComponet } from '@/plugins/index';
+
 import * as plugin from './plugins';
 import * as groupPlugin from './plugins/groupPlugin';
 import type { pluginType } from '@/plugins/type';
@@ -29,6 +31,7 @@ export const RadioGroup = registerComponet<
   RadioGroupProps,
   pluginType<RadioGroupProps>
 >(
-  AntdRadio.Group,
+  // ProFormRadio.Group,
+  ProFormRadio.Group,
   { plugin: groupPlugin, displayName: AntdRadio.Group.displayName, mapProps },
 );

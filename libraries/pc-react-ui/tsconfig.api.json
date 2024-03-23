@@ -23,5 +23,5 @@
       "@/*": ["*"]
     }
   },
-  "include": ["./src/components/*/*api.ts"]
+  "include": ["./src/components/*/*api.ts", "./src/components/*/blocks-api/*api.ts"]
 }

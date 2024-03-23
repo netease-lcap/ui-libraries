@@ -1,5 +1,5 @@
 // export { default as Button } from './components/Button/index';
-// import './index.css';
+import './index.less';
 import { Layout, ConfigProvider } from 'antd';
 
 export { Layout, ConfigProvider };

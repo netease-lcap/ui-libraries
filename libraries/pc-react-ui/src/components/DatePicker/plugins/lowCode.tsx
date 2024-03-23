@@ -1,20 +1,26 @@
 import React from 'react';
 import _ from 'lodash';
 import { useControllableValue } from 'ahooks';
+import { ConfigProvider } from 'antd';
 import { $deletePropsList } from '@/plugins/constants';
 
+import FormContext from '@/components/Form/form-context';
+
 export function useHandleNodePath(props) {
+  const { isForm } = React.useContext(FormContext);
+  const { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls();
   const id = _.uniqueId('contact_');
-  const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
   const nodePath = props.get('data-nodepath');
   React.useEffect(() => {
-    const mytab = document.querySelector(`[data-node-id=${id}]`);
-    const pickerElement = mytab?.parentNode?.parentNode as Element;
-    pickerElement?.setAttribute('data-nodepath', nodePath);
+    const datePicker = document.querySelector(`[data-node-id=${id}]`)?.closest(`.${prefixCls}-form-item-row`);
+    datePicker?.setAttribute('data-nodepath', nodePath);
+    if (!isForm) return;
+    datePicker?.setAttribute('data-tag-name', 'FormDatePicker');
+    datePicker?.setAttribute('data-has-mutation', 'true');
   }, []);
   return {
     'data-node-id': id,
-    [$deletePropsList]: deletePropsList,
   };
 }
 

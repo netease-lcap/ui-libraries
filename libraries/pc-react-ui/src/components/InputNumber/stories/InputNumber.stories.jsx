@@ -27,15 +27,16 @@ export const Primary = {
   args: {
     type: 'primary',
     style: { width: '256px' },
-    onClick: () => new Promise((res) => {
-      setTimeout(() => {
-        res();
-      }, 3000);
-    }),
+    onClick: () =>
+      new Promise((res) => {
+        setTimeout(() => {
+          res();
+        }, 3000);
+      }),
+    'data-nodepath': '123412',
     // controls: false,
-    onKeyup: (e) => {
-      console.log(1234);
-    },
+    // labelText: '1',
+
     // mySize: 'small',
     // size: 'small',
     // onClick: () => {},
