@@ -342,7 +342,11 @@ export default {
   },
   methods: {
     pwd() {
-      if (this.iffall) {
+      if (this.iffall && !this.resizing) {
+        this.resizing = true;
+        setTimeout(() => {
+          this.resizing = false;
+        }, 500);
         this.init();
       }
     },
