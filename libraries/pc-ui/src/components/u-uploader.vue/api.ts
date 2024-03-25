@@ -535,6 +535,14 @@ namespace nasl.ui {
             index: nasl.core.Integer;
         }) => any;
 
+        @Event({
+            title: '全部上传成功',
+            description: '文件全部上传成功时触发，增量文件上传成功也会触发',
+        })
+        onAllSuccess: (event: {
+            files: nasl.collection.List<File>;
+        }) => any;
+
         @Slot({
             title: 'undefined',
             description: '插入文本 或 HTML。',

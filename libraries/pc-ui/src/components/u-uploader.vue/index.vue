@@ -186,6 +186,7 @@ export default {
             },
             fileListStyleInfos: { 'file-icon': {}, 'file-name': {}, 'download-icon': {}, 'file-size': {} },
             fileListFlags: [],
+            fileSendingAndErrorTotal: 0
         };
     },
     computed: {
@@ -567,6 +568,7 @@ export default {
                 data: formData,
                 name: this.name,
             };
+            this.fileSendingAndErrorTotal++
             const xhr = ajax({
                 ...requestData,
                 onProgress: (e) => {
@@ -579,6 +581,8 @@ export default {
                     }, this);
                 },
                 onSuccess: (res) => {
+                    this.fileSendingAndErrorTotal--
+
                     const item = this.currentValue[index];
                     item.status = 'success';
                     if (res[this.urlField]) {
@@ -619,6 +623,8 @@ export default {
                         item,
                         xhr,
                     }, this);
+
+                    this.checkAllSuccess()
                 },
                 onError: (e, res) => {
                     console.log('error', e)
@@ -639,6 +645,13 @@ export default {
                 },
             });
         },
+
+        checkAllSuccess() {
+            if(this.fileSendingAndErrorTotal === 0) {
+                this.$emit('all-success', {files: this.currentValue});
+            }
+        },
+
         onPreview(item, index) {
             if (this.$emitPrevent('before-preview', {
                 item,
