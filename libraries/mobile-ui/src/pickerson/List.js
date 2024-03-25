@@ -119,7 +119,7 @@ export default createComponent({
                 {this.multiple && (
                   <div class="icon">
                     <Checkbox value={checked} shape="square">
-                      {this.slots('option', item) ||
+                      {this.slots('option', { ...item, item }) ||
                         (isInDesigner ? (
                           <EmptyCol></EmptyCol>
                         ) : (
@@ -130,7 +130,7 @@ export default createComponent({
                 )}
 
                 {!this.multiple &&
-                  (this.slots('option', item) ||
+                  (this.slots('option', { ...item, item }) ||
                     (isInDesigner ? (
                       <EmptyCol></EmptyCol>
                     ) : (

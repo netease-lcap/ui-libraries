@@ -112,7 +112,7 @@ export default defineConfig(({ command }) => {
     },
     build: {
       cssCodeSplit: false,
-      target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
+      target: ['es2020', 'edge88', 'firefox78', 'chrome56', 'safari14'],
       lib: {
         entry: 'src-vusion/index',
         name: 'vant',
@@ -134,6 +134,7 @@ export default defineConfig(({ command }) => {
             'vue-router': 'VueRouter',
             'vue-i18n': 'VueI18n',
           },
+          interop: 'compat',
           assetFileNames: (assetInfo) => {
             if (assetInfo.name === 'style.css') {
               return 'index.css';

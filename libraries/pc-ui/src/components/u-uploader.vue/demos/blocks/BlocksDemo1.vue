@@ -4,6 +4,9 @@
   <u-uploader display="inline"
     url="/upload" urlField="filePath"
     :limit="999"
+    :file-icon-switcher="true"
+    :download-icon-switcher="true"
+    :file-size="true"
     maxSize="50MB"
     converter="json">
     <u-button color="primary" icon="upload">上传</u-button>
