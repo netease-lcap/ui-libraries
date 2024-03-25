@@ -533,11 +533,7 @@ export default createComponent({
     return (
       <div class={bem([type])}>
         {this.sticky ? (
-          <Sticky
-            container={this.$el}
-            offsetTop={this.offsetTop}
-            onScroll={this.onSticktScroll}
-          >
+          <Sticky container={this.$el} offsetTop={this.offsetTop} onScroll={this.onSticktScroll}>
             {Wrap}
           </Sticky>
         ) : (

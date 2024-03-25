@@ -58,10 +58,14 @@ export default createComponent({
 
     genText() {
       const ifDesigner = (this.$env && this.$env.VUE_APP_DESIGNER);
-
+      console.log('-----------------')
+      console.log(this.$slots)
+      console.log(this.$scopedSlots)
+      console.log('-----------------')
+      
       const Text = (
         <span class={bem('text', { ellipsis: !this.scrollable })} vusion-slot-name-edit="title">
-          {this.slots() || this.title || (ifDesigner && <van-empty-col style="width:auto"></van-empty-col>)}
+          {this.slots('default', {item: {aaa: '1', bbb: '2'}}) || this.title || (ifDesigner && <van-empty-col style="width:auto"></van-empty-col>)}
         </span>
       );
 
