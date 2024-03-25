@@ -1,0 +1,36 @@
+/**
+ * @component Image
+ * @useGlobalTokens ["--cw-control-height-lg","--cw-color-bg-container-disabled","--cw-motion-duration-slow","--cw-padding-xxs","--cw-margin-xxs","--cw-color-text-light-solid","--cw-motion-ease-out","--cw-padding-sm","--cw-margin-xl","--cw-margin","--cw-padding-lg","--cw-margin-sm","--cw-z-index-popup-base","--cw-color-bg-mask","--cw-motion-duration-mid","--cw-motion-ease-out-circ","--cw-motion-ease-in-out-circ"]
+ */
+.cw-nasl.cw-image,
+.cw-nasl.cw-image-css-var {
+  /**
+   * @desc 预览操作图标颜色
+   * @type color
+   */
+  --cw-image-preview-operation-color: rgba(255, 255, 255, 0.65);
+
+  /**
+   * @desc 预览操作图标禁用颜色
+   * @type color
+   */
+  --cw-image-preview-operation-color-disabled: rgba(255, 255, 255, 0.25);
+
+  /**
+   * @desc 预览操作图标悬浮颜色
+   * @type color
+   */
+  --cw-image-preview-operation-hover-color: rgba(255, 255, 255, 0.85);
+
+  /**
+   * @desc 预览操作图标大小
+   * @type size
+   */
+  --cw-image-preview-operation-size: calc(var(--cw-font-size-icon) * 1.5);
+
+  /**
+   * @desc 预览浮层 z-index
+   * @type input
+   */
+  --cw-image-z-index-popup: 1080;
+}

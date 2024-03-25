@@ -1,5 +1,5 @@
 import React from 'react';
-import Switch from '../index';
+import { Switch } from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -23,8 +23,16 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 异步函数 = {
-  render: (args) => <Switch {...args} />,
+  render: (args) => {
+    const ref = React.useRef({});
+    React.useEffect(() => {
+      console.log(ref, 'ref');
+    }, []);
+    return <Switch {...args} ref={ref} data-nodepath="1234" />;
+  },
   args: {
-    defaultChecked: true,
+    // defaultChecked: true,
+    checkedChildren: 1,
+    unCheckedChildren: 2,
   },
 };

@@ -1,0 +1,150 @@
+/**
+ * @component Tabs
+ * @useGlobalTokens ["--cw-padding-xxs","--cw-border-radius","--cw-margin-sm","--cw-margin-xs","--cw-margin-xxs","--cw-margin","--cw-color-border-secondary","--cw-line-width","--cw-line-type","--cw-line-width-bold","--cw-motion-duration-slow","--cw-control-height","--cw-box-shadow-tabs-overflow-left","--cw-box-shadow-tabs-overflow-right","--cw-box-shadow-tabs-overflow-top","--cw-box-shadow-tabs-overflow-bottom","--cw-color-border","--cw-padding-lg","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-color-bg-container","--cw-border-radius-lg","--cw-box-shadow-secondary","--cw-padding-sm","--cw-color-text-description","--cw-font-size-sm","--cw-control-item-bg-hover","--cw-color-text-disabled","--cw-motion-ease-in-out","--cw-control-height-lg","--cw-padding-xs","--cw-line-width-focus","--cw-color-primary-border","--cw-color-text-heading","--cw-motion-duration-mid","--cw-motion-ease-out-quint","--cw-motion-ease-in-quint"]
+ */
+.cw-nasl.cw-tabs,
+.cw-nasl.cw-tabs-css-var {
+  /**
+   * @desc 卡片标签页背景色
+   * @type color
+   */
+  --cw-tabs-card-bg: var(--cw-color-fill-alter);
+
+  /**
+   * @desc 卡片标签间距
+   * @type size
+   */
+  --cw-tabs-card-gutter: calc(var(--cw-margin-xxs) / 2);
+
+  /**
+   * @desc 卡片标签页高度
+   * @type size
+   */
+  --cw-tabs-card-height: var(--cw-control-height-lg);
+
+  /**
+   * @desc 卡片标签页内间距
+   * @type size
+   */
+  --cw-tabs-card-padding: calc(calc(var(--cw-control-height-lg) - calc(var(--cw-font-size) * var(--cw-line-height))) / 2 - var(--cw-line-width)) var(--cw-padding);
+
+  /**
+   * @desc 大号卡片标签页内间距
+   * @type size
+   */
+  --cw-tabs-card-padding-lg: var(--cw-padding-xs) var(--cw-padding) calc(var(--cw-padding-xxs) * 1.5);
+
+  /**
+   * @desc 小号卡片标签页内间距
+   * @type size
+   */
+  --cw-tabs-card-padding-sm: calc(var(--cw-padding-xxs) * 1.5) var(--cw-padding);
+
+  /**
+   * @desc 横向标签页标签间距
+   * @type size
+   */
+  --cw-tabs-horizontal-item-gutter: 32px;
+
+  /**
+   * @desc 横向标签页标签外间距
+   * @type input
+   */
+  --cw-tabs-horizontal-item-margin: ;
+
+  /**
+   * @desc 横向标签页标签外间距（RTL）
+   * @type input
+   */
+  --cw-tabs-horizontal-item-margin-rtl: ;
+
+  /**
+   * @desc 横向标签页标签内间距
+   * @type input
+   */
+  --cw-tabs-horizontal-item-padding: var(--cw-padding-sm) 0;
+
+  /**
+   * @desc 大号横向标签页标签内间距
+   * @type input
+   */
+  --cw-tabs-horizontal-item-padding-lg: var(--cw-padding) 0;
+
+  /**
+   * @desc 小号横向标签页标签内间距
+   * @type input
+   */
+  --cw-tabs-horizontal-item-padding-sm: var(--cw-padding-xs) 0;
+
+  /**
+   * @desc 横向标签页外间距
+   * @type input
+   */
+  --cw-tabs-horizontal-margin: 0 0 var(--cw-margin) 0;
+
+  /**
+   * @desc 指示条颜色
+   * @type color
+   */
+  --cw-tabs-ink-bar-color: var(--cw-color-primary);
+
+  /**
+   * @desc 标签激活态文本颜色
+   * @type color
+   */
+  --cw-tabs-item-active-color: var(--cw-color-primary-active);
+
+  /**
+   * @desc 标签文本颜色
+   * @type color
+   */
+  --cw-tabs-item-color: var(--cw-color-text);
+
+  /**
+   * @desc 标签悬浮态文本颜色
+   * @type color
+   */
+  --cw-tabs-item-hover-color: var(--cw-color-primary-hover);
+
+  /**
+   * @desc 标签选中态文本颜色
+   * @type color
+   */
+  --cw-tabs-item-selected-color: var(--cw-color-primary);
+
+  /**
+   * @desc 标齐页标题文本大小
+   * @type size
+   */
+  --cw-tabs-title-font-size: var(--cw-font-size);
+
+  /**
+   * @desc 大号标签页标题文本大小
+   * @type size
+   */
+  --cw-tabs-title-font-size-lg: var(--cw-font-size-lg);
+
+  /**
+   * @desc 小号标签页标题文本大小
+   * @type size
+   */
+  --cw-tabs-title-font-size-sm: var(--cw-font-size);
+
+  /**
+   * @desc 纵向标签页标签外间距
+   * @type input
+   */
+  --cw-tabs-vertical-item-margin: var(--cw-margin) 0 0 0;
+
+  /**
+   * @desc 纵向标签页标签内间距
+   * @type size
+   */
+  --cw-tabs-vertical-item-padding: var(--cw-padding-xs) var(--cw-padding-lg);
+
+  /**
+   * @desc 下拉菜单 z-index
+   * @type input
+   */
+  --cw-tabs-z-index-popup: calc(var(--cw-z-index-popup-base) + 50);
+}

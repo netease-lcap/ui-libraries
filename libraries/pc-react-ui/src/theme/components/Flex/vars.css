@@ -1,0 +1,8 @@
+/**
+ * @component Flex
+ * @useGlobalTokens ["--cw-padding-xs","--cw-padding","--cw-padding-lg"]
+ */
+.cw-nasl.cw-flex,
+.cw-nasl.cw-flex-css-var {
+
+}
