@@ -5,27 +5,18 @@ exports[`renders demo correctly 1`] = `
   <div>
     <div class="van-swipe" style="height: 300px;">
       <div class="van-swipe__track" style="transition-duration: 0ms; transform: translateX(0px);">
-        <div class="van-swipe-item">1</div>
-        <div class="van-swipe-item">2</div>
-        <div class="van-swipe-item">3</div>
-        <div class="van-swipe-item">4</div>
+        <div class="van-swipe-item"> 1 </div>
+        <div class="van-swipe-item"> 2 </div>
+        <div class="van-swipe-item"> 3 </div>
+        <div class="van-swipe-item"> 4 </div>
+        <div class="van-swipe-item"> 5 </div>
+        <div class="van-swipe-item"> 6 </div>
       </div>
-      <div class="van-swipe__indicators"><i index="0" class="van-swipe__indicator van-swipe__indicator--active"></i><i index="1" class="van-swipe__indicator"></i><i index="2" class="van-swipe__indicator"></i><i index="3" class="van-swipe__indicator"></i></div>
+      <div class="van-swipe__indicators"><i index="0" class="van-swipe__indicator van-swipe__indicator--active"></i><i index="1" class="van-swipe__indicator"></i><i index="2" class="van-swipe__indicator"></i><i index="3" class="van-swipe__indicator"></i><i index="4" class="van-swipe__indicator"></i><i index="5" class="van-swipe__indicator"></i></div>
     </div>
   </div>
   <div>
-    <div class="van-swipe">
-      <div class="van-swipe__track" style="transition-duration: 0ms; transform: translateX(0px);">
-        <div class="van-swipe-item"><img data-src="https://img01.yzcdn.cn/vant/apple-1.jpg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" lazy="loading"></div>
-        <div class="van-swipe-item"><img data-src="https://img01.yzcdn.cn/vant/apple-2.jpg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" lazy="loading"></div>
-        <div class="van-swipe-item"><img data-src="https://img01.yzcdn.cn/vant/apple-3.jpg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" lazy="loading"></div>
-        <div class="van-swipe-item"><img data-src="https://img01.yzcdn.cn/vant/apple-4.jpg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" lazy="loading"></div>
-      </div>
-      <div class="van-swipe__indicators"><i index="0" class="van-swipe__indicator van-swipe__indicator--active"></i><i index="1" class="van-swipe__indicator"></i><i index="2" class="van-swipe__indicator"></i><i index="3" class="van-swipe__indicator"></i></div>
-    </div>
-  </div>
-  <div>
-    <div class="van-swipe">
+    <div class="van-swipe" style="height: 300px;">
       <div class="van-swipe__track" style="transition-duration: 0ms; transform: translateX(0px);">
         <div class="van-swipe-item">1</div>
         <div class="van-swipe-item">2</div>
@@ -33,39 +24,6 @@ exports[`renders demo correctly 1`] = `
         <div class="van-swipe-item">4</div>
       </div>
       <div class="van-swipe__indicators"><i index="0" class="van-swipe__indicator van-swipe__indicator--active"></i><i index="1" class="van-swipe__indicator"></i><i index="2" class="van-swipe__indicator"></i><i index="3" class="van-swipe__indicator"></i></div>
-    </div>
-  </div>
-  <div>
-    <div class="demo-swipe--vertical van-swipe" style="height: 200px;">
-      <div class="van-swipe__track van-swipe__track--vertical" style="transition-duration: 0ms; transform: translateY(0px); height: 800px;">
-        <div class="van-swipe-item" style="height: 200px;">1</div>
-        <div class="van-swipe-item" style="height: 200px;">2</div>
-        <div class="van-swipe-item" style="height: 200px;">3</div>
-        <div class="van-swipe-item" style="height: 200px;">4</div>
-      </div>
-      <div class="van-swipe__indicators van-swipe__indicators--vertical"><i index="0" class="van-swipe__indicator van-swipe__indicator--active"></i><i index="1" class="van-swipe__indicator"></i><i index="2" class="van-swipe__indicator"></i><i index="3" class="van-swipe__indicator"></i></div>
-    </div>
-  </div>
-  <div>
-    <div class="van-swipe">
-      <div class="van-swipe__track" style="transition-duration: 0ms; transform: translateX(0px); width: 1200px;">
-        <div class="van-swipe-item" style="width: 300px;">1</div>
-        <div class="van-swipe-item" style="width: 300px;">2</div>
-        <div class="van-swipe-item" style="width: 300px;">3</div>
-        <div class="van-swipe-item" style="width: 300px;">4</div>
-      </div>
-      <div class="van-swipe__indicators"><i index="0" class="van-swipe__indicator van-swipe__indicator--active"></i><i index="1" class="van-swipe__indicator"></i><i index="2" class="van-swipe__indicator"></i><i index="3" class="van-swipe__indicator"></i></div>
-    </div>
-  </div>
-  <div>
-    <div class="van-swipe">
-      <div class="van-swipe__track" style="transition-duration: 0ms; transform: translateX(0px);">
-        <div class="van-swipe-item">1</div>
-        <div class="van-swipe-item">2</div>
-        <div class="van-swipe-item">3</div>
-        <div class="van-swipe-item">4</div>
-      </div>
-      <div class="custom-indicator">1/4</div>
     </div>
   </div>
 </div>

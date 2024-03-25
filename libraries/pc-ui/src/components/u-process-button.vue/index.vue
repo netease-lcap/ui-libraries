@@ -13,8 +13,9 @@
                     <u-textarea v-model="model.comment" size="normal full" :placeholder="$tt('placeholder')">
                     </u-textarea>
                 </u-form-item>
-                <u-form-item :label="$tt('selectTransfer')" required rules="required" v-if="currentItem.name === 'reassign'">
+                <u-form-item :label="$tt('selectTransfer')" required :rules="`required #${$tt('selectTransferEmpty')}`" v-if="currentItem.name === 'reassign'">
                     <u-select
+                        size="full"
                         text-field="userName"
                         value-field="userName"
                         :data-source="getUsersForReassign"
@@ -74,7 +75,7 @@ export default {
                         taskId: this.taskId,
                     },
                 });
-                this.permissionDetails = (res.data || []).filter((item) => item.operatationEnabled);
+                this.permissionDetails = (res.data || []).filter((item) => item.operationEnabled);
             }
         },
         getColor(item) {
@@ -94,11 +95,12 @@ export default {
                 this.$refs.modal.close();
             }
         },
-        async submit() {
+        async submit(item) {
             if (!this.$processV2) {
                 return;
             }
-            const { name } = this.currentItem;
+            const currentItem = item || this.currentItem;
+            const { name } = currentItem;
             const operate = `${name}Task`;
             const body = {
                 taskId: this.taskId,
@@ -108,7 +110,7 @@ export default {
             }
             if (name === 'reassign') {
                 body.userForReassign = this.model.userName;
-            } else {
+            } else if(name !== 'submit') {
                 body.comment = this.model.comment;
             }
             await this.$processV2.setTaskInstance({
@@ -128,16 +130,22 @@ export default {
         },
         async onClickButton(item) {
             if (item.name === 'revert') {
-                return this.revertOperator();
+                this.revertOperator(item);
+                return;
             }
             if (item.name === 'withdraw') {
-                return this.withdrawOperator();
+                this.withdrawOperator(item);
+                return;
             }
             // 表单验证后打开弹窗
             if (window.__processDetailFromMixinFormVm__ && window.__processDetailFromMixinFormVm__.validate) {
                 const validateResult = await window.__processDetailFromMixinFormVm__.validate();
                 if (validateResult.valid) {
-                    this.openModal(item);
+                    if (item.name === 'submit') {
+                        return this.submit(item);
+                    } else {
+                        this.openModal(item);
+                    }
                 }
             } else {
                 this.openModal(item);
@@ -153,10 +161,10 @@ export default {
         /**
          * 回退
          */
-        revertOperator() {
+        revertOperator(item) {
             return this.$confirm({
-                title: this.$tt('revertTitle'),
-                content: this.$tt('revertContent'),
+                title: item.displayText,
+                content: this.$tt('revertContent',  { revertDisplayText: item.displayText }),
                 okButton: this.$tt('revertOK'),
                 cancelButton: this.$tt('revertCancel'),
             }).then(async () => {
@@ -176,10 +184,10 @@ export default {
         /**
          * 撤回
          */
-        withdrawOperator() {
+        withdrawOperator(item) {
             return this.$confirm({
-                title: this.$tt('withdrawTitle'),
-                content: this.$tt('withdrawContent'),
+                title: item.displayText,
+                content: this.$tt('withdrawContent', { withdrawDisplayText: item.displayText }),
                 okButton: this.$tt('withdrawOK'),
                 cancelButton: this.$tt('withdrawCancel'),
             }).then(async () => {

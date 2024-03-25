@@ -11,7 +11,7 @@
             <j-text :configs="{
                 fontSize: '14px',
                 textColor: '#333',
-                content: node.name,
+                content: node.title || node.name,
                 width: 128,
                 ellipsis: true,
                 textAlign: 'left'

@@ -201,8 +201,8 @@ export default createComponent({
     },
 
     getOptionText(option) {
-      if (isObject(option) && isDef(_get(option, this.textField))) {
-        return _get(option, this.textField);
+      if (isObject(option)) {
+        return _get(option, this.textField) || '';
       }
 
       return option;
@@ -309,7 +309,7 @@ export default createComponent({
 
         return (
           <li {...data} vusion-slot-name="option">
-            {this.slots('option', option) ||
+            {this.slots('option', { ...option, item: option }) ||
               (isInDesigner ? <EmptyCol></EmptyCol> : <div {...childData} />)}
           </li>
         );

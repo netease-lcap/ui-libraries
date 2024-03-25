@@ -175,10 +175,10 @@ exports[`u-multi-layout.vue > Demo-两栏-右侧固定 1`] = `
   </div>
   <div class="root" direction="horizontal" fixdirec="left" fixed="false" style="flex-grow: 1; flex-basis: 0px;" vusion-slot-name="default">
     <div class="root" direction="horizontal" gap="none" vusion-slot-name="default">
-      <div class="root" direction="horizontal" fixdirec="left" fixed="false" style="width: 200px; flex-grow: 0; flex-basis: auto;" vusion-slot-name="default">
+      <div class="root" direction="horizontal" fixdirec="left" fixed="false" style="flex-grow: 1; flex-basis: 0px;" vusion-slot-name="default">
         <!---->
       </div>
-      <div class="root" direction="horizontal" fixdirec="left" fixed="false" style="flex-grow: 1; flex-basis: 0px;" vusion-slot-name="default">
+      <div class="root" direction="horizontal" fixdirec="left" fixed="false" style="width: 200px; flex-grow: 0; flex-basis: auto;" vusion-slot-name="default">
         <!---->
       </div>
       <!---->

@@ -41,7 +41,7 @@ export default {
             return this.meta.target;
         },
         title() {
-            return this.node.name;
+            return this.node.title || this.node.name;
         },
         status() {
             return this.node.current ? '处理中' : this.node.completed ? '已处理' : '未处理';

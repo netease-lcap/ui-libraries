@@ -78,7 +78,7 @@ export default createComponent({
       const typeMap = {
         myPendingTaskList: 'getMyPendingTasks',
         myCompletedTaskList: 'getMyCompletedTasks',
-        myLaunchList: 'getMyInitiateTasks',
+        myLaunchList: 'getMyInitiatedTasks',
       };
 
       const filter = this[`${type}Filter`];
@@ -100,9 +100,6 @@ export default createComponent({
         }
       });
 
-      console.log('taskType', typeMap[type]);
-      console.log('body', body);
-
       if (this.inDesigner() || this.isDev()) {
         return {
           list: mockData[type].slice((page - 1) * size, page * size),
@@ -110,7 +107,7 @@ export default createComponent({
         };
       };
 
-      const { data } = await this.$processV2.getMyTaskList({
+      const { data } = await this.$processV2?.getMyTaskList({
         path: {
           taskType: typeMap[type],
         },
@@ -160,7 +157,7 @@ export default createComponent({
     },
 
     async onGotoDetail(taskId) {
-      const result = await this.$processV2.getTaskDestinationUrl({
+      const result = await this.$processV2?.getTaskDestinationUrl({
         body: {
           taskId,
         },

@@ -1,10 +1,10 @@
 <template>
-    <j-flow-link
+    <j-flow-branch-link
         ref="root"
         :configs="linkConfigs"
         :from="configs.from.source"
         :to="configs.to.source">
-    </j-flow-link>
+    </j-flow-branch-link>
 </template>
 
 <script>
