@@ -38,7 +38,11 @@ const TempComponent = {
   },
   template: `
     <u-table-view :data-source="dataSource">
-      <u-table-view-column title="用户名" field="name" width="20%"></u-table-view-column>
+      <u-table-view-column title="用户名" width="20%">
+        <template #cell="{ current }">
+          <u-text>{{ current.item.name }}</u-text>
+        </template>
+      </u-table-view-column>
       <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
       <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
       <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
@@ -67,25 +71,29 @@ export const Default = {
     <div>
       <u-input :value.sync="value1" />
       <u-table-view :data-source="dataSource">
-        <u-table-view-column title="用户名" field="name" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="地址" field="address"></u-table-view-column>
-        <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%"></u-table-view-column>
-      </u-table-view>
+      <u-table-view-column title="用户名" width="20%">
+        <template #cell="{ current }">
+          <u-text>{{ current.item.name }}</u-text>
+        </template>
+      </u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="地址" field="address"></u-table-view-column>
+      <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%"></u-table-view-column>
+    </u-table-view>
     </div>
     `,
     data() {

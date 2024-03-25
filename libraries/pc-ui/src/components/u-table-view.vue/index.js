@@ -7,6 +7,7 @@ import UTableViewColumnConfig from './column-config.vue';
 import UTableViewColumnDynamic from './column-dynamic.vue';
 import UTableViewColumnGroup from './column-group.vue';
 import UTableViewExpander from './expander.vue';
+import UTableViewWrap from './index-wrap.vue';
 
 export {
     UTableView,
@@ -18,6 +19,7 @@ export {
     UTableViewColumnDynamic,
     UTableViewColumnGroup,
     UTableViewExpander,
+    UTableViewWrap,
 };
 
 export default UTableView;
