@@ -110,6 +110,7 @@ export default defineConfig(({ command }) => {
             'vue-router': 'VueRouter',
             'vue-i18n': 'VueI18n',
           },
+          interop: 'compat',
           assetFileNames: (assetInfo) => {
             if (assetInfo.name === 'style.css') {
               return 'index.css';
