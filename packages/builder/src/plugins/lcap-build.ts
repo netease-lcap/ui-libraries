@@ -10,8 +10,12 @@ export interface LcapThemeOptions {
 export interface ViteLcapPluginOptions {
   type?: 'extension' | 'nasl.ui';
   framework?: 'react' | 'vue2' | 'taro' | 'vue3',
+  i18n?: { [lang: string]: string };
+  assetsPublicPath?: string;
   components?: Array<{ group: string, title: string, name: string }>,
   theme?: LcapThemeOptions,
+  rootPath?: string;
+  destDir?: string;
 }
 
 export default (options: any) => {
