@@ -18,6 +18,7 @@ import {
 // Mixins
 import { ParentMixin } from '../mixins/relation';
 import { BindEventMixin } from '../mixins/bind-event';
+import SupportDataSource from '../mixins/support.datasource.js'
 
 // Components
 import Title from './Title';
@@ -40,6 +41,7 @@ export default createComponent({
         bind(this.scroller, 'scroll', this.onScroll, true);
       }
     }),
+    SupportDataSource,
   ],
 
   inject: {
@@ -110,6 +112,7 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
+    urlField: { type: String, default: 'url' },
   },
 
   data() {
@@ -156,6 +159,15 @@ export default createComponent({
       }
       return 0;
     },
+
+    tabDataSource() {
+      return this.currentDataSource && this.currentDataSource.data || [];
+    },
+
+    inDesigner() {
+      return this.$env && this.$env.VUE_APP_DESIGNER;
+    },
+
   },
 
   watch: {
@@ -180,6 +192,10 @@ export default createComponent({
       this.$nextTick(() => {
         this.scrollIntoView(true);
       });
+    },
+
+    tabDataSource() {
+      this.setCurrentIndexByName(this.value ?? this.active);
     },
 
     currentIndex() {
@@ -235,15 +251,11 @@ export default createComponent({
     setLine() {
       const shouldAnimate = this.inited;
 
+
       this.$nextTick(() => {
         const { titles } = this.$refs;
 
-        if (
-          !titles ||
-          !titles[this.currentIndex] ||
-          this.type !== 'line' ||
-          isHidden(this.$el)
-        ) {
+        if (!titles || !titles[this.currentIndex] || this.type !== 'line' || isHidden(this.$el)) {
           return;
         }
 
@@ -279,17 +291,20 @@ export default createComponent({
     },
 
     setCurrentIndex(currentIndex) {
-      const newIndex = this.findAvailableTab(currentIndex);
+      const newIndex = this.dataSource === undefined ? this.findAvailableTab(currentIndex) : currentIndex
 
       if (!isDef(newIndex)) {
         return;
       }
 
-      const newTab = this.children[newIndex];
+      const newTab = this.dataSource === undefined ? this.children[newIndex] : { ...this.tabDataSource[newIndex], computedName: currentIndex };
       const newName = newTab.computedName;
       const shouldEmitChange = this.currentIndex !== null;
 
-      this.currentIndex = newIndex;
+      this.currentIndex = null
+      this.$nextTick(() => {
+        this.currentIndex = newIndex;
+      })
 
       if (newName !== (this.value ?? this.active)) {
         this.$emit('input', newName);
@@ -297,9 +312,9 @@ export default createComponent({
         this.$emit('update:active', newName);
 
         if (shouldEmitChange) {
-          this.$emit('update:value', newName, newTab.title);
-          this.$emit('update:active', newName, newTab.title);
-          this.$emit('change', newName, newTab.title);
+          this.$emit('update:value', newName, newTab[this.textField]);
+          this.$emit('update:active', newName, newTab[this.textField]);
+          this.$emit('change', newName, newTab[this.textField]);
         }
       }
     },
@@ -318,7 +333,14 @@ export default createComponent({
 
     // emit event when clicked
     onClick(item, index) {
-      const { title, disabled, computedName } = this.children[index];
+      const data = this.dataSource === undefined ? this.children[index] : { ...item, computedName: index };
+      const { disabled, computedName } = data;
+      const title = data[this.textField];
+
+      if (this.inDesigner && index >= 1) {
+        return
+      }
+
       if (disabled) {
         this.$emit('disabled', computedName, title);
       } else {
@@ -327,12 +349,17 @@ export default createComponent({
           args: [computedName],
           done: () => {
             this.setCurrentIndex(index);
-            this.scrollToCurrentContent();
+            if (this.dataSource === undefined) {
+              this.scrollToCurrentContent();
+            }
           },
         });
 
         this.$emit('click', computedName, title);
-        route(item.$router, item);
+        if (this.urlField !== 'url') {
+          item.url = item[this.urlField];
+        }
+        route(item.$router ? item.$router : this.$router, item);
       }
     },
 
@@ -400,56 +427,85 @@ export default createComponent({
 
       return children.length - 1;
     },
+    getDefaultNav() {
+      const { type, scrollable, disabled } = this;
+      return this.children.map((item, index) => {
+        const aId = item.$vnode.context.$options._scopeId;
+        const aIdo = { ...item.$attrs, [aId]: '' };
+        const style = item.titleStyle || {};
+        const vnodeStaticStyle = (item.$vnode.data && item.$vnode.data.staticStyle) || {};
+        const vnodeStyle = (item.$vnode.data && item.$vnode.data.style) || {};
+        Object.assign(style, vnodeStaticStyle);
+        Object.assign(style, vnodeStyle);
+        return (
+          <Title
+            {...{ attrs: { ...aIdo } }}
+            vusion-slot-name="title"
+            ref="titles"
+            refInFor
+            type={type}
+            dot={item.dot}
+            info={item.badgebtn ? (item.badge ? item.badge : item.info) : null}
+            badgemax={item.badgemax}
+            title={item.title}
+            color={this.color}
+            style={style}
+            class={item.titleClass}
+            isActive={index === this.currentIndex}
+            disabled={disabled || item.disabled}
+            scrollable={scrollable}
+            activeColor={this.titleActiveColor}
+            inactiveColor={this.titleInactiveColor}
+            vusion-scope-id={aId}
+            vusion-node-path={item.$attrs['vusion-node-path']}
+            vusion-node-tag={item.$attrs['vusion-node-tag']}
+            scopedSlots={{
+              default: () => item.slots('title'),
+            }}
+            onClick={() => {
+              if (disabled) return;
+              this.onClick(item, index);
+            }}
+          />
+        );
+      });
+    },
+
+    getDataSourceNav(dataSource) {
+      console.log(dataSource, 11)
+      return dataSource.map((item, index) => {
+        const inDesigner = this.inDesigner && index >= 1;
+        return (
+          <Title
+            vusion-slot-name="title"
+            ref="titles"
+            refInFor
+            type={this.type}
+            title={item[this.textField]}
+            color={this.color}
+            isActive={index === this.currentIndex}
+            disabled={this.disabled || item.disabled || inDesigner}
+            scrollable={this.scrollable}
+            activeColor={this.titleActiveColor}
+            inactiveColor={this.titleInactiveColor}
+            onClick={() => {
+              if (item.disabled) return;
+              this.onClick(item, index);
+            }}
+            scopedSlots={{
+              default: () => item[this.textField] || this.slots('title', {item}),
+            }}
+          >
+
+          </Title>
+        )
+      })
+    },
   },
 
   render() {
-    const { type, animated, scrollable, disabled } = this;
-
-    const Nav = this.children.map((item, index) => {
-      const aId = item.$vnode.context.$options._scopeId;
-      const aIdo = {
-        ...item.$attrs,
-        [aId]: '',
-      };
-      const style = item.titleStyle || {};
-      const vnodeStaticStyle =
-        (item.$vnode.data && item.$vnode.data.staticStyle) || {};
-      const vnodeStyle = (item.$vnode.data && item.$vnode.data.style) || {};
-      Object.assign(style, vnodeStaticStyle);
-      Object.assign(style, vnodeStyle);
-      return (
-        <Title
-          {...{ attrs: { ...aIdo } }}
-          vusion-slot-name="title"
-          ref="titles"
-          refInFor
-          type={type}
-          dot={item.dot}
-          info={item.badgebtn ? (item.badge ? item.badge : item.info) : null}
-          badgemax={item.badgemax}
-          title={item.title}
-          color={this.color}
-          style={style}
-          class={item.titleClass}
-          isActive={index === this.currentIndex}
-          disabled={disabled || item.disabled}
-          scrollable={scrollable}
-          activeColor={this.titleActiveColor}
-          inactiveColor={this.titleInactiveColor}
-          vusion-scope-id={aId}
-          vusion-node-path={item.$attrs['vusion-node-path']}
-          vusion-node-tag={item.$attrs['vusion-node-tag']}
-          scopedSlots={{
-            default: () => item.slots('title'),
-          }}
-          onClick={() => {
-            if (disabled) return;
-            this.onClick(item, index);
-          }}
-        />
-      );
-    });
-
+    const { type, animated, scrollable, disabled, dataSource, tabDataSource } = this;
+    const Nav = dataSource === undefined ? this.getDefaultNav() : this.getDataSourceNav(tabDataSource);
     const Wrap = (
       <div
         ref="wrap"
@@ -477,16 +533,13 @@ export default createComponent({
     return (
       <div class={bem([type])}>
         {this.sticky ? (
-          <Sticky
-            container={this.$el}
-            offsetTop={this.offsetTop}
-            onScroll={this.onSticktScroll}
-          >
+          <Sticky container={this.$el} offsetTop={this.offsetTop} onScroll={this.onSticktScroll}>
             {Wrap}
           </Sticky>
         ) : (
           Wrap
         )}
+    
         <Content
           count={this.children.length}
           animated={animated}
