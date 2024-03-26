@@ -14,7 +14,7 @@ exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 1`] = `
   <div class="root">
     <!---->
     <div class="table" position="static">
-      <div class="head" style="top: 0px;">
+      <div class="head">
         <table class="root head-table" sticky-fixed="true" striped="true">
           <colgroup>
             <col width>
@@ -64,7 +64,7 @@ exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 1`] = `
           </thead>
         </table>
       </div>
-      <!---->
+      <div class="headPlaceholder"></div>
       <div class="body" sticky-fixed="true">
         <div class="root scrollcview">
           <div class="wrap">
@@ -2332,7 +2332,7 @@ exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 2`] = `
   <div class="root">
     <!---->
     <div class="table" position="static">
-      <div class="head" style="top: 0px;">
+      <div class="head">
         <table class="root head-table" sticky-fixed="true" striped="true">
           <colgroup>
             <col width>
@@ -2382,7 +2382,7 @@ exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 2`] = `
           </thead>
         </table>
       </div>
-      <!---->
+      <div class="headPlaceholder"></div>
       <div class="body" sticky-fixed="true">
         <div class="root scrollcview">
           <div class="wrap">
