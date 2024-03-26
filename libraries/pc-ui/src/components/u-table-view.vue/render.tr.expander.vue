@@ -1,0 +1,31 @@
+<template>
+    <tr :class="$style['expand-content']" v-if="vm && item.expanded">
+        <f-collapse-transition>
+            <td :colspan="visibleColumnVMs.length" :class="$style['expand-td']" v-show="item.expanded">
+                <f-slot name="expand-content" :vm="vm" :props="slotProps"></f-slot>
+            </td>
+        </f-collapse-transition>
+    </tr>
+</template>
+<script>
+export default {
+    name: 'u-table-render-tr-expander',
+    props: {
+        vm: Object,
+        slotProps: Object,
+        slotName: String,
+        item: Object,
+        visibleColumnVMs: Array,
+    },
+}
+</script>
+
+<style module>
+.expand-content {
+
+}
+.expand-td {
+    /* transition: $transition-duration height ease-in-out, $transition-duration padding-top ease-in-out, $transition-duration padding-bottom ease-in-out; */
+    background-color: var(--table-view-expand-td-background);
+}
+</style>

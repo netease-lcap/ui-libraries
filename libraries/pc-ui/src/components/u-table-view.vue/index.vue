@@ -1,412 +1,18 @@
 <template>
-<div :class="$style.root" ref="root" :border="border"
-    @dragend="onDragEnd($event)"
-    @drop="onDrop($event)"
-    @dragover="onRootDragover($event)"
-    @dragleave="onRootDragleave($event)"
-    @dragenter="onRootDragenter($event)">
+<div v-if="$env.VUE_APP_DESIGNER" :class="$style.root" ref="root" :border="border">
     <div v-if="title" :class="$style.title" ref="title" :style="{ textAlign: titleAlignment }" vusion-slot-name="title" vusion-slot-name-edit="title">
         <slot name="title">{{ title }}</slot>
     </div>
     <slot name="config-columns"></slot>
-    <div :class="$style.table" ref="tablewrap" v-for="(tableMeta, tableMetaIndex) in tableMetaList" :key="tableMeta.position" :position="tableMeta.position"
-        :style="{ width: tableMeta.position !== 'static' && number2Pixel(tableMeta.width), height: number2Pixel(tableHeight)}"
-        @scroll="onTableScroll" :shadow="(tableMeta.position === 'left' && !scrollXStart) || (tableMeta.position === 'right' && !scrollXEnd)">
-        <div v-if="showHead" :class="$style.head" ref="head">
-            <u-table :class="$style['head-table']" :color="color" :line="line" :striped="striped" :sticky-fixed="useStickyFixed" :style="{ width: number2Pixel(tableWidth)}">
-                <colgroup>
-                    <col v-for="(columnVM, columnIndex) in visibleColumnVMs" :key="columnIndex" :width="columnVM.computedWidth">
-                </colgroup>
-                <thead :grouped="hasGroupedColumn">
-                    <tr v-for="(headTr, trIndex) in visibleTableHeadTrArr">
-                        <template v-for="(columnVM, columnIndex) in headTr">
-                        <th
-                            v-if="columnVM&&columnVM.colSpan !== 0"
-                            ref="th"
-                            :class="[$style['head-title'], boldHeader ? $style.boldHeader : null]"
-                            :key="columnIndex"
-                            :is-sub="columnVM.$attrs['is-sub']"
-                            :vusion-scope-id="columnVM.$vnode.context.$options._scopeId"
-                            :vusion-node-path="columnVM.$attrs['vusion-node-path']"
-                            :vusion-node-tag="columnVM.$attrs['vusion-node-tag']"
-                            :vusion-disabled-move="columnVM.$attrs['vusion-disabled-move']"
-                            :vusion-disabled-duplicate="columnVM.$attrs['vusion-disabled-duplicate']"
-                            :vusion-disabled-cut="columnVM.$attrs['vusion-disabled-cut']"
-                            :vusion-template-title-node-path="columnVM.$attrs['vusion-template-title-node-path']"
-                            :sortable="columnVM.sortable && sortTrigger === 'head'" :filterable="!!columnVM.filters" @click="columnVM.sortable && sortTrigger === 'head' && onClickSort(columnVM)"
-                            :style="getStyle('th', columnVM)"
-                            :last-left-fixed="isLastLeftFixed(columnVM, columnIndex, headTr)"
-                            :first-right-fixed="isFirstRightFixed(columnVM, columnIndex, headTr)"
-                            :shadow="(isLastLeftFixed(columnVM, columnIndex, headTr) && (!scrollXStart || $env.VUE_APP_DESIGNER)) || (isFirstRightFixed(columnVM, columnIndex, headTr) && (!scrollXEnd || $env.VUE_APP_DESIGNER))"
-                            :disabled="$env.VUE_APP_DESIGNER && columnVM.currentHidden"
-                            :colspan="columnVM.colSpan"
-                            :rowspan="columnVM.rowSpan"
-                            :ellipsis="columnVM.thEllipsis !== undefined? columnVM.thEllipsis : thEllipsis"
-                            v-ellipsis-title>
-                            <!-- type === 'checkbox' -->
-                            <span v-if="columnVM.type === 'checkbox'">
-                                <u-checkbox :value="allChecked" @check="checkAll($event.value)" :disabled="disabled" :readonly="readonly"></u-checkbox>
-                            </span>
-                            <!-- Normal title -->
-                            <template>
-                                <span vusion-slot-name="title" vusion-slot-name-edit="title" :class="$style['column-title']">
-                                    <f-slot name="title" :vm="columnVM" :props="{ columnVM, columnIndex, columnItem: columnVM.columnItem }">
-                                        {{ columnVM.title }}
-                                        <s-empty
-                                            v-if="!(columnVM.$slots && columnVM.$slots.title)
-                                                && !columnVM.title
-                                                && $env.VUE_APP_DESIGNER
-                                                && !!$attrs['vusion-node-path']">
-                                        </s-empty>
-                                    </f-slot>
-                                </span>
-                            </template>
-                            <!-- Sortable -->
-                            <span v-if="columnVM.sortable" :class="$style.sort"
-                                :sorting="currentSorting && currentSorting.field === columnVM.field" :order="currentSorting && currentSorting.order"
-                                @click="sortTrigger === 'icon' && ($event.stopPropagation(), onClickSort(columnVM))"></span>
-                            <!-- Filterable -->
-                            <span v-if="columnVM.filters" :class="$style['filter-wrap']" :active="isFilterActive(columnVM.field)">
-                                <!-- <u-table-view-filters :value="getFiltersValue(columnVM.field)" @select="onSelectFilters(columnVM.field, $event)">
-                                    <u-table-view-filter v-for="filter in columnVM.filters" :key="filter.value" :value="filter.value">{{ filter.text }}</u-table-view-filter>
-                                </u-table-view-filters> -->
-                                <u-table-view-filters-popper
-                                    :value="getFiltersValue(columnVM.field)"
-                                    :data="columnVM.filters"
-                                    :multiple="columnVM.filterMultiple || filterMultiple"
-                                    :max="columnVM.filterMax || filterMax"
-                                    @select="onSelectFilters(columnVM.field, $event)">
-                                </u-table-view-filters-popper>
-                            </span>
-                            <!-- Resizable -->
-                            <f-dragger v-if="resizable && columnIndex !== headTr.length - 1" axis="horizontal"
-                                @dragstart="onResizerDragStart($event, columnVM)"
-                                @drag="onResizerDrag($event, columnVM, columnIndex)"
-                                @dragend="onResizerDragEnd($event, columnVM, columnIndex)">
-                                <div :class="$style.resizer" @click.stop></div>
-                            </f-dragger>
-                        </th>
-                        </template>
-                    </tr>
-                </thead>
-            </u-table>
-        </div>
-        <div :class="$style.headPlaceholder" ref="headPlaceholder"></div>
-        <div :class="$style.body" ref="body" :style="{ height: number2Pixel(bodyHeight) }" @scroll="onBodyScroll"
-            :sticky-fixed="useStickyFixed">
-            <f-scroll-view :class="$style.scrollcview" @scroll="onScrollView" ref="scrollView" :native="!!tableMetaIndex || $env.VUE_APP_DESIGNER" :hide-scroll="!!tableMetaIndex">
-            <u-table ref="bodyTable" :class="$style['body-table']" :line="line" :striped="striped" :sticky-fixed="useStickyFixed" :style="{ width: number2Pixel(tableWidth)}">
-                <colgroup>
-                    <col v-for="(columnVM, columnIndex) in visibleColumnVMs" :key="columnIndex" :width="columnVM.computedWidth">
-                </colgroup>
-                <tbody ref="virtual">
-                    <template v-if="(!currentLoading && !currentError && !currentEmpty || pageable === 'auto-more' || pageable === 'load-more') && currentData && currentData.length">
-                        <template v-for="(item, rowIndex) in virtualList">
-                            <tr :key="getKey(item, rowIndex)" :class="[$style.row, ($env.VUE_APP_DESIGNER && rowIndex !== 0) ? $style.trmask : '']" :color="item.rowColor" :selected="selectable && selectedItem === item"
-                            v-if="item.display !== 'none'"
-                            :draggable="rowDraggable && item.draggable || undefined"
-                            :dragging="isDragging(item)"
-                            :subrow="!!item.tableTreeItemLevel"
-                            @dragstart="onDragStart($event, item, rowIndex + virtualIndex)"
-                            @dragover="onDragOver($event, item, rowIndex + virtualIndex)"
-                            @click="onClickRow($event, item, rowIndex + virtualIndex)"
-                            @dblclick="onDblclickRow($event, item, rowIndex + virtualIndex)">
-                                <template v-if="$env.VUE_APP_DESIGNER">
-                                    <td ref="td" :class="$style.cell" v-for="(columnVM, columnIndex) in visibleColumnVMs" :ellipsis="getTdEllipsis(columnVM)" v-ellipsis-title
-                                        vusion-slot-name="cell"
-                                        :key="columnIndex"
-                                        :vusion-next="true"
-                                        :vusion-disabled-move="columnVM.$attrs['vusion-disabled-move']"
-                                        :vusion-disabled-duplicate="columnVM.$attrs['vusion-disabled-duplicate']"
-                                        :vusion-disabled-cut="columnVM.$attrs['vusion-disabled-cut']"
-                                        :vusion-node-tag="columnVM.$attrs['vusion-node-tag']"
-                                        :vusion-template-cell-node-path="columnVM.$attrs['vusion-template-cell-node-path']"
-                                        :vusion-template-editcell-node-path="columnVM.$attrs['vusion-template-editcell-node-path']"
-                                        :vusion-scope-id="columnVM.$vnode.context.$options._scopeId"
-                                        :vusion-node-path="columnVM.$attrs['vusion-node-path']"
-                                        :vusion-disabled-selected="rowIndex !== 0"
-                                        :style="getStyle('td', columnVM)"
-                                        :last-left-fixed="isLastLeftFixed(columnVM, columnIndex, visibleColumnVMs)"
-                                        :first-right-fixed="isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs)"
-                                        :shadow="(isLastLeftFixed(columnVM, columnIndex, visibleColumnVMs)) || (isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs))"
-                                        :disabled="columnVM.currentHidden">
-                                        <!-- <div :class="$style.tdmask" v-if="rowIndex !== 0"></div> -->
-                                        <!--可视化占据的虚拟填充区域-->
-                                        <div vusion-slot-name="cell" :plus-empty="typeCheck(columnVM.type) ? false : columnVM.$attrs['plus-empty']">
-                                            <!-- type === 'index' -->
-                                            <span v-if="columnVM.type === 'index'">{{ (columnVM.startIndex - 0) + rowIndex + virtualIndex }}</span>
-                                            <!-- type === 'radio' -->
-                                            <span v-if="columnVM.type === 'radio'">
-                                                <u-radio :value="selectedItem === item" :disabled="item.disabled" @click.native="select(item, rowIndex + virtualIndex)" :readonly="readonly"></u-radio>
-                                            </span>
-                                            <!-- type === 'checkbox' -->
-                                            <span v-if="columnVM.type === 'checkbox'">
-                                                <u-checkbox :value="item.checked" :label="$at(item, valueField)" :disabled="item.disabled || disabled" @check="check(item, $event.value)" :readonly="readonly"></u-checkbox>
-                                            </span>
-
-                                            <!-- type === 'expander' left -->
-                                            <f-slot
-                                                v-if="columnVM.type === 'expander' && columnVM.expanderPosition === 'left'"
-                                                name="expander"
-                                                :vm="columnVM"
-                                                :props="{
-                                                    item: getRealItem(item, rowIndex + virtualIndex),
-                                                    value: $at(item, columnVM.field),
-                                                    columnVM,
-                                                    rowIndex,
-                                                    columnIndex,
-                                                    index: rowIndex,
-                                                    columnItem: columnVM.columnItem,
-                                                }">
-                                                <u-table-view-expander
-                                                    :item="getRealItem(item, rowIndex + virtualIndex)"
-                                                    @toggle="() => toggleExpanded(getRealItem(item, rowIndex + virtualIndex))">
-                                                </u-table-view-expander>
-                                            </f-slot>
-
-                                            <template v-if="treeDisplay && item.tableTreeItemLevel !== undefined && columnIndex === treeColumnIndex">
-                                                <span :class="$style.indent" :style="{ paddingLeft: number2Pixel(20 * item.tableTreeItemLevel) }"></span>
-                                                <span :class="$style.tree_expander" v-if="$at(item, hasChildrenField)" :expanded="item.treeExpanded" @click.stop="toggleTreeExpanded(item)" :loading="item.loading"></span>
-                                                <span :class="$style.tree_placeholder" v-else></span>
-                                            </template>
-                                            <!-- Normal text -->
-                                            <f-slot name="cell" :vm="columnVM" :props="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex, columnIndex, index: rowIndex, columnItem: columnVM.columnItem }">
-                                                <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)" vusion-slot-name="cell" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field) || item) }}</span>
-                                            </f-slot>
-                                            <!-- type === 'dragHandler' -->
-                                            <span v-if="columnVM.type === 'dragHandler'">
-                                                <i-ico :class="$style.dragHandler" name="dragHandler" :draggable="handlerDraggable && item.draggable || undefined" :disabled="!(handlerDraggable && item.draggable)"></i-ico>
-                                            </span>
-
-                                            <!-- type === 'expander' right -->
-                                            <f-slot
-                                                v-if="columnVM.type === 'expander' && columnVM.expanderPosition === 'right'"
-                                                name="expander"
-                                                :vm="columnVM"
-                                                :props="{
-                                                    item: getRealItem(item, rowIndex + virtualIndex),
-                                                    value: $at(item, columnVM.field),
-                                                    columnVM,
-                                                    rowIndex,
-                                                    columnIndex,
-                                                    index: rowIndex,
-                                                    columnItem: columnVM.columnItem,
-                                                }">
-                                                <u-table-view-expander
-                                                    :item="getRealItem(item, rowIndex + virtualIndex)"
-                                                    @toggle="() => toggleExpanded(getRealItem(item, rowIndex + virtualIndex))">
-                                                </u-table-view-expander>
-                                            </f-slot>
-                                        </div>
-                                        <div v-if="columnVM.type === 'editable'" vusion-slot-name="editcell" :plus-empty="columnVM.$attrs['editcell-plus-empty']" style="margin-top:10px">
-                                            <f-slot name="editcell" :vm="columnVM" :props="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex, columnIndex, index: rowIndex }">
-                                            </f-slot>
-                                        </div>
-                                    </td>
-                                </template>
-                                <template v-else>
-                                    <td ref="td" :class="$style.cell" v-for="(columnVM, columnIndex) in visibleColumnVMs"
-                                        :ellipsis="getTdEllipsis(columnVM)"
-                                        v-ellipsis-title
-                                        :key="columnIndex"
-                                        :vusion-scope-id="columnVM.$vnode.context.$options._scopeId"
-                                        :vusion-disabled-move="columnVM.$attrs['vusion-disabled-move']"
-                                        :vusion-disabled-duplicate="columnVM.$attrs['vusion-disabled-duplicate']"
-                                        :vusion-disabled-cut="columnVM.$attrs['vusion-disabled-cut']"
-                                        :vusion-node-path="columnVM.$attrs['vusion-node-path']"
-                                        :style="getStyle('td', columnVM)"
-                                        :last-left-fixed="isTdLastLeftFixed(columnVM, columnIndex, visibleColumnVMs, item, rowIndex)"
-                                        :first-right-fixed="isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs)"
-                                        :shadow="(isTdLastLeftFixed(columnVM, columnIndex, visibleColumnVMs, item, rowIndex) && !scrollXStart) || (isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs) && !scrollXEnd)"
-                                        v-if="getItemColSpan(item, rowIndex, columnIndex) !== 0 && getItemRowSpan(item, rowIndex, columnIndex) !== 0"
-                                        :colspan="getItemColSpan(item, rowIndex, columnIndex)"
-                                        :rowspan="getItemRowSpan(item, rowIndex, columnIndex)"
-                                        :disabled="item.disabled || disabled"
-                                        >
-                                            <!-- type === 'index' -->
-                                            <span v-if="columnVM.type === 'index'">
-                                                <template v-if="columnVM.autoIndex && usePagination && currentDataSource">{{ 1 + ((currentDataSource.paging.number - 1) * currentDataSource.paging.size) + rowIndex + virtualIndex }}</template>
-                                                <template v-else>{{ (columnVM.startIndex - 0) + rowIndex + virtualIndex }}</template>
-                                            </span>
-                                            <!-- type === 'radio' -->
-                                            <span v-if="columnVM.type === 'radio'">
-                                                <u-radio :value="selectedItem === item" :disabled="item.disabled" @click.native="select(item, rowIndex + virtualIndex)" :readonly="readonly"></u-radio>
-                                            </span>
-                                            <!-- type === 'checkbox' -->
-                                            <span v-if="columnVM.type === 'checkbox'">
-                                                <u-checkbox :value="item.checked" :label="$at(item, valueField)" :disabled="item.disabled || disabled" @check="check(item, $event.value)" :readonly="readonly"></u-checkbox>
-                                            </span>
-                                            <!-- type === 'expander' left -->
-                                            <f-slot
-                                                v-if="columnVM.type === 'expander' && columnVM.expanderPosition === 'left'"
-                                                name="expander"
-                                                :vm="columnVM"
-                                                :props="{
-                                                    item: getRealItem(item, rowIndex + virtualIndex),
-                                                    value: $at(item, columnVM.field),
-                                                    columnVM,
-                                                    rowIndex,
-                                                    columnIndex,
-                                                    index: rowIndex,
-                                                    columnItem: columnVM.columnItem,
-                                                    toggle: () => toggleExpanded(getRealItem(item, rowIndex + virtualIndex))
-                                                }">
-                                                <u-table-view-expander
-                                                    :item="getRealItem(item, rowIndex + virtualIndex)"
-                                                    @toggle="() => toggleExpanded(getRealItem(item, rowIndex + virtualIndex))">
-                                                </u-table-view-expander>
-                                            </f-slot>
-                                            <template v-if="treeDisplay && item.tableTreeItemLevel !== undefined && columnIndex === treeColumnIndex">
-                                                <span :class="$style.indent" :style="{ paddingLeft: number2Pixel(20 * item.tableTreeItemLevel) }"></span>
-                                                <span :class="$style.tree_expander" v-if="$at(item, hasChildrenField)" :expanded="item.treeExpanded" @click.stop="toggleTreeExpanded(item)" :loading="item.loading"></span>
-                                                <span :class="$style.tree_placeholder" v-else></span>
-                                            </template>
-                                            <!-- type === 'dragHandler' -->
-                                            <span v-if="columnVM.type === 'dragHandler'">
-                                                <i-ico :class="$style.dragHandler" name="dragHandler" :draggable="handlerDraggable && item.draggable || undefined" :disabled="!(handlerDraggable && item.draggable)"></i-ico>
-                                            </span>
-                                            <!-- Normal text -->
-                                            <template v-if="columnVM.type === 'editable'">
-                                                <div @dblclick.stop="onSetEditing(item, columnVM)" :class="$style.editablewrap"
-                                                    :ellipsis="columnVM.ellipsis !== undefined? columnVM.ellipsis : ellipsis"
-                                                    :style="{width:getEditablewrapWidth(item, columnIndex, treeColumnIndex)}"
-                                                    :editing="item.editing === columnVM.field">
-                                                    <div>
-                                                        <template v-if="item.editing === columnVM.field">
-                                                            <f-slot name="editcell" :vm="columnVM" :props="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex }">
-                                                                <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
-                                                            </f-slot>
-                                                        </template>
-                                                        <template v-else>
-                                                            <f-slot name="cell" :vm="columnVM" :props="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex, columnItem: columnVM.columnItem }">
-                                                                <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
-                                                            </f-slot>
-                                                        </template>
-                                                    </div>
-                                                </div>
-                                            </template>
-                                            <template v-else>
-                                                <f-slot name="cell" :vm="columnVM" :props="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex, columnItem: columnVM.columnItem }">
-                                                    <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
-                                                </f-slot>
-                                            </template>
-
-                                            <!-- type === 'expander' right -->
-                                            <f-slot
-                                                v-if="columnVM.type === 'expander' && columnVM.expanderPosition === 'right'"
-                                                name="expander"
-                                                :vm="columnVM"
-                                                :props="{
-                                                    item: getRealItem(item, rowIndex + virtualIndex),
-                                                    value: $at(item, columnVM.field),
-                                                    columnVM,
-                                                    rowIndex,
-                                                    columnIndex,
-                                                    index: rowIndex,
-                                                    columnItem: columnVM.columnItem,
-                                                    toggle: () => toggleExpanded(getRealItem(item, rowIndex + virtualIndex))
-                                                }">
-                                                <u-table-view-expander
-                                                    :item="getRealItem(item, rowIndex + virtualIndex)"
-                                                    @toggle="() => toggleExpanded(getRealItem(item, rowIndex + virtualIndex))">
-                                                </u-table-view-expander>
-                                            </f-slot>
-                                    </td>
-                                </template>
-                            </tr>
-                            <template v-if="$env.VUE_APP_DESIGNER && expanderColumnVM && rowIndex===0">
-                                <tr :class="$style['expand-content']">
-                                    <f-collapse-transition>
-                                        <td :colspan="visibleColumnVMs.length" :class="$style['expand-td']"
-                                        vusion-slot-name="expand-content"
-                                        :vusion-disabled-selected="true"
-                                        :vusion-node-tag="expanderColumnVM.$attrs['vusion-node-tag']"
-                                        :vusion-template-expand-content-node-path="expanderColumnVM.$attrs['vusion-template-expand-content-node-path']"
-                                        :vusion-scope-id="expanderColumnVM.$vnode.context.$options._scopeId"
-                                        :vusion-node-path="expanderColumnVM.$attrs['vusion-node-path']"
-                                        style="background: #F7F8FA;">
-                                            <div :plus-empty="expanderColumnVM.$attrs['expand-content-plus-empty']" color="inverse"></div>
-                                            <f-slot name="expand-content" :vm="expanderColumnVM" :props="{ item, value: $at(item, expanderColumnVM.field), columnVM: expanderColumnVM, rowIndex, index: rowIndex }">
-                                            </f-slot>
-                                        </td>
-                                    </f-collapse-transition>
-                                </tr>
-                            </template>
-                            <template v-else>
-                                <tr :class="$style['expand-content']" v-if="expanderColumnVM && item.expanded">
-                                    <f-collapse-transition>
-                                        <td :colspan="visibleColumnVMs.length" :class="$style['expand-td']" v-show="item.expanded">
-                                            <f-slot name="expand-content" :vm="expanderColumnVM" :props="{ item, value: $at(item, expanderColumnVM.field), columnVM: expanderColumnVM, rowIndex: rowIndex + virtualIndex, index: rowIndex + virtualIndex }"></f-slot>
-                                        </td>
-                                    </f-collapse-transition>
-                                </tr>
-                            </template>
-                        </template>
-                    </template>
-                    <tr key="no-data-source" v-if="currentData === undefined && !currentError && $env.VUE_APP_DESIGNER">
-                        <td :class="$style.center" :colspan="visibleColumnVMs.length">
-                            请绑定数据源
-                        </td>
-                    </tr>
-                    <tr key="loading" v-else-if="(currentData === undefined && !currentError) || currentLoading"><!-- 初次加载与加载更多 loading 合并在一起 -->
-                        <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="loading">
-                            <slot name="loading"><u-spinner :class="$style.spinner"></u-spinner> {{ loadingText }}</slot>
-                            <s-empty v-if="$env.VUE_APP_DESIGNER
-                                && !$slots.loading
-                                && $scopedSlots
-                                && !($scopedSlots.loading && $scopedSlots.loading())
-                                && !!$attrs['vusion-node-path']">
-                            </s-empty>
-                        </td>
-                    </tr>
-                    <tr key="error" v-else-if="currentData === null || currentError">
-                        <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="error">
-                            <slot name="error">
-                                <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
-                                <u-linear-layout layout="block" justify="center">
-                                    {{ errorText }}
-                                </u-linear-layout>
-                            </slot>
-                            <s-empty v-if="$env.VUE_APP_DESIGNER
-                                && !$slots.error
-                                && $scopedSlots
-                                && !($scopedSlots.error && $scopedSlots.error())
-                                && !!$attrs['vusion-node-path']">
-                            </s-empty>
-                        </td>
-                    </tr>
-                    <tr key="loadMore" v-else-if="pageable === 'load-more' && currentDataSource.hasMore()">
-                        <td :class="$style.center" :colspan="visibleColumnVMs.length">
-                            <u-link @click="load(true)">{{ $tt('loadMore') }}</u-link>
-                        </td>
-                    </tr>
-                    <tr key="noMore" v-else-if="((pageable === 'auto-more' && hasScroll) || pageable === 'load-more') && !currentDataSource.hasMore() && (currentData && currentData.length)">
-                        <td :class="$style.center" :colspan="visibleColumnVMs.length">
-                            {{ $tt('noMore') }}
-                        </td>
-                    </tr>
-                    <tr key="empty" v-else-if="!currentData.length || currentEmpty">
-                        <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="empty">
-                            <slot name="empty">
-                                <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
-                                <u-linear-layout layout="block" justify="center">
-                                    {{ emptyText }}
-                                </u-linear-layout>
-                            </slot>
-                            <s-empty v-if="$env.VUE_APP_DESIGNER
-                                && !$slots.empty
-                                && $scopedSlots
-                                && !($scopedSlots.empty && $scopedSlots.empty())
-                                && !!$attrs['vusion-node-path']">
-                            </s-empty>
-                        </td>
-                    </tr>
-                </tbody>
-            </u-table>
-            <div ref="virtualPlaceholder" v-if="virtual"></div>
-            </f-scroll-view>
-        </div>
-    </div>
+    <u-table-render
+        :tableMetaList="tableMetaList"
+        :visibleColumnVMs="visibleColumnVMs"
+        :visibleTableHeadTrArr="visibleTableHeadTrArr"
+        :currentData="currentData"
+        :currentLoading="currentLoading"
+        :currentError="currentError"
+        :virtual="virtual">
+    </u-table-render>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
         :total-items="currentDataSource.total" :page="currentDataSource.paging.number"
@@ -430,6 +36,56 @@
         <div :class="$style.trdragGhost" ref="trDragGhost"></div>
     </div>
 </div>
+<div v-else :class="$style.root" ref="root" :border="border"
+    @dragend="onDragEnd($event)"
+    @drop="onDrop($event)"
+    @dragover="onRootDragover($event)"
+    @dragleave="onRootDragleave($event)"
+    @dragenter="onRootDragenter($event)">
+    <div v-if="title" :class="$style.title" ref="title" :style="{ textAlign: titleAlignment }" vusion-slot-name="title" vusion-slot-name-edit="title">
+        <slot name="title">{{ title }}</slot>
+    </div>
+    <slot name="config-columns"></slot>
+    <u-table-render
+        ref="tableRender"
+        :tableMetaList="tableMetaList"
+        :visibleColumnVMs="visibleColumnVMs"
+        :visibleTableHeadTrArr="visibleTableHeadTrArr"
+        :resizable="resizable"
+        :emptyText="emptyText"
+        :errorText="errorText"
+        :loadingText="loadingText"
+        :currentData="currentData"
+        :currentLoading="currentLoading"
+        :currentError="currentError"
+        :virtual="virtual"
+        :pageable="pageable"
+        :striped="striped"
+        :tableHeight="tableHeight"
+        :listKey="listKey"
+        :currentDataSource="currentDataSource"
+        :columnVMsMap="columnVMsMap"
+        :defaultOrder="defaultOrder"
+        :sorting="sorting"
+        :useStickyFixed="useStickyFixed"
+        :fixedRightList="fixedRightList"
+        :fixedLeftList="fixedLeftList">
+    </u-table-render>
+    <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
+    <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
+        :total-items="currentDataSource.total" :page="currentDataSource.paging.number"
+        :page-size="currentDataSource.paging.size" :page-size-options="pageSizeOptions" :show-total="showTotal" :show-sizer="showSizer" :show-jumper="showJumper"
+        :size="paginationSize"
+        @change="page($event.page)" @change-page-size="onChangePageSize">
+    </u-pagination>
+    <div><slot></slot></div>
+    <div v-if="draggable || acrossTableDrag" ref="dragGhost" :class="$style.dragGhost">
+        <slot name="dragGhost" :item="dragState.source"></slot>
+    </div>
+    <div v-if="draggable || acrossTableDrag" :class="$style.dragGhost">
+        <div :class="$style.trdragGhost" ref="trDragGhost"></div>
+    </div>
+</div>
 </template>
 
 <script>
@@ -437,7 +93,6 @@ import DataSource from '../../utils/DataSource';
 import DataSourceNew from '../../utils/DataSource/new';
 import { addResizeListener, removeResizeListener, findScrollParent, getRect, findXScrollParent } from '../../utils/dom';
 import { format } from '../../utils/date';
-import KeyMap from '../../utils/keyMap';
 import MEmitter from '../m-emitter.vue';
 import debounce from 'lodash/debounce';
 import isNumber from 'lodash/isNumber';
@@ -445,19 +100,20 @@ import i18n from './i18n';
 import UTableViewDropGhost from './drop-ghost.vue';
 import SEmpty from '../../components/s-empty.vue';
 import throttle from 'lodash/throttle';
-import FVirtualTable from './f-virtual-table.vue';
 import i18nMixin from '../../mixins/i18n';
 import flatMap from 'lodash/flatMap';
 import { createTableHeaderExportHelper, getXslxStyle } from './helper';
 import * as xlsxUtils from '../../utils/xlsx';
+import UTableRender from './render.table.vue';
 
 export default {
     name: 'u-table-view',
     components: {
         UTableViewDropGhost,
         SEmpty,
+        UTableRender,
     },
-    mixins: [MEmitter, i18nMixin('u-table-view'), FVirtualTable],
+    mixins: [MEmitter, i18nMixin('u-table-view')],
     // i18n,
     props: {
         boldHeader: {
@@ -601,12 +257,20 @@ export default {
             dynamicColumnVMsMap: {}, // 用于记录动态列
             columnGroupVMs: {}, // 用于记录分组列
             slots: this.$slots,
-            keyMap: new KeyMap(),
             autoColSpan: [], // 用于记录自动的的列合并
             autoRowSpan: [], // 用于记录自动的的行合并
             columnVMsMap: {},
             tableHeadTrArr: [],
             currentPageSize: undefined,
+        };
+    },
+    provide() {
+        return {
+            toggleExpanded: this.toggleExpanded,
+            debouncedLoad: this.debouncedLoad,
+            throttledVirtualScroll: this.throttledVirtualScroll,
+            sort: this.sort,
+            filter: this.filter,
         };
     },
     computed: {
@@ -643,9 +307,6 @@ export default {
                 result[index] = headTr.filter((columnVM) => columnVM && !columnVM.currentHidden);
             });
             return result;
-        },
-        expanderColumnVM() {
-            return this.columnVMs.find((columnVM) => columnVM.type === 'expander');
         },
         paging() {
             if (this.usePagination) {
@@ -934,27 +595,6 @@ export default {
         this.enterTarget = null;
     },
     methods: {
-        getKey(item, index) {
-            typeof item === 'object' ? this.keyMap.getKey(item) : index;
-        },
-        isSimpleArray(arr) {
-            if (!Array.isArray(arr)) {
-                return false; // 如果不是数组类型，则不满足条件，直接返回 false
-            }
-            return arr.every((item) =>
-                typeof item !== 'object', // 使用 typeof 判断是否为简单数据类型
-            );
-        },
-        getRealItem(item, rowIndex) {
-            const data = (this.isSimpleArray(this.currentDataSource.data) && this.currentDataSource.data.length > 0) ? (this.currentDataSource.arrangedData[rowIndex] && this.currentDataSource.arrangedData[rowIndex].simple) : item;
-            // 给u-table-view-expander用
-            try {
-                data.toggle = () => this.toggleExpanded(data);
-            } catch (error) {
-                console.warn('当前data不是一个对象');
-            }
-            return data;
-        },
         typeCheck(type) {
             return [
                 'index',
@@ -1088,9 +728,7 @@ export default {
             } else
                 return dataSource;
         },
-        number2Pixel(value) {
-            return isNumber(value) ? value + 'px' : '';
-        },
+        
         handleResize(reComputedWidth = true) {
             if (this.resizeBodyHeight) {
                 this.bodyHeight = undefined;
@@ -1101,7 +739,7 @@ export default {
 
                 // 当最外层加了border后，会导致内部的宽度大于tablewrap的宽度，会出滚动条：Bug-2792431057259520
                 let rootWidth = this.$el.offsetWidth;
-                const tablewrapWidth = this.$refs.tablewrap[0] && this.$refs.tablewrap[0].offsetWidth;
+                const tablewrapWidth = this.$refs.tableRender.$refs.tablewrap[0] && this.$refs.tableRender.$refs.tablewrap[0].offsetWidth;
                 if (tablewrapWidth) {
                     rootWidth = tablewrapWidth;
                 }
@@ -1274,87 +912,9 @@ export default {
 
                 this.$emit('resize', undefined, this);
                 this.$nextTick(() => {
-                    this.$refs.scrollView[0] && this.$refs.scrollView[0].handleResize();
+                    this.$refs.tableRender.$refs.scrollView[0] && this.$refs.tableRender.$refs.scrollView[0].handleResize();
                 });
             });
-        },
-        onResizerDragStart($event, columnVM) {
-            this.visibleColumnVMs.forEach((columnVM) => {
-                columnVM.currentWidth = columnVM.computedWidth;
-                columnVM.oldWidth = columnVM.computedWidth;
-            });
-        },
-        onResizerDrag($event, columnVM, index) {
-            const minWidth = this.minColumnWidth;
-            const rootWidth = this.$refs.head[0].children[0].offsetWidth;
-            let beforeWidth = 0;
-            for (let i = 0; i < index; i++)
-                beforeWidth += this.visibleColumnVMs[i].computedWidth;
-            const maxWidth = rootWidth - beforeWidth - (this.visibleColumnVMs.length - 1 - index) * minWidth;
-            const width = Math.max(minWidth, Math.min(columnVM.oldWidth + $event.dragX, maxWidth));
-            let remainingWidth = width - columnVM.computedWidth;
-            columnVM.currentWidth = columnVM.computedWidth = width;
-            if (this.resizeRemaining === 'sequence') {
-                for (let i = index + 1; i < this.visibleColumnVMs.length; i++) {
-                    if (remainingWidth === 0)
-                        break;
-                    const columnVM = this.visibleColumnVMs[i];
-                    if (columnVM.computedWidth - remainingWidth >= minWidth) {
-                        columnVM.currentWidth = columnVM.computedWidth -= remainingWidth;
-                        remainingWidth = 0;
-                    } else {
-                        remainingWidth -= columnVM.computedWidth - minWidth;
-                        columnVM.currentWidth = columnVM.computedWidth = minWidth;
-                    }
-                }
-            } else if (this.resizeRemaining === 'average') {
-                /* eslint-disable no-inner-declarations */
-                function distributeInAverage(columnVMs) {
-                    const averageWidth = remainingWidth / columnVMs.length;
-                    const wideColumnVMs = [];
-                    columnVMs.forEach((columnVM) => {
-                        if (columnVM.computedWidth - averageWidth >= minWidth) {
-                            columnVM.currentWidth = columnVM.computedWidth -= averageWidth;
-                            remainingWidth -= averageWidth;
-                            wideColumnVMs.push(columnVM);
-                        } else {
-                            remainingWidth -= columnVM.computedWidth - minWidth;
-                            columnVM.currentWidth = columnVM.computedWidth = minWidth;
-                        }
-                    });
-                    if (Math.abs(remainingWidth) >= 1 && wideColumnVMs.length)
-                        distributeInAverage(wideColumnVMs);
-                }
-                distributeInAverage(this.visibleColumnVMs.slice(index + 1));
-                columnVM.currentWidth = columnVM.computedWidth -= remainingWidth;
-            }
-            $event.transferEl.style.left = '';
-        },
-        onResizerDragEnd($event, columnVM, index) {
-            this.reHandleResize();
-            this.$emit('resize', {
-                columnVM,
-                index,
-                width: columnVM.computedWidth,
-                oldWidth: columnVM.oldWidth,
-            });
-        },
-        onTableScroll(e) {
-            this.scrollXStart = e.target.scrollLeft === 0;
-            this.scrollXEnd = e.target.scrollLeft >= e.target.scrollWidth - e.target.clientWidth;
-        },
-        syncBodyScroll(scrollTop, target) {
-            if (!this.useStickyFixed) {
-                this.$refs.body[0]
-                    && this.$refs.body[0] !== target
-                    && (this.$refs.body[0].scrollTop = scrollTop);
-                this.$refs.body[1]
-                    && this.$refs.body[1] !== target
-                    && (this.$refs.body[1].scrollTop = scrollTop);
-                this.$refs.body[2]
-                    && this.$refs.body[2] !== target
-                    && (this.$refs.body[2].scrollTop = scrollTop);
-            }
         },
         syncHeadScroll() {
             // this.$refs.head[0].scrollLeft = this.$refs.head[0].parentElement.scrollLeft;
@@ -1364,17 +924,6 @@ export default {
                 headEl.childNodes[0].style.marginLeft = '-' + xScrollParentEl.scrollLeft + 'px';
                 headEl.style.width = xScrollParentEl.offsetWidth + 'px';
             }
-        },
-        onBodyScroll(e) {
-            this.syncBodyScroll(e.target.scrollTop, e.target); // this.throttledVirtualScroll(e);
-            this.$refs.head[0].scrollLeft = e.target.scrollLeft;
-            this.scrollXStart = e.target.scrollLeft === 0;
-            this.scrollXEnd = e.target.scrollLeft >= e.target.scrollWidth - e.target.clientWidth;
-            if (this.pageable !== 'auto-more' || this.currentLoading)
-                return;
-            const el = e.target;
-            if (el.scrollHeight === el.scrollTop + el.clientHeight && this.currentDataSource && this.currentDataSource.hasMore())
-                this.debouncedLoad(true);
         },
         onScrollParentScroll(e) {
             const rect = getRect(this.$el);
@@ -1412,34 +961,6 @@ export default {
                     this.syncHeadScroll();
                 }
             }
-        },
-        onScrollView(data) {
-            this.hasScroll = true;
-            if (!this.useStickyFixed) {
-                this.syncScrollViewScroll(data.scrollTop, data.target);
-            }
-            if (this.virtual)
-                this.throttledVirtualScroll(data);
-            if (this.$refs.scrollView[0].$refs.wrap === data.target) {
-                this.$refs.head[0].scrollLeft = data.scrollLeft;
-                this.scrollXStart = data.scrollLeft === 0;
-                this.scrollXEnd = data.scrollLeft >= data.scrollWidth - data.clientWidth;
-                if (this.pageable !== 'auto-more' || this.currentLoading)
-                    return;
-                if (data.scrollHeight === data.scrollTop + data.clientHeight && this.currentDataSource && this.currentDataSource.hasMore())
-                    this.debouncedLoad(true);
-            }
-        },
-        syncScrollViewScroll(scrollTop, target) {
-            this.$refs.scrollView[0]
-                && this.$refs.scrollView[0].$refs.wrap !== target
-                && (this.$refs.scrollView[0].$refs.wrap.scrollTop = scrollTop);
-            this.$refs.scrollView[1]
-                && this.$refs.scrollView[1].$refs.wrap !== target
-                && (this.$refs.scrollView[1].$refs.wrap.scrollTop = scrollTop);
-            this.$refs.scrollView[2]
-                && this.$refs.scrollView[2].$refs.wrap !== target
-                && (this.$refs.scrollView[2].$refs.wrap.scrollTop = scrollTop);
         },
         load(more) {
             const dataSource = this.currentDataSource;
@@ -1832,22 +1353,6 @@ export default {
             this.$emit('page', paging, this);
             this.load();
         },
-        onClickSort(columnVM) {
-            let order;
-            let sorting = this.currentSorting;
-            if (!sorting)
-                sorting = { field: undefined, order: undefined };
-            if (sorting.field === columnVM.field) {
-                if (sorting.order === (columnVM.defaultOrder || this.defaultOrder))
-                    order = sorting.order === 'asc' ? 'desc' : 'asc';
-                else if (sorting.order === undefined)
-                    order = columnVM.defaultOrder || this.defaultOrder;
-                else
-                    order = undefined;
-            } else
-                order = columnVM.defaultOrder || this.defaultOrder;
-            this.sort(order && columnVM.field, order, columnVM.sortCompare);
-        },
         sort(field, order, compare) {
             const sorting = { field, order, compare };
             if (this.$emitPrevent('before-sort', sorting, this))
@@ -1857,29 +1362,6 @@ export default {
             this.load();
             this.$emit('sort', sorting, this);
             this.$emit('update:sorting', sorting, this);
-        },
-        onSelectFilters(field, $event) {
-            // const filtering = $event.value || $event.value === 0 ? { [field]: $event.value } : undefined;
-            const filtering = { [field]: $event.value };
-            this.filter(filtering);
-        },
-        getFiltersValue(field) {
-            const filtering = this.currentDataSource && this.currentDataSource.filtering;
-            if (!filtering)
-                return undefined;
-            // const filterField = Object.keys(filtering)[0];
-            // if (filterField !== field)
-            //     return undefined;
-            // else
-            //     return this.$at(filtering, field);
-            return this.$at(filtering, field);
-        },
-        isFilterActive(field) {
-            const filtering = this.currentDataSource && this.currentDataSource.filtering;
-            if (!filtering)
-                return undefined;
-            const value = this.$at(filtering, field);
-            return value !== undefined && value !== 'ALL' && value !== 'all';
         },
         filter(filtering) {
             if (filtering) {
@@ -2255,94 +1737,6 @@ export default {
         },
         resetEdit(item) {
             item.editing = '';
-        },
-        getStyle(type, columnVM) {
-            const style = Object.assign({}, columnVM.$vnode.data && columnVM.$vnode.data.style);
-            const staticStyle = Object.assign({}, columnVM.$vnode.data && columnVM.$vnode.data.staticStyle);
-            if (this.useStickyFixed) {
-                const elZIndex = +this.$el.style.zIndex;
-                // --z-index-layout: 100, 可能用于导航栏fixed，不能大于它
-                const zIndex = elZIndex > 99 ? elZIndex : 99;
-                if (this.fixedLeftList && this.fixedLeftList.length) {
-                    const columnData = this.columnVMsMap[columnVM._uid];
-                    if (columnData) {
-                        const inFixedLeftList = this.isInFixedList(columnVM, this.fixedLeftList);
-                        if (inFixedLeftList) {
-                            let left = columnData.left;
-                            if (type === 'th') {
-                                left = this.getFixedWidth(columnVM, 'left');
-                            }
-                            if (left !== undefined) {
-                                return Object.assign(staticStyle, style, {
-                                    position: 'sticky',
-                                    left: left + 'px',
-                                    zIndex,
-                                    overflow: 'hidden',
-                                });
-                            }
-                        }
-                    }
-                }
-                if (this.fixedRightList && this.fixedRightList.length) {
-                    const columnData = this.columnVMsMap[columnVM._uid];
-                    if (columnData) {
-                        const inFixedRightList = this.isInFixedList(columnVM, this.fixedRightList);
-                        if (inFixedRightList) {
-                            let right = columnData.right;
-                            if (type === 'th') {
-                                right = this.getFixedWidth(columnVM, 'right');
-                            }
-                            if (right !== undefined) {
-                                return Object.assign(staticStyle, style, {
-                                    position: 'sticky',
-                                    right: right + 'px',
-                                    zIndex,
-                                    overflow: 'hidden',
-                                });
-                            }
-                        }
-                    }
-                }
-            }
-            return Object.assign(staticStyle, style);
-        },
-        isLastLeftFixed(columnVM, columnIndex, list) {
-            if (!columnVM)
-                return undefined;
-            const inFixedLeftList = this.isInFixedList(columnVM, this.fixedLeftList);
-            let isLastInList = list[columnIndex + 1] && !list[columnIndex + 1].fixed;
-            if (columnVM.$parent.isGroup) {
-                const groupList = this.visibleTableHeadTrArr.find((tableHeadTr) => tableHeadTr.includes(columnVM.$parent));
-                if (groupList) {
-                    const groupVMIndex = groupList.findIndex((groupVM) => groupVM === columnVM.$parent);
-                    const isGroupInLast = this.isLastLeftFixed(columnVM.$parent, groupVMIndex, groupList);
-                    isLastInList = isLastInList && isGroupInLast;
-                }
-            }
-            return inFixedLeftList && isLastInList ? true : undefined;
-        },
-        isTdLastLeftFixed(columnVM, columnIndex, columnVMList, item, rowIndex) {
-            if (!columnVM)
-                return undefined;
-            const colSpan = this.getItemColSpan(item, rowIndex, columnIndex);
-            if (colSpan > 1) {
-                const lastColumnVM = columnVMList[columnIndex + colSpan - 1];
-                return this.isLastLeftFixed(lastColumnVM, columnIndex + colSpan - 1, columnVMList);
-            }
-            return this.isLastLeftFixed(columnVM, columnIndex, columnVMList);
-        },
-        isFirstRightFixed(columnVM, columnIndex, list) {
-            const inFixedRightList = this.isInFixedList(columnVM, this.fixedRightList);
-            let isLastInList = list[columnIndex - 1] && !list[columnIndex - 1].fixed;
-            if (columnVM.$parent.isGroup) {
-                const groupList = this.visibleTableHeadTrArr.find((tableHeadTr) => tableHeadTr.includes(columnVM.$parent));
-                if (groupList) {
-                    const groupVMIndex = groupList.findIndex((groupVM) => groupVM === columnVM.$parent);
-                    const isGroupInLast = this.isFirstRightFixed(columnVM.$parent, groupVMIndex, groupList);
-                    isLastInList = isLastInList && isGroupInLast;
-                }
-            }
-            return inFixedRightList && isLastInList ? true : undefined;
         },
         /**
          * 拖拽开始
@@ -3196,54 +2590,7 @@ export default {
             this.columnVMsMap[key] = this.columnVMsMap[key] || {};
             Object.assign(this.columnVMsMap[key], valueObj);
         },
-        /**
-         * 表头固定列需要重新计算左、右距离
-         * @param {*} columnVM 表格列
-         * @param {*} type left｜ right
-         */
-        getFixedWidth(columnVM, type) {
-            const columnData = this.columnVMsMap[columnVM._uid];
-            if (columnData) {
-                let width = columnData[type];
-                // 分组或者有合并列的情况处理
-                if (columnData.columnsInGroup || columnData.cloumnsForColSpanHidden) {
-                    const columnsInGroupWidth = (columnData.columnsInGroup || []).map((columnVM) => {
-                        const columnData = this.columnVMsMap[columnVM._uid];
-                        return columnData[type];
-                    });
-                    const cloumnsForColSpanHiddenWidth = (columnData.cloumnsForColSpanHidden || []).map((columnVM) => {
-                        const columnData = this.columnVMsMap[columnVM._uid];
-                        return columnData[type];
-                    });
-                    const tempWidth = Math.min(...columnsInGroupWidth.concat(cloumnsForColSpanHiddenWidth));
-                    if (type === 'left' && width !== undefined) {
-                        width = Math.min(width, tempWidth);
-                    } else {
-                        width = tempWidth;
-                    }
-                }
-                return width;
-            }
-        },
-        /**
-         * 判断是否在固定列里
-         * @param {*} columnVM
-         * @param {*} list lef｜rightFixedList
-         */
-        isInFixedList(columnVM, list) {
-            const columnData = this.columnVMsMap[columnVM._uid];
-            if (columnData) {
-                if (columnData.columnsInGroup) {
-                    return columnData.columnsInGroup.some((columnVM1) => {
-                        const index = list.findIndex((data) => data.columnVM === columnVM1);
-                        return index !== -1;
-                    });
-                } else {
-                    const index = list.findIndex((data) => data.columnVM === columnVM);
-                    return index !== -1;
-                }
-            }
-        },
+        
         /**
          * column列里会有u-table-view-expander子组件，需要过滤掉
          */
@@ -3316,146 +2663,6 @@ export default {
     margin-bottom: var(--table-view-title-space);
 }
 
-.table {
-    overflow-x: var(--table-view-overflow-x);
-    overflow-y: hidden;
-    max-height: inherit;
-    position: relative;
-}
-
-.table[position="left"] {
-    position: absolute;
-    left: 0;
-    top: 0;
-    overflow: hidden;
-    background: var(--table-view-table-background);
-}
-
-.table[position="left"][shadow] {
-    box-shadow: var(--table-view-table-shadow);
-}
-
-.table[position="right"] {
-    position: absolute;
-    right: 0;
-    top: 0;
-    overflow: hidden;
-    background: var(--table-view-table-background);
-}
-
-.table[position="right"][shadow] {
-    box-shadow: var(--table-view-table-right-shadow);
-}
-
-.table[position="right"] > *,
-.table[position="right"] .head-table {
-    float: right;
-}
-
-.head {
-    width: 100%;
-    overflow-x:hidden;
-    overflow-y: hidden;
-}
-.head::-webkit-scrollbar {
-    height: 0;
-}
-
-.head[stickingHead] {
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    z-index: 200;
-    box-shadow: var(--table-view-table-top-shadow);
-}
-
-.headPlaceholder {
-    width: 100%;
-}
-
-.head-title {
-    position: relative;
-}
-
-.head-title[sortable]:hover {
-    background: var(--table-view-head-title-sortable-hover);
-    cursor: pointer;
-}
-.head-title[sortable]:hover .sort{
-    color: var(--table-view-sort-color-hover);
-}
-
-.head-title.boldHeader {
-    font-weight: bold;
-}
-.head-title[last-left-fixed]::after,
-.head-title[first-right-fixed]::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 6px;
-    bottom: -1px;
-    width: 6px;
-    pointer-events: none;
-    transform: translateX(-100%);
-    transition: box-shadow .1s linear;
-    box-shadow: none;
-    display:block;
-}
-.head-title[last-left-fixed]::after {
-    left: unset;
-    transform: translateX(100%);
-    right: 6px;
-}
-.head-title[shadow][last-left-fixed]::after {
-    box-shadow: inset -4px 0 5px -3px rgb(0 0 0 / 15%);
-}
-.head-title[shadow][first-right-fixed]::after {
-    box-shadow: inset 3px 0 5px -3px rgb(0 0 0 / 15%);
-}
-
-.head-title[disabled] {
-    color: var(--text-color-disabled);
-    background-color: var(--table-view-expander-background-disabled);
-}
-
-.head-title[ellipsis] * {
-    white-space: nowrap;
-}
-.head-title[ellipsis] div {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.head-title[ellipsis] .column-title {
-    max-width:100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: inline-block;
-    vertical-align: middle;
-}
-.head-title[filterable][ellipsis]:not([sortable]) .column-title,
-.head-title[sortable][ellipsis]:not([filterable]) .column-title {
-    max-width: calc(100% - 20px);
-}
-.head-title[sortable][filterable][ellipsis] .column-title {
-    max-width: calc(100% - 40px);
-}
-.head-title[ellipsis] .column-title + .sort,
-.head-title[ellipsis] .column-title + .filter-wrap
- {
-    vertical-align: middle;
-}
-/* 为了文字和排序按钮对齐 */
-.head-title[ellipsis]::before {
-    content: "";
-    display: inline-block;
-    width: 0;
-    height: 100%;
-    vertical-align: middle;
-}
-
 .extra {
     float: right;
 }
@@ -3469,96 +2676,6 @@ export default {
     overflow: hidden;
     width: 100%;
     height: 100%;
-}
-
-.center {
-    text-align: center;
-    color: #999 !important;
-}
-
-.sort {
-    position: relative;
-    display: inline-block;
-    width: var(--table-view-sort-size);
-    height: var(--table-view-sort-size);
-    vertical-align: -1px;
-    color: var(--table-view-sort-color);
-    cursor: var(--cursor-pointer);
-    margin-left: 5px;
-}
-
-.sort::before {
-    position: absolute;
-    left: 0;
-    top: -3px;
-    line-height: 1;
-content: "\e672";
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-}
-
-.sort::after {
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    line-height: 1;
-content: "\e66c";
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-}
-
-.sort[sorting][order="asc"]::before {
-    color: var(--table-view-sort-color-active);
-}
-
-.sort[sorting][order="desc"]::after {
-    color: var(--table-view-sort-color-active);
-}
-
-.filter-wrap {
-    cursor: var(--cursor-pointer);
-    padding-bottom: 6px;
-    margin-bottom: -6px;
-    color: var(--table-view-sort-color);
-    margin-left: 5px;
-}
-.filter-wrap:hover{
-    color: var(--table-view-filter-color-hover);
-}
-
-.filter-wrap::before {
-content: "\e665";
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-    color: inherit;
-    font-size: var(--font-size-small);
-}
-.filter-wrap[active] {
-    color: var(--table-view-filter-color-active);
 }
 
 .resizer {
@@ -3631,33 +2748,6 @@ content: "\e665";
     margin-top: var(--table-view-pagination-space);
 }
 
-.row[selected],
-.row[selected] td {
-    background: var(--table-view-row-selected-background) !important;
-}
-.row[selected] td{
-    box-shadow: inset 0px 1px 0px 0px var(--table-view-row-selected-border-color),
-        inset 0px -1px 0px 0px var(--table-view-row-selected-border-color);
-}
-.row[selected] td:first-child{
-    box-shadow: inset 0px 1px 0px 0px var(--table-view-row-selected-border-color),
-        inset 0px -1px 0px 0px var(--table-view-row-selected-border-color),
-        inset 1px 0px 0px 0px var(--table-view-row-selected-border-color);
-}
-.row[selected] td:last-child{
-    box-shadow: inset 0px 1px 0px 0px var(--table-view-row-selected-border-color),
-        inset 0px -1px 0px 0px var(--table-view-row-selected-border-color),
-        inset -1px 0px 0px 0px var(--table-view-row-selected-border-color);
-}
-.row[draggable="true"] {
-    cursor: var(--table-view-drag-cursor);
-}
-.row[dragging="true"] td {
-    background: var(--table-view-row-background-dragging);
-}
-.row[dragging="true"][subrow] td {
-    background: var(--table-view-subrow-background-dragging);
-}
 .dragHandler {
     cursor: var(--table-view-drag-cursor);
 }
@@ -3772,23 +2862,6 @@ content: "\e679";
 }
 .spinner {
     margin-right: 4px;
-}
-
-.scrollcview {
-    width: 100%;
-    height: 100%;
-}
-.scrollcview[native="true"][hide-scroll] [class^="f-scroll-view_wrap__"]{
-    overflow-x: hidden;
-}
-.scrollcview[native="true"][hide-scroll] [class^="f-scroll-view_wrap__"]::-webkit-scrollbar {
-    width: 0;
-}
-
-/** fix 固定列滚动条看不见 */
-.scrollcview [class^="f-scroll-view_wrap__"] {
-    position: relative;
-    z-index: 0;
 }
 
 .dropghost {

@@ -1,0 +1,973 @@
+<template>
+    <div>
+        <div :class="$style.table" ref="tablewrap" v-for="(tableMeta, tableMetaIndex) in tableMetaList" :key="tableMeta.position" :position="tableMeta.position"
+            :style="{ width: tableMeta.position !== 'static' && number2Pixel(tableMeta.width), height: number2Pixel(tableHeight)}"
+            @scroll="onTableScroll" :shadow="(tableMeta.position === 'left' && !scrollXStart) || (tableMeta.position === 'right' && !scrollXEnd)">
+            <div v-if="showHead" :class="$style.head" ref="head">
+                <u-table :class="$style['head-table']" :color="color" :line="line" :striped="striped" :sticky-fixed="useStickyFixed" :style="{ width: number2Pixel(tableWidth)}">
+                    <colgroup>
+                        <col v-for="(columnVM, columnIndex) in visibleColumnVMs" :key="columnIndex" :width="columnVM.computedWidth">
+                    </colgroup>
+                    <thead :grouped="hasGroupedColumn">
+                        <tr v-for="(headTr, trIndex) in visibleTableHeadTrArr">
+                            <template v-for="(columnVM, columnIndex) in headTr">
+                            <th
+                                v-if="columnVM&&columnVM.colSpan !== 0"
+                                ref="th"
+                                :class="[$style['head-title'], boldHeader ? $style.boldHeader : null]"
+                                :key="columnIndex"
+                                :sortable="columnVM.sortable && sortTrigger === 'head'" :filterable="!!columnVM.filters" @click="columnVM.sortable && sortTrigger === 'head' && onClickSort(columnVM)"
+                                :style="getStyle('th', columnVM)"
+                                :last-left-fixed="isLastLeftFixed(columnVM, columnIndex, headTr)"
+                                :first-right-fixed="isFirstRightFixed(columnVM, columnIndex, headTr)"
+                                :shadow="(isLastLeftFixed(columnVM, columnIndex, headTr) && !scrollXStart) || (isFirstRightFixed(columnVM, columnIndex, headTr) && !scrollXEnd)"
+                                :disabled="columnVM.currentHidden"
+                                :colspan="columnVM.colSpan"
+                                :rowspan="columnVM.rowSpan"
+                                :ellipsis="columnVM.thEllipsis !== undefined? columnVM.thEllipsis : thEllipsis"
+                                v-ellipsis-title>
+                                <!-- type === 'checkbox' -->
+                                <span v-if="columnVM.type === 'checkbox'">
+                                    <u-checkbox :value="allChecked" @check="checkAll($event.value)" :disabled="disabled" :readonly="readonly"></u-checkbox>
+                                </span>
+                                <!-- Normal title -->
+                                <template>
+                                    <span vusion-slot-name="title" vusion-slot-name-edit="title" :class="$style['column-title']">
+                                        <f-slot name="title" :vm="columnVM" :props="{ columnVM, columnIndex, columnItem: columnVM.columnItem }">
+                                            {{ columnVM.title }}
+                                        </f-slot>
+                                    </span>
+                                </template>
+                                <!-- Sortable -->
+                                <span v-if="columnVM.sortable" :class="$style.sort"
+                                    :sorting="currentSorting && currentSorting.field === columnVM.field" :order="currentSorting && currentSorting.order"
+                                    @click="sortTrigger === 'icon' && ($event.stopPropagation(), onClickSort(columnVM))"></span>
+                                <!-- Filterable -->
+                                <span v-if="columnVM.filters" :class="$style['filter-wrap']" :active="isFilterActive(columnVM.field)">
+                                    <u-table-view-filters-popper
+                                        :value="getFiltersValue(columnVM.field)"
+                                        :data="columnVM.filters"
+                                        :multiple="columnVM.filterMultiple || filterMultiple"
+                                        :max="columnVM.filterMax || filterMax"
+                                        @select="onSelectFilters(columnVM.field, $event)">
+                                    </u-table-view-filters-popper>
+                                </span>
+                                <!-- Resizable -->
+                                <f-dragger v-if="resizable && columnIndex !== headTr.length - 1" axis="horizontal"
+                                    @dragstart="onResizerDragStart($event, columnVM)"
+                                    @drag="onResizerDrag($event, columnVM, columnIndex)"
+                                    @dragend="onResizerDragEnd($event, columnVM, columnIndex)">
+                                    <div :class="$style.resizer" @click.stop></div>
+                                </f-dragger>
+                            </th>
+                            </template>
+                        </tr>
+                    </thead>
+                </u-table>
+            </div>
+            <div :class="$style.headPlaceholder" ref="headPlaceholder"></div>
+            <div :class="$style.body" ref="body" :style="{ height: number2Pixel(bodyHeight) }" @scroll="onBodyScroll"
+                :sticky-fixed="useStickyFixed">
+                <f-scroll-view :class="$style.scrollcview" @scroll="onScrollView" ref="scrollView" :native="!!tableMetaIndex || $env.VUE_APP_DESIGNER" :hide-scroll="!!tableMetaIndex">
+                    <u-table ref="bodyTable" :class="$style['body-table']" :line="line" :striped="striped" :sticky-fixed="useStickyFixed" :style="{ width: number2Pixel(tableWidth)}">
+                        <colgroup>
+                            <col v-for="(columnVM, columnIndex) in visibleColumnVMs" :key="columnIndex" :width="columnVM.computedWidth">
+                        </colgroup>
+                        <tbody ref="virtual">
+                            <template v-if="(!currentLoading && !currentError && !currentEmpty || pageable === 'auto-more' || pageable === 'load-more') && currentData && currentData.length">
+                                <template v-for="(item, rowIndex) in virtualList">
+                                    <tr :key="getKey(item, rowIndex)" :id="getKey(item, rowIndex)" :class="[$style.row, (rowIndex !== 0) ? $style.trmask : '']" :color="item.rowColor" :selected="selectable && selectedItem === item"
+                                    v-if="item.display !== 'none'"
+                                    :draggable="rowDraggable && item.draggable || undefined"
+                                    :dragging="isDragging(item)"
+                                    :subrow="!!item.tableTreeItemLevel"
+                                    @dragstart="onDragStart($event, item, rowIndex + virtualIndex)"
+                                    @dragover="onDragOver($event, item, rowIndex + virtualIndex)"
+                                    @click="onClickRow($event, item, rowIndex + virtualIndex)"
+                                    @dblclick="onDblclickRow($event, item, rowIndex + virtualIndex)">
+                                        <u-table-render-td v-for="(columnVM, columnIndex) in visibleColumnVMs"
+                                            v-if="getItemColSpan(item, rowIndex, columnIndex) !== 0 && getItemRowSpan(item, rowIndex, columnIndex) !== 0"
+                                            :key="columnIndex"
+                                            :vm="columnVM"
+                                            :item="getRealItem(item, rowIndex + virtualIndex)"
+                                            :rowIndex="rowIndex + virtualIndex"
+                                            :index="rowIndex + virtualIndex"
+                                            :columnIndex="columnIndex"
+                                            :columnItem="columnVM.columnItem"
+                                            :style="getStyle('td', columnVM)"
+                                            :last-left-fixed="isTdLastLeftFixed(columnVM, columnIndex, visibleColumnVMs, item, rowIndex)"
+                                            :first-right-fixed="isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs)"
+                                            :shadow="(isTdLastLeftFixed(columnVM, columnIndex, visibleColumnVMs, item, rowIndex) && !scrollXStart) || (isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs) && !scrollXEnd)"
+                                            :colspan="getItemColSpan(item, rowIndex, columnIndex)"
+                                            :rowspan="getItemRowSpan(item, rowIndex, columnIndex)"
+                                            :disabled="item.disabled || disabled"
+                                            slotName="cell"
+                                            :slotProps="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex, columnItem: columnVM.columnItem }">
+                                            <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
+                                        </u-table-render-td>
+                                    </tr>
+                                    <u-table-render-tr-expander
+                                        v-if="expanderColumnVM"
+                                        :vm="expanderColumnVM"
+                                        :item="item"
+                                        :visibleColumnVMs="visibleColumnVMs"
+                                        slotName="expand-content"
+                                        :slotProps="{ item, value: $at(item, expanderColumnVM.field), columnVM: expanderColumnVM, rowIndex: rowIndex + virtualIndex, index: rowIndex + virtualIndex }">
+                                    </u-table-render-tr-expander>
+                                </template>
+                            </template>
+                            <tr key="no-data-source" v-if="currentData === undefined && !currentError">
+                                <td :class="$style.center" :colspan="visibleColumnVMs.length">
+                                    请绑定数据源
+                                </td>
+                            </tr>
+                            <tr key="loading" v-else-if="(currentData === undefined && !currentError) || currentLoading"><!-- 初次加载与加载更多 loading 合并在一起 -->
+                                <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="loading">
+                                    <slot name="loading"><u-spinner :class="$style.spinner"></u-spinner> {{ loadingText }}</slot>
+                                </td>
+                            </tr>
+                            <tr key="error" v-else-if="currentData === null || currentError">
+                                <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="error">
+                                    <slot name="error">
+                                        <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
+                                        <u-linear-layout layout="block" justify="center">
+                                            {{ errorText }}
+                                        </u-linear-layout>
+                                    </slot>
+                                </td>
+                            </tr>
+                            <tr key="loadMore" v-else-if="pageable === 'load-more' && currentDataSource.hasMore()">
+                                <td :class="$style.center" :colspan="visibleColumnVMs.length">
+                                    <u-link @click="load(true)">{{ $tt('loadMore') }}</u-link>
+                                </td>
+                            </tr>
+                            <tr key="noMore" v-else-if="((pageable === 'auto-more' && hasScroll) || pageable === 'load-more') && !currentDataSource.hasMore() && (currentData && currentData.length)">
+                                <td :class="$style.center" :colspan="visibleColumnVMs.length">
+                                    {{ $tt('noMore') }}
+                                </td>
+                            </tr>
+                            <tr key="empty" v-else-if="!currentData.length || currentEmpty">
+                                <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="empty">
+                                    <slot name="empty">
+                                        <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
+                                        <u-linear-layout layout="block" justify="center">
+                                            {{ emptyText }}
+                                        </u-linear-layout>
+                                    </slot>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </u-table>
+                    <div ref="virtualPlaceholder" v-if="virtual"></div>
+                </f-scroll-view>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import isNumber from 'lodash/isNumber';
+import FVirtualTable from './f-virtual-table.vue';
+import i18nMixin from '../../mixins/i18n';
+import KeyMap from '../../utils/keyMap';
+import UTableRenderTd from './render.td.vue';
+import UTableRenderTrExpander from './render.tr.expander.vue';
+
+export default {
+    name: 'u-table-render',
+    mixins: [i18nMixin('u-table-view'), FVirtualTable],
+    components: {
+        UTableRenderTd,
+        UTableRenderTrExpander,
+    },
+    props: {
+        tableMetaList: Array,
+        tableWidth: Number,
+        useStickyFixed: Boolean,
+        visibleColumnVMs: Array,
+        visibleTableHeadTrArr: Array,
+        boldHeader: Boolean,
+        hasGroupedColumn: Boolean,
+        thEllipsis: Boolean,
+        disabled: Boolean,
+        readonly: Boolean,
+        resizable: Boolean,
+        filterMultiple: Boolean,
+        filterMax: Number,
+        showHead: { type: Boolean, default: true },
+        stickHead: { type: Boolean, default: false },
+        stickHeadOffset: { type: Number, default: 0 },
+        currentData: Array,
+        currentLoading: Boolean,
+        currentError: Boolean,
+        currentEmpty: Boolean,
+        currentDataSource: Object,
+        virtual: Boolean,
+        pageable: Boolean,
+        tableHeight: Number,
+        bodyHeight: Number,
+        loadingText: String,
+        errorText: String,
+        errorImage: String,
+        emptyText: String,
+        treeDisplay: Boolean,
+        treeColumnIndex: Number,
+        hasChildrenField: String,
+        rowDraggable: Boolean,
+        handlerDraggable: Boolean,
+        selectable: Boolean,
+        selectedItem: Object,
+        valueField: String,
+        ellipsis: Boolean,
+        usePagination: Boolean,
+        loading: Boolean,
+        error: Boolean,
+        empty: Boolean,
+        hasGroupedColumn: Boolean,
+        listKey: String,
+        columnVMsMap: Object,
+        color: String,
+        border: { type: Boolean, default: false },
+        line: { type: Boolean, default: false },
+        striped: { type: Boolean, default: false },
+        loading: { type: Boolean, default: undefined },
+        loadingText: {
+            type: String,
+            default() {
+                return this.$tt('loading');
+            },
+        },
+        error: Boolean,
+        errorText: {
+            type: String,
+            default() {
+                return this.$tt('error');
+            },
+        },
+        emptyText: {
+            type: String,
+            default() {
+                return this.$tt('empty');
+            },
+        },
+        errorImage: {
+            type: String,
+            default: '',
+        },
+        sorting: Object,
+        sortTrigger: { type: String, default: 'head' },
+        defaultOrder: { type: String, default: 'asc' },
+        fixedRightList: Array,
+        fixedLeftList: Array,
+    },
+    data() {
+        return {
+            keyMap: new KeyMap(),
+            scrollXStart: true,
+            scrollXEnd: true,
+            currentSorting: this.sorting,
+            hasScroll: false, // 作为下拉加载是否展示"没有更多"的依据。第一页不满，没有滚动条的情况下，不展示
+        };
+    },
+    inject: [
+        'toggleExpanded',
+        'debouncedLoad',
+        'throttledVirtualScroll',
+        'sort',
+        'filter',
+    ],
+    provide() {
+        return {
+            currentDataSource: this.currentDataSource,
+            toggleExpanded: this.toggleExpanded,
+        };
+    },
+    watch: {
+        'currentDataSource.sorting'(sorting) {
+            this.currentSorting = sorting;
+        },
+    },
+    created() {
+       
+    },
+    updated() {
+       console.log('updated 111111'); 
+    },
+    computed: {
+        expanderColumnVM() {
+            return this.visibleColumnVMs.find((columnVM) => columnVM.type === 'expander');
+        },
+    },
+    methods: {
+        number2Pixel(value) {
+            return isNumber(value) ? value + 'px' : '';
+        },
+        getStyle(type, columnVM) {
+            const style = Object.assign({}, columnVM.$vnode.data && columnVM.$vnode.data.style);
+            const staticStyle = Object.assign({}, columnVM.$vnode.data && columnVM.$vnode.data.staticStyle);
+            if (this.useStickyFixed) {
+                const elZIndex = +this.$el.style.zIndex;
+                // --z-index-layout: 100, 可能用于导航栏fixed，不能大于它
+                const zIndex = elZIndex > 99 ? elZIndex : 99;
+                if (this.fixedLeftList && this.fixedLeftList.length) {
+                    const columnData = this.columnVMsMap[columnVM._uid];
+                    if (columnData) {
+                        const inFixedLeftList = this.isInFixedList(columnVM, this.fixedLeftList);
+                        if (inFixedLeftList) {
+                            let left = columnData.left;
+                            if (type === 'th') {
+                                left = this.getFixedWidth(columnVM, 'left');
+                            }
+                            if (left !== undefined) {
+                                return Object.assign(staticStyle, style, {
+                                    position: 'sticky',
+                                    left: left + 'px',
+                                    zIndex,
+                                    overflow: 'hidden',
+                                });
+                            }
+                        }
+                    }
+                }
+                if (this.fixedRightList && this.fixedRightList.length) {
+                    const columnData = this.columnVMsMap[columnVM._uid];
+                    if (columnData) {
+                        const inFixedRightList = this.isInFixedList(columnVM, this.fixedRightList);
+                        if (inFixedRightList) {
+                            let right = columnData.right;
+                            if (type === 'th') {
+                                right = this.getFixedWidth(columnVM, 'right');
+                            }
+                            if (right !== undefined) {
+                                return Object.assign(staticStyle, style, {
+                                    position: 'sticky',
+                                    right: right + 'px',
+                                    zIndex,
+                                    overflow: 'hidden',
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            return Object.assign(staticStyle, style);
+        },
+        /**
+         * 固定列
+         */
+        /**
+         * 表头固定列需要重新计算左、右距离
+         * @param {*} columnVM 表格列
+         * @param {*} type left｜ right
+         */
+         getFixedWidth(columnVM, type) {
+            const columnData = this.columnVMsMap[columnVM._uid];
+            if (columnData) {
+                let width = columnData[type];
+                // 分组或者有合并列的情况处理
+                if (columnData.columnsInGroup || columnData.cloumnsForColSpanHidden) {
+                    const columnsInGroupWidth = (columnData.columnsInGroup || []).map((columnVM) => {
+                        const columnData = this.columnVMsMap[columnVM._uid];
+                        return columnData[type];
+                    });
+                    const cloumnsForColSpanHiddenWidth = (columnData.cloumnsForColSpanHidden || []).map((columnVM) => {
+                        const columnData = this.columnVMsMap[columnVM._uid];
+                        return columnData[type];
+                    });
+                    const tempWidth = Math.min(...columnsInGroupWidth.concat(cloumnsForColSpanHiddenWidth));
+                    if (type === 'left' && width !== undefined) {
+                        width = Math.min(width, tempWidth);
+                    } else {
+                        width = tempWidth;
+                    }
+                }
+                return width;
+            }
+        },
+        isLastLeftFixed(columnVM, columnIndex, list) {
+            if (!columnVM)
+                return undefined;
+            const inFixedLeftList = this.isInFixedList(columnVM, this.fixedLeftList);
+            let isLastInList = list[columnIndex + 1] && !list[columnIndex + 1].fixed;
+            if (columnVM.$parent.isGroup) {
+                const groupList = this.visibleTableHeadTrArr.find((tableHeadTr) => tableHeadTr.includes(columnVM.$parent));
+                if (groupList) {
+                    const groupVMIndex = groupList.findIndex((groupVM) => groupVM === columnVM.$parent);
+                    const isGroupInLast = this.isLastLeftFixed(columnVM.$parent, groupVMIndex, groupList);
+                    isLastInList = isLastInList && isGroupInLast;
+                }
+            }
+            return inFixedLeftList && isLastInList ? true : undefined;
+        },
+        isTdLastLeftFixed(columnVM, columnIndex, columnVMList, item, rowIndex) {
+            if (!columnVM)
+                return undefined;
+            const colSpan = this.getItemColSpan(item, rowIndex, columnIndex);
+            if (colSpan > 1) {
+                const lastColumnVM = columnVMList[columnIndex + colSpan - 1];
+                return this.isLastLeftFixed(lastColumnVM, columnIndex + colSpan - 1, columnVMList);
+            }
+            return this.isLastLeftFixed(columnVM, columnIndex, columnVMList);
+        },
+        isFirstRightFixed(columnVM, columnIndex, list) {
+            const inFixedRightList = this.isInFixedList(columnVM, this.fixedRightList);
+            let isLastInList = list[columnIndex - 1] && !list[columnIndex - 1].fixed;
+            if (columnVM.$parent.isGroup) {
+                const groupList = this.visibleTableHeadTrArr.find((tableHeadTr) => tableHeadTr.includes(columnVM.$parent));
+                if (groupList) {
+                    const groupVMIndex = groupList.findIndex((groupVM) => groupVM === columnVM.$parent);
+                    const isGroupInLast = this.isFirstRightFixed(columnVM.$parent, groupVMIndex, groupList);
+                    isLastInList = isLastInList && isGroupInLast;
+                }
+            }
+            return inFixedRightList && isLastInList ? true : undefined;
+        },
+        /**
+         * 判断是否在固定列里
+         * @param {*} columnVM
+         * @param {*} list lef｜rightFixedList
+         */
+         isInFixedList(columnVM, list) {
+            const columnData = this.columnVMsMap[columnVM._uid];
+            if (columnData) {
+                if (columnData.columnsInGroup) {
+                    return columnData.columnsInGroup.some((columnVM1) => {
+                        const index = list.findIndex((data) => data.columnVM === columnVM1);
+                        return index !== -1;
+                    });
+                } else {
+                    const index = list.findIndex((data) => data.columnVM === columnVM);
+                    return index !== -1;
+                }
+            }
+        },
+        /**
+         * 选择列
+         * @param {*} value 
+         */
+        checkAll(value) {
+            
+        },
+        /**
+         * 排序
+         */
+        onClickSort(columnVM) {
+            let order;
+            let sorting = this.currentSorting;
+            if (!sorting)
+                sorting = { field: undefined, order: undefined };
+            if (sorting.field === columnVM.field) {
+                if (sorting.order === (columnVM.defaultOrder || this.defaultOrder))
+                    order = sorting.order === 'asc' ? 'desc' : 'asc';
+                else if (sorting.order === undefined)
+                    order = columnVM.defaultOrder || this.defaultOrder;
+                else
+                    order = undefined;
+            } else
+                order = columnVM.defaultOrder || this.defaultOrder;
+            this.sort(order && columnVM.field, order, columnVM.sortCompare);
+        },
+        /**
+         * 过滤
+         * @param {*} field 
+         */
+        isFilterActive(field) {
+            const filtering = this.currentDataSource && this.currentDataSource.filtering;
+            if (!filtering)
+                return undefined;
+            const value = this.$at(filtering, field);
+            return value !== undefined && value !== 'ALL' && value !== 'all';
+        },
+        getFiltersValue(field) {
+            const filtering = this.currentDataSource && this.currentDataSource.filtering;
+            if (!filtering)
+                return undefined;
+            return this.$at(filtering, field);
+        },
+        onSelectFilters(field, $event) {
+            const filtering = { [field]: $event.value };
+            this.filter(filtering);
+        },
+        /**
+         * 表头宽度拖拽
+         */
+        onResizerDragStart($event, columnVM) {
+            this.visibleColumnVMs.forEach((columnVM) => {
+                columnVM.currentWidth = columnVM.computedWidth;
+                columnVM.oldWidth = columnVM.computedWidth;
+            });
+        },
+        onResizerDrag($event, columnVM, index) {
+            const minWidth = this.minColumnWidth;
+            const rootWidth = this.$refs.head[0].children[0].offsetWidth;
+            let beforeWidth = 0;
+            for (let i = 0; i < index; i++)
+                beforeWidth += this.visibleColumnVMs[i].computedWidth;
+            const maxWidth = rootWidth - beforeWidth - (this.visibleColumnVMs.length - 1 - index) * minWidth;
+            const width = Math.max(minWidth, Math.min(columnVM.oldWidth + $event.dragX, maxWidth));
+            let remainingWidth = width - columnVM.computedWidth;
+            columnVM.currentWidth = columnVM.computedWidth = width;
+            if (this.resizeRemaining === 'sequence') {
+                for (let i = index + 1; i < this.visibleColumnVMs.length; i++) {
+                    if (remainingWidth === 0)
+                        break;
+                    const columnVM = this.visibleColumnVMs[i];
+                    if (columnVM.computedWidth - remainingWidth >= minWidth) {
+                        columnVM.currentWidth = columnVM.computedWidth -= remainingWidth;
+                        remainingWidth = 0;
+                    } else {
+                        remainingWidth -= columnVM.computedWidth - minWidth;
+                        columnVM.currentWidth = columnVM.computedWidth = minWidth;
+                    }
+                }
+            } else if (this.resizeRemaining === 'average') {
+                /* eslint-disable no-inner-declarations */
+                function distributeInAverage(columnVMs) {
+                    const averageWidth = remainingWidth / columnVMs.length;
+                    const wideColumnVMs = [];
+                    columnVMs.forEach((columnVM) => {
+                        if (columnVM.computedWidth - averageWidth >= minWidth) {
+                            columnVM.currentWidth = columnVM.computedWidth -= averageWidth;
+                            remainingWidth -= averageWidth;
+                            wideColumnVMs.push(columnVM);
+                        } else {
+                            remainingWidth -= columnVM.computedWidth - minWidth;
+                            columnVM.currentWidth = columnVM.computedWidth = minWidth;
+                        }
+                    });
+                    if (Math.abs(remainingWidth) >= 1 && wideColumnVMs.length)
+                        distributeInAverage(wideColumnVMs);
+                }
+                distributeInAverage(this.visibleColumnVMs.slice(index + 1));
+                columnVM.currentWidth = columnVM.computedWidth -= remainingWidth;
+            }
+            $event.transferEl.style.left = '';
+        },
+        onResizerDragEnd($event, columnVM, index) {
+            this.reHandleResize();
+            this.$emit('resize', {
+                columnVM,
+                index,
+                width: columnVM.computedWidth,
+                oldWidth: columnVM.oldWidth,
+            });
+        },
+        /**
+         * 滚动相关处理
+         */
+        onBodyScroll(e) {
+            this.syncBodyScroll(e.target.scrollTop, e.target); // this.throttledVirtualScroll(e);
+            this.$refs.head[0].scrollLeft = e.target.scrollLeft;
+            this.scrollXStart = e.target.scrollLeft === 0;
+            this.scrollXEnd = e.target.scrollLeft >= e.target.scrollWidth - e.target.clientWidth;
+            if (this.pageable !== 'auto-more' || this.currentLoading)
+                return;
+            const el = e.target;
+            if (el.scrollHeight === el.scrollTop + el.clientHeight && this.currentDataSource && this.currentDataSource.hasMore())
+                this.debouncedLoad(true);
+        },
+        syncBodyScroll(scrollTop, target) {
+            if (!this.useStickyFixed) {
+                this.$refs.body[0]
+                    && this.$refs.body[0] !== target
+                    && (this.$refs.body[0].scrollTop = scrollTop);
+                this.$refs.body[1]
+                    && this.$refs.body[1] !== target
+                    && (this.$refs.body[1].scrollTop = scrollTop);
+                this.$refs.body[2]
+                    && this.$refs.body[2] !== target
+                    && (this.$refs.body[2].scrollTop = scrollTop);
+            }
+        },
+        onTableScroll(e) {
+            this.scrollXStart = e.target.scrollLeft === 0;
+            this.scrollXEnd = e.target.scrollLeft >= e.target.scrollWidth - e.target.clientWidth;
+        },
+        onScrollView(data) {
+            this.hasScroll = true;
+            if (!this.useStickyFixed) {
+                this.syncScrollViewScroll(data.scrollTop, data.target);
+            }
+            if (this.virtual)
+                this.throttledVirtualScroll(data);
+            if (this.$refs.scrollView[0].$refs.wrap === data.target) {
+                this.$refs.head[0].scrollLeft = data.scrollLeft;
+                this.scrollXStart = data.scrollLeft === 0;
+                this.scrollXEnd = data.scrollLeft >= data.scrollWidth - data.clientWidth;
+                if (this.pageable !== 'auto-more' || this.currentLoading)
+                    return;
+                if (data.scrollHeight === data.scrollTop + data.clientHeight && this.currentDataSource && this.currentDataSource.hasMore())
+                    this.debouncedLoad(true);
+            }
+        },
+        syncScrollViewScroll(scrollTop, target) {
+            this.$refs.scrollView[0]
+                && this.$refs.scrollView[0].$refs.wrap !== target
+                && (this.$refs.scrollView[0].$refs.wrap.scrollTop = scrollTop);
+            this.$refs.scrollView[1]
+                && this.$refs.scrollView[1].$refs.wrap !== target
+                && (this.$refs.scrollView[1].$refs.wrap.scrollTop = scrollTop);
+            this.$refs.scrollView[2]
+                && this.$refs.scrollView[2].$refs.wrap !== target
+                && (this.$refs.scrollView[2].$refs.wrap.scrollTop = scrollTop);
+        },
+        getKey(item, index) {
+            return typeof item === 'object' ? this.keyMap.getKey(item) : index;
+        },
+        onClickRow(event, item, rowIndex) {
+            
+        },
+        onDblclickRow(event, item, rowIndex) {
+            
+        },
+        onDragStart(event, item, rowIndex) {
+            
+        },
+        onDragOver(event, item, rowIndex) {
+            
+        },
+        isDragging(item) {
+            
+        },
+        select(item, rowIndex) {
+            
+        },
+        check(item, value) {
+            
+        },
+        // toggleExpanded(item) {
+            
+        // },
+        toggleTreeExpanded(item) {
+            
+        },
+        isSimpleArray(arr) {
+            if (!Array.isArray(arr)) {
+                return false; // 如果不是数组类型，则不满足条件，直接返回 false
+            }
+            return arr.every((item) =>
+                typeof item !== 'object', // 使用 typeof 判断是否为简单数据类型
+            );
+        },
+        getRealItem(item, rowIndex) {
+            const data = (this.isSimpleArray(this.currentDataSource.data) && this.currentDataSource.data.length > 0) ? (this.currentDataSource.arrangedData[rowIndex] && this.currentDataSource.arrangedData[rowIndex].simple) : item;
+            // 给u-table-view-expander用
+            try {
+                data.toggle = () => this.toggleExpanded(data);
+            } catch (error) {
+                console.warn('当前data不是一个对象');
+            }
+            return data;
+        },
+        getItemColSpan(item, rowIndex, columnIndex) {
+            
+        },
+        getItemRowSpan(item, rowIndex, columnIndex) {
+            
+        },
+        getTdEllipsis(columnVM) {
+            
+        },
+        getEditablewrapWidth(item, columnIndex, treeColumnIndex) {
+            
+        },
+        onSetEditing(item, columnVM) {
+            
+        },
+    },
+};
+</script>
+
+<style module>
+.table {
+    overflow-x: var(--table-view-overflow-x);
+    overflow-y: hidden;
+    max-height: inherit;
+    position: relative;
+}
+
+.table[position="left"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    background: var(--table-view-table-background);
+}
+
+.table[position="left"][shadow] {
+    box-shadow: var(--table-view-table-shadow);
+}
+
+.table[position="right"] {
+    position: absolute;
+    right: 0;
+    top: 0;
+    overflow: hidden;
+    background: var(--table-view-table-background);
+}
+
+.table[position="right"][shadow] {
+    box-shadow: var(--table-view-table-right-shadow);
+}
+
+.table[position="right"] > *,
+.table[position="right"] .head-table {
+    float: right;
+}
+
+.expand-td {
+    background-color: #f9f9f9;
+}
+/**
+ * 头部
+ */
+.head {
+    width: 100%;
+    overflow-x:hidden;
+    overflow-y: hidden;
+}
+.head::-webkit-scrollbar {
+    height: 0;
+}
+
+.head[stickingHead] {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    z-index: 200;
+    box-shadow: var(--table-view-table-top-shadow);
+}
+
+.headPlaceholder {
+    width: 100%;
+}
+
+.head-title {
+    position: relative;
+}
+
+.head-title[sortable]:hover {
+    background: var(--table-view-head-title-sortable-hover);
+    cursor: pointer;
+}
+.head-title[sortable]:hover .sort{
+    color: var(--table-view-sort-color-hover);
+}
+
+.head-title.boldHeader {
+    font-weight: bold;
+}
+.head-title[last-left-fixed]::after,
+.head-title[first-right-fixed]::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 6px;
+    bottom: -1px;
+    width: 6px;
+    pointer-events: none;
+    transform: translateX(-100%);
+    transition: box-shadow .1s linear;
+    box-shadow: none;
+    display:block;
+}
+.head-title[last-left-fixed]::after {
+    left: unset;
+    transform: translateX(100%);
+    right: 6px;
+}
+.head-title[shadow][last-left-fixed]::after {
+    box-shadow: inset -4px 0 5px -3px rgb(0 0 0 / 15%);
+}
+.head-title[shadow][first-right-fixed]::after {
+    box-shadow: inset 3px 0 5px -3px rgb(0 0 0 / 15%);
+}
+
+.head-title[disabled] {
+    color: var(--text-color-disabled);
+    background-color: var(--table-view-expander-background-disabled);
+}
+
+.head-title[ellipsis] * {
+    white-space: nowrap;
+}
+.head-title[ellipsis] div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.head-title[ellipsis] .column-title {
+    max-width:100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+}
+.head-title[filterable][ellipsis]:not([sortable]) .column-title,
+.head-title[sortable][ellipsis]:not([filterable]) .column-title {
+    max-width: calc(100% - 20px);
+}
+.head-title[sortable][filterable][ellipsis] .column-title {
+    max-width: calc(100% - 40px);
+}
+.head-title[ellipsis] .column-title + .sort,
+.head-title[ellipsis] .column-title + .filter-wrap
+ {
+    vertical-align: middle;
+}
+/* 为了文字和排序按钮对齐 */
+.head-title[ellipsis]::before {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+}
+
+/**
+ * 行
+ */
+.row[selected],
+.row[selected] td {
+    background: var(--table-view-row-selected-background) !important;
+}
+.row[selected] td{
+    box-shadow: inset 0px 1px 0px 0px var(--table-view-row-selected-border-color),
+        inset 0px -1px 0px 0px var(--table-view-row-selected-border-color);
+}
+.row[selected] td:first-child{
+    box-shadow: inset 0px 1px 0px 0px var(--table-view-row-selected-border-color),
+        inset 0px -1px 0px 0px var(--table-view-row-selected-border-color),
+        inset 1px 0px 0px 0px var(--table-view-row-selected-border-color);
+}
+.row[selected] td:last-child{
+    box-shadow: inset 0px 1px 0px 0px var(--table-view-row-selected-border-color),
+        inset 0px -1px 0px 0px var(--table-view-row-selected-border-color),
+        inset -1px 0px 0px 0px var(--table-view-row-selected-border-color);
+}
+.row[draggable="true"] {
+    cursor: var(--table-view-drag-cursor);
+}
+.row[dragging="true"] td {
+    background: var(--table-view-row-background-dragging);
+}
+.row[dragging="true"][subrow] td {
+    background: var(--table-view-subrow-background-dragging);
+}
+
+/**
+ * 状态
+ */
+.center {
+    text-align: center;
+    color: #999 !important;
+}
+
+/**
+ * 排序icon
+ */
+ .sort {
+    position: relative;
+    display: inline-block;
+    width: var(--table-view-sort-size);
+    height: var(--table-view-sort-size);
+    vertical-align: -1px;
+    color: var(--table-view-sort-color);
+    cursor: var(--cursor-pointer);
+    margin-left: 5px;
+}
+.sort::before {
+    position: absolute;
+    left: 0;
+    top: -3px;
+    line-height: 1;
+content: "\e672";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+.sort::after {
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    line-height: 1;
+content: "\e66c";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+.sort[sorting][order="asc"]::before {
+    color: var(--table-view-sort-color-active);
+}
+.sort[sorting][order="desc"]::after {
+    color: var(--table-view-sort-color-active);
+}
+
+/**
+ * filters
+ */
+ .filter-wrap {
+    cursor: var(--cursor-pointer);
+    padding-bottom: 6px;
+    margin-bottom: -6px;
+    color: var(--table-view-sort-color);
+    margin-left: 5px;
+}
+.filter-wrap:hover{
+    color: var(--table-view-filter-color-hover);
+}
+.filter-wrap::before {
+content: "\e665";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    color: inherit;
+    font-size: var(--font-size-small);
+}
+.filter-wrap[active] {
+    color: var(--table-view-filter-color-active);
+}
+
+/**
+ * f-scroll-view 滚动相关
+ */
+.scrollcview {
+    width: 100%;
+    height: 100%;
+}
+.scrollcview[native="true"][hide-scroll] [class^="f-scroll-view_wrap__"]{
+    overflow-x: hidden;
+}
+.scrollcview[native="true"][hide-scroll] [class^="f-scroll-view_wrap__"]::-webkit-scrollbar {
+    width: 0;
+}
+
+/** fix 固定列滚动条看不见 */
+.scrollcview [class^="f-scroll-view_wrap__"] {
+    position: relative;
+    z-index: 0;
+}
+
+</style>
