@@ -107,7 +107,7 @@
       "dataSource": {
         "dismiss": "!this.getAttribute('dataSource') && (this.filterElement(el => el.tag !== 'template').length > 0)",
         "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
-        "loopElem": "> label.ant-checkbox-wrapper",
+        "loopElem": "> label.cw-checkbox-wrapper",
         "emptySlot": {
           "display": "inline",
           "condition": "!this.getAttribute('dataSource')",
@@ -122,7 +122,7 @@
       "idetype": "container",
       "selector": {
         "expression": "this",
-        "cssSelector": "label.ant-checkbox-wrapper"
+        "cssSelector": "label.cw-checkbox-wrapper"
       }
     }
   },
@@ -132,7 +132,7 @@
       "idetype": "container",
       "selector": {
         "expression": "this",
-        "cssSelector": "label.ant-radio-wrapper"
+        "cssSelector": "label.cw-radio-wrapper"
       }
     }
   },
@@ -145,7 +145,7 @@
       "dataSource": {
         "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
         "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
-        "loopElem": "> label.ant-radio-wrapper",
+        "loopElem": "> label.cw-radio-wrapper",
         "emptySlot": {
           "display": "inline",
           "condition": "!this.getAttribute('dataSource')",
@@ -189,7 +189,7 @@
       "parentAccept": "target.tag === 'Descriptions'",
       "selector": {
         "expression": "this",
-        "cssSelector": ".ant-descriptions-item"
+        "cssSelector": ".cw-descriptions-item"
       }
     }
   },
@@ -289,11 +289,11 @@
       "selector": [
         {
           "expression": "this.getElement(el => el.slotTarget === 'tab')",
-          "cssSelector": ".ant-tabs-tab"
+          "cssSelector": ".cw-tabs-tab"
         },
         {
           "expression": "this",
-          "cssSelector": ".ant-tabs-tabpane"
+          "cssSelector": ".cw-tabs-tabpane"
         }
       ],
       "actions": {
@@ -377,7 +377,7 @@
       "idetype": "modal",
       "selector": {
         "expression": "this",
-        "cssSelector": "div[class='ant-modal-content']"
+        "cssSelector": "div[class='cw-modal-content']"
       },
       "additionalAttribute": {
         "transitionName": "''",
@@ -392,7 +392,7 @@
       "idetype": "modal",
       "selector": {
         "expression": "this",
-        "cssSelector": "div[class='ant-drawer-content']"
+        "cssSelector": "div[class='cw-drawer-content']"
       },
       "additionalAttribute": {
         "transitionName": "''",
@@ -407,7 +407,7 @@
       "idetype": "modal",
       "selector": {
         "expression": "this",
-        "cssSelector": "div[class='ant-drawer-wrapper-body']"
+        "cssSelector": "div[class='cw-drawer-wrapper-body']"
       }
     }
   },
@@ -417,7 +417,7 @@
       "idetype": "popover",
       "selector": {
         "expression": "this.getElement(el => el.slotTarget === 'content')",
-        "cssSelector": "div[class='ant-popover-content']"
+        "cssSelector": "div[class='cw-popover-content']"
       },
       "actions": {
         "click": {
@@ -509,7 +509,7 @@
       "idetype": "popover",
       "selector": {
         "expression": "this.getElement(el => el.slotTarget === 'default' || !el.slotTarget)",
-        "cssSelector": "div[class='ant-menu-submenu-popup']"
+        "cssSelector": "div[class='cw-menu-submenu-popup']"
       },
       "actions": {
         "click": {
