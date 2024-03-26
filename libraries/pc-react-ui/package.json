@@ -27,6 +27,7 @@
     "test:coverage": "vitest run --coverage",
     "preview": "vite preview",
     "build:storybook": "storybook build",
+    "screenshot": "npm run storybook && lcap-scripts screenshot",
     "mergeusage": "node ./usage-script.js > nasl.ui.json"
   },
   "keywords": [
