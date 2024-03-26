@@ -374,7 +374,7 @@ namespace nasl.ui {
       title: '表单值改变',
       description: '表单值改变后',
     })
-    onValuesChange: (changedValues, allValues) => any;
+    onValuesChange: (changedValues: any, allValues: any) => any;
 
     @Event({
       title: '提交表单且数据验证成功后',

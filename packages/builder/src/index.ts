@@ -1,4 +1,5 @@
 import lcapPlugin from './plugins';
+import { createGenScopedName } from './utils/create-gen-scoped-name';
 
 export type {
   ThemeInfo,
@@ -14,4 +15,5 @@ export {
 } from './nasl';
 export {
   lcapPlugin,
+  createGenScopedName,
 };

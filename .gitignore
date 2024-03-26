@@ -25,3 +25,6 @@ changelog.generated.md
 vetur
 
 *.tgz
+
+# other library
+element-ui
