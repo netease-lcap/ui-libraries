@@ -10,6 +10,13 @@ module.exports = {
     },
     {
       group: 'Form',
+      name: 'QueryForm',
+      alias: '查询表单',
+      show: false,
+      apiPath: 'Form/blocks-api/query-form.api.ts',
+    },
+    {
+      group: 'Form',
       name: 'FormItem',
       alias: '表单项',
       show: false,

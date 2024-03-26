@@ -246,6 +246,12 @@
     }
   },
   {
+    "name": "QueryForm",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
     "name": "FormItem",
     "ideusage": {
       "idetype": "container",
