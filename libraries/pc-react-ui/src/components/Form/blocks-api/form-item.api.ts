@@ -13,16 +13,11 @@ namespace nasl.ui {
 
   export class FormItemOptions extends ViewComponentOptions {
     @Prop({
-      title: '字段名称',
-      description: '表单项名称。',
-    })
-    name: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
+      group: '基础信息',
       title: '标题自定义',
       description: '开启标题自定义后,标题去会变成插槽,可以自由拖入组件定义标题',
-      docDescription: '开启标题自定义后,标题去会变成插槽,可以自由拖入组件定义标题',
+      docDescription:
+        '开启标题自定义后,标题去会变成插槽,可以自由拖入组件定义标题',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -30,19 +25,30 @@ namespace nasl.ui {
     labelIsSlot: nasl.core.Boolean = false;
 
     @Prop<FormItemOptions, 'labelText'>({
-      group: '主要属性',
+      group: '基础信息',
       title: '标题',
       docDescription: '选择分组的标题，标题只有在没有文本插槽的时候生效',
       if: (_) => _.labelIsSlot === false,
     })
-    labelText: nasl.core.String;
+    labelText: nasl.core.String = '表单项名称';
+
+    @Prop({
+      group: '基础信息',
+      title: '字段名称',
+      description: '表单项名称。',
+    })
+    name: nasl.core.String;
 
     @Prop({
       title: '验证是否静默',
       description: '验证是否静默',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '只静默消息提示' }, { title: '同时静默消息提示和红框提示' }, { title: '不作处理' }],
+        options: [
+          { title: '只静默消息提示' },
+          { title: '同时静默消息提示和红框提示' },
+          { title: '不作处理' },
+        ],
       },
     })
     private muted: 'message' | 'all' | 'none' = 'none';
@@ -67,8 +73,10 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '必填标记',
-      description: '是否必填。仅显示样式，如果要验证必填项，需要在`rules`中添加必填规则。',
-      docDescription: '是否必填。仅显示样式，如果要验证必填项，需要在rules中添加必填规则。',
+      description:
+        '是否必填。仅显示样式，如果要验证必填项，需要在`rules`中添加必填规则。',
+      docDescription:
+        '是否必填。仅显示样式，如果要验证必填项，需要在rules中添加必填规则。',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -86,17 +94,55 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '验证规则',
-      description: '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型',
-      docDescription: '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型，详见[验证规则](#验证规则)。',
+      description:
+        '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型',
+      docDescription:
+        '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型，详见[验证规则](#验证规则)。',
       bindHide: true,
     })
     rules: nasl.core.String;
 
-    @Slot({
-      title: '默认',
-      description: '插入文本或 HTML。',
+    @Prop({
+      group: '样式属性',
+      title: '尺寸',
+      description: '设置表单项大小',
+      docDescription: '设置表单项大小',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '超小' },
+          { title: '小' },
+          { title: '正常' },
+          { title: '大' },
+          { title: '超大' },
+          { title: '充满' },
+        ],
+      },
     })
-    slotDefault: () => Array<ViewComponent>;
+    width: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '100%';
+
+    @Prop({
+      group: '样式属性',
+      title: '标签宽度',
+      description: '标签宽度',
+      docDescription: '标签宽度',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    labelWidth?: nasl.core.Decimal = undefined;
+
+    @Prop({
+      group: '样式属性',
+      title: '标签布局',
+      description: '标签布局',
+      docDescription: '标签布局',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '左对齐' }, { title: '右对齐' }],
+      },
+    })
+    labelAlign?: 'left' | 'right' = 'right';
 
     @Slot({
       title: '标签自定义',

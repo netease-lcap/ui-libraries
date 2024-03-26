@@ -2,10 +2,8 @@
 
 namespace nasl.ui {
   @Component({
-    title: '时间范围选择',
-    icon: 'time-picker',
+    title: '表单时间范围选择',
     description: '时间范围选择',
-    group: 'Selector',
   })
   export class FormTimeRangePicker extends ViewComponent {
     constructor(options?: Partial<FormTimeRangePickerOptions & FormItemOptions>) {

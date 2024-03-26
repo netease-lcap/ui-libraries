@@ -27,6 +27,7 @@ export const Form = registerComponet<
 );
 Form.defaultProps = {
   layout: 'horizontal',
+  autoFocusFirstInput: false,
 };
 
 export const FormItem = registerComponet<
@@ -42,7 +43,7 @@ export const QueryForm = registerComponet<
   QueryFilterProps
 >(
   QueryFilter,
-  { plugin: queryFromPlugin, displayName: 'QueryForm', mapProps },
+  { plugin, displayName: 'QueryForm', mapProps },
 );
 
 export const FormList = AntdForm.List;

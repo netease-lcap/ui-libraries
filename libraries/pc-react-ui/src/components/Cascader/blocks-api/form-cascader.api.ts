@@ -2,10 +2,8 @@
 
 namespace nasl.ui {
   @Component({
-    title: '级联选择',
-    icon: 'cascade-select',
+    title: '表单级联选择',
     description: '一次选择多个相关联的项',
-    group: 'Selector',
   })
   export class FormCascader<T, V> extends ViewComponent {
     @Prop({

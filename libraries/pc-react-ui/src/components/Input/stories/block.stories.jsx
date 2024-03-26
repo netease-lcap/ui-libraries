@@ -24,6 +24,6 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: () => {
-    return <Input />;
+    return <Input labelText="表单输入框" />;
   },
 };

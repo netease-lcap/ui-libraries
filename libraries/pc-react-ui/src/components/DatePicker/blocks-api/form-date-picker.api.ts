@@ -2,10 +2,8 @@
 
 namespace nasl.ui {
   @Component({
-    title: '日期选择',
-    icon: 'date-picker',
+    title: '表单日期选择',
     description: '日期选择',
-    group: 'Selector',
   })
   export class FormDatePicker extends ViewComponent {
     constructor(options?: Partial<FormDatePickerOptions & FormItemOptions>) {

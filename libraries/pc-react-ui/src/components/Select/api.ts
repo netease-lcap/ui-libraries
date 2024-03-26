@@ -203,8 +203,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '样式属性',
-      title: '宽度',
-      description: '设置选择框宽度大小',
+      title: '选择框大小',
+      description: '选择框大小',
       docDescription: '设置选择框宽度大小，支持大、中、小共3种模式',
       setter: {
         concept: 'EnumSelectSetter',

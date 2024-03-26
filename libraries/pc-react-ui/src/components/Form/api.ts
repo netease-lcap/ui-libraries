@@ -119,7 +119,7 @@ namespace nasl.ui {
       },
       onChange: [{ clear: ['repeat'] }],
     })
-    layout: 'inline' | 'horizontal' | 'vertical' = 'inline';
+    layout: 'inline' | 'horizontal' | 'vertical' = 'horizontal';
 
     @Prop({
       group: '样式属性',
@@ -135,29 +135,59 @@ namespace nasl.ui {
 
     @Prop({
       group: '样式属性',
+      title: '标签宽度',
+      description: '标签宽度',
+      docDescription: '标签宽度',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    labelWidth?: nasl.core.Decimal = undefined;
+
+    @Prop({
+      group: '样式属性',
       title: '标签布局',
       description: '标签布局',
       docDescription: '标签布局',
       setter: {
-        max: 24,
-        min: 0,
-        concept: 'NumberInputSetter',
+        concept: 'EnumSelectSetter',
+        options: [{ title: '左对齐' }, { title: '右对齐' }],
       },
     })
-    labelColSpan?: nasl.core.Decimal = undefined;
+    labelAlign?: 'left' | 'right' = 'right';
 
     @Prop({
       group: '样式属性',
-      title: '控件布局',
-      description: '入控件设置布局样式',
-      docDescription: '入控件设置布局样式',
+      title: '尺寸',
+      description: '设置表单项大小',
+      docDescription: '设置表单项大小',
       setter: {
-        max: 24,
-        min: 0,
-        concept: 'NumberInputSetter',
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '超小' },
+          { title: '小' },
+          { title: '正常' },
+          { title: '大' },
+          { title: '超大' },
+          { title: '充满' },
+        ],
       },
     })
-    wrapperColSpan?: nasl.core.Decimal = undefined;
+    width: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '100%';
+
+
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '控件布局',
+    //   description: '入控件设置布局样式',
+    //   docDescription: '入控件设置布局样式',
+    //   setter: {
+    //     max: 24,
+    //     min: 0,
+    //     concept: 'NumberInputSetter',
+    //   },
+    // })
+    // wrapperColSpan?: nasl.core.Decimal = undefined;
 
     @Prop({
       group: '样式属性',
@@ -171,99 +201,123 @@ namespace nasl.ui {
     })
     gutterAlign: nasl.core.Decimal = 0;
 
-    @Prop<FormOptions, 'justify'>({
-      group: '主要属性',
-      title: '主轴对齐',
-      docDescription: `设置元素在主轴方向上的对齐方式	：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布，。 `,
-      bindHide: true,
-      setter: {
-        concept: 'CapsulesSetter',
-        options: [
-          {
-            title: '左对齐',
-            icon: 'horizontal-justify-start',
-            tooltip: '左对齐',
-          },
-          {
-            title: '居中对齐',
-            icon: 'horizontal-justify-center',
-            tooltip: '居中对齐',
-          },
-          {
-            title: '右对齐',
-            icon: 'horizontal-justify-end',
-            tooltip: '右对齐',
-          },
-          {
-            title: '平均分布(两端不留空)',
-            icon: 'horizontal-justify-space-between',
-            tooltip: '平均分布(两端不留空)',
-          },
-          {
-            title: '平均分布',
-            icon: 'horizontal-justify-space-around',
-            tooltip: '平均分布',
-          },
-        ],
-      },
-      tabKind: 'style',
-    })
-    justify: 'start' | 'center' | 'end' | 'space-between' | 'space-around' =
-      'start';
-
-    @Prop<FormOptions, 'alignment'>({
-      group: '主要属性',
-      title: '交叉轴对齐',
-      docDescription: `设置元素在交叉轴方向上的对齐方式：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。`,
-      bindHide: true,
-      setter: {
-        concept: 'CapsulesSetter',
-        options: [
-          {
-            title: '顶对齐',
-            icon: 'horizontal-alignment-start',
-            tooltip: '顶对齐',
-          },
-          {
-            title: '垂直居中',
-            icon: 'horizontal-alignment-center',
-            tooltip: '垂直居中',
-          },
-          {
-            title: '底对齐',
-            icon: 'horizontal-alignment-end',
-            tooltip: '底对齐',
-          },
-          {
-            title: '行内文字基线对齐',
-            icon: 'horizontal-alignment-baseline',
-            tooltip: '行内文字基线对齐',
-          },
-          {
-            title: '占满容器高度',
-            icon: 'horizontal-alignment-stretch',
-            tooltip: '占满容器高度',
-          },
-        ],
-      },
-      tabKind: 'style',
-    })
-    alignment: 'start' | 'center' | 'end' | 'baseline' | 'stretch' = 'stretch';
-
-    @Prop<FormOptions, 'wrap'>({
-      group: '主要属性',
-      title: '换行',
-      description: '设置弹性布局下子元素总宽度超出父级时子元素是否换行展示',
+    @Prop({
+      group: '样式属性',
+      title: '表单项栅格数',
+      description: '表单项栅格数',
       docDescription:
-        '支持控制弹性布局模式下，子元素总宽度超过父级时是否换行展示，默认开启。',
+        '表单项栅格数',
       setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '换行' }, { title: '不换行' }],
+        min: 0,
+        max: 24,
+        concept: 'NumberInputSetter',
       },
-      tabKind: 'style',
     })
-    wrap: 'wrap' | 'nowrap' = 'wrap';
+    span: nasl.core.Decimal = 0;
 
+    // @Prop<FormOptions, 'justify'>({
+    //   group: '主要属性',
+    //   title: '主轴对齐',
+    //   docDescription: `设置元素在主轴方向上的对齐方式	：支持左对齐、居中对齐、右对齐、平均分布（两端不留空）、平均分布，。 `,
+    //   bindHide: true,
+    //   setter: {
+    //     concept: 'CapsulesSetter',
+    //     options: [
+    //       {
+    //         title: '左对齐',
+    //         icon: 'horizontal-justify-start',
+    //         tooltip: '左对齐',
+    //       },
+    //       {
+    //         title: '居中对齐',
+    //         icon: 'horizontal-justify-center',
+    //         tooltip: '居中对齐',
+    //       },
+    //       {
+    //         title: '右对齐',
+    //         icon: 'horizontal-justify-end',
+    //         tooltip: '右对齐',
+    //       },
+    //       {
+    //         title: '平均分布(两端不留空)',
+    //         icon: 'horizontal-justify-space-between',
+    //         tooltip: '平均分布(两端不留空)',
+    //       },
+    //       {
+    //         title: '平均分布',
+    //         icon: 'horizontal-justify-space-around',
+    //         tooltip: '平均分布',
+    //       },
+    //     ],
+    //   },
+    //   tabKind: 'style',
+    // })
+    // justify: 'start' | 'center' | 'end' | 'space-between' | 'space-around' =
+    //   'start';
+
+    // @Prop<FormOptions, 'alignment'>({
+    //   group: '主要属性',
+    //   title: '交叉轴对齐',
+    //   docDescription: `设置元素在交叉轴方向上的对齐方式：支持顶对齐、垂直居中、底对齐、行内文字基线对齐、占满容器高度。`,
+    //   bindHide: true,
+    //   setter: {
+    //     concept: 'CapsulesSetter',
+    //     options: [
+    //       {
+    //         title: '顶对齐',
+    //         icon: 'horizontal-alignment-start',
+    //         tooltip: '顶对齐',
+    //       },
+    //       {
+    //         title: '垂直居中',
+    //         icon: 'horizontal-alignment-center',
+    //         tooltip: '垂直居中',
+    //       },
+    //       {
+    //         title: '底对齐',
+    //         icon: 'horizontal-alignment-end',
+    //         tooltip: '底对齐',
+    //       },
+    //       {
+    //         title: '行内文字基线对齐',
+    //         icon: 'horizontal-alignment-baseline',
+    //         tooltip: '行内文字基线对齐',
+    //       },
+    //       {
+    //         title: '占满容器高度',
+    //         icon: 'horizontal-alignment-stretch',
+    //         tooltip: '占满容器高度',
+    //       },
+    //     ],
+    //   },
+    //   tabKind: 'style',
+    // })
+    // alignment: 'start' | 'center' | 'end' | 'baseline' | 'stretch' = 'stretch';
+
+    // @Prop<FormOptions, 'wrap'>({
+    //   group: '主要属性',
+    //   title: '换行',
+    //   description: '设置弹性布局下子元素总宽度超出父级时子元素是否换行展示',
+    //   docDescription:
+    //     '支持控制弹性布局模式下，子元素总宽度超过父级时是否换行展示，默认开启。',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '换行' }, { title: '不换行' }],
+    //   },
+    //   tabKind: 'style',
+    // })
+    // wrap: 'wrap' | 'nowrap' = 'wrap';
+
+    @Prop({
+      group: '状态属性',
+      title: '使用默认提交',
+      description: '显示预览态',
+      docDescription: '',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    submitter: nasl.core.Boolean = true;
     // @Prop({
     //   group: '主要属性',
     //   title: '标签布局',
@@ -322,17 +376,6 @@ namespace nasl.ui {
     //     })
     //     expandTrigger: 'click' | 'click-expander' = 'click';
 
-    // @Prop({
-    //   group: '状态属性',
-    //   title: '预览',
-    //   description: '显示预览态',
-    //   docDescription: '',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    // })
-    // preview: nasl.core.Boolean = false;
-
     // @Prop<FormOptions, 'gapWidth'>({
     //   group: '样式属性',
     //   title: '列间隔',
@@ -374,7 +417,7 @@ namespace nasl.ui {
       title: '表单值改变',
       description: '表单值改变后',
     })
-    onValuesChange: (changedValues, allValues) => any;
+    onValuesChange: (changedValues: any, allValues: any) => any;
 
     @Event({
       title: '提交表单且数据验证成功后',

@@ -3,7 +3,7 @@ import _ from 'lodash';
 import React from 'react';
 import { useControllableValue } from 'ahooks';
 import { $deletePropsList } from '@/plugins/constants';
-import FormContext, { QueryFormContext } from '@/components/Form/form-context';
+import FormContext from '@/components/Form/form-context';
 import { Col, FormItem } from '@/index';
 import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
 import { COLPROPSFIELDS } from '@/components/Row/constants';
@@ -57,40 +57,23 @@ export function useHandleDataSource(props) {
   };
 }
 
-function useHandleFormWarp(props) {
-  const { isForm } = React.useContext(FormContext);
-  const BaseComponent = props.get('render');
-  const FormCascader = React.useCallback((selfProps) => {
-    const nodepath = selfProps['data-nodepath'];
-    return (
-      <Col
-        span={24}
-        {..._.pick(selfProps, COLPROPSFIELDS)}
-        data-nodepath={nodepath}
-        data-tag-name="FormCascader"
-        data-has-mutation="true"
-      >
-        <FormItem {..._.pick(selfProps, FORMITEMPROPSFIELDS)}>
-          <BaseComponent {..._.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS, 'data-nodepath', 'children'])} />
-        </FormItem>
-      </Col>
-    );
-  }, [BaseComponent]);
-  const render = isForm ? FormCascader : BaseComponent;
-  return {
-    render,
-  };
-}
-
-export function useHandleFormWarplabel(props) {
+function useHandleFormWarplabel(props) {
+  const { width, isForm, colSpan } = React.useContext(FormContext);
   const deletePropsList = props.get($deletePropsList).concat('labelIsSlot', 'labelText');
   const labelIsSlot = props.get('labelIsSlot');
   const labelProps = props.get('label');
   const labelText = props.get('labelText');
+  const labelWidth = props.get('labelWidth');
+  const spanProps = props.get('span');
+  const labelCol = _.isNil(labelWidth) ? {} : { labelCol: { flex: `${labelWidth}px` } };
   const label = labelIsSlot ? labelProps : labelText;
+  const span = _.defaults({ span: spanProps }, { span: colSpan });
+  const formResult = isForm ? {
+    width, label, ...labelCol, ...span,
+  } : {};
   return {
     [$deletePropsList]: deletePropsList,
-    label,
+    ...formResult,
   };
 }
 export function useHandleFormItemProps(props) {

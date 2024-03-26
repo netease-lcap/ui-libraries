@@ -30,7 +30,6 @@ export const 异步函数 = {
     console.log(ref, 'ref');
     React.useEffect(() => {
       console.log(ref, 'ref');
-      console.log(args);
     }, []);
     return (
       <div>

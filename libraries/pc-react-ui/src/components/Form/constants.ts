@@ -12,4 +12,6 @@ export const FORMITEMPROPSFIELDS = [
   'hidden',
   'colProps',
   'className',
+  'labelCol',
+  'labelAlign',
 ];

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form as AntdForm, InputNumber } from 'antd';
+import { Form as AntdForm } from 'antd';
 
 import {
   ProForm,
@@ -13,7 +13,12 @@ import {
   Form,
   FormItem,
   Text,
+  TextArea,
   Select,
+  InputNumber,
+  CheckboxGroup,
+  Checkbox,
+  DatePicker,
   FormSelect,
   QueryForm,
   Cascader,
@@ -46,24 +51,63 @@ export const 默认 = {
     React.useEffect(() => {
       console.log(ref, 'ref----');
     }, []);
+    function EmptySlot(params) {
+      return <div />;
+    }
+    function HoistNodePath(params) {
+      return <div />;
+    }
     return (
       <div style={{ width: '1200px' }}>
-        <Select width="xl" />
-        <Form ref={ref} layout="horizontal">
+        {/* <Select width="xl" /> */}
+        <ProFormText />
+        <Form
+          layout="horizontal"
+          // labelCol={{ flex: '500px' }}
+          // labelWidth="100"
+          span={12}
+          gutterJustify={30}
+          width="100%"
+        >
+          <Cascader labelText="123" width="100%" name="username" />
+          <Select ref={ref} labelText="表单项内容" />
           {/* <button onClick={() => console.log(ref.current.getValues())}>
             1234
           </button> */}
-          <ProFormText label="1234" width="md" colProps={{ span: 8 }} />
-          <Select
-            labelText="1234"
+          {/* <TextArea /> */}
+          <ProFormText />
+          <DatePicker data-nodepath="3333" />
+          <CheckboxGroup
+            data-nodepath="rootview.0.0"
+            ide-iscontainer="true"
+            key="component-37"
+          >
+            <Checkbox ide-iscontainer="true" key="component-38">
+              1234
+            </Checkbox>
+          </CheckboxGroup>
+          <CheckboxGroup data-nodepath="rootview.6.2">
+            <Checkbox
+              value={1}
+              label={1}
+              id="checkbox"
+              data-nodepath="checkbox"
+            >
+              1
+            </Checkbox>
+            <Checkbox value={2} label={2}>
+              2
+            </Checkbox>
+          </CheckboxGroup>
+          <InputNumber />
+          {/* <Select
             name="ag"
-            span={16}
-            // colProps={{ span: 16 }}
             dataSource={[
               { value: 1, label: '男' },
               { value: 2, label: '女' },
             ]}
-          />
+          /> */}
+          <Input />
         </Form>
       </div>
     );
@@ -102,23 +146,17 @@ export const 默认1 = {
 export const 查询表单 = {
   render: () => {
     return (
+      // const value=ref.current.getValue()
+      // CSSMathValue.name id time
       <div style={{ width: '1500px' }}>
         <QueryForm>
-          <Cascader labelText="123" />
-          {/* <ProFormCascader label="pro" /> */}
-          <Cascader labelText="123" />
+          <Cascader labelText="123" name="username" />
+          <Cascader labelText="123" name="id" />
+          <Cascader labelText="23" name="time" />
           <Cascader labelText="23" />
           <Cascader labelText="23" />
           <Cascader labelText="23" />
           <Cascader labelText="23" />
-          <Cascader labelText="23" />
-          {/* <ProFormCascader label="pro" /> */}
-          {/* <ProFormText label="132" width="xl" />
-          <ProFormText label="132" width="sm" />
-          <ProFormText label="132" width="700" /> */}
-          {/* <Input />
-        <Input />
-        <Input /> */}
         </QueryForm>
       </div>
     );
@@ -126,14 +164,26 @@ export const 查询表单 = {
 };
 export const Pro表单 = {
   render: () => {
+    const ref = React.useRef(null);
+    React.useEffect(() => {
+      console.log(ref, 'ref');
+    }, []);
     return (
       <div>
-        <ProForm width="lg">
-          <ProFormText label="132" width="xl" />
-          <ProFormText label="132" width="sm" />
+        <button
+          onClick={() => {
+            console.log(ref);
+          }}
+        >
+          1234
+        </button>
+        <Form>
+          <Select ref={ref} />
+          {/* <ProFormText fieldProps={{ ref }} label="132" width="xl" /> */}
+          {/* <ProFormText label="132" width="sm" />
           <ProFormText label="132" width="lg" />
-          <ProFormText label="132" width="xl" />
-        </ProForm>
+          <ProFormText label="132" width="xl" /> */}
+        </Form>
       </div>
     );
   },

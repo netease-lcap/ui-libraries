@@ -49,17 +49,25 @@
     }
   },
   {
-    "name": "FormInput",
+    "name": "InputNumber",
     "ideusage": {
-      "idetype": "container"
+      "idetype": "element",
+      "mutations": ["FormInputNumber"]
     }
   },
   {
-    "name": "InputNumber",
+    "name": "FormInputNumber",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "container"
+    },
+    "displaySlotConditions": {
+      "default": false,
+      "label": "this.getAttribute('labelIsSlot').value === true",
+      "description": false,
+      "extra": false
     }
   },
+
   {
     "name": "Transfer",
     "ideusage": {
@@ -69,14 +77,28 @@
   {
     "name": "Switch",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormSwitch"]
+    }
+  },
+  {
+    "name": "FormSwitch",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
     "name": "Input",
     "ideusage": {
       "idetype": "element",
-      "textholder": "value"
+      "textholder": "value",
+      "mutations": ["FormInput"]
     }
   },
   {
@@ -95,7 +117,20 @@
   {
     "name": "TextArea",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormTextArea"]
+    }
+  },
+  {
+    "name": "FormTextArea",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
@@ -113,6 +148,31 @@
           "condition": "!this.getAttribute('dataSource')",
           "accept": "false"
         }
+      },
+      "mutations": ["FormCheckboxGroup"]
+    }
+  },
+  {
+    "name": "FormCheckboxGroup",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'Checkbox'",
+      "dataSource": {
+        "dismiss": "!this.getAttribute('dataSource') && (this.filterElement(el => el.tag !== 'template').length > 0)",
+        "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
+        "loopElem": "> label.ant-checkbox-wrapper",
+        "emptySlot": {
+          "display": "inline",
+          "condition": "!this.getAttribute('dataSource')",
+          "accept": "false"
+        }
+      },
+      "displaySlotConditions": {
+        "default": true,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
       }
     }
   },
@@ -151,6 +211,31 @@
           "condition": "!this.getAttribute('dataSource')",
           "accept": "false"
         }
+      },
+      "mutations": ["FormRadioGroup"]
+    }
+  },
+  {
+    "name": "FormRadioGroup",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'Radio'",
+      "dataSource": {
+        "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+        "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
+        "loopElem": "> label.ant-radio-wrapper",
+        "emptySlot": {
+          "display": "inline",
+          "condition": "!this.getAttribute('dataSource')",
+          "accept": "false"
+        }
+      },
+      "displaySlotConditions": {
+        "default": true,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
       }
     }
   },
@@ -323,37 +408,115 @@
   {
     "name": "TreeSelect",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormTreeSelect"]
+    }
+  },
+  {
+    "name": "FormTreeSelect",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
     "name": "Cascader",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormCascader"]
+    }
+  },
+  {
+    "name": "FormCascader",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
     "name": "DatePicker",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormDatePicker"]
+    }
+  },
+  {
+    "name": "FormDatePicker",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
     "name": "DateRangePicker",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormDateRangePicker"]
+    }
+  },
+  {
+    "name": "FormDateRangePicker",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
     "name": "TimePicker",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormTimePicker"]
+    }
+  },
+  {
+    "name": "FormTimePicker",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
     "name": "TimeRangePicker",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormTimeRangePicker"]
+    }
+  },
+  {
+    "name": "FormTimeRangePicker",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {

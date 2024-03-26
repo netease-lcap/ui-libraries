@@ -5,6 +5,8 @@ import _ from 'lodash';
 import { useControllableValue } from 'ahooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { Col, FormItem, Checkbox } from '@/index';
+
+import FormContext from '@/components/Form/form-context';
 import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
 import { COLPROPSFIELDS } from '@/components/Row/constants';
 import {
@@ -54,18 +56,21 @@ export function useHandleDataSource(props) {
   };
 }
 
-export function useHandleFormWarplabel(props) {
+function useHandleFormWarplabel(props) {
+  const { width, isForm } = React.useContext(FormContext);
   const deletePropsList = props.get($deletePropsList).concat('labelIsSlot', 'labelText');
   const labelIsSlot = props.get('labelIsSlot');
   const labelProps = props.get('label');
   const labelText = props.get('labelText');
+  const labelWidth = props.get('labelWidth');
+  const labelCol = _.isNil(labelWidth) ? {} : { labelCol: { flex: `${labelWidth}px` } };
   const label = labelIsSlot ? labelProps : labelText;
+  const formResult = isForm ? { width, label, ...labelCol } : {};
   return {
     [$deletePropsList]: deletePropsList,
-    label,
+    ...formResult,
   };
 }
-
 export function useHandleFormItemProps(props) {
   const BaseComponent = props.get('render');
   const render = React.useCallback((selfProps) => {
@@ -79,7 +84,7 @@ export function useHandleFormItemProps(props) {
   };
 }
 export function useHandleRemoveRef(props) {
-  const BaseComponent = props.get('ref');
+  const BaseComponent = props.get('render');
   const render = React.useCallback((selfProps) => {
     return <BaseComponent {..._.omit(selfProps, 'ref')}>{selfProps.children}</BaseComponent>;
   }, [BaseComponent]);
@@ -89,3 +94,5 @@ export function useHandleRemoveRef(props) {
 }
 
 export * from './lowCode';
+
+export * from '@/components/Form/plugins/formItemPlugin';

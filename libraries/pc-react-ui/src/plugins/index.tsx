@@ -113,16 +113,18 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   //   );
   // }
   // console.log(excludeProps,'ex');
-  // console.log(excludeProps, 'ex');
   return (
     <ConfigProvider locale={zhCN}>
       <Component
         {...excludeProps}
-      // ref={baseRef}
+        ref={baseRef}
       // {...refObj}
       >
         {/* 修复radioPro 子组件透传的问题 */}
-        {excludeProps.children}
+        {/* {React.cloneElement(excludeProps.children)} */}
+        {/* {React.createElement(excludeProps.children)} */}
+        {/* {props.children && React.cloneElement(props.children)} */}
+        {props.children}
       </Component>
     </ConfigProvider>
   );
@@ -139,6 +141,7 @@ export function registerComponet<T, U>(
 ) {
   return React.forwardRef<T, U>((props, ref) => {
     const [plugin, setPlugin] = React.useState(new Plugin(pluginOption));
+    console.log(ref, 'ref---');
     // console.count(pluginOption.displayName);
     // React.useEffect(() => {
     //   if (props.appType === 'lowCode') {
