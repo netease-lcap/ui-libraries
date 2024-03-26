@@ -3,5 +3,5 @@
 <template>
   <u-checkboxes>
     <template #item="current"></template>
-</u-checkboxes>
+  </u-checkboxes>
 </template>
