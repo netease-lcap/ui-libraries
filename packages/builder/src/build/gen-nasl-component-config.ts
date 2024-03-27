@@ -94,7 +94,7 @@ function genBlockConfig(componentDir, { screenshots, drawings }) {
   if (fs.existsSync(`${storyFilePath}.jsx`)) {
     storyFilePath = `${storyFilePath}.jsx`;
   } else if (fs.existsSync(`${storyFilePath}.tsx`)) {
-    storyFilePath = `${storyFilePath}.Tsx`;
+    storyFilePath = `${storyFilePath}.tsx`;
   } else if (fs.existsSync(`${storyFilePath}.js`)) {
     storyFilePath = `${storyFilePath}.js`;
   } else {

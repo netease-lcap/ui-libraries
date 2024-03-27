@@ -1,4 +1,5 @@
 import { spawn, spawnSync } from 'child_process';
+import logger from './logger';
 
 /**
  * 使用 spawnSync 的 shell inherit 模式，直接对接主进程的 stdio
@@ -9,6 +10,7 @@ import { spawn, spawnSync } from 'child_process';
  */
 export function execSync(...args: Array<string>) {
   const command = args.join(' ');
+  logger.info('execute command: ', command);
   return spawnSync(command, { shell: true, stdio: 'inherit' });
 }
 

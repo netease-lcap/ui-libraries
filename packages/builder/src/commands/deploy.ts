@@ -49,7 +49,7 @@ function deployTgz(rootPath: string, config: LcapCliConfig) {
   // 复制tgz到zip.tgz
   fs.copyFileSync(tgz, 'zip.tgz');
 
-  const command = 'lcap deploy zip.tgz';
+  const command = 'npx lcap deploy zip.tgz';
   execSync(concatCommand(command, config));
   logger.success(`update success ${tgz}`);
   // 删除zip.tgz
