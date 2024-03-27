@@ -48,28 +48,48 @@
     <slot name="config-columns"></slot>
     <u-table-render
         ref="tableRender"
+
         :tableMetaList="tableMetaList"
         :visibleColumnVMs="visibleColumnVMs"
         :visibleTableHeadTrArr="visibleTableHeadTrArr"
-        :resizable="resizable"
+        :columnVMsMap="columnVMsMap"
+
         :emptyText="emptyText"
         :errorText="errorText"
         :loadingText="loadingText"
         :currentData="currentData"
+        :currentDataSource="currentDataSource"
         :currentLoading="currentLoading"
         :currentError="currentError"
+
         :virtual="virtual"
         :pageable="pageable"
         :striped="striped"
-        :tableHeight="tableHeight"
         :listKey="listKey"
-        :currentDataSource="currentDataSource"
-        :columnVMsMap="columnVMsMap"
+        
         :defaultOrder="defaultOrder"
         :sorting="sorting"
+
         :useStickyFixed="useStickyFixed"
         :fixedRightList="fixedRightList"
-        :fixedLeftList="fixedLeftList">
+        :fixedLeftList="fixedLeftList"
+
+        :tableWidth="tableWidth"
+        :tableHeight="tableHeight"
+        :bodyHeight="bodyHeight"
+
+        :thEllipsis="thEllipsis"
+        :ellipsis="ellipsis"
+        
+        :allChecked="allChecked"
+
+        :resizable="resizable"
+        :minColumnWidth="minColumnWidth"
+
+        :treeDisplay="treeDisplay"
+        :hasChildrenField="hasChildrenField"
+
+        @resize="onResizerDragEnd">
     </u-table-render>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
@@ -271,6 +291,11 @@ export default {
             throttledVirtualScroll: this.throttledVirtualScroll,
             sort: this.sort,
             filter: this.filter,
+            checkAll: this.checkAll,
+            onClickRow: this.onClickRow,
+            onDblclickRow: this.onDblclickRow,
+            check: this.check,
+            toggleTreeExpanded: this.toggleTreeExpanded,
         };
     },
     computed: {
@@ -349,20 +374,6 @@ export default {
                 return true;
             else
                 return null;
-        },
-        treeColumnIndex() {
-            const vms = this.columnVMs.filter((columnVM) => !columnVM.currentHidden);
-            let treeColumnIndex = vms.findIndex((columnVM) => columnVM.type === 'tree');
-            if (treeColumnIndex === -1) {
-                treeColumnIndex = vms.findIndex((columnVM) => !['index', 'radio', 'checkbox', 'expander', 'dragHandler'].includes(columnVM.type));
-                if (treeColumnIndex === -1) {
-                    return 0;
-                } else {
-                    return treeColumnIndex;
-                }
-            } else {
-                return treeColumnIndex;
-            }
         },
         usePagination() {
             if (typeof this.pagination === 'undefined') {
@@ -918,7 +929,7 @@ export default {
         },
         syncHeadScroll() {
             // this.$refs.head[0].scrollLeft = this.$refs.head[0].parentElement.scrollLeft;
-            const headEl = this.$refs.head[0];
+            const headEl = this.$refs.tableRender.$refs.head[0];
             if (this.xScrollParentEl && this.stickingHead && headEl && headEl.childNodes[0]) {
                 const xScrollParentEl = this.xScrollParentEl;
                 headEl.childNodes[0].style.marginLeft = '-' + xScrollParentEl.scrollLeft + 'px';
@@ -927,9 +938,9 @@ export default {
         },
         onScrollParentScroll(e) {
             const rect = getRect(this.$el);
-            const bodyRect = getRect(this.$refs.body[0]);
+            const bodyRect = getRect(this.$refs.tableRender.$refs.body[0]);
             const parentRect = this.scrollParentEl === window ? { top: 0, bottom: window.innerHeight } : getRect(this.scrollParentEl);
-            const headHeight = this.$refs.head[0].offsetHeight;
+            const headHeight = this.$refs.tableRender.$refs.head[0].offsetHeight;
 
             parentRect.top += this.stickHeadOffset;
             bodyRect.bottom -= headHeight;
@@ -941,8 +952,8 @@ export default {
             const stickingHead = rect.top < parentRect.top && bodyRect.bottom > parentRect.top;
             const stickingHeadTop = parentRect.top;
             const stickingHeadHeight = headHeight;
-            const stickheadEl = this.$refs.head[0];
-            const headPlaceholderEl = this.$refs.headPlaceholder[0];
+            const stickheadEl = this.$refs.tableRender.$refs.head[0];
+            const headPlaceholderEl = this.$refs.tableRender.$refs.headPlaceholder[0];
             if (stickheadEl) {
                 if (stickingHead) {
                     stickheadEl.setAttribute('stickingHead', true);
@@ -2597,22 +2608,6 @@ export default {
         isColumnVM(columnVM) {
             return columnVM && columnVM.$vnode && columnVM.$vnode.tag && columnVM.$vnode.tag.includes('-column');
         },
-        getThEllipsis(columnVM) {
-            if (columnVM.thEllipsis === undefined) {
-                return this.thEllipsis;
-            } else {
-                return columnVM.thEllipsis;
-            }
-        },
-        getTdEllipsis(columnVM) {
-            let ellipsis = false;
-            if (columnVM.ellipsis === undefined) {
-                ellipsis = this.ellipsis;
-            } else {
-                ellipsis = columnVM.ellipsis;
-            }
-            return ellipsis && columnVM.type !== 'editable';
-        },
         onChangePageSize(event) {
             this.currentPageSize = event.pageSize;
             const currentDataSource = this.currentDataSource;
@@ -2620,6 +2615,10 @@ export default {
         },
         onXScrollParentScroll(event) {
             this.syncHeadScroll();
+        },
+        onResizerDragEnd($event) {
+            this.reHandleResize();
+            this.$emit('resize', $event);
         },
     },
 };
@@ -2678,71 +2677,6 @@ export default {
     height: 100%;
 }
 
-.resizer {
-    position: absolute;
-    top: 4px;
-    bottom: 4px;
-    right: -3px;
-    z-index: 1;
-    cursor: col-resize;
-    padding: 2px;
-    background: var(--border-color-base) content-box;
-    width: 5px;
-}
-
-.cell {
-    position: relative;
-    white-space: normal;
-    word-break: break-all;
-    /* 解决在火狐浏览器下英文换行显示问题 */
-    word-wrap: break-word;
-}
-
-.cell[ellipsis] {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.cell[ellipsis] > div {
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.cell[ellipsis] > * {
-    white-space: nowrap;
-}
-.cell[last-left-fixed]::after,
-.cell[first-right-fixed]::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 6px;
-    bottom: -1px;
-    width: 6px;
-    pointer-events: none;
-    transform: translateX(-100%);
-    transition: box-shadow .1s linear;
-    box-shadow: none;
-    display:block;
-}
-.cell[last-left-fixed]::after {
-    left: unset;
-    transform: translateX(100%);
-    right: 6px;
-}
-.cell[shadow][last-left-fixed]::after {
-    box-shadow: inset -4px 0 5px -3px rgb(0 0 0 / 15%);
-}
-.cell[shadow][first-right-fixed]::after {
-    box-shadow: inset 3px 0 5px -3px rgb(0 0 0 / 15%);
-}
-
-.cell[disabled] {
-    color: var(--text-color-disabled);
-    background-color: var(--table-view-expander-background-disabled);
-}
-
 .pagination {
     text-align: right;
     margin-top: var(--table-view-pagination-space);
@@ -2767,74 +2701,6 @@ export default {
 }
 
 .column-field {}
-
-.tree_expander {
-    display: inline-block;
-    width: var(--table-view-tree-expander-size);
-    height: var(--table-view-tree-expander-size);
-    line-height: var(--table-view-tree-expander-size);
-    transition: transform var(--transition-duration-base);
-    margin-right: var(--table-view-tree-expander-margin);
-    text-align: center;
-    vertical-align: middle;
-}
-
-.tree_expander::before {
-content: "\e679";
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-}
-
-.tree_expander {
-    cursor: pointer;
-}
-
-.tree_expander[expanded] {
-    transform: rotate(90deg);
-}
-.tree_placeholder{
-    display: inline-block;
-    width: var(--table-view-tree-expander-size);
-    height: var(--table-view-tree-expander-size);
-    line-height: var(--table-view-tree-expander-size);
-    text-align: center;
-    margin-right: var(--table-view-tree-expander-margin);
-}
-.tree_expander[loading]{
-    margin-right: calc(4px + var(--table-view-tree-expander-margin));
-}
-.tree_expander[loading]::before {
-    content: '';
-    font: inherit;
-    display: inline-block;
-    width: var(--table-view-tree-expander-loading-size);
-    height: var(--table-view-tree-expander-loading-size);
-    border: var(--table-view-tree-expander-loading-border-width) solid currentColor;
-    border-radius: var(--table-view-tree-expander-loading-size);
-    animation: rotate var(--spinner-animation-duration) ease-in-out var(--spinner-animation-delay) infinite;
-}
-
-.tree_expander + div,
-.tree_placeholder + div
-{
-    display: inline-flex;
-    align-items: center;
-    width: auto;
-}
-
-.tree_expander[loading]::before {
-    border-top-color: transparent;
-}
-
-.indent {}
 
 .trmask {
     position: relative;

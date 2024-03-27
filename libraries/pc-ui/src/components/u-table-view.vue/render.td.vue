@@ -48,11 +48,11 @@
             </u-table-view-expander>
         </f-slot>
         <!-- tree -->
-        <!-- <template v-if="treeDisplay && item.tableTreeItemLevel !== undefined && columnIndex === treeColumnIndex">
+        <template v-if="treeDisplay && item.tableTreeItemLevel !== undefined && columnIndex === treeColumnIndex">
             <span :class="$style.indent" :style="{ paddingLeft: number2Pixel(20 * item.tableTreeItemLevel) }"></span>
             <span :class="$style.tree_expander" v-if="$at(item, hasChildrenField)" :expanded="item.treeExpanded" @click.stop="toggleTreeExpanded(item)" :loading="item.loading"></span>
             <span :class="$style.tree_placeholder" v-else></span>
-        </template> -->
+        </template>
         <!-- type === 'dragHandler' -->
         <span v-if="vm.type === 'dragHandler'">
             <i-ico :class="$style.dragHandler" name="dragHandler" :draggable="handlerDraggable && item.draggable || undefined" :disabled="!(handlerDraggable && item.draggable)"></i-ico>
@@ -108,6 +108,7 @@ export default {
     inject: [
         'currentDataSource',
         'toggleExpanded',
+        'number2Pixel',
     ],
     props: {
         vm: Object,
@@ -123,17 +124,31 @@ export default {
         readonly: Boolean,
         disabled: Boolean,
         usePagination: Boolean,
+        ellipsis: Boolean,
+
+        treeDisplay: Boolean,
+        hasChildrenField: String,
+        treeColumnIndex: Number,
     },
     methods: {
         getTdEllipsis() {
             const columnVM = this.vm;
-            return columnVM.ellipsis;
+            let ellipsis = false;
+            if (columnVM.ellipsis === undefined) {
+                ellipsis = this.ellipsis;
+            } else {
+                ellipsis = columnVM.ellipsis;
+            }
+            return ellipsis && columnVM.type !== 'editable';
         },
         select() {
 
         },
-        check() {
-
+        check(item, checked) {
+            this.$emit('check', {item, checked});
+        },
+        toggleTreeExpanded(item) {
+            this.$emit('tree-toggle-expanded', item);
         },
     },
 }
@@ -211,4 +226,71 @@ export default {
     cursor: var(--table-view-drag-cursor-disabled);
     color: var(--table-view-drag-color-disabled);
 }
+
+/**
+ * 树型展示
+ */
+.tree_expander {
+    display: inline-block;
+    width: var(--table-view-tree-expander-size);
+    height: var(--table-view-tree-expander-size);
+    line-height: var(--table-view-tree-expander-size);
+    transition: transform var(--transition-duration-base);
+    margin-right: var(--table-view-tree-expander-margin);
+    text-align: center;
+    vertical-align: middle;
+}
+.tree_expander::before {
+content: "\e679";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+.tree_expander {
+    cursor: pointer;
+}
+.tree_expander[expanded] {
+    transform: rotate(90deg);
+}
+.tree_placeholder{
+    display: inline-block;
+    width: var(--table-view-tree-expander-size);
+    height: var(--table-view-tree-expander-size);
+    line-height: var(--table-view-tree-expander-size);
+    text-align: center;
+    margin-right: var(--table-view-tree-expander-margin);
+}
+.tree_expander[loading]{
+    margin-right: calc(4px + var(--table-view-tree-expander-margin));
+}
+.tree_expander[loading]::before {
+    content: '';
+    font: inherit;
+    display: inline-block;
+    width: var(--table-view-tree-expander-loading-size);
+    height: var(--table-view-tree-expander-loading-size);
+    border: var(--table-view-tree-expander-loading-border-width) solid currentColor;
+    border-radius: var(--table-view-tree-expander-loading-size);
+    animation: rotate var(--spinner-animation-duration) ease-in-out var(--spinner-animation-delay) infinite;
+}
+.tree_expander + div,
+.tree_placeholder + div
+{
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+}
+
+.tree_expander[loading]::before {
+    border-top-color: transparent;
+}
+
+.indent {}
 </style>

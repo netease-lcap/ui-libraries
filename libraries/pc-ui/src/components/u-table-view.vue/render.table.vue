@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <f-render>
         <div :class="$style.table" ref="tablewrap" v-for="(tableMeta, tableMetaIndex) in tableMetaList" :key="tableMeta.position" :position="tableMeta.position"
             :style="{ width: tableMeta.position !== 'static' && number2Pixel(tableMeta.width), height: number2Pixel(tableHeight)}"
             @scroll="onTableScroll" :shadow="(tableMeta.position === 'left' && !scrollXStart) || (tableMeta.position === 'right' && !scrollXEnd)">
@@ -101,8 +101,16 @@
                                             :colspan="getItemColSpan(item, rowIndex, columnIndex)"
                                             :rowspan="getItemRowSpan(item, rowIndex, columnIndex)"
                                             :disabled="item.disabled || disabled"
+                                            :ellipsis="ellipsis"
+
+                                            :treeDisplay="treeDisplay"
+                                            :hasChildrenField="hasChildrenField"
+                                            :treeColumnIndex="treeColumnIndex"
+
                                             slotName="cell"
-                                            :slotProps="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex, columnItem: columnVM.columnItem }">
+                                            :slotProps="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex, columnItem: columnVM.columnItem }"
+                                            @check="check($event.item, $event.checked)"
+                                            @tree-toggle-expanded="toggleTreeExpanded">
                                             <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
                                         </u-table-render-td>
                                     </tr>
@@ -116,12 +124,7 @@
                                     </u-table-render-tr-expander>
                                 </template>
                             </template>
-                            <tr key="no-data-source" v-if="currentData === undefined && !currentError">
-                                <td :class="$style.center" :colspan="visibleColumnVMs.length">
-                                    请绑定数据源
-                                </td>
-                            </tr>
-                            <tr key="loading" v-else-if="(currentData === undefined && !currentError) || currentLoading"><!-- 初次加载与加载更多 loading 合并在一起 -->
+                            <tr key="loading" v-if="(currentData === undefined && !currentError) || currentLoading"><!-- 初次加载与加载更多 loading 合并在一起 -->
                                 <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="loading">
                                     <slot name="loading"><u-spinner :class="$style.spinner"></u-spinner> {{ loadingText }}</slot>
                                 </td>
@@ -162,7 +165,7 @@
                 </f-scroll-view>
             </div>
         </div>
-    </div>
+    </f-render>
 </template>
 
 <script>
@@ -182,16 +185,12 @@ export default {
     },
     props: {
         tableMetaList: Array,
-        tableWidth: Number,
-        useStickyFixed: Boolean,
         visibleColumnVMs: Array,
         visibleTableHeadTrArr: Array,
         boldHeader: Boolean,
         hasGroupedColumn: Boolean,
-        thEllipsis: Boolean,
         disabled: Boolean,
         readonly: Boolean,
-        resizable: Boolean,
         filterMultiple: Boolean,
         filterMax: Number,
         showHead: { type: Boolean, default: true },
@@ -204,21 +203,16 @@ export default {
         currentDataSource: Object,
         virtual: Boolean,
         pageable: Boolean,
-        tableHeight: Number,
-        bodyHeight: Number,
         loadingText: String,
         errorText: String,
         errorImage: String,
         emptyText: String,
-        treeDisplay: Boolean,
         treeColumnIndex: Number,
-        hasChildrenField: String,
         rowDraggable: Boolean,
         handlerDraggable: Boolean,
         selectable: Boolean,
         selectedItem: Object,
         valueField: String,
-        ellipsis: Boolean,
         usePagination: Boolean,
         loading: Boolean,
         error: Boolean,
@@ -230,6 +224,7 @@ export default {
         border: { type: Boolean, default: false },
         line: { type: Boolean, default: false },
         striped: { type: Boolean, default: false },
+        
         loading: { type: Boolean, default: undefined },
         loadingText: {
             type: String,
@@ -254,11 +249,29 @@ export default {
             type: String,
             default: '',
         },
+
         sorting: Object,
         sortTrigger: { type: String, default: 'head' },
         defaultOrder: { type: String, default: 'asc' },
+
+        useStickyFixed: Boolean,
         fixedRightList: Array,
         fixedLeftList: Array,
+
+        tableWidth: Number,
+        tableHeight: Number,
+        bodyHeight: Number,
+
+        thEllipsis: Boolean,
+        ellipsis: Boolean,
+
+        allChecked: Boolean,
+
+        resizable: Boolean,
+        minColumnWidth: Number,
+
+        treeDisplay: Boolean,
+        hasChildrenField: String,
     },
     data() {
         return {
@@ -275,11 +288,17 @@ export default {
         'throttledVirtualScroll',
         'sort',
         'filter',
+        'checkAll',
+        'onClickRow',
+        'onDblclickRow',
+        'check',
+        'toggleTreeExpanded',
     ],
     provide() {
         return {
             currentDataSource: this.currentDataSource,
             toggleExpanded: this.toggleExpanded,
+            number2Pixel: this.number2Pixel,
         };
     },
     watch: {
@@ -296,6 +315,20 @@ export default {
     computed: {
         expanderColumnVM() {
             return this.visibleColumnVMs.find((columnVM) => columnVM.type === 'expander');
+        },
+        treeColumnIndex() {
+            const vms = this.visibleColumnVMs;
+            let treeColumnIndex = vms.findIndex((columnVM) => columnVM.type === 'tree');
+            if (treeColumnIndex === -1) {
+                treeColumnIndex = vms.findIndex((columnVM) => !['index', 'radio', 'checkbox', 'expander', 'dragHandler'].includes(columnVM.type));
+                if (treeColumnIndex === -1) {
+                    return 0;
+                } else {
+                    return treeColumnIndex;
+                }
+            } else {
+                return treeColumnIndex;
+            }
         },
     },
     methods: {
@@ -442,13 +475,6 @@ export default {
             }
         },
         /**
-         * 选择列
-         * @param {*} value 
-         */
-        checkAll(value) {
-            
-        },
-        /**
          * 排序
          */
         onClickSort(columnVM) {
@@ -544,7 +570,6 @@ export default {
             $event.transferEl.style.left = '';
         },
         onResizerDragEnd($event, columnVM, index) {
-            this.reHandleResize();
             this.$emit('resize', {
                 columnVM,
                 index,
@@ -614,12 +639,6 @@ export default {
         getKey(item, index) {
             return typeof item === 'object' ? this.keyMap.getKey(item) : index;
         },
-        onClickRow(event, item, rowIndex) {
-            
-        },
-        onDblclickRow(event, item, rowIndex) {
-            
-        },
         onDragStart(event, item, rowIndex) {
             
         },
@@ -627,18 +646,6 @@ export default {
             
         },
         isDragging(item) {
-            
-        },
-        select(item, rowIndex) {
-            
-        },
-        check(item, value) {
-            
-        },
-        // toggleExpanded(item) {
-            
-        // },
-        toggleTreeExpanded(item) {
             
         },
         isSimpleArray(arr) {
@@ -665,8 +672,12 @@ export default {
         getItemRowSpan(item, rowIndex, columnIndex) {
             
         },
-        getTdEllipsis(columnVM) {
-            
+        getThEllipsis(columnVM) {
+            if (columnVM.thEllipsis === undefined) {
+                return this.thEllipsis;
+            } else {
+                return columnVM.thEllipsis;
+            }
         },
         getEditablewrapWidth(item, columnIndex, treeColumnIndex) {
             
@@ -867,7 +878,7 @@ export default {
 /**
  * 排序icon
  */
- .sort {
+.sort {
     position: relative;
     display: inline-block;
     width: var(--table-view-sort-size);
@@ -921,7 +932,7 @@ content: "\e66c";
 /**
  * filters
  */
- .filter-wrap {
+.filter-wrap {
     cursor: var(--cursor-pointer);
     padding-bottom: 6px;
     margin-bottom: -6px;
@@ -948,6 +959,30 @@ content: "\e665";
 }
 .filter-wrap[active] {
     color: var(--table-view-filter-color-active);
+}
+
+/**
+ * 调整列宽
+ */
+.resizer {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    right: -3px;
+    z-index: 1;
+    cursor: col-resize;
+    padding: 2px;
+    background: var(--border-color-base) content-box;
+    width: 5px;
+}
+/** 避免拖拽的时候点击到排序 */
+.resizer[draggable-source]::before {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    width: 100px;
+    height: 100%;
 }
 
 /**
