@@ -25,6 +25,7 @@ changelog.generated.md
 vetur
 
 *.tgz
+.lcaprc
 
 # other library
 element-ui
