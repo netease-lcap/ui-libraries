@@ -79,7 +79,7 @@ export const Default = {
     template: `
     <div>
       <u-input :value.sync="value1" />
-      <u-table-view :data-source="dataSource">
+      <u-table-view :data-source="dataSource" :values.sync="selectedValues" valueField="index">
       <u-table-view-column type="expander" title="展开" width="8%">
         <template #expander="current">
             <u-table-view-expander
@@ -97,7 +97,8 @@ export const Default = {
                 <u-list-item>{{ item.address }} 5</u-list-item>
             </u-list>
         </div>
-    </u-table-view-column>
+      </u-table-view-column>
+      <u-table-view-column type="checkbox" title="选择" width="8%"></u-table-view-column>
       <u-table-view-column title="用户名" width="20%">
         <template #cell="current">
           <u-text>{{ current.item.name }}</u-text>
@@ -133,7 +134,13 @@ export const Default = {
       return {
         value1: '',
         dataSource: [...dataSource],
+        selectedValues: [],
       };
+    },
+    watch: {
+      selectedValues(value) {
+        console.log(value);
+      },
     },
   }),
 };

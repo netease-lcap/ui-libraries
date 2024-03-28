@@ -1,7 +1,8 @@
 <template>
     <td :class="$style.cell"
         :ellipsis="getTdEllipsis()"
-        v-ellipsis-title>
+        v-ellipsis-title
+        :disabled="disabled">
         <!-- type === 'index' -->
         <span v-if="vm.type === 'index'">
             <template v-if="vm.autoIndex && usePagination && currentDataSource">
@@ -59,23 +60,23 @@
         </span>
         <!-- Editable text -->
         <template v-if="vm.type === 'editable'">
-            <!-- <div @dblclick.stop="onSetEditing(item, columnVM)" :class="$style.editablewrap"
-                :ellipsis="columnVM.ellipsis !== undefined? columnVM.ellipsis : ellipsis"
+            <div @dblclick.stop="onSetEditing(item, vm)" :class="$style.editablewrap"
+                :ellipsis="vm.ellipsis !== undefined? vm.ellipsis : ellipsis"
                 :style="{width:getEditablewrapWidth(item, columnIndex, treeColumnIndex)}"
-                :editing="item.editing === columnVM.field">
+                :editing="item.editing === vm.field">
                 <div>
-                    <template v-if="item.editing === columnVM.field">
-                        <f-slot name="editcell" :vm="columnVM" :props="{ item: item, value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex }">
-                            <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
+                    <template v-if="item.editing === vm.field">
+                        <f-slot name="editcell" :vm="vm" :props="{ item: item, value: $at(item, vm.field), vm, rowIndex: rowIndex, columnIndex, index: rowIndex }">
+                            <span v-if="vm.field && !['radio', 'checkbox'].includes(vm.type)" :class="$style['column-field']">{{ vm.currentFormatter.format($at(item, vm.field)) }}</span>
                         </f-slot>
                     </template>
                     <template v-else>
-                        <f-slot name="cell" :vm="columnVM" :props="{ item: item, value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex, columnItem: columnVM.columnItem }">
-                            <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
+                        <f-slot name="cell" :vm="vm" :props="{ item: item, value: $at(item, vm.field), vm, rowIndex: rowIndex, columnIndex, index: rowIndex, columnItem: vm.columnItem }">
+                            <span v-if="vm.field && !['radio', 'checkbox'].includes(vm.type)" :class="$style['column-field']">{{ vm.currentFormatter.format($at(item, vm.field)) }}</span>
                         </f-slot>
                     </template>
                 </div>
-            </div> -->
+            </div>
         </template>
         <f-slot v-else :name="slotName" :vm="vm" :props="slotProps">
             <slot></slot>
@@ -121,14 +122,18 @@ export default {
         item: Object,
         selectedItem: Object,
         valueField: String,
+
         readonly: Boolean,
         disabled: Boolean,
+
         usePagination: Boolean,
         ellipsis: Boolean,
 
         treeDisplay: Boolean,
         hasChildrenField: String,
         treeColumnIndex: Number,
+
+        handlerDraggable: Boolean,
     },
     methods: {
         getTdEllipsis() {
@@ -141,14 +146,37 @@ export default {
             }
             return ellipsis && columnVM.type !== 'editable';
         },
-        select() {
-
+        select(item, rowIndex) {
+            this.$emit('select', { item, rowIndex });
         },
         check(item, checked) {
             this.$emit('check', {item, checked});
         },
         toggleTreeExpanded(item) {
             this.$emit('tree-toggle-expanded', item);
+        },
+        /**
+         * 编辑列
+         * @param {*} item 
+         * @param {*} columnIndex 
+         * @param {*} treeColumnIndex 
+         */
+        getEditablewrapWidth(item, columnIndex, treeColumnIndex) {
+            if (this.treeDisplay && item.tableTreeItemLevel !== undefined && columnIndex === treeColumnIndex) {
+                const width = 20 * (item.tableTreeItemLevel + 1) + 10;
+                return `calc(100% - ${width}px)`;
+            }
+            return '100%';
+        },
+        onSetEditing(item, columnVM) {
+            const fieldName = columnVM.field;
+            item.editing = fieldName;
+            if (columnVM.dblclickHandler) {
+                columnVM.dblclickHandler({ item, columnVM });
+            }
+        },
+        resetEdit(item) {
+            item.editing = '';
         },
     },
 }
@@ -287,10 +315,37 @@ content: "\e679";
     align-items: center;
     width: auto;
 }
-
+.tree_expander + div.editablewrap > div,
+.tree_placeholder + div.editablewrap > div {
+    width: 100%;
+}
 .tree_expander[loading]::before {
     border-top-color: transparent;
 }
 
 .indent {}
+
+/**
+ * 编辑列
+ */
+.editablewrap{
+    display: table;
+    width: 100%;
+    height: 100%;
+    table-layout: fixed;
+    min-height: var(--table-view-editable-td-min-height);
+}
+.editablewrap > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+.editablewrap[ellipsis] > div {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.editablewrap[ellipsis]:not([editing]) > div div {
+    display: inline;
+}
 </style>

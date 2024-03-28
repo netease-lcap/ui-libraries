@@ -76,7 +76,7 @@
                         <tbody ref="virtual">
                             <template v-if="(!currentLoading && !currentError && !currentEmpty || pageable === 'auto-more' || pageable === 'load-more') && currentData && currentData.length">
                                 <template v-for="(item, rowIndex) in virtualList">
-                                    <tr :key="getKey(item, rowIndex)" :id="getKey(item, rowIndex)" :class="[$style.row, (rowIndex !== 0) ? $style.trmask : '']" :color="item.rowColor" :selected="selectable && selectedItem === item"
+                                    <tr :key="getKey(item, rowIndex)" :class="[$style.row, (rowIndex !== 0) ? $style.trmask : '']" :color="item.rowColor" :selectable="selectable" :selected="selectable && selectedItem === item"
                                     v-if="item.display !== 'none'"
                                     :draggable="rowDraggable && item.draggable || undefined"
                                     :dragging="isDragging(item)"
@@ -100,6 +100,7 @@
                                             :shadow="(isTdLastLeftFixed(columnVM, columnIndex, visibleColumnVMs, item, rowIndex) && !scrollXStart) || (isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs) && !scrollXEnd)"
                                             :colspan="getItemColSpan(item, rowIndex, columnIndex)"
                                             :rowspan="getItemRowSpan(item, rowIndex, columnIndex)"
+                                            
                                             :disabled="item.disabled || disabled"
                                             :ellipsis="ellipsis"
 
@@ -107,10 +108,15 @@
                                             :hasChildrenField="hasChildrenField"
                                             :treeColumnIndex="treeColumnIndex"
 
+                                            :selectedItem="selectedItem"
+
+                                            :handlerDraggable="handlerDraggable"
+
                                             slotName="cell"
                                             :slotProps="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex, columnItem: columnVM.columnItem }"
                                             @check="check($event.item, $event.checked)"
-                                            @tree-toggle-expanded="toggleTreeExpanded">
+                                            @tree-toggle-expanded="toggleTreeExpanded"
+                                            @select="select($event.item, $event.rowIndex)">
                                             <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
                                         </u-table-render-td>
                                     </tr>
@@ -189,29 +195,31 @@ export default {
         visibleTableHeadTrArr: Array,
         boldHeader: Boolean,
         hasGroupedColumn: Boolean,
+
         disabled: Boolean,
         readonly: Boolean,
         filterMultiple: Boolean,
         filterMax: Number,
+
         showHead: { type: Boolean, default: true },
+
         stickHead: { type: Boolean, default: false },
         stickHeadOffset: { type: Number, default: 0 },
+
         currentData: Array,
         currentLoading: Boolean,
         currentError: Boolean,
         currentEmpty: Boolean,
         currentDataSource: Object,
+
         virtual: Boolean,
         pageable: Boolean,
         loadingText: String,
         errorText: String,
         errorImage: String,
         emptyText: String,
-        treeColumnIndex: Number,
-        rowDraggable: Boolean,
-        handlerDraggable: Boolean,
-        selectable: Boolean,
-        selectedItem: Object,
+        
+        
         valueField: String,
         usePagination: Boolean,
         loading: Boolean,
@@ -220,6 +228,7 @@ export default {
         hasGroupedColumn: Boolean,
         listKey: String,
         columnVMsMap: Object,
+
         color: String,
         border: { type: Boolean, default: false },
         line: { type: Boolean, default: false },
@@ -272,6 +281,12 @@ export default {
 
         treeDisplay: Boolean,
         hasChildrenField: String,
+
+        selectable: Boolean,
+        selectedItem: Object,
+
+        rowDraggable: Boolean,
+        handlerDraggable: Boolean,
     },
     data() {
         return {
@@ -285,7 +300,6 @@ export default {
     inject: [
         'toggleExpanded',
         'debouncedLoad',
-        'throttledVirtualScroll',
         'sort',
         'filter',
         'checkAll',
@@ -293,6 +307,12 @@ export default {
         'onDblclickRow',
         'check',
         'toggleTreeExpanded',
+        'select',
+        'onDragStart',
+        'onDragOver',
+        'isDragging',
+        'getItemRowSpan',
+        'getItemColSpan',
     ],
     provide() {
         return {
@@ -304,6 +324,13 @@ export default {
     watch: {
         'currentDataSource.sorting'(sorting) {
             this.currentSorting = sorting;
+        },
+        virtualTop() {
+            this.$refs.virtualPlaceholder[0].style.height = this.virtualTop + this.virtualBottom + 'px';
+            this.$refs.bodyTable[0].$el.style.transform = `translateY(${this.virtualTop}px)`;
+        },
+        virtualBottom() {
+            this.$refs.virtualPlaceholder[0].style.height = this.virtualTop + this.virtualBottom + 'px';
         },
     },
     created() {
@@ -639,15 +666,6 @@ export default {
         getKey(item, index) {
             return typeof item === 'object' ? this.keyMap.getKey(item) : index;
         },
-        onDragStart(event, item, rowIndex) {
-            
-        },
-        onDragOver(event, item, rowIndex) {
-            
-        },
-        isDragging(item) {
-            
-        },
         isSimpleArray(arr) {
             if (!Array.isArray(arr)) {
                 return false; // 如果不是数组类型，则不满足条件，直接返回 false
@@ -666,12 +684,6 @@ export default {
             }
             return data;
         },
-        getItemColSpan(item, rowIndex, columnIndex) {
-            
-        },
-        getItemRowSpan(item, rowIndex, columnIndex) {
-            
-        },
         getThEllipsis(columnVM) {
             if (columnVM.thEllipsis === undefined) {
                 return this.thEllipsis;
@@ -679,11 +691,17 @@ export default {
                 return columnVM.thEllipsis;
             }
         },
-        getEditablewrapWidth(item, columnIndex, treeColumnIndex) {
-            
+        /**
+         * 虚拟滚动相关
+         */
+        startVirtualScroll() {
+            this.throttledVirtualScroll({ target: this.$refs.scrollView[0].$refs.wrap });
         },
-        onSetEditing(item, columnVM) {
-            
+        getBodyRef() {
+            return this.$refs.body[0];
+        },
+        getTableBodyRef() {
+            return this.$refs.bodyTable[0];
         },
     },
 };
@@ -865,6 +883,9 @@ export default {
 }
 .row[dragging="true"][subrow] td {
     background: var(--table-view-subrow-background-dragging);
+}
+.row[selectable="true"] {
+    cursor: pointer;
 }
 
 /**

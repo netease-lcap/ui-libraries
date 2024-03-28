@@ -62,10 +62,12 @@
         :currentLoading="currentLoading"
         :currentError="currentError"
 
-        :virtual="virtual"
         :pageable="pageable"
+
         :striped="striped"
-        :listKey="listKey"
+        :border="border"
+        :line="line"
+        :color="color"
         
         :defaultOrder="defaultOrder"
         :sorting="sorting"
@@ -88,6 +90,20 @@
 
         :treeDisplay="treeDisplay"
         :hasChildrenField="hasChildrenField"
+
+        :selectable="selectable"
+        :selectedItem="selectedItem"
+
+        :virtual="virtual"
+        :itemHeight="itemHeight"
+        :virtualCount="virtualCount"
+        :listKey="listKey"
+
+        :rowDraggable="rowDraggable"
+        :handlerDraggable="handlerDraggable"
+
+        :disabled="disabled"
+        :readonly="readonly"
 
         @resize="onResizerDragEnd">
     </u-table-render>
@@ -231,13 +247,14 @@ export default {
         canDragableHandler: Function,
         canDropinHandler: Function,
         acrossTableDrag: { type: Boolean, default: false }, // 是否跨表格拖拽
-        virtual: { type: Boolean, default: false },
-        // @inherit: virtualCount: { type: Number, default: 60 },
-        // @inherit: throttle: { type: Number, default: 60 },
-        listKey: { type: String, default: 'currentData' },
         thEllipsis: { type: Boolean, default: false }, // 表头是否缩略展示
         ellipsis: { type: Boolean, default: false }, // 单元格是否缩略展示
         syncStickHeadXScroll: { type: Boolean, default: false }, // 同步固定头部的横向滚动
+        // 虚拟滚动相关
+        itemHeight: Number,
+        virtual: { type: Boolean, default: false },
+        virtualCount: { type: Number, default: 60 },
+        listKey: { type: String, default: 'currentData' },
     },
     data() {
         return {
@@ -288,7 +305,6 @@ export default {
         return {
             toggleExpanded: this.toggleExpanded,
             debouncedLoad: this.debouncedLoad,
-            throttledVirtualScroll: this.throttledVirtualScroll,
             sort: this.sort,
             filter: this.filter,
             checkAll: this.checkAll,
@@ -296,6 +312,14 @@ export default {
             onDblclickRow: this.onDblclickRow,
             check: this.check,
             toggleTreeExpanded: this.toggleTreeExpanded,
+            select: this.select,
+            onDragStart: this.onDragStart,
+            onDragOver: this.onDragOver,
+            onDrop: this.onDrop,
+            onDragEnd: this.onDragEnd,
+            isDragging: this.isDragging,
+            getItemColSpan: this.getItemColSpan,
+            getItemRowSpan: this.getItemRowSpan,
         };
     },
     computed: {
@@ -513,13 +537,6 @@ export default {
         },
         acrossTableDrag() {
             this.processTableDraggable(true);
-        },
-        virtualTop() {
-            this.$refs.virtualPlaceholder[0].style.height = this.virtualTop + this.virtualBottom + 'px';
-            this.$refs.bodyTable[0].$el.style.transform = `translateY(${this.virtualTop}px)`;
-        },
-        virtualBottom() {
-            this.$refs.virtualPlaceholder[0].style.height = this.virtualTop + this.virtualBottom + 'px';
         },
         pageSize() {
             this.currentPageSize = undefined;
@@ -1702,7 +1719,7 @@ export default {
                 this.updateTreeExpanded(item, expanded);
             }
             if (this.virtual) {
-                this.throttledVirtualScroll({ target: this.$refs.scrollView[0].$refs.wrap });
+                this.$refs.tableRender.startVirtualScroll();
             }
         },
         /**
@@ -1738,16 +1755,6 @@ export default {
             });
             expandNode.expanded = expanded;
             this.$forceUpdate(); // 有loading的情况下，forceUpdate才会更新
-        },
-        onSetEditing(item, columnVM) {
-            const fieldName = columnVM.field;
-            item.editing = fieldName;
-            if (columnVM.dblclickHandler) {
-                columnVM.dblclickHandler({ item, columnVM });
-            }
-        },
-        resetEdit(item) {
-            item.editing = '';
         },
         /**
          * 拖拽开始
@@ -1795,7 +1802,12 @@ export default {
                         index: this.findItemIndex(item),
                     },
                 };
-                e.dataTransfer.setData('application/json', JSON.stringify(dragStartData));
+                e.dataTransfer.setData('application/json', JSON.stringify(dragStartData, function (key, value) {
+                    if (key === 'parentPointer') {
+                        return undefined;
+                    }
+                    return value;
+                }));
                 // 当不可拖拽节点里的文字双击选中时再拖拽，会触发dragstart事件，dragover的时候也会响应
                 // 这里增加信息，dragover的时候可以处理是否响应
                 e.dataTransfer.setData('info/acrosstabledrag', '');
@@ -1835,7 +1847,7 @@ export default {
                 // this.dragState.sourcePath === undefined，表示是拖拽节点所在表格外的其他表格，因为其他表格没有响应dragstart事件，所以sourcePath为undefined
                 if (!this.dropData && this.dragState.sourcePath === undefined) {
                     this.dropData = {
-                        dragoverElRect: this.$refs.body[0].getBoundingClientRect(),
+                        dragoverElRect: this.$refs.tableRender.getBodyRef().getBoundingClientRect(),
                         parentElRect: this.$refs.root.getBoundingClientRect(),
                         position: 'append',
                         left: 0,
@@ -2116,7 +2128,7 @@ export default {
                     return;
                 if (this.draggable || this.acrossTableDrag) {
                     this.dropData = {
-                        dragoverElRect: this.$refs.body[0].getBoundingClientRect(),
+                        dragoverElRect: this.$refs.tableRender.getBodyRef().getBoundingClientRect(),
                         parentElRect: this.$refs.root.getBoundingClientRect(),
                         position: 'append',
                         left: 0,
@@ -2253,7 +2265,7 @@ export default {
                 Array.from(crt.children).forEach((td) => {
                     td.style.position = 'static'; // 去除sticky的情况
                 });
-                const tableEl = this.$refs.bodyTable[0].$el;
+                const tableEl = this.$refs.renderTable.getTableBodyRef().$el;
                 const tableElCrt = tableEl.cloneNode(true);
                 const tbody = tableElCrt.getElementsByTagName('tbody')[0];
                 tbody.innerHTML = '';
@@ -2279,16 +2291,6 @@ export default {
                 }
             }
             return target;
-        },
-        getEditablewrapWidth(item, columnIndex, treeColumnIndex) {
-            if (this.treeDisplay && item.tableTreeItemLevel !== undefined && columnIndex === treeColumnIndex) {
-                let width = 20 * item.tableTreeItemLevel + 10;
-                if (this.$at(item, this.hasChildrenField)) {
-                    width = width + 20;
-                }
-                return `calc(100% - ${width}px)`;
-            }
-            return '100%';
         },
         getPaginationHeight() {
             let paginationHeight = 0;
@@ -2636,26 +2638,6 @@ export default {
     padding-bottom: 4px;
     min-height: var(--table-view-editable-td-min-height);
     height: 1px;
-}
-.editablewrap{
-    display: table;
-    width: 100%;
-    height: 100%;
-    table-layout: fixed;
-    min-height: var(--table-view-editable-td-min-height);
-}
-.editablewrap > div {
-    display: table-cell;
-    vertical-align: middle;
-}
-.editablewrap[ellipsis] > div {
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.editablewrap[ellipsis]:not([editing]) > div div {
-    display: inline;
 }
 .title {
     text-align: center;
