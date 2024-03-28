@@ -288,7 +288,26 @@
     "name": "Flex",
     "ideusage": {
       "idetype": "container",
-      "containerDirection": "this.getAttribute('direction')?.value === 'true' ? 'column' : 'row' "
+      "containerDirection": "this.getAttribute('direction')?.value === 'true' ? 'column' : 'row' ",
+      "automate": [{
+          "command": "WRAP_LINEAR_VERTICAL",
+          "useblock": 0,
+          "attribute": {
+              "direction": "vertical",
+              "justify": "start",
+              "alignment": "start",
+              "wrap": "nowrap"
+          }
+      }, {
+          "command": "WRAP_LINEAR_HORIZONTAL",
+          "useblock": 0,
+          "attribute": {
+              "direction": "horizontal",
+              "justify": "start",
+              "alignment": "start",
+              "wrap": "nowrap"
+          }
+      }]
     }
   },
   {
