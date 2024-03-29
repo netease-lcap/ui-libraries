@@ -4,15 +4,66 @@
         <slot name="title">{{ title }}</slot>
     </div>
     <slot name="config-columns"></slot>
-    <u-table-render
+    <u-table-designer
+        ref="tableRender"
+
         :tableMetaList="tableMetaList"
         :visibleColumnVMs="visibleColumnVMs"
         :visibleTableHeadTrArr="visibleTableHeadTrArr"
+        :columnVMsMap="columnVMsMap"
+
+        :emptyText="emptyText"
+        :errorText="errorText"
+        :loadingText="loadingText"
         :currentData="currentData"
+        :currentDataSource="currentDataSource"
         :currentLoading="currentLoading"
         :currentError="currentError"
-        :virtual="virtual">
-    </u-table-render>
+
+        :pageable="pageable"
+
+        :striped="striped"
+        :border="border"
+        :line="line"
+        :color="color"
+        :boldHeader="boldHeader"
+        
+        :defaultOrder="defaultOrder"
+        :sorting="sorting"
+
+        :useStickyFixed="useStickyFixed"
+        :fixedRightList="fixedRightList"
+        :fixedLeftList="fixedLeftList"
+
+        :tableWidth="tableWidth"
+        :tableHeight="tableHeight"
+        :bodyHeight="bodyHeight"
+
+        :thEllipsis="thEllipsis"
+        :ellipsis="ellipsis"
+        
+        :allChecked="allChecked"
+
+        :resizable="resizable"
+        :minColumnWidth="minColumnWidth"
+
+        :treeDisplay="treeDisplay"
+        :hasChildrenField="hasChildrenField"
+
+        :selectable="selectable"
+        :selectedItem="selectedItem"
+
+        :virtual="virtual"
+        :itemHeight="itemHeight"
+        :virtualCount="virtualCount"
+        :listKey="listKey"
+
+        :rowDraggable="rowDraggable"
+        :handlerDraggable="handlerDraggable"
+
+        :disabled="disabled"
+        :readonly="readonly">
+    </u-table-designer>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
         :total-items="currentDataSource.total" :page="currentDataSource.paging.number"
@@ -68,6 +119,7 @@
         :border="border"
         :line="line"
         :color="color"
+        :boldHeader="boldHeader"
         
         :defaultOrder="defaultOrder"
         :sorting="sorting"
@@ -141,6 +193,7 @@ import flatMap from 'lodash/flatMap';
 import { createTableHeaderExportHelper, getXslxStyle } from './helper';
 import * as xlsxUtils from '../../utils/xlsx';
 import UTableRender from './render.table.vue';
+import UTableDesigner from './designer.table.vue';
 
 export default {
     name: 'u-table-view',
@@ -148,17 +201,17 @@ export default {
         UTableViewDropGhost,
         SEmpty,
         UTableRender,
+        UTableDesigner,
     },
     mixins: [MEmitter, i18nMixin('u-table-view')],
     // i18n,
     props: {
-        boldHeader: {
-            type: Boolean,
-            default: true,
-        },
         data: Array,
         dataSource: [DataSource, DataSourceNew, Function, Object, Array],
+        extraParams: Object,
         initialLoad: { type: Boolean, default: true },
+        // 新增用来分页
+        pagination: { type: Boolean, default: undefined },
         pageable: { type: [Boolean, String], default: false },
         pageSize: { type: Number, default: 20 },
         pageNumber: { type: Number, default: 1 },
@@ -181,9 +234,7 @@ export default {
         remoteFiltering: { type: Boolean, default: false },
         title: { type: String, default: '' },
         titleAlignment: { type: String, default: 'center' },
-        border: { type: Boolean, default: false },
-        line: { type: Boolean, default: false },
-        striped: { type: Boolean, default: false },
+        
         loading: { type: Boolean, default: undefined },
         loadingText: {
             type: String,
@@ -221,40 +272,54 @@ export default {
         accordion: { type: Boolean, default: false },
         resizable: { type: Boolean, default: false },
         resizeRemaining: { type: String, default: 'average' },
+        minColumnWidth: { type: Number, default: 44 },
+
         showHead: { type: Boolean, default: true },
+
         stickHead: { type: Boolean, default: false },
         stickHeadOffset: { type: Number, default: 0 },
-        color: String,
+        syncStickHeadXScroll: { type: Boolean, default: false }, // 同步固定头部的横向滚动
+
         treeDisplay: { type: Boolean, default: false },
         childrenField: { type: String, default: 'children' },
         hasChildrenField: { type: String, default: 'hasChildren' },
         treeDataSource: [Function],
-        minColumnWidth: { type: Number, default: 44 },
-        extraParams: Object,
-        defaultColumnWidth: [String, Number],
+        treeCheckType: { type: String, default: 'up+down' }, // 树型数据关联选中类型
+        parentField: { type: String },
+
         filterMultiple: { type: Boolean, default: false },
         filterMax: Number,
         resizeBodyHeight: { type: Boolean, default: true },
-        stickFixed: { type: Boolean, default: true },
-        draggable: { type: Boolean, default: false }, // 是否可拖拽
-        treeCheckType: { type: String, default: 'up+down' }, // 树型数据关联选中类型
-        designerMode: { type: String, default: 'success' }, // 编辑器展示不同表单状态
 
-        // 新增用来分页
-        pagination: { type: Boolean, default: undefined },
-        parentField: { type: String },
+        stickFixed: { type: Boolean, default: true },
+
+        designerMode: { type: String, default: 'success' }, // 编辑器展示不同表单状态
+        
         configurable: { type: Boolean, default: false }, // 是否配置显隐列
+
+        draggable: { type: Boolean, default: false }, // 是否可拖拽
         canDragableHandler: Function,
         canDropinHandler: Function,
         acrossTableDrag: { type: Boolean, default: false }, // 是否跨表格拖拽
-        thEllipsis: { type: Boolean, default: false }, // 表头是否缩略展示
-        ellipsis: { type: Boolean, default: false }, // 单元格是否缩略展示
-        syncStickHeadXScroll: { type: Boolean, default: false }, // 同步固定头部的横向滚动
+        
+        
         // 虚拟滚动相关
         itemHeight: Number,
         virtual: { type: Boolean, default: false },
         virtualCount: { type: Number, default: 60 },
         listKey: { type: String, default: 'currentData' },
+        // 样式相关
+        boldHeader: {
+            type: Boolean,
+            default: true,
+        },
+        color: String,
+        border: { type: Boolean, default: false },
+        line: { type: Boolean, default: false },
+        striped: { type: Boolean, default: false },
+        defaultColumnWidth: [String, Number],
+        thEllipsis: { type: Boolean, default: false }, // 表头是否缩略展示
+        ellipsis: { type: Boolean, default: false }, // 单元格是否缩略展示
     },
     data() {
         return {
@@ -327,12 +392,6 @@ export default {
             if (this.exportData)
                 return this.exportData;
 
-            setTimeout(() => {
-                this.$refs.td && this.$refs.td.forEach((tdEl, index) => {
-                    const length = this.columnVMs.length;
-                    tdEl.__vue__ = this.columnVMs[index % length];
-                });
-            });
             let data = this.currentDataSource ? this.currentDataSource.viewData.filter((item) => !!item) : this.currentDataSource;
 
             if (this.treeDisplay && data) {
@@ -623,14 +682,6 @@ export default {
         this.enterTarget = null;
     },
     methods: {
-        typeCheck(type) {
-            return [
-                'index',
-                'radio',
-                'checkbox',
-                'expander',
-            ].includes(type);
-        },
         clearTimeout() {
             if (this.timer) {
                 clearTimeout(this.timer);
@@ -2677,37 +2728,6 @@ export default {
     background-color: var(--table-view-expand-td-background);
 }
 
-.column-title {
-    font-size: var(--table-view-head-item-size);
-    color: var(--table-view-head-item-color);
-}
-
-.column-field {}
-
-.trmask {
-    position: relative;
-}
-.trmask::after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background: rgba(255,255,255,0.8);
-    z-index: 999;
-}
-
-.tdmask {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background: rgba(255,255,255,0.8);
-    z-index: 999;
-}
 .spinner {
     margin-right: 4px;
 }

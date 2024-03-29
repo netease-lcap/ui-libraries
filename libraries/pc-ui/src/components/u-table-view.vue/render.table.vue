@@ -76,7 +76,7 @@
                         <tbody ref="virtual">
                             <template v-if="(!currentLoading && !currentError && !currentEmpty || pageable === 'auto-more' || pageable === 'load-more') && currentData && currentData.length">
                                 <template v-for="(item, rowIndex) in virtualList">
-                                    <tr :key="getKey(item, rowIndex)" :class="[$style.row, (rowIndex !== 0) ? $style.trmask : '']" :color="item.rowColor" :selectable="selectable" :selected="selectable && selectedItem === item"
+                                    <tr :key="getKey(item, rowIndex)" :class="[$style.row]" :color="item.rowColor" :selectable="selectable" :selected="selectable && selectedItem === item"
                                     v-if="item.display !== 'none'"
                                     :draggable="rowDraggable && item.draggable || undefined"
                                     :dragging="isDragging(item)"
@@ -112,12 +112,9 @@
 
                                             :handlerDraggable="handlerDraggable"
 
-                                            slotName="cell"
-                                            :slotProps="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex, columnItem: columnVM.columnItem }"
                                             @check="check($event.item, $event.checked)"
                                             @tree-toggle-expanded="toggleTreeExpanded"
                                             @select="select($event.item, $event.rowIndex)">
-                                            <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
                                         </u-table-render-td>
                                     </tr>
                                     <u-table-render-tr-expander
@@ -852,6 +849,10 @@ export default {
     width: 0;
     height: 100%;
     vertical-align: middle;
+}
+.column-title {
+    font-size: var(--table-view-head-item-size);
+    color: var(--table-view-head-item-color);
 }
 
 /**
