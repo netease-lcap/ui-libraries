@@ -45,7 +45,7 @@
                             v-ellipsis-title>
                             <!-- type === 'checkbox' -->
                             <span v-if="columnVM.type === 'checkbox'">
-                                <u-checkbox :value="allChecked" @check="checkAll($event.value)" :disabled="disabled" :readonly="readonly"></u-checkbox>
+                                <u-checkbox :value="allChecked" @check="checkAll($event.value)" :disabled="disabled" :readonly="readonly || !currentData || !currentData.length"></u-checkbox>
                             </span>
                             <!-- Normal title -->
                             <template>
@@ -2877,10 +2877,7 @@ export default {
         },
         getEditablewrapWidth(item, columnIndex, treeColumnIndex) {
             if (this.treeDisplay && item.tableTreeItemLevel !== undefined && columnIndex === treeColumnIndex) {
-                let width = 20 * item.tableTreeItemLevel + 10;
-                if (this.$at(item, this.hasChildrenField)) {
-                    width = width + 20;
-                }
+                const width = 20 * (item.tableTreeItemLevel + 1) + 10;
                 return `calc(100% - ${width}px)`;
             }
             return '100%';
@@ -3738,6 +3735,11 @@ content: "\e679";
     display: inline-flex;
     align-items: center;
     width: auto;
+}
+
+.tree_expander + div.editablewrap > div,
+.tree_placeholder + div.editablewrap > div {
+    width: 100%;
 }
 
 .tree_expander[loading]::before {
