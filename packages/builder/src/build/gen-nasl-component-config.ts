@@ -168,7 +168,7 @@ export default function genNaslComponentConfig({
   }
 
   const componentDir = path.resolve(apiPath, '../');
-  const assetsPath = [assetsPublicPath, libInfo, componentDir.substring(rootPath.length + 1)];
+  const assetsPath = [assetsPublicPath, libInfo, componentDir.substring(rootPath.length + 1)].join('/');
 
   const screenshots = getScreenShot(componentDir, assetsPath);
   const drawings = getDrawings(componentDir, assetsPath);
