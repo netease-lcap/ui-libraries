@@ -89,7 +89,7 @@ function getBlocksByDemo(componentDir, { screenshots, drawings }) {
   return blocks;
 }
 
-function genBlockConfig(componentDir, { screenshots, drawings }) {
+function genBlockConfig(componentDir, { screenshots, drawings }, framework) {
   let storyFilePath = `${componentDir}/stories/block.stories`;
   if (fs.existsSync(`${storyFilePath}.jsx`)) {
     storyFilePath = `${storyFilePath}.jsx`;
@@ -102,7 +102,7 @@ function genBlockConfig(componentDir, { screenshots, drawings }) {
   }
 
   const code = fs.readFileSync(storyFilePath);
-  const blocks = transformStory2Blocks(code.toString());
+  const blocks = transformStory2Blocks(code.toString(), framework);
   return blocks.map(({ name, template }, index) => ({
     concept: 'ViewBlockWithImage',
     title: name,
@@ -174,7 +174,7 @@ export default function genNaslComponentConfig({
   const drawings = getDrawings(componentDir, assetsPath);
 
   try {
-    const blocks = genBlockConfig(componentDir, { screenshots, drawings });
+    const blocks = genBlockConfig(componentDir, { screenshots, drawings }, framework);
     Object.assign(component, { blocks });
   } catch (e: any) {
     logger.error(`处理 block 异常 ${e.message}`);
