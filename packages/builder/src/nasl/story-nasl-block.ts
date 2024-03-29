@@ -36,7 +36,7 @@ const getBlocksFromStory = (code, framework) => {
               nameSeted = true;
             } else if (p.node.key && p.node.key.name === 'template') {
               // eslint-disable-next-line no-eval
-              block.template = eval(getNodeCode(p.node.value));
+              block.template = `<template>${eval(getNodeCode(p.node.value))}</template>`;
             } else if (nameSeted && block.template) {
               p.stop();
             }
