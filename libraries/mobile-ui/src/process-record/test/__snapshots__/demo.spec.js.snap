@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div vusion-disabled-duplicate="true" vusion-disabled-copy="true" class="van-process-record">
+      <div class="van-steps van-steps--vertical van-process-record__timeline">
+        <div child-cut-disabled="true" class="van-steps__items"></div>
+        <div class="van-process-record__timeline-noMore">没有更多了</div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div vusion-disabled-duplicate="true" vusion-disabled-copy="true" class="van-process-record">
+      <div role="feed" class="van-list van-process-record__list">
+        <div class="van-list__placeholder"></div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

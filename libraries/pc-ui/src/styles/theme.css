@@ -1248,7 +1248,7 @@
     --checkbox-font-color-disabled: #999; /* @hidden */
     --checkbox-font-color: #333; /* @hidden */
     --checkbox-box-shadow-active: var(--button-box-shadow-active); /* @hidden */
-    --checkbox-icon: '\ff01'; /* @hidden */
+    --checkbox-icon: '\e649'; /* @hidden */
     --checkbox-icon-size: var(--font-size-small); /* @hidden */
     --checkbox-icon-left: 0; /* @hidden */
     --checkbox-icon-top: 0; /* @hidden */
@@ -1319,8 +1319,10 @@
     --select-padding-x-large: 10px; /* @hidden */
     --select-padding-x-huge: 10px; /* @hidden */
     --select-padding-x-full: 10px; /* @hidden */
-    --select-multiple-background-color: white; /* @type color */ /* @group 多选状态 */ /* @desc 选择项checkbox的背景颜色 */
-    --select-multiple-icon-color: #517cff; /* @type color */ /* @group 多选状态 */ /* @desc 选择项checkbox的选中图标颜色 */
+    --select-multiple-popper-item-background-selected: #fff; /* @type color */ /* @group 多选状态 */ /* @desc 选择项的背景颜色 */
+    --select-multiple-popper-item-color-selected: inherit; /* @type color */ /* @group 多选状态 */ /* @desc 选择项的文字颜色 */
+    --select-multiple-background-color: var(--brand-primary); /* @type color */ /* @group 多选状态 */ /* @desc 选择项checkbox的背景颜色 */
+    --select-multiple-icon-color: #fff; /* @type color */ /* @group 多选状态 */ /* @desc 选择项checkbox的选中图标颜色 */
     --select-multiple-partial-icon-color: #517cff; /* @type color */ /* @group 多选状态 */ /* @desc 选择项checkbox的半选择图标颜色 */
     --select-border-color-hover: var(--brand-primary); /* @hidden */
     --select-border-color-inverse: var(--border-color-base-inverse); /* @hidden */
@@ -2019,7 +2021,7 @@
     --grid-layout-column-gap-none: 0;
     --grid-layout-column-gap-mini: 4px;
     --grid-layout-column-gap-small: 8px;
-    --grid-layout-column-gap-normal: 16px;
+    --grid-layout-column-gap-normal: var(--space-base);
     --grid-layout-column-gap-large: 24px;
     --grid-layout-column-gap-huge: 32px;
     --grid-layout-column-content-gap-shrink: var(--space-shrink);
@@ -2029,7 +2031,21 @@
     --grid-layout-column-content-gap-normal: var(--space-base);
     --grid-layout-column-content-gap-large: var(--space-large);
 
+    /* @component u-process-info @hidden*/
+    --process-info-label-color: var(--color-light);
 
+    /* @component u-process-record @hidden*/
+    --process-record-label-color: var(--color-light);
+    --process-record-title-color: #333;
+    --process-record-tail-border-color: #337EFF;
+    --process-record-dot-success-backgroundcolor: #337EFF;
+    --process-record-dot-error-backgroundcolor: #F24957;
+    --process-record-dot-normal-backgroundcolor: white;
+    --process-record-dot-normal-border-color: #337EFF;
+    --process-record-statuslabel-success-backgroundcolor: rgba(38, 189, 113, 0.1);
+    --process-record-statuslabel-success-color: #26BD71;
+    --process-record-statuslabel-error-backgroundcolor: rgba(242, 73, 87, 0.1);
+    --process-record-statuslabel-error-color: #F24957;
 }
 
 @custom-media --mini-window (max-width: 479px);

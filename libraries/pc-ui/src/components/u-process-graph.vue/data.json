@@ -1,0 +1,359 @@
+{
+    "message": "200",
+    "code": null,
+    "data": {
+        "procInstId": "a0853593-e1ec-11ee-be21-4a282caa57e7",
+        "elements": [
+            {
+                "current": false,
+                "completed": true,
+                "name": "Start",
+                "title": "开始",
+                "type": "InitiateTask",
+                "incomingFlows": [
+                    "Process_6ee0a806_Start_to_InitiateTask"
+                ],
+                "outcomingFlows": [
+                    "SequenceFlow"
+                ],
+                "completeInfos": [
+                    {
+                        "assignee": "DEVACC-dff",
+                        "completeTime": "2024-03-14 18:21:32",
+                        "completed": true,
+                        "candidates": [
+                            "DEVACC-dff"
+                        ]
+                    }
+                ],
+                "x": 0.0,
+                "y": 59.005859375,
+                "width": 0.0,
+                "height": 0.0
+            },
+            {
+                "current": false,
+                "completed": true,
+                "name": "ApprovalTask",
+                "title": "审批任务",
+                "type": "ApprovalTask",
+                "incomingFlows": [
+                    "SequenceFlow"
+                ],
+                "outcomingFlows": [
+                    "SequenceFlow2"
+                ],
+                "completeInfos": [
+                    {
+                        "assignee": "DEVACC-dff",
+                        "completeTime": "2024-03-14 20:42:17",
+                        "completed": true,
+                        "candidates": [
+                            "DEVACC-dff"
+                        ]
+                    }
+                ],
+                "x": 0.0,
+                "y": 149.068359375,
+                "width": 0.0,
+                "height": 0.0
+            },
+            {
+                "current": false,
+                "completed": true,
+                "name": "End",
+                "title": null,
+                "type": "EndEvent",
+                "incomingFlows": [
+                    "SequenceFlow4"
+                ],
+                "outcomingFlows": [],
+                "completeInfos": null,
+                "x": 0.0,
+                "y": 627.0,
+                "width": 0.0,
+                "height": 0.0
+            },
+            {
+                "current": false,
+                "completed": true,
+                "name": "ServiceTask1",
+                "title": null,
+                "type": "ServiceTask",
+                "incomingFlows": [
+                    "SequenceFlow1",
+                    "SequenceFlow3",
+                    "SequenceFlow5"
+                ],
+                "outcomingFlows": [
+                    "SequenceFlow4"
+                ],
+                "completeInfos": null,
+                "x": 0.0,
+                "y": 521.12109375,
+                "width": 0.0,
+                "height": 0.0
+            },
+            {
+                "current": false,
+                "completed": true,
+                "name": "ExclusiveGateway1",
+                "title": null,
+                "type": "ExclusiveGateway",
+                "incomingFlows": [
+                    "SequenceFlow2"
+                ],
+                "outcomingFlows": [
+                    "ConditionalFlow2",
+                    "ConditionalFlow1",
+                    "ConditionalFlow3"
+                ],
+                "completeInfos": null,
+                "x": 0.0,
+                "y": 214.5234375,
+                "width": 0.0,
+                "height": 0.0
+            },
+            {
+                "current": false,
+                "completed": false,
+                "name": "ApprovalTask1",
+                "title": "审批任务1",
+                "type": "ApprovalTask",
+                "incomingFlows": [
+                    "ConditionalFlow2"
+                ],
+                "outcomingFlows": [
+                    "SequenceFlow1"
+                ],
+                "completeInfos": [],
+                "x": -265.64453125,
+                "y": 346.4765625,
+                "width": 0.0,
+                "height": 0.0
+            },
+            {
+                "current": false,
+                "completed": true,
+                "name": "ApprovalTask2",
+                "title": "审批任务2",
+                "type": "ApprovalTask",
+                "incomingFlows": [
+                    "ConditionalFlow1"
+                ],
+                "outcomingFlows": [
+                    "SequenceFlow3"
+                ],
+                "completeInfos": [
+                    {
+                        "assignee": "DEVACC-dff",
+                        "completeTime": "2024-03-14 20:42:23",
+                        "completed": true,
+                        "candidates": [
+                            "DEVACC-dff"
+                        ]
+                    }
+                ],
+                "x": 0.0,
+                "y": 346.4765625,
+                "width": 0.0,
+                "height": 0.0
+            },
+            {
+                "current": false,
+                "completed": false,
+                "name": "ApprovalTask3",
+                "title": "审批任务3",
+                "type": "ApprovalTask",
+                "incomingFlows": [
+                    "ConditionalFlow3"
+                ],
+                "outcomingFlows": [
+                    "SequenceFlow5"
+                ],
+                "completeInfos": [],
+                "x": 255.44140625,
+                "y": 346.4765625,
+                "width": 0.0,
+                "height": 0.0
+            }
+        ],
+        "flows": [
+            {
+                "current": false,
+                "completed": true,
+                "name": null,
+                "title": "SequenceFlow",
+                "type": "sequenceFlow",
+                "sourceRef": "Start",
+                "targetRef": "ApprovalTask",
+                "wayPoints": [
+                    {
+                        "x": 0.0,
+                        "y": 1.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": -1.0
+                    }
+                ]
+            },
+            {
+                "current": false,
+                "completed": true,
+                "name": null,
+                "title": "SequenceFlow4",
+                "type": "sequenceFlow",
+                "sourceRef": "ServiceTask1",
+                "targetRef": "End",
+                "wayPoints": [
+                    {
+                        "x": 0.0,
+                        "y": 1.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": -1.0
+                    }
+                ]
+            },
+            {
+                "current": false,
+                "completed": true,
+                "name": null,
+                "title": "SequenceFlow2",
+                "type": "sequenceFlow",
+                "sourceRef": "ApprovalTask",
+                "targetRef": "ExclusiveGateway1",
+                "wayPoints": [
+                    {
+                        "x": 0.0,
+                        "y": 1.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": -1.0
+                    }
+                ]
+            },
+            {
+                "current": false,
+                "completed": false,
+                "name": null,
+                "title": "SequenceFlow1",
+                "type": "sequenceFlow",
+                "sourceRef": "ApprovalTask1",
+                "targetRef": "ServiceTask1",
+                "wayPoints": [
+                    {
+                        "x": 0.0,
+                        "y": 1.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": -1.0
+                    }
+                ]
+            },
+            {
+                "current": false,
+                "completed": true,
+                "name": null,
+                "title": "SequenceFlow3",
+                "type": "sequenceFlow",
+                "sourceRef": "ApprovalTask2",
+                "targetRef": "ServiceTask1",
+                "wayPoints": [
+                    {
+                        "x": 0.0,
+                        "y": 1.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": -1.0
+                    }
+                ]
+            },
+            {
+                "current": false,
+                "completed": false,
+                "name": null,
+                "title": "SequenceFlow5",
+                "type": "sequenceFlow",
+                "sourceRef": "ApprovalTask3",
+                "targetRef": "ServiceTask1",
+                "wayPoints": [
+                    {
+                        "x": 0.0,
+                        "y": 1.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": -1.0
+                    }
+                ]
+            },
+            {
+                "current": false,
+                "completed": false,
+                "name": null,
+                "title": "ConditionalFlow2",
+                "type": "sequenceFlow",
+                "sourceRef": "ExclusiveGateway1",
+                "targetRef": "ApprovalTask1",
+                "wayPoints": [
+                    {
+                        "x": 0.0,
+                        "y": 1.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": -1.0
+                    }
+                ]
+            },
+            {
+                "current": false,
+                "completed": true,
+                "name": null,
+                "title": "ConditionalFlow1",
+                "type": "sequenceFlow",
+                "sourceRef": "ExclusiveGateway1",
+                "targetRef": "ApprovalTask2",
+                "wayPoints": [
+                    {
+                        "x": 0.0,
+                        "y": 1.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": -1.0
+                    }
+                ]
+            },
+            {
+                "current": false,
+                "completed": false,
+                "name": null,
+                "title": "ConditionalFlow3",
+                "type": "sequenceFlow",
+                "sourceRef": "ExclusiveGateway1",
+                "targetRef": "ApprovalTask3",
+                "wayPoints": [
+                    {
+                        "x": 0.0,
+                        "y": 1.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": -1.0
+                    }
+                ]
+            }
+        ],
+        "diagramBeginX": -265.64453125,
+        "diagramBeginY": -1.0,
+        "diagramWidth": 255.44140625,
+        "diagramHeight": 627.0
+    }
+}

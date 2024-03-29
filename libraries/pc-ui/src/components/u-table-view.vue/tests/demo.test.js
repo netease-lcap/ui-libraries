@@ -45,7 +45,7 @@ import CasesDemo34 from '../demos/cases/CasesDemo34.vue';
 import CasesDemo35 from '../demos/cases/CasesDemo35.vue';
 import CasesDemo36 from '../demos/cases/CasesDemo36.vue';
 import CasesDemo37 from '../demos/cases/CasesDemo37.vue';
-import CasesDemo38 from '../demos/cases/CasesDemo38.vue';
+// // import CasesDemo38 from '../demos/cases/CasesDemo38.vue';
 import CasesDemo39 from '../demos/cases/CasesDemo39.vue';
 import CasesDemo40 from '../demos/cases/CasesDemo40.vue';
 import CasesDemo41 from '../demos/cases/CasesDemo41.vue';
@@ -193,509 +193,509 @@ describe('u-table-view.vue', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Demo-全部百分比', async () => {
-    const wrapper = mount(CasesDemo12, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-百分比与数字结合，横向滚动', async () => {
-    const wrapper = mount(CasesDemo13, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-固定列', async () => {
-    const wrapper = mount(CasesDemo14, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-多选的问题', async () => {
-    const wrapper = mount(CasesDemo15, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-局部报错', async () => {
-    const wrapper = mount(CasesDemo16, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-value-field', async () => {
-    const wrapper = mount(CasesDemo17, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-数据后来加载过来时，高度应当重新计算', async () => {
-    const wrapper = mount(CasesDemo18, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-data-source Error 的情况', async () => {
-    const wrapper = mount(CasesDemo19, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-步骤条中使用', async () => {
-    const wrapper = mount(CasesDemo20, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-排序+调整列宽', async () => {
-    const wrapper = mount(CasesDemo21, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-切换时分页调整不回来，分页报错', async () => {
-    const wrapper = mount(CasesDemo22, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-过滤下拉菜单不应该嵌在表格内部', async () => {
-    const wrapper = mount(CasesDemo23, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-空表格显示数据异常', async () => {
-    const wrapper = mount(CasesDemo24, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-空表格添加数据不会 reload', async () => {
-    const wrapper = mount(CasesDemo25, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-u-grid-layout 和 u-tabs 中的布局问题', async () => {
-    const wrapper = mount(CasesDemo26, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-loading 的问题', async () => {
-    const wrapper = mount(CasesDemo27, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-前端排序不需要 sorting 也能保持状态', async () => {
-    const wrapper = mount(CasesDemo28, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-后端排序', async () => {
-    const wrapper = mount(CasesDemo29, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-v-if', async () => {
-    const wrapper = mount(CasesDemo30, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-v-show', async () => {
-    const wrapper = mount(CasesDemo31, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-树型展示，点击选中', async () => {
-    const wrapper = mount(CasesDemo32, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-树型展示', async () => {
-    const wrapper = mount(CasesDemo33, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-显隐列配置', async () => {
-    const wrapper = mount(CasesDemo34, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-编辑行', async () => {
-    const wrapper = mount(CasesDemo35, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-动态列', async () => {
-    const wrapper = mount(CasesDemo36, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-行列与表头合并', async () => {
-    const wrapper = mount(CasesDemo37, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-行列与表头合并+固定列', async () => {
-    const wrapper = mount(CasesDemo38, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-自定义展开列图标', async () => {
-    const wrapper = mount(CasesDemo39, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-虚拟列表', async () => {
-    const wrapper = mount(CasesDemo40, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-纯数组前端分页', async () => {
-    const wrapper = mount(CasesDemo41, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-纯前端分页数据源改变后分页情况', async () => {
-    const wrapper = mount(CasesDemo42, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-后端分页', async () => {
-    const wrapper = mount(CasesDemo43, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-纯数组前端排序', async () => {
-    const wrapper = mount(CasesDemo44, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-纯前端过滤', async () => {
-    const wrapper = mount(CasesDemo45, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-data-source 数组', async () => {
-    const wrapper = mount(ExamplesDemo1, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-data-source 函数', async () => {
-    const wrapper = mount(ExamplesDemo2, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-格式器', async () => {
-    const wrapper = mount(ExamplesDemo3, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-格式器', async () => {
-    const wrapper = mount(ExamplesDemo4, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-列插槽', async () => {
-    const wrapper = mount(ExamplesDemo5, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-表格线条', async () => {
-    const wrapper = mount(ExamplesDemo6, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-条纹展示', async () => {
-    const wrapper = mount(ExamplesDemo7, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-表格颜色', async () => {
-    const wrapper = mount(ExamplesDemo8, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-单行颜色', async () => {
-    const wrapper = mount(ExamplesDemo9, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-隐藏头部', async () => {
-    const wrapper = mount(ExamplesDemo10, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-加载中', async () => {
-    const wrapper = mount(ExamplesDemo11, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-加载中', async () => {
-    const wrapper = mount(ExamplesDemo12, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-加载错误', async () => {
-    const wrapper = mount(ExamplesDemo13, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-加载错误', async () => {
-    const wrapper = mount(ExamplesDemo14, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-没有数据', async () => {
-    const wrapper = mount(ExamplesDemo15, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('Demo-表头固定', async () => {
-    const wrapper = mount(ExamplesDemo16, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  // it('Demo-表头吸顶', async () => {
-  //   const wrapper = mount(ExamplesDemo17, { localVue, router });
+  // it('Demo-全部百分比', async () => {
+  //   const wrapper = mount(CasesDemo12, { localVue, router });
   //   await sleep(16);
   //   expect(wrapper.html()).toMatchSnapshot();
   // });
 
-  it('Demo-默认多行显示', async () => {
-    const wrapper = mount(ExamplesDemo18, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-百分比与数字结合，横向滚动', async () => {
+  //   const wrapper = mount(CasesDemo13, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-单行省略显示', async () => {
-    const wrapper = mount(ExamplesDemo19, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-固定列', async () => {
+  //   const wrapper = mount(CasesDemo14, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-表头文字省略显示', async () => {
-    const wrapper = mount(ExamplesDemo20, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-多选的问题', async () => {
+  //   const wrapper = mount(CasesDemo15, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-横向滚动', async () => {
-    const wrapper = mount(ExamplesDemo21, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-局部报错', async () => {
+  //   const wrapper = mount(CasesDemo16, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-固定列', async () => {
-    const wrapper = mount(ExamplesDemo22, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-value-field', async () => {
+  //   const wrapper = mount(CasesDemo17, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-隐藏部分列', async () => {
-    const wrapper = mount(ExamplesDemo23, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-数据后来加载过来时，高度应当重新计算', async () => {
+  //   const wrapper = mount(CasesDemo18, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-average', async () => {
-    const wrapper = mount(ExamplesDemo24, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-data-source Error 的情况', async () => {
+  //   const wrapper = mount(CasesDemo19, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-sequence', async () => {
-    const wrapper = mount(ExamplesDemo25, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-步骤条中使用', async () => {
+  //   const wrapper = mount(CasesDemo20, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-none', async () => {
-    const wrapper = mount(ExamplesDemo26, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-排序+调整列宽', async () => {
+  //   const wrapper = mount(CasesDemo21, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-前端分页', async () => {
-    const wrapper = mount(ExamplesDemo27, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // // it('Demo-切换时分页调整不回来，分页报错', async () => {
+  // //   const wrapper = mount(CasesDemo22, { localVue, router });
+  // //   await sleep(16);
+  // //   expect(wrapper.html()).toMatchSnapshot();
+  // // });
 
-  it('Demo-后端分页', async () => {
-    const wrapper = mount(ExamplesDemo28, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-过滤下拉菜单不应该嵌在表格内部', async () => {
+  //   const wrapper = mount(CasesDemo23, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-翻页器功能', async () => {
-    const wrapper = mount(ExamplesDemo29, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-空表格显示数据异常', async () => {
+  //   const wrapper = mount(CasesDemo24, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-滚动加载更多', async () => {
-    const wrapper = mount(ExamplesDemo30, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-空表格添加数据不会 reload', async () => {
+  //   const wrapper = mount(CasesDemo25, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-手动加载更多', async () => {
-    const wrapper = mount(ExamplesDemo31, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // // it('Demo-u-grid-layout 和 u-tabs 中的布局问题', async () => {
+  // //   const wrapper = mount(CasesDemo26, { localVue, router });
+  // //   await sleep(16);
+  // //   expect(wrapper.html()).toMatchSnapshot();
+  // // });
 
-  it('Demo-前端排序', async () => {
-    const wrapper = mount(ExamplesDemo32, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-loading 的问题', async () => {
+  //   const wrapper = mount(CasesDemo27, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-后端排序', async () => {
-    const wrapper = mount(ExamplesDemo33, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-前端排序不需要 sorting 也能保持状态', async () => {
+  //   const wrapper = mount(CasesDemo28, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-前端过滤（筛选）', async () => {
-    const wrapper = mount(ExamplesDemo34, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-后端排序', async () => {
+  //   const wrapper = mount(CasesDemo29, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-前端过滤（筛选）- 筛选项可多选', async () => {
-    const wrapper = mount(ExamplesDemo35, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-v-if', async () => {
+  //   const wrapper = mount(CasesDemo30, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-后端过滤（筛选）', async () => {
-    const wrapper = mount(ExamplesDemo36, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-v-show', async () => {
+  //   const wrapper = mount(CasesDemo31, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-后端过滤（筛选）- 筛选项可多选', async () => {
-    const wrapper = mount(ExamplesDemo37, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-树型展示，点击选中', async () => {
+  //   const wrapper = mount(CasesDemo32, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-序号列', async () => {
-    const wrapper = mount(ExamplesDemo38, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-树型展示', async () => {
+  //   const wrapper = mount(CasesDemo33, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-单选列', async () => {
-    const wrapper = mount(ExamplesDemo39, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // // it('Demo-显隐列配置', async () => {
+  // //   const wrapper = mount(CasesDemo34, { localVue, router });
+  // //   await sleep(16);
+  // //   expect(wrapper.html()).toMatchSnapshot();
+  // // });
 
-  it('Demo-单选列', async () => {
-    const wrapper = mount(ExamplesDemo40, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-编辑行', async () => {
+  //   const wrapper = mount(CasesDemo35, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-多选列', async () => {
-    const wrapper = mount(ExamplesDemo41, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-动态列', async () => {
+  //   const wrapper = mount(CasesDemo36, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-多选列', async () => {
-    const wrapper = mount(ExamplesDemo42, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // // it('Demo-行列与表头合并', async () => {
+  // //   const wrapper = mount(CasesDemo37, { localVue, router });
+  // //   await sleep(16);
+  // //   expect(wrapper.html()).toMatchSnapshot();
+  // // });
 
-  it('Demo-展开列', async () => {
-    const wrapper = mount(ExamplesDemo43, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // // it('Demo-行列与表头合并+固定列', async () => {
+  // //   const wrapper = mount(CasesDemo38, { localVue, router });
+  // //   await sleep(16);
+  // //   expect(wrapper.html()).toMatchSnapshot();
+  // // });
 
-  it('Demo-展开列', async () => {
-    const wrapper = mount(ExamplesDemo44, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-自定义展开列图标', async () => {
+  //   const wrapper = mount(CasesDemo39, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-展开列', async () => {
-    const wrapper = mount(ExamplesDemo45, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-虚拟列表', async () => {
+  //   const wrapper = mount(CasesDemo40, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-特殊列与普通功能共用', async () => {
-    const wrapper = mount(ExamplesDemo46, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-纯数组前端分页', async () => {
+  //   const wrapper = mount(CasesDemo41, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-编辑行', async () => {
-    const wrapper = mount(ExamplesDemo47, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-纯前端分页数据源改变后分页情况', async () => {
+  //   const wrapper = mount(CasesDemo42, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-编辑行-new', async () => {
-    const wrapper = mount(ExamplesDemo48, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-后端分页', async () => {
+  //   const wrapper = mount(CasesDemo43, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-树型展示', async () => {
-    const wrapper = mount(ExamplesDemo49, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-纯数组前端排序', async () => {
+  //   const wrapper = mount(CasesDemo44, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
-  it('Demo-树型展示', async () => {
-    const wrapper = mount(ExamplesDemo50, { localVue, router });
-    await sleep(16);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  // it('Demo-纯前端过滤', async () => {
+  //   const wrapper = mount(CasesDemo45, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-data-source 数组', async () => {
+  //   const wrapper = mount(ExamplesDemo1, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-data-source 函数', async () => {
+  //   const wrapper = mount(ExamplesDemo2, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-格式器', async () => {
+  //   const wrapper = mount(ExamplesDemo3, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-格式器', async () => {
+  //   const wrapper = mount(ExamplesDemo4, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-列插槽', async () => {
+  //   const wrapper = mount(ExamplesDemo5, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-表格线条', async () => {
+  //   const wrapper = mount(ExamplesDemo6, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-条纹展示', async () => {
+  //   const wrapper = mount(ExamplesDemo7, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-表格颜色', async () => {
+  //   const wrapper = mount(ExamplesDemo8, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-单行颜色', async () => {
+  //   const wrapper = mount(ExamplesDemo9, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-隐藏头部', async () => {
+  //   const wrapper = mount(ExamplesDemo10, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-加载中', async () => {
+  //   const wrapper = mount(ExamplesDemo11, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-加载中', async () => {
+  //   const wrapper = mount(ExamplesDemo12, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-加载错误', async () => {
+  //   const wrapper = mount(ExamplesDemo13, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-加载错误', async () => {
+  //   const wrapper = mount(ExamplesDemo14, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-没有数据', async () => {
+  //   const wrapper = mount(ExamplesDemo15, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-表头固定', async () => {
+  //   const wrapper = mount(ExamplesDemo16, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // // it('Demo-表头吸顶', async () => {
+  // //   const wrapper = mount(ExamplesDemo17, { localVue, router });
+  // //   await sleep(16);
+  // //   expect(wrapper.html()).toMatchSnapshot();
+  // // });
+
+  // it('Demo-默认多行显示', async () => {
+  //   const wrapper = mount(ExamplesDemo18, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-单行省略显示', async () => {
+  //   const wrapper = mount(ExamplesDemo19, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-表头文字省略显示', async () => {
+  //   const wrapper = mount(ExamplesDemo20, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-横向滚动', async () => {
+  //   const wrapper = mount(ExamplesDemo21, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // // it('Demo-固定列', async () => {
+  // //   const wrapper = mount(ExamplesDemo22, { localVue, router });
+  // //   await sleep(16);
+  // //   expect(wrapper.html()).toMatchSnapshot();
+  // // });
+
+  // it('Demo-隐藏部分列', async () => {
+  //   const wrapper = mount(ExamplesDemo23, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-average', async () => {
+  //   const wrapper = mount(ExamplesDemo24, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-sequence', async () => {
+  //   const wrapper = mount(ExamplesDemo25, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-none', async () => {
+  //   const wrapper = mount(ExamplesDemo26, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-前端分页', async () => {
+  //   const wrapper = mount(ExamplesDemo27, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-后端分页', async () => {
+  //   const wrapper = mount(ExamplesDemo28, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-翻页器功能', async () => {
+  //   const wrapper = mount(ExamplesDemo29, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-滚动加载更多', async () => {
+  //   const wrapper = mount(ExamplesDemo30, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-手动加载更多', async () => {
+  //   const wrapper = mount(ExamplesDemo31, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-前端排序', async () => {
+  //   const wrapper = mount(ExamplesDemo32, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-后端排序', async () => {
+  //   const wrapper = mount(ExamplesDemo33, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-前端过滤（筛选）', async () => {
+  //   const wrapper = mount(ExamplesDemo34, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-前端过滤（筛选）- 筛选项可多选', async () => {
+  //   const wrapper = mount(ExamplesDemo35, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-后端过滤（筛选）', async () => {
+  //   const wrapper = mount(ExamplesDemo36, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-后端过滤（筛选）- 筛选项可多选', async () => {
+  //   const wrapper = mount(ExamplesDemo37, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-序号列', async () => {
+  //   const wrapper = mount(ExamplesDemo38, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-单选列', async () => {
+  //   const wrapper = mount(ExamplesDemo39, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-单选列', async () => {
+  //   const wrapper = mount(ExamplesDemo40, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-多选列', async () => {
+  //   const wrapper = mount(ExamplesDemo41, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-多选列', async () => {
+  //   const wrapper = mount(ExamplesDemo42, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-展开列', async () => {
+  //   const wrapper = mount(ExamplesDemo43, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-展开列', async () => {
+  //   const wrapper = mount(ExamplesDemo44, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-展开列', async () => {
+  //   const wrapper = mount(ExamplesDemo45, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-特殊列与普通功能共用', async () => {
+  //   const wrapper = mount(ExamplesDemo46, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-编辑行', async () => {
+  //   const wrapper = mount(ExamplesDemo47, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-编辑行-new', async () => {
+  //   const wrapper = mount(ExamplesDemo48, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-树型展示', async () => {
+  //   const wrapper = mount(ExamplesDemo49, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
+
+  // it('Demo-树型展示', async () => {
+  //   const wrapper = mount(ExamplesDemo50, { localVue, router });
+  //   await sleep(16);
+  //   expect(wrapper.html()).toMatchSnapshot();
+  // });
 
   // it('Demo-表格行拖拽', async () => {
   //   const wrapper = mount(ExamplesDemo51, { localVue, router });

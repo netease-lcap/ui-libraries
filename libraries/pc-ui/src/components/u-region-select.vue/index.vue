@@ -47,21 +47,19 @@ export default {
         async 'currentDataSource.data'(value, oldValue) {
             if (this.data.length)
                 return;
-            const currentData = RegionData;
             await new Promise((resolve) => setTimeout(resolve, 0));
-            this.currentData = currentData.default;
+            this.currentData = RegionData;
             this.allMergeText = this.getMergeText(this.currentData);
             this.getSubComponents();
         },
     },
     async created() {
         if (!this.data.length) {
-            const currentData = RegionData;
             // 这里加个异步，模拟之前的逻辑
             await new Promise((resolve) => setTimeout(resolve, 0));
-            this.currentData = currentData.default;
+            this.currentData = RegionData;
             // 保存一份给 converter 用
-            this.regionDate = currentData.default;
+            this.regionDate = RegionData;
             // this.$set(this, 'regionDate', currentData.default)
             await UCascader.created.call(this);
             // 这里created是异步的，会先执行mounted。如果opened是true，下拉框会是空的。这里需要再执行下

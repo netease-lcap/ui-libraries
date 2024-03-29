@@ -9,10 +9,10 @@
         <slot name="title">{{ title }}</slot>
     </div>
     <slot name="config-columns"></slot>
-    <div :class="$style.table" v-for="(tableMeta, tableMetaIndex) in tableMetaList" :key="tableMeta.position" :position="tableMeta.position"
+    <div :class="$style.table" ref="tablewrap" v-for="(tableMeta, tableMetaIndex) in tableMetaList" :key="tableMeta.position" :position="tableMeta.position"
         :style="{ width: tableMeta.position !== 'static' && number2Pixel(tableMeta.width), height: number2Pixel(tableHeight)}"
         @scroll="onTableScroll" :shadow="(tableMeta.position === 'left' && !scrollXStart) || (tableMeta.position === 'right' && !scrollXEnd)">
-        <div v-if="showHead" :class="$style.head" ref="head" :stickingHead="stickingHead" :style="{ width: stickingHead ? number2Pixel(tableMeta.width) : '', top: number2Pixel(stickingHeadTop) }">
+        <div v-if="showHead" :class="$style.head" ref="head">
             <u-table :class="$style['head-table']" :color="color" :line="line" :striped="striped" :sticky-fixed="useStickyFixed" :style="{ width: number2Pixel(tableWidth)}">
                 <colgroup>
                     <col v-for="(columnVM, columnIndex) in visibleColumnVMs" :key="columnIndex" :width="columnVM.computedWidth">
@@ -45,7 +45,7 @@
                             v-ellipsis-title>
                             <!-- type === 'checkbox' -->
                             <span v-if="columnVM.type === 'checkbox'">
-                                <u-checkbox :value="allChecked" @check="checkAll($event.value)" :disabled="disabled" :readonly="readonly"></u-checkbox>
+                                <u-checkbox :value="allChecked" @check="checkAll($event.value)" :disabled="disabled" :readonly="readonly || !currentData || !currentData.length"></u-checkbox>
                             </span>
                             <!-- Normal title -->
                             <template>
@@ -91,7 +91,7 @@
                 </thead>
             </u-table>
         </div>
-        <div v-if="stickingHead" :class="$style.headPlaceholder" ref="headPlaceholder" :style="{ height: number2Pixel(stickingHeadHeight) }"></div>
+        <div :class="$style.headPlaceholder" ref="headPlaceholder"></div>
         <div :class="$style.body" ref="body" :style="{ height: number2Pixel(bodyHeight) }" @scroll="onBodyScroll"
             :sticky-fixed="useStickyFixed">
             <f-scroll-view :class="$style.scrollcview" @scroll="onScrollView" ref="scrollView" :native="!!tableMetaIndex || $env.VUE_APP_DESIGNER" :hide-scroll="!!tableMetaIndex">
@@ -171,7 +171,7 @@
                                             </template>
                                             <!-- Normal text -->
                                             <f-slot name="cell" :vm="columnVM" :props="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex, columnIndex, index: rowIndex, columnItem: columnVM.columnItem }">
-                                                <span v-if="columnVM.field" vusion-slot-name="cell" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field) || item) }}</span>
+                                                <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)" vusion-slot-name="cell" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field) || item) }}</span>
                                             </f-slot>
                                             <!-- type === 'dragHandler' -->
                                             <span v-if="columnVM.type === 'dragHandler'">
@@ -274,12 +274,12 @@
                                                     <div>
                                                         <template v-if="item.editing === columnVM.field">
                                                             <f-slot name="editcell" :vm="columnVM" :props="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex }">
-                                                                <span v-if="columnVM.field" vusion-slot-name="editcell" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
+                                                                <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
                                                             </f-slot>
                                                         </template>
                                                         <template v-else>
                                                             <f-slot name="cell" :vm="columnVM" :props="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex, columnItem: columnVM.columnItem }">
-                                                                <span v-if="columnVM.field" vusion-slot-name="cell" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
+                                                                <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
                                                             </f-slot>
                                                         </template>
                                                     </div>
@@ -287,7 +287,7 @@
                                             </template>
                                             <template v-else>
                                                 <f-slot name="cell" :vm="columnVM" :props="{ item: getRealItem(item, rowIndex + virtualIndex), value: $at(item, columnVM.field), columnVM, rowIndex: rowIndex + virtualIndex, columnIndex, index: rowIndex + virtualIndex, columnItem: columnVM.columnItem }">
-                                                    <span v-if="columnVM.field" vusion-slot-name="cell" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
+                                                    <span v-if="columnVM.field && !['radio', 'checkbox'].includes(columnVM.type)" :class="$style['column-field']">{{ columnVM.currentFormatter.format($at(item, columnVM.field)) }}</span>
                                                 </f-slot>
                                             </template>
 
@@ -435,7 +435,7 @@
 <script>
 import DataSource from '../../utils/DataSource';
 import DataSourceNew from '../../utils/DataSource/new';
-import { addResizeListener, removeResizeListener, findScrollParent, getRect } from '../../utils/dom';
+import { addResizeListener, removeResizeListener, findScrollParent, getRect, findXScrollParent } from '../../utils/dom';
 import { format } from '../../utils/date';
 import KeyMap from '../../utils/keyMap';
 import MEmitter from '../m-emitter.vue';
@@ -448,7 +448,7 @@ import throttle from 'lodash/throttle';
 import FVirtualTable from './f-virtual-table.vue';
 import i18nMixin from '../../mixins/i18n';
 import flatMap from 'lodash/flatMap';
-import { createTableHeaderExportHelper } from './createTableHeadExporter';
+import { createTableHeaderExportHelper, getXslxStyle } from './helper';
 import * as xlsxUtils from '../../utils/xlsx';
 
 export default {
@@ -561,6 +561,7 @@ export default {
         listKey: { type: String, default: 'currentData' },
         thEllipsis: { type: Boolean, default: false }, // 表头是否缩略展示
         ellipsis: { type: Boolean, default: false }, // 单元格是否缩略展示
+        syncStickHeadXScroll: { type: Boolean, default: false }, // 同步固定头部的横向滚动
     },
     data() {
         return {
@@ -889,6 +890,14 @@ export default {
             leading: false,
             trailing: true,
         });
+        this.throttleScrollParentScroll = throttle(this.onScrollParentScroll, 50, {
+            leading: false,
+            trailing: true,
+        });
+        this.throttleXScrollParentScroll = throttle(this.onXScrollParentScroll, 50, {
+            leading: false,
+            trailing: true,
+        });
     },
     updated() {
         if (this.$env.VUE_APP_DESIGNER && this.slots !== this.$slots && !this.data && !this.dataSource) {
@@ -908,13 +917,18 @@ export default {
 
         if (this.stickHead) {
             this.scrollParentEl = findScrollParent(this.$el);
-            this.scrollParentEl && this.scrollParentEl.addEventListener('scroll', this.onScrollParentScroll);
+            this.scrollParentEl && this.scrollParentEl.addEventListener('scroll', this.throttleScrollParentScroll);
+            if (this.syncStickHeadXScroll) {
+                this.xScrollParentEl = findXScrollParent(this.$el);
+                this.xScrollParentEl && this.xScrollParentEl.addEventListener('scroll', this.throttleXScrollParentScroll); 
+            }
         }
     },
     destroyed() {
         removeResizeListener(this.$el, this.handleResizeListener);
         if (this.stickHead) {
-            this.scrollParentEl && this.scrollParentEl.removeEventListener('scroll', this.onScrollParentScroll);
+            this.scrollParentEl && this.scrollParentEl.removeEventListener('scroll', this.throttleScrollParentScroll);
+            this.xScrollParentEl && this.xScrollParentEl.removeEventListener('scroll', this.throttleXScrollParentScroll); 
         }
         this.clearTimeout();
         this.enterTarget = null;
@@ -1085,7 +1099,12 @@ export default {
             this.timer = setTimeout(() => {
                 this.timer = undefined;
 
+                // 当最外层加了border后，会导致内部的宽度大于tablewrap的宽度，会出滚动条：Bug-2792431057259520
                 let rootWidth = this.$el.offsetWidth;
+                const tablewrapWidth = this.$refs.tablewrap[0] && this.$refs.tablewrap[0].offsetWidth;
+                if (tablewrapWidth) {
+                    rootWidth = tablewrapWidth;
+                }
                 if (!rootWidth) {
                     // 初始表格隐藏时，上面的值为0，需要特殊处理
                     let parentEl = this.$el && this.$el.parentElement;
@@ -1323,7 +1342,6 @@ export default {
         onTableScroll(e) {
             this.scrollXStart = e.target.scrollLeft === 0;
             this.scrollXEnd = e.target.scrollLeft >= e.target.scrollWidth - e.target.clientWidth;
-            this.stickingHead && this.syncHeadScroll();
         },
         syncBodyScroll(scrollTop, target) {
             if (!this.useStickyFixed) {
@@ -1340,6 +1358,12 @@ export default {
         },
         syncHeadScroll() {
             // this.$refs.head[0].scrollLeft = this.$refs.head[0].parentElement.scrollLeft;
+            const headEl = this.$refs.head[0];
+            if (this.xScrollParentEl && this.stickingHead && headEl && headEl.childNodes[0]) {
+                const xScrollParentEl = this.xScrollParentEl;
+                headEl.childNodes[0].style.marginLeft = '-' + xScrollParentEl.scrollLeft + 'px';
+                headEl.style.width = xScrollParentEl.offsetWidth + 'px';
+            }
         },
         onBodyScroll(e) {
             this.syncBodyScroll(e.target.scrollTop, e.target); // this.throttledVirtualScroll(e);
@@ -1362,9 +1386,32 @@ export default {
             bodyRect.bottom -= headHeight;
 
             this.stickingHead = rect.top < parentRect.top && bodyRect.bottom > parentRect.top;
-            this.stickingHeadTop = parentRect.top;
-            this.stickingHeadHeight = headHeight;
-            this.syncHeadScroll();
+            // this.stickingHeadTop = parentRect.top;
+            // this.stickingHeadHeight = headHeight;
+
+            const stickingHead = rect.top < parentRect.top && bodyRect.bottom > parentRect.top;
+            const stickingHeadTop = parentRect.top;
+            const stickingHeadHeight = headHeight;
+            const stickheadEl = this.$refs.head[0];
+            const headPlaceholderEl = this.$refs.headPlaceholder[0];
+            if (stickheadEl) {
+                if (stickingHead) {
+                    stickheadEl.setAttribute('stickingHead', true);
+                    stickheadEl.style.width = this.$el.offsetWidth + 'px';
+                    headPlaceholderEl.style.height = stickingHeadHeight + 'px';
+                } else {
+                    stickheadEl.removeAttribute('stickingHead');
+                    stickheadEl.style.width = '';
+                    if (stickheadEl.childNodes[0]) {
+                        stickheadEl.childNodes[0].style.marginLeft = '';
+                    }
+                    headPlaceholderEl.style.height = '';
+                }
+                stickheadEl.style.top = stickingHeadTop + 'px';
+                if (this.syncStickHeadXScroll) {
+                    this.syncHeadScroll();
+                }
+            }
         },
         onScrollView(data) {
             this.hasScroll = true;
@@ -1430,15 +1477,15 @@ export default {
                 });
         },
         reload() {
+            if (this.dynamicColumnVMs.length) {
+                this.dynamicColumnVMs.forEach((vm) => vm.reload());
+            }
             if (!this.currentDataSource._load || typeof this.currentDataSource._load !== 'function')
                 return;
             this.currentDataSource.clearLocalData();
             this.clearDragState();
             this.load();
             console.log('table reload');
-            if (this.dynamicColumnVMs.length) {
-                this.dynamicColumnVMs.forEach((vm) => vm.reload());
-            }
         },
         getFields() {
             return this.visibleColumnVMs
@@ -1446,7 +1493,7 @@ export default {
                 .filter((item) => !!item)
                 .join(',');
         },
-        async exportExcel(page = 1, size = 2000, filename, sort, order, excludeColumns = []) {
+        async exportExcel(page = 1, size = 2000, filename, sort, order, excludeColumns = [], includeStyles = false) {
             if (this.currentDataSource.sorting && this.currentDataSource.sorting.field) {
                 const { sorting } = this.currentDataSource;
                 sort = sort || sorting.field;
@@ -1483,7 +1530,7 @@ export default {
                 let content = [];
                 let mergesMap = [];
                 if (!this.currentDataSource._load) {
-                    const result = await this.getRenderResult(this.currentDataSource.data, excludeColumns, hasHeader);
+                    const result = await this.getRenderResult(this.currentDataSource.data, excludeColumns, hasHeader, includeStyles);
                     content = result[0];
                     mergesMap = result[1];
                 } else {
@@ -1504,15 +1551,26 @@ export default {
                         return;
                     }
 
-                    const result = await this.getRenderResult(res, excludeColumns, hasHeader);
+                    const result = await this.getRenderResult(res, excludeColumns, hasHeader, includeStyles);
                     content = result[0];
                     mergesMap = result[1];
                 }
 
                 // console.time('生成文件');
                 const sheetTitle = this.title || undefined;
-                const { exportExcel } = xlsxUtils;
-                exportExcel(content, 'Sheet1', filename, sheetTitle, (content[0] || []).length, hasHeader, mergesMap);
+                const sheetTitleData = {
+                    title: sheetTitle,
+                };
+                if (sheetTitle && includeStyles) {
+                    const titleNode = this.$el.querySelector('[class^="u-table-view_title__"]');
+                    if (titleNode) {
+                        const style = getXslxStyle(titleNode);
+                        sheetTitleData.s = style.s;
+                        sheetTitleData.rect = style.rect;
+                    }
+                }
+
+                xlsxUtils.exportExcel(content, 'Sheet1', filename, sheetTitleData, (content[0] || []).length, hasHeader, mergesMap, includeStyles);
                 // console.timeEnd('生成文件');
             } catch (err) {
                 console.error(err);
@@ -1524,7 +1582,7 @@ export default {
             document.removeEventListener('click', fn, true);
             document.removeEventListener('keydown', fn, true);
         },
-        async getRenderResult(arr = [], excludeColumns = [], hasHeader = true) {
+        async getRenderResult(arr = [], excludeColumns = [], hasHeader = true, includeStyles = false) {
             let mergesMap = [];
             if (arr.length === 0) {
                 if (!hasHeader)
@@ -1553,7 +1611,17 @@ export default {
                             title = node.innerText;
                         }
                     }
-                    const cols = helper.setCell(title, colIndex + 1 === currentArr.length, rowspan, colspan);
+                    const data = {
+                        v: title,
+                    };
+                    if (includeStyles) {
+                        const style = getXslxStyle(node);
+                        Object.assign(data, {
+                            s: style.s,
+                            rect: style.rect,
+                        });
+                    }
+                    const cols = helper.setCell(data, colIndex + 1 === currentArr.length, rowspan, colspan);
                     const realColIndex = cols[0];
                     if (rowspan !== 1 || colspan !== 1) {
                         mergesMap.push({
@@ -1564,7 +1632,7 @@ export default {
                         });
                     }
                     titleColIndexRelations.push([title, cols]);
-                    return title;
+                    return data;
                 } else {
                     return null;
                 }
@@ -1614,7 +1682,17 @@ export default {
                                     colspan,
                                 });
                             }
-                            return title;
+                            const data = {
+                                v: title,
+                            };
+                            if (includeStyles) {
+                                const style = getXslxStyle(node);
+                                Object.assign(data, {
+                                    s: style.s,
+                                    rect: style.rect,
+                                });
+                            }
+                            return data;
                         } else {
                             return null;
                         }
@@ -1627,15 +1705,43 @@ export default {
                 const item = res[rowIndex];
                 for (let j = 0; j < item.length; j++) {
                     if (startIndexes[j] !== undefined)
-                        item[j] = startIndexes[j] + (hasHeader ? rowIndex - headerRowCount : rowIndex);
+                        item[j] = {
+                            v: startIndexes[j] + (hasHeader ? rowIndex - headerRowCount : rowIndex),
+                            s: item[j].s,
+                        };
                 }
             }
-
             const newResult = this.removeExcludeColumns(res, excludeColumns, mergesMap, titleColIndexRelations);
             res = newResult[0];
             mergesMap = newResult[1];
-
-            // console.timeEnd('渲染数据');
+            // 解决边框不展示问题，被合并的单元格需要补充样式
+            mergesMap.forEach((item) => {
+                const colspan = item.colspan;
+                const rowspan = item.rowspan;
+                const colItem = res[item.row][item.col];
+                if (colItem.rect) {
+                    colItem.rect.width = +colItem.rect.width / colspan;
+                    colItem.rect.height = +colItem.rect.height / rowspan;
+                }
+                for (let i = item.col + 1; i < item.col + colspan; i++) {
+                    if (!res[item.row][i]) {
+                        res[item.row][i] = {
+                            t: 's',
+                            v: '', // 必须设置，单设置s没有效果
+                            s: colItem.s,
+                        };
+                    }
+                }
+                for (let i = item.row + 1; i < item.row + rowspan; i++) {
+                    if (!res[i][item.col]) {
+                        res[i][item.col] = {
+                            t: 's',
+                            v: '',
+                            s: colItem.s,
+                        };
+                    }
+                }
+            });
 
             // console.time('复原表格');
             this.exportData = undefined;
@@ -2025,10 +2131,17 @@ export default {
                     break;
                 item.tableTreeItemLevel = level;
                 item.parentPointer = parent;
-                if (this.$at(item, this.childrenField) && this.$at(item, this.childrenField).length) {
-                    this.$setAt(item, this.hasChildrenField, true);
-                    item.expanded = item.expanded || false;
-                    item.treeExpanded = item.treeExpanded || false;
+                if (this.$at(item, this.childrenField)) {
+                    // fix: 2820102516186880，2830031229543936，子节点删除数据处理
+                    if (this.$at(item, this.childrenField).length) {
+                        this.$setAt(item, this.hasChildrenField, true);
+                        item.expanded = item.expanded || false;
+                        item.treeExpanded = item.treeExpanded || false;
+                    } else {
+                        this.$setAt(item, this.hasChildrenField, false);
+                        item.expanded = false;
+                        item.treeExpanded = false;
+                    }
                 }
                 if (parent) {
                     this.$set(item, 'display', needHidden(ancestors) ? 'none' : '');
@@ -2764,10 +2877,7 @@ export default {
         },
         getEditablewrapWidth(item, columnIndex, treeColumnIndex) {
             if (this.treeDisplay && item.tableTreeItemLevel !== undefined && columnIndex === treeColumnIndex) {
-                let width = 20 * item.tableTreeItemLevel + 10;
-                if (this.$at(item, this.hasChildrenField)) {
-                    width = width + 20;
-                }
+                const width = 20 * (item.tableTreeItemLevel + 1) + 10;
                 return `calc(100% - ${width}px)`;
             }
             return '100%';
@@ -3158,9 +3268,13 @@ export default {
             const currentDataSource = this.currentDataSource;
             this.page(currentDataSource && currentDataSource.paging ? currentDataSource.paging.number : this.pageNumber, event.pageSize);
         },
+        onXScrollParentScroll(event) {
+            this.syncHeadScroll();
+        },
     },
 };
 </script>
+
 
 <style module>
 .root {
@@ -3623,6 +3737,11 @@ content: "\e679";
     width: auto;
 }
 
+.tree_expander + div.editablewrap > div,
+.tree_placeholder + div.editablewrap > div {
+    width: 100%;
+}
+
 .tree_expander[loading]::before {
     border-top-color: transparent;
 }
@@ -3666,6 +3785,12 @@ content: "\e679";
 }
 .scrollcview[native="true"][hide-scroll] [class^="f-scroll-view_wrap__"]::-webkit-scrollbar {
     width: 0;
+}
+
+/** fix 固定列滚动条看不见 */
+.scrollcview [class^="f-scroll-view_wrap__"] {
+    position: relative;
+    z-index: 0;
 }
 
 .dropghost {

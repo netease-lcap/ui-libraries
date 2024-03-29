@@ -44,7 +44,7 @@ namespace nasl.ui {
             snippets: [
                 {
                     title: '插入一行',
-                    code: '<u-grid-layout-row :repeat="24"><u-grid-layout-column :span="8"></u-grid-layout-column><u-grid-layout-column :span="8"></u-grid-layout-column><u-grid-layout-column :span="8"></u-grid-layout-column></u-grid-layout-row>',
+                    code: '<u-grid-layout-row :repeat="24"><u-grid-layout-column :span="8" :wrap="true"></u-grid-layout-column><u-grid-layout-column :span="8" :wrap="true"></u-grid-layout-column><u-grid-layout-column :span="8" :wrap="true"></u-grid-layout-column></u-grid-layout-row>',
                 },
             ],
         })
@@ -329,6 +329,7 @@ namespace nasl.ui {
         @Prop<UGridLayoutColumnOptions, 'gap'>({
             group: '样式属性',
             title: '内容间隙',
+            tabKind: 'style',
             description: '内容块间隙大小',
             docDescription: '布局内各个组件之间的间隔，通常有收缩、无、小、正常、大，默认为正常。',
             setter: {

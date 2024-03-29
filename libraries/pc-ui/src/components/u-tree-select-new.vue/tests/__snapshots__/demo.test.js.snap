@@ -69,7 +69,7 @@ exports[`u-tree-select-new.vue > Demo-一维Data 1`] = `
 exports[`u-tree-select-new.vue > Demo-修改尺寸 1`] = `
 <div class="root" direction="vertical" type vusion-slot-name="default">
   <div class="root" direction="horizontal" type vusion-slot-name="default">
-    <div class="root" height="normal" tabindex="0" width="normal">
+    <div class="root" height="normal" tabindex="0" width>
       <span class="baseline">b</span>
       <!---->
       <div class="text">

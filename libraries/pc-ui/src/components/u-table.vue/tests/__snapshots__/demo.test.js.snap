@@ -5,11 +5,11 @@ exports[`u-table.vue > Demo-单行颜色 1`] = `
   <table class="root">
     <thead>
       <tr>
-        <th width="15%">用户名</th>
-        <th width="15%">手机号码</th>
+        <th width>用户名</th>
+        <th width>手机号码</th>
         <th>地址</th>
-        <th width="18%">最近登录时间</th>
-        <th width="12%">操作</th>
+        <th width>最近登录时间</th>
+        <th width>操作</th>
       </tr>
     </thead>
     <tbody>
@@ -23,7 +23,8 @@ exports[`u-table.vue > Demo-单行颜色 1`] = `
             <!---->
             详情
             <!---->
-          </a>&nbsp;<a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+          </a>
+          <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
             <!---->
             设置
             <!---->
@@ -40,7 +41,8 @@ exports[`u-table.vue > Demo-单行颜色 1`] = `
             <!---->
             详情
             <!---->
-          </a>&nbsp;<a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+          </a>
+          <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
             <!---->
             设置
             <!---->
@@ -57,7 +59,8 @@ exports[`u-table.vue > Demo-单行颜色 1`] = `
             <!---->
             详情
             <!---->
-          </a>&nbsp;<a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+          </a>
+          <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
             <!---->
             设置
             <!---->
@@ -74,7 +77,8 @@ exports[`u-table.vue > Demo-单行颜色 1`] = `
             <!---->
             详情
             <!---->
-          </a>&nbsp;<a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+          </a>
+          <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
             <!---->
             设置
             <!---->
@@ -91,7 +95,8 @@ exports[`u-table.vue > Demo-单行颜色 1`] = `
             <!---->
             详情
             <!---->
-          </a>&nbsp;<a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+          </a>
+          <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
             <!---->
             设置
             <!---->
@@ -108,10 +113,10 @@ exports[`u-table.vue > Demo-基本用法 1`] = `
   <table class="root">
     <thead>
       <tr>
-        <th width="20%">序号</th>
-        <th width="20%">姓名</th>
+        <th width>序号</th>
+        <th width>姓名</th>
         <th>地址</th>
-        <th width="20%">出生日期</th>
+        <th width>出生日期</th>
       </tr>
     </thead>
     <tbody>
@@ -155,10 +160,10 @@ exports[`u-table.vue > Demo-条纹展示 1`] = `
   <table class="root" striped>
     <thead>
       <tr>
-        <th width="20%">序号</th>
-        <th width="20%">姓名</th>
+        <th width>序号</th>
+        <th width>姓名</th>
         <th>地址</th>
-        <th width="20%">出生日期</th>
+        <th width>出生日期</th>
       </tr>
     </thead>
     <tbody>
@@ -202,10 +207,10 @@ exports[`u-table.vue > Demo-表格线条 1`] = `
   <table class="root" line="both">
     <thead>
       <tr>
-        <th width="20%">序号</th>
-        <th width="20%">姓名</th>
+        <th width>序号</th>
+        <th width>姓名</th>
         <th>地址</th>
-        <th width="20%">出生日期</th>
+        <th width>出生日期</th>
       </tr>
     </thead>
     <tbody>
@@ -249,10 +254,10 @@ exports[`u-table.vue > Demo-表格颜色 1`] = `
   <table class="root" color="light">
     <thead>
       <tr>
-        <th width="20%">序号</th>
-        <th width="20%">姓名</th>
+        <th width>序号</th>
+        <th width>姓名</th>
         <th>地址</th>
-        <th width="20%">出生日期</th>
+        <th width>出生日期</th>
       </tr>
     </thead>
     <tbody>

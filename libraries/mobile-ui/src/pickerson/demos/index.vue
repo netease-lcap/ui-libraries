@@ -24,8 +24,7 @@
       </van-pickerson>
     </demo-block>
 
-      <van-button @click="reload">reload</van-button>
-    </demo-block>
+    <van-button @click="reload">reload</van-button>
 
     <demo-block card title="列表静态数据">
       <van-pickerson

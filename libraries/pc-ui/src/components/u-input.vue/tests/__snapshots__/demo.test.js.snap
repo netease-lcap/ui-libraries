@@ -277,161 +277,161 @@ exports[`u-input.vue > Demo-大小扩展 1`] = `
 <div>
   <div class="root" direction="vertical" type vusion-slot-name="default">
     <div class="root" direction="horizontal" type vusion-slot-name="default">
-      <div class="root" height="mini" readonly="readonly" width="mini">
+      <div class="root" height="mini" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
         <!---->
-        <input class="input" height="mini" readonly="readonly" type="text" width="mini">
+        <input class="input" height="mini" readonly="readonly" type="text" width>
         <!---->
       </div>
-      <div class="root" height="mini" readonly="readonly" width="small">
+      <div class="root" height="mini" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
         <!---->
-        <input class="input" height="mini" readonly="readonly" type="text" width="small">
+        <input class="input" height="mini" readonly="readonly" type="text" width>
         <!---->
       </div>
-      <div class="root" height="mini" readonly="readonly" width="normal">
+      <div class="root" height="mini" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
         <!---->
-        <input class="input" height="mini" readonly="readonly" type="text" width="normal">
+        <input class="input" height="mini" readonly="readonly" type="text" width>
         <!---->
       </div>
-      <div class="root" height="mini" readonly="readonly" width="medium">
+      <div class="root" height="mini" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
         <!---->
-        <input class="input" height="mini" readonly="readonly" type="text" width="medium">
-        <!---->
-      </div>
-      <!---->
-      <!---->
-    </div>
-    <div class="root" direction="horizontal" type vusion-slot-name="default">
-      <div class="root" height="small" readonly="readonly" width="mini">
-        <span class="baseline">b</span>
-        <span class="placeholder" style="display: none;"></span>
-        <!---->
-        <input class="input" height="small" readonly="readonly" type="text" width="mini">
-        <!---->
-      </div>
-      <div class="root" height="small" readonly="readonly" width="small">
-        <span class="baseline">b</span>
-        <span class="placeholder" style="display: none;"></span>
-        <!---->
-        <input class="input" height="small" readonly="readonly" type="text" width="small">
-        <!---->
-      </div>
-      <div class="root" height="small" readonly="readonly" width="normal">
-        <span class="baseline">b</span>
-        <span class="placeholder" style="display: none;"></span>
-        <!---->
-        <input class="input" height="small" readonly="readonly" type="text" width="normal">
-        <!---->
-      </div>
-      <div class="root" height="small" readonly="readonly" width="medium">
-        <span class="baseline">b</span>
-        <span class="placeholder" style="display: none;"></span>
-        <!---->
-        <input class="input" height="small" readonly="readonly" type="text" width="medium">
+        <input class="input" height="mini" readonly="readonly" type="text" width>
         <!---->
       </div>
       <!---->
       <!---->
     </div>
     <div class="root" direction="horizontal" type vusion-slot-name="default">
-      <div class="root" height="normal" readonly="readonly" width="mini">
+      <div class="root" height="small" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
         <!---->
-        <input class="input" height="normal" readonly="readonly" type="text" width="mini">
+        <input class="input" height="small" readonly="readonly" type="text" width>
         <!---->
       </div>
-      <div class="root" height="normal" readonly="readonly" width="small">
+      <div class="root" height="small" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
         <!---->
-        <input class="input" height="normal" readonly="readonly" type="text" width="small">
+        <input class="input" height="small" readonly="readonly" type="text" width>
         <!---->
       </div>
-      <div class="root" height="normal" readonly="readonly" width="normal">
+      <div class="root" height="small" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
         <!---->
-        <input class="input" height="normal" readonly="readonly" type="text" width="normal">
+        <input class="input" height="small" readonly="readonly" type="text" width>
         <!---->
       </div>
-      <div class="root" height="normal" readonly="readonly" width="medium">
+      <div class="root" height="small" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
         <!---->
-        <input class="input" height="normal" readonly="readonly" type="text" width="medium">
-        <!---->
-      </div>
-      <!---->
-      <!---->
-    </div>
-    <div class="root" direction="horizontal" type vusion-slot-name="default">
-      <div class="root" height="medium" readonly="readonly" width="mini">
-        <span class="baseline">b</span>
-        <span class="placeholder" style="display: none;"></span>
-        <!---->
-        <input class="input" height="medium" readonly="readonly" type="text" width="mini">
-        <!---->
-      </div>
-      <div class="root" height="medium" readonly="readonly" width="small">
-        <span class="baseline">b</span>
-        <span class="placeholder" style="display: none;"></span>
-        <!---->
-        <input class="input" height="medium" readonly="readonly" type="text" width="small">
-        <!---->
-      </div>
-      <div class="root" height="medium" readonly="readonly" width="normal">
-        <span class="baseline">b</span>
-        <span class="placeholder" style="display: none;"></span>
-        <!---->
-        <input class="input" height="medium" readonly="readonly" type="text" width="normal">
-        <!---->
-      </div>
-      <div class="root" height="medium" readonly="readonly" width="medium">
-        <span class="baseline">b</span>
-        <span class="placeholder" style="display: none;"></span>
-        <!---->
-        <input class="input" height="medium" readonly="readonly" type="text" width="medium">
+        <input class="input" height="small" readonly="readonly" type="text" width>
         <!---->
       </div>
       <!---->
       <!---->
     </div>
     <div class="root" direction="horizontal" type vusion-slot-name="default">
-      <div class="root" height="large" readonly="readonly" width="large">
+      <div class="root" height="normal" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
         <!---->
-        <input class="input" height="large" readonly="readonly" type="text" width="large">
+        <input class="input" height="normal" readonly="readonly" type="text" width>
+        <!---->
+      </div>
+      <div class="root" height="normal" readonly="readonly" width>
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" height="normal" readonly="readonly" type="text" width>
+        <!---->
+      </div>
+      <div class="root" height="normal" readonly="readonly" width>
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" height="normal" readonly="readonly" type="text" width>
+        <!---->
+      </div>
+      <div class="root" height="normal" readonly="readonly" width>
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" height="normal" readonly="readonly" type="text" width>
         <!---->
       </div>
       <!---->
       <!---->
     </div>
     <div class="root" direction="horizontal" type vusion-slot-name="default">
-      <div class="root" height="huge" readonly="readonly" width="huge">
+      <div class="root" height="medium" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
         <!---->
-        <input class="input" height="huge" readonly="readonly" type="text" width="huge">
+        <input class="input" height="medium" readonly="readonly" type="text" width>
+        <!---->
+      </div>
+      <div class="root" height="medium" readonly="readonly" width>
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" height="medium" readonly="readonly" type="text" width>
+        <!---->
+      </div>
+      <div class="root" height="medium" readonly="readonly" width>
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" height="medium" readonly="readonly" type="text" width>
+        <!---->
+      </div>
+      <div class="root" height="medium" readonly="readonly" width>
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" height="medium" readonly="readonly" type="text" width>
         <!---->
       </div>
       <!---->
       <!---->
     </div>
     <div class="root" direction="horizontal" type vusion-slot-name="default">
-      <div class="root" height="full" readonly="readonly" width="full">
+      <div class="root" height="large" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
         <!---->
-        <input class="input" height="full" readonly="readonly" type="text" width="full">
+        <input class="input" height="large" readonly="readonly" type="text" width>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+    <div class="root" direction="horizontal" type vusion-slot-name="default">
+      <div class="root" height="huge" readonly="readonly" width>
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" height="huge" readonly="readonly" type="text" width>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+    <div class="root" direction="horizontal" type vusion-slot-name="default">
+      <div class="root" height="full" readonly="readonly" width>
+        <span class="baseline">b</span>
+        <span class="placeholder" style="display: none;"></span>
+        <!---->
+        <input class="input" height="full" readonly="readonly" type="text" width>
         <!---->
       </div>
       <!---->

@@ -38,14 +38,13 @@
                             </a>
                         </span>
                         <i-ico name="remove" :class="$style.remove" v-if="!readonly && !disabled && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
-                        <u-linear-progress v-if="item.showProgress && !$env.VUE_APP_DESIGNER" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                     </div>
-                     <div v-else>
+                      <div v-else>
                         <div :class="$style.thumb"><img :class="$style.img" v-if="listType === 'image'" :src="getUrl(item)"></div>
                         <a :class="$style.link" :href="encodeUrl(item.url)" target="_blank" download role="download">{{ item.name || item.url }}</a>
                         <i-ico name="remove" v-if="!readonly && !disabled" :class="$style.remove" @click="remove(index)"></i-ico>
-                         <u-linear-progress v-if="item.showProgress" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                     </div>
+                    <u-linear-progress v-if="item.showProgress && !$env.VUE_APP_DESIGNER" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                 </template>
             </div>
         </template>
@@ -79,7 +78,7 @@
         </span>
     </div>
     <u-lightbox :visible.sync="lightboxVisible" :value="currentIndex" animation="fade">
-        <u-lightbox-item v-for="(item, index) in currentValue" :key="index" :value="index" :title="item.name"><img :src="encodeURI(item.url || item)"></u-lightbox-item>
+        <u-lightbox-item v-for="(item, index) in currentValue" :key="index" :value="index" :title="item.name"><img :src="encodeUrl(item.url || item)"></u-lightbox-item>
     </u-lightbox>
     <cropper
         v-if="openCropper"
@@ -234,8 +233,6 @@ export default {
         currentValue: {
             handler(currentValue, oldValue) {
                 const value = this.toValue(currentValue);
-                this.$emit('input', value);
-                this.$emit('update:value', value);
                 this.$emit('change', {
                     value,
                     oldValue: this.toValue(oldValue),
@@ -310,8 +307,16 @@ export default {
             const iconInfo = Object.entries(this.iconMap).find(([type]) => type.includes((item.name || item.url).split('.').pop()));
             return !!iconInfo ? (iconInfo[1] || 'file-default') : 'file-default'
         },
+        isURLEncoded(url) {
+            const decodedUrl = decodeURI(url); // 对 URL 进行解码
+            if (decodedUrl === url) {
+                return false; // URL 未被编码
+            } else {
+                return true; // URL 已被编码
+            }
+        },
         encodeUrl(url) {
-            return encodeURI(url);
+            return this.isURLEncoded(url) ? url : encodeURI(url);
         },
         fromValue(value) {
             // Vue app 环境走 [];
@@ -568,6 +573,7 @@ export default {
                     const item = this.currentValue[index];
                     item.percent = e.percent;
 
+                    this.emitInputEvent();
                     this.$emit('progress', {
                         e, file, item, xhr,
                     }, this);
@@ -605,9 +611,7 @@ export default {
                         }
                     }
 
-                    const value = this.toValue(this.currentValue);
-                    this.$emit('input', value);
-                    this.$emit('update:value', value);
+                    this.emitInputEvent();
 
                     this.$emit('success', {
                         res,
@@ -621,9 +625,7 @@ export default {
                     const item = this.currentValue[index];
                     item.status = 'error';
 
-                    const value = this.toValue(this.currentValue);
-                    this.$emit('input', value);
-                    this.$emit('update:value', value);
+                    this.emitInputEvent();
                     const errorMessage = e.msg ? (JSON.parse(e.msg).Message || `文件${item.name}上传接口调用失败`) : `文件${item.name}上传接口调用失败`;
                     this.errorMessage.push(errorMessage);
 
@@ -666,7 +668,7 @@ export default {
                 return;
 
             this.currentValue.splice(index, 1);
-
+            this.emitInputEvent();
             this.$emit('remove', {
                 value: this.currentValue,
                 item,
@@ -679,6 +681,7 @@ export default {
 
             this.currentValue.splice(0, this.currentValue.length);
 
+            this.emitInputEvent();
             this.$emit('clear', { value: this.currentValue }, this);
         },
         onDrop(e) {
@@ -770,159 +773,164 @@ export default {
             console.log('match', match);
             return match ? match[1] : null;
         },
+        emitInputEvent() {
+            const value = this.toValue(this.currentValue);
+            this.$emit('input', value);
+            this.$emit('update:value', value);
+        },
     },
 };
 </script>
 
-<style module>
-.root {
-    display: block;
-    position: relative;
-}
+  <style module>
+  .root {
+      display: block;
+      position: relative;
+  }
 
-.root[display="inline"] {
-    display: inline-block;
-    max-width: var(--uploader-root-inline-max-width);
-}
+  .root[display="inline"] {
+      display: inline-block;
+      max-width: var(--uploader-root-inline-max-width);
+  }
 
-.select {
-    display: inline-block;
-    position: relative;
-    overflow: hidden\0;
-}
+  .select {
+      display: inline-block;
+      position: relative;
+      overflow: hidden\0;
+  }
 
-.full {
-    width: 100%;
-}
+  .full {
+      width: 100%;
+  }
 
-.file {
-    display: none;
-    display: block\0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0;
-    cursor: var(--cursor-pointer);
-    z-index: -1\0;
-}
+  .file {
+      display: none;
+      display: block\0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      cursor: var(--cursor-pointer);
+      z-index: -1\0;
+  }
 
-.file[readonly], .file[disabled] {
-    display: none;
-}
+  .file[readonly], .file[disabled] {
+      display: none;
+  }
 
-.item {
-    cursor: default;
-    margin-top: var(--uploader-list-margin-top);
-    padding: var(--uploader-item-padding);
-    background: var(--uploader-item-background);
-    border-radius: var(--uploader-item-border-radius);
-    transition: all var(--transition-duration-base);
-}
+  .item {
+      cursor: default;
+      margin-top: var(--uploader-list-margin-top);
+      padding: var(--uploader-item-padding);
+      background: var(--uploader-item-background);
+      border-radius: var(--uploader-item-border-radius);
+      transition: all var(--transition-duration-base);
+  }
 
-.thumb {
-    display: inline-block;
-    vertical-align: middle;
-}
-.img {
-    max-width: 100%;
-    max-height: 100%;
-}
+  .thumb {
+      display: inline-block;
+      vertical-align: middle;
+  }
+  .img {
+      max-width: 100%;
+      max-height: 100%;
+  }
 
-.list {
-    /* min-width: 400px; */
-}
+  .list {
+      /* min-width: 400px; */
+  }
 
-.list[list-type="text"]  .item{
-    /* width: fit-content; */
-}
+  .list[list-type="text"]  .item{
+      /* width: fit-content; */
+  }
 
-.list[list-type="image"] .item {
-    border: 1px solid var(--uploader-border-color);
-    margin-top: var(--uploader-list-image-margin-top);
-}
+  .list[list-type="image"] .item {
+      border: 1px solid var(--uploader-border-color);
+      margin-top: var(--uploader-list-image-margin-top);
+  }
 
-.list[list-type="image"] .thumb {
-    display: inline-block;
-    width: 48px;
-    height: 48px;
-    line-height: 48px;
-    text-align: center;
-    overflow: hidden;
-    margin-right: 4px;
-}
+  .list[list-type="image"] .thumb {
+      display: inline-block;
+      width: 48px;
+      height: 48px;
+      line-height: 48px;
+      text-align: center;
+      overflow: hidden;
+      margin-right: 4px;
+  }
 
-.item + .item {
-    margin-top: var(--uploader-item-space);
-}
+  .item + .item {
+      margin-top: var(--uploader-item-space);
+  }
 
-.item:hover {
-    background: var(--uploader-item-background-hover);
-}
+  .item:hover {
+      background: var(--uploader-item-background-hover);
+  }
 
-.link {
-    color: var(--uploader-link-color);
-    cursor: var(--cursor-pointer);
-    width: calc(100% - 50px);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: inline-block;
-    vertical-align: middle;
-}
-.file-text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: inline-block;
-    vertical-align: middle;
-}
-.textContainer {
-    /* width: fit-content; */
-    display: flex;
-    align-items: center;
-    max-width: 100%;
-}
-.textContainer .remove{
-    margin-top: 0px;
-}
+  .link {
+      color: var(--uploader-link-color);
+      cursor: var(--cursor-pointer);
+      width: calc(100% - 50px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      vertical-align: middle;
+  }
+  .file-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      vertical-align: middle;
+  }
+  .textContainer {
+      /* width: fit-content; */
+      display: flex;
+      align-items: center;
+      max-width: 100%;
+  }
+  .textContainer .remove{
+      margin-top: 0px;
+  }
 
-.file-name {
-    overflow: hidden;
-    max-width: 100%;
-}
+  .file-name {
+      overflow: hidden;
+      max-width: 100%;
+  }
 
-.list[list-type="image"] .link {
-    width: calc(100% - 75px);
-}
+  .list[list-type="image"] .link {
+      width: calc(100% - 75px);
+  }
 
-.item:hover .link {
-    color: var(--uploader-link-color-hover);
-}
+  .item:hover .link {
+      color: var(--uploader-link-color-hover);
+  }
 
-.link:hover {
-    text-decoration: underline;
-}
+  .link:hover {
+      text-decoration: underline;
+  }
 
-.remove {
-    display: none;
-    float: right;
-    line-height: 1;
-    font-size: 14px;
-    margin-top: 4px;
-    cursor: var(--cursor-pointer);
-    opacity: 0.5;
-    margin-right: 5px;
-}
+  .remove {
+      display: none;
+      float: right;
+      line-height: 1;
+      font-size: 14px;
+      margin-top: 4px;
+      cursor: var(--cursor-pointer);
+      opacity: 0.5;
+      margin-right: 5px;
+  }
 
-.item:hover .remove {
-    display: block;
-}
+  .item:hover .remove {
+      display: block;
+  }
 
-.remove:hover {
-    opacity: 1;
-}
+  .remove:hover {
+      opacity: 1;
+  }
 
 /* .remove::before {
 content: "\e663";
@@ -938,52 +946,127 @@ content: "\e663";
     font-smoothing: antialiased;
 } */
 
-.list[list-type="image"] .remove {
-    margin-top: 18px;
-}
+  .list[list-type="image"] .remove {
+      margin-top: 18px;
+  }
 
-.list[list-type="card"] {
-    margin: calc(var(--uploader-card-space) / (-2));
-}
+  .list[list-type="card"] {
+      margin: calc(var(--uploader-card-space) / (-2));
+  }
 
-.cardwrap{
-    position: relative;
-    display: inline-block;
-}
+  .cardwrap{
+      position: relative;
+      display: inline-block;
+  }
 
-.card {
-    position: relative;
-    display: inline-block;
-    width: var(--uploader-card-width);
-    height: var(--uploader-card-height);
-    border: 1px solid var(--border-color-base);
-    border-radius: var(--uploader-card-border-radius);
-    margin: calc(var(--uploader-card-space) / 2);
-    vertical-align: top;
-    overflow: hidden;
-}
+  .card {
+      position: relative;
+      display: inline-block;
+      width: var(--uploader-card-width);
+      height: var(--uploader-card-height);
+      border: 1px solid var(--border-color-base);
+      border-radius: var(--uploader-card-border-radius);
+      margin: calc(var(--uploader-card-space) / 2);
+      vertical-align: top;
+      overflow: hidden;
+  }
 
-.card .thumb {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-}
+  .card .thumb {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+  }
 
-.card[role="select"] {
-    cursor: var(--cursor-pointer);
-    text-align: center;
-    line-height: var(--uploader-card-width);
-    border-style: dashed;
-    transition: all var(--transition-duration-base);
-    background: var(--uploader-card-background);
-    vertical-align: bottom;
-}
+  .card[role="select"] {
+      cursor: var(--cursor-pointer);
+      text-align: center;
+      line-height: var(--uploader-card-width);
+      border-style: dashed;
+      transition: all var(--transition-duration-base);
+      background: var(--uploader-card-background);
+      vertical-align: bottom;
+  }
 
-.card[role="select"]::before {
-    color: var(--uploader-border-color);
-content: "\e64e";
+  .card[role="select"]::before {
+      color: var(--uploader-border-color);
+      content: "\e64e";
+      font-family: "lcap-ui-icons";
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-decoration: inherit;
+      text-rendering: optimizeLegibility;
+      text-transform: none;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      font-smoothing: antialiased;
+      font-size: var(--uploader-card-icon-font-size);
+  }
+
+  .card[role="select"]:hover {
+      border-color: var(--brand-primary);
+  }
+  .card[role="select"]:hover::before{
+      color: var(--brand-primary);
+  }
+
+  .card:not(:last-child) {
+      margin-right: var(--uploader-card-space);
+  }
+
+  .mask {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--uploader-mask-background);
+      opacity: 0;
+      transition: opacity var(--transition-duration-slow);
+  }
+
+  .mask:hover, .mask[show-progress] {
+      opacity: 1;
+  }
+
+  .card .progress {
+      position: absolute;
+      top: 65%;
+      width: 72%;
+      left: 14%;
+  }
+
+  .card .progress > div[class^="u-linear-progress_track__"] {
+      background: rgba(0, 0, 0, 0.5);
+      height: 6px;
+      border-radius: 100px;
+  }
+
+  .buttons {
+      position: absolute;
+      font-size: var(--uploader-card-button-font-size);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  }
+
+  .button {
+      cursor: var(--cursor-pointer);
+      color: rgba(255, 255, 255, 0.6);
+  }
+
+  .button + .button {
+      margin-left: 8px;
+  }
+
+  .button:hover {
+      color: white;
+  }
+
+  .button[role="preview"]::before {
+    content: "\e653";
     font-family: "lcap-ui-icons";
     font-style: normal;
     font-weight: normal;
@@ -994,71 +1077,10 @@ content: "\e64e";
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
-    font-size: var(--uploader-card-icon-font-size);
-}
+  }
 
-.card[role="select"]:hover {
-    border-color: var(--brand-primary);
-}
-.card[role="select"]:hover::before{
-    color: var(--brand-primary);
-}
-
-.card:not(:last-child) {
-    margin-right: var(--uploader-card-space);
-}
-
-.mask {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: var(--uploader-mask-background);
-    opacity: 0;
-    transition: opacity var(--transition-duration-slow);
-}
-
-.mask:hover, .mask[show-progress] {
-    opacity: 1;
-}
-
-.card .progress {
-    position: absolute;
-    top: 65%;
-    width: 72%;
-    left: 14%;
-}
-
-.card .progress > div[class^="u-linear-progress_track__"] {
-    background: rgba(0, 0, 0, 0.5);
-    height: 6px;
-    border-radius: 100px;
-}
-
-.buttons {
-    position: absolute;
-    font-size: var(--uploader-card-button-font-size);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.button {
-    cursor: var(--cursor-pointer);
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.button + .button {
-    margin-left: 8px;
-}
-
-.button:hover {
-    color: white;
-}
-
-.button[role="preview"]::before {
-content: "\e653";
+  .button[role="download"]::before {
+    content: "\e67d";
     font-family: "lcap-ui-icons";
     font-style: normal;
     font-weight: normal;
@@ -1069,10 +1091,10 @@ content: "\e653";
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
-}
+  }
 
-.button[role="download"]::before {
-content: "\e67d";
+  .button[role="remove"]::before {
+    content: "\e66f";
     font-family: "lcap-ui-icons";
     font-style: normal;
     font-weight: normal;
@@ -1083,43 +1105,29 @@ content: "\e67d";
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
-}
+  }
 
-.button[role="remove"]::before {
-content: "\e66f";
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-}
+  .draggable {
+      overflow: hidden;
+      cursor: var(--cursor-pointer);
+      text-align: center;
+      background: var(--uploader-draggable-background);
+      border: var(--uploader-draggable-border-width) dashed var(--uploader-draggable-border-color);
+      border-radius: var(--uploader-draggable-border-radius);
+      padding: var(--uploader-draggable-padding);
+      transition: all var(--transition-duration-base);
+  }
 
-.draggable {
-    overflow: hidden;
-    cursor: var(--cursor-pointer);
-    text-align: center;
-    background: var(--uploader-draggable-background);
-    border: var(--uploader-draggable-border-width) dashed var(--uploader-draggable-border-color);
-    border-radius: var(--uploader-draggable-border-radius);
-    padding: var(--uploader-draggable-padding);
-    transition: all var(--transition-duration-base);
-}
+  .draggable:focus,
+  .draggable:hover,
+  .draggable[dragover] {
+      outline: none;
+      border-color: var(--uploader-draggable-border-color-hover);
+  }
 
-.draggable:focus,
-.draggable:hover,
-.draggable[dragover] {
-    outline: none;
-    border-color: var(--uploader-draggable-border-color-hover);
-}
-
-.draggable::before {
+  .draggable::before {
     font-size: 24px;
-content: "\e656";
+    content: "\e656";
     font-family: "lcap-ui-icons";
     font-style: normal;
     font-weight: normal;
@@ -1131,32 +1139,32 @@ content: "\e656";
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
     color: var(--uploader-draggable-icon-color);
-}
-.draggable:focus::before,
-.draggable[dragover]::before{
-    color: var(--uploader-draggable-color-hover);
-}
+  }
+  .draggable:focus::before,
+  .draggable[dragover]::before{
+      color: var(--uploader-draggable-color-hover);
+  }
 
-.dragDescription{
-    margin-bottom: 10px;
-    color: var(--uploader-draggable-color);
-}
-.errwrap {
-    max-height: var(--uploader-error-box-height);
-    padding: 0 5px 5px 0;
-}
+  .dragDescription{
+      margin-bottom: 10px;
+      color: var(--uploader-draggable-color);
+  }
+  .errwrap {
+      max-height: var(--uploader-error-box-height);
+      padding: 0 5px 5px 0;
+  }
 
-.errmessage {
-    display: block;
-    white-space: var(--validator-message-white-space);
-    color: #F24957;
-    border-radius: var(--validator-message-border-radius);
-    min-width: var(--validator-message-min-width);
-    margin: 4px 0;
-    font-size: 12px;
-}
-.errmessage::before {
-content: "\e65f";
+  .errmessage {
+      display: block;
+      white-space: var(--validator-message-white-space);
+      color: #F24957;
+      border-radius: var(--validator-message-border-radius);
+      min-width: var(--validator-message-min-width);
+      margin: 4px 0;
+      font-size: 12px;
+  }
+  .errmessage::before {
+    content: "\e65f";
     font-family: "lcap-ui-icons";
     font-style: normal;
     font-weight: normal;
@@ -1171,18 +1179,18 @@ content: "\e65f";
     margin-left: 1px;
     margin-right: 4px;
     background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 48%, rgba(255,255,255,0) 48%);
-}
+  }
 
-.description {
-    color: var(--uploader-color);
-    margin: 4px 0;
-    font-size: 12px;
-}
-.cardwrap .description,
-.cardwrap .errmessage {
-    margin-left: var(--uploader-card-space);
-}
-.cardwrap .errwrap {
-    max-width: var(--uploader-error-box-max-width);
-}
-</style>
+  .description {
+      color: var(--uploader-color);
+      margin: 4px 0;
+      font-size: 12px;
+  }
+  .cardwrap .description,
+  .cardwrap .errmessage {
+      margin-left: var(--uploader-card-space);
+  }
+  .cardwrap .errwrap {
+      max-width: var(--uploader-error-box-max-width);
+  }
+  </style>

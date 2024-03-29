@@ -2,10 +2,10 @@
 
 namespace nasl.ui {
   @Component({
-    title: '弹出层',
+    title: '抽屉',
     icon: 'popuph5',
-    description: '弹出层容器，用于展示弹窗、信息提示等内容，支持多个弹出层叠加展示。',
-    group: "Container"
+    description: '抽屉容器，用于展示弹窗、信息提示等内容，支持多个抽屉叠加展示。',
+    group: "Feedback"
   })
   export class VanPopup extends ViewComponent {
     constructor(options?: Partial<VanPopupOptions>) {
@@ -59,8 +59,8 @@ namespace nasl.ui {
     })
     closeOnClickOverlay: nasl.core.Boolean = false;
     @Event({
-      title: '点击弹出层',
-      description: '点击弹出层时触发'
+      title: '点击抽屉',
+      description: '点击抽屉时触发'
     })
     onClick: (event: any) => any ;
     @Event({
@@ -69,13 +69,13 @@ namespace nasl.ui {
     })
     onClickOverlay: (event: any) => any ;
     @Event({
-      title: '打开弹出层后',
-      description: '打开弹出层时触发'
+      title: '打开抽屉后',
+      description: '打开抽屉时触发'
     })
     onOpen: (event: any) => any ;
     @Event({
-      title: '关闭弹出层后',
-      description: '关闭弹出层时触发'
+      title: '关闭抽屉后',
+      description: '关闭抽屉时触发'
     })
     onClose: (event: any) => any ;
     @Slot({

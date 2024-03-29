@@ -29,8 +29,12 @@
   "dependencies": {
     "@babel/core": "^7.22.10",
     "@babel/generator": "^7.22.10",
+    "@babel/parser": "^7.23.6",
     "@babel/plugin-proposal-decorators": "^7.22.10",
+    "@babel/plugin-transform-react-jsx": "^7.23.4",
+    "@babel/plugin-transform-typescript": "^7.23.6",
     "@babel/preset-typescript": "^7.22.5",
+    "@babel/traverse": "^7.23.7",
     "@babel/types": "^7.22.10",
     "@nasl/types": "^0.1.3",
     "babel-plugin-parameter-decorator": "^1.0.16",
@@ -50,6 +54,7 @@
     "yargs-parser": "^21.1.1"
   },
   "devDependencies": {
+    "@types/babel__traverse": "^7.20.5",
     "@types/fs-extra": "^11.0.4"
   },
   "engines": {

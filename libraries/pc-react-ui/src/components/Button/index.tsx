@@ -2,20 +2,20 @@ import { Button as AntdButton } from 'antd';
 import type { ButtonProps as AntdButtonProps } from 'antd/lib/button';
 import * as basicsPlugin from './plugins/basicsPlugin';
 import type { pluginType } from '@/plugins/type';
-import { Plugin, registerComponet } from '../../plugins/index';
+import { registerComponet } from '../../plugins/index';
+import type { BasePlugin } from '@/types/plugins';
 
-import './button.css';
+// import './button.css';
 
-const plugin = new Plugin(basicsPlugin);
-type ButtonProps = AntdButtonProps
+export type ButtonProps = AntdButtonProps & BasePlugin
 
 const mapProps = {
   mySize: 'size',
 };
+
 const Button = registerComponet<ButtonProps, pluginType<ButtonProps>>(
   AntdButton,
-  plugin,
-  mapProps,
+  { plugin: basicsPlugin, displayName: AntdButton.displayName, mapProps },
 );
 
 export default Button;

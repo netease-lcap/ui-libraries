@@ -1,9 +1,14 @@
+import 'vitest-canvas-mock';
+import './win.js';
 import Vue from 'vue';
 import { vi, expect } from 'vitest';
+import VueI18N from 'vue-i18n';
 import vueSnapshotSerializer from 'jest-serializer-vue-tjw';
 import * as CloudUI from '../src/index.js';
+import './dom';
 
 expect.addSnapshotSerializer(vueSnapshotSerializer);
+Vue.use(VueI18N);
 Vue.use(CloudUI);
 
 const mutationObserverMock = vi.fn(function MutationObserver(callback) {
@@ -15,7 +20,6 @@ const mutationObserverMock = vi.fn(function MutationObserver(callback) {
   };
 });
 window.MutationObserver = mutationObserverMock;
-
 // 将模拟对象赋值给实际的 VisualViewport 属性
 Object.defineProperty(window, 'VisualViewport', { value: function() {} });
 Object.assign(window.VisualViewport.prototype, {

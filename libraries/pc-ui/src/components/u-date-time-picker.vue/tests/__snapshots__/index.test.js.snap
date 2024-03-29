@@ -2,7 +2,7 @@
 
 exports[`u-date-time-picker.vue > date time picker 1`] = `
 <div class="root">
-  <div class="root input" height="full" prefix="calendar" width="full">
+  <div class="root input" height="full" prefix="calendar" width>
     <span class="baseline">b</span>
     <span class="placeholder"></span>
     <span class="prefix" name="calendar">
@@ -17,7 +17,7 @@ exports[`u-date-time-picker.vue > date time picker 1`] = `
         </div>
       </span>
     </span>
-    <input class="input" height="full" type="text" width="full">
+    <input class="input" height="full" type="text" width>
     <!---->
   </div>
   <transition-stub class="popper" data-popper-escaped data-popper-placement="bottom-start" data-popper-reference-hidden name="fade" style="position: absolute; left: 0px; top: 0px; margin: 0px; transform: translate(0px, 4px);">
@@ -35,12 +35,12 @@ exports[`u-date-time-picker.vue > date time picker 1`] = `
               <span class="clearable"></span>
             </span>
           </div>
-          <span class="root pickerinput" width="50">
-            <div class="root input" clearable="18:18:59" height="full" width="full">
+          <span class="root pickerinput" width>
+            <div class="root input" clearable="18:18:59" height="full" width>
               <span class="baseline">b</span>
               <span class="placeholder"></span>
               <!---->
-              <input class="input" height="full" type="text" width="full">
+              <input class="input" height="full" type="text" width>
               <span class="suffix">
                 <!---->
                 <!---->
@@ -786,7 +786,7 @@ exports[`u-date-time-picker.vue > date time picker 1`] = `
 exports[`u-date-time-picker.vue > date time range picker 1`] = `
 <div class="root">
   <div class="root input">
-    <div class="root input" height="full" prefix="calendar" width="full">
+    <div class="root input" height="full" prefix="calendar" width>
       <span class="baseline">b</span>
       <span class="placeholder"></span>
       <span class="prefix" name="calendar">
@@ -801,15 +801,15 @@ exports[`u-date-time-picker.vue > date time range picker 1`] = `
           </div>
         </span>
       </span>
-      <input class="input" height="full" type="text" width="full">
+      <input class="input" height="full" type="text" width>
       <!---->
     </div>
     <span class="toIcon"></span>
-    <div class="root input" height="full" width="full">
+    <div class="root input" height="full" width>
       <span class="baseline">b</span>
       <span class="placeholder"></span>
       <!---->
-      <input class="input" height="full" type="text" width="full">
+      <input class="input" height="full" type="text" width>
       <!---->
     </div>
   </div>
@@ -828,12 +828,12 @@ exports[`u-date-time-picker.vue > date time range picker 1`] = `
               <span class="clearable"></span>
             </span>
           </div>
-          <span class="root pickerinput" width="50">
-            <div class="root input" clearable="00:00:00" height="full" width="full">
+          <span class="root pickerinput" width>
+            <div class="root input" clearable="00:00:00" height="full" width>
               <span class="baseline">b</span>
               <span class="placeholder"></span>
               <!---->
-              <input class="input" height="full" type="text" width="full">
+              <input class="input" height="full" type="text" width>
               <span class="suffix">
                 <!---->
                 <!---->
@@ -1579,7 +1579,7 @@ exports[`u-date-time-picker.vue > date time range picker 1`] = `
 exports[`u-date-time-picker.vue > date time range picker 2`] = `
 <div class="root">
   <div class="root input">
-    <div class="root input" height="full" prefix="calendar" width="full">
+    <div class="root input" height="full" prefix="calendar" width>
       <span class="baseline">b</span>
       <span class="placeholder"></span>
       <span class="prefix" name="calendar">
@@ -1594,15 +1594,15 @@ exports[`u-date-time-picker.vue > date time range picker 2`] = `
           </div>
         </span>
       </span>
-      <input class="input" height="full" type="text" width="full">
+      <input class="input" height="full" type="text" width>
       <!---->
     </div>
     <span class="toIcon"></span>
-    <div class="root input" height="full" width="full">
+    <div class="root input" height="full" width>
       <span class="baseline">b</span>
       <span class="placeholder"></span>
       <!---->
-      <input class="input" height="full" type="text" width="full">
+      <input class="input" height="full" type="text" width>
       <!---->
     </div>
   </div>
@@ -1621,12 +1621,12 @@ exports[`u-date-time-picker.vue > date time range picker 2`] = `
               <span class="clearable"></span>
             </span>
           </div>
-          <span class="root pickerinput" width="50">
-            <div class="root input" clearable="00:00:00" height="full" width="full">
+          <span class="root pickerinput" width>
+            <div class="root input" clearable="00:00:00" height="full" width>
               <span class="baseline">b</span>
               <span class="placeholder"></span>
               <!---->
-              <input class="input" height="full" type="text" width="full">
+              <input class="input" height="full" type="text" width>
               <span class="suffix">
                 <!---->
                 <!---->

@@ -814,7 +814,6 @@ date.setDate(0);
 
 .head {
     line-height: 32px;
-    *zoom: 1;
 }
 .head::before {
     display: table;

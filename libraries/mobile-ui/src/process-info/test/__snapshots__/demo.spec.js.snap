@@ -1,0 +1,32 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div vusion-disabled-duplicate="true" vusion-disabled-copy="true" class="van-process-info">
+      <div class="van-process-info__card">
+        <div class="van-process-info__card-line">
+          <div class="van-process-info__card-label">发起人</div>
+          <div class="van-process-info__card-content">-</div>
+        </div>
+        <div class="van-process-info__card-line">
+          <div class="van-process-info__card-label">发起时间</div>
+          <div class="van-process-info__card-content">-</div>
+        </div>
+        <div class="van-process-info__card-line">
+          <div class="van-process-info__card-label">当前状态</div>
+          <div class="van-process-info__card-content">-</div>
+        </div>
+        <div class="van-process-info__card-line">
+          <div class="van-process-info__card-label">当前节点</div>
+          <div class="van-process-info__card-content">-</div>
+        </div>
+        <div class="van-process-info__card-line">
+          <div class="van-process-info__card-label">参与人</div>
+          <div class="van-process-info__card-content">-</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

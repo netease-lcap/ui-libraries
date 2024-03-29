@@ -1,80 +1,11 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Render Large Button 1`] = `
-<button
-  className="ant-btn css-dev-only-do-not-override-2rgkd4 ant-btn-default ant-btn-lg"
-  disabled={false}
-  mapProps={
-    {
-      "mySize": "size",
-    }
-  }
-  onClick={[Function]}
-  style={{}}
-  type="button"
->
-  <span>
-    Button
-  </span>
-</button>
-`;
-
-exports[`Render Primary Button 1`] = `
-<button
-  asyncLoading={true}
-  className="ant-btn css-dev-only-do-not-override-2rgkd4 ant-btn-primary"
-  disabled={false}
-  mapProps={
-    {
-      "mySize": "size",
-    }
-  }
-  mySize="small"
-  onClick={[Function]}
-  style={{}}
-  type="button"
->
-  <span>
-    Button-loading
-  </span>
-</button>
-`;
-
-exports[`Render Secondary Button 1`] = `
+exports[`Render Default Button 1`] = `
 <button
   className="ant-btn css-dev-only-do-not-override-2rgkd4 ant-btn-default"
   disabled={false}
-  label="Button"
-  mapProps={
-    {
-      "mySize": "size",
-    }
-  }
   onClick={[Function]}
   style={{}}
   type="button"
->
-  <span>
-    Button
-  </span>
-</button>
-`;
-
-exports[`Render Small Button 1`] = `
-<button
-  className="ant-btn css-dev-only-do-not-override-2rgkd4 ant-btn-default ant-btn-sm"
-  disabled={false}
-  mapProps={
-    {
-      "mySize": "size",
-    }
-  }
-  onClick={[Function]}
-  style={{}}
-  type="button"
->
-  <span>
-    Button
-  </span>
-</button>
+/>
 `;

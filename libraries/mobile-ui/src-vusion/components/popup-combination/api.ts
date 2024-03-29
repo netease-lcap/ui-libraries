@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @Component({
-    title: '气泡弹出框',
+    title: '弹出框',
     icon: 'popup',
     description: '点击，弹出气泡式的卡片浮层。',
     group: "Feedback"

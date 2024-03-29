@@ -17,13 +17,13 @@ exports[`u-grid-layout.vue > Demo- 1`] = `
   <div class="root">
     <!---->
     <div class="table" position="static">
-      <div class="head" style="top: 0px;">
+      <div class="head">
         <table class="root head-table" sticky-fixed="true">
           <colgroup>
-            <col width="0">
-            <col width="0">
+            <col width>
+            <col width>
             <col>
-            <col width="0">
+            <col width>
           </colgroup>
           <thead>
             <tr>
@@ -67,17 +67,17 @@ exports[`u-grid-layout.vue > Demo- 1`] = `
           </thead>
         </table>
       </div>
-      <!---->
+      <div class="headPlaceholder"></div>
       <div class="body" sticky-fixed="true">
         <div class="root scrollcview">
           <div class="wrap">
             <div class="view">
               <table class="root body-table" sticky-fixed="true">
                 <colgroup>
-                  <col width="0">
-                  <col width="0">
+                  <col width>
+                  <col width>
                   <col>
-                  <col width="0">
+                  <col width>
                 </colgroup>
                 <tbody>
                   <!---->

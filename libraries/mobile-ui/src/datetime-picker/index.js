@@ -25,7 +25,9 @@ export default createComponent({
     },
     inputAlign: String,
     closeOnClickOverlay: Boolean,
-    placeholder: String,
+    placeholder: {
+      type: String,
+    },
     range: Boolean,
     startValue: String,
     endValue: String,

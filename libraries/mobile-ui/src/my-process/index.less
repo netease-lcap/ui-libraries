@@ -1,0 +1,142 @@
+.van-my-process {
+  overflow: scroll;
+
+  &__toolbar {
+    height: 44px;
+    background-color: var(--van-tabs-nav-background-color);
+
+    &-button {
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: #F7F8FA;
+
+      display: inline-flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 4px;
+
+      &-icon {
+        color: #999999;
+      }
+
+      &:active {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  &__list-view {
+    height: auto;
+    background: transparent;
+  }
+
+  &__list-view-empty {
+    padding: 16px;
+    text-align: center;
+    color: #999999;
+  }
+}
+
+.van-my-process__item-card {
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  margin: 16px;
+  padding: 12px 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  font-size: 14px;
+  background: #FFFFFF;
+
+
+  border: 0.5px solid #E5E5E5;
+  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.06);
+
+}
+
+.van-my-process__item-card-title {
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #333333;
+  position: relative;
+  height: 30px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    transform-origin: left bottom;
+    border-bottom: 1px solid #E5E5E5;
+  }
+}
+
+.van-my-process__item-card-title-text {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.van-my-process__item-card-title-icon {
+  flex-shrink: 0;
+}
+
+.van-my-process__item-card-line {
+  display: flex;
+  flex-direction: row;
+  // align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.van-my-process__item-card-label {
+  color: #999999;
+  flex-shrink: 0;
+
+  &::after {
+    content: "：";
+  }
+}
+
+.van-my-process__item-card-content {
+  text-align: right;
+}
+
+
+.van-my-process-toolbar {
+  height: 44px;
+  background-color: var(--van-tabs-nav-background-color);
+  z-index: 9;
+
+  &__button {
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: #F7F8FA;
+
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+
+    &:active {
+      opacity: 0.8;
+    }
+  }
+
+  &__button-icon {
+    color: #999999;
+  }
+}

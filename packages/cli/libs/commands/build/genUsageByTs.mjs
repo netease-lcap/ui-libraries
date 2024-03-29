@@ -1,7 +1,10 @@
+/* eslint-disable no-param-reassign */
 import fs from 'fs-extra';
 import path from 'path';
 import { transform } from '../../transforms/naslTs2Json.js';
 import * as logger from '../../utils/logger.mjs';
+import transformStory2Blocks from '../../transforms/story2block.mjs';
+import { getComponentPathInfo } from '../../index.mjs';
 
 function hasImg(dir) {
   return fs.existsSync(path.join(dir, '0.png'));
@@ -31,7 +34,7 @@ function getScreenShot(
       });
     }
   } catch (e) {
-    console.log('找不到 screenShot 文件', componentDir);
+    logger.warn(`找不到 screenShot 文件 ${componentDir}/screenshots`);
     // console.log(e);
   }
   return screenShot;
@@ -52,13 +55,13 @@ function getDrawings(componentDir, component, libInfo, sourceDir, publicPath) {
       });
     }
   } catch (e) {
-    console.log('找不到 drawings 文件', componentDir);
-    console.log(e);
+    logger.warn(`找不到 drawings 文件 ${componentDir}/drawings`);
   }
   return drawings;
 }
 
-function getBlocks(dir, { screenShot, drawings }) {
+function getBlocksByDemo(componentDir, { screenshots, drawings }) {
+  const dir = `${componentDir}/demos/blocks`;
   if (!fs.existsSync(dir)) {
     logger.warn('未找到 blocks: ', dir);
     return [];
@@ -81,12 +84,32 @@ function getBlocks(dir, { screenShot, drawings }) {
       title,
       description: '',
       code,
-      screenshot: screenShot[index] || '',
+      screenshot: screenshots[index] || '',
       drawing: drawings[index] || '',
     });
   });
 
   return blocks;
+}
+
+function getBlocksByStory(componentDir, { screenshots, drawings }) {
+  const storyFilePath = `${componentDir}/stories/block.stories.jsx`;
+  if (!fs.existsSync(storyFilePath)) {
+    logger.warn(`未找到blocks 文件, ${storyFilePath}`);
+    return [];
+  }
+
+  const code = fs.readFileSync(storyFilePath);
+  const blocks = transformStory2Blocks(code.toString());
+
+  return blocks.map(({ name, template }, index) => ({
+    concept: 'ViewBlockWithImage',
+    title: name,
+    description: '',
+    code: template,
+    screenshot: screenshots[index] || '',
+    drawing: drawings[index] || '',
+  }));
 }
 
 /**
@@ -100,58 +123,75 @@ function genUsageByTs(config) {
     destPath,
     componentsPath,
     components,
+    blockGenerateType,
   } = config;
   const data = [];
   const packageInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
   const libInfo = [packageInfo.name, '@', packageInfo.version].join('');
 
   components.map((obj) => ({ ...obj })).forEach((component) => {
-    const sourceDir = path.join(rootPath, componentsPath);
-    let componentDir = path.join(sourceDir, `${component.name}`);
-    component.symbol = component.name;
+    const { componentDir, symbol, sourceDir } = getComponentPathInfo(component.name, rootPath, componentsPath);
 
-    if (!fs.existsSync(componentDir)) {
-      const name = `${componentDir}.vue`;
-      componentDir = name;
-      component.symbol = `${component.name}.vue`;
+    component.symbol = symbol;
+
+    // const rootComponentDir = path.join(rootPath, componentsPath);
+    // let componentDir = path.join(rootComponentDir, `${component.name}`);
+
+    // // 兼容 mobile-ui 处理
+    // const srcCompDir = path.join(rootPath, `./src/${component.name}`);
+    // let sourceDir = componentsPath;
+    // component.symbol = component.name;
+
+    // if (!fs.existsSync(componentDir)) {
+    //   if (fs.existsSync(srcCompDir)) {
+    //     componentDir = srcCompDir;
+    //     sourceDir = 'src';
+    //   } else {
+    //     const name = `${componentDir}.vue`;
+    //     componentDir = name;
+    //     component.symbol = `${component.name}.vue`;
+    //   }
+    // }
+
+    const tsPath = `${componentDir}/api.ts`;
+    if (!fs.existsSync(tsPath)) {
+      logger.error(`未找到组件 ${component.name} 的描述文件（api.ts）`);
+      process.exit(1);
     }
 
     // api.ts
     try {
-      const tsPath = `${componentDir}/api.ts`;
       // component.tsPath = tsPath;
       const info = transform(fs.readFileSync(tsPath, 'utf8'));
       Object.assign(component, info[0]);
     } catch (e) {
-      console.log('找不到 TS 文件或 TS 报错', componentDir);
+      logger.error(`解析 ${tsPath} 失败，${e.message}`);
+      process.exit(1);
     }
 
-    const screenShot = getScreenShot(
+    const screenshots = getScreenShot(
       componentDir,
       component,
       libInfo,
-      componentsPath,
+      sourceDir,
       assetsPublicPath,
     );
     const drawings = getDrawings(
       componentDir,
       component,
       libInfo,
-      componentsPath,
+      sourceDir,
       assetsPublicPath,
     );
 
     // blocks
     try {
-      const blocks = getBlocks(`${componentDir}/demos/blocks`, {
-        screenShot,
-        drawings,
-      });
+      const blocks = blockGenerateType === 'story'
+        ? getBlocksByStory(componentDir, { screenshots, drawings })
+        : getBlocksByDemo(componentDir, { screenshots, drawings });
       Object.assign(component, { blocks });
     } catch (e) {
-      logger.error('处理 block 异常');
-      console.log(e);
-      return;
+      logger.error(`处理 block 异常 ${e.message}`);
     }
 
     delete component.symbol;
