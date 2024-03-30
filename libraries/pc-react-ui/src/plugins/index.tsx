@@ -101,18 +101,6 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     };
   }, [componentRef, baseRef]);
   // mutableProps.setState({ ref });
-  // if (plugin.displayName === 'Tree') {
-  //   console.log(BaseComponent === Component, Tree === Component, '???===', plugin.displayName);
-  //   return (
-  //     <Component
-  //       {...excludeProps}
-  //       ref={baseRef}
-  //     >
-  //       {props.children}
-  //     </Component>
-  //   );
-  // }
-  // console.log(excludeProps,'ex');
   return (
     <ConfigProvider locale={zhCN}>
       <Component
@@ -141,7 +129,6 @@ export function registerComponet<T, U>(
 ) {
   return React.forwardRef<T, U>((props, ref) => {
     const [plugin, setPlugin] = React.useState(new Plugin(pluginOption));
-    console.log(ref, 'ref---');
     // console.count(pluginOption.displayName);
     // React.useEffect(() => {
     //   if (props.appType === 'lowCode') {

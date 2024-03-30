@@ -93,6 +93,14 @@ export function useHandleConfirm(props) {
 }
 useHandleConfirm.order = 4;
 
+function useHandle(props) {
+  const render = React.useCallback(() => {
+    return <div>1</div>;
+  }, []);
+  return {
+    render,
+  };
+}
 // export function useHandleIcon() {
 
 // }

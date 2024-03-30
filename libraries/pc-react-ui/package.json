@@ -51,7 +51,8 @@
     "lodash": "^4.17.21",
     "numbro": "^2.4.0",
     "react-error-boundary": "^4.0.12",
-    "react-router-dom": "^6.21.3"
+    "react-router-dom": "^6.21.3",
+    "remixicon": "^4.2.0"
   },
   "devDependencies": {
     "@ant-design/static-style-extract": "^1.0.2",

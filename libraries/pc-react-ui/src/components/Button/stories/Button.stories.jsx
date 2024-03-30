@@ -30,7 +30,6 @@ export const Primary = {
     }, []);
     return (
       <Button {...args} ref={refss}>
-        {' '}
         Button-loading
       </Button>
     );
@@ -61,6 +60,7 @@ export const 单实例插件 = {
     label: 'Button',
     usePlugin: {
       scopePlugin(props) {
+        console.log(1234);
         return {
           render(scopeProps) {
             const Component = props.get('render');

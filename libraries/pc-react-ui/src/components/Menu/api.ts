@@ -3,9 +3,10 @@
 namespace nasl.ui {
   @Component({
     title: '导航栏',
-    icon: 'navbar-multi',
-    description: '通常用于页面顶部的导航菜单，放置 Logo、导航链接、用户信息等。',
-    group: 'Navigation',
+    // icon: 'navbar-multi',
+    description:
+      '通常用于页面顶部的导航菜单，放置 Logo、导航链接、用户信息等。',
+    // group: 'Navigation',
   })
   export class Menu extends ViewComponent {
     constructor(options?: Partial<MenuOptions>) {
@@ -56,7 +57,8 @@ namespace nasl.ui {
 
     @Event({
       title: '点击',
-      description: '点击此项时触发，与原生 click 事件不同的是，它只会在非只读和禁用的情况下触发。',
+      description:
+        '点击此项时触发，与原生 click 事件不同的是，它只会在非只读和禁用的情况下触发。',
     })
     onClick: (event: {
       altKey: nasl.core.Boolean;
@@ -92,7 +94,13 @@ namespace nasl.ui {
       title: '被选中时',
       description: '选择某一项时触发',
     })
-    onSelect: (event: { value: nasl.core.String; oldValue: nasl.core.String; selectedItem: nasl.core.Any; item: nasl.core.Any; oldItem: nasl.core.Any }) => any;
+    onSelect: (event: {
+      value: nasl.core.String;
+      oldValue: nasl.core.String;
+      selectedItem: nasl.core.Any;
+      item: nasl.core.Any;
+      oldItem: nasl.core.Any;
+    }) => any;
 
     // @Event({
     //   title: '改变后',
@@ -106,15 +114,8 @@ namespace nasl.ui {
       snippets: [
         {
           title: '导航项',
-          code: '<MenuItem style="line-height:60px"><Text children="导航项目" style="color:inherit" /></MenuItem>',
-        },
-        {
-          title: '导航组',
-          code: `<MenuSubMenu style="line-height:60px" title={ <Text children="导航组" style="color:inherit" /> }>
-                    <MenuItem style="line-height:60px">
-                    <Text children="导航项目" style="color:inherit" />
-                    </MenuItem>
-                  </MenuSubMenu>`,
+          code:
+            '<MenuItem style="line-height:60px" label={<Text children="导航项目" style="color:inherit" />}></MenuItem>',
         },
       ],
     })
@@ -144,11 +145,25 @@ namespace nasl.ui {
   }
 
   export class MenuItemOptions extends ViewComponentOptions {
-    // @Prop({
-    //   title: '文本',
-    //   description: '文本内容',
-    // })
-    // label: nasl.core.String;
+    @Prop({
+      group: '基础信息',
+      title: '标题自定义',
+      description: '开启标题自定义后,标题去会变成插槽,可以自由拖入组件定义标题',
+      docDescription:
+        '开启标题自定义后,标题去会变成插槽,可以自由拖入组件定义标题',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    labelIsSlot: nasl.core.Boolean = false;
+
+    @Prop<MenuItemOptions, 'label'>({
+      group: '基础信息',
+      title: '标题',
+      docDescription: '选择分组的标题，标题只有在没有文本插槽的时候生效',
+      if: (_) => _.labelIsSlot === false,
+    })
+    label: nasl.core.String = '表单项名称';
 
     @Prop({
       title: '唯一标识',
@@ -209,13 +224,15 @@ namespace nasl.ui {
 
     @Prop({
       title: '路由链接',
-      description: '需要 vue-router，与`<router-link>`的`to`属性相同。可以是一个字符串或者是描述目标位置的对象。',
+      description:
+        '需要 vue-router，与`<router-link>`的`to`属性相同。可以是一个字符串或者是描述目标位置的对象。',
     })
     private to: nasl.core.String;
 
     @Prop({
       title: '替换地址',
-      description: '需要 vue-router，与`<router-link>`的`replace`属性相同。如果为`true`，当点击时，会调用`router.replace()`而不是`router.push()`，于是导航后不会留下`history `记录。',
+      description:
+        '需要 vue-router，与`<router-link>`的`replace`属性相同。如果为`true`，当点击时，会调用`router.replace()`而不是`router.push()`，于是导航后不会留下`history `记录。',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -224,7 +241,8 @@ namespace nasl.ui {
 
     @Prop({
       title: '精确匹配',
-      description: '需要 vue-router，与`<router-link>`的`exact`属性相同。是否与路由完全一致时才高亮显示。',
+      description:
+        '需要 vue-router，与`<router-link>`的`exact`属性相同。是否与路由完全一致时才高亮显示。',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -258,7 +276,7 @@ namespace nasl.ui {
       title: '导航名称',
       description: '导航项自定义',
     })
-    slotLabel: () => Array<ViewComponent>;
+    slotLabelSlot: () => Array<ViewComponent>;
 
     @Slot({
       title: '默认',
@@ -397,9 +415,21 @@ namespace nasl.ui {
 
     @Slot({
       title: '默认',
-      description: '导航项自定义',
+      description: '插入<MenuItem>子组件',
+      snippets: [
+        {
+          title: '选项',
+          code: '<MenuItem label={<Text children="选项"></Text>}></MenuItem>',
+        },
+      ],
     })
     slotDefault: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '默认',
+      description: '插入<MenuItem>子组件',
+    })
+    slotLabel: () => Array<ViewComponent>;
   }
   @Component({
     title: '导航菜单组',

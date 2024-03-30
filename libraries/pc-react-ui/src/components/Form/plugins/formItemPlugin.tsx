@@ -33,7 +33,6 @@ export function useHandleFormWarplabel(props) {
   const widthProps = props.get('width');
   const spanProps = props.get('span');
   const labelCol = _.isNil(labelWidth) ? {} : { labelCol: { flex: `${labelWidth}px` } };
-  // const labelCol = _.isNil(widthProps) ? {} : { labelCol: { flex: `${labelWidth}px` } };
   const label = labelIsSlot ? labelProps : labelText;
   const span = _.defaults({ span: spanProps }, { span: colSpan });
   const width = _.defaults({ width: widthProps }, { width: widthContext });

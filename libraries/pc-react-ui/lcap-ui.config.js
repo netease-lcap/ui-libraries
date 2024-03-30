@@ -8,6 +8,7 @@ module.exports = {
       name: 'Form',
       alias: '表单',
     },
+    { group: 'Navigation', name: 'ProLayout', alias: '导航栏' },
     {
       group: 'Form',
       name: 'QueryForm',
@@ -187,6 +188,6 @@ module.exports = {
 
     { group: 'Navigation', name: 'Breadcrumb', alias: '面包屑' },
     { group: 'Navigation', name: 'Dropdown', alias: '下拉菜单' },
-    { group: 'Navigation', name: 'Menu', alias: '导航栏' },
+    { group: 'Navigation', name: 'Menu', alias: '侧边栏' },
   ],
 };

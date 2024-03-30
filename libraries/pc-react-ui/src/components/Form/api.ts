@@ -48,6 +48,18 @@ namespace nasl.ui {
       })
       value: any,
     ): any {}
+
+    @Method({
+      title: 'undefined',
+      description: '设置表单值。',
+    })
+    setValues(
+      @Param({
+        title: 'undefined',
+        description: '表单项的 name',
+      })
+      values: Record<string, string>,
+    ): any {}
     // @Method({
     //   title: 'undefined',
     //   description: '验证表单中的某一项，已废弃。表单中的项是嵌套的，用 name 层级较深，而且可能有重名。',
@@ -175,7 +187,6 @@ namespace nasl.ui {
     })
     width: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '100%';
 
-
     // @Prop({
     //   group: '样式属性',
     //   title: '控件布局',
@@ -205,8 +216,7 @@ namespace nasl.ui {
       group: '样式属性',
       title: '表单项栅格数',
       description: '表单项栅格数',
-      docDescription:
-        '表单项栅格数',
+      docDescription: '表单项栅格数',
       setter: {
         min: 0,
         max: 24,

@@ -219,7 +219,7 @@ export function useHandleScroll(props) {
 export function useHandleStyle(props) {
   const className = props.get('className');
   return {
-    className: classnames(style.table, className),
+    className: classnames(style.table, className, 'xxss'),
   };
 }
 

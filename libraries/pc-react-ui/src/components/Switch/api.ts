@@ -28,15 +28,15 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '选中时的内容',
-      description: '选中时的内容',
+      title: '开启时展示文案',
+      description: '开启时展示文案',
     })
     checkedChildren: nasl.core.String;
 
     @Prop({
       group: '主要属性',
-      title: '非选中时的内容',
-      description: '非选中时的内容',
+      title: '关闭时展示文案',
+      description: '关闭时展示文案',
     })
     unCheckedChildren: nasl.core.String;
     // @Prop({

@@ -21,7 +21,7 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 单行排布 = {
   render: () => {
-    return <Flex />;
+    return <Flex mode="flex" />;
   },
 };
 export const 多行排布 = {

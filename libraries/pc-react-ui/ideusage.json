@@ -56,6 +56,13 @@
     }
   },
   {
+    "name": "ProLayout",
+    "ideusage": {
+      "idetype": "container",
+      "structure": true
+    }
+  },
+  {
     "name": "FormInputNumber",
     "ideusage": {
       "idetype": "container"

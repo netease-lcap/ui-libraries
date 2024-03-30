@@ -13,7 +13,7 @@ import {
   PageContainer,
   ProCard,
   ProConfigProvider,
-  ProLayout,
+  ProLayout as AntProLayout,
   SettingDrawer,
 } from '@ant-design/pro-components';
 import {
@@ -26,12 +26,12 @@ import {
   theme,
 } from 'antd';
 import {
-  Menu, MenuItem, Text, MenuSubMenu,
+  Menu, MenuItem, Text, MenuSubMenu, ProLayout,
 } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
-  title: 'Example/Menu',
+  title: 'Example/ProLaout',
   component: Menu,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -73,65 +73,43 @@ export const 默认 = {
         }}
       >
         <ProLayout
-          avatarProps={{
-            src:
-              'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',
-            size: 'small',
-            title: '七妮妮',
-            render: (props, dom) => {
-              return (
-                <Dropdown
-                  menu={{
-                    items: [
-                      {
-                        key: 'logout',
-                        icon: <LogoutOutlined />,
-                        label: '退出登录',
-                      },
-                    ],
-                  }}
-                >
-                  {dom}
-                </Dropdown>
-              );
-            },
+          getTargetContainer={() => {
+            return document.getElementById('test-pro-layout') || document.body;
           }}
+          avatarSrc="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
+          avatarTitle="七妮妮"
+          avatarRender={(
+            <Dropdown
+              menu={{
+                items: [
+                  {
+                    key: 'logout',
+                    icon: <LogoutOutlined />,
+                    label: '退出登录',
+                  },
+                ],
+              }}
+            />
+          )}
           fixSiderbar
-          layout="top"
+          layout="mix"
           // logo="https://bkimg.cdn.bcebos.com/pic/e1fe9925bc315c6034a8d84c71f8dc1349540923d974?x-bce-process=image/format,f_auto/quality,Q_70/resize,m_lfit,limit_1,w_536.jpg"
           title="应用名称"
           // splitMenus
           menuDataRender={(menuData) => {
             return [{ name: 2, label: 1, path: '/a' }];
-            // return menuData;
           }}
-          menuProps={{
-            items: [
-              <MenuItem key="/mail" />,
-              <MenuItem
-                label="1234"
-                title="123"
-                onClick={(el) => {
-                  console.log(1234);
-                }}
-              />,
-              {
-                label: 3,
-                key: 2,
-                width: '200px',
-                'data-nodepath': 1234,
-                children: [
-                  {
-                    label: 123,
-                    key: 12,
-                  },
-                ],
-                onClick() {
-                  console.log(1234);
-                },
-              },
-            ],
-          }}
+          menuSlot={[
+            <MenuItem
+              label="1234"
+              title="123"
+              key="/123"
+              onClick={(el) => {
+                console.log(el, '--');
+                console.log(1234);
+              }}
+            />,
+          ]}
         >
           <div>1234</div>
         </ProLayout>

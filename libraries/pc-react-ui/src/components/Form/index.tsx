@@ -43,7 +43,7 @@ export const QueryForm = registerComponet<
   QueryFilterProps
 >(
   QueryFilter,
-  { plugin, displayName: 'QueryForm', mapProps },
+  { plugin: queryFromPlugin, displayName: 'QueryForm', mapProps },
 );
 
 export const FormList = AntdForm.List;

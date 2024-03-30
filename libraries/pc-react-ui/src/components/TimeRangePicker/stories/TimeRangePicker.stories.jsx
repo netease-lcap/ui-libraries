@@ -1,5 +1,6 @@
 import React from 'react';
 import { TimePicker } from 'antd';
+import { ProFormTimePicker } from '@ant-design/pro-components';
 import { TimeRangePicker } from '../index';
 
 // const TimeRangePicker = TimePicker.RangePicker;
@@ -26,7 +27,9 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <TimeRangePicker {...args} use12Hours showNow data-nodepath="1234" />,
+  render: (args) => (
+    <ProFormTimePicker.RangePicker name="timeRange" label="时间区间" />
+  ),
   args: {
     color: 'magenta',
     onChange(e) {

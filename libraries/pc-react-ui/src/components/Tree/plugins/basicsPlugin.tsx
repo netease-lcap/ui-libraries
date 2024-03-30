@@ -33,12 +33,6 @@ function useHandleTreeNode(props) {
     });
     const omitColumnsProps = fp.map((item: Record<string, any>) => item.props);
     const childrenFlow = fp.flow(columnsChildren, omitColumnsProps);
-    // const warpColumns = fp.map((item: any) => {
-    //   const { render } = item;
-    //   return _.isFunction(render) ? _.assign({}, item, {
-    //     render: (text, record, index) => _.attempt(render, { item: record, text, index }),
-    //   }) : item;
-    // });
     const columnsCond = fp.cond([
       [fp.conforms({ columns: fp.isArray, children: fp.stubTrue }), fp.constant({ treeData: columns })],
       [fp.conforms({ children: fp.isArray }), fp.constant({ columns: childrenFlow(children as Array<any>) })],

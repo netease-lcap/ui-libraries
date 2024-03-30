@@ -31,51 +31,7 @@ export function useHandleStyle(props) {
   const className = props.get('className');
   return {
     className: classnames(style.inputNumber, className),
-  };
-}
-
-function useHandleFormWarp(props) {
-  const { isForm } = React.useContext(FormContext);
-  const BaseComponent = props.get('render');
-  const FormInputNumber = React.useCallback((selfProps) => {
-    const nodepath = selfProps['data-nodepath'];
-    return (
-      <Col
-        span={24}
-        {..._.pick(selfProps, COLPROPSFIELDS)}
-        data-nodepath={nodepath}
-        data-tag-name="FormInputNumber"
-        data-has-mutation="true"
-      >
-        <FormItem {..._.pick(selfProps, FORMITEMPROPSFIELDS)}>
-          <BaseComponent {..._.omit(
-            selfProps,
-            [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS, 'data-nodepath', 'children'],
-          )}
-          />
-        </FormItem>
-      </Col>
-    );
-  }, [BaseComponent]);
-  const render = isForm ? FormInputNumber : BaseComponent;
-  return {
-    render,
-  };
-}
-
-function useHandleFormWarplabel(props) {
-  const { width, isForm } = React.useContext(FormContext);
-  const deletePropsList = props.get($deletePropsList).concat('labelIsSlot', 'labelText');
-  const labelIsSlot = props.get('labelIsSlot');
-  const labelProps = props.get('label');
-  const labelText = props.get('labelText');
-  const labelWidth = props.get('labelWidth');
-  const labelCol = _.isNil(labelWidth) ? {} : { labelCol: { flex: `${labelWidth}px` } };
-  const label = labelIsSlot ? labelProps : labelText;
-  const formResult = isForm ? { width, label, ...labelCol } : {};
-  return {
-    [$deletePropsList]: deletePropsList,
-    ...formResult,
+    placeholder: '请输入数字',
   };
 }
 

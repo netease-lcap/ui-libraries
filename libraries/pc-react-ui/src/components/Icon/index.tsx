@@ -1,6 +1,8 @@
 import React from 'react';
 import * as AntdIcon from '@ant-design/icons';
 import _ from 'lodash';
+// import { RiHeartFill, RiArrowRightUpLine } from '@remixicon/react';
+import 'remixicon/fonts/remixicon.css';
 
 function SvgComponent(src) {
   return (
@@ -10,12 +12,9 @@ function SvgComponent(src) {
   );
 }
 export function Icon(props) {
-  const isAntIcon = _.curry(_.get)(AntdIcon)(_, false);
-  const result = _.cond([
-    [isAntIcon, _.constant(React.createElement(AntdIcon[props]))],
-    [_.stubTrue, SvgComponent],
-  ]);
-  return result(props);
+  return (
+    <i className="ri-admin-line" />
+  );
 }
 interface IconProps {
   iconName: string
