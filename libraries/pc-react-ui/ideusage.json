@@ -295,7 +295,26 @@
     "name": "Flex",
     "ideusage": {
       "idetype": "container",
-      "containerDirection": "this.getAttribute('direction')?.value === 'true' ? 'column' : 'row' "
+      "containerDirection": "this.getAttribute('direction')?.value === 'true' ? 'column' : 'row' ",
+      "automate": [{
+          "command": "WRAP_LINEAR_VERTICAL",
+          "useblock": 0,
+          "attribute": {
+              "direction": "vertical",
+              "justify": "start",
+              "alignment": "start",
+              "wrap": "nowrap"
+          }
+      }, {
+          "command": "WRAP_LINEAR_HORIZONTAL",
+          "useblock": 0,
+          "attribute": {
+              "direction": "horizontal",
+              "justify": "start",
+              "alignment": "start",
+              "wrap": "nowrap"
+          }
+      }]
     }
   },
   {
@@ -565,7 +584,7 @@
   {
     "name": "Drawer",
     "ideusage": {
-      "idetype": "modal",
+      "idetype": "drawer",
       "selector": {
         "expression": "this",
         "cssSelector": "div[class='cw-drawer-content']"
@@ -580,7 +599,7 @@
   {
     "name": "Message",
     "ideusage": {
-      "idetype": "modal",
+      "idetype": "messager",
       "selector": {
         "expression": "this",
         "cssSelector": "div[class='cw-drawer-wrapper-body']"
