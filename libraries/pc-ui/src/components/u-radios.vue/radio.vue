@@ -1,11 +1,11 @@
 <template>
-<label v-if="!isPreview" :class="$style.root" :disabled="currentDisabled" @click="select()"
+<label :class="$style.root" :preview="isPreview" :disabled="currentDisabled" @click="select()"
 tabindex="0" @keydown.space.prevent @keyup.space.prevent="select()"
 @focus="onFocus" @blur="onBlur" v-on="listeners" :readonly="currentReadonly">
-    <span :class="$style.radio" :selected="selected" :disabled="currentDisabled" :readonly="currentReadonly"></span>
+    <span v-if="!isPreview" :class="$style.radio" :selected="selected" :disabled="currentDisabled" :readonly="currentReadonly"></span>
     <slot></slot>
     <span vusion-slot-name="item">
-        <slot name="item" :item="node">{{ text }}</slot>
+        <slot v-if="isPreview && selected || !isPreview" name="item" :item="node">{{ text }}</slot>
         <s-empty v-if="!$slots.item && !text && $env.VUE_APP_DESIGNER && ($attrs['vusion-node-path'] || $attrs.designer)" inline :class="$style.empty"></s-empty>
     </span>
 </label>
@@ -205,5 +205,9 @@ export default {
 
 .empty:not(:only-child){
     display: none;
+}
+
+.root[preview] {
+    cursor: text;
 }
 </style>
