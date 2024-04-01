@@ -341,6 +341,16 @@ namespace nasl.ui {
       }
     })
     placeholder: nasl.core.String;
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '显示预览态',
+      docDescription: '',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    preview: nasl.core.Boolean = false;
     @Event({
       title: '确认',
       description: '点击完成按钮时触发的事件'
