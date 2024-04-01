@@ -12,7 +12,7 @@ export { RouterProvider, Outlet as Router } from 'react-router-dom';
 const mapProps = {
   mySize: 'size',
 };
-
+export { RouterContext } from './router-context';
 // export const Router = registerComponet<
 //   BrowserRouterProps,
 //   pluginType<BrowserRouterProps>

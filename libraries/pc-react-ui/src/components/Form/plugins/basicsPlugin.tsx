@@ -28,6 +28,7 @@ export function useHandleRef(props) {
   const [myForm] = Form.useForm();
   const form = props.get('form', myForm);
   const validate = async () => form.validateFields().then(() => true, () => false);
+
   return {
     form,
     ref: _.assign(ref, {

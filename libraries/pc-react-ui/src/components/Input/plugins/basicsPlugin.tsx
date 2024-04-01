@@ -6,10 +6,12 @@ import FormContext, { QueryFormContext } from '@/components/Form/form-context';
 import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
 import { $deletePropsList } from '@/plugins/constants';
 import { COLPROPSFIELDS } from '@/components/Row/constants';
+import { RouterContext } from '@/components/Router/router-context';
 
 import style from '../index.module.less';
 
 export function useHandleRef(props) {
+  const { router } = React.useContext(RouterContext);
   const onChangeProps = props.get('onChange');
   const result = {
     onChange: _.wrap(onChangeProps, (fn, e: React.ChangeEvent<HTMLInputElement>) => {

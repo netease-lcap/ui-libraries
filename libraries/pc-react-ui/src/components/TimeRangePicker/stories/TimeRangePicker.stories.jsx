@@ -28,7 +28,7 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => (
-    <ProFormTimePicker.RangePicker name="timeRange" label="时间区间" />
+    <TimeRangePicker name="timeRange" label="时间区间" />
   ),
   args: {
     color: 'magenta',
