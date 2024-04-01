@@ -1,5 +1,5 @@
 <template>
-<div :class="$style.root">
+<div :class="$style.root" :preview="preview">
   <u-loading v-if="loading" size="small"></u-loading>
   <template v-else>
     <u-checkbox
@@ -30,7 +30,6 @@
         </slot>
       </template>
     </u-checkbox>
-    <u-preview v-if="isPreview" :text="currentText"></u-preview>
   </template>
   <template v-if="$env.VUE_APP_DESIGNER && !dataSource && !$slots.default">
     <span :class="$style.loadContent">{{ treeSelectTip }}</span>
@@ -259,6 +258,10 @@ export default {
 
 .root > *:not(:last-child) {
   margin-right: var(--checkbox-space-x);
+}
+
+.root[preview] > *:not(:last-child) {
+  margin-right: 0;
 }
 
 .root .loadContent {

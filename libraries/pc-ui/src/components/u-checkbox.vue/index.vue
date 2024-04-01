@@ -1,14 +1,15 @@
 <template>
-<label v-show="!isPreview" :class="$style.root" :disabled="currentDisabled" @click="check()"
+<label :class="$style.root" :preview="isPreview" :disabled="currentDisabled" @click="check()"
     tabindex="0" @keydown.space.prevent @keyup.space.prevent="check()"
     @focus="onFocus" @blur="onBlur" v-on="listeners"
     :readonly="readonly">
-    <span :class="$style.box" :status="status" :disabled="currentDisabled"></span>
+    <span v-if="!isPreview" :class="$style.box" :status="status" :disabled="currentDisabled"></span>
     <slot></slot>
-    <span vusion-slot-name="item">
+    <span v-if="(isPreview && status == 'true') || !isPreview" vusion-slot-name="item">
         <slot name="item" :item="node">{{ text }}</slot>
         <s-empty v-if="!$slots.item && !text && $env.VUE_APP_DESIGNER && ($attrs['vusion-node-path'] || $attrs.designer)" inline :class="$style.empty"></s-empty>
     </span>
+    <span v-if="isPreview && status == 'true'">,</span>
 </label>
 </template>
 
@@ -70,6 +71,7 @@ export default {
     },
     mounted() {
         this.autofocus && this.$el.focus();
+        console.log('this: ', this);
     },
     methods: {
         onFocus(e) {
@@ -124,6 +126,10 @@ export default {
     user-select: none;
     cursor: var(--cursor-pointer);
     color: var(--checkbox-font-color);
+}
+
+.root[preview] {
+    cursor: text;
 }
 
 .root:focus {
