@@ -19,6 +19,8 @@
         :currentDataSource="currentDataSource"
         :currentLoading="currentLoading"
         :currentError="currentError"
+        :currentEmpty="currentEmpty"
+        :errorImage="errorImage"
 
         :pageable="pageable"
 
@@ -42,10 +44,9 @@
         :thEllipsis="thEllipsis"
         :ellipsis="ellipsis"
         
-        :allChecked="allChecked"
-
         :resizable="resizable"
         :minColumnWidth="minColumnWidth"
+        :resizeRemaining="resizeRemaining"
 
         :treeDisplay="treeDisplay"
         :hasChildrenField="hasChildrenField"
@@ -62,7 +63,12 @@
         :handlerDraggable="handlerDraggable"
 
         :disabled="disabled"
-        :readonly="readonly">
+        :readonly="readonly"
+        
+        :showHead="showHead">
+        <template #loading><slot name="loading"></slot></template>
+        <template #error><slot name="error"></slot></template>
+        <template #empty><slot name="empty"></slot></template>
     </u-table-designer>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
@@ -112,6 +118,8 @@
         :currentDataSource="currentDataSource"
         :currentLoading="currentLoading"
         :currentError="currentError"
+        :currentEmpty="currentEmpty"
+        :errorImage="errorImage"
 
         :pageable="pageable"
 
@@ -135,10 +143,9 @@
         :thEllipsis="thEllipsis"
         :ellipsis="ellipsis"
         
-        :allChecked="allChecked"
-
         :resizable="resizable"
         :minColumnWidth="minColumnWidth"
+        :resizeRemaining="resizeRemaining"
 
         :treeDisplay="treeDisplay"
         :hasChildrenField="hasChildrenField"
@@ -157,7 +164,15 @@
         :disabled="disabled"
         :readonly="readonly"
 
+        :showHead="showHead"
+
+        :filterMultiple="filterMultiple"
+        :filterMax="filterMax"
+
         @resize="onResizerDragEnd">
+        <template #loading><slot name="loading"></slot></template>
+        <template #error><slot name="error"></slot></template>
+        <template #empty><slot name="empty"></slot></template>
     </u-table-render>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
@@ -183,8 +198,6 @@ import { addResizeListener, removeResizeListener, findScrollParent, getRect, fin
 import { format } from '../../utils/date';
 import MEmitter from '../m-emitter.vue';
 import debounce from 'lodash/debounce';
-import isNumber from 'lodash/isNumber';
-import i18n from './i18n';
 import UTableViewDropGhost from './drop-ghost.vue';
 import SEmpty from '../../components/s-empty.vue';
 import throttle from 'lodash/throttle';
@@ -225,13 +238,16 @@ export default {
         showSizer: { type: Boolean, default: true },
         showJumper: { type: Boolean, default: false },
         paginationSize: { type: String, default: 'normal' },
+        remotePaging: { type: Boolean, default: false },
+
         sorting: Object,
         defaultOrder: { type: String, default: 'desc' },
         sortTrigger: { type: String, default: 'head' },
-        filtering: Object,
-        remotePaging: { type: Boolean, default: false },
         remoteSorting: { type: Boolean, default: false },
+        
+        filtering: Object,
         remoteFiltering: { type: Boolean, default: false },
+
         title: { type: String, default: '' },
         titleAlignment: { type: String, default: 'center' },
         
@@ -302,12 +318,12 @@ export default {
         canDropinHandler: Function,
         acrossTableDrag: { type: Boolean, default: false }, // 是否跨表格拖拽
         
-        
         // 虚拟滚动相关
         itemHeight: Number,
         virtual: { type: Boolean, default: false },
         virtualCount: { type: Number, default: 60 },
         listKey: { type: String, default: 'currentData' },
+
         // 样式相关
         boldHeader: {
             type: Boolean,
@@ -426,37 +442,6 @@ export default {
                 return paging;
             } else
                 return undefined;
-        },
-        allChecked() {
-            if (!this.currentData)
-                return;
-            let checkedLength = 0;
-
-            if (this.values === undefined) {
-                this.currentData.forEach((item) => {
-                    if (item.checked)
-                        checkedLength++;
-                });
-            } else {
-                if (this.valueField) {
-                    const hashSet = new Set();
-                    this.currentData.forEach((item) => {
-                        const id = this.$at(item, this.valueField);
-                        hashSet.add(id);
-                    });
-
-                    checkedLength = this.currentValues.filter((v) => hashSet.has(v)).length;
-                } else {
-                    checkedLength = this.currentValues.length;
-                }
-            }
-
-            if (checkedLength === 0)
-                return false;
-            else if (checkedLength === this.currentData.length)
-                return true;
-            else
-                return null;
         },
         usePagination() {
             if (typeof this.pagination === 'undefined') {
@@ -818,7 +803,7 @@ export default {
 
                 // 当最外层加了border后，会导致内部的宽度大于tablewrap的宽度，会出滚动条：Bug-2792431057259520
                 let rootWidth = this.$el.offsetWidth;
-                const tablewrapWidth = this.$refs.tableRender.$refs.tablewrap[0] && this.$refs.tableRender.$refs.tablewrap[0].offsetWidth;
+                const tablewrapWidth = this.$refs.tableRender.getRefs().tablewrap && this.$refs.tableRender.getRefs().tablewrap.offsetWidth;
                 if (tablewrapWidth) {
                     rootWidth = tablewrapWidth;
                 }
@@ -845,7 +830,7 @@ export default {
                     if (String(defaultColumnWidth).endsWith('%')) {
                         defaultColumnWidth = (parseFloat(defaultColumnWidth) * rootWidth) / 100;
                     }
-                    defaultColumnWidth = defaultColumnWidth || 0;
+                    defaultColumnWidth = parseFloat(defaultColumnWidth || 0);
                     this.visibleColumnVMs.forEach((columnVM, index) => {
                         if (!columnVM.currentWidth) {
                             noWidthColumnVMs.push(columnVM);
@@ -909,7 +894,7 @@ export default {
                             if (String(columnVM.currentWidth).endsWith('%'))
                                 return (prev + (parseFloat(columnVM.currentWidth) * rootWidth) / 100);
                             else
-                                return prev + columnVM.computedWidth;
+                                return prev + parseFloat(columnVM.computedWidth);
                         }, 0);
                         this.tableWidth = tableWidth;
                     } else
@@ -973,7 +958,8 @@ export default {
                     if (rootHeight) {
                         // 如果使用 v-show 隐藏了，无法计算
                         const titleHeight = this.$refs.title ? this.$refs.title.offsetHeight : 0;
-                        const headHeight = (this.$refs.head && this.$refs.head[0]) ? this.$refs.head[0].offsetHeight : 0;
+                        const headEl = this.$refs.tableRender.getRefs().head;
+                        const headHeight = headEl ? headEl.offsetHeight : 0;
                         const paginationHeight = this.getPaginationHeight();
                         this.bodyHeight = rootHeight - titleHeight - headHeight - paginationHeight;
                     }
@@ -991,13 +977,13 @@ export default {
 
                 this.$emit('resize', undefined, this);
                 this.$nextTick(() => {
-                    this.$refs.tableRender.$refs.scrollView[0] && this.$refs.tableRender.$refs.scrollView[0].handleResize();
+                    this.$refs.tableRender.getRefs().scrollView && this.$refs.tableRender.getRefs().scrollView.handleResize();
                 });
             });
         },
         syncHeadScroll() {
             // this.$refs.head[0].scrollLeft = this.$refs.head[0].parentElement.scrollLeft;
-            const headEl = this.$refs.tableRender.$refs.head[0];
+            const headEl = this.$refs.tableRender.getRefs().head;
             if (this.xScrollParentEl && this.stickingHead && headEl && headEl.childNodes[0]) {
                 const xScrollParentEl = this.xScrollParentEl;
                 headEl.childNodes[0].style.marginLeft = '-' + xScrollParentEl.scrollLeft + 'px';
@@ -1006,9 +992,10 @@ export default {
         },
         onScrollParentScroll(e) {
             const rect = getRect(this.$el);
-            const bodyRect = getRect(this.$refs.tableRender.$refs.body[0]);
+            const bodyRect = getRect(this.$refs.tableRender.getRefs().body);
             const parentRect = this.scrollParentEl === window ? { top: 0, bottom: window.innerHeight } : getRect(this.scrollParentEl);
-            const headHeight = this.$refs.tableRender.$refs.head[0].offsetHeight;
+            const headEl = this.$refs.tableRender.getRefs().head;
+            const headHeight = headEl && headEl.offsetHeight || 0;
 
             parentRect.top += this.stickHeadOffset;
             bodyRect.bottom -= headHeight;
@@ -1020,8 +1007,8 @@ export default {
             const stickingHead = rect.top < parentRect.top && bodyRect.bottom > parentRect.top;
             const stickingHeadTop = parentRect.top;
             const stickingHeadHeight = headHeight;
-            const stickheadEl = this.$refs.tableRender.$refs.head[0];
-            const headPlaceholderEl = this.$refs.tableRender.$refs.headPlaceholder[0];
+            const stickheadEl = headEl;
+            const headPlaceholderEl = this.$refs.tableRender.getRefs().headPlaceholder;
             if (stickheadEl) {
                 if (stickingHead) {
                     stickheadEl.setAttribute('stickingHead', true);
@@ -1898,7 +1885,7 @@ export default {
                 // this.dragState.sourcePath === undefined，表示是拖拽节点所在表格外的其他表格，因为其他表格没有响应dragstart事件，所以sourcePath为undefined
                 if (!this.dropData && this.dragState.sourcePath === undefined) {
                     this.dropData = {
-                        dragoverElRect: this.$refs.tableRender.getBodyRef().getBoundingClientRect(),
+                        dragoverElRect: this.$refs.tableRender.getRefs().body.getBoundingClientRect(),
                         parentElRect: this.$refs.root.getBoundingClientRect(),
                         position: 'append',
                         left: 0,
@@ -1915,12 +1902,12 @@ export default {
             let indentElRect = {};
             let placeholderWith = 0;
             if (this.treeDisplay) {
-                const indentEl = target.querySelector('[class^="u-table-view_indent__"]');
+                const indentEl = target.querySelector('[class^="u-table-view_render-td_indent__"]');
                 if (indentEl) {
                     indentElRect = indentEl.getBoundingClientRect();
                 }
-                const treePlaceholderEl = target.querySelector('[class^="u-table-view_tree_placeholder"]');
-                const treeExpanderEl = target.querySelector('[class^="u-table-view_tree_expander"]');
+                const treePlaceholderEl = target.querySelector('[class^="u-table-view_render-td_tree_placeholder"]');
+                const treeExpanderEl = target.querySelector('[class^="u-table-view_render-td_tree_expander"]');
                 placeholderWith = treePlaceholderEl && treePlaceholderEl.offsetWidth;
                 if (treePlaceholderEl) {
                     placeholderWith = treePlaceholderEl.offsetWidth;
@@ -2179,7 +2166,7 @@ export default {
                     return;
                 if (this.draggable || this.acrossTableDrag) {
                     this.dropData = {
-                        dragoverElRect: this.$refs.tableRender.getBodyRef().getBoundingClientRect(),
+                        dragoverElRect: this.$refs.tableRender.getRefs().body.getBoundingClientRect(),
                         parentElRect: this.$refs.root.getBoundingClientRect(),
                         position: 'append',
                         left: 0,
@@ -2316,7 +2303,7 @@ export default {
                 Array.from(crt.children).forEach((td) => {
                     td.style.position = 'static'; // 去除sticky的情况
                 });
-                const tableEl = this.$refs.renderTable.getTableBodyRef().$el;
+                const tableEl = this.$refs.tableRender.getTableBodyRef().$el;
                 const tableElCrt = tableEl.cloneNode(true);
                 const tbody = tableElCrt.getElementsByTagName('tbody')[0];
                 tbody.innerHTML = '';

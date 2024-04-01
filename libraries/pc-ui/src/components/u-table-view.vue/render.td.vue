@@ -78,7 +78,7 @@
                 </div>
             </div>
         </template>
-        <f-slot name="cell" :vm="vm" :props="{ item: item, value: $at(item, vm.field), columnVM: vm, rowIndex, columnIndex, index: rowIndex, columnItem: vm.columnItem }">
+        <f-slot v-else name="cell" :vm="vm" :props="{ item: item, value: $at(item, vm.field), columnVM: vm, rowIndex, columnIndex, index: rowIndex, columnItem: vm.columnItem }">
             <span v-if="vm.field && !['radio', 'checkbox'].includes(vm.type)" :class="$style['column-field']">{{ vm.currentFormatter.format($at(item, vm.field) || item) }}</span>
         </f-slot>
         <!-- type === 'expander' right -->

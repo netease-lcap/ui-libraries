@@ -178,6 +178,7 @@ import i18nMixin from '../../mixins/i18n';
 import KeyMap from '../../utils/keyMap';
 import UTableRenderTd from './render.td.vue';
 import UTableRenderTrExpander from './render.tr.expander.vue';
+import { head } from 'lodash';
 
 export default {
     name: 'u-table-render',
@@ -192,16 +193,17 @@ export default {
         visibleTableHeadTrArr: Array,
         boldHeader: Boolean,
         hasGroupedColumn: Boolean,
+        columnVMsMap: Object,
+
+        valueField: String,
 
         disabled: Boolean,
         readonly: Boolean,
+        
         filterMultiple: Boolean,
         filterMax: Number,
 
         showHead: { type: Boolean, default: true },
-
-        stickHead: { type: Boolean, default: false },
-        stickHeadOffset: { type: Number, default: 0 },
 
         currentData: Array,
         currentLoading: Boolean,
@@ -210,21 +212,10 @@ export default {
         currentDataSource: Object,
 
         virtual: Boolean,
-        pageable: Boolean,
-        loadingText: String,
-        errorText: String,
-        errorImage: String,
-        emptyText: String,
-        
-        
-        valueField: String,
-        usePagination: Boolean,
-        loading: Boolean,
-        error: Boolean,
-        empty: Boolean,
-        hasGroupedColumn: Boolean,
         listKey: String,
-        columnVMsMap: Object,
+
+        pageable: Boolean,
+        usePagination: Boolean,
 
         color: String,
         border: { type: Boolean, default: false },
@@ -271,10 +262,9 @@ export default {
         thEllipsis: Boolean,
         ellipsis: Boolean,
 
-        allChecked: Boolean,
-
         resizable: Boolean,
         minColumnWidth: Number,
+        resizeRemaining: { type: String, default: 'average' },
 
         treeDisplay: Boolean,
         hasChildrenField: String,
@@ -353,6 +343,37 @@ export default {
             } else {
                 return treeColumnIndex;
             }
+        },
+        allChecked() {
+            if (!this.currentData)
+                return;
+            let checkedLength = 0;
+
+            if (this.values === undefined) {
+                this.currentData.forEach((item) => {
+                    if (item.checked)
+                        checkedLength++;
+                });
+            } else {
+                if (this.valueField) {
+                    const hashSet = new Set();
+                    this.currentData.forEach((item) => {
+                        const id = this.$at(item, this.valueField);
+                        hashSet.add(id);
+                    });
+
+                    checkedLength = this.currentValues.filter((v) => hashSet.has(v)).length;
+                } else {
+                    checkedLength = this.currentValues.length;
+                }
+            }
+
+            if (checkedLength === 0)
+                return false;
+            else if (checkedLength === this.currentData.length)
+                return true;
+            else
+                return null;
         },
     },
     methods: {
@@ -699,6 +720,16 @@ export default {
         },
         getTableBodyRef() {
             return this.$refs.bodyTable[0];
+        },
+        getRefs() {
+            return {
+                body: this.$refs.body[0],
+                bodyTable: this.$refs.bodyTable[0],
+                scrollView: this.$refs.scrollView[0],
+                head: this.$refs.head && this.$refs.head[0],
+                headPlaceholder: this.$refs.headPlaceholder[0],
+                tablewrap: this.$refs.tablewrap[0],
+            }
         },
     },
 };

@@ -223,7 +223,7 @@
                                     && !$slots.loading
                                     && $scopedSlots
                                     && !($scopedSlots.loading && $scopedSlots.loading())
-                                    && !!$attrs['vusion-node-path']">
+                                    && !!$parent.$attrs['vusion-node-path']">
                                 </s-empty>
                             </td>
                         </tr>
@@ -239,7 +239,7 @@
                                     && !$slots.error
                                     && $scopedSlots
                                     && !($scopedSlots.error && $scopedSlots.error())
-                                    && !!$attrs['vusion-node-path']">
+                                    && !!$parent.$attrs['vusion-node-path']">
                                 </s-empty>
                             </td>
                         </tr>
@@ -265,7 +265,7 @@
                                     && !$slots.empty
                                     && $scopedSlots
                                     && !($scopedSlots.empty && $scopedSlots.empty())
-                                    && !!$attrs['vusion-node-path']">
+                                    && !!$parent.$attrs['vusion-node-path']">
                                 </s-empty>
                             </td>
                         </tr>

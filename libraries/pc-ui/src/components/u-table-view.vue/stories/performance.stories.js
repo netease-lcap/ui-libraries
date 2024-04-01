@@ -43,7 +43,7 @@ const TempComponent = {
     <u-table-view :data-source="dataSource">
       <u-table-view-column title="用户名" width="20%">
         <template #cell="current">
-          <u-text>{{ current.item.name }}</u-text>
+          <u-text>{{ current.item.name }} {{ current.item.index }}</u-text>
         </template>
       </u-table-view-column>
       <u-table-view-column title="选中" width="20%">
@@ -79,6 +79,7 @@ export const Default = {
     template: `
     <div>
       <u-input :value.sync="value1" />
+      {{ selectedValues }}
       <u-table-view :data-source="dataSource" :values.sync="selectedValues" valueField="index">
       <u-table-view-column type="expander" title="展开" width="8%">
         <template #expander="current">
@@ -101,7 +102,7 @@ export const Default = {
       <u-table-view-column type="checkbox" title="选择" width="8%"></u-table-view-column>
       <u-table-view-column title="用户名" width="20%">
         <template #cell="current">
-          <u-text>{{ current.item.name }}</u-text>
+          <u-text>{{ current.item.name }} {{ current.item.index }}</u-text>
         </template>
       </u-table-view-column>
       <u-table-view-column title="选中" width="20%">
