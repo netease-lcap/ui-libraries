@@ -57,11 +57,20 @@ function deployTgz(rootPath: string, config: LcapCliConfig) {
 }
 
 function deployImages(rootPath, config: LcapCliConfig) {
-  const imageFolderPaths = glob.sync([`${rootPath}/**/screenshots`, `${rootPath}/**/drawings`]);
-  imageFolderPaths.forEach((imgFolderPath) => {
-    const deployPath = imgFolderPath.substring(rootPath.length + 1);
-    execSync(concatCommand(`npx lcap deploy ${deployPath}`, config));
-    logger.success(`update success ${deployPath}`);
+  const imageFloders: string[] = [];
+  const imageFilePaths = glob.sync([`${rootPath}/src/**/screenshots/*`, `${rootPath}/src/**/drawings/*`, `${rootPath}/src-vusion/**/screenshots/*`, `${rootPath}/src-vusion/**/drawings/*`]);
+
+  imageFilePaths.forEach((filePath) => {
+    const deployPath = filePath.substring(rootPath.length + 1, filePath.lastIndexOf('/'));
+
+    if (!imageFloders.includes(deployPath)) {
+      imageFloders.push(deployPath);
+    }
+  });
+
+  imageFloders.forEach((folder) => {
+    execSync(concatCommand(`npx lcap deploy ${folder}`, config));
+    logger.success(`update success ${folder}`);
   });
 }
 
