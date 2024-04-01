@@ -32,19 +32,19 @@
    * @desc 按钮内容字体行高
    * @type input
    */
-  --cw-button-content-line-height: calc(calc(var(--cw-font-size) + 8px) / var(--cw-font-size));
+  --cw-button-content-line-height: calc(var(--cw-font-size) + 8px);
 
   /**
    * @desc 大号按钮内容字体行高
    * @type input
    */
-  --cw-button-content-line-height-lg: calc(calc(var(--cw-font-size-lg) + 8px) / var(--cw-font-size-lg));
+  --cw-button-content-line-height-lg: calc(var(--cw-font-size-lg) + 8px);
 
   /**
    * @desc 小号按钮内容字体行高
    * @type input
    */
-  --cw-button-content-line-height-sm: calc(calc(var(--cw-font-size) + 8px) / var(--cw-font-size));
+  --cw-button-content-line-height-sm: calc(var(--cw-font-size) + 8px);
 
   /**
    * @desc 危险按钮文本颜色
