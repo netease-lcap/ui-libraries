@@ -100,6 +100,27 @@
       </van-checkbox-group>
     </demo-block>
 
+    <demo-block title="预览模式">
+      <van-checkbox-group
+        preview
+        :value="[1, 2, 4]"
+        direction="horizontal"
+        :data-source="[4,5]"
+        :column="3"
+      >
+        <van-checkbox :label="1" title="选框1"></van-checkbox>
+        <van-checkbox :label="2" title="选框2"></van-checkbox>
+        <van-checkbox :label="3" title="选框3"></van-checkbox>
+
+        <template #item="current">
+          <van-checkbox
+            :label="current.item"
+            :title="'选项' + current.item"
+          ></van-checkbox>
+        </template>
+      </van-checkbox-group>
+    </demo-block>
+
   </demo-section>
 </template>
 
