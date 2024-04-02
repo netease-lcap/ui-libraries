@@ -76,7 +76,7 @@
                         <tbody ref="virtual">
                             <template v-if="(!currentLoading && !currentError && !currentEmpty || pageable === 'auto-more' || pageable === 'load-more') && currentData && currentData.length">
                                 <template v-for="(item, rowIndex) in virtualList">
-                                    <tr :key="getKey(item, rowIndex)" :class="[$style.row]" :color="item.rowColor" :selectable="selectable" :selected="selectable && selectedItem === item"
+                                    <tr :class="[$style.row]" :color="item.rowColor" :selectable="selectable" :selected="selectable && selectedItem === item"
                                     v-if="item.display !== 'none'"
                                     :draggable="rowDraggable && item.draggable || undefined"
                                     :dragging="isDragging(item)"
@@ -191,16 +191,15 @@ export default {
         tableMetaList: Array,
         visibleColumnVMs: Array,
         visibleTableHeadTrArr: Array,
-        boldHeader: Boolean,
         hasGroupedColumn: Boolean,
         columnVMsMap: Object,
 
         valueField: String,
 
-        disabled: Boolean,
-        readonly: Boolean,
+        readonly: { type: Boolean, default: false },
+        disabled: { type: Boolean, default: false },
         
-        filterMultiple: Boolean,
+        filterMultiple: { type: Boolean, default: false },
         filterMax: Number,
 
         showHead: { type: Boolean, default: true },
@@ -214,9 +213,13 @@ export default {
         virtual: Boolean,
         listKey: String,
 
-        pageable: Boolean,
+        pageable: { type: [Boolean, String], default: false },
         usePagination: Boolean,
 
+        boldHeader: {
+            type: Boolean,
+            default: true,
+        },
         color: String,
         border: { type: Boolean, default: false },
         line: { type: Boolean, default: false },
@@ -259,17 +262,17 @@ export default {
         tableHeight: Number,
         bodyHeight: Number,
 
-        thEllipsis: Boolean,
-        ellipsis: Boolean,
+        thEllipsis: { type: Boolean, default: false }, // 表头是否缩略展示
+        ellipsis: { type: Boolean, default: false }, // 单元格是否缩略展示
 
-        resizable: Boolean,
-        minColumnWidth: Number,
+        resizable: { type: Boolean, default: false },
+        minColumnWidth: { type: Number, default: 44 },
         resizeRemaining: { type: String, default: 'average' },
 
-        treeDisplay: Boolean,
-        hasChildrenField: String,
+        treeDisplay: { type: Boolean, default: false },
+        hasChildrenField: { type: String, default: 'hasChildren' },
 
-        selectable: Boolean,
+        selectable: { type: Boolean, default: false },
         selectedItem: Object,
 
         rowDraggable: Boolean,
@@ -319,12 +322,6 @@ export default {
         virtualBottom() {
             this.$refs.virtualPlaceholder[0].style.height = this.virtualTop + this.virtualBottom + 'px';
         },
-    },
-    created() {
-       
-    },
-    updated() {
-       console.log('updated 111111'); 
     },
     computed: {
         expanderColumnVM() {

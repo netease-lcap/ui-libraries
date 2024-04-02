@@ -9,7 +9,6 @@ export default {
         catchError: { type: Boolean, default: true },
     },
     render(h, context) {
-        console.log('f-slot render');
         let { vm, name, props, catchError } = context.props;
         vm = vm || vm.context.parent; // @TODO: 可能不太对，需要验证一下
         const scopedSlot = vm.$scopedSlots[name];

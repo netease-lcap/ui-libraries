@@ -111,8 +111,5 @@ export default {
             );
         });
     },
-    updated() {
-       console.log('updated 222222'); 
-    },
 };
 </script>
