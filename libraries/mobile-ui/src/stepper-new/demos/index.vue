@@ -19,7 +19,6 @@
           :value.sync="value"
           :decimalLength="precision"
           :decimal-places="{places:10, omit:true}"
-          :unit="{type:'prefix',value:''}"
           :highPrecision="true">
         </van-stepper-new>
       </van-cell>
@@ -29,13 +28,12 @@
           :value.sync="value"
           :decimalLength="precision"
           :decimal-places="{ places: 10, omit:false }"
-          :unit="{type:'prefix',value:''}"
           :highPrecision="true">
         </van-stepper-new>
       </van-cell>
 
       <van-cell v-if="false" center title="单位">
-        <van-stepper-new :value.sync="value" :unit="{ type: 'suffix', value: '元' }" />
+        <van-stepper-new :value.sync="value" unitType="suffix" unitValue="元" />
       </van-cell>
 
       <van-cell v-if="false" center title="千分位">
@@ -47,16 +45,16 @@
       </van-cell>
 
       <van-cell v-if="true" center title="小数3位">
-        <van-stepper-new :value.sync="value" :decimalPlaces="{ places: 3, omit: false }" />
+        <van-stepper-new :value.sync="value" :decimalPlacesValue="3" :decimalPlacesOmitZero="false" />
       </van-cell>
 
 
       <van-cell v-if="true" center title="不限制小数位">
-        <van-stepper-new :value.sync="value" :decimalPlaces="{ places: null, omit: false }" />
+        <van-stepper-new :value.sync="value" />
       </van-cell>
 
       <van-cell v-if="false" center title="高级格式化">
-        <van-stepper-new :value.sync="value" :advancedFormat="{ enable: true, value: '#,##0.00' }" />
+        <van-stepper-new :value.sync="value" :advancedFormatEnable="true" advancedFormatValue="#,##0.00" />
       </van-cell>
     </demo-block>
 
