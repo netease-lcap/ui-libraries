@@ -66,15 +66,18 @@ export default {
     },
     methods: {
         validate(trigger = 'submit', untouched = false) {
-            if (typeof trigger === 'boolean') {
-                untouched = trigger;
-                trigger = 'submit';
-            } // @compat
-            return Promise.all([].concat(this.validatorVMs, this.itemVMs)
-                .map((validatorVM) => validatorVM.validate('submit', untouched)),
-            ).then((results) => this.get$event(trigger));
+            this.$nextTick(() => {
+                if (typeof trigger === 'boolean') {
+                    untouched = trigger;
+                    trigger = 'submit';
+                } // @compat
+                return Promise.all([].concat(this.validatorVMs, this.itemVMs)
+                    .map((validatorVM) => validatorVM.validate('submit', untouched)),
+                ).then((results) => this.get$event(trigger));
+            })
         },
         validateItem(name, trigger = 'submit', silent = false) {
+            console.log('validateItem')
             const itemVM = this.itemVMs.find((itemVM) => itemVM.name === name);
             if (itemVM)
                 return itemVM.validate(trigger, silent);
