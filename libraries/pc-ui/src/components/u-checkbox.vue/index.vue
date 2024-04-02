@@ -1,11 +1,11 @@
 <template>
-<label v-show="!isPreview" :class="$style.root" :disabled="currentDisabled" @click="check()"
+<label :class="$style.root" :disabled="currentDisabled" @click="check()"
     tabindex="0" @keydown.space.prevent @keyup.space.prevent="check()"
     @focus="onFocus" @blur="onBlur" v-on="listeners"
     :readonly="readonly">
-    <span :class="$style.box" :status="status" :disabled="currentDisabled"></span>
+    <span v-if="!preview" :class="$style.box" :status="status" :disabled="currentDisabled"></span>
     <slot></slot>
-    <span vusion-slot-name="item">
+    <span v-if="showTitle" vusion-slot-name="item">
         <slot name="item" :item="node">{{ text }}</slot>
         <s-empty v-if="!$slots.item && !text && $env.VUE_APP_DESIGNER && ($attrs['vusion-node-path'] || $attrs.designer)" inline :class="$style.empty"></s-empty>
     </span>
@@ -33,6 +33,7 @@ export default {
         disabled: { type: Boolean, default: false },
         autofocus: { type: Boolean, default: false },
         node: Object,
+        preview: { type: Boolean, default: false },
     },
     data() {
         return { parentVM: undefined, currentValue: this.value };
@@ -59,6 +60,9 @@ export default {
 
             return 'false';
         },
+        showTitle() { 
+            return this.preview ? this.status === 'true' : true;
+        }
     },
     watch: {
         value: {
@@ -79,7 +83,7 @@ export default {
             this.$emit('blur', e);
         },
         check() {
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.disabled || this.preview)
                 return;
             const oldValue = this.currentValue;
             const value = !this.currentValue;
