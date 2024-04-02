@@ -77,7 +77,6 @@ export default {
             })
         },
         validateItem(name, trigger = 'submit', silent = false) {
-            console.log('validateItem')
             const itemVM = this.itemVMs.find((itemVM) => itemVM.name === name);
             if (itemVM)
                 return itemVM.validate(trigger, silent);
