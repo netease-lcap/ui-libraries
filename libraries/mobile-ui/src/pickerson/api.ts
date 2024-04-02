@@ -296,17 +296,17 @@ namespace nasl.ui {
       title: '点击完成按钮时触发',
       description: '回调参数：选中值，选中值对应的索引'
     })
-    onConfirm: (event: M extends true ? nasl.collection.List<V> : V) => any ;
+    onConfirm: (event: M extends true ? nasl.collection.List<V> : V) => void;
     @Event({
       title: '点击取消按钮时触发',
       description: '回调参数：选中值，选中值对应的索引'
     })
-    onCancel: (event: any) => any ;
+    onCancel: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '选项改变时触发',
       description: '回调参数：Picker 实例，选中值，选中值对应的索引'
     })
-    onChange: (event: any) => any ;
+    onChange: (event: nasl.ui.BaseEvent) => void;
     // @Slot({
     //   title: 'undefined',
     //   description: '插入`<van-picker-action-slot>`子组件',

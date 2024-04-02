@@ -215,36 +215,36 @@ namespace nasl.ui {
       title: '输入时',
       description: '输入时触发。'
     })
-    onInput: (event: Event) => any ;
+    onInput: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '改变后',
       description: '值变化时触发。（注意：与原生事件不同）'
     })
-    onChange: (event: nasl.core.String) => any ;
+    onChange: (event: nasl.core.String) => void;
     @Event({
       title: '获得焦点',
       description: '获得焦点时触发。'
     })
-    onFocus: (event: FocusEvent) => any ;
+    onFocus: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '失去焦点',
       description: '失去焦点时触发。'
     })
-    onBlur: (event: FocusEvent) => any ;
+    onBlur: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '清空后',
       description: '清空后触发。'
     })
-    onClear: (event: any) => any ;
+    onClear: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '输入完成时',
       description: '输入完成时后触发。'
     })
-    onEnoughkey: (event: nasl.core.String) => any ;
+    onEnoughkey: (event: nasl.core.String) => void;
     @Event({
       title: '点击完成按钮时',
       description: '点击定制键盘完成按钮时触发。'
     })
-    onClickConfirm: (event: nasl.core.String) => any ;
+    onClickConfirm: (event: nasl.core.String) => void;
   }
 }

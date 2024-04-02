@@ -58,14 +58,14 @@ namespace nasl.ui {
       title: '验证通过',
       description: '提交表单且验证通过后触发'
     })
-    onSubmit: (event: {}) => any ;
+    onSubmit: (event: {}) => void;
     @Event({
       title: '验证不通过',
       description: '提交表单且验证不通过后触发'
     })
     onFailed: (event: {
       values: {};
-    }) => any ;
+    }) => void;
     @Slot({
       title: 'undefined',
       description: '插入`<van-field>`子组件。',

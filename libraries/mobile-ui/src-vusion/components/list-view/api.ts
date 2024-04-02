@@ -418,7 +418,7 @@ namespace nasl.ui {
       title: '选择时',
       description: '选择某一项时触发'
     })
-    onInput: (event: M extends true ? nasl.collection.List<V> : V) => any ;
+    onInput: (event: M extends true ? nasl.collection.List<V> : V) => void;
     @Event({
       title: '选择后',
       description: '选择某一项时触发'
@@ -427,7 +427,7 @@ namespace nasl.ui {
       selected: nasl.core.Boolean;
       item: T;
       value: M extends true ? nasl.collection.List<V> : V;
-    }) => any ;
+    }) => void;
     @Event({
       title: '改变后',
       description: '选择值改变时触发。'
@@ -435,17 +435,17 @@ namespace nasl.ui {
     onChange: (event: {
       item: T;
       value: M extends true ? nasl.collection.List<V> : V;
-    }) => any ;
+    }) => void;
     @Event({
       title: '加载前',
       description: '加载前触发'
     })
-    onBeforeLoad: (event: any) => any ;
+    onBeforeLoad: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '加载后',
       description: '加载时触发'
     })
-    onLoad: (event: any) => any ;
+    onLoad: (event: nasl.ui.BaseEvent) => void;
     @Slot({
       title: 'undefined',
       description: '插入<van-cell />',

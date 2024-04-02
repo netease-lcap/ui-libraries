@@ -124,17 +124,17 @@ namespace nasl.ui {
       title: '点击选项导致 value 变化时触发',
       description: '点击选项导致 value 变化时触发'
     })
-    onChange: (event: nasl.core.String) => any ;
+    onChange: (event: nasl.core.String) => void;
     @Event({
       title: '打开菜单栏时触发',
       description: '打开菜单栏时触发'
     })
-    onOpen: (event: any) => any ;
+    onOpen: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '关闭菜单栏时触发',
       description: '关闭菜单栏时触发'
     })
-    onClose: (event: any) => any ;
+    onClose: (event: nasl.ui.BaseEvent) => void;
     @Slot({
       title: 'undefined',
       description: '插入`<van-dropdown-item-son>`子组件。',
@@ -278,7 +278,7 @@ namespace nasl.ui {
       screenX: nasl.core.Integer;
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
-  }) => any ;
+  }) => void;
     @Slot({
       title: 'undefined',
       description: '插入文本或 HTML。'

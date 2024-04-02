@@ -246,7 +246,7 @@ namespace nasl.ui {
       screenX: nasl.core.Integer;
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
-  }) => any ;
+  }) => void;
     @Event({
       title: '文件大小超额',
       description: '文件大小超额时触发'
@@ -262,7 +262,7 @@ namespace nasl.ui {
       size: nasl.core.Integer;
       status: nasl.core.String;
       uid: nasl.core.Integer;
-    }) => any ;
+    }) => void;
     @Event({
       title: '删除预览',
       description: '删除文件预览时触发'
@@ -274,7 +274,7 @@ namespace nasl.ui {
       uid: nasl.core.Integer;
       url: nasl.core.String;
       index: nasl.core.Integer;
-    }) => any ;
+    }) => void;
     @Event({
       title: '上传开始时',
       description: '上传开始时触发'
@@ -294,7 +294,7 @@ namespace nasl.ui {
         uid: nasl.core.Integer;
         url: nasl.core.String;
       };
-    }) => any ;
+    }) => void;
     @Event({
       title: '上传中',
       description: '上传中进度'
@@ -320,7 +320,7 @@ namespace nasl.ui {
           success: nasl.core.Boolean;
         };
       };
-    }) => any ;
+    }) => void;
     @Event({
       title: '上传成功时',
       description: '上传成功时触发'
@@ -346,7 +346,7 @@ namespace nasl.ui {
           success: nasl.core.Boolean;
         };
       };
-    }) => any ;
+    }) => void;
     @Event({
       title: '上传错误时',
       description: '上传报错时触发'
@@ -372,7 +372,7 @@ namespace nasl.ui {
           success: nasl.core.Boolean;
         };
       };
-    }) => any ;
+    }) => void;
     @Slot({
       title: '配置文件上传图标'
     })

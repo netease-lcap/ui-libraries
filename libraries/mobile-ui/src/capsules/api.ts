@@ -67,14 +67,14 @@ namespace nasl.ui {
     })
     onSelect: (event: {
       value: nasl.core.Any;
-    }) => any ;
+    }) => void;
     @Event({
       title: '改变后',
       description: '选择值改变时触发'
     })
     onChange: (event: {
       value: nasl.core.Any;
-    }) => any ;
+    }) => void;
     @Slot({
       title: 'undefined',
       description: '插入`<van-capsules-item>`或`<van-capsules-group>`子组件。',

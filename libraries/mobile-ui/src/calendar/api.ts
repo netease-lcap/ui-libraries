@@ -125,17 +125,17 @@ namespace nasl.ui {
       title: '确认',
       description: '点击完成按钮时触发的事件'
     })
-    onConfirm: (event: nasl.core.Date) => any ;
+    onConfirm: (event: nasl.core.Date) => void;
     @Event({
       title: '点击',
       description: '点击并选中任意日期时触发'
     })
-    onSelect: (event: nasl.core.Date) => any ;
+    onSelect: (event: nasl.core.Date) => void;
     @Event({
       title: '取消',
       description: '点击完成取消时触发的事件'
     })
-    onCancel: (event: any) => any ;
+    onCancel: (event: nasl.ui.BaseEvent) => void;
 
     @Slot({
       title: '',
