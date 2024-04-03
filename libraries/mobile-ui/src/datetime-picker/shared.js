@@ -17,12 +17,13 @@ export const sharedProps = {
   },
   displayFormat: String,
   showFormatter: String,
-  advancedFormat: {
-    type: Object,
-    default: () => ({
-        enable: false,
-        value: '',
-    }),
+  advancedFormatEnable: {
+    type: Boolean,
+    default: false,
+  },
+  advancedFormatValue: {
+    type: String,
+    default: '',
   },
   isNew: {
     type: Boolean,

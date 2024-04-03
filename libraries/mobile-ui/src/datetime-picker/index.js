@@ -88,12 +88,8 @@ export default createComponent({
     // 展示格式
     getDisplayFormatter() {
       // 高级格式化开启
-      if (
-        this.advancedFormat &&
-        this.advancedFormat.enable &&
-        this.advancedFormat.value
-      ) {
-        return this.advancedFormat.value;
+      if (this.advancedFormatEnable && this.advancedFormatValue) {
+        return this.advancedFormatValue;
       }
 
       const formatters = validDisplayFormatters[this.realType][this.realUnit];

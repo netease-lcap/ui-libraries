@@ -154,20 +154,30 @@ namespace nasl.ui {
           if: _ => _.type === 'datetime' && _.unit === 'minute'
         }]
       },
-      if: _ => !_.advancedFormat.enable
+      if: _ => !_.advancedFormatEnable
     })
     showFormatter: 'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' | 'GGGG-W周' | 'GGGG年第W周' | 'GGGG-WWWW' | 'YYYY年M月' | 'YYYY-MM' | 'M/YYYY' | 'YYYY年第Q季度' | 'YYYY年QQ' | 'YYYY-QQ' | 'YYYY年' | 'YYYY' | 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' | 'YYYY-MM-DD HH:mm:ss' | 'YYYY年M月D日 HH时mm分ss秒' | 'YYYY-MM-DD HH:mm HH:mm' | 'YYYY年M月D日 HH时mm分';
-    @Prop({
+    @Prop<VanDatetimePickerOptions, 'advancedFormatEnable'>({
+      group: '主要属性',
       title: '高级格式化',
-      bindHide: true
+      description: '用来控制数字的展示格式',
+      onChange: [
+        { clear: ['advancedFormatValue'] }
+      ],
+      setter: {
+        concept: 'SwitchSetter',
+      },
     })
-    advancedFormat: {
-      enable: nasl.core.Boolean;
-      value: nasl.core.String;
-    } = {
-      enable: false,
-      value: ''
-    };
+    advancedFormatEnable: nasl.core.Boolean = false;
+
+    @Prop<VanDatetimePickerOptions, 'advancedFormatValue'>({
+      group: '主要属性',
+      title: '高级格式化内容',
+      description: '用来控制数字的展示格式',
+      if: _ => _.advancedFormatEnable === true,
+      bindHide: true,
+    })
+    advancedFormatValue: nasl.core.String;
     @Prop({
       title: '区间选择',
       description: '是否支持区间选择',
