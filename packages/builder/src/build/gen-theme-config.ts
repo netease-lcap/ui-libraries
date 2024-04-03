@@ -6,7 +6,7 @@ export interface ThemeOptions {
   themeVarCssPath: string;
   themeComponentFolder: string;
   previewPages: Array<{ name: string, title: string }>;
-  components: Array<{ group: string, title: string, name: string }>
+  components: Array<{ group: string, title: string, name: string, [key: string]: any }>
 }
 
 export interface ThemeComponentConfig extends ThemeComponentVars {
@@ -59,7 +59,7 @@ export default function genThemeConfig(options: ThemeOptions) {
   const cssContent = concatCssContent(options.themeVarCssPath, options.themeComponentFolder);
   const themeInfo = parseCssVars(cssContent);
 
-  themeConfig.components = options.components.map(({ group, title, name }) => {
+  themeConfig.components = options.components.filter((comp) => comp.show !== false).map(({ group, title, name }) => {
     const compTheme = themeInfo.components.find((c) => c.name === name);
     if (!compTheme) {
       return {
