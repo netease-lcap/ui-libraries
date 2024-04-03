@@ -53,11 +53,13 @@ namespace nasl.ui {
           title: '正常'
         }, {
           title: '大'
+        }, {
+          title: '默认'
         }]
       },
       if: _ => _.justify !== 'space-between' && _.justify !== 'space-around'
     })
-    gap: 'shrink' | 'none' | 'mini' | 'small' | 'large' = 'none';
+    gap: 'shrink' | 'none' | 'mini' | 'small' | 'large' | 'normal' = 'normal';
     @Prop<VanLinearLayoutOptions, 'layout'>({
       group: '主要属性',
       title: '子元素展示方式',
