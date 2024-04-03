@@ -30,7 +30,7 @@ _.mixin({
 declare module 'lodash' {
   interface LoDashStatic {
     filterUnderfinedValue: (object: any) => any;
-    attemptLog: typeof _.attempt
+    attempt: typeof _.attempt
     isValidLink: typeof isValidLink
     stringToAscii: typeof stringToAscii
   }

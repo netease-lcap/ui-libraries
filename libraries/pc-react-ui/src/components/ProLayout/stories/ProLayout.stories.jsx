@@ -59,6 +59,10 @@ export const 默认 = {
     });
 
     const [pathname, setPathname] = useState('/list/sub-page/sub-sub-page1');
+    const ref = React.useRef();
+    React.useEffect(() => {
+      console.log(ref, 'ref');
+    }, []);
     const [num, setNum] = useState(40);
     if (typeof document === 'undefined') {
       return <div />;
@@ -73,46 +77,51 @@ export const 默认 = {
         }}
       >
         <ProLayout
-          getTargetContainer={() => {
-            return document.getElementById('test-pro-layout') || document.body;
-          }}
           avatarSrc="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
-          avatarTitle="七妮妮"
-          avatarRender={(
-            <Dropdown
-              menu={{
-                items: [
-                  {
-                    key: 'logout',
-                    icon: <LogoutOutlined />,
-                    label: '退出登录',
-                  },
-                ],
-              }}
-            />
-          )}
+          avatarTitle="张梦燕"
           fixSiderbar
           layout="mix"
-          // logo="https://bkimg.cdn.bcebos.com/pic/e1fe9925bc315c6034a8d84c71f8dc1349540923d974?x-bce-process=image/format,f_auto/quality,Q_70/resize,m_lfit,limit_1,w_536.jpg"
+          logo="http://minio-api.codewave-dev.163yun.com/lowcode-static/packages/%40lcap/pc-react-ui%401.0.0-beta.0/dist-theme/LOGO.png"
           title="应用名称"
-          // splitMenus
-          menuDataRender={(menuData) => {
-            return [{ name: 2, label: 1, path: '/a' }];
-          }}
-          menuSlot={[
-            <MenuItem
-              label="1234"
-              title="123"
-              key="/123"
-              onClick={(el) => {
-                console.log(el, '--');
-                console.log(1234);
-              }}
-            />,
-          ]}
-        >
-          <div>1234</div>
-        </ProLayout>
+          defaultOpenKeys={'/1'}
+          avatarRender={(
+            <Dropdown
+              menuItem={(
+                <>
+                  <MenuItem
+                    label={(
+                      <Text>导航项目</Text>
+                      )}
+                  />
+                  <MenuItem
+                    label={(
+                      <Text>导航项目2</Text>
+                      )}
+                  />
+                </>
+                )}
+            />
+          )}
+          menuSlot={(
+            <>
+              <MenuItem label="采购信息" path="/1">
+                <MenuItem
+                  // onClick={localStore.MenuItem17Click}
+                  label="采购信息录入"
+                  key="record"
+                  labelSlot={<></>}
+                />
+                <MenuItem
+                  // onClick={localStore.MenuItem18Click}
+                  label="采购信息管理"
+                  key="list"
+                  labelSlot={<></>}
+                />
+              </MenuItem>
+              <MenuItem label="导航项" path="/2" />
+            </>
+          )}
+        />
       </div>
     );
   },

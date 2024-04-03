@@ -59,6 +59,7 @@
     "name": "ProLayout",
     "ideusage": {
       "idetype": "container",
+      "structured": "menuSlot",
       "namedSlotOmitWrapper": ["menuSlot"]
     }
   },
@@ -684,7 +685,14 @@
     "name": "MenuItem",
     "ideusage": {
       "idetype": "container",
-      "parentAccept": "target.tag === 'Menu'"
+      "structured": true,
+      "parentAccept": "target.tag === 'Menu'",
+      "actions": {
+        "click": {
+          "status": "this.getParent().getParent().setCacheStatus('defaultOpenKeys', '\"' + this.getAttribute('path')?.value + '\"') ",
+          "effect": "this.getParent().getParent().callComponentMethod('setValue', this.getAttribute('path')?.value)"
+        }
+      }
     }
   },
   {
@@ -731,6 +739,12 @@
       "idetype": "element",
       "editable": "children",
       "textholder": "children"
+    }
+  },
+  {
+    "name": "Icon",
+    "ideusage": {
+      "idetype": "element"
     }
   },
   {

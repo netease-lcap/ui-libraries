@@ -28,7 +28,7 @@ export function useMergeMenu(props) {
     const { icon } = item.props;
     return {
       ..._.omit(item.props, 'children'),
-      ..._.isNil(icon) ? {} : { icon: Icon(icon) },
+      ..._.isNil(icon) ? {} : { icon: <Icon name={icon} /> },
     };
   });
   const menu = props.get('menu');

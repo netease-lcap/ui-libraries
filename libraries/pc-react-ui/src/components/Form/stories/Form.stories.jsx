@@ -171,14 +171,16 @@ export const Pro表单 = {
     return (
       <div>
         <button
-          onClick={() => {
-            console.log(ref);
+          onClick={() => {``
+            console.log(ref.current.getValues());
           }}
         >
           1234
         </button>
-        <Form>
-          <Select ref={ref} />
+        <Form ref={ref}>
+          <Input type="text" name="user" defaultValue="1224" />
+          <Input type="text" name="age" />
+          {/* <Select ref={ref} /> */}
           {/* <ProFormText fieldProps={{ ref }} label="132" width="xl" /> */}
           {/* <ProFormText label="132" width="sm" />
           <ProFormText label="132" width="lg" />

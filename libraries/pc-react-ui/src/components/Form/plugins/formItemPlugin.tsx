@@ -1,4 +1,3 @@
-// import fp from 'lodash/fp';
 import React from 'react';
 import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@vusion/validator';
@@ -22,6 +21,14 @@ export function useHandleRule(props) {
     }),
 
   };
+}
+export function useHandleDefaultValue(props) {
+  const { form } = React.useContext(FormContext);
+  React.useEffect(() => {
+    const name = props.get('name');
+    const defaultValue = props.get('defaultValue');
+    form.setFieldValue(name, defaultValue);
+  }, []);
 }
 export function useHandleFormWarplabel(props) {
   const { width: widthContext, isForm, colSpan } = React.useContext(FormContext);

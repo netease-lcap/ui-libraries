@@ -8,10 +8,10 @@ export function useHandleContext(props) {
   const BaseComponents = props.get('render');
   const render = React.useCallback((localProps) => {
     const colSpan = localProps.span;
-    const { width = 'md' } = localProps;
+    const { width = 'md', form } = localProps;
     return (
       <FormContext.Provider value={{
-        colSpan, isForm: true, width, labelText: '表单项名称',
+        colSpan, isForm: true, width, labelText: '表单项名称', form,
       }}
       >
         <BaseComponents {...localProps}>{localProps.children}</BaseComponents>

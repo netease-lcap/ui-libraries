@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToastMessage } from '../index';
+import { ToastMessage, message } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -23,7 +23,15 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <message {...args} />,
+  render: (args) => {
+    React.useEffect(() => {
+      async function name(params) {
+        await message.info('111');
+      }
+      name();
+    }, []);
+    return <message {...args} />;
+  },
   args: {
     color: 'magenta',
     children: 'Tag',

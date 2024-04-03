@@ -1,19 +1,17 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React from 'react';
-import * as AntdIcon from '@ant-design/icons';
 import _ from 'lodash';
-// import { RiHeartFill, RiArrowRightUpLine } from '@remixicon/react';
 import 'remixicon/fonts/remixicon.css';
 
-function SvgComponent(src) {
-  return (
-    <svg style={{ height: '14px', width: '14px' }}>
-      <image style={{ height: '14px', width: '14px' }} xlinkHref={src} />
-    </svg>
-  );
-}
 export function Icon(props) {
+  // _.isValidLink
+  const name = props.name ?? 'RiNeteaseCloudMusicLine';
+  if (name?.includes('.svg')) {
+    return <img src={name} width={20} alt="icon" />;
+  }
   return (
-    <i className="ri-admin-line" />
+    <i {...props} className={_.kebabCase(name)} />
   );
 }
 interface IconProps {

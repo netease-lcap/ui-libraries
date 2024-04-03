@@ -189,5 +189,6 @@ module.exports = {
     { group: 'Navigation', name: 'Breadcrumb', alias: '面包屑' },
     { group: 'Navigation', name: 'Dropdown', alias: '下拉菜单' },
     { group: 'Navigation', name: 'Menu', alias: '侧边栏' },
+    { group: 'Display', name: 'Icon', alias: '图标' },
   ],
 };

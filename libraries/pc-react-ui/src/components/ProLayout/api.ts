@@ -63,7 +63,7 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: '右侧导航' },
+          { title: '侧边导航' },
           { title: '顶部导航' },
           { title: '混合导航' },
         ],
@@ -177,8 +177,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '导航项',
-          code:
-            '<MenuItem label={<Text children="导航项目" style="color:inherit" />}></MenuItem>',
+          code: '<MenuItem label="导航项" path="123"></MenuItem>',
         },
       ],
     })

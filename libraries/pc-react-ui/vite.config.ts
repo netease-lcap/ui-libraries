@@ -73,7 +73,7 @@ export default defineConfig(({ mode, command }) => {
           }
         },
       },
-      minify: 'terser',
+      minify: 'esbuild',
       // minify: mode === 'development' ? 'esbuild' : 'terser',
       // minify: false,
       terserOptions: {

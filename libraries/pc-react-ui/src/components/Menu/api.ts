@@ -114,8 +114,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '导航项',
-          code:
-            '<MenuItem style="line-height:60px" label={<Text children="导航项目" style="color:inherit" />}></MenuItem>',
+          code: '<MenuItem style="line-height:60px" label={<Text children="导航项目" style="color:inherit" />}></MenuItem>',
         },
       ],
     })
@@ -169,7 +168,7 @@ namespace nasl.ui {
       title: '唯一标识',
       description: '在导航中使用可以用来跳转或标识选中状态',
     })
-    key: nasl.core.Any;
+    path: nasl.core.Any;
 
     @Prop({
       title: '图标',
@@ -281,6 +280,12 @@ namespace nasl.ui {
     @Slot({
       title: '默认',
       description: '导航项自定义',
+      snippets: [
+        {
+          title: '导航项',
+          code: '<MenuItem label="导航项" ></MenuItem>',
+        },
+      ],
     })
     slotDefault: () => Array<ViewComponent>;
   }
@@ -402,7 +407,7 @@ namespace nasl.ui {
       title: '链接地址',
       description: '链接地址',
     })
-    key: nasl.core.Any;
+    path: nasl.core.Any;
 
     @Prop({
       title: '图标',

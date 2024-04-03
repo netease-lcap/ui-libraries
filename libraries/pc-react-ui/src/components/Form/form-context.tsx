@@ -5,6 +5,7 @@ export interface IFormContext {
   isForm?: boolean
   width?: number | 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   labelText?: string
+  form?: any;
 }
 
 const FormContext = createContext<IFormContext>({
