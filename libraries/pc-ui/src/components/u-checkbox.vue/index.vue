@@ -2,7 +2,9 @@
 <label :class="$style.root" :disabled="currentDisabled" @click="check()"
     tabindex="0" @keydown.space.prevent @keyup.space.prevent="check()"
     @focus="onFocus" @blur="onBlur" v-on="listeners"
-    :readonly="readonly">
+    :readonly="readonly"
+    :preview="preview"
+    :show-title="showTitle">
     <span v-if="!preview" :class="$style.box" :status="status" :disabled="currentDisabled"></span>
     <slot></slot>
     <span v-if="showTitle" vusion-slot-name="item">
@@ -307,4 +309,12 @@ content: "\e682";
 .empty:not(:only-child){
     display: none;
 }
+
+.root[preview=true]:not([show-title=true]) {
+    margin-right: 0;
+}
+.root[preview=true] {
+    display: inline-block;
+}
+
 </style>
