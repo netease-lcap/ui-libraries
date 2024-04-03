@@ -4,30 +4,19 @@ exports[`u-tabs.vue > Demo-capsule 1`] = `
 <div>
   <div appear="capsule" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -35,44 +24,29 @@ exports[`u-tabs.vue > Demo-capsule 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
   <div appear="capsule" class="root" item-width="auto" size="small">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -80,44 +54,29 @@ exports[`u-tabs.vue > Demo-capsule 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
   <div appear="capsule" class="root" item-width="auto" size="mini">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -125,15 +84,11 @@ exports[`u-tabs.vue > Demo-capsule 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
@@ -144,30 +99,19 @@ exports[`u-tabs.vue > Demo-line 1`] = `
 <div>
   <div appear="line" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -175,44 +119,29 @@ exports[`u-tabs.vue > Demo-line 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
   <div appear="line" class="root" item-width="auto" size="small">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -220,44 +149,29 @@ exports[`u-tabs.vue > Demo-line 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
   <div appear="line" class="root" item-width="auto" size="mini">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -265,15 +179,11 @@ exports[`u-tabs.vue > Demo-line 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
@@ -284,30 +194,19 @@ exports[`u-tabs.vue > Demo-round 1`] = `
 <div>
   <div appear="round" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -315,44 +214,29 @@ exports[`u-tabs.vue > Demo-round 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
   <div appear="round" class="root" item-width="auto" size="small">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -360,44 +244,29 @@ exports[`u-tabs.vue > Demo-round 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
   <div appear="round" class="root" item-width="auto" size="mini">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -405,15 +274,11 @@ exports[`u-tabs.vue > Demo-round 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
@@ -424,30 +289,19 @@ exports[`u-tabs.vue > Demo-square 1`] = `
 <div>
   <div appear="square" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -455,44 +309,29 @@ exports[`u-tabs.vue > Demo-square 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
   <div appear="square" class="root" item-width="auto" size="small">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -500,44 +339,29 @@ exports[`u-tabs.vue > Demo-square 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
   <div appear="square" class="root" item-width="auto" size="mini">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -545,15 +369,11 @@ exports[`u-tabs.vue > Demo-square 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
@@ -564,30 +384,19 @@ exports[`u-tabs.vue > Demo-text 1`] = `
 <div>
   <div appear="text" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -595,44 +404,29 @@ exports[`u-tabs.vue > Demo-text 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
   <div appear="text" class="root" item-width="auto" size="small">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -640,44 +434,29 @@ exports[`u-tabs.vue > Demo-text 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
   <div appear="text" class="root" item-width="auto" size="mini">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -685,15 +464,11 @@ exports[`u-tabs.vue > Demo-text 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
@@ -704,30 +479,19 @@ exports[`u-tabs.vue > Demo-使用 value 控制 1`] = `
 <div>
   <div appear="square" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -735,15 +499,11 @@ exports[`u-tabs.vue > Demo-使用 value 控制 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
@@ -754,30 +514,19 @@ exports[`u-tabs.vue > Demo-使用tdestination 1`] = `
 <div>
   <div appear="square" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" href="/components/u-button" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Button
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Button </span>
             </a>
             <a alignment="center" class="item" href="/components/u-input" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Input
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Input </span>
             </a>
             <a alignment="center" class="item" href="/components/u-tabs" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Tabs
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Tabs </span>
             </a>
           </div>
         </div>
@@ -785,15 +534,11 @@ exports[`u-tabs.vue > Demo-使用tdestination 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">
-        <!---->
       </div>
       <div class="root" vusion-disabled-selected="true" vusion-slot-name="default">
-        <!---->
       </div>
     </div>
   </div>
@@ -804,30 +549,19 @@ exports[`u-tabs.vue > Demo-使用to 1`] = `
 <div>
   <div appear="square" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" href="#/components/u-button" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Button
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Button </span>
             </a>
             <a alignment="center" class="item" href="#/components/u-input" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Input
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Input </span>
             </a>
             <a alignment="center" class="item" href="#/components/u-tabs" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Tabs
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Tabs </span>
             </a>
           </div>
         </div>
@@ -835,15 +569,11 @@ exports[`u-tabs.vue > Demo-使用to 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">
-        <!---->
       </div>
       <div class="root" vusion-disabled-selected="true" vusion-slot-name="default">
-        <!---->
       </div>
     </div>
   </div>
@@ -854,9 +584,7 @@ exports[`u-tabs.vue > Demo-动态数据渲染 1`] = `
 <div>
   <div appear="square" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
@@ -866,34 +594,24 @@ exports[`u-tabs.vue > Demo-动态数据渲染 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
     </div>
   </div>
   <div appear="square" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">标签页 1title
-                <!---->
-                <span class="close"></span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">标签页 1title<span class="close"></span>
               </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">标签页 2title
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">标签页 2title</span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">标签页 3title
-                <!---->
-                <span class="close"></span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">标签页 3title<span class="close"></span>
               </span>
             </a>
           </div>
@@ -902,27 +620,19 @@ exports[`u-tabs.vue > Demo-动态数据渲染 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div style vusion-slot-name="content">标签页 1content
-        <!---->
       </div>
       <div style="display: none;" vusion-slot-name="content">标签页 2content
-        <!---->
       </div>
       <div style="display: none;" vusion-slot-name="content">标签页 3content
-        <!---->
       </div>
     </div>
   </div>
   <a class="root" hovertype="underline" size="small" slot="extra" tabindex="0" target="_self" vusion-slot-name-edit="text">
-    <!---->
     value+1
-    <!---->
   </a>
   <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-    <!---->
     click reload
-    <!---->
   </a>
 </div>
 `;
@@ -931,29 +641,20 @@ exports[`u-tabs.vue > Demo-动态数据渲染 2`] = `
 <div>
   <div appear="square" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">标签页 1
-                <!---->
-                <span class="close"></span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">标签页 1<span class="close"></span>
               </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">标签页 2
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">标签页 2</span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">标签页 3
-                <!---->
-                <span class="close"></span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">标签页 3<span class="close"></span>
               </span>
             </a>
           </div>
@@ -962,22 +663,16 @@ exports[`u-tabs.vue > Demo-动态数据渲染 2`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div style vusion-slot-name="content">
-        <!---->
       </div>
       <div style="display: none;" vusion-slot-name="content">
-        <!---->
       </div>
       <div style="display: none;" vusion-slot-name="content">
-        <!---->
       </div>
     </div>
   </div>
   <a class="root" hovertype="underline" size="small" slot="extra" tabindex="0" target="_self" vusion-slot-name-edit="text">
-    <!---->
     value+1
-    <!---->
   </a>
 </div>
 `;
@@ -985,18 +680,13 @@ exports[`u-tabs.vue > Demo-动态数据渲染 2`] = `
 exports[`u-tabs.vue > Demo-动态数据源 1`] = `
 <div appear="square" class="root" item-width="auto" size="normal">
   <div class="head">
-    <span class="extra" vusion-slot-name="extra">
-      <!---->
-    </span>
+    <span class="extra" vusion-slot-name="extra"></span>
     <nav class="nav">
       <span class="prev"></span>
       <div class="scroll-view">
         <div class="scroll">
           <a alignment="center" class="item" selected="selected" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"></span>
           </a>
         </div>
       </div>
@@ -1004,9 +694,7 @@ exports[`u-tabs.vue > Demo-动态数据源 1`] = `
     </nav>
   </div>
   <div class="body">
-    <!---->
     <div style vusion-slot-name="content">
-      <!---->
     </div>
   </div>
 </div>
@@ -1016,41 +704,29 @@ exports[`u-tabs.vue > Demo-可关闭 1`] = `
 <div>
   <div appear="square" class="root" item-width="90px" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="left" class="item" selected="selected" style="width: 90px;" target="_self" width-fixed="true">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <span class="close"></span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 <span class="close"></span>
               </span>
             </a>
             <a alignment="left" class="item" style="width: 90px;" target="_self" width-fixed="true">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <span class="close"></span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 <span class="close"></span>
               </span>
             </a>
             <a alignment="left" class="item" style="width: 90px;" target="_self" width-fixed="true">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <span class="close"></span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 <span class="close"></span>
               </span>
             </a>
             <a alignment="left" class="item" style="width: 90px;" target="_self" width-fixed="true">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 文档
-                <!---->
-                <span class="close"></span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 文档 <span class="close"></span>
               </span>
             </a>
             <a alignment="left" class="item" style="width: 90px;" target="_self" width-fixed="true">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 资源
-                <!---->
-                <span class="close"></span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 资源 <span class="close"></span>
               </span>
             </a>
           </div>
@@ -1059,21 +735,15 @@ exports[`u-tabs.vue > Demo-可关闭 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">文档内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">资源内容
-        <!---->
       </div>
     </div>
   </div>
@@ -1084,30 +754,19 @@ exports[`u-tabs.vue > Demo-圆形卡片（默认） 1`] = `
 <div>
   <div appear="round" class="root" item-width="auto" size="small">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -1115,15 +774,11 @@ exports[`u-tabs.vue > Demo-圆形卡片（默认） 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
@@ -1133,9 +788,7 @@ exports[`u-tabs.vue > Demo-圆形卡片（默认） 1`] = `
 exports[`u-tabs.vue > Demo-基本用法 1`] = `
 <div appear="square" class="root" item-width="auto" size="normal">
   <div class="head">
-    <span class="extra" vusion-slot-name="extra">
-      <!---->
-    </span>
+    <span class="extra" vusion-slot-name="extra"></span>
     <nav class="nav">
       <span class="prev"></span>
       <div class="scroll-view">
@@ -1143,19 +796,16 @@ exports[`u-tabs.vue > Demo-基本用法 1`] = `
           <a alignment="center" class="item" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡A</span>
-              <!---->
             </span>
           </a>
           <a alignment="center" class="item" selected="selected" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡B</span>
-              <!---->
             </span>
           </a>
           <a alignment="center" class="item" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡C</span>
-              <!---->
             </span>
           </a>
         </div>
@@ -1164,15 +814,11 @@ exports[`u-tabs.vue > Demo-基本用法 1`] = `
     </nav>
   </div>
   <div class="body">
-    <!---->
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">选项卡 A 的内容
-      <!---->
     </div>
     <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">选项卡 B 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">选项卡 C 的内容
-      <!---->
     </div>
   </div>
 </div>
@@ -1181,9 +827,7 @@ exports[`u-tabs.vue > Demo-基本用法 1`] = `
 exports[`u-tabs.vue > Demo-外观-圆形卡片（默认） 1`] = `
 <div appear="round" class="root" item-width="auto" size="small">
   <div class="head">
-    <span class="extra" vusion-slot-name="extra">
-      <!---->
-    </span>
+    <span class="extra" vusion-slot-name="extra"></span>
     <nav class="nav">
       <span class="prev"></span>
       <div class="scroll-view">
@@ -1191,19 +835,16 @@ exports[`u-tabs.vue > Demo-外观-圆形卡片（默认） 1`] = `
           <a alignment="center" class="item" selected="selected" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡A</span>
-              <!---->
             </span>
           </a>
           <a alignment="center" class="item" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡B</span>
-              <!---->
             </span>
           </a>
           <a alignment="center" class="item" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡C</span>
-              <!---->
             </span>
           </a>
         </div>
@@ -1212,15 +853,11 @@ exports[`u-tabs.vue > Demo-外观-圆形卡片（默认） 1`] = `
     </nav>
   </div>
   <div class="body">
-    <!---->
     <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">选项卡 A 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">选项卡 B 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">选项卡 C 的内容
-      <!---->
     </div>
   </div>
 </div>
@@ -1229,9 +866,7 @@ exports[`u-tabs.vue > Demo-外观-圆形卡片（默认） 1`] = `
 exports[`u-tabs.vue > Demo-外观-文本形态 1`] = `
 <div appear="text" class="root" item-width="auto" size="mini">
   <div class="head">
-    <span class="extra" vusion-slot-name="extra">
-      <!---->
-    </span>
+    <span class="extra" vusion-slot-name="extra"></span>
     <nav class="nav">
       <span class="prev"></span>
       <div class="scroll-view">
@@ -1239,19 +874,16 @@ exports[`u-tabs.vue > Demo-外观-文本形态 1`] = `
           <a alignment="center" class="item" selected="selected" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡A</span>
-              <!---->
             </span>
           </a>
           <a alignment="center" class="item" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡B</span>
-              <!---->
             </span>
           </a>
           <a alignment="center" class="item" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡C</span>
-              <!---->
             </span>
           </a>
         </div>
@@ -1260,15 +892,11 @@ exports[`u-tabs.vue > Demo-外观-文本形态 1`] = `
     </nav>
   </div>
   <div class="body">
-    <!---->
     <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">选项卡 A 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">选项卡 B 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">选项卡 C 的内容
-      <!---->
     </div>
   </div>
 </div>
@@ -1277,9 +905,7 @@ exports[`u-tabs.vue > Demo-外观-文本形态 1`] = `
 exports[`u-tabs.vue > Demo-外观-方形卡片（默认） 1`] = `
 <div appear="square" class="root" item-width="auto" size="normal">
   <div class="head">
-    <span class="extra" vusion-slot-name="extra">
-      <!---->
-    </span>
+    <span class="extra" vusion-slot-name="extra"></span>
     <nav class="nav">
       <span class="prev"></span>
       <div class="scroll-view">
@@ -1287,19 +913,16 @@ exports[`u-tabs.vue > Demo-外观-方形卡片（默认） 1`] = `
           <a alignment="center" class="item" selected="selected" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡A</span>
-              <!---->
             </span>
           </a>
           <a alignment="center" class="item" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡B</span>
-              <!---->
             </span>
           </a>
           <a alignment="center" class="item" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡C</span>
-              <!---->
             </span>
           </a>
         </div>
@@ -1308,15 +931,11 @@ exports[`u-tabs.vue > Demo-外观-方形卡片（默认） 1`] = `
     </nav>
   </div>
   <div class="body">
-    <!---->
     <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">选项卡 A 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">选项卡 B 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">选项卡 C 的内容
-      <!---->
     </div>
   </div>
 </div>
@@ -1325,9 +944,7 @@ exports[`u-tabs.vue > Demo-外观-方形卡片（默认） 1`] = `
 exports[`u-tabs.vue > Demo-外观-线条导航 1`] = `
 <div appear="line" class="root" item-width="auto" size="normal">
   <div class="head">
-    <span class="extra" vusion-slot-name="extra">
-      <!---->
-    </span>
+    <span class="extra" vusion-slot-name="extra"></span>
     <nav class="nav">
       <span class="prev"></span>
       <div class="scroll-view">
@@ -1335,19 +952,16 @@ exports[`u-tabs.vue > Demo-外观-线条导航 1`] = `
           <a alignment="center" class="item" selected="selected" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡A</span>
-              <!---->
             </span>
           </a>
           <a alignment="center" class="item" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡B</span>
-              <!---->
             </span>
           </a>
           <a alignment="center" class="item" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡C</span>
-              <!---->
             </span>
           </a>
         </div>
@@ -1356,15 +970,11 @@ exports[`u-tabs.vue > Demo-外观-线条导航 1`] = `
     </nav>
   </div>
   <div class="body">
-    <!---->
     <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">选项卡 A 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">选项卡 B 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">选项卡 C 的内容
-      <!---->
     </div>
   </div>
 </div>
@@ -1373,9 +983,7 @@ exports[`u-tabs.vue > Demo-外观-线条导航 1`] = `
 exports[`u-tabs.vue > Demo-外观-胶囊导航 1`] = `
 <div appear="capsule" class="root" item-width="auto" size="normal">
   <div class="head">
-    <span class="extra" vusion-slot-name="extra">
-      <!---->
-    </span>
+    <span class="extra" vusion-slot-name="extra"></span>
     <nav class="nav">
       <span class="prev"></span>
       <div class="scroll-view">
@@ -1383,19 +991,16 @@ exports[`u-tabs.vue > Demo-外观-胶囊导航 1`] = `
           <a alignment="center" class="item" selected="selected" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡A</span>
-              <!---->
             </span>
           </a>
           <a alignment="center" class="item" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡B</span>
-              <!---->
             </span>
           </a>
           <a alignment="center" class="item" target="_self">
             <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
               <span class="root" vusion-slot-name-edit="text">选项卡C</span>
-              <!---->
             </span>
           </a>
         </div>
@@ -1404,15 +1009,11 @@ exports[`u-tabs.vue > Demo-外观-胶囊导航 1`] = `
     </nav>
   </div>
   <div class="body">
-    <!---->
     <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">选项卡 A 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">选项卡 B 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">选项卡 C 的内容
-      <!---->
     </div>
   </div>
 </div>
@@ -1424,11 +1025,8 @@ exports[`u-tabs.vue > Demo-插槽扩展 1`] = `
     <div class="head">
       <span class="extra" vusion-slot-name="extra">
         <label class="root" tabindex="0">
-          <span class="box" status="false"></span>全选<span vusion-slot-name="item">
-            <!---->
-          </span>
+          <span class="box" status="false"></span>全选<span vusion-slot-name="item"></span>
         </label>
-        <!---->
       </span>
       <nav class="nav">
         <span class="prev"></span>
@@ -1438,30 +1036,24 @@ exports[`u-tabs.vue > Demo-插槽扩展 1`] = `
               <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
                 <span>模板 <span class="root" type="filled">
                     <span vusion-slot-name-edit="text">1</span>
-                    <!---->
                   </span>
                 </span>
-                <!---->
               </span>
             </a>
             <a alignment="center" class="item" selected="selected" target="_self">
               <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
                 <span>样式 <span class="root" type="filled">
                     <span vusion-slot-name-edit="text">6</span>
-                    <!---->
                   </span>
                 </span>
-                <!---->
               </span>
             </a>
             <a alignment="center" class="item" target="_self">
               <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
                 <span>逻辑 <span class="root" type="filled">
                     <span vusion-slot-name-edit="text">3</span>
-                    <!---->
                   </span>
                 </span>
-                <!---->
               </span>
             </a>
           </div>
@@ -1470,15 +1062,11 @@ exports[`u-tabs.vue > Demo-插槽扩展 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default"> 模板内容
-        <!---->
       </div>
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default"> 样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default"> 逻辑内容
-        <!---->
       </div>
     </div>
   </div>
@@ -1489,30 +1077,19 @@ exports[`u-tabs.vue > Demo-文本形态 1`] = `
 <div>
   <div appear="text" class="root" item-width="auto" size="mini">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -1520,15 +1097,11 @@ exports[`u-tabs.vue > Demo-文本形态 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
@@ -1539,30 +1112,19 @@ exports[`u-tabs.vue > Demo-方形卡片（默认） 1`] = `
 <div>
   <div appear="square" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -1570,15 +1132,11 @@ exports[`u-tabs.vue > Demo-方形卡片（默认） 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
@@ -1589,136 +1147,71 @@ exports[`u-tabs.vue > Demo-标签页较多的情形 1`] = `
 <div appear="square" class="root" item-width="auto" size="normal">
   <div class="head">
     <span class="extra" vusion-slot-name="extra">
-      <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-        <!---->
-        添加
-        <!---->
-      </a>
-      <!---->
+      <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">添加</a>
     </span>
     <nav class="nav">
       <span class="prev"></span>
       <div class="scroll-view">
         <div class="scroll">
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 1
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 1 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 2
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 2 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 3
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 3 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 4
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 4 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 5
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 5 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 6
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 6 </span>
           </a>
           <a alignment="center" class="item" selected="selected" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 7
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 7 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 8
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 8 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 9
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 9 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 10
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 10 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 11
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 11 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 12
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 12 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 13
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 13 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 14
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 14 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 15
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 15 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 16
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 16 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 17
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 17 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 18
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 18 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 19
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 19 </span>
           </a>
           <a alignment="center" class="item" target="_self">
-            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 20
-              <!---->
-              <!---->
-            </span>
+            <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 标签页 20 </span>
           </a>
         </div>
       </div>
@@ -1726,66 +1219,45 @@ exports[`u-tabs.vue > Demo-标签页较多的情形 1`] = `
     </nav>
   </div>
   <div class="body">
-    <!---->
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 1 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 2 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 3 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 4 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 5 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 6 的内容
-      <!---->
     </div>
     <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">标签页 7 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 8 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 9 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 10 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 11 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 12 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 13 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 14 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 15 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 16 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 17 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 18 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 19 的内容
-      <!---->
     </div>
     <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">标签页 20 的内容
-      <!---->
     </div>
   </div>
 </div>
@@ -1795,30 +1267,19 @@ exports[`u-tabs.vue > Demo-添加 1`] = `
 <div>
   <div appear="square" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> AAA
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> AAA </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> BBB
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> BBB </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> CCC
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> CCC </span>
             </a>
           </div>
         </div>
@@ -1826,22 +1287,16 @@ exports[`u-tabs.vue > Demo-添加 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">
-        <!---->
       </div>
     </div>
   </div>
   <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-    <!---->
     添加
-    <!---->
   </a>
 </div>
 `;
@@ -1850,30 +1305,19 @@ exports[`u-tabs.vue > Demo-禁用状态 1`] = `
 <div>
   <div appear="square" class="root" disabled="disabled" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" disabled="disabled" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" disabled="disabled" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" disabled="disabled" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -1881,44 +1325,29 @@ exports[`u-tabs.vue > Demo-禁用状态 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
   <div appear="square" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" disabled="disabled" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -1926,15 +1355,11 @@ exports[`u-tabs.vue > Demo-禁用状态 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
@@ -1946,30 +1371,19 @@ exports[`u-tabs.vue > Demo-竖线分割 1`] = `
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <div appear="split" class="root" item-width="auto" size="normal">
       <div class="head">
-        <span class="extra" vusion-slot-name="extra">
-          <!---->
-        </span>
+        <span class="extra" vusion-slot-name="extra"></span>
         <nav class="nav">
           <span class="prev"></span>
           <div class="scroll-view">
             <div class="scroll">
               <a alignment="center" class="item" selected="selected" target="_self">
-                <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                  <!---->
-                  <!---->
-                </span>
+                <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
               </a>
               <a alignment="center" class="item" target="_self">
-                <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                  <!---->
-                  <!---->
-                </span>
+                <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
               </a>
               <a alignment="center" class="item" target="_self">
-                <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                  <!---->
-                  <!---->
-                </span>
+                <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
               </a>
             </div>
           </div>
@@ -1977,43 +1391,31 @@ exports[`u-tabs.vue > Demo-竖线分割 1`] = `
         </nav>
       </div>
       <div class="body">
-        <!---->
         <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-          <!---->
         </div>
         <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-          <!---->
         </div>
         <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-          <!---->
         </div>
       </div>
     </div>
     <div appear="split" class="root" item-width="auto" size="mini">
       <div class="head">
-        <span class="extra" vusion-slot-name="extra">
-          <!---->
-        </span>
+        <span class="extra" vusion-slot-name="extra"></span>
         <nav class="nav">
           <span class="prev"></span>
           <div class="scroll-view">
             <div class="scroll">
               <a alignment="center" class="item" selected="selected" target="_self">
-                <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                  <!---->
-                  <span class="close"></span>
+                <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 <span class="close"></span>
                 </span>
               </a>
               <a alignment="center" class="item" target="_self">
-                <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                  <!---->
-                  <span class="close"></span>
+                <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 <span class="close"></span>
                 </span>
               </a>
               <a alignment="center" class="item" target="_self">
-                <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                  <!---->
-                  <span class="close"></span>
+                <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 <span class="close"></span>
                 </span>
               </a>
             </div>
@@ -2022,20 +1424,14 @@ exports[`u-tabs.vue > Demo-竖线分割 1`] = `
         </nav>
       </div>
       <div class="body">
-        <!---->
         <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-          <!---->
         </div>
         <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-          <!---->
         </div>
         <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-          <!---->
         </div>
       </div>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -2044,30 +1440,19 @@ exports[`u-tabs.vue > Demo-线条导航 1`] = `
 <div>
   <div appear="line" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -2075,15 +1460,11 @@ exports[`u-tabs.vue > Demo-线条导航 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
@@ -2094,30 +1475,19 @@ exports[`u-tabs.vue > Demo-胶囊导航 1`] = `
 <div>
   <div appear="capsule" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -2125,15 +1495,11 @@ exports[`u-tabs.vue > Demo-胶囊导航 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>
@@ -2144,30 +1510,19 @@ exports[`u-tabs.vue > Demo-路由 1`] = `
 <div>
   <div appear="square" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" href="#/components/u-button" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Button
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Button </span>
             </a>
             <a alignment="center" class="item" href="#/components/u-input" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Input
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Input </span>
             </a>
             <a alignment="center" class="item" href="#/components/u-tabs" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Tabs
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> Tabs </span>
             </a>
           </div>
         </div>
@@ -2175,15 +1530,11 @@ exports[`u-tabs.vue > Demo-路由 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">
-        <!---->
       </div>
       <div class="root" vusion-disabled-selected="true" vusion-slot-name="default">
-        <!---->
       </div>
     </div>
   </div>
@@ -2194,30 +1545,20 @@ exports[`u-tabs.vue > Demo-默认显示和可关闭 1`] = `
 <div>
   <div appear="square" class="root" item-width="auto" size="normal">
     <div class="head">
-      <span class="extra" vusion-slot-name="extra">
-        <!---->
-      </span>
+      <span class="extra" vusion-slot-name="extra"></span>
       <nav class="nav">
         <span class="prev"></span>
         <div class="scroll-view">
           <div class="scroll">
             <a alignment="center" class="item" selected="selected" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板
-                <!---->
-                <span class="close"></span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 模板 <span class="close"></span>
               </span>
             </a>
             <a alignment="center" class="item" style="display: none;" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 样式 </span>
             </a>
             <a alignment="center" class="item" target="_self">
-              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑
-                <!---->
-                <!---->
-              </span>
+              <span class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 逻辑 </span>
             </a>
           </div>
         </div>
@@ -2225,15 +1566,11 @@ exports[`u-tabs.vue > Demo-默认显示和可关闭 1`] = `
       </nav>
     </div>
     <div class="body">
-      <!---->
       <div class="root" style vusion-disabled-selected="true" vusion-slot-name="default">模板内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">样式内容
-        <!---->
       </div>
       <div class="root" style="display: none;" vusion-disabled-selected="true" vusion-slot-name="default">逻辑内容
-        <!---->
       </div>
     </div>
   </div>

@@ -6,7 +6,6 @@ exports[`u-cascader.vue > Demo-Placeholder 1`] = `
     <div class="root input" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">placeholder自定义内容</span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -15,15 +14,11 @@ exports[`u-cascader.vue > Demo-Placeholder 1`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 理学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 理学 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 工学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 工学 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
@@ -38,7 +33,6 @@ exports[`u-cascader.vue > Demo-Placeholder 1`] = `
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
@@ -51,7 +45,6 @@ exports[`u-cascader.vue > Demo-field 1`] = `
     <div class="root input" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -60,15 +53,11 @@ exports[`u-cascader.vue > Demo-field 1`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 1
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 1 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 2
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 2 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
@@ -83,12 +72,9 @@ exports[`u-cascader.vue > Demo-field 1`] = `
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -99,7 +85,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -108,15 +93,11 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 理学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 理学 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 工学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 工学 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
@@ -131,7 +112,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
@@ -139,7 +119,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -148,15 +127,11 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 理学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 理学 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 工学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 工学 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
@@ -171,7 +146,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
@@ -179,7 +153,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -188,15 +161,11 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 理学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 理学 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 工学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 工学 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
@@ -211,19 +180,15 @@ exports[`u-cascader.vue > Demo-size 1`] = `
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
-    <!---->
-    <!---->
   </div>
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <div class="root" height="mini" width>
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -232,15 +197,11 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 理学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 理学 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 工学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 工学 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
@@ -255,7 +216,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
@@ -263,7 +223,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -272,15 +231,11 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 理学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 理学 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 工学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 工学 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
@@ -295,7 +250,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
@@ -303,7 +257,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -312,15 +265,11 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 理学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 理学 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 工学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 工学 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
@@ -335,19 +284,15 @@ exports[`u-cascader.vue > Demo-size 1`] = `
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
-    <!---->
-    <!---->
   </div>
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <div class="root" height="mini" width>
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -356,15 +301,11 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 理学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 理学 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 工学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 工学 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
@@ -379,7 +320,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
@@ -387,7 +327,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -396,15 +335,11 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 理学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 理学 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 工学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 工学 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
@@ -419,7 +354,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
@@ -427,7 +361,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -436,15 +369,11 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 理学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 理学 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 工学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 工学 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
@@ -459,19 +388,15 @@ exports[`u-cascader.vue > Demo-size 1`] = `
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
-    <!---->
-    <!---->
   </div>
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <div class="root" height="large" width>
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -480,15 +405,11 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 理学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 理学 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 工学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 工学 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
@@ -503,7 +424,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
@@ -511,7 +431,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -520,15 +439,11 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 理学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 理学 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 工学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 工学 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
@@ -543,7 +458,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
@@ -551,7 +465,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -560,15 +473,11 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 理学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 理学 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" target="_self">
-                      <span vusion-slot-name-edit="text"> 工学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 工学 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
@@ -583,15 +492,10 @@ exports[`u-cascader.vue > Demo-size 1`] = `
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
-    <!---->
-    <!---->
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -601,7 +505,6 @@ exports[`u-cascader.vue > Demo-仅显示最后一级 1`] = `
     <div class="root input" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -610,15 +513,11 @@ exports[`u-cascader.vue > Demo-仅显示最后一级 1`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 理学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 理学 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 工学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 工学 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
@@ -633,12 +532,9 @@ exports[`u-cascader.vue > Demo-仅显示最后一级 1`] = `
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -648,7 +544,6 @@ exports[`u-cascader.vue > Demo-动态加载 1`] = `
     <div class="root input" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -667,12 +562,9 @@ exports[`u-cascader.vue > Demo-动态加载 1`] = `
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -682,7 +574,6 @@ exports[`u-cascader.vue > Demo-双向绑定 1`] = `
     <div class="root input" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -691,15 +582,11 @@ exports[`u-cascader.vue > Demo-双向绑定 1`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 理学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 理学 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 工学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 工学 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
@@ -714,12 +601,9 @@ exports[`u-cascader.vue > Demo-双向绑定 1`] = `
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -729,7 +613,6 @@ exports[`u-cascader.vue > Demo-可清空 1`] = `
     <div class="root input" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -738,15 +621,11 @@ exports[`u-cascader.vue > Demo-可清空 1`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 理学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 理学 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 工学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 工学 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
@@ -761,12 +640,9 @@ exports[`u-cascader.vue > Demo-可清空 1`] = `
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -775,7 +651,6 @@ exports[`u-cascader.vue > Demo-基本用法 1`] = `
   <div class="root input" readonly="readonly">
     <span class="baseline">b</span>
     <span class="placeholder">请选择</span>
-    <!---->
     <input class="input" readonly="readonly" type="text">
     <transition-stub class="popperShape" name="fade">
       <div class="root" style="display: none;">
@@ -784,15 +659,11 @@ exports[`u-cascader.vue > Demo-基本用法 1`] = `
             <div class="view">
               <nav class="root umenuShape">
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 理学
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 理学 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 工学
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 工学 </span>
                   <div class="sub"></div>
                 </a>
               </nav>
@@ -807,7 +678,6 @@ exports[`u-cascader.vue > Demo-基本用法 1`] = `
         </div>
       </div>
     </transition-stub>
-    <!---->
   </div>
   <span class="clearable" style="display: none;"></span>
 </div>
@@ -819,7 +689,6 @@ exports[`u-cascader.vue > Demo-基本用法 2`] = `
     <div class="root input" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -828,15 +697,11 @@ exports[`u-cascader.vue > Demo-基本用法 2`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 理学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 理学 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 工学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 工学 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
@@ -851,7 +716,6 @@ exports[`u-cascader.vue > Demo-基本用法 2`] = `
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
@@ -865,7 +729,6 @@ exports[`u-cascader.vue > Demo-数据源开启搜索 1`] = `
       <div class="root input">
         <span class="baseline">b</span>
         <span class="placeholder"></span>
-        <!---->
         <input class="input" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -879,29 +742,20 @@ exports[`u-cascader.vue > Demo-数据源开启搜索 1`] = `
                       </svg>
                     </span>
                     <div class="icontext" vusion-slot-name="default">
-                      <!---->
                     </div>
                   </span>
                 </div>
-                <!---->
               </div>
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
     <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-      <!---->
       click reload
-      <!---->
     </a>
-    <!---->
-    <!---->
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -912,7 +766,6 @@ exports[`u-cascader.vue > Demo-数据源改造 1`] = `
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -921,15 +774,11 @@ exports[`u-cascader.vue > Demo-数据源改造 1`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 理学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 理学 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 工学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 工学 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
@@ -944,19 +793,15 @@ exports[`u-cascader.vue > Demo-数据源改造 1`] = `
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
-    <!---->
-    <!---->
   </div>
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <div class="root">
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -965,15 +810,11 @@ exports[`u-cascader.vue > Demo-数据源改造 1`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 理学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 理学 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 工学
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 工学 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
@@ -988,19 +829,15 @@ exports[`u-cascader.vue > Demo-数据源改造 1`] = `
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
-    <!---->
-    <!---->
   </div>
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <div class="root">
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder"></span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -1014,28 +851,22 @@ exports[`u-cascader.vue > Demo-数据源改造 1`] = `
                       </svg>
                     </span>
                     <div class="icontext" vusion-slot-name="default">
-                      <!---->
                     </div>
                   </span>
                 </div>
-                <!---->
               </div>
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
-    <!---->
-    <!---->
   </div>
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <div class="root">
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -1049,28 +880,22 @@ exports[`u-cascader.vue > Demo-数据源改造 1`] = `
                       </svg>
                     </span>
                     <div class="icontext" vusion-slot-name="default">
-                      <!---->
                     </div>
                   </span>
                 </div>
-                <!---->
               </div>
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
-    <!---->
-    <!---->
   </div>
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <div class="root">
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder"></span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -1084,24 +909,17 @@ exports[`u-cascader.vue > Demo-数据源改造 1`] = `
                       </svg>
                     </span>
                     <div class="icontext" vusion-slot-name="default">
-                      <!---->
                     </div>
                   </span>
                 </div>
-                <!---->
               </div>
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
-    <!---->
-    <!---->
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -1111,9 +929,7 @@ exports[`u-cascader.vue > Demo-禁用某项 1`] = `
     <div class="root input" disabled="disabled" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <input class="input" disabled="disabled" readonly="readonly" type="text">
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
@@ -1121,7 +937,6 @@ exports[`u-cascader.vue > Demo-禁用某项 1`] = `
     <div class="root input" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -1130,15 +945,11 @@ exports[`u-cascader.vue > Demo-禁用某项 1`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 理学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 理学 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 工学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 工学 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
@@ -1153,12 +964,9 @@ exports[`u-cascader.vue > Demo-禁用某项 1`] = `
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -1168,7 +976,6 @@ exports[`u-cascader.vue > Demo-级联间连接字符 1`] = `
     <div class="root input" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -1177,15 +984,11 @@ exports[`u-cascader.vue > Demo-级联间连接字符 1`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 理学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 理学 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 工学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 工学 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
@@ -1200,7 +1003,6 @@ exports[`u-cascader.vue > Demo-级联间连接字符 1`] = `
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
@@ -1208,7 +1010,6 @@ exports[`u-cascader.vue > Demo-级联间连接字符 1`] = `
     <div class="root input" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -1217,15 +1018,11 @@ exports[`u-cascader.vue > Demo-级联间连接字符 1`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 理学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 理学 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 工学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 工学 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
@@ -1240,12 +1037,9 @@ exports[`u-cascader.vue > Demo-级联间连接字符 1`] = `
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -1255,7 +1049,6 @@ exports[`u-cascader.vue > Demo-触发方式 1`] = `
     <div class="root input" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">默认click点击触发</span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -1264,15 +1057,11 @@ exports[`u-cascader.vue > Demo-触发方式 1`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 理学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 理学 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 工学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 工学 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
@@ -1287,7 +1076,6 @@ exports[`u-cascader.vue > Demo-触发方式 1`] = `
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
@@ -1295,7 +1083,6 @@ exports[`u-cascader.vue > Demo-触发方式 1`] = `
     <div class="root input" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">hover悬浮触发</span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -1304,15 +1091,11 @@ exports[`u-cascader.vue > Demo-触发方式 1`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 理学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 理学 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 工学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 工学 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
@@ -1327,12 +1110,9 @@ exports[`u-cascader.vue > Demo-触发方式 1`] = `
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -1342,7 +1122,6 @@ exports[`u-cascader.vue > Demo-过滤（可搜索） 1`] = `
     <div class="root input">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <input class="input" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -1351,15 +1130,11 @@ exports[`u-cascader.vue > Demo-过滤（可搜索） 1`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 理学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 理学 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 工学
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 工学 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
@@ -1374,11 +1149,8 @@ exports[`u-cascader.vue > Demo-过滤（可搜索） 1`] = `
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
-  <!---->
-  <!---->
 </div>
 `;
