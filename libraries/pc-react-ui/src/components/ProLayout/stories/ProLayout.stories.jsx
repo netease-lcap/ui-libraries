@@ -52,18 +52,10 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: () => {
-    const [settings, setSetting] = useState({
-      fixSiderbar: true,
-      layout: 'mix',
-      // splitMenus: true,
-    });
-
-    const [pathname, setPathname] = useState('/list/sub-page/sub-sub-page1');
     const ref = React.useRef();
     React.useEffect(() => {
       console.log(ref, 'ref');
     }, []);
-    const [num, setNum] = useState(40);
     if (typeof document === 'undefined') {
       return <div />;
     }
@@ -83,7 +75,6 @@ export const 默认 = {
           layout="mix"
           logo="http://minio-api.codewave-dev.163yun.com/lowcode-static/packages/%40lcap/pc-react-ui%401.0.0-beta.0/dist-theme/LOGO.png"
           title="应用名称"
-          defaultOpenKeys={'/1'}
           avatarRender={(
             <Dropdown
               menuItem={(

@@ -43,31 +43,3 @@ export function useHandleStyle(props) {
     className: classnames(style.treeSelect, className),
   };
 }
-
-function useHandleFormWarplabel(props) {
-  const { width, isForm } = React.useContext(FormContext);
-  const deletePropsList = props.get($deletePropsList).concat('labelIsSlot', 'labelText');
-  const labelIsSlot = props.get('labelIsSlot');
-  const labelProps = props.get('label');
-  const labelText = props.get('labelText');
-  const labelWidth = props.get('labelWidth');
-  const labelCol = _.isNil(labelWidth) ? {} : { labelCol: { flex: `${labelWidth}px` } };
-  const label = labelIsSlot ? labelProps : labelText;
-  const formResult = isForm ? { width, label, ...labelCol } : {};
-  return {
-    [$deletePropsList]: deletePropsList,
-    ...formResult,
-  };
-}
-export function useHandleFormItemProps(props) {
-  const BaseComponent = props.get('render');
-  const render = React.useCallback((selfProps) => {
-    const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
-    const colProps = _.pick(selfProps, COLPROPSFIELDS);
-    const fieldProps = _.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]);
-    return <BaseComponent {...{ ...formItemProps, fieldProps, colProps }} />;
-  }, [BaseComponent]);
-  return {
-    render,
-  };
-}

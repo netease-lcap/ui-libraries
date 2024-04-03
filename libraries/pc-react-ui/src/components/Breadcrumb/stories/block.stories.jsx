@@ -24,7 +24,10 @@ export const 默认 = {
     return (
       <Breadcrumb>
         <BreadcrumbItem>
-          <Text children="sample" />
+          <Text children="首页" />
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+          <Text children="列表页" />
         </BreadcrumbItem>
       </Breadcrumb>
     );

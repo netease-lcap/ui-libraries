@@ -4,9 +4,12 @@ import { Form as AntdForm, FormProps, FormItemProps } from 'antd';
 import {
   QueryFilter, QueryFilterProps, ProForm, ProFormProps,
 } from '@ant-design/pro-components';
+import VusionValidator, { localizeRules } from '@vusion/validator';
+import _ from 'lodash';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import * as formItemPlugin from './plugins/formItemPlugin';
+
 import * as queryFromPlugin from './plugins/queryFromPlugin';
 import type { pluginType } from '@/plugins/type';
 
@@ -35,7 +38,30 @@ export const FormItem = registerComponet<
   FormItemProps
 >(
   AntdForm.Item,
-  { plugin: formItemPlugin, displayName: 'FormItem', mapProps },
+  {
+    plugin: {
+      useHandleRul(props) {
+        const rules = props.get('rules');
+        return {
+          rules: _.map(rules, (item) => {
+            return {
+              message: item.message,
+              required: item.required,
+              validateTrigger: ['onChange', 'onBlur'],
+              ...item,
+              validator: (rule, value) => {
+                const validator = new VusionValidator(undefined, localizeRules, [rule]);
+                return validator.validate(value);
+              },
+            };
+          }),
+
+        };
+      },
+    },
+    displayName: 'FormItem',
+    mapProps,
+  },
 );
 
 export const QueryForm = registerComponet<

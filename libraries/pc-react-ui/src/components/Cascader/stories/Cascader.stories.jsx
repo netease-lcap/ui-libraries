@@ -144,19 +144,6 @@ export const ref = {
   },
   args: {
     style: { width: 300 },
-    dataSource: () => new Promise((res) => {
-      setTimeout(() => {
-        res([
-          { labels: 'Option 1', key: '1' },
-          {
-            labels: 'Option 2',
-            key: '2',
-            children: [{ labels: 'Option 3', key: '3' }],
-          },
-        ]);
-      }, 3000);
-    }),
-    valueField: 'key',
-    textField: 'labels',
+ 
   },
 };

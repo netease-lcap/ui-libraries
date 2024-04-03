@@ -28,3 +28,13 @@ export function useHandleOpenRef(props) {
     onDropdownVisibleChange: setOpen,
   };
 }
+export function useHandleRemoteEmptyItems(props) {
+  const items = props.get('items');
+  const deletePropsList = props.get($deletePropsList);
+  const itemsDelete = _.isEmpty(items) ? ['items'] : [];
+  return {
+    [$deletePropsList]: deletePropsList.concat(itemsDelete),
+  };
+}
+
+useHandleRemoteEmptyItems.order = 5;

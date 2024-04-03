@@ -5,13 +5,13 @@ namespace nasl.ui {
     title: '表单项',
     description: '表单项',
   })
-  export class FormItem extends ViewComponent {
+  export class FormItemProps extends ViewComponent {
     constructor(options?: Partial<FormItemOptions>) {
       super();
     }
   }
 
-  export class FormItemOptions extends ViewComponentOptions {
+  export class FormItemPropsOptions extends ViewComponentOptions {
     @Prop({
       group: '基础信息',
       title: '标题自定义',
@@ -24,7 +24,7 @@ namespace nasl.ui {
     })
     labelIsSlot: nasl.core.Boolean = false;
 
-    @Prop<FormItemOptions, 'labelText'>({
+    @Prop<FormItemPropsOptions, 'labelText'>({
       group: '基础信息',
       title: '标题',
       docDescription: '选择分组的标题，标题只有在没有文本插槽的时候生效',

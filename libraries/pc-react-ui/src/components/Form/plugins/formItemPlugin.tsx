@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@vusion/validator';
+import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
+import { COLPROPSFIELDS } from '@/components/Row/constants';
 import FormContext from '../form-context';
 import { $deletePropsList } from '@/plugins/constants';
 
@@ -27,7 +29,7 @@ export function useHandleDefaultValue(props) {
   React.useEffect(() => {
     const name = props.get('name');
     const defaultValue = props.get('defaultValue');
-    form.setFieldValue(name, defaultValue);
+    form?.setFieldValue?.(name, defaultValue);
   }, []);
 }
 export function useHandleFormWarplabel(props) {
@@ -49,5 +51,17 @@ export function useHandleFormWarplabel(props) {
   return {
     [$deletePropsList]: deletePropsList,
     ...formResult,
+  };
+}
+export function useHandleFormItemProps(props) {
+  const BaseComponent = props.get('render');
+  const render = React.useCallback((selfProps) => {
+    const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
+    const colProps = _.pick(selfProps, COLPROPSFIELDS);
+    const fieldProps = _.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]);
+    return <BaseComponent {...{ ...formItemProps, fieldProps, colProps }} />;
+  }, [BaseComponent]);
+  return {
+    render,
   };
 }

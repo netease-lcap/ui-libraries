@@ -8,6 +8,7 @@ import F from 'futil';
 
 import { ConfigProvider } from 'antd';
 import { useControllableValue } from 'ahooks';
+import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
 import { MenuItem } from '@/index';
 import { RouterContext } from '@/components/Router';
@@ -128,6 +129,7 @@ export function useHandleAvatar(props) {
   const avatarSrcProps = props.get('avatarSrc');
   const logoProps = props.get('logo');
   const titleProps = props.get('title');
+  const deletePropsList = props.get($deletePropsList).concat(['avatarSize', 'avatarRender', 'avatarTitle', 'avatarSrc']);
   const title = _.isNil(titleProps) ? '' : titleProps;
   const logo = _.isNil(logoProps) ? null : logoProps;
   const avatarTitleProps = props.get('avatarTitle');
@@ -135,6 +137,7 @@ export function useHandleAvatar(props) {
   const AvatarRenderProps = props.get('avatarRender');
   const avatarRender = React.isValidElement(AvatarRenderProps) ? (_props, dom) => React.cloneElement(AvatarRenderProps, { children: dom }) : undefined;
   return {
+    [$deletePropsList]: deletePropsList,
     logo,
     title,
     avatarProps: _.filterUnderfinedValue({

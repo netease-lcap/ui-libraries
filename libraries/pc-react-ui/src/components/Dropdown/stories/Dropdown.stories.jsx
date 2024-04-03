@@ -57,8 +57,8 @@ export const 默认 = {
         type="dashed"
         menuItem={(
           <>
-            <MenuItem key="https://www.sf.163.com/" icon="BorderInnerOutlined" label={<Link href="https://www.baidu.com">图标+外部链接</Link>} />
-            <MenuItem key="/navbar" icon="" label={<Link href="/app">内部链接</Link>} />
+            <MenuItem path="https://www.sf.163.com/" icon="BorderInnerOutlined" label={<Link href="https://www.baidu.com">图标+外部链接</Link>} />
+            <MenuItem path="/navbar" icon="" label={<Link href="/app">内部链接</Link>} />
             <MenuItem
               // onClick={localStore.MenuItem55Click}
               key=""

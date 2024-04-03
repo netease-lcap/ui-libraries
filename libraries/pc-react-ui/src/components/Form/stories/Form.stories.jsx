@@ -58,58 +58,72 @@ export const 默认 = {
       return <div />;
     }
     return (
-      <div style={{ width: '1200px' }}>
-        {/* <Select width="xl" /> */}
-        <ProFormText />
-        <Form
-          layout="horizontal"
-          // labelCol={{ flex: '500px' }}
-          // labelWidth="100"
-          span={12}
-          gutterJustify={30}
-          width="100%"
-        >
-          <Cascader labelText="123" width="100%" name="username" />
-          <Select ref={ref} labelText="表单项内容" />
-          {/* <button onClick={() => console.log(ref.current.getValues())}>
-            1234
-          </button> */}
-          {/* <TextArea /> */}
-          <ProFormText />
-          <DatePicker data-nodepath="3333" />
-          <CheckboxGroup
-            data-nodepath="rootview.0.0"
-            ide-iscontainer="true"
-            key="component-37"
-          >
-            <Checkbox ide-iscontainer="true" key="component-38">
-              1234
-            </Checkbox>
-          </CheckboxGroup>
-          <CheckboxGroup data-nodepath="rootview.6.2">
-            <Checkbox
-              value={1}
-              label={1}
-              id="checkbox"
-              data-nodepath="checkbox"
+      <Form
+        data-nodepath="rootview.0.1.0.1.0.0.0.1"
+        ide-iscontainer="true"
+        submitter={false}
+        key="component-8"
+      >
+        <FormItem
+          data-nodepath="rootview.0.1.0.1.0.0.0.1.0"
+          ide-iscontainer="true"
+          name="userName"
+          rules="[{validate: 'filled',message: `表单项不得为空`,trigger: 'input+blur',required: true}]"
+          key="component-9"
+          label={(() => (
+            <div
+              ide-draggable="false"
+              data-nodepath="rootview.0.1.0.1.0.0.0.1.0.0"
             >
-              1
-            </Checkbox>
-            <Checkbox value={2} label={2}>
-              2
-            </Checkbox>
-          </CheckboxGroup>
-          <InputNumber />
-          {/* <Select
-            name="ag"
-            dataSource={[
-              { value: 1, label: '男' },
-              { value: 2, label: '女' },
-            ]}
-          /> */}
-          <Input />
-        </Form>
-      </div>
+              <Text
+                data-nodepath="rootview.0.1.0.1.0.0.0.1.0.0.0"
+                children="用户
+"
+                key="component-11"
+                data-editable="true"
+              />
+            </div>
+          ))()}
+        >
+          <Input
+            data-nodepath="rootview.0.1.0.1.0.0.0.1.0.1"
+            data-has-mutation="true"
+            placeholder="请输入账号"
+            type="text"
+            key="component-10"
+            style={{ height: '35px' }}
+          />
+        </FormItem>
+        <FormItem
+          data-nodepath="rootview.0.1.0.1.0.0.0.1.1"
+          ide-iscontainer="true"
+          name="passWord"
+          rules="[{validate: 'filled',message: `表单项不得为空`,trigger: 'input+blur',required: true}]"
+          key="component-12"
+          label={(() => (
+            <div
+              ide-draggable="false"
+              data-nodepath="rootview.0.1.0.1.0.0.0.1.1.0"
+            >
+              <Text
+                data-nodepath="rootview.0.1.0.1.0.0.0.1.1.0.0"
+                children="密码"
+                key="component-14"
+                data-editable="true"
+              />
+            </div>
+          ))()}
+        >
+          <Input
+            data-nodepath="rootview.0.1.0.1.0.0.0.1.1.1"
+            data-has-mutation="true"
+            placeholder="请输入密码"
+            type="password"
+            key="component-13"
+            style={{ height: '35px' }}
+          />
+        </FormItem>
+      </Form>
     );
   },
 };
@@ -165,28 +179,101 @@ export const 查询表单 = {
 export const Pro表单 = {
   render: () => {
     const ref = React.useRef(null);
+    function EmptySlot(params) {
+      return <div />;
+    }
     React.useEffect(() => {
       console.log(ref, 'ref');
     }, []);
     return (
-      <div>
-        <button
-          onClick={() => {``
-            console.log(ref.current.getValues());
-          }}
-        >
-          1234
-        </button>
-        <Form ref={ref}>
-          <Input type="text" name="user" defaultValue="1224" />
-          <Input type="text" name="age" />
-          {/* <Select ref={ref} /> */}
-          {/* <ProFormText fieldProps={{ ref }} label="132" width="xl" /> */}
-          {/* <ProFormText label="132" width="sm" />
-          <ProFormText label="132" width="lg" />
-          <ProFormText label="132" width="xl" /> */}
-        </Form>
-      </div>
+      <Form
+        data-nodepath="rootview.0.1.0.1.0.0.0.1"
+        ide-iscontainer="true"
+        submitter={false}
+        key="component-25"
+      >
+        <Input
+          data-nodepath="rootview.0.1.0.1.0.0.0.1.0"
+          ide-iscontainer="true"
+          data-has-mutation="true"
+          labelText="表单输入框"
+          key="component-26"
+          label={(() => (
+            <div
+              ide-draggable="false"
+              data-nodepath="rootview.0.1.0.1.0.0.0.1.0.0"
+            >
+              <EmptySlot
+                data-emptyslot-nodepath="rootview.0.1.0.1.0.0.0.1.0.0"
+                key="4"
+              />
+            </div>
+          ))()}
+          description={(() => (
+            <div
+              ide-draggable="false"
+              data-nodepath="rootview.0.1.0.1.0.0.0.1.0.1"
+            >
+              <EmptySlot
+                data-emptyslot-nodepath="rootview.0.1.0.1.0.0.0.1.0.1"
+                key="5"
+              />
+            </div>
+          ))()}
+          extra={(() => (
+            <div
+              ide-draggable="false"
+              data-nodepath="rootview.0.1.0.1.0.0.0.1.0.2"
+            >
+              <EmptySlot
+                data-emptyslot-nodepath="rootview.0.1.0.1.0.0.0.1.0.2"
+                key="6"
+              />
+            </div>
+          ))()}
+        />
+        <FormItem
+          data-nodepath="rootview.0.1.0.1.0.0.0.1.1"
+          ide-iscontainer="true"
+          name="userName"
+          rules="[{validate: 'filled',message: `表单项不得为空`,trigger: 'input+blur',required: true}]"
+          key="component-27"
+          label={(() => (
+            <div
+              ide-draggable="false"
+              data-nodepath="rootview.0.1.0.1.0.0.0.1.1.0"
+            >
+              <Text
+                data-nodepath="rootview.0.1.0.1.0.0.0.1.1.0.0"
+                children="用户
+"
+                key="component-28"
+                data-editable="true"
+              />
+            </div>
+          ))()}
+        />
+        <FormItem
+          data-nodepath="rootview.0.1.0.1.0.0.0.1.2"
+          ide-iscontainer="true"
+          name="passWord"
+          rules="[{validate: 'filled',message: `表单项不得为空`,trigger: 'input+blur',required: true}]"
+          key="component-29"
+          label={(() => (
+            <div
+              ide-draggable="false"
+              data-nodepath="rootview.0.1.0.1.0.0.0.1.2.0"
+            >
+              <Text
+                data-nodepath="rootview.0.1.0.1.0.0.0.1.2.0.0"
+                children="密码"
+                key="component-30"
+                data-editable="true"
+              />
+            </div>
+          ))()}
+        />
+      </Form>
     );
   },
 };
