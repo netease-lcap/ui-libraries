@@ -53,6 +53,7 @@ export default (options: ViteLcapPluginOptions = {}) => {
       group: c.group,
       title: c.alias,
       name: c.name,
+      show: c.show,
     }));
   }
 
