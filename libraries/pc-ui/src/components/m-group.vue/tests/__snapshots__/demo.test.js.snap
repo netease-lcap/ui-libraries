@@ -10,7 +10,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
           <div class="root">
             <div class="head">
               <div class="title">洗具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -23,7 +22,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
           <div class="root">
             <div class="head">
               <div class="title">杯具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -36,7 +34,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
           <div class="root">
             <div class="head">
               <div class="title">餐具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -47,7 +44,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
             </transition-stub>
           </div>
         </div>
-        <!---->
       </div>
       <div class="root" vusion-slot-name="default">
         <p>开启折叠功能</p>
@@ -55,7 +51,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
           <div class="root">
             <div class="head">
               <div class="title">洗具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -68,7 +63,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
           <div class="root" disabled="disabled" expanded="true">
             <div class="head">
               <div class="title">杯具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -81,7 +75,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
           <div class="root">
             <div class="head">
               <div class="title">餐具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -92,7 +85,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
             </transition-stub>
           </div>
         </div>
-        <!---->
       </div>
       <div class="root" vusion-slot-name="default">
         <p>手风琴模式</p>
@@ -100,7 +92,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
           <div class="root">
             <div class="head">
               <div class="title">洗具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -113,7 +104,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
           <div class="root">
             <div class="head">
               <div class="title">杯具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -126,7 +116,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
           <div class="root">
             <div class="head">
               <div class="title">餐具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -137,7 +126,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
             </transition-stub>
           </div>
         </div>
-        <!---->
       </div>
     </div>
     <div class="root">
@@ -147,7 +135,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
           <div class="root">
             <div class="head">
               <div class="title">洗具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -160,7 +147,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
           <div class="root">
             <div class="head">
               <div class="title">杯具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -171,7 +157,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
             </transition-stub>
           </div>
         </div>
-        <!---->
       </div>
       <div class="root" vusion-slot-name="default">
         <p>触发方式：仅点击小箭头时触发</p>
@@ -179,7 +164,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
           <div class="root">
             <div class="head">
               <div class="title">洗具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -192,7 +176,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
           <div class="root">
             <div class="head">
               <div class="title">杯具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -203,7 +186,6 @@ exports[`m-group.vue > Demo-分组 1`] = `
             </transition-stub>
           </div>
         </div>
-        <!---->
       </div>
     </div>
   </div>
@@ -220,7 +202,6 @@ exports[`m-group.vue > Demo-分组 2`] = `
           <div class="root">
             <div class="head">
               <div class="title">洗具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -233,7 +214,6 @@ exports[`m-group.vue > Demo-分组 2`] = `
           <div class="root">
             <div class="head">
               <div class="title">杯具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -246,7 +226,6 @@ exports[`m-group.vue > Demo-分组 2`] = `
           <div class="root">
             <div class="head">
               <div class="title">餐具</div>
-              <!---->
               <span class="extra"></span>
             </div>
             <transition-stub>
@@ -257,7 +236,6 @@ exports[`m-group.vue > Demo-分组 2`] = `
             </transition-stub>
           </div>
         </div>
-        <!---->
       </div>
     </div>
   </div>

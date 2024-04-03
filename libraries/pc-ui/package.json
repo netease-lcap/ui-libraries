@@ -120,6 +120,7 @@
   "jestSerializer": {
     "attributesToClear": [
       "width"
-    ]
+    ],
+    "removeComments": true
   }
 }

@@ -4,9 +4,7 @@ exports[`u-checkbox.vue > Demo-Basic 1`] = `
 <div>
   <label class="root" tabindex="0">
     <span class="box" status="false"></span>
-    <span vusion-slot-name="item">Checkbox
-      <!---->
-    </span>
+    <span vusion-slot-name="item">Checkbox</span>
   </label>
 </div>
 `;
@@ -16,18 +14,12 @@ exports[`u-checkbox.vue > Demo-Disabled 1`] = `
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <label class="root" readonly="readonly" tabindex="0">
       <span class="box" status="true"></span>
-      <span vusion-slot-name="item">Readonly
-        <!---->
-      </span>
+      <span vusion-slot-name="item">Readonly</span>
     </label>
     <label class="root" disabled="disabled" tabindex="0">
       <span class="box" disabled="disabled" status="true"></span>
-      <span vusion-slot-name="item">Disabled
-        <!---->
-      </span>
+      <span vusion-slot-name="item">Disabled</span>
     </label>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -36,9 +28,7 @@ exports[`u-checkbox.vue > Demo-Indeterminate 1`] = `
 <div>
   <label class="root" tabindex="0">
     <span class="box" status="null"></span>
-    <span vusion-slot-name="item">Indeterminate
-      <!---->
-    </span>
+    <span vusion-slot-name="item">Indeterminate</span>
   </label>
 </div>
 `;
@@ -46,8 +36,6 @@ exports[`u-checkbox.vue > Demo-Indeterminate 1`] = `
 exports[`u-checkbox.vue > Demo-v-model 1`] = `
 <label class="root" tabindex="0">
   <span class="box" status="true"></span>
-  <span vusion-slot-name="item">true
-    <!---->
-  </span>
+  <span vusion-slot-name="item">true</span>
 </label>
 `;
