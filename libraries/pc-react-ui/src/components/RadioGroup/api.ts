@@ -4,6 +4,7 @@ namespace nasl.ui {
   @Component({
     title: '单选项',
     description: '多项中选择一项',
+    icon: 'radios',
     group: 'Form',
   })
   export class Radio extends ViewComponent {
