@@ -91,11 +91,13 @@ export function useHandleMenuSlot(props) {
         const childrenProps = _.isEmpty(selfChildren.children) ? {} : selfChildren;
         const onClickPorps = child.props.onClick;
         const icon = _.isNil(child.props.icon) ? {} : { icon: <Icon name={child.props.icon} /> };
+        const label = child.props.labelIsSlot ? child.props.labelSlot : child.props.label;
         return {
           key: child.props?.path,
           ...child.props,
           ...childrenProps,
           ...icon,
+          label,
           onClick: _.wrap(onClickPorps, (fn, arg) => {
             _.attempt(fn, arg);
             if (_.isValidLink(arg.key)) {

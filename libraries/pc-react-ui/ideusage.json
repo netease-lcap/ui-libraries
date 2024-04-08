@@ -687,6 +687,9 @@
       "idetype": "container",
       "structured": true,
       "parentAccept": "target.tag === 'Menu'",
+      "displaySlotConditions": {
+        "labelSlot": "this.getAttribute('labelIsSlot').value === true"
+      },
       "actions": {
         "click": {
           "status": "this.getParent().getParent().setCacheStatus('defaultOpenKeys', '\"' + this.getAttribute('path')?.value + '\"') ",

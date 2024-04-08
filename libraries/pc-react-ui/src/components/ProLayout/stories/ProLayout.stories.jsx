@@ -79,18 +79,10 @@ export const 默认 = {
             <Dropdown
               menuItem={(
                 <>
-                  <MenuItem
-                    label={(
-                      <Text>导航项目</Text>
-                      )}
-                  />
-                  <MenuItem
-                    label={(
-                      <Text>导航项目2</Text>
-                      )}
-                  />
+                  <MenuItem label={<Text>导航项目</Text>} />
+                  <MenuItem label={<Text>导航项目2</Text>} />
                 </>
-                )}
+              )}
             />
           )}
           menuSlot={(
@@ -110,6 +102,22 @@ export const 默认 = {
                 />
               </MenuItem>
               <MenuItem label="导航项" path="/2" />
+              <MenuItem
+                data-nodepath="rootview.0.0.1.1"
+                ide-iscontainer="true"
+                label="导航项"
+                path="/2"
+                labelIsSlot
+                key="component-8"
+                labelSlot={(() => (
+                  <div
+                    ide-draggable="false"
+                    data-nodepath="rootview.0.0.1.1.0"
+                  >
+                    1234
+                  </div>
+                ))()}
+              />
             </>
           )}
         />

@@ -24,12 +24,3 @@ export function useHandleRouter(props) {
     }),
   };
 }
-export function useHandleLabel(props) {
-  const labelIsSlot = props.get('labelIsSlot');
-  const labelProps = props.get('label');
-  const labelSlot = props.get('labelSlot');
-  const label = labelIsSlot ? labelSlot : labelProps;
-  return {
-    label,
-  };
-}
