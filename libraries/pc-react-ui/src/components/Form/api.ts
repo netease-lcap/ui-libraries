@@ -41,7 +41,7 @@ namespace nasl.ui {
         title: 'undefined',
         description: '表单项的 name',
       })
-      name: nasl.core.String,
+      name: any,
       @Param({
         title: 'undefined',
         description: '表单值',
@@ -58,7 +58,7 @@ namespace nasl.ui {
         title: 'undefined',
         description: '表单项的 name',
       })
-      values: Record<string, string>,
+      values:nasl.core.Any
     ): any {}
     // @Method({
     //   title: 'undefined',
