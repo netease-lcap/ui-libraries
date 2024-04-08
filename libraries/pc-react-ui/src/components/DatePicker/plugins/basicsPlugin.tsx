@@ -15,7 +15,7 @@ export function useHandleValue(props) {
   const valueProps = props.get('value');
   const onChangeProps = props.get('onChange');
   const showTime = props.get('showTime');
-  const valueFormat = _.isNil(valueProps) ? valueProps : dayjs(valueProps);
+  const valueFormat = dayjs(valueProps).isValid() ? dayjs(valueProps) : undefined;
   const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueFormat }));
   return {
     value,

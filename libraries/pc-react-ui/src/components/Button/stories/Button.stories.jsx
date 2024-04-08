@@ -39,15 +39,15 @@ export const Primary = {
     asyncLoading: true,
     // icon: 'AimOutli2ned',
     onContextMenu: (e) => console.log(1),
-    icon: '//minio-api.codewave-test.163yun.com/lowcode-static/user/defaulttenant/1709717732938_%E5%A4%AA%E9%98%B3.svg',
-    children: '123',
+    // icon: '//minio-api.codewave-test.163yun.com/lowcode-static/user/defaulttenant/1709717732938_%E5%A4%AA%E9%98%B3.svg',
+    icon: 'RiCornerLeftUpFill',
     // onClick: () => new Promise((res) => {
     //   setTimeout(() => {
     //     res();
     //     alert('点击了按钮');
     //   }, 1000);
     // }),
-    mySize: 'small',
+    // mySize: 'small',
     // appType: '',
     // usePlugin: ['lowCode'],
     // size: 'small',
@@ -91,7 +91,11 @@ export const Small = {
     return (
       <div>
         <svg width="100" height="100">
-          <image xlinkHref="http://minio-api.react01-lowcode.com/lowcode-static/user/defaulttenant/1709200203232_account-book.svg" width="100" height="100" />
+          <image
+            xlinkHref="http://minio-api.react01-lowcode.com/lowcode-static/user/defaulttenant/1709200203232_account-book.svg"
+            width="100"
+            height="100"
+          />
         </svg>
       </div>
     );

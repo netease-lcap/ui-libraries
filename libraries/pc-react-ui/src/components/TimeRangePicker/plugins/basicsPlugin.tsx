@@ -59,8 +59,8 @@ function useHandleValueToStartAndEnd(props) {
     _.attempt(onStartDateChange, _.get(dateString, '0'));
     _.attempt(onEndDateChange, _.get(dateString, '1'));
   });
-  const startDate = _.isNil(startDateProps) ? undefined : dayjs(startDateProps);
-  const endDate = _.isNil(endDateProps) ? undefined : dayjs(endDateProps);
+  const startDate = dayjs(startDateProps).isValid() ? dayjs(startDateProps) : undefined;
+  const endDate = dayjs(endDateProps).isValid() ? dayjs(endDateProps) : undefined;
   const defaultStartDate = _.isNil(defaultStartDateProps) ? undefined : dayjs(defaultStartDateProps);
   const defaultEndDate = _.isNil(defaultEndDateProps) ? undefined : dayjs(defaultEndDateProps);
   const defaultValue = _.isEmpty([defaultStartDate, defaultEndDate].filter(Boolean)) ? undefined : [defaultStartDate, defaultEndDate];
@@ -70,18 +70,5 @@ function useHandleValueToStartAndEnd(props) {
     value,
     onChange,
     allowEmpty: [startEmpty, endEmpty],
-  };
-}
-
-export function useHandleFormItemProps(props) {
-  const BaseComponent = props.get('render');
-  const render = React.useCallback((selfProps) => {
-    const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
-    const colProps = _.pick(selfProps, COLPROPSFIELDS);
-    const fieldProps = _.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]);
-    return <BaseComponent {...{ ...formItemProps, fieldProps, colProps }} />;
-  }, [BaseComponent]);
-  return {
-    render,
   };
 }

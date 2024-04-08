@@ -38,7 +38,7 @@ namespace nasl.ui {
       description: '左上角 logo 的 url',
       docDescription: '左上角 logo 的 url',
     })
-    src: nasl.core.String;
+    logo: nasl.core.String;
 
     @Prop({
       group: '主要属性',

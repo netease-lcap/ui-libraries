@@ -23,7 +23,16 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <Text {...args} />,
+  render: (args) => {
+    const [value, setValue] = React.useState(true);
+    React.useEffect(() => {
+      setTimeout(() => {
+        setValue(false);
+        console.log(value, 'value');
+      }, 3000);
+    }, []);
+    return <Text {...args} copyable={value} />;
+  },
   args: {
     color: 'magenta',
     children: '123',

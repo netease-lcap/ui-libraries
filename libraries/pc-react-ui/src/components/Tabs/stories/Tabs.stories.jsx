@@ -39,25 +39,84 @@ export const 异步函数 = {
         >
           1234
         </button>
-        <Tabs ref={ref} activeKey={value} onActiveKeyChange={setValue}>
-          {/* <TabPanePane key"1" ></TabPanePane> */}
-          <TabPane key="2" tab="选项卡2" data-nodepath="12" />
-          <TabPane key={3} tab="选项卡3" data-nodepath="123" />
-          <TabPane key="1" tab="选项卡1" data-nodepath="1234" />
-        </Tabs>
+        <Tabs
+          ref={ref}
+          activeKey={value}
+          dataSource={args.dataSource}
+          textField="entityForSel.name"
+          valueField="entityForSel.id"
+          onActiveKeyChange={setValue}
+        />
       </div>
     );
   },
   args: {
-    // dataSource: () => new Promise((res) => {
-    //   setTimeout(() => {
-    //     res([
-    //       { label: `Option 1${Math.random()}`, key: '1' },
-    //       { label: 'Option 2', key: '2' },
-    //       { label: 'Option 3', key: '3' },
-    //     ]);
-    //   }, 3000);
-    // }),
+    dataSource: () => new Promise((res) => {
+      setTimeout(() => {
+        res([
+          {
+            entityForSel: {
+              id: 1,
+              createdTime: null,
+              updatedTime: null,
+              createdBy: null,
+              updatedBy: null,
+              fid: 0,
+              name: '测试1',
+              sonid: [],
+            },
+          },
+          {
+            entityForSel: {
+              id: 2,
+              createdTime: null,
+              updatedTime: null,
+              createdBy: null,
+              updatedBy: null,
+              fid: 0,
+              name: '测试2',
+              sonid: [],
+            },
+          },
+          {
+            entityForSel: {
+              id: 3,
+              createdTime: null,
+              updatedTime: null,
+              createdBy: null,
+              updatedBy: null,
+              fid: 1,
+              name: '测试1.1',
+              sonid: [],
+            },
+          },
+          {
+            entityForSel: {
+              id: 4,
+              createdTime: null,
+              updatedTime: null,
+              createdBy: null,
+              updatedBy: null,
+              fid: 3,
+              name: '测试1.1.1',
+              sonid: [],
+            },
+          },
+          {
+            entityForSel: {
+              id: 5,
+              createdTime: null,
+              updatedTime: null,
+              createdBy: null,
+              updatedBy: null,
+              fid: 2,
+              name: '测试2.1',
+              sonid: [],
+            },
+          },
+        ]);
+      }, 3000);
+    }),
   },
 };
 export const 同步函数 = {
@@ -74,7 +133,11 @@ export const 同步函数 = {
 export const 数组 = {
   render: (args) => {
     return (
-      <Tabs data-nodepath="rootview.11" ide-iscontainer="true" defaultActiveKey="2">
+      <Tabs
+        data-nodepath="rootview.11"
+        ide-iscontainer="true"
+        defaultActiveKey="2"
+      >
         <TabPane
           ide-iscontainer="true"
           key={1}
