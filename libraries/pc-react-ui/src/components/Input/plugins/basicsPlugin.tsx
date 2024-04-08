@@ -2,11 +2,6 @@ import React from 'react';
 import _ from 'lodash';
 import classnames from 'classnames';
 import { Icon, Col, FormItem } from '@/index';
-import FormContext, { QueryFormContext } from '@/components/Form/form-context';
-import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
-import { $deletePropsList } from '@/plugins/constants';
-import { COLPROPSFIELDS } from '@/components/Row/constants';
-import { RouterContext } from '@/components/Router/router-context';
 
 import style from '../index.module.less';
 

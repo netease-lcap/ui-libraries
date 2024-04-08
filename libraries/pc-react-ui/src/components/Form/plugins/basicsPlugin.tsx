@@ -34,7 +34,7 @@ export function useHandleRef(props) {
     ref: _.assign(ref, {
       validate, getValues: form.getFieldsValue, setValue: form.setFieldValue, setValues: form.setFieldsValue,
     }),
-    // grid: true,
+    grid: true,
   };
 }
 export function useHandleGutter(props) {
