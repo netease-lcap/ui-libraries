@@ -3,9 +3,9 @@
     tabindex="0" @keydown.space.prevent @keyup.space.prevent="check()"
     @focus="onFocus" @blur="onBlur" v-on="listeners"
     :readonly="readonly"
-    :preview="preview"
+    :preview="isPreview"
     :show-title="showTitle">
-    <span v-if="!preview" :class="$style.box" :status="status" :disabled="currentDisabled"></span>
+    <span v-if="!isPreview" :class="$style.box" :status="status" :disabled="currentDisabled"></span>
     <slot></slot>
     <span v-if="showTitle" vusion-slot-name="item">
         <slot name="item" :item="node">{{ text }}</slot>
@@ -63,7 +63,7 @@ export default {
             return 'false';
         },
         showTitle() { 
-            return this.preview ? this.status === 'true' : true;
+            return this.isPreview ? this.status === 'true' : true;
         }
     },
     watch: {
@@ -85,7 +85,7 @@ export default {
             this.$emit('blur', e);
         },
         check() {
-            if (this.readonly || this.disabled || this.preview)
+            if (this.readonly || this.disabled || this.isPreview)
                 return;
             const oldValue = this.currentValue;
             const value = !this.currentValue;
