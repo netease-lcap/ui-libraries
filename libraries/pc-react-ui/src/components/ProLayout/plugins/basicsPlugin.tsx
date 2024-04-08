@@ -8,9 +8,9 @@ import F from 'futil';
 
 import { ConfigProvider } from 'antd';
 import { useControllableValue } from 'ahooks';
+import { Icon, MenuItem } from '@/index';
 import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
-import { MenuItem } from '@/index';
 import { RouterContext } from '@/components/Router';
 
 // const { Header, Content, Footer } = Layout;
@@ -90,10 +90,12 @@ export function useHandleMenuSlot(props) {
         const selfChildren = _.isNil(child.props.children) ? {} : { children: childToJson(child.props.children) };
         const childrenProps = _.isEmpty(selfChildren.children) ? {} : selfChildren;
         const onClickPorps = child.props.onClick;
+        const icon = _.isNil(child.props.icon) ? {} : { icon: <Icon name={child.props.icon} /> };
         return {
           key: child.props?.path,
           ...child.props,
           ...childrenProps,
+          ...icon,
           onClick: _.wrap(onClickPorps, (fn, arg) => {
             _.attempt(fn, arg);
             if (_.isValidLink(arg.key)) {

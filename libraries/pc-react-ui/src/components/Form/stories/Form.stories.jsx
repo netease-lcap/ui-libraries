@@ -59,6 +59,7 @@ export const 默认 = {
     }
     return (
       <Form
+      ref={ref}
         data-nodepath="rootview.0.1.0.1.0.0.0.1"
         ide-iscontainer="true"
         submitter={false}
@@ -130,6 +131,9 @@ export const 默认 = {
 export const 默认1 = {
   render: () => {
     const ref = React.useRef({});
+    React.useEffect(() => {
+      console.log(ref, 'ref----');
+    }, []);
     return (
       <div>
         <Form ref={ref}>
