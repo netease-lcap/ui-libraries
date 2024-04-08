@@ -4,6 +4,7 @@ import genThemeConfig from './gen-theme-config';
 import { buildTheme as viteBuildTheme } from './vite-build-theme';
 import logger from '../utils/logger';
 import genNaslUIConfig from './gen-nasl-ui';
+import genNaslExtensionConfig from './gen-nasl-extension-config';
 
 export interface LcapThemeOptions {
   themeVarCssPath?: string;
@@ -95,10 +96,31 @@ export function buildI18N(options: LcapBuildOptions) {
   fs.writeJSONSync(destFile, data, { spaces: 2 });
 }
 
+export async function buildNaslExtension(options: LcapBuildOptions) {
+  if (options.type !== 'extension') {
+    return;
+  }
+
+  logger.start('开始生成 nasl.extension.json...');
+  const naslExtensionConfig = await genNaslExtensionConfig({
+    assetsPublicPath: options.assetsPublicPath,
+    rootPath: options.rootPath,
+    framework: options.framework,
+  });
+  logger.success('生成 nasl.extension.json 成功！');
+  fs.writeJSONSync(`${options.rootPath}/nasl.extension.json`, naslExtensionConfig, { spaces: 2 });
+}
+
 export async function lcapBuild(options: LcapBuildOptions) {
   if (!options.destDir) {
     options.destDir = 'dist-theme';
   }
+
+  if (options.type === 'extension') {
+    await buildNaslExtension(options);
+    return;
+  }
+
   buildNaslUI(options);
   await buildTheme(options);
   buildI18N(options);
