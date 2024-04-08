@@ -31,6 +31,5 @@ export function useHandleStyle(props) {
   const className = props.get('className');
   return {
     className: classnames(style.inputNumber, className),
-    placeholder: '请输入数字',
   };
 }

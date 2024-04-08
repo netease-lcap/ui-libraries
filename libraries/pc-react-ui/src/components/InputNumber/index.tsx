@@ -18,3 +18,7 @@ export const InputNumber = registerComponet<InputNumberProps, pluginType<InputNu
   { plugin: basicsPlugin, displayName: 'InputNumber', mapProps },
 
 );
+InputNumber.defaultProps = {
+  placeholder: '请输入数字',
+
+};
