@@ -101,7 +101,6 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     };
   }, [componentRef, baseRef]);
   // mutableProps.setState({ ref });
-  console.log(excludeProps, 'excludeProps');
   return (
     <ConfigProvider locale={zhCN}>
       <Component

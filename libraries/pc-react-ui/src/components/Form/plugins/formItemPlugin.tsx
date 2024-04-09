@@ -59,7 +59,6 @@ export function useHandleFormItemProps(props) {
     const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
     const colProps = _.pick(selfProps, COLPROPSFIELDS);
     const fieldProps = _.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]);
-    console.log(fieldProps, 'fieldProps');
     return <BaseComponent {...{ ...formItemProps, fieldProps, colProps }} />;
   }, [BaseComponent]);
   return {

@@ -320,7 +320,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    order: nasl.core.Boolean = true;
+    timeOrder: nasl.core.Boolean = true;
     // @Prop({
     //   group: '状态属性',
     //   title: '只读',

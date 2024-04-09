@@ -19,6 +19,12 @@ export function useHandleLocale() {
   };
 }
 
+export function useHandleTimeOrder(props) {
+  const timeOrder = props.get('timeOrder');
+  return {
+    order: timeOrder,
+  };
+}
 export function useHandleStyle(props) {
   const className = props.get('className');
   return {
