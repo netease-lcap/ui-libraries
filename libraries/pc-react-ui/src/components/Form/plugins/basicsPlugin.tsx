@@ -32,7 +32,11 @@ export function useHandleRef(props) {
   return {
     form,
     ref: _.assign(ref, {
-      validate, getValues: form.getFieldsValue, setValue: form.setFieldValue, setValues: form.setFieldsValue,
+      validate,
+      getValues: form.getFieldsValue,
+      setValue: form.setFieldValue,
+      setValues: form.setFieldsValue,
+      resetForm: form.resetFields,
     }),
     grid: true,
   };
