@@ -60,6 +60,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '是否可编辑',
+      bindHide: true,
       setter: {
         concept: 'SwitchSetter',
       },
@@ -69,6 +70,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '是否可拷贝，为对象时可进行各种自定义',
+      bindHide: true,
       setter: {
         concept: 'SwitchSetter',
       },
@@ -93,6 +95,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      bindHide: true,
     })
     code: nasl.core.Boolean;
 
@@ -102,12 +105,14 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      bindHide: true,
     })
     delete: nasl.core.Boolean;
 
     @Prop({
       group: '样式属性',
       title: '禁用文本',
+      bindHide: true,
       setter: {
         concept: 'SwitchSetter',
       },
@@ -117,6 +122,7 @@ namespace nasl.ui {
     @Prop({
       group: '样式属性',
       title: '添加键盘样式',
+      bindHide: true,
       setter: {
         concept: 'SwitchSetter',
       },
@@ -126,6 +132,7 @@ namespace nasl.ui {
     @Prop({
       group: '样式属性',
       title: '添加标记样式',
+      bindHide: true,
       setter: {
         concept: 'SwitchSetter',
       },
@@ -135,6 +142,7 @@ namespace nasl.ui {
     @Prop({
       group: '样式属性',
       title: '是否加粗',
+      bindHide: true,
       setter: {
         concept: 'SwitchSetter',
       },
@@ -144,6 +152,7 @@ namespace nasl.ui {
     @Prop({
       group: '样式属性',
       title: '是否斜体',
+      bindHide: true,
       setter: {
         concept: 'SwitchSetter',
       },
@@ -153,6 +162,7 @@ namespace nasl.ui {
     @Prop({
       group: '样式属性',
       title: '添加下划线样式',
+      bindHide: true,
       setter: {
         concept: 'SwitchSetter',
       },

@@ -31,7 +31,7 @@ export const 默认 = {
         console.log(value, 'value');
       }, 3000);
     }, []);
-    return <Text {...args} copyable={value} />;
+    return <Text key={value} {...args} copyable={value} />;
   },
   args: {
     color: 'magenta',
