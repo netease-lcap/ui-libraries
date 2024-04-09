@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import dayjs from 'dayjs';
 
 function filterUnderfinedValue(object: Record<string, string>) {
   return Object.fromEntries(Object.entries(object).filter(([, value]) => !_.isUndefined(value)));
@@ -9,6 +10,10 @@ const attempt = _.wrap(selfAttempt, (fn, ...arg) => {
   if (_.isError(result)) console.log(result);
   return result;
 });
+
+function isValidTime(time) {
+  return !_.isNil(time) && dayjs(time).isValid();
+}
 
 function isValidLink(link: string) {
   const pattern = /^(http(s)?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/;
@@ -24,7 +29,7 @@ function stringToAscii(str) {
 
 // 示例用法
 _.mixin({
-  filterUnderfinedValue, attempt, isValidLink, stringToAscii,
+  filterUnderfinedValue, attempt, isValidLink, stringToAscii, isValidTime,
 });
 // _.mixin
 declare module 'lodash' {
@@ -33,5 +38,6 @@ declare module 'lodash' {
     attempt: typeof _.attempt
     isValidLink: typeof isValidLink
     stringToAscii: typeof stringToAscii
+    isValidTime: typeof isValidTime
   }
 }

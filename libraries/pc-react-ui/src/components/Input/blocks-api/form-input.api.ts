@@ -71,7 +71,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    allowClear: nasl.core.Boolean;
+    allowClear: nasl.core.Boolean = true;
 
     @Prop({
       group: '状态属性',
@@ -99,7 +99,10 @@ namespace nasl.ui {
       title: '改变后',
       description: '值变化时触发。（注意：与原生事件不同）',
     })
-    onChange: (event: { value: nasl.core.String; oldValue: nasl.core.String }) => any;
+    onChange: (event: {
+      value: nasl.core.String;
+      oldValue: nasl.core.String;
+    }) => any;
 
     @Event({
       title: '获得焦点',

@@ -20,5 +20,5 @@ export const InputNumber = registerComponet<InputNumberProps, pluginType<InputNu
 );
 InputNumber.defaultProps = {
   placeholder: '请输入数字',
-
+  min: Number.MIN_SAFE_INTEGER,
 };

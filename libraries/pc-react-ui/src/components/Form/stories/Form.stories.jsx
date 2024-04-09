@@ -5,6 +5,7 @@ import {
   ProForm,
   ProFormText,
   ProFormCascader,
+  ProFormDateRangePicker,
   QueryFilter,
 } from '@ant-design/pro-components';
 import {
@@ -17,6 +18,9 @@ import {
   Select,
   InputNumber,
   CheckboxGroup,
+  // Date
+  SelectOption,
+  DateRangePicker,
   Checkbox,
   DatePicker,
   FormSelect,
@@ -59,7 +63,7 @@ export const 默认 = {
     }
     return (
       <Form
-      ref={ref}
+        ref={ref}
         data-nodepath="rootview.0.1.0.1.0.0.0.1"
         ide-iscontainer="true"
         submitter={false}
@@ -136,26 +140,27 @@ export const 默认1 = {
     }, []);
     return (
       <div>
-        <Form ref={ref}>
-          <Select labelIsSlot={false} />
-          <FormItem label={<Text children="账号" />} name="username">
-            <Input />
-          </FormItem>
-          <FormItem required label={<Text children="密码" />} name="password">
-            <Input
-              onChange={() => {
-                console.log(1234);
-              }}
-            />
-          </FormItem>
-          <FormItem>
-            <Button
-              onClick={() => console.log(ref.current.validate())}
-              type="primary"
-              htmlType="submit"
-              children="提交"
-            />
-          </FormItem>
+        <Form
+          labelWidth="140"
+          ref={ref}
+          submitter={{
+            onSubmit() {
+              console.log(ref.current.getValues());
+
+              console.log(111);
+            },
+          }}
+        >
+          <Input labelText="表单输入框" name="name" />
+          <Select labelText="表单选择器" name="age" />
+          <TextArea labelText="表单多行输入" />
+          <DatePicker labelText="表单日期选择" name="time2" />
+          <DateRangePicker
+            labelText="表单日期范围选择"
+            name="time"
+            format={(value) => value.format('YYYY-MM-DD')}
+          />
+          <ProFormDateRangePicker name="time2" />
         </Form>
       </div>
     );
@@ -196,6 +201,35 @@ export const Pro表单 = {
         submitter={false}
         key="component-25"
       >
+        <Select
+          labelText="1234"
+          data-nodepath="rootview.0.0.0.0.1"
+          ide-iscontainer="true"
+          allowClear
+          placeholder="请输入property1"
+          key="component-61"
+          defaultOpen={false}
+        >
+          <SelectOption
+            data-nodepath="rootview.0.0.0.0.1.0"
+            ide-iscontainer="true"
+            value
+            label="是"
+            key="component-62"
+          >
+            <EmptySlot key="16" />
+          </SelectOption>
+          <SelectOption
+            data-nodepath="rootview.0.0.0.0.1.1"
+            ide-iscontainer="true"
+            value={false}
+            label="否"
+            key="component-63"
+          >
+            <EmptySlot key="17" />
+          </SelectOption>
+        </Select>
+        );
         <Input
           data-nodepath="rootview.0.1.0.1.0.0.0.1.0"
           ide-iscontainer="true"

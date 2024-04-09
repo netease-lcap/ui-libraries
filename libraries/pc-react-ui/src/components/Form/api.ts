@@ -58,7 +58,19 @@ namespace nasl.ui {
         title: 'undefined',
         description: '表单项的 name',
       })
-      values:nasl.core.Any
+      values: nasl.core.Any,
+    ): any {}
+
+    @Method({
+      title: 'undefined',
+      description: '重置表单。',
+    })
+    resetForm(
+      @Param({
+        title: 'undefined',
+        description: '表单项的 name',
+      })
+      names?: nasl.collection.List<any>,
     ): any {}
     // @Method({
     //   title: 'undefined',

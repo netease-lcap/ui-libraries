@@ -293,7 +293,7 @@ namespace nasl.ui {
   export class SelectOptionOptions<T, V> extends ViewComponentOptions {
     @Prop({
       title: '选项文本',
-      description: '此项的显示值',
+      description: '选项文本',
     })
     label: nasl.core.String;
 

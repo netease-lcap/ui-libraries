@@ -111,11 +111,13 @@ namespace nasl.ui {
     // })
     // icon: '' | 'success' | 'warning' | 'error' = '';
 
-    @Prop({
+    @Prop<ModalOptions, 'maskClosable'>({
       group: '交互属性',
       title: '点击遮罩关闭',
       description: '点击遮罩关闭弹窗',
-      docDescription: '开启时，点击遮罩则自动关闭弹窗，若关闭，需要手动设置关闭事件，默认关闭',
+      docDescription:
+        '开启时，点击遮罩则自动关闭弹窗，若关闭，需要手动设置关闭事件，默认关闭',
+      if: (_) => _.mask === true,
       setter: {
         concept: 'SwitchSetter',
       },

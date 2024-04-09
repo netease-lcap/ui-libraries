@@ -20,7 +20,7 @@ export function useHandleLocale() {
 export function useHandleValue(props) {
   const valueProps = props.get('value');
   const onChangeProps = props.get('onChange', () => { });
-  const valueFormat = _.isNil(valueProps) ? valueProps : dayjs(valueProps, 'HH:mm:ss');
+  const valueFormat = _.isValidTime(valueProps) ? dayjs(valueProps, 'HH:mm:ss') : undefined;
   const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueFormat }));
   return {
     value,
