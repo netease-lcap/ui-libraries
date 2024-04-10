@@ -49,7 +49,7 @@ export default async function getNaslExtensionConfig(rootPath) {
                 functionCode = functionCode.substring(0, endIndex);
               }
 
-              apiFuncCodes.push(`declare ${functionCode};`);
+              apiFuncCodes.push(`  export ${functionCode};`);
             },
           });
         }
@@ -59,7 +59,7 @@ export default async function getNaslExtensionConfig(rootPath) {
 
   fs.writeFileSync(`${logicDir}/api.ts`, [
     '/// <reference types="@nasl/types" />',
-    `namespace extensions.${snakeCase(pkgInfo.name)}.logics {`,
+    `declare namespace extensions.${snakeCase(pkgInfo.name)}.logics {`,
     apiFuncCodes,
     '}',
   ].flat().join('\n\n'));
