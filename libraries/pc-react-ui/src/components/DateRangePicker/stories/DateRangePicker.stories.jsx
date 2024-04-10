@@ -38,8 +38,11 @@ export const 默认 = {
     return (
       <DateRangePicker
         {...args}
-        // value={value}
-        // onChange={setValue}
+        value={value}
+        onChange={(e)=>{
+          console.log(e)
+          setValue(e)
+        }}
         data-nodepath="123433"
       />
     );

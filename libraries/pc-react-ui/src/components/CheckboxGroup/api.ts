@@ -233,7 +233,7 @@ namespace nasl.ui {
     // slotCheckAll: () => Array<Text>;
 
     @Slot({
-      title: 'undefined',
+      title: '多选项',
       description: '自定义选项的结构和样式',
     })
     slotItem: (current: Current<T>) => Array<ViewComponent>;

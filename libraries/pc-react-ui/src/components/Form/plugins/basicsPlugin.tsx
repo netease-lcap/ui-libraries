@@ -4,40 +4,44 @@ import _ from 'lodash';
 import { Form } from 'antd';
 import FormContext from '../form-context';
 
-export function useHandleContext(props) {
+export function useHandleContext(props, refs) {
   const BaseComponents = props.get('render');
-  const render = React.useCallback((localProps) => {
+  const render = React.useCallback(React.forwardRef((localProps: any, ref) => {
     const colSpan = localProps.span;
-    const { width = 'md', form } = localProps;
+    const { width = 'md' } = localProps;
+    const value = React.useMemo(() => ({
+      colSpan, isForm: true, width, labelText: '表单项名称', form: refs,
+    }), [colSpan, width, refs]);
     return (
-      <FormContext.Provider value={{
-        colSpan, isForm: true, width, labelText: '表单项名称', form,
-      }}
-      >
-        <BaseComponents {...localProps}>{localProps.children}</BaseComponents>
+      <FormContext.Provider value={value}>
+        <BaseComponents {...localProps} formRef={ref}>{localProps.children}</BaseComponents>
       </FormContext.Provider>
     );
-  }, [BaseComponents]);
+  }), [BaseComponents, refs]);
   return {
     render,
   };
 }
 
-export function useHandleRef(props) {
+export function useHandleRef(props, refs) {
   const ref = props.get('ref');
-  const [myForm] = Form.useForm();
-  const form = props.get('form', myForm);
-  const validate = async () => form.validateFields().then(() => true, () => false);
-  const getvalues = () => _.mapValues(form.getFieldsValue(), (value) => value ?? null);
+  const validate = async () => refs?.current?.validateFields().then(() => true, () => false);
+  const getvalues = () => {
+    const value = _.mapValues(refs?.current?.getFieldsValue(), (valueItem) => valueItem ?? null);
+    const formValue = refs?.current?.getFieldsFormatValue(true);
+    return _.defaults(formValue, value);
+  };
+
   return {
-    form,
     ref: _.assign(ref, {
       validate,
       getValues: getvalues,
-      getValue: form.getFieldValue,
-      setValue: form.setFieldValue,
-      setValues: form.setFieldsValue,
-      resetForm: form.resetFields,
+      getValue: refs?.current?.getFieldValue,
+      setValue: (...arg) => {
+        refs?.current?.setFieldValue(...arg);
+      },
+      setValues: refs?.current?.setFieldsValue,
+      resetForm: refs?.current?.resetFields,
     }),
     grid: true,
   };

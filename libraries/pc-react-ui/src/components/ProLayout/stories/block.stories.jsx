@@ -40,7 +40,9 @@ export const 基本用法 = {
           return document.getElementById('test-pro-layout') || document.body;
         }}
         avatarSrc="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
-        avatarTitle="张梦燕"
+        avatarTitle={
+          window.$global?.userInfo?.UserName ?? 'window.$global.userInfo'
+        }
         avatarRender={(
           <Dropdown
             menuItem={(
@@ -64,44 +66,6 @@ export const 基本用法 = {
           </>
         )}
       />
-    );
-  },
-};
-export const 子页面 = {
-  render: () => {
-    return (
-      <ProLayout
-        getTargetContainer={() => {
-          return document.getElementById('test-pro-layout') || document.body;
-        }}
-        avatarSrc="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
-        avatarTitle="张梦燕"
-        avatarRender={(
-          <Dropdown
-            menuItem={(
-              <>
-                <MenuItem label={<Text>导航项目</Text>} />
-                <MenuItem label={<Text>导航项目2</Text>} />
-              </>
-            )}
-          />
-        )}
-        fixSiderbar
-        layout="mix"
-        logo="http://minio-api.codewave-dev.163yun.com/lowcode-static/packages/%40lcap/pc-react-ui%401.0.0-beta.0/dist-theme/LOGO.png"
-        title="应用名称"
-        menuDataRender={(menuData) => {
-          return [{ name: 2, label: 1, path: '/a' }];
-        }}
-        menuSlot={(
-          <>
-            <MenuItem label="导航项" path="/1" />
-            <MenuItem label="导航项" path="/2" />
-          </>
-        )}
-      >
-        <Router />
-      </ProLayout>
     );
   },
 };

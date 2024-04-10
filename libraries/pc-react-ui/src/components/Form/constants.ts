@@ -12,4 +12,5 @@ export const FORMITEMPROPSFIELDS = [
   'className',
   'labelCol',
   'labelAlign',
+  'transform',
 ];

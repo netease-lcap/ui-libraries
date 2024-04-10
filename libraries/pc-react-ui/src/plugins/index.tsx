@@ -64,6 +64,8 @@ export class Plugin {
 
 export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   const { BaseComponent, props, plugin } = myProps;
+  const defaultRef = React.useRef({});
+  ref = ref || defaultRef;
   const baseRef = React.useRef({});
   const pluginHooks = plugin.getPluginMethod();
   const mapProps = plugin.getMapProps();
@@ -83,7 +85,7 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     .set('ref', {})
     .set($deletePropsList, []);
   const expandProps = pluginHooks.reduce(
-    (expandProps, handleFun) => expandProps.merge(_.attempt(handleFun, expandProps)),
+    (expandProps, handleFun) => expandProps.merge(_.attempt(handleFun, expandProps, ref)),
     ImmutableProps,
   );
   const Component = expandProps.get('render');

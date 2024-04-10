@@ -6,7 +6,9 @@ namespace nasl.ui {
     description: '日期选择',
   })
   export class FormDateRangePicker extends ViewComponent {
-    constructor(options?: Partial<FormDateRangePickerOptions & FormItemOptions>) {
+    constructor(
+      options?: Partial<FormDateRangePickerOptions & FormItemOptions>,
+    ) {
       super();
     }
   }
@@ -16,10 +18,17 @@ namespace nasl.ui {
       group: '数据属性',
       title: '日期类型',
       description: '日期格式设置',
-      docDescription: '日期选择弹出层里的日期展示格式，支持日期、月份、季度、年份4种模式。默认日期格式',
+      docDescription:
+        '日期选择弹出层里的日期展示格式，支持日期、月份、季度、年份4种模式。默认日期格式',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '日期' }, { title: '周' }, { title: '月份' }, { title: '季度' }, { title: '年份' }],
+        options: [
+          { title: '日期' },
+          { title: '周' },
+          { title: '月份' },
+          { title: '季度' },
+          { title: '年份' },
+        ],
       },
     })
     picker: 'date' | 'week' | 'month' | 'quarter' | 'year' = 'date';
@@ -34,6 +43,28 @@ namespace nasl.ui {
       if: (_) => _.picker === 'date',
     })
     showTime: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '基础信息',
+      title: '字段名称',
+      description: '表单项名称。',
+      if: (_) => false,
+    })
+    name: nasl.core.String;
+
+    @Prop({
+      group: '基础信息',
+      title: '开始时间字段名称',
+      description: '表单项名称。',
+    })
+    startName: nasl.core.String;
+
+    @Prop({
+      group: '基础信息',
+      title: '结束时间字段名称',
+      description: '表单项名称。',
+    })
+    endName: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -84,7 +115,10 @@ namespace nasl.ui {
       title: '值变化时',
       description: '值变化时触发',
     })
-    onChange: (event: { date: nasl.core.String; time: nasl.core.String }) => any;
+    onChange: (event: {
+      date: nasl.core.String;
+      time: nasl.core.String;
+    }) => any;
 
     @Event({
       title: '弹出/隐藏时',

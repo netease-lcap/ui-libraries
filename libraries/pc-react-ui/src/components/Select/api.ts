@@ -81,7 +81,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    textField: (item: T) => nasl.core.String;
+    textField: (item: T) => any;
 
     @Prop<SelectOptions<T, V, P, M, C>, 'valueField'>({
       group: '数据属性',
@@ -92,7 +92,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    valueField: (item: T) => V;
+    valueField: (item: T) => any;
 
     // @Prop({
     //   group: '数据属性',
@@ -258,10 +258,16 @@ namespace nasl.ui {
     slotDefault: () => Array<SelectOption<T, V>>;
 
     @Event({
-      title: '按下回车时',
-      description: '按下回车时',
+      title: '按键按下时回调',
+      description: '按键按下时回调',
     })
-    onPressEnter: (event: V) => void;
+    onInputKeyDown: (event: V) => void;
+
+    @Event({
+      title: '文本框值变化时',
+      description: '文本框值变化时',
+    })
+    onSearch: (event: V) => void;
 
     @Event({
       title: '选择后',

@@ -27,11 +27,13 @@ export function useHandleRule(props) {
 export function useHandleDefaultValue(props) {
   const { form } = React.useContext(FormContext);
   React.useEffect(() => {
-    const name = props.get('name');
+    const symbolName = Symbol('name');
+    const name = props.get('name', symbolName);
     const defaultValue = props.get('defaultValue');
-    form?.setFieldValue?.(name, defaultValue ?? null);
+    form?.current?.setFieldValue?.(name, defaultValue ?? null);
   }, []);
 }
+useHandleDefaultValue.order = 5;
 export function useHandleFormWarplabel(props) {
   const { width: widthContext, isForm, colSpan } = React.useContext(FormContext);
   const deletePropsList = props.get($deletePropsList).concat('labelIsSlot', 'labelText');

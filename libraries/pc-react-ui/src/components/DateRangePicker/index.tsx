@@ -1,6 +1,6 @@
 import { DatePicker as AntdDatePicker } from 'antd';
 
-import { ProFormDateRangePicker } from '@ant-design/pro-components';
+import { ProFormDateTimeRangePicker } from '@ant-design/pro-components';
 import type { RangePickerProps } from 'antd/lib/date-picker';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
@@ -20,6 +20,10 @@ export const DateRangePicker = registerComponet<
   RangePickerProps,
   pluginType<RangePickerProps>
 >(
-  ProFormDateRangePicker,
+  ProFormDateTimeRangePicker,
   { plugin, displayName: AntdRangePicker.displayName, mapProps },
 );
+
+DateRangePicker.defaultProps = {
+  showTime: false,
+};

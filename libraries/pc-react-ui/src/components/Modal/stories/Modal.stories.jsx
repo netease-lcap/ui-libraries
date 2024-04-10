@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input } from 'antd';
-import { Modal, Flex } from '@/index';
+import { Modal, Flex, Select } from '@/index';
 // import { Add } from '../index';
 import { Button } from '@/components/Button/index';
 
@@ -33,6 +33,9 @@ export const 默认 = {
     React.useEffect(() => {
       console.log(modalRef, 'modalRef');
       console.log(flexRef, 'flexRef');
+      setTimeout(() => {
+        modalRef.current.close();
+      }, 3000);
     }, []);
     const showModal = () => {
       modalRef.current.open();
@@ -45,6 +48,7 @@ export const 默认 = {
         <Flex ref={flexRef}>
           <Input ref={modalRef} />
           <Modal title="Basic Modal" {...args} ref={modalRef} defaultOpen>
+            <Select dataSource={[{ label: 1, value: 1 }]} />
             <p>Some contents...</p>
             <p>Some contents...</p>
             <p>Some contents...</p>

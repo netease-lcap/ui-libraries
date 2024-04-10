@@ -24,6 +24,7 @@ import {
   Checkbox,
   DatePicker,
   FormSelect,
+  TimeRangePicker,
   QueryForm,
   Cascader,
 } from '@/index';
@@ -140,12 +141,18 @@ export const 默认1 = {
     }, []);
     return (
       <div>
+        <button
+          onClick={() => console.log(ref.current.getFieldsFormatValue(true))}
+        >
+          提交
+        </button>
         <Form
           labelWidth="140"
           ref={ref}
+          omitNil={false}
           submitter={{
             onSubmit() {
-              console.log(ref.current.getValues());
+              console.log(ref.current.getValues('name', 'name'));
 
               console.log(111);
             },
@@ -154,12 +161,16 @@ export const 默认1 = {
           <Input labelText="表单输入框" name="name" />
           <Select labelText="表单选择器" name="age" />
           <TextArea labelText="表单多行输入" />
-          <DatePicker labelText="表单日期选择" name="time2" />
+          <DatePicker labelText="表单日期选择" name="time2" showTime />
           <DateRangePicker
             labelText="表单日期范围选择"
-            name="time"
+            startName="startTime"
+            endName="endTime"
+            showTime={false}
+            format="YYYY-MM-DD"
           />
           <ProFormDateRangePicker name="time2" />
+          <TimeRangePicker startName="time3" endName="time4" />
         </Form>
       </div>
     );

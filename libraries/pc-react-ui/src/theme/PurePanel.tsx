@@ -97,7 +97,6 @@ const genPurePanel = <ComponentProps extends BaseProps = BaseProps>(
       minWidth: popupWidth,
     };
 
-    console.log('new PurlPanel');
     return (
       <div ref={holderRef} style={mergedStyle}>
         <Component {...mergedProps} />

@@ -22,18 +22,21 @@ export function useHandleLocale() {
 export function useHandleTimeOrder(props) {
   const BaseComponent = props.get('render');
   const render = React.useCallback((localProps) => {
-    return <BaseComponent {...localProps} order={localProps.timeOrder} />;
+    localProps.fieldProps.order = localProps.fieldProps.timeOrder ?? true;
+    return <BaseComponent {...localProps} />;
   }, [BaseComponent]);
   return {
     render,
   };
 }
+useHandleTimeOrder.order = 3;
 export function useHandleStyle(props) {
   const className = props.get('className');
   return {
     className: classnames(style.timeRangePicker, className),
   };
 }
+
 export function useHandleValue(props) {
   const valueProps = props.get('value');
   const onChangeProps = props.get('onChange');

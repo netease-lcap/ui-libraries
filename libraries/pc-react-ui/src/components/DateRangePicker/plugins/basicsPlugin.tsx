@@ -18,7 +18,28 @@ export function useHandleStyle(props) {
     className: classnames(style.dateRangePicker, className),
   };
 }
-
+export function useHandleShowTime(props) {
+  const showTime = props.get('showTime');
+  const formatProps = props.get('format');
+  const format = showTime ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD';
+  return {
+    format: formatProps ?? format,
+  };
+}
+export function useHandleName(props) {
+  const startName = props.get('startName');
+  const endName = props.get('endName');
+  const transform = (values) => {
+    return {
+      [startName]: values ? values[0] : undefined,
+      [endName]: values ? values[1] : undefined,
+    };
+  };
+  return {
+    transform,
+    name: startName + endName,
+  };
+}
 export function useHandleValue(props) {
   const valueProps = props.get('value');
   const onChangeProps = props.get('onChange');

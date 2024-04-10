@@ -36,3 +36,11 @@ export function useHandleStyle(props) {
     className: classnames(style.datePicker, className),
   };
 }
+export function useHandleShowTime(props) {
+  const showTime = props.get('showTime');
+  const formatProps = props.get('format');
+  const format = showTime ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD';
+  return {
+    format: formatProps ?? format,
+  };
+}
