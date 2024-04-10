@@ -26,16 +26,20 @@ exports[`renders demo correctly 1`] = `
   </div>
   <div style="margin-top: 20px;">
     <div class="van-checkbox-group">
-      <div class="fwfwwfwf">
-        <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="b">
-          <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
-              <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 b</span>
+      <div style="position: relative; width: auto;">
+        <div class="fwfwwfwf">
+          <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="b">
+            <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
+                <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 b</span>
+          </div>
         </div>
       </div>
-      <div class="fwfwwfwf">
-        <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="b">
-          <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
-              <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 b</span>
+      <div style="position: relative; width: auto;">
+        <div class="fwfwwfwf">
+          <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="b">
+            <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
+                <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 b</span>
+          </div>
         </div>
       </div>
     </div>
@@ -87,14 +91,34 @@ exports[`renders demo correctly 1`] = `
   </div>
   <div>
     <div class="van-checkbox-group">
-      <div>
-        <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="a">
+      <div style="position: relative; width: auto;">
+        <div>
+          <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="a">
+            <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
+                <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 a</span>
+          </div>
+        </div>
+      </div>
+      <div style="position: relative; width: auto;">
+        <div>
+          <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="b">
+            <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
+                <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 b</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="van-checkbox-group van-checkbox-group--horizontal">
+      <div style="position: relative; width: auto;">
+        <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox van-checkbox--horizontal" name="a">
           <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
               <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 a</span>
         </div>
       </div>
-      <div>
-        <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="b">
+      <div style="position: relative; width: auto;">
+        <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox van-checkbox--horizontal" name="b">
           <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
               <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 b</span>
         </div>
@@ -102,46 +126,46 @@ exports[`renders demo correctly 1`] = `
     </div>
   </div>
   <div>
-    <div class="van-checkbox-group van-checkbox-group--horizontal">
-      <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox van-checkbox--horizontal" name="a">
-        <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
-            <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 a</span>
+    <div class="van-checkbox-group">
+      <div style="position: relative; width: auto;">
+        <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="a">
+          <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
+              <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 a</span>
+        </div>
       </div>
-      <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox van-checkbox--horizontal" name="b">
-        <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
-            <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 b</span>
+      <div style="position: relative; width: auto;">
+        <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="b">
+          <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
+              <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 b</span>
+        </div>
+      </div>
+      <div style="position: relative; width: auto;">
+        <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="c">
+          <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
+              <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 c</span>
+        </div>
       </div>
     </div>
   </div>
   <div>
     <div class="van-checkbox-group">
-      <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="a">
-        <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
-            <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 a</span>
+      <div style="position: relative; width: auto;">
+        <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="a">
+          <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
+              <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 a</span>
+        </div>
       </div>
-      <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="b">
-        <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
-            <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 b</span>
+      <div style="position: relative; width: auto;">
+        <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="b">
+          <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
+              <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 b</span>
+        </div>
       </div>
-      <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="c">
-        <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
-            <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 c</span>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div class="van-checkbox-group">
-      <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="a">
-        <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
-            <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 a</span>
-      </div>
-      <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="b">
-        <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
-            <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 b</span>
-      </div>
-      <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="c">
-        <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
-            <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 c</span>
+      <div style="position: relative; width: auto;">
+        <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="c">
+          <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
+              <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label">复选框 c</span>
+        </div>
       </div>
     </div>
     <div class="demo-checkbox-buttons"><button class="van-button van-button--primary van-button--normal van-button--square">
@@ -152,19 +176,21 @@ exports[`renders demo correctly 1`] = `
   </div>
   <div>
     <div class="van-checkbox-group">
-      <div class="van-cell-group van-hairline--top-bottom">
-        <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
-          <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">复选框 a</div>
-          <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="a">
-            <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
-                <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label"><div data-v-60d187d5="" s-empty="true" class="empty empty">+</div></span>
+      <div style="position: relative; width: auto;">
+        <div class="van-cell-group van-hairline--top-bottom">
+          <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+            <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">复选框 a</div>
+            <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="a">
+              <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
+                  <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label"><div data-v-60d187d5="" s-empty="true" class="empty empty">+</div></span>
+            </div>
           </div>
-        </div>
-        <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
-          <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">复选框 b</div>
-          <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="b">
-            <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
-                <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label"><div data-v-60d187d5="" s-empty="true" class="empty empty">+</div></span>
+          <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
+            <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">复选框 b</div>
+            <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="b">
+              <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
+                  <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label"><div data-v-60d187d5="" s-empty="true" class="empty empty">+</div></span>
+            </div>
           </div>
         </div>
       </div>
