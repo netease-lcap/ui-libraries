@@ -624,7 +624,9 @@ export default {
          */
         onBodyScroll(e) {
             this.syncBodyScroll(e.target.scrollTop, e.target); // this.throttledVirtualScroll(e);
-            this.$refs.head[0].scrollLeft = e.target.scrollLeft;
+            if ( this.$refs.head[0]) {
+                this.$refs.head[0].scrollLeft = e.target.scrollLeft;
+            }
             this.scrollXStart = e.target.scrollLeft === 0;
             this.scrollXEnd = e.target.scrollLeft >= e.target.scrollWidth - e.target.clientWidth;
             if (this.pageable !== 'auto-more' || this.currentLoading)
@@ -658,7 +660,9 @@ export default {
             if (this.virtual)
                 this.throttledVirtualScroll(data);
             if (this.$refs.scrollView[0].$refs.wrap === data.target) {
-                this.$refs.head[0].scrollLeft = data.scrollLeft;
+                if ( this.$refs.head[0]) {
+                    this.$refs.head[0].scrollLeft = data.scrollLeft;
+                }
                 this.scrollXStart = data.scrollLeft === 0;
                 this.scrollXEnd = data.scrollLeft >= data.scrollWidth - data.clientWidth;
                 if (this.pageable !== 'auto-more' || this.currentLoading)
