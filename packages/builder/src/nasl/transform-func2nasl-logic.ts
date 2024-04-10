@@ -2,7 +2,6 @@
 import * as babelTypes from '@babel/types';
 import type {
   DefaultValue,
-  LogicDeclaration,
   TypeAnnotation,
 } from '@nasl/types/nasl.ui.ast';
 import logger from '../utils/logger';
@@ -69,14 +68,20 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
     });
   });
 
-  const logicDeclaration: LogicDeclaration = {
-    concept: 'LogicDeclaration',
+  const logic: any = {
+    concept: 'Logic',
     name: node.declaration.id ? node.declaration.id.name : '',
     title: logicComment.title,
     description: logicComment.description,
+    triggerType: '',
+    cron: '',
+    overridable: false,
+    variables: [],
+    body: [],
     typeParams: [],
     params: [],
     returns: [],
+    playground: [],
   };
 
   if (
@@ -84,7 +89,7 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
     && node.declaration.typeParameters.type === 'TSTypeParameterDeclaration'
     && node.declaration.typeParameters.params && node.declaration.typeParameters.params.length > 0
   ) {
-    logicDeclaration.typeParams = node.declaration.typeParameters.params.map((t) => ({
+    logic.typeParams = node.declaration.typeParameters.params.map((t) => ({
       concept: 'TypeParam',
       name: t.name,
     }));
@@ -191,7 +196,7 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
           p.defaultValue = defaultValue;
         }
 
-        logicDeclaration.params.push(p);
+        logic.params.push(p);
         return;
       }
 
@@ -204,7 +209,7 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
     const returnType = transformTypeAnnotation(node.declaration.returnType.typeAnnotation);
 
     if (returnType) {
-      logicDeclaration.returns.push({
+      logic.returns.push({
         concept: 'Return',
         name: 'result',
         description: logicComment.returns,
@@ -214,7 +219,7 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
   }
 
   return {
-    ...logicDeclaration,
+    ...logic,
     type: logicComment.type,
   };
 }
