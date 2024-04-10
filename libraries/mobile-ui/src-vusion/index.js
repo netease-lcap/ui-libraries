@@ -115,7 +115,6 @@ import '../src/style/mixins/ellipsis.less';
 import '../src/style/mixins/hairline.less';
 import '../src/style/normalize.less';
 import '../src/style/reset.less';
-import '../src/style/third.less';
 import '../src/style/var.less';
 import '../src/submit-bar/index.less';
 import '../src/swipe-cell/index.less';

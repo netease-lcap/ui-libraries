@@ -9,7 +9,6 @@ import { lcapPlugin } from '@lcap/builder';
 process.env.TZ = 'Asia/Shanghai';
 
 // https://vitejs.dev/config/
-
 export default defineConfig(({ mode, command }) => {
   return {
     publicDir: 'dist-theme',

@@ -7,24 +7,16 @@ exports[`u-navbar.vue > Demo-value 模式 1`] = `
     <div class="right"></div>
     <nav class="middle" vusion-slot-name="default">
       <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         组件
-        <!---->
       </a>
       <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         备案管理
-        <!---->
       </a>
       <a class="root" selected="selected" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         帮助
-        <!---->
       </a>
       <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         GitHub
-        <!---->
       </a>
     </nav>
   </div>
@@ -38,14 +30,10 @@ exports[`u-navbar.vue > Demo-下拉菜单与选择 1`] = `
     <div class="right"></div>
     <nav class="middle" vusion-slot-name="default">
       <a class="root" href="#/components" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         组件
-        <!---->
       </a>
       <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         指令
-        <!---->
       </a>
       <div class="root">
         <div class="title">下拉菜单</div>
@@ -86,48 +74,27 @@ exports[`u-navbar.vue > Demo-下拉菜单与选择 1`] = `
       <div class="root" tabindex="0">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-          <!---->
-          <!---->
-          <!---->
-          <!---->
         </div>
-        <!---->
-        <!---->
         <transition-stub class="popper" name="fade" style="width: 100%;">
           <div class="root" style="display: none;">
             <div class="wrap">
-              <!---->
               <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                <!---->
                 请选择
-                <!---->
               </div>
               <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                <!---->
                 中文
-                <!---->
               </div>
               <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                <!---->
                 English
-                <!---->
               </div>
               <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                <!---->
                 Français
-                <!---->
               </div>
               <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                <!---->
                 Русский
-                <!---->
               </div>
-              <!---->
-              <!---->
             </div>
-            <!---->
           </div>
         </transition-stub>
       </div>
@@ -147,25 +114,18 @@ exports[`u-navbar.vue > Demo-与 Logo 结合 1`] = `
           <span class="sub">
             <a href="/" target="_blank">ICP 备案系统</a>
           </span>
-          <!---->
         </div>
       </div>
       <div class="right"></div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" href="#/u-navbar" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           主体
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           备案管理
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           帮助
-          <!---->
         </a>
       </nav>
     </div>
@@ -173,47 +133,30 @@ exports[`u-navbar.vue > Demo-与 Logo 结合 1`] = `
       <div class="left">
         <div class="root">
           <a class="icon"></a>
-          <!---->
-          <!---->
-          <!---->
         </div>
       </div>
       <div class="right"></div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           产品
-          <!---->
         </a>
         <a class="root" href="#/u-navbar" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           价格
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           帮助
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           合作与生态
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           博客
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           备案
-          <!---->
         </a>
       </nav>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -226,30 +169,20 @@ exports[`u-navbar.vue > Demo-切换动画 1`] = `
       <div class="right"></div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           组件
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           概念
-          <!---->
         </a>
         <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           指令
-          <!---->
         </a>
         <div class="root"></div>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           配置
-          <!---->
         </a>
         <a class="root" href="https://github.com/vusion/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           GitHub
-          <!---->
         </a>
       </nav>
     </div>
@@ -258,30 +191,20 @@ exports[`u-navbar.vue > Demo-切换动画 1`] = `
       <div class="right"></div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           组件
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           概念
-          <!---->
         </a>
         <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           指令
-          <!---->
         </a>
         <div class="root"></div>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           配置
-          <!---->
         </a>
         <a class="root" href="https://github.com/vusion/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           GitHub
-          <!---->
         </a>
       </nav>
     </div>
@@ -290,30 +213,20 @@ exports[`u-navbar.vue > Demo-切换动画 1`] = `
       <div class="right"></div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           组件
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           概念
-          <!---->
         </a>
         <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           指令
-          <!---->
         </a>
         <div class="root"></div>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           配置
-          <!---->
         </a>
         <a class="root" href="https://github.com/vusion/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           GitHub
-          <!---->
         </a>
       </nav>
     </div>
@@ -322,30 +235,20 @@ exports[`u-navbar.vue > Demo-切换动画 1`] = `
       <div class="right"></div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           组件
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           概念
-          <!---->
         </a>
         <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           指令
-          <!---->
         </a>
         <div class="root"></div>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           配置
-          <!---->
         </a>
         <a class="root" href="https://github.com/vusion/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           GitHub
-          <!---->
         </a>
       </nav>
     </div>
@@ -354,35 +257,23 @@ exports[`u-navbar.vue > Demo-切换动画 1`] = `
       <div class="right"></div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           组件
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           概念
-          <!---->
         </a>
         <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           指令
-          <!---->
         </a>
         <div class="root"></div>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           配置
-          <!---->
         </a>
         <a class="root" href="https://github.com/vusion/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           GitHub
-          <!---->
         </a>
       </nav>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -395,30 +286,20 @@ exports[`u-navbar.vue > Demo-切换动画效果 1`] = `
       <div class="right"></div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           组件
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           概念
-          <!---->
         </a>
         <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           指令
-          <!---->
         </a>
         <div class="root"></div>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           配置
-          <!---->
         </a>
         <a class="root" href="https://github.com/vusion/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           GitHub
-          <!---->
         </a>
       </nav>
     </div>
@@ -427,30 +308,20 @@ exports[`u-navbar.vue > Demo-切换动画效果 1`] = `
       <div class="right"></div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           组件
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           概念
-          <!---->
         </a>
         <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           指令
-          <!---->
         </a>
         <div class="root"></div>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           配置
-          <!---->
         </a>
         <a class="root" href="https://github.com/vusion/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           GitHub
-          <!---->
         </a>
       </nav>
     </div>
@@ -459,30 +330,20 @@ exports[`u-navbar.vue > Demo-切换动画效果 1`] = `
       <div class="right"></div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           组件
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           概念
-          <!---->
         </a>
         <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           指令
-          <!---->
         </a>
         <div class="root"></div>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           配置
-          <!---->
         </a>
         <a class="root" href="https://github.com/vusion/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           GitHub
-          <!---->
         </a>
       </nav>
     </div>
@@ -491,35 +352,23 @@ exports[`u-navbar.vue > Demo-切换动画效果 1`] = `
       <div class="right"></div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           组件
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           概念
-          <!---->
         </a>
         <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           指令
-          <!---->
         </a>
         <div class="root"></div>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           配置
-          <!---->
         </a>
         <a class="root" href="https://github.com/vusion/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           GitHub
-          <!---->
         </a>
       </nav>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -532,14 +381,10 @@ exports[`u-navbar.vue > Demo-只读与禁用 1`] = `
       <div class="right"></div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" readonly="readonly" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           指南
-          <!---->
         </a>
         <a class="root" href="#/cloud-ui" readonly="readonly" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           组件
-          <!---->
         </a>
         <div class="root">
           <div class="title">下拉菜单</div>
@@ -580,48 +425,27 @@ exports[`u-navbar.vue > Demo-只读与禁用 1`] = `
         <div class="root" tabindex="0">
           <span class="baseline">b</span>
           <span class="placeholder">请选择</span>
-          <!---->
           <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-            <!---->
-            <!---->
-            <!---->
-            <!---->
           </div>
-          <!---->
-          <!---->
           <transition-stub class="popper" name="fade" style="width: 100%;">
             <div class="root" style="display: none;">
               <div class="wrap">
-                <!---->
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   请选择
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   中文
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   English
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   Français
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   Русский
-                  <!---->
                 </div>
-                <!---->
-                <!---->
               </div>
-              <!---->
             </div>
           </transition-stub>
         </div>
@@ -632,14 +456,10 @@ exports[`u-navbar.vue > Demo-只读与禁用 1`] = `
       <div class="right"></div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           指南
-          <!---->
         </a>
         <a class="root" disabled="disabled" href="#/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           组件
-          <!---->
         </a>
         <div class="root">
           <div class="title">下拉菜单</div>
@@ -680,55 +500,32 @@ exports[`u-navbar.vue > Demo-只读与禁用 1`] = `
         <div class="root" tabindex="0">
           <span class="baseline">b</span>
           <span class="placeholder">请选择</span>
-          <!---->
           <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-            <!---->
-            <!---->
-            <!---->
-            <!---->
           </div>
-          <!---->
-          <!---->
           <transition-stub class="popper" name="fade" style="width: 100%;">
             <div class="root" style="display: none;">
               <div class="wrap">
-                <!---->
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   请选择
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   中文
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   English
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   Français
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   Русский
-                  <!---->
                 </div>
-                <!---->
-                <!---->
               </div>
-              <!---->
             </div>
           </transition-stub>
         </div>
       </nav>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -739,20 +536,14 @@ exports[`u-navbar.vue > Demo-基本用法 1`] = `
   <div class="right"></div>
   <nav class="middle" vusion-slot-name="default">
     <a class="root" href="https://github.com/vusion/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-      <!---->
       GitHub
-      <!---->
     </a>
     <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-      <!---->
       指令
-      <!---->
     </a>
     <div class="root"></div>
     <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-      <!---->
       配置
-      <!---->
     </a>
   </nav>
 </div>
@@ -772,31 +563,21 @@ exports[`u-navbar.vue > Demo-基本用法 2`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>组件
-        <!---->
       </a>
       <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         概念
-        <!---->
       </a>
       <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         指令
-        <!---->
       </a>
       <div class="root"></div>
       <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         配置
-        <!---->
       </a>
       <a class="root" href="https://github.com/vusion/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         GitHub
-        <!---->
       </a>
     </nav>
   </div>
@@ -810,33 +591,22 @@ exports[`u-navbar.vue > Demo-对齐方式 1`] = `
       <div class="left">
         <div class="root">
           <a class="icon"></a>
-          <!---->
-          <!---->
-          <!---->
         </div>
       </div>
       <div class="right">
         <a class="root" href="https://github.com/vusion/cloud-ui" target="_blank" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           <i class="root" name="github"></i>
-          <!---->
         </a>
       </div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           指南
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           概念
-          <!---->
         </a>
         <a class="root" href="#/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           组件
-          <!---->
         </a>
       </nav>
     </div>
@@ -844,33 +614,22 @@ exports[`u-navbar.vue > Demo-对齐方式 1`] = `
       <div class="left">
         <div class="root">
           <a class="icon"></a>
-          <!---->
-          <!---->
-          <!---->
         </div>
       </div>
       <div class="right">
         <a class="root" href="https://github.com/vusion/cloud-ui" target="_blank" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           <i class="root" name="github"></i>
-          <!---->
         </a>
       </div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           指南
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           概念
-          <!---->
         </a>
         <a class="root" href="#/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           组件
-          <!---->
         </a>
       </nav>
     </div>
@@ -878,38 +637,25 @@ exports[`u-navbar.vue > Demo-对齐方式 1`] = `
       <div class="left">
         <div class="root">
           <a class="icon"></a>
-          <!---->
-          <!---->
-          <!---->
         </div>
       </div>
       <div class="right">
         <a class="root" href="https://github.com/vusion/cloud-ui" target="_blank" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           <i class="root" name="github"></i>
-          <!---->
         </a>
       </div>
       <nav class="middle" vusion-slot-name="default">
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           指南
-          <!---->
         </a>
         <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           概念
-          <!---->
         </a>
         <a class="root" href="#/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-          <!---->
           组件
-          <!---->
         </a>
       </nav>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -920,33 +666,22 @@ exports[`u-navbar.vue > Demo-左右插槽 1`] = `
     <div class="left">
       <div class="root">
         <a class="icon"></a>
-        <!---->
-        <!---->
-        <!---->
       </div>
     </div>
     <div class="right">
       <a class="root" href="https://github.com/vusion/cloud-ui" target="_blank" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         <i class="root" name="github"></i>
-        <!---->
       </a>
     </div>
     <nav class="middle" vusion-slot-name="default">
       <a class="root" href="#/components" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         组件
-        <!---->
       </a>
       <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         概念
-        <!---->
       </a>
       <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         指令
-        <!---->
       </a>
     </nav>
   </div>
@@ -960,24 +695,16 @@ exports[`u-navbar.vue > Demo-路由模式 1`] = `
     <div class="right"></div>
     <nav class="middle" vusion-slot-name="default">
       <a class="root" href="#/u-navbar" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         组件
-        <!---->
       </a>
       <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         备案管理
-        <!---->
       </a>
       <a class="root" disabled="disabled" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         帮助
-        <!---->
       </a>
       <a class="root" href="https://github.com/vusion/cloud-ui" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-        <!---->
         GitHub
-        <!---->
       </a>
     </nav>
   </div>
@@ -990,24 +717,16 @@ exports[`u-navbar.vue > Demo-选择控制 1`] = `
   <div class="right"></div>
   <nav class="middle" vusion-slot-name="default">
     <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-      <!---->
       组件
-      <!---->
     </a>
     <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-      <!---->
       备案管理
-      <!---->
     </a>
     <a class="root" selected="selected" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-      <!---->
       帮助
-      <!---->
     </a>
     <a class="root" target="_self" vusion-slot-name="default" vusion-slot-name-edit="text">
-      <!---->
       GitHub
-      <!---->
     </a>
   </nav>
 </div>

@@ -7,111 +7,70 @@ exports[`u-cascade-capsules.vue > Demo-join 1`] = `
       <span class="label">学科门类</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
           <div class="root" vusion-slot-name="default">
-            <!---->
             理学
-            <!---->
           </div>
           <div class="root" selected="selected" vusion-slot-name="default">
-            <!---->
             工学
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
     <div>
       <span class="label">一级学科</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
           <div class="root" selected="selected" vusion-slot-name="default">
-            <!---->
             计算机科学与技术
-            <!---->
           </div>
           <div class="root" disabled="disabled" vusion-slot-name="default">
-            <!---->
             软件工程
-            <!---->
           </div>
           <div class="root" vusion-slot-name="default">
-            <!---->
             机械工程
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
     <div>
       <span class="label">二级学科</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
           <div class="root" vusion-slot-name="default">
-            <!---->
             计算机系统结构
-            <!---->
           </div>
           <div class="root" disabled="disabled" vusion-slot-name="default">
-            <!---->
             计算机软件与理论
-            <!---->
           </div>
           <div class="root" selected="selected" vusion-slot-name="default">
-            <!---->
             计算机应用技术
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
-    <!---->
-    <!---->
   </div>
   <div>选择的值为：工学,计算机科学与技术,计算机应用技术</div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -122,86 +81,55 @@ exports[`u-cascade-capsules.vue > Demo-join 2`] = `
       <span class="label">CPU</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
           <div class="root" vusion-slot-name="default">
-            <!---->
             1核
-            <!---->
           </div>
           <div class="root" vusion-slot-name="default">
-            <!---->
             2核
-            <!---->
           </div>
           <div class="root" vusion-slot-name="default">
-            <!---->
             4核
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
     <div>
       <span class="label">内存</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
     <div>
       <span class="label">系统盘</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
-    <!---->
-    <!---->
   </div>
   <div>选择的值为：</div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -212,81 +140,52 @@ exports[`u-cascade-capsules.vue > Demo-last-value 1`] = `
       <span class="label">学科门类</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
           <div class="root" vusion-slot-name="default">
-            <!---->
             理学
-            <!---->
           </div>
           <div class="root" vusion-slot-name="default">
-            <!---->
             工学
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
     <div>
       <span class="label">一级学科</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
     <div>
       <span class="label">二级学科</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
-    <!---->
-    <!---->
   </div>
   <div>选择的值为：213</div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -297,77 +196,50 @@ exports[`u-cascade-capsules.vue > Demo-可取消 1`] = `
       <span class="label">学科门类</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
           <div class="root" vusion-slot-name="default">
-            <!---->
             理学
-            <!---->
           </div>
           <div class="root" vusion-slot-name="default">
-            <!---->
             工学
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
     <div>
       <span class="label">一级学科</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
     <div>
       <span class="label">二级学科</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -379,29 +251,19 @@ exports[`u-cascade-capsules.vue > Demo-基本用法 1`] = `
       <span class="label">学科门类</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
           <div class="root" vusion-slot-name="default">
-            <!---->
             理学
-            <!---->
           </div>
           <div class="root" vusion-slot-name="default">
-            <!---->
             工学
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
       <span class="tip">请选择正确的分类</span>
@@ -410,46 +272,30 @@ exports[`u-cascade-capsules.vue > Demo-基本用法 1`] = `
       <span class="label">一级学科</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
     <div>
       <span class="label">二级学科</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -461,82 +307,53 @@ exports[`u-cascade-capsules.vue > Demo-自动选择 1`] = `
       <span class="label">CPU</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
           <div class="root" vusion-slot-name="default">
-            <!---->
             1核
-            <!---->
           </div>
           <div class="root" vusion-slot-name="default">
-            <!---->
             2核
-            <!---->
           </div>
           <div class="root" vusion-slot-name="default">
-            <!---->
             4核
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
     <div>
       <span class="label">内存</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
     <div>
       <span class="label">系统盘</span>
       <div border="true" class="root capsules" tabindex="0">
         <div class="head" style="display: none;">
-          <!---->
           <span class="title" vusion-slot-name="title">列表</span>
           <div class="extra">
-            <!---->
           </div>
         </div>
-        <!---->
         <div class="body">
-          <!---->
-          <!---->
         </div>
         <div class="foot" style="display: none;">
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;

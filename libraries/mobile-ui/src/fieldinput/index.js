@@ -3,6 +3,7 @@ import { resetScroll } from '../utils/dom/reset-scroll';
 import { preventDefault } from '../utils/dom/event';
 
 import { FieldMixin } from '../mixins/field';
+import PreviewMixin from '../mixins/preview';
 import Icon from '../icon';
 import NumberKeyboard from '../number-keyboard';
 import PasswordInput from '../password-input';
@@ -11,7 +12,7 @@ import PasswordInput from '../password-input';
 const [createComponent, bem] = createNamespace('fieldinput');
 
 export default createComponent({
-  mixins: [FieldMixin],
+  mixins: [FieldMixin, PreviewMixin],
   props: {
     type: {
       type: String,
@@ -204,9 +205,7 @@ export default createComponent({
       const readonly = this.getProp('readonly');
       if (this.clearable && !readonly) {
         const hasValue = isDef(this.currentValue) && this.currentValue !== '';
-        const trigger =
-          this.clearTrigger === 'always' ||
-          (this.clearTrigger === 'focus' && this.focused);
+        const trigger = this.clearTrigger === 'always' || (this.clearTrigger === 'focus' && this.focused);
 
         return hasValue && trigger;
       }
@@ -229,9 +228,7 @@ export default createComponent({
 
       if (this.$env?.VUE_APP_DESIGNER) {
         this.$nextTick(() => {
-          document
-            .getElementsByClassName('van-number-keyboard')
-            ?.forEach((item) => (item.style.display = 'none'));
+          document.getElementsByClassName('van-number-keyboard')?.forEach((item) => (item.style.display = 'none'));
           if (this.$refs.numberKeyboard) {
             this.$refs.numberKeyboard.$el.style.display = 'block';
           }
@@ -312,6 +309,28 @@ export default createComponent({
   },
   render() {
     const inputAlign = this.vanField?.getProp('inputAlign');
+
+    if (this.isPreview && !this.inDesigner()) {
+      const isPassword = this.inputstyle === 'password' || this.type === 'password';
+      return (
+        <div
+          class={bem('newwrap', {
+            clearwrap: this.clearable,
+            focused: this.needFocusThemeStyle && this.focused,
+          })}
+        >
+          <span
+            class={bem('control', [
+              inputAlign,
+              'custom',
+            ])}
+          >
+            {isPassword ? this.currentValue.replace(/./g, '*') : this.currentValue}
+          </span>
+        </div>
+      );
+    }
+
     return (
       <div
         class={bem('newwrap', {
@@ -350,9 +369,7 @@ export default createComponent({
           onCompositionend={this.onCompositionEnd}
         />
 
-        {this.showClear() && (
-          <Icon name="clear" class={bem('clear')} onTouchstart={this.onClear} />
-        )}
+        {this.showClear() && <Icon name="clear" class={bem('clear')} onTouchstart={this.onClear} />}
         {this.inputstyle === 'password' ? (
           <PasswordInput
             value={this.currentValue}

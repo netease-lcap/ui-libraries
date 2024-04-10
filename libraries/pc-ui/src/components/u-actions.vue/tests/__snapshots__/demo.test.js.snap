@@ -13,17 +13,12 @@ exports[`u-actions.vue > Demo-使用指令 1`] = `
       </div>
       <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
         <a class="root" disabled="disabled" hovertype="underline" tabindex="-1" target="_self" vusion-slot-name-edit="text">
-          <!---->
           设置
-          <!---->
         </a>
         <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           显示Tips
-          <!---->
         </a>
         <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           更多 ▾ <transition-stub name="fade">
             <div class="root" merge-borders="true" style="display: none;">
               <span class="arrow" data-popper-arrow></span>
@@ -43,14 +38,9 @@ exports[`u-actions.vue > Demo-使用指令 1`] = `
               </nav>
             </div>
           </transition-stub>
-          <!---->
         </a>
-        <!---->
-        <!---->
       </div>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -64,23 +54,14 @@ exports[`u-actions.vue > Demo-基本用法 1`] = `
   </div>
   <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
     <a class="root" disabled="disabled" hovertype="underline" tabindex="-1" target="_self" vusion-slot-name-edit="text">
-      <!---->
       设置
-      <!---->
     </a>
     <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-      <!---->
       重启
-      <!---->
     </a>
     <a class="root" disabled="disabled" hovertype="underline" tabindex="-1" target="_self" vusion-slot-name-edit="text">
-      <!---->
       保存为镜像
-      <!---->
     </a>
-    <!---->
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -96,23 +77,14 @@ exports[`u-actions.vue > Demo-基本用法 2`] = `
       </div>
       <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
         <a class="root" disabled="disabled" hovertype="underline" tabindex="-1" target="_self" vusion-slot-name-edit="text">
-          <!---->
           设置
-          <!---->
         </a>
         <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           跳转到 Navbar
-          <!---->
         </a>
         <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           重启
-          <!---->
         </a>
-        <!---->
-        <!---->
-        <!---->
       </div>
     </div>
     <div class="root">
@@ -125,17 +97,12 @@ exports[`u-actions.vue > Demo-基本用法 2`] = `
       </div>
       <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
         <a class="root" disabled="disabled" hovertype="underline" tabindex="-1" target="_self" vusion-slot-name-edit="text">
-          <!---->
           设置
-          <!---->
         </a>
         <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           跳转到 Navbar
-          <!---->
         </a>
         <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           更多 ▾ <transition-stub name="fade">
             <div class="root" merge-borders="true" style="display: none;">
               <span class="arrow" data-popper-arrow></span>
@@ -155,14 +122,9 @@ exports[`u-actions.vue > Demo-基本用法 2`] = `
               </nav>
             </div>
           </transition-stub>
-          <!---->
         </a>
-        <!---->
-        <!---->
       </div>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;

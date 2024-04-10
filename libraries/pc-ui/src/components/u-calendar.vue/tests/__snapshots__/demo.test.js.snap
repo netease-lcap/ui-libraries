@@ -12,7 +12,6 @@ exports[`u-calendar.vue > Demo-只读和禁用 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
         <span class="lcp-iconv hicon">
@@ -22,7 +21,6 @@ exports[`u-calendar.vue > Demo-只读和禁用 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
         <div class="yearCenter">
@@ -36,119 +34,63 @@ exports[`u-calendar.vue > Demo-只读和禁用 1`] = `
                       <div class="yearList">
                         <div border="true" class="root yearListInner" tabindex="0">
                           <div class="head" style="display: none;">
-                            <!---->
                             <span class="title" vusion-slot-name="title">列表</span>
                             <div class="extra">
-                              <!---->
                             </div>
                           </div>
-                          <!---->
                           <div class="body">
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              1998
-                            </div>
+                              1998</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              1999
-                            </div>
+                              1999</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2000
-                            </div>
+                              2000</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2001
-                            </div>
+                              2001</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2002
-                            </div>
+                              2002</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2003
-                            </div>
+                              2003</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2004
-                            </div>
+                              2004</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2005
-                            </div>
+                              2005</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2006
-                            </div>
+                              2006</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2007
-                            </div>
+                              2007</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2008
-                            </div>
+                              2008</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2009
-                            </div>
+                              2009</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2010
-                            </div>
+                              2010</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2011
-                            </div>
+                              2011</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2012
-                            </div>
+                              2012</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2013
-                            </div>
+                              2013</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2014
-                            </div>
+                              2014</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2015
-                            </div>
+                              2015</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2016
-                            </div>
+                              2016</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2017
-                            </div>
+                              2017</div>
                             <div class="root yearitem" selected="selected" vusion-slot-name="item">
-                              <!---->
-                              2018
-                            </div>
+                              2018</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2019
-                            </div>
+                              2019</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2020
-                            </div>
+                              2020</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2021
-                            </div>
+                              2021</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2022
-                            </div>
-                            <!---->
-                            <!---->
+                              2022</div>
                           </div>
                           <div class="foot" style="display: none;">
-                            <!---->
                           </div>
                         </div>
                       </div>
@@ -174,67 +116,37 @@ exports[`u-calendar.vue > Demo-只读和禁用 1`] = `
                       <div class="yearList">
                         <div border="true" class="root yearListInner" tabindex="0">
                           <div class="head" style="display: none;">
-                            <!---->
                             <span class="title" vusion-slot-name="title">列表</span>
                             <div class="extra">
-                              <!---->
                             </div>
                           </div>
-                          <!---->
                           <div class="body">
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              1 月
-                            </div>
+                              1 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2 月
-                            </div>
+                              2 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              3 月
-                            </div>
+                              3 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              4 月
-                            </div>
+                              4 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              5 月
-                            </div>
+                              5 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              6 月
-                            </div>
+                              6 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              7 月
-                            </div>
+                              7 月</div>
                             <div class="root yearitem" role="true" vusion-slot-name="item">
-                              <!---->
-                              8 月
-                            </div>
+                              8 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              9 月
-                            </div>
+                              9 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              10 月
-                            </div>
+                              10 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              11 月
-                            </div>
+                              11 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              12 月
-                            </div>
-                            <!---->
-                            <!---->
+                              12 月</div>
                           </div>
                           <div class="foot" style="display: none;">
-                            <!---->
                           </div>
                         </div>
                       </div>
@@ -258,7 +170,6 @@ exports[`u-calendar.vue > Demo-只读和禁用 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
         <span class="lcp-iconv hicon">
@@ -268,15 +179,10 @@ exports[`u-calendar.vue > Demo-只读和禁用 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </div>
-      <!---->
-      <!---->
       <div>
-        <!---->
-        <!---->
       </div>
       <div class="content">
         <div class="week">
@@ -427,7 +333,6 @@ exports[`u-calendar.vue > Demo-只读和禁用 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
         <span class="lcp-iconv hicon">
@@ -437,7 +342,6 @@ exports[`u-calendar.vue > Demo-只读和禁用 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
         <div class="yearCenter">
@@ -451,119 +355,63 @@ exports[`u-calendar.vue > Demo-只读和禁用 1`] = `
                       <div class="yearList">
                         <div border="true" class="root yearListInner" tabindex="0">
                           <div class="head" style="display: none;">
-                            <!---->
                             <span class="title" vusion-slot-name="title">列表</span>
                             <div class="extra">
-                              <!---->
                             </div>
                           </div>
-                          <!---->
                           <div class="body">
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              1998
-                            </div>
+                              1998</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              1999
-                            </div>
+                              1999</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2000
-                            </div>
+                              2000</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2001
-                            </div>
+                              2001</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2002
-                            </div>
+                              2002</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2003
-                            </div>
+                              2003</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2004
-                            </div>
+                              2004</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2005
-                            </div>
+                              2005</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2006
-                            </div>
+                              2006</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2007
-                            </div>
+                              2007</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2008
-                            </div>
+                              2008</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2009
-                            </div>
+                              2009</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2010
-                            </div>
+                              2010</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2011
-                            </div>
+                              2011</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2012
-                            </div>
+                              2012</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2013
-                            </div>
+                              2013</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2014
-                            </div>
+                              2014</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2015
-                            </div>
+                              2015</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2016
-                            </div>
+                              2016</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2017
-                            </div>
+                              2017</div>
                             <div class="root yearitem" selected="selected" vusion-slot-name="item">
-                              <!---->
-                              2018
-                            </div>
+                              2018</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2019
-                            </div>
+                              2019</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2020
-                            </div>
+                              2020</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2021
-                            </div>
+                              2021</div>
                             <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                              <!---->
-                              2022
-                            </div>
-                            <!---->
-                            <!---->
+                              2022</div>
                           </div>
                           <div class="foot" style="display: none;">
-                            <!---->
                           </div>
                         </div>
                       </div>
@@ -589,67 +437,37 @@ exports[`u-calendar.vue > Demo-只读和禁用 1`] = `
                       <div class="yearList">
                         <div border="true" class="root yearListInner" tabindex="0">
                           <div class="head" style="display: none;">
-                            <!---->
                             <span class="title" vusion-slot-name="title">列表</span>
                             <div class="extra">
-                              <!---->
                             </div>
                           </div>
-                          <!---->
                           <div class="body">
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              1 月
-                            </div>
+                              1 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2 月
-                            </div>
+                              2 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              3 月
-                            </div>
+                              3 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              4 月
-                            </div>
+                              4 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              5 月
-                            </div>
+                              5 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              6 月
-                            </div>
+                              6 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              7 月
-                            </div>
+                              7 月</div>
                             <div class="root yearitem" role="true" vusion-slot-name="item">
-                              <!---->
-                              8 月
-                            </div>
+                              8 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              9 月
-                            </div>
+                              9 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              10 月
-                            </div>
+                              10 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              11 月
-                            </div>
+                              11 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              12 月
-                            </div>
-                            <!---->
-                            <!---->
+                              12 月</div>
                           </div>
                           <div class="foot" style="display: none;">
-                            <!---->
                           </div>
                         </div>
                       </div>
@@ -673,7 +491,6 @@ exports[`u-calendar.vue > Demo-只读和禁用 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
         <span class="lcp-iconv hicon">
@@ -683,15 +500,10 @@ exports[`u-calendar.vue > Demo-只读和禁用 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </div>
-      <!---->
-      <!---->
       <div>
-        <!---->
-        <!---->
       </div>
       <div class="content">
         <div class="week">
@@ -833,8 +645,6 @@ exports[`u-calendar.vue > Demo-只读和禁用 1`] = `
         </div>
       </div>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -854,7 +664,6 @@ exports[`u-calendar.vue > Demo-周范围全部禁用 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
               <span class="lcp-iconv hicon">
@@ -864,7 +673,6 @@ exports[`u-calendar.vue > Demo-周范围全部禁用 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -1119,7 +927,6 @@ exports[`u-calendar.vue > Demo-周范围全部禁用 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
               <span class="lcp-iconv hicon">
@@ -1129,7 +936,6 @@ exports[`u-calendar.vue > Demo-周范围全部禁用 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -1391,7 +1197,6 @@ exports[`u-calendar.vue > Demo-周范围最大最小值 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
               <span class="lcp-iconv hicon">
@@ -1401,7 +1206,6 @@ exports[`u-calendar.vue > Demo-周范围最大最小值 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -1656,7 +1460,6 @@ exports[`u-calendar.vue > Demo-周范围最大最小值 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
               <span class="lcp-iconv hicon">
@@ -1666,7 +1469,6 @@ exports[`u-calendar.vue > Demo-周范围最大最小值 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -1928,7 +1730,6 @@ exports[`u-calendar.vue > Demo-周范围选择 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
               <span class="lcp-iconv hicon">
@@ -1938,7 +1739,6 @@ exports[`u-calendar.vue > Demo-周范围选择 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -2193,7 +1993,6 @@ exports[`u-calendar.vue > Demo-周范围选择 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
               <span class="lcp-iconv hicon">
@@ -2203,7 +2002,6 @@ exports[`u-calendar.vue > Demo-周范围选择 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -2461,7 +2259,6 @@ exports[`u-calendar.vue > Demo-周选择组件 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
       <span class="lcp-iconv hicon">
@@ -2471,7 +2268,6 @@ exports[`u-calendar.vue > Demo-周选择组件 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
       <div class="yearCenter">
@@ -2485,119 +2281,63 @@ exports[`u-calendar.vue > Demo-周选择组件 1`] = `
                     <div class="yearList">
                       <div border="true" class="root yearListInner" tabindex="0">
                         <div class="head" style="display: none;">
-                          <!---->
                           <span class="title" vusion-slot-name="title">列表</span>
                           <div class="extra">
-                            <!---->
                           </div>
                         </div>
-                        <!---->
                         <div class="body">
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2002
-                          </div>
+                            2002</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2003
-                          </div>
+                            2003</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2004
-                          </div>
+                            2004</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2005
-                          </div>
+                            2005</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2006
-                          </div>
+                            2006</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2007
-                          </div>
+                            2007</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2008
-                          </div>
+                            2008</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2009
-                          </div>
+                            2009</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2010
-                          </div>
+                            2010</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2011
-                          </div>
+                            2011</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2012
-                          </div>
+                            2012</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2013
-                          </div>
+                            2013</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2014
-                          </div>
+                            2014</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2015
-                          </div>
+                            2015</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2016
-                          </div>
+                            2016</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2017
-                          </div>
+                            2017</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2018
-                          </div>
+                            2018</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2019
-                          </div>
+                            2019</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2020
-                          </div>
+                            2020</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2021
-                          </div>
+                            2021</div>
                           <div class="root yearitem" selected="selected" vusion-slot-name="item">
-                            <!---->
-                            2022
-                          </div>
+                            2022</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2023
-                          </div>
+                            2023</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2024
-                          </div>
+                            2024</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2025
-                          </div>
+                            2025</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2026
-                          </div>
-                          <!---->
-                          <!---->
+                            2026</div>
                         </div>
                         <div class="foot" style="display: none;">
-                          <!---->
                         </div>
                       </div>
                     </div>
@@ -2623,67 +2363,37 @@ exports[`u-calendar.vue > Demo-周选择组件 1`] = `
                     <div class="yearList">
                       <div border="true" class="root yearListInner" tabindex="0">
                         <div class="head" style="display: none;">
-                          <!---->
                           <span class="title" vusion-slot-name="title">列表</span>
                           <div class="extra">
-                            <!---->
                           </div>
                         </div>
-                        <!---->
                         <div class="body">
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            1 月
-                          </div>
+                            1 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2 月
-                          </div>
+                            2 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            3 月
-                          </div>
+                            3 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            4 月
-                          </div>
+                            4 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            5 月
-                          </div>
+                            5 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            6 月
-                          </div>
+                            6 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            7 月
-                          </div>
+                            7 月</div>
                           <div class="root yearitem" role="true" vusion-slot-name="item">
-                            <!---->
-                            8 月
-                          </div>
+                            8 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            9 月
-                          </div>
+                            9 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            10 月
-                          </div>
+                            10 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            11 月
-                          </div>
+                            11 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            12 月
-                          </div>
-                          <!---->
-                          <!---->
+                            12 月</div>
                         </div>
                         <div class="foot" style="display: none;">
-                          <!---->
                         </div>
                       </div>
                     </div>
@@ -2707,7 +2417,6 @@ exports[`u-calendar.vue > Demo-周选择组件 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
       <span class="lcp-iconv hicon">
@@ -2717,15 +2426,10 @@ exports[`u-calendar.vue > Demo-周选择组件 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </div>
-    <!---->
-    <!---->
     <div>
-      <!---->
-      <!---->
     </div>
     <div class="content">
       <div class="week">
@@ -2881,7 +2585,6 @@ exports[`u-calendar.vue > Demo-基本用法 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
       <span class="lcp-iconv hicon">
@@ -2891,7 +2594,6 @@ exports[`u-calendar.vue > Demo-基本用法 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
       <div class="yearCenter">
@@ -2905,119 +2607,63 @@ exports[`u-calendar.vue > Demo-基本用法 1`] = `
                     <div class="yearList">
                       <div border="true" class="root yearListInner" tabindex="0">
                         <div class="head" style="display: none;">
-                          <!---->
                           <span class="title" vusion-slot-name="title">列表</span>
                           <div class="extra">
-                            <!---->
                           </div>
                         </div>
-                        <!---->
                         <div class="body">
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2002
-                          </div>
+                            2002</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2003
-                          </div>
+                            2003</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2004
-                          </div>
+                            2004</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2005
-                          </div>
+                            2005</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2006
-                          </div>
+                            2006</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2007
-                          </div>
+                            2007</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2008
-                          </div>
+                            2008</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2009
-                          </div>
+                            2009</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2010
-                          </div>
+                            2010</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2011
-                          </div>
+                            2011</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2012
-                          </div>
+                            2012</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2013
-                          </div>
+                            2013</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2014
-                          </div>
+                            2014</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2015
-                          </div>
+                            2015</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2016
-                          </div>
+                            2016</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2017
-                          </div>
+                            2017</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2018
-                          </div>
+                            2018</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2019
-                          </div>
+                            2019</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2020
-                          </div>
+                            2020</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2021
-                          </div>
+                            2021</div>
                           <div class="root yearitem" selected="selected" vusion-slot-name="item">
-                            <!---->
-                            2022
-                          </div>
+                            2022</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2023
-                          </div>
+                            2023</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2024
-                          </div>
+                            2024</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2025
-                          </div>
+                            2025</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2026
-                          </div>
-                          <!---->
-                          <!---->
+                            2026</div>
                         </div>
                         <div class="foot" style="display: none;">
-                          <!---->
                         </div>
                       </div>
                     </div>
@@ -3043,67 +2689,37 @@ exports[`u-calendar.vue > Demo-基本用法 1`] = `
                     <div class="yearList">
                       <div border="true" class="root yearListInner" tabindex="0">
                         <div class="head" style="display: none;">
-                          <!---->
                           <span class="title" vusion-slot-name="title">列表</span>
                           <div class="extra">
-                            <!---->
                           </div>
                         </div>
-                        <!---->
                         <div class="body">
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            1 月
-                          </div>
+                            1 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            2 月
-                          </div>
+                            2 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            3 月
-                          </div>
+                            3 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            4 月
-                          </div>
+                            4 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            5 月
-                          </div>
+                            5 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            6 月
-                          </div>
+                            6 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            7 月
-                          </div>
+                            7 月</div>
                           <div class="root yearitem" role="true" vusion-slot-name="item">
-                            <!---->
-                            8 月
-                          </div>
+                            8 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            9 月
-                          </div>
+                            9 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            10 月
-                          </div>
+                            10 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            11 月
-                          </div>
+                            11 月</div>
                           <div class="root yearitem" vusion-slot-name="item">
-                            <!---->
-                            12 月
-                          </div>
-                          <!---->
-                          <!---->
+                            12 月</div>
                         </div>
                         <div class="foot" style="display: none;">
-                          <!---->
                         </div>
                       </div>
                     </div>
@@ -3127,7 +2743,6 @@ exports[`u-calendar.vue > Demo-基本用法 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
       <span class="lcp-iconv hicon">
@@ -3137,15 +2752,10 @@ exports[`u-calendar.vue > Demo-基本用法 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </div>
-    <!---->
-    <!---->
     <div>
-      <!---->
-      <!---->
     </div>
     <div class="content">
       <div class="week">
@@ -3302,7 +2912,6 @@ exports[`u-calendar.vue > Demo-增加展示年份 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
         <span class="lcp-iconv hicon">
@@ -3312,7 +2921,6 @@ exports[`u-calendar.vue > Demo-增加展示年份 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
         <div class="yearCenter">
@@ -3326,63 +2934,35 @@ exports[`u-calendar.vue > Demo-增加展示年份 1`] = `
                       <div class="yearList">
                         <div border="true" class="root yearListInner" tabindex="0">
                           <div class="head" style="display: none;">
-                            <!---->
                             <span class="title" vusion-slot-name="title">列表</span>
                             <div class="extra">
-                              <!---->
                             </div>
                           </div>
-                          <!---->
                           <div class="body">
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2013
-                            </div>
+                              2013</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2014
-                            </div>
+                              2014</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2015
-                            </div>
+                              2015</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2016
-                            </div>
+                              2016</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2017
-                            </div>
+                              2017</div>
                             <div class="root yearitem" selected="selected" vusion-slot-name="item">
-                              <!---->
-                              2018
-                            </div>
+                              2018</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2019
-                            </div>
+                              2019</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2020
-                            </div>
+                              2020</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2021
-                            </div>
+                              2021</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2022
-                            </div>
+                              2022</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2023
-                            </div>
-                            <!---->
-                            <!---->
+                              2023</div>
                           </div>
                           <div class="foot" style="display: none;">
-                            <!---->
                           </div>
                         </div>
                       </div>
@@ -3408,67 +2988,37 @@ exports[`u-calendar.vue > Demo-增加展示年份 1`] = `
                       <div class="yearList">
                         <div border="true" class="root yearListInner" tabindex="0">
                           <div class="head" style="display: none;">
-                            <!---->
                             <span class="title" vusion-slot-name="title">列表</span>
                             <div class="extra">
-                              <!---->
                             </div>
                           </div>
-                          <!---->
                           <div class="body">
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              1 月
-                            </div>
+                              1 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              2 月
-                            </div>
+                              2 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              3 月
-                            </div>
+                              3 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              4 月
-                            </div>
+                              4 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              5 月
-                            </div>
+                              5 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              6 月
-                            </div>
+                              6 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              7 月
-                            </div>
+                              7 月</div>
                             <div class="root yearitem" role="true" vusion-slot-name="item">
-                              <!---->
-                              8 月
-                            </div>
+                              8 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              9 月
-                            </div>
+                              9 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              10 月
-                            </div>
+                              10 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              11 月
-                            </div>
+                              11 月</div>
                             <div class="root yearitem" vusion-slot-name="item">
-                              <!---->
-                              12 月
-                            </div>
-                            <!---->
-                            <!---->
+                              12 月</div>
                           </div>
                           <div class="foot" style="display: none;">
-                            <!---->
                           </div>
                         </div>
                       </div>
@@ -3492,7 +3042,6 @@ exports[`u-calendar.vue > Demo-增加展示年份 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
         <span class="lcp-iconv hicon">
@@ -3502,15 +3051,10 @@ exports[`u-calendar.vue > Demo-增加展示年份 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </div>
-      <!---->
-      <!---->
       <div>
-        <!---->
-        <!---->
       </div>
       <div class="content">
         <div class="week">
@@ -3652,8 +3196,6 @@ exports[`u-calendar.vue > Demo-增加展示年份 1`] = `
         </div>
       </div>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -3673,7 +3215,6 @@ exports[`u-calendar.vue > Demo-季度范围全部禁用 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -3718,7 +3259,6 @@ exports[`u-calendar.vue > Demo-季度范围全部禁用 1`] = `
                 </svg>
               </span>
               <div class="icontext" vusion-slot-name="default">
-                <!---->
               </div>
             </span>
           </div>
@@ -3770,7 +3310,6 @@ exports[`u-calendar.vue > Demo-季度范围最大最小值 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -3815,7 +3354,6 @@ exports[`u-calendar.vue > Demo-季度范围最大最小值 1`] = `
                 </svg>
               </span>
               <div class="icontext" vusion-slot-name="default">
-                <!---->
               </div>
             </span>
           </div>
@@ -3867,7 +3405,6 @@ exports[`u-calendar.vue > Demo-季度范围选择 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -3912,7 +3449,6 @@ exports[`u-calendar.vue > Demo-季度范围选择 1`] = `
                 </svg>
               </span>
               <div class="icontext" vusion-slot-name="default">
-                <!---->
               </div>
             </span>
           </div>
@@ -3952,7 +3488,6 @@ exports[`u-calendar.vue > Demo-季度范围选择 1`] = `
 exports[`u-calendar.vue > Demo-季选择组件 1`] = `
 <div>
   <div border="true" class="root">
-    <!---->
     <div class="headCenter">
       <span class="lcp-iconv hicon">
         <span class="iconwrap">
@@ -3961,7 +3496,6 @@ exports[`u-calendar.vue > Demo-季选择组件 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
       <div class="yearCenter">
@@ -3974,11 +3508,9 @@ exports[`u-calendar.vue > Demo-季选择组件 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </div>
-    <!---->
     <div>
       <div class="content" type="quarter">
         <ul class="quarterBox">
@@ -3996,9 +3528,7 @@ exports[`u-calendar.vue > Demo-季选择组件 1`] = `
           </li>
         </ul>
       </div>
-      <!---->
     </div>
-    <!---->
   </div>
 </div>
 `;
@@ -4018,7 +3548,6 @@ exports[`u-calendar.vue > Demo-年度范围全部禁用 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -4109,7 +3638,6 @@ exports[`u-calendar.vue > Demo-年度范围全部禁用 1`] = `
                 </svg>
               </span>
               <div class="icontext" vusion-slot-name="default">
-                <!---->
               </div>
             </span>
           </div>
@@ -4207,7 +3735,6 @@ exports[`u-calendar.vue > Demo-年度范围最大最小值 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -4298,7 +3825,6 @@ exports[`u-calendar.vue > Demo-年度范围最大最小值 1`] = `
                 </svg>
               </span>
               <div class="icontext" vusion-slot-name="default">
-                <!---->
               </div>
             </span>
           </div>
@@ -4396,7 +3922,6 @@ exports[`u-calendar.vue > Demo-年度范围选择 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -4487,7 +4012,6 @@ exports[`u-calendar.vue > Demo-年度范围选择 1`] = `
                 </svg>
               </span>
               <div class="icontext" vusion-slot-name="default">
-                <!---->
               </div>
             </span>
           </div>
@@ -4573,8 +4097,6 @@ exports[`u-calendar.vue > Demo-年度范围选择 1`] = `
 exports[`u-calendar.vue > Demo-年选择组件 1`] = `
 <div>
   <div border="true" class="root">
-    <!---->
-    <!---->
     <div class="content" type="year">
       <div>
         <div class="iconBox">
@@ -4585,7 +4107,6 @@ exports[`u-calendar.vue > Demo-年选择组件 1`] = `
               </svg>
             </span>
             <div class="icontext" vusion-slot-name="default">
-              <!---->
             </div>
           </span>
           <span>2020-2029</span>
@@ -4596,11 +4117,9 @@ exports[`u-calendar.vue > Demo-年选择组件 1`] = `
               </svg>
             </span>
             <div class="icontext" vusion-slot-name="default">
-              <!---->
             </div>
           </span>
         </div>
-        <!---->
         <ul class="yearBox">
           <li class="boxItem" sindex="0">
             <div class="yearItem">2019</div>
@@ -4639,14 +4158,10 @@ exports[`u-calendar.vue > Demo-年选择组件 1`] = `
             <div class="yearItem">2030</div>
           </li>
         </ul>
-        <!---->
       </div>
     </div>
     <div>
-      <!---->
-      <!---->
     </div>
-    <!---->
   </div>
 </div>
 `;
@@ -4666,7 +4181,6 @@ exports[`u-calendar.vue > Demo-日期范围全部禁用 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
               <span class="lcp-iconv hicon">
@@ -4676,7 +4190,6 @@ exports[`u-calendar.vue > Demo-日期范围全部禁用 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -4931,7 +4444,6 @@ exports[`u-calendar.vue > Demo-日期范围全部禁用 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
               <span class="lcp-iconv hicon">
@@ -4941,7 +4453,6 @@ exports[`u-calendar.vue > Demo-日期范围全部禁用 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -5203,7 +4714,6 @@ exports[`u-calendar.vue > Demo-日期范围最大最小值 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
               <span class="lcp-iconv hicon">
@@ -5213,7 +4723,6 @@ exports[`u-calendar.vue > Demo-日期范围最大最小值 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -5468,7 +4977,6 @@ exports[`u-calendar.vue > Demo-日期范围最大最小值 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
               <span class="lcp-iconv hicon">
@@ -5478,7 +4986,6 @@ exports[`u-calendar.vue > Demo-日期范围最大最小值 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -5740,7 +5247,6 @@ exports[`u-calendar.vue > Demo-日期范围选择 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
               <span class="lcp-iconv hicon">
@@ -5750,7 +5256,6 @@ exports[`u-calendar.vue > Demo-日期范围选择 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -6005,7 +5510,6 @@ exports[`u-calendar.vue > Demo-日期范围选择 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
               <span class="lcp-iconv hicon">
@@ -6015,7 +5519,6 @@ exports[`u-calendar.vue > Demo-日期范围选择 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -6273,7 +5776,6 @@ exports[`u-calendar.vue > Demo-最大值最小值 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
       <span class="lcp-iconv hicon" disabled="disabled">
@@ -6283,7 +5785,6 @@ exports[`u-calendar.vue > Demo-最大值最小值 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
       <div class="yearCenter">
@@ -6297,119 +5798,63 @@ exports[`u-calendar.vue > Demo-最大值最小值 1`] = `
                     <div class="yearList">
                       <div border="true" class="root yearListInner" tabindex="0">
                         <div class="head" style="display: none;">
-                          <!---->
                           <span class="title" vusion-slot-name="title">列表</span>
                           <div class="extra">
-                            <!---->
                           </div>
                         </div>
-                        <!---->
                         <div class="body">
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            1998
-                          </div>
+                            1998</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            1999
-                          </div>
+                            1999</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2000
-                          </div>
+                            2000</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2001
-                          </div>
+                            2001</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2002
-                          </div>
+                            2002</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2003
-                          </div>
+                            2003</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2004
-                          </div>
+                            2004</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2005
-                          </div>
+                            2005</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2006
-                          </div>
+                            2006</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2007
-                          </div>
+                            2007</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2008
-                          </div>
+                            2008</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2009
-                          </div>
+                            2009</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2010
-                          </div>
+                            2010</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2011
-                          </div>
+                            2011</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2012
-                          </div>
+                            2012</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2013
-                          </div>
+                            2013</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2014
-                          </div>
+                            2014</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2015
-                          </div>
+                            2015</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2016
-                          </div>
+                            2016</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2017
-                          </div>
+                            2017</div>
                           <div class="root yearitem" selected="selected" vusion-slot-name="item">
-                            <!---->
-                            2018
-                          </div>
+                            2018</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2019
-                          </div>
+                            2019</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2020
-                          </div>
+                            2020</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2021
-                          </div>
+                            2021</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2022
-                          </div>
-                          <!---->
-                          <!---->
+                            2022</div>
                         </div>
                         <div class="foot" style="display: none;">
-                          <!---->
                         </div>
                       </div>
                     </div>
@@ -6435,67 +5880,37 @@ exports[`u-calendar.vue > Demo-最大值最小值 1`] = `
                     <div class="yearList">
                       <div border="true" class="root yearListInner" tabindex="0">
                         <div class="head" style="display: none;">
-                          <!---->
                           <span class="title" vusion-slot-name="title">列表</span>
                           <div class="extra">
-                            <!---->
                           </div>
                         </div>
-                        <!---->
                         <div class="body">
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            1 月
-                          </div>
+                            1 月</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            2 月
-                          </div>
+                            2 月</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            3 月
-                          </div>
+                            3 月</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            4 月
-                          </div>
+                            4 月</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            5 月
-                          </div>
+                            5 月</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            6 月
-                          </div>
+                            6 月</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            7 月
-                          </div>
+                            7 月</div>
                           <div class="root yearitem" role="true" vusion-slot-name="item">
-                            <!---->
-                            8 月
-                          </div>
+                            8 月</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            9 月
-                          </div>
+                            9 月</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            10 月
-                          </div>
+                            10 月</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            11 月
-                          </div>
+                            11 月</div>
                           <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                            <!---->
-                            12 月
-                          </div>
-                          <!---->
-                          <!---->
+                            12 月</div>
                         </div>
                         <div class="foot" style="display: none;">
-                          <!---->
                         </div>
                       </div>
                     </div>
@@ -6519,7 +5934,6 @@ exports[`u-calendar.vue > Demo-最大值最小值 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
       <span class="lcp-iconv hicon" disabled="disabled">
@@ -6529,15 +5943,10 @@ exports[`u-calendar.vue > Demo-最大值最小值 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </div>
-    <!---->
-    <!---->
     <div>
-      <!---->
-      <!---->
     </div>
     <div class="content">
       <div class="week">
@@ -6697,7 +6106,6 @@ exports[`u-calendar.vue > Demo-月份范围全部禁用 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -6788,7 +6196,6 @@ exports[`u-calendar.vue > Demo-月份范围全部禁用 1`] = `
                 </svg>
               </span>
               <div class="icontext" vusion-slot-name="default">
-                <!---->
               </div>
             </span>
           </div>
@@ -6886,7 +6293,6 @@ exports[`u-calendar.vue > Demo-月份范围最大最小值 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -6977,7 +6383,6 @@ exports[`u-calendar.vue > Demo-月份范围最大最小值 1`] = `
                 </svg>
               </span>
               <div class="icontext" vusion-slot-name="default">
-                <!---->
               </div>
             </span>
           </div>
@@ -7075,7 +6480,6 @@ exports[`u-calendar.vue > Demo-月份范围选择 1`] = `
                   </svg>
                 </span>
                 <div class="icontext" vusion-slot-name="default">
-                  <!---->
                 </div>
               </span>
             </div>
@@ -7166,7 +6570,6 @@ exports[`u-calendar.vue > Demo-月份范围选择 1`] = `
                 </svg>
               </span>
               <div class="icontext" vusion-slot-name="default">
-                <!---->
               </div>
             </span>
           </div>
@@ -7252,7 +6655,6 @@ exports[`u-calendar.vue > Demo-月份范围选择 1`] = `
 exports[`u-calendar.vue > Demo-月选择组件 1`] = `
 <div>
   <div border="true" class="root">
-    <!---->
     <div class="headCenter">
       <span class="lcp-iconv hicon">
         <span class="iconwrap">
@@ -7261,7 +6663,6 @@ exports[`u-calendar.vue > Demo-月选择组件 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
       <div class="yearCenter">
@@ -7274,13 +6675,10 @@ exports[`u-calendar.vue > Demo-月选择组件 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </div>
-    <!---->
     <div>
-      <!---->
       <div class="content" type="month">
         <ul class="monthBox">
           <li class="boxItem" sindex="0">
@@ -7322,7 +6720,6 @@ exports[`u-calendar.vue > Demo-月选择组件 1`] = `
         </ul>
       </div>
     </div>
-    <!---->
   </div>
 </div>
 `;

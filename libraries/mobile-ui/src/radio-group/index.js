@@ -2,11 +2,12 @@ import { createNamespace, isFunction } from '../utils';
 import { formatResult } from '../utils/format/data-source';
 import { FieldMixin } from '../mixins/field';
 import { ParentMixin } from '../mixins/relation';
+import PreviewMixin from '../mixins/preview';
 
 const [createComponent, bem] = createNamespace('radio-group');
 
 export default createComponent({
-  mixins: [ParentMixin('vanRadio'), FieldMixin],
+  mixins: [ParentMixin('vanRadio'), FieldMixin, PreviewMixin],
 
   props: {
     isNew: Boolean,
@@ -44,9 +45,6 @@ export default createComponent({
     },
   },
   computed: {
-    inDesigner() {
-      return this.$env && this.$env.VUE_APP_DESIGNER;
-    },
     currentIcon() {
       return this.icon || (this.isNew ? undefined : 'sure');
     },
@@ -75,12 +73,46 @@ export default createComponent({
         this.options = formatResult(this.dataSource);
       }
     },
+
+    previewRender() {
+      const nodes = [];
+
+      if (this.$scopedSlots.default) {
+        const slots = this.$scopedSlots.default();
+        if (slots) {
+          slots.forEach((slot) => {
+            if (this.datatemp === slot.componentOptions?.propsData?.name) {
+              nodes.push(slot);
+            }
+          });
+        }
+      }
+
+      if (this.$scopedSlots.item) {
+        this.options?.forEach((item, index) => {
+          const slots = this.$scopedSlots.item({ item, index });
+          if (slots) {
+            slots.forEach((slot) => {
+              if (this.datatemp === slot.componentOptions?.propsData?.name) {
+                nodes.push(slot);
+              }
+            });
+          }
+        });
+      }
+
+      return <div class={bem([this.direction, this.isPreview ? 'preview' : ''])}>{nodes}</div>;
+    }
   },
   render() {
     // 水平排列时
     let itemWidth = 'auto';
     if (this.column > 0) {
       itemWidth = 100 / this.column + '%';
+    }
+
+    if (this.isPreview && !this.inDesigner()) {
+      return this.previewRender();
     }
 
     return (
@@ -93,50 +125,21 @@ export default createComponent({
             }}
           >
             {this.slots('item', { item, index })}
-            {this.inDesigner && index > 0 && <div class="mantle"></div>}
+            {this.inDesigner() && index > 0 && <div class="mantle"></div>}
           </div>
         ))}
-        {!this.slots() && this.options?.length === 0 && this.inDesigner && (
-          <div style="text-align: center;width:100%">
-            请绑定数据源或插入子节点
+        {!this.slots() && this.options?.length === 0 && this.inDesigner() && <div style="text-align: center;width:100%">请绑定数据源或插入子节点</div>}
+        {(this.slots() || []).map((item) => (
+          <div
+            style={{
+              position: 'relative',
+              width: itemWidth,
+            }}
+          >
+            {item}
           </div>
-        )}
-        {this.slots()}
+        ))}
       </div>
     );
-    // if (this.dataSource && this.options?.length >= 0) {
-    //   return <div class={bem([this.direction])}>
-    //     {/* <van-linear-layout direction="horizontal" layout="inline"> */}
-    //     {
-    //       this.options.map((item, index) => {
-    //         const data = {
-    //           // style: optionStyle,
-    //           attrs: {
-    //             role: 'checkbox-wrapthird',
-    //           },
-    //           class: [
-    //           ],
-    //           // on: {
-    //           //   click: () => {
-    //           //     this.onClickItem(index);
-    //           //   },
-    //           // },
-    //         };
-    //         return this.slots('item', {item, index});
-    //       })
-    //     }
-    //        {this.slots()}
-    //     {/* </van-linear-layout> */}
-    //   </div>
-    // }
-    // return (
-    //   <div class={bem([this.direction])} role="radiogroup">
-    //     {!this.slots("default") && <div style="text-align: center;width:100%">请绑定数据源或插入子节点</div>}
-    //     {this.slots()}
-    //     {/* <van-linear-layout direction="horizontal" layout="inline">
-    //       {this.slots()}
-    //     </van-linear-layout> */}
-    //   </div>
-    // );
   },
 });

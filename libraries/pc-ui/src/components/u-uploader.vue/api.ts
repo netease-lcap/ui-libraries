@@ -102,7 +102,7 @@ namespace nasl.ui {
         @Prop({
             group: '数据属性',
             title: '最大文件大小',
-            description: '可上传的最大文件大小。默认为空，表示可上传任意大小的文件；如果为数字，则表示单位为字节；如果为字符串，可以添加以下单位：`KB`、`MB`、`GB`',
+            description: '可上传的最大文件大小。默认为50MB；如果为数字，则表示单位为字节；如果为字符串，可以添加以下单位：`KB`、`MB`、`GB`',
             docDescription: '可上传的最大文件大小。默认50MB；如果为数字，则表示单位为字节；如果为字符串，可以添加以下单位kB、MB、GB',
         })
         maxSize: nasl.core.String;
@@ -460,6 +460,17 @@ namespace nasl.ui {
         })
         disabled: nasl.core.Boolean = false;
 
+        @Prop({
+            group: '状态属性',
+            title: '预览',
+            description: '显示预览态',
+            docDescription: '',
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        preview: nasl.core.Boolean = false;
+
         @Event({
             title: '上传前',
             description: '上传前触发',
@@ -489,7 +500,7 @@ namespace nasl.ui {
             };
             count: nasl.core.Integer;
             limit: nasl.core.Integer;
-            message: nasl.core.String; 
+            message: nasl.core.String;
         }) => any;
 
         @Event({

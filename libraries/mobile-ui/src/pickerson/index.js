@@ -10,6 +10,7 @@ import { FieldMixin } from '../mixins/field';
 import DataSourceMixin from '../mixins/DataSource';
 import { EmptyCol } from '../emptycol';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
+import PreviewMixin from "../mixins/preview";
 
 const [createComponent, bem, t] = createNamespace('pickerson');
 
@@ -23,6 +24,7 @@ export default createComponent({
     FieldMixin,
     DataSourceMixin,
     EventSlotCommandProvider(EventSlotCommandMap),
+    PreviewMixin,
   ],
   props: {
     readonly: Boolean,
@@ -319,6 +321,24 @@ export default createComponent({
       cancel: this.onCancel,
       scrolltolower: this.onScrollToLower,
     };
+
+    if (this.isPreview && !this.inDesigner()) {
+      return (
+        <div class={bem('wrap')} vusion-click-enabled="true">
+          <Field
+            label={this.labelField}
+            value={this.getTitle()}
+            scopedSlots={tempSlot}
+            readonly
+            isLink
+            input-align={this.inputAlign || 'right'}
+            // eslint-disable-next-line no-prototype-builtins
+            notitle={!this.$slots.hasOwnProperty('title')}
+            insel={true}
+          />
+        </div>
+      );
+    }
 
     return (
       <div class={bem('wrap')} vusion-click-enabled="true">

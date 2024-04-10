@@ -1,7 +1,6 @@
 <template>
   <demo-section>
-    <demo-block :title="t('basicUsage')">
-      <div>{{ step }}</div>
+    <demo-block title="基础用法">
       <van-steps
         direction="vertical"
         :active.sync="step"
@@ -12,12 +11,17 @@
           :status="(((current || {}).item || {}).entity3 || {}).stepStatus">{{current.item.entity3.title}}</van-step>
         </template>
       </van-steps>
+    </demo-block>
 
+    <demo-block title="基础用法">
       <van-steps>
         <van-step>sadsdfsadsafdasafasd阿斯顿发生发顺丰阿斯顿发送到发的是分身乏术的阿斯顿夫妇撒地方水电费水电费是大丰收打发分身乏术地方</van-step>
         <van-step icon="sure">2</van-step>
         <van-step>3</van-step>
       </van-steps>
+    </demo-block>
+
+    <demo-block title="基础用法">
       <van-steps
         direction="vertical"
       >
@@ -25,55 +29,8 @@
         <van-step icon="sure">2</van-step>
         <van-step>3</van-step>
       </van-steps>
-
-      <!-- <van-steps>
-        <van-step>{{ t('step1') }}</van-step>
-        <van-step>{{ t('step2') }}</van-step>
-        <van-step>{{ t('step3') }}</van-step>
-        <van-step>{{ t('step4') }}</van-step>
-        <van-step>{{ t('step4') }}</van-step>
-      </van-steps> -->
-
-      <!-- <van-steps :active.sync="active">
-        <van-step>{{ t('step1') }}</van-step>
-        <van-step>{{ t('step2') }}</van-step>
-        <van-step>{{ t('step3') }}</van-step>
-        <van-step>{{ t('step4') }}</van-step>
-      </van-steps>
-
-      <van-button @click="nextStep">{{ t('nextStep') }}</van-button> -->
     </demo-block>
 
-    <!-- <demo-block :title="t('customStyle')">
-      <van-steps
-        :active="active"
-        active-icon="success"
-        inactive-icon="arrow"
-        active-color="#38f"
-      >
-        <van-step>{{ t('step1') }}</van-step>
-        <van-step>{{ t('step2') }}</van-step>
-        <van-step>{{ t('step3') }}</van-step>
-        <van-step>{{ t('step4') }}</van-step>
-      </van-steps>
-    </demo-block> -->
-
-    <!-- <demo-block :title="t('title3')">
-      <van-steps :active="0" direction="vertical">
-        <van-step>
-          <h3>{{ t('status1') }}</h3>
-          <p>2016-07-12 12:40</p>
-        </van-step>
-        <van-step>
-          <h3>{{ t('status2') }}</h3>
-          <p>2016-07-11 10:00</p>
-        </van-step>
-        <van-step>
-          <h3>{{ t('status3') }}</h3>
-          <p>2016-07-10 09:30</p>
-        </van-step>
-      </van-steps>
-    </demo-block> -->
   </demo-section>
 </template>
 

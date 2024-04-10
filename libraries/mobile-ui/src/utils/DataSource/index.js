@@ -447,7 +447,7 @@ const VueDataSource = Vue.extend({
             number: 1,
           });
 
-          this.load();
+          return this.load();
         },
         page(paging) {
             this.paging = paging;
