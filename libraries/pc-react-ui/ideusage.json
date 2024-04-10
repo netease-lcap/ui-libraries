@@ -400,7 +400,13 @@
     "ideusage": {
       "idetype": "container",
       "structured": true,
-      "childAccept": "target.tag === 'TabPane'"
+      "childAccept": "target.tag === 'TabPane'",
+      "dataSource": {
+        "display": 4,
+        "dismiss": "!this.getAttribute('dataSource')",
+        "displayData": "{[ { key:1 }, { key:2 }, { key:3 }]}",
+        "loopElem": "> .cw-tabs-nav  .cw-tabs-tab"
+      }
     }
   },
   {
