@@ -57,8 +57,8 @@
   "devDependencies": {
     "@ant-design/static-style-extract": "^1.0.2",
     "@babel/parser": "^7.23.6",
-    "@lcap/builder": "workspace:^1.0.0",
-    "@lcap/ui-cli": "workspace:^1.0.0",
+    "@lcap/builder": "workspace:*",
+    "@lcap/ui-cli": "workspace:*",
     "@nasl/types": "^0.1.6",
     "@storybook/addon-essentials": "^7.6.7",
     "@storybook/addon-interactions": "^7.6.7",

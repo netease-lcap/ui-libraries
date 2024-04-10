@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import glob from 'fast-glob';
 import genNaslComponentConfig from './gen-nasl-component-config';
+import genNaslLogicsConfig from './gen-nasl-logics-config';
 
 export interface GenNaslExtensionConfigProps {
   // cwd
@@ -51,6 +52,54 @@ function getPeerDependencies(pkgInfo) {
   });
 }
 
+function getFrontEndLibray(frameworkKind, viewComponents, logics) {
+  const pcFeLibrary: any = {
+    concept: 'FrontendLibrary',
+    name: 'pc',
+    type: 'pc',
+    frameworkKind,
+    viewComponents: [],
+    logics: [],
+  };
+
+  const mobileFeLibrary: any = {
+    concept: 'FrontendLibrary',
+    name: 'mobile',
+    type: 'mobile',
+    frameworkKind,
+    viewComponents: [],
+    logics: [],
+  };
+
+  viewComponents.forEach((c) => {
+    const typeKind = ['both', 'pc', 'mobile'].indexOf(c.type) !== -1 ? c.type : 'pc';
+    if (typeKind === 'pc') {
+      pcFeLibrary.viewComponents.push(c);
+    } else if (typeKind === 'mobile') {
+      mobileFeLibrary.viewComponents.push(c);
+    } else {
+      pcFeLibrary.viewComponents.push(c);
+      mobileFeLibrary.viewComponents.push(c);
+    }
+  });
+
+  logics.forEach((c) => {
+    const typeKind = ['both', 'pc', 'mobile'].indexOf(c.type) !== -1 ? c.type : 'pc';
+    if (typeKind === 'pc') {
+      pcFeLibrary.logics.push(c);
+    } else if (typeKind === 'mobile') {
+      mobileFeLibrary.logics.push(c);
+    } else {
+      pcFeLibrary.logics.push(c);
+      mobileFeLibrary.logics.push(c);
+    }
+  });
+
+  return [pcFeLibrary, mobileFeLibrary].filter((library) => {
+    return library.viewComponents.length > 0 || library.logics.length > 0;
+  });
+}
+
 export default async function getNaslExtensionConfig({
   rootPath,
   assetsPublicPath,
@@ -71,6 +120,8 @@ export default async function getNaslExtensionConfig({
 
     return componentConfig;
   });
+  const logics = await genNaslLogicsConfig(rootPath);
+  const feLibraries = getFrontEndLibray(frameworkKind, viewComponents, logics);
 
   return {
     name: pkgInfo.name,
@@ -80,14 +131,7 @@ export default async function getNaslExtensionConfig({
     type: 'module',
     subType: 'extension',
     version: pkgInfo.version,
-    frontends: [{
-      concept: 'FrontendLibrary',
-      name: 'pc',
-      type: 'pc',
-      frameworkKind,
-      viewComponents,
-      logics: [],
-    }],
+    frontends: feLibraries,
     externalDependencyMap: {
       npm: getPeerDependencies(pkgInfo),
     },
@@ -96,15 +140,18 @@ export default async function getNaslExtensionConfig({
       title: pkgInfo.title,
       version: pkgInfo.version,
       description: pkgInfo.description,
-      frontends: [{
-        type: 'pc',
+      frontends: feLibraries.map((library) => ({
+        type: library.type,
         frameworkKind,
-        viewComponents: viewComponents.map((item) => ({
+        viewComponents: library.viewComponents.map((item: any) => ({
           name: item.name,
           title: item.title,
         })),
-        logics: [],
-      }],
+        logics: library.logics.map((item: any) => ({
+          name: item.name,
+          description: item.title || item.description || item.name,
+        })),
+      })),
     },
     compilerInfoMap: {
       js: {
