@@ -1,10 +1,11 @@
 /* eslint-disable no-param-reassign */
 import fs from 'fs-extra';
 import path from 'path';
-import { transform } from '../../transforms/naslTs2Json.js';
+import { parseComponentAPI as transform } from '@lcap/builder';
 import * as logger from '../../utils/logger.mjs';
 import transformStory2Blocks from '../../transforms/story2block.mjs';
-import { getComponentPathInfo } from '../../index.mjs';
+import { getComponentPathInfo } from '../../utils/index.mjs';
+import snippetCode2NASL from '../../transforms/snippetCode2NASL.mjs';
 
 function hasImg(dir) {
   return fs.existsSync(path.join(dir, '0.png'));
@@ -13,13 +14,7 @@ function hasSvg(dir) {
   return fs.existsSync(path.join(dir, '0.svg'));
 }
 
-function getScreenShot(
-  componentDir,
-  component,
-  libInfo,
-  sourceDir,
-  publicPath,
-) {
+function getScreenShot(componentDir, component, libInfo, sourceDir, publicPath) {
   let screenShot = [];
   try {
     const screenShotPath = `${componentDir}/screenshots`;
@@ -78,11 +73,18 @@ function getBlocksByDemo(componentDir, { screenshots, drawings }) {
     const matches = content.match(/<!--.*?-->/);
     let title = '';
     if (matches.length > 0) {
-      title = matches[0].replace(/<!--/, '').replace(/-->/, '').trim();
+      title = matches[0]
+        .replace(/<!--/, '')
+        .replace(/-->/, '')
+        .trim();
       content = content.replace(/<!--.*?-->/, '');
     }
 
-    const code = content.split('\n').map((s) => s.trim()).filter((s) => !!s).join('\n');
+    const code = content
+      .split('\n')
+      .map((s) => s.trim())
+      .filter((s) => !!s)
+      .join('\n');
     blocks.push({
       concept: 'ViewBlockWithImage',
       title,
@@ -122,85 +124,81 @@ function getBlocksByStory(componentDir, { screenshots, drawings }) {
  */
 function genUsageByTs(config) {
   const {
-    rootPath,
-    assetsPublicPath,
-    destPath,
-    componentsPath,
-    components,
-    blockGenerateType,
+    rootPath, assetsPublicPath, destPath, componentsPath, components, blockGenerateType,
   } = config;
   const data = [];
   const packageInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
   const libInfo = [packageInfo.name, '@', packageInfo.version].join('');
+  components
+    .map((obj) => ({ ...obj }))
+    .forEach((component) => {
+      const { componentDir, symbol, sourceDir } = getComponentPathInfo(component.name, rootPath, componentsPath);
+      component.symbol = symbol;
+      const tsPath = component.apiPath ? path.resolve(rootPath, componentsPath, component.apiPath) : `${componentDir}/api.ts`;
+      if (!fs.existsSync(tsPath)) {
+        logger.error(`未找到组件 ${component.name} 的描述文件（api.ts）`);
+        process.exit(1);
+      }
 
-  components.map((obj) => ({ ...obj })).forEach((component) => {
-    const { componentDir, symbol, sourceDir } = getComponentPathInfo(component.name, rootPath, componentsPath);
+      // api.ts
+      try {
+        // component.tsPath = tsPath;
+        const info = transform(fs.readFileSync(tsPath, 'utf8'));
+        Object.assign(component, info[0]);
+        if (packageInfo.name === '@lcap/pc-react-ui' && component.slots && component.slots.length > 0) {
+          component.slots.forEach((slotConfig) => {
+            if (!slotConfig.snippets || slotConfig.snippets.length === 0) {
+              return;
+            }
 
-    component.symbol = symbol;
+            slotConfig.snippets = slotConfig.snippets.map((snippetConfig) => ({
+              ...snippetConfig,
+              code: snippetCode2NASL(snippetConfig.code),
+            }));
+          });
+        }
+      } catch (e) {
+        logger.error(`解析 ${tsPath} 失败，${e.message}`);
+        process.exit(1);
+      }
 
-    // const rootComponentDir = path.join(rootPath, componentsPath);
-    // let componentDir = path.join(rootComponentDir, `${component.name}`);
+      const extendsOptions = component?.extends?.map?.((item) => {
+        const targetComponents = data.find((el) => item === el.name);
+        if (!targetComponents) return {};
+        return {
+          props: targetComponents?.props ?? [],
+          events: targetComponents?.events ?? [],
+          methods: targetComponents?.methods ?? [],
+          slots: targetComponents?.slots ?? [],
+          blocks: targetComponents?.blocks ?? [],
+        };
+      });
+      extendsOptions?.forEach((options) => Object.entries(options).forEach(([key, value]) => component[key]?.push(...value)));
+      if (component.apiPath && !component.show) {
+        delete component.symbol;
+        delete component.apiPath;
+        data.push({
+          ...component,
+          blocks: [],
+        });
+        return;
+      }
 
-    // // 兼容 mobile-ui 处理
-    // const srcCompDir = path.join(rootPath, `./src/${component.name}`);
-    // let sourceDir = componentsPath;
-    // component.symbol = component.name;
+      const screenshots = getScreenShot(componentDir, component, libInfo, sourceDir, assetsPublicPath);
 
-    // if (!fs.existsSync(componentDir)) {
-    //   if (fs.existsSync(srcCompDir)) {
-    //     componentDir = srcCompDir;
-    //     sourceDir = 'src';
-    //   } else {
-    //     const name = `${componentDir}.vue`;
-    //     componentDir = name;
-    //     component.symbol = `${component.name}.vue`;
-    //   }
-    // }
+      const drawings = getDrawings(componentDir, component, libInfo, sourceDir, assetsPublicPath);
 
-    const tsPath = `${componentDir}/api.ts`;
-    if (!fs.existsSync(tsPath)) {
-      logger.error(`未找到组件 ${component.name} 的描述文件（api.ts）`);
-      process.exit(1);
-    }
-
-    // api.ts
-    try {
-      // component.tsPath = tsPath;
-      const info = transform(fs.readFileSync(tsPath, 'utf8'));
-      Object.assign(component, info[0]);
-    } catch (e) {
-      logger.error(`解析 ${tsPath} 失败，${e.message}`);
-      process.exit(1);
-    }
-
-    const screenshots = getScreenShot(
-      componentDir,
-      component,
-      libInfo,
-      sourceDir,
-      assetsPublicPath,
-    );
-    const drawings = getDrawings(
-      componentDir,
-      component,
-      libInfo,
-      sourceDir,
-      assetsPublicPath,
-    );
-
-    // blocks
-    try {
-      const blocks = blockGenerateType === 'story'
-        ? getBlocksByStory(componentDir, { screenshots, drawings })
-        : getBlocksByDemo(componentDir, { screenshots, drawings });
-      Object.assign(component, { blocks });
-    } catch (e) {
-      logger.error(`处理 block 异常 ${e.message}`);
-    }
-
-    delete component.symbol;
-    data.push(component);
-  });
+      // blocks
+      try {
+        const blocks = blockGenerateType === 'story' ? getBlocksByStory(componentDir, { screenshots, drawings }) : getBlocksByDemo(componentDir, { screenshots, drawings });
+        Object.assign(component, { blocks });
+      } catch (e) {
+        logger.error(`处理 block 异常 ${e.message}`);
+      }
+      // console.log(component, 'component', component.extends);
+      delete component.symbol;
+      data.push(component);
+    });
 
   const destDir = path.join(rootPath, destPath);
   if (!fs.existsSync(destDir)) {

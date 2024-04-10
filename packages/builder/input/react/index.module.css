@@ -1,0 +1,51 @@
+.componentPreview {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 24px;
+}
+
+.componentCard {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--cw-color-text);
+  font-size: var(--cw-font-size);
+  line-height: var(--cw-line-height);
+  list-style: none;
+  font-family: var(--cw-font-family);
+  position: relative;
+  background: var(--cw-color-bg-container);
+  border-radius: var(--cw-border-radius-lg);
+  box-shadow: var(--cw-box-shadow-tertiary);
+  border: 1px solid transparent;
+}
+
+.componentCard:hover {
+  box-shadow: var(--cw-box-shadow-card);
+}
+
+.componentCard.active {
+  border-color: var(--cw-color-primary);
+}
+
+.componentCardTitle {
+  display: flex;
+  align-items: center;
+  min-height: var(--cw-card-header-height);
+  margin-bottom: -1px;
+  padding: 0 var(--cw-padding-lg);
+  color: var(--cw-color-text-heading);
+  font-weight: var(--cw-font-weight-strong);
+  font-size: var(--cw-card-header-font-size);
+  background: var(--cw-card-header-bg);
+  border-bottom: var(--cw-line-width) var(--cw-line-type) var(--cw-color-border-secondary);
+  border-radius: var(--cw-border-radius-lg) var(--cw-border-radius-lg) 0 0;
+}
+
+.componentCardBody {
+  padding: var(--cw-padding-lg);
+  border-radius: 0 0 var(--cw-border-radius-lg) var(--cw-border-radius-lg);
+}

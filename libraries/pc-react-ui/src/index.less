@@ -1,0 +1,11 @@
+// @prefix: var(--cw-prefix, cw-);
+@pre: ant;
+
+.@{pre}-form-item:not(.@{pre}-form-item-hidden) {
+  display: inline-block;
+}
+.@{pre}-form {
+  .@{pre}-form-item:not(.@{pre}-form-item-hidden) {
+    display: block;
+  }
+}

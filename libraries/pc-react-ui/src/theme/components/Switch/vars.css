@@ -1,0 +1,84 @@
+/**
+ * @component Switch
+ * @useGlobalTokens ["--cw-motion-duration-mid","--cw-color-primary","--cw-opacity-loading","--cw-font-size-icon","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-color-text-quaternary","--cw-color-text-tertiary","--cw-line-width-focus","--cw-color-primary-border","--cw-color-primary-hover","--cw-color-text-light-solid","--cw-font-size-sm","--cw-margin-xxs"]
+ */
+.cw-nasl.cw-switch,
+.cw-nasl.cw-switch-css-var {
+  /**
+   * @desc 开关把手背景色
+   * @type color
+   */
+  --cw-switch-handle-bg: #fff;
+
+  /**
+   * @desc 开关把手阴影
+   * @type input
+   */
+  --cw-switch-handle-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
+
+  /**
+   * @desc 开关把手大小
+   * @type size
+   */
+  --cw-switch-handle-size: calc(var(--cw-font-size) * var(--cw-line-height) - 4px);
+
+  /**
+   * @desc 小号开关把手大小
+   * @type size
+   */
+  --cw-switch-handle-size-sm: calc(var(--cw-control-height) / 2 - 4px);
+
+  /**
+   * @desc 内容区域最大边距
+   * @type size
+   */
+  --cw-switch-inner-max-margin: calc(calc(var(--cw-font-size) * var(--cw-line-height) - 4px) + 6px);
+
+  /**
+   * @desc 小号开关内容区域最大边距
+   * @type size
+   */
+  --cw-switch-inner-max-margin-sm: calc(calc(var(--cw-control-height) / 2 - 4px) + 6px);
+
+  /**
+   * @desc 内容区域最小边距
+   * @type size
+   */
+  --cw-switch-inner-min-margin: calc(calc(var(--cw-font-size) * var(--cw-line-height) - 4px) / 2);
+
+  /**
+   * @desc 小号开关内容区域最小边距
+   * @type size
+   */
+  --cw-switch-inner-min-margin-sm: calc(calc(var(--cw-control-height) / 2 - 4px) / 2);
+
+  /**
+   * @desc 开关高度
+   * @type size
+   */
+  --cw-switch-track-height: calc(var(--cw-font-size) * var(--cw-line-height));
+
+  /**
+   * @desc 小号开关高度
+   * @type size
+   */
+  --cw-switch-track-height-sm: calc(var(--cw-control-height) / 2);
+
+  /**
+   * @desc 开关最小宽度
+   * @type size
+   */
+  --cw-switch-track-min-width: calc(calc(calc(var(--cw-font-size) * var(--cw-line-height) - 4px) * 2) + 8px);
+
+  /**
+   * @desc 小号开关最小宽度
+   * @type size
+   */
+  --cw-switch-track-min-width-sm: calc(calc(var(--cw-control-height) / 2 - 4px) * 2 + 4px);
+
+  /**
+   * @desc 开关内边距
+   * @type size
+   */
+  --cw-switch-track-padding: 2px;
+}
