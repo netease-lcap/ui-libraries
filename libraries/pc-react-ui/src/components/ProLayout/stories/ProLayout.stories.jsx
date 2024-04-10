@@ -70,6 +70,9 @@ export const 默认 = {
       >
         <ProLayout
           avatarSrc="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
+          getTargetContainer={(el) => {
+            return document.getElementById('test-pro-layout') || document.body;
+          }}
           avatarTitle="张梦燕"
           fixSiderbar
           layout="mix"

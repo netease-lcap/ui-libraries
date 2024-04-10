@@ -58,7 +58,7 @@ namespace nasl.ui {
       },
       // if: (_) => _.hasDataSource === true,
     })
-    textField: (item: T) => any = ((item: any) => item.text) as any;
+    textField: (item: T) => any = ((item: any) => item.key) as any;
 
     @Prop<DropdownOptions<T, V>, 'valueField'>({
       group: '数据属性',

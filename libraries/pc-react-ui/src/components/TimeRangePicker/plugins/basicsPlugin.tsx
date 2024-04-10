@@ -49,7 +49,7 @@ export function useHandleValue(props) {
         [_.stubTrue, ({ time: selfTime }) => selfTime?.format('HH:mm:ss')],
       ]);
       _.attempt(onChangeProps, [formatTime({ time: time?.[0] }), formatTime({ time: time?.[1] })]);
-      onChange(time);
+      // onChange(time);
     },
   };
 }

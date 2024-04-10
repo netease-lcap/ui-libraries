@@ -28,7 +28,7 @@ export const 异步函数 = {
     React.useEffect(() => {
       console.log(ref, 'ref');
     }, []);
-    return [<Image {...args} style={{ width: '200px', marginRight: '100px' }} />, <Image {...args} />];
+    return [<Image {...args} preview data-nodepath="123" style={{ width: '200px', marginRight: '100px' }} />, <Image {...args} />];
   },
   args: {
     width: '200px',

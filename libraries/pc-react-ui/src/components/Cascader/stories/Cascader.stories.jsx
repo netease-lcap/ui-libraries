@@ -42,46 +42,49 @@ export const 异步函数 = {
   },
 };
 export const 同步函数 = {
-  render: (args) => (
-    <Cascader
-      dataSource={async () => {
-        return [
-          {
-            entity1: {
-              id: 1,
-              createdTime: null,
-              updatedTime: null,
-              createdBy: null,
-              updatedBy: null,
-              fid: 0,
-              name: '选项1',
-              sonid: [],
+  render: (args) => {
+    const [value, onChange] = React.useState();
+
+    return (
+      <Cascader
+        value={value}
+        onChange={onChange}
+        dataSource={async () => {
+          return [
+            {
+              entity1: {
+                id: 1,
+                createdTime: null,
+                updatedTime: null,
+                createdBy: null,
+                updatedBy: null,
+                fid: 0,
+                name: '选项1',
+                sonid: [],
+              },
             },
-          },
-          {
-            entity1: {
-              id: 2,
-              createdTime: null,
-              updatedTime: null,
-              createdBy: null,
-              updatedBy: null,
-              fid: 0,
-              name: '选项2',
-              sonid: [],
+            {
+              entity1: {
+                id: 2,
+                createdTime: null,
+                updatedTime: null,
+                createdBy: null,
+                updatedBy: null,
+                fid: 0,
+                name: '选项2',
+                sonid: [],
+              },
             },
-          },
-        ];
-      }}
-      valueField="entity1.id"
-      textField="entity1.name"
-      parentField="entity1.fid"
-      data-nodepath="1234"
-      labelText="234"
-      // valueField="entity1.id"
-      // textfield="entity1.name"
-      // parentField="entity1.fid"
-    />
-  ),
+          ];
+        }}
+        valueField="entity1.id"
+        textField="entity1.name"
+        parentField="entity1.fid"
+        data-nodepath="1234"
+        labelText="234"
+      />
+    );
+  },
   args: {
     dataSource: async () => [
       {
@@ -144,6 +147,5 @@ export const ref = {
   },
   args: {
     style: { width: 300 },
- 
   },
 };

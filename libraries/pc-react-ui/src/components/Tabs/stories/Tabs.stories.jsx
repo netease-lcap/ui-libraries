@@ -46,6 +46,8 @@ export const 异步函数 = {
           textField="entityForSel.name"
           valueField="entityForSel.id"
           onActiveKeyChange={setValue}
+          renderTitle={(item) => <Text>{item.entityForSel.name}</Text> }
+          renderContent={(item) => <Text>{item.entityForSel.name}</Text>}
         />
       </div>
     );

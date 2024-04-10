@@ -158,7 +158,6 @@ export const 默认1 = {
           <DateRangePicker
             labelText="表单日期范围选择"
             name="time"
-            format={(value) => value.format('YYYY-MM-DD')}
           />
           <ProFormDateRangePicker name="time2" />
         </Form>

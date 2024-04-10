@@ -65,7 +65,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    textField: (item: T) => any = ((item: any) => item.text) as any;
+    textField: (item: T) => any = ((item: any) => item.key) as any;
 
     @Prop<FormCascaderOptions<T, V>, 'valueField'>({
       group: '数据属性',

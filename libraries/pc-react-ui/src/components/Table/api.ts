@@ -334,26 +334,26 @@ namespace nasl.ui {
     })
     showHeader: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: '表格头部吸顶',
-      docDescription: '当页面滚动到顶时，表格头是否固定在头部，不随页面滚动。默认关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    sticky: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '表格头部固定',
+    //   docDescription: '表格设置内容高度时,表格头部固定内容滚动',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // sticky: nasl.core.Boolean = false;
 
-    @Prop<TableOptions<T, V, P, M>, 'stickyOffsetTop'>({
-      group: '主要属性',
-      title: '表格头部吸顶偏移量',
-      docDescription: '与"表格头部吸顶"选项配合使用，表示表格头吸顶时与顶部的距离',
-      setter: {
-        concept: 'NumberInputSetter',
-      },
-      if: (_) => _.sticky === true,
-    })
-    stickyOffsetTop: nasl.core.Decimal = 0;
+    // @Prop<TableOptions<T, V, P, M>, 'stickyOffsetTop'>({
+    //   group: '主要属性',
+    //   title: '表格头部吸顶偏移量',
+    //   docDescription: '与"表格头部吸顶"选项配合使用，表示表格头吸顶时与顶部的距离',
+    //   setter: {
+    //     concept: 'NumberInputSetter',
+    //   },
+    //   if: (_) => _.sticky === true,
+    // })
+    // stickyOffsetTop: nasl.core.Decimal = 0;
 
     // @Prop({
     //   group: '数据属性',
@@ -1170,16 +1170,16 @@ namespace nasl.ui {
     })
     width: nasl.core.String | nasl.core.Decimal;
 
-    @Prop({
-      group: '样式属性',
-      title: '合并列数',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 1,
-        precision: 0,
-      },
-    })
-    colSpan: nasl.core.Integer;
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '合并列数',
+    //   setter: {
+    //     concept: 'NumberInputSetter',
+    //     min: 1,
+    //     precision: 0,
+    //   },
+    // })
+    // colSpan: nasl.core.Integer;
 
     // @Prop({
     //   group: '样式属性',

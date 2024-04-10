@@ -55,9 +55,12 @@ namespace nasl.ui {
       group: '数据属性',
       title: '数据源',
       description: '展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑',
-      docDescription: '数据列表，支持直接放置多层的数据源也支持通过单层的数据和`父节点字段名`或`子节点字段名`构建树形',
+      docDescription:
+        '数据列表，支持直接放置多层的数据源也支持通过单层的数据和`父节点字段名`或`子节点字段名`构建树形',
     })
-    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+    dataSource:
+      | nasl.collection.List<T>
+      | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
     @Prop({
       group: '数据属性',
@@ -76,7 +79,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    textField: (item: T) => any = ((item: any) => item.text) as any;
+    textField: (item: T) => any = ((item: any) => item.label) as any;
 
     @Prop<CascaderOptions<T, V>, 'valueField'>({
       group: '数据属性',
@@ -98,13 +101,15 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    childrenField: (item: T) => nasl.collection.List<any> = ((item: any) => item.children) as any;
+    childrenField: (item: T) => nasl.collection.List<any> = ((item: any) =>
+      item.children) as any;
 
     @Prop({
       group: '数据属性',
       title: '父级值字段',
       description: '集合的元素类型中，用于标识父节点的属性',
-      docDescription: '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
+      docDescription:
+        '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -263,10 +268,15 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '连接符',
-      description: '将选中的值以选择的符号作为连接符，转为字符串格式,不可为空值',
+      description:
+        '将选中的值以选择的符号作为连接符，转为字符串格式,不可为空值',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: "以', '连接" }, { title: "以'|'连接" }, { title: "以' / '连接" }],
+        options: [
+          { title: "以', '连接" },
+          { title: "以'|'连接" },
+          { title: "以' / '连接" },
+        ],
       },
     })
     private join: ',' | '|' | ' / ' = ' / ';
@@ -281,7 +291,11 @@ namespace nasl.ui {
       title: '选择完成后',
       description: '选择完成后的回调',
     })
-    onChange: (event: { value: V; values: nasl.collection.List<V>; items: nasl.collection.List<T> }) => any;
+    onChange: (event: {
+      value: V;
+      values: nasl.collection.List<V>;
+      items: nasl.collection.List<T>;
+    }) => any;
 
     @Event({
       title: '获得焦点',

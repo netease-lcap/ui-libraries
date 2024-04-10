@@ -27,12 +27,22 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
-    const [value, setValue] = React.useState(['2024-03-11T11:34:40.334Z', '2024-03-11T11:34:40.334Z']);
+    const [value, setValue] = React.useState([
+      '2024-03-11T11:34:40.334Z',
+      '2024-03-11T11:34:40.334Z',
+    ]);
     // setTimeout(() => {
     //   console.log('---');
     //   setValue(null);
     // }, 3000);
-    return <DateRangePicker {...args} value={value} data-nodepath="123433" />;
+    return (
+      <DateRangePicker
+        {...args}
+        // value={value}
+        // onChange={setValue}
+        data-nodepath="123433"
+      />
+    );
   },
   args: {
     color: 'magenta',

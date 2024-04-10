@@ -8,7 +8,7 @@ export function Icon(props) {
   // _.isValidLink
   const name = props.name ?? 'RiNeteaseCloudMusicLine';
   if (name?.includes('.svg')) {
-    return <img src={name} width={20} alt="icon" />;
+    return <img {...props} src={name} width={20} alt="icon" />;
   }
   return (
     <i {...props} className={_.kebabCase(name)} />

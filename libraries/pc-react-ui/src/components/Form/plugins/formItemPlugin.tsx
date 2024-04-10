@@ -29,7 +29,7 @@ export function useHandleDefaultValue(props) {
   React.useEffect(() => {
     const name = props.get('name');
     const defaultValue = props.get('defaultValue');
-    form?.setFieldValue?.(name, defaultValue);
+    form?.setFieldValue?.(name, defaultValue ?? null);
   }, []);
 }
 export function useHandleFormWarplabel(props) {

@@ -42,7 +42,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    textField: (item: T) => any = ((item: any) => item.text) as any;
+    textField: (item: T) => any = ((item: any) => item.title) as any;
 
     @Prop({
       group: '数据属性',

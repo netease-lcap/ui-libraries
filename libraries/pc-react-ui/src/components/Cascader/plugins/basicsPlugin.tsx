@@ -15,10 +15,8 @@ export function useHandleStyle(props) {
   };
 }
 export function useHandleValue(props) {
-  const valueProps = props.get('value');
-  const onChangeProps = props.get('onChange');
   const refProps = props.get('ref');
-  const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueProps, onChange: onChangeProps }));
+  const [value, onChange] = useControllableValue(_.controllableValue(props));
   const ref = _.assign(refProps, { value });
   return {
     value,

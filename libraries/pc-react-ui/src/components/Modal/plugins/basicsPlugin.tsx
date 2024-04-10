@@ -13,7 +13,12 @@ export function useHandleOpenRef(props) {
   const deletePropsList = props.get($deletePropsList, []).concat(['defaultOpen']);
   const [open, setOpen] = useControllableValue(_.filterUnderfinedValue({ value: openProps, defaultValue: defaultOpen }));
   const selfRef = React.useMemo(() => ({
-    open: () => setOpen(true),
+    open: () => {
+      return new Promise((resolve) => {
+        setOpen(true);
+        setTimeout(resolve, 0);
+      });
+    },
     close: () => setOpen(false),
     visible: open,
     ...ref,

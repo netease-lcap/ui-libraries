@@ -96,6 +96,7 @@ export const 异步 = {
     onDoubleClick: (...e) => {
       console.log(...e, 'onClickRow');
     },
+    sticky: true,
     async dataSource(params) {
       return {
         list: new Array(50).fill(1).map((item, index) => ({
@@ -128,13 +129,374 @@ export const 异步 = {
 export const 同步 = {
   render: (args) => {
     const ref = React.useRef({});
+    const [sticky, setSticky] = React.useState(false);
     React.useEffect(() => {
       console.log(ref, 'ref');
+      setTimeout(() => {
+        setSticky(true);
+        console.log(11111);
+      }, 3000);
     }, []);
+    function HoistNodePath(params) {
+      return <div />;
+    }
     return (
       <div>
-        <button onClick={() => ref.current.reload()}>13214</button>
-        <Table {...args} ref={ref} />
+        {`${sticky}sticky`}
+        <button onClick={() => setSticky((el) => !el)}>123</button>
+        <Table
+          data-nodepath="rootview.0"
+          key={`component-270${sticky}`}
+          dataSource={[{}, {}, {}]}
+          search={false}
+          options={false}
+          rowKey="lCAPPerResMapping.id"
+          sticky={sticky}
+          className="ide-style0"
+        >
+          <TableColumn
+            ide-iscontainer="true"
+            dataIndex="lCAPPerResMapping.createdTime"
+            key="component-271"
+            render={() => (
+              <>
+                <HoistNodePath
+                  key="126"
+                  nodePath="rootview.0.0"
+                  topSelector="td"
+                  data-nodepath-multiple="true"
+                />
+                <div ide-draggable="false" data-nodepath="rootview.0.0.0">
+                  <Flex
+                    data-nodepath="rootview.0.0.0.0"
+                    ide-iscontainer="true"
+                    gap="small"
+                    key="component-272"
+                  >
+                    <Text
+                      data-nodepath="rootview.0.0.0.0.0"
+                      children="{{current.item.lCAPPerResMapping.createdTime}}"
+                      key="component-273"
+                      data-editable="true"
+                    />
+                  </Flex>
+                </div>
+              </>
+            )}
+            title={() => (
+              <>
+                <HoistNodePath
+                  key="127"
+                  nodePath="rootview.0.0"
+                  topSelector="th"
+                  data-nodepath-multiple="true"
+                />
+                <div ide-draggable="false" data-nodepath="rootview.0.0.1">
+                  <Text
+                    data-nodepath="rootview.0.0.1.0"
+                    children="创建时间"
+                    key="component-274"
+                    data-editable="true"
+                  />
+                </div>
+              </>
+            )}
+          />
+          <TableColumn
+            ide-iscontainer="true"
+            dataIndex="lCAPPerResMapping.updatedTime"
+            key="component-275"
+            render={() => (
+              <>
+                <HoistNodePath
+                  key="128"
+                  nodePath="rootview.0.1"
+                  topSelector="td"
+                  data-nodepath-multiple="true"
+                />
+                <div ide-draggable="false" data-nodepath="rootview.0.1.0">
+                  <Flex
+                    data-nodepath="rootview.0.1.0.0"
+                    ide-iscontainer="true"
+                    gap="small"
+                    key="component-276"
+                  >
+                    <Text
+                      data-nodepath="rootview.0.1.0.0.0"
+                      children="{{current.item.lCAPPerResMapping.updatedTime}}"
+                      key="component-277"
+                      data-editable="true"
+                    />
+                  </Flex>
+                </div>
+              </>
+            )}
+            title={() => (
+              <>
+                <HoistNodePath
+                  key="129"
+                  nodePath="rootview.0.1"
+                  topSelector="th"
+                  data-nodepath-multiple="true"
+                />
+                <div ide-draggable="false" data-nodepath="rootview.0.1.1">
+                  <Text
+                    data-nodepath="rootview.0.1.1.0"
+                    children="更新时间"
+                    key="component-278"
+                    data-editable="true"
+                  />
+                </div>
+              </>
+            )}
+          />
+          <TableColumn
+            ide-iscontainer="true"
+            dataIndex="lCAPPerResMapping.createdBy"
+            key="component-279"
+            render={() => (
+              <>
+                <HoistNodePath
+                  key="130"
+                  nodePath="rootview.0.2"
+                  topSelector="td"
+                  data-nodepath-multiple="true"
+                />
+                <div ide-draggable="false" data-nodepath="rootview.0.2.0">
+                  <Flex
+                    data-nodepath="rootview.0.2.0.0"
+                    ide-iscontainer="true"
+                    gap="small"
+                    key="component-280"
+                  >
+                    <Text
+                      data-nodepath="rootview.0.2.0.0.0"
+                      children="{{current.item.lCAPPerResMapping.createdBy}}"
+                      key="component-281"
+                      data-editable="true"
+                    />
+                  </Flex>
+                </div>
+              </>
+            )}
+            title={() => (
+              <>
+                <HoistNodePath
+                  key="131"
+                  nodePath="rootview.0.2"
+                  topSelector="th"
+                  data-nodepath-multiple="true"
+                />
+                <div ide-draggable="false" data-nodepath="rootview.0.2.1">
+                  <Text
+                    data-nodepath="rootview.0.2.1.0"
+                    children="创建者"
+                    key="component-282"
+                    data-editable="true"
+                  />
+                </div>
+              </>
+            )}
+          />
+          <TableColumn
+            ide-iscontainer="true"
+            dataIndex="lCAPPerResMapping.updatedBy"
+            key="component-283"
+            render={() => (
+              <>
+                <HoistNodePath
+                  key="132"
+                  nodePath="rootview.0.3"
+                  topSelector="td"
+                  data-nodepath-multiple="true"
+                />
+                <div ide-draggable="false" data-nodepath="rootview.0.3.0">
+                  <Flex
+                    data-nodepath="rootview.0.3.0.0"
+                    ide-iscontainer="true"
+                    gap="small"
+                    key="component-284"
+                  >
+                    <Text
+                      data-nodepath="rootview.0.3.0.0.0"
+                      children="{{current.item.lCAPPerResMapping.updatedBy}}"
+                      key="component-285"
+                      data-editable="true"
+                    />
+                  </Flex>
+                </div>
+              </>
+            )}
+            title={() => (
+              <>
+                <HoistNodePath
+                  key="133"
+                  nodePath="rootview.0.3"
+                  topSelector="th"
+                  data-nodepath-multiple="true"
+                />
+                <div ide-draggable="false" data-nodepath="rootview.0.3.1">
+                  <Text
+                    data-nodepath="rootview.0.3.1.0"
+                    children="更新者"
+                    key="component-286"
+                    data-editable="true"
+                  />
+                </div>
+              </>
+            )}
+          />
+          <TableColumn
+            ide-iscontainer="true"
+            dataIndex="lCAPPerResMapping.permissionId"
+            key="component-287"
+            render={() => (
+              <>
+                <HoistNodePath
+                  key="134"
+                  nodePath="rootview.0.4"
+                  topSelector="td"
+                  data-nodepath-multiple="true"
+                />
+                <div ide-draggable="false" data-nodepath="rootview.0.4.0">
+                  <Flex
+                    data-nodepath="rootview.0.4.0.0"
+                    ide-iscontainer="true"
+                    gap="small"
+                    key="component-288"
+                  >
+                    <Text
+                      data-nodepath="rootview.0.4.0.0.0"
+                      children="{{current.item.lCAPPermission.createdTime}}"
+                      key="component-289"
+                      data-editable="true"
+                    />
+                  </Flex>
+                </div>
+              </>
+            )}
+            title={() => (
+              <>
+                <HoistNodePath
+                  key="135"
+                  nodePath="rootview.0.4"
+                  topSelector="th"
+                  data-nodepath-multiple="true"
+                />
+                <div ide-draggable="false" data-nodepath="rootview.0.4.1">
+                  <Text
+                    data-nodepath="rootview.0.4.1.0"
+                    children="权限唯一ID"
+                    key="component-290"
+                    data-editable="true"
+                  />
+                </div>
+              </>
+            )}
+            style={{ width: '299px' }}
+          />
+          <TableColumn
+            ide-iscontainer="true"
+            dataIndex="lCAPPerResMapping.resourceId"
+            key="component-291"
+            render={() => (
+              <>
+                <HoistNodePath
+                  key="136"
+                  nodePath="rootview.0.5"
+                  topSelector="td"
+                  data-nodepath-multiple="true"
+                />
+                <div ide-draggable="false" data-nodepath="rootview.0.5.0">
+                  <Flex
+                    data-nodepath="rootview.0.5.0.0"
+                    ide-iscontainer="true"
+                    gap="small"
+                    key="component-292"
+                  >
+                    <Text
+                      data-nodepath="rootview.0.5.0.0.0"
+                      children="{{current.item.lCAPResource.createdTime}}"
+                      key="component-293"
+                      data-editable="true"
+                    />
+                  </Flex>
+                </div>
+              </>
+            )}
+            title={() => (
+              <>
+                <HoistNodePath
+                  key="137"
+                  nodePath="rootview.0.5"
+                  topSelector="th"
+                  data-nodepath-multiple="true"
+                />
+                <div ide-draggable="false" data-nodepath="rootview.0.5.1">
+                  <Text
+                    data-nodepath="rootview.0.5.1.0"
+                    children="资源唯一ID"
+                    key="component-294"
+                    data-editable="true"
+                  />
+                </div>
+              </>
+            )}
+            style={{ width: '200px' }}
+          />
+          <TableColumn
+            ide-iscontainer="true"
+            key="component-295"
+            render={() => (
+              <>
+                <HoistNodePath
+                  key="138"
+                  nodePath="rootview.0.6"
+                  topSelector="td"
+                  data-nodepath-multiple="true"
+                />
+                <div ide-draggable="false" data-nodepath="rootview.0.6.0">
+                  <Flex
+                    data-nodepath="rootview.0.6.0.0"
+                    ide-iscontainer="true"
+                    key="component-296"
+                  >
+                    <Link
+                      data-nodepath="rootview.0.6.0.0.0"
+                      children="修改"
+                      key="component-297"
+                      data-editable="true"
+                    />
+                    <Link
+                      data-nodepath="rootview.0.6.0.0.1"
+                      children="删除"
+                      key="component-298"
+                      data-editable="true"
+                    />
+                  </Flex>
+                </div>
+              </>
+            )}
+            title={() => (
+              <>
+                <HoistNodePath
+                  key="139"
+                  nodePath="rootview.0.6"
+                  topSelector="th"
+                  data-nodepath-multiple="true"
+                />
+                <div ide-draggable="false" data-nodepath="rootview.0.6.1">
+                  <Text
+                    data-nodepath="rootview.0.6.1.0"
+                    children="操作"
+                    key="component-299"
+                    data-editable="true"
+                  />
+                </div>
+              </>
+            )}
+          />
+        </Table>
       </div>
     );
   },
@@ -321,21 +683,95 @@ export const 同步33 = {
       >
         <TableColumn
           ide-iscontainer="true"
+          dataIndex="testTableEntity1.deci1"
+          sorter={false}
+          key="component-1985"
+          render={() => (
+            <>
+              <HoistNodePath
+                key="1010"
+                nodePath="rootview.0.0.0.0.2.3"
+                topSelector="td"
+                data-nodepath-multiple="true"
+              />
+              <div ide-draggable="false" data-nodepath="rootview.0.0.0.0.2.3.0">
+                <Flex
+                  data-nodepath="rootview.0.0.0.0.2.3.0.0"
+                  ide-iscontainer="true"
+                  gap="small"
+                  key="component-1986"
+                >
+                  <Text
+                    data-nodepath="rootview.0.0.0.0.2.3.0.0.0"
+                    children="{{current.item.testTableEntity1.deci1}}"
+                    key="component-1987"
+                    data-editable="true"
+                  />
+                </Flex>
+              </div>
+            </>
+          )}
+          title={() => (
+            <>
+              <HoistNodePath
+                key="1011"
+                nodePath="rootview.0.0.0.0.2.3"
+                topSelector="th"
+                data-nodepath-multiple="true"
+              />
+              <div ide-draggable="false" data-nodepath="rootview.0.0.0.0.2.3.1">
+                <Text
+                  data-nodepath="rootview.0.0.0.0.2.3.1.0"
+                  ref={ref38}
+                  children="小数"
+                  key="component-1988"
+                  data-editable="true"
+                />
+              </div>
+            </>
+          )}
+        />
+        <TableColumn
+          ide-iscontainer="true"
           dataIndex="testEntity1.boolean1"
           key="component-134"
           render={() => (
             <div ide-draggable="false" data-nodepath="rootview.1.2.0.0">
-              <Flex data-nodepath="rootview.1.2.0.0.0" ide-iscontainer="true" gap="small" key="component-135">
-                <Text data-nodepath="rootview.1.2.0.0.0.0" children="是" key="component-136" data-editable="true" />
-                <Text data-nodepath="rootview.1.2.0.0.0.1" children="否" key="component-137" data-editable="true" />
+              <Flex
+                data-nodepath="rootview.1.2.0.0.0"
+                ide-iscontainer="true"
+                gap="small"
+                key="component-135"
+              >
+                <Text
+                  data-nodepath="rootview.1.2.0.0.0.0"
+                  children="是"
+                  key="component-136"
+                  data-editable="true"
+                />
+                <Text
+                  data-nodepath="rootview.1.2.0.0.0.1"
+                  children="否"
+                  key="component-137"
+                  data-editable="true"
+                />
               </Flex>
             </div>
           )}
           title={() => (
             <>
-              <HoistNodePath key="57" nodePath="rootview.1.2.0" topSelector="th" />
+              <HoistNodePath
+                key="57"
+                nodePath="rootview.1.2.0"
+                topSelector="th"
+              />
               <div ide-draggable="false" data-nodepath="rootview.1.2.0.1">
-                <Text data-nodepath="rootview.1.2.0.1.0" children="布尔值" key="component-138" data-editable="true" />
+                <Text
+                  data-nodepath="rootview.1.2.0.1.0"
+                  children="布尔值"
+                  key="component-138"
+                  data-editable="true"
+                />
               </div>
             </>
           )}
@@ -346,16 +782,35 @@ export const 同步33 = {
           key="component-139"
           render={() => (
             <div ide-draggable="false" data-nodepath="rootview.1.2.1.0">
-              <Flex data-nodepath="rootview.1.2.1.0.0" ide-iscontainer="true" gap="small" key="component-140">
-                <Text data-nodepath="rootview.1.2.1.0.0.0" children="{{current.item.testEntity1.text1}}" key="component-141" data-editable="true" />
+              <Flex
+                data-nodepath="rootview.1.2.1.0.0"
+                ide-iscontainer="true"
+                gap="small"
+                key="component-140"
+              >
+                <Text
+                  data-nodepath="rootview.1.2.1.0.0.0"
+                  children="{{current.item.testEntity1.text1}}"
+                  key="component-141"
+                  data-editable="true"
+                />
               </Flex>
             </div>
           )}
           title={() => (
             <>
-              <HoistNodePath key="58" nodePath="rootview.1.2.1" topSelector="th" />
+              <HoistNodePath
+                key="58"
+                nodePath="rootview.1.2.1"
+                topSelector="th"
+              />
               <div ide-draggable="false" data-nodepath="rootview.1.2.1.1">
-                <Text data-nodepath="rootview.1.2.1.1.0" children="文本" key="component-142" data-editable="true" />
+                <Text
+                  data-nodepath="rootview.1.2.1.1.0"
+                  children="文本"
+                  key="component-142"
+                  data-editable="true"
+                />
               </div>
             </>
           )}
@@ -367,16 +822,35 @@ export const 同步33 = {
           key="component-143"
           render={(current) => (
             <div ide-draggable="false" data-nodepath="rootview.1.2.2.0">
-              <Flex data-nodepath="rootview.1.2.2.0.0" ide-iscontainer="true" gap="small" key="component-144">
-                <Text data-nodepath="rootview.1.2.2.0.0.0" children={current.item.testEntity1.int1} key="component-145" data-editable="true" />
+              <Flex
+                data-nodepath="rootview.1.2.2.0.0"
+                ide-iscontainer="true"
+                gap="small"
+                key="component-144"
+              >
+                <Text
+                  data-nodepath="rootview.1.2.2.0.0.0"
+                  children={current.item.testEntity1.int1}
+                  key="component-145"
+                  data-editable="true"
+                />
               </Flex>
             </div>
           )}
           title={() => (
             <>
-              <HoistNodePath key="59" nodePath="rootview.1.2.2" topSelector="th" />
+              <HoistNodePath
+                key="59"
+                nodePath="rootview.1.2.2"
+                topSelector="th"
+              />
               <div ide-draggable="false" data-nodepath="rootview.1.2.2.1">
-                <Text data-nodepath="rootview.1.2.2.1.0" children="整数" key="component-146" data-editable="true" />
+                <Text
+                  data-nodepath="rootview.1.2.2.1.0"
+                  children="整数"
+                  key="component-146"
+                  data-editable="true"
+                />
               </div>
             </>
           )}
@@ -387,16 +861,35 @@ export const 同步33 = {
           key="component-147"
           render={() => (
             <div ide-draggable="false" data-nodepath="rootview.1.2.3.0">
-              <Flex data-nodepath="rootview.1.2.3.0.0" ide-iscontainer="true" gap="small" key="component-148">
-                <Text data-nodepath="rootview.1.2.3.0.0.0" children="{{current.item.testEntity1.deci1}}" key="component-149" data-editable="true" />
+              <Flex
+                data-nodepath="rootview.1.2.3.0.0"
+                ide-iscontainer="true"
+                gap="small"
+                key="component-148"
+              >
+                <Text
+                  data-nodepath="rootview.1.2.3.0.0.0"
+                  children="{{current.item.testEntity1.deci1}}"
+                  key="component-149"
+                  data-editable="true"
+                />
               </Flex>
             </div>
           )}
           title={() => (
             <>
-              <HoistNodePath key="60" nodePath="rootview.1.2.3" topSelector="th" />
+              <HoistNodePath
+                key="60"
+                nodePath="rootview.1.2.3"
+                topSelector="th"
+              />
               <div ide-draggable="false" data-nodepath="rootview.1.2.3.1">
-                <Text data-nodepath="rootview.1.2.3.1.0" children="小数" key="component-150" data-editable="true" />
+                <Text
+                  data-nodepath="rootview.1.2.3.1.0"
+                  children="小数"
+                  key="component-150"
+                  data-editable="true"
+                />
               </div>
             </>
           )}
@@ -407,16 +900,35 @@ export const 同步33 = {
           key="component-151"
           render={() => (
             <div ide-draggable="false" data-nodepath="rootview.1.2.4.0">
-              <Flex data-nodepath="rootview.1.2.4.0.0" ide-iscontainer="true" gap="small" key="component-152">
-                <Text data-nodepath="rootview.1.2.4.0.0.0" children="{{current.item.testEntity1.date1}}" key="component-153" data-editable="true" />
+              <Flex
+                data-nodepath="rootview.1.2.4.0.0"
+                ide-iscontainer="true"
+                gap="small"
+                key="component-152"
+              >
+                <Text
+                  data-nodepath="rootview.1.2.4.0.0.0"
+                  children="{{current.item.testEntity1.date1}}"
+                  key="component-153"
+                  data-editable="true"
+                />
               </Flex>
             </div>
           )}
           title={() => (
             <>
-              <HoistNodePath key="61" nodePath="rootview.1.2.4" topSelector="th" />
+              <HoistNodePath
+                key="61"
+                nodePath="rootview.1.2.4"
+                topSelector="th"
+              />
               <div ide-draggable="false" data-nodepath="rootview.1.2.4.1">
-                <Text data-nodepath="rootview.1.2.4.1.0" children="日期" key="component-154" data-editable="true" />
+                <Text
+                  data-nodepath="rootview.1.2.4.1.0"
+                  children="日期"
+                  key="component-154"
+                  data-editable="true"
+                />
               </div>
             </>
           )}
@@ -427,16 +939,35 @@ export const 同步33 = {
           key="component-155"
           render={() => (
             <div ide-draggable="false" data-nodepath="rootview.1.2.5.0">
-              <Flex data-nodepath="rootview.1.2.5.0.0" ide-iscontainer="true" gap="small" key="component-156">
-                <Text data-nodepath="rootview.1.2.5.0.0.0" children="{{current.item.testEntity1.time1}}" key="component-157" data-editable="true" />
+              <Flex
+                data-nodepath="rootview.1.2.5.0.0"
+                ide-iscontainer="true"
+                gap="small"
+                key="component-156"
+              >
+                <Text
+                  data-nodepath="rootview.1.2.5.0.0.0"
+                  children="{{current.item.testEntity1.time1}}"
+                  key="component-157"
+                  data-editable="true"
+                />
               </Flex>
             </div>
           )}
           title={() => (
             <>
-              <HoistNodePath key="62" nodePath="rootview.1.2.5" topSelector="th" />
+              <HoistNodePath
+                key="62"
+                nodePath="rootview.1.2.5"
+                topSelector="th"
+              />
               <div ide-draggable="false" data-nodepath="rootview.1.2.5.1">
-                <Text data-nodepath="rootview.1.2.5.1.0" children="时间" key="component-158" data-editable="true" />
+                <Text
+                  data-nodepath="rootview.1.2.5.1.0"
+                  children="时间"
+                  key="component-158"
+                  data-editable="true"
+                />
               </div>
             </>
           )}
@@ -447,16 +978,35 @@ export const 同步33 = {
           key="component-159"
           render={() => (
             <div ide-draggable="false" data-nodepath="rootview.1.2.6.0">
-              <Flex data-nodepath="rootview.1.2.6.0.0" ide-iscontainer="true" gap="small" key="component-160">
-                <Text data-nodepath="rootview.1.2.6.0.0.0" children="{{current.item.testEntity1.datetime1}}" key="component-161" data-editable="true" />
+              <Flex
+                data-nodepath="rootview.1.2.6.0.0"
+                ide-iscontainer="true"
+                gap="small"
+                key="component-160"
+              >
+                <Text
+                  data-nodepath="rootview.1.2.6.0.0.0"
+                  children="{{current.item.testEntity1.datetime1}}"
+                  key="component-161"
+                  data-editable="true"
+                />
               </Flex>
             </div>
           )}
           title={() => (
             <>
-              <HoistNodePath key="63" nodePath="rootview.1.2.6" topSelector="th" />
+              <HoistNodePath
+                key="63"
+                nodePath="rootview.1.2.6"
+                topSelector="th"
+              />
               <div ide-draggable="false" data-nodepath="rootview.1.2.6.1">
-                <Text data-nodepath="rootview.1.2.6.1.0" children="日期时间" key="component-162" data-editable="true" />
+                <Text
+                  data-nodepath="rootview.1.2.6.1.0"
+                  children="日期时间"
+                  key="component-162"
+                  data-editable="true"
+                />
               </div>
             </>
           )}
@@ -466,17 +1016,40 @@ export const 同步33 = {
           key="component-163"
           render={() => (
             <div ide-draggable="false" data-nodepath="rootview.1.2.7.0">
-              <Flex data-nodepath="rootview.1.2.7.0.0" ide-iscontainer="true" key="component-164">
-                <Link data-nodepath="rootview.1.2.7.0.0.0" children="修改" key="component-165" data-editable="true" />
-                <Link data-nodepath="rootview.1.2.7.0.0.1" children="删除" key="component-166" data-editable="true" />
+              <Flex
+                data-nodepath="rootview.1.2.7.0.0"
+                ide-iscontainer="true"
+                key="component-164"
+              >
+                <Link
+                  data-nodepath="rootview.1.2.7.0.0.0"
+                  children="修改"
+                  key="component-165"
+                  data-editable="true"
+                />
+                <Link
+                  data-nodepath="rootview.1.2.7.0.0.1"
+                  children="删除"
+                  key="component-166"
+                  data-editable="true"
+                />
               </Flex>
             </div>
           )}
           title={() => (
             <>
-              <HoistNodePath key="64" nodePath="rootview.1.2.7" topSelector="th" />
+              <HoistNodePath
+                key="64"
+                nodePath="rootview.1.2.7"
+                topSelector="th"
+              />
               <div ide-draggable="false" data-nodepath="rootview.1.2.7.1">
-                <Text data-nodepath="rootview.1.2.7.1.0" children="操作" key="component-167" data-editable="true" />
+                <Text
+                  data-nodepath="rootview.1.2.7.1.0"
+                  children="操作"
+                  key="component-167"
+                  data-editable="true"
+                />
               </div>
             </>
           )}
