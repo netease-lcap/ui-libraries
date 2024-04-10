@@ -201,7 +201,7 @@
       "idetype": "container",
       "selector": {
         "expression": "this",
-        "cssSelector": "label.cw-radio-wrapper"
+        "cssSelector": ":is(label.cw-radio-wrapper, label.cw-radio-button-wrapper)"
       }
     }
   },
