@@ -41,6 +41,10 @@ content: "\e65d";
     display: none;
 }
 
+.root[preview]::after{
+    display: none;
+}
+
 .input{
     cursor: var(--cursor-pointer);
     width: 100%;
