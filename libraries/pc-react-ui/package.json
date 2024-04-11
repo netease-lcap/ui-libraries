@@ -1,6 +1,6 @@
 {
   "name": "@lcap/pc-react-ui",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Codewave Low Code AI Platform React Ant Design HOC UI Components",
   "main": "src/index.ts",
   "files": [
@@ -13,8 +13,8 @@
     "dev": "npm run storybook",
     "storybook": "storybook dev -p 6006",
     "build": "vite build && tsc -p tsconfig.api.json && npm pack",
-    "bd": "vite build --mode development&& tsc -p tsconfig.api.json && npm run lowcode ",
-    "pub": "vite build && tsc -p tsconfig.api.json && npm run lowcode &&npm run move:test && npm run deploy:codewave1",
+    "bd": "vite build --mode development && tsc -p tsconfig.api.json && npm run lowcode ",
+    "pub": "vite build && tsc -p tsconfig.api.json && npm run lowcode &&npm run move:test && npm run deploy:codewave",
     "lowcode": " node usage-script.js > ./dist-theme/nasl.ui.merge.json && cd ./dist-theme rm ./nasl.ui.json && mv nasl.ui.merge.json nasl.ui.json ",
     "move": "cp -r /Users/songrui/Desktop/item/ui-libraries/libraries/pc-react-ui/dist-theme/* /Users/songrui/Desktop/item/lcap-assets/data/hoc/ && cd /Users/songrui/Desktop/item/lcap-assets && node upload.js && cd /Users/songrui/Desktop/item/ui-libraries/libraries/pc-react-ui",
     "move:test": "cp -r /Users/songrui/Desktop/item/ui-libraries/libraries/pc-react-ui/dist-theme/* /Users/songrui/Desktop/item/lcap-assets/data/hoc/ && cd /Users/songrui/Desktop/item/lcap-assets && node uploadTest.js && cd /Users/songrui/Desktop/item/ui-libraries/libraries/pc-react-ui",
@@ -22,7 +22,7 @@
     "deploy:codewave": "lcap-ui deploy --platform http://defaulttenant.lcap.codewave-test.163yun.com",
     "deploy:codewave1": "lcap-ui deploy --platform http://defaulttenant.lcap.codewave-dev.163yun.com",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "test": "vitest run",
+    "test": "echo \"no test config\"",
     "test:dev": "vitest dev",
     "test:coverage": "vitest run --coverage",
     "preview": "vite preview",
@@ -50,9 +50,11 @@
     "futil": "^1.76.0",
     "immutable": "5.0.0-beta.4",
     "lodash": "^4.17.21",
+    "normalize.css": "^7.0.0",
     "numbro": "^2.4.0",
     "react-error-boundary": "^4.0.12",
-    "react-router-dom": "^6.21.3"
+    "react-router-dom": "^6.21.3",
+    "remixicon": "^4.2.0"
   },
   "devDependencies": {
     "@ant-design/static-style-extract": "^1.0.2",

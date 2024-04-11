@@ -1,7 +1,7 @@
 <template>
 <label :class="$style.root" :preview="isPreview" :disabled="currentDisabled" @click="select()"
 tabindex="0" @keydown.space.prevent @keyup.space.prevent="select()"
-@focus="onFocus" @blur="onBlur" v-on="listeners" :readonly="currentReadonly">
+@focus="onFocus" @blur="onBlur" v-on="listeners" :readonly="currentReadonly" :selected="selected">
     <span v-if="!isPreview" :class="$style.radio" :selected="selected" :disabled="currentDisabled" :readonly="currentReadonly"></span>
     <slot></slot>
     <span vusion-slot-name="item">
@@ -209,5 +209,9 @@ export default {
 
 .root[preview] {
     cursor: text;
+}
+
+.root[preview=true]:not([selected=true]) {
+    margin-right: 0;
 }
 </style>

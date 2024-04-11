@@ -5,23 +5,6 @@ import FormContext from '@/components/Form/form-context';
 
 import { $deletePropsList } from '@/plugins/constants';
 
-// export function useHandleNodePath(props) {
-//   const { isForm } = React.useContext(FormContext);
-//   const dataTagName = isForm ? 'FormRadioGroup' : '';
-//   const BaseComponents = props.get('render');
-//   const render = React.useCallback((selfProps) => {
-//     return (
-//       <div data-tag-name={selfProps['data-tag-name']} data-nodepath={selfProps['data-nodepath']}>
-//         <BaseComponents {...selfProps} />
-//       </div>
-//     );
-//   }, [BaseComponents]);
-//   return {
-//     render,
-//     'data-tag-name': dataTagName,
-//   };
-// }
-// useHandleNodePath.order = 3;
 export function useHandleNodePath(props) {
   const { isForm } = React.useContext(FormContext);
   const { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);

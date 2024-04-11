@@ -34,13 +34,13 @@ export default {
 // };
 export const 动态数据源 = {
   render: () => {
-    return <CheckboxGroup />;
+    return <CheckboxGroup labelText="表单项名称" />;
   },
 };
 export const 静态数据 = {
   render: () => {
     return (
-      <CheckboxGroup>
+      <CheckboxGroup labelText="表单项名称">
         <Checkbox value="C">
           <Text children="多选框" />
         </Checkbox>

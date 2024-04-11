@@ -2,10 +2,8 @@
 
 namespace nasl.ui {
   @Component({
-    title: '树选择',
-    icon: 'tree-view',
-    description: '树选择',
-    group: 'Selector',
+    title: '表单树选择',
+    description: '表单树选择',
   })
   export class FormTreeSelect<T, V, M extends nasl.core.Boolean> extends ViewComponent {
     @Method({
@@ -44,7 +42,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    textField: (item: T) => any = ((item: any) => item.text) as any;
+    textField: (item: T) => any = ((item: any) => item.title) as any;
 
     @Prop({
       group: '数据属性',

@@ -2,8 +2,8 @@
 
 namespace nasl.ui {
   @Component({
-    title: '表单选择器',
-    description: '表单选择器',
+    title: '表单多选组',
+    description: '表单多选组',
   })
   export class FormCheckboxGroup<T, V, C extends string> extends ViewComponent {
     constructor(options?: Partial<FormCheckboxGroupOptions<T, V, C> & FormItemOptions>) {

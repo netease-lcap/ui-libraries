@@ -1,21 +1,18 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React from 'react';
-import * as AntdIcon from '@ant-design/icons';
 import _ from 'lodash';
+import 'remixicon/fonts/remixicon.css';
 
-function SvgComponent(src) {
-  return (
-    <svg style={{ height: '14px', width: '14px' }}>
-      <image style={{ height: '14px', width: '14px' }} xlinkHref={src} />
-    </svg>
-  );
-}
 export function Icon(props) {
-  const isAntIcon = _.curry(_.get)(AntdIcon)(_, false);
-  const result = _.cond([
-    [isAntIcon, _.constant(React.createElement(AntdIcon[props]))],
-    [_.stubTrue, SvgComponent],
-  ]);
-  return result(props);
+  // _.isValidLink
+  const name = props.name ?? 'RiNeteaseCloudMusicLine';
+  if (name?.includes('.svg')) {
+    return <img {...props} src={name} width={20} alt="icon" />;
+  }
+  return (
+    <i {...props} className={_.kebabCase(name)} />
+  );
 }
 interface IconProps {
   iconName: string

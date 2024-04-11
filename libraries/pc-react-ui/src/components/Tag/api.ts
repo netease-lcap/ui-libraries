@@ -40,7 +40,7 @@ namespace nasl.ui {
       docDescription: '支持定义标签颜色，包括默认、主题色、成功色、警告色和错误色',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '主题色' }, { title: '成功色' }, { title: '警告色' }, { title: '错误色' }],
+        options: [{ title: '默认色' }, { title: '成功色' }, { title: '警告色' }, { title: '错误色' }],
       },
     })
     color: 'default' | 'success' | 'warning' | 'error' = 'default';

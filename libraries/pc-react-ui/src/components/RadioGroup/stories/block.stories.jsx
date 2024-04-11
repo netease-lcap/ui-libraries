@@ -20,7 +20,7 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
-    return <RadioGroup />;
+    return <RadioGroup labelText="表单项名称" />;
   },
 };
 

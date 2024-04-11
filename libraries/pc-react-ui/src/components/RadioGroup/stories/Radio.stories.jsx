@@ -35,6 +35,7 @@ export const 默认 = {
     return (
       <RadioGroup data-nodepath="1234" className="1234" labelText="123">
         <Radio value={1} label="44" data-nodepath="ccccc1">
+          <span>1</span>
           1
         </Radio>
         <Radio value={2}>2</Radio>

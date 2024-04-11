@@ -132,6 +132,7 @@ export function useHandleRowSelection(props) {
 export function useHandleSticky(props) {
   const sticky = props.get('sticky');
   const stickyOffsetTop = props.get('stickyOffsetTop');
+
   const result = fp.cond([
     [fp.conforms({ sticky: fp.isEqual(true), stickyOffsetTop: fp.isInteger }), fp.constant({ sticky: { offsetHeader: stickyOffsetTop } })],
     [fp.conforms({ sticky: fp.isEqual(true), stickyOffsetTop: fp.stubTrue }), fp.constant({ sticky: true })],
@@ -219,7 +220,7 @@ export function useHandleScroll(props) {
 export function useHandleStyle(props) {
   const className = props.get('className');
   return {
-    className: classnames(style.table, className),
+    className: classnames(style.table, className, 'xxss'),
   };
 }
 

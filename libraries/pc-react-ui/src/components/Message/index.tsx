@@ -65,4 +65,8 @@ export const ToastMessage = registerComponet<
 );
 
 // export default ToastMessage;
+const methodInfo = AntdMessage.info;
 export const message = AntdMessage;
+message.info = (...arg) => {
+  methodInfo(...arg);
+};

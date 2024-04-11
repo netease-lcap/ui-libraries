@@ -64,6 +64,8 @@ export class Plugin {
 
 export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   const { BaseComponent, props, plugin } = myProps;
+  const defaultRef = React.useRef({});
+  ref = ref || defaultRef;
   const baseRef = React.useRef({});
   const pluginHooks = plugin.getPluginMethod();
   const mapProps = plugin.getMapProps();
@@ -83,7 +85,7 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     .set('ref', {})
     .set($deletePropsList, []);
   const expandProps = pluginHooks.reduce(
-    (expandProps, handleFun) => expandProps.merge(_.attempt(handleFun, expandProps)),
+    (expandProps, handleFun) => expandProps.merge(_.attempt(handleFun, expandProps, ref)),
     ImmutableProps,
   );
   const Component = expandProps.get('render');
@@ -101,28 +103,18 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     };
   }, [componentRef, baseRef]);
   // mutableProps.setState({ ref });
-  // if (plugin.displayName === 'Tree') {
-  //   console.log(BaseComponent === Component, Tree === Component, '???===', plugin.displayName);
-  //   return (
-  //     <Component
-  //       {...excludeProps}
-  //       ref={baseRef}
-  //     >
-  //       {props.children}
-  //     </Component>
-  //   );
-  // }
-  // console.log(excludeProps,'ex');
-  // console.log(excludeProps, 'ex');
   return (
     <ConfigProvider locale={zhCN}>
       <Component
         {...excludeProps}
-      // ref={baseRef}
+        ref={baseRef}
       // {...refObj}
       >
         {/* 修复radioPro 子组件透传的问题 */}
-        {excludeProps.children}
+        {/* {React.cloneElement(excludeProps.children)} */}
+        {/* {React.createElement(excludeProps.children)} */}
+        {/* {props.children && React.cloneElement(props.children)} */}
+        {props.children}
       </Component>
     </ConfigProvider>
   );

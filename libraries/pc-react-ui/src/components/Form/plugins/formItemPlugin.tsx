@@ -1,42 +1,14 @@
-// import fp from 'lodash/fp';
-import classnames from 'classnames';
 import React from 'react';
 import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@vusion/validator';
+import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
+import { COLPROPSFIELDS } from '@/components/Row/constants';
 import FormContext from '../form-context';
+import { $deletePropsList } from '@/plugins/constants';
 
-import style from '../index.module.less';
-import {
-  Col,
-} from '@/index';
-// import { $deletePropsList } from '@/plugins/constants';
-
-export function useHandleStyle(props) {
-  const className = props.get('className');
-  return {
-    className: classnames(style.formItem, className),
-  };
-}
-export function useHandleCol(props) {
-  const Compoent = props.get('render');
-  const { colSpan } = React.useContext(FormContext);
-  const render = React.useCallback((selfProps) => {
-    const ColPorps = ['offset', 'span'];
-    const span = _.assign({ span: 24 }, _.filterUnderfinedValue({ span: colSpan }), _.filterUnderfinedValue({ span: selfProps.span }));
-    return (
-      <Col {..._.pick(selfProps, ColPorps)} {...span}>
-        <Compoent {...selfProps}>{selfProps.children}</Compoent>
-      </Col>
-    );
-  }, [Compoent]);
-  return {
-    render,
-  };
-}
 export function useHandleRule(props) {
   const rules = props.get('rules');
   return {
-
     rules: _.map(rules, (item) => {
       return {
         message: item.message,
@@ -50,5 +22,48 @@ export function useHandleRule(props) {
       };
     }),
 
+  };
+}
+export function useHandleDefaultValue(props) {
+  const { form } = React.useContext(FormContext);
+  React.useEffect(() => {
+    const symbolName = Symbol('name');
+    const name = props.get('name', symbolName);
+    const defaultValue = props.get('defaultValue');
+    form?.current?.setFieldValue?.(name, defaultValue ?? null);
+  }, []);
+}
+useHandleDefaultValue.order = 5;
+export function useHandleFormWarplabel(props) {
+  const { width: widthContext, isForm, colSpan } = React.useContext(FormContext);
+  const deletePropsList = props.get($deletePropsList).concat('labelIsSlot', 'labelText');
+  const labelIsSlot = props.get('labelIsSlot');
+  const labelProps = props.get('label');
+  const labelText = props.get('labelText');
+  const labelWidth = props.get('labelWidth');
+  const widthProps = props.get('width');
+  const spanProps = props.get('span');
+  const labelCol = _.isNil(labelWidth) ? {} : { labelCol: { flex: `${labelWidth}px` } };
+  const label = labelIsSlot ? labelProps : labelText;
+  const span = _.defaults({ span: spanProps }, { span: colSpan });
+  const width = _.defaults({ width: widthProps }, { width: widthContext });
+  const formResult = isForm ? {
+    label, ...labelCol, ...span, ...width,
+  } : {};
+  return {
+    [$deletePropsList]: deletePropsList,
+    ...formResult,
+  };
+}
+export function useHandleFormItemProps(props) {
+  const BaseComponent = props.get('render');
+  const render = React.useCallback((selfProps) => {
+    const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
+    const colProps = _.pick(selfProps, COLPROPSFIELDS);
+    const fieldProps = _.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]);
+    return <BaseComponent {...{ ...formItemProps, fieldProps, colProps }} />;
+  }, [BaseComponent]);
+  return {
+    render,
   };
 }

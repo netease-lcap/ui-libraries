@@ -19,17 +19,29 @@ export function useHandleLocale() {
   };
 }
 
+export function useHandleTimeOrder(props) {
+  const BaseComponent = props.get('render');
+  const render = React.useCallback((localProps) => {
+    localProps.fieldProps.order = localProps.fieldProps.timeOrder ?? true;
+    return <BaseComponent {...localProps} />;
+  }, [BaseComponent]);
+  return {
+    render,
+  };
+}
+useHandleTimeOrder.order = 3;
 export function useHandleStyle(props) {
   const className = props.get('className');
   return {
     className: classnames(style.timeRangePicker, className),
   };
 }
+
 export function useHandleValue(props) {
   const valueProps = props.get('value');
   const onChangeProps = props.get('onChange');
-  const startDate = _.isNil(_.get(valueProps, '0')) ? undefined : dayjs(_.get(valueProps, '0'), 'HH:mm:ss');
-  const endDate = _.isNil(_.get(valueProps, '1')) ? undefined : dayjs(_.get(valueProps, '1'), 'HH:mm:ss');
+  const startDate = _.isValidTime(_.get(valueProps, '0')) ? dayjs(_.get(valueProps, '0'), 'HH:mm:ss') : undefined;
+  const endDate = _.isValidTime(_.get(valueProps, '1')) ? dayjs(_.get(valueProps, '1'), 'HH:mm:ss') : undefined;
   const valueFormat = _.isEmpty([startDate, endDate].filter(Boolean)) ? valueProps : [startDate, endDate];
   const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueFormat }));
   return {
@@ -40,7 +52,7 @@ export function useHandleValue(props) {
         [_.stubTrue, ({ time: selfTime }) => selfTime?.format('HH:mm:ss')],
       ]);
       _.attempt(onChangeProps, [formatTime({ time: time?.[0] }), formatTime({ time: time?.[1] })]);
-      onChange(time);
+      // onChange(time);
     },
   };
 }
@@ -59,8 +71,8 @@ function useHandleValueToStartAndEnd(props) {
     _.attempt(onStartDateChange, _.get(dateString, '0'));
     _.attempt(onEndDateChange, _.get(dateString, '1'));
   });
-  const startDate = _.isNil(startDateProps) ? undefined : dayjs(startDateProps);
-  const endDate = _.isNil(endDateProps) ? undefined : dayjs(endDateProps);
+  const startDate = dayjs(startDateProps).isValid() ? dayjs(startDateProps) : undefined;
+  const endDate = dayjs(endDateProps).isValid() ? dayjs(endDateProps) : undefined;
   const defaultStartDate = _.isNil(defaultStartDateProps) ? undefined : dayjs(defaultStartDateProps);
   const defaultEndDate = _.isNil(defaultEndDateProps) ? undefined : dayjs(defaultEndDateProps);
   const defaultValue = _.isEmpty([defaultStartDate, defaultEndDate].filter(Boolean)) ? undefined : [defaultStartDate, defaultEndDate];
@@ -70,54 +82,5 @@ function useHandleValueToStartAndEnd(props) {
     value,
     onChange,
     allowEmpty: [startEmpty, endEmpty],
-  };
-}
-
-function useHandleFormWarp(props) {
-  const { isForm } = React.useContext(FormContext);
-  const BaseComponent = props.get('render');
-  const FormTimeRangePicker = React.useCallback((selfProps) => {
-    const nodepath = selfProps['data-nodepath'];
-    return (
-      <Col
-        span={24}
-        {..._.pick(selfProps, COLPROPSFIELDS)}
-        data-nodepath={nodepath}
-        data-tag-name="FormTimeRangePicker"
-        data-has-mutation="true"
-      >
-        <FormItem {..._.pick(selfProps, FORMITEMPROPSFIELDS)}>
-          <BaseComponent {..._.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS, 'data-nodepath', 'children'])} />
-        </FormItem>
-      </Col>
-    );
-  }, [BaseComponent]);
-  const render = isForm ? FormTimeRangePicker : BaseComponent;
-  return {
-    render,
-  };
-}
-
-export function useHandleFormWarplabel(props) {
-  const deletePropsList = props.get($deletePropsList).concat('labelIsSlot', 'labelText');
-  const labelIsSlot = props.get('labelIsSlot');
-  const labelProps = props.get('label');
-  const labelText = props.get('labelText');
-  const label = labelIsSlot ? labelProps : labelText;
-  return {
-    [$deletePropsList]: deletePropsList,
-    label,
-  };
-}
-export function useHandleFormItemProps(props) {
-  const BaseComponent = props.get('render');
-  const render = React.useCallback((selfProps) => {
-    const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
-    const colProps = _.pick(selfProps, COLPROPSFIELDS);
-    const fieldProps = _.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]);
-    return <BaseComponent {...{ ...formItemProps, fieldProps, colProps }} />;
-  }, [BaseComponent]);
-  return {
-    render,
   };
 }

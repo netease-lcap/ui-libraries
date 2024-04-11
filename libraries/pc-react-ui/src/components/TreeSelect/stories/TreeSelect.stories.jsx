@@ -26,6 +26,7 @@ export const 异步函数 = {
   render: (args) => <TreeSelect {...args} />,
   args: {
     style: { width: 300 },
+    multiple: true,
     dataSource: [
       {
         text: '理学',
@@ -61,7 +62,11 @@ export const 异步函数 = {
             value: '计算机科学与技术',
             children: [
               { text: '计算机系统结构', value: '计算机系统结构' },
-              { text: '计算机软件与理论', value: '计算机软件与理论', disabled: true },
+              {
+                text: '计算机软件与理论',
+                value: '计算机软件与理论',
+                disabled: true,
+              },
               { text: '计算机应用技术', value: '计算机应用技术' },
             ],
           },
@@ -72,7 +77,11 @@ export const 异步函数 = {
             children: [
               { text: '机械制造及其自动化', value: '机械制造及其自动化' },
               { text: '机械电子工程', value: '机械电子工程' },
-              { text: '机械设计及理论', value: '机械设计及理论', disabled: true },
+              {
+                text: '机械设计及理论',
+                value: '机械设计及理论',
+                disabled: true,
+              },
               { text: '车辆工程', value: '车辆工程', disabled: true },
             ],
           },

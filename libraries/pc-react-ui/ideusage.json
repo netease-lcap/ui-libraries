@@ -49,17 +49,34 @@
     }
   },
   {
-    "name": "FormInput",
+    "name": "InputNumber",
     "ideusage": {
-      "idetype": "container"
+      "idetype": "element",
+      "mutations": ["FormInputNumber"]
     }
   },
   {
-    "name": "InputNumber",
+    "name": "ProLayout",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "container",
+      "structured": "menuSlot",
+      "namedSlotOmitWrapper": ["menuSlot"],
+      "parentAccept":"!target.isInSubview"
     }
   },
+  {
+    "name": "FormInputNumber",
+    "ideusage": {
+      "idetype": "container"
+    },
+    "displaySlotConditions": {
+      "default": false,
+      "label": "this.getAttribute('labelIsSlot').value === true",
+      "description": false,
+      "extra": false
+    }
+  },
+
   {
     "name": "Transfer",
     "ideusage": {
@@ -69,14 +86,28 @@
   {
     "name": "Switch",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormSwitch"]
+    }
+  },
+  {
+    "name": "FormSwitch",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
     "name": "Input",
     "ideusage": {
       "idetype": "element",
-      "textholder": "value"
+      "textholder": "value",
+      "mutations": ["FormInput"]
     }
   },
   {
@@ -95,11 +126,43 @@
   {
     "name": "TextArea",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormTextArea"]
+    }
+  },
+  {
+    "name": "FormTextArea",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
     "name": "CheckboxGroup",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'Checkbox'",
+      "dataSource": {
+        "dismiss": "!this.getAttribute('dataSource') && (this.filterElement(el => el.tag !== 'template').length > 0)",
+        "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
+        "loopElem": "> label.cw-checkbox-wrapper",
+        "emptySlot": {
+          "display": "inline",
+          "condition": "!this.getAttribute('dataSource')",
+          "accept": "false"
+        }
+      },
+      "mutations": ["FormCheckboxGroup"]
+    }
+  },
+  {
+    "name": "FormCheckboxGroup",
     "ideusage": {
       "idetype": "container",
       "structured": true,
@@ -113,6 +176,12 @@
           "condition": "!this.getAttribute('dataSource')",
           "accept": "false"
         }
+      },
+      "displaySlotConditions": {
+        "default": true,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
       }
     }
   },
@@ -122,7 +191,7 @@
       "idetype": "container",
       "selector": {
         "expression": "this",
-        "cssSelector": "label.ant-checkbox-wrapper"
+        "cssSelector": "label.cw-checkbox-wrapper"
       }
     }
   },
@@ -132,12 +201,31 @@
       "idetype": "container",
       "selector": {
         "expression": "this",
-        "cssSelector": "label.ant-radio-wrapper"
+        "cssSelector": ":is(label.cw-radio-wrapper, label.cw-radio-button-wrapper)"
       }
     }
   },
   {
     "name": "RadioGroup",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'Radio'",
+      "dataSource": {
+        "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+        "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
+        "loopElem": "> label.cw-radio-wrapper",
+        "emptySlot": {
+          "display": "inline",
+          "condition": "!this.getAttribute('dataSource')",
+          "accept": "false"
+        }
+      },
+      "mutations": ["FormRadioGroup"]
+    }
+  },
+  {
+    "name": "FormRadioGroup",
     "ideusage": {
       "idetype": "container",
       "structured": true,
@@ -151,11 +239,23 @@
           "condition": "!this.getAttribute('dataSource')",
           "accept": "false"
         }
+      },
+      "displaySlotConditions": {
+        "default": true,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
       }
     }
   },
   {
     "name": "Form",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
+    "name": "QueryForm",
     "ideusage": {
       "idetype": "container"
     }
@@ -189,7 +289,7 @@
       "parentAccept": "target.tag === 'Descriptions'",
       "selector": {
         "expression": "this",
-        "cssSelector": ".ant-descriptions-item"
+        "cssSelector": ".cw-descriptions-item"
       }
     }
   },
@@ -197,7 +297,29 @@
     "name": "Flex",
     "ideusage": {
       "idetype": "container",
-      "containerDirection": "this.getAttribute('direction')?.value === 'true' ? 'column' : 'row' "
+      "containerDirection": "this.getAttribute('direction')?.value === 'true' ? 'column' : 'row' ",
+      "automate": [
+        {
+          "command": "WRAP_LINEAR_VERTICAL",
+          "useblock": 0,
+          "attribute": {
+            "direction": "vertical",
+            "justify": "start",
+            "alignment": "start",
+            "wrap": "nowrap"
+          }
+        },
+        {
+          "command": "WRAP_LINEAR_HORIZONTAL",
+          "useblock": 0,
+          "attribute": {
+            "direction": "horizontal",
+            "justify": "start",
+            "alignment": "start",
+            "wrap": "nowrap"
+          }
+        }
+      ]
     }
   },
   {
@@ -278,7 +400,13 @@
     "ideusage": {
       "idetype": "container",
       "structured": true,
-      "childAccept": "target.tag === 'TabPane'"
+      "childAccept": "target.tag === 'TabPane'",
+      "dataSource": {
+        "display": 4,
+        "dismiss": "!this.getAttribute('dataSource')",
+        "displayData": "{[ { key:1 }, { key:2 }, { key:3 }]}",
+        "loopElem": "> .cw-tabs-nav  .cw-tabs-tab"
+      }
     }
   },
   {
@@ -289,11 +417,11 @@
       "selector": [
         {
           "expression": "this.getElement(el => el.slotTarget === 'tab')",
-          "cssSelector": ".ant-tabs-tab"
+          "cssSelector": ".cw-tabs-tab"
         },
         {
           "expression": "this",
-          "cssSelector": ".ant-tabs-tabpane"
+          "cssSelector": ".cw-tabs-tabpane"
         }
       ],
       "actions": {
@@ -323,37 +451,115 @@
   {
     "name": "TreeSelect",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormTreeSelect"]
+    }
+  },
+  {
+    "name": "FormTreeSelect",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
     "name": "Cascader",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormCascader"]
+    }
+  },
+  {
+    "name": "FormCascader",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
     "name": "DatePicker",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormDatePicker"]
+    }
+  },
+  {
+    "name": "FormDatePicker",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
     "name": "DateRangePicker",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormDateRangePicker"]
+    }
+  },
+  {
+    "name": "FormDateRangePicker",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
     "name": "TimePicker",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormTimePicker"]
+    }
+  },
+  {
+    "name": "FormTimePicker",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
     "name": "TimeRangePicker",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "mutations": ["FormTimeRangePicker"]
+    }
+  },
+  {
+    "name": "FormTimeRangePicker",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
     }
   },
   {
@@ -377,7 +583,7 @@
       "idetype": "modal",
       "selector": {
         "expression": "this",
-        "cssSelector": "div[class='ant-modal-content']"
+        "cssSelector": "div[class='cw-modal-content']"
       },
       "additionalAttribute": {
         "transitionName": "''",
@@ -389,10 +595,10 @@
   {
     "name": "Drawer",
     "ideusage": {
-      "idetype": "modal",
+      "idetype": "drawer",
       "selector": {
         "expression": "this",
-        "cssSelector": "div[class='ant-drawer-content']"
+        "cssSelector": "div[class='cw-drawer-content']"
       },
       "additionalAttribute": {
         "transitionName": "''",
@@ -404,10 +610,10 @@
   {
     "name": "Message",
     "ideusage": {
-      "idetype": "modal",
+      "idetype": "messager",
       "selector": {
         "expression": "this",
-        "cssSelector": "div[class='ant-drawer-wrapper-body']"
+        "cssSelector": "div[class='cw-drawer-wrapper-body']"
       }
     }
   },
@@ -417,7 +623,7 @@
       "idetype": "popover",
       "selector": {
         "expression": "this.getElement(el => el.slotTarget === 'content')",
-        "cssSelector": "div[class='ant-popover-content']"
+        "cssSelector": "div[class='cw-popover-content']"
       },
       "actions": {
         "click": {
@@ -486,7 +692,17 @@
     "name": "MenuItem",
     "ideusage": {
       "idetype": "container",
-      "parentAccept": "target.tag === 'Menu'"
+      "structured": true,
+      "parentAccept": "target.tag === 'Menu'",
+      "displaySlotConditions": {
+        "labelSlot": "this.getAttribute('labelIsSlot').value === true"
+      },
+      "actions": {
+        "click": {
+          "status": "this.getParent().getParent().setCacheStatus('defaultOpenKeys', '\"' + this.getAttribute('path')?.value + '\"') ",
+          "effect": "this.getParent().getParent().callComponentMethod('setValue', this.getAttribute('path')?.value)"
+        }
+      }
     }
   },
   {
@@ -509,7 +725,7 @@
       "idetype": "popover",
       "selector": {
         "expression": "this.getElement(el => el.slotTarget === 'default' || !el.slotTarget)",
-        "cssSelector": "div[class='ant-menu-submenu-popup']"
+        "cssSelector": "div[class='cw-menu-submenu-popup']"
       },
       "actions": {
         "click": {
@@ -533,6 +749,12 @@
       "idetype": "element",
       "editable": "children",
       "textholder": "children"
+    }
+  },
+  {
+    "name": "Icon",
+    "ideusage": {
+      "idetype": "element"
     }
   },
   {

@@ -4,9 +4,6 @@ import React from 'react';
 import _ from 'lodash';
 import { useControllableValue } from 'ahooks';
 import { $deletePropsList } from '@/plugins/constants';
-import { Col, FormItem, Checkbox } from '@/index';
-import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
-import { COLPROPSFIELDS } from '@/components/Row/constants';
 import {
   useRequestDataSource, useHandleMapField, useFormatDataSource,
 } from '@/plugins/common/dataSource';
@@ -24,17 +21,6 @@ export function useHandleRef(props) {
   };
 }
 useHandleRef.order = 1;
-function useHandleChildren(props) {
-  const childrenProps = props.get('children');
-  const dataSourceProps = props.get('dataSource');
-  const dataSource = React.useMemo(() => React.Children.map(childrenProps, (item) => {
-    if (item.type === Checkbox) {
-      return item.props;
-    }
-    return null;
-  })?.filter(Boolean), [childrenProps]);
-  return { dataSource: dataSourceProps ?? dataSource, children: null };
-}
 
 export function useHandleDataSource(props) {
   const dataSourceProps = props.get('dataSource');
@@ -54,32 +40,8 @@ export function useHandleDataSource(props) {
   };
 }
 
-export function useHandleFormWarplabel(props) {
-  const deletePropsList = props.get($deletePropsList).concat('labelIsSlot', 'labelText');
-  const labelIsSlot = props.get('labelIsSlot');
-  const labelProps = props.get('label');
-  const labelText = props.get('labelText');
-  const label = labelIsSlot ? labelProps : labelText;
-  return {
-    [$deletePropsList]: deletePropsList,
-    label,
-  };
-}
-
-export function useHandleFormItemProps(props) {
-  const BaseComponent = props.get('render');
-  const render = React.useCallback((selfProps) => {
-    const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
-    const colProps = _.pick(selfProps, COLPROPSFIELDS);
-    const fieldProps = _.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]);
-    return <BaseComponent {...{ ...formItemProps, fieldProps, colProps }} />;
-  }, [BaseComponent]);
-  return {
-    render,
-  };
-}
 export function useHandleRemoveRef(props) {
-  const BaseComponent = props.get('ref');
+  const BaseComponent = props.get('render');
   const render = React.useCallback((selfProps) => {
     return <BaseComponent {..._.omit(selfProps, 'ref')}>{selfProps.children}</BaseComponent>;
   }, [BaseComponent]);
@@ -89,3 +51,5 @@ export function useHandleRemoveRef(props) {
 }
 
 export * from './lowCode';
+
+export * from '@/components/Form/plugins/formItemPlugin';

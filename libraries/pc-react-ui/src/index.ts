@@ -1,5 +1,6 @@
 // export { default as Button } from './components/Button/index';
 import './index.less';
+import 'normalize.css';
 import { Layout, ConfigProvider } from 'antd';
 
 export { Layout, ConfigProvider };
@@ -49,6 +50,7 @@ export * from './components/Upload/index';
 export * from './components/Icon/index';
 export * from './components/Tag/index';
 export * from './components/Link/index';
+export * from './components/ProLayout/index';
 
 // eslint-disable-next-line import/first
 import 'virtual:theme.css';

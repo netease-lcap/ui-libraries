@@ -2,8 +2,8 @@
 
 namespace nasl.ui {
   @Component({
-    title: '表单输入框',
-    description: '表单输入框',
+    title: '表单数字输入框',
+    description: '表单数字输入框',
   })
   export class FormInputNumber extends ViewComponent {
     constructor(options?: Partial<FormInputNumberOptions & FormItemOptions>) {

@@ -106,6 +106,13 @@
         />
       </van-cell>
     </demo-block>
+
+    <demo-block title="预览模式">
+      <van-cell center title="高级格式化">
+        <van-stepper-new preview :value.sync="value" :advancedFormat="{ enable: true, value: '#,##0.00' }" />
+      </van-cell>
+    </demo-block>
+
   </demo-section>
 </template>
 

@@ -33,12 +33,6 @@ function useHandleTreeNode(props) {
     });
     const omitColumnsProps = fp.map((item: Record<string, any>) => item.props);
     const childrenFlow = fp.flow(columnsChildren, omitColumnsProps);
-    // const warpColumns = fp.map((item: any) => {
-    //   const { render } = item;
-    //   return _.isFunction(render) ? _.assign({}, item, {
-    //     render: (text, record, index) => _.attempt(render, { item: record, text, index }),
-    //   }) : item;
-    // });
     const columnsCond = fp.cond([
       [fp.conforms({ columns: fp.isArray, children: fp.stubTrue }), fp.constant({ treeData: columns })],
       [fp.conforms({ children: fp.isArray }), fp.constant({ columns: childrenFlow(children as Array<any>) })],
@@ -76,7 +70,7 @@ export function useHandleDataSource(props) {
   };
 }
 export function useHandleRemoveRef(props) {
-  const BaseComponent = props.get('ref');
+  const BaseComponent = props.get('render');
   const render = React.useCallback((selfProps) => {
     return <BaseComponent {..._.omit(selfProps, 'ref')}>{selfProps.children}</BaseComponent>;
   }, [BaseComponent]);

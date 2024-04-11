@@ -44,7 +44,7 @@ function useHandleAsyncLoading(props: StateMap<
 }
 export function useHandleIcon(props) {
   const icon = props.get('icon');
-  return _.isNil(icon) ? {} : { icon: Icon(icon) };
+  return _.isNil(icon) ? {} : { icon: <Icon name={icon} /> };
 }
 
 export function useHandleConfirm(props) {
@@ -93,9 +93,6 @@ export function useHandleConfirm(props) {
 }
 useHandleConfirm.order = 4;
 
-// export function useHandleIcon() {
-
-// }
 export const handle = {
   method: useHandleAsyncLoading,
   name: 'HandleAsyncLoading',

@@ -4,26 +4,19 @@ exports[`u-rate.vue > Demo-允许半选 1`] = `
 <div class="root">
   <span class="item" status="full">
     <span class="mask" style="width: 50%;"></span>
-    <!---->
   </span>
   <span class="item" status="full">
     <span class="mask" style="width: 50%;"></span>
-    <!---->
   </span>
   <span class="item" status="full">
     <span class="mask" style="width: 50%;"></span>
-    <!---->
   </span>
   <span class="item" status>
     <span class="mask" style="width: 50%;"></span>
-    <!---->
   </span>
   <span class="item" status>
     <span class="mask" style="width: 50%;"></span>
-    <!---->
   </span>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -31,26 +24,19 @@ exports[`u-rate.vue > Demo-允许清除 1`] = `
 <div class="root">
   <span class="item" status="full">
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status="full">
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status="full">
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status>
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status>
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -58,26 +44,19 @@ exports[`u-rate.vue > Demo-只读 1`] = `
 <div class="root" readonly="readonly">
   <span class="item" status="full">
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status="full">
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status="full">
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status>
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status>
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -86,49 +65,36 @@ exports[`u-rate.vue > Demo-只读，值为小数 1`] = `
   <div class="root" readonly="readonly">
     <span class="item" status="full">
       <span class="mask" style="width: 60%;"></span>
-      <!---->
     </span>
     <span class="item" status="full">
       <span class="mask" style="width: 60%;"></span>
-      <!---->
     </span>
     <span class="item" status="full">
       <span class="mask" style="width: 60%;"></span>
-      <!---->
     </span>
     <span class="item" half="true" status>
       <span class="mask" style="width: 60%;"></span>
-      <!---->
     </span>
     <span class="item" status>
       <span class="mask" style="width: 60%;"></span>
-      <!---->
     </span>
-    <!---->
-    <!---->
   </div>
   <div class="root" readonly="readonly">
     <span class="item" status="full">
       <span class="mask" style="width: 60%;"></span>
-      <!---->
     </span>
     <span class="item" status="full">
       <span class="mask" style="width: 60%;"></span>
-      <!---->
     </span>
     <span class="item" status="full">
       <span class="mask" style="width: 60%;"></span>
-      <!---->
     </span>
     <span class="item" half="true" status>
       <span class="mask" style="width: 60%;"></span>
-      <!---->
     </span>
     <span class="item" status>
       <span class="mask" style="width: 60%;"></span>
-      <!---->
     </span>
-    <!---->
     <span class="text"> 3.6 </span>
   </div>
 </div>
@@ -138,26 +104,19 @@ exports[`u-rate.vue > Demo-基本用法 1`] = `
 <div class="root">
   <span class="item" status>
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status>
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status>
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status>
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status>
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -165,26 +124,19 @@ exports[`u-rate.vue > Demo-基本用法 2`] = `
 <div class="root">
   <span class="item" status="full">
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status="full">
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status="full">
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status>
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
   <span class="item" status>
     <span class="mask" style="width: 0%;"></span>
-    <!---->
   </span>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -195,9 +147,7 @@ exports[`u-rate.vue > Demo-辅助文字 1`] = `
     <transition-stub class="popup" name="fade">
       <div class="root" merge-borders="true" style="display: none;">
         <span class="arrow" data-popper-arrow></span>
-        <!---->
         <div class="body" vusion-slot-name="default"> 一般 </div>
-        <!---->
       </div>
     </transition-stub>
   </span>
@@ -206,9 +156,7 @@ exports[`u-rate.vue > Demo-辅助文字 1`] = `
     <transition-stub class="popup" name="fade">
       <div class="root" merge-borders="true" style="display: none;">
         <span class="arrow" data-popper-arrow></span>
-        <!---->
         <div class="body" vusion-slot-name="default"> 一般 </div>
-        <!---->
       </div>
     </transition-stub>
   </span>
@@ -217,9 +165,7 @@ exports[`u-rate.vue > Demo-辅助文字 1`] = `
     <transition-stub class="popup" name="fade">
       <div class="root" merge-borders="true" style="display: none;">
         <span class="arrow" data-popper-arrow></span>
-        <!---->
         <div class="body" vusion-slot-name="default"> 一般 </div>
-        <!---->
       </div>
     </transition-stub>
   </span>
@@ -228,9 +174,7 @@ exports[`u-rate.vue > Demo-辅助文字 1`] = `
     <transition-stub class="popup" name="fade">
       <div class="root" merge-borders="true" style="display: none;">
         <span class="arrow" data-popper-arrow></span>
-        <!---->
         <div class="body" vusion-slot-name="default"> 一般 </div>
-        <!---->
       </div>
     </transition-stub>
   </span>
@@ -239,13 +183,10 @@ exports[`u-rate.vue > Demo-辅助文字 1`] = `
     <transition-stub class="popup" name="fade">
       <div class="root" merge-borders="true" style="display: none;">
         <span class="arrow" data-popper-arrow></span>
-        <!---->
         <div class="body" vusion-slot-name="default"> 一般 </div>
-        <!---->
       </div>
     </transition-stub>
   </span>
   <span class="text">一般</span>
-  <!---->
 </div>
 `;

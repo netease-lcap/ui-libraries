@@ -240,11 +240,5 @@ namespace nasl.ui {
       ],
     })
     slotDefault: () => Array<SelectOption<T, V>>;
-
-    @Slot({
-      title: '标签自定义',
-      description: '插入自定义标签，代替`label`属性。',
-    })
-    slotLabel: () => Array<ViewComponent>;
   }
 }

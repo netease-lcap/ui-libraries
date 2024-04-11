@@ -29,6 +29,19 @@
         ></van-calendar>
       </van-cell>
     </demo-block>
+
+    <demo-block title="预览模式">
+      <van-cell>
+        <template #title>
+          <span>日期选择</span>
+        </template>
+        <van-calendar
+          preview
+          value="2023-10-11"
+          title="选择日期"
+        ></van-calendar>
+      </van-cell>
+    </demo-block>
   </demo-section>
 </template>
 

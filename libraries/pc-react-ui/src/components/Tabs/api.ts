@@ -24,7 +24,11 @@ namespace nasl.ui {
       description: '是否显示标签滚动左右箭头按钮',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '有滚动的情况下显示' }, { title: '始终显示' }, { title: '始终不显示' }],
+        options: [
+          { title: '有滚动的情况下显示' },
+          { title: '始终显示' },
+          { title: '始终不显示' },
+        ],
       },
     })
     private showScrollButtons: 'auto' | 'always' | 'never' = 'auto';
@@ -32,11 +36,14 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      description:
+        '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       docDescription: '集合类型变量或者输出参数为集合类型的逻辑',
       designerValue: [{}, {}, {}],
     })
-    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+    dataSource:
+      | nasl.collection.List<T>
+      | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
     @Prop({
       group: '数据属性',
@@ -86,7 +93,7 @@ namespace nasl.ui {
       sync: true,
       docDescription: '指当前打开标签的标签项',
     })
-    activeKey: nasl.core.String ;
+    activeKey: nasl.core.String;
 
     // @Prop({
     //   group: '数据属性',
@@ -184,7 +191,15 @@ namespace nasl.ui {
       title: '选择后',
       description: '选择某一项后触发',
     })
-    onChange: (event: { selected: nasl.core.Boolean; item: T; oldItem: T; value: V; oldValue: V; items: nasl.collection.List<T>; oldItems: nasl.collection.List<T> }) => any;
+    onChange: (event: {
+      selected: nasl.core.Boolean;
+      item: T;
+      oldItem: T;
+      value: V;
+      oldValue: V;
+      items: nasl.collection.List<T>;
+      oldItems: nasl.collection.List<T>;
+    }) => any;
 
     // @Event({
     //   title: '新增和删除页签的回调',
@@ -223,6 +238,17 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<TabPane<V>>;
 
+    @Slot({
+      title: '标题自定义渲染',
+      description: '标题自定义渲染',
+    })
+    slottitleRender: (current: any) => Array<ViewComponent>;
+
+    @Slot({
+      title: '标题自定义渲染',
+      description: '标题自定义渲染',
+    })
+    slotcontentRender: (current: any) => Array<ViewComponent>;
     // @Slot({
     //   title: '右侧附加',
     //   description: '在标签右侧可以附加的组件。',

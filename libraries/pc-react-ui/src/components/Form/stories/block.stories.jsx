@@ -1,7 +1,23 @@
 import React from 'react';
-import { QueryFilter, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components';
+import {
+  QueryFilter,
+  ProFormDateRangePicker,
+  ProFormSelect,
+} from '@ant-design/pro-components';
 import { Form, FormItem } from '../index';
-import { Input, Button, Text } from '@/index';
+import {
+  Input,
+  Select,
+  Switch,
+  TreeSelect,
+  TextArea,
+  DatePicker,
+  DateRangePicker,
+  TimePicker,
+  TimeRangePicker,
+  Button,
+  QueryForm,
+} from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -20,30 +36,45 @@ export default {
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+
 export const 默认 = {
   render: () => {
     return (
-      <Form>
-        <FormItem label={<Text children="账号" />} name="username">
-          <Input />
-        </FormItem>
-        <FormItem label={<Text children="密码" />} name="password">
-          <Input />
-        </FormItem>
-        <FormItem>
-          <Button type="primary" htmlType="submit" children="提交" />
-        </FormItem>
+      <Form labelWidth="140">
+        <Input labelText="表单输入框" name="name" />
+        <Select labelText="表单选择器" name="age" />
+        <Switch labelText="表单开关" name="switch" />
+        <TreeSelect labelText="表单树选择器" name="tree" />
+        <TextArea labelText="表单多行输入" />
+        <DatePicker labelText="表单日期选择" />
+        <DateRangePicker labelText="表单日期范围选择" />
+        <TimePicker labelText="表单时间选择" />
+        <TimeRangePicker labelText="表单时间范围选择" />
       </Form>
     );
   },
 };
-export const 自由表单 = {
-  render: () => {
-    return <Form />;
-  },
-};
+
 export const 查询表单 = {
   render: () => {
-    return <QueryFilter />;
+    return (
+      <QueryForm labelWidth="140" defaultCollapsed={false}>
+        <Input labelText="表单输入框" name="name" />
+        <Select labelText="表单选择器" name="age" />
+        <Switch labelText="表单开关" name="switch" />
+        <TreeSelect labelText="表单树选择器" name="tree" />
+        <TextArea labelText="表单多行输入" />
+        <DatePicker labelText="表单日期选择" />
+        <DateRangePicker labelText="表单日期范围选择" />
+        <TimePicker labelText="表单时间选择" />
+        <TimeRangePicker labelText="表单时间范围选择" />
+      </QueryForm>
+    );
+  },
+};
+
+export const 空表单 = {
+  render: () => {
+    return <Form />;
   },
 };

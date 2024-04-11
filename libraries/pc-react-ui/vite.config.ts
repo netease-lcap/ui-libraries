@@ -9,29 +9,34 @@ import { lcapPlugin } from '@lcap/builder';
 process.env.TZ = 'Asia/Shanghai';
 
 // https://vitejs.dev/config/
-
 export default defineConfig(({ mode, command }) => {
   return {
     publicDir: 'dist-theme',
-    plugins: [react(), lcapPlugin({
-      theme: {
-        previewPages: [{
-          name: 'dashboard',
-          title: 'Dashboard',
-          viewport: {
-            width: 1440,
-            height: 1600,
-          },
-        }, {
-          name: 'form',
-          title: '表单页',
-          viewport: {
-            width: 1940,
-            height: 1700,
-          },
-        }],
-      },
-    })],
+    plugins: [
+      react(),
+      lcapPlugin({
+        theme: {
+          previewPages: [
+            {
+              name: 'dashboard',
+              title: 'Dashboard',
+              viewport: {
+                width: 1440,
+                height: 1600,
+              },
+            },
+            {
+              name: 'form',
+              title: '表单页',
+              viewport: {
+                width: 1940,
+                height: 1700,
+              },
+            },
+          ],
+        },
+      }),
+    ],
     css: {
       postcss: {
         plugins: [
@@ -67,7 +72,7 @@ export default defineConfig(({ mode, command }) => {
           }
         },
       },
-      minify: 'terser',
+      minify: 'esbuild',
       // minify: mode === 'development' ? 'esbuild' : 'terser',
       // minify: false,
       terserOptions: {

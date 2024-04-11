@@ -41,7 +41,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '占位符',
       description: '为空时显示的占位符文本',
-      docDescription: '时间选择框无内容时的提示信息，支持自定义编辑，默认为请输入',
+      docDescription:
+        '时间选择框无内容时的提示信息，支持自定义编辑，默认为请输入',
     })
     placeholder: nasl.core.String = '请选择时间';
 
@@ -341,20 +342,9 @@ namespace nasl.ui {
       title: '改变后',
       description: '时间改变时触发',
     })
-    onChange: (event: { date: nasl.core.String; time: nasl.core.String }) => any;
-
-    @Event({
-      title: '失去焦点',
-      description: '失去焦点时触发。',
-    })
-    onBlur: (event: {
-      cancelBubble: nasl.core.Boolean;
-      detail: nasl.core.String;
-      layerX: nasl.core.Integer;
-      layerY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      which: nasl.core.Integer;
+    onChange: (event: {
+      date: nasl.core.String;
+      time: nasl.core.String;
     }) => any;
   }
 }

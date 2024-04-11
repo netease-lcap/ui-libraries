@@ -28,18 +28,23 @@ namespace nasl.ui {
     @Prop<DropdownOptions<T, V>, 'dataSource'>({
       group: '数据属性',
       title: '数据源',
-      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
-      docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      description:
+        '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription:
+        '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
       designerValue: [{}, {}, {}],
       // if: (_) => _.hasDataSource === true,
     })
-    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+    dataSource:
+      | nasl.collection.List<T>
+      | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
     @Prop<DropdownOptions<T, V>, 'dataSchema'>({
       group: '数据属性',
       title: '数据类型',
       description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示',
+      docDescription:
+        '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示',
       // if: (_) => _.hasDataSource === true,
     })
     dataSchema: T;
@@ -53,7 +58,7 @@ namespace nasl.ui {
       },
       // if: (_) => _.hasDataSource === true,
     })
-    textField: (item: T) => any = ((item: any) => item.text) as any;
+    textField: (item: T) => any = ((item: any) => item.key) as any;
 
     @Prop<DropdownOptions<T, V>, 'valueField'>({
       group: '数据属性',
@@ -209,7 +214,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '下拉项',
-          code: '<MenuItem ><Text children="导航项目"  /></MenuItem>',
+          code: '<MenuItem  label="导航项目"></MenuItem>',
         },
       ],
     })

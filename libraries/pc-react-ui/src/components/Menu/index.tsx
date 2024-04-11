@@ -1,5 +1,6 @@
 import { Menu as AntdMenu } from 'antd';
 import type { MenuProps, MenuItemProps } from 'antd';
+
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import * as menuItemPlugin from './plugins/menuItemPlugin';
@@ -28,6 +29,7 @@ export const MenuItem = registerComponet<
   AntdMenu.Item,
   { plugin: menuItemPlugin, displayName: AntdMenu.displayName, mapProps },
 );
+
 // export default Menu;
 // export const MenuItem = AntdMenu.Item;
 export const MenuItemGroup = AntdMenu.ItemGroup;

@@ -7,11 +7,9 @@ exports[`u-card.vue > Demo-卡片分组 1`] = `
       <div class="wrap">
         <div class="view">
           <div class="cover" vusion-slot-name="cover">
-            <!---->
           </div>
           <div class="head">
             <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 卡片
-              <!---->
             </div>
             <a class="close"></a>
             <div class="extra"></div>
@@ -41,7 +39,6 @@ exports[`u-card.vue > Demo-卡片分组 1`] = `
                 </div>
               </div>
             </div>
-            <!---->
           </div>
           <div class="foot"></div>
         </div>
@@ -63,7 +60,6 @@ exports[`u-card.vue > Demo-基本样式 1`] = `
     <div class="wrap">
       <div class="view">
         <div class="cover" vusion-slot-name="cover">
-          <!---->
         </div>
         <div class="head">
           <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
@@ -73,7 +69,6 @@ exports[`u-card.vue > Demo-基本样式 1`] = `
           <div class="extra"></div>
         </div>
         <div class="body" vusion-slot-name="default">卡片内容
-          <!---->
         </div>
         <div class="foot"></div>
       </div>
@@ -95,11 +90,9 @@ exports[`u-card.vue > Demo-基本用法 1`] = `
       <div class="wrap">
         <div class="view">
           <div class="cover" vusion-slot-name="cover">
-            <!---->
           </div>
           <div class="head">
             <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 卡片
-              <!---->
             </div>
             <a class="close"></a>
             <div class="extra"></div>
@@ -111,7 +104,6 @@ exports[`u-card.vue > Demo-基本用法 1`] = `
               <p class="paragraph"></p>
               <p class="paragraph"></p>
             </div>
-            <!---->
           </div>
           <div class="foot"></div>
         </div>
@@ -133,7 +125,6 @@ exports[`u-card.vue > Demo-带分割线样式 1`] = `
     <div class="wrap">
       <div class="view">
         <div class="cover" vusion-slot-name="cover">
-          <!---->
         </div>
         <div class="head">
           <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
@@ -143,7 +134,6 @@ exports[`u-card.vue > Demo-带分割线样式 1`] = `
           <div class="extra"></div>
         </div>
         <div class="body" vusion-slot-name="default">卡片内容
-          <!---->
         </div>
         <div class="foot"></div>
       </div>
@@ -165,11 +155,9 @@ exports[`u-card.vue > Demo-带分割线样式 2`] = `
       <div class="wrap">
         <div class="view">
           <div class="cover" vusion-slot-name="cover">
-            <!---->
           </div>
           <div class="head">
             <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 卡片
-              <!---->
             </div>
             <a class="close"></a>
             <div class="extra"></div>
@@ -181,7 +169,6 @@ exports[`u-card.vue > Demo-带分割线样式 2`] = `
               <p class="paragraph"></p>
               <p class="paragraph"></p>
             </div>
-            <!---->
           </div>
           <div class="foot"></div>
         </div>
@@ -213,14 +200,11 @@ exports[`u-card.vue > Demo-带图片样式 1`] = `
                     </svg>
                   </span>
                   <div class="icontext" vusion-slot-name="default">
-                    <!---->
                   </div>
                 </span>
               </div>
-              <!---->
             </div>
           </div>
-          <!---->
         </div>
         <div class="head">
           <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
@@ -230,7 +214,6 @@ exports[`u-card.vue > Demo-带图片样式 1`] = `
           <div class="extra"></div>
         </div>
         <div class="body" vusion-slot-name="default">卡片内容
-          <!---->
         </div>
         <div class="foot"></div>
       </div>
@@ -262,18 +245,14 @@ exports[`u-card.vue > Demo-带图片样式 2`] = `
                       </svg>
                     </span>
                     <div class="icontext" vusion-slot-name="default">
-                      <!---->
                     </div>
                   </span>
                 </div>
-                <!---->
               </div>
             </div>
-            <!---->
           </div>
           <div class="head">
             <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 卡片
-              <!---->
             </div>
             <a class="close"></a>
             <div class="extra"></div>
@@ -285,7 +264,6 @@ exports[`u-card.vue > Demo-带图片样式 2`] = `
               <p class="paragraph"></p>
               <p class="paragraph"></p>
             </div>
-            <!---->
           </div>
           <div class="foot"></div>
         </div>

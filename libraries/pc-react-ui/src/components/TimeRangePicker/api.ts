@@ -116,7 +116,7 @@ namespace nasl.ui {
     //   },
     // })
     // endEmpty: nasl.core.Boolean = false;
-// =================
+    // =================
     @Prop({
       group: '数据属性',
       title: '小时选项间隔',
@@ -320,7 +320,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    order: nasl.core.Boolean = true;
+    timeOrder: nasl.core.Boolean = true;
     // @Prop({
     //   group: '状态属性',
     //   title: '只读',
@@ -340,6 +340,28 @@ namespace nasl.ui {
       },
     })
     disabled: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '基础信息',
+      title: '字段名称',
+      description: '表单项名称。',
+      if: (_) => false,
+    })
+    name: nasl.core.String;
+
+    @Prop({
+      group: '基础信息',
+      title: '开始时间字段名称',
+      description: '表单项名称。',
+    })
+    startName: nasl.core.String;
+
+    @Prop({
+      group: '基础信息',
+      title: '结束时间字段名称',
+      description: '表单项名称。',
+    })
+    endName: nasl.core.String;
 
     @Prop({
       group: '状态属性',
@@ -401,7 +423,10 @@ namespace nasl.ui {
       title: '改变后',
       description: '时间改变时触发',
     })
-    onChange: (event: { date: nasl.core.String; time: nasl.core.String }) => any;
+    onChange: (event: {
+      date: nasl.core.String;
+      time: nasl.core.String;
+    }) => any;
 
     @Event({
       title: '失去焦点',

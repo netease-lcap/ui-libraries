@@ -23,9 +23,18 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <Icon {...args} />,
+  render: (args) => {
+    return (
+      <Icon
+        data-nodepath="rootview.6"
+        name="//minio-api.codewave-dev.163yun.com/lowcode-static/user/defaulttenant/1701943475046_%E9%80%BB%E8%BE%91%26%E6%95%B0%E6%8D%AE.svg"
+        key="component-66"
+      />
+    );
+  },
   args: {
     color: 'magenta',
-    children: 'Tag',
+    name:
+      '//minio-api.codewave-dev.163yun.com/lowcode-static/user/defaulttenant/1711352646423_1711101097723_1710173501157_%E4%B8%89%E7%82%B9.svg',
   },
 };

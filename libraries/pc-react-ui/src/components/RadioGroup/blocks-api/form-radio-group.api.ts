@@ -3,9 +3,7 @@
 namespace nasl.ui {
   @Component({
     title: '表单单选组',
-    icon: 'capsules',
     description: '多项中选择一项',
-    group: 'Form',
   })
   export class FormRadioGroup<T, V, C extends string> extends ViewComponent {
     constructor(options?: Partial<FormRadioGroupOptions<T, V, C> & FormItemOptions>) {

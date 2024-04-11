@@ -1,5 +1,3 @@
-import { $deletePropsList } from '@/plugins/constants';
-
 export const FORMITEMPROPSFIELDS = [
   'labelIsSlot',
   'labelText',
@@ -12,4 +10,7 @@ export const FORMITEMPROPSFIELDS = [
   'hidden',
   'colProps',
   'className',
+  'labelCol',
+  'labelAlign',
+  'transform',
 ];

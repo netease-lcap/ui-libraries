@@ -9,6 +9,7 @@ import {
 } from '../utils/format/number';
 import { isNaN } from '../utils/validate/number';
 import { FieldMixin } from '../mixins/field';
+import PreviewMixin from '../mixins/preview';
 
 const [createComponent, bem] = createNamespace('stepper-new');
 
@@ -22,7 +23,7 @@ function equal(value1, value2) {
 const isNil = (val) => val === null || val === undefined || val === '';
 
 export default createComponent({
-  mixins: [FieldMixin],
+  mixins: [FieldMixin, PreviewMixin],
 
   props: {
     value: {
@@ -123,11 +124,7 @@ export default createComponent({
 
       if (this.advancedFormat.enable) {
         formatter = this.advancedFormat.value;
-      } else if (
-        this.thousandths ||
-        this.percentSign ||
-        !isNil(this.decimalPlaces.places)
-      ) {
+      } else if (this.thousandths || this.percentSign || !isNil(this.decimalPlaces.places)) {
         formatter = '0';
         // 千分位
         if (this.thousandths) {
@@ -152,7 +149,7 @@ export default createComponent({
           formatter,
           !this.advancedFormat.enable && {
             percentSign: this.percentSign, // 百分比
-          }
+          },
         );
       }
     }
@@ -177,15 +174,11 @@ export default createComponent({
       return this.unit.value !== '';
     },
     minusDisabled() {
-      return (
-        this.disabled || this.disableMinus || this.currentValue <= +this.min
-      );
+      return this.disabled || this.disableMinus || this.currentValue <= +this.min;
     },
 
     plusDisabled() {
-      return (
-        this.disabled || this.disablePlus || this.currentValue >= +this.max
-      );
+      return this.disabled || this.disablePlus || this.currentValue >= +this.max;
     },
 
     inputStyle() {
@@ -268,7 +261,8 @@ export default createComponent({
       value = Math.max(Math.min(this.max, value), this.min); // 超出范围转换为范围值
 
       // format decimal
-      if (!isNil(this.decimalLength)) { // 保留小数位数
+      if (!isNil(this.decimalLength)) {
+        // 保留小数位数
         value = value.toFixed(this.decimalLength);
       }
 
@@ -390,6 +384,22 @@ export default createComponent({
   },
 
   render() {
+    if (this.isPreview && !this.inDesigner()) {
+      return (
+        <div class={bem([this.theme])}>
+          {this.showUnit && this.unit.type === 'prefix' && <div class={bem('unit', { prefix: true })}>{this.unit?.value}</div>}
+          <input
+            ref="input"
+            class={bem('input')}
+            style={this.inputStyle}
+            readonly
+            value={this.formattedValue}
+          />
+          {this.showUnit && this.unit.type === 'suffix' && <div class={bem('unit', { suffix: true })}>{this.unit?.value}</div>}
+        </div>
+      );
+    }
+
     const createListeners = (type) => ({
       on: {
         click: (e) => {
@@ -410,16 +420,8 @@ export default createComponent({
 
     return (
       <div class={bem([this.theme])}>
-        <button
-          vShow={this.showMinus}
-          type="button"
-          style={this.buttonStyle}
-          class={bem('minus', { disabled: this.minusDisabled })}
-          {...createListeners('minus')}
-        />
-        {this.showUnit && this.unit.type === 'prefix' && (
-          <div class={bem('unit', { prefix: true })}>{this.unit?.value}</div>
-        )}
+        <button vShow={this.showMinus} type="button" style={this.buttonStyle} class={bem('minus', { disabled: this.minusDisabled })} {...createListeners('minus')} />
+        {this.showUnit && this.unit.type === 'prefix' && <div class={bem('unit', { prefix: true })}>{this.unit?.value}</div>}
         <input
           vShow={this.showInput}
           ref="input"
@@ -438,16 +440,8 @@ export default createComponent({
           onBlur={this.onBlur}
           onMousedown={this.onMousedown}
         />
-        {this.showUnit && this.unit.type === 'suffix' && (
-          <div class={bem('unit', { suffix: true })}>{this.unit?.value}</div>
-        )}
-        <button
-          vShow={this.showPlus}
-          type="button"
-          style={this.buttonStyle}
-          class={bem('plus', { disabled: this.plusDisabled })}
-          {...createListeners('plus')}
-        />
+        {this.showUnit && this.unit.type === 'suffix' && <div class={bem('unit', { suffix: true })}>{this.unit?.value}</div>}
+        <button vShow={this.showPlus} type="button" style={this.buttonStyle} class={bem('plus', { disabled: this.plusDisabled })} {...createListeners('plus')} />
       </div>
     );
   },

@@ -136,7 +136,7 @@ function genUsageByTs(config) {
       component.symbol = symbol;
       const tsPath = component.apiPath ? path.resolve(rootPath, componentsPath, component.apiPath) : `${componentDir}/api.ts`;
       if (!fs.existsSync(tsPath)) {
-        logger.error(`未找到组件 ${component.name} 的描述文件（api.ts）`);
+        logger.error(`未找到组件 ${component.name} 的描述文件（api.ts）, ${tsPath}`);
         process.exit(1);
       }
 

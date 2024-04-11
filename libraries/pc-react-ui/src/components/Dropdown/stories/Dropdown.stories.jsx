@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Dropdown, MenuItem, Text, Button, Link,
-} from '@/index';
+import { Dropdown, MenuItem, Text, Button, Link } from '@/index';
 // import { Dropdown } from 'antd';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -28,7 +26,11 @@ export const 默认 = {
       {
         key: '1',
         label: (
-          <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.antgroup.com"
+          >
             1st menu item
           </a>
         ),
@@ -36,7 +38,11 @@ export const 默认 = {
       {
         key: '2',
         label: (
-          <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.aliyun.com"
+          >
             2nd menu item
           </a>
         ),
@@ -47,29 +53,42 @@ export const 默认 = {
     }, []);
     return (
       <Dropdown
-        style={{
-          marginLeft: '20px',
-          '--update-key': 'y2xu',
-          marginTop: '20px',
-          marginBottom: '20px',
-          color: '#583838',
-        }}
-        type="dashed"
-        menuItem={(
+        trigger="click"
+        key="component-1"
+        menuItem={(() => (
           <>
-            <MenuItem key="https://www.sf.163.com/" icon="BorderInnerOutlined" label={<Link href="https://www.baidu.com">图标+外部链接</Link>} />
-            <MenuItem key="/navbar" icon="" label={<Link href="/app">内部链接</Link>} />
             <MenuItem
-              // onClick={localStore.MenuItem55Click}
-              key=""
-              icon=""
-              label={<Text>事件</Text>}
+              data-nodepath="rootview.0.0.0"
+              ide-iscontainer="true"
+              key="component-2"
+              labelSlot={(() => (
+                <div ide-draggable="false" data-nodepath="rootview.0.0.0.1">
+                  data-emptyslot-nodepath="rootview.0.0.0.1" key="0" />
+                </div>
+              ))()}
             />
-            <MenuItem disabled label={<Text>禁用</Text>} />
+            <MenuItem
+              data-nodepath="rootview.0.0.1"
+              ide-iscontainer="true"
+              key="component-3"
+              labelSlot={(() => (
+                <div ide-draggable="false" data-nodepath="rootview.0.0.1.1">
+                  data-emptyslot-nodepath="rootview.0.0.1.1" key="1" />
+                </div>
+              ))()}
+            />
           </>
-        )}
+        ))()}
       >
-        <Button type="primary">点击打开菜单项</Button>
+        <div style={{ display: 'inline-block' }} data-nodepath="rootview.0">
+          <Button
+            data-nodepath="rootview.0.1"
+            type="primary"
+            children="按钮"
+            key="component-4"
+            data-editable="true"
+          />
+        </div>
       </Dropdown>
     );
   },

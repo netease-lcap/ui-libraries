@@ -10,6 +10,11 @@ export function useHandleClassName(props) {
   };
 }
 
+export function useHandleFullChild(props) {
+  return {
+    mode: 'flex',
+  };
+}
 export function useHandleScroll(props) {
   const scroll = props.get('scroll');
   const result = scroll ? { style: { overflow: 'scroll' } } : {};

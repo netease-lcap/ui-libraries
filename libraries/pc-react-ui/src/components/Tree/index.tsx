@@ -14,11 +14,12 @@ const mapProps = {
 
 export const Tree = registerComponet<
   TreeProps,
-  pluginType<TreeProps>
+  TreeProps
 >(
   AntdTree,
   { plugin, displayName: 'Tree', mapProps },
 );
 
+// Tree.defo
 // export const Tree = AntdTree;
 export const { TreeNode } = AntdTree;

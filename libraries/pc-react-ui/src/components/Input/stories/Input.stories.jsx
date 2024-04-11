@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input } from '../index';
+import { Input, FormItem } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -32,7 +32,16 @@ export const 默认 = {
     React.useEffect(() => {
       console.log(ref, 'ref');
     }, []);
-    return <Input ref={ref} labelText="1234" value={value} allowClear data-nodepath="1234" onChange={onchange} />;
+    return (
+      <Input
+        ref={ref}
+        labelText="1234"
+        value={value}
+        allowClear
+        data-nodepath="1234"
+        onChange={onchange}
+      />
+    );
   },
   args: {
     color: 'magenta',
