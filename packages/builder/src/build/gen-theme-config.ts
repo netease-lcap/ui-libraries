@@ -82,6 +82,8 @@ export default function genThemeConfig(options: ThemeOptions) {
       title,
       group,
     };
+  }).filter((comp) => {
+    return comp.useGlobalTokens.length > 0 || comp.variables.length > 0;
   }).sort((a: any, b: any) => {
     return `${a.group}-${a.name}`.localeCompare(`${b.group}-${b.name}`);
   });
