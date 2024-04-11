@@ -43,6 +43,7 @@ namespace nasl.ui {
           title: '占位符',
           description: '为空时显示的占位符文本',
           docDescription: '时间选择框无内容时的提示信息，支持自定义编辑，默认为请输入',
+          implicitToString: true,
       })
       placeholder: nasl.core.String = '请选择时间';
 
@@ -52,6 +53,7 @@ namespace nasl.ui {
           description: '为空时显示的占位符文本（右侧）',
           docDescription: '时间选择框无内容时的提示信息，支持自定义编辑, 在没有设置的时候使用placeholder作为右侧占位符内容',
           if: _ => _.range === true,
+          implicitToString: true,
       })
       placeholderRight: nasl.core.String = '请选择时间';
 
@@ -164,6 +166,7 @@ namespace nasl.ui {
           title: '此刻按钮名称',
           docDescription: '支持自定义修改原此刻按钮名称',
           if: _ => _.showRightNowButton === true,
+          implicitToString: true,
       })
       rightNowTitle: nasl.core.String = '';
 
@@ -183,6 +186,7 @@ namespace nasl.ui {
           title: '取消按钮名称',
           docDescription: '支持自定义修改原取消按钮名称',
           if: _ => _.showFooterButton === true,
+          implicitToString: true,
       })
       cancelTitle: nasl.core.String = '';
 
@@ -192,6 +196,7 @@ namespace nasl.ui {
           description: '确定按钮的显示名称，如果为空则不显示',
           docDescription: '支持自定义修改原确定按钮名称',
           if: _ => _.showFooterButton === true,
+          implicitToString: true,
       })
       okTitle: nasl.core.String = '';
 

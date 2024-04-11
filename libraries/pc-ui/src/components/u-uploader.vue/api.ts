@@ -104,6 +104,7 @@ namespace nasl.ui {
             title: '最大文件大小',
             description: '可上传的最大文件大小。默认为空，表示可上传任意大小的文件；如果为数字，则表示单位为字节；如果为字符串，可以添加以下单位：`KB`、`MB`、`GB`',
             docDescription: '可上传的最大文件大小。默认50MB；如果为数字，则表示单位为字节；如果为字符串，可以添加以下单位kB、MB、GB',
+            implicitToString: true,
         })
         maxSize: nasl.core.String;
 
@@ -290,6 +291,7 @@ namespace nasl.ui {
             group: '主要属性',
             title: '图片裁剪框标题',
             if: _ => _.openCropper === true && _.multiple !== true,
+            implicitToString: true,
         })
         cropperTitle: nasl.core.String = '图片裁剪';
 
@@ -342,6 +344,7 @@ namespace nasl.ui {
             title: '辅助文本',
             description: '辅助说明的文本信息，如上传的数量、大小等，在上传组件下方展示。',
             docDescription: '在上传组件下方展示一些提示信息，如上传的数量、大小等，默认为null',
+            implicitToString: true,
         })
         description: nasl.core.String;
 
@@ -361,6 +364,7 @@ namespace nasl.ui {
             title: '辅助文本',
             description: '辅助说明的文本信息',
             docDescription: '拖拽位置的文字指引',
+            implicitToString: true,
         })
         dragDescription: nasl.core.String = '点击/拖动/粘贴文件到这里';
 

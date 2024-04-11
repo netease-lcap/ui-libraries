@@ -372,6 +372,7 @@ namespace nasl.ui {
           group: '主要属性',
           title: '表格标题',
           docDescription: '表格上方的标题信息。默认为空',
+          implicitToString: true,
       })
       title: nasl.core.String;
 
@@ -606,6 +607,7 @@ namespace nasl.ui {
           description: '加载中状态显示的提示文案',
           docDescription: '当加载表格数据过程中的提示文字。默认“正在加载中...”。',
           if: _ => _.designerMode === 'loading',
+          implicitToString: true,
       })
       loadingText: nasl.core.String = '正在加载中...';
 
@@ -628,6 +630,7 @@ namespace nasl.ui {
           description: '加载失败状态显示的提示文案',
           docDescription: '加载失败的提示文字。默认"加载失败，请重试"。',
           if: _ => _.designerMode === 'error',
+          implicitToString: true,
       })
       errorText: nasl.core.String = '加载失败，请重试';
 
@@ -650,6 +653,7 @@ namespace nasl.ui {
           description: '暂无数据状态显示的提示文案',
           docDescription: '当表格为空时的提示文字。默认"暂无数据"。',
           if: _ => _.designerMode === 'empty',
+          implicitToString: true,
       })
       emptyText: nasl.core.String = '暂无数据';
 
@@ -1066,7 +1070,7 @@ namespace nasl.ui {
           title: '筛选项',
           description: '筛选项的参数',
       })
-      private filters: Array<{ text: nasl.core.String, value: nasl.core.Any }>;
+      private filters: Array<{ text: nasl.core.String, value: any }>;
 
       @Prop({
           group: '数据属性',

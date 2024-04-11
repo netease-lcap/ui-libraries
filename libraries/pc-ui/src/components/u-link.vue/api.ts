@@ -51,6 +51,7 @@ namespace nasl.ui {
             title: '文本',
             description: '显示文本内容',
             docDescription: '显示的文本内容',
+            implicitToString: true,
         })
         text: nasl.core.String;
 

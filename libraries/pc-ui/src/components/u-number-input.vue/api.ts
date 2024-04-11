@@ -81,7 +81,7 @@ namespace nasl.ui {
             description: '控制数据展示时小数点后保留几位，仅影响展示，不影响数据实际存储的值。例如：小数位数为2，则数据展示时小数点后保留2位。',
             if: _ => _.advancedFormatEnable === false,
         })
-        decimalPlacesValue: nasl.core.Long;
+        decimalPlacesValue: nasl.core.Integer;
 
         @Prop<UNumberInputOptions, 'decimalPlacesOmitZero'>({
             group: '主要属性',
@@ -130,6 +130,7 @@ namespace nasl.ui {
             group: '主要属性',
             title: '单位',
             description: '输入框中显示的单位',
+            implicitToString: true,
         })
         unitValue: nasl.core.String;
 
@@ -152,6 +153,7 @@ namespace nasl.ui {
             description: '用来控制数字的展示格式',
             if: _ => _.advancedFormatEnable === true,
             bindHide: true,
+            implicitToString: true,
         })
         advancedFormatValue: nasl.core.String;
 
@@ -160,6 +162,7 @@ namespace nasl.ui {
             title: '占位符',
             description: '为空时显示的占位符文本',
             docDescription: '为空时的提示文本。',
+            implicitToString: true,
         })
         placeholder: nasl.core.String;
 

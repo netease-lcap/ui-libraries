@@ -121,6 +121,7 @@ namespace nasl.ui {
       @Prop({
           title: '占位符',
           description: '为空时显示的占位符文本',
+          implicitToString: true,
       })
       placeholder: nasl.core.String = '请选择';
 

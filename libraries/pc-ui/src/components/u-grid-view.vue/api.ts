@@ -261,6 +261,7 @@ namespace nasl.ui {
             group: '主要属性',
             title: '头部标题',
             docDescription: '数据网格列表标题，在开始显示头部功能后显示',
+            implicitToString: true,
         })
         title: nasl.core.String = '列表';
 
@@ -303,6 +304,7 @@ namespace nasl.ui {
             description: '加载中状态显示的提示文案',
             docDescription: '加载中显示的文字，仅在使用分页加载时出现，默认正在加载中。',
             if: _ => _.designerMode === 'loading',
+            implicitToString: true,
         })
         loadingText: nasl.core.String = '正在加载中...';
 
@@ -324,6 +326,7 @@ namespace nasl.ui {
             description: '加载失败状态显示的提示文案',
             docDescription: '数据网格加载失败时展示的文字，加载失败，请重试。',
             if: _ => _.designerMode === 'error',
+            implicitToString: true,
         })
         errorText: nasl.core.String = '加载失败，请重试';
 
@@ -346,6 +349,7 @@ namespace nasl.ui {
             description: '暂无数据状态显示的提示文案',
             docDescription: '数据网格数据源返回值为空时展示的文字，默认暂无数据。',
             if: _ => _.designerMode === 'empty',
+            implicitToString: true,
         })
         emptyText: nasl.core.String = '暂无数据';
 

@@ -162,7 +162,7 @@ namespace nasl.ui {
             title: '值',
             description: '该项的值',
         })
-        private value: nasl.core.Any;
+        private value: any;
 
         @Slot({
             title: 'undefined',

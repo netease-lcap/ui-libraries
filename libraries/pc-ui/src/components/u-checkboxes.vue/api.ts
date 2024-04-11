@@ -92,6 +92,7 @@ namespace nasl.ui {
             title: '全选展示内容',
             description: '全选功能展示的文案内容',
             if: _ => _.checkAll === true,
+            implicitToString: true,
         })
         checkAllText: nasl.core.String = '全选';
 

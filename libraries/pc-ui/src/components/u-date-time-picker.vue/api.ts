@@ -47,7 +47,7 @@ namespace nasl.ui {
           docDescription: '默认显示的日期时间值',
           if: _ => _.range !== true,
       })
-      value: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      value: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop<UDateTimePickerOptions, 'startDate'>({
           group: '数据属性',
@@ -56,7 +56,7 @@ namespace nasl.ui {
           sync: true,
           if: _ => _.range === true,
       })
-      startDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      startDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop<UDateTimePickerOptions, 'endDate'>({
           group: '数据属性',
@@ -65,7 +65,7 @@ namespace nasl.ui {
           sync: true,
           if: _ => _.range === true,
       })
-      endDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      endDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop({
           group: '数据属性',
@@ -73,7 +73,7 @@ namespace nasl.ui {
           description: '最小可选的日期时间值，填写null则不限制，日期填写格式为“yyyy-mm-dd  00:00:00”',
           docDescription: '支持输入的最小日期时间',
       })
-      minDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      minDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop({
           group: '数据属性',
@@ -81,7 +81,7 @@ namespace nasl.ui {
           description: '最大可选的日期时间值，填写null则不限制，日期填写格式为“yyyy-mm-dd  00:00:00”',
           docDescription: '支持输入的最大日期时间',
       })
-      maxDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      maxDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop<UDateTimePickerOptions, 'yearDiff'>({
           group: '数据属性',
@@ -160,6 +160,7 @@ namespace nasl.ui {
           title: '占位符',
           description: '为空时显示的占位符文本',
           docDescription: '未选择状态下的提示文案',
+          implicitToString: true,
       })
       placeholder: nasl.core.String = '请选择时间';
 
@@ -169,6 +170,7 @@ namespace nasl.ui {
           description: '为空时显示的占位符文本（右侧）',
           docDescription: '日期选择框无内容时的提示信息，支持自定义编辑, 在没有设置的时候使用placeholder作为右侧占位符内容',
           if: _ => _.range === true,
+          implicitToString: true,
       })
       placeholderRight: nasl.core.String = '请选择时间';
 
@@ -200,6 +202,7 @@ namespace nasl.ui {
           title: '此刻按钮名称',
           docDescription: '支持自定义修改原此刻按钮名称。',
           if: _ => _.showRightNowButton === true,
+          implicitToString: true,
       })
       rightNowTitle: nasl.core.String = '';
 
@@ -220,6 +223,7 @@ namespace nasl.ui {
           description: '取消按钮的显示名称，如果为空则不显示',
           docDescription: '支持自定义修改原取消按钮名称',
           if: _ => _.showFooterButton === true,
+          implicitToString: true,
       })
       cancelTitle: nasl.core.String = '';
 
@@ -229,6 +233,7 @@ namespace nasl.ui {
           description: '确定按钮的显示名称，如果为空则不显示',
           docDescription: '支持自定义修改原确定按钮名称',
           if: _ => _.showFooterButton === true,
+          implicitToString: true,
       })
       okTitle: nasl.core.String = '';
 
