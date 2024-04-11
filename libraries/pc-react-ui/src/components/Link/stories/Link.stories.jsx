@@ -28,6 +28,7 @@ export const 默认 = {
   },
   args: {
     color: 'magenta',
+    link: 'https://www.baidu.com',
     onFocus: (e) => {
       console.log(23);
     },
