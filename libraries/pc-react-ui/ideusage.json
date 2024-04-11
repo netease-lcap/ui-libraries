@@ -334,6 +334,11 @@
         "emptySlot": {
           "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
           "accept": "target.concept === 'Entity'"
+        },
+        "refInLoop": {
+          "child": "TableColumn",
+          "slot": "render",
+          "useRef": "argus?.[0]?.index === 0"
         }
       },
       "childAccept": "target.tag === 'TableColumn'"
