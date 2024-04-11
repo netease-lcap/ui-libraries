@@ -64,18 +64,18 @@ function getFrontEndLibray(frameworkKind, viewComponents, logics) {
 
   const mobileFeLibrary: any = {
     concept: 'FrontendLibrary',
-    name: 'mobile',
-    type: 'mobile',
+    name: 'h5',
+    type: 'h5',
     frameworkKind,
     viewComponents: [],
     logics: [],
   };
 
   viewComponents.forEach((c) => {
-    const typeKind = ['both', 'pc', 'mobile'].indexOf(c.type) !== -1 ? c.type : 'pc';
+    const typeKind = ['both', 'pc', 'h5'].indexOf(c.type) !== -1 ? c.type : 'pc';
     if (typeKind === 'pc') {
       pcFeLibrary.viewComponents.push(c);
-    } else if (typeKind === 'mobile') {
+    } else if (typeKind === 'h5') {
       mobileFeLibrary.viewComponents.push(c);
     } else {
       pcFeLibrary.viewComponents.push(c);
@@ -84,10 +84,10 @@ function getFrontEndLibray(frameworkKind, viewComponents, logics) {
   });
 
   logics.forEach((c) => {
-    const typeKind = ['both', 'pc', 'mobile'].indexOf(c.type) !== -1 ? c.type : 'pc';
+    const typeKind = ['both', 'pc', 'h5'].indexOf(c.type) !== -1 ? c.type : 'pc';
     if (typeKind === 'pc') {
       pcFeLibrary.logics.push(c);
-    } else if (typeKind === 'mobile') {
+    } else if (typeKind === 'h5') {
       mobileFeLibrary.logics.push(c);
     } else {
       pcFeLibrary.logics.push(c);
