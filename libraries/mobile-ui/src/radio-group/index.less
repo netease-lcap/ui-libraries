@@ -6,6 +6,24 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
+    &--preview {
+      .van-radio {
+        pointer-events: none;
+        display: inline;
+        width: auto;
+        margin: 0;
+        padding: 0;
+
+        &__label {
+          margin: 0;
+          padding: 0;
+        }
+
+        &__icon {
+          display: none;
+        }
+      }
+    }
   .mantle {
     z-index: 100;
     position: absolute;

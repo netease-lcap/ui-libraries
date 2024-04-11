@@ -9,16 +9,16 @@
             ref="modal"
             @close="currentItem = undefined">
             <u-form label-layout="block" ref="form">
-                <u-form-item :label="$tt('approvalComments')" :required="currentItem.commentRequired" :rules="currentItem.commentRequired?'required':''" v-if="currentItem.name !== 'reassign'">
+                <u-form-item :label="$tt('approvalComments')" :required="currentItem.commentRequired" :rules="currentItem.commentRequired?'required':''" v-if="!['reassign', 'addSign'].includes(currentItem.name)">
                     <u-textarea v-model="model.comment" size="normal full" :placeholder="$tt('placeholder')">
                     </u-textarea>
                 </u-form-item>
-                <u-form-item :label="$tt('selectTransfer')" required :rules="`required #${$tt('selectTransferEmpty')}`" v-if="currentItem.name === 'reassign'">
+                <u-form-item :label="$tt('selectTransfer')" required :rules="`required #${$tt('selectTransferEmpty')}`" v-if="['reassign', 'addSign'].includes(currentItem.name)">
                     <u-select
                         size="full"
                         text-field="userName"
                         value-field="userName"
-                        :data-source="getUsersForReassign"
+                        :data-source="getUsers(currentItem)"
                         :value.sync="model.userName"
                         :initial-load="true">
                     </u-select>
@@ -95,11 +95,16 @@ export default {
                 this.$refs.modal.close();
             }
         },
-        async submit() {
+        async submit(item) {
             if (!this.$processV2) {
                 return;
             }
-            const { name } = this.currentItem;
+            const currentItem = item || this.currentItem;
+            const { name } = currentItem;
+            if (name === 'addSign') {
+                this.addSignOperator(item);
+                return;
+            }
             const operate = `${name}Task`;
             const body = {
                 taskId: this.taskId,
@@ -109,7 +114,7 @@ export default {
             }
             if (name === 'reassign') {
                 body.userForReassign = this.model.userName;
-            } else {
+            } else if(name !== 'submit') {
                 body.comment = this.model.comment;
             }
             await this.$processV2.setTaskInstance({
@@ -129,16 +134,22 @@ export default {
         },
         async onClickButton(item) {
             if (item.name === 'revert') {
-                return this.revertOperator(item);
+                this.revertOperator(item);
+                return;
             }
             if (item.name === 'withdraw') {
-                return this.withdrawOperator(item);
+                this.withdrawOperator(item);
+                return;
             }
             // 表单验证后打开弹窗
             if (window.__processDetailFromMixinFormVm__ && window.__processDetailFromMixinFormVm__.validate) {
                 const validateResult = await window.__processDetailFromMixinFormVm__.validate();
                 if (validateResult.valid) {
-                    this.openModal(item);
+                    if (item.name === 'submit') {
+                        return this.submit(item);
+                    } else {
+                        this.openModal(item);
+                    }
                 }
             } else {
                 this.openModal(item);
@@ -156,7 +167,7 @@ export default {
          */
         revertOperator(item) {
             return this.$confirm({
-                title: this.$tt('revertTitle'),
+                title: item.displayText,
                 content: this.$tt('revertContent',  { revertDisplayText: item.displayText }),
                 okButton: this.$tt('revertOK'),
                 cancelButton: this.$tt('revertCancel'),
@@ -179,7 +190,7 @@ export default {
          */
         withdrawOperator(item) {
             return this.$confirm({
-                title: this.$tt('withdrawTitle'),
+                title: item.displayText,
                 content: this.$tt('withdrawContent', { withdrawDisplayText: item.displayText }),
                 okButton: this.$tt('withdrawOK'),
                 cancelButton: this.$tt('withdrawCancel'),
@@ -196,14 +207,34 @@ export default {
                 // do nothing
             });
         },
-        async getUsersForReassign() {
+        /**
+         * 加签
+         */
+        async addSignOperator(item) {
             if (this.$processV2) {
-                const result = await this.$processV2.getUsersForReassign({
+                await this.$processV2.addSignTask({
                     body: {
                         taskId: this.taskId,
+                        userForAddSign: this.model.userName
                     },
                 });
-                return result.data;
+                this.refresh();
+            }
+        },
+        getUsers(item) {
+            return async () => {
+                const map = {
+                    reassign: 'getUsersForReassign',
+                    addSign: 'getUsersForAddSign'
+                };
+                if (this.$processV2) {
+                    const result = await this.$processV2[map[item.name]]({
+                        body: {
+                            taskId: this.taskId,
+                        },
+                    });
+                    return result.data;
+                }
             }
         },
     },

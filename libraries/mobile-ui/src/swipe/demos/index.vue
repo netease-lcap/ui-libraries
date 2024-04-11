@@ -1,65 +1,27 @@
 <template>
   <demo-section>
-    <demo-block :title="t('basicUsage')">
+    <demo-block title="数据源">
+      <van-swipe :data-source="[1,2,3,4,5,6]" :autoplay="3000" indicator-color="white" style="height:300px;">
+        <van-swipe-item>1</van-swipe-item>
+        <van-swipe-item>2</van-swipe-item>
+        <van-swipe-item>3</van-swipe-item>
+        <van-swipe-item>4</van-swipe-item>
+
+        <template #item="current">
+          <van-swipe-item>
+            {{ current.item }}
+          </van-swipe-item>
+        </template>
+      </van-swipe>
+    </demo-block>
+
+
+    <demo-block title="基础用法">
       <van-swipe :autoplay="3000" indicator-color="white" style="height:300px;">
         <van-swipe-item>1</van-swipe-item>
         <van-swipe-item>2</van-swipe-item>
         <van-swipe-item>3</van-swipe-item>
         <van-swipe-item>4</van-swipe-item>
-      </van-swipe>
-    </demo-block>
-
-    <demo-block :title="t('title2')">
-      <van-swipe :autoplay="3000">
-        <van-swipe-item v-for="(image, index) in images" :key="index">
-          <img v-lazy="image" />
-        </van-swipe-item>
-      </van-swipe>
-    </demo-block>
-
-    <demo-block :title="t('title3')">
-      <van-swipe indicator-color="white" @change="onChange1">
-        <van-swipe-item>1</van-swipe-item>
-        <van-swipe-item>2</van-swipe-item>
-        <van-swipe-item>3</van-swipe-item>
-        <van-swipe-item>4</van-swipe-item>
-      </van-swipe>
-    </demo-block>
-
-    <demo-block :title="t('title4')">
-      <van-swipe
-        vertical
-        :autoplay="3000"
-        indicator-color="white"
-        style="height: 200px"
-        class="demo-swipe--vertical"
-      >
-        <van-swipe-item>1</van-swipe-item>
-        <van-swipe-item>2</van-swipe-item>
-        <van-swipe-item>3</van-swipe-item>
-        <van-swipe-item>4</van-swipe-item>
-      </van-swipe>
-    </demo-block>
-
-    <demo-block :title="t('title5')">
-      <van-swipe :width="300" :loop="false" indicator-color="white">
-        <van-swipe-item>1</van-swipe-item>
-        <van-swipe-item>2</van-swipe-item>
-        <van-swipe-item>3</van-swipe-item>
-        <van-swipe-item>4</van-swipe-item>
-      </van-swipe>
-    </demo-block>
-
-    <demo-block :title="t('title6')">
-      <van-swipe @change="onChange2">
-        <van-swipe-item>1</van-swipe-item>
-        <van-swipe-item>2</van-swipe-item>
-        <van-swipe-item>3</van-swipe-item>
-        <van-swipe-item>4</van-swipe-item>
-
-        <template #indicator>
-          <div class="custom-indicator">{{ current + 1 }}/4</div>
-        </template>
       </van-swipe>
     </demo-block>
   </demo-section>

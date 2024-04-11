@@ -103,6 +103,12 @@ export default createComponent({
   },
 
   methods: {
+    hasComment(name) {
+      return ['approve', 'reject'].includes(name);
+    },
+    hasConfirm(name) {
+      return ['revert', 'withdraw'].includes(name);
+    },
     async getOperationPermissionDetail(taskId) {
       if (this.inDesigner() || this.isDev()) {
         this.permissionDetails = mockData.permissionDetails;
@@ -110,7 +116,7 @@ export default createComponent({
       }
 
       try {
-        const res = await this.$processV2.getTaskOperationPermissions({
+        const res = await this.$processV2?.getTaskOperationPermissions({
           body: {
             taskId,
           },
@@ -122,13 +128,17 @@ export default createComponent({
       }
     },
 
-    async getTransferUserList(taskId) {
+    async getUserList(taskId, item) {
       if (this.inDesigner() || this.isDev()) {
         return mockData.allTransferUserList;
       }
 
       try {
-        const res = await this.$processV2.getUsersForReassign({
+        const map = {
+          reassign: 'getUsersForReassign',
+          addSign: 'getUsersForAddSign'
+        };
+        const res = await this.$processV2?.[map[item.name]]({
           body: {
             taskId,
           },
@@ -140,21 +150,37 @@ export default createComponent({
         return [];
       }
     },
-
+    /**
+     * 加签
+     */
+    async addSignOperator(item) {
+      if (this.$processV2) {
+        await this.$processV2.addSignTask({
+          body: {
+            taskId: this.taskId,
+            userForAddSign: this.dialog.reassign
+          },
+        });
+        this.refresh();
+      }
+    },
     async submit(item) {
+      if (item.name === 'addSign') {
+        this.addSignOperator(item);
+        return;
+      }
       const body = {
         taskId: this.taskId,
       };
 
-      // 意见
-      if (item.commentRequired) {
+      // 意见,   同意 拒绝才有
+      if (this.hasComment(item.name)) {
         body.comment = this.dialog.opinions;
       }
 
       // formdata
-      const dynamicRenderContainer = document.getElementById('dynamicRenderContainer');
-      if (dynamicRenderContainer && dynamicRenderContainer.__vue__) {
-        body.data = dynamicRenderContainer.__vue__.processDetailFormData;
+      if (window.__processDetailFromMixinFormData__) {
+        body.data = window.__processDetailFromMixinFormData__;
       }
 
       // 转交人
@@ -165,7 +191,7 @@ export default createComponent({
       const operate = `${item.name}Task`;
 
       try {
-        await this.$processV2.setTaskInstance({
+        await this.$processV2?.setTaskInstance({
           path: {
             operate,
           },
@@ -179,7 +205,7 @@ export default createComponent({
     },
 
     async onClickItem(item) {
-      const { name, commentRequired } = item;
+      const { name } = item;
 
       // 表单检验
       if (['approve', 'reject', 'submit'].includes(name)) {
@@ -196,8 +222,8 @@ export default createComponent({
         }
       }
 
-      // 需要弹出框的情况opinionsEnable和name是transfer
-      if (commentRequired || name === 'reassign') {
+      // 需要弹出框的情况
+      if (['approve', 'reject', 'revert', 'withdraw', 'reassign', 'addSign'].includes(name)) {
         this.dialog = {
           item,
         };
@@ -335,7 +361,7 @@ export default createComponent({
         >
           <div class={bem('dialog')}>
             <Form ref="form">
-              {['reassign'].includes(this.dialog.item?.name) && (
+              {['reassign', 'addSign'].includes(this.dialog.item?.name) && (
                 <Field
                   border={false}
                   rules={[
@@ -353,7 +379,7 @@ export default createComponent({
                         valueField="userId"
                         textField="userName"
                         class={bem('dialog-picker')}
-                        dataSource={() => this.getTransferUserList(this.taskId)}
+                        dataSource={() => this.getUserList(this.taskId, this.dialog.item)}
                         onConfirm={this.onTransferPickerConfirm}
                         placeholder="请选择转交人"
                         title=""
@@ -366,7 +392,16 @@ export default createComponent({
                 />
               )}
 
-              {this.dialog.item?.commentRequired && (
+              {this.hasComment(this.dialog.item?.name) ? (
+                <div
+                  class={bem('dialog-formItem_title', {
+                    required: this.dialog.item?.commentRequired,
+                  })}
+                >
+                  审批意见
+                </div>
+              ) : null}
+              {this.hasComment(this.dialog.item?.name) ? (
                 <Field
                   border={false}
                   rules={[
@@ -374,14 +409,20 @@ export default createComponent({
                       validate: 'filled',
                       message: '输入框不得为空',
                       trigger: 'input+blur',
-                      required: true,
+                      required: this.dialog.item?.commentRequired,
                     },
                   ]}
                   scopedSlots={{
                     input: () => <TextArea value={this.dialog.opinions} onInput={this.onOpinionsInput} class={bem('dialog-input')} placeholder="请输入审批意见" inputAlign="left" />,
                   }}
                 />
-              )}
+              ) : null}
+
+              {this.hasConfirm(this.dialog.item?.name) ? (
+                <div class={bem('dialog-confirm_content')}>
+                  <p class={bem('dialog-confirm_content_title')}>请确认是否{this.dialog.item?.displayText}流程？</p>
+                </div>
+              ) : null}
             </Form>
           </div>
         </Dialog>

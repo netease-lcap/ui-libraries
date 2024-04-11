@@ -68,12 +68,12 @@ module.exports = {
       extends: ['FormItemProps'],
       show: false,
     },
-    { group: 'Form', name: 'Textarea', alias: '多行输入' },
+    { group: 'Form', name: 'TextArea', alias: '多行输入' },
     {
       group: 'Form',
-      name: 'FormTextarea',
+      name: 'FormTextArea',
       alias: '表单多行输入',
-      apiPath: 'Textarea/blocks-api/form-text-area.api.ts',
+      apiPath: 'TextArea/blocks-api/form-text-area.api.ts',
       extends: ['FormItemProps'],
       show: false,
     },
@@ -119,7 +119,7 @@ module.exports = {
 
     { group: 'Selector', name: 'Tabs', alias: '选项卡' },
     { group: 'Selector', name: 'Tree', alias: '树形视图' },
-    { group: 'Selector', name: 'TreeSelect', alias: '树形视图' },
+    { group: 'Selector', name: 'TreeSelect', alias: '树选择' },
     {
       group: 'Selector',
       name: 'FormTreeSelect',
@@ -183,7 +183,7 @@ module.exports = {
     // { group: 'Feedback', name: 'Message', alias: '弹出消息' },
     { group: 'Feedback', name: 'Popover', alias: '弹出框' },
 
-    { group: 'Container', name: 'Card', alias: '卡片' },
+    { group: 'Container', name: 'Card', alias: '面板' },
     { group: 'Container', name: 'Router', alias: '子页面容器' },
 
     { group: 'Navigation', name: 'Breadcrumb', alias: '面包屑' },

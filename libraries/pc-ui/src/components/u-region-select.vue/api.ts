@@ -151,6 +151,28 @@ namespace nasl.ui {
 
         @Prop({
             group: '状态属性',
+            title: '只读',
+            description: '正常显示，但禁止选择/输入',
+            docDescription: '正常显示，但禁止选择或输入。',
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        readonly: nasl.core.Boolean = false;
+
+        @Prop({
+            group: '状态属性',
+            title: '预览',
+            description: '显示预览态',
+            docDescription: '',
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        preview: nasl.core.Boolean = false;
+
+        @Prop({
+            group: '状态属性',
             title: '弹出状态',
             description: '弹出状态分为“True(弹出)/False(关闭)”，默认为“弹出”',
             docDescription: '开启时加载下拉框时，下拉框自动弹出，默认关闭',

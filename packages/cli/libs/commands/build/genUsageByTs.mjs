@@ -64,7 +64,11 @@ function getBlocksByDemo(componentDir, { screenshots, drawings }) {
 
   const files = fs.readdirSync(dir).filter((p) => p.endsWith('.vue'));
   const blocks = [];
-  files.forEach((file, index) => {
+  files.sort((a, b) => {
+    const n1 = Number(a.substring('BlocksDemo'.length, a.lastIndexOf('.')));
+    const n2 = Number(b.substring('BlocksDemo'.length, b.lastIndexOf('.')));
+    return n1 - n2;
+  }).forEach((file, index) => {
     let content = fs.readFileSync(path.join(dir, file), 'utf-8');
     const matches = content.match(/<!--.*?-->/);
     let title = '';
@@ -132,7 +136,7 @@ function genUsageByTs(config) {
       component.symbol = symbol;
       const tsPath = component.apiPath ? path.resolve(rootPath, componentsPath, component.apiPath) : `${componentDir}/api.ts`;
       if (!fs.existsSync(tsPath)) {
-        logger.error(`未找到组件 ${component.name} 的描述文件（api.ts）`);
+        logger.error(`未找到组件 ${component.name} 的描述文件（api.ts）, ${tsPath}`);
         process.exit(1);
       }
 

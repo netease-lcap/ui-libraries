@@ -37,7 +37,7 @@ function copyFolder(sourceFolder, destinationFolder) {
 }
 
 const libraries = [
-  // 'libraries/pc-react-ui',
+  'libraries/pc-react-ui',
   'libraries/mobile-ui',
   'libraries/pc-ui',
 ];

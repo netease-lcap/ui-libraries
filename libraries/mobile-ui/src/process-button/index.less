@@ -28,9 +28,21 @@
 .van-process-button__dialog {
   padding: 10px 24px !important;
 
-  &-message {
-
+  .van-cellson {
+    padding-top: 0;
   }
+
+  &-formItem_title {
+    text-align: left;
+    font-size: 12px;
+    padding-left: 16px;
+  }
+
+  &-formItem_title--required::after {
+    content: '*';
+    color: red;
+  }
+
 
   &-input {
     box-sizing: border-box;

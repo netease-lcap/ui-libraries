@@ -15,16 +15,11 @@ exports[`u-time-picker.vue > Demo-只读和禁用 1`] = `
               </svg>
             </span>
             <div class="icontext" vusion-slot-name="default">
-              <!---->
             </div>
           </span>
         </span>
         <input class="input" height="full" readonly="readonly" type="text" width>
-        <span class="suffix">
-          <!---->
-          <!---->
-          <!---->
-        </span>
+        <span class="suffix"></span>
       </div>
       <transition-stub class="popper" name="fade" style="width: 100px;">
         <div class="root" style="display: none;">
@@ -232,29 +227,17 @@ exports[`u-time-picker.vue > Demo-只读和禁用 1`] = `
             <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
               <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
                 <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                  <!---->
                   此刻
-                  <!---->
                 </a>
-                <!---->
-                <!---->
               </div>
               <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
                 <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                  <!---->
                   取 消
-                  <!---->
                 </a>
                 <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                  <!---->
                   确 定
-                  <!---->
                 </a>
-                <!---->
-                <!---->
               </div>
-              <!---->
-              <!---->
             </div>
           </div>
         </div>
@@ -272,16 +255,11 @@ exports[`u-time-picker.vue > Demo-只读和禁用 1`] = `
               </svg>
             </span>
             <div class="icontext" vusion-slot-name="default">
-              <!---->
             </div>
           </span>
         </span>
         <input class="input" disabled="disabled" height="full" type="text" width>
-        <span class="suffix">
-          <!---->
-          <!---->
-          <!---->
-        </span>
+        <span class="suffix"></span>
       </div>
       <transition-stub class="popper" name="fade" style="width: 100px;">
         <div class="root" style="display: none;">
@@ -489,36 +467,22 @@ exports[`u-time-picker.vue > Demo-只读和禁用 1`] = `
             <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
               <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
                 <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                  <!---->
                   此刻
-                  <!---->
                 </a>
-                <!---->
-                <!---->
               </div>
               <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
                 <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                  <!---->
                   取 消
-                  <!---->
                 </a>
                 <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                  <!---->
                   确 定
-                  <!---->
                 </a>
-                <!---->
-                <!---->
               </div>
-              <!---->
-              <!---->
             </div>
           </div>
         </div>
       </transition-stub>
     </span>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -536,14 +500,11 @@ exports[`u-time-picker.vue > Demo-基本用法 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </span>
     <input class="input" height="full" type="text" width>
     <span class="suffix">
-      <!---->
-      <!---->
       <span class="clearable"></span>
     </span>
   </div>
@@ -753,29 +714,17 @@ exports[`u-time-picker.vue > Demo-基本用法 1`] = `
         <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
           <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
             <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               此刻
-              <!---->
             </a>
-            <!---->
-            <!---->
           </div>
           <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
             <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               取 消
-              <!---->
             </a>
             <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               确 定
-              <!---->
             </a>
-            <!---->
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
       </div>
     </div>
@@ -797,14 +746,11 @@ exports[`u-time-picker.vue > Demo-基本用法 2`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </span>
       <input class="input" height="full" type="text" width>
       <span class="suffix">
-        <!---->
-        <!---->
         <span class="clearable"></span>
       </span>
     </div>
@@ -1014,29 +960,17 @@ exports[`u-time-picker.vue > Demo-基本用法 2`] = `
           <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
             <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
               <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 此刻
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
             <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
               <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 取 消
-                <!---->
               </a>
               <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 确 定
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
         </div>
       </div>
@@ -1058,14 +992,11 @@ exports[`u-time-picker.vue > Demo-方法 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </span>
     <input class="input" height="full" type="text" width>
     <span class="suffix">
-      <!---->
-      <!---->
       <span class="clearable"></span>
     </span>
   </div>
@@ -1275,29 +1206,17 @@ exports[`u-time-picker.vue > Demo-方法 1`] = `
         <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
           <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
             <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               此刻
-              <!---->
             </a>
-            <!---->
-            <!---->
           </div>
           <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
             <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               取 消
-              <!---->
             </a>
             <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               确 定
-              <!---->
             </a>
-            <!---->
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
       </div>
     </div>
@@ -1318,14 +1237,11 @@ exports[`u-time-picker.vue > Demo-日期最小单位 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </span>
     <input class="input" height="full" type="text" width>
     <span class="suffix">
-      <!---->
-      <!---->
       <span class="clearable"></span>
     </span>
   </div>
@@ -1452,35 +1368,22 @@ exports[`u-time-picker.vue > Demo-日期最小单位 1`] = `
             </div>
           </div>
         </div>
-        <!---->
       </div>
       <div class="foot">
         <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
           <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
             <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               此刻
-              <!---->
             </a>
-            <!---->
-            <!---->
           </div>
           <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
             <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               取 消
-              <!---->
             </a>
             <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               确 定
-              <!---->
             </a>
-            <!---->
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
       </div>
     </div>
@@ -1502,14 +1405,11 @@ exports[`u-time-picker.vue > Demo-日期范围 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </span>
       <input class="input" height="full" type="text" width>
       <span class="suffix">
-        <!---->
-        <!---->
         <span class="clearable"></span>
       </span>
     </div>
@@ -1719,29 +1619,17 @@ exports[`u-time-picker.vue > Demo-日期范围 1`] = `
           <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
             <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
               <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 此刻
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
             <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
               <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 取 消
-                <!---->
               </a>
               <a class="root" color="primary" disabled="disabled" hovertype="underline" size="small" tabindex="-1" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 确 定
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
         </div>
       </div>
@@ -1764,14 +1652,11 @@ exports[`u-time-picker.vue > Demo-日期范围 2`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </span>
       <input class="input" height="full" type="text" width>
       <span class="suffix">
-        <!---->
-        <!---->
         <span class="clearable"></span>
       </span>
     </div>
@@ -1981,29 +1866,17 @@ exports[`u-time-picker.vue > Demo-日期范围 2`] = `
           <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
             <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
               <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 此刻
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
             <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
               <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 取 消
-                <!---->
               </a>
               <a class="root" color="primary" disabled="disabled" hovertype="underline" size="small" tabindex="-1" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 确 定
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
         </div>
       </div>
@@ -2025,14 +1898,11 @@ exports[`u-time-picker.vue > Demo-时间单位容错 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </span>
     <input class="input" height="full" type="text" width>
     <span class="suffix">
-      <!---->
-      <!---->
       <span class="clearable"></span>
     </span>
   </div>
@@ -2159,35 +2029,22 @@ exports[`u-time-picker.vue > Demo-时间单位容错 1`] = `
             </div>
           </div>
         </div>
-        <!---->
       </div>
       <div class="foot">
         <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
           <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
             <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               此刻
-              <!---->
             </a>
-            <!---->
-            <!---->
           </div>
           <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
             <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               取 消
-              <!---->
             </a>
             <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               确 定
-              <!---->
             </a>
-            <!---->
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
       </div>
     </div>
@@ -2209,16 +2066,11 @@ exports[`u-time-picker.vue > Demo-格式化 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </span>
       <input class="input" height="full" type="text" width>
-      <span class="suffix">
-        <!---->
-        <!---->
-        <!---->
-      </span>
+      <span class="suffix"></span>
     </div>
     <transition-stub class="popper" name="fade" style="width: 100px;">
       <div class="root" style="display: none;">
@@ -2426,29 +2278,17 @@ exports[`u-time-picker.vue > Demo-格式化 1`] = `
           <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
             <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
               <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 此刻
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
             <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
               <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 取 消
-                <!---->
               </a>
               <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 确 定
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
         </div>
       </div>
@@ -2467,22 +2307,17 @@ exports[`u-time-picker.vue > Demo-格式化 1`] = `
               </svg>
             </span>
             <div class="icontext" vusion-slot-name="default">
-              <!---->
             </div>
           </span>
         </span>
         <input class="input" height="full" type="text" width>
-        <!---->
       </div>
       <span class="toIcon"></span>
       <div class="root input" clearable="18时18分33秒" height="full" width>
         <span class="baseline">b</span>
         <span class="placeholder"></span>
-        <!---->
         <input class="input" height="full" type="text" width>
         <span class="suffix">
-          <!---->
-          <!---->
           <span class="clearable"></span>
         </span>
       </div>
@@ -2693,29 +2528,17 @@ exports[`u-time-picker.vue > Demo-格式化 1`] = `
           <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
             <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
               <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 此刻
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
             <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
               <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 取 消
-                <!---->
               </a>
               <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 确 定
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
         </div>
       </div>
@@ -2926,29 +2749,17 @@ exports[`u-time-picker.vue > Demo-格式化 1`] = `
           <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
             <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
               <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 此刻
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
             <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
               <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 取 消
-                <!---->
               </a>
               <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 确 定
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
         </div>
       </div>
@@ -2972,16 +2783,11 @@ exports[`u-time-picker.vue > Demo-自定义底部文案 1`] = `
               </svg>
             </span>
             <div class="icontext" vusion-slot-name="default">
-              <!---->
             </div>
           </span>
         </span>
         <input class="input" height="full" type="text" width>
-        <span class="suffix">
-          <!---->
-          <!---->
-          <!---->
-        </span>
+        <span class="suffix"></span>
       </div>
       <transition-stub class="popper" name="fade" style="width: 100px;">
         <div class="root" style="display: none;">
@@ -3189,36 +2995,22 @@ exports[`u-time-picker.vue > Demo-自定义底部文案 1`] = `
             <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
               <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
                 <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                  <!---->
                   此
-                  <!---->
                 </a>
-                <!---->
-                <!---->
               </div>
               <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
                 <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                  <!---->
                   取
-                  <!---->
                 </a>
                 <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                  <!---->
                   确
-                  <!---->
                 </a>
-                <!---->
-                <!---->
               </div>
-              <!---->
-              <!---->
             </div>
           </div>
         </div>
       </transition-stub>
     </span>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -3238,22 +3030,17 @@ exports[`u-time-picker.vue > Demo-范围选择 1`] = `
               </svg>
             </span>
             <div class="icontext" vusion-slot-name="default">
-              <!---->
             </div>
           </span>
         </span>
         <input class="input" height="full" type="text" width>
-        <!---->
       </div>
       <span class="toIcon"></span>
       <div class="root input" clearable="18:18:33" height="full" width>
         <span class="baseline">b</span>
         <span class="placeholder"></span>
-        <!---->
         <input class="input" height="full" type="text" width>
         <span class="suffix">
-          <!---->
-          <!---->
           <span class="clearable"></span>
         </span>
       </div>
@@ -3464,29 +3251,17 @@ exports[`u-time-picker.vue > Demo-范围选择 1`] = `
           <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
             <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
               <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 此刻
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
             <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
               <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 取 消
-                <!---->
               </a>
               <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 确 定
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
         </div>
       </div>
@@ -3697,29 +3472,17 @@ exports[`u-time-picker.vue > Demo-范围选择 1`] = `
           <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
             <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
               <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 此刻
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
             <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
               <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 取 消
-                <!---->
               </a>
               <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 确 定
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
         </div>
       </div>
@@ -3743,22 +3506,17 @@ exports[`u-time-picker.vue > Demo-范围选择分钟 1`] = `
               </svg>
             </span>
             <div class="icontext" vusion-slot-name="default">
-              <!---->
             </div>
           </span>
         </span>
         <input class="input" height="full" type="text" width>
-        <!---->
       </div>
       <span class="toIcon"></span>
       <div class="root input" clearable="18:18" height="full" width>
         <span class="baseline">b</span>
         <span class="placeholder"></span>
-        <!---->
         <input class="input" height="full" type="text" width>
         <span class="suffix">
-          <!---->
-          <!---->
           <span class="clearable"></span>
         </span>
       </div>
@@ -3886,35 +3644,22 @@ exports[`u-time-picker.vue > Demo-范围选择分钟 1`] = `
               </div>
             </div>
           </div>
-          <!---->
         </div>
         <div class="foot">
           <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
             <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
               <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 此刻
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
             <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
               <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 取 消
-                <!---->
               </a>
               <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 确 定
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
         </div>
       </div>
@@ -4042,35 +3787,22 @@ exports[`u-time-picker.vue > Demo-范围选择分钟 1`] = `
               </div>
             </div>
           </div>
-          <!---->
         </div>
         <div class="foot">
           <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
             <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
               <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 此刻
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
             <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
               <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 取 消
-                <!---->
               </a>
               <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                <!---->
                 确 定
-                <!---->
               </a>
-              <!---->
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
         </div>
       </div>
@@ -4093,22 +3825,17 @@ exports[`u-time-picker.vue > Demo-范围选择变量绑定 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </span>
       <input class="input" height="full" type="text" width>
-      <!---->
     </div>
     <span class="toIcon"></span>
     <div class="root input" clearable="18:18:33" height="full" width>
       <span class="baseline">b</span>
       <span class="placeholder"></span>
-      <!---->
       <input class="input" height="full" type="text" width>
       <span class="suffix">
-        <!---->
-        <!---->
         <span class="clearable"></span>
       </span>
     </div>
@@ -4319,29 +4046,17 @@ exports[`u-time-picker.vue > Demo-范围选择变量绑定 1`] = `
         <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
           <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
             <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               此刻
-              <!---->
             </a>
-            <!---->
-            <!---->
           </div>
           <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
             <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               取 消
-              <!---->
             </a>
             <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               确 定
-              <!---->
             </a>
-            <!---->
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
       </div>
     </div>
@@ -4552,29 +4267,17 @@ exports[`u-time-picker.vue > Demo-范围选择变量绑定 1`] = `
         <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
           <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
             <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               此刻
-              <!---->
             </a>
-            <!---->
-            <!---->
           </div>
           <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
             <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               取 消
-              <!---->
             </a>
             <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-              <!---->
               确 定
-              <!---->
             </a>
-            <!---->
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
       </div>
     </div>
@@ -4587,11 +4290,8 @@ exports[`u-time-picker.vue > Demo-表单验证 1`] = `
   <div class="root" layout="block">
     <div class="root" distance label-size="normal">
       <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
-        <span class="text" vusion-slot-name-edit="label">单日期
-          <!---->
-        </span>
+        <span class="text" vusion-slot-name-edit="label">单日期</span>
       </label>
-      <!---->
       <div class="field">
         <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
         <div class="wrap" vusion-slot-name="default">
@@ -4607,14 +4307,11 @@ exports[`u-time-picker.vue > Demo-表单验证 1`] = `
                     </svg>
                   </span>
                   <div class="icontext" vusion-slot-name="default">
-                    <!---->
                   </div>
                 </span>
               </span>
               <input class="input" height="full" type="text" width>
               <span class="suffix">
-                <!---->
-                <!---->
                 <span class="clearable"></span>
               </span>
             </div>
@@ -4824,46 +4521,29 @@ exports[`u-time-picker.vue > Demo-表单验证 1`] = `
                   <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
                     <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
                       <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                        <!---->
                         此刻
-                        <!---->
                       </a>
-                      <!---->
-                      <!---->
                     </div>
                     <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
                       <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                        <!---->
                         取 消
-                        <!---->
                       </a>
                       <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                        <!---->
                         确 定
-                        <!---->
                       </a>
-                      <!---->
-                      <!---->
                     </div>
-                    <!---->
-                    <!---->
                   </div>
                 </div>
               </div>
             </transition-stub>
           </span>
-          <!---->
-          <!---->
         </div>
       </div>
     </div>
     <div class="root" distance label-size="normal">
       <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
-        <span class="text" vusion-slot-name-edit="label">日期范围
-          <!---->
-        </span>
+        <span class="text" vusion-slot-name-edit="label">日期范围</span>
       </label>
-      <!---->
       <div class="field">
         <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
         <div class="wrap" vusion-slot-name="default">
@@ -4880,22 +4560,17 @@ exports[`u-time-picker.vue > Demo-表单验证 1`] = `
                       </svg>
                     </span>
                     <div class="icontext" vusion-slot-name="default">
-                      <!---->
                     </div>
                   </span>
                 </span>
                 <input class="input" height="full" type="text" width>
-                <!---->
               </div>
               <span class="toIcon"></span>
               <div class="root input" clearable="18:18:33" height="full" width>
                 <span class="baseline">b</span>
                 <span class="placeholder"></span>
-                <!---->
                 <input class="input" height="full" type="text" width>
                 <span class="suffix">
-                  <!---->
-                  <!---->
                   <span class="clearable"></span>
                 </span>
               </div>
@@ -5106,29 +4781,17 @@ exports[`u-time-picker.vue > Demo-表单验证 1`] = `
                   <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
                     <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
                       <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                        <!---->
                         此刻
-                        <!---->
                       </a>
-                      <!---->
-                      <!---->
                     </div>
                     <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
                       <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                        <!---->
                         取 消
-                        <!---->
                       </a>
                       <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                        <!---->
                         确 定
-                        <!---->
                       </a>
-                      <!---->
-                      <!---->
                     </div>
-                    <!---->
-                    <!---->
                   </div>
                 </div>
               </div>
@@ -5339,36 +5002,22 @@ exports[`u-time-picker.vue > Demo-表单验证 1`] = `
                   <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
                     <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
                       <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                        <!---->
                         此刻
-                        <!---->
                       </a>
-                      <!---->
-                      <!---->
                     </div>
                     <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
                       <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                        <!---->
                         取 消
-                        <!---->
                       </a>
                       <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                        <!---->
                         确 定
-                        <!---->
                       </a>
-                      <!---->
-                      <!---->
                     </div>
-                    <!---->
-                    <!---->
                   </div>
                 </div>
               </div>
             </transition-stub>
           </span>
-          <!---->
-          <!---->
         </div>
       </div>
     </div>
@@ -5391,14 +5040,11 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
               </svg>
             </span>
             <div class="icontext" vusion-slot-name="default">
-              <!---->
             </div>
           </span>
         </span>
         <input class="input" height="full" type="text" width>
         <span class="suffix">
-          <!---->
-          <!---->
           <span class="clearable"></span>
         </span>
       </div>
@@ -5608,16 +5254,9 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
             <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
               <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
                 <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                  <!---->
                   此刻
-                  <!---->
                 </a>
-                <!---->
-                <!---->
               </div>
-              <!---->
-              <!---->
-              <!---->
             </div>
           </div>
         </div>
@@ -5635,14 +5274,11 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
               </svg>
             </span>
             <div class="icontext" vusion-slot-name="default">
-              <!---->
             </div>
           </span>
         </span>
         <input class="input" height="full" type="text" width>
         <span class="suffix">
-          <!---->
-          <!---->
           <span class="clearable"></span>
         </span>
       </div>
@@ -5851,25 +5487,15 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
           <div class="foot">
             <div class="root" direction="horizontal" justify="space-between" type vusion-slot-name="default">
               <div class="root ctimewrap" direction="horizontal" type vusion-slot-name="default">
-                <!---->
-                <!---->
               </div>
               <div class="root" direction="horizontal" gap="small" type vusion-slot-name="default">
                 <a class="root" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                  <!---->
                   取 消
-                  <!---->
                 </a>
                 <a class="root" color="primary" hovertype="underline" size="small" tabindex="0" target="_self" vusion-slot-name-edit="text">
-                  <!---->
                   确 定
-                  <!---->
                 </a>
-                <!---->
-                <!---->
               </div>
-              <!---->
-              <!---->
             </div>
           </div>
         </div>
@@ -5887,14 +5513,11 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
               </svg>
             </span>
             <div class="icontext" vusion-slot-name="default">
-              <!---->
             </div>
           </span>
         </span>
         <input class="input" height="full" type="text" width>
         <span class="suffix">
-          <!---->
-          <!---->
           <span class="clearable"></span>
         </span>
       </div>
@@ -6100,12 +5723,9 @@ exports[`u-time-picker.vue > Demo-隐藏底部按钮 1`] = `
               </div>
             </div>
           </div>
-          <!---->
         </div>
       </transition-stub>
     </span>
-    <!---->
-    <!---->
   </div>
 </div>
 `;

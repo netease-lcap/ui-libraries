@@ -59,7 +59,7 @@ export default createComponent({
 
     onLoad: _debounce(async function () {
       const result = await this.getProcessRecords(this.taskId);
-      const { list, total } = result;
+      const { list, total } = result || {};
 
       this.records = this.records.concat(list || []);
       this.total = total || 0;
@@ -78,7 +78,7 @@ export default createComponent({
         };
       }
 
-      const result = await this.$processV2.getProcInstRecords({
+      const result = await this.$processV2?.getProcInstRecords({
         body: {
           taskId,
           page: this.page,
@@ -86,7 +86,7 @@ export default createComponent({
         },
       });
 
-      return result.data;
+      return result?.data;
     },
 
     renderList() {

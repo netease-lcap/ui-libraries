@@ -12,11 +12,9 @@ exports[`u-iframe.vue > Demo-iframe 其他属性 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </div>
-      <!---->
     </div>
     <iframe allowfullscreen="allowfullscreen" frameborder="0" sandbox="allow-same-origin" src="https://sf.163.com"></iframe>
   </div>
@@ -34,11 +32,9 @@ exports[`u-iframe.vue > Demo-基本用法 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </div>
-    <!---->
   </div>
   <iframe allowfullscreen="allowfullscreen" frameborder="0" src="https://sf.163.com"></iframe>
 </div>
@@ -56,11 +52,9 @@ exports[`u-iframe.vue > Demo-基本用法 2`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </div>
-      <!---->
     </div>
     <iframe allowfullscreen="allowfullscreen" frameborder="0" src="https://sf.163.com"></iframe>
   </div>

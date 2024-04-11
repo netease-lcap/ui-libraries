@@ -10,6 +10,7 @@ import { getRootScrollTop, setRootScrollTop } from '../utils/dom/scroll';
 
 
 import { FieldMixin } from '../mixins/field';
+import PreviewMixin from '../mixins/preview';
 
 import Icon from '../icon';
 
@@ -19,7 +20,7 @@ function equal(value1, value2) {
 }
 
 export default createComponent({
-  mixins: [FieldMixin],
+  mixins: [FieldMixin, PreviewMixin],
   props: {
     type: {
       type: String,
@@ -63,9 +64,7 @@ export default createComponent({
       currentValue: defaultValue,
     };
   },
-  computed: {
-
-  },
+  computed: {},
   mounted() {
     this.$nextTick(this.adjustSize);
   },
@@ -152,11 +151,9 @@ export default createComponent({
     },
     showClear() {
       const readonly = this.getProp('readonly');
-      if ((this.clearable && !readonly)) {
+      if (this.clearable && !readonly) {
         const hasValue = isDef(this.currentValue) && this.currentValue !== '';
-        const trigger =
-          this.clearTrigger === 'always' ||
-          (this.clearTrigger === 'focus' && this.focused);
+        const trigger = this.clearTrigger === 'always' || (this.clearTrigger === 'focus' && this.focused);
 
         return hasValue && trigger;
       }
@@ -169,7 +166,7 @@ export default createComponent({
       this.$emit('clear', event);
     },
     genWordLimit() {
-      if ((this.showWordLimit && this.maxlength)) {
+      if (this.showWordLimit && this.maxlength) {
         const count = (this.currentValue || '').length;
 
         return (
@@ -184,13 +181,13 @@ export default createComponent({
       this.currentValue = this.value;
     },
     adjustSize() {
-      const {input} = this.$refs;
+      const { input } = this.$refs;
 
       const scrollTop = getRootScrollTop();
       input.style.height = 'auto';
 
       let height = input.scrollHeight;
-      const {wrap} = this.$refs;
+      const { wrap } = this.$refs;
       // eslint-disable-next-line radix
       const wrapHeight = parseInt(window.getComputedStyle(wrap).height);
       if (isObject(this.autosize || input.autosize)) {
@@ -201,7 +198,7 @@ export default createComponent({
         if (minHeight) {
           height = Math.max(height, minHeight);
         }
-        input.style.overflowY = "auto"
+        input.style.overflowY = 'auto';
       }
 
       if (height) {
@@ -230,24 +227,36 @@ export default createComponent({
       this.$emit('change', val, this);
 
       this.$nextTick(this.adjustSize);
-
     },
   },
   render() {
-    const ifLimit = (this.showWordLimit && this.maxlength);
+    const ifLimit = this.showWordLimit && this.maxlength;
     const inputAlign = this.vanField?.getProp('inputAlign');
+
+    if (this.isPreview && !this.inDesigner()) {
+      return (
+        <div class={bem('newwrap', { clearwrap: this.clearable, limit: ifLimit })} ref="wrap">
+          <div class={bem('wrap-con')}>
+            <span
+              ref="input"
+              class={bem('control', [inputAlign, 'custom', { 'min-height': !this.autosize }])}
+            >
+              {this.currentValue}
+            </span>
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <div
-        class={bem('newwrap', { clearwrap: this.clearable, limit: ifLimit })}
-        ref="wrap"
-      >
+      <div class={bem('newwrap', { clearwrap: this.clearable, limit: ifLimit })} ref="wrap">
         <div class={bem('wrap-con')}>
           <textarea
             // vShow={this.showInput}
             ref="input"
             // type={this.type}
             role="fieldtextarea"
-            class={bem('control', [inputAlign, 'custom', {'min-height': !this.autosize}])}
+            class={bem('control', [inputAlign, 'custom', { 'min-height': !this.autosize }])}
             value={this.currentValue}
             // style={this.inputStyle}
             disabled={this.disabled}
@@ -263,16 +272,10 @@ export default createComponent({
             onBlur={this.onBlur}
             // onMousedown={this.onMousedown}
           />
-          {this.showClear() && (
-            <Icon
-              name="clear"
-              class={bem('clear')}
-              onTouchstart={this.onClear}
-            />
-          )}
+          {this.showClear() && <Icon name="clear" class={bem('clear')} onTouchstart={this.onClear} />}
         </div>
         {this.genWordLimit()}
       </div>
     );
-  }
+  },
 });

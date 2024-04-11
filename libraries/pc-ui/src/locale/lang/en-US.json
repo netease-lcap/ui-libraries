@@ -127,7 +127,7 @@
   "uProcessButton_revertOK": "submit",
   "uProcessButton_revertCancel": "cancel",
   "uProcessButton_withdrawTitle": "withdraw",
-  "uProcessButton_withdrawContent": "Confirm {widthdrawDisplayText}？",
+  "uProcessButton_withdrawContent": "Confirm {withdrawDisplayText}？",
   "uProcessButton_withdrawOK": "submit",
   "uProcessButton_withdrawCancel": "cancel",
   "uProcessInfo_startBy": "Startby",

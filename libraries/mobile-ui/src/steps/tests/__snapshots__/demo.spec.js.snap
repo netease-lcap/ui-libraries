@@ -3,7 +3,6 @@
 exports[`renders demo correctly 1`] = `
 <div>
   <div>
-    <div>0</div>
     <div class="van-steps van-steps--vertical" active="0">
       <div child-cut-disabled="true" class="van-steps__items">
         <div class="van-hairline van-step van-step--vertical van-step--process van-step--border">
@@ -64,6 +63,8 @@ exports[`renders demo correctly 1`] = `
         </div>
       </div>
     </div>
+  </div>
+  <div>
     <div class="van-steps van-steps--horizontal">
       <div class="van-steps__items">
         <div class="van-hairline van-step van-step--horizontal van-step--process van-step--border">
@@ -92,6 +93,8 @@ exports[`renders demo correctly 1`] = `
         </div>
       </div>
     </div>
+  </div>
+  <div>
     <div class="van-steps van-steps--vertical">
       <div class="van-steps__items">
         <div class="van-hairline van-step van-step--vertical van-step--process van-step--border">

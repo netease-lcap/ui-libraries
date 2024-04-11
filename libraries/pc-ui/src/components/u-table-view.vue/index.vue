@@ -45,7 +45,7 @@
                             v-ellipsis-title>
                             <!-- type === 'checkbox' -->
                             <span v-if="columnVM.type === 'checkbox'">
-                                <u-checkbox :value="allChecked" @check="checkAll($event.value)" :disabled="disabled" :readonly="readonly"></u-checkbox>
+                                <u-checkbox :value="allChecked" @check="checkAll($event.value)" :disabled="disabled" :readonly="readonly || !currentData || !currentData.length"></u-checkbox>
                             </span>
                             <!-- Normal title -->
                             <template>
@@ -1367,7 +1367,9 @@ export default {
         },
         onBodyScroll(e) {
             this.syncBodyScroll(e.target.scrollTop, e.target); // this.throttledVirtualScroll(e);
-            this.$refs.head[0].scrollLeft = e.target.scrollLeft;
+            if (this.$refs.head[0]) {
+                this.$refs.head[0].scrollLeft = e.target.scrollLeft;
+            }
             this.scrollXStart = e.target.scrollLeft === 0;
             this.scrollXEnd = e.target.scrollLeft >= e.target.scrollWidth - e.target.clientWidth;
             if (this.pageable !== 'auto-more' || this.currentLoading)
@@ -1380,7 +1382,7 @@ export default {
             const rect = getRect(this.$el);
             const bodyRect = getRect(this.$refs.body[0]);
             const parentRect = this.scrollParentEl === window ? { top: 0, bottom: window.innerHeight } : getRect(this.scrollParentEl);
-            const headHeight = this.$refs.head[0].offsetHeight;
+            const headHeight = this.$refs.head[0] && this.$refs.head[0].offsetHeight || 0;
 
             parentRect.top += this.stickHeadOffset;
             bodyRect.bottom -= headHeight;
@@ -1408,6 +1410,8 @@ export default {
                     headPlaceholderEl.style.height = '';
                 }
                 stickheadEl.style.top = stickingHeadTop + 'px';
+                // fix：滚动条在最右边时，置顶时表头会有偏移
+                stickheadEl.scrollLeft = this.$refs.scrollView[0].$refs.wrap.scrollLeft;
                 if (this.syncStickHeadXScroll) {
                     this.syncHeadScroll();
                 }
@@ -1421,7 +1425,9 @@ export default {
             if (this.virtual)
                 this.throttledVirtualScroll(data);
             if (this.$refs.scrollView[0].$refs.wrap === data.target) {
-                this.$refs.head[0].scrollLeft = data.scrollLeft;
+                if (this.$refs.head[0]) {
+                    this.$refs.head[0].scrollLeft = data.scrollLeft;
+                }
                 this.scrollXStart = data.scrollLeft === 0;
                 this.scrollXEnd = data.scrollLeft >= data.scrollWidth - data.clientWidth;
                 if (this.pageable !== 'auto-more' || this.currentLoading)
@@ -1477,15 +1483,15 @@ export default {
                 });
         },
         reload() {
+            if (this.dynamicColumnVMs.length) {
+                this.dynamicColumnVMs.forEach((vm) => vm.reload());
+            }
             if (!this.currentDataSource._load || typeof this.currentDataSource._load !== 'function')
                 return;
             this.currentDataSource.clearLocalData();
             this.clearDragState();
             this.load();
             console.log('table reload');
-            if (this.dynamicColumnVMs.length) {
-                this.dynamicColumnVMs.forEach((vm) => vm.reload());
-            }
         },
         getFields() {
             return this.visibleColumnVMs
@@ -2131,10 +2137,17 @@ export default {
                     break;
                 item.tableTreeItemLevel = level;
                 item.parentPointer = parent;
-                if (this.$at(item, this.childrenField) && this.$at(item, this.childrenField).length) {
-                    this.$setAt(item, this.hasChildrenField, true);
-                    item.expanded = item.expanded || false;
-                    item.treeExpanded = item.treeExpanded || false;
+                if (this.$at(item, this.childrenField)) {
+                    // fix: 2820102516186880，2830031229543936，子节点删除数据处理
+                    if (this.$at(item, this.childrenField).length) {
+                        this.$setAt(item, this.hasChildrenField, true);
+                        item.expanded = item.expanded || false;
+                        item.treeExpanded = item.treeExpanded || false;
+                    } else {
+                        this.$setAt(item, this.hasChildrenField, false);
+                        item.expanded = false;
+                        item.treeExpanded = false;
+                    }
                 }
                 if (parent) {
                     this.$set(item, 'display', needHidden(ancestors) ? 'none' : '');
@@ -2870,10 +2883,7 @@ export default {
         },
         getEditablewrapWidth(item, columnIndex, treeColumnIndex) {
             if (this.treeDisplay && item.tableTreeItemLevel !== undefined && columnIndex === treeColumnIndex) {
-                let width = 20 * item.tableTreeItemLevel + 10;
-                if (this.$at(item, this.hasChildrenField)) {
-                    width = width + 20;
-                }
+                const width = 20 * (item.tableTreeItemLevel + 1) + 10;
                 return `calc(100% - ${width}px)`;
             }
             return '100%';
@@ -3731,6 +3741,11 @@ content: "\e679";
     display: inline-flex;
     align-items: center;
     width: auto;
+}
+
+.tree_expander + div.editablewrap > div,
+.tree_placeholder + div.editablewrap > div {
+    width: 100%;
 }
 
 .tree_expander[loading]::before {

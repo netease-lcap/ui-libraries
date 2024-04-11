@@ -52,19 +52,26 @@ namespace nasl.ui {
       setter: {
         concept: "EnumSelectSetter",
         options: [{
-          title: '日期'
+          title: '日期',
+          if: _ => _.type === 'date'
         }, {
-          title: '周'
+          title: '周',
+          if: _ => _.type === 'date'
         }, {
-          title: '月份'
+          title: '月份',
+          if: _ => _.type === 'date'
         }, {
-          title: '季度'
+          title: '季度',
+          if: _ => _.type === 'date'
         }, {
-          title: '年份'
+          title: '年份',
+          if: _ => _.type === 'date'
         }, {
-          title: '分'
+          title: '分',
+          if: _ => _.type !== 'date'
         }, {
-          title: '秒'
+          title: '秒',
+          if: _ => _.type !== 'date'
         }]
       },
       onChange: [{
@@ -77,54 +84,77 @@ namespace nasl.ui {
       setter: {
         concept: "EnumSelectSetter",
         options: [{
-          title: '中国（2023年7月26日）'
+          title: '中国（2023年7月26日）',
+          if: _ => _.type === 'date' && _.unit === 'date'
         }, {
-          title: 'ISO（2023-07-26）'
+          title: 'ISO（2023-07-26）',
+          if: _ => _.type === 'date' && _.unit === 'date'
         }, {
-          title: 'US（7/26/2023）'
+          title: 'US（7/26/2023）',
+          if: _ => _.type === 'date' && _.unit === 'date'
         }, {
-          title: 'EU（26/7/2023）'
+          title: 'EU（26/7/2023）',
+          if: _ => _.type === 'date' && _.unit === 'date'
         }, {
-          title: '2023-28周'
+          title: '2023-28周',
+          if: _ => _.type === 'date' && _.unit === 'week'
         }, {
-          title: '2023年第28周'
+          title: '2023年第28周',
+          if: _ => _.type === 'date' && _.unit === 'week'
         }, {
-          title: '2023-W28'
+          title: '2023-W28',
+          if: _ => _.type === 'date' && _.unit === 'week'
         }, {
-          title: '中国（2023年7月）'
+          title: '中国（2023年7月）',
+          if: _ => _.type === 'date' && _.unit === 'month'
         }, {
-          title: 'ISO（2023-07）'
+          title: 'ISO（2023-07）',
+          if: _ => _.type === 'date' && _.unit === 'month'
         }, {
-          title: 'US/EU（7/2023）'
+          title: 'US/EU（7/2023）',
+          if: _ => _.type === 'date' && _.unit === 'month'
         }, {
-          title: '2023年第3季度'
+          title: '2023年第3季度',
+          if: _ => _.type === 'date' && _.unit === 'quarter'
         }, {
-          title: '2023年Q3'
+          title: '2023年Q3',
+          if: _ => _.type === 'date' && _.unit === 'quarter'
         }, {
-          title: '2023-Q3'
+          title: '2023-Q3',
+          if: _ => _.type === 'date' && _.unit === 'quarter'
         }, {
-          title: '中国（2023年）'
+          title: '中国（2023年）',
+          if: _ => _.type === 'date' && _.unit === 'year'
         }, {
-          title: 'ISO（2023）'
+          title: 'ISO（2023）',
+          if: _ => _.type === 'date' && _.unit === 'year'
         }, {
-          title: '12:09:09'
+          title: '12:09:09',
+          if: _ => _.type === 'time' && _.unit === 'second'
         }, {
-          title: '12时09分09秒'
+          title: '12时09分09秒',
+          if: _ => _.type === 'time' && _.unit === 'second'
         }, {
-          title: '12:09'
+          title: '12:09',
+          if: _ => _.type === 'time' && _.unit === 'minute'
         }, {
-          title: '12时09分'
+          title: '12时09分',
+          if: _ => _.type === 'time' && _.unit === 'minute'
         }, {
-          title: '2023-07-26 12:09:09'
+          title: '2023-07-26 12:09:09',
+          if: _ => _.type === 'datetime' && _.unit === 'second'
         }, {
-          title: '2023年7月26日 12时09分09秒'
+          title: '2023年7月26日 12时09分09秒',
+          if: _ => _.type === 'datetime' && _.unit === 'second'
         }, {
-          title: '2023-07-26 12:09'
+          title: '2023-07-26 12:09',
+          if: _ => _.type === 'datetime' && _.unit === 'minute'
         }, {
-          title: '2023年7月26日 12时09分'
+          title: '2023年7月26日 12时09分',
+          if: _ => _.type === 'datetime' && _.unit === 'minute'
         }]
       },
-      if: _ => _.advancedFormat.enable === false
+      if: _ => !_.advancedFormat.enable
     })
     showFormatter: 'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' | 'GGGG-W周' | 'GGGG年第W周' | 'GGGG-WWWW' | 'YYYY年M月' | 'YYYY-MM' | 'M/YYYY' | 'YYYY年第Q季度' | 'YYYY年QQ' | 'YYYY-QQ' | 'YYYY年' | 'YYYY' | 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' | 'YYYY-MM-DD HH:mm:ss' | 'YYYY年M月D日 HH时mm分ss秒' | 'YYYY-MM-DD HH:mm HH:mm' | 'YYYY年M月D日 HH时mm分';
     @Prop({
@@ -237,7 +267,7 @@ namespace nasl.ui {
       setter: {
         concept: "EnumSelectSetter",
         options: [{
-          title: 'yyyy/MM/dd HH:mm:ss'
+          title: 'YYYY/MM/dd HH:mm:ss'
         }, {
           title: 'Unix 时间戳'
         }, {
@@ -311,6 +341,16 @@ namespace nasl.ui {
       }
     })
     placeholder: nasl.core.String;
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '显示预览态',
+      docDescription: '',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    preview: nasl.core.Boolean = false;
     @Event({
       title: '确认',
       description: '点击完成按钮时触发的事件'
