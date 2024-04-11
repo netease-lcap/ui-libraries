@@ -32,7 +32,7 @@ exports[`u-validator.vue > Demo-动态验证 1`] = `
       <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
       <div class="wrap" vusion-slot-name="default">
         <div class="root">
-          <label class="root" tabindex="0">
+          <label class="root" selected="selected" tabindex="0">
             <span class="radio" selected="selected"></span>HTTP<span vusion-slot-name="item"></span>
           </label>
           <label class="root" tabindex="0">
@@ -70,7 +70,7 @@ exports[`u-validator.vue > Demo-动态验证 2`] = `
       <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
       <div class="wrap" vusion-slot-name="default">
         <div class="root">
-          <label class="root" tabindex="0">
+          <label class="root" selected="selected" tabindex="0">
             <span class="radio" selected="selected"></span>HTTP<span vusion-slot-name="item"></span>
           </label>
           <label class="root" tabindex="0">
