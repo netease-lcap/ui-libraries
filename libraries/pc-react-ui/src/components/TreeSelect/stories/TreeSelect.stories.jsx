@@ -27,6 +27,7 @@ export const 异步函数 = {
   args: {
     style: { width: 300 },
     multiple: true,
+    treeCheckStrictly: true,
     dataSource: [
       {
         text: '理学',
@@ -88,6 +89,10 @@ export const 异步函数 = {
         ],
       },
     ],
+    onChange: (value) => {
+      console.log(value);
+    },
+    // value: ['理学', '物理学', '理论物理'],
     valueField: 'text',
     textField: 'value',
     // parentField: 'a.parentId',

@@ -18,6 +18,7 @@ import {
   Select,
   InputNumber,
   CheckboxGroup,
+  TimePicker,
   // Date
   SelectOption,
   DateRangePicker,
@@ -169,8 +170,9 @@ export const 默认1 = {
             showTime={false}
             format="YYYY-MM-DD"
           />
-          <ProFormDateRangePicker name="time2" />
+          <ProFormDateRangePicker name="time3" />
           <TimeRangePicker startName="time3" endName="time4" />
+          <TimePicker name="meTime" />
         </Form>
       </div>
     );

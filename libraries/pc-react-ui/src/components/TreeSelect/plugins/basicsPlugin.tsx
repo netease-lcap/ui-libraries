@@ -1,10 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 import _ from 'lodash';
-import FormContext from '@/components/Form/form-context';
-import { Col, FormItem } from '@/index';
-import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
-import { COLPROPSFIELDS } from '@/components/Row/constants';
+import { useControllableValue } from 'ahooks';
 import { $deletePropsList } from '@/plugins/constants';
 import {
   useRequestDataSource, useHandleMapField, useFormatDataSource, useDataSourceToTree,
@@ -42,5 +39,25 @@ export function useHandleStyle(props) {
   return {
     className: classnames(style.treeSelect, className),
     showSearch: false,
+  };
+}
+export function useHandleValueTransform(props) {
+  return {
+    transform(value, name) {
+      return {
+        [name]: Array.isArray(value) ? value.map((item) => item.value) : value,
+      };
+    },
+  };
+}
+export function useHandleControllableValue(props) {
+  const [value, onChange] = useControllableValue(_.controllableValue(props));
+  return {
+    value,
+    onChange(localValue) {
+      const valueFormat = _.isArray(localValue) ? localValue.map((item) => item.value) : localValue;
+      onChange(valueFormat);
+    },
+
   };
 }
