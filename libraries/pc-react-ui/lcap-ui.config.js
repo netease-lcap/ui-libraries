@@ -119,7 +119,7 @@ module.exports = {
 
     { group: 'Selector', name: 'Tabs', alias: '选项卡' },
     { group: 'Selector', name: 'Tree', alias: '树形视图' },
-    { group: 'Selector', name: 'TreeSelect', alias: '树形视图' },
+    { group: 'Selector', name: 'TreeSelect', alias: '树选择' },
     {
       group: 'Selector',
       name: 'FormTreeSelect',
@@ -183,7 +183,7 @@ module.exports = {
     // { group: 'Feedback', name: 'Message', alias: '弹出消息' },
     { group: 'Feedback', name: 'Popover', alias: '弹出框' },
 
-    { group: 'Container', name: 'Card', alias: '卡片' },
+    { group: 'Container', name: 'Card', alias: '面板' },
     { group: 'Container', name: 'Router', alias: '子页面容器' },
 
     { group: 'Navigation', name: 'Breadcrumb', alias: '面包屑' },
