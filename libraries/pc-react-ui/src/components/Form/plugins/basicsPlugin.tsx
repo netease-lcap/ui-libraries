@@ -36,12 +36,12 @@ export function useHandleRef(props, refs) {
     ref: _.assign(ref, {
       validate,
       getValues: getvalues,
-      getValue: refs?.current?.getFieldValue,
+      getValue: (...arg) => { return refs?.current?.getFieldValue(...arg); },
       setValue: (...arg) => {
         refs?.current?.setFieldValue(...arg);
       },
-      setValues: refs?.current?.setFieldsValue,
-      resetForm: refs?.current?.resetFields,
+      setValues: (...arg) => { refs?.current?.setFieldsValue(...arg); },
+      resetForm: () => refs?.current?.resetFields,
     }),
     grid: true,
   };
