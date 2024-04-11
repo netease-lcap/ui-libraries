@@ -64,7 +64,7 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
       },
     })
-    current: nasl.core.Decimal = 0;
+    value: nasl.core.Decimal = 0;
 
     @Prop({
       group: '主要属性',
@@ -109,6 +109,28 @@ namespace nasl.ui {
     })
     size: 'default' | 'small' = 'default';
 
+    @Prop<StepsOptions<T>, 'textField'>({
+      group: '数据属性',
+      title: '文本字段',
+      description: '集合的元素类型中，用于显示文本的属性名称',
+      docDescription:
+        '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    textField: (item: T) => any;
+
+    @Prop<StepsOptions<T>, 'valueField'>({
+      group: '数据属性',
+      title: '值字段',
+      description: '集合的元素类型中，用于标识选中值的属性',
+      docDescription: '集合的元素类型中，用于标识选中值的属性，支持自定义变更',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    valueField: (item: T) => any;
     // @Event({
     //   title: '选择前',
     //   description: '选择某一步骤前触发',
@@ -125,7 +147,12 @@ namespace nasl.ui {
       title: '改变后',
       description: '步骤数改变后触发',
     })
-    onChange: (event: { value: nasl.core.Integer; oldValue: nasl.core.Integer; item: T; oldItem: T }) => any;
+    onChange: (event: {
+      value: nasl.core.Integer;
+      oldValue: nasl.core.Integer;
+      item: T;
+      oldItem: T;
+    }) => any;
 
     @Slot({
       title: '默认',
@@ -176,10 +203,16 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '状态值',
-      description: '若不配置该属性时，会使用步骤条的当前步骤来自动指定状态；如果该属性与当前步骤指定的状态不匹配会覆盖自动匹配的状态',
+      description:
+        '若不配置该属性时，会使用步骤条的当前步骤来自动指定状态；如果该属性与当前步骤指定的状态不匹配会覆盖自动匹配的状态',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '等待' }, { title: '进行中' }, { title: '完成' }, { title: '错误' }],
+        options: [
+          { title: '等待' },
+          { title: '进行中' },
+          { title: '完成' },
+          { title: '错误' },
+        ],
       },
     })
     status: 'wait' | 'process' | 'finish' | 'error';
@@ -233,6 +266,6 @@ namespace nasl.ui {
     @Slot({
       title: '描述',
     })
-    slotDescription	: () => Array<ViewComponent>;
+    slotDescription: () => Array<ViewComponent>;
   }
 }
