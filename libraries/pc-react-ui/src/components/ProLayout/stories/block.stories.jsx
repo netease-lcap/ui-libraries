@@ -36,13 +36,9 @@ export const 基本用法 = {
   render: () => {
     return (
       <ProLayout
-        getTargetContainer={() => {
-          return document.getElementById('test-pro-layout') || document.body;
-        }}
         avatarSrc="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
-        avatarTitle={
-          window.$global?.userInfo?.UserName ?? 'window.$global.userInfo'
-        }
+        // avatarTitle={window.$global.userInfo.UserName}
+        avatarTitle="张梦燕"
         avatarRender={(
           <Dropdown
             menuItem={(
@@ -56,9 +52,6 @@ export const 基本用法 = {
         fixSiderbar
         layout="mix"
         title="应用名称"
-        menuDataRender={(menuData) => {
-          return [{ name: 2, label: 1, path: '/a' }];
-        }}
         menuSlot={(
           <>
             <MenuItem label="导航项" path="/1" />
