@@ -36,7 +36,12 @@ export function useHandleRef(props, refs) {
     ref: _.assign(ref, {
       validate,
       getValues: getvalues,
-      getValue: (...arg) => { return refs?.current?.getFieldValue(...arg); },
+      getValue: (...arg) => {
+        console.log(arg, 'arg');
+        const value = refs?.current?.getFieldValue(...arg);
+        console.log(value, 'value');
+        return value;
+      },
       setValue: (...arg) => {
         refs?.current?.setFieldValue(...arg);
       },

@@ -3,10 +3,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
-import FormContext from '@/components/Form/form-context';
-import { Col, FormItem, SelectOption } from '@/index';
-import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
-import { COLPROPSFIELDS } from '@/components/Row/constants';
+import { SelectOption } from '@/index';
 import {
   useRequestDataSource, useHandleMapField, useFormatDataSource,
 } from '@/plugins/common/dataSource';
