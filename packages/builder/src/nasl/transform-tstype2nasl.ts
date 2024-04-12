@@ -24,6 +24,9 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference): TypeAnnotat
     }
   } else if (typeName.type === 'TSQualifiedName') {
     const { left, right } = typeName;
+    if (right.name === 'Any') {
+      exitNotSupportType(node);
+    }
     const primitive = isPrimitive(right.name);
     const namespace = getNodeCode(left);
     const typeArguments: TypeAnnotation[] = [];
