@@ -29,7 +29,7 @@ exports[`u-radios.vue > Demo-只读、禁用、禁用某一项 1`] = `
       <label class="root" readonly="readonly" tabindex="0">
         <span class="radio" readonly="readonly"></span>坚果<span vusion-slot-name="item"></span>
       </label>
-      <label class="root" readonly="readonly" tabindex="0">
+      <label class="root" readonly="readonly" selected="selected" tabindex="0">
         <span class="radio" readonly="readonly" selected="selected"></span>毛巾<span vusion-slot-name="item"></span>
       </label>
       <label class="root" readonly="readonly" tabindex="0">
@@ -43,7 +43,7 @@ exports[`u-radios.vue > Demo-只读、禁用、禁用某一项 1`] = `
       <label class="root" disabled="disabled" tabindex="0">
         <span class="radio" disabled="disabled"></span>坚果<span vusion-slot-name="item"></span>
       </label>
-      <label class="root" disabled="disabled" tabindex="0">
+      <label class="root" disabled="disabled" selected="selected" tabindex="0">
         <span class="radio" disabled="disabled" selected="selected"></span>毛巾<span vusion-slot-name="item"></span>
       </label>
       <label class="root" disabled="disabled" tabindex="0">
@@ -54,7 +54,7 @@ exports[`u-radios.vue > Demo-只读、禁用、禁用某一项 1`] = `
       <label class="root" tabindex="0">
         <span class="radio"></span>水杯<span vusion-slot-name="item"></span>
       </label>
-      <label class="root" tabindex="0">
+      <label class="root" selected="selected" tabindex="0">
         <span class="radio" selected="selected"></span>坚果<span vusion-slot-name="item"></span>
       </label>
       <label class="root" disabled="disabled" tabindex="0">
@@ -82,7 +82,7 @@ exports[`u-radios.vue > Demo-基本用法 2`] = `
     <label class="root" tabindex="0">
       <span class="radio"></span>坚果<span vusion-slot-name="item"></span>
     </label>
-    <label class="root" tabindex="0">
+    <label class="root" selected="selected" tabindex="0">
       <span class="radio" selected="selected"></span>毛巾<span vusion-slot-name="item"></span>
     </label>
     <label class="root" tabindex="0">

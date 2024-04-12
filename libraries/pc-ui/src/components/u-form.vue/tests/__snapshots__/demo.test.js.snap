@@ -125,7 +125,7 @@ exports[`u-form.vue > Demo-Header 外观 1`] = `
         <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
         <div class="wrap" vusion-slot-name="default">
           <div class="root">
-            <label class="root" tabindex="0">
+            <label class="root" selected="selected" tabindex="0">
               <span class="radio" selected="selected"></span>包年包月<span vusion-slot-name="item"></span>
             </label>
             <label class="root" tabindex="0">
@@ -348,7 +348,7 @@ exports[`u-form.vue > Demo-分组 1`] = `
               <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
               <div class="wrap" vusion-slot-name="default">
                 <div class="root">
-                  <label class="root" tabindex="0">
+                  <label class="root" selected="selected" tabindex="0">
                     <span class="radio" selected="selected"></span>包年包月<span vusion-slot-name="item"></span>
                   </label>
                   <label class="root" tabindex="0">
@@ -576,7 +576,7 @@ exports[`u-form.vue > Demo-分组 Collapsible 1`] = `
               <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
               <div class="wrap" vusion-slot-name="default">
                 <div class="root">
-                  <label class="root" tabindex="0">
+                  <label class="root" selected="selected" tabindex="0">
                     <span class="radio" selected="selected"></span>包年包月<span vusion-slot-name="item"></span>
                   </label>
                   <label class="root" tabindex="0">
@@ -1017,7 +1017,7 @@ exports[`u-form.vue > Demo-基本用法 1`] = `
         <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
         <div class="wrap" vusion-slot-name="default">
           <div class="root">
-            <label class="root" tabindex="0">
+            <label class="root" selected="selected" tabindex="0">
               <span class="radio" selected="selected"></span>包年包月<span vusion-slot-name="item"></span>
             </label>
             <label class="root" tabindex="0">
@@ -1441,7 +1441,7 @@ exports[`u-form.vue > Demo-数据收集与提交 1`] = `
       <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
       <div class="wrap" vusion-slot-name="default">
         <div class="root">
-          <label class="root" tabindex="0">
+          <label class="root" selected="selected" tabindex="0">
             <span class="radio" selected="selected"></span>包年包月<span vusion-slot-name="item"></span>
           </label>
           <label class="root" tabindex="0">
@@ -1803,7 +1803,7 @@ exports[`u-form.vue > Demo-标签块级布局 1`] = `
               <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
               <div class="wrap" vusion-slot-name="default">
                 <div class="root">
-                  <label class="root" tabindex="0">
+                  <label class="root" selected="selected" tabindex="0">
                     <span class="radio" selected="selected"></span>包年包月<span vusion-slot-name="item"></span>
                   </label>
                   <label class="root" tabindex="0">
@@ -2190,7 +2190,7 @@ exports[`u-form.vue > Demo-表单验证 1`] = `
       <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
       <div class="wrap" vusion-slot-name="default">
         <div class="root">
-          <label class="root" tabindex="0">
+          <label class="root" selected="selected" tabindex="0">
             <span class="radio" selected="selected"></span>包年包月<span vusion-slot-name="item"></span>
           </label>
           <label class="root" tabindex="0">

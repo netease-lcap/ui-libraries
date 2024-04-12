@@ -778,7 +778,7 @@ exports[`u-grid-view.vue > Demo-前端分页 2`] = `
   <div class="root" vusion-slot-name="default">
     <div border="true" class="root" tabindex="0">
       <div class="head">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -972,7 +972,7 @@ exports[`u-grid-view.vue > Demo-前端过滤（搜索） 1`] = `
   <div class="root" vusion-slot-name="default">
     <div border="true" class="root" tabindex="0">
       <div class="head">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="null"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -1118,7 +1118,7 @@ exports[`u-grid-view.vue > Demo-加载更多 1`] = `
   <div class="root" vusion-slot-name="default">
     <div border="true" class="root" tabindex="0">
       <div class="head">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -1243,7 +1243,7 @@ exports[`u-grid-view.vue > Demo-加载更多 1`] = `
   <div class="root" vusion-slot-name="default">
     <div border="true" class="root" tabindex="0">
       <div class="head">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -2265,7 +2265,7 @@ exports[`u-grid-view.vue > Demo-后端分页与加载更多 1`] = `
   <div class="root" vusion-slot-name="default">
     <div border="true" class="root" tabindex="0">
       <div class="head">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -2295,7 +2295,7 @@ exports[`u-grid-view.vue > Demo-后端分页与加载更多 1`] = `
   <div class="root" vusion-slot-name="default">
     <div border="true" class="root" tabindex="0">
       <div class="head">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -2316,7 +2316,7 @@ exports[`u-grid-view.vue > Demo-后端分页与加载更多 1`] = `
   <div class="root" vusion-slot-name="default">
     <div border="true" class="root" tabindex="0">
       <div class="head">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -2375,7 +2375,7 @@ exports[`u-grid-view.vue > Demo-后端过滤（搜索） 1`] = `
   <div class="root" vusion-slot-name="default">
     <div border="true" class="root" tabindex="0">
       <div class="head">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -2437,7 +2437,7 @@ exports[`u-grid-view.vue > Demo-多选时验证 1`] = `
 <div class="root" vusion-slot-name="default">
   <div border="true" class="root" tabindex="0">
     <div class="head" style="display: none;">
-      <label class="root" tabindex="0">
+      <label class="root" show-title="true" tabindex="0">
         <span class="box" status="false"></span>
         <span vusion-slot-name="item"></span>
       </label>
@@ -2461,7 +2461,7 @@ exports[`u-grid-view.vue > Demo-多选时验证 1`] = `
 exports[`u-grid-view.vue > Demo-多项选择 1`] = `
 <div border="true" class="root" tabindex="0">
   <div class="head" style="display: none;">
-    <label class="root" tabindex="0">
+    <label class="root" show-title="true" tabindex="0">
       <span class="box" status="false"></span>
       <span vusion-slot-name="item"></span>
     </label>
@@ -2486,7 +2486,7 @@ exports[`u-grid-view.vue > Demo-多项选择 2`] = `
   <div class="root" vusion-slot-name="default">
     <div border="true" class="root" tabindex="0">
       <div class="head" style="display: none;">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="null"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -2875,7 +2875,7 @@ exports[`u-grid-view.vue > Demo-添加头部 1`] = `
   <div class="root" vusion-slot-name="default">
     <div border="true" class="root" tabindex="0">
       <div class="head">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -3128,7 +3128,7 @@ exports[`u-grid-view.vue > Demo-添加尾部 1`] = `
   <div class="root" vusion-slot-name="default">
     <div border="true" class="root" tabindex="0">
       <div class="head">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -4284,7 +4284,7 @@ exports[`u-grid-view.vue > Demo-自定义内容 1`] = `
   <div class="root" vusion-slot-name="default">
     <div border="true" class="root" tabindex="0">
       <div class="head">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -4740,7 +4740,7 @@ exports[`u-grid-view.vue > Demo-自定义内容 2`] = `
   <div class="root" vusion-slot-name="default">
     <div border="true" class="root" tabindex="0">
       <div class="head">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -6392,7 +6392,7 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
   <div class="root" vusion-slot-name="default">
     <div border="true" class="root" readonly="readonly" reaonly-mode="initial" tabindex>
       <div class="head">
-        <label class="root" readonly="readonly" tabindex="0">
+        <label class="root" readonly="readonly" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -7826,7 +7826,7 @@ exports[`u-grid-view.vue > Demo-表单验证 1`] = `
     <div class="wrap" vusion-slot-name="default">
       <div border="true" class="root" tabindex="0">
         <div class="head">
-          <label class="root" tabindex="0">
+          <label class="root" show-title="true" tabindex="0">
             <span class="box" status="false"></span>
             <span vusion-slot-name="item"></span>
           </label>
