@@ -107,8 +107,10 @@ const zipDir = (basePath, fileName = 'client.zip', files: string[] = []) => new 
 
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < files.length; i++) {
-    // 将被打包文件的流添加进archiver对象中
-    archive.append(fs.createReadStream(files[i]), { name: files[i] });
+    if (fs.existsSync(files[i])) {
+      // 将被打包文件的流添加进archiver对象中
+      archive.append(fs.createReadStream(files[i]), { name: files[i] });
+    }
   }
   archive.finalize();
   archive.on('end', () => {
