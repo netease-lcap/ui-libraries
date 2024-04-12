@@ -61,7 +61,8 @@
       "idetype": "container",
       "structured": "menuSlot",
       "namedSlotOmitWrapper": ["menuSlot"],
-      "parentAccept":"!target.isInSubview"
+      "parentAccept":"!target.isInSubview",
+      "textholder": "avatarTitle"
     }
   },
   {
