@@ -20,7 +20,7 @@ namespace nasl.ui {
       sync: true,
       docDescription: '当前选择的值'
     })
-    value: nasl.core.Any;
+    value: any;
     @Prop({
       group: '交互属性',
       title: '可取消',
@@ -66,14 +66,14 @@ namespace nasl.ui {
       description: '选择某一项时触发'
     })
     onSelect: (event: {
-      value: nasl.core.Any;
+      value: any;
     }) => void;
     @Event({
       title: '改变后',
       description: '选择值改变时触发'
     })
     onChange: (event: {
-      value: nasl.core.Any;
+      value: any;
     }) => void;
     @Slot({
       title: 'undefined',

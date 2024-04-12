@@ -92,7 +92,7 @@ namespace nasl.ui {
       description: '表单项值',
       sync: true
     })
-    private value: nasl.core.Any = '';
+    private value: any = '';
     @Prop({
       title: '提交表单的标识符',
       description: '提交表单的标识符'
