@@ -147,13 +147,16 @@ export const 默认1 = {
         >
           提交
         </button>
+        <button onClick={() => console.log(ref.current.setValues({ id: 123 }))}>
+          设置
+        </button>
         <Form
           labelWidth="140"
           ref={ref}
           omitNil={false}
           submitter={{
             onSubmit() {
-              console.log(ref.current.getValue('name'));
+              console.log(ref.current.getValues());
 
               console.log(111);
             },

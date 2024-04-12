@@ -646,6 +646,12 @@
     }
   },
   {
+    "name": "Steps",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
     "name": "Router",
     "ideusage": {
       "idetype": "router"

@@ -52,7 +52,6 @@ export function useHandleRender(props) {
     });
   }, [itemsProps, titleRender, contentRender]);
   const itemsResult = _.isEmpty(items) ? {} : { items };
-  console.log(items, '==');
   return {
     ...itemsResult,
   };

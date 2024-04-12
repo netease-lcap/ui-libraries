@@ -27,7 +27,7 @@ export const 默认 = {
   render: () => (
     <div>
       {' '}
-      <Steps current={1}>
+      <Steps current={1} data-nodepath="nodepath123">
         <StepsItem
           key={1}
           title="finished"

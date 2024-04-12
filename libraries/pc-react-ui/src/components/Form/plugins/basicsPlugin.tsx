@@ -37,16 +37,14 @@ export function useHandleRef(props, refs) {
       validate,
       getValues: getvalues,
       getValue: (...arg) => {
-        console.log(arg, 'arg');
         const value = refs?.current?.getFieldValue(...arg);
-        console.log(value, 'value');
         return value;
       },
       setValue: (...arg) => {
         refs?.current?.setFieldValue(...arg);
       },
       setValues: (...arg) => { refs?.current?.setFieldsValue(...arg); },
-      resetForm: () => refs?.current?.resetFields,
+      resetForm: () => { refs?.current?.resetFields(); },
     }),
     grid: true,
   };
