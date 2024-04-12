@@ -96,7 +96,8 @@ namespace nasl.ui {
     @Prop({
       group: '状态属性',
       title: '加载中文案',
-      description: '加载状态中显示的文案'
+      description: '加载状态中显示的文案',
+      implicitToString: true,
     })
     loadingText: nasl.core.String = '';
     @Prop<VanLinearLayoutOptions, 'mode'>({

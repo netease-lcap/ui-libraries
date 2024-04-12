@@ -34,7 +34,8 @@ namespace nasl.ui {
     private value: nasl.core.Boolean = false;
     @Prop({
       title: '提示内容',
-      description: '默认提示内容'
+      description: '默认提示内容',
+      implicitToString: true,
     })
     message: nasl.core.String = '弹出消息';
     @Prop({

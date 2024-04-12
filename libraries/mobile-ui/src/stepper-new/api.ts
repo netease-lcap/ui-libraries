@@ -130,7 +130,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '占位符',
-      description: '输入框为空的显示文字'
+      description: '输入框为空的显示文字',
+      implicitToString: true,
     })
     placeholder: nasl.core.String = '请输入';
     @Prop({
@@ -201,7 +202,7 @@ namespace nasl.ui {
       title: '步长',
       description: '表示点击按钮或按上下键所增加或减少的量'
     })
-    step: nasl.core.String | nasl.core.Decimal = 1;
+    step: nasl.core.Decimal = 1;
     @Prop({
       group: '样式属性',
       title: '对齐方式',

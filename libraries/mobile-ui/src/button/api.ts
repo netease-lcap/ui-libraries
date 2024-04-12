@@ -30,7 +30,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '文本',
-      description: '默认文本显示内容'
+      description: '默认文本显示内容',
+      implicitToString: true,
     })
     text: nasl.core.String;
     @Prop({
@@ -149,7 +150,8 @@ namespace nasl.ui {
     loading: nasl.core.Boolean = false;
     @Prop({
       group: '状态属性',
-      title: '加载中文案'
+      title: '加载中文案',
+      implicitToString: true,
     })
     loadingText: nasl.core.String = '';
     @Prop({

@@ -99,7 +99,8 @@ namespace nasl.ui {
     value: nasl.core.String;
     @Prop({
       group: '主要属性',
-      title: '标题'
+      title: '标题',
+      implicitToString: true,
     })
     title: nasl.core.String = '标题';
     @Prop({
@@ -210,7 +211,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '文本',
-      description: '菜单子项的左侧文本'
+      description: '菜单子项的左侧文本',
+      implicitToString: true,
     })
     title: nasl.core.String;
     @Prop({

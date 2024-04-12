@@ -211,8 +211,8 @@ importers:
         specifier: workspace:^1.0.0
         version: link:../../packages/cli
       '@nasl/types':
-        specifier: ^0.1.6
-        version: 0.1.6
+        specifier: 0.1.7-beta.1
+        version: 0.1.7-beta.1
       '@storybook/addon-essentials':
         specifier: ^7.6.7
         version: 7.6.7(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
@@ -510,8 +510,8 @@ importers:
         specifier: workspace:^1.0.0
         version: link:../../packages/cli
       '@nasl/types':
-        specifier: ^0.1.6
-        version: 0.1.6
+        specifier: 0.1.7-beta.1
+        version: 0.1.7-beta.1
       '@storybook/addon-essentials':
         specifier: ^7.6.7
         version: 7.6.7(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
@@ -3142,6 +3142,10 @@ packages:
 
   /@nasl/types@0.1.6:
     resolution: {integrity: sha512-h6Yh57U1jEbvgWh8A1XxsWAW61JLjshq35sT1G57qZ3D6539v2hxEUe8TjOL0c501lz7gCm4WLlowf/wgypBRA==}
+
+  /@nasl/types@0.1.7-beta.1:
+    resolution: {integrity: sha512-iMgr0tRx8hlhXCAFUyI1WjYJkHTtq+X5dTZ8qlyAN4jOs7Ivj9b3fZB4djoT99VsCtorOD2azbIqR8vdYaZInw==}
+    dev: true
 
   /@ndelangen/get-tarball@3.0.9:
     resolution: {integrity: sha512-9JKTEik4vq+yGosHYhZ1tiH/3WpUS0Nh0kej4Agndhox8pAdWhEx5knFVRcb/ya9knCRCs1rPxNrSXTDdfVqpA==}
@@ -7418,7 +7422,7 @@ packages:
     dev: false
 
   /batch@0.6.1:
-    resolution: {integrity: sha512-x+VAiMRL6UPkx+kudNvxTl6hB2XNNCG2r+7wixVfIYwu/2HKRXimwQyaumLjMveWvT2Hkd/cAJw+QBMfJ/EKVw==}
+    resolution: {integrity: sha1-3DQxT05nkxgJP8dgJyUl+UvyXBY=}
     dev: false
 
   /bcrypt-pbkdf@1.0.2:

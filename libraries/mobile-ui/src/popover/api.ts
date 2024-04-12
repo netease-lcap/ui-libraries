@@ -151,6 +151,7 @@ namespace nasl.ui {
         @Prop({
             title: '标题',
             description: '标题',
+            implicitToString: true,
         })
         text: nasl.core.String = '标题';
 

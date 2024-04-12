@@ -297,7 +297,8 @@ namespace nasl.ui {
     private displayFormat: nasl.core.String;
     @Prop({
       group: '主要属性',
-      title: '顶部栏标题'
+      title: '顶部栏标题',
+      implicitToString: true,
     })
     title: nasl.core.String = '';
     @Prop({
@@ -348,7 +349,8 @@ namespace nasl.ui {
       description: '',
       setter: {
         concept: "InputSetter"
-      }
+      },
+      implicitToString: true,
     })
     placeholder: nasl.core.String;
     @Event({

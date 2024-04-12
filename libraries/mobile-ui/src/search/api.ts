@@ -34,7 +34,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '占位符',
-      description: '搜索框为空的显示文字'
+      description: '搜索框为空的显示文字',
+      implicitToString: true,
     })
     placeholder: nasl.core.String;
     @Prop({

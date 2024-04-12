@@ -30,7 +30,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识地区选择的值',
-      sync: true
+      sync: true,
     })
     value: nasl.core.String = '';
     @Prop({
@@ -52,17 +52,20 @@ namespace nasl.ui {
     };
     @Prop({
       group: '主要属性',
-      title: '顶部栏标题'
+      title: '顶部栏标题',
+      implicitToString: true,
     })
     title: nasl.core.String = '标题';
     @Prop({
       group: '主要属性',
-      title: '确认按钮文字'
+      title: '确认按钮文字',
+      implicitToString: true,
     })
     confirmButtonText: nasl.core.String = '确认';
     @Prop({
       group: '主要属性',
-      title: '取消按钮文字'
+      title: '取消按钮文字',
+      implicitToString: true,
     })
     cancelButtonText: nasl.core.String = '取消';
     @Prop({
@@ -146,7 +149,8 @@ namespace nasl.ui {
       description: '',
       setter: {
         concept: "InputSetter"
-      }
+      },
+      implicitToString: true,
     })
     placeholder: nasl.core.String;
     @Event({

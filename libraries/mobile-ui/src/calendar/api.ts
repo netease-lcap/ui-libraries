@@ -52,22 +52,23 @@ namespace nasl.ui {
       description: '用于标识日期选择的值',
       sync: true
     })
-    value: nasl.core.String;
+    value: nasl.core.String | nasl.core.Date;
     @Prop({
       group: '数据属性',
       title: '最小日期',
       description: '最小日期，默认为一年前。'
     })
-    minDate: nasl.core.String;
+    minDate: nasl.core.String | nasl.core.Date;
     @Prop({
       group: '数据属性',
       title: '最大日期',
       description: '最大日期，默认为一年后。'
     })
-    maxDate: nasl.core.String;
+    maxDate: nasl.core.String | nasl.core.Date;
     @Prop({
       group: '主要属性',
-      title: '日历标题'
+      title: '日历标题',
+      implicitToString: true,
     })
     title: nasl.core.String = '选择日期';
     @Prop({
@@ -118,7 +119,8 @@ namespace nasl.ui {
       description: '',
       setter: {
         concept: "InputSetter"
-      }
+      },
+      implicitToString: true,
     })
     placeholder: nasl.core.String;
     @Event({

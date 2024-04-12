@@ -136,7 +136,7 @@ namespace nasl.ui {
       title: '选项值',
       description: '当前选中的值'
     })
-    name: nasl.core.String;
+    name: nasl.core.String | nasl.core.Integer | nasl.core.Boolean;
     @Prop({
       group: '主要属性',
       title: '单选项图标',

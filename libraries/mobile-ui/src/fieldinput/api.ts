@@ -87,7 +87,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '占位符',
       description: '输入框为空的展示文字',
-      if: _ => _.inputstyle === 'input'
+      if: _ => _.inputstyle === 'input',
+      implicitToString: true,
     })
     placeholder: nasl.core.String;
     @Prop<VanFieldinputOptions, 'maxlength'>({
@@ -104,14 +105,16 @@ namespace nasl.ui {
     @Prop<VanFieldinputOptions, 'keyboardTitle'>({
       group: '主要属性',
       title: '键盘标题',
-      if: _ => _.keytheme === 'custom'
+      if: _ => _.keytheme === 'custom',
+      implicitToString: true,
     })
     keyboardTitle: nasl.core.String;
     @Prop<VanFieldinputOptions, 'confirmText'>({
       group: '主要属性',
       title: '按钮内容',
       description: '设置完成按钮文字内容',
-      if: _ => _.keytheme === 'custom'
+      if: _ => _.keytheme === 'custom',
+      implicitToString: true,
     })
     confirmText: nasl.core.String = '完成';
     @Prop<VanFieldinputOptions, 'confirmSize'>({

@@ -78,7 +78,7 @@ namespace nasl.ui {
       group: '样式属性',
       title: '步长'
     })
-    step: nasl.core.Decimal | nasl.core.String = 0;
+    step: nasl.core.Decimal = 0;
     @Prop({
       group: '样式属性',
       title: '进度条高度',

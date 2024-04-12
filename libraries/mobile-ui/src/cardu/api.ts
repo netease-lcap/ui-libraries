@@ -145,7 +145,8 @@ namespace nasl.ui {
   class VanCarduGroupOptions extends ViewComponentOptions {
     @Prop({
       title: '标题',
-      description: '卡片组的标题'
+      description: '卡片组的标题',
+      implicitToString: true,
     })
     title: nasl.core.String;
     @Slot({

@@ -166,24 +166,28 @@ namespace nasl.ui {
     type: 'picker' | 'list' = 'picker';
     @Prop({
       group: '主要属性',
-      title: '占位提示'
+      title: '占位提示',
+      implicitToString: true,
     })
     placeholder: nasl.core.String = '请选择';
     @Prop({
       group: '主要属性',
-      title: '工具栏标题'
+      title: '工具栏标题',
+      implicitToString: true,
     })
     title: nasl.core.String = '标题';
     @Prop<VanPickersonOptions<T, V, M, P>, 'confirmButtonText'>({
       group: '主要属性',
       title: '确认按钮文字',
-      if: _ => _.isNew === false
+      if: _ => _.isNew === false,
+      implicitToString: true,
     })
     confirmButtonText: nasl.core.String = '确认';
     @Prop<VanPickersonOptions<T, V, M, P>, 'cancelButtonText'>({
       group: '主要属性',
       title: '取消按钮文字',
-      if: _ => _.isNew === false
+      if: _ => _.isNew === false,
+      implicitToString: true,
     })
     cancelButtonText: nasl.core.String = '取消';
     @Prop<VanPickersonOptions<T, V, M, P>, 'visibleItemCount'>({

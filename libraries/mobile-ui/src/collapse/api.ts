@@ -76,7 +76,7 @@ namespace nasl.ui {
       title: '值',
       description: '用于标识面板项的值'
     })
-    name: nasl.core.String;
+    name: nasl.core.String | nasl.core.Integer;
     @Prop({
       group: '主要属性',
       title: '箭头图标',
