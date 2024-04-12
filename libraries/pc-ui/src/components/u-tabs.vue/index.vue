@@ -85,7 +85,7 @@
             </template>
             <template v-if="dataSource !== undefined">
                 <template v-for="(itemVM, index) in tabDataSource">
-                    <div vusion-slot-name="content" :key="index" v-show="itemVM.active">
+                    <div vusion-slot-name="content" :key="index" v-show="itemVM.active" v-if="!loadOnActive || itemVM.active">
                         <slot name="content" :item="itemVM" :index="index"></slot>
                         <s-empty
                             v-if="$env.VUE_APP_DESIGNER && !$slots.content && !($scopedSlots.content && $scopedSlots.content(itemVM)) && !!$attrs['vusion-node-path']">
@@ -114,6 +114,11 @@ export default {
     components: { URouterView, SEmpty, UTab },
     extends: MSinglex,
     mixins: [SupportDataSource],
+    provide() {
+      return {
+        tabLoadOnActive: this.loadOnActive,
+      };
+    },
     props: {
         autoSelect: { type: Boolean, default: true },
         closable: { type: Boolean, default: false },
@@ -124,6 +129,7 @@ export default {
         itemWidth: { type: String, default: 'auto' },
         itemAlign: { type: String, default: 'center' },
         showTitle: { type: Boolean, default: false },
+        loadOnActive: { type: Boolean, default: false },
         titleField: { type: String, default: 'title' },
         valueField: { type: String, default: 'value' },
         urlField: { type: String, default: 'url' },
