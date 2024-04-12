@@ -1,7 +1,7 @@
 <!-- 折叠分组 -->
 
 <template>
-  <u-form layout="inline" collapsible
+  <u-form layout="block" collapsible
     ><u-form-group expanded
         ><template #title><u-text text="常用条件"></u-text></template><u-form-item layout="center">
             <template #label><u-text text="名称"></u-text></template>

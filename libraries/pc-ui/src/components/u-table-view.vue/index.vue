@@ -29,7 +29,7 @@
         :line="line"
         :color="color"
         :boldHeader="boldHeader"
-        
+
         :defaultOrder="defaultOrder"
         :sorting="sorting"
 
@@ -43,7 +43,7 @@
 
         :thEllipsis="thEllipsis"
         :ellipsis="ellipsis"
-        
+
         :resizable="resizable"
         :minColumnWidth="minColumnWidth"
         :resizeRemaining="resizeRemaining"
@@ -64,7 +64,7 @@
 
         :disabled="disabled"
         :readonly="readonly"
-        
+
         :showHead="showHead">
         <template #loading><slot name="loading"></slot></template>
         <template #error><slot name="error"></slot></template>
@@ -128,7 +128,7 @@
         :line="line"
         :color="color"
         :boldHeader="boldHeader"
-        
+
         :defaultOrder="defaultOrder"
         :sorting="sorting"
 
@@ -142,7 +142,7 @@
 
         :thEllipsis="thEllipsis"
         :ellipsis="ellipsis"
-        
+
         :resizable="resizable"
         :minColumnWidth="minColumnWidth"
         :resizeRemaining="resizeRemaining"
@@ -244,13 +244,13 @@ export default {
         defaultOrder: { type: String, default: 'desc' },
         sortTrigger: { type: String, default: 'head' },
         remoteSorting: { type: Boolean, default: false },
-        
+
         filtering: Object,
         remoteFiltering: { type: Boolean, default: false },
 
         title: { type: String, default: '' },
         titleAlignment: { type: String, default: 'center' },
-        
+
         loading: { type: Boolean, default: undefined },
         loadingText: {
             type: String,
@@ -310,14 +310,14 @@ export default {
         stickFixed: { type: Boolean, default: true },
 
         designerMode: { type: String, default: 'success' }, // 编辑器展示不同表单状态
-        
+
         configurable: { type: Boolean, default: false }, // 是否配置显隐列
 
         draggable: { type: Boolean, default: false }, // 是否可拖拽
         canDragableHandler: Function,
         canDropinHandler: Function,
         acrossTableDrag: { type: Boolean, default: false }, // 是否跨表格拖拽
-        
+
         // 虚拟滚动相关
         itemHeight: Number,
         virtual: { type: Boolean, default: false },
@@ -653,7 +653,7 @@ export default {
             this.scrollParentEl && this.scrollParentEl.addEventListener('scroll', this.throttleScrollParentScroll);
             if (this.syncStickHeadXScroll) {
                 this.xScrollParentEl = findXScrollParent(this.$el);
-                this.xScrollParentEl && this.xScrollParentEl.addEventListener('scroll', this.throttleXScrollParentScroll); 
+                this.xScrollParentEl && this.xScrollParentEl.addEventListener('scroll', this.throttleXScrollParentScroll);
             }
         }
     },
@@ -661,7 +661,7 @@ export default {
         removeResizeListener(this.$el, this.handleResizeListener);
         if (this.stickHead) {
             this.scrollParentEl && this.scrollParentEl.removeEventListener('scroll', this.throttleScrollParentScroll);
-            this.xScrollParentEl && this.xScrollParentEl.removeEventListener('scroll', this.throttleXScrollParentScroll); 
+            this.xScrollParentEl && this.xScrollParentEl.removeEventListener('scroll', this.throttleXScrollParentScroll);
         }
         this.clearTimeout();
         this.enterTarget = null;
@@ -792,7 +792,7 @@ export default {
             } else
                 return dataSource;
         },
-        
+
         handleResize(reComputedWidth = true) {
             if (this.resizeBodyHeight) {
                 this.bodyHeight = undefined;
@@ -2643,7 +2643,7 @@ export default {
             this.columnVMsMap[key] = this.columnVMsMap[key] || {};
             Object.assign(this.columnVMsMap[key], valueObj);
         },
-        
+
         /**
          * column列里会有u-table-view-expander子组件，需要过滤掉
          */

@@ -95,7 +95,7 @@ export default {
                 });
                 data.push(...newData);
             }
-            
+
         return new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve({
