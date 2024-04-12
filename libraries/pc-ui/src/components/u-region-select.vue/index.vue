@@ -78,7 +78,7 @@ export default {
                 const rawValue = this.recoverValue(value);
                 this.currentValue = rawValue;
                 this.lastValueString = rawValue;
-                this.lastValueArray = rawValue.split('/');
+                this.lastValueArray = rawValue.split('/').map((item) => item.trim());
             }
         },
         // 转换为新值
@@ -150,10 +150,10 @@ export default {
 
                 search(this.regionDate, 1);
 
-                return result.join(' / ');
+                return result.join(this.join);
             }
             if (this.converter == 'name') {
-                return newValue.replace(/\//g, ' / ');
+                return newValue.split('/').map((item) => item.trim()).join(this.join);
             }
             return newValue;
         },

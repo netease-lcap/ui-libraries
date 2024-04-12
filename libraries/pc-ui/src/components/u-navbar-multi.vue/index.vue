@@ -115,6 +115,32 @@ export default {
         this.collectSlotItems();
     },
     methods: {
+        watchValue(value) {
+            if (this.selectedVM && this.selectedVM.value === value)
+                // 下面需要走 value === undefined
+                return;
+            if (value === undefined) {
+                if (this.autoSelect)
+                    this.selectedVM
+                        = this.itemVMs.find((itemVM) => !itemVM.disabled)
+                            || undefined;
+                else
+                    this.selectedVM = undefined;
+            } else {
+                this.selectedVM = this.itemVMs.find(
+                    (itemVM) => itemVM.value === value || (typeof value !== 'object' && String(itemVM.value) === String(value)),
+                );
+                if (!this.selectedVM && this.selectedValuesData && Array.isArray(this.selectedValuesData)) {
+                    this.selectedVM = this.selectedValuesData.find(
+                        (itemData) => itemData.value === value,
+                    );
+                }
+                // 重写 watchValue 注释掉底下这一行，防止重开
+                // this.selectedVM
+                //     && this.selectedVM.groupVM
+                //     && this.selectedVM.groupVM.toggle(true);
+            }
+        },
         collectSlotItems() {
             if (this.defaultSlots === this.$slots.default) {
                 return;
@@ -246,6 +272,7 @@ export default {
         reload() {
             this.load();
         },
+
     },
 };
 </script>
