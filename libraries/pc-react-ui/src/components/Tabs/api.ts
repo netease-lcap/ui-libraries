@@ -242,13 +242,13 @@ namespace nasl.ui {
       title: '标题自定义渲染',
       description: '标题自定义渲染',
     })
-    slottitleRender: (current: any) => Array<ViewComponent>;
+    slottitleRender: (current: T) => Array<ViewComponent>;
 
     @Slot({
       title: '标题自定义渲染',
       description: '标题自定义渲染',
     })
-    slotcontentRender: (current: any) => Array<ViewComponent>;
+    slotcontentRender: (current: T) => Array<ViewComponent>;
     // @Slot({
     //   title: '右侧附加',
     //   description: '在标签右侧可以附加的组件。',

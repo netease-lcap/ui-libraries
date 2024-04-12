@@ -164,7 +164,7 @@ namespace nasl.ui {
         },
       ],
     })
-    slotDefault: () => Array<StepsItem>;
+    slotDefault: () => Array<StepsItem<T>>;
 
     // @Slot({
     //   title: '头部标题',
@@ -181,13 +181,13 @@ namespace nasl.ui {
     title: '步骤条项',
     description: '步骤条项',
   })
-  export class StepsItem extends ViewComponent {
-    constructor(options?: Partial<StepsItemOptions>) {
+  export class StepsItem<T> extends ViewComponent {
+    constructor(options?: Partial<StepsItemOptions<T>>) {
       super();
     }
   }
 
-  export class StepsItemOptions extends ViewComponentOptions {
+  export class StepsItemOptions<T> extends ViewComponentOptions {
     @Prop({
       title: '标题',
       description: '步骤标题文本',

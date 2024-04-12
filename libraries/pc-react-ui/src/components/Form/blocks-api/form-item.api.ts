@@ -143,6 +143,16 @@ namespace nasl.ui {
       },
     })
     labelAlign?: 'left' | 'right' = 'right';
+    @Prop({
+      group: '样式属性',
+      title: '是否显示冒号',
+      description:
+        '是否显示冒号',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    colon: nasl.core.Boolean = true;
 
     @Slot({
       title: '标签自定义',

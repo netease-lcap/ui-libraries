@@ -473,7 +473,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '列表项',
-          code: '<Text>列表项</Text>',
+          code: '<ListItem>列表项</ListItem>',
         },
       ],
     })
