@@ -152,12 +152,6 @@ exports[`u-region-select.vue > Demo-Placeholder 1`] = `
                 </nav>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </transition-stub>
@@ -319,12 +313,6 @@ exports[`u-region-select.vue > Demo-仅显示什么区 1`] = `
                 </nav>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </transition-stub>
@@ -485,12 +473,6 @@ exports[`u-region-select.vue > Demo-双向绑定 1`] = `
               </nav>
             </div>
           </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-          </div>
         </div>
       </div>
     </transition-stub>
@@ -649,12 +631,6 @@ exports[`u-region-select.vue > Demo-基本用法 1`] = `
                 </a>
               </nav>
             </div>
-          </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
           </div>
         </div>
       </div>
@@ -817,12 +793,6 @@ exports[`u-region-select.vue > Demo-基本用法 2`] = `
                   </nav>
                 </div>
               </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-              </div>
             </div>
           </div>
         </transition-stub>
@@ -978,12 +948,6 @@ exports[`u-region-select.vue > Demo-基本用法 2`] = `
                     </a>
                   </nav>
                 </div>
-              </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
               </div>
             </div>
           </div>
@@ -1146,12 +1110,6 @@ exports[`u-region-select.vue > Demo-转换为地区名格式 1`] = `
               </nav>
             </div>
           </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-          </div>
         </div>
         <div class="root scrollShape" color="light" style="display: inline-block;">
           <div class="wrap">
@@ -1203,12 +1161,6 @@ exports[`u-region-select.vue > Demo-转换为地区名格式 1`] = `
                 </a>
               </nav>
             </div>
-          </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
           </div>
         </div>
         <div class="root scrollShape" color="light" style="display: inline-block;">
@@ -1269,12 +1221,6 @@ exports[`u-region-select.vue > Demo-转换为地区名格式 1`] = `
                 </a>
               </nav>
             </div>
-          </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
           </div>
         </div>
       </div>
@@ -1435,12 +1381,6 @@ exports[`u-region-select.vue > Demo-转换为地区码格式 1`] = `
               </nav>
             </div>
           </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-          </div>
         </div>
         <div class="root scrollShape" color="light" style="display: inline-block;">
           <div class="wrap">
@@ -1492,12 +1432,6 @@ exports[`u-region-select.vue > Demo-转换为地区码格式 1`] = `
                 </a>
               </nav>
             </div>
-          </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
           </div>
         </div>
         <div class="root scrollShape" color="light" style="display: inline-block;">
@@ -1558,12 +1492,6 @@ exports[`u-region-select.vue > Demo-转换为地区码格式 1`] = `
                 </a>
               </nav>
             </div>
-          </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
           </div>
         </div>
       </div>
@@ -1724,12 +1652,6 @@ exports[`u-region-select.vue > Demo-过滤（可搜索） 1`] = `
                   </a>
                 </nav>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>

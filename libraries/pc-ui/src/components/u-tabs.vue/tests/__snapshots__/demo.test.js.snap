@@ -1024,7 +1024,7 @@ exports[`u-tabs.vue > Demo-插槽扩展 1`] = `
   <div appear="square" class="root" item-width="auto" size="normal">
     <div class="head">
       <span class="extra" vusion-slot-name="extra">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>全选<span vusion-slot-name="item"></span>
         </label>
       </span>

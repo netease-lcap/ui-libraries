@@ -1346,7 +1346,7 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
     <div class="item" style="padding-left: 0px;" tabindex="0">
       <div class="expander" expand-trigger="click" expanded="true" style="width: 30px;"></div>
       <div class="text" draggable="false" style="margin-left: 30px;">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -1357,7 +1357,7 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
           <div class="text" draggable="false" style="margin-left: 30px;">
-            <label class="root" tabindex="0">
+            <label class="root" show-title="true" tabindex="0">
               <span class="box" status="false"></span>
               <span vusion-slot-name="item"></span>
             </label>
@@ -1371,7 +1371,7 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
         <div class="item" style="padding-left: 30px;" tabindex="0">
           <div class="expander" expand-trigger="click" expanded="true" style="width: 30px;"></div>
           <div class="text" draggable="false" style="margin-left: 30px;">
-            <label class="root" tabindex="0">
+            <label class="root" show-title="true" tabindex="0">
               <span class="box" status="false"></span>
               <span vusion-slot-name="item"></span>
             </label>
@@ -1382,7 +1382,7 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
           <div class="root">
             <div class="item" style="padding-left: 60px;" tabindex="0">
               <div class="text" draggable="false" style="margin-left: 30px;">
-                <label class="root" tabindex="0">
+                <label class="root" show-title="true" tabindex="0">
                   <span class="box" status="false"></span>
                   <span vusion-slot-name="item"></span>
                 </label>
@@ -1395,7 +1395,7 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
           <div class="root">
             <div class="item" style="padding-left: 60px;" tabindex="0">
               <div class="text" draggable="false" style="margin-left: 30px;">
-                <label class="root" tabindex="0">
+                <label class="root" show-title="true" tabindex="0">
                   <span class="box" status="false"></span>
                   <span vusion-slot-name="item"></span>
                 </label>
@@ -1410,7 +1410,7 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
           <div class="text" draggable="false" style="margin-left: 30px;">
-            <label class="root" tabindex="0">
+            <label class="root" show-title="true" tabindex="0">
               <span class="box" status="false"></span>
               <span vusion-slot-name="item"></span>
             </label>
@@ -1423,7 +1423,7 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
           <div class="text" draggable="false" style="margin-left: 30px;">
-            <label class="root" tabindex="0">
+            <label class="root" show-title="true" tabindex="0">
               <span class="box" status="false"></span>
               <span vusion-slot-name="item"></span>
             </label>
@@ -1438,7 +1438,7 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
   <div class="root">
     <div class="item" style="padding-left: 0px;" tabindex="0">
       <div class="text" draggable="false" style="margin-left: 30px;">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -1451,7 +1451,7 @@ exports[`u-tree-view-new.vue > Demo-多选 1`] = `
   <div class="root">
     <div class="item" style="padding-left: 0px;" tabindex="0">
       <div class="text" draggable="false" style="margin-left: 30px;">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -1470,7 +1470,7 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
     <div class="item" style="padding-left: 0px;" tabindex="0">
       <div class="expander" expand-trigger="click" expanded="true" style="width: 30px;"></div>
       <div class="text" draggable="false" style="margin-left: 30px;">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -1481,7 +1481,7 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
           <div class="text" draggable="false" style="margin-left: 30px;">
-            <label class="root" tabindex="0">
+            <label class="root" show-title="true" tabindex="0">
               <span class="box" status="false"></span>
               <span vusion-slot-name="item"></span>
             </label>
@@ -1495,7 +1495,7 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
         <div class="item" style="padding-left: 30px;" tabindex="0">
           <div class="expander" expand-trigger="click" expanded="true" style="width: 30px;"></div>
           <div class="text" draggable="false" style="margin-left: 30px;">
-            <label class="root" tabindex="0">
+            <label class="root" show-title="true" tabindex="0">
               <span class="box" status="false"></span>
               <span vusion-slot-name="item"></span>
             </label>
@@ -1506,7 +1506,7 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
           <div class="root">
             <div class="item" style="padding-left: 60px;" tabindex="0">
               <div class="text" draggable="false" style="margin-left: 30px;">
-                <label class="root" tabindex="0">
+                <label class="root" show-title="true" tabindex="0">
                   <span class="box" status="false"></span>
                   <span vusion-slot-name="item"></span>
                 </label>
@@ -1519,7 +1519,7 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
           <div class="root">
             <div class="item" style="padding-left: 60px;" tabindex="0">
               <div class="text" draggable="false" style="margin-left: 30px;">
-                <label class="root" tabindex="0">
+                <label class="root" show-title="true" tabindex="0">
                   <span class="box" status="false"></span>
                   <span vusion-slot-name="item"></span>
                 </label>
@@ -1534,7 +1534,7 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
           <div class="text" draggable="false" style="margin-left: 30px;">
-            <label class="root" tabindex="0">
+            <label class="root" show-title="true" tabindex="0">
               <span class="box" status="false"></span>
               <span vusion-slot-name="item"></span>
             </label>
@@ -1547,7 +1547,7 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
           <div class="text" draggable="false" style="margin-left: 30px;">
-            <label class="root" tabindex="0">
+            <label class="root" show-title="true" tabindex="0">
               <span class="box" status="false"></span>
               <span vusion-slot-name="item"></span>
             </label>
@@ -1562,7 +1562,7 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
   <div class="root">
     <div class="item" style="padding-left: 0px;" tabindex="0">
       <div class="text" draggable="false" style="margin-left: 30px;">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -1575,7 +1575,7 @@ exports[`u-tree-view-new.vue > Demo-多选 2`] = `
   <div class="root">
     <div class="item" style="padding-left: 0px;" tabindex="0">
       <div class="text" draggable="false" style="margin-left: 30px;">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -1594,7 +1594,7 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
     <div class="item" style="padding-left: 0px;" tabindex="0">
       <div check-controlled="true" class="expander" expand-trigger="click" expanded="true" style="width: 30px;"></div>
       <div class="text" draggable="false" style="margin-left: 30px;">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -1605,7 +1605,7 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
           <div class="text" draggable="false" style="margin-left: 30px;">
-            <label class="root" tabindex="0">
+            <label class="root" show-title="true" tabindex="0">
               <span class="box" status="false"></span>
               <span vusion-slot-name="item"></span>
             </label>
@@ -1619,7 +1619,7 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
         <div class="item" style="padding-left: 30px;" tabindex="0">
           <div check-controlled="true" class="expander" expand-trigger="click" expanded="true" style="width: 30px;"></div>
           <div class="text" draggable="false" style="margin-left: 30px;">
-            <label class="root" tabindex="0">
+            <label class="root" show-title="true" tabindex="0">
               <span class="box" status="false"></span>
               <span vusion-slot-name="item"></span>
             </label>
@@ -1630,7 +1630,7 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
           <div class="root">
             <div class="item" style="padding-left: 60px;" tabindex="0">
               <div class="text" draggable="false" style="margin-left: 30px;">
-                <label class="root" tabindex="0">
+                <label class="root" show-title="true" tabindex="0">
                   <span class="box" status="false"></span>
                   <span vusion-slot-name="item"></span>
                 </label>
@@ -1643,7 +1643,7 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
           <div class="root">
             <div class="item" style="padding-left: 60px;" tabindex="0">
               <div class="text" draggable="false" style="margin-left: 30px;">
-                <label class="root" tabindex="0">
+                <label class="root" show-title="true" tabindex="0">
                   <span class="box" status="false"></span>
                   <span vusion-slot-name="item"></span>
                 </label>
@@ -1658,7 +1658,7 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
           <div class="text" draggable="false" style="margin-left: 30px;">
-            <label class="root" tabindex="0">
+            <label class="root" show-title="true" tabindex="0">
               <span class="box" status="false"></span>
               <span vusion-slot-name="item"></span>
             </label>
@@ -1671,7 +1671,7 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
       <div class="root">
         <div class="item" style="padding-left: 30px;" tabindex="0">
           <div class="text" draggable="false" style="margin-left: 30px;">
-            <label class="root" tabindex="0">
+            <label class="root" show-title="true" tabindex="0">
               <span class="box" status="false"></span>
               <span vusion-slot-name="item"></span>
             </label>
@@ -1686,7 +1686,7 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
   <div class="root">
     <div class="item" style="padding-left: 0px;" tabindex="0">
       <div class="text" draggable="false" style="margin-left: 30px;">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -1699,7 +1699,7 @@ exports[`u-tree-view-new.vue > Demo-多选 3`] = `
   <div class="root">
     <div class="item" style="padding-left: 0px;" tabindex="0">
       <div class="text" draggable="false" style="margin-left: 30px;">
-        <label class="root" tabindex="0">
+        <label class="root" show-title="true" tabindex="0">
           <span class="box" status="false"></span>
           <span vusion-slot-name="item"></span>
         </label>
@@ -2279,7 +2279,7 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
       <div class="item" style="padding-left: 0px;" tabindex="0">
         <div class="expander" expand-trigger="click" expanded="true" style="width: 30px;"></div>
         <div class="text" draggable="false" style="margin-left: 30px;">
-          <label class="root" tabindex="0">
+          <label class="root" show-title="true" tabindex="0">
             <span class="box" status="false"></span>
             <span vusion-slot-name="item"></span>
           </label>
@@ -2290,7 +2290,7 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
         <div class="root">
           <div class="item" style="padding-left: 30px;" tabindex="0">
             <div class="text" draggable="false" style="margin-left: 30px;">
-              <label class="root" tabindex="0">
+              <label class="root" show-title="true" tabindex="0">
                 <span class="box" status="false"></span>
                 <span vusion-slot-name="item"></span>
               </label>
@@ -2304,7 +2304,7 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
           <div class="item" disabled="disabled" style="padding-left: 30px;" tabindex>
             <div class="expander" expand-trigger="click" expanded="true" style="width: 30px;"></div>
             <div class="text" draggable="false" style="margin-left: 30px;">
-              <label class="root" disabled="disabled" tabindex="0">
+              <label class="root" disabled="disabled" show-title="true" tabindex="0">
                 <span class="box" disabled="disabled" status="false"></span>
                 <span vusion-slot-name="item"></span>
               </label>
@@ -2315,7 +2315,7 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
             <div class="root">
               <div class="item" disabled="disabled" style="padding-left: 60px;" tabindex="0">
                 <div class="text" draggable="false" style="margin-left: 30px;">
-                  <label class="root" disabled="disabled" tabindex="0">
+                  <label class="root" disabled="disabled" show-title="true" tabindex="0">
                     <span class="box" disabled="disabled" status="false"></span>
                     <span vusion-slot-name="item"></span>
                   </label>
@@ -2328,7 +2328,7 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
             <div class="root">
               <div class="item" disabled="disabled" style="padding-left: 60px;" tabindex="0">
                 <div class="text" draggable="false" style="margin-left: 30px;">
-                  <label class="root" disabled="disabled" tabindex="0">
+                  <label class="root" disabled="disabled" show-title="true" tabindex="0">
                     <span class="box" disabled="disabled" status="false"></span>
                     <span vusion-slot-name="item"></span>
                   </label>
@@ -2343,7 +2343,7 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
         <div class="root">
           <div class="item" style="padding-left: 30px;" tabindex="0">
             <div class="text" draggable="false" style="margin-left: 30px;">
-              <label class="root" tabindex="0">
+              <label class="root" show-title="true" tabindex="0">
                 <span class="box" status="false"></span>
                 <span vusion-slot-name="item"></span>
               </label>
@@ -2356,7 +2356,7 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
         <div class="root">
           <div class="item" style="padding-left: 30px;" tabindex="0">
             <div class="text" draggable="false" style="margin-left: 30px;">
-              <label class="root" tabindex="0">
+              <label class="root" show-title="true" tabindex="0">
                 <span class="box" status="false"></span>
                 <span vusion-slot-name="item"></span>
               </label>
@@ -2371,7 +2371,7 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
         <div class="text" draggable="false" style="margin-left: 30px;">
-          <label class="root" tabindex="0">
+          <label class="root" show-title="true" tabindex="0">
             <span class="box" status="false"></span>
             <span vusion-slot-name="item"></span>
           </label>
@@ -2384,7 +2384,7 @@ exports[`u-tree-view-new.vue > Demo-统一操作 1`] = `
     <div class="root">
       <div class="item" style="padding-left: 0px;" tabindex="0">
         <div class="text" draggable="false" style="margin-left: 30px;">
-          <label class="root" tabindex="0">
+          <label class="root" show-title="true" tabindex="0">
             <span class="box" status="false"></span>
             <span vusion-slot-name="item"></span>
           </label>

@@ -1841,7 +1841,7 @@ exports[`u-select.vue > Demo-列表与 value 同时改变的问题 1`] = `
     <div class="root" direction="horizontal" type vusion-slot-name="default">
       <span class="root" size="normal" vusion-slot-name-edit="text">可用区</span>
       <div class="root">
-        <label class="root" tabindex="0">
+        <label class="root" selected="selected" tabindex="0">
           <span class="radio" selected="selected"></span>可用区A<span vusion-slot-name="item"></span>
         </label>
         <label class="root" tabindex="0">

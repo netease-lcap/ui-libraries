@@ -171,11 +171,11 @@ export default {
     computed: {
         // 基于编辑目标状态计算出来的最小值
         finalMinDate() {
-            return this.editTarget === 'end' ? this.startDateTime : this.minDate;
+            return this.editTarget === 'end' ? this.startDateTime || this.minDate : this.minDate;
         },
         // 基于编辑目标状态计算出来的最大值
         finalMaxDate() {
-            return this.editTarget === 'start' ? this.endDateTime : this.currentMaxDate;
+            return this.editTarget === 'start' ? this.endDateTime || this.currentMaxDate : this.currentMaxDate;
         },
         minCalendarDate() {
             return this.format(this.finalMinDate, 'YYYY-MM-DD');
@@ -284,6 +284,7 @@ export default {
         startDate(newValue) {
             this.startDateTime = this.format(newValue, 'YYYY-MM-DD HH:mm:ss');
             this.finalStartDateTime = this.startDateTime;
+            this.noticeValidator();
             // this.$emit(
             //     'update:startDate',
             //     this.startDateTime,
@@ -292,6 +293,7 @@ export default {
         endDate(newValue) {
             this.endDateTime = this.format(newValue, 'YYYY-MM-DD HH:mm:ss');
             this.finalEndDateTime = this.endDateTime;
+            this.noticeValidator();
             // this.$emit(
             //     'update:endDate',
             //     this.endDateTime,
@@ -305,14 +307,7 @@ export default {
         },
     },
     created() {
-        const startDateTime = this.toValue(this.startDateTime ? new Date(this.startDateTime.replace(/-/g, '/')) : '');
-        const endDateTime = this.toValue(this.endDateTime ? new Date(this.endDateTime.replace(/-/g, '/')) : '');
-        this.$emit(
-            'update',
-            this.startDateTime && this.endDateTime ? [startDateTime, endDateTime] : '',
-        );
-        this.$emit('update:startDate', startDateTime === '' ? undefined : startDateTime);
-        this.$emit('update:endDate', endDateTime === '' ? undefined : endDateTime);
+        this.noticeValidator(true);
     },
     mounted() {
         this.autofocus && this.$refs.input.focus();
@@ -321,6 +316,19 @@ export default {
             this.toggle(this.opened);
     },
     methods: {
+        noticeValidator(created = false) {
+          const startDateTime = this.toValue(this.startDateTime ? new Date(this.startDateTime.replace(/-/g, '/')) : '');
+          const endDateTime = this.toValue(this.endDateTime ? new Date(this.endDateTime.replace(/-/g, '/')) : '');
+          this.$emit(
+              'update',
+              this.startDateTime && this.endDateTime ? [startDateTime, endDateTime] : '',
+          );
+
+          if (created) {
+            this.$emit('update:startDate', startDateTime === '' ? undefined : startDateTime);
+            this.$emit('update:endDate', endDateTime === '' ? undefined : endDateTime);
+          }
+        },
         getFormatString() {
             return 'YYYY-MM-DD HH:mm:ss';
         },
