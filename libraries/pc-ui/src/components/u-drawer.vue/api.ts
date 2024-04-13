@@ -101,6 +101,12 @@ namespace nasl.ui {
         onOpen: (event: any) => any;
 
         @Event({
+          title: '打开后',
+          description: '打开抽屉后触发，动画执行完成后',
+        })
+        onOpened: (event: any) => any;
+
+        @Event({
             title: '关闭前',
             description: '关闭抽屉前触发',
         })

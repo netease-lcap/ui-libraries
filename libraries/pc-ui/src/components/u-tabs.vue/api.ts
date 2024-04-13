@@ -111,6 +111,17 @@ namespace nasl.ui {
         closableField: nasl.core.String = 'closable';
 
         @Prop({
+          group: '主要属性',
+          title: '仅在显示时加载内容',
+          description: '仅在显示时加载内容（优化渲染性能）',
+          docDescription: '仅在显示时加载内容（优化渲染性能）',
+          setter: {
+            concept: 'SwitchSetter',
+          },
+        })
+        loadOnActive: nasl.core.Boolean = false;
+
+        @Prop({
             group: '交互属性',
             title: '可关闭',
             description: '设置标签是否可关闭',
