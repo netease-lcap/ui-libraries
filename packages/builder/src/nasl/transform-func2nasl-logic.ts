@@ -23,6 +23,7 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
     description: '',
     type: '',
     params: {},
+    typeParams: {},
     returns: '',
   };
 
@@ -48,6 +49,14 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
           } else {
             logicComment.type = typeKind;
           }
+          break;
+        case text.includes('@typeParam '):
+          const tempTypeText = text.substring(text.indexOf('@typeParam ') + '@typeParam '.length);
+          const [typeName, ...typeValue] = tempTypeText.split(' ');
+          if (typeValue.length === 0) {
+            break;
+          }
+          logicComment.typeParams[typeName] = typeValue.join('');
           break;
         case text.includes('@param '):
           const tempText = text.substring(text.indexOf('@param ') + '@param '.length);
@@ -92,6 +101,7 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
     logic.typeParams = node.declaration.typeParameters.params.map((t) => ({
       concept: 'TypeParam',
       name: t.name,
+      displayName: logicComment.typeParams[t.name] || '',
     }));
   }
 
