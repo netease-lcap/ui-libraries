@@ -26,8 +26,9 @@ export default function genNaslUIConfig({
 
   if (components && components.length > 0) {
     components.forEach((extConfig) => {
-      const { componentDir } = getComponentPathInfo(extConfig.name, rootPath, 'src/components');
-      const apiPath = extConfig.apiPath ? path.join(rootPath, 'src/components', extConfig.apiPath) : path.join(componentDir, 'api.ts');
+      const componentRootDir = packageInfo.name === '@lcap/mobile-ui' ? 'src-vusion/components' : 'src/components';
+      const { componentDir } = getComponentPathInfo(extConfig.name, rootPath, componentRootDir);
+      const apiPath = extConfig.apiPath ? path.join(rootPath, componentRootDir, extConfig.apiPath) : path.join(componentDir, 'api.ts');
       if (!fs.existsSync(apiPath)) {
         logger.error(`未找到组件 ${extConfig.name} 的描述文件（api.ts）`);
         return;

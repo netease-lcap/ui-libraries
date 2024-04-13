@@ -2,7 +2,7 @@
 import { defineConfig } from 'vite';
 import path from 'path';
 import { createVuePlugin as vue2 } from '@lcap/vite-plugin-vue2';
-import { createGenScopedName } from '@lcap/builder';
+import { createGenScopedName, lcapPlugin } from '@lcap/builder';
 import autoprefixer from 'autoprefixer';
 
 // 设置测试运行的时区
@@ -20,6 +20,14 @@ export default defineConfig(({ command }) => {
           injectH: true,
           vOn: true,
           compositionAPI: false,
+        },
+      }),
+      lcapPlugin({
+        framework: 'vue2',
+        i18n: {
+          'zh-CN': './src/locale/lang/zh-CN.json',
+          'en-US': './src/locale/lang/en-US.json',
+          ja: './src/locale/lang/ja.json',
         },
       }),
     ],

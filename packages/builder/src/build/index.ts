@@ -8,6 +8,7 @@ import logger from '../utils/logger';
 import { execSync } from '../utils/exec';
 import genNaslUIConfig from './gen-nasl-ui';
 import genNaslExtensionConfig from './gen-nasl-extension-config';
+import genThemeJsonOld from './gen-theme-json-old';
 
 export interface LcapThemeOptions {
   themeVarCssPath?: string;
@@ -26,8 +27,28 @@ export interface LcapBuildOptions {
   destDir: string;
 }
 
+export function buildThemeOld(rootPath, destDir) {
+  const configPath = path.join(rootPath, './lcap-ui.config.js');
+  const themeConfigPath = path.join(rootPath, './lcap-ui.theme.json');
+
+  if (!fs.existsSync(configPath) || !fs.existsSync(themeConfigPath)) {
+    return;
+  }
+
+  // eslint-disable-next-line import/no-dynamic-require, global-require
+  const confg = require(configPath);
+
+  genThemeJsonOld({
+    rootPath,
+    destPath: destDir,
+    themePath: confg.themePath,
+    themeConfigPath: 'lcap-ui.theme.json',
+  });
+}
+
 export async function buildTheme(options: LcapBuildOptions) {
   if (!options.theme.themeVarCssPath || !fs.existsSync(options.theme.themeVarCssPath)) {
+    buildThemeOld(options.rootPath, options.destDir);
     return;
   }
 
