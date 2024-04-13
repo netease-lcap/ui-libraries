@@ -185,6 +185,19 @@ export default {
         },
         toggleCollapse() {
             this.currentWidth = this.currentCollapse ? null : this.minWidth;
+            if (
+              this.currentCollapse
+              && this.$vnode.data
+              && this.$vnode.data.staticStyle
+              && this.$vnode.data.staticStyle.width
+            ) {
+              const cw = parseInt(this.$vnode.data.staticStyle.width);
+
+              if (!isNaN(cw)) {
+                this.currentWidth = cw;
+              }
+            }
+
             this.updateCollapse(!this.currentCollapse);
             this.isTransitionEnd = false;
         },
