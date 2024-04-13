@@ -3319,12 +3319,6 @@ exports[`u-grid-view.vue > Demo-结合卡片 1`] = `
                 <div class="foot"></div>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </div>
@@ -3380,12 +3374,6 @@ exports[`u-grid-view.vue > Demo-结合卡片 1`] = `
                 </div>
                 <div class="foot"></div>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
@@ -3443,12 +3431,6 @@ exports[`u-grid-view.vue > Demo-结合卡片 1`] = `
                 <div class="foot"></div>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </div>
@@ -3504,12 +3486,6 @@ exports[`u-grid-view.vue > Demo-结合卡片 1`] = `
                 </div>
                 <div class="foot"></div>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
@@ -3567,12 +3543,6 @@ exports[`u-grid-view.vue > Demo-结合卡片 1`] = `
                 <div class="foot"></div>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </div>
@@ -3628,12 +3598,6 @@ exports[`u-grid-view.vue > Demo-结合卡片 1`] = `
                 </div>
                 <div class="foot"></div>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
@@ -3691,12 +3655,6 @@ exports[`u-grid-view.vue > Demo-结合卡片 1`] = `
                 <div class="foot"></div>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </div>
@@ -3752,12 +3710,6 @@ exports[`u-grid-view.vue > Demo-结合卡片 1`] = `
                 </div>
                 <div class="foot"></div>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
@@ -3815,12 +3767,6 @@ exports[`u-grid-view.vue > Demo-结合卡片 1`] = `
                 <div class="foot"></div>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </div>
@@ -3876,12 +3822,6 @@ exports[`u-grid-view.vue > Demo-结合卡片 1`] = `
                 </div>
                 <div class="foot"></div>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
@@ -3939,12 +3879,6 @@ exports[`u-grid-view.vue > Demo-结合卡片 1`] = `
                 <div class="foot"></div>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </div>
@@ -4000,12 +3934,6 @@ exports[`u-grid-view.vue > Demo-结合卡片 1`] = `
                 </div>
                 <div class="foot"></div>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
@@ -4997,12 +4925,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5023,12 +4945,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5051,12 +4967,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5077,12 +4987,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5105,12 +5009,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5131,12 +5029,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5159,12 +5051,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5185,12 +5071,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5213,12 +5093,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5239,12 +5113,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5267,12 +5135,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5293,12 +5155,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5321,12 +5177,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5347,12 +5197,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5375,12 +5219,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5401,12 +5239,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5429,12 +5261,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5455,12 +5281,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5483,12 +5303,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5509,12 +5323,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5537,12 +5345,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5563,12 +5365,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5591,12 +5387,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5617,12 +5407,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5645,12 +5429,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5671,12 +5449,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5699,12 +5471,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5725,12 +5491,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5753,12 +5513,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5779,12 +5533,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5807,12 +5555,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5833,12 +5575,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5861,12 +5597,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5887,12 +5617,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5915,12 +5639,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5941,12 +5659,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -5969,12 +5681,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -5995,12 +5701,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6023,12 +5723,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6049,12 +5743,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6077,12 +5765,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6103,12 +5785,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6131,12 +5807,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6157,12 +5827,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6185,12 +5849,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6211,12 +5869,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6239,12 +5891,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6265,12 +5911,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6293,12 +5933,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6319,12 +5953,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6347,12 +5975,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6373,12 +5995,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6421,12 +6037,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6447,12 +6057,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6475,12 +6079,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6501,12 +6099,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6529,12 +6121,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6555,12 +6141,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6583,12 +6163,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6609,12 +6183,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6637,12 +6205,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6663,12 +6225,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6691,12 +6247,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6717,12 +6267,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6745,12 +6289,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6771,12 +6309,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6799,12 +6331,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6825,12 +6351,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6853,12 +6373,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6879,12 +6393,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6907,12 +6415,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6933,12 +6435,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -6961,12 +6457,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -6987,12 +6477,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7015,12 +6499,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7041,12 +6519,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7069,12 +6541,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7095,12 +6561,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7123,12 +6583,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7149,12 +6603,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7177,12 +6625,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7203,12 +6645,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7231,12 +6667,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7257,12 +6687,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7285,12 +6709,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7311,12 +6729,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7339,12 +6751,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7365,12 +6771,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7393,12 +6793,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7419,12 +6813,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7447,12 +6835,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7473,12 +6855,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7501,12 +6877,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7527,12 +6897,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7555,12 +6919,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7581,12 +6939,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7609,12 +6961,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7635,12 +6981,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7663,12 +7003,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7689,12 +7023,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7717,12 +7045,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7743,12 +7065,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>
@@ -7771,12 +7087,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     <div class="foot"></div>
                   </div>
                 </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -7797,12 +7107,6 @@ exports[`u-grid-view.vue > Demo-自定义内容 3`] = `
                     </div>
                     <div class="foot"></div>
                   </div>
-                </div>
-                <div class="root" direction="horizontal">
-                  <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                </div>
-                <div class="root" direction="vertical">
-                  <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                 </div>
               </div>
             </div>

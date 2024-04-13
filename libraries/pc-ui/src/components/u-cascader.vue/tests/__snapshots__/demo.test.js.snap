@@ -24,12 +24,6 @@ exports[`u-cascader.vue > Demo-Placeholder 1`] = `
                 </nav>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </transition-stub>
@@ -62,12 +56,6 @@ exports[`u-cascader.vue > Demo-field 1`] = `
                   </a>
                 </nav>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
@@ -103,12 +91,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                   </nav>
                 </div>
               </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-              </div>
             </div>
           </div>
         </transition-stub>
@@ -137,12 +119,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                   </nav>
                 </div>
               </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-              </div>
             </div>
           </div>
         </transition-stub>
@@ -170,12 +146,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                     </a>
                   </nav>
                 </div>
-              </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
               </div>
             </div>
           </div>
@@ -207,12 +177,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                   </nav>
                 </div>
               </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-              </div>
             </div>
           </div>
         </transition-stub>
@@ -241,12 +205,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                   </nav>
                 </div>
               </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-              </div>
             </div>
           </div>
         </transition-stub>
@@ -274,12 +232,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                     </a>
                   </nav>
                 </div>
-              </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
               </div>
             </div>
           </div>
@@ -311,12 +263,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                   </nav>
                 </div>
               </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-              </div>
             </div>
           </div>
         </transition-stub>
@@ -345,12 +291,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                   </nav>
                 </div>
               </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-              </div>
             </div>
           </div>
         </transition-stub>
@@ -378,12 +318,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                     </a>
                   </nav>
                 </div>
-              </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
               </div>
             </div>
           </div>
@@ -415,12 +349,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                   </nav>
                 </div>
               </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-              </div>
             </div>
           </div>
         </transition-stub>
@@ -449,12 +377,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                   </nav>
                 </div>
               </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-              </div>
             </div>
           </div>
         </transition-stub>
@@ -482,12 +404,6 @@ exports[`u-cascader.vue > Demo-size 1`] = `
                     </a>
                   </nav>
                 </div>
-              </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
               </div>
             </div>
           </div>
@@ -523,12 +439,6 @@ exports[`u-cascader.vue > Demo-仅显示最后一级 1`] = `
                 </nav>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </transition-stub>
@@ -552,12 +462,6 @@ exports[`u-cascader.vue > Demo-动态加载 1`] = `
               <div class="view">
                 <nav class="root umenuShape"></nav>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
@@ -592,12 +496,6 @@ exports[`u-cascader.vue > Demo-双向绑定 1`] = `
                 </nav>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </transition-stub>
@@ -631,12 +529,6 @@ exports[`u-cascader.vue > Demo-可清空 1`] = `
                 </nav>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </transition-stub>
@@ -669,12 +561,6 @@ exports[`u-cascader.vue > Demo-基本用法 1`] = `
               </nav>
             </div>
           </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-          </div>
         </div>
       </div>
     </transition-stub>
@@ -706,12 +592,6 @@ exports[`u-cascader.vue > Demo-基本用法 2`] = `
                   </a>
                 </nav>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
@@ -784,12 +664,6 @@ exports[`u-cascader.vue > Demo-数据源改造 1`] = `
                   </nav>
                 </div>
               </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-              </div>
             </div>
           </div>
         </transition-stub>
@@ -819,12 +693,6 @@ exports[`u-cascader.vue > Demo-数据源改造 1`] = `
                     </a>
                   </nav>
                 </div>
-              </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
               </div>
             </div>
           </div>
@@ -955,12 +823,6 @@ exports[`u-cascader.vue > Demo-禁用某项 1`] = `
                 </nav>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </transition-stub>
@@ -994,12 +856,6 @@ exports[`u-cascader.vue > Demo-级联间连接字符 1`] = `
                 </nav>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </transition-stub>
@@ -1027,12 +883,6 @@ exports[`u-cascader.vue > Demo-级联间连接字符 1`] = `
                   </a>
                 </nav>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
@@ -1067,12 +917,6 @@ exports[`u-cascader.vue > Demo-触发方式 1`] = `
                 </nav>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </transition-stub>
@@ -1100,12 +944,6 @@ exports[`u-cascader.vue > Demo-触发方式 1`] = `
                   </a>
                 </nav>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
@@ -1139,12 +977,6 @@ exports[`u-cascader.vue > Demo-过滤（可搜索） 1`] = `
                   </a>
                 </nav>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
