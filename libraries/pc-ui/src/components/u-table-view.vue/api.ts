@@ -297,7 +297,7 @@ namespace nasl.ui {
           sync: true,
           docDescription: '当表格设置了单选列，或开启了可选行，选中某一行时的值。该取值由值字段名决定。一般会是id等能唯一标识每一行数据的值',
       })
-      value: T;
+      value: V;
 
       @Prop({
           group: '数据属性',
@@ -306,7 +306,7 @@ namespace nasl.ui {
           sync: true,
           docDescription: '当表格设置了多选列，选择多个值后获得了值列表数组。该取值由值字段名决定',
       })
-      values: nasl.collection.List<T>;
+      values: nasl.collection.List<V>;
 
       @Prop({
           group: '数据属性',

@@ -40,7 +40,7 @@ namespace nasl.ui {
             sync: true,
             docDescription: '当前的文件列表',
         })
-        value: nasl.collection.List<nasl.core.String> = [] as any;
+        value: nasl.collection.List<nasl.core.String> | nasl.core.String = [] as any;
 
         @Prop({
             group: '数据属性',
@@ -493,7 +493,7 @@ namespace nasl.ui {
             };
             count: nasl.core.Integer;
             limit: nasl.core.Integer;
-            message: nasl.core.String; 
+            message: nasl.core.String;
         }) => any;
 
         @Event({

@@ -7,7 +7,7 @@ namespace nasl.ui {
         description: '多项中选择多个时使用',
         group: "Form"
     })
-    export class UCheckboxes<T, V, C extends string> extends ViewComponent {
+    export class UCheckboxes<T, V, C> extends ViewComponent {
         @Prop({
             title: '数据',
         })
@@ -26,7 +26,7 @@ namespace nasl.ui {
         constructor(options?: Partial<UCheckboxesOptions<T, V, C>>) { super(); }
     }
 
-    export class UCheckboxesOptions<T, V, C extends string> extends ViewComponentOptions {
+    export class UCheckboxesOptions<T, V, C> extends ViewComponentOptions {
         @Prop({
             group: '数据属性',
             title: '数据源',
