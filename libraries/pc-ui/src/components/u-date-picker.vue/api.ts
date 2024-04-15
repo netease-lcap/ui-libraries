@@ -46,7 +46,7 @@ namespace nasl.ui {
           docDescription: '当前选择的值',
           if: _ => _.range !== true,
       })
-      value: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      value: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop<UDatePickerOptions, 'startDate'>({
           group: '数据属性',
@@ -55,7 +55,7 @@ namespace nasl.ui {
           sync: true,
           if: _ => _.range === true,
       })
-      startDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      startDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop<UDatePickerOptions, 'endDate'>({
           group: '数据属性',
@@ -64,7 +64,7 @@ namespace nasl.ui {
           sync: true,
           if: _ => _.range === true,
       })
-      endDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      endDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop({
           group: '数据属性',
@@ -72,7 +72,7 @@ namespace nasl.ui {
           description: '最小可选的日期值，默认为10年前，日期填写格式为“yyyy-mm-dd”',
           docDescription: '设置日期范围，支持输入的最小日期',
       })
-      minDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      minDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop({
           group: '数据属性',
@@ -80,7 +80,7 @@ namespace nasl.ui {
           description: '最大可选的日期值，默认为9年后，日期填写格式为“yyyy-mm-dd”',
           docDescription: '设置日期范围，支持输入的最大日期',
       })
-      maxDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      maxDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop({
           group: '数据属性',
