@@ -562,7 +562,7 @@ export default createComponent({
       title: () => this.slots('title'),
     };
 
-    if (this.isPreview && !this.inDesigner()) {
+    if (this.isPreview) {
       return (
         <div class={bem('wrappparea')} vusion-click-enabled="true">
           <Field

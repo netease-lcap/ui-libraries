@@ -111,7 +111,7 @@ export default createComponent({
       itemWidth = 100 / this.column + '%';
     }
 
-    if (this.isPreview && !this.inDesigner()) {
+    if (this.isPreview) {
       return this.previewRender();
     }
 

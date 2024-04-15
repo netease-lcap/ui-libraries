@@ -233,7 +233,7 @@ export default createComponent({
     const ifLimit = this.showWordLimit && this.maxlength;
     const inputAlign = this.vanField?.getProp('inputAlign');
 
-    if (this.isPreview && !this.inDesigner()) {
+    if (this.isPreview) {
       return (
         <div class={bem('newwrap', { clearwrap: this.clearable, limit: ifLimit })} ref="wrap">
           <div class={bem('wrap-con')}>
