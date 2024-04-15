@@ -312,7 +312,7 @@ export default createComponent({
 
     if (this.isPreview && !this.inDesigner()) {
       const isPassword = this.inputstyle === 'password' || this.type === 'password';
-      const value = this.currentValue || '--';
+      const value = isPassword ? this.currentValue.replace(/./g, '*') : this.currentValue;
 
       return (
         <div
@@ -327,7 +327,7 @@ export default createComponent({
               'custom',
             ])}
           >
-            {isPassword ? value.replace(/./g, '*') : value}
+            {value || '--'}
           </span>
         </div>
       );
