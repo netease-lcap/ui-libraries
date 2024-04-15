@@ -82,8 +82,8 @@ export const 默认 = {
             <Dropdown
               menuItem={(
                 <>
-                  <MenuItem label={<Text>导航项目</Text>} />
-                  <MenuItem label={<Text>导航项目2</Text>} />
+                  <MenuItem label="导航项目" />
+                  <MenuItem label="导航项目" />
                 </>
               )}
             />
@@ -92,13 +92,11 @@ export const 默认 = {
             <>
               <MenuItem label="采购信息" path="/1">
                 <MenuItem
-                  // onClick={localStore.MenuItem17Click}
                   label="采购信息录入"
                   key="record"
                   labelSlot={<></>}
                 />
                 <MenuItem
-                  // onClick={localStore.MenuItem18Click}
                   label="采购信息管理"
                   key="list"
                   labelSlot={<></>}
@@ -113,10 +111,7 @@ export const 默认 = {
                 labelIsSlot
                 key="component-8"
                 labelSlot={(() => (
-                  <div
-                    ide-draggable="false"
-                    data-nodepath="rootview.0.0.1.1.0"
-                  >
+                  <div ide-draggable="false" data-nodepath="rootview.0.0.1.1.0">
                     1234
                   </div>
                 ))()}

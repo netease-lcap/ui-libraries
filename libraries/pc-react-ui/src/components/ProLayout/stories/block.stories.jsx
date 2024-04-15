@@ -43,8 +43,8 @@ export const 基本用法 = {
           <Dropdown
             menuItem={(
               <>
-                <MenuItem label={<Text>导航项目</Text>} />
-                <MenuItem label={<Text>导航项目2</Text>} />
+                <MenuItem label="导航项目" />
+                <MenuItem label="导航项目" />
               </>
             )}
           />
