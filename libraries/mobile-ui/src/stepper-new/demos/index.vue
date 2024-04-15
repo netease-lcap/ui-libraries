@@ -18,7 +18,8 @@
         <van-stepper-new
           :value.sync="value"
           :decimalLength="precision"
-          :decimal-places="{places:10, omit:true}"
+          :decimalPlacesValue="10"
+          :decimalPlacesOmitZero="true"
           :highPrecision="true">
         </van-stepper-new>
       </van-cell>
@@ -27,7 +28,8 @@
         <van-stepper-new
           :value.sync="value"
           :decimalLength="precision"
-          :decimal-places="{ places: 10, omit:false }"
+          :decimalPlacesValue="10"
+          :decimalPlacesOmitZero="false"
           :highPrecision="true">
         </van-stepper-new>
       </van-cell>
