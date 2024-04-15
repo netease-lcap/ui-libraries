@@ -182,14 +182,14 @@ exports[`renders demo correctly 1`] = `
             <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">复选框 a</div>
             <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="a">
               <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
-                  <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label"><div data-v-60d187d5="" s-empty="true" class="empty empty">+</div></span>
+                  <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label"><div data-v-df054c22="" s-empty="true" class="empty empty">+</div></span>
             </div>
           </div>
           <div noallow="" role="button" tabindex="0" class="van-cell van-cell--clickable van-cell--center">
             <div vusion-slot-name="title" vusion-slot-name-edit="title" class="van-cell__title">复选框 b</div>
             <div role="checkbox" tabindex="0" aria-checked="false" class="van-checkbox" name="b">
               <div class="van-checkbox__icon van-checkbox__icon--round"><i class="van-icon van-icon-success">
-                  <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label"><div data-v-60d187d5="" s-empty="true" class="empty empty">+</div></span>
+                  <!----></i></div><span vusion-slot-name="default" class="van-checkbox__label"><div data-v-df054c22="" s-empty="true" class="empty empty">+</div></span>
             </div>
           </div>
         </div>

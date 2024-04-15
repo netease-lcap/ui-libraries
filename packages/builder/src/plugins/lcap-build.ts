@@ -1,8 +1,5 @@
 import type { Plugin } from 'vite';
-import fs from 'fs-extra';
-import genThemeConfig from '../build/gen-theme-config';
-import { buildTheme } from '../build/vite-build-theme';
-import logger from '../utils/logger';
+import { lcapBuild } from '../build';
 
 export interface LcapThemeOptions {
   themeVarCssPath?: string;
@@ -13,28 +10,28 @@ export interface LcapThemeOptions {
 export interface ViteLcapPluginOptions {
   type?: 'extension' | 'nasl.ui';
   framework?: 'react' | 'vue2' | 'taro' | 'vue3',
+  i18n?: { [lang: string]: string };
+  assetsPublicPath?: string;
   components?: Array<{ group: string, title: string, name: string }>,
   theme?: LcapThemeOptions,
+  rootPath?: string;
+  destDir?: string;
 }
 
-export default (options: ViteLcapPluginOptions = {}) => {
+export default (options: any) => {
+  let disabled = false;
   return {
     name: 'vite:lcap-build',
+    configResolved(config) {
+      if (config.mode === 'test' || config.mode === 'serve') {
+        disabled = true;
+      }
+    },
     async closeBundle() {
-      logger.start('开始生成 theme.config.json...');
-      const themeConfig = genThemeConfig({
-        components: options.components || [],
-        themeVarCssPath: options.theme?.themeVarCssPath || '',
-        themeComponentFolder: options.theme?.themeComponentFolder || '',
-        previewPages: options.theme?.previewPages || [],
-      });
-
-      logger.success('生成 theme.config.json 成功！');
-      await fs.writeJSONSync('dist-theme/theme.config.json', themeConfig, { spaces: 2 });
-      logger.start('开始构建 theme');
-
-      await buildTheme(themeConfig);
-      logger.success('构建theme 成功');
+      if (disabled) {
+        return;
+      }
+      await lcapBuild(options);
     },
   } as Plugin;
 };

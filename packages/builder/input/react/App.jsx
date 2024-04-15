@@ -1,6 +1,6 @@
 import './global.css';
 import React, { useEffect } from 'react';
-import { ConfigProvider } from '@lcap/pc-react-ui';
+import { renderAppPreview } from 'virtual:lcap-theme-preview-wrap.js';
 import ThemePagePreviewMap from 'virtual:lcap-theme-page-preview.js';
 import ThemeComponentPreview from 'virtual:lcap-theme-component-previews.js';
 import { sendRenderOk, sendClickComponent } from '../events';
@@ -56,18 +56,7 @@ const App = () => {
     };
   }, []);
 
-  return (
-    <ConfigProvider
-      theme={
-        {
-          cssVar: { prefix: 'cw', key: 'cw-nasl' },
-        }
-      }
-      prefixCls="cw"
-    >
-      <Preview {...props} />
-    </ConfigProvider>
-  );
+  return renderAppPreview(<Preview {...props} />);
 };
 
 export default App;

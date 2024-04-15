@@ -256,6 +256,10 @@ export default function transform(tsCode: string): astTypes.ViewComponentDeclara
         decorator.expression.arguments.forEach((arg) => {
           if (arg.type === 'ObjectExpression') Object.assign(component, evalOptions(arg));
         });
+      } else if (decorator.expression.type === 'CallExpression' && (decorator.expression.callee.name === 'ExtensionComponent' || decorator.expression.callee.name === 'IDEExtraInfo')) {
+        decorator.expression.arguments.forEach((arg) => {
+          if (arg.type === 'ObjectExpression') { Object.assign(component, evalOptions(arg)); }
+        });
       }
     });
 

@@ -54,7 +54,6 @@ export async function buildTheme(themeConfig: ThemeConfig) {
   }
   config.resolve.alias = {
     ...config.resolve.alias,
-    '@lcap/pc-react-ui': entry,
   };
 
   config.build.sourcemap = false;

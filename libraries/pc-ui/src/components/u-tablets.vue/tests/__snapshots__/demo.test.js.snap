@@ -106,7 +106,7 @@ exports[`u-tablets.vue > Demo-多项选择 1`] = `
 <div>
   <div border="true" class="root" tabindex="0">
     <div class="head" style="display: none;">
-      <label class="root" tabindex="0">
+      <label class="root" show-title="true" tabindex="0">
         <span class="box" status="false"></span>
         <span vusion-slot-name="item"></span>
       </label>

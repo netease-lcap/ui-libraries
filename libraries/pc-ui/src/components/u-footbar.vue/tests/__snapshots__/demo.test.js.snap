@@ -17,7 +17,7 @@ exports[`u-footbar.vue > Demo-与列表一起使用 1`] = `
             <tr>
               <th class="head-title boldHeader">
                 <span>
-                  <label class="root" tabindex="0">
+                  <label class="root" show-title="true" tabindex="0">
                     <span class="box" status="false"></span>
                     <span vusion-slot-name="item"></span>
                   </label>
@@ -57,7 +57,7 @@ exports[`u-footbar.vue > Demo-与列表一起使用 1`] = `
                   <tr class="row">
                     <td class="cell">
                       <span>
-                        <label class="root" tabindex="0">
+                        <label class="root" show-title="true" tabindex="0">
                           <span class="box" status="false"></span>
                           <span vusion-slot-name="item"></span>
                         </label>
@@ -79,7 +79,7 @@ exports[`u-footbar.vue > Demo-与列表一起使用 1`] = `
                   <tr class="row">
                     <td class="cell">
                       <span>
-                        <label class="root" tabindex="0">
+                        <label class="root" show-title="true" tabindex="0">
                           <span class="box" status="false"></span>
                           <span vusion-slot-name="item"></span>
                         </label>
@@ -101,7 +101,7 @@ exports[`u-footbar.vue > Demo-与列表一起使用 1`] = `
                   <tr class="row">
                     <td class="cell">
                       <span>
-                        <label class="root" tabindex="0">
+                        <label class="root" show-title="true" tabindex="0">
                           <span class="box" status="false"></span>
                           <span vusion-slot-name="item"></span>
                         </label>
@@ -123,7 +123,7 @@ exports[`u-footbar.vue > Demo-与列表一起使用 1`] = `
                   <tr class="row">
                     <td class="cell">
                       <span>
-                        <label class="root" tabindex="0">
+                        <label class="root" show-title="true" tabindex="0">
                           <span class="box" status="false"></span>
                           <span vusion-slot-name="item"></span>
                         </label>
@@ -145,7 +145,7 @@ exports[`u-footbar.vue > Demo-与列表一起使用 1`] = `
                   <tr class="row">
                     <td class="cell">
                       <span>
-                        <label class="root" tabindex="0">
+                        <label class="root" show-title="true" tabindex="0">
                           <span class="box" status="false"></span>
                           <span vusion-slot-name="item"></span>
                         </label>
@@ -167,12 +167,6 @@ exports[`u-footbar.vue > Demo-与列表一起使用 1`] = `
                 </tbody>
               </table>
             </div>
-          </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
           </div>
         </div>
       </div>

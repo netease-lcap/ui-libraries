@@ -137,6 +137,7 @@ export default {
     },
     methods: {
         onTransitionAterEnter() {
+            this.$emit('opened');
             const headEl = this.$refs.head;
             const footEl = this.$refs.foot;
             if (!headEl && !footEl)

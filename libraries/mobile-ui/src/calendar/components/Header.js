@@ -3,7 +3,8 @@ import { t, bem } from '../utils';
 import Popup from '../../popup';
 import Button from '../../button';
 
-import { MonthPicker } from 'vue-month-picker';
+// import { MonthPicker } from 'vue-month-picker';
+
 
 const [createComponent] = createNamespace('calendar-header');
 

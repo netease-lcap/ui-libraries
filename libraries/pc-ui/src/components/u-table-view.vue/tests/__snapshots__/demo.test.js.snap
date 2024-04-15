@@ -51,12 +51,6 @@ exports[`u-table-view.vue > Demo-刚开始为空的情况 1`] = `
             </table>
           </div>
         </div>
-        <div class="root" direction="horizontal">
-          <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-        </div>
-        <div class="root" direction="vertical">
-          <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-        </div>
       </div>
     </div>
   </div>
@@ -130,12 +124,6 @@ exports[`u-table-view.vue > Demo-后端排序，前端分页 1`] = `
               </tbody>
             </table>
           </div>
-        </div>
-        <div class="root" direction="horizontal">
-          <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-        </div>
-        <div class="root" direction="vertical">
-          <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
         </div>
       </div>
     </div>
@@ -214,12 +202,6 @@ exports[`u-table-view.vue > Demo-普通数据表格 1`] = `
             </table>
           </div>
         </div>
-        <div class="root" direction="horizontal">
-          <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-        </div>
-        <div class="root" direction="vertical">
-          <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-        </div>
       </div>
     </div>
   </div>
@@ -269,12 +251,6 @@ exports[`u-table-view.vue > Demo-纯前端过滤 1`] = `
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="root" direction="horizontal">
-                        <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                      </div>
-                      <div class="root" direction="vertical">
-                        <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
                       </div>
                     </div>
                   </div>
@@ -444,12 +420,6 @@ exports[`u-table-view.vue > Demo-纯前端过滤 1`] = `
               </tbody>
             </table>
           </div>
-        </div>
-        <div class="root" direction="horizontal">
-          <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-        </div>
-        <div class="root" direction="vertical">
-          <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
         </div>
       </div>
     </div>
@@ -694,12 +664,6 @@ exports[`u-table-view.vue > Demo-纯数组前端分页 1`] = `
               </tbody>
             </table>
           </div>
-        </div>
-        <div class="root" direction="horizontal">
-          <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-        </div>
-        <div class="root" direction="vertical">
-          <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
         </div>
       </div>
     </div>
@@ -948,12 +912,6 @@ exports[`u-table-view.vue > Demo-纯数组前端排序 1`] = `
             </table>
           </div>
         </div>
-        <div class="root" direction="horizontal">
-          <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-        </div>
-        <div class="root" direction="vertical">
-          <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-        </div>
       </div>
     </div>
   </div>
@@ -1175,12 +1133,6 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
                 </table>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </div>
@@ -1323,12 +1275,6 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
                   </tbody>
                 </table>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
@@ -1510,12 +1456,6 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
                 </table>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </div>
@@ -1580,12 +1520,6 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
                               </div>
                             </div>
                           </div>
-                          <div class="root" direction="horizontal">
-                            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                          </div>
-                          <div class="root" direction="vertical">
-                            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                          </div>
                         </div>
                       </div>
                     </transition-stub></span>
@@ -1628,12 +1562,6 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
                   </tbody>
                 </table>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
@@ -1693,12 +1621,6 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
                               </div>
                             </div>
                           </div>
-                          <div class="root" direction="horizontal">
-                            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-                          </div>
-                          <div class="root" direction="vertical">
-                            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-                          </div>
                         </div>
                       </div>
                     </transition-stub></span>
@@ -1750,12 +1672,6 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
                   </tbody>
                 </table>
               </div>
-            </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
             </div>
           </div>
         </div>
@@ -1897,12 +1813,6 @@ exports[`u-table-view.vue > Demo-默认多行显示 1`] = `
                 </tbody>
               </table>
             </div>
-          </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
           </div>
         </div>
       </div>

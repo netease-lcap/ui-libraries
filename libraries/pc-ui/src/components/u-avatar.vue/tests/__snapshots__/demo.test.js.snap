@@ -66,7 +66,7 @@ exports[`u-avatar.vue > Demo-添加徽章 1`] = `
 exports[`u-avatar.vue > Demo-自定义图片 1`] = `
 <div>
   <div class="root">
-    <img src="/src/components/u-avatar.vue/demos/assets/music.png">
+    <img src="/src/components/u-avatar.vue/assets/music.png">
   </div> 多多
 </div>
 `;

@@ -192,12 +192,6 @@ exports[`u-table-view.vue > pageNumber 变化 1`] = `
               </table>
             </div>
           </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-          </div>
         </div>
       </div>
     </div>
@@ -449,12 +443,6 @@ exports[`u-table-view.vue > pageNumber 变化 2`] = `
               </table>
             </div>
           </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-          </div>
         </div>
       </div>
     </div>
@@ -705,12 +693,6 @@ exports[`u-table-view.vue > pageNumber 变化 3`] = `
                 </tbody>
               </table>
             </div>
-          </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
           </div>
         </div>
       </div>

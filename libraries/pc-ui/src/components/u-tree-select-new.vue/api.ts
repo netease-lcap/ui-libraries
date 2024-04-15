@@ -19,7 +19,7 @@ namespace nasl.ui {
       value: UTreeSelectNewOptions<T, V, M>['value'];
 
       @Method({
-          title: 'undefined',
+          title: '重新加载',
           description: '重新加载',
       })
       reload(): void {}
@@ -215,7 +215,7 @@ namespace nasl.ui {
       height: 'full' | 'huge' | 'large' | 'medium' | 'normal' | 'small' | 'mini' = 'normal';
 
       @Event({
-          title: 'undefined',
+          title: '改变后',
           description: '修改时触发',
       })
       onChange: (event: {

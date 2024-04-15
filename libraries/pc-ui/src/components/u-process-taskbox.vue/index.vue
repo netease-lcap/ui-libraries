@@ -156,7 +156,7 @@ export default {
     font-size: 22px;
 }
 .notice::before {
-    icon-font: url('i-material-design.vue/assets/outlined/notifications.svg');
+    /* icon-font: url('i-material-design.vue/assets/outlined/notifications.svg'); */
     font-weight: bold;
 }
 
