@@ -202,6 +202,16 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
           spread,
         };
 
+        // 在泛型里就矫正 typeKind
+        if (
+          logic.typeParams.length > 0
+          && typeAnnotation
+          && typeAnnotation.typeKind === 'reference'
+          && logic.typeParams.findIndex((t) => typeAnnotation && t.name === typeAnnotation.typeName) !== -1
+        ) {
+          typeAnnotation.typeKind = 'typeParam';
+        }
+
         if (defaultValue) {
           p.defaultValue = defaultValue;
         }
