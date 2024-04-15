@@ -165,9 +165,6 @@ importers:
       '@lcap/storybook-vue-vite':
         specifier: workspace:^*
         version: link:../../packages/storybook-vue-vite
-      '@lcap/ui-cli':
-        specifier: workspace:^1.0.0
-        version: link:../../packages/cli
       '@lcap/vite-plugin-vue2':
         specifier: workspace:^*
         version: link:../../packages/vite-plugin-vue2
@@ -491,9 +488,6 @@ importers:
       '@lcap/storybook-vue-vite':
         specifier: workspace:*
         version: link:../../packages/storybook-vue-vite
-      '@lcap/ui-cli':
-        specifier: workspace:^1.0.0
-        version: link:../../packages/cli
       '@lcap/vite-plugin-vue2':
         specifier: workspace:*
         version: link:../../packages/vite-plugin-vue2
