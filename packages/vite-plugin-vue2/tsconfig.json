@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "outDir": "lib",
+    "target": "ES2015",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "noEmit": false,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "noImplicitAny": false,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "skipLibCheck": true,
+    "baseUrl": "."
+  },
+  "include": ["src/**/*"]
+}

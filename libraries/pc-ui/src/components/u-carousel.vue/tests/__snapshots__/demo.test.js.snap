@@ -7,7 +7,7 @@ exports[`u-carousel.vue > Demo-fade 1`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style>
           <div class="body">
-            <img src="/src/components/assets/images/1.jpg">
+            <img src="/src/assets/images/1.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -15,7 +15,7 @@ exports[`u-carousel.vue > Demo-fade 1`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/2.jpg">
+            <img src="/src/assets/images/2.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -23,7 +23,7 @@ exports[`u-carousel.vue > Demo-fade 1`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/3.jpg">
+            <img src="/src/assets/images/3.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -31,7 +31,7 @@ exports[`u-carousel.vue > Demo-fade 1`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/4.jpg">
+            <img src="/src/assets/images/4.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -39,7 +39,7 @@ exports[`u-carousel.vue > Demo-fade 1`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/5.jpg">
+            <img src="/src/assets/images/5.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -116,7 +116,7 @@ exports[`u-carousel.vue > Demo-基本用法 4`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style>
           <div class="body">
-            <img src="/src/components/assets/images/1.jpg">
+            <img src="/src/assets/images/1.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -124,7 +124,7 @@ exports[`u-carousel.vue > Demo-基本用法 4`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/2.jpg">
+            <img src="/src/assets/images/2.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -132,7 +132,7 @@ exports[`u-carousel.vue > Demo-基本用法 4`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/3.jpg">
+            <img src="/src/assets/images/3.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -140,7 +140,7 @@ exports[`u-carousel.vue > Demo-基本用法 4`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/4.jpg">
+            <img src="/src/assets/images/4.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -148,7 +148,7 @@ exports[`u-carousel.vue > Demo-基本用法 4`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/5.jpg">
+            <img src="/src/assets/images/5.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -202,7 +202,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 1`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style>
           <div class="body">
-            <img src="/src/components/assets/images/1.jpg">
+            <img src="/src/assets/images/1.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -210,7 +210,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 1`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/2.jpg">
+            <img src="/src/assets/images/2.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -218,7 +218,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 1`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/3.jpg">
+            <img src="/src/assets/images/3.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -226,7 +226,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 1`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/4.jpg">
+            <img src="/src/assets/images/4.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -234,7 +234,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 1`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/5.jpg">
+            <img src="/src/assets/images/5.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -260,7 +260,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 2`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style>
           <div class="body">
-            <img src="/src/components/assets/images/1.jpg">
+            <img src="/src/assets/images/1.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -268,7 +268,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 2`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/2.jpg">
+            <img src="/src/assets/images/2.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -276,7 +276,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 2`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/3.jpg">
+            <img src="/src/assets/images/3.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -284,7 +284,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 2`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/4.jpg">
+            <img src="/src/assets/images/4.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -292,7 +292,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 2`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/5.jpg">
+            <img src="/src/assets/images/5.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -318,7 +318,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 3`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style>
           <div class="body">
-            <img src="/src/components/assets/images/1.jpg">
+            <img src="/src/assets/images/1.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -326,7 +326,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 3`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/2.jpg">
+            <img src="/src/assets/images/2.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -334,7 +334,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 3`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/3.jpg">
+            <img src="/src/assets/images/3.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -342,7 +342,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 3`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/4.jpg">
+            <img src="/src/assets/images/4.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>
@@ -350,7 +350,7 @@ exports[`u-carousel.vue > Demo-自动播放与循环 3`] = `
       <transition-stub name="fade">
         <div animation="fade" class="root" style="display: none;">
           <div class="body">
-            <img src="/src/components/assets/images/5.jpg">
+            <img src="/src/assets/images/5.jpg">
             <span vusion-slot-name="item"></span>
           </div>
         </div>

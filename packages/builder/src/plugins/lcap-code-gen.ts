@@ -7,6 +7,7 @@ import {
   virtualThemeComponentStoriesFileId,
   virtualThemePagePreviewFileId,
   virtualThemeEntryFileId,
+  virtualThemePreviewWrapFileId,
 } from '../constants/virtual-file-names';
 import { themePath } from '../constants/input-paths';
 
@@ -99,6 +100,36 @@ function genThemeEntryCode(framework) {
   ].join('\n\n');
 }
 
+function genThemePagePreviewWrapCode(componentFolder) {
+  let filePath = '';
+  const index = [
+    '.js',
+    '.jsx',
+    '.tsx',
+  ].findIndex((ext) => {
+    filePath = path.resolve(componentFolder, `../index${ext}`);
+
+    if (fs.existsSync(filePath)) {
+      return true;
+    }
+
+    return false;
+  });
+
+  if (index === -1) {
+    return [
+      'import React from \'react\'',
+      '',
+      'export const renderAppPreview = (app) => app;',
+      'export const ComponentWrap = (props) => React.createElement(\'div\', { onClick: props.onClick, id: props.id }, props.demo);',
+    ].join('\n');
+  }
+
+  return [
+    `export { renderAppPreview, ComponentWrap } from '${filePath}';`,
+  ].join('\n');
+}
+
 export default (options: LcapCodeGenOption = {}) => {
   const cwd = process.cwd();
   let themeId;
@@ -128,6 +159,10 @@ export default (options: LcapCodeGenOption = {}) => {
         return virtualThemeEntryFileId;
       }
 
+      if (source === virtualThemePreviewWrapFileId) {
+        return virtualThemePreviewWrapFileId;
+      }
+
       if (source === themePath) {
         return themeId;
       }
@@ -148,6 +183,10 @@ export default (options: LcapCodeGenOption = {}) => {
 
       if (id === virtualThemePagePreviewFileId) {
         return genThemePagePreviewMapCode(componentFolder, options.previewPages);
+      }
+
+      if (id === virtualThemePreviewWrapFileId) {
+        return genThemePagePreviewWrapCode(componentFolder);
       }
 
       if (id === virtualThemeEntryFileId) {
