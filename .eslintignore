@@ -4,5 +4,7 @@ dist
 node_modules
 demo
 *api.ts
+**/libs/*.js
+**/libs/*.ts
 scripts/*.mjs
 **/scripts/*.js

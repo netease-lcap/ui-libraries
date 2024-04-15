@@ -1,4 +1,3 @@
-/** @type { import('@storybook/vue-vite').StorybookConfig } */
 import Config from '../lcap-ui.config.js';
 
 const config = {
@@ -10,11 +9,10 @@ const config = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-onboarding",
-    "@storybook/addon-interactions",
-    "@storybook/addon-storyshots",
+    "@storybook/addon-interactions"
   ],
   framework: {
-    name: "@storybook/vue-vite",
+    name: "@lcap/storybook-vue-vite",
     options: {
       builder: {
         viteConfigPath: './vite.config.js',

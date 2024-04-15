@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useMemo, useState, useEffect } from 'react';
+import { ComponentWrap } from 'virtual:lcap-theme-preview-wrap.js';
 import styles from './index.module.css';
 
 export default (stories) => {
@@ -77,20 +78,14 @@ export default (stories) => {
       <div className={styles.componentPreview}>
         {
           visibleStories.map((c) => (
-            // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
-            <div
-              id={c.name}
-              className={[styles.componentCard, 'cw-nasl', 'cw-card', activeName === c.name ? styles.active : ''].join(' ')}
+            <ComponentWrap
+              name={c.name}
+              title={c.title}
               key={c.name}
+              actived={c.name === activeName}
+              demo={<c.demo />}
               onClick={() => handleClick(c.name)}
-            >
-              <div className={styles.componentCardTitle}>
-                {c.title || c.name}
-              </div>
-              <div className={styles.componentCardBody}>
-                <c.demo />
-              </div>
-            </div>
+            />
           ))
         }
       </div>
