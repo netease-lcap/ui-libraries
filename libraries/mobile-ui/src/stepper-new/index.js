@@ -384,7 +384,7 @@ export default createComponent({
   },
 
   render() {
-    if (this.isPreview && !this.inDesigner()) {
+    if (this.isPreview) {
       return (
         <div class={bem([this.theme])}>
           {this.showUnit && this.unit.type === 'prefix' && <div class={bem('unit', { prefix: true })}>{this.unit?.value}</div>}

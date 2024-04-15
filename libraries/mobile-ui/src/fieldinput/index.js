@@ -310,8 +310,10 @@ export default createComponent({
   render() {
     const inputAlign = this.vanField?.getProp('inputAlign');
 
-    if (this.isPreview && !this.inDesigner()) {
+    if (this.isPreview) {
       const isPassword = this.inputstyle === 'password' || this.type === 'password';
+      const value = isPassword ? this.currentValue.replace(/./g, '*') : this.currentValue;
+
       return (
         <div
           class={bem('newwrap', {
@@ -325,7 +327,7 @@ export default createComponent({
               'custom',
             ])}
           >
-            {isPassword ? this.currentValue.replace(/./g, '*') : this.currentValue}
+            {value || '--'}
           </span>
         </div>
       );
