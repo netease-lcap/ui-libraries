@@ -2,7 +2,9 @@
 <div :class="$style.root" :readonly="readonly" :readonly-mode="readonlyMode" :disabled="disabled">
     <u-loading v-if="loading" size="small"></u-loading>
     <template v-else-if="currentDataSource">
-        <u-tree-view-node-new v-if="dataSource"
+        <u-tree-view-node-new
+            :renderOptimize="renderOptimize"
+            v-if="dataSource"
             v-for="(node, index) in currentDataSource.data"
             :text="$at2(node, field || textField)"
             :value="$at2(node, valueField)"
@@ -75,6 +77,7 @@ export default {
         filterFields: { type: Array, default: () => ['text'] },
         draggable: { type: Boolean, default: false },
         subBackground: { type: Boolean, default: false },
+        renderOptimize: { type: Boolean, default: false },
     },
     data() {
         return {
@@ -124,7 +127,6 @@ export default {
         this.currentDataSource = this.normalizeDataSource(this.dataSource || this.data);
         if (this.currentDataSource && this.currentDataSource.load && this.initialLoad)
             this.load();
-        // console.log('Data', this.currentDataSource);
     },
     mounted() {
         // Must trigger `value` watcher at mounted hook.

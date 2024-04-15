@@ -9,6 +9,7 @@ import {
 } from '../utils/format/number';
 import { isNaN } from '../utils/validate/number';
 import { FieldMixin } from '../mixins/field';
+import PreviewMixin from '../mixins/preview';
 
 const [createComponent, bem] = createNamespace('stepper-new');
 
@@ -22,7 +23,7 @@ function equal(value1, value2) {
 const isNil = (val) => val === null || val === undefined || val === '';
 
 export default createComponent({
-  mixins: [FieldMixin],
+  mixins: [FieldMixin, PreviewMixin],
 
   props: {
     value: {
@@ -384,6 +385,22 @@ export default createComponent({
   },
 
   render() {
+    if (this.isPreview && !this.inDesigner()) {
+      return (
+        <div class={bem([this.theme])}>
+          {this.showUnit && this.unit.type === 'prefix' && <div class={bem('unit', { prefix: true })}>{this.unit?.value}</div>}
+          <input
+            ref="input"
+            class={bem('input')}
+            style={this.inputStyle}
+            readonly
+            value={this.formattedValue}
+          />
+          {this.showUnit && this.unit.type === 'suffix' && <div class={bem('unit', { suffix: true })}>{this.unit?.value}</div>}
+        </div>
+      );
+    }
+
     const createListeners = (type) => ({
       on: {
         click: (e) => {

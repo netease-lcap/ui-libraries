@@ -1,9 +1,9 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`renders demo correctly 1`] = `
 <div>
   <div>
-    <div class="van-process-info">
+    <div vusion-disabled-duplicate="true" vusion-disabled-copy="true" class="van-process-info">
       <div class="van-process-info__card">
         <div class="van-process-info__card-line">
           <div class="van-process-info__card-label">发起人</div>
@@ -15,7 +15,7 @@ exports[`renders demo correctly 1`] = `
         </div>
         <div class="van-process-info__card-line">
           <div class="van-process-info__card-label">当前状态</div>
-          <div class="van-process-info__card-content">审批通过</div>
+          <div class="van-process-info__card-content">审批中</div>
         </div>
         <div class="van-process-info__card-line">
           <div class="van-process-info__card-label">当前节点</div>

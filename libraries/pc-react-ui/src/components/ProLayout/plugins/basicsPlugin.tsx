@@ -1,0 +1,157 @@
+import React from 'react';
+import _ from 'lodash';
+import classnames from 'classnames';
+
+// import { theme, Layout } from 'antd';
+// import { useNavigate, Link } from 'react-router-dom';
+import F from 'futil';
+
+import { ConfigProvider } from 'antd';
+import { useControllableValue } from 'ahooks';
+import { Icon, MenuItem } from '@/index';
+import { $deletePropsList } from '@/plugins/constants';
+import style from '../index.module.less';
+import { RouterContext } from '@/components/Router';
+
+// const { Header, Content, Footer } = Layout;
+export function useHandleStyle(props) {
+  const className = props.get('className');
+  return {
+    className: classnames(style.proLayout, className),
+  };
+}
+
+export function useHandleMenuOpenKey(props) {
+  const menuProps = props.get('menuProps');
+  const { useLocation } = React.useContext(RouterContext);
+  const location = useLocation?.();
+  const ref = props.get('ref');
+  const openKeysProps = props.get('oepnKeys');
+  const defaultOpenKeys = props.get('defaultOpenKeys');
+  const onOpenChangeProps = props.get('onOpenChange');
+  const [openKeys, setValue] = useControllableValue(_.filterUnderfinedValue({ value: openKeysProps, defaultValue: defaultOpenKeys, onChange: onOpenChangeProps }));
+  React.useEffect(() => {
+    const path = location?.pathname.split('/');
+    setValue(path);
+  }, [location?.pathname]);
+  const selfRef = React.useMemo(() => ({
+    ...ref,
+    openKeys,
+    setValue: (el) => {
+      const value = F.toggleElement(el, React.Children.toArray(openKeys));
+      setValue(value);
+    },
+  }), [setValue, openKeys, ref]);
+  return {
+    menuProps: {
+      ...menuProps,
+      autoClose: false,
+      onOpenChange: (el) => {
+        setValue(el);
+      },
+      className: 'cw-nasl',
+    },
+    openKeys: React.Children.toArray(openKeys),
+    ref: selfRef,
+    onCollapse: setValue,
+  };
+}
+export function useHandleSelectKey(props) {
+  const menuProps = props.get('menuProps');
+  const { useLocation } = React.useContext(RouterContext);
+  const location = useLocation?.();
+  // const ref = props.get('ref');
+  const selectedKeysProps = props.get('selectedKeys');
+  const defaultOpenKeysProps = props.get('defaultSelectedKeys');
+  const onSelectProps = props.get('onSelect');
+  const [selectedKeys, setSelectedKeys] = useControllableValue(_.filterUnderfinedValue({ value: selectedKeysProps, defaultValue: defaultOpenKeysProps, onChange: onSelectProps }));
+  React.useEffect(() => {
+    const path = location?.pathname.split('/');
+    setSelectedKeys(path);
+  }, [location?.pathname]);
+  return {
+    menuProps: {
+      ...menuProps,
+      onSelect: setSelectedKeys,
+    },
+    selectedKeys: React.Children.toArray(selectedKeys),
+  };
+}
+export function useHandleMenuSlot(props) {
+  const { useNavigate, useLocation } = React.useContext(RouterContext);
+  const navigate = useNavigate?.();
+  const location = useLocation?.();
+  const fragment = props.get('menuSlot');
+  const menuProps = props.get('menuProps');
+  const menuSlot = React.Children.toArray(_.get(fragment, 'props.children', []));
+  function childToJson(children) {
+    return React.Children.map(children, (child) => {
+      if (child?.type === MenuItem) {
+        const selfChildren = _.isNil(child.props.children) ? {} : { children: childToJson(child.props.children) };
+        const childrenProps = _.isEmpty(selfChildren.children) ? {} : selfChildren;
+        const onClickPorps = child.props.onClick;
+        const icon = _.isNil(child.props.icon) ? {} : { icon: <Icon name={child.props.icon} /> };
+        const label = child.props.labelIsSlot ? child.props.labelSlot : child.props.label;
+        return {
+          key: child.props?.path,
+          ...child.props,
+          ...childrenProps,
+          ...icon,
+          label,
+          onClick: _.wrap(onClickPorps, (fn, arg) => {
+            _.attempt(fn, arg);
+            if (_.isValidLink(arg.key)) {
+              window.location.href = arg.key;
+              return;
+            }
+            navigate(arg.key);
+            // use
+            // const event = new CustomEvent('pageNavigation', {
+            //   detail: {
+            //     url: arg.key,
+            //   },
+            // });
+            // window.dispatchEvent(event);
+          }),
+        };
+      }
+      return undefined;
+    }).filter(Boolean);
+  }
+  const items = childToJson(menuSlot);
+
+  return {
+    menuProps: {
+      ...menuProps,
+      items,
+    },
+    location,
+  };
+}
+
+export function useHandleAvatar(props) {
+  const avatarSrcProps = props.get('avatarSrc');
+  const logoProps = props.get('logo');
+  const titleProps = props.get('title');
+  const deletePropsList = props.get($deletePropsList).concat(['avatarSize', 'avatarRender', 'avatarTitle', 'avatarSrc']);
+  const title = _.isNil(titleProps) ? '' : titleProps;
+  const logo = _.isNil(logoProps) ? null : logoProps;
+  const avatarTitleProps = props.get('avatarTitle');
+  const avatarSizeProps = props.get('avatarSize');
+  const AvatarRenderProps = props.get('avatarRender');
+  const avatarRender = React.isValidElement(AvatarRenderProps) ? (_props, dom) => React.cloneElement(AvatarRenderProps, { children: dom }) : undefined;
+  return {
+    [$deletePropsList]: deletePropsList,
+    logo,
+    title,
+    avatarProps: _.filterUnderfinedValue({
+      src: avatarSrcProps,
+      size: avatarSizeProps,
+      title: avatarTitleProps,
+      render: avatarRender,
+    }),
+    menuDataRender: (menuData) => {
+      return [{ name: 2, label: 1, path: '/a' }];
+    },
+  };
+}

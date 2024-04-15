@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-shadow */
@@ -8,9 +9,11 @@ import { Map } from 'immutable';
 import React from 'react';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-// import { useWhyDidYouUpdate } from 'ahooks';
-import type { pluginType } from '@/plugins/type';
+import { withErrorBoundary } from 'react-error-boundary';
+import zhCN from 'antd/locale/zh_CN';
+import { ConfigProvider } from 'antd';
 import { $deletePropsList } from '@/plugins/constants';
+import '@/utils/index';
 
 export class Plugin {
   plugin: any[] = [];
@@ -59,48 +62,76 @@ export class Plugin {
   };
 }
 
-export function HocBaseComponents(
-  BaseComponent,
-  {
-    props, plugin, ref,
-  },
-) {
+export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
+  const { BaseComponent, props, plugin } = myProps;
+  const defaultRef = React.useRef({});
+  ref = ref || defaultRef;
+  const baseRef = React.useRef({});
   const pluginHooks = plugin.getPluginMethod();
   const mapProps = plugin.getMapProps();
-
+  // function handleMutableProps(ref) {
+  //   const obj = { ref, render: BaseComponent, children: props.children };
+  //   return {
+  //     setState: (state) => _.assign(obj, state),
+  //     getState: (state) => obj[state],
+  //     getObj: () => obj,
+  //   };
+  // }
+  // const mutableProps = handleMutableProps(ref);
   const ImmutableProps = Map(props)
     .reduce((result, value, key) => result.set(mapProps.get(key, key), value), Map())
     .set('render', BaseComponent)
-    .set('ref', ref)
-    .set('$deletePropsList', [])
-    .set($deletePropsList, [1, 2]);
-
+    // .set('mutableProps', mutableProps)
+    .set('ref', {})
+    .set($deletePropsList, []);
   const expandProps = pluginHooks.reduce(
-    (expandProps, handleFun) => expandProps.merge(_.attempt(handleFun, expandProps)),
+    (expandProps, handleFun) => expandProps.merge(_.attempt(handleFun, expandProps, ref)),
     ImmutableProps,
   );
   const Component = expandProps.get('render');
   const jsProps = expandProps.toJS();
-
+  const componentRef = jsProps.ref;
   const excludeProps = _.omit(jsProps, _.concat(
     _.keys(plugin.getMapProps().toJS()),
-    expandProps.get('$deletePropsList', []),
-    ['$deletePropsList', 'render', 'usePlugin'],
+    expandProps.get($deletePropsList, []),
+    [$deletePropsList, 'render', 'usePlugin', 'mutableProps', $deletePropsList, 'ref'],
   ));
-
+  React.useImperativeHandle(ref, () => {
+    return {
+      ...componentRef,
+      ...baseRef.current,
+    };
+  }, [componentRef, baseRef]);
+  // mutableProps.setState({ ref });
   return (
-    <Component
-      {...excludeProps}
-    />
+    <ConfigProvider locale={zhCN}>
+      <Component
+        {...excludeProps}
+        ref={baseRef}
+      // {...refObj}
+      >
+        {/* 修复radioPro 子组件透传的问题 */}
+        {/* {React.cloneElement(excludeProps.children)} */}
+        {/* {React.createElement(excludeProps.children)} */}
+        {/* {props.children && React.cloneElement(props.children)} */}
+        {props.children}
+      </Component>
+    </ConfigProvider>
   );
-}
-export function registerComponet<T, U extends pluginType<T>>(
+});
+const ComponentWithErrorBoundary = withErrorBoundary(HocBaseComponents, {
+  fallback: <div>Something went wrong</div>,
+  onError(error, info) {
+    console.log(error, info, '组件出错啦----');
+  },
+});
+export function registerComponet<T, U>(
   Component: React.ElementType,
   pluginOption,
 ) {
   return React.forwardRef<T, U>((props, ref) => {
     const [plugin, setPlugin] = React.useState(new Plugin(pluginOption));
-
+    // console.count(pluginOption.displayName);
     // React.useEffect(() => {
     //   if (props.appType === 'lowCode') {
     //     import('http://localhost:3030/app.js').then((_) => {
@@ -110,13 +141,11 @@ export function registerComponet<T, U extends pluginType<T>>(
     //   }
     // }, [props.appType]);
 
-    React.useEffect(() => {
-      plugin.setPlugin(props.usePlugin);
-      setPlugin({ ...(plugin as any) });
-    }, [props.usePlugin]);
+    // React.useEffect(() => {
+    //   plugin.setPlugin(props.usePlugin);
+    //   setPlugin({ ...(plugin as any) });
+    // }, [props.usePlugin]);
 
-    return HocBaseComponents(Component, {
-      props, plugin, ref,
-    });
+    return <ComponentWithErrorBoundary BaseComponent={Component} props={props} plugin={plugin} ref={ref} />;
   });
 }

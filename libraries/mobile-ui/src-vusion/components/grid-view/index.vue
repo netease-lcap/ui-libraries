@@ -342,7 +342,12 @@ export default {
   },
   methods: {
     pwd() {
-      if (this.iffall) {
+      // 此方法只在设计器中使用，增加节流控制防止频繁调用
+      if (this.iffall && !this.resizing) {
+        this.resizing = true;
+        setTimeout(() => {
+          this.resizing = false;
+        }, 500);
         this.init();
       }
     },

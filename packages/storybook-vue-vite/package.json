@@ -1,0 +1,62 @@
+{
+  "name": "@lcap/storybook-vue-vite",
+  "version": "7.6.17",
+  "description": "Storybook for Vue2 and Vite: Develop Vue2 Components in isolation with Hot Reloading.",
+  "keywords": [
+    "storybook"
+  ],
+  "homepage": "https://github.com/storybookjs/storybook/tree/next/code/frameworks/vue-vite",
+  "bugs": {
+    "url": "https://github.com/storybookjs/storybook/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybookjs/storybook.git",
+    "directory": "code/frameworks/vue-vite"
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/storybook"
+  },
+  "license": "MIT",
+  "main": "libs/index.js",
+  "types": "libs/index.d.ts",
+  "files": [
+    "libs/**/*",
+    "README.md",
+    "*.js",
+    "*.d.ts",
+    "!src/**/*"
+  ],
+  "scripts": {
+    "build": "echo \"no build config\""
+  },
+  "dependencies": {
+    "@storybook/builder-vite": "7.6.17",
+    "@storybook/core-common": "7.6.17",
+    "@storybook/core-server": "7.6.17",
+    "@storybook/vue": "7.6.17",
+    "magic-string": "^0.30.0",
+    "vue-docgen-api": "^4.40.0"
+  },
+  "devDependencies": {
+    "vue": "2.6.12"
+  },
+  "peerDependencies": {
+    "vite": "^3.0.0 || ^4.0.0 || ^5.0.0",
+    "vue": "^2.6.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bundler": {
+    "entries": [
+      "./src/index.ts",
+      "./src/preset.ts"
+    ],
+    "platform": "node"
+  }
+}

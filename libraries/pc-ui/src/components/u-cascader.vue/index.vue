@@ -7,8 +7,10 @@
         @keydown.esc.stop="close()"
         @keydown.enter="$refs.popper.currentOpened ? onEnter() : open()"
         :disabled="disabled"
-        :readonly="readonly">
-        <u-input :class="$style.input" :opened="currentOpened"
+        :readonly="readonly"
+        :preview="preview">
+        <span v-if="preview">{{ currentValue }}</span>
+        <u-input v-if="!preview" :class="$style.input" :opened="currentOpened"
             :placeholder="placeholder" :readonly="!filterable || readonly"
             :value="currentValue" :disabled="disabled"
             @focus="focus" @blur="blur"
@@ -65,6 +67,7 @@ export default {
         clearable: { type: Boolean, default: false },
         showFinalValue: { type: Boolean, default: false },
         readonly: { type: Boolean, default: false },
+        preview: { type: Boolean, default: false },
         disabled: { type: Boolean, default: false },
         lazy: { type: Boolean, default: false },
         lazyLoad: { type: Function, default: () => {} },

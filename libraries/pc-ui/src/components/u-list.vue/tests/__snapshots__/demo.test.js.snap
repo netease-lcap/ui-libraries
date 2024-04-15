@@ -12,7 +12,6 @@ exports[`u-list.vue > Demo-列表前缀 1`] = `
           <li class="root">List Item 4</li>
           <li class="root">List Item 5</li>
         </ul>
-        <!---->
       </div>
       <div class="root" vusion-slot-name="default">
         <ul class="root" style="list-style-type: circle;">
@@ -22,7 +21,6 @@ exports[`u-list.vue > Demo-列表前缀 1`] = `
           <li class="root">List Item 4</li>
           <li class="root">List Item 5</li>
         </ul>
-        <!---->
       </div>
       <div class="root" vusion-slot-name="default">
         <ul class="root" style="list-style-type: decimal;">
@@ -32,7 +30,6 @@ exports[`u-list.vue > Demo-列表前缀 1`] = `
           <li class="root">List Item 4</li>
           <li class="root">List Item 5</li>
         </ul>
-        <!---->
       </div>
     </div>
   </div>

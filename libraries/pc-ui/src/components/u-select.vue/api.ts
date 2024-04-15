@@ -341,10 +341,10 @@ namespace nasl.ui {
             docDescription: '支持添加前缀图标，如搜索图标',
             setter: {
                 concept: 'EnumSelectSetter',
-                options: [{ title: '搜索' }],
+                options: [{ title: '搜索' }, { title: '暂无' }],
             },
         })
-        prefix: 'search';
+        prefix: 'search' | '' = '';
 
         @Prop({
             group: '主要属性',
@@ -352,10 +352,10 @@ namespace nasl.ui {
             docDescription: '支持添加后缀图标，如搜索图标',
             setter: {
                 concept: 'EnumSelectSetter',
-                options: [{ title: '搜索' }],
+                options: [{ title: '搜索' }, { title: '暂无' }],
             },
         })
-        suffix: 'search';
+        suffix: 'search' | '' = '';
 
         @Prop({
             group: '主要属性',

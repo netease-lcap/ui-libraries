@@ -116,7 +116,7 @@ export default createComponent({
       }
 
       try {
-        const res = await this.$processV2.getTaskOperationPermissions({
+        const res = await this.$processV2?.getTaskOperationPermissions({
           body: {
             taskId,
           },
@@ -128,13 +128,17 @@ export default createComponent({
       }
     },
 
-    async getTransferUserList(taskId) {
+    async getUserList(taskId, item) {
       if (this.inDesigner() || this.isDev()) {
         return mockData.allTransferUserList;
       }
 
       try {
-        const res = await this.$processV2.getUsersForReassign({
+        const map = {
+          reassign: 'getUsersForReassign',
+          addSign: 'getUsersForAddSign'
+        };
+        const res = await this.$processV2?.[map[item.name]]({
           body: {
             taskId,
           },
@@ -146,8 +150,25 @@ export default createComponent({
         return [];
       }
     },
-
+    /**
+     * 加签
+     */
+    async addSignOperator(item) {
+      if (this.$processV2) {
+        await this.$processV2.addSignTask({
+          body: {
+            taskId: this.taskId,
+            userForAddSign: this.dialog.reassign
+          },
+        });
+        this.refresh();
+      }
+    },
     async submit(item) {
+      if (item.name === 'addSign') {
+        this.addSignOperator(item);
+        return;
+      }
       const body = {
         taskId: this.taskId,
       };
@@ -170,7 +191,7 @@ export default createComponent({
       const operate = `${item.name}Task`;
 
       try {
-        await this.$processV2.setTaskInstance({
+        await this.$processV2?.setTaskInstance({
           path: {
             operate,
           },
@@ -202,7 +223,7 @@ export default createComponent({
       }
 
       // 需要弹出框的情况
-      if (['approve', 'reject', 'revert', 'withdraw', 'reassign'].includes(name)) {
+      if (['approve', 'reject', 'revert', 'withdraw', 'reassign', 'addSign'].includes(name)) {
         this.dialog = {
           item,
         };
@@ -340,7 +361,7 @@ export default createComponent({
         >
           <div class={bem('dialog')}>
             <Form ref="form">
-              {['reassign'].includes(this.dialog.item?.name) && (
+              {['reassign', 'addSign'].includes(this.dialog.item?.name) && (
                 <Field
                   border={false}
                   rules={[
@@ -358,7 +379,7 @@ export default createComponent({
                         valueField="userId"
                         textField="userName"
                         class={bem('dialog-picker')}
-                        dataSource={() => this.getTransferUserList(this.taskId)}
+                        dataSource={() => this.getUserList(this.taskId, this.dialog.item)}
                         onConfirm={this.onTransferPickerConfirm}
                         placeholder="请选择转交人"
                         title=""

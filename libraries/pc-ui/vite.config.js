@@ -1,15 +1,10 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import path from 'path';
-import vue2 from '@vitejs/plugin-vue2';
-import vue2jsx from '@vitejs/plugin-vue2-jsx';
+import { createVuePlugin as vue2 } from '@lcap/vite-plugin-vue2';
+import { createGenScopedName, lcapPlugin } from '@lcap/builder';
 import autoprefixer from 'autoprefixer';
-import { getHashDigest } from 'loader-utils';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const VueTplCompiler = require('./vue-template-compiler');
-
-VueTplCompiler.parse = VueTplCompiler.parseComponent;
 // 设置测试运行的时区
 process.env.TZ = 'Asia/Shanghai';
 
@@ -18,18 +13,22 @@ export default defineConfig(({ command }) => {
   return {
     plugins: [
       vue2({
-        template: {
-          compiler: VueTplCompiler,
+        jsx: true,
+        jsxOptions: {
+          vModel: true,
+          functional: false,
+          injectH: true,
+          vOn: true,
+          compositionAPI: false,
         },
       }),
-      vue2jsx({
-        include: /.(jsx|tsx)$/,
-        babelPlugins: ['@babel/plugin-proposal-optional-chaining', '@babel/plugin-proposal-nullish-coalescing-operator'],
-        vModel: true,
-        functional: false,
-        injectH: true,
-        vOn: true,
-        compositionAPI: false,
+      lcapPlugin({
+        framework: 'vue2',
+        i18n: {
+          'zh-CN': './src/locale/lang/zh-CN.json',
+          'en-US': './src/locale/lang/en-US.json',
+          ja: './src/locale/lang/ja.json',
+        },
       }),
     ],
     resolve: {
@@ -50,28 +49,7 @@ export default defineConfig(({ command }) => {
     },
     css: {
       modules: {
-        generateScopedName: (name, filename) => {
-          const rootPath = path.resolve(__dirname, './src');
-          const request = path.relative(rootPath, filename.replace(/\.vue[\\/].*$/, ''));
-          const tmpPath = filename
-            .substring(0, filename.indexOf('?'))
-            .replace(/\.vue[\\/]/g, '_')
-            .replace(/\.(vue|css)$/g, '')
-            .replace(/_(module|index)$/, '');
-          const vueName = path.basename(tmpPath);
-          const content = ['CloudUI', request].join('+');
-          const hash = getHashDigest(content, 'md5', 'base64', 8);
-          let scopedName = vueName;
-
-          if (name !== 'root') {
-            scopedName = `${scopedName}_${name}`;
-          }
-
-          // eslint-disable-next-line prefer-regex-literals
-          scopedName = `${scopedName}__${hash}`.replace(new RegExp('[^a-zA-Z0-9\\-_\u00A0-\uFFFF]', 'g'), '-').replace(/^((-?[0-9])|--)/, '_$1');
-
-          return scopedName;
-        },
+        generateScopedName: createGenScopedName('CloudUI', './src'),
       },
       postcss: {
         plugins: [
@@ -88,7 +66,7 @@ export default defineConfig(({ command }) => {
     },
     build: {
       cssCodeSplit: false,
-      target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
+      target: ['es2020', 'edge88', 'firefox78', 'chrome56', 'safari14'],
       lib: {
         entry: 'src/index',
         name: 'CloudUI',
@@ -110,6 +88,7 @@ export default defineConfig(({ command }) => {
             'vue-router': 'VueRouter',
             'vue-i18n': 'VueI18n',
           },
+          interop: 'compat',
           assetFileNames: (assetInfo) => {
             if (assetInfo.name === 'style.css') {
               return 'index.css';

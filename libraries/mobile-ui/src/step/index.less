@@ -120,15 +120,15 @@
     }
   }
 
-  &:last-child {
-    .van-step__line {
-      width: 0;
+  &--vertical&--border {
+    &:not(:last-child)::after {
+      border-bottom-width: 1px;
     }
   }
 
-  &--border {
-    &:not(:last-child)::after {
-      border-bottom-width: 1px;
+  &:last-child {
+    .van-step__line {
+      width: 0;
     }
   }
 

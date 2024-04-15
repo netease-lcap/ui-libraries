@@ -10,9 +10,7 @@ exports[`u-dynamic-cards.vue > Demo-Mini 自定义 1`] = `
       <div class="textWrap">
         <span class="error" style="display: none;">false</span>
         <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           展开
-          <!---->
         </a>
       </div>
     </div>
@@ -20,73 +18,46 @@ exports[`u-dynamic-cards.vue > Demo-Mini 自定义 1`] = `
       <div class="actions">
         <div class="root" direction="horizontal" type vusion-slot-name="default">
           <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-            <!---->
             删除
-            <!---->
           </a>
           <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-            <!---->
             收起
-            <!---->
           </a>
-          <!---->
-          <!---->
         </div>
       </div>
       <div class="root" direction="horizontal" type vusion-slot-name="default">
         <div class="root" color size="huge normal">
           <span class="baseline">b</span>
           <span class="placeholder"></span>
-          <!---->
           <input class="input" size="huge normal" type="text">
-          <!---->
         </div>
         <div class="root" size="huge normal" tabindex="0">
           <span class="baseline">b</span>
           <span class="placeholder" style="display: none;">请选择</span>
-          <!---->
           <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-            <!---->
-            <!---->
             abc
-            <!---->
           </div>
-          <!---->
-          <!---->
           <transition-stub class="popper" name="fade" style="width: 100%;">
             <div class="root" style="display: none;">
               <div class="wrap">
-                <!---->
                 <div class="root" selected="selected" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   abc
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   def
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   zzz
-                  <!---->
                 </div>
-                <!---->
               </div>
-              <!---->
             </div>
           </transition-stub>
         </div>
         <div class="root" size="huge normal">
           <span class="baseline">b</span>
           <span class="placeholder"></span>
-          <!---->
           <input class="input" size="huge normal" type="text">
-          <!---->
         </div>
-        <!---->
-        <!---->
       </div>
     </div>
   </div>
@@ -98,9 +69,7 @@ exports[`u-dynamic-cards.vue > Demo-Mini 自定义 1`] = `
       <div class="textWrap">
         <span class="error" style="display: none;">false</span>
         <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           展开
-          <!---->
         </a>
       </div>
     </div>
@@ -108,83 +77,52 @@ exports[`u-dynamic-cards.vue > Demo-Mini 自定义 1`] = `
       <div class="actions">
         <div class="root" direction="horizontal" type vusion-slot-name="default">
           <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-            <!---->
             删除
-            <!---->
           </a>
           <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-            <!---->
             收起
-            <!---->
           </a>
-          <!---->
-          <!---->
         </div>
       </div>
       <div class="root" direction="horizontal" type vusion-slot-name="default">
         <div class="root" color size="huge normal">
           <span class="baseline">b</span>
           <span class="placeholder"></span>
-          <!---->
           <input class="input" size="huge normal" type="text">
-          <!---->
         </div>
         <div class="root" size="huge normal" tabindex="0">
           <span class="baseline">b</span>
           <span class="placeholder" style="display: none;">请选择</span>
-          <!---->
           <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-            <!---->
-            <!---->
             abc
-            <!---->
           </div>
-          <!---->
-          <!---->
           <transition-stub class="popper" name="fade" style="width: 100%;">
             <div class="root" style="display: none;">
               <div class="wrap">
-                <!---->
                 <div class="root" selected="selected" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   abc
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   def
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   zzz
-                  <!---->
                 </div>
-                <!---->
               </div>
-              <!---->
             </div>
           </transition-stub>
         </div>
         <div class="root" size="huge normal">
           <span class="baseline">b</span>
           <span class="placeholder"></span>
-          <!---->
           <input class="input" size="huge normal" type="text">
-          <!---->
         </div>
-        <!---->
-        <!---->
       </div>
     </div>
   </div>
   <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-    <!---->
     添加
-    <!---->
   </a>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -196,9 +134,7 @@ exports[`u-dynamic-cards.vue > Demo-基本用法 1`] = `
       <div class="textWrap">
         <span class="error" style="display: none;">false</span>
         <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           展开
-          <!---->
         </a>
       </div>
     </div>
@@ -206,73 +142,46 @@ exports[`u-dynamic-cards.vue > Demo-基本用法 1`] = `
       <div class="actions">
         <div class="root" direction="horizontal" type vusion-slot-name="default">
           <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-            <!---->
             删除
-            <!---->
           </a>
           <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-            <!---->
             收起
-            <!---->
           </a>
-          <!---->
-          <!---->
         </div>
       </div>
       <div class="root" direction="horizontal" type vusion-slot-name="default">
         <div class="root" color size="huge normal">
           <span class="baseline">b</span>
           <span class="placeholder"></span>
-          <!---->
           <input class="input" size="huge normal" type="text">
-          <!---->
         </div>
         <div class="root" size="huge normal" tabindex="0">
           <span class="baseline">b</span>
           <span class="placeholder" style="display: none;">请选择</span>
-          <!---->
           <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-            <!---->
-            <!---->
             abc
-            <!---->
           </div>
-          <!---->
-          <!---->
           <transition-stub class="popper" name="fade" style="width: 100%;">
             <div class="root" style="display: none;">
               <div class="wrap">
-                <!---->
                 <div class="root" selected="selected" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   abc
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   def
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   zzz
-                  <!---->
                 </div>
-                <!---->
               </div>
-              <!---->
             </div>
           </transition-stub>
         </div>
         <div class="root" size="huge normal">
           <span class="baseline">b</span>
           <span class="placeholder"></span>
-          <!---->
           <input class="input" size="huge normal" type="text">
-          <!---->
         </div>
-        <!---->
-        <!---->
       </div>
     </div>
   </div>
@@ -282,9 +191,7 @@ exports[`u-dynamic-cards.vue > Demo-基本用法 1`] = `
       <div class="textWrap">
         <span class="error" style="display: none;">false</span>
         <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           展开
-          <!---->
         </a>
       </div>
     </div>
@@ -292,83 +199,52 @@ exports[`u-dynamic-cards.vue > Demo-基本用法 1`] = `
       <div class="actions">
         <div class="root" direction="horizontal" type vusion-slot-name="default">
           <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-            <!---->
             删除
-            <!---->
           </a>
           <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-            <!---->
             收起
-            <!---->
           </a>
-          <!---->
-          <!---->
         </div>
       </div>
       <div class="root" direction="horizontal" type vusion-slot-name="default">
         <div class="root" color size="huge normal">
           <span class="baseline">b</span>
           <span class="placeholder"></span>
-          <!---->
           <input class="input" size="huge normal" type="text">
-          <!---->
         </div>
         <div class="root" size="huge normal" tabindex="0">
           <span class="baseline">b</span>
           <span class="placeholder" style="display: none;">请选择</span>
-          <!---->
           <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-            <!---->
-            <!---->
             def
-            <!---->
           </div>
-          <!---->
-          <!---->
           <transition-stub class="popper" name="fade" style="width: 100%;">
             <div class="root" style="display: none;">
               <div class="wrap">
-                <!---->
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   abc
-                  <!---->
                 </div>
                 <div class="root" selected="selected" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   def
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   zzz
-                  <!---->
                 </div>
-                <!---->
               </div>
-              <!---->
             </div>
           </transition-stub>
         </div>
         <div class="root" size="huge normal">
           <span class="baseline">b</span>
           <span class="placeholder"></span>
-          <!---->
           <input class="input" size="huge normal" type="text">
-          <!---->
         </div>
-        <!---->
-        <!---->
       </div>
     </div>
   </div>
   <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-    <!---->
     添加
-    <!---->
   </a>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -380,9 +256,7 @@ exports[`u-dynamic-cards.vue > Demo-表单验证 1`] = `
       <div class="textWrap">
         <span class="error" style="display: none;"></span>
         <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           展开
-          <!---->
         </a>
       </div>
     </div>
@@ -390,17 +264,11 @@ exports[`u-dynamic-cards.vue > Demo-表单验证 1`] = `
       <div class="actions">
         <div class="root" direction="horizontal" type vusion-slot-name="default">
           <a class="root" disabled="disabled" hovertype="underline" tabindex="-1" target="_self" vusion-slot-name-edit="text">
-            <!---->
             删除
-            <!---->
           </a>
           <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-            <!---->
             收起
-            <!---->
           </a>
-          <!---->
-          <!---->
         </div>
       </div>
       <div class="root" vusion-slot-name="default">
@@ -409,66 +277,41 @@ exports[`u-dynamic-cards.vue > Demo-表单验证 1`] = `
             <div class="root" color size="huge normal">
               <span class="baseline">b</span>
               <span class="placeholder">URL</span>
-              <!---->
               <input class="input" size="huge normal" type="text">
-              <!---->
             </div>
             <span class="message" color="error" style="display: none;">false</span>
-            <!---->
           </div>
           <div class="root" vusion-slot-name="default">
             <div class="root" color disabled="disabled" size="huge normal" tabindex>
               <span class="baseline">b</span>
               <span class="placeholder">请选择</span>
-              <!---->
               <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-                <!---->
-                <!---->
-                <!---->
-                <!---->
               </div>
-              <!---->
-              <!---->
               <transition-stub class="popper" name="fade" style="width: 100%;">
                 <div class="root" style="display: none;">
                   <div class="wrap">
-                    <!---->
-                    <!---->
-                    <!---->
                   </div>
-                  <!---->
                 </div>
               </transition-stub>
             </div>
             <span class="message" color="error" style="display: none;">false</span>
-            <!---->
           </div>
           <div class="root" vusion-slot-name="default">
             <div class="root" color size="huge normal">
               <span class="baseline">b</span>
               <span class="placeholder">端口</span>
-              <!---->
               <input class="input" size="huge normal" type="text">
-              <!---->
             </div>
             <span class="message" color="error" style="display: none;">false</span>
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
         <span class="message" color="error" style="display: none;"></span>
-        <!---->
       </div>
     </div>
   </div>
   <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-    <!---->
     添加
-    <!---->
   </a>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -480,9 +323,7 @@ exports[`u-dynamic-cards.vue > Demo-表单验证 2`] = `
       <div class="textWrap">
         <span class="error" style="display: none;"></span>
         <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           展开
-          <!---->
         </a>
       </div>
     </div>
@@ -490,17 +331,11 @@ exports[`u-dynamic-cards.vue > Demo-表单验证 2`] = `
       <div class="actions">
         <div class="root" direction="horizontal" type vusion-slot-name="default">
           <a class="root" disabled="disabled" hovertype="underline" tabindex="-1" target="_self" vusion-slot-name-edit="text">
-            <!---->
             删除
-            <!---->
           </a>
           <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-            <!---->
             收起
-            <!---->
           </a>
-          <!---->
-          <!---->
         </div>
       </div>
       <div class="root" direction="vertical" gap="small">
@@ -526,119 +361,77 @@ exports[`u-dynamic-cards.vue > Demo-表单验证 2`] = `
             <tr class="root row">
               <td class="cell">
                 <div class="root" display="block" vusion-slot-name="default">
-                  <!---->
                   <div class="root" color size="huge full">
                     <span class="baseline">b</span>
                     <span class="placeholder">URL</span>
-                    <!---->
                     <input class="input" size="huge full" type="text">
-                    <!---->
                   </div>
                   <span class="message" color="error" style="display: none;">false</span>
-                  <!---->
                 </div>
               </td>
               <td class="cell">
                 <div class="root" display="block" vusion-slot-name="default">
-                  <!---->
                   <div class="root" color size="huge full" tabindex="0">
                     <span class="baseline">b</span>
                     <span class="placeholder" style="display: none;">服务</span>
-                    <!---->
                     <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-                      <!---->
-                      <!---->
                       abc
-                      <!---->
                     </div>
-                    <!---->
-                    <!---->
                     <transition-stub class="popper" name="fade" style="width: 100%;">
                       <div class="root" style="display: none;">
                         <div class="wrap">
-                          <!---->
                           <div class="root" selected="selected" style="direction: ltr;" vusion-slot-name="default">
-                            <!---->
                             abc
-                            <!---->
                           </div>
                           <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                            <!---->
                             def
-                            <!---->
                           </div>
                           <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                            <!---->
                             zzz
-                            <!---->
                           </div>
-                          <!---->
                         </div>
-                        <!---->
                       </div>
                     </transition-stub>
                   </div>
                   <span class="message" color="error" style="display: none;">false</span>
-                  <!---->
                 </div>
               </td>
               <td class="cell">
                 <div class="root" display="block" vusion-slot-name="default">
-                  <!---->
                   <div class="root" color size="huge full">
                     <span class="baseline">b</span>
                     <span class="placeholder">端口</span>
-                    <!---->
                     <input class="input" size="huge full" type="text">
-                    <!---->
                   </div>
                   <span class="message" color="error" style="display: none;">false</span>
-                  <!---->
                 </div>
               </td>
               <td class="cell">
                 <div class="root" display="block" vusion-slot-name="default">
-                  <!---->
                   <div class="root" color size="huge full">
                     <span class="baseline">b</span>
                     <span class="placeholder">描述</span>
-                    <!---->
                     <input class="input" size="huge full" type="text">
-                    <!---->
                   </div>
                   <span class="message" color="error" style="display: none;">false</span>
-                  <!---->
                 </div>
               </td>
               <td class="last-column" dynamic="true">
                 <a class="root" disabled="disabled" hovertype="underline" tabindex="-1" target="_self" vusion-slot-name-edit="text">
-                  <!---->
-                  <!---->
                 </a>
-                <!---->
               </td>
             </tr>
           </tbody>
         </table>
         <a class="root add-button" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           添加
-          <!---->
         </a>
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
     </div>
   </div>
   <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-    <!---->
     添加
-    <!---->
   </a>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -650,9 +443,7 @@ exports[`u-dynamic-cards.vue > Demo-限制数量 1`] = `
       <div class="textWrap">
         <span class="error" style="display: none;">false</span>
         <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           展开
-          <!---->
         </a>
       </div>
     </div>
@@ -660,73 +451,46 @@ exports[`u-dynamic-cards.vue > Demo-限制数量 1`] = `
       <div class="actions">
         <div class="root" direction="horizontal" type vusion-slot-name="default">
           <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-            <!---->
             删除
-            <!---->
           </a>
           <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-            <!---->
             收起
-            <!---->
           </a>
-          <!---->
-          <!---->
         </div>
       </div>
       <div class="root" direction="horizontal" type vusion-slot-name="default">
         <div class="root" color size="huge normal">
           <span class="baseline">b</span>
           <span class="placeholder"></span>
-          <!---->
           <input class="input" size="huge normal" type="text">
-          <!---->
         </div>
         <div class="root" size="huge normal" tabindex="0">
           <span class="baseline">b</span>
           <span class="placeholder" style="display: none;">请选择</span>
-          <!---->
           <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-            <!---->
-            <!---->
             abc
-            <!---->
           </div>
-          <!---->
-          <!---->
           <transition-stub class="popper" name="fade" style="width: 100%;">
             <div class="root" style="display: none;">
               <div class="wrap">
-                <!---->
                 <div class="root" selected="selected" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   abc
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   def
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   zzz
-                  <!---->
                 </div>
-                <!---->
               </div>
-              <!---->
             </div>
           </transition-stub>
         </div>
         <div class="root" size="huge normal">
           <span class="baseline">b</span>
           <span class="placeholder"></span>
-          <!---->
           <input class="input" size="huge normal" type="text">
-          <!---->
         </div>
-        <!---->
-        <!---->
       </div>
     </div>
   </div>
@@ -736,9 +500,7 @@ exports[`u-dynamic-cards.vue > Demo-限制数量 1`] = `
       <div class="textWrap">
         <span class="error" style="display: none;">false</span>
         <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           展开
-          <!---->
         </a>
       </div>
     </div>
@@ -746,82 +508,51 @@ exports[`u-dynamic-cards.vue > Demo-限制数量 1`] = `
       <div class="actions">
         <div class="root" direction="horizontal" type vusion-slot-name="default">
           <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-            <!---->
             删除
-            <!---->
           </a>
           <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-            <!---->
             收起
-            <!---->
           </a>
-          <!---->
-          <!---->
         </div>
       </div>
       <div class="root" direction="horizontal" type vusion-slot-name="default">
         <div class="root" color size="huge normal">
           <span class="baseline">b</span>
           <span class="placeholder"></span>
-          <!---->
           <input class="input" size="huge normal" type="text">
-          <!---->
         </div>
         <div class="root" size="huge normal" tabindex="0">
           <span class="baseline">b</span>
           <span class="placeholder" style="display: none;">请选择</span>
-          <!---->
           <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-            <!---->
-            <!---->
             abc
-            <!---->
           </div>
-          <!---->
-          <!---->
           <transition-stub class="popper" name="fade" style="width: 100%;">
             <div class="root" style="display: none;">
               <div class="wrap">
-                <!---->
                 <div class="root" selected="selected" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   abc
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   def
-                  <!---->
                 </div>
                 <div class="root" style="direction: ltr;" vusion-slot-name="default">
-                  <!---->
                   zzz
-                  <!---->
                 </div>
-                <!---->
               </div>
-              <!---->
             </div>
           </transition-stub>
         </div>
         <div class="root" size="huge normal">
           <span class="baseline">b</span>
           <span class="placeholder"></span>
-          <!---->
           <input class="input" size="huge normal" type="text">
-          <!---->
         </div>
-        <!---->
-        <!---->
       </div>
     </div>
   </div>
   <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-    <!---->
     添加
-    <!---->
   </a>
-  <!---->
-  <!---->
 </div>
 `;

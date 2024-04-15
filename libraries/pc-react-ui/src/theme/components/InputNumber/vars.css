@@ -1,0 +1,162 @@
+/**
+ * @component InputNumber
+ * @useGlobalTokens ["--cw-padding-xxs","--cw-line-width","--cw-line-type","--cw-border-radius","--cw-font-size-lg","--cw-control-height-lg","--cw-control-height-sm","--cw-color-error","--cw-color-text-description","--cw-motion-duration-mid","--cw-color-text-disabled","--cw-border-radius-sm","--cw-border-radius-lg","--cw-line-height-lg","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-color-text-placeholder","--cw-control-height","--cw-motion-duration-slow","--cw-color-border","--cw-color-bg-container","--cw-color-bg-container-disabled","--cw-color-error-border-hover","--cw-color-warning","--cw-color-warning-border-hover","--cw-color-fill-tertiary","--cw-color-fill-secondary","--cw-color-primary","--cw-color-error-bg","--cw-color-error-bg-hover","--cw-color-error-text","--cw-color-warning-bg","--cw-color-warning-bg-hover","--cw-color-warning-text","--cw-padding-xs","--cw-color-split"]
+ */
+.cw-nasl.cw-input-number,
+.cw-nasl.cw-input-number-css-var {
+  /**
+   * @desc 输入框激活状态时背景颜色
+   * @type color
+   */
+  --cw-input-number-active-bg: var(--cw-color-bg-container);
+
+  /**
+   * @desc 激活态边框色
+   * @type color
+   */
+  --cw-input-number-active-border-color: var(--cw-color-primary);
+
+  /**
+   * @desc 激活态阴影
+   * @type input
+   */
+  --cw-input-number-active-shadow: 0 0 0 var(--cw-control-outline-width) var(--cw-control-outline);
+
+  /**
+   * @desc 前/后置标签背景色
+   * @type color
+   */
+  --cw-input-number-addon-bg: var(--cw-color-fill-alter);
+
+  /**
+   * @desc 输入框宽度
+   * @type size
+   */
+  --cw-input-number-control-width: 90px;
+
+  /**
+   * @desc 错误状态时激活态阴影
+   * @type input
+   */
+  --cw-input-number-error-active-shadow: 0 0 0 var(--cw-control-outline-width) var(--cw-color-error-outline);
+
+  /**
+   * @desc 面性变体操作按钮背景色
+   * @type color
+   */
+  --cw-input-number-filled-handle-bg: #f0f0f0;
+
+  /**
+   * @desc 操作按钮激活背景色
+   * @type color
+   */
+  --cw-input-number-handle-active-bg: var(--cw-color-fill-alter);
+
+  /**
+   * @desc 操作按钮背景色
+   * @type color
+   */
+  --cw-input-number-handle-bg: var(--cw-color-bg-container);
+
+  /**
+   * @desc 操作按钮边框颜色
+   * @type color
+   */
+  --cw-input-number-handle-border-color: var(--cw-color-border);
+
+  /**
+   * @desc 操作按钮图标大小
+   * @type size
+   */
+  --cw-input-number-handle-font-size: calc(var(--cw-font-size) / 2);
+
+  /**
+   * @desc 操作按钮悬浮颜色
+   * @type color
+   */
+  --cw-input-number-handle-hover-color: var(--cw-color-primary);
+
+  /**
+   * @desc 操作按钮可见性
+   * @type input
+   */
+  --cw-input-number-handle-visible: auto;
+
+  /**
+   * @desc 操作按钮宽度
+   * @type size
+   */
+  --cw-input-number-handle-width: calc(var(--cw-control-height-sm) - calc(var(--cw-line-width) * 2));
+
+  /**
+   * @desc 输入框hover状态时背景颜色
+   * @type color
+   */
+  --cw-input-number-hover-bg: var(--cw-color-bg-container);
+
+  /**
+   * @desc 悬浮态边框色
+   * @type color
+   */
+  --cw-input-number-hover-border-color: var(--cw-color-primary-hover);
+
+  /**
+   * @desc 字体大小
+   * @type size
+   */
+  --cw-input-number-input-font-size: var(--cw-font-size);
+
+  /**
+   * @desc 大号字体大小
+   * @type size
+   */
+  --cw-input-number-input-font-size-lg: var(--cw-font-size-lg);
+
+  /**
+   * @desc 小号字体大小
+   * @type size
+   */
+  --cw-input-number-input-font-size-sm: var(--cw-font-size);
+
+  /**
+   * @desc 输入框纵向内边距
+   * @type size
+   */
+  --cw-input-number-padding-block: 4px;
+
+  /**
+   * @desc 大号输入框纵向内边距
+   * @type size
+   */
+  --cw-input-number-padding-block-lg: 7px;
+
+  /**
+   * @desc 小号输入框纵向内边距
+   * @type input
+   */
+  --cw-input-number-padding-block-sm: 0;
+
+  /**
+   * @desc 输入框横向内边距
+   * @type size
+   */
+  --cw-input-number-padding-inline: calc(var(--cw-padding-sm) - var(--cw-line-width));
+
+  /**
+   * @desc 大号输入框横向内边距
+   * @type size
+   */
+  --cw-input-number-padding-inline-lg: calc(var(--cw-control-padding-horizontal) - var(--cw-line-width));
+
+  /**
+   * @desc 小号输入框横向内边距
+   * @type size
+   */
+  --cw-input-number-padding-inline-sm: calc(var(--cw-control-padding-horizontal-sm) - var(--cw-line-width));
+
+  /**
+   * @desc 警告状态时激活态阴影
+   * @type input
+   */
+  --cw-input-number-warning-active-shadow: 0 0 0 var(--cw-control-outline-width) var(--cw-color-warning-outline);
+}
