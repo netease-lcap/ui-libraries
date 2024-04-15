@@ -312,6 +312,8 @@ export default createComponent({
 
     if (this.isPreview && !this.inDesigner()) {
       const isPassword = this.inputstyle === 'password' || this.type === 'password';
+      const value = this.currentValue || '--';
+
       return (
         <div
           class={bem('newwrap', {
@@ -325,7 +327,7 @@ export default createComponent({
               'custom',
             ])}
           >
-            {isPassword ? this.currentValue.replace(/./g, '*') : this.currentValue}
+            {isPassword ? value.replace(/./g, '*') : value}
           </span>
         </div>
       );

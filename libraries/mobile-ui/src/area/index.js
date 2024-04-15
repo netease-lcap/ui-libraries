@@ -8,6 +8,7 @@ import Field from '../field';
 import { EmptyCol } from '../emptycol';
 
 import { FieldMixin } from '../mixins/field';
+import PreviewMixin from '../mixins/preview';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
 
 const [createComponent, bem] = createNamespace('area');
@@ -34,7 +35,11 @@ function pickSlots(instance, keys) {
 }
 
 export default createComponent({
-  mixins: [FieldMixin, EventSlotCommandProvider(['confirm', 'cancel'])],
+  mixins: [
+    FieldMixin,
+    EventSlotCommandProvider(['confirm', 'cancel']),
+    PreviewMixin,
+  ],
   props: {
     ...pickerProps,
     value: String,
@@ -126,7 +131,7 @@ export default createComponent({
     },
 
     isNew() {
-      this.$nextTick(function () {
+      this.$nextTick(function() {
         this.setValues(true);
       });
     },
@@ -158,7 +163,7 @@ export default createComponent({
       if (this?.$attrs?.['vusion-node-path'] === nodePath) {
         this.valuepopup = true;
         this.$refs.popforcas.togglePModal();
-        this.$nextTick(function () {
+        this.$nextTick(function() {
           this.setValues(true);
         });
       }
@@ -179,7 +184,7 @@ export default createComponent({
               },
             ],
           },
-          '*'
+          '*',
         );
       }
       this.$refs.popforcas.togglePModal();
@@ -202,7 +207,7 @@ export default createComponent({
         this.value && this.converter !== 'name' ? this.value : this.code;
       const provincet = this.getListTempNew(
         'province',
-        tcode.slice(0, 2) + '0000'
+        tcode.slice(0, 2) + '0000',
       );
       const cityt = this.getListTempNew('city', tcode.slice(0, 4) + '00');
       const countyt = this.getListTempNew('county', tcode.slice(0, 6));
@@ -215,7 +220,7 @@ export default createComponent({
       this.valuepopup = !this.valuepopup;
       this.$refs.popforcas.togglePModal();
       if (this.valuepopup) {
-        this.$nextTick(function () {
+        this.$nextTick(function() {
           this.setValues();
         });
       }
@@ -463,7 +468,7 @@ export default createComponent({
         function search(level, prefixCode) {
           if (level >= nameArr.length) return prefixCode;
           for (const [code, name] of Object.entries(
-            areaList[`${levelMap[level]}_list`]
+            areaList[`${levelMap[level]}_list`],
           )) {
             if (code.startsWith(prefixCode) && name === nameArr[level]) {
               return level === nameArr.length - 1
@@ -557,6 +562,25 @@ export default createComponent({
       title: () => this.slots('title'),
     };
 
+    if (this.isPreview && !this.inDesigner()) {
+      return (
+        <div class={bem('wrappparea')} vusion-click-enabled="true">
+          <Field
+            label={this.labelField}
+            value={this.getTitle || '--'}
+            scopedSlots={tempSlot}
+            readonly
+            isLink
+            input-align={this.inputAlign || 'right'}
+            // eslint-disable-next-line no-prototype-builtins
+            notitle={!this.$slots.hasOwnProperty('title')}
+            insel={true}
+            nofi={true}
+          />
+        </div>
+      );
+    }
+
     let children = null;
     if (this.isNew) {
       children = (
@@ -610,6 +634,7 @@ export default createComponent({
         />
       );
     }
+
     return (
       <div class={bem('wrappparea')} vusion-click-enabled="true">
         <Field

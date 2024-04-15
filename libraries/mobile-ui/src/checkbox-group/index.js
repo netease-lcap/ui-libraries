@@ -158,7 +158,7 @@ export default createComponent({
         });
       }
 
-      return <div class={bem([this.direction, this.isPreview ? 'preview' : ''])}>{nodes.map((item, index) => item)}</div>;
+      return <div class={bem([this.direction, this.isPreview ? 'preview' : ''])}>{nodes.length ? nodes : '--'}</div>;
     }
   },
 

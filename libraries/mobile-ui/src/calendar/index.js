@@ -609,7 +609,7 @@ export default createComponent({
         <div class={bem('wrapppcalendar')} vusion-click-enabled="true">
           <Field
             label={this.labelField}
-            value={this.getTitle()}
+            value={this.getTitle() || '--'}
             scopedSlots={tempSlot}
             readonly
             isLink

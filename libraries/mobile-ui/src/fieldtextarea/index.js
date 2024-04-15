@@ -241,7 +241,7 @@ export default createComponent({
               ref="input"
               class={bem('control', [inputAlign, 'custom', { 'min-height': !this.autosize }])}
             >
-              {this.currentValue}
+              {this.currentValue || '--'}
             </span>
           </div>
         </div>
