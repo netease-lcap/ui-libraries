@@ -4,14 +4,18 @@
     <u-time-picker
         :time.sync="time"
         @change="onChange"
-        :advanced-format="{ enable: true, value: 'HH时mm分ss秒' }">
+        :advancedFormatEnable="true"
+        advancedFormatValue="HH时mm分ss秒"
+    >
     </u-time-picker>
     <u-time-picker
         range
         :start-time.sync="starTime"
         :end-time.sync="endTime"
         @change="onChange"
-        :advanced-format="{ enable: true, value: 'HH时mm分ss秒' }">
+        :advancedFormatEnable="true"
+        advancedFormatValue="HH时mm分ss秒"
+    >
     </u-time-picker>
 </div>
 
