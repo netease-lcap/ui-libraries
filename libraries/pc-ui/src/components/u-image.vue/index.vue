@@ -29,6 +29,9 @@
 
 <script>
 import SImage from '../s-image.vue';
+
+const VARIBALE_REGEX = /^\{\{.*\}\}$/;
+
 export default {
     name: 'u-image',
     components: {
@@ -151,8 +154,18 @@ export default {
             };
         },
         wrapStyle() {
+            const borderRadius = this.circle ? this.radius : '';
+            if (this.$env && this.$env.VUE_APP_DESIGNER && VARIBALE_REGEX.test(this.src)) {
+              return {
+                'border-radius': borderRadius,
+                width: '100%',
+                height: '100%',
+                maxHeight: '600px',
+              };
+            }
+
             return {
-                'border-radius': this.circle ? this.radius : '',
+                'border-radius': borderRadius,
             };
         },
     },

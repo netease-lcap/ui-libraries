@@ -5,7 +5,7 @@ export const SImage = {
   name: 's-image',
   render(h) {
     const { src } = this.$attrs;
-    if (VARIBALE_REGEX.test(src)) {
+    if (this.$env && this.$env.VUE_APP_DESIGNER && VARIBALE_REGEX.test(src)) {
       // 图片处理
       return h('div', {
         attrs: this.$attrs,
