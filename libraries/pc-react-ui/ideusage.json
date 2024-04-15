@@ -642,7 +642,10 @@
   {
     "name": "Image",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "additionalAttribute": {
+        "preview": "{false}"
+      }
     }
   },
   {
