@@ -1,5 +1,7 @@
 import React from 'react';
-import { Dropdown, MenuItem, Text, Button, Link } from '@/index';
+import {
+  Dropdown, MenuItem, Text, Button, Link,
+} from '@/index';
 // import { Dropdown } from 'antd';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -61,21 +63,13 @@ export const 默认 = {
               data-nodepath="rootview.0.0.0"
               ide-iscontainer="true"
               key="component-2"
-              labelSlot={(() => (
-                <div ide-draggable="false" data-nodepath="rootview.0.0.0.1">
-                  data-emptyslot-nodepath="rootview.0.0.0.1" key="0" />
-                </div>
-              ))()}
+              label="2"
             />
             <MenuItem
               data-nodepath="rootview.0.0.1"
               ide-iscontainer="true"
               key="component-3"
-              labelSlot={(() => (
-                <div ide-draggable="false" data-nodepath="rootview.0.0.1.1">
-                  data-emptyslot-nodepath="rootview.0.0.1.1" key="1" />
-                </div>
-              ))()}
+              label="1"
             />
           </>
         ))()}

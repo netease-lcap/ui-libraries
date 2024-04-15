@@ -239,7 +239,7 @@ namespace nasl.ui {
 
     @Prop<TableOptions<T, V, P, M>, any>({
       group: '数据属性',
-      title: '排序初始顺序',
+      title: '选择类型',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '多选' }, { title: '单选' }],

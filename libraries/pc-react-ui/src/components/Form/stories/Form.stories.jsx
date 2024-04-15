@@ -156,7 +156,7 @@ export const 默认1 = {
           omitNil={false}
           submitter={{
             onSubmit() {
-              console.log(ref.current.getValues());
+              console.log(ref.current.resetForm());
 
               console.log(111);
             },
