@@ -305,7 +305,7 @@ namespace nasl.ui {
         }]
       }
     })
-    inputAlign: 'left' | 'center' | 'right' = 'left';
+    inputAlign: 'left' | 'center' | 'right' = 'right';
     @Prop({
       group: '交互属性',
       title: '点击遮罩层后关闭',

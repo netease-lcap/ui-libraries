@@ -322,12 +322,12 @@ export default createComponent({
       scrolltolower: this.onScrollToLower,
     };
 
-    if (this.isPreview && !this.inDesigner()) {
+    if (this.isPreview) {
       return (
         <div class={bem('wrap')} vusion-click-enabled="true">
           <Field
             label={this.labelField}
-            value={this.getTitle()}
+            value={this.getTitle() || '--'}
             scopedSlots={tempSlot}
             readonly
             isLink

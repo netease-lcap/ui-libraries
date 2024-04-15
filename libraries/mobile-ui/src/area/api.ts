@@ -149,6 +149,16 @@ namespace nasl.ui {
       }
     })
     placeholder: nasl.core.String;
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '显示预览态',
+      docDescription: '',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    preview: nasl.core.Boolean = false;
     @Event({
       title: '点击右上方完成按钮',
       description: '点击右上方完成按钮'
