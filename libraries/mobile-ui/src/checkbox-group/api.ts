@@ -7,22 +7,22 @@ namespace nasl.ui {
     description: '多项中选择一个或多个时使用',
     group: "Form"
   })
-  export class VanCheckboxGroup<T, V> extends ViewComponent {
-    constructor(options?: Partial<VanCheckboxGroupOptions<T, V>>) {
+  export class VanCheckboxGroup<T, V, C> extends ViewComponent {
+    constructor(options?: Partial<VanCheckboxGroupOptions<T, V, C>>) {
       super();
     }
 
     @Prop({
       title: '选中值',
     })
-    value: VanCheckboxGroupOptions<T, V>['value'];
+    value: VanCheckboxGroupOptions<T, V, C>['value'];
 
     @Prop({
       title: '数据',
     })
-    data: VanCheckboxGroupOptions<T, V>['dataSource'];
+    data: VanCheckboxGroupOptions<T, V, C>['dataSource'];
   }
-  export class VanCheckboxGroupOptions<T, V> extends ViewComponentOptions {
+  export class VanCheckboxGroupOptions<T, V, C> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -42,7 +42,7 @@ namespace nasl.ui {
       description: '用于标识多选组的值',
       sync: true
     })
-    value: nasl.collection.List<V>;
+    value: C extends 'none' ? nasl.collection.List<V> : nasl.core.String;
     @Prop({
       group: '数据属性',
       title: '最大可选数量',
@@ -63,7 +63,7 @@ namespace nasl.ui {
       }
     })
     min: nasl.core.Integer = 0;
-    @Prop<VanCheckboxGroupOptions<T, V>, 'valueField'>({
+    @Prop<VanCheckboxGroupOptions<T, V, C>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
       description: '用于标识选中值的字段',
@@ -86,7 +86,7 @@ namespace nasl.ui {
       }
     })
     direction: 'horizontal' | 'vertical' = 'horizontal';
-    @Prop<VanCheckboxGroupOptions<T, V>, 'column'>({
+    @Prop<VanCheckboxGroupOptions<T, V, C>, 'column'>({
       group: '主要属性',
       title: '排列数',
       description: '水平排列时每行展示的选项数量',
@@ -143,7 +143,7 @@ namespace nasl.ui {
     })
     onChange: (event: {
       value: nasl.collection.List<V>;
-    }) => any ;
+    }) => void;
     @Slot({
       title: 'undefined',
       description: '插入`<van-checkbox>`子组件。',
@@ -257,7 +257,7 @@ namespace nasl.ui {
       screenX: nasl.core.Integer;
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
-    }) => any ;
+    }) => void;
 
     @Slot({
       title: '',

@@ -223,7 +223,7 @@ namespace nasl.ui {
             title: '相关对象',
             description: '相关对象。当选择此项时，抛出的事件会传递该对象，便于开发',
         })
-        private item: nasl.core.Any;
+        private item: any;
 
         @Prop({
             title: '路由链接',

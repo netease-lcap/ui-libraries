@@ -111,19 +111,19 @@ namespace nasl.ui {
             title: '点击选项时触发',
             description: '点击选项时触发',
         })
-        onSelect: (event: any) => any ;
+        onSelect: (event: nasl.ui.BaseEvent) => void;
 
         @Event({
             title: '展开',
             description: '展开',
         })
-        onOpen: (event: any) => any ;
+        onOpen: (event: nasl.ui.BaseEvent) => void;
 
         @Event({
             title: '收起',
             description: '收起',
         })
-        onClose: (event: any) => any ;
+        onClose: (event: nasl.ui.BaseEvent) => void;
 
         @Slot({
             title: 'undefined',
@@ -151,6 +151,7 @@ namespace nasl.ui {
         @Prop({
             title: '标题',
             description: '标题',
+            implicitToString: true,
         })
         text: nasl.core.String = '标题';
 
@@ -164,6 +165,6 @@ namespace nasl.ui {
             title: '点击选项时触发',
             description: '点击选项时触发',
         })
-        onClick: (event: any) => any;
+        onClick: (event: nasl.ui.BaseEvent) => any;
     }
 }

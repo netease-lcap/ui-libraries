@@ -69,6 +69,7 @@ namespace nasl.ui {
             title: '标题',
             description: '弹出框标题',
             docDescription: '弹出框的标题，显示在弹出框内容上方',
+            implicitToString: true,
         })
         title: nasl.core.String = '标题';
 

@@ -16,7 +16,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '文本',
-      description: '默认文本显示内容'
+      description: '默认文本显示内容',
+      implicitToString: true,
     })
     text: nasl.core.String;
     @Prop({
@@ -113,6 +114,6 @@ namespace nasl.ui {
       screenX: nasl.core.Integer;
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
-    }) => any ;
+    }) => void;
   }
 }

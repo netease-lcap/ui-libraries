@@ -74,7 +74,7 @@ namespace nasl.ui {
       title: '切换步骤时',
       description: '切换步骤时'
     })
-    onChangestep: (event: nasl.core.Integer) => any ;
+    onChangestep: (event: nasl.core.Integer) => void;
     @Slot({
       title: 'undefined',
       description: '插入`<van-step>`子组件。',
@@ -150,12 +150,12 @@ namespace nasl.ui {
       title: '点击标题',
       description: '点击标题'
     })
-    onClicktitle: (event: nasl.core.Integer) => any ;
+    onClicktitle: (event: nasl.core.Integer) => void;
     @Event({
       title: '点击图标',
       description: '点击图标'
     })
-    onClickicon: (event: nasl.core.Integer) => any ;
+    onClickicon: (event: nasl.core.Integer) => void;
 
     @Slot({
       title: '',

@@ -1,10 +1,11 @@
-<!-- 格式化 -->
+<!-- 高级格式化 -->
 <template>
     <div>
         <u-date-picker
             :value.sync="quarter"
             picker="quarter"
-            show-formatter="YYYY年QQ"
+            :advancedFormatEnable="true"
+            advancedFormatValue="YYYY年QQ"
             width="large"
             clearable
             @change="onChange"
@@ -14,7 +15,8 @@
         <u-date-picker
             :value.sync="date"
             picker="week"
-            show-formatter="GGGG年第W周"
+            :advancedFormatEnable="true"
+            advancedFormatValue="GGGG年第W周"
             width="large"
             clearable
             @change="onChange"

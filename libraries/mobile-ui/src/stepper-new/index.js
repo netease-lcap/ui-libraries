@@ -83,34 +83,37 @@ export default createComponent({
     align: String,
 
     // 高级格式化
-    advancedFormat: {
-      type: Object,
-      default: () => ({
-        enable: false,
-        value: '',
-      }),
+    advancedFormatEnable: {
+      type: Boolean,
+      default: false,
+    },
+    advancedFormatValue: {
+      type: String,
+      default: '',
     },
     thousandths: {
       type: Boolean,
       default: false,
     },
-    decimalPlaces: {
-      type: Object,
-      default: () => ({
-        places: '',
-        omit: false,
-      }),
+    decimalPlacesValue: {
+      type: Number,
+      default: null,
+    },
+    decimalPlacesOmitZero: {
+      type: Boolean,
+      default: true,
     },
     percentSign: {
       type: Boolean,
       default: false,
     },
-    unit: {
-      type: Object,
-      default: () => ({
-        type: 'prefix',
-        value: '',
-      }),
+    unitType: {
+      type: String,
+      default: 'prefix',
+    },
+    unitValue: {
+      type: String,
+      default: '',
     },
   },
 
@@ -119,39 +122,37 @@ export default createComponent({
     const value = this.format(defaultValue);
     let currentFormatter = noopFormatter;
 
-    if (this.advancedFormat) {
-      let formatter;
+    let formatter;
 
-      if (this.advancedFormat.enable) {
-        formatter = this.advancedFormat.value;
-      } else if (this.thousandths || this.percentSign || !isNil(this.decimalPlaces.places)) {
-        formatter = '0';
-        // 千分位
-        if (this.thousandths) {
-          formatter = `#,##0`;
-        }
-
-        // 小数位数
-        if (this.decimalPlaces && this.decimalPlaces.places > 0) {
-          formatter += '.';
-
-          const char = this.decimalPlaces.omit ? '#' : '0';
-          for (let i = 0; i < this.decimalPlaces.places; i++) {
-            formatter += char;
-          }
-        } else if (this.decimalPlaces && isNil(this.decimalPlaces.places)) {
-          formatter += '.*';
-        }
+    if (this.advancedFormatEnable) {
+      formatter = this.advancedFormatValue;
+    } else if (this.thousandths || this.percentSign || !isNil(this.decimalPlacesValue)) {
+      formatter = '0';
+      // 千分位
+      if (this.thousandths) {
+        formatter = `#,##0`;
       }
 
-      if (formatter) {
-        currentFormatter = new NumberFormatter(
-          formatter,
-          !this.advancedFormat.enable && {
-            percentSign: this.percentSign, // 百分比
-          },
-        );
+      // 小数位数
+      if (this.decimalPlacesValue > 0) {
+        formatter += '.';
+
+        const char = this.decimalPlacesOmitZero ? '#' : '0';
+        for (let i = 0; i < this.decimalPlacesValue; i++) {
+          formatter += char;
+        }
+      } else if (isNil(this.decimalPlacesValue)) {
+        formatter += '.*';
       }
+    }
+
+    if (formatter) {
+      currentFormatter = new NumberFormatter(
+        formatter,
+        !this.advancedFormatEnable && {
+          percentSign: this.percentSign, // 百分比
+        },
+      );
     }
 
     const formattedValue = currentFormatter.format(value);
@@ -171,7 +172,7 @@ export default createComponent({
 
   computed: {
     showUnit() {
-      return this.unit.value !== '';
+      return this.unitValue !== '';
     },
     minusDisabled() {
       return this.disabled || this.disableMinus || this.currentValue <= +this.min;
@@ -421,7 +422,7 @@ export default createComponent({
     return (
       <div class={bem([this.theme])}>
         <button vShow={this.showMinus} type="button" style={this.buttonStyle} class={bem('minus', { disabled: this.minusDisabled })} {...createListeners('minus')} />
-        {this.showUnit && this.unit.type === 'prefix' && <div class={bem('unit', { prefix: true })}>{this.unit?.value}</div>}
+        {this.showUnit && this.unitType === 'prefix' && <div class={bem('unit', { prefix: true })}>{this.unitValue}</div>}
         <input
           vShow={this.showInput}
           ref="input"
@@ -440,7 +441,7 @@ export default createComponent({
           onBlur={this.onBlur}
           onMousedown={this.onMousedown}
         />
-        {this.showUnit && this.unit.type === 'suffix' && <div class={bem('unit', { suffix: true })}>{this.unit?.value}</div>}
+        {this.showUnit && this.unitType === 'suffix' && <div class={bem('unit', { suffix: true })}>{this.unitValue}</div>}
         <button vShow={this.showPlus} type="button" style={this.buttonStyle} class={bem('plus', { disabled: this.plusDisabled })} {...createListeners('plus')} />
       </div>
     );

@@ -87,7 +87,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '占位符',
       description: '输入框为空的展示文字',
-      if: _ => _.inputstyle === 'input'
+      if: _ => _.inputstyle === 'input',
+      implicitToString: true,
     })
     placeholder: nasl.core.String;
     @Prop<VanFieldinputOptions, 'maxlength'>({
@@ -104,14 +105,16 @@ namespace nasl.ui {
     @Prop<VanFieldinputOptions, 'keyboardTitle'>({
       group: '主要属性',
       title: '键盘标题',
-      if: _ => _.keytheme === 'custom'
+      if: _ => _.keytheme === 'custom',
+      implicitToString: true,
     })
     keyboardTitle: nasl.core.String;
     @Prop<VanFieldinputOptions, 'confirmText'>({
       group: '主要属性',
       title: '按钮内容',
       description: '设置完成按钮文字内容',
-      if: _ => _.keytheme === 'custom'
+      if: _ => _.keytheme === 'custom',
+      implicitToString: true,
     })
     confirmText: nasl.core.String = '完成';
     @Prop<VanFieldinputOptions, 'confirmSize'>({
@@ -225,36 +228,36 @@ namespace nasl.ui {
       title: '输入时',
       description: '输入时触发。'
     })
-    onInput: (event: Event) => any ;
+    onInput: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '改变后',
       description: '值变化时触发。（注意：与原生事件不同）'
     })
-    onChange: (event: nasl.core.String) => any ;
+    onChange: (event: nasl.core.String) => void;
     @Event({
       title: '获得焦点',
       description: '获得焦点时触发。'
     })
-    onFocus: (event: FocusEvent) => any ;
+    onFocus: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '失去焦点',
       description: '失去焦点时触发。'
     })
-    onBlur: (event: FocusEvent) => any ;
+    onBlur: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '清空后',
       description: '清空后触发。'
     })
-    onClear: (event: any) => any ;
+    onClear: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '输入完成时',
       description: '输入完成时后触发。'
     })
-    onEnoughkey: (event: nasl.core.String) => any ;
+    onEnoughkey: (event: nasl.core.String) => void;
     @Event({
       title: '点击完成按钮时',
       description: '点击定制键盘完成按钮时触发。'
     })
-    onClickConfirm: (event: nasl.core.String) => any ;
+    onClickConfirm: (event: nasl.core.String) => void;
   }
 }

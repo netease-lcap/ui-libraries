@@ -17,6 +17,7 @@ namespace nasl.ui {
             group: '主要属性',
             title: '文本',
             docDescription: '标签显示的文本内容',
+            implicitToString: true,
         })
         text: nasl.core.String;
 

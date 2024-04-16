@@ -27,7 +27,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '文字内容',
-      description: '进度条中的显示文字'
+      description: '进度条中的显示文字',
     })
     pivotText: nasl.core.String;
     @Prop({
