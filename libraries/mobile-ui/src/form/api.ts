@@ -21,7 +21,18 @@ namespace nasl.ui {
         description: '可选。需要验证的表单项 name'
       })
       name?: nasl.core.String | nasl.collection.List<nasl.core.String>
-    ): any {}
+    ): nasl.ui.ValidateResult {
+      return {
+        rawValue: '',
+        value: '',
+        trigger: '',
+        muted: '',
+        valid: true,
+        touched: true,
+        dirty: true,
+        firstError: ''
+      };
+    }
   }
   export class VanFormOptions extends ViewComponentOptions {
     @Prop({
@@ -92,7 +103,7 @@ namespace nasl.ui {
       description: '表单项值',
       sync: true
     })
-    private value: any = '';
+    private value: nasl.core.Any = '';
     @Prop({
       title: '提交表单的标识符',
       description: '提交表单的标识符'
