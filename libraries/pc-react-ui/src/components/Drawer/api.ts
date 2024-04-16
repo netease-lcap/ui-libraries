@@ -80,17 +80,17 @@ namespace nasl.ui {
     })
     maskClosable: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '状态属性',
-      title: '显示状态',
-      description: '显示状态分为“True(打开)/False(关闭)”，默认为“打开”',
-      sync: true,
-      docDescription: '控制抽屉是否进入页面时自动显示。开启表示自动显示，关闭表示不自动显示',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    open: nasl.core.Boolean;
+    // @Prop({
+    //   group: '状态属性',
+    //   title: '显示状态',
+    //   description: '显示状态分为“True(打开)/False(关闭)”，默认为“打开”',
+    //   sync: true,
+    //   docDescription: '控制抽屉是否进入页面时自动显示。开启表示自动显示，关闭表示不自动显示',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // open: nasl.core.Boolean;
 
     @Prop({
       group: '样式属性',

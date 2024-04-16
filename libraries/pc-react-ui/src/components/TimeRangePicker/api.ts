@@ -419,18 +419,18 @@ namespace nasl.ui {
       time: nasl.core.String;
     }) => any;
 
-    @Event({
-      title: '失去焦点',
-      description: '失去焦点时触发。',
-    })
-    onBlur: (event: {
-      cancelBubble: nasl.core.Boolean;
-      detail: nasl.core.String;
-      layerX: nasl.core.Integer;
-      layerY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    // @Event({
+    //   title: '失去焦点',
+    //   description: '失去焦点时触发。',
+    // })
+    // onBlur: (event: {
+    //   cancelBubble: nasl.core.Boolean;
+    //   detail: nasl.core.String;
+    //   layerX: nasl.core.Integer;
+    //   layerY: nasl.core.Integer;
+    //   pageX: nasl.core.Integer;
+    //   pageY: nasl.core.Integer;
+    //   which: nasl.core.Integer;
+    // }) => any;
   }
 }

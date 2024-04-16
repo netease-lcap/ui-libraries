@@ -276,6 +276,13 @@
     }
   },
   {
+    "name": "Avatar",
+    "ideusage": {
+      "idetype": "element",
+      "editable": "children"
+    }
+  },
+  {
     "name": "Descriptions",
     "ideusage": {
       "idetype": "container",

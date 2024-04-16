@@ -40,21 +40,21 @@ namespace nasl.ui {
     })
     logo: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '右上角头像 logo 的 url',
-      description: '右上角头像 logo 的 url',
-      docDescription: '右上角头像 logo 的 url',
-    })
-    avatarSrc: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '右上角头像 logo 的 url',
+    //   description: '右上角头像 logo 的 url',
+    //   docDescription: '右上角头像 logo 的 url',
+    // })
+    // avatarSrc: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '右上角用户名',
-      description: '右上角用户名',
-      docDescription: '右上角用户名',
-    })
-    avatarTitle: nasl.core.String = '张梦燕';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '右上角用户名',
+    //   description: '右上角用户名',
+    //   docDescription: '右上角用户名',
+    // })
+    // avatarTitle: nasl.core.String = '张梦燕';
 
     @Prop<ProLayoutOptions, 'layout'>({
       group: '样式属性',
@@ -98,6 +98,20 @@ namespace nasl.ui {
       sync: true,
     })
     openKeys: nasl.core.String;
+
+    @Prop({
+      title: '头部背景色',
+      description: '头部背景色',
+      tabKind: 'style',
+    })
+    colorBgHeader: nasl.core.String;
+
+    @Prop({
+      title: '侧导航背景色',
+      description: '侧导航背景色',
+      tabKind: 'style',
+    })
+    colorMenuBackground: nasl.core.String;
 
     // @Prop({
     //   title: '字段',

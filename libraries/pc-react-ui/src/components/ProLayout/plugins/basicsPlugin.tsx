@@ -139,7 +139,7 @@ export function useHandleAvatar(props) {
   const avatarTitleProps = props.get('avatarTitle');
   const avatarSizeProps = props.get('avatarSize');
   const AvatarRenderProps = props.get('avatarRender');
-  const avatarRender = React.isValidElement(AvatarRenderProps) ? (_props, dom) => React.cloneElement(AvatarRenderProps, { children: dom }) : undefined;
+  // const avatarRender = React.isValidElement(AvatarRenderProps) ? (_props, dom) => React.cloneElement(AvatarRenderProps, { children: dom }) : undefined;
   return {
     [$deletePropsList]: deletePropsList,
     logo,
@@ -148,10 +148,35 @@ export function useHandleAvatar(props) {
       src: avatarSrcProps,
       size: avatarSizeProps,
       title: avatarTitleProps,
-      render: avatarRender,
+      // render: (localProps, dom) => {
+      //   if (React.isValidElement(AvatarRenderProps)) {
+      //     return React.cloneElement(AvatarRenderProps, { children: dom, ...localProps });
+      //   }
+      //   return null;
+      // },
+      render: (localProps, dom) => {
+        // console.log(AvatarRenderProps, 'AvatarRenderProps');
+        // console.log(React.cloneElement(AvatarRenderProps, { children: dom, ...localProps }), 'childrenProps');
+        return React.cloneElement(AvatarRenderProps);
+      },
     }),
     menuDataRender: (menuData) => {
       return [{ name: 2, label: 1, path: '/a' }];
+    },
+  };
+}
+
+export function useHandleToken(props) {
+  const colorBgHeader = props.get('colorBgHeader');
+  const colorMenuBackground = props.get('colorMenuBackground');
+  return {
+    token: {
+      header: {
+        colorBgHeader,
+      },
+      sider: {
+        colorMenuBackground,
+      },
     },
   };
 }
