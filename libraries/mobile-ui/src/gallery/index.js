@@ -75,7 +75,7 @@ export default createComponent({
         <swipe class="swiper" onChange={this.onSwipeChange}>
           {this.options.map((item) => (
             <swipe-item class="swiper-slide">
-              <img src={this.getUrl(item)} />
+              <s-image src={this.getUrl(item)} />
             </swipe-item>
           ))}
           <template slot="indicator">
