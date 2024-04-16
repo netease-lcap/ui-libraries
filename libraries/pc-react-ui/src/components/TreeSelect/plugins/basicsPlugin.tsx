@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 import _ from 'lodash';
 import { useControllableValue } from 'ahooks';
+import { TreeSelect } from 'antd';
 import { $deletePropsList } from '@/plugins/constants';
 import {
   useRequestDataSource, useHandleMapField, useFormatDataSource, useDataSourceToTree,
@@ -39,6 +40,7 @@ export function useHandleStyle(props) {
   return {
     className: classnames(style.treeSelect, className),
     showSearch: false,
+    showCheckedStrategy: TreeSelect.SHOW_ALL,
   };
 }
 export function useHandleValueTransform(props) {
@@ -55,7 +57,7 @@ export function useHandleControllableValue(props) {
   return {
     value,
     onChange(localValue) {
-      const valueFormat = _.isArray(localValue) ? localValue.map((item) => item.value) : localValue;
+      const valueFormat = _.isArray(localValue) ? localValue.map((item) => item?.value ?? item) : localValue;
       onChange(valueFormat);
     },
 

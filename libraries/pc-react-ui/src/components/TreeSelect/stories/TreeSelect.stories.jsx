@@ -26,76 +26,102 @@ export const 异步函数 = {
   render: (args) => <TreeSelect {...args} />,
   args: {
     style: { width: 300 },
-    multiple: true,
+    treeCheckable: true,
     treeCheckStrictly: true,
+    // labelInValue: false,
     dataSource: [
       {
-        text: '理学',
-        value: '理学',
-        children: [
-          {
-            text: '物理学',
-            value: '物理学',
-            children: [
-              { text: '理论物理', value: '理论物理' },
-              { text: '凝聚态物理', value: '凝聚态物理' },
-              { text: '材料物理', value: '材料物理' },
-            ],
-          },
-          {
-            text: '数学',
-            value: '数学',
-            children: [
-              { text: '基础数学', value: '基础数学', disabled: true },
-              { text: '计算数学', value: '计算数学' },
-              { text: '应用数学', value: '应用数学' },
-            ],
-          },
-          { text: '化学', value: '化学' },
-        ],
+        entityForSel: {
+          id: 1,
+          createdTime: null,
+          updatedTime: null,
+          createdBy: null,
+          updatedBy: null,
+          fid: 0,
+          name: '测试1',
+          sonid: [],
+        },
       },
       {
-        text: '工学',
-        value: '工学',
-        children: [
-          {
-            text: '计算机科学与技术',
-            value: '计算机科学与技术',
-            children: [
-              { text: '计算机系统结构', value: '计算机系统结构' },
-              {
-                text: '计算机软件与理论',
-                value: '计算机软件与理论',
-                disabled: true,
-              },
-              { text: '计算机应用技术', value: '计算机应用技术' },
-            ],
-          },
-          { text: '软件工程', value: '软件工程', disabled: true },
-          {
-            text: '机械工程',
-            value: '机械工程',
-            children: [
-              { text: '机械制造及其自动化', value: '机械制造及其自动化' },
-              { text: '机械电子工程', value: '机械电子工程' },
-              {
-                text: '机械设计及理论',
-                value: '机械设计及理论',
-                disabled: true,
-              },
-              { text: '车辆工程', value: '车辆工程', disabled: true },
-            ],
-          },
-        ],
+        entityForSel: {
+          id: 2,
+          createdTime: null,
+          updatedTime: null,
+          createdBy: null,
+          updatedBy: null,
+          fid: 0,
+          name: '测试2',
+          sonid: [],
+        },
+      },
+      {
+        entityForSel: {
+          id: 3,
+          createdTime: null,
+          updatedTime: null,
+          createdBy: null,
+          updatedBy: null,
+          fid: 1,
+          name: '测试1.1',
+          sonid: [],
+        },
+      },
+      {
+        entityForSel: {
+          id: 4,
+          createdTime: null,
+          updatedTime: null,
+          createdBy: null,
+          updatedBy: null,
+          fid: 3,
+          name: '测试1.1.1',
+          sonid: [],
+        },
+      },
+      {
+        entityForSel: {
+          id: 9,
+          createdTime: null,
+          updatedTime: null,
+          createdBy: null,
+          updatedBy: null,
+          fid: 3,
+          name: '测试1.1.1',
+          sonid: [],
+        },
+      },
+      {
+        entityForSel: {
+          id: 5,
+          createdTime: null,
+          updatedTime: null,
+          createdBy: null,
+          updatedBy: null,
+          fid: 2,
+          name: '测试2.1',
+          sonid: [],
+        },
+      },
+      {
+        entityForSel: {
+          id: 2847071043167488,
+          createdTime: '2024-04-12T08:29:08.000Z',
+          updatedTime: '2024-04-12T08:29:08.000Z',
+          createdBy: null,
+          updatedBy: null,
+          fid: 0,
+          name: '测试3',
+          sonid: [],
+        },
       },
     ],
     onChange: (value) => {
       console.log(value);
     },
     // value: ['理学', '物理学', '理论物理'],
-    valueField: 'text',
-    textField: 'value',
-    // parentField: 'a.parentId',
+    valueField: 'entityForSel.id',
+    textField: 'entityForSel.name',
+    parentField: 'entityForSel.fid',
   },
 };
 export const 同步函数 = {

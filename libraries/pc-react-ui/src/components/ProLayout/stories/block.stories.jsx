@@ -45,13 +45,12 @@ export const 基本用法 = {
             menuItem={(
               <>
                 <MenuItem label="安全退出" />
-                <MenuItem label="导航项目" />
               </>
             )}
           >
             <Flex gap={8}>
               <Avatar src="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg" />
-              <Text style={{ lineHeight: '2.5' }}>userName</Text>
+              <Text style={{ lineHeight: '2.5' }}>{$global.userInfo.UserName}</Text>
             </Flex>
           </Dropdown>
         )}
