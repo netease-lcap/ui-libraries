@@ -191,13 +191,13 @@ namespace nasl.ui {
       sync: true,
       if: _ => _.range === true
     })
-    startValue: nasl.core.String;
+    startValue: nasl.core.String | nasl.core.DateTime | nasl.core.Date;
     @Prop<VanDatetimePickerOptions, 'endValue'>({
       title: '结束值',
       sync: true,
       if: _ => _.range === true
     })
-    endValue: nasl.core.String;
+    endValue: nasl.core.String | nasl.core.DateTime | nasl.core.Date;
     @Prop({
       title: '是否使用新版外观',
       description: '是否使用新版外观',
@@ -213,19 +213,19 @@ namespace nasl.ui {
       sync: true,
       if: _ => _.range !== true
     })
-    value: nasl.core.String;
+    value: nasl.core.String | nasl.core.DateTime | nasl.core.Date;
     @Prop({
       group: '数据属性',
       title: '最小日期',
       description: '当时间选择类型为datetime时可选的最小时间，精确到分钟, 默认为十年前'
     })
-    minDate: nasl.core.String;
+    minDate: nasl.core.String | nasl.core.DateTime | nasl.core.Date;
     @Prop({
       group: '数据属性',
       title: '最大日期',
       description: '当时间选择类型为datetime时可选的最大时间，精确到分钟, 默认为十年后'
     })
-    maxDate: nasl.core.String;
+    maxDate: nasl.core.String | nasl.core.DateTime | nasl.core.Date;
     @Prop<VanDatetimePickerOptions, 'maxHour'>({
       group: '数据属性',
       title: '最大小时',
