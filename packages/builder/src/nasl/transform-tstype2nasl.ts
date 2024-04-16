@@ -4,15 +4,13 @@ import type {
   StructureProperty,
   TypeAnnotation,
 } from '@nasl/types/nasl.ui.ast';
-import logger from '../utils/logger';
 import { getNodeCode } from '../utils/babel-utils';
 
 const isPrimitive = (name: string) => ['String', 'Integer', 'Decimal', 'Boolean', 'Date', 'Time', 'DateTime', 'Binary', 'Any'].includes(name);
 const getTypeKind = (typeParameters, primitive) => (typeParameters && typeParameters.params && typeParameters.params.length ? 'generic' : primitive ? 'primitive' : 'reference');
 
-function exitNotSupportType(node) {
-  logger.error(`解析Ts 类型异常，未支持 TS 类型 ${getNodeCode(node)}, 请使用nasl/types`);
-  process.exit(1);
+function exitNotSupportType(node: babelTypes.TSType) {
+  throw new Error(`解析Ts 类型异常，未支持 TS 类型 ${getNodeCode(node)}, 请使用nasl/types`);
 }
 
 function transformTSTypeReference(node: babelTypes.TSTypeReference): TypeAnnotation | undefined {
@@ -57,6 +55,10 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference): TypeAnnotat
     };
   } else if (typeName.type === 'Identifier') {
     const primitive = isPrimitive(typeName.name);
+
+    if (['String', 'Number', 'Array', 'Object', 'Boolean', 'Symbol', 'Function', 'Date'].indexOf(typeName.name) !== -1) {
+      exitNotSupportType(node);
+    }
 
     const typeArguments: TypeAnnotation[] = [];
 
@@ -110,6 +112,10 @@ function transformTSFunctionType(node: babelTypes.TSFunctionType): TypeAnnotatio
   if (node.parameters && node.parameters.length > 0) {
     node.parameters.forEach((parameter) => {
       if (parameter.type === 'Identifier' && parameter.typeAnnotation && parameter.typeAnnotation.type === 'TSTypeAnnotation') {
+        if (parameter.typeAnnotation.typeAnnotation.type === 'TSFunctionType') {
+          throw new Error('解析Ts 类型异常，未支持 TS 类型多层嵌套 function 类型');
+        }
+
         const typeAnnotation = transformTypeAnnotation(parameter.typeAnnotation.typeAnnotation);
         if (typeAnnotation) {
           typeArguments.push(typeAnnotation);

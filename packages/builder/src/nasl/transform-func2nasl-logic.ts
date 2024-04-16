@@ -98,144 +98,155 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
     && node.declaration.typeParameters.type === 'TSTypeParameterDeclaration'
     && node.declaration.typeParameters.params && node.declaration.typeParameters.params.length > 0
   ) {
-    logic.typeParams = node.declaration.typeParameters.params.map((t) => ({
-      concept: 'TypeParam',
-      name: t.name,
-      displayName: logicComment.typeParams[t.name] || '',
-    }));
-  }
-
-  if (node.declaration.params && node.declaration.params.length > 0) {
-    node.declaration.params.forEach((param) => {
-      let name: string | undefined;
-      let typeAnnotation: TypeAnnotation | undefined;
-      let defaultValue: DefaultValue | undefined;
-      let spread = false;
-      if (param.type === 'Identifier' && param.typeAnnotation && param.typeAnnotation.type === 'TSTypeAnnotation') {
-        typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation);
-        name = param.name;
-      } else if (param.type === 'RestElement' && param.argument.type === 'Identifier' && param.typeAnnotation && param.typeAnnotation.type === 'TSTypeAnnotation') {
-        if (param.typeAnnotation.typeAnnotation.type === 'TSTypeReference'
-          && (
-            (
-              param.typeAnnotation.typeAnnotation.typeName.type === 'TSQualifiedName'
-              && param.typeAnnotation.typeAnnotation.typeName.right.name === 'List'
-            ) || (
-              param.typeAnnotation.typeAnnotation.typeName.type === 'Identifier'
-              && param.typeAnnotation.typeAnnotation.typeName.name === 'Array'
-            )
-          )
-          && param.typeAnnotation.typeAnnotation.typeParameters
-          && param.typeAnnotation.typeAnnotation.typeParameters.params
-          && param.typeAnnotation.typeAnnotation.typeParameters.params.length > 0
-        ) {
-          typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation.typeParameters.params[0]);
-        } else if (param.typeAnnotation.typeAnnotation.type === 'TSArrayType') {
-          typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation.elementType);
-        } else {
-          typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation);
-        }
-        name = param.argument.name;
-        spread = true;
-      } else if (param.type === 'AssignmentPattern' && param.left.type === 'Identifier' && param.left.typeAnnotation && param.left.typeAnnotation.type === 'TSTypeAnnotation') {
-        name = param.left.name;
-        typeAnnotation = transformTypeAnnotation(param.left.typeAnnotation.typeAnnotation);
-        switch (param.right.type) {
-          case 'NullLiteral':
-            defaultValue = {
-              concept: 'DefaultValue',
-              expression: {
-                concept: 'NullLiteral',
-              },
-              playground: [],
-            };
-            break;
-          case 'StringLiteral':
-            defaultValue = {
-              concept: 'DefaultValue',
-              expression: {
-                concept: 'StringLiteral',
-                value: param.right.value,
-                i18nKey: '',
-              },
-              playground: [],
-            };
-            break;
-          case 'NumericLiteral':
-            defaultValue = {
-              concept: 'DefaultValue',
-              expression: {
-                concept: 'NumericLiteral',
-                value: String(param.right.value),
-                typeAnnotation: {
-                  concept: 'TypeAnnotation',
-                  typeKind: 'primitive',
-                  typeName: String(param.right.value).includes('.') ? 'Decimal' : 'Integer',
-                  typeNamespace: 'nasl.core',
-                  inferred: false,
-                  ruleMap: new Map(),
-                },
-              },
-              playground: [],
-            };
-            break;
-          case 'BooleanLiteral':
-            defaultValue = {
-              concept: 'DefaultValue',
-              expression: {
-                concept: 'BooleanLiteral',
-                value: String(param.right.value),
-              },
-              playground: [],
-            };
-            break;
-          default: break;
-        }
+    logic.typeParams = node.declaration.typeParameters.params.map((t) => {
+      if (t.constraint || t.default) {
+        logger.error(`解析逻辑失败 ${logic.name} ${getNodeCode(t)}, 泛型不支持使用 extends 或 = 等表达式`);
+        process.exit(1);
       }
 
-      if (name && typeAnnotation) {
-        const p: any = {
-          concept: 'Param',
-          name,
-          description: logicComment.params[name],
-          typeAnnotation,
-          spread,
-        };
-
-        // 在泛型里就矫正 typeKind
-        if (
-          logic.typeParams.length > 0
-          && typeAnnotation
-          && typeAnnotation.typeKind === 'reference'
-          && logic.typeParams.findIndex((t) => typeAnnotation && t.name === typeAnnotation.typeName) !== -1
-        ) {
-          typeAnnotation.typeKind = 'typeParam';
-        }
-
-        if (defaultValue) {
-          p.defaultValue = defaultValue;
-        }
-
-        logic.params.push(p);
-        return;
-      }
-
-      logger.error(`解析逻辑失败 ${name} ${getNodeCode(param)}, 参数不支持解析，请检查类型是否使用 @nasl/types`);
-      process.exit(1);
+      return {
+        concept: 'TypeParam',
+        name: t.name,
+        displayName: logicComment.typeParams[t.name] || '',
+      };
     });
   }
 
-  if (node.declaration.returnType && node.declaration.returnType.type === 'TSTypeAnnotation') {
-    const returnType = transformTypeAnnotation(node.declaration.returnType.typeAnnotation);
+  try {
+    if (node.declaration.params && node.declaration.params.length > 0) {
+      node.declaration.params.forEach((param) => {
+        let name: string | undefined;
+        let typeAnnotation: TypeAnnotation | undefined;
+        let defaultValue: DefaultValue | undefined;
+        let spread = false;
+        if (param.type === 'Identifier' && param.typeAnnotation && param.typeAnnotation.type === 'TSTypeAnnotation') {
+          typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation);
+          name = param.name;
+        } else if (param.type === 'RestElement' && param.argument.type === 'Identifier' && param.typeAnnotation && param.typeAnnotation.type === 'TSTypeAnnotation') {
+          if (param.typeAnnotation.typeAnnotation.type === 'TSTypeReference'
+            && (
+              (
+                param.typeAnnotation.typeAnnotation.typeName.type === 'TSQualifiedName'
+                && param.typeAnnotation.typeAnnotation.typeName.right.name === 'List'
+              ) || (
+                param.typeAnnotation.typeAnnotation.typeName.type === 'Identifier'
+                && param.typeAnnotation.typeAnnotation.typeName.name === 'Array'
+              )
+            )
+            && param.typeAnnotation.typeAnnotation.typeParameters
+            && param.typeAnnotation.typeAnnotation.typeParameters.params
+            && param.typeAnnotation.typeAnnotation.typeParameters.params.length > 0
+          ) {
+            typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation.typeParameters.params[0]);
+          } else if (param.typeAnnotation.typeAnnotation.type === 'TSArrayType') {
+            typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation.elementType);
+          } else {
+            typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation);
+          }
+          name = param.argument.name;
+          spread = true;
+        } else if (param.type === 'AssignmentPattern' && param.left.type === 'Identifier' && param.left.typeAnnotation && param.left.typeAnnotation.type === 'TSTypeAnnotation') {
+          name = param.left.name;
+          typeAnnotation = transformTypeAnnotation(param.left.typeAnnotation.typeAnnotation);
+          switch (param.right.type) {
+            case 'NullLiteral':
+              defaultValue = {
+                concept: 'DefaultValue',
+                expression: {
+                  concept: 'NullLiteral',
+                },
+                playground: [],
+              };
+              break;
+            case 'StringLiteral':
+              defaultValue = {
+                concept: 'DefaultValue',
+                expression: {
+                  concept: 'StringLiteral',
+                  value: param.right.value,
+                  i18nKey: '',
+                },
+                playground: [],
+              };
+              break;
+            case 'NumericLiteral':
+              defaultValue = {
+                concept: 'DefaultValue',
+                expression: {
+                  concept: 'NumericLiteral',
+                  value: String(param.right.value),
+                  typeAnnotation: {
+                    concept: 'TypeAnnotation',
+                    typeKind: 'primitive',
+                    typeName: String(param.right.value).includes('.') ? 'Decimal' : 'Integer',
+                    typeNamespace: 'nasl.core',
+                    inferred: false,
+                    ruleMap: new Map(),
+                  },
+                },
+                playground: [],
+              };
+              break;
+            case 'BooleanLiteral':
+              defaultValue = {
+                concept: 'DefaultValue',
+                expression: {
+                  concept: 'BooleanLiteral',
+                  value: String(param.right.value),
+                },
+                playground: [],
+              };
+              break;
+            default: break;
+          }
+        }
 
-    if (returnType) {
-      logic.returns.push({
-        concept: 'Return',
-        name: 'result',
-        description: logicComment.returns,
-        typeAnnotation: returnType,
+        if (name && typeAnnotation) {
+          const p: any = {
+            concept: 'Param',
+            name,
+            description: logicComment.params[name],
+            typeAnnotation,
+            spread,
+          };
+
+          // 在泛型里就矫正 typeKind
+          if (
+            logic.typeParams.length > 0
+            && typeAnnotation
+            && typeAnnotation.typeKind === 'reference'
+            && logic.typeParams.findIndex((t) => typeAnnotation && t.name === typeAnnotation.typeName) !== -1
+          ) {
+            typeAnnotation.typeKind = 'typeParam';
+          }
+
+          if (defaultValue) {
+            p.defaultValue = defaultValue;
+          }
+
+          logic.params.push(p);
+          return;
+        }
+
+        logger.error(`解析逻辑失败 ${name} ${getNodeCode(param)}, 参数不支持解析，请检查类型是否使用 @nasl/types`);
+        process.exit(1);
       });
     }
+
+    if (node.declaration.returnType && node.declaration.returnType.type === 'TSTypeAnnotation') {
+      const returnType = transformTypeAnnotation(node.declaration.returnType.typeAnnotation);
+
+      if (returnType) {
+        logic.returns.push({
+          concept: 'Return',
+          name: 'result',
+          description: logicComment.returns,
+          typeAnnotation: returnType,
+        });
+      }
+    }
+  } catch (e: any) {
+    logger.error(`解析逻辑失败 ${logic.name}: ${e.message}`);
   }
 
   return {
