@@ -44,7 +44,7 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
           break;
         case text.includes('@type '):
           const typeKind = (text.split('@type ')[1] || '').trim();
-          if (['both', 'pc', 'mobile'].indexOf(typeKind) === -1) {
+          if (['both', 'pc', 'h5'].indexOf(typeKind) === -1) {
             logicComment.type = 'pc';
           } else {
             logicComment.type = typeKind;
