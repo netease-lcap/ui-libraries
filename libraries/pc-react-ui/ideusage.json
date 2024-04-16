@@ -649,7 +649,10 @@
   {
     "name": "Image",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "additionalAttribute": {
+        "preview": "{false}"
+      }
     }
   },
   {
@@ -691,6 +694,7 @@
       "idetype": "popover",
       "structured": true,
       "namedSlotOmitWrapper": ["menuItem"],
+      "childAccept": "this.getDefaultElements().length < 1",
       "actions": {
         "click": {
           "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
