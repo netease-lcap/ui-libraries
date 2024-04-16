@@ -78,29 +78,38 @@ export const 默认 = {
           layout="mix"
           logo="http://minio-api.codewave-dev.163yun.com/lowcode-static/packages/%40lcap/pc-react-ui%401.0.0-beta.0/dist-theme/LOGO.png"
           title="应用名称"
-          avatarRender={(
-            <Dropdown
-              menuItem={(
-                <>
-                  <MenuItem label="导航项目" />
-                  <MenuItem label="导航项目" />
-                </>
-              )}
-            />
-          )}
+          // avatarRender={(
+          //   <Dropdown
+          //     menuItem={(
+          //       <>
+          //         <MenuItem label="导航项目" />
+          //         <MenuItem label="导航项目" />
+          //       </>
+          //     )}
+          //   />
+          // )}
+          avatarRender={(props, dom) => {
+            return (
+              <Dropdown
+                menu={{
+                  items: [
+                    {
+                      key: 'logout',
+                      icon: <LogoutOutlined />,
+                      label: '退出登录',
+                    },
+                  ],
+                }}
+              >
+                {dom}
+              </Dropdown>
+            );
+          }}
           menuSlot={(
             <>
               <MenuItem label="采购信息" path="/1">
-                <MenuItem
-                  label="采购信息录入"
-                  key="record"
-                  labelSlot={<></>}
-                />
-                <MenuItem
-                  label="采购信息管理"
-                  key="list"
-                  labelSlot={<></>}
-                />
+                <MenuItem label="采购信息录入" key="record" labelSlot={<></>} />
+                <MenuItem label="采购信息管理" key="list" labelSlot={<></>} />
               </MenuItem>
               <MenuItem label="导航项" path="/2" />
               <MenuItem
