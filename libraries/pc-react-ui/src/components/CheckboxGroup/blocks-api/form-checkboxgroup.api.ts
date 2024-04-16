@@ -5,13 +5,13 @@ namespace nasl.ui {
     title: '表单多选组',
     description: '表单多选组',
   })
-  export class FormCheckboxGroup<T, V, C extends string> extends ViewComponent {
+  export class FormCheckboxGroup<T, V, C> extends ViewComponent {
     constructor(options?: Partial<FormCheckboxGroupOptions<T, V, C> & FormItemOptions>) {
       super();
     }
   }
 
-  export class FormCheckboxGroupOptions<T, V, C extends string> extends ViewComponentOptions {
+  export class FormCheckboxGroupOptions<T, V, C> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',

@@ -329,8 +329,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/builder
       '@nasl/types':
-        specifier: ^0.1.6
-        version: 0.1.6
+        specifier: 0.1.7-beta.1
+        version: 0.1.7-beta.1
       '@storybook/addon-essentials':
         specifier: ^7.6.17
         version: 7.6.17(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)

@@ -7,7 +7,7 @@ namespace nasl.ui {
     description: '多项中选择多个时使用',
     group: 'Form',
   })
-  export class CheckboxGroup<T, V, C extends string> extends ViewComponent {
+  export class CheckboxGroup<T, V, C> extends ViewComponent {
     // @Prop({
     //   title: '数据',
     // })
@@ -28,7 +28,7 @@ namespace nasl.ui {
     }
   }
 
-  export class CheckboxGroupOptions<T, V, C extends string> extends ViewComponentOptions {
+  export class CheckboxGroupOptions<T, V, C> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -264,7 +264,7 @@ namespace nasl.ui {
       description: '此项的值',
       docDescription: '此项的值',
     })
-    value: nasl.core.Any;
+    value: any;
 
     // @Prop({
     //   group: '数据属性',

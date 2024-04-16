@@ -7,7 +7,7 @@ namespace nasl.ui {
     description: '用于列举大量数据的列表框，支持单选、多选、过滤（搜索）、分页等功能。',
     group: 'Table',
   })
-  export class List<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C extends string> extends ViewComponent {
+  export class List<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     @Prop({
       title: '数据',
     })
@@ -49,7 +49,7 @@ namespace nasl.ui {
     }
   }
 
-  export class ListOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C extends string> extends ViewComponentOptions {
+  export class ListOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',

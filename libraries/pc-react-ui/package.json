@@ -60,7 +60,7 @@
     "@ant-design/static-style-extract": "^1.0.2",
     "@babel/parser": "^7.23.6",
     "@lcap/builder": "workspace:*",
-    "@nasl/types": "^0.1.6",
+    "@nasl/types": "0.1.7-beta.1",
     "@storybook/addon-essentials": "^7.6.17",
     "@storybook/addon-interactions": "^7.6.17",
     "@storybook/addon-links": "^7.6.17",
