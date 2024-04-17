@@ -62,7 +62,7 @@
       "structured": "menuSlot",
       "namedSlotOmitWrapper": ["menuSlot"],
       "parentAccept":"!target.isInSubview",
-      "textholder": "avatarTitle"
+      "translateBindingProperty": ["avatarTitle"]
     }
   },
   {
