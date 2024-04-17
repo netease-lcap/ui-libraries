@@ -56,8 +56,6 @@ namespace nasl.ui {
     })
     hourStep: nasl.core.Integer;
 
-
-
     @Prop({
       group: '数据属性',
       title: '分选项间隔',
@@ -95,7 +93,12 @@ namespace nasl.ui {
       docDescription: '默认显示的日期值。',
       // if: (_) => _.range !== true,
     })
-    value: nasl.core.Time;
+    value:
+      | nasl.core.Date
+      | nasl.core.String
+      | nasl.core.Integer
+      | nasl.core.DateTime
+      | nasl.core.Time;
 
     // @Prop<TimePickerOptions, 'startTime'>({
     //   group: '数据属性',

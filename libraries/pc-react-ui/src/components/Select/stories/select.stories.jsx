@@ -34,7 +34,7 @@ export const 异步函数 = {
     return (
       <div>
         <button onClick={() => ref.current.open()}>1234</button>
-        <Select {...args} prefix="a" ref={ref} />
+        <Select style={{ fontSize: '50px' }} {...args} prefix="a" ref={ref} />
       </div>
     );
   },
@@ -82,11 +82,31 @@ export const 异步函数1 = {
       return <span>1234</span>;
     }
     return (
-      <Select labelText="1234" data-nodepath="rootview.0.0.0.0.1" ide-iscontainer="true" allowClear placeholder="请输入property1" key="component-61" defaultOpen={false}>
-        <SelectOption data-nodepath="rootview.0.0.0.0.1.0" ide-iscontainer="true" value label="是" key="component-62">
+      <Select
+        labelText="1234"
+        data-nodepath="rootview.0.0.0.0.1"
+        ide-iscontainer="true"
+        allowClear
+        placeholder="请输入property1"
+        key="component-61"
+        defaultOpen={false}
+      >
+        <SelectOption
+          data-nodepath="rootview.0.0.0.0.1.0"
+          ide-iscontainer="true"
+          value
+          label="是"
+          key="component-62"
+        >
           <EmptySlot key="16" />
         </SelectOption>
-        <SelectOption data-nodepath="rootview.0.0.0.0.1.1" ide-iscontainer="true" value={false} label="否" key="component-63">
+        <SelectOption
+          data-nodepath="rootview.0.0.0.0.1.1"
+          ide-iscontainer="true"
+          value={false}
+          label="否"
+          key="component-63"
+        >
           <EmptySlot key="17" />
         </SelectOption>
       </Select>

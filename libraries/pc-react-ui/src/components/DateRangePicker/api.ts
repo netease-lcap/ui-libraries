@@ -51,7 +51,9 @@ namespace nasl.ui {
       sync: true,
       docDescription: '当前选择的值',
     })
-    value: Array<nasl.core.Date>;
+    value: Array<
+      nasl.core.Date | nasl.core.String | nasl.core.Integer | nasl.core.DateTime
+    >;
 
     // ============================
     // @Prop<DateRangePickerOptions, 'startDate'>({
@@ -361,8 +363,6 @@ namespace nasl.ui {
     //   },
     // })
     // preview: nasl.core.Boolean = false;
-
-
 
     // @Prop({
     //   group: '样式属性',

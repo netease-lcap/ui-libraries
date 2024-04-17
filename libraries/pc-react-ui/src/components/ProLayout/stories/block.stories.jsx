@@ -12,7 +12,6 @@ import {
   Flex,
   ProLayout,
   Avatar,
-  Avatar,
   Router,
 } from '@/index';
 
@@ -52,8 +51,8 @@ export const 基本用法 = {
             )}
           >
             <Flex gap={8}>
-              <Avatar src="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg" />
-              <Text style={{ lineHeight: '2.5' }}>{$global.userInfo.UserName}</Text>
+              <Image style={{width:'21px'}} src="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg" />
+              <Text style={{ paddingTop: 11 }} children={$global.userInfo.UserName}></Text>
             </Flex>
           </Dropdown>
         )}

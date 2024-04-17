@@ -58,19 +58,19 @@ namespace nasl.ui {
     })
     ellipsis: nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: '是否可编辑',
-      bindHide: true,
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    editable: nasl.core.Boolean;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '是否可编辑',
+    //   bindHide: true,
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // editable: nasl.core.Boolean;
 
     @Prop({
       group: '主要属性',
-      title: '是否可拷贝，为对象时可进行各种自定义',
+      title: '是否可拷贝',
       bindHide: true,
       setter: {
         concept: 'SwitchSetter',

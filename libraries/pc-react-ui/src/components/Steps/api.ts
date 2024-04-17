@@ -188,11 +188,6 @@ namespace nasl.ui {
   }
 
   export class StepsItemOptions<T> extends ViewComponentOptions {
-    @Prop({
-      title: '标题',
-      description: '步骤标题文本',
-    })
-    private title: nasl.core.String;
 
     @Prop({
       title: '描述信息',

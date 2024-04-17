@@ -20,6 +20,6 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 普通图片 = {
   render: () => {
-    return <Avatar style={{ height: '100%' }} src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />;
+    return <Avatar />;
   },
 };

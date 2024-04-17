@@ -45,9 +45,9 @@ namespace nasl.ui {
       docDescription:
         '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
     })
-    dataSource: P extends true
-      ? { list: nasl.collection.List<T>; total: nasl.core.Integer }
-      : nasl.collection.List<T>;
+    dataSource:
+      | { list: nasl.collection.List<T>; total: nasl.core.Integer }
+      | nasl.collection.List<T>;
 
     @Prop({
       group: '数据属性',
@@ -65,11 +65,7 @@ namespace nasl.ui {
       sync: true,
       docDescription: '当前选择的值',
     })
-    value: M extends true
-      ? C extends ''
-        ? nasl.collection.List<V>
-        : nasl.core.String
-      : V;
+    value: any;
 
     @Prop<SelectOptions<T, V, P, M, C>, 'textField'>({
       group: '数据属性',
@@ -81,7 +77,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    textField: (item: T) => any;
+    textField: (item: T) => any = ((item: any) => item.label) as any;
 
     @Prop<SelectOptions<T, V, P, M, C>, 'valueField'>({
       group: '数据属性',
@@ -92,7 +88,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    valueField: (item: T) => any;
+    valueField: (item: T) => V = ((item: any) => item.value) as any;
 
     // @Prop({
     //   group: '数据属性',
@@ -309,7 +305,7 @@ namespace nasl.ui {
       description: '此项的值。',
       docDescription: '此项的值',
     })
-    value: V;
+    value: any;
 
     @Prop({
       group: '状态属性',

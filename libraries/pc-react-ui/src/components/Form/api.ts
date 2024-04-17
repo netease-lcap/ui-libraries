@@ -166,7 +166,7 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
       },
     })
-    labelWidth?: nasl.core.Decimal = undefined;
+    labelWidth:any;
 
     @Prop({
       group: '样式属性',

@@ -147,7 +147,9 @@ export const 默认1 = {
         >
           提交
         </button>
-        <button onClick={() => console.log(ref.current.setValues({ id: 123 }))}>
+        <button
+          onClick={() => console.log(ref.current.setValue('time2', ))}
+        >
           设置
         </button>
         <Form

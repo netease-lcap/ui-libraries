@@ -14,7 +14,7 @@
     "storybook": "storybook dev -p 6006",
     "build": "lcap-scripts build",
     "bd": "vite build --mode development && tsc -p tsconfig.api.json && npm run lowcode ",
-    "pub": "vite build && tsc -p tsconfig.api.json && npm run lowcode &&npm run move:test && npm run deploy:codewave1",
+    "pub": "vite build && tsc -p tsconfig.api.json && npm run lowcode  && npm run deploy:codewave",
     "lowcode": " node usage-script.js > ./dist-theme/nasl.ui.merge.json && cd ./dist-theme rm ./nasl.ui.json && mv nasl.ui.merge.json nasl.ui.json ",
     "move": "cp -r /Users/songrui/Desktop/item/ui-libraries/libraries/pc-react-ui/dist-theme/* /Users/songrui/Desktop/item/lcap-assets/data/hoc/ && cd /Users/songrui/Desktop/item/lcap-assets && node upload.js && cd /Users/songrui/Desktop/item/ui-libraries/libraries/pc-react-ui",
     "move:test": "cp -r /Users/songrui/Desktop/item/ui-libraries/libraries/pc-react-ui/dist-theme/* /Users/songrui/Desktop/item/lcap-assets/data/hoc/ && cd /Users/songrui/Desktop/item/lcap-assets && node uploadTest.js && cd /Users/songrui/Desktop/item/ui-libraries/libraries/pc-react-ui",

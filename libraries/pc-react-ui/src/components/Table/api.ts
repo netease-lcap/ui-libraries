@@ -4,10 +4,16 @@ namespace nasl.ui {
   @Component({
     title: '数据表格',
     icon: 'table-view',
-    description: '用于展示大量结构化数据。支持排序、过滤（筛选）、分页、自定义操作等复杂功能。',
+    description:
+      '用于展示大量结构化数据。支持排序、过滤（筛选）、分页、自定义操作等复杂功能。',
     group: 'Table',
   })
-  export class Table<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
+  export class Table<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean
+  > extends ViewComponent {
     @Prop({
       title: '数据',
     })
@@ -38,21 +44,30 @@ namespace nasl.ui {
     }
   }
 
-  export class TableOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
+  export class TableOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean
+  > extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',
       description: '展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑',
-      docDescription: '表格展示的数据。数据源可以绑定变量或者逻辑。变量或逻辑的返回值可以是数组，也可以是对象。对象格式为{list:[], total:10}',
+      docDescription:
+        '表格展示的数据。数据源可以绑定变量或者逻辑。变量或逻辑的返回值可以是数组，也可以是对象。对象格式为{list:[], total:10}',
       designerValue: [{}, {}, {}],
     })
-    dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
+    dataSource:
+      | { list: nasl.collection.List<T>; total: nasl.core.Integer }
+      | nasl.collection.List<T>;
 
     @Prop({
       group: '数据属性',
       title: '数据类型',
       description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription: '表格每一行的数据类型。该属性为展示属性，由数据源推导得到，无需填写',
+      docDescription:
+        '表格每一行的数据类型。该属性为展示属性，由数据源推导得到，无需填写',
     })
     dataSchema: T;
 
@@ -60,7 +75,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '数据源参数',
       description: '数据源除了DataSourceParams外还需要的参数',
-      docDescription: '当数据源绑定的是逻辑，逻辑的第一个输入参数无法满足要求时，可绑定该字段值，传入更多的参数值。数据类型为对象{key:value}格式。',
+      docDescription:
+        '当数据源绑定的是逻辑，逻辑的第一个输入参数无法满足要求时，可绑定该字段值，传入更多的参数值。数据类型为对象{key:value}格式。',
     })
     private params: object;
 
@@ -87,7 +103,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '分页',
       description: '设置是否分页展示数据',
-      docDescription: '是否展示分页组件，数据源调用接口是否加入分页参数。默认开启',
+      docDescription:
+        '是否展示分页组件，数据源调用接口是否加入分页参数。默认开启',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -109,7 +126,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '显示每页条数',
       description: '显示每页条数切换器',
-      docDescription: '分页组件处是否展示数据条数的选择列表。默认开启。在"分页"属性开启时有效',
+      docDescription:
+        '分页组件处是否展示数据条数的选择列表。默认开启。在"分页"属性开启时有效',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -121,7 +139,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '每页条数选项',
       description: '每页条数切换器的选项',
-      docDescription: '分页组件处是否展示每页显示数据条数的选择列表，需设置数组，如[10,20,30,40,50]。在"分页"属性开启时有效。',
+      docDescription:
+        '分页组件处是否展示每页显示数据条数的选择列表，需设置数组，如[10,20,30,40,50]。在"分页"属性开启时有效。',
       if: (_) => _.pagination === true && _.showSizeChanger === true,
     })
     pageSizeOptions: Array<nasl.core.Integer> = [10, 20, 50];
@@ -141,7 +160,8 @@ namespace nasl.ui {
     @Prop<TableOptions<T, V, P, M>, 'showTotal'>({
       group: '数据属性',
       title: '显示总条数',
-      docDescription: '分页组件处是否显示表格总数。默认关闭。在"分页"属性开启时有效',
+      docDescription:
+        '分页组件处是否显示表格总数。默认关闭。在"分页"属性开启时有效',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -153,7 +173,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '显示跳转输入',
       description: '显示页面跳转输入框',
-      docDescription: '分页组件处是否展示跳转到某一页的输入框。默认关闭。在"分页"属性开启时有效',
+      docDescription:
+        '分页组件处是否展示跳转到某一页的输入框。默认关闭。在"分页"属性开启时有效',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -210,22 +231,24 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值字段',
       description: '在单选、多选操作、渲染树形数据中，指定数据唯一值的字段',
-      docDescription: '在表格开启了单选、多选操作、渲染树形数据中，指定数据唯一值的字段',
+      docDescription:
+        '在表格开启了单选、多选操作、渲染树形数据中，指定数据唯一值的字段',
       setter: {
         concept: 'PropertySelectSetter',
       },
     })
-    rowKey: (item: T) => V;
+    rowKey: nasl.core.String | nasl.core.Integer;
 
     @Prop<TableOptions<T, V, P, M>, 'value'>({
       group: '数据属性',
       title: '选择值',
       description: '用于标识单选选项的值',
       sync: true,
-      docDescription: '当表格设置了选则列，或开启了可选行，选中的值。该取值由值字段名决定。一般会是id等能唯一标识每一行数据的值',
+      docDescription:
+        '当表格设置了选则列，或开启了可选行，选中的值。该取值由值字段名决定。一般会是id等能唯一标识每一行数据的值',
       if: (_) => _.rowSelection === true,
     })
-    value: T | nasl.collection.List<T>;
+    value: any;
 
     @Prop({
       group: '数据属性',
@@ -517,7 +540,8 @@ namespace nasl.ui {
     @Prop({
       group: '交互属性',
       title: '虚拟滚动',
-      description: '虚拟滚动表示不展示所有的数据，只展示默认条数的数据，当滚动时再展示剩余的数据。当表格数据量大时，可设置为虚拟滚动，提高性能。默认关闭。',
+      description:
+        '虚拟滚动表示不展示所有的数据，只展示默认条数的数据，当滚动时再展示剩余的数据。当表格数据量大时，可设置为虚拟滚动，提高性能。默认关闭。',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -749,7 +773,12 @@ namespace nasl.ui {
       title: '切换分页后',
       description: '切换分页或改变分页大小时触发',
     })
-    onPageonChange: (event: { size: nasl.core.Integer; oldSize: nasl.core.Integer; number: nasl.core.Integer; oldNumber: nasl.core.Integer }) => any;
+    onPageonChange: (event: {
+      size: nasl.core.Integer;
+      oldSize: nasl.core.Integer;
+      number: nasl.core.Integer;
+      oldNumber: nasl.core.Integer;
+    }) => any;
 
     // @Event({
     //   title: '排序前',
@@ -779,13 +808,21 @@ namespace nasl.ui {
       title: '点击行',
       description: '点击某一行时触发',
     })
-    onRowClick: (event: { item: T; index: nasl.core.Integer; rowIndex: nasl.core.Integer }) => any;
+    onRowClick: (event: {
+      item: T;
+      index: nasl.core.Integer;
+      rowIndex: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '双击行',
       description: '双击某一行时触发',
     })
-    onDoubleClick: (event: { item: T; index: nasl.core.Integer; rowIndex: nasl.core.Integer }) => any;
+    onDoubleClick: (event: {
+      item: T;
+      index: nasl.core.Integer;
+      rowIndex: nasl.core.Integer;
+    }) => any;
 
     // @Event({
     //   title: '选择前',
@@ -816,7 +853,15 @@ namespace nasl.ui {
       description: '多选值变后触发设定事件',
       // if: (_) => _.designerMode === 'empty',
     })
-    onChange: (event: { value: V; oldValue: V; item: T; oldItem: T; values: nasl.collection.List<V>; oldValues: nasl.collection.List<V>; items: nasl.collection.List<T> }) => any;
+    onChange: (event: {
+      value: V;
+      oldValue: V;
+      item: T;
+      oldItem: T;
+      values: nasl.collection.List<V>;
+      oldValues: nasl.collection.List<V>;
+      items: nasl.collection.List<T>;
+    }) => any;
 
     // @Event({
     //   title: '调整列宽后',
@@ -933,7 +978,8 @@ namespace nasl.ui {
       snippets: [
         {
           title: '表格列',
-          code: '<TableColumn title={<Text children="表格列"></Text>} ></TableColumn>',
+          code:
+            '<TableColumn title={<Text children="表格列"></Text>} ></TableColumn>',
         },
       ],
     })
@@ -974,13 +1020,23 @@ namespace nasl.ui {
     title: '表格列',
     description: '表格列',
   })
-  export class TableColumn<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
+  export class TableColumn<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean
+  > extends ViewComponent {
     constructor(options?: Partial<TableColumnOptions<T, V, P, M>>) {
       super();
     }
   }
 
-  export class TableColumnOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
+  export class TableColumnOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean
+  > extends ViewComponentOptions {
     @Prop({
       title: '格式器',
       description: '格式器',
@@ -1019,7 +1075,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '排序初始顺序',
       description: '该列首次点击时的排序顺序',
-      docDescription: '该列首次点击时的排序顺序。与表格属性中的"默认排序顺序"相同',
+      docDescription:
+        '该列首次点击时的排序顺序。与表格属性中的"默认排序顺序"相同',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '升序' }, { title: '倒序' }],
@@ -1142,7 +1199,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '隐藏列',
-      docDescription: '开启后，当表格横向滚动条滚动时，该列会固定不会跟随滚动条滚动',
+      docDescription:
+        '开启后，当表格横向滚动条滚动时，该列会固定不会跟随滚动条滚动',
       setter: {
         concept: 'SwitchSetter',
       },

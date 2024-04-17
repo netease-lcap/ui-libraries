@@ -100,19 +100,26 @@ namespace nasl.ui {
     })
     openKeys: nasl.core.String;
 
-    @Prop({
-      title: '头部背景色',
-      description: '头部背景色',
-      tabKind: 'style',
-    })
-    colorBgHeader: nasl.core.String;
+    // @Prop({
+    //   title: '头部背景色',
+    //   description: '头部背景色',
+    //   tabKind: 'style',
+    // })
+    // colorBgHeader: nasl.core.String;
+
+    // @Prop({
+    //   title: '侧导航背景色',
+    //   description: '侧导航背景色',
+    //   tabKind: 'style',
+    // })
+    // colorMenuBackground: nasl.core.String;
 
     @Prop({
-      title: '侧导航背景色',
+      title: '内容区背景色',
       description: '侧导航背景色',
       tabKind: 'style',
     })
-    colorMenuBackground: nasl.core.String;
+    contentBackground: nasl.core.String;
 
     // @Prop({
     //   title: '字段',

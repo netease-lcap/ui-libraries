@@ -62,7 +62,13 @@ namespace nasl.ui {
       docDescription: '默认显示的日期值。',
       // if: (_) => _.range !== true,
     })
-    value: Array<nasl.core.Time>;
+    value: Array<
+      | nasl.core.Date
+      | nasl.core.String
+      | nasl.core.Integer
+      | nasl.core.DateTime
+      | nasl.core.Time
+    >;
 
     // ======================
     // @Prop<TimeRangePickerOptions, 'startDate'>({
@@ -362,8 +368,6 @@ namespace nasl.ui {
       description: '表单项名称。',
     })
     endName: nasl.core.String;
-
-
 
     //  @Prop({
     //     group: '状态属性',

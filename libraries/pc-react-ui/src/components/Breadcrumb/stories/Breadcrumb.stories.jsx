@@ -24,7 +24,7 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (...arg) => (
-    <Breadcrumb>
+    <Breadcrumb style={{ fontSize: '50px' }}>
       <BreadcrumbItem
         href="www.baidu.com"
         onDoubleClick={(e) => {
