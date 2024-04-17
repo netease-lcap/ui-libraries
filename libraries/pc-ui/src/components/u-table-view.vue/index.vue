@@ -1127,6 +1127,9 @@ export default {
                     let defaultColumnWidth = this.defaultColumnWidth;
                     if (String(defaultColumnWidth).endsWith('%')) {
                         defaultColumnWidth = (parseFloat(defaultColumnWidth) * rootWidth) / 100;
+                    } else if (defaultColumnWidth) {
+                        defaultColumnWidth = parseFloat(defaultColumnWidth);
+                        defaultColumnWidth = isNaN(defaultColumnWidth) ? 0 : defaultColumnWidth;
                     }
                     defaultColumnWidth = defaultColumnWidth || 0;
                     this.visibleColumnVMs.forEach((columnVM, index) => {
