@@ -21,7 +21,7 @@ export default async (rootPath, port = 6006) => {
     deviceScaleFactor: 2,
   });
 
-  const storyPaths = await glob([`${rootPath}/**/stories/block.stories.js`, `${rootPath}/**/stories/block.stories.jsx`, `${rootPath}/**/stories/block.stories.tsx`]);
+  const storyPaths = await glob(['**/stories/block.stories.js', '**/stories/block.stories.jsx', '**/stories/block.stories.tsx'], { cwd: rootPath, absolute: true });
 
   for (let i = 0; i < storyPaths.length; i++) {
     const content = fs.readFileSync(storyPaths[i], 'utf-8');

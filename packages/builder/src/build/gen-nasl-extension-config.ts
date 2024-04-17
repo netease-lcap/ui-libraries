@@ -105,11 +105,11 @@ export default async function getNaslExtensionConfig({
   assetsPublicPath,
   framework,
 }: GenNaslExtensionConfigProps) {
-  const componentPath = path.join(rootPath, 'src/components');
+  const componentPath = 'src/components';
   const pkgInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
   const frameworkKind = framework || getFrameWorkKind(pkgInfo);
   const libInfo = [pkgInfo.name, '@', pkgInfo.version].join('');
-  const viewComponents = glob.sync(`${componentPath}/**/api.ts`).map((tsPath) => {
+  const viewComponents = glob.sync(`${componentPath}/**/api.ts`, { cwd: rootPath, absolute: true }).map((tsPath) => {
     const componentConfig = genNaslComponentConfig({
       apiPath: tsPath,
       assetsPublicPath,

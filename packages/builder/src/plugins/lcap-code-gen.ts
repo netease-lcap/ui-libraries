@@ -28,7 +28,7 @@ function genVarCssCode(themeVarCssPath, componentFolder) {
     themeVarCssPath,
   ];
 
-  const varFiles = glob.sync(`${componentFolder}/*/vars.css`);
+  const varFiles = glob.sync('*/vars.css', { cwd: componentFolder, absolute: true });
   if (varFiles.length > 0) {
     cssVars.push(...varFiles);
   }
@@ -43,7 +43,7 @@ function genComponentStoriesCode(componentFolder, framework) {
   ];
   const stories: string[] = ['const stories = ['];
 
-  const previewFiles = glob.sync(`${componentFolder}/*/index.*`);
+  const previewFiles = glob.sync('*/index.{tsx,ts,jsx,js}', { cwd: componentFolder, absolute: true });
   previewFiles.forEach((filePath) => {
     const compPath = filePath.substring(0, filePath.lastIndexOf('/'));
     const compName = compPath.substring(compPath.lastIndexOf('/') + 1);
