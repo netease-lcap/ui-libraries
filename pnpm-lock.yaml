@@ -169,8 +169,8 @@ importers:
         specifier: workspace:^*
         version: link:../../packages/vite-plugin-vue2
       '@nasl/types':
-        specifier: 0.1.7-beta.1
-        version: 0.1.7-beta.1
+        specifier: 0.1.7-beta.2
+        version: 0.1.7-beta.2
       '@storybook/addon-essentials':
         specifier: ^7.6.17
         version: 7.6.17(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
@@ -492,8 +492,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/vite-plugin-vue2
       '@nasl/types':
-        specifier: 0.1.7-beta.1
-        version: 0.1.7-beta.1
+        specifier: 0.1.7-beta.2
+        version: 0.1.7-beta.2
       '@storybook/addon-essentials':
         specifier: ^7.6.17
         version: 7.6.17(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
@@ -3916,8 +3916,8 @@ packages:
   /@nasl/types@0.1.6:
     resolution: {integrity: sha512-h6Yh57U1jEbvgWh8A1XxsWAW61JLjshq35sT1G57qZ3D6539v2hxEUe8TjOL0c501lz7gCm4WLlowf/wgypBRA==}
 
-  /@nasl/types@0.1.7-beta.1:
-    resolution: {integrity: sha512-iMgr0tRx8hlhXCAFUyI1WjYJkHTtq+X5dTZ8qlyAN4jOs7Ivj9b3fZB4djoT99VsCtorOD2azbIqR8vdYaZInw==}
+  /@nasl/types@0.1.7-beta.2:
+    resolution: {integrity: sha512-DQG4yh7SltBIW/BA6zA2jocFMzHzq7dkTsYiPutoZjrKESUkD9w+FkSisTw3QPZBLSjNHLYpq+QzOAreBbnNLA==}
     dev: true
 
   /@ndelangen/get-tarball@3.0.9:
