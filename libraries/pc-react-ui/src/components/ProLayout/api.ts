@@ -82,13 +82,14 @@ namespace nasl.ui {
     })
     siderWidth: nasl.core.Decimal = 208;
 
-    @Prop({
+    @Prop<ProLayoutOptions, 'fixSiderbar'>({
       group: '样式属性',
       title: '是否固定导航',
       description: '是否固定导航',
       setter: {
         concept: 'SwitchSetter',
       },
+      if: (_) => _.layout === 'top',
     })
     fixSiderbar: nasl.core.Boolean = false;
 
