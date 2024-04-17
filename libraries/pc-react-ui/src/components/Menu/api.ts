@@ -82,7 +82,7 @@ namespace nasl.ui {
     //   title: '输入前',
     //   description: '选择某一项前触发',
     // })
-    // onBeforeSelect: (event: { value: nasl.core.String; oldValue: nasl.core.String; selectedItem: nasl.core.Any; item: nasl.core.Any; oldItem: nasl.core.Any }) => any;
+    // onBeforeSelect: (event: { value: nasl.core.String; oldValue: nasl.core.String; selectedItem: any; item: any; oldItem: any }) => any;
 
     // @Event({
     //   title: '输入时',
@@ -97,16 +97,16 @@ namespace nasl.ui {
     onSelect: (event: {
       value: nasl.core.String;
       oldValue: nasl.core.String;
-      selectedItem: nasl.core.Any;
-      item: nasl.core.Any;
-      oldItem: nasl.core.Any;
+      selectedItem: any;
+      item: any;
+      oldItem: any;
     }) => any;
 
     // @Event({
     //   title: '改变后',
     //   description: '选择值改变时触发',
     // })
-    // onChange: (event: { value: nasl.core.String; oldValue: nasl.core.String; selectedItem: nasl.core.Any; item: nasl.core.Any; oldItem: nasl.core.Any }) => any;
+    // onChange: (event: { value: nasl.core.String; oldValue: nasl.core.String; selectedItem: any; item: any; oldItem: any }) => any;
 
     @Slot({
       title: '链接区域',
@@ -168,7 +168,7 @@ namespace nasl.ui {
       title: '唯一标识',
       description: '在导航中使用可以用来跳转或标识选中状态',
     })
-    path: nasl.core.Any;
+    path: any;
 
     @Prop({
       title: '图标',
@@ -192,7 +192,7 @@ namespace nasl.ui {
       title: '相关对象',
       description: '相关对象。当选择此项时，抛出的事件会传递该对象，便于开发',
     })
-    private item: nasl.core.Any;
+    private item: any;
 
     // @Prop({
     //   title: '链接类型',
@@ -258,7 +258,7 @@ namespace nasl.ui {
     //   title: '选择前',
     //   description: '选择此项前触发',
     // })
-    // onBeforeSelect: (event: { value: nasl.core.String; oldValue: nasl.core.String; selectedItem: nasl.core.Any; item: nasl.core.Any; oldItem: nasl.core.Any }) => any;
+    // onBeforeSelect: (event: { value: nasl.core.String; oldValue: nasl.core.String; selectedItem: any; item: any; oldItem: any }) => any;
 
     // @Event({
     //   title: '导航前',
@@ -407,7 +407,7 @@ namespace nasl.ui {
       title: '链接地址',
       description: '链接地址',
     })
-    path: nasl.core.Any;
+    path: any;
 
     @Prop({
       title: '图标',
@@ -457,7 +457,7 @@ namespace nasl.ui {
       title: '值',
       description: '此项的值',
     })
-    key: nasl.core.Any;
+    key: any;
 
     @Prop({
       title: '图标',

@@ -223,7 +223,8 @@ namespace nasl.ui {
     @Prop<VanListViewOptions<T, V, P, M>, 'placeholder'>({
       group: '主要属性',
       title: '筛选输入框显示文字',
-      if: _ => _.filterable === true
+      if: _ => _.filterable === true,
+      implicitToString: true,
     })
     placeholder: nasl.core.String = '请输入';
     @Prop<VanListViewOptions<T, V, P, M>, 'clearable'>({
@@ -285,19 +286,22 @@ namespace nasl.ui {
     @Prop<VanListViewOptions<T, V, P, M>, 'pullingText'>({
       group: '交互属性',
       title: '下拉过程中提示文案',
-      if: _ => _.pullRefresh === true && _.pageable !== 'pagination'
+      if: _ => _.pullRefresh === true && _.pageable !== 'pagination',
+      implicitToString: true,
     })
     pullingText: nasl.core.String = '下拉刷新';
     @Prop<VanListViewOptions<T, V, P, M>, 'loosingText'>({
       group: '交互属性',
       title: '释放过程中提示文案',
-      if: _ => _.pullRefresh === true && _.pageable !== 'pagination'
+      if: _ => _.pullRefresh === true && _.pageable !== 'pagination',
+      implicitToString: true,
     })
     loosingText: nasl.core.String = '释放刷新';
     @Prop<VanListViewOptions<T, V, P, M>, 'successText'>({
       group: '交互属性',
       title: '刷新成功提示文案',
-      if: _ => _.pullRefresh === true && _.pageable !== 'pagination'
+      if: _ => _.pullRefresh === true && _.pageable !== 'pagination',
+      implicitToString: true,
     })
     successText: nasl.core.String = '已刷新';
     @Prop<VanListViewOptions<T, V, P, M>, 'successDuration'>({
@@ -363,7 +367,8 @@ namespace nasl.ui {
       title: '加载中文案',
       description: '加载中状态显示的文案',
       docDescription: '当数据正在加载时展示的文字，默认为"加载中..."。',
-      if: _ => _.designerMode === 'loading'
+      if: _ => _.designerMode === 'loading',
+      implicitToString: true,
     })
     loadingText: nasl.core.String = '正在加载中...';
     @Prop<VanListViewOptions<T, V, P, M>, 'loading'>({
@@ -382,7 +387,8 @@ namespace nasl.ui {
       title: '加载失败文案',
       description: '加载失败状态显示的提示文案',
       docDescription: '加载失败的提示文字。默认"加载失败，请重试"',
-      if: _ => _.designerMode === 'error'
+      if: _ => _.designerMode === 'error',
+      implicitToString: true,
     })
     errorText: nasl.core.String = '加载失败，请重试';
     @Prop<VanListViewOptions<T, V, P, M>, 'error'>({
@@ -402,7 +408,8 @@ namespace nasl.ui {
       title: '暂无数据文案',
       description: '暂无数据状态显示的提示文案',
       docDescription: '当列表为空时的提示文字。默认"暂无数据"',
-      if: _ => _.designerMode === 'empty'
+      if: _ => _.designerMode === 'empty',
+      implicitToString: true,
     })
     emptyText: nasl.core.String = '暂无数据';
     @Prop({
@@ -418,7 +425,7 @@ namespace nasl.ui {
       title: '选择时',
       description: '选择某一项时触发'
     })
-    onInput: (event: M extends true ? nasl.collection.List<V> : V) => any ;
+    onInput: (event: M extends true ? nasl.collection.List<V> : V) => void;
     @Event({
       title: '选择后',
       description: '选择某一项时触发'
@@ -427,7 +434,7 @@ namespace nasl.ui {
       selected: nasl.core.Boolean;
       item: T;
       value: M extends true ? nasl.collection.List<V> : V;
-    }) => any ;
+    }) => void;
     @Event({
       title: '改变后',
       description: '选择值改变时触发。'
@@ -435,17 +442,17 @@ namespace nasl.ui {
     onChange: (event: {
       item: T;
       value: M extends true ? nasl.collection.List<V> : V;
-    }) => any ;
+    }) => void;
     @Event({
       title: '加载前',
       description: '加载前触发'
     })
-    onBeforeLoad: (event: any) => any ;
+    onBeforeLoad: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '加载后',
       description: '加载时触发'
     })
-    onLoad: (event: any) => any ;
+    onLoad: (event: nasl.ui.BaseEvent) => void;
     @Slot({
       title: 'undefined',
       description: '插入<van-cell />',

@@ -166,7 +166,7 @@ namespace nasl.ui {
     //   title: '输入前',
     //   description: '选择某一项前触发',
     // })
-    // onBeforeSelect: (event: { value: nasl.core.String; oldValue: nasl.core.String; selectedItem: nasl.core.Any; item: nasl.core.Any; oldItem: nasl.core.Any }) => any;
+    // onBeforeSelect: (event: { value: nasl.core.String; oldValue: nasl.core.String; selectedItem: any; item: any; oldItem: any }) => any;
 
     // @Event({
     //   title: '输入时',
@@ -181,9 +181,9 @@ namespace nasl.ui {
     onSelect: (event: {
       value: nasl.core.String;
       oldValue: nasl.core.String;
-      selectedItem: nasl.core.Any;
-      item: nasl.core.Any;
-      oldItem: nasl.core.Any;
+      selectedItem: any;
+      item: any;
+      oldItem: any;
     }) => any;
 
     @Slot({

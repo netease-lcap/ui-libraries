@@ -151,8 +151,8 @@ export default {
         getDisplayFormatString() {
             let formatter;
 
-            if (this.advancedFormat && this.advancedFormat.enable && this.advancedFormat.value) { // 高级格式化开启
-                formatter = this.advancedFormat.value;
+            if (this.advancedFormatEnable && this.advancedFormatValue) { // 高级格式化开启
+                formatter = this.advancedFormatValue;
             } else if (this.validShowFormatters.includes(this.showFormatter)) { // 配置的展示格式满足
                 formatter = this.showFormatter;
             }

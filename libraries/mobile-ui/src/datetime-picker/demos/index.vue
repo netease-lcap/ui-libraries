@@ -14,7 +14,8 @@
               :startValue.sync="startDate"
               :endValue.sync="endDate"
               :range="false"
-              :advanced-format="{enable: true, value: 'YYYY年MM月DD日'}"
+              :advanced-format-enable="true"
+              advanced-format-value="YYYY年MM月DD日"
               @confirm="onConfirm"
           >
               <template #title>

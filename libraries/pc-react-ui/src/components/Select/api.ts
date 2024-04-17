@@ -10,9 +10,9 @@ namespace nasl.ui {
   export class Select<
     T,
     V,
-    P extends boolean,
-    M extends boolean,
-    C extends string
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C
   > extends ViewComponent {
     @Prop({
       title: '弹出状态',
@@ -33,9 +33,9 @@ namespace nasl.ui {
   export class SelectOptions<
     T,
     V,
-    P extends boolean,
-    M extends boolean,
-    C extends string
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C
   > extends ViewComponentOptions {
     @Prop({
       group: '数据属性',

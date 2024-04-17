@@ -6,18 +6,18 @@
          :horizontal-center="horizontalCenter"
          v-on="$listeners">
         <template v-if="ready && src || isEmpty">
-            <img :src="convertedSrc" :style="imageStyle" v-bind="$attrs" @click="onClick">
+            <s-image class="" :src="convertedSrc" :style="imageStyle" v-bind="$attrs" @click="onClick" />
             <u-lightbox v-if="preview" :visible.sync="visible" close-button>
                 <u-lightbox-item title="图片预览">
-                    <img :src="convertedSrc"/>
+                    <s-image class="" :src="convertedSrc"/>
                 </u-lightbox-item>
             </u-lightbox>
         </template>
         <template v-else-if="placeholderReady && convertedPlaceholderSrc || placeholderIsEmpty">
-            <img :src="convertedPlaceholderSrc" :style="imageStyle" v-bind="$attrs" @click="onClick" hsj="hsj">
+            <s-image class="" :src="convertedPlaceholderSrc" :style="imageStyle" v-bind="$attrs" @click="onClick" hsj="hsj" />
             <u-lightbox v-if="preview" :visible.sync="visible" close-button>
                 <u-lightbox-item title="图片预览">
-                    <img :src="convertedPlaceholderSrc"/>
+                    <s-image class="" :src="convertedPlaceholderSrc" />
                 </u-lightbox-item>
             </u-lightbox>
         </template>
@@ -28,8 +28,15 @@
 </template>
 
 <script>
+import SImage from '../s-image.vue';
+
+const VARIBALE_REGEX = /^\{\{.*\}\}$/;
+
 export default {
     name: 'u-image',
+    components: {
+      SImage,
+    },
     props: {
         src: {
             type: String,
@@ -147,8 +154,18 @@ export default {
             };
         },
         wrapStyle() {
+            const borderRadius = this.circle ? this.radius : '';
+            if (this.$env && this.$env.VUE_APP_DESIGNER && VARIBALE_REGEX.test(this.src)) {
+              return {
+                'border-radius': borderRadius,
+                width: '100%',
+                height: '100%',
+                maxHeight: '600px',
+              };
+            }
+
             return {
-                'border-radius': this.circle ? this.radius : '',
+                'border-radius': borderRadius,
             };
         },
     },

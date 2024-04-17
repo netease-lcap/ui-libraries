@@ -991,7 +991,7 @@ namespace nasl.ui {
     //   title: '筛选项',
     //   description: '筛选项的参数',
     // })
-    // private valueType	: Array<{ text: nasl.core.String; value: nasl.core.Any }>;
+    // private valueType	: Array<{ text: nasl.core.String; value: any }>;
 
     @Prop({
       group: '数据属性',

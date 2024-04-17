@@ -306,6 +306,7 @@ namespace nasl.ui {
         @Prop({
             title: '文本',
             description: '节点的文本',
+            implicitToString: true,
         })
         text: nasl.core.String;
 

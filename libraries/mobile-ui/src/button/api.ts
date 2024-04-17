@@ -31,6 +31,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '文本',
       description: '默认文本显示内容',
+      implicitToString: true,
     })
     text: nasl.core.String;
     @Prop({
@@ -172,6 +173,7 @@ namespace nasl.ui {
     @Prop({
       group: '状态属性',
       title: '加载中文案',
+      implicitToString: true,
     })
     loadingText: nasl.core.String = '';
     @Prop({
@@ -230,6 +232,6 @@ namespace nasl.ui {
       title: '点击后',
       description: '点击事件',
     })
-    onClick: (event: any) => any;
+    onClick: (event: nasl.ui.BaseEvent) => void;
   }
 }

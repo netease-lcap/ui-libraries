@@ -58,7 +58,7 @@ namespace nasl.ui {
         title: 'undefined',
         description: '表单项的 name',
       })
-      values: nasl.core.Any,
+      values: any,
     ): any {}
 
     @Method({
@@ -556,7 +556,7 @@ namespace nasl.ui {
       title: '修改验证值',
       description: '临时修改验证值',
     })
-    private validatingValue: nasl.core.Any;
+    private validatingValue: any;
 
     @Prop({
       title: '验证前预处理',

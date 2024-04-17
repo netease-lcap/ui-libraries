@@ -81,6 +81,7 @@ namespace nasl.ui {
             title: '占位符',
             description: '为空时显示的占位符文本',
             docDescription: '内容为空时的提示文本。',
+            implicitToString: true,
         })
         placeholder: nasl.core.String;
 

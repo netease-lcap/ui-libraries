@@ -28,6 +28,7 @@ namespace nasl.ui {
         @Prop({
             title: '提示内容',
             description: '默认提示内容',
+            implicitToString: true,
         })
         text: nasl.core.String = '弹出消息';
 

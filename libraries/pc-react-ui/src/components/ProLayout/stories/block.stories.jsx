@@ -12,6 +12,7 @@ import {
   Flex,
   ProLayout,
   Avatar,
+  Avatar,
   Router,
 } from '@/index';
 
@@ -40,6 +41,8 @@ export const 基本用法 = {
         avatarSrc="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
         // avatarTitle={$global.userInfo.UserName}
         avatarTitle="张梦燕"
+        // avatarTitle={$global.userInfo.UserName}
+        // avatarTitle="张梦燕"
         avatarRender={(
           <Dropdown
             menuItem={(

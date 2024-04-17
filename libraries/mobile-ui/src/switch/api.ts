@@ -61,11 +61,11 @@ namespace nasl.ui {
       screenX: nasl.core.Integer;
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
-  }) => any ;
+  }) => void;
     @Event({
       title: '状态切换',
       description: '开关状态切换时触发'
     })
-    onChange: (event: nasl.core.Boolean) => any ;
+    onChange: (event: nasl.core.Boolean) => void;
   }
 }
