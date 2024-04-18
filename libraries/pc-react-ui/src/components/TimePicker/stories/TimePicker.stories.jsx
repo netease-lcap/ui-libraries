@@ -25,12 +25,13 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
-    const [value, setValue] = React.useState();
+    const [value, setValue] = React.useState('19:47:04');
+    React.useEffect(() => {}, []);
     return (
       <TimePicker
         {...args}
         data-nodepath="1234‰"
-        value={'19:47:04'}
+        value={value}
         onChange={(e) => {
           console.log(e);
           setValue(e);
@@ -43,6 +44,7 @@ export const 默认 = {
     locale: {
       placeholder: '请选择日期',
     },
+
     onChange(e) {
       console.log(e);
     },

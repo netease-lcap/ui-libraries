@@ -4,6 +4,8 @@ import { MenuItem, Icon } from '@/index';
 import {
   useRequestDataSource, useHandleMapField, useFormatDataSource,
 } from '@/plugins/common/dataSource';
+
+import { RouterContext } from '@/components/Router';
 import { $deletePropsList, $dataSourceField } from '@/plugins/constants';
 
 export function useHandleDataSource(props) {
@@ -26,13 +28,22 @@ export function useHandleDataSource(props) {
 }
 
 export function useMergeMenu(props) {
+  const { useNavigate } = React.useContext(RouterContext);
+  const navigate = useNavigate?.();
   const fragment = props.get('menuItem');
   const menuItem = React.Children.toArray(_.get(fragment, 'props.children', []));
   const ItemsProps = _.filter(menuItem, (item) => React.isValidElement(item) && item.type === MenuItem)?.map((item) => {
-    const { icon } = item.props;
+    // eslint-disable-next-line no-unsafe-optional-chaining
+    const { icon } = item?.props;
+    const onClickPorps = item.props?.onClick;
     return {
       ..._.omit(item.props, 'children'),
       ..._.isNil(icon) ? {} : { icon: <Icon name={icon} /> },
+      onClick: _.wrap(onClickPorps, (fn, arg) => {
+        _.attempt(fn, arg);
+        if (_.isValidLink(arg.key)) window.location.href = arg.key;
+        else navigate(arg.key);
+      }),
     };
   });
   const menu = props.get('menu');

@@ -64,8 +64,9 @@ export const 默认 = {
       total: 3,
     }),
     // dataSource: ['1', 2, 3],
-    textField: 'name',
-    valueField: 'id',
+    style: { fontSize: '50px' },
+    textField: 'checkbox.name',
+    valueField: 'checkbox.id',
   },
 };
 export const 静态数据 = {
@@ -101,9 +102,7 @@ export const 静态数据元素 = {
       return <div />;
     }
     return (
-      <CheckboxGroup
-        data-nodepath="rootview.6.2"
-      >
+      <CheckboxGroup data-nodepath="rootview.6.2">
         <Checkbox value={1} label={1} id="checkbox" data-nodepath="checkbox">
           1
         </Checkbox>

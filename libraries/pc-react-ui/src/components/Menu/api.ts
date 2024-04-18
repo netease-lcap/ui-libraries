@@ -134,8 +134,8 @@ namespace nasl.ui {
   }
 
   @Component({
-    title: '导航栏项',
-    description: '导航栏的子项目',
+    title: '菜单项',
+    description: '菜单项',
   })
   export class MenuItem extends ViewComponent {
     constructor(options?: Partial<MenuItemOptions>) {

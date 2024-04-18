@@ -16,11 +16,10 @@ export function useHandleValue(props) {
   const onChangeProps = props.get('onChange');
   const showTime = props.get('showTime');
   const valueFormat = _.isValidTime(valueProps) ? dayjs(valueProps) : undefined;
-  const [value, onChange] = useControllableValue(_.controllableValue({ value: valueFormat }));
+  const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueFormat }));
   return {
     value,
     onChange(time) {
-      // console.log(time,'time');
       const formatTime = _.cond([
         [_.conforms({ time: _.isNil, showTime: _.stubTrue }), _.constant(time)],
         [_.conforms({ showTime: Boolean }), _.constant(new Date(time?.format()).toJSON())],

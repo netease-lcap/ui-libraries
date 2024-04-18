@@ -100,18 +100,8 @@ export function useHandleMenuSlot(props) {
           label,
           onClick: _.wrap(onClickPorps, (fn, arg) => {
             _.attempt(fn, arg);
-            if (_.isValidLink(arg.key)) {
-              window.location.href = arg.key;
-              return;
-            }
-            navigate(arg.key);
-            // use
-            // const event = new CustomEvent('pageNavigation', {
-            //   detail: {
-            //     url: arg.key,
-            //   },
-            // });
-            // window.dispatchEvent(event);
+            if (_.isValidLink(arg.key)) window.location.href = arg.key;
+            else navigate(arg.key);
           }),
         };
       }

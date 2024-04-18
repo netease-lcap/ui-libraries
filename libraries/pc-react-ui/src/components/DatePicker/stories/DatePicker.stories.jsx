@@ -32,7 +32,6 @@ export const 默认 = {
     return <DatePicker {...args} ref={ref} data-nodepath="12213" />;
   },
   args: {
-    value: '',
     color: 'magenta',
     placeholder: '1234',
     showTime: true,

@@ -83,3 +83,5 @@ export function useHandleRemoveRef(props) {
 export * from './lowCode';
 
 export * from '@/components/Form/plugins/formItemPlugin';
+
+export * from './stylePlugin';

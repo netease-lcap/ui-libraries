@@ -18,10 +18,9 @@ export function useHandleLocale() {
   };
 }
 export function useHandleValue(props) {
-  const valueProps = props.get('value');
   const onChangeProps = props.get('onChange', () => { });
-  const valueFormat = !_.isNil(valueProps) ? dayjs(valueProps, 'HH:mm:ss') : undefined;
-  const [value, onChange] = useControllableValue(_.filterUnderfinedValue({ value: valueFormat }));
+  // const valueFormat = !_.isNil(valueProps) ? dayjs(valueProps, 'HH:mm:ss') : undefined;
+  const [value, onChange] = useControllableValue(_.controllableValue(props));
   return {
     value,
     onChange(time) {
