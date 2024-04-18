@@ -238,6 +238,7 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
     }
   } catch (e: any) {
     logger.error(`解析逻辑失败 ${logic.name}: ${e.message}`);
+    process.exit(1);
   }
 
   return {
