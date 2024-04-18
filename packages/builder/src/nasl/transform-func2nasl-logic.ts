@@ -113,6 +113,7 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
   }
 
   try {
+    const typeNames = logic.typeParams.map((t) => t.name);
     if (node.declaration.params && node.declaration.params.length > 0) {
       node.declaration.params.forEach((param) => {
         let name: string | undefined;
@@ -120,7 +121,7 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
         let defaultValue: DefaultValue | undefined;
         let spread = false;
         if (param.type === 'Identifier' && param.typeAnnotation && param.typeAnnotation.type === 'TSTypeAnnotation') {
-          typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation);
+          typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation, typeNames);
           name = param.name;
         } else if (param.type === 'RestElement' && param.argument.type === 'Identifier' && param.typeAnnotation && param.typeAnnotation.type === 'TSTypeAnnotation') {
           if (param.typeAnnotation.typeAnnotation.type === 'TSTypeReference'
@@ -137,17 +138,17 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
             && param.typeAnnotation.typeAnnotation.typeParameters.params
             && param.typeAnnotation.typeAnnotation.typeParameters.params.length > 0
           ) {
-            typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation.typeParameters.params[0]);
+            typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation.typeParameters.params[0], typeNames);
           } else if (param.typeAnnotation.typeAnnotation.type === 'TSArrayType') {
-            typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation.elementType);
+            typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation.elementType, typeNames);
           } else {
-            typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation);
+            typeAnnotation = transformTypeAnnotation(param.typeAnnotation.typeAnnotation, typeNames);
           }
           name = param.argument.name;
           spread = true;
         } else if (param.type === 'AssignmentPattern' && param.left.type === 'Identifier' && param.left.typeAnnotation && param.left.typeAnnotation.type === 'TSTypeAnnotation') {
           name = param.left.name;
-          typeAnnotation = transformTypeAnnotation(param.left.typeAnnotation.typeAnnotation);
+          typeAnnotation = transformTypeAnnotation(param.left.typeAnnotation.typeAnnotation, typeNames);
           switch (param.right.type) {
             case 'NullLiteral':
               defaultValue = {
@@ -210,16 +211,6 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
             spread,
           };
 
-          // 在泛型里就矫正 typeKind
-          if (
-            logic.typeParams.length > 0
-            && typeAnnotation
-            && typeAnnotation.typeKind === 'reference'
-            && logic.typeParams.findIndex((t) => typeAnnotation && t.name === typeAnnotation.typeName) !== -1
-          ) {
-            typeAnnotation.typeKind = 'typeParam';
-          }
-
           if (defaultValue) {
             p.defaultValue = defaultValue;
           }
@@ -234,7 +225,7 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
     }
 
     if (node.declaration.returnType && node.declaration.returnType.type === 'TSTypeAnnotation') {
-      const returnType = transformTypeAnnotation(node.declaration.returnType.typeAnnotation);
+      const returnType = transformTypeAnnotation(node.declaration.returnType.typeAnnotation, typeNames);
 
       if (returnType) {
         logic.returns.push({

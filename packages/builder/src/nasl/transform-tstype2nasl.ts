@@ -13,12 +13,12 @@ function exitNotSupportType(node: babelTypes.TSType) {
   throw new Error(`解析Ts 类型异常，未支持 TS 类型 ${getNodeCode(node)}, 请使用nasl/types`);
 }
 
-function transformTSTypeReference(node: babelTypes.TSTypeReference): TypeAnnotation | undefined {
+function transformTSTypeReference(node: babelTypes.TSTypeReference, typeNames): TypeAnnotation | undefined {
   const { typeName, typeParameters } = node;
   // 不支持 Promise
   if (typeName.type === 'Identifier' && typeName.name === 'Promise') {
     if (typeParameters && typeParameters.params && typeParameters.params.length > 0) {
-      return transformTypeAnnotation(typeParameters.params[0]);
+      return transformTypeAnnotation(typeParameters.params[0], typeNames);
     }
   } else if (typeName.type === 'TSQualifiedName') {
     const { left, right } = typeName;
@@ -31,7 +31,7 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference): TypeAnnotat
 
     if (typeParameters && typeParameters.params) {
       typeParameters.params.forEach((param) => {
-        const annotation = transformTypeAnnotation(param);
+        const annotation = transformTypeAnnotation(param, typeNames);
         if (annotation) {
           typeArguments.push({
             ...annotation,
@@ -60,11 +60,29 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference): TypeAnnotat
       exitNotSupportType(node);
     }
 
+    if (typeNames.indexOf(typeName.name) !== -1) {
+      return {
+        concept: 'TypeAnnotation',
+        typeKind: 'typeParam',
+        typeName: typeName.name,
+        typeNamespace: '',
+        inferred: false,
+        ruleMap: new Map(),
+        typeArguments: [],
+      };
+    }
+
+    const NaslTypes = ['Current', 'CurrentDynamic'];
+
+    if (!NaslTypes.includes(typeName.name)) {
+      exitNotSupportType(node);
+    }
+
     const typeArguments: TypeAnnotation[] = [];
 
     if (typeParameters && typeParameters.params) {
       typeParameters.params.forEach((param) => {
-        const annotation = transformTypeAnnotation(param);
+        const annotation = transformTypeAnnotation(param, typeNames);
         if (annotation) {
           typeArguments.push({
             ...annotation,
@@ -80,7 +98,7 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference): TypeAnnotat
     return {
       typeKind: getTypeKind(typeParameters, primitive) as any,
       typeName: typeName.name,
-      typeNamespace: ['Current', 'CurrentDynamic'].includes(typeName.name) ? 'nasl.ui' : '',
+      typeNamespace: NaslTypes.includes(typeName.name) ? 'nasl.ui' : '',
       concept: 'TypeAnnotation',
       inferred: false,
       ruleMap: new Map(),
@@ -91,8 +109,8 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference): TypeAnnotat
   return undefined;
 }
 
-function transformTSUnionType(node: babelTypes.TSUnionType): TypeAnnotation {
-  const typeArguments = node.types.map((t) => transformTypeAnnotation(t)).filter((v) => !!v) as TypeAnnotation[];
+function transformTSUnionType(node: babelTypes.TSUnionType, typeNames): TypeAnnotation {
+  const typeArguments = node.types.map((t) => transformTypeAnnotation(t, typeNames)).filter((v) => !!v) as TypeAnnotation[];
 
   return {
     typeKind: 'union',
@@ -105,7 +123,7 @@ function transformTSUnionType(node: babelTypes.TSUnionType): TypeAnnotation {
   };
 }
 
-function transformTSFunctionType(node: babelTypes.TSFunctionType): TypeAnnotation {
+function transformTSFunctionType(node: babelTypes.TSFunctionType, typeNames): TypeAnnotation {
   const typeArguments: TypeAnnotation[] = [];
   const returnType: TypeAnnotation[] = [];
 
@@ -116,7 +134,7 @@ function transformTSFunctionType(node: babelTypes.TSFunctionType): TypeAnnotatio
           throw new Error('解析Ts 类型异常，未支持 TS 类型多层嵌套 function 类型');
         }
 
-        const typeAnnotation = transformTypeAnnotation(parameter.typeAnnotation.typeAnnotation);
+        const typeAnnotation = transformTypeAnnotation(parameter.typeAnnotation.typeAnnotation, typeNames);
         if (typeAnnotation) {
           typeArguments.push(typeAnnotation);
         }
@@ -125,7 +143,7 @@ function transformTSFunctionType(node: babelTypes.TSFunctionType): TypeAnnotatio
   }
 
   if (node.typeAnnotation) {
-    const typeAnnotation = transformTypeAnnotation(node.typeAnnotation.typeAnnotation);
+    const typeAnnotation = transformTypeAnnotation(node.typeAnnotation.typeAnnotation, typeNames);
     if (typeAnnotation) {
       returnType.push(typeAnnotation);
     }
@@ -143,11 +161,11 @@ function transformTSFunctionType(node: babelTypes.TSFunctionType): TypeAnnotatio
   };
 }
 
-function transformTSTypeLiteral(node: babelTypes.TSTypeLiteral): TypeAnnotation {
+function transformTSTypeLiteral(node: babelTypes.TSTypeLiteral, typeNames: string[]): TypeAnnotation {
   const properties: StructureProperty[] = [];
   node.members.forEach((n) => {
     if (n.type === 'TSPropertySignature' && n.key.type === 'Identifier' && n.typeAnnotation && n.typeAnnotation.type === 'TSTypeAnnotation') {
-      const typeAnnotation = transformTypeAnnotation(n.typeAnnotation.typeAnnotation);
+      const typeAnnotation = transformTypeAnnotation(n.typeAnnotation.typeAnnotation, typeNames);
 
       if (typeAnnotation) {
         properties.push({
@@ -180,16 +198,16 @@ function transformTSTypeLiteral(node: babelTypes.TSTypeLiteral): TypeAnnotation 
   };
 }
 // eslint-disable-next-line consistent-return
-export default function transformTypeAnnotation(node: babelTypes.TSType): TypeAnnotation | undefined {
+export default function transformTypeAnnotation(node: babelTypes.TSType, typeNames: string[] = []): TypeAnnotation | undefined {
   switch (node.type) {
     case 'TSTypeReference':
-      return transformTSTypeReference(node);
+      return transformTSTypeReference(node, typeNames);
     case 'TSUnionType':
-      return transformTSUnionType(node);
+      return transformTSUnionType(node, typeNames);
     case 'TSFunctionType':
-      return transformTSFunctionType(node);
+      return transformTSFunctionType(node, typeNames);
     case 'TSTypeLiteral':
-      return transformTSTypeLiteral(node);
+      return transformTSTypeLiteral(node, typeNames);
     case 'TSVoidKeyword':
       return undefined;
     default:
