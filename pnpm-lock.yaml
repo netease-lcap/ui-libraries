@@ -114,8 +114,8 @@ importers:
         specifier: 0.4.11
         version: 0.4.11
       '@vusion/validator':
-        specifier: ^0.4.6
-        version: 0.4.12
+        specifier: 0.4.7
+        version: 0.4.7
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
@@ -280,8 +280,8 @@ importers:
         specifier: ^4.14.202
         version: 4.14.202
       '@vusion/validator':
-        specifier: ^0.4.14
-        version: 0.4.14
+        specifier: 0.4.7
+        version: 0.4.7
       ahooks:
         specifier: ^3.7.8
         version: 3.7.8(react@18.2.0)
@@ -431,8 +431,8 @@ importers:
         specifier: 0.4.11
         version: 0.4.11
       '@vusion/validator':
-        specifier: 0.4.12
-        version: 0.4.12
+        specifier: 0.4.7
+        version: 0.4.7
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
@@ -6146,13 +6146,6 @@ packages:
       '@types/ms': 0.7.34
     dev: true
 
-  /@types/decimal.js@7.4.0:
-    resolution: {integrity: sha512-TiP45voN8GdDib9QkkdMprTfs86xxHInqTxNPSGbF0m6X0LXVBjkFEKbbL9fqm4ZPoVFkG1p4F26on2MWGvW5w==}
-    deprecated: This is a stub types definition for decimal.js (https://github.com/MikeMcl/decimal.js). decimal.js provides its own type definitions, so you don't need @types/decimal.js installed!
-    dependencies:
-      decimal.js: 10.4.3
-    dev: false
-
   /@types/detect-port@1.3.5:
     resolution: {integrity: sha512-Rf3/lB9WkDfIL9eEKaSYKc+1L/rNVYBjThk22JTqQw0YozXarX8YljFAz+HCoC6h4B4KwCMsBPZHaFezwT4BNA==}
 
@@ -7185,19 +7178,8 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /@vusion/validator@0.4.12:
-    resolution: {integrity: sha512-Kgghnn/mvAARDKeDpD7MHWOPU6kNmlTwTxwOlwtfao1nxxLxeWpw6AlJw63pviEljOwEFGlPm239eQO4wIDsIQ==}
-    dependencies:
-      '@types/decimal.js': 7.4.0
-      '@types/lodash': 4.14.202
-      '@types/validator': 13.11.8
-      decimal.js: 10.4.3
-      lodash: 4.17.21
-      validator: 13.11.0
-    dev: false
-
-  /@vusion/validator@0.4.14:
-    resolution: {integrity: sha512-M6oper6nP+8wh1TCQdxBnDkGHIe0ExpO7GKlKai//Q5rKfmEhF/jYm5aJa9i6vHKGDZA7o8601UVF9O0hqvt0g==}
+  /@vusion/validator@0.4.7:
+    resolution: {integrity: sha512-cXRVo15C7+xXoOH5diP6+rCRcqcT+AAblc5eZLNYyMFuXCGByG9TQmEQZOOAQR0sTi7o307LI138nkKgGhE5IA==}
     dependencies:
       '@types/lodash': 4.14.202
       '@types/validator': 13.11.8
