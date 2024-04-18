@@ -25,7 +25,18 @@ namespace nasl.ui {
                 description: '是否验证后无提示',
             })
             muted: nasl.core.Boolean = false,
-        ): any {}
+        ): ValidateResult {
+            return {
+                rawValue: '',
+                value: '',
+                trigger: '',
+                muted:'',
+                valid: true,
+                touched: true,
+                dirty: true,
+                firstError: ''
+             };
+        }
 
         @Method({
             title: 'undefined',
@@ -47,7 +58,18 @@ namespace nasl.ui {
                 description: '是否验证后无提示',
             })
             muted: nasl.core.Boolean = false,
-        ): any {}
+        ): ValidateResult {
+            return {
+                rawValue: '',
+                value: '',
+                trigger: '',
+                muted:'',
+                valid: true,
+                touched: true,
+                dirty: true,
+                firstError: ''
+             };
+        }
         constructor(options?: Partial<UFormOptions>) { super(); }
     }
 
@@ -322,7 +344,7 @@ namespace nasl.ui {
             title: '修改验证值',
             description: '临时修改验证值',
         })
-        private validatingValue: nasl.core.Any;
+        private validatingValue: any;
 
         @Prop({
             title: '验证前预处理',
@@ -390,6 +412,7 @@ namespace nasl.ui {
             title: '释义提示',
             description: '鼠标悬浮标签后的图标显示释义提示信息',
             docDescription: '默认提示消息。',
+            implicitToString: true,
         })
         message: nasl.core.String;
 
@@ -398,6 +421,7 @@ namespace nasl.ui {
             title: '辅助文本',
             description: '辅助说明的文本信息',
             docDescription: '添加描述内容。',
+            implicitToString: true,
         })
         description: nasl.core.String;
 
@@ -510,6 +534,7 @@ namespace nasl.ui {
             group: '主要属性',
             title: '标题',
             docDescription: '显示的标题。',
+            implicitToString: true,
         })
         title: nasl.core.String;
 

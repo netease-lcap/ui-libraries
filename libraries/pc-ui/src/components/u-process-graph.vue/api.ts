@@ -3,7 +3,7 @@
 namespace nasl.ui {
     @Component({
         title: '流程图',
-        icon: 'processinfo',
+        icon: 'process-flow',
         description: '',
         group: 'Process'
     })

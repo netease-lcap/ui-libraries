@@ -34,7 +34,8 @@ namespace nasl.ui {
     private value: nasl.core.Boolean = false;
     @Prop({
       title: '提示内容',
-      description: '默认提示内容'
+      description: '默认提示内容',
+      implicitToString: true,
     })
     message: nasl.core.String = '弹出消息';
     @Prop({
@@ -91,11 +92,11 @@ namespace nasl.ui {
       title: '打开弹出消息后',
       description: '打开弹出消息时触发'
     })
-    onOpen: (event: any) => any ;
+    onOpen: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '关闭弹出消息后',
       description: '关闭弹出消息时触发'
     })
-    onClose: (event: any) => any ;
+    onClose: (event: nasl.ui.BaseEvent) => void;
   }
 }

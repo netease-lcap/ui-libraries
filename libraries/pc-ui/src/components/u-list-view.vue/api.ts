@@ -7,7 +7,7 @@ namespace nasl.ui {
         description: '用于列举大量数据的列表框，支持单选、多选、过滤（搜索）、分页等功能。',
         group: 'Table'
     })
-    export class UListView<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C extends string> extends ViewComponent {
+    export class UListView<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
         @Prop({
             title: '数据',
         })
@@ -47,7 +47,7 @@ namespace nasl.ui {
         constructor(options?: Partial<UListViewOptions<T, V, P, M, C>>) { super(); }
     }
 
-    export class UListViewOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C extends string> extends ViewComponentOptions {
+    export class UListViewOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
         @Prop({
             group: '数据属性',
             title: '数据源',
@@ -196,6 +196,7 @@ namespace nasl.ui {
             description: '搜搜框为空时显示的占位符文本',
             docDescription: '搜索框为空时提示文本，默认"请输入"。当"可筛选"属性开启时有效。',
             if: _ => _.filterable === true,
+            implicitToString: true,
         })
         placeholder: nasl.core.String = '请输入';
 
@@ -277,6 +278,7 @@ namespace nasl.ui {
             group: '主要属性',
             title: '列表标题',
             docDescription: '列表头部的标题信息。当"显示头部"属性开启时有效',
+            implicitToString: true,
         })
         title: nasl.core.String = '列表';
 
@@ -319,6 +321,7 @@ namespace nasl.ui {
             description: '加载中状态显示的文案',
             docDescription: '当数据正在加载时展示的文字，默认为"加载中..."。',
             if: _ => _.designerMode === 'loading',
+            implicitToString: true,
         })
         loadingText: nasl.core.String = '加载中...';
 
@@ -340,6 +343,7 @@ namespace nasl.ui {
             description: '加载失败状态显示的提示文案',
             docDescription: '加载失败的提示文字。默认"加载失败，请重试"',
             if: _ => _.designerMode === 'error',
+            implicitToString: true,
         })
         errorText: nasl.core.String = '加载失败，请重试';
 
@@ -362,6 +366,7 @@ namespace nasl.ui {
             description: '暂无数据状态显示的提示文案',
             docDescription: '当列表为空时的提示文字。默认"暂无数据"',
             if: _ => _.designerMode === 'empty',
+            implicitToString: true,
         })
         emptyText: nasl.core.String = '暂无数据';
 

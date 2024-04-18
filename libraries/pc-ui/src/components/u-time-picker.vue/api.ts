@@ -43,6 +43,7 @@ namespace nasl.ui {
           title: '占位符',
           description: '为空时显示的占位符文本',
           docDescription: '时间选择框无内容时的提示信息，支持自定义编辑，默认为请输入',
+          implicitToString: true,
       })
       placeholder: nasl.core.String = '请选择时间';
 
@@ -52,6 +53,7 @@ namespace nasl.ui {
           description: '为空时显示的占位符文本（右侧）',
           docDescription: '时间选择框无内容时的提示信息，支持自定义编辑, 在没有设置的时候使用placeholder作为右侧占位符内容',
           if: _ => _.range === true,
+          implicitToString: true,
       })
       placeholderRight: nasl.core.String = '请选择时间';
 
@@ -63,7 +65,7 @@ namespace nasl.ui {
           docDescription: '默认显示的日期值。',
           if: _ => _.range !== true,
       })
-      value: nasl.core.String = '';
+      value: nasl.core.String | nasl.core.Time = '';
 
       @Prop<UTimePickerOptions, 'startTime'>({
           group: '数据属性',
@@ -72,7 +74,7 @@ namespace nasl.ui {
           sync: true,
           if: _ => _.range === true,
       })
-      startTime: nasl.core.String;
+      startTime: nasl.core.String | nasl.core.Time;
 
       @Prop<UTimePickerOptions, 'endTime'>({
           group: '数据属性',
@@ -81,7 +83,7 @@ namespace nasl.ui {
           sync: true,
           if: _ => _.range === true,
       })
-      endTime: nasl.core.String;
+      endTime: nasl.core.String | nasl.core.Time;
 
       @Prop({
           group: '数据属性',
@@ -89,7 +91,7 @@ namespace nasl.ui {
           description: '最小可选的时间值，填写null则不限制，日期填写格式为“00:00:00”',
           docDescription: '支持输入的最小时间。',
       })
-      minTime: nasl.core.String = '00:00:00';
+      minTime: nasl.core.String | nasl.core.Time = '00:00:00';
 
       @Prop({
           group: '数据属性',
@@ -97,7 +99,7 @@ namespace nasl.ui {
           description: '最大可选的时间值，填写null则不限制，日期填写格式为“00:00:00”',
           docDescription: '支持输入的最大时间',
       })
-      maxTime: nasl.core.String = '23:59:59';
+      maxTime: nasl.core.String | nasl.core.Time = '23:59:59';
 
       @Prop<UTimePickerOptions, 'showFormatter'>({
           group: '主要属性',
@@ -111,16 +113,30 @@ namespace nasl.ui {
                   { title: '12时09分', if: _ => _.minUnit === 'minute' }
               ],
           },
-          if: _ => _.advancedFormat.enable === false,
+          if: _ => _.advancedFormatEnable === false,
       })
       showFormatter: 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分';
 
       @Prop({
           group: '主要属性',
           title: '高级格式化',
-          bindHide: true,
+          onChange: [
+            { clear: ['advancedFormatValue'] }
+          ],
+          setter: {
+            concept: 'SwitchSetter',
+          },
       })
-      advancedFormat: { enable: nasl.core.Boolean, value: nasl.core.String } = { enable: false, value: '' };
+      advancedFormatEnable: nasl.core.Boolean = false;
+
+      @Prop<UTimePickerOptions, 'advancedFormatValue'>({
+            group: '主要属性',
+            title: '高级格式化内容',
+            description: '用来控制时间的展示格式',
+            bindHide: true,
+            if: _ => _.advancedFormatEnable === true,
+        })
+        advancedFormatValue: nasl.core.String;
 
       @Prop({
           group: '主要属性',
@@ -150,6 +166,7 @@ namespace nasl.ui {
           title: '此刻按钮名称',
           docDescription: '支持自定义修改原此刻按钮名称',
           if: _ => _.showRightNowButton === true,
+          implicitToString: true,
       })
       rightNowTitle: nasl.core.String = '';
 
@@ -169,6 +186,7 @@ namespace nasl.ui {
           title: '取消按钮名称',
           docDescription: '支持自定义修改原取消按钮名称',
           if: _ => _.showFooterButton === true,
+          implicitToString: true,
       })
       cancelTitle: nasl.core.String = '';
 
@@ -178,6 +196,7 @@ namespace nasl.ui {
           description: '确定按钮的显示名称，如果为空则不显示',
           docDescription: '支持自定义修改原确定按钮名称',
           if: _ => _.showFooterButton === true,
+          implicitToString: true,
       })
       okTitle: nasl.core.String = '';
 

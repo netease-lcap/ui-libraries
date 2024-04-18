@@ -98,7 +98,8 @@ namespace nasl.ui {
     @Prop({
       group: '状态属性',
       title: '加载中文案',
-      description: '加载状态中显示的文案'
+      description: '加载状态中显示的文案',
+      implicitToString: true,
     })
     loadingText: nasl.core.String = '';
     @Prop<VanLinearLayoutOptions, 'mode'>({
@@ -316,7 +317,7 @@ namespace nasl.ui {
       title: '点击后',
       description: '点击此项时触发'
     })
-    onClick: (event: any) => any ;
+    onClick: (event: nasl.ui.BaseEvent) => void;
     @Slot({
       title: 'undefined',
       description: '内容'

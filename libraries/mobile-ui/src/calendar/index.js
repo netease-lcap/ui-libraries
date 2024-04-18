@@ -604,12 +604,12 @@ export default createComponent({
       title: () => this.slots('title'),
     };
 
-    if (this.isPreview && !this.inDesigner()) {
+    if (this.isPreview) {
       return (
         <div class={bem('wrapppcalendar')} vusion-click-enabled="true">
           <Field
             label={this.labelField}
-            value={this.getTitle()}
+            value={this.getTitle() || '--'}
             scopedSlots={tempSlot}
             readonly
             isLink

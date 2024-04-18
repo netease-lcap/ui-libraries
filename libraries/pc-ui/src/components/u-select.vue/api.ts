@@ -7,7 +7,7 @@ namespace nasl.ui {
         description: '下拉选择器，支持单选、多选、搜索等功能',
         group: 'Selector'
     })
-    export class USelect<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C extends string> extends ViewComponent {
+    export class USelect<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
         @Prop({
             title: '数据',
         })
@@ -87,7 +87,7 @@ namespace nasl.ui {
         constructor(options?: Partial<USelectOptions<T, V, P, M, C>>) { super(); }
     }
 
-    export class USelectOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C extends string> extends ViewComponentOptions {
+    export class USelectOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
         @Prop({
             group: '数据属性',
             title: '数据源',
@@ -319,6 +319,7 @@ namespace nasl.ui {
             title: '占位符',
             description: '为空时显示的占位符文本',
             docDescription: '选择框无内容时的提示信息，支持自定义编辑，默认为请选择',
+            implicitToString: true,
         })
         placeholder: nasl.core.String = '请选择';
 
@@ -446,6 +447,7 @@ namespace nasl.ui {
             title: '暂无数据文案',
             description: '暂无数据状态显示的提示文案',
             docDescription: '暂无数据时的文字',
+            implicitToString: true,
         })
         emptyText: nasl.core.String = '暂无数据';
 
@@ -754,6 +756,7 @@ namespace nasl.ui {
         @Prop({
             title: '选项文本',
             description: '此项的显示值',
+            implicitToString: true,
         })
         text: nasl.core.String;
 
@@ -770,6 +773,7 @@ namespace nasl.ui {
             title: '选项辅助文本',
             description: '选项的辅助说明信息，展示在选项文本下方',
             docDescription: '选项文本的辅助描述，展示在选项文本下方',
+            implicitToString: true,
         })
         description: nasl.core.String;
 
@@ -827,6 +831,7 @@ namespace nasl.ui {
             group: '主要属性',
             title: '标题',
             docDescription: '选择分组的标题，标题只有在没有文本插槽的时候生效',
+            implicitToString: true,
         })
         title: nasl.core.String;
 

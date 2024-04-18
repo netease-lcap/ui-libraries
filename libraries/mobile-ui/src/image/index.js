@@ -248,6 +248,10 @@ export default createComponent({
         return;
       }
 
+      if (this.ifDesigner()) {
+        return <s-image src={this.convertedSrc} {...imgData} />;
+      }
+
       if (this.lazyLoad) {
         return <img ref="image" vLazy={this.getSrc(this.src)} {...imgData} />;
       }
@@ -269,9 +273,15 @@ export default createComponent({
 
     loadImage() {
       if (this.lazyLoad) {
-        // lazyLoad 不走这段逻辑
+        // lazyLoad / designer 不走这段逻辑
         return;
       }
+
+      if (this.ifDesigner()) {
+        this.loading = false;
+        return;
+      }
+
       this.loading = true;
       this.error = false;
 

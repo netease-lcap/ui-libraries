@@ -34,7 +34,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '占位符',
-      description: '搜索框为空的显示文字'
+      description: '搜索框为空的显示文字',
+      implicitToString: true,
     })
     placeholder: nasl.core.String;
     @Prop({
@@ -125,7 +126,7 @@ namespace nasl.ui {
       title: '确定搜索时触发',
       description: '确定搜索时触发'
     })
-    onSearch: (event: nasl.core.String) => any ;
+    onSearch: (event: nasl.core.String) => void;
     @Event({
       title: '点击搜索图标时触发',
       description: '点击搜索图标时触发'
@@ -146,32 +147,32 @@ namespace nasl.ui {
       screenX: nasl.core.Integer;
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
-  }) => any ;
+  }) => void;
     @Event({
       title: '输入框内容变化时触发',
       description: '输入框内容变化时触发'
     })
-    onInput: (event: nasl.core.String) => any ;
+    onInput: (event: nasl.core.String) => void;
     @Event({
       title: '输入框获得焦点时触发',
       description: '输入框获得焦点时触发'
     })
-    onFocus: (event: FocusEvent) => any ;
+    onFocus: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '输入框失去焦点时触发',
       description: '输入框失去焦点时触发'
     })
-    onBlur: (event: FocusEvent) => any ;
+    onBlur: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '点击输入区域时触发',
       description: '点击输入区域时触发'
     })
-    onClickinput: (event: FocusEvent) => any ;
+    onClickinput: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '点击清除图标时触发',
       description: '点击清除图标时触发'
     })
-    onClear: (event: any) => any ;
+    onClear: (event: nasl.ui.BaseEvent) => void;
     @Slot({
       title: 'undefined',
       description: '内容'

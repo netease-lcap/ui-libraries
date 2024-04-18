@@ -7,7 +7,7 @@ namespace nasl.ui {
         description: '多项中选择多个时使用',
         group: "Form"
     })
-    export class UCheckboxes<T, V, C extends string> extends ViewComponent {
+    export class UCheckboxes<T, V, C> extends ViewComponent {
         @Prop({
             title: '数据',
         })
@@ -26,7 +26,7 @@ namespace nasl.ui {
         constructor(options?: Partial<UCheckboxesOptions<T, V, C>>) { super(); }
     }
 
-    export class UCheckboxesOptions<T, V, C extends string> extends ViewComponentOptions {
+    export class UCheckboxesOptions<T, V, C> extends ViewComponentOptions {
         @Prop({
             group: '数据属性',
             title: '数据源',
@@ -92,6 +92,7 @@ namespace nasl.ui {
             title: '全选展示内容',
             description: '全选功能展示的文案内容',
             if: _ => _.checkAll === true,
+            implicitToString: true,
         })
         checkAllText: nasl.core.String = '全选';
 

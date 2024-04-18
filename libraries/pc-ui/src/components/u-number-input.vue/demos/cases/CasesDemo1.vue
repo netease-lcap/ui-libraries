@@ -4,15 +4,16 @@
     <u-number-input v-model="value1" formatter="0000"></u-number-input>
     <u-number-input v-model="value2" :precision="0.01" :step="0.1" formatter="#,##0.00元"></u-number-input>
     <u-number-input v-model="value3" :precision="1" :step="1" formatter="0.000%"></u-number-input>
-    <u-number-input 
-        v-model="value4" 
-        :precision="0.005" 
-        :step="0.005" 
-        :advanced-formatter="{ enable: false, value: '' }"
+    <u-number-input
+        v-model="value4"
+        :precision="0.005"
+        :step="0.005"
         :thousandths="true"
-        :decimalPlaces="{ places: 3, omit: false }"
+        :decimalPlacesValue="3"
+        :decimalPlacesOmitZero="false"
         :percentSign="true"
-        :unit="{ type: 'prefix', value: '$' }"
+        unitType="prefix"
+        unitValue="$"
     ></u-number-input>
 </u-linear-layout>
 </template>

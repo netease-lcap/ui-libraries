@@ -89,8 +89,8 @@ export default createComponent({
     // 展示格式
     getDisplayFormatter() {
       // 高级格式化开启
-      if (this.advancedFormat && this.advancedFormat.enable && this.advancedFormat.value) {
-        return this.advancedFormat.value;
+      if (this.advancedFormatEnable && this.advancedFormatValue) {
+        return this.advancedFormatValue;
       }
 
       const formatters = validDisplayFormatters[this.realType][this.realUnit];
@@ -186,10 +186,6 @@ export default createComponent({
     // @exposed-api
     open() {
       if (this.readonly || this.disabled) {
-        return;
-      }
-
-      if (this.isPreview) {
         return;
       }
 
@@ -373,6 +369,25 @@ export default createComponent({
     const tempSlot = {
       title: () => this.slots('title'),
     };
+
+    if (this.isPreview) {
+      return (
+        <div class={bem('wrapppdtpicker')} vusion-click-enabled="true">
+          <Field
+            label={this.labelField}
+            value={this.getTitle() || '--'}
+            scopedSlots={tempSlot}
+            readonly
+            isLink
+            input-align={this.inputAlign || 'right'}
+            // eslint-disable-next-line no-prototype-builtins
+            notitle={!this.$slots.hasOwnProperty('title')}
+            insel={true}
+            nofi={true}
+          />
+        </div>
+      );
+    }
 
     return (
       <div class={bem('wrapppdtpicker')} vusion-click-enabled="true">
