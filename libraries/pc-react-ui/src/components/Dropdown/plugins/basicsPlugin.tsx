@@ -37,6 +37,7 @@ export function useMergeMenu(props) {
     const { icon } = item?.props;
     const onClickPorps = item.props?.onClick;
     return {
+      key: item.props.path,
       ..._.omit(item.props, 'children'),
       ..._.isNil(icon) ? {} : { icon: <Icon name={icon} /> },
       onClick: _.wrap(onClickPorps, (fn, arg) => {

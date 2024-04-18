@@ -71,14 +71,14 @@ export const 默认 = {
         sorter: true,
         // defaultSortOrder: 'ascend',
         // dataIndex: 'age',
-        key: 'name',
+        key: 'namez123',
       },
       {
         title: '年龄',
         sorter: true,
         // defaultSortOrder: 'ascend',
         dataIndex: 'age',
-        key: 'age',
+        key: 'ag1234e',
       },
     ],
   },
@@ -103,6 +103,7 @@ export const 异步 = {
     },
     sticky: true,
     async dataSource(params) {
+      console.log(params,'params,====');
       return {
         list: new Array(50).fill(1).map((item, index) => ({
           key: index,

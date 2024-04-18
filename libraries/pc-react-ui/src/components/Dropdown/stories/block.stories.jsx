@@ -25,7 +25,7 @@ export const 默认 = {
       <Dropdown
         menuItem={(
           <>
-            <MenuItem label="导航项目" />
+            <MenuItem label="导航项目" path="https://www.baidu.com" />
             <MenuItem label="导航项目2" />
           </>
         )}

@@ -90,7 +90,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    valueField: (item: T) => V = ((item: any) => item.value) as any;
+    valueField: (item: T) => any = ((item: any) => item.value) as any;
 
     @Prop<CascaderOptions<T, V>, 'childrenField'>({
       group: '数据属性',
@@ -229,8 +229,6 @@ namespace nasl.ui {
       },
     })
     disabled: nasl.core.Boolean = false;
-
-
 
     // @Prop({
     //   group: '样式属性',

@@ -7,7 +7,11 @@ namespace nasl.ui {
     description: '树选择',
     group: 'Selector',
   })
-  export class TreeSelect<T, V, M extends nasl.core.Boolean> extends ViewComponent {
+  export class TreeSelect<
+    T,
+    V,
+    M extends nasl.core.Boolean
+  > extends ViewComponent {
     // @Prop({
     //   title: '数据',
     // })
@@ -28,21 +32,30 @@ namespace nasl.ui {
     }
   }
 
-  export class TreeSelectOptions<T, V, M extends nasl.core.Boolean> extends ViewComponentOptions {
+  export class TreeSelectOptions<
+    T,
+    V,
+    M extends nasl.core.Boolean
+  > extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
-      docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的',
+      description:
+        '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription:
+        '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的',
       designerValue: [{}, {}, {}],
     })
-    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+    dataSource:
+      | nasl.collection.List<T>
+      | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
     @Prop({
       group: '数据属性',
       title: '数据类型',
       description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示',
+      docDescription:
+        '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示',
     })
     dataSchema: T;
 
@@ -65,7 +78,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    valueField: (item: T) => V = ((item: any) => item.value) as any;
+    valueField: (item: T) => any = ((item: any) => item.value) as any;
 
     @Prop({
       group: '数据属性',
@@ -82,7 +95,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '父级值字段',
       description: '集合的元素类型中，用于标识父节点的属性',
-      docDescription: '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
+      docDescription:
+        '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -119,7 +133,8 @@ namespace nasl.ui {
       group: '交互属性',
       title: '父子节点独立选择',
       description: '开启后父节点选择不会全选子节点，子节点选择不会联动父节点',
-      docDescription: '开启后父节点选择不会全选子节点，子节点选择不会联动父节点',
+      docDescription:
+        '开启后父节点选择不会全选子节点，子节点选择不会联动父节点',
       setter: {
         concept: 'SwitchSetter',
       },

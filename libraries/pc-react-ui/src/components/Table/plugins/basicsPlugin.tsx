@@ -61,7 +61,13 @@ export function useHandleTransformOption(props) {
   const transformOption = React.useMemo(
     () => fp.cond([
       [fp.isArray, fp.constant(async () => ({ list: dataSource, total: dataSource.length }))],
-      [fp.isFunction, fp.constant((...arg) => Promise.resolve(dataSource(...arg)).then(warpList))],
+      [fp.isFunction, fp.constant((...arg) => {
+        const sorterMap = { ascend: 'asc', descend: 'desc' };
+        const sorter = _.get(arg, '0.sorter', {});
+        arg[0].order = sorter.order ? sorterMap[sorter.order] : undefined;
+        arg[0].sorter = sorter.field;
+        return Promise.resolve(dataSource(...arg)).then(warpList);
+      })],
       [fp.stubTrue, fp.constant(async () => ({ list: [], total: 0 }))],
     ]),
     [dataSource],
@@ -170,7 +176,7 @@ export function useHandleOnRow(props) {
   };
 }
 
-export function useHandleSorter(props) {
+function useHandleSorter(props) {
   const columnsProps = props.get('columns');
   const columns = React.useMemo(() => _.map(columnsProps, (item) => {
     const isSorter = fp.conforms({ sorter: fp.isEqual(true) });
@@ -204,6 +210,26 @@ export function useHandleSorter(props) {
   return result;
 }
 
+export function useHandleSortering(props) {
+  const onChangeProps = props.get('onChange');
+  const [sortedInfo, setSortedInfo] = React.useState<any>();
+  const columnsProps = props.get('columns');
+  const columns = React.useMemo(() => _.map(columnsProps, (item) => {
+    const sortInfo = item.sorter ? { sorter: true, sortOrder: sortedInfo?.field === item.dataIndex ? sortedInfo.order : undefined } : {};
+    return {
+      ...item,
+      ...sortInfo,
+    };
+  }), [columnsProps, sortedInfo]);
+  return {
+    onChange: _.wrap(onChangeProps, (fn, pagination, filters, sorter, extra) => {
+      fn(pagination, filters, sorter, extra);
+      setSortedInfo(sorter);
+    }),
+    columns,
+  };
+}
+useHandleSortering.order = 5;
 export function useHandleScroll(props) {
   const scrollX = props.get('scrollX');
   const scrollY = props.get('scrollY');
