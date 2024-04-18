@@ -172,7 +172,7 @@ namespace nasl.ui {
             title: '默认每页条数',
             setter: {
                 concept: 'NumberInputSetter',
-                min: 1,
+                min: 10,
             },
             if: _ => _.pagination === true,
         })
