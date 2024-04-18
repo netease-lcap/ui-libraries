@@ -162,8 +162,8 @@ importers:
         specifier: 0.4.11
         version: 0.4.11
       '@vusion/validator':
-        specifier: ^0.4.6
-        version: 0.4.12
+        specifier: 0.4.7
+        version: 0.4.7
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
@@ -327,6 +327,18 @@ importers:
 
   libraries/pc-react-ui:
     dependencies:
+      '@ant-design/icons':
+        specifier: ^5.2.6
+        version: 5.2.6(react-dom@18.2.0)(react@18.2.0)
+      '@ant-design/pro-components':
+        specifier: ^2.6.48
+        version: 2.6.49(antd@5.15.1)(rc-field-form@1.42.1)(react-dom@18.2.0)(react@18.2.0)
+      '@types/lodash':
+        specifier: ^4.14.202
+        version: 4.14.202
+      '@vusion/validator':
+        specifier: 0.4.7
+        version: 0.4.7
       ahooks:
         specifier: ^3.7.8
         version: 3.7.8(react@18.2.0)
@@ -443,8 +455,8 @@ importers:
         specifier: 0.4.11
         version: 0.4.11
       '@vusion/validator':
-        specifier: 0.4.12
-        version: 0.4.12
+        specifier: 0.4.7
+        version: 0.4.7
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
@@ -5096,13 +5108,6 @@ packages:
       '@types/ms': 0.7.34
     dev: true
 
-  /@types/decimal.js@7.4.0:
-    resolution: {integrity: sha512-TiP45voN8GdDib9QkkdMprTfs86xxHInqTxNPSGbF0m6X0LXVBjkFEKbbL9fqm4ZPoVFkG1p4F26on2MWGvW5w==}
-    deprecated: This is a stub types definition for decimal.js (https://github.com/MikeMcl/decimal.js). decimal.js provides its own type definitions, so you don't need @types/decimal.js installed!
-    dependencies:
-      decimal.js: 10.4.3
-    dev: false
-
   /@types/detect-port@1.3.5:
     resolution: {integrity: sha512-Rf3/lB9WkDfIL9eEKaSYKc+1L/rNVYBjThk22JTqQw0YozXarX8YljFAz+HCoC6h4B4KwCMsBPZHaFezwT4BNA==}
     dev: true
@@ -6351,28 +6356,8 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /@vusion/validator@0.2.4:
-    resolution: {integrity: sha512-uEow9s5niULsXK98ou9hyf3Zl41bLw35INBQBSXEuXk4f4qLInxUBYYwTKNObPu3Qxkym6sf2ECi+JQlTSi3cw==}
-    dependencies:
-      '@types/lodash': 4.14.202
-      '@types/validator': 10.11.3
-      lodash: 4.17.21
-      validator: 11.1.0
-    dev: false
-
-  /@vusion/validator@0.4.12:
-    resolution: {integrity: sha512-Kgghnn/mvAARDKeDpD7MHWOPU6kNmlTwTxwOlwtfao1nxxLxeWpw6AlJw63pviEljOwEFGlPm239eQO4wIDsIQ==}
-    dependencies:
-      '@types/decimal.js': 7.4.0
-      '@types/lodash': 4.14.202
-      '@types/validator': 13.11.8
-      decimal.js: 10.4.3
-      lodash: 4.17.21
-      validator: 13.11.0
-    dev: false
-
-  /@vusion/webfonts-generator@0.6.1:
-    resolution: {integrity: sha512-Y3gxOp/pnL+91xrKahMENSiYKJITkykfuXwCAr4HgQC48KRJhyMgzUgNfpSy7F8V1pxIKaoplgkNueJgWP1z0w==}
+  /@vusion/validator@0.4.7:
+    resolution: {integrity: sha512-cXRVo15C7+xXoOH5diP6+rCRcqcT+AAblc5eZLNYyMFuXCGByG9TQmEQZOOAQR0sTi7o307LI138nkKgGhE5IA==}
     dependencies:
       handlebars: 4.7.8
       mkdirp: 0.5.6
