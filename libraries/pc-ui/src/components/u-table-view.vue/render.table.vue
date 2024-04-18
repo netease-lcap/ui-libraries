@@ -732,6 +732,11 @@ export default {
                 tablewrap: this.$refs.tablewrap[0],
             }
         },
+        resetVirtualData() {
+            this.virtualIndex = 0;
+            this.virtualTop = 0;
+            this.virtualBottom = 0;
+        },
     },
 };
 </script>

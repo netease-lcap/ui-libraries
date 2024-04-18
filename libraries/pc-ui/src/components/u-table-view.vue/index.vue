@@ -2442,6 +2442,9 @@ export default {
             }
         },
         handleResizeListener() {
+            if (this.virtual) {
+                this.$refs.tableRender.resetVirtualData();
+            }
             const rootWidth = this.$refs.root.offsetWidth;
             // 放在线性布局flex下，或者某些设置了fit-content，table-width会缓慢增长，导致表格一直动
             // 如果两次width变化不大，不要重新计算每列的computedWidth等
@@ -2449,6 +2452,9 @@ export default {
             this.handleResize(reComputedWidth);
         },
         reHandleResize() {
+            if (this.virtual) {
+                this.$refs.tableRender.resetVirtualData();
+            }
             this.preRootWidth = null;
             this.handleResize(true);
         },
