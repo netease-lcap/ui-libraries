@@ -47,6 +47,9 @@ const createTextNode = (str = '') => {
 function transAstNodeToNaslNode(astNode, namespace = '') {
   let node: any = null;
   if (astNode.type === 'MemberExpression') {
+    if (astNode.object && astNode.object.name === 'nasl' && astNode.property && astNode.property.name) {
+      return `nasl.${astNode.property.name}`;
+    }
     const object = transAstNodeToNaslNode(astNode.object);
     // object如果返回字符串，则将它当成namespace处理
     if (Object.prototype.toString.call(object) === '[object String]') {
