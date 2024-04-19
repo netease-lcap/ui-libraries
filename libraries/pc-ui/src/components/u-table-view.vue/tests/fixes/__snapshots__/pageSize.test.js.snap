@@ -10,11 +10,11 @@ exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 1`] = `
   <div class="root">
     <div class="table" position="static">
       <div class="head">
-        <table class="root head-table" sticky-fixed="true" striped="true">
+        <table class="root head-table" sticky-fixed="true" striped="true" style="width: 100px;">
           <colgroup>
             <col width>
             <col width>
-            <col>
+            <col width>
             <col width>
           </colgroup>
           <thead>
@@ -40,11 +40,11 @@ exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 1`] = `
         <div class="root scrollcview">
           <div class="wrap">
             <div class="view">
-              <table class="root body-table" sticky-fixed="true" striped="true">
+              <table class="root body-table" sticky-fixed="true" striped="true" style="width: 100px;">
                 <colgroup>
                   <col width>
                   <col width>
-                  <col>
+                  <col width>
                   <col width>
                 </colgroup>
                 <tbody>
@@ -815,11 +815,11 @@ exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 2`] = `
   <div class="root">
     <div class="table" position="static">
       <div class="head">
-        <table class="root head-table" sticky-fixed="true" striped="true">
+        <table class="root head-table" sticky-fixed="true" striped="true" style="width: 100px;">
           <colgroup>
             <col width>
             <col width>
-            <col>
+            <col width>
             <col width>
           </colgroup>
           <thead>
@@ -845,11 +845,11 @@ exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 2`] = `
         <div class="root scrollcview">
           <div class="wrap">
             <div class="view">
-              <table class="root body-table" sticky-fixed="true" striped="true">
+              <table class="root body-table" sticky-fixed="true" striped="true" style="width: 100px;">
                 <colgroup>
                   <col width>
                   <col width>
-                  <col>
+                  <col width>
                   <col width>
                 </colgroup>
                 <tbody>

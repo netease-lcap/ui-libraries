@@ -4,11 +4,11 @@ exports[`u-table-view.vue > Demo-刚开始为空的情况 1`] = `
 <div class="root">
   <div class="table" position="static">
     <div class="head">
-      <table class="root head-table" sticky-fixed="true" striped="true">
+      <table class="root head-table" sticky-fixed="true" striped="true" style="width: 100px;">
         <colgroup>
           <col width>
           <col width>
-          <col>
+          <col width>
           <col width>
         </colgroup>
         <thead>
@@ -34,11 +34,11 @@ exports[`u-table-view.vue > Demo-刚开始为空的情况 1`] = `
       <div class="root scrollcview">
         <div class="wrap">
           <div class="view">
-            <table class="root body-table" sticky-fixed="true" striped="true">
+            <table class="root body-table" sticky-fixed="true" striped="true" style="width: 100px;">
               <colgroup>
                 <col width>
                 <col width>
-                <col>
+                <col width>
                 <col width>
               </colgroup>
               <tbody>
@@ -75,11 +75,11 @@ exports[`u-table-view.vue > Demo-后端排序，前端分页 1`] = `
 <div class="root">
   <div class="table" position="static">
     <div class="head">
-      <table class="root head-table" sticky-fixed="true" striped="true">
+      <table class="root head-table" sticky-fixed="true" striped="true" style="width: 100px;">
         <colgroup>
           <col width>
           <col width>
-          <col>
+          <col width>
           <col width>
         </colgroup>
         <thead>
@@ -108,11 +108,11 @@ exports[`u-table-view.vue > Demo-后端排序，前端分页 1`] = `
       <div class="root scrollcview">
         <div class="wrap">
           <div class="view">
-            <table class="root body-table" sticky-fixed="true" striped="true">
+            <table class="root body-table" sticky-fixed="true" striped="true" style="width: 100px;">
               <colgroup>
                 <col width>
                 <col width>
-                <col>
+                <col width>
                 <col width>
               </colgroup>
               <tbody>
@@ -217,11 +217,11 @@ exports[`u-table-view.vue > Demo-纯前端过滤 1`] = `
 <div class="root">
   <div class="table" position="static">
     <div class="head">
-      <table class="root head-table" sticky-fixed="true" striped="true">
+      <table class="root head-table" sticky-fixed="true" striped="true" style="width: 100px;">
         <colgroup>
           <col width>
           <col width>
-          <col>
+          <col width>
           <col width>
         </colgroup>
         <thead>
@@ -269,11 +269,11 @@ exports[`u-table-view.vue > Demo-纯前端过滤 1`] = `
       <div class="root scrollcview">
         <div class="wrap">
           <div class="view">
-            <table class="root body-table" sticky-fixed="true" striped="true">
+            <table class="root body-table" sticky-fixed="true" striped="true" style="width: 100px;">
               <colgroup>
                 <col width>
                 <col width>
-                <col>
+                <col width>
                 <col width>
               </colgroup>
               <tbody>
@@ -483,11 +483,11 @@ exports[`u-table-view.vue > Demo-纯数组前端分页 1`] = `
 <div class="root">
   <div class="table" position="static">
     <div class="head">
-      <table class="root head-table" sticky-fixed="true" striped="true">
+      <table class="root head-table" sticky-fixed="true" striped="true" style="width: 100px;">
         <colgroup>
           <col width>
           <col width>
-          <col>
+          <col width>
           <col width>
         </colgroup>
         <thead>
@@ -513,11 +513,11 @@ exports[`u-table-view.vue > Demo-纯数组前端分页 1`] = `
       <div class="root scrollcview">
         <div class="wrap">
           <div class="view">
-            <table class="root body-table" sticky-fixed="true" striped="true">
+            <table class="root body-table" sticky-fixed="true" striped="true" style="width: 100px;">
               <colgroup>
                 <col width>
                 <col width>
-                <col>
+                <col width>
                 <col width>
               </colgroup>
               <tbody>
@@ -727,11 +727,11 @@ exports[`u-table-view.vue > Demo-纯数组前端排序 1`] = `
 <div class="root">
   <div class="table" position="static">
     <div class="head">
-      <table class="root head-table" sticky-fixed="true" striped="true">
+      <table class="root head-table" sticky-fixed="true" striped="true" style="width: 100px;">
         <colgroup>
           <col width>
           <col width>
-          <col>
+          <col width>
           <col width>
         </colgroup>
         <thead>
@@ -760,11 +760,11 @@ exports[`u-table-view.vue > Demo-纯数组前端排序 1`] = `
       <div class="root scrollcview">
         <div class="wrap">
           <div class="view">
-            <table class="root body-table" sticky-fixed="true" striped="true">
+            <table class="root body-table" sticky-fixed="true" striped="true" style="width: 100px;">
               <colgroup>
                 <col width>
                 <col width>
-                <col>
+                <col width>
                 <col width>
               </colgroup>
               <tbody>
@@ -976,14 +976,14 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
     <div class="root">
       <div class="table" position="static">
         <div class="head">
-          <table class="root head-table" line="horizontal" sticky-fixed="true" striped="true">
+          <table class="root head-table" line="horizontal" sticky-fixed="true" striped="true" style="width: 300px;">
             <colgroup>
               <col width>
               <col width>
-              <col>
               <col width>
-              <col>
-              <col>
+              <col width>
+              <col width>
+              <col width>
             </colgroup>
             <thead>
               <tr>
@@ -1019,14 +1019,14 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
           <div class="root scrollcview">
             <div class="wrap">
               <div class="view">
-                <table class="root body-table" line="horizontal" sticky-fixed="true" striped="true">
+                <table class="root body-table" line="horizontal" sticky-fixed="true" striped="true" style="width: 300px;">
                   <colgroup>
                     <col width>
                     <col width>
-                    <col>
                     <col width>
-                    <col>
-                    <col>
+                    <col width>
+                    <col width>
+                    <col width>
                   </colgroup>
                   <tbody>
                     <tr class="row">
@@ -1162,11 +1162,11 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
     <div class="root">
       <div class="table" position="static">
         <div class="head">
-          <table class="root head-table" line="true" sticky-fixed="true" striped="true">
+          <table class="root head-table" line="true" sticky-fixed="true" striped="true" style="width: 100px;">
             <colgroup>
               <col width>
               <col width>
-              <col>
+              <col width>
               <col width>
             </colgroup>
             <thead>
@@ -1194,11 +1194,11 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
           <div class="root scrollcview">
             <div class="wrap">
               <div class="view">
-                <table class="root body-table" line="true" sticky-fixed="true" striped="true">
+                <table class="root body-table" line="true" sticky-fixed="true" striped="true" style="width: 100px;">
                   <colgroup>
                     <col width>
                     <col width>
-                    <col>
+                    <col width>
                     <col width>
                   </colgroup>
                   <tbody>
@@ -1297,14 +1297,14 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
     <div class="root">
       <div class="table" position="static">
         <div class="head">
-          <table class="root head-table" line="true" sticky-fixed="true" striped="true">
+          <table class="root head-table" line="true" sticky-fixed="true" striped="true" style="width: 300px;">
             <colgroup>
               <col width>
               <col width>
-              <col>
               <col width>
-              <col>
-              <col>
+              <col width>
+              <col width>
+              <col width>
             </colgroup>
             <thead>
               <tr>
@@ -1342,14 +1342,14 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
           <div class="root scrollcview">
             <div class="wrap">
               <div class="view">
-                <table class="root body-table" line="true" sticky-fixed="true" striped="true">
+                <table class="root body-table" line="true" sticky-fixed="true" striped="true" style="width: 300px;">
                   <colgroup>
                     <col width>
                     <col width>
-                    <col>
                     <col width>
-                    <col>
-                    <col>
+                    <col width>
+                    <col width>
+                    <col width>
                   </colgroup>
                   <tbody>
                     <tr class="row">
@@ -1485,11 +1485,11 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
     <div class="root">
       <div class="table" position="static">
         <div class="head">
-          <table class="root head-table" sticky-fixed="true">
+          <table class="root head-table" sticky-fixed="true" style="width: 100px;">
             <colgroup>
               <col width>
               <col width>
-              <col>
+              <col width>
               <col width>
             </colgroup>
             <thead>
@@ -1537,11 +1537,11 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
           <div class="root scrollcview">
             <div class="wrap">
               <div class="view">
-                <table class="root body-table" sticky-fixed="true">
+                <table class="root body-table" sticky-fixed="true" style="width: 100px;">
                   <colgroup>
                     <col width>
                     <col width>
-                    <col>
+                    <col width>
                     <col width>
                   </colgroup>
                   <tbody>
@@ -1584,13 +1584,13 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
     <div class="root">
       <div class="table" position="static">
         <div class="head">
-          <table class="root head-table" sticky-fixed="true">
+          <table class="root head-table" sticky-fixed="true" style="width: 200px;">
             <colgroup>
               <col width>
               <col width>
-              <col>
               <col width>
-              <col>
+              <col width>
+              <col width>
             </colgroup>
             <thead>
               <tr>
@@ -1643,13 +1643,13 @@ exports[`u-table-view.vue > Demo-表头文字省略展示 1`] = `
           <div class="root scrollcview">
             <div class="wrap">
               <div class="view">
-                <table class="root body-table" sticky-fixed="true">
+                <table class="root body-table" sticky-fixed="true" style="width: 200px;">
                   <colgroup>
                     <col width>
                     <col width>
-                    <col>
                     <col width>
-                    <col>
+                    <col width>
+                    <col width>
                   </colgroup>
                   <tbody>
                     <tr class="row">
@@ -1702,11 +1702,11 @@ exports[`u-table-view.vue > Demo-默认多行显示 1`] = `
   <div class="root">
     <div class="table" position="static">
       <div class="head">
-        <table class="root head-table" line="horizontal" sticky-fixed="true" striped="true">
+        <table class="root head-table" line="horizontal" sticky-fixed="true" striped="true" style="width: 100px;">
           <colgroup>
             <col width>
             <col width>
-            <col>
+            <col width>
             <col width>
           </colgroup>
           <thead>
@@ -1732,11 +1732,11 @@ exports[`u-table-view.vue > Demo-默认多行显示 1`] = `
         <div class="root scrollcview">
           <div class="wrap">
             <div class="view">
-              <table class="root body-table" line="horizontal" sticky-fixed="true" striped="true">
+              <table class="root body-table" line="horizontal" sticky-fixed="true" striped="true" style="width: 100px;">
                 <colgroup>
                   <col width>
                   <col width>
-                  <col>
+                  <col width>
                   <col width>
                 </colgroup>
                 <tbody>
