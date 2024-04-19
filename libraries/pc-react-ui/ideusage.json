@@ -305,7 +305,7 @@
     "name": "Flex",
     "ideusage": {
       "idetype": "container",
-      "containerDirection": "this.getAttribute('direction')?.value === 'true' ? 'column' : 'row' ",
+      "containerDirection": "this.getAttribute('direction')?.value === 'vertical' ? 'column' : 'row' ",
       "automate": [
         {
           "command": "WRAP_LINEAR_VERTICAL",
