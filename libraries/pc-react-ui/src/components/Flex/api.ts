@@ -236,7 +236,7 @@ namespace nasl.ui {
         ],
       },
     })
-    gap: 'small' | 'middle' | 'large' | 0 = 0;
+    gap: 'small' | 'middle' | 'large' | nasl.core.Integer = 0;
 
     @Event({
       title: '点击',

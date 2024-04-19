@@ -1,12 +1,13 @@
 import React from 'react';
 import _ from 'lodash';
+import { Space } from 'antd';
 import { MenuItem, Icon } from '@/index';
 import {
   useRequestDataSource, useHandleMapField, useFormatDataSource,
 } from '@/plugins/common/dataSource';
 
 import { RouterContext } from '@/components/Router';
-import { $deletePropsList, $dataSourceField } from '@/plugins/constants';
+import { $deletePropsList } from '@/plugins/constants';
 
 export function useHandleDataSource(props) {
   const dataSourceProps = props.get('dataSource');
@@ -57,3 +58,18 @@ export function useMergeMenu(props) {
   };
 }
 useMergeMenu.order = 6;
+export function useHandleChildren(props) {
+  const BaseComponent = props.get('render');
+  const render = React.useCallback(React.forwardRef((localProps: any, ref) => {
+    return (
+      <BaseComponent {...localProps} ref={ref}>
+        <Space>
+          {localProps.children}
+        </Space>
+      </BaseComponent>
+    );
+  }), [BaseComponent]);
+  return {
+    render,
+  };
+}

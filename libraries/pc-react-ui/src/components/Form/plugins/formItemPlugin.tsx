@@ -1,7 +1,9 @@
 import React from 'react';
 import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@vusion/validator';
+import classnames from 'classnames';
 import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
+
 import { COLPROPSFIELDS } from '@/components/Row/constants';
 import FormContext from '../form-context';
 import { $deletePropsList } from '@/plugins/constants';
@@ -60,7 +62,11 @@ export function useHandleFormItemProps(props) {
   const render = React.useCallback((selfProps) => {
     const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
     const colProps = _.pick(selfProps, COLPROPSFIELDS);
-    const fieldProps = _.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]);
+    const fieldProps = {
+      ..._.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]),
+      className: 'cw-nasl',
+      popupClassName: 'cw-nasl',
+    };
     return <BaseComponent {...{ ...formItemProps, fieldProps, colProps }} />;
   }, [BaseComponent]);
   return {

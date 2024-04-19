@@ -1,6 +1,8 @@
 import React from 'react';
 import { Dropdown } from '../index';
-import { Button, Text, MenuItem } from '@/index';
+import {
+  Button, Text, MenuItem, Link, Flex,
+} from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -30,7 +32,7 @@ export const 默认 = {
           </>
         )}
       >
-        <Button type="primary" children="按钮" />
+        <Link icon="RiArrowDownSLine" children="按钮" />
       </Dropdown>
     );
   },

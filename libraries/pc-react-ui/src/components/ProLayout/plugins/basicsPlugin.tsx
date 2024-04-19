@@ -134,6 +134,8 @@ export function useHandleAvatar(props) {
     [$deletePropsList]: deletePropsList,
     logo,
     title,
+    // eslint-disable-next-line no-new-wrappers
+    pageTitleRender: () => '',
     avatarProps: _.filterUnderfinedValue({
       src: avatarSrcProps,
       size: avatarSizeProps,

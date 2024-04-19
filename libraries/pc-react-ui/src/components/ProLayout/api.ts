@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @Component({
-    title: '导航栏',
+    title: '导航栏容器',
     icon: 'navbar-multi',
     description:
       '通常用于页面顶部的导航菜单，放置 Logo、导航链接、用户信息等。',

@@ -37,7 +37,22 @@ export default {
 export const 默认 = {
   render: (args) => {
     const [value, onChange] = React.useState(3);
-    return <Table {...args} value={value} onChange={onChange} />;
+    const ref = React.useRef();
+    React.useEffect(() => {
+      console.log(ref, 'ref');
+    }, []);
+    return (
+      <div>
+        <button
+          onClick={() => {
+            ref.current.reload();
+          }}
+        >
+          1234
+        </button>
+        <Table {...args} ref={ref} value={value} onChange={onChange} />
+      </div>
+    );
   },
   args: {
     title: '12',
@@ -103,7 +118,7 @@ export const 异步 = {
     },
     sticky: true,
     async dataSource(params) {
-      console.log(params,'params,====');
+      console.log(params, 'params,====');
       return {
         list: new Array(50).fill(1).map((item, index) => ({
           key: index,
@@ -754,4 +769,129 @@ export const 同步33 = {
     );
   },
   args: {},
+};
+
+export const 可编辑表格 = {
+  render: (args) => {
+    const [value, onChange] = React.useState(3);
+    const [data, setData] = React.useState([]);
+    const ref = React.useRef();
+
+    return (
+      <div>
+        <button
+          onClick={() => {
+            ref.current.reload();
+          }}
+        >
+          1234
+        </button>
+        <EditableProTable
+          {...args}
+          dataSource={data}
+          ref={ref}
+          value={value}
+          onChange={onChange}
+        />
+      </div>
+    );
+  },
+  args: {
+    title: '12',
+    rowSelection: true,
+    rowSelectionType: 'radio',
+    value: 3,
+    rowKey: 'key',
+    showQuickJumper: true,
+    onChange(e) {
+      console.log(e, '3');
+    },
+    columns: [
+      {
+        title: '活动名称',
+        dataIndex: 'title',
+        tooltip: '只读，使用form.getFieldValue获取不到值',
+        formItemProps: (form, { rowIndex }) => {
+          return {
+            rules:
+              rowIndex > 1 ? [{ required: true, message: '此项为必填项' }] : [],
+          };
+        },
+        // 第一行不允许编辑
+        editable: (text, record, index) => {
+          return index !== 0;
+        },
+        width: '15%',
+      },
+      {
+        title: '活动名称二',
+        dataIndex: 'readonly',
+        tooltip: '只读，使用form.getFieldValue可以获取到值',
+        readonly: true,
+        width: '15%',
+      },
+      {
+        title: '状态',
+        key: 'state',
+        dataIndex: 'state',
+        valueType: 'select',
+        valueEnum: {
+          all: { text: '全部', status: 'Default' },
+          open: {
+            text: '未解决',
+            status: 'Error',
+          },
+          closed: {
+            text: '已解决',
+            status: 'Success',
+          },
+        },
+      },
+      {
+        title: '描述',
+        dataIndex: 'decs',
+        fieldProps: (form, { rowKey, rowIndex }) => {
+          if (form.getFieldValue([rowKey || '', 'title']) === '不好玩') {
+            return {
+              disabled: true,
+            };
+          }
+          if (rowIndex > 9) {
+            return {
+              disabled: true,
+            };
+          }
+          return {};
+        },
+      },
+      {
+        title: '活动时间',
+        dataIndex: 'created_at',
+        valueType: 'date',
+      },
+      {
+        title: '操作',
+        valueType: 'option',
+        width: 200,
+        render: (text, record, _, action) => [
+          <a
+            key="editable"
+            onClick={() => {
+              action?.startEditable?.(record.id);
+            }}
+          >
+            编辑
+          </a>,
+          <a
+            key="delete"
+            onClick={() => {
+              setDataSource(dataSource.filter((item) => item.id !== record.id));
+            }}
+          >
+            删除
+          </a>,
+        ],
+      },
+    ],
+  },
 };

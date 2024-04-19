@@ -52,7 +52,7 @@ export const 基本用法 = {
           >
             <Flex gap={8}>
               <Image style={{width:'21px'}} src="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg" />
-              <Text style={{ paddingTop: 11 }} children={$global.userInfo.UserName}></Text>
+              <Text style={{ paddingTop: 11 }} children={nasl.authInfo.userInfo.UserName}></Text>
             </Flex>
           </Dropdown>
         )}

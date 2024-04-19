@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '../index';
+import { Link, Icon } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -24,10 +24,19 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
-    return <Link {...args}>asdf</Link>;
+    return (
+      <Link {...args}>
+        asdf
+        {/* <Icon
+          style={{marginLeft: '10px'}}
+          name="RiArrowDownSLine"
+        /> */}
+      </Link>
+    );
   },
   args: {
     color: 'magenta',
+    icon: 'RiArrowDownSLine',
     link: 'https://www.baidu.com',
     onFocus: (e) => {
       console.log(23);

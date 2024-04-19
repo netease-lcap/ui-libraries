@@ -67,7 +67,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    textField: (item: T) => any = ((item: any) => item.title) as any;
+    textField:  any;
 
     @Prop({
       group: '数据属性',
@@ -78,7 +78,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    valueField: (item: T) => any = ((item: any) => item.value) as any;
+    valueField: any;
 
     @Prop({
       group: '数据属性',

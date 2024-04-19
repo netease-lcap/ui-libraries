@@ -44,7 +44,7 @@ export function useHandleRef(props, refs) {
         refs?.current?.setFieldValue(...arg);
       },
       setValues: (...arg) => { refs?.current?.setFieldsValue(...arg); },
-      resetForm: () => { refs?.current?.resetFields(); },
+      resetForm: (...arg) => { refs?.current?.resetFields(...arg); },
     }),
     grid: true,
   };

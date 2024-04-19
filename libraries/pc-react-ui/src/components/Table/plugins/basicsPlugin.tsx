@@ -64,8 +64,10 @@ export function useHandleTransformOption(props) {
       [fp.isFunction, fp.constant((...arg) => {
         const sorterMap = { ascend: 'asc', descend: 'desc' };
         const sorter = _.get(arg, '0.sorter', {});
-        arg[0].order = sorter.order ? sorterMap[sorter.order] : undefined;
-        arg[0].sorter = sorter.field;
+        if (_.isPlainObject(arg[0])) {
+          arg[0].order = sorter?.order ? sorterMap[sorter.order] : undefined;
+          arg[0].sorter = sorter?.field;
+        }
         return Promise.resolve(dataSource(...arg)).then(warpList);
       })],
       [fp.stubTrue, fp.constant(async () => ({ list: [], total: 0 }))],

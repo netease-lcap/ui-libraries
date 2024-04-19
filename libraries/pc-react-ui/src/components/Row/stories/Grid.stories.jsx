@@ -31,6 +31,11 @@ export const 默认 = {
       <div>
         {' '}
         <Row
+          style={{ width: '100%' }}
+          gutterJustify={null}
+          gutterAlign={0}
+        />
+        <Row
           data-nodepath="rootview.0"
           ide-iscontainer="true"
           gutterAlign={50}

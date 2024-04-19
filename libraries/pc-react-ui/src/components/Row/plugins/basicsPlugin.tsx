@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
 export function useHandleGutter(props) {
-  const gutterJustify = props.get('gutterJustify', 0);
-  const gutterAlign = props.get('gutterAlign', 0);
+  const gutterJustify = _.isNumber(props.get('gutterJustify', 0)) ? props.get('gutterJustify', 0) : 0;
+  const gutterAlign = _.isNumber(props.get('gutterAlign', 0)) ? props.get('gutterAlign', 0) : 0;
   return {
     gutter: [gutterJustify, gutterAlign],
   };
