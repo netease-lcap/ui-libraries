@@ -173,11 +173,11 @@ export default createComponent({
       if (this.converter === 'json')
         // fix for u-validator rules="required"
         return Array.isArray(value) && value.length === 0
-          ? '[]'
+          ? null
           : JSON.stringify(value);
       if (this.converter === 'simple')
         return Array.isArray(value) && value.length === 0
-          ? ''
+          ? null
           : this.simpleConvert(value);
       return value;
     },
