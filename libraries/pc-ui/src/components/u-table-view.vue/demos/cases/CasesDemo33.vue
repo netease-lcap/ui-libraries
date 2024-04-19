@@ -24,6 +24,18 @@
             <u-button @click="add2" color="primary">添加第二层子数据</u-button>
         </u-linear-layout>
     </u-linear-layout>
+    <u-linear-layout direction="vertical">
+        <u-linear-layout>
+            <u-button @click="loadList2" color="primary">加载数据</u-button>
+        </u-linear-layout>
+        <u-table-view :data-source="list2" tree-display ref="tableView1" parentField="parentId" valueField="name" pagination>
+            <u-table-view-column type="checkbox" width="30"></u-table-view-column>
+            <u-table-view-column title="用户名" field="name" width="20%"></u-table-view-column>
+            <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+            <u-table-view-column title="地址" field="address"></u-table-view-column>
+            <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%"></u-table-view-column>
+        </u-table-view>
+    </u-linear-layout>
 </u-linear-layout>
 </template>
 <script>
@@ -34,7 +46,11 @@ export default {
             list1: [
                 { name: '张三', phone: '18612917895', email: 'zhangsan@163.com', address: '浙江省杭州市滨江区网商路599号网易大厦', createdTime: 1464421931000, loginTime: 1527515531000, parentId: undefined },
                 { name: '张三11', phone: '18612917895', email: 'zhangsan@163.com', address: '浙江省杭州市滨江区网商路599号网易大厦', createdTime: 1464421931000, loginTime: 1527515531000, parentId: '张三'}
-            ]
+            ],
+            list2: {
+                list: [],
+                total: 0,
+            }
         }
     },
     methods: {
@@ -71,6 +87,16 @@ export default {
             const item = { name: name, phone: '18897127809', email: 'lisi@163.com', address: '浙江省杭州市滨江区秋溢路606号西可科技园', createdTime: 1494488730000, loginTime: 1558165530000,  parentId: '张三11' };
             this.list1.push(item);
         },
+        loadList2() {
+            console.log('loadList2');
+            this.list2 = {
+                list: [
+                    { name: '张三', phone: '18612917895', email: 'zhangsan@163.com', address: '浙江省杭州市滨江区网商路599号网易大厦', createdTime: 1464421931000, loginTime: 1527515531000, parentId: undefined },
+                    { name: '张三11', phone: '18612917895', email: 'zhangsan@163.com', address: '浙江省杭州市滨江区网商路599号网易大厦', createdTime: 1464421931000, loginTime: 1527515531000, parentId: '张三'}
+                ],
+                total: 2,
+            }
+        }
     },
 };
 </script>
