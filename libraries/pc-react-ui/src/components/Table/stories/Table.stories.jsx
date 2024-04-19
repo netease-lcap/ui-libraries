@@ -66,14 +66,20 @@ export const 默认 = {
     },
 
     async dataSource(params) {
+      const list = new Array(50).fill(1).map((item, index) => ({
+        key: index,
+        name: '胡彦斌',
+        age: Math.random(),
+        address: '西湖区湖底公园1号',
+      }));
+    
       return {
-        list: new Array(50).fill(1).map((item, index) => ({
-          key: index,
-          name: '胡彦斌',
+        list,
+        // .map((item) => {
+        //   return {
 
-          age: Math.random(),
-          address: '西湖区湖底公园1号',
-        })),
+        //   };
+        // }),
       };
     },
     // pageSize: 5,
@@ -86,6 +92,19 @@ export const 默认 = {
         sorter: true,
         // defaultSortOrder: 'ascend',
         // dataIndex: 'age',
+        onCell: (_, index) => {
+          if (index === 3) {
+            return { rowSpan: 2 };
+          }
+          // These two are merged into above cell
+          if (index === 4) {
+            return { rowSpan: 0 };
+          }
+          if (index === 5) {
+            return { rowSpan: 0 };
+          }
+          return {};
+        },
         key: 'namez123',
       },
       {
@@ -707,9 +726,9 @@ export const 同步33 = {
           recordCreatorProps={
             position !== 'hidden'
               ? {
-                position,
-                record: () => ({ id: (Math.random() * 1000000).toFixed(0) }),
-              }
+                  position,
+                  record: () => ({ id: (Math.random() * 1000000).toFixed(0) }),
+                }
               : false
           }
           loading={false}
