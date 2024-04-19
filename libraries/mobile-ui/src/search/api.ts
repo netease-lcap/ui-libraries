@@ -28,7 +28,12 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '最大字符数',
-      description: '输入框内输入的最大字符数'
+      description: '输入框内输入的最大字符数',
+      setter: {
+        concept: "NumberInputSetter",
+        min: 0,
+        precision: 0
+      }
     })
     maxlength: nasl.core.Integer;
     @Prop({
