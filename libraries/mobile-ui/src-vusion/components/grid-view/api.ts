@@ -56,11 +56,6 @@ namespace nasl.ui {
     })
     private value: any;
     @Prop({
-      title: '文本字段名',
-      description: '选项文本的字段名'
-    })
-    private textField: (item: T) => nasl.core.String;
-    @Prop({
       title: '值字段名',
       description: '选项值的字段名'
     })
@@ -282,6 +277,15 @@ namespace nasl.ui {
       }
     })
     private disabled: nasl.core.Boolean = false;
+    @Prop<VanGridViewOptions<T, V, P, M>, 'textField'>({
+      group: '数据属性',
+      title: '文本字段名',
+      description: '选项文本的字段名，可用于前端筛选时的匹配',
+      setter: {
+        concept: "PropertySelectSetter"
+      }
+    })
+    textField: (item: T) => any = ((item: any) => item.text) as any;
     @Event({
       title: '加载后',
       description: '加载时触发'
