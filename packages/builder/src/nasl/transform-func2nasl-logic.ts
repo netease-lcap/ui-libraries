@@ -225,7 +225,7 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
     }
 
     if (node.declaration.returnType && node.declaration.returnType.type === 'TSTypeAnnotation') {
-      const hasSubLogic = logic.params.findIndex((p: TypeAnnotation) => p.typeKind === 'function') !== -1;
+      const hasSubLogic = logic.params.findIndex((p) => p.typeAnnotation && p.typeAnnotation.typeKind === 'function') !== -1;
       const { typeAnnotation: tsType } = node.declaration.returnType as babelTypes.TSTypeAnnotation;
 
       if (hasSubLogic && (tsType.type !== 'TSTypeReference' || tsType.typeName.type !== 'Identifier' || tsType.typeName.name !== 'Promise')) {
