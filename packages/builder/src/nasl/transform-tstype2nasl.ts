@@ -33,13 +33,7 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference, typeNames): 
       typeParameters.params.forEach((param) => {
         const annotation = transformTypeAnnotation(param, typeNames);
         if (annotation) {
-          typeArguments.push({
-            ...annotation,
-            concept: 'TypeAnnotation',
-            typeKind: 'typeParam',
-            inferred: false,
-            ruleMap: new Map(),
-          });
+          typeArguments.push(annotation);
         }
       });
     }
@@ -84,13 +78,7 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference, typeNames): 
       typeParameters.params.forEach((param) => {
         const annotation = transformTypeAnnotation(param, typeNames);
         if (annotation) {
-          typeArguments.push({
-            ...annotation,
-            concept: 'TypeAnnotation',
-            typeKind: 'typeParam',
-            inferred: false,
-            ruleMap: new Map(),
-          });
+          typeArguments.push(annotation);
         }
       });
     }
