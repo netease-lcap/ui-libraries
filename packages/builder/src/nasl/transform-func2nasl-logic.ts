@@ -225,7 +225,15 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
     }
 
     if (node.declaration.returnType && node.declaration.returnType.type === 'TSTypeAnnotation') {
-      const returnType = transformTypeAnnotation(node.declaration.returnType.typeAnnotation, typeNames);
+      const hasSubLogic = logic.params.findIndex((p: TypeAnnotation) => p.typeKind === 'function') !== -1;
+      const { typeAnnotation: tsType } = node.declaration.returnType as babelTypes.TSTypeAnnotation;
+
+      if (hasSubLogic && (tsType.type !== 'TSTypeReference' || tsType.typeName.type !== 'Identifier' || tsType.typeName.name !== 'Promise')) {
+        logger.error(`解析逻辑失败 ${logic.name}, 该逻辑含有高阶函数（用函数作为参数），返回值类型强制需要为 Promise!`);
+        process.exit(1);
+      }
+
+      const returnType = transformTypeAnnotation(tsType, typeNames);
 
       if (returnType) {
         logic.returns.push({
