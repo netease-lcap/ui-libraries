@@ -46,7 +46,7 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference, typeNames): 
 
     return {
       typeKind: getTypeKind(typeParameters, primitive) as any,
-      typeName: right.name,
+      typeName: namespace === 'nasl.core' && right.name === 'Integer' ? 'Long' : right.name,
       typeNamespace: namespace,
       concept: 'TypeAnnotation',
       inferred: false,
