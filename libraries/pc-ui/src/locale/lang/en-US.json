@@ -135,6 +135,8 @@
   "uProcessInfo_finished": "Finished status",
   "uProcessInfo_currentNodes": "CurrentNodes",
   "uProcessInfo_currentCandidateUsers": "CurrentAssignee",
+  "uProcessInfo_approvedStatus": "Approved",
+  "uProcessInfo_approvingStatus": "Approving",
   "uProcessMyprocess_pendingTasks": "My PendingTasks",
   "uProcessMyprocess_processedTasks": "My ProcessedTasks",
   "uProcessMyprocess_intiationProcess": "My Processe",

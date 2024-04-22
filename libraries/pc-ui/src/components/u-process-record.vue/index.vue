@@ -126,27 +126,6 @@ export default {
             // eslint-disable-next-line new-cap
             return this.$utils ? this.$utils.FormatDateTime(value) : value;
         },
-        formatStatus(value) {
-            if (value === null || value === undefined) {
-                return '-';
-            }
-            if (value === true) {
-                return '已结束';
-            } else if (value === false) {
-                return '进行中';
-            } else {
-                return value;
-            }
-        },
-        formatArray2String(value) {
-            if (value === null || value === undefined) {
-                return '-';
-            }
-            if (Array.isArray(value)) {
-                return value.join('，') || '-';
-            }
-            return value;
-        },
         async loadList() {
             this.currentLoading = true;
             if (this.$processV2) {
