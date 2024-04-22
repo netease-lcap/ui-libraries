@@ -120,6 +120,12 @@
       <demo-block card title="临时测试">
           <van-datetime-picker :close-on-click-overlay="true" type="date" />
       </demo-block>
+
+      <demo-block card title="预览模式">
+          <van-datetime-picker preview value="2024-04-01" type="date" />
+          <van-datetime-picker preview value="12:12" type="time" />
+      </demo-block>
+
   </demo-section>
 </template>
 

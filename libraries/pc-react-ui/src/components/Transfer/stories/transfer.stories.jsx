@@ -1,5 +1,5 @@
 import React from 'react';
-import Transfer from '../index';
+import { Transfer } from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -27,7 +27,7 @@ export const 异步函数 = {
   args: {
     style: { width: '100px' },
 
-    options: () => new Promise((res) => {
+    dataSource: () => new Promise((res) => {
       setTimeout(() => {
         res([
           { label: 'Option 1', value: '1' },
@@ -52,11 +52,11 @@ export const 同步函数 = {
   render: (args) => <Transfer {...args} />,
   args: {
     style: { width: '100px' },
-
-    options: () => [
-      { label: 'Option 1', value: '1' },
-      { label: 'Option 2', value: '2' },
-      { label: 'Option 3', value: '3' },
+    render: (item) => item.title,
+    dataSource: [
+      { title: 'Option 1', key: '1' },
+      { title: 'Option 2', key: '2' },
+      { title: 'Option 3', key: '3' },
     ],
   },
 };

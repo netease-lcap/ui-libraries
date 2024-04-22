@@ -1,0 +1,228 @@
+/**
+ * @component Button
+ * @useGlobalTokens ["--cw-line-width","--cw-line-type","--cw-motion-duration-mid","--cw-motion-ease-in-out","--cw-color-text","--cw-margin-xs","--cw-line-width-focus","--cw-color-primary-border","--cw-control-height","--cw-border-radius","--cw-opacity-loading","--cw-motion-duration-slow","--cw-control-height-sm","--cw-padding-xs","--cw-border-radius-sm","--cw-control-height-lg","--cw-border-radius-lg","--cw-color-text-disabled","--cw-color-bg-container-disabled","--cw-color-border","--cw-color-error","--cw-color-error-hover","--cw-color-error-border-hover","--cw-color-error-active","--cw-color-primary","--cw-color-text-light-solid","--cw-color-primary-hover","--cw-color-primary-active","--cw-color-link","--cw-color-link-hover","--cw-color-link-active","--cw-color-bg-text-active","--cw-color-error-bg","--cw-color-bg-container","--cw-font-size"]
+ */
+.cw-nasl.cw-btn,
+.cw-nasl.cw-btn-css-var {
+  /**
+   * @desc 禁用状态边框颜色
+   * @type color
+   */
+  --cw-button-border-color-disabled: var(--cw-color-border);
+
+  /**
+   * @desc 按钮内容字体大小
+   * @type size
+   */
+  --cw-button-content-font-size: var(--cw-font-size);
+
+  /**
+   * @desc 大号按钮内容字体大小
+   * @type size
+   */
+  --cw-button-content-font-size-lg: var(--cw-font-size-lg);
+
+  /**
+   * @desc 小号按钮内容字体大小
+   * @type size
+   */
+  --cw-button-content-font-size-sm: var(--cw-font-size);
+
+  /**
+   * @desc 按钮内容字体行高
+   * @type input
+   */
+  --cw-button-content-line-height: calc(var(--cw-font-size) + 8px);
+
+  /**
+   * @desc 大号按钮内容字体行高
+   * @type input
+   */
+  --cw-button-content-line-height-lg: calc(var(--cw-font-size-lg) + 8px);
+
+  /**
+   * @desc 小号按钮内容字体行高
+   * @type input
+   */
+  --cw-button-content-line-height-sm: calc(var(--cw-font-size) + 8px);
+
+  /**
+   * @desc 危险按钮文本颜色
+   * @type color
+   */
+  --cw-button-danger-color: var(--cw-color-text-light-solid);
+
+  /**
+   * @desc 危险按钮阴影
+   * @type input
+   */
+  --cw-button-danger-shadow: 0 var(--cw-control-outline-width) 0 var(--cw-color-error-outline);
+
+  /**
+   * @desc 默认按钮激活态背景色
+   * @type color
+   */
+  --cw-button-default-active-bg: var(--cw-color-bg-container);
+
+  /**
+   * @desc 默认按钮激活态边框颜色
+   * @type color
+   */
+  --cw-button-default-active-border-color: var(--cw-color-primary-active);
+
+  /**
+   * @desc 默认按钮激活态文字颜色
+   * @type color
+   */
+  --cw-button-default-active-color: var(--cw-color-primary-active);
+
+  /**
+   * @desc 默认按钮背景色
+   * @type color
+   */
+  --cw-button-default-bg: var(--cw-color-bg-container);
+
+  /**
+   * @desc 默认按钮边框颜色
+   * @type color
+   */
+  --cw-button-default-border-color: var(--cw-color-border);
+
+  /**
+   * @desc 默认按钮文本颜色
+   * @type color
+   */
+  --cw-button-default-color: var(--cw-color-text);
+
+  /**
+   * @desc 默认幽灵按钮边框颜色
+   * @type color
+   */
+  --cw-button-default-ghost-border-color: var(--cw-color-bg-container);
+
+  /**
+   * @desc 默认幽灵按钮文本颜色
+   * @type color
+   */
+  --cw-button-default-ghost-color: var(--cw-color-bg-container);
+
+  /**
+   * @desc 默认按钮悬浮态背景色
+   * @type color
+   */
+  --cw-button-default-hover-bg: var(--cw-color-bg-container);
+
+  /**
+   * @desc 默认按钮悬浮态边框颜色
+   * @type color
+   */
+  --cw-button-default-hover-border-color: var(--cw-color-primary-hover);
+
+  /**
+   * @desc 默认按钮悬浮态文本颜色
+   * @type color
+   */
+  --cw-button-default-hover-color: var(--cw-color-primary-hover);
+
+  /**
+   * @desc 默认按钮阴影
+   * @type input
+   */
+  --cw-button-default-shadow: 0 var(--cw-control-outline-width) 0 var(--cw-control-tmp-outline);
+
+  /**
+   * @desc 文字字重
+   * @type input
+   */
+  --cw-button-font-weight: 400;
+
+  /**
+   * @desc 幽灵按钮背景色
+   * @type input
+   */
+  --cw-button-ghost-bg: transparent;
+
+  /**
+   * @desc 按钮组边框颜色
+   * @type color
+   */
+  --cw-button-group-border-color: var(--cw-color-primary-hover);
+
+  /**
+   * @desc 链接按钮悬浮态背景色
+   * @type input
+   */
+  --cw-button-link-hover-bg: transparent;
+
+  /**
+   * @desc 只有图标的按钮图标尺寸
+   * @type size
+   */
+  --cw-button-only-icon-size: var(--cw-font-size-lg);
+
+  /**
+   * @desc 大号只有图标的按钮图标尺寸
+   * @type size
+   */
+  --cw-button-only-icon-size-lg: calc(var(--cw-font-size-lg) + 2px);
+
+  /**
+   * @desc 小号只有图标的按钮图标尺寸
+   * @type size
+   */
+  --cw-button-only-icon-size-sm: calc(var(--cw-font-size-lg) - 2px);
+
+  /**
+   * @desc 按钮横向内间距
+   * @type size
+   */
+  --cw-button-padding-block: 4px;
+
+  /**
+   * @desc 大号按钮横向内间距
+   * @type size
+   */
+  --cw-button-padding-block-lg: 7px;
+
+  /**
+   * @desc 小号按钮横向内间距
+   * @type input
+   */
+  --cw-button-padding-block-sm: 0;
+
+  /**
+   * @desc 按钮横向内间距
+   * @type size
+   */
+  --cw-button-padding-inline: calc(var(--cw-padding-content-horizontal) - var(--cw-line-width));
+
+  /**
+   * @desc 大号按钮横向内间距
+   * @type size
+   */
+  --cw-button-padding-inline-lg: calc(var(--cw-padding-content-horizontal) - var(--cw-line-width));
+
+  /**
+   * @desc 小号按钮横向内间距
+   * @type size
+   */
+  --cw-button-padding-inline-sm: calc(8px - var(--cw-line-width));
+
+  /**
+   * @desc 主要按钮文本颜色
+   * @type color
+   */
+  --cw-button-primary-color: var(--cw-color-text-light-solid);
+
+  /**
+   * @desc 主要按钮阴影
+   * @type input
+   */
+  --cw-button-primary-shadow: 0 var(--cw-control-outline-width) 0 var(--cw-control-outline);
+
+  /**
+   * @desc 文本按钮悬浮态背景色
+   * @type color
+   */
+  --cw-button-text-hover-bg: var(--cw-color-bg-text-hover);
+}

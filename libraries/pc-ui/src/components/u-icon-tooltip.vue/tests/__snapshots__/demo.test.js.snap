@@ -63,8 +63,6 @@ exports[`u-icon-tooltip.vue > Demo-弹出位置 1`] = `
           </div>
         </transition-stub></span>
     </span>
-    <!---->
-    <!---->
   </div>
 </div>
 `;

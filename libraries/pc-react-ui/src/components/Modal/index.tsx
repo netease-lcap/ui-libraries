@@ -1,5 +1,6 @@
 import { Modal as AntdModal } from 'antd';
-import type { ModalProps } from 'antd/lib/modal';
+import React from 'react';
+import type { ModalProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import type { pluginType } from '@/plugins/type';
@@ -12,12 +13,22 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Modal = registerComponet<
+export const Modal = registerComponet<
   ModalProps,
   pluginType<ModalProps>
 >(
   AntdModal,
-  { plugin, displayName: AntdModal.displayName, mapProps },
+  { plugin, displayName: 'Modal', mapProps },
 );
 
-export default Modal;
+// export default Modal;
+// export function Add(props) {
+//   const { children } = props;
+//   return (
+
+//     <div>
+
+//       {children}
+//     </div>
+//   );
+// }

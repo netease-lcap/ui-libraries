@@ -11,11 +11,9 @@ exports[`u-image.vue > Demo-原尺寸 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </div>
-    <!---->
   </div>
 </div>
 `;
@@ -32,11 +30,9 @@ exports[`u-image.vue > Demo-原尺寸 2`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </div>
-      <!---->
     </div>
   </div>
 </div>
@@ -53,11 +49,9 @@ exports[`u-image.vue > Demo-填充 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </div>
-    <!---->
   </div>
 </div>
 `;
@@ -74,11 +68,9 @@ exports[`u-image.vue > Demo-填充 2`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </div>
-      <!---->
     </div>
   </div>
 </div>
@@ -96,11 +88,9 @@ exports[`u-image.vue > Demo-多个url 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </div>
-      <!---->
     </div>
   </div>
 </div>
@@ -117,11 +107,9 @@ exports[`u-image.vue > Demo-异步展示图片报错 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </div>
-    <!---->
   </div>
 </div>
 `;
@@ -137,11 +125,9 @@ exports[`u-image.vue > Demo-拉伸 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </div>
-    <!---->
   </div>
 </div>
 `;
@@ -158,11 +144,9 @@ exports[`u-image.vue > Demo-拉伸 2`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </div>
-      <!---->
     </div>
   </div>
 </div>
@@ -179,11 +163,9 @@ exports[`u-image.vue > Demo-模拟异步展示图片 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </div>
-    <!---->
   </div>
 </div>
 `;
@@ -199,11 +181,9 @@ exports[`u-image.vue > Demo-适应 1`] = `
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </div>
-    <!---->
   </div>
 </div>
 `;
@@ -220,11 +200,9 @@ exports[`u-image.vue > Demo-适应 2`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </div>
-      <!---->
     </div>
   </div>
 </div>
@@ -241,11 +219,9 @@ exports[`u-image.vue > Demo-适应（图片小于父元素时以原尺寸展示�
           </svg>
         </span>
         <div class="icontext" vusion-slot-name="default">
-          <!---->
         </div>
       </span>
     </div>
-    <!---->
   </div>
 </div>
 `;
@@ -262,11 +238,9 @@ exports[`u-image.vue > Demo-适应（图片小于父元素时以原尺寸展示�
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </div>
-      <!---->
     </div>
   </div>
 </div>

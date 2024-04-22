@@ -77,6 +77,24 @@
       </van-pickerson>
     </demo-block>
 
+    <demo-block card title="预览模式">
+      <van-pickerson
+        title="标题"
+        :show-toolbar="true"
+        :value="1"
+        value-field="value"
+        text-field="text"
+        :data-source="[{ text: '选项1', value: 1 }, { text: '选项2', value: 2 }, { text: '选项3', value: 3 }]"
+        type="list"
+        :enable-select-all="true"
+        :enable-selected-count="true"
+        preview>
+          <template #title>
+                <van-text :ref="`text10`" text="标题"></van-text>
+          </template>
+      </van-pickerson>
+    </demo-block>
+
     <demo-block card title="临时测试">
         <van-pickerson
         title="标题"

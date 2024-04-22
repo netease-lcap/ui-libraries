@@ -1367,7 +1367,9 @@ export default {
         },
         onBodyScroll(e) {
             this.syncBodyScroll(e.target.scrollTop, e.target); // this.throttledVirtualScroll(e);
-            this.$refs.head[0].scrollLeft = e.target.scrollLeft;
+            if (this.$refs.head[0]) {
+                this.$refs.head[0].scrollLeft = e.target.scrollLeft;
+            }
             this.scrollXStart = e.target.scrollLeft === 0;
             this.scrollXEnd = e.target.scrollLeft >= e.target.scrollWidth - e.target.clientWidth;
             if (this.pageable !== 'auto-more' || this.currentLoading)
@@ -1380,7 +1382,7 @@ export default {
             const rect = getRect(this.$el);
             const bodyRect = getRect(this.$refs.body[0]);
             const parentRect = this.scrollParentEl === window ? { top: 0, bottom: window.innerHeight } : getRect(this.scrollParentEl);
-            const headHeight = this.$refs.head[0].offsetHeight;
+            const headHeight = this.$refs.head[0] && this.$refs.head[0].offsetHeight || 0;
 
             parentRect.top += this.stickHeadOffset;
             bodyRect.bottom -= headHeight;
@@ -1408,6 +1410,8 @@ export default {
                     headPlaceholderEl.style.height = '';
                 }
                 stickheadEl.style.top = stickingHeadTop + 'px';
+                // fix：滚动条在最右边时，置顶时表头会有偏移
+                stickheadEl.scrollLeft = this.$refs.scrollView[0].$refs.wrap.scrollLeft;
                 if (this.syncStickHeadXScroll) {
                     this.syncHeadScroll();
                 }
@@ -1421,7 +1425,9 @@ export default {
             if (this.virtual)
                 this.throttledVirtualScroll(data);
             if (this.$refs.scrollView[0].$refs.wrap === data.target) {
-                this.$refs.head[0].scrollLeft = data.scrollLeft;
+                if (this.$refs.head[0]) {
+                    this.$refs.head[0].scrollLeft = data.scrollLeft;
+                }
                 this.scrollXStart = data.scrollLeft === 0;
                 this.scrollXEnd = data.scrollLeft >= data.scrollWidth - data.clientWidth;
                 if (this.pageable !== 'auto-more' || this.currentLoading)

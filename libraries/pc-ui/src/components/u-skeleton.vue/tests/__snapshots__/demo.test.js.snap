@@ -16,7 +16,6 @@ exports[`u-skeleton.vue > Demo-修改段落行数 1`] = `
 exports[`u-skeleton.vue > Demo-图片类型 1`] = `
 <div>
   <div class="root" type="image">
-    <!---->
   </div>
 </div>
 `;

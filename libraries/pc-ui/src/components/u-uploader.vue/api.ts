@@ -229,14 +229,15 @@ namespace nasl.ui {
         })
         multipleOnce: nasl.core.Boolean = false;
 
-        @Prop({
-            group: '主要属性',
-            title: '启用图片裁剪',
-            description: '设置是否启用图片裁剪功能，只对单文件上传有效',
-            docDescription: '开启后支持对选择的图片进行裁剪后上传',
-            setter: {
-                concept: 'SwitchSetter',
-            },
+        @Prop<UUploaderOptions, 'openCropper'>({
+          group: '主要属性',
+          title: '启用图片裁剪',
+          description: '设置是否启用图片裁剪功能，只对单文件上传有效',
+          docDescription: '开启后支持对选择的图片进行裁剪后上传',
+          setter: {
+              concept: 'SwitchSetter',
+          },
+          if: (_) => !_.multiple,
         })
         openCropper: nasl.core.Boolean = false;
 
@@ -459,6 +460,17 @@ namespace nasl.ui {
             },
         })
         disabled: nasl.core.Boolean = false;
+
+        @Prop({
+            group: '状态属性',
+            title: '预览',
+            description: '显示预览态',
+            docDescription: '',
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        preview: nasl.core.Boolean = false;
 
         @Event({
             title: '上传前',

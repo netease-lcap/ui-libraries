@@ -3,11 +3,12 @@ import { formatResult } from '../utils/format/data-source';
 import { FieldMixin } from '../mixins/field';
 import { ParentMixin } from '../mixins/relation';
 import { Converter } from '../mixins/convertor';
+import PreviewMixin from '../mixins/preview';
 
 const [createComponent, bem] = createNamespace('checkbox-group');
 
 export default createComponent({
-  mixins: [ParentMixin('vanCheckbox'), FieldMixin, Converter],
+  mixins: [ParentMixin('vanCheckbox'), FieldMixin, Converter, PreviewMixin],
 
   props: {
     dataSource: [Array, Object, Function, String],
@@ -41,8 +42,7 @@ export default createComponent({
   },
   watch: {
     value(val) {
-      this.currentValue =
-        this.hasConverter ? this.currentConverter.set(val) : val;
+      this.currentValue = this.hasConverter ? this.currentConverter.set(val) : val;
     },
     dataSource: {
       deep: true,
@@ -51,20 +51,13 @@ export default createComponent({
     },
   },
   computed: {
-    inDesigner() {
-      return this.$env && this.$env.VUE_APP_DESIGNER;
-    },
-
     hasConverter() {
       return this.converter && this.converter !== 'none';
     },
   },
 
   mounted() {
-    this.currentValue =
-      this.hasConverter
-        ? this.currentConverter.set(this.value)
-        : this.value || [];
+    this.currentValue = this.hasConverter ? this.currentConverter.set(this.value) : this.value || [];
   },
 
   methods: {
@@ -81,9 +74,7 @@ export default createComponent({
       }
     },
     toValue(value) {
-      return Array.isArray(value) && value.length === 0
-        ? '[]'
-        : JSON.stringify(value);
+      return Array.isArray(value) && value.length === 0 ? '[]' : JSON.stringify(value);
     },
     // @exposed-api
     toggleAll(options = {}) {
@@ -139,6 +130,36 @@ export default createComponent({
         value,
       });
     },
+
+    previewRender() {
+      const nodes = [];
+
+      if (this.$scopedSlots.default) {
+        const slots = this.$scopedSlots.default();
+        if (slots) {
+          slots.forEach((slot) => {
+            if (this.currentValue.includes(slot.componentOptions?.propsData?.label)) {
+              nodes.push(slot);
+            }
+          });
+        }
+      }
+
+      if (this.$scopedSlots.item) {
+        this.options?.forEach((item, index) => {
+          const slots = this.$scopedSlots.item({ item, index });
+          if (slots) {
+            slots.forEach((slot) => {
+              if (this.currentValue.includes(slot.componentOptions?.propsData?.label)) {
+                nodes.push(slot);
+              }
+            });
+          }
+        });
+      }
+
+      return <div class={bem([this.direction, this.isPreview ? 'preview' : ''])}>{nodes.map((item, index) => item)}</div>;
+    }
   },
 
   render() {
@@ -148,8 +169,12 @@ export default createComponent({
       itemWidth = 100 / this.column + '%';
     }
 
+    if (this.isPreview && !this.inDesigner()) {
+      return this.previewRender();
+    }
+
     return (
-      <div class={bem([this.direction])}>
+      <div class={bem([this.direction, this.isPreview ? 'preview' : ''])}>
         {this.options?.map((item, index) => (
           <div
             style={{
@@ -158,15 +183,20 @@ export default createComponent({
             }}
           >
             {this.slots('item', { item, index })}
-            {this.inDesigner && index > 0 && <div class="mantle"></div>}
+            {this.inDesigner() && index > 0 && <div class="mantle"></div>}
           </div>
         ))}
-        {!this.slots() && this.options?.length === 0 && this.inDesigner && (
-          <div style="text-align: center;width:100%">
-            请绑定数据源或插入子节点
+        {!this.slots() && this.options?.length === 0 && this.inDesigner() && <div style="text-align: center;width:100%">请绑定数据源或插入子节点</div>}
+        {(this.slots() || []).map(item => (
+          <div
+            style={{
+              position: 'relative',
+              width: itemWidth,
+            }}
+          >
+            {item}
           </div>
-        )}
-        {this.slots()}
+        ))}
       </div>
     );
   },

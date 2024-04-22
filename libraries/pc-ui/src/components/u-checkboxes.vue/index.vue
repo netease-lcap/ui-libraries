@@ -9,6 +9,7 @@
       :disabled="disabled"
       :readonly="readonly"
       :style="{ display: checkAllDisplay }"
+      :preview="isPreview"
     >
       <slot name="check-all">
         <u-text :text="checkAllText"></u-text>
@@ -23,6 +24,7 @@
       :readonly="node.readonly"
       :designer="$env.VUE_APP_DESIGNER"
       :node="node"
+      :preview="isPreview"
     >
       <template #item="item">
         <slot name="item" v-bind="item" :index="index">
@@ -30,7 +32,7 @@
         </slot>
       </template>
     </u-checkbox>
-    <u-preview v-if="isPreview" :text="currentText"></u-preview>
+    <!-- <u-preview v-if="isPreview" :text="currentText"></u-preview> -->
   </template>
   <template v-if="$env.VUE_APP_DESIGNER && !dataSource && !$slots.default">
     <span :class="$style.loadContent">{{ treeSelectTip }}</span>
@@ -46,14 +48,13 @@ import MConverter from "../m-converter.vue";
 import SupportDataSource from "../../mixins/support.datasource";
 import UCheckbox from "../u-checkbox.vue";
 import MPreview from '../u-text.vue/preview';
-import UPreview from '../u-text.vue/preview.vue';
+// import UPreview from '../u-text.vue/preview.vue';
 
 export default {
   name: "u-checkboxes",
   childName: "u-checkbox",
   components: {
-    UCheckbox,
-    UPreview
+    UCheckbox
   },
   mixins: [MParent, MField, MConverter, SupportDataSource, MPreview],
   props: {
@@ -78,7 +79,7 @@ export default {
   watch: {
     value(value) {
       this.watchValue(value);
-
+      this.setCheckAll();
     },
     currentValue(value, oldValue) {
       if (this.converter) {
@@ -99,23 +100,7 @@ export default {
     },
     itemVMs() {
       this.watchValue(this.value);
-      // 不开启全选就直接return
-      if (!this.checkAll) return;
-      if (this.isCheckAll) {
-        this.all = true;
-        // 这里不能这样判断：this.currentValue.length === 0，这里子项全部为false不代表currentValue.length === 0
-      } else if (
-        !this.currentValue.some((item) =>
-          this.itemVMsExcludesCheckAll.some((vm) => vm.label === item)
-        )
-      ) {
-        this.all = false;
-      } else {
-        // 半选兜底
-        this.all = null;
-      }
-
-
+      this.setCheckAll();
     },
   },
   computed: {
@@ -159,7 +144,7 @@ export default {
       }
     },
     canCheck($event) {
-      if (this.readonly || this.disabled) return false;
+      if (this.readonly || this.disabled || this.isPreview) return false;
       const value = $event.value;
       const label = $event.itemVM.label;
       if (label === "check-all") return true;
@@ -249,6 +234,24 @@ export default {
         }
       }
     },
+    setCheckAll() {
+      // 不开启全选就直接return
+      if (!this.checkAll) return;
+      if (this.isCheckAll) {
+        this.all = true;
+        // 这里不能这样判断：this.currentValue.length === 0，这里子项全部为false不代表currentValue.length === 0
+      } else if (
+        !this.currentValue.some((item) =>
+          this.itemVMsExcludesCheckAll.some((vm) => vm.label === item)
+        )
+      ) {
+        this.all = false;
+      } else {
+        // 半选兜底
+        this.all = null;
+      }
+
+    }
   },
 };
 </script>
