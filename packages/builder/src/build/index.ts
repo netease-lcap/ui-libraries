@@ -9,6 +9,7 @@ import { execSync } from '../utils/exec';
 import genNaslUIConfig from './gen-nasl-ui';
 import genNaslExtensionConfig from './gen-nasl-extension-config';
 import genThemeJsonOld from './gen-theme-json-old';
+import { BuildIdeOptions, buildIde as viteBuildIde } from './vite-build-ide';
 
 export interface LcapThemeOptions {
   themeVarCssPath?: string;
@@ -24,7 +25,25 @@ export interface LcapBuildOptions {
   components?: Array<{ group: string, title: string, name: string, [key: string]: any }>,
   i18n?: {[lang: string]: string}
   theme: LcapThemeOptions,
+  ide?: BuildIdeOptions,
   destDir: string;
+}
+
+export async function buildIDE(options: LcapBuildOptions) {
+  if (!options.ide) {
+    return;
+  }
+
+  // eslint-disable-next-line prefer-object-spread
+  const ideOptions: BuildIdeOptions = Object.assign(
+    {
+      entry: 'ide/index',
+      outDir: 'dist-theme/ide',
+    },
+    options.ide,
+  );
+
+  await viteBuildIde(ideOptions, options.rootPath);
 }
 
 export function buildThemeOld(rootPath, destDir) {
@@ -198,6 +217,8 @@ export async function lcapBuild(options: LcapBuildOptions) {
   if (!options.destDir) {
     options.destDir = 'dist-theme';
   }
+
+  await buildIDE(options);
 
   if (options.type === 'extension') {
     await buildNaslExtension(options);
