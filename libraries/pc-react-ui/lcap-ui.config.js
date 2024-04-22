@@ -175,7 +175,7 @@ module.exports = {
       extends: ['FormItemProps'],
       show: false,
     },
-    // { group: 'Selector', name: 'Steps', alias: '步骤条' },
+    { group: 'Selector', name: 'Steps', alias: '步骤条' },
     //
 
     { group: 'Feedback', name: 'Modal', alias: '弹窗' },

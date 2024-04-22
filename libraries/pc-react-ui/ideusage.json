@@ -297,7 +297,7 @@
       "parentAccept": "target.tag === 'Descriptions'",
       "selector": {
         "expression": "this",
-        "cssSelector": ".cw-descriptions-item"
+        "cssSelector": ".cw-descriptions-item-container"
       }
     }
   },

@@ -140,15 +140,7 @@ export function useHandleAvatar(props) {
       src: avatarSrcProps,
       size: avatarSizeProps,
       title: avatarTitleProps,
-      // render: (localProps, dom) => {
-      //   if (React.isValidElement(AvatarRenderProps)) {
-      //     return React.cloneElement(AvatarRenderProps, { children: dom, ...localProps });
-      //   }
-      //   return null;
-      // },
       render: (localProps, dom) => {
-        // console.log(AvatarRenderProps, 'AvatarRenderProps');
-        // console.log(React.cloneElement(AvatarRenderProps, { children: dom, ...localProps }), 'childrenProps');
         return React.cloneElement(AvatarRenderProps);
       },
     }),

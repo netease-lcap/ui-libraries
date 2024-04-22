@@ -3,9 +3,9 @@
 import React from 'react';
 import _ from 'lodash';
 import 'remixicon/fonts/remixicon.css';
+import { Flex, Text } from '@/index';
 
 export function Icon(props) {
-  // _.isValidLink
   // https://remixicon.com/
   // https://remixicon.com/icon/arrow-right-up-line
   const name = props.name ?? 'RiNeteaseCloudMusicLine';

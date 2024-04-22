@@ -62,7 +62,7 @@ namespace nasl.ui {
       docDescription: '默认显示的日期值。',
       // if: (_) => _.range !== true,
     })
-    value: Array<
+    value: nasl.collection.List<
       | nasl.core.Date
       | nasl.core.String
       | nasl.core.Integer

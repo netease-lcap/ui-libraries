@@ -20,8 +20,14 @@ namespace nasl.ui {
       description: '显示文本内容',
       docDescription: '显示的文本内容',
       implicitToString: true,
+      // sync:false,
     })
-    children: nasl.core.String;
+    children:  nasl.core.String
+      // | nasl.core.Integer
+      // | nasl.core.Time
+      // | nasl.core.Date
+      // | nasl.core.DateTime
+      // | nasl.core.Decimal;
 
     // @Prop({
     //   group: '主要属性',
@@ -51,7 +57,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '隐藏过长文本',
       description: '文本过长时省略显示',
-      docDescription: '文本过长的处理方式，支持默认不处理、多余的文本省略、强制换行且英文自动添加换行符、始终不换行共四种隐藏处理方式，缺省情况为默认不处理',
+      docDescription:
+        '文本过长的处理方式，支持默认不处理、多余的文本省略、强制换行且英文自动添加换行符、始终不换行共四种隐藏处理方式，缺省情况为默认不处理',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -85,10 +92,17 @@ namespace nasl.ui {
       docDescription: '设置文本类型',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '普通文本' }, { title: '辅助文本' }, { title: '成功文本' }, { title: '警告文本' }, { title: '危险文本' }],
+        options: [
+          { title: '普通文本' },
+          { title: '辅助文本' },
+          { title: '成功文本' },
+          { title: '警告文本' },
+          { title: '危险文本' },
+        ],
       },
     })
-    type?: 'default' | 'secondary' | 'success' | 'warning' | 'danger' = 'default';
+    type?: 'default' | 'secondary' | 'success' | 'warning' | 'danger' =
+      'default';
 
     @Prop({
       group: '样式属性',

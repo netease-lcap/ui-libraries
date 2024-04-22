@@ -29,14 +29,13 @@ export function useHandleChildren(props) {
 useHandleChildren.order = 2;
 
 export function useHandleDataSource(props) {
-  const dataSourceProps = props.get('dataSource');
+  const dataConfig = props.get('dataSource');
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
   const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField', 'dataSource', 'parentField', 'childrenField']);
   const ref = props.get('ref');
-  const { data, run: reload, loading } = useRequestDataSource(dataSourceProps);
-  const dataSourceFormat = useFormatDataSource(data);
-  const dataSource = useHandleMapField({ textField, valueField, dataSource: dataSourceFormat });
+  const { data, run: reload, loading } = useRequestDataSource(dataConfig);
+  const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
   const selfRef = React.useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
   const dataSourceResult = _.isEmpty(dataSource) ? {} : { options: dataSource };
   return {
@@ -46,3 +45,7 @@ export function useHandleDataSource(props) {
     ...dataSourceResult,
   };
 }
+
+// const list=getList(id).format().map(item=>item)
+// const listFormat=forMatList(list)
+// const listMap=mapList(listFormat)

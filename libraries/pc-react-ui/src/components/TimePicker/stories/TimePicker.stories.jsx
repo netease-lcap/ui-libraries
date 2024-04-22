@@ -25,28 +25,28 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
-    const [value, setValue] = React.useState('19:47:04');
+    const [value, setValue] = React.useState(undefined);
     React.useEffect(() => {}, []);
     return (
-      <TimePicker
-        {...args}
-        data-nodepath="1234‰"
-        value={value}
-        onChange={(e) => {
-          console.log(e);
-          setValue(e);
-        }}
-      />
+      <div>
+        {' '}
+        <TimePicker
+          {...args}
+          data-nodepath="1234‰"
+          value={value}
+          onChange={(e) => {
+            console.log(e);
+            setValue(e);
+          }}
+        />
+        {value}
+      </div>
     );
   },
   args: {
     color: 'magenta',
     locale: {
       placeholder: '请选择日期',
-    },
-
-    onChange(e) {
-      console.log(e);
     },
   },
 };

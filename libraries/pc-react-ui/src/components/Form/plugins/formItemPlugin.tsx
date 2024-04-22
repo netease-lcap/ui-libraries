@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@vusion/validator';
 import classnames from 'classnames';
+import styles from '../index.module.less';
 import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
 
 import { COLPROPSFIELDS } from '@/components/Row/constants';
@@ -59,15 +60,21 @@ export function useHandleFormWarplabel(props) {
 }
 export function useHandleFormItemProps(props) {
   const BaseComponent = props.get('render');
+  // const { isForm } = React.useContext(FormContext);
   const render = React.useCallback((selfProps) => {
     const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
     const colProps = _.pick(selfProps, COLPROPSFIELDS);
     const fieldProps = {
       ..._.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]),
-      className: 'cw-nasl',
+      // className: classnames(isForm ? '' : styles.formItemComponent, 'cw-nasl', selfProps.className),
       popupClassName: 'cw-nasl',
     };
-    return <BaseComponent {...{ ...formItemProps, fieldProps, colProps }} />;
+    return (
+      <BaseComponent {...{
+        ...formItemProps, fieldProps, colProps,
+      }}
+      />
+    );
   }, [BaseComponent]);
   return {
     render,

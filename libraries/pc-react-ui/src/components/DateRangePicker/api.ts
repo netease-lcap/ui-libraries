@@ -51,7 +51,7 @@ namespace nasl.ui {
       sync: true,
       docDescription: '当前选择的值',
     })
-    value: Array<
+    value: nasl.collection.List<
       nasl.core.Date | nasl.core.String | nasl.core.Integer | nasl.core.DateTime
     >;
 

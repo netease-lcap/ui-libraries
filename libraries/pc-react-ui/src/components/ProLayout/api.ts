@@ -94,6 +94,16 @@ namespace nasl.ui {
     fixSiderbar: nasl.core.Boolean = false;
 
     @Prop({
+      group: '样式属性',
+      title: '内容区边距',
+      description: '内容区边距',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    contentPadding: nasl.core.Integer = 32;
+
+    @Prop({
       title: '值',
       description: '当前选择的值',
       sync: true,

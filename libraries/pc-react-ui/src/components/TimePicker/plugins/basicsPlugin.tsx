@@ -26,7 +26,7 @@ export function useHandleValue(props) {
     onChange(time) {
       const formatTime = _.isNil(time) ? time : time?.format('HH:mm:ss');
       _.attempt(onChangeProps, formatTime);
-      onChange(value);
+      // onChange(value);
     },
   };
 }
