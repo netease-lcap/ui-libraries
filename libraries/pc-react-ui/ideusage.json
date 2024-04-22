@@ -7,8 +7,8 @@
       "childAccept": "target.tag === 'SelectOption' || target.tag === 'SelectOptGroup'",
       "actions": {
         "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
+          "default":"this.setCacheStatus('open', false)"
         }
       },
       "mutations": ["FormSelect"]
@@ -36,8 +36,8 @@
       "idetype": "container",
       "actions": {
         "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
+          "default":"this.setCacheStatus('open', false)"
         }
       },
       "displaySlotConditions": {
@@ -602,7 +602,7 @@
         "transitionName": "''",
         "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
       },
-      "cacheOpenKey": "defaultOpen"
+      "cacheOpenKey": "open"
     }
   },
   {
@@ -617,7 +617,7 @@
         "transitionName": "''",
         "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
       },
-      "cacheOpenKey": "defaultOpen"
+      "cacheOpenKey": "open"
     }
   },
   {
@@ -640,8 +640,8 @@
       },
       "actions": {
         "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
+          "default":"this.setCacheStatus('open', false)"
         }
       }
     }
@@ -698,7 +698,7 @@
       "actions": {
         "click": {
           "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+          "default": "this.setCacheStatus('open', false)"
         }
       }
     }
@@ -752,8 +752,8 @@
       },
       "actions": {
         "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
+          "default":"this.setCacheStatus('open', false)"
         }
       }
     }
