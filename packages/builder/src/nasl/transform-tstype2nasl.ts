@@ -142,7 +142,12 @@ function transformTSFunctionType(node: babelTypes.TSFunctionType, typeNames): Ty
     });
   }
 
-  if (node.typeAnnotation) {
+  if (node.typeAnnotation && node.typeAnnotation.type === 'TSTypeAnnotation') {
+    const tsType = node.typeAnnotation.typeAnnotation as babelTypes.TSType;
+    if (tsType.type !== 'TSTypeReference' || tsType.typeName.type !== 'Identifier' || tsType.typeName.name !== 'Promise') {
+      throw new Error('解析Ts 类型异常，用函数作为参数，返回值类型强制需要为 Promise!');
+    }
+
     const typeAnnotation = transformTypeAnnotation(node.typeAnnotation.typeAnnotation, typeNames);
     if (typeAnnotation) {
       returnType.push(typeAnnotation);
