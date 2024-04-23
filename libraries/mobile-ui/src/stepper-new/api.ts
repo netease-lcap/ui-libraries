@@ -59,7 +59,8 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
         precision: 0,
         min: 0
-      }
+      },
+      bindHide: true
     })
     decimalPlacesValue: nasl.core.Integer;
 
@@ -121,6 +122,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      bindHide: true,
     })
     advancedFormatEnable: nasl.core.Boolean = false;
 
@@ -205,7 +207,10 @@ namespace nasl.ui {
     @Prop({
       group: '样式属性',
       title: '步长',
-      description: '表示点击按钮或按上下键所增加或减少的量'
+      description: '表示点击按钮或按上下键所增加或减少的量',
+      setter: {
+        concept: "NumberInputSetter"
+      }
     })
     step: nasl.core.Decimal = 1;
     @Prop({
