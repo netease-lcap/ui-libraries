@@ -76,7 +76,10 @@ namespace nasl.ui {
     vertical: nasl.core.Boolean = false;
     @Prop({
       group: '样式属性',
-      title: '步长'
+      title: '步长',
+      setter: {
+        concept: 'NumberInputSetter'
+      }
     })
     step: nasl.core.Decimal = 0;
     @Prop({

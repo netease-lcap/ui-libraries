@@ -117,7 +117,8 @@ namespace nasl.ui {
       description: '设置分页大小，单位为px。',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 1
       },
       if: _ => !!_.pageable
     })
@@ -187,7 +188,9 @@ namespace nasl.ui {
       title: '展示时长',
       description: '设置刷新成功后提示展示时长，单位为ms。',
       setter: {
-        concept: "NumberInputSetter"
+        concept: "NumberInputSetter",
+        precision: 0,
+        min: 0
       }
     })
     successDuration: nasl.core.Integer = 500;
@@ -257,7 +260,9 @@ namespace nasl.ui {
       title: '网格数',
       description: '设置每页排列几项',
       setter: {
-        concept: "NumberInputSetter"
+        concept: "NumberInputSetter",
+        precision: 0,
+        min: 1
       }
     })
     col: nasl.core.Integer = 2;
