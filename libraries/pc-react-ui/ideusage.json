@@ -721,7 +721,7 @@
       },
       "actions": {
         "click": {
-          "status": "this.getAncestor('ProLayout').setCacheStatus('openKey', '\"' + this.getAttribute('path')?.value + '\"') "
+          "status": "this.getAncestor('ProLayout').setCacheStatus('openKeys', '[\"' + this.getAttribute('path')?.value + '\"]')"
         }
       }
     }
