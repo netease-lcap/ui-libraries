@@ -55,6 +55,11 @@ namespace nasl.ui {
       title: '小数位数',
       description: '控制数据展示时小数点后保留几位，仅影响展示，不影响数据实际存储的值。例如：小数位数为2，则数据展示时小数点后保留2位。',
       if: _ => _.advancedFormatEnable === false,
+      setter: {
+        concept: 'NumberInputSetter',
+        precision: 0,
+        min: 0
+      }
     })
     decimalPlacesValue: nasl.core.Integer;
 
