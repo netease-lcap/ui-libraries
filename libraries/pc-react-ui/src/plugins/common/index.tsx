@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import { RouterContext } from '@/components/Router';
 
-export function useHandleLink(props) {
+export function useHandleLink() {
   const { useNavigate } = React.useContext(RouterContext);
   const navigate = useNavigate?.();
   return async (targetUrl, target) => {

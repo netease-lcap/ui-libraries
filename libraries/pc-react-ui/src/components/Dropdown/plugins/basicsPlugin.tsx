@@ -5,7 +5,7 @@ import { MenuItem, Icon } from '@/index';
 import {
   useRequestDataSource, useHandleMapField, useFormatDataSource,
 } from '@/plugins/common/dataSource';
-
+import { useHandleLink } from '@/plugins/common/index';
 import { RouterContext } from '@/components/Router';
 import { $deletePropsList } from '@/plugins/constants';
 
@@ -33,18 +33,19 @@ export function useMergeMenu(props) {
   const navigate = useNavigate?.();
   const fragment = props.get('menuItem');
   const menuItem = React.Children.toArray(_.get(fragment, 'props.children', []));
+  const handleLink = useHandleLink();
   const ItemsProps = _.filter(menuItem, (item) => React.isValidElement(item) && item.type === MenuItem)?.map((item) => {
     // eslint-disable-next-line no-unsafe-optional-chaining
     const { icon } = item?.props;
     const onClickPorps = item.props?.onClick;
+
     return {
-      key: item.props.path,
+      key: item.props.destination ?? item.props.path,
       ..._.omit(item.props, 'children'),
       ..._.isNil(icon) ? {} : { icon: <Icon name={icon} /> },
       onClick: _.wrap(onClickPorps, (fn, arg) => {
         _.attempt(fn, arg);
-        if (_.isValidLink(arg.key)) window.location.href = arg.key;
-        else navigate(arg.key);
+        handleLink(arg.key, item.props?.target);
       }),
     };
   });

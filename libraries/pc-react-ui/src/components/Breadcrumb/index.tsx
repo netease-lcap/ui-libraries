@@ -20,5 +20,12 @@ export const Breadcrumb = registerComponet<
   { plugin, displayName: AntdBreadcrumb.displayName, mapProps },
 );
 
+export const BreadcrumbItem = registerComponet<
+  BreadcrumbProps,
+  pluginType<BreadcrumbProps>
+>(
+  AntdBreadcrumb.Item,
+  { plugin, displayName: AntdBreadcrumb.displayName, mapProps },
+);
 // export const Breadcrumb = AntdBreadcrumb;
-export const BreadcrumbItem = AntdBreadcrumb.Item;
+// export const BreadcrumbItem = AntdBreadcrumb.Item;

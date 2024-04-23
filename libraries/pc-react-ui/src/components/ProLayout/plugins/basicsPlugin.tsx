@@ -8,6 +8,7 @@ import F from 'futil';
 
 import { ConfigProvider } from 'antd';
 import { useControllableValue } from 'ahooks';
+import { useHandleLink } from '@/plugins/common/index';
 import { Icon, MenuItem } from '@/index';
 import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
@@ -84,6 +85,7 @@ export function useHandleMenuSlot(props) {
   const fragment = props.get('menuSlot');
   const menuProps = props.get('menuProps');
   const menuSlot = React.Children.toArray(_.get(fragment, 'props.children', []));
+  const handleLink = useHandleLink();
   function childToJson(children) {
     return React.Children.map(children, (child) => {
       if (child?.type === MenuItem) {
@@ -93,15 +95,15 @@ export function useHandleMenuSlot(props) {
         const icon = _.isNil(child.props.icon) ? {} : { icon: <Icon name={child.props.icon} /> };
         const label = child.props.labelIsSlot ? child.props.labelSlot : child.props.label;
         return {
-          key: child.props?.path,
+          key: child.props?.destination ?? child.props?.path,
           ...child.props,
           ...childrenProps,
           ...icon,
           label,
           onClick: _.wrap(onClickPorps, (fn, arg) => {
             _.attempt(fn, arg);
-            if (_.isValidLink(arg.key)) window.location.href = arg.key;
-            else navigate(arg.key);
+            handleLink(arg.key, child.props?.target);
+            return false;
           }),
         };
       }

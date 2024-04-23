@@ -33,9 +33,9 @@ export default {
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+const nasl = { auth: { userInfo: { UserName: '' } } };
 export const 基本用法 = {
   render: () => {
-    const nasl = { auth: { userInfo: { UserName: '' } } };
     return (
       <ProLayout
         avatarSrc="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
