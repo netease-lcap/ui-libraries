@@ -55,6 +55,10 @@ namespace nasl.ui {
       title: '小数位数',
       description: '控制数据展示时小数点后保留几位，仅影响展示，不影响数据实际存储的值。例如：小数位数为2，则数据展示时小数点后保留2位。',
       if: _ => _.advancedFormatEnable === false,
+      setter: {
+        concept: "NumberInputSetter"
+      },
+      bindHide: true
     })
     decimalPlacesValue: nasl.core.Integer;
 
@@ -116,6 +120,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      bindHide: true,
     })
     advancedFormatEnable: nasl.core.Boolean = false;
 
@@ -200,7 +205,10 @@ namespace nasl.ui {
     @Prop({
       group: '样式属性',
       title: '步长',
-      description: '表示点击按钮或按上下键所增加或减少的量'
+      description: '表示点击按钮或按上下键所增加或减少的量',
+      setter: {
+        concept: "NumberInputSetter"
+      }
     })
     step: nasl.core.Decimal = 1;
     @Prop({
