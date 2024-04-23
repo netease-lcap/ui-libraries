@@ -60,18 +60,21 @@ export function useHandleFormWarplabel(props) {
 }
 export function useHandleFormItemProps(props) {
   const BaseComponent = props.get('render');
-  // const { isForm } = React.useContext(FormContext);
+  const { isForm } = React.useContext(FormContext);
   const render = React.useCallback((selfProps) => {
     const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
     const colProps = _.pick(selfProps, COLPROPSFIELDS);
     const fieldProps = {
       ..._.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]),
-      // className: classnames(isForm ? '' : styles.formItemComponent, 'cw-nasl', selfProps.className),
+      className: classnames('cw-nasl', selfProps.className),
       popupClassName: 'cw-nasl',
     };
     return (
       <BaseComponent {...{
-        ...formItemProps, fieldProps, colProps,
+        ...formItemProps,
+        fieldProps,
+        colProps,
+        ...(isForm ? {} : { width: 256 }),
       }}
       />
     );

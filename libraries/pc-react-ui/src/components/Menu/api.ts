@@ -171,6 +171,13 @@ namespace nasl.ui {
     path: any;
 
     @Prop({
+      group: '交互属性',
+      title: '链接地址',
+      docDescription: '链接的详细地址',
+    })
+    hrefAndTo: nasl.core.String;
+
+    @Prop({
       title: '图标',
       description: '图标',
       setter: {

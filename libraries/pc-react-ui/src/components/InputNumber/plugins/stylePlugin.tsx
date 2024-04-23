@@ -13,7 +13,7 @@ export function useHandleStyleTheme(props) {
     return (
       <ConfigProvider theme={{
         components: {
-          Select: _.filterUnderfinedValue({
+          InputNumber: _.filterUnderfinedValue({
             colorText: color,
             fontSize,
           }),

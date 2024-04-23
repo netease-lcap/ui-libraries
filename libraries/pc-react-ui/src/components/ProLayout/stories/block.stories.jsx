@@ -35,6 +35,7 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 基本用法 = {
   render: () => {
+    const nasl = { auth: { userInfo: { UserName: '' } } };
     return (
       <ProLayout
         avatarSrc="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
@@ -43,16 +44,16 @@ export const 基本用法 = {
         // avatarTitle={$global.userInfo.UserName}
         // avatarTitle="张梦燕"
         avatarRender={(
-          <Dropdown
-            menuItem={(
-              <>
-                <MenuItem label="安全退出" />
-              </>
-            )}
-          >
+          <Dropdown menuItem={<MenuItem label="安全退出" />}>
             <Flex gap={8}>
-              <Image style={{width:'21px'}} src="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg" />
-              <Text style={{ paddingTop: 11 }} children={nasl.auth.userInfo.UserName}></Text>
+              <Image
+                style={{ width: '21px' }}
+                src="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
+              />
+              <Text
+                style={{ paddingTop: 11 }}
+                children={nasl.auth.userInfo.UserName}
+              />
             </Flex>
           </Dropdown>
         )}
@@ -61,7 +62,10 @@ export const 基本用法 = {
         title="应用名称"
         menuSlot={(
           <>
-            <MenuItem label="导航项" path="/1" />
+            <MenuItem label="导航项" path="/1">
+              <MenuItem label="导航项" path="/4" />
+              <MenuItem label="导航项" path="/3" />
+            </MenuItem>
             <MenuItem label="导航项" path="/2" />
           </>
         )}

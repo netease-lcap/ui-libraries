@@ -15,3 +15,11 @@ export function useHandleLabel(props) {
     label,
   };
 }
+
+export function useHandlePath(props) {
+  const path = props.get('path');
+  const destination = props.get('destination');
+  return {
+    path: path ?? destination,
+  };
+}

@@ -62,13 +62,7 @@ namespace nasl.ui {
       docDescription: '默认显示的日期值。',
       // if: (_) => _.range !== true,
     })
-    value: nasl.collection.List<
-      | nasl.core.Date
-      | nasl.core.String
-      | nasl.core.Integer
-      | nasl.core.DateTime
-      | nasl.core.Time
-    >;
+    value: nasl.collection.List<any>;
 
     // ======================
     // @Prop<TimeRangePickerOptions, 'startDate'>({

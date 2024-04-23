@@ -14,16 +14,16 @@ namespace nasl.ui {
   }
 
   export class BreadcrumbOptions extends ViewComponentOptions {
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '自动生成',
-    //   description: '是否自动根据子页面配置的面包屑属性自动生成',
-    //   docDescription: '支持控制面包屑生成方式。',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    // })
-    // auto: nasl.core.Boolean = false;
+    @Prop({
+      group: '主要属性',
+      title: '自动生成',
+      description: '是否自动根据子页面配置的面包屑属性自动生成',
+      docDescription: '支持控制面包屑生成方式。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    auto: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',

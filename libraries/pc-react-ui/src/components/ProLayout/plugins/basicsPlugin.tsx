@@ -26,7 +26,7 @@ export function useHandleMenuOpenKey(props) {
   const { useLocation } = React.useContext(RouterContext);
   const location = useLocation?.();
   const ref = props.get('ref');
-  const openKeysProps = props.get('oepnKeys');
+  const openKeysProps = props.get('openKeys');
   const defaultOpenKeys = props.get('defaultOpenKeys');
   const onOpenChangeProps = props.get('onOpenChange');
   const [openKeys, setValue] = useControllableValue(_.filterUnderfinedValue({ value: openKeysProps, defaultValue: defaultOpenKeys, onChange: onOpenChangeProps }));
