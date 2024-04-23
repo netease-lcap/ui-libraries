@@ -75,7 +75,7 @@ namespace nasl.ui {
     //   title: '文本',
     //   description: '文本内容',
     // })
-    // private text: nasl.core.String;
+    // title: nasl.core.String;
 
     // @Prop({
     //   title: '替换',
@@ -130,10 +130,20 @@ namespace nasl.ui {
     @Prop({
       group: '交互属性',
       title: '链接地址',
-      docDescription: '设置链接路径。',
+      docDescription: '链接的详细地址',
     })
-    href: nasl.core.String;
-    
+    hrefAndTo: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '图标',
+      docDescription: '支持从图标库选择图标或上传自定义图标。',
+      setter: {
+        concept: 'IconSetter',
+      },
+    })
+    icon: nasl.core.String = '';
+
     // @Prop({
     //   group: '交互属性',
     //   title: '链接打开方式',

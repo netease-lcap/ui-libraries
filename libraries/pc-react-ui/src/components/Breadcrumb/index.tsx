@@ -2,6 +2,7 @@ import { Breadcrumb as AntdBreadcrumb } from 'antd';
 import type { BreadcrumbProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
+import * as ItemPlugin from './itemPlugins/index';
 import type { pluginType } from '@/plugins/type';
 
 import './index.module.less';
@@ -25,7 +26,7 @@ export const BreadcrumbItem = registerComponet<
   pluginType<BreadcrumbProps>
 >(
   AntdBreadcrumb.Item,
-  { plugin, displayName: AntdBreadcrumb.displayName, mapProps },
+  { plugin: ItemPlugin, displayName: AntdBreadcrumb.displayName, mapProps },
 );
 // export const Breadcrumb = AntdBreadcrumb;
 // export const BreadcrumbItem = AntdBreadcrumb.Item;
