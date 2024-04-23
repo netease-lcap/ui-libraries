@@ -101,7 +101,7 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    textField: (item: T) => nasl.core.String = ((item: any)  => item.text) as any;
+    textField: (item: T) => any = ((item: any)  => item.text) as any;
     @Prop<VanPickersonOptions<T, V, M, P>, 'pageSize'>({
       group: '数据属性',
       title: '默认每页条数',
