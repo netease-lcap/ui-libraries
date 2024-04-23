@@ -439,8 +439,7 @@
       ],
       "actions": {
         "click": {
-          "status": "this.getParent().setCacheStatus('defaultActiveKey', '\"' + this.getAttribute('key')?.value + '\"') ",
-          "effect": "this.getParent().callComponentMethod('setValue', this.getAttribute('key')?.value)"
+          "status": "this.getParent().setCacheStatus('activeKey', '\"' + this.getAttribute('key')?.value + '\"') "
         }
       }
     }
@@ -697,7 +696,7 @@
       "childAccept": "this.getDefaultElements().length < 1",
       "actions": {
         "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
           "default": "this.setCacheStatus('open', false)"
         }
       }
@@ -722,8 +721,7 @@
       },
       "actions": {
         "click": {
-          "status": "this.getParent().getParent().setCacheStatus('defaultOpenKeys', '\"' + this.getAttribute('path')?.value + '\"') ",
-          "effect": "this.getParent().getParent().callComponentMethod('setValue', this.getAttribute('path')?.value)"
+          "status": "this.getAncestor('ProLayout').setCacheStatus('openKey', '\"' + this.getAttribute('path')?.value + '\"') "
         }
       }
     }
