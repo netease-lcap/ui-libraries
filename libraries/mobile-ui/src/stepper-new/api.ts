@@ -59,7 +59,8 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
         precision: 0,
         min: 0
-      }
+      },
+      bindHide: true
     })
     decimalPlacesValue: nasl.core.Integer;
 
@@ -121,6 +122,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      bindHide: true,
     })
     advancedFormatEnable: nasl.core.Boolean = false;
 

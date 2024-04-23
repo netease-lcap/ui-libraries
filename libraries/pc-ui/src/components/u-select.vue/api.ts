@@ -233,6 +233,9 @@ namespace nasl.ui {
             group: '数据属性',
             title: '自动加载选中值',
             description: '当下拉列表是分页或加载更多而选中值不在第一页时，是否自动往下加载直到加载到选中值，使下拉框能够展示选中值。数据较多时建议关闭该属性，使用选中值完整数据',
+            setter: {
+                concept: 'SwitchSetter',
+            }
         })
         autoCheckSelectedValue: nasl.core.Boolean = true;
 
