@@ -183,7 +183,8 @@ namespace nasl.ui {
       title: '文件有效期天数',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0
       },
       if: _ => _.ttl === true
     })

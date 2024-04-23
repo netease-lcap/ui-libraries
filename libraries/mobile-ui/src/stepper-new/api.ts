@@ -205,7 +205,11 @@ namespace nasl.ui {
     @Prop({
       group: '样式属性',
       title: '步长',
-      description: '表示点击按钮或按上下键所增加或减少的量'
+      description: '表示点击按钮或按上下键所增加或减少的量',
+      setter: {
+        concept: "NumberInputSetter",
+        min: 0
+      }
     })
     step: nasl.core.Decimal = 1;
     @Prop({

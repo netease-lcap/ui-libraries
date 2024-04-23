@@ -196,7 +196,8 @@ namespace nasl.ui {
       description: '设置可见选项个数',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 1
       },
       if: _ => _.type === 'picker'
     })

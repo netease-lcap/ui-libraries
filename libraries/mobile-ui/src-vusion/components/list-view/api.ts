@@ -198,6 +198,7 @@ namespace nasl.ui {
       description: '分页过小可能会导致滚动加载更多失效',
       setter: {
         concept: "NumberInputSetter",
+        precision: 0,
         min: 1
       },
       if: _ => _.pageable !== ''
@@ -310,7 +311,8 @@ namespace nasl.ui {
       description: '设置刷新成功后提示展示时长，单位为ms。',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0
       },
       if: _ => _.pullRefresh === true && _.pageable !== 'pagination'
     })

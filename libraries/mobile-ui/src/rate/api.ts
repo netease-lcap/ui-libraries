@@ -27,7 +27,12 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '图标总数',
-      description: '设置评分图标的总数'
+      description: '设置评分图标的总数',
+      setter: {
+        concept: "NumberInputSetter",
+        precision: 0,
+        min: 0
+      }
     })
     count: nasl.core.Integer = 5;
     @Prop({

@@ -233,7 +233,9 @@ namespace nasl.ui {
       if: _ => _.type === 'time',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0,
+        max: 23
       }
     })
     maxHour: nasl.core.Integer = 23;
@@ -244,7 +246,9 @@ namespace nasl.ui {
       if: _ => _.type === 'time',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0,
+        max: 23
       }
     })
     minHour: nasl.core.Integer = 0;
@@ -255,7 +259,9 @@ namespace nasl.ui {
       if: _ => _.type === 'time',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0,
+        max: 59
       }
     })
     maxMinute: nasl.core.Integer = 59;
@@ -266,7 +272,9 @@ namespace nasl.ui {
       if: _ => _.type === 'time',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0,
+        max: 59
       }
     })
     minMinute: nasl.core.Integer = 0;

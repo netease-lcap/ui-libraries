@@ -49,7 +49,8 @@ namespace nasl.ui {
       description: '最大可选数量(0为不限制)',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0
       }
     })
     max: nasl.core.Integer;
@@ -59,7 +60,8 @@ namespace nasl.ui {
       description: '最小可选数量(0为不限制)',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0
       }
     })
     min: nasl.core.Integer = 0;
@@ -92,7 +94,8 @@ namespace nasl.ui {
       description: '水平排列时每行展示的选项数量',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 1
       },
       if: _ => _.direction === 'horizontal'
     })
