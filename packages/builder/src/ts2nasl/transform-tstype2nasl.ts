@@ -4,7 +4,7 @@ import type {
   StructureProperty,
   TypeAnnotation,
 } from '@nasl/types/nasl.ui.ast';
-import { getNodeCode } from '../utils/babel-utils';
+import { getNodeCode } from './utils';
 
 const isPrimitive = (name: string) => ['String', 'Integer', 'Decimal', 'Boolean', 'Date', 'Time', 'DateTime', 'Binary', 'Any'].includes(name);
 const getTypeKind = (typeParameters, primitive) => (typeParameters && typeParameters.params && typeParameters.params.length ? 'generic' : primitive ? 'primitive' : 'reference');

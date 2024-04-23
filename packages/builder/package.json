@@ -16,6 +16,7 @@
       "require": "./lib/index.js",
       "import": "./lib/index.js"
     },
+    "./lib/ts2nasl/transform-tsx2nasl": "./lib/ts2nasl/transform-tsx2nasl.js",
     "./input/theme.html": "./input/theme.html",
     "./package.json": "./package.json"
   },

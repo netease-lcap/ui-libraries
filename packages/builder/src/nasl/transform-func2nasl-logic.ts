@@ -6,7 +6,7 @@ import type {
 } from '@nasl/types/nasl.ui.ast';
 import logger from '../utils/logger';
 import { getNodeCode } from '../utils/babel-utils';
-import transformTypeAnnotation from './transform-tstype2nasl';
+import { transformTsType2Nasl as transformTypeAnnotation } from '../ts2nasl';
 
 export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDeclaration) {
   if (
@@ -179,7 +179,7 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
                   typeAnnotation: {
                     concept: 'TypeAnnotation',
                     typeKind: 'primitive',
-                    typeName: String(param.right.value).includes('.') ? 'Decimal' : 'Integer',
+                    typeName: String(param.right.value).includes('.') ? 'Decimal' : 'Long',
                     typeNamespace: 'nasl.core',
                     inferred: false,
                     ruleMap: new Map(),

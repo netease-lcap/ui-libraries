@@ -36,19 +36,17 @@ export const 基本用法 = {
   render: () => {
     return (
       <ProLayout
-        getTargetContainer={() => {
-          return document.getElementById('test-pro-layout') || document.body;
-        }}
+        // getTargetContainer={() => {
+        //   return document.getElementById('test-pro-layout') || document.body;
+        // }}
         avatarSrc="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
-        avatarTitle={
-          window.$global?.userInfo?.UserName ?? 'window.$global.userInfo'
-        }
+        avatarTitle={nasl.auth.userInfo.UserName}
         avatarRender={(
           <Dropdown
             menuItem={(
               <>
-                <MenuItem label={<Text>导航项目</Text>} />
-                <MenuItem label={<Text>导航项目2</Text>} />
+                <MenuItem label={<Text children="导航项目" />} />
+                <MenuItem label={<Text children="导航项目2" />} />
               </>
             )}
           />
