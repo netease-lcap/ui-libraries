@@ -38,7 +38,13 @@
             </div>
         </template>
         <template v-else>
-            <u-table-view :data-source="loadTable" ref="tableview" :page-size="20" :page-number="1" pagination :initial-load="initialLoad">
+            <u-table-view
+                :data-source="loadTable"
+                ref="tableview"
+                :page-size="paging.size"
+                :page-number="paging.number"
+                pagination
+                :initial-load="initialLoad">
                 <u-table-view-column :title="$tt('currentNode')">
                     <template #cell="current"> {{ current.item.nodeTitle || '-' }}</template>
                 </u-table-view-column>
@@ -156,8 +162,8 @@ export default {
                 const result = await this.$processV2.getProcInstRecords({
                     body: {
                         taskId: this.taskId,
-                        size: this.paging.size,
-                        page: this.paging.number,
+                        size: params.size,
+                        page: params.page,
                     },
                 });
                 return result.data;
