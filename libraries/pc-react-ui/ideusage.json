@@ -721,7 +721,7 @@
       },
       "actions": {
         "click": {
-          "status": "this.getAncestor('ProLayout').setCacheStatus('openKeys', '[\"' + this.getAttribute('path')?.value + '\"]')"
+          "status": "{const prolayout=this.getAncestor('ProLayout'); \nconst cacheStatus = prolayout.getCacheStatus('openKeys') || []; \nconst key = this.getAttribute('path')?.value;\nif(key){\n    if(cacheStatus.includes(key)) {\n        const idx = cacheStatus.findIndex(s => s === key);\n        cacheStatus.splice(idx, 1);\n    } else {\n        prolayout.setCacheStatus('openKeys', cacheStatus.concat([key]));\n    }\n}}"
         }
       }
     }
