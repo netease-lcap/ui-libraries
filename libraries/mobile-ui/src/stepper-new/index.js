@@ -394,7 +394,7 @@ export default createComponent({
             class={bem('input')}
             style={this.inputStyle}
             readonly
-            value={this.formattedValue}
+            value={this.formattedValue || '--'}
           />
           {this.showUnit && this.unit.type === 'suffix' && <div class={bem('unit', { suffix: true })}>{this.unit?.value}</div>}
         </div>
