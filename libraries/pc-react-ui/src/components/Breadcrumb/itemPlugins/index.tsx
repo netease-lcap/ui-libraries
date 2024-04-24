@@ -23,7 +23,7 @@ export function useHandleIcon(props) {
   const render = React.useCallback((selfProps) => {
     return (
       <BaseComponents {..._.omit(selfProps, 'children')}>
-        <Icon name={icon} style={{ marginRight: '4px', fontSize: '18px', color: 'inherit' }} />
+        <Icon name={icon} style={{ marginRight: '4px', fontSize: 'inherit', color: 'inherit' }} />
         {selfProps.children}
       </BaseComponents>
     );
