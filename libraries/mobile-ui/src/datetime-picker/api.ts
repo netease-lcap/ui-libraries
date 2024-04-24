@@ -191,13 +191,13 @@ namespace nasl.ui {
       sync: true,
       if: _ => _.range === true
     })
-    startValue: nasl.core.String | nasl.core.DateTime | nasl.core.Date;
+    startValue: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop<VanDatetimePickerOptions, 'endValue'>({
       title: '结束值',
       sync: true,
       if: _ => _.range === true
     })
-    endValue: nasl.core.String | nasl.core.DateTime | nasl.core.Date;
+    endValue: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop({
       title: '是否使用新版外观',
       description: '是否使用新版外观',
@@ -213,19 +213,19 @@ namespace nasl.ui {
       sync: true,
       if: _ => _.range !== true
     })
-    value: nasl.core.String | nasl.core.DateTime | nasl.core.Date;
+    value: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop({
       group: '数据属性',
       title: '最小日期',
       description: '当时间选择类型为datetime时可选的最小时间，精确到分钟, 默认为十年前'
     })
-    minDate: nasl.core.String | nasl.core.DateTime | nasl.core.Date;
+    minDate: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop({
       group: '数据属性',
       title: '最大日期',
       description: '当时间选择类型为datetime时可选的最大时间，精确到分钟, 默认为十年后'
     })
-    maxDate: nasl.core.String | nasl.core.DateTime | nasl.core.Date;
+    maxDate: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop<VanDatetimePickerOptions, 'maxHour'>({
       group: '数据属性',
       title: '最大小时',
@@ -233,7 +233,9 @@ namespace nasl.ui {
       if: _ => _.type === 'time',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0,
+        max: 23
       }
     })
     maxHour: nasl.core.Integer = 23;
@@ -244,7 +246,9 @@ namespace nasl.ui {
       if: _ => _.type === 'time',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0,
+        max: 23
       }
     })
     minHour: nasl.core.Integer = 0;
@@ -255,7 +259,9 @@ namespace nasl.ui {
       if: _ => _.type === 'time',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0,
+        max: 59
       }
     })
     maxMinute: nasl.core.Integer = 59;
@@ -266,7 +272,9 @@ namespace nasl.ui {
       if: _ => _.type === 'time',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0,
+        max: 59
       }
     })
     minMinute: nasl.core.Integer = 0;

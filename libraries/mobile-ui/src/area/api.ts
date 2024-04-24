@@ -73,7 +73,8 @@ namespace nasl.ui {
       title: '可见选项个数',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 1
       }
     })
     visibleItemCount: nasl.core.Integer = 6;
@@ -83,7 +84,8 @@ namespace nasl.ui {
       description: '显示列数，3-省市区，2-省市，1-省',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 1,
       }
     })
     columnsNum: nasl.core.Integer = 3;

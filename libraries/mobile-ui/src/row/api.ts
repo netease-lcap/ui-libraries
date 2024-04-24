@@ -350,7 +350,8 @@ namespace nasl.ui {
       description: '栅格列向右偏移列数',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0,
       }
     })
     offset: nasl.core.Integer = 0;
