@@ -23,7 +23,7 @@ export const 默认 = {
   render: () => {
     return (
       <Breadcrumb>
-        <BreadcrumbItem icon="RiArrowRightCircleFill">
+        <BreadcrumbItem>
           <Text
             children="首页"
             style={{ fontSize: 'inherit', color: 'inherit' }}

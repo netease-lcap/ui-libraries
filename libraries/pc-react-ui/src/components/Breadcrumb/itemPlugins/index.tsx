@@ -19,12 +19,11 @@ export function useHandleHref(props) {
 export function useHandleIcon(props) {
   const icon = props.get('icon');
   const children = props.get('children');
-  console.log(icon, children, '=======');
   const BaseComponents = props.get('render');
   const render = React.useCallback((selfProps) => {
     return (
       <BaseComponents {..._.omit(selfProps, 'children')}>
-        <Icon name={icon} style={{ marginRight: '4px', fontSize: 'inherit', color: 'inherit' }} />
+        <Icon name={icon} style={{ marginRight: '4px', fontSize: '18px', color: 'inherit' }} />
         {selfProps.children}
       </BaseComponents>
     );
