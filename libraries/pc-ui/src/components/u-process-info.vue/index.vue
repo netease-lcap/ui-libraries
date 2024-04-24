@@ -70,9 +70,9 @@ export default {
                 return '-';
             }
             if (value.toLowerCase() === 'approved') {
-                return '审批通过';
+                return this.$tt('approvedStatus');
             } else if (value.toLowerCase() === 'approving') {
-                return '审批中';
+                return this.$tt('approvingStatus');
             } else {
                 return value;
             }

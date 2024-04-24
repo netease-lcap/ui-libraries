@@ -5,7 +5,8 @@
     <u-number-input 
         v-model="value" 
         placeholder="请输入" 
-        :decimal-places="{ places:3, omit:false }" 
+        :decimalPlacesValue="3"
+        :decimalPlacesOmitZero="false"
         :thousandths="false" 
         :percent-sign="true"
         :decimalLength="2"></u-number-input>

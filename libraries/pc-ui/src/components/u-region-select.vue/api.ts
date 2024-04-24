@@ -65,7 +65,7 @@ namespace nasl.ui {
             sync: true,
             docDescription: '当前选择的值',
         })
-        value: nasl.core.Any;
+        value: any;
 
         @Prop({
             group: '数据属性',
@@ -90,6 +90,7 @@ namespace nasl.ui {
             title: '占位符',
             description: '为空时显示的占位符文本',
             docDescription: '选择框无内容时的提示信息，支持自定义编辑，默认为请选择',
+            implicitToString: true,
         })
         placeholder: nasl.core.String = '请选择';
 

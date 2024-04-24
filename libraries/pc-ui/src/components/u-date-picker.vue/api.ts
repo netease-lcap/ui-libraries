@@ -46,7 +46,7 @@ namespace nasl.ui {
           docDescription: '当前选择的值',
           if: _ => _.range !== true,
       })
-      value: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      value: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
       @Prop<UDatePickerOptions, 'startDate'>({
           group: '数据属性',
@@ -55,7 +55,7 @@ namespace nasl.ui {
           sync: true,
           if: _ => _.range === true,
       })
-      startDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      startDate: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
       @Prop<UDatePickerOptions, 'endDate'>({
           group: '数据属性',
@@ -64,7 +64,7 @@ namespace nasl.ui {
           sync: true,
           if: _ => _.range === true,
       })
-      endDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      endDate: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
       @Prop({
           group: '数据属性',
@@ -72,7 +72,7 @@ namespace nasl.ui {
           description: '最小可选的日期值，默认为10年前，日期填写格式为“yyyy-mm-dd”',
           docDescription: '设置日期范围，支持输入的最小日期',
       })
-      minDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      minDate: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
       @Prop({
           group: '数据属性',
@@ -80,14 +80,14 @@ namespace nasl.ui {
           description: '最大可选的日期值，默认为9年后，日期填写格式为“yyyy-mm-dd”',
           docDescription: '设置日期范围，支持输入的最大日期',
       })
-      maxDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      maxDate: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
       @Prop({
           group: '数据属性',
           title: '时间格式',
           description: '输入对应格式的字符串（8:00:00）即可',
       })
-      private time: nasl.core.String | nasl.core.Decimal = '00:00:00';
+      private time: nasl.core.String | nasl.core.Integer = '00:00:00';
 
       @Prop<UDatePickerOptions, 'yearDiff'>({
           group: '数据属性',
@@ -116,9 +116,23 @@ namespace nasl.ui {
       @Prop({
           group: '主要属性',
           title: '高级格式化',
-          bindHide: true,
+          onChange: [
+            { clear: ['advancedFormatValue'] }
+          ],
+          setter: {
+            concept: 'SwitchSetter',
+          },
       })
-      advancedFormat: { enable: nasl.core.Boolean, value: nasl.core.String } = { enable: false, value: '' };
+      advancedFormatEnable: nasl.core.Boolean = false;
+
+      @Prop<UDatePickerOptions, 'advancedFormatValue'>({
+            group: '主要属性',
+            title: '高级格式化内容',
+            description: '用来控制日期的展示格式',
+            bindHide: true,
+            if: _ => _.advancedFormatEnable === true,
+        })
+      advancedFormatValue: nasl.core.String;
 
       @Prop<UDatePickerOptions, 'showFormatter'>({
           group: '主要属性',
@@ -143,7 +157,7 @@ namespace nasl.ui {
                   { title: 'ISO（2023）', if: _ => _.picker === 'year' }
               ],
           },
-          if: _ => _.advancedFormat.enable === false,
+          if: _ => _.advancedFormatEnable === false,
       })
       showFormatter: 'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' | 'GGGG-W周' | 'GGGG年第W周' | 'GGGG-WWWW' | 'YYYY年M月' | 'YYYY-MM' | 'M/YYYY' | 'YYYY年第Q季度' | 'YYYY年QQ' | 'YYYY-QQ' | 'YYYY年' | 'YYYY';
 
@@ -314,7 +328,7 @@ namespace nasl.ui {
       height: 'full' | 'huge' | 'large' | 'medium' | 'normal' | 'small' | 'mini' = 'normal';
 
       @Event({
-          title: '值输入时',
+          title: '值输入后',
           description: '值变化时触发 (表单验证可以检测到其值得变化)',
       })
       onInput: (event: nasl.core.Date) => any;

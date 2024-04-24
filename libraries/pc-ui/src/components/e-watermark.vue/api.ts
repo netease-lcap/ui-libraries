@@ -24,6 +24,7 @@ namespace nasl.ui {
             title: '文本',
             description: '水印文本显示内容',
             docDescription: '设置水印文本内容',
+            implicitToString: true,
         })
         text: nasl.core.String = '水印';
 

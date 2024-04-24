@@ -101,7 +101,7 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    textField: (item: T) => nasl.core.String = ((item: any)  => item.text) as any;
+    textField: (item: T) => any = ((item: any)  => item.text) as any;
     @Prop<VanPickersonOptions<T, V, M, P>, 'pageSize'>({
       group: '数据属性',
       title: '默认每页条数',
@@ -166,24 +166,28 @@ namespace nasl.ui {
     type: 'picker' | 'list' = 'picker';
     @Prop({
       group: '主要属性',
-      title: '占位提示'
+      title: '占位提示',
+      implicitToString: true,
     })
     placeholder: nasl.core.String = '请选择';
     @Prop({
       group: '主要属性',
-      title: '工具栏标题'
+      title: '工具栏标题',
+      implicitToString: true,
     })
     title: nasl.core.String = '标题';
     @Prop<VanPickersonOptions<T, V, M, P>, 'confirmButtonText'>({
       group: '主要属性',
       title: '确认按钮文字',
-      if: _ => _.isNew === false
+      if: _ => _.isNew === false,
+      implicitToString: true,
     })
     confirmButtonText: nasl.core.String = '确认';
     @Prop<VanPickersonOptions<T, V, M, P>, 'cancelButtonText'>({
       group: '主要属性',
       title: '取消按钮文字',
-      if: _ => _.isNew === false
+      if: _ => _.isNew === false,
+      implicitToString: true,
     })
     cancelButtonText: nasl.core.String = '取消';
     @Prop<VanPickersonOptions<T, V, M, P>, 'visibleItemCount'>({
@@ -192,7 +196,8 @@ namespace nasl.ui {
       description: '设置可见选项个数',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 1
       },
       if: _ => _.type === 'picker'
     })
@@ -306,17 +311,17 @@ namespace nasl.ui {
       title: '点击完成按钮时触发',
       description: '回调参数：选中值，选中值对应的索引'
     })
-    onConfirm: (event: M extends true ? nasl.collection.List<V> : V) => any ;
+    onConfirm: (event: M extends true ? nasl.collection.List<V> : V) => void;
     @Event({
       title: '点击取消按钮时触发',
       description: '回调参数：选中值，选中值对应的索引'
     })
-    onCancel: (event: any) => any ;
+    onCancel: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '选项改变时触发',
       description: '回调参数：Picker 实例，选中值，选中值对应的索引'
     })
-    onChange: (event: any) => any ;
+    onChange: (event: nasl.ui.BaseEvent) => void;
     // @Slot({
     //   title: 'undefined',
     //   description: '插入`<van-picker-action-slot>`子组件',

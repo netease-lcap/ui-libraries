@@ -194,7 +194,7 @@ namespace nasl.ui {
             description: '用于标识选项的值',
             docDescription: '单选框返还的选项值',
         })
-        label: V;
+        label: V | nasl.core.String | nasl.core.Boolean | nasl.core.Integer;
 
         @Prop({
             group: '主要属性',

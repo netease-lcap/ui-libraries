@@ -158,7 +158,7 @@ export default createComponent({
         });
       }
 
-      return <div class={bem([this.direction, this.isPreview ? 'preview' : ''])}>{nodes.map((item, index) => item)}</div>;
+      return <div class={bem([this.direction, this.isPreview ? 'preview' : ''])}>{nodes.length ? nodes : '--'}</div>;
     }
   },
 
@@ -169,7 +169,7 @@ export default createComponent({
       itemWidth = 100 / this.column + '%';
     }
 
-    if (this.isPreview && !this.inDesigner()) {
+    if (this.isPreview) {
       return this.previewRender();
     }
 

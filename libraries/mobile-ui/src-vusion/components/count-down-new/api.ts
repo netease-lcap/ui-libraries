@@ -80,21 +80,21 @@ namespace nasl.ui {
       title: '计时器开始',
       description: '计时器开始时触发'
     })
-    onStart: (event: any) => any ;
+    onStart: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '计时器暂停',
       description: '计时器暂停时触发'
     })
-    onPause: (event: any) => any ;
+    onPause: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '计时器继续',
       description: '计时器继续时触发'
     })
-    onContinue: (event: any) => any ;
+    onContinue: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '计时器结束',
       description: '计时器结束时触发'
     })
-    onStop: (event: any) => any ;
+    onStop: (event: nasl.ui.BaseEvent) => void;
   }
 }

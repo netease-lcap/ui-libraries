@@ -64,7 +64,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '占位符',
-      description: '输入框为空的显示文字'
+      description: '输入框为空的显示文字',
+      implicitToString: true,
     })
     placeholder: nasl.core.String;
     @Prop<VanFieldtextareaOptions, 'maxlength'>({
@@ -73,6 +74,7 @@ namespace nasl.ui {
       description: '输入框内可输入的最大字符数，超过时不支持输入。',
       setter: {
         concept: "NumberInputSetter",
+        precision: 0,
         placeholder: '不限制'
       },
       onChange: [{
@@ -147,26 +149,26 @@ namespace nasl.ui {
       title: '输入时',
       description: '输入时触发。'
     })
-    onInput: (event: Event) => any ;
+    onInput: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '改变后',
       description: '值变化时触发。（注意：与原生事件不同）'
     })
-    onChange: (event: nasl.core.String) => any ;
+    onChange: (event: nasl.core.String) => void;
     @Event({
       title: '获得焦点',
       description: '获得焦点时触发。'
     })
-    onFocus: (event: FocusEvent) => any ;
+    onFocus: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '失去焦点',
       description: '失去焦点时触发。'
     })
-    onBlur: (event: FocusEvent) => any ;
+    onBlur: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '清空后',
       description: '清空后触发。'
     })
-    onClear: (event: any) => any ;
+    onClear: (event: nasl.ui.BaseEvent) => void;
   }
 }

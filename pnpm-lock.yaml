@@ -114,8 +114,8 @@ importers:
         specifier: 0.4.11
         version: 0.4.11
       '@vusion/validator':
-        specifier: ^0.4.6
-        version: 0.4.12
+        specifier: 0.4.7
+        version: 0.4.7
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
@@ -169,8 +169,8 @@ importers:
         specifier: workspace:^*
         version: link:../../packages/vite-plugin-vue2
       '@nasl/types':
-        specifier: ^0.1.6
-        version: 0.1.6
+        specifier: 0.1.7-beta.2
+        version: 0.1.7-beta.2
       '@storybook/addon-essentials':
         specifier: ^7.6.17
         version: 7.6.17(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
@@ -280,8 +280,8 @@ importers:
         specifier: ^4.14.202
         version: 4.14.202
       '@vusion/validator':
-        specifier: ^0.4.14
-        version: 0.4.14
+        specifier: 0.4.7
+        version: 0.4.7
       ahooks:
         specifier: ^3.7.8
         version: 3.7.8(react@18.2.0)
@@ -431,8 +431,8 @@ importers:
         specifier: 0.4.11
         version: 0.4.11
       '@vusion/validator':
-        specifier: 0.4.12
-        version: 0.4.12
+        specifier: 0.4.7
+        version: 0.4.7
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
@@ -492,8 +492,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/vite-plugin-vue2
       '@nasl/types':
-        specifier: ^0.1.6
-        version: 0.1.6
+        specifier: 0.1.7-beta.2
+        version: 0.1.7-beta.2
       '@storybook/addon-essentials':
         specifier: ^7.6.17
         version: 7.6.17(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
@@ -3091,7 +3091,7 @@ packages:
     dev: true
 
   /@commitlint/load@18.4.3(typescript@5.3.3):
-    resolution: {integrity: sha512-v6j2WhvRQJrcJaj5D+EyES2WKTxPpxENmNpNG3Ww8MZGik3jWRXtph0QTzia5ZJyPh2ib5aC/6BIDymkUUM58Q==, tarball: https://registry.npmmirror.com/@commitlint/load/-/load-18.4.3.tgz}
+    resolution: {integrity: sha512-v6j2WhvRQJrcJaj5D+EyES2WKTxPpxENmNpNG3Ww8MZGik3jWRXtph0QTzia5ZJyPh2ib5aC/6BIDymkUUM58Q==}
     engines: {node: '>=v18'}
     dependencies:
       '@commitlint/config-validator': 18.4.3
@@ -3915,6 +3915,10 @@ packages:
 
   /@nasl/types@0.1.6:
     resolution: {integrity: sha512-h6Yh57U1jEbvgWh8A1XxsWAW61JLjshq35sT1G57qZ3D6539v2hxEUe8TjOL0c501lz7gCm4WLlowf/wgypBRA==}
+
+  /@nasl/types@0.1.7-beta.2:
+    resolution: {integrity: sha512-DQG4yh7SltBIW/BA6zA2jocFMzHzq7dkTsYiPutoZjrKESUkD9w+FkSisTw3QPZBLSjNHLYpq+QzOAreBbnNLA==}
+    dev: true
 
   /@ndelangen/get-tarball@3.0.9:
     resolution: {integrity: sha512-9JKTEik4vq+yGosHYhZ1tiH/3WpUS0Nh0kej4Agndhox8pAdWhEx5knFVRcb/ya9knCRCs1rPxNrSXTDdfVqpA==}
@@ -6142,13 +6146,6 @@ packages:
       '@types/ms': 0.7.34
     dev: true
 
-  /@types/decimal.js@7.4.0:
-    resolution: {integrity: sha512-TiP45voN8GdDib9QkkdMprTfs86xxHInqTxNPSGbF0m6X0LXVBjkFEKbbL9fqm4ZPoVFkG1p4F26on2MWGvW5w==}
-    deprecated: This is a stub types definition for decimal.js (https://github.com/MikeMcl/decimal.js). decimal.js provides its own type definitions, so you don't need @types/decimal.js installed!
-    dependencies:
-      decimal.js: 10.4.3
-    dev: false
-
   /@types/detect-port@1.3.5:
     resolution: {integrity: sha512-Rf3/lB9WkDfIL9eEKaSYKc+1L/rNVYBjThk22JTqQw0YozXarX8YljFAz+HCoC6h4B4KwCMsBPZHaFezwT4BNA==}
 
@@ -7181,19 +7178,8 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /@vusion/validator@0.4.12:
-    resolution: {integrity: sha512-Kgghnn/mvAARDKeDpD7MHWOPU6kNmlTwTxwOlwtfao1nxxLxeWpw6AlJw63pviEljOwEFGlPm239eQO4wIDsIQ==}
-    dependencies:
-      '@types/decimal.js': 7.4.0
-      '@types/lodash': 4.14.202
-      '@types/validator': 13.11.8
-      decimal.js: 10.4.3
-      lodash: 4.17.21
-      validator: 13.11.0
-    dev: false
-
-  /@vusion/validator@0.4.14:
-    resolution: {integrity: sha512-M6oper6nP+8wh1TCQdxBnDkGHIe0ExpO7GKlKai//Q5rKfmEhF/jYm5aJa9i6vHKGDZA7o8601UVF9O0hqvt0g==}
+  /@vusion/validator@0.4.7:
+    resolution: {integrity: sha512-cXRVo15C7+xXoOH5diP6+rCRcqcT+AAblc5eZLNYyMFuXCGByG9TQmEQZOOAQR0sTi7o307LI138nkKgGhE5IA==}
     dependencies:
       '@types/lodash': 4.14.202
       '@types/validator': 13.11.8
@@ -7477,6 +7463,7 @@ packages:
 
   /ajv@8.12.0:
     resolution: {integrity: sha512-sRu1kpcO9yLtYxBKvqfTeh9KzZEwO3STyX1HT+4CaDzC6HpTGYhIhPIzj9XuKU7KYDwnaeh5hcOwjy1QuJzBPA==}
+    requiresBuild: true
     dependencies:
       fast-deep-equal: 3.1.3
       json-schema-traverse: 1.0.0
@@ -12237,7 +12224,7 @@ packages:
     dev: false
 
   /graceful-fs@4.2.11:
-    resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==, tarball: https://registry.npmmirror.com/graceful-fs/-/graceful-fs-4.2.11.tgz}
+    resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
   /grapheme-splitter@1.0.4:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
@@ -14035,6 +14022,7 @@ packages:
 
   /lodash.uniq@4.5.0:
     resolution: {integrity: sha512-xfBaXQd9ryd9dlSDvnvI0lvxfLJlYAZzXomUYzLKtUeOQvOP5piqAWuGtrhWeqaXK9hhoM/iyJc5AV+XfsX3HQ==}
+    requiresBuild: true
     dev: true
 
   /lodash.upperfirst@4.3.1:
@@ -17787,7 +17775,7 @@ packages:
     dev: false
 
   /source-map@0.6.1:
-    resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==, tarball: https://registry.npmmirror.com/source-map/-/source-map-0.6.1.tgz}
+    resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
 
   /source-map@0.7.4:

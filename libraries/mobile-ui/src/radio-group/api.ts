@@ -108,7 +108,7 @@ namespace nasl.ui {
       title: '值改变时',
       description: '选择值改变时触发'
     })
-    onChange: (event: V) => any ;
+    onChange: (event: V) => void;
     @Slot({
       title: 'undefined',
       description: '插入`<van-radio>`子组件。',
@@ -146,7 +146,7 @@ namespace nasl.ui {
       title: '选项值',
       description: '当前选中的值'
     })
-    name: nasl.core.String;
+    name: nasl.core.String | nasl.core.Integer | nasl.core.Boolean;
     @Prop({
       group: '主要属性',
       title: '单选项图标',
@@ -199,7 +199,7 @@ namespace nasl.ui {
       screenX: nasl.core.Integer;
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
-    }) => any ;
+    }) => void;
 
     @Slot({
       title: '',

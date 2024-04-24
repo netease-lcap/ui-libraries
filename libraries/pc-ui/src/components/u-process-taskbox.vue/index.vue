@@ -85,7 +85,7 @@ export default {
                 this.setTime();
                 const { data = {} } = await this.$processV2.getMyPendingTasks({
                     body: {
-                        page: this.page - 1,
+                        page: this.page,
                         size: this.size,
                     },
                 }) || {};

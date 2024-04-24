@@ -46,7 +46,7 @@ namespace nasl.ui {
       title: '点击',
       description: '点击后触发'
     })
-    onClick: (event: nasl.core.String) => any ;
+    onClick: (event: nasl.core.String) => void;
     @Slot({
       title: 'undefined',
       description: '插入文本或 HTML。'

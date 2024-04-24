@@ -1081,10 +1081,10 @@ export default {
                 return new Constructor({ ...options, tag: 'u-table-view' });
             } else if (dataSource instanceof Object) {
                 if (dataSource.hasOwnProperty('list') && Array.isArray(dataSource.list))
-                    return new DataSource(Object.assign(options, dataSource, {
+                    return new Constructor(Object.assign({ tag: 'u-table-view' }, options, dataSource, {
                         data: dataSource.list,
                     }));
-                return new DataSource(Object.assign(options, dataSource));
+                return new Constructor(Object.assign({ tag: 'u-table-view' }, options, dataSource));
             } else
                 return dataSource;
         },
@@ -1127,6 +1127,9 @@ export default {
                     let defaultColumnWidth = this.defaultColumnWidth;
                     if (String(defaultColumnWidth).endsWith('%')) {
                         defaultColumnWidth = (parseFloat(defaultColumnWidth) * rootWidth) / 100;
+                    } else if (defaultColumnWidth) {
+                        defaultColumnWidth = parseFloat(defaultColumnWidth);
+                        defaultColumnWidth = isNaN(defaultColumnWidth) ? 0 : defaultColumnWidth;
                     }
                     defaultColumnWidth = defaultColumnWidth || 0;
                     this.visibleColumnVMs.forEach((columnVM, index) => {
@@ -1181,8 +1184,8 @@ export default {
                     } else if (remainingWidth > 0 && valueWidthSum !== 0) {
                         const averageWidth = remainingWidth / valueColumnVMs.length;
                         valueColumnVMs.forEach((columnVM) => columnVM.computedWidth = columnVM.computedWidth + averageWidth);
-                    } else if (remainingWidth < 0 && noWidthColumnVMs.length) {
-                        noWidthColumnVMs.forEach((columnVM) => columnVM.computedWidth = defaultColumnWidth || 100);
+                    } else if (remainingWidth <= 0 && noWidthColumnVMs.length && defaultColumnWidth) {
+                        noWidthColumnVMs.forEach((columnVM) => columnVM.computedWidth = defaultColumnWidth);
                     }
 
                     // 如果所有列均有值，则总宽度有超出的可能。否则总宽度为根节点的宽度。
@@ -2998,6 +3001,11 @@ export default {
             }
         },
         handleResizeListener() {
+            if (this.virtual) {
+                this.virtualIndex = 0;
+                this.virtualTop = 0;
+                this.virtualBottom = 0;
+            }
             const rootWidth = this.$refs.root.offsetWidth;
             // 放在线性布局flex下，或者某些设置了fit-content，table-width会缓慢增长，导致表格一直动
             // 如果两次width变化不大，不要重新计算每列的computedWidth等
@@ -3005,6 +3013,11 @@ export default {
             this.handleResize(reComputedWidth);
         },
         reHandleResize() {
+            if (this.virtual) {
+                this.virtualIndex = 0;
+                this.virtualTop = 0;
+                this.virtualBottom = 0;
+            }
             this.preRootWidth = null;
             this.handleResize(true);
         },

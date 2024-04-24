@@ -84,6 +84,7 @@ namespace nasl.ui {
             title: '标签',
             description: '指定展示在另一侧的 `label`，只在 `label` 模式下生效',
             docDescription: '指定展示在另一侧的 `label`，只在 `label` 模式下生效。',
+            implicitToString: true,
         })
         label: nasl.core.String;
 

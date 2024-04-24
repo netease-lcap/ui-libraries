@@ -53,7 +53,7 @@ namespace nasl.ui {
           title: 'undefined',
           description: '获取所有表格列的 field',
       })
-      getFields(): any {}
+      getFields(): nasl.core.String { return '' }
 
       @Method({
           title: 'undefined',
@@ -297,7 +297,7 @@ namespace nasl.ui {
           sync: true,
           docDescription: '当表格设置了单选列，或开启了可选行，选中某一行时的值。该取值由值字段名决定。一般会是id等能唯一标识每一行数据的值',
       })
-      value: T;
+      value: V;
 
       @Prop({
           group: '数据属性',
@@ -306,7 +306,7 @@ namespace nasl.ui {
           sync: true,
           docDescription: '当表格设置了多选列，选择多个值后获得了值列表数组。该取值由值字段名决定',
       })
-      values: nasl.collection.List<T>;
+      values: nasl.collection.List<V>;
 
       @Prop({
           group: '数据属性',
@@ -372,6 +372,7 @@ namespace nasl.ui {
           group: '主要属性',
           title: '表格标题',
           docDescription: '表格上方的标题信息。默认为空',
+          implicitToString: true,
       })
       title: nasl.core.String;
 
@@ -606,6 +607,7 @@ namespace nasl.ui {
           description: '加载中状态显示的提示文案',
           docDescription: '当加载表格数据过程中的提示文字。默认“正在加载中...”。',
           if: _ => _.designerMode === 'loading',
+          implicitToString: true,
       })
       loadingText: nasl.core.String = '正在加载中...';
 
@@ -628,6 +630,7 @@ namespace nasl.ui {
           description: '加载失败状态显示的提示文案',
           docDescription: '加载失败的提示文字。默认"加载失败，请重试"。',
           if: _ => _.designerMode === 'error',
+          implicitToString: true,
       })
       errorText: nasl.core.String = '加载失败，请重试';
 
@@ -650,6 +653,7 @@ namespace nasl.ui {
           description: '暂无数据状态显示的提示文案',
           docDescription: '当表格为空时的提示文字。默认"暂无数据"。',
           if: _ => _.designerMode === 'empty',
+          implicitToString: true,
       })
       emptyText: nasl.core.String = '暂无数据';
 
@@ -1066,7 +1070,7 @@ namespace nasl.ui {
           title: '筛选项',
           description: '筛选项的参数',
       })
-      private filters: Array<{ text: nasl.core.String, value: nasl.core.Any }>;
+      private filters: Array<{ text: nasl.core.String, value: any }>;
 
       @Prop({
           group: '数据属性',
@@ -1334,7 +1338,7 @@ namespace nasl.ui {
           sync: true,
           tooltipLink: 'https://help.lcap.163yun.com/99.%E5%8F%82%E8%80%83/40.%E9%A1%B5%E9%9D%A2IDE/30.%E9%A1%B5%E9%9D%A2%E7%BB%84%E4%BB%B6/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/05.%E8%A1%A8%E6%A0%BC/100.%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BC.html',
       })
-      value: V;
+      value: nasl.collection.List<V>;
 
       @Prop({
           group: '主要属性',
