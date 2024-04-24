@@ -473,10 +473,12 @@ namespace nasl.ui {
           title: '确认'
         }, {
           title: '取消'
+        }, {
+          title: '无'
         }]
       }
     })
-    targetMethod: 'confirm' | 'cancel';
+    targetMethod: 'confirm' | 'cancel' | 'none';
 
     @Slot({
       title: 'undefined',
