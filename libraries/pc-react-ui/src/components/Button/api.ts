@@ -45,6 +45,7 @@ namespace nasl.ui {
       docDescription: '显示的文本内容',
     })
     children: nasl.core.String;
+    
 
     @Prop({
       group: '主要属性',

@@ -7,8 +7,8 @@
       "childAccept": "target.tag === 'SelectOption' || target.tag === 'SelectOptGroup'",
       "actions": {
         "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
+          "default":"this.setCacheStatus('open', false)"
         }
       },
       "mutations": ["FormSelect"]
@@ -36,8 +36,8 @@
       "idetype": "container",
       "actions": {
         "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
+          "default":"this.setCacheStatus('open', false)"
         }
       },
       "displaySlotConditions": {
@@ -61,7 +61,8 @@
       "idetype": "container",
       "structured": "menuSlot",
       "namedSlotOmitWrapper": ["menuSlot"],
-      "parentAccept":"!target.isInSubview"
+      "parentAccept":"!target.isInSubview",
+      "translateBindingProperty": ["avatarTitle"]
     }
   },
   {
@@ -275,6 +276,13 @@
     }
   },
   {
+    "name": "Avatar",
+    "ideusage": {
+      "idetype": "element",
+      "editable": "children"
+    }
+  },
+  {
     "name": "Descriptions",
     "ideusage": {
       "idetype": "container",
@@ -289,7 +297,7 @@
       "parentAccept": "target.tag === 'Descriptions'",
       "selector": {
         "expression": "this",
-        "cssSelector": ".cw-descriptions-item"
+        "cssSelector": ".cw-descriptions-item-container"
       }
     }
   },
@@ -297,7 +305,7 @@
     "name": "Flex",
     "ideusage": {
       "idetype": "container",
-      "containerDirection": "this.getAttribute('direction')?.value === 'true' ? 'column' : 'row' ",
+      "containerDirection": "this.getAttribute('direction')?.value === 'vertical' ? 'column' : 'row' ",
       "automate": [
         {
           "command": "WRAP_LINEAR_VERTICAL",
@@ -334,6 +342,11 @@
         "emptySlot": {
           "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
           "accept": "target.concept === 'Entity'"
+        },
+        "refInLoop": {
+          "child": "TableColumn",
+          "slot": "render",
+          "useRef": "argus?.[0]?.index === 0"
         }
       },
       "childAccept": "target.tag === 'TableColumn'"
@@ -426,8 +439,7 @@
       ],
       "actions": {
         "click": {
-          "status": "this.getParent().setCacheStatus('defaultActiveKey', '\"' + this.getAttribute('key')?.value + '\"') ",
-          "effect": "this.getParent().callComponentMethod('setValue', this.getAttribute('key')?.value)"
+          "status": "this.getParent().setCacheStatus('activeKey', '\"' + this.getAttribute('key')?.value + '\"') "
         }
       }
     }
@@ -589,7 +601,7 @@
         "transitionName": "''",
         "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
       },
-      "cacheOpenKey": "defaultOpen"
+      "cacheOpenKey": "open"
     }
   },
   {
@@ -604,7 +616,7 @@
         "transitionName": "''",
         "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
       },
-      "cacheOpenKey": "defaultOpen"
+      "cacheOpenKey": "open"
     }
   },
   {
@@ -627,8 +639,8 @@
       },
       "actions": {
         "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
+          "default":"this.setCacheStatus('open', false)"
         }
       }
     }
@@ -636,11 +648,20 @@
   {
     "name": "Image",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "additionalAttribute": {
+        "preview": "{false}"
+      }
     }
   },
   {
     "name": "Card",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
+    "name": "Steps",
     "ideusage": {
       "idetype": "container"
     }
@@ -672,10 +693,11 @@
       "idetype": "popover",
       "structured": true,
       "namedSlotOmitWrapper": ["menuItem"],
+      "childAccept": "this.getDefaultElements().length < 1",
       "actions": {
         "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
+          "default": "this.setCacheStatus('open', false)"
         }
       }
     }
@@ -699,8 +721,7 @@
       },
       "actions": {
         "click": {
-          "status": "this.getParent().getParent().setCacheStatus('defaultOpenKeys', '\"' + this.getAttribute('path')?.value + '\"') ",
-          "effect": "this.getParent().getParent().callComponentMethod('setValue', this.getAttribute('path')?.value)"
+          "status": "{const prolayout=this.getAncestor('ProLayout'); \nconst cacheStatus = prolayout.getCacheStatus('openKeys') || []; \nlet key = this.getAttribute('path')?.value;\nif(key){\n    key = '\"' + key + '\"';\n    if(cacheStatus.includes(key)) {\n        const idx = cacheStatus.findIndex(s => s === key);\n        cacheStatus.splice(idx, 1);\n    } else {\n        prolayout.setCacheStatus('openKeys', cacheStatus.concat(key));\n    }\n}}"
         }
       }
     }
@@ -729,8 +750,8 @@
       },
       "actions": {
         "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
+          "default":"this.setCacheStatus('open', false)"
         }
       }
     }

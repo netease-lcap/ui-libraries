@@ -90,7 +90,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    valueField: (item: T) => V = ((item: any) => item.value) as any;
+    valueField: (item: T) => any = ((item: any) => item.value) as any;
 
     @Prop<CascaderOptions<T, V>, 'childrenField'>({
       group: '数据属性',
@@ -229,17 +229,6 @@ namespace nasl.ui {
       },
     })
     disabled: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '状态属性',
-      title: '弹出状态',
-      description: '弹出状态分为“True(弹出)/False(关闭)”，默认为“弹出”',
-      docDescription: '切换弹出/关闭状态',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    open: nasl.core.Boolean;
 
     // @Prop({
     //   group: '样式属性',

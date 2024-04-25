@@ -34,7 +34,7 @@ export const 默认 = {
   },
   args: {
     color: 'magenta',
-    name:
-      '//minio-api.codewave-dev.163yun.com/lowcode-static/user/defaulttenant/1711352646423_1711101097723_1710173501157_%E4%B8%89%E7%82%B9.svg',
+    name: 'RiArrowRightCircleFill',
+    // name: '//minio-api.codewave-dev.163yun.com/lowcode-static/user/defaulttenant/1711352646423_1711101097723_1710173501157_%E4%B8%89%E7%82%B9.svg',
   },
 };

@@ -5,13 +5,13 @@ namespace nasl.ui {
     title: '表单单选组',
     description: '多项中选择一项',
   })
-  export class FormRadioGroup<T, V, C extends string> extends ViewComponent {
+  export class FormRadioGroup<T, V, C> extends ViewComponent {
     constructor(options?: Partial<FormRadioGroupOptions<T, V, C> & FormItemOptions>) {
       super();
     }
   }
 
-  export class FormRadioGroupOptions<T, V, C extends string> extends ViewComponentOptions {
+  export class FormRadioGroupOptions<T, V, C> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',

@@ -25,6 +25,7 @@ export default {
 export const 异步函数 = {
   render: (args) => <Cascader {...args} />,
   args: {
+    style: { fontSize: '50px' },
     dataSource: () => new Promise((res) => {
       setTimeout(() => {
         res([

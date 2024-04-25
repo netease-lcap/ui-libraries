@@ -16,8 +16,9 @@ export function useHandleFullChild(props) {
   };
 }
 export function useHandleScroll(props) {
+  const styleProps = props.get('style');
   const scroll = props.get('scroll');
-  const result = scroll ? { style: { overflow: 'scroll' } } : {};
+  const result = scroll ? { style: { ...styleProps, overflow: 'scroll' } } : {};
   return result;
 }
 

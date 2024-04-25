@@ -1,4 +1,5 @@
 export * from './basicsPlugin';
+export * from './stylePlugin';
 
 export * from './lowCode';
 

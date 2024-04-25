@@ -57,17 +57,6 @@ namespace nasl.ui {
     hourStep: nasl.core.Integer;
 
     @Prop({
-      group: '状态属性',
-      title: '弹出状态',
-      description: '弹出状态分为“True(弹出)/False(关闭)”，默认为“关闭”',
-      docDescription: '开启时加载时间组件时，下拉框自动弹出，默认关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    open: nasl.core.Boolean;
-
-    @Prop({
       group: '数据属性',
       title: '分选项间隔',
       description: '分选项间隔',
@@ -104,7 +93,12 @@ namespace nasl.ui {
       docDescription: '默认显示的日期值。',
       // if: (_) => _.range !== true,
     })
-    value: nasl.core.Time;
+    value:
+      | nasl.core.Date
+      | nasl.core.String
+      | nasl.core.Integer
+      | nasl.core.DateTime
+      | nasl.core.Time;
 
     // @Prop<TimePickerOptions, 'startTime'>({
     //   group: '数据属性',

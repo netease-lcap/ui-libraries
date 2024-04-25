@@ -16,7 +16,7 @@ export function useHandleNodePath(props) {
     const inputParent = inputElement?.closest(`.${prefixCls}-form-item-row`);
     inputParent?.setAttribute('data-nodepath', nodePath);
     if (!isForm) return;
-    inputParent?.setAttribute('data-tag-name', 'FormInput');
+    inputParent?.setAttribute('data-tag-name', 'FormRadioGroup');
     inputParent?.setAttribute('data-has-mutation', 'true');
   }, [nodePath, isForm, nodeId, prefixCls]);
   return {

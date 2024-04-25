@@ -28,44 +28,11 @@ export const 默认 = {
     return <CheckboxGroup {...args} />;
   },
   args: {
-    dataSource: async () => ({
-      list: [
-        {
-          checkbox: {
-            id: 1,
-            createdTime: null,
-            updatedTime: null,
-            createdBy: null,
-            updatedBy: null,
-            name: '苹果',
-          },
-        },
-        {
-          checkbox: {
-            id: 2,
-            createdTime: null,
-            updatedTime: null,
-            createdBy: null,
-            updatedBy: null,
-            name: '香蕉',
-          },
-        },
-        {
-          checkbox: {
-            id: 3,
-            createdTime: null,
-            updatedTime: null,
-            createdBy: null,
-            updatedBy: null,
-            name: '橘子',
-          },
-        },
-      ],
-      total: 3,
-    }),
+    dataSource: async () => [11, 22, 33, 444],
     // dataSource: ['1', 2, 3],
-    textField: 'name',
-    valueField: 'id',
+    style: { fontSize: '50px' },
+    // textField: 'checkbox.name',
+    // valueField: 'checkbox.id',
   },
 };
 export const 静态数据 = {
@@ -101,9 +68,7 @@ export const 静态数据元素 = {
       return <div />;
     }
     return (
-      <CheckboxGroup
-        data-nodepath="rootview.6.2"
-      >
+      <CheckboxGroup data-nodepath="rootview.6.2">
         <Checkbox value={1} label={1} id="checkbox" data-nodepath="checkbox">
           1
         </Checkbox>

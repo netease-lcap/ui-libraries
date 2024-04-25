@@ -51,6 +51,7 @@ export * from './components/Icon/index';
 export * from './components/Tag/index';
 export * from './components/Link/index';
 export * from './components/ProLayout/index';
+export * from './components/Avatar/index';
 
 // eslint-disable-next-line import/first
 import 'virtual:theme.css';

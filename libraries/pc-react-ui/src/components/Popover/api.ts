@@ -167,17 +167,6 @@ namespace nasl.ui {
     })
     trigger: 'click' | 'hover' | 'manual' = 'click';
 
-    @Prop({
-      group: '状态属性',
-      title: '弹出状态',
-      description: '弹出状态分为“True(弹出)/False(关闭)”，默认为“弹出”',
-      sync: true,
-      docDescription: '控制弹出框的默认状态。开启时弹出框默认为弹出状态，关闭时弹出框默认为关闭状态',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    open: nasl.core.Boolean;
 
     // @Prop({
     //   group: '状态属性',

@@ -18,6 +18,7 @@ import {
   Select,
   InputNumber,
   CheckboxGroup,
+  TimePicker,
   // Date
   SelectOption,
   DateRangePicker,
@@ -146,13 +147,18 @@ export const 默认1 = {
         >
           提交
         </button>
+        <button
+          onClick={() => console.log(ref.current.setValue('time2', ))}
+        >
+          设置
+        </button>
         <Form
           labelWidth="140"
           ref={ref}
           omitNil={false}
           submitter={{
             onSubmit() {
-              console.log(ref.current.getValues('name', 'name'));
+              console.log(ref.current.resetForm(['name']));
 
               console.log(111);
             },
@@ -169,8 +175,9 @@ export const 默认1 = {
             showTime={false}
             format="YYYY-MM-DD"
           />
-          <ProFormDateRangePicker name="time2" />
+          <ProFormDateRangePicker name="time3" />
           <TimeRangePicker startName="time3" endName="time4" />
+          <TimePicker name="meTime" />
         </Form>
       </div>
     );
@@ -181,15 +188,15 @@ export const 查询表单 = {
     return (
       // const value=ref.current.getValue()
       // CSSMathValue.name id time
-      <div style={{ width: '1500px' }}>
+      <div style={{ width: '1200px' }}>
         <QueryForm>
           <Cascader labelText="123" name="username" />
-          <Cascader labelText="123" name="id" />
+          {/* <Cascader labelText="123" name="id" />
           <Cascader labelText="23" name="time" />
           <Cascader labelText="23" />
           <Cascader labelText="23" />
           <Cascader labelText="23" />
-          <Cascader labelText="23" />
+          <Cascader labelText="23" /> */}
         </QueryForm>
       </div>
     );

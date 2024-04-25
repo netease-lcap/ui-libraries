@@ -25,7 +25,7 @@ const Col = registerComponet<
   ColProps
 >(
   AntdCol,
-  { plugin, displayName: AntdCol.displayName, mapProps },
+  { plugin: {}, displayName: AntdCol.displayName, mapProps },
 );
 
 // export default { Row, Col };
