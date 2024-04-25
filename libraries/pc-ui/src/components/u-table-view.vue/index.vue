@@ -3290,6 +3290,13 @@ export default {
         onXScrollParentScroll(event) {
             this.syncHeadScroll();
         },
+        loadTo(page) {
+            if(page !== undefined) {
+                this.page(page);
+            } else {
+                this.load();
+            }
+        },
     },
 };
 </script>
