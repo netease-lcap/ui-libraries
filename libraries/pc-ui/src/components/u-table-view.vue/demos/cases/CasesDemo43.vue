@@ -3,6 +3,7 @@
 <u-linear-layout direction="vertical">
     <u-linear-layout>
         <u-button @click="reload">刷新</u-button>
+        <u-button @click="loadTo">当前页刷新</u-button>
         <u-button @click="resetPageSizeAndNumber">重置页码和页数</u-button>
     </u-linear-layout>
     <u-table-view :data-source="load" pagination :page-size="pageSize" :page-number="pageNumber" ref="tableview" @page="onPage">
@@ -72,7 +73,10 @@ export default {
         resetPageSizeAndNumber() {
             this.pageSize = 20;
             this.pageNumber = 1;    
-        }
+        },
+        loadTo() {
+            this.$refs.tableview.loadTo();
+        },
     },
 };
 </script>
