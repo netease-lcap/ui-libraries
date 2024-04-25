@@ -1,6 +1,10 @@
 import React from 'react';
+import {
+  ConfigProvider, Button, Space, Input, Divider,
+} from 'antd';
 import { Select, SelectOption, SelectOptGroup } from '../index';
 import { Text } from '@/index';
+
 // import Select from 'antd';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -34,12 +38,28 @@ export const 异步函数 = {
     return (
       <div>
         <button onClick={() => ref.current.open()}>1234</button>
-        <Select {...args} prefix="a" ref={ref} />
+        {/* <ConfigProvider
+          theme={{
+            components: {
+              Select: {
+                fontSize: 14,
+                colorText: 'red',
+              },
+            },
+          }}
+        > */}
+        <Select
+          showSearch
+          token={{ optionFontSize: 22 }}
+          {...args}
+          prefix="a"
+          ref={ref}
+        />
+        {/* </ConfigProvider> */}
       </div>
     );
   },
   args: {
-    style: { width: '256px' },
     textField: 'entity1.name',
     valueField: 'entity1.id',
     prefix: '1',
@@ -82,11 +102,31 @@ export const 异步函数1 = {
       return <span>1234</span>;
     }
     return (
-      <Select labelText="1234" data-nodepath="rootview.0.0.0.0.1" ide-iscontainer="true" allowClear placeholder="请输入property1" key="component-61" defaultOpen={false}>
-        <SelectOption data-nodepath="rootview.0.0.0.0.1.0" ide-iscontainer="true" value label="是" key="component-62">
+      <Select
+        labelText="1234"
+        data-nodepath="rootview.0.0.0.0.1"
+        ide-iscontainer="true"
+        allowClear
+        placeholder="请输入property1"
+        key="component-61"
+        defaultOpen={false}
+      >
+        <SelectOption
+          data-nodepath="rootview.0.0.0.0.1.0"
+          ide-iscontainer="true"
+          value
+          label="是"
+          key="component-62"
+        >
           <EmptySlot key="16" />
         </SelectOption>
-        <SelectOption data-nodepath="rootview.0.0.0.0.1.1" ide-iscontainer="true" value={false} label="否" key="component-63">
+        <SelectOption
+          data-nodepath="rootview.0.0.0.0.1.1"
+          ide-iscontainer="true"
+          value={false}
+          label="否"
+          key="component-63"
+        >
           <EmptySlot key="17" />
         </SelectOption>
       </Select>

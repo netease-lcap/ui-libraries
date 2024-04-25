@@ -24,10 +24,16 @@ export const 默认 = {
     return (
       <Breadcrumb>
         <BreadcrumbItem>
-          <Text children="首页" />
+          <Text
+            children="首页"
+            style={{ fontSize: 'inherit', color: 'inherit' }}
+          />
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <Text children="列表页" />
+          <Text
+            children="列表页"
+            style={{ fontSize: 'inherit', color: 'inherit' }}
+          />
         </BreadcrumbItem>
       </Breadcrumb>
     );

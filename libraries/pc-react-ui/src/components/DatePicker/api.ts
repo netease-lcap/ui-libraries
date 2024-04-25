@@ -18,10 +18,17 @@ namespace nasl.ui {
       group: '数据属性',
       title: '日期类型',
       description: '日期格式设置',
-      docDescription: '日期选择弹出层里的日期展示格式，支持日期、月份、季度、年份4种模式。默认日期格式',
+      docDescription:
+        '日期选择弹出层里的日期展示格式，支持日期、月份、季度、年份4种模式。默认日期格式',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '日期' }, { title: '周' }, { title: '月份' }, { title: '季度' }, { title: '年份' }],
+        options: [
+          { title: '日期' },
+          { title: '周' },
+          { title: '月份' },
+          { title: '季度' },
+          { title: '年份' },
+        ],
       },
     })
     picker: 'date' | 'week' | 'month' | 'quarter' | 'year' = 'date';
@@ -33,7 +40,11 @@ namespace nasl.ui {
       sync: true,
       docDescription: '当前选择的值',
     })
-    value: nasl.core.Date;
+    value:
+      | nasl.core.Date
+      | nasl.core.String
+      | nasl.core.Integer
+      | nasl.core.DateTime;
 
     // @Prop<UDatePickerOptions, 'startDate'>({
     //   group: '数据属性',
@@ -168,7 +179,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '占位符',
       description: '为空时显示的占位符文本',
-      docDescription: '日期选择框无内容时的提示信息，支持自定义编辑，默认为请输入',
+      docDescription:
+        '日期选择框无内容时的提示信息，支持自定义编辑，默认为请输入',
     })
     placeholder: nasl.core.String = '请选择日期';
 
@@ -293,17 +305,6 @@ namespace nasl.ui {
     // })
     // preview: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '状态属性',
-      title: '弹出状态',
-      description: '弹出状态分为“True(弹出)/False(关闭)”，默认为“关闭”',
-      docDescription: '开启时加载日期组件时，下拉框自动弹出，默认关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    open: nasl.core.Boolean;
-
     // @Prop({
     //   group: '样式属性',
     //   title: '宽度',
@@ -338,7 +339,10 @@ namespace nasl.ui {
       title: '值变化时',
       description: '值变化时触发',
     })
-    onChange: (event: { date: nasl.core.String; time: nasl.core.String }) => any;
+    onChange: (event: {
+      date: nasl.core.String;
+      time: nasl.core.String;
+    }) => any;
 
     // @Event({
     //   title: '选择时',

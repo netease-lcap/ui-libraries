@@ -29,10 +29,14 @@ export function useHandleShowTime(props) {
 export function useHandleName(props) {
   const startName = props.get('startName');
   const endName = props.get('endName');
+  const showTime = props.get('showTime');
+  const getIosTime = (localShowTime, time) => {
+    return localShowTime ? new Date(time).toJSON() : time;
+  };
   const transform = (values) => {
     return {
-      [startName]: values ? values[0] : undefined,
-      [endName]: values ? values[1] : undefined,
+      [startName]: values ? getIosTime(showTime, values[0]) : undefined,
+      [endName]: values ? getIosTime(showTime, values[1]) : undefined,
     };
   };
   return {

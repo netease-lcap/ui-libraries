@@ -11,6 +11,7 @@ import {
   Button,
   Flex,
   ProLayout,
+  Avatar,
   Router,
 } from '@/index';
 
@@ -32,36 +33,39 @@ export default {
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+const nasl = { auth: { userInfo: { UserName: '' } } };
 export const 基本用法 = {
   render: () => {
     return (
       <ProLayout
-        getTargetContainer={() => {
-          return document.getElementById('test-pro-layout') || document.body;
-        }}
         avatarSrc="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
-        avatarTitle={
-          window.$global?.userInfo?.UserName ?? 'window.$global.userInfo'
-        }
+        // avatarTitle={$global.userInfo.UserName}
+        avatarTitle="张梦燕"
+        // avatarTitle={$global.userInfo.UserName}
+        // avatarTitle="张梦燕"
         avatarRender={(
-          <Dropdown
-            menuItem={(
-              <>
-                <MenuItem label={<Text>导航项目</Text>} />
-                <MenuItem label={<Text>导航项目2</Text>} />
-              </>
-            )}
-          />
+          <Dropdown menuItem={<MenuItem label="安全退出" />}>
+            <Flex gap={8}>
+              <Image
+                style={{ width: '21px' }}
+                src="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
+              />
+              <Text
+                style={{ paddingTop: 11 }}
+                children={nasl.auth.userInfo.UserName}
+              />
+            </Flex>
+          </Dropdown>
         )}
         fixSiderbar
         layout="mix"
         title="应用名称"
-        menuDataRender={(menuData) => {
-          return [{ name: 2, label: 1, path: '/a' }];
-        }}
         menuSlot={(
           <>
-            <MenuItem label="导航项" path="/1" />
+            <MenuItem label="导航项" path="/1">
+              <MenuItem label="导航项" path="/4" />
+              <MenuItem label="导航项" path="/3" />
+            </MenuItem>
             <MenuItem label="导航项" path="/2" />
           </>
         )}

@@ -225,17 +225,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '交互属性',
-      title: '展开触发方式',
-      description: '展开/折叠操作的触发方式',
-      docDescription: `展开/折叠的触发方式。
-    - 整行点击均可触发。
-    - 仅点击小箭头时触发。`,
+      title: '超出是否折叠',
+      description: '默认状态下是否折叠超出的表单项',
+      docDescription: `默认状态下是否折叠超出的表单项`,
       setter: {
-        // allowClear: true,
         concept: 'SwitchSetter',
       },
     })
-    defaultCollapsed: 'click' | 'click-expander' = 'click';
+    defaultCollapsed: nasl.core.Boolean = true;
 
     @Event({
       title: '表单值改变',

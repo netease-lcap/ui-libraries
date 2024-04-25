@@ -93,7 +93,7 @@ namespace nasl.ui {
       sync: true,
       docDescription: '指当前打开标签的标签项',
     })
-    activeKey: nasl.core.String;
+    activeKey: any;
 
     // @Prop({
     //   group: '数据属性',
@@ -242,13 +242,13 @@ namespace nasl.ui {
       title: '标题自定义渲染',
       description: '标题自定义渲染',
     })
-    slottitleRender: (current: any) => Array<ViewComponent>;
+    slotTitleRender: (current: Current<T>) => Array<ViewComponent>;
 
     @Slot({
       title: '标题自定义渲染',
       description: '标题自定义渲染',
     })
-    slotcontentRender: (current: any) => Array<ViewComponent>;
+    slotContentRender: (current: Current<T>) => Array<ViewComponent>;
     // @Slot({
     //   title: '右侧附加',
     //   description: '在标签右侧可以附加的组件。',

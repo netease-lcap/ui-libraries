@@ -1,5 +1,6 @@
 // import React from 'react';
 import _ from 'lodash';
+import { useHandleLink } from '@/plugins/common/index';
 // import { theme, Layout } from 'antd';
 // import { useNavigate, Link } from 'react-router-dom';
 
@@ -7,20 +8,14 @@ import _ from 'lodash';
 
 export function useHandleRouter(props) {
   const onClickPorps = props.get('onClick');
-
+  const path = props.get('path');
+  const destination = props.get('destination');
+  const target = props.get('target');
+  const handleLink = useHandleLink({ path, destination, target });
   return {
     onClick: _.wrap(onClickPorps, (fn, arg) => {
       _.attempt(fn, arg);
-      if (_.isValidLink(arg.key)) {
-        window.location.href = arg.key;
-        return;
-      }
-      const event = new CustomEvent('pageNavigation', {
-        detail: {
-          url: arg.key,
-        },
-      });
-      window.dispatchEvent(event);
+      handleLink(path ?? destination, target);
     }),
   };
 }

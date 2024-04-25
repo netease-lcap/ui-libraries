@@ -58,7 +58,7 @@ namespace nasl.ui {
         title: 'undefined',
         description: '表单项的 name',
       })
-      values: nasl.core.Any,
+      values: any,
     ): any {}
 
     @Method({
@@ -135,15 +135,11 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         // options: [{ title: '行内展示' }, { title: '块级展示，宽度会充满父元素' }, { title: '栅格展示，可设置列数' }],
-        options: [
-          { title: '行内展示' },
-          { title: '水平展示' },
-          { title: '竖向展示' },
-        ],
+        options: [{ title: '水平展示' }, { title: '竖向展示' }],
       },
-      onChange: [{ clear: ['repeat'] }],
+      onChange: [{ clear: ['labelWidth'] }],
     })
-    layout: 'inline' | 'horizontal' | 'vertical' = 'horizontal';
+    layout: 'horizontal' | 'vertical' = 'horizontal';
 
     @Prop({
       group: '样式属性',
@@ -166,7 +162,7 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
       },
     })
-    labelWidth?: nasl.core.Decimal = undefined;
+    labelWidth: any;
 
     @Prop({
       group: '样式属性',
@@ -333,7 +329,8 @@ namespace nasl.ui {
     @Prop({
       group: '状态属性',
       title: '使用默认提交',
-      description: '显示预览态',
+      description:
+        '使用组件封装好的提交逻辑，如无法满足需求，可关闭此属性后自定义提交逻辑',
       docDescription: '',
       setter: {
         concept: 'SwitchSetter',
@@ -556,7 +553,7 @@ namespace nasl.ui {
       title: '修改验证值',
       description: '临时修改验证值',
     })
-    private validatingValue: nasl.core.Any;
+    private validatingValue: any;
 
     @Prop({
       title: '验证前预处理',

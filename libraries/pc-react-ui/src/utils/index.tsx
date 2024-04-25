@@ -28,8 +28,9 @@ function isValidLink(link: string) {
   return pattern.test(link);
 }
 function stringToAscii(str) {
+  if (_.isNil(str)) return [];
   const asciiArray: Array<number> = [];
-  for (let i = 0; i < str.length; i += 1) {
+  for (let i = 0; i < str?.length; i += 1) {
     asciiArray.push(str.charCodeAt(i));
   }
   return asciiArray;

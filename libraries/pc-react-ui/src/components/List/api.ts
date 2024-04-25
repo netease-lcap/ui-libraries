@@ -4,10 +4,17 @@ namespace nasl.ui {
   @Component({
     title: '数据列表',
     icon: 'list-view',
-    description: '用于列举大量数据的列表框，支持单选、多选、过滤（搜索）、分页等功能。',
+    description:
+      '用于列举大量数据的列表框，支持单选、多选、过滤（搜索）、分页等功能。',
     group: 'Table',
   })
-  export class List<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C extends string> extends ViewComponent {
+  export class List<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C
+  > extends ViewComponent {
     @Prop({
       title: '数据',
     })
@@ -49,21 +56,31 @@ namespace nasl.ui {
     }
   }
 
-  export class ListOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C extends string> extends ViewComponentOptions {
+  export class ListOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C
+  > extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',
       description: '展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑',
-      docDescription: '列表展示的数据。数据源可以绑定变量或者逻辑。变量或逻辑的返回值可以是数组，也可以是对象。对象格式为{list:[], total:10}',
+      docDescription:
+        '列表展示的数据。数据源可以绑定变量或者逻辑。变量或逻辑的返回值可以是数组，也可以是对象。对象格式为{list:[], total:10}',
       designerValue: [{}, {}, {}],
     })
-    dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
+    dataSource:
+      | { list: nasl.collection.List<T>; total: nasl.core.Integer }
+      | nasl.collection.List<T>;
 
     @Prop({
       group: '数据属性',
       title: '数据类型',
       description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription: '列表每一行的数据类型。该属性为展示属性，由数据源推倒得到，无需填写。',
+      docDescription:
+        '列表每一行的数据类型。该属性为展示属性，由数据源推倒得到，无需填写。',
     })
     dataSchema: T;
 
@@ -71,7 +88,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '分页',
       description: '设置是否分页展示数据',
-      docDescription: '是否展示分页组件，数据源调用接口是否加入分页参数。默认开启',
+      docDescription:
+        '是否展示分页组件，数据源调用接口是否加入分页参数。默认开启',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -105,14 +123,16 @@ namespace nasl.ui {
       group: '数据属性',
       title: '每页条数选项',
       description: '每页条数切换器的选项',
-      docDescription: '每页显示数据条数的选择列表，需设置数组，如[10,20,30,40,50]。在"可分页"属性开启时有效',
+      docDescription:
+        '每页显示数据条数的选择列表，需设置数组，如[10,20,30,40,50]。在"可分页"属性开启时有效',
     })
-    pageSizeOptions: Array<nasl.core.Integer> = [10, 20, 50];
+    pageSizeOptions: nasl.collection.List<nasl.core.Integer> = [10, 20, 50];
 
     @Prop({
       group: '数据属性',
       title: '显示总条数',
-      docDescription: '分页组件处是否显示列表总数。默认关闭。在"可分页"属性开启时有效',
+      docDescription:
+        '分页组件处是否显示列表总数。默认关闭。在"可分页"属性开启时有效',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -123,7 +143,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '显示每页条数',
       description: '显示每页条数切换器',
-      docDescription: '是否展示数据条数的选择列表。默认开启。在"可分页"属性开启时有效',
+      docDescription:
+        '是否展示数据条数的选择列表。默认开启。在"可分页"属性开启时有效',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -134,7 +155,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '显示跳转输入',
       description: '显示页面跳转输入框',
-      docDescription: '分页组件处是否展示跳转到某一页的输入框。默认关闭。在"可分页"属性开启时有效。',
+      docDescription:
+        '分页组件处是否展示跳转到某一页的输入框。默认关闭。在"可分页"属性开启时有效。',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -473,7 +495,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '列表项',
-          code: '<Text>列表项</Text>',
+          code: '<ListItem>列表项</ListItem>',
         },
       ],
     })
