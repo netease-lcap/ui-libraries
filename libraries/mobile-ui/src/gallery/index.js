@@ -39,6 +39,9 @@ export default createComponent({
       return this.$env && this.$env.VUE_APP_DESIGNER;
     },
     getUrl(item) {
+      if (this.ifDesigner()) {
+        return '{{ dataSource }}';
+      }
       if (typeof item === 'object')
         return item.url;
       return item;

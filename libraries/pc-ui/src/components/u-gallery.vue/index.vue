@@ -122,6 +122,9 @@ export default {
             this.thumbsSwiper = swiper;
         },
         getUrl(item) {
+            if (this.$env && this.$env.VUE_APP_DESIGNER) {
+              return '{{ dataSource }}';
+            }
             if (this.urlField) {
                 return this.$at(item, this.urlField);
             }
