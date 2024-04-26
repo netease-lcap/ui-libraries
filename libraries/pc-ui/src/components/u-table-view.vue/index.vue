@@ -1184,7 +1184,9 @@ export default {
                     } else if (remainingWidth > 0 && valueWidthSum !== 0) {
                         const averageWidth = remainingWidth / valueColumnVMs.length;
                         valueColumnVMs.forEach((columnVM) => columnVM.computedWidth = columnVM.computedWidth + averageWidth);
-                    } else if (remainingWidth <= 0 && noWidthColumnVMs.length && defaultColumnWidth) {
+                    } else if (remainingWidth < 0 && noWidthColumnVMs.length) {
+                        noWidthColumnVMs.forEach((columnVM) => columnVM.computedWidth = defaultColumnWidth || 100);
+                    } else if(remainingWidth === 0 && noWidthColumnVMs.length && defaultColumnWidth) {
                         noWidthColumnVMs.forEach((columnVM) => columnVM.computedWidth = defaultColumnWidth);
                     }
 
