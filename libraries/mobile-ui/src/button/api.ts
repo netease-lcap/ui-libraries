@@ -83,14 +83,14 @@ namespace nasl.ui {
       },
     })
     block: 'spanb' | 'blockb' = 'spanb';
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '图标',
-    //   setter: {
-    //     concept: "IconSetter"
-    //   }
-    // })
-    // icon: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '图标',
+      setter: {
+        concept: "IconSetter"
+      }
+    })
+    icon: nasl.core.String;
     @Prop({
       group: '主要属性',
       title: '图标位置',

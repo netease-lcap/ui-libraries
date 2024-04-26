@@ -10,6 +10,7 @@ import genNaslUIConfig from './gen-nasl-ui';
 import genNaslExtensionConfig from './gen-nasl-extension-config';
 import genThemeJsonOld from './gen-theme-json-old';
 import { BuildIdeOptions, buildIde as viteBuildIde } from './vite-build-ide';
+import genManifestConfig from './gen-manifest-config';
 
 export interface LcapThemeOptions {
   themeVarCssPath?: string;
@@ -139,6 +140,11 @@ export function buildI18N(options: LcapBuildOptions) {
   fs.writeJSONSync(destFile, data, { spaces: 2 });
 }
 
+export function buildManifest(options: LcapBuildOptions) {
+  const manifest = genManifestConfig(options);
+  fs.writeJSONSync(`${options.destDir}/manifest.json`, manifest, { spaces: 2 });
+}
+
 const zipDir = (basePath, fileName = 'client.zip', files: string[] = []) => new Promise((res) => {
   const zipPath = path.resolve(basePath, fileName);
   const output = fs.createWriteStream(zipPath);// 将压缩包保存到当前项目的目录下，并且压缩包名为test.zip
@@ -168,6 +174,7 @@ async function zipExtension(root, destDir) {
   const fileList = glob.sync(`${destDir}/**/*`)
     .filter((item) => item.indexOf('.') !== -1)
     .concat(['nasl.extension.d.ts', 'manifest']);
+
   const zipList = dirList.concat(fileList);
   const pkg = fs.readJSONSync(path.resolve(root, 'package.json'));
   const manifestData = {
@@ -181,16 +188,35 @@ async function zipExtension(root, destDir) {
     manifestData[getPath(filePath, pkg)] = filePath;
   });
 
-  let manifestStr = '';
+  const filePathList: string[] = [];
   // eslint-disable-next-line no-restricted-syntax, guard-for-in
   for (const i in manifestData) {
-    if (manifestStr) {
-      manifestStr += '\n';
-    }
-    manifestStr += `${i}: ${manifestData[i]}`;
+    filePathList.push(`${i}: ${manifestData[i]}`);
   }
-  fs.writeFileSync(path.resolve(root, 'manifest'), manifestStr);
+
+  const packName = `${pkg.name}@${pkg.version}.tgz`;
+  const zipName = 'zip.tgz';
+  const zipTgzPath = path.resolve(root, zipName);
+  if (fs.existsSync(path.resolve(root, packName))) {
+    fs.copyFileSync(path.resolve(root, packName), zipTgzPath);
+    filePathList.push(`${getPath(zipName, pkg)}: ${zipName}`);
+    zipList.push(zipName);
+  }
+
+  const assets = await glob(['src/**/screenshots/*', 'src/**/drawings/*'], { cwd: root });
+
+  assets.forEach((assetPath) => {
+    filePathList.push(`${getPath(assetPath, pkg)}: ${assetPath}`);
+    zipList.push(assetPath);
+  });
+
+  fs.writeFileSync(path.resolve(root, 'manifest'), filePathList.join('\n'));
+
   await zipDir(root, `${pkg.name}@${pkg.version}.zip`, zipList);
+
+  if (fs.existsSync(zipTgzPath)) {
+    fs.unlinkSync(zipTgzPath);
+  }
 }
 
 export async function buildNaslExtension(options: LcapBuildOptions) {
@@ -205,12 +231,21 @@ export async function buildNaslExtension(options: LcapBuildOptions) {
     framework: options.framework,
   });
   logger.success('生成 nasl.extension.json 成功！');
-  fs.writeJSONSync(`${options.rootPath}/nasl.extension.json`, naslExtensionConfig, { spaces: 2 });
-  // npx
-  logger.start('开始生成 nasl.extension.d.ts...');
-  execSync('npx tsc -p tsconfig.api.json');
-  logger.success('生成 nasl.extension.d.ts 成功！');
+  const naslConfigPath = path.join(options.rootPath, 'nasl.extension.json');
+  fs.writeJSONSync(naslConfigPath, naslExtensionConfig, { spaces: 2 });
+  execSync('npx tsc -p tsconfig.api.json && npm pack');
+
+  const manifest = genManifestConfig(options);
+  fs.writeJSONSync(naslConfigPath, { ...naslExtensionConfig, manifest }, { spaces: 2 });
   zipExtension(options.rootPath, options.destDir);
+}
+
+export async function buildNaslUILibrary(options: LcapBuildOptions) {
+  buildNaslUI(options);
+  await buildTheme(options);
+  buildI18N(options);
+  execSync('npx tsc -p tsconfig.api.json && npm pack');
+  buildManifest(options);
 }
 
 export async function lcapBuild(options: LcapBuildOptions) {
@@ -225,7 +260,5 @@ export async function lcapBuild(options: LcapBuildOptions) {
     return;
   }
 
-  buildNaslUI(options);
-  await buildTheme(options);
-  buildI18N(options);
+  await buildNaslUILibrary(options);
 }

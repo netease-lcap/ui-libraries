@@ -16,10 +16,10 @@
     </template>
     <template #input>
       <van-radio-group direction="horizontal" isNew icon="sure">
-        <van-radio name="1" icon="sure">
+        <van-radio :name="1" icon="sure">
           <van-text text="单选框 1"></van-text>
         </van-radio>
-        <van-radio name="2" icon="sure">
+        <van-radio :name="2" icon="sure">
           <van-text text="单选框 2"></van-text>
         </van-radio>
 
