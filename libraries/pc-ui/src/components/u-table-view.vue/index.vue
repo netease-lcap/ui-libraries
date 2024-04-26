@@ -3293,7 +3293,7 @@ export default {
             this.syncHeadScroll();
         },
         loadTo(page) {
-            if(page !== undefined) {
+            if(!['', null, undefined].includes(page)) {
                 this.page(page);
             } else {
                 this.load();
