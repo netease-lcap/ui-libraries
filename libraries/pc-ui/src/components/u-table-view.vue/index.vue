@@ -3294,9 +3294,11 @@ export default {
         },
         loadTo(page) {
             const dataSource = this.currentDataSource;
-            if (!dataSource)
+            if (!(dataSource && dataSource.paging))
                 return;
-            dataSource.clearLocalData();
+            if(dataSource._load && typeof dataSource._load === 'function') {
+                dataSource.clearLocalData();
+            }
             let currentPage = page;
             if(['', null, undefined].includes(page)) {
                 currentPage = dataSource.paging.number;

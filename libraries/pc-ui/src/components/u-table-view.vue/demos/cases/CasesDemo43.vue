@@ -1,18 +1,34 @@
 <!-- 后端分页 -->
 <template>
 <u-linear-layout direction="vertical">
-    <u-linear-layout>
-        <u-button @click="reload">刷新</u-button>
-        <u-number-input v-model="pageTo"></u-number-input>
-        <u-button @click="loadTo">loadTo刷新</u-button>
-        <u-button @click="resetPageSizeAndNumber">重置页码和页数</u-button>
+    <u-linear-layout direction="vertical">
+        <u-linear-layout>
+            <u-text>后端分页</u-text>
+            <u-button @click="reload">刷新</u-button>
+            <u-number-input v-model="pageTo"></u-number-input>
+            <u-button @click="loadTo">loadTo刷新</u-button>
+            <u-button @click="resetPageSizeAndNumber">重置页码和页数</u-button>
+        </u-linear-layout>
+        <u-table-view :data-source="load" pagination :page-size="pageSize" :page-number="pageNumber" ref="tableview" @page="onPage">
+            <u-table-view-column title="用户名" field="name" width="15%"></u-table-view-column>
+            <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+            <u-table-view-column title="地址" field="address"></u-table-view-column>
+            <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%"></u-table-view-column>
+        </u-table-view>
     </u-linear-layout>
-    <u-table-view :data-source="load" pagination :page-size="pageSize" :page-number="pageNumber" ref="tableview" @page="onPage">
-        <u-table-view-column title="用户名" field="name" width="15%"></u-table-view-column>
-        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-        <u-table-view-column title="地址" field="address"></u-table-view-column>
-        <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%"></u-table-view-column>
-    </u-table-view>
+    <u-linear-layout direction="vertical">
+        <u-linear-layout>
+            <u-text>前端分页绑定变量</u-text>
+            <u-number-input v-model="pageTo"></u-number-input>
+            <u-button @click="loadTo1">loadTo刷新</u-button>
+        </u-linear-layout>
+        <u-table-view striped :data="data" pagination :page-size="10" ref="tableview1">
+            <u-table-view-column title="用户名" field="name" width="15%"></u-table-view-column>
+            <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+            <u-table-view-column title="地址" field="address"></u-table-view-column>
+            <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%"></u-table-view-column>
+        </u-table-view>
+    </u-linear-layout>
 </u-linear-layout>
 </template>
 <script>
@@ -58,6 +74,7 @@ export default {
             pageSize: 10,
             pageNumber: 1,
             pageTo: null,
+            data: mockData,
         };
     },
     methods: {
@@ -80,6 +97,10 @@ export default {
         loadTo() {
             console.log('loadTo');
             this.$refs.tableview.loadTo(this.pageTo);
+        },
+        loadTo1() {
+            console.log('loadTo1');
+            this.$refs.tableview1.loadTo(this.pageTo);
         },
     },
 };
