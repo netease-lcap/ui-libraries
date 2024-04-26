@@ -3,7 +3,8 @@
 <u-linear-layout direction="vertical">
     <u-linear-layout>
         <u-button @click="reload">刷新</u-button>
-        <u-button @click="loadTo">当前页刷新</u-button>
+        <u-number-input v-model="pageTo"></u-number-input>
+        <u-button @click="loadTo">loadTo刷新</u-button>
         <u-button @click="resetPageSizeAndNumber">重置页码和页数</u-button>
     </u-linear-layout>
     <u-table-view :data-source="load" pagination :page-size="pageSize" :page-number="pageNumber" ref="tableview" @page="onPage">
@@ -56,10 +57,12 @@ export default {
             result: undefined,
             pageSize: 10,
             pageNumber: 1,
+            pageTo: null,
         };
     },
     methods: {
         load({ paging }) {
+            console.log('paging', paging);
             return mockService.loadList(paging.offset, paging.limit)
                 .then((result) => this.result = result); // 这句只是在 Demo 中打印一下数据，方便查看
         },
@@ -72,10 +75,11 @@ export default {
         },
         resetPageSizeAndNumber() {
             this.pageSize = 20;
-            this.pageNumber = 1;    
+            this.pageNumber = 1; 
         },
         loadTo() {
-            this.$refs.tableview.loadTo();
+            console.log('loadTo');
+            this.$refs.tableview.loadTo(this.pageTo);
         },
     },
 };
