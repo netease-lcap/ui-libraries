@@ -11,6 +11,7 @@ import genNaslExtensionConfig from './gen-nasl-extension-config';
 import genThemeJsonOld from './gen-theme-json-old';
 import { BuildIdeOptions, buildIde as viteBuildIde } from './vite-build-ide';
 import genManifestConfig from './gen-manifest-config';
+import { getPackName } from '../utils';
 
 export interface LcapThemeOptions {
   themeVarCssPath?: string;
@@ -194,11 +195,12 @@ async function zipExtension(root, destDir) {
     filePathList.push(`${i}: ${manifestData[i]}`);
   }
 
-  const packName = `${pkg.name}@${pkg.version}.tgz`;
+  const packName = getPackName(pkg.name, pkg.version);
+  const packPath = path.resolve(root, packName);
   const zipName = 'zip.tgz';
   const zipTgzPath = path.resolve(root, zipName);
-  if (fs.existsSync(path.resolve(root, packName))) {
-    fs.copyFileSync(path.resolve(root, packName), zipTgzPath);
+  if (fs.existsSync(packPath)) {
+    fs.copyFileSync(packPath, zipTgzPath);
     filePathList.push(`${getPath(zipName, pkg)}: ${zipName}`);
     zipList.push(zipName);
   }
@@ -216,6 +218,7 @@ async function zipExtension(root, destDir) {
 
   if (fs.existsSync(zipTgzPath)) {
     fs.unlinkSync(zipTgzPath);
+    fs.unlinkSync(packPath);
   }
 }
 
