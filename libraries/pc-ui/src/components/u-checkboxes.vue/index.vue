@@ -32,7 +32,7 @@
         </slot>
       </template>
     </u-checkbox>
-    <!-- <u-preview v-if="isPreview" :text="currentText"></u-preview> -->
+    <u-preview v-if="isPreview && $env.VUE_APP_DESIGNER" :text="currentText"></u-preview>
   </template>
   <template v-if="$env.VUE_APP_DESIGNER && !dataSource && !$slots.default">
     <span :class="$style.loadContent">{{ treeSelectTip }}</span>
