@@ -228,7 +228,7 @@ export async function buildNaslExtension(options: LcapBuildOptions) {
   }
 
   logger.start('开始生成 nasl.extension.json...');
-  const naslExtensionConfig = await genNaslExtensionConfig({
+  const naslExtensionConfig: any = await genNaslExtensionConfig({
     assetsPublicPath: options.assetsPublicPath,
     rootPath: options.rootPath,
     framework: options.framework,
@@ -239,7 +239,8 @@ export async function buildNaslExtension(options: LcapBuildOptions) {
   execSync('npx tsc -p tsconfig.api.json && npm pack');
 
   const manifest = genManifestConfig(options);
-  fs.writeJSONSync(naslConfigPath, { ...naslExtensionConfig, manifest }, { spaces: 2 });
+  naslExtensionConfig.compilerInfoMap.manifest = JSON.stringify(manifest);
+  fs.writeJSONSync(naslConfigPath, { ...naslExtensionConfig }, { spaces: 2 });
   zipExtension(options.rootPath, options.destDir);
 }
 
