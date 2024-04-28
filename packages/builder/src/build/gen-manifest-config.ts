@@ -19,11 +19,14 @@ const getManifest = (type, outDir) => {
       `${outDir}/theme.json`,
       `${outDir}/theme/index.html`,
     ],
+    package: [],
     i18n: [`${outDir}/i18n.json`],
     ide: [
       `${outDir}/ide/index.js`,
       `${outDir}/ide/index.css`,
     ],
+  } as {
+    [key: string]: string[],
   };
 };
 
@@ -37,7 +40,7 @@ export default function genManifestConfig(options: LcapBuildOptions) {
   const zipName = getPackName(pkg.name, pkg.version);
 
   if (fs.existsSync(path.join(options.rootPath, zipName))) {
-    manifest.runtime.push('zip.tgz');
+    manifest.package = ['zip.tgz'];
   }
 
   return manifest;
