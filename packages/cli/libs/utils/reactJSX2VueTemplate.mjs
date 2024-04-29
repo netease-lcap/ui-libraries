@@ -97,6 +97,11 @@ const parseJSXExpression = (expressionNode) => {
         type: 'object',
         value: getNodeCode(expressionNode),
       };
+    case 'ArrayExpression':
+      return {
+        type: 'object',
+        value: getNodeCode(expressionNode),
+      };
     case 'MemberExpression':
       return {
         type: 'member',

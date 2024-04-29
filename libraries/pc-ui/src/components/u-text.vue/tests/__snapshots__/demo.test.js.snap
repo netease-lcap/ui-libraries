@@ -28,8 +28,6 @@ exports[`u-text.vue > Demo-文本过长 1`] = `
     <span class="root" display="block" overflow="ellipsis" style="width: 200px;" vusion-slot-name-edit="text">围绕应用和微服务打造的一站式 PaaS 平台，帮助用户快速实现易接入、易运维的微服务解决方案。</span>
     <span class="root" display="block" overflow="break" style="width: 200px;" vusion-slot-name-edit="text">围绕应用和微服务打造的一站式 PaaS 平台，帮助用户快速实现易接入、易运维的微服务解决方案。</span>
     <span class="root" display="block" overflow="nowrap" style="width: 200px;" vusion-slot-name-edit="text">围绕应用和微服务打造的一站式 PaaS 平台，帮助用户快速实现易接入、易运维的微服务解决方案。</span>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -50,8 +48,6 @@ exports[`u-text.vue > Demo-设置尺寸 1`] = `
     <span class="root" size="large" vusion-slot-name-edit="text">大号文本</span>
     <span class="root" size="huge" vusion-slot-name-edit="text">特大号文本</span>
     <span class="root" style="font-size: 26px;" vusion-slot-name-edit="text">自定义大小</span>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -66,8 +62,6 @@ exports[`u-text.vue > Demo-设置颜色 1`] = `
     <span class="root" color="warning" vusion-slot-name-edit="text">警告文本</span>
     <span class="root" color="error" vusion-slot-name-edit="text">错误文本</span>
     <span class="root" color="disabled" vusion-slot-name-edit="text">禁默文本</span>
-    <!---->
-    <!---->
   </div>
 </div>
 `;

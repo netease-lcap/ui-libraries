@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../index';
+import { Button, Icon } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -23,18 +23,31 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary = {
-  render: (args) => <Button {...args}> Button-loading</Button>,
+  render: (args) => {
+    const refss = React.useRef();
+    React.useEffect(() => {
+      console.log(refss, 'refss');
+    }, []);
+    return (
+      <Button {...args} ref={refss}>
+        取色
+        <Icon name="RiCornerLeftUpFill" />
+      </Button>
+    );
+  },
   args: {
     type: 'primary',
     asyncLoading: true,
-    children: '123',
-    onClick: () => new Promise((res) => {
-      setTimeout(() => {
-        res();
-        alert('点击了按钮');
-      }, 1000);
-    }),
-    mySize: 'small',
+    // icon: 'AimOutli2ned',
+    onContextMenu: (e) => console.log(1),
+    // icon: '//minio-api.codewave-test.163yun.com/lowcode-static/user/defaulttenant/1709717732938_%E5%A4%AA%E9%98%B3.svg',
+    icon: 'RiCornerLeftUpFill',
+    onClick: async () => {
+      // const eyeDropper = new EyeDropper();
+      // const color = await eyeDropper.open();
+      // alert(color.sRGBHex);
+    },
+    // mySize: 'small',
     // appType: '',
     // usePlugin: ['lowCode'],
     // size: 'small',
@@ -47,6 +60,7 @@ export const 单实例插件 = {
     label: 'Button',
     usePlugin: {
       scopePlugin(props) {
+        console.log(1234);
         return {
           render(scopeProps) {
             const Component = props.get('render');
@@ -72,7 +86,20 @@ export const Large = {
 };
 
 export const Small = {
-  render: (args) => <Button {...args}>Button</Button>,
+  render: (args) => {
+    // return <Button {...args}>Button</Button>;
+    return (
+      <div>
+        <svg width="100" height="100">
+          <image
+            xlinkHref="http://minio-api.react01-lowcode.com/lowcode-static/user/defaulttenant/1709200203232_account-book.svg"
+            width="100"
+            height="100"
+          />
+        </svg>
+      </div>
+    );
+  },
   args: {
     size: 'small',
   },

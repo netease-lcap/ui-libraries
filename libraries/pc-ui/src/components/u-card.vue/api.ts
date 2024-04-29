@@ -249,6 +249,7 @@ namespace nasl.ui {
         @Prop({
             group: '主要属性',
             title: '标题',
+            implicitToString: true,
         })
         title: nasl.core.String;
 

@@ -136,7 +136,7 @@ namespace nasl.ui {
             docDescription: '当前选择的值，值仅在不适用路由下支持编辑',
             if: _ => _.router === false,
         })
-        value: nasl.core.Any;
+        value: any;
 
         @Prop({
             group: '交互属性',
@@ -295,7 +295,7 @@ namespace nasl.ui {
             title: '相关对象',
             description: '相关对象。当选择此项时，抛出的事件会传递该对象，便于开发',
         })
-        private item: nasl.core.Any;
+        private item: any;
 
         @Prop({
             title: '路由链接',

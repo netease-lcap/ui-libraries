@@ -22,7 +22,7 @@ namespace nasl.ui {
               concept: 'EnumSelectSetter',
               options: [{ title: '秒' }, { title: '分' }],
           },
-          if: _ => _.advancedFormat.enable === false,
+          if: _ => _.advancedFormatEnable === false,
       })
       minUnit: 'second' | 'minute' = 'second';
 
@@ -47,7 +47,7 @@ namespace nasl.ui {
           docDescription: '默认显示的日期时间值',
           if: _ => _.range !== true,
       })
-      value: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      value: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop<UDateTimePickerOptions, 'startDate'>({
           group: '数据属性',
@@ -56,7 +56,7 @@ namespace nasl.ui {
           sync: true,
           if: _ => _.range === true,
       })
-      startDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      startDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop<UDateTimePickerOptions, 'endDate'>({
           group: '数据属性',
@@ -65,7 +65,7 @@ namespace nasl.ui {
           sync: true,
           if: _ => _.range === true,
       })
-      endDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      endDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop({
           group: '数据属性',
@@ -73,7 +73,7 @@ namespace nasl.ui {
           description: '最小可选的日期时间值，填写null则不限制，日期填写格式为“yyyy-mm-dd  00:00:00”',
           docDescription: '支持输入的最小日期时间',
       })
-      minDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      minDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop({
           group: '数据属性',
@@ -81,7 +81,7 @@ namespace nasl.ui {
           description: '最大可选的日期时间值，填写null则不限制，日期填写格式为“yyyy-mm-dd  00:00:00”',
           docDescription: '支持输入的最大日期时间',
       })
-      maxDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date;
+      maxDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
       @Prop<UDateTimePickerOptions, 'yearDiff'>({
           group: '数据属性',
@@ -114,7 +114,7 @@ namespace nasl.ui {
               concept: 'EnumSelectSetter',
               options: [{ title: '中国（2023年7月26日）' }, { title: 'ISO（2023-07-26）' }, { title: 'US（7/26/2023）' }, { title: 'EU（26/7/2023）' }],
           },
-          if: _ => _.advancedFormat.enable === false,
+          if: _ => _.advancedFormatEnable === false,
       })
       showDateFormatter: 'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' = 'YYYY-MM-DD';
 
@@ -130,22 +130,37 @@ namespace nasl.ui {
                   { title: '12时09分', if: _ => _.minUnit === 'minute' }
               ],
           },
-          if: _ => _.advancedFormat.enable === false,
+          if: _ => _.advancedFormatEnable === false,
       })
       showTimeFormatter: 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' = 'HH:mm:ss';
 
       @Prop({
           group: '主要属性',
           title: '高级格式化',
-          bindHide: true,
+          onChange: [
+            { clear: ['advancedFormatValue'] }
+          ],
+          setter: {
+            concept: 'SwitchSetter',
+          },
       })
-      advancedFormat: { enable: nasl.core.Boolean, value: nasl.core.String } = { enable: false, value: '' };
+      advancedFormatEnable: nasl.core.Boolean = false;
+
+      @Prop<UDateTimePickerOptions, 'advancedFormatValue'>({
+            group: '主要属性',
+            title: '高级格式化内容',
+            description: '用来控制日期时间的展示格式',
+            bindHide: true,
+            if: _ => _.advancedFormatEnable === true,
+        })
+        advancedFormatValue: nasl.core.String;
 
       @Prop({
           group: '主要属性',
           title: '占位符',
           description: '为空时显示的占位符文本',
           docDescription: '未选择状态下的提示文案',
+          implicitToString: true,
       })
       placeholder: nasl.core.String = '请选择时间';
 
@@ -155,6 +170,7 @@ namespace nasl.ui {
           description: '为空时显示的占位符文本（右侧）',
           docDescription: '日期选择框无内容时的提示信息，支持自定义编辑, 在没有设置的时候使用placeholder作为右侧占位符内容',
           if: _ => _.range === true,
+          implicitToString: true,
       })
       placeholderRight: nasl.core.String = '请选择时间';
 
@@ -186,6 +202,7 @@ namespace nasl.ui {
           title: '此刻按钮名称',
           docDescription: '支持自定义修改原此刻按钮名称。',
           if: _ => _.showRightNowButton === true,
+          implicitToString: true,
       })
       rightNowTitle: nasl.core.String = '';
 
@@ -206,6 +223,7 @@ namespace nasl.ui {
           description: '取消按钮的显示名称，如果为空则不显示',
           docDescription: '支持自定义修改原取消按钮名称',
           if: _ => _.showFooterButton === true,
+          implicitToString: true,
       })
       cancelTitle: nasl.core.String = '';
 
@@ -215,6 +233,7 @@ namespace nasl.ui {
           description: '确定按钮的显示名称，如果为空则不显示',
           docDescription: '支持自定义修改原确定按钮名称',
           if: _ => _.showFooterButton === true,
+          implicitToString: true,
       })
       okTitle: nasl.core.String = '';
 

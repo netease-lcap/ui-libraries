@@ -27,6 +27,7 @@
         }
     },
     "include": [
+        "./types/**/*",
         "./src/*/api.ts",
         "./src-vusion/components/*/api.ts",
     ]

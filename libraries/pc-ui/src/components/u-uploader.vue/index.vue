@@ -14,11 +14,11 @@
     </div>
     <div v-else-if="listType !== 'card' && (!readonly || $env.VUE_APP_DESIGNER)" :class="$style.select" @click="select()"
         vusion-slot-name="default"
-        :vusion-empty-background="$env.VUE_APP_DESIGNER && !$slots.default ? 'add-any' : false">
+        :vusion-empty-background="$env.VUE_APP_DESIGNER && !$slots.default ? 'add-any' : false" :preview="preview">
         <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="disabled" @click.stop @change="onChange">
         <slot></slot>
     </div>
-    <template v-if="listType !== 'card'">
+    <template v-if="listType !== 'card' || (uploadEnable && draggable && !readonly)">
         <div v-if="description" :class="$style.description">{{ description }}</div>
         <f-scroll-view trigger="hover" v-if="showErrorMessage && errorMessage.length">
             <div :class="$style.errwrap">
@@ -37,12 +37,12 @@
                                 <i-ico :name="downloadIcon" icotype="only"></i-ico>
                             </a>
                         </span>
-                        <i-ico name="remove" :class="$style.remove" v-if="!readonly && !disabled && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
+                        <i-ico name="remove" :class="$style.remove" v-if="!readonly && !disabled && !preview && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
                     </div>
                       <div v-else>
                         <div :class="$style.thumb"><img :class="$style.img" v-if="listType === 'image'" :src="getUrl(item)"></div>
                         <a :class="$style.link" :href="encodeUrl(item.url)" target="_blank" download role="download">{{ item.name || item.url }}</a>
-                        <i-ico name="remove" v-if="!readonly && !disabled" :class="$style.remove" @click="remove(index)"></i-ico>
+                        <i-ico name="remove" v-if="!readonly && !disabled && !preview" :class="$style.remove" @click="remove(index)"></i-ico>
                     </div>
                     <u-linear-progress v-if="item.showProgress && !$env.VUE_APP_DESIGNER" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                 </template>
@@ -54,7 +54,7 @@
                 <div :class="$style.mask" :multiple="multiple || readonly" :show-progress="item.showProgress">
                     <u-linear-progress v-if="item.showProgress" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                     <div :class="$style.buttons">
-                        <span v-if="!readonly && !disabled" :class="$style.button" role="remove" @click.stop="remove(index)"></span>
+                        <span v-if="!readonly && !disabled && !preview" :class="$style.button" role="remove" @click.stop="remove(index)"></span>
                         <span :class="$style.button" role="preview" @click.stop="onPreview(item, index)"></span>
                         <a v-if="downLoadFilename" :class="$style.button" @click.stop :href="encodeUrl(item.url)" target="_blank" role="download" :download="downLoadFilename"></a>
                         <a v-else :class="$style.button" :href="encodeUrl(item.url)" @click.stop target="_blank" download role="download"></a>
@@ -162,6 +162,7 @@ export default {
         fileIconSwitcher: { type: Boolean, default: true },
         downloadIconSwitcher: { type: Boolean, default: true },
         fileSize: { type: Boolean, default: true },
+        preview: { type: Boolean, default: false },
     },
     data() {
         return {
@@ -666,8 +667,19 @@ export default {
                 index,
             }, this))
                 return;
-
             this.currentValue.splice(index, 1);
+            this.errorMessage = [];
+            const count = this.currentValue.length
+            if (count > this.limit) {
+                this.errorMessage[0] = `文件数量${count}超出限制 ${this.limit}！`;
+                this.$emit('count-exceed', {
+                    files:[],
+                    value: this.currentValue,
+                    count,
+                    limit: this.limit,
+                    message: this.errorMessage[0],
+                }, this);
+            }
             this.emitInputEvent();
             this.$emit('remove', {
                 value: this.currentValue,
@@ -797,6 +809,10 @@ export default {
       display: inline-block;
       position: relative;
       overflow: hidden\0;
+  }
+
+  .select[preview] {
+    display: none;
   }
 
   .full {

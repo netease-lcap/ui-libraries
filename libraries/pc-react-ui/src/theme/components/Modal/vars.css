@@ -1,0 +1,43 @@
+/**
+ * @component Modal
+ * @useGlobalTokens ["--cw-padding","--cw-font-size-heading-5","--cw-line-height-heading-5","--cw-color-split","--cw-line-type","--cw-line-width","--cw-color-icon-hover","--cw-color-icon","--cw-font-height","--cw-screen-sm-max","--cw-margin-xs","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-margin","--cw-padding-lg","--cw-font-weight-strong","--cw-border-radius-lg","--cw-box-shadow","--cw-z-index-popup-base","--cw-border-radius-sm","--cw-motion-duration-mid","--cw-font-size-lg","--cw-line-width-focus","--cw-color-primary-border","--cw-motion-duration-slow","--cw-color-bg-mask","--cw-motion-ease-out-circ","--cw-motion-ease-in-out-circ"]
+ */
+.cw-nasl.cw-modal,
+.cw-nasl.cw-modal-css-var,
+.cw-nasl.cw-css-var {
+  /**
+   * @desc 内容区域背景色
+   * @type color
+   */
+  --cw-modal-content-bg: var(--cw-color-bg-elevated);
+
+  /**
+   * @desc 底部区域背景色
+   * @type input
+   */
+  --cw-modal-footer-bg: transparent;
+
+  /**
+   * @desc 顶部背景色
+   * @type color
+   */
+  --cw-modal-header-bg: var(--cw-color-bg-elevated);
+
+  /**
+   * @desc 标题字体颜色
+   * @type color
+   */
+  --cw-modal-title-color: var(--cw-color-text-heading);
+
+  /**
+   * @desc 标题字体大小
+   * @type size
+   */
+  --cw-modal-title-font-size: var(--cw-font-size-heading-5);
+
+  /**
+   * @desc 标题行高
+   * @type input
+   */
+  --cw-modal-title-line-height: var(--cw-line-height-heading-5);
+}

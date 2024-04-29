@@ -61,7 +61,8 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '值',
-      description: '用于标识单元格的值'
+      description: '用于标识单元格的值',
+      implicitToString: true
     })
     value: nasl.core.String;
     @Prop({
@@ -163,7 +164,7 @@ namespace nasl.ui {
       screenX: nasl.core.Integer;
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
-  }) => any ;
+  }) => void;
     @Slot({
       title: 'undefined',
       description: '插入文本或 HTML。'

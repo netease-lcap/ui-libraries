@@ -76,9 +76,12 @@ namespace nasl.ui {
     vertical: nasl.core.Boolean = false;
     @Prop({
       group: '样式属性',
-      title: '步长'
+      title: '步长',
+      setter: {
+        concept: 'NumberInputSetter'
+      }
     })
-    step: nasl.core.Decimal | nasl.core.String = 0;
+    step: nasl.core.Decimal = 0;
     @Prop({
       group: '样式属性',
       title: '进度条高度',
@@ -111,22 +114,22 @@ namespace nasl.ui {
       title: '改变时',
       description: '进度变化时实时触发'
     })
-    onInput: (event: nasl.core.Decimal) => any ;
+    onInput: (event: nasl.core.Decimal) => void;
     @Event({
       title: '改变后',
       description: '进度变化且结束拖动后触发'
     })
-    onChange: (event: nasl.core.Decimal) => any ;
+    onChange: (event: nasl.core.Decimal) => void;
     @Event({
       title: '开始拖动时触发',
       description: '开始拖动时触发'
     })
-    onDragStart: (event: any) => any ;
+    onDragStart: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '结束拖动时触发',
       description: '结束拖动时触发'
     })
-    onDragEnd: (event: any) => any ;
+    onDragEnd: (event: nasl.ui.BaseEvent) => void;
 
     @Slot({
       title: '',

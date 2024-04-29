@@ -33,7 +33,7 @@ namespace nasl.ui {
       title: '切换导航时',
       description: '切换导航时'
     })
-    onChange: (event: any) => any ;
+    onChange: (event: nasl.ui.BaseEvent) => void;
     @Slot({
       title: 'undefined',
       description: '插入`<van-sidebar-item>`子组件。',
@@ -73,7 +73,10 @@ namespace nasl.ui {
     showbaget: nasl.core.Boolean = true;
     @Prop({
       group: '数据属性',
-      title: '徽章值'
+      title: '徽章值',
+      setter: {
+        concept: 'NumberInputSetter'
+      }
     })
     badge: nasl.core.Decimal;
     @Prop({
@@ -138,7 +141,7 @@ namespace nasl.ui {
       title: '点击菜单项',
       description: '点击选项导致 value 变化时触发'
     })
-    onClick: (event: nasl.core.Integer) => any ;
+    onClick: (event: nasl.core.Integer) => void;
     @Slot({
       title: 'undefined',
       description: '内容'

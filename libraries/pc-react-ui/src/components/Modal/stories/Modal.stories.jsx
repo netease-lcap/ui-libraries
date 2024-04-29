@@ -1,6 +1,8 @@
 import React from 'react';
-import Modal from '../index';
-import Button from '@/components/Button/index';
+import { Input } from 'antd';
+import { Modal, Flex, Select } from '@/index';
+// import { Add } from '../index';
+import { Button } from '@/components/Button/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -25,31 +27,41 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
-    const modalRef = React.useRef(false);
-    // const [ open,setOpen ]=React.useState(false)
+    const modalRef = React.useRef({});
+    const flexRef = React.useRef({});
+    const [open, setOpen] = React.useState(false);
+    React.useEffect(() => {
+      console.log(modalRef, 'modalRef');
+      console.log(flexRef, 'flexRef');
+      setTimeout(() => {
+        modalRef.current.close();
+      }, 3000);
+    }, []);
     const showModal = () => {
-      modalRef.current.setOpen(!modalRef.current.open);
+      modalRef.current.open();
     };
     return (
       <div>
         <Button type="primary" onClick={showModal}>
           Open Modal
         </Button>
-        <Modal
-          title="Basic Modal"
-          ref={modalRef}
-          onOk={() => modalRef.current.setOpen(false)}
-          onCancel={() => modalRef.current.setOpen(false)}
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
+        <Flex ref={flexRef}>
+          <Input ref={modalRef} />
+          <Modal title="Basic Modal" {...args} ref={modalRef} defaultOpen>
+            <Select dataSource={[{ label: 1, value: 1 }]} />
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+          </Modal>
+        </Flex>
       </div>
     );
   },
   args: {
     color: 'magenta',
     children: 'Tag',
+    afterOpenChange: (e) => {
+      console.log(e, '-----');
+    },
   },
 };

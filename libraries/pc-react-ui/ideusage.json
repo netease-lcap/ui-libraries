@@ -1,0 +1,787 @@
+[
+  {
+    "name": "Select",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'SelectOption' || target.tag === 'SelectOptGroup'",
+      "actions": {
+        "click": {
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
+          "default":"this.setCacheStatus('open', false)"
+        }
+      },
+      "mutations": ["FormSelect"]
+    }
+  },
+  {
+    "name": "SelectOption",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Select' || target.tag === 'SelectOptGroup'"
+    }
+  },
+  {
+    "name": "SelectOptGroup",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "parentAccept": "target.tag === 'Select'",
+      "childAccept": "target.tag === 'SelectOption'"
+    }
+  },
+  {
+    "name": "FormSelect",
+    "ideusage": {
+      "idetype": "container",
+      "actions": {
+        "click": {
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
+          "default":"this.setCacheStatus('open', false)"
+        }
+      },
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
+    }
+  },
+  {
+    "name": "InputNumber",
+    "ideusage": {
+      "idetype": "element",
+      "mutations": ["FormInputNumber"]
+    }
+  },
+  {
+    "name": "ProLayout",
+    "ideusage": {
+      "idetype": "container",
+      "structured": "menuSlot",
+      "namedSlotOmitWrapper": ["menuSlot"],
+      "parentAccept":"!target.isInSubview",
+      "translateBindingProperty": ["avatarTitle"]
+    }
+  },
+  {
+    "name": "FormInputNumber",
+    "ideusage": {
+      "idetype": "container"
+    },
+    "displaySlotConditions": {
+      "default": false,
+      "label": "this.getAttribute('labelIsSlot').value === true",
+      "description": false,
+      "extra": false
+    }
+  },
+
+  {
+    "name": "Transfer",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
+    "name": "Switch",
+    "ideusage": {
+      "idetype": "element",
+      "mutations": ["FormSwitch"]
+    }
+  },
+  {
+    "name": "FormSwitch",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
+    }
+  },
+  {
+    "name": "Input",
+    "ideusage": {
+      "idetype": "element",
+      "textholder": "value",
+      "mutations": ["FormInput"]
+    }
+  },
+  {
+    "name": "FormInput",
+    "ideusage": {
+      "idetype": "container",
+      "textholder": "value",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
+    }
+  },
+  {
+    "name": "TextArea",
+    "ideusage": {
+      "idetype": "element",
+      "mutations": ["FormTextArea"]
+    }
+  },
+  {
+    "name": "FormTextArea",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
+    }
+  },
+  {
+    "name": "CheckboxGroup",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'Checkbox'",
+      "dataSource": {
+        "dismiss": "!this.getAttribute('dataSource') && (this.filterElement(el => el.tag !== 'template').length > 0)",
+        "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
+        "loopElem": "> label.cw-checkbox-wrapper",
+        "emptySlot": {
+          "display": "inline",
+          "condition": "!this.getAttribute('dataSource')",
+          "accept": "false"
+        }
+      },
+      "mutations": ["FormCheckboxGroup"]
+    }
+  },
+  {
+    "name": "FormCheckboxGroup",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'Checkbox'",
+      "dataSource": {
+        "dismiss": "!this.getAttribute('dataSource') && (this.filterElement(el => el.tag !== 'template').length > 0)",
+        "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
+        "loopElem": "> label.ant-checkbox-wrapper",
+        "emptySlot": {
+          "display": "inline",
+          "condition": "!this.getAttribute('dataSource')",
+          "accept": "false"
+        }
+      },
+      "displaySlotConditions": {
+        "default": true,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
+    }
+  },
+  {
+    "name": "Checkbox",
+    "ideusage": {
+      "idetype": "container",
+      "selector": {
+        "expression": "this",
+        "cssSelector": "label.cw-checkbox-wrapper"
+      }
+    }
+  },
+  {
+    "name": "Radio",
+    "ideusage": {
+      "idetype": "container",
+      "selector": {
+        "expression": "this",
+        "cssSelector": ":is(label.cw-radio-wrapper, label.cw-radio-button-wrapper)"
+      }
+    }
+  },
+  {
+    "name": "RadioGroup",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'Radio'",
+      "dataSource": {
+        "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+        "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
+        "loopElem": "> label.cw-radio-wrapper",
+        "emptySlot": {
+          "display": "inline",
+          "condition": "!this.getAttribute('dataSource')",
+          "accept": "false"
+        }
+      },
+      "mutations": ["FormRadioGroup"]
+    }
+  },
+  {
+    "name": "FormRadioGroup",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'Radio'",
+      "dataSource": {
+        "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+        "displayData": "{[ { label: '根据', value: '根据' }, { label: '数据', value: '数据' }, { label: '生成', value: '生成' }]}",
+        "loopElem": "> label.ant-radio-wrapper",
+        "emptySlot": {
+          "display": "inline",
+          "condition": "!this.getAttribute('dataSource')",
+          "accept": "false"
+        }
+      },
+      "displaySlotConditions": {
+        "default": true,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
+    }
+  },
+  {
+    "name": "Form",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
+    "name": "QueryForm",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
+    "name": "FormItem",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Form'"
+    }
+  },
+  {
+    "name": "Button",
+    "ideusage": {
+      "idetype": "element",
+      "editable": "children"
+    }
+  },
+  {
+    "name": "Avatar",
+    "ideusage": {
+      "idetype": "element",
+      "editable": "children"
+    }
+  },
+  {
+    "name": "Descriptions",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'DescriptionsItem'"
+    }
+  },
+  {
+    "name": "DescriptionsItem",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Descriptions'",
+      "selector": {
+        "expression": "this",
+        "cssSelector": ".cw-descriptions-item-container"
+      }
+    }
+  },
+  {
+    "name": "Flex",
+    "ideusage": {
+      "idetype": "container",
+      "containerDirection": "this.getAttribute('direction')?.value === 'vertical' ? 'column' : 'row' ",
+      "automate": [
+        {
+          "command": "WRAP_LINEAR_VERTICAL",
+          "useblock": 0,
+          "attribute": {
+            "direction": "vertical",
+            "justify": "start",
+            "alignment": "start",
+            "wrap": "nowrap"
+          }
+        },
+        {
+          "command": "WRAP_LINEAR_HORIZONTAL",
+          "useblock": 0,
+          "attribute": {
+            "direction": "horizontal",
+            "justify": "start",
+            "alignment": "start",
+            "wrap": "nowrap"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "Table",
+    "ideusage": {
+      "idetype": "container",
+      "containerDirection": "row",
+      "structured": true,
+      "dataSource": {
+        "display": 3,
+        "loopElem": "table > tbody > tr",
+        "emptySlot": {
+          "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
+          "accept": "target.concept === 'Entity'"
+        },
+        "refInLoop": {
+          "child": "TableColumn",
+          "slot": "render",
+          "useRef": "argus?.[0]?.index === 0"
+        }
+      },
+      "childAccept": "target.tag === 'TableColumn'"
+    }
+  },
+  {
+    "name": "TableColumn",
+    "ideusage": {
+      "idetype": "container",
+      "childAccept": false,
+      "parentAccept": "target.tag === 'Table'",
+      "containerDirection": "row",
+      "selector": [
+        {
+          "expression": "this.getElement(el => el.slotTarget === 'title')",
+          "cssSelector": "th"
+        },
+        {
+          "expression": "this.getElement(el => el.slotTarget === 'render')",
+          "cssSelector": "td"
+        }
+      ]
+    }
+  },
+  {
+    "name": "List",
+    "ideusage": {
+      "idetype": "container",
+      "containerDirection": "column",
+      "dataSource": {
+        "display": 3,
+        "loopElem": "ul > div",
+        "emptySlot": {
+          "condition": "!this.getAttribute('dataSource')",
+          "accept": "target.concept === 'Entity'"
+        }
+      }
+    }
+  },
+  {
+    "name": "ListItem",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'List'"
+    }
+  },
+  {
+    "name": "Row",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'Col'"
+    }
+  },
+  {
+    "name": "Col",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Row'"
+    }
+  },
+  {
+    "name": "Tabs",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'TabPane'",
+      "dataSource": {
+        "display": 4,
+        "dismiss": "!this.getAttribute('dataSource')",
+        "displayData": "{[ { key:1 }, { key:2 }, { key:3 }]}",
+        "loopElem": "> .cw-tabs-nav  .cw-tabs-tab"
+      }
+    }
+  },
+  {
+    "name": "TabPane",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Tabs'",
+      "selector": [
+        {
+          "expression": "this.getElement(el => el.slotTarget === 'tab')",
+          "cssSelector": ".cw-tabs-tab"
+        },
+        {
+          "expression": "this",
+          "cssSelector": ".cw-tabs-tabpane"
+        }
+      ],
+      "actions": {
+        "click": {
+          "status": "this.getParent().setCacheStatus('activeKey', '\"' + this.getAttribute('key')?.value + '\"') "
+        }
+      }
+    }
+  },
+  {
+    "name": "Tree",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'TreeNode'"
+    }
+  },
+  {
+    "name": "TreeNode",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "parentAccept": "target.tag === 'Tree'"
+    }
+  },
+  {
+    "name": "TreeSelect",
+    "ideusage": {
+      "idetype": "element",
+      "mutations": ["FormTreeSelect"]
+    }
+  },
+  {
+    "name": "FormTreeSelect",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
+    }
+  },
+  {
+    "name": "Cascader",
+    "ideusage": {
+      "idetype": "element",
+      "mutations": ["FormCascader"]
+    }
+  },
+  {
+    "name": "FormCascader",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
+    }
+  },
+  {
+    "name": "DatePicker",
+    "ideusage": {
+      "idetype": "element",
+      "mutations": ["FormDatePicker"]
+    }
+  },
+  {
+    "name": "FormDatePicker",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
+    }
+  },
+  {
+    "name": "DateRangePicker",
+    "ideusage": {
+      "idetype": "element",
+      "mutations": ["FormDateRangePicker"]
+    }
+  },
+  {
+    "name": "FormDateRangePicker",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
+    }
+  },
+  {
+    "name": "TimePicker",
+    "ideusage": {
+      "idetype": "element",
+      "mutations": ["FormTimePicker"]
+    }
+  },
+  {
+    "name": "FormTimePicker",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
+    }
+  },
+  {
+    "name": "TimeRangePicker",
+    "ideusage": {
+      "idetype": "element",
+      "mutations": ["FormTimeRangePicker"]
+    }
+  },
+  {
+    "name": "FormTimeRangePicker",
+    "ideusage": {
+      "idetype": "container",
+      "displaySlotConditions": {
+        "default": false,
+        "label": "this.getAttribute('labelIsSlot').value === true",
+        "description": false,
+        "extra": false
+      }
+    }
+  },
+  {
+    "name": "Steps",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'StepsItem'"
+    }
+  },
+  {
+    "name": "StepsItem",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Steps'"
+    }
+  },
+  {
+    "name": "Modal",
+    "ideusage": {
+      "idetype": "modal",
+      "selector": {
+        "expression": "this",
+        "cssSelector": "div[class='cw-modal-content']"
+      },
+      "additionalAttribute": {
+        "transitionName": "''",
+        "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
+      },
+      "cacheOpenKey": "open"
+    }
+  },
+  {
+    "name": "Drawer",
+    "ideusage": {
+      "idetype": "drawer",
+      "selector": {
+        "expression": "this",
+        "cssSelector": "div[class='cw-drawer-content']"
+      },
+      "additionalAttribute": {
+        "transitionName": "''",
+        "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
+      },
+      "cacheOpenKey": "open"
+    }
+  },
+  {
+    "name": "Message",
+    "ideusage": {
+      "idetype": "messager",
+      "selector": {
+        "expression": "this",
+        "cssSelector": "div[class='cw-drawer-wrapper-body']"
+      }
+    }
+  },
+  {
+    "name": "Popover",
+    "ideusage": {
+      "idetype": "popover",
+      "selector": {
+        "expression": "this.getElement(el => el.slotTarget === 'content')",
+        "cssSelector": "div[class='cw-popover-content']"
+      },
+      "actions": {
+        "click": {
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
+          "default":"this.setCacheStatus('open', false)"
+        }
+      }
+    }
+  },
+  {
+    "name": "Image",
+    "ideusage": {
+      "idetype": "element",
+      "additionalAttribute": {
+        "preview": "{false}"
+      }
+    }
+  },
+  {
+    "name": "Card",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
+    "name": "Steps",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
+    "name": "Router",
+    "ideusage": {
+      "idetype": "router"
+    }
+  },
+  {
+    "name": "Breadcrumb",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'BreadcrumbItem'"
+    }
+  },
+  {
+    "name": "BreadcrumbItem",
+    "ideusage": {
+      "idetype": "container",
+      "parentAccept": "target.tag === 'Breadcrumb'"
+    }
+  },
+  {
+    "name": "Dropdown",
+    "ideusage": {
+      "idetype": "popover",
+      "structured": true,
+      "namedSlotOmitWrapper": ["menuItem"],
+      "childAccept": "this.getDefaultElements().length < 1",
+      "actions": {
+        "click": {
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
+          "default": "this.setCacheStatus('open', false)"
+        }
+      }
+    }
+  },
+  {
+    "name": "Menu",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "childAccept": "target.tag === 'MenuItem' || target.tag === 'MenuDivider' || target.tag === 'MenuItemGroup'"
+    }
+  },
+  {
+    "name": "MenuItem",
+    "ideusage": {
+      "idetype": "container",
+      "structured": true,
+      "parentAccept": "target.tag === 'Menu'",
+      "displaySlotConditions": {
+        "labelSlot": "this.getAttribute('labelIsSlot').value === true"
+      },
+      "actions": {
+        "click": {
+          "status": "{const prolayout=this.getAncestor('ProLayout'); \nconst cacheStatus = prolayout.getCacheStatus('openKeys') || []; \nlet key = this.getAttribute('path')?.value;\nif(key){\n    key = '\"' + key + '\"';\n    if(cacheStatus.includes(key)) {\n        const idx = cacheStatus.findIndex(s => s === key);\n        cacheStatus.splice(idx, 1);\n    } else {\n        prolayout.setCacheStatus('openKeys', cacheStatus.concat(key));\n    }\n}}"
+        }
+      }
+    }
+  },
+  {
+    "name": "MenuDivider",
+    "ideusage": {
+      "idetype": "element"
+    }
+  },
+  {
+    "name": "MenuItemGroup",
+    "ideusage": {
+      "idetype": "container",
+      "childAccept": "target.tag === 'MenuItem'",
+      "parentAccept": "target.tag === 'Menu'"
+    }
+  },
+  {
+    "name": "MenuSubMenu",
+    "ideusage": {
+      "idetype": "popover",
+      "selector": {
+        "expression": "this.getElement(el => el.slotTarget === 'default' || !el.slotTarget)",
+        "cssSelector": "div[class='cw-menu-submenu-popup']"
+      },
+      "actions": {
+        "click": {
+          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
+          "default":"this.setCacheStatus('open', false)"
+        }
+      }
+    }
+  },
+  {
+    "name": "Text",
+    "ideusage": {
+      "idetype": "element",
+      "editable": "children",
+      "textholder": "children"
+    }
+  },
+  {
+    "name": "Link",
+    "ideusage": {
+      "idetype": "element",
+      "editable": "children",
+      "textholder": "children"
+    }
+  },
+  {
+    "name": "Icon",
+    "ideusage": {
+      "idetype": "element"
+    }
+  },
+  {
+    "name": "Upload",
+    "ideusage": {
+      "idetype": "container"
+    }
+  }
+]

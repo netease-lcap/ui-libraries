@@ -112,7 +112,7 @@ namespace nasl.ui {
       screenX: nasl.core.Integer;
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
-  }) => any ;
+  }) => void;
     @Slot({
       title: 'undefined',
       description: '插入默认的元素'
@@ -145,7 +145,8 @@ namespace nasl.ui {
   class VanCarduGroupOptions extends ViewComponentOptions {
     @Prop({
       title: '标题',
-      description: '卡片组的标题'
+      description: '卡片组的标题',
+      implicitToString: true,
     })
     title: nasl.core.String;
     @Slot({

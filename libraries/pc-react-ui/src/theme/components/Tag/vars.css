@@ -1,0 +1,18 @@
+/**
+ * @component Tag
+ * @useGlobalTokens ["--cw-line-width","--cw-font-size-icon","--cw-font-size-sm","--cw-line-height-sm","--cw-padding-xxs","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-margin-xs","--cw-line-type","--cw-color-border","--cw-border-radius-sm","--cw-motion-duration-mid","--cw-color-text-description","--cw-color-text-heading","--cw-color-text-light-solid","--cw-color-primary","--cw-color-fill-secondary","--cw-color-primary-hover","--cw-color-primary-active"]
+ */
+.cw-nasl.cw-tag,
+.cw-nasl.cw-tag-css-var {
+  /**
+   * @desc 默认背景色
+   * @type color
+   */
+  --cw-tag-default-bg: #fafafa;
+
+  /**
+   * @desc 默认文字颜色
+   * @type color
+   */
+  --cw-tag-default-color: var(--cw-color-text);
+}

@@ -30,7 +30,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识地区选择的值',
-      sync: true
+      sync: true,
     })
     value: nasl.core.String = '';
     @Prop({
@@ -52,17 +52,20 @@ namespace nasl.ui {
     };
     @Prop({
       group: '主要属性',
-      title: '顶部栏标题'
+      title: '顶部栏标题',
+      implicitToString: true,
     })
     title: nasl.core.String = '标题';
     @Prop({
       group: '主要属性',
-      title: '确认按钮文字'
+      title: '确认按钮文字',
+      implicitToString: true,
     })
     confirmButtonText: nasl.core.String = '确认';
     @Prop({
       group: '主要属性',
-      title: '取消按钮文字'
+      title: '取消按钮文字',
+      implicitToString: true,
     })
     cancelButtonText: nasl.core.String = '取消';
     @Prop({
@@ -70,7 +73,8 @@ namespace nasl.ui {
       title: '可见选项个数',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 1
       }
     })
     visibleItemCount: nasl.core.Integer = 6;
@@ -80,7 +84,8 @@ namespace nasl.ui {
       description: '显示列数，3-省市区，2-省市，1-省',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 1,
       }
     })
     columnsNum: nasl.core.Integer = 3;
@@ -146,9 +151,20 @@ namespace nasl.ui {
       description: '',
       setter: {
         concept: "InputSetter"
-      }
+      },
+      implicitToString: true,
     })
     placeholder: nasl.core.String;
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '显示预览态',
+      docDescription: '',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    preview: nasl.core.Boolean = false;
     @Event({
       title: '点击右上方完成按钮',
       description: '点击右上方完成按钮'
@@ -156,17 +172,17 @@ namespace nasl.ui {
     onConfirm: (values: nasl.collection.List<{
       code: nasl.core.String;
       name: nasl.core.String;
-    }>, index: nasl.collection.List<nasl.core.Integer>, value: nasl.core.String) => any ;
+    }>, index: nasl.collection.List<nasl.core.Integer>, value: nasl.core.String) => void;
     @Event({
       title: '点击取消按钮时',
       description: '点击取消按钮时'
     })
-    onCancel: (event: any) => any ;
+    onCancel: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '选项改变时触发',
       description: '选项改变时触发'
     })
-    onChange: (event: any) => any ;
+    onChange: (event: nasl.ui.BaseEvent) => void;
 
     @Slot({
       title: '',

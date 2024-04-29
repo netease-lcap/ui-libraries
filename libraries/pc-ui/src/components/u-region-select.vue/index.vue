@@ -13,6 +13,8 @@ export default {
     props: {
         field: { type: String, default: 'value' },
         converter: String,
+        readonly: { type: Boolean, default: false },
+        preview: { type: Boolean, default: false },
         // categories: {
         //     type: Array,
         //     default() {

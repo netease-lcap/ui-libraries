@@ -9,13 +9,14 @@ import Tab from '../tab';
 import { EmptyCol } from '../emptycol';
 import { FieldMixin } from '../mixins/field';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
+import PreviewMixin from '../mixins/preview';
 
 import { validDisplayFormatters, validUnit, validType } from './shared';
 
 const [createComponent, bem, t] = createNamespace('datetime-picker');
 
 export default createComponent({
-  mixins: [FieldMixin, EventSlotCommandProvider(['cancel', 'confirm'])],
+  mixins: [FieldMixin, EventSlotCommandProvider(['cancel', 'confirm']), PreviewMixin],
   props: {
     ...TimePicker.props,
     ...DatePicker.props,
@@ -88,12 +89,8 @@ export default createComponent({
     // 展示格式
     getDisplayFormatter() {
       // 高级格式化开启
-      if (
-        this.advancedFormat &&
-        this.advancedFormat.enable &&
-        this.advancedFormat.value
-      ) {
-        return this.advancedFormat.value;
+      if (this.advancedFormatEnable && this.advancedFormatValue) {
+        return this.advancedFormatValue;
       }
 
       const formatters = validDisplayFormatters[this.realType][this.realUnit];
@@ -135,7 +132,7 @@ export default createComponent({
               },
             ],
           },
-          '*'
+          '*',
         );
       }
       this.$refs.popup.togglePModal();
@@ -143,12 +140,8 @@ export default createComponent({
     getTitle() {
       if (this.inDesigner()) {
         const value = isValidDate(this.value, this.realType) ? this.value : '';
-        const start = isValidDate(this.startValue, this.realType)
-          ? this.startValue
-          : '';
-        const end = isValidDate(this.endValue, this.realType)
-          ? this.endValue
-          : '';
+        const start = isValidDate(this.startValue, this.realType) ? this.startValue : '';
+        const end = isValidDate(this.endValue, this.realType) ? this.endValue : '';
 
         return this.range ? `${start} - ${end}` : value;
       }
@@ -259,17 +252,11 @@ export default createComponent({
         return (
           <div class={bem('picker-top')}>
             {topSlot && (
-              <div
-                vusion-slot-name="picker-top"
-                style="display:flex; justify-content: space-between; align-items: center; min-height:32px;"
-              >
+              <div vusion-slot-name="picker-top" style="display:flex; justify-content: space-between; align-items: center; min-height:32px;">
                 {topSlot}
               </div>
             )}
-            <div
-              style="position:absolute; top: 50%; left:50%; transform: translate(-50%,-50%);"
-              vusion-slot-name="pannel-title"
-            >
+            <div style="position:absolute; top: 50%; left:50%; transform: translate(-50%,-50%);" vusion-slot-name="pannel-title">
               {titleSlot || this.title}
             </div>
           </div>
@@ -281,9 +268,7 @@ export default createComponent({
           <button type="button" class={bem('cancel')} onClick={this.cancel}>
             {this.cancelButtonText || t('cancel')}
           </button>
-          {this.title && (
-            <div class={['van-ellipsis', bem('title')]}>{this.title}</div>
-          )}
+          {this.title && <div class={['van-ellipsis', bem('title')]}>{this.title}</div>}
           <button type="button" class={bem('confirm')} onClick={this.confirm}>
             {this.confirmButtonText || t('confirm')}
           </button>
@@ -317,11 +302,7 @@ export default createComponent({
                 }}
               />
             </Tab>
-            <Tab
-              style={{ flex: '0 0 20px' }}
-              title={t('rangeTabTo')}
-              disabled
-            ></Tab>
+            <Tab style={{ flex: '0 0 20px' }} title={t('rangeTabTo')} disabled></Tab>
             <Tab title={t('rangeTabEnd')}>
               <Component
                 ref="end"
@@ -389,6 +370,25 @@ export default createComponent({
       title: () => this.slots('title'),
     };
 
+    if (this.isPreview) {
+      return (
+        <div class={bem('wrapppdtpicker')} vusion-click-enabled="true">
+          <Field
+            label={this.labelField}
+            value={this.getTitle() || '--'}
+            scopedSlots={tempSlot}
+            readonly
+            isLink
+            input-align={this.inputAlign || 'right'}
+            // eslint-disable-next-line no-prototype-builtins
+            notitle={!this.$slots.hasOwnProperty('title')}
+            insel={true}
+            nofi={true}
+          />
+        </div>
+      );
+    }
+
     return (
       <div class={bem('wrapppdtpicker')} vusion-click-enabled="true">
         <Field
@@ -429,11 +429,7 @@ export default createComponent({
         >
           <div class={bem(this.isNew && 'content-wrapper')}>
             {this.inDesigner() && (
-              <div
-                class={bem('designer-close-button')}
-                vusion-click-enabled="true"
-                onClick={this.designerClose}
-              >
+              <div class={bem('designer-close-button')} vusion-click-enabled="true" onClick={this.designerClose}>
                 点击关闭
               </div>
             )}

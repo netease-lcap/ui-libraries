@@ -82,9 +82,9 @@ namespace nasl.ui {
         onBeforeSelect: (event: {
             value: nasl.core.String;
             oldValue: nasl.core.String;
-            selectedItem: nasl.core.Any;
-            item: nasl.core.Any;
-            oldItem: nasl.core.Any;
+            selectedItem: any;
+            item: any;
+            oldItem: any;
         }) => any;
 
         @Event({
@@ -100,9 +100,9 @@ namespace nasl.ui {
         onSelect: (event: {
             value: nasl.core.String;
             oldValue: nasl.core.String;
-            selectedItem: nasl.core.Any;
-            item: nasl.core.Any;
-            oldItem: nasl.core.Any;
+            selectedItem: any;
+            item: any;
+            oldItem: any;
         }) => any;
 
         @Event({
@@ -112,9 +112,9 @@ namespace nasl.ui {
         onChange: (event: {
             value: nasl.core.String;
             oldValue: nasl.core.String;
-            selectedItem: nasl.core.Any;
-            item: nasl.core.Any;
-            oldItem: nasl.core.Any;
+            selectedItem: any;
+            item: any;
+            oldItem: any;
         }) => any;
 
         @Slot({
@@ -159,6 +159,7 @@ namespace nasl.ui {
         @Prop({
             title: '文本',
             description: '文本内容',
+            implicitToString: true,
         })
         text: nasl.core.String;
 
@@ -166,7 +167,7 @@ namespace nasl.ui {
             title: '值',
             description: '此项的值',
         })
-        value: nasl.core.Any;
+        value: any;
 
         @Prop({
             title: '图标',
@@ -190,7 +191,7 @@ namespace nasl.ui {
             title: '相关对象',
             description: '相关对象。当选择此项时，抛出的事件会传递该对象，便于开发',
         })
-        private item: nasl.core.Any;
+        private item: any;
 
         @Prop({
             title: '链接类型',
@@ -250,9 +251,9 @@ namespace nasl.ui {
         onBeforeSelect: (event: {
             value: nasl.core.String;
             oldValue: nasl.core.String;
-            selectedItem: nasl.core.Any;
-            item: nasl.core.Any;
-            oldItem: nasl.core.Any;
+            selectedItem: any;
+            item: any;
+            oldItem: any;
         }) => any;
 
         @Event({

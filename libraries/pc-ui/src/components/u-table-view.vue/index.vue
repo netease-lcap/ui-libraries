@@ -1081,10 +1081,10 @@ export default {
                 return new Constructor({ ...options, tag: 'u-table-view' });
             } else if (dataSource instanceof Object) {
                 if (dataSource.hasOwnProperty('list') && Array.isArray(dataSource.list))
-                    return new DataSource(Object.assign(options, dataSource, {
+                    return new Constructor(Object.assign({ tag: 'u-table-view' }, options, dataSource, {
                         data: dataSource.list,
                     }));
-                return new DataSource(Object.assign(options, dataSource));
+                return new Constructor(Object.assign({ tag: 'u-table-view' }, options, dataSource));
             } else
                 return dataSource;
         },
@@ -1127,6 +1127,9 @@ export default {
                     let defaultColumnWidth = this.defaultColumnWidth;
                     if (String(defaultColumnWidth).endsWith('%')) {
                         defaultColumnWidth = (parseFloat(defaultColumnWidth) * rootWidth) / 100;
+                    } else if (defaultColumnWidth) {
+                        defaultColumnWidth = parseFloat(defaultColumnWidth);
+                        defaultColumnWidth = isNaN(defaultColumnWidth) ? 0 : defaultColumnWidth;
                     }
                     defaultColumnWidth = defaultColumnWidth || 0;
                     this.visibleColumnVMs.forEach((columnVM, index) => {
@@ -1183,6 +1186,8 @@ export default {
                         valueColumnVMs.forEach((columnVM) => columnVM.computedWidth = columnVM.computedWidth + averageWidth);
                     } else if (remainingWidth < 0 && noWidthColumnVMs.length) {
                         noWidthColumnVMs.forEach((columnVM) => columnVM.computedWidth = defaultColumnWidth || 100);
+                    } else if(remainingWidth === 0 && noWidthColumnVMs.length && defaultColumnWidth) {
+                        noWidthColumnVMs.forEach((columnVM) => columnVM.computedWidth = defaultColumnWidth);
                     }
 
                     // 如果所有列均有值，则总宽度有超出的可能。否则总宽度为根节点的宽度。
@@ -1367,7 +1372,9 @@ export default {
         },
         onBodyScroll(e) {
             this.syncBodyScroll(e.target.scrollTop, e.target); // this.throttledVirtualScroll(e);
-            this.$refs.head[0].scrollLeft = e.target.scrollLeft;
+            if (this.$refs.head[0]) {
+                this.$refs.head[0].scrollLeft = e.target.scrollLeft;
+            }
             this.scrollXStart = e.target.scrollLeft === 0;
             this.scrollXEnd = e.target.scrollLeft >= e.target.scrollWidth - e.target.clientWidth;
             if (this.pageable !== 'auto-more' || this.currentLoading)
@@ -1380,7 +1387,7 @@ export default {
             const rect = getRect(this.$el);
             const bodyRect = getRect(this.$refs.body[0]);
             const parentRect = this.scrollParentEl === window ? { top: 0, bottom: window.innerHeight } : getRect(this.scrollParentEl);
-            const headHeight = this.$refs.head[0].offsetHeight;
+            const headHeight = this.$refs.head[0] && this.$refs.head[0].offsetHeight || 0;
 
             parentRect.top += this.stickHeadOffset;
             bodyRect.bottom -= headHeight;
@@ -1408,6 +1415,8 @@ export default {
                     headPlaceholderEl.style.height = '';
                 }
                 stickheadEl.style.top = stickingHeadTop + 'px';
+                // fix：滚动条在最右边时，置顶时表头会有偏移
+                stickheadEl.scrollLeft = this.$refs.scrollView[0].$refs.wrap.scrollLeft;
                 if (this.syncStickHeadXScroll) {
                     this.syncHeadScroll();
                 }
@@ -1421,7 +1430,9 @@ export default {
             if (this.virtual)
                 this.throttledVirtualScroll(data);
             if (this.$refs.scrollView[0].$refs.wrap === data.target) {
-                this.$refs.head[0].scrollLeft = data.scrollLeft;
+                if (this.$refs.head[0]) {
+                    this.$refs.head[0].scrollLeft = data.scrollLeft;
+                }
                 this.scrollXStart = data.scrollLeft === 0;
                 this.scrollXEnd = data.scrollLeft >= data.scrollWidth - data.clientWidth;
                 if (this.pageable !== 'auto-more' || this.currentLoading)
@@ -1441,7 +1452,7 @@ export default {
                 && this.$refs.scrollView[2].$refs.wrap !== target
                 && (this.$refs.scrollView[2].$refs.wrap.scrollTop = scrollTop);
         },
-        load(more) {
+        load(more, paging = {}) {
             const dataSource = this.currentDataSource;
             if (!dataSource)
                 return;
@@ -1453,7 +1464,7 @@ export default {
                 this.currentLoading = true;
                 this.currentError = false;
             }
-            dataSource[more ? 'loadMore' : 'load']()
+            dataSource[more ? 'loadMore' : 'load'](paging.offset, paging.limit, paging.number)
                 .then((data) => {
                     // 防止同步数据使页面抖动
                     // setTimeout(() => this.currentData = data);
@@ -1830,7 +1841,7 @@ export default {
             this.currentDataSource.page(paging);
             this.$emit('update:page-number', number, this);
             this.$emit('page', paging, this);
-            this.load();
+            this.load(false, { number, limit: size });
         },
         onClickSort(columnVM) {
             let order;
@@ -2992,6 +3003,11 @@ export default {
             }
         },
         handleResizeListener() {
+            if (this.virtual) {
+                this.virtualIndex = 0;
+                this.virtualTop = 0;
+                this.virtualBottom = 0;
+            }
             const rootWidth = this.$refs.root.offsetWidth;
             // 放在线性布局flex下，或者某些设置了fit-content，table-width会缓慢增长，导致表格一直动
             // 如果两次width变化不大，不要重新计算每列的computedWidth等
@@ -2999,6 +3015,11 @@ export default {
             this.handleResize(reComputedWidth);
         },
         reHandleResize() {
+            if (this.virtual) {
+                this.virtualIndex = 0;
+                this.virtualTop = 0;
+                this.virtualBottom = 0;
+            }
             this.preRootWidth = null;
             this.handleResize(true);
         },
@@ -3270,6 +3291,23 @@ export default {
         },
         onXScrollParentScroll(event) {
             this.syncHeadScroll();
+        },
+        loadTo(page) {
+            const dataSource = this.currentDataSource;
+            if (!(dataSource && dataSource.paging))
+                return;
+            if(dataSource._load && typeof dataSource._load === 'function') {
+                dataSource.clearLocalData();
+            }
+            let currentPage = page;
+            if(['', null, undefined].includes(page)) {
+                currentPage = dataSource.paging.number;
+            }
+            if(currentPage === dataSource.paging.number) {
+                this.load(false, { number: currentPage });
+            } else {
+                dataSource.paging.number = page;
+            }
         },
     },
 };

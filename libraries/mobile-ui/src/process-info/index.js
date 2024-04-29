@@ -80,7 +80,7 @@ export default createComponent({
       .join('，');
 
     const statusMap = {
-      Approved: '审批通过',
+      Approved: '审批结束',
       Approving: '审批中',
     };
 
