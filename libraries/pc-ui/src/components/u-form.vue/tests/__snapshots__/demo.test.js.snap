@@ -1852,7 +1852,7 @@ exports[`u-form.vue > Demo-基础表单 1`] = `
 `;
 
 exports[`u-form.vue > Demo-折叠分组 1`] = `
-<div class="root" layout="inline">
+<div class="root" layout="block">
   <div class="root" collapsible="true" size="normal">
     <div class="head">
       <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title">

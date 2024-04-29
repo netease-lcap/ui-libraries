@@ -314,7 +314,7 @@ namespace nasl.ui {
       height: 'full' | 'huge' | 'large' | 'medium' | 'normal' | 'small' | 'mini' = 'normal';
 
       @Event({
-          title: '值输入时',
+          title: '值输入后',
           description: '值变化时触发 (表单验证可以检测到其值得变化)',
       })
       onInput: (event: nasl.core.Date) => any;
