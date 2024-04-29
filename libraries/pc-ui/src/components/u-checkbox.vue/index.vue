@@ -310,8 +310,8 @@ content: "\e682";
     display: none;
 }
 
-.root[preview=true]:not([show-title=true]) {
-    margin-right: 0;
+.root[preview=true]:not([show-title]) {
+    display: none;
 }
 .root[preview=true] {
     display: inline-block;
