@@ -173,7 +173,7 @@ namespace nasl.ui {
             description: '当分页条数过少导致无法触发分页滚动加载时，系统会自动请求数据到出现滚动条以避免功能异常',
             setter: {
                 concept: 'NumberInputSetter',
-                min: 10,
+                min: 1,
             },
             if: _ => _.pagination === true,
         })
