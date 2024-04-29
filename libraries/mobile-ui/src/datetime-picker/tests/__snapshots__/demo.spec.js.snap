@@ -129,5 +129,21 @@ exports[`renders demo correctly 1`] = `
       </div>
     </div>
   </div>
+  <div>
+    <div vusion-click-enabled="true" class="van-datetime-picker__wrapppdtpicker">
+      <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-cellson--insel van-field">
+        <div class="van-cellson__value van-field__value">
+          <div class="van-field__body"><input type="text" readonly="readonly" class="van-field__control van-field__control--right"></div>
+        </div>
+      </div>
+    </div>
+    <div vusion-click-enabled="true" class="van-datetime-picker__wrapppdtpicker">
+      <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-cellson--insel van-field">
+        <div class="van-cellson__value van-field__value">
+          <div class="van-field__body"><input type="text" readonly="readonly" class="van-field__control van-field__control--right"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 `;

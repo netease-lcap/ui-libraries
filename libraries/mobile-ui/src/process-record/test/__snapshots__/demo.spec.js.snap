@@ -5,8 +5,149 @@ exports[`renders demo correctly 1`] = `
   <div>
     <div vusion-disabled-duplicate="true" vusion-disabled-copy="true" class="van-process-record">
       <div class="van-steps van-steps--vertical van-process-record__timeline">
-        <div child-cut-disabled="true" class="van-steps__items"></div>
-        <div class="van-process-record__timeline-noMore">没有更多了</div>
+        <div child-cut-disabled="true" class="van-steps__items">
+          <div class="van-hairline van-step van-step--vertical van-step--finish" style="--van-step-line-color: #337EFF; --van-step-finish-line-color: #337EFF; --van-step-active-color: #337EFF; --van-step-text-color: #333;">
+            <div vusion-slot-name="default" class="van-step__title">
+              <div class="van-process-record__card">
+                <div class="van-process-record__card-title">开始（示例）</div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">处理人</div>
+                  <div class="van-process-record__card-content">张三</div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">处理时间</div>
+                  <div class="van-process-record__card-content">2023-12-21 15:40:04</div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">审批操作</div>
+                  <div class="van-process-record__card-content"><span class="submit">-</span></div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">审批意见</div>
+                  <div class="van-process-record__card-content">-</div>
+                </div>
+              </div>
+            </div>
+            <div class="van-step__circle-container"><i class="van-iconv van-step__icon van-step__icon--finish"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                  <use xlink:href="#h5-steps-finish" class="van-shoud-pa"></use>
+                </svg>
+                <!----></i></div>
+            <div class="van-step__line"></div>
+          </div>
+          <div class="van-hairline van-step van-step--vertical van-step--finish" style="--van-step-line-color: #337EFF; --van-step-finish-line-color: #337EFF; --van-step-active-color: #337EFF; --van-step-text-color: #333;">
+            <div vusion-slot-name="default" class="van-step__title">
+              <div class="van-process-record__card">
+                <div class="van-process-record__card-title">领导审批（示例）</div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">处理人</div>
+                  <div class="van-process-record__card-content">李领导</div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">处理时间</div>
+                  <div class="van-process-record__card-content">2023-12-22 15:40:04</div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">审批操作</div>
+                  <div class="van-process-record__card-content"><span class="approve">同意</span></div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">审批意见</div>
+                  <div class="van-process-record__card-content">-</div>
+                </div>
+              </div>
+            </div>
+            <div class="van-step__circle-container"><i class="van-iconv van-step__icon van-step__icon--finish"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                  <use xlink:href="#h5-steps-finish" class="van-shoud-pa"></use>
+                </svg>
+                <!----></i></div>
+            <div class="van-step__line"></div>
+          </div>
+          <div class="van-hairline van-step van-step--vertical van-step--error" style="--van-step-line-color: #337EFF; --van-step-finish-line-color: #337EFF; --van-step-active-color: #337EFF; --van-step-text-color: #333;">
+            <div vusion-slot-name="default" class="van-step__title">
+              <div class="van-process-record__card">
+                <div class="van-process-record__card-title">总监审批（示例）</div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">处理人</div>
+                  <div class="van-process-record__card-content">王总监</div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">处理时间</div>
+                  <div class="van-process-record__card-content">2023-12-23 15:40:04</div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">审批操作</div>
+                  <div class="van-process-record__card-content"><span class="reject">不同意</span></div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">审批意见</div>
+                  <div class="van-process-record__card-content">请做好交接工作再提交审批</div>
+                </div>
+              </div>
+            </div>
+            <div class="van-step__circle-container"><i class="van-iconv van-step__icon van-step__icon--error"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                  <use xlink:href="#h5-steps-error" class="van-shoud-pa"></use>
+                </svg>
+                <!----></i></div>
+            <div class="van-step__line"></div>
+          </div>
+          <div class="van-hairline van-step van-step--vertical van-step--finish" style="--van-step-line-color: #337EFF; --van-step-finish-line-color: #337EFF; --van-step-active-color: #337EFF; --van-step-text-color: #333;">
+            <div vusion-slot-name="default" class="van-step__title">
+              <div class="van-process-record__card">
+                <div class="van-process-record__card-title">开始（示例）</div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">处理人</div>
+                  <div class="van-process-record__card-content">张三</div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">处理时间</div>
+                  <div class="van-process-record__card-content">2023-12-21 15:40:04</div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">审批操作</div>
+                  <div class="van-process-record__card-content"><span class="submit">-</span></div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">审批意见</div>
+                  <div class="van-process-record__card-content">-</div>
+                </div>
+              </div>
+            </div>
+            <div class="van-step__circle-container"><i class="van-iconv van-step__icon van-step__icon--finish"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                  <use xlink:href="#h5-steps-finish" class="van-shoud-pa"></use>
+                </svg>
+                <!----></i></div>
+            <div class="van-step__line"></div>
+          </div>
+          <div class="van-hairline van-step van-step--vertical van-step--finish" style="--van-step-line-color: #337EFF; --van-step-finish-line-color: #337EFF; --van-step-active-color: #337EFF; --van-step-text-color: #333;">
+            <div vusion-slot-name="default" class="van-step__title">
+              <div class="van-process-record__card">
+                <div class="van-process-record__card-title">领导审批（示例）</div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">处理人</div>
+                  <div class="van-process-record__card-content">李领导</div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">处理时间</div>
+                  <div class="van-process-record__card-content">2023-12-22 15:40:04</div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">审批操作</div>
+                  <div class="van-process-record__card-content"><span class="approve">同意</span></div>
+                </div>
+                <div class="van-process-record__card-line">
+                  <div class="van-process-record__card-label">审批意见</div>
+                  <div class="van-process-record__card-content">-</div>
+                </div>
+              </div>
+            </div>
+            <div class="van-step__circle-container"><i class="van-iconv van-step__icon van-step__icon--finish"><svg aria-hidden="true" class="vant-iconv-svg van-shoud-pa">
+                  <use xlink:href="#h5-steps-finish" class="van-shoud-pa"></use>
+                </svg>
+                <!----></i></div>
+            <div class="van-step__line"></div>
+          </div>
+        </div>
+        <div class="van-process-record__timeline-more">查看更多</div>
       </div>
     </div>
   </div>

@@ -68,7 +68,7 @@ namespace nasl.ui {
       // emptyBackground: 'add-sub-large',
       snippets: [{
         title: '幻灯片子项',
-        code: '<van-swipe-item vusion-slot-name="default"><van-image style="width:100%;height:100%" src="https://static-vusion.163yun.com/assets/cloud-ui/1.jpg"></van-image></van-swipe-item>'
+        code: '<van-swipe-item vusion-slot-name="default"><van-image style="width:100%;height:100%" src="https://static-vusion.163yun.com/assets/cloud-ui/6.jpg"></van-image></van-swipe-item>'
       }]
     })
     slotDefault: () => Array<VanSwipeItem>;
@@ -109,7 +109,7 @@ namespace nasl.ui {
       screenX: nasl.core.Integer;
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
-  }) => any ;
+  }) => void;
     @Slot({
       title: 'undefined',
       description: '插入幻灯片内容，如图片'

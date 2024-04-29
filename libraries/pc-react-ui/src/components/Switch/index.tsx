@@ -1,5 +1,7 @@
 import { Switch as AntdSwitch } from 'antd';
-import type { SwitchProps } from 'antd/lib/switch';
+import type { SwitchProps } from 'antd';
+
+import { ProFormSwitch } from '@ant-design/pro-components';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import type { pluginType } from '@/plugins/type';
@@ -12,12 +14,12 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Switch = registerComponet<
+export const Switch = registerComponet<
   SwitchProps,
   pluginType<SwitchProps>
 >(
-  AntdSwitch,
+  ProFormSwitch,
   { plugin, displayName: AntdSwitch.displayName, mapProps },
 );
 
-export default Switch;
+// export default Switch;

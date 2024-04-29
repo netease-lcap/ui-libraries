@@ -16,7 +16,8 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description: '展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑。'
+      description: '展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑。',
+      designerValue: [{}, {}, {}]
     })
     dataSource: nasl.collection.List<T> | { total: nasl.core.Integer; list: nasl.collection.List<T> };
   }

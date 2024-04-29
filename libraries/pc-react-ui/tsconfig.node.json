@@ -7,5 +7,5 @@
     "allowSyntheticDefaultImports": true
   },
   "include": ["vite.config.ts"],
-  "exclude": ["src/**/api.ts"],
+  "exclude": ["src/**/*api.ts"],
 }

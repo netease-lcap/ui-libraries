@@ -22,8 +22,6 @@ exports[`u-switch.vue > Demo-基本状态、只读和禁用 1`] = `
       <span class="button"></span>
       <span class="text" vusion-slot-name="default"></span>
     </label>
-    <!---->
-    <!---->
   </div>
 </div>
 `;

@@ -97,6 +97,7 @@ namespace nasl.ui {
             group: '数据属性',
             title: '单位',
             docDescription: '数值右侧展示的文字',
+            implicitToString: true,
         })
         unit: nasl.core.String;
 
@@ -137,6 +138,7 @@ namespace nasl.ui {
             title: '提示信息',
             description: 'Tooltip提示信息设置。在展示提示信息开关打开的情况下才会生效',
             docDescription: 'tooltip文字设置，在展示Tooltip开关打开的情况下才会生效',
+            implicitToString: true,
         })
         tooltip: nasl.core.String;
 

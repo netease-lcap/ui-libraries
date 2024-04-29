@@ -20,7 +20,7 @@ namespace nasl.ui {
       sync: true,
       docDescription: '当前选择的值'
     })
-    value: nasl.core.Any;
+    value: any;
     @Prop({
       group: '交互属性',
       title: '可取消',
@@ -66,15 +66,15 @@ namespace nasl.ui {
       description: '选择某一项时触发'
     })
     onSelect: (event: {
-      value: nasl.core.Any;
-    }) => any ;
+      value: any;
+    }) => void;
     @Event({
       title: '改变后',
       description: '选择值改变时触发'
     })
     onChange: (event: {
-      value: nasl.core.Any;
-    }) => any ;
+      value: any;
+    }) => void;
     @Slot({
       title: 'undefined',
       description: '插入`<van-capsules-item>`或`<van-capsules-group>`子组件。',
@@ -105,12 +105,13 @@ namespace nasl.ui {
       description: '此项的值',
       docDescription: '此项的值'
     })
-    value: nasl.core.Any;
+    value: any;
     @Prop({
       group: '主要属性',
       title: '标签',
       description: '顶部自定义提示文本',
-      docDescription: '顶部自定义提示文本'
+      docDescription: '顶部自定义提示文本',
+      implicitToString: true,
     })
     label: nasl.core.String = '';
     @Prop({

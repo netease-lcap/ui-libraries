@@ -1,11 +1,13 @@
 <template>
-<label v-show="!isPreview" :class="$style.root" :disabled="currentDisabled" @click="check()"
+<label :class="$style.root" :disabled="currentDisabled" @click="check()"
     tabindex="0" @keydown.space.prevent @keyup.space.prevent="check()"
     @focus="onFocus" @blur="onBlur" v-on="listeners"
-    :readonly="readonly">
-    <span :class="$style.box" :status="status" :disabled="currentDisabled"></span>
+    :readonly="readonly"
+    :preview="isPreview"
+    :show-title="showTitle">
+    <span v-if="!isPreview" :class="$style.box" :status="status" :disabled="currentDisabled"></span>
     <slot></slot>
-    <span vusion-slot-name="item">
+    <span v-if="showTitle" vusion-slot-name="item">
         <slot name="item" :item="node">{{ text }}</slot>
         <s-empty v-if="!$slots.item && !text && $env.VUE_APP_DESIGNER && ($attrs['vusion-node-path'] || $attrs.designer)" inline :class="$style.empty"></s-empty>
     </span>
@@ -33,6 +35,7 @@ export default {
         disabled: { type: Boolean, default: false },
         autofocus: { type: Boolean, default: false },
         node: Object,
+        preview: { type: Boolean, default: false },
     },
     data() {
         return { parentVM: undefined, currentValue: this.value };
@@ -59,6 +62,9 @@ export default {
 
             return 'false';
         },
+        showTitle() { 
+            return this.isPreview ? this.status === 'true' : true;
+        }
     },
     watch: {
         value: {
@@ -79,7 +85,7 @@ export default {
             this.$emit('blur', e);
         },
         check() {
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.disabled || this.isPreview)
                 return;
             const oldValue = this.currentValue;
             const value = !this.currentValue;
@@ -303,4 +309,12 @@ content: "\e682";
 .empty:not(:only-child){
     display: none;
 }
+
+.root[preview=true]:not([show-title=true]) {
+    margin-right: 0;
+}
+.root[preview=true] {
+    display: inline-block;
+}
+
 </style>

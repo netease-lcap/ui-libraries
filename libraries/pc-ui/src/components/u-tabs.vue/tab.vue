@@ -1,5 +1,5 @@
 <template>
-<div :class="$style.root" v-show="selected" vusion-slot-name="default" :vusion-disabled-selected="true">
+<div :class="$style.root" v-if="!tabLoadOnActive || selected" v-show="selected" vusion-slot-name="default" :vusion-disabled-selected="true">
     <slot></slot>
     <s-empty v-if="!$slots.default && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']"></s-empty>
 </div>
@@ -14,6 +14,7 @@ export default {
     parentName: 'u-tabs',
     components: { SEmpty },
     extends: MSinglexItem,
+    inject: ['tabLoadOnActive'],
     props: {
         title: String,
         /* @TODO: Remove this option */
@@ -21,6 +22,7 @@ export default {
             type: Boolean,
             default: false,
         },
+        loadOnActive: { type: Boolean, default: false },
         closable: { type: Boolean, default: false },
         showTabItem: { type: Boolean, default: true },
     },

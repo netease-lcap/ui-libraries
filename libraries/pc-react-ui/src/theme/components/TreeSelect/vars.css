@@ -1,0 +1,24 @@
+/**
+ * @component TreeSelect
+ * @useGlobalTokens ["--cw-color-bg-elevated","--cw-padding-xs","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-border-radius","--cw-motion-duration-slow","--cw-line-width-focus","--cw-color-primary-border","--cw-color-primary","--cw-color-text-disabled","--cw-control-item-bg-hover","--cw-color-bg-text-hover","--cw-color-border","--cw-margin-xxs","--cw-motion-duration-mid","--cw-line-width-bold","--cw-control-interactive-size","--cw-margin-xs","--cw-border-radius-sm","--cw-color-bg-container","--cw-line-width","--cw-line-type","--cw-color-white","--cw-motion-duration-fast","--cw-motion-ease-in-back","--cw-color-primary-hover","--cw-motion-ease-out-back","--cw-font-size-lg","--cw-color-bg-container-disabled"]
+ */
+.cw-nasl.cw-tree-select,
+.cw-nasl.cw-tree-select-css-var {
+  /**
+   * @desc 节点悬浮态背景色
+   * @type color
+   */
+  --cw-tree-select-node-hover-bg: var(--cw-control-item-bg-hover);
+
+  /**
+   * @desc 节点选中态背景色
+   * @type color
+   */
+  --cw-tree-select-node-selected-bg: var(--cw-control-item-bg-active);
+
+  /**
+   * @desc 节点标题高度
+   * @type size
+   */
+  --cw-tree-select-title-height: var(--cw-control-height-sm);
+}

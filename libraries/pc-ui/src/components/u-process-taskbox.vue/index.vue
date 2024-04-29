@@ -85,7 +85,7 @@ export default {
                 this.setTime();
                 const { data = {} } = await this.$processV2.getMyPendingTasks({
                     body: {
-                        page: this.page - 1,
+                        page: this.page,
                         size: this.size,
                     },
                 }) || {};
@@ -156,7 +156,7 @@ export default {
     font-size: 22px;
 }
 .notice::before {
-    icon-font: url('i-material-design.vue/assets/outlined/notifications.svg');
+    /* icon-font: url('i-material-design.vue/assets/outlined/notifications.svg'); */
     font-weight: bold;
 }
 

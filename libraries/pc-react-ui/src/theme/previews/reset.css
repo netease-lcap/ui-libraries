@@ -1,0 +1,4 @@
+.app-demo-dashboard-banner.cw-card {
+  background-color: var(--cw-color-primary) !important;
+  color: var(--cw-color-white) !important;
+}

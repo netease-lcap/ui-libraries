@@ -15,7 +15,7 @@ const config = {
     "@storybook/addon-storyshots",
   ],
   framework: {
-    name: "@storybook/vue-vite",
+    name: "@lcap/storybook-vue-vite",
     options: {
       builder: {
         viteConfigPath: './vite.config.js',

@@ -8,11 +8,9 @@ exports[`u-panel.vue > Demo-基本用法 1`] = `
     </div>
     <a class="close"></a>
     <div class="extra" vusion-slot-name="extra">
-      <!---->
     </div>
   </div>
   <div class="body" vusion-slot-name="default">任务内容
-    <!---->
   </div>
   <div class="foot"></div>
 </div>
@@ -23,11 +21,9 @@ exports[`u-panel.vue > Demo-基本用法 2`] = `
   <div bordered="true" class="root" shadow="always">
     <div class="head">
       <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 任务总览
-        <!---->
       </div>
       <a class="close"></a>
       <div class="extra" vusion-slot-name="extra">
-        <!---->
       </div>
     </div>
     <div class="body" vusion-slot-name="default">
@@ -37,7 +33,6 @@ exports[`u-panel.vue > Demo-基本用法 2`] = `
         <p class="paragraph"></p>
         <p class="paragraph"></p>
       </div>
-      <!---->
     </div>
     <div class="foot"></div>
   </div>
@@ -49,11 +44,9 @@ exports[`u-panel.vue > Demo-基本用法 3`] = `
   <div bordered="true" class="root" shadow="hover">
     <div class="head">
       <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 任务总览
-        <!---->
       </div>
       <a class="close"></a>
       <div class="extra" vusion-slot-name="extra">
-        <!---->
       </div>
     </div>
     <div class="body" vusion-slot-name="default">
@@ -63,7 +56,6 @@ exports[`u-panel.vue > Demo-基本用法 3`] = `
         <p class="paragraph"></p>
         <p class="paragraph"></p>
       </div>
-      <!---->
     </div>
     <div class="foot"></div>
   </div>
@@ -75,11 +67,9 @@ exports[`u-panel.vue > Demo-基本用法 4`] = `
   <div bordered="true" class="root" shadow="never">
     <div class="head">
       <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 任务总览
-        <!---->
       </div>
       <a class="close"></a>
       <div class="extra" vusion-slot-name="extra">
-        <!---->
       </div>
     </div>
     <div class="body" vusion-slot-name="default">
@@ -89,7 +79,6 @@ exports[`u-panel.vue > Demo-基本用法 4`] = `
         <p class="paragraph"></p>
         <p class="paragraph"></p>
       </div>
-      <!---->
     </div>
     <div class="foot"></div>
   </div>
@@ -101,11 +90,9 @@ exports[`u-panel.vue > Demo-基本用法 5`] = `
   <div class="root" shadow="always">
     <div class="head">
       <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 任务总览
-        <!---->
       </div>
       <a class="close"></a>
       <div class="extra" vusion-slot-name="extra">
-        <!---->
       </div>
     </div>
     <div class="body" vusion-slot-name="default">
@@ -115,7 +102,6 @@ exports[`u-panel.vue > Demo-基本用法 5`] = `
         <p class="paragraph"></p>
         <p class="paragraph"></p>
       </div>
-      <!---->
     </div>
     <div class="foot"></div>
   </div>
@@ -130,7 +116,6 @@ exports[`u-panel.vue > Demo-面板分组 1`] = `
     </div>
     <a class="close"></a>
     <div class="extra" vusion-slot-name="extra">
-      <!---->
     </div>
   </div>
   <div class="body" vusion-slot-name="default">
@@ -139,7 +124,6 @@ exports[`u-panel.vue > Demo-面板分组 1`] = `
         <span class="root" vusion-slot-name-edit="text">当天概览</span>
       </div>
       <div class="body" vusion-slot-name="default">概览内容
-        <!---->
       </div>
     </div>
     <div class="root">
@@ -147,10 +131,8 @@ exports[`u-panel.vue > Demo-面板分组 1`] = `
         <span class="root" vusion-slot-name-edit="text">事务分组</span>
       </div>
       <div class="body" vusion-slot-name="default">事务内容
-        <!---->
       </div>
     </div>
-    <!---->
   </div>
   <div class="foot"></div>
 </div>
@@ -161,17 +143,14 @@ exports[`u-panel.vue > Demo-面板分组 2`] = `
   <div bordered="true" class="root" shadow="always">
     <div class="head">
       <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 服务
-        <!---->
       </div>
       <a class="close"></a>
       <div class="extra" vusion-slot-name="extra">
-        <!---->
       </div>
     </div>
     <div class="body" vusion-slot-name="default">
       <div class="root">
         <div class="head" vusion-slot-name="title" vusion-slot-name-edit="title"> 当天概览
-          <!---->
         </div>
         <div class="body" vusion-slot-name="default">
           <div class="root" type="paragraph">
@@ -180,12 +159,10 @@ exports[`u-panel.vue > Demo-面板分组 2`] = `
             <p class="paragraph"></p>
             <p class="paragraph"></p>
           </div>
-          <!---->
         </div>
       </div>
       <div class="root">
         <div class="head" vusion-slot-name="title" vusion-slot-name-edit="title"> 事务分组
-          <!---->
         </div>
         <div class="body" vusion-slot-name="default">
           <div class="root" type="paragraph">
@@ -194,10 +171,8 @@ exports[`u-panel.vue > Demo-面板分组 2`] = `
             <p class="paragraph"></p>
             <p class="paragraph"></p>
           </div>
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
     <div class="foot"></div>
   </div>

@@ -30,6 +30,7 @@ import { EmptyCol } from '../emptycol';
 
 import { FieldMixin } from '../mixins/field';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
+import PreviewMixin from '../mixins/preview';
 
 const EventSlotCommandMap = {
   cancel: 'onCancel',
@@ -37,7 +38,7 @@ const EventSlotCommandMap = {
 };
 
 export default createComponent({
-  mixins: [FieldMixin, EventSlotCommandProvider(EventSlotCommandMap)],
+  mixins: [FieldMixin, EventSlotCommandProvider(EventSlotCommandMap), PreviewMixin],
 
   props: {
     title: String,
@@ -173,9 +174,7 @@ export default createComponent({
       do {
         months.push(new Date(cursor));
         cursor.setMonth(cursor.getMonth() + 1);
-      } while (
-        compareMonth(cursor, transErrorMinOrMaxDate(this.maxDate, 'max')) !== 1
-      );
+      } while (compareMonth(cursor, transErrorMinOrMaxDate(this.maxDate, 'max')) !== 1);
 
       return months;
     },
@@ -263,7 +262,7 @@ export default createComponent({
               },
             ],
           },
-          '*'
+          '*',
         );
       }
       this.$refs.popforcas.togglePModal();
@@ -289,9 +288,7 @@ export default createComponent({
       this.currentValue = val;
 
       const date = dayjs(this.currentValue);
-      const value = date.isValid()
-        ? date.format('YYYY-MM-DD')
-        : this.currentValue;
+      const value = date.isValid() ? date.format('YYYY-MM-DD') : this.currentValue;
       this.$emit('update:value', value);
       this.$emit('update:default-date', value);
     },
@@ -312,9 +309,7 @@ export default createComponent({
       this.currentValue = val;
 
       const date = dayjs(this.currentValue);
-      const value = date.isValid()
-        ? date.format('YYYY-MM-DD')
-        : this.currentValue;
+      const value = date.isValid() ? date.format('YYYY-MM-DD') : this.currentValue;
       this.$emit('update:value', value);
       this.$emit('update:default-date', value);
       this.scrollIntoView();
@@ -328,9 +323,7 @@ export default createComponent({
       this.$nextTick(() => {
         // add Math.floor to avoid decimal height issues
         // https://github.com/youzan/vant/issues/5640
-        this.bodyHeight = Math.floor(
-          this.$refs.body.getBoundingClientRect().height
-        );
+        this.bodyHeight = Math.floor(this.$refs.body.getBoundingClientRect().height);
         this.onScroll();
         this.scrollIntoView();
       });
@@ -432,8 +425,7 @@ export default createComponent({
       }
 
       months.forEach((month, index) => {
-        month.visible =
-          index >= visibleRange[0] - 1 && index <= visibleRange[1] + 1;
+        month.visible = index >= visibleRange[0] - 1 && index <= visibleRange[1] + 1;
       });
 
       /* istanbul ignore else */
@@ -462,9 +454,7 @@ export default createComponent({
       this.currentValue = this.currentDate;
 
       const date = dayjs(this.currentValue);
-      const value = date.isValid()
-        ? date.format('YYYY-MM-DD')
-        : this.currentValue;
+      const value = date.isValid() ? date.format('YYYY-MM-DD') : this.currentValue;
       this.$emit('update:value', value);
       this.$emit('update:default-date', value);
 
@@ -515,21 +505,10 @@ export default createComponent({
       }
 
       if (this.showConfirm) {
-        const text = this.buttonDisabled
-          ? this.confirmDisabledText
-          : this.confirmText;
+        const text = this.buttonDisabled ? this.confirmDisabledText : this.confirmText;
 
         return (
-          <Button
-            round
-            block="blockb"
-            type="info"
-            color={this.color}
-            class={bem('confirm')}
-            disabled={this.buttonDisabled}
-            nativeType="button"
-            onClick={this.onConfirm}
-          >
+          <Button round block="blockb" type="info" color={this.color} class={bem('confirm')} disabled={this.buttonDisabled} nativeType="button" onClick={this.onConfirm}>
             {text || t('confirm')}
           </Button>
         );
@@ -571,17 +550,11 @@ export default createComponent({
       return (
         <div class={bem('picker-top')}>
           {topSlot && (
-            <div
-              vusion-slot-name="picker-top"
-              style="display:flex; justify-content: space-between; align-items: center; min-height:32px;"
-            >
+            <div vusion-slot-name="picker-top" style="display:flex; justify-content: space-between; align-items: center; min-height:32px;">
               {topSlot}
             </div>
           )}
-          <div
-            style="position:absolute; top: 50%; left:50%; transform: translate(-50%,-50%);"
-            vusion-slot-name="pannel-title"
-          >
+          <div style="position:absolute; top: 50%; left:50%; transform: translate(-50%,-50%);" vusion-slot-name="pannel-title">
             {titleSlot || this.title}
           </div>
         </div>
@@ -597,11 +570,7 @@ export default createComponent({
       return (
         <div class={bem([this.isNew && 'new'])}>
           {this.inDesigner() && (
-            <div
-              class={bem('designer-close-button')}
-              vusion-click-enabled="true"
-              onClick={this.designerClose}
-            >
+            <div class={bem('designer-close-button')} vusion-click-enabled="true" onClick={this.designerClose}>
               点击关闭
             </div>
           )}
@@ -634,6 +603,26 @@ export default createComponent({
     const tempSlot = {
       title: () => this.slots('title'),
     };
+
+    if (this.isPreview) {
+      return (
+        <div class={bem('wrapppcalendar')} vusion-click-enabled="true">
+          <Field
+            label={this.labelField}
+            value={this.getTitle() || '--'}
+            scopedSlots={tempSlot}
+            readonly
+            isLink
+            input-align={this.inputAlign || 'right'}
+            // eslint-disable-next-line no-prototype-builtins
+            notitle={!this.$slots.hasOwnProperty('title')}
+            insel={true}
+            nofi={true}
+          />
+        </div>
+      );
+    }
+
     if (this.poppable) {
       return (
         <div class={bem('wrapppcalendar')} vusion-click-enabled="true">

@@ -1,0 +1,60 @@
+/**
+ * @component Card
+ * @useGlobalTokens ["--cw-box-shadow-card","--cw-padding","--cw-padding-lg","--cw-font-size","--cw-color-border-secondary","--cw-box-shadow-tertiary","--cw-color-text","--cw-line-height","--cw-font-family","--cw-color-bg-container","--cw-border-radius-lg","--cw-color-text-heading","--cw-font-weight-strong","--cw-line-width","--cw-line-type","--cw-motion-duration-mid","--cw-color-text-description","--cw-color-primary","--cw-font-height","--cw-margin-xxs","--cw-margin-xs","--cw-font-size-lg","--cw-color-fill-alter"]
+ */
+.cw-nasl.cw-card,
+.cw-nasl.cw-card-css-var {
+  /**
+   * @desc 操作区背景色
+   * @type color
+   */
+  --cw-card-actions-bg: var(--cw-color-bg-container);
+
+  /**
+   * @desc 操作区每一项的外间距
+   * @type input
+   */
+  --cw-card-actions-li-margin: var(--cw-padding-sm) 0;
+
+  /**
+   * @desc 额外区文字颜色
+   * @type color
+   */
+  --cw-card-extra-color: var(--cw-color-text);
+
+  /**
+   * @desc 卡片头部背景色
+   * @type input
+   */
+  --cw-card-header-bg: transparent;
+
+  /**
+   * @desc 卡片头部文字大小
+   * @type size
+   */
+  --cw-card-header-font-size: var(--cw-font-size-lg);
+
+  /**
+   * @desc 小号卡片头部文字大小
+   * @type size
+   */
+  --cw-card-header-font-size-sm: var(--cw-font-size);
+
+  /**
+   * @desc 卡片头部高度
+   * @type size
+   */
+  --cw-card-header-height: calc(calc(var(--cw-font-size-lg) * var(--cw-line-height-lg)) + calc(var(--cw-padding) * 2));
+
+  /**
+   * @desc 小号卡片头部高度
+   * @type size
+   */
+  --cw-card-header-height-sm: calc(calc(var(--cw-font-size-lg) * var(--cw-line-height)) + calc(var(--cw-padding-xs) * 2));
+
+  /**
+   * @desc 内置标签页组件下间距
+   * @type size
+   */
+  --cw-card-tabs-margin-bottom: calc(calc(var(--cw-padding) + var(--cw-line-width)) * -1);
+}
