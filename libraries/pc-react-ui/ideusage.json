@@ -340,7 +340,7 @@
         "display": 3,
         "loopElem": "table > tbody > tr",
         "emptySlot": {
-          "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
+          "condition": "!this.getAttribute('dataSource')?.value && this.elementsLength() === 0",
           "accept": "target.concept === 'Entity'"
         },
         "refInLoop": {
