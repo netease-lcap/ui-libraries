@@ -32,7 +32,7 @@
         </slot>
       </template>
     </u-checkbox>
-    <u-preview v-if="isPreview && $env.VUE_APP_DESIGNER" :text="currentText"></u-preview>
+    <u-preview v-if="isPreview && currentText === null"></u-preview>
   </template>
   <template v-if="$env.VUE_APP_DESIGNER && !dataSource && !$slots.default">
     <span :class="$style.loadContent">{{ treeSelectTip }}</span>
@@ -48,13 +48,14 @@ import MConverter from "../m-converter.vue";
 import SupportDataSource from "../../mixins/support.datasource";
 import UCheckbox from "../u-checkbox.vue";
 import MPreview from '../u-text.vue/preview';
-// import UPreview from '../u-text.vue/preview.vue';
+import UPreview from '../u-text.vue/preview.vue';
 
 export default {
   name: "u-checkboxes",
   childName: "u-checkbox",
   components: {
-    UCheckbox
+    UCheckbox,
+    UPreview
   },
   mixins: [MParent, MField, MConverter, SupportDataSource, MPreview],
   props: {
