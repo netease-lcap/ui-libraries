@@ -34,6 +34,7 @@
     "name": "FormSelect",
     "ideusage": {
       "idetype": "container",
+      "structured": true,
       "actions": {
         "click": {
           "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
@@ -761,7 +762,8 @@
     "ideusage": {
       "idetype": "element",
       "editable": "children",
-      "textholder": "children"
+      "textholder": "children",
+      "forceUpdateWhenAttributeChange": true
     }
   },
   {
