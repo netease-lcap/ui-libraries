@@ -160,7 +160,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '步骤条子组件',
-          code: '<StepsItem title="步骤N" description="步骤详情"></StepsItem>',
+          code: '<StepsItem description="步骤详情"></StepsItem>',
         },
       ],
     })

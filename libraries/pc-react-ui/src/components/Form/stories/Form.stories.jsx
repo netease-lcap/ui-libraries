@@ -147,9 +147,7 @@ export const 默认1 = {
         >
           提交
         </button>
-        <button
-          onClick={() => console.log(ref.current.setValue('time2', ))}
-        >
+        <button onClick={() => console.log(ref.current.setValue('time2'))}>
           设置
         </button>
         <Form
@@ -189,14 +187,14 @@ export const 查询表单 = {
       // const value=ref.current.getValue()
       // CSSMathValue.name id time
       <div style={{ width: '1200px' }}>
-        <QueryForm>
-          <Cascader labelText="123" name="username" />
-          {/* <Cascader labelText="123" name="id" />
+        <QueryForm width="xs">
+          <Cascader labelText="123" width="xl" name="username" />
+          <Cascader labelText="123" name="id" />
           <Cascader labelText="23" name="time" />
           <Cascader labelText="23" />
           <Cascader labelText="23" />
           <Cascader labelText="23" />
-          <Cascader labelText="23" /> */}
+          <Cascader labelText="23" />
         </QueryForm>
       </div>
     );
