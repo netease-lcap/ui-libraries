@@ -8,7 +8,7 @@
       "actions": {
         "click": {
           "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
-          "default":"this.setCacheStatus('open', false)"
+          "default": "this.setCacheStatus('open', false)"
         }
       },
       "mutations": ["FormSelect"]
@@ -38,7 +38,7 @@
       "actions": {
         "click": {
           "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
-          "default":"this.setCacheStatus('open', false)"
+          "default": "this.setCacheStatus('open', false)"
         }
       },
       "displaySlotConditions": {
@@ -62,7 +62,7 @@
       "idetype": "container",
       "structured": "menuSlot",
       "namedSlotOmitWrapper": ["menuSlot"],
-      "parentAccept":"!target.isInSubview",
+      "parentAccept": "!target.isInSubview",
       "translateBindingProperty": ["avatarTitle"]
     }
   },
@@ -259,7 +259,8 @@
   {
     "name": "QueryForm",
     "ideusage": {
-      "idetype": "container"
+      "idetype": "container",
+      "forceUpdateWhenAttributeChange": true
     }
   },
   {
@@ -641,7 +642,7 @@
       "actions": {
         "click": {
           "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
-          "default":"this.setCacheStatus('open', false)"
+          "default": "this.setCacheStatus('open', false)"
         }
       }
     }
@@ -752,7 +753,7 @@
       "actions": {
         "click": {
           "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false))",
-          "default":"this.setCacheStatus('open', false)"
+          "default": "this.setCacheStatus('open', false)"
         }
       }
     }
