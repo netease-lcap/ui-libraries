@@ -42,7 +42,7 @@
     "@ant-design/icons": "^5.2.6",
     "@ant-design/pro-components": "^2.6.48",
     "@types/lodash": "^4.14.202",
-    "@vusion/validator": "0.4.7",
+    "@vusion/validator": "0.4.15",
     "ahooks": "^3.7.8",
     "antd": "5.15.1",
     "classnames": "^2.5.1",
