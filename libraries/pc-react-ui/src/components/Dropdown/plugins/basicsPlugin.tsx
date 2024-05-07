@@ -30,7 +30,6 @@ export function useHandleDataSource(props) {
 
 export function useMergeMenu(props) {
   const { useNavigate } = React.useContext(RouterContext);
-  const navigate = useNavigate?.();
   const fragment = props.get('menuItem');
   const menuItem = React.Children.toArray(_.get(fragment, 'props.children', []));
   const handleLink = useHandleLink();

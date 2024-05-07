@@ -187,15 +187,15 @@ export const 查询表单 = {
       // const value=ref.current.getValue()
       // CSSMathValue.name id time
       <div style={{ width: '1200px' }}>
-        <QueryForm width="xs">
+        <QueryFilter width="xs" grid>
           <Cascader labelText="123" width="xl" name="username" />
-          <Cascader labelText="123" name="id" />
+          <Cascader labelText="123" span={12} name="id" />
           <Cascader labelText="23" name="time" />
           <Cascader labelText="23" />
           <Cascader labelText="23" />
           <Cascader labelText="23" />
           <Cascader labelText="23" />
-        </QueryForm>
+        </QueryFilter>
       </div>
     );
   },

@@ -80,8 +80,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '占据数',
-      description: '列跨越的格数',
-      docDescription: '当前列表项占的列数，为空默认取列表组的列数值，优先取列表项的值',
+      description: '包含列的数量',
+      docDescription: '包含列的数量',
       setter: {
         concept: 'NumberInputSetter',
       },
