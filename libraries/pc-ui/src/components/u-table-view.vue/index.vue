@@ -349,30 +349,34 @@
                         </td>
                     </tr>
                     <tr key="loading" v-else-if="(currentData === undefined && !currentError) || currentLoading"><!-- 初次加载与加载更多 loading 合并在一起 -->
-                        <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="loading">
-                            <slot name="loading"><u-spinner :class="$style.spinner"></u-spinner> {{ loadingText }}</slot>
-                            <s-empty v-if="$env.VUE_APP_DESIGNER
-                                && !$slots.loading
-                                && $scopedSlots
-                                && !($scopedSlots.loading && $scopedSlots.loading())
-                                && !!$attrs['vusion-node-path']">
-                            </s-empty>
+                        <td :class="[$style.center, $style.centerSticky]" :colspan="visibleColumnVMs.length">
+                            <div :class="$style.wrap" :style="{ width: number2Pixel(rootWidth) }" vusion-slot-name="loading">
+                                <slot name="loading"><u-spinner :class="$style.spinner"></u-spinner> {{ loadingText }}</slot>
+                                <s-empty v-if="$env.VUE_APP_DESIGNER
+                                    && !$slots.loading
+                                    && $scopedSlots
+                                    && !($scopedSlots.loading && $scopedSlots.loading())
+                                    && !!$attrs['vusion-node-path']">
+                                </s-empty>
+                            </div>
                         </td>
                     </tr>
                     <tr key="error" v-else-if="currentData === null || currentError">
-                        <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="error">
-                            <slot name="error">
-                                <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
-                                <u-linear-layout layout="block" justify="center">
-                                    {{ errorText }}
-                                </u-linear-layout>
-                            </slot>
-                            <s-empty v-if="$env.VUE_APP_DESIGNER
-                                && !$slots.error
-                                && $scopedSlots
-                                && !($scopedSlots.error && $scopedSlots.error())
-                                && !!$attrs['vusion-node-path']">
-                            </s-empty>
+                        <td :class="[$style.center, $style.centerSticky]" :colspan="visibleColumnVMs.length">
+                            <div :class="$style.wrap" :style="{ width: number2Pixel(rootWidth) }" vusion-slot-name="error">
+                                <slot name="error">
+                                    <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
+                                    <u-linear-layout layout="block" justify="center">
+                                        {{ errorText }}
+                                    </u-linear-layout>
+                                </slot>
+                                <s-empty v-if="$env.VUE_APP_DESIGNER
+                                    && !$slots.error
+                                    && $scopedSlots
+                                    && !($scopedSlots.error && $scopedSlots.error())
+                                    && !!$attrs['vusion-node-path']">
+                                </s-empty>
+                            </div>
                         </td>
                     </tr>
                     <tr key="loadMore" v-else-if="pageable === 'load-more' && currentDataSource.hasMore()">
@@ -386,19 +390,21 @@
                         </td>
                     </tr>
                     <tr key="empty" v-else-if="!currentData.length || currentEmpty">
-                        <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="empty">
-                            <slot name="empty">
-                                <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
-                                <u-linear-layout layout="block" justify="center">
-                                    {{ emptyText }}
-                                </u-linear-layout>
-                            </slot>
-                            <s-empty v-if="$env.VUE_APP_DESIGNER
-                                && !$slots.empty
-                                && $scopedSlots
-                                && !($scopedSlots.empty && $scopedSlots.empty())
-                                && !!$attrs['vusion-node-path']">
-                            </s-empty>
+                        <td :class="[$style.center, $style.centerSticky]" :colspan="visibleColumnVMs.length">
+                            <div :class="$style.wrap" :style="{ width: number2Pixel(rootWidth) }" vusion-slot-name="empty">
+                                <slot name="empty">
+                                    <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
+                                    <u-linear-layout layout="block" justify="center">
+                                        {{ emptyText }}
+                                    </u-linear-layout>
+                                </slot>
+                                <s-empty v-if="$env.VUE_APP_DESIGNER
+                                    && !$slots.empty
+                                    && $scopedSlots
+                                    && !($scopedSlots.empty && $scopedSlots.empty())
+                                    && !!$attrs['vusion-node-path']">
+                                </s-empty>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -607,6 +613,7 @@ export default {
             columnVMsMap: {},
             tableHeadTrArr: [],
             currentPageSize: undefined,
+            rootWidth: undefined,
         };
     },
     computed: {
@@ -1112,6 +1119,7 @@ export default {
                         parentEl = parentEl.parentElement;
                     rootWidth = parentEl ? parentEl.offsetWidth : 0;
                 }
+                this.rootWidth = rootWidth;
 
                 // 重新计算列宽等，会导致表格重新渲染，如果组件因为重新渲染而加载，会导致宽高变化，导致handleResize再次触发
                 // 如果是监听Resize事件进来的，如果reComputedWidth是false，就不要重复计算
@@ -3509,6 +3517,15 @@ export default {
 .center {
     text-align: center;
     color: #999 !important;
+}
+.centerSticky {
+    padding: 0 !important;
+}
+.centerSticky .wrap {
+    position: sticky;
+    left: 0;
+    overflow: hidden;
+    padding: var(--table-view-td-padding);
 }
 
 .sort {
