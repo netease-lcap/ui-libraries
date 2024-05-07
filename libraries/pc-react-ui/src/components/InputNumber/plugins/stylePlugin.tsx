@@ -18,6 +18,8 @@ export function useHandleStyleTheme(props) {
             fontSize,
           }),
         },
+
+        cssVar: { prefix: 'cw', key: 'cw-nasl' },
       }}
       >
         <BaseComponent {...localProps} />
