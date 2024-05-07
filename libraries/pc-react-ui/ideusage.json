@@ -681,7 +681,10 @@
       "idetype": "popover",
       "structured": true,
       "namedSlotOmitWrapper": ["menuItem"],
-      "childAccept": "this.getDefaultElements().length < 1"
+      "childAccept": {
+        "default": "this.getDefaultElements().length < 1",
+        "menuItem": "target.tag === 'MenuItem'"
+      }
     }
   },
   {
@@ -697,7 +700,7 @@
     "ideusage": {
       "idetype": "container",
       "structured": true,
-      "parentAccept": "target.tag === 'Menu' || (target.tag === 'template' && target.slotTarget === 'menuSlot')",
+      "parentAccept": "target.tag === 'Menu' || (target.tag === 'template' && ['menuSlot', 'menuItem'].includes(target.slotTarget) )",
       "displaySlotConditions": {
         "labelSlot": "this.getAttribute('labelIsSlot').value === true"
       },
