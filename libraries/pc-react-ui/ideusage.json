@@ -702,7 +702,7 @@
         "labelSlot": "this.getAttribute('labelIsSlot').value === true"
       },
       "events": {
-        "click": "!!this.getAncestor('ProLayout')"
+        "click": "!!this.getAncestor('ProLayout') && !this.getAncestor('Dropdown')"
       }
     }
   },
