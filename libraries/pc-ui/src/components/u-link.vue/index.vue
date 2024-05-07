@@ -137,6 +137,7 @@ export default {
                 if (e.ctrlKey || e.shiftKey || e.metaKey || e.altKey)
                     return;
                 e.preventDefault();
+                e.returnValue = false;
                 this.navigate(to);
             }
         },
