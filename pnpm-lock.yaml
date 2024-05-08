@@ -114,8 +114,8 @@ importers:
         specifier: 0.4.11
         version: 0.4.11
       '@vusion/validator':
-        specifier: 0.4.15
-        version: 0.4.15
+        specifier: 0.4.15-beta.1
+        version: 0.4.15-beta.1
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
@@ -280,8 +280,8 @@ importers:
         specifier: ^4.14.202
         version: 4.14.202
       '@vusion/validator':
-        specifier: 0.4.15
-        version: 0.4.15
+        specifier: 0.4.15-beta.1
+        version: 0.4.15-beta.1
       ahooks:
         specifier: ^3.7.8
         version: 3.7.8(react@18.2.0)
@@ -431,8 +431,8 @@ importers:
         specifier: 0.4.11
         version: 0.4.11
       '@vusion/validator':
-        specifier: 0.4.15
-        version: 0.4.15
+        specifier: 0.4.15-beta.1
+        version: 0.4.15-beta.1
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
@@ -7192,8 +7192,8 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /@vusion/validator@0.4.15:
-    resolution: {integrity: sha512-TbDMz9FGx8ORuSwKURH9ejCdLTZEg6/R4My6Lub3gUxy47wFCrVuHjnFqCB+vqw9YvgLAamJ6VD5MIvZYFt9kw==}
+  /@vusion/validator@0.4.15-beta.1:
+    resolution: {integrity: sha512-UVDfA8w6hw8l10V9RypWhePjpS1LHNCc1IV9erDgVoV0TTUUAoNE0gYR5vs84UybeOnX5U1nT0DlfiwWGLjiVw==}
     dependencies:
       '@types/lodash': 4.14.202
       '@types/validator': 13.11.8
