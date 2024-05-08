@@ -2418,7 +2418,12 @@ export default {
                         index: this.findItemIndex(item),
                     },
                 };
-                e.dataTransfer.setData('application/json', JSON.stringify(dragStartData));
+                // fix: 树型表格间拖拽，有parentPointer，JSON.stringify报错
+                const replacer = (key, value) => {
+                    if (['parentPointer', 'toggle'].includes(key)) return undefined
+                    return value
+                }
+                e.dataTransfer.setData('application/json', JSON.stringify(dragStartData, replacer));
                 // 当不可拖拽节点里的文字双击选中时再拖拽，会触发dragstart事件，dragover的时候也会响应
                 // 这里增加信息，dragover的时候可以处理是否响应
                 e.dataTransfer.setData('info/acrosstabledrag', '');
