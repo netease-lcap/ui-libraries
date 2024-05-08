@@ -96,6 +96,7 @@ namespace nasl.ui {
       title: '最大输入长度',
       setter: {
         concept: "NumberInputSetter",
+        precision: 0,
         min: 1,
         max: 6
       },

@@ -56,11 +56,6 @@ namespace nasl.ui {
     })
     private value: any;
     @Prop({
-      title: '文本字段名',
-      description: '选项文本的字段名'
-    })
-    private textField: (item: T) => nasl.core.String;
-    @Prop({
       title: '值字段名',
       description: '选项值的字段名'
     })
@@ -122,7 +117,8 @@ namespace nasl.ui {
       description: '设置分页大小，单位为px。',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 1
       },
       if: _ => !!_.pageable
     })
@@ -192,7 +188,9 @@ namespace nasl.ui {
       title: '展示时长',
       description: '设置刷新成功后提示展示时长，单位为ms。',
       setter: {
-        concept: "NumberInputSetter"
+        concept: "NumberInputSetter",
+        precision: 0,
+        min: 0
       }
     })
     successDuration: nasl.core.Integer = 500;
@@ -262,7 +260,9 @@ namespace nasl.ui {
       title: '网格数',
       description: '设置每页排列几项',
       setter: {
-        concept: "NumberInputSetter"
+        concept: "NumberInputSetter",
+        precision: 0,
+        min: 1
       }
     })
     col: nasl.core.Integer = 2;
@@ -282,6 +282,15 @@ namespace nasl.ui {
       }
     })
     private disabled: nasl.core.Boolean = false;
+    @Prop<VanGridViewOptions<T, V, P, M>, 'textField'>({
+      group: '数据属性',
+      title: '文本字段名',
+      description: '选项文本的字段名，可用于前端筛选时的匹配',
+      setter: {
+        concept: "PropertySelectSetter"
+      }
+    })
+    textField: (item: T) => any = ((item: any) => item.text) as any;
     @Event({
       title: '加载后',
       description: '加载时触发'

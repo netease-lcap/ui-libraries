@@ -74,6 +74,7 @@ namespace nasl.ui {
       description: '输入框内可输入的最大字符数，超过时不支持输入。',
       setter: {
         concept: "NumberInputSetter",
+        precision: 0,
         placeholder: '不限制'
       },
       onChange: [{

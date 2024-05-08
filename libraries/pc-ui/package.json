@@ -39,7 +39,7 @@
     "@joskii/jflow-vue2-plugin": "^0.1.0",
     "@popperjs/core": "^2.10.2",
     "@vusion/utils": "0.4.11",
-    "@vusion/validator": "0.4.12",
+    "@vusion/validator": "0.4.15-beta.1",
     "animate.css": "^4.1.1",
     "countup.js": "^1.9.3",
     "dayjs": "^1.10.7",
@@ -58,7 +58,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
-    "@nasl/types": "0.1.7-beta.1",
+    "@nasl/types": "0.1.7-beta.2",
     "@lcap/builder": "workspace:*",
     "@lcap/storybook-vue-vite": "workspace:*",
     "@lcap/vite-plugin-vue2": "workspace:*",
@@ -103,7 +103,7 @@
   "scripts": {
     "dev": "npm run storybook",
     "storybook": "storybook dev -p 6006",
-    "build": "vite build && tsc -p tsconfig.api.json && npm pack",
+    "build": "lcap-scripts build",
     "deploy:dev": "lcap-scripts deploy --platform http://defaulttenant.lcap.codewave-dev.163yun.com/",
     "deploy:test": "lcap-scripts deploy --platform http://defaulttenant.lcap.codewave-test.163yun.com/",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",

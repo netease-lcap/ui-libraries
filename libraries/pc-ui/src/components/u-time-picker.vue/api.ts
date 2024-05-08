@@ -65,7 +65,7 @@ namespace nasl.ui {
           docDescription: '默认显示的日期值。',
           if: _ => _.range !== true,
       })
-      value: nasl.core.String = '';
+      value: nasl.core.String | nasl.core.Time = '';
 
       @Prop<UTimePickerOptions, 'startTime'>({
           group: '数据属性',
@@ -74,7 +74,7 @@ namespace nasl.ui {
           sync: true,
           if: _ => _.range === true,
       })
-      startTime: nasl.core.String;
+      startTime: nasl.core.String | nasl.core.Time;
 
       @Prop<UTimePickerOptions, 'endTime'>({
           group: '数据属性',
@@ -83,7 +83,7 @@ namespace nasl.ui {
           sync: true,
           if: _ => _.range === true,
       })
-      endTime: nasl.core.String;
+      endTime: nasl.core.String | nasl.core.Time;
 
       @Prop({
           group: '数据属性',
@@ -91,7 +91,7 @@ namespace nasl.ui {
           description: '最小可选的时间值，填写null则不限制，日期填写格式为“00:00:00”',
           docDescription: '支持输入的最小时间。',
       })
-      minTime: nasl.core.String = '00:00:00';
+      minTime: nasl.core.String | nasl.core.Time = '00:00:00';
 
       @Prop({
           group: '数据属性',
@@ -99,7 +99,7 @@ namespace nasl.ui {
           description: '最大可选的时间值，填写null则不限制，日期填写格式为“00:00:00”',
           docDescription: '支持输入的最大时间',
       })
-      maxTime: nasl.core.String = '23:59:59';
+      maxTime: nasl.core.String | nasl.core.Time = '23:59:59';
 
       @Prop<UTimePickerOptions, 'showFormatter'>({
           group: '主要属性',

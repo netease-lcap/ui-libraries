@@ -6,7 +6,7 @@
          :horizontal-center="horizontalCenter"
          v-on="$listeners">
         <template v-if="ready && src || isEmpty">
-            <s-image class="" :src="convertedSrc" :style="imageStyle" v-bind="$attrs" @click="onClick" />
+            <s-image class="" :src="convertedSrc" :style="imageStyle" v-bind="$attrs" @click.native="onClick" :preview="preview"/>
             <u-lightbox v-if="preview" :visible.sync="visible" close-button>
                 <u-lightbox-item title="图片预览">
                     <s-image class="" :src="convertedSrc"/>
@@ -14,7 +14,7 @@
             </u-lightbox>
         </template>
         <template v-else-if="placeholderReady && convertedPlaceholderSrc || placeholderIsEmpty">
-            <s-image class="" :src="convertedPlaceholderSrc" :style="imageStyle" v-bind="$attrs" @click="onClick" hsj="hsj" />
+            <s-image class="" :src="convertedPlaceholderSrc" :style="imageStyle" v-bind="$attrs" @click.native="onClick" hsj="hsj" :preview="preview"/>
             <u-lightbox v-if="preview" :visible.sync="visible" close-button>
                 <u-lightbox-item title="图片预览">
                     <s-image class="" :src="convertedPlaceholderSrc" />
@@ -296,6 +296,9 @@ export default {
     max-width: none;
     max-height: none;
     object-position: left top;
+}
+.root img[preview] {
+    cursor: pointer;
 }
 
 .root .loading {

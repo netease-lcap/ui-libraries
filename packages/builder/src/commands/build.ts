@@ -3,6 +3,6 @@ import logger from '../utils/logger';
 
 export default () => {
   logger.start('start building......');
-  execSync('npx vite build && tsc -p tsconfig.api.json && npm pack');
+  execSync('npx vite build');
   logger.success('build success!');
 };

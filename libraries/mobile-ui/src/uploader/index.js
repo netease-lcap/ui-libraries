@@ -173,11 +173,11 @@ export default createComponent({
       if (this.converter === 'json')
         // fix for u-validator rules="required"
         return Array.isArray(value) && value.length === 0
-          ? '[]'
+          ? null
           : JSON.stringify(value);
       if (this.converter === 'simple')
         return Array.isArray(value) && value.length === 0
-          ? ''
+          ? null
           : this.simpleConvert(value);
       return value;
     },
@@ -615,7 +615,13 @@ export default createComponent({
 
     genPreviewList() {
       if (this.previewImage) {
-        return this.currentValue.map(this.genPreviewItem);
+        if (this.currentValue?.length) {
+          return this.currentValue.map(this.genPreviewItem);
+        }
+
+        if (this.isPreview) {
+          return '--';
+        }
       }
     },
 
@@ -625,7 +631,7 @@ export default createComponent({
       if (this.currentValue.length >= this.maxCount || !this.showUpload) {
         return;
       }
-      if (this.isPreview && !this.inDesigner()) return;
+      if (this.isPreview) return;
 
       const slot = this.slots();
 

@@ -88,7 +88,10 @@ namespace nasl.ui {
     showbaget: nasl.core.Boolean = false;
     @Prop({
       group: '数据属性',
-      title: '徽章值'
+      title: '徽章值',
+      setter: {
+        concept: "NumberInputSetter"
+      }
     })
     badge: nasl.core.Decimal;
     @Prop({

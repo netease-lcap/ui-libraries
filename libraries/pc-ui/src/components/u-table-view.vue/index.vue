@@ -1081,10 +1081,10 @@ export default {
                 return new Constructor({ ...options, tag: 'u-table-view' });
             } else if (dataSource instanceof Object) {
                 if (dataSource.hasOwnProperty('list') && Array.isArray(dataSource.list))
-                    return new DataSource(Object.assign(options, dataSource, {
+                    return new Constructor(Object.assign({ tag: 'u-table-view' }, options, dataSource, {
                         data: dataSource.list,
                     }));
-                return new DataSource(Object.assign(options, dataSource));
+                return new Constructor(Object.assign({ tag: 'u-table-view' }, options, dataSource));
             } else
                 return dataSource;
         },
@@ -1127,6 +1127,9 @@ export default {
                     let defaultColumnWidth = this.defaultColumnWidth;
                     if (String(defaultColumnWidth).endsWith('%')) {
                         defaultColumnWidth = (parseFloat(defaultColumnWidth) * rootWidth) / 100;
+                    } else if (defaultColumnWidth) {
+                        defaultColumnWidth = parseFloat(defaultColumnWidth);
+                        defaultColumnWidth = isNaN(defaultColumnWidth) ? 0 : defaultColumnWidth;
                     }
                     defaultColumnWidth = defaultColumnWidth || 0;
                     this.visibleColumnVMs.forEach((columnVM, index) => {
@@ -1183,6 +1186,8 @@ export default {
                         valueColumnVMs.forEach((columnVM) => columnVM.computedWidth = columnVM.computedWidth + averageWidth);
                     } else if (remainingWidth < 0 && noWidthColumnVMs.length) {
                         noWidthColumnVMs.forEach((columnVM) => columnVM.computedWidth = defaultColumnWidth || 100);
+                    } else if(remainingWidth === 0 && noWidthColumnVMs.length && defaultColumnWidth) {
+                        noWidthColumnVMs.forEach((columnVM) => columnVM.computedWidth = defaultColumnWidth);
                     }
 
                     // 如果所有列均有值，则总宽度有超出的可能。否则总宽度为根节点的宽度。
@@ -1447,7 +1452,7 @@ export default {
                 && this.$refs.scrollView[2].$refs.wrap !== target
                 && (this.$refs.scrollView[2].$refs.wrap.scrollTop = scrollTop);
         },
-        load(more) {
+        load(more, paging = {}) {
             const dataSource = this.currentDataSource;
             if (!dataSource)
                 return;
@@ -1459,7 +1464,7 @@ export default {
                 this.currentLoading = true;
                 this.currentError = false;
             }
-            dataSource[more ? 'loadMore' : 'load']()
+            dataSource[more ? 'loadMore' : 'load'](paging.offset, paging.limit, paging.number)
                 .then((data) => {
                     // 防止同步数据使页面抖动
                     // setTimeout(() => this.currentData = data);
@@ -1836,7 +1841,7 @@ export default {
             this.currentDataSource.page(paging);
             this.$emit('update:page-number', number, this);
             this.$emit('page', paging, this);
-            this.load();
+            this.load(false, { number, limit: size });
         },
         onClickSort(columnVM) {
             let order;
@@ -2998,6 +3003,11 @@ export default {
             }
         },
         handleResizeListener() {
+            if (this.virtual) {
+                this.virtualIndex = 0;
+                this.virtualTop = 0;
+                this.virtualBottom = 0;
+            }
             const rootWidth = this.$refs.root.offsetWidth;
             // 放在线性布局flex下，或者某些设置了fit-content，table-width会缓慢增长，导致表格一直动
             // 如果两次width变化不大，不要重新计算每列的computedWidth等
@@ -3005,6 +3015,11 @@ export default {
             this.handleResize(reComputedWidth);
         },
         reHandleResize() {
+            if (this.virtual) {
+                this.virtualIndex = 0;
+                this.virtualTop = 0;
+                this.virtualBottom = 0;
+            }
             this.preRootWidth = null;
             this.handleResize(true);
         },
@@ -3276,6 +3291,23 @@ export default {
         },
         onXScrollParentScroll(event) {
             this.syncHeadScroll();
+        },
+        loadTo(page) {
+            const dataSource = this.currentDataSource;
+            if (!(dataSource && dataSource.paging))
+                return;
+            if(dataSource._load && typeof dataSource._load === 'function') {
+                dataSource.clearLocalData();
+            }
+            let currentPage = page;
+            if(['', null, undefined].includes(page)) {
+                currentPage = dataSource.paging.number;
+            }
+            if(currentPage === dataSource.paging.number) {
+                this.load(false, { number: currentPage });
+            } else {
+                dataSource.paging.number = page;
+            }
         },
     },
 };

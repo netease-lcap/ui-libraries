@@ -129,7 +129,7 @@ namespace nasl.ui {
             snippets: [
                 {
                     title: '幻灯片子项',
-                    code: '<u-carousel-item><u-image style="width: 100%; height: 100%" fit="cover" src="https://static-vusion.163yun.com/assets/cloud-ui/1.jpg"></u-carousel-item>',
+                    code: '<u-carousel-item><u-image style="width: 100%; height: 100%" fit="cover" src="https://static-vusion.163yun.com/assets/cloud-ui/6.jpg"></u-carousel-item>',
                 },
             ],
         })
