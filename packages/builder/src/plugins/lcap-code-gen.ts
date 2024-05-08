@@ -39,11 +39,11 @@ function genVarCssCode(themeVarCssPath, componentFolder) {
 
 function genComponentStoriesCode(componentFolder, framework) {
   const imports: string[] = [
-    `import createComponentPreview from '${path.resolve(__dirname, `../../input/${framework}/createComponentPreview.jsx`)}';`,
+    `import createComponentPreview from '${path.resolve(__dirname, `../../input/${framework}/createComponentPreview`)}';`,
   ];
   const stories: string[] = ['const stories = ['];
 
-  const previewFiles = glob.sync('*/index.{tsx,ts,jsx,js}', { cwd: componentFolder, absolute: true });
+  const previewFiles = glob.sync('*/index.{tsx,ts,jsx,js,vue}', { cwd: componentFolder, absolute: true });
   previewFiles.forEach((filePath) => {
     const compPath = filePath.substring(0, filePath.lastIndexOf('/'));
     const compName = compPath.substring(compPath.lastIndexOf('/') + 1);
@@ -82,11 +82,23 @@ function genThemePagePreviewMapCode(componentFolder, previewPages: Array<{ name:
   ].join('\n\n');
 }
 
-function genThemeEntryCode(framework) {
+function genThemeEntryCode(framework, rootPath) {
+  if (framework === 'vue2') {
+    return [
+      'import Vue from \'vue\';',
+      `import UILibrary from '${path.resolve(rootPath, './src/index')}';`,
+      `import App from '${path.resolve(__dirname, '../../input/vue2/App')}';`,
+      'Vue.use(UILibrary);',
+      'Vue.config.productionTip = false;',
+      'const app = new Vue({ ...App });',
+      'app.$mount("#app");',
+    ].join('\n');
+  }
+
   const importCodes: string[] = [
     'import React from \'react\';',
     'import ReactDOM from \'react-dom/client\'',
-    `import App from '${path.resolve(__dirname, `../../input/${framework}/App`)}';`,
+    `import App from '${path.resolve(__dirname, '../../input/react/App')}';`,
   ];
 
   const bodyCodes: string[] = [
@@ -100,7 +112,7 @@ function genThemeEntryCode(framework) {
   ].join('\n\n');
 }
 
-function genThemePagePreviewWrapCode(componentFolder) {
+function genThemePagePreviewWrapCode(componentFolder, framework) {
   let filePath = '';
   const index = [
     '.js',
@@ -117,6 +129,19 @@ function genThemePagePreviewWrapCode(componentFolder) {
   });
 
   if (index === -1) {
+    if (framework === 'vue2') {
+      return [
+        'export const renderAppPreview = (app) => app;',
+        'export const ComponentWrap = {',
+        '  name: "ThemeComponentWrap",',
+        '  props: ["demo", "actived", "title", "name"],',
+        '  render(h) {',
+        '    return h("div", { on: this.$listeners }, [h(this.demo)])',
+        '  }',
+        '}',
+      ];
+    }
+
     return [
       'import React from \'react\'',
       '',
@@ -186,11 +211,11 @@ export default (options: LcapCodeGenOption = {}) => {
       }
 
       if (id === virtualThemePreviewWrapFileId) {
-        return genThemePagePreviewWrapCode(componentFolder);
+        return genThemePagePreviewWrapCode(componentFolder, options.framework);
       }
 
       if (id === virtualThemeEntryFileId) {
-        return genThemeEntryCode(options.framework);
+        return genThemeEntryCode(options.framework, cwd);
       }
 
       if (id === themeId) {
