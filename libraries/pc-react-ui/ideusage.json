@@ -8,7 +8,10 @@
       "events": {
         "mousedown": true
       },
-      "mutations": ["FormSelect"]
+      "mutations": ["FormSelect"],
+      "additionalAttribute": {
+        "notFoundContent": "{<div></div>}"
+      }
     }
   },
   {
@@ -40,6 +43,9 @@
         "label": "this.getAttribute('labelIsSlot').value === true",
         "description": false,
         "extra": false
+      },
+      "additionalAttribute": {
+        "notFoundContent": "{<div></div>}"
       }
     }
   },
