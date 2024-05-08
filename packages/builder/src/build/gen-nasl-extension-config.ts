@@ -118,6 +118,8 @@ export default async function getNaslExtensionConfig({
       framework,
     });
 
+    componentConfig.category = `${pkgInfo.name}(${pkgInfo.title})`;
+
     return componentConfig;
   });
   const logics = await genNaslLogicsConfig(rootPath);
