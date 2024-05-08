@@ -133,7 +133,6 @@
               else
                   this.selectedVM = itemVM; // Assign and sync `value`
               const value = this.selectedVM && this.selectedVM.value;
-              const selectedItem = this.selectedVM && this.selectedVM.item;
               this.$emit('input', value, this);
               this.$emit('update', value, this);
               this.$emit('update:value', value, this); // Emit `after-` events
@@ -141,11 +140,11 @@
                   value,
                   oldValue,
                   selectedVM: this.selectedVM,
-                  selectedItem,
+                  selectedItem: this.selectedVM && this.selectedVM.item ? this.selectedVM.item : this.selectedVM,
                   itemVM,
-                  item: itemVM && itemVM.item,
+                  item: itemVM && itemVM.item ? itemVM.item : itemVM,
                   oldVM,
-                  oldItem: oldVM && oldVM.item,
+                  oldItem: oldVM && oldVM.item ? oldVM.item : oldVM,
               }, this);
           },
       },
