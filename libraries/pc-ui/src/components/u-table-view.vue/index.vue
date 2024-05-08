@@ -350,7 +350,7 @@
                     </tr>
                     <tr key="loading" v-else-if="(currentData === undefined && !currentError) || currentLoading"><!-- 初次加载与加载更多 loading 合并在一起 -->
                         <td :class="[$style.center, $style.centerSticky]" :colspan="visibleColumnVMs.length">
-                            <div :class="$style.wrap" :style="{ width: number2Pixel(rootWidth) }" vusion-slot-name="loading">
+                            <div :class="$style.wrap" :style="{ width: rootWidth? number2Pixel(rootWidth): undefined }" vusion-slot-name="loading">
                                 <slot name="loading"><u-spinner :class="$style.spinner"></u-spinner> {{ loadingText }}</slot>
                                 <s-empty v-if="$env.VUE_APP_DESIGNER
                                     && !$slots.loading
@@ -363,7 +363,7 @@
                     </tr>
                     <tr key="error" v-else-if="currentData === null || currentError">
                         <td :class="[$style.center, $style.centerSticky]" :colspan="visibleColumnVMs.length">
-                            <div :class="$style.wrap" :style="{ width: number2Pixel(rootWidth) }" vusion-slot-name="error">
+                            <div :class="$style.wrap" :style="{ width: rootWidth ? number2Pixel(rootWidth): undefined }" vusion-slot-name="error">
                                 <slot name="error">
                                     <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
                                     <u-linear-layout layout="block" justify="center">
@@ -391,7 +391,7 @@
                     </tr>
                     <tr key="empty" v-else-if="!currentData.length || currentEmpty">
                         <td :class="[$style.center, $style.centerSticky]" :colspan="visibleColumnVMs.length">
-                            <div :class="$style.wrap" :style="{ width: number2Pixel(rootWidth) }" vusion-slot-name="empty">
+                            <div :class="$style.wrap" :style="{ width: rootWidth ? number2Pixel(rootWidth): undefined }" vusion-slot-name="empty">
                                 <slot name="empty">
                                     <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
                                     <u-linear-layout layout="block" justify="center">

@@ -55,7 +55,7 @@ exports[`u-grid-layout.vue > Demo- 1`] = `
                 <tbody>
                   <tr>
                     <td class="center centerSticky" colspan="4">
-                      <div class="wrap" style="width: 0px;" vusion-slot-name="empty">
+                      <div class="wrap" vusion-slot-name="empty">
                         <div class="root" direction="horizontal" justify="center" layout="block" type vusion-slot-name="default"> 暂无数据
                         </div>
                       </div>
