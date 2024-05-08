@@ -64,7 +64,11 @@ export default createComponent({
       currentValue: defaultValue,
     };
   },
-  computed: {},
+  computed: {
+    ifLimit() {
+      return this.showWordLimit && this.maxlength;
+    },
+  },
   mounted() {
     this.$nextTick(this.adjustSize);
   },
@@ -170,7 +174,7 @@ export default createComponent({
         const count = (this.currentValue || '').length;
 
         return (
-          <div class={bem('word-limit')}>
+          <div class={bem('word-limit')} ref="limit">
             <span class={bem('word-num')}>{count}</span>/{this.maxlength}
           </div>
         );
@@ -181,13 +185,13 @@ export default createComponent({
       this.currentValue = this.value;
     },
     adjustSize() {
-      const { input } = this.$refs;
+      const { input, wrap, limit } = this.$refs;
 
       const scrollTop = getRootScrollTop();
       input.style.height = 'auto';
 
       let height = input.scrollHeight;
-      const { wrap } = this.$refs;
+
       // eslint-disable-next-line radix
       const wrapHeight = parseInt(window.getComputedStyle(wrap).height);
       if (isObject(this.autosize || input.autosize)) {
@@ -202,7 +206,9 @@ export default createComponent({
       }
 
       if (height) {
-        input.style.height = (wrapHeight > height ? wrapHeight : height) + 'px';
+        const h = wrapHeight > height ? wrapHeight : height;
+        const limitH = this.ifLimit ? parseInt(window.getComputedStyle(limit).height) : 0;
+        input.style.height = `${h - limitH}px`;
 
         // https://github.com/youzan/vant/issues/9178
         setRootScrollTop(scrollTop);
@@ -230,7 +236,7 @@ export default createComponent({
     },
   },
   render() {
-    const ifLimit = this.showWordLimit && this.maxlength;
+    const ifLimit = this.ifLimit;
     const inputAlign = this.vanField?.getProp('inputAlign');
 
     if (this.isPreview) {

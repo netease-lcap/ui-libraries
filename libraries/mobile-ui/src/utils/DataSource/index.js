@@ -231,11 +231,6 @@ const VueDataSource = Vue.extend({
             this.originTotal = arrangedData.length;
           }
 
-          // 重置清除标志
-          if (this.cleared) {
-            this.cleared = false;
-          }
-
           if (this.queryChanged) {
             this.queryChanged = false;
           }
@@ -252,6 +247,7 @@ const VueDataSource = Vue.extend({
             this.originTotal = Infinity; // originTotal 必须清空，否则空列表不会更新
             this.arranged = false;
             this.initialLoaded = false;
+            this.allData = null;
 
             this.cleared = true;
         },
@@ -317,6 +313,11 @@ const VueDataSource = Vue.extend({
               this.paging.number = 1;
             }
             offset = 0;
+
+            // 重置清除标志
+            if (this.cleared) {
+              this.cleared = false;
+            }
           }
 
           // 不需要走后端

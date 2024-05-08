@@ -74,7 +74,8 @@ namespace nasl.ui {
           title: '子元素块级布局'
         }]
       },
-      if: _ => _.mode === 'inline' || _.mode === 'block'
+      if: _ => _.mode === 'inline' || _.mode === 'block',
+      tabKind: 'style'
     })
     layout: 'none' | 'inline' | 'block' = 'none';
     @Prop({
@@ -126,7 +127,8 @@ namespace nasl.ui {
       },
       onChange: [{
         clear: ['justify', 'alignment', 'wrap', 'layout']
-      }]
+      }],
+      tabKind: 'style'
     })
     mode: 'inline' | 'block' | 'flex' = 'block';
     @Prop<VanLinearLayoutOptions, 'direction'>({
@@ -147,7 +149,8 @@ namespace nasl.ui {
       },
       onChange: [{
         clear: ['justify', 'alignment']
-      }]
+      }],
+      tabKind: 'style'
     })
     direction: 'horizontal' | 'vertical' = 'horizontal';
     @Prop<VanLinearLayoutOptions, 'justify'>({
@@ -227,7 +230,8 @@ namespace nasl.ui {
           tooltip: '占满容器高度'
         }]
       },
-      if: _ => _.mode === 'flex' && _.direction === 'horizontal'
+      if: _ => _.mode === 'flex' && _.direction === 'horizontal',
+      tabKind: 'style'
     })
     alignment: 'start' | 'center' | 'end' | 'baseline' | 'stretch' = 'stretch';
     @Prop<VanLinearLayoutOptions, '_alignment'>({
@@ -256,7 +260,8 @@ namespace nasl.ui {
           tooltip: '占满容器宽度'
         }]
       },
-      if: _ => _.mode === 'flex' && _.direction === 'vertical'
+      if: _ => _.mode === 'flex' && _.direction === 'vertical',
+      tabKind: 'style'
     })
     _alignment: 'start' | 'center' | 'end' | 'stretch' = 'stretch';
     @Prop<VanLinearLayoutOptions, '_justify'>({
@@ -300,7 +305,8 @@ namespace nasl.ui {
           gap: 'normal'
         },
         if: _ => _ === 'space-around'
-      }]
+      }],
+      tabKind: 'style'
     })
     _justify: 'start' | 'center' | 'end' | 'space-between' | 'space-around' = 'start';
     @Prop<VanLinearLayoutOptions, 'wrap'>({
@@ -310,7 +316,8 @@ namespace nasl.ui {
       setter: {
         concept: "SwitchSetter"
       },
-      if: _ => _.mode === 'flex'
+      if: _ => _.mode === 'flex',
+      tabKind: 'style'
     })
     wrap: nasl.core.Boolean = true;
     @Event({

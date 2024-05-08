@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div>
+    <div class="van-fieldtextarea__newwrap">
+      <div class="van-fieldtextarea__wrap-con"><span class="van-fieldtextarea__control van-fieldtextarea__control--custom van-fieldtextarea__control--min-height" style="height: auto;">我是多行输入我是多行输入我是多行输入我是多行输入我是多行输入我是多行输入我是多行输入我是多行输入我是多行输入我是多行输入我是多行输入我是多行输入我是多行输入我是多行输入我是多行输入我是多行输入我是多行输入</span></div>
+    </div>
+  </div>
+  <div>
+    <div class="van-fieldtextarea__newwrap van-fieldtextarea__newwrap--limit" style="height: 120px; background-color: bisque;">
+      <div class="van-fieldtextarea__wrap-con"><textarea role="fieldtextarea" placeholder="" class="van-fieldtextarea__control van-fieldtextarea__control--custom van-fieldtextarea__control--min-height" style="height: auto;"></textarea></div>
+      <div class="van-fieldtextarea__word-limit"><span class="van-fieldtextarea__word-num">99</span>/100</div>
+    </div>
+  </div>
+</div>
+`;

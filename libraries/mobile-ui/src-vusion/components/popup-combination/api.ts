@@ -123,7 +123,8 @@ namespace nasl.ui {
       description: '当触发方式为“悬浮”时，提示内容消失延迟时间，单位为ms。',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0
       }
     })
     hideDelay: nasl.core.Integer = 200;

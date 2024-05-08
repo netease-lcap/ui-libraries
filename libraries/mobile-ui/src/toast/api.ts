@@ -70,7 +70,8 @@ namespace nasl.ui {
       description: '自动关闭的延时，单位毫秒。设为 0 时不自动关闭',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0
       }
     })
     duration: nasl.core.Integer = 2000;

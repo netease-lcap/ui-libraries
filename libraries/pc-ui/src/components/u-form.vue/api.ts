@@ -108,7 +108,8 @@ namespace nasl.ui {
                 options: [{ title: '行内展示' }, { title: '块级展示，宽度会充满父元素' }, { title: '栅格展示，可设置列数' }],
             },
             onChange: [
-                { clear: ['repeat'] }
+                { clear: ['repeat'] },
+                { update: { repeat: 1 }, if: (_) => _ === 'inline-flex' }
             ],
         })
         layout: 'inline' | 'block' | 'inline-flex' = 'block';
