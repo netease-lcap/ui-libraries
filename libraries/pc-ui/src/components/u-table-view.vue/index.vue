@@ -729,6 +729,15 @@ export default {
             if (typeof dataSource === 'function' && String(dataSource) === String(oldDataSource))
                 return;
 
+            // fix: 2864106089210368，首次进入页面时单击分页切换效果没有实现，需多次点击才生效
+            const replacer = (key, value) => {
+                if (['parentPointer', 'toggle'].includes(key)) return undefined
+                return value
+            }
+            if (JSON.stringify(dataSource, replacer) === JSON.stringify(oldDataSource, replacer) && this.currentDataSource) {
+                return;
+            }
+
             // 拖拽树数据改变的时候，会进入这里的watch，数据会不一致，所以阻止进入
             if (this.preventDatasourceWatch) {
                 return;
