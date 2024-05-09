@@ -31,6 +31,7 @@
                             :exact="$at2(node, exactField)"
                             :value="$at2(node, valueField)"
                             :icon="$at2(node, iconField)"
+                            :item="node"
                             :link-type="$at2(node, linkTypeField)"
                             :href-and-to="$at2(node, hrefAndToField)"
                             :to="$at2(node, toField)"
