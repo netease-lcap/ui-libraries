@@ -63,7 +63,10 @@
       "structured": "menuSlot",
       "namedSlotOmitWrapper": ["menuSlot"],
       "parentAccept": "!target.isInSubview",
-      "translateBindingProperty": ["avatarTitle"]
+      "translateBindingProperty": ["avatarTitle"],
+      "childAccept": {
+        "menuSlot": "target.tag === 'MenuItem'"
+      }
     }
   },
   {
