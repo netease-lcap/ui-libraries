@@ -24,14 +24,14 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
-    const [value, setValue] = React.useState(true);
+    const [value, setValue] = React.useState(false);
     React.useEffect(() => {
       setTimeout(() => {
-        setValue(false);
+        setValue(true);
         console.log(value, 'value');
       }, 3000);
     }, []);
-    return <Text key={value} {...args} copyable={value} />;
+    return <Text code={value}>1234</Text>;
   },
   args: {
     color: 'magenta',

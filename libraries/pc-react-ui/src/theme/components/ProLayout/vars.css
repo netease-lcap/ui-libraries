@@ -1,5 +1,5 @@
 /**
- * @component Menu
+ * @component ProLayout
  * @useGlobalTokens ["--cw-color-bg-elevated","--cw-control-height-lg","--cw-font-size","--cw-motion-duration-slow","--cw-motion-duration-mid","--cw-motion-ease-in-out","--cw-padding-xs","--cw-padding","--cw-color-split","--cw-line-width","--cw-border-radius-lg","--cw-line-type","--cw-color-text","--cw-line-height","--cw-font-family","--cw-motion-ease-out","--cw-border-radius","--cw-margin","--cw-color-text-light-solid","--cw-padding-xl","--cw-font-size-lg","--cw-box-shadow-secondary","--cw-margin-xs","--cw-line-width-focus","--cw-color-primary-border","--cw-motion-ease-out-quint","--cw-motion-ease-in-quint","--cw-motion-ease-out-circ","--cw-motion-ease-in-out-circ"]
  */
 .cw-nasl.cw-menu,

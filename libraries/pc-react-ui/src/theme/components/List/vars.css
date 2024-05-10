@@ -1,6 +1,5 @@
 /**
  * @component List
- * @useGlobalTokens ["--cw-control-height-lg","--cw-control-height","--cw-padding-sm","--cw-margin-lg","--cw-padding","--cw-color-primary","--cw-padding-xs","--cw-margin","--cw-color-text","--cw-color-text-description","--cw-motion-duration-slow","--cw-line-width","--cw-font-size","--cw-line-height","--cw-font-family","--cw-margin-xxs","--cw-margin-xxl","--cw-font-height","--cw-color-split","--cw-font-size-sm","--cw-color-text-disabled","--cw-font-size-lg","--cw-line-height-lg","--cw-line-type","--cw-padding-lg","--cw-border-radius-lg","--cw-color-border","--cw-screen-sm","--cw-screen-md","--cw-margin-sm"]
  */
 .cw-nasl.cw-list,
 .cw-nasl.cw-list-css-var {

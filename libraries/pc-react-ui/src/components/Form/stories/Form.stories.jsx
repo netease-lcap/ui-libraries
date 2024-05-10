@@ -7,6 +7,7 @@ import {
   ProFormCascader,
   ProFormDateRangePicker,
   QueryFilter,
+  ProFormDatePicker,
 } from '@ant-design/pro-components';
 import {
   Input,
@@ -147,9 +148,7 @@ export const 默认1 = {
         >
           提交
         </button>
-        <button
-          onClick={() => console.log(ref.current.setValue('time2', ))}
-        >
+        <button onClick={() => console.log(ref.current.setValue('time2'))}>
           设置
         </button>
         <Form
@@ -189,15 +188,23 @@ export const 查询表单 = {
       // const value=ref.current.getValue()
       // CSSMathValue.name id time
       <div style={{ width: '1200px' }}>
-        <QueryForm>
-          <Cascader labelText="123" name="username" />
-          {/* <Cascader labelText="123" name="id" />
+        <QueryFilter width="xs">
+          <Cascader labelText="123" width="xl" name="username" />
+          <Cascader labelText="123" span={12} name="id" />
           <Cascader labelText="23" name="time" />
           <Cascader labelText="23" />
           <Cascader labelText="23" />
           <Cascader labelText="23" />
-          <Cascader labelText="23" /> */}
-        </QueryForm>
+          <Cascader labelText="23" />
+        </QueryFilter>
+        <QueryFilter defaultCollapsed split>
+          <ProFormText name="name" span={4} width="xs" label="应用名称" />
+          <ProFormDatePicker name="createDate" label="创建时间" />
+          <ProFormText name="status" label="应用状态" />
+          <ProFormDatePicker name="replyDate" label="响应日期" />
+          <ProFormDatePicker name="startDate" label="创建时间" />
+          <ProFormDatePicker name="endDate" label="结束时间" />
+        </QueryFilter>
       </div>
     );
   },

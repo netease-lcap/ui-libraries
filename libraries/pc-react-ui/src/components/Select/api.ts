@@ -153,7 +153,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    allowClear: nasl.core.Boolean = false;
+    allowClear: nasl.core.Boolean = true;
 
     // @Prop({
     //   group: '交互属性',
