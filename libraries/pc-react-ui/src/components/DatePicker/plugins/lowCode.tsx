@@ -20,7 +20,7 @@ export function useHandleNodePath(props) {
     if (!isForm) return;
     datePicker?.setAttribute('data-tag-name', 'FormDatePicker');
     datePicker?.setAttribute('data-has-mutation', 'true');
-  }, []);
+  }, [id]);
   return {
     [$deletePropsList]: deletePropsList,
     'data-node-id': id,

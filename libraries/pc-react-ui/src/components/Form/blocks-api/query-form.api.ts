@@ -89,26 +89,15 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         // options: [{ title: '行内展示' }, { title: '块级展示，宽度会充满父元素' }, { title: '栅格展示，可设置列数' }],
         options: [
-          { title: '行内展示' },
           { title: '水平展示' },
           { title: '竖向展示' },
         ],
       },
       onChange: [{ clear: ['repeat'] }],
     })
-    layout: 'inline' | 'horizontal' | 'vertical' = 'horizontal';
+    layout:  'horizontal' | 'vertical' = 'horizontal';
 
-    @Prop({
-      group: '样式属性',
-      title: '栅格水平间隔',
-      description: '栅格列之间的间隔',
-      docDescription:
-        '栅格列之间的间隔，支持无（0）、迷你（4）、小（8）、正常（16）、巨大（32）共6种间隔模式。',
-      setter: {
-        concept: 'NumberInputSetter',
-      },
-    })
-    gutterJustify: nasl.core.Decimal = 0;
+ 
 
     @Prop({
       group: '样式属性',
@@ -146,36 +135,6 @@ namespace nasl.ui {
     })
     labelAlign?: 'left' | 'right' = 'right';
 
-    @Prop({
-      group: '样式属性',
-      title: '尺寸',
-      description: '设置表单项大小',
-      docDescription: '设置表单项大小',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: '超小' },
-          { title: '小' },
-          { title: '正常' },
-          { title: '大' },
-          { title: '超大' },
-          { title: '充满' },
-        ],
-      },
-    })
-    width: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '100%';
-
-    @Prop({
-      group: '样式属性',
-      title: '栅格垂直间隔',
-      description: '栅格列之间的间隔',
-      docDescription:
-        '栅格列之间的间隔，支持无（0）、迷你（4）、小（8）、正常（16）、巨大（32）共6种间隔模式。',
-      setter: {
-        concept: 'NumberInputSetter',
-      },
-    })
-    gutterAlign: nasl.core.Decimal = 0;
 
     @Prop({
       group: '样式属性',

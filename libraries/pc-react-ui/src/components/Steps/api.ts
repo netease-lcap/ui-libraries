@@ -160,7 +160,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '步骤条子组件',
-          code: '<StepsItem description="步骤详情"></StepsItem>',
+          code: '<StepsItem ></StepsItem>',
         },
       ],
     })
@@ -188,7 +188,6 @@ namespace nasl.ui {
   }
 
   export class StepsItemOptions<T> extends ViewComponentOptions {
-
     @Prop({
       title: '描述信息',
       description: '步骤描述信息',
