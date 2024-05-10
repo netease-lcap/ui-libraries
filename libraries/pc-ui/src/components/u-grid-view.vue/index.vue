@@ -29,6 +29,7 @@ export default {
 /** 避免父级设置了white-space:nowrap，导致item没有换行 */
 .root {
     white-space: normal;
+    overflow: hidden; /* bug-2854963854918912: foot长度超出 */
 }
 
 .body{
