@@ -8,7 +8,10 @@
       "events": {
         "mousedown": true
       },
-      "mutations": ["FormSelect"]
+      "mutations": ["FormSelect"],
+      "additionalAttribute": {
+        "notFoundContent": "{<div></div>}"
+      }
     }
   },
   {
@@ -40,6 +43,9 @@
         "label": "this.getAttribute('labelIsSlot').value === true",
         "description": false,
         "extra": false
+      },
+      "additionalAttribute": {
+        "notFoundContent": "{<div></div>}"
       }
     }
   },
@@ -57,7 +63,10 @@
       "structured": "menuSlot",
       "namedSlotOmitWrapper": ["menuSlot"],
       "parentAccept": "!target.isInSubview",
-      "translateBindingProperty": ["avatarTitle"]
+      "translateBindingProperty": ["avatarTitle"],
+      "childAccept": {
+        "menuSlot": "target.tag === 'MenuItem'"
+      }
     }
   },
   {
@@ -681,7 +690,10 @@
       "idetype": "popover",
       "structured": true,
       "namedSlotOmitWrapper": ["menuItem"],
-      "childAccept": "this.getDefaultElements().length < 1"
+      "childAccept": {
+        "default": "this.getDefaultElements().length < 1",
+        "menuItem": "target.tag === 'MenuItem'"
+      }
     }
   },
   {
@@ -697,7 +709,7 @@
     "ideusage": {
       "idetype": "container",
       "structured": true,
-      "parentAccept": "target.tag === 'Menu' || (target.tag === 'template' && target.slotTarget === 'menuSlot')",
+      "parentAccept": "target.tag === 'Menu' || (target.tag === 'template' && ['menuSlot', 'menuItem'].includes(target.slotTarget) )",
       "displaySlotConditions": {
         "labelSlot": "this.getAttribute('labelIsSlot').value === true"
       },
