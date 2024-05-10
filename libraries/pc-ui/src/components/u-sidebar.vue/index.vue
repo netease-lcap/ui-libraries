@@ -43,9 +43,9 @@
                 icotype="only"
             >
             </i-ico>
-            <u-tooltip v-if="!$env.VUE_APP_DESIGNER" :hide-delay="500" placement="right">
+            <!-- <u-tooltip v-if="!$env.VUE_APP_DESIGNER" :hide-delay="500" placement="right">
               {{ currentCollapse ? '展开' : '收起' }}
-            </u-tooltip>
+            </u-tooltip> -->
           </div>
         </div>
     </nav>
