@@ -548,7 +548,8 @@ export default {
             }
             let showDate = this.format(this.finalDateTime, 'YYYY-MM-DD');
             if (this.checkDate(value)) {
-                const date = new Date(this.transformDate(value + ' ' + this.spMinTime));
+                const minTimeStr = !this.spMinTime || this.spMinTime === 'undefined' ? '00:00:00' : this.spMinTime;
+                const date = new Date(this.transformDate(`${value} ${minTimeStr}`));
                 const isOutOfRange = this.isOutOfRange(date); // 超出范围还原成上一次值
                 if (!isOutOfRange) {
                     showDate = this.format(date, 'YYYY-MM-DD');
