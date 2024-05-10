@@ -693,6 +693,9 @@
       "childAccept": {
         "default": "this.getDefaultElements().length < 1",
         "menuItem": "target.tag === 'MenuItem'"
+      },
+      "additionalAttribute": {
+        "menu": "{{ triggerSubMenuAction: 'click' }}"
       }
     }
   },
@@ -715,7 +718,7 @@
         "labelSlot": "this.getAttribute('labelIsSlot').value === true"
       },
       "events": {
-        "click": "!!this.getAncestor('ProLayout') && !this.getAncestor('Dropdown')"
+        "click":  "this.filterElement(el => el.tag === 'MenuItem').length > 0"
       }
     }
   },
