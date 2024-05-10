@@ -709,6 +709,7 @@
     "ideusage": {
       "idetype": "container",
       "structured": true,
+      "childAccept": "target.tag === 'MenuItem'",
       "parentAccept": "target.tag === 'Menu' || (target.tag === 'template' && ['menuSlot', 'menuItem'].includes(target.slotTarget) )",
       "displaySlotConditions": {
         "labelSlot": "this.getAttribute('labelIsSlot').value === true"
