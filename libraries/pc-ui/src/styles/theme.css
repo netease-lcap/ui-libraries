@@ -968,7 +968,8 @@
 
     /* @component u-grid-view @hidden */
     --grid-view-item-space: var(--space-base);
-    --grid-view-foot-padding: calc(var(--grid-view-item-space) / 2);
+    --grid-view-foot-padding: calc(var(--grid-view-item-space) / 2) 0;
+    --grid-view-border-radius: var(--border-radius-base);
 
     /* @component u-tree-view */
     --tree-view-background: white; /* @type color */ /* @desc 树形列表节点的背景色,如 #223325 */ /* @prefix tree-view */ /* @depStaticStyles ["background-color"] */

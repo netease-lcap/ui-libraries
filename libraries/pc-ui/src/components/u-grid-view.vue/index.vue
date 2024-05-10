@@ -29,7 +29,7 @@ export default {
 /** 避免父级设置了white-space:nowrap，导致item没有换行 */
 .root {
     white-space: normal;
-    overflow: hidden; /* bug-2854963854918912: foot长度超出 */
+    border-radius: var(--grid-view-border-radius);
 }
 
 .body{
@@ -44,8 +44,10 @@ export default {
     text-align: right;
     margin: 0;
 }
+/** Bug-2854963854918912: foot 数据网格分页栏超出容器长度 */
 .foot {
-    margin: 0 calc(var(--grid-view-item-space) / (-2));
     padding: var(--grid-view-foot-padding);
+    border-bottom-left-radius: var(--grid-view-border-radius);
+    border-bottom-right-radius: var(--grid-view-border-radius);
 }
 </style>
