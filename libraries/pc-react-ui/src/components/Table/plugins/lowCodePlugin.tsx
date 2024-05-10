@@ -12,6 +12,6 @@ export function useHandleRef(props) {
   React.useEffect(() => {
     const myTable = document.querySelector(`[data-node-id=${nodeId}]`)?.closest(`.${prefix}-table-wrapper`);
     myTable?.setAttribute('data-nodepath', nodePath);
-  }, []);
+  }, [nodeId]);
   return { [$deletePropsList]: deletePropsList, 'data-node-id': nodeId };
 }

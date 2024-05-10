@@ -80,7 +80,6 @@ export function useHandleSelectKey(props) {
 }
 export function useHandleMenuSlot(props) {
   const { useNavigate, useLocation } = React.useContext(RouterContext);
-  const navigate = useNavigate?.();
   const location = useLocation?.();
   const fragment = props.get('menuSlot');
   const menuProps = props.get('menuProps');

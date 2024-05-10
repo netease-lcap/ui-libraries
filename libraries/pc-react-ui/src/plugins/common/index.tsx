@@ -6,7 +6,7 @@ export function useHandleLink() {
   const { useNavigate } = React.useContext(RouterContext);
   const navigate = useNavigate?.();
   return async (targetUrl, target) => {
-    if (_.isValidLink(targetUrl)) {
+    if (_.isValidLink(targetUrl) || target === '_blank') {
       const a = document.createElement('a');
       a.setAttribute('href', targetUrl);
       a.setAttribute('target', target);

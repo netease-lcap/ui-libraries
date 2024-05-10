@@ -12,6 +12,7 @@ export function useHandleStyleTheme(props) {
   const render = React.useCallback((localProps) => {
     return (
       <ConfigProvider theme={{
+        cssVar: { prefix: 'cw', key: 'cw-nasl' },
         components: {
           DatePicker: _.filterUnderfinedValue({
             colorText: color,

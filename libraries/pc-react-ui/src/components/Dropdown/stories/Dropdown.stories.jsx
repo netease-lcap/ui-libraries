@@ -64,7 +64,14 @@ export const 默认 = {
               ide-iscontainer="true"
               key="component-2"
               label="2"
-            />
+            >
+              <MenuItem
+                data-nodepath="rootview.0.0.1"
+                ide-iscontainer="true"
+                key="component-3"
+                label="1"
+              />
+            </MenuItem>
             <MenuItem
               data-nodepath="rootview.0.0.1"
               ide-iscontainer="true"

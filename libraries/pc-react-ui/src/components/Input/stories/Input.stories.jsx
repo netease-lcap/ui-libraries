@@ -38,6 +38,7 @@ export const 默认 = {
         labelText="1234"
         value={value}
         allowClear
+        className="myInput"
         data-nodepath="1234"
         onChange={onchange}
       />

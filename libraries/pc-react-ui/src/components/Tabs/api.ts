@@ -150,6 +150,16 @@ namespace nasl.ui {
 
     @Prop({
       group: '样式属性',
+      title: '选项卡间隙',
+      docDescription: '选项卡间隙',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    tabBarGutter: nasl.core.Integer;
+
+    @Prop({
+      group: '样式属性',
       title: '标签尺寸',
       docDescription: '标签展示的尺寸',
       setter: {

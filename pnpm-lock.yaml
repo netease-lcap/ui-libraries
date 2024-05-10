@@ -422,8 +422,8 @@ importers:
         specifier: ^0.1.22
         version: 0.1.24
       '@joskii/jflow-vue2-plugin':
-        specifier: ^0.1.0
-        version: 0.1.0(@joskii/jflow-core@0.1.24)(vue@2.6.12)
+        specifier: ^0.1.1
+        version: 0.1.1(@joskii/jflow-core@0.1.24)(vue@2.6.12)
       '@popperjs/core':
         specifier: ^2.10.2
         version: 2.11.8
@@ -3827,8 +3827,8 @@ packages:
       object-diff: 0.0.4
     dev: false
 
-  /@joskii/jflow-vue2-plugin@0.1.0(@joskii/jflow-core@0.1.24)(vue@2.6.12):
-    resolution: {integrity: sha512-iFPqSqRmKX5dTm0FDT/WGZwVn2IrJzfKM7HQILGzrj/hLClth3iDB1DM4bbHVZBJ8daAJJSGsIvric4H3pnuIg==}
+  /@joskii/jflow-vue2-plugin@0.1.1(@joskii/jflow-core@0.1.24)(vue@2.6.12):
+    resolution: {integrity: sha512-VTchhcyR+pryeqlkKvrgD5Zy+hMXlpm2/omXklDFIics2jmgOqnn3DbBktTjONssScH5dw/nvBQaNUvwecXJfg==}
     peerDependencies:
       '@joskii/jflow-core': ^0.1.0
       vue: ^2.6.11

@@ -53,12 +53,14 @@ export function useHandleGutter(props) {
   const gutterJustify = props.get('gutterJustify', 0);
   const gutterAlign = props.get('gutterAlign', 0);
   const wrapperColSpan = props.get('wrapperColSpan');
+  const labelCol = props.get('labelCol');
+  const wrapperCol = props.get('wrapperCol');
   const labelWidth = props.get('labelWidth');
   return {
     rowProps: {
       gutter: [gutterJustify, gutterAlign],
     },
-    labelCol: { flex: `${labelWidth}px` },
-    wrapperCol: { span: wrapperColSpan },
+    labelCol: { ...labelCol, flex: `${labelWidth}px` },
+    wrapperCol: { ...wrapperCol, span: wrapperColSpan },
   };
 }

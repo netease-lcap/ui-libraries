@@ -17,7 +17,7 @@ export function useHandleNodepath(props) {
     if (!isForm) return;
     inputNumber?.setAttribute('data-tag-name', 'FormInputNumber');
     inputNumber?.setAttribute('data-has-mutation', 'true');
-  }, []);
+  }, [nodeid]);
   return {
     'data-node-id': nodeid,
     [$deletePropsList]: deletePropsList,
