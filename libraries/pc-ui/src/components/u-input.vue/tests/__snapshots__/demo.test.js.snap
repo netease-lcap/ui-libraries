@@ -154,8 +154,8 @@ exports[`u-input.vue > Demo-可清除 1`] = `
 `;
 
 exports[`u-input.vue > Demo-和倒计时一起使用 1`] = `
-<div class="root" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">中文名</span>
     </label>
@@ -170,7 +170,7 @@ exports[`u-input.vue > Demo-和倒计时一起使用 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">倒计时</span>
     </label>
