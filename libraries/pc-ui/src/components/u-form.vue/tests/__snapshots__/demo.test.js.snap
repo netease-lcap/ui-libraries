@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`u-form.vue > Demo-Bubble 1`] = `
-<div class="root" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">用户名</span>
     </label>
@@ -17,7 +17,7 @@ exports[`u-form.vue > Demo-Bubble 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">邮箱</span>
     </label>
@@ -72,7 +72,7 @@ exports[`u-form.vue > Demo-Bubble 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">手机号码</span>
     </label>
@@ -87,7 +87,7 @@ exports[`u-form.vue > Demo-Bubble 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label"></span>
     </label>
@@ -105,7 +105,7 @@ exports[`u-form.vue > Demo-Bubble 1`] = `
 
 exports[`u-form.vue > Demo-Header 外观 1`] = `
 <div>
-  <div class="root" gap="large" layout="block">
+  <div class="root" gap="none" gap-height="large" gap-width="large" layout="block">
     <div appear="header" class="root" size="normal">
       <div class="head" title="域名信息">
         <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 域名信息
@@ -117,7 +117,7 @@ exports[`u-form.vue > Demo-Header 外观 1`] = `
         <div class="body" vusion-slot-name="default"></div>
       </transition-stub>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">域名管理密码</span>
       </label>
@@ -135,7 +135,7 @@ exports[`u-form.vue > Demo-Header 外观 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">实例名称</span>
       </label>
@@ -150,7 +150,7 @@ exports[`u-form.vue > Demo-Header 外观 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">　</span>
       </label>
@@ -176,7 +176,7 @@ exports[`u-form.vue > Demo-Header 外观 1`] = `
         <div class="body" vusion-slot-name="default"></div>
       </transition-stub>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">规格</span>
       </label>
@@ -245,7 +245,7 @@ exports[`u-form.vue > Demo-Header 外观 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">端口号</span>
       </label>
@@ -260,7 +260,7 @@ exports[`u-form.vue > Demo-Header 外观 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">公网带宽</span>
       </label>
@@ -311,7 +311,7 @@ exports[`u-form.vue > Demo-Header 外观 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label"></span>
       </label>
@@ -330,7 +330,7 @@ exports[`u-form.vue > Demo-Header 外观 1`] = `
 
 exports[`u-form.vue > Demo-分组 1`] = `
 <div>
-  <div class="root" gap="large" layout="block">
+  <div class="root" gap="none" gap-height="large" gap-width="large" layout="block">
     <div class="root" size="normal">
       <div class="head" title="域名信息">
         <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 域名信息
@@ -340,7 +340,7 @@ exports[`u-form.vue > Demo-分组 1`] = `
       </div>
       <transition-stub>
         <div class="body" vusion-slot-name="default">
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">域名管理密码</span>
             </label>
@@ -358,7 +358,7 @@ exports[`u-form.vue > Demo-分组 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">实例名称</span>
             </label>
@@ -373,7 +373,7 @@ exports[`u-form.vue > Demo-分组 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">　</span>
             </label>
@@ -400,7 +400,7 @@ exports[`u-form.vue > Demo-分组 1`] = `
       </div>
       <transition-stub>
         <div class="body" vusion-slot-name="default">
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">规格</span>
             </label>
@@ -469,7 +469,7 @@ exports[`u-form.vue > Demo-分组 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">端口号</span>
             </label>
@@ -484,7 +484,7 @@ exports[`u-form.vue > Demo-分组 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">公网带宽</span>
             </label>
@@ -538,7 +538,7 @@ exports[`u-form.vue > Demo-分组 1`] = `
         </div>
       </transition-stub>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label"></span>
       </label>
@@ -557,7 +557,7 @@ exports[`u-form.vue > Demo-分组 1`] = `
 
 exports[`u-form.vue > Demo-分组 Collapsible 1`] = `
 <div>
-  <div class="root" gap="large" layout="block">
+  <div class="root" gap="none" gap-height="large" gap-width="large" layout="block">
     <div class="root" collapsible="true" size="normal">
       <div class="head" title="域名信息">
         <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 域名信息
@@ -568,7 +568,7 @@ exports[`u-form.vue > Demo-分组 Collapsible 1`] = `
       </div>
       <transition-stub>
         <div class="body" vusion-slot-name="default">
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">域名管理密码</span>
             </label>
@@ -586,7 +586,7 @@ exports[`u-form.vue > Demo-分组 Collapsible 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">实例名称</span>
             </label>
@@ -601,7 +601,7 @@ exports[`u-form.vue > Demo-分组 Collapsible 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">　</span>
             </label>
@@ -629,7 +629,7 @@ exports[`u-form.vue > Demo-分组 Collapsible 1`] = `
       </div>
       <transition-stub>
         <div class="body" vusion-slot-name="default">
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">规格</span>
             </label>
@@ -698,7 +698,7 @@ exports[`u-form.vue > Demo-分组 Collapsible 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">端口号</span>
             </label>
@@ -713,7 +713,7 @@ exports[`u-form.vue > Demo-分组 Collapsible 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">公网带宽</span>
             </label>
@@ -767,7 +767,7 @@ exports[`u-form.vue > Demo-分组 Collapsible 1`] = `
         </div>
       </transition-stub>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label"></span>
       </label>
@@ -786,7 +786,7 @@ exports[`u-form.vue > Demo-分组 Collapsible 1`] = `
 
 exports[`u-form.vue > Demo-分组 Small 1`] = `
 <div>
-  <div class="root" layout="inline">
+  <div class="root" gap="none" gap-height="normal" gap-width="normal" layout="inline">
     <div class="root" collapsible="true" size="small">
       <div class="head" title="常用条件">
         <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title"> 常用条件
@@ -797,7 +797,7 @@ exports[`u-form.vue > Demo-分组 Small 1`] = `
       </div>
       <transition-stub>
         <div class="body" vusion-slot-name="default">
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">名称</span>
             </label>
@@ -812,7 +812,7 @@ exports[`u-form.vue > Demo-分组 Small 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">状态</span>
             </label>
@@ -853,7 +853,7 @@ exports[`u-form.vue > Demo-分组 Small 1`] = `
       </div>
       <transition-stub>
         <div class="body" vusion-slot-name="default">
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">名称</span>
             </label>
@@ -868,7 +868,7 @@ exports[`u-form.vue > Demo-分组 Small 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-size="normal">
+          <div class="root" distance label-size="normal" layout="center">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">状态</span>
             </label>
@@ -904,8 +904,8 @@ exports[`u-form.vue > Demo-分组 Small 1`] = `
 `;
 
 exports[`u-form.vue > Demo-基本 1`] = `
-<div class="root" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">用户名</span>
     </label>
@@ -920,7 +920,7 @@ exports[`u-form.vue > Demo-基本 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">邮箱</span>
     </label>
@@ -942,7 +942,7 @@ exports[`u-form.vue > Demo-基本 1`] = `
     <div class="field">
       <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
       <div class="wrap" vusion-slot-name="default">
-        <div class="root" distance label-size="normal">
+        <div class="root" distance label-size="normal" layout="center">
           <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
             <span class="text" vusion-slot-name-edit="label">邮箱1</span>
           </label>
@@ -957,7 +957,7 @@ exports[`u-form.vue > Demo-基本 1`] = `
             </div>
           </div>
         </div>
-        <div class="root" distance label-size="normal">
+        <div class="root" distance label-size="normal" layout="center">
           <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
             <span class="text" vusion-slot-name-edit="label">邮箱2</span>
           </label>
@@ -975,7 +975,7 @@ exports[`u-form.vue > Demo-基本 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">手机号码</span>
     </label>
@@ -990,7 +990,7 @@ exports[`u-form.vue > Demo-基本 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label"></span>
     </label>
@@ -1008,8 +1008,8 @@ exports[`u-form.vue > Demo-基本 1`] = `
 
 exports[`u-form.vue > Demo-基本用法 1`] = `
 <div>
-  <div class="root" gap="large" layout="block">
-    <div class="root" distance label-size="normal">
+  <div class="root" gap="none" gap-height="large" gap-width="large" layout="block">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">计费方式</span>
       </label>
@@ -1027,7 +1027,7 @@ exports[`u-form.vue > Demo-基本用法 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">实例名称</span>
       </label>
@@ -1042,7 +1042,7 @@ exports[`u-form.vue > Demo-基本用法 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">　</span>
       </label>
@@ -1057,7 +1057,7 @@ exports[`u-form.vue > Demo-基本用法 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">规格</span>
       </label>
@@ -1126,7 +1126,7 @@ exports[`u-form.vue > Demo-基本用法 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">端口号</span>
       </label>
@@ -1141,7 +1141,7 @@ exports[`u-form.vue > Demo-基本用法 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">公网带宽</span>
       </label>
@@ -1192,7 +1192,7 @@ exports[`u-form.vue > Demo-基本用法 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label"></span>
       </label>
@@ -1210,7 +1210,7 @@ exports[`u-form.vue > Demo-基本用法 1`] = `
 `;
 
 exports[`u-form.vue > Demo-基础表单 1`] = `
-<div class="root" layout="block">
+<div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
   <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">
@@ -1271,7 +1271,7 @@ exports[`u-form.vue > Demo-基础表单 1`] = `
 `;
 
 exports[`u-form.vue > Demo-折叠分组 1`] = `
-<div class="root" layout="block">
+<div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
   <div class="root" collapsible="true" size="normal">
     <div class="head">
       <div class="title" vusion-slot-name="title" vusion-slot-name-edit="title">
@@ -1399,7 +1399,7 @@ exports[`u-form.vue > Demo-折叠分组 1`] = `
 
 exports[`u-form.vue > Demo-插槽 1`] = `
 <div>
-  <div class="root" layout="block">
+  <div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
     <div class="root" distance="extra" label-size="normal" layout="block">
       <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">
@@ -1432,8 +1432,8 @@ exports[`u-form.vue > Demo-插槽 1`] = `
 `;
 
 exports[`u-form.vue > Demo-数据收集与提交 1`] = `
-<div class="root" gap="large" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="large" gap-width="large" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">计费方式</span>
     </label>
@@ -1451,7 +1451,7 @@ exports[`u-form.vue > Demo-数据收集与提交 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">实例名称</span>
     </label>
@@ -1466,7 +1466,7 @@ exports[`u-form.vue > Demo-数据收集与提交 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">规格</span>
     </label>
@@ -1535,7 +1535,7 @@ exports[`u-form.vue > Demo-数据收集与提交 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">端口号</span>
     </label>
@@ -1550,7 +1550,7 @@ exports[`u-form.vue > Demo-数据收集与提交 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">公网带宽</span>
     </label>
@@ -1601,7 +1601,7 @@ exports[`u-form.vue > Demo-数据收集与提交 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label"></span>
     </label>
@@ -1618,8 +1618,8 @@ exports[`u-form.vue > Demo-数据收集与提交 1`] = `
 `;
 
 exports[`u-form.vue > Demo-数据转换 1`] = `
-<div class="root" gap="large" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="large" gap-width="large" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">超时时长</span>
     </label>
@@ -1634,7 +1634,7 @@ exports[`u-form.vue > Demo-数据转换 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">端口号</span>
     </label>
@@ -1649,7 +1649,7 @@ exports[`u-form.vue > Demo-数据转换 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label"></span>
     </label>
@@ -1667,8 +1667,8 @@ exports[`u-form.vue > Demo-数据转换 1`] = `
 
 exports[`u-form.vue > Demo-栅格布局 1`] = `
 <div>
-  <div class="root" layout="inline" repeat="3">
-    <div class="root" distance label-size="normal" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
+  <div class="root" gap="none" gap-height="normal" gap-width="normal" layout="inline" repeat="3">
+    <div class="root" distance label-size="normal" layout="center" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">状态</span>
       </label>
@@ -1694,7 +1694,7 @@ exports[`u-form.vue > Demo-栅格布局 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
+    <div class="root" distance label-size="normal" layout="center" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">备案类型</span>
       </label>
@@ -1720,7 +1720,7 @@ exports[`u-form.vue > Demo-栅格布局 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
+    <div class="root" distance label-size="normal" layout="center" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">备案号</span>
       </label>
@@ -1735,7 +1735,7 @@ exports[`u-form.vue > Demo-栅格布局 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
+    <div class="root" distance label-size="normal" layout="center" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">用户名</span>
       </label>
@@ -1750,7 +1750,7 @@ exports[`u-form.vue > Demo-栅格布局 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
+    <div class="root" distance label-size="normal" layout="center" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">单位名称</span>
       </label>
@@ -1765,7 +1765,7 @@ exports[`u-form.vue > Demo-栅格布局 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal" style="width: 100%; margin-left: -2.6666666666666665px;">
+    <div class="root" distance label-size="normal" layout="center" style="width: 100%; margin-left: -2.6666666666666665px;">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label"></span>
       </label>
@@ -1794,8 +1794,8 @@ exports[`u-form.vue > Demo-标签块级布局 1`] = `
         </div>
       </div>
       <div class="body" vusion-slot-name="default">
-        <div class="root" label-layout="block" layout="block">
-          <div class="root" distance label-layout="block" label-size="normal">
+        <div class="root" gap="none" gap-height="normal" gap-width="normal" label-layout="block" layout="block">
+          <div class="root" distance label-layout="block" label-size="normal" layout="center">
             <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">计费方式</span>
             </label>
@@ -1813,7 +1813,7 @@ exports[`u-form.vue > Demo-标签块级布局 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-layout="block" label-size="normal">
+          <div class="root" distance label-layout="block" label-size="normal" layout="center">
             <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">实例名称</span>
             </label>
@@ -1828,7 +1828,7 @@ exports[`u-form.vue > Demo-标签块级布局 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-layout="block" label-size="normal">
+          <div class="root" distance label-layout="block" label-size="normal" layout="center">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label"></span>
             </label>
@@ -1854,8 +1854,8 @@ exports[`u-form.vue > Demo-标签块级布局 1`] = `
         </div>
       </div>
       <div class="body" vusion-slot-name="default">
-        <div class="root" label-layout="block" layout="inline" repeat="3">
-          <div class="root" distance label-layout="block" label-size="normal" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
+        <div class="root" gap="none" gap-height="normal" gap-width="normal" label-layout="block" layout="inline" repeat="3">
+          <div class="root" distance label-layout="block" label-size="normal" layout="center" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">状态</span>
             </label>
@@ -1881,7 +1881,7 @@ exports[`u-form.vue > Demo-标签块级布局 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-layout="block" label-size="normal" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
+          <div class="root" distance label-layout="block" label-size="normal" layout="center" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">备案类型</span>
             </label>
@@ -1907,7 +1907,7 @@ exports[`u-form.vue > Demo-标签块级布局 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-layout="block" label-size="normal" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
+          <div class="root" distance label-layout="block" label-size="normal" layout="center" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">备案号</span>
             </label>
@@ -1922,7 +1922,7 @@ exports[`u-form.vue > Demo-标签块级布局 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-layout="block" label-size="normal" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
+          <div class="root" distance label-layout="block" label-size="normal" layout="center" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">用户名</span>
             </label>
@@ -1937,7 +1937,7 @@ exports[`u-form.vue > Demo-标签块级布局 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-layout="block" label-size="normal" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
+          <div class="root" distance label-layout="block" label-size="normal" layout="center" style="width: 33.33333333333333%; margin-left: -2.6666666666666665px;">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label">单位名称</span>
             </label>
@@ -1952,7 +1952,7 @@ exports[`u-form.vue > Demo-标签块级布局 1`] = `
               </div>
             </div>
           </div>
-          <div class="root" distance label-layout="block" label-size="normal" style="width: 100%; margin-left: -2.6666666666666665px;">
+          <div class="root" distance label-layout="block" label-size="normal" layout="center" style="width: 100%; margin-left: -2.6666666666666665px;">
             <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
               <span class="text" vusion-slot-name-edit="label"></span>
             </label>
@@ -1975,8 +1975,8 @@ exports[`u-form.vue > Demo-标签块级布局 1`] = `
 
 exports[`u-form.vue > Demo-行内 1`] = `
 <div>
-  <div class="root" layout="inline">
-    <div class="root" distance label-size="auto">
+  <div class="root" gap="none" gap-height="normal" gap-width="normal" layout="inline">
+    <div class="root" distance label-size="auto" layout="center">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">状态</span>
       </label>
@@ -2002,7 +2002,7 @@ exports[`u-form.vue > Demo-行内 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="auto">
+    <div class="root" distance label-size="auto" layout="center">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">用户名</span>
       </label>
@@ -2017,7 +2017,7 @@ exports[`u-form.vue > Demo-行内 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="auto">
+    <div class="root" distance label-size="auto" layout="center">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">联系号码</span>
       </label>
@@ -2032,7 +2032,7 @@ exports[`u-form.vue > Demo-行内 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="auto">
+    <div class="root" distance label-size="auto" layout="center">
       <label class="label" position="right" style="display: none;" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label"></span>
       </label>
@@ -2050,7 +2050,7 @@ exports[`u-form.vue > Demo-行内 1`] = `
 `;
 
 exports[`u-form.vue > Demo-行内表单 1`] = `
-<div class="root" layout="inline">
+<div class="root" gap="none" gap-height="normal" gap-width="normal" layout="inline">
   <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">
@@ -2085,8 +2085,8 @@ exports[`u-form.vue > Demo-行内表单 1`] = `
 `;
 
 exports[`u-form.vue > Demo-表单逻辑 1`] = `
-<div class="root" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">用户名</span>
     </label>
@@ -2101,7 +2101,7 @@ exports[`u-form.vue > Demo-表单逻辑 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">邮箱</span>
     </label>
@@ -2116,7 +2116,7 @@ exports[`u-form.vue > Demo-表单逻辑 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">手机号码</span>
     </label>
@@ -2131,7 +2131,7 @@ exports[`u-form.vue > Demo-表单逻辑 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label"></span>
     </label>
@@ -2148,8 +2148,8 @@ exports[`u-form.vue > Demo-表单逻辑 1`] = `
 `;
 
 exports[`u-form.vue > Demo-表单项必填标记位置 1`] = `
-<div class="root" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="left" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">用户名</span>
     </label>
@@ -2164,7 +2164,7 @@ exports[`u-form.vue > Demo-表单项必填标记位置 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label"></span>
     </label>
@@ -2181,8 +2181,8 @@ exports[`u-form.vue > Demo-表单项必填标记位置 1`] = `
 `;
 
 exports[`u-form.vue > Demo-表单验证 1`] = `
-<div class="root" gap="large" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="large" gap-width="large" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">计费方式</span>
     </label>
@@ -2200,7 +2200,7 @@ exports[`u-form.vue > Demo-表单验证 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">实例名称</span>
     </label>
@@ -2215,7 +2215,7 @@ exports[`u-form.vue > Demo-表单验证 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">规格</span>
     </label>
@@ -2284,7 +2284,7 @@ exports[`u-form.vue > Demo-表单验证 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">端口号</span>
     </label>
@@ -2299,7 +2299,7 @@ exports[`u-form.vue > Demo-表单验证 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">公网带宽</span>
     </label>
@@ -2350,7 +2350,7 @@ exports[`u-form.vue > Demo-表单验证 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label"></span>
     </label>

@@ -1,6 +1,13 @@
 <template>
-<div :class="$style.root" :label-size="currentLabelSize" :distance="rootVM && rootVM.extraSlots ? 'extra' : ''" :style="responsiveStyle" :label-layout="currentLabelLayout"
-    :label-ellipsis="currentLabelEllipsis">
+<div
+  :class="$style.root"
+  :label-size="currentLabelSize"
+  :distance="rootVM && rootVM.extraSlots ? 'extra' : ''"
+  :style="responsiveStyle"
+  :label-layout="currentLabelLayout"
+  :label-ellipsis="currentLabelEllipsis"
+  :layout="layout"
+>
     <label :class="$style.label" :required="required" :position="requiredPosition" v-show="label || title || $slots.label || currentLabelSize !== 'auto'" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span :class="$style.text" vusion-slot-name-edit="label" v-ellipsis-title>
             <slot name="label">{{ label || title }}</slot>
@@ -51,6 +58,10 @@ export default {
         // rules: Array,
         // ignoreRules: { type: Boolean, default: false },
         // message: String,
+        layout: {
+          type: String,
+          default: 'center',
+        },
         required: { type: Boolean, default: false },
         requiredPosition: { type: String, default: 'right' },
         labelSize: String,
@@ -185,7 +196,7 @@ export default {
     white-space: pre-wrap;
 }
 
-.label[required] .text::after {
+.label[required]::after {
     content: "*";
     color: var(--form-required-color);
     position: absolute;
@@ -198,13 +209,13 @@ export default {
     padding-left: 10px;
 }
 
-.label[required][position='right'] .text::after {
-    right: calc(var(--form-required-right) - var(--form-item-label-padding-right));
+.label[required][position='right']::after {
+    right: var(--form-required-right);
 }
 
-.label[required][position='left'] .text::after {
+.label[required][position='left']::after {
     /* left: calc(var(--form-item-label-padding-right) - var(--form-required-right)); */
-    left: -10px;
+    left: 0px;
 }
 
 .field {
@@ -216,12 +227,12 @@ export default {
     width: var(--form-item-label-width-mini);
     padding-right: var(--form-item-label-padding-right-mini);
 }
-.root[label-size$="mini"] > .label[required][position='right'] .text::after {
-    right: calc(var(--form-required-right-mini) - var(--form-item-label-padding-right-mini));
+.root[label-size$="mini"] > .label[required][position='right']::after {
+    right: var(--form-required-right-mini);
 }
-.root[label-size$="mini"] > .label[required][position='left'] .text::after {
+.root[label-size$="mini"] > .label[required][position='left']::after {
     /* left: calc(var(--form-required-right-mini) - var(--form-item-label-padding-right-mini)); */
-    left: -10px;
+    left: 0;
 }
 .root[label-size$="mini"] > .field {
     max-width: calc(100% - var(--form-item-label-width-mini));
@@ -231,12 +242,12 @@ export default {
     width: var(--form-item-label-width-small);
     padding-right: var(--form-item-label-padding-right-small);
 }
-.root[label-size$="small"] > .label[required][position='right'] .text::after {
-    right: calc(var(--form-required-right-small) - var(--form-item-label-padding-right-small));
+.root[label-size$="small"] > .label[required][position='right']::after {
+    right: var(--form-required-right-small);
 }
-.root[label-size$="small"] > .label[required][position='left'] .text::after {
+.root[label-size$="small"] > .label[required][position='left']::after {
     /* left: calc(var(--form-required-right-small) - var(--form-item-label-padding-right-small)); */
-    left: -10px;
+    left: 0px;
 }
 .root[label-size$="small"] > .field {
     max-width: calc(100% - var(--form-item-label-width-small));
@@ -246,12 +257,12 @@ export default {
     width: var(--form-item-label-width);
     padding-right: var(--form-item-label-padding-right);
 }
-.root[label-size$="normal"] > .label[required][position='right'] .text::after {
-    right: calc(var(--form-required-right) - var(--form-item-label-padding-right));
+.root[label-size$="normal"] > .label[required][position='right']::after {
+    right: var(--form-required-right);
 }
-.root[label-size$="normal"] > .label[required][position='left'] .text::after {
+.root[label-size$="normal"] > .label[required][position='left']::after {
     /* left: calc(var(--form-required-right) - var(--form-item-label-padding-right)); */
-    left: -10px;
+    left: 0;
 }
 .root[label-size$="normal"] > .field {
     max-width: calc(100% - var(--form-item-label-width));
@@ -261,12 +272,12 @@ export default {
     width: var(--form-item-label-width-large);
     padding-right: var(--form-item-label-padding-right-large);
 }
-.root[label-size$="large"] > .label[required][position='right'] .text::after {
-    right: calc(var(--form-required-right-large) - var(--form-item-label-padding-right-large));
+.root[label-size$="large"] > .label[required][position='right']::after {
+    right: var(--form-required-right);
 }
-.root[label-size$="large"] > .label[required][position='left'] .text::after {
+.root[label-size$="large"] > .label[required][position='left']::after {
     /* left: calc(var(--form-required-right-large) - var(--form-item-label-padding-right-large)); */
-    left: -10px;
+    left: 0;
 }
 .root[label-size$="large"] > .field {
     max-width: calc(100% - var(--form-item-label-width-large));
@@ -401,5 +412,9 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.root[label-ellipsis] .label span {
+  vertical-align: middle;
 }
 </style>

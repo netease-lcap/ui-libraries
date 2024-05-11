@@ -8042,8 +8042,8 @@ exports[`u-date-picker.vue > Demo-自动对焦 1`] = `
 
 exports[`u-date-picker.vue > Demo-表单验证 1`] = `
 <div>
-  <div class="root" layout="block">
-    <div class="root" distance label-size="normal">
+  <div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">单日期</span>
       </label>
@@ -8421,7 +8421,7 @@ exports[`u-date-picker.vue > Demo-表单验证 1`] = `
         </div>
       </div>
     </div>
-    <div class="root" distance label-size="normal">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">日期范围</span>
       </label>
