@@ -1,0 +1,810 @@
+[
+    {
+        "name": "ULinearLayout",
+        "ideusage": {
+            "idetype": "container",
+            "containerDirection": "this.getAttribute('direction')?.value === 'vertical' ? 'column' : 'row' "
+        }
+    },
+    {
+        "name": "UAbsoluteLayout",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UGridLayout",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "containerDirection": "column",
+            "childAccept": "target.tag === 'u-grid-layout-row'"
+        }
+    },
+    {
+        "name": "UGridLayoutRow",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "containerDirection": "row",
+            "childAccept": "target.tag === 'u-grid-layout-column'",
+            "parentAccept": "target.tag === 'u-grid-layout'"
+        }
+    },
+    {
+        "name": "UGridLayoutColumn",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'u-grid-layout-row'"
+        }
+    },
+    {
+        "name": "UMultiLayout",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'u-multi-layout-item'"
+        }
+    },
+    {
+        "name": "UMultiLayoutItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'u-multi-layout'"
+        }
+    },
+    {
+        "name": "UCrumb",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'u-crumb-item'"
+        }
+    },
+    {
+        "name": "UCrumbItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'u-crumb'"
+        }
+    },
+    {
+        "name": "USidebar",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['u-sidebar-group', 'u-sidebar-item', 'u-sidebar-divider'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "USidebarItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "['u-sidebar-group', 'u-sidebar'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "USidebarGroup",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['u-sidebar-group', 'u-sidebar-item', 'u-sidebar-divider'].includes(target.tag)",
+            "parentAccept": "['u-sidebar-group', 'u-sidebar'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "USidebarDivider",
+        "ideusage": {
+            "idetype": "element",
+            "parentAccept": "['u-sidebar-group', 'u-sidebar'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UNavbarMulti",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['u-navbar-group-multi', 'u-navbar-item-multi', 'u-navbar-divider-multi'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UNavbarGroupMulti",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "parentAccept": "['u-navbar-group-multi', 'u-navbar-multi'].includes(target.tag)",
+            "childAccept": "['u-navbar-group-multi', 'u-navbar-item-multi', 'u-navbar-divider-multi'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UNavbarItemMulti",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "['u-navbar-group-multi', 'u-navbar-multi'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UNavbarDividerMulti",
+        "ideusage": {
+            "idetype": "element",
+            "parentAccept": "['u-navbar-group-multi', 'u-navbar-multi'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UNavbar",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['u-navbar-item', 'u-navbar-divider'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UNavbarItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'u-navbar'"
+        }
+    },
+    {
+        "name": "UNavbarDivider",
+        "ideusage": {
+            "idetype": "element",
+            "parentAccept": "target.tag === 'u-navbar'"
+        }
+    },
+    {
+        "name": "UDropdown",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['u-dropdown-group', 'u-dropdown-item'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UDropdownItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "['u-dropdown-group', 'u-dropdown'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UDropdownGroup",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['u-dropdown-group', 'u-dropdown-item'].includes(target.tag)",
+            "parentAccept": "['u-dropdown-group', 'u-dropdown'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UToc",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'u-toc-item'"
+        }
+    },
+    {
+        "name": "UTocItem",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "parentAccept": "['u-toc-item', 'u-toc'].includes(target.tag)",
+            "childAccept": "target.tag === 'u-toc-item'"
+        }
+    },
+    {
+        "name": "UAnchor",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "URouterView",
+        "ideusage": {
+            "idetype": "router"
+        }
+    },
+    {
+        "name": "UIframe",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "UPanel",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'u-panel-group'"
+        }
+    },
+    {
+        "name": "UPanelGroup",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'u-panel'"
+        }
+    }, 
+    {
+        "name": "UCollapse",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'u-collapse-item'"
+        }
+    },
+    {
+        "name": "UCollapseItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'u-collapse'"
+        }
+    },
+    {
+        "name": "UCard",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UCardGroup",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'u-card'"
+        }
+    },
+    {
+        "name": "UText",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ULink",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "UButton",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "IIco",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "UGallery",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ULabel",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UBadge",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UCarousel",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "'u-carousel-item' === target.tag"
+        }
+    },
+    {
+        "name": "UCarouselItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "'u-carousel' === target.tag"
+        }
+    },
+    {
+        "name": "UInfoList",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['u-info-list-group', 'u-info-list-item'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UInfoListItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "['u-info-list-group', 'u-info-list'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UInfoListGroup",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "parentAccept": "target.tag === 'u-info-list'",
+            "childAccept": "target.tag === 'u-info-list-item'"
+        }
+    },
+    {
+        "name": "UImage",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "UAlert",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UCountDown",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "UDivider",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UTimeline",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'u-timeline-item'"
+        }
+    },
+    {
+        "name": "UTimelineItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'u-timeline'"
+        }
+    },
+    {
+        "name": "UTableView",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "dataSource": {
+                "display": 3,
+                "loopElem": "table > tbody > tr",
+                "emptySlot": {
+                    "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
+                    "accept": "target.concept === 'Entity'"
+                }
+            },
+            "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic', 'u-table-view-column-group'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UTableViewColumn",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UTableViewColumnDynamic",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UTableViewColumnGroup",
+        "ideusage": {
+            "idetype": "container",
+            "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic'].includes(target.tag)",
+            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UListView",
+        "ideusage": {
+            "idetype": "container",
+            "dataSource": {
+                "display": 3,
+                "loopElem": "[class^='u-list-view_body'] > div > [class^='u-list-view_item']",
+                "emptySlot": {
+                    "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
+                    "accept": "target.concept === 'Entity'"
+                }
+            }
+        }
+    },
+    {
+        "name": "UGridView",
+        "ideusage": {
+            "idetype": "container",
+            "dataSource": {
+                "display": 3,
+                "loopElem": "[class^='u-grid-view_body'] > div > [class^='u-grid-view_item']",
+                "emptySlot": {
+                    "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
+                    "accept": "target.concept === 'Entity'"
+                }
+            }
+        }
+    },
+    {
+        "name": "UCalendarView",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UListComponents",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UForm",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['u-form-group', 'u-form-item'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UFormItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "['u-form-group', 'u-form'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UFormGroup",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['u-form-item'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UInput",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UNumberInput",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UTextarea",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "URadios",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+                "display": 3,
+                "loopElem": "> label[class^='u-radios_radio']",
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": "false"
+                }
+            },
+            "childAccept":"target.tag === 'u-radio'"
+        }
+    },
+    {
+        "name": "URadio",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "USwitch",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "UCheckboxes",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+                "display": 3,
+                "loopElem": "> label[class^='u-checkbox']",
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": "false"
+                }
+            },
+            "childAccept": "target.tag === 'u-checkbox'"
+        }
+    },
+    {
+        "name": "UCheckbox",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UCapsules",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['u-capsule', 'u-capsules-group'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UCapsulesGroup",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "parentAccept": "target.tag === 'u-capsules'",
+            "childAccept": "target.tag === 'u-capsule'"
+        }
+    },
+    {
+        "name": "UCapsule",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "URate",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "UComboSlider",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UUploader",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UValidator",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UTabs",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept":"target.tag === 'u-tab'"
+        }
+    },
+    {
+        "name": "UTab",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept":"target.tag === 'u-tabs'",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "USelectableSteps",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept":"target.tag === 'u-selectable-step'"
+        }
+    },
+    {
+        "name": "USelectableStep",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept":"target.tag === 'u-selectable-steps'",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "UPagination",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "USelect",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['u-select-item', 'u-select-group', 'u-select-divider'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "USelectItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "['u-select-group', 'u-select'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "USelectGroup",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'u-select-item'",
+            "parentAccept": "['u-select'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "USelectDivider",
+        "ideusage": {
+            "idetype": "element",
+            "parentAccept": "['u-select-group', 'u-select'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UCascader",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "URegionSelect",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "UTreeViewNew",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'u-tree-view-node-new'"
+        }
+    },
+    {
+        "name": "UTreeViewNodeNew",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'u-tree-view-node-new'",
+            "parentAccept": "['u-tree-select-new', 'u-tree-view-new', 'u-tree-view-node-new'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "UTransfer",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UDatePicker",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "UTimePicker",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "UDateTimePicker",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "UTreeSelectNew",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'u-tree-view-node-new'",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "ULinearProgress",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UCircularProgress",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UPopupCombination",
+        "ideusage": {
+            "idetype": "popover",
+            "selector": {
+                "expression": "this",
+                "cssSelector": "div[class^='u-popup_body']"
+            }
+        }
+    },
+    {
+        "name": "UModal",
+        "ideusage": {
+            "idetype": "modal",
+            "selector": {
+              "expression": "this",
+              "cssSelector": "div[class^='u-modal_dialog']"
+            },
+            "cacheOpenKey": "open"
+        }
+    },
+    {
+        "name": "UDrawer",
+        "ideusage": {
+            "idetype": "modal",
+            "selector": {
+              "expression": "this",
+              "cssSelector": "div[class^='u-drawer_drawer']"
+            },
+            "cacheOpenKey": "open"
+        }
+    },
+    {
+        "name": "UToastSingle",
+        "ideusage": {
+            "idetype": "messager",
+            "selector": {
+              "expression": "this",
+              "cssSelector": "div[class^='u-toast_index']"
+            },
+            "cacheOpenKey": "open"
+        }
+    },
+    {
+        "name": "EWatermark",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "UCopy",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "UTaskbox",
+        "ideusage": {
+            "idetype": "element"
+        }
+    }
+]

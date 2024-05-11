@@ -1,0 +1,24 @@
+[
+    "UNavbarDropdownMulti",
+
+    "UNavbarMenuMulti",
+    "UNavbarMenuGroupMulti",
+    "UNavbarMenuItemMulti",
+    "UNavbarMenuDividerMulti",
+
+    "UNavbarSelectMulti",
+    "UNavbarSelectGroupMulti",
+    "UNavbarSelectItemMulti",
+    "UNavbarSelectDividerMulti",
+
+    "UNavbarDropdown",
+    "UNavbarMenu",
+    "UNavbarMenuGroup",
+    "UNavbarMenuItem",
+    "UNavbarMenuDivider",
+
+    "UNavbarSelect",
+    "UNavbarSelectGroup",
+    "UNavbarSelectItem",
+    "UNavbarSelectDivider",
+]
