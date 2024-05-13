@@ -23,8 +23,8 @@ exports[`u-validator.vue > Demo-blur 后从绑定变量更新 1`] = `
 `;
 
 exports[`u-validator.vue > Demo-动态验证 1`] = `
-<div class="root" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label"></span>
     </label>
@@ -42,7 +42,7 @@ exports[`u-validator.vue > Demo-动态验证 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">端口</span>
     </label>
@@ -61,8 +61,8 @@ exports[`u-validator.vue > Demo-动态验证 1`] = `
 `;
 
 exports[`u-validator.vue > Demo-动态验证 2`] = `
-<div class="root" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label"></span>
     </label>
@@ -80,7 +80,7 @@ exports[`u-validator.vue > Demo-动态验证 2`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">端口</span>
     </label>
@@ -148,8 +148,8 @@ exports[`u-validator.vue > Demo-单行嵌套 2`] = `
 `;
 
 exports[`u-validator.vue > Demo-复合验证规则 1`] = `
-<div class="root" gap="large" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="large" gap-width="large" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">名称1</span>
     </label>
@@ -164,7 +164,7 @@ exports[`u-validator.vue > Demo-复合验证规则 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">名称2</span>
     </label>
@@ -184,7 +184,7 @@ exports[`u-validator.vue > Demo-复合验证规则 1`] = `
 
 exports[`u-validator.vue > Demo-失去焦点，还原正确的值 1`] = `
 <div>
-  <div class="root" distance label-size="auto">
+  <div class="root" distance label-size="auto" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">用户名</span>
     </label>
@@ -204,7 +204,7 @@ exports[`u-validator.vue > Demo-失去焦点，还原正确的值 1`] = `
 
 exports[`u-validator.vue > Demo-字符串简写说明： 1`] = `
 <div>
-  <div class="root" distance label-size="auto">
+  <div class="root" distance label-size="auto" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">用户名</span>
     </label>
@@ -224,7 +224,7 @@ exports[`u-validator.vue > Demo-字符串简写说明： 1`] = `
 
 exports[`u-validator.vue > Demo-完整格式 1`] = `
 <div>
-  <div class="root" distance label-size="auto">
+  <div class="root" distance label-size="auto" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">用户名</span>
     </label>
@@ -243,8 +243,8 @@ exports[`u-validator.vue > Demo-完整格式 1`] = `
 `;
 
 exports[`u-validator.vue > Demo-密码确认场景 1`] = `
-<div class="root" gap="large" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="large" gap-width="large" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">密码</span>
     </label>
@@ -259,7 +259,7 @@ exports[`u-validator.vue > Demo-密码确认场景 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">确认密码</span>
     </label>
@@ -278,7 +278,7 @@ exports[`u-validator.vue > Demo-密码确认场景 1`] = `
 `;
 
 exports[`u-validator.vue > Demo-注册验证规则 1`] = `
-<div class="root" distance label-size="auto">
+<div class="root" distance label-size="auto" layout="center">
   <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
     <span class="text" vusion-slot-name-edit="label">颜色</span>
   </label>
@@ -296,7 +296,7 @@ exports[`u-validator.vue > Demo-注册验证规则 1`] = `
 `;
 
 exports[`u-validator.vue > Demo-注册验证规则 2`] = `
-<div class="root" distance label-size="auto">
+<div class="root" distance label-size="auto" layout="center">
   <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
     <span class="text" vusion-slot-name-edit="label">颜色</span>
   </label>
@@ -314,7 +314,7 @@ exports[`u-validator.vue > Demo-注册验证规则 2`] = `
 `;
 
 exports[`u-validator.vue > Demo-混合编写 1`] = `
-<div class="root" distance label-size="auto">
+<div class="root" distance label-size="auto" layout="center">
   <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
     <span class="text" vusion-slot-name-edit="label">用户名</span>
   </label>
@@ -332,7 +332,7 @@ exports[`u-validator.vue > Demo-混合编写 1`] = `
 `;
 
 exports[`u-validator.vue > Demo-混合编写 2`] = `
-<div class="root" distance label-size="auto">
+<div class="root" distance label-size="auto" layout="center">
   <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
     <span class="text" vusion-slot-name-edit="label">用户名</span>
   </label>
@@ -351,7 +351,7 @@ exports[`u-validator.vue > Demo-混合编写 2`] = `
 
 exports[`u-validator.vue > Demo-简写格式 1`] = `
 <div>
-  <div class="root" distance label-size="auto">
+  <div class="root" distance label-size="auto" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">用户名</span>
     </label>
@@ -371,8 +371,8 @@ exports[`u-validator.vue > Demo-简写格式 1`] = `
 
 exports[`u-validator.vue > Demo-过长提示 1`] = `
 <div>
-  <div class="root" layout="block">
-    <div class="root" distance label-size="normal">
+  <div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
+    <div class="root" distance label-size="normal" layout="center">
       <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span class="text" vusion-slot-name-edit="label">用户名</span>
       </label>
@@ -392,7 +392,7 @@ exports[`u-validator.vue > Demo-过长提示 1`] = `
 `;
 
 exports[`u-validator.vue > Demo-验证唯一性 1`] = `
-<div class="root" distance label-size="auto">
+<div class="root" distance label-size="auto" layout="center">
   <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
     <span class="text" vusion-slot-name-edit="label">端口</span>
   </label>

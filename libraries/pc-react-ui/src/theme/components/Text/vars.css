@@ -19,7 +19,7 @@
    * @desc 一级文本色
    * @type input
    */
-  --cw-color-text: inherit;
+  --cw-color-text: currentColor;
   /**
    * @desc 默认字号
    * @type input
