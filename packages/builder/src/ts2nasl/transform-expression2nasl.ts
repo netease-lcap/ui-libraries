@@ -22,8 +22,8 @@ function transformObjectExpression2Nasl(ast: ObjectExpression) {
       throw new Error(`解析Expression失败，nasl未支持该表达式, ${getNodeCode(ast)}`);
     }
 
-    newMap.push(transformExpression2Nasl(property.key));
-    newMap.push(transformExpression2Nasl(property.value as any));
+    newMap.keys.push(transformExpression2Nasl(property.key));
+    newMap.values.push(transformExpression2Nasl(property.value as any));
   });
   return newMap;
 }
