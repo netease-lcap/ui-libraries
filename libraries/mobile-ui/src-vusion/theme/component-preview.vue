@@ -20,7 +20,6 @@ export default {
 </script>
 <style module>
 .sectionContainer {
-  margin: 0 0 20px 0;
   background: white;
   border: 1.5px solid #e7e8eb;
   box-sizing: border-box;

@@ -157,6 +157,7 @@ export default (cssContent: string, themeComponentFolder) => {
     themeComponentsMap[componentName] = {
       cssProperty,
       dependencyComponents,
+      hidden: lastComponent.hidden,
     };
   }
 
