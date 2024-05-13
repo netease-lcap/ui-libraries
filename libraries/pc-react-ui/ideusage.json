@@ -695,7 +695,8 @@
         "menuItem": "target.tag === 'MenuItem'"
       },
       "additionalAttribute": {
-        "menu": "{{ triggerSubMenuAction: 'click' }}"
+        "menu": "{{ triggerSubMenuAction: 'click' }}",
+        "trigger": "{['click']}"
       }
     }
   },
