@@ -29,6 +29,24 @@ export default defineConfig(({ command }) => {
         ide: true,
         theme: {
           themeVarCssPath: './src-vusion/styles/theme.css',
+          previewPages: [
+            {
+              name: 'dashboard',
+              title: 'Dashboard',
+              viewport: {
+                width: 375,
+                height: 815,
+              },
+            },
+            {
+              name: 'form',
+              title: '表单页',
+              viewport: {
+                width: 375,
+                height: 815,
+              },
+            },
+          ],
           themeComponentFolder: './src-vusion/theme/components',
           useOldCssVarParser: true,
         },
