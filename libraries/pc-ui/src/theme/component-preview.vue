@@ -22,6 +22,7 @@ export default {
 .sectionContainer {
   background: white;
   border: 1.5px solid #e7e8eb;
+  border-radius: 8px;
   box-sizing: border-box;
 }
 

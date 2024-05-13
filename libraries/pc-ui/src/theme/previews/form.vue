@@ -11,7 +11,14 @@
                         </u-dropdown-item>
                     </template>
                     <template #title>
-                      <u-image src="/assets/avatar-default.svg" fit="cover" style="width: 36px; height: 36px; vertical-align: middle;"></u-image>
+                      <img
+                        :src="AvatarDefault"
+                        fit="cover"
+                        style="
+                          width: 36px;
+                          height: 36px;
+                          vertical-align: middle;
+                        "></img>
                       <span style="display: inline-block; vertical-align: top; margin-left: 10px; margin-right: 10px;">
                         <u-text text="DEVACC-examtemplate"></u-text>
                       </span>
@@ -21,7 +28,16 @@
         </template>
         <template #left>
             <u-multi-layout-item align-items="center" style="width:200px;">
-                <u-image fit="cover" src="/assets/lcap-logo-light.svg" style="width: 28px; height: 28px; margin: 16px 14px; --custom-start: auto; vertical-align: middle;"></u-image>
+                <img
+                fit="cover"
+                :src="Logo"
+                style="
+                  width: 28px;
+                  height: 28px;
+                  margin: 16px 14px;
+                  --custom-start: auto;
+                  vertical-align: middle;
+                "></img>
                 <u-text size="large" text="应用名称" style="--custom-start: auto; vertical-align: middle;"></u-text>
             </u-multi-layout-item>
         </template>
@@ -160,6 +176,19 @@
     </u-multi-layout-item>
 </u-multi-layout>
 </template>
+<script>
+import AvatarDefault from '../assets/avatar-default.svg';
+import Logo from '../assets/lcap-logo-light.svg'
+
+export default {
+  data() {
+    return {
+      AvatarDefault,
+      Logo,
+    };
+  },
+};
+</script>
 <style>
 .form_page_layout {
   padding: var(--space-medium);
