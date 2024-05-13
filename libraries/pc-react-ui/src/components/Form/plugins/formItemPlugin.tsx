@@ -15,7 +15,7 @@ export function useHandleRule(props) {
     rules: _.map(rules, (item) => {
       return {
         message: item.message,
-        required: item.required,
+        equired: item.required,
         validateTrigger: ['onChange', 'onBlur'],
         ...item,
         validator: (rule, value) => {

@@ -100,9 +100,11 @@ export function useHandleMenuSlot(props) {
           ...icon,
           label,
           onClick: _.wrap(onClickPorps, (fn, arg) => {
-            _.attempt(fn, arg);
+            if (_.isFunction(fn)) {
+              _.attempt(fn, arg);
+              return;
+            }
             handleLink(arg.key, child.props?.target);
-            return false;
           }),
         };
       }
