@@ -1,20 +1,20 @@
-/* eslint-disable */
 import * as postcss from 'postcss';
 import type { ThemeInfo, ThemeVariable, ThemeComponentVars } from './parse-css-vars';
 
 const GLOBAL_NAME = '$global';
+const DEFAULT_SELECTOR = ':root';
 
 export interface ComponentVarInfo {
   name: string;
   cssProperty: { [name: string]: ThemeVariable };
   hidden?: boolean;
-  dependencyComponents?: string;
+  dependencyComponents?: string[];
 }
 
 export default (cssContent: string) => {
   const themeInfo: ThemeInfo = {
     global: {
-      selector: '',
+      selector: DEFAULT_SELECTOR,
       variables: [],
     },
     components: [],
@@ -26,8 +26,9 @@ export default (cssContent: string) => {
     (node) => node.type === 'rule' && node.selector === ':root',
   );
 
+  const themePropertiesMap: { [name: string]: string } = {};
   const themeComponentsMap: { [name: string]: any } = {};
-  let lastComponent = {
+  let lastComponent: ComponentVarInfo = {
     name: GLOBAL_NAME,
     cssProperty: {},
   };
@@ -53,6 +54,7 @@ export default (cssContent: string) => {
               themeComponentsMap[componentName] = {
                 cssProperty,
                 dependencyComponents,
+                hidden: lastComponent.hidden,
               };
             }
 
@@ -75,7 +77,7 @@ export default (cssContent: string) => {
       } else if (lastComponent) {
         if (node.text.trim() === '@hidden') {
           // 不展示此变量
-          delete lastComponent.cssProperty[lastProp];
+          lastComponent.cssProperty[lastProp].hidden = true;
         } else if (node.text.includes('@type ')) {
           // 变量展示、输入的类型
           const cap: any = /@type\s+([\w-]+)/.exec(node.text.trim());
@@ -131,10 +133,9 @@ export default (cssContent: string) => {
       }
     } else if (node.type === 'decl') {
       themePropertiesMap[node.prop] = node.value;
-      if (!lastComponent) return;
       lastComponent.cssProperty[node.prop] = {
         type: 'input',
-      };
+      } as any;
       lastProp = node.prop;
     }
   });
@@ -151,6 +152,54 @@ export default (cssContent: string) => {
     };
   }
 
+  Object.keys(themeComponentsMap).forEach((name) => {
+    const comp: ComponentVarInfo = themeComponentsMap[name];
+    if (name === GLOBAL_NAME) {
+      themeInfo.global.selector = DEFAULT_SELECTOR;
+      Object.keys(comp.cssProperty).forEach((cssVarName) => {
+        themeInfo.global.variables.push({
+          ...comp.cssProperty[cssVarName],
+          name: cssVarName,
+          value: themePropertiesMap[cssVarName],
+        });
+      });
+      return;
+    }
+
+    const themeComponent: ThemeComponentVars = {
+      name,
+      useGlobalTokens: [],
+      selector: DEFAULT_SELECTOR,
+      variables: Object.keys(comp.cssProperty).map((cssVarName) => ({
+        ...comp.cssProperty[cssVarName],
+        name: cssVarName,
+        value: themePropertiesMap[cssVarName],
+      })),
+    };
+
+    if (comp.hidden) {
+      themeComponent.hidden = true;
+    }
+
+    if (comp.dependencyComponents && comp.dependencyComponents.length > 0) {
+      comp.dependencyComponents.forEach((depName) => {
+        const depComp = themeComponentsMap[depName];
+        if (!depComp) {
+          return;
+        }
+
+        themeComponent.variables = themeComponent.variables.concat(
+          Object.keys(depComp.cssProperty).map((cssVarName) => ({
+            ...depComp.cssProperty[cssVarName],
+            name: cssVarName,
+            value: themePropertiesMap[cssVarName],
+          })),
+        );
+      });
+    }
+
+    themeInfo.components.push(themeComponent);
+  });
 
   return themeInfo;
 };

@@ -12,6 +12,7 @@ export type {
 export {
   parseComponentAPI,
   parseCssVars,
+  parseCssVarsOld,
   transformJsx2Nasl,
   transformTsFunc2NaslLogic,
 } from './nasl';
