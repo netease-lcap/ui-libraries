@@ -21,4 +21,7 @@
     "UNavbarSelectGroup",
     "UNavbarSelectItem",
     "UNavbarSelectDivider",
+
+    "UTableViewColumnConfig",
+    "UTableViewExpander"
 ]

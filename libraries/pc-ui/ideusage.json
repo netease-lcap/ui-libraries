@@ -157,7 +157,10 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "['u-dropdown-group', 'u-dropdown-item'].includes(target.tag)"
+            "childAccept": "['u-dropdown-group', 'u-dropdown-item'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -257,19 +260,25 @@
     {
         "name": "UText",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "editable": "text",
+            "textholder": "text"
         }
     },
     {
         "name": "ULink",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "editable": "text",
+            "textholder": "text"
         }
     },
     {
         "name": "UButton",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "editable": "text",
+            "textholder": "text"
         }
     },
     {
@@ -387,6 +396,11 @@
                     "accept": "target.concept === 'Entity'"
                 }
             },
+            "refInLoop": {
+                "child": "TableColumn",
+                "slot": "cell",
+                "useRef": "argus?.[0]?.index === 0"
+            },
             "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic', 'u-table-view-column-group'].includes(target.tag)"
         }
     },
@@ -394,7 +408,17 @@
         "name": "UTableViewColumn",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
+            "selector": [
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'title')",
+                    "cssSelector": "th"
+                },
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'cell')",
+                    "cssSelector": "td"
+                }
+              ]
         }
     },
     {
@@ -607,6 +631,16 @@
         "ideusage": {
             "idetype": "container",
             "parentAccept":"target.tag === 'u-tabs'",
+            "selector": [
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'title')",
+                    "cssSelector": "a[class^='u-tabs_item']"
+                },
+                {
+                    "expression": "this",
+                    "cssSelector": "[class^='u-tabs_body']"
+                }
+            ],
             "events": {
                 "click": true
             }
@@ -625,6 +659,16 @@
         "ideusage": {
             "idetype": "container",
             "parentAccept":"target.tag === 'u-selectable-steps'",
+            "selector": [
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'title')",
+                    "cssSelector": "[class^='u-selectable-steps_item-body']"
+                },
+                {
+                    "expression": "this",
+                    "cssSelector": "div"
+                }
+            ],
             "events": {
                 "click": true
             }
@@ -761,10 +805,10 @@
         "ideusage": {
             "idetype": "modal",
             "selector": {
-              "expression": "this",
+              "expression": "this.getElement(el => el.slotTarget === 'body')",
               "cssSelector": "div[class^='u-modal_dialog']"
             },
-            "cacheOpenKey": "open"
+            "cacheOpenKey": "visible"
         }
     },
     {
@@ -775,7 +819,7 @@
               "expression": "this",
               "cssSelector": "div[class^='u-drawer_drawer']"
             },
-            "cacheOpenKey": "open"
+            "cacheOpenKey": "visible"
         }
     },
     {
@@ -805,6 +849,12 @@
         "name": "UTaskbox",
         "ideusage": {
             "idetype": "element"
+        }
+    },
+    {
+        "name": "LRoot",
+        "ideusage": {
+            "idetype": "container"
         }
     }
 ]
