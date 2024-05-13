@@ -85,6 +85,7 @@ export function useHandleMenuSlot(props) {
   const menuProps = props.get('menuProps');
   const menuSlot = React.Children.toArray(_.get(fragment, 'props.children', []));
   const handleLink = useHandleLink();
+  let timeer = null;
   function childToJson(children) {
     return React.Children.map(children, (child) => {
       if (child?.type === MenuItem) {
@@ -104,7 +105,12 @@ export function useHandleMenuSlot(props) {
               _.attempt(fn, arg);
               return;
             }
-            handleLink(arg.key, child.props?.target);
+            if (timeer) {
+              clearTimeout(timeer);
+            }
+            timeer = setTimeout(() => {
+              handleLink(arg.key, child.props?.target);
+            }, 150);
           }),
         };
       }
