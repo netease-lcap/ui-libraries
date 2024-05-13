@@ -9,7 +9,7 @@ export function useHandleStyleTheme(props) {
   const style = props.get('style');
   const fontSize = _.get(style, 'fontSize');
   const color = _.get(style, 'color');
-  const render = React.useCallback((localProps) => {
+  const render = React.useCallback(React.forwardRef((localProps, ref) => {
     return (
       <ConfigProvider theme={{
         components: {
@@ -21,10 +21,10 @@ export function useHandleStyleTheme(props) {
         cssVar: { prefix: 'cw', key: 'cw-nasl' },
       }}
       >
-        <BaseComponent {...localProps} />
+        <BaseComponent {...localProps} ref={ref} />
       </ConfigProvider>
     );
-  }, [BaseComponent]);
+  }), [BaseComponent]);
   return {
     render,
   };
