@@ -104,9 +104,16 @@ export function buildNaslUI(options: LcapBuildOptions) {
     assetsPublicPath: options.assetsPublicPath,
   });
 
-  if (!options.components) {
-    options.components = naslUIConfig.map(({ name, group, title }) => ({ name, group, title }));
-  }
+  options.components = naslUIConfig.map(({
+    name, kebabName, group, title, children,
+  }) => {
+    return {
+      name: options.framework.startsWith('vue') ? kebabName : name,
+      group,
+      title,
+      children: children.map((child) => (options.framework.startsWith('vue') ? child.kebabName : child.name)),
+    };
+  });
 
   logger.success('生成 nasl.ui.json 成功！');
   fs.writeJSONSync(`${options.destDir}/nasl.ui.json`, naslUIConfig, { spaces: 2 });

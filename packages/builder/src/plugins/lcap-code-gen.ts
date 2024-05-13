@@ -2,6 +2,7 @@ import path from 'path';
 import glob from 'fast-glob';
 import fs from 'fs-extra';
 import { Plugin } from 'vite';
+import { camelCase, upperFirst } from 'lodash';
 import {
   virtualThemeCSSFileId,
   virtualThemeComponentStoriesFileId,
@@ -47,10 +48,12 @@ function genComponentStoriesCode(componentFolder, framework) {
   previewFiles.forEach((filePath) => {
     const compPath = filePath.substring(0, filePath.lastIndexOf('/'));
     const compName = compPath.substring(compPath.lastIndexOf('/') + 1);
-    imports.push(`import ${compName} from '${filePath}';`);
+    const varName = upperFirst(camelCase(compName));
+
+    imports.push(`import ${varName} from '${filePath}';`);
 
     stories.push(
-      `{ demo: ${compName}, name: '${compName}' },`,
+      `{ demo: ${varName}, name: '${compName}' },`,
     );
   });
 
@@ -82,13 +85,11 @@ function genThemePagePreviewMapCode(componentFolder, previewPages: Array<{ name:
   ].join('\n\n');
 }
 
-function genThemeEntryCode(framework, rootPath) {
+function genThemeEntryCode(framework) {
   if (framework === 'vue2') {
     return [
       'import Vue from \'vue\';',
-      `import UILibrary from '${path.resolve(rootPath, './src/index')}';`,
       `import App from '${path.resolve(__dirname, '../../input/vue2/App')}';`,
-      'Vue.use(UILibrary);',
       'Vue.config.productionTip = false;',
       'const app = new Vue({ ...App });',
       'app.$mount("#app");',
@@ -139,7 +140,7 @@ function genThemePagePreviewWrapCode(componentFolder, framework) {
         '    return h("div", { on: this.$listeners }, [h(this.demo)])',
         '  }',
         '}',
-      ];
+      ].join('\n');
     }
 
     return [
@@ -215,7 +216,7 @@ export default (options: LcapCodeGenOption = {}) => {
       }
 
       if (id === virtualThemeEntryFileId) {
-        return genThemeEntryCode(options.framework, cwd);
+        return genThemeEntryCode(options.framework);
       }
 
       if (id === themeId) {

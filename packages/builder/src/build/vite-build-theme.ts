@@ -52,9 +52,6 @@ export async function buildTheme(themeConfig: ThemeConfig) {
   if (!config.resolve) {
     config.resolve = {};
   }
-  config.resolve.alias = {
-    ...config.resolve.alias,
-  };
 
   config.build.sourcemap = false;
   config.build.minify = 'esbuild';

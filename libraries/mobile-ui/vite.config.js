@@ -26,6 +26,11 @@ export default defineConfig(({ command }) => {
       }),
       lcapPlugin({
         framework: 'vue2',
+        theme: {
+          themeVarCssPath: './src-vusion/styles/theme.css',
+          themeComponentFolder: './src-vusion/theme/components',
+          useOldCssVarParser: true,
+        },
         i18n: {
           'zh-CN': './src/locale/lang/zh-CN/data.json',
         },

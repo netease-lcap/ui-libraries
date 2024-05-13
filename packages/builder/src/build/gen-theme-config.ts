@@ -70,7 +70,9 @@ export default function genThemeConfig(options: ThemeOptions) {
     themeInfo = parseCssVars(cssContent);
   }
 
-  themeConfig.components = options.components.filter((comp) => comp.show !== false).map(({ group, title, name }) => {
+  themeConfig.components = options.components.filter((comp) => comp.show !== false).map(({
+    group, title, name, children,
+  }) => {
     const compTheme = themeInfo.components.find((c) => c.name === name);
     if (!compTheme) {
       return {
@@ -92,16 +94,15 @@ export default function genThemeConfig(options: ThemeOptions) {
       name,
       title,
       group,
+      children: children || [],
     };
-  }).filter((comp) => {
-    return comp.useGlobalTokens.length > 0 || comp.variables.length > 0 || !comp.hidden;
+  }).filter((comp: ThemeComponentVars) => {
+    return (comp.useGlobalTokens.length > 0 || comp.variables.length > 0) && !comp.hidden;
   }).map((comp) => {
     return {
       ...comp,
       variables: comp.variables.filter((cssVar) => !cssVar.hidden),
     };
-  }).sort((a: any, b: any) => {
-    return `${a.group}-${a.name}`.localeCompare(`${b.group}-${b.name}`);
   });
 
   themeConfig.global.selector = themeInfo.global.selector;
