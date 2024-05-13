@@ -207,12 +207,12 @@ export function parseJSXExpression(ast: JSXElement | JSXFragment | JSXExpression
     return;
   }
 
-  if (ast.expression.type === 'NumericLiteral' || ast.expression.type === 'BooleanLiteral') {
+  if (['NumericLiteral', 'BooleanLiteral', 'ArrayExpression', 'ObjectExpression'].indexOf(ast.expression.type) !== -1) {
     element.bindAttrs.push({
       concept: 'BindAttribute',
       name: attrName,
       type: 'static',
-      value: ast.expression.value,
+      value: getNodeCode(ast.expression),
     });
     return;
   }
