@@ -628,7 +628,7 @@ namespace nasl.ui {
             snippets: [
                 {
                     title: '表单项',
-                    code: '<u-form-item><template #label><u-text text="表单项"></u-text></template></u-form-item>',
+                    code: '<u-form-item layout="center"><template #label><u-text text="表单项"></u-text></template></u-form-item>',
                 },
             ],
         })

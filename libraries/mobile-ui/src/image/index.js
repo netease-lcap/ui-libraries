@@ -321,6 +321,13 @@ export default createComponent({
       );
     },
     load(src, onTimeout = () => {}, delay = 10000) {
+      if (!src) {
+        return [
+          Promise.reject(new Error('image src is required')),
+          () => {},
+        ];
+      }
+
       const img = new Image();
       const timer = setTimeout(onTimeout, delay);
       return [

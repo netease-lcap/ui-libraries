@@ -1,5 +1,14 @@
 <template>
-<div :class="$style.root" @submit.prevent :layout="layoutValue" :repeat="repeat" :label-layout="labelLayout">
+<div
+  :class="$style.root"
+  @submit.prevent
+  :layout="layoutValue"
+  :repeat="repeat"
+  :label-layout="labelLayout"
+  gap="none"
+  :gap-width="gap || gapWidth"
+  :gap-height="gap || gapHeight"
+>
     <slot></slot>
 </div>
 </template>
@@ -22,6 +31,17 @@ export default {
         collapsible: { type: Boolean, default: false },
         repeat: { type: [String, Number], default: null },
         labelLayout: String,
+        gap: {
+          type: String,
+        },
+        gapWidth: {
+          type: String,
+          default: 'normal',
+        },
+        gapHeight: {
+          type: String,
+          default: 'normal',
+        },
         labelEllipsis: { type: Boolean, default: false },
         preview: { type: Boolean, default: false },
     },
@@ -120,6 +140,11 @@ export default {
 .root[layout="inline"] .item:not(:last-child) {
     padding-right: var(--space-base);
 }
+
+.root[layout="inline"][gap="none"] .item {
+    padding-right: 0;
+}
+
 .root[layout="inline"] .item {
     margin-bottom: var(--space-base);
 }
@@ -133,6 +158,7 @@ export default {
 .root[layout="inline"] .item[layout="center"],
 .root[layout="inline"] .item[layout="end"] {
     display: inline-flex;
+    max-width: 100%;
 }
 
 .root[layout="block"] .item:not(:last-child) {
@@ -259,7 +285,7 @@ export default {
 
 .root[gap-width="normal"][layout="inline"]:not([repeat]) .item:not(:last-child),
 .root[gapwidth="normal"][layout="inline"]:not([repeat]) .item:not(:last-child) {
-  margin-right: var(--space-medium);
+  margin-right: var(--space-base);
 }
 
 .root[label-layout="block"][layout="inline"] .item,
