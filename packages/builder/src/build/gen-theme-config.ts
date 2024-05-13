@@ -1,11 +1,14 @@
+/* eslint-disable newline-per-chained-call */
 import glob from 'fast-glob';
 import fs from 'fs-extra';
-import parseCssVars, { ThemeComponentVars, ThemeGlobalVars } from '../nasl/parse-css-vars';
+import parseCssVars, { ThemeComponentVars, ThemeGlobalVars, ThemeInfo } from '../nasl/parse-css-vars';
+import parseCssVarsOld from '../nasl/parse-css-vars-old';
 
 export interface ThemeOptions {
   themeVarCssPath: string;
   themeComponentFolder: string;
   previewPages: Array<{ name: string, title: string }>;
+  useOldCssVarParser?: boolean;
   components: Array<{ group: string, title: string, name: string, [key: string]: any }>
 }
 
@@ -56,8 +59,16 @@ export default function genThemeConfig(options: ThemeOptions) {
       variables: [],
     },
   };
-  const cssContent = concatCssContent(options.themeVarCssPath, options.themeComponentFolder);
-  const themeInfo = parseCssVars(cssContent);
+
+  let themeInfo: ThemeInfo;
+
+  if (options.useOldCssVarParser) {
+    const cssContent = fs.readFileSync(options.themeVarCssPath, { encoding: 'utf-8' }).toString();
+    themeInfo = parseCssVarsOld(cssContent);
+  } else {
+    const cssContent = concatCssContent(options.themeVarCssPath, options.themeComponentFolder);
+    themeInfo = parseCssVars(cssContent);
+  }
 
   themeConfig.components = options.components.filter((comp) => comp.show !== false).map(({ group, title, name }) => {
     const compTheme = themeInfo.components.find((c) => c.name === name);
@@ -83,16 +94,20 @@ export default function genThemeConfig(options: ThemeOptions) {
       group,
     };
   }).filter((comp) => {
-    return comp.useGlobalTokens.length > 0 || comp.variables.length > 0;
+    return comp.useGlobalTokens.length > 0 || comp.variables.length > 0 || !comp.hidden;
+  }).map((comp) => {
+    return {
+      ...comp,
+      variables: comp.variables.filter((cssVar) => !cssVar.hidden),
+    };
   }).sort((a: any, b: any) => {
     return `${a.group}-${a.name}`.localeCompare(`${b.group}-${b.name}`);
   });
 
   themeConfig.global.selector = themeInfo.global.selector;
-  themeConfig.global.variables = themeInfo.global.variables;
-
-  themeConfig.global.variables.forEach(({ name: key, value }) => {
-    themeConfig.defaultTheme[key] = value;
+  themeConfig.global.variables = themeInfo.global.variables.filter((cssVar) => {
+    themeConfig.defaultTheme[cssVar.name] = cssVar.value;
+    return !cssVar.hidden;
   });
 
   return themeConfig;

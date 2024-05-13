@@ -8,6 +8,7 @@ import type { LcapThemeOptions, ViteLcapPluginOptions } from './lcap-build';
 const DEFAULT_THEME_OPTIONS: LcapThemeOptions = {
   themeVarCssPath: './src/theme/vars.css',
   themeComponentFolder: './src/theme/components',
+  useOldCssVarParser: false,
   previewPages: [
     {
       name: 'dashboard',

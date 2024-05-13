@@ -16,6 +16,7 @@ import { getPackName } from '../utils';
 export interface LcapThemeOptions {
   themeVarCssPath?: string;
   themeComponentFolder?: string;
+  useOldCssVarParser?: boolean;
   previewPages?: Array<{ name: string; title: string; viewport?: { width: number; height: number } }>;
 }
 
@@ -79,6 +80,7 @@ export async function buildTheme(options: LcapBuildOptions) {
     themeVarCssPath: options.theme.themeVarCssPath || '',
     themeComponentFolder: options.theme.themeComponentFolder || '',
     previewPages: options.theme.previewPages || [],
+    useOldCssVarParser: options.theme.useOldCssVarParser,
   });
 
   logger.success('生成 theme.config.json 成功！');
