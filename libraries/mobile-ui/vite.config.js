@@ -26,6 +26,7 @@ export default defineConfig(({ command }) => {
       }),
       lcapPlugin({
         framework: 'vue2',
+        ide: true,
         theme: {
           themeVarCssPath: './src-vusion/styles/theme.css',
           themeComponentFolder: './src-vusion/theme/components',

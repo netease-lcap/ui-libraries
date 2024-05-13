@@ -24,6 +24,7 @@ export default defineConfig(({ command }) => {
       }),
       lcapPlugin({
         framework: 'vue2',
+        ide: true,
         theme: {
           themeVarCssPath: 'src/styles/theme.css',
           useOldCssVarParser: true,

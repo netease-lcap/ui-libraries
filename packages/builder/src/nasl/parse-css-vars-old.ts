@@ -1,4 +1,6 @@
 import * as postcss from 'postcss';
+import path from 'path';
+import fs from 'fs-extra';
 import type { ThemeInfo, ThemeVariable, ThemeComponentVars } from './parse-css-vars';
 
 const GLOBAL_NAME = '$global';
@@ -11,7 +13,13 @@ export interface ComponentVarInfo {
   dependencyComponents?: string[];
 }
 
-export default (cssContent: string) => {
+export default (cssContent: string, themeComponentFolder) => {
+  const globTokenPath = path.resolve(themeComponentFolder, '../global-tokens-map.json');
+  let globTokenMap = {};
+  if (fs.existsSync(globTokenPath)) {
+    globTokenMap = fs.readJSONSync(globTokenPath);
+  }
+
   const themeInfo: ThemeInfo = {
     global: {
       selector: DEFAULT_SELECTOR,
@@ -157,8 +165,10 @@ export default (cssContent: string) => {
     if (name === GLOBAL_NAME) {
       themeInfo.global.selector = DEFAULT_SELECTOR;
       Object.keys(comp.cssProperty).forEach((cssVarName) => {
+        const globalVarInfo = globTokenMap[cssVarName] || {};
         themeInfo.global.variables.push({
           ...comp.cssProperty[cssVarName],
+          ...globalVarInfo,
           name: cssVarName,
           value: themePropertiesMap[cssVarName],
         });

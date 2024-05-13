@@ -64,7 +64,7 @@ export default function genThemeConfig(options: ThemeOptions) {
 
   if (options.useOldCssVarParser) {
     const cssContent = fs.readFileSync(options.themeVarCssPath, { encoding: 'utf-8' }).toString();
-    themeInfo = parseCssVarsOld(cssContent);
+    themeInfo = parseCssVarsOld(cssContent, options.themeComponentFolder);
   } else {
     const cssContent = concatCssContent(options.themeVarCssPath, options.themeComponentFolder);
     themeInfo = parseCssVars(cssContent);
