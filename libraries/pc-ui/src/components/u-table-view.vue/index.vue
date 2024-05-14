@@ -349,30 +349,34 @@
                         </td>
                     </tr>
                     <tr key="loading" v-else-if="(currentData === undefined && !currentError) || currentLoading"><!-- 初次加载与加载更多 loading 合并在一起 -->
-                        <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="loading">
-                            <slot name="loading"><u-spinner :class="$style.spinner"></u-spinner> {{ loadingText }}</slot>
-                            <s-empty v-if="$env.VUE_APP_DESIGNER
-                                && !$slots.loading
-                                && $scopedSlots
-                                && !($scopedSlots.loading && $scopedSlots.loading())
-                                && !!$attrs['vusion-node-path']">
-                            </s-empty>
+                        <td :class="[$style.center, $style.centerSticky]" :colspan="visibleColumnVMs.length">
+                            <div :class="$style.wrap" :style="{ width: rootWidth? number2Pixel(rootWidth): undefined }" vusion-slot-name="loading">
+                                <slot name="loading"><u-spinner :class="$style.spinner"></u-spinner> {{ loadingText }}</slot>
+                                <s-empty v-if="$env.VUE_APP_DESIGNER
+                                    && !$slots.loading
+                                    && $scopedSlots
+                                    && !($scopedSlots.loading && $scopedSlots.loading())
+                                    && !!$attrs['vusion-node-path']">
+                                </s-empty>
+                            </div>
                         </td>
                     </tr>
                     <tr key="error" v-else-if="currentData === null || currentError">
-                        <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="error">
-                            <slot name="error">
-                                <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
-                                <u-linear-layout layout="block" justify="center">
-                                    {{ errorText }}
-                                </u-linear-layout>
-                            </slot>
-                            <s-empty v-if="$env.VUE_APP_DESIGNER
-                                && !$slots.error
-                                && $scopedSlots
-                                && !($scopedSlots.error && $scopedSlots.error())
-                                && !!$attrs['vusion-node-path']">
-                            </s-empty>
+                        <td :class="[$style.center, $style.centerSticky]" :colspan="visibleColumnVMs.length">
+                            <div :class="$style.wrap" :style="{ width: rootWidth ? number2Pixel(rootWidth): undefined }" vusion-slot-name="error">
+                                <slot name="error">
+                                    <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
+                                    <u-linear-layout layout="block" justify="center">
+                                        {{ errorText }}
+                                    </u-linear-layout>
+                                </slot>
+                                <s-empty v-if="$env.VUE_APP_DESIGNER
+                                    && !$slots.error
+                                    && $scopedSlots
+                                    && !($scopedSlots.error && $scopedSlots.error())
+                                    && !!$attrs['vusion-node-path']">
+                                </s-empty>
+                            </div>
                         </td>
                     </tr>
                     <tr key="loadMore" v-else-if="pageable === 'load-more' && currentDataSource.hasMore()">
@@ -386,19 +390,21 @@
                         </td>
                     </tr>
                     <tr key="empty" v-else-if="!currentData.length || currentEmpty">
-                        <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="empty">
-                            <slot name="empty">
-                                <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
-                                <u-linear-layout layout="block" justify="center">
-                                    {{ emptyText }}
-                                </u-linear-layout>
-                            </slot>
-                            <s-empty v-if="$env.VUE_APP_DESIGNER
-                                && !$slots.empty
-                                && $scopedSlots
-                                && !($scopedSlots.empty && $scopedSlots.empty())
-                                && !!$attrs['vusion-node-path']">
-                            </s-empty>
+                        <td :class="[$style.center, $style.centerSticky]" :colspan="visibleColumnVMs.length">
+                            <div :class="$style.wrap" :style="{ width: rootWidth ? number2Pixel(rootWidth): undefined }" vusion-slot-name="empty">
+                                <slot name="empty">
+                                    <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
+                                    <u-linear-layout layout="block" justify="center">
+                                        {{ emptyText }}
+                                    </u-linear-layout>
+                                </slot>
+                                <s-empty v-if="$env.VUE_APP_DESIGNER
+                                    && !$slots.empty
+                                    && $scopedSlots
+                                    && !($scopedSlots.empty && $scopedSlots.empty())
+                                    && !!$attrs['vusion-node-path']">
+                                </s-empty>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -607,6 +613,7 @@ export default {
             columnVMsMap: {},
             tableHeadTrArr: [],
             currentPageSize: undefined,
+            rootWidth: undefined,
         };
     },
     computed: {
@@ -721,6 +728,15 @@ export default {
         dataSource(dataSource, oldDataSource) {
             if (typeof dataSource === 'function' && String(dataSource) === String(oldDataSource))
                 return;
+
+            // fix: 2864106089210368，首次进入页面时单击分页切换效果没有实现，需多次点击才生效
+            const replacer = (key, value) => {
+                if (['parentPointer', 'toggle'].includes(key)) return undefined
+                return value
+            }
+            if (JSON.stringify(dataSource, replacer) === JSON.stringify(oldDataSource, replacer) && this.currentDataSource) {
+                return;
+            }
 
             // 拖拽树数据改变的时候，会进入这里的watch，数据会不一致，所以阻止进入
             if (this.preventDatasourceWatch) {
@@ -1112,6 +1128,7 @@ export default {
                         parentEl = parentEl.parentElement;
                     rootWidth = parentEl ? parentEl.offsetWidth : 0;
                 }
+                this.rootWidth = rootWidth;
 
                 // 重新计算列宽等，会导致表格重新渲染，如果组件因为重新渲染而加载，会导致宽高变化，导致handleResize再次触发
                 // 如果是监听Resize事件进来的，如果reComputedWidth是false，就不要重复计算
@@ -1184,7 +1201,9 @@ export default {
                     } else if (remainingWidth > 0 && valueWidthSum !== 0) {
                         const averageWidth = remainingWidth / valueColumnVMs.length;
                         valueColumnVMs.forEach((columnVM) => columnVM.computedWidth = columnVM.computedWidth + averageWidth);
-                    } else if (remainingWidth <= 0 && noWidthColumnVMs.length && defaultColumnWidth) {
+                    } else if (remainingWidth < 0 && noWidthColumnVMs.length) {
+                        noWidthColumnVMs.forEach((columnVM) => columnVM.computedWidth = defaultColumnWidth || 100);
+                    } else if(remainingWidth === 0 && noWidthColumnVMs.length && defaultColumnWidth) {
                         noWidthColumnVMs.forEach((columnVM) => columnVM.computedWidth = defaultColumnWidth);
                     }
 
@@ -1450,7 +1469,7 @@ export default {
                 && this.$refs.scrollView[2].$refs.wrap !== target
                 && (this.$refs.scrollView[2].$refs.wrap.scrollTop = scrollTop);
         },
-        load(more) {
+        load(more, paging = {}) {
             const dataSource = this.currentDataSource;
             if (!dataSource)
                 return;
@@ -1462,7 +1481,7 @@ export default {
                 this.currentLoading = true;
                 this.currentError = false;
             }
-            dataSource[more ? 'loadMore' : 'load']()
+            dataSource[more ? 'loadMore' : 'load'](paging.offset, paging.limit, paging.number)
                 .then((data) => {
                     // 防止同步数据使页面抖动
                     // setTimeout(() => this.currentData = data);
@@ -1839,7 +1858,7 @@ export default {
             this.currentDataSource.page(paging);
             this.$emit('update:page-number', number, this);
             this.$emit('page', paging, this);
-            this.load();
+            this.load(false, { number, limit: size });
         },
         onClickSort(columnVM) {
             let order;
@@ -2399,7 +2418,12 @@ export default {
                         index: this.findItemIndex(item),
                     },
                 };
-                e.dataTransfer.setData('application/json', JSON.stringify(dragStartData));
+                // fix: 树型表格间拖拽，有parentPointer，JSON.stringify报错
+                const replacer = (key, value) => {
+                    if (['parentPointer', 'toggle'].includes(key)) return undefined
+                    return value
+                }
+                e.dataTransfer.setData('application/json', JSON.stringify(dragStartData, replacer));
                 // 当不可拖拽节点里的文字双击选中时再拖拽，会触发dragstart事件，dragover的时候也会响应
                 // 这里增加信息，dragover的时候可以处理是否响应
                 e.dataTransfer.setData('info/acrosstabledrag', '');
@@ -3290,6 +3314,23 @@ export default {
         onXScrollParentScroll(event) {
             this.syncHeadScroll();
         },
+        loadTo(page) {
+            const dataSource = this.currentDataSource;
+            if (!(dataSource && dataSource.paging))
+                return;
+            if(dataSource._load && typeof dataSource._load === 'function') {
+                dataSource.clearLocalData();
+            }
+            let currentPage = page;
+            if(['', null, undefined].includes(page)) {
+                currentPage = dataSource.paging.number;
+            }
+            if(currentPage === dataSource.paging.number) {
+                this.load(false, { number: currentPage });
+            } else {
+                dataSource.paging.number = page;
+            }
+        },
     },
 };
 </script>
@@ -3490,6 +3531,15 @@ export default {
 .center {
     text-align: center;
     color: #999 !important;
+}
+.centerSticky {
+    padding: 0 !important;
+}
+.centerSticky .wrap {
+    position: sticky;
+    left: 0;
+    overflow: hidden;
+    padding: var(--table-view-td-padding);
 }
 
 .sort {

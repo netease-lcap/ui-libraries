@@ -93,6 +93,9 @@ export default {
     cursor: var(--cursor-pointer);
 }
 
+.root {
+  width: 100%;
+}
 .root[collapsible] .head {
     cursor: var(--cursor-pointer);
     padding-left: 38px;

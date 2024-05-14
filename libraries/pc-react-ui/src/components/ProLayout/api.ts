@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @Component({
-    title: '导航栏',
+    title: '导航栏容器',
     icon: 'navbar-multi',
     description:
       '通常用于页面顶部的导航菜单，放置 Logo、导航链接、用户信息等。',
@@ -40,21 +40,21 @@ namespace nasl.ui {
     })
     logo: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '右上角头像 logo 的 url',
-      description: '右上角头像 logo 的 url',
-      docDescription: '右上角头像 logo 的 url',
-    })
-    avatarSrc: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '右上角头像 logo 的 url',
+    //   description: '右上角头像 logo 的 url',
+    //   docDescription: '右上角头像 logo 的 url',
+    // })
+    // avatarSrc: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '右上角用户名',
-      description: '右上角用户名',
-      docDescription: '右上角用户名',
-    })
-    avatarTitle: nasl.core.String = '张梦燕';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '右上角用户名',
+    //   description: '右上角用户名',
+    //   docDescription: '右上角用户名',
+    // })
+    // avatarTitle: nasl.core.String = '张梦燕';
 
     @Prop<ProLayoutOptions, 'layout'>({
       group: '样式属性',
@@ -82,15 +82,26 @@ namespace nasl.ui {
     })
     siderWidth: nasl.core.Decimal = 208;
 
-    @Prop({
+    @Prop<ProLayoutOptions, 'fixSiderbar'>({
       group: '样式属性',
       title: '是否固定导航',
       description: '是否固定导航',
       setter: {
         concept: 'SwitchSetter',
       },
+      if: (_) => _.layout === 'top',
     })
     fixSiderbar: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '样式属性',
+      title: '内容区边距',
+      description: '内容区边距',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    contentPadding: nasl.core.Integer = 32;
 
     @Prop({
       title: '值',
@@ -98,6 +109,27 @@ namespace nasl.ui {
       sync: true,
     })
     openKeys: nasl.core.String;
+
+    // @Prop({
+    //   title: '头部背景色',
+    //   description: '头部背景色',
+    //   tabKind: 'style',
+    // })
+    // colorBgHeader: nasl.core.String;
+
+    // @Prop({
+    //   title: '侧导航背景色',
+    //   description: '侧导航背景色',
+    //   tabKind: 'style',
+    // })
+    // colorMenuBackground: nasl.core.String;
+
+    @Prop({
+      title: '内容区背景色',
+      description: '侧导航背景色',
+      tabKind: 'style',
+    })
+    contentBackground: nasl.core.String;
 
     // @Prop({
     //   title: '字段',
@@ -151,7 +183,7 @@ namespace nasl.ui {
     //   title: '输入前',
     //   description: '选择某一项前触发',
     // })
-    // onBeforeSelect: (event: { value: nasl.core.String; oldValue: nasl.core.String; selectedItem: nasl.core.Any; item: nasl.core.Any; oldItem: nasl.core.Any }) => any;
+    // onBeforeSelect: (event: { value: nasl.core.String; oldValue: nasl.core.String; selectedItem: any; item: any; oldItem: any }) => any;
 
     // @Event({
     //   title: '输入时',
@@ -166,9 +198,9 @@ namespace nasl.ui {
     onSelect: (event: {
       value: nasl.core.String;
       oldValue: nasl.core.String;
-      selectedItem: nasl.core.Any;
-      item: nasl.core.Any;
-      oldItem: nasl.core.Any;
+      selectedItem: any;
+      item: any;
+      oldItem: any;
     }) => any;
 
     @Slot({

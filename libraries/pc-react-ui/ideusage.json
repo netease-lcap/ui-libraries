@@ -5,13 +5,13 @@
       "idetype": "container",
       "structured": true,
       "childAccept": "target.tag === 'SelectOption' || target.tag === 'SelectOptGroup'",
-      "actions": {
-        "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
-        }
+      "events": {
+        "mousedown": true
       },
-      "mutations": ["FormSelect"]
+      "mutations": ["FormSelect"],
+      "additionalAttribute": {
+        "notFoundContent": "{<div></div>}"
+      }
     }
   },
   {
@@ -34,17 +34,18 @@
     "name": "FormSelect",
     "ideusage": {
       "idetype": "container",
-      "actions": {
-        "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
-        }
+      "structured": true,
+      "events": {
+        "mousedown": true
       },
       "displaySlotConditions": {
         "default": false,
         "label": "this.getAttribute('labelIsSlot').value === true",
         "description": false,
         "extra": false
+      },
+      "additionalAttribute": {
+        "notFoundContent": "{<div></div>}"
       }
     }
   },
@@ -61,7 +62,11 @@
       "idetype": "container",
       "structured": "menuSlot",
       "namedSlotOmitWrapper": ["menuSlot"],
-      "parentAccept":"!target.isInSubview"
+      "parentAccept": "!target.isInSubview",
+      "translateBindingProperty": ["avatarTitle"],
+      "childAccept": {
+        "menuSlot": "target.tag === 'MenuItem'"
+      }
     }
   },
   {
@@ -257,7 +262,8 @@
   {
     "name": "QueryForm",
     "ideusage": {
-      "idetype": "container"
+      "idetype": "container",
+      "forceUpdateWhenAttributeChange": true
     }
   },
   {
@@ -269,6 +275,13 @@
   },
   {
     "name": "Button",
+    "ideusage": {
+      "idetype": "element",
+      "editable": "children"
+    }
+  },
+  {
+    "name": "Avatar",
     "ideusage": {
       "idetype": "element",
       "editable": "children"
@@ -289,7 +302,7 @@
       "parentAccept": "target.tag === 'Descriptions'",
       "selector": {
         "expression": "this",
-        "cssSelector": ".cw-descriptions-item"
+        "cssSelector": ".cw-descriptions-item-container"
       }
     }
   },
@@ -297,7 +310,7 @@
     "name": "Flex",
     "ideusage": {
       "idetype": "container",
-      "containerDirection": "this.getAttribute('direction')?.value === 'true' ? 'column' : 'row' ",
+      "containerDirection": "this.getAttribute('direction')?.value === 'vertical' ? 'column' : 'row' ",
       "automate": [
         {
           "command": "WRAP_LINEAR_VERTICAL",
@@ -332,8 +345,13 @@
         "display": 3,
         "loopElem": "table > tbody > tr",
         "emptySlot": {
-          "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
+          "condition": "this.elementsLength() === 0",
           "accept": "target.concept === 'Entity'"
+        },
+        "refInLoop": {
+          "child": "TableColumn",
+          "slot": "render",
+          "useRef": "argus?.[0]?.index === 0"
         }
       },
       "childAccept": "target.tag === 'TableColumn'"
@@ -424,11 +442,8 @@
           "cssSelector": ".cw-tabs-tabpane"
         }
       ],
-      "actions": {
-        "click": {
-          "status": "this.getParent().setCacheStatus('defaultActiveKey', '\"' + this.getAttribute('key')?.value + '\"') ",
-          "effect": "this.getParent().callComponentMethod('setValue', this.getAttribute('key')?.value)"
-        }
+      "events": {
+        "click": true
       }
     }
   },
@@ -589,7 +604,7 @@
         "transitionName": "''",
         "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
       },
-      "cacheOpenKey": "defaultOpen"
+      "cacheOpenKey": "open"
     }
   },
   {
@@ -604,7 +619,7 @@
         "transitionName": "''",
         "maskStyle": "{{opacity: 1,animationDuration: '0s'}}"
       },
-      "cacheOpenKey": "defaultOpen"
+      "cacheOpenKey": "open"
     }
   },
   {
@@ -624,23 +639,26 @@
       "selector": {
         "expression": "this.getElement(el => el.slotTarget === 'content')",
         "cssSelector": "div[class='cw-popover-content']"
-      },
-      "actions": {
-        "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
-        }
       }
     }
   },
   {
     "name": "Image",
     "ideusage": {
-      "idetype": "element"
+      "idetype": "element",
+      "additionalAttribute": {
+        "preview": "{false}"
+      }
     }
   },
   {
     "name": "Card",
+    "ideusage": {
+      "idetype": "container"
+    }
+  },
+  {
+    "name": "Steps",
     "ideusage": {
       "idetype": "container"
     }
@@ -672,11 +690,13 @@
       "idetype": "popover",
       "structured": true,
       "namedSlotOmitWrapper": ["menuItem"],
-      "actions": {
-        "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
-        }
+      "childAccept": {
+        "default": "this.getDefaultElements().length < 1",
+        "menuItem": "target.tag === 'MenuItem'"
+      },
+      "additionalAttribute": {
+        "menu": "{{ triggerSubMenuAction: 'click' }}",
+        "trigger": "{['click']}"
       }
     }
   },
@@ -693,15 +713,13 @@
     "ideusage": {
       "idetype": "container",
       "structured": true,
-      "parentAccept": "target.tag === 'Menu'",
+      "childAccept": "target.tag === 'MenuItem'",
+      "parentAccept": "target.tag === 'Menu' || (target.tag === 'template' && ['menuSlot', 'menuItem'].includes(target.slotTarget) )",
       "displaySlotConditions": {
         "labelSlot": "this.getAttribute('labelIsSlot').value === true"
       },
-      "actions": {
-        "click": {
-          "status": "this.getParent().getParent().setCacheStatus('defaultOpenKeys', '\"' + this.getAttribute('path')?.value + '\"') ",
-          "effect": "this.getParent().getParent().callComponentMethod('setValue', this.getAttribute('path')?.value)"
-        }
+      "events": {
+        "click":  "this.filterElement(el => el.tag === 'MenuItem').length > 0"
       }
     }
   },
@@ -726,12 +744,6 @@
       "selector": {
         "expression": "this.getElement(el => el.slotTarget === 'default' || !el.slotTarget)",
         "cssSelector": "div[class='cw-menu-submenu-popup']"
-      },
-      "actions": {
-        "click": {
-          "status": "this.setCacheStatus('defaultOpen', !(this.getCacheStatus('defaultOpen') || false))",
-          "effect": "this.callComponentMethod(this.getCacheStatus('defaultOpen') ? 'open': 'close')"
-        }
       }
     }
   },
@@ -740,7 +752,8 @@
     "ideusage": {
       "idetype": "element",
       "editable": "children",
-      "textholder": "children"
+      "textholder": "children",
+      "forceUpdateWhenAttributeChange": true
     }
   },
   {

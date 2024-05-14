@@ -37,7 +37,7 @@ export function useHandleNodePath(props) {
   const { isForm } = React.useContext(FormContext);
   const { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls();
-  const nodeId = React.useMemo(() => _.uniqueId('input_'), []);
+  const nodeId = _.uniqueId('input_');
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
   const nodePath = props.get('data-nodepath');
   React.useEffect(() => {
@@ -47,7 +47,7 @@ export function useHandleNodePath(props) {
     if (!isForm) return;
     inputParent?.setAttribute('data-tag-name', 'FormCascader');
     inputParent?.setAttribute('data-has-mutation', 'true');
-  }, []);
+  }, [nodeId]);
   return {
     'data-node-id': nodeId,
     [$deletePropsList]: deletePropsList,

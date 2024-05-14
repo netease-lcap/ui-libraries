@@ -45,6 +45,7 @@
                         :replace="$at2(childNode, rootVM.replaceField)"
                         :exact="$at2(childNode, rootVM.exactField)"
                         :value="$at2(childNode, rootVM.valueField)"
+                        :item="childNode"
                         :icon="$at2(childNode, rootVM.iconField)"
                         :link-type="$at2(childNode, rootVM.linkTypeField)"
                         :href-and-to="$at2(childNode, rootVM.hrefAndToField)"

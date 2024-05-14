@@ -108,7 +108,8 @@ namespace nasl.ui {
                 options: [{ title: '行内展示' }, { title: '块级展示，宽度会充满父元素' }, { title: '栅格展示，可设置列数' }],
             },
             onChange: [
-                { clear: ['repeat'] }
+                { clear: ['repeat'] },
+                { update: { repeat: 1 }, if: (_) => _ === 'inline-flex' }
             ],
         })
         layout: 'inline' | 'block' | 'inline-flex' = 'block';
@@ -627,7 +628,7 @@ namespace nasl.ui {
             snippets: [
                 {
                     title: '表单项',
-                    code: '<u-form-item><template #label><u-text text="表单项"></u-text></template></u-form-item>',
+                    code: '<u-form-item layout="center"><template #label><u-text text="表单项"></u-text></template></u-form-item>',
                 },
             ],
         })

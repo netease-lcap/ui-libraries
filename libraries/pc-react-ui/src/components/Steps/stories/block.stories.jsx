@@ -26,9 +26,9 @@ export const 基本用法 = {
   render: () => {
     return (
       <Steps current={1}>
-        <StepsItem key={1} title="finished" description="his is a description" />
-        <StepsItem key={2} title="In Progress" description="his is a description" />
-        <StepsItem key={3} title="Waiting" description="his is a description" />
+        <StepsItem key={1} />
+        <StepsItem key={2} />
+        <StepsItem key={3} />
       </Steps>
     );
   },
@@ -38,9 +38,9 @@ export const 禁用 = {
   render: () => {
     return (
       <Steps current={1}>
-        <StepsItem disabled key={1} title="finished" description="his is a description" />
-        <StepsItem disabled key={2} title="In Progress" description="his is a description" />
-        <StepsItem disabled key={3} title="Waiting" description="his is a description" />
+        <StepsItem disabled key={1} />
+        <StepsItem disabled key={2} />
+        <StepsItem disabled key={3} />
       </Steps>
     );
   },

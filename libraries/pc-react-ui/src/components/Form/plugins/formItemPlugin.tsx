@@ -1,7 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@vusion/validator';
+import classnames from 'classnames';
+import styles from '../index.module.less';
 import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
+
 import { COLPROPSFIELDS } from '@/components/Row/constants';
 import FormContext from '../form-context';
 import { $deletePropsList } from '@/plugins/constants';
@@ -12,7 +15,7 @@ export function useHandleRule(props) {
     rules: _.map(rules, (item) => {
       return {
         message: item.message,
-        required: item.required,
+        equired: item.required,
         validateTrigger: ['onChange', 'onBlur'],
         ...item,
         validator: (rule, value) => {
@@ -57,12 +60,27 @@ export function useHandleFormWarplabel(props) {
 }
 export function useHandleFormItemProps(props) {
   const BaseComponent = props.get('render');
-  const render = React.useCallback((selfProps) => {
+  const { isForm } = React.useContext(FormContext);
+  const render = React.useCallback(React.forwardRef((selfProps, ref) => {
     const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
     const colProps = _.pick(selfProps, COLPROPSFIELDS);
-    const fieldProps = _.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]);
-    return <BaseComponent {...{ ...formItemProps, fieldProps, colProps }} />;
-  }, [BaseComponent]);
+
+    const fieldProps = {
+      ..._.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]),
+      className: classnames('cw-nasl', selfProps.className),
+      popupClassName: 'cw-nasl',
+      ref,
+    };
+    return (
+      <BaseComponent {...{
+        ...formItemProps,
+        fieldProps,
+        colProps,
+        ...(isForm ? {} : { width: 256 }),
+      }}
+      />
+    );
+  }), [BaseComponent]);
   return {
     render,
   };

@@ -23,24 +23,58 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (...arg) => (
-    <Breadcrumb>
-      <BreadcrumbItem
-        href="www.baidu.com"
-        onDoubleClick={(e) => {
-          console.log('cicl');
-        }}
-        {...arg}
-      >
-        sample
-      </BreadcrumbItem>
-    </Breadcrumb>
-  ),
+  render: (...arg) => {
+    const items = [
+      [
+        {
+          title: 'Home',
+        },
+        {
+          title: <a href="">Application Center</a>,
+        },
+      ],
+    ];
+    return (
+      <Breadcrumb
+        items={[
+          {
+            title: 'Home',
+          },
+          {
+            title: <a href="">Application Center</a>,
+          },
+          {
+            title: <a href="">Application List</a>,
+          },
+          {
+            title: 'An Application',
+            onClick: (e) => {
+              console.log(e, 'e');
+            },
+          },
+        ]}
+      />
+    );
+  },
   args: {
     onDoubleClick: (e) => {
       console.log(1234);
     },
     color: 'magenta',
+    auto: true,
     children: 'Tag',
+    onClick: (e) => {
+      console.log(e, 'e');
+    },
+    items: [
+      [
+        {
+          title: 'Home',
+        },
+        {
+          title: <a href="">Application Center</a>,
+        },
+      ],
+    ],
   },
 };

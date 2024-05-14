@@ -25,6 +25,15 @@ namespace nasl.ui {
     })
     column: nasl.core.Decimal = 3;
 
+    @Prop({
+      group: '主要属性',
+      title: '标题',
+      description: '描述列表的标题，显示在最顶部',
+      setter: {
+        concept: 'InputSetter',
+      },
+    })
+    title: nasl.core.String = '高级定义列表';
     // @Prop({
     //   group: '主要属性',
     //   title: '显示表格头部',
@@ -79,9 +88,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '占据数',
-      description: '列跨越的格数',
-      docDescription: '当前列表项占的列数，为空默认取列表组的列数值，优先取列表项的值',
+      title: '向后合并列数',
+      description: '向后合并列数',
       setter: {
         concept: 'NumberInputSetter',
       },
@@ -187,3 +195,4 @@ namespace nasl.ui {
   //   slotExtra: () => Array<ViewComponent>;
   // }
 }
+

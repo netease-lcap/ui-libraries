@@ -21,7 +21,7 @@ namespace nasl.ui {
       sync: true,
       docDescription: '当前选择的值',
     })
-    value: nasl.core.Any;
+    value: any;
 
     // @Prop({
     //   group: '数据属性',
@@ -161,13 +161,13 @@ namespace nasl.ui {
     description: '多项中选择一项',
     group: 'Form',
   })
-  export class RadioGroup<T, V, C extends string> extends ViewComponent {
+  export class RadioGroup<T, V, C> extends ViewComponent {
     constructor(options?: Partial<RadioGroupOptions<T, V, C>>) {
       super();
     }
   }
 
-  export class RadioGroupOptions<T, V, C extends string> extends ViewComponentOptions {
+  export class RadioGroupOptions<T, V, C> extends ViewComponentOptions {
     @Prop({
       title: '相关对象',
       description: '相关对象。当选择此项时，抛出的事件会传递该对象，便于开发',
@@ -190,7 +190,7 @@ namespace nasl.ui {
       docDescription: '此项的值',
       sync: true,
     })
-    value: nasl.core.Any;
+    value: any;
 
     @Prop<RadioGroupOptions<T, V, C>, 'textField'>({
       group: '数据属性',

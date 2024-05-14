@@ -211,7 +211,7 @@ export default {
     cursor: text;
 }
 
-.root[preview=true]:not([selected=true]) {
-    margin-right: 0;
+.root[preview=true]:not([selected]) {
+    display: none;
 }
 </style>

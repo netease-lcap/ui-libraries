@@ -134,7 +134,7 @@ namespace nasl.ui {
             sync: true,
             docDescription: '当前选择的值',
         })
-        value: V;
+        value: M extends true ? nasl.collection.List<V> : V;
 
         @Prop({
             group: '交互属性',
@@ -156,7 +156,7 @@ namespace nasl.ui {
                 concept: 'SwitchSetter',
             },
         })
-        checkable: nasl.core.Boolean = false;
+        checkable: M = false as any;
 
         @Prop({
             group: '交互属性',

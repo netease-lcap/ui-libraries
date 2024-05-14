@@ -40,7 +40,7 @@ namespace nasl.ui {
             sync: true,
             docDescription: '当前的文件列表',
         })
-        value: nasl.collection.List<nasl.core.String> | nasl.core.String = [] as any;
+        value: nasl.core.String;
 
         @Prop({
             group: '数据属性',

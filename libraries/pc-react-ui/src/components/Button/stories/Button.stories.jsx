@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../index';
+import { Button, Icon } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -30,7 +30,8 @@ export const Primary = {
     }, []);
     return (
       <Button {...args} ref={refss}>
-        Button-loading
+        取色
+        <Icon name="RiCornerLeftUpFill" />
       </Button>
     );
   },
@@ -41,12 +42,11 @@ export const Primary = {
     onContextMenu: (e) => console.log(1),
     // icon: '//minio-api.codewave-test.163yun.com/lowcode-static/user/defaulttenant/1709717732938_%E5%A4%AA%E9%98%B3.svg',
     icon: 'RiCornerLeftUpFill',
-    // onClick: () => new Promise((res) => {
-    //   setTimeout(() => {
-    //     res();
-    //     alert('点击了按钮');
-    //   }, 1000);
-    // }),
+    onClick: async () => {
+      // const eyeDropper = new EyeDropper();
+      // const color = await eyeDropper.open();
+      // alert(color.sRGBHex);
+    },
     // mySize: 'small',
     // appType: '',
     // usePlugin: ['lowCode'],

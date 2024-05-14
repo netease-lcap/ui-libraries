@@ -36,12 +36,15 @@ export function useHandleRef(props, refs) {
     ref: _.assign(ref, {
       validate,
       getValues: getvalues,
-      getValue: refs?.current?.getFieldValue,
+      getValue: (...arg) => {
+        const value = refs?.current?.getFieldValue(...arg);
+        return value;
+      },
       setValue: (...arg) => {
         refs?.current?.setFieldValue(...arg);
       },
-      setValues: refs?.current?.setFieldsValue,
-      resetForm: refs?.current?.resetFields,
+      setValues: (...arg) => { refs?.current?.setFieldsValue(...arg); },
+      resetForm: (...arg) => { refs?.current?.resetFields(...arg); },
     }),
     grid: true,
   };
@@ -50,12 +53,14 @@ export function useHandleGutter(props) {
   const gutterJustify = props.get('gutterJustify', 0);
   const gutterAlign = props.get('gutterAlign', 0);
   const wrapperColSpan = props.get('wrapperColSpan');
+  const labelCol = props.get('labelCol');
+  const wrapperCol = props.get('wrapperCol');
   const labelWidth = props.get('labelWidth');
   return {
     rowProps: {
       gutter: [gutterJustify, gutterAlign],
     },
-    labelCol: { flex: `${labelWidth}px` },
-    wrapperCol: { span: wrapperColSpan },
+    labelCol: { ...labelCol, flex: `${labelWidth}px` },
+    wrapperCol: { ...wrapperCol, span: wrapperColSpan },
   };
 }

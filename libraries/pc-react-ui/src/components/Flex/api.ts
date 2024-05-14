@@ -110,9 +110,21 @@ namespace nasl.ui {
       setter: {
         concept: 'CapsulesSetter',
         options: [
-          { title: '左对齐', icon: 'horizontal-justify-start', tooltip: '左对齐' },
-          { title: '居中对齐', icon: 'horizontal-justify-center', tooltip: '居中对齐' },
-          { title: '右对齐', icon: 'horizontal-justify-end', tooltip: '右对齐' },
+          {
+            title: '左对齐',
+            icon: 'horizontal-justify-start',
+            tooltip: '左对齐',
+          },
+          {
+            title: '居中对齐',
+            icon: 'horizontal-justify-center',
+            tooltip: '居中对齐',
+          },
+          {
+            title: '右对齐',
+            icon: 'horizontal-justify-end',
+            tooltip: '右对齐',
+          },
           {
             title: '平均分布(两端不留空)',
             icon: 'horizontal-justify-space-between',
@@ -127,7 +139,8 @@ namespace nasl.ui {
       },
       tabKind: 'style',
     })
-    justify: 'start' | 'center' | 'end' | 'space-between' | 'space-around' = 'start';
+    justify: 'start' | 'center' | 'end' | 'space-between' | 'space-around' =
+      'start';
 
     @Prop<FlexOptions, 'alignment'>({
       group: '主要属性',
@@ -137,22 +150,38 @@ namespace nasl.ui {
       setter: {
         concept: 'CapsulesSetter',
         options: [
-          { title: '顶对齐', icon: 'horizontal-alignment-start', tooltip: '顶对齐' },
-          { title: '垂直居中', icon: 'horizontal-alignment-center', tooltip: '垂直居中' },
-          { title: '底对齐', icon: 'horizontal-alignment-end', tooltip: '底对齐' },
-          { title: '行内文字基线对齐', icon: 'horizontal-alignment-baseline', tooltip: '行内文字基线对齐' },
-          { title: '占满容器高度', icon: 'horizontal-alignment-stretch', tooltip: '占满容器高度' },
+          {
+            title: '顶对齐',
+            icon: 'horizontal-alignment-start',
+            tooltip: '顶对齐',
+          },
+          {
+            title: '垂直居中',
+            icon: 'horizontal-alignment-center',
+            tooltip: '垂直居中',
+          },
+          {
+            title: '底对齐',
+            icon: 'horizontal-alignment-end',
+            tooltip: '底对齐',
+          },
+          {
+            title: '行内文字基线对齐',
+            icon: 'horizontal-alignment-baseline',
+            tooltip: '行内文字基线对齐',
+          },
         ],
       },
       tabKind: 'style',
     })
-    alignment: 'start' | 'center' | 'end' | 'baseline' | 'stretch' = 'stretch';
+    alignment: 'start' | 'center' | 'end' | 'baseline' = 'start';
 
     @Prop<FlexOptions, 'wrap'>({
       group: '主要属性',
       title: '换行',
       description: '设置弹性布局下子元素总宽度超出父级时子元素是否换行展示',
-      docDescription: '支持控制弹性布局模式下，子元素总宽度超过父级时是否换行展示，默认开启。',
+      docDescription:
+        '支持控制弹性布局模式下，子元素总宽度超过父级时是否换行展示，默认开启。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '换行' }, { title: '不换行' }],
@@ -195,13 +224,19 @@ namespace nasl.ui {
       group: '样式属性',
       title: '内容间隙',
       description: '内容块间隙大小',
-      docDescription: '布局内各个组件之间的间隔，通常有收缩、无、小、正常、大，默认为正常。',
+      docDescription:
+        '布局内各个组件之间的间隔，通常有收缩、无、小、正常、大，默认为正常。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '小' }, { title: '正常' }, { title: '大' }, { title: '无' }],
+        options: [
+          { title: '小' },
+          { title: '正常' },
+          { title: '大' },
+          { title: '无' },
+        ],
       },
     })
-    gap: 'small' | 'middle' | 'large' | 0 = 0;
+    gap: 'small' | 'middle' | 'large' | nasl.core.Integer = 0;
 
     @Event({
       title: '点击',

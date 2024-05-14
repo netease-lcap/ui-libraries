@@ -115,7 +115,7 @@ namespace nasl.ui {
         options: [{ title: '点击' }, { title: '悬浮' }, { title: '右击' }],
       },
     })
-    trigger: 'click' | 'hover' | 'contextMenu' = 'click';
+    trigger: 'click' | 'hover' | 'contextMenu' = 'hover';
 
     // @Prop({
     //   group: '主要属性',

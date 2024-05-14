@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card as AntCard } from 'antd';
 import {
   Card, Flex, Text, CheckboxGroup, Checkbox,
 } from '@/index';
@@ -32,14 +33,31 @@ export const 默认 = {
       bordered
       title={(() => (
         <div ide-draggable="false" data-nodepath="rootview.0.0">
-          <Text data-nodepath="rootview.0.0.0" children="多选框：静态数据" style={{ fontSize: 'inherit' }} />
+          <Text
+            data-nodepath="rootview.0.0.0"
+            children="多选框：静态数据"
+            style={{ fontSize: 'inherit' }}
+          />
         </div>
       ))()}
     >
-      <Flex data-nodepath="rootview.0.1" ide-iscontainer="true" vertical={arg?.add} gap="small" justify="start">
-        <Flex data-nodepath="rootview.0.1.0" ide-iscontainer="true" justify="start">
+      <Flex
+        data-nodepath="rootview.0.1"
+        ide-iscontainer="true"
+        vertical={arg?.add}
+        gap="small"
+        justify="start"
+      >
+        <Flex
+          data-nodepath="rootview.0.1.0"
+          ide-iscontainer="true"
+          justify="start"
+        >
           <Text data-nodepath="rootview.0.1.0.0" children="普通文本" />
-          <CheckboxGroup data-nodepath="rootview.0.1.0.1" ide-iscontainer="true">
+          <CheckboxGroup
+            data-nodepath="rootview.0.1.0.1"
+            ide-iscontainer="true"
+          >
             <Checkbox ide-iscontainer="true" value="苹果" checked={false}>
               <Text data-nodepath="rootview.0.1.0.1.0.0" children="苹果" />
             </Checkbox>
@@ -48,8 +66,15 @@ export const 默认 = {
             </Checkbox>
           </CheckboxGroup>
         </Flex>
-        <Flex data-nodepath="rootview.0.1.1" ide-iscontainer="true" vertical="nasl.core.Boolean" align="start" style={{ textAlign: 'left' }} />
+        <Flex
+          data-nodepath="rootview.0.1.1"
+          ide-iscontainer="true"
+          vertical="nasl.core.Boolean"
+          align="start"
+          style={{ textAlign: 'left' }}
+        />
       </Flex>
+      <AntCard>123</AntCard>
     </Card>
   ),
   args: {

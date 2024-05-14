@@ -1,4 +1,5 @@
 import React from 'react';
+import { ProForm, ProFormText } from '@ant-design/pro-components';
 import { Input, FormItem } from '@/index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -33,14 +34,18 @@ export const 默认 = {
       console.log(ref, 'ref');
     }, []);
     return (
-      <Input
-        ref={ref}
-        labelText="1234"
-        value={value}
-        allowClear
-        data-nodepath="1234"
-        onChange={onchange}
-      />
+      <div>
+        <Input
+          ref={ref}
+          labelText="1234"
+          value={value}
+          allowClear
+          className="myInput"
+          data-nodepath="1234"
+          onChange={onchange}
+        />
+        {/* <Input value={re}> </Input> */}
+      </div>
     );
   },
   args: {

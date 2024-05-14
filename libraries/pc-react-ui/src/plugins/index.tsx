@@ -69,19 +69,9 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
   const baseRef = React.useRef({});
   const pluginHooks = plugin.getPluginMethod();
   const mapProps = plugin.getMapProps();
-  // function handleMutableProps(ref) {
-  //   const obj = { ref, render: BaseComponent, children: props.children };
-  //   return {
-  //     setState: (state) => _.assign(obj, state),
-  //     getState: (state) => obj[state],
-  //     getObj: () => obj,
-  //   };
-  // }
-  // const mutableProps = handleMutableProps(ref);
   const ImmutableProps = Map(props)
     .reduce((result, value, key) => result.set(mapProps.get(key, key), value), Map())
     .set('render', BaseComponent)
-    // .set('mutableProps', mutableProps)
     .set('ref', {})
     .set($deletePropsList, []);
   const expandProps = pluginHooks.reduce(
@@ -102,9 +92,13 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
       ...baseRef.current,
     };
   }, [componentRef, baseRef]);
-  // mutableProps.setState({ ref });
   return (
-    <ConfigProvider locale={zhCN}>
+    <ConfigProvider
+      locale={zhCN}
+      theme={{
+        cssVar: { prefix: 'cw', key: 'cw-nasl' },
+      }}
+    >
       <Component
         {...excludeProps}
         ref={baseRef}

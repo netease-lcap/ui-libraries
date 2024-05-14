@@ -1,17 +1,17 @@
 <template>
 <div :class="$style.root">
-    <div @click="copy" vusion-slot-name="default">
-        <slot>
-            <s-empty v-if="(!$slots.default) && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']"></s-empty>
-            <van-link v-else :disabled="disabled" vusion-slot-name-edit="text">{{ text }}</van-link>
-        </slot>
-    </div>
-    <u-tooltip v-if="feedback === 'tooltip'" :placement="placement" trigger="manual" :opened.sync="success">
-        {{ successText }}
-    </u-tooltip>
-    <u-tooltip :placement="placement" trigger="manual" :opened.sync="failed">
-        {{ failTip }}
-    </u-tooltip>
+  <van-popover v-model="visible" :placement="placement" theme="dark" get-container="body">
+    <span :class="$style.tooltip">{{ success ? successText : failTip }}</span>
+
+    <template #reference>
+      <div @click="copy" vusion-slot-name="default">
+          <slot>
+              <s-empty v-if="(!$slots.default) && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']"></s-empty>
+              <van-link v-else :disabled="disabled" vusion-slot-name-edit="text">{{ text }}</van-link>
+          </slot>
+      </div>
+    </template>
+  </van-popover>
 </div>
 </template>
 
@@ -19,7 +19,7 @@
 import ClipboardJS from 'clipboard';
 // import i18n from '@/utils/i18n';
 import { SEmpty } from 'cloud-ui.vusion/src/components/s-empty.vue';
-import { UTooltip } from 'cloud-ui.vusion/src/components/u-tooltip.vue';
+import Popover from '../../../src/popover';
 import { createI18N } from '../../../src/utils/create/i18n'
 
 const name = 'van-copy';
@@ -28,7 +28,10 @@ const t = createI18N(name);
 
 export default {
     name,
-    components: { SEmpty, UTooltip },
+    components: {
+      SEmpty,
+      Popover
+    },
     props: {
         value: String,
         text: { type: String, default: '复制' },
@@ -39,7 +42,11 @@ export default {
         feedback: { type: String, default: 'tooltip' },
     },
     data() {
-        return { success: false, timeoutId: undefined, failed: false };
+        return {
+          success: false,
+          timeoutId: undefined,
+          visible: false,
+        };
     },
     computed: {
         failTip() {
@@ -58,12 +65,14 @@ export default {
                 if (this.feedback === 'toast')
                     this.$toast.show(this.successText, this.hideDelay);
                 this.$emit('copy', { value: this.value }, this);
-                clearTimeout(this.timeoutId);
-                this.timeoutId = setTimeout(() => {
-                    this.success = false;
-                }, this.hideDelay);
             }
-            this.failed = !this.success;
+
+            clearTimeout(this.timeoutId);
+            this.timeoutId = setTimeout(() => {
+              this.visible = false;
+            }, this.hideDelay);
+
+            this.visible = true;
         },
     },
 };
@@ -73,5 +82,11 @@ export default {
 .root {
     display: inline-block;
     position: relative;
+}
+.tooltip {
+  white-space: nowrap;
+  font-size: 12px;
+  padding: 5px 10px;
+  color: #fff;
 }
 </style>

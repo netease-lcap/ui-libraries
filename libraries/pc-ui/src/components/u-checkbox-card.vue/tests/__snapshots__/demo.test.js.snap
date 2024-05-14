@@ -356,7 +356,7 @@ exports[`u-checkbox-card.vue > Demo-自定义选择项 1`] = `
 `;
 
 exports[`u-checkbox-card.vue > Demo-表单校验 1`] = `
-<div class="root" layout="block">
+<div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
   <div class="root" distance label-size="normal" layout="block" placement="bottom">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">选择环境</span>

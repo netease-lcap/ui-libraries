@@ -56,8 +56,8 @@ exports[`u-countup.vue > Demo-小数 1`] = `
 `;
 
 exports[`u-countup.vue > Demo-方法 1`] = `
-<div class="root" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">演示效果</span>
     </label>
@@ -84,7 +84,7 @@ exports[`u-countup.vue > Demo-方法 1`] = `
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
       <span class="text" vusion-slot-name-edit="label">结束值</span>
     </label>

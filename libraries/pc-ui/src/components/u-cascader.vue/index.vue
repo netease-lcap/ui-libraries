@@ -9,7 +9,7 @@
         :disabled="disabled"
         :readonly="readonly"
         :preview="preview">
-        <span v-if="preview">{{ currentValue }}</span>
+        <span v-if="preview">{{ currentValue || '--' }}</span>
         <u-input v-if="!preview" :class="$style.input" :opened="currentOpened"
             :placeholder="placeholder" :readonly="!filterable || readonly"
             :value="currentValue" :disabled="disabled"
@@ -19,7 +19,7 @@
             :color="formItemVM && formItemVM.color"
             :autofocus="autofocus"
             ref="input">
-            <m-popper v-if="!disabled && !readonly" :class="$style.popperShape" ref="popper"
+            <m-popper v-if="!disabled && !readonly && !preview" :class="$style.popperShape" ref="popper"
                 @mousedown.stop.prevent
                 @open="getSubComponents(true)" @close="resetInput">
                 <div v-if="loading" :class="$style.loading"><u-loading></u-loading></div>
@@ -42,7 +42,7 @@
                 </template>
             </m-popper>
         </u-input>
-        <span v-show="clearable && currentValue && !disabled && !readonly" :class="$style.clearable" @click="clear" @mousedown.prevent></span>
+        <span v-show="clearable && currentValue && !disabled && !readonly && !preview" :class="$style.clearable" @click="clear" @mousedown.prevent></span>
     </div>
 </template>
 
@@ -461,7 +461,7 @@ export default {
             this.$refs.popper && this.$refs.popper.toggle(opened);
         },
         clear(...args) {
-            if (this.readonly || this.disabled) {
+            if (this.readonly || this.disabled || this.preview) {
                 return;
             }
             this.currentValue = '';

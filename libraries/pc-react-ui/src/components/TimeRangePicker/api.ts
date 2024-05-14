@@ -8,7 +8,7 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class TimeRangePicker extends ViewComponent {
-    constructor(options?: Partial<TimePickerOptions>) {
+    constructor(options?: Partial<TimeRangePickerOptions>) {
       super();
     }
   }
@@ -62,7 +62,7 @@ namespace nasl.ui {
       docDescription: '默认显示的日期值。',
       // if: (_) => _.range !== true,
     })
-    value: Array<nasl.core.Time>;
+    value: nasl.collection.List<any>;
 
     // ======================
     // @Prop<TimeRangePickerOptions, 'startDate'>({
@@ -363,17 +363,6 @@ namespace nasl.ui {
     })
     endName: nasl.core.String;
 
-    @Prop({
-      group: '状态属性',
-      title: '弹出状态',
-      description: '弹出状态分为“True(弹出)/False(关闭)”，默认为“关闭”',
-      docDescription: '开启时加载时间组件时，下拉框自动弹出，默认关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    open: nasl.core.Boolean;
-
     //  @Prop({
     //     group: '状态属性',
     //     title: '预览',
@@ -428,18 +417,18 @@ namespace nasl.ui {
       time: nasl.core.String;
     }) => any;
 
-    @Event({
-      title: '失去焦点',
-      description: '失去焦点时触发。',
-    })
-    onBlur: (event: {
-      cancelBubble: nasl.core.Boolean;
-      detail: nasl.core.String;
-      layerX: nasl.core.Integer;
-      layerY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    // @Event({
+    //   title: '失去焦点',
+    //   description: '失去焦点时触发。',
+    // })
+    // onBlur: (event: {
+    //   cancelBubble: nasl.core.Boolean;
+    //   detail: nasl.core.String;
+    //   layerX: nasl.core.Integer;
+    //   layerY: nasl.core.Integer;
+    //   pageX: nasl.core.Integer;
+    //   pageY: nasl.core.Integer;
+    //   which: nasl.core.Integer;
+    // }) => any;
   }
 }

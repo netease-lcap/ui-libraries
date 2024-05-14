@@ -8,6 +8,7 @@ import F from 'futil';
 
 import { ConfigProvider } from 'antd';
 import { useControllableValue } from 'ahooks';
+import { useHandleLink } from '@/plugins/common/index';
 import { Icon, MenuItem } from '@/index';
 import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
@@ -26,7 +27,7 @@ export function useHandleMenuOpenKey(props) {
   const { useLocation } = React.useContext(RouterContext);
   const location = useLocation?.();
   const ref = props.get('ref');
-  const openKeysProps = props.get('oepnKeys');
+  const openKeysProps = props.get('openKeys');
   const defaultOpenKeys = props.get('defaultOpenKeys');
   const onOpenChangeProps = props.get('onOpenChange');
   const [openKeys, setValue] = useControllableValue(_.filterUnderfinedValue({ value: openKeysProps, defaultValue: defaultOpenKeys, onChange: onOpenChangeProps }));
@@ -79,11 +80,12 @@ export function useHandleSelectKey(props) {
 }
 export function useHandleMenuSlot(props) {
   const { useNavigate, useLocation } = React.useContext(RouterContext);
-  const navigate = useNavigate?.();
   const location = useLocation?.();
   const fragment = props.get('menuSlot');
   const menuProps = props.get('menuProps');
   const menuSlot = React.Children.toArray(_.get(fragment, 'props.children', []));
+  const handleLink = useHandleLink();
+  let timeer = null;
   function childToJson(children) {
     return React.Children.map(children, (child) => {
       if (child?.type === MenuItem) {
@@ -93,25 +95,22 @@ export function useHandleMenuSlot(props) {
         const icon = _.isNil(child.props.icon) ? {} : { icon: <Icon name={child.props.icon} /> };
         const label = child.props.labelIsSlot ? child.props.labelSlot : child.props.label;
         return {
-          key: child.props?.path,
+          key: child.props?.destination ?? child.props?.path,
           ...child.props,
           ...childrenProps,
           ...icon,
           label,
           onClick: _.wrap(onClickPorps, (fn, arg) => {
-            _.attempt(fn, arg);
-            if (_.isValidLink(arg.key)) {
-              window.location.href = arg.key;
+            if (_.isFunction(fn)) {
+              _.attempt(fn, arg);
               return;
             }
-            navigate(arg.key);
-            // use
-            // const event = new CustomEvent('pageNavigation', {
-            //   detail: {
-            //     url: arg.key,
-            //   },
-            // });
-            // window.dispatchEvent(event);
+            if (timeer) {
+              clearTimeout(timeer);
+            }
+            timeer = setTimeout(() => {
+              handleLink(arg.key, child.props?.target);
+            }, 150);
           }),
         };
       }
@@ -139,19 +138,38 @@ export function useHandleAvatar(props) {
   const avatarTitleProps = props.get('avatarTitle');
   const avatarSizeProps = props.get('avatarSize');
   const AvatarRenderProps = props.get('avatarRender');
-  const avatarRender = React.isValidElement(AvatarRenderProps) ? (_props, dom) => React.cloneElement(AvatarRenderProps, { children: dom }) : undefined;
+  // const avatarRender = React.isValidElement(AvatarRenderProps) ? (_props, dom) => React.cloneElement(AvatarRenderProps, { children: dom }) : undefined;
   return {
     [$deletePropsList]: deletePropsList,
     logo,
     title,
+    // eslint-disable-next-line no-new-wrappers
+    pageTitleRender: () => '',
     avatarProps: _.filterUnderfinedValue({
       src: avatarSrcProps,
       size: avatarSizeProps,
       title: avatarTitleProps,
-      render: avatarRender,
+      render: (localProps, dom) => {
+        return React.cloneElement(AvatarRenderProps);
+      },
     }),
     menuDataRender: (menuData) => {
       return [{ name: 2, label: 1, path: '/a' }];
+    },
+  };
+}
+
+export function useHandleToken(props) {
+  const colorBgHeader = props.get('colorBgHeader');
+  const colorMenuBackground = props.get('colorMenuBackground');
+  return {
+    token: {
+      header: {
+        colorBgHeader,
+      },
+      sider: {
+        colorMenuBackground,
+      },
     },
   };
 }

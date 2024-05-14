@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders demo correctly 1`] = `
+<div>
+  <div class="root"><span class="van-popover__wrapper"><div vusion-slot-name="default"><a vusion-slot-name-edit="text" target="_self" tabindex="0" hovertype="underline" class="root"><!----><!---->复制密钥</a></div></span></div>
+</div>
+`;

@@ -5,13 +5,13 @@ namespace nasl.ui {
     title: '表单选择器',
     description: '表单选择器',
   })
-  export class FormSelect<T, V, P extends boolean, M extends boolean, C extends string> extends ViewComponent {
+  export class FormSelect<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     constructor(options?: Partial<FormSelectOptions<T, V, P, M, C> & SelectOptions<T, V, P, M, C> & FormItemOptions>) {
       super();
     }
   }
 
-  export class FormSelectOptions<T, V, P extends boolean, M extends boolean, C extends string> extends ViewComponentOptions {
+  export class FormSelectOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
     // @Prop({
     //   group: '主要属性',
     //   title: '标题自定义',

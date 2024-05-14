@@ -9,8 +9,9 @@ export const FORMITEMPROPSFIELDS = [
   'width',
   'hidden',
   'colProps',
-  'className',
+  // 'className',
   'labelCol',
   'labelAlign',
   'transform',
+  'colon',
 ];
