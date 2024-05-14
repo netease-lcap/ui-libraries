@@ -1340,7 +1340,6 @@ namespace nasl.ui {
           setter: {
               concept: 'PropertySelectSetter',
           },
-          disabledIf: _ => _.dataSource === null,
       })
       valueField: (item: T) => V;
 
@@ -1425,7 +1424,6 @@ namespace nasl.ui {
           setter: {
               concept: 'PropertySelectSetter',
           },
-          disabledIf: _ => _.dataSource === null,
       })
       valueField: (item: T) => V = ((item: any)  => item.value) as any;
 
