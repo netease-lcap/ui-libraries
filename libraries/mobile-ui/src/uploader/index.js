@@ -749,6 +749,12 @@ export default createComponent({
           );
         },
         onSuccess: (res) => {
+          if (res.Code === 200 && Array.isArray(res.Data)) {
+            res = {
+              [this.urlField]: res.Data.map((f) => f[this.urlField])[0],
+            };
+          }
+
           file.status = 'success';
           file.message = '';
           file.percent = 100;
