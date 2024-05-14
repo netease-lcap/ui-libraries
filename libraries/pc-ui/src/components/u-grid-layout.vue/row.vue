@@ -20,6 +20,7 @@ export default {
     flex-wrap: wrap;
     /*适配--space-base */
     --grid-layout-column-gap-normal: var(--space-base);
+    --grid-layout-column-gap-none: 0px;
 }
 
 .root[justify="start"] { justify-content: flex-start; }
