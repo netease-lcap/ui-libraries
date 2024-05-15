@@ -11,6 +11,7 @@ import {
   JSXSpreadAttribute,
   JSXText,
   JSXSpreadChild,
+  Expression,
 } from '@babel/types';
 import reactStyleToCSS from 'react-style-object-to-css';
 import { kebabCase, lowerFirst } from 'lodash';
@@ -214,12 +215,17 @@ export function parseJSXExpression(ast: JSXElement | JSXFragment | JSXExpression
       throw new Error(`解析 JSX Expression 异常，$sync 仅允许传一个参数，${getNodeCode(ast)}`);
     }
 
+    const arg = ast.expression.arguments[0];
+    if (['JSXNamespacedName', 'SpreadElement', 'ArgumentPlaceholder'].indexOf(arg.type) !== -1) {
+      throw new Error(`解析 JSX Expression 异常，不支持该表达式，${getNodeCode(ast)}`);
+    }
+
     element.bindAttrs.push({
       concept: 'BindAttribute',
       name: attrName,
       type: 'dynamic',
       sync: true,
-      expression: transformExpression2Nasl(ast.expression),
+      expression: transformExpression2Nasl(arg as Expression),
     });
     return;
   }
