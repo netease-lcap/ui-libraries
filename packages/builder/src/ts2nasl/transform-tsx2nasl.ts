@@ -97,6 +97,8 @@ const createTextNode = (str = '') => {
   } as NaslViewElement;
 };
 
+const SYNC_KEY = '$sync';
+
 export function transformJSXChildNode(node: JSXText | JSXExpressionContainer | JSXSpreadChild | JSXElement | JSXFragment) {
   if (node.type === 'JSXText') {
     return createTextNode(node.value);
@@ -207,6 +209,21 @@ export function parseJSXExpression(ast: JSXElement | JSXFragment | JSXExpression
     return;
   }
 
+  if (ast.expression.type === 'CallExpression' && getNodeCode(ast.expression.callee) === SYNC_KEY) {
+    if (ast.expression.arguments.length !== 1) {
+      throw new Error(`解析 JSX Expression 异常，$sync 仅允许传一个参数，${getNodeCode(ast)}`);
+    }
+
+    element.bindAttrs.push({
+      concept: 'BindAttribute',
+      name: attrName,
+      type: 'dynamic',
+      sync: true,
+      expression: transformExpression2Nasl(ast.expression),
+    });
+    return;
+  }
+
   if (['NumericLiteral', 'BooleanLiteral', 'ArrayExpression', 'ObjectExpression'].indexOf(ast.expression.type) !== -1) {
     element.bindAttrs.push({
       concept: 'BindAttribute',
@@ -251,6 +268,15 @@ export function parseJSXAttr(attr: JSXAttribute | JSXSpreadAttribute, element: N
   }
 
   const attrName = getJSXName(attr.name);
+
+  if (attrName === 'ref') {
+    if (!attr.value || attr.value.type !== 'StringLiteral') {
+      throw new Error(`解析 JSXElement 异常, ref 仅允许设置静态字符串， 例如 ref="button", ${getNodeCode(attr)}`);
+    }
+    element.name = attr.value.value;
+    return;
+  }
+
   if (attrName === 'style') {
     const value = parseJSXStyle(attr.value);
     if (value) {
@@ -289,7 +315,7 @@ export function parseJSXAttr(attr: JSXAttribute | JSXSpreadAttribute, element: N
   });
 }
 
-export default function transformJSXElement2Nasl(element: JSXElement) {
+export function transformJSXElement2Nasl(element: JSXElement) {
   const node = element.openingElement;
 
   const elementAST: NaslViewElement = {
@@ -328,3 +354,5 @@ export default function transformJSXElement2Nasl(element: JSXElement) {
 
   return elementAST;
 }
+
+export default transformJSXElement2Nasl;

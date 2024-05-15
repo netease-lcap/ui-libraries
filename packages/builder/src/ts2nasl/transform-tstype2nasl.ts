@@ -191,7 +191,7 @@ function transformTSTypeLiteral(node: babelTypes.TSTypeLiteral, typeNames: strin
   };
 }
 // eslint-disable-next-line consistent-return
-export default function transformTypeAnnotation(node: babelTypes.TSType, typeNames: string[] = []): TypeAnnotation | undefined {
+function transformTypeAnnotation(node: babelTypes.TSType, typeNames: string[] = []): TypeAnnotation | undefined {
   switch (node.type) {
     case 'TSTypeReference':
       return transformTSTypeReference(node, typeNames);
@@ -208,3 +208,5 @@ export default function transformTypeAnnotation(node: babelTypes.TSType, typeNam
       return undefined;
   }
 }
+
+export default transformTypeAnnotation;

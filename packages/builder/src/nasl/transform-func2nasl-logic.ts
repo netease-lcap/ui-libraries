@@ -6,7 +6,7 @@ import type {
 } from '@nasl/types/nasl.ui.ast';
 import logger from '../utils/logger';
 import { getNodeCode } from '../utils/babel-utils';
-import { transformTsType2Nasl as transformTypeAnnotation } from '../ts2nasl';
+import { transformExpression2nasl, transformTsType2Nasl as transformTypeAnnotation } from '../ts2nasl';
 
 export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDeclaration) {
   if (
@@ -149,57 +149,11 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
         } else if (param.type === 'AssignmentPattern' && param.left.type === 'Identifier' && param.left.typeAnnotation && param.left.typeAnnotation.type === 'TSTypeAnnotation') {
           name = param.left.name;
           typeAnnotation = transformTypeAnnotation(param.left.typeAnnotation.typeAnnotation, typeNames);
-          switch (param.right.type) {
-            case 'NullLiteral':
-              defaultValue = {
-                concept: 'DefaultValue',
-                expression: {
-                  concept: 'NullLiteral',
-                },
-                playground: [],
-              };
-              break;
-            case 'StringLiteral':
-              defaultValue = {
-                concept: 'DefaultValue',
-                expression: {
-                  concept: 'StringLiteral',
-                  value: param.right.value,
-                  i18nKey: '',
-                },
-                playground: [],
-              };
-              break;
-            case 'NumericLiteral':
-              defaultValue = {
-                concept: 'DefaultValue',
-                expression: {
-                  concept: 'NumericLiteral',
-                  value: String(param.right.value),
-                  typeAnnotation: {
-                    concept: 'TypeAnnotation',
-                    typeKind: 'primitive',
-                    typeName: String(param.right.value).includes('.') ? 'Decimal' : 'Long',
-                    typeNamespace: 'nasl.core',
-                    inferred: false,
-                    ruleMap: new Map(),
-                  },
-                },
-                playground: [],
-              };
-              break;
-            case 'BooleanLiteral':
-              defaultValue = {
-                concept: 'DefaultValue',
-                expression: {
-                  concept: 'BooleanLiteral',
-                  value: String(param.right.value),
-                },
-                playground: [],
-              };
-              break;
-            default: break;
-          }
+          defaultValue = {
+            concept: 'DefaultValue',
+            expression: transformExpression2nasl(param.right),
+            playground: [],
+          };
         }
 
         if (name && typeAnnotation) {
@@ -213,6 +167,35 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
 
           if (defaultValue) {
             p.defaultValue = defaultValue;
+          } else if (param.optional) {
+            p.defaultValue = {
+              concept: 'DefaultValue',
+              expression: typeAnnotation.typeKind === 'function'
+                ? {
+                  concept: 'SubLogic',
+                  name: '',
+                  params: (typeAnnotation.typeArguments || []).map((arg, index) => ({
+                    concept: 'Param',
+                    name: `param${index + 1}`,
+                    description: '',
+                    typeAnnotation: arg,
+                  })),
+                  returns: typeAnnotation.returnType,
+                  variables: [],
+                  playground: [],
+                  body: [
+                    {
+                      concept: 'Start',
+                    },
+                    {
+                      concept: 'End',
+                    },
+                  ],
+                } : {
+                  concept: 'NullLiteral',
+                },
+              playground: [],
+            };
           }
 
           logic.params.push(p);

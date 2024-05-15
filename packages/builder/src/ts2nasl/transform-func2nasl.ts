@@ -8,6 +8,7 @@ import {
   Noop,
   TypeAnnotation,
   TSTypeAnnotation,
+  VariableDeclarator,
 } from '@babel/types';
 import { getNodeCode, normalizeArray } from './utils';
 import transformExpression2Nasl from './transform-expression2nasl';
@@ -170,7 +171,29 @@ export function transformStatement(statement: Statement) {
   throw new Error(`解析语句失败, Nasl 不支持该语法, ${getNodeCode(statement)}`);
 }
 
-export default function transformFunc2Nasl(funcAst: FunctionExpression | FunctionDeclaration) {
+export function transformVariable(ast: VariableDeclarator) {
+  if (ast.id.type !== 'Identifier') {
+    throw new Error(`解析变量定义失败， ${getNodeCode(ast)}`);
+  }
+
+  const variable: any = {
+    concept: 'Variable',
+    name: ast.id.name,
+    description: '',
+  };
+
+  if (ast.id.typeAnnotation && ast.id.typeAnnotation.type === 'TSTypeAnnotation') {
+    variable.typeAnnotation = transformTypeAnnotation(ast.id.typeAnnotation.typeAnnotation);
+  }
+
+  if (ast.init) {
+    variable.defaultValue = transformExpression2Nasl(ast.init);
+  }
+
+  return variable;
+}
+
+export function transformFunc2Nasl(funcAst: FunctionExpression | FunctionDeclaration) {
   if (!funcAst.id) {
     throw new Error('解析函数失败，未定义函数名称');
   }
@@ -183,12 +206,7 @@ export default function transformFunc2Nasl(funcAst: FunctionExpression | Functio
 
     s.declarations.forEach((decla) => {
       if (decla.id && decla.id.type === 'Identifier') {
-        variables.push({
-          concept: 'Variable',
-          name: decla.id.name,
-          description: '',
-          typeAnnotation: decla.id.typeAnnotation && decla.id.typeAnnotation.type === 'TSTypeAnnotation' ? transformTypeAnnotation(decla.id.typeAnnotation.typeAnnotation) : null,
-        });
+        variables.push(transformVariable(decla));
       }
     });
 
@@ -218,3 +236,5 @@ export default function transformFunc2Nasl(funcAst: FunctionExpression | Functio
 
   return Logic;
 }
+
+export default transformFunc2Nasl;
