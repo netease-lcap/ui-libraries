@@ -11,6 +11,7 @@ import {
   JSXSpreadAttribute,
   JSXText,
   JSXSpreadChild,
+  Expression,
 } from '@babel/types';
 import reactStyleToCSS from 'react-style-object-to-css';
 import { kebabCase, lowerFirst } from 'lodash';
@@ -96,6 +97,8 @@ const createTextNode = (str = '') => {
     children: [],
   } as NaslViewElement;
 };
+
+const SYNC_KEY = '$sync';
 
 export function transformJSXChildNode(node: JSXText | JSXExpressionContainer | JSXSpreadChild | JSXElement | JSXFragment) {
   if (node.type === 'JSXText') {
@@ -207,12 +210,32 @@ export function parseJSXExpression(ast: JSXElement | JSXFragment | JSXExpression
     return;
   }
 
-  if (ast.expression.type === 'NumericLiteral' || ast.expression.type === 'BooleanLiteral') {
+  if (ast.expression.type === 'CallExpression' && getNodeCode(ast.expression.callee) === SYNC_KEY) {
+    if (ast.expression.arguments.length !== 1) {
+      throw new Error(`解析 JSX Expression 异常，$sync 仅允许传一个参数，${getNodeCode(ast)}`);
+    }
+
+    const arg = ast.expression.arguments[0];
+    if (['JSXNamespacedName', 'SpreadElement', 'ArgumentPlaceholder'].indexOf(arg.type) !== -1) {
+      throw new Error(`解析 JSX Expression 异常，不支持该表达式，${getNodeCode(ast)}`);
+    }
+
+    element.bindAttrs.push({
+      concept: 'BindAttribute',
+      name: attrName,
+      type: 'dynamic',
+      sync: true,
+      expression: transformExpression2Nasl(arg as Expression),
+    });
+    return;
+  }
+
+  if (['NumericLiteral', 'BooleanLiteral', 'ArrayExpression', 'ObjectExpression'].indexOf(ast.expression.type) !== -1) {
     element.bindAttrs.push({
       concept: 'BindAttribute',
       name: attrName,
       type: 'static',
-      value: ast.expression.value,
+      value: getNodeCode(ast.expression),
     });
     return;
   }
@@ -226,9 +249,15 @@ export function parseJSXExpression(ast: JSXElement | JSXFragment | JSXExpression
     };
 
     if (ast.expression.type === 'FunctionExpression') {
-      bindEvent.logics.push(transformFunc2Nasl(ast.expression));
+      const logicNode = transformFunc2Nasl(ast.expression);
+      logicNode.params = [];
+      bindEvent.logics.push(logicNode);
     } else if (ast.expression.type === 'ArrayExpression' && ast.expression.elements.findIndex((eleNode) => !eleNode || eleNode.type !== 'FunctionExpression') === -1) {
-      bindEvent.logics.push(...ast.expression.elements.map((eleNode) => transformFunc2Nasl(eleNode as any)));
+      bindEvent.logics.push(...ast.expression.elements.map((eleNode) => {
+        const logicNode = transformFunc2Nasl(eleNode as any);
+        logicNode.params = [];
+        return logicNode;
+      }));
     } else {
       throw new Error(`JSX 解析失败，事件绑定仅支持函数或函数数组, ${getNodeCode(ast)}`);
     }
@@ -251,6 +280,15 @@ export function parseJSXAttr(attr: JSXAttribute | JSXSpreadAttribute, element: N
   }
 
   const attrName = getJSXName(attr.name);
+
+  if (attrName === 'ref') {
+    if (!attr.value || attr.value.type !== 'StringLiteral') {
+      throw new Error(`解析 JSXElement 异常, ref 仅允许设置静态字符串， 例如 ref="button", ${getNodeCode(attr)}`);
+    }
+    element.name = attr.value.value;
+    return;
+  }
+
   if (attrName === 'style') {
     const value = parseJSXStyle(attr.value);
     if (value) {
@@ -289,7 +327,7 @@ export function parseJSXAttr(attr: JSXAttribute | JSXSpreadAttribute, element: N
   });
 }
 
-export default function transformJSXElement2Nasl(element: JSXElement) {
+export function transformJSXElement2Nasl(element: JSXElement) {
   const node = element.openingElement;
 
   const elementAST: NaslViewElement = {
@@ -328,3 +366,5 @@ export default function transformJSXElement2Nasl(element: JSXElement) {
 
   return elementAST;
 }
+
+export default transformJSXElement2Nasl;

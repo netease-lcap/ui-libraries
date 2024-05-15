@@ -1,6 +1,12 @@
 /* eslint-disable no-use-before-define */
-import { CallExpression, Expression, ObjectExpression } from '@babel/types';
+import {
+  ArrowFunctionExpression,
+  CallExpression,
+  Expression,
+  ObjectExpression,
+} from '@babel/types';
 import { getNodeCode } from './utils';
+import { transformParam2Nasl } from './transform-func2nasl';
 
 const getNamespace = (ast) => {
   if (ast.object && ast.object.name === 'nasl' && ast.property && ast.property.name) {
@@ -64,11 +70,14 @@ function transformCallExpress2Nasl(ast: CallExpression) {
       expression: transformExpression2Nasl(arg),
     };
   });
+
+  const SHORTCUT_NAMES = ['consoleLog', 'jsonSerialize', 'jsonDeserialize'];
   if (namespace === 'nasl.util') {
     return {
       concept: 'CallFunction',
       calleeNamespace: namespace,
       calleeName: name,
+      shortcut: SHORTCUT_NAMES.indexOf(name) !== -1,
       arguments: args,
     };
   }
@@ -78,10 +87,23 @@ function transformCallExpress2Nasl(ast: CallExpression) {
     arguments: args,
     calleeNamespace: namespace,
     calleeName: name,
+    shortcut: namespace === 'nasl.ui',
   };
 }
 
-export default function transformExpression2Nasl(ast: Expression, namespace = '') {
+function transformArrowFunctionExpression(ast: ArrowFunctionExpression) {
+  if (ast.body.type === 'BlockStatement') {
+    throw new Error(`解析Expression失败，箭头函数仅支持表达式, ${getNodeCode(ast)}`);
+  }
+
+  return {
+    concept: 'AnonymousFunction',
+    params: ast.params.map((p) => transformParam2Nasl(p)),
+    body: transformExpression2Nasl(ast.body),
+  };
+}
+
+export function transformExpression2Nasl(ast: Expression, namespace = '') {
   switch (ast.type) {
     case 'MemberExpression':
       // eslint-disable-next-line no-case-declarations
@@ -195,9 +217,13 @@ export default function transformExpression2Nasl(ast: Expression, namespace = ''
         left: transformExpression2Nasl(ast.left as any),
         right: transformExpression2Nasl(ast.right),
       };
+    case 'ArrowFunctionExpression':
+      return transformArrowFunctionExpression(ast);
     case 'CallExpression':
       return transformCallExpress2Nasl(ast);
     default:
       throw new Error(`解析Expression失败，nasl未支持该表达式, ${getNodeCode(ast)}`);
   }
 }
+
+export default transformExpression2Nasl;

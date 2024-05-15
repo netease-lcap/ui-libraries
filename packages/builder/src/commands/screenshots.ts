@@ -51,4 +51,6 @@ export default async (rootPath, port = 6006) => {
       await el.screenshot({ path: `${screenshotDir}/${j}.png` });
     }
   }
+
+  await browser.close();
 };
