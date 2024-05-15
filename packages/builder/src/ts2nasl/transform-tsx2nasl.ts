@@ -249,9 +249,15 @@ export function parseJSXExpression(ast: JSXElement | JSXFragment | JSXExpression
     };
 
     if (ast.expression.type === 'FunctionExpression') {
-      bindEvent.logics.push(transformFunc2Nasl(ast.expression));
+      const logicNode = transformFunc2Nasl(ast.expression);
+      logicNode.params = [];
+      bindEvent.logics.push(logicNode);
     } else if (ast.expression.type === 'ArrayExpression' && ast.expression.elements.findIndex((eleNode) => !eleNode || eleNode.type !== 'FunctionExpression') === -1) {
-      bindEvent.logics.push(...ast.expression.elements.map((eleNode) => transformFunc2Nasl(eleNode as any)));
+      bindEvent.logics.push(...ast.expression.elements.map((eleNode) => {
+        const logicNode = transformFunc2Nasl(eleNode as any);
+        logicNode.params = [];
+        return logicNode;
+      }));
     } else {
       throw new Error(`JSX 解析失败，事件绑定仅支持函数或函数数组, ${getNodeCode(ast)}`);
     }
