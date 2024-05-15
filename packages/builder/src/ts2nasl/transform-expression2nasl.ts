@@ -70,11 +70,14 @@ function transformCallExpress2Nasl(ast: CallExpression) {
       expression: transformExpression2Nasl(arg),
     };
   });
+
+  const SHORTCUT_NAMES = ['consoleLog', 'jsonSerialize', 'jsonDeserialize'];
   if (namespace === 'nasl.util') {
     return {
       concept: 'CallFunction',
       calleeNamespace: namespace,
       calleeName: name,
+      shortcut: SHORTCUT_NAMES.indexOf(name) !== -1,
       arguments: args,
     };
   }
@@ -84,6 +87,7 @@ function transformCallExpress2Nasl(ast: CallExpression) {
     arguments: args,
     calleeNamespace: namespace,
     calleeName: name,
+    shortcut: namespace === 'nasl.ui',
   };
 }
 
