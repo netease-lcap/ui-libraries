@@ -74,7 +74,6 @@
     "loader-utils": "^3.2.1",
     "lodash": "^4.17.21",
     "postcss": "^8.4.35",
-    "puppeteer": "^22.2.0",
     "react-style-object-to-css": "^1.1.2",
     "semver": "^7.5.4"
   },
