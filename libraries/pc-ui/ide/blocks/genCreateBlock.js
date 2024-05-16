@@ -190,12 +190,14 @@ function genQueryLogic(allEntities, nameGroup, supportFilter, supportSort, paren
     }`;
 }
 
-export function genCreateBlock(entity, viewElement) {
-  const likeComponent = viewElement?.likeComponent;
+export function genCreateBlock(entity, refElement) {
+  const likeComponent = refElement?.likeComponent;
   const dataSource = entity.parentNode;
   const module = dataSource.app;
-  const { ns } = entity;
 
+  // 生成唯一name
+  // 加到页面上的params、variables、logics等都需要唯一name
+  // 页面上有ref引用的element也需要唯一name
   const nameGroup = {
     viewElementMainView: likeComponent.getViewElementUniqueName('form1'),
     viewVariableEntity: likeComponent.getVariableUniqueName(firstLowerCase(entity.name)),
