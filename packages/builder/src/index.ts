@@ -7,13 +7,11 @@ export type {
   ThemeComponentVars,
   ThemeVariable,
   ThemeGlobalVars,
-  NaslViewElement,
 } from './nasl';
 export {
   parseComponentAPI,
   parseCssVars,
   parseCssVarsOld,
-  transformJsx2Nasl,
   transformTsFunc2NaslLogic,
 } from './nasl';
 
