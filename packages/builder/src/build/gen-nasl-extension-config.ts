@@ -118,7 +118,10 @@ export default async function getNaslExtensionConfig({
       framework,
     });
 
-    componentConfig.category = `${pkgInfo.name}(${pkgInfo.title})`;
+    const projectAssetPath = 'assets';
+    if (componentConfig.icon && componentConfig.icon.indexOf('.') !== -1 && fs.existsSync(path.join(rootPath, projectAssetPath, componentConfig.icon))) {
+      componentConfig.icon = `${assetsPublicPath}/${libInfo}/${projectAssetPath}/${componentConfig.icon}`;
+    }
 
     return componentConfig;
   });

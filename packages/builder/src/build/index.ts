@@ -214,7 +214,7 @@ async function zipExtension(root, destDir) {
     zipList.push(zipName);
   }
 
-  const assets = await glob(['src/**/screenshots/*', 'src/**/drawings/*'], { cwd: root });
+  const assets = await glob(['assets/**/*', 'src/**/screenshots/*', 'src/**/drawings/*'], { cwd: root });
 
   assets.forEach((assetPath) => {
     filePathList.push(`${getPath(assetPath, pkg)}: ${assetPath}`);
