@@ -24,15 +24,18 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary = {
-  render: (args) => <InputNumber {...args} />,
+  render: (args) => {
+    return <InputNumber {...args} />;
+  },
   args: {
     type: 'primary',
     style: { width: '256px' },
-    onClick: () => new Promise((res) => {
-      setTimeout(() => {
-        res();
-      }, 3000);
-    }),
+    onClick: () =>
+      new Promise((res) => {
+        setTimeout(() => {
+          res();
+        }, 3000);
+      }),
     'data-nodepath': '123412',
     placeholder: '请输入数字1',
     // controls: false,

@@ -73,7 +73,7 @@ namespace nasl.ui {
             description: '最小可选的日期值，默认为10年前，日期填写格式为“yyyy-mm-dd”',
             docDescription: '控制日历展示的日期范围，默认 10 年前。',
         })
-        minDate: nasl.core.Date;
+        minDate: nasl.core.Date | nasl.core.String;
 
         @Prop({
             group: '数据属性',
@@ -81,7 +81,7 @@ namespace nasl.ui {
             description: '最大可选的日期值，默认为9年后，日期填写格式为“yyyy-mm-dd”',
             docDescription: '控制日历展示的日期范围，默认 9 年后。',
         })
-        maxDate: nasl.core.Date;
+        maxDate: nasl.core.Date | nasl.core.String;
 
         @Prop({
             group: '主要属性',

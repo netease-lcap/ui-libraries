@@ -33,7 +33,7 @@ export default {
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-const nasl = { auth: { userInfo: { UserName: '' } } };
+const nasl = { auth: { userInfo: { UserName: '用户名' } } };
 export const 基本用法 = {
   render: () => {
     return (
