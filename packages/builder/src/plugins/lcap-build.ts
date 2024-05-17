@@ -7,6 +7,7 @@ export interface LcapThemeOptions {
   /* 使用旧的css var 解析方式（兼容 pc-ui, mobile-ui） */
   useOldCssVarParser?: boolean;
   previewPages?: Array<{ name: string; title: string; viewport?: { width: number; height: number } }>;
+  themePreviewEntry?: string;
 }
 
 export interface ViteLcapPluginOptions {

@@ -16,7 +16,8 @@
       "require": "./lib/index.js",
       "import": "./lib/index.js"
     },
-    "./lib/ts2nasl/transform-tsx2nasl": "./lib/ts2nasl/transform-tsx2nasl.js",
+    "./input/vue2/component-preview": "./input/vue2/component-preview.js",
+    "./input/react/component-preview": "./input/react/component-preview.jsx",
     "./input/theme.html": "./input/theme.html",
     "./package.json": "./package.json"
   },
