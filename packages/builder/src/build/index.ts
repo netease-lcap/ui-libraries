@@ -69,23 +69,22 @@ export function buildThemeOld(rootPath, destDir) {
 }
 
 export async function buildTheme(options: LcapBuildOptions) {
-  if (!options.theme.themeVarCssPath || !fs.existsSync(options.theme.themeVarCssPath)) {
-    buildThemeOld(options.rootPath, options.destDir);
-    return;
-  }
-
-  logger.start('开始生成 theme.config.json...');
   const themeConfig = genThemeConfig({
     components: options.components || [],
     themeVarCssPath: options.theme.themeVarCssPath || '',
     themeComponentFolder: options.theme.themeComponentFolder || '',
     previewPages: options.theme.previewPages || [],
     useOldCssVarParser: options.theme.useOldCssVarParser,
+    type: options.type,
   });
 
-  logger.success('生成 theme.config.json 成功！');
-  await fs.writeJSONSync(`${options.destDir}/theme.config.json`, themeConfig, { spaces: 2 });
+  if (!themeConfig || !themeConfig.components || themeConfig.components.length === 0) {
+    return;
+  }
+
   logger.start('开始构建 theme');
+  await fs.writeJSON(`${options.destDir}/theme.config.json`, themeConfig, { spaces: 2 });
+  logger.success('生成 theme.config.json 成功！');
 
   await viteBuildTheme(themeConfig);
   logger.success('构建theme 成功');

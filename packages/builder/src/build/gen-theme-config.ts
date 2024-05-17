@@ -7,9 +7,10 @@ import parseCssVarsOld from '../nasl/parse-css-vars-old';
 export interface ThemeOptions {
   themeVarCssPath: string;
   themeComponentFolder: string;
+  type: string;
   previewPages: Array<{ name: string, title: string }>;
   useOldCssVarParser?: boolean;
-  components: Array<{ group: string, title: string, name: string, [key: string]: any }>
+  components: Array<{ group: string, title: string, name: string, [key: string]: any }>;
 }
 
 export interface ThemeComponentConfig extends ThemeComponentVars {
@@ -30,14 +31,19 @@ export interface ThemeConfig {
   global: ThemeGlobalConfig;
 }
 
-function concatCssContent(themeVarCssPath: string, themeComponentFolder: string) {
-  const cssVarFiles = [
-    themeVarCssPath,
-  ];
+function getCssContent(options: ThemeOptions) {
+  const cssVarFiles: string[] = [];
 
-  const varFiles = glob.sync('*/vars.css', { cwd: themeComponentFolder, absolute: true });
-  if (varFiles.length > 0) {
-    cssVarFiles.push(...varFiles);
+  if (options.themeVarCssPath) {
+    cssVarFiles.push(options.themeVarCssPath);
+  }
+
+  if (!options.useOldCssVarParser) {
+    const varsPath = options.type === 'extension' ? '*/theme/vars.css' : '*/vars.css';
+    const varFiles = glob.sync(varsPath, { cwd: options.themeComponentFolder, absolute: true });
+    if (varFiles.length > 0) {
+      cssVarFiles.push(...varFiles);
+    }
   }
 
   const cssContents: string[] = [];
@@ -62,11 +68,15 @@ export default function genThemeConfig(options: ThemeOptions) {
 
   let themeInfo: ThemeInfo;
 
+  const cssContent = getCssContent(options);
+
+  if (!cssContent) {
+    return themeConfig;
+  }
+
   if (options.useOldCssVarParser) {
-    const cssContent = fs.readFileSync(options.themeVarCssPath, { encoding: 'utf-8' }).toString();
     themeInfo = parseCssVarsOld(cssContent, options.themeComponentFolder);
   } else {
-    const cssContent = concatCssContent(options.themeVarCssPath, options.themeComponentFolder);
     themeInfo = parseCssVars(cssContent);
   }
 
