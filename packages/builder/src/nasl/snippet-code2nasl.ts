@@ -1,6 +1,6 @@
 import * as parser from '@babel/parser';
 import traverse from '@babel/traverse';
-import transformJsx2Nasl from './transform-jsx2nasl';
+import { transformTSX2Nasl } from '../ts2nasl';
 
 export default (code) => {
   const ast = parser.parse(code, {
@@ -11,7 +11,7 @@ export default (code) => {
   let nasl = '';
   traverse(ast, {
     JSXElement: (p) => {
-      nasl = transformJsx2Nasl(p.node);
+      nasl = JSON.stringify(transformTSX2Nasl(p.node));
       p.stop();
     },
   });
