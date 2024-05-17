@@ -7,6 +7,7 @@ import genNaslLogicsConfig from './gen-nasl-logics-config';
 export interface GenNaslExtensionConfigProps {
   // cwd
   rootPath: string;
+  i18n?: boolean | { [lang: string]: string };
   framework?: string;
   assetsPublicPath?: string;
 }
@@ -104,6 +105,7 @@ export default async function getNaslExtensionConfig({
   rootPath,
   assetsPublicPath,
   framework,
+  i18n,
 }: GenNaslExtensionConfigProps) {
   const componentPath = 'src/components';
   const pkgInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
@@ -121,6 +123,18 @@ export default async function getNaslExtensionConfig({
     const projectAssetPath = 'assets';
     if (componentConfig.icon && componentConfig.icon.indexOf('.') !== -1 && fs.existsSync(path.join(rootPath, projectAssetPath, componentConfig.icon))) {
       componentConfig.icon = `${assetsPublicPath}/${libInfo}/${projectAssetPath}/${componentConfig.icon}`;
+    }
+
+    if (i18n) {
+      const componentDir = path.resolve(tsPath, '../');
+      const i18nFiles = glob.sync('i18n/*.json', { cwd: componentDir, absolute: true });
+      componentConfig.i18nMap = {};
+      i18nFiles.forEach((i18nFilePath) => {
+        const map = fs.readJSONSync(i18nFilePath, 'utf-8');
+        const key = path.basename(i18nFilePath, '.json');
+
+        componentConfig.i18nMap[key] = map || {};
+      });
     }
 
     return componentConfig;

@@ -12,7 +12,7 @@ export interface LcapThemeOptions {
 export interface ViteLcapPluginOptions {
   type?: 'extension' | 'nasl.ui';
   framework?: 'react' | 'vue2' | 'taro' | 'vue3',
-  i18n?: { [lang: string]: string };
+  i18n?: boolean | { [lang: string]: string };
   ide?: boolean;
   assetsPublicPath?: string;
   components?: Array<{ group: string, title: string, name: string }>,

@@ -26,7 +26,7 @@ export interface LcapBuildOptions {
   framework: 'react' | 'vue2' | 'taro' | 'vue3',
   assetsPublicPath?: string;
   components?: Array<{ group: string, title: string, name: string, [key: string]: any }>,
-  i18n?: {[lang: string]: string}
+  i18n?: boolean | {[lang: string]: string}
   theme: LcapThemeOptions,
   ide?: BuildIdeOptions,
   destDir: string;
@@ -241,6 +241,7 @@ export async function buildNaslExtension(options: LcapBuildOptions) {
     assetsPublicPath: options.assetsPublicPath,
     rootPath: options.rootPath,
     framework: options.framework,
+    i18n: options.i18n,
   });
   logger.success('生成 nasl.extension.json 成功！');
   const naslConfigPath = path.join(options.rootPath, 'nasl.extension.json');
