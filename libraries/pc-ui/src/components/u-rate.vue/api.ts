@@ -107,6 +107,17 @@ namespace nasl.ui {
         })
         readonly: nasl.core.Boolean = false;
 
+        @Prop({
+          group: '状态属性',
+          title: '预览',
+          description: '显示预览态',
+          docDescription: '',
+          setter: {
+            concept: 'SwitchSetter',
+          },
+        })
+        preview: nasl.core.Boolean = false;
+
         @Event({
             title: '改变后',
             description: '修改时触发',

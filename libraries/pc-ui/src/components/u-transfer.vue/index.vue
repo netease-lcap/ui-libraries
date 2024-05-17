@@ -1,8 +1,9 @@
 <template>
-    <div :class="$style.root">
+    <div :class="[$style.root, isPreview ? $style.preview : '']">
         <u-list-view
             :class="$style.listView"
             multiple
+            v-if="!isPreview"
             :checkbox="checkbox"
             :data-source="source"
             v-model="sourceValues"
@@ -30,7 +31,7 @@
                 <slot name="item" v-bind="props"></slot>
             </template>
         </u-list-view>
-        <div :class="$style.buttons">
+        <div v-if="!isPreview" :class="$style.buttons">
             <u-button
                 color="primary"
                 shape="square"
@@ -50,10 +51,12 @@
                 @click="forward()"
             ></u-button>
         </div>
+        <u-preview v-if="isPreview && (!target || target.length === 0)"></u-preview>
         <u-list-view
+            v-if="!isPreview || (target && target.length > 0)"
             :class="$style.listView"
             multiple
-            :checkbox="checkbox"
+            :checkbox="checkbox && !isPreview"
             :data-source="target"
             v-model="targetValues"
             :text-field="textField"
@@ -73,7 +76,7 @@
             ref="target"
             :page-size="pageSize"
             empty-text="请从左侧添加"
-            :readonly="readonly"
+            :readonly="readonly || isPreview"
             :disabled="disabled"
         >
             <template #item="props">
@@ -86,9 +89,15 @@
 
 <script>
 import UListView from '../u-list-view.vue';
+import UPreview from '../u-text.vue';
+import MPreview from '../u-text.vue/preview';
 
 export default {
     name: 'u-transfer',
+    mixins: [MPreview],
+    components: {
+      UPreview
+    },
     props: {
         source: Array,
         target: Array,
@@ -111,6 +120,7 @@ export default {
         pageSize: UListView.props.pageSize,
         readonly: UListView.props.readonly,
         disabled: UListView.props.disabled,
+        preview: { type: Boolean, default: false },
     },
     data() {
         return { sourceValues: [], targetValues: [] };
@@ -218,5 +228,10 @@ export default {
 }
 .root[size$="auto"] .listView {
     width: auto;
+}
+.preview .listView {
+  border: none;
+  height: auto;
+  max-height: var(--transfer-height);
 }
 </style>

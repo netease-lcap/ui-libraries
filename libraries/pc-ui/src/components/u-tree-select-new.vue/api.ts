@@ -215,6 +215,17 @@ namespace nasl.ui {
       })
       height: 'full' | 'huge' | 'large' | 'medium' | 'normal' | 'small' | 'mini' = 'normal';
 
+      @Prop({
+        group: '状态属性',
+        title: '预览',
+        description: '显示预览态',
+        docDescription: '',
+        setter: {
+          concept: 'SwitchSetter',
+        },
+      })
+      preview: nasl.core.Boolean = false;
+
       @Event({
           title: '改变后',
           description: '修改时触发',
