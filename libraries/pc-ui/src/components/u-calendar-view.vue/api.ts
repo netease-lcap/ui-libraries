@@ -7,7 +7,7 @@ namespace nasl.ui {
         description: '用于展示大量结构化数据。支持日历结构展示。',
         group: "Table"
     })
-    export class UCalendarView<T> extends ViewComponent {
+    export class UCalendarView<T, M extends nasl.core.Boolean> extends ViewComponent {
 
 
         @Method({
@@ -15,10 +15,10 @@ namespace nasl.ui {
             description: '重新加载',
         })
         reload(): void {}
-        constructor(options?: Partial<UCalendarViewOptions<T>>) { super(); }
+        constructor(options?: Partial<UCalendarViewOptions<T, M>>) { super(); }
     }
 
-    export class UCalendarViewOptions<T> extends ViewComponentOptions {
+    export class UCalendarViewOptions<T, M extends nasl.core.Boolean> extends ViewComponentOptions {
         @Prop({
             group: '数据属性',
             title: '数据源',
@@ -36,7 +36,7 @@ namespace nasl.ui {
         })
         dataSchema: T;
 
-        @Prop<UCalendarViewOptions<T>, 'startKey'>({
+        @Prop<UCalendarViewOptions<T, M>, 'startKey'>({
             group: '数据属性',
             title: '开始时间字段',
             description: '数据内表示开始时间的字段',
@@ -47,7 +47,7 @@ namespace nasl.ui {
         })
         startKey: (item: T) => any = ((item: any)  => item.startTime) as any;
 
-        @Prop<UCalendarViewOptions<T>, 'endKey'>({
+        @Prop<UCalendarViewOptions<T, M>, 'endKey'>({
             group: '数据属性',
             title: '结束时间字段',
             description: '数据内表示结束时间的字段',
@@ -65,7 +65,7 @@ namespace nasl.ui {
             sync: true,
             docDescription: '当前选择的日期。',
         })
-        value: nasl.core.Date = 'TODAY' as any;
+        value: M extends true ? nasl.collection.List<nasl.core.Date> : nasl.core.Date;
 
         @Prop({
             group: '数据属性',
@@ -73,7 +73,7 @@ namespace nasl.ui {
             description: '最小可选的日期值，默认为10年前，日期填写格式为“yyyy-mm-dd”',
             docDescription: '控制日历展示的日期范围，默认 10 年前。',
         })
-        minDate: nasl.core.Date;
+        minDate: nasl.core.Date | nasl.core.String;
 
         @Prop({
             group: '数据属性',
@@ -81,7 +81,7 @@ namespace nasl.ui {
             description: '最大可选的日期值，默认为9年后，日期填写格式为“yyyy-mm-dd”',
             docDescription: '控制日历展示的日期范围，默认 9 年后。',
         })
-        maxDate: nasl.core.Date;
+        maxDate: nasl.core.Date | nasl.core.String;
 
         @Prop({
             group: '主要属性',
@@ -145,7 +145,7 @@ namespace nasl.ui {
                 concept: 'SwitchSetter',
             },
         })
-        multiple: nasl.core.Boolean = false;
+        multiple: M = false as any;
 
         @Event({
             title: '选择后',

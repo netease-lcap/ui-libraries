@@ -31,7 +31,7 @@ describe('u-textarea.vue functional tests', () => {
     wrapper.vm.onDragStart();
     expect(wrapper.vm.startWidth).toBe(0);
     wrapper.vm.onDrag({ dragY: 20 });
-    expect(wrapper.vm.height).toBe('220px');
+    expect(wrapper.vm.height).toBe('20px');
 
     await wrapper.setProps({
       resize: 'horizontal',

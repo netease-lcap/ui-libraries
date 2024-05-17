@@ -4,12 +4,9 @@ exports[`u-tree-select-new.vue > Demo-Data 方式 1`] = `
 <div>
   <div class="root" tabindex="0">
     <span class="baseline">b</span>
-    <!---->
     <div class="text">
       <span> 节点 1 </span>
-      <!---->
     </div>
-    <!---->
     <transition-stub class="popper" name="fade">
       <div class="root" style="display: none;"></div>
     </transition-stub>
@@ -22,10 +19,7 @@ exports[`u-tree-select-new.vue > Demo-Tag 方式 1`] = `
   <span class="baseline">b</span>
   <span class="placeholder"> 请选择 </span>
   <div class="text">
-    <!---->
-    <!---->
   </div>
-  <!---->
   <transition-stub class="popper" name="fade">
     <div class="root" style="display: none;"></div>
   </transition-stub>
@@ -38,10 +32,7 @@ exports[`u-tree-select-new.vue > Demo-Tag 方式 2`] = `
     <span class="baseline">b</span>
     <span class="placeholder"> 请选择 </span>
     <div class="text">
-      <!---->
-      <!---->
     </div>
-    <!---->
     <transition-stub class="popper" name="fade">
       <div class="root" style="display: none;"></div>
     </transition-stub>
@@ -55,10 +46,7 @@ exports[`u-tree-select-new.vue > Demo-一维Data 1`] = `
     <span class="baseline">b</span>
     <span class="placeholder"> 请选择 </span>
     <div class="text">
-      <!---->
-      <!---->
     </div>
-    <!---->
     <transition-stub class="popper" name="fade">
       <div class="root" style="display: none;"></div>
     </transition-stub>
@@ -71,142 +59,85 @@ exports[`u-tree-select-new.vue > Demo-修改尺寸 1`] = `
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <div class="root" height="normal" tabindex="0" width>
       <span class="baseline">b</span>
-      <!---->
       <div class="text">
         <span> 节点 1 </span>
-        <!---->
       </div>
-      <!---->
       <transition-stub class="popper" name="fade">
         <div class="root" style="display: none;"></div>
       </transition-stub>
     </div>
-    <!---->
-    <!---->
   </div>
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <span class="root" vusion-slot-name-edit="text">选择尺寸</span>
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;">选择宽度</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
         正常
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               占满
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               巨大
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               大
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               中型
-              <!---->
             </div>
             <div class="root" selected="selected" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               正常
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               小
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               迷你
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;">选择高度</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
         正常
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               占满
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               巨大
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               大
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               中型
-              <!---->
             </div>
             <div class="root" selected="selected" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               正常
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               小
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               迷你
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
-    <!---->
-    <!---->
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -216,10 +147,7 @@ exports[`u-tree-select-new.vue > Demo-动态插槽数据 1`] = `
     <span class="baseline">b</span>
     <span class="placeholder"> 请选择 </span>
     <div class="text">
-      <!---->
-      <!---->
     </div>
-    <!---->
     <transition-stub class="popper" name="fade">
       <div class="root" style="display: none;"></div>
     </transition-stub>
@@ -233,10 +161,7 @@ exports[`u-tree-select-new.vue > Demo-动静结合选项回填 1`] = `
     <span class="baseline">b</span>
     <span class="placeholder"> 请选择 </span>
     <div class="text">
-      <!---->
-      <!---->
     </div>
-    <!---->
     <transition-stub class="popper" name="fade">
       <div class="root" style="display: none;"></div>
     </transition-stub>
@@ -250,10 +175,7 @@ exports[`u-tree-select-new.vue > Demo-动静结合选项回填 2`] = `
     <span class="baseline">b</span>
     <span class="placeholder"> 请选择 </span>
     <div class="text">
-      <!---->
-      <!---->
     </div>
-    <!---->
     <transition-stub class="popper" name="fade">
       <div class="root" style="display: none;"></div>
     </transition-stub>
@@ -266,10 +188,7 @@ exports[`u-tree-select-new.vue > Demo-基本用法 1`] = `
   <span class="baseline">b</span>
   <span class="placeholder"> 请选择 </span>
   <div class="text">
-    <!---->
-    <!---->
   </div>
-  <!---->
   <transition-stub class="popper" name="fade">
     <div class="root" style="display: none;"></div>
   </transition-stub>
@@ -282,21 +201,14 @@ exports[`u-tree-select-new.vue > Demo-异步加载 1`] = `
     <span class="baseline">b</span>
     <span class="placeholder"> 请选择 </span>
     <div class="text">
-      <!---->
-      <!---->
     </div>
-    <!---->
     <transition-stub class="popper" name="fade">
       <div class="root" style="display: none;"></div>
     </transition-stub>
   </div>
   <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-    <!---->
     重新加载
-    <!---->
   </a>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -306,9 +218,7 @@ exports[`u-tree-select-new.vue > Demo-支持多选 1`] = `
   <span class="placeholder"> 请选择 </span>
   <div class="text">
     <span> </span>
-    <!---->
   </div>
-  <!---->
   <transition-stub class="popper" name="fade">
     <div class="root" style="display: none;"></div>
   </transition-stub>
@@ -321,9 +231,7 @@ exports[`u-tree-select-new.vue > Demo-支持清除 1`] = `
   <span class="placeholder"> 请选择 </span>
   <div class="text">
     <span> </span>
-    <!---->
   </div>
-  <!---->
   <transition-stub class="popper" name="fade">
     <div class="root" style="display: none;"></div>
   </transition-stub>
@@ -335,10 +243,7 @@ exports[`u-tree-select-new.vue > Demo-支持清除 2`] = `
   <span class="baseline">b</span>
   <span class="placeholder"> 请选择 </span>
   <div class="text">
-    <!---->
-    <!---->
   </div>
-  <!---->
   <transition-stub class="popper" name="fade">
     <div class="root" style="display: none;"></div>
   </transition-stub>
@@ -348,12 +253,9 @@ exports[`u-tree-select-new.vue > Demo-支持清除 2`] = `
 exports[`u-tree-select-new.vue > Demo-禁用状态 1`] = `
 <div class="root" disabled="disabled" tabindex>
   <span class="baseline">b</span>
-  <!---->
   <div class="text">
     <span> 节点 1 </span>
-    <!---->
   </div>
-  <!---->
   <transition-stub class="popper" name="fade">
     <div class="root" style="display: none;"></div>
   </transition-stub>
@@ -361,14 +263,11 @@ exports[`u-tree-select-new.vue > Demo-禁用状态 1`] = `
 `;
 
 exports[`u-tree-select-new.vue > Demo-表单验证 1`] = `
-<div class="root" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
-      <span class="text" vusion-slot-name-edit="label">树选择器
-        <!---->
-      </span>
+      <span class="text" vusion-slot-name-edit="label">树选择器</span>
     </label>
-    <!---->
     <div class="field">
       <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
       <div class="wrap" vusion-slot-name="default">
@@ -376,26 +275,18 @@ exports[`u-tree-select-new.vue > Demo-表单验证 1`] = `
           <span class="baseline">b</span>
           <span class="placeholder"> 请选择 </span>
           <div class="text">
-            <!---->
-            <!---->
           </div>
-          <!---->
           <transition-stub class="popper" name="fade">
             <div class="root" style="display: none;"></div>
           </transition-stub>
         </div>
-        <!---->
-        <!---->
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
-      <span class="text" vusion-slot-name-edit="label">树选择器
-        <!---->
-      </span>
+      <span class="text" vusion-slot-name-edit="label">树选择器</span>
     </label>
-    <!---->
     <div class="field">
       <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
       <div class="wrap" vusion-slot-name="default">
@@ -403,26 +294,18 @@ exports[`u-tree-select-new.vue > Demo-表单验证 1`] = `
           <span class="baseline">b</span>
           <span class="placeholder"> 请选择 </span>
           <div class="text">
-            <!---->
-            <!---->
           </div>
-          <!---->
           <transition-stub class="popper" name="fade">
             <div class="root" style="display: none;"></div>
           </transition-stub>
         </div>
-        <!---->
-        <!---->
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" required="required" vusion-slot-name="label" vusion-slot-name-edit="label">
-      <span class="text" vusion-slot-name-edit="label">树选择器
-        <!---->
-      </span>
+      <span class="text" vusion-slot-name-edit="label">树选择器</span>
     </label>
-    <!---->
     <div class="field">
       <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
       <div class="wrap" vusion-slot-name="default">
@@ -430,36 +313,24 @@ exports[`u-tree-select-new.vue > Demo-表单验证 1`] = `
           <span class="baseline">b</span>
           <span class="placeholder"> 请选择 </span>
           <div class="text">
-            <!---->
-            <!---->
           </div>
-          <!---->
           <transition-stub class="popper" name="fade">
             <div class="root" style="display: none;"></div>
           </transition-stub>
         </div>
-        <!---->
-        <!---->
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
-      <span class="text" vusion-slot-name-edit="label">
-        <!---->
-      </span>
+      <span class="text" vusion-slot-name-edit="label"></span>
     </label>
-    <!---->
     <div class="field">
       <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
       <div class="wrap" vusion-slot-name="default">
         <a class="root" color="primary" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-          <!---->
           立即创建
-          <!---->
         </a>
-        <!---->
-        <!---->
       </div>
     </div>
   </div>
@@ -471,10 +342,7 @@ exports[`u-tree-select-new.vue > Demo-输入value 0 测试 1`] = `
   <span class="baseline">b</span>
   <span class="placeholder"> 请选择 </span>
   <div class="text">
-    <!---->
-    <!---->
   </div>
-  <!---->
   <transition-stub class="popper" name="fade">
     <div class="root" style="display: none;"></div>
   </transition-stub>
@@ -487,10 +355,7 @@ exports[`u-tree-select-new.vue > Demo-输入value 0 测试 2`] = `
     <span class="baseline">b</span>
     <span class="placeholder"> 请选择 </span>
     <div class="text">
-      <!---->
-      <!---->
     </div>
-    <!---->
     <transition-stub class="popper" name="fade">
       <div class="root" style="display: none;"></div>
     </transition-stub>

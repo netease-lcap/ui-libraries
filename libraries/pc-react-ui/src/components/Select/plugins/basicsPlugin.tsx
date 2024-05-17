@@ -1,44 +1,51 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable react-refresh/only-export-components */
 import _ from 'lodash';
 import React from 'react';
-// import moduleName from 'module';
-import { useRequest } from 'ahooks';
-// import {renm} from 'futil';
-// import type { ButtonProps } from 'antd';
-// import F from 'futil';
-// import { hookType } from '@/plugins/type';
+import classnames from 'classnames';
+import { $deletePropsList } from '@/plugins/constants';
+import style from '../index.module.less';
+import { SelectOption } from '@/index';
+import {
+  useRequestDataSource, useHandleMapField, useFormatDataSource,
+} from '@/plugins/common/dataSource';
 
-export function useHandleTransformOption(props) {
-  const options = props.get('options');
-  const transformOption = _.cond([
-    [_.isArray, _.constant(() => Promise.resolve(options))],
-    [_.isFunction, _.constant(() => Promise.resolve(options()))],
-    [_.stubTrue, _.constant(() => Promise.resolve([]))],
-  ]);
-  const conformsArray = _.cond([
-    [Array.isArray, _.identity],
-    [_.stubTrue, _.stubArray],
-  ]);
-  const { data, loading } = useRequest(transformOption(options));
-  return _.isNil(options) ? {} : { options: conformsArray(data), loading };
+export function useHandleStyle(props) {
+  const className = props.get('className');
+  return {
+    className: classnames(style.select, className),
+  };
 }
 
-export function useHandleTextAndValueField(props) {
+export function useHandleChildren(props) {
+  const childrenProps = props.get('children');
+  const dataSourceProps = props.get('dataSource');
+  const dataSource = React.useMemo(() => React.Children.map(childrenProps, (item) => {
+    if (item.type === SelectOption) {
+      return _.omit(item.props, 'children');
+    }
+    return null;
+  })?.filter(Boolean), [childrenProps]);
+  return { dataSource: dataSourceProps ?? dataSource, children: null };
+}
+useHandleChildren.order = 2;
+
+export function useHandleDataSource(props) {
+  const dataConfig = props.get('dataSource');
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
-  const $deletePropsList = props.get('$deletePropsList', []).concat(['textField', 'valueField']);
-  const options = props.get('options');
-
-  const convertOption = React.useMemo(() => {
-    const logicFn = _.map(options, (item) => ({ label: item[textField], value: item[valueField] }));
-    const decisionCallback = _.cond([
-      [_.matches({ textField: _.isString }), _.constant(logicFn)],
-      [_.matches({ valueField: _.isString }), _.constant(logicFn)],
-      [_.stubTrue, _.constant(options)],
-    ]);
-    return decisionCallback({ textField, valueField });
-  }, [options, textField, valueField]);
-
-  return _.isNil(options) ? { $deletePropsList } : { options: convertOption, $deletePropsList };
+  const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField', 'dataSource', 'parentField', 'childrenField']);
+  const ref = props.get('ref');
+  const { data, run: reload, loading } = useRequestDataSource(dataConfig);
+  const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
+  const selfRef = React.useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
+  const dataSourceResult = _.isEmpty(dataSource) ? {} : { options: dataSource };
+  return {
+    [$deletePropsList]: deletePropsList,
+    ref: selfRef,
+    loading,
+    ...dataSourceResult,
+  };
 }
+
+// const list=getList(id).format().map(item=>item)
+// const listFormat=forMatList(list)
+// const listMap=mapList(listFormat)

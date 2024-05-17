@@ -11,7 +11,7 @@
         </template>
     </template>
     <slot v-else></slot>
-    <s-empty v-if="showSEmpty"></s-empty>
+    <s-empty v-if="$env.VUE_APP_DESIGNER && !$slots.default && !auto && (!items || items.length === 0)"></s-empty>
 </nav>
 </template>
 
@@ -38,11 +38,6 @@ export default {
             // @inherit: itemVMs: [],
             items: [],
         };
-    },
-    computed: {
-        showSEmpty() {
-            return this.$env.VUE_APP_DESIGNER && !this.$slots.default && !this.auto && (!this.items || this.items.length === 0);
-        },
     },
     watch: {
         $route: {

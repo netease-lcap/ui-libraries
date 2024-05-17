@@ -7,8 +7,10 @@
         @keydown.esc.stop="close()"
         @keydown.enter="$refs.popper.currentOpened ? onEnter() : open()"
         :disabled="disabled"
-        :readonly="readonly">
-        <u-input :class="$style.input" :opened="currentOpened"
+        :readonly="readonly"
+        :preview="preview">
+        <span v-if="preview">{{ currentValue || '--' }}</span>
+        <u-input v-if="!preview" :class="$style.input" :opened="currentOpened"
             :placeholder="placeholder" :readonly="!filterable || readonly"
             :value="currentValue" :disabled="disabled"
             @focus="focus" @blur="blur"
@@ -17,7 +19,7 @@
             :color="formItemVM && formItemVM.color"
             :autofocus="autofocus"
             ref="input">
-            <m-popper v-if="!disabled && !readonly" :class="$style.popperShape" ref="popper"
+            <m-popper v-if="!disabled && !readonly && !preview" :class="$style.popperShape" ref="popper"
                 @mousedown.stop.prevent
                 @open="getSubComponents(true)" @close="resetInput">
                 <div v-if="loading" :class="$style.loading"><u-loading></u-loading></div>
@@ -40,7 +42,7 @@
                 </template>
             </m-popper>
         </u-input>
-        <span v-show="clearable && currentValue && !disabled && !readonly" :class="$style.clearable" @click="clear" @mousedown.prevent></span>
+        <span v-show="clearable && currentValue && !disabled && !readonly && !preview" :class="$style.clearable" @click="clear" @mousedown.prevent></span>
     </div>
 </template>
 
@@ -65,6 +67,7 @@ export default {
         clearable: { type: Boolean, default: false },
         showFinalValue: { type: Boolean, default: false },
         readonly: { type: Boolean, default: false },
+        preview: { type: Boolean, default: false },
         disabled: { type: Boolean, default: false },
         lazy: { type: Boolean, default: false },
         lazyLoad: { type: Function, default: () => {} },
@@ -458,7 +461,7 @@ export default {
             this.$refs.popper && this.$refs.popper.toggle(opened);
         },
         clear(...args) {
-            if (this.readonly || this.disabled) {
+            if (this.readonly || this.disabled || this.preview) {
                 return;
             }
             this.currentValue = '';

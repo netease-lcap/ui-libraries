@@ -6,84 +6,45 @@ exports[`u-cascade-select.vue > Demo-Placeholder 1`] = `
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">学科门类</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               理学
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               工学
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">一级学科</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">二级学科</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -94,118 +55,71 @@ exports[`u-cascade-select.vue > Demo-join 1`] = `
     <div class="root" clearable="true" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
         工学
-        <!---->
       </div>
-      <!---->
       <span class="clearable"></span>
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               理学
-              <!---->
             </div>
             <div class="root" selected="selected" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               工学
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
     <div class="root" clearable="true" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
         计算机科学与技术
-        <!---->
       </div>
-      <!---->
       <span class="clearable"></span>
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
             <div class="root" selected="selected" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               计算机科学与技术
-              <!---->
             </div>
             <div class="root" disabled="disabled" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               软件工程
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               机械工程
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
     <div class="root" clearable="true" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
         计算机应用技术
-        <!---->
       </div>
-      <!---->
       <span class="clearable"></span>
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               计算机系统结构
-              <!---->
             </div>
             <div class="root" disabled="disabled" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               计算机软件与理论
-              <!---->
             </div>
             <div class="root" selected="selected" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               计算机应用技术
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
-    <!---->
-    <!---->
   </div>
   <div>选择的值为：工学,计算机科学与技术,计算机应用技术</div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -215,93 +129,50 @@ exports[`u-cascade-select.vue > Demo-join 2`] = `
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               1核
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               2核
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               4核
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
-    <!---->
-    <!---->
   </div>
   <div>选择的值为：</div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -311,88 +182,47 @@ exports[`u-cascade-select.vue > Demo-last-value 1`] = `
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               理学
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               工学
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
-    <!---->
-    <!---->
   </div>
   <div>选择的值为：213</div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -401,84 +231,45 @@ exports[`u-cascade-select.vue > Demo-基本用法 1`] = `
   <div class="root" tabindex="0">
     <span class="baseline">b</span>
     <span class="placeholder">学科门类</span>
-    <!---->
     <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-      <!---->
-      <!---->
-      <!---->
-      <!---->
     </div>
-    <!---->
-    <!---->
     <transition-stub class="popper" name="fade" style="width: 100%;">
       <div class="root" style="display: none;">
         <div class="wrap">
-          <!---->
           <div class="root" style="direction: ltr;" vusion-slot-name="default">
-            <!---->
             理学
-            <!---->
           </div>
           <div class="root" style="direction: ltr;" vusion-slot-name="default">
-            <!---->
             工学
-            <!---->
           </div>
-          <!---->
-          <!---->
         </div>
-        <!---->
       </div>
     </transition-stub>
   </div>
   <div class="root" tabindex="0">
     <span class="baseline">b</span>
     <span class="placeholder">一级学科</span>
-    <!---->
     <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-      <!---->
-      <!---->
-      <!---->
-      <!---->
     </div>
-    <!---->
-    <!---->
     <transition-stub class="popper" name="fade" style="width: 100%;">
       <div class="root" style="display: none;">
         <div class="wrap">
-          <!---->
-          <!---->
-          <!---->
         </div>
-        <!---->
       </div>
     </transition-stub>
   </div>
   <div class="root" tabindex="0">
     <span class="baseline">b</span>
     <span class="placeholder">二级学科</span>
-    <!---->
     <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-      <!---->
-      <!---->
-      <!---->
-      <!---->
     </div>
-    <!---->
-    <!---->
     <transition-stub class="popper" name="fade" style="width: 100%;">
       <div class="root" style="display: none;">
         <div class="wrap">
-          <!---->
-          <!---->
-          <!---->
         </div>
-        <!---->
       </div>
     </transition-stub>
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -488,84 +279,45 @@ exports[`u-cascade-select.vue > Demo-基本用法 2`] = `
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               理学
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               工学
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -576,84 +328,45 @@ exports[`u-cascade-select.vue > Demo-大小扩展 1`] = `
     <div class="root" size="medium" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               理学
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               工学
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
     <div class="root" size="medium" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
     <div class="root" size="medium" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -664,40 +377,21 @@ exports[`u-cascade-select.vue > Demo-隐藏空列表 1`] = `
     <div class="root" tabindex="0">
       <span class="baseline">b</span>
       <span class="placeholder">学科门类</span>
-      <!---->
       <div class="text textEllipsis" style="direction: ltr;" tags-overflow="collapse">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <!---->
       <transition-stub class="popper" name="fade" style="width: 100%;">
         <div class="root" style="display: none;">
           <div class="wrap">
-            <!---->
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               理学
-              <!---->
             </div>
             <div class="root" style="direction: ltr;" vusion-slot-name="default">
-              <!---->
               工学
-              <!---->
             </div>
-            <!---->
-            <!---->
           </div>
-          <!---->
         </div>
       </transition-stub>
     </div>
-    <!---->
-    <!---->
-    <!---->
-    <!---->
   </div>
 </div>
 `;

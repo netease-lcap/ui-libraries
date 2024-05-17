@@ -6,6 +6,7 @@ import BlocksDemo2 from '../demos/blocks/BlocksDemo2.vue';
 import BlocksDemo3 from '../demos/blocks/BlocksDemo3.vue';
 import BlocksDemo4 from '../demos/blocks/BlocksDemo4.vue';
 import BlocksDemo5 from '../demos/blocks/BlocksDemo5.vue';
+import BlocksDemo6 from '../demos/blocks/BlocksDemo6.vue';
 
 Vue.use(CloudUI);
 
@@ -63,6 +64,15 @@ export const Demo4 = {
   render: () => ({
     components: {
       DeprecatedDemo: BlocksDemo5,
+    },
+    template: '<deprecated-demo />',
+  }),
+};
+
+export const Demo5 = {
+  render: () => ({
+    components: {
+      DeprecatedDemo: BlocksDemo6,
     },
     template: '<deprecated-demo />',
   }),

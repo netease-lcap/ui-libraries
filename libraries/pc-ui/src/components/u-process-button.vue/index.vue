@@ -9,16 +9,16 @@
             ref="modal"
             @close="currentItem = undefined">
             <u-form label-layout="block" ref="form">
-                <u-form-item :label="$tt('approvalComments')" :required="currentItem.commentRequired" :rules="currentItem.commentRequired?'required':''" v-if="currentItem.name !== 'reassign'">
+                <u-form-item :label="$tt('approvalComments')" :required="currentItem.commentRequired" :rules="currentItem.commentRequired?'required':''" v-if="!['reassign', 'addSign'].includes(currentItem.name)">
                     <u-textarea v-model="model.comment" size="normal full" :placeholder="$tt('placeholder')">
                     </u-textarea>
                 </u-form-item>
-                <u-form-item :label="$tt('selectTransfer')" required :rules="`required #${$tt('selectTransferEmpty')}`" v-if="currentItem.name === 'reassign'">
+                <u-form-item :label="$tt('selectTransfer')" required :rules="`required #${$tt('selectTransferEmpty')}`" v-if="['reassign', 'addSign'].includes(currentItem.name)">
                     <u-select
                         size="full"
                         text-field="userName"
                         value-field="userName"
-                        :data-source="getUsersForReassign"
+                        :data-source="getUsers(currentItem)"
                         :value.sync="model.userName"
                         :initial-load="true">
                     </u-select>
@@ -101,6 +101,10 @@ export default {
             }
             const currentItem = item || this.currentItem;
             const { name } = currentItem;
+            if (name === 'addSign') {
+                this.addSignOperator(item);
+                return;
+            }
             const operate = `${name}Task`;
             const body = {
                 taskId: this.taskId,
@@ -203,14 +207,34 @@ export default {
                 // do nothing
             });
         },
-        async getUsersForReassign() {
+        /**
+         * 加签
+         */
+        async addSignOperator(item) {
             if (this.$processV2) {
-                const result = await this.$processV2.getUsersForReassign({
+                await this.$processV2.addSignTask({
                     body: {
                         taskId: this.taskId,
+                        userForAddSign: this.model.userName
                     },
                 });
-                return result.data;
+                this.refresh();
+            }
+        },
+        getUsers(item) {
+            return async () => {
+                const map = {
+                    reassign: 'getUsersForReassign',
+                    addSign: 'getUsersForAddSign'
+                };
+                if (this.$processV2) {
+                    const result = await this.$processV2[map[item.name]]({
+                        body: {
+                            taskId: this.taskId,
+                        },
+                    });
+                    return result.data;
+                }
             }
         },
     },

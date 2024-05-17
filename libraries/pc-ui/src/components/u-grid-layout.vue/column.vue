@@ -91,24 +91,24 @@ export default {
     methods: {
         getPullPush(span, repeat) {
             const column = this.getColumnWidth(span, repeat);
-            return `calc(${column.columnWidth} + ${column.gap}px * ${span})`;
+            return `calc(${column.columnWidth} + ${column.gap} * ${span})`;
         },
         getWidth(span, repeat) {
             const column = this.getColumnWidth(span, repeat);
-            return `calc(${column.columnWidth} + ${column.gap}px * ${span - 1})`;
+            return `calc(${column.columnWidth} + ${column.gap} * ${span - 1})`;
         },
         getMarginLeft(span, repeat) {
             if (!span)
                 return undefined;
             const column = this.getColumnWidth(span, repeat);
-            return `calc(${column.columnWidth} + ${column.gap}px * ${span} + ${column.gap / 2}px)`;
+            return `calc(${column.columnWidth} + ${column.gap} * ${span} + calc(${column.gap} / 2))`;
         },
         getColumnWidth(span, repeat) {
             repeat
                 = repeat || this.$parent.repeat || this.$parent.$parent.repeat;
-            const gap = this.$parent.gap ? GAP_CONFIGS[this.$parent.gap] : GAP_CONFIGS.normal;
+            const gap = `var(--grid-layout-column-gap-${this.$parent.gap || 'normal'})`;
             return {
-                columnWidth: `(100% - ${gap}px * ${repeat}) / ${repeat} * ${span}`,
+                columnWidth: `(100% - ${gap} * ${repeat}) / ${repeat} * ${span}`,
                 gap,
             };
         },

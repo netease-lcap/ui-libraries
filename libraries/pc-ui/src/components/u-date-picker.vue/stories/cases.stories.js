@@ -6,6 +6,7 @@ import CasesDemo2 from '../demos/cases/CasesDemo2.vue';
 import CasesDemo3 from '../demos/cases/CasesDemo3.vue';
 import CasesDemo4 from '../demos/cases/CasesDemo4.vue';
 import CasesDemo5 from '../demos/cases/CasesDemo5.vue';
+import CasesDemo6 from '../demos/cases/CasesDemo6.vue';
 
 Vue.use(CloudUI);
 
@@ -68,6 +69,16 @@ export const Demo4 = {
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo5,
+    },
+    template: '<deprecated-demo />',
+  }),
+};
+
+export const Demo5 = {
+  name: '高级格式化',
+  render: () => ({
+    components: {
+      DeprecatedDemo: CasesDemo6,
     },
     template: '<deprecated-demo />',
   }),

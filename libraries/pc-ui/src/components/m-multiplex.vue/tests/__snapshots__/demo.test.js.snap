@@ -46,8 +46,6 @@ exports[`m-multiplex.vue > Demo-保持顺序 1`] = `
     <div class="root" selected="selected" vusion-slot-name="text">毛巾</div>
     <div class="root" vusion-slot-name="text">沙发</div>
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -67,8 +65,6 @@ exports[`m-multiplex.vue > Demo-双向绑定 1`] = `
     <div class="root" selected="selected" vusion-slot-name="text">毛巾</div>
     <div class="root" vusion-slot-name="text">沙发</div>
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -88,8 +84,6 @@ exports[`m-multiplex.vue > Demo-双向绑定 2`] = `
     <div class="root" selected="selected" vusion-slot-name="text">毛巾</div>
     <div class="root" vusion-slot-name="text">沙发</div>
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -104,7 +98,6 @@ exports[`m-multiplex.vue > Demo-只读、禁用、禁用某一项 1`] = `
         <div class="root" readonly="readonly" selected="selected" vusion-slot-name="text">毛巾</div>
         <div class="root" readonly="readonly" vusion-slot-name="text">沙发</div>
       </div>
-      <!---->
     </div>
     <div class="root" vusion-slot-name="default">
       <div class="root" disabled="disabled">
@@ -114,7 +107,6 @@ exports[`m-multiplex.vue > Demo-只读、禁用、禁用某一项 1`] = `
         <div class="root" disabled="disabled" selected="selected" vusion-slot-name="text">毛巾</div>
         <div class="root" disabled="disabled" vusion-slot-name="text">沙发</div>
       </div>
-      <!---->
     </div>
     <div class="root" vusion-slot-name="default">
       <div class="root">
@@ -124,7 +116,6 @@ exports[`m-multiplex.vue > Demo-只读、禁用、禁用某一项 1`] = `
         <div class="root" disabled="disabled" selected="selected" vusion-slot-name="text">毛巾</div>
         <div class="root" vusion-slot-name="text">沙发</div>
       </div>
-      <!---->
     </div>
   </div>
 </div>
@@ -141,7 +132,6 @@ exports[`m-multiplex.vue > Demo-只读、禁用、禁用某一项 2`] = `
         <div class="root" readonly="readonly" selected="selected" vusion-slot-name="text">毛巾</div>
         <div class="root" readonly="readonly" vusion-slot-name="text">沙发</div>
       </div>
-      <!---->
     </div>
     <div class="root" vusion-slot-name="default">
       <div class="root" disabled="disabled">
@@ -151,7 +141,6 @@ exports[`m-multiplex.vue > Demo-只读、禁用、禁用某一项 2`] = `
         <div class="root" disabled="disabled" selected="selected" vusion-slot-name="text">毛巾</div>
         <div class="root" disabled="disabled" vusion-slot-name="text">沙发</div>
       </div>
-      <!---->
     </div>
     <div class="root" vusion-slot-name="default">
       <div class="root">
@@ -161,7 +150,6 @@ exports[`m-multiplex.vue > Demo-只读、禁用、禁用某一项 2`] = `
         <div class="root" disabled="disabled" selected="selected" vusion-slot-name="text">毛巾</div>
         <div class="root" vusion-slot-name="text">沙发</div>
       </div>
-      <!---->
     </div>
   </div>
 </div>
@@ -201,9 +189,7 @@ exports[`m-multiplex.vue > Demo-更新列表 1`] = `
     <div class="root" vusion-slot-name="text">沙发</div>
   </div>
   <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
-    <!---->
     更新列表
-    <!---->
   </a>
 </div>
 `;

@@ -38,7 +38,13 @@
             </div>
         </template>
         <template v-else>
-            <u-table-view :data-source="loadTable" ref="tableview" :page-size="20" :page-number="1" pagination :initial-load="initialLoad">
+            <u-table-view
+                :data-source="loadTable"
+                ref="tableview"
+                :page-size="paging.size"
+                :page-number="paging.number"
+                pagination
+                :initial-load="initialLoad">
                 <u-table-view-column :title="$tt('currentNode')">
                     <template #cell="current"> {{ current.item.nodeTitle || '-' }}</template>
                 </u-table-view-column>
@@ -126,27 +132,6 @@ export default {
             // eslint-disable-next-line new-cap
             return this.$utils ? this.$utils.FormatDateTime(value) : value;
         },
-        formatStatus(value) {
-            if (value === null || value === undefined) {
-                return '-';
-            }
-            if (value === true) {
-                return '已结束';
-            } else if (value === false) {
-                return '进行中';
-            } else {
-                return value;
-            }
-        },
-        formatArray2String(value) {
-            if (value === null || value === undefined) {
-                return '-';
-            }
-            if (Array.isArray(value)) {
-                return value.join('，') || '-';
-            }
-            return value;
-        },
         async loadList() {
             this.currentLoading = true;
             if (this.$processV2) {
@@ -177,8 +162,8 @@ export default {
                 const result = await this.$processV2.getProcInstRecords({
                     body: {
                         taskId: this.taskId,
-                        size: this.paging.size,
-                        page: this.paging.number,
+                        size: params.size,
+                        page: params.page,
                     },
                 });
                 return result.data;

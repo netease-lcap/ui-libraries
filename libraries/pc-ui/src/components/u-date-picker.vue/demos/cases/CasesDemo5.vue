@@ -14,7 +14,7 @@
         <u-date-picker
             :value.sync="date"
             picker="week"
-            :advanced-format="{ enable: true, value: 'GGGG年第W周' }"
+            show-formatter="GGGG年第W周"
             width="large"
             clearable
             @change="onChange"

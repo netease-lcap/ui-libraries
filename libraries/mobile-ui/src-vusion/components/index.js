@@ -1,4 +1,5 @@
 // export { default as VanActionSheet } from '../../src/action-sheet';
+export * from './s-image';
 export { default as VanAddressEdit } from '../../src/address-edit';
 export { default as VanAddressList } from '../../src/address-list';
 export { default as VanArea } from '../../src/area';

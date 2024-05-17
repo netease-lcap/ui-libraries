@@ -4,9 +4,7 @@ exports[`u-input.vue > Demo- 1`] = `
 <div class="root">
   <span class="baseline">b</span>
   <span class="placeholder">请输入</span>
-  <!---->
   <input class="input" type="text">
-  <!---->
 </div>
 `;
 
@@ -16,27 +14,15 @@ exports[`u-input.vue > Demo-@deprecated 搜索图标 1`] = `
     <div class="root" search="left" size="normal medium">
       <span class="baseline">b</span>
       <span class="placeholder">1~12位小写字母</span>
-      <!---->
       <input class="input" search="left" size="normal medium" type="text">
-      <span class="suffix">
-        <!---->
-        <!---->
-        <!---->
-      </span>
+      <span class="suffix"></span>
     </div>
     <div class="root" search="right" size="normal medium">
       <span class="baseline">b</span>
       <span class="placeholder">1~12位小写字母</span>
-      <!---->
       <input class="input" search="right" size="normal medium" type="text">
-      <span class="suffix">
-        <!---->
-        <!---->
-        <!---->
-      </span>
+      <span class="suffix"></span>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -46,12 +32,9 @@ exports[`u-input.vue > Demo-加密 1`] = `
   <div class="root" maxlength="12" password="true">
     <span class="baseline">b</span>
     <span class="placeholder">请输入密码</span>
-    <!---->
     <input class="input" maxlength="12" type="password">
     <span class="suffix">
       <span class="password"></span>
-      <!---->
-      <!---->
     </span>
   </div>
 </div>
@@ -62,12 +45,9 @@ exports[`u-input.vue > Demo-加密 2`] = `
   <div class="root" maxlength="12" password="true">
     <span class="baseline">b</span>
     <span class="placeholder">请输入密码</span>
-    <!---->
     <input class="input" maxlength="12" type="password">
     <span class="suffix">
       <span class="password"></span>
-      <!---->
-      <!---->
     </span>
   </div>
 </div>
@@ -78,26 +58,18 @@ exports[`u-input.vue > Demo-双向绑定 1`] = `
   <div class="root" maxlength="12">
     <span class="baseline">b</span>
     <span class="placeholder"></span>
-    <!---->
     <input class="input" maxlength="12" type="text">
-    <!---->
   </div>
   <div class="root" maxlength="12">
     <span class="baseline">b</span>
     <span class="placeholder"></span>
-    <!---->
     <input class="input" maxlength="12" type="text">
-    <!---->
   </div>
   <div class="root" maxlength="12">
     <span class="baseline">b</span>
     <span class="placeholder"></span>
-    <!---->
     <input class="input" maxlength="12" type="text">
-    <!---->
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -106,26 +78,18 @@ exports[`u-input.vue > Demo-双向绑定 2`] = `
   <div class="root" maxlength="12">
     <span class="baseline">b</span>
     <span class="placeholder"></span>
-    <!---->
     <input class="input" maxlength="12" type="text">
-    <!---->
   </div>
   <div class="root" maxlength="12">
     <span class="baseline">b</span>
     <span class="placeholder"></span>
-    <!---->
     <input class="input" maxlength="12" type="text">
-    <!---->
   </div>
   <div class="root" maxlength="12">
     <span class="baseline">b</span>
     <span class="placeholder"></span>
-    <!---->
     <input class="input" maxlength="12" type="text">
-    <!---->
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -135,19 +99,13 @@ exports[`u-input.vue > Demo-只读和禁用 1`] = `
     <div class="root" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
-      <!---->
     </div>
     <div class="root" disabled="disabled">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
-      <!---->
       <input class="input" disabled="disabled" type="text">
-      <!---->
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -158,19 +116,13 @@ exports[`u-input.vue > Demo-只读和禁用 2`] = `
     <div class="root" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
-      <!---->
     </div>
     <div class="root" disabled="disabled">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
-      <!---->
       <input class="input" disabled="disabled" type="text">
-      <!---->
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -180,11 +132,8 @@ exports[`u-input.vue > Demo-可清空 1`] = `
   <div class="root" clearable="可清空">
     <span class="baseline">b</span>
     <span class="placeholder" style="display: none;"></span>
-    <!---->
     <input class="input" type="text">
     <span class="suffix">
-      <!---->
-      <!---->
       <span class="clearable"></span>
     </span>
   </div>
@@ -196,11 +145,8 @@ exports[`u-input.vue > Demo-可清除 1`] = `
   <div class="root" clearable="可清除">
     <span class="baseline">b</span>
     <span class="placeholder" style="display: none;"></span>
-    <!---->
     <input class="input" type="text">
     <span class="suffix">
-      <!---->
-      <!---->
       <span class="clearable"></span>
     </span>
   </div>
@@ -208,41 +154,29 @@ exports[`u-input.vue > Demo-可清除 1`] = `
 `;
 
 exports[`u-input.vue > Demo-和倒计时一起使用 1`] = `
-<div class="root" layout="block">
-  <div class="root" distance label-size="normal">
+<div class="root" gap="none" gap-height="normal" gap-width="normal" layout="block">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
-      <span class="text" vusion-slot-name-edit="label">中文名
-        <!---->
-      </span>
+      <span class="text" vusion-slot-name-edit="label">中文名</span>
     </label>
-    <!---->
     <div class="field">
       <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
       <div class="wrap" vusion-slot-name="default">
         <div class="root" color>
           <span class="baseline">b</span>
           <span class="placeholder" style="display: none;"></span>
-          <!---->
           <input class="input" type="text">
-          <!---->
         </div>
-        <!---->
-        <!---->
       </div>
     </div>
   </div>
-  <div class="root" distance label-size="normal">
+  <div class="root" distance label-size="normal" layout="center">
     <label class="label" position="right" vusion-slot-name="label" vusion-slot-name-edit="label">
-      <span class="text" vusion-slot-name-edit="label">倒计时
-        <!---->
-      </span>
+      <span class="text" vusion-slot-name-edit="label">倒计时</span>
     </label>
-    <!---->
     <div class="field">
       <div class="description" vusion-slot-name="description" vusion-slot-name-edit="description"></div>
       <div class="wrap" vusion-slot-name="default"> 600 秒后重新获取
-        <!---->
-        <!---->
       </div>
     </div>
   </div>
@@ -254,9 +188,7 @@ exports[`u-input.vue > Demo-基本用法 1`] = `
   <div class="root" maxlength="12">
     <span class="baseline">b</span>
     <span class="placeholder">请输入</span>
-    <!---->
     <input class="input" maxlength="12" type="text">
-    <!---->
   </div>
 </div>
 `;
@@ -266,9 +198,7 @@ exports[`u-input.vue > Demo-基本用法 2`] = `
   <div class="root" maxlength="12">
     <span class="baseline">b</span>
     <span class="placeholder">1~12位小写字母</span>
-    <!---->
     <input class="input" maxlength="12" type="text">
-    <!---->
   </div>
 </div>
 `;
@@ -280,165 +210,111 @@ exports[`u-input.vue > Demo-大小扩展 1`] = `
       <div class="root" height="mini" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="mini" readonly="readonly" type="text" width>
-        <!---->
       </div>
       <div class="root" height="mini" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="mini" readonly="readonly" type="text" width>
-        <!---->
       </div>
       <div class="root" height="mini" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="mini" readonly="readonly" type="text" width>
-        <!---->
       </div>
       <div class="root" height="mini" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="mini" readonly="readonly" type="text" width>
-        <!---->
       </div>
-      <!---->
-      <!---->
     </div>
     <div class="root" direction="horizontal" type vusion-slot-name="default">
       <div class="root" height="small" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="small" readonly="readonly" type="text" width>
-        <!---->
       </div>
       <div class="root" height="small" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="small" readonly="readonly" type="text" width>
-        <!---->
       </div>
       <div class="root" height="small" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="small" readonly="readonly" type="text" width>
-        <!---->
       </div>
       <div class="root" height="small" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="small" readonly="readonly" type="text" width>
-        <!---->
       </div>
-      <!---->
-      <!---->
     </div>
     <div class="root" direction="horizontal" type vusion-slot-name="default">
       <div class="root" height="normal" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="normal" readonly="readonly" type="text" width>
-        <!---->
       </div>
       <div class="root" height="normal" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="normal" readonly="readonly" type="text" width>
-        <!---->
       </div>
       <div class="root" height="normal" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="normal" readonly="readonly" type="text" width>
-        <!---->
       </div>
       <div class="root" height="normal" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="normal" readonly="readonly" type="text" width>
-        <!---->
       </div>
-      <!---->
-      <!---->
     </div>
     <div class="root" direction="horizontal" type vusion-slot-name="default">
       <div class="root" height="medium" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="medium" readonly="readonly" type="text" width>
-        <!---->
       </div>
       <div class="root" height="medium" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="medium" readonly="readonly" type="text" width>
-        <!---->
       </div>
       <div class="root" height="medium" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="medium" readonly="readonly" type="text" width>
-        <!---->
       </div>
       <div class="root" height="medium" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="medium" readonly="readonly" type="text" width>
-        <!---->
       </div>
-      <!---->
-      <!---->
     </div>
     <div class="root" direction="horizontal" type vusion-slot-name="default">
       <div class="root" height="large" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="large" readonly="readonly" type="text" width>
-        <!---->
       </div>
-      <!---->
-      <!---->
     </div>
     <div class="root" direction="horizontal" type vusion-slot-name="default">
       <div class="root" height="huge" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="huge" readonly="readonly" type="text" width>
-        <!---->
       </div>
-      <!---->
-      <!---->
     </div>
     <div class="root" direction="horizontal" type vusion-slot-name="default">
       <div class="root" height="full" readonly="readonly" width>
         <span class="baseline">b</span>
         <span class="placeholder" style="display: none;"></span>
-        <!---->
         <input class="input" height="full" readonly="readonly" type="text" width>
-        <!---->
       </div>
-      <!---->
-      <!---->
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -449,18 +325,12 @@ exports[`u-input.vue > Demo-展示方式 1`] = `
     <div class="root" maxlength="12">
       <span class="baseline">b</span>
       <span class="placeholder">行内展示（默认）</span>
-      <!---->
       <input class="input" maxlength="12" type="text">
-      <!---->
     </div> 与文字对齐 <div class="root" display="block" maxlength="12">
       <span class="baseline">b</span>
       <span class="placeholder">块级展示</span>
-      <!---->
       <input class="input" display="block" maxlength="12" type="text">
-      <!---->
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -471,18 +341,12 @@ exports[`u-input.vue > Demo-展示方式 2`] = `
     <div class="root" maxlength="12">
       <span class="baseline">b</span>
       <span class="placeholder">行内展示（默认）</span>
-      <!---->
       <input class="input" maxlength="12" type="text">
-      <!---->
     </div> 与文字对齐 <div class="root" display="block" maxlength="12">
       <span class="baseline">b</span>
       <span class="placeholder">块级展示</span>
-      <!---->
       <input class="input" display="block" maxlength="12" type="text">
-      <!---->
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -501,24 +365,17 @@ exports[`u-input.vue > Demo-添加图标 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </span>
       <input class="input" size="normal medium" type="text">
-      <span class="suffix">
-        <!---->
-        <!---->
-        <!---->
-      </span>
+      <span class="suffix"></span>
     </div>
     <div class="root" size="normal medium" suffix="search">
       <span class="baseline">b</span>
       <span class="placeholder">1~12位小写字母</span>
-      <!---->
       <input class="input" size="normal medium" type="text">
       <span class="suffix">
-        <!---->
         <span>
           <span class="lcp-iconv singleicon">
             <span class="iconwrap">
@@ -527,11 +384,9 @@ exports[`u-input.vue > Demo-添加图标 1`] = `
               </svg>
             </span>
             <div class="icontext" vusion-slot-name="default">
-              <!---->
             </div>
           </span>
         </span>
-        <!---->
       </span>
     </div>
     <div class="root" prefix="bug" size="normal medium">
@@ -545,24 +400,17 @@ exports[`u-input.vue > Demo-添加图标 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </span>
       <input class="input" size="normal medium" type="text">
-      <span class="suffix">
-        <!---->
-        <!---->
-        <!---->
-      </span>
+      <span class="suffix"></span>
     </div>
     <div class="root" size="normal medium" suffix="bug">
       <span class="baseline">b</span>
       <span class="placeholder">1~12位小写字母</span>
-      <!---->
       <input class="input" size="normal medium" type="text">
       <span class="suffix">
-        <!---->
         <span>
           <span class="lcp-iconv singleicon">
             <span class="iconwrap">
@@ -571,11 +419,9 @@ exports[`u-input.vue > Demo-添加图标 1`] = `
               </svg>
             </span>
             <div class="icontext" vusion-slot-name="default">
-              <!---->
             </div>
           </span>
         </span>
-        <!---->
       </span>
     </div>
     <div class="root" prefix="top" size="normal medium">
@@ -589,16 +435,11 @@ exports[`u-input.vue > Demo-添加图标 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
       </span>
       <input class="input" size="normal medium" type="text">
-      <span class="suffix">
-        <!---->
-        <!---->
-        <!---->
-      </span>
+      <span class="suffix"></span>
     </div>
     <div class="root" prefix size="normal medium">
       <span class="baseline">b</span>
@@ -607,14 +448,8 @@ exports[`u-input.vue > Demo-添加图标 1`] = `
         <span>111</span>
       </span>
       <input class="input" size="normal medium" type="text">
-      <span class="suffix">
-        <!---->
-        <!---->
-        <!---->
-      </span>
+      <span class="suffix"></span>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -624,12 +459,8 @@ exports[`u-input.vue > Demo-自动扩展大小 1`] = `
   <div class="root" style="width: 0px;">
     <span class="baseline">b</span>
     <span class="placeholder" style="display: none;"></span>
-    <!---->
     <input class="input" style type="text">
-    <!---->
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -638,19 +469,13 @@ exports[`u-input.vue > Demo-自定义样式 1`] = `
   <div class="root custom" maxlength="12">
     <span class="baseline">b</span>
     <span class="placeholder">class</span>
-    <!---->
     <input class="input" maxlength="12" type="text">
-    <!---->
   </div>
   <div class="root" maxlength="12" style="background: rgb(247, 248, 252); width: 200px;">
     <span class="baseline">b</span>
     <span class="placeholder">style</span>
-    <!---->
     <input class="input" maxlength="12" type="text">
-    <!---->
   </div>
-  <!---->
-  <!---->
 </div>
 `;
 
@@ -658,8 +483,6 @@ exports[`u-input.vue > Demo-键盘事件 1`] = `
 <div class="root">
   <span class="baseline">b</span>
   <span class="placeholder" style="display: none;"></span>
-  <!---->
   <input class="input" type="text">
-  <!---->
 </div>
 `;

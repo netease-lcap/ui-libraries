@@ -50,20 +50,30 @@ namespace nasl.ui {
       }
     })
     decimalLength: nasl.core.Integer;
-    @Prop<VanStepperNewOptions, 'decimalPlaces'>({
+    @Prop<VanStepperNewOptions, 'decimalPlacesValue'>({
       group: '主要属性',
       title: '小数位数',
       description: '控制数据展示时小数点后保留几位，仅影响展示，不影响数据实际存储的值。例如：小数位数为2，则数据展示时小数点后保留2位。',
-      bindHide: true,
-      if: _ => _.advancedFormat.enable === false
+      if: _ => _.advancedFormatEnable === false,
+      setter: {
+        concept: 'NumberInputSetter',
+        precision: 0,
+        min: 0
+      },
+      bindHide: true
     })
-    decimalPlaces: {
-      places: nasl.core.Integer | nasl.core.String;
-      omit: nasl.core.Boolean;
-    } = {
-      places: '',
-      omit: true
-    };
+    decimalPlacesValue: nasl.core.Integer;
+
+    @Prop<VanStepperNewOptions, 'decimalPlacesOmitZero'>({
+      group: '主要属性',
+      title: '隐藏末尾0',
+      description: '控制数据展示时最后一个是否展示0，仅影响展示，不影响数据实际存储的值。',
+      if: _ => _.advancedFormatEnable === false,
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    decimalPlacesOmitZero: nasl.core.Boolean = false;
     @Prop<VanStepperNewOptions, 'thousandths'>({
       group: '主要属性',
       title: '千位符',
@@ -71,7 +81,7 @@ namespace nasl.ui {
       setter: {
         concept: "SwitchSetter"
       },
-      if: _ => _.advancedFormat.enable === false
+      if: _ => _.advancedFormatEnable === false
     })
     thousandths: nasl.core.Boolean = false;
     @Prop<VanStepperNewOptions, 'percentSign'>({
@@ -81,39 +91,54 @@ namespace nasl.ui {
       setter: {
         concept: "SwitchSetter"
       },
-      if: _ => _.advancedFormat.enable === false
+      if: _ => _.advancedFormatEnable === false
     })
     percentSign: nasl.core.Boolean = false;
     @Prop({
       group: '主要属性',
+      title: '单位显示位置',
+      description: '输入框中显示的单位',
+      bindHide: true,
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '前缀' }, { title: '后缀' }],
+      },
+    })
+    unitType: 'prefix' | 'suffix' = 'prefix';
+
+    @Prop({
+      group: '主要属性',
       title: '单位',
       description: '输入框中显示的单位',
-      bindHide: true
     })
-    unit: {
-      type: nasl.core.String;
-      value: nasl.core.String;
-    } = {
-      type: 'prefix',
-      value: ''
-    };
-    @Prop({
+    unitValue: nasl.core.String;
+    @Prop<VanStepperNewOptions, 'advancedFormatEnable'>({
       group: '主要属性',
       title: '高级格式化',
       description: '用来控制数字的展示格式',
-      bindHide: true
+      onChange: [
+        { clear: ['advancedFormatValue'] }
+      ],
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      bindHide: true,
     })
-    advancedFormat: {
-      enable: nasl.core.Boolean;
-      value: nasl.core.String;
-    } = {
-      enable: false,
-      value: ''
-    };
+    advancedFormatEnable: nasl.core.Boolean = false;
+
+    @Prop<VanStepperNewOptions, 'advancedFormatValue'>({
+      group: '主要属性',
+      title: '高级格式化内容',
+      description: '用来控制数字的展示格式',
+      if: _ => _.advancedFormatEnable === true,
+      bindHide: true,
+    })
+    advancedFormatValue: nasl.core.String;
     @Prop({
       group: '主要属性',
       title: '占位符',
-      description: '输入框为空的显示文字'
+      description: '输入框为空的显示文字',
+      implicitToString: true,
     })
     placeholder: nasl.core.String = '请输入';
     @Prop({
@@ -182,9 +207,13 @@ namespace nasl.ui {
     @Prop({
       group: '样式属性',
       title: '步长',
-      description: '表示点击按钮或按上下键所增加或减少的量'
+      description: '表示点击按钮或按上下键所增加或减少的量',
+      setter: {
+        concept: "NumberInputSetter",
+        min: 0
+      }
     })
-    step: nasl.core.String | nasl.core.Decimal = 1;
+    step: nasl.core.Decimal = 1;
     @Prop({
       group: '样式属性',
       title: '对齐方式',
@@ -201,15 +230,25 @@ namespace nasl.ui {
       }
     })
     align: 'left' | 'center' | 'right' = 'center';
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '显示预览态',
+      docDescription: '',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    preview: nasl.core.Boolean = false;
     @Event({
       title: '点击加减按钮',
       description: '点击加减按钮时触发'
     })
-    onClick: (event: any) => any ;
+    onClick: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '值改变',
       description: '值改变时触发'
     })
-    onChange: (event: nasl.core.Decimal | nasl.core.Integer) => any ;
+    onChange: (event: nasl.core.Decimal | nasl.core.Integer) => void;
   }
 }

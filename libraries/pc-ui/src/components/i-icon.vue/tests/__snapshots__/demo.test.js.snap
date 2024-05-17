@@ -39,8 +39,6 @@ exports[`i-icon.vue > Demo-基本用法 11`] = `
     <i class="root" name="chart-refresh">chart-refresh</i>
     <i class="root" name="chart-zoom">chart-zoom</i>
     <i class="root" name="close">close</i>
-    <!---->
-    <!---->
   </div>
 </div>
 `;

@@ -49,7 +49,7 @@ namespace nasl.ui {
       title: '切换后',
       description: '切换标签时触发'
     })
-    onChange: (event: nasl.core.String) => any ;
+    onChange: (event: nasl.core.String) => void;
     @Slot({
       title: 'undefined',
       description: '插入`<van-tabbar-item>`子组件。',
@@ -88,7 +88,10 @@ namespace nasl.ui {
     showbaget: nasl.core.Boolean = false;
     @Prop({
       group: '数据属性',
-      title: '徽章值'
+      title: '徽章值',
+      setter: {
+        concept: "NumberInputSetter"
+      }
     })
     badge: nasl.core.Decimal;
     @Prop({
@@ -164,7 +167,7 @@ namespace nasl.ui {
       screenX: nasl.core.Integer;
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
-    }) => any ;
+    }) => void;
 
     @Slot({
       title: '',

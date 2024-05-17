@@ -4,12 +4,9 @@ exports[`u-tree-select.vue > Demo-Data 方式 1`] = `
 <div>
   <div class="root" tabindex="0">
     <span class="baseline">b</span>
-    <!---->
     <div class="text">
       <span> 节点 1 </span>
-      <!---->
     </div>
-    <!---->
     <transition-stub class="popper" name="fade">
       <div class="root" style="display: none;"></div>
     </transition-stub>
@@ -22,10 +19,7 @@ exports[`u-tree-select.vue > Demo-Tag 方式 1`] = `
   <span class="baseline">b</span>
   <span class="placeholder"> 请选择 </span>
   <div class="text">
-    <!---->
-    <!---->
   </div>
-  <!---->
   <transition-stub class="popper" name="fade">
     <div class="root" style="display: none;"></div>
   </transition-stub>
@@ -36,12 +30,9 @@ exports[`u-tree-select.vue > Demo-Tag 方式 2`] = `
 <div>
   <div class="root" tabindex="0">
     <span class="baseline">b</span>
-    <!---->
     <div class="text">
       <span> 节点 2 </span>
-      <!---->
     </div>
-    <!---->
     <transition-stub class="popper" name="fade">
       <div class="root" style="display: none;"></div>
     </transition-stub>
@@ -53,12 +44,9 @@ exports[`u-tree-select.vue > Demo-支持多选 1`] = `
 <div>
   <div class="root" tabindex="0">
     <span class="baseline">b</span>
-    <!---->
     <div class="text">
       <span> 节点 1 </span>
-      <!---->
     </div>
-    <!---->
     <transition-stub class="popper" name="fade">
       <div class="root" style="display: none;"></div>
     </transition-stub>

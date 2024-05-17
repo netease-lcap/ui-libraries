@@ -105,7 +105,7 @@ namespace nasl.ui {
           sync: true,
           docDescription: '通过组件进行选择后，最终选中的值，支持双向绑定到变量',
       })
-      value: V;
+      value: M extends true ? nasl.collection.List<V> : V;
 
       @Prop({
           group: '交互属性',
@@ -116,11 +116,12 @@ namespace nasl.ui {
               concept: 'SwitchSetter',
           },
       })
-      checkable: nasl.core.Boolean = false;
+      checkable: M = false as any;
 
       @Prop({
           title: '占位符',
           description: '为空时显示的占位符文本',
+          implicitToString: true,
       })
       placeholder: nasl.core.String = '请选择';
 
