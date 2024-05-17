@@ -4,6 +4,7 @@ import {
   getFirstDisplayedProperty,
   genUniqueQueryNameGroup,
 } from './utils';
+import { genQueryLogic } from './genQueryLogic';
 
 function getEntityKeyProperty(entity) {
   return entity.properties.find((p) => p.primaryKey)?.name || 'id';
@@ -31,8 +32,8 @@ function genTableColumnTemplate(property, currentName) {
   const getText = (property1) => {
     if (property1.typeAnnotation.typeName === 'Boolean') {
       return `
-            <UText if="${valueExpression}" text="是"></UText>
-            <UText if="!${valueExpression}" text="否"></UText>
+            <UText _if={${valueExpression}} text="是"></UText>
+            <UText _if={!${valueExpression}} text="否"></UText>
             `;
     }
     return `<UText text={${valueExpression}}></UText>`;
@@ -60,7 +61,7 @@ function genTableTemplate(entity, nameGroup, modifyable, entryFromCall) {
   const entityName = entity.name;
   const currentName = nameGroup.currentName || 'current';
   const properties = entity.properties.filter(filterProperty('inTable'));
-  const dataSourceValue = `${nameGroup.logic}(elements.$ce.page, elements.$ce.size, elements.$ce.sort, elements.$ce.order)`;
+  const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.page, elements.$ce.size, elements.$ce.sort, elements.$ce.order)`;
   return `export function view() {
     return <UTableView
         ref="${nameGroup.viewElementMainView}"
@@ -90,6 +91,7 @@ function genTableTemplate(entity, nameGroup, modifyable, entryFromCall) {
                 slotCell={
                     (current) => <ULinearLayout gap="small">
                         <ULink
+                            text="修改"
                             onClick={
                                 function ${nameGroup.viewLogicModify}(event) {
 
@@ -97,6 +99,7 @@ function genTableTemplate(entity, nameGroup, modifyable, entryFromCall) {
                             }>
                         </ULink>
                         <ULink
+                            text="删除"
                             onClick={
                                 function ${nameGroup.viewLogicRemove}(event) {
                                     ${namespace}.${entityName}.logics.delete(${currentName}.item.${firstLowerCase(entity.name)}.${getEntityKeyProperty(entity)})
@@ -132,5 +135,23 @@ export function genTableBlock(entity, refElement) {
   // 当前节点的currentName
   nameGroup.currentName = refElement.getCurrentName();
 
-  return `${genTableTemplate(entity, nameGroup)}`;
+  // 收集所有和本实体关联的实体
+  const entitySet = new Set();
+  entitySet.add(entity);
+  entity.properties.forEach((property) => {
+    if (property.relationEntity) {
+      // 有外键关联
+      const relationEntity = dataSource?.findEntityByName(property.relationEntity);
+      if (relationEntity) {
+        const displayedProperty = getFirstDisplayedProperty(relationEntity);
+        if (displayedProperty) entitySet.add(relationEntity);
+      }
+    }
+  });
+  const allEntities = [...entitySet];
+
+  return `${genTableTemplate(entity, nameGroup)}
+    export namespace app.logics {
+        ${genQueryLogic(allEntities, nameGroup, true, true, refElement.parentNode)}
+    }`;
 }
