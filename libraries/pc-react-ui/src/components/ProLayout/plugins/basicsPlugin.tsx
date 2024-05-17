@@ -85,6 +85,7 @@ export function useHandleMenuSlot(props) {
   const menuProps = props.get('menuProps');
   const menuSlot = React.Children.toArray(_.get(fragment, 'props.children', []));
   const handleLink = useHandleLink();
+  let timeer = null;
   function childToJson(children) {
     return React.Children.map(children, (child) => {
       if (child?.type === MenuItem) {
@@ -100,9 +101,16 @@ export function useHandleMenuSlot(props) {
           ...icon,
           label,
           onClick: _.wrap(onClickPorps, (fn, arg) => {
-            _.attempt(fn, arg);
-            handleLink(arg.key, child.props?.target);
-            return false;
+            if (_.isFunction(fn)) {
+              _.attempt(fn, arg);
+              return;
+            }
+            if (timeer) {
+              clearTimeout(timeer);
+            }
+            timeer = setTimeout(() => {
+              handleLink(arg.key, child.props?.target);
+            }, 150);
           }),
         };
       }

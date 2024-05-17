@@ -88,6 +88,8 @@ export * from './u-radios.vue';
 export * from './u-rate.vue';
 export * from './u-region-select.vue';
 export * from './u-select.vue';
+export * from './u-date-picker.vue';
+export * from './u-date-time-picker.vue';
 export * from './u-selectable-steps.vue';
 export * from './u-date-picker.vue';
 export * from './u-date-time-picker.vue';

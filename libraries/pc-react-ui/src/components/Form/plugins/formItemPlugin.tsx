@@ -15,7 +15,7 @@ export function useHandleRule(props) {
     rules: _.map(rules, (item) => {
       return {
         message: item.message,
-        required: item.required,
+        equired: item.required,
         validateTrigger: ['onChange', 'onBlur'],
         ...item,
         validator: (rule, value) => {
@@ -61,13 +61,15 @@ export function useHandleFormWarplabel(props) {
 export function useHandleFormItemProps(props) {
   const BaseComponent = props.get('render');
   const { isForm } = React.useContext(FormContext);
-  const render = React.useCallback((selfProps) => {
+  const render = React.useCallback(React.forwardRef((selfProps, ref) => {
     const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
     const colProps = _.pick(selfProps, COLPROPSFIELDS);
+
     const fieldProps = {
       ..._.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]),
       className: classnames('cw-nasl', selfProps.className),
       popupClassName: 'cw-nasl',
+      ref,
     };
     return (
       <BaseComponent {...{
@@ -78,7 +80,7 @@ export function useHandleFormItemProps(props) {
       }}
       />
     );
-  }, [BaseComponent]);
+  }), [BaseComponent]);
   return {
     render,
   };

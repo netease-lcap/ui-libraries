@@ -7,12 +7,6 @@
             <u-table-view-column title="地址" field="address"></u-table-view-column>
             <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%"></u-table-view-column>
         </u-table-view>
-        <u-table-view striped :data-source="data" pageable :page-size="10" :defaultColumnWidth="300">
-            <u-table-view-column title="用户名" field="name"></u-table-view-column>
-            <u-table-view-column title="手机号码" field="phone"></u-table-view-column>
-            <u-table-view-column title="地址" field="address"></u-table-view-column>
-            <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date"></u-table-view-column>
-        </u-table-view>
 </u-linear-layout>
 </template>
 <script>

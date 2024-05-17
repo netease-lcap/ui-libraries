@@ -99,6 +99,7 @@ const createTextNode = (str = '') => {
 };
 
 const SYNC_KEY = '$sync';
+const DIRECTIVE_PREFIX = '_';
 
 export function transformJSXChildNode(node: JSXText | JSXExpressionContainer | JSXSpreadChild | JSXElement | JSXFragment) {
   if (node.type === 'JSXText') {
@@ -230,16 +231,6 @@ export function parseJSXExpression(ast: JSXElement | JSXFragment | JSXExpression
     return;
   }
 
-  if (['NumericLiteral', 'BooleanLiteral', 'ArrayExpression', 'ObjectExpression'].indexOf(ast.expression.type) !== -1) {
-    element.bindAttrs.push({
-      concept: 'BindAttribute',
-      name: attrName,
-      type: 'static',
-      value: getNodeCode(ast.expression),
-    });
-    return;
-  }
-
   if (EVENT_REGEX.test(attrName)) {
     const eventName = kebabCase(attrName.substring(2));
     const bindEvent: any = {
@@ -263,6 +254,16 @@ export function parseJSXExpression(ast: JSXElement | JSXFragment | JSXExpression
     }
 
     element.bindEvents.push(bindEvent);
+    return;
+  }
+
+  if (['NumericLiteral', 'BooleanLiteral', 'ArrayExpression', 'ObjectExpression'].indexOf(ast.expression.type) !== -1) {
+    element.bindAttrs.push({
+      concept: 'BindAttribute',
+      name: attrName,
+      type: 'static',
+      value: getNodeCode(ast.expression),
+    });
     return;
   }
 
@@ -349,6 +350,22 @@ export function transformJSXElement2Nasl(element: JSXElement) {
   elementAST.tag = node.name.name;
 
   node.attributes.forEach((attr) => parseJSXAttr(attr, elementAST));
+
+  elementAST.bindAttrs = elementAST.bindAttrs.filter((attr) => {
+    if (attr.name.startsWith(DIRECTIVE_PREFIX)) {
+      elementAST.bindDirectives.push({
+        concept: 'BindDirective',
+        name: attr.name.substring(DIRECTIVE_PREFIX.length),
+        type: attr.type,
+        expression: attr.expression,
+        value: attr.value,
+        playground: [],
+      });
+      return false;
+    }
+
+    return true;
+  });
 
   const childNodes: NaslViewElement[] = [];
   element.children.forEach((childNode) => {
