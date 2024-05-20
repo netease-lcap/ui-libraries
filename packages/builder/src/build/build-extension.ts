@@ -108,11 +108,13 @@ export async function buildNaslExtension(options: LcapBuildOptions) {
     components: viewComponents.map(({
       name, kebabName,
       group, title, children,
+      show,
     }) => {
       return {
         name: options.framework.startsWith('vue') ? kebabName : name,
         group,
         title,
+        show,
         children: children.map((child) => (options.framework.startsWith('vue') ? child.kebabName : child.name)),
       };
     }),

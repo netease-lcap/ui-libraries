@@ -31,6 +31,11 @@
   border: 1.5px solid #4c88ff;
 }
 
+.sectionContainer hr {
+  border: none;
+  border-top: 1px solid #e5e5e5;
+}
+
 .sectionTitle,
 .sectionBody {
   padding: 24px;

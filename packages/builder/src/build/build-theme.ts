@@ -55,6 +55,18 @@ export async function viteBuildTheme(themeConfig: ThemeConfig) {
     config.resolve = {};
   }
 
+  if (!Array.isArray(config.resolve.alias)) {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      vue: 'vue/dist/vue.esm.js',
+    };
+  } else {
+    config.resolve.alias.push({
+      find: 'vue',
+      replacement: 'vue/dist/vue.esm.js',
+    });
+  }
+
   config.build.sourcemap = false;
   config.build.minify = 'esbuild';
   config.build.emptyOutDir = false;
@@ -78,7 +90,7 @@ export async function buildTheme(options: LcapBuildOptions) {
     useOldCssVarParser: options.theme.useOldCssVarParser,
     findThemeType: options.theme.findThemeType,
     type: options.type,
-  });
+  }, options.framework);
 
   if (!themeConfig || !themeConfig.components || themeConfig.components.length === 0) {
     return;

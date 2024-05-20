@@ -1,6 +1,7 @@
 /* eslint-disable newline-per-chained-call */
 import glob from 'fast-glob';
 import fs from 'fs-extra';
+import { kebabCase } from 'lodash';
 import parseCssVars, { ThemeComponentVars, ThemeGlobalVars, ThemeInfo } from '../../nasl/parse-css-vars';
 import parseCssVarsOld from '../../nasl/parse-css-vars-old';
 
@@ -56,7 +57,7 @@ function getCssContent(options: ThemeOptions) {
   return cssContents.join('\n\n');
 }
 
-export default function genThemeConfig(options: ThemeOptions) {
+export default function genThemeConfig(options: ThemeOptions, framework: string) {
   const themeConfig: ThemeConfig = {
     defaultTheme: {},
     previewPages: options.previewPages,
@@ -84,7 +85,12 @@ export default function genThemeConfig(options: ThemeOptions) {
   themeConfig.components = options.components.filter((comp) => comp.show !== false).map(({
     group, title, name, children,
   }) => {
-    const compTheme = themeInfo.components.find((c) => c.name === name);
+    const compTheme = themeInfo.components.find((c) => (
+      c.name === name || (
+        kebabCase(c.name) === kebabCase(name)
+        && framework && framework.startsWith('vue')
+      )
+    ));
     if (!compTheme) {
       return {
         name,

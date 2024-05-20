@@ -55,7 +55,7 @@ export default (options: ViteLcapPluginOptions = {}) => {
   }
 
   if (pluginOption.theme) {
-    pluginOption.theme.themeVarCssPath = path.resolve(cwd, pluginOption.theme.themeVarCssPath || '');
+    pluginOption.theme.themeVarCssPath = pluginOption.theme.themeVarCssPath ? path.resolve(cwd, pluginOption.theme.themeVarCssPath || '') : '';
     pluginOption.theme.themeComponentFolder = path.resolve(cwd, pluginOption.theme.themeComponentFolder || '');
   }
 
