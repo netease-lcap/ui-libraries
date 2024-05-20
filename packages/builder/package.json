@@ -18,6 +18,8 @@
     },
     "./input/vue2/component-preview": "./input/vue2/component-preview.js",
     "./input/react/component-preview": "./input/react/component-preview.jsx",
+    "./input/vue2/stories-preview": "./input/vue2/stories-preview.js",
+    "./input/react/stories-preview": "./input/react/stories-preview.jsx",
     "./input/theme.html": "./input/theme.html",
     "./package.json": "./package.json"
   },

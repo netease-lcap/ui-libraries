@@ -7,6 +7,15 @@
   gap: 24px;
 }
 
+.storiesPreview {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
 .sectionContainer {
   background: white;
   border: 1.5px solid #e7e8eb;
