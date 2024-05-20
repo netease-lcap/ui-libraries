@@ -1,5 +1,6 @@
 import type { Plugin } from 'vite';
 import { lcapBuild } from '../build';
+import type { BuildIdeOptions } from '../build/types';
 
 export interface LcapThemeOptions {
   themeVarCssPath?: string;
@@ -16,7 +17,7 @@ export interface ViteLcapPluginOptions {
   type?: 'extension' | 'nasl.ui';
   framework?: 'react' | 'vue2' | 'taro' | 'vue3',
   i18n?: boolean | { [lang: string]: string };
-  ide?: boolean;
+  ide?: BuildIdeOptions;
   assetsPublicPath?: string;
   components?: Array<{ group: string, title: string, name: string }>,
   theme?: LcapThemeOptions,

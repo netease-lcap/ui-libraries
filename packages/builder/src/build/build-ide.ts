@@ -58,6 +58,10 @@ export async function viteBuildIde(options: BuildIdeOptions, rootPath: string) {
     }
   }
 
+  if (buildConfig.build?.rollupOptions?.external) {
+    delete buildConfig.build.rollupOptions.external;
+  }
+
   await build({
     configFile: false,
     envFile: false,
@@ -65,19 +69,40 @@ export async function viteBuildIde(options: BuildIdeOptions, rootPath: string) {
   });
 }
 
-export async function buildIDE(options: LcapBuildOptions) {
-  if (!options.ide) {
-    return;
+const isExistEntry = (entry, rootPath) => {
+  if (!entry) {
+    return false;
   }
+
+  if (entry.indexOf('.') !== -1) {
+    return fs.existsSync(path.resolve(rootPath, entry));
+  }
+
+  return [
+    '.js',
+    '.jsx',
+    '.tsx',
+    '.ts',
+  ].findIndex((ext) => {
+    return fs.existsSync(path.resolve(rootPath, `${entry}${ext}`));
+  }) !== -1;
+};
+
+export async function buildIDE(options: LcapBuildOptions) {
+  const DEFUALT_IDE_OPTIONS = {
+    entry: 'ide/index',
+    outDir: `${options.destDir}/ide`,
+  };
 
   // eslint-disable-next-line prefer-object-spread
   const ideOptions: BuildIdeOptions = Object.assign(
-    {
-      entry: 'ide/index',
-      outDir: 'dist-theme/ide',
-    },
+    DEFUALT_IDE_OPTIONS,
     options.ide,
   );
+
+  if (!isExistEntry(ideOptions.entry, options.rootPath)) {
+    return;
+  }
 
   await viteBuildIde(ideOptions, options.rootPath);
 }
