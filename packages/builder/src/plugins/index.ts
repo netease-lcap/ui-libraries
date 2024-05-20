@@ -6,6 +6,7 @@ import LcapConfig from './lcap-config';
 import type { LcapThemeOptions, ViteLcapPluginOptions } from './lcap-build';
 
 const DEFAULT_THEME_OPTIONS: LcapThemeOptions = {
+  findThemeType: 'theme',
   themeVarCssPath: './src/theme/vars.css',
   themeComponentFolder: './src/theme/components',
   useOldCssVarParser: false,
@@ -23,6 +24,7 @@ const DEFAULT_THEME_OPTIONS: LcapThemeOptions = {
 };
 
 const EXTENSION_DEFAULT_THEME_OPTIONS: LcapThemeOptions = {
+  findThemeType: 'component',
   themeVarCssPath: '',
   themeComponentFolder: './src/components',
   themePreviewEntry: '',

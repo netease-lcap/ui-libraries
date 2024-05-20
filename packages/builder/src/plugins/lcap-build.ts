@@ -8,6 +8,8 @@ export interface LcapThemeOptions {
   useOldCssVarParser?: boolean;
   previewPages?: Array<{ name: string; title: string; viewport?: { width: number; height: number } }>;
   themePreviewEntry?: string;
+  /* 找 theme文件的方式， theme, 在src/theme里， 在 component/theme */
+  findThemeType?: 'theme' | 'component';
 }
 
 export interface ViteLcapPluginOptions {

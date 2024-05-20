@@ -1,8 +1,8 @@
 /* eslint-disable newline-per-chained-call */
 import glob from 'fast-glob';
 import fs from 'fs-extra';
-import parseCssVars, { ThemeComponentVars, ThemeGlobalVars, ThemeInfo } from '../nasl/parse-css-vars';
-import parseCssVarsOld from '../nasl/parse-css-vars-old';
+import parseCssVars, { ThemeComponentVars, ThemeGlobalVars, ThemeInfo } from '../../nasl/parse-css-vars';
+import parseCssVarsOld from '../../nasl/parse-css-vars-old';
 
 export interface ThemeOptions {
   themeVarCssPath: string;
@@ -11,6 +11,7 @@ export interface ThemeOptions {
   previewPages: Array<{ name: string, title: string }>;
   useOldCssVarParser?: boolean;
   components: Array<{ group: string, title: string, name: string, [key: string]: any }>;
+  findThemeType?: 'theme' | 'component';
 }
 
 export interface ThemeComponentConfig extends ThemeComponentVars {
@@ -39,7 +40,7 @@ function getCssContent(options: ThemeOptions) {
   }
 
   if (!options.useOldCssVarParser) {
-    const varsPath = options.type === 'extension' ? '*/theme/vars.css' : '*/vars.css';
+    const varsPath = options.findThemeType === 'component' ? '*/theme/vars.css' : '*/vars.css';
     const varFiles = glob.sync(varsPath, { cwd: options.themeComponentFolder, absolute: true });
     if (varFiles.length > 0) {
       cssVarFiles.push(...varFiles);

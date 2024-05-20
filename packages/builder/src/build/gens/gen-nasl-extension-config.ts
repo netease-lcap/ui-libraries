@@ -143,40 +143,43 @@ export default async function getNaslExtensionConfig({
   const feLibraries = getFrontEndLibray(frameworkKind, viewComponents, logics);
 
   return {
-    name: pkgInfo.name,
-    title: pkgInfo.title,
-    description: pkgInfo.description,
-    specVersion: '1.0.0',
-    type: 'module',
-    subType: 'extension',
-    version: pkgInfo.version,
-    frontends: feLibraries,
-    externalDependencyMap: {
-      npm: getPeerDependencies(pkgInfo),
-    },
-    summary: {
+    config: {
       name: pkgInfo.name,
       title: pkgInfo.title,
-      version: pkgInfo.version,
       description: pkgInfo.description,
-      frontends: feLibraries.map((library) => ({
-        type: library.type,
-        frameworkKind,
-        viewComponents: library.viewComponents.map((item: any) => ({
-          name: item.name,
-          title: item.title,
-        })),
-        logics: library.logics.map((item: any) => ({
-          name: item.name,
-          description: item.title || item.description || item.name,
-        })),
-      })),
-    },
-    compilerInfoMap: {
-      js: {
-        prefix: 'extension',
+      specVersion: '1.0.0',
+      type: 'module',
+      subType: 'extension',
+      version: pkgInfo.version,
+      frontends: feLibraries,
+      externalDependencyMap: {
+        npm: getPeerDependencies(pkgInfo),
       },
+      summary: {
+        name: pkgInfo.name,
+        title: pkgInfo.title,
+        version: pkgInfo.version,
+        description: pkgInfo.description,
+        frontends: feLibraries.map((library) => ({
+          type: library.type,
+          frameworkKind,
+          viewComponents: library.viewComponents.map((item: any) => ({
+            name: item.name,
+            title: item.title,
+          })),
+          logics: library.logics.map((item: any) => ({
+            name: item.name,
+            description: item.title || item.description || item.name,
+          })),
+        })),
+      },
+      compilerInfoMap: {
+        js: {
+          prefix: 'extension',
+        },
+      },
+      ideVersion: pkgInfo.lcapIdeVersion || '3.8',
     },
-    ideVersion: pkgInfo.lcapIdeVersion || '3.8',
+    viewComponents,
   };
 }

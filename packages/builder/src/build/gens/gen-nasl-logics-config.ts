@@ -2,7 +2,7 @@ import * as parser from '@babel/parser';
 import traverse from '@babel/traverse';
 import glob from 'fast-glob';
 import fs from 'fs-extra';
-import transformFunc2NaslLogic from '../nasl/transform-func2nasl-logic';
+import transformFunc2NaslLogic from '../../nasl/transform-func2nasl-logic';
 
 export default async function getNaslExtensionConfig(rootPath) {
   const logicDir = 'src/logics';

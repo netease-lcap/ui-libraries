@@ -19,6 +19,7 @@ export interface LcapCodeGenOption {
   themeComponentFolder?: string;
   themePreviewEntry?: string;
   previewPages?: Array<{ name: string; title: string }>;
+  findThemeType?: 'theme' | 'component';
   framework?: 'react' | 'vue2' | 'taro' | 'vue3',
 }
 
@@ -30,14 +31,13 @@ const defaultOptions = {
 function genVarCssCode({
   themeVarCssPath,
   themeComponentFolder: componentFolder,
-  type,
+  findThemeType,
 }: LcapCodeGenOption) {
-  const isExtension = type === 'extension';
   const cssVars = [
     themeVarCssPath,
   ];
 
-  const varsPath = isExtension ? '*/theme/vars.css' : '*/vars.css';
+  const varsPath = findThemeType === 'component' ? '*/theme/vars.css' : '*/vars.css';
   const varFiles = glob.sync(varsPath, { cwd: componentFolder, absolute: true });
   if (varFiles.length > 0) {
     cssVars.push(...varFiles);
@@ -47,12 +47,12 @@ function genVarCssCode({
   return code;
 }
 
-function genComponentStoriesCode({ themeComponentFolder: componentFolder, framework, type }: LcapCodeGenOption) {
+function genComponentStoriesCode({ themeComponentFolder: componentFolder, framework, findThemeType }: LcapCodeGenOption) {
   const imports: string[] = [
     `import createComponentPreview from '${path.resolve(__dirname, `../../input/${framework}/createComponentPreview`)}';`,
   ];
   const stories: string[] = ['const stories = ['];
-  const previewFilePath = type === 'extension' ? '*/theme/index.{tsx,ts,jsx,js,vue}' : '*/index.{tsx,ts,jsx,js,vue}';
+  const previewFilePath = findThemeType === 'component' ? '*/theme/index.{tsx,ts,jsx,js,vue}' : '*/index.{tsx,ts,jsx,js,vue}';
 
   const previewFiles = glob.sync(previewFilePath, { cwd: componentFolder, absolute: true });
   previewFiles.forEach((filePath) => {

@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
-import type { LcapBuildOptions } from './index';
-import { getPackName } from '../utils';
+import type { LcapBuildOptions } from '../types';
+import { getPackName } from '../../utils';
 
 const getManifest = (type, outDir) => {
   return {

@@ -1,9 +1,11 @@
 import { loadConfigFromFile, build } from 'vite';
-import logger from '../utils/logger';
-import type { ThemeConfig } from './gen-theme-config';
+import fs from 'fs-extra';
+import genThemeConfig, { ThemeConfig } from './gens/gen-theme-config';
 import { themePath } from '../constants/input-paths';
+import logger from '../utils/logger';
+import type { LcapBuildOptions } from './types';
 
-export async function buildTheme(themeConfig: ThemeConfig) {
+export async function viteBuildTheme(themeConfig: ThemeConfig) {
   const loadResult = await loadConfigFromFile({ command: 'build', mode: 'production' });
   if (!loadResult || !loadResult.config) {
     logger.error('未找到 vite 配置文件');
@@ -65,4 +67,27 @@ export async function buildTheme(themeConfig: ThemeConfig) {
     envFile: false,
     ...config,
   });
+}
+
+export async function buildTheme(options: LcapBuildOptions) {
+  const themeConfig = genThemeConfig({
+    components: options.components || [],
+    themeVarCssPath: options.theme.themeVarCssPath || '',
+    themeComponentFolder: options.theme.themeComponentFolder || '',
+    previewPages: options.theme.previewPages || [],
+    useOldCssVarParser: options.theme.useOldCssVarParser,
+    findThemeType: options.theme.findThemeType,
+    type: options.type,
+  });
+
+  if (!themeConfig || !themeConfig.components || themeConfig.components.length === 0) {
+    return;
+  }
+
+  logger.start('开始构建 theme');
+  await fs.writeJSON(`${options.destDir}/theme.config.json`, themeConfig, { spaces: 2 });
+  logger.success('生成 theme.config.json 成功！');
+
+  await viteBuildTheme(themeConfig);
+  logger.success('构建theme 成功');
 }

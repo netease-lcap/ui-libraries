@@ -2,8 +2,8 @@ import path from 'path';
 import fs from 'fs-extra';
 import glob from 'fast-glob';
 import genNaslComponentConfig from './gen-nasl-component-config';
-import { getComponentPathInfo } from '../utils/component-path';
-import logger from '../utils/logger';
+import { getComponentPathInfo } from '../../utils/component-path';
+import logger from '../../utils/logger';
 
 export interface GenNaslUIConfigProps {
   // cwd

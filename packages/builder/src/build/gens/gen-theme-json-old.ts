@@ -2,7 +2,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import * as postcss from 'postcss';
-import logger from '../utils/logger';
+import logger from '../../utils/logger';
 
 export default (config) => {
   const {
