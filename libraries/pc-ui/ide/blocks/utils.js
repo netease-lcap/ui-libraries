@@ -52,3 +52,7 @@ export function genUniqueQueryNameGroup(
   result.structure = scope?.getStructureUniqueName?.(firstUpperCase(`${result.logic}Structure`));
   return result;
 }
+
+export function getEntityPromaryKeyProperty(entity) {
+  return entity.properties.find((p) => p.primaryKey)?.name || 'id';
+}

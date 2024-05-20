@@ -6,7 +6,7 @@ import {
 } from './utils';
 import { genQueryLogic, genFormItemsTemplate } from './genCommonBlock';
 
-function genCreateFormTemplate(entity, nameGroup, selectNameGroupMap) {
+function genUpdateFormTemplate(entity, nameGroup, selectNameGroupMap) {
   const namespace = entity.getNamespace();
   const entityName = entity.name;
   const entityFullName = `${namespace}.${entityName}`;
@@ -14,29 +14,29 @@ function genCreateFormTemplate(entity, nameGroup, selectNameGroupMap) {
   nameGroup.vModelName = nameGroup.viewVariableEntity;
 
   return ` export function view() {
-        let ${nameGroup.viewVariableEntity}: ${entityFullName};
-
-        return <UForm ref="${nameGroup.viewElementMainView}">
-            ${genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap)}
-            <UFormItem
-                layout="center">
-                <UButton
-                    color="primary"
-                    text="立即创建"
-                    onClick={
-                        function ${nameGroup.viewLogicSubmit}(event) {
-                            if ($refs.${nameGroup.viewElementMainView}.validate().valid) {
-                                ${namespace}.${entity.name}.logics.create(${nameGroup.viewVariableEntity})
-                                nasl.ui.showMessage('创建成功！')
-                            }
-                        }
-                    }></UButton>
-            </UFormItem>
-        </UForm>
-    }`;
+          let ${nameGroup.viewVariableEntity}: ${entityFullName};
+  
+          return <UForm ref="${nameGroup.viewElementMainView}">
+              ${genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap)}
+              <UFormItem
+                  layout="center">
+                  <UButton
+                      color="primary"
+                      text="提交修改"
+                      onClick={
+                          function ${nameGroup.viewLogicSubmit}(event) {
+                              if ($refs.${nameGroup.viewElementMainView}.validate().valid) {
+                                  ${namespace}.${entity.name}.logics.update(${nameGroup.viewVariableEntity})
+                                  nasl.ui.showMessage('修改成功！')
+                              }
+                          }
+                      }></UButton>
+              </UFormItem>
+          </UForm>
+      }`;
 }
 
-export function genCreateBlock(entity, refElement) {
+export function genUpdateBlock(entity, refElement) {
   const likeComponent = refElement?.likeComponent;
   const dataSource = entity.parentNode;
   const module = dataSource.app;
@@ -48,6 +48,7 @@ export function genCreateBlock(entity, refElement) {
     viewElementMainView: likeComponent.getViewElementUniqueName('form1'),
     viewVariableEntity: likeComponent.getVariableUniqueName(firstLowerCase(entity.name)),
     viewLogicSubmit: likeComponent.getLogicUniqueName('submit'),
+    viewParamId: likeComponent.getParamUniqueName('id'),
   };
 
   // 收集所有和本实体关联的实体
@@ -73,9 +74,8 @@ export function genCreateBlock(entity, refElement) {
     }
   });
 
-  return `${genCreateFormTemplate(entity, nameGroup, selectNameGroupMap)}
-    export namespace app.logics {
-        ${newLogics.join('\n')}
-    }
-    `;
+  return `${genUpdateFormTemplate(entity, nameGroup, selectNameGroupMap)}
+      export namespace app.logics {
+          ${newLogics.join('\n')}
+      }`;
 }

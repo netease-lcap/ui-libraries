@@ -1,0 +1,41 @@
+import {
+  firstLowerCase,
+  getFirstDisplayedProperty,
+  genUniqueQueryNameGroup,
+  getEntityPromaryKeyProperty,
+} from './utils';
+import { genQueryLogic } from './genCommonBlock';
+
+function genSelectTemplate(entity, nameGroup) {
+  const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.page, elements.$ce.size)`;
+  const property = getFirstDisplayedProperty(entity);
+  return `export function view() {
+    return <USelect
+        clearable={true}
+        placeholder="请选择"
+        ref="${nameGroup.viewElementMainView}"
+        dataSource={${dataSourceValue}}
+        textField={${nameGroup.lowerEntity}.${property.name}}
+        valueField={${nameGroup.lowerEntity}.${getEntityPromaryKeyProperty(entity)}}
+        pagination={true}>
+    </USelect>
+  }`;
+}
+
+export function genSelectBlock(entity, refElement) {
+  const likeComponent = refElement?.likeComponent;
+  const dataSource = entity.parentNode;
+  const module = dataSource.app;
+
+  const viewElementMainView = likeComponent.getViewElementUniqueName('select');
+  const nameGroup = genUniqueQueryNameGroup(module, likeComponent, viewElementMainView, false);
+  nameGroup.viewElementMainView = viewElementMainView;
+  nameGroup.lowerEntity = firstLowerCase(entity.name);
+
+  const allEntities = [entity];
+
+  return `${genSelectTemplate(entity, nameGroup)}
+        export namespace app.logics {
+            ${genQueryLogic(allEntities, nameGroup, false, false, module)}
+        }`;
+}

@@ -1,4 +1,4 @@
-export function genCurdTableBlock(entity, view) {
+export function genTableCurdBlock(entity, view) {
   const namespace = entity.getNamespace();
   const entityName = entity.name;
   const entityLowerName = entityName.toLowerCase();
