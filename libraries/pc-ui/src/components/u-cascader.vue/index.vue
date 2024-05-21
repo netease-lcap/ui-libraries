@@ -49,13 +49,14 @@
 <script>
 import UCascaderItem from './item.vue';
 import MField from '../m-field.vue';
+import MPreview from '../u-text.vue/preview';
 import SupportDataSource from '../../mixins/support.datasource';
 import treeDataSource from '../../mixins/tree.datasource';
 
 export default {
     name: 'u-cascader',
     components: { UCascaderItem },
-    mixins: [MField, SupportDataSource, treeDataSource],
+    mixins: [MField, SupportDataSource, treeDataSource, MPreview],
     props: {
         data: { type: Array, default: () => [] },
         value: { type: [String, Array], default: '' },
