@@ -1,6 +1,6 @@
 {
   "name": "@lcap/pc-react-ui",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.2",
   "description": "Codewave Low Code AI Platform React Ant Design HOC UI Components",
   "main": "src/index.ts",
   "files": [
