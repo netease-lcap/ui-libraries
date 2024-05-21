@@ -12,9 +12,16 @@ export type {
 export {
   parseComponentAPI,
   parseCssVars,
-  transformJsx2Nasl,
   transformTsFunc2NaslLogic,
+  transformJsx2Nasl,
 } from './nasl';
+
+export {
+  transformExpression2nasl,
+  transformTsType2Nasl,
+  transformFunc2Nasl,
+  transformTSX2Nasl,
+} from './ts2nasl';
 
 export {
   lcapPlugin,
