@@ -1,111 +1,100 @@
-export function genTableCurdBlock(entity, view) {
+import {
+  firstLowerCase,
+  getFirstDisplayedProperty,
+  genUniqueQueryNameGroup,
+} from './utils';
+import { genQueryLogic, genFilterTemplate, genSaveModalTemplate } from './genCommonBlock';
+import { genTableTemplate } from './genTableBlock';
+
+export function genTableCurdBlock(entity, refElement) {
+  const likeComponent = refElement?.likeComponent;
+  const dataSource = entity.parentNode;
+  const module = dataSource.app;
   const namespace = entity.getNamespace();
   const entityName = entity.name;
-  const entityLowerName = entityName.toLowerCase();
   const entityFullName = `${namespace}.${entityName}`;
-  const code = `
-        export function view() {
-            let entity1: ${entityFullName};
-            let input: ${entityFullName};
-            let filter: ${entityFullName};
-            let isUpdate: Boolean;
-            
-            const $lifecycles = {
-                onCreated: [
-                    function init(event) {
-                        nasl.util.Clear(filter);
-                        return;
-                    },     
-                ]      
-            }
 
-            return <ULinearLayout>
-                <ULinearLayout></ULinearLayout>
-                <ULinearLayout>
-                    <ULink
-                        ref="link_1" 
-                        text="刷新" 
-                        onClick={
-                            function remove(event) {
-                                ${namespace}.logics.delete(current.item.entity1.id)
-                                $refs.tableView_1.reload()
-                                return;
-                            }          
-                        }>
-                    </ULink>
-                </ULinearLayout>
-                <UTableView
-                    dataSource={app.logics.loadTable13TableView_1(elements.$ce.page, elements.$ce.size, elements.$ce.sort, elements.$ce.order, filter)}
-                    valueField="entity1.id"
-                    pagination={true}
-                    showSizer={true}
-                    pageSize={20}
-                    pageNumber={1}>
-                        <UTableViewColumn
-                        field="entity1.property2"
-                        slotExpander={
-                            (current) => <UTableViewExpander item={current.item}></UTableViewExpander>
-                        }
-                        slotCell={
-                            (current) => <ULinearLayout gap="small">
-                                <UText text={current.item.entity1.property2}></UText>
-                            </ULinearLayout>
-                        }
-                        slotTitle={
-                            () => <UText text="property2"></UText>
-                        }>
-                    </UTableViewColumn>
-                    <UTableViewColumn
-                        slotExpander={
-                            (current) => <UTableViewExpander item={current.item}></UTableViewExpander>
-                        }
-                        slotCell={
-                            (current) => (
-                                <>
-                                <ULink 
-                                    text="修改"
-                                    onClick={
-                                        function modify(event) {
-                                            isUpdate = true
-                                            input = nasl.util.Clone(current.item.entity1)
-                                            $refs.saveModal_1.open()
-                                            return;
-                                        }
-                                    }>
-                                </ULink>,
-                                <ULink 
-                                    text="修改"
-                                    onClick={
-                                        function remove(event) {
-                                            app.dataSources.defaultDS.entities.Entity1.logics.delete(current.item.entity1.id)
-                                            $refs.tableView_1.reload()
-                                            return;
-                                        }
-                                    }>
-                                </ULink>
-                                </>
-                            )  
-                        }
-                        soltTitle={
-                            () => <UText text="操作"></UText>
-                        }>
-                    </UTableViewColumn>
-                    </UTableView>
-            </ULinearLayout>
-        }
+  const viewElementMainView = likeComponent.getViewElementUniqueName('tableView');
+  const nameGroup = genUniqueQueryNameGroup(module, likeComponent, viewElementMainView);
+  nameGroup.viewElementMainView = viewElementMainView;
+  nameGroup.viewElementFilterForm = likeComponent.getViewElementUniqueName('filterform');
+  nameGroup.viewElementSaveModal = likeComponent.getViewElementUniqueName('saveModal');
+  nameGroup.viewElementSaveModalForm = likeComponent.getViewElementUniqueName('saveModalForm');
+  nameGroup.viewLogicRemove = likeComponent.getLogicUniqueName('remove');
+  nameGroup.viewLogicInit = likeComponent.getLogicUniqueName('init');
+  nameGroup.viewLogicCreate = likeComponent.getLogicUniqueName('create');
+  nameGroup.viewLogicModify = likeComponent.getLogicUniqueName('modify');
+  nameGroup.viewLogicSubmit = likeComponent.getLogicUniqueName('submit');
+  nameGroup.viewLogicUpdateSubmit = likeComponent.getLogicUniqueName('updateSubmit');
+  nameGroup.viewLogicReload = likeComponent.getLogicUniqueName('reload');
+  nameGroup.viewVariableEntity = likeComponent.getVariableUniqueName(firstLowerCase(entity.name));
+  nameGroup.viewVariableInput = likeComponent.getVariableUniqueName('input');
+  nameGroup.viewVariableFilter = likeComponent.getVariableUniqueName('filter');
+  nameGroup.viewVariableIsUpdate = likeComponent.getVariableUniqueName('isUpdate');
 
-        export namespace app.logics {
-            export function loadTable13TableView_1(page, size) {
-                let result;
-                result = PAGINATE(FROM(${entityFullName}, ${entityName} => $
-                .WHERE(() => LIKE(Entity1.property1, filter.property1) && LIKE(Entity1.property2, filter.property2))
-                .ORDER_BY(() => [sort, order])
-                .SELECT(() => ({
-                    ${entityLowerName}: ${entityName},
-                }))), page, size)
-                return result;
-            } 
+  // 收集所有和本实体关联的实体
+  const entitySet = new Set();
+  entitySet.add(entity);
+  const selectNameGroupMap = new Map();
+  const newLogics = [];
+  entity.properties.forEach((property) => {
+    if (property.relationEntity) {
+      // 有外键关联
+      const relationEntity = dataSource?.findEntityByName(property.relationEntity);
+      if (relationEntity) {
+        const displayedProperty = getFirstDisplayedProperty(relationEntity);
+        if (displayedProperty) {
+          entitySet.add(relationEntity);
+          const viewElementSelect = likeComponent.getViewElementUniqueName('select');
+          const selectNameGroup = genUniqueQueryNameGroup(module, likeComponent, viewElementSelect, false, relationEntity.name);
+          selectNameGroup.viewElementSelect = viewElementSelect;
+          // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
+          const key = [property.name, relationEntity.name].join('-');
+          selectNameGroupMap.set(key, selectNameGroup);
+          const newLogic = genQueryLogic([relationEntity], selectNameGroup, false, false, module);
+          newLogics.push(newLogic);
         }
-    `;
-  return code;
+      }
+    }
+  });
+  const allEntities = [...entitySet];
+  const entityLogic = genQueryLogic(allEntities, nameGroup, true, true, module);
+  newLogics.push(entityLogic);
+
+  return `export function view() {
+    let ${nameGroup.viewVariableEntity}: ${entityFullName};
+    let ${nameGroup.viewVariableInput}: ${entityFullName};
+    let ${nameGroup.viewVariableFilter}: ${entityFullName};
+    let ${nameGroup.viewVariableIsUpdate}: Boolean;
+    
+    const $lifecycles = {
+        onCreated: [
+            function ${nameGroup.viewLogicInit}(event) {
+              nasl.util.Clear(${nameGroup.viewVariableFilter});
+              return;
+            },
+        ]
+    }
+
+    return <ULinearLayout direction="vertical">
+        ${genFilterTemplate(entity, nameGroup, selectNameGroupMap)}
+        <ULinearLayout mode="flex" alignment="start" justify="end">
+            <UButton
+                color="primary"
+                text="创 建"
+                onClick={
+                    function ${nameGroup.viewLogicCreate}(event) {
+                        ${nameGroup.viewVariableIsUpdate} = false
+                        ${nameGroup.viewVariableInput} = nasl.util.Clone(${nameGroup.viewVariableEntity});
+                        $refs.${nameGroup.viewElementSaveModal}.open()
+                    }
+                }></UButton>
+        </ULinearLayout>
+        ${genTableTemplate(entity, nameGroup, { hasFileter: true, modifyable: true })}
+        ${genSaveModalTemplate(entity, nameGroup, selectNameGroupMap)}
+    </ULinearLayout>
+  }
+    export namespace app.logics {
+        ${newLogics.join('\n')}
+    }`;
 }

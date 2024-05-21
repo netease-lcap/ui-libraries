@@ -5,6 +5,10 @@ import {
   transEntityMetadataTypes,
 } from './utils';
 
+/**
+ * where条件生成
+ * @param {*} entity
+ */
 function genWhereExpression(entity) {
   const properties = entity.properties.filter((property) => property?.display.inFilter);
   const expressions = properties.map((property) => {
@@ -16,6 +20,14 @@ function genWhereExpression(entity) {
   return expressions.join('&&');
 }
 
+/**
+ * 生成后端数据查询逻辑
+ * @param {*} allEntities
+ * @param {*} nameGroup
+ * @param {*} supportSort
+ * @param {*} supportFilter
+ * @returns
+ */
 export function genQueryLogic(allEntities, nameGroup, supportSort, supportFilter) {
   allEntities = Array.from(allEntities);
   const entity = allEntities.shift();
@@ -45,6 +57,12 @@ export function genQueryLogic(allEntities, nameGroup, supportSort, supportFilter
     }`;
 }
 
+/**
+ * 列的MemberExpression生成
+ * @param {*} property
+ * @param {*} nameGroup
+ * @returns
+ */
 export function genColumnMeta(property, nameGroup) {
   const { entity } = property;
   const currentName = nameGroup.currentName || 'current';
@@ -68,6 +86,12 @@ export function genColumnMeta(property, nameGroup) {
   };
 }
 
+/**
+ * 列的text生成
+ * @param {*} property
+ * @param {*} nameGroup
+ * @returns
+ */
 export function genTextTemplate(property, nameGroup) {
   const { valueExpression } = genColumnMeta(property, nameGroup);
   if (property.typeAnnotation.typeName === 'Boolean') {
@@ -79,6 +103,15 @@ export function genTextTemplate(property, nameGroup) {
   return `<UText text={${valueExpression}}></UText>`;
 }
 
+/**
+ * 表单项
+ * @param {*} entity
+ * @param {*} properties
+ * @param {*} nameGroup
+ * @param {*} selectNameGroupMap
+ * @param {*} options
+ * @returns
+ */
 export function genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap, options = {
   needRules: true,
 }) {
@@ -99,7 +132,7 @@ export function genFormItemsTemplate(entity, properties, nameGroup, selectNameGr
           ${rules.length ? ` rules={[${rules.join(',')}]}` : ''}
           layout="center"
           slotLabel={
-              <UText text="${label}"></UText>
+            <UText text="${label}"></UText>
           }>`;
     const { typeAnnotation } = property || {};
     const { typeNamespace: propertyTypeNamespace } = typeAnnotation || {};
@@ -208,13 +241,13 @@ export function genFormItemsTemplate(entity, properties, nameGroup, selectNameGr
         const enumeration = dataSource.app.findNodeByCompleteName(`${propertyTypeNamespace}.${propertyTypeName}`);
         const enumnamespace = enumeration?.getNamespace() || '';
         const name = enumeration?.name || '';
-        const enumTypeAnnotationStr = `__enumTypeAnnotation_${enumnamespace}.${name}`;
+        const enumTypeAnnotationStr = `${enumnamespace}.${name}`;
         formItem += `
                   <USelect
                       clearable={true}
                       value={$sync(${vModel})}
                       placeholder="请输入${label}"
-                      dataSource={$utils.EnumToList('${enumTypeAnnotationStr}')}>
+                      dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}>
                   </USelect>
               `;
       } else {
@@ -226,6 +259,83 @@ export function genFormItemsTemplate(entity, properties, nameGroup, selectNameGr
   }).join('\n')}`;
 }
 
+/**
+ * 过滤条件
+ * @param {*} entity
+ * @param {*} nameGroup
+ * @param {*} selectNameGroupMap
+ */
 export function genFilterTemplate(entity, nameGroup, selectNameGroupMap) {
+  const properties = entity.properties.filter(filterProperty('inFilter'));
+  nameGroup.vModelName = nameGroup.viewVariableFilter;
+  return `<ULinearLayout>
+  <UForm layout="inline">
+        ${genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap, {
+    needRules: false,
+  })}
+        <UFormItem layout="center" labelSize="auto">
+            <UButton
+                color="primary"
+                text="查询"
+                onClick={
+                    function ${nameGroup.viewLogicReload}(event) {
+                        $refs.${nameGroup.viewElementMainView}.reload()
+                    }
+                }>
+            </UButton>
+        </UFormItem>
+  </UForm>
+    </ULinearLayout>`;
+}
 
+export function genSaveModalTemplate(entity, nameGroup, selectNameGroupMap) {
+  const dataSource = entity.parentNode;
+  const properties = entity.properties.filter(filterProperty('inForm'));
+  nameGroup.vModelName = nameGroup.viewVariableInput;
+
+  return `<UModal ref="${nameGroup.viewElementSaveModal}"
+    slotTitle={
+      <>
+        <UText _if={${nameGroup.viewVariableIsUpdate}} text="修改"></UText>
+        <UText _if={!${nameGroup.viewVariableIsUpdate}} text="创建"></UText>
+      </>
+    }
+    slotBody={
+        <UForm ref="${nameGroup.viewElementSaveModalForm}">
+            ${genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap)}
+        </UForm>
+    }
+    slotFoot={
+        <ULinearLayout>
+            <UButton
+                _if={${nameGroup.viewVariableIsUpdate}}
+                color="primary"
+                text="提交修改"
+                onClick={
+                    function ${nameGroup.viewLogicUpdateSubmit}(event) {
+                      if ($refs.${nameGroup.viewElementSaveModalForm}.validate().valid) {
+                        ${dataSource.app.getNamespace()}.${entity.name}.logics.update(${nameGroup.viewVariableInput})
+                        $refs.${nameGroup.viewElementSaveModal}.close()
+                        $refs.${nameGroup.viewElementMainView}.reload()
+                    }
+                    }
+                }>
+            </UButton>
+            <UButton
+              _if={!${nameGroup.viewVariableIsUpdate}}
+                color="primary"
+                text="立即创建"
+                onClick={
+                    function ${nameGroup.viewLogicSubmit}(event) {
+                        if ($refs.${nameGroup.viewElementSaveModalForm}.validate().valid) {
+                          ${dataSource.app.getNamespace()}.${entity.name}.logics.create(${nameGroup.viewVariableInput})
+                          $refs.${nameGroup.viewElementSaveModal}.close()
+                          $refs.${nameGroup.viewElementMainView}.reload()
+                        }
+                      }
+                }>
+            </UButton>
+        </ULinearLayout>
+    }>
+  </UModal>`;
 }

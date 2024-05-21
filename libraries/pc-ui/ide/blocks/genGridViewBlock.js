@@ -16,7 +16,7 @@ function genGridViewCardTemplate(property, nameGroup) {
   </ULinearLayout> `;
 }
 
-function genGridViewTemplate(entity, nameGroup, options = {
+export function genGridViewTemplate(entity, nameGroup, options = {
   hasFileter: false,
   modifyable: false,
 }) {
@@ -25,8 +25,7 @@ function genGridViewTemplate(entity, nameGroup, options = {
   const currentName = nameGroup.currentName || 'current';
   const properties = entity.properties.filter(filterProperty('inTable'));
   const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.page, elements.$ce.size${options.hasFileter ? `,${nameGroup.viewVariableFilter}` : ''})`;
-  return `export function view() {
-    return <UGridView
+  return `<UGridView
         ref="${nameGroup.viewElementMainView}"
         dataSource={${dataSourceValue}}
         valueField={${nameGroup.lowerEntity}.${getEntityPromaryKeyProperty(entity)}}
@@ -68,8 +67,7 @@ function genGridViewTemplate(entity, nameGroup, options = {
                 </ULinearLayout>
             </UCard>
         }>
-    </UGridView>
-  }`;
+    </UGridView>`;
 }
 
 export function genGridViewBlock(entity, refElement) {
@@ -103,7 +101,9 @@ export function genGridViewBlock(entity, refElement) {
   });
   const allEntities = [...entitySet];
 
-  return `${genGridViewTemplate(entity, nameGroup)}
+  return `export function view() {
+    return ${genGridViewTemplate(entity, nameGroup)}
+  }
     export namespace app.logics {
         ${genQueryLogic(allEntities, nameGroup, false, true, module)}
     }`;

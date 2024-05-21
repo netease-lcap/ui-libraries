@@ -27,7 +27,7 @@ function genTableColumnTemplate(property, nameGroup) {
   </UTableViewColumn>`;
 }
 
-function genTableTemplate(entity, nameGroup, options = {
+export function genTableTemplate(entity, nameGroup, options = {
   hasFileter: false,
 }) {
   const namespace = entity.getNamespace();
@@ -35,8 +35,7 @@ function genTableTemplate(entity, nameGroup, options = {
   const currentName = nameGroup.currentName || 'current';
   const properties = entity.properties.filter(filterProperty('inTable'));
   const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.page, elements.$ce.size, elements.$ce.sort, elements.$ce.order${options.hasFileter ? `,${nameGroup.viewVariableFilter}` : ''})`;
-  return `export function view() {
-    return <UTableView
+  return `<UTableView
         ref="${nameGroup.viewElementMainView}"
         dataSource={${dataSourceValue}}
         valueField="${firstLowerCase(entity.name)}.${getEntityPromaryKeyProperty(entity)}"
@@ -90,8 +89,7 @@ function genTableTemplate(entity, nameGroup, options = {
                     </UTableViewExpander>
                 }>
             </UTableViewColumn>
-    </UTableView>
-  }`;
+    </UTableView>`;
 }
 
 export function genTableBlock(entity, refElement) {
@@ -125,7 +123,9 @@ export function genTableBlock(entity, refElement) {
   });
   const allEntities = [...entitySet];
 
-  return `${genTableTemplate(entity, nameGroup)}
+  return `export function view() {
+      return ${genTableTemplate(entity, nameGroup)}
+    }
     export namespace app.logics {
         ${genQueryLogic(allEntities, nameGroup, true, true, refElement.parentNode)}
     }`;
