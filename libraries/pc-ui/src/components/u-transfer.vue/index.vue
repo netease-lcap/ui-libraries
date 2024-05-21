@@ -1,9 +1,9 @@
 <template>
     <div :class="[$style.root, isPreview ? $style.preview : '']">
+        <u-preview v-if="isPreview" :text="previewText"></u-preview>
         <u-list-view
             :class="$style.listView"
             multiple
-            v-if="!isPreview"
             :checkbox="checkbox"
             :data-source="source"
             v-model="sourceValues"
@@ -31,7 +31,7 @@
                 <slot name="item" v-bind="props"></slot>
             </template>
         </u-list-view>
-        <div v-if="!isPreview" :class="$style.buttons">
+        <div :class="$style.buttons">
             <u-button
                 color="primary"
                 shape="square"
@@ -51,12 +51,10 @@
                 @click="forward()"
             ></u-button>
         </div>
-        <u-preview v-if="isPreview && (!target || target.length === 0)"></u-preview>
         <u-list-view
-            v-if="!isPreview || (target && target.length > 0)"
             :class="$style.listView"
             multiple
-            :checkbox="checkbox && !isPreview"
+            :checkbox="checkbox"
             :data-source="target"
             v-model="targetValues"
             :text-field="textField"
@@ -76,7 +74,7 @@
             ref="target"
             :page-size="pageSize"
             empty-text="请从左侧添加"
-            :readonly="readonly || isPreview"
+            :readonly="readonly"
             :disabled="disabled"
         >
             <template #item="props">
@@ -124,6 +122,15 @@ export default {
     },
     data() {
         return { sourceValues: [], targetValues: [] };
+    },
+    computed: {
+      previewText() {
+        if (!this.isPreview) {
+          return '';
+        }
+
+        return this.target.map((item) => this.$at(item, this.textField)).join('，') || '--';
+      }
     },
     methods: {
         transfer(direction = 'forward', values) {
@@ -229,9 +236,8 @@ export default {
 .root[size$="auto"] .listView {
     width: auto;
 }
-.preview .listView {
-  border: none;
-  height: auto;
-  max-height: var(--transfer-height);
+.preview .listView,
+.preview .buttons {
+  display: none;
 }
 </style>
