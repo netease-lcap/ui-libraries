@@ -105,6 +105,8 @@
   "uSelect_empty": "No matching data",
   "uSelect_loadMore": "Load more",
   "uSelect_noMore": "No more items",
+  "uSwitch_on": "On",
+  "uSwitch_off": "Off",
   "uTableView_loading": "Loading...",
   "uTableView_error": "Failed to load. Please try again",
   "uTableView_empty": "No data",

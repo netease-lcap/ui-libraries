@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.root"
+    <div :class="[$style.root, isPreview ? $style.preview : '', isPreview && !$env.VUE_APP_DESIGNER ? $style.disEvent: '']"
         :color="color || formItemVM && formItemVM.color"
         :readonly="readonly"
         :disabled="currentDisabled"
@@ -16,7 +16,7 @@
         <span :class="$style.baseline">b</span>
         <span v-if="(!filterText && !selectedItem && !checkable) || (checkable && !checkableValue)"
             :class="$style.placeholder">
-            {{ placeholder }}
+            {{ isPreview ? '--' : placeholder }}
         </span>
         <div :class="$style.text" v-ellipsis-title>
             <template v-if="checkable">
@@ -135,12 +135,13 @@
 import MField from '../m-field.vue';
 // import UTreeViewNodeNew from '../u-tree-view-new.vue/node.vue';
 import SEmpty from '../s-empty.vue';
+import MPreview from '../u-text.vue/preview';
 
 export default {
     name: 'u-tree-select-new',
     childName: 'u-tree-view-node-new',
     components: { SEmpty },
-    mixins: [MField],
+    mixins: [MField, MPreview],
     props: {
         value: null,
         field: String,
@@ -171,6 +172,7 @@ export default {
         clearable: { type: Boolean, default: false },
         filterable: { type: Boolean, default: false },
         opened: { type: Boolean, default: false },
+        preview: { type: Boolean, default: false },
         placement: {
             type: String,
             validator: (value) =>
@@ -487,7 +489,10 @@ export default {
             this.toggle();
         },
         toggle(opened) {
-            this.$refs.popper && this.$refs.popper.toggle(opened);
+          if (this.isPreview) {
+            return;
+          }
+          this.$refs.popper && this.$refs.popper.toggle(opened);
         },
         onOpen($event) {
             this.popperOpened = true; // 刚打开时，除非是没有加载，否则保留上次的 filter 过的数据
@@ -1218,6 +1223,41 @@ content: "\e663";
 }
 .root[height="full"] {
   height: 100%;
+}
+
+.preview {
+    border: none;
+    background: transparent;
+}
+
+.disEvent{
+    pointer-events: none;
+}
+
+.preview::after {
+    display: none;
+}
+
+.preview:focus {
+    outline: none;
+    border-color: none;
+    box-shadow: none;
+}
+
+.preview .tag {
+    max-width: none;
+}
+
+.preview .clearable{
+    display: none;
+}
+
+.preview .placeholder {
+    color: var(--select-color);
+}
+
+.preview.root {
+    padding-left: 0;
 }
 
 </style>

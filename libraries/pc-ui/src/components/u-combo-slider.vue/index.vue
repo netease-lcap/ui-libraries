@@ -1,5 +1,5 @@
 <template>
-<div :class="$style.root">
+<div v-if="!isPreview" :class="$style.root">
     <div :class="$style.main" :unit="!!unit" :multiple="multiple">
          <!-- @override: 增加提示 tip -->
         <div :class="$style.tip" vusion-slot-name="tip" vusion-slot-name-edit="tip">
@@ -34,16 +34,23 @@
         <span>{{ unit }}</span>
     </slot>
 </div>
+<u-preview v-else :text="getPreviewText()"></u-preview>
 </template>
 
 <script>
 import MField from '../m-field.vue';
 import SEmpty from '../s-empty.vue';
+import UPreview from '../u-text.vue';
+import MPreview from '../u-text.vue/preview';
+import { NumberFormatter } from '../../utils/Formatters';
 
 export default {
     name: 'u-combo-slider',
     components: { SEmpty },
-    mixins: [MField],
+    mixins: [MField, MPreview],
+    components: {
+      UPreview,
+    },
     props: {
         value: { type: [Number, Array], default: 0 },
         min: { type: Number, default: 0 },
@@ -72,6 +79,7 @@ export default {
         placement: { type: String, default: 'top' },
         layout: { type: String, default: 'flex' },
         multiple: { type: Boolean, default: false },
+        preview: { type: Boolean, default: false },
     },
     data() {
         return { currentValue: this.value, isMousedown: false };
@@ -136,6 +144,27 @@ export default {
                 this.isMousedown = false;
             }
         },
+        getPreviewText() {
+          if (!this.isPreview) {
+            return '';
+          }
+
+          if (this.multiple) {
+            return (Array.isArray(this.currentValue) ? this.currentValue : [this.currentValue]).join('-') + (this.unit || '');
+          }
+
+          let value = this.currentValue;
+
+          if (this.formatter) {
+            const numberFormatter = new NumberFormatter(this.formatter, {
+              percentSign: false,
+            });
+
+            value = numberFormatter.format(value);
+          }
+
+          return `${value}${this.unit || ''}`;
+        }
     },
 };
 </script>
