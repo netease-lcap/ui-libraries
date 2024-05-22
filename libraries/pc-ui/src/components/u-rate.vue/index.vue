@@ -10,9 +10,9 @@
         </u-popup>
     </span>
     <span :class="$style.text" v-if="showText">{{ texts[tooltipIndex] }}</span>
-    <span :class="$style.text" v-if="showValue"> {{ value }} </span>
+    <span :class="$style.text" v-if="showValue"> {{ currentValue }} </span>
 </div>
-<u-preview v-else :text="showText ? texts[tooltipIndex] : String(value) || '--'"></u-preview>
+<u-preview v-else :text="showText ? texts[tooltipIndex] : String(currentValue) || '--'"></u-preview>
 </template>
 
 <script>
