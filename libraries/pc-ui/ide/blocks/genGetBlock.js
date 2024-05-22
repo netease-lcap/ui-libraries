@@ -4,25 +4,9 @@ import {
 } from './utils';
 
 function genGetTemplate(entity, nameGroup) {
-  // 所有变量都需要有类型
-  const namespace = entity.getNamespace();
-  const entityName = entity.name;
-  const entityFullName = `${namespace}.${entityName}`;
-
   const properties = entity.properties.filter(filterProperty('inDetail'));
 
-  return ` export function view(${nameGroup.viewParamId}: Long) {
-    let ${nameGroup.viewVariableEntity}: ${entityFullName};
-
-    const $lifecycles = {
-        onCreated: [
-            function ${nameGroup.viewLogicLoad}() {
-                ${nameGroup.viewVariableEntity} = ${namespace}.${entity.name}.logics.get(${nameGroup.viewParamId})
-            },     
-        ]      
-    }
-
-    return <UInfoList>
+  return `<UInfoList>
         <UInfoListGroup
             slotTitle={
                 <UText text="基本信息"></UText>
@@ -38,14 +22,14 @@ function genGetTemplate(entity, nameGroup) {
     return detailItem;
   }).join('\n')}
         </UInfoListGroup>
-    </UInfoList>;
-  }`;
+    </UInfoList>`;
 }
 
 export function genGetBlock(entity, refElement) {
   const likeComponent = refElement?.likeComponent;
-  const { ns } = entity;
-  const getLogic = ns?.logics?.find((logic) => logic.name === 'get');
+  const namespace = entity.getNamespace();
+  const entityName = entity.name;
+  const entityFullName = `${namespace}.${entityName}`;
 
   // 生成唯一name
   // 加到页面上的params、variables、logics等都需要唯一name
@@ -55,5 +39,17 @@ export function genGetBlock(entity, refElement) {
   nameGroup.viewVariableEntity = likeComponent.getVariableUniqueName(firstLowerCase(entity.name));
   nameGroup.viewLogicLoad = likeComponent.getLogicUniqueName('load');
 
-  return `${genGetTemplate(entity, nameGroup)}`;
+  return `export function view(${nameGroup.viewParamId}: Long) {
+    let ${nameGroup.viewVariableEntity}: ${entityFullName};
+
+    const $lifecycles = {
+        onCreated: [
+            function ${nameGroup.viewLogicLoad}() {
+                ${nameGroup.viewVariableEntity} = ${namespace}.${entity.name}Entity.get(${nameGroup.viewParamId})
+            },     
+        ]      
+    }
+
+    return ${genGetTemplate(entity, nameGroup)}
+  }`;
 }

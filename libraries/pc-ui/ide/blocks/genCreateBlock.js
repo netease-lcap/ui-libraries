@@ -8,15 +8,10 @@ import { genQueryLogic, genFormItemsTemplate } from './genCommonBlock';
 
 function genCreateFormTemplate(entity, nameGroup, selectNameGroupMap) {
   const namespace = entity.getNamespace();
-  const entityName = entity.name;
-  const entityFullName = `${namespace}.${entityName}`;
   const properties = entity.properties.filter(filterProperty('inForm'));
   nameGroup.vModelName = nameGroup.viewVariableEntity;
 
-  return ` export function view() {
-        let ${nameGroup.viewVariableEntity}: ${entityFullName};
-
-        return <UForm ref="${nameGroup.viewElementMainView}">
+  return `<UForm ref="${nameGroup.viewElementMainView}">
             ${genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap)}
             <UFormItem
                 layout="center">
@@ -26,20 +21,22 @@ function genCreateFormTemplate(entity, nameGroup, selectNameGroupMap) {
                     onClick={
                         function ${nameGroup.viewLogicSubmit}(event) {
                             if ($refs.${nameGroup.viewElementMainView}.validate().valid) {
-                                ${namespace}.${entity.name}.logics.create(${nameGroup.viewVariableEntity})
+                                ${namespace}.${entity.name}Entity.create(${nameGroup.viewVariableEntity})
                                 nasl.ui.showMessage('创建成功！')
                             }
                         }
                     }></UButton>
             </UFormItem>
-        </UForm>
-    }`;
+        </UForm>`;
 }
 
 export function genCreateBlock(entity, refElement) {
   const likeComponent = refElement?.likeComponent;
   const dataSource = entity.parentNode;
   const module = dataSource.app;
+  const namespace = entity.getNamespace();
+  const entityName = entity.name;
+  const entityFullName = `${namespace}.${entityName}`;
 
   // 生成唯一name
   // 加到页面上的params、variables、logics等都需要唯一name
@@ -73,7 +70,10 @@ export function genCreateBlock(entity, refElement) {
     }
   });
 
-  return `${genCreateFormTemplate(entity, nameGroup, selectNameGroupMap)}
+  return `export function view() {
+    let ${nameGroup.viewVariableEntity}: ${entityFullName};
+    return ${genCreateFormTemplate(entity, nameGroup, selectNameGroupMap)}
+  }
     export namespace app.logics {
         ${newLogics.join('\n')}
     }

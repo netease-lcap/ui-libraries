@@ -36,23 +36,23 @@ export function genQueryLogic(allEntities, nameGroup, supportSort, supportFilter
   }
   const namespace = entity.getNamespace();
   const entityLowerName = firstLowerCase(entity.name);
-  return `export function ${nameGroup.logic}(page: Long, size: Long${supportSort ? ', sort: String, order: String' : ''}${supportFilter ? ', filter: any' : ''}) {
+  return `export function ${nameGroup.logic}(page: Long, size: Long${supportSort ? ', sort: String, order: String' : ''}${supportFilter ? ', filter: any' : ''}) : { list: List<{ ${entityLowerName}: ${namespace}.${entity.name}${allEntities.map((relationEntity) => `,${firstLowerCase(relationEntity.name)}: ${relationEntity.getNamespace()}.${relationEntity.name}`)} }>, total: Long }  {
         let result;
-        result = PAGINATE(FROM(${namespace}.${entity.name}, ${entity.name} => $
+        result = PAGINATE(FROM(${namespace}.${entity.name}Entity, ${entity.name} => $
         ${allEntities.map((relationEntity) => {
     const onExpressions = entity.properties
       ?.filter((property) => property.relationEntity === relationEntity.name)
       .map((leftProperty) => {
         return `${entity.name}.${leftProperty.name} == ${relationEntity.name}.${leftProperty.relationProperty}`;
       }).join('\n');
-    return `.LEFT_JOIN(${namespace}.${relationEntity.name}, ${relationEntity.name} => ON(() => ${onExpressions}))`;
+    return `.LEFT_JOIN(${namespace}.${relationEntity.name}Entity, ${relationEntity.name} => ON(${onExpressions}))`;
   }).join('\n')}
-  ${supportFilter ? `.WHERE(() => ${genWhereExpression(entity)})` : ''}
-        ${supportSort ? '.ORDER_BY(() => [sort, order])' : ''}
-        .SELECT(() => ({
+  ${supportFilter ? `.WHERE(${genWhereExpression(entity)})` : ''}
+        ${supportSort ? '.ORDER_BY([sort, order])' : ''}
+        .SELECT({
             ${entityLowerName}: ${entity.name},
             ${allEntities.map((relationEntity) => `${firstLowerCase(relationEntity.name)}: relationEntity.name`).join(',')}
-        }))), page, size)
+        })), page, size)
         return result;
     }`;
 }
@@ -70,6 +70,7 @@ export function genColumnMeta(property, nameGroup) {
   const dataSource = entity.parentNode;
   const lowerEntityName = firstLowerCase(entity.name);
   let valueExpression = `${currentName}.item.${lowerEntityName}.${property.name}`;
+  const entityExpression = `${currentName}.item.${lowerEntityName}`;
   const title = (property.label || property.name).replace(/"/g, '&quot;');
 
   if (property.relationEntity) {
@@ -83,6 +84,7 @@ export function genColumnMeta(property, nameGroup) {
     valueExpression,
     title,
     currentName,
+    entityExpression,
   };
 }
 
@@ -104,6 +106,119 @@ export function genTextTemplate(property, nameGroup) {
 }
 
 /**
+ * property 列生成
+ * @param {*} entity
+ * @param {*} property
+ * @param {*} nameGroup
+ * @param {*} selectNameGroupMap
+ * @returns
+ */
+export function genPropertyEditableTemplate(entity, property, nameGroup, selectNameGroupMap) {
+  const dataSource = entity.parentNode;
+  const vModel = `${nameGroup.vModelName}.${property.name}`;
+  const label = (property.label || property.name).replace(/"/g, '&quot;');
+  const { typeAnnotation } = property || {};
+  const { typeNamespace: propertyTypeNamespace } = typeAnnotation || {};
+  const propertyTypeName = transEntityMetadataTypes(typeAnnotation, dataSource.app);
+  const propertyTypeMaxLength = Number(
+    property.rules
+      .find((item) => item.indexOf('max') > -1)
+      ?.split('(')[1]
+      .slice(0, -1),
+  ) || 0;
+  if (property.relationEntity) {
+    // 有外键关联
+    const relationEntity = dataSource?.findEntityByName(property.relationEntity);
+    if (relationEntity) {
+      const relationProperty = relationEntity.properties.find((prop) => prop.name === property.relationProperty);
+      const displayedProperty = getFirstDisplayedProperty(relationEntity);
+      if (displayedProperty) {
+        const lowerEntityName = firstLowerCase(relationEntity.name);
+        // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
+        const key = [property.name, relationEntity.name].join('-');
+        const selectNameGroup = selectNameGroupMap.get(key);
+        const dataSourceValue = `${selectNameGroup.logic}(elements.$ce.page, elements.$ce.size)`;
+        return `<USelect
+                clearable={true}
+                placeholder="请选择${label}"
+                dataSource={${dataSourceValue}}
+                pageSize={50}
+                textField="${lowerEntityName}.${displayedProperty.name}"
+                valueField="${lowerEntityName}.${relationProperty.name}"
+                pagination={true}
+                value={$sync(${vModel})}>
+            </USelect>`;
+      } return '';
+    } return '';
+  }
+  if (propertyTypeName === 'Boolean') {
+    return `<USelect
+        clearable={true}
+        value={$sync(${vModel})}
+        placeholder="请输入${label}">
+        <USelectItem value={true} text="是"></USelectItem>
+        <USelectItem value={false} text="否"></USelectItem>
+    </USelect>`;
+  } if (propertyTypeName === 'Integer' || propertyTypeName === 'Long') {
+    return `<UNumberInput
+        value={$sync(${vModel})}
+        placeholder="请输入${label}">
+    </UNumberInput>`;
+  } if (propertyTypeName === 'Double') {
+    return `<UNumberInput
+        value={$sync(${vModel})}
+        precision={0}
+        step={0}
+        placeholder="请输入${label}">
+    </UNumberInput>`;
+  } if (propertyTypeName === 'Decimal') {
+    return `<UNumberInput
+        value={$sync(${vModel})}
+        precision={0}
+        step={0}
+        placeholder="请输入${label}">
+    </UNumberInput>`;
+  } if (propertyTypeName === 'String' && propertyTypeMaxLength > 256) {
+    return `<UTextArea
+        value={$sync(${vModel})}
+        placeholder="请输入${label}">
+    </UTextArea>`;
+  } if (propertyTypeName === 'Date') {
+    return `<UDatePicker
+        clearable={true}
+        value={$sync(${vModel})}
+        placeholder="请输入${label}">
+    </UDatePicker>`;
+  } if (propertyTypeName === 'Time') {
+    return `<UTimePicker
+        value={$sync(${vModel})}
+        placeholder="请输入${label}">
+    </UTimePicker>`;
+  } if (propertyTypeName === 'DateTime') {
+    return `<UDateTimePicker
+        clearable={true}
+        value={$sync(${vModel})}
+        placeholder="请输入${label}">
+    </UDateTimePicker>`;
+  }
+  const namespaceArr = propertyTypeNamespace.split('.');
+  const type = namespaceArr.pop();
+  if (type === 'enums') {
+    const enumeration = dataSource.app.findNodeByCompleteName(`${propertyTypeNamespace}.${propertyTypeName}`);
+    const enumnamespace = enumeration?.getNamespace() || '';
+    const name = enumeration?.name || '';
+    const enumTypeAnnotationStr = `${enumnamespace}.${name}`;
+    return `<USelect
+                clearable={true}
+                value={$sync(${vModel})}
+                placeholder="请输入${label}"
+                dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}>
+            </USelect>`;
+  }
+  return `<UInput value={$sync(${vModel})} placeholder="请输入${label}"></UInput>`;
+}
+
+/**
  * 表单项
  * @param {*} entity
  * @param {*} properties
@@ -115,11 +230,8 @@ export function genTextTemplate(property, nameGroup) {
 export function genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap, options = {
   needRules: true,
 }) {
-  const dataSource = entity.parentNode;
-
   return `
   ${properties.map((property) => {
-    const vModel = `${nameGroup.vModelName}.${property.name}`;
     const label = (property.label || property.name).replace(/"/g, '&quot;');
     const required = !!property.required && options.needRules;
     const rules = [];
@@ -134,126 +246,7 @@ export function genFormItemsTemplate(entity, properties, nameGroup, selectNameGr
           slotLabel={
             <UText text="${label}"></UText>
           }>`;
-    const { typeAnnotation } = property || {};
-    const { typeNamespace: propertyTypeNamespace } = typeAnnotation || {};
-    const propertyTypeName = transEntityMetadataTypes(typeAnnotation, dataSource.app);
-    const propertyTypeMaxLength = Number(
-      property.rules
-        .find((item) => item.indexOf('max') > -1)
-        ?.split('(')[1]
-        .slice(0, -1),
-    ) || 0;
-    if (property.relationEntity) {
-      // 有外键关联
-      const relationEntity = dataSource?.findEntityByName(property.relationEntity);
-      if (relationEntity) {
-        const relationProperty = relationEntity.properties.find((prop) => prop.name === property.relationProperty);
-        const displayedProperty = getFirstDisplayedProperty(relationEntity);
-        if (displayedProperty) {
-          const lowerEntityName = firstLowerCase(relationEntity.name);
-          // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
-          const key = [property.name, relationEntity.name].join('-');
-          const selectNameGroup = selectNameGroupMap.get(key);
-          const dataSourceValue = `${selectNameGroup.logic}(elements.$ce.page, elements.$ce.size)`;
-          formItem += `
-                      <USelect
-                          clearable={true}
-                          placeholder="请选择${label}"
-                          dataSource={${dataSourceValue}}
-                          pageSize={50}
-                          textField="${lowerEntityName}.${displayedProperty.name}"
-                          valueField="${lowerEntityName}.${relationProperty.name}"
-                          pagination={true}
-                          value={$sync(${vModel})}>
-                      </USelect>
-                  `;
-        } else return '';
-      } else return '';
-    } else if (propertyTypeName === 'Boolean') {
-      formItem += `
-              <USelect
-                  clearable={true}
-                  value={$sync(${vModel})}
-                  placeholder="请输入${label}">
-                  <USelectItem value={true} text="是"></USelectItem>
-                  <USelectItem value={false} text="否"></USelectItem>
-              </USelect>
-          `;
-    } else if (propertyTypeName === 'Integer' || propertyTypeName === 'Long') {
-      formItem += `
-              <UNumberInput
-                  value={$sync(${vModel})}
-                  placeholder="请输入${label}">
-              </UNumberInput>
-          `;
-    } else if (propertyTypeName === 'Double') {
-      formItem += `
-              <UNumberInput
-                  value={$sync(${vModel})}
-                  precision={0}
-                  step={0}
-                  placeholder="请输入${label}">
-              </UNumberInput>
-          `;
-    } else if (propertyTypeName === 'Decimal') {
-      formItem += `
-              <UNumberInput
-                  value={$sync(${vModel})}
-                  precision={0}
-                  step={0}
-                  placeholder="请输入${label}">
-              </UNumberInput>
-          `;
-    } else if (propertyTypeName === 'String' && propertyTypeMaxLength > 256) {
-      formItem += `
-              <UTextArea
-                  value={$sync(${vModel})}
-                  placeholder="请输入${label}">
-              </UTextArea>
-          `;
-    } else if (propertyTypeName === 'Date') {
-      formItem += `
-              <UDatePicker
-                  clearable={true}
-                  value={$sync(${vModel})}
-                  placeholder="请输入${label}">
-              </UDatePicker>
-          `;
-    } else if (propertyTypeName === 'Time') {
-      formItem += `
-              <UTimePicker
-                  value={$sync(${vModel})}
-                  placeholder="请输入${label}">
-              </UTimePicker>
-          `;
-    } else if (propertyTypeName === 'DateTime') {
-      formItem += `
-              <UDateTimePicker
-                  clearable={true}
-                  value={$sync(${vModel})}
-                  placeholder="请输入${label}">
-              </UDateTimePicker>
-          `;
-    } else {
-      const namespaceArr = propertyTypeNamespace.split('.');
-      const type = namespaceArr.pop();
-      if (type === 'enums') {
-        const enumeration = dataSource.app.findNodeByCompleteName(`${propertyTypeNamespace}.${propertyTypeName}`);
-        const enumnamespace = enumeration?.getNamespace() || '';
-        const name = enumeration?.name || '';
-        const enumTypeAnnotationStr = `${enumnamespace}.${name}`;
-        formItem += `
-                  <USelect
-                      clearable={true}
-                      value={$sync(${vModel})}
-                      placeholder="请输入${label}"
-                      dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}>
-                  </USelect>
-              `;
-      } else {
-        formItem += `<UInput value={$sync(${vModel})} placeholder="请输入${label}"></UInput>`;
-      }
-    }
+    formItem += `${genPropertyEditableTemplate(entity, property, nameGroup, selectNameGroupMap)}`;
     formItem += '</UFormItem>';
     return formItem;
   }).join('\n')}`;
@@ -314,7 +307,7 @@ export function genSaveModalTemplate(entity, nameGroup, selectNameGroupMap) {
                 onClick={
                     function ${nameGroup.viewLogicUpdateSubmit}(event) {
                       if ($refs.${nameGroup.viewElementSaveModalForm}.validate().valid) {
-                        ${dataSource.app.getNamespace()}.${entity.name}.logics.update(${nameGroup.viewVariableInput})
+                        ${entity.getNamespace()}.${entity.name}Entity.update(${nameGroup.viewVariableInput})
                         $refs.${nameGroup.viewElementSaveModal}.close()
                         $refs.${nameGroup.viewElementMainView}.reload()
                     }
@@ -328,7 +321,7 @@ export function genSaveModalTemplate(entity, nameGroup, selectNameGroupMap) {
                 onClick={
                     function ${nameGroup.viewLogicSubmit}(event) {
                         if ($refs.${nameGroup.viewElementSaveModalForm}.validate().valid) {
-                          ${dataSource.app.getNamespace()}.${entity.name}.logics.create(${nameGroup.viewVariableInput})
+                          ${entity.getNamespace()}.${entity.name}Entity.create(${nameGroup.viewVariableInput})
                           $refs.${nameGroup.viewElementSaveModal}.close()
                           $refs.${nameGroup.viewElementMainView}.reload()
                         }

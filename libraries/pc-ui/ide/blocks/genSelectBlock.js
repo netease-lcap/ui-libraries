@@ -9,8 +9,7 @@ import { genQueryLogic } from './genCommonBlock';
 function genSelectTemplate(entity, nameGroup) {
   const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.page, elements.$ce.size)`;
   const property = getFirstDisplayedProperty(entity);
-  return `export function view() {
-    return <USelect
+  return `<USelect
         clearable={true}
         placeholder="请选择"
         ref="${nameGroup.viewElementMainView}"
@@ -18,8 +17,7 @@ function genSelectTemplate(entity, nameGroup) {
         textField={${nameGroup.lowerEntity}.${property.name}}
         valueField={${nameGroup.lowerEntity}.${getEntityPromaryKeyProperty(entity)}}
         pagination={true}>
-    </USelect>
-  }`;
+    </USelect>`;
 }
 
 export function genSelectBlock(entity, refElement) {
@@ -34,7 +32,9 @@ export function genSelectBlock(entity, refElement) {
 
   const allEntities = [entity];
 
-  return `${genSelectTemplate(entity, nameGroup)}
+  return `export function view() {
+    return ${genSelectTemplate(entity, nameGroup)}
+  }
         export namespace app.logics {
             ${genQueryLogic(allEntities, nameGroup, false, false, module)}
         }`;

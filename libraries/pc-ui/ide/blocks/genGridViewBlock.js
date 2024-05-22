@@ -58,7 +58,7 @@ export function genGridViewTemplate(entity, nameGroup, options = {
                             text="删除"
                             onClick={
                                 function ${nameGroup.viewLogicRemove}(event) {
-                                    ${namespace}.${entityName}.logics.delete(${currentName}.item.${firstLowerCase(entity.name)}.${getEntityPromaryKeyProperty(entity)})
+                                    ${namespace}.${entityName}Entity.delete(${currentName}.item.${firstLowerCase(entity.name)}.${getEntityPromaryKeyProperty(entity)})
                                     $refs.${nameGroup.viewElementMainView}.reload()
                                 }
                             }>

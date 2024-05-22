@@ -8,38 +8,35 @@ import { genQueryLogic, genFormItemsTemplate } from './genCommonBlock';
 
 function genUpdateFormTemplate(entity, nameGroup, selectNameGroupMap) {
   const namespace = entity.getNamespace();
-  const entityName = entity.name;
-  const entityFullName = `${namespace}.${entityName}`;
   const properties = entity.properties.filter(filterProperty('inForm'));
   nameGroup.vModelName = nameGroup.viewVariableEntity;
 
-  return ` export function view() {
-          let ${nameGroup.viewVariableEntity}: ${entityFullName};
-  
-          return <UForm ref="${nameGroup.viewElementMainView}">
-              ${genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap)}
-              <UFormItem
-                  layout="center">
-                  <UButton
-                      color="primary"
-                      text="提交修改"
-                      onClick={
-                          function ${nameGroup.viewLogicSubmit}(event) {
-                              if ($refs.${nameGroup.viewElementMainView}.validate().valid) {
-                                  ${namespace}.${entity.name}.logics.update(${nameGroup.viewVariableEntity})
-                                  nasl.ui.showMessage('修改成功！')
-                              }
-                          }
-                      }></UButton>
-              </UFormItem>
-          </UForm>
-      }`;
+  return `<UForm ref="${nameGroup.viewElementMainView}">
+      ${genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap)}
+      <UFormItem
+          layout="center">
+          <UButton
+              color="primary"
+              text="提交修改"
+              onClick={
+                  function ${nameGroup.viewLogicSubmit}(event) {
+                      if ($refs.${nameGroup.viewElementMainView}.validate().valid) {
+                          ${namespace}.${entity.name}Entity.update(${nameGroup.viewVariableEntity})
+                          nasl.ui.showMessage('修改成功！')
+                      }
+                  }
+              }></UButton>
+      </UFormItem>
+  </UForm>`;
 }
 
 export function genUpdateBlock(entity, refElement) {
   const likeComponent = refElement?.likeComponent;
   const dataSource = entity.parentNode;
   const module = dataSource.app;
+  const namespace = entity.getNamespace();
+  const entityName = entity.name;
+  const entityFullName = `${namespace}.${entityName}`;
 
   // 生成唯一name
   // 加到页面上的params、variables、logics等都需要唯一name
@@ -74,7 +71,10 @@ export function genUpdateBlock(entity, refElement) {
     }
   });
 
-  return `${genUpdateFormTemplate(entity, nameGroup, selectNameGroupMap)}
+  return `export function view() {
+    let ${nameGroup.viewVariableEntity}: ${entityFullName};
+    return ${genUpdateFormTemplate(entity, nameGroup, selectNameGroupMap)}
+  }
       export namespace app.logics {
           ${newLogics.join('\n')}
       }`;
