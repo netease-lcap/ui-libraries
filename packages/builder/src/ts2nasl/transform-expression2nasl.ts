@@ -7,6 +7,7 @@ import {
 } from '@babel/types';
 import { getNodeCode } from './utils';
 import { transformParam2Nasl } from './transform-func2nasl';
+import transformTypeAnnotation from './transform-tstype2nasl';
 
 const getNamespace = (ast) => {
   if (ast.object && ast.object.name === 'nasl' && ast.property && ast.property.name) {
@@ -79,6 +80,7 @@ function transformCallExpress2Nasl(ast: CallExpression) {
       calleeName: name,
       shortcut: SHORTCUT_NAMES.indexOf(name) !== -1,
       arguments: args,
+      typeArguments: ast.typeParameters ? ast.typeParameters.params.map((tsType) => transformTypeAnnotation(tsType)) : [],
     };
   }
 
