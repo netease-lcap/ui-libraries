@@ -79,7 +79,6 @@ export default (rootPath, commandArgs = {}) => {
     ...commandArgs,
   };
 
-  console.log(lcapCliConfig);
   const configPath = `${rootPath}/.lcaprc`;
   if (fs.existsSync(`${rootPath}/.lcaprc`)) {
     const config = fs.readJSONSync(configPath);
