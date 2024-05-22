@@ -74,12 +74,12 @@ function deployImages(rootPath, config: LcapCliConfig) {
   });
 }
 
-export default (rootPath, platform) => {
-  logger.start('Start deploy...');
+export default (rootPath, commandArgs = {}) => {
   const lcapCliConfig: LcapCliConfig = {
-    platform,
+    ...commandArgs,
   };
 
+  console.log(lcapCliConfig);
   const configPath = `${rootPath}/.lcaprc`;
   if (fs.existsSync(`${rootPath}/.lcaprc`)) {
     const config = fs.readJSONSync(configPath);
