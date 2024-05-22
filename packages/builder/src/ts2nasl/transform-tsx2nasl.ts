@@ -305,6 +305,31 @@ export function parseJSXAttr(attr: JSXAttribute | JSXSpreadAttribute, element: N
     return;
   }
 
+  if (attrName === 'rules') {
+    if (!attr.value || attr.value.type !== 'JSXExpressionContainer' || attr.value.expression.type !== 'ArrayExpression') {
+      throw new Error(`解析 JSXElement 异常, rules 仅允许设置内置验证规则， 例如  rules=[nasl.validation.required()], ${getNodeCode(attr)}`);
+    }
+
+    element.bindAttrs.push({
+      concept: 'BindAttribute',
+      name: attrName,
+      rules: attr.value.expression.elements.map((exp) => {
+        if (!exp || exp.type !== 'CallExpression') {
+          throw new Error(`解析 JSXElement 异常, rules 仅允许设置内置验证规则， 例如  rules=[nasl.validation.required()], ${getNodeCode(attr)}`);
+        }
+        const callLogic = transformExpression2Nasl(exp);
+
+        return {
+          concept: 'ValidationRule',
+          calleeNamespace: callLogic.calleeNamespace,
+          calleeName: callLogic.calleeName,
+          arguments: callLogic.arguments,
+        };
+      }),
+    });
+    return;
+  }
+
   if (!attr.value) {
     element.bindAttrs.push({
       concept: 'BindAttribute',
