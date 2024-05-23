@@ -1,10 +1,15 @@
 <script>
 import { UListView } from '../u-list-view.vue';
+import MPreview from '../u-text.vue/preview';
 
 export default {
     name: 'u-capsules',
     childName: 'u-capsule',
     extends: UListView,
+    mixins: [MPreview],
+    props: {
+      preview: { type: Boolean, default: false },
+    },
 };
 </script>
 

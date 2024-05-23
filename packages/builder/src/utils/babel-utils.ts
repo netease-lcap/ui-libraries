@@ -5,13 +5,28 @@ export const evalOptions = (object) => {
   const { code } = generate(object);
   // eslint-disable-next-line no-eval
   const result = eval(`(${code})`);
-  if (result.if) result.if = result.if.toString();
-  if (result.disabledIf) result.disabledIf = result.disabledIf.toString();
+  if (result.if) {
+    result.if = result.if.toString();
+    result.tsIf = result.if;
+  }
+
+  if (result.disabledIf) {
+    result.disabledIf = result.disabledIf.toString();
+    result.tsDisabledIf = result.disabledIf;
+  }
+
   if (result.onChange) {
     result.onChange.forEach((item) => {
       if (item.if) item.if = item.if.toString();
     });
+
+    result.tsOnChange = JSON.stringify(result.onChange);
   }
+
+  if (result.designerValue) {
+    result.tsDesignerValue = JSON.stringify(result.designerValue);
+  }
+
   return result;
 };
 

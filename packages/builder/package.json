@@ -1,6 +1,6 @@
 {
   "name": "@lcap/builder",
-  "version": "1.1.0-beta.7",
+  "version": "1.2.0-beta.8",
   "description": "lcap builder utils",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -16,6 +16,10 @@
       "require": "./lib/index.js",
       "import": "./lib/index.js"
     },
+    "./input/vue2/component-preview": "./input/vue2/component-preview.js",
+    "./input/react/component-preview": "./input/react/component-preview.jsx",
+    "./input/vue2/stories-preview": "./input/vue2/stories-preview.js",
+    "./input/react/stories-preview": "./input/react/stories-preview.jsx",
     "./input/theme.html": "./input/theme.html",
     "./package.json": "./package.json"
   },
@@ -73,7 +77,6 @@
     "loader-utils": "^3.2.1",
     "lodash": "^4.17.21",
     "postcss": "^8.4.35",
-    "puppeteer": "^22.2.0",
     "react-style-object-to-css": "^1.1.2",
     "semver": "^7.5.4"
   },

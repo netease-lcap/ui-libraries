@@ -1,5 +1,5 @@
 import lcapPlugin from './plugins';
-import genNaslLogicsConfig from './build/gen-nasl-logics-config';
+import genNaslLogicsConfig from './build/gens/gen-nasl-logics-config';
 import { createGenScopedName } from './utils/create-gen-scoped-name';
 
 export type {
@@ -7,14 +7,20 @@ export type {
   ThemeComponentVars,
   ThemeVariable,
   ThemeGlobalVars,
-  NaslViewElement,
 } from './nasl';
 export {
   parseComponentAPI,
   parseCssVars,
-  transformJsx2Nasl,
+  parseCssVarsOld,
   transformTsFunc2NaslLogic,
 } from './nasl';
+
+export {
+  transformExpression2nasl,
+  transformTsType2Nasl,
+  transformFunc2Nasl,
+  transformTSX2Nasl,
+} from './ts2nasl';
 
 export {
   lcapPlugin,

@@ -1,6 +1,6 @@
 import * as parser from '@babel/parser';
 import traverse from '@babel/traverse';
-import transformJsx2Nasl from './transform-jsx2nasl';
+import { transformTSX2Nasl } from '../ts2nasl';
 import { getNodeCode } from '../utils/babel-utils';
 
 const getBlocksFromStory = (code, framework) => {
@@ -57,7 +57,7 @@ const getBlocksFromStory = (code, framework) => {
               return;
             }
 
-            block.template = transformJsx2Nasl(p.node);
+            block.template = JSON.stringify(transformTSX2Nasl(p.node));
             p.skip();
           },
         });

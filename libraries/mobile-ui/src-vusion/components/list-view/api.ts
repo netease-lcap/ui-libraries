@@ -459,10 +459,6 @@ namespace nasl.ui {
       title: 'undefined',
       description: '插入<van-cell />',
       emptyBackground: 'drag-entity-here',
-      snippets: [{
-        title: '单元格',
-        code: '<template #item="current"><van-cell isLink><template #title>文本</template></van-cell></template>'
-      }]
     })
     slotDefault: () => Array<VanCell>;
     @Slot({

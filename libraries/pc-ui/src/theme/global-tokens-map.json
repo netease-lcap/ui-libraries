@@ -1,0 +1,202 @@
+{
+  "--brand-primary": {
+    "title": "主色",
+    "type": "color"
+  },
+  "--brand-primary-lightest": {
+    "title": "主色最浅",
+    "type": "color"
+  },
+  "--brand-primary-lighter": {
+    "title": "主色更浅",
+    "type": "color"
+  },
+  "--brand-primary-light": {
+    "title": "主色浅",
+    "type": "color"
+  },
+  "--brand-primary-dark": {
+    "title": "主色暗",
+    "type": "color"
+  },
+  "--brand-primary-darker": {
+    "title": "主色更暗",
+    "type": "color"
+  },
+  "--brand-primary-darkest": {
+    "title": "主色最暗",
+    "type": "color"
+  },
+  "--brand-primary-disabled": {
+    "title": "主色禁用色",
+    "type": "color"
+  },
+  "--brand-success": {
+    "title": "成功色",
+    "type": "color"
+  },
+  "--brand-success-lightest": {
+    "title": "成功色最浅",
+    "type": "color"
+  },
+  "--brand-success-lighter": {
+    "title": "成功色更浅",
+    "type": "color"
+  },
+  "--brand-success-light": {
+    "title": "成功色浅",
+    "type": "color"
+  },
+  "--brand-success-dark": {
+    "title": "成功色暗",
+    "type": "color"
+  },
+  "--brand-success-darker": {
+    "title": "成功色更暗",
+    "type": "color"
+  },
+  "--brand-success-darkest": {
+    "title": "成功色最暗",
+    "type": "color"
+  },
+  "--brand-warning": {
+    "title": "警告色",
+    "type": "color"
+  },
+  "--brand-warning-lightest": {
+    "title": "警告色最浅",
+    "type": "color"
+  },
+  "--brand-warning-lighter": {
+    "title": "警告色更浅",
+    "type": "color"
+  },
+  "--brand-warning-light": {
+    "title": "警告色浅",
+    "type": "color"
+  },
+  "--brand-warning-dark": {
+    "title": "警告色暗",
+    "type": "color"
+  },
+  "--brand-warning-darker": {
+    "title": "警告色更暗",
+    "type": "color"
+  },
+  "--brand-warning-darkest": {
+    "title": "警告色最暗",
+    "type": "color"
+  },
+  "--brand-error": {
+    "title": "错误色",
+    "type": "color"
+  },
+  "--brand-error-lightest": {
+    "title": "错误色最浅",
+    "type": "color"
+  },
+  "--brand-error-lighter": {
+    "title": "错误色更浅",
+    "type": "color"
+  },
+  "--brand-error-light": {
+    "title": "错误色浅",
+    "type": "color"
+  },
+  "--brand-error-dark": {
+    "title": "错误色暗",
+    "type": "color"
+  },
+  "--brand-error-darker": {
+    "title": "错误色更暗",
+    "type": "color"
+  },
+  "--brand-error-darkest": {
+    "title": "错误色最暗",
+    "type": "color"
+  },
+  "--brand-disabled": {
+    "title": "禁用色",
+    "type": "color"
+  },
+  "--brand-disabled-lightest": {
+    "title": "禁用色最浅",
+    "type": "color"
+  },
+  "--brand-disabled-lighter": {
+    "title": "禁用色更浅",
+    "type": "color"
+  },
+  "--brand-disabled-light": {
+    "title": "禁用色浅",
+    "type": "color"
+  },
+  "--brand-disabled-dark": {
+    "title": "禁用色暗",
+    "type": "color"
+  },
+  "--brand-disabled-darker": {
+    "title": "禁用色更暗",
+    "type": "color"
+  },
+  "--brand-disabled-darkest": {
+    "title": "禁用色最暗",
+    "type": "color"
+  },
+  "--background-color-base": {
+    "title": "背景色",
+    "type": "color"
+  },
+  "--border-color-base": {
+    "title": "边框色",
+    "type": "color"
+  },
+  "--color-base": {
+    "title": "文本色",
+    "type": "color"
+  },
+  "--link-color": {
+    "title": "链接色",
+    "type": "color"
+  },
+  "--scrollbar-background": {
+    "title": "滚动条颜色",
+    "type": "color"
+  },
+  "--scrollbar-background-hover": {
+    "title": "滚动条颜色（hover）",
+    "type": "color"
+  },
+  "--space-shrink": {
+    "title": "收缩间距",
+    "type": "size"
+  },
+  "--space-small": {
+    "title": "小间距",
+    "type": "size"
+  },
+  "--space-base": {
+    "title": "中等间距",
+    "type": "size"
+  },
+  "--space-large": {
+    "title": "大间距",
+    "type": "size"
+  },
+  "--scrollbar-size": {
+    "title": "滚动条宽度",
+    "type": "size"
+  },
+  "--font-family-zh-CN": {
+    "title": "基础字体",
+    "type": "fontFamily"
+  },
+  "--font-size-base": {
+    "title": "基础字体大小",
+    "type": "size"
+  },
+  "--border-radius-base": {
+    "title": "圆角",
+    "type": "size"
+  }
+}
