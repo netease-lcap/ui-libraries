@@ -66,7 +66,7 @@ function genEditComponent(entity, property, nameGroup, selectNameGroupMap) {
         // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
         const key = [property.name, relationEntity.name].join('-');
         const selectNameGroup = selectNameGroupMap.get(key);
-        const dataSourceValue = `${selectNameGroup.logic}(elements.$ce.page, elements.$ce.size)`;
+        const dataSourceValue = `app.logics.${selectNameGroup.logic}(elements.$ce.page, elements.$ce.size)`;
         formItem += `<USelect
             clearable={true}
             placeholder="请选择${label}"

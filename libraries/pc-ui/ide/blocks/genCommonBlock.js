@@ -36,7 +36,7 @@ export function genQueryLogic(allEntities, nameGroup, supportSort, supportFilter
   }
   const namespace = entity.getNamespace();
   const entityLowerName = firstLowerCase(entity.name);
-  return `export function ${nameGroup.logic}(page: Long, size: Long${supportSort ? ', sort: String, order: String' : ''}${supportFilter ? ', filter: any' : ''}) : { list: List<{ ${entityLowerName}: ${namespace}.${entity.name}${allEntities.map((relationEntity) => `,${firstLowerCase(relationEntity.name)}: ${relationEntity.getNamespace()}.${relationEntity.name}`)} }>, total: Long }  {
+  return `export function ${nameGroup.logic}(page: Long, size: Long${supportSort ? ', sort: String, order: String' : ''}${supportFilter ? `, filter: ${namespace}.${entity.name}` : ''}) {
         let result;
         result = PAGINATE(FROM(${namespace}.${entity.name}Entity, ${entity.name} => $
         ${allEntities.map((relationEntity) => {
@@ -51,7 +51,7 @@ export function genQueryLogic(allEntities, nameGroup, supportSort, supportFilter
         ${supportSort ? '.ORDER_BY([sort, order])' : ''}
         .SELECT({
             ${entityLowerName}: ${entity.name},
-            ${allEntities.map((relationEntity) => `${firstLowerCase(relationEntity.name)}: relationEntity.name`).join(',')}
+            ${allEntities.map((relationEntity) => `${firstLowerCase(relationEntity.name)}: ${relationEntity.name}`).join(',')}
         })), page, size)
         return result;
     }`;
@@ -137,7 +137,7 @@ export function genPropertyEditableTemplate(entity, property, nameGroup, selectN
         // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
         const key = [property.name, relationEntity.name].join('-');
         const selectNameGroup = selectNameGroupMap.get(key);
-        const dataSourceValue = `${selectNameGroup.logic}(elements.$ce.page, elements.$ce.size)`;
+        const dataSourceValue = `app.logics.${selectNameGroup.logic}(elements.$ce.page, elements.$ce.size)`;
         return `<USelect
                 clearable={true}
                 placeholder="请选择${label}"
@@ -155,7 +155,7 @@ export function genPropertyEditableTemplate(entity, property, nameGroup, selectN
     return `<USelect
         clearable={true}
         value={$sync(${vModel})}
-        placeholder="请输入${label}">
+        placeholder="请选择${label}">
         <USelectItem value={true} text="是"></USelectItem>
         <USelectItem value={false} text="否"></USelectItem>
     </USelect>`;
@@ -211,7 +211,7 @@ export function genPropertyEditableTemplate(entity, property, nameGroup, selectN
     return `<USelect
                 clearable={true}
                 value={$sync(${vModel})}
-                placeholder="请输入${label}"
+                placeholder="请选择${label}"
                 dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}>
             </USelect>`;
   }
@@ -269,7 +269,7 @@ export function genFilterTemplate(entity, nameGroup, selectNameGroupMap) {
         <UFormItem layout="center" labelSize="auto">
             <UButton
                 color="primary"
-                text="查询"
+                text="查 询"
                 onClick={
                     function ${nameGroup.viewLogicReload}(event) {
                         $refs.${nameGroup.viewElementMainView}.reload()
