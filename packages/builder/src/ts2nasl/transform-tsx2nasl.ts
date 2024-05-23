@@ -207,7 +207,13 @@ export function parseJSXExpression(ast: JSXElement | JSXFragment | JSXExpression
       || ast.expression.body.type === 'JSXFragment'
     )
   ) {
-    element.children.push(parseJSXElement2Slot(ast.expression.body, attrName, ''));
+    let argName = '';
+
+    if (ast.expression.params && ast.expression.params[0] && ast.expression.params[0].type === 'Identifier') {
+      argName = ast.expression.params[0].name;
+    }
+
+    element.children.push(parseJSXElement2Slot(ast.expression.body, attrName, argName));
     return;
   }
 

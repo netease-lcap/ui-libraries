@@ -49,6 +49,11 @@ function getCallName(code: string) {
   namespace = arr.slice(0, arr.length - 1).join('.');
   name = arr[arr.length - 1];
 
+  const Entity = 'Entity';
+  if (namespace.endsWith(Entity)) {
+    namespace = `${namespace.substring(0, namespace.lastIndexOf(Entity))}.logics`;
+  }
+
   return { namespace, name };
 }
 
