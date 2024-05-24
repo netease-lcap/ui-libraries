@@ -17,7 +17,7 @@
             <span v-if="showSuffix">{{ unitValue }}</span>
         </template>
     </u-input>
-    <u-preview v-else :text="currentValue"></u-preview>
+    <u-preview v-else :text="previewText"></u-preview>
 </template>
 
 <script>
@@ -163,6 +163,17 @@ export default {
         showSuffix() {
             return this.unitType === 'suffix' && !!this.unitValue;
         },
+        previewText() {
+            const texts = [this.formattedValue];
+
+            if (this.showPrefix) {
+              texts.unshift(this.unitValue);
+            } else if (this.showSuffix) {
+              texts.push(this.unitValue);
+            }
+
+            return texts.join(' ');
+        },
     },
     watch: {
         value(value, oldValue) {
@@ -233,7 +244,7 @@ export default {
         toFixed(value) {
             // 为空时使用默认值
             if ((typeof value === 'string' && value.trim() === '') || value === null || value === undefined)
-                return value = this.defaultValue !== undefined ? this.defaultValue : '';
+                return value = this.defaultValue !== undefined ? this.defaultValue : null;
             else if (isNaN(value))
                 value = this.currentValue || this.defaultValue || 0;
 

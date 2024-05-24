@@ -46,7 +46,7 @@ export default {
                     this.close();
                     return;
                 }
-                this.parentVM.select(this, true);
+                this.parentVM.select(this);
             }
             this.close();
         },
