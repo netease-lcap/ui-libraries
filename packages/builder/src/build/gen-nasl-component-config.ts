@@ -181,7 +181,8 @@ export default function genNaslComponentConfig({
     const blocks = genBlockConfig(componentDir, { screenshots, drawings }, framework);
     Object.assign(component, { blocks });
   } catch (e: any) {
-    logger.error(`处理 block 异常 ${e.message}`);
+    logger.error(`${component.name} 处理 block 异常 ${e.message}`);
+    process.exit(1);
   }
 
   return component;

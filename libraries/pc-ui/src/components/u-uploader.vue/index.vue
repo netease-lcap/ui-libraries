@@ -99,6 +99,7 @@ import i18n from './i18n';
 import ajax from './ajax';
 import cropper from './cropper';
 import i18nMixin from '../../mixins/i18n';
+import FileImg from './assets/file.svg';
 import MPreview from '../u-text.vue/preview';
 import UPreview from '../u-text.vue/preview.vue';
 
@@ -368,7 +369,10 @@ export default {
             return value.map((x) => (x.url || '')).join(',');
         },
         getUrl(item) {
-            return this.encodeUrl(item.thumb || item.url || item);
+          const IMAGE_REGEXP = /\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg)/i;
+          const url = this.encodeUrl(item.thumb || item.url || item)
+
+          return IMAGE_REGEXP.test(url) ? url : FileImg;
         },
         select() {
             if (this.readonly || this.disabled || this.sending)
@@ -855,6 +859,7 @@ export default {
   .img {
       max-width: 100%;
       max-height: 100%;
+      vertical-align: middle;
   }
 
   .list {
