@@ -40,7 +40,7 @@ export default function genNaslUIConfig({
       });
     });
   } else {
-    glob.sync(`${rootPath}/**/api.ts`).forEach((apiPath) => {
+    glob.sync('**/api.ts', { cwd: rootPath, absolute: true }).forEach((apiPath) => {
       waitParseList.push({
         apiPath,
         extConfig: {},

@@ -9,7 +9,9 @@ import { execSync } from '../utils/exec';
 import genNaslUIConfig from './gen-nasl-ui';
 import genNaslExtensionConfig from './gen-nasl-extension-config';
 import genThemeJsonOld from './gen-theme-json-old';
+import { BuildIdeOptions, buildIde as viteBuildIde } from './vite-build-ide';
 import genManifestConfig from './gen-manifest-config';
+import { getPackName } from '../utils';
 
 export interface LcapThemeOptions {
   themeVarCssPath?: string;
@@ -25,7 +27,25 @@ export interface LcapBuildOptions {
   components?: Array<{ group: string, title: string, name: string, [key: string]: any }>,
   i18n?: {[lang: string]: string}
   theme: LcapThemeOptions,
+  ide?: BuildIdeOptions,
   destDir: string;
+}
+
+export async function buildIDE(options: LcapBuildOptions) {
+  if (!options.ide) {
+    return;
+  }
+
+  // eslint-disable-next-line prefer-object-spread
+  const ideOptions: BuildIdeOptions = Object.assign(
+    {
+      entry: 'ide/index',
+      outDir: 'dist-theme/ide',
+    },
+    options.ide,
+  );
+
+  await viteBuildIde(ideOptions, options.rootPath);
 }
 
 export function buildThemeOld(rootPath, destDir) {
@@ -175,11 +195,12 @@ async function zipExtension(root, destDir) {
     filePathList.push(`${i}: ${manifestData[i]}`);
   }
 
-  const packName = `${pkg.name}@${pkg.version}.tgz`;
+  const packName = getPackName(pkg.name, pkg.version);
+  const packPath = path.resolve(root, packName);
   const zipName = 'zip.tgz';
   const zipTgzPath = path.resolve(root, zipName);
-  if (fs.existsSync(path.resolve(root, packName))) {
-    fs.copyFileSync(path.resolve(root, packName), zipTgzPath);
+  if (fs.existsSync(packPath)) {
+    fs.copyFileSync(packPath, zipTgzPath);
     filePathList.push(`${getPath(zipName, pkg)}: ${zipName}`);
     zipList.push(zipName);
   }
@@ -197,6 +218,7 @@ async function zipExtension(root, destDir) {
 
   if (fs.existsSync(zipTgzPath)) {
     fs.unlinkSync(zipTgzPath);
+    fs.unlinkSync(packPath);
   }
 }
 
@@ -206,7 +228,7 @@ export async function buildNaslExtension(options: LcapBuildOptions) {
   }
 
   logger.start('开始生成 nasl.extension.json...');
-  const naslExtensionConfig = await genNaslExtensionConfig({
+  const naslExtensionConfig: any = await genNaslExtensionConfig({
     assetsPublicPath: options.assetsPublicPath,
     rootPath: options.rootPath,
     framework: options.framework,
@@ -217,7 +239,8 @@ export async function buildNaslExtension(options: LcapBuildOptions) {
   execSync('npx tsc -p tsconfig.api.json && npm pack');
 
   const manifest = genManifestConfig(options);
-  fs.writeJSONSync(naslConfigPath, { ...naslExtensionConfig, manifest }, { spaces: 2 });
+  naslExtensionConfig.compilerInfoMap.manifest = JSON.stringify(manifest);
+  fs.writeJSONSync(naslConfigPath, { ...naslExtensionConfig }, { spaces: 2 });
   zipExtension(options.rootPath, options.destDir);
 }
 
@@ -233,6 +256,8 @@ export async function lcapBuild(options: LcapBuildOptions) {
   if (!options.destDir) {
     options.destDir = 'dist-theme';
   }
+
+  await buildIDE(options);
 
   if (options.type === 'extension') {
     await buildNaslExtension(options);

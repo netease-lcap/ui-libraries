@@ -326,8 +326,14 @@ export default function transform(tsCode: string): astTypes.ViewComponentDeclara
                 const types = prop?.tsType.split(' | ').map((type) => type.replace(/(\'|\")/g, '').trim());
                 // @ts-ignore
                 prop?.setter?.options = prop?.setter?.options?.map((option: any, idx) => {
-                  if (option.if) option.if = option.if.toString();
-                  if (option.disabledIf) option.disabledIf = option.disabledIf.toString();
+                  if (option.if) {
+                    option.if = option.if.toString();
+                    option.tsIf = option.if;
+                  }
+                  if (option.disabledIf) {
+                    option.disabledIf = option.disabledIf.toString();
+                    option.tsDisabledIf = option.disabledIf;
+                  }
                   return {
                     ...option,
                     value: types[idx],

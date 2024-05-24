@@ -46,8 +46,11 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
   program.command('deploy')
     .description('发布流程')
     .option('--platform <platform>', '发布cdn 地址')
-    .action(async ({ platform }) => {
-      await deploy.default(cwd, platform);
+    .option('--username <username>', '发布username')
+    .option('--password <password>', '发布password')
+    .option('--bucket <bucket>', '发布 bucket')
+    .action(async ({ ...args }) => {
+      await deploy.default(cwd, args);
     });
 
   program.parse(process.argv);
