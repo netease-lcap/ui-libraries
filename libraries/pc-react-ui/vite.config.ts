@@ -15,6 +15,7 @@ export default defineConfig(({ mode, command }) => {
     plugins: [
       react(),
       lcapPlugin({
+        ide: true,
         theme: {
           previewPages: [
             {

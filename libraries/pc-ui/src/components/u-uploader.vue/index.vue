@@ -587,6 +587,11 @@ export default {
                     }, this);
                 },
                 onSuccess: (res) => {
+                    if (res.Code === 200 && Array.isArray(res.Data)) {
+                      res = {
+                        [this.urlField]: Array.isArray(file) ? res.Data.map((f) => f[this.urlField]) : res.Data[0][this.urlField],
+                      };
+                    }
                     const item = this.currentValue[index];
                     item.status = 'success';
                     if (res[this.urlField]) {
