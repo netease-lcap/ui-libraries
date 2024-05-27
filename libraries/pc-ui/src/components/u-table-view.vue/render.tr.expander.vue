@@ -20,12 +20,4 @@ export default {
 }
 </script>
 
-<style module>
-.expand-content {
-
-}
-.expand-td {
-    /* transition: $transition-duration height ease-in-out, $transition-duration padding-top ease-in-out, $transition-duration padding-bottom ease-in-out; */
-    background-color: var(--table-view-expand-td-background);
-}
-</style>
+<style module src="./index.css"></style>
