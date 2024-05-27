@@ -1018,6 +1018,7 @@ export default {
                 data.forEach((item) => {
                     if (!item.hasOwnProperty('display'))
                         this.$set(item, 'display', '');
+                    if (!item.hasOwnProperty('loading'))
                         this.$set(item, 'loading', false);
                 });
             }
