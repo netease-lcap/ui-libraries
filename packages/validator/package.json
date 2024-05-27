@@ -1,0 +1,54 @@
+{
+  "name": "@lcap/validator",
+  "version": "1.0.0",
+  "description": "CodeWave validator library",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc -w",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netease-lcap/ui-libraries.git#develop"
+  },
+  "keywords": [
+    "Validator"
+  ],
+  "author": "NetEase CodeWave FE Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/netease-lcap/ui-libraries/issues"
+  },
+  "homepage": "https://github.com/netease-lcap/ui-libraries/tree/develop#readme",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "node": "./dist/index.js",
+      "require": "./dist/index.js",
+      "import": "./dist/index.js"
+    },
+    "./VuePlugin": "./VuePlugin.js",
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "validator": "^13.0.0"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.5.7",
+    "@types/lodash": "^4.14.136",
+    "@types/validator": "^13.7.0",
+    "esbuild": "^0.19.2",
+    "rollup": "^4.0.2",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  }
+}

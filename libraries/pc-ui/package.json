@@ -39,7 +39,7 @@
     "@joskii/jflow-vue2-plugin": "^0.1.1",
     "@popperjs/core": "^2.10.2",
     "@vusion/utils": "0.4.11",
-    "@vusion/validator": "0.4.15-beta.1",
+    "@lcap/validator": "workspace:*",
     "animate.css": "^4.1.1",
     "countup.js": "^1.9.3",
     "dayjs": "^1.10.7",
@@ -103,6 +103,7 @@
   },
   "scripts": {
     "dev": "npm run storybook",
+    "pack": "pnpm pack",
     "storybook": "storybook dev -p 6006",
     "build": "lcap-scripts build",
     "deploy": "lcap-scripts deploy",

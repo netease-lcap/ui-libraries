@@ -120,7 +120,12 @@ export async function buildNaslExtension(options: LcapBuildOptions) {
     }),
   });
 
-  execSync('npx tsc -p tsconfig.api.json && npm pack');
+  execSync('npx tsc -p tsconfig.api.json');
+  if (options.pnpm) {
+    execSync('pnpm pack');
+  } else {
+    execSync('npm pack');
+  }
 
   const manifest = genManifestConfig(options);
   (naslExtensionConfig.compilerInfoMap as any).manifest = JSON.stringify(manifest);

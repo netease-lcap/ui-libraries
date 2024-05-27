@@ -22,4 +22,5 @@ export interface LcapBuildOptions {
   theme: LcapThemeOptions,
   ide?: BuildIdeOptions,
   destDir: string;
+  pnpm?: boolean;
 }
