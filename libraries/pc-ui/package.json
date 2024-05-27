@@ -38,7 +38,7 @@
     "@joskii/jflow-core": "^0.1.22",
     "@joskii/jflow-vue2-plugin": "^0.1.1",
     "@popperjs/core": "^2.10.2",
-    "@vusion/utils": "0.4.11",
+    "@lcap/vue2-utils": "workspace:*",
     "@lcap/validator": "workspace:*",
     "animate.css": "^4.1.1",
     "countup.js": "^1.9.3",
@@ -98,8 +98,7 @@
     "vusion-api": "^0.6.30"
   },
   "peerDependencies": {
-    "@vusion/utils": "^0.4.9",
-    "vue": "^2.6.10"
+    "vue": "^2.6.12"
   },
   "scripts": {
     "dev": "npm run storybook",

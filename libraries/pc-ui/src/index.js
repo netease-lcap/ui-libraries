@@ -9,7 +9,7 @@ import * as filters from './filters';
 import * as utils from './utils';
 export { directives, filters, utils };
 
-export { install } from '@vusion/utils';
+export { install } from '@lcap/vue2-utils';
 
 import Vue from 'vue';
 Vue.prototype.$env = Vue.prototype.$env || {};

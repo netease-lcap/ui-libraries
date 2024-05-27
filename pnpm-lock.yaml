@@ -101,6 +101,9 @@ importers:
       '@lcap/validator':
         specifier: workspace:*
         version: link:../../packages/validator
+      '@lcap/vue2-utils':
+        specifier: workspace:*
+        version: link:../../packages/vue2-utils
       '@popperjs/core':
         specifier: ^2.10.2
         version: 2.11.8
@@ -113,9 +116,6 @@ importers:
       '@vue/babel-helper-vue-jsx-merge-props':
         specifier: ^1.0.0
         version: 1.4.0
-      '@vusion/utils':
-        specifier: 0.4.11
-        version: 0.4.11
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
@@ -433,12 +433,12 @@ importers:
       '@lcap/validator':
         specifier: workspace:*
         version: link:../../packages/validator
+      '@lcap/vue2-utils':
+        specifier: workspace:*
+        version: link:../../packages/vue2-utils
       '@popperjs/core':
         specifier: ^2.10.2
         version: 2.11.8
-      '@vusion/utils':
-        specifier: 0.4.11
-        version: 0.4.11
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
@@ -879,6 +879,22 @@ importers:
       yorkie:
         specifier: ^2.0.0
         version: 2.0.0
+
+  packages/vue2-utils:
+    dependencies:
+      lodash:
+        specifier: ^4.17.11
+        version: 4.17.21
+    devDependencies:
+      '@types/lodash':
+        specifier: ^4.14.136
+        version: 4.14.202
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+      vue:
+        specifier: 2.6.12
+        version: 2.6.12
 
 packages:
 
@@ -3867,9 +3883,6 @@ packages:
     peerDependencies:
       vue: 2.x
       vue-template-compiler: ^2.x
-
-  '@vusion/utils@0.4.11':
-    resolution: {integrity: sha512-3n+fFmHEkgnMFZ+XwDmNMXHsyKTsFoyjYiH335rPipTbeJIO4bEAvedNMFdGPykt7FsMH8toMXgg3wVUjkIL+w==}
 
   '@webassemblyjs/ast@1.11.6':
     resolution: {integrity: sha512-IN1xI7PwOvLPgjcf180gC1bqn3q/QaOCwYUahIOhbYUu8KA/3tw2RT/T0Gidi1l7Hhj5D/INhJxiICObqpMu4Q==}
@@ -13864,10 +13877,6 @@ snapshots:
       pretty: 2.0.0
       vue: 2.6.12
       vue-template-compiler: 2.6.12
-
-  '@vusion/utils@0.4.11':
-    dependencies:
-      lodash: 4.17.21
 
   '@webassemblyjs/ast@1.11.6':
     dependencies:

@@ -8,7 +8,7 @@ import * as utils from 'cloud-ui.vusion/src/utils';
 // Vue.prototype.$env.VUE_APP_DESIGNER = String(process.env.VUE_APP_DESIGNER) === 'true';
 
 export { utils };
-export { install } from '@vusion/utils';
+export { install } from '@lcap/vue2-utils';
 export * from './components';
 
 import Vue from 'vue';
