@@ -1013,6 +1013,14 @@ export default {
                     this.canDraggable(item);
                 });
             }
+            // fix: 2864106089210368 树型分页无效，多次点击才生效
+            if(this.treeDisplay) {
+                data.forEach((item) => {
+                    if (!item.hasOwnProperty('display'))
+                        this.$set(item, 'display', '');
+                        this.$set(item, 'loading', false);
+                });
+            }
             return data;
         },
         handleData() {
