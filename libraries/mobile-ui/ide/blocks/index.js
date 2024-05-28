@@ -1,15 +1,15 @@
-import { genListViewBlock } from './blocks/genListViewBlock';
-import { genGridViewBlock } from './blocks/genGridViewBlock';
-import { genGetBlock } from './blocks/genGetBlock';
-import { genCreateBlock } from './blocks/genCreateBlock';
-import { genUpdateBlock } from './blocks/genUpdateBlock';
-import { genSelectBlock } from './blocks/genSelectBlock';
-import gridViewPng from './blocks/assets/grid.png';
-import detailpng from './blocks/assets/detail.png';
-import createpng from './blocks/assets/create.png';
-import selectpng from './blocks/assets/select.png';
-import updatepng from './blocks/assets/update.png';
-import listpng from './blocks/assets/list.png';
+import { genListViewBlock } from './genListViewBlock';
+import { genGridViewBlock } from './genGridViewBlock';
+import { genGetBlock } from './genGetBlock';
+import { genCreateBlock } from './genCreateBlock';
+import { genUpdateBlock } from './genUpdateBlock';
+import { genSelectBlock } from './genSelectBlock';
+import gridViewPng from './assets/grid.png';
+import detailpng from './assets/detail.png';
+import createpng from './assets/create.png';
+import selectpng from './assets/select.png';
+import updatepng from './assets/update.png';
+import listpng from './assets/list.png';
 
 export default [
   {
