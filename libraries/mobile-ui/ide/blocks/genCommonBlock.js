@@ -137,7 +137,7 @@ export function genPropertyEditableTemplate(entity, property, nameGroup, selectN
         const key = [property.name, relationEntity.name].join('-');
         const selectNameGroup = selectNameGroupMap.get(key);
         const dataSourceValue = `app.logics.${selectNameGroup.logic}(elements.$ce.page, elements.$ce.size)`;
-        return `<VanPickerSon
+        return `<VanPickerson
             type="list"
             showToolbar={true}
             title="请选择${label}"
@@ -151,10 +151,10 @@ export function genPropertyEditableTemplate(entity, property, nameGroup, selectN
             pageable={true}
             inputAlign="left"
             remotePaging={true}
-            slotPanelTitle={
+            slot-panel-title={
               <VanText text="请选择${label}"></VanText>
             }
-            slotPickerTop={
+            slot-picker-top={
               <>
                 <VanPickerActionSlot targetMethod="cancel">
                   <VanIconv name="left-arrow" icotype="only"></VanIconv>
@@ -163,7 +163,7 @@ export function genPropertyEditableTemplate(entity, property, nameGroup, selectN
                 </VanPickerActionSlot>
               </>
             }
-            slotPickerBottom={
+            slot-picker-bottom={
               <>
                 <VanPickerActionSlot targetMethod="cancel">
                   <VanButton
@@ -183,7 +183,7 @@ export function genPropertyEditableTemplate(entity, property, nameGroup, selectN
                 </VanPickerActionSlot>
               </>
             }>
-          </VanPickerSon>`;
+          </VanPickerson>`;
       } return '';
     } return '';
   }
@@ -226,10 +226,10 @@ export function genPropertyEditableTemplate(entity, property, nameGroup, selectN
             dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}
             pageSize={50}
             notitleblock={true}
-            slotPanelTitle={
+            slot-panel-title={
               <VanText text="请选择${label}"></VanText>
             }
-            slotPickerTop={
+            slot-picker-top={
               <>
                 <VanPickerActionSlot targetMethod="cancel">
                   <VanIconv name="left-arrow" icotype="only"></VanIconv>
@@ -238,7 +238,7 @@ export function genPropertyEditableTemplate(entity, property, nameGroup, selectN
                 </VanPickerActionSlot>
               </>
             }
-            slotPickerBottom={
+            slot-picker-bottom={
               <>
                 <VanPickerActionSlot targetMethod="cancel">
                   <VanButton

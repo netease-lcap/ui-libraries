@@ -24,7 +24,7 @@ function genSelectTemplate(entity, nameGroup) {
       slotTitle={
         <VanText text="请选择"></VanText>
       }
-      slotPickerTop={
+      slot-picker-top={
         <>
           <VanPickerActionSlot targetMethod="cancel">
             <VanIconv name="left-arrow" icotype="only"></VanIconv>
@@ -33,7 +33,7 @@ function genSelectTemplate(entity, nameGroup) {
           </VanPickerActionSlot>
         </>
       }
-      slotPickerBottom={
+      slot-picker-bottom={
         <>
           <VanPickerActionSlot targetMethod="cancel">
             <VanButton
