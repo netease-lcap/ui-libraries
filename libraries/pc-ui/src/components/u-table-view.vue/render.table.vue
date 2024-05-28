@@ -632,7 +632,7 @@ export default {
          */
         onBodyScroll(e) {
             this.syncBodyScroll(e.target.scrollTop, e.target); // this.throttledVirtualScroll(e);
-            if ( this.$refs.head[0]) {
+            if ( this.$refs.head && this.$refs.head[0]) {
                 this.$refs.head[0].scrollLeft = e.target.scrollLeft;
             }
             this.scrollXStart = e.target.scrollLeft === 0;
