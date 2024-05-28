@@ -801,9 +801,6 @@ exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 1`] = `
       <div style="display: none;">
       </div>
     </div>
-    <div style="display: none;"></div>
-    <div style="display: none;"></div>
-    <div style="display: none;"></div>
   </div>
 </div>
 `;
@@ -1191,9 +1188,6 @@ exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 2`] = `
       <div style="display: none;">
       </div>
     </div>
-    <div style="display: none;"></div>
-    <div style="display: none;"></div>
-    <div style="display: none;"></div>
   </div>
 </div>
 `;

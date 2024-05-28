@@ -82,9 +82,6 @@ exports[`u-grid-layout.vue > Demo- 1`] = `
       <div style="display: none;">
       </div>
     </div>
-    <div style="display: none;"></div>
-    <div style="display: none;"></div>
-    <div style="display: none;"></div>
   </div>
   <div class="root">
     <div class="root">

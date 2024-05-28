@@ -187,9 +187,6 @@ exports[`u-footbar.vue > Demo-与列表一起使用 1`] = `
       <div style="display: none;">
       </div>
     </div>
-    <div style="display: none;"></div>
-    <div style="display: none;"></div>
-    <div style="display: none;"></div>
   </div>
   <div class="root">
     <div class="body" position="static" vusion-slot-name="default">

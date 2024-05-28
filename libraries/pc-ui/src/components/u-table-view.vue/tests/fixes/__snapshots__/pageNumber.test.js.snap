@@ -247,9 +247,6 @@ exports[`u-table-view.vue > pageNumber 变化 1`] = `
       <div style="display: none;">
       </div>
     </div>
-    <div style="display: none;"></div>
-    <div style="display: none;"></div>
-    <div style="display: none;"></div>
   </div>
 </div>
 `;
@@ -501,9 +498,6 @@ exports[`u-table-view.vue > pageNumber 变化 2`] = `
       <div style="display: none;">
       </div>
     </div>
-    <div style="display: none;"></div>
-    <div style="display: none;"></div>
-    <div style="display: none;"></div>
   </div>
 </div>
 `;
@@ -755,9 +749,6 @@ exports[`u-table-view.vue > pageNumber 变化 3`] = `
       <div style="display: none;">
       </div>
     </div>
-    <div style="display: none;"></div>
-    <div style="display: none;"></div>
-    <div style="display: none;"></div>
   </div>
 </div>
 `;

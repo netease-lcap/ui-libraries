@@ -285,9 +285,6 @@ exports[`u-info-list.vue > Demo-与表格结合 1`] = `
             <div style="display: none;">
             </div>
           </div>
-          <div style="display: none;"></div>
-          <div style="display: none;"></div>
-          <div style="display: none;"></div>
         </div>
       </div>
     </div>
