@@ -668,7 +668,7 @@ export default {
             if (this.virtual)
                 this.throttledVirtualScroll(data);
             if (this.$refs.scrollView[0].$refs.wrap === data.target) {
-                if ( this.$refs.head[0]) {
+                if (this.$refs.head && this.$refs.head[0]) {
                     this.$refs.head[0].scrollLeft = data.scrollLeft;
                 }
                 this.scrollXStart = data.scrollLeft === 0;
@@ -723,12 +723,6 @@ export default {
          */
         startVirtualScroll() {
             this.throttledVirtualScroll({ target: this.$refs.scrollView[0].$refs.wrap });
-        },
-        getBodyRef() {
-            return this.$refs.body[0];
-        },
-        getTableBodyRef() {
-            return this.$refs.bodyTable[0];
         },
         getRefs() {
             return {
