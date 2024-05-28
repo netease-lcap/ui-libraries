@@ -209,7 +209,7 @@ function genEditComponent(entity, property, nameGroup, selectNameGroupMap) {
     formItem += '</UValidator>';
   }
   return `slotEditcell={
-    <ULinearLayout gap="small">
+    (current) => <ULinearLayout gap="small">
     ${formItem}
     </ULinearLayout>
   }`;

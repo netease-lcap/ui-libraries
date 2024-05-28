@@ -58,7 +58,7 @@ export function genGridViewCurdBlock(entity, refElement) {
     }
   });
   const allEntities = [...entitySet];
-  const entityLogic = genQueryLogic(allEntities, nameGroup, true, true, module);
+  const entityLogic = genQueryLogic(allEntities, nameGroup, false, true, module);
   newLogics.push(entityLogic);
 
   return `export function view() {
@@ -77,7 +77,7 @@ export function genGridViewCurdBlock(entity, refElement) {
       }
   
       return <ULinearLayout direction="vertical">
-          ${genFilterTemplate(entity, nameGroup)}
+          ${genFilterTemplate(entity, nameGroup, selectNameGroupMap)}
           <ULinearLayout mode="flex" alignment="start" justify="end">
               <UButton
                   color="primary"

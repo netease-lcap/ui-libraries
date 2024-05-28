@@ -105,6 +105,6 @@ export function genGridViewBlock(entity, refElement) {
     return ${genGridViewTemplate(entity, nameGroup)}
   }
     export namespace app.logics {
-        ${genQueryLogic(allEntities, nameGroup, false, true, module)}
+        ${genQueryLogic(allEntities, nameGroup, false, false, module)}
     }`;
 }

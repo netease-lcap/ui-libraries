@@ -127,6 +127,6 @@ export function genTableBlock(entity, refElement) {
       return ${genTableTemplate(entity, nameGroup)}
     }
     export namespace app.logics {
-        ${genQueryLogic(allEntities, nameGroup, true, true, refElement.parentNode)}
+        ${genQueryLogic(allEntities, nameGroup, true, false, refElement.parentNode)}
     }`;
 }
