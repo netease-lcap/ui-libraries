@@ -1,5 +1,5 @@
 import themeGlobal from '../src/theme/ide';
-import genBlocks from './generate';
+import genBlocks from './blocks/index';
 
 export const theme = {
   global: themeGlobal,

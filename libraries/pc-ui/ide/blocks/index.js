@@ -1,21 +1,21 @@
-import { genTableCurdBlock } from './blocks/genTableCurdBlock';
-import { genTableBlock } from './blocks/genTableBlock';
-import { genTableEditBlock } from './blocks/genTableEditBlock';
-import { genGridViewCurdBlock } from './blocks/genGridViewCurdBlock';
-import { genGridViewBlock } from './blocks/genGridViewBlock';
-import { genGetBlock } from './blocks/genGetBlock';
-import { genCreateBlock } from './blocks/genCreateBlock';
-import { genUpdateBlock } from './blocks/genUpdateBlock';
-import { genSelectBlock } from './blocks/genSelectBlock';
-import curdsvg from './blocks/assets/curd.svg';
-import tablesvg from './blocks/assets/table.svg';
-import gridViewPng from './blocks/assets/grid-view.png';
-import gridViewPng1 from './blocks/assets/grid-view1.png';
-import detailsvg from './blocks/assets/detail.svg';
-import createsvg from './blocks/assets/create.svg';
-import selectsvg from './blocks/assets/select.svg';
-import updatesvg from './blocks/assets/update.svg';
-import edittablesvg from './blocks/assets/editTable.svg';
+import { genTableCurdBlock } from './genTableCurdBlock';
+import { genTableBlock } from './genTableBlock';
+import { genTableEditBlock } from './genTableEditBlock';
+import { genGridViewCurdBlock } from './genGridViewCurdBlock';
+import { genGridViewBlock } from './genGridViewBlock';
+import { genGetBlock } from './genGetBlock';
+import { genCreateBlock } from './genCreateBlock';
+import { genUpdateBlock } from './genUpdateBlock';
+import { genSelectBlock } from './genSelectBlock';
+import curdsvg from './assets/curd.svg';
+import tablesvg from './assets/table.svg';
+import gridViewPng from './assets/grid-view.png';
+import gridViewPng1 from './assets/grid-view1.png';
+import detailsvg from './assets/detail.svg';
+import createsvg from './assets/create.svg';
+import selectsvg from './assets/select.svg';
+import updatesvg from './assets/update.svg';
+import edittablesvg from './assets/editTable.svg';
 
 export default [
   {
