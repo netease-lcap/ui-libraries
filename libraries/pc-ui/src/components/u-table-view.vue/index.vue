@@ -185,9 +185,6 @@
     <div v-if="draggable || acrossTableDrag" :class="$style.dragGhost">
         <div :class="$style.trdragGhost" ref="trDragGhost"></div>
     </div>
-    <div v-show="false"><slot name="loading"></slot></div>
-    <div v-show="false"><slot name="error"></slot></div>
-    <div v-show="false"><slot name="empty"></slot></div>
 </div>
 </template>
 
