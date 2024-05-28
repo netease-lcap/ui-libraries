@@ -130,21 +130,21 @@
                             <tr key="loading" v-if="(currentData === undefined && !currentError) || currentLoading"><!-- 初次加载与加载更多 loading 合并在一起 -->
                                 <td :class="[$style.center, $style.centerSticky]" :colspan="visibleColumnVMs.length">
                                     <div :class="$style.wrap" :style="{ width: rootWidth? number2Pixel(rootWidth): undefined }" vusion-slot-name="loading">
-                                        <slot name="loading"><u-spinner :class="$style.spinner"></u-spinner> {{ loadingText }}</slot>
+                                        <f-slot name="loading" :vm="$parent"><u-spinner :class="$style.spinner"></u-spinner> {{ loadingText }}</f-slot>
                                     </div>
                                 </td>
                             </tr>
                             <tr key="error" v-else-if="currentData === null || currentError">
-                                <div :class="$style.wrap" :style="{ width: rootWidth ? number2Pixel(rootWidth): undefined }">
-                                    <td :class="[$style.center, $style.centerSticky]" :colspan="visibleColumnVMs.length" vusion-slot-name="error">
-                                        <slot name="error">
+                                <td :class="[$style.center, $style.centerSticky]" :colspan="visibleColumnVMs.length">
+                                    <div :class="$style.wrap" :style="{ width: rootWidth ? number2Pixel(rootWidth): undefined }" vusion-slot-name="error">
+                                        <f-slot name="error" :vm="$parent">
                                             <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
                                             <u-linear-layout layout="block" justify="center">
                                                 {{ errorText }}
                                             </u-linear-layout>
-                                        </slot>
-                                    </td>
-                                </div>
+                                        </f-slot>
+                                    </div>
+                                </td>
                             </tr>
                             <tr key="loadMore" v-else-if="pageable === 'load-more' && currentDataSource.hasMore()">
                                 <td :class="$style.center" :colspan="visibleColumnVMs.length">
@@ -159,12 +159,12 @@
                             <tr key="empty" v-else-if="!currentData.length || currentEmpty">
                                 <td :class="[$style.center, $style.centerSticky]" :colspan="visibleColumnVMs.length">
                                     <div :class="$style.wrap" :style="{ width: rootWidth ? number2Pixel(rootWidth): undefined }" vusion-slot-name="empty">
-                                        <slot name="empty">
+                                        <f-slot name="empty" :vm="$parent">
                                             <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
                                             <u-linear-layout layout="block" justify="center">
                                                 {{ emptyText }}
                                             </u-linear-layout>
-                                        </slot>
+                                        </f-slot>
                                     </div>
                                 </td>
                             </tr>

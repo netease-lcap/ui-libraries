@@ -66,11 +66,7 @@
         :readonly="readonly"
 
         :showHead="showHead"
-        
         :rootWidth="rootWidth">
-        <template #loading><slot name="loading"></slot></template>
-        <template #error><slot name="error"></slot></template>
-        <template #empty><slot name="empty"></slot></template>
     </u-table-designer>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
@@ -174,9 +170,6 @@
         :rootWidth="rootWidth"
 
         @resize="onResizerDragEnd">
-        <template #loading><slot name="loading"></slot></template>
-        <template #error><slot name="error"></slot></template>
-        <template #empty><slot name="empty"></slot></template>
     </u-table-render>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
@@ -192,6 +185,9 @@
     <div v-if="draggable || acrossTableDrag" :class="$style.dragGhost">
         <div :class="$style.trdragGhost" ref="trDragGhost"></div>
     </div>
+    <div v-show="false"><slot name="loading"></slot></div>
+    <div v-show="false"><slot name="error"></slot></div>
+    <div v-show="false"><slot name="empty"></slot></div>
 </div>
 </template>
 
