@@ -218,27 +218,25 @@
                         </tr>
                         <tr key="loading" v-else-if="(currentData === undefined && !currentError) || currentLoading"><!-- 初次加载与加载更多 loading 合并在一起 -->
                             <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="loading">
-                                <slot name="loading"><u-spinner :class="$style.spinner"></u-spinner> {{ loadingText }}</slot>
+                                <f-slot name="loading" :vm="$parent"><u-spinner :class="$style.spinner"></u-spinner> {{ loadingText }}</f-slot>
                                 <s-empty v-if="$env.VUE_APP_DESIGNER
-                                    && !$slots.loading
-                                    && $scopedSlots
-                                    && !($scopedSlots.loading && $scopedSlots.loading())
+                                    && !($parent.$slots && $parent.$slots.loading)
+                                    && !($parent.$scopedSlots && $parent.$scopedSlots.loading && $parent.$scopedSlots.loading())
                                     && !!$parent.$attrs['vusion-node-path']">
                                 </s-empty>
                             </td>
                         </tr>
                         <tr key="error" v-else-if="currentData === null || currentError">
                             <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="error">
-                                <slot name="error">
+                                <f-slot name="error" :vm="$parent">
                                     <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
                                     <u-linear-layout layout="block" justify="center">
                                         {{ errorText }}
                                     </u-linear-layout>
-                                </slot>
+                                </f-slot>
                                 <s-empty v-if="$env.VUE_APP_DESIGNER
-                                    && !$slots.error
-                                    && $scopedSlots
-                                    && !($scopedSlots.error && $scopedSlots.error())
+                                    && !($parent.$slots && $parent.$slots.error)
+                                    && !($parent.$scopedSlots && $parent.$scopedSlots.error && $parent.$scopedSlots.error())
                                     && !!$parent.$attrs['vusion-node-path']">
                                 </s-empty>
                             </td>
@@ -255,16 +253,15 @@
                         </tr>
                         <tr key="empty" v-else-if="!currentData.length || currentEmpty">
                             <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="empty">
-                                <slot name="empty">
+                                <f-slot name="empty" :vm="$parent">
                                     <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
                                     <u-linear-layout layout="block" justify="center">
                                         {{ emptyText }}
                                     </u-linear-layout>
-                                </slot>
+                                </f-slot>
                                 <s-empty v-if="$env.VUE_APP_DESIGNER
-                                    && !$slots.empty
-                                    && $scopedSlots
-                                    && !($scopedSlots.empty && $scopedSlots.empty())
+                                    && !($parent.$slots && $parent.$slots.empty)
+                                    && !($parent.$scopedSlots && $parent.$scopedSlots.empty && $parent.$scopedSlots.empty())
                                     && !!$parent.$attrs['vusion-node-path']">
                                 </s-empty>
                             </td>

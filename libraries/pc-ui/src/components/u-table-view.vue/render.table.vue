@@ -129,17 +129,17 @@
                             </template>
                             <tr key="loading" v-if="(currentData === undefined && !currentError) || currentLoading"><!-- 初次加载与加载更多 loading 合并在一起 -->
                                 <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="loading">
-                                    <slot name="loading"><u-spinner :class="$style.spinner"></u-spinner> {{ loadingText }}</slot>
+                                    <f-slot name="loading" :vm="$parent"><u-spinner :class="$style.spinner"></u-spinner> {{ loadingText }}</f-slot>
                                 </td>
                             </tr>
                             <tr key="error" v-else-if="currentData === null || currentError">
                                 <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="error">
-                                    <slot name="error">
+                                    <f-slot name="error" :vm="$parent">
                                         <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
                                         <u-linear-layout layout="block" justify="center">
                                             {{ errorText }}
                                         </u-linear-layout>
-                                    </slot>
+                                    </f-slot>
                                 </td>
                             </tr>
                             <tr key="loadMore" v-else-if="pageable === 'load-more' && currentDataSource.hasMore()">
@@ -154,12 +154,12 @@
                             </tr>
                             <tr key="empty" v-else-if="!currentData.length || currentEmpty">
                                 <td :class="$style.center" :colspan="visibleColumnVMs.length" vusion-slot-name="empty">
-                                    <slot name="empty">
+                                    <f-slot name="empty" :vm="$parent">
                                         <u-image v-if="errorImage" :src="errorImage" fit="contain"></u-image>
                                         <u-linear-layout layout="block" justify="center">
                                             {{ emptyText }}
                                         </u-linear-layout>
-                                    </slot>
+                                    </f-slot>
                                 </td>
                             </tr>
                         </tbody>
