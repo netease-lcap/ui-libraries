@@ -989,7 +989,10 @@ export default {
         },
         onScrollParentScroll(e) {
             const rect = getRect(this.$el);
-            const bodyRect = getRect(this.$refs.tableRender.getRefs().body);
+            const bodyEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().body;
+            if(!bodyEl)
+                return;
+            const bodyRect = getRect(bodyEl);
             const parentRect = this.scrollParentEl === window ? { top: 0, bottom: window.innerHeight } : getRect(this.scrollParentEl);
             const headEl = this.$refs.tableRender.getRefs().head;
             const headHeight = headEl && headEl.offsetHeight || 0;
@@ -1021,7 +1024,8 @@ export default {
                 }
                 stickheadEl.style.top = stickingHeadTop + 'px';
                 // fix：滚动条在最右边时，置顶时表头会有偏移
-                stickheadEl.scrollLeft = this.$refs.scrollView[0].$refs.wrap.scrollLeft;
+                const scorllViewEl = this.$refs.tableRender.getRefs().scrollView;
+                stickheadEl.scrollLeft = scorllViewEl && scorllViewEl.$refs.wrap.scrollLeft;
                 if (this.syncStickHeadXScroll) {
                     this.syncHeadScroll();
                 }
@@ -2302,7 +2306,7 @@ export default {
                 Array.from(crt.children).forEach((td) => {
                     td.style.position = 'static'; // 去除sticky的情况
                 });
-                const tableEl = this.$refs.tableRender.getTableBodyRef().$el;
+                const tableEl = this.$refs.tableRender.getRefs().bodyTable.$el;
                 const tableElCrt = tableEl.cloneNode(true);
                 const tbody = tableElCrt.getElementsByTagName('tbody')[0];
                 tbody.innerHTML = '';
