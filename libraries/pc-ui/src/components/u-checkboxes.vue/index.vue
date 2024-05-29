@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { MParent } from "../m-parent.vue";
 import MField from "../m-field.vue";
 import MConverter from "../m-converter.vue";
@@ -57,7 +58,25 @@ export default {
     UCheckbox,
     UPreview
   },
-  mixins: [MParent, MField, MConverter, SupportDataSource, MPreview],
+  mixins: [
+    MParent,
+    MField,
+    MConverter,
+    SupportDataSource,
+    MPreview,
+    sync({
+      data() {
+        return this.currentDataSource ? this.currentDataSource.data : [];
+      },
+      value() {
+        if (this.converter) {
+          return this.currentConverter.get(this.currentValue);
+        }
+
+        return this.currentValue;
+      }
+    })
+  ],
   props: {
     value: [Array, String],
     min: { type: Number, default: 0 },
