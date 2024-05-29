@@ -750,6 +750,7 @@ export default {
                 getExtraParams: this.getExtraParams,
                 process: this.processData,
                 filterMultiple: this.filterMultiple,
+                useCache: this.usePagination? false : true, // fix：2879747503294464 大数据分页使用cache性能问题
             };
 
             if (this.treeDisplay && this.valueField && this.parentField && this.childrenField) {
