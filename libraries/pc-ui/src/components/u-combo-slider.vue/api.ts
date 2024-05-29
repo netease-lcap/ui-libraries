@@ -8,6 +8,10 @@ namespace nasl.ui {
         group: "Form"
     })
     export class UComboSlider extends ViewComponent {
+        @Prop({
+          title: '滑块值'
+        })
+        value: UComboSliderOptions['value'] = 0;
 
         constructor(options?: Partial<UComboSliderOptions>) { super(); }
     }
