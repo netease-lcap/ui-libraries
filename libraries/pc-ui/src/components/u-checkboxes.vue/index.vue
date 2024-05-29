@@ -75,7 +75,7 @@ export default {
 
         return this.currentValue;
       }
-    })
+    }),
   ],
   props: {
     value: [Array, String],

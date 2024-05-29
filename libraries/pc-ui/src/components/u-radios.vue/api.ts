@@ -11,7 +11,7 @@ namespace nasl.ui {
         @Prop({
             title: '数据',
         })
-        data: URadiosOptions<T, V>['dataSource'];
+        data: nasl.collection.List<T>;
 
         @Prop({
             title: '选中值',
