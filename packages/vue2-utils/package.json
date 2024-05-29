@@ -36,6 +36,7 @@
       "import": "./dist/index.js"
     },
     "./install": "./dist/install.js",
+    "./mixins": "./dist/mixins/index.js",
     "./package.json": "./package.json"
   },
   "dependencies": {
