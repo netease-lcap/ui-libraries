@@ -8,6 +8,20 @@ namespace nasl.ui {
         group: 'Selector'
     })
     export class UPagination extends ViewComponent {
+        @Prop({
+            title: '分页大小',
+        })
+        size: UPaginationOptions['pageSize'];
+
+        @Prop({
+            title: '当前页数',
+        })
+        page: UPaginationOptions['page'];
+
+        @Prop({
+            title: '总页数',
+        })
+        totalPage: nasl.core.Integer;
 
         constructor(options?: Partial<UPaginationOptions>) { super(); }
     }
