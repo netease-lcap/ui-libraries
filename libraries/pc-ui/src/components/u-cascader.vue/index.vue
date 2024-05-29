@@ -67,6 +67,10 @@ export default {
           return this.currentDataSource ? this.currentDataSource.data : [];
         },
         value() {
+          if (this.converter && typeof this.convertValue === 'function') {
+            return this.convertValue(this.currentValue);
+          }
+
           if (this.useArrayLikeValue) {
             return this.lastRealValueArray;
           }
