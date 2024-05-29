@@ -8,6 +8,15 @@ namespace nasl.ui {
         group: 'Form'
     })
     export class UNumberInput extends ViewComponent {
+        @Prop({
+          title: '值',
+        })
+        value: UInputOptions['value'];
+
+        @Prop({
+          title: '格式化后的值',
+        })
+        formattedValue: nasl.core.String;
 
         constructor(options?: Partial<UNumberInputOptions>) { super(); }
     }
@@ -284,7 +293,7 @@ namespace nasl.ui {
             title: '验证时',
             description: '输入验证时触发',
         })
-        onValidate: (event: { 
+        onValidate: (event: {
             trigger: nasl.core.String;
             valid: nasl.core.Boolean;
             triggerValid: nasl.core.Boolean;

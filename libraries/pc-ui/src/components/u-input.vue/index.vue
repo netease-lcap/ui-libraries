@@ -80,8 +80,8 @@ export default {
         password: { type: Boolean, default: false },
         type: { type: String, default: 'text' },
         maxlengthMessage: String,
-        prefix: String,
-        suffix: String,
+        prefix: { type: [String, Boolean] },
+        suffix: { type: [String, Boolean] },
         autoSize: {
             type: String,
             validator: (value) =>
