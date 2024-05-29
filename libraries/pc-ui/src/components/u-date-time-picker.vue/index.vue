@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import dayjs from '../../utils/dayjs';
 import DateFormatMixin from '../../mixins/date.format';
 // import { formatterOptions as dateFormatterOptions } from '../u-date-picker.vue/wrap';
@@ -83,7 +84,17 @@ import i18nMixin from '../../mixins/i18n';
 export default {
     name: 'u-date-time-picker',
     // i18n,
-    mixins: [MField, DateFormatMixin, i18nMixin('u-date-time-picker'), MPreview],
+    mixins: [
+      MField,
+      DateFormatMixin,
+      i18nMixin('u-date-time-picker'),
+      MPreview,
+      sync({
+        value() {
+          return this.finalDateTime ? this.toValue(new Date(this.finalDateTime.replace(/-/g, '/'))) : undefined;
+        },
+      }),
+    ],
     component: {
         UPreview,
     },
