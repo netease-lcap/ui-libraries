@@ -84,6 +84,14 @@ export default (...options: SyncOption[]) => {
           this.$emit(`sync:${name}`, this[stateKey]);
         });
       },
+      $emitSyncParams(params: { [key: string]: any }) {
+        if (!params || typeof params !== 'object') {
+          return;
+        }
+
+        const filterKeys = ['size', 'page', 'sort', 'order', 'filterText'];
+        Object.keys(params).forEach((key) => filterKeys.includes(key) && this.$emit(`sync:${key}`, params[key]));
+      },
     },
     watch: {
       ...watchMap,
