@@ -1,4 +1,5 @@
 // Utils
+import { sync } from '@lcap/vue2-utils';
 import { resetScroll } from '../utils/dom/reset-scroll';
 import { formatNumber } from '../utils/format/number';
 import { preventDefault } from '../utils/dom/event';
@@ -24,6 +25,11 @@ const [createComponent, bem, t] = createNamespace('fieldsonforsearch');
 const comSet = new Set(['van-fieldinput','van-fieldtextarea','van-fieldnumber']);
 
 export default createComponent({
+  mixins: [
+    sync({
+      value: 'currentValue',
+    }),
+  ],
   inheritAttrs: false,
 
   provide() {
