@@ -8,7 +8,15 @@ namespace nasl.ui {
         group: 'Selector'
     })
     export class UTreeViewNew<T, V, M extends nasl.core.Boolean> extends ViewComponent {
+        @Prop({
+            title: '数据',
+        })
+        data: nasl.collection.List<T>;
 
+        @Prop({
+            title: '选中值',
+        })
+        value: UTreeViewNewOptions<T, V, M>['value'];
 
         @Method({
             title: 'undefined',
@@ -259,7 +267,7 @@ namespace nasl.ui {
             checked: nasl.core.Boolean;
             oldChecked: nasl.core.Boolean;
             node: T;
-            values: nasl.collection.List<V>; 
+            values: nasl.collection.List<V>;
         }) => any;
 
         @Event({
