@@ -20,7 +20,7 @@ namespace nasl.ui {
     @Prop({
       title: '数据',
     })
-    data: VanPickersonOptions<T, V, M, P>['dataSource'];
+    data: nasl.collection.List<T>;
 
     @Prop({
       title: '当前页数',

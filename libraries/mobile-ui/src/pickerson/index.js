@@ -1,4 +1,5 @@
 // Utils
+import { sync } from '@lcap/vue2-utils';
 import { createNamespace, _get } from '../utils';
 import Picker from './Picker';
 import Popup from '../popup';
@@ -25,6 +26,17 @@ export default createComponent({
     DataSourceMixin,
     EventSlotCommandProvider(EventSlotCommandMap),
     PreviewMixin,
+    sync({
+      value: 'currentValue',
+      data: 'data',
+      size() {
+        return this.currentDataSource && this.currentDataSource.size ? this.currentDataSource.paging.size : this.pageSize;
+      },
+      page() {
+        return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : this.pageNumber;
+      },
+      filterText: 'filterText',
+    }),
   ],
   props: {
     readonly: Boolean,
