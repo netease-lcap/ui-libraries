@@ -15,7 +15,12 @@ namespace nasl.ui {
     @Prop({
       title: '数据',
     })
-    data: VanListViewOptions<T, V, P, M>['dataSource'];
+    data: nasl.collection.List<T>;
+
+    @Prop({
+      title: '数据量',
+    })
+    total: nasl.core.Integer;
 
     @Prop({
       title: '当前页数',
