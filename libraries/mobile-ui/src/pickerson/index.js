@@ -12,6 +12,7 @@ import DataSourceMixin from '../mixins/DataSource';
 import { EmptyCol } from '../emptycol';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
 import PreviewMixin from "../mixins/preview";
+import DataSource from '../utils/DataSource';
 
 const [createComponent, bem, t] = createNamespace('pickerson');
 
@@ -212,6 +213,40 @@ export default createComponent({
     },
     closePopup() {
       this.popupVisible = false;
+    },
+    normalizeDataSource(dataSource) {
+      const options = this.getDataSourceOptions();
+      if (dataSource instanceof DataSource) return dataSource;
+      // 数组
+      if (dataSource instanceof Array) {
+        options.data = Array.from(dataSource);
+
+        return new DataSource(options);
+      }
+      if (dataSource instanceof Function) {
+        const self = this;
+        // 构造load函数
+        options.load = function load(params) {
+          self.$emitSyncParams(params);
+          const result = dataSource(params);
+          if (result instanceof Promise)
+            return result.catch(() => (this.currentLoading = false));
+
+          return Promise.resolve(result);
+        };
+
+        return new DataSource(options);
+      }
+      if (dataSource instanceof Object) {
+        if (dataSource.hasOwnProperty('list') && Array.isArray(dataSource.list))
+          return new DataSource(
+            Object.assign(options, dataSource, {
+              data: dataSource.list,
+            })
+          );
+        return new DataSource(Object.assign(options, dataSource));
+      }
+      return undefined;
     },
     onChange(vm, val, index) {
       this.$emit('change', vm, val, index);
