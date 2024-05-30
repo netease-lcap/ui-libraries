@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanSlider extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: VanSliderOptions['value'];
+
     constructor(options?: Partial<VanSliderOptions>) {
       super();
     }
@@ -22,7 +27,7 @@ namespace nasl.ui {
         concept: "NumberInputSetter"
       }
     })
-    value: nasl.core.Decimal;
+    value: nasl.core.Decimal | nasl.collection.List<nasl.core.Decimal>;
     @Prop({
       group: '数据属性',
       title: '最大值',
