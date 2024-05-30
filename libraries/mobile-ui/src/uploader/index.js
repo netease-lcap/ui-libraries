@@ -1,4 +1,5 @@
 // Utils
+import { sync } from '@lcap/vue2-utils';
 import { createNamespace, addUnit, noop, isPromise, isDef, _template } from '../utils';
 import { toArray, readFile, isOversize, isImageFile } from './utils';
 
@@ -22,7 +23,13 @@ const [createComponent, bem, t] = createNamespace('uploader');
 export default createComponent({
   inheritAttrs: false,
 
-  mixins: [FieldMixin, PreviewMixin],
+  mixins: [
+    FieldMixin,
+    PreviewMixin,
+    sync({
+      value: 'fileList',
+    }),
+  ],
   // model: {
   //   prop: 'fileListprop',
   // },
