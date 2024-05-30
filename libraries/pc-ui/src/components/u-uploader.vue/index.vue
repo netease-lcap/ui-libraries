@@ -94,6 +94,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import MField from '../m-field.vue';
 import i18n from './i18n';
 import ajax from './ajax';
@@ -114,7 +115,16 @@ const SIZE_UNITS = {
 export default {
     name: 'u-uploader',
     components: { cropper, UPreview },
-    mixins: [MField, i18nMixin('u-uploader'), MPreview],
+    mixins: [
+      MField,
+      i18nMixin('u-uploader'),
+      MPreview,
+      sync({
+        value() {
+          return this.toValue(this.currentValue);
+        },
+      }),
+    ],
     // i18n,
     props: {
         value: [Array, String],
