@@ -1,21 +1,28 @@
-import './styles/base.css';
-import './styles/theme.css';
-export * from './components';
-export * from './layouts';
-export * from './assist';
-
-import * as directives from './directives';
-import * as filters from './filters';
-import * as utils from './utils';
-export { directives, filters, utils };
-
-export { install } from '@lcap/vue2-utils';
-
+import {
+  installOptions,
+  installDirectives,
+  installComponents,
+} from '@lcap/vue2-utils';
 import Vue from 'vue';
-Vue.prototype.$env = Vue.prototype.$env || {};
-Vue.prototype.$env.VUE_APP_DESIGNER = String(process.env.VUE_APP_DESIGNER) === 'true';
-Vue.prototype.$at2 = function (obj, propertyPath) {
-    if (propertyPath === '' && !this.$env.VUE_APP_DESIGNER)
-        return obj;
+import * as CloudUI from './main';
+
+export * from './main';
+
+if (typeof window !== 'undefined') {
+  // 一些初始化的操作;
+  window.LCAPUILibrary = CloudUI;
+
+  Vue.prototype.$env = Vue.prototype.$env || {};
+  Vue.prototype.$env.VUE_APP_DESIGNER = String(process.env.VUE_APP_DESIGNER) === 'true';
+  Vue.prototype.$at2 = function (obj, propertyPath) {
+    if (propertyPath === '' && !this.$env.VUE_APP_DESIGNER) return obj;
     return this.$at(obj, propertyPath);
-};
+  };
+
+  installOptions(Vue);
+  installDirectives(Vue, CloudUI.directives);
+  installComponents(Vue, CloudUI);
+
+  Vue.mixin(CloudUI.MEmitter);
+  Vue.mixin(CloudUI.MPubSub);
+}
