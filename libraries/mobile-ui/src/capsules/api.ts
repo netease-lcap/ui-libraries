@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Form"
   })
   export class VanCapsules extends ViewComponent {
+    @Prop({
+      title: '选中值',
+    })
+    value: VanCapsulesOptions['value'];
+
     constructor(options?: Partial<VanCapsulesOptions>) {
       super();
     }
