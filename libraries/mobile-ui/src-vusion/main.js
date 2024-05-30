@@ -132,10 +132,7 @@ import 'cloud-ui.vusion/src/styles/typography.css';
 import 'cloud-ui.vusion/src/styles/animation.css';
 
 import * as utils from 'cloud-ui.vusion/src/utils';
-import MEmitter from 'cloud-ui.vusion/src/components/m-emitter.vue/index';
-import MPubSub from 'cloud-ui.vusion/src/components/m-pub-sub.vue/index';
 
-export { MEmitter, MPubSub };
 export { utils };
 export { install } from '@vusion/utils';
 export * from './components';

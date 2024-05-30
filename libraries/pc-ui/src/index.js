@@ -5,10 +5,10 @@ import {
 } from '@vusion/utils';
 import Vue from 'vue';
 import * as CloudUI from './main';
+export * from './main';
 
 if (typeof window !== 'undefined') {
   // 一些初始化的操作;
-  window.CloudUI = CloudUI;
   window.LCAPUILibrary = CloudUI;
 
   Vue.prototype.$env = Vue.prototype.$env || {};
