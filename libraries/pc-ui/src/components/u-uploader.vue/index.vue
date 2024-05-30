@@ -368,7 +368,7 @@ export default {
             return this.encodeUrl(item.thumb || item.url || item);
         },
         select() {
-            if (this.readonly || this.disabled || this.sending)
+            if (this.readonly || this.disabled || this.sending || this.$env.VUE_APP_DESIGNER)
                 return;
 
             this.$refs.file.value = '';
