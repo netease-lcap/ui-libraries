@@ -10,4 +10,4 @@ export * from './layouts';
 export * from './assist';
 export { directives, filters, utils };
 
-export { install } from '@vusion/utils';
+export { install } from '@lcap/vue2-utils';

@@ -134,5 +134,5 @@ import 'cloud-ui.vusion/src/styles/animation.css';
 import * as utils from 'cloud-ui.vusion/src/utils';
 
 export { utils };
-export { install } from '@vusion/utils';
+export { install } from '@lcap/vue2-utils';
 export * from './components';
