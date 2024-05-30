@@ -189,6 +189,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import DataSource from '../../utils/DataSource';
 import DataSourceNew from '../../utils/DataSource/new';
 import { addResizeListener, removeResizeListener, findScrollParent, getRect, findXScrollParent } from '../../utils/dom';
@@ -213,7 +214,32 @@ export default {
         UTableRender,
         UTableDesigner,
     },
-    mixins: [MEmitter, i18nMixin('u-table-view')],
+    mixins: [
+      MEmitter,
+      i18nMixin('u-table-view'),
+      sync({
+        data: 'currentData',
+        total() {
+          return this.currentDataSource && this.currentDataSource.total ? this.currentDataSource.total : 0;
+        },
+        size() {
+          return this.currentDataSource && this.currentDataSource.size ? this.currentDataSource.paging.size : this.pageSize;
+        },
+        page() {
+          return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : this.pageNumber;
+        },
+        sort() {
+          return this.currentDataSource && this.currentDataSource.sorting ? this.currentDataSource.sorting.field : '';
+        },
+        order() {
+          return this.currentDataSource && this.currentDataSource.sorting ? this.currentDataSource.sorting.order : '';
+        },
+        value() {
+          return this.selectedItem && this.$at(this.selectedItem, this.valueField);
+        },
+        values: 'currentValues',
+      })
+    ],
     // i18n,
     props: {
         data: Array,
@@ -778,7 +804,9 @@ export default {
                 }
                 return new Constructor({ ...options, tag: 'u-table-view' });
             } else if (dataSource instanceof Function) {
+                const self = this;
                 options.load = function load(params, extraParams) {
+                    self.$emitSyncParams(params);
                     const result = dataSource(params, extraParams);
                     if (result instanceof Promise)
                         return result;
