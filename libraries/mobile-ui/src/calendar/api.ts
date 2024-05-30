@@ -11,6 +11,11 @@ namespace nasl.ui {
     constructor(options?: Partial<VanCalendarOptions>) {
       super();
     }
+    @Prop({
+      title: '值',
+    })
+    value: VanCalendarOptions['value'];
+
     @Method({
       title: '日期重置',
       description: '将选中的日期重置到指定日期，未传参时会重置到默认日期'

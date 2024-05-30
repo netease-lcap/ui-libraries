@@ -31,6 +31,7 @@ import { EmptyCol } from '../emptycol';
 import { FieldMixin } from '../mixins/field';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
 import PreviewMixin from '../mixins/preview';
+import SyncValueMixin from '../mixins/sync-value';
 
 const EventSlotCommandMap = {
   cancel: 'onCancel',
@@ -38,7 +39,12 @@ const EventSlotCommandMap = {
 };
 
 export default createComponent({
-  mixins: [FieldMixin, EventSlotCommandProvider(EventSlotCommandMap), PreviewMixin],
+  mixins: [
+    FieldMixin,
+    EventSlotCommandProvider(EventSlotCommandMap),
+    PreviewMixin,
+    SyncValueMixin,
+  ],
 
   props: {
     title: String,
