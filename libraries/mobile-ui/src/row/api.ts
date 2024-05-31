@@ -119,7 +119,7 @@ namespace nasl.ui {
       emptyBackground: 'add-sub',
       snippets: [{
         title: '插入一列',
-        code: '<van-col span="8"></van-col>'
+        code: '<van-col :span="8"></van-col>'
       }]
     })
     slotDefault: () => Array<VanCol>;

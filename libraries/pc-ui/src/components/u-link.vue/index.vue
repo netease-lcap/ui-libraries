@@ -53,18 +53,22 @@ export default {
          */
         currentHref() {
             let res;
-            if (this.href !== undefined)
-                res = encodeUrl(this.href);
-            if (this.destination !== undefined)
-                res = encodeUrl(this.destination);
-            else if (this.parentVM && !this.parentVM.router && typeof this.to === 'string' && (this.to.startsWith('http') || this.to.startsWith('https') || this.to.startsWith('www.')))
-                res = encodeUrl(this.to);
-            else if (this.$router && this.to !== undefined)
-                res = encodeUrl(this.$router.resolve(this.to, this.$route, this.append).href);
+            if (this.href !== undefined){
+              res = encodeUrl(this.href);
+            } if (this.destination !== undefined){
+              res = encodeUrl(this.destination);
+            } if (this.link && typeof this.link === 'string') {
+              res = encodeUrl(this.link);
+            } else if (this.parentVM && !this.parentVM.router && typeof this.to === 'string' && (this.to.startsWith('http') || this.to.startsWith('https') || this.to.startsWith('www.'))) {
+              res = encodeUrl(this.to);
+            } else if (this.$router && this.to !== undefined){
+              res = encodeUrl(this.$router.resolve(this.to, this.$route, this.append).href);
+            }
 
             // $formatMicroFrontRouterPath 定义在 lcap-pc-template
-            if (this.$formatMicroFrontRouterPath)
-                res = this.$formatMicroFrontRouterPath(res);
+            if (this.$formatMicroFrontRouterPath) {
+              res = this.$formatMicroFrontRouterPath(res);
+            }
 
             return res;
         },

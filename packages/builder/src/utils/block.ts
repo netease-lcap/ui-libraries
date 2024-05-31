@@ -1,5 +1,6 @@
 import * as parser from '@babel/parser';
 import traverse from '@babel/traverse';
+import { kebabCase } from 'lodash';
 
 export function getBlockInfos(code) {
   const ast = parser.parse(code, {
@@ -14,7 +15,7 @@ export function getBlockInfos(code) {
       path.traverse({
         ObjectProperty: (p) => {
           if (p.node.key.type === 'Identifier' && p.node.key.name === 'id' && p.node.value.type === 'StringLiteral') {
-            id = p.node.value.value;
+            id = kebabCase(p.node.value.value);
             p.stop();
           } else if (p.node.key.type === 'Identifier' && p.node.key.name === 'title' && p.node.value.type === 'StringLiteral') {
             id = p.node.value.value.split('/').map((str) => str.toLowerCase()).join('-');
@@ -39,7 +40,7 @@ export function getBlockInfos(code) {
       const nodeId = path.node.id.type === 'Identifier' ? path.node.id.name : '';
       const block = {
         name: nodeId,
-        id: `${id}--${nodeId.toLowerCase()}`,
+        id: `${id}--${kebabCase(nodeId)}`,
       };
 
       path.traverse({

@@ -105,6 +105,8 @@
   "uSelect_empty": "データがありません",
   "uSelect_loadMore": "もっと読み込む",
   "uSelect_noMore": "これ以上ありません",
+  "uSwitch_on": "開いています",
+  "uSwitch_off": "閉じられました",
   "uTableView_loading": "読み込み中...",
   "uTableView_error": "読み込みに失敗しました。再試行してください。",
   "uTableView_empty": "データがありません",

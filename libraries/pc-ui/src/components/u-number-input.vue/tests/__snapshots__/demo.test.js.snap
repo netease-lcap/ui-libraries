@@ -20,7 +20,7 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
     <span class="button" role="up" tabindex="0"></span>
     <span class="button" role="down" tabindex="0"></span>
   </div>
-  <div button-display="tail" class="root root" clearable placeholder="abcdsdf" prefix="true">
+  <div button-display="tail" class="root root" placeholder="abcdsdf" prefix="true">
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <span class="prefix" name="true">
@@ -39,7 +39,7 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
     </span>
     <input button-display="tail" class="input" hide-buttons="true" type="text">
   </div>
-  <div button-display="tail" class="root root" clearable hide-buttons="true" placeholder="abcdsdf" prefix="true">
+  <div button-display="tail" class="root root" hide-buttons="true" placeholder="abcdsdf" prefix="true">
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <span class="prefix" name="true">
@@ -68,7 +68,7 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
       </span>
     </span>
   </div>
-  <div button-display="tail" class="root root" clearable placeholder="abcdsdf" suffix="true">
+  <div button-display="tail" class="root root" placeholder="abcdsdf" suffix="true">
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <input button-display="tail" class="input" type="text">
@@ -90,7 +90,7 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
       </span>
     </span>
   </div>
-  <div button-display="tail" class="root root" clearable hide-buttons="true" placeholder="abcdsdf" suffix="true">
+  <div button-display="tail" class="root root" hide-buttons="true" placeholder="abcdsdf" suffix="true">
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <input button-display="tail" class="input" hide-buttons="true" type="text">
@@ -118,7 +118,7 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
     <span class="button" role="up" tabindex="0"></span>
     <span class="button" role="down" tabindex="0"></span>
   </div>
-  <div button-display="bothEnds" class="root root" clearable placeholder="abcdsdf" prefix="true">
+  <div button-display="bothEnds" class="root root" placeholder="abcdsdf" prefix="true">
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <span class="prefix" name="true">
@@ -137,7 +137,7 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
     </span>
     <input button-display="bothEnds" class="input" hide-buttons="true" type="text">
   </div>
-  <div button-display="bothEnds" class="root root" clearable hide-buttons="true" placeholder="abcdsdf" prefix="true">
+  <div button-display="bothEnds" class="root root" hide-buttons="true" placeholder="abcdsdf" prefix="true">
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <span class="prefix" name="true">
@@ -166,7 +166,7 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
       </span>
     </span>
   </div>
-  <div button-display="bothEnds" class="root root" clearable placeholder="abcdsdf" suffix="true">
+  <div button-display="bothEnds" class="root root" placeholder="abcdsdf" suffix="true">
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <input button-display="bothEnds" class="input" type="text">
@@ -188,7 +188,7 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
       </span>
     </span>
   </div>
-  <div button-display="bothEnds" class="root root" clearable hide-buttons="true" placeholder="abcdsdf" suffix="true">
+  <div button-display="bothEnds" class="root root" hide-buttons="true" placeholder="abcdsdf" suffix="true">
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <input button-display="bothEnds" class="input" hide-buttons="true" type="text">

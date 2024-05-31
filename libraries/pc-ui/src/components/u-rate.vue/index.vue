@@ -1,5 +1,5 @@
 <template>
-<div :class="$style.root" @mouseleave="onMouseleave" :readonly="readonly">
+<div v-if="!isPreview" :class="$style.root" @mouseleave="onMouseleave" :readonly="readonly">
     <span :class="$style.item" v-for="i in currentMax" :key="i" :status="getFullStatus(i)"
         @mousemove="onMousemove(i, $event)"
         @click="select(i)" :half="getHalfStatus(i)"
@@ -10,16 +10,22 @@
         </u-popup>
     </span>
     <span :class="$style.text" v-if="showText">{{ texts[tooltipIndex] }}</span>
-    <span :class="$style.text" v-if="showValue"> {{ value }} </span>
+    <span :class="$style.text" v-if="showValue"> {{ currentValue }} </span>
 </div>
+<u-preview v-else :text="showText ? texts[tooltipIndex] : String(currentValue) || '--'"></u-preview>
 </template>
 
 <script>
 import MField from '../m-field.vue';
+import UPreview from '../u-text.vue';
+import MPreview from '../u-text.vue/preview';
 
 export default {
     name: 'u-rate',
-    mixins: [MField],
+    mixins: [MField, MPreview],
+    components: {
+      UPreview,
+    },
     props: {
         value: { type: Number, default: 0 },
         max: { type: Number, default: 5 },
@@ -35,6 +41,7 @@ export default {
         showText: { type: Boolean, default: false },
         showTooltip: { type: Boolean, default: false },
         showValue: { type: Boolean, default: false },
+        preview: { type: Boolean, default: false },
         placement: { type: String, default: 'top' },
         tooltips: {
             type: Array,
