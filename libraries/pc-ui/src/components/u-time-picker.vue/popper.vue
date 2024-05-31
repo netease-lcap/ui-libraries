@@ -424,7 +424,13 @@ export default {
                 seconds: this.second,
             };
             timeData[type] = value;
-            const showTime = this.getTime(timeData.hours, timeData.minutes, timeData.seconds);
+            let showTime = this.getTime(timeData.hours, timeData.minutes, timeData.seconds);
+            const arr = showTime.split(':');
+            if (type === 'minutes' && arr.length < 3) {
+              arr.push('00');
+              showTime = arr.join(':');
+            }
+
             return !!this.isOutOfRange(showTime);
         },
         onMounseOver(type, item) {
