@@ -70,6 +70,11 @@ const getSlotName = (attrName: string) => {
     return lowerFirst(attrName.substring(4));
   }
 
+  const slotPrefix = 'slot-';
+  if (attrName.startsWith(slotPrefix)) {
+    return attrName.substring(slotPrefix.length);
+  }
+
   return attrName;
 };
 
