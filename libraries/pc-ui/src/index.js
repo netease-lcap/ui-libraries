@@ -1,5 +1,4 @@
 import {
-  installOptions,
   installDirectives,
   installComponents,
 } from '@lcap/vue2-utils';
@@ -16,7 +15,6 @@ if (typeof window !== 'undefined') {
     return this.$at(obj, propertyPath);
   };
 
-  installOptions(Vue);
   installDirectives(Vue, CloudUI.directives);
   installComponents(Vue, CloudUI);
 
