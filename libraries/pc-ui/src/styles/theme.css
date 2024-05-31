@@ -1185,6 +1185,8 @@
     --number-input-button-border-radius: var(--input-border-radius); /* @hidden */
     --number-input-width: var(--width-base); /* @hidden */
     --number-input-border-radius: var(--input-border-radius); /* @hidden */
+    --number-input-prefix-padding: 24px; /* @desc 输入框前缀的边距 */
+    --number-input-suffix-padding: 24px; /* @desc 输入框后缀的边距 */
 
     /* @component u-radios */
     --radio-space-x: 32px; /* @group 间距 */ /* @prefix radio */ /* @desc 单选项之间的间距,如 1px */ /* @excludeTags u-radio */

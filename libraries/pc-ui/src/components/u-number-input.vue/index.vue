@@ -637,18 +637,18 @@ content: "\e65d";
 
 /* normal */
 .root[prefix] input {
-    padding-left: 24px;
+    padding-left: var(--number-input-prefix-padding);
 }
 .root[prefix][clearable]:hover input,
 .root[prefix][clearable][focus] input {
-    padding-right: 24px !important;
+    padding-right: var(--number-input-suffix-padding) !important;
 }
 .root[suffix] input {
-    padding-right: 24px;
+    padding-right: var(--number-input-suffix-padding);
 }
 .root[suffix][clearable]:hover input,
 .root[suffix][clearable][focus] input {
-    padding-right: 48px !important;
+    padding-right: calc(var(--number-input-suffix-padding) + 24px) !important;
 }
 /* tail */
 .root[button-display="tail"]:not([hide-buttons="true"]) input {
@@ -659,11 +659,11 @@ content: "\e65d";
     padding-right: calc(var(--input-suffix-padding-right) + 24px) !important;
 }
 .root[button-display="tail"]:not([hide-buttons="true"])[suffix] input {
-    padding-right: calc(var(--input-suffix-padding-right) + 24px);
+    padding-right: calc(var(--input-suffix-padding-right) + var(--number-input-suffix-padding));
 }
 .root[button-display="tail"]:not([hide-buttons="true"])[suffix][clearable]:hover input,
 .root[button-display="tail"]:not([hide-buttons="true"])[suffix][clearable][focus] input {
-    padding-right: calc(var(--input-suffix-padding-right) + 48px) !important;
+    padding-right: calc(var(--input-suffix-padding-right) + var(--number-input-suffix-padding) + 24px) !important;
 }
 .root[button-display="tail"]:not([hide-buttons="true"]) [class^="u-input_suffix__"] {
     right: var(--input-suffix-padding-right);
@@ -674,18 +674,18 @@ content: "\e65d";
     padding: 0 var(--number-input-both-ends-button-width);
 }
 .root[button-display="bothEnds"]:not([hide-buttons="true"])[prefix] input {
-    padding-left: calc(var(--number-input-both-ends-button-width) + 24px);
+    padding-left: calc(var(--number-input-both-ends-button-width) + var(--number-input-prefix-padding));
 }
 .root[button-display="bothEnds"]:not([hide-buttons="true"])[prefix][clearable]:hover input,
 .root[button-display="bothEnds"]:not([hide-buttons="true"])[prefix][clearable][focuse] input {
     padding-right: calc(var(--number-input-both-ends-button-width) + 24px) !important;
 }
 .root[button-display="bothEnds"]:not([hide-buttons="true"])[suffix] input {
-    padding-right: calc(var(--number-input-both-ends-button-width) + 24px);
+    padding-right: calc(var(--number-input-both-ends-button-width) + var(--number-input-suffix-padding));
 }
 .root[button-display="bothEnds"]:not([hide-buttons="true"])[suffix][clearable]:hover input,
 .root[button-display="bothEnds"]:not([hide-buttons="true"])[suffix][clearable][focus] input {
-    padding-right: calc(var(--number-input-both-ends-button-width) + 48px) !important;
+    padding-right: calc(var(--number-input-both-ends-button-width) + var(--number-input-suffix-padding) + 24px) !important;
 }
 .root[button-display="bothEnds"]:not([hide-buttons="true"]) [class^="u-input_prefix__"] {
     left: calc(var(--number-input-both-ends-button-width) + 8px);
