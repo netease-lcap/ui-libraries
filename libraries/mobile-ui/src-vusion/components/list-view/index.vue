@@ -85,6 +85,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import UListView from 'cloud-ui.vusion/src/components/u-list-view.vue/index.vue';
 import UCheckbox from 'cloud-ui.vusion/src/components/u-checkbox.vue/index.vue';
 import UInput from 'cloud-ui.vusion/src/components/u-input.vue/index.vue';
@@ -104,6 +105,27 @@ export default {
     childName: 'van-list-view-item',
     components: { VanPullRefresh, VanEmptyCol, VanPagination, UCheckbox, UInput, USpinner, ULink, Iconv },
     extends: UListView,
+    mixins: [
+      sync({
+        data: 'currentData',
+        total() {
+          return this.currentDataSource && this.currentDataSource.total ? this.currentDataSource.total : 0;
+        },
+        size() {
+          return this.currentDataSource && this.currentDataSource.size ? this.currentDataSource.paging.size : this.pageSize;
+        },
+        page() {
+          return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : this.pageNumber;
+        },
+        sort() {
+          return this.currentDataSource && this.currentDataSource.sorting ? this.currentDataSource.sorting.field : '';
+        },
+        order() {
+          return this.currentDataSource && this.currentDataSource.sorting ? this.currentDataSource.sorting.order : '';
+        },
+        filterText: 'filterText',
+      }),
+    ],
     props: {
         border: { type: Boolean, default: false },
         readonly: { type: Boolean, default: false },
@@ -154,7 +176,9 @@ export default {
             options.data = Array.from(dataSource);
             return new DataSource(options);
           } if (dataSource instanceof Function) {
+            const self = this;
             options.load = function load(params) {
+              self.$emitSyncParams(params);
               const result = dataSource(params);
               if (result instanceof Promise)
                 return result.catch(() => (this.currentLoading = false));

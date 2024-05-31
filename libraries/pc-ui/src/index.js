@@ -2,9 +2,10 @@ import {
   installOptions,
   installDirectives,
   installComponents,
-} from '@vusion/utils';
+} from '@lcap/vue2-utils';
 import Vue from 'vue';
 import * as CloudUI from './main';
+
 export * from './main';
 
 if (typeof window !== 'undefined') {

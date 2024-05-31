@@ -26,7 +26,7 @@ export default defineConfig(({ command }) => {
       }),
       lcapPlugin({
         framework: 'vue2',
-        ide: true,
+        pnpm: true,
         theme: {
           themeVarCssPath: './src-vusion/styles/theme.css',
           previewPages: [

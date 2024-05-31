@@ -129,6 +129,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { UListView } from '../u-list-view.vue';
 import { ellipsisTitle } from '../../directives';
 import i18n from './i18n';
@@ -149,7 +150,20 @@ export default {
     directives: { ellipsisTitle },
     extends: UListView,
     // i18n,
-    mixins: [i18nMixin('u-select'), MPreview],
+    mixins: [
+      i18nMixin('u-select'),
+      MPreview,
+      sync({
+        opened: 'popperOpened',
+        value() {
+          if (this.currentMultiple) {
+            return this.selectedVMs.map((itemVM) => itemVM.value);
+          }
+
+          return this.selectedVM ? this.selectedVM.value : undefined;
+        },
+      })
+    ],
     props: {
         // @inherit: value: { type: String, default: '' },
         // @inherit: value: Array,
@@ -476,7 +490,9 @@ export default {
 
                 return new Constructor(options);
             } else if (dataSource instanceof Function) {
+                const self = this;
                 options.load = function load(params, extraParams) {
+                    self.$emitSyncParams(params);
                     const result = dataSource(params, extraParams);
                     if (result instanceof Promise)
                         return result.catch(

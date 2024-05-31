@@ -11,6 +11,11 @@ namespace nasl.ui {
     constructor(options?: Partial<VanUploaderOptions>) {
       super();
     }
+
+    @Prop({
+      title: '值',
+    })
+    value: VanUploaderOptions['value'];
     @Method({
       title: 'undefined',
       description: '主动调起文件选择，由于浏览器安全限制，只在触发操作的上下文中调用才有效'

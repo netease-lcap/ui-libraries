@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import fs from 'fs-extra';
 import path from 'path';
 import type { LcapBuildOptions } from './types';
@@ -97,7 +98,12 @@ export async function buildNaslUILibrary(options: LcapBuildOptions) {
   buildNaslUI(options);
   await buildTheme(options);
   buildI18N(options);
-  execSync('npx tsc -p tsconfig.api.json && npm pack');
+  execSync('npx tsc -p tsconfig.api.json');
+  if (options.pnpm) {
+    execSync('pnpm pack');
+  } else {
+    execSync('npm pack');
+  }
   buildManifest(options);
 }
 

@@ -8,7 +8,10 @@ namespace nasl.ui {
         group: 'Selector'
     })
     export class URegionSelect<T, V> extends ViewComponent {
-
+        @Prop({
+          title: '选中值',
+        })
+        value: URegionSelectOptions<T, V>['value'];
 
         @Method({
             title: 'undefined',

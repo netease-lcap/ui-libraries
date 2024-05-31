@@ -23,6 +23,7 @@ export interface ViteLcapPluginOptions {
   theme?: LcapThemeOptions,
   rootPath?: string;
   destDir?: string;
+  pnpm?: boolean;
 }
 
 export default (options: any) => {

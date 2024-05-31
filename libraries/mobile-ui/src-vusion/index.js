@@ -1,6 +1,7 @@
 import Vue from 'vue';
-import { installOptions } from '@vusion/utils';
+import { installOptions } from '@lcap/vue2-utils';
 import * as Vant from './main';
+
 export * from './main';
 
 if (typeof window !== 'undefined') {

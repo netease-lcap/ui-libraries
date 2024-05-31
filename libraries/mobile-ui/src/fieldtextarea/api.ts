@@ -11,6 +11,12 @@ namespace nasl.ui {
     constructor(options?: Partial<VanFieldtextareaOptions>) {
       super();
     }
+
+    @Prop({
+      title: '值',
+    })
+    value: VanFieldtextareaOptions['value'];
+
     @Method({
       title: 'undefined',
       description: '让输入框获取焦点。'

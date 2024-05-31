@@ -8,6 +8,10 @@ namespace nasl.ui {
     group: "Navigation"
   })
   export class VanTabbar extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: VanTabbarOptions['value'];
     constructor(options?: Partial<VanTabbarOptions>) {
       super();
     }

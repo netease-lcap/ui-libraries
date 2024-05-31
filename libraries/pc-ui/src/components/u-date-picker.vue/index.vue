@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import dayjs from '../../utils/dayjs';
 import DateFormatMixin from '../../mixins/date.format';
 import { formatterOptions } from './wrap';
@@ -64,7 +65,20 @@ export default {
     name: 'u-date-picker',
     // i18n,
     directives: { clickOutside },
-    mixins: [MField, DateFormatMixin, i18nMixin('u-date-picker'), MPreview],
+    mixins: [
+      MField,
+      DateFormatMixin,
+      i18nMixin('u-date-picker'),
+      MPreview,
+      sync({
+        value() {
+          let date = this.returnTime(this.showDate);
+          const newDate = date ? new Date(this.transformDate(date)) : undefined;
+
+          return this.toValue(newDate);
+        }
+      })
+    ],
     props: {
         preIcon: {
             type: String,

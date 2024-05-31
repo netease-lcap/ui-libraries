@@ -8,6 +8,10 @@ namespace nasl.ui {
         group: 'Form'
     })
     export class USwitch extends ViewComponent {
+        @Prop({
+          title: '值'
+        })
+        value: nasl.core.Boolean;
 
         constructor(options?: Partial<USwitchOptions>) { super(); }
     }

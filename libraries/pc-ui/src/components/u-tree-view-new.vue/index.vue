@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { MRoot } from '../m-root.vue';
 import MField from '../m-field.vue';
 import UTreeViewNodeNew from '../u-tree-view-new.vue/node.vue';
@@ -42,7 +43,25 @@ export default {
     name: 'u-tree-view-new',
     nodeName: 'u-tree-view-node-new',
     components: { UTreeViewNodeNew },
-    mixins: [MRoot, MField],
+    mixins: [
+      MRoot,
+      MField,
+      sync({
+        data() {
+          return this.currentDataSource ? this.currentDataSource.data : [];
+        },
+        value() {
+          if (this.checkable) {
+            return this.currentValues;
+          }
+
+          const { value, node } = this.selectedVM || {};
+          const actualValue = value || this.$at(node, this.valueField) || this.$at(this.selectedVM, this.valueField);
+
+          return actualValue;
+        }
+      })
+    ],
     props: {
         value: null,
         field: String,

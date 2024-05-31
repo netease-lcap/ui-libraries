@@ -8,6 +8,16 @@ namespace nasl.ui {
     group: "Form"
   })
   export class VanStepperNew extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: VanStepperNewOptions['value'];
+
+    @Prop({
+      title: '格式化值',
+    })
+    formattedValue: nasl.core.String;
+
     constructor(options?: Partial<VanStepperNewOptions>) {
       super();
     }

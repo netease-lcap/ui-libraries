@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 import { createNamespace } from '../utils';
 import { showFormat, isValidDate } from './utils';
 import TimePicker from './TimePicker';
@@ -16,7 +17,16 @@ import { validDisplayFormatters, validUnit, validType } from './shared';
 const [createComponent, bem, t] = createNamespace('datetime-picker');
 
 export default createComponent({
-  mixins: [FieldMixin, EventSlotCommandProvider(['cancel', 'confirm']), PreviewMixin],
+  mixins: [
+    FieldMixin,
+    EventSlotCommandProvider(['cancel', 'confirm']),
+    PreviewMixin,
+    sync({
+      value: 'currentValue',
+      startValue: 'currentStartValue',
+      endValue: 'currentEndValue',
+    }),
+  ],
   props: {
     ...TimePicker.props,
     ...DatePicker.props,

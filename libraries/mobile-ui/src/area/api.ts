@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Selector"
   })
   export class VanArea extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: nasl.core.String = '';
+
     constructor(options?: Partial<VanAreaOptions>) {
       super();
     }
