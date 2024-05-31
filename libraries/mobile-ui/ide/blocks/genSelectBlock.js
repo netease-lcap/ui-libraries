@@ -9,6 +9,7 @@ import { genQueryLogic } from './genCommonBlock';
 function genSelectTemplate(entity, nameGroup) {
   const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.page, elements.$ce.size)`;
   const property = getFirstDisplayedProperty(entity);
+  const label = property.label || property.name;
   return `<VanPickerson
       type="list"
       showToolbar={true}
@@ -22,6 +23,9 @@ function genSelectTemplate(entity, nameGroup) {
       pageSize={50}
       remotePaging={true}
       slotTitle={
+        <VanText text="${label}"></VanText>
+      }
+      slot-pannel-title={
         <VanText text="请选择"></VanText>
       }
       slot-picker-top={
