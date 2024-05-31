@@ -16,7 +16,7 @@ export function useHandleOpenRef(props) {
     open: () => {
       return new Promise((resolve) => {
         setOpen(true);
-        setTimeout(resolve, 0);
+        setTimeout(resolve, 10);
       });
     },
     close: () => setOpen(false),
