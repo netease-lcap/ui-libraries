@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.root">
+  <div :class="$style.root" ref="root">
     <div :class="$style.designerImage" v-if="noData">
         <img :class="[$style.img, $style.lb]" :src="leftBottomImg" />
         <img :class="[$style.img, $style.rt]" :src="rightTopImg" />
@@ -7,7 +7,7 @@
       </div>
     <div :class="$style.graph">
       <u-loading v-if="loading"></u-loading>
-      <process-graph v-if="!loading && !noData" :ast="ast" 
+      <process-graph v-if="visible && !loading && !noData" :ast="ast" 
         :initialZoom="initialZoom"></process-graph>
     </div>
   </div>
@@ -45,6 +45,7 @@ export default {
           middleImg,
           rightTopImg,
           taskId: undefined,
+          visible: true,
         }
     },
     watch: {
@@ -62,6 +63,20 @@ export default {
     },
     mounted() {
       this.loadProcess();
+      const intersectionObserver = new IntersectionObserver((entries) => {
+        if(entries[0]) {
+          const rect = entries[0].boundingClientRect;
+          this.visible = !(rect.width === 0 && rect.height === 0)
+        }
+      });
+      // start observing
+      intersectionObserver.observe(this.$refs.root);
+      this.detachObserver = () => {
+        intersectionObserver.disconnect();
+      }
+    },
+    beforeDestroy() {
+      this.detachObserver();
     },
     methods: {
       async loadProcess() {
