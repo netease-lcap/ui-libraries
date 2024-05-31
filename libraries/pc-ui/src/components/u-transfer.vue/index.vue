@@ -1,5 +1,6 @@
 <template>
-    <div :class="$style.root">
+    <div :class="[$style.root, isPreview ? $style.preview : '']">
+        <u-preview v-if="isPreview" :text="previewText"></u-preview>
         <u-list-view
             :class="$style.listView"
             multiple
@@ -86,9 +87,15 @@
 
 <script>
 import UListView from '../u-list-view.vue';
+import UPreview from '../u-text.vue';
+import MPreview from '../u-text.vue/preview';
 
 export default {
     name: 'u-transfer',
+    mixins: [MPreview],
+    components: {
+      UPreview
+    },
     props: {
         source: Array,
         target: Array,
@@ -111,9 +118,19 @@ export default {
         pageSize: UListView.props.pageSize,
         readonly: UListView.props.readonly,
         disabled: UListView.props.disabled,
+        preview: { type: Boolean, default: false },
     },
     data() {
         return { sourceValues: [], targetValues: [] };
+    },
+    computed: {
+      previewText() {
+        if (!this.isPreview) {
+          return '';
+        }
+
+        return (this.target || []).map((item) => this.$at(item, this.textField)).join('，') || '--';
+      }
     },
     methods: {
         transfer(direction = 'forward', values) {
@@ -218,5 +235,9 @@ export default {
 }
 .root[size$="auto"] .listView {
     width: auto;
+}
+.preview .listView,
+.preview .buttons {
+  display: none;
 }
 </style>

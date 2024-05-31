@@ -114,8 +114,8 @@ importers:
         specifier: 0.4.11
         version: 0.4.11
       '@vusion/validator':
-        specifier: 0.4.7
-        version: 0.4.7
+        specifier: 0.4.15-beta.1
+        version: 0.4.15-beta.1
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
@@ -280,8 +280,8 @@ importers:
         specifier: ^4.14.202
         version: 4.14.202
       '@vusion/validator':
-        specifier: 0.4.7
-        version: 0.4.7
+        specifier: 0.4.15-beta.1
+        version: 0.4.15-beta.1
       ahooks:
         specifier: ^3.7.8
         version: 3.7.8(react@18.2.0)
@@ -422,8 +422,8 @@ importers:
         specifier: ^0.1.22
         version: 0.1.24
       '@joskii/jflow-vue2-plugin':
-        specifier: ^0.1.0
-        version: 0.1.0(@joskii/jflow-core@0.1.24)(vue@2.6.12)
+        specifier: ^0.1.1
+        version: 0.1.1(@joskii/jflow-core@0.1.24)(vue@2.6.12)
       '@popperjs/core':
         specifier: ^2.10.2
         version: 2.11.8
@@ -431,8 +431,8 @@ importers:
         specifier: 0.4.11
         version: 0.4.11
       '@vusion/validator':
-        specifier: 0.4.7
-        version: 0.4.7
+        specifier: 0.4.15-beta.1
+        version: 0.4.15-beta.1
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
@@ -650,9 +650,6 @@ importers:
       postcss:
         specifier: ^8.4.35
         version: 8.4.35
-      puppeteer:
-        specifier: ^22.2.0
-        version: 22.4.1(typescript@5.3.3)
       react-style-object-to-css:
         specifier: ^1.1.2
         version: 1.1.2
@@ -3827,8 +3824,8 @@ packages:
       object-diff: 0.0.4
     dev: false
 
-  /@joskii/jflow-vue2-plugin@0.1.0(@joskii/jflow-core@0.1.24)(vue@2.6.12):
-    resolution: {integrity: sha512-iFPqSqRmKX5dTm0FDT/WGZwVn2IrJzfKM7HQILGzrj/hLClth3iDB1DM4bbHVZBJ8daAJJSGsIvric4H3pnuIg==}
+  /@joskii/jflow-vue2-plugin@0.1.1(@joskii/jflow-core@0.1.24)(vue@2.6.12):
+    resolution: {integrity: sha512-VTchhcyR+pryeqlkKvrgD5Zy+hMXlpm2/omXklDFIics2jmgOqnn3DbBktTjONssScH5dw/nvBQaNUvwecXJfg==}
     peerDependencies:
       '@joskii/jflow-core': ^0.1.0
       vue: ^2.6.11
@@ -7192,8 +7189,8 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /@vusion/validator@0.4.7:
-    resolution: {integrity: sha512-cXRVo15C7+xXoOH5diP6+rCRcqcT+AAblc5eZLNYyMFuXCGByG9TQmEQZOOAQR0sTi7o307LI138nkKgGhE5IA==}
+  /@vusion/validator@0.4.15-beta.1:
+    resolution: {integrity: sha512-UVDfA8w6hw8l10V9RypWhePjpS1LHNCc1IV9erDgVoV0TTUUAoNE0gYR5vs84UybeOnX5U1nT0DlfiwWGLjiVw==}
     dependencies:
       '@types/lodash': 4.14.202
       '@types/validator': 13.11.8

@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  ConfigProvider, Button, Space, Input, Divider,
-} from 'antd';
+import { ConfigProvider, Button, Space, Input, Divider } from 'antd';
 import { Select, SelectOption, SelectOptGroup } from '../index';
 import { Text } from '@/index';
 
@@ -37,25 +35,12 @@ export const 异步函数 = {
     }, []);
     return (
       <div>
+        {ref.current.opened}
+        1
         <button onClick={() => ref.current.open()}>1234</button>
-        {/* <ConfigProvider
-          theme={{
-            components: {
-              Select: {
-                fontSize: 14,
-                colorText: 'red',
-              },
-            },
-          }}
-        > */}
-        <Select
-          showSearch
-          token={{ optionFontSize: 22 }}
-          {...args}
-          prefix="a"
-          ref={ref}
-        />
-        {/* </ConfigProvider> */}
+        <Select showSearch {...args} prefix="a" ref={ref} />
+
+        <Select dataSource={ref.current?.data} />
       </div>
     );
   },
@@ -63,34 +48,35 @@ export const 异步函数 = {
     textField: 'entity1.name',
     valueField: 'entity1.id',
     prefix: '1',
-    dataSource: () => new Promise((res) => {
-      setTimeout(() => {
-        res([
-          {
-            entity1: {
-              id: 1,
-              createdTime: null,
-              updatedTime: null,
-              createdBy: null,
-              updatedBy: null,
-              fid: 0,
-              name: '选项1',
+    dataSource: () =>
+      new Promise((res) => {
+        setTimeout(() => {
+          res([
+            {
+              entity1: {
+                id: 1,
+                createdTime: null,
+                updatedTime: null,
+                createdBy: null,
+                updatedBy: null,
+                fid: 0,
+                name: '选项1',
+              },
             },
-          },
-          {
-            entity1: {
-              id: 2,
-              createdTime: null,
-              updatedTime: null,
-              createdBy: null,
-              updatedBy: null,
-              fid: 0,
-              name: '选项2',
+            {
+              entity1: {
+                id: 2,
+                createdTime: null,
+                updatedTime: null,
+                createdBy: null,
+                updatedBy: null,
+                fid: 0,
+                name: '选项2',
+              },
             },
-          },
-        ]);
-      }, 300);
-    }),
+          ]);
+        }, 300);
+      }),
     onDropdownVisibleChange(e) {
       console.log(1);
     },
@@ -109,15 +95,13 @@ export const 异步函数1 = {
         allowClear
         placeholder="请输入property1"
         key="component-61"
-        defaultOpen={false}
-      >
+        defaultOpen={false}>
         <SelectOption
           data-nodepath="rootview.0.0.0.0.1.0"
           ide-iscontainer="true"
           value
           label="是"
-          key="component-62"
-        >
+          key="component-62">
           <EmptySlot key="16" />
         </SelectOption>
         <SelectOption
@@ -125,8 +109,7 @@ export const 异步函数1 = {
           ide-iscontainer="true"
           value={false}
           label="否"
-          key="component-63"
-        >
+          key="component-63">
           <EmptySlot key="17" />
         </SelectOption>
       </Select>

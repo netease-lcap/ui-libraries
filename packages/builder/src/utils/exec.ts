@@ -11,7 +11,14 @@ import logger from './logger';
 export function execSync(...args: Array<string>) {
   const command = args.join(' ');
   logger.info('execute command: ', command);
-  return spawnSync(command, { shell: true, stdio: 'inherit' });
+  const result = spawnSync(command, { shell: true, stdio: 'inherit' });
+  if (result.status !== null && result.status > 0) {
+    logger.error('execute command error: ', command);
+    // 异常退出
+    process.exit(1);
+  }
+
+  return result;
 }
 
 /**

@@ -74,7 +74,6 @@ export function useHandleTransformOption(props) {
     ]),
     [dataSource],
   );
-
   const { tableProps, run } = useAntdTable(transformOption(dataSource), {
     onBefore: (params) => _.attempt(onBefore, params),
     onSuccess: (data, params) => _.attempt(onSuccess, data, params),
@@ -82,6 +81,7 @@ export function useHandleTransformOption(props) {
       { current, pageSize: pageSizeProps },
     ],
   });
+  React.useEffect(() => { run(); }, [transformOption]);
   const { dataSource: data, pagination: { pageSize } } = tableProps;
   const ref = _.assign(refProps, { reload: run, data, pageSize });
   const resultTableProps = _.isEqual(pagination, false) ? _.assign(tableProps, { pagination: false }) : tableProps;

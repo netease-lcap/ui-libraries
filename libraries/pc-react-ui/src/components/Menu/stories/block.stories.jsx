@@ -68,7 +68,7 @@ export const 折叠功能 = {
       <Menu mode="horizontal" defaultOpenKeys={['sub1', 'sub2']}>
         <MenuSubMenu key="sub1" title={<Text children="Navigation Four"> </Text>}>
           <MenuItem key="mail">
-            <Text> Navigation Four - LinkM</Text>
+            <Text children=" Navigation Four - LinkM" />
           </MenuItem>
         </MenuSubMenu>
         <MenuSubMenu title={<Text children="Navigation"> </Text>} key="sub2">

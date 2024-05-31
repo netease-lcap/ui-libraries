@@ -14,7 +14,7 @@ module.exports = {
     },
     {
       group: 'Container',
-      show: false,
+      show: true,
       name: 'iframe',
       alias: 'Iframe',
       vusion: true,

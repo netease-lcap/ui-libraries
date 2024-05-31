@@ -1,7 +1,6 @@
 /* eslint-disable no-continue */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-plusplus */
-import puppeteer from 'puppeteer';
 import fs from 'fs-extra';
 import glob from 'fast-glob';
 import path from 'path';
@@ -12,6 +11,8 @@ import logger from '../utils/logger';
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export default async (rootPath, port = 6006) => {
+  // eslint-disable-next-line global-require
+  const puppeteer = require('puppeteer');
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
@@ -21,7 +22,7 @@ export default async (rootPath, port = 6006) => {
     deviceScaleFactor: 2,
   });
 
-  const storyPaths = await glob([`${rootPath}/**/stories/block.stories.js`, `${rootPath}/**/stories/block.stories.jsx`, `${rootPath}/**/stories/block.stories.tsx`]);
+  const storyPaths = await glob(['**/stories/block.stories.js', '**/stories/block.stories.jsx', '**/stories/block.stories.tsx'], { cwd: rootPath, absolute: true });
 
   for (let i = 0; i < storyPaths.length; i++) {
     const content = fs.readFileSync(storyPaths[i], 'utf-8');
@@ -51,4 +52,6 @@ export default async (rootPath, port = 6006) => {
       await el.screenshot({ path: `${screenshotDir}/${j}.png` });
     }
   }
+
+  await browser.close();
 };

@@ -4,38 +4,26 @@ import { ComponentWrap } from 'virtual:lcap-theme-preview-wrap.js';
 import styles from './index.module.css';
 
 export default (stories) => {
+  if (window.THEME_INFO && window.THEME_INFO.components) {
+    stories = stories.map((c) => {
+      const tIndex = window.THEME_INFO.components.findIndex((tc) => tc.name.toLowerCase() === c.name.toLowerCase());
+      const it = window.THEME_INFO.components[tIndex];
+      return {
+        ...c,
+        title: it ? it.title : '',
+        group: it ? it.group : '',
+        orderIndex: tIndex,
+      };
+    }).filter((c) => c.orderIndex > -1).sort((a, b) => a.orderIndex - b.orderIndex);
+  }
   const ComponentPreview = ({ componentNames, onActive }) => {
     const [activeName, setActiveName] = useState('');
     const visibleStories = useMemo(() => {
       if (!componentNames || componentNames.length === 0) {
-        return stories.map((c) => {
-          if (window.THEME_INFO && window.THEME_INFO.components) {
-            const it = window.THEME_INFO.components.find((tc) => tc.name.toLowerCase() === c.name.toLowerCase());
-            return {
-              ...c,
-              title: it ? it.title : '',
-              group: it ? it.group : '',
-            };
-          }
-          return c;
-        }).sort((a, b) => {
-          const sortValueA = `${a.group || ''}-${a.name}`;
-          const sortValueb = `${b.group || ''}-${b.name}`;
-          return sortValueA.localeCompare(sortValueb);
-        });
+        return stories;
       }
 
-      return stories.filter((c) => componentNames.includes(c.name)).map((c) => {
-        if (window.THEME_INFO && window.THEME_INFO.components) {
-          const it = window.THEME_INFO.components.find((tc) => tc.name.toLowerCase() === c.name.toLowerCase());
-          return {
-            ...c,
-            title: it ? it.title : '',
-            group: it ? it.group : '',
-          };
-        }
-        return c;
-      });
+      return stories.filter((c) => componentNames.includes(c.name));
     }, [componentNames]);
 
     const handleClick = (name) => {

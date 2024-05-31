@@ -93,7 +93,12 @@ export const HocBaseComponents = React.forwardRef((myProps: any, ref) => {
     };
   }, [componentRef, baseRef]);
   return (
-    <ConfigProvider locale={zhCN}>
+    <ConfigProvider
+      locale={zhCN}
+      theme={{
+        cssVar: { prefix: 'cw', key: 'cw-nasl' },
+      }}
+    >
       <Component
         {...excludeProps}
         ref={baseRef}

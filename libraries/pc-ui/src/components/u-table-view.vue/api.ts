@@ -33,21 +33,23 @@ namespace nasl.ui {
       })
       order: UTableViewOptions<T, V, P, M>['sorting']['order'];
 
-      @Prop({
-          title: '单选选中值',
-      })
-      value: UTableViewOptions<T, V, P, M>['value'];
-
-      @Prop({
-          title: '多选选中值',
-      })
-      values: UTableViewOptions<T, V, P, M>['values'];
-
       @Method({
           title: 'undefined',
           description: '清除缓存，重新加载',
       })
       reload(): void {}
+
+      @Method({
+        title: '带页码刷新',
+        description: '保持页码，重新加载',
+      })
+      loadTo(
+        @Param({
+            title: '页数',
+            description: '要刷新的页数',
+        })
+        page?: nasl.core.Integer,
+      ): void {}
 
       @Method({
           title: 'undefined',
@@ -109,18 +111,6 @@ namespace nasl.ui {
           item?: object,
       ): void {}
       constructor(options?: Partial<UTableViewOptions<T, V, P, M>>) { super(); }
-
-      @Method({
-        title: '带页码刷新',
-        description: '保持页码，重新加载',
-      })
-      loadTo(
-        @Param({
-            title: '页数',
-            description: '要刷新的页数',
-        })
-        page?: nasl.core.Integer,
-      ): void {}
   }
 
   export class UTableViewOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
@@ -1340,7 +1330,6 @@ namespace nasl.ui {
           setter: {
               concept: 'PropertySelectSetter',
           },
-          disabledIf: _ => _.dataSource === null,
       })
       valueField: (item: T) => V;
 
@@ -1425,7 +1414,6 @@ namespace nasl.ui {
           setter: {
               concept: 'PropertySelectSetter',
           },
-          disabledIf: _ => _.dataSource === null,
       })
       valueField: (item: T) => V = ((item: any)  => item.value) as any;
 

@@ -38,8 +38,12 @@ export const 默认 = {
   render: (args) => {
     const [value, onChange] = React.useState(3);
     const ref = React.useRef();
+    const [data, setDataSource] = React.useState([]);
     React.useEffect(() => {
-      console.log(ref, 'ref');
+      setTimeout(() => {
+        setDataSource([null]);
+      }, 3000);
+      // console.log(ref, 'ref');
     }, []);
     return (
       <div>
@@ -50,7 +54,8 @@ export const 默认 = {
         >
           1234
         </button>
-        <Table {...args} ref={ref} value={value} onChange={onChange} />
+        {JSON.stringify(data)}
+        <Table dataSource={data} ref={ref} value={value} onChange={onChange} />
       </div>
     );
   },
@@ -72,7 +77,6 @@ export const 默认 = {
         age: Math.random(),
         address: '西湖区湖底公园1号',
       }));
-    
       return {
         list,
         // .map((item) => {
@@ -726,9 +730,9 @@ export const 同步33 = {
           recordCreatorProps={
             position !== 'hidden'
               ? {
-                  position,
-                  record: () => ({ id: (Math.random() * 1000000).toFixed(0) }),
-                }
+                position,
+                record: () => ({ id: (Math.random() * 1000000).toFixed(0) }),
+              }
               : false
           }
           loading={false}

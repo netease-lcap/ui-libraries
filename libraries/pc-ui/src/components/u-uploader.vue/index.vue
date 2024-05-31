@@ -14,7 +14,7 @@
     </div>
     <div v-else-if="listType !== 'card' && (!readonly || $env.VUE_APP_DESIGNER)" :class="$style.select" @click="select()"
         vusion-slot-name="default"
-        :vusion-empty-background="$env.VUE_APP_DESIGNER && !$slots.default ? 'add-any' : false" :preview="preview">
+        :vusion-empty-background="$env.VUE_APP_DESIGNER && !$slots.default ? 'add-any' : false" :preview="isPreview">
         <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="disabled" @click.stop @change="onChange">
         <slot></slot>
     </div>
@@ -37,12 +37,12 @@
                                 <i-ico :name="downloadIcon" icotype="only"></i-ico>
                             </a>
                         </span>
-                        <i-ico name="remove" :class="$style.remove" v-if="!readonly && !disabled && !preview && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
+                        <i-ico name="remove" :class="$style.remove" v-if="!readonly && !disabled && !isPreview && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
                     </div>
                       <div v-else>
                         <div :class="$style.thumb"><img :class="$style.img" v-if="listType === 'image'" :src="getUrl(item)"></div>
                         <a :class="$style.link" :href="encodeUrl(item.url)" target="_blank" download role="download">{{ item.name || item.url }}</a>
-                        <i-ico name="remove" v-if="!readonly && !disabled && !preview" :class="$style.remove" @click="remove(index)"></i-ico>
+                        <i-ico name="remove" v-if="!readonly && !disabled && !isPreview" :class="$style.remove" @click="remove(index)"></i-ico>
                     </div>
                     <u-linear-progress v-if="item.showProgress && !$env.VUE_APP_DESIGNER" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                 </template>
@@ -54,7 +54,7 @@
                 <div :class="$style.mask" :multiple="multiple || readonly" :show-progress="item.showProgress">
                     <u-linear-progress v-if="item.showProgress" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                     <div :class="$style.buttons">
-                        <span v-if="!readonly && !disabled && !preview" :class="$style.button" role="remove" @click.stop="remove(index)"></span>
+                        <span v-if="!readonly && !disabled && !isPreview" :class="$style.button" role="remove" @click.stop="remove(index)"></span>
                         <span :class="$style.button" role="preview" @click.stop="onPreview(item, index)"></span>
                         <a v-if="downLoadFilename" :class="$style.button" @click.stop :href="encodeUrl(item.url)" target="_blank" role="download" :download="downLoadFilename"></a>
                         <a v-else :class="$style.button" :href="encodeUrl(item.url)" @click.stop target="_blank" download role="download"></a>
@@ -73,7 +73,7 @@
                 </f-scroll-view>
             </div>
         </template>
-        <span v-show="$env.VUE_APP_DESIGNER && listType === 'text'" vusion-slot-name="file-list">
+        <span v-show="$env.VUE_APP_DESIGNER && listType === 'text' && !isPreview" vusion-slot-name="file-list">
             <slot name="file-list" ref="file-list"></slot>
         </span>
     </div>
@@ -89,6 +89,7 @@
         @uploadFiles="uploadCropperImg"
     >
     </cropper>
+    <u-preview v-if="isPreview && currentValue.length === 0"></u-preview>
 </div>
 </template>
 
@@ -98,6 +99,9 @@ import i18n from './i18n';
 import ajax from './ajax';
 import cropper from './cropper';
 import i18nMixin from '../../mixins/i18n';
+import FileImg from './assets/file.svg';
+import MPreview from '../u-text.vue/preview';
+import UPreview from '../u-text.vue/preview.vue';
 
 const SIZE_UNITS = {
     kB: 1024,
@@ -109,8 +113,8 @@ const SIZE_UNITS = {
 
 export default {
     name: 'u-uploader',
-    components: { cropper },
-    mixins: [MField, i18nMixin('u-uploader')],
+    components: { cropper, UPreview },
+    mixins: [MField, i18nMixin('u-uploader'), MPreview],
     // i18n,
     props: {
         value: [Array, String],
@@ -365,7 +369,10 @@ export default {
             return value.map((x) => (x.url || '')).join(',');
         },
         getUrl(item) {
-            return this.encodeUrl(item.thumb || item.url || item);
+          const IMAGE_REGEXP = /\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg)/i;
+          const url = this.encodeUrl(item.thumb || item.url || item)
+
+          return IMAGE_REGEXP.test(url) ? url : FileImg;
         },
         select() {
             if (this.readonly || this.disabled || this.sending || this.$env.VUE_APP_DESIGNER)
@@ -716,7 +723,7 @@ export default {
             const validFiles = [];
             const tasks = files.map(async (file) => {
                 if (!this.checkSize(file)) {
-                    const errorMessage = `文件${file.name} ${file.size}超出大小${this.maxSize}！`;
+                    const errorMessage = `${file.name}文件大小超过${this.maxSize}限制`;
                     this.$emit('size-exceed', {
                         maxSize: this.maxSize,
                         size: file.size,
@@ -852,6 +859,7 @@ export default {
   .img {
       max-width: 100%;
       max-height: 100%;
+      vertical-align: middle;
   }
 
   .list {

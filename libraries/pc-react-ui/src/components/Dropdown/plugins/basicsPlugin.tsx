@@ -30,25 +30,36 @@ export function useHandleDataSource(props) {
 
 export function useMergeMenu(props) {
   const { useNavigate } = React.useContext(RouterContext);
-  const navigate = useNavigate?.();
   const fragment = props.get('menuItem');
   const menuItem = React.Children.toArray(_.get(fragment, 'props.children', []));
   const handleLink = useHandleLink();
-  const ItemsProps = _.filter(menuItem, (item) => React.isValidElement(item) && item.type === MenuItem)?.map((item) => {
-    // eslint-disable-next-line no-unsafe-optional-chaining
-    const { icon } = item?.props;
-    const onClickPorps = item.props?.onClick;
-
-    return {
-      key: item.props.destination ?? item.props.path,
-      ..._.omit(item.props, 'children'),
-      ..._.isNil(icon) ? {} : { icon: <Icon name={icon} /> },
-      onClick: _.wrap(onClickPorps, (fn, arg) => {
-        _.attempt(fn, arg);
-        handleLink(arg.key, item.props?.target);
-      }),
-    };
-  });
+  function childToJson(children) {
+    return React.Children.map(children, (child) => {
+      if (child?.type === MenuItem) {
+        const selfChildren = _.isNil(child.props.children) ? {} : { children: childToJson(child.props.children) };
+        const childrenProps = _.isEmpty(selfChildren.children) ? {} : selfChildren;
+        const onClickPorps = child.props.onClick;
+        const icon = _.isNil(child.props.icon) ? {} : { icon: <Icon name={child.props.icon} /> };
+        const label = child.props.labelIsSlot ? child.props.labelSlot : child.props.label;
+        return {
+          key: child.props?.destination ?? child.props?.path,
+          ...child.props,
+          ...childrenProps,
+          ...icon,
+          label,
+          onClick: _.wrap(onClickPorps, (fn, arg) => {
+            if (_.isFunction(fn)) {
+              _.attempt(fn, arg);
+              return;
+            }
+            handleLink(arg.key, child.props?.target);
+          }),
+        };
+      }
+      return undefined;
+    }).filter(Boolean);
+  }
+  const ItemsProps = childToJson(menuItem);
   const menu = props.get('menu');
   const items = props.get('items', ItemsProps);
   return {
