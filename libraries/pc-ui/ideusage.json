@@ -3,13 +3,14 @@
         "name": "ULinearLayout",
         "ideusage": {
             "idetype": "container",
-            "containerDirection": "this.getAttribute('direction')?.value === 'vertical' ? 'column' : 'row' "
+            "containerDirection": "this.getAttribute('direction')?.value === 'vertical' ? 'column' : 'row' ",
+            "expandWhenHesitate": true
         }
     },
     {
         "name": "UAbsoluteLayout",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "board"
         }
     },
     {
