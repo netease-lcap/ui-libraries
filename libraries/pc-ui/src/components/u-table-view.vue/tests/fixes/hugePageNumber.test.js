@@ -6,13 +6,13 @@ import {
 } from 'vitest';
 import { mount } from '@vue/test-utils';
 
-import PageNumberDemo from './__demos__/pageNumber.vue';
+import HugePageNumberDemo from './__demos__/hugePageNumber.vue';
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 describe('u-table-view.vue', () => {
   it('pageNumber 变化', async () => {
-    const wrapper = mount(PageNumberDemo);
+    const wrapper = mount(HugePageNumberDemo);
     await sleep(16);
 
     // 点击到第二页
@@ -22,19 +22,12 @@ describe('u-table-view.vue', () => {
     expect(selectedPage.text()).toBe('2');
     expect(wrapper.html()).toMatchSnapshot();
 
-    // 数据源变化时还原到第一页
-    const button = wrapper.find('#changelistbutton');
-    await button.trigger('click');
-    await sleep(16);
-    const selectedPage1 = wrapper.find('a[selected="selected"]');
-    expect(selectedPage1.text()).toBe('1');
-    expect(wrapper.html()).toMatchSnapshot();
-
     // 改变pageNumber
-    wrapper.vm.pageNumber = 3;
+    wrapper.vm.pageNumber = 10000;
     await sleep(16);
     const selectedPage2 = wrapper.find('a[selected="selected"]');
-    expect(selectedPage2.text()).toBe('3');
+    expect(selectedPage2.exists()).toBe(true);
+    expect(selectedPage2.text()).toBe('10000');
     expect(wrapper.html()).toMatchSnapshot();
   });
 });
