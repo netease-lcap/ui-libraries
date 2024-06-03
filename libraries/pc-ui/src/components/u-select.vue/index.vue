@@ -317,6 +317,7 @@ export default {
         multipleAppearance: { type: String, default: 'tags' },
         tagsOverflow: { type: String, default: 'collapse' },
         autoSelect: { type: Boolean, default: false },
+        emptyValueIsNull:{ type: Boolean, default: true},
         placeholder: { type: String, default: '请选择' },
         clearable: { type: Boolean, default: false },
         filterable: { type: Boolean, default: false },
@@ -958,9 +959,9 @@ export default {
         this.selectedVM = undefined;
         this.filterText = '';
         this.fastLoad();
-        this.$emit('input', value, this);
-        this.$emit('update:value', value, this);
-        this.$emit('clear', { oldValue, value }, this);
+        this.$emit('input', this.handleEmptyValue(value), this);
+        this.$emit('update:value', this.handleEmptyValue( value ), this);
+        this.$emit('clear', { oldValue, value:this.handleEmptyValue( value ) }, this);
       }
       this.focus();
       this.close();
@@ -1135,6 +1136,13 @@ export default {
        */
       this.loadMoreNoopTimer = setTimeout(() => this.loadMoreNoopOnOpen(), 50);
     },
+    handleEmptyValue(value) {
+      if (!this.emptyValueIsNull) {
+        return value;
+      } else {
+        return value ? value : null;
+      }
+    }
   },
 };
 </script>
