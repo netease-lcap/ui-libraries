@@ -1,6 +1,6 @@
 <template>
 <div
-  :class="$style.root"
+  :class="[$style.root, { [$style.colon]: colon }]"
   @submit.prevent
   :layout="layoutValue"
   :repeat="repeat"
@@ -25,6 +25,7 @@ export default {
     props: {
         model: Object,
         rules: Object,
+        colon: { type: Boolean, default: false },
         layout: { type: String, default: 'block' },
         size: { type: String, default: 'normal' },
         labelSize: { type: String, default: 'normal' },
@@ -291,5 +292,11 @@ export default {
 .root[label-layout="block"][layout="inline"] .item,
 .root[label-layout="block"][layout="inline"] .item[label-layout="block"]{
     display: inline-flex;
+}
+
+.root.colon .item .item_label .item_text:not(:empty)::after {
+  content: ':';
+  margin-left: 2px;
+  margin-block: 0;
 }
 </style>
