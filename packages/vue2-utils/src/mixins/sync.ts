@@ -14,7 +14,7 @@ function createWatch(name: string): WatchOptionsWithHandler<any> {
         return;
       }
 
-      this.$emit(`sync:${name}`, val);
+      this.$emit('sync:state', name, val);
     },
     immediate: true,
   };
@@ -81,7 +81,7 @@ export default (...options: SyncOption[]) => {
           }
 
           const { stateKey } = syncMap[name];
-          this.$emit(`sync:${name}`, this[stateKey]);
+          this.$emit('sync:state', name, this[stateKey]);
         });
       },
       $emitSyncParams(params: { [key: string]: any }) {
@@ -90,7 +90,7 @@ export default (...options: SyncOption[]) => {
         }
 
         const filterKeys = ['size', 'page', 'sort', 'order', 'filterText'];
-        Object.keys(params).forEach((key) => filterKeys.includes(key) && this.$emit(`sync:${key}`, params[key]));
+        Object.keys(params).forEach((key) => filterKeys.includes(key) && this.$emit('sync:state', key, params[key]));
       },
     },
     watch: {
