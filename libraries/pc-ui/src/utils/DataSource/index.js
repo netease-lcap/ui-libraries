@@ -424,6 +424,8 @@ const VueDataSource = Vue.extend({
         return true;
       });
       if (!uniqData.length) return;
+
+      if (!this._load || typeof this._load !== 'function') return;
       this._load({ filterValue, paging: {} }).then((result) => {
         let partialData = [];
         if (result instanceof Array) {
