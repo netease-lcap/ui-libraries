@@ -1045,7 +1045,7 @@ exports[`u-list-view.vue > Demo-前端分页，数据源改变后分页问题 1`
         <div class="root" index="2" vusion-slot-name="item">
           C#1
         </div>
-        <div class="root" index="3" vusion-slot-name="item">
+        <div class="root" index="3" selected="selected" vusion-slot-name="item">
           C++1
         </div>
         <div class="root" index="4" vusion-slot-name="item">
