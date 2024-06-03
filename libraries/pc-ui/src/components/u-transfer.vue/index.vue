@@ -129,7 +129,7 @@ export default {
           return '';
         }
 
-        return this.target.map((item) => this.$at(item, this.textField)).join('，') || '--';
+        return (this.target || []).map((item) => this.$at(item, this.textField)).join('，') || '--';
       }
     },
     methods: {
