@@ -33,16 +33,6 @@ namespace nasl.ui {
       })
       order: UTableViewOptions<T, V, P, M>['sorting']['order'];
 
-      @Prop({
-          title: '单选选中值',
-      })
-      value: UTableViewOptions<T, V, P, M>['value'];
-
-      @Prop({
-          title: '多选选中值',
-      })
-      values: UTableViewOptions<T, V, P, M>['values'];
-
       @Method({
           title: 'undefined',
           description: '清除缓存，重新加载',

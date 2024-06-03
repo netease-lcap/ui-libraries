@@ -1,7 +1,7 @@
 {
   "name": "cloud-ui.vusion",
   "description": "Lcap Cloud UI",
-  "version": "0.22.0",
+  "version": "0.22.1",
   "author": "NetEase CodeWave FE Team",
   "contributors": [
     "haoxutong <1255965516@qq.com>",
@@ -104,6 +104,7 @@
     "dev": "npm run storybook",
     "storybook": "storybook dev -p 6006",
     "build": "lcap-scripts build",
+    "deploy": "lcap-scripts deploy",
     "deploy:dev": "lcap-scripts deploy --platform http://defaulttenant.lcap.codewave-dev.163yun.com/",
     "deploy:test": "lcap-scripts deploy --platform http://defaulttenant.lcap.codewave-test.163yun.com/",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
