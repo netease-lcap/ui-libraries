@@ -474,7 +474,7 @@ export default {
     },
     async selectedDataQueue(value) {
       const valueList = Array.isArray(this.value) ? this.value : [this.value];
-      const mapDataValue = this.currentData.reduce((acc, item) => {
+      const mapDataValue = this.currentData?.reduce((acc, item) => {
         acc[item?.value] = item;
         return acc;
       }, {});
