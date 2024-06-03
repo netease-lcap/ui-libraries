@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Form"
   })
   export class VanSearch extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: VanSearchOptions['value'];
+
     constructor(options?: Partial<VanSearchOptions>) {
       super();
     }

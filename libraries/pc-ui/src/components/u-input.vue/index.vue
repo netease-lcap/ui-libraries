@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import MField from '../m-field.vue';
 import { focus } from '../../directives';
 import { isIE } from '../../utils/dom';
@@ -60,7 +61,13 @@ export default {
         UPreview
     },
     directives: { focus },
-    mixins: [MField, MPreview],
+    mixins: [
+      MField,
+      MPreview,
+      sync({
+        value: 'currentValue',
+      }),
+    ],
     props: {
         value: [String, Number],
         color: String,
@@ -73,8 +80,8 @@ export default {
         password: { type: Boolean, default: false },
         type: { type: String, default: 'text' },
         maxlengthMessage: String,
-        prefix: String,
-        suffix: String,
+        prefix: { type: [String, Boolean] },
+        suffix: { type: [String, Boolean] },
         autoSize: {
             type: String,
             validator: (value) =>

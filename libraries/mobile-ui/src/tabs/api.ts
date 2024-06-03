@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Selector"
   })
   export class VanTabs extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: VanTabsOptions['value'];
+
     constructor(options?: Partial<VanTabsOptions>) {
       super();
     }

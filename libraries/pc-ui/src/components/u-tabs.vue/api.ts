@@ -8,7 +8,10 @@ namespace nasl.ui {
         group: 'Selector'
     })
     export class UTabs<T, V> extends ViewComponent {
-
+        @Prop({
+          title: '值',
+        })
+        value: V;
 
         @Method({
             title: 'undefined',

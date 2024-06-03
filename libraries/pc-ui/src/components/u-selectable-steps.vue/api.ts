@@ -8,7 +8,32 @@ namespace nasl.ui {
         group: 'Selector'
     })
     export class USelectableSteps<T> extends ViewComponent {
+        @Prop({
+          title: '当前步骤'
+        })
+        value: USelectableStepsOptions<T>['value'];
 
+        @Prop({
+          title: '第一步'
+        })
+        isFirst: nasl.core.Boolean;
+
+        @Prop({
+          title: '最后一步'
+        })
+        isLast: nasl.core.Boolean;
+
+        @Method({
+          title: '上一步',
+          description: '上一步'
+        })
+        prev(): void {}
+
+        @Method({
+          title: '下一步',
+          description: '下一步'
+        })
+        next(): void {}
 
         @Method({
             title: 'undefined',

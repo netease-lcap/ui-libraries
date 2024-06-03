@@ -106,4 +106,6 @@ Dialog.Component = VanDialog;
 
 Vue.prototype.$dialog = Dialog;
 
+Vue.prototype.$confirm = Dialog.confirm;
+
 export default Dialog;

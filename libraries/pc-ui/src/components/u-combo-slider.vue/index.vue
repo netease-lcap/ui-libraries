@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import MField from '../m-field.vue';
 import SEmpty from '../s-empty.vue';
 import UPreview from '../u-text.vue';
@@ -47,7 +48,13 @@ import { NumberFormatter } from '../../utils/Formatters';
 export default {
     name: 'u-combo-slider',
     components: { SEmpty },
-    mixins: [MField, MPreview],
+    mixins: [
+      MField,
+      MPreview,
+      sync({
+        value: 'currentValue',
+      })
+    ],
     components: {
       UPreview,
     },

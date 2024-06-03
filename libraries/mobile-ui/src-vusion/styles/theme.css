@@ -57,7 +57,6 @@
   --van-padding-lg: calc(var(--van-padding-base) * 6);
   --van-padding-xl: calc(var(--van-padding-base) * 8);
 
-  /* @component van-linear-layout */
   --van-space-base: var(
     --van-space-baset
   ); /* @desc 布局内各元素之间的外间距, 如：1px */ /* @prefix van */

@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Navigation"
   })
   export class VanSidebar extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: VanSidebarOptions['value'];
+
     constructor(options?: Partial<VanSidebarOptions>) {
       super();
     }

@@ -11,6 +11,21 @@ namespace nasl.ui {
     constructor(options?: Partial<VanDatetimePickerOptions>) {
       super();
     }
+    @Prop({
+      title: '值',
+    })
+    value: VanDatetimePickerOptions['value'];
+
+    @Prop({
+      title: '起始值',
+    })
+    startValue: VanDatetimePickerOptions['startValue'];
+
+    @Prop({
+      title: '结束值',
+    })
+    endValue: VanDatetimePickerOptions['endValue'];
+
     @Method({
       title: 'undefined',
       description: '打开'

@@ -8,7 +8,10 @@ namespace nasl.ui {
         group: 'Form'
     })
     export class UInput extends ViewComponent {
-
+        @Prop({
+          title: '输入值',
+        })
+        value: UInputOptions['value'];
 
         @Method({
             title: 'undefined',

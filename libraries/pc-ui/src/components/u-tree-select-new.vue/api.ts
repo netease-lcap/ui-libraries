@@ -11,7 +11,7 @@ namespace nasl.ui {
       @Prop({
           title: '数据',
       })
-      data: UTreeSelectNewOptions<T, V, M>['dataSource'];
+      data: nasl.collection.List<T>;
 
       @Prop({
           title: '选中值',
@@ -96,7 +96,7 @@ namespace nasl.ui {
               concept: 'PropertySelectSetter',
           }
       })
-      expandedField: (item: T) => nasl.collection.List<any> = ((item: any)  => item.expanded) as any;
+      expandedField: (item: T) => nasl.core.Boolean = ((item: any)  => item.expanded) as any;
 
       @Prop({
           group: '数据属性',

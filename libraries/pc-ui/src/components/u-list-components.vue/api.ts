@@ -11,7 +11,7 @@ namespace nasl.ui {
         @Prop({
             title: '数据',
         })
-        data: UListComponentsOptions<T>['dataSource'];
+        data: nasl.collection.List<T>;
 
         constructor(options?: Partial<UListComponentsOptions<T>>) { super(); }
     }

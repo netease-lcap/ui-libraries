@@ -20,7 +20,7 @@ namespace nasl.ui {
     @Prop({
       title: '数据',
     })
-    data: VanRadioGroupOptions<T, V>['dataSource'];
+    data: nasl.collection.List<T>;
   }
   export class VanRadioGroupOptions<T, V> extends ViewComponentOptions {
     @Prop({

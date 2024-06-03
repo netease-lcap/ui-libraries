@@ -266,6 +266,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { UListView } from '../u-list-view.vue';
 import { ellipsisTitle } from '../../directives';
 import i18n from './i18n';
@@ -276,70 +277,79 @@ import AllCheck from './allCheck.vue';
 import i18nMixin from '../../mixins/i18n';
 
 export default {
-  name: 'u-select',
-  component: {
-    'u-select-item-all-check': AllCheck,
-  },
-  childName: 'u-select-item',
-  groupName: 'u-select-group',
-  isSelect: true,
-  directives: { ellipsisTitle },
-  extends: UListView,
-  // i18n,
-  mixins: [i18nMixin('u-select'), MPreview],
-  props: {
-    // @inherit: value: { type: String, default: '' },
-    // @inherit: value: Array,
-    // @inherit: field: String,
-    // @inherit: textField: { type: String, default: 'text' },
-    // @inherit: valueField: { type: String, default: 'value' },
-    // @inherit: data: Array,
-    // @inherit: dataSource: [DataSource, Function, Object],
-    // @inherit: cancelable: { type: Boolean, default: false },
-    // @inherit: multiple: { type: Boolean, default: false },
-    // @inherit: keepOrder: { type: Boolean, default: false },
-    autofocus: { type: Boolean, default: false },
-    duplicated: { type: Boolean, default: false },
-    multipleAppearance: { type: String, default: 'tags' },
-    tagsOverflow: { type: String, default: 'collapse' },
-    autoSelect: { type: Boolean, default: false },
-    placeholder: { type: String, default: '请选择' },
-    clearable: { type: Boolean, default: false },
-    filterable: { type: Boolean, default: false },
-    preview: { type: Boolean, default: false },
-    matchMethod: { type: [String, Function], default: 'includes' },
-    caseSensitive: { type: Boolean, default: false }, // @inherit: loadingText: { type: String, default: '加载中...' },
-    placement: {
-      type: String,
-      validator: (value) =>
-        /^(top|bottom|left|right)(-start|-end)?$/.test(value),
+    name: 'u-select',
+    component: {
+        'u-select-item-all-check': AllCheck,
     },
-    emptyText: {
-      type: String,
-      default() {
-        return this.$tt('empty');
-      },
-    },
-    emptyDisabled: { type: Boolean, default: false }, // @inherit: initialLoad: { type: Boolean, default: true },
-    // @inherit: pageable: { type: Boolean, default: false },
-    // @inherit: pageSize: { type: Number, default: 50 },
-    // @inherit: remotePaging: { type: Boolean, default: false },
-    remoteFiltering: { type: Boolean, default: false },
-    autoComplete: { type: Boolean, default: false },
-    opened: { type: Boolean, default: false },
-    prefix: String,
-    suffix: String,
-    label: { type: String, default: '' },
-    ellipsisDirection: { type: String, default: 'ltr' },
-    appendTo: {
-      type: String,
-      default: 'reference',
-      validator: (value) => ['body', 'reference'].includes(value),
-    },
-    color: String,
-    popperWidth: { type: String, default: '' },
-    showEmptyText: { type: Boolean, default: true }, // 控制是否展示emptyText
-    descriptionField: String,
+    childName: 'u-select-item',
+    groupName: 'u-select-group',
+    isSelect: true,
+    directives: { ellipsisTitle },
+    extends: UListView,
+    // i18n,
+    mixins: [
+      i18nMixin('u-select'),
+      MPreview,
+      sync({
+        opened: 'popperOpened',
+        value() {
+          if (this.currentMultiple) {
+            return this.selectedVMs.map((itemVM) => itemVM.value);
+          }
+
+          return this.selectedVM ? this.selectedVM.value : undefined;
+        },
+      })
+    ],
+    props: {
+        // @inherit: value: { type: String, default: '' },
+        // @inherit: value: Array,
+        // @inherit: field: String,
+        // @inherit: textField: { type: String, default: 'text' },
+        // @inherit: valueField: { type: String, default: 'value' },
+        // @inherit: data: Array,
+        // @inherit: dataSource: [DataSource, Function, Object],
+        // @inherit: cancelable: { type: Boolean, default: false },
+        // @inherit: multiple: { type: Boolean, default: false },
+        // @inherit: keepOrder: { type: Boolean, default: false },
+        autofocus: { type: Boolean, default: false },
+        duplicated: { type: Boolean, default: false },
+        multipleAppearance: { type: String, default: 'tags' },
+        tagsOverflow: { type: String, default: 'collapse' },
+        autoSelect: { type: Boolean, default: false },
+        placeholder: { type: String, default: '请选择' },
+        clearable: { type: Boolean, default: false },
+        filterable: { type: Boolean, default: false },
+        preview: { type: Boolean, default: false },
+        matchMethod: { type: [String, Function], default: 'includes' },
+        caseSensitive: { type: Boolean, default: false }, // @inherit: loadingText: { type: String, default: '加载中...' },
+        placement: { type: String, validator: (value) => /^(top|bottom|left|right)(-start|-end)?$/.test(value) },
+        emptyText: {
+            type: String,
+            default() {
+                return this.$tt('empty');
+            },
+        },
+        emptyDisabled: { type: Boolean, default: false }, // @inherit: initialLoad: { type: Boolean, default: true },
+        // @inherit: pageable: { type: Boolean, default: false },
+        // @inherit: pageSize: { type: Number, default: 50 },
+        // @inherit: remotePaging: { type: Boolean, default: false },
+        remoteFiltering: { type: Boolean, default: false },
+        autoComplete: { type: Boolean, default: false },
+        opened: { type: Boolean, default: false },
+        prefix: String,
+        suffix: String,
+        label: { type: String, default: '' },
+        ellipsisDirection: { type: String, default: 'ltr' },
+        appendTo: {
+            type: String,
+            default: 'reference',
+            validator: (value) => ['body', 'reference'].includes(value),
+        },
+        color: String,
+        popperWidth: { type: String, default: '' },
+        showEmptyText: { type: Boolean, default: true }, // 控制是否展示emptyText
+        descriptionField: String,
 
     // 新增用来分页
     pagination: { type: Boolean, default: undefined },
@@ -649,15 +659,21 @@ export default {
           options.remoteSorting = false;
         }
 
-        return new Constructor(options);
-      } else if (dataSource instanceof Function) {
-        options.load = function load(params, extraParams) {
-          const result = dataSource(params, extraParams);
-          if (result instanceof Promise)
-            return result.catch(() => (this.currentLoading = false));
-          else if (result instanceof Array) return Promise.resolve(result);
-          else return Promise.resolve(result);
-        };
+                return new Constructor(options);
+            } else if (dataSource instanceof Function) {
+                const self = this;
+                options.load = function load(params, extraParams) {
+                    self.$emitSyncParams(params);
+                    const result = dataSource(params, extraParams);
+                    if (result instanceof Promise)
+                        return result.catch(
+                            () => (this.currentLoading = false),
+                        );
+                    else if (result instanceof Array)
+                        return Promise.resolve(result);
+                    else
+                        return Promise.resolve(result);
+                };
 
         // 使用了新的分页, 函数类型先当做是后端数据
         if (isNew) {

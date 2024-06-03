@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { MChild } from '../m-parent.vue';
 import MField from '../m-field.vue';
 import SEmpty from '../s-empty.vue';
@@ -26,7 +27,14 @@ export default {
     components: {
         SEmpty,
     },
-    mixins: [MChild, MField, MPreview],
+    mixins: [
+      MChild,
+      MField,
+      MPreview,
+      sync({
+        value: 'currentValue',
+      }),
+    ],
     props: {
         value: { type: [String, Boolean, null], default: false },
         label: null,
@@ -62,7 +70,7 @@ export default {
 
             return 'false';
         },
-        showTitle() { 
+        showTitle() {
             return this.isPreview ? this.status === 'true' : true;
         }
     },

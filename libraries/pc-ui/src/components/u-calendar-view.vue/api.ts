@@ -8,7 +8,10 @@ namespace nasl.ui {
         group: "Table"
     })
     export class UCalendarView<T, M extends nasl.core.Boolean> extends ViewComponent {
-
+        @Prop({
+          title: '日历选择值',
+        })
+        value: UCalendarViewOptions<T, M>['value'];
 
         @Method({
             title: 'undefined',

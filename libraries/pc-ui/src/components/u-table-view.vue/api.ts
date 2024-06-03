@@ -11,7 +11,12 @@ namespace nasl.ui {
       @Prop({
           title: '数据',
       })
-      data: UTableViewOptions<T, V, P, M>['dataSource'];
+      data: nasl.collection.List<T>;
+
+      @Prop({
+          title: '数据量',
+      })
+      total: nasl.core.Integer;
 
       @Prop({
           title: '分页大小',
@@ -32,6 +37,16 @@ namespace nasl.ui {
           title: '排序属性',
       })
       order: UTableViewOptions<T, V, P, M>['sorting']['order'];
+
+      @Prop({
+          title: '单选值',
+      })
+      value: V;
+
+      @Prop({
+          title: '多选值',
+      })
+      values: nasl.collection.List<V>;
 
       @Method({
           title: 'undefined',
