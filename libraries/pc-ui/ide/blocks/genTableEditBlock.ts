@@ -1,3 +1,4 @@
+import * as naslTypes from '@nasl/ast-mini';
 import {
   filterProperty,
   firstLowerCase,
@@ -5,13 +6,14 @@ import {
   genUniqueQueryNameGroup,
   getEntityPromaryKeyProperty,
   transEntityMetadataTypes,
+  NameGroup,
 } from './utils';
 import {
   genQueryLogic, genTextTemplate, genColumnMeta,
   genFilterTemplate, genSaveModalTemplate,
 } from './genCommonBlock';
 
-function genBlurFunction(property, nameGroup) {
+function genBlurFunction(property: naslTypes.EntityProperty, nameGroup: NameGroup) {
   const { entityExpression, currentName } = genColumnMeta(property, nameGroup);
   const { entity } = property;
   return `function ${nameGroup.viewLogicBlurUpdate}(event) {
@@ -20,7 +22,7 @@ function genBlurFunction(property, nameGroup) {
   }`;
 }
 
-function genEditComponent(entity, property, nameGroup, selectNameGroupMap) {
+function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityProperty, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>) {
   if (property.readonly) {
     return '';
   }
@@ -42,7 +44,7 @@ function genEditComponent(entity, property, nameGroup, selectNameGroupMap) {
         display="appear"
         rules={[${rules.join(',')}]}
         onBlurValid={
-          ${genBlurFunction(entity, property, nameGroup)}
+          ${genBlurFunction(property, nameGroup)}
         }
         style="width:100%">`;
   }
@@ -215,7 +217,7 @@ function genEditComponent(entity, property, nameGroup, selectNameGroupMap) {
   }`;
 }
 
-function genTableEditColumnTemplate(entity, property, nameGroup, selectNameGroupMap) {
+function genTableEditColumnTemplate(entity: naslTypes.Entity, property: naslTypes.EntityProperty, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>) {
   const canEditable = (property1) => !property1.readonly;
   const title = property.label || property.name;
   return `<UTableViewColumn
@@ -238,7 +240,7 @@ function genTableEditColumnTemplate(entity, property, nameGroup, selectNameGroup
   </UTableViewColumn>`;
 }
 
-export function genEditTableTemplate(entity, nameGroup, selectNameGroupMap) {
+export function genEditTableTemplate(entity: naslTypes.Entity, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>) {
   const namespace = entity.getNamespace();
   const entityName = entity.name;
   const currentName = nameGroup.currentName || 'current';
@@ -292,7 +294,7 @@ export function genEditTableTemplate(entity, nameGroup, selectNameGroupMap) {
   </UTableView>`;
 }
 
-export function genTableEditBlock(entity, refElement) {
+export function genTableEditBlock(entity: naslTypes.Entity, refElement: naslTypes.ViewElement) {
   const likeComponent = refElement?.likeComponent;
   const dataSource = entity.parentNode;
   const module = dataSource.app;
@@ -318,10 +320,10 @@ export function genTableEditBlock(entity, refElement) {
   nameGroup.viewVariableFilter = likeComponent.getVariableUniqueName('filter');
 
   // 收集所有和本实体关联的实体
-  const entitySet = new Set();
+  const entitySet: Set<naslTypes.Entity> = new Set();
   entitySet.add(entity);
   const selectNameGroupMap = new Map();
-  const newLogics = [];
+  const newLogics: Array<string> = [];
   entity.properties.forEach((property) => {
     if (property.relationEntity) {
       // 有外键关联
@@ -336,14 +338,14 @@ export function genTableEditBlock(entity, refElement) {
           // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
           const key = [property.name, relationEntity.name].join('-');
           selectNameGroupMap.set(key, selectNameGroup);
-          const newLogic = genQueryLogic([relationEntity], selectNameGroup, false, false, module);
+          const newLogic = genQueryLogic([relationEntity], selectNameGroup, false, false);
           newLogics.push(newLogic);
         }
       }
     }
   });
   const allEntities = [...entitySet];
-  const entityLogic = genQueryLogic(allEntities, nameGroup, true, true, module);
+  const entityLogic = genQueryLogic(allEntities, nameGroup, true, true);
   newLogics.push(entityLogic);
 
   return `export function view() {

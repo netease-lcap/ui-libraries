@@ -37,6 +37,7 @@
   "dependencies": {
     "@joskii/jflow-core": "^0.1.22",
     "@joskii/jflow-vue2-plugin": "^0.1.1",
+    "@nasl/ast-mini": "3.9.0-beta",
     "@popperjs/core": "^2.10.2",
     "@vusion/utils": "0.4.11",
     "@vusion/validator": "0.4.15-beta.1",

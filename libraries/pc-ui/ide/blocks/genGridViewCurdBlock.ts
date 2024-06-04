@@ -1,12 +1,14 @@
+import * as naslTypes from '@nasl/ast-mini';
 import {
   firstLowerCase,
   getFirstDisplayedProperty,
   genUniqueQueryNameGroup,
+  NameGroup,
 } from './utils';
 import { genQueryLogic, genFilterTemplate, genSaveModalTemplate } from './genCommonBlock';
 import { genGridViewTemplate } from './genGridViewBlock';
 
-export function genGridViewCurdBlock(entity, refElement) {
+export function genGridViewCurdBlock(entity: naslTypes.Entity, refElement: naslTypes.ViewElement) {
   const likeComponent = refElement?.likeComponent;
   const dataSource = entity.parentNode;
   const module = dataSource.app;
@@ -33,10 +35,10 @@ export function genGridViewCurdBlock(entity, refElement) {
   nameGroup.viewVariableIsUpdate = likeComponent.getVariableUniqueName('isUpdate');
 
   // 收集所有和本实体关联的实体
-  const entitySet = new Set();
+  const entitySet: Set<naslTypes.Entity> = new Set();
   entitySet.add(entity);
   const selectNameGroupMap = new Map();
-  const newLogics = [];
+  const newLogics: Array<string> = [];
   entity.properties.forEach((property) => {
     if (property.relationEntity) {
       // 有外键关联
@@ -51,14 +53,14 @@ export function genGridViewCurdBlock(entity, refElement) {
           // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
           const key = [property.name, relationEntity.name].join('-');
           selectNameGroupMap.set(key, selectNameGroup);
-          const newLogic = genQueryLogic([relationEntity], selectNameGroup, false, false, module);
+          const newLogic = genQueryLogic([relationEntity], selectNameGroup, false, false);
           newLogics.push(newLogic);
         }
       }
     }
   });
   const allEntities = [...entitySet];
-  const entityLogic = genQueryLogic(allEntities, nameGroup, false, true, module);
+  const entityLogic = genQueryLogic(allEntities, nameGroup, false, true);
   newLogics.push(entityLogic);
 
   return `export function view() {

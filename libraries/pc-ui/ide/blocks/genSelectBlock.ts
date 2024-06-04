@@ -1,12 +1,14 @@
+import * as naslTypes from '@nasl/ast-mini';
 import {
   firstLowerCase,
   getFirstDisplayedProperty,
   genUniqueQueryNameGroup,
   getEntityPromaryKeyProperty,
+  NameGroup,
 } from './utils';
 import { genQueryLogic } from './genCommonBlock';
 
-function genSelectTemplate(entity, nameGroup) {
+function genSelectTemplate(entity: naslTypes.Entity, nameGroup: NameGroup) {
   const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.page, elements.$ce.size)`;
   const property = getFirstDisplayedProperty(entity);
   return `<USelect
@@ -20,7 +22,7 @@ function genSelectTemplate(entity, nameGroup) {
     </USelect>`;
 }
 
-export function genSelectBlock(entity, refElement) {
+export function genSelectBlock(entity: naslTypes.Entity, refElement: naslTypes.ViewElement) {
   const likeComponent = refElement?.likeComponent;
   const dataSource = entity.parentNode;
   const module = dataSource.app;
@@ -36,6 +38,6 @@ export function genSelectBlock(entity, refElement) {
     return ${genSelectTemplate(entity, nameGroup)}
   }
         export namespace app.logics {
-            ${genQueryLogic(allEntities, nameGroup, false, false, module)}
+            ${genQueryLogic(allEntities, nameGroup, false, false)}
         }`;
 }

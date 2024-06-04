@@ -1,67 +1,51 @@
+import * as naslTypes from '@nasl/ast-mini';
 import {
   filterProperty,
   firstLowerCase,
   getFirstDisplayedProperty,
   genUniqueQueryNameGroup,
   getEntityPromaryKeyProperty,
+  NameGroup,
 } from './utils';
 import { genQueryLogic, genTextTemplate, genColumnMeta } from './genCommonBlock';
 
-function genTableColumnTemplate(property, nameGroup) {
-  const { lowerEntityName, title } = genColumnMeta(property, nameGroup);
-  return `<UTableViewColumn
-    field="${lowerEntityName}.${property.name}"
-    slotTitle={
-        <UText text="${title}"></UText>
-    }
-    slotCell={
-        (current) => <ULinearLayout gap="small">
-            ${genTextTemplate(property, nameGroup)}
-        </ULinearLayout>
-    }
-    slotExpander={
-        (current) => <UTableViewExpander
-            item={current.item}>
-        </UTableViewExpander>
-    }>
-  </UTableViewColumn>`;
+function genGridViewCardTemplate(property: naslTypes.EntityProperty, nameGroup: NameGroup) {
+  const { title } = genColumnMeta(property, nameGroup);
+
+  return `<ULinearLayout gap="small">
+    <UText text="${title}"></UText>
+    ${genTextTemplate(property, nameGroup)}
+  </ULinearLayout> `;
 }
 
-export function genTableTemplate(entity, nameGroup, options = {
+export function genGridViewTemplate(entity: naslTypes.Entity, nameGroup: NameGroup, options = {
   hasFileter: false,
+  modifyable: false,
 }) {
   const namespace = entity.getNamespace();
   const entityName = entity.name;
   const currentName = nameGroup.currentName || 'current';
   const properties = entity.properties.filter(filterProperty('inTable'));
-  const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.page, elements.$ce.size, elements.$ce.sort, elements.$ce.order${options.hasFileter ? `,${nameGroup.viewVariableFilter}` : ''})`;
-  return `<UTableView
+  const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.page, elements.$ce.size${options.hasFileter ? `,${nameGroup.viewVariableFilter}` : ''})`;
+  return `<UGridView
         ref="${nameGroup.viewElementMainView}"
         dataSource={${dataSourceValue}}
-        valueField="${firstLowerCase(entity.name)}.${getEntityPromaryKeyProperty(entity)}"
-        pagination={true}
+        valueField={${nameGroup.lowerEntity}.${getEntityPromaryKeyProperty(entity)}}
+        pageSize={50}
+        pageNumber={1}
+        pageable={true}
+        remotePaging={true}
         showSizer={true}
-        pageSize={20}
-        pageNumber={1}>
-            <UTableViewColumn
-                type="index"
-                width={60}
-                slotTitle={
-                    <UText text="序号"></UText>
-                }
-                slotExpander={
-                    (current) => <UTableViewExpander
-                        item={current.item}>
-                    </UTableViewExpander>
-                }>
-            </UTableViewColumn>
-            ${properties.map((property) => `${genTableColumnTemplate(property, nameGroup)}`).join('\n')}
-            <UTableViewColumn
-                slotTitle={
-                    <UText text="操作"></UText>
-                }
-                slotCell={
-                    (current) => <ULinearLayout gap="small">
+        repeat={4}
+        border={false}
+        readonly={true}
+        showFoot={true}
+        style="height:auto"
+        slotItem={
+            (current) => <UCard>
+                <ULinearLayout direction="vertical" gap="small">
+                    ${properties.map((property) => `${genGridViewCardTemplate(property, nameGroup)}`).join('\n')}
+                    <ULinearLayout gap="small">
                         <ULink
                             text="修改"
                             ${options.modifyable ? `onClick={
@@ -82,34 +66,30 @@ export function genTableTemplate(entity, nameGroup, options = {
                             }>
                         </ULink>
                     </ULinearLayout>
-                }
-                slotExpander={
-                    (current) => <UTableViewExpander
-                        item={current.item}>
-                    </UTableViewExpander>
-                }>
-            </UTableViewColumn>
-    </UTableView>`;
+                </ULinearLayout>
+            </UCard>
+        }>
+    </UGridView>`;
 }
 
-export function genTableBlock(entity, refElement) {
+export function genGridViewBlock(entity: naslTypes.Entity, refElement: naslTypes.ViewElement) {
   const likeComponent = refElement?.likeComponent;
   const dataSource = entity.parentNode;
   const module = dataSource.app;
 
-  // 生成唯一name
-  // 加到页面上的params、variables、logics等都需要唯一name
-  // 页面上有ref引用的element也需要唯一name
-  const viewElementMainView = likeComponent.getViewElementUniqueName('tableView');
+  const viewElementMainView = likeComponent.getViewElementUniqueName('gridView');
   const nameGroup = genUniqueQueryNameGroup(module, likeComponent, viewElementMainView);
   nameGroup.viewElementMainView = viewElementMainView;
   nameGroup.viewVariableEntity = likeComponent.getVariableUniqueName(firstLowerCase(entity.name));
   nameGroup.viewLogicRemove = likeComponent.getLogicUniqueName('remove');
+  nameGroup.viewVariableFilter = likeComponent.getVariableUniqueName('filter');
+  nameGroup.lowerEntity = firstLowerCase(entity.name);
+
   // 当前节点的currentName
   nameGroup.currentName = refElement.getCurrentName();
 
   // 收集所有和本实体关联的实体
-  const entitySet = new Set();
+  const entitySet: Set<naslTypes.Entity> = new Set();
   entitySet.add(entity);
   entity.properties.forEach((property) => {
     if (property.relationEntity) {
@@ -124,9 +104,9 @@ export function genTableBlock(entity, refElement) {
   const allEntities = [...entitySet];
 
   return `export function view() {
-      return ${genTableTemplate(entity, nameGroup)}
-    }
+    return ${genGridViewTemplate(entity, nameGroup)}
+  }
     export namespace app.logics {
-        ${genQueryLogic(allEntities, nameGroup, true, false, refElement.parentNode)}
+        ${genQueryLogic(allEntities, nameGroup, false, false)}
     }`;
 }

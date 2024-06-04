@@ -430,6 +430,9 @@ importers:
       '@joskii/jflow-vue2-plugin':
         specifier: ^0.1.1
         version: 0.1.1(@joskii/jflow-core@0.1.24)(vue@2.6.12)
+      '@nasl/ast-mini':
+        specifier: 3.9.0-beta
+        version: 3.9.0-beta
       '@popperjs/core':
         specifier: ^2.10.2
         version: 2.11.8
@@ -3920,6 +3923,10 @@ packages:
       '@types/react': 18.2.45
       react: 18.2.0
     dev: true
+
+  /@nasl/ast-mini@3.9.0-beta:
+    resolution: {integrity: sha512-eBD/grpras0/w3N/xVCWpArZQTP/NKfA58hPHx00zir5j3vdMarkFYiAM7BaAcpf4o0ys6uIJhOpni/rtbg6Mg==}
+    dev: false
 
   /@nasl/types@0.1.6:
     resolution: {integrity: sha512-h6Yh57U1jEbvgWh8A1XxsWAW61JLjshq35sT1G57qZ3D6539v2hxEUe8TjOL0c501lz7gCm4WLlowf/wgypBRA==}

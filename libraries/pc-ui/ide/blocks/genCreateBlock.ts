@@ -1,12 +1,14 @@
+import * as naslTypes from '@nasl/ast-mini';
 import {
   filterProperty,
   firstLowerCase,
   getFirstDisplayedProperty,
   genUniqueQueryNameGroup,
+  NameGroup,
 } from './utils';
 import { genQueryLogic, genFormItemsTemplate } from './genCommonBlock';
 
-function genCreateFormTemplate(entity, nameGroup, selectNameGroupMap) {
+function genCreateFormTemplate(entity: naslTypes.Entity, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>) {
   const namespace = entity.getNamespace();
   const properties = entity.properties.filter(filterProperty('inForm'));
   nameGroup.vModelName = nameGroup.viewVariableEntity;
@@ -30,7 +32,7 @@ function genCreateFormTemplate(entity, nameGroup, selectNameGroupMap) {
         </UForm>`;
 }
 
-export function genCreateBlock(entity, refElement) {
+export function genCreateBlock(entity: naslTypes.Entity, refElement: naslTypes.ViewElement) {
   const likeComponent = refElement?.likeComponent;
   const dataSource = entity.parentNode;
   const module = dataSource.app;
@@ -49,7 +51,7 @@ export function genCreateBlock(entity, refElement) {
 
   // 收集所有和本实体关联的实体
   const selectNameGroupMap = new Map();
-  const newLogics = [];
+  const newLogics: Array<string> = [];
   entity.properties.forEach((property) => {
     // 有外键关联
     if (property.relationEntity) {
@@ -63,7 +65,7 @@ export function genCreateBlock(entity, refElement) {
           // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
           const key = [property.name, relationEntity.name].join('-');
           selectNameGroupMap.set(key, selectNameGroup);
-          const newLogic = genQueryLogic([relationEntity], selectNameGroup, false, false, module);
+          const newLogic = genQueryLogic([relationEntity], selectNameGroup, false, false);
           newLogics.push(newLogic);
         }
       }

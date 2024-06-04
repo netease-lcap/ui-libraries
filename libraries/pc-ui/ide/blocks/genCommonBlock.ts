@@ -1,15 +1,17 @@
+import * as naslTypes from '@nasl/ast-mini';
 import {
   firstLowerCase,
   getFirstDisplayedProperty,
   filterProperty,
   transEntityMetadataTypes,
+  NameGroup,
 } from './utils';
 
 /**
  * where条件生成
  * @param {*} entity
  */
-function genWhereExpression(entity) {
+function genWhereExpression(entity: naslTypes.Entity) {
   const properties = entity.properties.filter((property) => property?.display.inFilter);
   const expressions = properties.map((property) => {
     if (!property.relationEntity && ['String', 'Text'].includes(property.typeAnnotation.typeName)) {
@@ -28,7 +30,7 @@ function genWhereExpression(entity) {
  * @param {*} supportFilter
  * @returns
  */
-export function genQueryLogic(allEntities, nameGroup, supportSort, supportFilter) {
+export function genQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: NameGroup, supportSort: boolean, supportFilter: boolean): string {
   allEntities = Array.from(allEntities);
   const entity = allEntities.shift();
   if (!entity) {
@@ -63,7 +65,7 @@ export function genQueryLogic(allEntities, nameGroup, supportSort, supportFilter
  * @param {*} nameGroup
  * @returns
  */
-export function genColumnMeta(property, nameGroup) {
+export function genColumnMeta(property: naslTypes.EntityProperty, nameGroup: NameGroup) {
   const { entity } = property;
   const currentName = nameGroup.currentName || 'current';
 
@@ -94,7 +96,7 @@ export function genColumnMeta(property, nameGroup) {
  * @param {*} nameGroup
  * @returns
  */
-export function genTextTemplate(property, nameGroup) {
+export function genTextTemplate(property: naslTypes.EntityProperty, nameGroup: NameGroup) {
   const { valueExpression } = genColumnMeta(property, nameGroup);
   if (property.typeAnnotation.typeName === 'Boolean') {
     return `
@@ -113,7 +115,7 @@ export function genTextTemplate(property, nameGroup) {
  * @param {*} selectNameGroupMap
  * @returns
  */
-export function genPropertyEditableTemplate(entity, property, nameGroup, selectNameGroupMap) {
+export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: naslTypes.EntityProperty, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>) {
   const dataSource = entity.parentNode;
   const vModel = `${nameGroup.vModelName}.${property.name}`;
   const label = (property.label || property.name).replace(/"/g, '&quot;');
@@ -227,7 +229,7 @@ export function genPropertyEditableTemplate(entity, property, nameGroup, selectN
  * @param {*} options
  * @returns
  */
-export function genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap, options = {
+export function genFormItemsTemplate(entity: naslTypes.Entity, properties: Array<naslTypes.EntityProperty>, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>, options = {
   needRules: true,
 }) {
   return `
@@ -258,7 +260,7 @@ export function genFormItemsTemplate(entity, properties, nameGroup, selectNameGr
  * @param {*} nameGroup
  * @param {*} selectNameGroupMap
  */
-export function genFilterTemplate(entity, nameGroup, selectNameGroupMap) {
+export function genFilterTemplate(entity: naslTypes.Entity, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>) {
   const properties = entity.properties.filter(filterProperty('inFilter'));
   nameGroup.vModelName = nameGroup.viewVariableFilter;
   return `<ULinearLayout>
@@ -281,7 +283,7 @@ export function genFilterTemplate(entity, nameGroup, selectNameGroupMap) {
     </ULinearLayout>`;
 }
 
-export function genSaveModalTemplate(entity, nameGroup, selectNameGroupMap) {
+export function genSaveModalTemplate(entity: naslTypes.Entity, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>) {
   const dataSource = entity.parentNode;
   const properties = entity.properties.filter(filterProperty('inForm'));
   nameGroup.vModelName = nameGroup.viewVariableInput;

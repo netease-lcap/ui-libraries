@@ -1,4 +1,19 @@
-export const filterProperty = (key) => (property) => {
+import * as naslTypes from '@nasl/ast-mini';
+/**
+ * 命名组，主要承载一次 mergeBlock 中的逻辑名称
+ */
+export interface NameGroup {
+  logic?: string;
+  structure?: string;
+  load?: string;
+  remove?: string;
+  modify?: string;
+  submit?: string;
+  lowerEntity?: string;
+  [key: string]: string;
+}
+
+export const filterProperty = (key) => (property: naslTypes.EntityProperty) => {
   if (property.display) {
     return property.display[key];
   }
@@ -8,7 +23,7 @@ export const filterProperty = (key) => (property) => {
 export const firstUpperCase = (value) => value.replace(/^\S/, (letter) => letter.toUpperCase());
 export const firstLowerCase = (value) => value.replace(/^\S/, (letter) => letter.toLowerCase());
 
-export function transEntityMetadataTypes(typeAnnotation, app) {
+export function transEntityMetadataTypes(typeAnnotation: naslTypes.TypeAnnotation, app: naslTypes.App) {
   let { typeName: propertyTypeName } = typeAnnotation || {};
   if (typeAnnotation?.typeNamespace?.endsWith('.metadataTypes')) {
     const referenceNode = app.findNodeByCompleteName(`${typeAnnotation.typeNamespace}.${typeAnnotation.typeName}`) || {};
@@ -18,8 +33,8 @@ export function transEntityMetadataTypes(typeAnnotation, app) {
   return propertyTypeName;
 }
 
-export function getFirstDisplayedProperty(entity) {
-  let property = entity.properties.find((property) => !property.readonly);
+export function getFirstDisplayedProperty(entity: naslTypes.Entity) {
+  let property = entity.properties.find((property1) => !property1.readonly);
   if (!property) property = entity.properties[0];
   return property;
 }
@@ -38,13 +53,13 @@ function capFirstLetter(word) {
  * @param defaultInView 是否在页面逻辑中用 load 简写
  */
 export function genUniqueQueryNameGroup(
-  scope,
-  view,
-  componentName,
-  defaultInView,
-  suffix,
+  scope: naslTypes.App | naslTypes.Module | naslTypes.Namespace,
+  view: naslTypes.View | naslTypes.BusinessComponent,
+  componentName: string = '',
+  defaultInView: boolean = true,
+  suffix: string = '',
 ) {
-  const result = {};
+  const result: NameGroup = {};
   result.viewLogicLoad = view?.getLogicUniqueName?.(`load${defaultInView ? '' : capFirstLetter(componentName)}${suffix ? capFirstLetter(suffix) : ''}`);
   result.logic = scope?.getLogicUniqueName?.(
     `load${capFirstLetter(view.name)}${componentName ? capFirstLetter(componentName) : ''}${suffix ? capFirstLetter(suffix) : ''}`,
@@ -53,6 +68,6 @@ export function genUniqueQueryNameGroup(
   return result;
 }
 
-export function getEntityPromaryKeyProperty(entity) {
+export function getEntityPromaryKeyProperty(entity: naslTypes.Entity) {
   return entity.properties.find((p) => p.primaryKey)?.name || 'id';
 }
