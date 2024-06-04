@@ -620,8 +620,8 @@ export default {
                 })
                 .catch(() => (this.currentLoading = false)); // });
         },
-        onFocus() {
-            // @disabled
+        onFocus(e) {
+            this.$emit('focus', e, this);
         },
         onInput(value) {
             if (!this.filterable)
