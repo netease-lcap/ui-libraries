@@ -68,7 +68,7 @@ export default createComponent({
           }
           // vue-router 3.x $route.matched[0].path is empty in / and its children paths
           if (config.path === '/') return false;
-          const pathMatched = config.path === path;
+          const pathMatched = (config.path || '').split('?')[0] === (path || '').split('?')[0];
           const nameMatched = isDef(config.name) && config.name === r.name;
           return pathMatched || nameMatched;
         });
