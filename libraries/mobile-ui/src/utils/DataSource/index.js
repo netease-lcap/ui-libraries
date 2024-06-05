@@ -237,9 +237,6 @@ const VueDataSource = Vue.extend({
 
           return arrangedData;
         },
-        _process(data) {
-            return data;
-        },
         clearLocalData() {
             this.data = [];
             this.arrangedData = [];
@@ -250,10 +247,12 @@ const VueDataSource = Vue.extend({
             this.cleared = true;
         },
         mustRemote() {
-            return (
-              !this.hasAllRemoteData() || // 后端数据 且 还有未获取的后端数据
-              (this.remote && (this.cleared)) // 后端数据 query有变化、reload
-            );
+          if (this.remote) {
+            // 还有未获取的后端数据 或 reload
+            return !this.hasAllRemoteData() || this.cleared;
+          }
+
+          return false;
         },
         /**
          * 根据 viewData，是否还有数据
@@ -286,9 +285,6 @@ const VueDataSource = Vue.extend({
 
             return false
         },
-        hasChanges() {
-            return false;
-        },
         defaultCompare(a, b, sign) {
             if (a === b)
                 return 0;
@@ -296,9 +292,6 @@ const VueDataSource = Vue.extend({
         },
         _getExtraParams() {
             return undefined;
-        },
-        slice(offset, newOffset) {
-            return this.arrangedData.slice(offset, newOffset);
         },
         // _load(params)
         load(offset = this.offset, limit = this.limit, newPageNumber) {
@@ -553,9 +546,6 @@ function DataSource(options) {
         else
             data[key] = option;
     });
-
-    // if (options.data)
-    //     data.data = methods._process ? methods._process(options.data) : Array.from(options.data);
 
     VueDataSource.call(this, {
         data() {
