@@ -1,12 +1,14 @@
+import * as naslTypes from '@nasl/ast-mini';
 import {
   filterProperty,
   firstLowerCase,
   getFirstDisplayedProperty,
   genUniqueQueryNameGroup,
+  NameGroup,
 } from './utils';
 import { genQueryLogic, genFormItemsTemplate } from './genCommonBlock';
 
-function genUpdateFormTemplate(entity, nameGroup, selectNameGroupMap) {
+function genCreateFormTemplate(entity: naslTypes.Entity, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>) {
   const namespace = entity.getNamespace();
   const properties = entity.properties.filter(filterProperty('inForm'));
   nameGroup.vModelName = nameGroup.viewVariableEntity;
@@ -17,19 +19,19 @@ function genUpdateFormTemplate(entity, nameGroup, selectNameGroupMap) {
       round
       block="blockb"
       type="info"
-      text="提交修改"
+      text="立即创建"
       onClick={
-        function ${nameGroup.viewLogicSubmit}(event) {
-          if ($refs.${nameGroup.viewElementMainView}.validate().valid) {
-              ${namespace}.${entity.name}Entity.update(${nameGroup.viewVariableEntity})
-              nasl.ui.showMessage('修改成功！')
+          function ${nameGroup.viewLogicSubmit}(event) {
+              if ($refs.${nameGroup.viewElementMainView}.validate().valid) {
+                  ${namespace}.${entity.name}Entity.create(${nameGroup.viewVariableEntity})
+                  nasl.ui.showMessage('创建成功！')
+              }
           }
-        }
       }></VanButton>
   </VanForm>`;
 }
 
-export function genUpdateBlock(entity, refElement) {
+export function genCreateBlock(entity: naslTypes.Entity, refElement: naslTypes.ViewElement) {
   const likeComponent = refElement?.likeComponent;
   const dataSource = entity.parentNode;
   const module = dataSource.app;
@@ -44,12 +46,11 @@ export function genUpdateBlock(entity, refElement) {
     viewElementMainView: likeComponent.getViewElementUniqueName('form1'),
     viewVariableEntity: likeComponent.getVariableUniqueName(firstLowerCase(entity.name)),
     viewLogicSubmit: likeComponent.getLogicUniqueName('submit'),
-    viewParamId: likeComponent.getParamUniqueName('id'),
   };
 
   // 收集所有和本实体关联的实体
   const selectNameGroupMap = new Map();
-  const newLogics = [];
+  const newLogics: Array<string> = [];
   entity.properties.forEach((property) => {
     // 有外键关联
     if (property.relationEntity) {
@@ -72,9 +73,10 @@ export function genUpdateBlock(entity, refElement) {
 
   return `export function view() {
     let ${nameGroup.viewVariableEntity}: ${entityFullName};
-    return ${genUpdateFormTemplate(entity, nameGroup, selectNameGroupMap)}
+    return ${genCreateFormTemplate(entity, nameGroup, selectNameGroupMap)}
   }
-      export namespace app.logics {
-          ${newLogics.join('\n')}
-      }`;
+    export namespace app.logics {
+        ${newLogics.join('\n')}
+    }
+    `;
 }

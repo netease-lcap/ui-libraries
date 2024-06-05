@@ -1,12 +1,14 @@
+import * as naslTypes from '@nasl/ast-mini';
 import {
   firstLowerCase,
   getFirstDisplayedProperty,
   genUniqueQueryNameGroup,
   getEntityPromaryKeyProperty,
+  NameGroup,
 } from './utils';
 import { genQueryLogic } from './genCommonBlock';
 
-export function genListViewTemplate(entity, nameGroup) {
+export function genListViewTemplate(entity: naslTypes.Entity, nameGroup: NameGroup) {
   const displayedProperty = getFirstDisplayedProperty(entity);
   const lowerEntityName = firstLowerCase(entity.name);
   const currentName = nameGroup.currentName || 'current';
@@ -40,7 +42,7 @@ export function genListViewTemplate(entity, nameGroup) {
   </VanListView>`;
 }
 
-export function genListViewBlock(entity, refElement) {
+export function genListViewBlock(entity: naslTypes.Entity, refElement: naslTypes.ViewElement) {
   const likeComponent = refElement?.likeComponent;
   const dataSource = entity.parentNode;
   const module = dataSource.app;
@@ -56,7 +58,7 @@ export function genListViewBlock(entity, refElement) {
   nameGroup.currentName = refElement.getCurrentName();
 
   // 收集所有和本实体关联的实体
-  const entitySet = new Set();
+  const entitySet: Set<naslTypes.Entity> = new Set();
   entitySet.add(entity);
   entity.properties.forEach((property) => {
     if (property.relationEntity) {
@@ -74,6 +76,6 @@ export function genListViewBlock(entity, refElement) {
         return ${genListViewTemplate(entity, nameGroup)}
       }
       export namespace app.logics {
-          ${genQueryLogic(allEntities, nameGroup, false, false, refElement.parentNode)}
+          ${genQueryLogic(allEntities, nameGroup, false, false)}
       }`;
 }

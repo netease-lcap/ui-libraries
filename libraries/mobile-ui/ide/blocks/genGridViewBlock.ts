@@ -1,17 +1,19 @@
+import * as naslTypes from '@nasl/ast-mini';
 import {
   filterProperty,
   firstLowerCase,
   getFirstDisplayedProperty,
   genUniqueQueryNameGroup,
   getEntityPromaryKeyProperty,
+  NameGroup,
 } from './utils';
 import { genQueryLogic, genTextTemplate } from './genCommonBlock';
 
-function genGridViewCardTemplate(property, nameGroup) {
+function genGridViewCardTemplate(property: naslTypes.EntityProperty, nameGroup: NameGroup) {
   return `${genTextTemplate(property, nameGroup)}`;
 }
 
-export function genGridViewTemplate(entity, nameGroup) {
+export function genGridViewTemplate(entity: naslTypes.Entity, nameGroup: NameGroup) {
   const properties = entity.properties.filter(filterProperty('inTable'));
   const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.page, elements.$ce.size)`;
   return `<VanGridView
@@ -32,7 +34,7 @@ export function genGridViewTemplate(entity, nameGroup) {
     </VanGridView>`;
 }
 
-export function genGridViewBlock(entity, refElement) {
+export function genGridViewBlock(entity: naslTypes.Entity, refElement: naslTypes.ViewElement) {
   const likeComponent = refElement?.likeComponent;
   const dataSource = entity.parentNode;
   const module = dataSource.app;
@@ -48,7 +50,7 @@ export function genGridViewBlock(entity, refElement) {
   nameGroup.currentName = refElement.getCurrentName();
 
   // 收集所有和本实体关联的实体
-  const entitySet = new Set();
+  const entitySet: Set<naslTypes.Entity> = new Set();
   entitySet.add(entity);
   entity.properties.forEach((property) => {
     if (property.relationEntity) {
@@ -66,6 +68,6 @@ export function genGridViewBlock(entity, refElement) {
     return ${genGridViewTemplate(entity, nameGroup)}
   }
     export namespace app.logics {
-      ${genQueryLogic(allEntities, nameGroup, false, false, module)}
+      ${genQueryLogic(allEntities, nameGroup, false, false)}
     }`;
 }
