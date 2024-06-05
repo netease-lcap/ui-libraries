@@ -105,7 +105,7 @@
     "dev": "npm run storybook",
     "pack": "pnpm pack",
     "storybook": "storybook dev -p 6006",
-    "build": "lcap-scripts build",
+    "build": "lcap-scripts build && npm run lowcode",
     "deploy": "lcap-scripts deploy",
     "deploy:dev": "lcap-scripts deploy --platform http://defaulttenant.lcap.codewave-dev.163yun.com/",
     "deploy:test": "lcap-scripts deploy --platform http://defaulttenant.lcap.codewave-test.163yun.com/",
@@ -115,7 +115,8 @@
     "test:coverage": "vitest run --coverage",
     "preview": "vite preview",
     "build:storybook": "storybook build",
-    "check:api": "tsc -p tsconfig.api.json"
+    "check:api": "tsc -p tsconfig.api.json",
+    "lowcode": " node usage-script.js > ./dist-theme/nasl.ui.merge.json && cd ./dist-theme rm ./nasl.ui.json && mv nasl.ui.merge.json nasl.ui.json "
   },
   "jestSerializer": {
     "attributesToClear": [
