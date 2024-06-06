@@ -38,6 +38,7 @@ export function genQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: N
   }
   const namespace = entity.getNamespace();
   const entityLowerName = firstLowerCase(entity.name);
+  const properties = entity.properties.filter((property) => property?.display.inFilter);
   return `export function ${nameGroup.logic}(page: Long, size: Long${supportSort ? ', sort: String, order: String' : ''}${supportFilter ? `, filter: ${namespace}.${entity.name}` : ''}) {
         let result;
         result = PAGINATE(FROM(${namespace}.${entity.name}Entity, ${entity.name} => $
@@ -49,7 +50,7 @@ export function genQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: N
       }).join('\n');
     return `.LEFT_JOIN(${namespace}.${relationEntity.name}Entity, ${relationEntity.name} => ON(${onExpressions}))`;
   }).join('\n')}
-  ${supportFilter ? `.WHERE(${genWhereExpression(entity)})` : ''}
+  ${supportFilter && properties.length ? `.WHERE(${genWhereExpression(entity)})` : ''}
         ${supportSort ? '.ORDER_BY([sort, order])' : ''}
         .SELECT({
             ${entityLowerName}: ${entity.name},
