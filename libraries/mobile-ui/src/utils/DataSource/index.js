@@ -241,8 +241,6 @@ const VueDataSource = Vue.extend({
             this.data = [];
             this.arrangedData = [];
             this.originTotal = Infinity; // originTotal 必须清空，否则空列表不会更新
-            this.arranged = false;
-            this.allData = null;
 
             this.cleared = true;
         },
@@ -338,6 +336,10 @@ const VueDataSource = Vue.extend({
 
           const extraParams = this._getExtraParams();
 
+          if (this.needAllData && (!this.allData?.length || this.cleared)) {
+            this.loadAll();
+          };
+
           return this._load(params, extraParams)
             .then((result) => {
               const finalResult = {};
@@ -401,11 +403,6 @@ const VueDataSource = Vue.extend({
 
               return this.arrange(this.data);
             })
-            .then(() => {
-              if (this.needAllData && !this.allData?.length) {
-                this.loadAll();
-              }
-            });
         },
         loadMore() {
             if (!this.hasMore())
@@ -474,32 +471,13 @@ const VueDataSource = Vue.extend({
             return tree;
         },
         loadAll() {
-          const size = 10000;
-
-          const paging = {
-            offset: 0,
-            limit: size,
-            number: 1,
-            size,
-          };
-
           const params = {
-            paging,
-            sorting: this.sorting,
-            filtering: this.filtering,
-            ...this._getExtraParams(), // 带上filterText
+            page: 1,
+            size: 10000,
+            filterText: '',
           };
 
-          // 支持 JDL
-          if (params.paging) {
-            params.page = 1;
-            params.start = 0;
-            params.size = size;
-          }
-
-          const extraParams = this._getExtraParams();
-
-          return this._load(params, extraParams)
+          return this._load(params)
             .then((result) => {
               const finalResult = {};
 
