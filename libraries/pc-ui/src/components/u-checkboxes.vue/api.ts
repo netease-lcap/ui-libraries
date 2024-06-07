@@ -115,10 +115,11 @@ namespace nasl.ui {
             docDescription: '多选组可以勾选多选框的最小数量。',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
             if: _ => _.checkAll === false,
         })
-        min: nasl.core.Decimal = 0;
+        min: nasl.core.Integer = 0;
 
         @Prop<UCheckboxesOptions<T, V, C>, 'max'>({
             group: '主要属性',
@@ -127,10 +128,11 @@ namespace nasl.ui {
             docDescription: '多选组可以勾选多选框的最大数量。',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
             if: _ => _.checkAll === false,
         })
-        max: nasl.core.Decimal;
+        max: nasl.core.Integer;
 
         @Prop({
             group: '主要属性',

@@ -96,7 +96,7 @@ namespace nasl.ui {
                 max: 24,
             },
         })
-        repeat: nasl.core.Decimal = 12;
+        repeat: nasl.core.Decimal | nasl.core.Integer = 12;
 
         @Prop({
             group: '样式属性',
@@ -140,7 +140,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        private mediaHuge: nasl.core.Decimal;
+        private mediaHuge: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             title: '响应大屏',
@@ -149,7 +149,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        private mediaLarge: nasl.core.Decimal;
+        private mediaLarge: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             title: '响应中屏',
@@ -158,7 +158,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        private mediaMedium: nasl.core.Decimal;
+        private mediaMedium: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             title: '响应小屏',
@@ -167,7 +167,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        private mediaSmall: nasl.core.Decimal;
+        private mediaSmall: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             title: '响应迷你屏',
@@ -176,7 +176,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        private mediaMini: nasl.core.Decimal;
+        private mediaMini: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop<UGridLayoutColumnOptions, 'mode'>({
             group: '主要属性',
@@ -279,7 +279,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        span: nasl.core.Decimal = 1;
+        span: nasl.core.Decimal | nasl.core.Integer = 1;
 
         @Prop<UGridLayoutColumnOptions, 'offset'>({
             group: '主要属性',
@@ -290,7 +290,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        offset: nasl.core.Decimal = 0;
+        offset: nasl.core.Decimal | nasl.core.Integer = 0;
 
         @Prop<UGridLayoutColumnOptions, 'pull'>({
             group: '主要属性',
@@ -301,7 +301,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        pull: nasl.core.Decimal = 0;
+        pull: nasl.core.Decimal | nasl.core.Integer = 0;
 
         @Prop<UGridLayoutColumnOptions, 'push'>({
             group: '主要属性',
@@ -312,7 +312,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        push: nasl.core.Decimal = 0;
+        push: nasl.core.Decimal | nasl.core.Integer = 0;
 
         @Prop<UGridLayoutColumnOptions, 'wrap'>({
             group: '主要属性',

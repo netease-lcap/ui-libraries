@@ -42,7 +42,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        colnum: nasl.core.Decimal = 5;
+        colnum: nasl.core.Decimal | nasl.core.Integer = 5;
 
         @Prop({
             group: '样式属性',

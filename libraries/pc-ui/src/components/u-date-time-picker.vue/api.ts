@@ -61,7 +61,7 @@ namespace nasl.ui {
           docDescription: '默认显示的日期时间值',
           if: _ => _.range !== true,
       })
-      value: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
+      value: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime | nasl.core.Integer;
 
       @Prop<UDateTimePickerOptions, 'startDate'>({
           group: '数据属性',
