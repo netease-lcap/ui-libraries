@@ -32,7 +32,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        size: nasl.core.Decimal = 5;
+        size: nasl.core.Decimal | nasl.core.Integer = 5;
 
         @Prop({
             group: '主要属性',
@@ -44,7 +44,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        interval: nasl.core.Decimal = 30;
+        interval: nasl.core.Decimal | nasl.core.Integer = 30;
 
         @Event({
             title: '点击',

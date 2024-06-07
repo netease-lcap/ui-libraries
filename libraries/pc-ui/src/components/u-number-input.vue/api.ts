@@ -29,7 +29,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        value: nasl.core.Decimal = 0;
+        value: nasl.core.Decimal | nasl.core.Integer = 0;
 
         @Prop({
             group: '数据属性',
@@ -40,7 +40,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        min: nasl.core.Decimal;
+        min: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             group: '数据属性',
@@ -51,7 +51,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        max: nasl.core.Decimal;
+        max: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             group: '数据属性',
@@ -62,7 +62,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        private precision: nasl.core.Decimal = 1;
+        private precision: nasl.core.Decimal | nasl.core.Integer = 1;
 
         @Prop({
             group: '数据属性',
@@ -73,7 +73,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        decimalLength: nasl.core.Decimal;
+        decimalLength: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop<UNumberInputOptions, 'decimalPlacesValue'>({
             group: '主要属性',
@@ -248,7 +248,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        step: nasl.core.Decimal = 1;
+        step: nasl.core.Decimal | nasl.core.Integer = 1;
 
         @Prop({
             group: '样式属性',
@@ -300,8 +300,8 @@ namespace nasl.ui {
             description: '值变化时触发（与原生事件不同）',
         })
         onChange: (event: {
-            value: nasl.core.Decimal;
-            oldValue: nasl.core.Decimal;
+            value: nasl.core.Decimal | nasl.core.Integer;
+            oldValue: nasl.core.Decimal | nasl.core.Integer;
             formattedValue: nasl.core.String;
             valid: nasl.core.Boolean;
         }) => any;
