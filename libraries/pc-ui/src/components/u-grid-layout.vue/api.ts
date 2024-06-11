@@ -347,8 +347,8 @@ namespace nasl.ui {
         onResponsive: (event: any) => any;
 
         @Event({
-            title: '点击栅格行',
-            description: '点击栅格行时触发',
+            title: '点击栅格列',
+            description: '点击栅格列时触发',
         })
         onClick: (event: {
             row: nasl.core.Integer;

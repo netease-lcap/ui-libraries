@@ -126,8 +126,7 @@ export default {
         },
         onClick() {
             const params = { row: this.parentVM.$parent.$children.findIndex(item => item === this.parentVM), column: this.parentVM.$children.findIndex(item => item === this), vm: this };
-            console.log('handleClick', params)
-            this.$emit('onClick', params)
+            this.$emit('click', params)
         }
     },
 };
