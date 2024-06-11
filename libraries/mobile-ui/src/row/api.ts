@@ -110,7 +110,9 @@ namespace nasl.ui {
         }, {
           title: '大（30）'
         }]
-      }
+      },
+      // @ts-ignore
+      implicitToString: true
     })
     gutter: '0' | '10' | '20' | '30' = '0';
     @Slot({
@@ -119,7 +121,7 @@ namespace nasl.ui {
       emptyBackground: 'add-sub',
       snippets: [{
         title: '插入一列',
-        code: '<van-col span="8"></van-col>'
+        code: '<van-col :span="8"></van-col>'
       }]
     })
     slotDefault: () => Array<VanCol>;
@@ -350,7 +352,8 @@ namespace nasl.ui {
       description: '栅格列向右偏移列数',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0,
       }
     })
     offset: nasl.core.Integer = 0;

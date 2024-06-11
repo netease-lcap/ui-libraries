@@ -54,12 +54,7 @@ namespace nasl.ui {
       description: '当前选择的值',
       sync: true
     })
-    private value: nasl.core.Any;
-    @Prop({
-      title: '文本字段名',
-      description: '选项文本的字段名'
-    })
-    private textField: (item: T) => nasl.core.String;
+    private value: any;
     @Prop({
       title: '值字段名',
       description: '选项值的字段名'
@@ -122,7 +117,8 @@ namespace nasl.ui {
       description: '设置分页大小，单位为px。',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 1
       },
       if: _ => !!_.pageable
     })
@@ -171,17 +167,20 @@ namespace nasl.ui {
     pullRefresh: nasl.core.Boolean = true;
     @Prop({
       group: '交互属性',
-      title: '下拉过程中提示文案'
+      title: '下拉过程中提示文案',
+      implicitToString: true,
     })
     pullingText: nasl.core.String = '下拉刷新';
     @Prop({
       group: '交互属性',
-      title: '释放过程中提示文案'
+      title: '释放过程中提示文案',
+      implicitToString: true,
     })
     loosingText: nasl.core.String = '释放刷新';
     @Prop({
       group: '交互属性',
-      title: '刷新成功提示文案'
+      title: '刷新成功提示文案',
+      implicitToString: true,
     })
     successText: nasl.core.String = '已刷新';
     @Prop({
@@ -189,7 +188,9 @@ namespace nasl.ui {
       title: '展示时长',
       description: '设置刷新成功后提示展示时长，单位为ms。',
       setter: {
-        concept: "NumberInputSetter"
+        concept: "NumberInputSetter",
+        precision: 0,
+        min: 0
       }
     })
     successDuration: nasl.core.Integer = 500;
@@ -205,7 +206,8 @@ namespace nasl.ui {
     @Prop({
       group: '交互属性',
       title: '搜索框占位符',
-      description: '搜索框为空时的显示文本'
+      description: '搜索框为空时的显示文本',
+      implicitToString: true,
     })
     placeholder: nasl.core.String = '请输入';
     @Prop({
@@ -219,7 +221,8 @@ namespace nasl.ui {
     initialLoad: nasl.core.Boolean = true;
     @Prop({
       group: '状态属性',
-      title: '加载中文案'
+      title: '加载中文案',
+      implicitToString: true,
     })
     loadingText: nasl.core.String = '加载中...';
     @Prop({
@@ -233,12 +236,14 @@ namespace nasl.ui {
     private error: nasl.core.Boolean;
     @Prop({
       group: '状态属性',
-      title: '加载失败文案'
+      title: '加载失败文案',
+      implicitToString: true,
     })
     errorText: nasl.core.String = '加载失败，请重试';
     @Prop({
       group: '状态属性',
-      title: '暂无数据文案'
+      title: '暂无数据文案',
+      implicitToString: true,
     })
     emptyText: nasl.core.String = '暂无数据';
     @Prop({
@@ -255,7 +260,9 @@ namespace nasl.ui {
       title: '网格数',
       description: '设置每页排列几项',
       setter: {
-        concept: "NumberInputSetter"
+        concept: "NumberInputSetter",
+        precision: 0,
+        min: 1
       }
     })
     col: nasl.core.Integer = 2;
@@ -275,11 +282,20 @@ namespace nasl.ui {
       }
     })
     private disabled: nasl.core.Boolean = false;
+    @Prop<VanGridViewOptions<T, V, P, M>, 'textField'>({
+      group: '数据属性',
+      title: '文本字段名',
+      description: '选项文本的字段名，可用于前端筛选时的匹配',
+      setter: {
+        concept: "PropertySelectSetter"
+      }
+    })
+    textField: (item: T) => any = ((item: any) => item.text) as any;
     @Event({
       title: '加载后',
       description: '加载时触发'
     })
-    onLoad: (event: any) => any ;
+    onLoad: (event: nasl.ui.BaseEvent) => void;
     @Slot({
       title: 'undefined',
       description: '插入<van-cardu />',

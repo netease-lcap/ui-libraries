@@ -11,13 +11,13 @@
         <slot></slot>
 
         <template #prefix>
-            <span v-if="showPrefix">{{ unit && unit.value }}</span>
+            <span v-if="showPrefix">{{ unitValue }}</span>
         </template>
         <template #suffix>
-            <span v-if="showSuffix">{{ unit && unit.value }}</span>
+            <span v-if="showSuffix">{{ unitValue }}</span>
         </template>
     </u-input>
-    <u-preview v-else :text="currentValue"></u-preview>
+    <u-preview v-else :text="previewText"></u-preview>
 </template>
 
 <script>
@@ -60,34 +60,37 @@ export default {
         autofocus: { type: Boolean, default: false },
 
         // 高级格式化
-        advancedFormat: {
-            type: Object,
-            default: () => ({
-                enable: false,
-                value: '',
-            }),
+        advancedFormatEnable: {
+            type: Boolean,
+            default: false,
+        },
+        advancedFormatValue: {
+            type: String,
+            default: '',
         },
         thousandths: {
             type: Boolean,
             default: false,
         },
-        decimalPlaces: {
-            type: Object,
-            default: () => ({
-                places: '',
-                omit: false,
-            }),
+        decimalPlacesValue: {
+            type: Number,
+            default: null,
+        },
+        decimalPlacesOmitZero: {
+            type: Boolean,
+            default: true,
         },
         percentSign: {
             type: Boolean,
             default: false,
         },
-        unit: {
-            type: Object,
-            default: () => ({
-                type: 'prefix',
-                value: '',
-            }),
+        unitType: {
+            type: String,
+            default: 'prefix',
+        },
+        unitValue: {
+            type: String,
+            default: '',
         },
     },
     data() {
@@ -109,48 +112,37 @@ export default {
             data.currentFormatter = noopFormatter; // 初始值需要在最小值和最大值范围之内
 
         // advancedFormat最高权限
-        if (this.advancedFormat) {
-            let formatter;
+        let formatter;
 
-            if (this.advancedFormat.enable) {
-                formatter = this.advancedFormat.value;
-            } else if (this.thousandths || this.percentSign || this.decimalPlaces.places >= 0) {
-                formatter = '0';
-                // 千分位
-                if (this.thousandths) {
-                    formatter = `#,##0`;
-                }
-
-                // 小数位数
-                if (this.decimalPlaces && this.decimalPlaces.places > 0) {
-                    formatter += '.';
-
-                    const char = this.decimalPlaces.omit ? '#' : '0';
-                    for (let i = 0; i < this.decimalPlaces.places; i++) {
-                        formatter += char;
-                    }
-                } else if (this.decimalPlaces && this.decimalPlaces.places === '') {
-                    formatter += '.';
-                    for (let i = 0; i < 17; i++) {
-                        formatter += '#';
-                    }
-                }
-
-                // 单位
-                // if (this.unit && this.unit.value) {
-                //     if (this.unit.type === 'prefix') {
-                //         formatter = `${this.unit.value} ${formatter}`;
-                //     } else if (this.unit.type === 'suffix') {
-                //         formatter = `${formatter} ${this.unit.value}`;
-                //     }
-                // }
+        if (this.advancedFormatEnable) {
+            formatter = this.advancedFormatValue;
+        } else if (this.thousandths || this.percentSign || parseInt(this.decimalPlacesValue) >= 0) {
+            formatter = '0';
+            // 千分位
+            if (this.thousandths) {
+                formatter = `#,##0`;
             }
 
-            if (formatter) {
-                data.currentFormatter = new NumberFormatter(formatter, !this.advancedFormat.enable && {
-                    percentSign: this.percentSign, // 百分比
-                });
+            // 小数位数
+            if (this.decimalPlacesValue > 0) {
+                formatter += '.';
+
+                const char = this.decimalPlacesOmitZero ? '#' : '0';
+                for (let i = 0; i < this.decimalPlacesValue; i++) {
+                    formatter += char;
+                }
+            } else if (this.decimalPlacesValue === '' || this.decimalPlacesValue == null) {
+                formatter += '.';
+                for (let i = 0; i < 17; i++) {
+                    formatter += '#';
+                }
             }
+        }
+
+        if (formatter) {
+            data.currentFormatter = new NumberFormatter(formatter, !this.advancedFormatEnable && {
+                percentSign: this.percentSign, // 百分比
+            });
         }
 
         data.formattedValue = data.currentFormatter.format(data.currentValue);
@@ -166,10 +158,21 @@ export default {
             return listeners;
         },
         showPrefix() {
-            return this.unit && this.unit.type === 'prefix' && !!this.unit.value;
+            return this.unitType === 'prefix' && !!this.unitValue;
         },
         showSuffix() {
-            return this.unit && this.unit.type === 'suffix' && !!this.unit.value;
+            return this.unitType === 'suffix' && !!this.unitValue;
+        },
+        previewText() {
+            const texts = [this.formattedValue];
+
+            if (this.showPrefix) {
+              texts.unshift(this.unitValue);
+            } else if (this.showSuffix) {
+              texts.push(this.unitValue);
+            }
+
+            return texts.join(' ');
         },
     },
     watch: {
@@ -241,7 +244,7 @@ export default {
         toFixed(value) {
             // 为空时使用默认值
             if ((typeof value === 'string' && value.trim() === '') || value === null || value === undefined)
-                return value = this.defaultValue !== undefined ? this.defaultValue : '';
+                return value = this.defaultValue !== undefined ? this.defaultValue : null;
             else if (isNaN(value))
                 value = this.currentValue || this.defaultValue || 0;
 
@@ -645,18 +648,18 @@ content: "\e65d";
 
 /* normal */
 .root[prefix] input {
-    padding-left: 24px;
+    padding-left: var(--number-input-prefix-padding);
 }
 .root[prefix][clearable]:hover input,
 .root[prefix][clearable][focus] input {
-    padding-right: 24px !important;
+    padding-right: var(--number-input-suffix-padding) !important;
 }
 .root[suffix] input {
-    padding-right: 24px;
+    padding-right: var(--number-input-suffix-padding);
 }
 .root[suffix][clearable]:hover input,
 .root[suffix][clearable][focus] input {
-    padding-right: 48px !important;
+    padding-right: calc(var(--number-input-suffix-padding) + 24px) !important;
 }
 /* tail */
 .root[button-display="tail"]:not([hide-buttons="true"]) input {
@@ -667,11 +670,11 @@ content: "\e65d";
     padding-right: calc(var(--input-suffix-padding-right) + 24px) !important;
 }
 .root[button-display="tail"]:not([hide-buttons="true"])[suffix] input {
-    padding-right: calc(var(--input-suffix-padding-right) + 24px);
+    padding-right: calc(var(--input-suffix-padding-right) + var(--number-input-suffix-padding));
 }
 .root[button-display="tail"]:not([hide-buttons="true"])[suffix][clearable]:hover input,
 .root[button-display="tail"]:not([hide-buttons="true"])[suffix][clearable][focus] input {
-    padding-right: calc(var(--input-suffix-padding-right) + 48px) !important;
+    padding-right: calc(var(--input-suffix-padding-right) + var(--number-input-suffix-padding) + 24px) !important;
 }
 .root[button-display="tail"]:not([hide-buttons="true"]) [class^="u-input_suffix__"] {
     right: var(--input-suffix-padding-right);
@@ -682,18 +685,18 @@ content: "\e65d";
     padding: 0 var(--number-input-both-ends-button-width);
 }
 .root[button-display="bothEnds"]:not([hide-buttons="true"])[prefix] input {
-    padding-left: calc(var(--number-input-both-ends-button-width) + 24px);
+    padding-left: calc(var(--number-input-both-ends-button-width) + var(--number-input-prefix-padding));
 }
 .root[button-display="bothEnds"]:not([hide-buttons="true"])[prefix][clearable]:hover input,
 .root[button-display="bothEnds"]:not([hide-buttons="true"])[prefix][clearable][focuse] input {
     padding-right: calc(var(--number-input-both-ends-button-width) + 24px) !important;
 }
 .root[button-display="bothEnds"]:not([hide-buttons="true"])[suffix] input {
-    padding-right: calc(var(--number-input-both-ends-button-width) + 24px);
+    padding-right: calc(var(--number-input-both-ends-button-width) + var(--number-input-suffix-padding));
 }
 .root[button-display="bothEnds"]:not([hide-buttons="true"])[suffix][clearable]:hover input,
 .root[button-display="bothEnds"]:not([hide-buttons="true"])[suffix][clearable][focus] input {
-    padding-right: calc(var(--number-input-both-ends-button-width) + 48px) !important;
+    padding-right: calc(var(--number-input-both-ends-button-width) + var(--number-input-suffix-padding) + 24px) !important;
 }
 .root[button-display="bothEnds"]:not([hide-buttons="true"]) [class^="u-input_prefix__"] {
     left: calc(var(--number-input-both-ends-button-width) + 8px);

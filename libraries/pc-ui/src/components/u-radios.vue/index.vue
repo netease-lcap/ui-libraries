@@ -18,7 +18,7 @@
                 </slot>
             </template>
         </u-radio>
-        <u-preview v-if="isPreview" :text="currentText"></u-preview>
+        <u-preview v-if="isPreview && !selectedVM"></u-preview>
     </template>
     <template v-if="$env.VUE_APP_DESIGNER && !dataSource && !$slots.default">
         <span :class="$style.loadContent">{{ treeSelectTip }}</span>

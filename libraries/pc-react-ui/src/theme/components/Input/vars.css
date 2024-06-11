@@ -1,0 +1,108 @@
+/**
+ * @component Input
+ * @useGlobalTokens ["--cw-padding-xxs","--cw-control-height-sm","--cw-line-width","--cw-color-text","--cw-font-size","--cw-line-height","--cw-font-family","--cw-border-radius","--cw-motion-duration-mid","--cw-color-text-placeholder","--cw-control-height","--cw-motion-duration-slow","--cw-line-height-lg","--cw-border-radius-lg","--cw-border-radius-sm","--cw-color-border","--cw-color-bg-container","--cw-line-type","--cw-color-text-disabled","--cw-color-bg-container-disabled","--cw-color-error","--cw-color-error-border-hover","--cw-color-warning","--cw-color-warning-border-hover","--cw-color-fill-tertiary","--cw-color-fill-secondary","--cw-color-primary","--cw-color-error-bg","--cw-color-error-bg-hover","--cw-color-error-text","--cw-color-warning-bg","--cw-color-warning-bg-hover","--cw-color-warning-text","--cw-control-height-lg","--cw-padding-lg","--cw-color-text-description","--cw-padding-xs","--cw-color-icon","--cw-color-icon-hover","--cw-color-text-quaternary","--cw-font-size-icon","--cw-color-text-tertiary","--cw-color-split","--cw-color-primary-hover","--cw-color-primary-active"]
+ */
+.cw-nasl.cw-input,
+.cw-nasl.cw-input-css-var {
+  /**
+   * @desc 输入框激活状态时背景颜色
+   * @type color
+   */
+  --cw-input-active-bg: var(--cw-color-bg-container);
+
+  /**
+   * @desc 激活态边框色
+   * @type color
+   */
+  --cw-input-active-border-color: var(--cw-color-primary);
+
+  /**
+   * @desc 激活态阴影
+   * @type input
+   */
+  --cw-input-active-shadow: 0 0 0 var(--cw-control-outline-width) var(--cw-control-outline);
+
+  /**
+   * @desc 前/后置标签背景色
+   * @type color
+   */
+  --cw-input-addon-bg: var(--cw-color-fill-alter);
+
+  /**
+   * @desc 错误状态时激活态阴影
+   * @type input
+   */
+  --cw-input-error-active-shadow: 0 0 0 var(--cw-control-outline-width) var(--cw-color-error-outline);
+
+  /**
+   * @desc 输入框hover状态时背景颜色
+   * @type color
+   */
+  --cw-input-hover-bg: var(--cw-color-bg-container);
+
+  /**
+   * @desc 悬浮态边框色
+   * @type color
+   */
+  --cw-input-hover-border-color: var(--cw-color-primary-hover);
+
+  /**
+   * @desc 字体大小
+   * @type size
+   */
+  --cw-input-input-font-size: var(--cw-font-size);
+
+  /**
+   * @desc 大号字体大小
+   * @type size
+   */
+  --cw-input-input-font-size-lg: var(--cw-font-size-lg);
+
+  /**
+   * @desc 小号字体大小
+   * @type size
+   */
+  --cw-input-input-font-size-sm: var(--cw-font-size);
+
+  /**
+   * @desc 输入框纵向内边距
+   * @type size
+   */
+  --cw-input-padding-block: 4px;
+
+  /**
+   * @desc 大号输入框纵向内边距
+   * @type size
+   */
+  --cw-input-padding-block-lg: 7px;
+
+  /**
+   * @desc 小号输入框纵向内边距
+   * @type input
+   */
+  --cw-input-padding-block-sm: 0;
+
+  /**
+   * @desc 输入框横向内边距
+   * @type size
+   */
+  --cw-input-padding-inline: calc(var(--cw-padding-sm) - var(--cw-line-width));
+
+  /**
+   * @desc 大号输入框横向内边距
+   * @type size
+   */
+  --cw-input-padding-inline-lg: calc(var(--cw-control-padding-horizontal) - var(--cw-line-width));
+
+  /**
+   * @desc 小号输入框横向内边距
+   * @type size
+   */
+  --cw-input-padding-inline-sm: calc(var(--cw-control-padding-horizontal-sm) - var(--cw-line-width));
+
+  /**
+   * @desc 警告状态时激活态阴影
+   * @type input
+   */
+  --cw-input-warning-active-shadow: 0 0 0 var(--cw-control-outline-width) var(--cw-color-warning-outline);
+}

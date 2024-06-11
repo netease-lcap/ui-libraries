@@ -1,5 +1,5 @@
 import { Tag as AntdTag } from 'antd';
-import type { TagProps } from 'antd/lib/tag';
+import type { TagProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import type { pluginType } from '@/plugins/type';
@@ -12,7 +12,7 @@ const mapProps = {
   mySize: 'size',
 };
 
-const Tag = registerComponet<
+export const Tag = registerComponet<
   TagProps,
   pluginType<TagProps>
 >(
@@ -20,4 +20,4 @@ const Tag = registerComponet<
   { plugin, displayName: AntdTag.displayName, mapProps },
 );
 
-export default Tag;
+// export default Tag;

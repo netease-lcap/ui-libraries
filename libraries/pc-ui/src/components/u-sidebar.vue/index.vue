@@ -19,6 +19,7 @@
                         :replace="$at2(node, replaceField)"
                         :exact="$at2(node, exactField)"
                         :value="$at2(node, valueField)"
+                        :item="node"
                         :icon="$at2(node, iconField)"
                         :link-type="$at2(node, linkTypeField)"
                         :href-and-to="$at2(node, hrefAndToField)"
@@ -42,9 +43,9 @@
                 icotype="only"
             >
             </i-ico>
-            <u-tooltip v-if="!$env.VUE_APP_DESIGNER" :hide-delay="500" placement="right">
+            <!-- <u-tooltip v-if="!$env.VUE_APP_DESIGNER" :hide-delay="500" placement="right">
               {{ currentCollapse ? '展开' : '收起' }}
-            </u-tooltip>
+            </u-tooltip> -->
           </div>
         </div>
     </nav>

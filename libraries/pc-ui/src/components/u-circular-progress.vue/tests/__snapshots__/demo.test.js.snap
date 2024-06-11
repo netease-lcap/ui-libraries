@@ -103,8 +103,6 @@ exports[`u-circular-progress.vue > Demo-尺寸设置 1`] = `
       </div>
       <div class="foot"></div>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;

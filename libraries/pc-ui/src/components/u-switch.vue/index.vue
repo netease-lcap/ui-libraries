@@ -1,5 +1,5 @@
 <template>
-<label :class="$style.root" :with-text="withText" :checked="currentValue" :readonly="readonly" :disabled="disabled" @click="toggle()"
+<label v-if="!isPreview" :class="$style.root" :with-text="withText" :checked="currentValue" :readonly="readonly" :disabled="disabled" @click="toggle()"
     tabindex="0" @keydown.space.prevent @keyup.space.prevent="toggle()"
     @focus="onFocus" @blur="onBlur" v-on="listeners">
     <span :class="$style.button"></span>
@@ -7,17 +7,25 @@
         <slot></slot>
     </span>
 </label>
+<u-preview v-else :text="$tt(currentValue ? 'on' : 'off')"></u-preview>
 </template>
 
 <script>
 import MField from '../m-field.vue';
+import UPreview from '../u-text.vue';
+import MPreview from '../u-text.vue/preview';
+import i18nMixin from '../../mixins/i18n';
 
 export default {
     name: 'u-switch',
-    mixins: [MField],
+    mixins: [MField, MPreview, i18nMixin('u-switch')],
+    components: {
+      UPreview,
+    },
     props: {
         withText: { type: Boolean, default: false },
         value: { type: Boolean, default: false },
+        preview: { type: Boolean, default: false },
         readonly: { type: Boolean, default: false },
         disabled: { type: Boolean, default: false },
     },

@@ -20,7 +20,7 @@ namespace nasl.ui {
             sync: true,
             docDescription: '当前选择的值',
         })
-        value: nasl.core.Any;
+        value: any;
 
         @Prop({
             group: '主要属性',
@@ -160,13 +160,14 @@ namespace nasl.ui {
             description: '此项的值',
             docDescription: '此项的值',
         })
-        value: nasl.core.Any;
+        value: any;
 
         @Prop({
             group: '主要属性',
             title: '标签',
             description: '顶部自定义提示文本',
             docDescription: '顶部自定义提示文本',
+            implicitToString: true,
         })
         label: nasl.core.String = '';
 
@@ -191,6 +192,17 @@ namespace nasl.ui {
             },
         })
         disabled: nasl.core.Boolean = false;
+
+        @Prop({
+          group: '状态属性',
+          title: '预览',
+          description: '显示预览态',
+          docDescription: '',
+          setter: {
+            concept: 'SwitchSetter',
+          },
+        })
+        preview: nasl.core.Boolean = false;
 
         @Prop({
             group: '样式属性',

@@ -100,7 +100,7 @@ namespace nasl.ui {
     })
     onCopy: (event: {
       value: nasl.core.String;
-    }) => any ;
+    }) => void;
     @Slot({
       title: 'undefined',
       description: '修改默认触发元素'

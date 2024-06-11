@@ -3,7 +3,7 @@
     <div class="swiper mySwiper swiperbig" v-show="pattern==='big'" ref="swiperbig">
         <div class="swiper-wrapper swiper-wrapper-big">
             <div class="swiper-slide swiper-slide-big" v-for="(item, index) in options" :key="index" @click="tagAct">
-                <img :src="getUrl(item)" class="swiper-slide-big-image">
+                <s-image :src="getUrl(item)" class="swiper-slide-big-image" />
             </div>
         </div>
     </div>
@@ -12,7 +12,7 @@
     <div class="swiper mySwiper swipersmall" v-show="pattern==='small'" ref="swipersmall">
         <div class="swiper-wrapper swiper-wrapper-small">
             <div class="swiper-slide swiper-slide-small" v-for="(item, index) in options" :key="index">
-                <img :src="getUrl(item)" class="swiper-slide-small-image">
+                <s-image :src="getUrl(item)" class="swiper-slide-small-image" />
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
         <div class="swiper mySwiper swiperthumb" ref="swiperthumb">
             <div class="swiper-wrapper swiper-wrapper-thumb">
                 <div class="swiper-slide swiper-slide-thumb" v-for="(item, index) in options" :key="index">
-                    <img :src="getUrl(item)" class="swiper-slide-thumb-image">
+                    <s-image :src="getUrl(item)" class="swiper-slide-thumb-image" />
                 </div>
             </div>
         </div>
@@ -33,11 +33,15 @@
 <script>
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
+import SImage from '../s-image.vue';
 import SupportDataSource from '../../mixins/support.datasource';
 
 export default {
     name: 'u-gallery',
     mixins: [SupportDataSource],
+    components: {
+      SImage,
+    },
     props: {
         dataSource: {
             type: [Array, Object, Function, String],
@@ -118,6 +122,9 @@ export default {
             this.thumbsSwiper = swiper;
         },
         getUrl(item) {
+            if (this.$env && this.$env.VUE_APP_DESIGNER) {
+              return '{{ dataSource }}';
+            }
             if (this.urlField) {
                 return this.$at(item, this.urlField);
             }
@@ -225,6 +232,12 @@ export default {
         height: 100%;
         object-fit: contain;
     }
+
+    div.swiper-slide-big-image {
+      display: flex;
+      max-height: 180px;
+    }
+
     .swiper-for-vusion  .swiper-slide-small-image {
         display: block;
         width: 100%;
@@ -272,6 +285,7 @@ export default {
         height: 100%;
         object-fit: contain;
     }
+
     .swiper-thumb-left-arrow, .swiper-thumb-right-arrow {
         font-size: 20px;
         color: #999;

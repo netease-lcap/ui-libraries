@@ -7,8 +7,10 @@
         @keydown.esc.stop="close()"
         @keydown.enter="$refs.popper.currentOpened ? onEnter() : open()"
         :disabled="disabled"
-        :readonly="readonly">
-        <u-input :class="$style.input" :opened="currentOpened"
+        :readonly="readonly"
+        :preview="isPreview">
+        <span v-if="isPreview">{{ currentValue || '--' }}</span>
+        <u-input v-if="!isPreview" :class="$style.input" :opened="currentOpened"
             :placeholder="placeholder" :readonly="!filterable || readonly"
             :value="currentValue" :disabled="disabled"
             @focus="focus" @blur="blur"
@@ -17,7 +19,7 @@
             :color="formItemVM && formItemVM.color"
             :autofocus="autofocus"
             ref="input">
-            <m-popper v-if="!disabled && !readonly" :class="$style.popperShape" ref="popper"
+            <m-popper v-if="!disabled && !readonly && !isPreview" :class="$style.popperShape" ref="popper"
                 @mousedown.stop.prevent
                 @open="getSubComponents(true)" @close="resetInput">
                 <div v-if="loading" :class="$style.loading"><u-loading></u-loading></div>
@@ -40,20 +42,21 @@
                 </template>
             </m-popper>
         </u-input>
-        <span v-show="clearable && currentValue && !disabled && !readonly" :class="$style.clearable" @click="clear" @mousedown.prevent></span>
+        <span v-show="clearable && currentValue && !disabled && !readonly && !isPreview" :class="$style.clearable" @click="clear" @mousedown.prevent></span>
     </div>
 </template>
 
 <script>
 import UCascaderItem from './item.vue';
 import MField from '../m-field.vue';
+import MPreview from '../u-text.vue/preview';
 import SupportDataSource from '../../mixins/support.datasource';
 import treeDataSource from '../../mixins/tree.datasource';
 
 export default {
     name: 'u-cascader',
     components: { UCascaderItem },
-    mixins: [MField, SupportDataSource, treeDataSource],
+    mixins: [MField, SupportDataSource, treeDataSource, MPreview],
     props: {
         data: { type: Array, default: () => [] },
         value: { type: [String, Array], default: '' },
@@ -65,6 +68,7 @@ export default {
         clearable: { type: Boolean, default: false },
         showFinalValue: { type: Boolean, default: false },
         readonly: { type: Boolean, default: false },
+        preview: { type: Boolean, default: false },
         disabled: { type: Boolean, default: false },
         lazy: { type: Boolean, default: false },
         lazyLoad: { type: Function, default: () => {} },
@@ -458,7 +462,7 @@ export default {
             this.$refs.popper && this.$refs.popper.toggle(opened);
         },
         clear(...args) {
-            if (this.readonly || this.disabled) {
+            if (this.readonly || this.disabled || this.isPreview) {
                 return;
             }
             this.currentValue = '';

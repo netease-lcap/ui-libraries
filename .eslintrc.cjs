@@ -20,13 +20,13 @@ module.exports = {
     'react/jsx-filename-extension': 0,
     'react/jsx-props-no-spreading': 0,
     'import/prefer-default-export': 0,
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
     "semi": [2, "always"],
+    '@typescript-eslint/no-var-requires': 0,
     "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-unused-vars": 1,
     'no-unused-vars': 1,
+    'react/no-children-prop': 0,
+    'react-refresh/only-export-components':0,
     'max-len': [1, { code: 200 }],
   },
 };

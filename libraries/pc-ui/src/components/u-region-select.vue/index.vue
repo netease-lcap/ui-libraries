@@ -4,15 +4,18 @@ import UCascader from '../u-cascader.vue';
 import i18n from './i18n';
 import RegionData from './region';
 import i18nMixin from '../../mixins/i18n';
+import MPreview from '../u-text.vue/preview';
 
 export default {
     name: 'u-region-select',
     extends: UCascader,
     // i18n,
-    mixins: [i18nMixin('u-region-select')],
+    mixins: [i18nMixin('u-region-select'), MPreview],
     props: {
         field: { type: String, default: 'value' },
         converter: String,
+        readonly: { type: Boolean, default: false },
+        preview: { type: Boolean, default: false },
         // categories: {
         //     type: Array,
         //     default() {

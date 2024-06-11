@@ -6,7 +6,6 @@ exports[`u-region-select.vue > Demo-Placeholder 1`] = `
     <div class="root input" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">请选择省份</span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -15,222 +14,147 @@ exports[`u-region-select.vue > Demo-Placeholder 1`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 北京市
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 北京市 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 天津市
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 天津市 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 河北省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 河北省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 山西省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 山西省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 内蒙古自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 内蒙古自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 辽宁省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 辽宁省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 吉林省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 吉林省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 黑龙江省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 黑龙江省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 上海市
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 上海市 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 江苏省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 江苏省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 浙江省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 浙江省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 安徽省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 安徽省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 福建省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 福建省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 江西省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 江西省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 山东省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 山东省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 河南省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 河南省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 湖北省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 湖北省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 湖南省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 湖南省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 广东省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 广东省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 广西壮族自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 广西壮族自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 海南省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 海南省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 重庆市
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 重庆市 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 四川省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 四川省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 贵州省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 贵州省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 云南省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 云南省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 西藏自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 西藏自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 陕西省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 陕西省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 甘肃省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 甘肃省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 青海省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 青海省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 宁夏回族自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 宁夏回族自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 新疆维吾尔自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 新疆维吾尔自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 台湾省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 台湾省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 香港特别行政区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 香港特别行政区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 澳门特别行政区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 澳门特别行政区 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
@@ -243,7 +167,6 @@ exports[`u-region-select.vue > Demo-仅显示什么区 1`] = `
     <div class="root input" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <input class="input" readonly="readonly" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -252,222 +175,147 @@ exports[`u-region-select.vue > Demo-仅显示什么区 1`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 北京市
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 北京市 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 天津市
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 天津市 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 河北省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 河北省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 山西省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 山西省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 内蒙古自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 内蒙古自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 辽宁省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 辽宁省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 吉林省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 吉林省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 黑龙江省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 黑龙江省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 上海市
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 上海市 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 江苏省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 江苏省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 浙江省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 浙江省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 安徽省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 安徽省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 福建省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 福建省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 江西省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 江西省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 山东省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 山东省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 河南省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 河南省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 湖北省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 湖北省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 湖南省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 湖南省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 广东省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 广东省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 广西壮族自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 广西壮族自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 海南省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 海南省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 重庆市
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 重庆市 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 四川省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 四川省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 贵州省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 贵州省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 云南省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 云南省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 西藏自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 西藏自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 陕西省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 陕西省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 甘肃省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 甘肃省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 青海省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 青海省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 宁夏回族自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 宁夏回族自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 新疆维吾尔自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 新疆维吾尔自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 台湾省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 台湾省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 香港特别行政区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 香港特别行政区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 澳门特别行政区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 澳门特别行政区 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>
@@ -479,7 +327,6 @@ exports[`u-region-select.vue > Demo-双向绑定 1`] = `
   <div class="root input" readonly="readonly">
     <span class="baseline">b</span>
     <span class="placeholder">请选择</span>
-    <!---->
     <input class="input" readonly="readonly" type="text">
     <transition-stub class="popperShape" name="fade">
       <div class="root" style="display: none;">
@@ -488,222 +335,147 @@ exports[`u-region-select.vue > Demo-双向绑定 1`] = `
             <div class="view">
               <nav class="root umenuShape">
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 北京市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 北京市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 天津市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 天津市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 河北省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 河北省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 山西省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 山西省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 内蒙古自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 内蒙古自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 辽宁省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 辽宁省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 吉林省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 吉林省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 黑龙江省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 黑龙江省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 上海市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 上海市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 江苏省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 江苏省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 浙江省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 浙江省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 安徽省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 安徽省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 福建省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 福建省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 江西省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 江西省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 山东省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 山东省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 河南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 河南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 湖北省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 湖北省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 湖南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 湖南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 广东省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 广东省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 广西壮族自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 广西壮族自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 海南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 海南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 重庆市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 重庆市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 四川省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 四川省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 贵州省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 贵州省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 云南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 云南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 西藏自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 西藏自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 陕西省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 陕西省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 甘肃省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 甘肃省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 青海省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 青海省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 宁夏回族自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 宁夏回族自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 新疆维吾尔自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 新疆维吾尔自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 台湾省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 台湾省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 香港特别行政区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 香港特别行政区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 澳门特别行政区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 澳门特别行政区 </span>
                   <div class="sub"></div>
                 </a>
               </nav>
             </div>
           </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-          </div>
         </div>
       </div>
     </transition-stub>
-    <!---->
   </div>
   <span class="clearable" style="display: none;"></span>
 </div>
@@ -714,7 +486,6 @@ exports[`u-region-select.vue > Demo-基本用法 1`] = `
   <div class="root input" readonly="readonly">
     <span class="baseline">b</span>
     <span class="placeholder">请选择</span>
-    <!---->
     <input class="input" readonly="readonly" type="text">
     <transition-stub class="popperShape" name="fade">
       <div class="root" style="display: none;">
@@ -723,222 +494,147 @@ exports[`u-region-select.vue > Demo-基本用法 1`] = `
             <div class="view">
               <nav class="root umenuShape">
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 北京市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 北京市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 天津市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 天津市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 河北省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 河北省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 山西省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 山西省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 内蒙古自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 内蒙古自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 辽宁省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 辽宁省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 吉林省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 吉林省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 黑龙江省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 黑龙江省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 上海市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 上海市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 江苏省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 江苏省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 浙江省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 浙江省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 安徽省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 安徽省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 福建省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 福建省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 江西省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 江西省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 山东省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 山东省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 河南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 河南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 湖北省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 湖北省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 湖南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 湖南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 广东省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 广东省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 广西壮族自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 广西壮族自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 海南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 海南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 重庆市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 重庆市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 四川省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 四川省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 贵州省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 贵州省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 云南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 云南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 西藏自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 西藏自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 陕西省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 陕西省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 甘肃省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 甘肃省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 青海省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 青海省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 宁夏回族自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 宁夏回族自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 新疆维吾尔自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 新疆维吾尔自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 台湾省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 台湾省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 香港特别行政区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 香港特别行政区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 澳门特别行政区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 澳门特别行政区 </span>
                   <div class="sub"></div>
                 </a>
               </nav>
             </div>
           </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-          </div>
         </div>
       </div>
     </transition-stub>
-    <!---->
   </div>
   <span class="clearable" style="display: none;"></span>
 </div>
@@ -951,7 +647,6 @@ exports[`u-region-select.vue > Demo-基本用法 2`] = `
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -960,222 +655,147 @@ exports[`u-region-select.vue > Demo-基本用法 2`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 北京市
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 北京市 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 天津市
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 天津市 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 河北省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 河北省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 山西省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 山西省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 内蒙古自治区
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 内蒙古自治区 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 辽宁省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 辽宁省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 吉林省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 吉林省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 黑龙江省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 黑龙江省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 上海市
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 上海市 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 江苏省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 江苏省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 浙江省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 浙江省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 安徽省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 安徽省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 福建省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 福建省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 江西省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 江西省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 山东省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 山东省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 河南省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 河南省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 湖北省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 湖北省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 湖南省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 湖南省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 广东省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 广东省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 广西壮族自治区
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 广西壮族自治区 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 海南省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 海南省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 重庆市
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 重庆市 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 四川省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 四川省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 贵州省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 贵州省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 云南省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 云南省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 西藏自治区
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 西藏自治区 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 陕西省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 陕西省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 甘肃省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 甘肃省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 青海省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 青海省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 宁夏回族自治区
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 宁夏回族自治区 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 新疆维吾尔自治区
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 新疆维吾尔自治区 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 台湾省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 台湾省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 香港特别行政区
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 香港特别行政区 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 澳门特别行政区
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 澳门特别行政区 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
                 </div>
               </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-              </div>
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
@@ -1183,7 +803,6 @@ exports[`u-region-select.vue > Demo-基本用法 2`] = `
       <div class="root input" readonly="readonly">
         <span class="baseline">b</span>
         <span class="placeholder">请选择</span>
-        <!---->
         <input class="input" readonly="readonly" type="text">
         <transition-stub class="popperShape" name="fade">
           <div class="root" style="display: none;">
@@ -1192,227 +811,150 @@ exports[`u-region-select.vue > Demo-基本用法 2`] = `
                 <div class="view">
                   <nav class="root umenuShape">
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 北京市
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 北京市 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 天津市
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 天津市 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 河北省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 河北省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 山西省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 山西省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 内蒙古自治区
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 内蒙古自治区 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 辽宁省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 辽宁省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 吉林省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 吉林省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 黑龙江省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 黑龙江省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 上海市
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 上海市 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 江苏省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 江苏省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 浙江省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 浙江省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 安徽省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 安徽省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 福建省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 福建省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 江西省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 江西省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 山东省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 山东省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 河南省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 河南省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 湖北省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 湖北省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 湖南省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 湖南省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 广东省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 广东省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 广西壮族自治区
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 广西壮族自治区 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 海南省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 海南省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 重庆市
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 重庆市 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 四川省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 四川省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 贵州省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 贵州省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 云南省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 云南省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 西藏自治区
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 西藏自治区 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 陕西省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 陕西省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 甘肃省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 甘肃省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 青海省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 青海省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 宁夏回族自治区
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 宁夏回族自治区 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 新疆维吾尔自治区
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 新疆维吾尔自治区 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 台湾省
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 台湾省 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 香港特别行政区
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 香港特别行政区 </span>
                       <div class="sub"></div>
                     </a>
                     <a class="root select_item" has-sub="true" target="_self">
-                      <span vusion-slot-name-edit="text"> 澳门特别行政区
-                        <!---->
-                      </span>
+                      <span vusion-slot-name-edit="text"> 澳门特别行政区 </span>
                       <div class="sub"></div>
                     </a>
                   </nav>
                 </div>
               </div>
-              <div class="root" direction="horizontal">
-                <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-              </div>
-              <div class="root" direction="vertical">
-                <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-              </div>
             </div>
           </div>
         </transition-stub>
-        <!---->
       </div>
       <span class="clearable" style="display: none;"></span>
     </div>
-    <!---->
-    <!---->
   </div>
 </div>
 `;
@@ -1422,7 +964,6 @@ exports[`u-region-select.vue > Demo-转换为地区名格式 1`] = `
   <div class="root input" readonly="readonly">
     <span class="baseline">b</span>
     <span class="placeholder"></span>
-    <!---->
     <input class="input" readonly="readonly" type="text">
     <transition-stub class="popperShape" name="fade">
       <div class="root" style="display: none;">
@@ -1431,217 +972,143 @@ exports[`u-region-select.vue > Demo-转换为地区名格式 1`] = `
             <div class="view">
               <nav class="root umenuShape">
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 北京市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 北京市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 天津市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 天津市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 河北省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 河北省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 山西省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 山西省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 内蒙古自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 内蒙古自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 辽宁省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 辽宁省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 吉林省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 吉林省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 黑龙江省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 黑龙江省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 上海市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 上海市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 江苏省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 江苏省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" select="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 浙江省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 浙江省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 安徽省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 安徽省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 福建省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 福建省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 江西省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 江西省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 山东省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 山东省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 河南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 河南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 湖北省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 湖北省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 湖南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 湖南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 广东省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 广东省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 广西壮族自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 广西壮族自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 海南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 海南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 重庆市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 重庆市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 四川省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 四川省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 贵州省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 贵州省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 云南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 云南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 西藏自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 西藏自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 陕西省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 陕西省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 甘肃省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 甘肃省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 青海省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 青海省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 宁夏回族自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 宁夏回族自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 新疆维吾尔自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 新疆维吾尔自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 台湾省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 台湾省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 香港特别行政区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 香港特别行政区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 澳门特别行政区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 澳门特别行政区 </span>
                   <div class="sub"></div>
                 </a>
               </nav>
             </div>
-          </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
           </div>
         </div>
         <div class="root scrollShape" color="light" style="display: inline-block;">
@@ -1649,79 +1116,51 @@ exports[`u-region-select.vue > Demo-转换为地区名格式 1`] = `
             <div class="view">
               <nav class="root umenuShape">
                 <a class="root select_item" has-sub="true" select="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 杭州市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 杭州市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 宁波市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 宁波市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 温州市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 温州市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 嘉兴市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 嘉兴市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 湖州市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 湖州市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 绍兴市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 绍兴市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 金华市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 金华市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 衢州市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 衢州市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 舟山市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 舟山市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 台州市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 台州市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 丽水市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 丽水市 </span>
                   <div class="sub"></div>
                 </a>
               </nav>
             </div>
-          </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
           </div>
         </div>
         <div class="root scrollShape" color="light" style="display: inline-block;">
@@ -1729,96 +1168,63 @@ exports[`u-region-select.vue > Demo-转换为地区名格式 1`] = `
             <div class="view">
               <nav class="root umenuShape">
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 上城区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 上城区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 拱墅区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 拱墅区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 西湖区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 西湖区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" select="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 滨江区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 滨江区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 萧山区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 萧山区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 余杭区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 余杭区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 富阳区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 富阳区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 临安区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 临安区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 钱塘区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 钱塘区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 临平区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 临平区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 桐庐县
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 桐庐县 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 淳安县
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 淳安县 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 建德市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 建德市 </span>
                   <div class="sub"></div>
                 </a>
               </nav>
             </div>
-          </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
           </div>
         </div>
       </div>
     </transition-stub>
-    <!---->
   </div>
   <span class="clearable" style="display: none;"></span>
 </div>
@@ -1829,7 +1235,6 @@ exports[`u-region-select.vue > Demo-转换为地区码格式 1`] = `
   <div class="root input" readonly="readonly">
     <span class="baseline">b</span>
     <span class="placeholder"></span>
-    <!---->
     <input class="input" readonly="readonly" type="text">
     <transition-stub class="popperShape" name="fade">
       <div class="root" style="display: none;">
@@ -1838,217 +1243,143 @@ exports[`u-region-select.vue > Demo-转换为地区码格式 1`] = `
             <div class="view">
               <nav class="root umenuShape">
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 北京市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 北京市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 天津市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 天津市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 河北省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 河北省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 山西省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 山西省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 内蒙古自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 内蒙古自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 辽宁省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 辽宁省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 吉林省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 吉林省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 黑龙江省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 黑龙江省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 上海市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 上海市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 江苏省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 江苏省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" select="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 浙江省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 浙江省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 安徽省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 安徽省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 福建省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 福建省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 江西省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 江西省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 山东省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 山东省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 河南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 河南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 湖北省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 湖北省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 湖南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 湖南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 广东省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 广东省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 广西壮族自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 广西壮族自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 海南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 海南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 重庆市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 重庆市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 四川省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 四川省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 贵州省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 贵州省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 云南省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 云南省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 西藏自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 西藏自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 陕西省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 陕西省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 甘肃省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 甘肃省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 青海省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 青海省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 宁夏回族自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 宁夏回族自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 新疆维吾尔自治区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 新疆维吾尔自治区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 台湾省
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 台湾省 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 香港特别行政区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 香港特别行政区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 澳门特别行政区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 澳门特别行政区 </span>
                   <div class="sub"></div>
                 </a>
               </nav>
             </div>
-          </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
           </div>
         </div>
         <div class="root scrollShape" color="light" style="display: inline-block;">
@@ -2056,79 +1387,51 @@ exports[`u-region-select.vue > Demo-转换为地区码格式 1`] = `
             <div class="view">
               <nav class="root umenuShape">
                 <a class="root select_item" has-sub="true" select="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 杭州市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 杭州市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 宁波市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 宁波市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 温州市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 温州市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 嘉兴市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 嘉兴市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 湖州市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 湖州市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 绍兴市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 绍兴市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 金华市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 金华市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 衢州市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 衢州市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 舟山市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 舟山市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 台州市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 台州市 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" has-sub="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 丽水市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 丽水市 </span>
                   <div class="sub"></div>
                 </a>
               </nav>
             </div>
-          </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
           </div>
         </div>
         <div class="root scrollShape" color="light" style="display: inline-block;">
@@ -2136,96 +1439,63 @@ exports[`u-region-select.vue > Demo-转换为地区码格式 1`] = `
             <div class="view">
               <nav class="root umenuShape">
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 上城区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 上城区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 拱墅区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 拱墅区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 西湖区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 西湖区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" select="true" target="_self">
-                  <span vusion-slot-name-edit="text"> 滨江区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 滨江区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 萧山区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 萧山区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 余杭区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 余杭区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 富阳区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 富阳区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 临安区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 临安区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 钱塘区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 钱塘区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 临平区
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 临平区 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 桐庐县
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 桐庐县 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 淳安县
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 淳安县 </span>
                   <div class="sub"></div>
                 </a>
                 <a class="root select_item" target="_self">
-                  <span vusion-slot-name-edit="text"> 建德市
-                    <!---->
-                  </span>
+                  <span vusion-slot-name-edit="text"> 建德市 </span>
                   <div class="sub"></div>
                 </a>
               </nav>
             </div>
-          </div>
-          <div class="root" direction="horizontal">
-            <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-          </div>
-          <div class="root" direction="vertical">
-            <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
           </div>
         </div>
       </div>
     </transition-stub>
-    <!---->
   </div>
   <span class="clearable" style="display: none;"></span>
 </div>
@@ -2237,7 +1507,6 @@ exports[`u-region-select.vue > Demo-过滤（可搜索） 1`] = `
     <div class="root input">
       <span class="baseline">b</span>
       <span class="placeholder">请选择</span>
-      <!---->
       <input class="input" type="text">
       <transition-stub class="popperShape" name="fade">
         <div class="root" style="display: none;">
@@ -2246,222 +1515,147 @@ exports[`u-region-select.vue > Demo-过滤（可搜索） 1`] = `
               <div class="view">
                 <nav class="root umenuShape">
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 北京市
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 北京市 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 天津市
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 天津市 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 河北省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 河北省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 山西省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 山西省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 内蒙古自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 内蒙古自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 辽宁省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 辽宁省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 吉林省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 吉林省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 黑龙江省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 黑龙江省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 上海市
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 上海市 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 江苏省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 江苏省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 浙江省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 浙江省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 安徽省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 安徽省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 福建省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 福建省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 江西省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 江西省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 山东省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 山东省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 河南省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 河南省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 湖北省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 湖北省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 湖南省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 湖南省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 广东省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 广东省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 广西壮族自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 广西壮族自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 海南省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 海南省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 重庆市
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 重庆市 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 四川省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 四川省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 贵州省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 贵州省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 云南省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 云南省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 西藏自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 西藏自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 陕西省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 陕西省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 甘肃省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 甘肃省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 青海省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 青海省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 宁夏回族自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 宁夏回族自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 新疆维吾尔自治区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 新疆维吾尔自治区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 台湾省
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 台湾省 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 香港特别行政区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 香港特别行政区 </span>
                     <div class="sub"></div>
                   </a>
                   <a class="root select_item" has-sub="true" target="_self">
-                    <span vusion-slot-name-edit="text"> 澳门特别行政区
-                      <!---->
-                    </span>
+                    <span vusion-slot-name-edit="text"> 澳门特别行政区 </span>
                     <div class="sub"></div>
                   </a>
                 </nav>
               </div>
             </div>
-            <div class="root" direction="horizontal">
-              <div class="thumb" style="transform: translateX(0%); webkit-transform: translateX(0%);"></div>
-            </div>
-            <div class="root" direction="vertical">
-              <div class="thumb" style="transform: translateY(0%); webkit-transform: translateY(0%);"></div>
-            </div>
           </div>
         </div>
       </transition-stub>
-      <!---->
     </div>
     <span class="clearable" style="display: none;"></span>
   </div>

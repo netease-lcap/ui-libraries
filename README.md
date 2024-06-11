@@ -233,12 +233,16 @@ test('Render Primary Button', () => {
   expect(wrapper.toJSON()).toMatchSnapshot();
 });
 
-// ...
+// ... 
 ```
 
 **功能测试**
 
 针对api.ts 对外暴露的参数进行功能交互测试, 例如： 按钮点击，选择框选中， 数据源加载等等；
+
+## 贡献指南
+
+修改代码请阅读我们的 [贡献指南](./.github/CONTRIBUTING.md)。
 
 ## 资源
 

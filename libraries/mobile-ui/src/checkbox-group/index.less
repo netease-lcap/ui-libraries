@@ -6,6 +6,31 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
+  &--preview {
+    .van-checkbox {
+      pointer-events: none;
+      display: inline;
+      width: auto;
+      margin: 0;
+      padding: 0;
+
+      &::after{
+        content: '，';
+      }
+
+      &:last-child::after {
+        content: '';
+      }
+
+      &__label {
+        margin: 0;
+        padding: 0;
+      }
+      &__icon {
+        display: none;
+      }
+    }
+  }
   .mantle {
     z-index: 100;
     position: absolute;

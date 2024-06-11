@@ -1,5 +1,5 @@
 <template>
-<span :class="$style.root" :width="width" :height="height">
+<span v-if="!isPreview" :class="$style.root" :width="width" :height="height">
     <u-range-input
         :class="$style.input"
         :left-value="genDisplayFormatText(startInputTime)"
@@ -68,6 +68,7 @@
         @toggle="onPopperToggle"
     ></u-time-picker-popper>
 </span>
+<u-preview v-else :text="previewText"></u-preview>
 </template>
 
 <script>
@@ -79,6 +80,8 @@ import MField from '../m-field.vue';
 import UTimePickerPopper from './popper.vue';
 import URangeInput from '../u-date-picker.vue/range-input.vue';
 import i18nMixin from '../../mixins/i18n';
+import UPreview from '../u-text.vue';
+import MPreview from '../u-text.vue/preview';
 
 /**
  * @class TimePicker
@@ -97,8 +100,8 @@ import i18nMixin from '../../mixins/i18n';
 export default {
     name: 'u-time-range-picker',
     // i18n,
-    components: { URangeInput, UTimePickerPopper },
-    mixins: [MField, DateFormatMixin, i18nMixin('u-time-picker')],
+    components: { URangeInput, UTimePickerPopper, UPreview },
+    mixins: [MField, MPreview, DateFormatMixin, i18nMixin('u-time-picker')],
     props: {
         minUnit: { type: String, default: 'second' },
         startTime: { type: String, default: '' },
@@ -123,6 +126,7 @@ export default {
             default: '',
         },
         clearable: { type: Boolean, default: true },
+        preview: { type: Boolean, default: false },
         width: String,
         height: String,
         popperWidth: { type: String, default: '' },
@@ -159,6 +163,16 @@ export default {
         validShowFormatters() {
             return formatterOptions[this.minUnit];
         },
+        previewText() {
+          const start = this.genDisplayFormatText(this.startInputTime);
+          const end = this.genDisplayFormatText(this.endInputTime);
+
+          if (!start && !end) {
+            return '--';
+          }
+
+          return [start, end].join(' ~ ');
+        },
     },
     created() {
         const value = this.startInputTime && this.endInputTime ? [this.startInputTime, this.endInputTime] : '';
@@ -179,8 +193,8 @@ export default {
         getDisplayFormatString() {
             let formatter;
 
-            if (this.advancedFormat && this.advancedFormat.enable && this.advancedFormat.value) { // 高级格式化开启
-                formatter = this.advancedFormat.value;
+            if (this.advancedFormatEnable && this.advancedFormatValue) { // 高级格式化开启
+                formatter = this.advancedFormatValue;
             } else if (this.validShowFormatters.includes(this.showFormatter)) { // 配置的展示格式满足
                 formatter = this.showFormatter;
             }

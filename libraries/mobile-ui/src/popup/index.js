@@ -34,10 +34,6 @@ export default createComponent({
       default: false,
     },
     designTitle: String,
-    // getContainer: {
-    //   type: String,
-    //   default: 'body',
-    // },
   },
 
   beforeCreate() {

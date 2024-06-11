@@ -65,14 +65,14 @@ namespace nasl.ui {
             sync: true,
             docDescription: '当前选择的值',
         })
-        value: nasl.core.Any;
+        value: any;
 
         @Prop({
             group: '数据属性',
             title: '文本字段',
             docDescription: '集合的元素类型中，用于显示文本的属性名称，支持自定义变更',
         })
-        field: (item: T) => any = ((item: any)  => item.text) as any;
+        field: (item: T) => any = ((item: any)  => item.value) as any;
 
         @Prop({
             group: '数据属性',
@@ -90,6 +90,7 @@ namespace nasl.ui {
             title: '占位符',
             description: '为空时显示的占位符文本',
             docDescription: '选择框无内容时的提示信息，支持自定义编辑，默认为请选择',
+            implicitToString: true,
         })
         placeholder: nasl.core.String = '请选择';
 
@@ -148,6 +149,28 @@ namespace nasl.ui {
             },
         })
         disabled: nasl.core.Boolean = false;
+
+        @Prop({
+            group: '状态属性',
+            title: '只读',
+            description: '正常显示，但禁止选择/输入',
+            docDescription: '正常显示，但禁止选择或输入。',
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        readonly: nasl.core.Boolean = false;
+
+        @Prop({
+            group: '状态属性',
+            title: '预览',
+            description: '显示预览态',
+            docDescription: '',
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        preview: nasl.core.Boolean = false;
 
         @Prop({
             group: '状态属性',

@@ -1,5 +1,5 @@
 <template>
-<div :class="$style.root" :width="width" :height="height">
+<div v-if="!isPreview" :class="$style.root" :width="width" :height="height">
     <u-range-input
         :class="$style.input"
         ref="input"
@@ -61,6 +61,7 @@
     </m-popper>
     <slot></slot>
 </div>
+<u-preview v-else :text="previewText"></u-preview>
 </template>
 
 <script>
@@ -73,6 +74,8 @@ import MField from '../m-field.vue';
 import URangeInput from '../u-date-picker.vue/range-input.vue';
 import i18n from './i18n';
 import i18nMixin from '../../mixins/i18n';
+import UPreview from '../u-text.vue';
+import MPreview from '../u-text.vue/preview';
 /**
  * @class DateTimePicker
  * @extend Dropdown
@@ -90,8 +93,8 @@ import i18nMixin from '../../mixins/i18n';
 export default {
     name: 'u-date-time-range-picker',
     // i18n,
-    components: { URangeInput },
-    mixins: [MField, DateFormatMixin, i18nMixin('u-date-time-picker')],
+    components: { URangeInput, UPreview },
+    mixins: [MField, MPreview, DateFormatMixin, i18nMixin('u-date-time-picker')],
     props: {
         preIcon: {
             type: String,
@@ -120,6 +123,7 @@ export default {
         yearAdd: { type: [String, Number], default: 20 },
         converter: { type: String, default: 'json' },
         clearable: { type: Boolean, default: false },
+        preview: { type: Boolean, default: false },
         appendTo: {
             type: String,
             default: 'body',
@@ -280,6 +284,16 @@ export default {
         validShowTimeFormatters() {
             return timeFormatterOptions[this.minUnit];
         },
+        previewText() {
+          const start = this.genDisplayFormatText(this.finalStartDateTime);
+          const end = this.genDisplayFormatText(this.finalEndDateTime);
+
+          if (!start && !end) {
+            return '--';
+          }
+
+          return [start, end].join(' ~ ');
+        }
     },
     watch: {
         startDate(newValue) {
@@ -336,8 +350,8 @@ export default {
         getDisplayFormatString() {
             let formatter;
 
-            if (this.advancedFormat && this.advancedFormat.enable && this.advancedFormat.value) { // 高级格式化开启
-                formatter = this.advancedFormat.value;
+            if (this.advancedFormatEnable && this.advancedFormatValue) { // 高级格式化开启
+                formatter = advancedFormatValue;
             } else if (this.showDateFormatter || this.showTimeFormatter) { // 配置的展示格式满足
                 formatter = `${this.showDateFormatter} `;
 
@@ -676,15 +690,17 @@ export default {
                 return;
             }
             let showDate = this.format(this.finalDateTime, 'YYYY-MM-DD');
+
             if (this.checkDate(value)) {
-                const date = new Date(this.transformDate(value + ' ' + this.spMinTime));
+                const minTimeStr = !this.spMinTime || this.spMinTime === 'undefined' ? '00:00:00' : this.spMinTime;
+                const date = new Date(this.transformDate(value + ' ' + minTimeStr));
                 const isOutOfRange = this.isOutOfRange(date); // 超出范围还原成上一次值
                 if (!isOutOfRange) {
                     showDate = this.format(date, 'YYYY-MM-DD');
                 }
             }
             this.showDate = showDate;
-            this.updateCurrentInputValue(this.showDate);
+            // this.updateCurrentInputValue(this.showDate);
             this.outRangeDateTime(this.showDate, this.showTime);
         },
         checkValid(value) {

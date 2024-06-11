@@ -1,37 +1,59 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable react-refresh/only-export-components */
-import _ from 'lodash';
+import classnames from 'classnames';
 import React from 'react';
-import { useRequest } from 'ahooks';
+import _ from 'lodash';
+import style from '../index.module.less';
+import {
+  useRequestDataSource, useHandleMapField, useFormatDataSource,
+} from '@/plugins/common/dataSource';
 
-export function useHandleTransformOption(props) {
-  const items = props.get('items');
-  const transformOption = _.cond([
-    [_.isArray, _.constant(() => Promise.resolve(items))],
-    [_.isFunction, _.constant(() => Promise.resolve(items()))],
-  ]);
-  const conformsArray = _.cond([
-    [Array.isArray, _.identity],
-    [_.stubTrue, _.stubArray],
-  ]);
-  const { data } = useRequest(transformOption(items));
-  return { items: conformsArray(data) };
+import {
+  $labelKey, $valueKey, $dataSourceField, $deletePropsList,
+} from '@/plugins/constants';
+
+export function useHandleStyle(props) {
+  const className = props.get('className');
+  return {
+    className: classnames(style.tabs, className),
+  };
 }
-
-export function useHandleTextAndValueField(props) {
+export function useHandleDataSource(props) {
+  const dataSourceProps = props.get('dataSource');
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'key');
-  const $deletePropsList = props.get('$deletePropsList', []).concat(['textField', 'valueField']);
-  const option = props.get('option');
-
-  const convertOption = React.useMemo(() => {
-    const logicFn = _.map(option, (item) => ({ label: item[textField], value: item[valueField] }));
-    const decisionCallback = _.cond([
-      [_.matches({ textField: _.isString }), _.constant(logicFn)],
-      [_.matches({ valueField: _.isString }), _.constant(logicFn)],
-      [_.stubTrue, _.constant(option)],
-    ]);
-    return decisionCallback({ textField, valueField });
-  }, [option, textField, valueField]);
-  return { option: convertOption, $deletePropsList };
+  const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField', 'dataSource', 'parentField', 'childrenField']);
+  const ref = props.get('ref');
+  const { data, run: reload, loading } = useRequestDataSource(dataSourceProps);
+  const dataSourceFormat = useFormatDataSource(data);
+  const dataSource = useHandleMapField({
+    textField, valueField, dataSource: dataSourceFormat, value: 'key',
+  });
+  const selfRef = React.useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
+  const dataSourceResult = _.isEmpty(dataSource) ? {} : { items: dataSource };
+  return {
+    [$deletePropsList]: deletePropsList,
+    ref: selfRef,
+    loading,
+    ...dataSourceResult,
+  };
 }
+
+export function useHandleRender(props) {
+  const titleRender = props.get('titleRender');
+  const contentRender = props.get('contentRender');
+  const itemsProps = props.get('items');
+  const items = React.useMemo(() => {
+    return _.map(itemsProps, (item, index) => {
+      return {
+        ...item,
+        key: _.isEmpty(item.key) ? index : item.key,
+        label: _.isFunction(titleRender) ? titleRender({ item, index }) : item.label,
+        children: _.isFunction(contentRender) ? contentRender({ item, index }) : item.children,
+      };
+    });
+  }, [itemsProps, titleRender, contentRender]);
+  const itemsResult = _.isEmpty(items) ? {} : { items };
+  return {
+    ...itemsResult,
+  };
+}
+useHandleRender.order = 5;

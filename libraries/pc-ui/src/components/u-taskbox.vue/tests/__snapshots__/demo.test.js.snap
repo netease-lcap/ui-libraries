@@ -10,25 +10,18 @@ exports[`u-taskbox.vue > Demo-任务箱 1`] = `
         </svg>
       </span>
       <div class="icontext" vusion-slot-name="default">
-        <!---->
       </div>
     </span>
-    <!---->
   </div>
   <transition-stub name="fade">
     <div class="root" merge-borders="true" style="display: none;">
       <span class="arrow" data-popper-arrow></span>
-      <!---->
       <div class="body" vusion-slot-name="default">
         <div class="root content" direction="vertical" type vusion-slot-name="default">
           <h3 class="h3">待处理任务 (0)</h3>
           <ul class="root" hover line striped></ul>
-          <!---->
-          <!---->
-          <!---->
         </div>
       </div>
-      <!---->
     </div>
   </transition-stub>
 </span>
@@ -46,25 +39,18 @@ exports[`u-taskbox.vue > Demo-设置分页 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
-        <!---->
       </div>
       <transition-stub name="fade">
         <div class="root" merge-borders="true" style="display: none;">
           <span class="arrow" data-popper-arrow></span>
-          <!---->
           <div class="body" vusion-slot-name="default">
             <div class="root content" direction="vertical" type vusion-slot-name="default">
               <h3 class="h3">待处理任务 (0)</h3>
               <ul class="root" hover line striped></ul>
-              <!---->
-              <!---->
-              <!---->
             </div>
           </div>
-          <!---->
         </div>
       </transition-stub>
     </span>
@@ -77,25 +63,18 @@ exports[`u-taskbox.vue > Demo-设置分页 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
-        <!---->
       </div>
       <transition-stub name="fade">
         <div class="root" merge-borders="true" style="display: none;">
           <span class="arrow" data-popper-arrow></span>
-          <!---->
           <div class="body" vusion-slot-name="default">
             <div class="root content" direction="vertical" type vusion-slot-name="default">
               <h3 class="h3">待处理任务 (0)</h3>
               <ul class="root" hover line striped></ul>
-              <!---->
-              <!---->
-              <!---->
             </div>
           </div>
-          <!---->
         </div>
       </transition-stub>
     </span>
@@ -108,30 +87,21 @@ exports[`u-taskbox.vue > Demo-设置分页 1`] = `
             </svg>
           </span>
           <div class="icontext" vusion-slot-name="default">
-            <!---->
           </div>
         </span>
-        <!---->
       </div>
       <transition-stub name="fade">
         <div class="root" merge-borders="true" style="display: none;">
           <span class="arrow" data-popper-arrow></span>
-          <!---->
           <div class="body" vusion-slot-name="default">
             <div class="root content" direction="vertical" type vusion-slot-name="default">
               <h3 class="h3">待处理任务 (0)</h3>
               <ul class="root" hover line striped></ul>
-              <!---->
-              <!---->
-              <!---->
             </div>
           </div>
-          <!---->
         </div>
       </transition-stub>
     </span>
-    <!---->
-    <!---->
   </div>
 </div>
 `;

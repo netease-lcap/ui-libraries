@@ -81,6 +81,7 @@ namespace nasl.ui {
             title: '占位符',
             description: '为空时显示的占位符文本',
             docDescription: '内容为空时的提示文本。',
+            implicitToString: true,
         })
         placeholder: nasl.core.String;
 
@@ -324,31 +325,13 @@ namespace nasl.ui {
             title: '键盘按下',
             description: '键盘按键按下时触发',
         })
-        onKeydown: (event: {
-            altKey: nasl.core.Boolean;
-            code: nasl.core.String;
-            ctrlKey: nasl.core.Boolean;
-            isComposing: nasl.core.Boolean;
-            key: nasl.core.String;
-            metaKey: nasl.core.Boolean;
-            repeat: nasl.core.Boolean;
-            shiftKey: nasl.core.Boolean;
-        }) => any;
+        onKeydown: (event: KeyboardEvent) => any;
 
         @Event({
             title: '键盘松开',
             description: '键盘按键松开时触发',
         })
-        onKeyup: (event: {
-            altKey: nasl.core.Boolean;
-            code: nasl.core.String;
-            ctrlKey: nasl.core.Boolean;
-            isComposing: nasl.core.Boolean;
-            key: nasl.core.String;
-            metaKey: nasl.core.Boolean;
-            repeat: nasl.core.Boolean;
-            shiftKey: nasl.core.Boolean;
-        }) => any;
+        onKeyup: (event: KeyboardEvent) => any;
 
         @Slot({
             title: '前缀图标',

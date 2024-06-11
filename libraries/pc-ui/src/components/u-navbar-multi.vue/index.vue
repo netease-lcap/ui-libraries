@@ -31,6 +31,7 @@
                             :exact="$at2(node, exactField)"
                             :value="$at2(node, valueField)"
                             :icon="$at2(node, iconField)"
+                            :item="node"
                             :link-type="$at2(node, linkTypeField)"
                             :href-and-to="$at2(node, hrefAndToField)"
                             :to="$at2(node, toField)"
@@ -292,6 +293,7 @@ export default {
 
     /* 旧应用中存在UDropdown在UNavbarMulti里面的情况,这里为了使得UDropdown的主题设置生效，不可以直接覆盖UDropdown的样式 */
     --dropdown-color-text: var(--navbar-color);
+    z-index: 100;
 }
 
 .root::after{

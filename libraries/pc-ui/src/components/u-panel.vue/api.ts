@@ -97,6 +97,7 @@ namespace nasl.ui {
             title: '标题',
             description: '面板项的标题',
             docDescription: '面板组的标题',
+            implicitToString: true,
         })
         title: nasl.core.String;
 

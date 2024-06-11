@@ -62,22 +62,22 @@ namespace nasl.ui {
       title: '点击抽屉',
       description: '点击抽屉时触发'
     })
-    onClick: (event: any) => any ;
+    onClick: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '点击遮罩层',
       description: '点击遮罩层时触发'
     })
-    onClickOverlay: (event: any) => any ;
+    onClickOverlay: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '打开抽屉后',
       description: '打开抽屉时触发'
     })
-    onOpen: (event: any) => any ;
+    onOpen: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '关闭抽屉后',
       description: '关闭抽屉时触发'
     })
-    onClose: (event: any) => any ;
+    onClose: (event: nasl.ui.BaseEvent) => void;
     @Slot({
       title: 'undefined',
       description: '内容自定义'

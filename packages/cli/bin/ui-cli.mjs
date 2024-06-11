@@ -8,6 +8,7 @@ import { program } from 'commander';
 import build from '../libs/commands/build/index.mjs';
 import { resolveConfig } from '../libs/config/index.js';
 import deploy from '../libs/commands/deploy/index.mjs';
+import screenshot from '../libs/commands/screenshot/index.mjs';
 
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -33,8 +34,8 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'ice') {
   program.command('screenshot')
     .description('stories 截图')
     .option('--config <configPath>', '设置配置文件路径', 'lcap-ui.config.js')
-    .action(async (args, ctx) => {
-      console.log(args, ctx);
+    .action(async ({ config }) => {
+      await screenshot(resolveConfig(path.join(cwd, config), cwd));
     });
 
   program.command('build')

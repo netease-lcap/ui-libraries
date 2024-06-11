@@ -211,6 +211,7 @@ export default {
         allCheckItemText: { type: String, default: '全选' },
 
         isItemDisplay: { type: Boolean, default: true },
+        autoCheckSelectedValue: { type: Boolean, default: true },
     },
     data() {
         return {
@@ -436,6 +437,9 @@ export default {
         clearTimeout(this.inputBlurTimer);
         clearTimeout(this.rootBlurTimer);
         clearTimeout(this.inputDeleteTimer);
+        if (this.loadMoreNoopTimer) {
+          clearTimeout(this.loadMoreNoopTimer);
+        }
     },
     methods: {
         getExtraParams() {
@@ -558,13 +562,21 @@ export default {
                 this.load().then(() => {
                     this.ensureFocusedInView(true);
                     this.$refs.input.focus();
+                    this.$nextTick(() => this.loadMoreNoopOnOpen());
                 });
-            } else
-                setTimeout(() => this.ensureFocusedInView(true));
+            } else {
+              setTimeout(() => this.ensureFocusedInView(true));
+              this.$nextTick(() => this.loadMoreNoopOnOpen());
+            }
+
+
             this.$emit('open', $event, this);
             this.$emit('update:opened', true);
         },
         onClose($event) {
+            if (this.loadMoreNoopTimer) {
+              clearTimeout(this.loadMoreNoopTimer);
+            }
             this.popperOpened = false;
             this.focusedVM = undefined;
             this.preventRootBlur = false;
@@ -608,8 +620,8 @@ export default {
                 })
                 .catch(() => (this.currentLoading = false)); // });
         },
-        onFocus() {
-            // @disabled
+        onFocus(e) {
+            this.$emit('focus', e, this);
         },
         onInput(value) {
             if (!this.filterable)
@@ -782,12 +794,18 @@ export default {
         },
         focus() {
             this.preventBlur = true;
-            if (this.filterable)
-                this.$refs.input.focus();
+            if (this.filterable) {
+              this.$refs.input.focus();
+            } else {
+              this.$emit('focus');
+            }
         },
         blur() {
-            if (this.filterable)
-                this.$refs.input.blur();
+            if (this.filterable) {
+              this.$refs.input.blur();
+            } else {
+              this.$emit('blur');
+            }
         },
         setPopperWidth() {
             if (this.appendTo === 'body') {
@@ -896,6 +914,9 @@ export default {
          * 存储value
          */
         setSelectedDataQueue(value) {
+            // 添加配置，可关闭自动查找
+            if (!this.autoCheckSelectedValue)
+                return;
             if (this.multiple) {
                 let currentValue = value;
                 if (this.converter)
@@ -907,6 +928,35 @@ export default {
                 this.selectedDataQueue.splice(0, 1, value);
             }
         },
+        async loadMoreNoopOnOpen() {
+          if (!this.usePagination || !this.$refs.popperwrap) {
+            return;
+          }
+
+          const scrollerEl = this.showRenderFooter ? this.$refs.popperwrap : this.$refs.popper.$el;
+          if (!scrollerEl) {
+            return;
+          }
+
+          // 有滚动条等滚动加载
+          if (scrollerEl.scrollHeight > scrollerEl.offsetHeight) {
+            return;
+          }
+
+          if (this.loadMoreNoopTimer) {
+            clearTimeout(this.loadMoreNoopTimer);
+          }
+
+          const data = await this.load(true);
+          if (!data || data.length === 0) {
+            return;
+          }
+
+          /**
+           * 渲染结束后加载下一页
+           */
+          this.loadMoreNoopTimer = setTimeout(() => this.loadMoreNoopOnOpen(), 50);
+        }
     },
 };
 </script>

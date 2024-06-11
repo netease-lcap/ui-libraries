@@ -1,5 +1,5 @@
 <template>
-<div :class="$style.root" :width="width" :height="height">
+<div v-if="!isPreview" :class="$style.root" :width="width" :height="height">
     <u-range-input
         :class="$style.input"
         ref="input"
@@ -36,6 +36,7 @@
         </div>
     </m-popper>
 </div>
+<u-preview v-else :text="previewText"></u-preview>
 </template>
 
 <script>
@@ -49,6 +50,8 @@ import MField from '../m-field.vue';
 import URangeInput from './range-input.vue';
 import i18n from './i18n';
 import i18nMixin from '../../mixins/i18n';
+import UPreview from '../u-text.vue';
+import MPreview from '../u-text.vue/preview';
 
 const MS_OF_DAY = 24 * 3600 * 1000;
 
@@ -68,9 +71,9 @@ const MS_OF_DAY = 24 * 3600 * 1000;
 export default {
     name: 'u-date-range-picker',
     // i18n,
-    components: { URangeInput },
+    components: { URangeInput, UPreview },
     directives: { clickOutside },
-    mixins: [MField, DateFormatMixin, i18nMixin('u-date-picker')],
+    mixins: [MField, MPreview, DateFormatMixin, i18nMixin('u-date-picker')],
     props: {
         preIcon: {
             type: String,
@@ -112,6 +115,7 @@ export default {
             validator: (value) => ['body', 'reference'].includes(value),
         },
         opened: { type: Boolean, default: false },
+        preview: { type: Boolean, default: false },
         width: String,
         height: String,
     },
@@ -136,6 +140,16 @@ export default {
         },
         validShowFormatters() {
             return formatterOptions[this.picker];
+        },
+        previewText() {
+          const start = this.genDisplayFormatText(this.showStartDate);
+          const end = this.genDisplayFormatText(this.showEndDate);
+
+          if (!start && !end) {
+            return '--';
+          }
+
+          return [start, end].join(' ~ ');
         },
     },
     watch: {

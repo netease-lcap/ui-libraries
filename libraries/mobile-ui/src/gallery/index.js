@@ -39,6 +39,9 @@ export default createComponent({
       return this.$env && this.$env.VUE_APP_DESIGNER;
     },
     getUrl(item) {
+      if (this.ifDesigner()) {
+        return '{{ dataSource }}';
+      }
       if (typeof item === 'object')
         return item.url;
       return item;
@@ -75,7 +78,7 @@ export default createComponent({
         <swipe class="swiper" onChange={this.onSwipeChange}>
           {this.options.map((item) => (
             <swipe-item class="swiper-slide">
-              <img src={this.getUrl(item)} />
+              <s-image src={this.getUrl(item)} />
             </swipe-item>
           ))}
           <template slot="indicator">

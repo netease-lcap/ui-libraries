@@ -123,7 +123,8 @@ namespace nasl.ui {
       description: '当触发方式为“悬浮”时，提示内容消失延迟时间，单位为ms。',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0
       }
     })
     hideDelay: nasl.core.Integer = 200;
@@ -163,22 +164,22 @@ namespace nasl.ui {
       title: '弹出前',
       description: '弹出前触发。'
     })
-    onBeforeOpen: (event: any) => any ;
+    onBeforeOpen: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '弹出时',
       description: '弹出时触发。'
     })
-    onOpen: (event: any) => any ;
+    onOpen: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '隐藏前',
       description: '隐藏前触发。'
     })
-    onBeforeClose: (event: any) => any ;
+    onBeforeClose: (event: nasl.ui.BaseEvent) => void;
     @Event({
       title: '隐藏后',
       description: '隐藏时触发。'
     })
-    onClose: (event: any) => any ;
+    onClose: (event: nasl.ui.BaseEvent) => void;
     @Slot({
       title: 'undefined',
       description: '自定义弹出的内容。'

@@ -99,17 +99,20 @@ namespace nasl.ui {
     childrenField: (item: T) => any = ((item: any)  => item.children) as any;
     @Prop({
       group: '主要属性',
-      title: '占位提示'
+      title: '占位提示',
+      implicitToString: true,
     })
     placeholder: nasl.core.String = '请选择';
     @Prop({
       group: '主要属性',
-      title: '顶部栏标题'
+      title: '顶部栏标题',
+      implicitToString: true,
     })
     title: nasl.core.String = '标题';
     @Prop({
       group: '主要属性',
-      title: '未选中提示文案'
+      title: '未选中提示文案',
+      implicitToString: true,
     })
     tabPlaceholder: nasl.core.String = '请选择';
     @Prop({
@@ -170,14 +173,14 @@ namespace nasl.ui {
     })
     onFinish: (event: {
       value: V;
-    }) => any ;
+    }) => void;
     @Event({
       title: '选中项变化时触发',
       description: '选中项变化时触发'
     })
     onChange: (event: {
       value: V;
-    }) => any ;
+    }) => void;
     @Slot({
       title: 'option'
     })

@@ -4,6 +4,7 @@ import { toArray, readFile, isOversize, isImageFile } from './utils';
 
 // Mixins
 import { FieldMixin } from '../mixins/field';
+import PreviewMixin from '../mixins/preview';
 
 // Components
 import Icon from '../icon';
@@ -21,7 +22,7 @@ const [createComponent, bem, t] = createNamespace('uploader');
 export default createComponent({
   inheritAttrs: false,
 
-  mixins: [FieldMixin],
+  mixins: [FieldMixin, PreviewMixin],
   // model: {
   //   prop: 'fileListprop',
   // },
@@ -135,7 +136,7 @@ export default createComponent({
     canUp() {
       if (this.currentValue.length === 0) return true;
       const can = this.currentValue.every(
-        (item) => item.status !== 'uploading'
+        (item) => item.status !== 'uploading',
       );
       return can;
     },
@@ -172,11 +173,11 @@ export default createComponent({
       if (this.converter === 'json')
         // fix for u-validator rules="required"
         return Array.isArray(value) && value.length === 0
-          ? '[]'
+          ? null
           : JSON.stringify(value);
       if (this.converter === 'simple')
         return Array.isArray(value) && value.length === 0
-          ? ''
+          ? null
           : this.simpleConvert(value);
       return value;
     },
@@ -291,15 +292,15 @@ export default createComponent({
           files = files.slice(0, maxCount);
         }
 
-        Promise.all(
-          files.map((file) => readFile(file, this.resultType))
-        ).then((contents) => {
+        Promise.all(files.map((file) => readFile(file, this.resultType))).then(
+          (contents) => {
             const list = files.map((file, index) => {
               const result = {
                 file,
                 status: '',
                 message: '',
-                uid: file.uid !== undefined ? file.uid : Date.now() + files.length,
+                uid:
+                  file.uid !== undefined ? file.uid : Date.now() + files.length,
                 name: file.name,
                 size: file.size,
                 percent: 0,
@@ -312,7 +313,7 @@ export default createComponent({
             });
 
             this.onAfterRead(list, oversize);
-          }
+          },
         );
       } else {
         readFile(files, this.resultType).then((content) => {
@@ -321,7 +322,10 @@ export default createComponent({
             file: files,
             status: '',
             message: '',
-            uid: file.uid !== undefined ? file.uid : Date.now() + (files?.length || 1),
+            uid:
+              file.uid !== undefined
+                ? file.uid
+                : Date.now() + (files?.length || 1),
             name: file.name,
             size: file.size,
           };
@@ -348,10 +352,12 @@ export default createComponent({
             if (item.file) {
               if (isOversize(item.file, this.maxSize)) {
                 oversizeFiles.push(item);
-                Toast(_template(t('maxSize'), {
-                  name: item.file.name,
-                  size: this.maxSize,
-                }));
+                Toast(
+                  _template(t('maxSize'), {
+                    name: item.file.name,
+                    size: this.maxSize,
+                  }),
+                );
               } else {
                 validFiles.push(item);
               }
@@ -363,7 +369,7 @@ export default createComponent({
             _template(t('maxSize'), {
               name: files.file.name,
               size: this.maxSize,
-            })
+            }),
           );
         }
         this.$emit('oversize', oversizeFiles, this.getDetail());
@@ -381,7 +387,7 @@ export default createComponent({
         if (this.afterRead) {
           this.afterRead(validFiles, this.getDetail());
         }
-        this.$nextTick(function () {
+        this.$nextTick(function() {
           this.currentValue.forEach((file, index) => {
             if (!file.url && !file.status) {
               file.status = 'uploading';
@@ -449,7 +455,7 @@ export default createComponent({
 
       const imageFiles = this.currentValue.filter((item) => isImageFile(item));
       const imageContents = imageFiles.map(
-        (item) => item.content || item.url || item
+        (item) => item.content || item.url || item,
       );
 
       this.imagePreview = ImagePreview({
@@ -505,7 +511,7 @@ export default createComponent({
     genPreviewItem(item, index) {
       const deleteAble = item.deletable ?? this.deletable;
       const showDelete =
-        item.status !== 'uploading' && deleteAble && !this.readonly;
+        item.status !== 'uploading' && deleteAble && !this.readonly && !this.isPreview;
 
       const DeleteIcon = showDelete && (
         <div
@@ -573,57 +579,72 @@ export default createComponent({
           </div>
         );
       const getErrMsg = (errMsg) => {
-        return (JSON.parse(errMsg)?.Message || '')
-      }
+        return JSON.parse(errMsg)?.Message || '';
+      };
       return (
         <div>
           <div
-          class={bem('preview')}
-          onClick={() => {
-            this.$emit('click-preview', item, this.getDetail(index));
-          }}
-        >
-          {Preview}
-          {this.genPreviewMask(item)}
-          {DeleteIcon}
-
-        </div>
-         {item.errorMsg && getErrMsg(item.errorMsg) && <div class={bem("err-info")}>
-          <Icon class={bem('err-info-icon')} name="info" />
-          <PopoverCombination placement="bottom-start"  class={[bem('err-info-msg'), 'van-ellipsis', bem('title')]}>
-            <template slot="reference" >
-                {getErrMsg(item.errorMsg) || ''}
-            </template>
-            <PopoverCombinationItem slot="default">
-              <van-text text={getErrMsg(item.errorMsg)}></van-text>
-            </PopoverCombinationItem>
-          </PopoverCombination>
-        </div>}
+            class={bem('preview')}
+            onClick={() => {
+              this.$emit('click-preview', item, this.getDetail(index));
+            }}
+          >
+            {Preview}
+            {this.genPreviewMask(item)}
+            {DeleteIcon}
+          </div>
+          {item.errorMsg && getErrMsg(item.errorMsg) && (
+            <div class={bem('err-info')}>
+              <Icon class={bem('err-info-icon')} name="info" />
+              <PopoverCombination
+                placement="bottom-start"
+                class={[bem('err-info-msg'), 'van-ellipsis', bem('title')]}
+              >
+                <template slot="reference">
+                  {getErrMsg(item.errorMsg) || ''}
+                </template>
+                <PopoverCombinationItem slot="default">
+                  <van-text text={getErrMsg(item.errorMsg)}></van-text>
+                </PopoverCombinationItem>
+              </PopoverCombination>
+            </div>
+          )}
         </div>
       );
     },
 
     genPreviewList() {
       if (this.previewImage) {
-        return this.currentValue.map(this.genPreviewItem);
+        if (this.currentValue?.length) {
+          return this.currentValue.map(this.genPreviewItem);
+        }
+
+        if (this.isPreview) {
+          return '--';
+        }
       }
     },
 
     genUpload() {
       if (!this.canUp) return;
-      if (this.readonly && !(this.$env && this.$env.VUE_APP_DESIGNER)) return;
+      if (this.readonly && !this.inDesigner()) return;
       if (this.currentValue.length >= this.maxCount || !this.showUpload) {
         return;
       }
+      if (this.isPreview) return;
 
       const slot = this.slots();
 
       const Input = this.readonly ? null : (
         <input
-          {...{ attrs: {
-            ...this.$attrs,
-            capture: ['camera'].includes(this.$attrs.capture) ? this.$attrs.capture : undefined
-          } }}
+          {...{
+            attrs: {
+              ...this.$attrs,
+              capture: ['camera'].includes(this.$attrs.capture)
+                ? this.$attrs.capture
+                : undefined,
+            },
+          }}
           ref="input"
           type="file"
           accept={this.accept}
@@ -643,14 +664,20 @@ export default createComponent({
       }
       return (
         <div
-          class={bem('upload', { readonly: this.readonly, empty: this.currentValue.length === 0 })}
+          class={bem('upload', {
+            readonly: this.readonly,
+            empty: this.currentValue.length === 0,
+          })}
           style={style}
           onClick={this.onClickUpload}
         >
           <div
-            class={bem('upload-icon-slot', { designer: this.$env && this.$env.VUE_APP_DESIGNER })}
-            vusion-slot-name="default">
-            { slot || <Icon name={this.uploadIcon} class={bem('upload-icon')} /> }
+            class={bem('upload-icon-slot', {
+              designer: this.inDesigner(),
+            })}
+            vusion-slot-name="default"
+          >
+            {slot || <Icon name={this.uploadIcon} class={bem('upload-icon')} />}
           </div>
           {this.uploadText && (
             <span class={bem('upload-text')}>{this.uploadText}</span>
@@ -718,7 +745,7 @@ export default createComponent({
               item: file,
               xhr,
             },
-            this
+            this,
           );
         },
         onSuccess: (res) => {
@@ -747,7 +774,7 @@ export default createComponent({
                   item: file,
                   xhr,
                 },
-                this
+                this,
               );
             }
           }, 100);
@@ -765,7 +792,7 @@ export default createComponent({
               item: file,
               xhr,
             },
-            this
+            this,
           );
         },
       });
@@ -784,12 +811,16 @@ export default createComponent({
 
   render() {
     return (
-      <div class={bem('', { uploaded: this.currentValue.length > 0 })}
-        {...{ attrs: this.$attrs }}>
-        <div class={bem('wrapper', {
-          disabled: this.disabled,
-          empty: this.currentValue.length === 0,
-        })}>
+      <div
+        class={bem('', { uploaded: this.currentValue.length > 0 })}
+        {...{ attrs: this.$attrs }}
+      >
+        <div
+          class={bem('wrapper', {
+            disabled: this.disabled,
+            empty: this.currentValue.length === 0,
+          })}
+        >
           {this.genPreviewList()}
           {this.genUpload()}
         </div>

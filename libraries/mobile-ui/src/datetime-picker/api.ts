@@ -154,20 +154,30 @@ namespace nasl.ui {
           if: _ => _.type === 'datetime' && _.unit === 'minute'
         }]
       },
-      if: _ => !_.advancedFormat.enable
+      if: _ => !_.advancedFormatEnable
     })
     showFormatter: 'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' | 'GGGG-W周' | 'GGGG年第W周' | 'GGGG-WWWW' | 'YYYY年M月' | 'YYYY-MM' | 'M/YYYY' | 'YYYY年第Q季度' | 'YYYY年QQ' | 'YYYY-QQ' | 'YYYY年' | 'YYYY' | 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' | 'YYYY-MM-DD HH:mm:ss' | 'YYYY年M月D日 HH时mm分ss秒' | 'YYYY-MM-DD HH:mm HH:mm' | 'YYYY年M月D日 HH时mm分';
-    @Prop({
+    @Prop<VanDatetimePickerOptions, 'advancedFormatEnable'>({
+      group: '主要属性',
       title: '高级格式化',
-      bindHide: true
+      description: '用来控制数字的展示格式',
+      onChange: [
+        { clear: ['advancedFormatValue'] }
+      ],
+      setter: {
+        concept: 'SwitchSetter',
+      },
     })
-    advancedFormat: {
-      enable: nasl.core.Boolean;
-      value: nasl.core.String;
-    } = {
-      enable: false,
-      value: ''
-    };
+    advancedFormatEnable: nasl.core.Boolean = false;
+
+    @Prop<VanDatetimePickerOptions, 'advancedFormatValue'>({
+      group: '主要属性',
+      title: '高级格式化内容',
+      description: '用来控制数字的展示格式',
+      if: _ => _.advancedFormatEnable === true,
+      bindHide: true,
+    })
+    advancedFormatValue: nasl.core.String;
     @Prop({
       title: '区间选择',
       description: '是否支持区间选择',
@@ -181,13 +191,13 @@ namespace nasl.ui {
       sync: true,
       if: _ => _.range === true
     })
-    startValue: nasl.core.String;
+    startValue: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop<VanDatetimePickerOptions, 'endValue'>({
       title: '结束值',
       sync: true,
       if: _ => _.range === true
     })
-    endValue: nasl.core.String;
+    endValue: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop({
       title: '是否使用新版外观',
       description: '是否使用新版外观',
@@ -203,19 +213,19 @@ namespace nasl.ui {
       sync: true,
       if: _ => _.range !== true
     })
-    value: nasl.core.String;
+    value: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop({
       group: '数据属性',
       title: '最小日期',
       description: '当时间选择类型为datetime时可选的最小时间，精确到分钟, 默认为十年前'
     })
-    minDate: nasl.core.String;
+    minDate: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop({
       group: '数据属性',
       title: '最大日期',
       description: '当时间选择类型为datetime时可选的最大时间，精确到分钟, 默认为十年后'
     })
-    maxDate: nasl.core.String;
+    maxDate: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop<VanDatetimePickerOptions, 'maxHour'>({
       group: '数据属性',
       title: '最大小时',
@@ -223,7 +233,9 @@ namespace nasl.ui {
       if: _ => _.type === 'time',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0,
+        max: 23
       }
     })
     maxHour: nasl.core.Integer = 23;
@@ -234,7 +246,9 @@ namespace nasl.ui {
       if: _ => _.type === 'time',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0,
+        max: 23
       }
     })
     minHour: nasl.core.Integer = 0;
@@ -245,7 +259,9 @@ namespace nasl.ui {
       if: _ => _.type === 'time',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0,
+        max: 59
       }
     })
     maxMinute: nasl.core.Integer = 59;
@@ -256,7 +272,9 @@ namespace nasl.ui {
       if: _ => _.type === 'time',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0
+        precision: 0,
+        min: 0,
+        max: 59
       }
     })
     minMinute: nasl.core.Integer = 0;
@@ -287,7 +305,8 @@ namespace nasl.ui {
     private displayFormat: nasl.core.String;
     @Prop({
       group: '主要属性',
-      title: '顶部栏标题'
+      title: '顶部栏标题',
+      implicitToString: true,
     })
     title: nasl.core.String = '';
     @Prop({
@@ -305,7 +324,7 @@ namespace nasl.ui {
         }]
       }
     })
-    inputAlign: 'left' | 'center' | 'right' = 'left';
+    inputAlign: 'left' | 'center' | 'right' = 'right';
     @Prop({
       group: '交互属性',
       title: '点击遮罩层后关闭',
@@ -338,19 +357,30 @@ namespace nasl.ui {
       description: '',
       setter: {
         concept: "InputSetter"
-      }
+      },
+      implicitToString: true,
     })
     placeholder: nasl.core.String;
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '显示预览态',
+      docDescription: '',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    preview: nasl.core.Boolean = false;
     @Event({
       title: '确认',
       description: '点击完成按钮时触发的事件'
     })
-    onConfirm: (event: nasl.core.String) => any ;
+    onConfirm: (event: nasl.core.String) => void;
     @Event({
       title: '取消',
       description: '点击完成取消时触发的事件'
     })
-    onCancel: (event: any) => any ;
+    onCancel: (event: nasl.ui.BaseEvent) => void;
 
     @Slot({
       title: '',
@@ -443,10 +473,12 @@ namespace nasl.ui {
           title: '确认'
         }, {
           title: '取消'
+        }, {
+          title: '无'
         }]
       }
     })
-    targetMethod: 'confirm' | 'cancel';
+    targetMethod: 'confirm' | 'cancel' | 'none';
 
     @Slot({
       title: 'undefined',

@@ -154,6 +154,7 @@ namespace nasl.ui {
             title: '占位符',
             description: '为空时显示的占位符文本',
             docDescription: '搜索框为空时提示文本',
+            implicitToString: true,
         })
         placeholder: nasl.core.String = '请选择';
 
@@ -258,6 +259,17 @@ namespace nasl.ui {
             },
         })
         private join: ',' | '|' | ' / ' = ' / ';
+
+        @Prop({
+          group: '状态属性',
+          title: '预览',
+          description: '显示预览态',
+          docDescription: '',
+          setter: {
+            concept: 'SwitchSetter',
+          },
+        })
+        preview: nasl.core.Boolean = false;
 
         @Event({
             title: '输入时',

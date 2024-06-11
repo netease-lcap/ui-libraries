@@ -25,7 +25,18 @@ namespace nasl.ui {
               description: '是否验证后无提示',
           })
           muted: nasl.core.Boolean = false,
-      ): any {}
+      ): ValidateResult {
+         return {
+            rawValue: '',
+            value: '',
+            trigger: '',
+            muted:'',
+            valid: true,
+            touched: true,
+            dirty: true,
+            firstError: ''
+         };
+      }
       constructor(options?: Partial<UValidatorOptions>) { super(); }
   }
 
@@ -36,7 +47,7 @@ namespace nasl.ui {
           description: '临时修改验证值',
           docDescription: '临时修改验证值',
       })
-      validatingValue: nasl.core.Any;
+      validatingValue: any;
 
       @Prop({
           group: '数据属性',
@@ -68,7 +79,7 @@ namespace nasl.ui {
           docDescription: '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型，详见[验证规则](#验证规则)',
           bindHide: true,
       })
-      rules: nasl.core.String | Array<nasl.core.Any>;
+      rules: nasl.core.String | Array<any>;
 
       @Prop({
           group: '主要属性',
