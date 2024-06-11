@@ -39,7 +39,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        max: nasl.core.Decimal = 99;
+        max: nasl.core.Decimal | nasl.core.Integer = 99;
 
         @Prop({
             group: '主要属性',

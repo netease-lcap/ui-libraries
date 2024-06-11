@@ -22,7 +22,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        percent: nasl.core.Decimal = 0;
+        percent: nasl.core.Decimal | nasl.core.Integer = 0;
 
         @Prop({
             group: '样式属性',

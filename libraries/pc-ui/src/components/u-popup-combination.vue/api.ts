@@ -94,7 +94,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        hideDelay: nasl.core.Decimal = 200;
+        hideDelay: nasl.core.Decimal | nasl.core.Integer = 200;
 
         @Prop({
             group: '主要属性',

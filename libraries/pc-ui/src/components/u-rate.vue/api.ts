@@ -27,7 +27,7 @@ namespace nasl.ui {
                 max: 20,
             },
         })
-        value: nasl.core.Decimal = 0;
+        value: nasl.core.Decimal | nasl.core.Integer = 0;
 
         @Prop({
             group: '数据属性',
@@ -38,7 +38,7 @@ namespace nasl.ui {
                 max: 20,
             },
         })
-        max: nasl.core.Decimal = 5;
+        max: nasl.core.Decimal | nasl.core.Integer = 5;
 
         @Prop({
             group: '主要属性',
@@ -127,8 +127,8 @@ namespace nasl.ui {
             description: '修改时触发',
         })
         onChange: (event: {
-            value: nasl.core.Decimal;
-            oldValue: nasl.core.Decimal;
+            value: nasl.core.Decimal | nasl.core.Integer;
+            oldValue: nasl.core.Decimal | nasl.core.Integer;
         }) => any;
     }
 }

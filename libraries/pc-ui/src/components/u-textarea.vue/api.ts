@@ -40,7 +40,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        private minlength: nasl.core.Decimal;
+        private minlength: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             title: '拼写检查',
@@ -80,7 +80,7 @@ namespace nasl.ui {
                 { update: {showWordLimit:false}, if: _ => _ === null },
             ],
         })
-        maxlength: nasl.core.Decimal;
+        maxlength: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop<UTextareaOptions, 'showWordLimit'>({
             group: '主要属性',
