@@ -346,6 +346,15 @@ namespace nasl.ui {
         })
         onResponsive: (event: any) => any;
 
+        @Event({
+            title: '点击栅格行',
+            description: '点击栅格行时触发',
+        })
+        onClick: (event: {
+            row: nasl.core.Integer;
+            column: nasl.core.Integer;
+        }) => any;
+
         @Slot({
             title: 'undefined',
             description: '插入需要布局的元素。',

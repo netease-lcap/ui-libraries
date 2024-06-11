@@ -1,5 +1,5 @@
 <template>
-<div :class="$style.root" vusion-slot-name="default" :style="[commonStyle, responsiveStyle]" :empty="!$slots.default" :nowrap="!wrap">
+<div :class="$style.root" vusion-slot-name="default" :style="[commonStyle, responsiveStyle]" :empty="!$slots.default" :nowrap="!wrap" @click="onClick">
     <slot></slot>
     <s-empty v-if="(!$slots.default) && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']"></s-empty>
 </div>
@@ -124,6 +124,11 @@ export default {
             });
             this.currentSpan = span;
         },
+        onClick() {
+            const params = { row: this.parentVM.$parent.$children.findIndex(item => item === this.parentVM), column: this.parentVM.$children.findIndex(item => item === this), vm: this };
+            console.log('handleClick', params)
+            this.$emit('onClick', params)
+        }
     },
 };
 </script>
