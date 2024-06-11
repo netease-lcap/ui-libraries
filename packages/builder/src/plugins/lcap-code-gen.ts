@@ -1,7 +1,7 @@
 import path from 'path';
 import glob from 'fast-glob';
 import fs from 'fs-extra';
-import { Plugin } from 'vite';
+import { Plugin, normalizePath } from 'vite';
 import { camelCase, kebabCase, upperFirst } from 'lodash';
 import {
   virtualThemeCSSFileId,
@@ -45,13 +45,13 @@ function genVarCssCode({
     cssVars.push(...varFiles);
   }
 
-  const code = cssVars.map((filePath) => `@import '${filePath}';`).join('\n');
+  const code = cssVars.map((filePath) => `@import '${normalizePath(filePath)}';`).join('\n');
   return code;
 }
 
 function genComponentStoriesCode({ themeComponentFolder: componentFolder = '', framework, findThemeType }: LcapCodeGenOption) {
   const imports: string[] = [
-    `import createComponentPreview from '${path.resolve(__dirname, `../../input/${framework}/createComponentPreview`)}';`,
+    `import createComponentPreview from '${normalizePath(path.resolve(__dirname, `../../input/${framework}/createComponentPreview`))}';`,
   ];
   const stories: string[] = ['const stories = ['];
   const previewFilePath = findThemeType === 'component' ? '*/theme/index.{tsx,ts,jsx,js,vue}' : '*/index.{tsx,ts,jsx,js,vue}';
@@ -64,7 +64,7 @@ function genComponentStoriesCode({ themeComponentFolder: componentFolder = '', f
     const varName = upperFirst(camelCase(compName));
     const name = framework && framework.startsWith('vue') ? kebabCase(varName) : varName;
 
-    imports.push(`import ${varName} from '${filePath}';`);
+    imports.push(`import ${varName} from '${normalizePath(filePath)}';`);
 
     stories.push(
       `{ demo: ${varName}, name: '${name}' },`,
@@ -86,7 +86,8 @@ function genThemePagePreviewMapCode({ themeComponentFolder: componentFolder = ''
   const exportCodes: string[] = [];
 
   previewPages.forEach(({ name }) => {
-    importCodes.push(`import ${name} from '${path.resolve(componentFolder, `../previews/${name}`)}';`);
+    const importPath = normalizePath(path.resolve(componentFolder, `../previews/${name}`));
+    importCodes.push(`import ${name} from '${importPath}';`);
     exportCodes.push(`  ${name},`);
   });
 
@@ -103,7 +104,7 @@ function genThemeEntryCode({ framework }: LcapCodeGenOption) {
   if (framework === 'vue2') {
     return [
       'import Vue from \'vue\';',
-      `import App from '${path.resolve(__dirname, '../../input/vue2/App')}';`,
+      `import App from '${normalizePath(path.resolve(__dirname, '../../input/vue2/App'))}';`,
       'Vue.config.productionTip = false;',
       'const app = new Vue({ ...App });',
       'app.$mount("#app");',
@@ -113,7 +114,7 @@ function genThemeEntryCode({ framework }: LcapCodeGenOption) {
   const importCodes: string[] = [
     'import React from \'react\';',
     'import ReactDOM from \'react-dom/client\'',
-    `import App from '${path.resolve(__dirname, '../../input/react/App')}';`,
+    `import App from '${normalizePath(path.resolve(__dirname, '../../input/react/App'))}';`,
   ];
 
   const bodyCodes: string[] = [
@@ -166,7 +167,7 @@ function genDefaultPreviewCode({
 }: LcapCodeGenOption) {
   const isExtension = type === 'extension';
   const codes = [
-    `export { default as ComponentWrap } from '${path.resolve(__dirname, `../../input/${framework}/component-preview`)}'`,
+    `export { default as ComponentWrap } from '${normalizePath(path.resolve(__dirname, `../../input/${framework}/component-preview`))}'`,
     'export const renderAppPreview = (app) => app;',
   ];
 
@@ -203,7 +204,7 @@ function genThemePagePreviewWrapCode(options: LcapCodeGenOption) {
 
     if (index !== -1) {
       return [
-        `export { renderAppPreview, ComponentWrap } from '${filePath}';`,
+        `export { renderAppPreview, ComponentWrap } from '${normalizePath(filePath)}';`,
       ].join('\n');
     }
   }
