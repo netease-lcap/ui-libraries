@@ -58,7 +58,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        duration: nasl.core.Decimal = 2000;
+        duration: nasl.core.Decimal | nasl.core.Integer = 2000;
 
         @Prop({
             title: '位置',

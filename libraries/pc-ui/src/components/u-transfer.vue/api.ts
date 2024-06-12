@@ -73,6 +73,7 @@ namespace nasl.ui {
             title: '分页大小',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
         })
         private pageSize: nasl.core.Integer = 50;

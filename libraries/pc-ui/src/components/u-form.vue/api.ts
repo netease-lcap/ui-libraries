@@ -122,10 +122,11 @@ namespace nasl.ui {
             setter: {
                 concept: 'NumberInputSetter',
                 min: 1,
+                precision: 0,
             },
             if: _ => _.layout === 'inline-flex' || _.repeat !== 1,
         })
-        repeat: nasl.core.Decimal = 1;
+        repeat: nasl.core.Integer = 1;
 
         @Prop({
             group: '主要属性',
@@ -360,9 +361,10 @@ namespace nasl.ui {
             docDescription: '列跨越的格数。',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
         })
-        span: nasl.core.Decimal = 1;
+        span: nasl.core.Integer = 1;
 
         @Prop({
             group: '主要属性',
@@ -546,9 +548,10 @@ namespace nasl.ui {
             docDescription: '整个表单的划分列数。',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
         })
-        repeat: nasl.core.Decimal = 1;
+        repeat: nasl.core.Integer = 1;
 
         @Prop({
             group: '主要属性',

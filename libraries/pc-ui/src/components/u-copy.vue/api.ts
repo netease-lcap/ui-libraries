@@ -50,10 +50,9 @@ namespace nasl.ui {
             description: '提示框显示时长',
             setter: {
                 concept: 'NumberInputSetter',
-                precision: 0,
             },
         })
-        private hideDelay: nasl.core.Integer = 3000;
+        private hideDelay: nasl.core.Decimal | nasl.core.Integer = 3000;
 
         @Prop({
             group: '数据属性',
