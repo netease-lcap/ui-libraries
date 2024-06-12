@@ -426,7 +426,7 @@ const VueDataSource = Vue.extend({
       if (!uniqData.length) return;
 
       if (!this._load || typeof this._load !== 'function') return;
-      this._load({ filterValue, paging: {} }).then((result) => {
+      this._load({ noTextValues: filterValue, paging: {} }).then((result) => {
         let partialData = [];
         if (result instanceof Array) {
           // 只返回数组，没有 total 字段
