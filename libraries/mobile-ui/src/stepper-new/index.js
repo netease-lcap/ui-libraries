@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 import { createNamespace, isDef, addUnit } from '../utils';
 import { resetScroll } from '../utils/dom/reset-scroll';
 import { preventDefault } from '../utils/dom/event';
@@ -23,7 +24,14 @@ function equal(value1, value2) {
 const isNil = (val) => val === null || val === undefined || val === '';
 
 export default createComponent({
-  mixins: [FieldMixin, PreviewMixin],
+  mixins: [
+    FieldMixin,
+    PreviewMixin,
+    sync({
+      value: 'currentValue',
+      formattedValue: 'formattedValue',
+    }),
+  ],
 
   props: {
     value: {

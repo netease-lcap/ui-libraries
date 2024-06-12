@@ -11,7 +11,7 @@ namespace nasl.ui {
         @Prop({
             title: '数据',
         })
-        data: UCheckboxesOptions<T, V, C>['dataSource'];
+        data: nasl.collection.List<T>;
 
         @Prop({
             title: '选中值',
@@ -254,6 +254,11 @@ namespace nasl.ui {
         description: '多选项',
     })
     export class UCheckbox<T, V> extends ViewComponent {
+
+        @Prop({
+          title: '选中',
+        })
+        value: UCheckboxOptions<T, V>['value'] = false;
 
         constructor(options?: Partial<UCheckboxOptions<T, V>>) { super(); }
     }

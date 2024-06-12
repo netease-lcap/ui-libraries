@@ -17,11 +17,6 @@ namespace nasl.ui {
     })
     value: VanCascaderOptions<T, V>['value'];
 
-    // @Prop({
-    //   title: '数据',
-    // })
-    // data: VanCascaderOptions<T, V>['dataSource'];
-
     @Prop({
       title: '过滤文本',
     })

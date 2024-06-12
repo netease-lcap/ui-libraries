@@ -5,42 +5,12 @@
             "idetype": "container",
             "containerDirection": "this.getAttribute('direction')?.value === 'vertical' ? 'column' : 'row' ",
             "expandWhenHesitate": true
-        },
-        "automate": [
-            {
-              "command": "WRAP_LINEAR_VERTICAL",
-              "useblock": 0,
-              "attribute": {
-                "mode": "flex",
-                "direction": "vertical",
-                "justify": "start",
-                "alignment": "start",
-                "wrap": "false"
-              }
-            },
-            {
-              "command": "WRAP_LINEAR_HORIZONTAL",
-              "useblock": 0,
-              "attribute": {
-                "mode": "flex",
-                "direction": "horizontal",
-                "justify": "start",
-                "alignment": "start",
-                "wrap": "false"
-              }
-            }
-        ]
+        }
     },
     {
         "name": "UAbsoluteLayout",
         "ideusage": {
-            "idetype": "board",
-            "automate": [
-                {
-                  "command": "WRAP_FREE",
-                  "useblock": 0
-                }
-            ]
+            "idetype": "board"
         }
     },
     {
@@ -259,7 +229,7 @@
             "idetype": "container",
             "parentAccept": "target.tag === 'u-panel'"
         }
-    }, 
+    },
     {
         "name": "UCollapse",
         "ideusage": {

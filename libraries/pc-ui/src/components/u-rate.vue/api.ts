@@ -8,6 +8,10 @@ namespace nasl.ui {
         group: 'Form'
     })
     export class URate extends ViewComponent {
+        @Prop({
+            title: '选中值',
+        })
+        value: URateOptions['value'];
 
         constructor(options?: Partial<URateOptions>) { super(); }
     }

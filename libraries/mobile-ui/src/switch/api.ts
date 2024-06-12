@@ -8,6 +8,10 @@ namespace nasl.ui {
     group: "Form"
   })
   export class VanSwitch extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: nasl.core.Boolean = false;
     constructor(options?: Partial<VanSwitchOptions>) {
       super();
     }

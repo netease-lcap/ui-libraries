@@ -8,6 +8,20 @@ namespace nasl.ui {
       group: 'Selector'
   })
   export class UTimePicker extends ViewComponent {
+      @Prop({
+        title: '值',
+      })
+      value: UTimePickerOptions['value'];
+
+      @Prop({
+        title: '起始值',
+      })
+      startTime: UTimePickerOptions['startTime'];
+
+      @Prop({
+        title: '结束值',
+      })
+      endTime: UTimePickerOptions['endTime'];
 
       constructor(options?: Partial<UTimePickerOptions>) { super(); }
   }

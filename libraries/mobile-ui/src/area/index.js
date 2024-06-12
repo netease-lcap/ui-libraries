@@ -10,6 +10,7 @@ import { EmptyCol } from '../emptycol';
 import { FieldMixin } from '../mixins/field';
 import PreviewMixin from '../mixins/preview';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
+import SyncValueMixin from '../mixins/sync-value';
 
 const [createComponent, bem] = createNamespace('area');
 
@@ -39,6 +40,7 @@ export default createComponent({
     FieldMixin,
     EventSlotCommandProvider(['confirm', 'cancel']),
     PreviewMixin,
+    SyncValueMixin,
   ],
   props: {
     ...pickerProps,

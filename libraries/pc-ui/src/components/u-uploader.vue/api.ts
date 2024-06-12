@@ -8,7 +8,10 @@ namespace nasl.ui {
         group: 'Form'
     })
     export class UUploader extends ViewComponent {
-
+        @Prop({
+            title: '值',
+        })
+        value: UUploaderOptions['value'];
 
         @Method({
             title: '选择',

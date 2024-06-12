@@ -21,7 +21,7 @@ import { cellProps } from '../cell/shared';
 import VanEmptyCol from '../emptycol/index';
 import VanFieldinput from '../fieldinput/index';
 
-import VusionValidator from '@vusion/validator';
+import VusionValidator from '@lcap/validator';
 
 const [createComponent, bem, t] = createNamespace('field');
 const comSet = new Set(['van-fieldinput','van-fieldtextarea','van-fieldnumber']);

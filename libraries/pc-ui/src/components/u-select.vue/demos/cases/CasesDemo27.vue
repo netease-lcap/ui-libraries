@@ -26,7 +26,7 @@ remoteData = remoteData.map((text) => ({ text, value: text }));
 export default {
     methods: {
         load({ filterText, paging }) {
-            const value = filterText.toLowerCase();
+            const value = filterText ? filterText.toLowerCase() : '';
 
             // 这里使用 Promise 和 setTimeout 模拟一个异步请求
             return new Promise((resolve, reject) => {

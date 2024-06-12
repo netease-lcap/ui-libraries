@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { isFunction } from '../utils';
 import { formatResult } from '../utils/format/data-source';
 import VanForComponentsItem from './item.vue'
@@ -56,6 +57,9 @@ export default {
     },
     mixins: [
       DataSourceMixin,
+      sync({
+        data: 'options',
+      }),
     ],
     props: {
       dataSource: {

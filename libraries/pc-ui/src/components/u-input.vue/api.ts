@@ -8,7 +8,10 @@ namespace nasl.ui {
         group: 'Form'
     })
     export class UInput extends ViewComponent {
-
+        @Prop({
+          title: '输入值',
+        })
+        value: UInputOptions['value'];
 
         @Method({
             title: 'undefined',
@@ -75,6 +78,18 @@ namespace nasl.ui {
             docDescription: '输入框的值。',
         })
         value: nasl.core.String;
+
+
+        @Prop({
+            group: '数据属性',
+            title: '空值为null',
+            description: '清空值时是否设置为null',
+            designerValue: true,
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        emptyValueIsNull: nasl.core.Boolean = true;
 
         @Prop({
             group: '主要属性',

@@ -68,7 +68,7 @@ export default (stories) => {
           visibleStories.map((c) => (
             <ComponentWrap
               name={c.name}
-              title={c.title}
+              title={c.title || c.name}
               key={c.name}
               actived={c.name === activeName}
               demo={<c.demo />}

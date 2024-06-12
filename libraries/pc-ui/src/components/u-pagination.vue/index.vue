@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import i18n from './i18n';
 import i18nMixin from '../../mixins/i18n';
 
@@ -54,7 +55,14 @@ const DEFAULT_PAGE_SIZE = 20;
 export default {
     name: 'u-pagination',
     // i18n,
-    mixins: [i18nMixin('u-pagination')],
+    mixins: [
+      i18nMixin('u-pagination'),
+      sync({
+        page: 'currentPage',
+        size: 'currentPageSize',
+        totalPage: 'currentTotalPage',
+      })
+    ],
     props: {
         total: {
             type: Number,

@@ -20,7 +20,7 @@ namespace nasl.ui {
     @Prop({
       title: '数据',
     })
-    data: VanCheckboxGroupOptions<T, V, C>['dataSource'];
+    data: nasl.collection.List<T>;
   }
   export class VanCheckboxGroupOptions<T, V, C> extends ViewComponentOptions {
     @Prop({
@@ -168,6 +168,11 @@ namespace nasl.ui {
     group: "Form"
   })
   export class VanCheckbox<V> extends ViewComponent {
+    @Prop({
+      title: '选中',
+    })
+    value: nasl.core.Boolean = false;
+
     constructor(options?: Partial<VanCheckboxOptions<V>>) {
       super();
     }

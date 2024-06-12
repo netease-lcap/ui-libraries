@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import dayjs from '../../utils/dayjs';
 import DateFormatMixin from '../../mixins/date.format';
 // import { formatterOptions as dateFormatterOptions } from '../u-date-picker.vue/wrap';
@@ -94,7 +95,20 @@ export default {
     name: 'u-date-time-range-picker',
     // i18n,
     components: { URangeInput, UPreview },
-    mixins: [MField, MPreview, DateFormatMixin, i18nMixin('u-date-time-picker')],
+    mixins: [
+      MField,
+      MPreview,
+      DateFormatMixin,
+      i18nMixin('u-date-time-picker'),
+      sync({
+        startDate() {
+          return this.finalStartDateTime ? this.toValue(new Date(this.finalStartDateTime.replace(/-/g, '/'))) : undefined;
+        },
+        endDate() {
+          return this.finalEndDateTime ? this.toValue(new Date(this.finalEndDateTime.replace(/-/g, '/'))) : undefined;
+        },
+      }),
+    ],
     props: {
         preIcon: {
             type: String,

@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 import { createNamespace, isFunction } from '../utils';
 import { formatResult } from '../utils/format/data-source';
 import { FieldMixin } from '../mixins/field';
@@ -7,7 +8,15 @@ import PreviewMixin from '../mixins/preview';
 const [createComponent, bem] = createNamespace('radio-group');
 
 export default createComponent({
-  mixins: [ParentMixin('vanRadio'), FieldMixin, PreviewMixin],
+  mixins: [
+    ParentMixin('vanRadio'),
+    FieldMixin,
+    PreviewMixin,
+    sync({
+      value: 'datatemp',
+      data: 'options',
+    }),
+  ],
 
   props: {
     isNew: Boolean,

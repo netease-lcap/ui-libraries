@@ -11,7 +11,12 @@ namespace nasl.ui {
         @Prop({
             title: '数据',
         })
-        data: USelectOptions<T, V, P, M, C>['dataSource'];
+        data: nasl.collection.List<T>;
+
+        @Prop({
+          title: '数据量',
+        })
+        total: nasl.core.Integer;
 
         @Prop({
             title: '选中值',
@@ -37,6 +42,11 @@ namespace nasl.ui {
             title: '过滤文本',
         })
         filterText: nasl.core.String;
+
+        @Prop({
+            title: '没有文本信息的值',
+        })
+        noTextValues: Array<nasl.core.String>;
 
         @Method({
             title: 'undefined',
@@ -134,6 +144,17 @@ namespace nasl.ui {
             },
         })
         valueField: (item: T) => V = ((item: any)  => item.value) as any;
+
+        @Prop({
+            group: '数据属性',
+            title: '空值为null',
+            description: '清空值时是否设置为null',
+            designerValue: true,
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        emptyValueIsNull: nasl.core.Boolean = true;
 
         @Prop({
             group: '数据属性',

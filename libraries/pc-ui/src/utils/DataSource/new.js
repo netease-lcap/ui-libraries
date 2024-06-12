@@ -133,6 +133,7 @@ const VueDataSource = Vue.extend({
             queryChanged: false,
 
             treeDisplay: false,
+            useCache: true,
         };
     },
     computed: {
@@ -161,8 +162,10 @@ const VueDataSource = Vue.extend({
             if (this.paging) {
                 if (this.viewMode === 'more')
                     return this.arrangedData.slice(0, this.offset + this.limit);
-                else
-                    return this.arrangedData.slice(this.offset, this.offset + this.limit);
+                else {
+                    const data = this.arrangedData.slice(this.offset, this.offset + this.limit);
+                    return data.length === 0 ? this.arrangedData: data;
+                }
             } else
                 return this.arrangedData;
         },
@@ -207,6 +210,10 @@ const VueDataSource = Vue.extend({
             }
 
             let arrangedData = Array.from(data);
+            // fix: 2864106089210368 树型分页无效，多次点击才生效
+            if (this._process) {
+                arrangedData = this._process(arrangedData);
+            }
             if(this.isSimpleArray(arrangedData) && this.tag === "u-table-view") {
                 arrangedData = arrangedData.map(item => ({'simple': item}))
             }
@@ -240,13 +247,12 @@ const VueDataSource = Vue.extend({
             if (this.queryChanged) {
                 this.queryChanged = false;
             }
-
             this.arrangedData = arrangedData;
             return arrangedData;
         },
-        _process(data) {
-            return data;
-        },
+        // _process(data) {
+        //     return data;
+        // },
         clearLocalData() {
             this.data = [];
             this.arrangedData = [];
@@ -415,11 +421,15 @@ const VueDataSource = Vue.extend({
                     if (!this.remotePaging || limit === Infinity) {
                         this.data = finalResult.data;
                     } else {
-                        for (let i = 0; i < limit; i++) {
-                            const item = finalResult.data[i];
-                            if (item) {
-                                this.data[offset + i] = item;
+                        if(this.useCache) {
+                            for (let i = 0; i < limit; i++) {
+                                const item = finalResult.data[i];
+                                if (item) {
+                                    this.data[offset + i] = item;
+                                }
                             }
+                        } else {
+                            this.data = finalResult.data;
                         }
                     }
 

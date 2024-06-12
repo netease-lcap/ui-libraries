@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanRate extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: VanRateOptions['value'];
+
     constructor(options?: Partial<VanRateOptions>) {
       super();
     }

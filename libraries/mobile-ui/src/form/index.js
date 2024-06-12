@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import VueVusionValidator from '@vusion/validator/VuePlugin';
+import VueVusionValidator from '@lcap/validator/VuePlugin';
 Vue.use(VueVusionValidator);
 
 import { createNamespace } from '../utils';
