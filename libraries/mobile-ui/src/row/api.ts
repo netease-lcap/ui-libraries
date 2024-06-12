@@ -110,7 +110,9 @@ namespace nasl.ui {
         }, {
           title: '大（30）'
         }]
-      }
+      },
+      // @ts-ignore
+      implicitToString: true
     })
     gutter: '0' | '10' | '20' | '30' = '0';
     @Slot({

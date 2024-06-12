@@ -55,7 +55,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        num: nasl.core.Decimal = 5;
+        num: nasl.core.Decimal | nasl.core.Integer = 5;
 
         @Prop({
             group: '主要属性',

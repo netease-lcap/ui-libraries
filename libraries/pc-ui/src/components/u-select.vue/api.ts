@@ -174,6 +174,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'NumberInputSetter',
                 min: 1,
+                precision: 0,
             },
             if: _ => _.pagination === true,
         })
