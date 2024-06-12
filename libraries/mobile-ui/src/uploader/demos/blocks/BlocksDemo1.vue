@@ -1,5 +1,5 @@
 <!-- 基本用法 -->
 
 <template>
-  <van-uploader converter="json" url="/v1/upload" urlField="url"></van-uploader>
+  <van-uploader converter="json" url="/upload" urlField="filePath"></van-uploader>
 </template>
