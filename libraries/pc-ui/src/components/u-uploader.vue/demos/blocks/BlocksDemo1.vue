@@ -2,7 +2,7 @@
 
 <template>
   <u-uploader display="inline"
-    url="/v1/upload" urlField="url"
+    url="/upload" urlField="filePath"
     :limit="999"
     :file-icon-switcher="true"
     :download-icon-switcher="true"

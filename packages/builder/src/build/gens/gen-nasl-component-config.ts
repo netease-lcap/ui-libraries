@@ -131,20 +131,8 @@ export default function genNaslComponentConfig({
   };
 
   try {
-    const nasl = parseComponentAPI(fs.readFileSync(apiPath, 'utf8'));
+    const nasl = parseComponentAPI(fs.readFileSync(apiPath, 'utf8'), framework);
     Object.assign(component, nasl[0]);
-    if (!framework.startsWith('vue') && component.slots && component.slots.length > 0) {
-      component.slots.forEach((slotConfig) => {
-        if (!slotConfig.snippets || slotConfig.snippets.length === 0) {
-          return;
-        }
-
-        slotConfig.snippets = slotConfig.snippets.map((snippetConfig) => ({
-          ...snippetConfig,
-          code: snippetCode2NASL(snippetConfig.code),
-        }));
-      });
-    }
   } catch (e: any) {
     logger.error(`解析 ${apiPath} 失败，${e.message}`);
     process.exit(1);
