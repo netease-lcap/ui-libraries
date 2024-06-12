@@ -375,7 +375,7 @@ export default {
           return IMAGE_REGEXP.test(url) ? url : FileImg;
         },
         select() {
-            if (this.readonly || this.disabled || this.sending)
+            if (this.readonly || this.disabled || this.sending || this.$env.VUE_APP_DESIGNER)
                 return;
 
             this.$refs.file.value = '';

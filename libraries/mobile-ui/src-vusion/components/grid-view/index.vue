@@ -407,7 +407,7 @@ export default {
     initFloat() {
       this.mainW = this.getWidth();
       this.calcCol();
-      let list = [...this.virtualList];
+      let list = [...(this.virtualList || [])];
       list.forEach((e, i) => {
         let _i = i;
         if (!this.styleArr[_i]) {

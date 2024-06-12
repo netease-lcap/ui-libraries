@@ -3338,7 +3338,7 @@ exports[`u-time-picker.vue > Demo-范围选择分钟 1`] = `
                       <div class="item" disabled="disabled" value="27"> 27 </div>
                       <div class="item" disabled="disabled" value="28"> 28 </div>
                       <div class="item" disabled="disabled" value="29"> 29 </div>
-                      <div class="item" disabled="disabled" value="30"> 30 </div>
+                      <div class="item" value="30"> 30 </div>
                       <div class="item" value="31"> 31 </div>
                       <div class="item" value="32"> 32 </div>
                       <div class="item" value="33"> 33 </div>

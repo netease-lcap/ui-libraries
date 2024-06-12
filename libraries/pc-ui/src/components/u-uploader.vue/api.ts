@@ -95,9 +95,10 @@ namespace nasl.ui {
             docDescription: '列表数量上限，默认为999',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
         })
-        limit: nasl.core.Decimal;
+        limit: nasl.core.Integer;
 
         @Prop({
             group: '数据属性',
@@ -260,7 +261,7 @@ namespace nasl.ui {
             },
             if: _ => _.openCropper === true && _.multiple !== true,
         })
-        cropperBoxWidth: nasl.core.Decimal = 200;
+        cropperBoxWidth: nasl.core.Decimal | nasl.core.Integer = 200;
 
         @Prop<UUploaderOptions, 'cropperBoxHeight'>({
             group: '主要属性',
@@ -270,7 +271,7 @@ namespace nasl.ui {
             },
             if: _ => _.cropperPreviewShape === 'rect' && _.openCropper === true && _.multiple !== true,
         })
-        cropperBoxHeight: nasl.core.Decimal = 0;
+        cropperBoxHeight: nasl.core.Decimal | nasl.core.Integer = 0;
 
         @Prop<UUploaderOptions, 'cropperPreviewShape'>({
             group: '主要属性',
@@ -409,7 +410,7 @@ namespace nasl.ui {
             },
             if: _ => _.ttl === true,
         })
-        ttlValue: nasl.core.Decimal;
+        ttlValue: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             group: '主要属性',
@@ -513,8 +514,8 @@ namespace nasl.ui {
             description: '文件大小超额时触发',
         })
         onSizeExceed: (event: {
-            maxSize: nasl.core.Decimal;
-            size: nasl.core.Decimal;
+            maxSize: nasl.core.Decimal | nasl.core.Integer;
+            size: nasl.core.Decimal | nasl.core.Integer;
             message: nasl.core.String;
             name: nasl.core.String;
             file: File;

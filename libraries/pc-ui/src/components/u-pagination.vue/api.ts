@@ -21,6 +21,7 @@ namespace nasl.ui {
             docDescription: '翻页器的当前页',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
         })
         page: nasl.core.Integer = 1;
@@ -31,6 +32,7 @@ namespace nasl.ui {
             docDescription: '翻页器的总页数',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
         })
         total: nasl.core.Integer = 11;
@@ -42,6 +44,7 @@ namespace nasl.ui {
             docDescription: '当页数多时，两边恒定显示的数量',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
         })
         side: nasl.core.Integer = 2;
@@ -53,6 +56,7 @@ namespace nasl.ui {
             docDescription: '当页数多时，左侧恒定显示的数量，若和两边的显示数量不一致，则取两者之间的最大值',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
         })
         around: nasl.core.Integer = 5;
@@ -63,6 +67,7 @@ namespace nasl.ui {
             docDescription: '数据的总条数目',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
         })
         totalItems: nasl.core.Integer;
@@ -74,6 +79,7 @@ namespace nasl.ui {
             docDescription: '每页展示数据的条目数，默认为[10,20,50]',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
         })
         pageSize: nasl.core.Integer = 20;
