@@ -10,6 +10,7 @@ import { execSync } from '../utils/exec';
 import genNaslUIConfig from './gens/gen-nasl-ui';
 import genThemeJsonOld from './gens/gen-theme-json-old';
 import genManifestConfig from './gens/gen-manifest-config';
+import buildDecalaration from './build-declaration';
 
 export function buildThemeOld(rootPath, destDir) {
   const configPath = path.join(rootPath, './lcap-ui.config.js');
@@ -98,7 +99,7 @@ export async function buildNaslUILibrary(options: LcapBuildOptions) {
   buildNaslUI(options);
   await buildTheme(options);
   buildI18N(options);
-  execSync('npx tsc -p tsconfig.api.json');
+  await buildDecalaration(options);
   if (options.pnpm) {
     execSync('pnpm pack');
   } else {
