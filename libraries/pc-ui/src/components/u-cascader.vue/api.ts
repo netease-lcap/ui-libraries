@@ -116,7 +116,7 @@ namespace nasl.ui {
             sync: true,
             docDescription: '选择器的值',
         })
-        value: V;
+        value: any;
 
         @Prop({
             group: '数据属性',
