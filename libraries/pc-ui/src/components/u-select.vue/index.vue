@@ -816,8 +816,8 @@ export default {
         })
         .catch(() => (this.currentLoading = false)); // });
     },
-    onFocus() {
-      // @disabled
+    onFocus(e) {
+      this.$emit('focus', e, this);
     },
     onInput(value) {
       if (!this.filterable) return;
@@ -968,10 +968,18 @@ export default {
     },
     focus() {
       this.preventBlur = true;
-      if (this.filterable) this.$refs.input.focus();
+      if (this.filterable) {
+        this.$refs.input.focus();
+      } else {
+        this.$emit('focus');
+      }
     },
     blur() {
-      if (this.filterable) this.$refs.input.blur();
+      if (this.filterable) {
+        this.$refs.input.blur();
+      } else {
+        this.$emit('blur');
+      }
     },
     setPopperWidth() {
       if (this.appendTo === 'body') {

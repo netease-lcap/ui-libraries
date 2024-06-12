@@ -21,5 +21,11 @@ namespace nasl.ui {
             implicitToString: true,
         })
         label: nasl.core.String;
+
+        @Slot({
+          title: '默认',
+          description: '内容',
+        })
+        slotDefault: () => Array<ViewComponent>;
     }
 }

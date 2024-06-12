@@ -229,7 +229,7 @@
             "idetype": "container",
             "parentAccept": "target.tag === 'u-panel'"
         }
-    }, 
+    },
     {
         "name": "UCollapse",
         "ideusage": {
