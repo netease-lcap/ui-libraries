@@ -72,7 +72,13 @@
   {
     "name": "AbsoluteLayout",
     "ideusage": {
-      "idetype": "board"
+      "idetype": "board",
+      "automate": [
+        {
+          "command": "WRAP_FREE",
+          "useblock": 0
+        }
+      ]
     }
   },
   {
