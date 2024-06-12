@@ -43,6 +43,11 @@ namespace nasl.ui {
         })
         filterText: nasl.core.String;
 
+        @Prop({
+            title: '没有文本信息的值',
+        })
+        noTextValues: Array<nasl.core.String>;
+
         @Method({
             title: 'undefined',
             description: '弹出选择框。',
