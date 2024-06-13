@@ -5,12 +5,16 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { MParent } from '../m-parent.vue';
 
 export default {
     name: 'u-collapse',
     childName: 'u-collapse-item',
-    mixins: [MParent],
+    mixins: [
+      MParent,
+      sync('disabled'),
+    ],
     props: {
         accordion: { type: Boolean, default: false },
         expandTrigger: { type: String, default: 'click' },
