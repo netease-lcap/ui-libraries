@@ -124,6 +124,13 @@ export default {
           return this.currentDataSource && this.currentDataSource.sorting ? this.currentDataSource.sorting.order : '';
         },
         filterText: 'filterText',
+        value() {
+          if (this.currentMultiple) {
+            return this.selectedVMs.map((itemVM) => itemVM.value);
+          }
+
+          return this.selectedVM ? this.selectedVM.value : undefined;
+        },
       }),
     ],
     props: {

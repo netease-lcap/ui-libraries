@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Container"
   })
   export class VanCollapse extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: VanCollapseOptions['value'];
+
     constructor(options?: Partial<VanCollapseOptions>) {
       super();
     }
@@ -19,7 +24,8 @@ namespace nasl.ui {
       description: '用于标识折叠面板的值',
       sync: true
     })
-    value: nasl.core.String;
+    value: nasl.core.String | nasl.core.Integer | nasl.collection.List<nasl.core.String | nasl.core.Integer>;
+
     @Prop({
       group: '交互属性',
       title: '手风琴模式',

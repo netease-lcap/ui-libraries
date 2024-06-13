@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanLink extends ViewComponent {
+    @Prop({
+      title: '禁用'
+    })
+    disabled: nasl.core.Boolean;
+
     constructor(options?: Partial<VanLinkOptions>) {
       super();
     }

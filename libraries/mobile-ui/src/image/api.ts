@@ -8,6 +8,21 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanImage extends ViewComponent {
+    @Prop({
+      title: '地址',
+    })
+    src: VanImageOptions['src'];
+
+    @Prop({
+      title: '默认图地址',
+    })
+    placeholderSrc: VanImageOptions['placeholderSrc'];
+
+    @Prop({
+      title: '预览状态',
+    })
+    preview: nasl.core.Boolean = false;
+
     constructor(options?: Partial<VanImageOptions>) {
       super();
     }

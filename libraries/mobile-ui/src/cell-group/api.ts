@@ -38,6 +38,10 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanCell extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: VanCellOptions['value'];
     constructor(options?: Partial<VanCellOptions>) {
       super();
     }

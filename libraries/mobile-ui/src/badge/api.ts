@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanBadge extends ViewComponent {
+    @Prop({
+      title: '徽章值',
+    })
+    content: VanBadgeOptions['content'];
+
     constructor(options?: Partial<VanBadgeOptions>) {
       super();
     }
