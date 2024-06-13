@@ -77,6 +77,10 @@ export default {
 
           return this.currentValue;
         },
+        readonly: 'readonly',
+        preview: 'isPreview',
+        opened: 'currentOpened',
+        disabled: 'disabled',
       }),
     ],
     props: {

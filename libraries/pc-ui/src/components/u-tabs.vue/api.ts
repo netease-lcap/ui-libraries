@@ -13,6 +13,16 @@ namespace nasl.ui {
         })
         value: V;
 
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
         @Method({
             title: 'undefined',
             description: '重新加载数据',
@@ -292,6 +302,10 @@ namespace nasl.ui {
         description: '标签页',
     })
     export class UTab<V> extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UTabOptions<V>>) { super(); }
     }

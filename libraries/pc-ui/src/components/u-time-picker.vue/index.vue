@@ -87,6 +87,9 @@ export default {
       MPreview,
       sync({
         value: 'inputTime',
+        readonly: 'readonly',
+        preview: 'isPreview',
+        disabled: 'disabled',
       }),
     ],
     props: {

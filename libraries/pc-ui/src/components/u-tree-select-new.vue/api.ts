@@ -18,6 +18,26 @@ namespace nasl.ui {
       })
       value: UTreeSelectNewOptions<T, V, M>['value'];
 
+      @Prop({
+        title: '禁用',
+      })
+      disabled: nasl.core.Boolean;
+
+      @Prop({
+        title: '只读',
+      })
+      readonly: nasl.core.Boolean;
+
+      @Prop({
+        title: '预览',
+      })
+      preview: nasl.core.Boolean;
+
+      @Prop({
+        title: '打开',
+      })
+      opened: nasl.core.Boolean;
+
       @Method({
           title: '重新加载',
           description: '重新加载',

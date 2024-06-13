@@ -59,7 +59,9 @@ export default {
           const actualValue = value || this.$at(node, this.valueField) || this.$at(this.selectedVM, this.valueField);
 
           return actualValue;
-        }
+        },
+        disabled: 'disabled',
+        readonly: 'readonly',
       })
     ],
     props: {

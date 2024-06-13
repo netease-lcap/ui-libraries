@@ -21,6 +21,7 @@
         :color="formItemVM && formItemVM.color">
     </u-range-input>
     <m-popper :class="$style.popper" ref="popper" :append-to="appendTo" :disabled="disabled || readonly" :placement="placement"
+        @update:opened="currentOpened = $event"
         @toggle="onToggle($event)"
         @close="onPopperClose"
         @open="onPopperOpen">
@@ -107,6 +108,10 @@ export default {
         endDate() {
           return this.finalEndDateTime ? this.toValue(new Date(this.finalEndDateTime.replace(/-/g, '/'))) : undefined;
         },
+        readonly: 'readonly',
+        preview: 'isPreview',
+        opened: 'currentOpened',
+        disabled: 'disabled',
       }),
     ],
     props: {
@@ -171,6 +176,7 @@ export default {
     },
     data() {
         return {
+            currentOpened: this.opened,
             startDateTime: this.format(this.startDate, 'YYYY-MM-DD HH:mm:ss'), // popper选择以后的值
             endDateTime: this.format(this.endDate, 'YYYY-MM-DD HH:mm:ss'), // popper选择以后的值
             open: false,
@@ -310,6 +316,11 @@ export default {
         }
     },
     watch: {
+        opened(val) {
+          if (val !== this.currentOpened) {
+            this.currentOpened = val;
+          }
+        },
         startDate(newValue) {
             this.startDateTime = this.format(newValue, 'YYYY-MM-DD HH:mm:ss');
             this.finalStartDateTime = this.startDateTime;
