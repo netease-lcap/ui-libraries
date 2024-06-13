@@ -10,6 +10,6 @@ import classnames from 'classnames';
 import style from './index.module.less';
 
 export function AbsoluteLayout(props) {
-  const className = classnames(style.input, props?.className);
+  const className = classnames(style.AbsoluteLayout, props?.className);
   return <div {...props} className={className} />;
 }
