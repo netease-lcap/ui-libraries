@@ -500,7 +500,7 @@ content: "\e661";
     border: 1px solid #e5e5e5;
     border-radius: 4px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-    background: #fff;
+    /* background: #fff; */
 }
 
 .body {
