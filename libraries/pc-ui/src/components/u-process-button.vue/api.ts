@@ -132,43 +132,43 @@ namespace nasl.ui {
             title: '提交时',
             description: '提交时按钮成功执行后触发。',
         })
-        submit: (event: any) => void;
+        onSubmit: (event: any) => void;
 
         @Event({
             title: '同意时',
             description: '同意时按钮成功执行后触发。',
         })
-        approve: (event: any) => void;
+        onApprove: (event: any) => void;
 
         @Event({
             title: '拒绝时',
             description: '拒绝时按钮成功执行后触发。',
         })
-        reject: (event: any) => void;
+        onReject: (event: any) => void;
 
         @Event({
             title: '回退时',
             description: '回退时按钮成功执行后触发。',
         })
-        revert: (event: any) => void;
+        onRevert: (event: any) => void;
 
         @Event({
             title: '转派时',
             description: '转派时按钮成功执行后触发。',
         })
-        reassign: (event: any) => void;
+        onReassign: (event: any) => void;
 
         @Event({
             title: '加签时',
             description: '加签时按钮成功执行后触发。',
         })
-        addSign: (event: any) => void;
+        onAddSign: (event: any) => void;
 
         @Event({
             title: '撤回时',
             description: '撤回时按钮成功执行后触发。',
         })
-        withdraw: (event: any) => void;
+        onWithdraw: (event: any) => void;
     }
 }
 
