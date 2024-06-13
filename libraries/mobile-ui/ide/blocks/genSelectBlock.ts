@@ -19,8 +19,8 @@ function genSelectTemplate(entity: naslTypes.Entity, nameGroup: NameGroup) {
       placeholder="请选择"
       ref="${nameGroup.viewElementMainView}"
       dataSource={${dataSourceValue}}
-      textField={${nameGroup.lowerEntity}.${property.name}}
-      valueField={${nameGroup.lowerEntity}.${getEntityPromaryKeyProperty(entity)}}
+      textField="${nameGroup.lowerEntity}.${property.name}"
+      valueField="${nameGroup.lowerEntity}.${getEntityPromaryKeyProperty(entity)}"
       pageable={true}
       pageSize={50}
       remotePaging={true}
