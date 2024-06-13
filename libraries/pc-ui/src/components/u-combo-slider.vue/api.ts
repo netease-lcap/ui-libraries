@@ -13,6 +13,21 @@ namespace nasl.ui {
         })
         value: UComboSliderOptions['value'] = 0;
 
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
+
         constructor(options?: Partial<UComboSliderOptions>) { super(); }
     }
 

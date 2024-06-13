@@ -11,7 +11,22 @@ namespace nasl.ui {
         @Prop({
           title: '输入值',
         })
-        value: UInputOptions['value'];
+        value: UTextareaOptions['value'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',

@@ -8,7 +8,10 @@ namespace nasl.ui {
         group: 'Form'
     })
     export class UForm extends ViewComponent {
-
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',

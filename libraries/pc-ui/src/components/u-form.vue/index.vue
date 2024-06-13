@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import MParent from '../m-parent.vue';
 import MGroupParent from '../m-group.vue/parent.vue';
 import UValidator from '../u-validator.vue';
@@ -21,7 +22,14 @@ import cloneDeep from 'lodash/cloneDeep';
 
 export default {
     name: 'u-form',
-    mixins: [MParent, MGroupParent, UValidator],
+    mixins: [
+      MParent,
+      MGroupParent,
+      UValidator,
+      sync({
+        preview: 'preview',
+      }),
+    ],
     props: {
         model: Object,
         rules: Object,

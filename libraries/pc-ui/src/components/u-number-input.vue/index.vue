@@ -41,6 +41,9 @@ export default {
       sync({
         value: 'currentValue',
         formattedValue: 'formattedValue',
+        readonly: 'readonly',
+        preview: 'isPreview',
+        disabled: 'disabled',
       })
     ],
     props: {
