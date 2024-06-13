@@ -5,7 +5,14 @@
             <slot name="reference"></slot>
             <s-empty v-if="$env.VUE_APP_DESIGNER && !$slots.reference && !!$attrs['vusion-node-path']"></s-empty>
         </span>
-        <u-popup reference="prev" v-bind="$attrs" v-on="$listeners" ref="popup" :vusion-scope-id="$vnode.context.$options._scopeId">
+        <u-popup
+          reference="prev"
+          v-bind="$attrs"
+          v-on="$listeners"
+          ref="popup"
+          :style="staticStyleVar"
+          :vusion-scope-id="$vnode.context.$options._scopeId"
+        >
             <slot></slot>
         </u-popup>
     </span>
@@ -20,6 +27,17 @@ export default {
     props: {
         display: String,
         ellipsis: Boolean,
+    },
+    data() {
+      return {
+        staticStyleVar: '',
+      }
+    },
+    mounted() {
+      this.staticStyleVar = this.getStaticStyleVar(this.$vnode.data.staticStyle);
+    },
+    updated() {
+      this.staticStyleVar = this.getStaticStyleVar(this.$vnode.data.staticStyle);
     },
     methods: {
         // 双击打开弹出框
@@ -44,6 +62,18 @@ export default {
         },
         scheduleUpdate() {
             this.$refs.popup.scheduleUpdate();
+        },
+        getStaticStyleVar(staticStyle) {
+          let style = '';
+          for (const key in staticStyle) {
+            if (Object.prototype.hasOwnProperty.call(staticStyle, key)) {
+              if (/^--/.test(key)) {
+                const value = staticStyle[key];
+                style += `${key}: ${value};`
+              }
+            }
+          }
+          return style;
         },
     },
 };
