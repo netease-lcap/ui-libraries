@@ -126,7 +126,7 @@ export default {
             this.currentSpan = span;
         },
         onClick() {
-            const params = { row: this.grid.findIndex(item => item === this.row), column: this.row.findIndex(item => item === this), vm: this };
+            const params = { row: this.grid.$children.findIndex(item => item === this.row), column: this.row.$children.findIndex(item => item === this), vm: this };
             this.$emit('click', params)
         }
     },
