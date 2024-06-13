@@ -24,7 +24,7 @@ namespace nasl.ui {
         disabled: nasl.core.Boolean;
 
         @Prop({
-          title: '禁用',
+          title: '只读',
         })
         readonly: nasl.core.Boolean;
 
