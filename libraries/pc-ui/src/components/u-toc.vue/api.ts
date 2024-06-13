@@ -8,6 +8,10 @@ namespace nasl.ui {
         group: 'Navigation'
     })
     export class UToc extends ViewComponent {
+        @Prop({
+          title: '选中值',
+        })
+        value: UTocOptions['value'];
 
         constructor(options?: Partial<UTocOptions>) { super(); }
     }
