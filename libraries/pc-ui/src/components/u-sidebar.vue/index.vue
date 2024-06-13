@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import MSinglex from '../m-singlex.vue';
 import { MGroupParent } from '../m-group.vue';
 
@@ -59,7 +60,22 @@ export default {
     name: 'u-sidebar',
     groupName: 'u-sidebar-group',
     childName: 'u-sidebar-item',
-    mixins: [MSinglex, MGroupParent],
+    mixins: [
+      MSinglex,
+      MGroupParent,
+      sync(
+        'readonly',
+        'disabled',
+        {
+          data() {
+            return this.currentDataSource ? this.currentDataSource.data : [];
+          },
+          value() {
+            return this.selectedVM && this.selectedVM.value;
+          },
+        },
+      ),
+    ],
     props: {
         enableCollapse: { type: Boolean, default: false },
         // collapse: { type: Boolean, default: false }, // 当前用作整个侧边栏的折叠效果。
