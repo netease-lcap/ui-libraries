@@ -23,6 +23,16 @@ namespace nasl.ui {
     })
     isLast: nasl.core.Boolean;
 
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
     @Method({
       title: '上一步',
       description: '上一步'
@@ -123,6 +133,21 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanStep extends ViewComponent {
+    @Prop({
+      title: '状态',
+    })
+    status: 'wait' | 'process' | 'finish' | 'error';
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
     constructor(options?: Partial<VanStepOptions>) {
       super();
     }

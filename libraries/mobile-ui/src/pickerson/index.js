@@ -37,6 +37,9 @@ export default createComponent({
         return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : this.pageNumber;
       },
       filterText: 'filterText',
+      preview: 'isPreview',
+      readonly: 'readonly',
+      disabled: 'disabled',
     }),
   ],
   props: {

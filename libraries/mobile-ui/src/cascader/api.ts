@@ -13,6 +13,11 @@ namespace nasl.ui {
     }
 
     @Prop({
+      title: '数据',
+    })
+    data: nasl.collection.List<T>;
+
+    @Prop({
       title: '选中值',
     })
     value: VanCascaderOptions<T, V>['value'];
@@ -21,6 +26,16 @@ namespace nasl.ui {
       title: '过滤文本',
     })
     filterText: nasl.core.String;
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
   }
   export class VanCascaderOptions<T, V> extends ViewComponentOptions {
     @Prop({

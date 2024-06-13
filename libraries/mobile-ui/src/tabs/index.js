@@ -43,6 +43,7 @@ export default createComponent({
     }),
     sync({
       value: 'currentName',
+      disabled: 'disabled',
     }),
   ],
 

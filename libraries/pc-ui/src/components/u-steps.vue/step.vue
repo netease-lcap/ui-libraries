@@ -14,6 +14,12 @@ export default {
     parentName: 'u-steps',
     components: { SEmpty },
     extends: UTab,
+    mixins: [
+      sync({
+        readonly: 'readonly',
+        status: 'status',
+      })
+    ],
     props: {
         value: { type: Number, default: 0 },
         desc: { type: String, default: null },

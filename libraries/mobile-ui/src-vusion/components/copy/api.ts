@@ -8,6 +8,16 @@ namespace nasl.ui {
     group: "Effects"
   })
   export class VanCopy extends ViewComponent {
+    @Prop({
+      title: '复制的值',
+    })
+    value: VanCopyOptions['value'];
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
     constructor(options?: Partial<VanCopyOptions>) {
       super();
     }
