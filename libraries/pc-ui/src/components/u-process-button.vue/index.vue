@@ -122,7 +122,8 @@ export default {
                 body,
             });
             if(res?.code === "200") {
-                this.$emit(name);
+                const eventName = `on${name.replace(/^./, (m) => m.toUpperCase())}`
+                this.$emit(eventName);
             }
             this.refresh();
         },
@@ -180,7 +181,8 @@ export default {
                         },
                     });
                     if(res?.code === "200") {
-                        this.$emit(item.name);
+                        const eventName = `on${item.name.replace(/^./, (m) => m.toUpperCase())}`
+                        this.$emit(eventName);
                     }
                     this.refresh();
                 }
@@ -206,7 +208,8 @@ export default {
                         },
                     });
                     if(res?.code === "200") {
-                        this.$emit(item.name);
+                        const eventName = `on${item.name.replace(/^./, (m) => m.toUpperCase())}`
+                        this.$emit(eventName);
                     }
                     this.refresh();
                 }
@@ -226,7 +229,8 @@ export default {
                     },
                 });
                 if(res?.code === "200") {
-                    this.$emit(item.name);
+                    const eventName = `on${item.name.replace(/^./, (m) => m.toUpperCase())}`
+                    this.$emit(eventName);
                 }
                 this.refresh();
             }
