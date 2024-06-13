@@ -7,7 +7,7 @@ import classnames from 'classnames';
 // import * as plugin from './plugins';
 // import type { pluginType } from '@/plugins/type';
 
-import style from '../index.module.less';
+import style from './index.module.less';
 
 export function AbsoluteLayout(props) {
   const className = classnames(style.input, props?.className);
