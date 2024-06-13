@@ -13,6 +13,8 @@ export default createComponent({
       value: 'currentValue',
       isFirst: 'isFirst',
       isLast: 'isLast',
+      disabled: 'disabled',
+      readonly: 'readonly',
     }),
   ],
 
@@ -47,7 +49,7 @@ export default createComponent({
     },
     isLast() {
       const steps = this.dataSource !== undefined ? this.currentData || [] : this.children;
-      return this.currentValue >= steps.length;
+      return this.currentValue >= steps.length - 1;
     },
   },
   watch: {

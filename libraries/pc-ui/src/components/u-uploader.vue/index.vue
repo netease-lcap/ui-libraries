@@ -123,6 +123,10 @@ export default {
         value() {
           return this.toValue(this.currentValue);
         },
+        readonly: 'readonly',
+        preview: 'isPreview',
+        disabled: 'disabled',
+        url: 'url',
       }),
     ],
     // i18n,

@@ -120,6 +120,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { MGroup } from '../m-group.vue';
 import SEmpty from '../s-empty.vue';
 
@@ -127,6 +128,9 @@ export default {
     name: 'u-sidebar-group',
     parentName: 'u-sidebar',
     childName: 'u-sidebar-item',
+    mixins: [
+      sync('disabled'),
+    ],
     components: {
         SEmpty,
     },

@@ -8,6 +8,15 @@ namespace nasl.ui {
         group: "Effects"
     })
     export class UCopy extends ViewComponent {
+        @Prop({
+          title: '复制的值',
+        })
+        value: UCopyOptions['value'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UCopyOptions>) { super(); }
     }

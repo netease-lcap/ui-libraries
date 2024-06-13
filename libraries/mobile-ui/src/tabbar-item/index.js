@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 // Utils
 import { createNamespace, isObject, isDef, isEmpty } from '../utils';
 import { route, routeProps } from '../utils/router';
@@ -14,7 +15,10 @@ import encodeUrl from '../utils/encodeUrl';
 const [createComponent, bem] = createNamespace('tabbar-item');
 
 export default createComponent({
-  mixins: [ChildrenMixin('vanTabbar')],
+  mixins: [
+    ChildrenMixin('vanTabbar'),
+    sync('badge'),
+  ],
 
   props: {
     ...routeProps,

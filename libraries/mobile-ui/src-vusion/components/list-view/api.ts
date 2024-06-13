@@ -37,6 +37,11 @@ namespace nasl.ui {
     })
     filterText: nasl.core.String;
 
+    @Prop({
+      title: '值',
+    })
+    value: VanListViewOptions<T, V, P, M>['value'];
+
     @Method({
       title: 'undefined',
       description: '清除缓存，重新加载'

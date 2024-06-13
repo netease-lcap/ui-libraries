@@ -74,7 +74,10 @@ export default {
         }
 
         return this.currentValue;
-      }
+      },
+      readonly: 'readonly',
+      preview: 'isPreview',
+      disabled: 'disabled',
     }),
   ],
   props: {

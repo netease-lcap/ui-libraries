@@ -8,6 +8,25 @@ namespace nasl.ui {
         group: 'Navigation'
     })
     export class UNavbarMulti<T, V> extends ViewComponent {
+        @Prop({
+          title: '数据',
+        })
+        data: nasl.collection.List<T>;
+
+        @Prop({
+          title: '选中值'
+        })
+        value: UNavbarMultiOptions<T, V>['value'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
 
         constructor(options?: Partial<UNavbarMultiOptions<T, V>>) { super(); }
     }
@@ -208,6 +227,10 @@ namespace nasl.ui {
         description: '导航栏的子项目',
     })
     export class UNavbarItemMulti extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UNavbarItemMultiOptions>) { super(); }
     }
@@ -526,6 +549,10 @@ namespace nasl.ui {
         description: '导航栏下拉菜单',
     })
     export class UNavbarDropdownMulti extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UNavbarDropdownMultiOptions>) { super(); }
     }
@@ -672,6 +699,10 @@ namespace nasl.ui {
         description: '导航栏分组',
     })
     export class UNavbarGroupMulti extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UNavbarGroupMultiOptions>) { super(); }
     }

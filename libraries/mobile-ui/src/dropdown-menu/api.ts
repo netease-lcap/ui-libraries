@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Navigation"
   })
   export class VanDropdownMenu extends ViewComponent {
+    @Prop({
+      title: '打开状态',
+    })
+    opened: nasl.core.Boolean;
+
     constructor(options?: Partial<VanDropdownMenuOptions>) {
       super();
     }

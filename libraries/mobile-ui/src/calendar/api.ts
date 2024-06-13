@@ -16,6 +16,21 @@ namespace nasl.ui {
     })
     value: VanCalendarOptions['value'];
 
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
+    @Prop({
+      title: '预览',
+    })
+    preview: nasl.core.Boolean;
+
     @Method({
       title: '日期重置',
       description: '将选中的日期重置到指定日期，未传参时会重置到默认日期'

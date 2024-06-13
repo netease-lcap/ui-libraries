@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 // Utils
 import dayjs from '../utils/dayjs';
 import { raf } from '../utils/dom/raf';
@@ -44,6 +45,11 @@ export default createComponent({
     EventSlotCommandProvider(EventSlotCommandMap),
     PreviewMixin,
     SyncValueMixin,
+    sync({
+      preview: 'isPreview',
+      readonly: 'readonly',
+      disabled: 'disabled',
+    }),
   ],
 
   props: {

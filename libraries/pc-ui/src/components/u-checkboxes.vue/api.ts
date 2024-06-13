@@ -18,6 +18,21 @@ namespace nasl.ui {
         })
         value: UCheckboxesOptions<T, V, C>['value'];
 
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
+
         @Method({
             title: 'undefined',
             description: '清除缓存，重新加载',
@@ -259,6 +274,21 @@ namespace nasl.ui {
           title: '选中',
         })
         value: UCheckboxOptions<T, V>['value'] = false;
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
 
         constructor(options?: Partial<UCheckboxOptions<T, V>>) { super(); }
     }

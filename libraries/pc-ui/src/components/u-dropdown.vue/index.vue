@@ -30,7 +30,7 @@
             :placement="placement"
             :disabled="disabled"
             :append-to="appendTo"
-            :opened="opened"
+            :opened="currentOpened"
             @update:opened="onUpdateOpened"
         >
             <template v-if="childrenNodes.length > 0">
@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { MGroupParent } from '../m-group.vue';
 import { MSinglex } from '../m-singlex.vue';
 import SEmpty from '../s-empty.vue';
@@ -79,7 +80,22 @@ export default {
     components: {
         SEmpty,
     },
-    mixins: [MSinglex, MGroupParent],
+    mixins: [
+      MSinglex,
+      MGroupParent,
+      sync(
+        'disabled',
+        {
+          opened: 'currentOpened',
+          data() {
+            return this.currentDataSource ? this.currentDataSource.data : [];
+          },
+          value() {
+            return this.selectedVM && this.selectedVM.value;
+          },
+        },
+      ),
+    ],
     props: {
         type: { type: String, default: 'text' },
         router: { type: Boolean, default: true },
@@ -120,6 +136,7 @@ export default {
         return {
             currentPopperWidth: undefined,
             currentDataSource: undefined,
+            currentOpened: this.opened,
             loading: false,
         };
     },
@@ -132,6 +149,11 @@ export default {
         },
     },
     watch: {
+        opened(value) {
+          if (value !== this.currentOpened) {
+            this.currentOpened = value;
+          }
+        },
         appendTo(appendTo) {
             this.setPopperWidth();
         },
@@ -183,6 +205,7 @@ export default {
             }
         },
         onUpdateOpened($event) {
+            this.currentOpened = $event;
             this.$emit('update:opened', $event);
             if (this.$env.VUE_APP_DESIGNER) {
                 this.setPopperWidth();

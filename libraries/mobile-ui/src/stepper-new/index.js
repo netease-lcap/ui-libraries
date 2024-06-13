@@ -30,6 +30,9 @@ export default createComponent({
     sync({
       value: 'currentValue',
       formattedValue: 'formattedValue',
+      preview: 'isPreview',
+      readonly: 'readonly',
+      disabled: 'disabled',
     }),
   ],
 

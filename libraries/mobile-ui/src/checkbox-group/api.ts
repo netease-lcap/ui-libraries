@@ -13,6 +13,11 @@ namespace nasl.ui {
     }
 
     @Prop({
+      title: '全选中',
+    })
+    allChecked: nasl.core.Boolean;
+
+    @Prop({
       title: '选中值',
     })
     value: VanCheckboxGroupOptions<T, V, C>['value'];
@@ -21,6 +26,21 @@ namespace nasl.ui {
       title: '数据',
     })
     data: nasl.collection.List<T>;
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
+    @Prop({
+      title: '预览',
+    })
+    preview: nasl.core.Boolean;
   }
   export class VanCheckboxGroupOptions<T, V, C> extends ViewComponentOptions {
     @Prop({
@@ -172,6 +192,16 @@ namespace nasl.ui {
       title: '选中',
     })
     value: nasl.core.Boolean = false;
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
 
     constructor(options?: Partial<VanCheckboxOptions<V>>) {
       super();

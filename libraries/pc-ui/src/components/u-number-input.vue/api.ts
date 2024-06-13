@@ -11,12 +11,27 @@ namespace nasl.ui {
         @Prop({
           title: '值',
         })
-        value: UInputOptions['value'];
+        value: UNumberInputOptions['value'];
 
         @Prop({
           title: '格式化后的值',
         })
         formattedValue: nasl.core.String;
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
 
         constructor(options?: Partial<UNumberInputOptions>) { super(); }
     }

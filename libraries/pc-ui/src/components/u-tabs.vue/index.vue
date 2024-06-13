@@ -129,6 +129,8 @@ export default {
 
           return itemVM.value;
         },
+        readonly: 'readonly',
+        disabled: 'disabled',
       }),
     ],
     provide() {

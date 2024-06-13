@@ -15,6 +15,9 @@ export default createComponent({
     sync({
       value: 'datatemp',
       data: 'options',
+      preview: 'isPreview',
+      readonly: 'readonly',
+      disabled: 'disabled',
     }),
   ],
 

@@ -61,6 +61,8 @@ export default {
         page: 'currentPage',
         size: 'currentPageSize',
         totalPage: 'currentTotalPage',
+        readonly: 'readonly',
+        disabled: 'disabled',
       })
     ],
     props: {

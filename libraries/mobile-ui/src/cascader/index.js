@@ -22,6 +22,9 @@ export default createComponent({
     sync({
       value: 'currentValue',
       filterText: 'filterText',
+      data: 'currentData',
+      disabled: 'disabled',
+      readonly: 'readonly',
     }),
   ],
 

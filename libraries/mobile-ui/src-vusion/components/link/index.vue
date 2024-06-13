@@ -15,11 +15,17 @@
 </a>
 </template>
 <script>
+import { sync } from '@lcap/vue2-utils';
 import ULink from 'cloud-ui.vusion/src/components/u-link.vue/index.vue';
 import IIco from 'cloud-ui.vusion/src/components/i-ico.vue/index.vue';
 
 export default {
     name: 'van-link',
+    mixins: [
+      sync({
+        disabled: 'currentDisabled',
+      }),
+    ],
     components: {
       IIco
     },

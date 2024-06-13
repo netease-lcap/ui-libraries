@@ -20,7 +20,7 @@
         :suffix-icon="suffixIcon"
         :color="formItemVM && formItemVM.color">
     </u-range-input>
-    <m-popper :class="$style.popper" ref="popper" :append-to="appendTo" :disabled="disabled || readonly" :placement="placement" @toggle="onToggle($event)" @close="onPopperClose">
+    <m-popper :class="$style.popper" ref="popper" :append-to="appendTo" :disabled="disabled || readonly" :placement="placement" @update:opened="currentOpened = $event" @toggle="onToggle($event)" @close="onPopperClose">
         <div @click.stop>
             <u-calendar-range
                 :picker="picker"
@@ -90,6 +90,10 @@ export default {
           const newDate = date ? new Date(this.transformDate(date)) : undefined;
           return this.toValue(newDate);
         },
+        readonly: 'readonly',
+        preview: 'isPreview',
+        opened: 'currentOpened',
+        disabled: 'disabled',
       }),
     ],
     props: {
@@ -141,6 +145,7 @@ export default {
         const showStartDate = this.format(this.startDate, this.getFormatString());
         const showEndDate = this.format(this.endDate, this.getFormatString());
         return {
+            currentOpened: this.opened,
             // 输入框里的值
             showStartDate,
             showEndDate,
@@ -171,6 +176,11 @@ export default {
         },
     },
     watch: {
+        opened(val) {
+          if (val !== this.currentOpened) {
+            this.currentOpened = val;
+          }
+        },
         startDate(newValue) {
             this.showStartDate = this.format(newValue, this.getFormatString());
         },

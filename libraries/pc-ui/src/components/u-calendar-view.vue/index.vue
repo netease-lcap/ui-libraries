@@ -81,7 +81,8 @@ export default {
         value() {
           const dates = this.selectedDates.map((d) => d.format(DefaultFormatType));
           return this.multiple ? dates : dates[0];
-        }
+        },
+        data: 'tableData',
       }),
     ],
     props: {

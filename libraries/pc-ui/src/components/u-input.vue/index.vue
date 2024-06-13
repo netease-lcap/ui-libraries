@@ -66,6 +66,9 @@ export default {
       MPreview,
       sync({
         value: 'currentValue',
+        readonly: 'readonly',
+        preview: 'isPreview',
+        disabled: 'disabled',
       }),
     ],
     props: {

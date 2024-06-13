@@ -25,6 +25,9 @@ export default createComponent({
     PreviewMixin,
     sync({
       value: 'currentValue',
+      preview: 'isPreview',
+      readonly: 'readonly',
+      disabled: 'disabled',
     }),
   ],
   props: {

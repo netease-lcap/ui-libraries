@@ -16,6 +16,8 @@ export default createComponent({
     FieldMixin,
     sync({
       value: 'checked',
+      readonly: 'readonly',
+      disabled: 'disabled',
     }),
   ],
 

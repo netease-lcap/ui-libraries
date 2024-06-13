@@ -8,6 +8,10 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanProgress extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: VanProgressOptions['value'];
     constructor(options?: Partial<VanProgressOptions>) {
       super();
     }

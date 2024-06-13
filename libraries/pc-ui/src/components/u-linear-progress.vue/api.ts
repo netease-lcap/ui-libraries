@@ -8,6 +8,10 @@ namespace nasl.ui {
         group: 'Chart'
     })
     export class ULinearProgress extends ViewComponent {
+        @Prop({
+          title: '当前进度(%)',
+        })
+        percent: UCircularProgressOptions['percent'];
 
         constructor(options?: Partial<ULinearProgressOptions>) { super(); }
     }

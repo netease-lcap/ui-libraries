@@ -48,6 +48,16 @@ namespace nasl.ui {
       })
       values: nasl.collection.List<V>;
 
+      @Prop({
+        title: '禁用',
+      })
+      disabled: nasl.core.Boolean;
+
+      @Prop({
+        title: '只读',
+      })
+      readonly: nasl.core.Boolean;
+
       @Method({
           title: 'undefined',
           description: '清除缓存，重新加载',

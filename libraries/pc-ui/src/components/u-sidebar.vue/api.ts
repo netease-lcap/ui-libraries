@@ -8,7 +8,25 @@ namespace nasl.ui {
         group: 'Navigation'
     })
     export class USidebar<T, V> extends ViewComponent {
+        @Prop({
+          title: '数据',
+        })
+        data: nasl.collection.List<T>;
 
+        @Prop({
+          title: '选中值'
+        })
+        value: USidebarOptions<T, V>['value'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -280,6 +298,10 @@ namespace nasl.ui {
         description: '侧边栏项',
     })
     export class USidebarItem extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<USidebarItemOptions>) { super(); }
     }
@@ -585,6 +607,10 @@ namespace nasl.ui {
         description: '侧边栏分组',
     })
     export class USidebarGroup extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<USidebarGroupOptions>) { super(); }
     }

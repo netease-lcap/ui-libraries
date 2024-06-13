@@ -17,6 +17,7 @@ export default createComponent({
     FieldMixin,
     sync({
       value: 'currentData',
+      disabled: 'disabled',
     }),
   ],
 

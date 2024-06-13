@@ -8,6 +8,16 @@ namespace nasl.ui {
     group: "Container"
   })
   export class VanIframe extends ViewComponent {
+    @Prop({
+      title: '网页地址',
+    })
+    src: VanIframeOptions['src'];
+
+    @Prop({
+      title: '加载完成',
+    })
+    loaded: nasl.core.Boolean;
+
     constructor(options?: Partial<VanIframeOptions>) {
       super();
     }

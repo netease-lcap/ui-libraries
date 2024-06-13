@@ -8,7 +8,25 @@ namespace nasl.ui {
         group: 'Navigation'
     })
     export class UDropdown<T, V> extends ViewComponent {
+        @Prop({
+          title: '数据',
+        })
+        data: nasl.collection.List<T>;
 
+        @Prop({
+          title: '选中值'
+        })
+        value: UDropdownOptions<T, V>['value'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '已打开',
+        })
+        opened: nasl.core.Boolean;
         constructor(options?: Partial<UDropdownOptions<T, V>>) { super(); }
     }
 

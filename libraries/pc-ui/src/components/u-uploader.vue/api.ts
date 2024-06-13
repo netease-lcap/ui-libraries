@@ -13,6 +13,26 @@ namespace nasl.ui {
         })
         value: UUploaderOptions['value'];
 
+        @Prop({
+          title: '上传地址',
+        })
+        url: UUploaderOptions['url'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
+
         @Method({
             title: '选择',
             description: '选择文件上传',

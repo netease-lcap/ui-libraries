@@ -99,6 +99,8 @@ function Button(
     }
   }
 
+  emit(ctx, 'sync:state', 'disabled', disabled);
+
   const onClick = _debounce(async (event: Event) => {
     if (props.loading) {
       event.preventDefault();

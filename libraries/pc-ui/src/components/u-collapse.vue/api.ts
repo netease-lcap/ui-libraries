@@ -8,6 +8,10 @@ namespace nasl.ui {
         group: "Container"
     })
     export class UCollapse extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UCollapseOptions>) { super(); }
     }
@@ -101,6 +105,15 @@ namespace nasl.ui {
         description: '折叠面板项',
     })
     export class UCollapseItem extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '是否展开',
+        })
+        expanded: nasl.core.Boolean;
 
         constructor(options?: Partial<UCollapseItemOptions>) { super(); }
     }

@@ -16,6 +16,21 @@ namespace nasl.ui {
     })
     value: VanFieldinputOptions['value'];
 
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
+    @Prop({
+      title: '预览',
+    })
+    preview: nasl.core.Boolean;
+
     @Method({
       title: 'undefined',
       description: '让输入框获取焦点。'

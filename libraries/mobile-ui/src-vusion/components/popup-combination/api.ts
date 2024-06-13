@@ -11,6 +11,16 @@ namespace nasl.ui {
     constructor(options?: Partial<VanPopupCombinationOptions>) {
       super();
     }
+    @Prop({
+      title: '打开',
+    })
+    opened: nasl.core.Boolean;
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
     @Method({
       title: 'undefined',
       description: '弹出实例。'

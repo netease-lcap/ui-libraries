@@ -13,6 +13,16 @@ namespace nasl.ui {
         })
         value: URateOptions['value'];
 
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
+
         constructor(options?: Partial<URateOptions>) { super(); }
     }
 

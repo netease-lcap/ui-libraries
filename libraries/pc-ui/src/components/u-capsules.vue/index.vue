@@ -14,7 +14,10 @@ export default {
         }
 
         return this.selectedVM ? this.selectedVM.value : undefined;
-      }
+      },
+      readonly: 'readonly',
+      preview: 'isPreview',
+      disabled: 'disabled',
     })],
     props: {
       preview: { type: Boolean, default: false },
