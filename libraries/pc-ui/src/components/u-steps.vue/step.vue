@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { UTab } from '../u-tabs.vue';
 import SEmpty from '../s-empty.vue';
 
