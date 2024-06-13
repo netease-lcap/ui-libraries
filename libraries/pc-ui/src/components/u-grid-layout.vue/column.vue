@@ -31,6 +31,7 @@ export default {
     components: {
         SEmpty,
     },
+    inject: ['grid', 'row'],
     props: {
         span: { type: Number, default: 1 },
         pull: Number,
@@ -125,7 +126,7 @@ export default {
             this.currentSpan = span;
         },
         onClick() {
-            const params = { row: this.parentVM.$parent.$children.findIndex(item => item === this.parentVM), column: this.parentVM.$children.findIndex(item => item === this), vm: this };
+            const params = { row: this.grid.findIndex(item => item === this.row), column: this.row.findIndex(item => item === this), vm: this };
             this.$emit('click', params)
         }
     },

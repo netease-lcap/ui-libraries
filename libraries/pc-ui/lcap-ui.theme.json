@@ -2953,6 +2953,14 @@
           "--number-input-button-outline": {
             "type": "input",
             "desc": "输入框轮廓,如 1px ridge rgba(0, 0, 0, 0.2)"
+          },
+          "--number-input-prefix-padding": {
+            "type": "input",
+            "desc": "输入框前缀的边距"
+          },
+          "--number-input-suffix-padding": {
+            "type": "input",
+            "desc": "输入框后缀的边距"
           }
         }
       },
