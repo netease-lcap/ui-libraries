@@ -9,6 +9,8 @@ export default createComponent({
     ParentMixin('VanCapsules'),
     sync({
       value: 'currentValue',
+      readonly: 'readonly',
+      disabled: 'disabled',
     }),
   ],
   props: {

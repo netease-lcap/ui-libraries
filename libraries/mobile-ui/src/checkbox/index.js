@@ -14,6 +14,8 @@ export default createComponent({
     }),
     sync({
       value: 'checked',
+      readonly: 'readonly',
+      disabled: 'disabled',
     }),
   ],
   props: {

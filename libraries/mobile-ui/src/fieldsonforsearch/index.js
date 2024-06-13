@@ -28,6 +28,8 @@ export default createComponent({
   mixins: [
     sync({
       value: 'currentValue',
+      disabled: 'disabled',
+      readonly: 'readonly',
     }),
   ],
   inheritAttrs: false,

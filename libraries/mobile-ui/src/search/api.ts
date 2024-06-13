@@ -13,6 +13,16 @@ namespace nasl.ui {
     })
     value: VanSearchOptions['value'];
 
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
     constructor(options?: Partial<VanSearchOptions>) {
       super();
     }

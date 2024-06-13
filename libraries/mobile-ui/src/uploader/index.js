@@ -28,6 +28,9 @@ export default createComponent({
     PreviewMixin,
     sync({
       value: 'fileList',
+      readonly: 'readonly',
+      disabled: 'disabled',
+      preview: 'isPreview',
     }),
   ],
   // model: {
