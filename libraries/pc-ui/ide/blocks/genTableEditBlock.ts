@@ -10,7 +10,7 @@ import {
 } from './utils';
 import {
   genQueryLogic, genTextTemplate, genColumnMeta,
-  genFilterTemplate, genSaveModalTemplate,
+  genFilterTemplate, genFormItemsTemplate, 
 } from './genCommonBlock';
 
 function genBlurFunction(property: naslTypes.EntityProperty, nameGroup: NameGroup) {
@@ -38,16 +38,6 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
   }
   if (required) rules.push('nasl.validation.required()');
   let formItem = '';
-  if (rules.length > 0) {
-    formItem = `<UValidator
-        placement="bottom"
-        display="appear"
-        rules={[${rules.join(',')}]}
-        onBlurValid={
-          ${genBlurFunction(property, nameGroup)}
-        }
-        style="width:100%">`;
-  }
   const { typeAnnotation } = property || {};
   const { typeNamespace: propertyTypeNamespace } = typeAnnotation || {};
   const propertyTypeName = transEntityMetadataTypes(typeAnnotation, dataSource.app);
@@ -139,12 +129,21 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
         }>
     </UNumberInput>`;
   } else if (propertyTypeName === 'String' && propertyTypeMaxLength > 256) {
-    formItem += `<UTextArea
-        value={$sync(${vModel})}
-        placeholder="请输入${label}"
-        autofocus={true}
-        size="full">
-    </UTextArea>`;
+    formItem += `<UValidator
+        placement="bottom"
+        display="appear"
+        onBlurValid={
+          ${genBlurFunction(property, nameGroup)}
+        }
+        style="width:100%"
+        appendTo="body">
+          <UTextArea
+              value={$sync(${vModel})}
+              placeholder="请输入${label}"
+              autofocus={true}
+              size="full">
+          </UTextArea>
+        </UValidator>`;
   } else if (propertyTypeName === 'Date') {
     formItem += `<UDatePicker
         clearable={true}
@@ -204,11 +203,17 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
           }>
       </USelect>`;
     } else {
-      formItem += `<UInput value={$sync(${vModel})} placeholder="请输入${label}" autofocus={true} size="full"></UInput>`;
+      formItem += `<UValidator
+        placement="bottom"
+        display="appear"
+        onBlurValid={
+          ${genBlurFunction(property, nameGroup)}
+        }
+        style="width:100%"
+        appendTo="body">
+      <UInput value={$sync(${vModel})} placeholder="请输入${label}" autofocus={true} size="full"></UInput>
+      </UValidator>`;
     }
-  }
-  if (formItem.startsWith('<UValidator')) {
-    formItem += '</UValidator>';
   }
   return `slotEditcell={
     (current) => <ULinearLayout gap="small">
@@ -294,6 +299,42 @@ export function genEditTableTemplate(entity: naslTypes.Entity, nameGroup: NameGr
   </UTableView>`;
 }
 
+function genSaveModalTemplate(entity: naslTypes.Entity, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>) {
+  const dataSource = entity.parentNode;
+  const properties = entity.properties.filter(filterProperty('inForm'));
+  nameGroup.vModelName = nameGroup.viewVariableInput;
+
+  return `<UModal ref="${nameGroup.viewElementSaveModal}"
+    slotTitle={
+      <>
+        <UText text="创建"></UText>
+      </>
+    }
+    slotBody={
+        <UForm ref="${nameGroup.viewElementSaveModalForm}">
+            ${genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap)}
+        </UForm>
+    }
+    slotFoot={
+        <ULinearLayout>
+            <UButton
+              color="primary"
+              text="立即创建"
+              onClick={
+                  function ${nameGroup.viewLogicSubmit}(event) {
+                      if ($refs.${nameGroup.viewElementSaveModalForm}.validate().valid) {
+                        ${entity.getNamespace()}.${entity.name}Entity.create(${nameGroup.viewVariableInput})
+                        $refs.${nameGroup.viewElementSaveModal}.close()
+                        $refs.${nameGroup.viewElementMainView}.reload()
+                      }
+                    }
+              }>
+            </UButton>
+        </ULinearLayout>
+    }>
+  </UModal>`;
+}
+
 export function genTableEditBlock(entity: naslTypes.Entity, refElement: naslTypes.ViewElement) {
   const likeComponent = refElement?.likeComponent;
   const dataSource = entity.parentNode;
@@ -352,7 +393,6 @@ export function genTableEditBlock(entity: naslTypes.Entity, refElement: naslType
       let ${nameGroup.viewVariableEntity}: ${entityFullName};
       let ${nameGroup.viewVariableInput}: ${entityFullName};
       let ${nameGroup.viewVariableFilter}: ${entityFullName};
-      let ${nameGroup.viewVariableIsUpdate}: Boolean;
       
       const $lifecycles = {
           onCreated: [
@@ -370,7 +410,6 @@ export function genTableEditBlock(entity: naslTypes.Entity, refElement: naslType
                 text="创 建"
                 onClick={
                     function ${nameGroup.viewLogicCreate}(event) {
-                        ${nameGroup.viewVariableIsUpdate} = false
                         ${nameGroup.viewVariableInput} = nasl.util.Clone(${nameGroup.viewVariableEntity});
                         $refs.${nameGroup.viewElementSaveModal}.open()
                     }
