@@ -3,8 +3,9 @@
         <u-button :color="colors.submit">提交</u-button>
         <u-button :color="colors.approve">同意</u-button>
         <u-button :color="colors.reject">拒绝</u-button>
-        <u-button :color="colors.revert">回退</u-button>
         <u-button :color="colors.reassign">转派</u-button>
+        <u-button :color="colors.addSign">加签</u-button>
+        <u-button :color="colors.withdraw">撤回</u-button>
     </u-linear-layout>
         <component
         v-else
