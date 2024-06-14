@@ -137,12 +137,12 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
         }
         style="width:100%"
         appendTo="body">
-          <UTextArea
+          <UTextarea
               value={$sync(${vModel})}
               placeholder="请输入${label}"
               autofocus={true}
               size="full">
-          </UTextArea>
+          </UTextarea>
         </UValidator>`;
   } else if (propertyTypeName === 'Date') {
     formItem += `<UDatePicker
