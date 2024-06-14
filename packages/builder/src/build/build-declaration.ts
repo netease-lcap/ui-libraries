@@ -113,6 +113,12 @@ function transformTsCode(tsCode: string, componentMap: Record<string, ViewCompon
 
             if (methodInfo) {
               const blocks: string[] = getBlocks(methodInfo.title, methodInfo.description);
+              if (methodInfo.params && methodInfo.params.length > 0) {
+                blocks.push(
+                  ...methodInfo.params.map((p) => ` * @param ${p.name} - ${p.description || ''}`),
+                );
+              }
+
               if (blocks.length > 0) {
                 n.leadingComments = [
                   {
