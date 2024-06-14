@@ -477,21 +477,6 @@ export default {
       }
     },
     async selectedDataQueue(value) {
-      const valueList = Array.isArray(this.value) ? this.value : [this.value];
-      if(!Array.isArray(this.currentData)) return;
-      const mapDataValue = this.currentData.reduce((acc, item) => {
-        acc[item?.value] = item;
-        return acc;
-      }, {});
-      const uniqData = valueList.filter((item) => {
-        if (mapDataValue[item?.value] || !item) {
-          return false;
-        }
-        return true;
-      });
-      if (!uniqData.length) return;
-      await this?.currentDataSource?.loadValueData(uniqData);
-      return;
 
       // 当value有值，并且已经加载过一次数据才能开启判断
       // value 和 data 可能都是异步的，所以需要watch
