@@ -12,6 +12,7 @@ namespace nasl.ui {
       title: '值',
     })
     value: VanTabbarOptions['value'];
+
     constructor(options?: Partial<VanTabbarOptions>) {
       super();
     }
@@ -70,6 +71,11 @@ namespace nasl.ui {
     group: "Navigation"
   })
   export class VanTabbarItem extends ViewComponent {
+    @Prop({
+      title: '徽章值',
+    })
+    badge: VanTabbarItemOptions['badge'];
+
     constructor(options?: Partial<VanTabbarItemOptions>) {
       super();
     }

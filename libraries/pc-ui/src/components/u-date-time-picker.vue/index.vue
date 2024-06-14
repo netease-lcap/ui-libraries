@@ -13,6 +13,7 @@
         <template #suffix><i-ico v-if="suffixIcon" :name="suffixIcon" :class="[$style.suffixIcon]" notext></i-ico></template>
     </u-input>
     <m-popper :class="$style.popper" ref="popper" :append-to="appendTo" :disabled="disabled || readonly" :placement="placement"
+        @update:opened="currentOpened = $event"
         @toggle="onToggle($event)"
         @close="onPopperClose"
         @open="onPopperOpen">
@@ -93,6 +94,10 @@ export default {
         value() {
           return this.finalDateTime ? this.toValue(new Date(this.finalDateTime.replace(/-/g, '/'))) : undefined;
         },
+        readonly: 'readonly',
+        preview: 'isPreview',
+        opened: 'currentOpened',
+        disabled: 'disabled',
       }),
     ],
     component: {
@@ -158,6 +163,7 @@ export default {
     },
     data() {
         return {
+            currentOpened: this.opened,
             dateTime: this.format((this.value !== null && this.value !== undefined) ? this.value : this.date, 'YYYY-MM-DD HH:mm:ss'), // popper选择以后的值
             open: false,
             minTime: undefined,
@@ -206,6 +212,11 @@ export default {
         },
     },
     watch: {
+        opened(val) {
+          if (val !== this.currentOpened) {
+            this.currentOpened = val;
+          }
+        },
         date(newValue) {
             this.dateTime = this.format(newValue, 'YYYY-MM-DD HH:mm:ss');
             this.finalDateTime = this.dateTime;

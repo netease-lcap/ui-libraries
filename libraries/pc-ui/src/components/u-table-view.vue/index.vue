@@ -219,6 +219,8 @@ export default {
       i18nMixin('u-table-view'),
       sync({
         data: 'currentData',
+        disabled: 'disabled',
+        readonly: 'readonly',
         total() {
           return this.currentDataSource && this.currentDataSource.total ? this.currentDataSource.total : 0;
         },

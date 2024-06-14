@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 import { areaList } from '@vant/area-data';
 
 import { createNamespace } from '../utils';
@@ -41,6 +42,11 @@ export default createComponent({
     EventSlotCommandProvider(['confirm', 'cancel']),
     PreviewMixin,
     SyncValueMixin,
+    sync({
+      preview: 'isPreview',
+      readonly: 'readonly',
+      disabled: 'disabled',
+    }),
   ],
   props: {
     ...pickerProps,

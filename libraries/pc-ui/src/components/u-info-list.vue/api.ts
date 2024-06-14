@@ -22,7 +22,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        repeat: nasl.core.Decimal = 3;
+        repeat: nasl.core.Decimal | nasl.core.Integer = 3;
 
         @Prop({
             group: '主要属性',
@@ -88,7 +88,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        span: nasl.core.Decimal;
+        span: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             group: '主要属性',
@@ -149,7 +149,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        repeat: nasl.core.Decimal;
+        repeat: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             group: '样式属性',

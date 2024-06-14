@@ -8,6 +8,10 @@ namespace nasl.ui {
         group: 'Chart'
     })
     export class ULinearProgress extends ViewComponent {
+        @Prop({
+          title: '当前进度(%)',
+        })
+        percent: UCircularProgressOptions['percent'];
 
         constructor(options?: Partial<ULinearProgressOptions>) { super(); }
     }
@@ -17,7 +21,7 @@ namespace nasl.ui {
             title: '百分比范围',
             description: '百分比范围限制',
         })
-        private range: Array<nasl.core.Decimal> = [0,100];
+        private range: Array<nasl.core.Decimal> | Array<nasl.core.Integer> = [0,100];
 
         @Prop({
             group: '数据属性',
@@ -28,7 +32,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        percent: nasl.core.Decimal = 0;
+        percent: nasl.core.Decimal | nasl.core.Integer = 0;
 
         @Prop({
             group: '主要属性',

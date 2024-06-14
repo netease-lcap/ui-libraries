@@ -9,6 +9,7 @@ import genManifestConfig from './gens/gen-manifest-config';
 import type { LcapBuildOptions } from './types';
 import { execSync } from '../utils/exec';
 import { buildTheme } from './build-theme';
+import buildDecalaration from './build-declaration';
 
 const zipDir = (basePath, fileName = 'client.zip', files: string[] = []) => new Promise((res) => {
   const zipPath = path.resolve(basePath, fileName);
@@ -120,7 +121,7 @@ export async function buildNaslExtension(options: LcapBuildOptions) {
     }),
   });
 
-  execSync('npx tsc -p tsconfig.api.json');
+  await buildDecalaration(options);
   if (options.pnpm) {
     execSync('pnpm pack');
   } else {

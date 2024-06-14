@@ -8,6 +8,15 @@ namespace nasl.ui {
         group: "Effects"
     })
     export class UCopy extends ViewComponent {
+        @Prop({
+          title: '复制的值',
+        })
+        value: UCopyOptions['value'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UCopyOptions>) { super(); }
     }
@@ -50,10 +59,9 @@ namespace nasl.ui {
             description: '提示框显示时长',
             setter: {
                 concept: 'NumberInputSetter',
-                precision: 0,
             },
         })
-        private hideDelay: nasl.core.Integer = 3000;
+        private hideDelay: nasl.core.Decimal | nasl.core.Integer = 3000;
 
         @Prop({
             group: '数据属性',

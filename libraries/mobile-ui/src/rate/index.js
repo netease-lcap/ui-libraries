@@ -30,6 +30,8 @@ export default createComponent({
     FieldMixin,
     sync({
       value: 'current',
+      readonly: 'readonly',
+      disabled: 'disabled',
     }),
   ],
 

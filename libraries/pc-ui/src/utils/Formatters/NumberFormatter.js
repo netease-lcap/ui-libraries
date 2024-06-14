@@ -10,6 +10,10 @@ export class NumberFormatter extends Formatter {
     format(value, pattern) {
         pattern = pattern || this.pattern;
 
+        if (value === null || value === undefined) {
+          return '';
+        }
+
         if (typeof value !== 'number')
             return pattern.replace(/[0#.,]+/, value);
 

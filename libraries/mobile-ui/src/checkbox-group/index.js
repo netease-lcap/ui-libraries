@@ -23,7 +23,14 @@ export default createComponent({
 
         return this.currentValue;
       },
+      allChecked() {
+        return this.currentValue.length > 0
+          && this.children && !this.children.find((item) => !item.checked);
+      },
       data: 'options',
+      preview: 'isPreview',
+      readonly: 'readonly',
+      disabled: 'disabled',
     }),
   ],
 

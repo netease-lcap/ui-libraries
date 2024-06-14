@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 // Utils
 import { createNamespace, isObject, isDef, isEmpty } from '../utils';
 import { route, routeProps } from '../utils/router';
@@ -14,7 +15,10 @@ import encodeUrl from '../utils/encodeUrl';
 const [createComponent, bem] = createNamespace('tabbar-item');
 
 export default createComponent({
-  mixins: [ChildrenMixin('vanTabbar')],
+  mixins: [
+    ChildrenMixin('vanTabbar'),
+    sync('badge'),
+  ],
 
   props: {
     ...routeProps,
@@ -68,7 +72,7 @@ export default createComponent({
           }
           // vue-router 3.x $route.matched[0].path is empty in / and its children paths
           if (config.path === '/') return false;
-          const pathMatched = config.path === path;
+          const pathMatched = (config.path || '').split('?')[0] === (path || '').split('?')[0];
           const nameMatched = isDef(config.name) && config.name === r.name;
           return pathMatched || nameMatched;
         });

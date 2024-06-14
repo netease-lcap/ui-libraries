@@ -25,6 +25,9 @@ export default {
       i18nMixin('u-switch'),
       sync({
         value: 'currentValue',
+        readonly: 'readonly',
+        preview: 'isPreview',
+        disabled: 'disabled',
       }),
     ],
     components: {

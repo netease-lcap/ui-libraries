@@ -13,6 +13,11 @@ namespace nasl.ui {
     })
     value: VanSliderOptions['value'];
 
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
     constructor(options?: Partial<VanSliderOptions>) {
       super();
     }

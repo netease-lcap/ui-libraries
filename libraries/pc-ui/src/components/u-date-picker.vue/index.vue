@@ -23,7 +23,7 @@
         <template #prefix><i-ico v-if="preIcon" :name="preIcon" :class="[$style.preIcon]" notext slot="prefix"></i-ico></template>
         <template #suffix><i-ico v-if="suffixIcon" :name="suffixIcon" :class="[$style.suffixIcon]" notext></i-ico></template>
     </u-input>
-    <m-popper :class="$style.popper" ref="popper" :append-to="appendTo" :disabled="disabled || readonly" :placement="placement" @toggle="onToggle($event)" @close="onPopperClose">
+    <m-popper :class="$style.popper" ref="popper" :append-to="appendTo" :disabled="disabled || readonly" :placement="placement" @update:opened="currentOpened = $event" @toggle="onToggle($event)" @close="onPopperClose">
         <div @click.stop>
             <u-calendar :picker="picker" ref="calendar" :min-date="minDate" :year-diff="yearDiff" :year-add="yearAdd" :max-date="maxDate" :date="calendarDate" :value="value || date" @select="select($event.date)"></u-calendar>
         </div>
@@ -76,7 +76,11 @@ export default {
           const newDate = date ? new Date(this.transformDate(date)) : undefined;
 
           return this.toValue(newDate);
-        }
+        },
+        readonly: 'readonly',
+        preview: 'isPreview',
+        opened: 'currentOpened',
+        disabled: 'disabled',
       })
     ],
     props: {
@@ -130,6 +134,7 @@ export default {
         return {
             showDate,
             calendarDate: showDate, // calendar里的值
+            currentOpened: this.opened,
         };
     },
     computed: {
@@ -144,6 +149,11 @@ export default {
         },
     },
     watch: {
+        opened(val) {
+          if (val !== this.currentOpened) {
+            this.currentOpened = val;
+          }
+        },
         date(newValue) {
             this.showDate = this.format(newValue, this.getFormatString());
         },

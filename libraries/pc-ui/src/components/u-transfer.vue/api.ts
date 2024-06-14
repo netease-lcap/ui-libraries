@@ -8,7 +8,20 @@ namespace nasl.ui {
         group: 'Selector'
     })
     export class UTransfer<T, V> extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -73,6 +86,7 @@ namespace nasl.ui {
             title: '分页大小',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
         })
         private pageSize: nasl.core.Integer = 50;

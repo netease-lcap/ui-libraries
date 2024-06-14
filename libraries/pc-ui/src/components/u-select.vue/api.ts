@@ -43,6 +43,26 @@ namespace nasl.ui {
         })
         filterText: nasl.core.String;
 
+        @Prop({
+            title: '没有文本信息的值',
+        })
+        noTextValues: Array<nasl.core.String>;
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
+
         @Method({
             title: 'undefined',
             description: '弹出选择框。',
@@ -190,6 +210,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'NumberInputSetter',
                 min: 1,
+                precision: 0,
             },
             if: _ => _.pagination === true,
         })

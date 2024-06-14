@@ -23,6 +23,26 @@ namespace nasl.ui {
       })
       endDate: UDatePickerOptions['endDate'];
 
+      @Prop({
+        title: '禁用',
+      })
+      disabled: nasl.core.Boolean;
+
+      @Prop({
+        title: '只读',
+      })
+      readonly: nasl.core.Boolean;
+
+      @Prop({
+        title: '预览',
+      })
+      preview: nasl.core.Boolean;
+
+      @Prop({
+        title: '打开',
+      })
+      opened: nasl.core.Boolean;
+
       constructor(options?: Partial<UDateTimePickerOptions>) { super(); }
   }
 
@@ -61,7 +81,7 @@ namespace nasl.ui {
           docDescription: '默认显示的日期时间值',
           if: _ => _.range !== true,
       })
-      value: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
+      value: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime | nasl.core.Integer;
 
       @Prop<UDateTimePickerOptions, 'startDate'>({
           group: '数据属性',

@@ -9,6 +9,11 @@ namespace nasl.ui {
     })
     export class UCalendarView<T, M extends nasl.core.Boolean> extends ViewComponent {
         @Prop({
+          title: '数据源',
+        })
+        data: nasl.collection.List<T>;
+
+        @Prop({
           title: '日历选择值',
         })
         value: UCalendarViewOptions<T, M>['value'];

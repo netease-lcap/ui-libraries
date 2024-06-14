@@ -23,6 +23,26 @@ namespace nasl.ui {
       })
       endDate: UDatePickerOptions['endDate'];
 
+      @Prop({
+        title: '禁用',
+      })
+      disabled: nasl.core.Boolean;
+
+      @Prop({
+        title: '只读',
+      })
+      readonly: nasl.core.Boolean;
+
+      @Prop({
+        title: '预览',
+      })
+      preview: nasl.core.Boolean;
+
+      @Prop({
+        title: '打开',
+      })
+      opened: nasl.core.Boolean;
+
       constructor(options?: Partial<UDatePickerOptions>) { super(); }
   }
 
@@ -113,7 +133,7 @@ namespace nasl.ui {
           },
           if: _ => _.range !== true,
       })
-      yearDiff: nasl.core.Decimal = 20;
+      yearDiff: nasl.core.Decimal | nasl.core.Integer = 20;
 
       @Prop<UDatePickerOptions, 'yearAdd'>({
           group: '数据属性',
@@ -125,7 +145,7 @@ namespace nasl.ui {
           },
           if: _ => _.range !== true,
       })
-      yearAdd: nasl.core.Decimal = 20;
+      yearAdd: nasl.core.Decimal | nasl.core.Integer = 20;
 
       @Prop({
           group: '主要属性',

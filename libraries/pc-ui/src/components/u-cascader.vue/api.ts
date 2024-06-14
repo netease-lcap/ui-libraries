@@ -23,6 +23,26 @@ namespace nasl.ui {
         })
         filterText: nasl.core.String;
 
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
+
+        @Prop({
+          title: '打开',
+        })
+        opened: nasl.core.Boolean;
+
         @Method({
             title: 'undefined',
             description: '弹出实例。',
@@ -116,7 +136,7 @@ namespace nasl.ui {
             sync: true,
             docDescription: '选择器的值',
         })
-        value: V;
+        value: any;
 
         @Prop({
             group: '数据属性',

@@ -1,4 +1,5 @@
 import generate from '@babel/generator';
+import { lowerFirst } from 'lodash';
 import logger from './logger';
 
 export const evalOptions = (object) => {
@@ -46,4 +47,22 @@ export const getJSXNameByNode = (node) => {
   }
 
   return node.name.name;
+};
+
+export const getSlotName = (slotName) => {
+  if (!slotName) {
+    return '';
+  }
+
+  const slotRegex = /^slot[A-Z].*/;
+  if (slotRegex.test(slotName)) {
+    return lowerFirst(slotName.substring(4));
+  }
+
+  const slotPrefix = 'slot-';
+  if (slotName.startsWith(slotPrefix)) {
+    return slotName.substring(slotPrefix.length);
+  }
+
+  return slotName;
 };

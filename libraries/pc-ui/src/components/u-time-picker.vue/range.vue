@@ -110,6 +110,9 @@ export default {
       sync({
         startTime: 'startInputTime',
         endTime: 'endInputTime',
+        readonly: 'readonly',
+        preview: 'isPreview',
+        disabled: 'disabled',
       }),
     ],
     props: {

@@ -101,6 +101,8 @@ export default {
         value: 'currentIndex',
         isFirst: 'isFirst',
         isLast: 'isLast',
+        disabled: 'disabled',
+        readonly: 'readonly',
       }),
     ],
     props: {

@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanCircle extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: VanCircleOptions['value'];
+
     constructor(options?: Partial<VanCircleOptions>) {
       super();
     }

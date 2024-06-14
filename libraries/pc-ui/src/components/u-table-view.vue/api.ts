@@ -48,6 +48,16 @@ namespace nasl.ui {
       })
       values: nasl.collection.List<V>;
 
+      @Prop({
+        title: '禁用',
+      })
+      disabled: nasl.core.Boolean;
+
+      @Prop({
+        title: '只读',
+      })
+      readonly: nasl.core.Boolean;
+
       @Method({
           title: 'undefined',
           description: '清除缓存，重新加载',
@@ -190,6 +200,7 @@ namespace nasl.ui {
           docDescription: '每页的数据条数。默认20条。在"分页"属性开启时有效',
           setter: {
               concept: 'NumberInputSetter',
+              precision: 0,
           },
           if: _ => _.pagination === true,
       })
@@ -223,6 +234,7 @@ namespace nasl.ui {
           docDescription: '当前加载的表格页。默认1。在"分页"属性开启时有效',
           setter: {
               concept: 'NumberInputSetter',
+              precision: 0,
           },
           if: _ => _.pagination === true,
       })
@@ -422,7 +434,7 @@ namespace nasl.ui {
           },
           if: _ => _.stickHead === true,
       })
-      stickHeadOffset: nasl.core.Decimal = 0;
+      stickHeadOffset: nasl.core.Decimal | nasl.core.Integer = 0;
 
       @Prop({
           group: '主要属性',
@@ -581,7 +593,7 @@ namespace nasl.ui {
           },
           if: _ => _.virtual === true,
       })
-      itemHeight: nasl.core.Decimal;
+      itemHeight: nasl.core.Decimal | nasl.core.Integer;
 
       @Prop<UTableViewOptions<T, V, P, M>, 'virtualCount'>({
           group: '交互属性',
@@ -592,7 +604,7 @@ namespace nasl.ui {
           },
           if: _ => _.virtual === true,
       })
-      virtualCount: nasl.core.Decimal = 60;
+      virtualCount: nasl.core.Integer = 60;
 
       @Prop({
           group: '状态属性',
@@ -1167,7 +1179,7 @@ namespace nasl.ui {
           },
           if: _ => _.type === 'index' && _.autoIndex !== true,
       })
-      startIndex: nasl.core.Decimal = 1;
+      startIndex: nasl.core.Decimal | nasl.core.Integer = 1;
 
       @Prop({
           group: '数据属性',
@@ -1246,7 +1258,7 @@ namespace nasl.ui {
           description: '设置列宽度，可设置为数字或百分比',
           docDescription: '指定列宽，可以是数字或百分比，如100，或10%。',
       })
-      width: nasl.core.String | nasl.core.Decimal;
+      width: nasl.core.String | nasl.core.Decimal | nasl.core.Integer;
 
       @Prop({
           group: '样式属性',
@@ -1504,7 +1516,7 @@ namespace nasl.ui {
           description: '设置列宽度，可设置为数字或百分比',
           docDescription: '指定列宽，可以是数字或百分比，如100，或10%。',
       })
-      width: nasl.core.String | nasl.core.Decimal;
+      width: nasl.core.String | nasl.core.Decimal | nasl.core.Integer;
 
       @Slot({
           title: '配置列展示title',

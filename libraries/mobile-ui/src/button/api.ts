@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: 'Display',
   })
   export class VanButton extends ViewComponent {
+    @Prop({
+      title: '禁用'
+    })
+    disabled: nasl.core.Boolean;
+
     constructor(options?: Partial<VanButtonOptions>) {
       super();
     }

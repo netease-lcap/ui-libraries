@@ -13,6 +13,11 @@ namespace nasl.ui {
     })
     value: VanTabsOptions['value'];
 
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
     constructor(options?: Partial<VanTabsOptions>) {
       super();
     }
@@ -112,6 +117,16 @@ namespace nasl.ui {
     group: "Selector"
   })
   export class VanTab extends ViewComponent {
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '徽章值',
+    })
+    badge: VanTabOptions['badge'];
+
     constructor(options?: Partial<VanTabOptions>) {
       super();
     }

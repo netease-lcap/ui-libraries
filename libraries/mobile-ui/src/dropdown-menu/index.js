@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 // Utils
 import { createNamespace, isDef } from '../utils';
 import { getScroller } from '../utils/dom/scroll';
@@ -17,6 +18,9 @@ export default createComponent({
     ClickOutsideMixin({
       event: 'click',
       method: 'onClickOutside',
+    }),
+    sync({
+      opened: 'opened',
     }),
   ],
 

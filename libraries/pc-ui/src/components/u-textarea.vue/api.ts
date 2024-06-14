@@ -11,7 +11,22 @@ namespace nasl.ui {
         @Prop({
           title: '输入值',
         })
-        value: UInputOptions['value'];
+        value: UTextareaOptions['value'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -40,7 +55,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        private minlength: nasl.core.Decimal;
+        private minlength: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             title: '拼写检查',
@@ -80,7 +95,7 @@ namespace nasl.ui {
                 { update: {showWordLimit:false}, if: _ => _ === null },
             ],
         })
-        maxlength: nasl.core.Decimal;
+        maxlength: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop<UTextareaOptions, 'showWordLimit'>({
             group: '主要属性',

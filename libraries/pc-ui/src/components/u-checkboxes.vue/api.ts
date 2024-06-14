@@ -18,6 +18,21 @@ namespace nasl.ui {
         })
         value: UCheckboxesOptions<T, V, C>['value'];
 
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
+
         @Method({
             title: 'undefined',
             description: '清除缓存，重新加载',
@@ -115,10 +130,11 @@ namespace nasl.ui {
             docDescription: '多选组可以勾选多选框的最小数量。',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
             if: _ => _.checkAll === false,
         })
-        min: nasl.core.Decimal = 0;
+        min: nasl.core.Integer = 0;
 
         @Prop<UCheckboxesOptions<T, V, C>, 'max'>({
             group: '主要属性',
@@ -127,10 +143,11 @@ namespace nasl.ui {
             docDescription: '多选组可以勾选多选框的最大数量。',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
             if: _ => _.checkAll === false,
         })
-        max: nasl.core.Decimal;
+        max: nasl.core.Integer;
 
         @Prop({
             group: '主要属性',
@@ -257,6 +274,21 @@ namespace nasl.ui {
           title: '选中',
         })
         value: UCheckboxOptions<T, V>['value'] = false;
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
 
         constructor(options?: Partial<UCheckboxOptions<T, V>>) { super(); }
     }

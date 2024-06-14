@@ -9,7 +9,8 @@ import * as babel from '@babel/core';
 import * as babelTypes from '@babel/types';
 import generate from '@babel/generator';
 import * as astTypes from '@nasl/types/nasl.ui.ast';
-import { evalOptions } from '../utils/babel-utils';
+import { evalOptions, getSlotName } from '../utils/babel-utils';
+import snippetCode2NASL from '../nasl/snippet-code2nasl';
 
 function getValueFromObjectExpressionByKey(object: babelTypes.ObjectExpression, key: string): unknown {
   const property = object.properties.find((prop) => prop.type === 'ObjectProperty' && (prop.key as babelTypes.Identifier).name === key) as babelTypes.ObjectProperty;
@@ -168,7 +169,7 @@ function transformValue(node: DefaultValue, typeAnnotation?: Annotation): any {
   }
 }
 
-export default function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
+export default function transform(tsCode: string, framework: string): astTypes.ViewComponentDeclaration[] {
   const root = babel.parseSync(tsCode, {
     filename: 'result.ts',
     presets: [require('@babel/preset-typescript')],
@@ -363,10 +364,18 @@ export default function transform(tsCode: string): astTypes.ViewComponentDeclara
             } else if (calleeName === 'Slot') {
               const parameters = ((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation as babelTypes.TSFunctionType).parameters as babelTypes.Identifier[];
 
+              let slotName;
+
+              if (member.key.type === 'Identifier') {
+                slotName = member.key.name;
+              } else if (member.key.type === 'StringLiteral') {
+                slotName = member.key.value;
+              }
+
               const slot: astTypes.SlotDeclaration = {
                 concept: 'SlotDeclaration',
                 snippets: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'snippets') as astTypes.SlotDeclaration['snippets'],
-                name: (member.key as babelTypes.Identifier).name.replace(/^slot(\w)/, (m, $1) => $1.toLowerCase()),
+                name: getSlotName(slotName),
                 title: '',
                 tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
                 params: transformSlotParams(parameters),
@@ -375,6 +384,13 @@ export default function transform(tsCode: string): astTypes.ViewComponentDeclara
               decorator.expression.arguments.forEach((arg) => {
                 if (arg.type === 'ObjectExpression') Object.assign(slot, evalOptions(arg));
               });
+
+              if (Array.isArray(slot.snippets) && slot.snippets.length > 0 && !framework.startsWith('vue')) {
+                slot.snippets = slot.snippets.map((snippetConfig) => ({
+                  ...snippetConfig,
+                  code: snippetCode2NASL(snippetConfig.code),
+                }));
+              }
               component.slots.push(slot);
             }
           }

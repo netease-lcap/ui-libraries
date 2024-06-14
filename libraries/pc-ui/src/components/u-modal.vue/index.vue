@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { clickOutside } from '../../directives';
 import i18n from './i18n';
 import MEmitter from '../m-emitter.vue';
@@ -61,7 +62,13 @@ export const UModal = {
     name: 'u-modal',
     components: { SEmpty },
     directives: { clickOutside },
-    mixins: [MEmitter, i18nMixin('u-modal')],
+    mixins: [
+      MEmitter,
+      i18nMixin('u-modal'),
+      sync({
+        visible: 'currentVisible',
+      }),
+    ],
     // i18n,
     props: {
         visible: { type: Boolean, default: false },

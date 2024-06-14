@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { MChild } from '../m-parent.vue';
 import SEmpty from '../s-empty.vue';
 
@@ -45,7 +46,15 @@ export default {
     components: {
         SEmpty,
     },
-    mixins: [MChild],
+    mixins: [
+      MChild,
+      sync({
+        disabled() {
+          return this.disabled || (this.parentVM && this.parentVM.disabled);
+        },
+        expanded: 'currentExpanded',
+      }),
+    ],
     props: {
         title: String,
         expanded: { type: Boolean, default: false },

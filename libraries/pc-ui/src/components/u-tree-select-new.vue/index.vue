@@ -148,6 +148,10 @@ export default {
       MPreview,
       sync({
         value: 'actualValue',
+        readonly: 'readonly',
+        preview: 'isPreview',
+        opened: 'popperOpened',
+        disabled: 'disabled',
       }),
     ],
     props: {

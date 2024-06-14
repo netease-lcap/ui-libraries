@@ -3,7 +3,7 @@
 <template>
   <u-uploader list-type="card"
     accept=".png,.jpg,.jpeg,.gif,.bmp"
-    url="/new/upload" urlField="url"
+    url="/upload" urlField="filePath"
     :limit="999"
     maxSize="50MB"
     converter="json">

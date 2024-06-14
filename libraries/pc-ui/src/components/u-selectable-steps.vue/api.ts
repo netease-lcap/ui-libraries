@@ -23,6 +23,16 @@ namespace nasl.ui {
         })
         isLast: nasl.core.Boolean;
 
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
         @Method({
           title: '上一步',
           description: '上一步'
@@ -89,7 +99,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        value: nasl.core.Decimal = 0;
+        value: nasl.core.Decimal | nasl.core.Integer = 0;
 
         @Prop({
             group: '主要属性',
@@ -193,6 +203,20 @@ namespace nasl.ui {
         description: '步骤条项',
     })
     export class USelectableStep extends ViewComponent {
+        @Prop({
+          title: '状态',
+        })
+        status: USelectableStepOptions['status'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
 
         constructor(options?: Partial<USelectableStepOptions>) { super(); }
     }

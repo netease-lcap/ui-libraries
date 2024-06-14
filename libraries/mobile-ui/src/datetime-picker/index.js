@@ -25,6 +25,9 @@ export default createComponent({
       value: 'currentValue',
       startValue: 'currentStartValue',
       endValue: 'currentEndValue',
+      preview: 'isPreview',
+      readonly: 'readonly',
+      disabled: 'disabled',
     }),
   ],
   props: {

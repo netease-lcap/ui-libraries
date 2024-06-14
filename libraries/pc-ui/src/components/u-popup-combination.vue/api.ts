@@ -8,7 +8,15 @@ namespace nasl.ui {
         group: 'Feedback'
     })
     export class UPopupCombination extends ViewComponent {
+        @Prop({
+          title: '打开',
+        })
+        opened: nasl.core.Boolean;
 
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -94,7 +102,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        hideDelay: nasl.core.Decimal = 200;
+        hideDelay: nasl.core.Decimal | nasl.core.Integer = 200;
 
         @Prop({
             group: '主要属性',

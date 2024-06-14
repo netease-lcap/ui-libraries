@@ -13,6 +13,26 @@ namespace nasl.ui {
         })
         value: URegionSelectOptions<T, V>['value'];
 
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
+
+        @Prop({
+          title: '打开',
+        })
+        opened: nasl.core.Boolean;
+
         @Method({
             title: 'undefined',
             description: '弹出实例。',
@@ -75,7 +95,7 @@ namespace nasl.ui {
             title: '文本字段',
             docDescription: '集合的元素类型中，用于显示文本的属性名称，支持自定义变更',
         })
-        field: (item: T) => any = ((item: any)  => item.text) as any;
+        field: (item: T) => any = ((item: any)  => item.value) as any;
 
         @Prop({
             group: '数据属性',

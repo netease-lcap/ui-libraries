@@ -124,6 +124,13 @@ export default {
           return this.currentDataSource && this.currentDataSource.sorting ? this.currentDataSource.sorting.order : '';
         },
         filterText: 'filterText',
+        value() {
+          if (this.currentMultiple) {
+            return this.selectedVMs.map((itemVM) => itemVM.value);
+          }
+
+          return this.selectedVM ? this.selectedVM.value : undefined;
+        },
       }),
     ],
     props: {
@@ -204,21 +211,9 @@ export default {
               return
             }
             this.refreshing = true;
-            const paging = {
-                size: this.currentDataSource.paging.size,
-                oldSize: this.currentDataSource.paging.size,
-                number: 1,
-                oldNumber: this.currentDataSource.paging.number,
-            };
-            // eslint-disable-next-line no-console
-            try {
-                this.currentDataSource.page(paging);
-                await this.load();
-                this.$emit('page', paging, this);
-                this.$emit('update:page-number', 1, this);
-            } catch (error) {
-                // eslint-disable-next-line no-console
-            }
+
+            await this.reload();
+
             this.refreshing = false;
         },
 
