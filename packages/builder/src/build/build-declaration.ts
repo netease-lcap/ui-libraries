@@ -107,7 +107,7 @@ function transformTsCode(tsCode: string, componentMap: Record<string, ViewCompon
       const superClassName = getNodeCode(classNode.superClass);
       if (superClassName.endsWith('ViewComponent')) {
         classNode.body.body.forEach((n) => {
-          if (n.type === 'ClassMethod' && n.kind === 'method' && n.key.type === 'Identifier') {
+          if (n.type === 'TSDeclareMethod' && n.kind === 'method' && n.key.type === 'Identifier') {
             const methodName = n.key.name;
             const methodInfo = componentInfo.methods.find((m) => m.name === methodName);
 
