@@ -110,7 +110,7 @@ module.exports = {
     { group: 'Display', name: 'Descriptions', alias: '详情列表' },
     { group: 'Display', name: 'Image', alias: '图片展示' },
     { group: 'Display', name: 'Tag', alias: '标签' },
-    // { group: 'Display', name: 'Avatar', alias: '标签' },
+    { group: 'Display', name: 'Avatar', alias: '标签' },
     { group: 'Table', name: 'List', alias: '数据列表' },
 
     { group: 'Layout', name: 'Flex', alias: '线性布局' },
