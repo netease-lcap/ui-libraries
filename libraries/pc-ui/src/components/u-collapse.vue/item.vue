@@ -126,6 +126,10 @@ export default {
     cursor: var(--cursor-pointer);
 }
 
+.title {
+    display: inline-block;
+}
+
 .expander {
     position: absolute;
     display: inline-block;
