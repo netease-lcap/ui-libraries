@@ -281,14 +281,22 @@ export default {
             this.lastValueString = this.lastValueArray.join(this.join);
             this.close();
             if (this.useArrayLikeValue) {
+                const value = [...this.lastRealValueArray];
+                this.$emit('update:value', value);
+                this.$emit('change', { sender: this, value });
+                this.$emit('input', value, this);
                 this.$emit('select', {
-                    value: this.lastRealValueArray,
+                    value,
                     values: this.lastRealValueArray,
                     items: this.subComponents,
                 }, this);
             } else {
+                const value = this.lastValueString;
+                this.$emit('update:value', value);
+                this.$emit('change', { sender: this, value });
+                this.$emit('input', value, this);
                 this.$emit('select', {
-                    value: this.lastValueString,
+                    value,
                     values: this.lastValueArray,
                     items: this.subComponents,
                 }, this);
