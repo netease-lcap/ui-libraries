@@ -25,8 +25,7 @@ const isOperator = (value) => {
 };
 
 export const solveCondition = (condition, obj) => {
-  if (Array.isArray(condition))
-    return condition.some((cond) => solveCondition(cond, obj));
+  if (Array.isArray(condition)) return condition.some((cond) => solveCondition(cond, obj));
   if (typeof condition === 'object') {
     return Object.keys(condition).every((key) => {
       let expression = condition[key];
@@ -48,40 +47,28 @@ export const solveCondition = (condition, obj) => {
       let sourceValue = get(obj, key);
       let targetValue = expression.value;
       if (expression.caseInsensitive) {
-        sourceValue =
-          typeof sourceValue === 'string'
-            ? sourceValue.toLowerCase()
-            : sourceValue;
-        targetValue =
-          typeof targetValue === 'string'
-            ? targetValue.toLowerCase()
-            : targetValue;
+        sourceValue = typeof sourceValue === 'string'
+          ? sourceValue.toLowerCase()
+          : sourceValue;
+        targetValue = typeof targetValue === 'string'
+          ? targetValue.toLowerCase()
+          : targetValue;
       }
 
-      if (typeof expression.operator === 'function')
-        return expression.operator(sourceValue, targetValue, expression);
+      if (typeof expression.operator === 'function') return expression.operator(sourceValue, targetValue, expression);
       if (
-        expression.operator === '=' ||
-        expression.operator === '==' ||
-        expression.operator === 'eq'
-      )
-        return sourceValue === targetValue;
-      if (expression.operator === '!=' || expression.operator === 'neq')
-        return sourceValue !== targetValue;
-      if (expression.operator === '<' || expression.operator === 'lt')
-        return sourceValue < targetValue;
-      if (expression.operator === '<=' || expression.operator === 'lte')
-        return sourceValue <= targetValue;
-      if (expression.operator === '>' || expression.operator === 'gt')
-        return sourceValue > targetValue;
-      if (expression.operator === '>=' || expression.operator === 'gte')
-        return sourceValue >= targetValue;
-      if (expression.operator === 'includes')
-        return String(sourceValue).includes(targetValue);
-      if (expression.operator === 'startsWith')
-        return String(sourceValue).startsWith(targetValue);
-      if (expression.operator === 'endsWith')
-        return String(sourceValue).endsWith(targetValue);
+        expression.operator === '='
+        || expression.operator === '=='
+        || expression.operator === 'eq'
+      ) return sourceValue === targetValue;
+      if (expression.operator === '!=' || expression.operator === 'neq') return sourceValue !== targetValue;
+      if (expression.operator === '<' || expression.operator === 'lt') return sourceValue < targetValue;
+      if (expression.operator === '<=' || expression.operator === 'lte') return sourceValue <= targetValue;
+      if (expression.operator === '>' || expression.operator === 'gt') return sourceValue > targetValue;
+      if (expression.operator === '>=' || expression.operator === 'gte') return sourceValue >= targetValue;
+      if (expression.operator === 'includes') return String(sourceValue).includes(targetValue);
+      if (expression.operator === 'startsWith') return String(sourceValue).startsWith(targetValue);
+      if (expression.operator === 'endsWith') return String(sourceValue).endsWith(targetValue);
       throw new TypeError('Unknown operator in conditions!');
     });
   }
@@ -107,7 +94,6 @@ const VueDataSource = Vue.extend({
   data() {
     return {
       data: [],
-      valueData: [],
       cache: true,
       viewMode: 'page',
       paging: undefined, // @TODO
@@ -152,20 +138,9 @@ const VueDataSource = Vue.extend({
     },
     viewData() {
       if (this.paging) {
-        if (this.viewMode === 'more') {
-          return unionBy(
-            this.valueData,
-            this.arrangedData.slice(0, this.offset + this.limit),
-            'value',
-          );
-        }
-        return unionBy(
-          this.valueData,
-          this.arrangedData.slice(this.offset, this.offset + this.limit),
-          'value',
-        );
-      }
-      return this.arrangedData;
+        if (this.viewMode === 'more') return this.arrangedData.slice(0, this.offset + this.limit);
+        return this.arrangedData.slice(this.offset, this.offset + this.limit);
+      } return this.arrangedData;
     },
   },
   watch: {
@@ -194,31 +169,24 @@ const VueDataSource = Vue.extend({
       if (this.remotePaging) return (this.arrangedData = arrangedData);
 
       const { filtering } = this;
-      if (!this.remoteFiltering && filtering && Object.keys(filtering).length)
-        arrangedData = arrangedData.filter((item) =>
-          solveCondition(filtering, item),
-        );
+      if (!this.remoteFiltering && filtering && Object.keys(filtering).length) arrangedData = arrangedData.filter((item) => solveCondition(filtering, item));
 
       const { sorting } = this;
       if (!this.remoteSorting && sorting && sorting.field) {
         const { field } = sorting;
         const orderSign = sorting.order === 'asc' ? 1 : -1;
         if (sorting.compare) {
-          arrangedData.sort((item1, item2) =>
-            sorting.compare(
-              this.$at(item1, field),
-              this.$at(item2, field),
-              orderSign,
-            ),
-          );
+          arrangedData.sort((item1, item2) => sorting.compare(
+            this.$at(item1, field),
+            this.$at(item2, field),
+            orderSign,
+          ));
         } else {
-          arrangedData.sort((item1, item2) =>
-            this.defaultCompare(
-              this.$at(item1, field),
-              this.$at(item2, field),
-              orderSign,
-            ),
-          );
+          arrangedData.sort((item1, item2) => this.defaultCompare(
+            this.$at(item1, field),
+            this.$at(item2, field),
+            orderSign,
+          ));
         }
       }
 
@@ -239,9 +207,9 @@ const VueDataSource = Vue.extend({
     },
     mustRemote(offset, newOffset) {
       return (
-        !this.hasAllRemoteData(offset, newOffset) || // 没有全部的后端数据
-        (this.params.hasOwnProperty('filtering') && this.remoteFiltering) ||
-        (this.params.hasOwnProperty('sorting') && this.remoteSorting)
+        !this.hasAllRemoteData(offset, newOffset) // 没有全部的后端数据
+        || (this.params.hasOwnProperty('filtering') && this.remoteFiltering)
+        || (this.params.hasOwnProperty('sorting') && this.remoteSorting)
       );
     },
     /**
@@ -249,8 +217,7 @@ const VueDataSource = Vue.extend({
      * @param {Number} offset - 位置
      */
     hasMore(offset) {
-      if (offset === undefined || offset === Infinity)
-        offset = this.offset + this.limit;
+      if (offset === undefined || offset === Infinity) offset = this.offset + this.limit;
       console.log(
         this.offset,
         this.limit,
@@ -360,8 +327,8 @@ const VueDataSource = Vue.extend({
           if (result.hasOwnProperty('list') && result.hasOwnProperty('total')) {
             result.data = result.list;
           } else if (
-            result.hasOwnProperty('totalElements') &&
-            result.hasOwnProperty('content')
+            result.hasOwnProperty('totalElements')
+            && result.hasOwnProperty('content')
           ) {
             result.total = result.totalElements;
             result.data = result.content;
@@ -403,38 +370,14 @@ const VueDataSource = Vue.extend({
           this.arrange();
           return partialData;
         }
-        console.log(extraParams.filterValue, 'extraParams.filterValue');
         for (let i = 0; i < limit; i++) {
           const item = partialData[i];
           //   this.data.push(item);
           if (item) this.data[offset + i] = item;
         }
 
-        console.log(this.data, 'this.data');
         this.arrange();
         return partialData;
-      });
-    },
-    loadValueData(filterValue) {
-      const mapDataValue = this.valueData
-        .concat(this.data)
-        .reduce((acc, item) => Object.assign(acc, { [item?.value]: item }), {});
-      const uniqData = filterValue.filter((item) => {
-        if (mapDataValue[item?.value] || !item) return false;
-        return true;
-      });
-      if (!uniqData.length) return;
-
-      if (!this._load || typeof this._load !== 'function') return;
-      this._load({ filterValue, paging: {} }).then((result) => {
-        let partialData = [];
-        if (result instanceof Array) {
-          // 只返回数组，没有 total 字段
-          partialData = this._process(result);
-        } else if (result instanceof Object) {
-          partialData = this._process(result.data);
-        } // 否则什么都不做
-        this.valueData = unionBy(this.valueData, partialData, 'value');
       });
     },
     loadMore() {
