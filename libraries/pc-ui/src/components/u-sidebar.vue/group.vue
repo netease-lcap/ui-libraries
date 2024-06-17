@@ -34,6 +34,7 @@
         placement="right-start"
         :disabled="disabled"
         :append-to="isInSidebar ? 'body': 'reference'"
+        :style="staticCssVarStyle"
         @before-open="$event=>collapsible === false && $event.preventDefault()"
         @update:opened="toggle($event)"
         :offset="popperOffset"
@@ -131,17 +132,21 @@ export default {
         SEmpty,
     },
     extends: MGroup,
-
     provide() {
         return {
             groupNestedLevel: this.currentGroupNestedLevel + 1,
         };
     },
-
     inject: {
         currentGroupNestedLevel: {
             from: 'groupNestedLevel',
             default: 0,
+        },
+        getStaticCssVarStyle: {
+          from: 'getStaticCssVarStyle',
+          default() {
+            return () => '';
+          },
         },
     },
 
@@ -158,6 +163,9 @@ export default {
     },
 
     computed: {
+        staticCssVarStyle() {
+          return this.getStaticCssVarStyle();
+        },
         popperOffset() {
             let isFirstItem = false;
             if (this.innerIdx !== undefined) {

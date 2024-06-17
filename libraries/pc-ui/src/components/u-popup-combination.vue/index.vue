@@ -19,25 +19,18 @@
 </template>
 
 <script>
+import CssVarsStyleMixin from '../../mixins/css-variables';
 import UPopup from '../u-popup.vue/index.vue';
 import SEmpty from '../../components/s-empty.vue';
 export default {
     name: 'u-popup-combination',
     components: { SEmpty, UPopup },
+    mixins: [
+      CssVarsStyleMixin,
+    ],
     props: {
         display: String,
         ellipsis: Boolean,
-    },
-    data() {
-      return {
-        staticStyleVar: '',
-      }
-    },
-    mounted() {
-      this.staticStyleVar = this.getStaticStyleVar(this.$vnode.data.staticStyle);
-    },
-    updated() {
-      this.staticStyleVar = this.getStaticStyleVar(this.$vnode.data.staticStyle);
     },
     methods: {
         // 双击打开弹出框
@@ -62,18 +55,6 @@ export default {
         },
         scheduleUpdate() {
             this.$refs.popup.scheduleUpdate();
-        },
-        getStaticStyleVar(staticStyle) {
-          let style = '';
-          for (const key in staticStyle) {
-            if (Object.prototype.hasOwnProperty.call(staticStyle, key)) {
-              if (/^--/.test(key)) {
-                const value = staticStyle[key];
-                style += `${key}: ${value};`
-              }
-            }
-          }
-          return style;
         },
     },
 };
