@@ -100,7 +100,7 @@
                                             :shadow="(isTdLastLeftFixed(columnVM, columnIndex, visibleColumnVMs, item, rowIndex) && !scrollXStart) || (isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs) && !scrollXEnd)"
                                             :colspan="getItemColSpan(item, rowIndex, columnIndex)"
                                             :rowspan="getItemRowSpan(item, rowIndex, columnIndex)"
-                                            
+
                                             :disabled="item.disabled || disabled"
                                             :ellipsis="ellipsis"
 
@@ -204,7 +204,7 @@ export default {
 
         readonly: { type: Boolean, default: false },
         disabled: { type: Boolean, default: false },
-        
+
         filterMultiple: { type: Boolean, default: false },
         filterMax: Number,
 
@@ -230,7 +230,7 @@ export default {
         border: { type: Boolean, default: false },
         line: { type: Boolean, default: false },
         striped: { type: Boolean, default: false },
-        
+
         loading: { type: Boolean, default: undefined },
         loadingText: {
             type: String,
@@ -545,7 +545,7 @@ export default {
         },
         /**
          * 过滤
-         * @param {*} field 
+         * @param {*} field
          */
         isFilterActive(field) {
             const filtering = this.currentDataSource && this.currentDataSource.filtering;
@@ -705,7 +705,7 @@ export default {
             const data = (this.isSimpleArray(this.currentDataSource.data) && this.currentDataSource.data.length > 0) ? (this.currentDataSource.arrangedData[rowIndex] && this.currentDataSource.arrangedData[rowIndex].simple) : item;
             // 给u-table-view-expander用
             try {
-                data.toggle = () => this.toggleExpanded(data);
+                data.__toggle = () => this.toggleExpanded(data);
             } catch (error) {
                 console.warn('当前data不是一个对象');
             }
