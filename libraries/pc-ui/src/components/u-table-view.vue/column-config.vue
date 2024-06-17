@@ -220,7 +220,7 @@ export default {
 .root {
     cursor: pointer;
     position: absolute;
-    z-index: 1;
+    z-index: 100; /*fix:2891670506516992 表格配置固定列后打开可配置展示列，配置图标被遮挡*/
     right: 7px;
     top: 8px;
 }

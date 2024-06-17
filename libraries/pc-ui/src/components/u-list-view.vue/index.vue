@@ -573,6 +573,9 @@ export default {
         async reload() {
             // readme: 目前使用场景中存在着用户通过props间接改变组件内部状态后同步调用reload的情况，在这里等待组件内部状态更新完成。
             await new Promise((res) => { this.$nextTick(() => res()); });
+            // fix: 2891721709081088 数据源为变量时，调用reload会清空数据
+            if (!this.currentDataSource._load || typeof this.currentDataSource._load !== 'function')
+                return;
             this.currentDataSource.clearLocalData();
             const {
                 paging: oldPaging,

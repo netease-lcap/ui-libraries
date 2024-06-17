@@ -1022,6 +1022,9 @@ exports[`u-list-view.vue > Demo-前端分页，数据源改变后分页问题 1`
 <div class="root" direction="vertical" type vusion-slot-name="default">
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
+      刷 新
+    </a>
+    <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
       变换list值
     </a>
     <a class="root" hovertype="underline" tabindex="0" target="_self" vusion-slot-name-edit="text">
