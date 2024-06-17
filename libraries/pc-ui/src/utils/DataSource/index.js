@@ -46,6 +46,7 @@ export const solveCondition = (condition, obj) => {
 
       let sourceValue = get(obj, key);
       let targetValue = expression.value;
+      if (targetValue === null) return true;
       if (expression.caseInsensitive) {
         sourceValue = typeof sourceValue === 'string'
           ? sourceValue.toLowerCase()
@@ -169,7 +170,11 @@ const VueDataSource = Vue.extend({
       if (this.remotePaging) return (this.arrangedData = arrangedData);
 
       const { filtering } = this;
-      if (!this.remoteFiltering && filtering && Object.keys(filtering).length) arrangedData = arrangedData.filter((item) => solveCondition(filtering, item));
+      if (!this.remoteFiltering && filtering && Object.keys(filtering).length) {
+        arrangedData = arrangedData.filter((item) => solveCondition(filtering, item));
+        // // 前端筛选， 且无后端分页 时重置originTotal
+        !this.remotePaging && (this.originTotal = arrangedData.length);
+      }
 
       const { sorting } = this;
       if (!this.remoteSorting && sorting && sorting.field) {
@@ -191,9 +196,6 @@ const VueDataSource = Vue.extend({
       }
 
       this.arrangedData = arrangedData;
-      if (this.remoteFiltering) {
-        this.originTotal = arrangedData.length; // 有filtering的时候，total需要重新设值
-      }
     },
     _process(data) {
       return data;

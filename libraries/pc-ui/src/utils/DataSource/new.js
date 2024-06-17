@@ -48,6 +48,7 @@ export const solveCondition = (condition, obj) => {
 
             let sourceValue = getType(obj) === 'String' ? obj : get(obj, key);
             let targetValue = expression.value;
+            if (targetValue === null) return true;
             if (expression.caseInsensitive) {
                 sourceValue
           = typeof sourceValue === 'string' ? sourceValue.toLowerCase() : sourceValue;
