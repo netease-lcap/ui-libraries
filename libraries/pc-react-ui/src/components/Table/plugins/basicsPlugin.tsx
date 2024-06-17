@@ -50,6 +50,7 @@ export function useHandleTransformOption(props) {
   const refProps = props.get('ref');
   const warpList = _.cond([
     [Array.isArray, (list) => ({ list, total: list.length })],
+    [_.isPlainObject, (data) => data],
     [_.conforms({ list: _.isArray }), _.identity],
     [fp.stubTrue, fp.constant({ list: [], total: 0 })],
   ]) as (Target: {
@@ -61,6 +62,7 @@ export function useHandleTransformOption(props) {
   const transformOption = React.useMemo(
     () => fp.cond([
       [fp.isArray, fp.constant(async () => ({ list: dataSource, total: dataSource.length }))],
+      [_.isPlainObject, (data) => data],
       [fp.isFunction, fp.constant((...arg) => {
         const sorterMap = { ascend: 'asc', descend: 'desc' };
         const sorter = _.get(arg, '0.sorter', {});

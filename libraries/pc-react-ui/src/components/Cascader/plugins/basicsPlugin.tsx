@@ -48,6 +48,8 @@ export function useHandleDataSource(props) {
     ...dataSourceResult,
     fieldNames: {
       children: childrenField,
+      label: textField,
+      value: valueField,
     },
   };
 }
