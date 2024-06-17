@@ -703,12 +703,6 @@ export default {
         },
         getRealItem(item, rowIndex) {
             const data = (this.isSimpleArray(this.currentDataSource.data) && this.currentDataSource.data.length > 0) ? (this.currentDataSource.arrangedData[rowIndex] && this.currentDataSource.arrangedData[rowIndex].simple) : item;
-            // 给u-table-view-expander用
-            try {
-                data.__toggle = () => this.toggleExpanded(data);
-            } catch (error) {
-                console.warn('当前data不是一个对象');
-            }
             return data;
         },
         getThEllipsis(columnVM) {
