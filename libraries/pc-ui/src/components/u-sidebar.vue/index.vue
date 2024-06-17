@@ -201,7 +201,6 @@ export default {
     },
     methods: {
         getStaticCssVarStyle() {
-          console.log('staticStyleVar', this.staticStyleVar);
           return this.staticStyleVar;
         },
         updateCollapse(nV) {
@@ -364,18 +363,6 @@ export default {
         getProperlyWidth(w) {
             const properlyWidth = Math.max(this.minWidth, w);
             return properlyWidth;
-        },
-        getStaticStyleVar(staticStyle) {
-          let style = '';
-          for (const key in staticStyle) {
-            if (Object.prototype.hasOwnProperty.call(staticStyle, key)) {
-              if (/^--/.test(key)) {
-                const value = staticStyle[key];
-                style += `${key}: ${value};`
-              }
-            }
-          }
-          return style;
         },
     },
 };
