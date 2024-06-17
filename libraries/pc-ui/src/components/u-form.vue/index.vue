@@ -302,7 +302,7 @@ export default {
     display: inline-flex;
 }
 
-.root.colon .item .item_label .item_text:not(:empty)::after {
+.root.colon .item .item_label .item_text:not(:empty):not([designer-empty]):after {
   content: ':';
   margin-left: 2px;
   margin-block: 0;

@@ -55,6 +55,7 @@
 import { sync } from '@lcap/vue2-utils';
 import MSinglex from '../m-singlex.vue';
 import { MGroupParent } from '../m-group.vue';
+import CssVarsStyleMixin from '../../mixins/css-variables';
 
 export default {
     name: 'u-sidebar',
@@ -63,6 +64,7 @@ export default {
     mixins: [
       MSinglex,
       MGroupParent,
+      CssVarsStyleMixin,
       sync(
         'readonly',
         'disabled',
@@ -76,6 +78,11 @@ export default {
         },
       ),
     ],
+    provide() {
+      return {
+        getStaticCssVarStyle: () => this.getStaticCssVarStyle(),
+      };
+    },
     props: {
         enableCollapse: { type: Boolean, default: false },
         // collapse: { type: Boolean, default: false }, // 当前用作整个侧边栏的折叠效果。
@@ -193,6 +200,9 @@ export default {
         }
     },
     methods: {
+        getStaticCssVarStyle() {
+          return this.staticStyleVar;
+        },
         updateCollapse(nV) {
             this.$emit('update:collapseMode', nV ? 'fold' : 'expand', this);
             this.currentCollapse = nV;
