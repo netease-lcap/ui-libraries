@@ -54,12 +54,18 @@
 <script>
 import MSinglex from '../m-singlex.vue';
 import { MGroupParent } from '../m-group.vue';
+import CssVarsStyleMixin from '../../mixins/css-variables';
 
 export default {
     name: 'u-sidebar',
     groupName: 'u-sidebar-group',
     childName: 'u-sidebar-item',
-    mixins: [MSinglex, MGroupParent],
+    mixins: [MSinglex, MGroupParent, CssVarsStyleMixin],
+    provide() {
+      return {
+        getStaticCssVarStyle: () => this.getStaticCssVarStyle(),
+      };
+    },
     props: {
         enableCollapse: { type: Boolean, default: false },
         // collapse: { type: Boolean, default: false }, // 当前用作整个侧边栏的折叠效果。
@@ -178,6 +184,10 @@ export default {
         }
     },
     methods: {
+        getStaticCssVarStyle() {
+          console.log('staticStyleVar', this.staticStyleVar);
+          return this.staticStyleVar;
+        },
         updateCollapse(nV) {
             this.$emit('update:collapseMode', nV ? 'fold' : 'expand', this);
             this.currentCollapse = nV;
@@ -339,6 +349,18 @@ export default {
         getProperlyWidth(w) {
             const properlyWidth = Math.max(this.minWidth, w);
             return properlyWidth;
+        },
+        getStaticStyleVar(staticStyle) {
+          let style = '';
+          for (const key in staticStyle) {
+            if (Object.prototype.hasOwnProperty.call(staticStyle, key)) {
+              if (/^--/.test(key)) {
+                const value = staticStyle[key];
+                style += `${key}: ${value};`
+              }
+            }
+          }
+          return style;
         },
     },
 };
