@@ -154,7 +154,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
             pageable={true}
             inputAlign="left"
             remotePaging={true}
-            slot-panel-title={
+            slot-pannel-title={
               <VanText text="请选择${label}"></VanText>
             }
             slot-picker-top={
@@ -229,7 +229,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
             dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}
             pageSize={50}
             notitleblock={true}
-            slot-panel-title={
+            slot-pannel-title={
               <VanText text="请选择${label}"></VanText>
             }
             slot-picker-top={
