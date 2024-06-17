@@ -34,7 +34,7 @@
             name="expander"
             :vm="vm"
             :props="{
-                item: { ...item, toggle: () => toggleExpanded(item) },
+                item: { ...item, __toggle: () => toggleExpanded(item) },
                 value: $at(item, vm.field),
                 vm,
                 rowIndex,
@@ -44,7 +44,7 @@
                 toggle: () => toggleExpanded(item)
             }">
             <u-table-view-expander
-                :item="{ ...item, toggle: () => toggleExpanded(item) }"
+                :item="{ ...item, __toggle: () => toggleExpanded(item) }"
                 @toggle="() => toggleExpanded(item)">
             </u-table-view-expander>
         </f-slot>
