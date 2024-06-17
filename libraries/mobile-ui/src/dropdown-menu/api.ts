@@ -72,7 +72,7 @@ namespace nasl.ui {
         code: '<van-dropdown-item title="标题"><van-dropdown-item-son clickable :isLink="false"><template #title>标题1</template></van-dropdown-item-son></van-dropdown-item>'
       }]
     })
-    slotDefault: () => Array<VanDropdownMenu>;
+    slotDefault: () => Array<VanDropdownItem>;
   }
   @Component({
     title: '菜单项',
