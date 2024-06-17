@@ -1,6 +1,7 @@
 import React from 'react';
 import { useControllableValue } from 'ahooks';
 import _ from 'lodash';
+import { ConfigProvider } from 'antd';
 import { $deletePropsList } from '@/plugins/constants';
 
 export function useHandleOpenRef(props) {
@@ -38,3 +39,21 @@ export function useHandleRemoteEmptyItems(props) {
 }
 
 useHandleRemoteEmptyItems.order = 5;
+
+export function useHandleNodePath(props) {
+  const { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls();
+  const nodeId = _.uniqueId('input_');
+  const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
+  const nodePath = props.get('data-nodepath');
+  React.useEffect(() => {
+    const dropdownNode = document.querySelector(`[data-nodeid=${nodeId}]`);
+    const dropdownTriggerNode = dropdownNode?.closest(`.${prefixCls}-dropdown-trigger`);
+    dropdownTriggerNode?.setAttribute('data-nodepath', nodePath);
+    console.log(dropdownNode, `.${prefixCls}-dropdown-trigger`, dropdownTriggerNode, 'node');
+  }, [nodePath, nodeId]);
+  return {
+    'data-nodeid': nodeId,
+    [$deletePropsList]: deletePropsList,
+  };
+}
