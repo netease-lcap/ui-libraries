@@ -409,7 +409,7 @@ namespace nasl.ui {
         concept: "SwitchSetter"
       }
     })
-    visible: nasl.core.Boolean = false;
+    visible: nasl.core.Boolean;
     @Event({
       title: '确认',
       description: '点击完成按钮时触发的事件'
