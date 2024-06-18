@@ -401,6 +401,15 @@ namespace nasl.ui {
       },
     })
     preview: nasl.core.Boolean = false;
+    @Prop({
+      group: '主要属性',
+      title: '展示弹层',
+      sync: true,
+      setter: {
+        concept: "SwitchSetter"
+      }
+    })
+    visible: nasl.core.Boolean;
     @Event({
       title: '确认',
       description: '点击完成按钮时触发的事件'
