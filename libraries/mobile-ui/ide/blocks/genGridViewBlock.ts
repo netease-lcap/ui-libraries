@@ -20,7 +20,6 @@ export function genGridViewTemplate(entity: naslTypes.Entity, nameGroup: NameGro
         ref="${nameGroup.viewElementMainView}"
         dataSource={${dataSourceValue}}
         pageable="auto-more"
-        valueField={${nameGroup.lowerEntity}.${getEntityPromaryKeyProperty(entity)}}
         pageSize={50}
         pageNumber={1}
         remotePaging={true}
