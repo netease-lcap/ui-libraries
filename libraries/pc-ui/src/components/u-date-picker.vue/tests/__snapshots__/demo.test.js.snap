@@ -153,7 +153,7 @@ exports[`u-date-picker.vue > Demo-只读和禁用 1`] = `
                     </transition-stub>
                   </span>
                   <span>
-                    <span class="showtext">8 月</span>
+                    <span class="showtext">8月 </span>
                     <transition-stub name="fade">
                       <div class="root" style="display: none;">
                         <div class="root">
@@ -168,29 +168,29 @@ exports[`u-date-picker.vue > Demo-只读和禁用 1`] = `
                                   </div>
                                   <div class="body">
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      1 月</div>
+                                      1 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      2 月</div>
+                                      2 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      3 月</div>
+                                      3 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      4 月</div>
+                                      4 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      5 月</div>
+                                      5 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      6 月</div>
+                                      6 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      7 月</div>
+                                      7 </div>
                                     <div class="root yearitem" role="true" vusion-slot-name="item">
-                                      8 月</div>
+                                      8 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      9 月</div>
+                                      9 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      10 月</div>
+                                      10 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      11 月</div>
+                                      11 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      12 月</div>
+                                      12 </div>
                                   </div>
                                   <div class="foot" style="display: none;">
                                   </div>
@@ -518,7 +518,7 @@ exports[`u-date-picker.vue > Demo-只读和禁用 1`] = `
                     </transition-stub>
                   </span>
                   <span>
-                    <span class="showtext">8 月</span>
+                    <span class="showtext">8月 </span>
                     <transition-stub name="fade">
                       <div class="root" style="display: none;">
                         <div class="root">
@@ -533,29 +533,29 @@ exports[`u-date-picker.vue > Demo-只读和禁用 1`] = `
                                   </div>
                                   <div class="body">
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      1 月</div>
+                                      1 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      2 月</div>
+                                      2 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      3 月</div>
+                                      3 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      4 月</div>
+                                      4 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      5 月</div>
+                                      5 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      6 月</div>
+                                      6 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      7 月</div>
+                                      7 </div>
                                     <div class="root yearitem" role="true" vusion-slot-name="item">
-                                      8 月</div>
+                                      8 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      9 月</div>
+                                      9 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      10 月</div>
+                                      10 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      11 月</div>
+                                      11 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      12 月</div>
+                                      12 </div>
                                   </div>
                                   <div class="foot" style="display: none;">
                                   </div>
@@ -795,7 +795,7 @@ exports[`u-date-picker.vue > Demo-周范围选择 1`] = `
                         </div>
                       </span>
                     </div>
-                    <div>2023 年 3 月</div>
+                    <div>2023 年 3月 </div>
                     <div class="holder"></div>
                   </div>
                   <table cellpadding="0" cellspacing="0" class="dateTable">
@@ -1037,7 +1037,7 @@ exports[`u-date-picker.vue > Demo-周范围选择 1`] = `
                 <div class="content right">
                   <div class="header">
                     <div class="holder"></div>
-                    <div>2023 年 4 月</div>
+                    <div>2023 年 4月 </div>
                     <div>
                       <span class="lcp-iconv hicon">
                         <span class="iconwrap">
@@ -1388,7 +1388,7 @@ exports[`u-date-picker.vue > Demo-周选择 1`] = `
                 </transition-stub>
               </span>
               <span>
-                <span class="showtext">7 月</span>
+                <span class="showtext">7月 </span>
                 <transition-stub name="fade">
                   <div class="root" style="display: none;">
                     <div class="root">
@@ -1403,29 +1403,29 @@ exports[`u-date-picker.vue > Demo-周选择 1`] = `
                               </div>
                               <div class="body">
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  1 月</div>
+                                  1 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  2 月</div>
+                                  2 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  3 月</div>
+                                  3 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  4 月</div>
+                                  4 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  5 月</div>
+                                  5 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  6 月</div>
+                                  6 </div>
                                 <div class="root yearitem" role="true" vusion-slot-name="item">
-                                  7 月</div>
+                                  7 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  8 月</div>
+                                  8 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  9 月</div>
+                                  9 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  10 月</div>
+                                  10 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  11 月</div>
+                                  11 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  12 月</div>
+                                  12 </div>
                               </div>
                               <div class="foot" style="display: none;">
                               </div>
@@ -1756,7 +1756,7 @@ exports[`u-date-picker.vue > Demo-基本用法 1`] = `
                 </transition-stub>
               </span>
               <span>
-                <span class="showtext">8 月</span>
+                <span class="showtext">8月 </span>
                 <transition-stub name="fade">
                   <div class="root" style="display: none;">
                     <div class="root">
@@ -1771,29 +1771,29 @@ exports[`u-date-picker.vue > Demo-基本用法 1`] = `
                               </div>
                               <div class="body">
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  1 月</div>
+                                  1 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  2 月</div>
+                                  2 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  3 月</div>
+                                  3 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  4 月</div>
+                                  4 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  5 月</div>
+                                  5 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  6 月</div>
+                                  6 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  7 月</div>
+                                  7 </div>
                                 <div class="root yearitem" role="true" vusion-slot-name="item">
-                                  8 月</div>
+                                  8 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  9 月</div>
+                                  9 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  10 月</div>
+                                  10 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  11 月</div>
+                                  11 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  12 月</div>
+                                  12 </div>
                               </div>
                               <div class="foot" style="display: none;">
                               </div>
@@ -2129,7 +2129,7 @@ exports[`u-date-picker.vue > Demo-基本用法 2`] = `
                     </transition-stub>
                   </span>
                   <span>
-                    <span class="showtext">8 月</span>
+                    <span class="showtext">8月 </span>
                     <transition-stub name="fade">
                       <div class="root" style="display: none;">
                         <div class="root">
@@ -2144,29 +2144,29 @@ exports[`u-date-picker.vue > Demo-基本用法 2`] = `
                                   </div>
                                   <div class="body">
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      1 月</div>
+                                      1 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      2 月</div>
+                                      2 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      3 月</div>
+                                      3 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      4 月</div>
+                                      4 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      5 月</div>
+                                      5 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      6 月</div>
+                                      6 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      7 月</div>
+                                      7 </div>
                                     <div class="root yearitem" role="true" vusion-slot-name="item">
-                                      8 月</div>
+                                      8 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      9 月</div>
+                                      9 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      10 月</div>
+                                      10 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      11 月</div>
+                                      11 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      12 月</div>
+                                      12 </div>
                                   </div>
                                   <div class="foot" style="display: none;">
                                   </div>
@@ -2497,7 +2497,7 @@ exports[`u-date-picker.vue > Demo-基本用法 2`] = `
                     </transition-stub>
                   </span>
                   <span>
-                    <span class="showtext">8 月</span>
+                    <span class="showtext">8月 </span>
                     <transition-stub name="fade">
                       <div class="root" style="display: none;">
                         <div class="root">
@@ -2512,29 +2512,29 @@ exports[`u-date-picker.vue > Demo-基本用法 2`] = `
                                   </div>
                                   <div class="body">
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      1 月</div>
+                                      1 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      2 月</div>
+                                      2 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      3 月</div>
+                                      3 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      4 月</div>
+                                      4 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      5 月</div>
+                                      5 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      6 月</div>
+                                      6 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      7 月</div>
+                                      7 </div>
                                     <div class="root yearitem" role="true" vusion-slot-name="item">
-                                      8 月</div>
+                                      8 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      9 月</div>
+                                      9 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      10 月</div>
+                                      10 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      11 月</div>
+                                      11 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      12 月</div>
+                                      12 </div>
                                   </div>
                                   <div class="foot" style="display: none;">
                                   </div>
@@ -3382,7 +3382,7 @@ exports[`u-date-picker.vue > Demo-弹窗对其方式 1`] = `
                     </transition-stub>
                   </span>
                   <span>
-                    <span class="showtext">8 月</span>
+                    <span class="showtext">8月 </span>
                     <transition-stub name="fade">
                       <div class="root" style="display: none;">
                         <div class="root">
@@ -3397,29 +3397,29 @@ exports[`u-date-picker.vue > Demo-弹窗对其方式 1`] = `
                                   </div>
                                   <div class="body">
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      1 月</div>
+                                      1 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      2 月</div>
+                                      2 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      3 月</div>
+                                      3 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      4 月</div>
+                                      4 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      5 月</div>
+                                      5 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      6 月</div>
+                                      6 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      7 月</div>
+                                      7 </div>
                                     <div class="root yearitem" role="true" vusion-slot-name="item">
-                                      8 月</div>
+                                      8 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      9 月</div>
+                                      9 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      10 月</div>
+                                      10 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      11 月</div>
+                                      11 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      12 月</div>
+                                      12 </div>
                                   </div>
                                   <div class="foot" style="display: none;">
                                   </div>
@@ -3747,7 +3747,7 @@ exports[`u-date-picker.vue > Demo-弹窗对其方式 1`] = `
                     </transition-stub>
                   </span>
                   <span>
-                    <span class="showtext">8 月</span>
+                    <span class="showtext">8月 </span>
                     <transition-stub name="fade">
                       <div class="root" style="display: none;">
                         <div class="root">
@@ -3762,29 +3762,29 @@ exports[`u-date-picker.vue > Demo-弹窗对其方式 1`] = `
                                   </div>
                                   <div class="body">
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      1 月</div>
+                                      1 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      2 月</div>
+                                      2 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      3 月</div>
+                                      3 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      4 月</div>
+                                      4 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      5 月</div>
+                                      5 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      6 月</div>
+                                      6 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      7 月</div>
+                                      7 </div>
                                     <div class="root yearitem" role="true" vusion-slot-name="item">
-                                      8 月</div>
+                                      8 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      9 月</div>
+                                      9 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      10 月</div>
+                                      10 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      11 月</div>
+                                      11 </div>
                                     <div class="root yearitem" vusion-slot-name="item">
-                                      12 月</div>
+                                      12 </div>
                                   </div>
                                   <div class="foot" style="display: none;">
                                   </div>
@@ -4049,7 +4049,7 @@ exports[`u-date-picker.vue > Demo-方法 1`] = `
                 </transition-stub>
               </span>
               <span>
-                <span class="showtext">8 月</span>
+                <span class="showtext">8月 </span>
                 <transition-stub name="fade">
                   <div class="root" style="display: none;">
                     <div class="root">
@@ -4064,29 +4064,29 @@ exports[`u-date-picker.vue > Demo-方法 1`] = `
                               </div>
                               <div class="body">
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  1 月</div>
+                                  1 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  2 月</div>
+                                  2 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  3 月</div>
+                                  3 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  4 月</div>
+                                  4 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  5 月</div>
+                                  5 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  6 月</div>
+                                  6 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  7 月</div>
+                                  7 </div>
                                 <div class="root yearitem" role="true" vusion-slot-name="item">
-                                  8 月</div>
+                                  8 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  9 月</div>
+                                  9 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  10 月</div>
+                                  10 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  11 月</div>
+                                  11 </div>
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  12 月</div>
+                                  12 </div>
                               </div>
                               <div class="foot" style="display: none;">
                               </div>
@@ -4321,7 +4321,7 @@ exports[`u-date-picker.vue > Demo-日期范围只读 1`] = `
                         </div>
                       </span>
                     </div>
-                    <div>2023 年 3 月</div>
+                    <div>2023 年 3月 </div>
                     <div class="holder"></div>
                   </div>
                   <table cellpadding="0" cellspacing="0" class="dateTable">
@@ -4563,7 +4563,7 @@ exports[`u-date-picker.vue > Demo-日期范围只读 1`] = `
                 <div class="content right">
                   <div class="header">
                     <div class="holder"></div>
-                    <div>2023 年 4 月</div>
+                    <div>2023 年 4月 </div>
                     <div>
                       <span class="lcp-iconv hicon">
                         <span class="iconwrap">
@@ -4899,7 +4899,7 @@ exports[`u-date-picker.vue > Demo-日期范围复杂情况 1`] = `
                       </div>
                     </span>
                   </div>
-                  <div>2023 年 3 月</div>
+                  <div>2023 年 3月 </div>
                   <div class="holder"></div>
                 </div>
                 <table cellpadding="0" cellspacing="0" class="dateTable">
@@ -5141,7 +5141,7 @@ exports[`u-date-picker.vue > Demo-日期范围复杂情况 1`] = `
               <div class="content right">
                 <div class="header">
                   <div class="holder"></div>
-                  <div>2023 年 4 月</div>
+                  <div>2023 年 4月 </div>
                   <div>
                     <span class="lcp-iconv hicon">
                       <span class="iconwrap">
@@ -5463,7 +5463,7 @@ exports[`u-date-picker.vue > Demo-日期范围禁用 1`] = `
                         </div>
                       </span>
                     </div>
-                    <div>2023 年 3 月</div>
+                    <div>2023 年 3月 </div>
                     <div class="holder"></div>
                   </div>
                   <table cellpadding="0" cellspacing="0" class="dateTable">
@@ -5705,7 +5705,7 @@ exports[`u-date-picker.vue > Demo-日期范围禁用 1`] = `
                 <div class="content right">
                   <div class="header">
                     <div class="holder"></div>
-                    <div>2023 年 4 月</div>
+                    <div>2023 年 4月 </div>
                     <div>
                       <span class="lcp-iconv hicon">
                         <span class="iconwrap">
@@ -6031,7 +6031,7 @@ exports[`u-date-picker.vue > Demo-日期范围选择 1`] = `
                         </div>
                       </span>
                     </div>
-                    <div>2023 年 3 月</div>
+                    <div>2023 年 3月 </div>
                     <div class="holder"></div>
                   </div>
                   <table cellpadding="0" cellspacing="0" class="dateTable">
@@ -6273,7 +6273,7 @@ exports[`u-date-picker.vue > Demo-日期范围选择 1`] = `
                 <div class="content right">
                   <div class="header">
                     <div class="holder"></div>
-                    <div>2023 年 4 月</div>
+                    <div>2023 年 4月 </div>
                     <div>
                       <span class="lcp-iconv hicon">
                         <span class="iconwrap">
@@ -6693,7 +6693,7 @@ exports[`u-date-picker.vue > Demo-最大值和最小值 1`] = `
                   </transition-stub>
                 </span>
                 <span>
-                  <span class="showtext">8 月</span>
+                  <span class="showtext">8月 </span>
                   <transition-stub name="fade">
                     <div class="root" style="display: none;">
                       <div class="root">
@@ -6708,29 +6708,29 @@ exports[`u-date-picker.vue > Demo-最大值和最小值 1`] = `
                                 </div>
                                 <div class="body">
                                   <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                                    1 月</div>
+                                    1 </div>
                                   <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                                    2 月</div>
+                                    2 </div>
                                   <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                                    3 月</div>
+                                    3 </div>
                                   <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                                    4 月</div>
+                                    4 </div>
                                   <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                                    5 月</div>
+                                    5 </div>
                                   <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                                    6 月</div>
+                                    6 </div>
                                   <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                                    7 月</div>
+                                    7 </div>
                                   <div class="root yearitem" role="true" vusion-slot-name="item">
-                                    8 月</div>
+                                    8 </div>
                                   <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                                    9 月</div>
+                                    9 </div>
                                   <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                                    10 月</div>
+                                    10 </div>
                                   <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                                    11 月</div>
+                                    11 </div>
                                   <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                                    12 月</div>
+                                    12 </div>
                                 </div>
                                 <div class="foot" style="display: none;">
                                 </div>
@@ -6968,68 +6968,68 @@ exports[`u-date-picker.vue > Demo-月份范围选择 1`] = `
                       <tr>
                         <td class="disabled">
                           <div>
-                            <a class="cell">1</a>
+                            <a class="cell">1月</a>
                           </div>
                         </td>
                         <td class>
                           <div>
-                            <a class="cell">2</a>
+                            <a class="cell">2月</a>
                           </div>
                         </td>
                         <td class>
                           <div>
-                            <a class="cell">3</a>
+                            <a class="cell">3月</a>
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td class>
                           <div>
-                            <a class="cell">4</a>
+                            <a class="cell">4月</a>
                           </div>
                         </td>
                         <td class>
                           <div>
-                            <a class="cell">5</a>
+                            <a class="cell">5月</a>
                           </div>
                         </td>
                         <td class="in-range start-date">
                           <div>
-                            <a class="cell">6</a>
+                            <a class="cell">6月</a>
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td class="in-range">
                           <div>
-                            <a class="cell">7</a>
+                            <a class="cell">7月</a>
                           </div>
                         </td>
                         <td class="in-range">
                           <div>
-                            <a class="cell">8</a>
+                            <a class="cell">8月</a>
                           </div>
                         </td>
                         <td class="in-range">
                           <div>
-                            <a class="cell">9</a>
+                            <a class="cell">9月</a>
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td class="in-range">
                           <div>
-                            <a class="cell">10</a>
+                            <a class="cell">10月</a>
                           </div>
                         </td>
                         <td class="in-range">
                           <div>
-                            <a class="cell">11</a>
+                            <a class="cell">11月</a>
                           </div>
                         </td>
                         <td class="in-range">
                           <div>
-                            <a class="cell">12</a>
+                            <a class="cell">12月</a>
                           </div>
                         </td>
                       </tr>
@@ -7055,68 +7055,68 @@ exports[`u-date-picker.vue > Demo-月份范围选择 1`] = `
                       <tr>
                         <td class="in-range">
                           <div>
-                            <a class="cell">1</a>
+                            <a class="cell">1月</a>
                           </div>
                         </td>
                         <td class="in-range">
                           <div>
-                            <a class="cell">2</a>
+                            <a class="cell">2月</a>
                           </div>
                         </td>
                         <td class="in-range end-date">
                           <div>
-                            <a class="cell">3</a>
+                            <a class="cell">3月</a>
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td class>
                           <div>
-                            <a class="cell">4</a>
+                            <a class="cell">4月</a>
                           </div>
                         </td>
                         <td class>
                           <div>
-                            <a class="cell">5</a>
+                            <a class="cell">5月</a>
                           </div>
                         </td>
                         <td class="disabled">
                           <div>
-                            <a class="cell">6</a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="disabled">
-                          <div>
-                            <a class="cell">7</a>
-                          </div>
-                        </td>
-                        <td class="disabled">
-                          <div>
-                            <a class="cell">8</a>
-                          </div>
-                        </td>
-                        <td class="disabled">
-                          <div>
-                            <a class="cell">9</a>
+                            <a class="cell">6月</a>
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td class="disabled">
                           <div>
-                            <a class="cell">10</a>
+                            <a class="cell">7月</a>
                           </div>
                         </td>
                         <td class="disabled">
                           <div>
-                            <a class="cell">11</a>
+                            <a class="cell">8月</a>
                           </div>
                         </td>
                         <td class="disabled">
                           <div>
-                            <a class="cell">12</a>
+                            <a class="cell">9月</a>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="disabled">
+                          <div>
+                            <a class="cell">10月</a>
+                          </div>
+                        </td>
+                        <td class="disabled">
+                          <div>
+                            <a class="cell">11月</a>
+                          </div>
+                        </td>
+                        <td class="disabled">
+                          <div>
+                            <a class="cell">12月</a>
                           </div>
                         </td>
                       </tr>
@@ -7452,7 +7452,7 @@ exports[`u-date-picker.vue > Demo-格式化 1`] = `
                   </transition-stub>
                 </span>
                 <span>
-                  <span class="showtext">7 月</span>
+                  <span class="showtext">7月 </span>
                   <transition-stub name="fade">
                     <div class="root" style="display: none;">
                       <div class="root">
@@ -7467,29 +7467,29 @@ exports[`u-date-picker.vue > Demo-格式化 1`] = `
                                 </div>
                                 <div class="body">
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    1 月</div>
+                                    1 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    2 月</div>
+                                    2 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    3 月</div>
+                                    3 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    4 月</div>
+                                    4 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    5 月</div>
+                                    5 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    6 月</div>
+                                    6 </div>
                                   <div class="root yearitem" role="true" vusion-slot-name="item">
-                                    7 月</div>
+                                    7 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    8 月</div>
+                                    8 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    9 月</div>
+                                    9 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    10 月</div>
+                                    10 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    11 月</div>
+                                    11 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    12 月</div>
+                                    12 </div>
                                 </div>
                                 <div class="foot" style="display: none;">
                                 </div>
@@ -7822,7 +7822,7 @@ exports[`u-date-picker.vue > Demo-自动对焦 1`] = `
                   </transition-stub>
                 </span>
                 <span>
-                  <span class="showtext">8 月</span>
+                  <span class="showtext">8月 </span>
                   <transition-stub name="fade">
                     <div class="root" style="display: none;">
                       <div class="root">
@@ -7837,29 +7837,29 @@ exports[`u-date-picker.vue > Demo-自动对焦 1`] = `
                                 </div>
                                 <div class="body">
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    1 月</div>
+                                    1 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    2 月</div>
+                                    2 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    3 月</div>
+                                    3 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    4 月</div>
+                                    4 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    5 月</div>
+                                    5 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    6 月</div>
+                                    6 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    7 月</div>
+                                    7 </div>
                                   <div class="root yearitem" role="true" vusion-slot-name="item">
-                                    8 月</div>
+                                    8 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    9 月</div>
+                                    9 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    10 月</div>
+                                    10 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    11 月</div>
+                                    11 </div>
                                   <div class="root yearitem" vusion-slot-name="item">
-                                    12 月</div>
+                                    12 </div>
                                 </div>
                                 <div class="foot" style="display: none;">
                                 </div>
@@ -8203,7 +8203,7 @@ exports[`u-date-picker.vue > Demo-表单验证 1`] = `
                           </transition-stub>
                         </span>
                         <span>
-                          <span class="showtext">3 月</span>
+                          <span class="showtext">3月 </span>
                           <transition-stub name="fade">
                             <div class="root" style="display: none;">
                               <div class="root">
@@ -8218,29 +8218,29 @@ exports[`u-date-picker.vue > Demo-表单验证 1`] = `
                                         </div>
                                         <div class="body">
                                           <div class="root yearitem" vusion-slot-name="item">
-                                            1 月</div>
+                                            1 </div>
                                           <div class="root yearitem" vusion-slot-name="item">
-                                            2 月</div>
+                                            2 </div>
                                           <div class="root yearitem" role="true" vusion-slot-name="item">
-                                            3 月</div>
+                                            3 </div>
                                           <div class="root yearitem" vusion-slot-name="item">
-                                            4 月</div>
+                                            4 </div>
                                           <div class="root yearitem" vusion-slot-name="item">
-                                            5 月</div>
+                                            5 </div>
                                           <div class="root yearitem" vusion-slot-name="item">
-                                            6 月</div>
+                                            6 </div>
                                           <div class="root yearitem" vusion-slot-name="item">
-                                            7 月</div>
+                                            7 </div>
                                           <div class="root yearitem" vusion-slot-name="item">
-                                            8 月</div>
+                                            8 </div>
                                           <div class="root yearitem" vusion-slot-name="item">
-                                            9 月</div>
+                                            9 </div>
                                           <div class="root yearitem" vusion-slot-name="item">
-                                            10 月</div>
+                                            10 </div>
                                           <div class="root yearitem" vusion-slot-name="item">
-                                            11 月</div>
+                                            11 </div>
                                           <div class="root yearitem" vusion-slot-name="item">
-                                            12 月</div>
+                                            12 </div>
                                         </div>
                                         <div class="foot" style="display: none;">
                                         </div>
@@ -8484,7 +8484,7 @@ exports[`u-date-picker.vue > Demo-表单验证 1`] = `
                                 </div>
                               </span>
                             </div>
-                            <div>2022 年 3 月</div>
+                            <div>2022 年 3月 </div>
                             <div class="holder"></div>
                           </div>
                           <table cellpadding="0" cellspacing="0" class="dateTable">
@@ -8726,7 +8726,7 @@ exports[`u-date-picker.vue > Demo-表单验证 1`] = `
                         <div class="content right">
                           <div class="header">
                             <div class="holder"></div>
-                            <div>2022 年 4 月</div>
+                            <div>2022 年 4月 </div>
                             <div>
                               <span class="lcp-iconv hicon">
                                 <span class="iconwrap">
