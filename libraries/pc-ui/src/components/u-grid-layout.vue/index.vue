@@ -11,6 +11,11 @@ export default {
     props: {
         repeat: { type: Number, default: 12 },
     },
+    provide() {
+        return {
+            grid: this,
+        };
+    },
     mounted() {
         this.$refs.root.addEventListener('scroll', throttle(this.handleScroll.bind(this), 200));
     },
