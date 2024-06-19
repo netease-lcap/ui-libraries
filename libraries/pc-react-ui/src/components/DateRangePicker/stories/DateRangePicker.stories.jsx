@@ -37,8 +37,9 @@ export const 默认 = {
     // }, 3000);
     return (
       <DateRangePicker
-        {...args}
-        value={value}
+        // {...args}
+        // value={value}
+        showTime
         onChange={(e)=>{
           console.log(e)
           setValue(e)
