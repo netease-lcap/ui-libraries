@@ -15,6 +15,7 @@
         @focus="onFocus" @blur="onBlur"
         @blur:value="onBlurInputValue($event)"
         @clear="clearValue"
+
         :prefix="preIcon?preIcon:undefined"
         :suffix="suffixIcon?suffixIcon:undefined"
         :color="formItemVM && formItemVM.color">
@@ -245,7 +246,8 @@ export default {
             this.$emit('update', e);
         },
         clearValue() {
-            this.$refs.popper && this.$refs.popper.clearValue();
+          this.onEmitUpdate(null);
+          this.$refs.popper && this.$refs.popper.clearValue();
         },
         onSpinnerClick() {
             this.$refs.input.focus();
