@@ -472,7 +472,10 @@
     "ideusage": {
       "idetype": "container",
       "structured": true,
-      "parentAccept": "target.tag === 'Tree'"
+      "parentAccept": "target.tag === 'Tree'",
+      "events": {
+        "click": true
+      }
     }
   },
   {
