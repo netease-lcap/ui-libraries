@@ -10,7 +10,7 @@ export default createComponent({
   mixins: [
     sync({
       src: 'convertedSrc',
-      placeholderSrc: 'convertedPlaceholderSrc',
+      placeholderSrc: 'placeholderSrc',
       preview: 'preview',
     }),
   ],

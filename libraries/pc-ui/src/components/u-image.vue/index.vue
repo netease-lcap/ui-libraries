@@ -41,8 +41,8 @@ export default {
     mixins: [
       sync({
         src: 'convertedSrc',
-        placeholderSrc: 'convertedPlaceholderSrc',
-        preview: 'visible',
+        placeholderSrc: 'placeholderSrc',
+        preview: 'preview',
       })
     ],
     props: {
