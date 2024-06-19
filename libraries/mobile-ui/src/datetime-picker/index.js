@@ -49,6 +49,9 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
+    visible: {
+      type: Boolean,
+    },
   },
   data() {
     const val = this.value;
@@ -84,6 +87,12 @@ export default createComponent({
     },
   },
   watch: {
+    visible(val) {
+      // 设计器模式下不触发
+      if (this.inDesigner()) return;
+
+      this.popupVisible = val;
+    },
     value(val) {
       this.currentValue = val;
     },
@@ -194,7 +203,7 @@ export default createComponent({
     },
     togglePopup() {
       this.popupVisible = !this.popupVisible;
-      // this.$refs.popup.toggle();
+      this.$emit('update:visible', this.popupVisible);
     },
     // @exposed-api
     open() {
@@ -203,12 +212,12 @@ export default createComponent({
       }
 
       this.popupVisible = true;
-      // this.$refs.popup.open();
+      this.$emit('update:visible', this.popupVisible);
     },
     // @exposed-api
     close() {
       this.popupVisible = false;
-      // this.$refs.popup.close();
+      this.$emit('update:visible', this.popupVisible);
     },
     // @exposed-api
     getPicker() {

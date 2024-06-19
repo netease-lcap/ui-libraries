@@ -182,10 +182,10 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
         placeholder="请输入${label}">
     </UNumberInput>`;
   } if (propertyTypeName === 'String' && propertyTypeMaxLength > 256) {
-    return `<UTextArea
+    return `<UTextarea
         value={$sync(${vModel})}
         placeholder="请输入${label}">
-    </UTextArea>`;
+    </UTextarea>`;
   } if (propertyTypeName === 'Date') {
     return `<UDatePicker
         clearable={true}

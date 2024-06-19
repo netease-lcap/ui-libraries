@@ -154,7 +154,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
             pageable={true}
             inputAlign="left"
             remotePaging={true}
-            slot-panel-title={
+            slot-pannel-title={
               <VanText text="请选择${label}"></VanText>
             }
             slot-picker-top={
@@ -194,7 +194,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
     return `<VanSwitch value={$sync(${vModel})}></VanSwitch>`;
   } if (propertyTypeName === 'Integer' || propertyTypeName === 'Long') {
     return `<VanStepperNew value={$sync(${vModel})} placeholder="请输入${property.label || property.name
-    }" showPlus={false} showMinus={false} align="left"></VanStepperNew`;
+    }" showPlus={false} showMinus={false} align="left"></VanStepperNew>`;
   } if (propertyTypeName === 'Double') {
     return `<VanStepperNew value={$sync(${vModel})} placeholder="请输入${property.label || property.name
     }" showPlus={false} showMinus={false} align="left"></VanStepperNew>`;
@@ -229,7 +229,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
             dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}
             pageSize={50}
             notitleblock={true}
-            slot-panel-title={
+            slot-pannel-title={
               <VanText text="请选择${label}"></VanText>
             }
             slot-picker-top={

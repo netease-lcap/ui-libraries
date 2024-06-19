@@ -49,17 +49,17 @@ namespace nasl.ui {
         })
         reject_color: 'primary' | 'primary_secondary' | 'default' | 'danger' | 'danger_secondary' = 'default';
 
-        @Prop({
-            group: '主要属性',
-            title: '回退按钮样式',
-            description: '设置回退按钮的颜色和按钮样式类型',
-            docDescription: '- 支持定义按钮样式，包括主要按钮、次要按钮、普通按钮、危险操作按钮和次要危险操作按钮。',
-            setter: {
-                concept: 'EnumSelectSetter',
-                options: [{ title: '主要按钮' }, { title: '次要按钮' }, { title: '普通按钮' }, { title: '危险操作按钮' }, { title: '次要危险操作按钮' }],
-            },
-        })
-        revert_color: 'primary' | 'primary_secondary' | 'default' | 'danger' | 'danger_secondary' = 'default';
+        // @Prop({
+        //     group: '主要属性',
+        //     title: '回退按钮样式',
+        //     description: '设置回退按钮的颜色和按钮样式类型',
+        //     docDescription: '- 支持定义按钮样式，包括主要按钮、次要按钮、普通按钮、危险操作按钮和次要危险操作按钮。',
+        //     setter: {
+        //         concept: 'EnumSelectSetter',
+        //         options: [{ title: '主要按钮' }, { title: '次要按钮' }, { title: '普通按钮' }, { title: '危险操作按钮' }, { title: '次要危险操作按钮' }],
+        //     },
+        // })
+        // revert_color: 'primary' | 'primary_secondary' | 'default' | 'danger' | 'danger_secondary' = 'default';
 
         @Prop({
             group: '主要属性',
@@ -146,11 +146,11 @@ namespace nasl.ui {
         })
         onReject: (event: any) => void;
 
-        @Event({
-            title: '回退时',
-            description: '回退时按钮成功执行后触发。',
-        })
-        onRevert: (event: any) => void;
+        // @Event({
+        //     title: '回退时',
+        //     description: '回退时按钮成功执行后触发。',
+        // })
+        // onRevert: (event: any) => void;
 
         @Event({
             title: '转派时',

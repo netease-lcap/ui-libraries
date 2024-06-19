@@ -34,7 +34,7 @@
             name="expander"
             :vm="vm"
             :props="{
-                item: item,
+                item: { ...item, __toggle: () => toggleExpanded(item) },
                 value: $at(item, vm.field),
                 vm,
                 rowIndex,
@@ -44,7 +44,7 @@
                 toggle: () => toggleExpanded(item)
             }">
             <u-table-view-expander
-                :item="item"
+                :item="{ ...item, __toggle: () => toggleExpanded(item) }"
                 @toggle="() => toggleExpanded(item)">
             </u-table-view-expander>
         </f-slot>
@@ -87,7 +87,7 @@
             name="expander"
             :vm="vm"
             :props="{
-                item: item,
+                item: { ...item, __toggle: () => toggleExpanded(item) },
                 value: $at(item, vm.field),
                 vm,
                 rowIndex,
@@ -97,7 +97,7 @@
                 toggle: () => toggleExpanded(item)
             }">
             <u-table-view-expander
-                :item="item"
+                :item="{ ...item, __toggle: () => toggleExpanded(item) }"
                 @toggle="() => toggleExpanded(item)">
             </u-table-view-expander>
         </f-slot>
@@ -155,9 +155,9 @@ export default {
         },
         /**
          * 编辑列
-         * @param {*} item 
-         * @param {*} columnIndex 
-         * @param {*} treeColumnIndex 
+         * @param {*} item
+         * @param {*} columnIndex
+         * @param {*} treeColumnIndex
          */
         getEditablewrapWidth(item, columnIndex, treeColumnIndex) {
             if (this.treeDisplay && item.tableTreeItemLevel !== undefined && columnIndex === treeColumnIndex) {

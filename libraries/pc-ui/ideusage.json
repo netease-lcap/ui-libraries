@@ -120,7 +120,10 @@
             "idetype": "container",
             "structured": true,
             "childAccept": "['u-sidebar-group', 'u-sidebar-item', 'u-sidebar-divider'].includes(target.tag)",
-            "parentAccept": "['u-sidebar-group', 'u-sidebar'].includes(target.tag)"
+            "parentAccept": "['u-sidebar-group', 'u-sidebar'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -144,7 +147,10 @@
             "idetype": "container",
             "structured": true,
             "parentAccept": "['u-navbar-group-multi', 'u-navbar-multi'].includes(target.tag)",
-            "childAccept": "['u-navbar-group-multi', 'u-navbar-item-multi', 'u-navbar-divider-multi'].includes(target.tag)"
+            "childAccept": "['u-navbar-group-multi', 'u-navbar-item-multi', 'u-navbar-divider-multi'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -207,7 +213,10 @@
             "idetype": "container",
             "structured": true,
             "childAccept": "['u-dropdown-group', 'u-dropdown-item'].includes(target.tag)",
-            "parentAccept": "['u-dropdown-group', 'u-dropdown'].includes(target.tag)"
+            "parentAccept": "['u-dropdown-group', 'u-dropdown'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -272,7 +281,10 @@
         "name": "UCollapseItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'u-collapse'"
+            "parentAccept": "target.tag === 'u-collapse'",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -378,7 +390,10 @@
     {
         "name": "UImage",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "additionalAttribute": {
+                ":convertSrcFn": "\"(src) => src.startsWith('/assets') ? '/lowcode-static' + src : src \""
+            }
         }
     },
     {
@@ -669,7 +684,7 @@
                 },
                 {
                     "expression": "this",
-                    "cssSelector": "[class^='u-tabs_body']"
+                    "cssSelector": "[class^='u-tabs_tab']"
                 }
             ],
             "events": {
