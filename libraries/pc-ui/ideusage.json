@@ -860,10 +860,10 @@
     {
         "name": "UDrawer",
         "ideusage": {
-            "idetype": "modal",
+            "idetype": "drawer",
             "selector": {
-              "expression": "this",
-              "cssSelector": "div[class^='u-drawer_drawer']"
+                "expression": "this.getElement(el => el.slotTarget === 'body')",
+                "cssSelector": "div[class^='u-drawer_drawer']"
             },
             "cacheOpenKey": "visible"
         }
