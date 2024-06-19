@@ -4944,7 +4944,7 @@
       },
       {
         "id": 46,
-        "name": "u-popup",
+        "name": "u-popup-combination",
         "title": "弹出框",
         "toPosition": "popup",
         "type": [],
