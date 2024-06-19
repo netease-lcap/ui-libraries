@@ -504,8 +504,8 @@ importers:
         specifier: 3.9.0-beta
         version: 3.9.0-beta
       '@nasl/types':
-        specifier: 0.1.7-beta.2
-        version: 0.1.7-beta.2
+        specifier: 0.1.8-beta.2
+        version: 0.1.8-beta.2
       '@storybook/addon-essentials':
         specifier: ^7.6.17
         version: 7.6.17(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -2371,6 +2371,9 @@ packages:
 
   '@nasl/types@0.1.7-beta.2':
     resolution: {integrity: sha512-DQG4yh7SltBIW/BA6zA2jocFMzHzq7dkTsYiPutoZjrKESUkD9w+FkSisTw3QPZBLSjNHLYpq+QzOAreBbnNLA==}
+
+  '@nasl/types@0.1.8-beta.2':
+    resolution: {integrity: sha512-gm23DQANs1+kA3nFVfpIZO8CFoFXUBCFT0MD5aAnYXhBhkr7C4pjpeOGbtPHzlH83l6DaBsvYLeKBCobsUZzeg==}
 
   '@ndelangen/get-tarball@3.0.9':
     resolution: {integrity: sha512-9JKTEik4vq+yGosHYhZ1tiH/3WpUS0Nh0kej4Agndhox8pAdWhEx5knFVRcb/ya9knCRCs1rPxNrSXTDdfVqpA==}
@@ -11686,6 +11689,8 @@ snapshots:
   '@nasl/types@0.1.7-beta.1': {}
 
   '@nasl/types@0.1.7-beta.2': {}
+
+  '@nasl/types@0.1.8-beta.2': {}
 
   '@ndelangen/get-tarball@3.0.9':
     dependencies:

@@ -96,6 +96,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'NumberInputSetter',
             },
+            unsettable: true,
         })
         decimalLength: nasl.core.Decimal | nasl.core.Integer;
 
@@ -109,6 +110,7 @@ namespace nasl.ui {
                 precision: 0,
             },
             bindHide: true,
+            unsettable: true,
         })
         decimalPlacesValue: nasl.core.Integer;
 
@@ -117,6 +119,7 @@ namespace nasl.ui {
             title: '隐藏末尾0',
             description: '控制数据展示时最后一个是否展示0，仅影响展示，不影响数据实际存储的值。',
             if: _ => _.advancedFormatEnable === false,
+            unsettable: true,
             setter: {
                 concept: 'SwitchSetter',
             },
@@ -130,6 +133,7 @@ namespace nasl.ui {
                 concept: 'SwitchSetter',
             },
             if: _ => _.advancedFormatEnable === false,
+            unsettable: true,
         })
         thousandths: nasl.core.Boolean = false;
 
@@ -139,6 +143,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            unsettable: true,
             if: _ => _.advancedFormatEnable === false,
         })
         percentSign: nasl.core.Boolean = false;
@@ -174,6 +179,7 @@ namespace nasl.ui {
                 concept: 'SwitchSetter',
             },
             bindHide: true,
+            unsettable: true,
         })
         advancedFormatEnable: nasl.core.Boolean = false;
 
