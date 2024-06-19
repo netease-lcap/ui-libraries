@@ -399,6 +399,10 @@ export default function transform(tsCode: string, framework: string): astTypes.V
     });
 
     classDecl.body.body.forEach((member) => {
+      if ((member.type === 'ClassProperty' || member.type === 'ClassMethod') && member.accessibility === 'private') {
+        return;
+      }
+
       if (member.type === 'ClassProperty') {
         member.decorators?.forEach((decorator) => {
           if (decorator.expression.type === 'CallExpression') {
@@ -476,7 +480,7 @@ export default function transform(tsCode: string, framework: string): astTypes.V
                 title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'title') as astTypes.LogicDeclaration['title'],
                 // type: generate((member. as babelTypes.TSTypeAnnotation).typeAnnotation).code,
               };
-              // @TODO: private
+
               decorator.expression.arguments.forEach((arg) => {
                 if (arg.type === 'ObjectExpression') Object.assign(method, evalOptions(arg));
               });
