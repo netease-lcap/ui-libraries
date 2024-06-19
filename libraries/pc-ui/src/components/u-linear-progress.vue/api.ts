@@ -21,7 +21,7 @@ namespace nasl.ui {
             title: '百分比范围',
             description: '百分比范围限制',
         })
-        private range: Array<nasl.core.Decimal> | Array<nasl.core.Integer> = [0,100];
+        private range: nasl.collection.List<nasl.core.Decimal | nasl.core.Integer> = [0,100];
 
         @Prop({
             group: '数据属性',

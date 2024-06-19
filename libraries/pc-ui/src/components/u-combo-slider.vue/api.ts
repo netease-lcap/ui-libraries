@@ -43,7 +43,7 @@ namespace nasl.ui {
             sync: true,
             docDescription: '滑块的值',
         })
-        value: nasl.core.Decimal | Array<nasl.core.Decimal> | nasl.core.Integer | Array<nasl.core.Integer>  = 0;
+        value: nasl.core.Decimal | nasl.core.Integer | nasl.collection.List<nasl.core.Integer | nasl.core.Decimal> = 0;
 
         @Prop({
             group: '数据属性',
@@ -93,7 +93,7 @@ namespace nasl.ui {
             description: '进一步对`value`限制，通常传入一个数组，第一个值表示范围开始值，第二个值表示范围的结束值',
             docDescription: '进一步对`值`限制，通常传入一个数组，第一个值表示范围开始值，第二个值表示范围的结束值',
         })
-        range: Array<nasl.core.Decimal> | Array<nasl.core.Integer> = [];
+        range: nasl.collection.List<nasl.core.Integer | nasl.core.Decimal> = [];
 
         @Prop({
             group: '数据属性',

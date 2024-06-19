@@ -46,7 +46,7 @@ namespace nasl.ui {
         @Prop({
             title: '没有文本信息的值',
         })
-        noTextValues: Array<nasl.core.String>;
+        noTextValues: nasl.collection.List<nasl.core.String>;
 
         @Prop({
           title: '禁用',
