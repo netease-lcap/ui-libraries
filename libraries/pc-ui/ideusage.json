@@ -557,7 +557,8 @@
     {
         "name": "UNumberInput",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "element",
+            "textholder": "value"
         }
     },
     {
