@@ -3,7 +3,7 @@ import { Icon } from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
-  title: 'Example/Icon',
+  title: 'Example/Icon/blocks',
   component: Icon,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -26,14 +26,14 @@ export const 默认 = {
   render: (args) => {
     return (
       <Icon
-        data-nodepath="e1e577afa6af4443a311a1d7085a6b60"
-        name="RiArrowRightUpLine"
-        style={{ height: '14px', width: '14px', fontSize: '14px' }}
+        name="RiNeteaseCloudMusicLine"
+        key="component-e1e577afa6af4443a311a1d7085a6b60"
       />
     );
   },
   args: {
     color: 'magenta',
     name: 'RiArrowRightCircleFill',
+    // name: '//minio-api.codewave-dev.163yun.com/lowcode-static/user/defaulttenant/1711352646423_1711101097723_1710173501157_%E4%B8%89%E7%82%B9.svg',
   },
 };
