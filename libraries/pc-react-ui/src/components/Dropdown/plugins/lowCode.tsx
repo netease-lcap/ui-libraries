@@ -50,7 +50,7 @@ export function useHandleNodePath(props) {
     const dropdownNode = document.querySelector(`[data-nodeid=${nodeId}]`);
     const dropdownTriggerNode = dropdownNode?.closest(`.${prefixCls}-dropdown-trigger`);
     dropdownTriggerNode?.setAttribute('data-nodepath', nodePath);
-    console.log(dropdownNode, `.${prefixCls}-dropdown-trigger`, dropdownTriggerNode, 'node');
+    // console.log(dropdownNode, `.${prefixCls}-dropdown-trigger`, dropdownTriggerNode, 'node');
   }, [nodePath, nodeId]);
   return {
     'data-nodeid': nodeId,
