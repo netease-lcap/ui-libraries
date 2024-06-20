@@ -522,7 +522,11 @@
     {
         "name": "UListComponents",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "additionalAttribute": {
+                ":dataSource": "\"[{}]\"",
+                ":colnum": "\"1\""
+            }
         }
     },
     {
@@ -545,7 +549,10 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "['u-form-item'].includes(target.tag)"
+            "childAccept": "['u-form-item'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
