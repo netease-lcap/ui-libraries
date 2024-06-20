@@ -67,7 +67,7 @@ namespace nasl.ui {
             description: '辅助说明的文本信息，在展示辅助文本开关打开的情况下才会生效',
             docDescription: '辅助文字设置。在展示辅助文字开关打开的情况下才会生效',
         })
-        texts: Array<nasl.core.String> = ['极差','失望','一般','满意','惊喜'];
+        texts: nasl.collection.List<nasl.core.String> = ['极差','失望','一般','满意','惊喜'];
 
         @Prop({
             group: '主要属性',
@@ -86,7 +86,7 @@ namespace nasl.ui {
             description: 'Tooltip提示信息设置。在展示提示信息开关打开的情况下才会生效',
             docDescription: 'Tooltip文字设置。在展示Tooltip开关打开的情况下才会生效',
         })
-        tooltips: Array<nasl.core.String> = ['极差','失望','一般','满意','惊喜'];
+        tooltips: nasl.collection.List<nasl.core.String> = ['极差','失望','一般','满意','惊喜'];
 
         @Prop({
             group: '交互属性',

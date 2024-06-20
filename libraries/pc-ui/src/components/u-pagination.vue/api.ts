@@ -114,7 +114,7 @@ namespace nasl.ui {
             description: '每页条数切换器的选项',
             docDescription: '每页条数选项列表',
         })
-        pageSizeOptions: Array<nasl.core.Integer> = [10,20,50];
+        pageSizeOptions: nasl.collection.List<nasl.core.Integer> = [10,20,50];
 
         @Prop({
             group: '主要属性',
@@ -201,25 +201,25 @@ namespace nasl.ui {
         onChangePageSize: (event:  {
             page: nasl.core.Integer;
             oldPage: nasl.core.Integer;
-            pageSizeOptions: Array<nasl.core.Integer>;
+            pageSizeOptions: nasl.collection.List<nasl.core.Integer>;
         }) => any;
 
         @Slot({
             title: '总数',
             description: '总数自定义',
         })
-        slotTotal: () => Array<ViewComponent>;
+        slotTotal: () => nasl.collection.List<ViewComponent>;
 
         @Slot({
             title: '上一页',
             description: '上一页自定义',
         })
-        slotPrev: () => Array<ViewComponent>;
+        slotPrev: () => nasl.collection.List<ViewComponent>;
 
         @Slot({
             title: '下一页',
             description: '下一页自定义',
         })
-        slotNext: () => Array<ViewComponent>;
+        slotNext: () => nasl.collection.List<ViewComponent>;
     }
 }

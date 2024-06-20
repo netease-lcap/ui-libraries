@@ -28,7 +28,7 @@ export default createComponent({
     title: String,
     titleStyle: null,
     titleClass: null,
-    disabled: Boolean,
+    disabled: { type: Boolean, default: false },
   },
 
   data() {

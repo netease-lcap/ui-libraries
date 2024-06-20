@@ -32,7 +32,7 @@ namespace nasl.ui {
                 title: 'undefined',
                 description: '指定转移选项值的列表。如果不填，则为按左列表框选中项值的列表。',
             })
-            values: Array<nasl.core.String>,
+            values: nasl.collection.List<nasl.core.String>,
         ): void {}
 
         @Method({
@@ -44,7 +44,7 @@ namespace nasl.ui {
                 title: 'undefined',
                 description: '指定转移选项值的列表。如果不填，则为按右列表框选中项值的列表。',
             })
-            values: Array<nasl.core.String>,
+            values: nasl.collection.List<nasl.core.String>,
         ): void {}
 
         @Method({
@@ -61,7 +61,7 @@ namespace nasl.ui {
                 title: 'undefined',
                 description: '指定转移选项值的列表。',
             })
-            values: Array<nasl.core.String>,
+            values: nasl.collection.List<nasl.core.String>,
         ): void {}
         constructor(options?: Partial<UTransferOptions<T, V>>) { super(); }
     }

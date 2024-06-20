@@ -247,6 +247,7 @@ export default {
         },
         clearValue() {
           this.onEmitUpdate(null);
+          this.onChange({ sender: this, time: null, value: null });
           this.$refs.popper && this.$refs.popper.clearValue();
         },
         onSpinnerClick() {

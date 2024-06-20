@@ -45,6 +45,12 @@ namespace nasl.ui {
     })
     next(): void {}
 
+    @Method({
+      title: '重载数据',
+      description: '重新加载数据',
+    })
+    reload(): void {}
+
     constructor(options?: Partial<VanStepsOptions<T>>) {
       super();
     }

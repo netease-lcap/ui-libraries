@@ -42,7 +42,7 @@ export default createComponent({
       default: 0,
     },
     valueField: { type: String, default: 'value' },
-    disabled: Boolean,
+    disabled: { type: Boolean, default: false },
     direction: String,
     iconSize: [Number, String],
     checkedColor: String,

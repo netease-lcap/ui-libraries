@@ -43,8 +43,8 @@ export default createComponent({
     }),
   ],
   props: {
-    readonly: Boolean,
-    disabled: Boolean,
+    readonly: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
     columnsprop: [Array, String],
     pvalue: [String, Object], // 废弃
     value: [String, Object],

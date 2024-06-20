@@ -55,8 +55,8 @@ export default createComponent({
   props: {
     title: String,
     color: String,
-    readonly: Boolean,
-    disabled: Boolean,
+    readonly: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
     formatter: Function,
     rowHeight: [Number, String],
     confirmText: String,
