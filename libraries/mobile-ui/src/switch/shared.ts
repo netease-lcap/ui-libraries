@@ -17,8 +17,8 @@ export const switchProps = {
   size: [Number, String],
   value: null as any,
   loading: Boolean,
-  disabled: Boolean,
-  readonly: Boolean,
+  disabled: { type: Boolean, default: false },
+  readonly: { type: Boolean, default: false },
   activeColor: String,
   inactiveColor: String,
   activeValue: {

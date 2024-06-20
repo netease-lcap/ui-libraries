@@ -30,7 +30,7 @@ export default createComponent({
 
   props: {
     readonly: Boolean,
-    disabled: Boolean,
+    disabled: { type: Boolean, default: false },
     title: String,
     value: [Number, String],
     fieldNamesp: [Object, String],
