@@ -842,10 +842,19 @@
     {
         "name": "UPopupCombination",
         "ideusage": {
-            "idetype": "popover",
-            "selector": {
-                "expression": "this",
-                "cssSelector": "div[class^='u-popup_body']"
+            "idetype": "container",
+            "selector": [
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'reference')",
+                    "cssSelector": "span[class^='u-popup-combination']"
+                },
+                {
+                    "expression": "this",
+                    "cssSelector": "div[class^='u-popup']"
+                }
+            ],
+            "events": {
+                "click": true
             }
         }
     },
