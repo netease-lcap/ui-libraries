@@ -79,8 +79,9 @@ namespace nasl.ui {
             title: '数据源',
             description: '支持动态绑定集合类型变量（List\<T>）或输出参数为集合类型的逻辑。',
             docDescription: '- 支持动态绑定集合类型变量（List\<T>）或输出参数为集合类型的逻辑。',
+            isDataSource: true,
         })
-        data: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+        data: nasl.collection.List<T>;
 
         @Prop({
             group: '数据属性',
