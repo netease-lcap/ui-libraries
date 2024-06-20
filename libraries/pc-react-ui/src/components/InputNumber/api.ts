@@ -65,9 +65,10 @@ namespace nasl.ui {
       docDescription: '限制数字要保留的最小单位，整数、小数均可，如需要保留两位小数，则填入0.01。',
       setter: {
         concept: 'NumberInputSetter',
+        max:14
       },
     })
-    private precision: nasl.core.Decimal = 1;
+    precision: nasl.core.Decimal = 1;
 
     // @Prop({
     //   group: '数据属性',

@@ -41,8 +41,8 @@ export function useHandle(props) {
     }
     return item;
   });
-  const render = React.useCallback(() => {
-    return <BaseComponents>{children}</BaseComponents>;
+  const render = React.useCallback((selfprops) => {
+    return <BaseComponents {...selfprops}>{children}</BaseComponents>;
   }, [children]);
 
   return {

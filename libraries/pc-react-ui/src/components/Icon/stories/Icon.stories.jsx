@@ -26,15 +26,14 @@ export const 默认 = {
   render: (args) => {
     return (
       <Icon
-        data-nodepath="rootview.6"
-        name="//minio-api.codewave-dev.163yun.com/lowcode-static/user/defaulttenant/1701943475046_%E9%80%BB%E8%BE%91%26%E6%95%B0%E6%8D%AE.svg"
-        key="component-66"
+        data-nodepath="e1e577afa6af4443a311a1d7085a6b60"
+        name="RiArrowRightUpLine"
+        style={{ height: '14px', width: '14px', fontSize: '14px' }}
       />
     );
   },
   args: {
     color: 'magenta',
     name: 'RiArrowRightCircleFill',
-    // name: '//minio-api.codewave-dev.163yun.com/lowcode-static/user/defaulttenant/1711352646423_1711101097723_1710173501157_%E4%B8%89%E7%82%B9.svg',
   },
 };
