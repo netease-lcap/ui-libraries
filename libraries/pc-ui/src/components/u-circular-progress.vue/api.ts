@@ -36,11 +36,11 @@ namespace nasl.ui {
         })
         size: 'small' | 'normal' | 'large' | 'huge' = 'normal';
 
-        @Slot({
-            title: '默认',
-            description: '插入文本或 HTML。',
-        })
-        slotDefault: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: '默认',
+        //     description: '插入文本或 HTML。',
+        // })
+        // slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: '分数展示',
