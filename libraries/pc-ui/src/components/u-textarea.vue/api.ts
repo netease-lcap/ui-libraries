@@ -71,6 +71,7 @@ namespace nasl.ui {
             description: '输入的值',
             sync: true,
             docDescription: '当前多行输入组件，输入框内的本文内容',
+            settable: true,
         })
         value: nasl.core.String;
 
@@ -165,6 +166,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -176,6 +178,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -187,6 +190,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         preview: nasl.core.Boolean = false;
 

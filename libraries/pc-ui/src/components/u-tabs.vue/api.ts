@@ -98,6 +98,7 @@ namespace nasl.ui {
             description: '指当前打开标签的标签项',
             sync: true,
             docDescription: '指当前打开标签的标签项',
+            settable: true,
         })
         value: V;
 
@@ -152,6 +153,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -162,6 +164,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -420,6 +423,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

@@ -47,6 +47,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
                 precision: 0,
             },
+            settable: true,
         })
         page: nasl.core.Integer = 1;
 
@@ -105,6 +106,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
                 precision: 0,
             },
+            settable: true,
         })
         pageSize: nasl.core.Integer = 20;
 
@@ -154,6 +156,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -164,6 +167,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

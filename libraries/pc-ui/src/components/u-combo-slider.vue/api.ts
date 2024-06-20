@@ -42,6 +42,7 @@ namespace nasl.ui {
             title: '滑块值',
             sync: true,
             docDescription: '滑块的值',
+            settable: true,
         })
         value: nasl.core.Decimal | nasl.core.Integer | nasl.collection.List<nasl.core.Integer> | nasl.collection.List<nasl.core.Decimal> = 0;
 
@@ -169,6 +170,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -180,6 +182,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

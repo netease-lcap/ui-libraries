@@ -36,6 +36,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
                 max: 20,
             },
+            settable: true,
         })
         value: nasl.core.Decimal | nasl.core.Integer = 0;
 
@@ -118,6 +119,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -129,6 +131,7 @@ namespace nasl.ui {
           setter: {
             concept: 'SwitchSetter',
           },
+          settable: true,
         })
         preview: nasl.core.Boolean = false;
 

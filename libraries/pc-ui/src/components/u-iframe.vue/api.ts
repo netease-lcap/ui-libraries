@@ -27,6 +27,7 @@ namespace nasl.ui {
             title: '网页地址',
             description: '需要嵌入的网页地址',
             docDescription: '需要嵌入的网页地址',
+            settable: true,
         })
         src: nasl.core.String;
 

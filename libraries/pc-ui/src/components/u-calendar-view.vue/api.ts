@@ -72,6 +72,7 @@ namespace nasl.ui {
             description: '当前选中的日期',
             sync: true,
             docDescription: '当前选择的日期。',
+            settable: true,
         })
         value: M extends true ? nasl.collection.List<nasl.core.Date> : nasl.core.Date;
 

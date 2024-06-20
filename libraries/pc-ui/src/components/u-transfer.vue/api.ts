@@ -202,6 +202,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -213,6 +214,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -224,6 +226,7 @@ namespace nasl.ui {
           setter: {
             concept: 'SwitchSetter',
           },
+          settable: true,
         })
         preview: nasl.core.Boolean = false;
 

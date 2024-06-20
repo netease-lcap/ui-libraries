@@ -40,6 +40,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'NumberInputSetter',
             },
+            settable: true,
         })
         size: nasl.core.Decimal | nasl.core.Integer = 5;
 

@@ -62,6 +62,7 @@ namespace nasl.ui {
             description: '当前文件列表',
             sync: true,
             docDescription: '当前的文件列表',
+            settable: true,
         })
         value: nasl.core.String;
 
@@ -70,7 +71,6 @@ namespace nasl.ui {
             title: '上传地址',
             description: '上传的 URL 地址',
             docDescription: '文件上传的URL地址，如/upload',
-            unsettable: true,
         })
         url: nasl.core.String;
 
@@ -79,7 +79,6 @@ namespace nasl.ui {
             title: '上传的文件字段',
             description: '上传的文件字段名，后端需要这个字段获取',
             docDescription: '默认file，支持自定义，后端通过该字段获取文件',
-            unsettable: true,
         })
         name: nasl.core.String = 'file';
 
@@ -93,7 +92,6 @@ namespace nasl.ui {
                 concept: 'InputSetter',
                 placeholder: '所有类型',
             },
-            unsettable: true,
         })
         accept: nasl.core.String;
 
@@ -105,7 +103,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            unsettable: true,
         })
         withCredentials: nasl.core.Boolean = false;
 
@@ -152,7 +149,6 @@ namespace nasl.ui {
             title: 'URL 字段',
             description: '请求返回的 URL 字段名',
             docDescription: '请求返回的URL字段名',
-            unsettable: true,
         })
         urlField: nasl.core.String = 'url';
 
@@ -256,7 +252,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            unsettable: true,
         })
         multipleOnce: nasl.core.Boolean = false;
 
@@ -269,7 +264,7 @@ namespace nasl.ui {
               concept: 'SwitchSetter',
           },
           if: (_) => !_.multiple,
-          unsettable: true,
+          settable: false,
         })
         openCropper: nasl.core.Boolean = false;
 
@@ -280,7 +275,6 @@ namespace nasl.ui {
                 concept: 'SwitchSetter',
             },
             if: _ => _.openCropper === true && _.multiple !== true,
-            unsettable: true,
         })
         fixedCropper: nasl.core.Boolean = false;
 
@@ -291,7 +285,6 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
             if: _ => _.openCropper === true && _.multiple !== true,
-            unsettable: true,
         })
         cropperBoxWidth: nasl.core.Decimal | nasl.core.Integer = 200;
 
@@ -302,7 +295,6 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
             if: _ => _.cropperPreviewShape === 'rect' && _.openCropper === true && _.multiple !== true,
-            unsettable: true,
         })
         cropperBoxHeight: nasl.core.Decimal | nasl.core.Integer = 0;
 
@@ -319,7 +311,6 @@ namespace nasl.ui {
                 { update: {cropperBoxHeight:0}, if: _ => _ === 'square' },
             ],
             if: _ => _.openCropper === true && _.multiple !== true,
-            unsettable: true,
         })
         cropperPreviewShape: 'rect' | 'square' | 'circle' = 'circle';
 
@@ -328,7 +319,6 @@ namespace nasl.ui {
             title: '图片裁剪框标题',
             if: _ => _.openCropper === true && _.multiple !== true,
             implicitToString: true,
-            unsettable: true,
         })
         cropperTitle: nasl.core.String = '图片裁剪';
 
@@ -361,7 +351,6 @@ namespace nasl.ui {
                 concept: 'EnumSelectSetter',
                 options: [{ title: 'JSON' }, { title: 'URL字符串' }],
             },
-            unsettable: true,
         })
         converter: 'json' | 'simple' = 'json';
 
@@ -488,6 +477,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -499,6 +489,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -510,6 +501,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         preview: nasl.core.Boolean = false;
 

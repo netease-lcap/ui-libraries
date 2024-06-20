@@ -44,6 +44,21 @@ namespace nasl.ui {
         })
         filterText: nasl.core.String;
 
+        @Prop({
+            title: '值'
+        })
+        value: UListViewOptions<T, V, P, M, C>['value'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
         @Method({
             title: 'undefined',
             description: '清除缓存，重新加载',
@@ -211,6 +226,7 @@ namespace nasl.ui {
             description: '显示的值',
             sync: true,
             docDescription: '在列表开启可多选时，指定数据唯一值的字段。',
+            settable: true,
         })
         value: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
 
@@ -383,6 +399,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -394,6 +411,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

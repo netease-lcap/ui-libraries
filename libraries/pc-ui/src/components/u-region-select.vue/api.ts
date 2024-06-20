@@ -88,6 +88,7 @@ namespace nasl.ui {
             title: '值',
             sync: true,
             docDescription: '当前选择的值',
+            settable: true,
         })
         value: any;
 
@@ -171,6 +172,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -182,6 +184,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -193,6 +196,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         preview: nasl.core.Boolean = false;
 
@@ -204,6 +208,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         opened: nasl.core.Boolean = false;
 

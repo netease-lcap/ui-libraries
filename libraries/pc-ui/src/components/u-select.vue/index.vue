@@ -292,16 +292,7 @@ export default {
       MPreview,
       sync({
         opened: 'popperOpened',
-        value() {
-          if (this.currentMultiple) {
-            return this.selectedVMs.map((itemVM) => itemVM.value);
-          }
-
-          return this.selectedVM ? this.selectedVM.value : undefined;
-        },
-        readonly: 'readonly',
         preview: 'isPreview',
-        disabled: 'disabled',
       })
     ],
     props: {

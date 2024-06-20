@@ -38,6 +38,7 @@ namespace nasl.ui {
             description: '当前选中的值',
             sync: true,
             docDescription: '当前选择的值',
+            settable: true,
         })
         value: any;
 
@@ -82,6 +83,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -93,6 +95,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -162,6 +165,10 @@ namespace nasl.ui {
         description: '子选项',
     })
     export class UCapsule extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UCapsuleOptions>) { super(); }
     }
@@ -209,6 +216,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

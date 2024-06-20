@@ -67,6 +67,7 @@ namespace nasl.ui {
             group: '数据属性',
             title: '复制的值',
             description: '需要复制的值',
+            settable: true,
         })
         value: nasl.core.String;
 
@@ -77,6 +78,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
