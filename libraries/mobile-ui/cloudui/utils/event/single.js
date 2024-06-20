@@ -9,7 +9,7 @@ const off = function (name, element, type, token) {
     const eventDataName = getDataName(name, type);
     const eventData = eventsData[eventDataName];
     delete eventData.data[token];
-    if (!Object.keys(eventData).length) {
+    if (!Object.keys(eventData.data).length) {
         delete eventsData[eventDataName];
         element.removeEventListener(type, eventData.listener, eventData.options);
     }

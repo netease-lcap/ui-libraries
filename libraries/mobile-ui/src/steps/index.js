@@ -11,6 +11,7 @@ export default createComponent({
     DataSourceMixin,
     sync({
       value: 'currentValue',
+      data: 'currentData',
       isFirst: 'isFirst',
       isLast: 'isLast',
       disabled: 'disabled',
