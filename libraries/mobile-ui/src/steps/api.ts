@@ -14,6 +14,11 @@ namespace nasl.ui {
     value: VanStepsOptions<T>['value'] = 0;
 
     @Prop({
+      title: '数据',
+    })
+    data: nasl.collection.List<T>;
+
+    @Prop({
       title: '第一步'
     })
     isFirst: nasl.core.Boolean;
