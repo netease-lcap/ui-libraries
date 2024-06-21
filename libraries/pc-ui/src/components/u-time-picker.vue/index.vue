@@ -12,7 +12,7 @@
         :clearable="clearable" :placeholder="placeholder"
         @update:value="onInputChange($event)"
         @click="onInputClick"
-        @focus="onFocus" @blur="onBlur"
+        @focus="onFocus"
         @blur:value="onBlurInputValue($event)"
         @clear="clearValue"
         :prefix="preIcon?preIcon:undefined"
@@ -203,6 +203,7 @@ export default {
         },
         onBlurInputValue(value) {
             this.$refs.popper && this.$refs.popper.onBlurInputValue(value);
+            this.onBlur();
             this.$nextTick(() => {
                 this.$refs.input.updateCurrentValue(this.genDisplayFormatText(this.inputTime));
             });
