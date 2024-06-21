@@ -279,7 +279,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UFormGroup | UFormItem>;
+        slotDefault: () => Array<ViewComponent>;
     }
 
     @Component({
@@ -647,7 +647,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UFormItem>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: 'undefined',

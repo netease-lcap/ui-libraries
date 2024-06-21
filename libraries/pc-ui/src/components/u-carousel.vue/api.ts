@@ -136,7 +136,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UCarouselItem>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: 'undefined',

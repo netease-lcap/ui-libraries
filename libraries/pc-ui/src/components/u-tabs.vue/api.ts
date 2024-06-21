@@ -281,7 +281,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UTab<V>>;
+        slotDefault: () => Array<UTab<V> | ViewComponent>;
 
         @Slot({
             title: '右侧附加',

@@ -31,7 +31,7 @@ namespace nasl.ui {
         code: '<van-cell isLink center><template #title>左侧文本</template><template>右侧文本</template></van-cell>'
       }]
     })
-    slotDefault: () => Array<VanCell>;
+    slotDefault: () => Array<ViewComponent>;
   }
   @Component({
     title: '单元格',

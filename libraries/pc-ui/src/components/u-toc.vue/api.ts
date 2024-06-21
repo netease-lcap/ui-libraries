@@ -59,7 +59,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UTocItem>;
+        slotDefault: () => Array<ViewComponent>;
     }
 
     @Component({
@@ -167,7 +167,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UTocItem>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: '标签',

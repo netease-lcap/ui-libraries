@@ -264,7 +264,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotCheckAll: () => Array<UText>;
+        slotCheckAll: () => Array<ViewComponent>;
 
         @Slot({
             title: 'undefined',

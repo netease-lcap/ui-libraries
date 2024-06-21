@@ -50,7 +50,7 @@ namespace nasl.ui {
         code: '<van-collapse-item><template #title>标签名称n</template></van-collapse-item>'
       }]
     })
-    slotDefault: () => Array<VanCollapseItem>;
+    slotDefault: () => Array<ViewComponent>;
   }
   @Component({
     title: '面板项',

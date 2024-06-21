@@ -98,7 +98,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UCollapseItem>;
+        slotDefault: () => Array<ViewComponent>;
     }
 
     @Component({

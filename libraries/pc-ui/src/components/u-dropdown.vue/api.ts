@@ -225,7 +225,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UDropdownGroup | UDropdownItem>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: '标题',
@@ -399,7 +399,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UDropdownGroup | UDropdownItem>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: '标题',
