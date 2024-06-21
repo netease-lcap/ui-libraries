@@ -39,6 +39,16 @@ namespace nasl.ui {
         })
         order: nasl.core.String;
 
+        @Prop({
+            title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
         @Method({
             title: 'undefined',
             description: '清除缓存，重新加载',
@@ -366,6 +376,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -377,6 +388,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

@@ -86,6 +86,7 @@ namespace nasl.ui {
             description: '当前选中的值',
             sync: true,
             docDescription: '多选组的选中项，返还结构为List\<T>。',
+            settable: true,
         })
         value: C extends '' ? nasl.collection.List<V> : nasl.core.String;
 
@@ -170,6 +171,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -181,6 +183,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         preview: nasl.core.Boolean = false;
 
@@ -193,6 +196,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -333,6 +337,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -344,6 +349,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

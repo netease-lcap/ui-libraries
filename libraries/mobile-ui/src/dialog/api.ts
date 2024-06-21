@@ -50,7 +50,8 @@ namespace nasl.ui {
       sync: true,
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     value: nasl.core.Boolean = false;
     @Prop({

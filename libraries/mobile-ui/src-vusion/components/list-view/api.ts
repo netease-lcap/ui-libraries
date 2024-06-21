@@ -181,7 +181,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识数据列表的值',
-      sync: true
+      sync: true,
+      settable: true,
     })
     value: M extends true ? nasl.collection.List<V> : V;
     @Prop({

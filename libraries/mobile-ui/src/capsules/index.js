@@ -53,7 +53,7 @@ export default createComponent({
     currentValue(val) {
       this.$emit('update:value', val);
       this.$emit('change', { value: val });
-    }
+    },
   },
 
   methods: {

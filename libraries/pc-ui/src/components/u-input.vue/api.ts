@@ -91,9 +91,9 @@ namespace nasl.ui {
             description: '输入的值',
             sync: true,
             docDescription: '输入框的值。',
+            settable: true,
         })
         value: nasl.core.String;
-
 
         @Prop({
             group: '数据属性',
@@ -188,6 +188,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -199,6 +200,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         preview: nasl.core.Boolean = false;
 
@@ -210,6 +212,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

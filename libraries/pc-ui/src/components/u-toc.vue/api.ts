@@ -23,6 +23,7 @@ namespace nasl.ui {
             description: '当前选中的值',
             sync: true,
             docDescription: '当前选择的值',
+            settable: true,
         })
         value: nasl.core.String;
 

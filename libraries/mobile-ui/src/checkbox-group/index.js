@@ -29,7 +29,6 @@ export default createComponent({
       },
       data: 'options',
       preview: 'isPreview',
-      readonly: 'readonly',
       disabled: 'disabled',
     }),
   ],

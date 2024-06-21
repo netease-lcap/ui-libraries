@@ -80,6 +80,7 @@ namespace nasl.ui {
           sync: true,
           docDescription: '默认显示的日期时间值',
           if: _ => _.range !== true,
+          settable: true,
       })
       value: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime | nasl.core.Integer;
 
@@ -89,6 +90,7 @@ namespace nasl.ui {
           description: '默认显示的起始日期时间值，格式如2018-08-08 08:08:08',
           sync: true,
           if: _ => _.range === true,
+          settable: true,
       })
       startDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
@@ -98,6 +100,7 @@ namespace nasl.ui {
           description: '默认显示的结束日期时间值，格式如2018-08-08 08:08:08',
           sync: true,
           if: _ => _.range === true,
+          settable: true,
       })
       endDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
@@ -334,6 +337,7 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
+          settable: true,
       })
       opened: nasl.core.Boolean = false;
 
@@ -344,6 +348,7 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
+          settable: true,
       })
       disabled: nasl.core.Boolean = false;
 
@@ -354,6 +359,7 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
+          settable: true,
       })
       readonly: nasl.core.Boolean = false;
 
@@ -365,6 +371,7 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
+          settable: true,
       })
       preview: nasl.core.Boolean = false;
 

@@ -8,16 +8,7 @@ export default {
     childName: 'u-capsule',
     extends: UListView,
     mixins: [MPreview, sync({
-      value() {
-        if (this.currentMultiple) {
-          return this.selectedVMs.map((itemVM) => itemVM.value);
-        }
-
-        return this.selectedVM ? this.selectedVM.value : undefined;
-      },
-      readonly: 'readonly',
       preview: 'isPreview',
-      disabled: 'disabled',
     })],
     props: {
       preview: { type: Boolean, default: false },

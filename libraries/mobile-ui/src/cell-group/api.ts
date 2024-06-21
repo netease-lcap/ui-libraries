@@ -66,7 +66,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识单元格的值',
-      implicitToString: true
+      implicitToString: true,
+      settable: true,
     })
     value: nasl.core.String;
     @Prop({

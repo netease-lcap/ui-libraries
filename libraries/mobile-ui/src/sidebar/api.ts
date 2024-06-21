@@ -22,7 +22,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识菜单的值',
-      sync: true
+      sync: true,
+      settable: true,
     })
     value: nasl.core.String;
     @Prop({

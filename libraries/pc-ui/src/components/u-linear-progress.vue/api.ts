@@ -31,6 +31,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'NumberInputSetter',
             },
+            settable: true,
         })
         percent: nasl.core.Decimal | nasl.core.Integer = 0;
 

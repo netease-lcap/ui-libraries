@@ -62,6 +62,7 @@ namespace nasl.ui {
             description: '当前文件列表',
             sync: true,
             docDescription: '当前的文件列表',
+            settable: true,
         })
         value: nasl.core.String;
 
@@ -263,6 +264,7 @@ namespace nasl.ui {
               concept: 'SwitchSetter',
           },
           if: (_) => !_.multiple,
+          settable: false,
         })
         openCropper: nasl.core.Boolean = false;
 
@@ -475,6 +477,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -486,6 +489,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -497,6 +501,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         preview: nasl.core.Boolean = false;
 

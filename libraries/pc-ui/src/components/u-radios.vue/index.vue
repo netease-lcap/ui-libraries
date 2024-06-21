@@ -54,7 +54,10 @@ export default {
         },
         value() {
           return this.selectedVM && this.selectedVM.label;
-        }
+        },
+        readonly: 'readonly',
+        preview: 'isPreview',
+        disabled: 'disabled',
       }),
     ],
     props: {
