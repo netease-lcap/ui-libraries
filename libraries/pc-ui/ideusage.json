@@ -89,7 +89,11 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "target.tag === 'u-crumb-item'"
+            "childAccept": "target.tag === 'u-crumb-item'",
+            "elementSutando": {
+                "condition": "this.getAttribute('auto')?.value === true",
+                "component": "UCrumbDesigner"
+            }
         }
     },
     {
@@ -393,6 +397,11 @@
             "idetype": "element",
             "additionalAttribute": {
                 ":convertSrcFn": "\"(src) => src.startsWith('/assets') ? '/lowcode-static' + src : src \""
+            },
+            "textholder": "src",
+            "elementSutando": {
+                "condition": "/^\\{\\{.*\\}\\}$/.test(this.getAttribute('src')?.value) === true",
+                "component": "UImageDesigner"
             }
         }
     },
