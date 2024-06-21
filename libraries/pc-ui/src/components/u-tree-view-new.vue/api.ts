@@ -269,7 +269,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UTreeViewNodeNew<T, V>>;
+        slotDefault: () => Array<UTreeViewNodeNew<T, V> | ViewComponent>;
 
         @Slot({
             title: '项',

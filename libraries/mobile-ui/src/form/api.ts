@@ -86,7 +86,7 @@ namespace nasl.ui {
         code: '<van-field drole="other"><template #title><van-text text="表单项"><van-text></template><template #input></template></van-field>'
       }]
     })
-    slotDefault: () => Array<VanField>;
+    slotDefault: () => Array<ViewComponent>;
   }
   @Component({
     title: '表单项',

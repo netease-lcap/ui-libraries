@@ -188,7 +188,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<USelectableStep>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: '头部标题',

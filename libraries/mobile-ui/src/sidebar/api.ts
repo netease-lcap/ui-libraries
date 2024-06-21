@@ -49,7 +49,7 @@ namespace nasl.ui {
         code: '<van-sidebar-item><template #title>标签名称n</template></van-sidebar-item>'
       }]
     })
-    slotDefault: () => Array<VanSidebarItem>;
+    slotDefault: () => Array<ViewComponent>;
   }
   @Component({
     title: '菜单项',

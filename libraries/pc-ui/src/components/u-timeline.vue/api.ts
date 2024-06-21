@@ -65,7 +65,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UTimelineItem>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: 'undefined',

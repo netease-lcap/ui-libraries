@@ -135,7 +135,7 @@ namespace nasl.ui {
         code: '<van-step>stepn</van-step>'
       }]
     })
-    slotDefault: () => Array<VanStep>;
+    slotDefault: () => Array<ViewComponent>;
     @Slot({
       title: 'undefined',
       description: '自定义选项的结构和样式'

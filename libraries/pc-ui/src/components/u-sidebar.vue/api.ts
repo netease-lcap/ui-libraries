@@ -293,7 +293,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<USidebarGroup | USidebarItem | USidebarDivider>;
+        slotDefault: () => Array<ViewComponent>;
     }
 
     @Component({
@@ -679,7 +679,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<USidebarGroup | USidebarItem | USidebarDivider>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: 'undefined',

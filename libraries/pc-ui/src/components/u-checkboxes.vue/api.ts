@@ -19,6 +19,11 @@ namespace nasl.ui {
         value: UCheckboxesOptions<T, V, C>['value'];
 
         @Prop({
+          title: '全选中',
+        })
+        allChecked: nasl.core.Boolean;
+
+        @Prop({
           title: '禁用',
         })
         disabled: nasl.core.Boolean;
@@ -259,7 +264,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotCheckAll: () => Array<UText>;
+        slotCheckAll: () => Array<ViewComponent>;
 
         @Slot({
             title: 'undefined',

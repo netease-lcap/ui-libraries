@@ -12,7 +12,7 @@
         :clearable="clearable" :placeholder="placeholder"
         @update:value="onInputChange($event)"
         @click="onInputClick"
-        @focus="onFocus" @blur="onBlur"
+        @focus="onFocus"
         @blur:value="onBlurInputValue($event)"
         @clear="clearValue"
 
@@ -216,6 +216,7 @@ export default {
         },
         onBlurInputValue(value) {
             this.$refs.popper && this.$refs.popper.onBlurInputValue(value);
+            this.onBlur();
             this.$nextTick(() => {
                 this.$refs.input.updateCurrentValue(this.genDisplayFormatText(this.inputTime));
             });
@@ -246,8 +247,6 @@ export default {
             this.$emit('update', e);
         },
         clearValue() {
-          this.onEmitUpdate(null);
-          this.onChange({ sender: this, time: null, value: null });
           this.$refs.popper && this.$refs.popper.clearValue();
         },
         onSpinnerClick() {

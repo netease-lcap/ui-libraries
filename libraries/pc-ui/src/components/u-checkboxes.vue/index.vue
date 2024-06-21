@@ -75,6 +75,7 @@ export default {
 
         return this.currentValue;
       },
+      allChecked: 'all',
       readonly: 'readonly',
       preview: 'isPreview',
       disabled: 'disabled',

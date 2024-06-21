@@ -471,7 +471,7 @@ namespace nasl.ui {
       description: '插入<van-cell />',
       emptyBackground: 'drag-entity-here',
     })
-    slotDefault: () => Array<VanCell>;
+    slotDefault: () => Array<ViewComponent>;
     @Slot({
       title: 'undefined',
       description: '自定义选项的结构和样式'

@@ -210,7 +210,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UNavbarGroupMulti | UNavbarItemMulti | UNavbarDividerMulti>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: '左侧导航',
@@ -778,7 +778,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UNavbarGroupMulti | UNavbarItemMulti>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: '标题',

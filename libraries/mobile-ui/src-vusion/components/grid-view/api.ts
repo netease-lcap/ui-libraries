@@ -310,7 +310,7 @@ namespace nasl.ui {
         code: '<template #item="current"><van-cardu><template #head><van-text text="标题"></van-text></template><van-text  text="卡片内容"></van-text></van-cardu></template>'
       }]
     })
-    slotDefault: () => Array<VanCardu>;
+    slotDefault: () => Array<ViewComponent>;
     @Slot({
       title: 'undefined',
       description: '自定义选项的结构和样式'

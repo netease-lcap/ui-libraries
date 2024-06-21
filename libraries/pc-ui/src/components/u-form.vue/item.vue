@@ -210,17 +210,25 @@ export default {
     top: var(--form-required-top);
 }
 
-.label[required][position='left'] {
+.label[required][position='left'] .text {
     padding-left: 10px;
 }
 
 .label[required][position='right']::after {
     right: var(--form-required-right);
 }
-
 .label[required][position='left']::after {
-    /* left: calc(var(--form-item-label-padding-right) - var(--form-required-right)); */
-    left: 0px;
+  content: '';
+}
+
+.label[required][position='left'] .text::before {
+  content: "*";
+  color: var(--form-required-color);
+  position: absolute;
+  height: 12px;
+  line-height: 12px;
+  top: var(--form-required-top);
+  left: 0;
 }
 
 .field {
@@ -235,10 +243,9 @@ export default {
 .root[label-size$="mini"] > .label[required][position='right']::after {
     right: var(--form-required-right-mini);
 }
-.root[label-size$="mini"] > .label[required][position='left']::after {
-    /* left: calc(var(--form-required-right-mini) - var(--form-item-label-padding-right-mini)); */
+/* .root[label-size$="mini"] > .label[required][position='left']::after {
     left: 0;
-}
+} */
 .root[label-size$="mini"] > .field {
     max-width: calc(100% - var(--form-item-label-width-mini));
 }
@@ -250,10 +257,9 @@ export default {
 .root[label-size$="small"] > .label[required][position='right']::after {
     right: var(--form-required-right-small);
 }
-.root[label-size$="small"] > .label[required][position='left']::after {
-    /* left: calc(var(--form-required-right-small) - var(--form-item-label-padding-right-small)); */
+/* .root[label-size$="small"] > .label[required][position='left']::after {
     left: 0px;
-}
+} */
 .root[label-size$="small"] > .field {
     max-width: calc(100% - var(--form-item-label-width-small));
 }
@@ -265,10 +271,9 @@ export default {
 .root[label-size$="normal"] > .label[required][position='right']::after {
     right: var(--form-required-right);
 }
-.root[label-size$="normal"] > .label[required][position='left']::after {
-    /* left: calc(var(--form-required-right) - var(--form-item-label-padding-right)); */
+/* .root[label-size$="normal"] > .label[required][position='left']::after {
     left: 0;
-}
+} */
 .root[label-size$="normal"] > .field {
     max-width: calc(100% - var(--form-item-label-width));
 }
@@ -280,10 +285,9 @@ export default {
 .root[label-size$="large"] > .label[required][position='right']::after {
     right: var(--form-required-right);
 }
-.root[label-size$="large"] > .label[required][position='left']::after {
-    /* left: calc(var(--form-required-right-large) - var(--form-item-label-padding-right-large)); */
+/* .root[label-size$="large"] > .label[required][position='left']::after {
     left: 0;
-}
+} */
 .root[label-size$="large"] > .field {
     max-width: calc(100% - var(--form-item-label-width-large));
 }

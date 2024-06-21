@@ -233,11 +233,11 @@ namespace nasl.ui {
       title: 'undefined',
       description: '自定义选择器顶部内容',
     })
-    slotPickerTop: () => Array<VanPickerActionSlot>;
+    slotPickerTop: () => Array<ViewComponent>;
     @Slot({
       title: 'undefined',
       description: '自定义选择器底部内容',
     })
-    slotPickerBottom: () => Array<VanPickerActionSlot>;
+    slotPickerBottom: () => Array<ViewComponent>;
   }
 }

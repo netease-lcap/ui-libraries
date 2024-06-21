@@ -157,7 +157,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UCapsule>;
+        slotDefault: () => Array<ViewComponent>;
     }
 
     @Component({
@@ -308,6 +308,6 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UCapsule>;
+        slotDefault: () => Array<ViewComponent>;
     }
 }
