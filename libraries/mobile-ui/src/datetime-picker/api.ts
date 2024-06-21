@@ -219,13 +219,15 @@ namespace nasl.ui {
     @Prop<VanDatetimePickerOptions, 'startValue'>({
       title: '起始值',
       sync: true,
-      if: _ => _.range === true
+      if: _ => _.range === true,
+      settable: true,
     })
     startValue: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop<VanDatetimePickerOptions, 'endValue'>({
       title: '结束值',
       sync: true,
-      if: _ => _.range === true
+      if: _ => _.range === true,
+      settable: true,
     })
     endValue: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop({
@@ -241,7 +243,8 @@ namespace nasl.ui {
       title: '值',
       description: '用于标识时间选择的值',
       sync: true,
-      if: _ => _.range !== true
+      if: _ => _.range !== true,
+      settable: true,
     })
     value: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop({
@@ -369,7 +372,8 @@ namespace nasl.ui {
       description: '正常显示，但禁止选择/输入',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     readonly: nasl.core.Boolean = false;
     @Prop({
@@ -378,7 +382,8 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Prop({
@@ -399,6 +404,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      settable: true,
     })
     preview: nasl.core.Boolean = false;
     @Prop({

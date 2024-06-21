@@ -22,7 +22,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识折叠面板的值',
-      sync: true
+      sync: true,
+      settable: true,
     })
     value: nasl.core.String | nasl.core.Integer | nasl.collection.List<nasl.core.String | nasl.core.Integer>;
 

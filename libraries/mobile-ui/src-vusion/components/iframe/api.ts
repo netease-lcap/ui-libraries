@@ -26,7 +26,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '地址',
-      description: '需要嵌入的网页地址'
+      description: '需要嵌入的网页地址',
+      settable: true,
     })
     src: nasl.core.String;
     @Event({

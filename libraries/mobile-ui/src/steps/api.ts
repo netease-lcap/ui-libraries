@@ -83,7 +83,8 @@ namespace nasl.ui {
         concept: "NumberInputSetter",
         precision: 0,
         min: 0
-      }
+      },
+      settable: true,
     })
     value: nasl.core.Integer = 0;
     @Prop({
@@ -106,7 +107,8 @@ namespace nasl.ui {
       description: '正常显示，但禁止选择/输入',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     readonly: nasl.core.Boolean = false;
     @Prop({
@@ -115,7 +117,8 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Event({
@@ -179,7 +182,8 @@ namespace nasl.ui {
         }, {
           title: '错误'
         }]
-      }
+      },
+      settable: true,
     })
     status: 'wait' | 'process' | 'finish' | 'error';
     @Prop({
@@ -197,7 +201,8 @@ namespace nasl.ui {
       description: '正常显示，但禁止选择/输入',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     readonly: nasl.core.Boolean = false;
     @Prop({
@@ -206,7 +211,8 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Event({

@@ -23,7 +23,8 @@ namespace nasl.ui {
       title: '徽章值',
       setter: {
         concept: "NumberInputSetter"
-      }
+      },
+      settable: true,
     })
     content: nasl.core.Decimal = 2;
     @Prop({

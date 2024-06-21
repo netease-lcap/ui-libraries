@@ -22,7 +22,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识标签栏的值',
-      sync: true
+      sync: true,
+      settable: true,
     })
     value: nasl.core.String;
     @Prop({
@@ -101,7 +102,8 @@ namespace nasl.ui {
       title: '徽章值',
       setter: {
         concept: "NumberInputSetter"
-      }
+      },
+      settable: true,
     })
     badge: nasl.core.Decimal;
     @Prop({

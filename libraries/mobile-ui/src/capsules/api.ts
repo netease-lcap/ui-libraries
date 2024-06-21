@@ -33,7 +33,8 @@ namespace nasl.ui {
       title: '选中值',
       description: '当前选中的值',
       sync: true,
-      docDescription: '当前选择的值'
+      docDescription: '当前选择的值',
+      settable: true,
     })
     value: any;
     @Prop({
@@ -63,7 +64,8 @@ namespace nasl.ui {
       docDescription: '正常显示，但禁止选择或输入。',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     readonly: nasl.core.Boolean = false;
     @Prop({
@@ -73,7 +75,8 @@ namespace nasl.ui {
       docDescription: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Event({
@@ -109,6 +112,16 @@ namespace nasl.ui {
     group: "Form"
   })
   export class VanCapsulesItem extends ViewComponent {
+    @Prop({
+      title: '选中值',
+    })
+    value: VanCapsulesOptions['value'];
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
     constructor(options?: Partial<VanCapsulesItemOptions>) {
       super();
     }
@@ -118,7 +131,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '此项的值',
-      docDescription: '此项的值'
+      docDescription: '此项的值',
+      settable: true,
     })
     value: any;
     @Prop({
@@ -146,7 +160,8 @@ namespace nasl.ui {
       docDescription: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Slot({

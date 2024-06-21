@@ -45,7 +45,8 @@ namespace nasl.ui {
       sync: true,
       setter: {
         concept: "NumberInputSetter"
-      }
+      },
+      settable: true,
     })
     value: nasl.core.Decimal | nasl.core.Integer;
     @Prop({
@@ -204,7 +205,8 @@ namespace nasl.ui {
       description: '正常显示，但禁止选择/输入。',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disableInput: nasl.core.Boolean = false;
     @Prop({
@@ -213,7 +215,8 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Prop({
@@ -263,6 +266,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      settable: true,
     })
     preview: nasl.core.Boolean = false;
     @Event({

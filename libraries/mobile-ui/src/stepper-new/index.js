@@ -31,7 +31,7 @@ export default createComponent({
       value: 'currentValue',
       formattedValue: 'formattedValue',
       preview: 'isPreview',
-      readonly: 'readonly',
+      readonly: 'disableInput',
       disabled: 'disabled',
     }),
   ],
@@ -53,7 +53,7 @@ export default createComponent({
     placeholder: String,
     disablePlus: Boolean,
     disableMinus: Boolean,
-    disableInput: Boolean,
+    disableInput: { type: Boolean, default: false },
     decimalLength: [Number, String],
     name: {
       type: [Number, String],

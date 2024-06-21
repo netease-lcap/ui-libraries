@@ -29,7 +29,8 @@ namespace nasl.ui {
       setter: {
         concept: "NumberInputSetter",
         min: 0
-      }
+      },
+      settable: true,
     })
     value: nasl.core.Decimal;
     @Prop({

@@ -27,7 +27,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识选项卡的值',
-      sync: true
+      sync: true,
+      settable: true,
     })
     value: nasl.core.String;
     @Prop({
@@ -88,7 +89,8 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Event({
@@ -161,6 +163,7 @@ namespace nasl.ui {
         concept: "NumberInputSetter"
       },
       if: _ => _.badgebtn === true,
+      settable: true,
     })
     badge: nasl.core.Decimal;
     @Prop<VanTabOptions, 'badgemax'>({
@@ -179,7 +182,8 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Slot({
