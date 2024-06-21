@@ -422,7 +422,17 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "target.tag === 'u-timeline-item'"
+            "childAccept": "target.tag === 'u-timeline-item'",
+            "dataSource": {
+                "display": 3,
+                "dismiss": "this.filterElement(el => el.tag!=='template').length > 0",
+                "loopElem": "> div",
+                "emptySlot": {
+                  "display": "inline",
+                  "condition": "!this.getAttribute('dataSource')",
+                  "accept": "false"
+                }
+            }
         }
     },
     {
