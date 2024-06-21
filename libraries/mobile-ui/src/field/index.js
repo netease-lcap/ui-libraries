@@ -270,7 +270,7 @@ export default createComponent({
 
         // 时间选择
         if (this.children?.$options?._componentTag === 'van-datetime-picker') {
-          return this.children.value;
+          return this.children.validateValue;
         }
 
         // 日期选择
