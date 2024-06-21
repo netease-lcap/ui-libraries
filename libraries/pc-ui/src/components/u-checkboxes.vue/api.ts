@@ -19,6 +19,11 @@ namespace nasl.ui {
         value: UCheckboxesOptions<T, V, C>['value'];
 
         @Prop({
+          title: '全选中',
+        })
+        allChecked: nasl.core.Boolean;
+
+        @Prop({
           title: '禁用',
         })
         disabled: nasl.core.Boolean;

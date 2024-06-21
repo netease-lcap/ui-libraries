@@ -253,7 +253,6 @@ namespace nasl.ui {
       setter: {
         concept: "SwitchSetter"
       },
-      settable: true,
     })
     value: nasl.core.Boolean = false;
     @Prop({
