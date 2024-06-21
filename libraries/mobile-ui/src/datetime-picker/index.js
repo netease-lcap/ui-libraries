@@ -85,6 +85,14 @@ export default createComponent({
       }
       return validUnit[this.realType][0];
     },
+    validateValue() {
+      // 范围选择
+      if (this.range) {
+        return this.startValue || this.endValue;
+      }
+
+      return this.value;
+    },
   },
   watch: {
     visible(val) {
