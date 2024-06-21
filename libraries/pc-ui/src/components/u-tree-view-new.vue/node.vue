@@ -28,7 +28,7 @@
             :dragover="expanderDragover"></div>
         <div :class="$style.text" :style="{ marginLeft : expanderWidth? expanderWidth + 'px':'' }" :draggable="draggable || rootVM.draggable">
             <u-checkbox v-if="rootVM.checkable" :value="currentChecked" :disabled="currentDisabled" :readonly="currentReadOnly" @check="check($event.value)" @click.native.stop></u-checkbox>
-            <span vusion-slot-name="item">
+            <span :class="$style.checkitem" vusion-slot-name="item">
                 <slot name="item" :vm="currentTextSlotVM" :item="{
                     data: node && $at(node, currentChildrenField),
                     text,
@@ -711,6 +711,10 @@ content: "\e679";
 /* readme: 当前的item slot插槽在编辑态的实现有一点问题，这里通过屏蔽u-text更新的方式暂时回归旧的表现 */
 .text [class^='u-text']{
     white-space: unset;
+}
+
+.checkitem {
+    display: inline-block;
 }
 
 .item:hover {

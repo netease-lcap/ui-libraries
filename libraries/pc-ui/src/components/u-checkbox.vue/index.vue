@@ -7,7 +7,7 @@
     :show-title="showTitle">
     <span v-if="!isPreview" :class="$style.box" :status="status" :disabled="currentDisabled"></span>
     <slot></slot>
-    <span v-if="showTitle" vusion-slot-name="item">
+    <span :class="$style.item" v-if="showTitle" vusion-slot-name="item">
         <slot name="item" :item="node">{{ text }}</slot>
         <s-empty v-if="!$slots.item && !text && $env.VUE_APP_DESIGNER && ($attrs['vusion-node-path'] || $attrs.designer)" inline :class="$style.empty"></s-empty>
     </span>
@@ -181,6 +181,10 @@ export default {
 
 .root[readonly] {
     cursor: default;
+}
+
+.item {
+    display: inline-block;
 }
 
 .box {

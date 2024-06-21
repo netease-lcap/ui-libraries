@@ -145,7 +145,9 @@ export default {
 </script>
 
 <style module>
-.root {}
+.root {
+    display: flex;
+}
 
 .root > *:not(:last-child) {
     margin-right: var(--radio-space-x);
