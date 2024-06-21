@@ -124,7 +124,7 @@ namespace nasl.ui {
             description: '选项值的字段名',
             docDescription: '集合的元素类型中，用于指定数据唯一值的字段，支持自定义变更',
         })
-        valueField: (item: T) => V = ((item: any)  => item.text) as any;
+        valueField: (item: T) => V = ((item: any)  => item.value) as any;
 
         @Prop({
             group: '数据属性',
