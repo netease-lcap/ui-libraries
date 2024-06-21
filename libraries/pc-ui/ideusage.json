@@ -493,7 +493,7 @@
                 "display": 3,
                 "loopElem": "[class^='u-list-view_body'] > div > [class^='u-list-view_item']",
                 "emptySlot": {
-                    "condition": "this.elementsLength() === 0",
+                   "condition": "!this.getAttribute('dataSource')",
                     "accept": "target.concept === 'Entity'"
                 }
             }
@@ -507,7 +507,7 @@
                 "display": 3,
                 "loopElem": "[class^='u-grid-view_body'] > div > [class^='u-grid-view_item']",
                 "emptySlot": {
-                    "condition": "this.elementsLength() === 0",
+                    "condition": "!this.getAttribute('dataSource')",
                     "accept": "target.concept === 'Entity'"
                 }
             }
