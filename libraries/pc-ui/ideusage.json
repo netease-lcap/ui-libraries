@@ -457,6 +457,8 @@
         "name": "UTableViewColumn",
         "ideusage": {
             "idetype": "container",
+            "forceRefresh": "parent",
+            "childAccept": false,
             "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
             "selector": [
                 {
@@ -466,23 +468,57 @@
                 {
                     "expression": "this.getElement(el => el.slotTarget === 'cell')",
                     "cssSelector": "td"
+                },
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'expand-content')",
+                    "cssSelector": "tr[class^='u-table-view_expand-content']"
                 }
-              ]
+            ],
+            "displaySlotInline": {
+                "cell": true,
+                "title": true
+            }
+        }
+    },
+    {
+        "name": "UTableViewColumnConfig",
+        "ideusage": {
+            "idetype": "container",
+            "forceRefresh": "parent",
+            "childAccept": false,
+            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
         }
     },
     {
         "name": "UTableViewColumnDynamic",
         "ideusage": {
             "idetype": "container",
+            "forceRefresh": "parent",
+            "childAccept": false,
             "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
         }
     },
     {
         "name": "UTableViewColumnGroup",
+       "ideusage": {
+        "idetype": "container",
+        "forceRefresh": "parent",
+        "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic'].includes(target.tag)",
+        "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+       }
+    },
+    {
+        "name": "UTableViewExpander",
         "ideusage": {
-            "idetype": "container",
-            "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic'].includes(target.tag)",
-            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+        "idetype": "element",
+            "forceRefresh": "parent",
+            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
+            "additionalAttribute": {
+                ":item": "\"argus.item\""
+            },
+            "events": {
+                "click": true
+            }
         }
     },
     {
