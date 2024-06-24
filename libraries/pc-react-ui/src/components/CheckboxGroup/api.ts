@@ -23,7 +23,9 @@ namespace nasl.ui {
     //   description: '清除缓存，重新加载',
     // })
     // reload(): void {}
-    constructor(options?: Partial<CheckboxGroupOptions<T, V, C>>) {
+    constructor(
+      options?: Partial<CheckboxGroupOptions<T, V, C> & FormItemOptions>,
+    ) {
       super();
     }
   }
@@ -32,17 +34,22 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
-      docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      description:
+        '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription:
+        '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
       designerValue: [{}, {}, {}],
     })
-    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+    dataSource:
+      | nasl.collection.List<T>
+      | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
     @Prop({
       group: '数据属性',
       title: '数据类型',
       description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
+      docDescription:
+        '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
     })
     dataSchema: T;
 
@@ -60,7 +67,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值字段',
       description: '用于标识选中值的字段',
-      docDescription: '集合的元素类型中，用于标识选中值的属性，支持自定义变更。',
+      docDescription:
+        '集合的元素类型中，用于标识选中值的属性，支持自定义变更。',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -193,7 +201,10 @@ namespace nasl.ui {
       title: '改变后',
       description: '选中状态改变时触发',
     })
-    onChange: (event: { value: nasl.collection.List<V> | nasl.core.String; oldValue: nasl.collection.List<V> | nasl.core.String }) => any;
+    onChange: (event: {
+      value: nasl.collection.List<V> | nasl.core.String;
+      oldValue: nasl.collection.List<V> | nasl.core.String;
+    }) => any;
 
     // @Event({
     //   title: '加载前',

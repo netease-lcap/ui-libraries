@@ -8,7 +8,7 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class DateRangePicker extends ViewComponent {
-    constructor(options?: Partial<DateRangePickerOptions>) {
+    constructor(options?: Partial<DateRangePickerOptions & FormItemOptions>) {
       super();
     }
   }

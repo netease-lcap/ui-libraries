@@ -25,7 +25,7 @@ namespace nasl.ui {
     // 		description: '清空输入框。',
     // })
     // clear(): void {}
-    constructor(options?: Partial<InputOptions>) {
+    constructor(options?: Partial<InputOptions & FormItemOptions>) {
       super();
     }
   }
