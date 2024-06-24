@@ -327,7 +327,7 @@
     {
         "name": "IIco",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "container"
         }
     },
     {
@@ -485,8 +485,8 @@
                 }
             ],
             "displaySlotInline": {
-                "cell": true,
-                "title": true
+                "cell": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type').value)",
+                "title": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type').value)"
             }
         }
     },
