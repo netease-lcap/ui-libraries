@@ -27,7 +27,9 @@ namespace nasl.ui {
       description: '重新加载',
     })
     reload(): void {}
-    constructor(options?: Partial<TreeSelectOptions<T, V, M>>) {
+    constructor(
+      options?: Partial<TreeSelectOptions<T, V, M> & FormItemOptions>,
+    ) {
       super();
     }
   }

@@ -45,7 +45,7 @@ namespace nasl.ui {
     })
     reload(): void {}
 
-    constructor(options?: Partial<CascaderOptions<T, V>>) {
+    constructor(options?: Partial<CascaderOptions<T, V> & FormItemOptions>) {
       super();
     }
   }

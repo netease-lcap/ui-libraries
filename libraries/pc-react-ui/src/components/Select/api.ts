@@ -12,7 +12,7 @@ namespace nasl.ui {
     V,
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
-    C
+    C,
   > extends ViewComponent {
     @Prop({
       title: '弹出状态',
@@ -25,7 +25,9 @@ namespace nasl.ui {
       description: '清除缓存，重新加载',
     })
     reload(): void {}
-    constructor(options?: Partial<SelectOptions<T, V, P, M, C>>) {
+    constructor(
+      options?: Partial<SelectOptions<T, V, P, M, C> & FormItemOptions>,
+    ) {
       super();
     }
   }
@@ -35,7 +37,7 @@ namespace nasl.ui {
     V,
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
-    C
+    C,
   > extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
