@@ -36,7 +36,7 @@
             :class="$style.resizer"
             @mousedown="handleResizerMouseDown">
         </div>
-        <div :class="$style.bottom" :expanded="!currentCollapse" v-if="enableCollapse">
+        <div :class="$style.bottom" :expanded="!currentCollapse" v-if="enableCollapse && showCollapseIcon">
           <div :class="$style.expanderIcon" @click="toggleCollapse" vusion-click-enabled>
             <i-ico
                 :name="currentCollapse ? expandIcon : foldIcon"
@@ -105,6 +105,7 @@ export default {
         collapsibleField: { type: String, default: 'collapsible' },
         minWidth: { type: Number, default: 56 },
         collapseMode: { type: String, default: 'expand', validator: (value) => /^(expand|fold)$/.test(value) },
+        showCollapseIcon: { type: Boolean, default: true },
         expandIcon: { type: String, default: 'expand' },
         foldIcon: { type: String, default: 'fold' },
     },
@@ -211,6 +212,7 @@ export default {
             this.isTransitionEnd = true;
         },
         toggleCollapse() {
+            if(!this.enableCollapse) return;
             this.currentWidth = this.currentCollapse ? null : this.minWidth;
             if (
               this.currentCollapse

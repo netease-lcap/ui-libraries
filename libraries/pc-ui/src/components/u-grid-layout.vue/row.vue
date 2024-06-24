@@ -11,6 +11,11 @@ export default {
         repeat: Number,
         gap: String,
     },
+    provide() {
+        return {
+            row: this,
+        };
+    },
 };
 </script>
 

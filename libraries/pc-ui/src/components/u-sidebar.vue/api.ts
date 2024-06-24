@@ -39,6 +39,11 @@ namespace nasl.ui {
             })
             expanded: nasl.core.Boolean,
         ): void {}
+        @Method({
+            title: 'undefined',
+            description: '展开/折叠所有分组',
+        })
+        toggleCollapse(): void {}
         constructor(options?: Partial<USidebarOptions<T, V>>) { super(); }
     }
 
@@ -215,6 +220,17 @@ namespace nasl.ui {
         })
         collapseMode: 'fold' | 'expand' = 'expand';
 
+        @Prop<USidebarOptions<T, V>, 'showCollapseIcon'>({
+            group: '交互属性',
+            title: '是否展示伸缩图标',
+            description: '是否展示伸缩图标',
+            setter: {
+                concept: 'SwitchSetter',
+            },
+            if: _ => _.enableCollapse === true,
+        })
+        showCollapseIcon: nasl.core.Boolean = true;
+
         @Prop<USidebarOptions<T, V>, 'expandIcon'>({
             group: '交互属性',
             title: '展开图标',
@@ -222,7 +238,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'IconSetter',
             },
-            if: _ => _.enableCollapse === true,
+            if: _ => _.enableCollapse === true && _.showCollapseIcon === true,
         })
         expandIcon: nasl.core.String = 'expand';
 
@@ -233,7 +249,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'IconSetter',
             },
-            if: _ => _.enableCollapse === true,
+            if: _ => _.enableCollapse === true && _.showCollapseIcon === true,
         })
         foldIcon: nasl.core.String = 'fold';
 
