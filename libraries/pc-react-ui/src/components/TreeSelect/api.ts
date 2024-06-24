@@ -110,7 +110,7 @@ namespace nasl.ui {
       sync: true,
       docDescription: '通过组件进行选择后，最终选中的值，支持双向绑定到变量',
     })
-    value: V | Array<V>;
+    value: V | nasl.collection.List<V>;
 
     @Prop({
       group: '交互属性',
