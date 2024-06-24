@@ -8,7 +8,7 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class Switch extends ViewComponent {
-    constructor(options?: Partial<SwitchOptions>) {
+    constructor(options?: Partial<SwitchOptions & FormItemOptions>) {
       super();
     }
   }

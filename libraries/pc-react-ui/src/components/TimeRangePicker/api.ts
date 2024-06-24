@@ -8,7 +8,7 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class TimeRangePicker extends ViewComponent {
-    constructor(options?: Partial<TimeRangePickerOptions>) {
+    constructor(options?: Partial<TimeRangePickerOptions & FormItemOptions>) {
       super();
     }
   }
