@@ -26,7 +26,7 @@ namespace nasl.ui {
     @Prop({
       title: '只读',
     })
-    readonly: nasl.core.Boolean;
+    disableInput: nasl.core.Boolean;
 
     @Prop({
       title: '预览',

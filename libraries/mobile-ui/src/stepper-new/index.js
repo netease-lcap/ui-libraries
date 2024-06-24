@@ -31,7 +31,7 @@ export default createComponent({
       value: 'currentValue',
       formattedValue: 'formattedValue',
       preview: 'isPreview',
-      readonly: 'disableInput',
+      disableInput: 'disableInput',
       disabled: 'disabled',
     }),
   ],

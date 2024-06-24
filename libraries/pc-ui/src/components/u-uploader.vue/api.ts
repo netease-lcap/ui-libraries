@@ -71,6 +71,7 @@ namespace nasl.ui {
             title: '上传地址',
             description: '上传的 URL 地址',
             docDescription: '文件上传的URL地址，如/upload',
+            settable: true,
         })
         url: nasl.core.String;
 
