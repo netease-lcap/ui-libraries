@@ -294,11 +294,6 @@ namespace nasl.ui {
         })
         readonly: nasl.core.Boolean;
 
-        @Prop({
-          title: '预览',
-        })
-        preview: nasl.core.Boolean;
-
         constructor(options?: Partial<UCheckboxOptions<T, V>>) { super(); }
     }
 

@@ -18,6 +18,11 @@ namespace nasl.ui {
     value: VanUploaderOptions['value'];
 
     @Prop({
+      title: '上传地址',
+    })
+    url: VanUploaderOptions['url'];
+
+    @Prop({
       title: '禁用',
     })
     disabled: nasl.core.Boolean;
@@ -85,7 +90,8 @@ namespace nasl.ui {
     accept: nasl.core.String;
     @Prop({
       group: '数据属性',
-      title: '文件上传地址'
+      title: '文件上传地址',
+      settable: true,
     })
     url: nasl.core.String;
     @Prop({
