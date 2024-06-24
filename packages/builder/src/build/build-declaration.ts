@@ -10,7 +10,7 @@ import path from 'path';
 import { execSync } from '../utils/exec';
 import logger from '../utils/logger';
 import { LcapBuildOptions } from './types';
-import { getNodeCode } from '../utils/babel-utils';
+import { getNodeCode, getSlotName } from '../utils/babel-utils';
 
 function putComponentMap(components: ViewComponentDeclaration[], componentMap: Record<string, ViewComponentDeclaration> = {}) {
   if (!Array.isArray(components)) {
@@ -146,11 +146,11 @@ function transformTsCode(tsCode: string, componentMap: Record<string, ViewCompon
         });
       } else if (superClassName.endsWith('ViewComponentOptions')) {
         classNode.body.body.forEach((n) => {
-          if (n.type !== 'ClassProperty' || n.key.type !== 'Identifier') {
+          if (n.type !== 'ClassProperty' || (n.key.type !== 'Identifier' && n.key.type !== 'StringLiteral')) {
             return;
           }
-          const propName = n.key.name;
 
+          const propName = n.key.type === 'Identifier' ? n.key.name : n.key.value;
           let propInfo: any = componentInfo.props.find((p) => p.name === propName);
 
           if (!propInfo && propName.startsWith('on')) {
@@ -159,7 +159,7 @@ function transformTsCode(tsCode: string, componentMap: Record<string, ViewCompon
             });
             propInfo = componentInfo.events.find((e) => e.name === eventName);
           } else if (!propInfo && propName.startsWith('slot')) {
-            const slotName = propName.replace(/^slot(\w)/, (m, $1) => $1.toLowerCase());
+            const slotName = getSlotName(propName);
             propInfo = componentInfo.slots.find((slot) => slot.name === slotName);
           }
 
