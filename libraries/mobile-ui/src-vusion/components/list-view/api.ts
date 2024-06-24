@@ -47,6 +47,18 @@ namespace nasl.ui {
       description: '清除缓存，重新加载'
     })
     reload(): any {}
+
+    @Method({
+      title: '带页码刷新',
+      description: '保持页码，重新加载',
+    })
+    loadTo(
+      @Param({
+          title: '页数',
+          description: '要刷新的页数',
+      })
+      page?: nasl.core.Integer,
+    ): void {}
   }
   export class VanListViewOptions<T, V, P, M> extends ViewComponentOptions {
     @Prop({

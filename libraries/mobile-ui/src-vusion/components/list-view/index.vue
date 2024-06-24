@@ -262,6 +262,27 @@ export default {
             this.debouncedLoad(true);
           }
         },
+        loadTo(page) {
+            if (this.pageable !== 'pagination') {
+              return;
+            }
+
+            const dataSource = this.currentDataSource;
+            if (!(dataSource && dataSource.paging))
+                return;
+            if(dataSource._load && typeof dataSource._load === 'function') {
+                dataSource.clearLocalData();
+            }
+            let currentPage = page;
+            if(['', null, undefined].includes(page)) {
+                currentPage = dataSource.paging.number;
+            }
+            if(currentPage === dataSource.paging.number) {
+                this.load(false, { number: currentPage });
+            } else {
+                dataSource.paging.number = page;
+            }
+        },
     },
 }
 </script>

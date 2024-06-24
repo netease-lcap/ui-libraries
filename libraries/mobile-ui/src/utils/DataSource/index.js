@@ -294,7 +294,7 @@ const VueDataSource = Vue.extend({
         // _load(params)
         load(offset = this.offset, limit = this.limit, newPageNumber) {
           // reload 或 query变化
-          if (this.cleared) {
+          if (this.cleared && newPageNumber === undefined) {
             if (this.paging) {
               this.paging.number = 1;
             }
