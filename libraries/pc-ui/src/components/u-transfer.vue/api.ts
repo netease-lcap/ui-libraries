@@ -115,16 +115,22 @@ namespace nasl.ui {
             title: '文本字段',
             description: '选项文本的字段名',
             docDescription: '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
+            setter: {
+              concept: 'InputSetter',
+            },
         })
-        textField: (item: T) => any = ((item: any)  => item.text) as any;
+        textField: nasl.core.String = 'text';
 
         @Prop({
             group: '数据属性',
             title: '值字段',
             description: '选项值的字段名',
             docDescription: '集合的元素类型中，用于指定数据唯一值的字段，支持自定义变更',
+            setter: {
+              concept: 'InputSetter',
+            },
         })
-        valueField: (item: T) => V = ((item: any)  => item.value) as any;
+        valueField: nasl.core.String = 'value';
 
         @Prop({
             group: '数据属性',
