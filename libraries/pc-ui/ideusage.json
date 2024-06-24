@@ -400,7 +400,7 @@
             },
             "textholder": "src",
             "elementSutando": {
-                "condition": "/^\\{\\{.*\\}\\}$/.test(this.getAttribute('src')?.value) === true",
+                "condition": "this.getAttribute('src').type === 'dynamic'",
                 "component": "UImageDesigner"
             }
         }
