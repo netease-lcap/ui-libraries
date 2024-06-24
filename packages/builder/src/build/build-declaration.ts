@@ -174,6 +174,24 @@ function transformTsCode(tsCode: string, componentMap: Record<string, ViewCompon
               ];
             }
           }
+
+          //  slot () => nasl.collection.List 转成 Array
+          if (
+            propName.startsWith('slot')
+              && n.typeAnnotation && n.typeAnnotation.type === 'TSTypeAnnotation'
+              && n.typeAnnotation.typeAnnotation.type === 'TSFunctionType'
+              && n.typeAnnotation.typeAnnotation.typeAnnotation
+              && n.typeAnnotation.typeAnnotation.typeAnnotation.type === 'TSTypeAnnotation'
+              && n.typeAnnotation.typeAnnotation.typeAnnotation.typeAnnotation.type === 'TSTypeReference'
+          ) {
+            const code = getNodeCode(n.typeAnnotation.typeAnnotation.typeAnnotation.typeAnnotation.typeName);
+            if (code.startsWith('nasl.collection.List')) {
+              n.typeAnnotation.typeAnnotation.typeAnnotation.typeAnnotation.typeName = {
+                type: 'Identifier',
+                name: 'Array',
+              };
+            }
+          }
         });
       }
     },

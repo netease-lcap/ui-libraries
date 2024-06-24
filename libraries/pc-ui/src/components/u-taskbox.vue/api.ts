@@ -13,11 +13,6 @@ namespace nasl.ui {
         })
         total: nasl.core.Integer;
 
-        @Prop({
-          title: '打开状态',
-        })
-        opened: nasl.core.Boolean;
-
         constructor(options?: Partial<UTaskboxOptions>) { super(); }
     }
 
