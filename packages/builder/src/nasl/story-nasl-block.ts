@@ -2,7 +2,6 @@ import * as parser from '@babel/parser';
 import traverse from '@babel/traverse';
 import { transformTSX2Nasl } from '../ts2nasl';
 import { getNodeCode } from '../utils/babel-utils';
-import logger from '../utils/logger';
 
 const getBlocksFromStory = (code, framework) => {
   const ast = parser.parse(code, {

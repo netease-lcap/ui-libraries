@@ -11,6 +11,27 @@ namespace nasl.ui {
     constructor(options?: Partial<VanUploaderOptions>) {
       super();
     }
+
+    @Prop({
+      title: '值',
+    })
+    value: VanUploaderOptions['value'];
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
+    @Prop({
+      title: '预览',
+    })
+    preview: nasl.core.Boolean;
+
     @Method({
       title: 'undefined',
       description: '主动调起文件选择，由于浏览器安全限制，只在触发操作的上下文中调用才有效'
@@ -37,7 +58,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识文件上传的值',
-      sync: true
+      sync: true,
+      settable: true,
     })
     value: nasl.collection.List<{
       name: nasl.core.String;
@@ -215,7 +237,8 @@ namespace nasl.ui {
       description: '正常显示，但禁止选择/输入',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     readonly: nasl.core.Boolean = false;
     @Prop({
@@ -224,7 +247,8 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Prop({
@@ -235,6 +259,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      settable: true,
     })
     preview: nasl.core.Boolean = false;
     @Event({

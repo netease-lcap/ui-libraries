@@ -8,6 +8,25 @@ namespace nasl.ui {
         group: 'Form'
     })
     export class USwitch extends ViewComponent {
+        @Prop({
+          title: '值'
+        })
+        value: nasl.core.Boolean;
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
 
         constructor(options?: Partial<USwitchOptions>) { super(); }
     }

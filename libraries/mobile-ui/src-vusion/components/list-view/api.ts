@@ -15,7 +15,12 @@ namespace nasl.ui {
     @Prop({
       title: '数据',
     })
-    data: VanListViewOptions<T, V, P, M>['dataSource'];
+    data: nasl.collection.List<T>;
+
+    @Prop({
+      title: '数据量',
+    })
+    total: nasl.core.Integer;
 
     @Prop({
       title: '当前页数',
@@ -31,6 +36,11 @@ namespace nasl.ui {
       title: '过滤文本',
     })
     filterText: nasl.core.String;
+
+    @Prop({
+      title: '值',
+    })
+    value: VanListViewOptions<T, V, P, M>['value'];
 
     @Method({
       title: 'undefined',
@@ -171,7 +181,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识数据列表的值',
-      sync: true
+      sync: true,
+      settable: true,
     })
     value: M extends true ? nasl.collection.List<V> : V;
     @Prop({
@@ -460,7 +471,7 @@ namespace nasl.ui {
       description: '插入<van-cell />',
       emptyBackground: 'drag-entity-here',
     })
-    slotDefault: () => Array<VanCell>;
+    slotDefault: () => Array<ViewComponent>;
     @Slot({
       title: 'undefined',
       description: '自定义选项的结构和样式'

@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import SImage from '../s-image.vue';
 
 const VARIBALE_REGEX = /^\{\{.*\}\}$/;
@@ -37,6 +38,13 @@ export default {
     components: {
       SImage,
     },
+    mixins: [
+      sync({
+        src: 'convertedSrc',
+        placeholderSrc: 'placeholderSrc',
+        preview: 'preview',
+      })
+    ],
     props: {
         src: {
             type: String,

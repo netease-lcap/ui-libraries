@@ -56,6 +56,10 @@ const App = () => {
     };
   }, []);
 
+  if (!Preview) {
+    return null;
+  }
+
   return renderAppPreview(<Preview {...props} />);
 };
 

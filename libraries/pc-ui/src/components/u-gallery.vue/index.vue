@@ -33,12 +33,18 @@
 <script>
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
+import { sync } from '@lcap/vue2-utils';
 import SImage from '../s-image.vue';
 import SupportDataSource from '../../mixins/support.datasource';
 
 export default {
     name: 'u-gallery',
-    mixins: [SupportDataSource],
+    mixins: [
+      SupportDataSource,
+      sync({
+        data: 'options',
+      }),
+    ],
     components: {
       SImage,
     },

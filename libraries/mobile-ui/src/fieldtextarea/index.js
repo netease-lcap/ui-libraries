@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 import {
   isDef,
   isDefB,
@@ -7,7 +8,6 @@ import {
 import { resetScroll } from '../utils/dom/reset-scroll';
 import { preventDefault } from '../utils/dom/event';
 import { getRootScrollTop, setRootScrollTop } from '../utils/dom/scroll';
-
 
 import { FieldMixin } from '../mixins/field';
 import PreviewMixin from '../mixins/preview';
@@ -20,7 +20,16 @@ function equal(value1, value2) {
 }
 
 export default createComponent({
-  mixins: [FieldMixin, PreviewMixin],
+  mixins: [
+    FieldMixin,
+    PreviewMixin,
+    sync({
+      value: 'currentValue',
+      preview: 'isPreview',
+      readonly: 'readonly',
+      disabled: 'disabled',
+    }),
+  ],
   props: {
     type: {
       type: String,
@@ -71,6 +80,19 @@ export default createComponent({
   },
   mounted() {
     this.$nextTick(this.adjustSize);
+
+    if (this.inDesigner()) {
+      this.ob = new ResizeObserver((entries) => {
+        this.adjustSize();
+      });
+
+      this.ob.observe(this.$refs.wrap);
+    }
+  },
+  beforeDestroy() {
+    if (this.ob) {
+      this.ob.disconnect();
+    }
   },
   methods: {
     getProp(key) {

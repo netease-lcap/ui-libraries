@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 import { createNamespace } from '../utils';
 import { showFormat, isValidDate } from './utils';
 import TimePicker from './TimePicker';
@@ -16,7 +17,19 @@ import { validDisplayFormatters, validUnit, validType } from './shared';
 const [createComponent, bem, t] = createNamespace('datetime-picker');
 
 export default createComponent({
-  mixins: [FieldMixin, EventSlotCommandProvider(['cancel', 'confirm']), PreviewMixin],
+  mixins: [
+    FieldMixin,
+    EventSlotCommandProvider(['cancel', 'confirm']),
+    PreviewMixin,
+    sync({
+      value: 'currentValue',
+      startValue: 'currentStartValue',
+      endValue: 'currentEndValue',
+      preview: 'isPreview',
+      readonly: 'readonly',
+      disabled: 'disabled',
+    }),
+  ],
   props: {
     ...TimePicker.props,
     ...DatePicker.props,
@@ -35,6 +48,9 @@ export default createComponent({
     isNew: {
       type: Boolean,
       default: false,
+    },
+    visible: {
+      type: Boolean,
     },
   },
   data() {
@@ -69,8 +85,22 @@ export default createComponent({
       }
       return validUnit[this.realType][0];
     },
+    validateValue() {
+      // 范围选择
+      if (this.range) {
+        return this.startValue || this.endValue;
+      }
+
+      return this.value;
+    },
   },
   watch: {
+    visible(val) {
+      // 设计器模式下不触发
+      if (this.inDesigner()) return;
+
+      this.popupVisible = val;
+    },
     value(val) {
       this.currentValue = val;
     },
@@ -181,7 +211,7 @@ export default createComponent({
     },
     togglePopup() {
       this.popupVisible = !this.popupVisible;
-      // this.$refs.popup.toggle();
+      this.$emit('update:visible', this.popupVisible);
     },
     // @exposed-api
     open() {
@@ -190,12 +220,12 @@ export default createComponent({
       }
 
       this.popupVisible = true;
-      // this.$refs.popup.open();
+      this.$emit('update:visible', this.popupVisible);
     },
     // @exposed-api
     close() {
       this.popupVisible = false;
-      // this.$refs.popup.close();
+      this.$emit('update:visible', this.popupVisible);
     },
     // @exposed-api
     getPicker() {

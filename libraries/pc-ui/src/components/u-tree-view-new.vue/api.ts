@@ -8,7 +8,25 @@ namespace nasl.ui {
         group: 'Selector'
     })
     export class UTreeViewNew<T, V, M extends nasl.core.Boolean> extends ViewComponent {
+        @Prop({
+            title: '数据',
+        })
+        data: nasl.collection.List<T>;
 
+        @Prop({
+            title: '选中值',
+        })
+        value: UTreeViewNewOptions<T, V, M>['value'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -97,6 +115,7 @@ namespace nasl.ui {
             description: '选择后，所选中的值',
             sync: true,
             docDescription: '当前选择的值',
+            settable: true,
         })
         value: M extends true ? nasl.collection.List<V> : V;
 
@@ -153,6 +172,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -164,6 +184,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -223,7 +244,7 @@ namespace nasl.ui {
             checked: nasl.core.Boolean;
             oldChecked: nasl.core.Boolean;
             node: T;
-            values: nasl.collection.List<V>; 
+            values: nasl.collection.List<V>;
         }) => any;
 
         @Event({
@@ -248,7 +269,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UTreeViewNodeNew<T, V>>;
+        slotDefault: () => Array<UTreeViewNodeNew<T, V> | ViewComponent>;
 
         @Slot({
             title: '项',

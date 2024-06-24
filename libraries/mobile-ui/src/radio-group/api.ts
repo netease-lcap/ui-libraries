@@ -20,7 +20,22 @@ namespace nasl.ui {
     @Prop({
       title: '数据',
     })
-    data: VanRadioGroupOptions<T, V>['dataSource'];
+    data: nasl.collection.List<T>;
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
+    @Prop({
+      title: '预览',
+    })
+    preview: nasl.core.Boolean;
   }
   export class VanRadioGroupOptions<T, V> extends ViewComponentOptions {
     @Prop({
@@ -130,6 +145,21 @@ namespace nasl.ui {
     group: "Form"
   })
   export class VanRadio<V> extends ViewComponent {
+    @Prop({
+      title: '选中',
+    })
+    value: nasl.core.Boolean = false;
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
     constructor(options?: Partial<VanRadioOptions<V>>) {
       super();
     }

@@ -1,6 +1,6 @@
 {
   "name": "@lcap/pc-react-ui",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Codewave Low Code AI Platform React Ant Design HOC UI Components",
   "main": "src/index.ts",
   "files": [
@@ -43,7 +43,7 @@
     "@ant-design/icons": "^5.2.6",
     "@ant-design/pro-components": "^2.6.48",
     "@types/lodash": "^4.14.202",
-    "@vusion/validator": "0.4.15-beta.1",
+    "@lcap/validator": "workspace:*",
     "ahooks": "^3.7.8",
     "antd": "5.15.1",
     "classnames": "^2.5.1",
@@ -58,8 +58,10 @@
     "remixicon": "^4.2.0"
   },
   "devDependencies": {
+    "@ant-design/colors": "^7.0.2",
     "@ant-design/static-style-extract": "^1.0.2",
     "@babel/parser": "^7.23.6",
+    "@ctrl/tinycolor": "^4.1.0",
     "@lcap/builder": "workspace:*",
     "@nasl/types": "0.1.7-beta.1",
     "@storybook/addon-essentials": "^7.6.17",

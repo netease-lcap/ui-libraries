@@ -115,6 +115,8 @@ module.exports = {
 
     { group: 'Layout', name: 'Flex', alias: '线性布局' },
 
+    { group: 'Layout', name: 'AbsoluteLayout', alias: '自由布局' },
+
     { group: 'Layout', name: 'Row', alias: '栅格布局' },
     // { group: 'Layout', name: 'Layout', alias: '布局' },
 

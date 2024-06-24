@@ -86,13 +86,21 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import UListView from '../u-list-view.vue';
 import UPreview from '../u-text.vue';
 import MPreview from '../u-text.vue/preview';
 
 export default {
     name: 'u-transfer',
-    mixins: [MPreview],
+    mixins: [
+      MPreview,
+      sync({
+        readonly: 'readonly',
+        preview: 'isPreview',
+        disabled: 'disabled',
+      }),
+    ],
     components: {
       UPreview
     },
