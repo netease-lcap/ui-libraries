@@ -35,9 +35,13 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import IIco from '../i-ico.vue';
 export default {
     name: 'u-process-taskbox',
+    mixins: [
+      sync('total'),
+    ],
     component: {
         IIco,
     },
