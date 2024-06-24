@@ -15,6 +15,7 @@
         @focus="onFocus"
         @blur:value="onBlurInputValue($event)"
         @clear="clearValue"
+
         :prefix="preIcon?preIcon:undefined"
         :suffix="suffixIcon?suffixIcon:undefined"
         :color="formItemVM && formItemVM.color">
@@ -51,6 +52,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import dayjs from '../../utils/dayjs';
 import DateFormatMixin from '../../mixins/date.format';
 import { formatterOptions } from './wrap';
@@ -79,7 +81,18 @@ export default {
     name: 'u-time-picker',
     // i18n,
     components: { UTimePickerPopper, UPreview },
-    mixins: [MField, DateFormatMixin, i18nMixin('u-time-picker'), MPreview],
+    mixins: [
+      MField,
+      DateFormatMixin,
+      i18nMixin('u-time-picker'),
+      MPreview,
+      sync({
+        value: 'inputTime',
+        readonly: 'readonly',
+        preview: 'isPreview',
+        disabled: 'disabled',
+      }),
+    ],
     props: {
         minUnit: { type: String, default: 'second' },
         time: { type: String, default: '' },
@@ -234,7 +247,7 @@ export default {
             this.$emit('update', e);
         },
         clearValue() {
-            this.$refs.popper && this.$refs.popper.clearValue();
+          this.$refs.popper && this.$refs.popper.clearValue();
         },
         onSpinnerClick() {
             this.$refs.input.focus();

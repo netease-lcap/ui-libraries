@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 import { createNamespace } from '../utils';
 import { BORDER_TOP_BOTTOM } from '../utils/constant';
 import { callInterceptor } from '../utils/interceptor';
@@ -6,7 +7,12 @@ import { ParentMixin } from '../mixins/relation';
 const [createComponent, bem] = createNamespace('tabbar');
 
 export default createComponent({
-  mixins: [ParentMixin('vanTabbar')],
+  mixins: [
+    ParentMixin('vanTabbar'),
+    sync({
+      value: 'curvalue',
+    }),
+  ],
 
   props: {
     route: {

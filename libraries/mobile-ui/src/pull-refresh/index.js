@@ -18,7 +18,7 @@ export default createComponent({
   mixins: [TouchMixin],
 
   props: {
-    disabled: Boolean,
+    disabled: { type: Boolean, default: false },
     successText: String,
     pullingText: String,
     loosingText: String,

@@ -67,7 +67,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UPanelGroup | ViewComponent>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: '标题',

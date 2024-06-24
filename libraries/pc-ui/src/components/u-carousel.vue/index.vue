@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { MSinglex } from '../m-singlex.vue';
 import SupportDataSource  from '../../mixins/support.datasource.js';
 import UCarouselItem from './item.vue';
@@ -53,7 +54,15 @@ export default {
     name: 'u-carousel',
     childName: 'u-carousel-item',
     extends: MSinglex,
-    mixins: [SupportDataSource],
+    mixins: [
+      SupportDataSource,
+      sync({
+        data() {
+          return this.currentDataSource && Array.isArray(this.currentDataSource.data)
+            ? this.currentDataSource.data : [];
+        },
+      }),
+    ],
     components: {
         UCarouselItem,
     },

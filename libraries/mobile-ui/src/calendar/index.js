@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 // Utils
 import dayjs from '../utils/dayjs';
 import { raf } from '../utils/dom/raf';
@@ -31,6 +32,7 @@ import { EmptyCol } from '../emptycol';
 import { FieldMixin } from '../mixins/field';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
 import PreviewMixin from '../mixins/preview';
+import SyncValueMixin from '../mixins/sync-value';
 
 const EventSlotCommandMap = {
   cancel: 'onCancel',
@@ -38,13 +40,23 @@ const EventSlotCommandMap = {
 };
 
 export default createComponent({
-  mixins: [FieldMixin, EventSlotCommandProvider(EventSlotCommandMap), PreviewMixin],
+  mixins: [
+    FieldMixin,
+    EventSlotCommandProvider(EventSlotCommandMap),
+    PreviewMixin,
+    SyncValueMixin,
+    sync({
+      preview: 'isPreview',
+      readonly: 'readonly',
+      disabled: 'disabled',
+    }),
+  ],
 
   props: {
     title: String,
     color: String,
-    readonly: Boolean,
-    disabled: Boolean,
+    readonly: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
     formatter: Function,
     rowHeight: [Number, String],
     confirmText: String,

@@ -70,6 +70,18 @@
     }
   },
   {
+    "name": "AbsoluteLayout",
+    "ideusage": {
+      "idetype": "board",
+      "automate": [
+        {
+          "command": "WRAP_FREE",
+          "useblock": 0
+        }
+      ]
+    }
+  },
+  {
     "name": "FormInputNumber",
     "ideusage": {
       "idetype": "container"
@@ -722,7 +734,7 @@
         "labelSlot": "this.getAttribute('labelIsSlot').value === true"
       },
       "events": {
-        "click":  "this.filterElement(el => el.tag === 'MenuItem').length > 0"
+        "click": "this.filterElement(el => el.tag === 'MenuItem').length > 0"
       }
     }
   },

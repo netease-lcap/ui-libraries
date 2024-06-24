@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 import { isDef, createNamespace } from '../utils';
 import { isNumeric } from '../utils/validate/number';
 
@@ -6,6 +7,9 @@ import VanEmptyCol from '../emptycol'
 const [createComponent, bem] = createNamespace('badge');
 
 export default createComponent({
+  mixins: [
+    sync('content'),
+  ],
   props: {
     dot: Boolean,
     max: [Number, String],

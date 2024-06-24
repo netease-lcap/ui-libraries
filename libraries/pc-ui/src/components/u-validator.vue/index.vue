@@ -15,8 +15,8 @@
 
 <script>
 import MEmitter from '../m-emitter.vue';
-import VusionValidator from '@vusion/validator';
-import VueVusionValidator from '@vusion/validator/VuePlugin';
+import VusionValidator from '@lcap/validator';
+import VueVusionValidator from '@lcap/validator/VuePlugin';
 import debounce from 'lodash/debounce';
 import SEmpty from '../../components/s-empty.vue';
 

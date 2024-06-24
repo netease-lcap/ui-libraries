@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { MComplex } from '../m-complex.vue';
 import { MGroupParent } from '../m-group.vue';
 import MField from '../m-field.vue';
@@ -97,7 +98,41 @@ export default {
     components: {
         SEmpty,
     },
-    mixins: [MComplex, MGroupParent, MField, FVirtualList, i18nMixin('u-list-view')],
+    mixins: [
+      MComplex,
+      MGroupParent,
+      MField,
+      FVirtualList,
+      i18nMixin('u-list-view'),
+      sync({
+        data: 'currentData',
+        total() {
+          return this.currentDataSource && this.currentDataSource.total ? this.currentDataSource.total : 0;
+        },
+        size() {
+          return this.currentDataSource && this.currentDataSource.size ? this.currentDataSource.paging.size : this.pageSize;
+        },
+        page() {
+          return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : this.pageNumber;
+        },
+        sort() {
+          return this.currentDataSource && this.currentDataSource.sorting ? this.currentDataSource.sorting.field : '';
+        },
+        order() {
+          return this.currentDataSource && this.currentDataSource.sorting ? this.currentDataSource.sorting.order : '';
+        },
+        filterText: 'filterText',
+        readonly: 'readonly',
+        disabled: 'disabled',
+        value() {
+          if (this.currentMultiple) {
+            return this.selectedVMs.map((itemVM) => itemVM.value);
+          }
+
+          return this.selectedVM ? this.selectedVM.value : undefined;
+        },
+      })
+    ],
     // i18n,
     props: {
         // @inherit: value: null,
@@ -382,7 +417,9 @@ export default {
                 options.data = Array.from(dataSource);
                 return new DataSource(options);
             } else if (dataSource instanceof Function) {
+                const self = this;
                 options.load = function load(params) {
+                    self.$emitSyncParams(params);
                     const result = dataSource(params);
                     if (result instanceof Promise)
                         return result.catch(
@@ -545,6 +582,9 @@ export default {
         async reload() {
             // readme: 目前使用场景中存在着用户通过props间接改变组件内部状态后同步调用reload的情况，在这里等待组件内部状态更新完成。
             await new Promise((res) => { this.$nextTick(() => res()); });
+            // fix: 2891721709081088 数据源为变量时，调用reload会清空数据
+            if (!this.currentDataSource._load || typeof this.currentDataSource._load !== 'function')
+                return;
             this.currentDataSource.clearLocalData();
             const {
                 paging: oldPaging,

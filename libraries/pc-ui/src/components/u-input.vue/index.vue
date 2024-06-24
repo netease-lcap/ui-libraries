@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import MField from '../m-field.vue';
 import { focus } from '../../directives';
 import { isIE } from '../../utils/dom';
@@ -60,11 +61,21 @@ export default {
         UPreview
     },
     directives: { focus },
-    mixins: [MField, MPreview],
+    mixins: [
+      MField,
+      MPreview,
+      sync({
+        value: 'currentValue',
+        readonly: 'readonly',
+        preview: 'isPreview',
+        disabled: 'disabled',
+      }),
+    ],
     props: {
         value: [String, Number],
         color: String,
         placeholder: String,
+        emptyValueIsNull:{ type: Boolean, default: true},
         clearable: { type: Boolean, default: false },
         autofocus: { type: [Boolean, String], default: false },
         readonly: { type: Boolean, default: false },
@@ -73,8 +84,8 @@ export default {
         password: { type: Boolean, default: false },
         type: { type: String, default: 'text' },
         maxlengthMessage: String,
-        prefix: String,
-        suffix: String,
+        prefix: { type: [String, Boolean] },
+        suffix: { type: [String, Boolean] },
         autoSize: {
             type: String,
             validator: (value) =>
@@ -211,7 +222,7 @@ export default {
             this.compositionInputing = false;
             const $event = {
                 oldValue: this.currentValue,
-                value: e.target.value,
+                value: this.handleEmptyValue(e.target.value),
             };
             if (this.$emitPrevent('before-input', $event, this))
                 return;
@@ -231,7 +242,7 @@ export default {
         clear() {
             if (this.readonly || this.disabled)
                 return;
-            const $event = { oldValue: this.currentValue, value: '' };
+            const $event = { oldValue: this.currentValue, value: this.handleEmptyValue('') };
             if (this.$emitPrevent('before-clear', $event, this))
                 return;
             if (this.$emitPrevent('before-input', $event, this))
@@ -282,7 +293,14 @@ export default {
                 this.$refs.input && this.$refs.input.select();
             });
         },
-    }
+        handleEmptyValue(value) {
+            if (!this.emptyValueIsNull) {
+                return value;
+            } else {
+                return value ? value : null;
+        }
+    },
+  },
 };
 </script>
 
