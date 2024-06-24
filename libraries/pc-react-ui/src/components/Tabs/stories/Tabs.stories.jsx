@@ -138,6 +138,7 @@ export const 同步函数 = {
         data-nodepath="rootview.0"
         ide-iscontainer="true"
         key="component-4"
+        onChange={(e)=>{console.log(12)}}
         dataSource={[{}, {}, {}]}
         titleRender={(item) => <Text>1234</Text>}
       >

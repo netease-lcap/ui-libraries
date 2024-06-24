@@ -10,7 +10,7 @@ namespace nasl.ui {
   export class TreeSelect<
     T,
     V,
-    M extends nasl.core.Boolean
+    M extends nasl.core.Boolean,
   > extends ViewComponent {
     // @Prop({
     //   title: '数据',
@@ -35,7 +35,7 @@ namespace nasl.ui {
   export class TreeSelectOptions<
     T,
     V,
-    M extends nasl.core.Boolean
+    M extends nasl.core.Boolean,
   > extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
@@ -67,7 +67,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    textField:  any;
+    textField: any;
 
     @Prop({
       group: '数据属性',
@@ -110,7 +110,7 @@ namespace nasl.ui {
       sync: true,
       docDescription: '通过组件进行选择后，最终选中的值，支持双向绑定到变量',
     })
-    value: V;
+    value: V | nasl.collection.List<V>;
 
     @Prop({
       group: '交互属性',
