@@ -80,6 +80,19 @@ export default createComponent({
   },
   mounted() {
     this.$nextTick(this.adjustSize);
+
+    if (this.inDesigner()) {
+      this.ob = new ResizeObserver((entries) => {
+        this.adjustSize();
+      });
+
+      this.ob.observe(this.$refs.wrap);
+    }
+  },
+  beforeDestroy() {
+    if (this.ob) {
+      this.ob.disconnect();
+    }
   },
   methods: {
     getProp(key) {
