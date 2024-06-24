@@ -1,13 +1,10 @@
 import _ from 'lodash';
 import React from 'react';
 import classnames from 'classnames';
+import { Input } from 'antd';
 import style from '../index.module.less';
-import FormContext from '@/components/Form/form-context';
-import { Col, FormItem } from '@/index';
-import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
-import { $deletePropsList } from '@/plugins/constants';
-import { COLPROPSFIELDS } from '@/components/Row/constants';
 
+const { TextArea } = Input;
 export function useHandleRef(props) {
   const onChangeProps = props.get('onChange');
   const result = {
@@ -30,3 +27,10 @@ export function useHandleThemeStyle(props) {
     rootClassName: classnames('cw-textarea cw-textarea-css-var', className),
   };
 }
+
+export function useHandleBasicsComponent() {
+  return {
+    BasicsComponent: TextArea,
+  };
+}
+useHandleBasicsComponent.order = 2;

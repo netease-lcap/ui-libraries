@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { useControllableValue } from 'ahooks';
 import { TreeSelect } from 'antd';
 import { $deletePropsList } from '@/plugins/constants';
+import FormContext from '@/components/Form/form-context';
 import {
   useRequestDataSource, useHandleMapField, useFormatDataSource, useDataSourceToTree,
 } from '@/plugins/common/dataSource';
@@ -44,6 +45,8 @@ export function useHandleStyle(props) {
   };
 }
 export function useHandleValueTransform(props) {
+  const { isForm } = React.useContext(FormContext);
+  if (!isForm) return {};
   return {
     transform(value, name) {
       return {
@@ -63,3 +66,9 @@ export function useHandleControllableValue(props) {
 
   };
 }
+export function useHandleBasicsComponent() {
+  return {
+    BasicsComponent: TreeSelect,
+  };
+}
+useHandleBasicsComponent.order = 2;

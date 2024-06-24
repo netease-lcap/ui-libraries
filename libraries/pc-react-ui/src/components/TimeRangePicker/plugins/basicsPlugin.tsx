@@ -4,6 +4,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 import { useControllableValue } from 'ahooks';
 import locale from 'antd/lib/date-picker/locale/zh_CN';
+import { TimePicker } from 'antd';
 import FormContext from '@/components/Form/form-context';
 import { Col, FormItem } from '@/index';
 import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
@@ -13,21 +14,28 @@ import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
 import 'dayjs/locale/zh-cn';
 
+const { RangePicker } = TimePicker;
+
 export function useHandleLocale() {
   return {
     locale,
   };
 }
+export function useHandleBasicsComponent() {
+  return {
+    BasicsComponent: RangePicker,
+  };
+}
+useHandleBasicsComponent.order = 2;
 
 export function useHandleTimeOrder(props) {
+  const { isForm } = React.useContext(FormContext);
   const BaseComponent = props.get('render');
-  const render = React.useCallback((localProps) => {
+  const render = React.useCallback(React.forwardRef((localProps: any, ref) => {
     localProps.fieldProps.order = localProps.fieldProps.timeOrder ?? true;
-    return <BaseComponent {...localProps} />;
-  }, [BaseComponent]);
-  return {
-    render,
-  };
+    return <BaseComponent {...localProps} ref={ref} />;
+  }), [BaseComponent]);
+  return isForm ? { render } : {};
 }
 useHandleTimeOrder.order = 3;
 export function useHandleStyle(props) {

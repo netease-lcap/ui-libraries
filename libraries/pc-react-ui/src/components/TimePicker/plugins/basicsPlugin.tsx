@@ -4,11 +4,7 @@ import { useControllableValue } from 'ahooks';
 import React from 'react';
 import _ from 'lodash';
 import locale from 'antd/lib/date-picker/locale/zh_CN';
-import FormContext from '@/components/Form/form-context';
-import { Col, FormItem } from '@/index';
-import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
-import { COLPROPSFIELDS } from '@/components/Row/constants';
-import { $deletePropsList } from '@/plugins/constants';
+import { TimePicker } from 'antd';
 import style from '../index.module.less';
 import 'dayjs/locale/zh-cn';
 
@@ -36,3 +32,10 @@ export function useHandleStyle(props) {
     className: classnames(style.timePicker, className),
   };
 }
+
+export function useHandleBasicsComponent() {
+  return {
+    BasicsComponent: TimePicker,
+  };
+}
+useHandleBasicsComponent.order = 2;

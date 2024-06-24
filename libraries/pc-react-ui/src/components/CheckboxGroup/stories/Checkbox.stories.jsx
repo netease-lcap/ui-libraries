@@ -30,16 +30,13 @@ export const 默认 = {
   args: {
     dataSource: async () => [11, 22, 33, 444],
     // dataSource: ['1', 2, 3],
-    style: { fontSize: '50px' },
+    // style: { fontSize: '50px' },
     // textField: 'checkbox.name',
     // valueField: 'checkbox.id',
   },
 };
 export const 静态数据 = {
   render: () => {
-    function EmptySlot(params) {
-      return <div />;
-    }
     return (
       <CheckboxGroup
         data-nodepath="rootview.6.2"
@@ -50,14 +47,9 @@ export const 静态数据 = {
           { label: '数据', value: '数据' },
           { label: '生成', value: '生成' },
         ]}
-        textField="entitytestradio.name"
-        valueField="entitytestradio.name"
+        textField="label"
+        valueField="value"
         className="ide-style1"
-        item={() => (
-          <div ide-draggable="false" data-nodepath="rootview.6.2.0">
-            <EmptySlot key="30" />
-          </div>
-        )}
       />
     );
   },

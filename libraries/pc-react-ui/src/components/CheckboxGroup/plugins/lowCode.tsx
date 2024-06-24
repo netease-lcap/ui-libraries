@@ -13,12 +13,15 @@ export function useHandleNodePath(props) {
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
   const nodePath = props.get('data-nodepath');
   React.useEffect(() => {
-    const inputElement = document.querySelector(`[data-node-id=${nodeId}]`);
-    const inputParent = inputElement?.closest(`.${prefixCls}-form-item-row`);
-    inputParent?.setAttribute('data-nodepath', nodePath);
-    if (!isForm) return;
-    inputParent?.setAttribute('data-tag-name', 'FormCheckboxGroup');
-    inputParent?.setAttribute('data-has-mutation', 'true');
+    const CheckBoxGroupElement = document.querySelector(`[data-node-id=${nodeId}]`);
+    if (isForm) {
+      const CheckBoxGroupParent = CheckBoxGroupElement?.closest(`.${prefixCls}-form-item-row`);
+      CheckBoxGroupParent?.setAttribute('data-nodepath', nodePath);
+      CheckBoxGroupParent?.setAttribute('data-tag-name', 'FormCheckboxGroup');
+      CheckBoxGroupParent?.setAttribute('data-has-mutation', 'true');
+    } else {
+      CheckBoxGroupElement?.setAttribute('data-nodepath', nodePath);
+    }
   }, [prefixCls, isForm, nodePath, nodeId]);
   return {
     'data-node-id': nodeId,

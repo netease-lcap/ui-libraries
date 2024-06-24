@@ -1,6 +1,5 @@
 import { InputNumber as AntdInputNumber } from 'antd';
 import type { InputNumberProps as AntdInputNumberProps } from 'antd';
-import { ProFormDigit } from '@ant-design/pro-components';
 import * as basicsPlugin from './plugins/index';
 import type { pluginType } from '@/plugins/type';
 import { registerComponet } from '../../plugins/index';
@@ -14,7 +13,7 @@ const mapProps = {
 };
 
 export const InputNumber = registerComponet<InputNumberProps, pluginType<InputNumberProps>>(
-  ProFormDigit,
+  AntdInputNumber,
   { plugin: basicsPlugin, displayName: 'InputNumber', mapProps },
 
 );

@@ -3,6 +3,8 @@ import _ from 'lodash';
 import React from 'react';
 import { useControllableValue } from 'ahooks';
 import { Cascader as AntCascader, CascaderProps } from 'antd';
+import { ProFormCascader, ProFormCaptchaProps } from '@ant-design/pro-components';
+
 import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
 import {
@@ -54,11 +56,11 @@ export function useHandleDataSource(props) {
   };
 }
 
-// export function useHandleNotInForm(props) {
-//   const render = React.useCallback(React.forwardRef<any>((localProps, ref) => {
-//     return <AntCascader {...localProps} ref={ref} />;
-//   }), []);
-//   return {
-//     render,
-//   };
-// }
+export function useHandleBasicsComponent(props) {
+  const deletePropsList = props.get($deletePropsList, []).concat(['FormItemComponent']);
+  return {
+    FormItemComponent: ProFormCascader,
+    [$deletePropsList]: deletePropsList,
+  };
+}
+useHandleBasicsComponent.order = 2;

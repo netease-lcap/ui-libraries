@@ -27,7 +27,7 @@ export const CheckboxGroup = registerComponet<
   CheckboxProps,
   ProFormCheckboxGroupProps
 >(
-  ProFormCheckbox.Group,
+  AntdCheckbox.Group,
   { plugin: groupPlugin, displayName: 'CheckboxGroup', mapProps },
 );
 // export const CheckboxGroup = AntdCheckbox.Group;

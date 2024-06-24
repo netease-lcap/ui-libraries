@@ -2,7 +2,6 @@ import React from 'react';
 import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@lcap/validator';
 import classnames from 'classnames';
-import styles from '../index.module.less';
 import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
 
 import { COLPROPSFIELDS } from '@/components/Row/constants';
@@ -10,6 +9,8 @@ import FormContext from '../form-context';
 import { $deletePropsList } from '@/plugins/constants';
 
 export function useHandleRule(props) {
+  const { isForm } = React.useContext(FormContext);
+  if (!isForm) return {};
   const rules = props.get('rules');
   return {
     rules: _.map(rules, (item) => {
@@ -28,8 +29,9 @@ export function useHandleRule(props) {
   };
 }
 export function useHandleDefaultValue(props) {
-  const { form } = React.useContext(FormContext);
+  const { isForm, form } = React.useContext(FormContext);
   React.useEffect(() => {
+    if (!isForm) return;
     const symbolName = Symbol('name');
     const name = props.get('name', symbolName);
     const defaultValue = props.get('defaultValue');
@@ -39,6 +41,7 @@ export function useHandleDefaultValue(props) {
 useHandleDefaultValue.order = 5;
 export function useHandleFormWarplabel(props) {
   const { width: widthContext, isForm, colSpan } = React.useContext(FormContext);
+  if (!isForm) return {};
   const deletePropsList = props.get($deletePropsList).concat('labelIsSlot', 'labelText');
   const labelIsSlot = props.get('labelIsSlot');
   const labelProps = props.get('label');
@@ -59,29 +62,33 @@ export function useHandleFormWarplabel(props) {
   };
 }
 export function useHandleFormItemProps(props) {
-  const BaseComponent = props.get('render');
+  const FormItemComponent = props.get('FormItemComponent', () => (<div />));
+  const BasicsComponent = props.get('BasicsComponent', () => (<div />));
   const { isForm } = React.useContext(FormContext);
-  const render = React.useCallback(React.forwardRef((selfProps, ref) => {
+  const renderInForm = React.useCallback(React.forwardRef((selfProps: any, ref) => {
     const formItemProps = _.pick(selfProps, FORMITEMPROPSFIELDS);
     const colProps = _.pick(selfProps, COLPROPSFIELDS);
-
     const fieldProps = {
-      ..._.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS]),
+      ..._.omit(selfProps, [...FORMITEMPROPSFIELDS, ...COLPROPSFIELDS, 'BasicsComponent']),
       className: classnames('cw-nasl', selfProps.className),
       popupClassName: 'cw-nasl',
       ref,
     };
     return (
-      <BaseComponent {...{
+      <FormItemComponent {...{
         ...formItemProps,
         fieldProps,
         colProps,
-        ...(isForm ? {} : { width: 256 }),
       }}
       />
     );
-  }), [BaseComponent]);
-  return {
-    render,
-  };
+  }), [FormItemComponent]);
+  const renderNotInForm = React.useCallback(React.forwardRef((selfProps: any, ref) => {
+    return (
+      <BasicsComponent {..._.omit(selfProps, 'BasicsComponent')} ref={ref} />
+    );
+  }), [BasicsComponent]);
+  console.log(isForm, 'form');
+  if (isForm) return { render: renderInForm };
+  return { render: renderNotInForm };
 }

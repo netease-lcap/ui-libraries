@@ -164,10 +164,10 @@ export const 默认1 = {
           }}
         >
           <Input labelText="表单输入框" name="name" />
-          <Select labelText="表单选择器" name="age" />
-          <TextArea labelText="表单多行输入" />
-          <DatePicker labelText="表单日期选择" name="time2" showTime />
-          <DateRangePicker
+          {/* <Select labelText="表单选择器" name="age" /> */}
+          {/* <TextArea labelText="表单多行输入" /> */}
+          {/* <DatePicker labelText="表单日期选择" name="time2" showTime /> */}
+          {/* <DateRangePicker
             labelText="表单日期范围选择"
             startName="startTime"
             endName="endTime"
@@ -176,7 +176,7 @@ export const 默认1 = {
           />
           <ProFormDateRangePicker name="time3" />
           <TimeRangePicker startName="time3" endName="time4" />
-          <TimePicker name="meTime" />
+          <TimePicker name="meTime" /> */}
         </Form>
       </div>
     );

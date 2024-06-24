@@ -1,8 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 import classnames from 'classnames';
-import { Icon, Col, FormItem } from '@/index';
-
+import { Input } from 'antd';
+import { ProForm, ProFormText } from '@ant-design/pro-components';
+import { Icon } from '@/index';
+import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
 
 export function useHandleRef(props) {
@@ -15,6 +17,15 @@ export function useHandleRef(props) {
   return _.isFunction(onChangeProps) ? result : {};
 }
 useHandleRef.order = 1;
+
+export function useHandleBasicsComponent(props) {
+  const deletePropsList = props.get($deletePropsList, []).concat(['FormItemComponent']);
+  return {
+    FormItemComponent: ProFormText,
+    [$deletePropsList]: deletePropsList,
+  };
+}
+useHandleBasicsComponent.order = 2;
 
 export function useHandlePrefix(props) {
   const prefixProps = props.get('prefix');

@@ -285,7 +285,7 @@ namespace nasl.ui {
     description: '选择项',
   })
   export class SelectOption<T, V> extends ViewComponent {
-    constructor(options?: Partial<ListItemOptions<T, V>>) {
+    constructor(options?: Partial<SelectOptionOptions<T, V>>) {
       super();
     }
   }
