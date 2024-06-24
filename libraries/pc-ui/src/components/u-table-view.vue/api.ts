@@ -1304,7 +1304,8 @@ namespace nasl.ui {
           title: '展开列内容',
           description: '展开列的内容',
       })
-      slotExpandContent: (current: Current<T>) => Array<ViewComponent>;
+      'slot-expand-content': (current: Current<T>) => Array<ViewComponent>;
+      slotExpandContent: (current: Current<T>) => Array<ViewComponent>; // 防止 ide 编译报错
 
       @Slot({
           title: '展开列图标',
