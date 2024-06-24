@@ -241,7 +241,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '选项',
-          code: '<SelectOption><Text children="选项"></Text></SelectOption>',
+          code: '<SelectOption label="2"></SelectOption>',
         },
         // {
         //   title: '分组',
@@ -285,7 +285,7 @@ namespace nasl.ui {
     description: '选择项',
   })
   export class SelectOption<T, V> extends ViewComponent {
-    constructor(options?: Partial<ListItemOptions<T, V>>) {
+    constructor(options?: Partial<SelectOptionOptions<T, V>>) {
       super();
     }
   }
