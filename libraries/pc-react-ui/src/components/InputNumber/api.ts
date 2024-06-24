@@ -8,7 +8,7 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class InputNumber extends ViewComponent {
-    constructor(options?: Partial<InputNumberOptions>) {
+    constructor(options?: Partial<InputNumberOptions & FormItemOptions>) {
       super();
     }
   }
@@ -16,7 +16,8 @@ namespace nasl.ui {
   export class InputNumberOptions extends ViewComponentOptions {
     @Prop({
       title: '格式化',
-      description: '格式化字符串，具体参见示例。也可以传入一个包含`get`和`set`方法的格式化对象。',
+      description:
+        '格式化字符串，具体参见示例。也可以传入一个包含`get`和`set`方法的格式化对象。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '千分位' }, { title: '百分号' }],
@@ -61,11 +62,13 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '精度',
-      description: '限制数字输入要保留的最小精度单位，默认不限制精度，如需保留两位小数，则填入0.01',
-      docDescription: '限制数字要保留的最小单位，整数、小数均可，如需要保留两位小数，则填入0.01。',
+      description:
+        '限制数字输入要保留的最小精度单位，默认不限制精度，如需保留两位小数，则填入0.01',
+      docDescription:
+        '限制数字要保留的最小单位，整数、小数均可，如需要保留两位小数，则填入0.01。',
       setter: {
         concept: 'NumberInputSetter',
-        max:14
+        max: 14,
       },
     })
     precision: nasl.core.Decimal = 1;
@@ -259,7 +262,12 @@ namespace nasl.ui {
       title: '改变后',
       description: '值变化时触发（与原生事件不同）',
     })
-    onChange: (event: { value: nasl.core.Decimal; oldValue: nasl.core.Decimal; formattedValue: nasl.core.String; valid: nasl.core.Boolean }) => any;
+    onChange: (event: {
+      value: nasl.core.Decimal;
+      oldValue: nasl.core.Decimal;
+      formattedValue: nasl.core.String;
+      valid: nasl.core.Boolean;
+    }) => any;
 
     @Event({
       title: '聚焦后',
