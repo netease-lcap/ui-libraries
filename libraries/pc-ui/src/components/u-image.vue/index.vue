@@ -195,6 +195,12 @@ export default {
         this.loadImage();
         this.loadPlaceholderImage();
     },
+    beforeDestroy() {
+      if (this.loadImgTimer) {
+        this.loadImgTimer();
+        this.loadImgTimer = null;
+      }
+    },
     methods: {
         loadImage() {
             this.ready = false;
