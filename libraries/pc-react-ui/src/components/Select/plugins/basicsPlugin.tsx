@@ -16,12 +16,12 @@ export function useHandleStyle(props) {
   };
 }
 
-export function useHandleBasicsComponent(props) {
+export function useHandleFormItemComponent(props) {
   return {
     FormItemComponent: ProFormSelect,
   };
 }
-useHandleBasicsComponent.order = 2;
+useHandleFormItemComponent.order = 2;
 
 export function useHandleChildren(props) {
   const childrenProps = props.get('children');

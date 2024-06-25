@@ -1,10 +1,8 @@
 import classnames from 'classnames';
-import dayjs from 'dayjs';
 import { useControllableValue } from 'ahooks';
-import React from 'react';
 import _ from 'lodash';
 import locale from 'antd/lib/date-picker/locale/zh_CN';
-import { TimePicker } from 'antd';
+import { ProFormTimePicker } from '@ant-design/pro-components';
 import style from '../index.module.less';
 import 'dayjs/locale/zh-cn';
 
@@ -33,9 +31,9 @@ export function useHandleStyle(props) {
   };
 }
 
-export function useHandleBasicsComponent() {
+export function useHandleFormItemComponent() {
   return {
-    BasicsComponent: TimePicker,
+    FormItemComponent: ProFormTimePicker,
   };
 }
-useHandleBasicsComponent.order = 2;
+useHandleFormItemComponent.order = 2;

@@ -1,19 +1,12 @@
-import React from 'react';
-import _ from 'lodash';
-import { Switch } from 'antd';
-import { Col, FormItem } from '@/index';
-import FormContext from '@/components/Form/form-context';
-import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
-import { COLPROPSFIELDS } from '@/components/Row/constants';
-import { $deletePropsList } from '@/plugins/constants';
+import { ProFormSwitch } from '@ant-design/pro-components';
 
 export function useHandle(props) {
 
 }
 
-export function useHandleBasicsComponent() {
+export function useHandleFormItemComponent() {
   return {
-    BasicsComponent: Switch,
+    FormItemComponent: ProFormSwitch,
   };
 }
-useHandleBasicsComponent.order = 2;
+useHandleFormItemComponent.order = 2;

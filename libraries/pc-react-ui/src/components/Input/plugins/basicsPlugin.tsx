@@ -18,14 +18,12 @@ export function useHandleRef(props) {
 }
 useHandleRef.order = 1;
 
-export function useHandleBasicsComponent(props) {
-  const deletePropsList = props.get($deletePropsList, []).concat(['FormItemComponent']);
+export function useHandleFormItemComponent(props) {
   return {
     FormItemComponent: ProFormText,
-    [$deletePropsList]: deletePropsList,
   };
 }
-useHandleBasicsComponent.order = 2;
+useHandleFormItemComponent.order = 2;
 
 export function useHandlePrefix(props) {
   const prefixProps = props.get('prefix');

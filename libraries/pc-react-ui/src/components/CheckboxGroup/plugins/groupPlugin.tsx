@@ -23,14 +23,12 @@ export function useHandleRef(props) {
 }
 useHandleRef.order = 1;
 
-export function useHandleBasicsComponent(props) {
-  const deletePropsList = props.get($deletePropsList, []).concat(['FormItemComponent']);
+export function useHandleFormItemComponent(props) {
   return {
-    [$deletePropsList]: deletePropsList,
     FormItemComponent: ProFormCheckbox.Group,
   };
 }
-useHandleBasicsComponent.order = 2;
+useHandleFormItemComponent.order = 2;
 
 export function useHandleDataSource(props) {
   const dataSourceProps = props.get('dataSource');

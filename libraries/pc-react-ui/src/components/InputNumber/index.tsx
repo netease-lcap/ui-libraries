@@ -1,7 +1,7 @@
 import { InputNumber as AntdInputNumber } from 'antd';
 import type { InputNumberProps as AntdInputNumberProps } from 'antd';
 import * as basicsPlugin from './plugins/index';
-import type { pluginType } from '@/plugins/type';
+// import type { pluginType } from '@/plugins/type';
 import { registerComponet } from '../../plugins/index';
 
 import './index.module.less';
@@ -12,7 +12,7 @@ const mapProps = {
   // mySize: 'size',
 };
 
-export const InputNumber = registerComponet<InputNumberProps, pluginType<InputNumberProps>>(
+export const InputNumber = registerComponet<InputNumberProps, InputNumberProps>(
   AntdInputNumber,
   { plugin: basicsPlugin, displayName: 'InputNumber', mapProps },
 

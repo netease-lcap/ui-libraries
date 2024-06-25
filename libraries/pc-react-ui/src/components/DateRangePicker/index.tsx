@@ -18,7 +18,7 @@ const mapProps = {
 
 export const DateRangePicker = registerComponet<
   RangePickerProps,
-  pluginType<RangePickerProps>
+  RangePickerProps
 >(
   AntdRangePicker,
   { plugin, displayName: AntdRangePicker.displayName, mapProps },

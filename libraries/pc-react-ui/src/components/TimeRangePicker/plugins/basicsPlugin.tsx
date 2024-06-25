@@ -4,29 +4,27 @@ import React from 'react';
 import dayjs from 'dayjs';
 import { useControllableValue } from 'ahooks';
 import locale from 'antd/lib/date-picker/locale/zh_CN';
-import { TimePicker } from 'antd';
+import {
+  ProFormTimePicker,
+} from '@ant-design/pro-components';
 import FormContext from '@/components/Form/form-context';
-import { Col, FormItem } from '@/index';
-import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
-import { COLPROPSFIELDS } from '@/components/Row/constants';
-import { $deletePropsList } from '@/plugins/constants';
 
 import style from '../index.module.less';
 import 'dayjs/locale/zh-cn';
 
-const { RangePicker } = TimePicker;
+const ProFormDateTimeRangePicker = ProFormTimePicker.RangePicker;
 
 export function useHandleLocale() {
   return {
     locale,
   };
 }
-export function useHandleBasicsComponent() {
+export function useHandleFormItemComponent() {
   return {
-    BasicsComponent: RangePicker,
+    FormItemComponent: ProFormDateTimeRangePicker,
   };
 }
-useHandleBasicsComponent.order = 2;
+useHandleFormItemComponent.order = 2;
 
 export function useHandleTimeOrder(props) {
   const { isForm } = React.useContext(FormContext);

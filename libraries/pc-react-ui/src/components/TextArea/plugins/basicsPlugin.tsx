@@ -1,10 +1,9 @@
 import _ from 'lodash';
 import React from 'react';
 import classnames from 'classnames';
-import { Input } from 'antd';
+import { ProFormTextArea } from '@ant-design/pro-components';
 import style from '../index.module.less';
 
-const { TextArea } = Input;
 export function useHandleRef(props) {
   const onChangeProps = props.get('onChange');
   const result = {
@@ -28,9 +27,9 @@ export function useHandleThemeStyle(props) {
   };
 }
 
-export function useHandleBasicsComponent() {
+export function useHandleFormItemComponent() {
   return {
-    BasicsComponent: TextArea,
+    FormItemComponent: ProFormTextArea,
   };
 }
-useHandleBasicsComponent.order = 2;
+useHandleFormItemComponent.order = 2;

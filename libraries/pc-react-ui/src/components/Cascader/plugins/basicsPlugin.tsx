@@ -2,8 +2,8 @@ import classnames from 'classnames';
 import _ from 'lodash';
 import React from 'react';
 import { useControllableValue } from 'ahooks';
-import { Cascader as AntCascader, CascaderProps } from 'antd';
-import { ProFormCascader, ProFormCaptchaProps } from '@ant-design/pro-components';
+// import { Cascader as AntCascader, CascaderProps } from 'antd';
+import { ProFormCascader } from '@ant-design/pro-components';
 
 import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
@@ -56,11 +56,9 @@ export function useHandleDataSource(props) {
   };
 }
 
-export function useHandleBasicsComponent(props) {
-  const deletePropsList = props.get($deletePropsList, []).concat(['FormItemComponent']);
+export function useHandleFormItemComponent(props) {
   return {
     FormItemComponent: ProFormCascader,
-    [$deletePropsList]: deletePropsList,
   };
 }
-useHandleBasicsComponent.order = 2;
+useHandleFormItemComponent.order = 2;

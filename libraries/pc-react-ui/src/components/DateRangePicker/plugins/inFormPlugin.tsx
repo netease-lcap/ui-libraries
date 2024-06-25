@@ -1,6 +1,8 @@
 import React from 'react';
 import { ProFormDateTimeRangePicker } from '@ant-design/pro-components';
-import FormContext from '@/components/Form/form-context';
+// import FormContext from '@/components/Form/form-context';
+// import FormContext from '@/components/Form/form-context';
+import FormContext from '../../Form/form-context';
 
 export function useHandleName(props) {
   const { isForm } = React.useContext(FormContext);
@@ -22,9 +24,9 @@ export function useHandleName(props) {
     name: startName + endName,
   };
 }
-export function useHandleBasicsComponent(props) {
+export function useHandleFormItemComponent(props) {
   return {
-    BasicsComponent: ProFormDateTimeRangePicker,
+    FormItemComponent: ProFormDateTimeRangePicker,
   };
 }
-useHandleBasicsComponent.order = 2;
+useHandleFormItemComponent.order = 2;

@@ -30,9 +30,9 @@ export function useHandleStyle(props) {
   };
 }
 
-export function useHandleBasicsComponent(props) {
+export function useHandleFormItemComponent(props) {
   return {
-    BasicsComponent: ProFormDigit,
+    FormItemComponent: ProFormDigit,
   };
 }
-useHandleBasicsComponent.order = 2;
+useHandleFormItemComponent.order = 2;

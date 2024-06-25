@@ -5,6 +5,7 @@ import { useControllableValue } from 'ahooks';
 import React from 'react';
 import _ from 'lodash';
 import { Radio as AntdRadio } from 'antd';
+import { ProFormRadio } from '@ant-design/pro-components';
 import { $deletePropsList } from '@/plugins/constants';
 // import FormContext from '@/components/Form/form-context';
 // import { Col, FormItem, Radio } from '@/index';
@@ -15,12 +16,12 @@ import {
 } from '@/plugins/common/dataSource';
 
 const { Group: AntRadioGroup } = AntdRadio;
-export function useHandleBasicsComponent() {
+export function useHandleFormItemComponent() {
   return {
-    BasicsComponent: AntRadioGroup,
+    FormItemComponent: ProFormRadio.Group,
   };
 }
-useHandleBasicsComponent.order = 2;
+useHandleFormItemComponent.order = 2;
 
 export function useHandleValue(props) {
   const onChangeProps = props.get('onChange');

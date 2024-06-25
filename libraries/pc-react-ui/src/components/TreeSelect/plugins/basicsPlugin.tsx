@@ -3,6 +3,7 @@ import React from 'react';
 import _ from 'lodash';
 import { useControllableValue } from 'ahooks';
 import { TreeSelect } from 'antd';
+import { ProFormTreeSelect } from '@ant-design/pro-components';
 import { $deletePropsList } from '@/plugins/constants';
 import FormContext from '@/components/Form/form-context';
 import {
@@ -66,9 +67,9 @@ export function useHandleControllableValue(props) {
 
   };
 }
-export function useHandleBasicsComponent() {
+export function useHandleFormItemComponent() {
   return {
-    BasicsComponent: TreeSelect,
+    FormItemComponent: ProFormTreeSelect,
   };
 }
-useHandleBasicsComponent.order = 2;
+useHandleFormItemComponent.order = 2;
