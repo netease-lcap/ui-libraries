@@ -17,7 +17,13 @@ export default {
         };
     },
     mounted() {
-        this.$refs.root.addEventListener('scroll', throttle(this.handleScroll.bind(this), 200));
+        this._handleScroll = throttle(this.handleScroll.bind(this), 200);
+        this.$refs.root.addEventListener('scroll', this._handleScroll);
+    },
+    beforeDestroy() {
+        if (this.$refs.root && this._handleScroll) {
+            this.$refs.root.removeEventListener('scroll', this._handleScroll);
+        }
     },
     methods: {
         handleScroll(e) {
