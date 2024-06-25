@@ -54,6 +54,19 @@ namespace nasl.ui {
             description: '清除缓存，重新加载',
         })
         reload(): void {}
+
+        @Method({
+          title: '带页码刷新',
+          description: '保持页码，重新加载',
+        })
+        loadTo(
+          @Param({
+              title: '页数',
+              description: '要刷新的页数',
+          })
+          page?: nasl.core.Integer,
+        ): void {}
+
         constructor(options?: Partial<UGridViewOptions<T, V, P, M, C>>) { super(); }
     }
 

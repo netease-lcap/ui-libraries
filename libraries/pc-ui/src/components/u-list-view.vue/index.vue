@@ -110,7 +110,7 @@ export default {
           return this.currentDataSource && this.currentDataSource.total ? this.currentDataSource.total : 0;
         },
         size() {
-          return this.currentDataSource && this.currentDataSource.size ? this.currentDataSource.paging.size : this.pageSize;
+          return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.size : this.pageSize;
         },
         page() {
           return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : this.pageNumber;
@@ -673,6 +673,23 @@ export default {
             this.currentPageSize = event.pageSize;
             const currentDataSource = this.currentDataSource;
             this.page(currentDataSource.paging ? currentDataSource.paging.number : this.pageNumber, event.pageSize);
+        },
+        loadTo(page) {
+            const dataSource = this.currentDataSource;
+            if (!(dataSource && dataSource.paging))
+                return;
+            if(dataSource._load && typeof dataSource._load === 'function') {
+                dataSource.clearLocalData();
+            }
+            let currentPage = page;
+            if(['', null, undefined].includes(page)) {
+                currentPage = dataSource.paging.number;
+            }
+            if(currentPage === dataSource.paging.number) {
+                this.load(false, { number: currentPage });
+            } else {
+                dataSource.paging.number = page;
+            }
         },
     },
 };

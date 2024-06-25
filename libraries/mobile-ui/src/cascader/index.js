@@ -29,7 +29,7 @@ export default createComponent({
   ],
 
   props: {
-    readonly: Boolean,
+    readonly: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
     title: String,
     value: [Number, String],
