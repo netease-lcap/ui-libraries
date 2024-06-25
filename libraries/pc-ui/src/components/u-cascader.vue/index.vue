@@ -353,7 +353,7 @@ export default {
             return combinedText;
         },
         // mpopper打开时，根据value值展开mpopper框内部组件
-        getSubComponents(opened) {
+        getSubComponents(opened = false) {
             this.currentOpened = opened;
             if (this.isInput)
                 return;
