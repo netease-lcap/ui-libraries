@@ -200,6 +200,10 @@ export default {
         this.loadImgTimer();
         this.loadImgTimer = null;
       }
+      if (this.placeholderLoadingTimer) {
+        this.placeholderLoadingTimer();
+        this.placeholderLoadingTimer = null;
+      }
     },
     methods: {
         loadImage() {
