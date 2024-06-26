@@ -310,15 +310,7 @@ namespace nasl.ui {
       title: '选项变化时',
       description: '选项变化时',
     })
-    onChange: (event: {
-      selected: nasl.core.Boolean;
-      item: nasl.core.String;
-      oldItem: nasl.core.String;
-      value: nasl.core.String;
-      oldValue: nasl.core.String;
-      items: nasl.collection.List<nasl.core.String>;
-      oldItems: nasl.collection.List<nasl.core.String>;
-    }) => any;
+    onChange: (event: any) => any;
 
     @Slot({
       title: 'undefined',
