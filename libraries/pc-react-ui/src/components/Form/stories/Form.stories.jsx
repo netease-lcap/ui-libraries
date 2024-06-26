@@ -65,72 +65,19 @@ export const 默认 = {
       return <div />;
     }
     return (
-      <Form
-        ref={ref}
-        data-nodepath="rootview.0.1.0.1.0.0.0.1"
-        ide-iscontainer="true"
-        submitter={false}
-        key="component-8"
-      >
-        <FormItem
-          data-nodepath="rootview.0.1.0.1.0.0.0.1.0"
-          ide-iscontainer="true"
-          name="userName"
-          rules="[{validate: 'filled',message: `表单项不得为空`,trigger: 'input+blur',required: true}]"
-          key="component-9"
-          label={(() => (
-            <div
-              ide-draggable="false"
-              data-nodepath="rootview.0.1.0.1.0.0.0.1.0.0"
-            >
-              <Text
-                data-nodepath="rootview.0.1.0.1.0.0.0.1.0.0.0"
-                children="用户
-"
-                key="component-11"
-                data-editable="true"
-              />
-            </div>
-          ))()}
-        >
-          <Input
-            data-nodepath="rootview.0.1.0.1.0.0.0.1.0.1"
-            data-has-mutation="true"
-            placeholder="请输入账号"
-            type="text"
-            key="component-10"
-            style={{ height: '35px' }}
-          />
-        </FormItem>
-        <FormItem
-          data-nodepath="rootview.0.1.0.1.0.0.0.1.1"
-          ide-iscontainer="true"
-          name="passWord"
-          rules="[{validate: 'filled',message: `表单项不得为空`,trigger: 'input+blur',required: true}]"
-          key="component-12"
-          label={(() => (
-            <div
-              ide-draggable="false"
-              data-nodepath="rootview.0.1.0.1.0.0.0.1.1.0"
-            >
-              <Text
-                data-nodepath="rootview.0.1.0.1.0.0.0.1.1.0.0"
-                children="密码"
-                key="component-14"
-                data-editable="true"
-              />
-            </div>
-          ))()}
-        >
-          <Input
-            data-nodepath="rootview.0.1.0.1.0.0.0.1.1.1"
-            data-has-mutation="true"
-            placeholder="请输入密码"
-            type="password"
-            key="component-13"
-            style={{ height: '35px' }}
-          />
-        </FormItem>
+      <Form labelWidth="140" submitter>
+        <DatePicker
+          labelText="表单日期选择"
+          rules={[
+            {
+              validate: 'required',
+              message: '表单项不得为空',
+              trigger: 'input+blur',
+              required: true,
+            },
+          ]}
+          name="mytime"
+        />
       </Form>
     );
   },

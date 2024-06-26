@@ -159,6 +159,7 @@ export const 异步 = {
       },
       {
         title: '年龄',
+        sorter: true,
         dataIndex: 'age',
         key: 'age',
       },

@@ -34,6 +34,11 @@ namespace nasl.ui {
     })
     order: nasl.core.String;
 
+    @Prop({
+      title: '排序字段',
+    })
+    sort: nasl.core.String;
+
     @Method({
       title: 'undefined',
       description: '清除缓存，重新加载',
@@ -1172,7 +1177,7 @@ namespace nasl.ui {
         options: [{ title: '左侧' }, { title: '右侧' }, { title: '不固定' }],
       },
     })
-    fixed: 'left' | 'right' | false;
+    fixed: 'left' | 'right' | nasl.core.Boolean;
 
     // @Prop({
     //   group: '主要属性',
