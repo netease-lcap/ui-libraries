@@ -271,13 +271,13 @@ namespace nasl.ui {
       title: '选择后',
       description: '选择某一项后触发。单选模式中：',
     })
-    onSelect: (event: { value: V; items: nasl.collection.List<T> }) => void;
+    onSelect: (event: V) => void;
 
     @Event({
       title: '选中 option或输入变化时',
       description: '选中 option，或 input 的 value 变化时，调用此函数	',
     })
-    onChange: (event: { value: V; items: nasl.collection.List<T> }) => void;
+    onChange: (event: V) => void;
   }
 
   @Component({

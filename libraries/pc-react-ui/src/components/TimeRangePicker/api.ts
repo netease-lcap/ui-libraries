@@ -412,10 +412,7 @@ namespace nasl.ui {
       title: '改变后',
       description: '时间改变时触发',
     })
-    onChange: (event: {
-      date: nasl.core.String;
-      time: nasl.core.String;
-    }) => any;
+    onChange: (event: nasl.core.String) => any;
 
     // @Event({
     //   title: '失去焦点',
