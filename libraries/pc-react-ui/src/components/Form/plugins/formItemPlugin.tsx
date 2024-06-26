@@ -19,6 +19,7 @@ export function useHandleRule(props) {
         validateTrigger: ['onChange', 'onBlur'],
         ...item,
         validator: (rule, value) => {
+          console.log(value, '===');
           const validator = new VusionValidator(undefined, localizeRules, [rule]);
           return validator.validate(value);
         },
