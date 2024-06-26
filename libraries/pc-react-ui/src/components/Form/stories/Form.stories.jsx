@@ -13,6 +13,7 @@ import {
   Input,
   Button,
   Form,
+  RadioGroup,
   FormItem,
   Text,
   TextArea,
@@ -70,6 +71,15 @@ export const 默认 = {
         <Input labelText="表单输入框" name="name" />
         <InputNumber labelText="表单数字输入" name="number" />
         <Select labelText="表单选择器" name="age" />
+        <Cascader labelText="表单级联选择器" />
+        <RadioGroup
+          labelText="表单单选"
+          dataSource={['苹果', '香蕉', '橘子']}
+        />
+        <CheckboxGroup
+          labelText="表单多选"
+          dataSource={['苹果', '香蕉', '橘子']}
+        />
         <Switch labelText="表单开关" name="switch" />
         <TreeSelect labelText="表单树选择器" name="tree" />
         <TextArea labelText="表单多行输入" />

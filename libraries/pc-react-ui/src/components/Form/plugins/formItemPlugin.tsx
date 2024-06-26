@@ -63,7 +63,6 @@ export function useHandleFormWarplabel(props) {
 }
 export function useHandleFormItemProps(props) {
   const FormItemComponent = props.get('FormItemComponent');
-  const BasicsComponent = props.get('BasicsComponent', () => (<div />));
   const { isForm } = React.useContext(FormContext);
   const deletePropsList = props.get($deletePropsList, []).concat(['FormItemComponent']);
   const renderInForm = React.useCallback(React.forwardRef((selfProps: any, ref) => {
@@ -85,8 +84,6 @@ export function useHandleFormItemProps(props) {
     );
   }), [FormItemComponent]);
 
-  const render = isForm ? renderInForm : BasicsComponent;
-  console.log(isForm, 'isForm');
   return {
     [$deletePropsList]: deletePropsList,
     ...(isForm ? { render: renderInForm } : {}),
