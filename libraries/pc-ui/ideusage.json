@@ -357,7 +357,11 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "'u-carousel-item' === target.tag"
+            "childAccept": "'u-carousel-item' === target.tag",
+            "elementSutando": {
+                "condition": "!this.getAttribute('dataSource') && !this.filterElement((el) => el.tag!== 'template').length > 0",
+                "component": "UCarouselDesigner"
+            }
         }
     },
     {

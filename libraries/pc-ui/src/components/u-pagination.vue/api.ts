@@ -208,22 +208,22 @@ namespace nasl.ui {
             pageSizeOptions: nasl.collection.List<nasl.core.Integer>;
         }) => any;
 
-        @Slot({
-            title: '总数',
-            description: '总数自定义',
-        })
-        slotTotal: () => nasl.collection.List<ViewComponent>;
+        // @Slot({
+        //     title: '总数',
+        //     description: '总数自定义',
+        // })
+        // slotTotal: () => nasl.collection.List<ViewComponent>;
 
-        @Slot({
-            title: '上一页',
-            description: '上一页自定义',
-        })
-        slotPrev: () => nasl.collection.List<ViewComponent>;
+        // @Slot({
+        //     title: '上一页',
+        //     description: '上一页自定义',
+        // })
+        // slotPrev: () => nasl.collection.List<ViewComponent>;
 
-        @Slot({
-            title: '下一页',
-            description: '下一页自定义',
-        })
-        slotNext: () => nasl.collection.List<ViewComponent>;
+        // @Slot({
+        //     title: '下一页',
+        //     description: '下一页自定义',
+        // })
+        // slotNext: () => nasl.collection.List<ViewComponent>;
     }
 }

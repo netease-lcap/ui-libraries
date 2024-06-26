@@ -687,11 +687,11 @@ namespace nasl.ui {
         })
         slotTitle: () => Array<ViewComponent>;
 
-        @Slot({
-            title: 'undefined',
-            description: '在右侧可以附加内容。',
-        })
-        slotExtra: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: 'undefined',
+        //     description: '在右侧可以附加内容。',
+        // })
+        // slotExtra: () => Array<ViewComponent>;
     }
 
     @Component({
