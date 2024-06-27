@@ -37,7 +37,7 @@ namespace nasl.ui {
     @Prop({
       title: '排序字段',
     })
-    sort: nasl.core.String;
+    sorter: nasl.core.String;
 
     @Method({
       title: 'undefined',
