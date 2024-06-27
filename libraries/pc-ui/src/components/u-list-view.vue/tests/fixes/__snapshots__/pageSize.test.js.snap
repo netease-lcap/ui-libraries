@@ -24,7 +24,7 @@ exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 1`] = `
         <div class="root" index="2" vusion-slot-name="item">
           C#12
         </div>
-        <div class="root" index="3" vusion-slot-name="item">
+        <div class="root" index="3" selected="selected" vusion-slot-name="item">
           C++12
         </div>
         <div class="root" index="4" vusion-slot-name="item">
@@ -229,7 +229,7 @@ exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 2`] = `
         <div class="root" index="2" vusion-slot-name="item">
           C#12
         </div>
-        <div class="root" index="3" vusion-slot-name="item">
+        <div class="root" index="3" selected="selected" vusion-slot-name="item">
           C++12
         </div>
         <div class="root" index="4" vusion-slot-name="item">

@@ -8,7 +8,25 @@ namespace nasl.ui {
         group: 'Navigation'
     })
     export class UDropdown<T, V> extends ViewComponent {
+        @Prop({
+          title: '数据',
+        })
+        data: nasl.collection.List<T>;
 
+        @Prop({
+          title: '选中值'
+        })
+        value: UDropdownOptions<T, V>['value'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '已打开',
+        })
+        opened: nasl.core.Boolean;
         constructor(options?: Partial<UDropdownOptions<T, V>>) { super(); }
     }
 
@@ -166,6 +184,7 @@ namespace nasl.ui {
             sync: true,
             docDescription: '当前选择的值，值仅在不适用路由下支持编辑',
             if: _ => _.router === false,
+            settable: true,
         })
         value: V;
 
@@ -177,6 +196,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -187,6 +207,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         opened: nasl.core.Boolean = false;
 
@@ -204,7 +225,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UDropdownGroup | UDropdownItem>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: '标题',
@@ -285,6 +306,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -359,6 +381,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -376,7 +399,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UDropdownGroup | UDropdownItem>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: '标题',

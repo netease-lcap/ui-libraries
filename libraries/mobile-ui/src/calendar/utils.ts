@@ -7,12 +7,27 @@ const [createComponent, bem, t] = createNamespace('calendar');
 export { createComponent, bem, t };
 
 export function formatMonthTitle(date: Date) {
-  const format = t('monthTitle');
+  const year = t('year');
 
-  return _template(format, {
+  const keysMap = {
+    1: 'January',
+    2: 'February',
+    3: 'March',
+    4: 'April',
+    5: 'May',
+    6: 'June',
+    7: 'July',
+    8: 'August',
+    9: 'September',
+    10: 'October',
+    11: 'November',
+    12: 'December',
+  };
+
+  return _template(`{year}${year}{month}`, {
     year: date.getFullYear(),
-    month: date.getMonth() + 1,
-  })
+    month: t(keysMap[date.getMonth() + 1]),
+  });
 }
 
 export function compareMonth(date1: Date, date2: Date) {
@@ -86,12 +101,12 @@ export function transErrorDate(date: any, type: any) {
   const calendarMax = new Date(now.getFullYear(), now.getMonth() + 6, now.getDate());
   let fDate;
   fDate = new Date(date);
-  if(isDate(fDate)) {
+  if (isDate(fDate)) {
   } else {
-    if(type === 'min') {
+    if (type === 'min') {
       fDate = calendarMin;
     }
-    if(type === 'max') {
+    if (type === 'max') {
       fDate = calendarMax;
     }
   }

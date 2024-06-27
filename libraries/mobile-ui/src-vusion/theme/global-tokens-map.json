@@ -1,0 +1,66 @@
+{
+  "--van-brand-primary": {
+    "title": "主色",
+    "type": "color"
+  },
+  "--van-brand-success": {
+    "title": "成功色",
+    "type": "color"
+  },
+  "--van-brand-warning": {
+    "title": "警告色",
+    "type": "color"
+  },
+  "--van-brand-error": {
+    "title": "错误色",
+    "type": "color"
+  },
+  "--van-brand-disabled": {
+    "title": "禁用色",
+    "type": "color"
+  },
+  "--van-component-background-color": {
+    "title": "背景色",
+    "type": "color"
+  },
+  "--van-border-color": {
+    "title": "边框色",
+    "type": "color"
+  },
+  "--van-component-text-color": {
+    "title": "文本色",
+    "type": "color"
+  },
+  "--link-color": {
+    "title": "链接色",
+    "type": "color"
+  },
+  "--van-space-shrink": {
+    "title": "收缩间距",
+    "type": "size"
+  },
+  "--van-space-small": {
+    "title": "小间距",
+    "type": "size"
+  },
+  "--van-space-base": {
+    "title": "中等间距",
+    "type": "size"
+  },
+  "--van-space-large": {
+    "title": "大间距",
+    "type": "size"
+  },
+  "--van-base-font-family": {
+    "title": "基础字体",
+    "type": "fontFamily"
+  },
+  "--van-font-size-sm": {
+    "title": "基础字体大小",
+    "type": "size"
+  },
+  "--van-border-radius-md": {
+    "title": "圆角",
+    "type": "size"
+  }
+}

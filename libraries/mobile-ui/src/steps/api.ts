@@ -8,6 +8,54 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanSteps<T> extends ViewComponent {
+    @Prop({
+      title: '当前步骤',
+    })
+    value: VanStepsOptions<T>['value'] = 0;
+
+    @Prop({
+      title: '数据',
+    })
+    data: nasl.collection.List<T>;
+
+    @Prop({
+      title: '第一步'
+    })
+    isFirst: nasl.core.Boolean;
+
+    @Prop({
+      title: '最后一步'
+    })
+    isLast: nasl.core.Boolean;
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
+    @Method({
+      title: '上一步',
+      description: '上一步'
+    })
+    prev(): void {}
+
+    @Method({
+      title: '下一步',
+      description: '下一步'
+    })
+    next(): void {}
+
+    @Method({
+      title: '重载数据',
+      description: '重新加载数据',
+    })
+    reload(): void {}
+
     constructor(options?: Partial<VanStepsOptions<T>>) {
       super();
     }
@@ -35,7 +83,8 @@ namespace nasl.ui {
         concept: "NumberInputSetter",
         precision: 0,
         min: 0
-      }
+      },
+      settable: true,
     })
     value: nasl.core.Integer = 0;
     @Prop({
@@ -58,7 +107,8 @@ namespace nasl.ui {
       description: '正常显示，但禁止选择/输入',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     readonly: nasl.core.Boolean = false;
     @Prop({
@@ -67,7 +117,8 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Event({
@@ -84,7 +135,7 @@ namespace nasl.ui {
         code: '<van-step>stepn</van-step>'
       }]
     })
-    slotDefault: () => Array<VanStep>;
+    slotDefault: () => Array<ViewComponent>;
     @Slot({
       title: 'undefined',
       description: '自定义选项的结构和样式'
@@ -96,6 +147,21 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanStep extends ViewComponent {
+    @Prop({
+      title: '状态',
+    })
+    status: 'wait' | 'process' | 'finish' | 'error';
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
     constructor(options?: Partial<VanStepOptions>) {
       super();
     }
@@ -116,7 +182,8 @@ namespace nasl.ui {
         }, {
           title: '错误'
         }]
-      }
+      },
+      settable: true,
     })
     status: 'wait' | 'process' | 'finish' | 'error';
     @Prop({
@@ -134,7 +201,8 @@ namespace nasl.ui {
       description: '正常显示，但禁止选择/输入',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     readonly: nasl.core.Boolean = false;
     @Prop({
@@ -143,7 +211,8 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Event({

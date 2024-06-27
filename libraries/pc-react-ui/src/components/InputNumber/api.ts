@@ -262,70 +262,31 @@ namespace nasl.ui {
       title: '改变后',
       description: '值变化时触发（与原生事件不同）',
     })
-    onChange: (event: {
-      value: nasl.core.Decimal;
-      oldValue: nasl.core.Decimal;
-      formattedValue: nasl.core.String;
-      valid: nasl.core.Boolean;
-    }) => any;
+    onChange: (event: nasl.core.Decimal) => any;
 
     @Event({
       title: '聚焦后',
       description: '获得焦点时触发',
     })
-    onFocus: (event: {
-      cancelBubble: nasl.core.Boolean;
-      detail: nasl.core.String;
-      layerX: nasl.core.Integer;
-      layerY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    onFocus: (event: any) => any;
 
     @Event({
       title: '失焦后',
       description: '失去焦点时触发',
     })
-    onBlur: (event: {
-      cancelBubble: nasl.core.Boolean;
-      detail: nasl.core.String;
-      layerX: nasl.core.Integer;
-      layerY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    onBlur: (event: any) => any;
 
     @Event({
       title: '键盘按下',
       description: '键盘按键按下时触发',
     })
-    onKeyDown: (event: {
-      altKey: nasl.core.Boolean;
-      code: nasl.core.String;
-      ctrlKey: nasl.core.Boolean;
-      isComposing: nasl.core.Boolean;
-      key: nasl.core.String;
-      metaKey: nasl.core.Boolean;
-      repeat: nasl.core.Boolean;
-      shiftKey: nasl.core.Boolean;
-    }) => any;
+    onKeyDown: (event: any) => any;
 
     @Event({
       title: '键盘松开',
       description: '键盘按键松开时触发',
     })
-    onKeyUp: (event: {
-      altKey: nasl.core.Boolean;
-      code: nasl.core.String;
-      ctrlKey: nasl.core.Boolean;
-      isComposing: nasl.core.Boolean;
-      key: nasl.core.String;
-      metaKey: nasl.core.Boolean;
-      repeat: nasl.core.Boolean;
-      shiftKey: nasl.core.Boolean;
-    }) => any;
+    onKeyUp: (event: any) => any;
 
     @Slot({
       title: '默认',

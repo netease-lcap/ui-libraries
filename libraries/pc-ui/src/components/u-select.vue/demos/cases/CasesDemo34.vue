@@ -55,11 +55,11 @@ export default {
             this.remoteValue = 'detail45';
             this.remoteValues =  ['detail45', 'info45'];
             this.remoteValues1 = 'detail45|info45';
-        }, 300); 
+        }, 300);
     },
     methods: {
         load({ filterText, paging }) {
-            const value = filterText.toLowerCase();
+            const value = filterText ? filterText.toLowerCase() : '';
 
             // 这里使用 Promise 和 setTimeout 模拟一个异步请求
             return new Promise((resolve, reject) => {

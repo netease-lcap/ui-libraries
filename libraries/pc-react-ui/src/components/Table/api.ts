@@ -34,6 +34,11 @@ namespace nasl.ui {
     })
     order: nasl.core.String;
 
+    @Prop({
+      title: '排序字段',
+    })
+    sorter: nasl.core.String;
+
     @Method({
       title: 'undefined',
       description: '清除缓存，重新加载',
@@ -143,7 +148,7 @@ namespace nasl.ui {
         '分页组件处是否展示每页显示数据条数的选择列表，需设置数组，如[10,20,30,40,50]。在"分页"属性开启时有效。',
       if: (_) => _.pagination === true && _.showSizeChanger === true,
     })
-    pageSizeOptions: Array<nasl.core.Integer> = [10, 20, 50];
+    pageSizeOptions: nasl.collection.List<nasl.core.Integer> = [10, 20, 50];
 
     @Prop<TableOptions<T, V, P, M>, 'current'>({
       group: '数据属性',
@@ -1172,7 +1177,7 @@ namespace nasl.ui {
         options: [{ title: '左侧' }, { title: '右侧' }, { title: '不固定' }],
       },
     })
-    fixed: 'left' | 'right' | false;
+    fixed: 'left' | 'right' | nasl.core.Boolean;
 
     // @Prop({
     //   group: '主要属性',

@@ -8,6 +8,16 @@ namespace nasl.ui {
     group: "Container"
   })
   export class VanIframe extends ViewComponent {
+    @Prop({
+      title: '网页地址',
+    })
+    src: VanIframeOptions['src'];
+
+    @Prop({
+      title: '加载完成',
+    })
+    loaded: nasl.core.Boolean;
+
     constructor(options?: Partial<VanIframeOptions>) {
       super();
     }
@@ -16,7 +26,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '地址',
-      description: '需要嵌入的网页地址'
+      description: '需要嵌入的网页地址',
+      settable: true,
     })
     src: nasl.core.String;
     @Event({

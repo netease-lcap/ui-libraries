@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { MGroup } from '../m-group.vue';
 import SEmpty from '../s-empty.vue';
 
@@ -75,7 +76,10 @@ export default {
     components: {
         SEmpty,
     },
-    mixins: [MGroup],
+    mixins: [
+      MGroup,
+      sync('disabled')
+    ],
 
     props: {
         node: Object,

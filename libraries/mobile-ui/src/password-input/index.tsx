@@ -90,8 +90,8 @@ PasswordInput.props = {
     type: [Number, String],
     default: 6,
   },
-  readonly: Boolean,
-  disabled: Boolean,
+  readonly: { type: Boolean, default: false },
+  disabled: { type: Boolean, default: false },
 };
 
 export default createComponent<PasswordInputProps>(PasswordInput);

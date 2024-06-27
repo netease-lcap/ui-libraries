@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Navigation"
   })
   export class VanSidebar extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: VanSidebarOptions['value'];
+
     constructor(options?: Partial<VanSidebarOptions>) {
       super();
     }
@@ -17,7 +22,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识菜单的值',
-      sync: true
+      sync: true,
+      settable: true,
     })
     value: nasl.core.String;
     @Prop({
@@ -43,7 +49,7 @@ namespace nasl.ui {
         code: '<van-sidebar-item><template #title>标签名称n</template></van-sidebar-item>'
       }]
     })
-    slotDefault: () => Array<VanSidebarItem>;
+    slotDefault: () => Array<ViewComponent>;
   }
   @Component({
     title: '菜单项',

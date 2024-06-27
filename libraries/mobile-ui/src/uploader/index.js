@@ -1,4 +1,5 @@
 // Utils
+import { sync } from '@lcap/vue2-utils';
 import { createNamespace, addUnit, noop, isPromise, isDef, _template } from '../utils';
 import { toArray, readFile, isOversize, isImageFile } from './utils';
 
@@ -22,7 +23,17 @@ const [createComponent, bem, t] = createNamespace('uploader');
 export default createComponent({
   inheritAttrs: false,
 
-  mixins: [FieldMixin, PreviewMixin],
+  mixins: [
+    FieldMixin,
+    PreviewMixin,
+    sync({
+      value: 'fileList',
+      url: 'url',
+      readonly: 'readonly',
+      disabled: 'disabled',
+      preview: 'isPreview',
+    }),
+  ],
   // model: {
   //   prop: 'fileListprop',
   // },
@@ -34,8 +45,8 @@ export default createComponent({
     withCredentials: { type: Boolean, default: false },
     data: Object,
     urlField: { type: String, default: 'filePath' },
-    disabled: Boolean,
-    readonly: Boolean,
+    disabled: { type: Boolean, default: false },
+    readonly: { type: Boolean, default: false },
     lazyLoad: Boolean,
     uploadText: String,
     afterRead: Function,
@@ -749,6 +760,12 @@ export default createComponent({
           );
         },
         onSuccess: (res) => {
+          if (res.Code === 200 && Array.isArray(res.Data)) {
+            res = {
+              [this.urlField]: res.Data.map((f) => f[this.urlField])[0],
+            };
+          }
+
           file.status = 'success';
           file.message = '';
           file.percent = 100;

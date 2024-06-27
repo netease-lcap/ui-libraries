@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 // Utils
 import { createNamespace, isDef, isDefB, isObject } from '../utils';
 import encodeUrl from '../utils/encodeUrl';
@@ -17,7 +18,10 @@ const [createComponent, bem] = createNamespace('cell');
 
 
 export default createComponent({
-  mixins: [ChildrenMixin('vanDropdownMenuItem')],
+  mixins: [
+    ChildrenMixin('vanDropdownMenuItem'),
+    sync('value'),
+  ],
   inheritAttrs: false,
   components: {
     VanEmptyCol,

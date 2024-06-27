@@ -280,39 +280,19 @@ namespace nasl.ui {
       title: '选择完成后',
       description: '选择完成后的回调',
     })
-    onChange: (event: {
-      value: V;
-      values: nasl.collection.List<V>;
-      items: nasl.collection.List<T>;
-    }) => any;
+    onChange: (event: V) => any;
 
     @Event({
       title: '获得焦点',
       description: '获得焦点时触发。',
     })
-    onFocus: (event: {
-      cancelBubble: nasl.core.Boolean;
-      detail: nasl.core.String;
-      layerX: nasl.core.Integer;
-      layerY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    onFocus: (event: any) => any;
 
     @Event({
       title: '失去焦点',
       description: '失去焦点时触发。',
     })
-    onBlur: (event: {
-      cancelBubble: nasl.core.Boolean;
-      detail: nasl.core.String;
-      layerX: nasl.core.Integer;
-      layerY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    onBlur: (event: any) => any;
 
     // @Event({
     //   title: '清空后',

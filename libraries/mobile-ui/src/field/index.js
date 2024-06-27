@@ -21,7 +21,7 @@ import { cellProps } from '../cell/shared';
 import VanEmptyCol from '../emptycol/index';
 import VanFieldinput from '../fieldinput/index';
 
-import VusionValidator from '@vusion/validator';
+import VusionValidator from '@lcap/validator';
 
 const [createComponent, bem, t] = createNamespace('field');
 const comSet = new Set(['van-fieldinput','van-fieldtextarea','van-fieldnumber']);
@@ -270,7 +270,7 @@ export default createComponent({
 
         // 时间选择
         if (this.children?.$options?._componentTag === 'van-datetime-picker') {
-          return this.children.value;
+          return this.children.validateValue;
         }
 
         // 日期选择

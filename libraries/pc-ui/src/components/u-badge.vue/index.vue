@@ -10,10 +10,17 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import SEmpty from '../../components/s-empty.vue';
+
 export default {
     name: 'u-badge',
     components: { SEmpty },
+    mixins: [
+      sync({
+        value: 'currentValue',
+      }),
+    ],
     props: { value: [Number, String], max: { type: Number, default: 99 } },
     computed: {
         currentValue() {

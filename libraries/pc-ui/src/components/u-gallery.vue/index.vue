@@ -33,12 +33,18 @@
 <script>
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
+import { sync } from '@lcap/vue2-utils';
 import SImage from '../s-image.vue';
 import SupportDataSource from '../../mixins/support.datasource';
 
 export default {
     name: 'u-gallery',
-    mixins: [SupportDataSource],
+    mixins: [
+      SupportDataSource,
+      sync({
+        data: 'options',
+      }),
+    ],
     components: {
       SImage,
     },
@@ -117,6 +123,9 @@ export default {
                 this.renderSwiper();
         },
     },
+    beforeDestroy() {
+      this.clearSwiper();
+    },
     methods: {
         setThumbsSwiper(swiper) {
             this.thumbsSwiper = swiper;
@@ -140,8 +149,8 @@ export default {
                 this.$refs.rooot.style.height = '600px';
             }
         },
-        renderSwiper() {
-            try {
+        clearSwiper() {
+          try {
                 this.swiperthumb && this.swiperthumb.destroy();
                 this.swiperbig && this.swiperbig.destroy();
                 this.swipersmall && this.swipersmall.destroy();
@@ -149,6 +158,9 @@ export default {
                 // eslint-disable-next-line no-console
                 console.log(e);
             }
+        },
+        renderSwiper() {
+            this.clearSwiper();
             this.$nextTick(() => {
                 if (this.pattern === 'small') {
                     this.thumbOption.slidesPerView = this.maxNum();

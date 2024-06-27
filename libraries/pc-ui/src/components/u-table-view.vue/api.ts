@@ -11,7 +11,12 @@ namespace nasl.ui {
       @Prop({
           title: '数据',
       })
-      data: UTableViewOptions<T, V, P, M>['dataSource'];
+      data: nasl.collection.List<T>;
+
+      @Prop({
+          title: '数据量',
+      })
+      total: nasl.core.Integer;
 
       @Prop({
           title: '分页大小',
@@ -32,6 +37,26 @@ namespace nasl.ui {
           title: '排序属性',
       })
       order: UTableViewOptions<T, V, P, M>['sorting']['order'];
+
+      @Prop({
+          title: '单选值',
+      })
+      value: V;
+
+      @Prop({
+          title: '多选值',
+      })
+      values: nasl.collection.List<V>;
+
+      @Prop({
+        title: '禁用',
+      })
+      disabled: nasl.core.Boolean;
+
+      @Prop({
+        title: '只读',
+      })
+      readonly: nasl.core.Boolean;
 
       @Method({
           title: 'undefined',
@@ -200,7 +225,7 @@ namespace nasl.ui {
           docDescription: '分页组件处是否展示每页显示数据条数的选择列表，需设置数组，如[10,20,30,40,50]。在"分页"属性开启时有效。',
           if: _ => _.pagination === true && _.showSizer === true,
       })
-      pageSizeOptions: Array<nasl.core.Integer> = [10,20,50];
+      pageSizeOptions: nasl.collection.List<nasl.core.Integer> = [10,20,50];
 
       @Prop<UTableViewOptions<T, V, P, M>, 'pageNumber'>({
           group: '数据属性',
@@ -669,6 +694,7 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
+          settable: true,
       })
       readonly: nasl.core.Boolean = false;
 
@@ -680,6 +706,7 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
+          settable: true,
       })
       disabled: nasl.core.Boolean = false;
 
@@ -1020,7 +1047,7 @@ namespace nasl.ui {
               },
           ],
       })
-      slotDefault: () => Array<UTableViewColumn<T, V, P, M> | UTableViewColumnDynamic<T, V, P, M, unknown> | UTableViewColumnGroup<T, V, P, M>>;
+      slotDefault: () => Array<UTableViewColumn<T, V, P, M> | UTableViewColumnDynamic<T, V, P, M, unknown> | UTableViewColumnGroup<T, V, P, M> | ViewComponent>;
 
       @Slot({
           title: '加载中内容',
@@ -1277,7 +1304,8 @@ namespace nasl.ui {
           title: '展开列内容',
           description: '展开列的内容',
       })
-      slotExpandContent: (current: Current<T>) => Array<ViewComponent>;
+      'slot-expand-content': (current: Current<T>) => Array<ViewComponent>;
+      slotExpandContent: (current: Current<T>) => Array<ViewComponent>; // 防止 ide 编译报错
 
       @Slot({
           title: '展开列图标',
@@ -1538,7 +1566,7 @@ namespace nasl.ui {
               },
           ],
       })
-      slotDefault: SlotType<() => Array<UTableViewColumn<T, V, P, M>>>;
+      slotDefault: SlotType<() => Array<UTableViewColumn<T, V, P, M> | ViewComponent>>;
 
       @Slot({
           title: '标题',
