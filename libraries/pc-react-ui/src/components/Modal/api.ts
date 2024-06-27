@@ -157,7 +157,7 @@ namespace nasl.ui {
       title: '打开/关闭后',
       description: '打开和关闭 Modal 时动画结束后的回调	',
     })
-    afterOpenChange: (event: Boolean) => any;
+    onAfterOpenChange: (event: Boolean) => any;
 
     @Event({
       title: '关闭时',
