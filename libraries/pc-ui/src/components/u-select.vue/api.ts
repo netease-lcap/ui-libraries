@@ -14,7 +14,7 @@ namespace nasl.ui {
         data: nasl.collection.List<T>;
 
         @Prop({
-          title: '数据量',
+          title: '数据总数',
         })
         total: nasl.core.Integer;
 
