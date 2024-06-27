@@ -24,7 +24,7 @@ namespace nasl.ui {
         disabled: nasl.core.Boolean;
 
         @Prop({
-          title: '已打开',
+          title: '打开',
         })
         opened: nasl.core.Boolean;
         constructor(options?: Partial<UDropdownOptions<T, V>>) { super(); }
