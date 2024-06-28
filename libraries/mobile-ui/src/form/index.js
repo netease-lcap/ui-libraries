@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { sync } from '@lcap/vue2-utils';
 import VueVusionValidator from '@lcap/validator/VuePlugin';
 Vue.use(VueVusionValidator);
 
@@ -41,7 +42,13 @@ export default createComponent({
       vanForm: this,
     };
   },
-
+  mixins: [
+    sync({
+      valid() {
+        return this.fields.every((f) => !f.validateFailed);
+      },
+    }),
+  ],
   data() {
     return {
       fields: [],
