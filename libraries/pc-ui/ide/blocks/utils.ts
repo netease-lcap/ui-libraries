@@ -71,3 +71,12 @@ export function genUniqueQueryNameGroup(
 export function getEntityPromaryKeyProperty(entity: naslTypes.Entity) {
   return entity.properties.find((p) => p.primaryKey)?.name || 'id';
 }
+
+export function getViewUniqueVariableNames(name: string, entityName: string) {
+  const start = 1;
+  if (entityName === name) {
+    const newName = name.replace(/\d*$/, (m) => String(m === '' ? start : +m + 1));
+    return newName;
+  }
+  return name;
+}
