@@ -484,6 +484,12 @@ namespace nasl.ui {
       emptyBackground: 'drag-entity-here',
     })
     slotDefault: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '空状态时显示的内容',
+    })
+    slotEmpty: () => Array<ViewComponent>;
+
     @Slot({
       title: 'undefined',
       description: '自定义选项的结构和样式'
