@@ -7,6 +7,7 @@ import {
   getEntityPromaryKeyProperty,
   transEntityMetadataTypes,
   NameGroup,
+  getViewUniqueVariableNames,
 } from './utils';
 import {
   genQueryLogic, genTextTemplate, genColumnMeta,
@@ -357,8 +358,8 @@ export function genTableEditBlock(entity: naslTypes.Entity, refElement: naslType
   nameGroup.viewLogicBlurUpdate = likeComponent.getLogicUniqueName('blurUpdate');
   nameGroup.viewLogicReload = likeComponent.getLogicUniqueName('reload');
   nameGroup.viewVariableEntity = likeComponent.getVariableUniqueName(firstLowerCase(entity.name));
-  nameGroup.viewVariableInput = likeComponent.getVariableUniqueName('input');
-  nameGroup.viewVariableFilter = likeComponent.getVariableUniqueName('filter');
+  nameGroup.viewVariableInput = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('input'), nameGroup.viewVariableEntity);
+  nameGroup.viewVariableFilter = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('filter'), nameGroup.viewVariableEntity);
 
   // 收集所有和本实体关联的实体
   const entitySet: Set<naslTypes.Entity> = new Set();

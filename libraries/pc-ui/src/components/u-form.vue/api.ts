@@ -13,6 +13,11 @@ namespace nasl.ui {
         })
         preview: nasl.core.Boolean;
 
+        @Prop({
+          title: '验证是否有效',
+        })
+        valid: nasl.core.Boolean;
+
         @Method({
             title: 'undefined',
             description: '手动验证。',
@@ -287,7 +292,10 @@ namespace nasl.ui {
         description: '表单项',
     })
     export class UFormItem extends ViewComponent {
-
+        @Prop({
+          title: '验证是否有效',
+        })
+        valid: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
