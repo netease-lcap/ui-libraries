@@ -215,13 +215,13 @@ namespace nasl.ui {
       title: '选中树节点时调用此函数',
       description: '选中树节点时调用此函数',
     })
-    onChange: (event: { value: V; oldValue: V; node: T; oldNode: T }) => any;
+    onChange: (event: V) => any;
 
     @Event({
       title: '被选中时调用',
       description: '被选中时调用',
     })
-    onSelect: (event: { value: V; oldValue: V; node: T; oldNode: T }) => any;
+    onSelect: (event: V) => any;
 
     // @Event({
     //   title: '选中或取消后',

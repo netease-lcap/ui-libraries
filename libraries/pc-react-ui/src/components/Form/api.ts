@@ -231,7 +231,7 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
       },
     })
-    span: nasl.core.Decimal = 0;
+    span: nasl.core.Decimal;
 
     // @Prop<FormOptions, 'justify'>({
     //   group: '主要属性',
