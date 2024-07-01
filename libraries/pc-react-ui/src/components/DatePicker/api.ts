@@ -8,7 +8,7 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class DatePicker extends ViewComponent {
-    constructor(options?: Partial<DatePickerOptions>) {
+    constructor(options?: Partial<DatePickerOptions & FormItemOptions>) {
       super();
     }
   }
@@ -339,10 +339,7 @@ namespace nasl.ui {
       title: '值变化时',
       description: '值变化时触发',
     })
-    onChange: (event: {
-      date: nasl.core.String;
-      time: nasl.core.String;
-    }) => any;
+    onChange: (event: nasl.core.String) => any;
 
     // @Event({
     //   title: '选择时',
@@ -354,20 +351,12 @@ namespace nasl.ui {
       title: '弹出/隐藏时',
       description: '弹出/隐藏时触发',
     })
-    onOpenChange: (event: { opened: nasl.core.Boolean }) => any;
+    onOpenChange: (event: nasl.core.Boolean) => any;
 
     @Event({
       title: '失去焦点',
       description: '失去焦点时触发。',
     })
-    onBlur: (event: {
-      cancelBubble: nasl.core.Boolean;
-      detail: nasl.core.String;
-      layerX: nasl.core.Integer;
-      layerY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    onBlur: (event: any) => any;
   }
 }

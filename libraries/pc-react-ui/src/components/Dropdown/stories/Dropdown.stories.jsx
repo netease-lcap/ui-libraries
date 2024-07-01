@@ -57,6 +57,7 @@ export const 默认 = {
       <Dropdown
         trigger="click"
         key="component-1"
+        data-nodepath="rootview.0111"
         menuItem={(() => (
           <>
             <MenuItem

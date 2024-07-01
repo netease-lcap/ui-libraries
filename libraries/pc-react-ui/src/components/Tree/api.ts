@@ -167,16 +167,16 @@ namespace nasl.ui {
     })
     checkStrictly: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '交互属性',
-      title: '可多选',
-      description: '设置是否开启多选模式，显示多选框',
-      docDescription: '开启后支持选中多项。默认关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    checkable: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '交互属性',
+    //   title: '可多选',
+    //   description: '设置是否开启多选模式，显示多选框',
+    //   docDescription: '开启后支持选中多项。默认关闭',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // checkable: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '交互属性',

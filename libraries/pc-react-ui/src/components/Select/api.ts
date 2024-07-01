@@ -12,7 +12,7 @@ namespace nasl.ui {
     V,
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
-    C
+    C,
   > extends ViewComponent {
     @Prop({
       title: '弹出状态',
@@ -25,7 +25,9 @@ namespace nasl.ui {
       description: '清除缓存，重新加载',
     })
     reload(): void {}
-    constructor(options?: Partial<SelectOptions<T, V, P, M, C>>) {
+    constructor(
+      options?: Partial<SelectOptions<T, V, P, M, C> & FormItemOptions>,
+    ) {
       super();
     }
   }
@@ -35,7 +37,7 @@ namespace nasl.ui {
     V,
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
-    C
+    C,
   > extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
@@ -239,7 +241,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '选项',
-          code: '<SelectOption><Text children="选项"></Text></SelectOption>',
+          code: '<SelectOption label="2"></SelectOption>',
         },
         // {
         //   title: '分组',
@@ -269,13 +271,13 @@ namespace nasl.ui {
       title: '选择后',
       description: '选择某一项后触发。单选模式中：',
     })
-    onSelect: (event: { value: V; items: nasl.collection.List<T> }) => void;
+    onSelect: (event: V) => void;
 
     @Event({
       title: '选中 option或输入变化时',
       description: '选中 option，或 input 的 value 变化时，调用此函数	',
     })
-    onChange: (event: { value: V; items: nasl.collection.List<T> }) => void;
+    onChange: (event: V) => void;
   }
 
   @Component({
@@ -283,7 +285,7 @@ namespace nasl.ui {
     description: '选择项',
   })
   export class SelectOption<T, V> extends ViewComponent {
-    constructor(options?: Partial<ListItemOptions<T, V>>) {
+    constructor(options?: Partial<SelectOptionOptions<T, V>>) {
       super();
     }
   }

@@ -8,7 +8,7 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class InputNumber extends ViewComponent {
-    constructor(options?: Partial<InputNumberOptions>) {
+    constructor(options?: Partial<InputNumberOptions & FormItemOptions>) {
       super();
     }
   }
@@ -16,7 +16,8 @@ namespace nasl.ui {
   export class InputNumberOptions extends ViewComponentOptions {
     @Prop({
       title: '格式化',
-      description: '格式化字符串，具体参见示例。也可以传入一个包含`get`和`set`方法的格式化对象。',
+      description:
+        '格式化字符串，具体参见示例。也可以传入一个包含`get`和`set`方法的格式化对象。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '千分位' }, { title: '百分号' }],
@@ -61,13 +62,16 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '精度',
-      description: '限制数字输入要保留的最小精度单位，默认不限制精度，如需保留两位小数，则填入0.01',
-      docDescription: '限制数字要保留的最小单位，整数、小数均可，如需要保留两位小数，则填入0.01。',
+      description:
+        '限制数字输入要保留的最小精度单位，默认不限制精度，如需保留两位小数，则填入0.01',
+      docDescription:
+        '限制数字要保留的最小单位，整数、小数均可，如需要保留两位小数，则填入0.01。',
       setter: {
         concept: 'NumberInputSetter',
+        max: 14,
       },
     })
-    private precision: nasl.core.Decimal = 1;
+    precision: nasl.core.Decimal = 1;
 
     // @Prop({
     //   group: '数据属性',
@@ -258,65 +262,31 @@ namespace nasl.ui {
       title: '改变后',
       description: '值变化时触发（与原生事件不同）',
     })
-    onChange: (event: { value: nasl.core.Decimal; oldValue: nasl.core.Decimal; formattedValue: nasl.core.String; valid: nasl.core.Boolean }) => any;
+    onChange: (event: nasl.core.Decimal) => any;
 
     @Event({
       title: '聚焦后',
       description: '获得焦点时触发',
     })
-    onFocus: (event: {
-      cancelBubble: nasl.core.Boolean;
-      detail: nasl.core.String;
-      layerX: nasl.core.Integer;
-      layerY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    onFocus: (event: any) => any;
 
     @Event({
       title: '失焦后',
       description: '失去焦点时触发',
     })
-    onBlur: (event: {
-      cancelBubble: nasl.core.Boolean;
-      detail: nasl.core.String;
-      layerX: nasl.core.Integer;
-      layerY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    onBlur: (event: any) => any;
 
     @Event({
       title: '键盘按下',
       description: '键盘按键按下时触发',
     })
-    onKeyDown: (event: {
-      altKey: nasl.core.Boolean;
-      code: nasl.core.String;
-      ctrlKey: nasl.core.Boolean;
-      isComposing: nasl.core.Boolean;
-      key: nasl.core.String;
-      metaKey: nasl.core.Boolean;
-      repeat: nasl.core.Boolean;
-      shiftKey: nasl.core.Boolean;
-    }) => any;
+    onKeyDown: (event: any) => any;
 
     @Event({
       title: '键盘松开',
       description: '键盘按键松开时触发',
     })
-    onKeyUp: (event: {
-      altKey: nasl.core.Boolean;
-      code: nasl.core.String;
-      ctrlKey: nasl.core.Boolean;
-      isComposing: nasl.core.Boolean;
-      key: nasl.core.String;
-      metaKey: nasl.core.Boolean;
-      repeat: nasl.core.Boolean;
-      shiftKey: nasl.core.Boolean;
-    }) => any;
+    onKeyUp: (event: any) => any;
 
     @Slot({
       title: '默认',

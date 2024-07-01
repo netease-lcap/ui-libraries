@@ -125,11 +125,11 @@ export default {
       this.handleData();
     },
     handleData() {
-      if (this.$env && this.$env.VUE_APP_DESIGNER) return;
-
       this.currentDataSource = this.normalizeDataSource(this.dataSource);
       // 初始加载开启时
       if (this.currentDataSource && this.initialLoad) {
+        if (this.$env && this.$env.VUE_APP_DESIGNER) return;
+
         if (this.pageNumber && this.pageable) {
           this.page(this.pageNumber);
         } else {
