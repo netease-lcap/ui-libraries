@@ -31,13 +31,17 @@ namespace nasl.ui {
         code: '<van-cell isLink center><template #title>左侧文本</template><template>右侧文本</template></van-cell>'
       }]
     })
-    slotDefault: () => Array<VanCell>;
+    slotDefault: () => Array<ViewComponent>;
   }
   @Component({
     title: '单元格',
     group: "Display"
   })
   export class VanCell extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: VanCellOptions['value'];
     constructor(options?: Partial<VanCellOptions>) {
       super();
     }
@@ -62,7 +66,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识单元格的值',
-      implicitToString: true
+      implicitToString: true,
+      settable: true,
     })
     value: nasl.core.String;
     @Prop({

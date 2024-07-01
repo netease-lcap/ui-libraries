@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 import { createNamespace } from '../utils';
 import { ParentMixin } from '../mixins/relation';
 import DataSourceMixin from '../mixins/DataSource';
@@ -5,7 +6,18 @@ import DataSourceMixin from '../mixins/DataSource';
 const [createComponent, bem] = createNamespace('steps');
 
 export default createComponent({
-  mixins: [ParentMixin('vanSteps'), DataSourceMixin],
+  mixins: [
+    ParentMixin('vanSteps'),
+    DataSourceMixin,
+    sync({
+      value: 'currentValue',
+      data: 'currentData',
+      isFirst: 'isFirst',
+      isLast: 'isLast',
+      disabled: 'disabled',
+      readonly: 'readonly',
+    }),
+  ],
 
   props: {
     activeColor: String,
@@ -33,6 +45,13 @@ export default createComponent({
     inDesigner() {
       return this.$env && this.$env.VUE_APP_DESIGNER;
     },
+    isFirst() {
+      return this.currentValue <= 0;
+    },
+    isLast() {
+      const steps = this.dataSource !== undefined ? this.currentData || [] : this.children;
+      return this.currentValue >= steps.length - 1;
+    },
   },
   watch: {
     value(val) {
@@ -54,6 +73,20 @@ export default createComponent({
 
     renderNormal() {
       return this.slots();
+    },
+    prev() {
+      if (this.isFirst) {
+        return;
+      }
+
+      this.currentValue -= 1;
+    },
+    next() {
+      if (this.isLast) {
+        return;
+      }
+
+      this.currentValue += 1;
     },
   },
 

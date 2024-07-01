@@ -10,6 +10,13 @@ import './dom';
 expect.addSnapshotSerializer(vueSnapshotSerializer);
 Vue.use(VueI18N);
 Vue.use(CloudUI);
+Vue.mixin({
+  beforeCreate() {
+    this.$on('sync:state', (name, value) => {
+      this.$emit(`sync:${name}`, value);
+    });
+  },
+});
 
 const mutationObserverMock = vi.fn(function MutationObserver(callback) {
   this.observe = vi.fn();

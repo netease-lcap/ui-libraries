@@ -1,4 +1,5 @@
 // Utils
+import { sync } from '@lcap/vue2-utils';
 import { createNamespace, addUnit } from '../utils';
 import { preventDefault } from '../utils/dom/event';
 
@@ -24,14 +25,22 @@ function getRateStatus(value, index, allowHalf) {
 }
 
 export default createComponent({
-  mixins: [TouchMixin, FieldMixin],
+  mixins: [
+    TouchMixin,
+    FieldMixin,
+    sync({
+      value: 'current',
+      readonly: 'readonly',
+      disabled: 'disabled',
+    }),
+  ],
 
   props: {
     size: [Number, String],
     color: String,
     gutter: [Number, String],
-    readonly: Boolean,
-    disabled: Boolean,
+    readonly: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
     allowHalf: Boolean,
     voidColor: String,
     iconPrefix: String,

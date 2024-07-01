@@ -44,10 +44,16 @@ export default createComponent({
     Loading,
   },
   mounted() {
+    this._handleScroll = _throttle(this.handleScroll.bind(this), 200);
     this.$refs.root.addEventListener(
       'scroll',
-      _throttle(this.handleScroll.bind(this), 200)
+      this._handleScroll,
     );
+  },
+  beforeDestroy() {
+    if (this._handleScroll && this.$refs.root) {
+      this.$refs.root.removeEventListener('scroll', this._handleScroll);
+    }
   },
   methods: {
     // expose

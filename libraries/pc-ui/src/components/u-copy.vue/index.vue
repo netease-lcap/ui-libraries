@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { copy } from '../../utils/edit/clipboard';
 // import i18n from '@/utils/i18n';
 import SEmpty from '../../components/s-empty.vue';
@@ -23,6 +24,9 @@ import SEmpty from '../../components/s-empty.vue';
 export default {
     name: 'u-copy',
     components: { SEmpty },
+    mixins: [
+      sync('value', 'disabled'),
+    ],
     props: {
         value: String,
         text: { type: String, default: '复制' },

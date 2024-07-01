@@ -11,7 +11,7 @@ namespace nasl.ui {
         @Prop({
             title: '数据',
         })
-        data: UCascaderOptions<T, V>['dataSource'];
+        data: nasl.collection.List<T>;
 
         @Prop({
             title: '选中值',
@@ -22,6 +22,26 @@ namespace nasl.ui {
             title: '过滤文本',
         })
         filterText: nasl.core.String;
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
+
+        @Prop({
+          title: '打开',
+        })
+        opened: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -115,6 +135,7 @@ namespace nasl.ui {
             title: '值',
             sync: true,
             docDescription: '选择器的值',
+            settable: true,
         })
         value: any;
 
@@ -211,6 +232,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -222,6 +244,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         opened: nasl.core.Boolean = false;
 
@@ -268,6 +291,7 @@ namespace nasl.ui {
           setter: {
             concept: 'SwitchSetter',
           },
+          settable: true,
         })
         preview: nasl.core.Boolean = false;
 

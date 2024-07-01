@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 import _get from 'lodash/get';
 import { createNamespace } from '../utils';
 import { CheckboxMixin } from '../mixins/checkbox';
@@ -10,6 +11,11 @@ export default createComponent({
       bem,
       role: 'checkbox',
       parent: 'vanCheckbox',
+    }),
+    sync({
+      value: 'checked',
+      readonly: 'readonly',
+      disabled: 'disabled',
     }),
   ],
   props: {

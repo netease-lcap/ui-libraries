@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import MField from '../m-field.vue';
 import { repeatClick, clickOutside } from '../../directives';
 import { noopFormatter, NumberFormatter } from '../../utils/Formatters';
@@ -34,7 +35,17 @@ export default {
         UPreview
     },
     directives: { repeatClick, clickOutside },
-    mixins: [MField, MPreview],
+    mixins: [
+      MField,
+      MPreview,
+      sync({
+        value: 'currentValue',
+        formattedValue: 'formattedValue',
+        readonly: 'readonly',
+        preview: 'isPreview',
+        disabled: 'disabled',
+      })
+    ],
     props: {
         // String 类型是为了验证抛出
         value: [Number, String],
@@ -152,7 +163,7 @@ export default {
     computed: {
         listeners() {
             const listeners = Object.assign({}, this.$listeners);
-            ['input', 'change', 'focus', 'blur', 'update:value'].forEach((prop) => {
+            ['input', 'change', 'focus', 'blur', 'update:value', 'sync:value'].forEach((prop) => {
                 delete listeners[prop];
             });
             return listeners;

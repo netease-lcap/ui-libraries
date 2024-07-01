@@ -10,11 +10,20 @@
 </ul>
 </template>
 <script>
+import { sync } from '@lcap/vue2-utils';
 import SupportDataSource from '../../mixins/support.datasource.js';
 import UTimelineItem from './item.vue';
 export default {
     name: 'u-timeline',
-    mixins: [SupportDataSource],
+    mixins: [
+      SupportDataSource,
+      sync({
+        data() {
+          return this.currentDataSource && Array.isArray(this.currentDataSource.data)
+            ? this.currentDataSource.data : [];
+        },
+      }),
+    ],
     components: {
         UTimelineItem,
     },

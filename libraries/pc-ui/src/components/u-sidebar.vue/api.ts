@@ -8,7 +8,25 @@ namespace nasl.ui {
         group: 'Navigation'
     })
     export class USidebar<T, V> extends ViewComponent {
+        @Prop({
+          title: '数据',
+        })
+        data: nasl.collection.List<T>;
 
+        @Prop({
+          title: '选中值'
+        })
+        value: USidebarOptions<T, V>['value'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -140,6 +158,7 @@ namespace nasl.ui {
             sync: true,
             docDescription: '当前选择的值，值仅在不适用路由下支持编辑',
             if: _ => _.router === false,
+            settable: true,
         })
         value: any;
 
@@ -242,6 +261,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -253,6 +273,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -288,7 +309,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<USidebarGroup | USidebarItem | USidebarDivider>;
+        slotDefault: () => Array<ViewComponent>;
     }
 
     @Component({
@@ -296,6 +317,10 @@ namespace nasl.ui {
         description: '侧边栏项',
     })
     export class USidebarItem extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<USidebarItemOptions>) { super(); }
     }
@@ -394,6 +419,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -601,6 +627,10 @@ namespace nasl.ui {
         description: '侧边栏分组',
     })
     export class USidebarGroup extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<USidebarGroupOptions>) { super(); }
     }
@@ -643,6 +673,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -664,7 +695,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<USidebarGroup | USidebarItem | USidebarDivider>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: 'undefined',

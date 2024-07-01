@@ -8,7 +8,15 @@ namespace nasl.ui {
         group: "Table"
     })
     export class UCalendarView<T, M extends nasl.core.Boolean> extends ViewComponent {
+        @Prop({
+          title: '数据源',
+        })
+        data: nasl.collection.List<T>;
 
+        @Prop({
+          title: '日历选择值',
+        })
+        value: UCalendarViewOptions<T, M>['value'];
 
         @Method({
             title: 'undefined',
@@ -64,6 +72,7 @@ namespace nasl.ui {
             description: '当前选中的日期',
             sync: true,
             docDescription: '当前选择的日期。',
+            settable: true,
         })
         value: M extends true ? nasl.collection.List<nasl.core.Date> : nasl.core.Date;
 

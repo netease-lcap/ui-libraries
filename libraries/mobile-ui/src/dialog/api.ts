@@ -11,6 +11,11 @@ namespace nasl.ui {
     constructor(options?: Partial<VanDialogOptions>) {
       super();
     }
+
+    @Prop({
+      title: '展示弹窗',
+    })
+    visible: nasl.core.Boolean;
     @Method({
       title: 'undefined',
       description: '打开弹窗'
@@ -41,11 +46,12 @@ namespace nasl.ui {
     private showCancelButton: nasl.core.Boolean = true;
     @Prop({
       group: '主要属性',
-      title: '展示弹框',
+      title: '展示弹窗',
       sync: true,
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     value: nasl.core.Boolean = false;
     @Prop({

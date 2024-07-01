@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanLink extends ViewComponent {
+    @Prop({
+      title: '禁用'
+    })
+    disabled: nasl.core.Boolean;
+
     constructor(options?: Partial<VanLinkOptions>) {
       super();
     }
@@ -125,7 +130,8 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Event({

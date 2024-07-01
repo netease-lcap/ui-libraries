@@ -13,19 +13,29 @@ namespace nasl.ui {
     }
 
     @Prop({
+      title: '数据',
+    })
+    data: nasl.collection.List<T>;
+
+    @Prop({
       title: '选中值',
     })
     value: VanCascaderOptions<T, V>['value'];
-
-    // @Prop({
-    //   title: '数据',
-    // })
-    // data: VanCascaderOptions<T, V>['dataSource'];
 
     @Prop({
       title: '过滤文本',
     })
     filterText: nasl.core.String;
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
   }
   export class VanCascaderOptions<T, V> extends ViewComponentOptions {
     @Prop({
@@ -45,7 +55,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识级联选择的值',
-      sync: true
+      sync: true,
+      settable: true,
     })
     value: V;
     @Prop({
@@ -155,7 +166,8 @@ namespace nasl.ui {
       description: '正常显示，但禁止选择/输入',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     readonly: nasl.core.Boolean = false;
     @Prop({
@@ -164,7 +176,8 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Event({

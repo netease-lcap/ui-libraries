@@ -13,6 +13,11 @@ namespace nasl.ui {
     }
 
     @Prop({
+      title: '全选中',
+    })
+    allChecked: nasl.core.Boolean;
+
+    @Prop({
       title: '选中值',
     })
     value: VanCheckboxGroupOptions<T, V, C>['value'];
@@ -20,7 +25,17 @@ namespace nasl.ui {
     @Prop({
       title: '数据',
     })
-    data: VanCheckboxGroupOptions<T, V, C>['dataSource'];
+    data: nasl.collection.List<T>;
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '预览',
+    })
+    preview: nasl.core.Boolean;
   }
   export class VanCheckboxGroupOptions<T, V, C> extends ViewComponentOptions {
     @Prop({
@@ -40,7 +55,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识多选组的值',
-      sync: true
+      sync: true,
+      settable: true,
     })
     value: C extends 'none' ? nasl.collection.List<V> : nasl.core.String;
     @Prop({
@@ -127,7 +143,8 @@ namespace nasl.ui {
       description: '正常显示，但禁止选择/输入',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Prop({
@@ -138,6 +155,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      settable: true,
     })
     preview: nasl.core.Boolean = false;
     @Event({
@@ -168,6 +186,21 @@ namespace nasl.ui {
     group: "Form"
   })
   export class VanCheckbox<V> extends ViewComponent {
+    @Prop({
+      title: '选中',
+    })
+    value: nasl.core.Boolean = false;
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
     constructor(options?: Partial<VanCheckboxOptions<V>>) {
       super();
     }
@@ -219,7 +252,7 @@ namespace nasl.ui {
       sync: true,
       setter: {
         concept: "SwitchSetter"
-      }
+      },
     })
     value: nasl.core.Boolean = false;
     @Prop({
@@ -228,7 +261,8 @@ namespace nasl.ui {
       description: '正常显示，但禁止选择/输入',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Prop({
@@ -237,7 +271,8 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     readonly: nasl.core.Boolean = false;
     @Event({
