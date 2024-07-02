@@ -94,7 +94,7 @@
                                             :index="rowIndex + virtualIndex"
                                             :columnIndex="columnIndex"
                                             :columnItem="columnVM.columnItem"
-                                            :style="getStyle('td', columnVM)"
+                                            :style="getStyle('td', columnVM, {item, columnIndex, rowIndex: rowIndex + virtualIndex, index: rowIndex + virtualIndex})"
                                             :last-left-fixed="isTdLastLeftFixed(columnVM, columnIndex, visibleColumnVMs, item, rowIndex)"
                                             :first-right-fixed="isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs)"
                                             :shadow="(isTdLastLeftFixed(columnVM, columnIndex, visibleColumnVMs, item, rowIndex) && !scrollXStart) || (isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs) && !scrollXEnd)"
@@ -285,6 +285,7 @@ export default {
         handlerDraggable: Boolean,
 
         rootWidth: Number,
+        setRowStyle: Function,
     },
     data() {
         return {
@@ -385,7 +386,7 @@ export default {
         number2Pixel(value) {
             return isNumber(value) ? value + 'px' : '';
         },
-        getStyle(type, columnVM) {
+        getStyle(type, columnVM, currentData) {
             const style = Object.assign({}, columnVM.$vnode.data && columnVM.$vnode.data.style);
             const staticStyle = Object.assign({}, columnVM.$vnode.data && columnVM.$vnode.data.staticStyle);
             if (this.useStickyFixed) {
@@ -431,6 +432,18 @@ export default {
                             }
                         }
                     }
+                }
+            }
+            if(type === 'td' && currentData && this.setRowStyle && typeof this.setRowStyle === 'function') {
+                // const backgroundColor = this.setRowStyle(currentData);
+                // if(backgroundColor) {
+                //     return Object.assign(staticStyle, style, {
+                //         backgroundColor
+                //     });
+                // }
+                const rowStyle = this.setRowStyle(currentData);
+                if(rowStyle) {
+                    return Object.assign(staticStyle, style, rowStyle);
                 }
             }
             return Object.assign(staticStyle, style);

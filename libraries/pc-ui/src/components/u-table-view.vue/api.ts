@@ -771,6 +771,15 @@ namespace nasl.ui {
       })
       defaultColumnWidth: nasl.core.String | nasl.core.Decimal;
 
+      @Prop({
+        group: '样式属性',
+        title: '表格行动态样式',
+        description: '动态设置表格行背景色、字体颜色等',
+        docDescription: '表格每列的默认宽度。',
+        bindOpen: true,
+      })
+      setRowStyle: (current: Current<T>) => { backgroundColor: nasl.core.String, color: nasl.core.String };
+
       @Event({
           title: '加载前',
           description: '加载前触发',

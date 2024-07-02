@@ -169,6 +169,8 @@
 
         :rootWidth="rootWidth"
 
+        :setRowStyle="setRowStyle"
+
         @resize="onResizerDragEnd">
     </u-table-render>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
@@ -361,6 +363,8 @@ export default {
         defaultColumnWidth: [String, Number],
         thEllipsis: { type: Boolean, default: false }, // 表头是否缩略展示
         ellipsis: { type: Boolean, default: false }, // 单元格是否缩略展示
+
+        setRowStyle: Function, // 设置行背景色
     },
     data() {
         return {
