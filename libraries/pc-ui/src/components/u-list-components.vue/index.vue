@@ -4,13 +4,13 @@
       <div v-for="(item, index) in options" :key="index" class="u-for-com-frag">
         <u-list-components-item
           v-for="(item2, index2) in item"
-          :key="index2"
+          :key="idField ? $at(item2, idField) || item2 : index2"
           :item="item2"
           :colnum="colnum || 5"
           :equal-width="equalWidth"
           :index="comIndex(index, index2)"
         >
-          <template #default="item2">
+        <template #default="item2">
             <slot :item="item2.item" :index="comIndex(index, index2)"></slot>
             <s-empty v-if="$scopedSlots
                 &&!($scopedSlots.default && $scopedSlots.default(item2))
@@ -49,6 +49,10 @@ export default {
         equalWidth: {
             type: Boolean,
             default: true,
+        },
+        idField: {
+            type: String,
+            default: '',
         },
     },
     data() {
