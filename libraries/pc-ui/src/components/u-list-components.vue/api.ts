@@ -34,6 +34,13 @@ namespace nasl.ui {
         dataSchema: T;
 
         @Prop({
+            group: '数据属性',
+            title: '唯一字段',
+            description: '唯一字段，默认使用数据 index 作为唯一字段'
+        })
+        idField: (item: T) => any;
+
+        @Prop({
             group: '主要属性',
             title: '每行排列项数',
             description: '为空时默认为5',

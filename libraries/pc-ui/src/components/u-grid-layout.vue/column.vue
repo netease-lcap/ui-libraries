@@ -136,6 +136,9 @@ export default {
 <style module>
 .root {
     position: relative;
+    /*适配--space-base */
+    --grid-layout-column-content-gap-normal: var(--space-base);
+    --grid-layout-column-content-gap-none: 0px;
 }
 
 .root[mode="flex"] { display: flex; text-align: inherit; flex-wrap: wrap; }
