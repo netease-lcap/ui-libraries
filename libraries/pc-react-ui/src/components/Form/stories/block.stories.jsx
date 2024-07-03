@@ -58,7 +58,7 @@ export const 默认 = {
 export const 查询表单 = {
   render: () => {
     return (
-      <QueryForm labelWidth="140" defaultCollapsed={false}>
+      <QueryForm labelWidth={140} defaultCollapsed={false}>
         <Input labelText="表单输入框" name="name" />
         <Select labelText="表单选择器" name="age" />
         <Switch labelText="表单开关" name="switch" />
