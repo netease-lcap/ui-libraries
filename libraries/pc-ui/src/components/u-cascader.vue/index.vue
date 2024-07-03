@@ -49,13 +49,14 @@
 <script>
 import UCascaderItem from './item.vue';
 import MField from '../m-field.vue';
+import MPreview from '../u-text.vue/preview';
 import SupportDataSource from '../../mixins/support.datasource';
 import treeDataSource from '../../mixins/tree.datasource';
 
 export default {
     name: 'u-cascader',
     components: { UCascaderItem },
-    mixins: [MField, SupportDataSource, treeDataSource],
+    mixins: [MField, SupportDataSource, treeDataSource, MPreview],
     props: {
         data: { type: Array, default: () => [] },
         value: { type: [String, Array], default: '' },
@@ -254,14 +255,22 @@ export default {
             this.lastValueString = this.lastValueArray.join(this.join);
             this.close();
             if (this.useArrayLikeValue) {
+                const value = [...this.lastRealValueArray];
+                this.$emit('update:value', value);
+                this.$emit('change', { sender: this, value });
+                this.$emit('input', value, this);
                 this.$emit('select', {
-                    value: this.lastRealValueArray,
+                    value,
                     values: this.lastRealValueArray,
                     items: this.subComponents,
                 }, this);
             } else {
+                const value = this.lastValueString;
+                this.$emit('update:value', value);
+                this.$emit('change', { sender: this, value });
+                this.$emit('input', value, this);
                 this.$emit('select', {
-                    value: this.lastValueString,
+                    value,
                     values: this.lastValueArray,
                     items: this.subComponents,
                 }, this);

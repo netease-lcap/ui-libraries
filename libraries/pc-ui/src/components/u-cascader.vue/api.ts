@@ -116,7 +116,7 @@ namespace nasl.ui {
             sync: true,
             docDescription: '选择器的值',
         })
-        value: V;
+        value: any;
 
         @Prop({
             group: '数据属性',
@@ -259,6 +259,17 @@ namespace nasl.ui {
             },
         })
         private join: ',' | '|' | ' / ' = ' / ';
+
+        @Prop({
+          group: '状态属性',
+          title: '预览',
+          description: '显示预览态',
+          docDescription: '',
+          setter: {
+            concept: 'SwitchSetter',
+          },
+        })
+        preview: nasl.core.Boolean = false;
 
         @Event({
             title: '输入时',

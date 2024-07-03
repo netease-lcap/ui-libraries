@@ -58,7 +58,7 @@ function deployTgz(rootPath: string, config: LcapCliConfig) {
 
 function deployImages(rootPath, config: LcapCliConfig) {
   const imageFloders: string[] = [];
-  const imageFilePaths = glob.sync([`${rootPath}/src/**/screenshots/*`, `${rootPath}/src/**/drawings/*`, `${rootPath}/src-vusion/**/screenshots/*`, `${rootPath}/src-vusion/**/drawings/*`]);
+  const imageFilePaths = glob.sync(['src/**/screenshots/*', 'src/**/drawings/*', 'src-vusion/**/screenshots/*', 'src-vusion/**/drawings/*'], { cwd: rootPath, absolute: true });
 
   imageFilePaths.forEach((filePath) => {
     const deployPath = filePath.substring(rootPath.length + 1, filePath.lastIndexOf('/'));
@@ -74,10 +74,9 @@ function deployImages(rootPath, config: LcapCliConfig) {
   });
 }
 
-export default (rootPath, platform) => {
-  logger.start('Start deploy...');
+export default (rootPath, commandArgs = {}) => {
   const lcapCliConfig: LcapCliConfig = {
-    platform,
+    ...commandArgs,
   };
 
   const configPath = `${rootPath}/.lcaprc`;

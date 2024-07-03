@@ -125,7 +125,7 @@ namespace nasl.ui {
             },
             if: _ => _.layout === 'inline-flex' || _.repeat !== 1,
         })
-        repeat: nasl.core.Decimal = 1;
+        repeat: nasl.core.Decimal | nasl.core.Integer = 1;
 
         @Prop({
             group: '主要属性',
@@ -362,7 +362,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        span: nasl.core.Decimal = 1;
+        span: nasl.core.Decimal | nasl.core.Integer = 1;
 
         @Prop({
             group: '主要属性',
@@ -548,7 +548,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        repeat: nasl.core.Decimal = 1;
+        repeat: nasl.core.Decimal | nasl.core.Integer = 1;
 
         @Prop({
             group: '主要属性',

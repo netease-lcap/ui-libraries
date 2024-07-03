@@ -8,7 +8,7 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class TimePicker extends ViewComponent {
-    constructor(options?: Partial<TimePickerOptions>) {
+    constructor(options?: Partial<TimePickerOptions & FormItemOptions>) {
       super();
     }
   }
@@ -336,9 +336,6 @@ namespace nasl.ui {
       title: '改变后',
       description: '时间改变时触发',
     })
-    onChange: (event: {
-      date: nasl.core.String;
-      time: nasl.core.String;
-    }) => any;
+    onChange: (event: nasl.core.String) => any;
   }
 }

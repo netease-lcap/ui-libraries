@@ -1,5 +1,5 @@
 <template>
-<div :class="$style.root" vusion-slot-name="default" :style="[commonStyle, responsiveStyle]" :empty="!$slots.default" :nowrap="!wrap">
+<div :class="$style.root" vusion-slot-name="default" :style="[commonStyle, responsiveStyle]" :empty="!$slots.default" :nowrap="!wrap" @click="onClick">
     <slot></slot>
     <s-empty v-if="(!$slots.default) && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']"></s-empty>
 </div>
@@ -31,6 +31,7 @@ export default {
     components: {
         SEmpty,
     },
+    inject: ['grid', 'row'],
     props: {
         span: { type: Number, default: 1 },
         pull: Number,
@@ -124,6 +125,10 @@ export default {
             });
             this.currentSpan = span;
         },
+        onClick() {
+            const params = { row: this.grid.$children.findIndex(item => item === this.row), column: this.row.$children.findIndex(item => item === this), vm: this };
+            this.$emit('click', params)
+        }
     },
 };
 </script>
@@ -131,6 +136,9 @@ export default {
 <style module>
 .root {
     position: relative;
+    /*适配--space-base */
+    --grid-layout-column-content-gap-normal: var(--space-base);
+    --grid-layout-column-content-gap-none: 0px;
 }
 
 .root[mode="flex"] { display: flex; text-align: inherit; flex-wrap: wrap; }

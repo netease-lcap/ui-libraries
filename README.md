@@ -233,7 +233,7 @@ test('Render Primary Button', () => {
   expect(wrapper.toJSON()).toMatchSnapshot();
 });
 
-// ...
+// ... 
 ```
 
 **功能测试**

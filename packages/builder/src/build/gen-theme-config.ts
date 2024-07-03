@@ -32,7 +32,7 @@ function concatCssContent(themeVarCssPath: string, themeComponentFolder: string)
     themeVarCssPath,
   ];
 
-  const varFiles = glob.sync(`${themeComponentFolder}/*/vars.css`);
+  const varFiles = glob.sync('*/vars.css', { cwd: themeComponentFolder, absolute: true });
   if (varFiles.length > 0) {
     cssVarFiles.push(...varFiles);
   }

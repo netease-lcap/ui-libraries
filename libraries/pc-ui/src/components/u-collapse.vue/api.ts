@@ -88,7 +88,7 @@ namespace nasl.ui {
             description: '插入`<u-collapse-item>`子组件。',
             snippets: [
                 {
-                    title: '多选项',
+                    title: '折叠面板项',
                     code: '<u-collapse-item><template #title><u-text text="面板"></u-text></template><template #extra></template>内容</u-collapse-item>',
                 },
             ],

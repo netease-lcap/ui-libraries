@@ -8,7 +8,7 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class Radio extends ViewComponent {
-    constructor(options?: Partial<RadioOptions>) {
+    constructor(options?: Partial<RadioOptions & FormItemOptions>) {
       super();
     }
   }
@@ -177,11 +177,15 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
-      docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      description:
+        '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription:
+        '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
       designerValue: [{}, {}, {}],
     })
-    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+    dataSource:
+      | nasl.collection.List<T>
+      | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
     @Prop({
       group: '数据属性',
@@ -196,7 +200,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '文本字段',
       description: '集合的元素类型中，用于显示文本的属性名称',
-      docDescription: '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
+      docDescription:
+        '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -305,15 +310,7 @@ namespace nasl.ui {
       title: '选项变化时',
       description: '选项变化时',
     })
-    onChange: (event: {
-      selected: nasl.core.Boolean;
-      item: nasl.core.String;
-      oldItem: nasl.core.String;
-      value: nasl.core.String;
-      oldValue: nasl.core.String;
-      items: nasl.collection.List<nasl.core.String>;
-      oldItems: nasl.collection.List<nasl.core.String>;
-    }) => any;
+    onChange: (event: any) => any;
 
     @Slot({
       title: 'undefined',

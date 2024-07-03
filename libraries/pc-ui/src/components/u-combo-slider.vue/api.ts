@@ -24,7 +24,7 @@ namespace nasl.ui {
             sync: true,
             docDescription: '滑块的值',
         })
-        value: nasl.core.Decimal | Array<nasl.core.Decimal> = 0;
+        value: nasl.core.Decimal | Array<nasl.core.Decimal> | nasl.core.Integer | Array<nasl.core.Integer>  = 0;
 
         @Prop({
             group: '数据属性',
@@ -34,7 +34,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        min: nasl.core.Decimal = 0;
+        min: nasl.core.Decimal | nasl.core.Integer = 0;
 
         @Prop({
             group: '数据属性',
@@ -44,7 +44,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        max: nasl.core.Decimal = 100;
+        max: nasl.core.Decimal | nasl.core.Integer = 100;
 
         @Prop({
             group: '数据属性',
@@ -55,7 +55,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        step: nasl.core.Decimal = 1;
+        step: nasl.core.Decimal | nasl.core.Integer = 1;
 
         @Prop({
             group: '数据属性',
@@ -66,7 +66,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        precision: nasl.core.Decimal = 1;
+        precision: nasl.core.Decimal | nasl.core.Integer = 1;
 
         @Prop({
             group: '数据属性',
@@ -74,7 +74,7 @@ namespace nasl.ui {
             description: '进一步对`value`限制，通常传入一个数组，第一个值表示范围开始值，第二个值表示范围的结束值',
             docDescription: '进一步对`值`限制，通常传入一个数组，第一个值表示范围开始值，第二个值表示范围的结束值',
         })
-        range: Array<nasl.core.Decimal> = [];
+        range: Array<nasl.core.Decimal> | Array<nasl.core.Integer> = [];
 
         @Prop({
             group: '数据属性',
@@ -164,21 +164,32 @@ namespace nasl.ui {
         })
         disabled: nasl.core.Boolean = false;
 
+        @Prop({
+          group: '状态属性',
+          title: '预览',
+          description: '显示预览态',
+          docDescription: '',
+          setter: {
+            concept: 'SwitchSetter',
+          },
+        })
+        preview: nasl.core.Boolean = false;
+
         @Event({
             title: '值改变时',
             description: '滑块的值改变时触发',
         })
-        onInput: (event: nasl.core.Decimal) => any;
+        onInput: (event: nasl.core.Decimal | nasl.core.Integer) => any;
 
         @Event({
             title: '拖动滑块时',
             description: '拖动滑块时触发',
         })
         onSlide: (event: {
-            value: nasl.core.Decimal;
-            oldValue: nasl.core.Decimal;
-            percent: nasl.core.Decimal;
-            index: nasl.core.Decimal;
+            value: nasl.core.Decimal | nasl.core.Integer;
+            oldValue: nasl.core.Decimal | nasl.core.Integer;
+            percent: nasl.core.Decimal | nasl.core.Integer;
+            index: nasl.core.Decimal | nasl.core.Integer;
         }) => any;
 
         @Event({
@@ -186,21 +197,21 @@ namespace nasl.ui {
             description: '滑块的值改变后触发',
         })
         onChange: (event: {
-            value: nasl.core.Decimal;
-            oldValue: nasl.core.Decimal;
+            value: nasl.core.Decimal | nasl.core.Integer;
+            oldValue: nasl.core.Decimal | nasl.core.Integer;
         }) => any;
 
         @Event({
             title: '改变数字输入框的值后',
             description: '改变数字输入框的值后触发',
         })
-        onNumberInput: (event: nasl.core.Decimal) => any;
+        onNumberInput: (event: nasl.core.Decimal | nasl.core.Integer) => any;
 
         @Event({
             title: '拖动滑块结束后',
             description: '拖动滑块结束后触发',
         })
-        onSlideEnd: (event: nasl.core.Decimal) => any;
+        onSlideEnd: (event: nasl.core.Decimal | nasl.core.Integer) => any;
 
         @Slot({
             title: '提示',

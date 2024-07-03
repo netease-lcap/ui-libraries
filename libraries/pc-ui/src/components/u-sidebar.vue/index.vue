@@ -36,7 +36,7 @@
             :class="$style.resizer"
             @mousedown="handleResizerMouseDown">
         </div>
-        <div :class="$style.bottom" :expanded="!currentCollapse" v-if="enableCollapse">
+        <div :class="$style.bottom" :expanded="!currentCollapse" v-if="enableCollapse && showCollapseIcon">
           <div :class="$style.expanderIcon" @click="toggleCollapse" vusion-click-enabled>
             <i-ico
                 :name="currentCollapse ? expandIcon : foldIcon"
@@ -54,12 +54,18 @@
 <script>
 import MSinglex from '../m-singlex.vue';
 import { MGroupParent } from '../m-group.vue';
+import CssVarsStyleMixin from '../../mixins/css-variables';
 
 export default {
     name: 'u-sidebar',
     groupName: 'u-sidebar-group',
     childName: 'u-sidebar-item',
-    mixins: [MSinglex, MGroupParent],
+    mixins: [MSinglex, MGroupParent, CssVarsStyleMixin],
+    provide() {
+      return {
+        getStaticCssVarStyle: () => this.getStaticCssVarStyle(),
+      };
+    },
     props: {
         enableCollapse: { type: Boolean, default: false },
         // collapse: { type: Boolean, default: false }, // 当前用作整个侧边栏的折叠效果。
@@ -82,6 +88,7 @@ export default {
         collapsibleField: { type: String, default: 'collapsible' },
         minWidth: { type: Number, default: 56 },
         collapseMode: { type: String, default: 'expand', validator: (value) => /^(expand|fold)$/.test(value) },
+        showCollapseIcon: { type: Boolean, default: true },
         expandIcon: { type: String, default: 'expand' },
         foldIcon: { type: String, default: 'fold' },
     },
@@ -177,6 +184,9 @@ export default {
         }
     },
     methods: {
+        getStaticCssVarStyle() {
+          return this.staticStyleVar;
+        },
         updateCollapse(nV) {
             this.$emit('update:collapseMode', nV ? 'fold' : 'expand', this);
             this.currentCollapse = nV;
@@ -185,6 +195,7 @@ export default {
             this.isTransitionEnd = true;
         },
         toggleCollapse() {
+            if(!this.enableCollapse) return;
             this.currentWidth = this.currentCollapse ? null : this.minWidth;
             if (
               this.currentCollapse

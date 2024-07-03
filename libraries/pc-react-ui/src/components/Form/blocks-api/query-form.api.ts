@@ -46,7 +46,7 @@ namespace nasl.ui {
       })
       value: any,
     ): any {}
-    constructor(options?: Partial<FormOptions>) {
+    constructor(options?: Partial<QueryFormOptions>) {
       super();
     }
   }

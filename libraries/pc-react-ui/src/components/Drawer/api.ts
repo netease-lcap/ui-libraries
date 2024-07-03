@@ -108,7 +108,7 @@ namespace nasl.ui {
       title: '切换时',
       description: '切换抽屉时动画结束后的回调',
     })
-    afterOpenChange: (event: any) => any;
+    onAfterOpenChange: (event: any) => any;
 
     @Event({
       title: '关闭时',

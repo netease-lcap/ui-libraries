@@ -125,11 +125,11 @@ export default {
       this.handleData();
     },
     handleData() {
-      if (this.$env && this.$env.VUE_APP_DESIGNER) return;
-
       this.currentDataSource = this.normalizeDataSource(this.dataSource);
       // 初始加载开启时
       if (this.currentDataSource && this.initialLoad) {
+        if (this.$env && this.$env.VUE_APP_DESIGNER) return;
+
         if (this.pageNumber && this.pageable) {
           this.page(this.pageNumber);
         } else {
@@ -224,8 +224,23 @@ export default {
         });
     },
     reload() {
-      this.currentDataSource.clearLocalData();
-      this.load();
+      const dataSource = this.currentDataSource;
+      if (!dataSource) return Promise.reject();
+
+      this.currentLoading = true;
+      this.currentError = false;
+
+      return dataSource.reload()
+        .then((data) => {
+          this.currentLoading = false;
+          this.$emit('load', undefined, this);
+          return data;
+        })
+        .catch((e) => {
+          console.log('DataSource加载数据失败:', e);
+          this.currentLoading = false;
+          this.currentError = true;
+        });
     },
     page(number, size = this.currentDataSource.paging.size) {
       const paging = {

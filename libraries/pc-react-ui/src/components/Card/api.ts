@@ -41,19 +41,19 @@ namespace nasl.ui {
     })
     bordered: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '样式属性',
-      title: '阴影',
-      description: '是否显示阴影',
-      setter: {
-        concept: 'SwitchSetter',
-      },
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '阴影',
+    //   description: '是否显示阴影',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+      // },
       // setter: {
       //   concept: 'EnumSelectSetter',
       //   options: [{ title: '一直显示' }, { title: 'hover时显示' }, { title: '不显示' }],
       // },
-    })
-    boxShadow: nasl.core.Boolean = false;
+    // })
+    // boxShadow: nasl.core.Boolean = false;
     // shadow: 'always' | 'hover' | 'never' = 'always';
 
     @Slot({

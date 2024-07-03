@@ -8,7 +8,7 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class DateRangePicker extends ViewComponent {
-    constructor(options?: Partial<DateRangePickerOptions>) {
+    constructor(options?: Partial<DateRangePickerOptions & FormItemOptions>) {
       super();
     }
   }
@@ -396,10 +396,7 @@ namespace nasl.ui {
       title: '值变化时',
       description: '值变化时触发',
     })
-    onChange: (event: {
-      date: nasl.core.String;
-      time: nasl.core.String;
-    }) => any;
+    onChange: (event: nasl.core.String) => any;
 
     // @Event({
     //   title: '选择时',
@@ -411,6 +408,6 @@ namespace nasl.ui {
       title: '弹出/隐藏时',
       description: '弹出/隐藏时触发',
     })
-    onOpenChange: (event: { opened: nasl.core.Boolean }) => any;
+    onOpenChange: (event: nasl.core.Boolean) => any;
   }
 }

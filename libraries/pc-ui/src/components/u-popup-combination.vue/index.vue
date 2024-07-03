@@ -5,18 +5,29 @@
             <slot name="reference"></slot>
             <s-empty v-if="$env.VUE_APP_DESIGNER && !$slots.reference && !!$attrs['vusion-node-path']"></s-empty>
         </span>
-        <u-popup reference="prev" v-bind="$attrs" v-on="$listeners" ref="popup" :vusion-scope-id="$vnode.context.$options._scopeId">
+        <u-popup
+          reference="prev"
+          v-bind="$attrs"
+          v-on="$listeners"
+          ref="popup"
+          :style="staticStyleVar"
+          :vusion-scope-id="$vnode.context.$options._scopeId"
+        >
             <slot></slot>
         </u-popup>
     </span>
 </template>
 
 <script>
+import CssVarsStyleMixin from '../../mixins/css-variables';
 import UPopup from '../u-popup.vue/index.vue';
 import SEmpty from '../../components/s-empty.vue';
 export default {
     name: 'u-popup-combination',
     components: { SEmpty, UPopup },
+    mixins: [
+      CssVarsStyleMixin,
+    ],
     props: {
         display: String,
         ellipsis: Boolean,

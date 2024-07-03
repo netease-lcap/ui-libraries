@@ -1,7 +1,7 @@
 {
   "name": "cloud-ui.vusion",
   "description": "Lcap Cloud UI",
-  "version": "0.22.0",
+  "version": "0.22.1",
   "author": "NetEase CodeWave FE Team",
   "contributors": [
     "haoxutong <1255965516@qq.com>",
@@ -103,7 +103,8 @@
   "scripts": {
     "dev": "npm run storybook",
     "storybook": "storybook dev -p 6006",
-    "build": "lcap-scripts build",
+    "build": "lcap-scripts build && npm run lowcode",
+    "deploy": "lcap-scripts deploy",
     "deploy:dev": "lcap-scripts deploy --platform http://defaulttenant.lcap.codewave-dev.163yun.com/",
     "deploy:test": "lcap-scripts deploy --platform http://defaulttenant.lcap.codewave-test.163yun.com/",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -112,7 +113,8 @@
     "test:coverage": "vitest run --coverage",
     "preview": "vite preview",
     "build:storybook": "storybook build",
-    "check:api": "tsc -p tsconfig.api.json"
+    "check:api": "tsc -p tsconfig.api.json",
+    "lowcode": " node usage-script.js > ./dist-theme/nasl.ui.merge.json && cd ./dist-theme rm ./nasl.ui.json && mv nasl.ui.merge.json nasl.ui.json "
   },
   "jestSerializer": {
     "attributesToClear": [

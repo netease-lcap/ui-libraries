@@ -73,6 +73,7 @@ namespace nasl.ui {
             title: '分页大小',
             setter: {
                 concept: 'NumberInputSetter',
+                precision: 0,
             },
         })
         private pageSize: nasl.core.Integer = 50;
@@ -200,6 +201,17 @@ namespace nasl.ui {
             },
         })
         disabled: nasl.core.Boolean = false;
+
+        @Prop({
+          group: '状态属性',
+          title: '预览',
+          description: '显示预览态',
+          docDescription: '',
+          setter: {
+            concept: 'SwitchSetter',
+          },
+        })
+        preview: nasl.core.Boolean = false;
 
         @Event({
             title: '数据转移时',

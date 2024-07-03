@@ -29,7 +29,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        value: nasl.core.Decimal = 0;
+        value: nasl.core.Decimal | nasl.core.Integer = 0;
 
         @Prop({
             group: '数据属性',
@@ -40,7 +40,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        min: nasl.core.Decimal;
+        min: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             group: '数据属性',
@@ -51,7 +51,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        max: nasl.core.Decimal;
+        max: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             group: '数据属性',
@@ -62,7 +62,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        private precision: nasl.core.Decimal = 1;
+        private precision: nasl.core.Decimal | nasl.core.Integer = 1;
 
         @Prop({
             group: '数据属性',
@@ -73,7 +73,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        decimalLength: nasl.core.Decimal;
+        decimalLength: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop<UNumberInputOptions, 'decimalPlacesValue'>({
             group: '主要属性',
@@ -248,7 +248,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
             },
         })
-        step: nasl.core.Decimal = 1;
+        step: nasl.core.Decimal | nasl.core.Integer = 1;
 
         @Prop({
             group: '样式属性',
@@ -284,7 +284,7 @@ namespace nasl.ui {
             title: '验证时',
             description: '输入验证时触发',
         })
-        onValidate: (event: { 
+        onValidate: (event: {
             trigger: nasl.core.String;
             valid: nasl.core.Boolean;
             triggerValid: nasl.core.Boolean;
@@ -300,8 +300,8 @@ namespace nasl.ui {
             description: '值变化时触发（与原生事件不同）',
         })
         onChange: (event: {
-            value: nasl.core.Decimal;
-            oldValue: nasl.core.Decimal;
+            value: nasl.core.Decimal | nasl.core.Integer;
+            oldValue: nasl.core.Decimal | nasl.core.Integer;
             formattedValue: nasl.core.String;
             valid: nasl.core.Boolean;
         }) => any;
@@ -338,31 +338,13 @@ namespace nasl.ui {
             title: '键盘按下',
             description: '键盘按键按下时触发',
         })
-        onKeydown: (event: {
-            altKey: nasl.core.Boolean;
-            code: nasl.core.String;
-            ctrlKey: nasl.core.Boolean;
-            isComposing: nasl.core.Boolean;
-            key: nasl.core.String;
-            metaKey: nasl.core.Boolean;
-            repeat: nasl.core.Boolean;
-            shiftKey: nasl.core.Boolean;
-        }) => any;
+        onKeydown: (event: KeyboardEvent) => any;
 
         @Event({
             title: '键盘松开',
             description: '键盘按键松开时触发',
         })
-        onKeyup: (event: {
-            altKey: nasl.core.Boolean;
-            code: nasl.core.String;
-            ctrlKey: nasl.core.Boolean;
-            isComposing: nasl.core.Boolean;
-            key: nasl.core.String;
-            metaKey: nasl.core.Boolean;
-            repeat: nasl.core.Boolean;
-            shiftKey: nasl.core.Boolean;
-        }) => any;
+        onKeyup: (event: KeyboardEvent) => any;
 
         @Slot({
             title: '默认',

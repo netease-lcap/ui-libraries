@@ -12,48 +12,12 @@ namespace nasl.ui {
 
         @Method({
             title: 'undefined',
-            description: '广度优先遍历树。当`func`函数有返回值时，停止遍历。',
-        })
-        private walk(
-            @Param({
-                title: 'undefined',
-                description: '遍历的处理函数',
-            })
-            func: Function,
-        ): void {}
-
-        @Method({
-            title: 'undefined',
-            description: '查找节点实例。',
-        })
-        private find(
-            @Param({
-                title: 'undefined',
-                description: '查找函数。找到第一个返回值为`true`的实例。',
-            })
-            func: Function,
-        ): void {}
-
-        @Method({
-            title: 'undefined',
             description: '展开/折叠所有节点',
         })
-        private toggleAll(
+        toggleAll(
             @Param({
                 title: 'undefined',
                 description: '展开/折叠',
-            })
-            expanded: nasl.core.Boolean,
-        ): void {}
-
-        @Method({
-            title: 'undefined',
-            description: '选中/取消所有节点',
-        })
-        private checkAll(
-            @Param({
-                title: 'undefined',
-                description: '选中/取消',
             })
             expanded: nasl.core.Boolean,
         ): void {}

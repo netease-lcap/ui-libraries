@@ -49,10 +49,10 @@ export default {
             this.watchValue(currentValue);
         },
         selectedVMs(selectedVMs, oldVMs) {
-            // const oldValue = oldVMs.map((itemVM) => itemVM.value);
+            const oldValues = oldVMs.map((itemVM) => itemVM.value);
             const values = selectedVMs.map((itemVM) => itemVM.value); // @TODO: 因为是同一个数组。。没有好的剪枝方法
-            // if (value.length === oldValue.length && value.every((val, index) => val === oldValue[index]))
-            //     return;
+            if (values.length === oldValues.length && values.every((val, index) => val === oldValues[index]))
+                return;
             let value = values;
             if (this.converter) {
                 value = this.currentConverter.get(values);
@@ -133,14 +133,19 @@ export default {
         watchSelectedChange(selectedVM) {
             if (!this.keepOrder) {
                 const index = this.selectedVMs.indexOf(selectedVM);
-                if (selectedVM.currentSelected && (!~index || this.duplicated))
-                    this.selectedVMs.push(selectedVM);
-                else if (!selectedVM.currentSelected && ~index)
-                    this.selectedVMs.splice(index, 1);
-            } else
-                this.selectedVMs = this.itemVMs.filter(
+                const selectedVMs = [...this.selectedVMs];
+                if (selectedVM.currentSelected && (!~index || this.duplicated)) {
+                  selectedVMs.push(selectedVM);
+                  this.selectedVMs = selectedVMs;
+                } else if (!selectedVM.currentSelected && ~index) {
+                  selectedVMs.splice(index, 1);
+                  this.selectedVMs = selectedVMs;
+                }
+            } else {
+              this.selectedVMs = this.itemVMs.filter(
                     (itemVM) => itemVM.currentSelected,
                 );
+            }
         },
         select(itemVM, selected) {
             // Check if enabled

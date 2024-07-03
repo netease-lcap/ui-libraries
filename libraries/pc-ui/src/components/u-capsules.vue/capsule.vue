@@ -1,14 +1,14 @@
 <template>
-<div :class="$style.root"
+<div :class="[$style.root, isPreview ? $style.preview : '']"
     :size="parentVM.$attrs.size"
     :selected="parentVM.multiple ? currentSelected : isSelected"
     :readonly="parentVM.readonly"
     :disabled="disabled || parentVM.disabled"
-    @click="select()"
+    @click="capsuleSelect"
     v-ellipsis-title
     vusion-slot-name="default">
     <!-- @override: 添加了label功能 -->
-    <span v-if="label" :class="$style.label">{{ label }}</span>
+    <span v-if="label && !isPreview" :class="$style.label">{{ label }}</span>
     <slot></slot>
     <s-empty v-if="(!$slots.default) && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']"></s-empty>
 </div>
@@ -17,13 +17,26 @@
 <script>
 import { UListViewItem } from '../u-list-view.vue';
 import SEmpty from '../s-empty.vue';
+import MPreview from '../u-text.vue/preview';
 
 export default {
     name: 'u-capsule',
     parentName: 'u-capsules',
     components: { SEmpty },
     extends: UListViewItem,
-    props: { label: String },
+    mixins: [MPreview],
+    props: {
+      label: String,
+      preview: { type: Boolean, default: false },
+    },
+    methods: {
+      capsuleSelect(e) {
+        if (this.isPreview) {
+          return;
+        }
+        this.select(e);
+      }
+    }
 };
 </script>
 
@@ -69,14 +82,14 @@ export default {
     border-left-color:transparent;
 }
 
-.root[selected]:not([disabled]) {
+.root[selected]:not([disabled], .preview) {
     z-index: 1;
     border-color: var(--capsules-capsule-border-color-selected);
     background: var(--capsules-capsule-background-selected);
     color: var(--capsules-capsule-color-selected);
 }
 
-.root[selected]:not([readonly], [disabled]):hover {
+.root[selected]:not([readonly], [disabled], .preview):hover {
     border-color: var(--capsules-capsule-border-color-selected-hover);
     background: var(--capsules-capsule-background-selected-hover);
 }
@@ -132,5 +145,13 @@ export default {
 .root[size="small"] {
     width: 50px;
     padding: 0;
+}
+.preview {
+  border: none;
+  cursor: initial;
+}
+
+.preview:not([selected]) {
+  display: none;
 }
 </style>

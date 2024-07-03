@@ -96,7 +96,7 @@ namespace nasl.ui {
               concept: 'PropertySelectSetter',
           }
       })
-      expandedField: (item: T) => nasl.collection.List<any> = ((item: any)  => item.expanded) as any;
+      expandedField: (item: T) => nasl.core.Boolean = ((item: any)  => item.expanded) as any;
 
       @Prop({
           group: '数据属性',
@@ -214,6 +214,17 @@ namespace nasl.ui {
           },
       })
       height: 'full' | 'huge' | 'large' | 'medium' | 'normal' | 'small' | 'mini' = 'normal';
+
+      @Prop({
+        group: '状态属性',
+        title: '预览',
+        description: '显示预览态',
+        docDescription: '',
+        setter: {
+          concept: 'SwitchSetter',
+        },
+      })
+      preview: nasl.core.Boolean = false;
 
       @Event({
           title: '改变后',
