@@ -123,7 +123,7 @@ export default {
             });
             if(res?.code === "200") {
                 const eventName = `on${name.replace(/^./, (m) => m.toUpperCase())}`
-                this.$emit(eventName);
+                this.$emit(name);
             }
             this.refresh();
         },
@@ -182,7 +182,7 @@ export default {
                     });
                     if(res?.code === "200") {
                         const eventName = `on${item.name.replace(/^./, (m) => m.toUpperCase())}`
-                        this.$emit(eventName);
+                        this.$emit(item.name);
                     }
                     this.refresh();
                 }
@@ -209,7 +209,7 @@ export default {
                     });
                     if(res?.code === "200") {
                         const eventName = `on${item.name.replace(/^./, (m) => m.toUpperCase())}`
-                        this.$emit(eventName);
+                        this.$emit(item.name);
                     }
                     this.refresh();
                 }
@@ -230,7 +230,7 @@ export default {
                 });
                 if(res?.code === "200") {
                     const eventName = `on${item.name.replace(/^./, (m) => m.toUpperCase())}`
-                    this.$emit(eventName);
+                    this.$emit(item.name);
                 }
                 this.refresh();
             }
