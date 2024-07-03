@@ -113,7 +113,7 @@ export default {
                 return this.fieldTouched && this.firstErrorMessage;
         },
         mutedMessage() {
-            return this.muted === 'all' || this.muted === 'message';
+            return this.muted === 'all' || this.muted === 'message' || (this.fieldVM && this.fieldVM.isPreview);
         },
         showMessage() {
             return !this.mutedMessage && this.touched && !this.valid && this.firstError && !(this.blurred && this.blurReset);
