@@ -971,7 +971,7 @@
     --grid-view-foot-padding: calc(var(--grid-view-item-space) / 2) 0;
     --grid-view-border-radius: var(--border-radius-base);
 
-    /* @component u-tree-view */
+    /* @component u-tree-view-new */
     --tree-view-background: white; /* @type color */ /* @desc 树形列表节点的背景色,如 #223325 */ /* @prefix tree-view */ /* @depStaticStyles ["background-color"] */
     --tree-view-node-background-dragging: #e5e5e5; /* @type color */ /* @desc 树形列表可拖拽节点的背景色,如 #223325 */ /* @prefix tree-view-node */
     --tree-view-node-color-dragging: #999; /* @type color */ /* @desc 树形列表可拖拽节点的字体颜色,如 #223325 */ /* @prefix tree-view-node */
@@ -1008,7 +1008,7 @@
     --tree-view-node-background-selected-disabled-inverse: var(--brand-disabled-light-inverse); /* @hidden */
     --table-view-tree-expander-size: 16px;
 
-    /* @component u-transfer @hidden */
+    /* @component u-transfer */
     --transfer-height: var(--list-view-height); /* @desc 穿梭框高度,如 1px */
     --transfer-height-large: var(--list-view-height-large); /* @hidden */
     --transfer-height-huge: var(--list-view-height-huge); /* @hidden */
@@ -1575,7 +1575,7 @@
     --pagination-item-height-small-line-height: var(--pagination-item-height-small); /* @hidden */
 
     /* @component u-tree-select-new */
-    /* @dependency-components u-tree-view */
+    /* @dependency-components u-tree-view-new */
     --tree-select-new-width: var(--select-width); /* @group 宽度 */ /* @desc 树选择器宽度,如 1px */ /* @depAttrs {"width": ["normal", null]} */ /* @depStaticStyles ["width"] */
     --tree-select-new-height: var(--select-height); /* @group 高度 */ /* @desc 树选择器高度,如 1px */ /* @depAttrs {"height": ["normal", null]} */ /* @depStaticStyles ["height"] */
     --tree-select-new-padding-x: var(--select-padding-x); /* @group 内边距 */ /* @desc Mini树选择器水平方向内边距,如 1px */ /* @depAttrs {"width": ["normal", null]} */ /* @depStaticStyles ["padding-left", "padding-right"] */

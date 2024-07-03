@@ -8,6 +8,40 @@ namespace nasl.ui {
       group: 'Selector'
   })
   export class UDatePicker extends ViewComponent {
+      @Prop({
+        title: '值',
+      })
+      value: UDatePickerOptions['value'];
+
+      @Prop({
+        title: '起始值',
+      })
+      startDate: UDatePickerOptions['startDate'];
+
+      @Prop({
+        title: '结束值',
+      })
+      endDate: UDatePickerOptions['endDate'];
+
+      @Prop({
+        title: '禁用',
+      })
+      disabled: nasl.core.Boolean;
+
+      @Prop({
+        title: '只读',
+      })
+      readonly: nasl.core.Boolean;
+
+      @Prop({
+        title: '预览',
+      })
+      preview: nasl.core.Boolean;
+
+      @Prop({
+        title: '打开',
+      })
+      opened: nasl.core.Boolean;
 
       constructor(options?: Partial<UDatePickerOptions>) { super(); }
   }
@@ -45,6 +79,7 @@ namespace nasl.ui {
           sync: true,
           docDescription: '当前选择的值',
           if: _ => _.range !== true,
+          settable: true,
       })
       value: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
@@ -54,6 +89,7 @@ namespace nasl.ui {
           description: '默认显示的起始日期值，格式如2018-08-08',
           sync: true,
           if: _ => _.range === true,
+          settable: true,
       })
       startDate: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
@@ -63,6 +99,7 @@ namespace nasl.ui {
           description: '默认显示的结束日期值，格式如2018-08-08',
           sync: true,
           if: _ => _.range === true,
+          settable: true,
       })
       endDate: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
@@ -267,6 +304,7 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
+          settable: true,
       })
       readonly: nasl.core.Boolean = false;
 
@@ -278,6 +316,7 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
+          settable: true,
       })
       disabled: nasl.core.Boolean = false;
 
@@ -289,6 +328,7 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
+          settable: true,
       })
       preview: nasl.core.Boolean = false;
 
@@ -300,6 +340,7 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
+          settable: true,
       })
       opened: nasl.core.Boolean = false;
 

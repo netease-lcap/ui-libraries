@@ -11,6 +11,12 @@ namespace nasl.ui {
     constructor(options?: Partial<VanSwipeCellOptions>) {
       super();
     }
+
+    @Prop({
+      title: '禁止滑动'
+    })
+    disabled: nasl.core.Boolean;
+
     @Method({
       title: '收起单元格侧边栏',
       description: '收起单元格侧边栏'
@@ -39,7 +45,8 @@ namespace nasl.ui {
       title: '禁止滑动',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Event({

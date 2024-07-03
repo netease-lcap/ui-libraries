@@ -12,6 +12,7 @@ tabindex="0" @keydown.space.prevent @keyup.space.prevent="select()"
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { MChild } from '../m-parent.vue';
 import MField from '../m-field.vue';
 import SEmpty from '../s-empty.vue';
@@ -23,7 +24,12 @@ export default {
     components: {
         SEmpty,
     },
-    mixins: [MChild, MField, MPreview],
+    mixins: [
+      MChild,
+      MField,
+      MPreview,
+      sync('disabled', 'sync'),
+    ],
     props: {
         text: String,
         value: { type: Boolean, default: false },

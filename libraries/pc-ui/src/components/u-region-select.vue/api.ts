@@ -8,7 +8,30 @@ namespace nasl.ui {
         group: 'Selector'
     })
     export class URegionSelect<T, V> extends ViewComponent {
+        @Prop({
+          title: '选中值',
+        })
+        value: URegionSelectOptions<T, V>['value'];
 
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
+
+        @Prop({
+          title: '打开',
+        })
+        opened: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -56,14 +79,16 @@ namespace nasl.ui {
             title: '数据源',
             description: '支持动态绑定集合类型变量（List\<T>）或输出参数为集合类型的逻辑。',
             docDescription: '- 支持动态绑定集合类型变量（List\<T>）或输出参数为集合类型的逻辑。',
+            isDataSource: true,
         })
-        data: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+        data: nasl.collection.List<T>;
 
         @Prop({
             group: '数据属性',
             title: '值',
             sync: true,
             docDescription: '当前选择的值',
+            settable: true,
         })
         value: any;
 
@@ -147,6 +172,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -158,6 +184,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -169,6 +196,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         preview: nasl.core.Boolean = false;
 
@@ -180,6 +208,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         opened: nasl.core.Boolean = false;
 

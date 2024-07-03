@@ -11,10 +11,14 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import SEmpty from '../s-empty.vue';
 
 export default {
     name: 'u-linear-progress',
+    mixins: [
+      sync('percent')
+    ],
     components: {
         SEmpty,
     },

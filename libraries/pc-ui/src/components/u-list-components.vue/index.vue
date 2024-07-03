@@ -27,12 +27,18 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import UListComponentsItem from './item.vue';
 import SEmpty from '../../components/s-empty.vue';
 import { formatDSResult } from '../../utils/DataSource/format';
 
 export default {
     name: 'u-list-components',
+    mixins: [
+      sync({
+        data: 'options',
+      })
+    ],
     components: {
         UListComponentsItem,
         SEmpty,

@@ -24,9 +24,13 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import SEmpty from '../s-empty.vue';
 export default {
     name: 'u-circular-progress',
+    mixins: [
+      sync('percent')
+    ],
     components: {
         SEmpty,
     },

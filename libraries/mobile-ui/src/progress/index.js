@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 import { createNamespace, addUnit } from '../utils';
 import { BindEventMixin } from '../mixins/bind-event';
 import VanEmptyCol from '../emptycol';
@@ -10,6 +11,7 @@ export default createComponent({
       bind(window, 'resize', this.resize, true);
       bind(window, 'orientationchange', this.resize, true);
     }),
+    sync('value'),
   ],
 
   props: {

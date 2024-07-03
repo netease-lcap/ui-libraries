@@ -8,6 +8,20 @@ namespace nasl.ui {
         group: 'Display'
     })
     export class UImage extends ViewComponent {
+        @Prop({
+          title: '地址',
+        })
+        src: UImageOptions['src'];
+
+        @Prop({
+          title: '默认图地址',
+        })
+        placeholderSrc: UImageOptions['placeholderSrc'];
+
+        @Prop({
+          title: '预览状态',
+        })
+        preview: nasl.core.Boolean = false;
 
         constructor(options?: Partial<UImageOptions>) { super(); }
     }

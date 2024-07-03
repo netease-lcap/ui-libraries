@@ -8,6 +8,25 @@ namespace nasl.ui {
         group: 'Navigation'
     })
     export class UNavbarMulti<T, V> extends ViewComponent {
+        @Prop({
+          title: '数据',
+        })
+        data: nasl.collection.List<T>;
+
+        @Prop({
+          title: '选中值'
+        })
+        value: UNavbarMultiOptions<T, V>['value'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
 
         constructor(options?: Partial<UNavbarMultiOptions<T, V>>) { super(); }
     }
@@ -123,6 +142,7 @@ namespace nasl.ui {
             sync: true,
             docDescription: '当前选择的值',
             if: _ => _.router === false,
+            settable: true,
         })
         value: V;
 
@@ -144,6 +164,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -155,6 +176,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -188,7 +210,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UNavbarGroupMulti | UNavbarItemMulti | UNavbarDividerMulti>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: '左侧导航',
@@ -208,6 +230,10 @@ namespace nasl.ui {
         description: '导航栏的子项目',
     })
     export class UNavbarItemMulti extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UNavbarItemMultiOptions>) { super(); }
     }
@@ -306,6 +332,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -526,6 +553,10 @@ namespace nasl.ui {
         description: '导航栏下拉菜单',
     })
     export class UNavbarDropdownMulti extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UNavbarDropdownMultiOptions>) { super(); }
     }
@@ -559,6 +590,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
     }
@@ -672,6 +704,10 @@ namespace nasl.ui {
         description: '导航栏分组',
     })
     export class UNavbarGroupMulti extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UNavbarGroupMultiOptions>) { super(); }
     }
@@ -724,6 +760,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -741,7 +778,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UNavbarGroupMulti | UNavbarItemMulti>;
+        slotDefault: () => Array<ViewComponent>;
 
         @Slot({
             title: '标题',

@@ -8,6 +8,10 @@ namespace nasl.ui {
         group: "Chart"
     })
     export class UCircularProgress extends ViewComponent {
+        @Prop({
+          title: '当前进度(%)',
+        })
+        percent: UCircularProgressOptions['percent'];
 
         constructor(options?: Partial<UCircularProgressOptions>) { super(); }
     }
@@ -21,6 +25,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'NumberInputSetter',
             },
+            settable: true,
         })
         percent: nasl.core.Decimal | nasl.core.Integer = 0;
 

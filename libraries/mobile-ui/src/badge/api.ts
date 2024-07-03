@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanBadge extends ViewComponent {
+    @Prop({
+      title: '徽章值',
+    })
+    content: VanBadgeOptions['content'];
+
     constructor(options?: Partial<VanBadgeOptions>) {
       super();
     }
@@ -18,7 +23,8 @@ namespace nasl.ui {
       title: '徽章值',
       setter: {
         concept: "NumberInputSetter"
-      }
+      },
+      settable: true,
     })
     content: nasl.core.Decimal = 2;
     @Prop({

@@ -1,3 +1,4 @@
+import { sync } from '@lcap/vue2-utils';
 import { createNamespace, isDef } from '../utils';
 import { PopupMixin } from '../mixins/popup';
 import Icon from '../icon';
@@ -5,7 +6,12 @@ import Icon from '../icon';
 const [createComponent, bem] = createNamespace('popup');
 
 export default createComponent({
-  mixins: [PopupMixin({ independInDesigner: true })],
+  mixins: [
+    PopupMixin({ independInDesigner: true }),
+    sync({
+      visible: 'realValue',
+    }),
+  ],
 
   props: {
     round: Boolean,
