@@ -6,8 +6,11 @@ import LcapConfig from './lcap-config';
 import type { LcapThemeOptions, ViteLcapPluginOptions } from './lcap-build';
 
 const DEFAULT_THEME_OPTIONS: LcapThemeOptions = {
+  findThemeType: 'theme',
   themeVarCssPath: './src/theme/vars.css',
   themeComponentFolder: './src/theme/components',
+  useOldCssVarParser: false,
+  themePreviewEntry: './src/theme/index',
   previewPages: [
     {
       name: 'dashboard',
@@ -20,17 +23,29 @@ const DEFAULT_THEME_OPTIONS: LcapThemeOptions = {
   ],
 };
 
+const EXTENSION_DEFAULT_THEME_OPTIONS: LcapThemeOptions = {
+  findThemeType: 'component',
+  themeVarCssPath: '',
+  themeComponentFolder: './src/components',
+  themePreviewEntry: '',
+  useOldCssVarParser: false,
+  previewPages: [],
+};
+
 export default (options: ViteLcapPluginOptions = {}) => {
   const cwd = process.cwd();
+  const isExtension = options.type && options.type === 'extension';
+  const defaultPublicPath = isExtension ? 'https://static-vusion.163yun.com/packages/extension' : 'https://static-vusion.163yun.com/packages';
+  const defaultThemeOptions = isExtension ? EXTENSION_DEFAULT_THEME_OPTIONS : DEFAULT_THEME_OPTIONS;
   const pluginOption: ViteLcapPluginOptions = {
     rootPath: cwd,
     type: 'nasl.ui',
     framework: 'react',
-    assetsPublicPath: options.type && options.type === 'extension' ? 'https://static-vusion.163yun.com/packages/extension' : 'https://static-vusion.163yun.com/packages',
+    assetsPublicPath: defaultPublicPath,
     destDir: 'dist-theme',
     ...options,
     theme: {
-      ...DEFAULT_THEME_OPTIONS,
+      ...defaultThemeOptions,
       ...(options.theme || {}),
     },
   };
@@ -40,7 +55,7 @@ export default (options: ViteLcapPluginOptions = {}) => {
   }
 
   if (pluginOption.theme) {
-    pluginOption.theme.themeVarCssPath = path.resolve(cwd, pluginOption.theme.themeVarCssPath || '');
+    pluginOption.theme.themeVarCssPath = pluginOption.theme.themeVarCssPath ? path.resolve(cwd, pluginOption.theme.themeVarCssPath || '') : '';
     pluginOption.theme.themeComponentFolder = path.resolve(cwd, pluginOption.theme.themeComponentFolder || '');
   }
 
@@ -65,6 +80,7 @@ export default (options: ViteLcapPluginOptions = {}) => {
     LcapCodeGen({
       ...pluginOption.theme,
       framework: pluginOption.framework,
+      type: pluginOption.type,
     }),
     LcapBuild(pluginOption),
   ];

@@ -11,6 +11,36 @@ namespace nasl.ui {
     constructor(options?: Partial<VanDatetimePickerOptions>) {
       super();
     }
+    @Prop({
+      title: '值',
+    })
+    value: VanDatetimePickerOptions['value'];
+
+    @Prop({
+      title: '起始值',
+    })
+    startValue: VanDatetimePickerOptions['startValue'];
+
+    @Prop({
+      title: '结束值',
+    })
+    endValue: VanDatetimePickerOptions['endValue'];
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
+    @Prop({
+      title: '预览',
+    })
+    preview: nasl.core.Boolean;
+
     @Method({
       title: 'undefined',
       description: '打开'
@@ -189,13 +219,15 @@ namespace nasl.ui {
     @Prop<VanDatetimePickerOptions, 'startValue'>({
       title: '起始值',
       sync: true,
-      if: _ => _.range === true
+      if: _ => _.range === true,
+      settable: true,
     })
     startValue: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop<VanDatetimePickerOptions, 'endValue'>({
       title: '结束值',
       sync: true,
-      if: _ => _.range === true
+      if: _ => _.range === true,
+      settable: true,
     })
     endValue: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop({
@@ -211,7 +243,8 @@ namespace nasl.ui {
       title: '值',
       description: '用于标识时间选择的值',
       sync: true,
-      if: _ => _.range !== true
+      if: _ => _.range !== true,
+      settable: true,
     })
     value: nasl.core.String | nasl.core.DateTime | nasl.core.Date | nasl.core.Time;
     @Prop({
@@ -339,7 +372,8 @@ namespace nasl.ui {
       description: '正常显示，但禁止选择/输入',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     readonly: nasl.core.Boolean = false;
     @Prop({
@@ -348,7 +382,8 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     disabled: nasl.core.Boolean = false;
     @Prop({
@@ -369,8 +404,18 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      settable: true,
     })
     preview: nasl.core.Boolean = false;
+    @Prop({
+      group: '主要属性',
+      title: '展示弹层',
+      sync: true,
+      setter: {
+        concept: "SwitchSetter"
+      }
+    })
+    visible: nasl.core.Boolean;
     @Event({
       title: '确认',
       description: '点击完成按钮时触发的事件'
@@ -419,12 +464,12 @@ namespace nasl.ui {
       title: 'undefined',
       description: '自定义选择器顶部内容',
     })
-    slotPickerTop: () => Array<VanPickerActionSlot>;
+    slotPickerTop: () => Array<ViewComponent>;
     @Slot({
       title: 'undefined',
       description: '自定义选择器底部内容',
     })
-    slotPickerBottom: () => Array<VanPickerActionSlot>;
+    slotPickerBottom: () => Array<ViewComponent>;
   }
   @Component({
     title: '时间选择事件插槽',

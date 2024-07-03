@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import MSinglex from '../m-singlex.vue';
 import { MGroupParent } from '../m-group.vue';
 import CssVarsStyleMixin from '../../mixins/css-variables';
@@ -60,7 +61,23 @@ export default {
     name: 'u-sidebar',
     groupName: 'u-sidebar-group',
     childName: 'u-sidebar-item',
-    mixins: [MSinglex, MGroupParent, CssVarsStyleMixin],
+    mixins: [
+      MSinglex,
+      MGroupParent,
+      CssVarsStyleMixin,
+      sync(
+        'readonly',
+        'disabled',
+        {
+          data() {
+            return this.currentDataSource ? this.currentDataSource.data : [];
+          },
+          value() {
+            return this.selectedVM && this.selectedVM.value;
+          },
+        },
+      ),
+    ],
     provide() {
       return {
         getStaticCssVarStyle: () => this.getStaticCssVarStyle(),

@@ -38,6 +38,7 @@
               const oldValue = oldVM ? oldVM.value : undefined;
               if (value === oldValue)
                   return;
+              this.$emit('update', value, this);
               this.$emit('change', {
                   value,
                   oldValue,
