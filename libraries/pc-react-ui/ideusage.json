@@ -256,7 +256,8 @@
   {
     "name": "Form",
     "ideusage": {
-      "idetype": "container"
+      "idetype": "container",
+      "forceUpdateWhenAttributeChange": true
     }
   },
   {
