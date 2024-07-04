@@ -296,6 +296,10 @@ export default {
     width: 100%;
 }
 
+.root[layout="block"] {
+  display: flex;
+}
+
 .root[layout="block"] > .field {
     vertical-align: top;
 }
@@ -308,15 +312,19 @@ export default {
     flex-shrink: 0;
 }
 
-.root[layout="center"] .field {
+.root[layout="center"] .field,
+.root[layout="end"] .field,
+.root[layout="block"] .field {
     flex: 1;
 }
 
+.root[layout="block"] .wrap,
+.root[layout="end"] .wrap,
 .root[layout="center"] .wrap {
     width: 100%;
 }
 
-.root[layout="end"]{
+.root[layout="end"] {
     display: flex;
     align-items: flex-end;
 }
