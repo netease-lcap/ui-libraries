@@ -74,7 +74,7 @@ function deployImages(rootPath, config: LcapCliConfig) {
   });
 }
 
-export default (rootPath, commandArgs = {}) => {
+export default (rootPath, { images, ...commandArgs }) => {
   const lcapCliConfig: LcapCliConfig = {
     ...commandArgs,
   };
@@ -93,6 +93,9 @@ export default (rootPath, commandArgs = {}) => {
 
   execSync(concatCommand('npx lcap deploy dist-theme', lcapCliConfig));
 
-  deployImages(rootPath, lcapCliConfig);
+  if (images) {
+    deployImages(rootPath, lcapCliConfig);
+  }
+
   logger.success('Deploy successed!');
 };
