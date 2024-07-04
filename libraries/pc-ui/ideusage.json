@@ -245,7 +245,7 @@
     {
         "name": "UAnchor",
         "ideusage": {
-            "idetype": "element"
+           "idetype": "container"
         }
     },
     {
