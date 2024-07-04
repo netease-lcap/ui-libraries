@@ -166,6 +166,10 @@ export default {
 [designer] .content {
     top: 0;
 }
+[designer] .dot {
+    margin-top: 6px;
+}
+
 .left .tail, .left .dot,
 .left .dotCustom,
 .right .tail, .right .dot,
