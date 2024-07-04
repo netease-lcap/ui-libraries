@@ -170,6 +170,10 @@ export default {
     margin-top: 6px;
 }
 
+[designer] .tail {
+    top: 16px;
+}
+
 .left .tail, .left .dot,
 .left .dotCustom,
 .right .tail, .right .dot,
