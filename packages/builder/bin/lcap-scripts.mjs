@@ -45,6 +45,7 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
 
   program.command('deploy')
     .description('发布流程')
+    .option('--images', '发布图片')
     .option('--platform <platform>', '发布cdn 地址')
     .option('--username <username>', '发布username')
     .option('--password <password>', '发布password')

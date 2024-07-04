@@ -86,12 +86,12 @@ namespace nasl.ui {
         title: '面板组',
         description: '面板组',
     })
-    class UPanelGroup extends ViewComponent {
+    export class UPanelGroup extends ViewComponent {
 
         constructor(options?: Partial<UPanelGroupOptions>) { super(); }
     }
 
-    class UPanelGroupOptions  extends ViewComponentOptions {
+    export class UPanelGroupOptions  extends ViewComponentOptions {
         @Prop({
             group: '主要属性',
             title: '标题',
