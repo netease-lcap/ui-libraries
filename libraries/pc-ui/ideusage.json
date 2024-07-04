@@ -66,7 +66,13 @@
         "name": "UGridLayoutColumn",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'u-grid-layout-row'"
+            "parentAccept": "target.tag === 'u-grid-layout-row'",
+            "gridCol": {
+                "rowComponent": "u-grid-layout-row",
+                "colGap": "{ const gap = this.getParent().getAttribute('gap')?.value || 'normal'; const _map = { none: 0, mini: 4, small: 8, normal: 16, huge: 32 }; return _map[gap]; }",
+                "colNum": "this.getParent().getAttribute('repeat')?.value || 12",
+                "spanAttr": "span"
+            }
         }
     },
     {
@@ -623,25 +629,32 @@
     {
         "name": "URadios",
         "ideusage": {
-            "idetype": "container",
+           "idetype": "container",
             "structured": true,
             "dataSource": {
                 "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
                 "display": 3,
-                "loopElem": "> label[class^='u-radios_radio']",
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> label[class^='u-radios_radio']:not([data-nodepath])",
                 "emptySlot": {
                     "display": "inline",
                     "condition": "!this.getAttribute('dataSource')",
                     "accept": "false"
                 }
             },
-            "childAccept":"target.tag === 'u-radio'"
+            "childAccept": "target.tag === 'u-radio'",
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block;width:90px;"
+            }
         }
     },
     {
         "name": "URadio",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "displaySlotInline": {
+                "item": true
+            }
         }
     },
     {
@@ -653,25 +666,32 @@
     {
         "name": "UCheckboxes",
         "ideusage": {
-            "idetype": "container",
+           "idetype": "container",
             "structured": true,
             "dataSource": {
-                "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
                 "display": 3,
-                "loopElem": "> label[class^='u-checkbox']",
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> label[class^='u-checkbox']:not([data-nodepath])",
                 "emptySlot": {
                     "display": "inline",
                     "condition": "!this.getAttribute('dataSource')",
                     "accept": "false"
                 }
             },
-            "childAccept": "target.tag === 'u-checkbox'"
+            "childAccept": "target.tag === 'u-checkbox'",
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block;width:90px;"
+            }
         }
     },
     {
         "name": "UCheckbox",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "displaySlotInline": {
+                "item": true
+            }
         }
     },
     {
