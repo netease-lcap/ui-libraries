@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { UListViewItem } from '../u-list-view.vue';
 import SEmpty from '../s-empty.vue';
 import MPreview from '../u-text.vue/preview';
@@ -24,7 +25,14 @@ export default {
     parentName: 'u-capsules',
     components: { SEmpty },
     extends: UListViewItem,
-    mixins: [MPreview],
+    mixins: [
+      MPreview,
+      sync({
+        disabled() {
+          return this.disabled || (this.parentVM && this.parentVM.disabled);
+        },
+      }),
+    ],
     props: {
       label: String,
       preview: { type: Boolean, default: false },

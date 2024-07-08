@@ -1,4 +1,5 @@
 // Utils
+import { sync } from '@lcap/vue2-utils';
 import { createNamespace, isDef, addUnit } from '../utils';
 import { scrollLeftTo, scrollTopTo } from './utils';
 import { route } from '../utils/router';
@@ -39,6 +40,10 @@ export default createComponent({
       if (this.scrollspy) {
         bind(this.scroller, 'scroll', this.onScroll, true);
       }
+    }),
+    sync({
+      value: 'currentName',
+      disabled: 'disabled',
     }),
   ],
 

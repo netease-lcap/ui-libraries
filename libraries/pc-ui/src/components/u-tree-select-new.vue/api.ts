@@ -11,12 +11,27 @@ namespace nasl.ui {
       @Prop({
           title: '数据',
       })
-      data: UTreeSelectNewOptions<T, V, M>['dataSource'];
+      data: nasl.collection.List<T>;
 
       @Prop({
           title: '选中值',
       })
       value: UTreeSelectNewOptions<T, V, M>['value'];
+
+      @Prop({
+        title: '禁用',
+      })
+      disabled: nasl.core.Boolean;
+
+      @Prop({
+        title: '预览',
+      })
+      preview: nasl.core.Boolean;
+
+      @Prop({
+        title: '打开',
+      })
+      opened: nasl.core.Boolean;
 
       @Method({
           title: '重新加载',
@@ -104,6 +119,7 @@ namespace nasl.ui {
           description: '选择后，所选中的值',
           sync: true,
           docDescription: '通过组件进行选择后，最终选中的值，支持双向绑定到变量',
+          settable: true,
       })
       value: M extends true ? nasl.collection.List<V> : V;
 
@@ -188,8 +204,21 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
+          settable: true,
       })
       disabled: nasl.core.Boolean = false;
+
+      @Prop({
+        group: '状态属性',
+        title: '弹出状态',
+        description: '弹出状态分为“True(弹出)/False(关闭)”，默认为“关闭”',
+        docDescription: '开启时加载日期组件时，下拉框自动弹出，默认关闭',
+        setter: {
+            concept: 'SwitchSetter',
+        },
+        settable: true,
+      })
+      opened: nasl.core.Boolean = false;
 
       @Prop({
           group: '样式属性',
@@ -223,6 +252,7 @@ namespace nasl.ui {
         setter: {
           concept: 'SwitchSetter',
         },
+        settable: true,
       })
       preview: nasl.core.Boolean = false;
 
@@ -303,7 +333,7 @@ namespace nasl.ui {
               },
           ],
       })
-      slotDefault: () => Array<UTreeViewNodeNew<T, V>>;
+      slotDefault: () => Array<UTreeViewNodeNew<T, V> | ViewComponent>;
 
       @Slot({
           title: '项',

@@ -1,13 +1,20 @@
+import { sync } from '@lcap/vue2-utils';
 import { createNamespace } from '../utils';
 import { ChildrenMixin } from '../mixins/relation';
 import { routeProps } from '../utils/router';
 
-import VanEmptyCol  from '../emptycol/index';
+import VanEmptyCol from '../emptycol/index';
 
 const [createComponent, bem] = createNamespace('tab');
 
 export default createComponent({
-  mixins: [ChildrenMixin('vanTabs')],
+  mixins: [
+    ChildrenMixin('vanTabs'),
+    sync(
+      'badge',
+      'disabled',
+    ),
+  ],
 
   props: {
     ...routeProps,
@@ -21,7 +28,7 @@ export default createComponent({
     title: String,
     titleStyle: null,
     titleClass: null,
-    disabled: Boolean,
+    disabled: { type: Boolean, default: false },
   },
 
   data() {

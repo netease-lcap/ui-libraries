@@ -8,7 +8,10 @@ namespace nasl.ui {
       group: 'Form'
   })
   export class UValidator extends ViewComponent {
-
+      @Prop({
+        title: '验证是否有效',
+      })
+      valid: nasl.core.Boolean;
 
       @Method({
           title: 'undefined',

@@ -8,6 +8,25 @@ namespace nasl.ui {
         group: "Form"
     })
     export class UCapsules extends ViewComponent {
+        @Prop({
+          title: "值"
+        })
+        value: UCapsulesOptions['value'];
+
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
+
+        @Prop({
+          title: '只读',
+        })
+        readonly: nasl.core.Boolean;
+
+        @Prop({
+          title: '预览',
+        })
+        preview: nasl.core.Boolean;
 
         constructor(options?: Partial<UCapsulesOptions>) { super(); }
     }
@@ -19,6 +38,7 @@ namespace nasl.ui {
             description: '当前选中的值',
             sync: true,
             docDescription: '当前选择的值',
+            settable: true,
         })
         value: any;
 
@@ -63,6 +83,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -74,6 +95,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -135,7 +157,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UCapsule>;
+        slotDefault: () => Array<ViewComponent>;
     }
 
     @Component({
@@ -143,6 +165,10 @@ namespace nasl.ui {
         description: '子选项',
     })
     export class UCapsule extends ViewComponent {
+        @Prop({
+          title: '禁用',
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UCapsuleOptions>) { super(); }
     }
@@ -190,6 +216,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -281,6 +308,6 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UCapsule>;
+        slotDefault: () => Array<ViewComponent>;
     }
 }

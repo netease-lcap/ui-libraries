@@ -8,6 +8,10 @@ namespace nasl.ui {
         group: 'Display'
     })
     export class ULink extends ViewComponent {
+        @Prop({
+          title: '禁用'
+        })
+        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<ULinkOptions>) { super(); }
     }
@@ -132,6 +136,7 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
+            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

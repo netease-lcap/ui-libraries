@@ -44,6 +44,7 @@ export default {
         target: { type: String, default: '_self' },
         destination: String,
         link: [String, Function],
+        colors: Object,
     },
     data() {
         return {
@@ -79,10 +80,7 @@ export default {
             }
         },
         getColor(item) {
-            if (['approve', 'submit'].includes(item.name)) {
-                return 'primary';
-            }
-            return undefined;
+            return this.colors && this.colors[item.name];
         },
         close() {
             this.currentItem = undefined;
@@ -102,7 +100,7 @@ export default {
             const currentItem = item || this.currentItem;
             const { name } = currentItem;
             if (name === 'addSign') {
-                this.addSignOperator(item);
+                this.addSignOperator(currentItem);
                 return;
             }
             const operate = `${name}Task`;
@@ -117,12 +115,16 @@ export default {
             } else if(name !== 'submit') {
                 body.comment = this.model.comment;
             }
-            await this.$processV2.setTaskInstance({
+            const res = await this.$processV2.setTaskInstance({
                 path: {
                     operate,
                 },
                 body,
             });
+            if(res?.code === "200") {
+                const eventName = `on${name.replace(/^./, (m) => m.toUpperCase())}`
+                this.$emit(name);
+            }
             this.refresh();
         },
         refresh() {
@@ -173,11 +175,15 @@ export default {
                 cancelButton: this.$tt('revertCancel'),
             }).then(async () => {
                 if (this.$processV2) {
-                    await this.$processV2.revertTask({
+                    const res = await this.$processV2.revertTask({
                         body: {
                             taskId: this.taskId,
                         },
                     });
+                    if(res?.code === "200") {
+                        const eventName = `on${item.name.replace(/^./, (m) => m.toUpperCase())}`
+                        this.$emit(item.name);
+                    }
                     this.refresh();
                 }
             }).catch(() => {
@@ -196,11 +202,15 @@ export default {
                 cancelButton: this.$tt('withdrawCancel'),
             }).then(async () => {
                 if (this.$processV2) {
-                    await this.$processV2.withdrawTask({
+                    const res = await this.$processV2.withdrawTask({
                         body: {
                             taskId: this.taskId,
                         },
                     });
+                    if(res?.code === "200") {
+                        const eventName = `on${item.name.replace(/^./, (m) => m.toUpperCase())}`
+                        this.$emit(item.name);
+                    }
                     this.refresh();
                 }
             }).catch(() => {
@@ -212,12 +222,16 @@ export default {
          */
         async addSignOperator(item) {
             if (this.$processV2) {
-                await this.$processV2.addSignTask({
+                const res = await this.$processV2.addSignTask({
                     body: {
                         taskId: this.taskId,
                         userForAddSign: this.model.userName
                     },
                 });
+                if(res?.code === "200") {
+                    const eventName = `on${item.name.replace(/^./, (m) => m.toUpperCase())}`
+                    this.$emit(item.name);
+                }
                 this.refresh();
             }
         },

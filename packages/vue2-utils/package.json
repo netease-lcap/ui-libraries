@@ -1,0 +1,52 @@
+{
+  "name": "@lcap/vue2-utils",
+  "version": "1.0.0",
+  "description": "CodeWave utils library",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc -w",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netease-lcap/ui-libraries.git#develop"
+  },
+  "keywords": [
+    "utils",
+    "lcap",
+    "vue2"
+  ],
+  "author": "NetEase CodeWave FE Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/netease-lcap/ui-libraries/issues"
+  },
+  "homepage": "https://github.com/netease-lcap/ui-libraries/tree/develop#readme",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "node": "./dist/index.js",
+      "require": "./dist/index.js",
+      "import": "./dist/index.js"
+    },
+    "./install": "./dist/install.js",
+    "./mixins": "./dist/mixins/index.js",
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.136",
+    "vue": "2.6.12",
+    "typescript": "^5.3.3"
+  }
+}

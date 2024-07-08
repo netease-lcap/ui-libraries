@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import { MSinglexItem } from '../m-singlex.vue';
 import ULink from '../u-link.vue';
 import { isElementInView } from '../../utils/dom';
@@ -46,6 +47,9 @@ export default {
     parentName: 'u-sidebar',
     groupName: 'u-sidebar-group',
     extends: MSinglexItem,
+    mixins: [
+      sync('disabled'),
+    ],
     computed: {
         isInSidebar() {
             return !(this.groupVM && this.groupVM.$options.name === this.$options.groupName);

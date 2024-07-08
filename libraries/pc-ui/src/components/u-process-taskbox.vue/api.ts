@@ -8,6 +8,10 @@ namespace nasl.ui {
         group: 'Process'
     })
     export class UProcessTaskbox extends ViewComponent {
+        @Prop({
+          title: '总条数',
+        })
+        total: nasl.core.Integer;
 
         constructor(options?: Partial<UProcessTaskboxOptions>) { super(); }
     }
@@ -32,6 +36,7 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
                 precision: 0,
             },
+            settable: true,
         })
         size: nasl.core.Integer = 5;
 

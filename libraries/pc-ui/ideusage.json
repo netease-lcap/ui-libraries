@@ -3,33 +3,33 @@
         "name": "ULinearLayout",
         "ideusage": {
             "idetype": "container",
-            "containerDirection": "this.getAttribute('direction')?.value === 'vertical' ? 'column' : 'row' ",
-            "expandWhenHesitate": true
-        },
-        "automate": [
-            {
-              "command": "WRAP_LINEAR_VERTICAL",
-              "useblock": 0,
-              "attribute": {
-                "mode": "flex",
-                "direction": "vertical",
-                "justify": "start",
-                "alignment": "start",
-                "wrap": "false"
-              }
-            },
-            {
-              "command": "WRAP_LINEAR_HORIZONTAL",
-              "useblock": 0,
-              "attribute": {
-                "mode": "flex",
-                "direction": "horizontal",
-                "justify": "start",
-                "alignment": "start",
-                "wrap": "false"
-              }
-            }
-        ]
+            "containerDirection": "column",
+            "expandWhenHesitate": true,
+           "automate": [
+                {
+                    "command": "WRAP_LINEAR_VERTICAL",
+                    "useblock": 0,
+                    "attribute": {
+                        "mode": "flex",
+                        "direction": "vertical",
+                        "justify": "start",
+                        "alignment": "start",
+                        "wrap": "false"
+                    }
+                },
+                {
+                    "command": "WRAP_LINEAR_HORIZONTAL",
+                    "useblock": 0,
+                    "attribute": {
+                        "mode": "flex",
+                        "direction": "horizontal",
+                        "justify": "start",
+                        "alignment": "start",
+                        "wrap": "false"
+                    }
+                }
+            ]
+        }
     },
     {
         "name": "UAbsoluteLayout",
@@ -37,8 +37,8 @@
             "idetype": "board",
             "automate": [
                 {
-                  "command": "WRAP_FREE",
-                  "useblock": 0
+                    "command": "WRAP_FREE",
+                    "useblock": 0
                 }
             ]
         }
@@ -66,7 +66,13 @@
         "name": "UGridLayoutColumn",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'u-grid-layout-row'"
+            "parentAccept": "target.tag === 'u-grid-layout-row'",
+            "gridCol": {
+                "rowComponent": "u-grid-layout-row",
+                "colGap": "{ const gap = this.getParent().getAttribute('gap')?.value || 'normal'; const _map = { none: 0, mini: 4, small: 8, normal: 16, huge: 32 }; return _map[gap]; }",
+                "colNum": "this.getParent().getAttribute('repeat')?.value || 12",
+                "spanAttr": "span"
+            }
         }
     },
     {
@@ -81,7 +87,10 @@
         "name": "UMultiLayoutItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'u-multi-layout'"
+            "parentAccept": "target.tag === 'u-multi-layout'",
+            "slotInlineStyle": {
+                "default": "height:100%;"
+            }
         }
     },
     {
@@ -120,7 +129,10 @@
             "idetype": "container",
             "structured": true,
             "childAccept": "['u-sidebar-group', 'u-sidebar-item', 'u-sidebar-divider'].includes(target.tag)",
-            "parentAccept": "['u-sidebar-group', 'u-sidebar'].includes(target.tag)"
+            "parentAccept": "['u-sidebar-group', 'u-sidebar'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -144,7 +156,10 @@
             "idetype": "container",
             "structured": true,
             "parentAccept": "['u-navbar-group-multi', 'u-navbar-multi'].includes(target.tag)",
-            "childAccept": "['u-navbar-group-multi', 'u-navbar-item-multi', 'u-navbar-divider-multi'].includes(target.tag)"
+            "childAccept": "['u-navbar-group-multi', 'u-navbar-item-multi', 'u-navbar-divider-multi'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -207,7 +222,10 @@
             "idetype": "container",
             "structured": true,
             "childAccept": "['u-dropdown-group', 'u-dropdown-item'].includes(target.tag)",
-            "parentAccept": "['u-dropdown-group', 'u-dropdown'].includes(target.tag)"
+            "parentAccept": "['u-dropdown-group', 'u-dropdown'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -230,7 +248,7 @@
     {
         "name": "UAnchor",
         "ideusage": {
-            "idetype": "element"
+           "idetype": "container"
         }
     },
     {
@@ -259,7 +277,7 @@
             "idetype": "container",
             "parentAccept": "target.tag === 'u-panel'"
         }
-    }, 
+    },
     {
         "name": "UCollapse",
         "ideusage": {
@@ -272,7 +290,10 @@
         "name": "UCollapseItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'u-collapse'"
+            "parentAccept": "target.tag === 'u-collapse'",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -315,7 +336,7 @@
     {
         "name": "IIco",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "container"
         }
     },
     {
@@ -327,7 +348,7 @@
     {
         "name": "ULabel",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "element"
         }
     },
     {
@@ -341,14 +362,31 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "'u-carousel-item' === target.tag"
+            "childAccept": "'u-carousel-item' === target.tag",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+                "display": 1,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> label[class^='u-carousel_body']:not([data-nodepath])",
+                "emptySlot": {
+                    "display": "large",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            },
+            "additionalAttribute": {
+                ":autoplay": "\"false\""
+            }
         }
     },
     {
         "name": "UCarouselItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "'u-carousel' === target.tag"
+            "parentAccept": "'u-carousel' === target.tag",
+            "displaySlotConditions": {
+                "title": false
+            }
         }
     },
     {
@@ -378,7 +416,10 @@
     {
         "name": "UImage",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "additionalAttribute": {
+                ":convertSrcFn": "\"(src) => src.startsWith('/assets') ? '/lowcode-static' + src : src \""
+            }
         }
     },
     {
@@ -390,7 +431,10 @@
     {
         "name": "UCountDown",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "additionalAttribute": {
+                ":autostart": "\"false\""
+            }
         }
     },
     {
@@ -404,7 +448,17 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "target.tag === 'u-timeline-item'"
+            "childAccept": "target.tag === 'u-timeline-item'",
+            "dataSource": {
+                "display": 3,
+                "dismiss": "this.filterElement(el => el.tag!=='template').length > 0",
+                "loopElem": "> div",
+                "emptySlot": {
+                  "display": "inline",
+                  "condition": "!this.getAttribute('dataSource')",
+                  "accept": false
+                }
+            }
         }
     },
     {
@@ -423,7 +477,7 @@
                 "display": 3,
                 "loopElem": "table > tbody > tr",
                 "emptySlot": {
-                    "condition": "this.elementsLength() === 0",
+                    "condition": "this.getDefaultElements().length === 0",
                     "accept": "target.concept === 'Entity'"
                 }
             },
@@ -439,6 +493,8 @@
         "name": "UTableViewColumn",
         "ideusage": {
             "idetype": "container",
+            "forceRefresh": "parent",
+            "childAccept": false,
             "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
             "selector": [
                 {
@@ -448,23 +504,57 @@
                 {
                     "expression": "this.getElement(el => el.slotTarget === 'cell')",
                     "cssSelector": "td"
+                },
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'expand-content')",
+                    "cssSelector": "tr[class^='u-table-view_expand-content']"
                 }
-              ]
+            ],
+            "displaySlotInline": {
+                "cell": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type').value)",
+                "title": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type').value)"
+            }
+        }
+    },
+    {
+        "name": "UTableViewColumnConfig",
+        "ideusage": {
+            "idetype": "container",
+            "forceRefresh": "parent",
+            "childAccept": false,
+            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
         }
     },
     {
         "name": "UTableViewColumnDynamic",
         "ideusage": {
             "idetype": "container",
+            "forceRefresh": "parent",
+            "childAccept": false,
             "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
         }
     },
     {
         "name": "UTableViewColumnGroup",
+       "ideusage": {
+        "idetype": "container",
+        "forceRefresh": "parent",
+        "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic'].includes(target.tag)",
+        "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+       }
+    },
+    {
+        "name": "UTableViewExpander",
         "ideusage": {
-            "idetype": "container",
-            "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic'].includes(target.tag)",
-            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+        "idetype": "element",
+            "forceRefresh": "parent",
+            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
+            "additionalAttribute": {
+                ":item": "\"argus.item\""
+            },
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -475,7 +565,7 @@
                 "display": 3,
                 "loopElem": "[class^='u-list-view_body'] > div > [class^='u-list-view_item']",
                 "emptySlot": {
-                    "condition": "this.elementsLength() === 0",
+                   "condition": "!this.getAttribute('dataSource')",
                     "accept": "target.concept === 'Entity'"
                 }
             }
@@ -489,7 +579,7 @@
                 "display": 3,
                 "loopElem": "[class^='u-grid-view_body'] > div > [class^='u-grid-view_item']",
                 "emptySlot": {
-                    "condition": "this.elementsLength() === 0",
+                    "condition": "!this.getAttribute('dataSource')",
                     "accept": "target.concept === 'Entity'"
                 }
             }
@@ -504,7 +594,11 @@
     {
         "name": "UListComponents",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "additionalAttribute": {
+                ":dataSource": "\"[{}]\"",
+                ":colnum": "\"1\""
+            }
         }
     },
     {
@@ -527,7 +621,10 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "['u-form-item'].includes(target.tag)"
+            "childAccept": "['u-form-item'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -539,7 +636,8 @@
     {
         "name": "UNumberInput",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "element",
+            "textholder": "value"
         }
     },
     {
@@ -551,25 +649,32 @@
     {
         "name": "URadios",
         "ideusage": {
-            "idetype": "container",
+           "idetype": "container",
             "structured": true,
             "dataSource": {
                 "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
                 "display": 3,
-                "loopElem": "> label[class^='u-radios_radio']",
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> label[class^='u-radios_radio']:not([data-nodepath])",
                 "emptySlot": {
                     "display": "inline",
                     "condition": "!this.getAttribute('dataSource')",
-                    "accept": "false"
+                    "accept": false
                 }
             },
-            "childAccept":"target.tag === 'u-radio'"
+            "childAccept": "target.tag === 'u-radio'",
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block;width:90px;"
+            }
         }
     },
     {
         "name": "URadio",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "displaySlotInline": {
+                "item": true
+            }
         }
     },
     {
@@ -581,25 +686,32 @@
     {
         "name": "UCheckboxes",
         "ideusage": {
-            "idetype": "container",
+           "idetype": "container",
             "structured": true,
             "dataSource": {
-                "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
                 "display": 3,
-                "loopElem": "> label[class^='u-checkbox']",
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> label[class^='u-checkbox']:not([data-nodepath])",
                 "emptySlot": {
                     "display": "inline",
                     "condition": "!this.getAttribute('dataSource')",
-                    "accept": "false"
+                    "accept": false
                 }
             },
-            "childAccept": "target.tag === 'u-checkbox'"
+            "childAccept": "target.tag === 'u-checkbox'",
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block;width:90px;"
+            }
         }
     },
     {
         "name": "UCheckbox",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "displaySlotInline": {
+                "item": true
+            }
         }
     },
     {
@@ -654,7 +766,18 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept":"target.tag === 'u-tab'"
+            "childAccept":"target.tag === 'u-tab'",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> div[class^='u-tabs_head'] a[class^='u-tabs_item']",
+                "emptySlot": {
+                    "display": "large",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            }
         }
     },
     {
@@ -669,7 +792,7 @@
                 },
                 {
                     "expression": "this",
-                    "cssSelector": "[class^='u-tabs_body']"
+                    "cssSelector": "[class^='u-tabs_tab']"
                 }
             ],
             "events": {
@@ -762,7 +885,18 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "target.tag === 'u-tree-view-node-new'"
+            "childAccept": "target.tag === 'u-tree-view-node-new'",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> div[class^='u-tree-view-new_node']:not([data-nodepath])",
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            }
         }
     },
     {
@@ -771,7 +905,10 @@
             "idetype": "container",
             "structured": true,
             "childAccept": "target.tag === 'u-tree-view-node-new'",
-            "parentAccept": "['u-tree-select-new', 'u-tree-view-new', 'u-tree-view-node-new'].includes(target.tag)"
+            "parentAccept": "['u-tree-select-new', 'u-tree-view-new', 'u-tree-view-node-new'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -824,10 +961,19 @@
     {
         "name": "UPopupCombination",
         "ideusage": {
-            "idetype": "popover",
-            "selector": {
-                "expression": "this",
-                "cssSelector": "div[class^='u-popup_body']"
+            "idetype": "container",
+            "selector": [
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'reference')",
+                    "cssSelector": "span[class^='u-popup-combination']"
+                },
+                {
+                    "expression": "this",
+                    "cssSelector": "div[class^='u-popup']"
+                }
+            ],
+            "events": {
+                "click": true
             }
         }
     },
@@ -845,10 +991,10 @@
     {
         "name": "UDrawer",
         "ideusage": {
-            "idetype": "modal",
+            "idetype": "drawer",
             "selector": {
-              "expression": "this",
-              "cssSelector": "div[class^='u-drawer_drawer']"
+                "expression": "this.getElement(el => el.slotTarget === 'body')",
+                "cssSelector": "div[class^='u-drawer_drawer']"
             },
             "cacheOpenKey": "visible"
         }
@@ -857,11 +1003,15 @@
         "name": "UToastSingle",
         "ideusage": {
             "idetype": "messager",
-            "selector": {
-              "expression": "this",
-              "cssSelector": "div[class^='u-toast_index']"
+            "elementSutando": {
+                "condition": true,
+                "component": "UToastDesigner",
+                "selector": {
+                    "slot": "inject",
+                    "cssSelector": "div[class^='u-toast_index']"
+                }
             },
-            "cacheOpenKey": "open"
+            "cacheOpenKey": "visible"
         }
     },
     {

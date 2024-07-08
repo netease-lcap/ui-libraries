@@ -8,6 +8,11 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanCircle extends ViewComponent {
+    @Prop({
+      title: '值',
+    })
+    value: VanCircleOptions['value'];
+
     constructor(options?: Partial<VanCircleOptions>) {
       super();
     }
@@ -24,7 +29,8 @@ namespace nasl.ui {
       setter: {
         concept: "NumberInputSetter",
         min: 0
-      }
+      },
+      settable: true,
     })
     value: nasl.core.Decimal;
     @Prop({

@@ -1,7 +1,7 @@
 <template>
     <u-linear-layout direction="vertical">
         <u-linear-layout><u-button @click="changeList" id="changelistbutton">变换data值</u-button></u-linear-layout>
-        <u-table-view striped :data="data" pagination :page-size="pageSize" :page-number="pageNumber" :show-sizer="true" :page-size-options="[10,20,50]" ref="tableview">
+        <u-table-view striped :data-source="data" pagination :page-size="pageSize" :page-number="pageNumber" :show-sizer="true" :page-size-options="[10,20,50]" ref="tableview">
             <u-table-view-column title="用户名" field="name" width="15%"></u-table-view-column>
             <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
             <u-table-view-column title="地址" field="address"></u-table-view-column>
