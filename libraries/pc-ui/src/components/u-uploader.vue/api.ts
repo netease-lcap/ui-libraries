@@ -591,7 +591,8 @@ namespace nasl.ui {
             title: '文件列表',
             description: '文件列表。',
         })
-        slotFileList: () => Array<ViewComponent>;
+        'slot-file-list': () => Array<ViewComponent>;
+        slotFileList: () => Array<ViewComponent>; // 防止 ide 编译报错
 
         @Slot({
             title: '拖拽文字',
