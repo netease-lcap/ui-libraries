@@ -54,7 +54,7 @@ namespace nasl.ui {
             },
             settable: true,
         })
-        value: nasl.core.Decimal | nasl.core.Integer = 0;
+        value: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             group: '数据属性',
