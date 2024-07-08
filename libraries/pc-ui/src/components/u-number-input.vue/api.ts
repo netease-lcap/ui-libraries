@@ -1,15 +1,6 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
-    type NumberLike = number | `${number}`;
-    type Stringify<T extends string | number | bigint | boolean | null | undefined> = `${T}`;
-
-    type CheckLeftIsExtendsRight<T, R> = T extends R ? true : false;
-
-    type IsZero<N extends NumberLike> = CheckLeftIsExtendsRight<N, 0 | "0">
-    type IsOverZero<N extends NumberLike> = IsZero<N> extends true ? false
-      : CheckLeftIsExtendsRight<Stringify<N> extends `${"-"}${infer Rest}` ? Rest : false, false>
-
     @Component({
         title: '数字输入',
         icon: 'number',
@@ -63,7 +54,7 @@ namespace nasl.ui {
             },
             settable: true,
         })
-        value: IsOverZero<UNumberInputOptions['decimalLength']> extends true ? nasl.core.Decimal : nasl.core.Integer;
+        value: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
             group: '数据属性',
