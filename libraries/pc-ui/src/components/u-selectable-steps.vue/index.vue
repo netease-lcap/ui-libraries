@@ -39,6 +39,9 @@ export default {
 .root[layout="inline"] .title {
     padding: 0;
     padding-left: var(--steps-seleatable-item-title-padding-left);
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
     > span {
         white-space: nowrap;
     }

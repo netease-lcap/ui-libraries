@@ -4,6 +4,7 @@ import Component from '../index.js';
 import ExamplesDemo1 from '../demos/examples/ExamplesDemo1.vue';
 import ExamplesDemo2 from '../demos/examples/ExamplesDemo2.vue';
 import ExamplesDemo3 from '../demos/examples/ExamplesDemo3.vue';
+import ExamplesDemo4 from '../demos/examples/ExamplesDemo4.vue';
 
 Vue.use(CloudUI);
 
@@ -43,6 +44,15 @@ export const Demo2 = {
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo3,
+    },
+    template: '<deprecated-demo />',
+  }),
+};
+
+export const Demo4 = {
+  render: () => ({
+    components: {
+      DeprecatedDemo: ExamplesDemo4,
     },
     template: '<deprecated-demo />',
   }),

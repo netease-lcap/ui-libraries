@@ -258,16 +258,16 @@ namespace nasl.ui {
             transferValues: nasl.collection.List<V>;
         }) => any;
 
-        @Slot({
-            title: '默认',
-            description: '插入文本或 HTML',
-        })
-        slotDefault: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: '默认',
+        //     description: '插入文本或 HTML',
+        // })
+        // slotDefault: () => Array<ViewComponent>;
 
-        @Slot({
-            title: '项',
-            description: '自定义选项的结构和样式',
-        })
-        slotItem: (current: Current<T>) => Array<ViewComponent>;
+        // @Slot({
+        //     title: '项',
+        //     description: '自定义选项的结构和样式',
+        // })
+        // slotItem: (current: Current<T>) => Array<ViewComponent>;
     }
 }

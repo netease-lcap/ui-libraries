@@ -5,7 +5,12 @@
     list-style: none;
 }
 
-.root li:last-child [uname="tail"] {
+.root > li:last-child [uname="tail"] {
+    display: none;
+}
+
+/* 新ide里会在每个li标签外层包一层div标签 */
+.root > div:last-child li [uname="tail"] {
     display: none;
 }
 

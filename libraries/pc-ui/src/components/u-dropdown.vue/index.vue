@@ -494,7 +494,9 @@ content: "\e65d";
     position: absolute;
     font-size: 18px;
     padding-left: 6px;
-    margin-left: 16px;
+    /* margin-left: 16px; */
+    right: 7px;
+    top: 0;
     border-left: var(--button-border-width) solid var(--button-border-color);
 }
 .root[type="more"]:hover .iconMore,
