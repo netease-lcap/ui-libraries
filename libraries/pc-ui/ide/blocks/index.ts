@@ -54,7 +54,7 @@ export default [
     genBlock: (naslNode, refElement) => genUpdateBlock(naslNode, refElement),
   },
   {
-    title: '选择框',
+    title: '选择器',
     image: selectsvg,
     genBlock: (naslNode, refElement) => genSelectBlock(naslNode, refElement),
   },
