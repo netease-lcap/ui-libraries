@@ -151,11 +151,11 @@ export function useHandleAvatar(props) {
       src: avatarSrcProps,
       size: avatarSizeProps,
       title: avatarTitleProps,
-      render: (localProps, dom) => {
+      render: () => {
         return React.cloneElement(AvatarRenderProps);
       },
     }),
-    menuDataRender: (menuData) => {
+    menuDataRender: () => {
       return [{ name: 2, label: 1, path: '/a' }];
     },
   };
