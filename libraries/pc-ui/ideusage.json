@@ -380,10 +380,6 @@
             },
             "additionalAttribute": {
                 ":autoplay": "\"false\""
-            },
-            "elementSutando": {
-                "condition": "!this.getAttribute('dataSource') && !this.filterElement((el) => el.tag!== 'template').length > 0",
-                "component": "UCarouselDesigner"
             }
         }
     },
@@ -643,7 +639,7 @@
     {
         "name": "UInput",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "element"
         }
     },
     {
