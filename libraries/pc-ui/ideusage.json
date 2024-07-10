@@ -929,19 +929,28 @@
     {
         "name": "UDatePicker",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "additionalAttribute": {
+                ":value": null
+            }
         }
     },
     {
         "name": "UTimePicker",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "additionalAttribute": {
+                ":value": null
+            }
         }
     },
     {
         "name": "UDateTimePicker",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "additionalAttribute": {
+                ":value": null
+            }
         }
     },
     {
