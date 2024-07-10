@@ -93,6 +93,7 @@ export function buildI18N(options: LcapBuildOptions) {
 export function buildManifest(options: LcapBuildOptions) {
   const manifest = genManifestConfig(options);
   fs.writeJSONSync(`${options.destDir}/manifest.json`, manifest, { spaces: 2 });
+  fs.writeJSONSync(`${options.rootPath}/manifest.json`, manifest, { spaces: 2 });
 }
 
 export async function buildNaslUILibrary(options: LcapBuildOptions) {
@@ -100,12 +101,12 @@ export async function buildNaslUILibrary(options: LcapBuildOptions) {
   await buildTheme(options);
   buildI18N(options);
   await buildDecalaration(options);
+  await buildManifest(options);
   if (options.pnpm) {
     execSync('pnpm pack');
   } else {
     execSync('npm pack');
   }
-  buildManifest(options);
 }
 
 export async function lcapBuild(options: LcapBuildOptions) {

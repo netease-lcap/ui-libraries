@@ -1,7 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
 import type { LcapBuildOptions } from '../types';
-import { getPackName } from '../../utils';
 
 const getManifest = (type, outDir) => {
   return {
@@ -36,12 +35,7 @@ export default function genManifestConfig(options: LcapBuildOptions) {
     manifest[key] = manifest[key].filter((filePath) => fs.existsSync(path.join(options.rootPath, filePath)));
   });
 
-  const pkg = fs.readJSONSync(path.join(options.rootPath, 'package.json'));
-  const zipName = getPackName(pkg.name, pkg.version);
-
-  if (fs.existsSync(path.join(options.rootPath, zipName))) {
-    manifest.package = ['zip.tgz'];
-  }
+  manifest.package.push('zip.tgz');
 
   return manifest;
 }

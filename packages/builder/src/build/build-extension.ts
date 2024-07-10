@@ -122,14 +122,15 @@ export async function buildNaslExtension(options: LcapBuildOptions) {
   });
 
   await buildDecalaration(options);
+  const manifest = genManifestConfig(options);
+  (naslExtensionConfig.compilerInfoMap as any).manifest = JSON.stringify(manifest);
+  fs.writeJSONSync(naslConfigPath, { ...naslExtensionConfig }, { spaces: 2 });
+
   if (options.pnpm) {
     execSync('pnpm pack');
   } else {
     execSync('npm pack');
   }
 
-  const manifest = genManifestConfig(options);
-  (naslExtensionConfig.compilerInfoMap as any).manifest = JSON.stringify(manifest);
-  fs.writeJSONSync(naslConfigPath, { ...naslExtensionConfig }, { spaces: 2 });
   zipExtension(options.rootPath, options.destDir);
 }
