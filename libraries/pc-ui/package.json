@@ -8,7 +8,8 @@
     "ChenWeiYuan123 <360411956@qq.com>",
     "zou-xinhua <m15616168428@163.com>"
   ],
-  "main": "./src/index.js",
+  "main": "dist-theme/index.js",
+  "style": "dist-theme/index.css",
   "repository": "https://github.com/netease-lcap/ui-libraries",
   "bugs": {
     "url": "https://github.com/netease-lcap/ui-libraries/issues"
@@ -28,10 +29,9 @@
   ],
   "files": [
     "dist-theme",
-    "src",
-    "themes",
-    "vetur",
-    "index.js",
+    "es",
+    "lib",
+    "manifest.json",
     "README.md"
   ],
   "dependencies": {
