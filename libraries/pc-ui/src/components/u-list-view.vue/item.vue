@@ -33,12 +33,11 @@ export default {
         setRowStyle: { type: Function },
         item: { tyepe: Object },
         index: { type: Number },
-        disabled: { type: Boolean },
+        value: { type: String }
     },
     methods: {
         getStyle() {
-            // TODO LD:打开表达式编辑后，为什么current里没有这些传进去的参数
-            return isFunction(this.setRowStyle) ? this.setRowStyle({ item: { ...this.item, disabled: this.disabled }, index: this.index }) : {};
+            return isFunction(this.setRowStyle) ? this.setRowStyle({ item: this.item, index: this.index, value: this.value }) : {};
         }
     }
 };
