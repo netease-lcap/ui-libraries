@@ -777,6 +777,7 @@ namespace nasl.ui {
       })
       defaultColumnWidth: nasl.core.String | nasl.core.Decimal;
 
+      // TODO LD:这里的title以及description展示什么具体要和产品确认下
       @Prop({
         group: '样式属性',
         title: '表格行动态样式',

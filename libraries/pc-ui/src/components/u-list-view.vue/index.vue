@@ -28,8 +28,9 @@
                 :disabled="item.disabled || disabled"
                 :ellipsis-title="ellipsisTitle"
                 :item="item"
-                :index="index">
-                <slot name="item" :item="item" :index="index" :text="$at(item, field || textField) || item" :value="$at(item, valueField) || item" :disabled="item.disabled || disabled" vusion-slot-name="item" :ellipsis-title="ellipsisTitle">{{ isPrimitive(item) ? item : $at(item, field || textField) }}<s-empty v-if="(!$slots.item) && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']"></s-empty></slot>
+                :index="index"
+                :setRowStyle="setRowStyle">
+                <slot name="item" :item="item" :index="index" :text="$at(item, field || textField) || item" :value="$at(item, valueField) || item" :disabled="item.disabled || disabled" vusion-slot-name="item" :ellipsis-title="ellipsisTitle" :setRowStyle="setRowStyle">{{ isPrimitive(item) ? item : $at(item, field || textField) }}<s-empty v-if="(!$slots.item) && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']"></s-empty></slot>
             </component>
         </div>
         <div :class="$style.status" status="loading" v-if="currentLoading" vusion-slot-name="loading">
@@ -203,6 +204,7 @@ export default {
         ellipsisTitle: { type: [Boolean, String], default: false },
         selectedValuesData: Array, // 如果是分页数据，选中的值在可能在下拉框里没有，导致选中值展示不出来。这里传入该字段，用于展示选中的值
         designerMode: { type: String, default: 'success' }, // 配合IDE编辑器展示不同表格状态
+        setRowStyle: { type: Function }
     },
     data() {
         return {

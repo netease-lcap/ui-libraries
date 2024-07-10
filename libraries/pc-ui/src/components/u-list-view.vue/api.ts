@@ -461,6 +461,19 @@ namespace nasl.ui {
         })
         height: 'full' | 'huge' | 'large' | 'normal' | 'auto' = 'normal';
 
+        // TODO LD:这里的title以及description展示什么具体要和产品确认下
+        @Prop({
+            group: '样式属性',
+            title: '列表行动态样式',
+            description: '动态设置列表行背景色、字体颜色等',
+            docDescription: '列表每行的背景色、字体颜色',
+            bindOpen: true,
+            setter: {
+                concept: 'AnonymousFunctionSetter',
+            }
+        })
+        setRowStyle: (current: Current<T>) => { backgroundColor: nasl.core.String, color: nasl.core.String };
+
         @Event({
             title: '选择前',
             description: '选择某一项前触发',
