@@ -23,9 +23,8 @@ assets-package
 /site
 changelog.generated.md
 vetur
-
+manifest.json
 *.tgz
 .lcaprc
 
 # other library
-element-ui
