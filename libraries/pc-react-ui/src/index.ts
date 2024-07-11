@@ -56,6 +56,7 @@ export * from './components/Avatar/index';
 // eslint-disable-next-line import/first
 import 'virtual:theme.css';
 
+window.nodeName = false;
 // export * from './components/Typography/index';
 // export * from 'antd';
 // if (window.parent !== window) {
