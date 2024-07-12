@@ -10,6 +10,10 @@
     "dist-theme",
     "es",
     "lib",
+    "src",
+    "src-vusion",
+    "cloudui",
+    "manifest.json",
     "vetur"
   ],
   "publishConfig": {
