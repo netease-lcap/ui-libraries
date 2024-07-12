@@ -3,7 +3,7 @@
         "name": "ULinearLayout",
         "ideusage": {
             "idetype": "container",
-            "containerDirection": "this.getAttribute('direction')?.value === 'vertical' ? 'column' : 'row' ",
+            "containerDirection": "column",
             "expandWhenHesitate": true,
            "automate": [
                 {
@@ -66,7 +66,13 @@
         "name": "UGridLayoutColumn",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'u-grid-layout-row'"
+            "parentAccept": "target.tag === 'u-grid-layout-row'",
+            "gridCol": {
+                "rowComponent": "u-grid-layout-row",
+                "colGap": "{ const gap = this.getParent().getAttribute('gap')?.value || 'normal'; const _map = { none: 0, mini: 4, small: 8, normal: 16, huge: 32 }; return _map[gap]; }",
+                "colNum": "this.getParent().getAttribute('repeat')?.value || 12",
+                "spanAttr": "span"
+            }
         }
     },
     {
@@ -81,7 +87,10 @@
         "name": "UMultiLayoutItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'u-multi-layout'"
+            "parentAccept": "target.tag === 'u-multi-layout'",
+            "slotInlineStyle": {
+                "default": "height:100%;"
+            }
         }
     },
     {
@@ -239,7 +248,7 @@
     {
         "name": "UAnchor",
         "ideusage": {
-            "idetype": "element"
+           "idetype": "container"
         }
     },
     {
@@ -339,7 +348,7 @@
     {
         "name": "ULabel",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "element"
         }
     },
     {
@@ -353,14 +362,31 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "'u-carousel-item' === target.tag"
+            "childAccept": "'u-carousel-item' === target.tag",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+                "display": 1,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> label[class^='u-carousel_body']:not([data-nodepath])",
+                "emptySlot": {
+                    "display": "large",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            },
+            "additionalAttribute": {
+                ":autoplay": "\"false\""
+            }
         }
     },
     {
         "name": "UCarouselItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "'u-carousel' === target.tag"
+            "parentAccept": "'u-carousel' === target.tag",
+            "displaySlotConditions": {
+                "title": false
+            }
         }
     },
     {
@@ -430,7 +456,7 @@
                 "emptySlot": {
                   "display": "inline",
                   "condition": "!this.getAttribute('dataSource')",
-                  "accept": "false"
+                  "accept": false
                 }
             }
         }
@@ -451,7 +477,7 @@
                 "display": 3,
                 "loopElem": "table > tbody > tr",
                 "emptySlot": {
-                    "condition": "this.elementsLength() === 0",
+                    "condition": "this.getDefaultElements().length === 0",
                     "accept": "target.concept === 'Entity'"
                 }
             },
@@ -623,25 +649,32 @@
     {
         "name": "URadios",
         "ideusage": {
-            "idetype": "container",
+           "idetype": "container",
             "structured": true,
             "dataSource": {
                 "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
                 "display": 3,
-                "loopElem": "> label[class^='u-radios_radio']",
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> label[class^='u-radios_radio']:not([data-nodepath])",
                 "emptySlot": {
                     "display": "inline",
                     "condition": "!this.getAttribute('dataSource')",
-                    "accept": "false"
+                    "accept": false
                 }
             },
-            "childAccept":"target.tag === 'u-radio'"
+            "childAccept": "target.tag === 'u-radio'",
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block;width:90px;"
+            }
         }
     },
     {
         "name": "URadio",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "displaySlotInline": {
+                "item": true
+            }
         }
     },
     {
@@ -653,25 +686,32 @@
     {
         "name": "UCheckboxes",
         "ideusage": {
-            "idetype": "container",
+           "idetype": "container",
             "structured": true,
             "dataSource": {
-                "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
                 "display": 3,
-                "loopElem": "> label[class^='u-checkbox']",
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> label[class^='u-checkbox']:not([data-nodepath])",
                 "emptySlot": {
                     "display": "inline",
                     "condition": "!this.getAttribute('dataSource')",
-                    "accept": "false"
+                    "accept": false
                 }
             },
-            "childAccept": "target.tag === 'u-checkbox'"
+            "childAccept": "target.tag === 'u-checkbox'",
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block;width:90px;"
+            }
         }
     },
     {
         "name": "UCheckbox",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "displaySlotInline": {
+                "item": true
+            }
         }
     },
     {
@@ -726,7 +766,18 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept":"target.tag === 'u-tab'"
+            "childAccept":"target.tag === 'u-tab'",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> div[class^='u-tabs_head'] a[class^='u-tabs_item']",
+                "emptySlot": {
+                    "display": "large",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            }
         }
     },
     {
@@ -834,7 +885,18 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "target.tag === 'u-tree-view-node-new'"
+            "childAccept": "target.tag === 'u-tree-view-node-new'",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> div[class^='u-tree-view-new_node']:not([data-nodepath])",
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            }
         }
     },
     {
@@ -843,7 +905,10 @@
             "idetype": "container",
             "structured": true,
             "childAccept": "target.tag === 'u-tree-view-node-new'",
-            "parentAccept": "['u-tree-select-new', 'u-tree-view-new', 'u-tree-view-node-new'].includes(target.tag)"
+            "parentAccept": "['u-tree-select-new', 'u-tree-view-new', 'u-tree-view-node-new'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {

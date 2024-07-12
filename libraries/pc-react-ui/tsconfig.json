@@ -7,10 +7,9 @@
     "skipLibCheck": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    // "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": false,
-    "noEmit": true,
     "jsx": "react",
     "jsxFactory": "React.createElement",
     /* Linting */
@@ -22,12 +21,14 @@
     "noFallthroughCasesInSwitch": true,
     "emitDecoratorMetadata": true,
     "noImplicitAny": false,
+    "allowJs": true,
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx",],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["src/theme/**/*.ts", "src/theme/**/*.tsx"],
   "references": [
     {
       "path": "./tsconfig.node.json"

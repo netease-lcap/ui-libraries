@@ -10,6 +10,7 @@
     "dist-theme",
     "es",
     "lib",
+    "manifest.json",
     "vetur"
   ],
   "publishConfig": {
