@@ -11,7 +11,7 @@ import {
 } from './utils';
 import {
   genQueryLogic, genTextTemplate, genColumnMeta,
-  genFilterTemplate, genFormItemsTemplate, 
+  genFilterTemplate, genFormItemsTemplate,
 } from './genCommonBlock';
 
 function genBlurFunction(property: naslTypes.EntityProperty, nameGroup: NameGroup) {
@@ -85,7 +85,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
     formItem += `<USelect
         clearable={true}
         value={$sync(${vModel})}
-        placeholder="请输入${label}"
+        placeholder="请选择${label}"
         autofocus={true}
         opened={true}
         appendTo="body"
@@ -149,7 +149,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
     formItem += `<UDatePicker
         clearable={true}
         value={$sync(${vModel})}
-        placeholder="请输入${label}"
+        placeholder="请选择${label}"
         autofocus={true}
         opened={true}
         appendTo="body"
@@ -160,7 +160,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
   } else if (propertyTypeName === 'Time') {
     formItem += `<UTimePicker
         value={$sync(${vModel})}
-        placeholder="请输入${label}"
+        placeholder="请选择${label}"
         autofocus={true}
         opened={true}
         appendTo="body"
@@ -172,7 +172,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
     formItem += `<UDateTimePicker
         clearable={true}
         value={$sync(${vModel})}
-        placeholder="请输入${label}"
+        placeholder="请选择${label}"
         autofocus={true}
         opened={true}
         appendTo="body"
