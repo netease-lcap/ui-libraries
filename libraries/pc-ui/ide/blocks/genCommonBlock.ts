@@ -47,7 +47,7 @@ export function genQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: N
       ?.filter((property) => property.relationEntity === relationEntity.name)
       .map((leftProperty) => {
         return `${entity.name}.${leftProperty.name} == ${relationEntity.name}.${leftProperty.relationProperty}`;
-      }).join('\n');
+      }).join('&&');
     return `.LEFT_JOIN(${namespace}.${relationEntity.name}Entity, ${relationEntity.name} => ON(${onExpressions}))`;
   }).join('\n')}
   ${supportFilter && properties.length ? `.WHERE(${genWhereExpression(entity)})` : ''}
