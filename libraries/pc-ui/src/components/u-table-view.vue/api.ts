@@ -782,13 +782,22 @@ namespace nasl.ui {
         group: '样式属性',
         title: '表格行动态样式',
         description: '动态设置表格行背景色、字体颜色等',
-        docDescription: '表格每列的默认宽度。',
+        docDescription: '动态设置表格行背景色、字体颜色等',
         bindOpen: true,
         setter: {
             concept: 'AnonymousFunctionSetter',
         }
       })
-      setRowStyle: (current: Current<T>) => { backgroundColor: nasl.core.String, color: nasl.core.String };
+      setRowStyle: (current: Current<T>) => { 
+        /**
+         * @title 表格行背景颜色
+         */
+        backgroundColor: nasl.core.String, 
+        /**
+         * @title 表格行字体颜色
+         */
+        color: nasl.core.String 
+      };
 
       @Event({
           title: '加载前',

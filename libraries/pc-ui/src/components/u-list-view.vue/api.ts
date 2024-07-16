@@ -472,7 +472,16 @@ namespace nasl.ui {
                 concept: 'AnonymousFunctionSetter',
             }
         })
-        setRowStyle: (current: Current<T>) => { backgroundColor: nasl.core.String, color: nasl.core.String };
+        setRowStyle: (current: Current<T>) => { 
+            /**
+             * @title 列表行背景颜色
+             */
+            backgroundColor: nasl.core.String, 
+            /**
+             * @title 列表行字体颜色
+             */
+            color: nasl.core.String 
+        };
 
         @Event({
             title: '选择前',
