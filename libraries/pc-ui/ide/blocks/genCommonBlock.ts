@@ -190,18 +190,18 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
     return `<UDatePicker
         clearable={true}
         value={$sync(${vModel})}
-        placeholder="请输入${label}">
+        placeholder="请选择${label}">
     </UDatePicker>`;
   } if (propertyTypeName === 'Time') {
     return `<UTimePicker
         value={$sync(${vModel})}
-        placeholder="请输入${label}">
+        placeholder="请选择${label}">
     </UTimePicker>`;
   } if (propertyTypeName === 'DateTime') {
     return `<UDateTimePicker
         clearable={true}
         value={$sync(${vModel})}
-        placeholder="请输入${label}">
+        placeholder="请选择${label}">
     </UDateTimePicker>`;
   }
   const namespaceArr = propertyTypeNamespace.split('.');
