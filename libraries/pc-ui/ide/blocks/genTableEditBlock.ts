@@ -8,10 +8,11 @@ import {
   transEntityMetadataTypes,
   NameGroup,
   getViewUniqueVariableNames,
+  getAllEntityPromaryKeyProperty,
 } from './utils';
 import {
   genQueryLogic, genTextTemplate, genColumnMeta,
-  genFilterTemplate, genFormItemsTemplate, 
+  genFilterTemplate, genFormItemsTemplate,
 } from './genCommonBlock';
 
 function genBlurFunction(property: naslTypes.EntityProperty, nameGroup: NameGroup) {
@@ -252,6 +253,7 @@ export function genEditTableTemplate(entity: naslTypes.Entity, nameGroup: NameGr
   const currentName = nameGroup.currentName || 'current';
   const properties = entity.properties.filter(filterProperty('inTable'));
   const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.page, elements.$ce.size, elements.$ce.sort, elements.$ce.order, ${nameGroup.viewVariableFilter})`;
+  const idProperties = getAllEntityPromaryKeyProperty(entity);
   return `<UTableView
     ref="${nameGroup.viewElementMainView}"
     dataSource={${dataSourceValue}}
@@ -284,7 +286,7 @@ export function genEditTableTemplate(entity: naslTypes.Entity, nameGroup: NameGr
                       text="删除"
                       onClick={
                           function ${nameGroup.viewLogicRemove}(event) {
-                              ${namespace}.${entityName}Entity.delete(${currentName}.item.${firstLowerCase(entity.name)}.${getEntityPromaryKeyProperty(entity)})
+                              ${namespace}.${entityName}Entity.delete(${idProperties.map((property) => `${currentName}.item.${firstLowerCase(entity.name)}.${property.name}`).join(',')})
                               $refs.${nameGroup.viewElementMainView}.reload()
                           }
                       }>

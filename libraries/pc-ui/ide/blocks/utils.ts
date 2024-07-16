@@ -72,6 +72,10 @@ export function getEntityPromaryKeyProperty(entity: naslTypes.Entity) {
   return entity.properties.find((p) => p.primaryKey)?.name || 'id';
 }
 
+export function getAllEntityPromaryKeyProperty(entity: naslTypes.Entity) {
+  return entity.properties.filter((property) => property.primaryKey || property.name === 'id');
+}
+
 export function getViewUniqueVariableNames(name: string, entityName: string) {
   const start = 1;
   if (entityName === name) {

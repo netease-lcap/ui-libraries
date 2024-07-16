@@ -71,3 +71,7 @@ export function genUniqueQueryNameGroup(
 export function getEntityPromaryKeyProperty(entity: naslTypes.Entity) {
   return entity.properties.find((p) => p.primaryKey)?.name || 'id';
 }
+
+export function getAllEntityPromaryKeyProperty(entity: naslTypes.Entity) {
+  return entity.properties.filter((property) => property.primaryKey || property.name === 'id');
+}
