@@ -216,10 +216,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
   const namespaceArr = propertyTypeNamespace.split('.');
   const type = namespaceArr.pop();
   if (type === 'enums') {
-    const enumeration = dataSource.app.findNodeByCompleteName(`${propertyTypeNamespace}.${propertyTypeName}`);
-    const enumnamespace = enumeration?.getNamespace() || '';
-    const name = enumeration?.name || '';
-    const enumTypeAnnotationStr = `${enumnamespace}.${name}`;
+    const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;
     return `<VanPickerson
             type="list"
             showToolbar={true}
