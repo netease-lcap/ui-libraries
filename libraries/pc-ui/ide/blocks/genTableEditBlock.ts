@@ -185,10 +185,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
     const namespaceArr = propertyTypeNamespace.split('.');
     const type = namespaceArr.pop();
     if (type === 'enums') {
-      const enumeration = dataSource.app.findNodeByCompleteName(`${propertyTypeNamespace}.${propertyTypeName}`);
-      const enumnamespace = enumeration?.getNamespace() || '';
-      const name = enumeration?.name || '';
-      const enumTypeAnnotationStr = `${enumnamespace}.${name}`;
+      const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;
       formItem += `<USelect
           clearable={true}
           value={$sync(${vModel})}
