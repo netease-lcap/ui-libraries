@@ -181,7 +181,7 @@ namespace nasl.ui {
 
         @Prop<UCheckboxesOptions<T, V, C>, 'column'>({
             group: '主要属性',
-            title: '排列数',
+            title: '每行排列数',
             description: '水平排列时每行展示的选项数量',
             setter: {
                 concept: "NumberInputSetter",
