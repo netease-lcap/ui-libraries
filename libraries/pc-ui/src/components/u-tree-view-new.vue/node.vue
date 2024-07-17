@@ -519,42 +519,6 @@ export default {
             dfs(node, null, currentFields);
         },
 
-        // TODO LD：看一下这里的逻辑能不能直接调用solveCondition方法
-        // isMatched({filterText, sourceText, matchMethod}) {
-        //     if (!filterText) return true;
-        //     if (typeof matchMethod === 'function') return matchMethod(sourceText, filterText);
-
-        //     switch(matchMethod) {
-        //         case '=':
-        //         case '==':
-        //         case 'eq':
-        //             return sourceText === filterText;
-        //         case 'neq':
-        //         case '!=':
-        //             return sourceText !== filterText;
-        //         case '<':
-        //         case 'lt':
-        //             return sourceText < filterText;
-        //         case '<=':
-        //         case 'lte':
-        //             return sourceText <= filterText;
-        //         case '>':
-        //         case 'gt':
-        //             return sourceText > filterText;
-        //         case '>=':
-        //         case 'gte':
-        //             return sourceText >= filterText;
-        //         case 'startsWith':
-        //             return sourceText.startsWith(filterText);
-        //         case 'endsWith':
-        //             return sourceText.endsWith(filterText);
-        //         case 'includes':
-        //             return sourceText.includes(filterText);
-        //         default:
-        //             throw new TypeError('Unknown operator in conditions!')
-        //     }
-        // },
-
         filter() {
             if (!this.$parent || this.$parent.$options.name !== 'u-tree-view-new')
                 return;
@@ -571,8 +535,6 @@ export default {
                     return;
 
                 const hiddenByFilter = filterFields.every((field) => !$at(node, field) || !solveCondition(that.filterOptions, node));
-                // const hiddenByFilter = filterFields.every((field) => !$at(node, field) || !that.isMatched({ filterText, sourceText: $at(node, field).toLowerCase(), matchMethod }));
-                // const hiddenByFilter = filterFields.every((field) => !$at(node, field) || !$at(node, field).toLowerCase().includes(filterText));
                 that.$set(node, 'hiddenByFilter', hiddenByFilter);
                 that.$set(node, 'expandedByFilter', false);
 
