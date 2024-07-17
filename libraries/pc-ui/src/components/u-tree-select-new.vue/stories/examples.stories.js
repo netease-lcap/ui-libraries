@@ -12,6 +12,7 @@ import ExamplesDemo8 from '../demos/examples/ExamplesDemo8.vue';
 import ExamplesDemo9 from '../demos/examples/ExamplesDemo9.vue';
 import ExamplesDemo10 from '../demos/examples/ExamplesDemo10.vue';
 import ExamplesDemo11 from '../demos/examples/ExamplesDemo11.vue';
+import ExamplesDemo12 from '../demos/examples/ExamplesDemo12.vue';
 
 Vue.use(CloudUI);
 
@@ -123,6 +124,15 @@ export const Demo10 = {
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo11,
+    },
+    template: '<deprecated-demo />',
+  }),
+};
+
+export const 筛选方式 = {
+  render: () => ({
+    components: {
+      DeprecatedDemo: ExamplesDemo12,
     },
     template: '<deprecated-demo />',
   }),
