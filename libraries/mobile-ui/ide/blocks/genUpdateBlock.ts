@@ -5,6 +5,7 @@ import {
   getFirstDisplayedProperty,
   genUniqueQueryNameGroup,
   NameGroup,
+  getAllEntityPromaryKeyProperty,
 } from './utils';
 import { genQueryLogic, genFormItemsTemplate } from './genCommonBlock';
 
@@ -46,8 +47,17 @@ export function genUpdateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
     viewElementMainView: likeComponent.getViewElementUniqueName('form1'),
     viewVariableEntity: likeComponent.getVariableUniqueName(firstLowerCase(entity.name)),
     viewLogicSubmit: likeComponent.getLogicUniqueName('submit'),
-    viewParamId: likeComponent.getParamUniqueName('id'),
+    viewLogicLoad: likeComponent.getLogicUniqueName('load'),
   };
+  const idProperties = getAllEntityPromaryKeyProperty(entity);
+  let viewParamIds: Array<{name:string, type: string}> = [];
+  viewParamIds = idProperties.map((property) => {
+    const name = idProperties.length === 1 ? 'id' : property.name;
+    return {
+      name: likeComponent.getParamUniqueName(name),
+      type: (property.typeAnnotation?.toNaturalTS && property.typeAnnotation?.toNaturalTS()) || 'Long',
+    };
+  });
 
   // 收集所有和本实体关联的实体
   const selectNameGroupMap = new Map();
@@ -65,15 +75,24 @@ export function genUpdateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
           // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
           const key = [property.name, relationEntity.name].join('-');
           selectNameGroupMap.set(key, selectNameGroup);
-          const newLogic = genQueryLogic([relationEntity], selectNameGroup, false, false, module);
+          const newLogic = genQueryLogic([relationEntity], selectNameGroup, false, false);
           newLogics.push(newLogic);
         }
       }
     }
   });
 
-  return `export function view() {
+  return `export function view(${viewParamIds.map((param) => `${param.name}: ${param.type}`).join(', ')}) {
     let ${nameGroup.viewVariableEntity}: ${entityFullName};
+
+    const $lifecycles = {
+        onCreated: [
+            function ${nameGroup.viewLogicLoad}() {
+                ${nameGroup.viewVariableEntity} = ${namespace}.${entity.name}Entity.get(${viewParamIds.map((param) => param.name).join(',')})
+            },     
+        ]      
+    }
+
     return ${genUpdateFormTemplate(entity, nameGroup, selectNameGroupMap)}
   }
       export namespace app.logics {
