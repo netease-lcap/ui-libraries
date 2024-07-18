@@ -11,7 +11,7 @@ namespace nasl.ui {
         @Prop({
           title: "值"
         })
-        value: UCapsulesOptions<M> ['value'];
+        value: UCapsulesOptions<M>['value'];
 
         @Prop({
           title: '禁用',
@@ -40,7 +40,7 @@ namespace nasl.ui {
             docDescription: '当前选择的值',
             settable: true,
         })
-        value: M extends true ? nasl.collection.List<nasl.core.String | nasl.core.Integer | nasl.core.Decimal | any> : (nasl.core.String | nasl.core.Integer | nasl.core.Decimal | any);
+        value: M extends true ? nasl.collection.List<nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean> : (nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean);
 
         @Prop({
             group: '主要属性',
@@ -186,7 +186,7 @@ namespace nasl.ui {
             description: '此项的值',
             docDescription: '此项的值',
         })
-        value: nasl.core.String | nasl.core.Integer | nasl.core.Decimal | any;
+        value: nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean;
 
         @Prop({
             group: '主要属性',
