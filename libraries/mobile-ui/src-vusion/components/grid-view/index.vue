@@ -208,10 +208,10 @@ export default {
         return this.currentDataSource && this.currentDataSource.total ? this.currentDataSource.total : 0;
       },
       size() {
-        return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.size : this.pageSize;
+        return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.size : undefined; // 不分页时size为undefined
       },
       page() {
-        return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : this.pageNumber;
+        return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : 1; // 不分页时page为1
       },
       sort() {
         return this.currentDataSource && this.currentDataSource.sorting ? this.currentDataSource.sorting.field : '';
@@ -376,16 +376,24 @@ export default {
     },
     async refresh() {
       this.refreshing = true;
-      const paging = {
-        size: this.currentDataSource.paging.size,
-        oldSize: this.currentDataSource.paging.size,
-        number: 1,
-        oldNumber: this.currentDataSource.paging.number,
-      };
       // eslint-disable-next-line no-console
       try {
-        this.currentDataSource.page(paging);
-        await this.load();
+        await this.currentDataSource.reload();
+
+        const {
+          paging: oldPaging,
+        } = this.currentDataSource;
+        let paging;
+
+        if (oldPaging) {
+          const { size, number } = oldPaging;
+          paging = {
+            size,
+            oldSize: size,
+            number: 1,
+            oldNumber: number,
+          };
+        }
         this.$emit('page', paging, this);
         this.$emit('update:page-number', 1, this);
         if (this.iffall) {
