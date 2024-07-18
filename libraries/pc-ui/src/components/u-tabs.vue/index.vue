@@ -199,6 +199,9 @@ export default {
         },
         tabDataSource() {
             this.watchValueForDatasource(this.value);
+            if (!this.$refs.scrollView) {
+              return;
+            }
             this.$nextTick(() => {
               const threshold = 1; // IE 浏览器缩放时，scrollWidth 可能会比 clientWidth 大 1 像素
               this.scrollable = this.$refs.scrollView.scrollWidth - this.$refs.scrollView.clientWidth > threshold;
