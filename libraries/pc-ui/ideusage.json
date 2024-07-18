@@ -297,6 +297,9 @@
             "parentAccept": "target.tag === 'u-collapse'",
             "events": {
                 "click": true
+            },
+            "slotWrapperInlineStyle": {
+                "title": "display:inline-block"
             }
         }
     },
@@ -467,7 +470,8 @@
                   "condition": "!this.getAttribute('dataSource')",
                   "accept": false
                 }
-            }
+            },
+            "namedSlotOmitWrapper": ["item"]
         }
     },
     {
@@ -917,6 +921,9 @@
             "parentAccept": "['u-tree-select-new', 'u-tree-view-new', 'u-tree-view-node-new'].includes(target.tag)",
             "events": {
                 "click": true
+            },
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block"
             }
         }
     },
