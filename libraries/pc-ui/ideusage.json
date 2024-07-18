@@ -836,6 +836,9 @@
                     "cssSelector": "div"
                 }
             ],
+            "slotWrapperInlineStyle": {
+                "title": "display:inline-block;width:max-content;"
+            },
             "events": {
                 "click": true
             }
