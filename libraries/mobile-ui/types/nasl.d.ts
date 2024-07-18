@@ -1,3 +1,4 @@
+/* eslint-disable */
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
@@ -11,5 +12,11 @@ namespace nasl.ui {
     touched: nasl.core.Boolean;
     dirty: nasl.core.Boolean;
     firstError: nasl.core.String;
+  }
+}
+
+namespace nasl.core {
+  export class StringLiteral<T> {
+    _value: T;
   }
 }

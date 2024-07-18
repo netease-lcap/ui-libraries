@@ -58,7 +58,7 @@ namespace nasl.ui {
       sync: true,
       settable: true,
     })
-    value: C extends 'none' ? nasl.collection.List<V> : nasl.core.String;
+    value: C extends (nasl.core.StringLiteral<`none`> | nasl.core.StringLiteral<``>) ? nasl.collection.List<V> : nasl.core.String;
     @Prop({
       group: '数据属性',
       title: '最大可选数量',

@@ -7,11 +7,11 @@ namespace nasl.ui {
         description: '多项中选择一项',
         group: "Form"
     })
-    export class UCapsules extends ViewComponent {
+    export class UCapsules<M extends nasl.core.Boolean>  extends ViewComponent {
         @Prop({
           title: "值"
         })
-        value: UCapsulesOptions['value'];
+        value: UCapsulesOptions<M>['value'];
 
         @Prop({
           title: '禁用',
@@ -28,10 +28,10 @@ namespace nasl.ui {
         })
         preview: nasl.core.Boolean;
 
-        constructor(options?: Partial<UCapsulesOptions>) { super(); }
+        constructor(options?: Partial<UCapsulesOptions<M>>) { super(); }
     }
 
-    export class UCapsulesOptions extends ViewComponentOptions {
+    export class UCapsulesOptions<M extends nasl.core.Boolean> extends ViewComponentOptions {
         @Prop({
             group: '数据属性',
             title: '选中值',
@@ -40,7 +40,7 @@ namespace nasl.ui {
             docDescription: '当前选择的值',
             settable: true,
         })
-        value: any;
+        value: M extends true ? nasl.collection.List<nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean> : (nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean);
 
         @Prop({
             group: '主要属性',
@@ -186,7 +186,7 @@ namespace nasl.ui {
             description: '此项的值',
             docDescription: '此项的值',
         })
-        value: any;
+        value: nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean;
 
         @Prop({
             group: '主要属性',
