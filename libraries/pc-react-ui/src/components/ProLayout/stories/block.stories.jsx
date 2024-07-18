@@ -63,7 +63,7 @@ export const 基本用法 = {
         menuSlot={(
           <>
             <MenuItem label="导航项" path="/1">
-              <MenuItem label="导航项" path="/4" />
+              <MenuItem label="导航项" path="/4" destination="www.baidu.com" />
               <MenuItem label="导航项" path="/3" />
             </MenuItem>
             <MenuItem label="导航项" path="/2" />
