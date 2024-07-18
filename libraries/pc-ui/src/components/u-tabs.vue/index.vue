@@ -199,6 +199,10 @@ export default {
         },
         tabDataSource() {
             this.watchValueForDatasource(this.value);
+            this.$nextTick(() => {
+              const threshold = 1; // IE 浏览器缩放时，scrollWidth 可能会比 clientWidth 大 1 像素
+              this.scrollable = this.$refs.scrollView.scrollWidth - this.$refs.scrollView.clientWidth > threshold;
+            });
         },
     },
     methods: {
@@ -302,32 +306,33 @@ export default {
         scrollToSelectedVM() {
             const scrollViewEl = this.$refs.scrollView;
             const children = this.$refs.item;
-            if (scrollViewEl && this.selectedVM && Array.isArray(children)) {
-                const index = this.itemVMs.indexOf(this.selectedVM);
-                if (index !== -1) {
-                    // 选中节点的右侧距离
-                    let activeMin = 0;
-                    for (let i = 0; i < index; i++) {
-                        const itemEl = children[i] || {};
-                        activeMin += itemEl.offsetWidth || 0;
-                    }
-                    const activeMax = activeMin + ((children[index] || {}).offsetWidth || 0);
-                    // 可视区宽度
-                    const scrollWidth = scrollViewEl.clientWidth;
-                    // 可视区域左侧
-                    const scrollMin = scrollViewEl.scrollLeft;
-                    // 可视区域右侧
-                    const scrollMax = scrollMin + scrollWidth;
-                    let accWidth = scrollMin;
-                    // 至少有一部分在可视区域右侧
-                    if (scrollMax < activeMax) {
-                        accWidth = activeMax - scrollWidth;
-                    } else if (activeMin < scrollMin) { // 至少有一部分在可视区域左侧
-                        accWidth = activeMin;
-                    }
-                    if (accWidth !== scrollMin) {
-                        scrollTo(scrollViewEl, { left: accWidth, duration: 1000 });
-                    }
+            const index = this.dataSource !== undefined &&  this.tabDataSource && this.tabDataSource.length > 0
+                  ? this.tabDataSource.findIndex((d) => d.active)
+                  : this.itemVMs.indexOf(this.selectedVM);
+            if (scrollViewEl && index !== -1 && Array.isArray(children)) {
+                // 选中节点的右侧距离
+                let activeMin = 0;
+                for (let i = 0; i < index; i++) {
+                    const itemEl = children[i] || {};
+                    activeMin += itemEl.offsetWidth || 0;
+                }
+                const activeMax = activeMin + ((children[index] || {}).offsetWidth || 0);
+                // 可视区宽度
+                const scrollWidth = scrollViewEl.clientWidth;
+                // 可视区域左侧
+                const scrollMin = scrollViewEl.scrollLeft;
+                // 可视区域右侧
+                const scrollMax = scrollMin + scrollWidth;
+                let accWidth = scrollMin;
+
+                // 至少有一部分在可视区域右侧
+                if (scrollMax < activeMax) {
+                    accWidth = activeMax - scrollWidth;
+                } else if (activeMin < scrollMin) { // 至少有一部分在可视区域左侧
+                    accWidth = activeMin;
+                }
+                if (accWidth !== scrollMin) {
+                    scrollTo(scrollViewEl, { left: accWidth, duration: 1000 });
                 }
             }
         },
