@@ -8,6 +8,7 @@
     "dist-theme",
     "es",
     "lib",
+    "src",
     "manifest.json",
     "README.md"
   ],
