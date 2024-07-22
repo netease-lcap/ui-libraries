@@ -271,8 +271,10 @@
         "name": "UPanel",
         "ideusage": {
             "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'u-panel-group'"
+            "structured": {
+                "slot": "default",
+                "empty": true
+            }
         }
     },
     {
@@ -535,7 +537,10 @@
             "idetype": "container",
             "forceRefresh": "parent",
             "childAccept": false,
-            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
