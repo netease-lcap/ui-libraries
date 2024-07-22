@@ -1,6 +1,6 @@
 {
   "name": "lcap-ui-monorepo",
-  "version": "3.9.0",
+  "version": "3.10.0",
   "private": true,
   "description": "Codewave Low Code AI Platform UI Components",
   "main": "index.js",
