@@ -2737,6 +2737,10 @@ export default {
             this.reHandleResize();
             this.$emit('resize', $event);
         },
+        // for 外部调用
+        resetEdit(item) {
+            item.editing = '';
+        },
     },
 };
 </script>
