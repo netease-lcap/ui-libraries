@@ -28,6 +28,20 @@
             style="width: 240px"
             :value.sync="remoteValues1"
             converter="join:|"></u-select>
+    <u-select :data-source="load"
+        pageable remote-paging
+        filterable remote-filtering
+        clearable
+        :value.sync="value"
+        :autoCheckSelectedValue="false"
+        :selectedValuesData="[{currentText: 'detail30', value: 'detail30'}]"></u-select>
+    <u-select :data-source="load"
+        pageable remote-paging
+        remote-filtering
+        clearable
+        :value.sync="value"
+        :autoCheckSelectedValue="false"
+        :selectedValuesData="[{text: 'detail30', value: 'detail30'}]"></u-select>
 </u-linear-layout>
 </template>
 <script>
