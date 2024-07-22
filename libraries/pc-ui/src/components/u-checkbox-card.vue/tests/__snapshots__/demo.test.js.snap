@@ -11,7 +11,7 @@ exports[`u-checkbox-card.vue > Demo-卡牌宽度 1`] = `
         </label>
       </div>
       <div class="body">
-        <div class="root">
+        <div class="root" direction="horizontal">
           <div class="item">
             <label class="root" show-title="true" tabindex="0" title="jiande-private">
               <span class="box" status="false"></span> jiande-private <span vusion-slot-name="item"></span>
@@ -50,7 +50,7 @@ exports[`u-checkbox-card.vue > Demo-卡牌宽度 1`] = `
         </label>
       </div>
       <div class="body">
-        <div class="root">
+        <div class="root" direction="horizontal">
           <div class="item">
             <label class="root" show-title="true" tabindex="0" title="jiande-private">
               <span class="box" status="false"></span> jiande-private <span vusion-slot-name="item"></span>
@@ -89,7 +89,7 @@ exports[`u-checkbox-card.vue > Demo-卡牌宽度 1`] = `
         </label>
       </div>
       <div class="body">
-        <div class="root">
+        <div class="root" direction="horizontal">
           <div class="item">
             <label class="root" show-title="true" tabindex="0" title="jiande-private">
               <span class="box" status="false"></span> jiande-private <span vusion-slot-name="item"></span>
@@ -128,7 +128,7 @@ exports[`u-checkbox-card.vue > Demo-卡牌宽度 1`] = `
         </label>
       </div>
       <div class="body">
-        <div class="root">
+        <div class="root" direction="horizontal">
           <div class="item">
             <label class="root" show-title="true" tabindex="0" title="jiande-private">
               <span class="box" status="false"></span> jiande-private <span vusion-slot-name="item"></span>
@@ -167,7 +167,7 @@ exports[`u-checkbox-card.vue > Demo-卡牌宽度 1`] = `
         </label>
       </div>
       <div class="body">
-        <div class="root">
+        <div class="root" direction="horizontal">
           <div class="item">
             <label class="root" show-title="true" tabindex="0" title="jiande-private">
               <span class="box" status="false"></span> jiande-private <span vusion-slot-name="item"></span>
@@ -209,7 +209,7 @@ exports[`u-checkbox-card.vue > Demo-固定每行展示数据个数 1`] = `
       </label>
     </div>
     <div class="body">
-      <div class="root">
+      <div class="root" direction="horizontal">
         <div class="item" style="width: 33.333333333333336%;">
           <label class="root" show-title="true" tabindex="0" title="jiande-private">
             <span class="box" status="false"></span> jiande-private <span vusion-slot-name="item"></span>
@@ -250,7 +250,7 @@ exports[`u-checkbox-card.vue > Demo-基本用法 1`] = `
       </label>
     </div>
     <div class="body">
-      <div class="root">
+      <div class="root" direction="horizontal">
         <div class="item">
           <label class="root" show-title="true" tabindex="0" title="jiande-private">
             <span class="box" status="true"></span> jiande-private <span vusion-slot-name="item"></span>
@@ -308,7 +308,7 @@ exports[`u-checkbox-card.vue > Demo-自定义选择项 1`] = `
       </label>
     </div>
     <div class="body">
-      <div class="root">
+      <div class="root" direction="horizontal">
         <div class="item" style="width: 33.333333333333336%;">
           <label class="root" show-title="true" tabindex="0" title="jiande-private">
             <span class="box" status="false"></span>
@@ -371,7 +371,7 @@ exports[`u-checkbox-card.vue > Demo-表单校验 1`] = `
             </label>
           </div>
           <div class="body">
-            <div class="root">
+            <div class="root" direction="horizontal">
               <div class="item" style="width: 33.333333333333336%;">
                 <label class="root" show-title="true" tabindex="0" title="jiande-private">
                   <span class="box" status="false"></span> jiande-private <span vusion-slot-name="item"></span>
@@ -430,7 +430,7 @@ exports[`u-checkbox-card.vue > Demo-部分选项不可选择 1`] = `
       </label>
     </div>
     <div class="body">
-      <div class="root">
+      <div class="root" direction="horizontal">
         <div class="item">
           <label class="root" show-title="true" tabindex="0" title="jiande-private">
             <span class="box" status="false"></span> jiande-private <span vusion-slot-name="item"></span>

@@ -91,6 +91,30 @@ namespace nasl.ui {
         value: V;
 
         @Prop({
+            group: '主要属性',
+            title: '排列方向',
+            description: '选择水平或垂直排列',
+            setter: {
+              concept: "EnumSelectSetter",
+              options: [{ title: '水平' }, { title: '垂直' }]
+            }
+        })
+        direction: 'horizontal' | 'vertical' = 'horizontal';
+
+        @Prop<URadiosOptions<T, V>, 'column'>({
+            group: '主要属性',
+            title: '每行排列数',
+            description: '水平排列时每行展示的选项数量',
+            setter: {
+                concept: "NumberInputSetter",
+                precision: 0,
+                min: 1
+            },
+            if: _ => _.direction === 'horizontal'
+        })
+        column: nasl.core.Integer;
+
+        @Prop({
             group: '状态属性',
             title: '只读',
             description: '正常显示，但禁止选择/输入',

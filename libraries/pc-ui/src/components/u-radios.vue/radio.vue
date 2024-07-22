@@ -145,6 +145,8 @@ export default {
     vertical-align: text-top;
     width: var(--radio-size);
     height: var(--radio-size);
+    min-width: var(--radio-size);
+    min-height: var(--radio-size);
     border-radius: 100px;
     line-height: calc(var(--radio-size) - 2px);
     background: var(--radio-background);
