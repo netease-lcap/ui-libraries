@@ -115,7 +115,7 @@ export default createComponent({
     currentValue(val) {
       // 对外使用converter转换
       if (this.converter) {
-        val = this.currentConverter.get(val);
+        val = this.currentConverter.convert(val);
       }
 
       this.$emit('update:value', val);
@@ -123,7 +123,7 @@ export default createComponent({
     },
     // 监听props变化
     value(val) {
-      this.currentValue = this.converter ? this.currentConverter.set(val) : this.formatValue(val);
+      this.currentValue = this.converter ? this.currentConverter.format(val) : this.formatValue(val);
     },
     pvalue(val) {
       this.currentValue = this.formatValue(val);

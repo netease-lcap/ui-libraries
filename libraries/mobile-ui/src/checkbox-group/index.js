@@ -18,7 +18,7 @@ export default createComponent({
       value() {
         // 对外使用converter转换
         if (this.hasConverter) {
-          return this.currentConverter.get(this.currentValue);
+          return this.currentConverter.convert(this.currentValue);
         }
 
         return this.currentValue;
@@ -65,7 +65,7 @@ export default createComponent({
   },
   watch: {
     value(val) {
-      this.currentValue = this.hasConverter ? this.currentConverter.set(val) : val;
+      this.currentValue = this.hasConverter ? this.currentConverter.format(val) : val;
     },
     dataSource: {
       deep: true,
@@ -80,7 +80,7 @@ export default createComponent({
   },
 
   mounted() {
-    this.currentValue = this.hasConverter ? this.currentConverter.set(this.value) : this.value || [];
+    this.currentValue = this.hasConverter ? this.currentConverter.format(this.value) : this.value || [];
   },
 
   methods: {
@@ -144,7 +144,7 @@ export default createComponent({
 
       // 对外使用converter转换
       if (this.hasConverter) {
-        value = this.currentConverter.get(value);
+        value = this.currentConverter.convert(value);
       }
 
       this.$emit('input', value);
