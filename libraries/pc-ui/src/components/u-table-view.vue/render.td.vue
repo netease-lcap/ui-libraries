@@ -173,9 +173,6 @@ export default {
                 columnVM.dblclickHandler({ item, columnVM });
             }
         },
-        resetEdit(item) {
-            item.editing = '';
-        },
     },
 }
 </script>
