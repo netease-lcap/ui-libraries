@@ -447,7 +447,9 @@ export default {
       this.setPopperWidth();
     },
     value(value) {
-      this.setSelectedDataQueue(value);
+      if (this.autoCheckSelectedValue) {
+        this.setSelectedDataQueue(value);
+      }
 
       if (
         this.filterable &&
@@ -468,6 +470,7 @@ export default {
       }
     },
     async selectedDataQueue(value) {
+      if (!this.autoCheckSelectedValue) return;
 
       // 当value有值，并且已经加载过一次数据才能开启判断
       // value 和 data 可能都是异步的，所以需要watch
@@ -588,7 +591,9 @@ export default {
         this.close();
       }
     });
-    this.setSelectedDataQueue(this.value);
+    if (this.autoCheckSelectedValue) {
+      this.setSelectedDataQueue(this.value);
+    }
   },
   mounted() {
     this.autofocus && this.$el.focus();
@@ -787,7 +792,7 @@ export default {
           this.ensureSelectedInItemVMs();
           // 选中数据不在第一页处理
           // 只需要初始的时候处理，这里存储数据用于判断是否是第一次加载数据
-          if (!this.selectedDataQueue[1]) {
+          if (this.autoCheckSelectedValue && this.selectedDataQueue[0] !== undefined && !this.selectedDataQueue[1]) {
             this.selectedDataQueue.splice(1, 1, data);
           }
           this.$refs.popper.currentOpened && this.$refs.popper.scheduleUpdate();
