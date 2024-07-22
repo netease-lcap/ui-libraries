@@ -377,7 +377,7 @@ export default {
       currentPopperWidth: this.popperWidth || '100%',
       compositionInputing: false,
       collapseCounter: 0,
-      selectedDataQueue: [], // 选中不在第一页数据处理
+      selectedDataQueue: [null, null], // 选中不在第一页数据处理
     };
   },
   computed: {
@@ -792,7 +792,7 @@ export default {
           this.ensureSelectedInItemVMs();
           // 选中数据不在第一页处理
           // 只需要初始的时候处理，这里存储数据用于判断是否是第一次加载数据
-          if (this.autoCheckSelectedValue && this.selectedDataQueue[0] !== undefined && !this.selectedDataQueue[1]) {
+          if (this.autoCheckSelectedValue && !this.selectedDataQueue[1]) {
             this.selectedDataQueue.splice(1, 1, data);
           }
           this.$refs.popper.currentOpened && this.$refs.popper.scheduleUpdate();
