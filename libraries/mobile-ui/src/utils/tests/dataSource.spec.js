@@ -4,7 +4,7 @@ import {
   vi,
 } from 'vitest';
 
-import DataSource from '../dataSource';
+import DataSource from '../DataSource/index';
 
 const data = [
   { id: 1, name: 'A' },
