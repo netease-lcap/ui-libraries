@@ -104,6 +104,7 @@
 </template>
 
 <script>
+import { solveCondition } from '../../utils/DataSource';
 import { MNode } from '../m-root.vue';
 import SEmpty from '../s-empty.vue';
 
@@ -242,6 +243,16 @@ export default {
         },
         childrenNodeRenderedShow() {
             return this.renderOptimize ? true : this.currentExpanded
+        },
+        filterOptions() {
+            const { filterText, field, textField, matchMethod, caseSensitive } = this.rootVM;
+            return {
+                [field || textField]: {
+                    operator: matchMethod,
+                    value: filterText,
+                    caseInsensitive: !caseSensitive,
+                },
+            };
         }
     },
 
@@ -523,7 +534,7 @@ export default {
                 if (!node)
                     return;
 
-                const hiddenByFilter = filterFields.every((field) => !$at(node, field) || !$at(node, field).toLowerCase().includes(filterText));
+                const hiddenByFilter = filterFields.every((field) => !$at(node, field) || !solveCondition(that.filterOptions, node));
                 that.$set(node, 'hiddenByFilter', hiddenByFilter);
                 that.$set(node, 'expandedByFilter', false);
 

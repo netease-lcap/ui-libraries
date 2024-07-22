@@ -96,6 +96,8 @@ export default {
         filterable: { type: Boolean, default: false },
         filterText: { type: String, default: '' },
         filterFields: { type: Array, default: () => ['text'] },
+        matchMethod: { type: [String, Function], default: 'includes' },
+        caseSensitive: { type: Boolean, default: false },
         draggable: { type: Boolean, default: false },
         subBackground: { type: Boolean, default: false },
         renderOptimize: { type: Boolean, default: false },
