@@ -63,9 +63,11 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
     .description('重载组件')
     .argument('<component>', '组件名称')
     .option('--fork', '是否复制组件源代码')
+    .option('--prefix <prefix>', '重载组件名称前缀')
     .action(async (component, options) => {
       await overload(cwd, {
         fork: options.fork,
+        prefix: options.prefix,
         component,
       });
     });
