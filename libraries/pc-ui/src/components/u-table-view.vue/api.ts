@@ -1077,6 +1077,7 @@ namespace nasl.ui {
           title: '配置列',
           description: '自定义配置列内容',
       })
+      "slot-config-columns": () => Array<ViewComponent>;
       slotConfigColumns: () => Array<ViewComponent>;
 
   }
