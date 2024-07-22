@@ -231,7 +231,7 @@ export default {
             currentPopperWidth: this.popperWidth || '100%',
             compositionInputing: false,
             collapseCounter: 0,
-            selectedDataQueue: [], // 选中不在第一页数据处理
+            selectedDataQueue: [null, null], // 选中不在第一页数据处理
         };
     },
     computed: {
@@ -303,7 +303,9 @@ export default {
             this.setPopperWidth();
         },
         value(value) {
-            this.setSelectedDataQueue(value);
+            if (this.autoCheckSelectedValue) {
+                this.setSelectedDataQueue(value);
+            }
 
             if (this.filterable && !this.multiple && this.currentDataSource && Array.isArray(this.currentDataSource.data)) {
               const selectedItem = this.currentDataSource.data.find((d) => this.$at2(d, this.valueField) === value);
@@ -315,6 +317,8 @@ export default {
             }
         },
         selectedDataQueue(value) {
+            if (!this.autoCheckSelectedValue) return;
+
             // 当value有值，并且已经加载过一次数据才能开启判断
             // value 和 data 可能都是异步的，所以需要watch
             // 只有数据源是load函数的情况才需要处理
@@ -424,7 +428,9 @@ export default {
                 this.close();
             }
         });
-        this.setSelectedDataQueue(this.value);
+        if (this.autoCheckSelectedValue) {
+            this.setSelectedDataQueue(this.value);
+        }
     },
     mounted() {
         this.autofocus && this.$el.focus();
@@ -611,7 +617,7 @@ export default {
                     this.ensureSelectedInItemVMs();
                     // 选中数据不在第一页处理
                     // 只需要初始的时候处理，这里存储数据用于判断是否是第一次加载数据
-                    if (!this.selectedDataQueue[1]) {
+                    if (this.autoCheckSelectedValue && !this.selectedDataQueue[1]) {
                         this.selectedDataQueue.splice(1, 1, data);
                     }
                     this.$refs.popper.currentOpened
