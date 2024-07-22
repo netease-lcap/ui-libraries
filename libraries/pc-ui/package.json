@@ -1,7 +1,7 @@
 {
   "name": "@lcap/pc-ui",
   "description": "Lcap Cloud UI",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "NetEase CodeWave FE Team",
   "contributors": [
     "haoxutong <1255965516@qq.com>",

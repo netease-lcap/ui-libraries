@@ -118,11 +118,11 @@ namespace nasl.ui {
         })
         slotDefault: () => Array<ViewComponent>;
 
-        @Slot({
-            title: 'undefined',
-            description: '自定义图标',
-        })
-        slotDot: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: 'undefined',
+        //     description: '自定义图标',
+        // })
+        // slotDot: () => Array<ViewComponent>;
 
         @Slot({
             title: 'undefined',
