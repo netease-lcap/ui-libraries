@@ -308,7 +308,8 @@
     {
         "name": "UCard",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "disableSlotAutoFill": ["cover"]
         }
     },
     {
