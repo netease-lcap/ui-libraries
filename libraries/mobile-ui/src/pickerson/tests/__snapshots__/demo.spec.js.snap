@@ -36,6 +36,17 @@ exports[`renders demo correctly 1`] = `
         </div>
       </div>
     </div>
+    <div>picked value is: []</div>
+  </div>
+  <div>
+    <div vusion-click-enabled="true" class="van-pickerson__wrap">
+      <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-cellson--insel van-field">
+        <div vusion-slot-name="title" class="van-cellson__title van-field__label van-field__labelhasslots"><span vusion-slot-name-edit="text" class="root">标题</span></div>
+        <div class="van-cellson__value van-field__value">
+          <div class="van-field__body"><input type="text" readonly="readonly" placeholder="请选择" class="van-field__control van-field__control--right"></div>
+        </div>
+      </div>
+    </div>
   </div>
   <div>
     <div vusion-click-enabled="true" class="van-pickerson__wrap">
