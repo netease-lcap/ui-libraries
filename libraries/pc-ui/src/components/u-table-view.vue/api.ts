@@ -777,12 +777,11 @@ namespace nasl.ui {
       })
       defaultColumnWidth: nasl.core.String | nasl.core.Decimal;
 
-      // TODO LD:这里的title以及description展示什么具体要和产品确认下
       @Prop({
         group: '样式属性',
         title: '表格行动态样式',
-        description: '动态设置表格行背景色、字体颜色等',
-        docDescription: '动态设置表格行背景色、字体颜色等',
+        description: '动态设置表格行背景色、字体颜色等样式',
+        docDescription: '动态设置表格行背景色、字体颜色等样式',
         bindOpen: true,
         setter: {
             concept: 'AnonymousFunctionSetter',
