@@ -411,7 +411,11 @@
         "name": "UInfoListItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['u-info-list-group', 'u-info-list'].includes(target.tag)"
+            "parentAccept": "['u-info-list-group', 'u-info-list'].includes(target.tag)",
+            "disableSlotAutoFill": [{
+                "slot": "label",
+                "expression": "this.getAttribute('label')?.value"
+            }]
         }
     },
     {
@@ -420,7 +424,12 @@
             "idetype": "container",
             "structured": true,
             "parentAccept": "target.tag === 'u-info-list'",
-            "childAccept": "target.tag === 'u-info-list-item'"
+            "childAccept": "target.tag === 'u-info-list-item'",
+            "textholder": "title",
+            "disableSlotAutoFill": [{
+                "slot": "title",
+                "expression": "this.getAttribute('title')"
+            }]
         }
     },
     {
@@ -816,7 +825,12 @@
             ],
             "events": {
                 "click": true
-            }
+            },
+            "disableSlotAutoFill": [{
+                "slot": "title",
+                "expression": "this.getAttribute('title')",
+                "fill": "this.getAttribute('title').value"
+            }]
         }
     },
     {
