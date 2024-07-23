@@ -1,10 +1,10 @@
 import React from 'react';
-import { Layout } from '../index';
+import { AbsoluteLayout } from '../index';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
   title: 'Example/Layout1',
-  component: Layout,
+  component: AbsoluteLayout,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
@@ -23,9 +23,11 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
-  render: (args) => <Layout {...args} />,
+  render: (args) => <AbsoluteLayout {...args} />,
   args: {
     color: 'magenta',
     children: 'Tag',
   },
 };
+
+

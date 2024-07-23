@@ -16,7 +16,7 @@ export const Input = registerComponet<
   InputProps,
   pluginType<InputProps>
 >(
-  ProFormText,
+  AntdInput,
   { plugin, displayName: AntdInput.displayName, mapProps },
 );
 

@@ -1,6 +1,5 @@
 import { Select as AntdSelect } from 'antd';
 import type { SelectProps as AntdSelectProps } from 'antd';
-import { ProFormSelect, ProFormSelectProps } from '@ant-design/pro-components';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
 import * as formSelectPlugin from './plugins/formSelect';
@@ -17,14 +16,12 @@ const mapProps = {
   // dataSource: 'options',
 };
 
-export const Select = registerComponet<SelectProps, ProFormSelectProps>(
-  ProFormSelect,
+export const Select = registerComponet<SelectProps, AntdSelectProps>(
+  AntdSelect,
   { plugin, displayName: AntdSelect.displayName, mapProps },
 );
 Select.defaultProps = {
-  fieldProps: {
-    optionFilterProp: 'label',
-  },
+  optionFilterProp: 'label',
 };
 export const FormSelect = registerComponet<SelectProps, pluginType<SelectProps>>(
   AntdSelect,

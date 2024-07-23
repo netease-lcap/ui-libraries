@@ -2,7 +2,9 @@ import classnames from 'classnames';
 import _ from 'lodash';
 import React from 'react';
 import { useControllableValue } from 'ahooks';
-import { Cascader as AntCascader, CascaderProps } from 'antd';
+// import { Cascader as AntCascader, CascaderProps } from 'antd';
+import { ProFormCascader } from '@ant-design/pro-components';
+
 import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
 import {
@@ -54,11 +56,9 @@ export function useHandleDataSource(props) {
   };
 }
 
-// export function useHandleNotInForm(props) {
-//   const render = React.useCallback(React.forwardRef<any>((localProps, ref) => {
-//     return <AntCascader {...localProps} ref={ref} />;
-//   }), []);
-//   return {
-//     render,
-//   };
-// }
+export function useHandleFormItemComponent(props) {
+  return {
+    FormItemComponent: ProFormCascader,
+  };
+}
+useHandleFormItemComponent.order = 2;

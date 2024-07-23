@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import classnames from 'classnames';
+import { ProFormSelect, ProFormSelectProps } from '@ant-design/pro-components';
 import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
 import { SelectOption } from '@/index';
@@ -14,6 +15,13 @@ export function useHandleStyle(props) {
     className: classnames(style.select, className),
   };
 }
+
+export function useHandleFormItemComponent(props) {
+  return {
+    FormItemComponent: ProFormSelect,
+  };
+}
+useHandleFormItemComponent.order = 2;
 
 export function useHandleChildren(props) {
   const childrenProps = props.get('children');
@@ -45,7 +53,3 @@ export function useHandleDataSource(props) {
     ...dataSourceResult,
   };
 }
-
-// const list=getList(id).format().map(item=>item)
-// const listFormat=forMatList(list)
-// const listMap=mapList(listFormat)

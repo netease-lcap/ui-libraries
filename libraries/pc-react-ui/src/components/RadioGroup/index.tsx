@@ -32,6 +32,6 @@ export const RadioGroup = registerComponet<
   pluginType<RadioGroupProps>
 >(
   // ProFormRadio.Group,
-  ProFormRadio.Group,
+  AntdRadio.Group,
   { plugin: groupPlugin, displayName: AntdRadio.Group.displayName, mapProps },
 );

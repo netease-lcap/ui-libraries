@@ -4,14 +4,24 @@
 import { useControllableValue } from 'ahooks';
 import React from 'react';
 import _ from 'lodash';
+import { Radio as AntdRadio } from 'antd';
+import { ProFormRadio } from '@ant-design/pro-components';
 import { $deletePropsList } from '@/plugins/constants';
-import FormContext from '@/components/Form/form-context';
-import { Col, FormItem, Radio } from '@/index';
-import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
-import { COLPROPSFIELDS } from '@/components/Row/constants';
+// import FormContext from '@/components/Form/form-context';
+// import { Col, FormItem, Radio } from '@/index';
+// import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
+// import { COLPROPSFIELDS } from '@/components/Row/constants';
 import {
   useRequestDataSource, useHandleMapField, useFormatDataSource,
 } from '@/plugins/common/dataSource';
+
+const { Group: AntRadioGroup } = AntdRadio;
+export function useHandleFormItemComponent() {
+  return {
+    FormItemComponent: ProFormRadio.Group,
+  };
+}
+useHandleFormItemComponent.order = 2;
 
 export function useHandleValue(props) {
   const onChangeProps = props.get('onChange');
@@ -25,7 +35,7 @@ function useHandleChildren(props) {
   const childrenProps = props.get('children');
   const dataSourceProps = props.get('dataSource');
   const dataSource = React.useMemo(() => React.Children.map(childrenProps, (item) => {
-    if (item.type === Radio) {
+    if (item.type === AntdRadio) {
       return item.props;
     }
     return null;
@@ -72,9 +82,9 @@ export function useHandleDataSource(props) {
 
 export function useHandleRemoveRef(props) {
   const BaseComponent = props.get('render');
-  const render = React.useCallback((selfProps) => {
+  const render = React.useCallback(React.forwardRef((selfProps: any, ref) => {
     return <BaseComponent {..._.omit(selfProps, 'ref')}>{selfProps.children}</BaseComponent>;
-  }, [BaseComponent]);
+  }), [BaseComponent]);
   return {
     render,
   };

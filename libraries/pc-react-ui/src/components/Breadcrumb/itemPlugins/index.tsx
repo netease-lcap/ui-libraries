@@ -28,7 +28,6 @@ export function useHandleIcon(props) {
       </BaseComponents>
     );
   }, [BaseComponents, icon]);
-
   if (!icon) return {};
   return {
     render,

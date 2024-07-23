@@ -1,6 +1,5 @@
 import { TimePicker as AntdTimePicker } from 'antd';
 
-import { ProFormTimePicker } from '@ant-design/pro-components';
 import type { TimePickerProps } from 'antd';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';
@@ -18,7 +17,7 @@ export const TimePicker = registerComponet<
   TimePickerProps,
   pluginType<TimePickerProps>
 >(
-  ProFormTimePicker,
+  AntdTimePicker,
   { plugin, displayName: AntdTimePicker.displayName, mapProps },
 );
 
