@@ -10,6 +10,7 @@ export interface NaslUIComponentConfig extends ViewComponentDeclaration {
 
 export interface OverloadComponentContext {
   naslUIConfig: NaslUIComponentConfig;
+  naslConfigList: NaslUIComponentConfig[];
   name: string;
   tagName: string;
   framework: string;
@@ -19,6 +20,8 @@ export interface OverloadComponentContext {
   fork: boolean;
   type: 'pc' | 'h5';
   prefix: string;
+  replaceNameMap: Record<string, string>;
+  replaceTagMap: Record<string, string>;
 }
 
 export function getProjectContext(rootPath) {
@@ -53,6 +56,43 @@ function getComponentFloderPath(rootPath, component, framework) {
   return path.resolve(rootPath, `.lcap/lcap-ui/package/src/components/${framework.startsWith('vue') ? kebabCase(component) : component}`);
 }
 
+function addPrefix(name, prefix, kebab = false) {
+  if (kebab) {
+    return [
+      prefix.toLowerCase(),
+      name,
+    ].join('-');
+  }
+
+  return upperFirst(prefix.toLowerCase()) + name;
+}
+
+function getReleaceMap(comp, framework, prefix) {
+  const replaceNameMap = {
+    [comp.name]: addPrefix(comp.name, prefix),
+  };
+
+  const isKebab = framework.startsWith('vue');
+  const getTagName = (cp) => (isKebab ? cp.kebabName : cp.name);
+  const tagName = getTagName(comp);
+  const replaceTagMap = {
+    [tagName]: addPrefix(tagName, prefix, isKebab),
+  };
+
+  if (comp.children && comp.children.length > 0) {
+    comp.children.forEach((child) => {
+      replaceNameMap[child.name] = addPrefix(child.name, prefix);
+      const tname = getTagName(child);
+      replaceTagMap[tname] = addPrefix(tname, prefix, isKebab);
+    });
+  }
+
+  return {
+    replaceNameMap,
+    replaceTagMap,
+  };
+}
+
 export function getOverloadComponentContext(rootPath, { component, prefix, fork }) {
   const env = getProjectContext(rootPath);
   const configPath = path.resolve(rootPath, '.lcap/lcap-ui/runtime/nasl.ui.json');
@@ -66,10 +106,12 @@ export function getOverloadComponentContext(rootPath, { component, prefix, fork 
     throw new Error(`unfound component ${component} in config file `);
   }
 
+  prefix = prefix.toLowerCase();
   const name = upperFirst(prefix) + component;
   const tagName = env.framework.startsWith('vue') ? kebabCase(name) : name;
 
   return {
+    naslConfigList: configList,
     naslUIConfig: comp,
     name,
     tagName,
@@ -80,5 +122,6 @@ export function getOverloadComponentContext(rootPath, { component, prefix, fork 
     componentFolderPath: path.resolve(rootPath, `src/components/${tagName}`),
     fork,
     prefix,
+    ...getReleaceMap(comp, env.framework, prefix),
   } as OverloadComponentContext;
 }

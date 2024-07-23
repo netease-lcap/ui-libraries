@@ -85,6 +85,10 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
     },
     ClassDeclaration(path) {
       if (path.node.superClass && path.node.id && path.node.id.type === 'Identifier' && path.node.superClass.type === 'Identifier' && path.node.superClass.name === 'ViewComponent') {
+        if (path.node.id.name !== context.naslUIConfig.name) {
+          path.remove();
+          return;
+        }
         path.node.id.name = addPrefix(path.node.id.name, context.prefix);
         if (!path.node.decorators) {
           return;
@@ -159,9 +163,23 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
           }
         }
       } else if (path.node.id && path.node.id.type === 'Identifier' && path.node.superClass && path.node.superClass.type === 'Identifier' && path.node.superClass.name === 'ViewComponentOptions') {
+        if (path.node.id.name !== `${context.naslUIConfig.name}Options`) {
+          path.remove();
+          return;
+        }
         path.node.id.name = addPrefix(path.node.id.name, context.prefix);
       }
-    }
+    },
+    // ObjectProperty(path) {
+    //   if (path.node.key.type === 'Identifier' && path.node.key.name === 'code' && path.node.value.type === 'StringLiteral') {
+    //     let code = path.node.value.value;
+
+    //     Object.keys(context.replaceTagMap).forEach((name) => {
+    //       code = code.replaceAll(`<${name}`, `<${context.replaceTagMap[name]}`).replaceAll(`</${name}`, `</${context.replaceTagMap[name]}`);
+    //     });
+    //     path.node.value.value = code;
+    //   }
+    // }
   });
 
   return generate(ast).code;

@@ -6,6 +6,7 @@ import {
   copyFiles,
   transformAPITs,
   OverloadComponentContext,
+  generateBlockFile,
 } from '../overload';
 
 function transformAPITsFile(context: OverloadComponentContext) {
@@ -18,8 +19,9 @@ function transformAPITsFile(context: OverloadComponentContext) {
 export default async (rootPath, { fork, component, prefix }) => {
   try {
     const context = getOverloadComponentContext(rootPath, { component, prefix, fork });
-    copyFiles(context);
-    transformAPITsFile(context);
+    await copyFiles(context);
+    await transformAPITsFile(context);
+    await generateBlockFile(context);
   } catch (e) {
     logger.error(e);
   }
