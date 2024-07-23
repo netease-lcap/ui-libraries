@@ -126,7 +126,7 @@ export default createComponent({
       this.currentValue = this.converter ? this.currentConverter.format(val) : this.formatValue(val);
     },
     pvalue(val) {
-      this.currentValue = this.formatValue(val);
+      this.currentValue = this.converter ? this.currentConverter.format(val) : this.formatValue(val);
     },
   },
 
