@@ -85,7 +85,7 @@ export function useHandleMenuSlot(props) {
   const menuProps = props.get('menuProps');
   const menuSlot = React.Children.toArray(_.get(fragment, 'props.children', []));
   const handleLink = useHandleLink();
-  const timeer = null;
+  let timeer = null;
   function childToJson(children) {
     return React.Children.map(children, (child) => {
       if (child?.type === MenuItem) {
@@ -94,8 +94,10 @@ export function useHandleMenuSlot(props) {
         const onClickPorps = child.props.onClick;
         const icon = _.isNil(child.props.icon) ? {} : { icon: <Icon name={child.props.icon} /> };
         const label = child.props.labelIsSlot ? child.props.labelSlot : child.props.label;
+        console.log(child.props, 'props');
+        const destination = child.props?.destination;
         return {
-          key: child.props?.destination ?? child.props?.path,
+          key: destination ?? child.props?.path,
           ...child.props,
           ...childrenProps,
           ...icon,
@@ -108,11 +110,12 @@ export function useHandleMenuSlot(props) {
             if (timeer) {
               clearTimeout(timeer);
             }
-            // timeer = setTimeout(() => {
-            if (arg.key === child.props?.destination) { // 唯一标识不跳转
-              handleLink(arg.key, child.props?.target);
-            }
-            // }, 150);
+            timeer = setTimeout(() => {
+              // console.log(arg.key, '===', arg.item.props.path);
+              if (arg.key !== arg.item.props.path) { // 唯一标识不跳转
+                handleLink(arg.key, child.props?.target);
+              }
+            }, 150);
           }),
         };
       }

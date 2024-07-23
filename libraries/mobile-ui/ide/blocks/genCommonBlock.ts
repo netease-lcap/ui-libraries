@@ -46,7 +46,7 @@ export function genQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: N
       ?.filter((property) => property.relationEntity === relationEntity.name)
       .map((leftProperty) => {
         return `${entity.name}.${leftProperty.name} == ${relationEntity.name}.${leftProperty.relationProperty}`;
-      }).join('\n');
+      }).join('&&');
     return `.LEFT_JOIN(${namespace}.${relationEntity.name}Entity, ${relationEntity.name} => ON(${onExpressions}))`;
   }).join('\n')}
   ${supportFilter && properties.length ? `.WHERE(${genWhereExpression(entity)})` : ''}
@@ -216,10 +216,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
   const namespaceArr = propertyTypeNamespace.split('.');
   const type = namespaceArr.pop();
   if (type === 'enums') {
-    const enumeration = dataSource.app.findNodeByCompleteName(`${propertyTypeNamespace}.${propertyTypeName}`);
-    const enumnamespace = enumeration?.getNamespace() || '';
-    const name = enumeration?.name || '';
-    const enumTypeAnnotationStr = `${enumnamespace}.${name}`;
+    const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;
     return `<VanPickerson
             type="list"
             showToolbar={true}

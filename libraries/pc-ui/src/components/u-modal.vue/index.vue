@@ -108,6 +108,7 @@ export const UModal = {
         isTitleSlotEmpty: { type: Boolean, default: false }, // 有插槽template但是不想展示的情况
         isFootSlotEmpty: { type: Boolean, default: false },
         showHead: { type: Boolean, default: true },
+        disableRootElemShift:  { type: Boolean, default: false }, // 取消根节点移位
     },
     data() {
         return {
@@ -132,13 +133,13 @@ export const UModal = {
         },
     },
     mounted() {
-        if (this.$el && !this.static) {
+        if (!this.disableRootElemShift && this.$el && !this.static) {
             const container = window.LcapMicro && window.LcapMicro.appendTo ? window.LcapMicro.appendTo : document.body;
             container.appendChild(this.$el);
         }
     },
     destroyed() {
-        if (this.$el) {
+        if (this.$el && !this.disableRootElemShift) {
             const container = window.LcapMicro && window.LcapMicro.appendTo ? window.LcapMicro.appendTo : document.body;
             this.$el.parentNode === container && container.removeChild(this.$el);
         }

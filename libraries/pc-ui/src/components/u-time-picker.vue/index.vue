@@ -98,9 +98,9 @@ export default {
         time: { type: String, default: '' },
         value: { type: String, default: '' }, // 优先使用
         autofocus: [String, Boolean],
-        disabled: [String, Boolean],
+        disabled: { type: [String, Boolean], default: false },
         preview: { type: Boolean, default: false },
-        readonly: [String, Boolean],
+        readonly: { type: [String, Boolean], default: false },
         minTime: { type: String, default: '00:00:00' },
         maxTime: { type: String, default: '23:59:59' },
         appendTo: {

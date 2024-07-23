@@ -225,7 +225,7 @@ export default {
           return this.currentDataSource && this.currentDataSource.total ? this.currentDataSource.total : 0;
         },
         size() {
-          return this.currentDataSource && this.currentDataSource.size ? this.currentDataSource.paging.size : this.pageSize;
+          return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.size : this.pageSize;
         },
         page() {
           return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : this.pageNumber;
@@ -2736,6 +2736,10 @@ export default {
         onResizerDragEnd($event) {
             this.reHandleResize();
             this.$emit('resize', $event);
+        },
+        // for 外部调用
+        resetEdit(item) {
+            item.editing = '';
         },
     },
 };

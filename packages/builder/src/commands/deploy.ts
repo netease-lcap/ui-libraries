@@ -49,8 +49,7 @@ function deployTgz(rootPath: string, config: LcapCliConfig) {
   // 复制tgz到zip.tgz
   fs.copyFileSync(tgz, 'zip.tgz');
 
-  const command = 'npx lcap deploy zip.tgz';
-  execSync(concatCommand(command, config));
+  execSync(concatCommand('npx lcap deploy zip.tgz', config));
   logger.success(`update success ${tgz}`);
   // 删除zip.tgz
   fs.unlinkSync('zip.tgz');
@@ -74,13 +73,13 @@ function deployImages(rootPath, config: LcapCliConfig) {
   });
 }
 
-export default (rootPath, commandArgs = {}) => {
+export default (rootPath, { images, ...commandArgs }) => {
   const lcapCliConfig: LcapCliConfig = {
     ...commandArgs,
   };
 
-  const configPath = `${rootPath}/.lcaprc`;
-  if (fs.existsSync(`${rootPath}/.lcaprc`)) {
+  const configPath = path.resolve(rootPath, '.lcaprc');
+  if (fs.existsSync(configPath)) {
     const config = fs.readJSONSync(configPath);
     Object.keys(config).forEach((key) => {
       if (config[key] && !lcapCliConfig[key]) {
@@ -93,6 +92,14 @@ export default (rootPath, commandArgs = {}) => {
 
   execSync(concatCommand('npx lcap deploy dist-theme', lcapCliConfig));
 
-  deployImages(rootPath, lcapCliConfig);
+  const manifestPath = path.resolve(rootPath, 'manifest.json');
+  if (fs.existsSync(manifestPath)) {
+    execSync(concatCommand('npx lcap deploy manifest.json', lcapCliConfig));
+  }
+
+  if (images) {
+    deployImages(rootPath, lcapCliConfig);
+  }
+
   logger.success('Deploy successed!');
 };

@@ -18,7 +18,7 @@ namespace nasl.ui {
     data: nasl.collection.List<T>;
 
     @Prop({
-      title: '数据量',
+      title: '数据总数',
     })
     total: nasl.core.Integer;
 
@@ -152,7 +152,7 @@ namespace nasl.ui {
         concept: "SwitchSetter"
       }
     })
-    remotePaging: nasl.core.Boolean = false;
+    private remotePaging: nasl.core.Boolean = false;
     @Prop({
       group: '主要属性',
       title: '后端筛选',
@@ -160,7 +160,7 @@ namespace nasl.ui {
         concept: "SwitchSetter"
       }
     })
-    remoteFiltering: nasl.core.Boolean = false;
+    private remoteFiltering: nasl.core.Boolean = false;
     @Prop({
       group: '交互属性',
       title: '下拉刷新',

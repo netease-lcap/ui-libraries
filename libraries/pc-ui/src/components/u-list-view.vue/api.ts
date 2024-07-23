@@ -14,7 +14,7 @@ namespace nasl.ui {
         data: nasl.collection.List<T>;
 
         @Prop({
-            title: '数据量',
+            title: '数据总数',
         })
         total: nasl.core.Integer;
 
@@ -64,6 +64,18 @@ namespace nasl.ui {
             description: '清除缓存，重新加载',
         })
         reload(): void {}
+
+        @Method({
+          title: '带页码刷新',
+          description: '保持页码，重新加载',
+        })
+        loadTo(
+          @Param({
+              title: '页数',
+              description: '要刷新的页数',
+          })
+          page?: nasl.core.Integer,
+        ): void {}
         constructor(options?: Partial<UListViewOptions<T, V, P, M, C>>) { super(); }
     }
 
@@ -515,6 +527,11 @@ namespace nasl.ui {
             emptyBackground: 'drag-entity-here',
         })
         slotDefault: () => Array<ViewComponent>;
+
+        @Slot({
+          title: '空状态时显示的内容',
+        })
+        slotEmpty: () => Array<ViewComponent>;
 
         @Slot({
             title: '项',

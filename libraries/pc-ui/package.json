@@ -1,14 +1,15 @@
 {
   "name": "@lcap/pc-ui",
   "description": "Lcap Cloud UI",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "NetEase CodeWave FE Team",
   "contributors": [
     "haoxutong <1255965516@qq.com>",
     "ChenWeiYuan123 <360411956@qq.com>",
     "zou-xinhua <m15616168428@163.com>"
   ],
-  "main": "./src/index.js",
+  "main": "dist-theme/index.js",
+  "style": "dist-theme/index.css",
   "repository": "https://github.com/netease-lcap/ui-libraries",
   "bugs": {
     "url": "https://github.com/netease-lcap/ui-libraries/issues"
@@ -28,10 +29,10 @@
   ],
   "files": [
     "dist-theme",
+    "es",
+    "lib",
     "src",
-    "themes",
-    "vetur",
-    "index.js",
+    "manifest.json",
     "README.md"
   ],
   "dependencies": {
@@ -107,7 +108,7 @@
     "storybook": "storybook dev -p 6006",
     "build": "lcap-scripts build && npm run lowcode",
     "deploy": "lcap-scripts deploy",
-    "deploy:dev": "lcap-scripts deploy --platform http://defaulttenant.lcap.codewave-dev.163yun.com/",
+    "deploy:dev": "lcap-scripts deploy --platform http://devtest.lcap.codewave-dev.163yun.com/",
     "deploy:test": "lcap-scripts deploy --platform http://defaulttenant.lcap.codewave-test.163yun.com/",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "test": "vitest run --silent",

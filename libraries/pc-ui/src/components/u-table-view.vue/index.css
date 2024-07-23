@@ -363,6 +363,9 @@ content: "\e665";
 .cell[ellipsis] > * {
     white-space: nowrap;
 }
+.cell[ellipsis] > div > * {
+    white-space: nowrap;
+}
 .cell[last-left-fixed]::after,
 .cell[first-right-fixed]::after{
     content: "";

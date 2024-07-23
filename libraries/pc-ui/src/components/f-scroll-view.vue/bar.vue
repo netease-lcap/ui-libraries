@@ -91,8 +91,7 @@ export default {
         mouseUpDocumentHandler(e) {
             this.cursorDown = false;
             this[this.bar.axis] = 0;
-            document.removeEventListener('mousemove', this.mouseMoveDocumentHandler, false);
-            document.onselectstart = null;
+            this.clearEvents();
         },
         renderThumbStyle({ move, size, bar }) {
             const style = {};
@@ -104,7 +103,15 @@ export default {
 
             return style;
         },
+        clearEvents() {
+            document.removeEventListener('mousemove', this.mouseMoveDocumentHandler, false);
+            document.removeEventListener('mouseup', this.mouseUpDocumentHandler, false);
+            document.onselectstart = null;
+        },
     },
+    beforeDestroy() {
+        this.clearEvents();
+    }
 };
 </script>
 

@@ -3,7 +3,7 @@
         "name": "ULinearLayout",
         "ideusage": {
             "idetype": "container",
-            "containerDirection": "this.getAttribute('direction')?.value === 'vertical' ? 'column' : 'row' ",
+            "containerDirection": "column",
             "expandWhenHesitate": true,
            "automate": [
                 {
@@ -66,7 +66,13 @@
         "name": "UGridLayoutColumn",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'u-grid-layout-row'"
+            "parentAccept": "target.tag === 'u-grid-layout-row'",
+            "gridCol": {
+                "rowComponent": "u-grid-layout-row",
+                "colGap": "{ const gap = this.getParent().getAttribute('gap')?.value || 'normal'; const _map = { none: 0, mini: 4, small: 8, normal: 16, huge: 32 }; return _map[gap]; }",
+                "colNum": "this.getParent().getAttribute('repeat')?.value || 12",
+                "spanAttr": "span"
+            }
         }
     },
     {
@@ -81,7 +87,10 @@
         "name": "UMultiLayoutItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'u-multi-layout'"
+            "parentAccept": "target.tag === 'u-multi-layout'",
+            "slotInlineStyle": {
+                "default": "height:100%;"
+            }
         }
     },
     {
@@ -89,7 +98,11 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "target.tag === 'u-crumb-item'"
+            "childAccept": "target.tag === 'u-crumb-item'",
+            "elementSutando": {
+                "condition": "this.getAttribute('auto')?.value === true",
+                "component": "UCrumbDesigner"
+            }
         }
     },
     {
@@ -239,7 +252,7 @@
     {
         "name": "UAnchor",
         "ideusage": {
-            "idetype": "element"
+           "idetype": "container"
         }
     },
     {
@@ -258,8 +271,10 @@
         "name": "UPanel",
         "ideusage": {
             "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'u-panel-group'"
+            "structured": {
+                "slot": "default",
+                "empty": true
+            }
         }
     },
     {
@@ -284,13 +299,17 @@
             "parentAccept": "target.tag === 'u-collapse'",
             "events": {
                 "click": true
+            },
+            "slotWrapperInlineStyle": {
+                "title": "display:inline-block"
             }
         }
     },
     {
         "name": "UCard",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "disableSlotAutoFill": ["cover"]
         }
     },
     {
@@ -339,7 +358,7 @@
     {
         "name": "ULabel",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "element"
         }
     },
     {
@@ -353,14 +372,31 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "'u-carousel-item' === target.tag"
+            "childAccept": "'u-carousel-item' === target.tag",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+                "display": 1,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> label[class^='u-carousel_body']:not([data-nodepath])",
+                "emptySlot": {
+                    "display": "large",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            },
+            "additionalAttribute": {
+                ":autoplay": "\"false\""
+            }
         }
     },
     {
         "name": "UCarouselItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "'u-carousel' === target.tag"
+            "parentAccept": "'u-carousel' === target.tag",
+            "displaySlotConditions": {
+                "title": false
+            }
         }
     },
     {
@@ -375,7 +411,11 @@
         "name": "UInfoListItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['u-info-list-group', 'u-info-list'].includes(target.tag)"
+            "parentAccept": "['u-info-list-group', 'u-info-list'].includes(target.tag)",
+            "disableSlotAutoFill": [{
+                "slot": "label",
+                "expression": "this.getAttribute('label')?.value"
+            }]
         }
     },
     {
@@ -384,7 +424,12 @@
             "idetype": "container",
             "structured": true,
             "parentAccept": "target.tag === 'u-info-list'",
-            "childAccept": "target.tag === 'u-info-list-item'"
+            "childAccept": "target.tag === 'u-info-list-item'",
+            "textholder": "title",
+            "disableSlotAutoFill": [{
+                "slot": "title",
+                "expression": "this.getAttribute('title')"
+            }]
         }
     },
     {
@@ -393,6 +438,11 @@
             "idetype": "element",
             "additionalAttribute": {
                 ":convertSrcFn": "\"(src) => src.startsWith('/assets') ? '/lowcode-static' + src : src \""
+            },
+            "textholder": "src",
+            "elementSutando": {
+                "condition": "this.getAttribute('src').type === 'dynamic'",
+                "component": "UImageDesigner"
             }
         }
     },
@@ -430,9 +480,10 @@
                 "emptySlot": {
                   "display": "inline",
                   "condition": "!this.getAttribute('dataSource')",
-                  "accept": "false"
+                  "accept": false
                 }
-            }
+            },
+            "namedSlotOmitWrapper": ["item"]
         }
     },
     {
@@ -451,7 +502,7 @@
                 "display": 3,
                 "loopElem": "table > tbody > tr",
                 "emptySlot": {
-                    "condition": "this.elementsLength() === 0",
+                    "condition": "this.getDefaultElements().length === 0",
                     "accept": "target.concept === 'Entity'"
                 }
             },
@@ -485,8 +536,8 @@
                 }
             ],
             "displaySlotInline": {
-                "cell": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type').value)",
-                "title": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type').value)"
+                "cell": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type')?.value)",
+                "title": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type')?.value)"
             }
         }
     },
@@ -496,7 +547,10 @@
             "idetype": "container",
             "forceRefresh": "parent",
             "childAccept": false,
-            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -604,7 +658,7 @@
     {
         "name": "UInput",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "element"
         }
     },
     {
@@ -623,25 +677,32 @@
     {
         "name": "URadios",
         "ideusage": {
-            "idetype": "container",
+           "idetype": "container",
             "structured": true,
             "dataSource": {
                 "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
                 "display": 3,
-                "loopElem": "> label[class^='u-radios_radio']",
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> label[class^='u-radios_radio']:not([data-nodepath])",
                 "emptySlot": {
                     "display": "inline",
                     "condition": "!this.getAttribute('dataSource')",
-                    "accept": "false"
+                    "accept": false
                 }
             },
-            "childAccept":"target.tag === 'u-radio'"
+            "childAccept": "target.tag === 'u-radio'",
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block;width:90px;"
+            }
         }
     },
     {
         "name": "URadio",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "displaySlotInline": {
+                "item": true
+            }
         }
     },
     {
@@ -653,25 +714,32 @@
     {
         "name": "UCheckboxes",
         "ideusage": {
-            "idetype": "container",
+           "idetype": "container",
             "structured": true,
             "dataSource": {
-                "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
                 "display": 3,
-                "loopElem": "> label[class^='u-checkbox']",
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> label[class^='u-checkbox']:not([data-nodepath])",
                 "emptySlot": {
                     "display": "inline",
                     "condition": "!this.getAttribute('dataSource')",
-                    "accept": "false"
+                    "accept": false
                 }
             },
-            "childAccept": "target.tag === 'u-checkbox'"
+            "childAccept": "target.tag === 'u-checkbox'",
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block;width:90px;"
+            }
         }
     },
     {
         "name": "UCheckbox",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "displaySlotInline": {
+                "item": true
+            }
         }
     },
     {
@@ -726,7 +794,18 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept":"target.tag === 'u-tab'"
+            "childAccept":"target.tag === 'u-tab'",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> div[class^='u-tabs_head'] a[class^='u-tabs_item']",
+                "emptySlot": {
+                    "display": "large",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            }
         }
     },
     {
@@ -746,7 +825,12 @@
             ],
             "events": {
                 "click": true
-            }
+            },
+            "disableSlotAutoFill": [{
+                "slot": "title",
+                "expression": "this.getAttribute('title')",
+                "fill": "this.getAttribute('title').value"
+            }]
         }
     },
     {
@@ -772,6 +856,9 @@
                     "cssSelector": "div"
                 }
             ],
+            "slotWrapperInlineStyle": {
+                "title": "display:inline-block;width:max-content;"
+            },
             "events": {
                 "click": true
             }
@@ -834,7 +921,18 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "target.tag === 'u-tree-view-node-new'"
+            "childAccept": "target.tag === 'u-tree-view-node-new'",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> div[class^='u-tree-view-new_node']:not([data-nodepath])",
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            }
         }
     },
     {
@@ -843,7 +941,13 @@
             "idetype": "container",
             "structured": true,
             "childAccept": "target.tag === 'u-tree-view-node-new'",
-            "parentAccept": "['u-tree-select-new', 'u-tree-view-new', 'u-tree-view-node-new'].includes(target.tag)"
+            "parentAccept": "['u-tree-select-new', 'u-tree-view-new', 'u-tree-view-node-new'].includes(target.tag)",
+            "events": {
+                "click": true
+            },
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block"
+            }
         }
     },
     {
@@ -855,19 +959,28 @@
     {
         "name": "UDatePicker",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "additionalAttribute": {
+                ":value": null
+            }
         }
     },
     {
         "name": "UTimePicker",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "additionalAttribute": {
+                ":value": null
+            }
         }
     },
     {
         "name": "UDateTimePicker",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "additionalAttribute": {
+                ":value": null
+            }
         }
     },
     {

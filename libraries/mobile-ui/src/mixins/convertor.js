@@ -55,11 +55,19 @@ export const Converter = {
     converter: { type: [String, Object], default: undefined },
   },
   data() {
-    let currentConverter;
+    let currentConverter = {
+      get(val) {
+        return val;
+      },
+      set(val) {
+        return val;
+      },
+    };
     let types = [];
     if (this.converter) {
-      if (this.converter instanceof Object) currentConverter = this.converter;
-      else if (this.converter.startsWith('join')) {
+      if (this.converter instanceof Object) {
+        currentConverter = this.converter;
+      } else if (this.converter.startsWith('join')) {
         const m = this.converter.match(/^join(\.number)?(:.+)?$/);
         if (!m) throw new Error('converter format error');
         const number = !!m[1];

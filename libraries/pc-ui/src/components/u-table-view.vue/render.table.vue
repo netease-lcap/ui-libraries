@@ -76,15 +76,21 @@
                         <tbody ref="virtual">
                             <template v-if="(!currentLoading && !currentError && !currentEmpty || pageable === 'auto-more' || pageable === 'load-more') && currentData && currentData.length">
                                 <template v-for="(item, rowIndex) in virtualList">
-                                    <tr :class="[$style.row]" :color="item.rowColor" :selectable="selectable" :selected="selectable && selectedItem === item"
-                                    v-if="item.display !== 'none'"
-                                    :draggable="rowDraggable && item.draggable || undefined"
-                                    :dragging="isDragging(item)"
-                                    :subrow="!!item.tableTreeItemLevel"
-                                    @dragstart="onDragStart($event, item, rowIndex + virtualIndex)"
-                                    @dragover="onDragOver($event, item, rowIndex + virtualIndex)"
-                                    @click="onClickRow($event, item, rowIndex + virtualIndex)"
-                                    @dblclick="onDblclickRow($event, item, rowIndex + virtualIndex)">
+                                    <tr
+                                      v-if="item.display !== 'none'"
+                                      :key="valueField && $at(item, valueField) ? $at(item, valueField) : rowIndex"
+                                      :class="[$style.row]"
+                                      :color="item.rowColor"
+                                      :selectable="selectable"
+                                      :selected="selectable && selectedItem === item"
+                                      :draggable="rowDraggable && item.draggable || undefined"
+                                      :dragging="isDragging(item)"
+                                      :subrow="!!item.tableTreeItemLevel"
+                                      @dragstart="onDragStart($event, item, rowIndex + virtualIndex)"
+                                      @dragover="onDragOver($event, item, rowIndex + virtualIndex)"
+                                      @click="onClickRow($event, item, rowIndex + virtualIndex)"
+                                      @dblclick="onDblclickRow($event, item, rowIndex + virtualIndex)"
+                                    >
                                         <u-table-render-td v-for="(columnVM, columnIndex) in visibleColumnVMs"
                                             v-if="getItemColSpan(item, rowIndex, columnIndex) !== 0 && getItemRowSpan(item, rowIndex, columnIndex) !== 0"
                                             :key="columnIndex"
@@ -118,12 +124,14 @@
                                         </u-table-render-td>
                                     </tr>
                                     <u-table-render-tr-expander
-                                        v-if="expanderColumnVM"
-                                        :vm="expanderColumnVM"
-                                        :item="item"
-                                        :visibleColumnVMs="visibleColumnVMs"
-                                        slotName="expand-content"
-                                        :slotProps="{ item, value: $at(item, expanderColumnVM.field), columnVM: expanderColumnVM, rowIndex: rowIndex + virtualIndex, index: rowIndex + virtualIndex }">
+                                      v-if="expanderColumnVM"
+                                      :key="`expander_${valueField && $at(item, valueField) ? $at(item, valueField) : rowIndex}`"
+                                      :vm="expanderColumnVM"
+                                      :item="item"
+                                      :visibleColumnVMs="visibleColumnVMs"
+                                      slotName="expand-content"
+                                      :slotProps="{ item, value: $at(item, expanderColumnVM.field), columnVM: expanderColumnVM, rowIndex: rowIndex + virtualIndex, index: rowIndex + virtualIndex }"
+                                    >
                                     </u-table-render-tr-expander>
                                 </template>
                             </template>

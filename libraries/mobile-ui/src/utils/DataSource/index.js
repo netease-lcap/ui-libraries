@@ -135,7 +135,7 @@ const VueDataSource = Vue.extend({
     },
     computed: {
         pageable() {
-          return !!this.paging;
+          return !!this.paging && (this.paging.size > 0 && this.paging.size < Infinity);
         },
         offset() {
             return this.pageable ? (this.paging.number - 1) * this.paging.size : 0;
@@ -182,7 +182,7 @@ const VueDataSource = Vue.extend({
         // 传 data 为本地数据模式，此时已知所有数据
         if (!this.remote) {
             this.originTotal = this.data.length;
-            this.arrange(this.data.slice(this.offset, this.offset + this.limit));
+            this.arrange(this.data);
         } else if (this.needAllData) {
           this.loadAll().then((data) => {
             this.allData = data;
@@ -238,7 +238,7 @@ const VueDataSource = Vue.extend({
           return arrangedData;
         },
         clearLocalData() {
-            this.data = [];
+            this.remote && (this.data = []);
             this.arrangedData = [];
             this.originTotal = Infinity; // originTotal 必须清空，否则空列表不会更新
 
@@ -294,7 +294,7 @@ const VueDataSource = Vue.extend({
         // _load(params)
         load(offset = this.offset, limit = this.limit, newPageNumber) {
           // reload 或 query变化
-          if (this.cleared) {
+          if (this.cleared && newPageNumber === undefined) {
             if (this.paging) {
               this.paging.number = 1;
             }
@@ -342,7 +342,10 @@ const VueDataSource = Vue.extend({
 
           return this._load(params, extraParams)
             .then((result) => {
-              const finalResult = {};
+              const finalResult = {
+                data: [],
+                total: 0,
+              };
 
               // 判断是否后端数据
               if (getType(result) === 'Object') {
@@ -368,26 +371,21 @@ const VueDataSource = Vue.extend({
                   !finalResult.hasOwnProperty('data') ||
                   !finalResult.hasOwnProperty('total')
                 ) {
-                  this.remote = false;
+                  // this.remote = false;
                 }
               } else if (getType(result) === 'Array') {
                 finalResult.data = result;
                 finalResult.total = result.length;
-                this.remote = false;
+                // this.remote = false;
               } else {
-                this.remote = false;
+                // this.remote = false;
               }
 
               if (!this.remote) {
-                // this.remotePaging = false;
-                // this.remoteSorting = false;
-                // this.remoteFiltering = false;
-
                 this.data = finalResult.data;
-                this.originTotal = finalResult.total;
               } else {
-                // 后端不分页
-                if (!this.pageable || limit === Infinity) {
+                // 远端数据未分页
+                if (!this.pageable || limit === Infinity || finalResult.data.length >= finalResult.total) {
                   this.data = finalResult.data;
                 } else {
                   for (let i = 0; i < limit; i++) {
@@ -397,23 +395,24 @@ const VueDataSource = Vue.extend({
                     }
                   }
                 }
-
-                this.originTotal = finalResult.total;
               }
+
+              this.originTotal = finalResult.total;
 
               return this.arrange(this.data);
             })
         },
         loadMore() {
-            if (!this.hasMore())
-                return Promise.resolve([]);
+            if (!this.hasMore()) {
+              return Promise.resolve([]);
+            }
 
-                const newPageNumber = this.paging.number + 1;
-                return this.load(
-                    this.offset + this.limit,
-                    undefined,
-                    newPageNumber,
-                ).then(() => (this.paging.number = newPageNumber));
+            const newPageNumber = this.paging.number + 1;
+            return this.load(
+                this.offset + this.limit,
+                undefined,
+                newPageNumber,
+            ).then(() => (this.paging.number = newPageNumber));
 
         },
         reload() {

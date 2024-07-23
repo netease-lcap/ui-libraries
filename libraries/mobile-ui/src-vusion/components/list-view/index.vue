@@ -112,10 +112,10 @@ export default {
           return this.currentDataSource && this.currentDataSource.total ? this.currentDataSource.total : 0;
         },
         size() {
-          return this.currentDataSource && this.currentDataSource.size ? this.currentDataSource.paging.size : this.pageSize;
+          return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.size : undefined;
         },
         page() {
-          return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : this.pageNumber;
+          return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : 1;
         },
         sort() {
           return this.currentDataSource && this.currentDataSource.sorting ? this.currentDataSource.sorting.field : '';
@@ -261,6 +261,27 @@ export default {
           if (el.scrollHeight <= el.scrollTop + el.clientHeight+30 && this.currentDataSource && this.currentDataSource.hasMore()) {
             this.debouncedLoad(true);
           }
+        },
+        loadTo(page) {
+            if (this.pageable !== 'pagination') {
+              return;
+            }
+
+            const dataSource = this.currentDataSource;
+            if (!(dataSource && dataSource.paging))
+                return;
+            if(dataSource._load && typeof dataSource._load === 'function') {
+                dataSource.clearLocalData();
+            }
+            let currentPage = page;
+            if(['', null, undefined].includes(page)) {
+                currentPage = dataSource.paging.number;
+            }
+            if(currentPage === dataSource.paging.number) {
+                this.load(false, { number: currentPage });
+            } else {
+                dataSource.paging.number = page;
+            }
         },
     },
 }

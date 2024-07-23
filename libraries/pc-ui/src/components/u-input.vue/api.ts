@@ -366,16 +366,16 @@ namespace nasl.ui {
         })
         onKeyup: (event: KeyboardEvent) => any;
 
-        @Slot({
-            title: '前缀图标',
-            description: '前缀图标自定义',
-        })
-        slotPrefix: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: '前缀图标',
+        //     description: '前缀图标自定义',
+        // })
+        // slotPrefix: () => Array<ViewComponent>;
 
-        @Slot({
-            title: '后缀图标',
-            description: '后缀图标自定义',
-        })
-        slotSuffix: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: '后缀图标',
+        //     description: '后缀图标自定义',
+        // })
+        // slotSuffix: () => Array<ViewComponent>;
     }
 }

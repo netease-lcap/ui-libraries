@@ -7,11 +7,11 @@ namespace nasl.ui {
     description: '多项中选择一项',
     group: "Form"
   })
-  export class VanCapsules extends ViewComponent {
+  export class VanCapsules<M extends nasl.core.Boolean> extends ViewComponent {
     @Prop({
       title: '选中值',
     })
-    value: VanCapsulesOptions['value'];
+    value: VanCapsulesOptions<M>['value'];
 
     @Prop({
       title: '禁用',
@@ -23,11 +23,11 @@ namespace nasl.ui {
     })
     readonly: nasl.core.Boolean;
 
-    constructor(options?: Partial<VanCapsulesOptions>) {
+    constructor(options?: Partial<VanCapsulesOptions<M>>) {
       super();
     }
   }
-  export class VanCapsulesOptions extends ViewComponentOptions {
+  export class VanCapsulesOptions<M extends nasl.core.Boolean> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '选中值',
@@ -36,7 +36,8 @@ namespace nasl.ui {
       docDescription: '当前选择的值',
       settable: true,
     })
-    value: any;
+    value: M extends true ? nasl.collection.List<nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean> : (nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean);
+
     @Prop({
       group: '交互属性',
       title: '可取消',
@@ -115,7 +116,7 @@ namespace nasl.ui {
     @Prop({
       title: '选中值',
     })
-    value: VanCapsulesOptions['value'];
+    value: VanCapsulesItemOptions['value'];
 
     @Prop({
       title: '禁用',
@@ -134,7 +135,8 @@ namespace nasl.ui {
       docDescription: '此项的值',
       settable: true,
     })
-    value: any;
+    value: nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean;
+
     @Prop({
       group: '主要属性',
       title: '标签',

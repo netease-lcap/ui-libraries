@@ -2,7 +2,7 @@
 
 exports[`u-radios.vue > Demo-autofocus 1`] = `
 <div>
-  <div class="root">
+  <div class="root" direction="horizontal">
     <label class="root" tabindex="0">
       <span class="radio"></span>水杯<span vusion-slot-name="item"></span>
     </label>
@@ -22,7 +22,7 @@ exports[`u-radios.vue > Demo-autofocus 1`] = `
 exports[`u-radios.vue > Demo-只读、禁用、禁用某一项 1`] = `
 <div>
   <div class="root" direction="vertical" type vusion-slot-name="default">
-    <div class="root">
+    <div class="root" direction="horizontal">
       <label class="root" readonly="readonly" tabindex="0">
         <span class="radio" readonly="readonly"></span>水杯<span vusion-slot-name="item"></span>
       </label>
@@ -36,7 +36,7 @@ exports[`u-radios.vue > Demo-只读、禁用、禁用某一项 1`] = `
         <span class="radio" readonly="readonly"></span>沙发<span vusion-slot-name="item"></span>
       </label>
     </div>
-    <div class="root">
+    <div class="root" direction="horizontal">
       <label class="root" disabled="disabled" tabindex="0">
         <span class="radio" disabled="disabled"></span>水杯<span vusion-slot-name="item"></span>
       </label>
@@ -50,7 +50,7 @@ exports[`u-radios.vue > Demo-只读、禁用、禁用某一项 1`] = `
         <span class="radio" disabled="disabled"></span>沙发<span vusion-slot-name="item"></span>
       </label>
     </div>
-    <div class="root">
+    <div class="root" direction="horizontal">
       <label class="root" tabindex="0">
         <span class="radio"></span>水杯<span vusion-slot-name="item"></span>
       </label>
@@ -69,13 +69,13 @@ exports[`u-radios.vue > Demo-只读、禁用、禁用某一项 1`] = `
 `;
 
 exports[`u-radios.vue > Demo-基本用法 1`] = `
-<div class="root">
+<div class="root" direction="horizontal">
 </div>
 `;
 
 exports[`u-radios.vue > Demo-基本用法 2`] = `
 <div>
-  <div class="root">
+  <div class="root" direction="horizontal">
     <label class="root" tabindex="0">
       <span class="radio"></span>水杯<span vusion-slot-name="item"></span>
     </label>
@@ -94,7 +94,7 @@ exports[`u-radios.vue > Demo-基本用法 2`] = `
 
 exports[`u-radios.vue > Demo-数据源 1`] = `
 <div class="root" direction="vertical" type vusion-slot-name="default">
-  <div class="root">
+  <div class="root" direction="horizontal">
     <div class="root" size="small">
       <div class="rotate">
         <span class="lcp-iconv icon">

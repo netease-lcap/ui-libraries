@@ -31,7 +31,7 @@ export default createComponent({
       value: 'currentValue',
       data: 'data',
       size() {
-        return this.currentDataSource && this.currentDataSource.size ? this.currentDataSource.paging.size : this.pageSize;
+        return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.size : this.pageSize;
       },
       page() {
         return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : this.pageNumber;

@@ -13,6 +13,11 @@ namespace nasl.ui {
         })
         preview: nasl.core.Boolean;
 
+        @Prop({
+          title: '验证是否有效',
+        })
+        valid: nasl.core.Boolean;
+
         @Method({
             title: 'undefined',
             description: '手动验证。',
@@ -287,7 +292,10 @@ namespace nasl.ui {
         description: '表单项',
     })
     export class UFormItem extends ViewComponent {
-
+        @Prop({
+          title: '验证是否有效',
+        })
+        valid: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -523,17 +531,17 @@ namespace nasl.ui {
         })
         slotLabel: () => Array<ViewComponent>;
 
-        @Slot({
-            title: '描述自定义',
-            description: '插入自定义描述内容，代替`description`属性。',
-        })
-        slotDescription: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: '描述自定义',
+        //     description: '插入自定义描述内容，代替`description`属性。',
+        // })
+        // slotDescription: () => Array<ViewComponent>;
 
-        @Slot({
-            title: '附加内容',
-            description: '自定义标签右侧额外内容。',
-        })
-        slotExtra: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: '附加内容',
+        //     description: '自定义标签右侧额外内容。',
+        // })
+        // slotExtra: () => Array<ViewComponent>;
     }
 
     @Component({

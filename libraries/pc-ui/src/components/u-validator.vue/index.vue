@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { sync } from '@lcap/vue2-utils';
 import MEmitter from '../m-emitter.vue';
 import VusionValidator from '@lcap/validator';
 import VueVusionValidator from '@lcap/validator/VuePlugin';
@@ -27,7 +28,10 @@ export default {
     install(Vue) {
         Vue.use(VueVusionValidator, { locale: Vue.i18n && Vue.i18n.locale });
     },
-    mixins: [MEmitter],
+    mixins: [
+      MEmitter,
+      sync('valid'),
+    ],
     props: {
         name: String,
         label: String,
@@ -109,7 +113,7 @@ export default {
                 return this.fieldTouched && this.firstErrorMessage;
         },
         mutedMessage() {
-            return this.muted === 'all' || this.muted === 'message';
+            return this.muted === 'all' || this.muted === 'message' || (this.fieldVM && this.fieldVM.isPreview);
         },
         showMessage() {
             return !this.mutedMessage && this.touched && !this.valid && this.firstError && !(this.blurred && this.blurReset);

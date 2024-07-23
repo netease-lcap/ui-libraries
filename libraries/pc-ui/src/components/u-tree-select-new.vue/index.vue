@@ -112,6 +112,8 @@
                 :filterable="filterable"
                 :filter-text="filterText"
                 :filter-fields="filterFields"
+                :matchMethod="matchMethod"
+                :caseSensitive="caseSensitive"
                 @change="$emit('change', $event, this)"
                 @before-select="$emit('before-select', $event, this)"
                 @select="$emit('select', $event, this)"
@@ -183,6 +185,8 @@ export default {
         placeholder: { type: String, default: '请选择' },
         clearable: { type: Boolean, default: false },
         filterable: { type: Boolean, default: false },
+        matchMethod: { type: [String, Function], default: 'includes' },
+        caseSensitive: { type: Boolean, default: false },
         opened: { type: Boolean, default: false },
         preview: { type: Boolean, default: false },
         placement: {

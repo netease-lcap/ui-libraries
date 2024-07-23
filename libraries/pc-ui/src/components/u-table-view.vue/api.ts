@@ -14,7 +14,7 @@ namespace nasl.ui {
       data: nasl.collection.List<T>;
 
       @Prop({
-          title: '数据量',
+          title: '数据总数',
       })
       total: nasl.core.Integer;
 
@@ -34,7 +34,7 @@ namespace nasl.ui {
       sort: UTableViewOptions<T, V, P, M>['sorting']['field'];
 
       @Prop({
-          title: '排序属性',
+          title: '排序方式',
       })
       order: UTableViewOptions<T, V, P, M>['sorting']['order'];
 
@@ -1077,6 +1077,7 @@ namespace nasl.ui {
           title: '配置列',
           description: '自定义配置列内容',
       })
+      "slot-config-columns": () => Array<ViewComponent>;
       slotConfigColumns: () => Array<ViewComponent>;
 
   }

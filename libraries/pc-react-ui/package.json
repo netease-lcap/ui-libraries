@@ -2,11 +2,14 @@
   "name": "@lcap/pc-react-ui",
   "version": "1.1.0",
   "description": "Codewave Low Code AI Platform React Ant Design HOC UI Components",
-  "main": "src/index.ts",
+  "main": "dist-theme/index.js",
+  "style": "dist-theme/index.css",
   "files": [
     "dist-theme",
+    "es",
+    "lib",
     "src",
-    "index.js",
+    "manifest.json",
     "README.md"
   ],
   "scripts": {
@@ -21,7 +24,7 @@
     "move:test": "cp -r /Users/songrui/Desktop/item/ui-libraries/libraries/pc-react-ui/dist-theme/* /Users/songrui/Desktop/item/lcap-assets/data/hoc/ && cd /Users/songrui/Desktop/item/lcap-assets && node uploadTest.js && cd /Users/songrui/Desktop/item/ui-libraries/libraries/pc-react-ui",
     "deploy:test": "lcap-scripts deploy --platform http://defaulttenant.lcap.react01-lowcode.com",
     "deploy:codewave": "lcap-scripts deploy --platform http://defaulttenant.lcap.codewave-test.163yun.com",
-    "deploy:codewave1": "lcap-scripts deploy --platform http://defaulttenant.lcap.codewave-dev.163yun.com",
+    "deploy:codewave1": "lcap-scripts deploy --platform http://devtest.lcap.codewave-dev.163yun.com",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "test": "echo \"no test config\"",
     "test:dev": "vitest dev",

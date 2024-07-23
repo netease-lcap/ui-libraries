@@ -124,6 +124,37 @@ namespace nasl.ui {
       value: M extends true ? nasl.collection.List<V> : V;
 
       @Prop({
+        group: '数据属性',
+        title: '筛选',
+        description: '设置是否可以筛选，开启将会支持搜索。',
+        docDescription: '开启后选择框可输入文本进行筛选',
+        setter: {
+            concept: 'SwitchSetter',
+        },
+      })
+      filterable: nasl.core.Boolean = false;
+
+      @Prop({
+        group: '数据属性',
+        title: '大小写敏感',
+        description: '过滤时大小写是否敏感',
+      })
+      private caseSensitive: nasl.core.String = 'includes';
+
+      @Prop<UTreeSelectNewOptions<T, V, M>, 'matchMethod'>({
+          group: '数据属性',
+          title: '匹配方法',
+          description: '过滤时的匹配方法',
+          docDescription: '支持配置过滤时的匹配模式，共有包括、匹配开头或匹配结尾3种模式',
+          setter: {
+              concept: 'EnumSelectSetter',
+              options: [{ title: '包括' }, { title: '匹配开头' }, { title: '匹配结尾' }],
+          },
+          if: _ => _.filterable === true,
+      })
+      matchMethod: 'includes' | 'startsWith' | 'endsWith' = 'includes';
+
+      @Prop({
           group: '交互属性',
           title: '可多选',
           description: '设置是否开启多选模式，显示多选框',

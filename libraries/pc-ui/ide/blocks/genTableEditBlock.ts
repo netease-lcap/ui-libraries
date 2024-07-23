@@ -7,10 +7,12 @@ import {
   getEntityPromaryKeyProperty,
   transEntityMetadataTypes,
   NameGroup,
+  getViewUniqueVariableNames,
+  getAllEntityPromaryKeyProperty,
 } from './utils';
 import {
   genQueryLogic, genTextTemplate, genColumnMeta,
-  genFilterTemplate, genFormItemsTemplate, 
+  genFilterTemplate, genFormItemsTemplate,
 } from './genCommonBlock';
 
 function genBlurFunction(property: naslTypes.EntityProperty, nameGroup: NameGroup) {
@@ -84,7 +86,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
     formItem += `<USelect
         clearable={true}
         value={$sync(${vModel})}
-        placeholder="请输入${label}"
+        placeholder="请选择${label}"
         autofocus={true}
         opened={true}
         appendTo="body"
@@ -148,7 +150,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
     formItem += `<UDatePicker
         clearable={true}
         value={$sync(${vModel})}
-        placeholder="请输入${label}"
+        placeholder="请选择${label}"
         autofocus={true}
         opened={true}
         appendTo="body"
@@ -159,7 +161,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
   } else if (propertyTypeName === 'Time') {
     formItem += `<UTimePicker
         value={$sync(${vModel})}
-        placeholder="请输入${label}"
+        placeholder="请选择${label}"
         autofocus={true}
         opened={true}
         appendTo="body"
@@ -171,7 +173,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
     formItem += `<UDateTimePicker
         clearable={true}
         value={$sync(${vModel})}
-        placeholder="请输入${label}"
+        placeholder="请选择${label}"
         autofocus={true}
         opened={true}
         appendTo="body"
@@ -183,10 +185,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
     const namespaceArr = propertyTypeNamespace.split('.');
     const type = namespaceArr.pop();
     if (type === 'enums') {
-      const enumeration = dataSource.app.findNodeByCompleteName(`${propertyTypeNamespace}.${propertyTypeName}`);
-      const enumnamespace = enumeration?.getNamespace() || '';
-      const name = enumeration?.name || '';
-      const enumTypeAnnotationStr = `${enumnamespace}.${name}`;
+      const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;
       formItem += `<USelect
           clearable={true}
           value={$sync(${vModel})}
@@ -251,6 +250,7 @@ export function genEditTableTemplate(entity: naslTypes.Entity, nameGroup: NameGr
   const currentName = nameGroup.currentName || 'current';
   const properties = entity.properties.filter(filterProperty('inTable'));
   const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.page, elements.$ce.size, elements.$ce.sort, elements.$ce.order, ${nameGroup.viewVariableFilter})`;
+  const idProperties = getAllEntityPromaryKeyProperty(entity);
   return `<UTableView
     ref="${nameGroup.viewElementMainView}"
     dataSource={${dataSourceValue}}
@@ -283,7 +283,7 @@ export function genEditTableTemplate(entity: naslTypes.Entity, nameGroup: NameGr
                       text="删除"
                       onClick={
                           function ${nameGroup.viewLogicRemove}(event) {
-                              ${namespace}.${entityName}Entity.delete(${currentName}.item.${firstLowerCase(entity.name)}.${getEntityPromaryKeyProperty(entity)})
+                              ${namespace}.${entityName}Entity.delete(${idProperties.map((property) => `${currentName}.item.${firstLowerCase(entity.name)}.${property.name}`).join(',')})
                               $refs.${nameGroup.viewElementMainView}.reload()
                           }
                       }>
@@ -357,8 +357,8 @@ export function genTableEditBlock(entity: naslTypes.Entity, refElement: naslType
   nameGroup.viewLogicBlurUpdate = likeComponent.getLogicUniqueName('blurUpdate');
   nameGroup.viewLogicReload = likeComponent.getLogicUniqueName('reload');
   nameGroup.viewVariableEntity = likeComponent.getVariableUniqueName(firstLowerCase(entity.name));
-  nameGroup.viewVariableInput = likeComponent.getVariableUniqueName('input');
-  nameGroup.viewVariableFilter = likeComponent.getVariableUniqueName('filter');
+  nameGroup.viewVariableInput = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('input'), nameGroup.viewVariableEntity);
+  nameGroup.viewVariableFilter = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('filter'), nameGroup.viewVariableEntity);
 
   // 收集所有和本实体关联的实体
   const entitySet: Set<naslTypes.Entity> = new Set();
