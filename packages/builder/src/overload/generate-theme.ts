@@ -27,7 +27,7 @@ async function generateThemeVarsFile(context: OverloadComponentContext, themeFol
 
     Object.keys(cssVar).forEach((key) => {
       const v = cssVar[key];
-      if (!v) {
+      if (!v || ['name', 'value'].indexOf(key) !== -1) {
         return;
       }
 
@@ -104,5 +104,7 @@ export async function generateThemeFile(context: OverloadComponentContext) {
   }
 
   await generateThemeVarsFile(context, themeFolder);
-  await generateThemePrevieFile(context, themeFolder);
+  if (fs.existsSync(path.resolve(themeFolder, 'vars.css'))) {
+    await generateThemePrevieFile(context, themeFolder);
+  }
 }
