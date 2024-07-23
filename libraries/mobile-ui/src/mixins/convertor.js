@@ -1,21 +1,21 @@
 const ConverterUtils = {
   default: {
-    get(currentValue) {
+    convert(currentValue) {
       return currentValue;
     },
-    set(value) {
+    format(value) {
       return value;
     },
   },
   json: {
-    get(currentValue) {
+    convert(currentValue) {
       try {
         return JSON.stringify(currentValue || []);
       } catch (err) {
         return '[]';
       }
     },
-    set(value) {
+    format(value) {
       try {
         return JSON.parse(value || '[]');
       } catch (err) {
@@ -24,32 +24,36 @@ const ConverterUtils = {
     },
   },
   'join:,': {
-    get(currentValue) {
+    convert(currentValue) {
       return (currentValue || []).join(',');
     },
-    set(value) {
+    format(value) {
       return value ? value.split(',') : [];
     },
   },
   'join:|': {
-    get(currentValue) {
+    convert(currentValue) {
       return (currentValue || []).join('|');
     },
-    set(value) {
+    format(value) {
       return value ? value.split('|') : [];
     },
   },
   'join:;': {
-    get(currentValue) {
+    convert(currentValue) {
       return (currentValue || []).join(';');
     },
-    set(value) {
+    format(value) {
       return value ? value.split(';') : [];
     },
   },
 };
 
-
+/**
+ * 转换器
+ * convert 转换内部值到外部值
+ * format 转换外部值到内部值
+ */
 export const Converter = {
   props: {
     converter: { type: [String, Object], default: undefined },
@@ -73,39 +77,39 @@ export const Converter = {
         const number = !!m[1];
         const sep = m[2] ? m[2].slice(1) : ',';
         currentConverter = {
-          get(values) {
+          convert(values) {
             if (Array.isArray(values)) {
               types = values.map((v) => typeof v);
               return values.join(sep);
             }
           },
-          set(value) {
+          format(value) {
             if (Array.isArray(value)) return value;
             const values = value ? value.split(sep) : [];
             return number
               ? values.map((i) => +i)
               : values.map((v, i) => {
-                  const type = types[i];
-                  if (type === 'string') {
-                    return v.toString();
-                  }
-                  if (type === 'number') {
-                    return +v;
-                  }
-                  if (type === 'undefined') {
-                    return undefined;
-                  }
-                  if (type === 'boolean') {
-                    return v === 'true';
-                  }
+                const type = types[i];
+                if (type === 'string') {
+                  return v.toString();
+                }
+                if (type === 'number') {
+                  return +v;
+                }
+                if (type === 'undefined') {
+                  return undefined;
+                }
+                if (type === 'boolean') {
+                  return v === 'true';
+                }
 
-                  return v;
-                });
+                return v;
+              });
           },
         };
       } else if (this.converter === 'json') {
         currentConverter = {
-          get(values) {
+          convert(values) {
             if (typeof values === 'string') {
               return values || '[]';
             }
@@ -116,7 +120,7 @@ export const Converter = {
               return '[]';
             }
           },
-          set(value) {
+          format(value) {
             if (Array.isArray(value)) return value;
             try {
               return JSON.parse(value || '[]');

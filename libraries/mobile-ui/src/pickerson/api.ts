@@ -7,15 +7,15 @@ namespace nasl.ui {
     description: '提供多个选项集合供用户选择，支持单列选择和多列级联。',
     group: "Selector"
   })
-  export class VanPickerson<T, V, M extends nasl.core.Boolean, P extends nasl.core.Boolean> extends ViewComponent {
-    constructor(options?: Partial<VanPickersonOptions<T, V, M, P>>) {
+  export class VanPickerson<T, V, M extends nasl.core.Boolean, P extends nasl.core.Boolean, C> extends ViewComponent {
+    constructor(options?: Partial<VanPickersonOptions<T, V, M, P, C>>) {
       super();
     }
 
     @Prop({
       title: '选中值',
     })
-    value: VanPickersonOptions<T, V, M, P>['value'];
+    value: VanPickersonOptions<T, V, M, P, C>['value'];
 
     @Prop({
       title: '数据',
@@ -58,7 +58,7 @@ namespace nasl.ui {
     })
     reload(): any {}
   }
-  export class VanPickersonOptions<T, V, M extends nasl.core.Boolean, P extends nasl.core.Boolean> extends ViewComponentOptions {
+  export class VanPickersonOptions<T, V, M extends nasl.core.Boolean, P extends nasl.core.Boolean, C> extends ViewComponentOptions {
     @Prop({
       title: '左侧标题',
       description: '左侧标题'
@@ -86,7 +86,7 @@ namespace nasl.ui {
       sync: true,
       settable: true,
     })
-    value: M extends true ? nasl.collection.List<V> : V;
+    value: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -118,7 +118,7 @@ namespace nasl.ui {
       }
     })
     textField: (item: T) => any = ((item: any)  => item.text) as any;
-    @Prop<VanPickersonOptions<T, V, M, P>, 'pageSize'>({
+    @Prop<VanPickersonOptions<T, V, M, P, C>, 'pageSize'>({
       group: '数据属性',
       title: '默认每页条数',
       setter: {
@@ -140,7 +140,7 @@ namespace nasl.ui {
       field: '',
       order: 'desc'
     };
-    @Prop<VanPickersonOptions<T, V, M, P>, 'matchMethod'>({
+    @Prop<VanPickersonOptions<T, V, M, P, C>, 'matchMethod'>({
       group: '数据属性',
       title: '匹配方法',
       description: '设置过滤时的匹配方法',
@@ -192,21 +192,21 @@ namespace nasl.ui {
       implicitToString: true,
     })
     title: nasl.core.String = '标题';
-    @Prop<VanPickersonOptions<T, V, M, P>, 'confirmButtonText'>({
+    @Prop<VanPickersonOptions<T, V, M, P, C>, 'confirmButtonText'>({
       group: '主要属性',
       title: '确认按钮文字',
       if: _ => _.isNew === false,
       implicitToString: true,
     })
     confirmButtonText: nasl.core.String = '确认';
-    @Prop<VanPickersonOptions<T, V, M, P>, 'cancelButtonText'>({
+    @Prop<VanPickersonOptions<T, V, M, P, C>, 'cancelButtonText'>({
       group: '主要属性',
       title: '取消按钮文字',
       if: _ => _.isNew === false,
       implicitToString: true,
     })
     cancelButtonText: nasl.core.String = '取消';
-    @Prop<VanPickersonOptions<T, V, M, P>, 'visibleItemCount'>({
+    @Prop<VanPickersonOptions<T, V, M, P, C>, 'visibleItemCount'>({
       group: '主要属性',
       title: '可见选项个数',
       description: '设置可见选项个数',
@@ -242,6 +242,20 @@ namespace nasl.ui {
       }
     })
     showToolbar: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '主要属性',
+      title: '转换器',
+      description: '将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式。',
+      docDescription: '将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式',
+      bindHide: true,
+      setter: {
+          concept: 'EnumSelectSetter',
+          options: [{ title: '无' }, { title: "以', '连接" }, { title: "以'|'连接" }, { title: "以';'连接" }, { title: 'json' }],
+      },
+    })
+    converter: '' | 'join' | 'join:|' | 'join:;' | 'json' = '';
+
     @Prop({
       group: '交互属性',
       title: '支持筛选',
@@ -259,7 +273,7 @@ namespace nasl.ui {
       }
     })
     multiple: nasl.core.Boolean = false;
-    @Prop<VanPickersonOptions<T, V, M, P>, 'enableSelectAll'>({
+    @Prop<VanPickersonOptions<T, V, M, P, C>, 'enableSelectAll'>({
       group: '交互属性',
       title: '全选',
       setter: {
@@ -268,7 +282,7 @@ namespace nasl.ui {
       if: _ => _.multiple === true
     })
     enableSelectAll: nasl.core.Boolean = false;
-    @Prop<VanPickersonOptions<T, V, M, P>, 'enableSelectedCount'>({
+    @Prop<VanPickersonOptions<T, V, M, P, C>, 'enableSelectedCount'>({
       group: '交互属性',
       title: '已选中项数',
       description: '是否显示当前已选中项数',
