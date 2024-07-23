@@ -42,6 +42,7 @@ async function generateVueComponent(context: OverloadComponentContext) {
     `.${context.tagName}{`,
     '}',
     '</style>',
+    '',
   ].join('\n');
 
   fs.writeFileSync(path.resolve(context.componentFolderPath, 'index.vue'), code, 'utf-8');
@@ -66,6 +67,7 @@ async function generateReactComponent(context: OverloadComponentContext) {
     '});',
     '',
     `export default ${context.name}`,
+    '',
   ].join('\n');
 
   fs.writeFileSync(path.resolve(context.componentFolderPath, 'index.tsx'), code, 'utf-8');
