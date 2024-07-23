@@ -2,6 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { kebabCase, upperFirst } from 'lodash';
 import type { ViewComponentDeclaration } from '@nasl/types/nasl.ui.ast';
+import type { ThemeComponentConfig, ThemeConfig } from '../build/gens/gen-theme-config';
 
 export interface NaslUIComponentConfig extends ViewComponentDeclaration {
   ideusage?: any;
@@ -22,6 +23,7 @@ export interface OverloadComponentContext {
   prefix: string;
   replaceNameMap: Record<string, string>;
   replaceTagMap: Record<string, string>;
+  themeConfig: ThemeComponentConfig;
 }
 
 export function getProjectContext(rootPath) {
@@ -93,6 +95,29 @@ function getReleaceMap(comp, framework, prefix) {
   };
 }
 
+function getThemeConfig(rootPath, component) {
+  const defaultConfig = {
+    title: '',
+    name: '',
+    useGlobalTokens: [] as any[],
+    selector: ':root',
+    variables: [] as any[],
+  } as ThemeComponentConfig;
+  const configPath = path.resolve(rootPath, '.lcap/lcap-ui/runtime/theme.config.json');
+  if (!fs.existsSync(configPath)) {
+    return defaultConfig;
+  }
+
+  try {
+    const config: ThemeConfig = fs.readJSONSync(configPath);
+    const c = config.components.find((n) => n.name === kebabCase(component));
+
+    return c || defaultConfig;
+  } catch (e) {
+    return defaultConfig;
+  }
+}
+
 export function getOverloadComponentContext(rootPath, { component, prefix, fork }) {
   const env = getProjectContext(rootPath);
   const configPath = path.resolve(rootPath, '.lcap/lcap-ui/runtime/nasl.ui.json');
@@ -123,5 +148,6 @@ export function getOverloadComponentContext(rootPath, { component, prefix, fork 
     fork,
     prefix,
     ...getReleaceMap(comp, env.framework, prefix),
+    themeConfig: getThemeConfig(rootPath, component),
   } as OverloadComponentContext;
 }

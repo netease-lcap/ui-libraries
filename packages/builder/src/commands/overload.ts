@@ -7,6 +7,8 @@ import {
   transformAPITs,
   OverloadComponentContext,
   generateBlockFile,
+  generateComponentFile,
+  generateThemeFile,
 } from '../overload';
 
 function transformAPITsFile(context: OverloadComponentContext) {
@@ -22,6 +24,8 @@ export default async (rootPath, { fork, component, prefix }) => {
     await copyFiles(context);
     await transformAPITsFile(context);
     await generateBlockFile(context);
+    await generateComponentFile(context);
+    await generateThemeFile(context);
   } catch (e) {
     logger.error(e);
   }

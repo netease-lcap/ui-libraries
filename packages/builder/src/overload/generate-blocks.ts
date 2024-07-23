@@ -8,6 +8,7 @@ import path from 'path';
 import { getNodeCode } from '../utils/babel-utils';
 import { OverloadComponentContext } from './context';
 import { replaceTagName } from './utils';
+import { LCAP_UI_PACKAGE_NAME } from './constants';
 
 function getBlockCodeFromData(context: OverloadComponentContext) {
   let blocks = [{
@@ -20,11 +21,15 @@ function getBlockCodeFromData(context: OverloadComponentContext) {
   }
 
   const blockCodes = blocks.map((block, i) => {
+    let code = replaceTagName(block.code, context.naslUIConfig.kebabName, context.tagName).trim();
+    if (code.startsWith('<template>') && code.endsWith('</template>')) {
+      code = code.substring('<template>'.length, code.length - '</template>'.length).trim();
+    }
     return [
       `export const Block${i + 1} = {`,
-      `  name: '${block.title}',`,
+      `  name: '${block.title || '基本用法'}',`,
       '  render: () => ({',
-      `    template: \`${replaceTagName(block.code, context.naslUIConfig.kebabName, context.tagName)}\`,`,
+      `    template: \`${code}\`,`,
       '  }),',
       '};',
     ].join('\n');
@@ -33,7 +38,7 @@ function getBlockCodeFromData(context: OverloadComponentContext) {
   return `import Component from '../index';
 
 export default {
-  id: 'ex-u-grid-layout-blocks',
+  id: '${context.tagName}-blocks',
   title: '组件列表/${context.name}/内置区块',
   component: Component,
   parameters: {
@@ -43,7 +48,7 @@ export default {
 };
 
 ${blockCodes.join('\n\n')}
-  `;
+`;
 }
 
 function getBlockInfos(code, context: OverloadComponentContext) {
@@ -124,7 +129,7 @@ function getBlockCodeFromFile(filePath, context: OverloadComponentContext) {
   const tsCode = fs.readFileSync(filePath, 'utf-8');
   const { blocks, waitImports } = getBlockInfos(tsCode, context);
   const BASE_STORIES_CODE = [
-    `import React from 'react';${waitImports.length > 0 ? `\nimport { ${waitImports.join(', ')} } from 'virtual-lcap:lcap-ui';` : ''}`,
+    `import React from 'react';${waitImports.length > 0 ? `\nimport { ${waitImports.join(', ')} } from '${LCAP_UI_PACKAGE_NAME}';` : ''}`,
     `import ${context.name} from '../index';`,
     `export default {`,
     `  id: '${context.name}-Blocks',`,
