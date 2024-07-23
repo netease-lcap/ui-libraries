@@ -97,6 +97,56 @@ async function generateThemePrevieFile(context: OverloadComponentContext, themeF
   fs.writeFileSync(path.resolve(themeFolder, 'index.jsx'), REACT_PREVIEW_CODE, 'utf-8');
 }
 
+const VUE_THEME_STORIES_CODE = `import ComponentPreivew from 'virtual:lcap-theme-component-previews.js';
+
+export default {
+  title: '主题配置预览',
+  // More on argTypes: https://storybook.js.org/docs/api/argtypes
+  argTypes: {
+    backgroundColor: { control: 'color' },
+  },
+};
+
+export const Components = {
+  name: '组件预览',
+  render: (args, { argTypes }) => {
+    return {
+      props: Object.keys(argTypes),
+      components: {
+        ComponentPreivew,
+      },
+      template: '<ComponentPreivew v-bind="$props" />',
+    };
+  },
+};
+`;
+
+const REACT_THEME_STORIES_CODE = `import ComponentPreivew from 'virtual:lcap-theme-component-previews.js';
+
+export default {
+  title: '主题配置预览',
+  // More on argTypes: https://storybook.js.org/docs/api/argtypes
+  argTypes: {
+    backgroundColor: { control: 'color' },
+  },
+};
+
+export const Components = {
+  name: '组件预览',
+  render: ComponentPreivew,
+};
+`;
+async function generateThemeStories(context: OverloadComponentContext) {
+  const storiesPath = path.resolve(process.cwd(), './src/theme.stories.js');
+  if (fs.existsSync(storiesPath)) {
+    return;
+  }
+
+  const code = context.framework === 'react' ? REACT_THEME_STORIES_CODE : VUE_THEME_STORIES_CODE;
+
+  fs.writeFileSync(storiesPath, code, 'utf-8');
+}
+
 export async function generateThemeFile(context: OverloadComponentContext) {
   const themeFolder = path.resolve(context.componentFolderPath, 'theme');
   if (!fs.existsSync(themeFolder)) {
@@ -106,5 +156,6 @@ export async function generateThemeFile(context: OverloadComponentContext) {
   await generateThemeVarsFile(context, themeFolder);
   if (fs.existsSync(path.resolve(themeFolder, 'vars.css'))) {
     await generateThemePrevieFile(context, themeFolder);
+    await generateThemeStories(context);
   }
 }

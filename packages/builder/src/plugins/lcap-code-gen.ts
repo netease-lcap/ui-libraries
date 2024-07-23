@@ -21,6 +21,7 @@ export interface LcapCodeGenOption {
   previewPages?: Array<{ name: string; title: string }>;
   findThemeType?: 'theme' | 'component';
   framework?: 'react' | 'vue2' | 'taro' | 'vue3',
+  pkg?: any;
 }
 
 const defaultOptions = {
@@ -164,6 +165,7 @@ const InstallLibraryCode = `function installLibrary(Vue, Components) {
 function genDefaultPreviewCode({
   framework,
   type,
+  pkg,
 }: LcapCodeGenOption) {
   const isExtension = type === 'extension';
   const codes = [
@@ -172,12 +174,21 @@ function genDefaultPreviewCode({
   ];
 
   if (framework && framework.startsWith('vue')) {
-    codes.unshift('');
-    codes.unshift([
-      'import Vue from "vue"',
+    const importCodes = [
+      'import Vue from "vue";',
       'import * as Library from "@/index"',
+    ];
+    if (isExtension && pkg && pkg.lcap && pkg.lcap['lcap-ui']) {
+      importCodes.push('import "virtual-lcap:lcap-ui.css";');
+      importCodes.push('import * as LcapUI from "virtual-lcap:lcap-ui";');
+      importCodes.push('Vue.use(LcapUI);');
+    }
+
+    importCodes.push(
       isExtension ? [InstallLibraryCode, 'installLibrary(Vue, Library);'].join('\n') : 'Vue.use(Library);',
-    ].join('\n'));
+    );
+    codes.unshift('');
+    codes.unshift(importCodes.join('\n'));
   }
 
   return codes.join('\n');
@@ -223,6 +234,7 @@ export default (options: LcapCodeGenOption = {}) => {
     themeVarCssPath,
     themeComponentFolder: componentFolder,
     rootPath: cwd,
+    pkg: fs.readJSONSync(path.resolve(cwd, 'package.json')),
   };
   return {
     name: 'vite-lcap:code-gen', // 必须的，将会在 warning 和 error 中显示

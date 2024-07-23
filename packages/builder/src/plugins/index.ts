@@ -76,6 +76,7 @@ export default (options: ViteLcapPluginOptions = {}) => {
     LcapConfig({
       framework: pluginOption.framework,
       destDir: pluginOption.destDir,
+      rootPath: cwd,
     }),
     LcapCodeGen({
       ...pluginOption.theme,

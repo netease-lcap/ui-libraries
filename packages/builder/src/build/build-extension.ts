@@ -39,7 +39,7 @@ async function zipExtension(root, destDir) {
   const dirList: string[] = ['nasl.extension.json'];
   const fileList = glob.sync(`${destDir}/**/*`)
     .filter((item) => item.indexOf('.') !== -1)
-    .concat(['nasl.extension.d.ts', 'manifest']);
+    .concat(['nasl.extension.d.ts', 'manifest', 'source.zip']);
 
   const zipList = dirList.concat(fileList);
   const pkg = fs.readJSONSync(path.resolve(root, 'package.json'));
@@ -87,10 +87,33 @@ async function zipExtension(root, destDir) {
   }
 }
 
+function getIgnores(root) {
+  const filePath = path.resolve(root, '.gitignore');
+  let ignores: string[] = ['node_modules', '.lcap'];
+  if (fs.existsSync(filePath)) {
+    ignores = fs.readFileSync(filePath).toString().split('\n').filter((v) => !!v.trim() && !v.startsWith('#'));
+  }
+
+  return ignores;
+}
+
+async function buildSourceZip(root) {
+  const ignores = getIgnores(root);
+  const files = await glob(['**/*'], {
+    cwd: root,
+    absolute: false,
+    ignore: ignores,
+    dot: true,
+  });
+  await zipDir(root, 'source.zip', files);
+}
+
 export async function buildNaslExtension(options: LcapBuildOptions) {
   if (options.type !== 'extension') {
     return;
   }
+
+  await buildSourceZip(options.rootPath);
 
   logger.start('开始生成 nasl.extension.json...');
   const { config: naslExtensionConfig, viewComponents } = await genNaslExtensionConfig({

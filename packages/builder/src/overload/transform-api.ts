@@ -124,6 +124,18 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
                           type: 'ObjectProperty',
                           key: {
                             type: 'Identifier',
+                            name: 'replaceNaslUIComponent',
+                          },
+                          value: {
+                            type: 'StringLiteral',
+                            value: context.naslUIConfig.name,
+                          },
+                          computed: false,
+                          shorthand: false,
+                        }, {
+                          type: 'ObjectProperty',
+                          key: {
+                            type: 'Identifier',
                             name: 'type',
                           },
                           value: {
