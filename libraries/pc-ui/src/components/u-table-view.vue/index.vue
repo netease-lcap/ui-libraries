@@ -1737,12 +1737,10 @@ export default {
                     // fix: 2820102516186880，2830031229543936，子节点删除数据处理
                     if (this.$at(item, this.childrenField).length) {
                         this.$setAt(item, this.hasChildrenField, true);
-                        item.expanded = item.expanded || false;
-                        item.treeExpanded = item.treeExpanded || false;
+                        this.$set(item, 'treeExpanded', item.treeExpanded || false);
                     } else {
                         this.$setAt(item, this.hasChildrenField, false);
-                        item.expanded = false;
-                        item.treeExpanded = false;
+                        this.$set(item, 'treeExpanded', false);
                     }
                 }
                 if (parent) {
@@ -1956,12 +1954,12 @@ export default {
             let indentElRect = {};
             let placeholderWith = 0;
             if (this.treeDisplay) {
-                const indentEl = target.querySelector('[class^="u-table-view_render-td_indent__"]');
+                const indentEl = target.querySelector('[class^="u-table-view_indent__"]');
                 if (indentEl) {
                     indentElRect = indentEl.getBoundingClientRect();
                 }
-                const treePlaceholderEl = target.querySelector('[class^="u-table-view_render-td_tree_placeholder"]');
-                const treeExpanderEl = target.querySelector('[class^="u-table-view_render-td_tree_expander"]');
+                const treePlaceholderEl = target.querySelector('[class^="u-table-view_tree_placeholder"]');
+                const treeExpanderEl = target.querySelector('[class^="u-table-view_tree_expander"]');
                 placeholderWith = treePlaceholderEl && treePlaceholderEl.offsetWidth;
                 if (treePlaceholderEl) {
                     placeholderWith = treePlaceholderEl.offsetWidth;
@@ -1988,7 +1986,7 @@ export default {
                 // 在下部
                 position = 'insertAfter';
                 let level = (item.tableTreeItemLevel || 0);
-                if (item.expanded) {
+                if (item.treeExpanded) {
                     const childList = this.$at(item, this.childrenField);
                     if (childList && childList.length)
                         level = level + 1;
@@ -2137,7 +2135,7 @@ export default {
                                     this.check(parentNode, parentNode.checked, true);
                                 }
                                 this.$set(parentNode, 'loading', false);
-                                this.$set(parentNode, 'expanded', true);
+                                this.$set(parentNode, 'treeExpanded', true);
                                 this.subTreeLoading = false;
                                 this.currentDataSource.arrangedData = originalList;
                                 const level = (parentNode.tableTreeItemLevel || 0) + 1;

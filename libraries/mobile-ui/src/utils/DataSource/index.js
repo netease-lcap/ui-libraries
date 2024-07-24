@@ -183,10 +183,6 @@ const VueDataSource = Vue.extend({
         if (!this.remote) {
             this.originTotal = this.data.length;
             this.arrange(this.data);
-        } else if (this.needAllData) {
-          this.loadAll().then((data) => {
-            this.allData = data;
-          });
         }
     },
     methods: {

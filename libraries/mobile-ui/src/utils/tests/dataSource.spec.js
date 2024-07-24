@@ -282,3 +282,42 @@ test('组件关闭分页 + 前端数组数据', async () => {
 
   expect(dataSource.hasMore()).toEqual(false);
 });
+
+test('加载全量数据', async () => {
+  const cb = vi.fn();
+  const load = (params) => {
+    const { page, size } = params;
+    cb();
+    return new Promise((resolve) => {
+      const start = (page - 1) * size;
+      const end = page * size;
+
+      resolve({
+        list: data.slice(start, end),
+        total: data.length,
+      });
+    });
+  };
+  const dataSource = new DataSource({
+    load,
+    viewMode: 'more',
+    paging: {
+      number: 1,
+      size: 20,
+    },
+    needAllData: true,
+  });
+
+  await dataSource.load();
+  expect(cb).toHaveBeenCalledTimes(2);
+
+  expect(dataSource.allData.length).toEqual(data.length);
+
+  expect(dataSource.hasMore()).toEqual(true);
+
+  await dataSource.loadMore();
+  expect(cb).toHaveBeenCalledTimes(3);
+
+  await dataSource.reload();
+  expect(cb).toHaveBeenCalledTimes(5);
+});
