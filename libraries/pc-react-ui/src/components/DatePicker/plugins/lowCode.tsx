@@ -9,18 +9,21 @@ import FormContext from '@/components/Form/form-context';
 export function useHandleNodePath(props) {
   const { isForm } = React.useContext(FormContext);
   const { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
-
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
   const prefixCls = getPrefixCls();
   const id = _.uniqueId('contact_');
   const nodePath = props.get('data-nodepath');
   React.useEffect(() => {
     const datePicker = document.querySelector(`[data-node-id=${id}]`)?.closest(`.${prefixCls}-form-item-row`);
-    datePicker?.setAttribute('data-nodepath', nodePath);
-    if (!isForm) return;
-    datePicker?.setAttribute('data-tag-name', 'FormDatePicker');
-    datePicker?.setAttribute('data-has-mutation', 'true');
-  }, [id]);
+    const dataPickerItem = datePicker?.closest(`.${prefixCls}-form-item-row`);
+    if (isForm) {
+      datePicker?.setAttribute('data-tag-name', 'FormDatePicker');
+      datePicker?.setAttribute('data-has-mutation', 'true');
+      dataPickerItem?.setAttribute('data-nodepath', nodePath);
+    } else {
+      datePicker?.setAttribute('data-nodepath', nodePath);
+    }
+  }, [id, isForm, nodePath, prefixCls]);
   return {
     [$deletePropsList]: deletePropsList,
     'data-node-id': id,

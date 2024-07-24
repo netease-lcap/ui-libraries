@@ -14,11 +14,14 @@ export function useHandleNodePath(props) {
   const nodePath = props.get('data-nodepath');
   React.useEffect(() => {
     const inputElement = document.querySelector(`[data-node-id=${nodeId}]`);
-    const inputParent = inputElement?.closest(`.${prefixCls}-form-item-row`);
-    inputParent?.setAttribute('data-nodepath', nodePath);
-    if (!isForm) return;
-    inputParent?.setAttribute('data-tag-name', 'FormTimePicker');
-    inputParent?.setAttribute('data-has-mutation', 'true');
+    if (isForm) {
+      const inputParent = inputElement?.closest(`.${prefixCls}-form-item-row`);
+      inputParent?.setAttribute('data-nodepath', nodePath);
+      inputParent?.setAttribute('data-tag-name', 'FormTimePicker');
+      inputParent?.setAttribute('data-has-mutation', 'true');
+    } else {
+      inputElement?.setAttribute('data-nodepath', nodePath);
+    }
   }, [nodePath, isForm, nodeId, prefixCls]);
   return {
     'data-node-id': nodeId,

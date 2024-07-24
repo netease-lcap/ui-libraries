@@ -12,12 +12,16 @@ export function useHandleNodepath(props) {
   const prefix = getPrefixCls();
   const nodeid = _.uniqueId('inputNumber_');
   React.useEffect(() => {
-    const inputNumber = document.querySelector(`[data-node-id=${nodeid}]`)?.closest(`.${prefix}-form-item-row`);
-    inputNumber?.setAttribute('data-nodepath', nodepath);
-    if (!isForm) return;
-    inputNumber?.setAttribute('data-tag-name', 'FormInputNumber');
-    inputNumber?.setAttribute('data-has-mutation', 'true');
-  }, [nodeid]);
+    const inputNumber = document.querySelector(`[data-node-id=${nodeid}]`);
+    if (isForm) {
+      const inputNumberItem = inputNumber?.closest(`.${prefix}-form-item-row`);
+      inputNumberItem?.setAttribute('data-nodepath', nodepath);
+      inputNumber?.setAttribute('data-tag-name', 'FormInputNumber');
+      inputNumber?.setAttribute('data-has-mutation', 'true');
+    } else {
+      inputNumber?.setAttribute('data-nodepath', nodepath);
+    }
+  }, [nodeid, nodepath, isForm, prefix]);
   return {
     'data-node-id': nodeid,
     [$deletePropsList]: deletePropsList,
