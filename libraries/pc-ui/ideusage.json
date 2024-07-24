@@ -680,7 +680,7 @@
            "idetype": "container",
             "structured": true,
             "dataSource": {
-                "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
                 "display": 3,
                 "loopRule": "nth-child(n+2)",
                 "loopElem": "> label[class^='u-radios_radio']:not([data-nodepath])",
