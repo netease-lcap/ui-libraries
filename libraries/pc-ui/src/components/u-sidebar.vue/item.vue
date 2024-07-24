@@ -1,6 +1,6 @@
 <template>
     <a
-        :class="[$style.root, parentVM.currentCollapse && !isInSidebar ? $style.popRoot : $style.normalRoot]"
+        :class="[$style.root, parentVM.currentCollapse && !isInSidebar ? $style.popRoot : $style.normalRoot, hasIconPadding ? $style.hasIconPadding : '']"
         :selected="parentVM.router ? active : isSelected" :readonly="parentVM.readonly" :disabled="disabled || parentVM.disabled"
         :href="currentHref" :target="target" @click="parentVM.router ? onClick($event) : select($event)" v-on="listeners"
         v-ellipsis-title
@@ -53,6 +53,13 @@ export default {
     computed: {
         isInSidebar() {
             return !(this.groupVM && this.groupVM.$options.name === this.$options.groupName);
+        },
+        hasIconPadding() {
+          if (!this.groupVM && !this.rootVM) {
+            return false;
+          }
+
+          return !this.icon && ((this.groupVM.childrenNodes || []).find((it) => !!this.$at(it, $at2(childNode, this.rootVM.iconField))) || (this.groupVM.itemVMs || []).find((it) => !!it.icon));
         },
         miniMode() {
             return this.isInSidebar && this.parentVM.currentCollapse;
@@ -136,6 +143,10 @@ export default {
     line-height: 32px;
     padding: 0 12px;
     font-size: 14px;
+}
+
+.popRoot.hasIconPadding {
+  padding-left: calc(var(--sidebar-item-icon-font-size) + 20px);
 }
 
 .root:hover {
