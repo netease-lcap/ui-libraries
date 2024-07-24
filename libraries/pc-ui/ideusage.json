@@ -680,7 +680,7 @@
            "idetype": "container",
             "structured": true,
             "dataSource": {
-                "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
                 "display": 3,
                 "loopRule": "nth-child(n+2)",
                 "loopElem": "> label[class^='u-radios_radio']:not([data-nodepath])",
@@ -1033,7 +1033,10 @@
               "expression": "this.getElement(el => el.slotTarget === 'body')",
               "cssSelector": "div[class^='u-modal_dialog']"
             },
-            "cacheOpenKey": "visible"
+            "cacheOpenKey": "visible",
+            "additionalAttribute": {
+                ":disableRootElemShift": "\"true\"" 
+            }
         }
     },
     {
@@ -1044,7 +1047,10 @@
                 "expression": "this.getElement(el => el.slotTarget === 'body')",
                 "cssSelector": "div[class^='u-drawer_drawer']"
             },
-            "cacheOpenKey": "visible"
+            "cacheOpenKey": "visible",
+            "additionalAttribute": {
+                ":disableRootElemShift": "\"true\"" 
+            }
         }
     },
     {
