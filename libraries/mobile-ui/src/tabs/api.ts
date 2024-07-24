@@ -19,7 +19,7 @@ namespace nasl.ui {
       description: '用于标识选项卡的值',
       sync: true
     })
-    value: nasl.core.String;
+    value: nasl.core.String | nasl.core.Integer;
     @Prop({
       group: '主要属性',
       title: '样式类型',
@@ -122,7 +122,7 @@ namespace nasl.ui {
       title: '选项值',
       description: '用于标识选项的值'
     })
-    name: nasl.core.String;
+    name: nasl.core.String | nasl.core.Integer;
     @Prop({
       group: '数据属性',
       title: '显示徽章',
