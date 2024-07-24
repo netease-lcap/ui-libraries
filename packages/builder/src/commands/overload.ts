@@ -9,6 +9,7 @@ import {
   generateBlockFile,
   generateComponentFile,
   generateThemeFile,
+  forkComponent,
 } from '../overload';
 
 function transformAPITsFile(context: OverloadComponentContext) {
@@ -21,11 +22,14 @@ function transformAPITsFile(context: OverloadComponentContext) {
 export default async (rootPath, { fork, component, prefix }) => {
   try {
     const context = getOverloadComponentContext(rootPath, { component, prefix, fork });
+    logger.start('开始执行重载组件');
     await copyFiles(context);
     await transformAPITsFile(context);
     await generateBlockFile(context);
     await generateComponentFile(context);
     await generateThemeFile(context);
+    await forkComponent(context);
+    logger.success('重载组件成功');
   } catch (e) {
     logger.error(e);
   }
