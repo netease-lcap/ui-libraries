@@ -1033,7 +1033,10 @@
               "expression": "this.getElement(el => el.slotTarget === 'body')",
               "cssSelector": "div[class^='u-modal_dialog']"
             },
-            "cacheOpenKey": "visible"
+            "cacheOpenKey": "visible",
+            "additionalAttribute": {
+                ":disableRootElemShift": "\"true\"" 
+            }
         }
     },
     {
@@ -1044,7 +1047,10 @@
                 "expression": "this.getElement(el => el.slotTarget === 'body')",
                 "cssSelector": "div[class^='u-drawer_drawer']"
             },
-            "cacheOpenKey": "visible"
+            "cacheOpenKey": "visible",
+            "additionalAttribute": {
+                ":disableRootElemShift": "\"true\"" 
+            }
         }
     },
     {
