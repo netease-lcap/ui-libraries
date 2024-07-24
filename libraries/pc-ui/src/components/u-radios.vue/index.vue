@@ -185,13 +185,8 @@ export default {
   flex-direction: column;
 }
 
-.root[isSetColumn=true] > label {
+.root[isSetColumn=true] > label, .root[direction="vertical"] > label {
     display: flex;
+    align-items: center;
 }
-/* .root[isSetColumn=true] > label {
-    display: flex;
-    > span[radio-content], span[vusion-slot-name-edit='text'] {
-        white-space: nowrap;
-    }
-} */
 </style>
