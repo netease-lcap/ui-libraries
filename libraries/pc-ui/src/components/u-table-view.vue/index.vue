@@ -370,6 +370,7 @@ export default {
         rowStyle: Function, // 设置行背景色
 
         useMask: { type: Boolean, default: true },
+        subForm: { type: Boolean, default: false }, // 是否是子表单
     },
     data() {
         return {
@@ -487,6 +488,9 @@ export default {
         },
         hasGroupedColumn() {
             return !!Object.keys(this.columnGroupVMs).length;
+        },
+        isDesignerSubForm() {
+            return this.$env.VUE_APP_DESIGNER && this.subForm;
         },
     },
     watch: {
@@ -801,6 +805,7 @@ export default {
             return options;
         },
         normalizeDataSource(dataSource) {
+            if (this.isDesignerSubForm) dataSource = [{}]; // IDE中的子表单只渲染一行数据
             const options = this.getDataSourceOptions();
             const isNew = typeof this.pagination !== 'undefined';
             const Constructor = isNew ? DataSourceNew : DataSource;

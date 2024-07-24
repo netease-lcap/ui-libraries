@@ -38,6 +38,8 @@ export default {
         autoRowSpan: { type: Boolean, default: false },
         expanderPosition: { type: String, default: 'left' },
         thEllipsis: { type: Boolean, default: undefined }, // 表头是否缩略展示
+        subFormDropColumn: { type: Boolean, default: false }, // 子表单放置列
+        subFormInitialColumn: { type: Boolean, default: false }, // 子表单初始列(表单设计器中，不允许选中，拖拽)
     },
     data() {
         const data = {

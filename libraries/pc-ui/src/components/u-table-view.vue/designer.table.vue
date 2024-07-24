@@ -33,6 +33,8 @@
                                 :colspan="columnVM.colSpan"
                                 :rowspan="columnVM.rowSpan"
                                 :ellipsis="columnVM.thEllipsis !== undefined? columnVM.thEllipsis : thEllipsis"
+                                :sub-form-drop-column="columnVM?.subFormDropColumn"
+                                :sub-form-initial-column="columnVM?.subFormInitialColumn"
                                 v-ellipsis-title>
                                 <!-- type === 'checkbox' -->
                                 <span v-if="columnVM.type === 'checkbox'">
@@ -119,6 +121,8 @@
                                         :last-left-fixed="isLastLeftFixed(columnVM, columnIndex, visibleColumnVMs)"
                                         :first-right-fixed="isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs)"
                                         :shadow="(isLastLeftFixed(columnVM, columnIndex, visibleColumnVMs)) || (isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs))"
+                                        :sub-form-drop-column="columnVM?.subFormDropColumn"
+                                        :sub-form-initial-column="columnVM?.subFormInitialColumn"
                                         :disabled="columnVM.currentHidden">
                                         <div :class="$designer.tdmask" v-if="useMask && rowIndex !== 0"></div>
                                         <!--可视化占据的虚拟填充区域-->
@@ -310,5 +314,42 @@ export default {
     background: white;
     opacity: 0.8;
     z-index: 999;
+}
+
+/* 子表单特有 */
+th[sub-form-drop-column],
+td[sub-form-drop-column] {
+    border-bottom: 0 !important;
+    z-index: 88 !important;
+}
+td[sub-form-drop-column] div {
+    display: none !important;
+}
+th[sub-form-drop-column]::after,
+td[sub-form-drop-column]::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: #F7F8FA;
+    box-sizing: border-box;
+    border: 1px dashed #A9AEB8;
+    pointer-events: none;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    color: #777777;
+    z-index: 999;
+}
+th[sub-form-drop-column]::after {
+    background: url('./assets/drop.svg') center calc(100% - 8px) / 12px 12px no-repeat;
+    border-bottom: 0;
+}
+td[sub-form-drop-column]::after {
+    content: '从组件库拖拽组件添加';
+    border-top: 0;
 }
 </style>
