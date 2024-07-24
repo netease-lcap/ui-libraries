@@ -1,10 +1,16 @@
+import fs from 'fs';
 import path from 'path';
 import type { Alias, Plugin, UserConfig } from 'vite';
+import { LCAP_UI_PATH } from '../overload/constants';
 
 export interface LcapViteConfigPluginOptions {
   framework?: string;
   destDir?: string;
   rootPath: string;
+}
+
+function hasLcapUI(rootPath) {
+  return fs.existsSync(path.resolve(rootPath, LCAP_UI_PATH));
 }
 
 function addResolve(config: UserConfig, options: LcapViteConfigPluginOptions) {
@@ -29,15 +35,17 @@ function addResolve(config: UserConfig, options: LcapViteConfigPluginOptions) {
   }
 
   const alias: Alias[] = config.resolve.alias as Alias[];
-  alias.push({
-    find: 'virtual-lcap:lcap-ui',
-    replacement: path.resolve(options.rootPath, './.lcap/lcap-ui/runtime/index.js'),
-  });
+  if (hasLcapUI(options.rootPath)) {
+    alias.push({
+      find: 'virtual-lcap:lcap-ui',
+      replacement: path.resolve(options.rootPath, './.lcap/lcap-ui/runtime/index.js'),
+    });
 
-  alias.push({
-    find: 'virtual-lcap:lcap-ui.css',
-    replacement: path.resolve(options.rootPath, './.lcap/lcap-ui/runtime/index.css'),
-  });
+    alias.push({
+      find: 'virtual-lcap:lcap-ui.css',
+      replacement: path.resolve(options.rootPath, './.lcap/lcap-ui/runtime/index.css'),
+    });
+  }
 }
 
 function getCommonjsOptionsInclude(config: UserConfig): Array<string | RegExp> {
@@ -84,15 +92,19 @@ export default (options: LcapViteConfigPluginOptions) => {
         config.optimizeDeps.include = [];
       }
 
-      config.optimizeDeps.include?.push('virtual-lcap:lcap-ui');
-
       config.build.commonjsOptions = {
         requireReturnsDefault: true,
+        extensions: ['.js'],
         ...config.build.commonjsOptions,
-        include: getCommonjsOptionsInclude(config).concat([
-          '.lcap/**/*.js',
-        ]),
       };
+
+      if (hasLcapUI(options.rootPath)) {
+        config.optimizeDeps.include?.push('virtual-lcap:lcap-ui');
+        config.build.commonjsOptions.include = getCommonjsOptionsInclude(config).concat([
+          '.lcap/lcap-ui/**/*.js',
+          /node_modules/,
+        ]);
+      }
 
       // 非库构建不处理默认参数；
       if (!config.build.lib && config.build.rollupOptions && config.build.rollupOptions.input) {
