@@ -2,10 +2,10 @@
 import * as parser from '@babel/parser';
 import traverse from '@babel/traverse';
 import type { ExportNamedDeclaration } from '@babel/types';
+import generate from '@babel/generator';
 import glob from 'fast-glob';
 import fs from 'fs-extra';
 import path from 'path';
-import { getNodeCode } from '../utils/babel-utils';
 import { OverloadComponentContext } from './context';
 import { replaceTagName } from './utils';
 import { LCAP_UI_PACKAGE_NAME } from './constants';
@@ -197,7 +197,7 @@ function getBlockCodeFromFile(filePath, context: OverloadComponentContext) {
     }),
   );
 
-  return getNodeCode(baseAST);
+  return generate(baseAST).code;
 }
 
 export function generateBlockFile(context: OverloadComponentContext) {
