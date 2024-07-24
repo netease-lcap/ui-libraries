@@ -271,8 +271,10 @@
         "name": "UPanel",
         "ideusage": {
             "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'u-panel-group'"
+            "structured": {
+                "slot": "default",
+                "empty": true
+            }
         }
     },
     {
@@ -306,7 +308,8 @@
     {
         "name": "UCard",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "disableSlotAutoFill": ["cover"]
         }
     },
     {
@@ -408,7 +411,11 @@
         "name": "UInfoListItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['u-info-list-group', 'u-info-list'].includes(target.tag)"
+            "parentAccept": "['u-info-list-group', 'u-info-list'].includes(target.tag)",
+            "disableSlotAutoFill": [{
+                "slot": "label",
+                "expression": "this.getAttribute('label')?.value"
+            }]
         }
     },
     {
@@ -417,7 +424,12 @@
             "idetype": "container",
             "structured": true,
             "parentAccept": "target.tag === 'u-info-list'",
-            "childAccept": "target.tag === 'u-info-list-item'"
+            "childAccept": "target.tag === 'u-info-list-item'",
+            "textholder": "title",
+            "disableSlotAutoFill": [{
+                "slot": "title",
+                "expression": "this.getAttribute('title')"
+            }]
         }
     },
     {
@@ -535,7 +547,10 @@
             "idetype": "container",
             "forceRefresh": "parent",
             "childAccept": false,
-            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -810,7 +825,12 @@
             ],
             "events": {
                 "click": true
-            }
+            },
+            "disableSlotAutoFill": [{
+                "slot": "title",
+                "expression": "this.getAttribute('title')",
+                "fill": "this.getAttribute('title').value"
+            }]
         }
     },
     {

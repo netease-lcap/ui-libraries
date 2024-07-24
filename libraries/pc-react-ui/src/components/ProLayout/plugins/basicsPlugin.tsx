@@ -111,9 +111,9 @@ export function useHandleMenuSlot(props) {
               clearTimeout(timeer);
             }
             timeer = setTimeout(() => {
-              // console.log(arg.key, '===', arg.item.props.path);
+              console.log(arg.key, '===', arg.item.props);
               if (arg.key !== arg.item.props.path) { // 唯一标识不跳转
-                handleLink(arg.key, child.props?.target);
+                handleLink(arg.key, arg.item.props?.target);
               }
             }, 150);
           }),
@@ -154,11 +154,11 @@ export function useHandleAvatar(props) {
       src: avatarSrcProps,
       size: avatarSizeProps,
       title: avatarTitleProps,
-      render: (localProps, dom) => {
+      render: () => {
         return React.cloneElement(AvatarRenderProps);
       },
     }),
-    menuDataRender: (menuData) => {
+    menuDataRender: () => {
       return [{ name: 2, label: 1, path: '/a' }];
     },
   };

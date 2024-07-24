@@ -1,10 +1,10 @@
 import locale from 'antd/lib/date-picker/locale/zh_CN';
 import _ from 'lodash';
-import React from 'react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import classnames from 'classnames';
 import { useControllableValue } from 'ahooks';
+// import FormContext from '@/components/Form/form-context';
 import style from '../index.module.less';
 
 export function useHandleLocale() {
@@ -24,24 +24,6 @@ export function useHandleShowTime(props) {
   const format = showTime ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD';
   return {
     format: formatProps ?? format,
-  };
-}
-export function useHandleName(props) {
-  const startName = props.get('startName');
-  const endName = props.get('endName');
-  const showTime = props.get('showTime');
-  const getIosTime = (localShowTime, time) => {
-    return localShowTime ? new Date(time).toJSON() : time;
-  };
-  const transform = (values) => {
-    return {
-      [startName]: values ? getIosTime(showTime, values[0]) : undefined,
-      [endName]: values ? getIosTime(showTime, values[1]) : undefined,
-    };
-  };
-  return {
-    transform,
-    name: startName + endName,
   };
 }
 export function useHandleValue(props) {

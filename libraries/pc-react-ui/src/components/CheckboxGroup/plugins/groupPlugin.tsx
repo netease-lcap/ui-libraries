@@ -3,6 +3,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { useControllableValue } from 'ahooks';
+import { ProFormCheckbox } from '@ant-design/pro-components';
 import { $deletePropsList } from '@/plugins/constants';
 import {
   useRequestDataSource, useHandleMapField, useFormatDataSource,
@@ -21,6 +22,13 @@ export function useHandleRef(props) {
   };
 }
 useHandleRef.order = 1;
+
+export function useHandleFormItemComponent(props) {
+  return {
+    FormItemComponent: ProFormCheckbox.Group,
+  };
+}
+useHandleFormItemComponent.order = 2;
 
 export function useHandleDataSource(props) {
   const dataSourceProps = props.get('dataSource');
@@ -51,6 +59,5 @@ export function useHandleRemoveRef(props) {
 }
 
 export * from './lowCode';
-
 export * from '@/components/Form/plugins/formItemPlugin';
 export * from './stylePlugin';

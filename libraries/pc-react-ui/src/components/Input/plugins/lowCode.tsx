@@ -14,7 +14,7 @@ export function useHandleNodePath(props) {
   React.useEffect(() => {
     const inputElement = document.querySelector(`[data-node-id=${nodeId}]`);
     const inputParent = inputElement?.closest(`.${prefixCls}-form-item-row`);
-    inputParent?.setAttribute('data-nodepath', nodePath);
+    if (nodePath) inputParent?.setAttribute('data-nodepath', nodePath);
     if (!isForm) return;
     inputParent?.setAttribute('data-tag-name', 'FormInput');
     inputParent?.setAttribute('data-has-mutation', 'true');

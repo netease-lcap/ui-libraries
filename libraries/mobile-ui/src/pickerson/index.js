@@ -12,6 +12,7 @@ import DataSourceMixin from '../mixins/DataSource';
 import { EmptyCol } from '../emptycol';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
 import PreviewMixin from "../mixins/preview";
+import { Converter } from '../mixins/convertor';
 import DataSource from '../utils/DataSource';
 
 const [createComponent, bem, t] = createNamespace('pickerson');
@@ -27,6 +28,7 @@ export default createComponent({
     DataSourceMixin,
     EventSlotCommandProvider(EventSlotCommandMap),
     PreviewMixin,
+    Converter,
     sync({
       value: 'currentValue',
       data: 'data',
@@ -111,15 +113,20 @@ export default createComponent({
   },
   watch: {
     currentValue(val) {
+      // 对外使用converter转换
+      if (this.converter && this.multiple) {
+        val = this.currentConverter.convert(val);
+      }
+
       this.$emit('update:value', val);
       this.$emit('update:pvalue', val);
     },
     // 监听props变化
     value(val) {
-      this.currentValue = this.formatValue(val);
+      this.currentValue = this.converter && this.multiple ? this.currentConverter.format(val) : this.formatValue(val);
     },
     pvalue(val) {
-      this.currentValue = this.formatValue(val);
+      this.currentValue = this.converter && this.multiple ? this.currentConverter.format(val) : this.formatValue(val);
     },
   },
 

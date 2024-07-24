@@ -26,13 +26,7 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const 默认 = {
   render: (args) => {
-    const ref = React.useRef();
-    React.useEffect(() => {
-      setTimeout(() => {
-        console.log(ref, 'ref');
-      }, 1000);
-    }, []);
-    return <TextArea {...args} ref={ref} data-nodepath="1234234" />;
+    return <TextArea {...args} data-nodepath="1234234" />;
   },
   args: {
     color: 'magenta',
