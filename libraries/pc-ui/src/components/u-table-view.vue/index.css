@@ -508,5 +508,66 @@ content: "\e679";
     background-color: var(--table-view-expand-td-background);
 }
 
+/* 子表单特有 */
+.table[allow-drop='true'] th[sub-form-drop-column]::after {
+    background: rgba(78, 117, 236, 0.24) url('./assets/allow-drop.svg') center calc(100% - 8px) / 12px 12px no-repeat;
+    border-color: #4E75EC;
+
+}
+.table[allow-drop='true'] td[sub-form-drop-column]::after {
+    color: #4E75EC !important;
+    background: rgba(78, 117, 236, 0.24);
+    border-color: #4E75EC;
+}
+
+
+.table[allow-drop='false'] th[sub-form-drop-column]::after {
+    background: #F5F5F5 url('./assets/forbid-drop.svg') center bottom / 16px 16px no-repeat;
+    border: 1px solid #E5E5E5;
+    border-bottom: 0;
+}
+.table[allow-drop='false'] td[sub-form-drop-column]::after {
+    content: '';
+    background: #F5F5F5;
+    border: 1px solid #E5E5E5;
+    border-top: 0;
+}
+
+th[sub-form-drop-column],
+td[sub-form-drop-column] {
+    border-bottom: 0 !important;
+    z-index: 88 !important;
+}
+th[sub-form-drop-column] *,
+td[sub-form-drop-column] * {
+    display: none !important;
+}
+th[sub-form-drop-column]::after,
+td[sub-form-drop-column]::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: #F7F8FA;
+    box-sizing: border-box;
+    border: 1px dashed #A9AEB8;
+    pointer-events: none;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    color: #777777;
+    z-index: 999;
+}
+th[sub-form-drop-column]::after {
+    background: url('./assets/drop.svg') center calc(100% - 8px) / 12px 12px no-repeat;
+    border-bottom: 0;
+}
+td[sub-form-drop-column]::after {
+    content: '从组件库拖拽组件添加';
+    border-top: 0;
+}
 
 

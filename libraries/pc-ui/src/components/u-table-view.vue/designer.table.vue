@@ -33,6 +33,8 @@
                                 :colspan="columnVM.colSpan"
                                 :rowspan="columnVM.rowSpan"
                                 :ellipsis="columnVM.thEllipsis !== undefined? columnVM.thEllipsis : thEllipsis"
+                                :sub-form-drop-column="columnVM?.subFormDropColumn"
+                                :sub-form-initial-column="columnVM?.subFormInitialColumn"
                                 v-ellipsis-title>
                                 <!-- type === 'checkbox' -->
                                 <span v-if="columnVM.type === 'checkbox'">
@@ -119,6 +121,8 @@
                                         :last-left-fixed="isLastLeftFixed(columnVM, columnIndex, visibleColumnVMs)"
                                         :first-right-fixed="isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs)"
                                         :shadow="(isLastLeftFixed(columnVM, columnIndex, visibleColumnVMs)) || (isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs))"
+                                        :sub-form-drop-column="columnVM?.subFormDropColumn"
+                                        :sub-form-initial-column="columnVM?.subFormInitialColumn"
                                         :disabled="columnVM.currentHidden">
                                         <div :class="$designer.tdmask" v-if="useMask && rowIndex !== 0"></div>
                                         <!--可视化占据的虚拟填充区域-->
