@@ -55,14 +55,15 @@ export default {
             return !(this.groupVM && this.groupVM.$options.name === this.$options.groupName);
         },
         hasIconPadding() {
-          if (!this.groupVM && !this.rootVM) {
+          if (!this.groupVM || !this.groupVM.rootVM) {
             return false;
           }
 
+          const rootVM = this.groupVM.rootVM;
           const { childrenNodes = [], itemVMs = [] } = this.groupVM;
 
           return !this.icon && (
-            childrenNodes.find((childNode) => !!this.$at2(childNode, this.rootVM.iconField))
+            childrenNodes.find((childNode) => !!this.$at2(childNode, rootVM.iconField))
             || itemVMs.find((it) => !!it.icon)
           );
         },
