@@ -51,11 +51,17 @@ export default {
             return !(this.groupVM && this.groupVM.$options.name === this.$options.groupName);
         },
         hasIconPadding() {
-          if (!this.groupVM && !this.rootVM) {
+          if (!this.groupVM || !this.groupVM.rootVM) {
             return false;
           }
 
-          return !this.icon && ((this.groupVM.childrenNodes || []).find((it) => !!this.$at(it, $at2(childNode, this.rootVM.iconField))) || (this.groupVM.itemVMs || []).find((it) => !!it.icon));
+          const rootVM = this.groupVM.rootVM;
+          const { childrenNodes = [], itemVMs = [] } = this.groupVM;
+
+          return !this.icon && (
+            childrenNodes.find((childNode) => !!this.$at2(childNode, rootVM.iconField))
+            || itemVMs.find((it) => !!it.icon)
+          );
         },
         miniMode() {
             return this.isInSidebar && this.parentVM.currentCollapse;
