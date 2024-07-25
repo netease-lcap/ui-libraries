@@ -32,7 +32,7 @@ export function genGridViewTemplate(entity: naslTypes.Entity, nameGroup: NameGro
   return `<UGridView
         ref="${nameGroup.viewElementMainView}"
         dataSource={${dataSourceValue}}
-        valueField={${nameGroup.lowerEntity}.${getEntityPromaryKeyProperty(entity)}}
+        valueField="${nameGroup.lowerEntity}.${getEntityPromaryKeyProperty(entity)}"
         pageSize={50}
         pageNumber={1}
         pageable={true}
