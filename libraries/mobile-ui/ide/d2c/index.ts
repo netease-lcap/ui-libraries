@@ -2,7 +2,6 @@ import button from './components/button';
 import checkbox from './components/checkbox';
 import listView from './components/listView';
 import numberInput from './components/numberInput';
-import pagination from './components/pagination';
 import passwordInput from './components/passwordInput';
 import radio from './components/radio';
 import searchInput from './components/searchInput';
@@ -17,7 +16,6 @@ const componentCfgs = [
   checkbox,
   listView,
   numberInput,
-  pagination,
   passwordInput,
   radio,
   searchInput,
