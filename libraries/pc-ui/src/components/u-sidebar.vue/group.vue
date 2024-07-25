@@ -202,7 +202,13 @@ export default {
           if (this.parentVM.$options.name !== this.$options.name) {
             return;
           }
-          return !this.icon && ((this.parentVM.childrenNodes || []).find((it) => !!this.$at(it, $at2(childNode, this.rootVM.iconField))) || (this.parentVM.itemVMs || []).find((it) => !!it.icon));
+
+          const { childrenNodes = [], itemVMs = [] } = this.parentVM;
+
+          return !this.icon && (
+            childrenNodes.find((childNode) => !!this.$at2(childNode, this.rootVM.iconField))
+            || itemVMs.find((it) => !!it.icon)
+          );
         },
 
         miniMode() {
