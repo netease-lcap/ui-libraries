@@ -111,9 +111,9 @@ export function useHandleMenuSlot(props) {
               clearTimeout(timeer);
             }
             timeer = setTimeout(() => {
-              // console.log(arg.key, '===', arg.item.props.path);
+              console.log(arg.key, '===', arg.item.props);
               if (arg.key !== arg.item.props.path) { // 唯一标识不跳转
-                handleLink(arg.key, child.props?.target);
+                handleLink(arg.key, arg.item.props?.target);
               }
             }, 150);
           }),

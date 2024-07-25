@@ -183,12 +183,11 @@ namespace nasl.ui {
       title: '文件有效期天数',
       setter: {
         concept: "NumberInputSetter",
-        precision: 0,
         min: 0
       },
       if: _ => _.ttl === true
     })
-    ttlValue: nasl.core.Integer;
+    ttlValue: nasl.core.Decimal;
     @Prop({
       group: '主要属性',
       title: '源地址访问',
