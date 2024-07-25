@@ -649,7 +649,7 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "parentAccept": "['u-form-group', 'u-form'].includes(target.tag)",
+            "parentAccept": "['u-form'].includes(target.tag)",
             "childAccept": "['u-form-item'].includes(target.tag)",
             "events": {
                 "click": true
