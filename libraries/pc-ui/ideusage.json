@@ -831,7 +831,8 @@
                 "slot": "title",
                 "expression": "this.getAttribute('title')",
                 "fill": "this.getAttribute('title').value"
-            }]
+            }],
+            "forceRefresh": "parent"
         }
     },
     {
@@ -862,7 +863,8 @@
             },
             "events": {
                 "click": true
-            }
+            },
+            "forceRefresh": "parent"
         }
     },
     {
