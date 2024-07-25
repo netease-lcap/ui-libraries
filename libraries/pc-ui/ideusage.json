@@ -99,9 +99,8 @@
             "idetype": "container",
             "structured": true,
             "childAccept": "target.tag === 'u-crumb-item'",
-            "elementSutando": {
-                "condition": "this.getAttribute('auto')?.value === true",
-                "component": "UCrumbDesigner"
+            "additionalAttribute": {
+                ":showInDesiner": true
             }
         }
     },
@@ -559,7 +558,10 @@
             "idetype": "container",
             "forceRefresh": "parent",
             "childAccept": false,
-            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
+            "additionalAttribute": {
+                ":dataSource": "\"[{}]\""
+            }
         }
     },
     {
@@ -596,6 +598,9 @@
                    "condition": "!this.getAttribute('dataSource')",
                     "accept": "target.concept === 'Entity'"
                 }
+            },
+            "displaySlotConditions": {
+                "empty": false
             }
         }
     },
@@ -650,6 +655,7 @@
             "idetype": "container",
             "structured": true,
             "childAccept": "['u-form-item'].includes(target.tag)",
+            "parentAccept": "['u-form'].includes(target.tag)",
             "events": {
                 "click": true
             }
@@ -700,6 +706,7 @@
         "name": "URadio",
         "ideusage": {
             "idetype": "container",
+            "parentAccept": "target.tag === 'u-radios'",
             "displaySlotInline": {
                 "item": true
             }
@@ -730,6 +737,10 @@
             "childAccept": "target.tag === 'u-checkbox'",
             "slotWrapperInlineStyle": {
                 "item": "display:inline-block;width:90px;"
+            },
+            "displaySlotConditions": {
+                "checkAll": false,
+                "item": false
             }
         }
     },
@@ -737,6 +748,7 @@
         "name": "UCheckbox",
         "ideusage": {
             "idetype": "container",
+            "parentAccept": "target.tag === 'u-checkboxes'",
             "displaySlotInline": {
                 "item": true
             }
@@ -762,7 +774,8 @@
     {
         "name": "UCapsule",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "parentAccept": "['u-capsules', 'u-capsules-group'].includes(target.tag)"
         }
     },
     {
@@ -780,7 +793,13 @@
     {
         "name": "UUploader",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "additionalAttribute": {
+                ":showInDesigner": true
+            },
+            "slotWrapperInlineStyle": {
+                "file-list": "display:flex"
+            }
         }
     },
     {
@@ -838,7 +857,11 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept":"target.tag === 'u-selectable-step'"
+            "childAccept":"target.tag === 'u-selectable-step'",
+            "displaySlotConditions": {
+                "title": false,
+                "desc": false
+            }
         }
     },
     {

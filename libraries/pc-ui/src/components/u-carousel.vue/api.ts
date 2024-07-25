@@ -139,7 +139,7 @@ namespace nasl.ui {
         slotDefault: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '幻灯片子项',
             description: '自定义选项的结构和样式',
         })
         slotItem: (current: Current<T>) => Array<ViewComponent>;
@@ -175,7 +175,7 @@ namespace nasl.ui {
         slotDefault: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '标题',
             description: '自定义标题文本。',
         })
         slotTitle: () => Array<ViewComponent>;

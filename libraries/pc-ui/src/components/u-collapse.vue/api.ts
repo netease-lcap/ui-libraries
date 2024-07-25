@@ -168,13 +168,13 @@ namespace nasl.ui {
         slotDefault: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '标题',
             description: '自定义标题文本。',
         })
         slotTitle: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '附加内容',
             description: '在右侧可以附加内容。',
         })
         slotExtra: () => Array<ViewComponent>;

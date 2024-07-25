@@ -1,6 +1,6 @@
 <template>
 <nav :class="$style.root">
-    <template v-if="auto && $env.VUE_APP_DESIGNER">
+    <template v-if="auto && ($env.VUE_APP_DESIGNER || showInDesiner)">
         <u-crumb-item text="面包屑"></u-crumb-item>
         <u-crumb-item text="会根据路径"></u-crumb-item>
         <u-crumb-item text="自动生成"></u-crumb-item>
@@ -11,7 +11,7 @@
         </template>
     </template>
     <slot v-else></slot>
-    <s-empty v-if="$env.VUE_APP_DESIGNER && !$slots.default && !auto && (!items || items.length === 0)"></s-empty>
+    <s-empty v-if="($env.VUE_APP_DESIGNER || showInDesiner) && !$slots.default && !auto && (!items || items.length === 0)"></s-empty>
 </nav>
 </template>
 
@@ -32,6 +32,7 @@ export default {
         auto: { type: Boolean, default: false },
         separator: { type: String, default: 'arrow' },
         icon: { type: Boolean, default: false },
+        showInDesiner: { type: Boolean, default: false}
     },
     data() {
         return {

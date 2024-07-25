@@ -219,13 +219,13 @@ namespace nasl.ui {
         }) => any;
 
         @Slot({
-            title: 'undefined',
+            title: '弹出内容',
             description: '自定义弹出的内容。',
         })
         slotDefault: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '触发节点',
             description: '弹出层触发节点。',
         })
         slotReference: () => Array<ViewComponent>;

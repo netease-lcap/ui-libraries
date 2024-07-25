@@ -224,7 +224,7 @@ namespace nasl.ui {
         slotDefault: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '图片',
             description: '插入图片',
         })
         slotCover: () => Array<ViewComponent>;
@@ -260,7 +260,7 @@ namespace nasl.ui {
         slotDefault: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '图片',
             description: '插入图片',
         })
         slotCover: () => Array<ViewComponent>;
