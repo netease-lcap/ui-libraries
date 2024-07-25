@@ -59,7 +59,12 @@ export default {
             return false;
           }
 
-          return !this.icon && ((this.groupVM.childrenNodes || []).find((it) => !!this.$at(it, $at2(childNode, this.rootVM.iconField))) || (this.groupVM.itemVMs || []).find((it) => !!it.icon));
+          const { childrenNodes = [], itemVMs = [] } = this.groupVM;
+
+          return !this.icon && (
+            childrenNodes.find((childNode) => !!this.$at2(childNode, this.rootVM.iconField))
+            || itemVMs.find((it) => !!it.icon)
+          );
         },
         miniMode() {
             return this.isInSidebar && this.parentVM.currentCollapse;
