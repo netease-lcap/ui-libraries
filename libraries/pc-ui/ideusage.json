@@ -774,7 +774,8 @@
     {
         "name": "UComboSlider",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "childAccept": false
         }
     },
     {
