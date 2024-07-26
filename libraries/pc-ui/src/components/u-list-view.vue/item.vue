@@ -19,7 +19,6 @@
 
 <script>
 import { MComplexItem } from '../m-complex.vue';
-// import { ellipsisTitle } from '../../../directives';
 
 export default {
     name: 'u-list-view-item',

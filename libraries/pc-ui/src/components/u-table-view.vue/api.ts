@@ -518,8 +518,11 @@ namespace nasl.ui {
           description: '设置表格行是否可拖拽起来。绑定逻辑',
           bindOpen: true,
           if: _ => _.draggable === true || _.acrossTableDrag === true,
+          setter: {
+            concept: 'AnonymousFunctionSetter',
+          },
       })
-      canDragableHandler: Function;
+      canDragableHandler: (item: T) => nasl.core.Boolean;
 
       @Prop<UTableViewOptions<T, V, P, M>, 'canDropinHandler'>({
           group: '交互属性',
@@ -527,8 +530,11 @@ namespace nasl.ui {
           description: '设置表格行是否可拖拽放入。绑定逻辑',
           bindOpen: true,
           if: _ => _.draggable === true || _.acrossTableDrag === true,
+          setter: {
+            concept: 'AnonymousFunctionSetter',
+          },
       })
-      canDropinHandler: Function;
+      canDropinHandler: (item: T) => nasl.core.Boolean;
 
       @Prop({
           group: '交互属性',
@@ -770,6 +776,27 @@ namespace nasl.ui {
           docDescription: '表格每列的默认宽度。',
       })
       defaultColumnWidth: nasl.core.String | nasl.core.Decimal;
+
+      @Prop({
+        group: '样式属性',
+        title: '表格行动态样式',
+        description: '动态设置表格行背景色、字体颜色等样式',
+        docDescription: '动态设置表格行背景色、字体颜色等样式',
+        bindOpen: true,
+        setter: {
+            concept: 'AnonymousFunctionSetter',
+        }
+      })
+      rowStyle: (current: Current<T>) => { 
+        /**
+         * @title 表格行背景颜色
+         */
+        backgroundColor: nasl.core.String, 
+        /**
+         * @title 表格行字体颜色
+         */
+        color: nasl.core.String 
+      };
 
       @Event({
           title: '加载前',

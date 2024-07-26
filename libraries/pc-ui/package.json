@@ -62,7 +62,7 @@
     "@lcap/builder": "workspace:*",
     "@lcap/storybook-vue-vite": "workspace:*",
     "@lcap/vite-plugin-vue2": "workspace:*",
-    "@nasl/types": "0.1.8-beta.3",
+    "@nasl/types": "0.1.9-alpha",
     "@nasl/ast-mini": "3.9.0-beta",
     "@storybook/addon-essentials": "^7.6.17",
     "@storybook/addon-interactions": "^7.6.17",
