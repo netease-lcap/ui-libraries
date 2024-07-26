@@ -169,7 +169,7 @@
 
         :rootWidth="rootWidth"
 
-        :setRowStyle="setRowStyle"
+        :rowStyle="rowStyle"
 
         @resize="onResizerDragEnd">
     </u-table-render>
@@ -364,7 +364,7 @@ export default {
         thEllipsis: { type: Boolean, default: false }, // 表头是否缩略展示
         ellipsis: { type: Boolean, default: false }, // 单元格是否缩略展示
 
-        setRowStyle: Function, // 设置行背景色
+        rowStyle: Function, // 设置行背景色
     },
     data() {
         return {

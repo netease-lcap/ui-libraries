@@ -206,7 +206,7 @@ export default {
         ellipsisTitle: { type: [Boolean, String], default: false },
         selectedValuesData: Array, // 如果是分页数据，选中的值在可能在下拉框里没有，导致选中值展示不出来。这里传入该字段，用于展示选中的值
         designerMode: { type: String, default: 'success' }, // 配合IDE编辑器展示不同表格状态
-        setRowStyle: { type: Function }
+        rowStyle: { type: Function }
     },
     data() {
         return {
@@ -696,7 +696,7 @@ export default {
             }
         },
         getStyle(current) {
-            return isFunction(this.setRowStyle) ? this.setRowStyle(current) : {};
+            return isFunction(this.rowStyle) ? this.rowStyle(current) : {};
         }
     },
 };

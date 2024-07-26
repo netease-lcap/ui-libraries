@@ -3,7 +3,7 @@
     <u-linear-layout direction="vertical">
         <u-linear-layout><u-button @click="setData">改变数据</u-button></u-linear-layout>
         <u-linear-layout>
-            <u-table-view striped :data="data" pageable :page-size="10" :setRowStyle="getRowStyle">
+            <u-table-view striped :data="data" pageable :page-size="10" :rowStyle="getRowStyle">
                 <u-table-view-column title="用户名" field="name" width="15%"></u-table-view-column>
                 <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
                 <u-table-view-column title="地址" field="address"></u-table-view-column>

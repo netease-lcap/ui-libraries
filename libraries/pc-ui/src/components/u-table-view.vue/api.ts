@@ -787,7 +787,7 @@ namespace nasl.ui {
             concept: 'AnonymousFunctionSetter',
         }
       })
-      setRowStyle: (current: Current<T>) => { 
+      rowStyle: (current: Current<T>) => { 
         /**
          * @title 表格行背景颜色
          */

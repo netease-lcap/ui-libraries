@@ -1,6 +1,6 @@
 <!-- 后端分页与加载更多 -->
 <template>
-<u-list-view multiple v-model="values" :setRowStyle="getRowStyle" :data-source="dataSource">
+<u-list-view multiple v-model="values" :rowStyle="getRowStyle" :data-source="dataSource">
 </u-list-view>
 </template>
 <script>

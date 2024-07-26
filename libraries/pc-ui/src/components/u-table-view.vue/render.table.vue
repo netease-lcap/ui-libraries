@@ -285,7 +285,7 @@ export default {
         handlerDraggable: Boolean,
 
         rootWidth: Number,
-        setRowStyle: Function,
+        rowStyle: Function,
     },
     data() {
         return {
@@ -434,14 +434,14 @@ export default {
                     }
                 }
             }
-            if(type === 'td' && currentData && this.setRowStyle && typeof this.setRowStyle === 'function') {
-                // const backgroundColor = this.setRowStyle(currentData);
+            if(type === 'td' && currentData && this.rowStyle && typeof this.rowStyle === 'function') {
+                // const backgroundColor = this.rowStyle(currentData);
                 // if(backgroundColor) {
                 //     return Object.assign(staticStyle, style, {
                 //         backgroundColor
                 //     });
                 // }
-                const rowStyle = this.setRowStyle(currentData);
+                const rowStyle = this.rowStyle(currentData);
                 if(rowStyle) {
                     return Object.assign(staticStyle, style, rowStyle);
                 }
