@@ -158,7 +158,7 @@ namespace nasl.ui {
         }) => any;
 
         @Slot({
-            title: 'undefined',
+            title: '标题',
             description: '弹窗标题自定义',
         })
         slotTitle: () => Array<ViewComponent>;
@@ -170,19 +170,19 @@ namespace nasl.ui {
         // slotHead: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '内容',
             description: '弹窗中部自定义',
         })
         slotBody: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '尾部',
             description: '弹窗尾部自定义',
         })
         slotFoot: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '小标题',
             description: '弹框小标题自定义',
         })
         slotHeading: () => Array<ViewComponent>;

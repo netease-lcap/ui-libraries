@@ -170,7 +170,7 @@ namespace nasl.ui {
         }) => any;
 
         @Slot({
-            title: 'undefined',
+            title: '内容',
             description: '内容',
         })
         slotDefault: () => Array<ViewComponent>;
