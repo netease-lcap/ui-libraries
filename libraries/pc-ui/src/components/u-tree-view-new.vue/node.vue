@@ -562,7 +562,7 @@ export default {
             }
             dfs(node, null, currentFields);
 
-            if (node.expandedByFilter)
+            if (node && node.expandedByFilter)
                 this.currentExpanded = node.expandedByFilter;
         },
         onDragStart(e) {

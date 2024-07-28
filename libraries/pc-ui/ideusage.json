@@ -510,7 +510,11 @@
                 "slot": "cell",
                 "useRef": "argus?.[0]?.index === 0"
             },
-            "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic', 'u-table-view-column-group'].includes(target.tag)"
+            "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic', 'u-table-view-column-group'].includes(target.tag)",
+            "disableSlotAutoFill": [{
+                "slot": "config-columns",
+                "expression": "!this.getAttribute('configurable')?.value"
+            }]
         }
     },
     {
