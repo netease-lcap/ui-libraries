@@ -108,7 +108,7 @@
                 :expander-width="expanderWidth"
                 :filterable="filterable"
                 :filter-text="filterText"
-                :filter-fields="_filterFields"
+                :filter-fields="finalFilterFields"
                 :matchMethod="matchMethod"
                 :caseSensitive="caseSensitive"
                 @change="$emit('change', $event, this)"
@@ -261,7 +261,7 @@ export default {
                 return '';
             }
         },
-        _filterFields() {
+        finalFilterFields() {
           this.textField && this.filterFields.push(this.textField)
           return [...new Set(this.filterFields)]
         }
