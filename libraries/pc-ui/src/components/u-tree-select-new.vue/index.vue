@@ -7,9 +7,6 @@
         :clearable="clearable && (!!checkableValue || !!selectedItem)"
         :tabindex="readonly || currentDisabled ? '' : 0"
         @click="focus"
-        @keydown.up.prevent="$refs.popper.currentOpened ? shift(-1) : open()"
-        @keydown.down.prevent="$refs.popper.currentOpened ? shift(+1) : open()"
-        @keydown.enter.stop.prevent="onEnter"
         @keydown.esc.stop="close(), (filterText = '')"
         @blur="onRootBlur">
         <!-- 用于基线对齐 -->
@@ -111,7 +108,7 @@
                 :expander-width="expanderWidth"
                 :filterable="filterable"
                 :filter-text="filterText"
-                :filter-fields="filterFields"
+                :filter-fields="finalFilterFields"
                 :matchMethod="matchMethod"
                 :caseSensitive="caseSensitive"
                 @change="$emit('change', $event, this)"
@@ -264,6 +261,10 @@ export default {
                 return '';
             }
         },
+        finalFilterFields() {
+          this.textField && this.filterFields.push(this.textField)
+          return [...new Set(this.filterFields)]
+        }
     },
     watch: {
         value() {
