@@ -9,6 +9,8 @@ function addPrefix(name, prefix) {
   return upperFirst(prefix.toLowerCase()) + name;
 }
 
+const TEMP_IDEUSAGE_VAR_NAME = '_tempIdeusage';
+
 export function transformAPITs(tsCode, context: OverloadComponentContext) {
   const ast = babel.parse(tsCode, {
     filename: 'result.ts',
@@ -103,13 +105,13 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
         if (
           decorator && context.naslUIConfig.ideusage
         ) {
-          const code = `const temp = ${JSON.stringify(context.naslUIConfig.ideusage)};`;
+          const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${JSON.stringify(context.naslUIConfig.ideusage)};`;
           const tempAST = babel.parseSync(code);
           const decorators = path.node.decorators || [];
           if (tempAST) {
             traverse(tempAST, {
               VariableDeclarator(p) {
-                if (p.node.id.type === 'Identifier' && p.node.id.name === 'temp' && p.node.init && p.node.init.type === 'ObjectExpression') {
+                if (p.node.id.type === 'Identifier' && p.node.id.name === TEMP_IDEUSAGE_VAR_NAME && p.node.init && p.node.init.type === 'ObjectExpression') {
                   decorators.unshift({
                     type: 'Decorator',
                     expression: {
