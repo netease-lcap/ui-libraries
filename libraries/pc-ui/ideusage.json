@@ -643,7 +643,16 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "['u-form-group', 'u-form-item'].includes(target.tag)"
+            "childAccept": "['u-form-group', 'u-form-item'].includes(target.tag)",
+            "baseInfo": {
+                "title": "(this.getAttribute('id')?.value === 'dynamicRenderContainer' && this.getAttribute('processPrefix')) ? '流程表单' : '表单' "
+            },
+            "operator": {
+                "copy": "!(this.getAttribute('id')?.value === 'dynamicRenderContainer' && this.getAttribute('processPrefix'))",
+                "duplicate": "!(this.getAttribute('id')?.value === 'dynamicRenderContainer' && this.getAttribute('processPrefix'))",
+                "cut": "!(this.getAttribute('id')?.value === 'dynamicRenderContainer' && this.getAttribute('processPrefix'))",
+                "d2c": "!(this.getAttribute('id')?.value === 'dynamicRenderContainer' && this.getAttribute('processPrefix'))"
+            }
         }
     },
     {
