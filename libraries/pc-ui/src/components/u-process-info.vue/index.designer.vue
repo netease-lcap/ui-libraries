@@ -1,5 +1,5 @@
 <template>
-    <div v-if="$env.VUE_APP_DESIGNER" vusion-disabled-duplicate="true" vusion-disabled-copy="true">
+    <div v-if="$env.VUE_APP_DESIGNER || showInDesigner" vusion-disabled-duplicate="true" vusion-disabled-copy="true">
         <div :class="$style.item">
             <div :class="$style.label">{{ $tt('startBy') }}：</div>
             <div :class="$style.value" v-ellipsis-title>张三（示例）</div>
@@ -37,6 +37,9 @@ export default {
     component: {
         UProcessInfoReal,
     },
+    props: {
+        showInDesigner: { type: Boolean, default: false },
+    }
 };
 </script>
 
