@@ -58,7 +58,7 @@ function getBlockInfos(code, context: OverloadComponentContext) {
   });
 
   const blocks: any[] = [];
-
+  const waitImports: string[] = [];
   traverse(ast, {
     VariableDeclarator(bpath) {
       const hasExporedName = bpath.findParent((p) => p.type === 'ExportNamedDeclaration');
@@ -96,27 +96,24 @@ function getBlockInfos(code, context: OverloadComponentContext) {
 
       blocks.push(block);
     },
-  });
+    JSXElement(pt) {
+      if (pt.node.openingElement.name.type !== 'JSXIdentifier') {
+        return;
+      }
 
-  const waitImports: string[] = [];
-  blocks.forEach((b) => {
-    traverse(b.ast, {
-      JSXElement(p) {
-        if (p.node.openingElement.name.type !== 'JSXIdentifier') {
-          return;
+      const tagName = pt.node.openingElement.name.name;
+      if (tagName === context.naslUIConfig.name) {
+        pt.node.openingElement.name.name = context.tagName;
+        if (pt.node.closingElement && pt.node.closingElement.name.type === 'JSXIdentifier') {
+          pt.node.closingElement.name.name = context.tagName;
         }
-
-        const tagName = p.node.openingElement.name.name;
-        if (tagName === context.naslUIConfig.name) {
-          p.node.openingElement.name.name = context.tagName;
-          if (p.node.closingElement && p.node.closingElement.name.type === 'JSXIdentifier') {
-            p.node.closingElement.name.name = context.tagName;
-          }
-        } else if (context.naslConfigList.findIndex((nl) => nl.name === tagName) !== -1) {
-          waitImports.push(tagName);
-        }
-      },
-    });
+      } else if (
+        waitImports.indexOf(tagName) === -1
+        && context.naslConfigList.findIndex((nl) => nl.name === tagName || (nl.children && nl.children.find((child) => child.name === tagName))) !== -1
+      ) {
+        waitImports.push(tagName);
+      }
+    },
   });
 
   return {
@@ -171,6 +168,10 @@ function getBlockCodeFromFile(filePath, context: OverloadComponentContext) {
                 value: {
                   type: 'StringLiteral',
                   value: block.name,
+                  extra: {
+                    rawValue: block.name,
+                    raw: `'${block.name}'`,
+                  },
                 },
                 shorthand: false,
                 computed: false,
@@ -206,7 +207,7 @@ export function generateBlockFile(context: OverloadComponentContext) {
     fs.writeFileSync(path.resolve(context.componentFolderPath, 'stories/block.stories.js'), content, 'utf-8');
     return;
   }
-  const storyFilePath = glob.sync('stories/block.stories.{tsx,jsx}', { cwd: context.pkgComponentFolderPath })[0];
+  const storyFilePath = glob.sync('stories/block.stories.{tsx,jsx}', { cwd: context.pkgComponentFolderPath, absolute: true })[0];
   if (!storyFilePath) {
     return;
   }
