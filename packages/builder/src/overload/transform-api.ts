@@ -1,9 +1,11 @@
+import { default as nodePath } from 'path';
 import * as babel from '@babel/core';
 import * as babelTypes from '@babel/types';
 import generate from '@babel/generator';
 import traverse from '@babel/traverse';
 import { OverloadComponentContext } from './context';
 import { upperFirst } from 'lodash';
+import { LCAP_UI_PATH } from './constants';
 
 function addPrefix(name, prefix) {
   return upperFirst(prefix.toLowerCase()) + name;
@@ -54,12 +56,26 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
       }
     },
     TSTypeReference(path) {
+      if (path.node.typeName.type !== 'Identifier') {
+        return;
+      }
       const addNaslUINamespace = [
         'ViewComponent', 'CurrentDynamic', 'DataSourceParams',
         'PoiInfo', 'File', 'SelectData', 'DragAndDropUpdateData',
         'ValidateResult', 'BaseEvent',
       ];
-      if (path.node.typeName.type === 'Identifier' && addNaslUINamespace.indexOf(path.node.typeName.name) !== -1) {
+      const typeName = path.node.typeName.name;
+      if (
+        typeName === `${context.naslUIConfig.name}Options`
+      ) {
+        path.node.typeName.name = addPrefix(path.node.typeName.name, context.prefix);
+      } else if (
+        addNaslUINamespace.indexOf(path.node.typeName.name) !== -1
+        || context.findNaslUIConfig(
+          (config) => config.name === typeName
+          ||(typeName.endsWith('Options') && typeName.startsWith(config.name)),
+        )
+      ) {
         const typeName = path.node.typeName;
         path.node.typeName = {
           type: 'TSQualifiedName',
@@ -76,13 +92,6 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
           },
           right: typeName,
         }
-      }
-
-      if (
-        path.node.typeName.type === 'Identifier'
-        && path.node.typeName.name.endsWith('Options')
-      ) {
-        path.node.typeName.name = addPrefix(path.node.typeName.name, context.prefix);
       }
     },
     ClassDeclaration(path) {
@@ -184,16 +193,11 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
         path.node.id.name = addPrefix(path.node.id.name, context.prefix);
       }
     },
-    // ObjectProperty(path) {
-    //   if (path.node.key.type === 'Identifier' && path.node.key.name === 'code' && path.node.value.type === 'StringLiteral') {
-    //     let code = path.node.value.value;
+  });
 
-    //     Object.keys(context.replaceTagMap).forEach((name) => {
-    //       code = code.replaceAll(`<${name}`, `<${context.replaceTagMap[name]}`).replaceAll(`</${name}`, `</${context.replaceTagMap[name]}`);
-    //     });
-    //     path.node.value.value = code;
-    //   }
-    // }
+  ast.program.body[0].leadingComments?.push({
+    type: 'CommentLine',
+    value: `/ <reference types="${nodePath.relative(context.componentFolderPath, nodePath.resolve(context.rootPath, LCAP_UI_PATH, 'runtime/nasl.ui.d.ts'))}" />`,
   });
 
   return generate(ast).code;

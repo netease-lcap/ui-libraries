@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import fs from 'fs-extra';
 import path from 'path';
 import { kebabCase, upperFirst } from 'lodash';
@@ -10,6 +11,7 @@ export interface NaslUIComponentConfig extends ViewComponentDeclaration {
 }
 
 export interface OverloadComponentContext {
+  rootPath: string;
   naslUIConfig: NaslUIComponentConfig;
   naslConfigList: NaslUIComponentConfig[];
   name: string;
@@ -24,6 +26,7 @@ export interface OverloadComponentContext {
   replaceNameMap: Record<string, string>;
   replaceTagMap: Record<string, string>;
   themeConfig: ThemeComponentConfig;
+  findNaslUIConfig: (name: string | ((c: NaslUIComponentConfig) => boolean)) => NaslUIComponentConfig | null;
 }
 
 export function getProjectContext(rootPath) {
@@ -110,7 +113,7 @@ function getThemeConfig(rootPath, component) {
 
   try {
     const config: ThemeConfig = fs.readJSONSync(configPath);
-    const c = config.components.find((n) => n.name === kebabCase(component));
+    const c = config.components.find((n) => n.name === component);
 
     return c || defaultConfig;
   } catch (e) {
@@ -136,6 +139,7 @@ export function getOverloadComponentContext(rootPath, { component, prefix, fork 
   const tagName = env.framework.startsWith('vue') ? kebabCase(name) : name;
 
   return {
+    rootPath,
     naslConfigList: configList,
     naslUIConfig: comp,
     name,
@@ -148,6 +152,28 @@ export function getOverloadComponentContext(rootPath, { component, prefix, fork 
     fork,
     prefix,
     ...getReleaceMap(comp, env.framework, prefix),
-    themeConfig: getThemeConfig(rootPath, component),
+    themeConfig: getThemeConfig(rootPath, env.framework.startsWith('vue') ? kebabCase(component) : component),
+    findNaslUIConfig: (compName: string | ((c: NaslUIComponentConfig) => boolean)) => {
+      let checkFn = (n: NaslUIComponentConfig) => n.name === compName;
+      if (typeof compName === 'function') {
+        checkFn = compName;
+      }
+
+      for (let i = 0; i < configList.length; i++) {
+        const config = configList[i];
+        if (checkFn(config)) {
+          return config;
+        }
+
+        if (config.children && config.children.length > 0) {
+          const childConfig = config.children.find(checkFn);
+          if (childConfig) {
+            return childConfig;
+          }
+        }
+      }
+
+      return null;
+    },
   } as OverloadComponentContext;
 }

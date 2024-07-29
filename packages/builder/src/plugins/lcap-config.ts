@@ -1,7 +1,7 @@
-import fs from 'fs';
 import path from 'path';
+import fs from 'fs-extra';
 import type { Alias, Plugin, UserConfig } from 'vite';
-import { LCAP_UI_PATH } from '../overload/constants';
+import { LCAP_UI_PACKAGE_NAME, LCAP_UI_PACKAGE_PATH, LCAP_UI_PATH } from '../overload/constants';
 
 export interface LcapViteConfigPluginOptions {
   framework?: string;
@@ -11,6 +11,16 @@ export interface LcapViteConfigPluginOptions {
 
 function hasLcapUI(rootPath) {
   return fs.existsSync(path.resolve(rootPath, LCAP_UI_PATH));
+}
+
+function getLcapUIPkgName(rootPath) {
+  const pkgPath = path.resolve(rootPath, LCAP_UI_PACKAGE_PATH, 'package.json');
+  if (fs.existsSync(pkgPath)) {
+    const pkg = fs.readJSONSync(pkgPath);
+    return pkg.name;
+  }
+
+  return '';
 }
 
 function addResolve(config: UserConfig, options: LcapViteConfigPluginOptions) {
@@ -98,12 +108,15 @@ export default (options: LcapViteConfigPluginOptions) => {
         ...config.build.commonjsOptions,
       };
 
-      if (hasLcapUI(options.rootPath)) {
+      let lcapUIPkgName = '';
+      const hasLcapUIPkg = hasLcapUI(options.rootPath);
+      if (hasLcapUIPkg) {
         config.optimizeDeps.include?.push('virtual-lcap:lcap-ui');
         config.build.commonjsOptions.include = getCommonjsOptionsInclude(config).concat([
           '.lcap/lcap-ui/**/*.js',
           /node_modules/,
         ]);
+        lcapUIPkgName = getLcapUIPkgName(options.rootPath);
       }
 
       // 非库构建不处理默认参数；
@@ -116,24 +129,32 @@ export default (options: LcapViteConfigPluginOptions) => {
 
       switch (options.framework) {
         case 'react':
-          external.push('react', 'react-dom', 'virtual-lcap:lcap-ui');
+          external.push('react', 'react-dom');
           globals = {
             react: 'React',
             'react-dom': 'ReactDOM',
-            'virtual-lcap:lcap-ui': 'LcapUI',
           };
           break;
         case 'vue2':
-          external.push('vue', 'vue-router', 'vue-i18n', 'virtual-lcap:lcap-ui');
+          external.push('vue', 'vue-router', 'vue-i18n');
           globals = {
             vue: 'Vue',
             'vue-router': 'VueRouter',
             'vue-i18n': 'VueI18n',
-            'virtual-lcap:lcap-ui': 'LcapUI',
           };
           break;
         default:
           break;
+      }
+
+      if (lcapUIPkgName) {
+        external.push(lcapUIPkgName);
+        globals[lcapUIPkgName] = 'LcapUI';
+        const alias = (config.resolve && config.resolve.alias ? config.resolve.alias : []) as Alias[];
+        const alia = alias.find((it) => it.find === LCAP_UI_PACKAGE_NAME);
+        if (alia) {
+          alia.replacement = lcapUIPkgName;
+        }
       }
 
       config.build = {

@@ -48,7 +48,7 @@ async function generateThemeVarsFile(context: OverloadComponentContext, themeFol
     });
 
     codes.push('   */');
-    codes.push(`${cssVar.name}: ${cssVar.value};`);
+    codes.push(`  ${cssVar.name}: ${cssVar.value};`);
     codes.push('');
     return codes.join('\n');
   });
@@ -86,9 +86,10 @@ export default {
 const REACT_PREVIEW_CODE = `import createStoriesPreview from '@lcap/builder/input/react/stories-preview';
 import * as stories from '../stories/block.stories';
 
-export default createStoriesPreview(stories);`;
+export default createStoriesPreview(stories);
+`;
 
-async function generateThemePrevieFile(context: OverloadComponentContext, themeFolder: string) {
+async function generateThemePreviewFile(context: OverloadComponentContext, themeFolder: string) {
   if (context.framework.startsWith('vue')) {
     fs.writeFileSync(path.resolve(themeFolder, 'index.vue'), VUE_PREVIEW_CODE, 'utf-8');
     return;
@@ -137,7 +138,7 @@ export const Components = {
 };
 `;
 async function generateThemeStories(context: OverloadComponentContext) {
-  const storiesPath = path.resolve(process.cwd(), './src/theme.stories.js');
+  const storiesPath = path.resolve(context.rootPath, './src/theme.stories.js');
   if (fs.existsSync(storiesPath)) {
     return;
   }
@@ -155,7 +156,7 @@ export async function generateThemeFile(context: OverloadComponentContext) {
 
   await generateThemeVarsFile(context, themeFolder);
   if (fs.existsSync(path.resolve(themeFolder, 'vars.css'))) {
-    await generateThemePrevieFile(context, themeFolder);
+    await generateThemePreviewFile(context, themeFolder);
     await generateThemeStories(context);
   }
 }

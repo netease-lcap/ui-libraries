@@ -109,7 +109,7 @@ function getBlockInfos(code, context: OverloadComponentContext) {
         }
       } else if (
         waitImports.indexOf(tagName) === -1
-        && context.naslConfigList.findIndex((nl) => nl.name === tagName || (nl.children && nl.children.find((child) => child.name === tagName))) !== -1
+        && context.findNaslUIConfig(tagName)
       ) {
         waitImports.push(tagName);
       }
