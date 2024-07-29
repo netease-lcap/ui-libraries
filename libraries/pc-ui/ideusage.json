@@ -323,7 +323,8 @@
         "ideusage": {
             "idetype": "element",
             "editable": "text",
-            "textholder": "text"
+            "textholder": "text",
+            "useFxOrEg": "text"
         }
     },
     {
@@ -331,7 +332,8 @@
         "ideusage": {
             "idetype": "element",
             "editable": "text",
-            "textholder": "text"
+            "textholder": "text",
+            "useFxOrEg": "text"
         }
     },
     {
@@ -339,7 +341,8 @@
         "ideusage": {
             "idetype": "element",
             "editable": "text",
-            "textholder": "text"
+            "textholder": "text",
+            "useFxOrEg": "text"
         }
     },
     {
@@ -428,7 +431,8 @@
             "disableSlotAutoFill": [{
                 "slot": "title",
                 "expression": "this.getAttribute('title')"
-            }]
+            }],
+            "useFxOrEg": "title"
         }
     },
     {
@@ -442,7 +446,8 @@
             "elementSutando": {
                 "condition": "this.getAttribute('src').type === 'dynamic'",
                 "component": "UImageDesigner"
-            }
+            },
+            "useFxOrEg": "src"
         }
     },
     {
@@ -669,7 +674,6 @@
             "structured": true,
             "parentAccept": "['u-form'].includes(target.tag)",
             "childAccept": "['u-form-item'].includes(target.tag)",
-            "parentAccept": "['u-form'].includes(target.tag)",
             "events": {
                 "click": true
             }
@@ -678,7 +682,8 @@
     {
         "name": "UInput",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "textholder": "value"
         }
     },
     {
