@@ -371,6 +371,7 @@ export default {
       // @inherit: currentLoading: false,
       currentText: '', // 显示文本
       filterText: '', // 过滤文本，只有 input 时会改变它
+      filterInputFocused: false,
       preventBlur: false,
       inputWidth: 20,
       popperOpened: false,
@@ -490,9 +491,9 @@ export default {
         return;
       }
       if (this.filterable) {
-        if (this.selectedVM) {
+        if (this.selectedVM && !this.filterInputFocused) {
           this.filterText = this.selectedVM.currentText;
-        } else if (!this.value) {
+        } else if (!this.value && !this.filterInputFocused) {
           // 响应this.value 的变化 = '' 时处理 清空
           this.filterText = '';
         }
@@ -804,7 +805,10 @@ export default {
       this.$emit('focus', e, this);
     },
     onInput(value) {
-      if (!this.filterable) return;
+      if (!this.filterable) {
+        return;
+      }
+      this.filterInputFocused = true;
       this.currentText = value; // value.split(',')
       if (this.$emitPrevent('before-filter', { filterText: value }, this))
         return;
@@ -814,7 +818,11 @@ export default {
       this.hasFilter = true; // 控制blur时是否重置列表，避免每次blur都重置
     },
     onBlur(e) {
-      if (!this.filterable) return; // 这边必须要用 setTimeout，$nextTick 也不行，需要保证在 @select 之后完成
+      this.filterInputFocused = false;
+      if (!this.filterable) {
+        return; // 这边必须要用 setTimeout，$nextTick 也不行，需要保证在 @select 之后完成
+      }
+
       this.inputBlurTimer = setTimeout(() => {
         if (this.preventBlur) return (this.preventBlur = false);
         this.selectByText(this.filterText);
