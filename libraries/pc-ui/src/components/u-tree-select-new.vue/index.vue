@@ -133,6 +133,7 @@
 
 <script>
 import { sync } from '@lcap/vue2-utils';
+import _ from 'lodash'
 import MField from '../m-field.vue';
 // import UTreeViewNodeNew from '../u-tree-view-new.vue/node.vue';
 import SEmpty from '../s-empty.vue';
@@ -262,8 +263,10 @@ export default {
             }
         },
         finalFilterFields() {
-          this.textField && this.filterFields.push(this.textField)
-          return [...new Set(this.filterFields)]
+          if (this.textField) {
+            this.filterFields.push(this.textField)
+          }
+          return _.uniq(this.filterFields)
         }
     },
     watch: {

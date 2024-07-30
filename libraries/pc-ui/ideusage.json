@@ -1114,6 +1114,32 @@
         }
     },
     {
+        "name": "UProcessButton",
+        "ideusage": {
+            "idetype": "element",
+            "elementSutando": {
+                "condition": true,
+                "component": "UProcessButton"
+            },
+            "additionalAttribute": {
+                ":showInDesigner": true
+            }
+        }
+    },
+    {
+        "name": "UProcessInfo",
+        "ideusage": {
+            "idetype": "element",
+            "elementSutando": {
+                "condition": true,
+                "component": "UProcessInfo"
+            },
+            "additionalAttribute": {
+                ":showInDesigner": true
+            }
+        }
+    },
+    {
         "name": "EWatermark",
         "ideusage": {
             "idetype": "element"
