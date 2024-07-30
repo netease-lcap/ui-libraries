@@ -47,7 +47,7 @@
                                                 v-if="!(columnVM.$slots && columnVM.$slots.title)
                                                     && !columnVM.title
                                                     && $env.VUE_APP_DESIGNER
-                                                    && !!$attrs['vusion-node-path']">
+                                                    && !!(columnVM.$attrs && columnVM.$attrs['vusion-node-path'])">
                                             </s-empty>
                                         </f-slot>
                                     </span>

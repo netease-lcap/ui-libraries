@@ -109,6 +109,7 @@
 
                                             :disabled="item.disabled || disabled"
                                             :ellipsis="ellipsis"
+                                            :readonly="readonly"
 
                                             :treeDisplay="treeDisplay"
                                             :hasChildrenField="hasChildrenField"
@@ -117,6 +118,8 @@
                                             :selectedItem="selectedItem"
 
                                             :handlerDraggable="handlerDraggable"
+
+                                            :usePagination="usePagination"
 
                                             @check="check($event.item, $event.checked)"
                                             @tree-toggle-expanded="toggleTreeExpanded"
