@@ -360,7 +360,9 @@
     {
         "name": "ULabel",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "textholder": "text",
+            "useFxOrEg": "text"
         }
     },
     {
@@ -1080,6 +1082,7 @@
             },
             "cacheOpenKey": "visible",
             "additionalAttribute": {
+                ":mode": "\"false\"",
                 ":disableRootElemShift": "\"true\"" 
             }
         }
@@ -1094,6 +1097,7 @@
             },
             "cacheOpenKey": "visible",
             "additionalAttribute": {
+                ":mode": "\"false\"",
                 ":disableRootElemShift": "\"true\"" 
             }
         }
