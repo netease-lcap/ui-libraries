@@ -360,6 +360,8 @@
     {
         "name": "ULabel",
         "ideusage": {
+            "textholder": "text",
+            "useFxOrEg": "text",
             "idetype": "element"
         }
     },
@@ -1080,7 +1082,7 @@
             },
             "cacheOpenKey": "visible",
             "additionalAttribute": {
-                ":disableRootElemShift": "\"true\"" 
+                ":disableRootElemShift": "\"true\""
             }
         }
     },
@@ -1094,7 +1096,7 @@
             },
             "cacheOpenKey": "visible",
             "additionalAttribute": {
-                ":disableRootElemShift": "\"true\"" 
+                ":disableRootElemShift": "\"true\""
             }
         }
     },
@@ -1102,6 +1104,8 @@
         "name": "UToastSingle",
         "ideusage": {
             "idetype": "messager",
+            "textholder": "text",
+            "useFxOrEg": "text",
             "elementSutando": {
                 "condition": true,
                 "component": "UToastDesigner",
@@ -1142,6 +1146,8 @@
     {
         "name": "EWatermark",
         "ideusage": {
+            "textholder": "text",
+            "useFxOrEg": "text",
             "idetype": "element"
         }
     },
