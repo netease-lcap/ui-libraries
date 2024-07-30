@@ -169,6 +169,8 @@
 
         :rootWidth="rootWidth"
 
+        :usePagination="usePagination"
+
         @resize="onResizerDragEnd">
     </u-table-render>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
