@@ -290,7 +290,9 @@
     "name": "Button",
     "ideusage": {
       "idetype": "element",
-      "editable": "children"
+      "editable": "children",
+      "textholder": "children",
+      "useFxOrEg": "children"
     }
   },
   {
@@ -769,6 +771,7 @@
       "idetype": "element",
       "editable": "children",
       "textholder": "children",
+      "useFxOrEg": "children",
       "forceUpdateWhenAttributeChange": true
     }
   },
@@ -777,7 +780,8 @@
     "ideusage": {
       "idetype": "element",
       "editable": "children",
-      "textholder": "children"
+      "textholder": "children",
+      "useFxOrEg": "children"
     }
   },
   {
