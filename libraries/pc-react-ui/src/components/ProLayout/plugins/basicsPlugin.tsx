@@ -96,7 +96,7 @@ export function useHandleMenuSlot(props) {
         const label = child.props.labelIsSlot ? child.props.labelSlot : child.props.label;
         const destination = child.props?.destination;
         return {
-          key: destination ?? child.props?.path,
+          key: child.props?.path,
           ...child.props,
           ...childrenProps,
           ...icon,
@@ -111,8 +111,8 @@ export function useHandleMenuSlot(props) {
             }
             timeer = setTimeout(() => {
               // console.log(arg.key, '===', arg.item.props.path);
-              if (arg.key !== arg.item.props.path) { // 唯一标识不跳转
-                handleLink(arg.key, arg.item.props?.target);
+              if (arg.item.props.destination) { // 唯一标识不跳转
+                handleLink(arg.item.props.destination, arg.item.props?.target);
               }
             }, 150);
           }),
