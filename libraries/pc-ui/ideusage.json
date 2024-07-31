@@ -819,6 +819,9 @@
             },
             "slotWrapperInlineStyle": {
                 "file-list": "display:flex"
+            },
+            "displaySlotConditions": {
+                "dragDescription": false
             }
         }
     },
