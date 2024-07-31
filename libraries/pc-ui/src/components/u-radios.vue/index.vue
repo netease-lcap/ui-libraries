@@ -181,8 +181,12 @@ export default {
 }
 
 .root[direction="vertical"] {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1;
+}
+
+.root[direction] {
+    row-gap: var(--radio-space-y);
 }
 
 .root[isSetColumn=true] > label, .root[direction="vertical"] > label {
