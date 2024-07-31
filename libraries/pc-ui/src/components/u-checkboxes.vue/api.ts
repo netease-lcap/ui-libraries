@@ -279,19 +279,20 @@ namespace nasl.ui {
         slotDefault: () => Array<UCheckbox<T, V>>;
 
         @Slot({
-            title: 'undefined',
+            
+            title: '全选/反选文本',
             description: '全选/反选',
-            snippets: [
-                {
-                    title: '全选/反选文本',
-                    code: "<u-text text='全选'></u-text>",
-                },
-            ],
+            // snippets: [
+            //     {
+            //         title: '全选/反选文本',
+            //         code: "<u-text text='全选'></u-text>",
+            //     },
+            // ],
         })
         slotCheckAll: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '自定义选项',
             description: '自定义选项的结构和样式',
         })
         slotItem: (current: Current<T>) => Array<ViewComponent>;

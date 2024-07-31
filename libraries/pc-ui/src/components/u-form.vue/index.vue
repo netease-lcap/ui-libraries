@@ -164,6 +164,8 @@ export default {
     height: 0;
     visibility: hidden;
 }
+
+.root[layout="inline"] .item[layout="block"],
 .root[layout="inline"] .item[layout="center"],
 .root[layout="inline"] .item[layout="end"] {
     display: inline-flex;

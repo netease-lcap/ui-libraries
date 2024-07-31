@@ -20,6 +20,7 @@ import ExamplesDemo16 from '../demos/examples/ExamplesDemo16.vue';
 import ExamplesDemo17 from '../demos/examples/ExamplesDemo17.vue';
 import ExamplesDemo18 from '../demos/examples/ExamplesDemo18.vue';
 import ExamplesDemo19 from '../demos/examples/ExamplesDemo19.vue';
+import ExamplesDemo20 from '../demos/examples/ExamplesDemo20.vue';
 
 Vue.use(CloudUI);
 
@@ -203,6 +204,15 @@ export const Demo18 = {
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo19,
+    },
+    template: '<deprecated-demo />',
+  }),
+};
+
+export const Demo19 = {
+  render: () => ({
+    components: {
+      DeprecatedDemo: ExamplesDemo20,
     },
     template: '<deprecated-demo />',
   }),

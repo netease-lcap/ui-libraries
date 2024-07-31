@@ -677,6 +677,17 @@ namespace nasl.ui {
         })
         disabled: nasl.core.Boolean = false;
 
+
+        @Prop({
+            group: '主要属性',
+            title: '图标',
+            docDescription: '支持从图标库选择图标或上传自定义图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        icon: nasl.core.String = '';
+
         @Slot({
             title: '默认',
             description: '插入`<u-sidebar-item>`或`<u-sidebar-divider>`子组件。',
@@ -698,7 +709,7 @@ namespace nasl.ui {
         slotDefault: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '标题',
             description: '自定义标题文本。',
         })
         slotTitle: () => Array<ViewComponent>;

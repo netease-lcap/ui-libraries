@@ -1,5 +1,5 @@
 <template>
-<div :class="[$style.root, rootVM.currentCollapse && !isInSidebar ? $style.popRoot : $style.normalRoot]" :disabled="disabled" :mini="miniMode" ref="root" :noIcon="!icon">
+<div :class="[$style.root, rootVM.currentCollapse && !isInSidebar ? $style.popRoot : $style.normalRoot, hasIconPadding ? $style.hasIconPadding : '']" :disabled="disabled" :mini="miniMode" ref="root" :noIcon="!icon">
     <div :class="$style.head" :selected="selected" @click="rootVM.expandTrigger === 'click' && !rootVM.currentCollapse && toggle()" :title="title" :data-group-nested-level="currentGroupNestedLevel" :vusion-click-enabled="rootVM.currentCollapse">
         <i-ico
             v-if="icon"
@@ -43,7 +43,7 @@
             <u-sidebar-item
                 :text="title"
                 disabled
-                style="color: #999999;"
+                style="color: #999999;padding-left: 12px;"
                 >
                 <template #title>
                     <slot name="title">
@@ -93,6 +93,7 @@
                     :disabled="childNode.disabled"
                     :collapsible="$at2(childNode, rootVM.collapsibleField)"
                     :title="$at2(childNode, rootVM.textField)"
+                    :icon="$at2(childNode, rootVM.iconField)"
                 ></u-sidebar-group>
                 <u-sidebar-item v-else
                     :key="`${$at2(childNode, rootVM.valueField) || idx}`"
@@ -197,6 +198,19 @@ export default {
             return this.parentVM.$options.name === this.$options.parentName;
         },
 
+        hasIconPadding() {
+          if (this.parentVM.$options.name !== this.$options.name) {
+            return;
+          }
+
+          const { childrenNodes = [], itemVMs = [] } = this.parentVM;
+
+          return !this.icon && (
+            childrenNodes.find((childNode) => !!this.$at2(childNode, this.rootVM.iconField))
+            || itemVMs.find((it) => !!it.icon)
+          );
+        },
+
         miniMode() {
             return this.isInSidebar && this.rootVM.currentCollapse;
         },
@@ -294,6 +308,10 @@ export default {
     line-height: 32px;
     padding: 0 32px 0 12px;
     font-size: 14px;
+}
+
+.popRoot.hasIconPadding {
+  padding-left: calc(var(--sidebar-item-icon-font-size) + 20px);
 }
 
 .head {

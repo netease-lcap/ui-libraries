@@ -62,6 +62,7 @@
                 :hidden="rootVM.filterText ? $at(subNode, 'hiddenByFilter') : $at(subNode, rootVM.hiddenField)"
                 :node="subNode"
                 :nodeKey="`${nodeKey}-${subNodeIndex}`"
+                :key="$at2(subNode, rootVM.valueField) || `tree_sub_node_${subNodeIndex}`"
                 :parent="node"
                 :level="level + 1"
                 :draggable="subNode.draggable"
@@ -85,6 +86,7 @@
                     :hidden="rootVM.filterText ? $at(subNode, 'hiddenByFilter') : $at(subNode, rootVM.hiddenField)"
                     :node="subNode"
                     :nodeKey="`${nodeKey}-${subNodeIndex}`"
+                    :key="$at2(subNode, rootVM.valueField) || `tree_sub_node_${subNodeIndex}`"
                     :parent="node"
                     :level="level + 1"
                     :draggable="subNode.draggable"
@@ -562,7 +564,7 @@ export default {
             }
             dfs(node, null, currentFields);
 
-            if (node.expandedByFilter)
+            if (node && node.expandedByFilter)
                 this.currentExpanded = node.expandedByFilter;
         },
         onDragStart(e) {

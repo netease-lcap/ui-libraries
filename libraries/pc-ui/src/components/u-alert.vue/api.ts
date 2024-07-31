@@ -91,7 +91,7 @@ namespace nasl.ui {
         slotDefault: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '标题',
             description: '标题',
         })
         slotTitle: () => Array<ViewComponent>;

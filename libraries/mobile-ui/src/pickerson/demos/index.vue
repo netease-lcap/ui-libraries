@@ -45,6 +45,27 @@
       </van-pickerson>
     </demo-block>
 
+    <demo-block card title="转换器-join:|">
+      <van-pickerson
+        :ref="`pickerson3`"
+        title="标题"
+        :show-toolbar="true"
+        :data-source="list"
+        :value.sync="pickerVal"
+        :pageable="true"
+        :pageSize="10"
+        :multiple="true"
+        :converter="'join:|'"
+        type="list"
+        :enable-select-all="true"
+        :enable-selected-count="true">
+          <template #title>
+                <van-text :ref="`text10`" text="标题"></van-text>
+          </template>
+      </van-pickerson>
+      <div>picked value is: {{ pickerVal }}</div>
+    </demo-block>
+
     <demo-block card title="只读">
       <van-pickerson
         title="标题"
@@ -107,7 +128,7 @@
           </template>
       </van-pickerson>
     </demo-block>
-  </demo-section>
+  </demo-section> 
 </template>
 
 <script>
@@ -150,6 +171,7 @@ export default {
       pupupd: true,
       list: data,
       pickerValue: ['32001111100'],
+      pickerVal: []
     };
   },
 

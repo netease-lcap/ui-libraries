@@ -9,6 +9,7 @@
             :text="$at2(node, field || textField)"
             :value="$at2(node, valueField)"
             :expanded="$at(node, expandedField)"
+            :key="$at2(node, valueField) || `tree_node_${index}`"
             :checked.sync="node.checked"
             :disabled="$at2(node, disabledField)"
             :children-field="childrenField"

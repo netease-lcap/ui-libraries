@@ -73,7 +73,7 @@
                 </f-scroll-view>
             </div>
         </template>
-        <span v-show="$env.VUE_APP_DESIGNER && listType === 'text' && !isPreview" vusion-slot-name="file-list">
+        <span v-show="(showInDesigner || $env.VUE_APP_DESIGNER) && listType === 'text' && !isPreview" vusion-slot-name="file-list">
             <slot name="file-list" ref="file-list"></slot>
         </span>
     </div>
@@ -181,6 +181,7 @@ export default {
         downloadIconSwitcher: { type: Boolean, default: true },
         fileSize: { type: Boolean, default: true },
         preview: { type: Boolean, default: false },
+        showInDesigner: { type: Boolean, default: false }
     },
     data() {
         return {
