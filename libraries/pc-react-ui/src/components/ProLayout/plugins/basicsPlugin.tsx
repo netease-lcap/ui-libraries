@@ -94,7 +94,6 @@ export function useHandleMenuSlot(props) {
         const onClickPorps = child.props.onClick;
         const icon = _.isNil(child.props.icon) ? {} : { icon: <Icon name={child.props.icon} /> };
         const label = child.props.labelIsSlot ? child.props.labelSlot : child.props.label;
-        console.log(child.props, 'props');
         const destination = child.props?.destination;
         return {
           key: destination ?? child.props?.path,
