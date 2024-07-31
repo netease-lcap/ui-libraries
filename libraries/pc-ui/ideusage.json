@@ -301,7 +301,11 @@
             },
             "slotWrapperInlineStyle": {
                 "title": "display:inline-block"
-            }
+            },
+            "disableSlotAutoFill": [{
+                "slot": "extra",
+                "expression": "!this.getParent().getAttribute('showExtraEmptySlot')?.value"
+            }]
         }
     },
     {
@@ -690,7 +694,10 @@
         "name": "UNumberInput",
         "ideusage": {
             "idetype": "element",
-            "textholder": "value"
+            "textholder": "value",
+            "additionalAttribute": {
+                ":value": null
+            }
         }
     },
     {
