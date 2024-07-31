@@ -3185,7 +3185,16 @@
             "type": "input",
             "group": "间距",
             "prefix": "radio",
-            "desc": "单选项之间的间距,如 1px",
+            "desc": "单选项之间的水平间距,如 1px",
+            "excludeTags": [
+              "u-radio"
+            ]
+          },
+          "--radio-space-y": {
+            "type": "input",
+            "group": "间距",
+            "prefix": "radio",
+            "desc": "单选项之间的垂直间距,如 1px",
             "excludeTags": [
               "u-radio"
             ]
