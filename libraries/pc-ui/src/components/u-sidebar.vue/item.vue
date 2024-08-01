@@ -11,7 +11,7 @@
         ref="root"
         >
         <i-ico v-if="icon" :name="icon" :class="$style.singleicon" notext></i-ico>
-        <span v-show="!hiddenText">
+        <span :class="$style.content" v-show="!hiddenText">
             <slot>{{ text }}</slot>
         </span>
         <s-empty
@@ -138,9 +138,9 @@ export default {
     border-bottom: var(--sidebar-item-border-bottom-width) solid var(--sidebar-item-border-bottom-color);
 }
 
-.normalRoot[mini][noIcon] {
+/* .normalRoot[mini][noIcon] {
     padding-left: calc(var(--sidebar-item-padding-left) - 12px);
-}
+} */
 
 .popRoot{
     display: block;
@@ -187,8 +187,24 @@ export default {
     margin-left: -24px;
 }
 
-.normalRoot[mini] .singleicon {
+/* .normalRoot[mini] .singleicon {
     margin-left: -12px;
+} */
+
+.normalRoot[mini] {
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.normalRoot[mini] .singleicon {
+  margin: 0;
+}
+
+.normalRoot[mini] > .content > *:not([class^="i-ico"]) {
+  display: none;
 }
 
 .root .singleicon {

@@ -1,6 +1,6 @@
 <template>
     <nav :class="$style.root" :readonly="readonly" :disabled="disabled" :style="dynamicStyle" @transitionend="handleTranstitionEnd" :collapse="currentCollapse">
-        <f-scroll-view :class="$style.content">
+        <f-scroll-view native :class="$style.content">
             <template v-if="currentDataSource&&currentDataSource.data&&Array.isArray(currentDataSource.data)">
                 <template v-for="(node,idx) in currentDataSource.data">
                     <u-sidebar-group
@@ -377,7 +377,7 @@ export default {
     border-right: 1px solid #E9E9EB;
     background: var(--sidebar-background);
     height: 100%;
-    overflow: auto;
+    /* overflow: auto; */
     transition: all var(--transition-duration-base);
     position: relative;
 }
