@@ -193,8 +193,4 @@ export default {
     display: flex;
     align-items: center;
 }
-
-.root[direction="vertical"] > label {
-    margin-right: 0;
-}
 </style>
