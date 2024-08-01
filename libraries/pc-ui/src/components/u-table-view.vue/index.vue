@@ -159,6 +159,7 @@
                                                     columnItem: columnVM.columnItem,
                                                 }">
                                                 <u-table-view-expander
+                                                    v-if="!columnVM.$scopedSlots.expander"
                                                     :item="getRealItem(item, rowIndex + virtualIndex)"
                                                     @toggle="() => toggleExpanded(getRealItem(item, rowIndex + virtualIndex))">
                                                 </u-table-view-expander>
@@ -193,6 +194,7 @@
                                                     columnItem: columnVM.columnItem,
                                                 }">
                                                 <u-table-view-expander
+                                                    v-if="!columnVM.$scopedSlots.expander"
                                                     :item="getRealItem(item, rowIndex + virtualIndex)"
                                                     @toggle="() => toggleExpanded(getRealItem(item, rowIndex + virtualIndex))">
                                                 </u-table-view-expander>
@@ -252,6 +254,7 @@
                                                     toggle: () => toggleExpanded(getRealItem(item, rowIndex + virtualIndex))
                                                 }">
                                                 <u-table-view-expander
+                                                    v-if="!columnVM.$scopedSlots.expander"
                                                     :item="getRealItem(item, rowIndex + virtualIndex)"
                                                     @toggle="() => toggleExpanded(getRealItem(item, rowIndex + virtualIndex))">
                                                 </u-table-view-expander>
@@ -307,6 +310,7 @@
                                                     toggle: () => toggleExpanded(getRealItem(item, rowIndex + virtualIndex))
                                                 }">
                                                 <u-table-view-expander
+                                                    v-if="!columnVM.$scopedSlots.expander"
                                                     :item="getRealItem(item, rowIndex + virtualIndex)"
                                                     @toggle="() => toggleExpanded(getRealItem(item, rowIndex + virtualIndex))">
                                                 </u-table-view-expander>
