@@ -13,6 +13,12 @@ namespace nasl.ui {
         })
         data: nasl.collection.List<T>;
 
+        @Method({
+            title: 'undefined',
+            description: '清除缓存，重新加载',
+        })
+        reload(): void {}
+
         constructor(options?: Partial<UListComponentsOptions<T>>) { super(); }
     }
 
