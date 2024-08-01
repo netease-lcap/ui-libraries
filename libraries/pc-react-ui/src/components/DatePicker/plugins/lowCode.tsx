@@ -14,14 +14,14 @@ export function useHandleNodePath(props) {
   const id = _.uniqueId('contact_');
   const nodePath = props.get('data-nodepath');
   React.useEffect(() => {
-    const datePicker = document.querySelector(`[data-node-id=${id}]`)?.closest(`.${prefixCls}-form-item-row`);
+    const datePicker = document.querySelector(`[data-node-id=${id}]`);
     const dataPickerItem = datePicker?.closest(`.${prefixCls}-form-item-row`);
     if (isForm) {
-      datePicker?.setAttribute('data-tag-name', 'FormDatePicker');
-      datePicker?.setAttribute('data-has-mutation', 'true');
+      dataPickerItem?.setAttribute('data-tag-name', 'FormDatePicker');
+      dataPickerItem?.setAttribute('data-has-mutation', 'true');
       dataPickerItem?.setAttribute('data-nodepath', nodePath);
     } else {
-      datePicker?.setAttribute('data-nodepath', nodePath);
+      datePicker?.closest(`${prefixCls}-picker`)?.setAttribute('data-nodepath', nodePath);
     }
   }, [id, isForm, nodePath, prefixCls]);
   return {
