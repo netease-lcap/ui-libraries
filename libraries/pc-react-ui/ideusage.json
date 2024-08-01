@@ -124,6 +124,7 @@
     "ideusage": {
       "idetype": "element",
       "textholder": "value",
+      "useFxOrEg": "value",
       "mutations": ["FormInput"]
     }
   },
@@ -144,6 +145,8 @@
     "name": "TextArea",
     "ideusage": {
       "idetype": "element",
+      "textholder": "value",
+      "useFxOrEg": "value",
       "mutations": ["FormTextArea"]
     }
   },

@@ -364,9 +364,9 @@
     {
         "name": "ULabel",
         "ideusage": {
-            "idetype": "element",
             "textholder": "text",
-            "useFxOrEg": "text"
+            "useFxOrEg": "text",
+            "idetype": "element"
         }
     },
     {
@@ -1116,6 +1116,8 @@
         "name": "UToastSingle",
         "ideusage": {
             "idetype": "messager",
+            "textholder": "text",
+            "useFxOrEg": "text",
             "elementSutando": {
                 "condition": true,
                 "component": "UToastDesigner",
@@ -1156,6 +1158,8 @@
     {
         "name": "EWatermark",
         "ideusage": {
+            "textholder": "text",
+            "useFxOrEg": "text",
             "idetype": "element"
         }
     },
