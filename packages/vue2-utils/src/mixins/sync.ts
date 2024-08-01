@@ -89,8 +89,9 @@ export default (...options: SyncOption[]) => {
           return;
         }
 
-        const filterKeys = ['size', 'page', 'sort', 'order', 'filterText', 'noTextValues'];
-        Object.keys(params).forEach((key) => filterKeys.includes(key) && this.$emit('sync:state', key, params[key]));
+        ['size', 'page', 'sort', 'order', 'filterText'].forEach((key) => {
+          this.$emit('sync:state', key, params[key]);
+        });
       },
     },
     watch: {

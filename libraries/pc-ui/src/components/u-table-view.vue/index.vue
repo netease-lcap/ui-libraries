@@ -170,6 +170,7 @@
         :rootWidth="rootWidth"
 
         :rowStyle="rowStyle"
+        :usePagination="usePagination"
 
         @resize="onResizerDragEnd">
     </u-table-render>

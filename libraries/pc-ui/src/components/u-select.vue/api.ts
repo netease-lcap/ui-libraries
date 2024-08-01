@@ -44,11 +44,6 @@ namespace nasl.ui {
         filterText: nasl.core.String;
 
         @Prop({
-            title: '没有文本信息的值',
-        })
-        noTextValues: nasl.collection.List<nasl.core.String>;
-
-        @Prop({
           title: '禁用',
         })
         disabled: nasl.core.Boolean;

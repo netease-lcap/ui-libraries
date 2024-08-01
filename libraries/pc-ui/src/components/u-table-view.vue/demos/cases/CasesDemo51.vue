@@ -47,6 +47,6 @@ export default {
             this.data[5].name = '张三-51';
             this.data = [...this.data];
         }
-    },  
+    },
 };
 </script>
