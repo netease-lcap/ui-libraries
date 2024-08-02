@@ -53,6 +53,8 @@
     "name": "InputNumber",
     "ideusage": {
       "idetype": "element",
+      "textholder": "value",
+      "useFxOrEg": "value",
       "mutations": ["FormInputNumber"]
     }
   },
@@ -734,6 +736,8 @@
     "ideusage": {
       "idetype": "container",
       "structured": true,
+      "textholder": "label",
+      "useFxOrEg": "label",
       "childAccept": "target.tag === 'MenuItem'",
       "parentAccept": "target.tag === 'Menu' || (target.tag === 'template' && ['menuSlot', 'menuItem'].includes(target.slotTarget) )",
       "displaySlotConditions": {
@@ -766,6 +770,15 @@
         "expression": "this.getElement(el => el.slotTarget === 'default' || !el.slotTarget)",
         "cssSelector": "div[class='cw-menu-submenu-popup']"
       }
+    }
+  },
+  {
+    "name": "Tag",
+    "ideusage": {
+      "textholder": "children",
+      "editable": "children",
+      "useFxOrEg": "children",
+      "idetype": "element"
     }
   },
   {

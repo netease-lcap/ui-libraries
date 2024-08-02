@@ -697,6 +697,7 @@
         "ideusage": {
             "idetype": "element",
             "textholder": "value",
+            "useFxOrEg": "value",
             "additionalAttribute": {
                 ":value": null
             }
@@ -705,7 +706,9 @@
     {
         "name": "UTextarea",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "textholder": "value",
+            "useFxOrEg": "value"
         }
     },
     {
@@ -1093,7 +1096,7 @@
             "cacheOpenKey": "visible",
             "additionalAttribute": {
                 ":mode": "\"false\"",
-                ":disableRootElemShift": "\"true\"" 
+                ":disableRootElemShift": "\"true\""
             }
         }
     },
@@ -1108,7 +1111,7 @@
             "cacheOpenKey": "visible",
             "additionalAttribute": {
                 ":mode": "\"false\"",
-                ":disableRootElemShift": "\"true\"" 
+                ":disableRootElemShift": "\"true\""
             }
         }
     },
