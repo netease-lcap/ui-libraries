@@ -531,7 +531,7 @@ export default {
              * @property {object} date 改变后的日期时间
              */
             this.emitChange(this.finalDateTime ? new Date(this.finalDateTime.replace(/-/g, '/')).getTime() : undefined); // 方便u-field组件捕获到其值
-            this.$emit('input', this.handel( newDateTime ));
+            this.$emit('input', this.handleEmptyValue( newDateTime ));
         },
         onPopperOpen() {
             if (!this.finalDateTime)
