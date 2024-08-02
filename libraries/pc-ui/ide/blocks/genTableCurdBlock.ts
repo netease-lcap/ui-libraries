@@ -68,11 +68,11 @@ export function genTableCurdBlock(entity: naslTypes.Entity, refElement: naslType
     let ${nameGroup.viewVariableInput}: ${entityFullName};
     let ${nameGroup.viewVariableFilter}: ${entityFullName};
     let ${nameGroup.viewVariableIsUpdate}: Boolean;
-    
+
     const $lifecycles = {
         onCreated: [
             function ${nameGroup.viewLogicInit}(event) {
-              nasl.util.Clear(${nameGroup.viewVariableFilter});
+              nasl.util.Clear(${nameGroup.viewVariableFilter},'shallow');
               return;
             },
         ]
