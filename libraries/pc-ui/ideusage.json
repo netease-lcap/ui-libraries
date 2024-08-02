@@ -116,7 +116,10 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "['u-sidebar-group', 'u-sidebar-item', 'u-sidebar-divider'].includes(target.tag)"
+            "childAccept": "['u-sidebar-group', 'u-sidebar-item', 'u-sidebar-divider'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -924,7 +927,8 @@
     {
         "name": "UPagination",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "childAccept": false
         }
     },
     {
