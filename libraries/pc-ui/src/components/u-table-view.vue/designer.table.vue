@@ -93,7 +93,7 @@
                     <tbody ref="virtual">
                         <template v-if="(!currentLoading && !currentError && !currentEmpty || pageable === 'auto-more' || pageable === 'load-more') && currentData && currentData.length">
                             <template v-for="(item, rowIndex) in virtualList">
-                                <tr :key="getKey(item, rowIndex)" :class="[$style.row, ($env.VUE_APP_DESIGNER && rowIndex !== 0) ? $designer.trmask : '']" :color="item.rowColor" :selected="selectable && selectedItem === item"
+                                <tr :key="getKey(item, rowIndex)" :class="[$style.row, ($env.VUE_APP_DESIGNER && rowIndex !== 0 && useMask) ? $designer.trmask : '']" :color="item.rowColor" :selected="selectable && selectedItem === item"
                                 v-if="item.display !== 'none'"
                                 :draggable="rowDraggable && item.draggable || undefined"
                                 :dragging="isDragging(item)"
