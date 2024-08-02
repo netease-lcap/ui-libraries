@@ -54,7 +54,7 @@
     "ideusage": {
       "idetype": "element",
       "textholder": "value",
-      "useFxOrEg": "value",
+      "useFxOrEg":{"property": "value","displayAsAttr":true},
       "mutations": ["FormInputNumber"]
     }
   },
@@ -126,7 +126,7 @@
     "ideusage": {
       "idetype": "element",
       "textholder": "value",
-      "useFxOrEg": "value",
+      "useFxOrEg":{"property": "value","displayAsAttr":true},
       "mutations": ["FormInput"]
     }
   },
@@ -148,7 +148,7 @@
     "ideusage": {
       "idetype": "element",
       "textholder": "value",
-      "useFxOrEg": "value",
+      "useFxOrEg":{"property": "value","displayAsAttr":true},
       "mutations": ["FormTextArea"]
     }
   },
@@ -297,7 +297,7 @@
       "idetype": "element",
       "editable": "children",
       "textholder": "children",
-      "useFxOrEg": "children"
+      "useFxOrEg":{"property": "children"}
     }
   },
   {
@@ -311,6 +311,8 @@
     "name": "Descriptions",
     "ideusage": {
       "idetype": "container",
+      "useFxOrEg":{"property": "title","displayAsAttr":true},
+      "textholder":"title",
       "structured": true,
       "childAccept": "target.tag === 'DescriptionsItem'"
     }
@@ -737,7 +739,7 @@
       "idetype": "container",
       "structured": true,
       "textholder": "label",
-      "useFxOrEg": "label",
+      "useFxOrEg":{"property": "label"},
       "childAccept": "target.tag === 'MenuItem'",
       "parentAccept": "target.tag === 'Menu' || (target.tag === 'template' && ['menuSlot', 'menuItem'].includes(target.slotTarget) )",
       "displaySlotConditions": {
@@ -777,7 +779,7 @@
     "ideusage": {
       "textholder": "children",
       "editable": "children",
-      "useFxOrEg": "children",
+      "useFxOrEg":{"property": "children"},
       "idetype": "element"
     }
   },
@@ -787,7 +789,7 @@
       "idetype": "element",
       "editable": "children",
       "textholder": "children",
-      "useFxOrEg": "children",
+      "useFxOrEg":{"property": "children"},
       "forceUpdateWhenAttributeChange": true
     }
   },
@@ -797,7 +799,7 @@
       "idetype": "element",
       "editable": "children",
       "textholder": "children",
-      "useFxOrEg": "children"
+      "useFxOrEg":{"property": "children"}
     }
   },
   {
