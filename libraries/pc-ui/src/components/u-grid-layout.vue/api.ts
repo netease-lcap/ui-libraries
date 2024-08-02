@@ -41,6 +41,7 @@ namespace nasl.ui {
         @Slot({
             title: 'undefined',
             description: '插入`<u-grid-layout-row>`或`<u-grid-layout-column>`子组件。',
+            emptyBackground: 'add-sub',
             snippets: [
                 {
                     title: '插入一行',
@@ -113,6 +114,7 @@ namespace nasl.ui {
         @Slot({
             title: 'undefined',
             description: '插入`<u-grid-layout-column>`子组件。',
+            emptyBackground: 'add-sub',
             snippets: [
                 {
                     title: '插入一列',
