@@ -114,6 +114,7 @@ export default {
         yearAdd: { type: [String, Number], default: 20 },
         converter: { type: String, default: 'json' },
         clearable: { type: Boolean, default: false },
+        emptyValueIsNull:{ type: Boolean, default: false },
         appendTo: {
             type: String,
             default: 'body',
@@ -200,7 +201,7 @@ export default {
             this.finalDateTime = this.dateTime;
             this.$emit(
                 'update',
-                this.dateTime,
+                this.handleEmptyValue(this.dateTime),
             );
         },
         value(newValue) {
@@ -208,7 +209,7 @@ export default {
             this.finalDateTime = this.dateTime;
             this.$emit(
                 'update',
-                this.dateTime,
+                this.handleEmptyValue(this.dateTime),
             );
         },
         dateTime(newValue) {
@@ -251,7 +252,7 @@ export default {
         // );
         this.$emit(
             'update',
-            this.dateTime || '',
+             this.handleEmptyValue(this.dateTime),
         );
         this.lastChangedValue = this.finalDateTime ? new Date(this.finalDateTime.replace(/-/g, '/')).getTime() : undefined;
     },
@@ -517,20 +518,20 @@ export default {
         emitChange(value) {
             if (this.lastChangedValue === value)
                 return;
-            this.$emit('change', { sender: this, date: value });
+            this.$emit('change', { sender: this, date: this.handleEmptyValue( value ) });
             this.lastChangedValue = value;
         },
         emitValue() {
             const newDateTime = this.finalDateTime ? this.toValue(new Date(this.finalDateTime.replace(/-/g, '/'))) : undefined;
-            this.$emit('update:value', newDateTime);
-            this.$emit('update:date', newDateTime);
+            this.$emit('update:value', this.handleEmptyValue( newDateTime ));
+            this.$emit('update:date', this.handleEmptyValue( newDateTime ));
             /**
              * @event change 日期时间改变时触发
              * @property {object} sender 事件发送对象
              * @property {object} date 改变后的日期时间
              */
             this.emitChange(this.finalDateTime ? new Date(this.finalDateTime.replace(/-/g, '/')).getTime() : undefined); // 方便u-field组件捕获到其值
-            this.$emit('input', newDateTime);
+            this.$emit('input', this.handel( newDateTime ));
         },
         onPopperOpen() {
             if (!this.finalDateTime)
@@ -570,6 +571,13 @@ export default {
             const reg = /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
             return reg.test(value);
         },
+        handleEmptyValue(value) {
+            if (!this.emptyValueIsNull) {
+                return value;
+            } else {
+              return value ? value : null;
+           }
+        }
     },
 };
 </script>

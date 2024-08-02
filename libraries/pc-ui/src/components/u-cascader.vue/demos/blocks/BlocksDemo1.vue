@@ -1,7 +1,7 @@
 <!-- 基本用法 -->
 
 <template>
-  <u-cascader :dataSource="[
+  <u-cascader :emptyValueIsNull="true" :dataSource="[
     { text: '理学', value: '理学', children: [
         { text: '物理学', value: '物理学', children: [
             { text: '理论物理', value: '理论物理' },

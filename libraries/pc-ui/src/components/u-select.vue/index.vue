@@ -166,7 +166,7 @@ export default {
         multipleAppearance: { type: String, default: 'tags' },
         tagsOverflow: { type: String, default: 'collapse' },
         autoSelect: { type: Boolean, default: false },
-        emptyValueIsNull:{ type: Boolean, default: true},
+        emptyValueIsNull:{ type: Boolean, default: false},
         placeholder: { type: String, default: '请选择' },
         clearable: { type: Boolean, default: false },
         filterable: { type: Boolean, default: false },
@@ -625,7 +625,7 @@ export default {
         })
         .catch(() => (this.currentLoading = false)); // });
     },
-    onFocus() {
+    onFocus(e) {
         this.$emit('focus', e, this);
     },
     onInput(value) {

@@ -65,7 +65,7 @@ export default {
         value: [String, Number],
         color: String,
         placeholder: String,
-        emptyValueIsNull:{ type: Boolean, default: true},
+        emptyValueIsNull:{ type: Boolean, default: false},
         clearable: { type: Boolean, default: false },
         autofocus: { type: [Boolean, String], default: false },
         readonly: { type: Boolean, default: false },

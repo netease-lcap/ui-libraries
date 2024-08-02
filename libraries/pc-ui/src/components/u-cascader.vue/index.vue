@@ -63,6 +63,7 @@ export default {
         placeholder: { type: String, default: '请选择' },
         field: { type: String, default: 'text' },
         trigger: { type: String, default: 'click' },
+        emptyValueIsNull:{ type: Boolean, default: false },
         join: { type: String, default: ' / ' },
         filterable: { type: Boolean, default: false },
         clearable: { type: Boolean, default: false },
@@ -139,7 +140,7 @@ export default {
                 this.lastValueString = '';
                 this.lastRealValueArray = [];
                 this.selectSubIdnex = -1;
-                this.currentValue = '';
+                this.currentValue = this.handleEmptyValue('');
                 return;
             }
             if (!this.converter) {
@@ -473,12 +474,11 @@ export default {
             if (this.readonly || this.disabled || this.isPreview) {
                 return;
             }
-            this.currentValue = '';
+            this.currentValue = this.handleEmptyValue('');
             this.lastValueString = '';
             this.lastRealValueArray = [];
             this.selectSubIdnex = -1;
             this.close();
-
             this.$emit('clear', ...args);
         },
         resetInput() {
@@ -498,6 +498,13 @@ export default {
         blur(...args) {
             this.$emit('blur', ...args);
         },
+        handleEmptyValue(value) {
+            if (!this.emptyValueIsNull) {
+                return value;
+            } else {
+              return value ? value : null;
+           }
+        }
     },
 };
 </script>

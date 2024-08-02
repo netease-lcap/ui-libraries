@@ -86,7 +86,7 @@ namespace nasl.ui {
                 concept: 'SwitchSetter',
             },
         })
-        emptyValueIsNull: nasl.core.Boolean = true;
+        emptyValueIsNull: nasl.core.Boolean ;
 
         @Prop({
             group: '主要属性',
