@@ -584,7 +584,21 @@
             "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
             "additionalAttribute": {
                 ":dataSource": "\"[{}]\""
-            }
+            },
+            "selector": [
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'title')",
+                    "cssSelector": "th"
+                },
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'cell')",
+                    "cssSelector": "td"
+                },
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'expand-content')",
+                    "cssSelector": "tr[class^='u-table-view_expand-content']"
+                }
+            ]
         }
     },
     {
