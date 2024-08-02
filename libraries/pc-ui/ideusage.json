@@ -116,7 +116,10 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "['u-sidebar-group', 'u-sidebar-item', 'u-sidebar-divider'].includes(target.tag)"
+            "childAccept": "['u-sidebar-group', 'u-sidebar-item', 'u-sidebar-divider'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -522,10 +525,15 @@
                 "useRef": "argus?.[0]?.index === 0"
             },
             "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic', 'u-table-view-column-group'].includes(target.tag)",
-            "disableSlotAutoFill": [{
-                "slot": "config-columns",
-                "expression": "!this.getAttribute('configurable')?.value"
-            }]
+            "disableSlotAutoFill": [
+                {
+                    "slot": "config-columns",
+                    "expression": "!this.getAttribute('configurable')?.value"
+                }
+            ],
+            "additionalAttribute": {
+                ":useMask": false
+            }
         }
     },
     {
@@ -927,7 +935,8 @@
     {
         "name": "UPagination",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "childAccept": false
         }
     },
     {

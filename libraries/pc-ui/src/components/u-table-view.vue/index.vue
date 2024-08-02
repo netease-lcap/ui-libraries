@@ -66,7 +66,9 @@
         :readonly="readonly"
 
         :showHead="showHead"
-        :rootWidth="rootWidth">
+        :rootWidth="rootWidth"
+        
+        :useMask="useMask">
     </u-table-designer>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
@@ -366,6 +368,8 @@ export default {
         ellipsis: { type: Boolean, default: false }, // 单元格是否缩略展示
 
         rowStyle: Function, // 设置行背景色
+
+        useMask: { type: Boolean, default: true },
     },
     data() {
         return {
