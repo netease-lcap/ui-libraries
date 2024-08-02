@@ -93,7 +93,7 @@
                     <tbody ref="virtual">
                         <template v-if="(!currentLoading && !currentError && !currentEmpty || pageable === 'auto-more' || pageable === 'load-more') && currentData && currentData.length">
                             <template v-for="(item, rowIndex) in virtualList">
-                                <tr :key="getKey(item, rowIndex)" :class="[$style.row, ($env.VUE_APP_DESIGNER && rowIndex !== 0 && useMask) ? $designer.trmask : '']" :color="item.rowColor" :selected="selectable && selectedItem === item"
+                                <tr :key="getKey(item, rowIndex)" :class="[$style.row]" :color="item.rowColor" :selected="selectable && selectedItem === item"
                                 v-if="item.display !== 'none'"
                                 :draggable="rowDraggable && item.draggable || undefined"
                                 :dragging="isDragging(item)"
@@ -120,6 +120,7 @@
                                         :first-right-fixed="isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs)"
                                         :shadow="(isLastLeftFixed(columnVM, columnIndex, visibleColumnVMs)) || (isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs))"
                                         :disabled="columnVM.currentHidden">
+                                        <div :class="$designer.tdmask" v-if="useMask && rowIndex !== 0"></div>
                                         <!--可视化占据的虚拟填充区域-->
                                         <div vusion-slot-name="cell" :plus-empty="typeCheck(columnVM.type) ? false : columnVM.$attrs['plus-empty']">
                                             <!-- type === 'index' -->
@@ -300,7 +301,7 @@ export default {
 </script>
 
 <style module="$designer">
-.trmask {
+.tdmask {
     position: absolute;
     top: 0;
     right: 0;
