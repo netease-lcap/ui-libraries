@@ -301,17 +301,13 @@ export default {
 
 <style module="$designer">
 .trmask {
-    position: relative;
-}
-.trmask::after {
-    content: '';
-    display: block;
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
-    bottom: 0;
-    background: rgba(255,255,255,0.8);
+    bottom: -1px;
+    background: white;
+    opacity: 0.8;
     z-index: 999;
 }
 </style>
