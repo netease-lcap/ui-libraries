@@ -137,6 +137,17 @@ namespace nasl.ui {
 
         @Prop({
             group: '数据属性',
+            title: '空值为null',
+            description: '清空值时是否设置为null',
+            designerValue: true,
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        emptyValueIsNull: nasl.core.Boolean ;
+
+        @Prop({
+            group: '数据属性',
             title: '分页加载更多',
             description: '设置是否分页加载更多',
             docDescription: '是否使用分页功能加载更多',

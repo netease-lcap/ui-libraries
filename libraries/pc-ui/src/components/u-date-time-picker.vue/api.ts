@@ -294,6 +294,17 @@ namespace nasl.ui {
       clearable: nasl.core.Boolean;
 
       @Prop({
+            group: '数据属性',
+            title: '空值为null',
+            description: '清空值时是否设置为null',
+            designerValue: true,
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        emptyValueIsNull: nasl.core.Boolean ;
+
+      @Prop({
           group: '状态属性',
           title: '弹出状态',
           description: '弹出状态分为“True(弹出)/False(关闭)”，默认为“关闭”',

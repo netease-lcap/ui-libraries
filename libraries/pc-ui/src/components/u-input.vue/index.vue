@@ -65,6 +65,7 @@ export default {
         value: [String, Number],
         color: String,
         placeholder: String,
+        emptyValueIsNull:{ type: Boolean, default: false},
         clearable: { type: Boolean, default: false },
         autofocus: { type: [Boolean, String], default: false },
         readonly: { type: Boolean, default: false },
@@ -211,7 +212,7 @@ export default {
             this.compositionInputing = false;
             const $event = {
                 oldValue: this.currentValue,
-                value: e.target.value,
+                value: this.handleEmptyValue(e.target.value),
             };
             if (this.$emitPrevent('before-input', $event, this))
                 return;
@@ -231,7 +232,7 @@ export default {
         clear() {
             if (this.readonly || this.disabled)
                 return;
-            const $event = { oldValue: this.currentValue, value: '' };
+            const $event = { oldValue: this.currentValue, value: this.handleEmptyValue('') };
             if (this.$emitPrevent('before-clear', $event, this))
                 return;
             if (this.$emitPrevent('before-input', $event, this))
@@ -282,7 +283,14 @@ export default {
                 this.$refs.input && this.$refs.input.select();
             });
         },
-    }
+        handleEmptyValue(value) {
+            if (!this.emptyValueIsNull) {
+                return value;
+            } else {
+                return value ? value : null;
+        }
+    },
+  },
 };
 </script>
 

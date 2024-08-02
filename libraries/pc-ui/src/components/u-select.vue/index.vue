@@ -166,6 +166,7 @@ export default {
         multipleAppearance: { type: String, default: 'tags' },
         tagsOverflow: { type: String, default: 'collapse' },
         autoSelect: { type: Boolean, default: false },
+        emptyValueIsNull:{ type: Boolean, default: false},
         placeholder: { type: String, default: '请选择' },
         clearable: { type: Boolean, default: false },
         filterable: { type: Boolean, default: false },
@@ -796,9 +797,9 @@ export default {
                 this.selectedVM = undefined;
                 this.filterText = '';
                 this.fastLoad();
-                this.$emit('input', value, this);
-                this.$emit('update:value', value, this);
-                this.$emit('clear', { oldValue, value }, this);
+                this.$emit('input', this.handleEmptyValue(value), this);
+                this.$emit('update:value', this.handleEmptyValue( value ), this);
+                this.$emit('clear', { oldValue, value:this.handleEmptyValue( value ) }, this);
             }
             this.focus();
             this.close();
@@ -817,33 +818,35 @@ export default {
             } else {
               this.$emit('blur');
             }
-        },
-        setPopperWidth() {
-            if (this.appendTo === 'body') {
-                this.currentPopperWidth = this.popperWidth ? this.popperWidth : this.$el && (this.$el.offsetWidth + 'px');
-            } else {
-                this.currentPopperWidth = this.popperWidth || '100%';
-            }
-        },
-        rootFocus() {
-            this.$el.focus();
-        },
-        resetFilterList() {
-            if (this.multiple) {
-                this.fastLoad();
-            }
-        },
-        removeTag(itemVm, flag) {
-            this.select(itemVm, flag);
-            this.resetFilterList();
-            this.$emit('removetag', itemVm);
-            this.preventRootBlur = false;
-            this.preventBlur = false;
-            this.rootFocus();
-        },
-        onScroll(e) {
-            this.hasScroll = true;
-            this.throttledVirtualScroll(e);
+    },
+    setPopperWidth() {
+      if (this.appendTo === 'body') {
+        this.currentPopperWidth = this.popperWidth
+          ? this.popperWidth
+          : this.$el && this.$el.offsetWidth + 'px';
+      } else {
+        this.currentPopperWidth = this.popperWidth || '100%';
+      }
+    },
+    rootFocus() {
+      this.$el.focus();
+    },
+    resetFilterList() {
+      if (this.multiple) {
+        this.fastLoad();
+      }
+    },
+    removeTag(itemVm, flag) {
+      this.select(itemVm, flag);
+      this.resetFilterList();
+      this.$emit('removetag', itemVm);
+      this.preventRootBlur = false;
+      this.preventBlur = false;
+      this.rootFocus();
+    },
+    onScroll(e) {
+      this.hasScroll = true;
+      this.throttledVirtualScroll(e);
 
             if (typeof this.pagination !== 'undefined') {
                 if (!this.pagination || !this.$options.isSelect) {
@@ -963,12 +966,19 @@ export default {
             return;
           }
 
-          /**
-           * 渲染结束后加载下一页
-           */
-          this.loadMoreNoopTimer = setTimeout(() => this.loadMoreNoopOnOpen(), 50);
-        }
+      /**
+       * 渲染结束后加载下一页
+       */
+      this.loadMoreNoopTimer = setTimeout(() => this.loadMoreNoopOnOpen(), 50);
     },
+    handleEmptyValue(value) {
+      if (!this.emptyValueIsNull) {
+        return value;
+      } else {
+        return value ? value : null;
+      }
+    }
+  },
 };
 </script>
 
