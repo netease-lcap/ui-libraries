@@ -328,7 +328,7 @@
             "idetype": "element",
             "editable": "text",
             "textholder": "text",
-            "useFxOrEg": "text"
+            "useFxOrEg":{"property": "text"}
         }
     },
     {
@@ -337,7 +337,7 @@
             "idetype": "element",
             "editable": "text",
             "textholder": "text",
-            "useFxOrEg": "text"
+            "useFxOrEg":{"property": "text"}
         }
     },
     {
@@ -346,7 +346,7 @@
             "idetype": "element",
             "editable": "text",
             "textholder": "text",
-            "useFxOrEg": "text"
+            "useFxOrEg":{"property": "text"}
         }
     },
     {
@@ -365,7 +365,7 @@
         "name": "ULabel",
         "ideusage": {
             "textholder": "text",
-            "useFxOrEg": "text",
+            "useFxOrEg":{"property": "text"},
             "idetype": "element"
         }
     },
@@ -438,7 +438,7 @@
                 "slot": "title",
                 "expression": "this.getAttribute('title')"
             }],
-            "useFxOrEg": "title"
+            "useFxOrEg":{"property": "title"}
         }
     },
     {
@@ -453,7 +453,7 @@
                 "condition": "this.getAttribute('src').type === 'dynamic'",
                 "component": "UImageDesigner"
             },
-            "useFxOrEg": "src"
+            "useFxOrEg":{"property": "src"}
         }
     },
     {
@@ -697,6 +697,7 @@
         "ideusage": {
             "idetype": "element",
             "textholder": "value",
+            "useFxOrEg":{"property": "value"},
             "additionalAttribute": {
                 ":value": null
             }
@@ -705,7 +706,9 @@
     {
         "name": "UTextarea",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "textholder": "value",
+            "useFxOrEg":{"property": "value"}
         }
     },
     {
@@ -1093,7 +1096,7 @@
             "cacheOpenKey": "visible",
             "additionalAttribute": {
                 ":mode": "\"false\"",
-                ":disableRootElemShift": "\"true\"" 
+                ":disableRootElemShift": "\"true\""
             }
         }
     },
@@ -1108,7 +1111,7 @@
             "cacheOpenKey": "visible",
             "additionalAttribute": {
                 ":mode": "\"false\"",
-                ":disableRootElemShift": "\"true\"" 
+                ":disableRootElemShift": "\"true\""
             }
         }
     },
@@ -1117,7 +1120,7 @@
         "ideusage": {
             "idetype": "messager",
             "textholder": "text",
-            "useFxOrEg": "text",
+            "useFxOrEg":{"property": "text","displayAsAttr":true},
             "elementSutando": {
                 "condition": true,
                 "component": "UToastDesigner",
@@ -1159,7 +1162,7 @@
         "name": "EWatermark",
         "ideusage": {
             "textholder": "text",
-            "useFxOrEg": "text",
+            "useFxOrEg":{"property": "text","displayAsAttr":true},
             "idetype": "element"
         }
     },
