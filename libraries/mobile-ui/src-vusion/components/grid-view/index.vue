@@ -185,6 +185,7 @@ import UInput from 'cloud-ui.vusion/src/components/u-input.vue/index.vue';
 import USpinner from 'cloud-ui.vusion/src/components/u-spinner.vue/index.vue';
 import ULink from 'cloud-ui.vusion/src/components/u-link.vue/index.vue';
 import VanPullRefresh from '../../../src/pull-refresh';
+import DataSource from '../../../src/utils/DataSource';
 import VanEmptyCol from '../../../src/emptycol';
 import { createI18N } from '../../../src/utils/create/i18n'
 
@@ -353,16 +354,24 @@ export default {
     },
     async refresh() {
       this.refreshing = true;
-      const paging = {
-        size: this.currentDataSource.paging.size,
-        oldSize: this.currentDataSource.paging.size,
-        number: 1,
-        oldNumber: this.currentDataSource.paging.number,
-      };
       // eslint-disable-next-line no-console
       try {
-        this.currentDataSource.page(paging);
-        await this.load();
+        await this.currentDataSource.reload();
+
+        const {
+          paging: oldPaging,
+        } = this.currentDataSource;
+        let paging;
+
+        if (oldPaging) {
+          const { size, number } = oldPaging;
+          paging = {
+            size,
+            oldSize: size,
+            number: 1,
+            oldNumber: number,
+          };
+        }
         this.$emit('page', paging, this);
         this.$emit('update:page-number', 1, this);
         if (this.iffall) {
@@ -661,6 +670,37 @@ export default {
           func.apply(this, args);
         }, wait);
       };
+    },
+    normalizeDataSource(dataSource) {
+      const options = this.getDataSourceOptions();
+      if (dataSource instanceof DataSource)
+          return dataSource;
+      else if (dataSource instanceof Array) {
+          options.data = Array.from(dataSource);
+          return new DataSource(options);
+      } else if (dataSource instanceof Function) {
+          const self = this;
+          options.load = function load(params) {
+              self.$emitSyncParams(params);
+              const result = dataSource(params);
+              if (result instanceof Promise)
+                  return result.catch(
+                      () => (this.currentLoading = false),
+                  );
+              else if (result instanceof Array)
+                  return Promise.resolve(result);
+              else
+                  return Promise.resolve(result);
+          };
+          return new DataSource(options);
+      } else if (dataSource instanceof Object) {
+          if (dataSource.hasOwnProperty('list') && Array.isArray(dataSource.list))
+              return new DataSource(Object.assign(options, dataSource, {
+                  data: dataSource.list,
+              }));
+          return new DataSource(Object.assign(options, dataSource));
+      } else
+          return undefined;
     },
   },
 };
