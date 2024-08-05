@@ -715,6 +715,8 @@
         "name": "UInput",
         "ideusage": {
             "idetype": "element",
+            "textholder": "value",
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
             "translateBindingProperty": ["value", "placeholder"]
         }
     },
