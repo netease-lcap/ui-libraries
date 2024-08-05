@@ -679,9 +679,7 @@ export default {
           options.data = Array.from(dataSource);
           return new DataSource(options);
       } else if (dataSource instanceof Function) {
-          const self = this;
           options.load = function load(params) {
-              self.$emitSyncParams(params);
               const result = dataSource(params);
               if (result instanceof Promise)
                   return result.catch(
