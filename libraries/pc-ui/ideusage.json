@@ -692,7 +692,11 @@
         "name": "UFormItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['u-form-group', 'u-form'].includes(target.tag)"
+            "parentAccept": "['u-form-group', 'u-form'].includes(target.tag)",
+            "disableSlotAutoFill": [{
+                "slot": "label",
+                "expression": "this.getAttribute('label')?.value"
+            }]
         }
     },
     {
