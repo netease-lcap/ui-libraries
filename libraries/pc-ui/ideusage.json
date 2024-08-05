@@ -968,7 +968,11 @@
         "name": "USelectItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['u-select-group', 'u-select'].includes(target.tag)"
+            "parentAccept": "['u-select-group', 'u-select'].includes(target.tag)",
+            "disableSlotAutoFill": [{
+                "slot": "default",
+                "expression": "this.getAttribute('text')?.value"
+            }]
         }
     },
     {
