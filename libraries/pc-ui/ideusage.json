@@ -863,7 +863,11 @@
             },
             "displaySlotConditions": {
                 "dragDescription": false
-            }
+            },
+            "disableSlotAutoFill": [{
+                "slot": "file-list",
+                "expression": "!this.getElement(el => el.slotTarget === 'file-list')"
+            }]
         }
     },
     {
