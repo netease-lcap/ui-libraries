@@ -734,7 +734,7 @@
         "ideusage": {
             "idetype": "element",
             "textholder": "value",
-            "useFxOrEg":{"property": "value"}
+            "useFxOrEg":{"property": "value","displayAsAttr":true}
         }
     },
     {
