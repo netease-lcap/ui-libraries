@@ -73,7 +73,7 @@ export function genGridViewCurdBlock(entity: naslTypes.Entity, refElement: naslT
       const $lifecycles = {
           onCreated: [
               function ${nameGroup.viewLogicInit}(event) {
-                nasl.util.Clear(${nameGroup.viewVariableFilter},'shallow');
+                nasl.util.Clear(${nameGroup.viewVariableFilter},'deep');
                 return;
               },
           ]

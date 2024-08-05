@@ -72,7 +72,7 @@ export function genTableCurdBlock(entity: naslTypes.Entity, refElement: naslType
     const $lifecycles = {
         onCreated: [
             function ${nameGroup.viewLogicInit}(event) {
-              nasl.util.Clear(${nameGroup.viewVariableFilter},'shallow');
+              nasl.util.Clear(${nameGroup.viewVariableFilter},'deep');
               return;
             },
         ]
