@@ -560,7 +560,8 @@
             "displaySlotInline": {
                 "cell": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type')?.value)",
                 "title": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type')?.value)"
-            }
+            },
+            "forceUpdateWhenAttributeChange": "parent"
         }
     },
     {
