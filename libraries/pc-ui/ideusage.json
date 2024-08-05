@@ -1120,6 +1120,11 @@
             "additionalAttribute": {
                 ":mode": "\"false\"",
                 ":disableRootElemShift": "\"true\""
+            },
+            "disableSlotAutoFill": ["head"],
+            "displaySlotConditions": {
+                "head": false,
+                "heading": false
             }
         }
     },
