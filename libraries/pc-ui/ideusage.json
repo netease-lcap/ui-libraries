@@ -718,19 +718,19 @@
         "name": "UNumberInput",
         "ideusage": {
             "idetype": "element",
-            "textholder": "value",
             "useFxOrEg":{"property": "value"},
             "additionalAttribute": {
                 ":value": null
-            }
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
         "name": "UTextarea",
         "ideusage": {
             "idetype": "element",
-            "textholder": "value",
-            "useFxOrEg":{"property": "value"}
+            "useFxOrEg":{"property": "value"},
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -961,7 +961,8 @@
             "childAccept": "['u-select-item', 'u-select-group', 'u-select-divider'].includes(target.tag)",
             "events": {
                 "click": true
-            }
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -1000,7 +1001,8 @@
     {
         "name": "URegionSelect",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -1049,7 +1051,8 @@
             "idetype": "element",
             "additionalAttribute": {
                 ":value": null
-            }
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -1058,7 +1061,8 @@
             "idetype": "element",
             "additionalAttribute": {
                 ":value": null
-            }
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -1067,7 +1071,8 @@
             "idetype": "element",
             "additionalAttribute": {
                 ":value": null
-            }
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -1078,7 +1083,8 @@
             "childAccept": "target.tag === 'u-tree-view-node-new'",
             "events": {
                 "click": true
-            }
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
