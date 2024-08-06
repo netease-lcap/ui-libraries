@@ -739,7 +739,8 @@
       "idetype": "container",
       "structured": true,
       "textholder": "label",
-      "useFxOrEg":{"property": "label"},
+      "translateBindingProperty":["label"],
+      "useFxOrEg":{"property": "label","displayAsAttr":true},
       "childAccept": "target.tag === 'MenuItem'",
       "parentAccept": "target.tag === 'Menu' || (target.tag === 'template' && ['menuSlot', 'menuItem'].includes(target.slotTarget) )",
       "displaySlotConditions": {
