@@ -560,7 +560,8 @@
             "displaySlotInline": {
                 "cell": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type')?.value)",
                 "title": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type')?.value)"
-            }
+            },
+            "forceUpdateWhenAttributeChange": "parent"
         }
     },
     {
@@ -861,7 +862,11 @@
             },
             "displaySlotConditions": {
                 "dragDescription": false
-            }
+            },
+            "disableSlotAutoFill": [{
+                "slot": "file-list",
+                "expression": "!this.getElement(el => el.slotTarget === 'file-list')"
+            }]
         }
     },
     {
