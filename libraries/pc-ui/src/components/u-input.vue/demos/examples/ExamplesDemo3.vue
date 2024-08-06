@@ -14,6 +14,6 @@ export default {
             value: '3306',
             numberValue: 3306,
         };
-    },
+script    },
 };
 </script>

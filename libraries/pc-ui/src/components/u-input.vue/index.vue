@@ -129,7 +129,7 @@ export default {
             // 如果输入法还在输入中，不向外部输出变更
             if (!this.compositionInputing) {
                 this.autoSize && this.autoResize();
-                this.$emit('update', value, this);
+                this.$emit('update', this.handleEmptyValue( value ), this);
                 this.$emit('change', { value, oldValue }, this);
             }
         },
@@ -178,7 +178,7 @@ export default {
             if (!this.compositionInputing) {
                 const $event = {
                     oldValue: this.currentValue,
-                    value: e.target.value,
+                    value:this.handleEmptyValue( e.target.value),
                 };
                 if (this.$emitPrevent('before-input', $event, this))
                     return;
@@ -200,7 +200,7 @@ export default {
         onBlur(e) {
             this.focused = false;
             this.$emit('blur', e, this);
-            this.$emit('blur:value', this.currentValue);
+            this.$emit('blur:value', this.handleEmptyValue(this.currentValue));
         },
         onCompositionStart(e) {
             this.compositionInputing = true;
