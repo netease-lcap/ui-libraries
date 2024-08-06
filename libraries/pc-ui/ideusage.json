@@ -669,7 +669,8 @@
             "additionalAttribute": {
                 ":dataSource": "\"[{}]\"",
                 ":colnum": "\"1\""
-            }
+            },
+            "useTemplateInDefaultSlot": true
         }
     },
     {
