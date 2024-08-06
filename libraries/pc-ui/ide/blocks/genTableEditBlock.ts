@@ -398,11 +398,11 @@ export function genTableEditBlock(entity: naslTypes.Entity, refElement: naslType
       let ${nameGroup.viewVariableEntity}: ${entityFullName};
       let ${nameGroup.viewVariableInput}: ${entityFullName};
       let ${nameGroup.viewVariableFilter}: ${entityFullName};
-      
+
       const $lifecycles = {
           onCreated: [
               function ${nameGroup.viewLogicInit}(event) {
-                nasl.util.Clear(${nameGroup.viewVariableFilter});
+                nasl.util.Clear(${nameGroup.viewVariableFilter},'deep');
                 return;
               },
           ]
@@ -425,6 +425,6 @@ export function genTableEditBlock(entity: naslTypes.Entity, refElement: naslType
     </ULinearLayout>
     }
     export namespace app.logics {
-      ${newLogics.join('\n')}  
+      ${newLogics.join('\n')}
     }`;
 }

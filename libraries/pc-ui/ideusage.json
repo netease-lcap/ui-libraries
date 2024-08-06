@@ -116,7 +116,10 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "['u-sidebar-group', 'u-sidebar-item', 'u-sidebar-divider'].includes(target.tag)"
+            "childAccept": "['u-sidebar-group', 'u-sidebar-item', 'u-sidebar-divider'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -328,7 +331,7 @@
             "idetype": "element",
             "editable": "text",
             "textholder": "text",
-            "useFxOrEg": "text"
+            "useFxOrEg":{"property": "text"}
         }
     },
     {
@@ -337,7 +340,7 @@
             "idetype": "element",
             "editable": "text",
             "textholder": "text",
-            "useFxOrEg": "text"
+            "useFxOrEg":{"property": "text"}
         }
     },
     {
@@ -346,7 +349,7 @@
             "idetype": "element",
             "editable": "text",
             "textholder": "text",
-            "useFxOrEg": "text"
+            "useFxOrEg":{"property": "text"}
         }
     },
     {
@@ -365,7 +368,7 @@
         "name": "ULabel",
         "ideusage": {
             "textholder": "text",
-            "useFxOrEg": "text",
+            "useFxOrEg":{"property": "text"},
             "idetype": "element"
         }
     },
@@ -438,7 +441,7 @@
                 "slot": "title",
                 "expression": "this.getAttribute('title')"
             }],
-            "useFxOrEg": "title"
+            "useFxOrEg":{"property": "title"}
         }
     },
     {
@@ -453,7 +456,7 @@
                 "condition": "this.getAttribute('src').type === 'dynamic'",
                 "component": "UImageDesigner"
             },
-            "useFxOrEg": "src"
+            "useFxOrEg":{"property": "src"}
         }
     },
     {
@@ -522,10 +525,15 @@
                 "useRef": "argus?.[0]?.index === 0"
             },
             "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic', 'u-table-view-column-group'].includes(target.tag)",
-            "disableSlotAutoFill": [{
-                "slot": "config-columns",
-                "expression": "!this.getAttribute('configurable')?.value"
-            }]
+            "disableSlotAutoFill": [
+                {
+                    "slot": "config-columns",
+                    "expression": "!this.getAttribute('configurable')?.value"
+                }
+            ],
+            "additionalAttribute": {
+                ":useMask": false
+            }
         }
     },
     {
@@ -552,7 +560,8 @@
             "displaySlotInline": {
                 "cell": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type')?.value)",
                 "title": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type')?.value)"
-            }
+            },
+            "forceUpdateWhenAttributeChange": "parent"
         }
     },
     {
@@ -576,7 +585,21 @@
             "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
             "additionalAttribute": {
                 ":dataSource": "\"[{}]\""
-            }
+            },
+            "selector": [
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'title')",
+                    "cssSelector": "th"
+                },
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'cell')",
+                    "cssSelector": "td"
+                },
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'expand-content')",
+                    "cssSelector": "tr[class^='u-table-view_expand-content']"
+                }
+            ]
         }
     },
     {
@@ -670,7 +693,11 @@
         "name": "UFormItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['u-form-group', 'u-form'].includes(target.tag)"
+            "parentAccept": "['u-form-group', 'u-form'].includes(target.tag)",
+            "disableSlotAutoFill": [{
+                "slot": "label",
+                "expression": "this.getAttribute('label')?.value"
+            }]
         }
     },
     {
@@ -689,6 +716,7 @@
         "name": "UInput",
         "ideusage": {
             "idetype": "element",
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
             "translateBindingProperty": ["value", "placeholder"]
         }
     },
@@ -696,16 +724,19 @@
         "name": "UNumberInput",
         "ideusage": {
             "idetype": "element",
-            "textholder": "value",
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
             "additionalAttribute": {
                 ":value": null
-            }
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
         "name": "UTextarea",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -831,7 +862,11 @@
             },
             "displaySlotConditions": {
                 "dragDescription": false
-            }
+            },
+            "disableSlotAutoFill": [{
+                "slot": "file-list",
+                "expression": "!this.getElement(el => el.slotTarget === 'file-list')"
+            }]
         }
     },
     {
@@ -924,7 +959,8 @@
     {
         "name": "UPagination",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "childAccept": false
         }
     },
     {
@@ -935,14 +971,19 @@
             "childAccept": "['u-select-item', 'u-select-group', 'u-select-divider'].includes(target.tag)",
             "events": {
                 "click": true
-            }
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
         "name": "USelectItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['u-select-group', 'u-select'].includes(target.tag)"
+            "parentAccept": "['u-select-group', 'u-select'].includes(target.tag)",
+            "disableSlotAutoFill": [{
+                "slot": "default",
+                "expression": "this.getAttribute('text')?.value"
+            }]
         }
     },
     {
@@ -970,7 +1011,8 @@
     {
         "name": "URegionSelect",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -1019,7 +1061,8 @@
             "idetype": "element",
             "additionalAttribute": {
                 ":value": null
-            }
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -1028,7 +1071,8 @@
             "idetype": "element",
             "additionalAttribute": {
                 ":value": null
-            }
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -1037,7 +1081,8 @@
             "idetype": "element",
             "additionalAttribute": {
                 ":value": null
-            }
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -1048,7 +1093,8 @@
             "childAccept": "target.tag === 'u-tree-view-node-new'",
             "events": {
                 "click": true
-            }
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -1093,7 +1139,12 @@
             "cacheOpenKey": "visible",
             "additionalAttribute": {
                 ":mode": "\"false\"",
-                ":disableRootElemShift": "\"true\"" 
+                ":disableRootElemShift": "\"true\""
+            },
+            "disableSlotAutoFill": ["head"],
+            "displaySlotConditions": {
+                "head": false,
+                "heading": false
             }
         }
     },
@@ -1108,7 +1159,7 @@
             "cacheOpenKey": "visible",
             "additionalAttribute": {
                 ":mode": "\"false\"",
-                ":disableRootElemShift": "\"true\"" 
+                ":disableRootElemShift": "\"true\""
             }
         }
     },
@@ -1117,7 +1168,7 @@
         "ideusage": {
             "idetype": "messager",
             "textholder": "text",
-            "useFxOrEg": "text",
+            "useFxOrEg":{"property": "text","displayAsAttr":true},
             "elementSutando": {
                 "condition": true,
                 "component": "UToastDesigner",
@@ -1159,7 +1210,7 @@
         "name": "EWatermark",
         "ideusage": {
             "textholder": "text",
-            "useFxOrEg": "text",
+            "useFxOrEg":{"property": "text","displayAsAttr":true},
             "idetype": "element"
         }
     },

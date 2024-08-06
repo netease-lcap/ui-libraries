@@ -69,16 +69,16 @@ export function genGridViewCurdBlock(entity: naslTypes.Entity, refElement: naslT
       let ${nameGroup.viewVariableInput}: ${entityFullName};
       let ${nameGroup.viewVariableFilter}: ${entityFullName};
       let ${nameGroup.viewVariableIsUpdate}: Boolean;
-      
+
       const $lifecycles = {
           onCreated: [
               function ${nameGroup.viewLogicInit}(event) {
-                nasl.util.Clear(${nameGroup.viewVariableFilter});
+                nasl.util.Clear(${nameGroup.viewVariableFilter},'deep');
                 return;
               },
           ]
       }
-  
+
       return <ULinearLayout direction="vertical">
           ${genFilterTemplate(entity, nameGroup, selectNameGroupMap)}
           <ULinearLayout mode="flex" alignment="start" justify="end">
