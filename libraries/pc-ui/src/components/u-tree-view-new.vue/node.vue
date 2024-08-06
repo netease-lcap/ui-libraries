@@ -46,7 +46,7 @@
                     dragging: currentDragging,
                     ...node,
                 }">{{ text }}</slot>
-                <s-empty v-if="!$slots.item && $env.VUE_APP_DESIGNER"></s-empty>
+                <s-empty v-if="!$slots.item && $env.VUE_APP_DESIGNER && showEmpty"></s-empty>
             </span>
         </div>
     </div>
@@ -136,6 +136,7 @@ export default {
         draggable: { type: Boolean, default: false },
         dragExpanderDelay: { type: Number, default: 1500 },
         renderOptimize: { type: Boolean, default: false },
+        showEmpty: { type: Boolean, default: true }
     },
     data() {
         return {
