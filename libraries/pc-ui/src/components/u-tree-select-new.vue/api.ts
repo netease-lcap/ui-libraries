@@ -159,6 +159,17 @@ namespace nasl.ui {
       clearable: nasl.core.Boolean = false;
 
       @Prop({
+            group: '数据属性',
+            title: '空值为null',
+            description: '清空值时是否设置为null',
+            designerValue: true,
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        emptyValueIsNull: nasl.core.Boolean ;
+
+      @Prop({
         group: '交互属性',
         title: '只渲染激活节点',
         description: '设置只渲染tree激活子节点，用于渲染性能提升。',

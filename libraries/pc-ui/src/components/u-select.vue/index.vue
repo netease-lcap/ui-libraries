@@ -166,6 +166,7 @@ export default {
         multipleAppearance: { type: String, default: 'tags' },
         tagsOverflow: { type: String, default: 'collapse' },
         autoSelect: { type: Boolean, default: false },
+        emptyValueIsNull:{ type: Boolean, default: false},
         placeholder: { type: String, default: '请选择' },
         clearable: { type: Boolean, default: false },
         filterable: { type: Boolean, default: false },
@@ -225,6 +226,7 @@ export default {
             // @inherit: currentLoading: false,
             currentText: '', // 显示文本
             filterText: '', // 过滤文本，只有 input 时会改变它
+            filterInputFocused: false,
             preventBlur: false,
             inputWidth: 20,
             popperOpened: false,
@@ -337,11 +339,12 @@ export default {
                 return;
             }
             if (this.filterable) {
-                if (this.selectedVM) {
-                    this.filterText = this.selectedVM.currentText;
-                } else if (!this.value) { // 响应this.value 的变化 = '' 时处理 清空
-                    this.filterText = '';
-                }
+              if (this.selectedVM && !this.filterInputFocused) {
+                this.filterText = this.selectedVM.currentText;
+              } else if (!this.value && !this.filterInputFocused) {
+                // 响应this.value 的变化 = '' 时处理 清空
+                this.filterText = '';
+              }
                 // blur 事件会处理这个未搜索到置空的问题
                 // this.filterText = ? this.selectedVM.currentText : '';
             } else {
@@ -630,8 +633,10 @@ export default {
             this.$emit('focus', e, this);
         },
         onInput(value) {
-            if (!this.filterable)
-                return;
+            if (!this.filterable) {
+              return;
+            }
+            this.filterInputFocused = true;
             this.currentText = value; // value.split(',')
             if (this.$emitPrevent('before-filter', { filterText: value }, this))
                 return;
@@ -641,6 +646,7 @@ export default {
             this.hasFilter = true; // 控制blur时是否重置列表，避免每次blur都重置
         },
         onBlur(e) {
+            this.filterInputFocused = false;
             if (!this.filterable)
                 return; // 这边必须要用 setTimeout，$nextTick 也不行，需要保证在 @select 之后完成
             this.inputBlurTimer = setTimeout(() => {
@@ -791,9 +797,9 @@ export default {
                 this.selectedVM = undefined;
                 this.filterText = '';
                 this.fastLoad();
-                this.$emit('input', value, this);
-                this.$emit('update:value', value, this);
-                this.$emit('clear', { oldValue, value }, this);
+                this.$emit('input', this.handleEmptyValue(value), this);
+                this.$emit('update:value', this.handleEmptyValue( value ), this);
+                this.$emit('clear', { oldValue, value:this.handleEmptyValue( value ) }, this);
             }
             this.focus();
             this.close();
@@ -812,33 +818,35 @@ export default {
             } else {
               this.$emit('blur');
             }
-        },
-        setPopperWidth() {
-            if (this.appendTo === 'body') {
-                this.currentPopperWidth = this.popperWidth ? this.popperWidth : this.$el && (this.$el.offsetWidth + 'px');
-            } else {
-                this.currentPopperWidth = this.popperWidth || '100%';
-            }
-        },
-        rootFocus() {
-            this.$el.focus();
-        },
-        resetFilterList() {
-            if (this.multiple) {
-                this.fastLoad();
-            }
-        },
-        removeTag(itemVm, flag) {
-            this.select(itemVm, flag);
-            this.resetFilterList();
-            this.$emit('removetag', itemVm);
-            this.preventRootBlur = false;
-            this.preventBlur = false;
-            this.rootFocus();
-        },
-        onScroll(e) {
-            this.hasScroll = true;
-            this.throttledVirtualScroll(e);
+    },
+    setPopperWidth() {
+      if (this.appendTo === 'body') {
+        this.currentPopperWidth = this.popperWidth
+          ? this.popperWidth
+          : this.$el && this.$el.offsetWidth + 'px';
+      } else {
+        this.currentPopperWidth = this.popperWidth || '100%';
+      }
+    },
+    rootFocus() {
+      this.$el.focus();
+    },
+    resetFilterList() {
+      if (this.multiple) {
+        this.fastLoad();
+      }
+    },
+    removeTag(itemVm, flag) {
+      this.select(itemVm, flag);
+      this.resetFilterList();
+      this.$emit('removetag', itemVm);
+      this.preventRootBlur = false;
+      this.preventBlur = false;
+      this.rootFocus();
+    },
+    onScroll(e) {
+      this.hasScroll = true;
+      this.throttledVirtualScroll(e);
 
             if (typeof this.pagination !== 'undefined') {
                 if (!this.pagination || !this.$options.isSelect) {
@@ -958,12 +966,19 @@ export default {
             return;
           }
 
-          /**
-           * 渲染结束后加载下一页
-           */
-          this.loadMoreNoopTimer = setTimeout(() => this.loadMoreNoopOnOpen(), 50);
-        }
+      /**
+       * 渲染结束后加载下一页
+       */
+      this.loadMoreNoopTimer = setTimeout(() => this.loadMoreNoopOnOpen(), 50);
     },
+    handleEmptyValue(value) {
+      if (!this.emptyValueIsNull) {
+        return value;
+      } else {
+        return value ? value : null;
+      }
+    }
+  },
 };
 </script>
 
