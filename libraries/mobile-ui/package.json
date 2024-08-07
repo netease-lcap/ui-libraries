@@ -22,7 +22,7 @@
   "scripts": {
     "dev": "npm run storybook",
     "storybook": "storybook dev -p 8008",
-    "build": "lcap-scripts build && npm run build:d2c",
+    "build": "lcap-scripts build && npm run build:d2c && npm run lowcode",
     "build:d2c": "vite build --config vite.d2c.config.js",
     "deploy": "lcap-scripts deploy",
     "deploy:dev": "lcap-scripts deploy --platform http://devtest.lcap.codewave-dev.163yun.com/",
@@ -33,7 +33,8 @@
     "test:coverage": "vitest run --coverage",
     "preview": "vite preview",
     "build:storybook": "storybook build",
-    "check:api": "tsc -p tsconfig.api.json"
+    "check:api": "tsc -p tsconfig.api.json",
+    "lowcode": " node usage-script.js > ./dist-theme/nasl.ui.merge.json && cd ./dist-theme rm ./nasl.ui.json && mv nasl.ui.merge.json nasl.ui.json "
   },
   "repository": "https://github.com/netease-lcap/ui-libraries",
   "bugs": {
