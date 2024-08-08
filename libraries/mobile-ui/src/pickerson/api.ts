@@ -102,15 +102,6 @@ namespace nasl.ui {
     dataSchema: T;
     @Prop({
       group: '数据属性',
-      title: '值字段',
-      description: '选项值的字段名',
-      setter: {
-        concept: "PropertySelectSetter"
-      }
-    })
-    valueField: (item: T) => V = ((item: any)  => item.value) as any;
-    @Prop({
-      group: '数据属性',
       title: '文本字段',
       description: '选项文本的字段名',
       setter: {
@@ -118,6 +109,15 @@ namespace nasl.ui {
       }
     })
     textField: (item: T) => any = ((item: any)  => item.text) as any;
+    @Prop({
+      group: '数据属性',
+      title: '值字段',
+      description: '选项值的字段名',
+      setter: {
+        concept: "PropertySelectSetter"
+      }
+    })
+    valueField: (item: T) => V = ((item: any)  => item.value) as any;
     @Prop<VanPickersonOptions<T, V, M, P>, 'pageSize'>({
       group: '数据属性',
       title: '默认每页条数',

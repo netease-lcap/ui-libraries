@@ -1,6 +1,7 @@
 <template>
   <div
     :class="$style.expander"
+    v-if="!item.hideExpanderIcon"
     :expanded="item.expanded"
     :disabled="item.disabled"
     @click.stop="toggle"
