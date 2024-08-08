@@ -712,7 +712,8 @@
             "disableSlotAutoFill": [{
                 "slot": "label",
                 "expression": "this.getAttribute('label')?.value"
-            }]
+            }],
+            "ignoreProperty": ["rules"]
         }
     },
     {
