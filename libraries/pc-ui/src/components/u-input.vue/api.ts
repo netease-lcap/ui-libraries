@@ -95,6 +95,18 @@ namespace nasl.ui {
         })
         value: nasl.core.String;
 
+
+        @Prop({
+            group: '数据属性',
+            title: '空值为null',
+            description: '清空值时是否设置为null',
+            designerValue: true,
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        emptyValueIsNull: nasl.core.Boolean ;
+
         @Prop({
             group: '数据属性',
             title: '空值为null',

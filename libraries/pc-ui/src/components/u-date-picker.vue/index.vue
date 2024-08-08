@@ -118,6 +118,7 @@ export default {
         yearDiff: { type: [String, Number], default: 20 },
         yearAdd: { type: [String, Number], default: 20 },
         clearable: { type: Boolean, default: false },
+        emptyValueIsNull:{ type: Boolean, default: false},
         converter: { type: String, default: 'format' },
         appendTo: {
             type: String,
@@ -168,10 +169,10 @@ export default {
              */
             const showDate = this.returnTime(newValue);
             const newDate = showDate ? new Date(this.transformDate(showDate)) : undefined;
-            this.$emit('update:value', this.toValue(newDate));
-            this.$emit('update:date', this.toValue(newDate));
-            this.$emit('change', { sender: this, date: newDate });
-            this.$emit('input', this.toValue(newDate));
+            this.$emit('update:value', this.handleEmptyValue(this.toValue(newDate)));
+            this.$emit('update:date', this.handleEmptyValue( this.toValue(newDate) ));
+            this.$emit('change', { sender: this, date: this.handleEmptyValue( newDate ) });
+            this.$emit('input', this.handleEmptyValue( this.toValue(newDate) ));
             this.calendarDate = newDate; // showDate改变时设置calendar里的值
         },
         minDate(newValue) {
@@ -197,7 +198,7 @@ export default {
 
         this.$emit(
             'update',
-            this.toValue(this.showDate ? new Date(this.transformDate(this.showDate)) : ''),
+            this.handleEmptyValue(this.toValue(this.showDate ? new Date(this.transformDate(this.showDate)) : '')),
         );
     },
     mounted() {
@@ -258,7 +259,7 @@ export default {
         select(date) {
             if (this.readonly || this.disabled || this.isOutOfRange(date))
                 return;
-            this.showDate = this.format(date, this.getFormatString());
+            this.showDate = this.handleEmptyValue(this.format(date, this.getFormatString()));
             const showDate = this.returnTime(this.showDate);
             /**
              * @event select 选择某一项时触发
@@ -350,7 +351,7 @@ export default {
             return date + ' ' + time;
         },
         clearValue() {
-            this.showDate = undefined;
+            this.showDate = this.handleEmptyValue(undefined);
         },
         onBlur(e) {
             if (this.preventBlur)
@@ -393,6 +394,13 @@ export default {
                 this.preventBlur = false;
             }, 0);
         },
+        handleEmptyValue(value) {
+            if (!this.emptyValueIsNull) {
+                return value;
+            } else {
+              return value ? value : null;
+           }
+        }
     },
 };
 </script>
