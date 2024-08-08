@@ -172,6 +172,14 @@ content: "\e64c";
   color: var(--tabs-item-color-selected);
 }
 
+.root[appear="text"] > .head .item[disabled]{
+  color: var(--tabs-item-color-disabled);
+}
+
+.root[appear="text"] > .head .item[disabled]:hover{
+  color: var(--tabs-item-color-disabled);
+}
+
 .root[appear="split"] > .head .item {
   background: var(--tabs-item-background-split);
 }
@@ -196,6 +204,14 @@ content: "\e64c";
 .root[appear="split"] > .head .item[selected] {
   background: var(--tabs-item-background-selected);
   color: var(--tabs-item-color-selected);
+}
+
+.root[appear="split"] > .head .item[disabled]{
+  color: var(--tabs-item-color-disabled);
+}
+
+.root[appear="split"] > .head .item[disabled]:hover{
+  color: var(--tabs-item-color-disabled);
 }
 
 .root[appear="capsule"] > .head .item {
@@ -324,6 +340,14 @@ content: "\e64c";
 
 .root[appear="line"] > .head .item[selected]::after {
   transform: scale(1);
+}
+
+.root[appear="line"] > .head .item[disabled]{
+  color: var(--tabs-item-color-disabled);
+}
+
+.root[appear="line"] > .head .item[disabled]:hover{
+  color: var(--tabs-item-color-disabled);
 }
 
 .close {
