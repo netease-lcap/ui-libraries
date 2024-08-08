@@ -182,6 +182,7 @@ export default {
         autoSelect: { type: Boolean, default: false },
         placeholder: { type: String, default: '请选择' },
         clearable: { type: Boolean, default: false },
+        emptyValueIsNull:{ type: Boolean, default: false },
         filterable: { type: Boolean, default: false },
         opened: { type: Boolean, default: false },
         preview: { type: Boolean, default: false },
@@ -581,7 +582,7 @@ export default {
             const oldValue = this.actualValue;
             const itemInfo = {
                 oldValue,
-                value: undefined,
+                value: this.handleEmptyValue( undefined ),
                 valid: true,
             };
             if (this.$refs.treeView && this.$refs.treeView.selectedVM && this.$refs.treeView.selectedVM.$options.propsData) {
@@ -618,6 +619,13 @@ export default {
                 return popperStyle;
             }
         },
+        handleEmptyValue(value) {
+            if (!this.emptyValueIsNull) {
+                return value;
+            } else {
+              return value ? value : null;
+           }
+        }
     },
 };
 </script>
