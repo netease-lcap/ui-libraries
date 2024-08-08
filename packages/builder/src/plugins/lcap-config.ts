@@ -77,9 +77,10 @@ export default (options: LcapViteConfigPluginOptions) => {
       if (!config.define) {
         config.define = {};
       }
+      const isBuild = command === 'build';
 
       config.define['process.env'] = {
-        NODE_ENV: command === 'build' ? 'production' : 'development',
+        NODE_ENV: isBuild ? 'production' : 'development',
         VUE_APP_DESIGNER: false,
         ...(config.define['process.env'] || {}),
       };
@@ -152,7 +153,7 @@ export default (options: LcapViteConfigPluginOptions) => {
         globals[lcapUIPkgName] = 'LcapUI';
         const alias = (config.resolve && config.resolve.alias ? config.resolve.alias : []) as Alias[];
         const alia = alias.find((it) => it.find === LCAP_UI_PACKAGE_NAME);
-        if (alia) {
+        if (alia && isBuild) {
           alia.replacement = lcapUIPkgName;
         }
       }
