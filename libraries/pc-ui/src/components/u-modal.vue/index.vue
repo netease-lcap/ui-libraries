@@ -256,7 +256,7 @@ export default UModal;
     text-align: center;
     overflow: hidden;
     overflow-y: auto;
-    background: rgba(0, 0, 0, 0.6);
+    background: var(--el-color-background-3);
     padding-top: 65px;
     padding-bottom: 30px;
     white-space: nowrap;

@@ -1,3 +1,4 @@
+import './theme/vars.css';
 import './styles/base.css';
 import './styles/theme.css';
 
