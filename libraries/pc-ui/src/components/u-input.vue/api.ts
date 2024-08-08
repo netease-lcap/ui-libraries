@@ -108,17 +108,6 @@ namespace nasl.ui {
         emptyValueIsNull: nasl.core.Boolean ;
 
         @Prop({
-            group: '数据属性',
-            title: '空值为null',
-            description: '清空值时是否设置为null',
-            designerValue: true,
-            setter: {
-                concept: 'SwitchSetter',
-            },
-        })
-        emptyValueIsNull: nasl.core.Boolean = true;
-
-        @Prop({
             group: '主要属性',
             title: '占位符',
             description: '为空时显示的占位符文本',
