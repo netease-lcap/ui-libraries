@@ -340,7 +340,7 @@ const SizeGroups = [{
 
     sizes.forEach((s, i) => {
       const num = i + 1;
-      mappedValue[`el-size-${num}`] = addUnit(s);
+      mappedValue[`--el-size-${num}`] = addUnit(s);
     });
 
     return mappedValue;
