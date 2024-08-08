@@ -1,0 +1,34 @@
+[
+    {
+        "name": "VanLinearLayout",
+        "ideusage": {
+            "idetype": "container",
+            "containerDirection": "column",
+            "expandWhenHesitate": true,
+            "automate": [
+                {
+                    "command": "WRAP_LINEAR_VERTICAL",
+                    "useblock": 0,
+                    "attribute": {
+                        "mode": "flex",
+                        "direction": "vertical",
+                        "justify": "start",
+                        "alignment": "start",
+                        "wrap": "false"
+                    }
+                },
+                {
+                    "command": "WRAP_LINEAR_HORIZONTAL",
+                    "useblock": 0,
+                    "attribute": {
+                        "mode": "flex",
+                        "direction": "horizontal",
+                        "justify": "start",
+                        "alignment": "start",
+                        "wrap": "false"
+                    }
+                }
+            ]
+        }
+    }
+]
