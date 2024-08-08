@@ -1026,7 +1026,7 @@ content: "\e663";
   .card[role="select"] {
       cursor: var(--cursor-pointer);
       text-align: center;
-      line-height: var(--uploader-card-width);
+      line-height: var(--uploader-card-height);
       border-style: dashed;
       transition: all var(--transition-duration-base);
       background: var(--uploader-card-background);
