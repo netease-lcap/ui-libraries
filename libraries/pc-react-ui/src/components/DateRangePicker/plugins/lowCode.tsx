@@ -17,9 +17,10 @@ export function useHandleNodePath(props) {
     if (isForm) {
       const inputParent = inputElement?.closest(`.${prefixCls}-form-item-row`);
       inputParent?.setAttribute('data-tag-name', 'FormDateRangePicker');
+      inputParent?.setAttribute('data-nodepath', nodePath);
       inputParent?.setAttribute('data-has-mutation', 'true');
     } else {
-      inputElement?.closest(`${prefixCls}-picker`)?.setAttribute('data-nodepath', nodePath);
+      inputElement?.setAttribute('data-nodepath', nodePath);
     }
   }, [nodeId]);
   return {
