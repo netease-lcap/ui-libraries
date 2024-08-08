@@ -10,7 +10,7 @@ export interface ThemeOptions {
   themeComponentFolder: string;
   type: string;
   previewPages: Array<{ name: string, title: string }>;
-  useOldCssVarParser?: boolean;
+  oldCssVarPath?: string;
   components: Array<{ group: string, title: string, name: string, [key: string]: any }>;
   findThemeType?: 'theme' | 'component';
 }
@@ -36,16 +36,14 @@ export interface ThemeConfig {
 function getCssContent(options: ThemeOptions) {
   const cssVarFiles: string[] = [];
 
-  if (options.themeVarCssPath) {
+  if (options.themeVarCssPath && fs.existsSync(options.themeVarCssPath)) {
     cssVarFiles.push(options.themeVarCssPath);
   }
 
-  if (!options.useOldCssVarParser) {
-    const varsPath = options.findThemeType === 'component' ? '*/theme/vars.css' : '*/vars.css';
-    const varFiles = glob.sync(varsPath, { cwd: options.themeComponentFolder, absolute: true });
-    if (varFiles.length > 0) {
-      cssVarFiles.push(...varFiles);
-    }
+  const varsPath = options.findThemeType === 'component' ? '*/theme/vars.css' : '*/vars.css';
+  const varFiles = glob.sync(varsPath, { cwd: options.themeComponentFolder, absolute: true });
+  if (varFiles.length > 0) {
+    cssVarFiles.push(...varFiles);
   }
 
   const cssContents: string[] = [];
@@ -68,18 +66,28 @@ export default function genThemeConfig(options: ThemeOptions, framework: string)
     },
   };
 
-  let themeInfo: ThemeInfo;
+  let themeInfo: ThemeInfo = null as any;
+
+  if (options.oldCssVarPath && fs.existsSync(options.oldCssVarPath)) {
+    themeInfo = parseCssVarsOld(fs.readFileSync(options.oldCssVarPath, 'utf-8').toString(), options.themeComponentFolder);
+  }
 
   const cssContent = getCssContent(options);
 
-  if (!cssContent) {
-    return themeConfig;
-  }
+  if (cssContent) {
+    const { global, components } = parseCssVars(cssContent);
+    if (!themeInfo) {
+      themeInfo = { global, components };
+    } else {
+      themeInfo.global.variables = ([] as any[]).concat(themeInfo.global.variables).concat(global.variables);
 
-  if (options.useOldCssVarParser) {
-    themeInfo = parseCssVarsOld(cssContent, options.themeComponentFolder);
-  } else {
-    themeInfo = parseCssVars(cssContent);
+      components.forEach((comp) => {
+        const it = themeInfo?.components.find((itComp) => itComp.name === comp.name);
+        if (!it) {
+          themeInfo?.components.push(comp);
+        }
+      });
+    }
   }
 
   themeConfig.components = options.components.filter((comp) => comp.show !== false).map(({

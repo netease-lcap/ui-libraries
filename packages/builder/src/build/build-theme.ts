@@ -87,7 +87,7 @@ export async function buildTheme(options: LcapBuildOptions) {
     themeVarCssPath: options.theme.themeVarCssPath || '',
     themeComponentFolder: options.theme.themeComponentFolder || '',
     previewPages: options.theme.previewPages || [],
-    useOldCssVarParser: options.theme.useOldCssVarParser,
+    oldCssVarPath: options.theme.oldCssVarPath,
     findThemeType: options.theme.findThemeType,
     type: options.type,
   }, options.framework);

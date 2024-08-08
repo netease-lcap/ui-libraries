@@ -1,4 +1,4 @@
-import { addUnit, colorDarken, colorLighten, colorOpacity, parseValue, addUnit } from './utils';
+import { addUnit, colorDarken, colorLighten, colorOpacity, parseValue } from './utils';
 import { generate } from './palette';
 import getFontSizes from './fontSize';
 

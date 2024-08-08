@@ -6,7 +6,7 @@ export interface LcapThemeOptions {
   themeVarCssPath?: string;
   themeComponentFolder?: string;
   /* 使用旧的css var 解析方式（兼容 pc-ui, mobile-ui） */
-  useOldCssVarParser?: boolean;
+  oldCssVarPath?: string;
   previewPages?: Array<{ name: string; title: string; viewport?: { width: number; height: number } }>;
   themePreviewEntry?: string;
   /* 找 theme文件的方式， theme, 在src/theme里， 在 component/theme */
