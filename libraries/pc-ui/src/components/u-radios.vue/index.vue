@@ -189,4 +189,8 @@ export default {
     row-gap: var(--radio-space-y);
 }
 
+.root[isSetColumn=true] > label, .root[direction="vertical"] > label {
+    display: flex;
+    align-items: center;
+}
 </style>
