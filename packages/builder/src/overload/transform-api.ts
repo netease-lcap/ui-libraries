@@ -24,7 +24,7 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
     root: __dirname,
   }) as babelTypes.File;
 
-  const insertAST = babel.parseSync('const { Component, Prop, ViewComponent, Slot, Method, Event, ViewComponentOptions } = nasl.ui;');
+  const insertAST = babel.parseSync('const { Component, Prop, ViewComponent, Slot, Method, Param, Event, ViewComponentOptions } = nasl.ui;');
 
   traverse(ast, {
     TSModuleDeclaration(path) {

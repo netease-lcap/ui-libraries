@@ -189,7 +189,7 @@ export async function forkComponent(context: OverloadComponentContext) {
 
   addDependices();
 
-  const removeFiles = await glob('index.{jsx,js,ts,tsx}', { cwd: context.componentFolderPath, absolute: true });
+  const removeFiles = await glob('index.{jsx,js,ts,tsx,vue}', { cwd: context.componentFolderPath, absolute: true });
   removeFiles.forEach((filePath) => {
     fs.unlinkSync(filePath);
   });
