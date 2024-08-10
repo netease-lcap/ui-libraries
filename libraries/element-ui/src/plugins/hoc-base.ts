@@ -354,7 +354,7 @@ export default defineComponent({
     const propKeys = getPropKeys(baseComponent);
     const keys = manger.getPluginPropKeys(propKeys);
     const vueInstance: any = ctx.root;
-    const isDesigner = inject('VUE_APP_DESIGNER') || (vueInstance.$env && vueInstance.$env.VUE_APP_DESIGNER) || false;
+    const isDesigner = inject('VUE_APP_DESIGNER', false) || (vueInstance.$env && vueInstance.$env.VUE_APP_DESIGNER);
     let refMap = useInitRefMap(keys);
     const { callSetupEnd, createPropsControl } = usePropMap(props, ctx);
     const setups = manger.getPluginSetup(isDesigner);
