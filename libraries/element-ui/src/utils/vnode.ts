@@ -1,4 +1,3 @@
-
 export const isEmptyVNodes = (vnodes) => {
   if (!vnodes || (Array.isArray(vnodes) && vnodes.length === 0)) {
     return true;
@@ -11,4 +10,4 @@ export const isEmptyVNodes = (vnodes) => {
   const arr = vnodes.flat();
 
   return arr.filter((v) => !!v).length === 0;
-}
+};

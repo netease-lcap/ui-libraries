@@ -34,22 +34,22 @@ const EVENT_PREFIX = 'on-';
 const SLOT_PREFIX = 'slot-';
 
 export function getSlotKey(name) {
-  return camelCase(`slot-${name}`)
+  return camelCase(`slot-${name}`);
 }
 
 export function getEventKey(name) {
-  return camelCase(`${EVENT_PREFIX}${name}`)
+  return camelCase(`${EVENT_PREFIX}${name}`);
 }
 
 export function getEventKeys(keys: string[]) {
   return keys.map((key) => kebabCase(key))
-    .filter(key => key.startsWith(EVENT_PREFIX))
+    .filter((key) => key.startsWith(EVENT_PREFIX))
     .map((key) => key.substring(EVENT_PREFIX.length));
 }
 
 export function getSlotKeys(keys: string[]) {
   return keys.map((key) => kebabCase(key))
-    .filter(key => key.startsWith(SLOT_PREFIX))
+    .filter((key) => key.startsWith(SLOT_PREFIX))
     .map((key) => key.substring(SLOT_PREFIX.length));
 }
 
@@ -68,16 +68,14 @@ export function getRefValueMap(refMap) {
   return map;
 }
 
-export function splitPropsAndAttrs(map, propsKeys, allKeys, deletePropsKeys) {
+export function splitPropsAndAttrs(map, propsKeys, allKeys) {
   const props = {};
   const attrs = {};
   let className = '';
   let style = {};
 
   Object.keys(map).forEach((k) => {
-    if (deletePropsKeys.indexOf(k) !== -1) {
-      return;
-    } else if (k === 'class') {
+    if (k === 'class') {
       className = map[k];
     } else if (k === 'style') {
       style = map[k];
@@ -96,7 +94,7 @@ export function splitPropsAndAttrs(map, propsKeys, allKeys, deletePropsKeys) {
     props,
     attrs,
     class: className,
-    style: style,
+    style,
   };
 }
 
@@ -164,7 +162,6 @@ export function normalizeArray<T>(arr: T | T[]) {
   return Array.isArray(arr) ? arr : [arr];
 }
 
-
 export function mergeArray<T>(arr1: T[], arr2: T[]) {
   const arr = [...arr1];
 
@@ -176,7 +173,7 @@ export function mergeArray<T>(arr1: T[], arr2: T[]) {
     if (arr.indexOf(v) === -1) {
       arr.push(v);
     }
-  })
+  });
 
   return arr;
 }
@@ -193,7 +190,7 @@ export const isEmptyVNodes = (vnodes) => {
   const arr = vnodes.flat();
 
   return arr.filter((v) => !!v).length === 0;
-}
+};
 
 export const isShallowEqualArray = (values, oldValues) => {
   if (values.length !== oldValues.length) {
@@ -207,4 +204,4 @@ export const isShallowEqualArray = (values, oldValues) => {
   }
 
   return false;
-}
+};

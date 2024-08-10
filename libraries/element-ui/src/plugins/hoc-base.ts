@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import type { VNode } from 'vue';
 import {
   defineComponent,
@@ -102,7 +103,7 @@ const useSetRefParent = (refMap, mapGet, $methodNames, ctx) => {
     });
     Object.defineProperties(ctx.parent, map);
   });
-}
+};
 
 const usePropMap = (props, ctx: SetupContext) => {
   let setupEnded = false;
@@ -162,7 +163,7 @@ const usePropMap = (props, ctx: SetupContext) => {
       throw new Error('GetEnd not allowed to be used in setup runtime!');
     }
     return mapGet(endRefMap, key);
-  }
+  };
 
   const useComputed = (map: Record<string, any>, dependPropKeys: string | string[], compute: (...args: any[]) => any = (v) => v) => {
     let oldValues: any[] = [];
@@ -173,7 +174,7 @@ const usePropMap = (props, ctx: SetupContext) => {
         return oldResult;
       }
 
-      let result = compute(...values);
+      const result = compute(...values);
       oldResult = result;
       oldValues = values;
       return result;
@@ -195,7 +196,7 @@ const usePropMap = (props, ctx: SetupContext) => {
       propRef.value = compute(...values);
     }, { immediate: true });
     return propRef;
-  }
+  };
 
   const createPropsControl = (momentRefMap) => {
     return {
@@ -215,19 +216,20 @@ const usePropMap = (props, ctx: SetupContext) => {
       useComputed: (k: string | string[], compute = (v) => v) => useComputed(momentRefMap, k, compute),
       useRef: (k: string | string[], compute = (v) => v) => useMapGetRef(momentRefMap, k, compute),
     };
-  }
+  };
 
   const callSetupEnd = (refMap: HocBaseRefMap) => {
     setupEnded = true;
     Object.assign(endRefMap, refMap);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useSetRefParent(refMap, mapGet, props.$methodNames || [], ctx);
-  }
+  };
 
   return {
     callSetupEnd,
     createPropsControl,
   };
-}
+};
 
 function setMergeMapSymbol(mergeMap, momentRefMap) {
   mergeMap[$deletePropList] = mergeArray(momentRefMap[$deletePropList], mergeMap[$deletePropList] || []);
@@ -250,7 +252,7 @@ function setMergeMapSymbol(mergeMap, momentRefMap) {
 }
 
 function mergeRefMap(...refMaps: HocBaseRefMap[]) {
-  let map: HocBaseRefMap = {
+  const map: HocBaseRefMap = {
     [$ref]: {
       props: [],
     },
@@ -258,7 +260,7 @@ function mergeRefMap(...refMaps: HocBaseRefMap[]) {
     [$render]: [],
   };
 
-  refMaps.map((refMap) => {
+  refMaps.forEach((refMap) => {
     Object.keys(refMap).forEach((k) => {
       map[k] = refMap[k];
     });
@@ -292,7 +294,7 @@ const toRenderState = (map: Record<MapGetKey, any>, keys: string[], baseComponen
       listeners[eventName] = map[k];
     } else if (k.startsWith('update:')) {
       listeners[k] = map[k];
-    }else if (slotRegex.test(k)) {
+    } else if (slotRegex.test(k)) {
       const slotName = _.kebabCase(k.substring(4));
       renderSlots[slotName] = map[k];
     } else {
@@ -348,7 +350,7 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const { $plugin: manger, $component: baseComponent } = props;
-    const compName = baseComponent.name;
+    // const compName = baseComponent.name;
     const propKeys = getPropKeys(baseComponent);
     const keys = manger.getPluginPropKeys(propKeys);
     const vueInstance: any = ctx.root;
@@ -410,7 +412,7 @@ export default defineComponent({
       baseComponent,
     } = this.$state;
 
-    const scopedSlots: any = Object.assign({}, this.$scopedSlots, getRefValueMap(slots));
+    const scopedSlots: any = { ...this.$scopedSlots, ...getRefValueMap(slots) };
 
     const childrenNodes: VNode[] = [];
     (this.$slotNames as string[]).forEach((slotName) => {
@@ -437,11 +439,11 @@ export default defineComponent({
       }
     });
 
-    const refProps: any = Object.assign({}, this.$attrs, getRefValueMap(props));
-    const refListeners = Object.assign({}, this.$listeners, getRefValueMap(listeners));
+    const refProps: any = { ...this.$attrs, ...getRefValueMap(props) };
+    const refListeners = { ...this.$listeners, ...getRefValueMap(listeners) };
 
     const resultVNode = h(baseComponent, {
-      ...splitPropsAndAttrs(refProps, propKeys, allPropsKeys, deletePropsKeys),
+      ...splitPropsAndAttrs(refProps, propKeys, allPropsKeys),
       ...splitListeners(refListeners, this.$nativeEvents as string[], getEventKeys(deletePropsKeys)),
       scopedSlots,
       ref: '$base',

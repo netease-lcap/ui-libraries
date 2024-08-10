@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
 import type { Ref, ComputedRef, SetupContext } from '@vue/composition-api';
 import _ from 'lodash';
 import type { CreateElement, VNode } from 'vue';
@@ -41,8 +42,7 @@ export interface MapGet {
   useComputed<T>(prop: string[], compute?: (...v: any[]) => T): ComputedRef<T>;
 }
 
-export type PluginSetupFunction<K, V> = (props: Readonly<MapGet>, ctx: PluginSetUpContext) => PluginSetupFunctionReturn | void;
-
+export type PluginSetupFunction = (props: Readonly<MapGet>, ctx: PluginSetUpContext) => PluginSetupFunctionReturn | void;
 
 export interface NaslComponentPluginOptions {
   /**
@@ -56,7 +56,7 @@ export interface NaslComponentPluginOptions {
   /**
    * vue composition setup 执行是函数，用户监听数据变化，
    */
-  setup: PluginSetupFunction<string, any>;
+  setup: PluginSetupFunction;
 
   /**
    * 插件排序，默认 4, 越小越先执行
