@@ -1,12 +1,12 @@
 /* 组件功能扩展插件 */
-import  { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
+import { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
 import { shallowRef, watch } from '@vue/composition-api';
 import { isObject } from 'lodash';
 
 const getFileNameByURL = (url) => {
   const match = url.match(/\/([^/]+)$/);
   return match ? match[1] : null;
-}
+};
 
 const getFileListByValue = (value, converter: 'json' | 'simple', fileList) => {
   if (Array.isArray(fileList)) {
@@ -30,7 +30,7 @@ const getFileListByValue = (value, converter: 'json' | 'simple', fileList) => {
   try {
     const parsedValue = JSON.parse(value || '[]');
     return Array.isArray(parsedValue) ? parsedValue : [];
-  } catch(e) {
+  } catch (e) {
     return [];
   }
 };
@@ -50,7 +50,7 @@ const getValueByList = (fileList, convert) => {
   }
 
   return JSON.stringify(list);
-}
+};
 
 export const useEvents = {
   setup: (props) => {
@@ -108,8 +108,7 @@ export const useEvents = {
     };
   },
   order: 2,
-}
-
+};
 
 export const useValue2FileList: NaslComponentPluginOptions = {
   props: ['value', 'convert'],
@@ -119,7 +118,6 @@ export const useValue2FileList: NaslComponentPluginOptions = {
       props.get('converter'),
       props.get('fileList'),
     ));
-
 
     watch(() => props.get('value'), (v, oldV) => {
       const convert = props.getEnd<string>('converter');
@@ -146,7 +144,6 @@ export const useValue2FileList: NaslComponentPluginOptions = {
       fileList.value = arr.concat(list);
     });
 
-
     const changeFileList = (list) => {
       const convert = props.getEnd<string>('converter');
       const updateValue = props.get('update:value');
@@ -165,11 +162,11 @@ export const useValue2FileList: NaslComponentPluginOptions = {
         const onChange = props.get('onChange');
         return typeof onChange === 'function' ? onChange(file, list) : null;
       },
-      onRemove: (file, fileList) => {
-        changeFileList(fileList);
+      onRemove: (file, fl) => {
+        changeFileList(fl);
         const onRemove = props.get('onRemove');
-        return typeof onRemove === 'function' ? onRemove(file, fileList) : null;
-      }
+        return typeof onRemove === 'function' ? onRemove(file, fl) : null;
+      },
     };
   },
   order: 3,
@@ -188,9 +185,8 @@ export const useUploadFile: NaslComponentPluginOptions = {
       const name = `${cname}=`;
       const ca = document.cookie.split(';');
       for (let i = 0; i < ca.length; i++) {
-          const c = ca[i].trim();
-          if (c.indexOf(name) === 0)
-              return c.substring(name.length, c.length);
+        const c = ca[i].trim();
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
       }
       return '';
     };
@@ -217,7 +213,7 @@ export const useUploadFile: NaslComponentPluginOptions = {
         }
       }
 
-      return Object.assign({}, isObject(propHeaders) ? propHeaders : {}, lcapUploadHeaders);
+      return { ...(isObject(propHeaders) ? propHeaders : {}), ...lcapUploadHeaders };
     });
 
     const data = props.useComputed(['data', 'lcapIsCompress', 'viaOriginURL'], (propData, lcapIsCompress, viaOriginURL) => {
@@ -226,7 +222,7 @@ export const useUploadFile: NaslComponentPluginOptions = {
         viaOriginURL,
       };
 
-      return Object.assign({}, isObject(propData) ? propData : {}, formData);
+      return { ...(isObject(propData) ? propData : {}), ...formData };
     });
 
     return {
@@ -244,11 +240,11 @@ export const useUploadFile: NaslComponentPluginOptions = {
         if (typeof onSuccess === 'function') {
           onSuccess(res, file, fileList);
         }
-      }
+      },
     };
   },
   order: 3,
-}
+};
 
 export const useUploadTrigger: NaslComponentPluginOptions = {
   props: ['dragTipText'],
@@ -262,7 +258,7 @@ export const useUploadTrigger: NaslComponentPluginOptions = {
         if (drag) {
           return [
             h('i', { class: 'el-icon-upload' }),
-            h('div', { class: 'el-upload__text'}, dragTipText)
+            h('div', { class: 'el-upload__text' }, dragTipText),
           ];
         }
 
@@ -272,6 +268,6 @@ export const useUploadTrigger: NaslComponentPluginOptions = {
 
         return slotDefault ? slotDefault() : null;
       },
-    }
-  }
-}
+    };
+  },
+};
