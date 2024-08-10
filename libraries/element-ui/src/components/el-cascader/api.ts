@@ -2,7 +2,6 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: false,
     ideusage: {
       "idetype": "container",
       "structured": true,
@@ -212,7 +211,6 @@ namespace nasl.ui {
   }
 
   @IDEExtraInfo({
-    show: false,
     ideusage: {
       "idetype": "container",
       "parentAccept": "target.tag === 'el-cascader'"

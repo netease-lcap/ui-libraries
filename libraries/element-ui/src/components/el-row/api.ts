@@ -2,7 +2,6 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: false,
     "ideusage": {
       "idetype": "container",
       "structured": true,
@@ -84,7 +83,6 @@ namespace nasl.ui {
 
 
   @IDEExtraInfo({
-    show: false,
     "ideusage": {
       "idetype": "element",
       "parentAccept": "target.tag === 'el-row'"

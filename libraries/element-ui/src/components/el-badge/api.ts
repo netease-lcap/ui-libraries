@@ -2,7 +2,6 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: false,
   })
   @Component({
     title: '标记',
@@ -23,7 +22,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     text: nasl.core.String = '';
-    
+
     @Prop({
       group: '主要属性',
       title: '显示值',

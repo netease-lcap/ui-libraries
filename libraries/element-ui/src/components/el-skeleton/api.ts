@@ -2,7 +2,6 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: false,
     "ideusage": {
       "idetype": "container",
       "structured": "template",
@@ -90,7 +89,6 @@ namespace nasl.ui {
 
 
   @IDEExtraInfo({
-    show: false,
     "ideusage": {
       "idetype": "element",
       "parentAccept": "target.tag === 'template' && target.slotTarget ==='template'",

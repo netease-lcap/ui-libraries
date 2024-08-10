@@ -2,7 +2,6 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: false,
   })
   @Component({
     title: '多选框',

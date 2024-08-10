@@ -2,7 +2,6 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: false,
   })
   @Component({
     title: '日期选择器',
@@ -139,7 +138,7 @@ namespace nasl.ui {
     })
     endPlaceholder: nasl.core.String;
 
-    
+
     @Prop({
       group: '主要属性',
       title: '显示格式',

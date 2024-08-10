@@ -2,7 +2,6 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: false,
   })
   @Component({
     title: '对话框',
@@ -16,7 +15,7 @@ namespace nasl.ui {
         description: '打开弹窗',
     })
     open(): void {}
-   
+
     @Method({
       title: 'undefined',
       description: '打开动画结束时的回调',

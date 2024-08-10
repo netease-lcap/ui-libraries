@@ -2,7 +2,6 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: false,
     ideusage: {
       "idetype": "container",
       "structured": true,
@@ -172,7 +171,6 @@ namespace nasl.ui {
   }
 
   @IDEExtraInfo({
-    show: false,
     "ideusage": {
       "idetype": "container",
       "structured": true, // 配合默认插槽 snippets选项 添加子组件
@@ -264,7 +262,6 @@ namespace nasl.ui {
   }
 
   @IDEExtraInfo({
-    show: false,
     "ideusage": {
       "idetype": "container",
       "parentAccept": "target.tag === 'el-menu' || target.tag === 'el-submenu' || target.tag === 'el-menu-item-group'"
@@ -315,7 +312,6 @@ namespace nasl.ui {
   }
 
   @IDEExtraInfo({
-    show: false,
     "ideusage": {
       "idetype": "container",
       "structured": true,

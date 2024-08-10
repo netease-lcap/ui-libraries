@@ -2,7 +2,6 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: false,
   })
   @Component({
     title: '输入框',
@@ -20,19 +19,19 @@ namespace nasl.ui {
       description: '使 input 失去焦点',
     })
     blur(): any {};
-  
+
     @Method({
       title: '使获取焦点',
       description: '使 input 获取焦点',
     })
     focus(): any {};
-  
+
     @Method({
       title: '清除值',
       description: '清除 input 值',
     })
     clear(): any {};
-  
+
     @Method({
       title: 'Input HTML 元素',
       description: 'Input HTML 元素',
@@ -56,7 +55,7 @@ namespace nasl.ui {
       description: '选中 input 中的文字',
     })
     select(): any {};
-    
+
   }
 
   export class ElInputOptions extends ViewComponentOptions {
@@ -239,8 +238,8 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-            { title: 'none' }, 
-            { title: 'both' }, 
+            { title: 'none' },
+            { title: 'both' },
             { title: 'horizontal' },
             { title: 'vertical' }
         ],
@@ -514,7 +513,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     name: nasl.core.String;
-    
+
     @Prop({
       group: '主要属性',
       title: 'lable提示',
@@ -594,19 +593,19 @@ namespace nasl.ui {
       description: '输入框头部内容，只对 `type="text"` 有效',
     })
     slotPrefix: () => Array<ViewComponent>;
-  
+
     @Slot({
       title: '尾部内容插槽',
       description: '输入框尾部内容，只对 `type="text"` 有效',
     })
     slotSuffix: () => Array<ViewComponent>;
-  
+
     @Slot({
       title: '前置内容插槽',
       description: '输入框前置内容，只对 `type="text"` 有效',
     })
     slotPrepend: () => Array<ViewComponent>;
-  
+
     @Slot({
       title: '后置内容插槽',
       description: '输入框后置内容，只对 `type="text"` 有效',

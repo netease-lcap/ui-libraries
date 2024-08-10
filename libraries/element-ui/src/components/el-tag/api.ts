@@ -2,7 +2,6 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: false,
   })
   @Component({
     title: '标签',
@@ -57,9 +56,9 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: '默认标签' }, 
-          { title: '中等标签' }, 
-          { title: '小型标签' }, 
+          { title: '默认标签' },
+          { title: '中等标签' },
+          { title: '小型标签' },
           { title: '超小标签' }
         ],
       },
@@ -73,8 +72,8 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'dark' }, 
-          { title: 'light' }, 
+          { title: 'dark' },
+          { title: 'light' },
           { title: 'plain' }
         ],
       },

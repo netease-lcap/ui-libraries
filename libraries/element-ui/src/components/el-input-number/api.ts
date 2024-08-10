@@ -2,7 +2,6 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: false,
   })
   @Component({
     title: '数字输入框',
@@ -45,7 +44,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     name: nasl.core.String;
-  
+
     @Prop({
       group: '主要属性',
       title: 'label文字',
@@ -53,7 +52,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     label: nasl.core.String;
-  
+
     @Prop({
       group: '主要属性',
       title: 'lable提示',
@@ -61,7 +60,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     ariaLabel: nasl.core.String;
-    
+
     @Prop({
       group: '主要属性',
       title: '占位文本',
@@ -77,7 +76,7 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
     })
     max: nasl.core.Decimal = Infinity;
-  
+
     @Prop({
       group: '主要属性',
       title: '最小值',
@@ -101,7 +100,7 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     stepStrictly: nasl.core.Boolean = false;
-  
+
     @Prop({
       group: '主要属性',
       title: '数值精度',
@@ -109,7 +108,7 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
     })
     precision: nasl.core.Decimal;
-  
+
     @Prop({
       group: '主要属性',
       title: '尺寸',
@@ -136,7 +135,7 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     disabled: nasl.core.Boolean = false;
-  
+
     @Prop({
       group: '主要属性',
       title: '控制按钮',
@@ -185,7 +184,7 @@ namespace nasl.ui {
       description: '自定义输入框按钮减少图标',
     })
     slotDecreaseIcon: () => Array<ViewComponent>;
-  
+
     @Slot({
       title: '增加图标',
       description: '自定义输入框按钮增加图标',

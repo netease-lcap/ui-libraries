@@ -2,7 +2,6 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: false,
   })
   @Component({
     title: '日期时间选择器',
@@ -139,7 +138,7 @@ namespace nasl.ui {
     })
     timeArrowControl: nasl.core.Boolean = false;
 
-    
+
     @Prop({
       group: '主要属性',
       title: '显示格式',
@@ -154,7 +153,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '对齐方式',
       description: '对齐方式',
-      setter: { 
+      setter: {
         concept: 'EnumSelectSetter',
         options: [
           { title: '居左' },
@@ -295,7 +294,7 @@ namespace nasl.ui {
       description: "选中日期后会执行的回调，只有当 daterange 或 datetimerange 才生效"
     })
     onPick: (event: {maxDate: nasl.core.Date; minDate: nasl.core.Date}) => any;
-    
+
     @Event({
       title: 'On Change',
       description: '用户确认选定的值时触发',

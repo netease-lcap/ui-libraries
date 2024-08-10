@@ -2,7 +2,6 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: false,
   })
   @Component({
     title: '标签页',
@@ -34,7 +33,7 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [
           { title: '默认样式' },
-          { title: '选项卡样式的标签页' }, 
+          { title: '选项卡样式的标签页' },
           { title: '卡片化的标签页' }
         ],
       },
@@ -94,7 +93,7 @@ namespace nasl.ui {
       title: '切换标签之前的钩子，若返回 false 或者返回 Promise 且被 reject，则阻止切换。',
       description:
         '切换标签之前的钩子，若返回 false 或者返回 Promise 且被 reject，则阻止切换。',
-      setter: { 
+      setter: {
         concept: 'EnumSelectSetter',
         options: [
           { title: '允许切换' },
@@ -126,7 +125,7 @@ namespace nasl.ui {
       title: '点击 tabs 的新增按钮或 tab 被关闭',
       description: '点击 tabs 的新增按钮或 tab 被关闭后触发',
     })
-    onEdit: (event: 
+    onEdit: (event:
       {
         targetName: nasl.core.String;
         action: nasl.collection.List<String>;
