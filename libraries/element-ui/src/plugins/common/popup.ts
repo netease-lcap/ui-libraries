@@ -20,10 +20,10 @@ export const createUsePopup = (propName: string = 'visible') => {
           },
           close: () => {
             opened.value = false;
-          }
-        }
+          },
+        },
       };
-    }
+    },
   };
 
   return usePopup;

@@ -4,7 +4,6 @@ export const createProp2Default = (propName) => {
   const useProps2Default = {
     props: [propName],
     setup: (props) => {
-
       return {
         slotDefault: () => {
           const slotDefault = props.get('slotDefault');
@@ -18,7 +17,7 @@ export const createProp2Default = (propName) => {
       };
     },
     order: 1,
-  }
+  };
 
   return useProps2Default;
-}
+};
