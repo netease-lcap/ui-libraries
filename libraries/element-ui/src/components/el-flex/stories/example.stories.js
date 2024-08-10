@@ -10,7 +10,7 @@ export default {
   },
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    direction: { control: 'radio', options: ['horizontal', 'vertical'] }
+    direction: { control: 'radio', options: ['horizontal', 'vertical'] },
   },
 };
 
@@ -33,6 +33,6 @@ export const Default = {
   }),
   args: {
     gutter: 10,
-    direction: 'vertical'
-  }
+    direction: 'vertical',
+  },
 };

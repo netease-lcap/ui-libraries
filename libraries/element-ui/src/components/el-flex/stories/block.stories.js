@@ -1,4 +1,3 @@
-
 import ElFlex from '../index';
 
 export default {
@@ -12,8 +11,8 @@ export default {
   decorators: [() => ({
     provide() {
       return {
-        'VUE_APP_DESIGNER': true
-      }
+        VUE_APP_DESIGNER: true,
+      };
     },
     template: '<div style="width: 500px;"><story/></div>',
   })],
@@ -23,7 +22,7 @@ export const Default = {
   name: '单行排布',
   render: () => ({
     template: '<el-flex direction="horizontal"></el-flex>',
-  })
+  }),
 };
 
 export const MultiLine = {
@@ -35,12 +34,12 @@ export const MultiLine = {
     <el-flex :wrap="true">
     </el-flex>
     </el-flex>`,
-  })
+  }),
 };
 
 export const SpaceBetween = {
   name: '两端排布',
   render: () => ({
     template: '<el-flex justify="space-between"><el-flex :wrap="true"></el-flex><el-flex :wrap="true"></el-flex></el-flex>',
-  })
+  }),
 };

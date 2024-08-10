@@ -17,7 +17,7 @@ export default {
     },
     alignment: {
       type: String,
-      default: () => 'start'
+      default: () => 'start',
     },
     wrap: {
       type: Boolean,
@@ -40,12 +40,12 @@ export default {
     };
 
     return h('div', {
-      style: style,
+      style,
       class: this.mode === 'flex' ? styles.flex : styles.flexBlock,
       on: this.$listeners,
       attrs: {
-        'vusion-slot-name': 'default'
+        'vusion-slot-name': 'default',
       },
     }, this.$scopedSlots.default ? this.$scopedSlots.default() : null);
-  }
+  },
 };
