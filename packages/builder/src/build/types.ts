@@ -7,7 +7,7 @@ export interface BuildIdeOptions {
 export interface LcapThemeOptions {
   themeVarCssPath?: string;
   themeComponentFolder?: string;
-  useOldCssVarParser?: boolean;
+  oldCssVarPath?: string;
   previewPages?: Array<{ name: string; title: string; viewport?: { width: number; height: number } }>;
   findThemeType?: 'theme' | 'component';
 }

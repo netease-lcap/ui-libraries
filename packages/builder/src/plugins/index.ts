@@ -9,7 +9,6 @@ const DEFAULT_THEME_OPTIONS: LcapThemeOptions = {
   findThemeType: 'theme',
   themeVarCssPath: './src/theme/vars.css',
   themeComponentFolder: './src/theme/components',
-  useOldCssVarParser: false,
   themePreviewEntry: './src/theme/index',
   previewPages: [
     {
@@ -28,7 +27,6 @@ const EXTENSION_DEFAULT_THEME_OPTIONS: LcapThemeOptions = {
   themeVarCssPath: '',
   themeComponentFolder: './src/components',
   themePreviewEntry: '',
-  useOldCssVarParser: false,
   previewPages: [],
 };
 

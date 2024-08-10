@@ -558,7 +558,7 @@
                 }
             ],
             "displaySlotInline": {
-                "cell": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type')?.value)",
+                "cell": "['index', 'radio', 'checkbox', 'dragHandler'].includes(this.getAttribute('type')?.value)",
                 "title": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type')?.value)"
             },
             "forceUpdateWhenAttributeChange": "parent"
@@ -608,7 +608,21 @@
         "idetype": "container",
         "forceRefresh": "parent",
         "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic'].includes(target.tag)",
-        "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+        "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
+        "selector": [
+            {
+                "expression": "this.getElement(el => el.slotTarget === 'title')",
+                "cssSelector": "th"
+            },
+            {
+                "expression": "this.getElement(el => el.slotTarget === 'cell')",
+                "cssSelector": "td"
+            },
+            {
+                "expression": "this.getElement(el => el.slotTarget === 'expand-content')",
+                "cssSelector": "tr[class^='u-table-view_expand-content']"
+            }
+        ]
        }
     },
     {
@@ -669,7 +683,8 @@
             "additionalAttribute": {
                 ":dataSource": "\"[{}]\"",
                 ":colnum": "\"1\""
-            }
+            },
+            "useTemplateInDefaultSlot": true
         }
     },
     {
@@ -1046,6 +1061,9 @@
             },
             "slotWrapperInlineStyle": {
                 "item": "display:inline-block"
+            },
+            "additionalAttribute": {
+                ":showEmpty": false
             }
         }
     },
