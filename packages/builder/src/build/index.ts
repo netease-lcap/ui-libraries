@@ -11,6 +11,7 @@ import genNaslUIConfig from './gens/gen-nasl-ui';
 import genThemeJsonOld from './gens/gen-theme-json-old';
 import genManifestConfig from './gens/gen-manifest-config';
 import buildDecalaration from './build-declaration';
+import { getConfigComponents } from '../utils';
 
 export function buildThemeOld(rootPath, destDir) {
   const configPath = path.join(rootPath, './lcap-ui.config.js');
@@ -44,6 +45,21 @@ export function buildNaslUI(options: LcapBuildOptions) {
     assetsPublicPath: options.assetsPublicPath,
   });
 
+  if (options.dependencies && options.dependencies.length > 0) {
+    options.dependencies.forEach(({ rootPath, config }) => {
+      const configFn = typeof config === 'function' ? config : (c) => c;
+      const list = genNaslUIConfig({
+        rootPath,
+        framework: options.framework,
+        components: getConfigComponents(rootPath),
+        assetsPublicPath: options.assetsPublicPath,
+        dependency: true,
+      });
+
+      naslUIConfig.unshift(...list.map((it) => configFn(it)));
+    });
+  }
+
   options.components = naslUIConfig.map(({
     name, kebabName, group, title, children,
   }) => {
@@ -56,7 +72,7 @@ export function buildNaslUI(options: LcapBuildOptions) {
   });
 
   logger.success('生成 nasl.ui.json 成功！');
-  fs.writeJSONSync(`${options.destDir}/nasl.ui.json`, naslUIConfig, { spaces: 2 });
+  fs.writeJSONSync(path.join(options.destDir, 'nasl.ui.json'), naslUIConfig, { spaces: 2 });
 }
 
 export function buildI18N(options: LcapBuildOptions) {

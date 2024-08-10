@@ -4,16 +4,7 @@ import fs from 'fs-extra';
 import { kebabCase } from 'lodash';
 import parseCssVars, { ThemeComponentVars, ThemeGlobalVars, ThemeInfo } from '../../nasl/parse-css-vars';
 import parseCssVarsOld from '../../nasl/parse-css-vars-old';
-
-export interface ThemeOptions {
-  themeVarCssPath: string;
-  themeComponentFolder: string;
-  type: string;
-  previewPages: Array<{ name: string, title: string }>;
-  oldCssVarPath?: string;
-  components: Array<{ group: string, title: string, name: string, [key: string]: any }>;
-  findThemeType?: 'theme' | 'component';
-}
+import type { ThemeOptions } from '../types';
 
 export interface ThemeComponentConfig extends ThemeComponentVars {
   group: string;
@@ -88,6 +79,10 @@ export default function genThemeConfig(options: ThemeOptions, framework: string)
         }
       });
     }
+  }
+
+  if (!themeInfo) {
+    return themeConfig;
   }
 
   themeConfig.components = options.components.filter((comp) => comp.show !== false).map(({

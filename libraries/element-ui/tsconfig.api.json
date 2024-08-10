@@ -1,33 +1,31 @@
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowJs": false,
-        "resolveJsonModule": true,
-        "allowSyntheticDefaultImports": false,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "sourceMap": false,
-        "pretty": true,
-        "baseUrl": ".",
-        "declaration": true,
-        "emitDeclarationOnly": true,
-        "outFile": "./dist-theme/nasl.ui.ts",
-        "lib": [
-            "esnext",
-            "dom"
-        ],
-        "paths": {
-            "@/*": ["*"]
-        }
-    },
-    "include": [
-        "./src/components/*/api.ts",
-        "../pc-ui/src/components/*/api.ts"
-    ]
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowJs": false,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "sourceMap": false,
+    "pretty": true,
+    "baseUrl": ".",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outFile": "./dist-theme/nasl.ui.ts",
+    "lib": ["esnext", "dom"],
+    "paths": {
+      "@/*": ["*"]
+    }
+  },
+  "include": [
+    "./src/components/*/api.ts",
+    "./src/typings.d.ts",
+    "../pc-ui/src/components/*/api.ts"
+  ]
 }

@@ -2,7 +2,6 @@ import path from 'path';
 import fs from 'fs-extra';
 import logger from '../../utils/logger';
 import parseComponentAPI from '../../nasl/parse-component-api';
-import snippetCode2NASL from '../../nasl/snippet-code2nasl';
 import transformStory2Blocks from '../../nasl/story-nasl-block';
 
 function hasImg(dir) {

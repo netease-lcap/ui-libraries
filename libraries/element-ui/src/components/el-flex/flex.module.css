@@ -1,0 +1,13 @@
+.flex {
+  display: flex;
+  box-sizing: border-box;
+}
+
+.flexBlock {
+  display: block;
+  box-sizing: border-box;
+}
+
+.flexBlock > *:not(:last-child) {
+  margin-bottom: var(--el-flex-space-base);
+}

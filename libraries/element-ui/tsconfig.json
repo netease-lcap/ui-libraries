@@ -2,18 +2,19 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
     "skipLibCheck": true,
-
     /* Bundler mode */
     "moduleResolution": "bundler",
+    "alwaysStrict": false,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": false,
+    "allowJs": true,
     "noEmit": true,
     "jsx": "preserve",
-
+    "jsxFactory": "h",
     /* Linting */
     "strict": true,
     "noUnusedLocals": false,
@@ -22,8 +23,14 @@
     "strictPropertyInitialization": false,
     "noFallthroughCasesInSwitch": true,
     "emitDecoratorMetadata": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@lcap/nasl-hoc-vue/*": ["./src/plugins/*"],
+      "@components/*": ["./src/components/*"]
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": []
+  "include": ["src/**/*.ts", "src/**/*.tsx", "ide/**/*.ts"],
+  "references": [
+  ]
 }

@@ -1,0 +1,603 @@
+[
+    {
+        "name": "ElAlert",
+        "ideusage": {
+            "idetype": "container",
+            "selector": {
+                "expression": "this",
+                "cssSelector": ".el-alert"
+            }
+        }
+    },
+    {
+        "name": "ElAvatar",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "ElBadge",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElBreadcrumb",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'el-breadcrumb-item'"
+        }
+    },
+    {
+        "name": "ElBreadcrumbItem",
+        "ideusage": {
+            "idetype": "element",
+            "parentAccept": "target.tag === 'el-breadcrumb'"
+        }
+    },
+    {
+        "name": "ElButton",
+        "ideusage": {
+            "idetype": "element",
+            "editable": "text",
+            "textholder": "text"
+        }
+    },
+    {
+        "name": "ElCalendar",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElCard",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "ElCarousel",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'el-carousel-item'"
+        }
+    },
+    {
+        "name": "ElCarouselItem",
+        "ideusage": {
+            "idetype": "element",
+            "parentAccept": "target.tag === 'el-carousel'"
+        }
+    },
+    {
+        "name": "ElCascader",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'el-cascader-panel'"
+        }
+    },
+    {
+        "name": "ElCascaderPanel",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-cascader'"
+        }
+    },
+    {
+        "name": "ElCheckbox",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['el-checkbox-button', 'el-checkbox-group'].includes(target.tag) "
+        }
+    },
+    {
+        "name": "ElCheckboxGroup",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'el-checkbox-button'"
+        }
+    },
+    {
+        "name": "ElCheckboxButton",
+        "ideusage": {
+            "idetype": "element",
+            "parentAccept": "target.tag === 'el-checkbox'"
+        }
+    },
+    {
+        "name": "ElCollapse",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'el-collapse-item'"
+        }
+    },
+    {
+        "name": "ElCollapseItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-collapse'"
+        }
+    },
+    {
+        "name": "ElColorPicker",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElContainer",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['el-header', 'el-aside', 'el-footer'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "ElHeader",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-container'"
+        }
+    },
+    {
+        "name": "ElAside",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-container'"
+        }
+    },
+    {
+        "name": "ElFooter",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-container'"
+        }
+    },
+    {
+        "name": "ElDatePicker",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElDatetimePicker",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElDescriptions",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'el-descriptions-item'"
+        }
+    },
+    {
+        "name": "ElDescriptionsItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-descriptions'"
+        }
+    },
+    {
+        "name": "ElDialog",
+        "ideusage": {
+            "idetype": "modal",
+            "cacheOpenKey": "visible"
+        }
+    },
+    {
+        "name": "ElDrawer",
+        "ideusage": {
+            "idetype": "drawer",
+            "cacheOpenKey": "visible"
+        }
+    },
+    {
+        "name": "ElDivider",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElDropdown",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['el-dropdown-menu', 'el-dropdown-item'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "ElDropdownMenu",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-dropdown'"
+        }
+    },
+    {
+        "name": "ElDropdownItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-dropdown'"
+        }
+    },
+    {
+        "name": "ElEmpty",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "ElFlex",
+        "ideusage": {
+            "idetype": "container",
+            "containerDirection": "this.getAttribute('direction')?.value === 'vertical' ? 'column' : 'row' "
+        }
+    },
+    {
+        "name": "ElForm",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'el-form-item'"
+        }
+    },
+    {
+        "name": "ElFormItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-form'"
+        }
+    },
+    {
+        "name": "ElIcon",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElIframe",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElImage",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "ElInput",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'el-autocomplete'"
+        }
+    },
+    {
+        "name": "ElAutocomplete",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "ElInputNumber",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElLink",
+        "ideusage": {
+            "idetype": "element",
+            "textholder": "text"
+        }
+    },
+    {
+        "name": "ElMenu",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['el-submenu', 'el-menu-item', 'el-menu-item-group'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "ElMenu",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['el-submenu', 'el-menu-item', 'el-menu-item-group'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "ElSubmenu",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-menu'"
+        }
+    },
+    {
+        "name": "ElMenuItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-menu'"
+        }
+    },
+    {
+        "name": "ElMeElMenuItemGroupnuItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-menu'"
+        }
+    },
+    {
+        "name": "ElPageHeader",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "ElPageHeader",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElPopconfirm",
+        "ideusage": {
+            "idetype": "popover"
+        }
+    },
+    {
+        "name": "ElPopover",
+        "ideusage": {
+            "idetype": "popover"
+        }
+    },
+    {
+        "name": "ElProgress",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElRadio",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['el-radio-group', 'el-radio-button'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "ElRadioGroup",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-radio'"
+        }
+    },
+    {
+        "name": "ElRadioButton",
+        "ideusage": {
+            "idetype": "element",
+            "parentAccept": "target.tag === 'el-radio'"
+        }
+    },
+    {
+        "name": "ElRate",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElResult",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "ElRouterView",
+        "ideusage": {
+            "idetype": "router"
+        }
+    },
+    {
+        "name": "ElRow",
+        "ideusage": {
+            "idetype": "container",
+            "childAccept": "target.tag === 'el-col'"
+        }
+    },
+    {
+        "name": "ElCol",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-row'"
+        }
+    },
+    {
+        "name": "ElSelect",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['el-option-group', 'el-option'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "ElOptionGroup",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-select'"
+        }
+    },
+    {
+        "name": "ElOption",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-select'"
+        }
+    },
+    {
+        "name": "ElSkeleton",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'el-skeleton-item'"
+        }
+    },
+    {
+        "name": "ElSkeletonItem",
+        "ideusage": {
+            "idetype": "element",
+            "parentAccept": "target.tag === 'el-skeleton'"
+        }
+    },
+    {
+        "name": "ElSlider",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElStatistic",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "ElSteps",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'el-step'"
+        }
+    },
+    {
+        "name": "ElStep",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "ElSwitch",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElTable",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'el-table-column'",
+            "containerDirection": "row",
+            "dataSource": {
+                "display": 3,
+                "loopElem": "table > tbody > tr",
+                "emptySlot": {
+                    "condition": "!this.getAttribute('dataSource') || this.elementsLength() === 0",
+                    "accept": "target.concept === 'Entity'"
+                },
+                "refInLoop": {
+                    "child": "el-table-column",
+                    "slot": "default",
+                    "useRef": "argus?.[0]?.index === 0"
+                }
+            }
+        }
+    },
+    {
+        "name": "ElTableColumn",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-table'",
+            "containerDirection": "row",
+            "selector": "multiple",
+            "forceRefresh": "parent",
+            "events": {
+                "click": "this.getAttribute('type')?.value === 'expand'"
+            }
+        }
+    },
+    {
+        "name": "ElTabs",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'el-tab-pane'"
+        }
+    },
+    {
+        "name": "ElTabPane",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-tabs'"
+        }
+    },
+    {
+        "name": "ElTag",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElText",
+        "ideusage": {
+            "idetype": "element",
+            "editable": "text",
+            "textholder": "text"
+        }
+    },
+    {
+        "name": "ElTimePicker",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElTimeline",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'el-timeline-item'"
+        }
+    },
+    {
+        "name": "ElTimelineItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-timeline'"
+        }
+    },
+    {
+        "name": "ElTooltip",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "ElTransfer",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "ElTree",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "ElUpload",
+        "ideusage": {
+            "idetype": "container"
+        }
+    }
+]

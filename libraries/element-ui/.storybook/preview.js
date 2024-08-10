@@ -1,16 +1,11 @@
-/** @type { import('@storybook/react').Preview } */
-import { INITIAL_VIEWPORTS, MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
+import Vue from 'vue';
+import * as ElementUI from '@/main';
+
+Vue.use(ElementUI);
 
 const preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
-    viewport: {
-      viewports: {
-        ...INITIAL_VIEWPORTS,
-        ...MINIMAL_VIEWPORTS,
-      },
-      defaultViewport: 'iphone14promax',
-    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -18,6 +13,14 @@ const preview = {
       },
     },
   },
+  decorators: [() => ({
+    provide() {
+      return {
+        'VUE_APP_DESIGNER': false
+      }
+    },
+    template: '<story/>',
+  })],
 };
 
 export default preview;

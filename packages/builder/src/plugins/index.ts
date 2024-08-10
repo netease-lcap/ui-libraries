@@ -1,9 +1,9 @@
 import path from 'path';
-import fs from 'fs-extra';
 import LcapCodeGen from './lcap-code-gen';
 import LcapBuild from './lcap-build';
 import LcapConfig from './lcap-config';
 import type { LcapThemeOptions, ViteLcapPluginOptions } from './lcap-build';
+import { getConfigComponents } from '../utils';
 
 const DEFAULT_THEME_OPTIONS: LcapThemeOptions = {
   findThemeType: 'theme',
@@ -57,17 +57,8 @@ export default (options: ViteLcapPluginOptions = {}) => {
     pluginOption.theme.themeComponentFolder = path.resolve(cwd, pluginOption.theme.themeComponentFolder || '');
   }
 
-  const lcapConfigPath = path.resolve(cwd, './lcap-ui.config.js');
-  if ((!pluginOption.components || pluginOption.components.length === 0) && fs.existsSync(lcapConfigPath)) {
-    // eslint-disable-next-line import/no-dynamic-require, global-require
-    const config = require(lcapConfigPath);
-    pluginOption.components = (config.components || []).map((c) => ({
-      ...c,
-      group: c.group,
-      title: c.alias,
-      name: c.name,
-      show: c.show,
-    }));
+  if (!pluginOption.components || pluginOption.components.length === 0) {
+    pluginOption.components = getConfigComponents(cwd);
   }
 
   return [

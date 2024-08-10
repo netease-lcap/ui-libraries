@@ -11,6 +11,12 @@ export interface GenNaslUIConfigProps {
   framework?: string;
   assetsPublicPath?: string;
   components?: Array<{ group: string, title: string, name: string, [key: string]: any }>,
+  dependency?: boolean;
+}
+
+export interface ParseOption {
+  apiPath: string,
+  extConfig: Record<string, any>;
 }
 
 export default function genNaslUIConfig({
@@ -22,7 +28,7 @@ export default function genNaslUIConfig({
   const packageInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
   const libInfo = [packageInfo.name, '@', packageInfo.version].join('');
 
-  const waitParseList: any[] = [];
+  const waitParseList: ParseOption[] = [];
 
   if (components && components.length > 0) {
     components.forEach((extConfig) => {
@@ -40,7 +46,7 @@ export default function genNaslUIConfig({
       });
     });
   } else {
-    glob.sync('**/api.ts', { cwd: rootPath, absolute: true }).forEach((apiPath) => {
+    glob.sync('src/**/api.ts', { cwd: rootPath, absolute: true }).forEach((apiPath) => {
       waitParseList.push({
         apiPath,
         extConfig: {},

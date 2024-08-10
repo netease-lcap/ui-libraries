@@ -22,20 +22,37 @@ export default defineConfig(({ command }) => {
           compositionAPI: false,
         },
       }),
-      // lcapPlugin({
-      //   framework: 'vue2',
-      //   pnpm: true,
-      //   // theme: {
-      //   //   themeVarCssPath: 'src/styles/theme.css',
-      //   //   useOldCssVarParser: true,
-      //   // },
-      //   i18n: {},
-      // }),
+      lcapPlugin({
+        type: 'nasl.ui',
+        framework: 'vue2',
+        pnpm: true,
+        // theme: {
+        //   themeVarCssPath: 'src/styles/theme.css',
+        //   useOldCssVarParser: true,
+        // },
+        i18n: {},
+        dependencies: [
+          {
+            name: '@lcap/pc-ui',
+            rootPath: path.resolve(__dirname, '../pc-ui'),
+            config: (c) => {
+              return {
+                ...c,
+                show: false,
+              };
+            },
+          },
+        ],
+      }),
     ],
+    optimizeDeps: {
+      include: ['online-svg-icon-vue2'],
+    },
     resolve: {
       extensions: ['.js', '.ts', '.tsx', '.jsx', '.vue', '.mjs', '.cjs', '.json'],
       alias: {
         '@': path.resolve(__dirname, './src'),
+        '@lcap/nasl-hoc-vue': path.resolve(__dirname, './src/plugins'),
         'swiper/swiper-bundle.esm.js': path.resolve(__dirname, './node_modules/swiper/swiper-bundle.esm.js'),
         '@joskii/jflow-core': path.resolve(__dirname, './node_modules/@joskii/jflow-core/dist/jflow.es.min.js'),
         '@joskii/jflow-vue2-plugin': path.resolve(__dirname, './node_modules/@joskii/jflow-vue2-plugin/dist/jflow-vue2-plugin.es.min.js'),
@@ -69,38 +86,12 @@ export default defineConfig(({ command }) => {
       target: ['es2020', 'edge88', 'firefox78', 'chrome56', 'safari14'],
       lib: {
         entry: 'src/index',
-        name: 'LcapUI',
-        formats: ['umd'],
-        fileName: () => 'index.js',
+        name: 'ElementUI',
       },
       outDir: 'dist-theme',
       modulePreload: false,
       sourcemap: true,
       minify: true,
-      rollupOptions: {
-        // 确保外部化处理那些你不想打包进库的依赖
-        treehake: false,
-        external: ['vue', 'vue-router', 'vue-i18n'],
-        output: {
-          // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
-          globals: {
-            vue: 'Vue',
-            'vue-router': 'VueRouter',
-            'vue-i18n': 'VueI18n',
-          },
-          interop: 'compat',
-          assetFileNames: (assetInfo) => {
-            if (assetInfo.name === 'style.css') {
-              return 'index.css';
-            }
-
-            return '[name][extname]';
-          },
-        },
-      },
-      commonjsOptions: {
-        transformMixedEsModules: true,
-      },
     },
     test: {
       environment: 'jsdom',

@@ -1,0 +1,210 @@
+import Vue from 'vue';
+import type { ComponentOptions } from 'vue';
+import { isRef } from '@vue/composition-api';
+import { camelCase, kebabCase } from 'lodash';
+import { PluginSetupRef } from './plugin';
+
+export function getPropKeys(component: ComponentOptions<Vue>) {
+  const keys = Array.isArray(component.props) ? [...component.props] : Object.keys(component.props || {});
+
+  if (component.extends) {
+    const extendKeys = getPropKeys(component.extends as ComponentOptions<Vue>);
+    extendKeys.forEach((k) => {
+      if (keys.indexOf(k) === -1) {
+        keys.push(k);
+      }
+    });
+  }
+
+  if (component.mixins && component.mixins.length > 0) {
+    component.mixins.forEach((mixin: any) => {
+      const mixinKeys = getPropKeys(mixin);
+      mixinKeys.forEach((k) => {
+        if (keys.indexOf(k) === -1) {
+          keys.push(k);
+        }
+      });
+    });
+  }
+
+  return keys;
+}
+
+const EVENT_PREFIX = 'on-';
+const SLOT_PREFIX = 'slot-';
+
+export function getSlotKey(name) {
+  return camelCase(`slot-${name}`)
+}
+
+export function getEventKey(name) {
+  return camelCase(`${EVENT_PREFIX}${name}`)
+}
+
+export function getEventKeys(keys: string[]) {
+  return keys.map((key) => kebabCase(key))
+    .filter(key => key.startsWith(EVENT_PREFIX))
+    .map((key) => key.substring(EVENT_PREFIX.length));
+}
+
+export function getSlotKeys(keys: string[]) {
+  return keys.map((key) => kebabCase(key))
+    .filter(key => key.startsWith(SLOT_PREFIX))
+    .map((key) => key.substring(SLOT_PREFIX.length));
+}
+
+export function getRefValue(props, name) {
+  const v = props[name];
+  return isRef(v) ? v.value : v;
+}
+
+export function getRefValueMap(refMap) {
+  const map = {};
+
+  Object.keys(refMap).forEach((k) => {
+    map[k] = getRefValue(refMap, k);
+  });
+
+  return map;
+}
+
+export function splitPropsAndAttrs(map, propsKeys, allKeys, deletePropsKeys) {
+  const props = {};
+  const attrs = {};
+  let className = '';
+  let style = {};
+
+  Object.keys(map).forEach((k) => {
+    if (deletePropsKeys.indexOf(k) !== -1) {
+      return;
+    } else if (k === 'class') {
+      className = map[k];
+    } else if (k === 'style') {
+      style = map[k];
+    } else if (propsKeys.indexOf(k) !== -1) {
+      props[k] = map[k];
+    } else {
+      attrs[k] = map[k];
+    }
+  });
+
+  allKeys.forEach((k) => {
+    delete attrs[k];
+  });
+
+  return {
+    props,
+    attrs,
+    class: className,
+    style: style,
+  };
+}
+
+export function splitListeners(listeners, nativeEvents: string[], deleteEventKeys: string[]) {
+  const on = {};
+  const nativeOn = {};
+
+  Object.keys(listeners).forEach((k) => {
+    if (deleteEventKeys.indexOf(k) !== -1) {
+      return;
+    }
+
+    if (nativeEvents.indexOf(k) === -1) {
+      on[k] = listeners[k];
+    } else {
+      nativeOn[k] = listeners[k];
+    }
+  });
+
+  return {
+    on,
+    nativeOn,
+  };
+}
+
+export function mergeRef($toRef, ref) {
+  Object.keys(ref).forEach((k) => {
+    if (k === 'props') {
+      ref.props?.forEach((key) => {
+        if ($toRef.props.indexOf(key) === -1) {
+          $toRef.props.push(key);
+        }
+      });
+    } else {
+      $toRef[k] = ref[k];
+    }
+  });
+}
+
+export function getProxyMap($toRef: PluginSetupRef, propMap) {
+  const { props, ...methods } = $toRef;
+  const proxyMap = {};
+  if (props && props.length > 0) {
+    props.forEach((name) => {
+      proxyMap[name] = getRefValue(propMap, name);
+    });
+  }
+
+  Object.keys(methods).forEach((methodName) => {
+    proxyMap[methodName] = methods[methodName];
+  });
+
+  return proxyMap;
+}
+
+export function isNullOrUndefined(v) {
+  return v === undefined || v === null;
+}
+
+export function normalizeArray<T>(arr: T | T[]) {
+  if (isNullOrUndefined(arr)) {
+    return [];
+  }
+
+  return Array.isArray(arr) ? arr : [arr];
+}
+
+
+export function mergeArray<T>(arr1: T[], arr2: T[]) {
+  const arr = [...arr1];
+
+  if (!arr2 || arr2.length === 0) {
+    return arr;
+  }
+
+  arr2.forEach((v) => {
+    if (arr.indexOf(v) === -1) {
+      arr.push(v);
+    }
+  })
+
+  return arr;
+}
+
+export const isEmptyVNodes = (vnodes) => {
+  if (!vnodes || (Array.isArray(vnodes) && vnodes.length === 0)) {
+    return true;
+  }
+
+  if (!Array.isArray(vnodes)) {
+    return false;
+  }
+
+  const arr = vnodes.flat();
+
+  return arr.filter((v) => !!v).length === 0;
+}
+
+export const isShallowEqualArray = (values, oldValues) => {
+  if (values.length !== oldValues.length) {
+    return false;
+  }
+
+  const index = values.findIndex((v, i) => oldValues[i] !== v);
+
+  if (index === -1) {
+    return true;
+  }
+
+  return false;
+}

@@ -1,0 +1,77 @@
+.root {
+  white-space: pre-wrap;
+}
+
+.root.size-small {
+  font-size: 12px;
+}
+
+.root.size-normal {
+  font-size: 14px;
+}
+
+.root.size-large {
+  font-size: 16px;
+}
+
+.root.size-huge {
+  font-size: 18px;
+}
+
+.root.weight-normal {
+  font-weight: normal;
+}
+
+.root.weight-bold {
+  font-weight: bold;
+}
+
+.root.color-default {
+  color: inherit;
+}
+
+.root.color-primary {
+  color: #409EFF;
+}
+
+.root.color-secondary {
+  color: #666666;
+}
+
+.root.color-success {
+  color: #67C23A;
+}
+
+.root.color-warning {
+  color: #E6A23C;
+}
+
+.root.color-error {
+  color: #F56C6C;
+}
+
+.root.color-disabled {
+  color: #C0C4CC;
+}
+
+.root.overflow-ellipsis,
+.root.wrap-ellipsis {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.root.overflow-break, .root.wrap-break {
+  word-wrap: break-word;
+  hyphens: auto;
+  white-space: normal;
+}
+
+.root.overflow-nowrap, .root.wrap-nowrap {
+  white-space: nowrap;
+}
+
+.root.display-block {
+  display: block;
+}
