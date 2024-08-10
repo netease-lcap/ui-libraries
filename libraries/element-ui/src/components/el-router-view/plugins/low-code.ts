@@ -8,7 +8,7 @@ export const useLowcodePlaceholder: NaslComponentPluginOptions = {
     const inAbsolutedLayout = inject('inAbsoluteLayout') || false;
     return {
       [$render]: (resultVnode, h) => {
-        const absoluteTip = h('div', { class: styles.tooltip}, [
+        const absoluteTip = h('div', { class: styles.tooltip }, [
           h('span', { class: styles.tooltipIcon }),
           h('span', '温馨提示'),
           h('div', { class: styles.tooltipContent }, [
@@ -20,13 +20,13 @@ export const useLowcodePlaceholder: NaslComponentPluginOptions = {
         return h('div', {
           class: styles.fake,
         }, [
-          h('div', { class: styles.fakeRouter}, [resultVnode]),
-          h('div', { class: styles.fakeEmpty}, [
+          h('div', { class: styles.fakeRouter }, [resultVnode]),
+          h('div', { class: styles.fakeEmpty }, [
             h('span', ['此容器为子页面呈现占位，可在子页面编辑内容']),
             inAbsolutedLayout ? absoluteTip : null,
-          ])
+          ]),
         ]);
-      }
+      },
     };
   },
   onlyUseIDE: true,
