@@ -33,7 +33,6 @@ export const useDataSource: NaslComponentPluginOptions = {
       return 0;
     });
 
-
     const loadDataFn = props.useRef('dataSource', (v) => {
       if (typeof v !== 'function') {
         return null;
@@ -52,7 +51,7 @@ export const useDataSource: NaslComponentPluginOptions = {
 
         loading.value = false;
         return data;
-      }
+      };
 
       return loadData;
     });
@@ -68,8 +67,9 @@ export const useDataSource: NaslComponentPluginOptions = {
             return;
           }
 
+          // eslint-disable-next-line consistent-return
           return loadDataFn.value(params);
-        }
+        },
       },
       /* 删除多余的key 防止透传 */
       [$deletePropList]: ['onLoadData'],

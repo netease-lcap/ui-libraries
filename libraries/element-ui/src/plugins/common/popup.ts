@@ -5,7 +5,7 @@ import { isNullOrUndefined } from '../utils';
 export const createUsePopup = (propName: string = 'visible') => {
   const usePopup: NaslComponentPluginOptions = {
     setup: (props) => {
-      const opened = props.useRef(propName, (v) => (isNullOrUndefined(v) ? false : true));
+      const opened = props.useRef(propName, (v) => (!isNullOrUndefined(v)));
 
       return {
         [propName]: opened,
@@ -27,4 +27,4 @@ export const createUsePopup = (propName: string = 'visible') => {
   };
 
   return usePopup;
-}
+};

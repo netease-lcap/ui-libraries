@@ -8,15 +8,15 @@ export const useVModelSync: NaslComponentPluginOptions = {
     return {
       onInput: (v) => {
         const onInput = props.get('onInput');
-        const onUpdateValue =  props.get('update:value');
+        const onUpdateValue = props.get('update:value');
         if (typeof onInput === 'function') {
           onInput(v);
         }
 
-        if (typeof onUpdateValue === 'function' ) {
+        if (typeof onUpdateValue === 'function') {
           onUpdateValue(v);
         }
       },
-    }
-  }
+    };
+  },
 };

@@ -1,3 +1,7 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-shadow */
+/* eslint-disable no-script-url */
+/* eslint-disable no-unused-expressions */
 import { $deletePropList } from '../constants';
 import { NaslComponentPluginOptions } from '../plugin';
 import { getEventKey } from '../utils';
@@ -9,12 +13,12 @@ export const useLink: NaslComponentPluginOptions = {
   name: 'link2ref',
   props: ['link', 'destination'],
   setup: (props) => {
-    const href = props.useComputed(['link', 'destination', 'href'], (link, destination, href) => {
+    const hrefRef = props.useComputed(['link', 'destination', 'href'], (link, destination, href) => {
       return href || link || destination;
     });
 
     return {
-      href,
+      href: hrefRef,
     };
   },
   order: 2,
@@ -30,12 +34,13 @@ export const createVueRouterNavigate = (bindEventName: string = 'click') => {
       const eventName = getEventKey(bindEventName);
       const routerLink = props.useComputed('href', (url: string) => {
         if (
-          url.startsWith('http') ||
-          !$router ||
-          url.startsWith('://') ||
-          url.startsWith('#') ||
-          url.startsWith('javascript:') ||
-          url.indexOf('://') !== -1) {
+          url.startsWith('http')
+          || !$router
+          || url.startsWith('://')
+          || url.startsWith('#')
+          // eslint-disable-next-line no-script-url
+          || url.startsWith('javascript:')
+          || url.indexOf('://') !== -1) {
           return null;
         }
 
@@ -47,12 +52,13 @@ export const createVueRouterNavigate = (bindEventName: string = 'click') => {
         /**
          * router link 存在点击默认不处理
          */
-        if (!!routerLink.value) {
+        if (routerLink.value) {
+          // eslint-disable-next-line no-script-url
           return 'javascript:;';
         }
 
         return url;
-      })
+      });
 
       return {
         href,
@@ -62,7 +68,7 @@ export const createVueRouterNavigate = (bindEventName: string = 'click') => {
             return;
           }
 
-          const preClick = props.get<(e: any) => void>(eventName);
+          const preClick = props.get<(ea: any) => void>(eventName);
           if (!routerLink.value) {
             preClick && preClick(e);
             return;
@@ -70,14 +76,14 @@ export const createVueRouterNavigate = (bindEventName: string = 'click') => {
           const replace = props.get('replace');
 
           replace === true ? $router.replace(routerLink.value) : $router.push(routerLink.value);
-        }
-      }
+        },
+      };
     },
     order: 5,
   };
 
   return useVueRouterNavigate;
-}
+};
 
 /**
  * 浏览器跳转插件，绑定onClick,
@@ -128,10 +134,10 @@ export const createBrowserNavigate = (bindEventName: string = 'click') => {
           location.href = href;
         },
         [$deletePropList]: ['href', 'target', 'download'],
-      }
+      };
     },
     order: 6,
-  }
+  };
 
   return useBrowserNavigate;
-}
+};

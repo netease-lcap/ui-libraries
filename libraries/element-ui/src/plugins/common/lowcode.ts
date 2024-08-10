@@ -40,14 +40,15 @@ export const createSlotEmpty = (slotNames: string[] = ['default'], disableVusion
               'vusion-slot-name': name,
             },
           }, sempty);
-        }
+        };
       });
 
+      // eslint-disable-next-line consistent-return
       return resultSlots;
     },
     order: 11,
     onlyUseIDE: true,
-  }
+  };
 
   return useSlotEmpty;
-}
+};
