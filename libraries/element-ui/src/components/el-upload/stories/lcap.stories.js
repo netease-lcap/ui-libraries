@@ -1,6 +1,5 @@
 import Component from '../index';
 
-
 export default {
   id: 'el-upload-examples',
   title: '组件列表/Upload 上传/示例',
