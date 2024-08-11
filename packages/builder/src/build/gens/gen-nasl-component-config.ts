@@ -50,7 +50,7 @@ function getDrawings(componentDir, assetsPublicPath) {
 }
 
 function getBlocksByDemo(componentDir, { screenshots, drawings }) {
-  const dir = `${componentDir}/demos/blocks`;
+  const dir = path.join(componentDir, 'demos/blocks');
   if (!fs.existsSync(dir)) {
     logger.warn('未找到 blocks: ', dir);
     return [];

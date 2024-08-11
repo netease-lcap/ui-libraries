@@ -73,6 +73,64 @@ test('组件开启分页 + 远端数据返回分页数据', async () => {
   expect(dataSource.hasMore()).toEqual(true);
 });
 
+test('组件开启分页 + 远端数据返回分页数据 + 筛选', async () => {
+  const filter = 'A';
+  const expectedData = data.filter((item) => item.name.includes(filter));
+
+  const load = (params) => {
+    const { page, size, filterText } = params;
+
+    return new Promise((resolve) => {
+      const start = (page - 1) * size;
+      const end = page * size;
+
+      const list = data.filter((item) => item.name.includes(filterText));
+
+      resolve({
+        list: list.slice(start, end),
+        total: list.length,
+      });
+    });
+  };
+  const dataSource = new DataSource({
+    load,
+    viewMode: 'more',
+    paging: {
+      number: 1,
+      size: 20,
+    },
+    // 给后端筛选用
+    getExtraParams() {
+      return {
+        filterText: filter,
+      };
+    },
+    // 给前端筛选用
+    filtering: {
+      name: {
+        operator: 'includes',
+        value: filter,
+        caseInsensitive: true,
+      },
+    },
+  });
+
+  await dataSource.load();
+  expect(JSON.stringify(dataSource.viewData)).toEqual(JSON.stringify(expectedData.slice(0, 20)));
+
+  expect(dataSource.hasMore()).toEqual(false);
+
+  await dataSource.loadMore();
+  expect(JSON.stringify(dataSource.viewData)).toEqual(JSON.stringify(expectedData.slice(0, 40)));
+
+  expect(dataSource.hasMore()).toEqual(false);
+
+  await dataSource.reload();
+  expect(JSON.stringify(dataSource.viewData)).toEqual(JSON.stringify(expectedData.slice(0, 20)));
+
+  expect(dataSource.hasMore()).toEqual(false);
+});
+
 test('组件开启分页 + 远端数据返回全量数据', async () => {
   const load = (params) => {
     const { page, size } = params;
@@ -263,6 +321,42 @@ test('组件开启分页 + 前端数组数据', async () => {
   expect(JSON.stringify(dataSource.viewData)).toEqual(JSON.stringify(data.slice(0, 20)));
 
   expect(dataSource.hasMore()).toEqual(true);
+});
+
+test('组件开启分页 + 前端数组数据 + 筛选', async () => {
+  const filter = 'A';
+  const expectedData = data.filter((item) => item.name.includes(filter));
+
+  const dataSource = new DataSource({
+    data,
+    viewMode: 'more',
+    paging: {
+      number: 1,
+      size: 20,
+    },
+    filtering: {
+      name: {
+        operator: 'includes',
+        value: filter,
+        caseInsensitive: true,
+      },
+    },
+  });
+
+  await dataSource.load();
+  expect(JSON.stringify(dataSource.viewData)).toEqual(JSON.stringify(expectedData.slice(0, 20)));
+
+  expect(dataSource.hasMore()).toEqual(false);
+
+  await dataSource.loadMore();
+  expect(JSON.stringify(dataSource.viewData)).toEqual(JSON.stringify(expectedData.slice(0, 40)));
+
+  expect(dataSource.hasMore()).toEqual(false);
+
+  await dataSource.reload();
+  expect(JSON.stringify(dataSource.viewData)).toEqual(JSON.stringify(expectedData.slice(0, 20)));
+
+  expect(dataSource.hasMore()).toEqual(false);
 });
 
 test('组件关闭分页 + 前端数组数据', async () => {

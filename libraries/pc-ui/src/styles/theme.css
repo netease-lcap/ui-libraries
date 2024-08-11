@@ -1234,8 +1234,9 @@
     --switch-background-disabled-checked: #ADCBFF; /* @hidden */
     --switch-font-size: 12px; /* @hidden */
 
-    /* @component u-checkbox */
-    --checkbox-space-x: 80px; /* @group 间距 */ /* @prefix checkbox */ /* @desc 多选项之间的间距,如 1px */ /* @excludeTags u-checkbox */
+    /* @component u-checkboxes */
+    --checkbox-space-x: 32px; /* @group 间距 */ /* @prefix checkbox */ /* @desc 多选项之间的水平间距,如 1px */ /* @excludeTags u-checkbox */
+    --checkbox-space-y: 16px; /* @group 间距 */ /* @prefix checkbox */ /* @desc 多选项之间的垂直间距,如 1px */ /* @excludeTags u-checkbox */
     --checkbox-size: 16px; /* @group 大小 */ /* @prefix checkbox */ /* @desc 多选项按钮的大小,如 1px */
     --checkbox-border-radius: var(--border-radius-base); /* @group 圆角 */ /* @prefix checkbox */ /* @desc 多选项按钮圆角,如 1px */
     --checkbox-background: var(--brand-primary); /* @type color */ /* @group 背景色 */ /* @prefix checkbox */ /* @desc 多选项按钮的背景色,如 #223325 */
@@ -1450,8 +1451,8 @@
     --uploader-draggable-color: #666; /* @hidden */
     --uploader-draggable-icon-color: #ccc; /* @hidden */
     --uploader-draggable-color-hover: var(--brand-primary); /* @hidden */
-    --uploader-card-width: 80px; /* @hidden */
-    --uploader-card-height: 80px; /* @hidden */
+    --uploader-card-width: 80px; /* @desc 卡片式文件上传按钮的宽度,如 80px */
+    --uploader-card-height: 80px; /* @desc 卡片式文件上传按钮的高度,如 80px */
     --uploader-card-button-font-size: 16px; /* @hidden */
     --uploader-card-background: #fcfcfc; /* @hidden */
     --uploader-color: #999; /* @hidden */

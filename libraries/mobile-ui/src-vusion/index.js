@@ -14,4 +14,5 @@ if (typeof window !== 'undefined') {
   };
 
   Vue.use(Vant);
+  window.LcapUI = Vant;
 }

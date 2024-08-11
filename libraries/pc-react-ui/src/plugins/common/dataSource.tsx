@@ -72,11 +72,13 @@ export function useHandleMapField(filedInfo) {
     valueField = 'value',
     dataSource,
   } = filedInfo;
-  return useMemo(() => _.map(dataSource, (item) => ({
-    ...item,
-    [label]: _.isObject(item) ? _.get(item, textField, '') : item,
-    [value]: _.isObject(item) ? _.get(item, valueField, '') : item,
-  })), [label, value, textField, valueField, dataSource]);
+  return useMemo(() => {
+    return _.map(dataSource, (item) => ({
+      ...item,
+      [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
+      [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
+    }));
+  }, [label, value, textField, valueField, dataSource]);
 }
 export function useRequestDataSource(dataSource, options = {}) {
   const wrapDataSource = _.cond([

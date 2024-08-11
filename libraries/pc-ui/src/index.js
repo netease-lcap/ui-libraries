@@ -20,4 +20,6 @@ if (typeof window !== 'undefined') {
 
   Vue.mixin(CloudUI.MEmitter);
   Vue.mixin(CloudUI.MPubSub);
+
+  window.LcapUI = CloudUI;
 }
