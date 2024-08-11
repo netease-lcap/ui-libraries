@@ -443,15 +443,15 @@ export default function transform(tsCode: string, framework: string): astTypes.V
 
                   // 有默认值
                   if (type === 'AssignmentPattern') {
-                    const decorator = param.left.decorators[0];
+                    const decorator = param.left.decorators ? param.left.decorators[0] : null;
                     const typeAnnotation = (param.left as babelTypes.Identifier).typeAnnotation as babelTypes.TSTypeAnnotation;
                     return {
                       concept: 'Param',
                       name: (param.left as babelTypes.Identifier).name,
-                      description: getValueFromObjectExpressionByKey(
+                      description: decorator ? getValueFromObjectExpressionByKey(
                         (decorator.expression as babelTypes.CallExpression).arguments[0] as babelTypes.ObjectExpression,
                         'description',
-                      ) as astTypes.LogicDeclaration['description'],
+                      ) as astTypes.LogicDeclaration['description'] : (param.left as babelTypes.Identifier).name,
                       typeAnnotation: transformTypeAnnotation(typeAnnotation.typeAnnotation as Annotation),
                       defaultValue: {
                         concept: 'DefaultValue',
@@ -461,15 +461,15 @@ export default function transform(tsCode: string, framework: string): astTypes.V
                     };
                   }
                   // eslint-disable-next-line no-shadow
-                  const decorator = param.decorators[0];
+                  const decorator = param.decorators ? param.decorators[0] : null;
                   const typeAnnotation = (param as babelTypes.Identifier).typeAnnotation as babelTypes.TSTypeAnnotation;
                   return {
                     concept: 'Param',
                     name: (param as babelTypes.Identifier).name,
-                    description: getValueFromObjectExpressionByKey(
+                    description: decorator ? getValueFromObjectExpressionByKey(
                       (decorator.expression as babelTypes.CallExpression).arguments[0] as babelTypes.ObjectExpression,
                       'description',
-                    ) as astTypes.LogicDeclaration['description'],
+                    ) as astTypes.LogicDeclaration['description'] : (param as babelTypes.Identifier).name,
                     typeAnnotation: transformTypeAnnotation(typeAnnotation.typeAnnotation as Annotation),
                   } as any;
                 }),

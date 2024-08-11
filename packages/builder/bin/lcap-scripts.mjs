@@ -5,9 +5,14 @@ import chalk from 'chalk';
 import fse from 'fs-extra';
 import semver from 'semver';
 import { program } from 'commander';
-import screenshot from '../lib/commands/screenshots.js';
-import build from '../lib/commands/build.js';
-import deploy from '../lib/commands/deploy.js';
+import commands from '../lib/commands/index.js';
+
+const {
+  screenshot,
+  build,
+  deploy,
+  overload,
+} = commands;
 
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -34,13 +39,13 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
     .description('批量 block.stories 截图')
     .option('--port <port>', '设置端口', '6006')
     .action(async ({ port }) => {
-      await screenshot.default(cwd, port);
+      await screenshot(cwd, port);
     });
 
   program.command('build')
     .description('构建流程，vite build 生成 theme.config.json usage.json, nasl.ui.json, i18n.json 等文件')
     .action(async () => {
-      await build.default();
+      await build();
     });
 
   program.command('deploy')
@@ -51,7 +56,20 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
     .option('--password <password>', '发布password')
     .option('--bucket <bucket>', '发布 bucket')
     .action(async ({ ...args }) => {
-      await deploy.default(cwd, args);
+      await deploy(cwd, args);
+    });
+
+  program.command('overload')
+    .description('重载组件')
+    .argument('<component>', '组件名称')
+    .option('--fork', '是否复制组件源代码')
+    .option('--prefix <prefix>', '重载组件名称前缀')
+    .action(async (component, options) => {
+      await overload(cwd, {
+        fork: options.fork,
+        prefix: options.prefix,
+        component,
+      });
     });
 
   program.parse(process.argv);
