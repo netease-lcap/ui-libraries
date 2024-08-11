@@ -104,7 +104,6 @@ export default (options: LcapViteConfigPluginOptions) => {
       }
 
       config.build.commonjsOptions = {
-        requireReturnsDefault: true,
         extensions: ['.js'],
         ...config.build.commonjsOptions,
       };
@@ -113,6 +112,9 @@ export default (options: LcapViteConfigPluginOptions) => {
       const hasLcapUIPkg = hasLcapUI(options.rootPath);
       if (hasLcapUIPkg) {
         config.optimizeDeps.include?.push('virtual-lcap:lcap-ui');
+        if (config.build.commonjsOptions.requireReturnsDefault === undefined) {
+          config.build.commonjsOptions.requireReturnsDefault = true;
+        }
         config.build.commonjsOptions.include = getCommonjsOptionsInclude(config).concat([
           '.lcap/lcap-ui/**/*.js',
           /node_modules/,
