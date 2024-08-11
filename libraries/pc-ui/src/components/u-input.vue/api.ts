@@ -95,6 +95,7 @@ namespace nasl.ui {
         })
         value: nasl.core.String;
 
+
         @Prop({
             group: '数据属性',
             title: '空值为null',
@@ -104,7 +105,7 @@ namespace nasl.ui {
                 concept: 'SwitchSetter',
             },
         })
-        emptyValueIsNull: nasl.core.Boolean = true;
+        emptyValueIsNull: nasl.core.Boolean ;
 
         @Prop({
             group: '主要属性',

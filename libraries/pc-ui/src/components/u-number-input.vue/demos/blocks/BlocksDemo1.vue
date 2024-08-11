@@ -1,5 +1,5 @@
 <!-- 基本用法 -->
 
 <template>
-  <u-number-input></u-number-input>
+  <u-number-input :decimalPlacesOmitZero="true"></u-number-input>
 </template>

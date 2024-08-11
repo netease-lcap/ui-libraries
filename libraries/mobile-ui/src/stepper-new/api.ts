@@ -99,7 +99,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    decimalPlacesOmitZero: nasl.core.Boolean = false;
+    decimalPlacesOmitZero: nasl.core.Boolean = true;
     @Prop<VanStepperNewOptions, 'thousandths'>({
       group: '主要属性',
       title: '千位符',
