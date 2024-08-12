@@ -607,7 +607,8 @@
     "ideusage": {
       "idetype": "container",
       "structured": true,
-      "childAccept": "target.tag === 'StepsItem'"
+      "childAccept": "target.tag === 'StepsItem'",
+      "useWrapperInBoard": true
     }
   },
   {
@@ -722,7 +723,8 @@
       "additionalAttribute": {
         "menu": "{{ triggerSubMenuAction: 'click' }}",
         "trigger": "{['click']}"
-      }
+      },
+      "useWrapperInBoard": true
     }
   },
   {
