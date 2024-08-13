@@ -67,7 +67,7 @@
 
         :showHead="showHead"
         :rootWidth="rootWidth"
-        
+        :value-field="valueField"
         :useMask="useMask">
     </u-table-designer>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
@@ -170,7 +170,7 @@
         :filterMax="filterMax"
 
         :rootWidth="rootWidth"
-
+        :value-field="valueField"
         :rowStyle="rowStyle"
         :usePagination="usePagination"
 
