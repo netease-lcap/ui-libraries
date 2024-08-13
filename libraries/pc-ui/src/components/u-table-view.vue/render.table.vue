@@ -106,7 +106,7 @@
                                             :shadow="(isTdLastLeftFixed(columnVM, columnIndex, visibleColumnVMs, item, rowIndex) && !scrollXStart) || (isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs) && !scrollXEnd)"
                                             :colspan="getItemColSpan(item, rowIndex, columnIndex)"
                                             :rowspan="getItemRowSpan(item, rowIndex, columnIndex)"
-
+                                            :value-field="valueField"
                                             :disabled="item.disabled || disabled"
                                             :ellipsis="ellipsis"
                                             :readonly="readonly"
