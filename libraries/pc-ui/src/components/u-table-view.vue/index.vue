@@ -168,8 +168,8 @@
         :filterMax="filterMax"
 
         :rootWidth="rootWidth"
-
         :usePagination="usePagination"
+        :value-field="valueField"
 
         @resize="onResizerDragEnd">
     </u-table-render>
