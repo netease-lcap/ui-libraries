@@ -23,13 +23,21 @@ namespace nasl.ui {
   }
 
   export class ElAlertOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '标题',
-      description: '标题',
-      setter: { concept: 'InputSetter' },
-    })
-    title: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '标题',
+    //   description: '标题',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // title: nasl.core.String;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '描述',
+    //   description: '辅助性文字。也可通过默认 slot 传入',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // description: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -46,14 +54,6 @@ namespace nasl.ui {
       },
     })
     type: 'success' | 'warning' | 'info' | 'error' = 'info';
-
-    @Prop({
-      group: '主要属性',
-      title: '描述',
-      description: '辅助性文字。也可通过默认 slot 传入',
-      setter: { concept: 'InputSetter' },
-    })
-    description: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -89,11 +89,11 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '主题',
-      description: '选择提供的主题',
+      title: '风格',
+      description: '选择提供的风格',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'light' }, { title: 'dark' }],
+        options: [{ title: '浅色' }, { title: '深色' }],
       },
     })
     effect: 'light' | 'dark' = 'light';

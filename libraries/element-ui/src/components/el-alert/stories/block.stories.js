@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-alert></el-alert>',
+    template: '<el-alert type="info"><template #title><el-text text="公告内容"></u-text></template></el-alert>',
   }),
 };
