@@ -62,7 +62,7 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
       const addNaslUINamespace = [
         'ViewComponent', 'CurrentDynamic', 'DataSourceParams',
         'PoiInfo', 'File', 'SelectData', 'DragAndDropUpdateData',
-        'ValidateResult', 'BaseEvent',
+        'ValidateResult', 'BaseEvent', 'Current'
       ];
       const typeName = path.node.typeName.name;
       if (
