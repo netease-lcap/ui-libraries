@@ -19,7 +19,10 @@ function transformScriptAst(ast: babelTypes.File, filePath, modules: string[]) {
     ImportDeclaration(p) {
       let sourcePath = p.node.source.value;
       if (sourcePath.startsWith('./') && sourcePath.lastIndexOf('/') === 1) {
-        return;
+        const resolvePath = path.resolve(filePath.substring(0, filePath.lastIndexOf('/')), sourcePath);
+        if (fs.existsSync(resolvePath) && !fs.lstatSync(resolvePath).isDirectory()) {
+          return;
+        }
       }
 
       if (sourcePath.startsWith('@components')) {
