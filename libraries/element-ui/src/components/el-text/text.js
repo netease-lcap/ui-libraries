@@ -30,9 +30,9 @@ export default {
         styles[`overflow-${this.overflow}`],
       ],
       attrs: {
-        'vusion-slot-name-edit': 'text'
+        'vusion-slot-name-edit': 'text',
       },
       on: this.$listeners,
     }, this.$scopedSlots.default ? this.$scopedSlots.default() : null);
-  }
-}
+  },
+};

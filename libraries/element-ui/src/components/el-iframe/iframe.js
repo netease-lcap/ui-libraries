@@ -29,15 +29,15 @@ export default {
       [
         this.src
           ? h('iframe', {
-              attrs: {
-                ...this.attrs,
-                src: this.src,
-                frameborder: '0',
-              },
-              on: {
-                load: this.onLoad,
-              },
-            })
+            attrs: {
+              ...this.attrs,
+              src: this.src,
+              frameborder: '0',
+            },
+            on: {
+              load: this.onLoad,
+            },
+          })
           : null,
       ],
     );

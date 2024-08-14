@@ -31,6 +31,6 @@ export const Default = {
     size: 'default',
     overflow: 'normal',
     text: 'hello world',
-    display: 'normal'
-  }
+    display: 'normal',
+  },
 };

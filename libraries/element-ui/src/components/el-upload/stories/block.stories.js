@@ -41,7 +41,6 @@ export const Picture = {
   }),
 };
 
-
 export const DragPicture = {
   name: '拖拽上传',
   render: () => ({

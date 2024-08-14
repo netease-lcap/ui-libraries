@@ -1,4 +1,5 @@
 import ElDialog from '../index';
+
 export default {
   id: 'el-dialog-blocks',
   title: '组件列表/DIALOG 对话框/内置区块',

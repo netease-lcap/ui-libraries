@@ -29,7 +29,7 @@ export const Example1 = {
 export const Example2 = {
   name: '更多参数',
   render: () => ({
-    template: `<div><el-skeleton :rows="6" /></div>`,
+    template: '<div><el-skeleton :rows="6" /></div>',
   }),
 };
 
@@ -37,7 +37,7 @@ export const Example2 = {
 export const Example3 = {
   name: '动画效果',
   render: () => ({
-    template: `<div><el-skeleton :rows="6" animated /></div>`,
+    template: '<div><el-skeleton :rows="6" animated /></div>',
   }),
 };
 

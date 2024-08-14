@@ -18,20 +18,20 @@ const normalDataSource = () => {
     setTimeout(() => {
       resolve([{
         value: '选项1',
-        label: '黄金糕'
+        label: '黄金糕',
       }, {
         value: '选项2',
         label: '双皮奶',
-        disabled: true
+        disabled: true,
       }, {
         value: '选项3',
-        label: '蚵仔煎'
+        label: '蚵仔煎',
       }, {
         value: '选项4',
-        label: '龙须面'
+        label: '龙须面',
       }, {
         value: '选项5',
-        label: '北京烤鸭'
+        label: '北京烤鸭',
       }]);
     }, 3000);
   });
@@ -57,27 +57,26 @@ export const DataSource = {
   }),
   args: {
     // dataSource: normalDataSource,
-  }
+  },
 };
 
-
-const states = ["Alabama", "Alaska", "Arizona",
-"Arkansas", "California", "Colorado",
-"Connecticut", "Delaware", "Florida",
-"Georgia", "Hawaii", "Idaho", "Illinois",
-"Indiana", "Iowa", "Kansas", "Kentucky",
-"Louisiana", "Maine", "Maryland",
-"Massachusetts", "Michigan", "Minnesota",
-"Mississippi", "Missouri", "Montana",
-"Nebraska", "Nevada", "New Hampshire",
-"New Jersey", "New Mexico", "New York",
-"North Carolina", "North Dakota", "Ohio",
-"Oklahoma", "Oregon", "Pennsylvania",
-"Rhode Island", "South Carolina",
-"South Dakota", "Tennessee", "Texas",
-"Utah", "Vermont", "Virginia",
-"Washington", "West Virginia", "Wisconsin",
-"Wyoming"];
+const states = ['Alabama', 'Alaska', 'Arizona',
+  'Arkansas', 'California', 'Colorado',
+  'Connecticut', 'Delaware', 'Florida',
+  'Georgia', 'Hawaii', 'Idaho', 'Illinois',
+  'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+  'Louisiana', 'Maine', 'Maryland',
+  'Massachusetts', 'Michigan', 'Minnesota',
+  'Mississippi', 'Missouri', 'Montana',
+  'Nebraska', 'Nevada', 'New Hampshire',
+  'New Jersey', 'New Mexico', 'New York',
+  'North Carolina', 'North Dakota', 'Ohio',
+  'Oklahoma', 'Oregon', 'Pennsylvania',
+  'Rhode Island', 'South Carolina',
+  'South Dakota', 'Tennessee', 'Texas',
+  'Utah', 'Vermont', 'Virginia',
+  'Washington', 'West Virginia', 'Wisconsin',
+  'Wyoming'];
 export const Filter = {
   name: '远程搜索',
   render: () => ({
@@ -91,11 +90,11 @@ export const Filter = {
         return new Promise((resolve) => {
           setTimeout(() => {
             if (!filterText) {
-              return resolve(states.slice(0, 10).map(item => {
+              return resolve(states.slice(0, 10).map((item) => {
                 return { value: `value:${item}`, label: `label:${item}` };
               }));
             }
-            resolve(states.filter((label) => label.toLowerCase().indexOf(filterText.toLowerCase()) > -1).map(item => {
+            resolve(states.filter((label) => label.toLowerCase().indexOf(filterText.toLowerCase()) > -1).map((item) => {
               return { value: `value:${item}`, label: `label:${item}` };
             }));
           }, 3000);

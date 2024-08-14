@@ -7,5 +7,5 @@ export default {
       class: styles.root,
       on: this.$listeners,
     }, this.$scopedSlots.default ? this.$scopedSlots.default() : null);
-  }
+  },
 };

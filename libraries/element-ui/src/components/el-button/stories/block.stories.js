@@ -27,7 +27,6 @@ export const Primary = {
   }),
 };
 
-
 export const Default = {
   name: '默认按钮',
   render: () => ({

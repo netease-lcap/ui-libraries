@@ -1,4 +1,3 @@
-
 import ElIcon from '../index';
 
 export default {
@@ -12,8 +11,8 @@ export default {
   decorators: [() => ({
     provide() {
       return {
-        'VUE_APP_DESIGNER': true
-      }
+        VUE_APP_DESIGNER: true,
+      };
     },
     template: '<div style="width: 500px;"><story/></div>',
   })],
@@ -23,6 +22,5 @@ export const Default = {
   name: '默认示例',
   render: () => ({
     template: '<el-icon name="ri-bookmark-line"></el-icon>',
-  })
+  }),
 };
-

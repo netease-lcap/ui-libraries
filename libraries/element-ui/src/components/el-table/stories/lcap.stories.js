@@ -51,7 +51,7 @@ const loadDataSource = [
     zip: 200333,
     tag: '公司',
   },
-]
+];
 
 export const Default = {
   render: () => ({
@@ -60,7 +60,9 @@ export const Default = {
         value: 2,
         values: [2, 3],
         showJumper: false,
-        dataSource: ({ page, size, sort, order }) => {
+        dataSource: ({
+          page, size, sort, order,
+        }) => {
           return new Promise((resolve) => {
             setTimeout(() => {
               const data = [];
@@ -76,22 +78,22 @@ export const Default = {
               resolve({
                 list: data,
                 total: 400,
-              })
+              });
             }, 3000);
-          })
+          });
         },
-      }
+      };
     },
     methods: {
       formatter(row, column) {
         return row.address;
       },
       handleCurrentChange({ value }) {
-        console.log('item', this.value)
+        console.log('item', this.value);
       },
       handleSelect(e) {
         console.log(e, this.values);
-      }
+      },
     },
     template: `
       <div>
@@ -120,5 +122,5 @@ export const Default = {
         </el-table>
       </div>
     `,
-  })
-}
+  }),
+};

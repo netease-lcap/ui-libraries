@@ -27,7 +27,6 @@ export const Default = {
   }),
 };
 
-
 export const Medium = {
   name: '中等标签',
   render: () => ({

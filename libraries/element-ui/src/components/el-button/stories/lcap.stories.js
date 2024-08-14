@@ -10,9 +10,9 @@ export default {
   },
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    type: { control: 'radio', options: ['primary', 'success', 'warning', 'danger', 'info', 'text', '']},
-    size: { control: 'radio', options: ['medium', 'small', 'mini', '' ]},
-    iconPosition: { control: 'radio', options: ['left', 'right'] }
+    type: { control: 'radio', options: ['primary', 'success', 'warning', 'danger', 'info', 'text', ''] },
+    size: { control: 'radio', options: ['medium', 'small', 'mini', ''] },
+    iconPosition: { control: 'radio', options: ['left', 'right'] },
   },
 };
 
@@ -47,8 +47,8 @@ export const Default = {
     type: '',
     text: 'Hello world',
     tooltip: '',
-    icon: "ri-donut-chart-fill",
+    icon: 'ri-donut-chart-fill',
     iconPosition: 'left',
     size: 'small',
-  }
+  },
 };

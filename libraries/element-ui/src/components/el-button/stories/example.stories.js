@@ -12,7 +12,6 @@ export default {
   argTypes: {},
 };
 
-
 /*  基础的按钮用法。 */
 export const Example1 = {
   name: '基础用法',
@@ -120,7 +119,7 @@ export const Example5 = {
 export const Example6 = {
   name: '加载中',
   render: () => ({
-    template: `<div><el-button type="primary" :loading="true">加载中</el-button></div>`,
+    template: '<div><el-button type="primary" :loading="true">加载中</el-button></div>',
   }),
 };
 

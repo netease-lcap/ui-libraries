@@ -13,16 +13,16 @@ export default {
   },
 };
 const iconData = [
-'bar-chart',
-'bar-chart-horizontal',
-'bar-chart-2',
-'bar-chart-box',
-'bar-chart-grouped',
-'bubble-chart',
-'pie-chart',
-'pie-chart-2',
-'pie-chart-box',
-'donut-chart',
+  'bar-chart',
+  'bar-chart-horizontal',
+  'bar-chart-2',
+  'bar-chart-box',
+  'bar-chart-grouped',
+  'bubble-chart',
+  'pie-chart',
+  'pie-chart-2',
+  'pie-chart-box',
+  'donut-chart',
 ];
 
 export const Default = {
@@ -32,7 +32,7 @@ export const Default = {
     data() {
       return {
         iconData,
-      }
+      };
     },
     methods: {
       handleClick(c) {
@@ -47,6 +47,6 @@ export const Default = {
   }),
   args: {
     gutter: 10,
-    direction: 'vertical'
-  }
+    direction: 'vertical',
+  },
 };

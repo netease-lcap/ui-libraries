@@ -11,7 +11,7 @@ export default {
     name: {
       type: String,
       default: () => '',
-    }
+    },
   },
   render(h) {
     if (isSvgUrl(this.name)) {
@@ -27,5 +27,5 @@ export default {
     }
 
     return h('i', { class: kebabCase(this.name) });
-  }
+  },
 };

@@ -16,7 +16,7 @@ export default {
 export const Example1 = {
   name: '基础用法',
   render: () => ({
-    template: `<div><el-empty description="描述文字"></el-empty></div>`,
+    template: '<div><el-empty description="描述文字"></el-empty></div>',
   }),
 };
 
@@ -24,7 +24,7 @@ export const Example1 = {
 export const Example2 = {
   name: '自定义图片',
   render: () => ({
-    template: `<div><el-empty image="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"></el-empty></div>`,
+    template: '<div><el-empty image="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"></el-empty></div>',
   }),
 };
 
@@ -32,7 +32,7 @@ export const Example2 = {
 export const Example3 = {
   name: '图片尺寸',
   render: () => ({
-    template: `<div><el-empty :image-size="200"></el-empty></div>`,
+    template: '<div><el-empty :image-size="200"></el-empty></div>',
   }),
 };
 
