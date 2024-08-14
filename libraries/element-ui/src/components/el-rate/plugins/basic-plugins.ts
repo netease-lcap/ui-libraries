@@ -1,7 +1,8 @@
 /* 组件功能扩展插件 */
-export { useVModelSync } from '@lcap/nasl-hoc-vue/index';
 import type { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
-export const useRateChange: NaslComponentPluginOptions  = {
+
+export { useVModelSync } from '@lcap/nasl-hoc-vue/index';
+export const useRateChange: NaslComponentPluginOptions = {
   setup: (props) => {
     return {
       onChange: (value) => {
@@ -10,11 +11,11 @@ export const useRateChange: NaslComponentPluginOptions  = {
 
         if (typeof onChange === 'function') {
           onChange({
-            value
+            value,
           });
         }
-      }
+      },
     };
   },
   order: 2,
-}
+};

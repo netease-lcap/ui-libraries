@@ -1,10 +1,11 @@
-
 /* 组件功能扩展插件 */
-import { $deletePropList, $ref, $render } from '@/plugins/constants';
-import type { NaslComponentPluginOptions } from '@/plugins/plugin';
-import { watch, shallowRef, useAttrs, provide } from '@vue/composition-api';
+import {
+  watch, shallowRef, useAttrs, provide,
+} from '@vue/composition-api';
 import { at } from 'lodash';
 import Pagination from 'element-ui/lib/pagination';
+import type { NaslComponentPluginOptions } from '@/plugins/plugin';
+import { $deletePropList, $ref, $render } from '@/plugins/constants';
 import styles from '../index.module.css';
 
 export { useDataSource, useInitialLoaded } from '@lcap/nasl-hoc-vue/index';
@@ -20,7 +21,7 @@ const getVusionProps = () => {
   });
 
   return props;
-}
+};
 
 export const useLoadData: NaslComponentPluginOptions = {
   props: ['pagination', 'pageSize', 'sorting'],
@@ -63,10 +64,10 @@ export const useLoadData: NaslComponentPluginOptions = {
           onLoaded(result);
         }
         return result;
-      }
+      };
     });
 
-    provide('getPagination', () => ({ currentPage: props.getEnd('currentPage'), pageSize: props.getEnd('pageSize'), }));
+    provide('getPagination', () => ({ currentPage: props.getEnd('currentPage'), pageSize: props.getEnd('pageSize') }));
 
     return {
       currentPage,
@@ -133,10 +134,10 @@ export const useLoadData: NaslComponentPluginOptions = {
           }
 
           return loadDataFnRef.value(params);
-        }
+        },
       },
       [$deletePropList]: ['currentPage', 'pageSize'],
-    }
+    };
   },
   order: 2,
 };
@@ -160,7 +161,7 @@ export const useCurrentRow: NaslComponentPluginOptions = {
           return;
         }
 
-        const row = data.find(item => at(item, rowKey.value)[0] === value.value);
+        const row = data.find((item) => at(item, rowKey.value)[0] === value.value);
         (ctx.refs.$base as any).setCurrentRow(row);
       };
 
@@ -169,11 +170,10 @@ export const useCurrentRow: NaslComponentPluginOptions = {
         if (!v && oldV) {
           setCurrentRow(value.value);
         }
-      })
+      });
 
       watch(value, setCurrentRow);
     }
-
 
     return {
       rowKey,
@@ -226,7 +226,7 @@ export const useSelection: NaslComponentPluginOptions = {
         }
 
         (ctx.refs.$base as any).clearSelection();
-        data.filter(item => selectValues.includes(at(item, rowKey)[0])).forEach((row) => {
+        data.filter((item) => selectValues.includes(at(item, rowKey)[0])).forEach((row) => {
           (ctx.refs.$base as any).toggleRowSelection(row, true);
         });
       };
@@ -285,7 +285,7 @@ export const useSelection: NaslComponentPluginOptions = {
     };
   },
   order: 8,
-}
+};
 
 export const useConcatPagination: NaslComponentPluginOptions = {
   props: ['currentPage', 'pageSize', 'total', 'pagePosition', 'showSizer', 'pageSizeOptions', 'showTotal', 'showJumper'],
@@ -299,7 +299,7 @@ export const useConcatPagination: NaslComponentPluginOptions = {
         showJumper,
         pageSize,
         currentPage,
-        total
+        total,
       ) => {
         const layouts = ['prev', 'pager', 'next'];
         const defaultProps = {
@@ -308,9 +308,9 @@ export const useConcatPagination: NaslComponentPluginOptions = {
           pagerCount: 7,
           hideOnSinglePage: !isDesigner,
           layout: layouts.join(','),
-          pageSize: pageSize,
-          currentPage: currentPage,
-          total: total,
+          pageSize,
+          currentPage,
+          total,
           pageSizes: pageSizeOptions || [10, 20, 50],
         };
 
@@ -354,7 +354,7 @@ export const useConcatPagination: NaslComponentPluginOptions = {
             on: {
               'current-change': listeners['page-change'],
               'size-change': listeners['size-change'],
-            }
+            },
           }) : null,
         ]);
       },
@@ -433,4 +433,4 @@ export const useEvents = {
     };
   },
   order: 2,
-}
+};

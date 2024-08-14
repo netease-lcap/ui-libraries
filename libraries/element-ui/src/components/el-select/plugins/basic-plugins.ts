@@ -1,6 +1,7 @@
 /* 组件功能扩展插件 */
 import { at } from 'lodash';
 import Option from 'element-ui/lib/option';
+
 export { useVModelSync, useDataSource, useInitialLoaded } from '@lcap/nasl-hoc-vue/index';
 
 export const useRenderData = {
@@ -40,10 +41,10 @@ export const useRenderData = {
               value,
               disabled,
             },
-          })
+          });
         });
-      }
-    }
+      },
+    };
   },
   order: 8,
-}
+};

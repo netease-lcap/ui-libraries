@@ -5,7 +5,7 @@ import * as plugins from './plugins';
 
 export const ElTag = registerComponent(Tag, plugins, {
   nativeEvents: [],
-  slotNames: ["default"],
+  slotNames: ['default'],
   methodNames: [],
 });
 

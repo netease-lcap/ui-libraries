@@ -13,7 +13,7 @@ export const useTabBeforeLeave: NaslComponentPluginOptions = {
       }
 
       if (allowBeforeLeave === '阻止切换') {
-        return false
+        return false;
       }
 
       return true;

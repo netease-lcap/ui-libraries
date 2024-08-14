@@ -1,6 +1,7 @@
 /* 组件功能扩展插件 */
 import type { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
-export const useTransferChange: NaslComponentPluginOptions  = {
+
+export const useTransferChange: NaslComponentPluginOptions = {
   setup: (props) => {
     return {
       onChange: (index, oldIndex) => {
@@ -13,9 +14,8 @@ export const useTransferChange: NaslComponentPluginOptions  = {
             oldIndex,
           });
         }
-      }
+      },
     };
   },
   order: 2,
-}
-
+};

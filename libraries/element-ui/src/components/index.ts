@@ -8,7 +8,9 @@ export { ElButton, ElButtonGroup } from './el-button';
 export { ElTable, ElTableColumn } from './el-table';
 export { ElResult } from './el-result';
 export { ElRow, ElCol } from './el-row';
-export { ElContainer, ElHeader, ElAside, ElFooter } from './el-container';
+export {
+  ElContainer, ElHeader, ElAside, ElFooter,
+} from './el-container';
 export { ElLink } from './el-link';
 export { ElRadio, ElRadioGroup, ElRadioButton } from './el-radio';
 export { ElCheckbox, ElCheckboxGroup, ElCheckboxButton } from './el-checkbox';
@@ -37,7 +39,9 @@ export { ElEmpty } from './el-empty';
 export { ElDescriptions, ElDescriptionsItem } from './el-descriptions';
 export { ElStatistic } from './el-statistic';
 export { ElAlert } from './el-alert';
-export { ElMenu, ElSubmenu, ElMenuItem, ElMenuItemGroup } from './el-menu';
+export {
+  ElMenu, ElSubmenu, ElMenuItem, ElMenuItemGroup,
+} from './el-menu';
 export { ElTabs, ElTabPane } from './el-tabs';
 export { ElBreadcrumb, ElBreadcrumbItem } from './el-breadcrumb';
 export { ElPageHeader } from './el-page-header';

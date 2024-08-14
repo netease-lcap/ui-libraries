@@ -1,5 +1,7 @@
 import { NaslComponentPluginOptions, SEmpty } from '@lcap/nasl-hoc-vue/index';
-import { inject, onBeforeMount, onMounted, useAttrs } from '@vue/composition-api';
+import {
+  inject, onBeforeMount, onMounted, useAttrs,
+} from '@vue/composition-api';
 import { at } from 'lodash';
 import { uid } from 'uid';
 
@@ -37,14 +39,14 @@ export const useSlotHeaderEmpty: NaslComponentPluginOptions = {
         slotHeader: () => {
           return h('el-checkbox', {
             attrs: {
-              'id': uuid,
+              id: uuid,
             },
           });
         },
         slotDefault: () => {
           return h('el-checkbox', {
             attrs: {
-              'id': uuid,
+              id: uuid,
             },
           });
         },
@@ -55,15 +57,14 @@ export const useSlotHeaderEmpty: NaslComponentPluginOptions = {
       return {
         slotHeader: () => {
           const label = props.get<string>('label');
-          return  h('div', {
+          return h('div', {
             attrs: {
-              'id': uuid,
+              id: uuid,
             },
           }, [label || '']);
-        }
+        },
       };
     }
-
 
     return {
       slotHeader: () => {
@@ -71,18 +72,18 @@ export const useSlotHeaderEmpty: NaslComponentPluginOptions = {
         const vnodes = typeof slot === 'function' ? slot({}) : null;
         const sempty = !vnodes || vnodes.length === 0 ? [h(SEmpty)] : vnodes;
 
-        return  h('div', {
+        return h('div', {
           attrs: {
             'vusion-slot-name': 'header',
-            'id': uuid,
+            id: uuid,
           },
         }, [sempty]);
-      }
+      },
     };
   },
   order: 11,
   onlyUseIDE: true,
-}
+};
 
 export const useSlotDefaultEmpty: NaslComponentPluginOptions = {
   setup: (props, { h, setupContext: ctx }) => {
@@ -128,7 +129,7 @@ export const useSlotDefaultEmpty: NaslComponentPluginOptions = {
             id: uuid,
           },
         }, [sempty]);
-      }
+      },
     };
   },
   order: 11,
@@ -165,5 +166,5 @@ export const useAutoSetIndex: NaslComponentPluginOptions = {
     return {
       index,
     };
-  }
-}
+  },
+};

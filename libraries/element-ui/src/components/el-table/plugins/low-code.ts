@@ -1,6 +1,11 @@
 /* 仅在 ide 环境生效的插件 */
-import { NaslComponentPluginOptions } from "@lcap/nasl-hoc-vue/index";
-import { onMounted, onUpdated, provide, shallowRef, useAttrs } from "@vue/composition-api";
+import { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
+import {
+  onMounted,
+  onUpdated,
+  provide,
+  shallowRef,
+} from '@vue/composition-api';
 
 const getScopeId = (el: Element) => {
   if (!el) {
@@ -8,14 +13,14 @@ const getScopeId = (el: Element) => {
   }
 
   for (let i = 0; i < el.attributes.length; i++) {
-    const name = el.attributes[0].name;
+    const { name } = el.attributes[0];
     if (name.startsWith('data-v')) {
       return name;
     }
   }
 
   return '';
-}
+};
 
 const getCellElement = (el: Element | null) => {
   if (!el) {
@@ -45,7 +50,7 @@ const getCellElement = (el: Element | null) => {
   if (tag === 'th' || tag === 'td') {
     return ele;
   }
-}
+};
 
 export const useSetVusionAttrs: NaslComponentPluginOptions = {
   setup: (props, { setupContext: ctx }) => {
