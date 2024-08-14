@@ -10,7 +10,7 @@
         <u-select-item value="none">父子不关联（父选中子不选中，子全选父不选中）</u-select-item>
     </u-select>
 </u-linear-layout>
-<u-table-view :data-source="list" tree-display :treeCheckType="checkType" ref="tableView">
+<u-table-view :data-source="list" tree-display :treeCheckType="checkType" ref="tableView" :values.sync="checkedValues" valueField="name">
     <u-table-view-column type="checkbox" width="30"></u-table-view-column>
     <u-table-view-column title="用户名" field="name" width="20%"></u-table-view-column>
     <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
@@ -18,6 +18,7 @@
     <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%"></u-table-view-column>
 </u-table-view>
 <u-button @click="add" color="primary">添加子数据</u-button>
+<u-text>{{ checkedValues }}</u-text>
 </u-linear-layout>
 </template>
 <script>
@@ -26,6 +27,7 @@ export default {
         return {
             list: this.getList(),
             checkType: 'up+down',
+            checkedValues: [],
         }
     },
     methods: {
