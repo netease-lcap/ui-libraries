@@ -543,6 +543,7 @@ export default {
             if (value === oldValue)
                 return;
             this.$emit('change', { value, oldValue, item, oldItem }, this);
+            item.radioChecked = true;
         },
         values(values) {
             this.$nextTick(() => {
@@ -709,6 +710,8 @@ export default {
             this.processTableDraggable();
             if (selectable) {
                 data.forEach((item) => {
+                    if (!item.hasOwnProperty('radioChecked'))
+                        this.$set(item, 'radioChecked', false);
                     if (!item.hasOwnProperty('disabled'))
                         this.$set(item, 'disabled', false);
                 });
