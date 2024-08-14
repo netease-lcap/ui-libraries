@@ -13,7 +13,7 @@
         <!-- type === 'radio' -->
         <span v-if="vm.type === 'radio'">
             <u-radio
-                :value="selectedItem === item"
+                :value="item.radioChecked"
                 :disabled="item.disabled"
                 @click.native="select(item, rowIndex)"
                 :readonly="readonly">
