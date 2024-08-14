@@ -3,8 +3,8 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
-      "idetype": "container"
-    }
+      idetype: 'container',
+    },
   })
   @Component({
     title: '文字提示',
@@ -30,13 +30,13 @@ namespace nasl.ui {
     })
     effect: 'dark' | 'light' = 'dark';
 
-    @Prop({
-      group: '主要属性',
-      title: '内容',
-      description: '显示的内容',
-      setter: { concept: 'InputSetter' },
-    })
-    content: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '内容',
+    //   description: '显示的内容',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // content: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -44,10 +44,35 @@ namespace nasl.ui {
       description: '出现位置',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '上边' }, { title: '上左' }, { title: '上右' }, { title: '下边' }, { title: '下左' }, { title: '下右' }, { title: '左边' }, { title: '左上' }, { title: '左下' }, { title: '右边' }, { title: '右上' }, { title: '右下' }],
+        options: [
+          { title: '上边' },
+          { title: '上左' },
+          { title: '上右' },
+          { title: '下边' },
+          { title: '下左' },
+          { title: '下右' },
+          { title: '左边' },
+          { title: '左上' },
+          { title: '左下' },
+          { title: '右边' },
+          { title: '右上' },
+          { title: '右下' },
+        ],
       },
     })
-    placement: 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end' = 'bottom'
+    placement:
+      | 'top'
+      | 'top-start'
+      | 'top-end'
+      | 'bottom'
+      | 'bottom-start'
+      | 'bottom-end'
+      | 'left'
+      | 'left-start'
+      | 'left-end'
+      | 'right'
+      | 'right-start'
+      | 'right-end' = 'bottom';
 
     @Prop({
       group: '状态属性',
@@ -90,13 +115,16 @@ namespace nasl.ui {
     })
     visibleArrow: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Popper参数',
-      description: '[popper.js](https://popper.js.org/docs/v2/) 的参数',
-      setter: { concept: 'InputSetter' },
-    })
-    popperOptions: { boundariesElement: nasl.core.String, gpuAcceleration: nasl.core.Boolean }
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Popper参数',
+    //   description: '[popper.js](https://popper.js.org/docs/v2/) 的参数',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // popperOptions: {
+    //   boundariesElement: nasl.core.String;
+    //   gpuAcceleration: nasl.core.Boolean;
+    // };
 
     @Prop({
       group: '主要属性',

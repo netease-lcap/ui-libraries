@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-shadow */
 import TableColumn from 'element-ui/lib/table-column';
 import { registerComponent } from '@lcap/nasl-hoc-vue/index';
 
@@ -9,10 +11,14 @@ const selectColumn = {
     return h('el-checkbox', {
       props: {
         value: isSelected,
-        disabled: column.selectable ? !column.selectable.call(null, row, $index) : false,
+        disabled: column.selectable
+          ? !column.selectable.call(null, row, $index)
+          : false,
       },
       on: {
-        input: () => { store.commit('rowSelectedChanged', row); },
+        input: () => {
+          store.commit('rowSelectedChanged', row);
+        },
       },
       nativeOn: {
         click: (event) => event.stopPropagation(),
@@ -65,17 +71,21 @@ TableColumn.methods.setColumnRenders = function (column) {
     if (type === 'expand') {
       forceRender = expandColumn.renderHeader;
     }
-    return h('div', {
-      directives: [
-        {
-          name: 'hoist-data-attribute',
-          value: {
-            topSelector: 'th',
-            ...dataAttr,
+    return h(
+      'div',
+      {
+        directives: [
+          {
+            name: 'hoist-data-attribute',
+            value: {
+              topSelector: 'th',
+              ...dataAttr,
+            },
           },
-        },
-      ],
-    }, [(forceRender || oldrenderHeader).call(this, h, scope)]);
+        ],
+      },
+      [(forceRender || oldrenderHeader).call(this, h, scope)],
+    );
   };
 
   const oldrenderCell = column.renderCell;
@@ -94,18 +104,22 @@ TableColumn.methods.setColumnRenders = function (column) {
     if (type === 'index') {
       forceRender = indexColumn.renderCell;
     }
-    return h('div', {
-      class: 'cell',
-      directives: [
-        {
-          name: 'hoist-data-attribute',
-          value: {
-            topSelector: 'td',
-            ...dataAttr,
+    return h(
+      'div',
+      {
+        class: 'cell',
+        directives: [
+          {
+            name: 'hoist-data-attribute',
+            value: {
+              topSelector: 'td',
+              ...dataAttr,
+            },
           },
-        },
-      ],
-    }, [(forceRender || oldrenderCell).call(this, h, scope)]);
+        ],
+      },
+      [(forceRender || oldrenderCell).call(this, h, scope)],
+    );
   };
 
   return column;
@@ -126,19 +140,27 @@ TableColumn.render = function (h) {
       attrs[key] = 'undefined';
     }
   });
-  return h('div', {
-    directives: [
-      {
-        name: 'remove-data-attribute',
-      },
-    ],
-  }, this.$slots.default);
+  return h(
+    'div',
+    {
+      directives: [
+        {
+          name: 'remove-data-attribute',
+        },
+      ],
+    },
+    this.$slots.default,
+  );
 };
 
-const ElTableColumn = registerComponent(TableColumn, {}, {
-  slotNames: [],
-  nativeEvents: [],
-  methodNames: [],
-});
+const ElTableColumn = registerComponent(
+  TableColumn,
+  {},
+  {
+    slotNames: [],
+    nativeEvents: [],
+    methodNames: [],
+  },
+);
 
 export default ElTableColumn;

@@ -2,21 +2,20 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    "ideusage": {
-      "idetype": "popover",
-      "selector": {
-        "expression": "this.getElement(el => el.slotTarget === 'content')",
-        "cssSelector": "div[class='ant-popover-content']"
-
+    ideusage: {
+      idetype: 'container',
+      selector: {
+        expression: "this.getElement(el => el.slotTarget === 'content')",
+        cssSelector: "div[class='ant-popover-content']",
       },
-      "actions": {
-        "click": {
-          "status": "this.setCacheStatus('open', !(this.getCacheStatus('open') || false)) ",
-          "default": "this.setCacheStatus('open', false)"
-
-        }
-      }
-    }
+      actions: {
+        click: {
+          status:
+            "this.setCacheStatus('open', !(this.getCacheStatus('open') || false)) ",
+          default: "this.setCacheStatus('open', false)",
+        },
+      },
+    },
   })
   @Component({
     title: '弹出框',
@@ -35,9 +34,17 @@ namespace nasl.ui {
       group: '主要属性',
       title: '触发方式',
       description: '触发方式',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '点击' },
+          { title: '聚焦' },
+          { title: '悬浮' },
+          { title: '手动' },
+        ],
+      },
     })
-    trigger: nasl.core.String = 'click';
+    trigger: 'click' | 'focus' | 'hover' | 'manual' = 'click';
 
     @Prop({
       group: '主要属性',
@@ -47,13 +54,13 @@ namespace nasl.ui {
     })
     title: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '显示的内容',
-      description: '显示的内容，也可以通过 slot 传入 DOM',
-      setter: { concept: 'InputSetter' },
-    })
-    content: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '显示的内容',
+    //   description: '显示的内容，也可以通过 slot 传入 DOM',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // content: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -96,13 +103,13 @@ namespace nasl.ui {
     })
     offset: nasl.core.Decimal = 0;
 
-    @Prop({
-      group: '主要属性',
-      title: '定义渐变动画',
-      description: '定义渐变动画',
-      setter: { concept: 'InputSetter' },
-    })
-    transition: nasl.core.String = 'fade-in-linear';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '定义渐变动画',
+    //   description: '定义渐变动画',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // transition: nasl.core.String = 'fade-in-linear';
 
     @Prop({
       group: '主要属性',
@@ -113,13 +120,16 @@ namespace nasl.ui {
     })
     visibleArrow: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Popper Options',
-      description: '[popper.js](https://popper.js.org/docs/v2/) 的参数',
-      setter: { concept: 'InputSetter' },
-    })
-    popperOptions: { boundariesElement: nasl.core.String, gpuAcceleration: nasl.core.Boolean }
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Popper Options',
+    //   description: '[popper.js](https://popper.js.org/docs/v2/) 的参数',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // popperOptions: {
+    //   boundariesElement: nasl.core.String;
+    //   gpuAcceleration: nasl.core.Boolean;
+    // };
 
     @Prop({
       group: '主要属性',
