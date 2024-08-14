@@ -49,13 +49,31 @@ export default defineConfig(({ command }) => {
       include: ['online-svg-icon-vue2'],
     },
     resolve: {
-      extensions: ['.js', '.ts', '.tsx', '.jsx', '.vue', '.mjs', '.cjs', '.json'],
+      extensions: [
+        '.js',
+        '.ts',
+        '.tsx',
+        '.jsx',
+        '.vue',
+        '.mjs',
+        '.cjs',
+        '.json',
+      ],
       alias: {
         '@': path.resolve(__dirname, './src'),
         '@lcap/nasl-hoc-vue': path.resolve(__dirname, './src/plugins'),
-        'swiper/swiper-bundle.esm.js': path.resolve(__dirname, './node_modules/swiper/swiper-bundle.esm.js'),
-        '@joskii/jflow-core': path.resolve(__dirname, './node_modules/@joskii/jflow-core/dist/jflow.es.min.js'),
-        '@joskii/jflow-vue2-plugin': path.resolve(__dirname, './node_modules/@joskii/jflow-vue2-plugin/dist/jflow-vue2-plugin.es.min.js'),
+        'swiper/swiper-bundle.esm.js': path.resolve(
+          __dirname,
+          './node_modules/swiper/swiper-bundle.esm.js',
+        ),
+        '@joskii/jflow-core': path.resolve(
+          __dirname,
+          './node_modules/@joskii/jflow-core/dist/jflow.es.min.js',
+        ),
+        '@joskii/jflow-vue2-plugin': path.resolve(
+          __dirname,
+          './node_modules/@joskii/jflow-vue2-plugin/dist/jflow-vue2-plugin.es.min.js',
+        ),
       },
     },
     define: {
@@ -71,11 +89,7 @@ export default defineConfig(({ command }) => {
       postcss: {
         plugins: [
           autoprefixer({
-            overrideBrowserslist: [
-              '> 1%',
-              'last 2 versions',
-              'ie >= 9',
-            ],
+            overrideBrowserslist: ['> 1%', 'last 2 versions', 'ie >= 9'],
             grid: true,
           }),
         ],
@@ -86,6 +100,7 @@ export default defineConfig(({ command }) => {
       target: ['es2020', 'edge88', 'firefox78', 'chrome56', 'safari14'],
       lib: {
         entry: 'src/index',
+        // name: 'ElementUI',
         name: 'CloudUI',
       },
       outDir: 'dist-theme',
@@ -107,14 +122,24 @@ export default defineConfig(({ command }) => {
         provider: 'v8',
         reporter: ['text', 'json', 'html'],
         reportsDirectory: './test/coverage',
-        include: ['src/components/**/*.?(c|m)[jt]s?(x)', 'src/components/**/*.vue'],
-        exclude: ['src/**/stories/**', 'src/**/tests/*', 'src/**/demos/*', 'src/**/api.ts', 'src/components/*/index.js'],
+        include: [
+          'src/components/**/*.?(c|m)[jt]s?(x)',
+          'src/components/**/*.vue',
+        ],
+        exclude: [
+          'src/**/stories/**',
+          'src/**/tests/*',
+          'src/**/demos/*',
+          'src/**/api.ts',
+          'src/components/*/index.js',
+        ],
       },
       setupFiles: ['./test/setup.js'],
       environmentOptions: {
         jsdom: {
           // i-ico.vue/icon.js 要求文档必须有一个 script 标签
-          html: '<!DOCTYPE html><html><head><meta charset="UTF-8" /><script></script></head><body></body></html>',
+          html:
+            '<!DOCTYPE html><html><head><meta charset="UTF-8" /><script></script></head><body></body></html>',
         },
       },
     },

@@ -1,8 +1,7 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
-  @IDEExtraInfo({
-  })
+  @IDEExtraInfo({})
   @Component({
     title: '对话框',
     icon: 'dialog',
@@ -10,30 +9,6 @@ namespace nasl.ui {
     group: 'Feedback',
   })
   export class ElDialog extends ViewComponent {
-    @Method({
-        title: 'undefined',
-        description: '打开弹窗',
-    })
-    open(): void {}
-
-    @Method({
-      title: 'undefined',
-      description: '打开动画结束时的回调',
-    })
-    opened(): void {}
-
-    @Method({
-        title: 'undefined',
-        description: '关闭弹窗',
-    })
-    close(): void {}
-
-    @Method({
-      title: 'undefined',
-      description: '关闭动画结束时的回调',
-    })
-    closed(): void {}
-
     constructor(options?: Partial<ElDialogOptions>) {
       super();
     }
@@ -49,13 +24,13 @@ namespace nasl.ui {
     })
     visible: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: '标题',
-      description: '对话框标题',
-      setter: { concept: 'InputSetter' },
-    })
-    title: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '标题',
+    //   description: '对话框标题',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // title: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -147,13 +122,13 @@ namespace nasl.ui {
     })
     showClose: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: '关闭前回调',
-      description: '关闭前的回调，会暂停对话框的关闭',
-      setter: { concept: 'InputSetter' },
-    })
-    beforeClose: any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '关闭前回调',
+    //   description: '关闭前的回调，会暂停对话框的关闭',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // beforeClose: any;
 
     @Prop({
       group: '主要属性',
@@ -210,8 +185,7 @@ namespace nasl.ui {
     @Slot({
       title: 'Title',
       description: 'Dialog 标题区的内容',
-      snippets: [
-         {  title: '代码⽚段标题', code: '代码⽚段内容' } ]
+      snippets: [{ title: '代码⽚段标题', code: '代码⽚段内容' }],
     })
     slotTitle: () => Array<ViewComponent>;
 

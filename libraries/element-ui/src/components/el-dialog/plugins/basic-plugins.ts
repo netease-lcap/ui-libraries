@@ -1,6 +1,7 @@
 /* 组件功能扩展插件 */
 import type { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/plugin';
 import { $ref } from '@lcap/nasl-hoc-vue/index';
+import _ from 'lodash';
 import { isNullOrUndefined } from '../../../plugins/utils';
 
 export const useDialog: NaslComponentPluginOptions = {
@@ -34,11 +35,8 @@ export const useEvents = {
     return {
       beforeClose: (done) => {
         const onBeforeClose = props.get('onBeforeClose');
-        if (typeof onBeforeClose === 'function') {
-          onBeforeClose(done);
-        }
+        return _.attempt(onBeforeClose, done);
       },
-
     };
   },
   order: 2,
