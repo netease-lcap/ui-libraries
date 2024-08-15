@@ -684,6 +684,7 @@
                 ":dataSource": "\"[{}]\"",
                 ":colnum": "\"1\""
             },
+            "childAccept": false,
             "useTemplateInDefaultSlot": true
         }
     },
