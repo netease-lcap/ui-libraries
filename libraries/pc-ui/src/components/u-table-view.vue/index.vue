@@ -173,6 +173,7 @@
         :value-field="valueField"
         :rowStyle="rowStyle"
         :usePagination="usePagination"
+        :value-field="valueField"
 
         @resize="onResizerDragEnd">
     </u-table-render>
@@ -1541,7 +1542,17 @@ export default {
                 return;
             if (values) {
                 this.currentValues = values;
-                this.currentData && this.currentData.forEach((item) => (item.checked = values.includes(this.$at(item, this.valueField))));
+                // fix: 2933349384995840，父级选中子级没有勾选
+                if (this.currentData) {
+                    this.currentData.forEach((item) => {
+                        if (!item.hasOwnProperty('checked')) {
+                            this.$set(item, 'checked', false);
+                        }
+                        if (values.includes(this.$at(item, this.valueField))) {
+                            this.$set(item, 'checked', true);
+                        }
+                    });
+                }
             } else {
                 const values = [];
                 this.currentData && this.currentData.forEach((item) => item.checked && values.push(this.$at(item, this.valueField)));
@@ -1610,8 +1621,7 @@ export default {
             // Assign and sync `checked`
             item.checked = checked;
             if (this.treeDisplay) {
-                this.checkRecursively(item, checked);
-                this.getTreeCheckedValues(item, checked);
+                this.checkRecursively(item, checked, this.treeCheckType);
             } else {
                 this.getCheckedValues(item, checked);
             }
@@ -1629,8 +1639,7 @@ export default {
                     return;
                 item.checked = checked;
                 if (this.treeDisplay) {
-                    this.checkRecursively(item, checked);
-                    this.getTreeCheckedValues(item, checked);
+                    this.checkRecursively(item, checked, this.treeCheckType);
                 } else {
                     this.getCheckedValues(item, checked);
                 }
@@ -1639,25 +1648,30 @@ export default {
             this.$emit('update:values', this.currentValues, this);
             this.$emit('check', { values: this.currentValues, oldValues, checked, items: checkedItems }, this);
         },
-        checkRecursively(item, checked) {
-            if (this.treeCheckType.includes('down')) {
+        checkRecursively(item, checked, direction = 'up+down') {
+            this.getCheckedValues(item, checked);
+            if (direction.includes('down')) {
                 const children = this.$at(item, this.childrenField);
                 if (children && children.length) {
                     children.forEach((citem) => {
+                        if(citem.disabled)
+                            return;
                         citem.checked = checked;
-                        this.checkRecursively(citem, checked);
+                        this.checkRecursively(citem, checked, 'down');
                     });
                 }
             }
-            if (this.treeCheckType.includes('up')) {
+            if (direction.includes('up')) {
                 if (item.parentPointer) {
                     const parentItem = this.currentData.find((citem) => citem === item.parentPointer);
-                    if (parentItem) {
+                    if (parentItem && !parentItem.disabled) {
                         const children = this.$at(parentItem, this.childrenField) || [];
                         let checkedLength = 0;
                         children.forEach((item) => {
                             if (item.checked)
                                 checkedLength++;
+                            if (item.checked === null)
+                                checkedLength += 0.5;
                         });
                         if (checkedLength === 0)
                             parentItem.checked = false;
@@ -1665,6 +1679,7 @@ export default {
                             parentItem.checked = true;
                         else
                             parentItem.checked = null;
+                        this.checkRecursively(parentItem, parentItem.checked, 'up');
                     }
                 }
             }
@@ -1680,28 +1695,6 @@ export default {
                     this.checkedItems[label] = item;
                 } else {
                     delete this.checkedItems[label];
-                }
-            }
-        },
-        /**
-         * 获取树形选中值
-         */
-        getTreeCheckedValues(item, checked) {
-            this.getCheckedValues(item, checked);
-            const children = this.$at(item, this.childrenField);
-            if (children && children.length) {
-                children.forEach((citem) => {
-                    if (this.treeCheckType.includes('down')) {
-                        this.getTreeCheckedValues(citem, checked);
-                    }
-                });
-            }
-            if (item.parentPointer) {
-                const parentItem = this.currentData.find((citem) => citem === item.parentPointer);
-                if (parentItem) {
-                    if (this.treeCheckType.includes('up')) {
-                        this.getCheckedValues(parentItem, checked);
-                    }
                 }
             }
         },
