@@ -30,5 +30,500 @@
                 }
             ]
         }
+    },
+    {
+        "name": "VanAbsoluteLayout",
+        "ideusage": {
+            "idetype": "board",
+            "automate": [
+                {
+                    "command": "WRAP_FREE",
+                    "useblock": 0
+                }
+            ]
+        }
+    },
+    {
+        "name": "VanRow",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "containerDirection": "row"
+        }
+    },
+    {
+        "name": "VanCol",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "containerDirection": "column"
+        }
+    },
+    {
+        "name": "VanRouterView",
+        "ideusage": {
+            "idetype": "router"
+        }
+    },
+    {
+        "name": "VanSidebar",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['van-sidebar-item'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanSidebarItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "['van-sidebar'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "VanDropdownMenu",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['van-dropdown-item', 'van-dropdown-item-son'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanDropdownItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "['van-dropdown-menu'].includes(target.tag)",
+            "childAccept": "['van-dropdown-item-son'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "VanDropdownItemSon",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "parentAccept": "['van-dropdown-menu', 'van-dropdown-item'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanTabbar",
+        "ideusage": {
+            "idetype": "container",
+            "childAccept": "['van-tabbar-item'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "VanTabbarItem",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "parentAccept": "['van-tabbar'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanCollapse",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'van-collapse-item'"
+        }
+    },
+    {
+        "name": "VanCollapseItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'van-collapse'",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanSwipeCell",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "VanDivider",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "VanCellGroup",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'van-cell'"
+        }
+    },
+    {
+        "name": "VanCell",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'van-cell-group'",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanSwipe",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'van-swipe-item'"
+        }
+    },
+    {
+        "name": "VanSwipeItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'van-swipe'",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanText",
+        "ideusage": {
+            "idetype": "element",
+            "editable": "text",
+            "textholder": "text",
+            "useFxOrEg": {
+                "property": "text"
+            }
+        }
+    },
+    {
+        "name": "VanLink",
+        "ideusage": {
+            "idetype": "element",
+            "editable": "text",
+            "textholder": "text",
+            "useFxOrEg": {
+                "property": "text"
+            }
+        }
+    },
+    {
+        "name": "VanBadge",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "VanNoticeBar",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "VanSteps",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept":"target.tag === 'van-step'"
+        }
+    },
+    {
+        "name": "VanStep",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept":"target.tag === 'van-steps'",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanIconv",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "VanTag",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "VanCircle",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "VanProgress",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "VanGallery",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "VanRate",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "VanSlider",
+        "ideusage": {
+            "idetype": "container",
+            "childAccept": false
+        }
+    },
+    {
+        "name": "VanListView",
+        "ideusage": {
+            "idetype": "container",
+            "dataSource": {
+                "display": 3
+            }
+        }
+    },
+    {
+        "name": "VanGridView",
+        "ideusage": {
+            "idetype": "container",
+            "dataSource": {
+                "display": 3
+            }
+        }
+    },
+    {
+        "name": "VanForComponents",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "VanTabs",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept":"target.tag === 'van-tab'",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+                "display": 3,
+                "loopRule": "nth-child(n+2)"
+            }
+        }
+    },
+    {
+        "name": "VanTab",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept":"target.tag === 'van-tabs'",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanPickerson",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['van-picker-action-slot'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanPickerActionSlot",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "['van-pickerson', 'van-area', 'van-datetime-picker', 'van-calendar'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "VanArea",
+        "ideusage": {
+            "idetype": "container",
+            "childAccept": "['van-picker-action-slot'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "VanCascader",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "VanDateTimePicker",
+        "ideusage": {
+            "idetype": "container",
+            "childAccept": "['van-picker-action-slot'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "VanCalendar",
+        "ideusage": {
+            "idetype": "container",
+            "childAccept": "['van-picker-action-slot'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "VanPopupCombination",
+        "ideusage": {
+            "idetype": "container",
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanDialog",
+        "ideusage": {
+            "idetype": "modal",
+            "cacheOpenKey": "visible",
+            "selector": {
+              "expression": "this.getElement(el => el.slotTarget === 'body')",
+              "cssSelector": "div[class^='van-dialog__wrap']"
+            }
+        }
+    },
+    {
+        "name": "VanPopup",
+        "ideusage": {
+            "idetype": "drawer",
+            "selector": {
+                "expression": "this.getElement(el => el.slotTarget === 'body')",
+                "cssSelector": "div[class^='van-popup']"
+            }
+        }
+    },
+    {
+        "name": "VanToast",
+        "ideusage": {
+            "idetype": "messager",
+            "selector": {
+                "expression": "this.getElement(el => el.slotTarget === 'body')",
+                "cssSelector": "div[class^='van-toast-designer']"
+            }
+        }
+    },
+    {
+        "name": "VanCopy",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "VanForm",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['van-field'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "VanField",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "['van-form'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "VanFieldinput",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "VanStepperNew",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "VanFieldtextarea",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "VanSearch",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "VanRadioGroup",
+        "ideusage": {
+           "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'van-radio'"
+        }
+    },
+    {
+        "name": "VanRadio",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'van-radio-group'"
+        }
+    },
+    {
+        "name": "VanSwitch",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "VanCheckboxGroup",
+        "ideusage": {
+           "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'van-checkbox'"
+        }
+    },
+    {
+        "name": "VanCheckbox",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'van-checkbox-group'"
+        }
+    },
+    {
+        "name": "VanUploader",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "VanCapsules",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['van-capsules-item'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "VanCapsulesItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "['van-capsules'].includes(target.tag)"
+        }
     }
 ]
