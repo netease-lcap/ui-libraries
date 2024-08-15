@@ -3,7 +3,6 @@
         "name": "ULinearLayout",
         "ideusage": {
             "idetype": "container",
-            "containerDirection": "column",
             "expandWhenHesitate": true,
            "automate": [
                 {
