@@ -173,7 +173,6 @@
         :value-field="valueField"
         :rowStyle="rowStyle"
         :usePagination="usePagination"
-        :value-field="valueField"
 
         @resize="onResizerDragEnd">
     </u-table-render>
