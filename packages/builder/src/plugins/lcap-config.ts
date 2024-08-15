@@ -162,7 +162,7 @@ export default (options: LcapViteConfigPluginOptions) => {
 
       if (lcapUIPkgName) {
         external.push(lcapUIPkgName);
-        globals[lcapUIPkgName] = 'LcapUI';
+        globals[lcapUIPkgName] = options.framework === 'react' ? 'antd' : 'LcapUI';
         const alias = (config.resolve && config.resolve.alias ? config.resolve.alias : []) as Alias[];
         const alia = alias.find((it) => it.find === LCAP_UI_PACKAGE_NAME);
         if (alia && isBuild) {
