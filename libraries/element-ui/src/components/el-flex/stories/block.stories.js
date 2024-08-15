@@ -2,7 +2,7 @@ import ElFlex from '../index';
 
 export default {
   id: 'el-flex-blocks',
-  title: '组件列表/el-flex/内置区块',
+  title: '组件列表/Flex 线性布局/内置区块',
   component: ElFlex,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout

@@ -2,7 +2,7 @@ import Component from '../index';
 
 export default {
   id: 'el-flex-examples',
-  title: '组件列表/el-flex/示例',
+  title: '组件列表/Flex 线性布局/示例',
   component: Component,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -34,5 +34,7 @@ export const Default = {
   args: {
     gutter: 10,
     direction: 'vertical',
+    loading: false,
+    loadingText: '拼命加载中',
   },
 };

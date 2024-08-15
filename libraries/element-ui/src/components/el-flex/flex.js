@@ -27,6 +27,19 @@ export default {
       type: Number,
       default: 0,
     },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+    loadingText: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {
+      loading: false,
+    };
   },
   render(h) {
     const style = this.mode === 'flex' ? {
@@ -43,8 +56,13 @@ export default {
       style,
       class: this.mode === 'flex' ? styles.flex : styles.flexBlock,
       on: this.$listeners,
+      directives: [{
+        name: 'loading',
+        value: this.loading,
+      }],
       attrs: {
         'vusion-slot-name': 'default',
+        'element-loading-text': this.loadingText,
       },
     }, this.$scopedSlots.default ? this.$scopedSlots.default() : null);
   },
