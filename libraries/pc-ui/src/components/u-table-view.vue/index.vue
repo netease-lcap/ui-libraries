@@ -1486,8 +1486,10 @@ export default {
                     }
 
                     if (this.usePagination) {
-                        if (this.currentDataSource.paging && this.currentDataSource.paging.number > this.currentDataSource.totalPage)
-                            this.page(1); // 数据发生变更时，回归到第 1 页
+                        if (this.currentDataSource.paging && this.currentDataSource.paging.number > this.currentDataSource.totalPage) {
+                            this.currentDataSource.paging.number = 1; // 会触发page onchange事件
+                            // this.page(1); // 数据发生变更时，回归到第 1 页
+                        }
                     } // auto-more 状态的 resize 会频闪。
                     this.pageable !== 'auto-more' && this.reHandleResize();
                     this.$emit('load', undefined, this);
@@ -3305,7 +3307,18 @@ export default {
         onChangePageSize(event) {
             this.currentPageSize = event.pageSize;
             const currentDataSource = this.currentDataSource;
-            this.page(currentDataSource && currentDataSource.paging ? currentDataSource.paging.number : this.pageNumber, event.pageSize);
+            if (currentDataSource){
+                if(currentDataSource._load && typeof currentDataSource._load === 'function') {
+                    currentDataSource.clearLocalData();
+                }
+                currentDataSource.paging.size = event.pageSize;
+                const initialPage = this.pageNumber !== undefined ? this.pageNumber : 1;
+                if (currentDataSource.paging.number !== initialPage) {
+                    currentDataSource.paging.number = initialPage; // 会触发page的onchange事件，不用手动调用page
+                } else {
+                    this.page(initialPage, event.pageSize);
+                }
+            }
         },
         onXScrollParentScroll(event) {
             this.syncHeadScroll();
