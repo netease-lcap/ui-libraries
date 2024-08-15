@@ -1445,7 +1445,7 @@ namespace nasl.ui {
               concept: 'PropertySelectSetter',
           },
       })
-      valueField: (item: T1) => V = ((item: any)  => item.value) as any;
+      valueField: (item: T1) => any = ((item: any)  => item.value) as any;
 
       @Prop({
           group: '数据属性',
