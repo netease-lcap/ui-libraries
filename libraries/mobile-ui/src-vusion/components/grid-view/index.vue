@@ -381,6 +381,7 @@ export default {
         // eslint-disable-next-line no-console
       }
       this.refreshing = false;
+      this.$emit('load', undefined, this);
     },
     onScroll(e) {
       if (this?.$env.VUE_APP_DESIGNER) return;
