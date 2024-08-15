@@ -216,6 +216,7 @@ export default {
             }
 
             this.currentLoading = false;
+            this.$emit('load', undefined, this);
         },
 
         onScroll(e) {
