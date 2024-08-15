@@ -180,6 +180,24 @@ namespace nasl.ui {
     })
     gutter: nasl.core.Decimal | nasl.core.Integer = 12;
 
+    @Prop({
+      group: '状态属性',
+      title: '加载中',
+      description: '加载中状态',
+      docDescription: '加载中状态',
+      settable: true,
+    })
+    loading: nasl.core.Boolean = false;
+
+    @Prop({
+        group: '状态属性',
+        title: '加载中文案',
+        description: '加载中状态显示的提示文案',
+        docDescription: '支持编辑组件加载中情况显示文案。',
+        implicitToString: true,
+    })
+    loadingText: nasl.core.String = '';
+
     @Event({
       title: '点击',
       description: '在元素上按下并释放任意鼠标按钮时触发。',
