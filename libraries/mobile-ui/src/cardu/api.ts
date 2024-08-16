@@ -119,14 +119,14 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '插入图片'
     })
     slotCover: () => Array<ViewComponent>;
 
     @Slot({
-      title: '',
-      description: ''
+      title: '组件插槽',
+      description: '标题'
     })
     slotHead: () => Array<ViewComponent>;
   }

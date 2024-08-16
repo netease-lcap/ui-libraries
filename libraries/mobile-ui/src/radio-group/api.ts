@@ -129,7 +129,7 @@ namespace nasl.ui {
     })
     onChange: (event: V) => void;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '插入`<van-radio>`子组件。',
       emptyBackground: 'add-sub',
       snippets: [{
@@ -139,7 +139,7 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<VanRadio<V>>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义选项的结构和样式'
     })
     slotItem: (current: Current<T>) => Array<ViewComponent>;

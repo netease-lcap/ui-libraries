@@ -55,7 +55,6 @@
         "name": "VanCol",
         "ideusage": {
             "idetype": "container",
-            "structured": true,
             "containerDirection": "column"
         }
     },
@@ -80,7 +79,10 @@
         "name": "VanSidebarItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['van-sidebar'].includes(target.tag)"
+            "parentAccept": "['van-sidebar'].includes(target.tag)",
+            "displaySlotInline": {
+                "title": true
+            }
         }
     },
     {
@@ -98,6 +100,7 @@
         "name": "VanDropdownItem",
         "ideusage": {
             "idetype": "container",
+            "structured": true,
             "parentAccept": "['van-dropdown-menu'].includes(target.tag)",
             "childAccept": "['van-dropdown-item-son'].includes(target.tag)"
         }
@@ -106,10 +109,11 @@
         "name": "VanDropdownItemSon",
         "ideusage": {
             "idetype": "container",
-            "structured": true,
             "parentAccept": "['van-dropdown-menu', 'van-dropdown-item'].includes(target.tag)",
-            "events": {
-                "click": true
+            "displaySlotConditions": {
+                "default": false,
+                "title": false,
+                "rightIcon": false
             }
         }
     },
@@ -117,6 +121,7 @@
         "name": "VanTabbar",
         "ideusage": {
             "idetype": "container",
+            "structured": true,
             "childAccept": "['van-tabbar-item'].includes(target.tag)"
         }
     },
@@ -124,10 +129,9 @@
         "name": "VanTabbarItem",
         "ideusage": {
             "idetype": "container",
-            "structured": true,
             "parentAccept": "['van-tabbar'].includes(target.tag)",
             "events": {
-                "click": true
+                "click": "!this.getParent().getAttribute('route')?.value"
             }
         }
     },
@@ -147,6 +151,13 @@
             "events": {
                 "click": true
             }
+        }
+    },
+    {
+        "name": "VanCardu",
+        "ideusage": {
+            "idetype": "container",
+            "disableSlotAutoFill": ["cover"]
         }
     },
     {
@@ -176,6 +187,9 @@
             "parentAccept": "target.tag === 'van-cell-group'",
             "events": {
                 "click": true
+            },
+            "displaySlotConditions": {
+                "rightIcon": false
             }
         }
     },
@@ -202,10 +216,7 @@
         "ideusage": {
             "idetype": "element",
             "editable": "text",
-            "textholder": "text",
-            "useFxOrEg": {
-                "property": "text"
-            }
+            "translateBindingProperty": ["text"]
         }
     },
     {
@@ -298,6 +309,9 @@
             "idetype": "container",
             "dataSource": {
                 "display": 3
+            },
+            "displaySlotConditions": {
+                "empty": false
             }
         }
     },
@@ -306,7 +320,7 @@
         "ideusage": {
             "idetype": "container",
             "dataSource": {
-                "display": 3
+                "display": 8
             }
         }
     },
@@ -448,25 +462,29 @@
     {
         "name": "VanFieldinput",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
         "name": "VanStepperNew",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
         "name": "VanFieldtextarea",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
         "name": "VanSearch",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -520,10 +538,19 @@
         }
     },
     {
+        "name": "VanCapsulesGroup",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "parentAccept": "['van-capsules'].includes(target.tag)",
+            "childAccept": "['van-capsules-item'].includes(target.tag)"
+        }
+    },
+    {
         "name": "VanCapsulesItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['van-capsules'].includes(target.tag)"
+            "parentAccept": "['van-capsules', 'van-capsules-group'].includes(target.tag)"
         }
     }
 ]

@@ -302,7 +302,7 @@ namespace nasl.ui {
     })
     onLoad: (event: nasl.ui.BaseEvent) => void;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '插入<van-cardu />',
       emptyBackground: 'drag-entity-here',
       snippets: [{
@@ -312,7 +312,7 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义选项的结构和样式'
     })
     slotItem: (current: Current<T>) => Array<ViewComponent>;

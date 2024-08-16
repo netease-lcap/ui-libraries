@@ -479,7 +479,7 @@ namespace nasl.ui {
     })
     onLoad: (event: nasl.ui.BaseEvent) => void;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '插入<van-cell />',
       emptyBackground: 'drag-entity-here',
     })
@@ -491,17 +491,17 @@ namespace nasl.ui {
     slotEmpty: () => Array<ViewComponent>;
 
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义选项的结构和样式'
     })
     slotItem: (current: Current<T>) => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义上一页'
     })
     slotPrev: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义下一页'
     })
     slotNext: () => Array<ViewComponent>;

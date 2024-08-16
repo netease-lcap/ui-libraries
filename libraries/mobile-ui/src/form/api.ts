@@ -17,12 +17,12 @@ namespace nasl.ui {
     valid: nasl.core.Boolean;
 
     @Method({
-      title: 'undefined',
+      title: '组件插槽',
       description: '验证表单，支持传入 name 来验证单个或部分表单项'
     })
     validate(
       @Param({
-        title: 'undefined',
+        title: '组件插槽',
         description: '可选。需要验证的表单项 name'
       })
       name?: nasl.core.String | nasl.collection.List<nasl.core.String>
@@ -83,7 +83,7 @@ namespace nasl.ui {
       values: {};
     }) => void;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '插入`<van-field>`子组件。',
       emptyBackground: 'add-sub-large',
       snippets: [{
@@ -201,14 +201,14 @@ namespace nasl.ui {
     })
     border: nasl.core.Boolean = true;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '插入自定义输入框'
     })
     slotInput: () => Array<ViewComponent>;
 
     @Slot({
-      title: '',
-      description: ''
+      title: '组件插槽',
+      description: 'label 自定义'
     })
     slotTitle: () => Array<ViewComponent>
   }
