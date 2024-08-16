@@ -105,8 +105,8 @@ export default defineConfig(({ command }) => {
       },
       outDir: 'dist-theme',
       modulePreload: false,
-      sourcemap: true,
-      minify: true,
+      // sourcemap: true,
+      // minify: true,
     },
     test: {
       environment: 'jsdom',

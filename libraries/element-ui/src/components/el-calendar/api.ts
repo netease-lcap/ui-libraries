@@ -46,6 +46,6 @@ namespace nasl.ui {
       title: '卡片内容',
       description: '卡片内容',
     })
-    slotDefault: () => Array<ViewComponent>;
+    slotDateCell: () => Array<ViewComponent>;
   }
 }

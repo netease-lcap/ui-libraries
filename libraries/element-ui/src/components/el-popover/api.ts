@@ -3,16 +3,16 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
-      idetype: 'container',
+      idetype: 'popover',
       selector: {
-        expression: "this.getElement(el => el.slotTarget === 'content')",
-        cssSelector: "div[class='ant-popover-content']",
+        expression: "this.getElement(el => el.slotTarget === 'reference')",
+        cssSelector: "span[class='el-popover__reference-wrapper']",
       },
       actions: {
         click: {
           status:
-            "this.setCacheStatus('open', !(this.getCacheStatus('open') || false)) ",
-          default: "this.setCacheStatus('open', false)",
+            "this.setCacheStatus('value', !(this.getCacheStatus('value') || false)) ",
+          default: "this.setCacheStatus('value', false)",
         },
       },
     },
@@ -189,8 +189,8 @@ namespace nasl.ui {
     onAfterLeave: (event: any) => any;
 
     @Slot({
-      title: 'Popover 内嵌 HTML 文本',
-      description: 'Popover 内嵌 HTML 文本',
+      title: 'Default',
+      description: '默认插槽',
     })
     slotDefault: () => Array<ViewComponent>;
 

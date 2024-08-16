@@ -359,7 +359,7 @@
     {
         "name": "ElPopover",
         "ideusage": {
-            "idetype": "popover"
+            "idetype": "container"
         }
     },
     {
