@@ -26,6 +26,10 @@ export default {
       });
     }
 
-    return h('i', { class: kebabCase(this.name) });
+    let name = this.name || 'picture-outline';
+    if (!name.startsWith('Ri')) {
+      name = `el-icon-${name}`;
+    }
+    return h('i', { class: kebabCase(name) });
   },
 };
