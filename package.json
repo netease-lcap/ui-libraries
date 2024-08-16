@@ -26,7 +26,7 @@
       "eslint --cache --fix",
       "git add"
     ],
-    "libraries/element-ui/**/*.{ts,tsx,js,vue}": [
+    "libraries/element-ui/**/*.{ts,tsx,js}": [
       "eslint --cache --fix",
       "git add"
     ],

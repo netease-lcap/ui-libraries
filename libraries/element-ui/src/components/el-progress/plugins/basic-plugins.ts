@@ -10,6 +10,11 @@ export const useFormatFunction: NaslComponentPluginOptions = {
       if (!format) {
         return null;
       }
+
+      if (typeof format === 'function') {
+        return format;
+      }
+
       return (percentage: number) => {
         // return percentage === 100 ? format : `${percentage}%`;
         return format;
