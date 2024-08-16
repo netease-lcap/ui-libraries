@@ -1,0 +1,115 @@
+import Notification from 'element-ui/lib/notification';
+
+export default {
+  name: 'ElNotification',
+  props: {
+    visible: {
+      type: Boolean,
+      default: false,
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    type: {
+      type: String,
+      default: '',
+    },
+    icon: {
+      type: String,
+      default: '',
+    },
+    duration: {
+      type: Number,
+      default: 4500,
+    },
+    position: {
+      type: String,
+      default: 'top-right',
+    },
+    showClose: {
+      type: Boolean,
+      default: false,
+    },
+    offset: {
+      type: Number,
+      default: 20,
+    },
+  },
+  watch: {
+    visible: {
+      handler(val, oldVal) {
+        if (val === oldVal) {
+          return;
+        }
+
+        if (val) {
+          this.openNotification();
+        } else {
+          this.closeNotification();
+        }
+      },
+      immediate: true,
+    },
+  },
+  beforeDestroy() {
+    this.closeNotification();
+  },
+  methods: {
+    openNotification() {
+      this.closeNotification();
+
+      const h = this.$createElement;
+      const vnodes = this.$scopedSlots.default() || [];
+      const message = Array.isArray(vnodes) && vnodes.length > 0 ? h('div', {}, vnodes) : null;
+
+      this.instance = Notification({
+        type: this.type,
+        title: this.title,
+        duration: this.duration,
+        showClose: this.showClose,
+        offset: this.offset,
+        position: this.position,
+        iconClass: this.icon,
+        customClass: this.$vnode.data.staticClass,
+        message,
+        onClick: () => {
+          this.$emit('click');
+        },
+        onClose: () => {
+          this.visible = false;
+          this.$emit('update:visible', false);
+          this.$emit('close');
+        },
+      });
+
+      if (this.$vnode.data.staticStyle && this.instance.$el) {
+        const exclude = [
+          'zIndex', 'postion', 'left', 'right', 'top', 'bottom',
+        ];
+
+        Object.keys(this.$vnode.data.staticStyle).forEach((key) => {
+          if (exclude.includes(key)) {
+            return;
+          }
+
+          this.instance.$el.style[key] = this.$vnode.data.staticStyle[key];
+        });
+      }
+
+      this.instance.$nextTick(() => {
+        this.$emit('open');
+      });
+    },
+    closeNotification() {
+      if (this.instance) {
+        const ins = this.instance;
+        this.instance = null;
+        ins.close();
+      }
+    },
+  },
+  render() {
+    return null;
+  },
+};
