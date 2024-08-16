@@ -59,3 +59,5 @@ export { ElDivider } from './el-divider';
 export { ElCalendar } from './el-calendar';
 export { ElImage } from './el-image';
 export { ElDrawer } from './el-drawer';
+export { ElMessage, ElMessageDesigner } from './el-message';
+export { ElNotification, ElNotificationDesigner } from './el-notification';
