@@ -20,9 +20,35 @@ export default {
   ],
 };
 
-export const Default = {
-  name: '基础示例',
+export const Demo1 = {
+  name: '3列样式（8:8:8）',
   render: () => ({
-    template: '<el-row></el-row>',
+    template: `<el-row>
+      <el-col :span="8"></el-col>
+      <el-col :span="8"></el-col>
+      <el-col :span="8"></el-col>
+    </el-row>`,
+  }),
+};
+
+export const Demo2 = {
+  name: '4列样式（2:4:8:10）',
+  render: () => ({
+    template: `<el-row>
+      <el-col :span="2"></el-col>
+      <el-col :span="4"></el-col>
+      <el-col :span="8"></el-col>
+      <el-col :span="10"></el-col>
+    </el-row>`,
+  }),
+};
+
+export const Demo3 = {
+  name: '2列样式（8:16）',
+  render: () => ({
+    template: `<el-row>
+      <el-col :span="8"></el-col>
+      <el-col :span="16"></el-col>
+    </el-row>`,
   }),
 };
