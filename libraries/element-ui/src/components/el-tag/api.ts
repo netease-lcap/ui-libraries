@@ -2,10 +2,13 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    ideusage: {
+      idetype: 'element',
+    }
   })
   @Component({
     title: '标签',
-    icon: 'tag',
+    icon: 'label',
     description: '用于标记和选择。',
     group: 'Display',
   })
@@ -45,7 +48,9 @@ namespace nasl.ui {
       group: '主要属性',
       title: '背景色',
       description: 'color属性，可以设置标签背景色',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'InputSetter'
+      },
     })
     color: nasl.core.String = '';
 
@@ -108,12 +113,44 @@ namespace nasl.ui {
       title: '点击',
       description: '点击 Tag 时触发的事件',
     })
-    onClick: (event: any) => any;
+    onClick: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => void;
 
     @Event({
       title: '关闭',
       description: '关闭 Tag 时触发的事件',
     })
-    onClose: (event: any) => any;
+    onClose: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => void;
   }
 }
