@@ -23,6 +23,7 @@ export default {
         style: {
           verticalAlign: 'middle',
         },
+        on: this.$listeners,
       });
     }
 
@@ -30,6 +31,9 @@ export default {
     if (!name.startsWith('Ri')) {
       name = `el-icon-${name}`;
     }
-    return h('i', { class: kebabCase(name) });
+    return h('i', {
+      class: kebabCase(name),
+      on: this.$listeners,
+    });
   },
 };
