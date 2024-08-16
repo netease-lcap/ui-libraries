@@ -957,7 +957,6 @@ export default {
       }
       this.focus();
       this.close();
-      this.$emit('before-clear')
     },
     focus() {
       this.preventBlur = true;
