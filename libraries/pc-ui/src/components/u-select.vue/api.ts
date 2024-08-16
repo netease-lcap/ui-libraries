@@ -700,6 +700,12 @@ namespace nasl.ui {
         onLoad: (event: any) => any;
 
         @Event({
+            title: '清空后',
+            description: '清空后触发',
+        })
+        onBeforeClear: (event: any) => any;
+
+        @Event({
             title: '点击前缀图标',
             description: '点击前缀图标后触发',
         })
