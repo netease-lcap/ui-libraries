@@ -25,6 +25,7 @@ namespace nasl.ui {
       docDescription: '支持从图标库选择图标或上传自定义图标。',
       setter: {
         concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS'
       },
     })
     name: nasl.core.String = '';
