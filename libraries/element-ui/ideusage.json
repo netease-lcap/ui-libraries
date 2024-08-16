@@ -1,5 +1,11 @@
 [
     {
+        "name": "ElAbsoluteLayout",
+        "ideusage": {
+            "idetype": "board"
+        }
+    },
+    {
         "name": "ElAlert",
         "ideusage": {
             "idetype": "container",
@@ -135,28 +141,50 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "['el-header', 'el-aside', 'el-footer'].includes(target.tag)"
+            "childAccept": "['el-header', 'el-aside', 'el-footer', 'el-main', 'el-container'].includes(target.tag)",
+            "slotInlineStyle": {
+                "default": "height:100%"
+            }
         }
     },
     {
         "name": "ElHeader",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'el-container'"
+            "parentAccept": "target.tag === 'el-container'",
+            "slotInlineStyle": {
+                "default": "height:100%"
+            }
         }
     },
     {
         "name": "ElAside",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'el-container'"
+            "parentAccept": "target.tag === 'el-container'",
+            "slotInlineStyle": {
+                "default": "height:100%"
+            }
         }
     },
     {
         "name": "ElFooter",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'el-container'"
+            "parentAccept": "target.tag === 'el-container'",
+            "slotInlineStyle": {
+                "default": "height:100%"
+            }
+        }
+    },
+    {
+        "name": "ElMain",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag === 'el-container'",
+            "slotInlineStyle": {
+                "default": "height:100%"
+            }
         }
     },
     {
@@ -419,7 +447,10 @@
         "name": "ElCol",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag === 'el-row'"
+            "parentAccept": "target.tag === 'el-row'",
+            "slotInlineStyle": {
+                "default": "min-width:auto"
+            }
         }
     },
     {

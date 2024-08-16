@@ -21,8 +21,43 @@ export default {
 };
 
 export const Default = {
-  name: '基础示例',
+  name: '两栏-左侧固定',
   render: () => ({
-    template: '<el-container></el-container>',
+    template: `<el-container style="height:100%">
+      <el-header></el-header>
+      <el-container>
+        <el-aside></el-aside>
+        <el-main></el-main>
+      </el-container>
+    </el-container>`,
+  }),
+};
+
+export const Demo1 = {
+  name: '三栏-常规',
+  render: () => ({
+    template: `<el-container style="height:100%">
+      <el-header></el-header>
+      <el-container>
+        <el-aside></el-aside>
+        <el-main></el-main>
+        <el-aside></el-aside>
+      </el-container>
+    </el-container>`,
+  }),
+};
+
+export const Demo2 = {
+  name: '三栏-全部',
+  render: () => ({
+    template: `<el-container style="height:100%">
+      <el-header></el-header>
+      <el-container>
+        <el-aside></el-aside>
+        <el-main></el-main>
+        <el-aside></el-aside>
+      </el-container>
+      <el-footer></el-footer>
+    </el-container>`,
   }),
 };

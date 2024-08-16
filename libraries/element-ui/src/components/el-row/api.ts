@@ -1,15 +1,8 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
-  @IDEExtraInfo({
-    "ideusage": {
-      "idetype": "container",
-      "structured": true,
-      "childAccept": "target.tag === 'el-col'"
-    }
-  })
   @Component({
-    title: '布局',
+    title: '栅格布局',
     icon: 'row',
     description: '通过基础的 24 分栏，迅速简便地创建布局。',
     group: 'Layout',
@@ -33,9 +26,12 @@ namespace nasl.ui {
       group: '主要属性',
       title: '布局模式',
       description: '布局模式，可选 flex，现代浏览器下有效',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'CapsulesSetter',
+        options: [{ title: '默认布局', icon: 'layout-block', tooltip: '块级布局' }, { title: '弹性', icon: 'layout-flex', tooltip: '弹性布局' }],
+      },
     })
-    type: nasl.core.String;
+    type: 'block' | 'flex' = 'block';
 
     @Prop({
       group: '主要属性',
@@ -76,21 +72,14 @@ namespace nasl.ui {
     @Slot({
       title: '自定义默认内容',
       description: '自定义默认内容',
-      snippets: [{ title: 'Col', code: '<el-col></el-col>' }],
+      emptyBackground: 'add-sub',
+      snippets: [{ title: '列', code: '<el-col :span="1"></el-col>' }],
     })
     slotDefault: () => Array<ViewComponent>;
   }
 
-
-  @IDEExtraInfo({
-    "ideusage": {
-      "idetype": "element",
-      "parentAccept": "target.tag === 'el-row'"
-    }
-  })
-
   @Component({
-    title: 'Col',
+    title: '栅格列',
     icon: 'col',
     description: '',
     group: 'Layout',
@@ -181,5 +170,11 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     tag: nasl.core.String = 'div';
+
+    @Slot({
+      title: '自定义默认内容',
+      description: '自定义默认内容',
+    })
+    slotDefault: () => Array<ViewComponent>;
   }
 }
