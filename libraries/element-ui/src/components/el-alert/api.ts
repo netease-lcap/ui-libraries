@@ -4,14 +4,10 @@ namespace nasl.ui {
   @IDEExtraInfo({
     "ideusage": {
       "idetype": "container",
-      "selector": {
-        "expression": "this",
-        "cssSelector": "div[class='el-alert']"
-      }
     }
   })
   @Component({
-    title: '警告',
+    title: '公告',
     icon: 'alert',
     description: '用于页面中展示重要的提示信息。',
     group: 'Display',
@@ -69,7 +65,7 @@ namespace nasl.ui {
       description: '文字是否居中',
       setter: { concept: 'SwitchSetter' },
     })
-    center: nasl.core.Boolean = true;
+    center: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
