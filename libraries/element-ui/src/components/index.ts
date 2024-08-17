@@ -61,3 +61,4 @@ export { ElImage } from './el-image';
 export { ElDrawer } from './el-drawer';
 export { ElMessage, ElMessageDesigner } from './el-message';
 export { ElNotification, ElNotificationDesigner } from './el-notification';
+export { ElMessageBox, ElMessageBoxDesigner } from './el-message-box';
