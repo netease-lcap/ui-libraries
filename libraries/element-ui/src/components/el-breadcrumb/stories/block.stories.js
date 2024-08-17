@@ -15,7 +15,7 @@ export default {
           VUE_APP_DESIGNER: true,
         };
       },
-      template: '<div style="width: 500px;"><story/></div>',
+      template: '<div style="width: auto;"><story/></div>',
     }),
   ],
 };
@@ -23,6 +23,17 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-breadcrumb></el-breadcrumb>',
+    template: `<el-breadcrumb separator="/">
+      <el-breadcrumb-item><el-text text="主页面"></el-text></el-breadcrumb-item>
+      <el-breadcrumb-item><el-text text="一级子页面"></el-text></el-breadcrumb-item>
+      <el-breadcrumb-item><el-text text="二级子页面"></el-text></el-breadcrumb-item>
+    </el-breadcrumb>`,
+  }),
+};
+
+export const Auto = {
+  name: '自动生成面包屑',
+  render: () => ({
+    template: '<el-breadcrumb :auto="true" separator="/"></el-breadcrumb>',
   }),
 };

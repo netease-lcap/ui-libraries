@@ -195,7 +195,10 @@ namespace nasl.ui {
       "childAccept": "['el-submenu', 'el-menu-item', 'el-menu-item-group'].includes(target.tag)",
       "events": {
         "click": true
-      }
+      },
+      "displaySlotInline": {
+        title: true,
+      },
     }
   })
   @Component({
@@ -332,7 +335,10 @@ namespace nasl.ui {
       "idetype": "container",
       "structured": true,
       "childAccept": "['el-submenu', 'el-menu-item', 'el-menu-item-group'].includes(target.tag)",
-      "parentAccept": "target.tag === 'el-menu' || target.tag === 'el-submenu' || target.tag === 'el-menu-item-group'"
+      "parentAccept": "target.tag === 'el-menu' || target.tag === 'el-submenu' || target.tag === 'el-menu-item-group'",
+      "displaySlotInline": {
+        title: true,
+      },
     }
   })
   @Component({
