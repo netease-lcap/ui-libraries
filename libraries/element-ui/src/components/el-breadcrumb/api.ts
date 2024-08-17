@@ -2,10 +2,21 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      structured: true,
+      childAccept: "target.tag === 'el-breadcrumb-item'",
+      additionalAttribute: {
+        ':showInDesiner': true,
+      },
+      "displaySlotInline": {
+        default: true,
+      },
+    },
   })
   @Component({
     title: '面包屑',
-    icon: 'breadcrumb',
+    icon: 'crumb',
     description: '显示当前页面的路径，快速返回之前的任意页面。',
     group: 'Navigation',
   })
@@ -18,38 +29,48 @@ namespace nasl.ui {
   export class ElBreadcrumbOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
-      title: 'Separator',
+      title: '分隔符',
       description: '分隔符',
       setter: { concept: 'InputSetter' },
     })
-    separator: nasl.core.String = "/";
+    separator: nasl.core.String = '/';
 
     @Prop({
       group: '主要属性',
-      title: 'Separator Class',
-      description: '图标分隔符 class',
-      setter: { concept: 'InputSetter' },
+      title: '自动生成',
+      description: '是否自动根据子页面配置的面包屑属性自动生成',
+      docDescription: '支持控制面包屑生成方式。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      bindHide: true,
     })
-    separatorClass: nasl.core.String = '';
+    auto: nasl.core.Boolean = false;
 
     @Slot({
-      title: 'Default',
+      title: '内容',
       description: '内容',
       snippets: [
         {
-          title: 'Breadcrumb Item',
-          code: '<el-breadcrumb-item></el-breadcrumb-item>',
+          title: '面包屑项',
+          code: '<el-breadcrumb-item><template #default><el-text text="面包屑"></el-text></template></el-breadcrumb-item>',
         },
       ],
     })
     slotDefault: () => Array<ViewComponent>;
   }
 
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      "displaySlotInline": {
+        default: true,
+      },
+    },
+  })
   @Component({
-    title: 'Breadcrumb Item',
-    icon: 'breadcrumb-item',
-    description: '',
-    group: 'Navigation',
+    title: '面包屑项',
+    description: '面包屑项',
   })
   export class ElBreadcrumbItem extends ViewComponent {
     constructor(options?: Partial<ElBreadcrumbItemOptions>) {
@@ -59,20 +80,24 @@ namespace nasl.ui {
 
   export class ElBreadcrumbItemOptions extends ViewComponentOptions {
     @Prop({
-      group: '主要属性',
-      title: 'To',
-      description: '路由跳转对象，同 `vue-router` 的 `to`',
-      setter: { concept: 'InputSetter' },
+      group: '交互属性',
+      title: '链接地址'
     })
-    to: nasl.core.String | object;
+    hrefAndTo: nasl.core.String;
 
     @Prop({
       group: '主要属性',
-      title: 'Replace',
+      title: '替换路由',
       description:
         '在使用 to 进行路由跳转时，启用 replace 将不会向 history 添加新记录',
       setter: { concept: 'SwitchSetter' },
     })
     replace: nasl.core.Boolean = false;
+
+    @Slot({
+      title: '内容',
+      description: '内容',
+    })
+    slotDefault: () => Array<ViewComponent>;
   }
 }
