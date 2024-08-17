@@ -7,6 +7,12 @@ declare module '*.module.less' {
   export default classes;
 }
 
+declare module '*.vue' {
+  type VueComponentOptions = any;
+  const options: VueComponentOptions;
+  export default options;
+}
+
 declare namespace nasl.ui {
   export interface IDEExtraInfoOptions {
     show?: boolean;
