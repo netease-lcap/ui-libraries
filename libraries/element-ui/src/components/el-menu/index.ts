@@ -1,3 +1,4 @@
+import './index.css';
 import Menu from 'element-ui/lib/menu';
 import Submenu from 'element-ui/lib/submenu';
 import MenuItem from 'element-ui/lib/menu-item';

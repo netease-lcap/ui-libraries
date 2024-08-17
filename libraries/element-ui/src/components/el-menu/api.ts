@@ -5,12 +5,15 @@ namespace nasl.ui {
     ideusage: {
       "idetype": "container",
       "structured": true,
-      "childAccept": "['el-submenu', 'el-menu-item', 'el-menu-item-group'].includes(target.tag)"
+      "childAccept": "['el-submenu', 'el-menu-item', 'el-menu-item-group'].includes(target.tag)",
+      "events": {
+        "click": true
+      },
     }
   })
   @Component({
     title: '导航菜单',
-    icon: 'menu',
+    icon: 'navbar-multi',
     description: '为网站提供导航功能的菜单。',
     group: 'Navigation',
   })
@@ -44,11 +47,13 @@ namespace nasl.ui {
     })
     mode: 'horizontal' | 'vertical' = 'vertical';
 
-    @Prop({
-      group: '状态属性',
+    @Prop<ElMenuOptions, 'collapse'>({
+      group: '主要属性',
       title: '是否水平折叠收起菜单',
       description: '是否水平折叠收起菜单（仅在 mode 为 vertical 时可用）',
       setter: { concept: 'SwitchSetter' },
+      settable: true,
+      if: (_) => _.mode === 'vertical',
     })
     collapse: nasl.core.Boolean = false;
 
@@ -77,23 +82,23 @@ namespace nasl.ui {
     activeTextColor: nasl.core.String = '#409EFF';
 
     @Prop({
-      group: '数据属性',
-      title: '当前激活菜单的index',
-      description: '当前激活菜单的 index',
+      group: '主要属性',
+      title: '当前激活菜单的标识',
+      description: '当前激活菜单的 标识',
       setter: { concept: 'InputSetter' },
     })
     defaultActive: nasl.core.String;
 
     @Prop({
-      group: '数据属性',
-      title: '当前打开的sub-menu的index的数组',
-      description: '当前打开的 sub-menu 的 index 的数组',
+      group: '主要属性',
+      title: '当前打开的子菜单的标识的数组',
+      description: '当前打开的子菜单的标识的数组',
       setter: { concept: 'InputSetter' },
     })
     defaultOpeneds: nasl.collection.List<nasl.core.String>;
 
     @Prop({
-      group: '状态属性',
+      group: '主要属性',
       title: '是否只保持一个子菜单的展开',
       description: '是否只保持一个子菜单的展开',
       setter: { concept: 'SwitchSetter' },
@@ -112,7 +117,7 @@ namespace nasl.ui {
     menuTrigger: 'hover' | 'click' = 'hover';
 
     @Prop({
-      group: '状态属性',
+      group: '主要属性',
       title: '是否使用 vue-router 的模式',
       description:
         '是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转',
@@ -121,7 +126,7 @@ namespace nasl.ui {
     router: nasl.core.Boolean = false;
 
     @Prop({
-      group: '状态属性',
+      group: '主要属性',
       title: '是否开启折叠动画',
       description: '是否开启折叠动画',
       setter: { concept: 'SwitchSetter' },
@@ -138,8 +143,8 @@ namespace nasl.ui {
     }) => void;
 
     @Event({
-      title: 'sub-menu展开时',
-      description: 'sub-menu 展开的回调',
+      title: '子菜单展开时',
+      description: '子菜单展开的回调',
     })
     onOpen: (event: {
       index: nasl.core.String;
@@ -147,8 +152,8 @@ namespace nasl.ui {
     }) => void;
 
     @Event({
-      title: 'sub-menu收起时',
-      description: 'sub-menu 收起的回调',
+      title: '子菜单收起时',
+      description: '子菜单收起的回调',
     })
     onClose: (event: {
       index: nasl.core.String;
@@ -159,15 +164,27 @@ namespace nasl.ui {
       title: '默认',
       description: '默认',
       snippets: [
-        { title: 'Submenu', code: '<el-submenu></el-submenu>' },
-        { title: 'Menu Item', code: '<el-menu-item></el-menu-item>' },
+        { title: '子菜单', code: '<el-submenu><template #title><el-text text="子菜单"></el-text></template><template #default><el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item></template></el-submenu>' },
+        { title: '菜单项', code: '<el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item>' },
         {
-          title: 'Menu Item Group',
-          code: '<el-menu-item-group></el-menu-item-group>',
+          title: '菜单组',
+          code: '<el-menu-item-group><template #title><el-text text="菜单分组"></el-text></template><template #default><el-menu-item><template #default><el-text>菜单项</el-text></template></el-menu-item></template></el-menu-item-group>',
         },
       ],
     })
     slotDefault: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '导航栏左侧',
+      description: '导航栏左侧',
+    })
+    slotLeft: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '导航栏右侧',
+      description: '导航栏右侧',
+    })
+    slotRight: () => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({
@@ -175,14 +192,15 @@ namespace nasl.ui {
       "idetype": "container",
       "structured": true, // 配合默认插槽 snippets选项 添加子组件
       "parentAccept": "target.tag === 'el-menu' || target.tag === 'el-submenu' || target.tag === 'el-menu-item-group'",
-      "childAccept": "['el-submenu', 'el-menu-item', 'el-menu-item-group'].includes(target.tag)"
+      "childAccept": "['el-submenu', 'el-menu-item', 'el-menu-item-group'].includes(target.tag)",
+      "events": {
+        "click": true
+      }
     }
   })
   @Component({
-    title: 'Submenu',
-    icon: 'submenu',
-    description: '',
-    group: 'Navigation',
+    title: '子菜单',
+    description: '子菜单',
   })
   export class ElSubmenu extends ViewComponent {
     constructor(options?: Partial<ElSubmenuOptions>) {
@@ -193,11 +211,11 @@ namespace nasl.ui {
   export class ElSubmenuOptions extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
-      title: '唯一标志',
-      description: '唯一标志',
+      title: '唯一标识',
+      description: '唯一标识',
       setter: { concept: 'InputSetter' },
     })
-    index: nasl.core.String | any = null;
+    index: nasl.core.String | null = null;
 
     @Prop({
       group: '样式属性',
@@ -209,16 +227,16 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '展开 sub-menu 的延时',
-      description: '展开 sub-menu 的延时',
+      title: '展开子菜单的延时',
+      description: '展开子菜单的延时',
       setter: { concept: 'NumberInputSetter' },
     })
     showTimeout: nasl.core.Decimal = 300;
 
     @Prop({
       group: '主要属性',
-      title: '展开 sub-menu 的延时',
-      description: '展开 sub-menu 的延时',
+      title: '展开子菜单的延时',
+      description: '展开子菜单的延时',
       setter: { concept: 'NumberInputSetter' },
     })
     hideTimeout: nasl.core.Decimal = 300;
@@ -244,11 +262,11 @@ namespace nasl.ui {
       title: '默认',
       description: '默认',
       snippets: [
-        { title: 'Submenu', code: '<el-submenu></el-submenu>' },
-        { title: 'Menu Item', code: '<el-menu-item></el-menu-item>' },
+        { title: '子菜单', code: '<el-submenu><template #title><el-text text="子菜单"></el-text></template><template #default><el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item></template></el-submenu>' },
+        { title: '菜单项', code: '<el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item>' },
         {
-          title: 'Menu Item Group',
-          code: '<el-menu-item-group></el-menu-item-group>',
+          title: '菜单组',
+          code: '<el-menu-item-group><template #title><el-text text="菜单分组"></el-text></template><template #default><el-menu-item><template #default><el-text>菜单项</el-text></template></el-menu-item></template></el-menu-item-group>',
         },
       ],
     })
@@ -268,10 +286,8 @@ namespace nasl.ui {
     }
   })
   @Component({
-    title: 'Menu Item',
-    icon: 'menu-item',
-    description: '',
-    group: 'Navigation',
+    title: '菜单项',
+    description: '菜单项',
   })
   export class ElMenuItem extends ViewComponent {
     constructor(options?: Partial<ElMenuItemOptions>) {
@@ -282,19 +298,19 @@ namespace nasl.ui {
   export class ElMenuItemOptions extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
-      title: '唯一标志',
-      description: '唯一标志',
+      title: '唯一标识',
+      description: '唯一标识',
       setter: { concept: 'InputSetter' },
     })
     index: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Vue Router 路径对象',
-      description: 'Vue Router 路径对象',
-      setter: { concept: 'InputSetter' },
-    })
-    route: object;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Vue Router 路径对象',
+    //   description: 'Vue Router 路径对象',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // route: object;
 
     @Prop({
       group: '状态属性',
@@ -305,10 +321,10 @@ namespace nasl.ui {
     disabled: nasl.core.Boolean = false;
 
     @Slot({
-      title: '标题',
-      description: '标题',
+      title: '菜单项内容',
+      description: '菜单项内容',
     })
-    slotTitle: () => Array<ViewComponent>;
+    slotDefault: () => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({
@@ -320,10 +336,8 @@ namespace nasl.ui {
     }
   })
   @Component({
-    title: 'Menu Item Group',
-    icon: 'menu-item-group',
-    description: '',
-    group: 'Navigation',
+    title: '菜单组',
+    description: '菜单组',
   })
   export class ElMenuItemGroup extends ViewComponent {
     constructor(options?: Partial<ElMenuItemGroupOptions>) {
@@ -332,24 +346,20 @@ namespace nasl.ui {
   }
 
   export class ElMenuItemGroupOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '分组标题',
-      description: '分组标题',
-      setter: { concept: 'InputSetter' },
-    })
-    title: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '分组标题',
+    //   description: '分组标题',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // title: nasl.core.String;
 
     @Slot({
       title: '默认',
       description: '默认',
       snippets: [
-        { title: 'Submenu', code: '<el-submenu></el-submenu>' },
-        { title: 'Menu Item', code: '<el-menu-item></el-menu-item>' },
-        {
-          title: 'Menu Item Group',
-          code: '<el-menu-item-group></el-menu-item-group>',
-        },
+        { title: '子菜单', code: '<el-submenu><template #title><el-text text="子菜单"></el-text></template><template #default><el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item></template></el-submenu>' },
+        { title: '菜单项', code: '<el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item>' },
       ],
     })
     slotDefault: () => Array<ViewComponent>;

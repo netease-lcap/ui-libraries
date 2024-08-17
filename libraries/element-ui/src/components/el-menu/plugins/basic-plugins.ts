@@ -1,9 +1,9 @@
 /* 组件功能扩展插件 */
 import type { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
+import { VNode } from 'vue';
 
-// 菜单激活回调 绑定事件select
-export const useTransferSelect: NaslComponentPluginOptions = {
-  setup: (props) => {
+export const useExtendsPlugin: NaslComponentPluginOptions = {
+  setup: (props, { h }) => {
     return {
       onSelect: (index, indexPath) => {
         const onSelect = props.get('onSelect');
@@ -14,15 +14,6 @@ export const useTransferSelect: NaslComponentPluginOptions = {
           });
         }
       },
-    };
-  },
-  order: 3,
-};
-
-// sub-menu 展开的回调 绑定事件open
-export const useTransferOpen: NaslComponentPluginOptions = {
-  setup: (props) => {
-    return {
       onOpen: (index, indexPath) => {
         const onOpen = props.get('onOpen');
         if (typeof onOpen === 'function') {
@@ -32,15 +23,6 @@ export const useTransferOpen: NaslComponentPluginOptions = {
           });
         }
       },
-    };
-  },
-  order: 3,
-};
-
-// sub-menu 收起的回调 绑定事件close
-export const useTransferClose: NaslComponentPluginOptions = {
-  setup: (props) => {
-    return {
       onClose: (index, indexPath) => {
         const onClose = props.get('onClose');
         if (typeof onClose === 'function') {
@@ -50,7 +32,29 @@ export const useTransferClose: NaslComponentPluginOptions = {
           });
         }
       },
+      slotDefault: () => {
+        const mode = props.get('mode');
+        const [slotDefault, slotLeft, slotRight] = props.get<Array<() => VNode[]>>(['slotDefault', 'slotLeft', 'slotRight']);
+
+        let vnodes = typeof slotDefault === 'function' ? slotDefault() : [];
+        if (!Array.isArray(vnodes)) {
+          vnodes = [];
+        }
+
+        if (mode === 'horizontal') {
+          const leftNodes = typeof slotLeft === 'function' ? slotLeft() : [];
+          const rightNodes = typeof slotRight === 'function' ? slotRight() : [];
+          if (Array.isArray(leftNodes) && leftNodes.length > 0) {
+            vnodes.unshift(...leftNodes);
+          }
+
+          if (Array.isArray(rightNodes) && rightNodes.length > 0) {
+            vnodes.push(h('div', { class: 'el-menu__extra' }, rightNodes));
+          }
+        }
+
+        return vnodes;
+      },
     };
   },
-  order: 3,
 };

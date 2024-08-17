@@ -16,6 +16,7 @@ export default {
   render(h) {
     if (isSvgUrl(this.name)) {
       return h(onlineSvgIcon, {
+        class: 'el-icon--online',
         props: {
           purecss: !ie11(),
           url: this.name,
