@@ -116,6 +116,7 @@ export const Example8 = {
     },
     template: `
       <el-tabs :data-source="list" title-field="label" :value.sync="value">
+        <template #label="{item}">{{item.value}}</template>
         <template #content="{ item, value }">
             {{item.label}} 选项卡内容 {{item}} {{value}}
         </template>

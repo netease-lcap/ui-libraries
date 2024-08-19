@@ -10,7 +10,7 @@ namespace nasl.ui {
         dismiss:
           "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
-        loopRule: 'nth-child(n+2)',
+        loopRule: 'nth-child(n+3)',
         loopElem: ".el-tabs__nav > .el-tabs__item",
         emptySlot: {
           display: 'large',
@@ -214,6 +214,7 @@ namespace nasl.ui {
     @Slot({
       title: '标签页',
       description: '内容',
+      emptyBackground: 'add-sub',
       snippets: [
         {
           title: '标签页',
