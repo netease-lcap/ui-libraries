@@ -4,6 +4,7 @@ import { createProp2Default } from '@lcap/nasl-hoc-vue/common/text';
 import type { NaslComponentPluginOptions, Slot } from '@lcap/nasl-hoc-vue/plugin';
 import ElIcon from '../../el-icon';
 import { isEmptyVNodes } from '@/utils/vnode';
+import styles from '../index.module.css';
 
 export const useText2Default = createProp2Default('text');
 
@@ -29,9 +30,9 @@ export const useIcon: NaslComponentPluginOptions = {
         }
 
         if (iconPosition === 'right') {
-          return [h('span', vnodes), iconNode];
+          return h('span', { class: styles.spanwrap }, [h('span', vnodes), iconNode]);
         }
-        return [iconNode, h('span', vnodes)];
+        return h('span', { class: styles.spanwrap }, [iconNode, h('span', vnodes)]);
       },
       [$deletePropList]: ['icon'],
     };

@@ -9,7 +9,7 @@ export { ElTable, ElTableColumn } from './el-table';
 export { ElResult } from './el-result';
 export { ElRow, ElCol } from './el-row';
 export {
-  ElContainer, ElHeader, ElAside, ElFooter,
+  ElContainer, ElHeader, ElAside, ElFooter, ElMain,
 } from './el-container';
 export { ElLink } from './el-link';
 export { ElRadio, ElRadioGroup, ElRadioButton } from './el-radio';
