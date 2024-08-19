@@ -2,22 +2,35 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    "ideusage": {
-      "idetype": "container",
-      "structured": true,
-      "childAccept": "['el-dropdown-menu', 'el-dropdown-item'].includes(target.tag)",
-      "selector": {
-        "expression": "this.getElement(el => el.slotTarget === 'dropdown')",
-        "cssSelector": "div[class='el-dropdown']"
+    ideusage: {
+      idetype: 'container',
+      structured: {
+        slot: 'items',
+        empty: true,
       },
-      "events": {
-        "click": true
-      }
-    }
+      selector: [
+        {
+          expression: 'this',
+          cssSelector: "div[class='el-dropdown']",
+        },
+        {
+          expression: "this.getElement(el => el.slotTarget === 'items')",
+          cssSelector: '.el-dropdown-menu',
+        },
+      ],
+      namedSlotOmitWrapper: ['items'],
+      events: {
+        click: true,
+      },
+      additionalAttribute: {
+        "trigger": '"click"',
+        ":hideOnClick": '"false"',
+      },
+    },
   })
   @Component({
     title: '下拉菜单',
-    icon: 'dropdown',
+    icon: 'dropdown-new',
     description: '将动作或菜单折叠到下拉菜单中。',
     group: 'Navigation',
   })
@@ -29,32 +42,52 @@ namespace nasl.ui {
 
   export class ElDropdownOptions extends ViewComponentOptions {
     @Prop({
-      group: '主要属性',
-      title: '菜单按钮类型',
-      description:
-        '菜单按钮类型，同 Button 组件(只在`split-button`为 true 的情况下有效)',
-      setter: { concept: 'InputSetter' },
-    })
-    type: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '菜单尺寸',
-      description: '菜单尺寸，在`split-button`为 true 的情况下也对触发按钮生效',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '中等' }, { title: '小型' }, { title: '迷你' }],
-      },
-    })
-    size: 'medium' | 'small' | 'mini';
-
-    @Prop({
-      group: '状态属性',
+      group: '样式属性',
       title: '是否下拉触发元素呈现为按钮组',
       description: '下拉触发元素呈现为按钮组',
       setter: { concept: 'SwitchSetter' },
     })
     splitButton: nasl.core.Boolean = false;
+
+    @Prop<ElDropdownOptions, 'type'>({
+      group: '样式属性',
+      title: '按钮类型',
+      description: '设置按钮样式类型',
+      docDescription:
+        '- 支持定义按钮样式，包括主要按钮、次要按钮、普通按钮、危险操作按钮按钮。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '主要按钮' },
+          { title: '成功按钮' },
+          { title: '警告按钮' },
+          { title: '危险按钮' },
+          { title: '信息按钮' },
+          { title: '文字按钮' },
+          { title: '默认按钮' },
+        ],
+      },
+      if: (_) => _.splitButton,
+    })
+    type: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text' | '' =
+      '';
+
+    @Prop<ElDropdownOptions, 'size'>({
+      group: '样式属性',
+      title: '按钮尺寸',
+      description: '按钮尺寸',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '中等' },
+          { title: '小型' },
+          { title: '迷你' },
+          { title: '默认' },
+        ],
+      },
+      if: (_) => _.splitButton,
+    })
+    size: 'medium' | 'small' | 'mini' | '' = '';
 
     @Prop({
       group: '主要属性',
@@ -84,9 +117,12 @@ namespace nasl.ui {
       group: '交互属性',
       title: '触发下拉的行为',
       description: '触发下拉的行为',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '鼠标悬停' }, { title: '点击' }],
+      },
     })
-    trigger: nasl.core.String = 'hover';
+    trigger: 'hover' | 'click' = 'hover';
 
     @Prop({
       group: '状态属性',
@@ -112,14 +148,14 @@ namespace nasl.ui {
     })
     hideTimeout: nasl.core.Decimal = 150;
 
-    @Prop({
-      group: '数据属性',
-      title: 'Tabindex',
-      description:
-        'Dropdown 组件的 [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex)',
-      setter: { concept: 'NumberInputSetter' },
-    })
-    tabindex: nasl.core.Decimal = 0;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Tabindex',
+    //   description:
+    //     'Dropdown 组件的 [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex)',
+    //   setter: { concept: 'NumberInputSetter' },
+    // })
+    // tabindex: nasl.core.Decimal = 0;
 
     @Prop({
       group: '状态属性',
@@ -131,80 +167,54 @@ namespace nasl.ui {
 
     @Event({
       title: '点击左侧按钮时',
-      description: '`split-button` 为 true 时，点击左侧按钮的回调',
+      description: '点击左侧按钮时',
     })
-    onClick: (event: any) => any;
+    onClick: (event: {}) => any;
 
     @Event({
       title: '点击菜单项时',
       description: '点击菜单项触发的事件回调',
     })
-    onCommand: (event: any) => any;
+    onCommand: (event: nasl.core.String | nasl.core.Integer) => any;
 
     @Event({
       title: '下拉框出现/隐藏时',
       description: '下拉框出现/隐藏时触发',
     })
-    onVisibleChange: (event: any) => any;
+    onVisibleChange: (event: nasl.core.Boolean) => any;
 
     @Slot({
       title: '触发下拉列表显示的元素',
       description: '触发下拉列表显示的元素。 注意： 必须是一个元素或者或者组件',
-      snippets: [
-        {
-          title: 'Dropdown Menu',
-          code: '<el-dropdown-menu></el-dropdown-menu>',
-        },
-        {
-          title: 'Dropdown Item',
-          code: '<el-dropdown-item></el-dropdown-item>',
-        },
-      ],
     })
     slotDefault: () => Array<ViewComponent>;
 
     @Slot({
       title: '下拉列表',
-      description: '下拉列表，通常是 `<el-dropdown-menu>` 组件',
+      description: '下拉列表',
+      snippets: [
+        {
+          title: '下拉菜单项',
+          code: '<el-dropdown-item><template><el-text text="菜单项"></el-text></template></el-dropdown-item>',
+        },
+      ],
     })
-    slotDropdown: () => Array<ViewComponent>;
+    slotItems: () => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({
-    "ideusage": {
-      "idetype": "container",
-      "parentAccept": "target.tag === 'el-dropdown'"
-    }
+    ideusage: {
+      idetype: 'container',
+      parentAccept: "target.tag.endsWith('el-dropdown')",
+      selector: [{
+        expression: 'this',
+        cssSelector: ".el-dropdown-menu__item",
+      }],
+    },
   })
   @Component({
-    title: 'Dropdown Menu',
-    icon: 'dropdown-menu',
-    description: '',
-    group: 'Navigation',
-  })
-  export class ElDropdownMenu extends ViewComponent {
-    constructor(options?: Partial<ElDropdownMenuOptions>) {
-      super();
-    }
-  }
-
-  export class ElDropdownMenuOptions extends ViewComponentOptions { }
-
-  @IDEExtraInfo({
-    "ideusage": {
-      "idetype": "container",
-      "parentAccept": "target.tag === 'el-dropdown'",
-      "selector": {
-        "expression": "this",
-        "cssSelector": "div[class='el-dropdown-menu__item']"
-      },
-    }
-  })
-  @Component({
-    title: 'Dropdown Item',
-    icon: 'dropdown-item',
-    description: '',
-    group: 'Navigation',
+    title: '下拉菜单项',
+    description: '下拉菜单项',
   })
   export class ElDropdownItem extends ViewComponent {
     constructor(options?: Partial<ElDropdownItemOptions>) {
@@ -230,7 +240,7 @@ namespace nasl.ui {
     disabled: nasl.core.Boolean = false;
 
     @Prop({
-      group: '状态属性',
+      group: '样式属性',
       title: '显示分割线',
       description: '显示分割线',
       setter: { concept: 'SwitchSetter' },
@@ -238,11 +248,17 @@ namespace nasl.ui {
     divided: nasl.core.Boolean = false;
 
     @Prop({
-      group: '样式属性',
-      title: '图标类名',
-      description: '图标类名',
-      setter: { concept: 'InputSetter' },
+      group: '主要属性',
+      title: '图标',
+      description: '图标',
+      setter: { concept: 'IconSetter' },
     })
     icon: nasl.core.String;
+
+    @Slot({
+      title: '菜单项内容',
+      description: '菜单项内容',
+    })
+    slotDefault: () => Array<ViewComponent>;
   }
 }
