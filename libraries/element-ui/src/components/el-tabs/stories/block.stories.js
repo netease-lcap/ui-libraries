@@ -32,3 +32,12 @@ export const Default = {
     `,
   }),
 };
+
+export const DataSource = {
+  name: '使用数据源',
+  render: () => ({
+    template: `
+      <el-tabs :dataSource="[{}]"></el-tabs>
+    `,
+  }),
+};

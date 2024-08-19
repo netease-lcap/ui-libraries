@@ -100,3 +100,26 @@ export const Example7 = {
     template: '<example-demo></example-demo>',
   }),
 };
+
+export const Example8 = {
+  name: '数据源',
+  render: () => ({
+    data() {
+      return {
+        value: 'tab2',
+        list: [
+          { label: '标签页1', value: 'tab1' },
+          { label: '标签页2', value: 'tab2' },
+          { label: '标签页3', value: 'tab3' },
+        ],
+      };
+    },
+    template: `
+      <el-tabs :data-source="list" title-field="label" :value.sync="value">
+        <template #content="{ item, value }">
+            {{item.label}} 选项卡内容 {{item}} {{value}}
+        </template>
+      </el-tabs>
+    `,
+  }),
+};

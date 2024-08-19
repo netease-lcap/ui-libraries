@@ -6,6 +6,18 @@ namespace nasl.ui {
       idetype: 'container',
       structured: true,
       childAccept: "target.tag === 'el-tab-pane'",
+      dataSource: {
+        dismiss:
+          "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        display: 3,
+        loopRule: 'nth-child(n+2)',
+        loopElem: ".el-tabs__nav > .el-tabs__item",
+        emptySlot: {
+          display: 'large',
+          condition: "!this.getAttribute('dataSource')",
+          accept: false,
+        },
+      },
     },
   })
   @Component({
@@ -14,15 +26,61 @@ namespace nasl.ui {
     description: '分隔内容上有关联但属于不同类别的数据集合。',
     group: 'Navigation',
   })
-  export class ElTabs extends ViewComponent {
-    constructor(options?: Partial<ElTabsOptions>) {
+  export class ElTabs<T, V> extends ViewComponent {
+    constructor(options?: Partial<ElTabsOptions<T, V>>) {
       super();
     }
   }
 
-  export class ElTabsOptions extends ViewComponentOptions {
+  export class ElTabsOptions<T, V> extends ViewComponentOptions {
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
+      title: '数据源',
+      description:
+        '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription:
+        '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      designerValue: [{}, {}, {}],
+    })
+    dataSource:
+      | { list: nasl.collection.List<T>; total: nasl.core.Integer }
+      | nasl.collection.List<T>;
+
+    @Prop({
+      group: '数据属性',
+      title: '数据类型',
+      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
+      docDescription:
+        '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
+    })
+    dataSchema: T;
+
+    @Prop<ElTabsOptions<T, V>, 'titleField'>({
+      group: '数据属性',
+      title: '文本字段',
+      description: '集合的元素类型中，用于显示文本的属性名称',
+      docDescription:
+        '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    titleField: (item: T) => nasl.core.String = ((item: any) =>
+      item.title) as any;
+
+    @Prop<ElTabsOptions<T, V>, 'valueField'>({
+      group: '数据属性',
+      title: '值字段',
+      description: '集合的元素类型中，用于标识选中值的属性',
+      docDescription: '集合的元素类型中，用于标识选中值的属性，支持自定义变更',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    valueField: (item: T) => V = ((item: any) => item.value) as any;
+
+    @Prop({
+      group: '数据属性',
       title: '选中值',
       description: '绑定值，选中选项卡的 name',
       setter: { concept: 'InputSetter' },
@@ -30,6 +88,20 @@ namespace nasl.ui {
       settable: true,
     })
     value: nasl.core.String;
+
+    @Prop({
+      group: '数据属性',
+      title: '标签页属性设置',
+      description: '标签页属性设置',
+      setter: {
+        concept: 'AnonymousFunctionSetter',
+      },
+    })
+    tabPaneProps: (current: Current<T>) => {
+      disabled: nasl.core.Boolean;
+      closable: nasl.core.Boolean;
+      lazy: nasl.core.Boolean;
+    };
 
     @Prop({
       group: '主要属性',
@@ -150,6 +222,18 @@ namespace nasl.ui {
       ],
     })
     slotDefault: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '标签页标题',
+      description: '标签页标题',
+    })
+    slotLabel: (current: Current<T>) => Array<ViewComponent>;
+
+    @Slot({
+      title: '标签页内容',
+      description: '标签页内容',
+    })
+    slotContent: (current: Current<T>) => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({
