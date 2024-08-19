@@ -370,22 +370,22 @@ namespace nasl.ui {
     slotOption: (current: Current<T>) => Array<ViewComponent>;
 
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义标题',
     })
     slotTitle: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义',
     })
     slotPannelTitle: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义选择器顶部内容',
     })
     slotPickerTop: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义选择器底部内容',
     })
     slotPickerBottom: () => Array<ViewComponent>;
