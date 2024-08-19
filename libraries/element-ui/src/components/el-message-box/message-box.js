@@ -61,8 +61,15 @@ export default {
     inputValue: {
       type: String,
     },
-    rules: {
-      type: Array,
+    inputPattern: {
+      type: String,
+    },
+    inputValidator: {
+      type: Function,
+    },
+    inputErrorMessage: {
+      type: String,
+      default: '输入的数据不合法!',
     },
   },
   watch: {
@@ -107,6 +114,9 @@ export default {
         inputPlaceholder: this.inputPlaceholder,
         inputType: this.inputType,
         inputValue: this.inputValue,
+        inputPattern: this.inputPattern ? new RegExp(this.inputPattern) : null,
+        inputValidator: this.inputValidator,
+        inputErrorMessage: this.inputErrorMessage,
         showInput: this.type === 'prompt',
         closeOnPressEscape: this.type !== 'alert',
         closeOnClickModal: this.type !== 'alert',

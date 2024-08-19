@@ -200,6 +200,39 @@ namespace nasl.ui {
     })
     inputValue: nasl.core.String = '';
 
+    @Prop<ElMessageBoxOptions, 'inputPattern'>({
+      title: '输入验证正则表达式',
+      description: '输入框的校验表达式',
+      group: '主要属性',
+      setter: {
+        concept: 'InputSetter',
+      },
+      if: (_) => _.type === 'prompt',
+    })
+    inputPattern: nasl.core.String;
+
+    @Prop<ElMessageBoxOptions, 'inputValidator'>({
+      title: '输入验证函数',
+      description: '可以返回布尔值或字符串，若返回一个字符串, 则返回结果会被赋值给校验未通过时的提示文本',
+      group: '主要属性',
+      setter: {
+        concept: 'AnonymousFunctionSetter',
+      },
+      if: (_) => _.type === 'prompt',
+    })
+    inputValidator: (value: nasl.core.String) => (nasl.core.Boolean | nasl.core.String);
+
+    @Prop<ElMessageBoxOptions, 'inputErrorMessage'>({
+      title: '校验未通过时的提示文本',
+      description: '校验未通过时的提示文本',
+      group: '主要属性',
+      setter: {
+        concept: 'InputSetter',
+      },
+      if: (_) => _.type === 'prompt',
+    })
+    inputErrorMessage: nasl.core.String = '输入的数据不合法';
+
     @Prop<ElMessageBoxOptions, 'rules'>({
       group: '主要属性',
       title: '规则',
