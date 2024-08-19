@@ -23,8 +23,8 @@ namespace nasl.ui {
         click: true,
       },
       additionalAttribute: {
-        "trigger": '"click"',
-        ":hideOnClick": '"false"',
+        trigger: '"click"',
+        ':hideOnClick': '"false"',
       },
     },
   })
@@ -34,13 +34,79 @@ namespace nasl.ui {
     description: '将动作或菜单折叠到下拉菜单中。',
     group: 'Navigation',
   })
-  export class ElDropdown extends ViewComponent {
-    constructor(options?: Partial<ElDropdownOptions>) {
+  export class ElDropdown<T, V> extends ViewComponent {
+    constructor(options?: Partial<ElDropdownOptions<T, V>>) {
       super();
     }
   }
 
-  export class ElDropdownOptions extends ViewComponentOptions {
+  export class ElDropdownOptions<T, V> extends ViewComponentOptions {
+    @Prop({
+      group: '数据属性',
+      title: '数据源',
+      description:
+        '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription:
+        '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      designerValue: [{}, {}, {}],
+    })
+    dataSource:
+      | nasl.collection.List<T>
+      | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+
+    @Prop({
+      group: '数据属性',
+      title: '数据类型',
+      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
+      docDescription:
+        '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示',
+    })
+    dataSchema: T;
+
+    @Prop({
+      group: '数据属性',
+      title: '文本字段',
+      description: '集合的元素类型中，用于显示文本的属性名称',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    textField: (item: T) => any = ((item: any) => item.text) as any;
+
+    @Prop({
+      group: '数据属性',
+      title: '值字段',
+      description: '集合的元素类型中，用于标识选中值的属性',
+      docDescription: '集合的元素类型中，用于标识选中值的属性，支持自定义变更',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    valueField: (item: T) => V = ((item: any) => item.value) as any;
+
+    @Prop({
+      group: '数据属性',
+      title: '图标属性字段',
+      description: '集合的元素类型中，用于图标的属性名称',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    iconField: (item: T) => any = ((item: any) => item.icon) as any;
+
+    @Prop({
+      group: '数据属性',
+      title: '菜单项属性设置',
+      description: '菜单项属性设置',
+      setter: {
+        concept: 'AnonymousFunctionSetter',
+      },
+    })
+    itemProps: (current: { item: T; index: nasl.core.Integer }) => {
+      disabled: nasl.core.Boolean;
+      divided: nasl.core.Boolean;
+    };
+
     @Prop({
       group: '样式属性',
       title: '是否下拉触发元素呈现为按钮组',
@@ -49,7 +115,7 @@ namespace nasl.ui {
     })
     splitButton: nasl.core.Boolean = false;
 
-    @Prop<ElDropdownOptions, 'type'>({
+    @Prop<ElDropdownOptions<T, V>, 'type'>({
       group: '样式属性',
       title: '按钮类型',
       description: '设置按钮样式类型',
@@ -72,7 +138,7 @@ namespace nasl.ui {
     type: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text' | '' =
       '';
 
-    @Prop<ElDropdownOptions, 'size'>({
+    @Prop<ElDropdownOptions<T, V>, 'size'>({
       group: '样式属性',
       title: '按钮尺寸',
       description: '按钮尺寸',
@@ -175,7 +241,7 @@ namespace nasl.ui {
       title: '点击菜单项时',
       description: '点击菜单项触发的事件回调',
     })
-    onCommand: (event: nasl.core.String | nasl.core.Integer) => any;
+    onCommand: (event: nasl.core.String | nasl.core.Integer | V) => any;
 
     @Event({
       title: '下拉框出现/隐藏时',
@@ -206,10 +272,12 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       parentAccept: "target.tag.endsWith('el-dropdown')",
-      selector: [{
-        expression: 'this',
-        cssSelector: ".el-dropdown-menu__item",
-      }],
+      selector: [
+        {
+          expression: 'this',
+          cssSelector: '.el-dropdown-menu__item',
+        },
+      ],
     },
   })
   @Component({

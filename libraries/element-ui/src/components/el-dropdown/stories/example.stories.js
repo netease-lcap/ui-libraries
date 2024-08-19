@@ -121,3 +121,48 @@ export const Example6 = {
 </el-dropdown></div>`,
   }),
 };
+
+export const Example7 = {
+  name: '数据源',
+  render: () => ({
+    data() {
+      return {
+        dataSource: () => {
+          return [
+            {
+              label: '黄金糕',
+              icon: 'plus',
+              value: '1',
+            },
+            {
+              label: '狮子头',
+              icon: 'circle-plus',
+              value: '2',
+            },
+            {
+              label: '螺蛳粉',
+              icon: 'circle-plus-outline',
+              value: '3',
+            },
+            {
+              label: '双皮奶',
+              icon: 'check',
+              value: '4',
+            },
+            {
+              label: '蚵仔煎',
+              icon: 'circle-check',
+              value: '5',
+            },
+          ];
+        },
+      };
+    },
+    methods: {
+      handleCommand(command) {
+        console.log('item command', command);
+      },
+    },
+    template: '<el-dropdown @command="handleCommand" :data-source="dataSource" text-field="label" size="small" split-button type="primary"><el-text>下拉菜单</el-text></el-dropdown>',
+  }),
+};
