@@ -59,7 +59,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
           const titleVNodes = typeof slotTabLabel === 'function' ? slotTabLabel(current) : [];
           const props = tabPaneProps(current);
 
-          childNodes.push(...contents);
+          childNodes.push(h('template', { slot: 'default' }, contents));
           if (Array.isArray(titleVNodes) && titleVNodes.length > 0) {
             childNodes.push(
               h('template', { slot: 'label' }, titleVNodes),
@@ -74,7 +74,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
               label: title,
             },
           }, [
-            ...contents,
+            ...childNodes,
           ]);
         });
       },
