@@ -68,13 +68,17 @@ export function getRefValueMap(refMap) {
   return map;
 }
 
-export function splitPropsAndAttrs(map, propsKeys, allKeys) {
+export function splitPropsAndAttrs(map, propsKeys, allKeys, deletePropsKeys) {
   const props = {};
   const attrs = {};
   let className = '';
   let style = {};
 
   Object.keys(map).forEach((k) => {
+    if (deletePropsKeys.indexOf(k) !== -1) {
+      return;
+    }
+
     if (k === 'class') {
       className = map[k];
     } else if (k === 'style') {
