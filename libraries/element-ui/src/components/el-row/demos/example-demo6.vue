@@ -16,6 +16,20 @@
         ><div class="grid-content bg-purple-light"></div
       ></el-col>
     </el-row>
+    <el-row :gutter="10">
+      <el-col :xsSpan="8" :smSpan="6" :mdSpan="4" :lgSpan="3" :xlSpan="1"
+        ><div class="grid-content bg-purple"></div
+      ></el-col>
+      <el-col :xsSpan="4" :smSpan="6" :mdSpan="8" :lgSpan="9" :xlSpan="11"
+        ><div class="grid-content bg-purple-light"></div
+      ></el-col>
+      <el-col :xsSpan="4" :smSpan="6" :mdSpan="8" :lgSpan="9" :xlSpan="11"
+        ><div class="grid-content bg-purple"></div
+      ></el-col>
+      <el-col :xsSpan="8" :smSpan="6" :mdSpan="4" :lgSpan="3" :xlSpan="1"
+        ><div class="grid-content bg-purple-light"></div
+      ></el-col>
+    </el-row>
   </div>
 </template>
 

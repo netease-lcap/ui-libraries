@@ -178,7 +178,7 @@ namespace nasl.ui {
       },
       if: (_) => _.mode === 'flex' && _.justify !== 'space-between' && _.justify !== 'space-around',
     })
-    gutter: number = 12;
+    gutter: nasl.core.Decimal | nasl.core.Integer = 12;
 
     @Event({
       title: '点击',

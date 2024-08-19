@@ -440,7 +440,8 @@
         "name": "ElRow",
         "ideusage": {
             "idetype": "container",
-            "childAccept": "target.tag === 'el-col'"
+            "childAccept": "target.tag === 'el-col'",
+            "structured": true
         }
     },
     {
