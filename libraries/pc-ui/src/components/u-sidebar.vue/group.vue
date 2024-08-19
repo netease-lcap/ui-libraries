@@ -275,6 +275,18 @@ export default {
                 final();
             }
         },
+        toggleAll(expanded) {
+          if (!Array.isArray(this.groupVMs) || this.groupVMs.length === 0) {
+            return;
+          }
+
+          this.groupVMs.forEach((groupVM) => {
+            groupVM.toggle(expanded)
+            if (Array.isArray(groupVM.groupVMs) && typeof groupVM.toggleAll === 'function') {
+                groupVM.toggleAll(expanded);
+              }
+          });
+        },
         load() {
             this.loading = true;
             return this.rootVM.currentDataSource.load({
