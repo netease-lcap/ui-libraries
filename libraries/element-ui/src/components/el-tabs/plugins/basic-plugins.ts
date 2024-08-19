@@ -1,27 +1,33 @@
 /* 组件功能扩展插件 */
 import type { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
 
-type AllowBeforeLeave = '允许切换' | '阻止切换';
-
-export const useTabBeforeLeave: NaslComponentPluginOptions = {
-  props: ['allowBeforeLeave'],
-  setup: (props) => {
-    const beforeLeave = props.useComputed(['allowBeforeLeave', 'beforeLeave'], (allowBeforeLeave: AllowBeforeLeave, beforeLeave: any) => {
-      // 兼容 beforeLeave 原有功能
-      if (beforeLeave) {
-        return beforeLeave;
-      }
-
-      if (allowBeforeLeave === '阻止切换') {
-        return false;
-      }
-
-      return true;
-    });
-
+export const useExtendsPlugin: NaslComponentPluginOptions = {
+  setup: ({ get: propGet, useComputed }) => {
     return {
-      beforeLeave,
+      onTabClick(tab) {
+        const onTabClick = propGet('onTabClick');
+        if (typeof onTabClick === 'function') {
+          onTabClick({
+            active: tab.active,
+            loaded: tab.loaded,
+            isClosable: tab.isClosable,
+            value: tab.paneName,
+          });
+        }
+      },
+      onEdit(value, action) {
+        const [onTabEdit, onEdit] = propGet(['onTabEdit', 'onEdit']);
+        if (typeof onTabEdit === 'function') {
+          onTabEdit({
+            value,
+            action,
+          });
+        }
+
+        if (typeof onEdit === 'function') {
+          onEdit(value, action);
+        }
+      },
     };
   },
-  order: 2,
 };
