@@ -782,6 +782,9 @@ export default {
       // if (this.currentLoading)
       //     return Promise.resolve(); // @TODO: dataSource 的多次 promise 必须串行
       // return this.promiseSequence = this.promiseSequence.then(() => {
+      if (this.$emitPrevent('before-load', undefined, this)) {
+        return;
+      }
       this.currentLoading = true;
       const loadToken = (this.loadToken = +new Date());
       // console.log('filterText', this.filterText, loadToken);
@@ -797,6 +800,7 @@ export default {
             this.selectedDataQueue.splice(1, 1, data);
           }
           this.$refs.popper.currentOpened && this.$refs.popper.scheduleUpdate();
+          this.$emit('load', undefined, this);
           return data;
         })
         .catch(() => (this.currentLoading = false)); // });
