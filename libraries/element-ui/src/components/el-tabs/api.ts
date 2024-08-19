@@ -18,6 +18,9 @@ namespace nasl.ui {
           accept: false,
         },
       },
+      displaySlotInline: {
+        label: true,
+      },
     },
   })
   @Component({

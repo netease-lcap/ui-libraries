@@ -36,11 +36,6 @@ export default {
       default: '',
     },
   },
-  data() {
-    return {
-      loading: false,
-    };
-  },
   render(h) {
     const style = this.mode === 'flex' ? {
       flexDirection: this.direction === 'horizontal' ? 'row' : 'column',
