@@ -5,6 +5,7 @@ import ElIcon from '../../el-icon';
 
 export const useIcon: NaslComponentPluginOptions = {
   order: 1,
+  props: ['fallbackSrc'],
   setup: (props, { h }) => {
     return {
       slotDefault: () => {
@@ -31,7 +32,7 @@ export const useIcon: NaslComponentPluginOptions = {
 
         return slots;
       },
-      [$deletePropList]: ['icon'],
+      [$deletePropList]: ['icon', 'fallbackSrc'],
     };
   },
 };
