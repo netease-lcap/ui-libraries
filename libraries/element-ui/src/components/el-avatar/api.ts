@@ -3,7 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
-      "idetype": "container"
+      "idetype": "element",
     }
   })
   @Component({
@@ -23,7 +23,10 @@ namespace nasl.ui {
       group: '主要属性',
       title: '图标',
       description: '设置头像的图标类型，参考 Icon 组件',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS'
+      },
     })
     icon: nasl.core.String;
 
@@ -53,6 +56,14 @@ namespace nasl.ui {
       setter: { concept: 'ImageSetter' },
     })
     src: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: ' fallback链接',
+      description: '图片头像的资源地址',
+      setter: { concept: 'ImageSetter' },
+    })
+    fallbackSrc: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -93,7 +104,7 @@ namespace nasl.ui {
       description:
         '图片类头像加载失败的回调， 返回 false 会关闭组件默认的 fallback 行为',
     })
-    onError: (event: {}) => void;
+    onError: (event: {}) => any;
 
     @Slot({
       title: 'Default',
