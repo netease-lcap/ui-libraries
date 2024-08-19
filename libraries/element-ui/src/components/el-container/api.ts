@@ -5,7 +5,7 @@ namespace nasl.ui {
   })
   @Component({
     title: '布局容器',
-    icon: 'container',
+    icon: 'multi-layout',
     description: '用于布局的容器组件，方便快速搭建页面的基本结构：',
     group: 'Layout',
   })
@@ -22,7 +22,7 @@ namespace nasl.ui {
       description: '子元素的排列方向',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'horizontal' }, { title: 'vertical' }],
+        options: [{ title: '横向' }, { title: '纵向' }],
       },
     })
     direction: 'horizontal' | 'vertical';
@@ -31,10 +31,13 @@ namespace nasl.ui {
       title: 'Default',
       description: '内容',
       snippets: [
+        { title: '布局容器', code: '<el-container></el-container>' },
         { title: 'Header', code: '<el-header></el-header>' },
         { title: 'Aside', code: '<el-aside></el-aside>' },
         { title: 'Footer', code: '<el-footer></el-footer>' },
+        { title: 'Main', code: '<el-main></el-main>' },
       ],
+      emptyBackground: 'add-sub',
     })
     slotDefault: () => Array<ViewComponent>;
   }
@@ -52,14 +55,6 @@ namespace nasl.ui {
   }
 
   export class ElHeaderOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '顶栏高度',
-      description: '顶栏高度',
-      setter: { concept: 'InputSetter' },
-    })
-    height: nasl.core.String = '60px';
-
     @Slot({
       title: '默认',
       description: '内容',
@@ -80,14 +75,6 @@ namespace nasl.ui {
   }
 
   export class ElAsideOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '侧边栏宽度',
-      description: '侧边栏宽度',
-      setter: { concept: 'InputSetter' },
-    })
-    width: nasl.core.String = '300px';
-
     @Slot({
       title: '默认',
       description: '内容',
@@ -128,14 +115,6 @@ namespace nasl.ui {
   }
 
   export class ElFooterOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '底栏高度',
-      description: '底栏高度',
-      setter: { concept: 'InputSetter' },
-    })
-    height: nasl.core.String = '60px';
-
     @Slot({
       title: '默认',
       description: '内容',

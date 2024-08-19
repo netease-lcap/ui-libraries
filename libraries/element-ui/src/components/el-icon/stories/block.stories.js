@@ -21,6 +21,6 @@ export default {
 export const Default = {
   name: '默认示例',
   render: () => ({
-    template: '<el-icon name="ri-bookmark-line"></el-icon>',
+    template: '<el-icon name="picture-outline"></el-icon>',
   }),
 };

@@ -16,21 +16,15 @@ namespace nasl.ui {
   }
 
   export class ElCardOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '设置卡片头部',
-      description: '设置 header，也可以通过 `slot#header` 传入 DOM',
-      setter: { concept: 'InputSetter' },
-    })
-    header: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '设置 body 的样式',
-      description: '设置 body 的样式',
-      setter: { concept: 'InputSetter' },
-    })
-    bodyStyle: object = { padding: '20px' };
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '设置 body 的样式',
+    //   description: '设置 body 的样式',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // bodyStyle: object = { padding: '20px' };
 
     @Prop({
       group: '主要属性',
