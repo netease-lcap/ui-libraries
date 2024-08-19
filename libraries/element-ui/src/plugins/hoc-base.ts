@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import type { VNode } from 'vue';
 import {
   defineComponent,
@@ -221,7 +220,6 @@ const usePropMap = (props, ctx: SetupContext) => {
   const callSetupEnd = (refMap: HocBaseRefMap) => {
     setupEnded = true;
     Object.assign(endRefMap, refMap);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useSetRefParent(refMap, mapGet, props.$methodNames || [], ctx);
   };
 
@@ -443,7 +441,7 @@ export default defineComponent({
     const refListeners = { ...this.$listeners, ...getRefValueMap(listeners) };
 
     const resultVNode = h(baseComponent, {
-      ...splitPropsAndAttrs(refProps, propKeys, allPropsKeys),
+      ...splitPropsAndAttrs(refProps, propKeys, allPropsKeys, deletePropsKeys),
       ...splitListeners(refListeners, this.$nativeEvents as string[], getEventKeys(deletePropsKeys)),
       scopedSlots,
       ref: '$base',
