@@ -23,6 +23,25 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-collapse></el-collapse>',
+    template: `<el-collapse>
+      <el-collapse-item>
+        <template #title>面板1</template>
+      </el-collapse-item>
+      <el-collapse-item>
+        <template #title>面板2</template>
+      </el-collapse-item>
+      <el-collapse-item>
+        <template #title>面板3</template>
+      </el-collapse-item>
+    </el-collapse>`,
+  }),
+};
+
+export const DataSource = {
+  name: '使用数据源',
+  render: () => ({
+    template: `
+      <el-collapse :dataSource="[{}]"></el-collapse>
+    `,
   }),
 };
