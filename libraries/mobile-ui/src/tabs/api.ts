@@ -8,16 +8,6 @@ namespace nasl.ui {
     group: "Selector"
   })
   export class VanTabs extends ViewComponent {
-    @Prop({
-      title: '值',
-    })
-    value: VanTabsOptions['value'];
-
-    @Prop({
-      title: '禁用',
-    })
-    disabled: nasl.core.Boolean;
-
     constructor(options?: Partial<VanTabsOptions>) {
       super();
     }
@@ -27,8 +17,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识选项卡的值',
-      sync: true,
-      settable: true,
+      sync: true
     })
     value: nasl.core.String | nasl.core.Integer;
     @Prop({
@@ -89,8 +78,7 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     disabled: nasl.core.Boolean = false;
     @Event({
@@ -119,16 +107,6 @@ namespace nasl.ui {
     group: "Selector"
   })
   export class VanTab extends ViewComponent {
-    @Prop({
-      title: '禁用',
-    })
-    disabled: nasl.core.Boolean;
-
-    @Prop({
-      title: '徽章值',
-    })
-    badge: VanTabOptions['badge'];
-
     constructor(options?: Partial<VanTabOptions>) {
       super();
     }
@@ -163,7 +141,6 @@ namespace nasl.ui {
         concept: "NumberInputSetter"
       },
       if: _ => _.badgebtn === true,
-      settable: true,
     })
     badge: nasl.core.Decimal;
     @Prop<VanTabOptions, 'badgemax'>({
@@ -182,8 +159,7 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     disabled: nasl.core.Boolean = false;
     @Slot({

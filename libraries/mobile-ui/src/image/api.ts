@@ -8,21 +8,6 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanImage extends ViewComponent {
-    @Prop({
-      title: '地址',
-    })
-    src: VanImageOptions['src'];
-
-    @Prop({
-      title: '默认图地址',
-    })
-    placeholderSrc: VanImageOptions['placeholderSrc'];
-
-    @Prop({
-      title: '预览状态',
-    })
-    preview: nasl.core.Boolean = false;
-
     constructor(options?: Partial<VanImageOptions>) {
       super();
     }
@@ -44,8 +29,7 @@ namespace nasl.ui {
     loadingType: 'loading' | 'none' | 'placeholder' = 'loading';
     @Prop<VanImageOptions, 'placeholderSrc'>({
       title: '默认图地址',
-      if: _ => _.loadingType === 'placeholder',
-      settable: true,
+      if: _ => _.loadingType === 'placeholder'
     })
     placeholderSrc: nasl.core.String = 'https://static-vusion.nos-eastchina1.126.net/h5-template/lietu.png';
     @Prop({
@@ -53,8 +37,7 @@ namespace nasl.ui {
       title: '图片地址',
       setter: {
         concept: "ImageSetter"
-      },
-      settable: true,
+      }
     })
     src: nasl.core.String = '';
     @Prop({
@@ -97,8 +80,7 @@ namespace nasl.ui {
       description: '是否支持点击放大全屏展示',
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     preview: nasl.core.Boolean = false;
     @Event({

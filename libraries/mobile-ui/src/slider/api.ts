@@ -8,16 +8,6 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanSlider extends ViewComponent {
-    @Prop({
-      title: '值',
-    })
-    value: VanSliderOptions['value'];
-
-    @Prop({
-      title: '禁用',
-    })
-    disabled: nasl.core.Boolean;
-
     constructor(options?: Partial<VanSliderOptions>) {
       super();
     }
@@ -30,10 +20,9 @@ namespace nasl.ui {
       sync: true,
       setter: {
         concept: "NumberInputSetter"
-      },
-      settable: true,
+      }
     })
-    value: nasl.core.Decimal | nasl.collection.List<nasl.core.Decimal>;
+    value: nasl.core.Decimal;
     @Prop({
       group: '数据属性',
       title: '最大值',
@@ -73,8 +62,7 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     disabled: nasl.core.Boolean = false;
     @Prop({

@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace, isDef } from '../utils';
 import { ParentMixin } from '../mixins/relation';
 import { BORDER_TOP_BOTTOM } from '../utils/constant';
@@ -6,12 +5,7 @@ import { BORDER_TOP_BOTTOM } from '../utils/constant';
 const [createComponent, bem] = createNamespace('collapse');
 
 export default createComponent({
-  mixins: [
-    ParentMixin('vanCollapse'),
-    sync({
-      value: 'currentValue',
-    }),
-  ],
+  mixins: [ParentMixin('vanCollapse')],
 
   props: {
     accordion: Boolean,

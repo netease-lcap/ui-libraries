@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace, isObject, addUnit } from '../utils';
 import { raf, cancelRaf } from '../utils/dom/raf';
 import VanEmptyCol from '../emptycol';
@@ -21,9 +20,6 @@ function getPath(clockwise, viewBoxSize) {
 }
 
 export default createComponent({
-  mixins: [
-    sync('value'),
-  ],
   props: {
     text: String,
     size: [Number, String],
@@ -177,7 +173,7 @@ export default createComponent({
         </svg>
         <div class={bem('text')} vusion-slot-name="default">
           {!this.slots() ? this.text ? <div class={bem('text')}>{this.text}</div> :  (this.inDesigner&& <VanEmptyCol></VanEmptyCol>):
-            this.slots()
+            this.slots() 
           }
           </div>
       </div>

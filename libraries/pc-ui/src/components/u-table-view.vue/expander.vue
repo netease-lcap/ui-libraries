@@ -93,8 +93,8 @@ export default {
     },
     methods: {
         toggle() {
-            if (this.item.__toggle) {
-                this.item.__toggle();
+            if (this.item.toggle) {
+                this.item.toggle();
             } else {
                 this.$emit('toggle');
             }

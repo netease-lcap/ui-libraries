@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace, isFunction } from '../utils';
 import { formatResult } from '../utils/format/data-source';
 import swipe from '../swipe';
@@ -7,11 +6,6 @@ import swipeItem from '../swipe-item';
 const [createComponent] = createNamespace('gallery');
 
 export default createComponent({
-  mixins: [
-    sync({
-      data: 'options',
-    }),
-  ],
   components: {
     swipe,
     'swipe-item': swipeItem,

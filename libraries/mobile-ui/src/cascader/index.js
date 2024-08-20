@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace, isFunction, _get } from '../utils';
 import { formatResult } from '../utils/format/data-source';
 import Tab from '../tab';
@@ -16,21 +15,11 @@ import { EmptyCol } from '../emptycol';
 const [createComponent, bem, t] = createNamespace('cascader');
 
 export default createComponent({
-  mixins: [
-    FieldMixin,
-    DataSourceMixin,
-    sync({
-      value: 'currentValue',
-      filterText: 'filterText',
-      data: 'currentData',
-      disabled: 'disabled',
-      readonly: 'readonly',
-    }),
-  ],
+  mixins: [FieldMixin, DataSourceMixin],
 
   props: {
-    readonly: { type: Boolean, default: false },
-    disabled: { type: Boolean, default: false },
+    readonly: Boolean,
+    disabled: Boolean,
     title: String,
     value: [Number, String],
     fieldNamesp: [Object, String],
@@ -340,7 +329,6 @@ export default createComponent({
         return;
       }
 
-      this.filterText = '';
       this.togglePopup();
     },
 

@@ -101,7 +101,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import { MSinglex } from '../m-singlex.vue';
 import { scrollTo } from '../../utils/dom';
 import SEmpty from '../s-empty.vue';
@@ -114,25 +113,7 @@ export default {
     childName: 'u-tab',
     components: { URouterView, SEmpty, UTab },
     extends: MSinglex,
-    mixins: [
-      SupportDataSource,
-      sync({
-        value() {
-          const itemVM = this.selectedVM;
-          if (!itemVM) {
-            return this.value;
-          }
-
-          if (this.dataSource !== undefined) {
-            return this.$at(itemVM, this.valueField);
-          }
-
-          return itemVM.value;
-        },
-        readonly: 'readonly',
-        disabled: 'disabled',
-      }),
-    ],
+    mixins: [SupportDataSource],
     provide() {
       return {
         tabLoadOnActive: this.loadOnActive,

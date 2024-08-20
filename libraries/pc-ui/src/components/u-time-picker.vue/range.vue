@@ -72,7 +72,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import dayjs from '../../utils/dayjs';
 import DateFormatMixin from '../../mixins/date.format';
 import { formatterOptions } from './wrap';
@@ -102,19 +101,7 @@ export default {
     name: 'u-time-range-picker',
     // i18n,
     components: { URangeInput, UTimePickerPopper, UPreview },
-    mixins: [
-      MField,
-      MPreview,
-      DateFormatMixin,
-      i18nMixin('u-time-picker'),
-      sync({
-        startTime: 'startInputTime',
-        endTime: 'endInputTime',
-        readonly: 'readonly',
-        preview: 'isPreview',
-        disabled: 'disabled',
-      }),
-    ],
+    mixins: [MField, MPreview, DateFormatMixin, i18nMixin('u-time-picker')],
     props: {
         minUnit: { type: String, default: 'second' },
         startTime: { type: String, default: '' },

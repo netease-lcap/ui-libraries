@@ -35,17 +35,12 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import IIco from '../i-ico.vue';
-
 export default {
     name: 'u-taskbox',
     component: {
         IIco,
     },
-    mixins: [
-      sync('total', 'opened'),
-    ],
     props: {
         icon: {
             type: String,

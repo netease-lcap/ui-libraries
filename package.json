@@ -1,6 +1,6 @@
 {
   "name": "lcap-ui-monorepo",
-  "version": "3.9.0",
+  "version": "3.8.2",
   "private": true,
   "description": "Codewave Low Code AI Platform UI Components",
   "main": "index.js",
@@ -36,6 +36,7 @@
     "pnpm": ">=8.12.1"
   },
   "repository": "https://github.com/netease-lcap/ui-libraries",
+  "packageManager": "pnpm@8.12.1",
   "author": "NetEase CodeWave FE Team",
   "license": "ISC",
   "devDependencies": {

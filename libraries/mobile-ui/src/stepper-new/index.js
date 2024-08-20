@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace, isDef, addUnit } from '../utils';
 import { resetScroll } from '../utils/dom/reset-scroll';
 import { preventDefault } from '../utils/dom/event';
@@ -24,17 +23,7 @@ function equal(value1, value2) {
 const isNil = (val) => val === null || val === undefined || val === '';
 
 export default createComponent({
-  mixins: [
-    FieldMixin,
-    PreviewMixin,
-    sync({
-      value: 'currentValue',
-      formattedValue: 'formattedValue',
-      preview: 'isPreview',
-      disableInput: 'disableInput',
-      disabled: 'disabled',
-    }),
-  ],
+  mixins: [FieldMixin, PreviewMixin],
 
   props: {
     value: {
@@ -42,7 +31,7 @@ export default createComponent({
     },
     theme: String,
     integer: Boolean,
-    disabled: { type: Boolean, default: false },
+    disabled: Boolean,
     allowEmpty: {
       type: Boolean,
       default: true,
@@ -53,7 +42,7 @@ export default createComponent({
     placeholder: String,
     disablePlus: Boolean,
     disableMinus: Boolean,
-    disableInput: { type: Boolean, default: false },
+    disableInput: Boolean,
     decimalLength: [Number, String],
     name: {
       type: [Number, String],

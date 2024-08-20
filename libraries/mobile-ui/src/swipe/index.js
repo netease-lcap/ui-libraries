@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 // Utils
 import { createNamespace } from '../utils';
 import { isHidden } from '../utils/dom/style';
@@ -29,9 +28,6 @@ export default createComponent({
       } else {
         this.clear();
       }
-    }),
-    sync({
-      data: 'currentData',
     }),
   ],
 

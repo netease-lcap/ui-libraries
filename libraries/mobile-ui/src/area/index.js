@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { areaList } from '@vant/area-data';
 
 import { createNamespace } from '../utils';
@@ -11,7 +10,6 @@ import { EmptyCol } from '../emptycol';
 import { FieldMixin } from '../mixins/field';
 import PreviewMixin from '../mixins/preview';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
-import SyncValueMixin from '../mixins/sync-value';
 
 const [createComponent, bem] = createNamespace('area');
 
@@ -41,12 +39,6 @@ export default createComponent({
     FieldMixin,
     EventSlotCommandProvider(['confirm', 'cancel']),
     PreviewMixin,
-    SyncValueMixin,
-    sync({
-      preview: 'isPreview',
-      readonly: 'readonly',
-      disabled: 'disabled',
-    }),
   ],
   props: {
     ...pickerProps,

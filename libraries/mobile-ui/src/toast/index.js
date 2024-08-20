@@ -210,7 +210,6 @@ Toast.closeToast = (key) => {
 ['loading', 'success', 'fail'].forEach((method) => {
   Toast[method] = createMethod(method);
 });
-Toast.error = Toast.fail;
 
 Toast.clear = (all) => {
   if (queue.length) {

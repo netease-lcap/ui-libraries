@@ -267,7 +267,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<ViewComponent>;
+        slotDefault: () => Array<UMultiLayoutItem>;
     }
 
     @Component({

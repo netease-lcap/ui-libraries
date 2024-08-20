@@ -11,16 +11,6 @@ namespace nasl.ui {
     constructor(options?: Partial<VanPopupCombinationOptions>) {
       super();
     }
-    @Prop({
-      title: '打开',
-    })
-    opened: nasl.core.Boolean;
-
-    @Prop({
-      title: '禁用',
-    })
-    disabled: nasl.core.Boolean;
-
     @Method({
       title: 'undefined',
       description: '弹出实例。'
@@ -106,8 +96,7 @@ namespace nasl.ui {
       sync: true,
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     opened: nasl.core.Boolean = false;
     @Prop({
@@ -168,8 +157,7 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     disabled: nasl.core.Boolean = false;
     @Event({

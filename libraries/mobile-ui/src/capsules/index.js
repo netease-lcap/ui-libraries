@@ -1,18 +1,10 @@
-import { sync } from '@lcap/vue2-utils';
-import { createNamespace } from '../utils';
-import { ParentMixin } from '../mixins/relation';
+import { createNamespace } from '../utils'
+import { ParentMixin } from '../mixins/relation'
 
-const [createComponent, bem] = createNamespace('capsules');
+const [createComponent, bem] = createNamespace('capsules')
 
 export default createComponent({
-  mixins: [
-    ParentMixin('VanCapsules'),
-    sync({
-      value: 'currentValue',
-      readonly: 'readonly',
-      disabled: 'disabled',
-    }),
-  ],
+  mixins: [ParentMixin('VanCapsules')],
   props: {
     value: {
       type: [String, Array],
@@ -53,7 +45,7 @@ export default createComponent({
     currentValue(val) {
       this.$emit('update:value', val);
       this.$emit('change', { value: val });
-    },
+    }
   },
 
   methods: {

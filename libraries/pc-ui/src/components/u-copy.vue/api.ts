@@ -8,15 +8,6 @@ namespace nasl.ui {
         group: "Effects"
     })
     export class UCopy extends ViewComponent {
-        @Prop({
-          title: '复制的值',
-        })
-        value: UCopyOptions['value'];
-
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UCopyOptions>) { super(); }
     }
@@ -67,7 +58,6 @@ namespace nasl.ui {
             group: '数据属性',
             title: '复制的值',
             description: '需要复制的值',
-            settable: true,
         })
         value: nasl.core.String;
 
@@ -78,7 +68,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

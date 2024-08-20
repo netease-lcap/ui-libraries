@@ -89,7 +89,7 @@ export default (stories) => {
           props: {
             name: c.name,
             demo: c.demo,
-            title: c.title || c.name,
+            title: c.title,
             actived: c.name === this.activeName,
           },
           on: {

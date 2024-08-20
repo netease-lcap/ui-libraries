@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import MSinglex from '../m-singlex.vue';
 import { getPosition, getComputedStyle, findScrollParent } from '../../utils/dom';
 import event from '../../utils/event';
@@ -26,13 +25,6 @@ export default {
     name: 'u-toc',
     childName: 'u-toc-item',
     extends: MSinglex,
-    mixins: [
-      sync({
-        value() {
-          return this.selectedVM && this.selectedVM.value;
-        },
-      }),
-    ],
     props: {
         value: { type: String, default: '' },
         scrollSpy: { type: Boolean, default: true },
@@ -126,8 +118,8 @@ export default {
         },
         getSelectedVmById() {
             if (this.hashChange)
-                return;
-
+                return;  
+                
             function getChildren(vm) {
                 const res = [];
                 for(const childVm of vm.$children) {
@@ -144,7 +136,7 @@ export default {
                 const id = itemVm.currentHref.split('#')[1];
                 const ele = document.getElementById(id);
                 if(ele && this.isIntoView(ele))
-                    return itemVm;
+                    return itemVm;                
             }
         },
         select(nodeVM) {

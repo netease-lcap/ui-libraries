@@ -8,11 +8,6 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanSwipe<T> extends ViewComponent {
-    @Prop({
-      title: '数据',
-    })
-    data: nasl.collection.List<T>;
-
     constructor(options?: Partial<VanSwipeOptions<T>>) {
       super();
     }

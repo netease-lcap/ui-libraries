@@ -1,6 +1,6 @@
 <!-- 单选列 -->
 <template>
-<u-table-view striped value-field="id" :data-source="data">
+<u-table-view striped value-field="id" v-model="selectedValue" :data-source="data">
     <u-table-view-column type="radio" title="选择" width="8%"></u-table-view-column>
     <u-table-view-column title="用户名" field="name" width="12%"></u-table-view-column>
     <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
@@ -21,11 +21,6 @@ export default {
                 { id: '150823cc351642b6', name: '王五', phone: '13579340020', email: 'wangwu@163.com', address: '浙江省杭州市滨江区网商路599号网易大厦二期', createdTime: 1468614726000, loginTime: 1531675926000 },
             ],
         };
-    },
-    watch: {
-        selectedValue(value) {
-            console.log(value);
-        },
     },
 };
 </script>

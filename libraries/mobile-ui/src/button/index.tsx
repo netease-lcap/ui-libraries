@@ -99,8 +99,6 @@ function Button(
     }
   }
 
-  emit(ctx, 'sync:state', 'disabled', disabled);
-
   const onClick = _debounce(async (event: Event) => {
     if (props.loading) {
       event.preventDefault();
@@ -306,7 +304,7 @@ Button.props = {
   },
   loading: Boolean,
   hairline: Boolean,
-  disabled: { type: Boolean, default: false },
+  disabled: Boolean,
   iconPrefix: String,
   nativeType: String,
   loadingText: String,

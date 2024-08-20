@@ -57,10 +57,6 @@ export default {
       Preview = ThemePagePreviewMap.dashboard;
     }
 
-    if (!Preview) {
-      return null;
-    }
-
     return renderAppPreview(h(Preview, { attrs: { ...props } }));
   },
 };

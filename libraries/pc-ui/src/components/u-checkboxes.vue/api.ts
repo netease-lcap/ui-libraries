@@ -11,32 +11,12 @@ namespace nasl.ui {
         @Prop({
             title: '数据',
         })
-        data: nasl.collection.List<T>;
+        data: UCheckboxesOptions<T, V, C>['dataSource'];
 
         @Prop({
             title: '选中值',
         })
         value: UCheckboxesOptions<T, V, C>['value'];
-
-        @Prop({
-          title: '全选中',
-        })
-        allChecked: nasl.core.Boolean;
-
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
-
-        @Prop({
-          title: '只读',
-        })
-        readonly: nasl.core.Boolean;
-
-        @Prop({
-          title: '预览',
-        })
-        preview: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -91,7 +71,6 @@ namespace nasl.ui {
             description: '当前选中的值',
             sync: true,
             docDescription: '多选组的选中项，返还结构为List\<T>。',
-            settable: true,
         })
         value: C extends '' ? nasl.collection.List<V> : nasl.core.String;
 
@@ -176,7 +155,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -188,7 +166,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         preview: nasl.core.Boolean = false;
 
@@ -201,7 +178,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -264,7 +240,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotCheckAll: () => Array<ViewComponent>;
+        slotCheckAll: () => Array<UText>;
 
         @Slot({
             title: 'undefined',
@@ -278,21 +254,6 @@ namespace nasl.ui {
         description: '多选项',
     })
     export class UCheckbox<T, V> extends ViewComponent {
-
-        @Prop({
-          title: '选中',
-        })
-        value: UCheckboxOptions<T, V>['value'] = false;
-
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
-
-        @Prop({
-          title: '只读',
-        })
-        readonly: nasl.core.Boolean;
 
         constructor(options?: Partial<UCheckboxOptions<T, V>>) { super(); }
     }
@@ -337,7 +298,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -349,7 +309,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

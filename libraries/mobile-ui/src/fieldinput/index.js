@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { isDef, createNamespace } from '../utils';
 import { resetScroll } from '../utils/dom/reset-scroll';
 import { preventDefault } from '../utils/dom/event';
@@ -13,16 +12,7 @@ import PasswordInput from '../password-input';
 const [createComponent, bem] = createNamespace('fieldinput');
 
 export default createComponent({
-  mixins: [
-    FieldMixin,
-    PreviewMixin,
-    sync({
-      value: 'currentValue',
-      preview: 'isPreview',
-      readonly: 'readonly',
-      disabled: 'disabled',
-    }),
-  ],
+  mixins: [FieldMixin, PreviewMixin],
   props: {
     type: {
       type: String,

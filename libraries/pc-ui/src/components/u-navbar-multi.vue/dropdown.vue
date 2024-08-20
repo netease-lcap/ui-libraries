@@ -9,13 +9,9 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 export default {
     name: 'u-navbar-dropdown-multi',
     parentName: 'u-navbar-multi',
-    mixins: [
-      sync('disabled'),
-    ],
     props: {
         title: String,
         trigger: { type: String, default: 'hover' },

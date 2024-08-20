@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import { MParent } from '../m-parent.vue';
 import MField from '../m-field.vue';
 import URadio from './radio.vue';
@@ -43,23 +42,7 @@ export default {
         URadio,
         UPreview
     },
-    mixins: [
-      MParent,
-      MField,
-      SupportDataSource,
-      MPreview,
-      sync({
-        data() {
-          return this.currentDataSource ? this.currentDataSource.data : [];
-        },
-        value() {
-          return this.selectedVM && this.selectedVM.label;
-        },
-        readonly: 'readonly',
-        preview: 'isPreview',
-        disabled: 'disabled',
-      }),
-    ],
+    mixins: [MParent, MField, SupportDataSource, MPreview],
     props: {
         value: null,
         readonly: { type: Boolean, default: false },

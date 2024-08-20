@@ -7,10 +7,6 @@ namespace nasl.ui {
         group: 'Display'
     })
     export class UTimeline<T> extends ViewComponent {
-        @Prop({
-          title: '数据',
-        })
-        data: nasl.collection.List<T>;
 
         constructor(options?: Partial<UTimelineOptions<T>>) { super(); }
     }
@@ -65,7 +61,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<ViewComponent>;
+        slotDefault: () => Array<UTimelineItem>;
 
         @Slot({
             title: 'undefined',

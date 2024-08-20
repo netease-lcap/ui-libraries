@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace } from '../utils';
 import { showFormat, isValidDate } from './utils';
 import TimePicker from './TimePicker';
@@ -17,19 +16,7 @@ import { validDisplayFormatters, validUnit, validType } from './shared';
 const [createComponent, bem, t] = createNamespace('datetime-picker');
 
 export default createComponent({
-  mixins: [
-    FieldMixin,
-    EventSlotCommandProvider(['cancel', 'confirm']),
-    PreviewMixin,
-    sync({
-      value: 'currentValue',
-      startValue: 'currentStartValue',
-      endValue: 'currentEndValue',
-      preview: 'isPreview',
-      readonly: 'readonly',
-      disabled: 'disabled',
-    }),
-  ],
+  mixins: [FieldMixin, EventSlotCommandProvider(['cancel', 'confirm']), PreviewMixin],
   props: {
     ...TimePicker.props,
     ...DatePicker.props,
@@ -48,9 +35,6 @@ export default createComponent({
     isNew: {
       type: Boolean,
       default: false,
-    },
-    visible: {
-      type: Boolean,
     },
   },
   data() {
@@ -95,12 +79,6 @@ export default createComponent({
     },
   },
   watch: {
-    visible(val) {
-      // 设计器模式下不触发
-      if (this.inDesigner()) return;
-
-      this.popupVisible = val;
-    },
     value(val) {
       this.currentValue = val;
     },
@@ -211,7 +189,7 @@ export default createComponent({
     },
     togglePopup() {
       this.popupVisible = !this.popupVisible;
-      this.$emit('update:visible', this.popupVisible);
+      // this.$refs.popup.toggle();
     },
     // @exposed-api
     open() {
@@ -220,12 +198,12 @@ export default createComponent({
       }
 
       this.popupVisible = true;
-      this.$emit('update:visible', this.popupVisible);
+      // this.$refs.popup.open();
     },
     // @exposed-api
     close() {
       this.popupVisible = false;
-      this.$emit('update:visible', this.popupVisible);
+      // this.$refs.popup.close();
     },
     // @exposed-api
     getPicker() {

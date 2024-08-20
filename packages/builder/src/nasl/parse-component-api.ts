@@ -10,7 +10,6 @@ import * as babelTypes from '@babel/types';
 import generate from '@babel/generator';
 import * as astTypes from '@nasl/types/nasl.ui.ast';
 import { evalOptions, getSlotName } from '../utils/babel-utils';
-import snippetCode2NASL from '../nasl/snippet-code2nasl';
 
 function getValueFromObjectExpressionByKey(object: babelTypes.ObjectExpression, key: string): unknown {
   const property = object.properties.find((prop) => prop.type === 'ObjectProperty' && (prop.key as babelTypes.Identifier).name === key) as babelTypes.ObjectProperty;
@@ -169,7 +168,7 @@ function transformValue(node: DefaultValue, typeAnnotation?: Annotation): any {
   }
 }
 
-export default function transform(tsCode: string, framework: string): astTypes.ViewComponentDeclaration[] {
+export default function transform(tsCode: string): astTypes.ViewComponentDeclaration[] {
   const root = babel.parseSync(tsCode, {
     filename: 'result.ts',
     presets: [require('@babel/preset-typescript')],
@@ -384,13 +383,6 @@ export default function transform(tsCode: string, framework: string): astTypes.V
               decorator.expression.arguments.forEach((arg) => {
                 if (arg.type === 'ObjectExpression') Object.assign(slot, evalOptions(arg));
               });
-
-              if (Array.isArray(slot.snippets) && slot.snippets.length > 0 && !framework.startsWith('vue')) {
-                slot.snippets = slot.snippets.map((snippetConfig) => ({
-                  ...snippetConfig,
-                  code: snippetCode2NASL(snippetConfig.code),
-                }));
-              }
               component.slots.push(slot);
             }
           }

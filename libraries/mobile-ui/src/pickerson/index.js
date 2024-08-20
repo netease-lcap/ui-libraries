@@ -1,5 +1,4 @@
 // Utils
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace, _get } from '../utils';
 import Picker from './Picker';
 import Popup from '../popup';
@@ -12,7 +11,6 @@ import DataSourceMixin from '../mixins/DataSource';
 import { EmptyCol } from '../emptycol';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
 import PreviewMixin from "../mixins/preview";
-import DataSource from '../utils/DataSource';
 
 const [createComponent, bem, t] = createNamespace('pickerson');
 
@@ -27,24 +25,10 @@ export default createComponent({
     DataSourceMixin,
     EventSlotCommandProvider(EventSlotCommandMap),
     PreviewMixin,
-    sync({
-      value: 'currentValue',
-      data: 'data',
-      size() {
-        return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.size : this.pageSize;
-      },
-      page() {
-        return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : this.pageNumber;
-      },
-      filterText: 'filterText',
-      preview: 'isPreview',
-      readonly: 'readonly',
-      disabled: 'disabled',
-    }),
   ],
   props: {
-    readonly: { type: Boolean, default: false },
-    disabled: { type: Boolean, default: false },
+    readonly: Boolean,
+    disabled: Boolean,
     columnsprop: [Array, String],
     pvalue: [String, Object], // 废弃
     value: [String, Object],
@@ -216,40 +200,6 @@ export default createComponent({
     },
     closePopup() {
       this.popupVisible = false;
-    },
-    normalizeDataSource(dataSource) {
-      const options = this.getDataSourceOptions();
-      if (dataSource instanceof DataSource) return dataSource;
-      // 数组
-      if (dataSource instanceof Array) {
-        options.data = Array.from(dataSource);
-
-        return new DataSource(options);
-      }
-      if (dataSource instanceof Function) {
-        const self = this;
-        // 构造load函数
-        options.load = function load(params) {
-          self.$emitSyncParams(params);
-          const result = dataSource(params);
-          if (result instanceof Promise)
-            return result.catch(() => (this.currentLoading = false));
-
-          return Promise.resolve(result);
-        };
-
-        return new DataSource(options);
-      }
-      if (dataSource instanceof Object) {
-        if (dataSource.hasOwnProperty('list') && Array.isArray(dataSource.list))
-          return new DataSource(
-            Object.assign(options, dataSource, {
-              data: dataSource.list,
-            })
-          );
-        return new DataSource(Object.assign(options, dataSource));
-      }
-      return undefined;
     },
     onChange(vm, val, index) {
       this.$emit('change', vm, val, index);

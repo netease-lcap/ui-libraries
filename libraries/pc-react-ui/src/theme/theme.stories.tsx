@@ -1,5 +1,4 @@
 import React from 'react';
-// @ts-ignore
 import ComponentPreivew, { demos } from 'virtual:lcap-theme-component-previews.js';
 import Dashboard from './previews/dashboard';
 import Form from './previews/form';

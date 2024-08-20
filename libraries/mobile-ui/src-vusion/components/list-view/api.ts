@@ -15,12 +15,7 @@ namespace nasl.ui {
     @Prop({
       title: '数据',
     })
-    data: nasl.collection.List<T>;
-
-    @Prop({
-      title: '数据总数',
-    })
-    total: nasl.core.Integer;
+    data: VanListViewOptions<T, V, P, M>['dataSource'];
 
     @Prop({
       title: '当前页数',
@@ -37,28 +32,11 @@ namespace nasl.ui {
     })
     filterText: nasl.core.String;
 
-    @Prop({
-      title: '值',
-    })
-    value: VanListViewOptions<T, V, P, M>['value'];
-
     @Method({
       title: 'undefined',
       description: '清除缓存，重新加载'
     })
     reload(): any {}
-
-    @Method({
-      title: '带页码刷新',
-      description: '保持页码，重新加载',
-    })
-    loadTo(
-      @Param({
-          title: '页数',
-          description: '要刷新的页数',
-      })
-      page?: nasl.core.Integer,
-    ): void {}
   }
   export class VanListViewOptions<T, V, P, M> extends ViewComponentOptions {
     @Prop({
@@ -193,8 +171,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识数据列表的值',
-      sync: true,
-      settable: true,
+      sync: true
     })
     value: M extends true ? nasl.collection.List<V> : V;
     @Prop({
@@ -483,13 +460,7 @@ namespace nasl.ui {
       description: '插入<van-cell />',
       emptyBackground: 'drag-entity-here',
     })
-    slotDefault: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '空状态时显示的内容',
-    })
-    slotEmpty: () => Array<ViewComponent>;
-
+    slotDefault: () => Array<VanCell>;
     @Slot({
       title: 'undefined',
       description: '自定义选项的结构和样式'

@@ -8,30 +8,7 @@ namespace nasl.ui {
         group: 'Form'
     })
     export class UUploader extends ViewComponent {
-        @Prop({
-            title: '值',
-        })
-        value: UUploaderOptions['value'];
 
-        @Prop({
-          title: '上传地址',
-        })
-        url: UUploaderOptions['url'];
-
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
-
-        @Prop({
-          title: '只读',
-        })
-        readonly: nasl.core.Boolean;
-
-        @Prop({
-          title: '预览',
-        })
-        preview: nasl.core.Boolean;
 
         @Method({
             title: '选择',
@@ -62,7 +39,6 @@ namespace nasl.ui {
             description: '当前文件列表',
             sync: true,
             docDescription: '当前的文件列表',
-            settable: true,
         })
         value: nasl.core.String;
 
@@ -71,7 +47,6 @@ namespace nasl.ui {
             title: '上传地址',
             description: '上传的 URL 地址',
             docDescription: '文件上传的URL地址，如/upload',
-            settable: true,
         })
         url: nasl.core.String;
 
@@ -265,7 +240,6 @@ namespace nasl.ui {
               concept: 'SwitchSetter',
           },
           if: (_) => !_.multiple,
-          settable: false,
         })
         openCropper: nasl.core.Boolean = false;
 
@@ -478,7 +452,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -490,7 +463,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -502,7 +474,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         preview: nasl.core.Boolean = false;
 
@@ -591,8 +562,7 @@ namespace nasl.ui {
             title: '文件列表',
             description: '文件列表。',
         })
-        'slot-file-list': () => Array<ViewComponent>;
-        slotFileList: () => Array<ViewComponent>; // 防止 ide 编译报错
+        slotFileList: () => Array<ViewComponent>;
 
         @Slot({
             title: '拖拽文字',

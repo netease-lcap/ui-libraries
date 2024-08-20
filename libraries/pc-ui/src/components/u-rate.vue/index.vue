@@ -16,22 +16,13 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import MField from '../m-field.vue';
 import UPreview from '../u-text.vue';
 import MPreview from '../u-text.vue/preview';
 
 export default {
     name: 'u-rate',
-    mixins: [
-      MField,
-      MPreview,
-      sync({
-        value: 'currentValue',
-        readonly: 'readonly',
-        preview: 'isPreview',
-      })
-    ],
+    mixins: [MField, MPreview],
     components: {
       UPreview,
     },

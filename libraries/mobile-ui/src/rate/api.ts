@@ -8,21 +8,6 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanRate extends ViewComponent {
-    @Prop({
-      title: '值',
-    })
-    value: VanRateOptions['value'];
-
-    @Prop({
-      title: '禁用',
-    })
-    disabled: nasl.core.Boolean;
-
-    @Prop({
-      title: '只读',
-    })
-    readonly: nasl.core.Boolean;
-
     constructor(options?: Partial<VanRateOptions>) {
       super();
     }
@@ -36,8 +21,7 @@ namespace nasl.ui {
       setter: {
         concept: "NumberInputSetter",
         min: 0
-      },
-      settable: true,
+      }
     })
     value: nasl.core.Decimal;
     @Prop({
@@ -82,8 +66,7 @@ namespace nasl.ui {
       description: '正常显示，但禁止选择/输入',
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     readonly: nasl.core.Boolean = false;
     @Prop({
@@ -92,8 +75,7 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     disabled: nasl.core.Boolean = false;
     @Prop({

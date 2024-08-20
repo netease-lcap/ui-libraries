@@ -8,11 +8,6 @@ namespace nasl.ui {
     group: "Navigation"
   })
   export class VanTabbar extends ViewComponent {
-    @Prop({
-      title: '值',
-    })
-    value: VanTabbarOptions['value'];
-
     constructor(options?: Partial<VanTabbarOptions>) {
       super();
     }
@@ -22,8 +17,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识标签栏的值',
-      sync: true,
-      settable: true,
+      sync: true
     })
     value: nasl.core.String | nasl.core.Integer;
     @Prop({
@@ -72,11 +66,6 @@ namespace nasl.ui {
     group: "Navigation"
   })
   export class VanTabbarItem extends ViewComponent {
-    @Prop({
-      title: '徽章值',
-    })
-    badge: VanTabbarItemOptions['badge'];
-
     constructor(options?: Partial<VanTabbarItemOptions>) {
       super();
     }
@@ -102,8 +91,7 @@ namespace nasl.ui {
       title: '徽章值',
       setter: {
         concept: "NumberInputSetter"
-      },
-      settable: true,
+      }
     })
     badge: nasl.core.Decimal;
     @Prop({

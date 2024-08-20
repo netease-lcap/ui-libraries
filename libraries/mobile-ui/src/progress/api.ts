@@ -8,10 +8,6 @@ namespace nasl.ui {
     group: "Display"
   })
   export class VanProgress extends ViewComponent {
-    @Prop({
-      title: '值',
-    })
-    value: VanProgressOptions['value'];
     constructor(options?: Partial<VanProgressOptions>) {
       super();
     }
@@ -25,8 +21,7 @@ namespace nasl.ui {
       setter: {
         concept: "NumberInputSetter",
         min: 0
-      },
-      settable: true,
+      }
     })
     value: nasl.core.Decimal;
     @Prop({

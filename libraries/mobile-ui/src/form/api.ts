@@ -11,11 +11,6 @@ namespace nasl.ui {
     constructor(options?: Partial<VanFormOptions>) {
       super();
     }
-    @Prop({
-      title: '验证是否有效',
-    })
-    valid: nasl.core.Boolean;
-
     @Method({
       title: 'undefined',
       description: '验证表单，支持传入 name 来验证单个或部分表单项'
@@ -91,18 +86,13 @@ namespace nasl.ui {
         code: '<van-field drole="other"><template #title><van-text text="表单项"><van-text></template><template #input></template></van-field>'
       }]
     })
-    slotDefault: () => Array<ViewComponent>;
+    slotDefault: () => Array<VanField>;
   }
   @Component({
     title: '表单项',
     group: "Form"
   })
   export class VanField extends ViewComponent {
-    @Prop({
-      title: '验证是否有效',
-    })
-    valid: nasl.core.Boolean;
-
     constructor(options?: Partial<VanFieldOptions>) {
       super();
     }

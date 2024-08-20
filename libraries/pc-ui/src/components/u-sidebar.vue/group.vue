@@ -122,7 +122,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import { MGroup } from '../m-group.vue';
 import SEmpty from '../s-empty.vue';
 
@@ -130,9 +129,6 @@ export default {
     name: 'u-sidebar-group',
     parentName: 'u-sidebar',
     childName: 'u-sidebar-item',
-    mixins: [
-      sync('disabled'),
-    ],
     components: {
         SEmpty,
     },
@@ -275,18 +271,6 @@ export default {
                 final();
             }
         },
-        toggleAll(expanded) {
-          if (!Array.isArray(this.groupVMs) || this.groupVMs.length === 0) {
-            return;
-          }
-
-          this.groupVMs.forEach((groupVM) => {
-            groupVM.toggle(expanded)
-            if (Array.isArray(groupVM.groupVMs) && typeof groupVM.toggleAll === 'function') {
-                groupVM.toggleAll(expanded);
-              }
-          });
-        },
         load() {
             this.loading = true;
             return this.rootVM.currentDataSource.load({
@@ -342,22 +326,22 @@ export default {
     line-height: var(--sidebar-group-head-height);
 }
 
-/* .normalRoot[mini][noIcon] .head{
+.normalRoot[mini][noIcon] .head{
     padding-left: calc(var(--sidebar-item-padding-left) - 12px);
-} */
+}
 
-/* .normalRoot[mini] .head{
+.normalRoot[mini] .head{
     padding-right: 16px;
-} */
+}
 
 .popperRoot .head{
     display: flex;
     align-items: center;
 }
 
-/* .normalRoot[mini] .singleicon {
+.normalRoot[mini] .singleicon {
     margin-left: -12px;
-} */
+}
 
 .normalRoot .singleicon {
     margin-left: -24px;
@@ -383,9 +367,9 @@ export default {
     padding-right: 32px;
 }
 
-/* .normalRoot[mini] .title{
+.normalRoot[mini] .title{
     padding-right: 0;
-} */
+}
 
 .normalRoot .title{
     flex: 1;
@@ -477,13 +461,13 @@ export default {
     line-height: var(--sidebar-group-head-height);
 }
 
-/* .normalRoot[mini] .expander{
+.normalRoot[mini] .expander{
     width: 16px;
     height: 16px;
     line-height: 16px;
     top: 50%;
     transform: translateY(-50%);
-} */
+}
 
 .popRoot .expander{
     transform: translateX(-100%);
@@ -511,39 +495,13 @@ content: "\e661";
     transform: rotate(90deg);
 }
 
-.normalRoot[mini] .head {
-  padding: 0;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
-.normalRoot[mini] .singleicon {
-  margin: 0;
-}
-
-.normalRoot[mini] .title {
-  /* display: none; */
-  padding: 0;
-  text-align: center;
-  flex: none;
-}
-
-.normalRoot[mini] .title > *:not([class^="i-ico"]) {
-  display: none;
-}
-
-.normalRoot[mini] .expander {
-  display: none;
-}
-
-/* .normalRoot[mini] .expander::after {
+.normalRoot[mini] .expander::after {
     transform: rotate(90deg);
 }
 
 .normalRoot[mini] .expander[expanded]::after {
     transform: rotate(270deg);
-} */
+}
 
 .root[disabled] {
     cursor: var(--cursor-not-allowed);

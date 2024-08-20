@@ -13,7 +13,6 @@
         <template #suffix><i-ico v-if="suffixIcon" :name="suffixIcon" :class="[$style.suffixIcon]" notext></i-ico></template>
     </u-input>
     <m-popper :class="$style.popper" ref="popper" :append-to="appendTo" :disabled="disabled || readonly" :placement="placement"
-        @update:opened="currentOpened = $event"
         @toggle="onToggle($event)"
         @close="onPopperClose"
         @open="onPopperOpen">
@@ -57,7 +56,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import dayjs from '../../utils/dayjs';
 import DateFormatMixin from '../../mixins/date.format';
 // import { formatterOptions as dateFormatterOptions } from '../u-date-picker.vue/wrap';
@@ -85,21 +83,7 @@ import i18nMixin from '../../mixins/i18n';
 export default {
     name: 'u-date-time-picker',
     // i18n,
-    mixins: [
-      MField,
-      DateFormatMixin,
-      i18nMixin('u-date-time-picker'),
-      MPreview,
-      sync({
-        value() {
-          return this.finalDateTime ? this.toValue(new Date(this.finalDateTime.replace(/-/g, '/'))) : undefined;
-        },
-        readonly: 'readonly',
-        preview: 'isPreview',
-        opened: 'currentOpened',
-        disabled: 'disabled',
-      }),
-    ],
+    mixins: [MField, DateFormatMixin, i18nMixin('u-date-time-picker'), MPreview],
     component: {
         UPreview,
     },
@@ -164,7 +148,6 @@ export default {
     },
     data() {
         return {
-            currentOpened: this.opened,
             dateTime: this.format((this.value !== null && this.value !== undefined) ? this.value : this.date, 'YYYY-MM-DD HH:mm:ss'), // popper选择以后的值
             open: false,
             minTime: undefined,
@@ -213,11 +196,6 @@ export default {
         },
     },
     watch: {
-        opened(val) {
-          if (val !== this.currentOpened) {
-            this.currentOpened = val;
-          }
-        },
         date(newValue) {
             this.dateTime = this.format(newValue, 'YYYY-MM-DD HH:mm:ss');
             this.finalDateTime = this.dateTime;

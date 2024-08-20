@@ -7,40 +7,20 @@ namespace nasl.ui {
         description: '多项中选择一项',
         group: "Form"
     })
-    export class UCapsules<M extends nasl.core.Boolean>  extends ViewComponent {
-        @Prop({
-          title: "值"
-        })
-        value: UCapsulesOptions<M>['value'];
+    export class UCapsules extends ViewComponent {
 
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
-
-        @Prop({
-          title: '只读',
-        })
-        readonly: nasl.core.Boolean;
-
-        @Prop({
-          title: '预览',
-        })
-        preview: nasl.core.Boolean;
-
-        constructor(options?: Partial<UCapsulesOptions<M>>) { super(); }
+        constructor(options?: Partial<UCapsulesOptions>) { super(); }
     }
 
-    export class UCapsulesOptions<M extends nasl.core.Boolean> extends ViewComponentOptions {
+    export class UCapsulesOptions extends ViewComponentOptions {
         @Prop({
             group: '数据属性',
             title: '选中值',
             description: '当前选中的值',
             sync: true,
             docDescription: '当前选择的值',
-            settable: true,
         })
-        value: M extends true ? nasl.collection.List<nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean> : (nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean);
+        value: any;
 
         @Prop({
             group: '主要属性',
@@ -83,7 +63,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -95,7 +74,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -157,7 +135,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<ViewComponent>;
+        slotDefault: () => Array<UCapsule>;
     }
 
     @Component({
@@ -165,10 +143,6 @@ namespace nasl.ui {
         description: '子选项',
     })
     export class UCapsule extends ViewComponent {
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UCapsuleOptions>) { super(); }
     }
@@ -186,7 +160,7 @@ namespace nasl.ui {
             description: '此项的值',
             docDescription: '此项的值',
         })
-        value: nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean;
+        value: any;
 
         @Prop({
             group: '主要属性',
@@ -216,7 +190,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -308,6 +281,6 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<ViewComponent>;
+        slotDefault: () => Array<UCapsule>;
     }
 }

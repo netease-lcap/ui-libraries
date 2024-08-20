@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace, addUnit } from '../utils';
 import { BORDER_TOP, BORDER_LEFT } from '../utils/constant';
 import { PopupMixin } from '../mixins/popup';
@@ -11,10 +10,7 @@ import VanEmptyCol from '../emptycol/index';
 const [createComponent, bem, t] = createNamespace('dialog');
 
 export default createComponent({
-  mixins: [
-    PopupMixin({ independInDesigner: true }),
-    sync('visible'),
-  ],
+  mixins: [PopupMixin({ independInDesigner: true })],
   // components: {
   //   [Button.name]: Button,
   // },

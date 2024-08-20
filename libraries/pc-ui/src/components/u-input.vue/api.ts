@@ -8,25 +8,7 @@ namespace nasl.ui {
         group: 'Form'
     })
     export class UInput extends ViewComponent {
-        @Prop({
-          title: '输入值',
-        })
-        value: UInputOptions['value'];
 
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
-
-        @Prop({
-          title: '只读',
-        })
-        readonly: nasl.core.Boolean;
-
-        @Prop({
-          title: '预览',
-        })
-        preview: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -91,7 +73,6 @@ namespace nasl.ui {
             description: '输入的值',
             sync: true,
             docDescription: '输入框的值。',
-            settable: true,
         })
         value: nasl.core.String;
 
@@ -189,7 +170,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -201,7 +181,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         preview: nasl.core.Boolean = false;
 
@@ -213,7 +192,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

@@ -1,5 +1,4 @@
 // Utils
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace, addUnit } from '../utils';
 import { switchProps } from './shared';
 
@@ -12,14 +11,7 @@ import Loading from '../loading';
 const [createComponent, bem] = createNamespace('switch');
 
 export default createComponent({
-  mixins: [
-    FieldMixin,
-    sync({
-      value: 'checked',
-      readonly: 'readonly',
-      disabled: 'disabled',
-    }),
-  ],
+  mixins: [FieldMixin],
 
   props: switchProps,
   data() {

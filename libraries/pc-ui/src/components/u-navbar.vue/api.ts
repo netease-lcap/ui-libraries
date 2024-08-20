@@ -131,7 +131,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<ViewComponent>;
+        slotDefault: () => Array<UNavbarItem | UNavbarDivider>;
 
         @Slot({
             title: '左部区域',

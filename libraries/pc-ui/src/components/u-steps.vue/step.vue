@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import { UTab } from '../u-tabs.vue';
 import SEmpty from '../s-empty.vue';
 
@@ -15,12 +14,6 @@ export default {
     parentName: 'u-steps',
     components: { SEmpty },
     extends: UTab,
-    mixins: [
-      sync({
-        readonly: 'readonly',
-        status: 'status',
-      })
-    ],
     props: {
         value: { type: Number, default: 0 },
         desc: { type: String, default: null },

@@ -8,10 +8,6 @@ namespace nasl.ui {
         group: "Display"
     })
     export class UBadge extends ViewComponent {
-        @Prop({
-          title: '值',
-        })
-        value: UBadgeOptions['value'];
 
         constructor(options?: Partial<UBadgeOptions>) { super(); }
     }
@@ -31,9 +27,8 @@ namespace nasl.ui {
             title: '值',
             description: '用于标识的值',
             docDescription: '当前提醒消息的条数。',
-            settable: true,
         })
-        value: nasl.core.Integer | nasl.core.String;
+        value: nasl.core.Integer;
 
         @Prop({
             group: '数据属性',

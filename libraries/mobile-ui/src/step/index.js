@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace } from '../utils';
 import { BORDER } from '../utils/constant';
 import { ChildrenMixin } from '../mixins/relation';
@@ -10,14 +9,7 @@ const [createComponent, bem] = createNamespace('step');
 const statusList = ['wait', 'process', 'finish', 'error']
 
 export default createComponent({
-  mixins: [
-    ChildrenMixin('vanSteps'),
-    sync({
-      disabled: 'isDisabled',
-      status: 'currentStatus',
-      readonly: 'isReadonly',
-    }),
-  ],
+  mixins: [ChildrenMixin('vanSteps')],
   components: {
     VanEmptyCol,
   },

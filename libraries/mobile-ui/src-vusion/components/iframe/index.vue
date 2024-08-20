@@ -8,12 +8,9 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
+
 export default {
     name: 'van-iframe',
-    mixins: [
-      sync('src', 'loaded'),
-    ],
     props: {
         src: {
             type: String,

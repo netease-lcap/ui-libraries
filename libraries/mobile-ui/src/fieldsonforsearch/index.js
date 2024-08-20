@@ -1,5 +1,4 @@
 // Utils
-import { sync } from '@lcap/vue2-utils';
 import { resetScroll } from '../utils/dom/reset-scroll';
 import { formatNumber } from '../utils/format/number';
 import { preventDefault } from '../utils/dom/event';
@@ -21,17 +20,12 @@ import { cellProps } from '../cell/shared';
 import VanEmptyCol from '../emptycol/index';
 import VanFieldinput from '../fieldinput/index';
 
+import VusionValidator from '@vusion/validator';
+
 const [createComponent, bem, t] = createNamespace('fieldsonforsearch');
 const comSet = new Set(['van-fieldinput','van-fieldtextarea','van-fieldnumber']);
 
 export default createComponent({
-  mixins: [
-    sync({
-      value: 'currentValue',
-      disabled: 'disabled',
-      readonly: 'readonly',
-    }),
-  ],
   inheritAttrs: false,
 
   provide() {
@@ -477,9 +471,9 @@ export default createComponent({
       if (inputn && comSet.has(inputn.$options._componentTag)) {
         if (inputn.type !== 'textarea') {
           return;
-        }
+        } 
           input = inputn.$refs.input;
-
+        
       } else if (!(this.type === 'textarea' && this.autosize) || !input) {
           return;
         }

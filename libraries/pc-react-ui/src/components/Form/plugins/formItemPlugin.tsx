@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import VusionValidator, { localizeRules } from '@lcap/validator';
+import VusionValidator, { localizeRules } from '@vusion/validator';
 import classnames from 'classnames';
 import styles from '../index.module.less';
 import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';

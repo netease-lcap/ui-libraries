@@ -47,7 +47,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import UCascaderItem from './item.vue';
 import MField from '../m-field.vue';
 import MPreview from '../u-text.vue/preview';
@@ -57,32 +56,7 @@ import treeDataSource from '../../mixins/tree.datasource';
 export default {
     name: 'u-cascader',
     components: { UCascaderItem },
-    mixins: [
-      MField,
-      SupportDataSource,
-      treeDataSource,
-      MPreview,
-      sync({
-        data() {
-          return this.currentDataSource ? this.currentDataSource.data : [];
-        },
-        value() {
-          if (this.converter && typeof this.convertValue === 'function') {
-            return this.convertValue(this.currentValue);
-          }
-
-          if (this.useArrayLikeValue) {
-            return this.lastRealValueArray;
-          }
-
-          return this.currentValue;
-        },
-        readonly: 'readonly',
-        preview: 'isPreview',
-        opened: 'currentOpened',
-        disabled: 'disabled',
-      }),
-    ],
+    mixins: [MField, SupportDataSource, treeDataSource, MPreview],
     props: {
         data: { type: Array, default: () => [] },
         value: { type: [String, Array], default: '' },
@@ -354,7 +328,7 @@ export default {
             return combinedText;
         },
         // mpopper打开时，根据value值展开mpopper框内部组件
-        getSubComponents(opened = false) {
+        getSubComponents(opened) {
             this.currentOpened = opened;
             if (this.isInput)
                 return;
@@ -452,7 +426,6 @@ export default {
                 this.isInput = false;
                 this.typeMpopper = this.subComponents;
             }
-            this.$emit('sync:filterText', value);
             this.open();
         },
         markMatchingStrings(source, target) {

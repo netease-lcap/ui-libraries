@@ -8,10 +8,7 @@ namespace nasl.ui {
         group: "Display"
     })
     export class UCarousel<T> extends ViewComponent {
-        @Prop({
-          title: '数据',
-        })
-        data: nasl.collection.List<T>;
+
 
         @Method({
             title: 'undefined',
@@ -136,7 +133,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<ViewComponent>;
+        slotDefault: () => Array<UCarouselItem>;
 
         @Slot({
             title: 'undefined',

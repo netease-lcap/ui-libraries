@@ -21,7 +21,6 @@
         :color="formItemVM && formItemVM.color">
     </u-range-input>
     <m-popper :class="$style.popper" ref="popper" :append-to="appendTo" :disabled="disabled || readonly" :placement="placement"
-        @update:opened="currentOpened = $event"
         @toggle="onToggle($event)"
         @close="onPopperClose"
         @open="onPopperOpen">
@@ -66,7 +65,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import dayjs from '../../utils/dayjs';
 import DateFormatMixin from '../../mixins/date.format';
 // import { formatterOptions as dateFormatterOptions } from '../u-date-picker.vue/wrap';
@@ -96,24 +94,7 @@ export default {
     name: 'u-date-time-range-picker',
     // i18n,
     components: { URangeInput, UPreview },
-    mixins: [
-      MField,
-      MPreview,
-      DateFormatMixin,
-      i18nMixin('u-date-time-picker'),
-      sync({
-        startDate() {
-          return this.finalStartDateTime ? this.toValue(new Date(this.finalStartDateTime.replace(/-/g, '/'))) : undefined;
-        },
-        endDate() {
-          return this.finalEndDateTime ? this.toValue(new Date(this.finalEndDateTime.replace(/-/g, '/'))) : undefined;
-        },
-        readonly: 'readonly',
-        preview: 'isPreview',
-        opened: 'currentOpened',
-        disabled: 'disabled',
-      }),
-    ],
+    mixins: [MField, MPreview, DateFormatMixin, i18nMixin('u-date-time-picker')],
     props: {
         preIcon: {
             type: String,
@@ -176,7 +157,6 @@ export default {
     },
     data() {
         return {
-            currentOpened: this.opened,
             startDateTime: this.format(this.startDate, 'YYYY-MM-DD HH:mm:ss'), // popper选择以后的值
             endDateTime: this.format(this.endDate, 'YYYY-MM-DD HH:mm:ss'), // popper选择以后的值
             open: false,
@@ -316,11 +296,6 @@ export default {
         }
     },
     watch: {
-        opened(val) {
-          if (val !== this.currentOpened) {
-            this.currentOpened = val;
-          }
-        },
         startDate(newValue) {
             this.startDateTime = this.format(newValue, 'YYYY-MM-DD HH:mm:ss');
             this.finalStartDateTime = this.startDateTime;

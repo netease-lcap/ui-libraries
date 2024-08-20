@@ -8,30 +8,6 @@ namespace nasl.ui {
         group: 'Selector'
     })
     export class UPagination extends ViewComponent {
-        @Prop({
-            title: '分页大小',
-        })
-        size: UPaginationOptions['pageSize'];
-
-        @Prop({
-            title: '当前页数',
-        })
-        page: UPaginationOptions['page'];
-
-        @Prop({
-            title: '总页数',
-        })
-        totalPage: nasl.core.Integer;
-
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
-
-        @Prop({
-          title: '只读',
-        })
-        readonly: nasl.core.Boolean;
 
         constructor(options?: Partial<UPaginationOptions>) { super(); }
     }
@@ -47,7 +23,6 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
                 precision: 0,
             },
-            settable: true,
         })
         page: nasl.core.Integer = 1;
 
@@ -106,7 +81,6 @@ namespace nasl.ui {
                 concept: 'NumberInputSetter',
                 precision: 0,
             },
-            settable: true,
         })
         pageSize: nasl.core.Integer = 20;
 
@@ -116,7 +90,7 @@ namespace nasl.ui {
             description: '每页条数切换器的选项',
             docDescription: '每页条数选项列表',
         })
-        pageSizeOptions: nasl.collection.List<nasl.core.Integer> = [10,20,50];
+        pageSizeOptions: Array<nasl.core.Integer> = [10,20,50];
 
         @Prop({
             group: '主要属性',
@@ -156,7 +130,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -167,7 +140,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -205,25 +177,25 @@ namespace nasl.ui {
         onChangePageSize: (event:  {
             page: nasl.core.Integer;
             oldPage: nasl.core.Integer;
-            pageSizeOptions: nasl.collection.List<nasl.core.Integer>;
+            pageSizeOptions: Array<nasl.core.Integer>;
         }) => any;
 
         @Slot({
             title: '总数',
             description: '总数自定义',
         })
-        slotTotal: () => nasl.collection.List<ViewComponent>;
+        slotTotal: () => Array<ViewComponent>;
 
         @Slot({
             title: '上一页',
             description: '上一页自定义',
         })
-        slotPrev: () => nasl.collection.List<ViewComponent>;
+        slotPrev: () => Array<ViewComponent>;
 
         @Slot({
             title: '下一页',
             description: '下一页自定义',
         })
-        slotNext: () => nasl.collection.List<ViewComponent>;
+        slotNext: () => Array<ViewComponent>;
     }
 }

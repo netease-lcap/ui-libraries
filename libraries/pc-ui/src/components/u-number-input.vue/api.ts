@@ -8,30 +8,6 @@ namespace nasl.ui {
         group: 'Form'
     })
     export class UNumberInput extends ViewComponent {
-        @Prop({
-          title: '值',
-        })
-        value: UNumberInputOptions['value'];
-
-        @Prop({
-          title: '格式化后的值',
-        })
-        formattedValue: nasl.core.String;
-
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
-
-        @Prop({
-          title: '只读',
-        })
-        readonly: nasl.core.Boolean;
-
-        @Prop({
-          title: '预览',
-        })
-        preview: nasl.core.Boolean;
 
         constructor(options?: Partial<UNumberInputOptions>) { super(); }
     }
@@ -52,9 +28,8 @@ namespace nasl.ui {
             setter: {
                 concept: 'NumberInputSetter',
             },
-            settable: true,
         })
-        value: nasl.core.Decimal | nasl.core.Integer;
+        value: nasl.core.Decimal | nasl.core.Integer = 0;
 
         @Prop({
             group: '数据属性',
@@ -239,7 +214,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -251,7 +225,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -263,7 +236,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         preview: nasl.core.Boolean = false;
 

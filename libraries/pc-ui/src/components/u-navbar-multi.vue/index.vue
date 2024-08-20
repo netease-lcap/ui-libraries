@@ -47,29 +47,13 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import { MGroupParent } from '../m-group.vue';
 import { MSinglex } from '../m-singlex.vue';
 
 export default {
     name: 'u-navbar-multi',
     childName: 'u-navbar-item-multi',
-    mixins: [
-      MSinglex,
-      MGroupParent,
-      sync(
-        'readonly',
-        'disabled',
-        {
-          data() {
-            return this.currentDataSource ? this.currentDataSource.data : [];
-          },
-          value() {
-            return this.selectedVM && this.selectedVM.value;
-          },
-        },
-      ),
-    ],
+    mixins: [MSinglex, MGroupParent],
     props: {
         router: { type: Boolean, default: true },
         animation: { type: String, default: '1' },

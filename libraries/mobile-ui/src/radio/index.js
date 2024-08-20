@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace, addUnit } from '../utils';
 import { CheckboxMixin } from '../mixins/checkbox';
 import Iconv from '../iconv';
@@ -11,11 +10,6 @@ export default createComponent({
       bem,
       role: 'radio',
       parent: 'vanRadio',
-    }),
-    sync({
-      value: 'checked',
-      readonly: 'readonly',
-      disabled: 'disabled',
     }),
   ],
 

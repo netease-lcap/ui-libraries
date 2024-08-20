@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace, isFunction } from '../utils';
 import { formatResult } from '../utils/format/data-source';
 import { FieldMixin } from '../mixins/field';
@@ -9,29 +8,7 @@ import PreviewMixin from '../mixins/preview';
 const [createComponent, bem] = createNamespace('checkbox-group');
 
 export default createComponent({
-  mixins: [
-    ParentMixin('vanCheckbox'),
-    FieldMixin,
-    Converter,
-    PreviewMixin,
-    sync({
-      value() {
-        // 对外使用converter转换
-        if (this.hasConverter) {
-          return this.currentConverter.get(this.currentValue);
-        }
-
-        return this.currentValue;
-      },
-      allChecked() {
-        return this.currentValue.length > 0
-          && this.children && !this.children.find((item) => !item.checked);
-      },
-      data: 'options',
-      preview: 'isPreview',
-      disabled: 'disabled',
-    }),
-  ],
+  mixins: [ParentMixin('vanCheckbox'), FieldMixin, Converter, PreviewMixin],
 
   props: {
     dataSource: [Array, Object, Function, String],
@@ -41,7 +18,7 @@ export default createComponent({
       default: 0,
     },
     valueField: { type: String, default: 'value' },
-    disabled: { type: Boolean, default: false },
+    disabled: Boolean,
     direction: String,
     iconSize: [Number, String],
     checkedColor: String,

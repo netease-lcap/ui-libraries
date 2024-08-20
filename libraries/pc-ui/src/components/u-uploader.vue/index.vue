@@ -94,7 +94,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import MField from '../m-field.vue';
 import i18n from './i18n';
 import ajax from './ajax';
@@ -115,20 +114,7 @@ const SIZE_UNITS = {
 export default {
     name: 'u-uploader',
     components: { cropper, UPreview },
-    mixins: [
-      MField,
-      i18nMixin('u-uploader'),
-      MPreview,
-      sync({
-        value() {
-          return this.toValue(this.currentValue);
-        },
-        readonly: 'readonly',
-        preview: 'isPreview',
-        disabled: 'disabled',
-        url: 'url',
-      }),
-    ],
+    mixins: [MField, i18nMixin('u-uploader'), MPreview],
     // i18n,
     props: {
         value: [Array, String],
@@ -601,11 +587,6 @@ export default {
                     }, this);
                 },
                 onSuccess: (res) => {
-                    if (res.Code === 200 && Array.isArray(res.Data)) {
-                      res = {
-                        [this.urlField]: Array.isArray(file) ? res.Data.map((f) => f[this.urlField]) : res.Data[0][this.urlField],
-                      };
-                    }
                     const item = this.currentValue[index];
                     item.status = 'success';
                     if (res[this.urlField]) {

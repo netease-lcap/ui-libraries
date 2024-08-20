@@ -61,7 +61,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<ViewComponent>;
+        slotDefault: () => Array<UInfoListGroup | UInfoListItem>;
     }
 
     @Component({
@@ -173,7 +173,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<ViewComponent>;
+        slotDefault: () => Array<UInfoListItem>;
 
         @Slot({
             title: '自定义标题',

@@ -8,20 +8,7 @@ namespace nasl.ui {
         group: 'Selector'
     })
     export class UTabs<T, V> extends ViewComponent {
-        @Prop({
-          title: '值',
-        })
-        value: V;
 
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
-
-        @Prop({
-          title: '只读',
-        })
-        readonly: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -98,7 +85,6 @@ namespace nasl.ui {
             description: '指当前打开标签的标签项',
             sync: true,
             docDescription: '指当前打开标签的标签项',
-            settable: true,
         })
         value: V;
 
@@ -153,7 +139,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -164,7 +149,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -281,7 +265,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<UTab<V> | ViewComponent>;
+        slotDefault: () => Array<UTab<V>>;
 
         @Slot({
             title: '右侧附加',
@@ -305,10 +289,6 @@ namespace nasl.ui {
         description: '标签页',
     })
     export class UTab<V> extends ViewComponent {
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
 
         constructor(options?: Partial<UTabOptions<V>>) { super(); }
     }
@@ -423,7 +403,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

@@ -8,42 +8,7 @@ namespace nasl.ui {
         group: 'Selector'
     })
     export class USelectableSteps<T> extends ViewComponent {
-        @Prop({
-          title: '当前步骤'
-        })
-        value: USelectableStepsOptions<T>['value'];
 
-        @Prop({
-          title: '第一步'
-        })
-        isFirst: nasl.core.Boolean;
-
-        @Prop({
-          title: '最后一步'
-        })
-        isLast: nasl.core.Boolean;
-
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
-
-        @Prop({
-          title: '只读',
-        })
-        readonly: nasl.core.Boolean;
-
-        @Method({
-          title: '上一步',
-          description: '上一步'
-        })
-        prev(): void {}
-
-        @Method({
-          title: '下一步',
-          description: '下一步'
-        })
-        next(): void {}
 
         @Method({
             title: 'undefined',
@@ -98,7 +63,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'NumberInputSetter',
             },
-            settable: true,
         })
         value: nasl.core.Decimal | nasl.core.Integer = 0;
 
@@ -121,7 +85,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -132,7 +95,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -188,7 +150,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<ViewComponent>;
+        slotDefault: () => Array<USelectableStep>;
 
         @Slot({
             title: '头部标题',
@@ -206,20 +168,6 @@ namespace nasl.ui {
         description: '步骤条项',
     })
     export class USelectableStep extends ViewComponent {
-        @Prop({
-          title: '状态',
-        })
-        status: USelectableStepOptions['status'];
-
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
-
-        @Prop({
-          title: '只读',
-        })
-        readonly: nasl.core.Boolean;
 
         constructor(options?: Partial<USelectableStepOptions>) { super(); }
     }
@@ -245,7 +193,6 @@ namespace nasl.ui {
                 concept: 'EnumSelectSetter',
                 options: [{ title: '等待' }, { title: '进行中' }, { title: '完成' }, { title: '错误' }],
             },
-            settable: true,
         })
         status: 'pending' | 'selected' | 'passed' | 'failed';
 
@@ -268,7 +215,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -280,7 +226,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

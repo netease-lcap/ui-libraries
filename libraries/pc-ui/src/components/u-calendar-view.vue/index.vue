@@ -58,7 +58,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import dayjs from 'dayjs';
 import DateTable from './date-table.vue';
 import './initDayjs';
@@ -74,17 +73,7 @@ export default {
         DateTable,
         SEmpty,
     },
-    mixins: [
-      MEmitter,
-      i18nMixin('u-calendar-view'),
-      sync({
-        value() {
-          const dates = this.selectedDates.map((d) => d.format(DefaultFormatType));
-          return this.multiple ? dates : dates[0];
-        },
-        data: 'tableData',
-      }),
-    ],
+    mixins: [MEmitter, i18nMixin('u-calendar-view')],
     props: {
         value: {
             type: [Date, String, Number, Array],

@@ -49,7 +49,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<ViewComponent>;
+        slotDefault: () => Array<UGridLayoutRow>;
     }
 
     @Component({
@@ -122,7 +122,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<ViewComponent>;
+        slotDefault: () => Array<UGridLayoutColumn>;
     }
 
     @Component({

@@ -8,10 +8,7 @@ namespace nasl.ui {
         group: 'Feedback'
     })
     export class UModal extends ViewComponent {
-        @Prop({
-          title: '显示状态',
-        })
-        visible: nasl.core.Boolean;
+
 
         @Method({
             title: 'undefined',
@@ -116,7 +113,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         visible: nasl.core.Boolean = false;
 

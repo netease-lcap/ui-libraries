@@ -91,8 +91,6 @@ export * from './u-select.vue';
 export * from './u-date-picker.vue';
 export * from './u-date-time-picker.vue';
 export * from './u-selectable-steps.vue';
-export * from './u-date-picker.vue';
-export * from './u-date-time-picker.vue';
 export * from './u-sidebar.vue';
 export * from './u-skeleton.vue';
 export * from './u-slider.vue';

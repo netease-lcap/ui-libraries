@@ -6,7 +6,6 @@ export interface ThemeVariable {
   type?: string;
   name: string;
   value: string;
-  hidden?: boolean;
   [key: string]: any;
 }
 
@@ -15,7 +14,6 @@ export interface ThemeComponentVars {
   useGlobalTokens: string[];
   selector: string;
   variables: ThemeVariable[];
-  hidden?: boolean;
 }
 
 export interface ThemeGlobalVars {

@@ -8,25 +8,6 @@ namespace nasl.ui {
         group: "Form"
     })
     export class UComboSlider extends ViewComponent {
-        @Prop({
-          title: '滑块值'
-        })
-        value: UComboSliderOptions['value'] = 0;
-
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
-
-        @Prop({
-          title: '只读',
-        })
-        readonly: nasl.core.Boolean;
-
-        @Prop({
-          title: '预览',
-        })
-        preview: nasl.core.Boolean;
 
         constructor(options?: Partial<UComboSliderOptions>) { super(); }
     }
@@ -42,9 +23,8 @@ namespace nasl.ui {
             title: '滑块值',
             sync: true,
             docDescription: '滑块的值',
-            settable: true,
         })
-        value: nasl.core.Decimal | nasl.core.Integer | nasl.collection.List<nasl.core.Integer> | nasl.collection.List<nasl.core.Decimal> = 0;
+        value: nasl.core.Decimal | Array<nasl.core.Decimal> | nasl.core.Integer | Array<nasl.core.Integer>  = 0;
 
         @Prop({
             group: '数据属性',
@@ -94,7 +74,7 @@ namespace nasl.ui {
             description: '进一步对`value`限制，通常传入一个数组，第一个值表示范围开始值，第二个值表示范围的结束值',
             docDescription: '进一步对`值`限制，通常传入一个数组，第一个值表示范围开始值，第二个值表示范围的结束值',
         })
-        range: nasl.collection.List<nasl.core.Integer> | nasl.collection.List<nasl.core.Decimal> = [];
+        range: Array<nasl.core.Decimal> | Array<nasl.core.Integer> = [];
 
         @Prop({
             group: '数据属性',
@@ -170,7 +150,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -182,7 +161,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -194,7 +172,6 @@ namespace nasl.ui {
           setter: {
             concept: 'SwitchSetter',
           },
-          settable: true,
         })
         preview: nasl.core.Boolean = false;
 

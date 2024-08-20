@@ -11,7 +11,7 @@
         ref="root"
         >
         <i-ico v-if="icon" :name="icon" :class="$style.singleicon" notext></i-ico>
-        <span :class="$style.content" v-show="!hiddenText">
+        <span v-show="!hiddenText">
             <slot>{{ text }}</slot>
         </span>
         <s-empty
@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import { MSinglexItem } from '../m-singlex.vue';
 import ULink from '../u-link.vue';
 import { isElementInView } from '../../utils/dom';
@@ -47,9 +46,6 @@ export default {
     parentName: 'u-sidebar',
     groupName: 'u-sidebar-group',
     extends: MSinglexItem,
-    mixins: [
-      sync('disabled'),
-    ],
     computed: {
         isInSidebar() {
             return !(this.groupVM && this.groupVM.$options.name === this.$options.groupName);
@@ -138,9 +134,9 @@ export default {
     border-bottom: var(--sidebar-item-border-bottom-width) solid var(--sidebar-item-border-bottom-color);
 }
 
-/* .normalRoot[mini][noIcon] {
+.normalRoot[mini][noIcon] {
     padding-left: calc(var(--sidebar-item-padding-left) - 12px);
-} */
+}
 
 .popRoot{
     display: block;
@@ -187,24 +183,8 @@ export default {
     margin-left: -24px;
 }
 
-/* .normalRoot[mini] .singleicon {
-    margin-left: -12px;
-} */
-
-.normalRoot[mini] {
-  padding: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .normalRoot[mini] .singleicon {
-  margin: 0;
-}
-
-.normalRoot[mini] > .content > *:not([class^="i-ico"]) {
-  display: none;
+    margin-left: -12px;
 }
 
 .root .singleicon {

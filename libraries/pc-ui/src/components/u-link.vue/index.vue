@@ -17,17 +17,11 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import IIco from '../i-ico.vue';
 import encodeUrl from '../../utils/encodeUrl';
 
 export default {
     name: 'u-link',
-    mixins: [
-      sync({
-        disabled: 'currentDisabled',
-      }),
-    ],
     components: {
         IIco,
     },

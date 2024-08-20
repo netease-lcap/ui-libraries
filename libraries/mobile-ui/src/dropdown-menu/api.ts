@@ -8,11 +8,6 @@ namespace nasl.ui {
     group: "Navigation"
   })
   export class VanDropdownMenu extends ViewComponent {
-    @Prop({
-      title: '打开状态',
-    })
-    opened: nasl.core.Boolean;
-
     constructor(options?: Partial<VanDropdownMenuOptions>) {
       super();
     }
@@ -69,10 +64,10 @@ namespace nasl.ui {
       emptyBackground: 'add-sub',
       snippets: [{
         title: '菜单项',
-        code: '<van-dropdown-item title="标题"><van-dropdown-item-son clickable :isLink="false"><template #title>标题</template></van-dropdown-item-son></van-dropdown-item>'
+        code: '<van-dropdown-item title="标题"><van-dropdown-item-son clickable :isLink="false"><template #title>标题1</template></van-dropdown-item-son></van-dropdown-item>'
       }]
     })
-    slotDefault: () => Array<VanDropdownItem>;
+    slotDefault: () => Array<VanDropdownMenu>;
   }
   @Component({
     title: '菜单项',
@@ -147,7 +142,7 @@ namespace nasl.ui {
       emptyBackground: 'add-sub',
       snippets: [{
         title: '菜单项',
-        code: '<van-dropdown-item-son clickable :isLink="false"><template #title>标题</template></van-dropdown-item-son>'
+        code: '<van-dropdown-item-son clickable :isLink="false" notitle title="标题n"></van-dropdown-item-son>'
       }]
     })
     slotDefault: () => Array<VanDropdownItemSon>;
@@ -291,11 +286,6 @@ namespace nasl.ui {
       description: '插入文本或 HTML。'
     })
     slotDefault: () => Array<ViewComponent>;
-    @Slot({
-      title: 'undefined',
-      description: '文本'
-    })
-    slotTitle: () => Array<ViewComponent>;
     @Slot({
       title: 'undefined',
       description: '右侧图标。'

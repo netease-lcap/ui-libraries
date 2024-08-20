@@ -11,14 +11,11 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
+
 import ULoading from '../u-loading.vue';
 export default {
     name: 'u-iframe',
     components: { ULoading },
-    mixins: [
-      sync('src', 'loaded'),
-    ],
     props: {
         src: {
             type: String,

@@ -8,15 +8,7 @@ namespace nasl.ui {
         group: 'Form'
     })
     export class UForm extends ViewComponent {
-        @Prop({
-          title: '预览',
-        })
-        preview: nasl.core.Boolean;
 
-        @Prop({
-          title: '验证是否有效',
-        })
-        valid: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -201,7 +193,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         preview: nasl.core.Boolean = false;
 
@@ -242,17 +233,6 @@ namespace nasl.ui {
         })
         labelSize: 'mini' | 'small' | 'normal' | 'large' = 'normal';
 
-        @Prop({
-          group: '主要属性',
-          title: '冒号',
-          description: '设置是否显示标签后的冒号',
-          docDescription: '设置是否显示标签后的冒号',
-          setter: {
-            concept: 'SwitchSetter',
-          },
-        })
-        colon: nasl.core.Boolean = false;
-
         @Event({
             title: '验证后',
             description: '验证时触发',
@@ -284,7 +264,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<ViewComponent>;
+        slotDefault: () => Array<UFormGroup | UFormItem>;
     }
 
     @Component({
@@ -292,10 +272,7 @@ namespace nasl.ui {
         description: '表单项',
     })
     export class UFormItem extends ViewComponent {
-        @Prop({
-          title: '验证是否有效',
-        })
-        valid: nasl.core.Boolean;
+
 
         @Method({
             title: 'undefined',
@@ -655,7 +632,7 @@ namespace nasl.ui {
                 },
             ],
         })
-        slotDefault: () => Array<ViewComponent>;
+        slotDefault: () => Array<UFormItem>;
 
         @Slot({
             title: 'undefined',

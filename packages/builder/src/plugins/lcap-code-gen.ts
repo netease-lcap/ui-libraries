@@ -1,8 +1,7 @@
 import path from 'path';
 import glob from 'fast-glob';
 import fs from 'fs-extra';
-import { Plugin, normalizePath } from 'vite';
-import { camelCase, kebabCase, upperFirst } from 'lodash';
+import { Plugin } from 'vite';
 import {
   virtualThemeCSSFileId,
   virtualThemeComponentStoriesFileId,
@@ -13,13 +12,9 @@ import {
 import { themePath } from '../constants/input-paths';
 
 export interface LcapCodeGenOption {
-  type?: 'extension' | 'nasl.ui';
-  rootPath?: string;
   themeVarCssPath?: string;
   themeComponentFolder?: string;
-  themePreviewEntry?: string;
   previewPages?: Array<{ name: string; title: string }>;
-  findThemeType?: 'theme' | 'component';
   framework?: 'react' | 'vue2' | 'taro' | 'vue3',
 }
 
@@ -28,46 +23,34 @@ const defaultOptions = {
   themeComponentFolder: './src/theme/components',
 };
 
-function genVarCssCode({
-  themeVarCssPath,
-  themeComponentFolder: componentFolder,
-  findThemeType,
-}: LcapCodeGenOption) {
-  const cssVars: string[] = [];
+function genVarCssCode(themeVarCssPath, componentFolder) {
+  const cssVars = [
+    themeVarCssPath,
+  ];
 
-  if (themeVarCssPath) {
-    cssVars.push(themeVarCssPath);
-  }
-
-  const varsPath = findThemeType === 'component' ? '*/theme/vars.css' : '*/vars.css';
-  const varFiles = glob.sync(varsPath, { cwd: componentFolder, absolute: true });
+  const varFiles = glob.sync('*/vars.css', { cwd: componentFolder, absolute: true });
   if (varFiles.length > 0) {
     cssVars.push(...varFiles);
   }
 
-  const code = cssVars.map((filePath) => `@import '${normalizePath(filePath)}';`).join('\n');
+  const code = cssVars.map((filePath) => `@import '${filePath}';`).join('\n');
   return code;
 }
 
-function genComponentStoriesCode({ themeComponentFolder: componentFolder = '', framework, findThemeType }: LcapCodeGenOption) {
+function genComponentStoriesCode(componentFolder, framework) {
   const imports: string[] = [
-    `import createComponentPreview from '${normalizePath(path.resolve(__dirname, `../../input/${framework}/createComponentPreview`))}';`,
+    `import createComponentPreview from '${path.resolve(__dirname, `../../input/${framework}/createComponentPreview`)}';`,
   ];
   const stories: string[] = ['const stories = ['];
-  const previewFilePath = findThemeType === 'component' ? '*/theme/index.{tsx,ts,jsx,js,vue}' : '*/index.{tsx,ts,jsx,js,vue}';
 
-  const previewFiles = glob.sync(previewFilePath, { cwd: componentFolder });
-  // console.log(previewFiles);
-  previewFiles.forEach((previewPath) => {
-    const filePath = path.resolve(componentFolder, previewPath);
-    const compName = previewPath.substring(0, previewPath.indexOf('/'));
-    const varName = upperFirst(camelCase(compName));
-    const name = framework && framework.startsWith('vue') ? kebabCase(varName) : varName;
-
-    imports.push(`import ${varName} from '${normalizePath(filePath)}';`);
+  const previewFiles = glob.sync('*/index.{tsx,ts,jsx,js,vue}', { cwd: componentFolder, absolute: true });
+  previewFiles.forEach((filePath) => {
+    const compPath = filePath.substring(0, filePath.lastIndexOf('/'));
+    const compName = compPath.substring(compPath.lastIndexOf('/') + 1);
+    imports.push(`import ${compName} from '${filePath}';`);
 
     stories.push(
-      `{ demo: ${varName}, name: '${name}' },`,
+      `{ demo: ${compName}, name: '${compName}' },`,
     );
   });
 
@@ -81,13 +64,12 @@ function genComponentStoriesCode({ themeComponentFolder: componentFolder = '', f
   ].join('\n\n');
 }
 
-function genThemePagePreviewMapCode({ themeComponentFolder: componentFolder = '', previewPages = [] }: LcapCodeGenOption) {
+function genThemePagePreviewMapCode(componentFolder, previewPages: Array<{ name: string; title: string }> = []) {
   const importCodes: string[] = [];
   const exportCodes: string[] = [];
 
   previewPages.forEach(({ name }) => {
-    const importPath = normalizePath(path.resolve(componentFolder, `../previews/${name}`));
-    importCodes.push(`import ${name} from '${importPath}';`);
+    importCodes.push(`import ${name} from '${path.resolve(componentFolder, `../previews/${name}`)}';`);
     exportCodes.push(`  ${name},`);
   });
 
@@ -100,11 +82,13 @@ function genThemePagePreviewMapCode({ themeComponentFolder: componentFolder = ''
   ].join('\n\n');
 }
 
-function genThemeEntryCode({ framework }: LcapCodeGenOption) {
+function genThemeEntryCode(framework, rootPath) {
   if (framework === 'vue2') {
     return [
       'import Vue from \'vue\';',
-      `import App from '${normalizePath(path.resolve(__dirname, '../../input/vue2/App'))}';`,
+      `import UILibrary from '${path.resolve(rootPath, './src/index')}';`,
+      `import App from '${path.resolve(__dirname, '../../input/vue2/App')}';`,
+      'Vue.use(UILibrary);',
       'Vue.config.productionTip = false;',
       'const app = new Vue({ ...App });',
       'app.$mount("#app");',
@@ -114,7 +98,7 @@ function genThemeEntryCode({ framework }: LcapCodeGenOption) {
   const importCodes: string[] = [
     'import React from \'react\';',
     'import ReactDOM from \'react-dom/client\'',
-    `import App from '${normalizePath(path.resolve(__dirname, '../../input/react/App'))}';`,
+    `import App from '${path.resolve(__dirname, '../../input/react/App')}';`,
   ];
 
   const bodyCodes: string[] = [
@@ -128,102 +112,55 @@ function genThemeEntryCode({ framework }: LcapCodeGenOption) {
   ].join('\n\n');
 }
 
-const InstallLibraryCode = `function installLibrary(Vue, Components) {
-  const caseRE = /^[A-Z]/;
-  const blackList = ['directives', 'filters', 'utils', 'mixins', 'blocks', 'vendors', 'install', 'default'];
+function genThemePagePreviewWrapCode(componentFolder, framework) {
+  let filePath = '';
+  const index = [
+    '.js',
+    '.jsx',
+    '.tsx',
+  ].findIndex((ext) => {
+    filePath = path.resolve(componentFolder, `../index${ext}`);
 
-  // 组件之间有依赖，有 install 的必须先安装
-  Object.keys(Components).forEach((key) => {
-      if (!caseRE.test(key)) { // 如果为大写则是组件
-          if (!blackList.includes(key))
-              console.error('不允许组件名首字母小写', key, Components[key]);
-          return;
-      }
-
-      const Component = Components[key];
-      if (Component.install) {
-          Vue.component(key, Component);
-          Component.install(Vue, key);
-      }
-  });
-  Object.keys(Components).forEach((key) => {
-      if (!caseRE.test(key)) { // 如果为大写则是组件
-          if (!blackList.includes(key))
-              console.error('不允许组件名首字母小写', key, Components[key]);
-          return;
-      }
-
-      const Component = Components[key];
-      Vue.component(key, Component);
-      if (!Component.install) {
-          Vue.component(key, Component);
-      }
-  });
-}`;
-
-function genDefaultPreviewCode({
-  framework,
-  type,
-}: LcapCodeGenOption) {
-  const isExtension = type === 'extension';
-  const codes = [
-    `export { default as ComponentWrap } from '${normalizePath(path.resolve(__dirname, `../../input/${framework}/component-preview`))}'`,
-    'export const renderAppPreview = (app) => app;',
-  ];
-
-  if (framework && framework.startsWith('vue')) {
-    codes.unshift('');
-    codes.unshift([
-      'import Vue from "vue"',
-      'import * as Library from "@/index"',
-      isExtension ? [InstallLibraryCode, 'installLibrary(Vue, Library);'].join('\n') : 'Vue.use(Library);',
-    ].join('\n'));
-  }
-
-  return codes.join('\n');
-}
-
-function genThemePagePreviewWrapCode(options: LcapCodeGenOption) {
-  const { rootPath = '', themePreviewEntry } = options;
-
-  if (themePreviewEntry) {
-    let filePath = '';
-    const index = [
-      '.js',
-      '.jsx',
-      '.tsx',
-    ].findIndex((ext) => {
-      filePath = path.resolve(rootPath, themePreviewEntry, `../index${ext}`);
-
-      if (fs.existsSync(filePath)) {
-        return true;
-      }
-
-      return false;
-    });
-
-    if (index !== -1) {
-      return [
-        `export { renderAppPreview, ComponentWrap } from '${normalizePath(filePath)}';`,
-      ].join('\n');
+    if (fs.existsSync(filePath)) {
+      return true;
     }
+
+    return false;
+  });
+
+  if (index === -1) {
+    if (framework === 'vue2') {
+      return [
+        'export const renderAppPreview = (app) => app;',
+        'export const ComponentWrap = {',
+        '  name: "ThemeComponentWrap",',
+        '  props: ["demo", "actived", "title", "name"],',
+        '  render(h) {',
+        '    return h("div", { on: this.$listeners }, [h(this.demo)])',
+        '  }',
+        '}',
+      ];
+    }
+
+    return [
+      'import React from \'react\'',
+      '',
+      'export const renderAppPreview = (app) => app;',
+      'export const ComponentWrap = (props) => React.createElement(\'div\', { onClick: props.onClick, id: props.id }, props.demo);',
+    ].join('\n');
   }
 
-  return genDefaultPreviewCode(options);
+  return [
+    `export { renderAppPreview, ComponentWrap } from '${filePath}';`,
+  ].join('\n');
 }
 
 export default (options: LcapCodeGenOption = {}) => {
   const cwd = process.cwd();
   let themeId;
-  const themeVarCssPath = options.themeVarCssPath ? path.resolve(cwd, options.themeVarCssPath) : '';
+  const themeVarCssPath = path.resolve(cwd, options.themeVarCssPath || defaultOptions.themeVarCssPath);
   const componentFolder = path.resolve(cwd, options.themeComponentFolder || defaultOptions.themeComponentFolder);
 
-  const genOptions: LcapCodeGenOption = {
-    ...options,
-    themeVarCssPath,
-    themeComponentFolder: componentFolder,
-    rootPath: cwd,
-  };
   return {
     name: 'vite-lcap:code-gen', // 必须的，将会在 warning 和 error 中显示
     enforce: 'pre',
@@ -258,24 +195,27 @@ export default (options: LcapCodeGenOption = {}) => {
       return undefined;
     },
     load: (id) => {
+      if (id.indexOf('_util/PurePanel') !== -1) {
+        console.log(id);
+      }
       if (id === virtualThemeCSSFileId) {
-        return genVarCssCode(genOptions);
+        return genVarCssCode(themeVarCssPath, componentFolder);
       }
 
       if (id === virtualThemeComponentStoriesFileId) {
-        return genComponentStoriesCode(genOptions);
+        return genComponentStoriesCode(componentFolder, options.framework);
       }
 
       if (id === virtualThemePagePreviewFileId) {
-        return genThemePagePreviewMapCode(genOptions);
+        return genThemePagePreviewMapCode(componentFolder, options.previewPages);
       }
 
       if (id === virtualThemePreviewWrapFileId) {
-        return genThemePagePreviewWrapCode(genOptions);
+        return genThemePagePreviewWrapCode(componentFolder, options.framework);
       }
 
       if (id === virtualThemeEntryFileId) {
-        return genThemeEntryCode(genOptions);
+        return genThemeEntryCode(options.framework, cwd);
       }
 
       if (id === themeId) {

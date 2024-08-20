@@ -8,15 +8,7 @@ namespace nasl.ui {
         group: 'Feedback'
     })
     export class UPopupCombination extends ViewComponent {
-        @Prop({
-          title: '打开',
-        })
-        opened: nasl.core.Boolean;
 
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -162,7 +154,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         opened: nasl.core.Boolean = false;
 
@@ -174,7 +165,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 

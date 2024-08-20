@@ -7,37 +7,20 @@ namespace nasl.ui {
     description: '多项中选择一项',
     group: "Form"
   })
-  export class VanCapsules<M extends nasl.core.Boolean> extends ViewComponent {
-    @Prop({
-      title: '选中值',
-    })
-    value: VanCapsulesOptions<M>['value'];
-
-    @Prop({
-      title: '禁用',
-    })
-    disabled: nasl.core.Boolean;
-
-    @Prop({
-      title: '只读',
-    })
-    readonly: nasl.core.Boolean;
-
-    constructor(options?: Partial<VanCapsulesOptions<M>>) {
+  export class VanCapsules extends ViewComponent {
+    constructor(options?: Partial<VanCapsulesOptions>) {
       super();
     }
   }
-  export class VanCapsulesOptions<M extends nasl.core.Boolean> extends ViewComponentOptions {
+  export class VanCapsulesOptions extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '选中值',
       description: '当前选中的值',
       sync: true,
-      docDescription: '当前选择的值',
-      settable: true,
+      docDescription: '当前选择的值'
     })
-    value: M extends true ? nasl.collection.List<nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean> : (nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean);
-
+    value: any;
     @Prop({
       group: '交互属性',
       title: '可取消',
@@ -65,8 +48,7 @@ namespace nasl.ui {
       docDescription: '正常显示，但禁止选择或输入。',
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     readonly: nasl.core.Boolean = false;
     @Prop({
@@ -76,8 +58,7 @@ namespace nasl.ui {
       docDescription: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     disabled: nasl.core.Boolean = false;
     @Event({
@@ -113,16 +94,6 @@ namespace nasl.ui {
     group: "Form"
   })
   export class VanCapsulesItem extends ViewComponent {
-    @Prop({
-      title: '选中值',
-    })
-    value: VanCapsulesItemOptions['value'];
-
-    @Prop({
-      title: '禁用',
-    })
-    disabled: nasl.core.Boolean;
-
     constructor(options?: Partial<VanCapsulesItemOptions>) {
       super();
     }
@@ -132,11 +103,9 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '此项的值',
-      docDescription: '此项的值',
-      settable: true,
+      docDescription: '此项的值'
     })
-    value: nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean;
-
+    value: any;
     @Prop({
       group: '主要属性',
       title: '标签',
@@ -162,8 +131,7 @@ namespace nasl.ui {
       docDescription: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     disabled: nasl.core.Boolean = false;
     @Slot({

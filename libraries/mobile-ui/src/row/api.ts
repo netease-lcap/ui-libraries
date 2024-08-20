@@ -124,7 +124,7 @@ namespace nasl.ui {
         code: '<van-col :span="8"></van-col>'
       }]
     })
-    slotDefault: () => Array<ViewComponent>;
+    slotDefault: () => Array<VanCol>;
   }
   @Component({
     title: '栅格列',

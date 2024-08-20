@@ -1,6 +1,6 @@
 <template>
     <nav :class="$style.root" :readonly="readonly" :disabled="disabled" :style="dynamicStyle" @transitionend="handleTranstitionEnd" :collapse="currentCollapse">
-        <f-scroll-view native :class="$style.content">
+        <f-scroll-view :class="$style.content">
             <template v-if="currentDataSource&&currentDataSource.data&&Array.isArray(currentDataSource.data)">
                 <template v-for="(node,idx) in currentDataSource.data">
                     <u-sidebar-group
@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import MSinglex from '../m-singlex.vue';
 import { MGroupParent } from '../m-group.vue';
 import CssVarsStyleMixin from '../../mixins/css-variables';
@@ -61,23 +60,7 @@ export default {
     name: 'u-sidebar',
     groupName: 'u-sidebar-group',
     childName: 'u-sidebar-item',
-    mixins: [
-      MSinglex,
-      MGroupParent,
-      CssVarsStyleMixin,
-      sync(
-        'readonly',
-        'disabled',
-        {
-          data() {
-            return this.currentDataSource ? this.currentDataSource.data : [];
-          },
-          value() {
-            return this.selectedVM && this.selectedVM.value;
-          },
-        },
-      ),
-    ],
+    mixins: [MSinglex, MGroupParent, CssVarsStyleMixin],
     provide() {
       return {
         getStaticCssVarStyle: () => this.getStaticCssVarStyle(),
@@ -366,15 +349,6 @@ export default {
             const properlyWidth = Math.max(this.minWidth, w);
             return properlyWidth;
         },
-        toggleAll(expanded) {
-            this.groupVMs.forEach((groupVM) => {
-              groupVM.toggle(expanded);
-
-              if (Array.isArray(groupVM.groupVMs) && typeof groupVM.toggleAll === 'function') {
-                groupVM.toggleAll(expanded);
-              }
-            });
-        },
     },
 };
 </script>
@@ -386,7 +360,7 @@ export default {
     border-right: 1px solid #E9E9EB;
     background: var(--sidebar-background);
     height: 100%;
-    /* overflow: auto; */
+    overflow: auto;
     transition: all var(--transition-duration-base);
     position: relative;
 }

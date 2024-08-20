@@ -28,20 +28,6 @@
             style="width: 240px"
             :value.sync="remoteValues1"
             converter="join:|"></u-select>
-    <u-select :data-source="load"
-        pageable remote-paging
-        filterable remote-filtering
-        clearable
-        :value.sync="value"
-        :autoCheckSelectedValue="false"
-        :selectedValuesData="[{currentText: 'detail30', value: 'detail30'}]"></u-select>
-    <u-select :data-source="load"
-        pageable remote-paging
-        remote-filtering
-        clearable
-        :value.sync="value"
-        :autoCheckSelectedValue="false"
-        :selectedValuesData="[{text: 'detail30', value: 'detail30'}]"></u-select>
 </u-linear-layout>
 </template>
 <script>
@@ -69,11 +55,11 @@ export default {
             this.remoteValue = 'detail45';
             this.remoteValues =  ['detail45', 'info45'];
             this.remoteValues1 = 'detail45|info45';
-        }, 300);
+        }, 300); 
     },
     methods: {
         load({ filterText, paging }) {
-            const value = filterText ? filterText.toLowerCase() : '';
+            const value = filterText.toLowerCase();
 
             // 这里使用 Promise 和 setTimeout 模拟一个异步请求
             return new Promise((resolve, reject) => {

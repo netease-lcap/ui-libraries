@@ -11,12 +11,7 @@ namespace nasl.ui {
       @Prop({
           title: '数据',
       })
-      data: nasl.collection.List<T>;
-
-      @Prop({
-          title: '数据总数',
-      })
-      total: nasl.core.Integer;
+      data: UTableViewOptions<T, V, P, M>['dataSource'];
 
       @Prop({
           title: '分页大小',
@@ -34,29 +29,9 @@ namespace nasl.ui {
       sort: UTableViewOptions<T, V, P, M>['sorting']['field'];
 
       @Prop({
-          title: '排序方式',
+          title: '排序属性',
       })
       order: UTableViewOptions<T, V, P, M>['sorting']['order'];
-
-      @Prop({
-          title: '单选值',
-      })
-      value: V;
-
-      @Prop({
-          title: '多选值',
-      })
-      values: nasl.collection.List<V>;
-
-      @Prop({
-        title: '禁用',
-      })
-      disabled: nasl.core.Boolean;
-
-      @Prop({
-        title: '只读',
-      })
-      readonly: nasl.core.Boolean;
 
       @Method({
           title: 'undefined',
@@ -225,7 +200,7 @@ namespace nasl.ui {
           docDescription: '分页组件处是否展示每页显示数据条数的选择列表，需设置数组，如[10,20,30,40,50]。在"分页"属性开启时有效。',
           if: _ => _.pagination === true && _.showSizer === true,
       })
-      pageSizeOptions: nasl.collection.List<nasl.core.Integer> = [10,20,50];
+      pageSizeOptions: Array<nasl.core.Integer> = [10,20,50];
 
       @Prop<UTableViewOptions<T, V, P, M>, 'pageNumber'>({
           group: '数据属性',
@@ -694,7 +669,6 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
-          settable: true,
       })
       readonly: nasl.core.Boolean = false;
 
@@ -706,7 +680,6 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
-          settable: true,
       })
       disabled: nasl.core.Boolean = false;
 
@@ -1047,7 +1020,7 @@ namespace nasl.ui {
               },
           ],
       })
-      slotDefault: () => Array<UTableViewColumn<T, V, P, M> | UTableViewColumnDynamic<T, V, P, M, unknown> | UTableViewColumnGroup<T, V, P, M> | ViewComponent>;
+      slotDefault: () => Array<UTableViewColumn<T, V, P, M> | UTableViewColumnDynamic<T, V, P, M, unknown> | UTableViewColumnGroup<T, V, P, M>>;
 
       @Slot({
           title: '加载中内容',
@@ -1304,8 +1277,7 @@ namespace nasl.ui {
           title: '展开列内容',
           description: '展开列的内容',
       })
-      'slot-expand-content': (current: Current<T>) => Array<ViewComponent>;
-      slotExpandContent: (current: Current<T>) => Array<ViewComponent>; // 防止 ide 编译报错
+      slotExpandContent: (current: Current<T>) => Array<ViewComponent>;
 
       @Slot({
           title: '展开列图标',
@@ -1445,7 +1417,7 @@ namespace nasl.ui {
               concept: 'PropertySelectSetter',
           },
       })
-      valueField: (item: T1) => any = ((item: any)  => item.value) as any;
+      valueField: (item: T) => V = ((item: any)  => item.value) as any;
 
       @Prop({
           group: '数据属性',
@@ -1566,7 +1538,7 @@ namespace nasl.ui {
               },
           ],
       })
-      slotDefault: SlotType<() => Array<UTableViewColumn<T, V, P, M> | ViewComponent>>;
+      slotDefault: SlotType<() => Array<UTableViewColumn<T, V, P, M>>>;
 
       @Slot({
           title: '标题',

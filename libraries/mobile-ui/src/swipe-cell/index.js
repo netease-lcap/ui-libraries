@@ -1,5 +1,4 @@
 // Utils
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace, isDef } from '../utils';
 import { range } from '../utils/format/number';
 import { preventDefault } from '../utils/dom/event';
@@ -20,14 +19,13 @@ export default createComponent({
       event: 'touchstart',
       method: 'onClick',
     }),
-    sync('disabled'),
   ],
 
   props: {
     // @deprecated
     // should be removed in next major version, use beforeClose instead
     onClose: Function,
-    disabled: { type: Boolean, default: false },
+    disabled: Boolean,
     leftWidth: [Number, String],
     rightWidth: [Number, String],
     beforeClose: Function,

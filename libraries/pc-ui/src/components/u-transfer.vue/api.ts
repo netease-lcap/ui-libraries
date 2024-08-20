@@ -8,20 +8,7 @@ namespace nasl.ui {
         group: 'Selector'
     })
     export class UTransfer<T, V> extends ViewComponent {
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
 
-        @Prop({
-          title: '只读',
-        })
-        readonly: nasl.core.Boolean;
-
-        @Prop({
-          title: '预览',
-        })
-        preview: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -32,7 +19,7 @@ namespace nasl.ui {
                 title: 'undefined',
                 description: '指定转移选项值的列表。如果不填，则为按左列表框选中项值的列表。',
             })
-            values: nasl.collection.List<nasl.core.String>,
+            values: Array<nasl.core.String>,
         ): void {}
 
         @Method({
@@ -44,7 +31,7 @@ namespace nasl.ui {
                 title: 'undefined',
                 description: '指定转移选项值的列表。如果不填，则为按右列表框选中项值的列表。',
             })
-            values: nasl.collection.List<nasl.core.String>,
+            values: Array<nasl.core.String>,
         ): void {}
 
         @Method({
@@ -61,7 +48,7 @@ namespace nasl.ui {
                 title: 'undefined',
                 description: '指定转移选项值的列表。',
             })
-            values: nasl.collection.List<nasl.core.String>,
+            values: Array<nasl.core.String>,
         ): void {}
         constructor(options?: Partial<UTransferOptions<T, V>>) { super(); }
     }
@@ -97,7 +84,6 @@ namespace nasl.ui {
             description: '原数据列表',
             sync: true,
             docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
-            isDataSource: true,
         })
         source: nasl.collection.List<T>;
 
@@ -115,22 +101,16 @@ namespace nasl.ui {
             title: '文本字段',
             description: '选项文本的字段名',
             docDescription: '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
-            setter: {
-              concept: 'InputSetter',
-            },
         })
-        textField: nasl.core.String = 'text';
+        textField: (item: T) => any = ((item: any)  => item.text) as any;
 
         @Prop({
             group: '数据属性',
             title: '值字段',
             description: '选项值的字段名',
             docDescription: '集合的元素类型中，用于指定数据唯一值的字段，支持自定义变更',
-            setter: {
-              concept: 'InputSetter',
-            },
         })
-        valueField: nasl.core.String = 'value';
+        valueField: (item: T) => V = ((item: any)  => item.text) as any;
 
         @Prop({
             group: '数据属性',
@@ -208,7 +188,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -220,7 +199,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -232,7 +210,6 @@ namespace nasl.ui {
           setter: {
             concept: 'SwitchSetter',
           },
-          settable: true,
         })
         preview: nasl.core.Boolean = false;
 

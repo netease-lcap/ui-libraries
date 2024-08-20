@@ -4,7 +4,7 @@ import { Form as AntdForm, FormProps, FormItemProps } from 'antd';
 import {
   QueryFilter, QueryFilterProps, ProForm, ProFormProps,
 } from '@ant-design/pro-components';
-import VusionValidator, { localizeRules } from '@lcap/validator';
+import VusionValidator, { localizeRules } from '@vusion/validator';
 import _ from 'lodash';
 import { registerComponet } from '@/plugins/index';
 import * as plugin from './plugins';

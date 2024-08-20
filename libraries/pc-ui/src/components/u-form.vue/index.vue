@@ -1,6 +1,6 @@
 <template>
 <div
-  :class="[$style.root, { [$style.colon]: colon }]"
+  :class="$style.root"
   @submit.prevent
   :layout="layoutValue"
   :repeat="repeat"
@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import MParent from '../m-parent.vue';
 import MGroupParent from '../m-group.vue/parent.vue';
 import UValidator from '../u-validator.vue';
@@ -22,18 +21,10 @@ import cloneDeep from 'lodash/cloneDeep';
 
 export default {
     name: 'u-form',
-    mixins: [
-      MParent,
-      MGroupParent,
-      UValidator,
-      sync({
-        preview: 'preview',
-      }),
-    ],
+    mixins: [MParent, MGroupParent, UValidator],
     props: {
         model: Object,
         rules: Object,
-        colon: { type: Boolean, default: false },
         layout: { type: String, default: 'block' },
         size: { type: String, default: 'normal' },
         labelSize: { type: String, default: 'normal' },
@@ -164,8 +155,6 @@ export default {
     height: 0;
     visibility: hidden;
 }
-
-.root[layout="inline"] .item[layout="block"],
 .root[layout="inline"] .item[layout="center"],
 .root[layout="inline"] .item[layout="end"] {
     display: inline-flex;
@@ -302,11 +291,5 @@ export default {
 .root[label-layout="block"][layout="inline"] .item,
 .root[label-layout="block"][layout="inline"] .item[label-layout="block"]{
     display: inline-flex;
-}
-
-.root.colon .item .item_label .item_text:not(:empty):not([designer-empty]):after {
-  content: ':';
-  margin-left: 2px;
-  margin-block: 0;
 }
 </style>

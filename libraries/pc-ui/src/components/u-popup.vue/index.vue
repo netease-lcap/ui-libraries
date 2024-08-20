@@ -27,19 +27,12 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import MPopper from '../m-popper.vue';
 import SEmpty from '../../components/s-empty.vue';
 export default {
     name: 'u-popup',
     components: { SEmpty },
     extends: MPopper,
-    mixins: [
-      sync({
-        disabled: 'disabled',
-        opened: 'currentOpened',
-      }),
-    ],
     props: {
         title: String,
         content: String, // @inherit: opened

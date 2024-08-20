@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace, isDef, addUnit, inBrowser } from '../utils';
 import Icon from '../icon';
 // eslint-disable-next-line import/no-cycle
@@ -7,13 +6,6 @@ import ImagePreview from '../image-preview';
 const [createComponent, bem] = createNamespace('image');
 
 export default createComponent({
-  mixins: [
-    sync({
-      src: 'convertedSrc',
-      placeholderSrc: 'placeholderSrc',
-      preview: 'preview',
-    }),
-  ],
   props: {
     src: String,
     fit: String,

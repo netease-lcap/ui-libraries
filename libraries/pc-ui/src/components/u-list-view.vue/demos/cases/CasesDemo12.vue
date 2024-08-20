@@ -2,11 +2,10 @@
 <template>
     <u-linear-layout direction="vertical">
         <u-linear-layout>
-            <u-button @click="reload">刷 新</u-button>
             <u-button @click="changeList">变换list值</u-button>
             <u-button @click="resetPageSizeAndNumber">重置页码和页数</u-button>
         </u-linear-layout>
-        <u-list-view ref="listview" v-model="value" :data-source="list" :page-size="pageSize" :page-number="pageNumber" :pageable="true" :show-sizer="true" :page-size-options="[10,20,50]" @page="onPage"></u-list-view>
+        <u-list-view v-model="value" :data-source="list" :page-size="pageSize" :page-number="pageNumber" :pageable="true" :show-sizer="true" :page-size-options="[10,20,50]" @page="onPage"></u-list-view>
     </u-linear-layout>
 </template>
 <script>
@@ -92,9 +91,6 @@ export default {
         onPage(paging) {
             this.pageSize = paging.size;
             this.pageNumber = paging.number;
-        },
-        reload() {
-            this.$refs.listview.reload();
         },
     }
 };

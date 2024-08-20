@@ -87,7 +87,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import { UTabs } from '../u-tabs.vue';
 import IIco from '../i-ico.vue';
 
@@ -96,15 +95,6 @@ export default {
     childName: 'u-step',
     components: { IIco },
     extends: UTabs,
-    mixins: [
-      sync({
-        value: 'currentIndex',
-        isFirst: 'isFirst',
-        isLast: 'isLast',
-        disabled: 'disabled',
-        readonly: 'readonly',
-      }),
-    ],
     props: {
         value: { type: Number, default: 0 },
         readonly: { type: Boolean, default: true },
@@ -126,19 +116,6 @@ export default {
         stepDataSource() {
             const data = this.currentDataSource && this.currentDataSource.data || [];
             return data.map((item, index) => ({ ...item, index }));
-        },
-        currentIndex() {
-          return this.selectedVM && this.selectedVM.index !== undefined ? this.selectedVM.index : this.value;
-        },
-        isFirst() {
-          return this.currentIndex <= 0;
-        },
-        isLast() {
-          if (this.dataSource !== undefined) {
-            return this.currentIndex >= this.stepDataSource.length - 1;
-          }
-
-          return this.currentIndex >= this.itemVMs.length - 1;
         },
     },
     watch: {
@@ -213,22 +190,6 @@ export default {
             const itemStyle = Object.assign({}, itemVm.$vnode.data && itemVm.$vnode.data.style);
             const itemstaticStyle = Object.assign({}, itemVm.$vnode.data && itemVm.$vnode.data.staticStyle);
             return Object.assign({ width: this.currentItemWidth }, itemstaticStyle, itemStyle);
-        },
-        prev() {
-          if (this.isFirst) {
-            return;
-          }
-
-          const steps = this.dataSource !== undefined ? this.stepDataSource : this.itemVMs;
-          this.select(steps[this.currentIndex - 1]);
-        },
-        next() {
-          if (this.isLast) {
-            return;
-          }
-
-          const steps = this.dataSource !== undefined ? this.stepDataSource : this.itemVMs;
-          this.select(steps[this.currentIndex + 1]);
         },
     },
 };

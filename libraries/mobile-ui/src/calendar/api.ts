@@ -11,26 +11,6 @@ namespace nasl.ui {
     constructor(options?: Partial<VanCalendarOptions>) {
       super();
     }
-    @Prop({
-      title: '值',
-    })
-    value: VanCalendarOptions['value'];
-
-    @Prop({
-      title: '禁用',
-    })
-    disabled: nasl.core.Boolean;
-
-    @Prop({
-      title: '只读',
-    })
-    readonly: nasl.core.Boolean;
-
-    @Prop({
-      title: '预览',
-    })
-    preview: nasl.core.Boolean;
-
     @Method({
       title: '日期重置',
       description: '将选中的日期重置到指定日期，未传参时会重置到默认日期'
@@ -70,8 +50,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识日期选择的值',
-      sync: true,
-      settable: true,
+      sync: true
     })
     value: nasl.core.String | nasl.core.Date;
     @Prop({
@@ -122,8 +101,7 @@ namespace nasl.ui {
       description: '正常显示，但禁止选择/输入',
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     readonly: nasl.core.Boolean = false;
     @Prop({
@@ -132,8 +110,7 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     disabled: nasl.core.Boolean = false;
     @Prop({
@@ -154,7 +131,6 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
-      settable: true,
     })
     preview: nasl.core.Boolean = false;
     @Event({
@@ -198,11 +174,11 @@ namespace nasl.ui {
       title: 'undefined',
       description: '自定义选择器顶部内容',
     })
-    slotPickerTop: () => Array<ViewComponent>;
+    slotPickerTop: () => Array<VanPickerActionSlot>;
     @Slot({
       title: 'undefined',
       description: '自定义选择器底部内容',
     })
-    slotPickerBottom: () => Array<ViewComponent>;
+    slotPickerBottom: () => Array<VanPickerActionSlot>;
   }
 }

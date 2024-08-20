@@ -8,21 +8,6 @@ namespace nasl.ui {
     group: "Form"
   })
   export class VanSearch extends ViewComponent {
-    @Prop({
-      title: '值',
-    })
-    value: VanSearchOptions['value'];
-
-    @Prop({
-      title: '禁用',
-    })
-    disabled: nasl.core.Boolean;
-
-    @Prop({
-      title: '只读',
-    })
-    readonly: nasl.core.Boolean;
-
     constructor(options?: Partial<VanSearchOptions>) {
       super();
     }
@@ -37,8 +22,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '用于标识搜索框的值',
-      sync: true,
-      settable: true,
+      sync: true
     })
     value: nasl.core.String;
     @Prop({
@@ -117,8 +101,7 @@ namespace nasl.ui {
       description: '正常显示，但禁止选择/输入',
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     readonly: nasl.core.Boolean;
     @Prop({
@@ -127,8 +110,7 @@ namespace nasl.ui {
       description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     disabled: nasl.core.Boolean;
     @Prop({

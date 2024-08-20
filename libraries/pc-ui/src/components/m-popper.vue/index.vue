@@ -162,11 +162,9 @@ export default {
     },
     methods: {
         getOptions() {
-            const options = {
-              ...this.options,
-              modifiers: [...(this.options && Array.isArray(this.options.modifiers) ? this.options.modifiers : [])],
-              placement: this.placement,
-            };
+            const options = Object.assign({}, this.options, {
+                placement: this.placement,
+            });
             options.modifiers.push({
                 name: 'arrow',
                 options: {
@@ -210,7 +208,6 @@ export default {
                     },
                 },
             });
-
             return options;
         },
         getReferenceEl() {

@@ -33,14 +33,13 @@ export default {
         text: String,
         closable: { type: Boolean, default: false },
         customIcon: { type: String },
-        visible:  { type: Boolean, default: false },
     },
     data() {
         return {
             items: [],
             itemsQueue: new Map(),
 
-            designerVisible: this.visible,
+            designerVisible: false,
         };
     },
     watch: {
@@ -53,9 +52,6 @@ export default {
                 return false;
             });
         },
-        visible(val) {
-            this.designerVisible = val;
-        }
     },
     mounted() {
         if (this.$env.VUE_APP_DESIGNER) {

@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace } from '../utils';
 import { ChildrenMixin } from '../mixins/relation';
 import Empty from '../emptycol';
@@ -6,10 +5,7 @@ import Empty from '../emptycol';
 const [createComponent, bem] = createNamespace('capsules-item');
 
 export default createComponent({
-  mixins: [
-    ChildrenMixin('VanCapsules'),
-    sync('value', 'disabled'),
-  ],
+  mixins: [ChildrenMixin('VanCapsules')],
   components: {
     Empty,
   },

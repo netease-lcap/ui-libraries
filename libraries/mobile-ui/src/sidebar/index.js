@@ -1,16 +1,10 @@
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace } from '../utils';
 import { ParentMixin } from '../mixins/relation';
 
 const [createComponent, bem] = createNamespace('sidebar');
 
 export default createComponent({
-  mixins: [
-    ParentMixin('vanSidebar'),
-    sync({
-      value: 'curvalue',
-    }),
-  ],
+  mixins: [ParentMixin('vanSidebar')],
 
   // model: {
   //   prop: 'activeKey',

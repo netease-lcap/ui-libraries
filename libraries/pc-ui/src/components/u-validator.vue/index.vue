@@ -14,10 +14,9 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import MEmitter from '../m-emitter.vue';
-import VusionValidator from '@lcap/validator';
-import VueVusionValidator from '@lcap/validator/VuePlugin';
+import VusionValidator from '@vusion/validator';
+import VueVusionValidator from '@vusion/validator/VuePlugin';
 import debounce from 'lodash/debounce';
 import SEmpty from '../../components/s-empty.vue';
 
@@ -28,10 +27,7 @@ export default {
     install(Vue) {
         Vue.use(VueVusionValidator, { locale: Vue.i18n && Vue.i18n.locale });
     },
-    mixins: [
-      MEmitter,
-      sync('valid'),
-    ],
+    mixins: [MEmitter],
     props: {
         name: String,
         label: String,

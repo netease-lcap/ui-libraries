@@ -1,4 +1,3 @@
-import { sync } from '@lcap/vue2-utils';
 import { createNamespace, addUnit } from '../utils';
 import { deepClone } from '../utils/deep-clone';
 import { preventDefault } from '../utils/dom/event';
@@ -12,14 +11,7 @@ const [createComponent, bem] = createNamespace('slider');
 const isSameValue = (newValue, oldValue) => JSON.stringify(newValue) === JSON.stringify(oldValue);
 
 export default createComponent({
-  mixins: [
-    TouchMixin,
-    FieldMixin,
-    sync({
-      value: 'currentData',
-      disabled: 'disabled',
-    }),
-  ],
+  mixins: [TouchMixin, FieldMixin],
 
   props: {
     disabled: Boolean,

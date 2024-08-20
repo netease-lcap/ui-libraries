@@ -8,15 +8,6 @@ namespace nasl.ui {
         group: 'Container'
     })
     export class UIframe extends ViewComponent {
-        @Prop({
-          title: '网页地址',
-        })
-        src: UIframeOptions['src'];
-
-        @Prop({
-          title: '加载完成',
-        })
-        loaded: nasl.core.Boolean;
 
         constructor(options?: Partial<UIframeOptions>) { super(); }
     }
@@ -27,7 +18,6 @@ namespace nasl.ui {
             title: '网页地址',
             description: '需要嵌入的网页地址',
             docDescription: '需要嵌入的网页地址',
-            settable: true,
         })
         src: nasl.core.String;
 

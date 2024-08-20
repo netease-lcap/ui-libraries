@@ -8,35 +8,6 @@ namespace nasl.ui {
       group: 'Selector'
   })
   export class UTimePicker extends ViewComponent {
-      @Prop({
-        title: '值',
-      })
-      value: UTimePickerOptions['value'];
-
-      @Prop({
-        title: '起始值',
-      })
-      startTime: UTimePickerOptions['startTime'];
-
-      @Prop({
-        title: '结束值',
-      })
-      endTime: UTimePickerOptions['endTime'];
-
-      @Prop({
-        title: '禁用',
-      })
-      disabled: nasl.core.Boolean;
-
-      @Prop({
-        title: '只读',
-      })
-      readonly: nasl.core.Boolean;
-
-      @Prop({
-        title: '预览',
-      })
-      preview: nasl.core.Boolean;
 
       constructor(options?: Partial<UTimePickerOptions>) { super(); }
   }
@@ -93,7 +64,6 @@ namespace nasl.ui {
           sync: true,
           docDescription: '默认显示的日期值。',
           if: _ => _.range !== true,
-          settable: true,
       })
       value: nasl.core.String | nasl.core.Time = '';
 
@@ -103,7 +73,6 @@ namespace nasl.ui {
           description: '默认显示的起始时间值，格式如08:08:08',
           sync: true,
           if: _ => _.range === true,
-          settable: true,
       })
       startTime: nasl.core.String | nasl.core.Time;
 
@@ -113,7 +82,6 @@ namespace nasl.ui {
           description: '默认显示的结束时间值，格式如08:08:08',
           sync: true,
           if: _ => _.range === true,
-          settable: true,
       })
       endTime: nasl.core.String | nasl.core.Time;
 
@@ -284,7 +252,6 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
-          settable: true,
       })
       readonly: nasl.core.Boolean = false;
 
@@ -295,7 +262,6 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
-          settable: true,
       })
       disabled: nasl.core.Boolean = false;
 
@@ -307,7 +273,6 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
-          settable: true,
       })
       preview: nasl.core.Boolean = false;
 

@@ -58,7 +58,6 @@ export default {
                 value = this.currentConverter.get(values);
             }
             const selectedItems = selectedVMs.map((itemVM) => itemVM.item);
-            this.$emit('update', value, this);
             this.$emit('change', {
                 value, // @TODO: oldValue,
                 values,

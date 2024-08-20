@@ -4,7 +4,7 @@
     <u-table-view :data-source="data" :default-column-width="200">
         <u-table-view-column title="用户名" field="name" type="editable" fixed>
             <template #editcell="scope">
-                <u-validator style="width:100%" placement="bottom" display="appear" append-to="body" @blur-valid="validator1_blurvalid($event, scope)" rules="required">
+                <u-validator style="width:100%" placement="bottom" display="appear" append-to="body" @blur-valid="validator1_blurvalid(event, scope)" rules="required">
                     <u-input :value.sync="scope.item.name" placeholder="请输入用户名" :autofocus="true" width="full"></u-input>
                 </u-validator>
             </template>
@@ -15,7 +15,7 @@
         <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" fixed></u-table-view-column>
         <u-table-view-column  title="手机号码" field="phone" type="editable">
             <template #editcell="scope">
-                <u-validator style="width:100%" placement="bottom" display="appear" append-to="body" @blur-valid="validator2_blurvalid($event, scope)" rules="required | phone">
+                <u-validator style="width:100%" placement="bottom" display="appear" append-to="body" @blur-valid="validator2_blurvalid(event, scope)" rules="required | phone">
                     <u-input :value.sync="scope.item.phone" placeholder="请输入手机号" :autofocus="true" width="full"></u-input>
                 </u-validator>
             </template>

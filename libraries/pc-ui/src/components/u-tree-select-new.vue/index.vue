@@ -117,7 +117,6 @@
                 @select="$emit('select', $event, this)"
                 @input="onUpdateValue"
                 @update:value="onUpdateValue"
-                @sync:data="$listeners['sync:data']"
                 @toggle="$emit('toggle', $event, this)"
                 @check="$emit('check', $event, this)"
                 @before-load="onBeforeLoad"
@@ -133,7 +132,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import MField from '../m-field.vue';
 // import UTreeViewNodeNew from '../u-tree-view-new.vue/node.vue';
 import SEmpty from '../s-empty.vue';
@@ -143,17 +141,7 @@ export default {
     name: 'u-tree-select-new',
     childName: 'u-tree-view-node-new',
     components: { SEmpty },
-    mixins: [
-      MField,
-      MPreview,
-      sync({
-        value: 'actualValue',
-        readonly: 'readonly',
-        preview: 'isPreview',
-        opened: 'popperOpened',
-        disabled: 'disabled',
-      }),
-    ],
+    mixins: [MField, MPreview],
     props: {
         value: null,
         field: String,

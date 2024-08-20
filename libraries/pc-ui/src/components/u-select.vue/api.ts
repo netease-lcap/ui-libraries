@@ -11,12 +11,7 @@ namespace nasl.ui {
         @Prop({
             title: '数据',
         })
-        data: nasl.collection.List<T>;
-
-        @Prop({
-          title: '数据总数',
-        })
-        total: nasl.core.Integer;
+        data: USelectOptions<T, V, P, M, C>['dataSource'];
 
         @Prop({
             title: '选中值',
@@ -42,21 +37,6 @@ namespace nasl.ui {
             title: '过滤文本',
         })
         filterText: nasl.core.String;
-
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
-
-        @Prop({
-          title: '只读',
-        })
-        readonly: nasl.core.Boolean;
-
-        @Prop({
-          title: '预览',
-        })
-        preview: nasl.core.Boolean;
 
         @Method({
             title: 'undefined',
@@ -130,7 +110,6 @@ namespace nasl.ui {
             description: '当前选中的值',
             sync: true,
             docDescription: '当前选择的值',
-            settable: true,
         })
         value: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
 
@@ -514,7 +493,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -526,7 +504,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -538,7 +515,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         preview: nasl.core.Boolean = false;
 
@@ -551,7 +527,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         opened: nasl.core.Boolean = false;
 

@@ -112,10 +112,11 @@
               <van-empty-col v-if="(!slots('item')) && $env.VUE_APP_DESIGNER"></van-empty-col>
             </component>
           </div>
-          <div :class="$style.status" status="loading" v-if="currentLoading">
-            <slot name="loading"
-              ><u-spinner></u-spinner> {{ loadingText }}</slot
-            >
+          <div v-if="refreshing">
+            <!-- display nothing -->
+          </div>
+          <div :class="$style.status" status="loading" v-else-if="currentLoading">
+            <slot name="loading"><u-spinner></u-spinner> {{ loadingText }}</slot>
           </div>
           <div
             :class="$style.status"
@@ -179,7 +180,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import UListView from 'cloud-ui.vusion/src/components/u-list-view.vue/index.vue';
 import UCheckbox from 'cloud-ui.vusion/src/components/u-checkbox.vue/index.vue';
 import UInput from 'cloud-ui.vusion/src/components/u-input.vue/index.vue';
@@ -201,27 +201,6 @@ export default {
   groupName: 'van-grid-view-group',
   childName: 'van-grid-view-item',
   extends: UListView,
-  mixins: [
-    sync({
-      data: 'currentData',
-      total() {
-        return this.currentDataSource && this.currentDataSource.total ? this.currentDataSource.total : 0;
-      },
-      size() {
-        return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.size : undefined; // 不分页时size为undefined
-      },
-      page() {
-        return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : 1; // 不分页时page为1
-      },
-      sort() {
-        return this.currentDataSource && this.currentDataSource.sorting ? this.currentDataSource.sorting.field : '';
-      },
-      order() {
-        return this.currentDataSource && this.currentDataSource.sorting ? this.currentDataSource.sorting.order : '';
-      },
-      filterText: 'filterText',
-    }),
-  ],
   components: { VanPullRefresh, VanEmptyCol, UCheckbox, UInput, USpinner, ULink },
   props: {
     border: { type: Boolean, default: false },
@@ -376,6 +355,14 @@ export default {
     },
     async refresh() {
       this.refreshing = true;
+
+      await this.reload();
+
+      this.refreshing = false;
+
+    },
+    async reload() {
+      this.currentLoading = true;
       // eslint-disable-next-line no-console
       try {
         await this.currentDataSource.reload();
@@ -402,8 +389,8 @@ export default {
       } catch (error) {
         // eslint-disable-next-line no-console
       }
-      this.refreshing = false;
       this.$emit('load', undefined, this);
+      this.currentLoading = false;
     },
     onScroll(e) {
       if (this?.$env.VUE_APP_DESIGNER) return;
@@ -702,9 +689,7 @@ export default {
           options.data = Array.from(dataSource);
           return new DataSource(options);
       } else if (dataSource instanceof Function) {
-          const self = this;
           options.load = function load(params) {
-              self.$emitSyncParams(params);
               const result = dataSource(params);
               if (result instanceof Promise)
                   return result.catch(

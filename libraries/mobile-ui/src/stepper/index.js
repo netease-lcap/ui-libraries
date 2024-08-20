@@ -23,7 +23,7 @@ export default createComponent({
     },
     theme: String,
     integer: Boolean,
-    disabled: { type: Boolean, default: false },
+    disabled: Boolean,
     allowEmpty: {
       type: Boolean,
       default: true,

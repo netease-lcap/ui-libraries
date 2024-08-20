@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import { MSinglexItem } from '../m-singlex.vue';
 import SEmpty from '../s-empty.vue';
 
@@ -15,11 +14,6 @@ export default {
     parentName: 'u-tabs',
     components: { SEmpty },
     extends: MSinglexItem,
-    mixins: [
-      sync({
-        disabled: 'disabled',
-      })
-    ],
     inject: ['tabLoadOnActive'],
     props: {
         title: String,

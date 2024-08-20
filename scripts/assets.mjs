@@ -69,7 +69,6 @@ libraries.forEach((libPath) => {
 
   // 复制tgz到distDic
   fs.copyFileSync(`${packageDir}/${tgz}`, `${destDir}/zip.tgz`);
-  fs.copyFileSync(`${packageDir}/manifest.json`, `${destDir}/manifest.json`);
 });
 
 

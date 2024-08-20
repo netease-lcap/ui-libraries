@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import ClipboardJS from 'clipboard';
 // import i18n from '@/utils/i18n';
 import { SEmpty } from 'cloud-ui.vusion/src/components/s-empty.vue';
@@ -33,9 +32,6 @@ export default {
       SEmpty,
       Popover
     },
-    mixins: [
-      sync('value', 'disabled'),
-    ],
     props: {
         value: String,
         text: { type: String, default: '复制' },

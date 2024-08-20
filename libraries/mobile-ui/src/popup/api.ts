@@ -11,20 +11,14 @@ namespace nasl.ui {
     constructor(options?: Partial<VanPopupOptions>) {
       super();
     }
-
-    @Prop({
-      title: '展示抽屉',
-    })
-    visible: nasl.core.Boolean;
-
     @Method({
       title: 'undefined',
-      description: '打开抽屉'
+      description: '打开弹窗'
     })
     openModal(): any {}
     @Method({
       title: 'undefined',
-      description: '关闭抽屉'
+      description: '关闭弹窗'
     })
     closeModal(): any {}
   }
@@ -35,8 +29,7 @@ namespace nasl.ui {
       sync: true,
       setter: {
         concept: "SwitchSetter"
-      },
-      settable: true,
+      }
     })
     value: nasl.core.Boolean = false;
     @Prop({

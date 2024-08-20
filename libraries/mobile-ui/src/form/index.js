@@ -1,6 +1,5 @@
 import Vue from 'vue';
-import { sync } from '@lcap/vue2-utils';
-import VueVusionValidator from '@lcap/validator/VuePlugin';
+import VueVusionValidator from '@vusion/validator/VuePlugin';
 Vue.use(VueVusionValidator);
 
 import { createNamespace } from '../utils';
@@ -11,8 +10,8 @@ const [createComponent, bem] = createNamespace('form');
 export default createComponent({
   props: {
     colon: Boolean,
-    disabled: { type: Boolean, default: false },
-    readonly: { type: Boolean, default: false },
+    disabled: Boolean,
+    readonly: Boolean,
     labelWidth: [Number, String],
     labelAlign: String,
     inputAlign: String,
@@ -42,13 +41,7 @@ export default createComponent({
       vanForm: this,
     };
   },
-  mixins: [
-    sync({
-      valid() {
-        return this.fields.every((f) => !f.validateFailed);
-      },
-    }),
-  ],
+
   data() {
     return {
       fields: [],

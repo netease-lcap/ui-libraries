@@ -11,12 +11,7 @@ namespace nasl.ui {
         @Prop({
             title: '数据',
         })
-        data: nasl.collection.List<T>;
-
-        @Prop({
-            title: '数据总数',
-        })
-        total: nasl.core.Integer;
+        data: UListViewOptions<T, V, P, M, C>['dataSource'];
 
         @Prop({
             title: '分页大小',
@@ -44,38 +39,11 @@ namespace nasl.ui {
         })
         filterText: nasl.core.String;
 
-        @Prop({
-            title: '值'
-        })
-        value: UListViewOptions<T, V, P, M, C>['value'];
-
-        @Prop({
-          title: '禁用',
-        })
-        disabled: nasl.core.Boolean;
-
-        @Prop({
-          title: '只读',
-        })
-        readonly: nasl.core.Boolean;
-
         @Method({
             title: 'undefined',
             description: '清除缓存，重新加载',
         })
         reload(): void {}
-
-        @Method({
-          title: '带页码刷新',
-          description: '保持页码，重新加载',
-        })
-        loadTo(
-          @Param({
-              title: '页数',
-              description: '要刷新的页数',
-          })
-          page?: nasl.core.Integer,
-        ): void {}
         constructor(options?: Partial<UListViewOptions<T, V, P, M, C>>) { super(); }
     }
 
@@ -137,7 +105,7 @@ namespace nasl.ui {
             description: '每页条数切换器的选项',
             docDescription: '每页显示数据条数的选择列表，需设置数组，如[10,20,30,40,50]。在"可分页"属性开启时有效',
         })
-        pageSizeOptions: nasl.collection.List<nasl.core.Integer> = [10,20,50];
+        pageSizeOptions: Array<nasl.core.Integer> = [10,20,50];
 
         @Prop({
             group: '数据属性',
@@ -238,7 +206,6 @@ namespace nasl.ui {
             description: '显示的值',
             sync: true,
             docDescription: '在列表开启可多选时，指定数据唯一值的字段。',
-            settable: true,
         })
         value: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
 
@@ -411,7 +378,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         readonly: nasl.core.Boolean = false;
 
@@ -423,7 +389,6 @@ namespace nasl.ui {
             setter: {
                 concept: 'SwitchSetter',
             },
-            settable: true,
         })
         disabled: nasl.core.Boolean = false;
 
@@ -527,11 +492,6 @@ namespace nasl.ui {
             emptyBackground: 'drag-entity-here',
         })
         slotDefault: () => Array<ViewComponent>;
-
-        @Slot({
-          title: '空状态时显示的内容',
-        })
-        slotEmpty: () => Array<ViewComponent>;
 
         @Slot({
             title: '项',

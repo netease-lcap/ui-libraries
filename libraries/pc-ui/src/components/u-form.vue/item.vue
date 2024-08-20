@@ -9,12 +9,7 @@
   :layout="layout"
 >
     <label :class="$style.label" :required="required" :position="requiredPosition" v-show="label || title || $slots.label || currentLabelSize !== 'auto'" vusion-slot-name="label" vusion-slot-name-edit="label">
-        <span
-          :class="$style.text"
-          :designer-empty="!$slots.label && !(label || title) && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']"
-          vusion-slot-name-edit="label"
-          v-ellipsis-title
-        >
+        <span :class="$style.text" vusion-slot-name-edit="label" v-ellipsis-title>
             <slot name="label">{{ label || title }}</slot>
             <s-empty
                 v-if="!$slots.label

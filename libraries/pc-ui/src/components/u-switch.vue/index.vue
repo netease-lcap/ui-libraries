@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { sync } from '@lcap/vue2-utils';
 import MField from '../m-field.vue';
 import UPreview from '../u-text.vue';
 import MPreview from '../u-text.vue/preview';
@@ -19,17 +18,7 @@ import i18nMixin from '../../mixins/i18n';
 
 export default {
     name: 'u-switch',
-    mixins: [
-      MField,
-      MPreview,
-      i18nMixin('u-switch'),
-      sync({
-        value: 'currentValue',
-        readonly: 'readonly',
-        preview: 'isPreview',
-        disabled: 'disabled',
-      }),
-    ],
+    mixins: [MField, MPreview, i18nMixin('u-switch')],
     components: {
       UPreview,
     },
