@@ -112,10 +112,11 @@
               <van-empty-col v-if="(!slots('item')) && $env.VUE_APP_DESIGNER"></van-empty-col>
             </component>
           </div>
-          <div :class="$style.status" status="loading" v-if="currentLoading">
-            <slot name="loading"
-              ><u-spinner></u-spinner> {{ loadingText }}</slot
-            >
+          <div v-if="refreshing">
+            <!-- display nothing -->
+          </div>
+          <div :class="$style.status" status="loading" v-else-if="currentLoading">
+            <slot name="loading"><u-spinner></u-spinner> {{ loadingText }}</slot>
           </div>
           <div
             :class="$style.status"
@@ -376,6 +377,14 @@ export default {
     },
     async refresh() {
       this.refreshing = true;
+
+      await this.reload();
+
+      this.refreshing = false;
+
+    },
+    async reload() {
+      this.currentLoading = true;
       // eslint-disable-next-line no-console
       try {
         await this.currentDataSource.reload();
@@ -402,8 +411,8 @@ export default {
       } catch (error) {
         // eslint-disable-next-line no-console
       }
-      this.refreshing = false;
       this.$emit('load', undefined, this);
+      this.currentLoading = false;
     },
     onScroll(e) {
       if (this?.$env.VUE_APP_DESIGNER) return;
