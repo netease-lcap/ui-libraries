@@ -2,6 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    show: false,
   })
   @Component({
     title: '日期选择器',
