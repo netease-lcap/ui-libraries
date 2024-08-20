@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
 import * as LcapUI from '@lcap/pc-ui/src/index';
+import * as ElementPro from '@lcap/element-pro';
 import 'element-ui/lib/theme-chalk/index.css';
+import '@lcap/element-pro/dist-theme/index.css';
 import Loading from 'element-ui/lib/loading';
 import Message from 'element-ui/lib/message';
 import * as components from './components';
@@ -18,6 +20,7 @@ export const install = (Vue) => {
   Object.keys(components).forEach((key) => {
     Vue.component(components[key].name, components[key]);
   });
+  Vue.use(ElementPro);
   Vue.use(Loading);
   Vue.directive('hoist-data-attribute', {
     inserted(el, binding) {

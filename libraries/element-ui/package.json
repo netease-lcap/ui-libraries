@@ -47,6 +47,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@lcap/builder": "workspace:*",
     "@lcap/pc-ui": "workspace:*",
+    "@lcap/element-pro": "workspace:*",
     "@lcap/storybook-vue-vite": "workspace:*",
     "@lcap/vite-plugin-vue2": "workspace:*",
     "@nasl/ast-mini": "3.9.0-beta",

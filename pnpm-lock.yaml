@@ -310,6 +310,9 @@ importers:
       '@lcap/builder':
         specifier: workspace:*
         version: link:../../packages/builder
+      '@lcap/element-pro':
+        specifier: workspace:*
+        version: link:../element-pro
       '@lcap/pc-ui':
         specifier: workspace:*
         version: link:../pc-ui

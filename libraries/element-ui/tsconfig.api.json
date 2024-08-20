@@ -26,6 +26,7 @@
   "include": [
     "./src/components/*/api.ts",
     "./src/typings.d.ts",
-    "../pc-ui/src/components/*/api.ts"
+    "../pc-ui/src/components/*/api.ts",
+    "../element-pro/src/components/*/api.ts"
   ]
 }

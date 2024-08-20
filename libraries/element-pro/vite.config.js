@@ -73,8 +73,17 @@ export default defineConfig(({ command }) => {
       },
       outDir: 'dist-theme',
       modulePreload: false,
-      sourcemap: true,
-      minify: true,
+      sourcemap: false,
+      minify: false,
+      rollupOptions: {
+        external: ['vue', 'vue-router', 'vue-i18n', '@vue/composition-api'],
+        globals: {
+          vue: 'Vue',
+          'vue-router': 'VueRouter',
+          'vue-i18n': 'VueI18n',
+          '@vue/composition-api': 'VueCompositionAPI',
+        },
+      },
     },
     test: {
       environment: 'jsdom',
