@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import VueCompositionAPI from '@vue/composition-api';
 import './theme.css';
 import * as components from './components';
 
@@ -11,6 +12,7 @@ export const install = (Vue) => {
   }
 
   installed = true;
+  Vue.use(VueCompositionAPI);
   Object.keys(components).forEach((key) => {
     Vue.component(key, components[key]);
   });
