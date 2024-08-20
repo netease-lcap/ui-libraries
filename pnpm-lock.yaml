@@ -23,15 +23,6 @@ importers:
       '@types/node':
         specifier: ^20.11.26
         version: 20.11.26
-      '@types/react':
-        specifier: ^18.2.45
-        version: 18.2.45
-      '@types/react-dom':
-        specifier: ^18.2.18
-        version: 18.2.18
-      '@types/react-test-renderer':
-        specifier: ^18.0.7
-        version: 18.0.7
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.15.0
         version: 6.15.0(@typescript-eslint/parser@6.15.0(eslint@8.56.0)(typescript@5.3.3))(eslint@8.56.0)(typescript@5.3.3)
@@ -65,15 +56,6 @@ importers:
       eslint-plugin-promise:
         specifier: ^6.1.1
         version: 6.1.1(eslint@8.56.0)
-      eslint-plugin-react:
-        specifier: ^7.33.2
-        version: 7.33.2(eslint@8.56.0)
-      eslint-plugin-react-hooks:
-        specifier: ^4.6.0
-        version: 4.6.0(eslint@8.56.0)
-      eslint-plugin-react-refresh:
-        specifier: ^0.4.5
-        version: 0.4.5(eslint@8.56.0)
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
@@ -92,6 +74,190 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
+
+  libraries/element-pro:
+    dependencies:
+      '@lcap/validator':
+        specifier: workspace:*
+        version: link:../../packages/validator
+      '@lcap/vue2-utils':
+        specifier: workspace:*
+        version: link:../../packages/vue2-utils
+      '@popperjs/core':
+        specifier: ^2.4.0
+        version: 2.11.8
+      '@types/clipboard':
+        specifier: ^2.0.1
+        version: 2.0.7
+      '@types/lodash':
+        specifier: 4.14.182
+        version: 4.14.182
+      '@types/raf':
+        specifier: ^3.4.0
+        version: 3.4.3
+      '@types/sortablejs':
+        specifier: ^1.10.7
+        version: 1.15.8
+      '@types/tinycolor2':
+        specifier: ^1.4.3
+        version: 1.4.6
+      '@types/validator':
+        specifier: ^13.1.3
+        version: 13.11.8
+      '@vue/babel-helper-vue-jsx-merge-props':
+        specifier: ^1.4.0
+        version: 1.4.0
+      '@vue/composition-api':
+        specifier: ^1.7.2
+        version: 1.7.2(vue@2.6.12)
+      classnames:
+        specifier: ^2.2.6
+        version: 2.5.1
+      clipboard:
+        specifier: ^2.0.8
+        version: 2.0.11
+      dayjs:
+        specifier: 1.11.10
+        version: 1.11.10
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      mitt:
+        specifier: ^3.0.0
+        version: 3.0.1
+      raf:
+        specifier: ^3.4.1
+        version: 3.4.1
+      sortablejs:
+        specifier: ^1.15.0
+        version: 1.15.2
+      tinycolor2:
+        specifier: ^1.4.2
+        version: 1.6.0
+      uid:
+        specifier: ^2.0.2
+        version: 2.0.2
+      validator:
+        specifier: ^13.5.1
+        version: 13.11.0
+    devDependencies:
+      '@babel/plugin-proposal-nullish-coalescing-operator':
+        specifier: ^7.18.6
+        version: 7.18.6(@babel/core@7.23.6)
+      '@babel/plugin-proposal-optional-chaining':
+        specifier: ^7.21.0
+        version: 7.21.0(@babel/core@7.23.6)
+      '@lcap/builder':
+        specifier: workspace:*
+        version: link:../../packages/builder
+      '@lcap/storybook-vue-vite':
+        specifier: workspace:*
+        version: link:../../packages/storybook-vue-vite
+      '@lcap/vite-plugin-vue2':
+        specifier: workspace:*
+        version: link:../../packages/vite-plugin-vue2
+      '@nasl/ast-mini':
+        specifier: 3.9.0-beta
+        version: 3.9.0-beta
+      '@nasl/types':
+        specifier: 0.1.9-alpha
+        version: 0.1.9-alpha
+      '@storybook/addon-essentials':
+        specifier: ^7.6.17
+        version: 7.6.17(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@storybook/addon-interactions':
+        specifier: ^7.6.17
+        version: 7.6.17
+      '@storybook/addon-links':
+        specifier: ^7.6.17
+        version: 7.6.17(react@18.2.0)
+      '@storybook/addon-onboarding':
+        specifier: ^1.0.10
+        version: 1.0.10(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@storybook/blocks':
+        specifier: ^7.6.17
+        version: 7.6.17(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@storybook/builder-vite':
+        specifier: ^7.6.17
+        version: 7.6.17(typescript@5.3.3)(vite@5.0.10(@types/node@20.11.26)(less@4.2.0)(terser@5.26.0))
+      '@storybook/test':
+        specifier: ^7.6.17
+        version: 7.6.17(vitest@1.1.0(@types/node@20.11.26)(jsdom@23.0.1)(less@4.2.0)(terser@5.26.0))
+      '@storybook/vue':
+        specifier: ^7.6.17
+        version: 7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0(esbuild@0.18.20)))(vue@2.6.12)
+      '@testing-library/vue':
+        specifier: '5'
+        version: 5.9.0(vue-template-compiler@2.6.12)(vue@2.6.12)
+      '@types/fs-extra':
+        specifier: ^11.0.4
+        version: 11.0.4
+      '@vitest/coverage-v8':
+        specifier: ^1.1.0
+        version: 1.1.0(vitest@1.1.0(@types/node@20.11.26)(jsdom@23.0.1)(less@4.2.0)(terser@5.26.0))
+      '@vue/test-utils':
+        specifier: ^1.3.5
+        version: 1.3.6(vue-template-compiler@2.6.12)(vue@2.6.12)
+      autoprefixer:
+        specifier: ^10.4.16
+        version: 10.4.16(postcss@8.4.35)
+      color:
+        specifier: ^4.2.3
+        version: 4.2.3
+      fs-extra:
+        specifier: ^9.0.1
+        version: 9.1.0
+      glob:
+        specifier: ^10.3.10
+        version: 10.3.10
+      jest-serializer-vue-tjw:
+        specifier: ^3.20.0
+        version: 3.20.0
+      js-yaml:
+        specifier: ^3.14.0
+        version: 3.14.1
+      jsdom:
+        specifier: ^23.0.1
+        version: 23.0.1
+      remark-parse:
+        specifier: ^11.0.0
+        version: 11.0.0
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.5
+      storybook:
+        specifier: ^7.6.17
+        version: 7.6.17
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+      unified:
+        specifier: ^11.0.4
+        version: 11.0.4
+      vite:
+        specifier: ^5.0.10
+        version: 5.0.10(@types/node@20.11.26)(less@4.2.0)(terser@5.26.0)
+      vitest:
+        specifier: ^1.1.0
+        version: 1.1.0(@types/node@20.11.26)(jsdom@23.0.1)(less@4.2.0)(terser@5.26.0)
+      vitest-canvas-mock:
+        specifier: ^0.3.3
+        version: 0.3.3(vitest@1.1.0(@types/node@20.11.26)(jsdom@23.0.1)(less@4.2.0)(terser@5.26.0))
+      vue:
+        specifier: 2.6.12
+        version: 2.6.12
+      vue-class-component:
+        specifier: ^7.2.6
+        version: 7.2.6(vue@2.6.12)
+      vue-i18n:
+        specifier: ^8.15.5
+        version: 8.28.2(vue@2.6.12)
+      vue-router:
+        specifier: 3.3.4
+        version: 3.3.4(vue@2.6.12)
+      vue-template-compiler:
+        specifier: 2.6.12
+        version: 2.6.12
 
   libraries/element-ui:
     dependencies:
@@ -189,9 +355,6 @@ importers:
       '@vant/area-data':
         specifier: 1.1.1
         version: 1.1.1
-      '@vitejs/plugin-react':
-        specifier: ^4.2.1
-        version: 4.2.1(vite@5.0.10(@types/node@20.11.26)(less@4.2.0)(terser@5.26.0))
       '@vitest/coverage-v8':
         specifier: ^1.1.0
         version: 1.1.0(vitest@1.1.0(@types/node@20.11.26)(jsdom@23.0.1)(less@4.2.0)(terser@5.26.0))
@@ -3605,6 +3768,10 @@ packages:
   '@types/chai@4.3.11':
     resolution: {integrity: sha512-qQR1dr2rGIHYlJulmr8Ioq3De0Le9E4MJ5AiaeAETJJpndT1uUNHsGFK3L/UIu+rbkQSdj8J/w2bCsBZc/Y5fQ==}
 
+  '@types/clipboard@2.0.7':
+    resolution: {integrity: sha512-VwVFUHlneOsWfv/GaaY7Kwk4XasDqkAlyFQtsHxnOw0yyBYWTrlEXtmb9RtC+VFBCdtuOeIXECmELNd5RrKp/g==}
+    deprecated: This is a stub types definition. clipboard provides its own type definitions, so you do not need this installed.
+
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
 
@@ -3808,6 +3975,9 @@ packages:
   '@types/linkify-it@3.0.5':
     resolution: {integrity: sha512-yg6E+u0/+Zjva+buc3EIb+29XEg4wltq7cSmd4Uc2EE/1nUVmxyzpX6gUXD0V8jIrG0r7YeOGVIbYRkxeooCtw==}
 
+  '@types/lodash@4.14.182':
+    resolution: {integrity: sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==}
+
   '@types/lodash@4.14.202':
     resolution: {integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==}
 
@@ -3880,6 +4050,9 @@ packages:
   '@types/qs@6.9.10':
     resolution: {integrity: sha512-3Gnx08Ns1sEoCrWssEgTSJs/rsT2vhGP+Ja9cnnk9k4ALxinORlQneLXFeFKOTJMOeZUFD1s7w+w2AphTpvzZw==}
 
+  '@types/raf@3.4.3':
+    resolution: {integrity: sha512-c4YAvMedbPZ5tEyxzQdMoOhhJ4RD3rngZIdwC2/qDN3d7JpEhB6fiBRKVY1lg5B7Wk+uPBjn5f39j1/2MY1oOw==}
+
   '@types/range-parser@1.2.7':
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
 
@@ -3912,6 +4085,12 @@ packages:
 
   '@types/shelljs@0.8.15':
     resolution: {integrity: sha512-vzmnCHl6hViPu9GNLQJ+DZFd6BQI2DBTUeOvYHqkWQLMfKAAQYMb/xAmZkTogZI/vqXHCWkqDRymDI5p0QTi5Q==}
+
+  '@types/sortablejs@1.15.8':
+    resolution: {integrity: sha512-b79830lW+RZfwaztgs1aVPgbasJ8e7AXtZYHTELNXZPsERt4ymJdjV4OccDbHQAvHrCcFpbF78jkm0R6h/pZVg==}
+
+  '@types/tinycolor2@1.4.6':
+    resolution: {integrity: sha512-iEN8J0BoMnsWBqjVbWH/c0G0Hh7O21lpR2/+PrvAVgWdzL7eexIFm4JN/Wn10PTcmNdtS6U67r499mlWMXOxNw==}
 
   '@types/unist@2.0.10':
     resolution: {integrity: sha512-IfYcSBWE3hLpBg8+X2SEa8LVkJdJEkT2Ese2aaLs3ptGdVtABxndrMaxuFlQ1qdFf9Q5rDvDpxI3WwgvKFAsQA==}
@@ -6045,11 +6224,6 @@ packages:
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
 
-  eslint-plugin-react-refresh@0.4.5:
-    resolution: {integrity: sha512-D53FYKJa+fDmZMtriODxvhwrO+IOqrxoEo21gMA0sjHdU6dPVH4OhyFip9ypl8HOF5RV5KdTo+rBQLvnY2cO8w==}
-    peerDependencies:
-      eslint: '>=7'
-
   eslint-plugin-react@7.33.2:
     resolution: {integrity: sha512-73QQMKALArI8/7xGLNI/3LylrEYrlKZSb5C9+q3OtOewTnMQi5cT+aE9E41sLCmli3I9PGGmD1yiZydyo4FEPw==}
     engines: {node: '>=4'}
@@ -6492,6 +6666,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   global-dirs@0.1.1:
     resolution: {integrity: sha512-NknMLn7F2J7aflwFOlGdNIuCDpN3VGoSoB+aap3KABFWbHVn1TCgFC+np23J8W2BiZbjfEw3BFBycSMv1AFblg==}
@@ -7642,6 +7817,9 @@ packages:
     resolution: {integrity: sha512-bAxsR8BVfj60DWXHE3u30oHzfl4G7khkSuPW+qvpd7jFRHm7dLxOjUk1EHACJ/hxLY8phGJ0YhYHZo7jil7Qdg==}
     engines: {node: '>= 8'}
 
+  mitt@3.0.1:
+    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
+
   mixme@0.5.10:
     resolution: {integrity: sha512-5H76ANWinB1H3twpJ6JY8uvAtpmFvHNArpilJAjXRKXSDDLPIMoZArw5SH0q9z+lLs8IrMw7Q2VWpWimFKFT1Q==}
     engines: {node: '>= 8.0.0'}
@@ -7995,6 +8173,9 @@ packages:
   pend@1.2.0:
     resolution: {integrity: sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==}
 
+  performance-now@2.1.0:
+    resolution: {integrity: sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==}
+
   picocolors@0.2.1:
     resolution: {integrity: sha512-cMlDqaLEqfSaW8Z7N5Jw+lyIW869EzT73/F5lhtY9cLGoVxSXznfgfXMO0Z5K0o0Q2TkTXq+0KFsdnSe3jDViA==}
 
@@ -8267,6 +8448,9 @@ packages:
   quick-lru@4.0.1:
     resolution: {integrity: sha512-ARhCpm70fzdcvNQfPoy49IaanKkTlRWF2JMzqhcJbhSFRZv7nPTvZJdcY7301IPmvW+/p0RgIWnQDLJxifsQ7g==}
     engines: {node: '>=8'}
+
+  raf@3.4.1:
+    resolution: {integrity: sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==}
 
   ramda@0.29.0:
     resolution: {integrity: sha512-BBea6L67bYLtdbOqfp8f58fPMqEwx0doL+pAi8TZyp2YWz8R9G8z9x75CZI8W+ftqhFHCpEX2cRnUUXK130iKA==}
@@ -9023,6 +9207,9 @@ packages:
     resolution: {integrity: sha512-vCsKNQxb7PnCNd2wY1WClWifAc2lwqsG8OaswpJkVJsvMGcnEntdTCDajZCkk93Ay1U3t/9puJmb525Rg5MZBA==}
     engines: {node: '>=6'}
     hasBin: true
+
+  sortablejs@1.15.2:
+    resolution: {integrity: sha512-FJF5jgdfvoKn1MAKSdGs33bIqLi3LmsgVTliuX6iITj834F+JRQZN90Z93yql8h0K2t0RwDPBmxwlbZfDcxNZA==}
 
   source-map-js@1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
@@ -9811,6 +9998,11 @@ packages:
     resolution: {integrity: sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==}
     engines: {node: '>=0.10.0'}
 
+  vue-class-component@7.2.6:
+    resolution: {integrity: sha512-+eaQXVrAm/LldalI272PpDe3+i4mPis0ORiMYxF6Ae4hyuCh15W8Idet7wPUEs4N4YptgFHGys4UrgNQOMyO6w==}
+    peerDependencies:
+      vue: ^2.0.0
+
   vue-cropper@0.5.11:
     resolution: {integrity: sha512-UeA3qL2BLCTGkOEAxEsxSNFO+qLYAn6YRHv4oS32cP9lMhF1vFmnAf/z+ZamtR0/Fh3sbZeZUCLVR2Ol2/dpTQ==}
 
@@ -10210,7 +10402,7 @@ snapshots:
       '@ant-design/icons': 5.2.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-provider': 2.13.5(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-utils': 2.15.4(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       antd: 5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       classnames: 2.5.1
       omit.js: 2.0.2
@@ -10246,7 +10438,7 @@ snapshots:
       '@ant-design/pro-form': 2.24.4(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(rc-field-form@1.42.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-skeleton': 2.1.10(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-utils': 2.15.4(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       antd: 5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       rc-resize-observer: 0.2.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       rc-util: 5.39.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -10261,7 +10453,7 @@ snapshots:
       '@ant-design/icons': 5.2.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-provider': 2.13.5(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-utils': 2.15.4(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       '@chenshuai2144/sketch-color': 1.0.9(react@18.2.0)
       antd: 5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       classnames: 2.5.1
@@ -10280,7 +10472,7 @@ snapshots:
       '@ant-design/pro-field': 2.14.6(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-provider': 2.13.5(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-utils': 2.15.4(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       '@chenshuai2144/sketch-color': 1.0.9(react@18.2.0)
       '@umijs/use-params': 1.0.9(react@18.2.0)
       antd: 5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -10299,7 +10491,7 @@ snapshots:
       '@ant-design/icons': 5.2.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-provider': 2.13.5(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-utils': 2.15.4(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       '@umijs/route-utils': 4.0.1
       '@umijs/use-params': 1.0.9(react@18.2.0)
       antd: 5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -10321,7 +10513,7 @@ snapshots:
       '@ant-design/pro-field': 2.14.6(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-table': 3.14.2(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(rc-field-form@1.42.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-utils': 2.15.4(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       antd: 5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       classnames: 2.5.1
       dayjs: 1.11.10
@@ -10336,7 +10528,7 @@ snapshots:
   '@ant-design/pro-provider@2.13.5(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@ant-design/cssinjs': 1.18.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       '@ctrl/tinycolor': 3.6.1
       antd: 5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       rc-util: 5.39.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -10346,7 +10538,7 @@ snapshots:
 
   '@ant-design/pro-skeleton@2.1.10(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       antd: 5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10359,7 +10551,7 @@ snapshots:
       '@ant-design/pro-form': 2.24.4(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(rc-field-form@1.42.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-provider': 2.13.5(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-utils': 2.15.4(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       '@dnd-kit/core': 6.1.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@dnd-kit/modifiers': 6.0.1(@dnd-kit/core@6.1.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       '@dnd-kit/sortable': 7.0.2(@dnd-kit/core@6.1.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
@@ -10381,7 +10573,7 @@ snapshots:
     dependencies:
       '@ant-design/icons': 5.2.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ant-design/pro-provider': 2.13.5(antd@5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       antd: 5.15.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       classnames: 2.5.1
       dayjs: 1.11.10
@@ -11349,7 +11541,7 @@ snapshots:
 
   '@changesets/apply-release-plan@7.0.0':
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       '@changesets/config': 3.0.0
       '@changesets/get-version-range-type': 0.4.0
       '@changesets/git': 3.0.0
@@ -11365,7 +11557,7 @@ snapshots:
 
   '@changesets/assemble-release-plan@6.0.0':
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       '@changesets/errors': 0.2.0
       '@changesets/get-dependents-graph': 2.0.0
       '@changesets/types': 6.0.0
@@ -11435,7 +11627,7 @@ snapshots:
 
   '@changesets/get-release-plan@4.0.0':
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       '@changesets/assemble-release-plan': 6.0.0
       '@changesets/config': 3.0.0
       '@changesets/pre': 2.0.0
@@ -11447,7 +11639,7 @@ snapshots:
 
   '@changesets/git@3.0.0':
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       '@changesets/errors': 0.2.0
       '@changesets/types': 6.0.0
       '@manypkg/get-packages': 1.1.3
@@ -11466,7 +11658,7 @@ snapshots:
 
   '@changesets/pre@2.0.0':
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       '@changesets/errors': 0.2.0
       '@changesets/types': 6.0.0
       '@manypkg/get-packages': 1.1.3
@@ -11474,7 +11666,7 @@ snapshots:
 
   '@changesets/read@0.6.0':
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       '@changesets/git': 3.0.0
       '@changesets/logger': 0.1.0
       '@changesets/parse': 0.4.0
@@ -11489,7 +11681,7 @@ snapshots:
 
   '@changesets/write@0.3.0':
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       '@changesets/types': 6.0.0
       fs-extra: 7.0.1
       human-id: 1.0.2
@@ -12056,7 +12248,7 @@ snapshots:
 
   '@manypkg/get-packages@1.1.3':
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.24.0
       '@changesets/types': 4.1.0
       '@manypkg/find-root': 1.1.0
       fs-extra: 8.1.0
@@ -13400,6 +13592,10 @@ snapshots:
 
   '@types/chai@4.3.11': {}
 
+  '@types/clipboard@2.0.7':
+    dependencies:
+      clipboard: 2.0.11
+
   '@types/connect@3.4.38':
     dependencies:
       '@types/node': 20.11.26
@@ -13636,6 +13832,8 @@ snapshots:
 
   '@types/linkify-it@3.0.5': {}
 
+  '@types/lodash@4.14.182': {}
+
   '@types/lodash@4.14.202': {}
 
   '@types/markdown-it@10.0.3':
@@ -13700,6 +13898,8 @@ snapshots:
 
   '@types/qs@6.9.10': {}
 
+  '@types/raf@3.4.3': {}
+
   '@types/range-parser@1.2.7': {}
 
   '@types/react-dom@18.2.18':
@@ -13739,6 +13939,10 @@ snapshots:
     dependencies:
       '@types/glob': 7.2.0
       '@types/node': 20.11.26
+
+  '@types/sortablejs@1.15.8': {}
+
+  '@types/tinycolor2@1.4.6': {}
 
   '@types/unist@2.0.10': {}
 
@@ -16166,10 +16370,6 @@ snapshots:
     dependencies:
       eslint: 8.56.0
 
-  eslint-plugin-react-refresh@0.4.5(eslint@8.56.0):
-    dependencies:
-      eslint: 8.56.0
-
   eslint-plugin-react@7.33.2(eslint@8.56.0):
     dependencies:
       array-includes: 3.1.7
@@ -18062,6 +18262,8 @@ snapshots:
       minipass: 3.3.6
       yallist: 4.0.0
 
+  mitt@3.0.1: {}
+
   mixme@0.5.10: {}
 
   mkdirp-classic@0.5.3: {}
@@ -18400,6 +18602,8 @@ snapshots:
 
   pend@1.2.0: {}
 
+  performance-now@2.1.0: {}
+
   picocolors@0.2.1: {}
 
   picocolors@1.0.0: {}
@@ -18691,6 +18895,10 @@ snapshots:
   queue-tick@1.0.1: {}
 
   quick-lru@4.0.1: {}
+
+  raf@3.4.1:
+    dependencies:
+      performance-now: 2.1.0
 
   ramda@0.29.0: {}
 
@@ -19641,6 +19849,8 @@ snapshots:
       wcwidth: 1.0.1
       yargs: 15.4.1
 
+  sortablejs@1.15.2: {}
+
   source-map-js@1.0.2: {}
 
   source-map-support@0.5.21:
@@ -20444,6 +20654,10 @@ snapshots:
       - terser
 
   void-elements@3.1.0: {}
+
+  vue-class-component@7.2.6(vue@2.6.12):
+    dependencies:
+      vue: 2.6.12
 
   vue-cropper@0.5.11: {}
 
