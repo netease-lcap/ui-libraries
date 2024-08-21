@@ -21,8 +21,22 @@ export default {
 };
 
 export const Default = {
-  name: '基础示例',
+  name: '线性',
   render: () => ({
-    template: '<el-progress></el-progress>',
+    template: '<el-progress style="width: 300px;"></el-progress>',
+  }),
+};
+
+export const Circle = {
+  name: '环形',
+  render: () => ({
+    template: '<el-progress type="circle"></el-progress>',
+  }),
+};
+
+export const Dashboard = {
+  name: '仪表盘',
+  render: () => ({
+    template: '<el-progress type="dashboard"></el-progress>',
   }),
 };

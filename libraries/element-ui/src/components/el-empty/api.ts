@@ -2,6 +2,9 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    ideusage: {
+      idetype: "container"
+    }
   })
   @Component({
     title: '空状态',
@@ -20,7 +23,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '图片地址',
       description: '图片地址',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'ImageSetter' },
     })
     image: nasl.core.String;
 
@@ -28,17 +31,20 @@ namespace nasl.ui {
       group: '主要属性',
       title: '图片大小（宽度）',
       description: '图片大小（宽度）',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        min: 0,
+      },
     })
     imageSize: nasl.core.Decimal;
 
-    @Prop({
-      group: '主要属性',
-      title: '文本描述',
-      description: '文本描述',
-      setter: { concept: 'InputSetter' },
-    })
-    description: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '文本描述',
+    //   description: '文本描述',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // description: nasl.core.String;
 
     @Slot({
       title: '自定义底部内容',
@@ -46,11 +52,11 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
 
-    @Slot({
-      title: '自定义图片',
-      description: '自定义图片',
-    })
-    slotImage: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: '自定义图片',
+    //   description: '自定义图片',
+    // })
+    // slotImage: () => Array<ViewComponent>;
 
     @Slot({
       title: '自定义描述文字',

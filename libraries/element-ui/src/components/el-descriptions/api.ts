@@ -33,7 +33,11 @@ namespace nasl.ui {
       group: '数据属性',
       title: '一行Descriptions Item的数量',
       description: '一行 `Descriptions Item` 的数量',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        precision: 0,
+        min: 1,
+      },
     })
     column: nasl.core.Decimal = 3;
 
@@ -54,26 +58,26 @@ namespace nasl.ui {
       description: '列表的尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '中等' }, { title: '小型' }, { title: '迷你' }],
+        options: [{title: '默认' }, { title: '中等' }, { title: '小型' }, { title: '迷你' }],
       },
     })
-    size: 'medium' | 'small' | 'mini';
+    size: '' | 'medium' | 'small' | 'mini' = '';
 
-    @Prop({
-      group: '主要属性',
-      title: '标题',
-      description: '标题文本，显示在左上方',
-      setter: { concept: 'InputSetter' },
-    })
-    title: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '标题',
+    //   description: '标题文本，显示在左上方',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // title: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '操作区文本',
-      description: '操作区文本，显示在右上方',
-      setter: { concept: 'InputSetter' },
-    })
-    extra: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '操作区文本',
+    //   description: '操作区文本，显示在右上方',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // extra: nasl.core.String;
 
     @Prop({
       group: '状态属性',
@@ -105,7 +109,7 @@ namespace nasl.ui {
       description: '自定义标签样式',
       setter: { concept: 'InputSetter' },
     })
-    labelStyle: object;
+    labelStyle: nasl.core.String = '{}';
 
     @Prop({
       group: '样式属性',
@@ -113,7 +117,7 @@ namespace nasl.ui {
       description: '自定义内容样式',
       setter: { concept: 'InputSetter' },
     })
-    contentStyle: object;
+    contentStyle: nasl.core.String = '{}';;
 
     @Slot({
       title: '标题',
@@ -133,7 +137,10 @@ namespace nasl.ui {
       snippets: [
         {
           title: 'Descriptions Item',
-          code: '<el-descriptions-item></el-descriptions-item>',
+          code: `<el-descriptions-item>
+            <template #label>标签</template>
+            内容
+          </el-descriptions-item>`,
         },
       ],
     })
@@ -144,10 +151,15 @@ namespace nasl.ui {
     ideusage: {
       "idetype": "container",
       "parentAccept": "target.tag === 'el-descriptions'",
-      "selector": {
-        "expression": "this.getElement(el => el.slotTarget === 'label')",
-        "cssSelector": "div[class='el-descriptions-item']"
-      },
+      "selector": [
+        {
+          "expression": "this.getElement(el => el.slotTarget === 'label')",
+          "cssSelector": ".el-descriptions-item__label"
+        }, {
+          "expression": "this",
+          "cssSelector": ".el-descriptions-item__content"
+        }
+      ],
     }
   })
   @Component({
@@ -163,19 +175,23 @@ namespace nasl.ui {
   }
 
   export class ElDescriptionsItemOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '标签文本',
-      description: '标签文本',
-      setter: { concept: 'InputSetter' },
-    })
-    label: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '标签文本',
+    //   description: '标签文本',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // label: nasl.core.String;
 
     @Prop({
       group: '数据属性',
       title: '列的数量',
       description: '列的数量',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        precision: 0,
+        min: 1,
+      },
     })
     span: nasl.core.Decimal = 1;
 
@@ -201,7 +217,7 @@ namespace nasl.ui {
       description: '自定义标签样式',
       setter: { concept: 'InputSetter' },
     })
-    labelStyle: object;
+    labelStyle: nasl.core.String = '{}';
 
     @Prop({
       group: '样式属性',
@@ -209,7 +225,7 @@ namespace nasl.ui {
       description: '自定义内容样式',
       setter: { concept: 'InputSetter' },
     })
-    contentStyle: object;
+    contentStyle: nasl.core.String = '{}';
 
     @Slot({
       title: '内容',

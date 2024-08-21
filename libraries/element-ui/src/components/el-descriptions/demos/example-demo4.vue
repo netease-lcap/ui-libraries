@@ -3,22 +3,41 @@
 <template>
   <div>
     <el-descriptions title="自定义样式列表" :column="3" border>
-      <el-descriptions-item
-        label="用户名"
-        label-class-name="my-label"
-        content-class-name="my-content"
-        >kooriookami</el-descriptions-item
-      >
-      <el-descriptions-item label="手机号">18100000000</el-descriptions-item>
-      <el-descriptions-item label="居住地">苏州市</el-descriptions-item>
-      <el-descriptions-item label="备注">
+      <el-descriptions-item label-class-name="my-label" content-class-name="my-content">
+        <template slot="label">
+          <i class="el-icon-user"></i>
+          用户名
+        </template>
+        kooriookami
+      </el-descriptions-item>
+      <el-descriptions-item>
+        <template slot="label">
+          <i class="el-icon-mobile-phone"></i>
+          手机号
+        </template>
+        18100000000
+      </el-descriptions-item>
+      <el-descriptions-item>
+        <template slot="label">
+          <i class="el-icon-location-outline"></i>
+          居住地
+        </template>
+        苏州市
+      </el-descriptions-item>
+      <el-descriptions-item>
+        <template slot="label">
+          <i class="el-icon-tickets"></i>
+          备注
+        </template>
         <el-tag size="small">学校</el-tag>
       </el-descriptions-item>
-      <el-descriptions-item
-        label="联系地址"
-        :contentStyle="{ 'text-align': 'right' }"
-        >江苏省苏州市吴中区吴中大道 1188 号</el-descriptions-item
-      >
+      <el-descriptions-item :contentStyle="{ 'text-align': 'right' }">
+        <template slot="label">
+          <i class="el-icon-office-building"></i>
+          联系地址
+        </template>
+        江苏省苏州市吴中区吴中大道 1188 号
+      </el-descriptions-item>
     </el-descriptions>
   </div>
 </template>

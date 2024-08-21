@@ -33,13 +33,20 @@ export const Example2 = {
     template: `<div>
   <div class="demo-type">
     <div>
-      <el-avatar icon="el-icon-user-solid"></el-avatar>
+      <p>element icon</p>
+      <el-avatar icon="user-solid"></el-avatar>
     </div>
     <div>
+      <p>链接</p>
       <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
     </div>
     <div>
+      <p>字符插槽</p>
       <el-avatar> user </el-avatar>
+    </div>
+    <div>
+      <p>svg icon</p>
+      <el-avatar icon="//minio-api.codewave-test.163yun.com/lowcode-static/user/csforkf/1723807833050_%E5%87%8F%E5%B0%91_reduce.svg"> </el-avatar>
     </div>
   </div>
 </div>`,

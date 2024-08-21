@@ -23,6 +23,13 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-skeleton></el-skeleton>',
+    template: `<el-skeleton>
+      <template #template>
+        <el-skeleton-item variant="image" style="width: 240px; height: 240px;" />
+        <el-skeleton-item variant="p" style="width: 50%" />
+        <el-skeleton-item variant="text" />
+        <el-skeleton-item variant="text" style="width: 30%;" />
+      </template>
+    </el-skeleton>`,
   }),
 };
