@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import 'element-ui/lib/theme-chalk/index.css';
-import '@lcap/element-pro/dist-theme/index.css';
 import Loading from 'element-ui/lib/loading';
 import Message from 'element-ui/lib/message';
 import * as components from './components';
