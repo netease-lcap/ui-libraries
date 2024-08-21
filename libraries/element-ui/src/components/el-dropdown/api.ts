@@ -35,6 +35,12 @@ namespace nasl.ui {
     group: 'Navigation',
   })
   export class ElDropdown<T, V> extends ViewComponent {
+    @Method({
+      title: '重新加载',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void { }
+
     constructor(options?: Partial<ElDropdownOptions<T, V>>) {
       super();
     }

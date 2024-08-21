@@ -63,12 +63,13 @@ export const useDataSource: NaslComponentPluginOptions = {
       onLoadData: loadDataFn,
       [$ref]: {
         reload(params = {}) {
-          if (!loadDataFn.value) {
+          const loadData = props.getEnd<LoadDataFunc | null>('onLoadData');
+          if (!loadData) {
             return;
           }
 
           // eslint-disable-next-line consistent-return
-          return loadDataFn.value(params);
+          return loadData(params);
         },
       },
       /* 删除多余的key 防止透传 */
