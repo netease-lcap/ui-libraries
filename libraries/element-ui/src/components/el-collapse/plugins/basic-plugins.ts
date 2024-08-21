@@ -15,7 +15,7 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
         const slotItemContent = propGet('slotContent');
         const data = propGet('data') || [];
         const valueField = propGet('valueField') || 'value';
-        const tabPaneProps = propGet<(c: any) => any>('tabPaneProps') || (() => ({}));
+        const itemProps = propGet<(c: any) => any>('itemProps') || (() => ({}));
         if (!Array.isArray(data) || data.length === 0) {
           return typeof slotDefault === 'function' ? slotDefault() : null;
         }
@@ -30,7 +30,7 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
           const childNodes: any[] = [];
           const contents = typeof slotItemContent === 'function' ? slotItemContent(current) : [];
           const titleVNodes = typeof slotItemTitle === 'function' ? slotItemTitle(current) : [];
-          const props = tabPaneProps(current);
+          const props = itemProps(current);
 
           childNodes.push(h('template', { slot: 'default' }, contents));
           if (Array.isArray(titleVNodes) && titleVNodes.length > 0) {

@@ -51,7 +51,7 @@ export const Example3 = {
 
 /*  数据源 */
 export const Example4 = {
-  name: '⾃定义时间戳',
+  name: '数据源',
   render: () => ({
     components: {
       exampleDemo: ExampleDemo4,

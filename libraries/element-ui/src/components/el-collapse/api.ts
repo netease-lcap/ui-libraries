@@ -96,7 +96,7 @@ namespace nasl.ui {
         concept: 'AnonymousFunctionSetter',
       },
     })
-    tabPaneProps: (current: Current<T>) => {
+    itemProps: (current: Current<T>) => {
       disabled: nasl.core.Boolean;
     };
 
@@ -122,7 +122,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '折叠面板项',
-          code: '<el-collapse-item><template #title>面板</template></el-collapse-item>',
+          code: '<el-collapse-item><template #title><el-text text="面板"></el-text></template></el-collapse-item>',
         },
       ],
     })
