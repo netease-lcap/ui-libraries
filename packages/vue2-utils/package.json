@@ -42,11 +42,17 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "uid": "^2.0.2"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.12",
+    "@vue/composition-api": "^1.7.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.136",
     "vue": "2.6.12",
+    "@vue/composition-api": "^1.7.2",
     "typescript": "^5.3.3"
   }
 }
