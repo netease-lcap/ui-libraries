@@ -16,7 +16,7 @@ export default {
 export const Example1 = {
   name: '基础用法',
   render: () => ({
-    template: '<div><el-empty description="描述文字"></el-empty></div>',
+    template: '<div><el-empty> <template #description>描述文字</template> </el-empty></div>',
   }),
 };
 

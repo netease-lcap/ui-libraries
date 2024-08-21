@@ -1,6 +1,7 @@
 import Component from '../index';
 import ExampleDemo1 from '../demos/example-demo1.vue';
 import ExampleDemo2 from '../demos/example-demo2.vue';
+import ExampleDemo3 from '../demos/example-demo3.vue';
 
 export default {
   id: 'el-collapse-examples',
@@ -62,5 +63,16 @@ export const Example3 = {
     <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
   </el-collapse-item>
 </el-collapse></div>`,
+  }),
+};
+
+/*  每次只能展开一个面板 */
+export const Example4 = {
+  name: '数据源',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo3,
+    },
+    template: '<example-demo></example-demo>',
   }),
 };

@@ -2,10 +2,13 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    ideusage: {
+      idetype: 'element',
+    }
   })
   @Component({
     title: '标记',
-    icon: '标记',
+    icon: 'badge',
     description: '出现在按钮、图标旁的数字或状态标记。',
     group: 'Display',
   })

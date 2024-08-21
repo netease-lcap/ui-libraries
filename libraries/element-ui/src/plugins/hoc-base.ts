@@ -24,6 +24,7 @@ import {
   isEmptyVNodes,
   getEventKeys,
   isShallowEqualArray,
+  isNullOrUndefined,
 } from './utils';
 import { $deletePropList, $ref, $render } from './constants';
 
@@ -128,7 +129,7 @@ const usePropMap = (props, ctx: SetupContext) => {
       return ctx.listeners[k];
     }
 
-    return ctx.attrs[k] || ctx.attrs[kebabCase(k)];
+    return isNullOrUndefined(ctx.attrs[k]) ? ctx.attrs[kebabCase(k)] : ctx.attrs[k];
   };
 
   const mapGet = (map: any, key: MapGetKey) => {
