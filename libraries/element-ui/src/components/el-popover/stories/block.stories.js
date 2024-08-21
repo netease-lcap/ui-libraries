@@ -25,6 +25,6 @@ export const Default = {
   name: '基础示例',
   render: () => ({
     template:
-      '<el-popover><><el-button slot="reference"></el-button></el-popover>',
+      '<el-popover trigger="click" ></el-popover>',
   }),
 };

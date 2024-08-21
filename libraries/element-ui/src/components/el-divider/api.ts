@@ -5,10 +5,9 @@ namespace nasl.ui {
     // 配置这个，是让分割线内可以拖入tex文本 需要有对应的slot插槽
     ideusage: {
       "idetype": "container",
-      "structured": true,
       "selector": {
         "expression": "this",
-        "cssSelector": "div[class='el-divider']"
+        "cssSelector": ".el-divider"
       },
     }
   })
@@ -54,3 +53,5 @@ namespace nasl.ui {
     slotDefault: () => Array<ViewComponent>;
   }
 }
+
+

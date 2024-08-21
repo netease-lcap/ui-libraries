@@ -8,7 +8,7 @@ namespace nasl.ui {
       "structured": true,
       "selector": {
         "expression": "this",
-        "cssSelector": "div[class='el-drawer']"
+        "cssSelector": ".el-drawer"
       },
     }
   })
@@ -41,13 +41,13 @@ namespace nasl.ui {
     })
     appendToBody: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '关闭前的回调，会暂停 Drawer 的关闭',
-      description: '关闭前的回调，会暂停 Drawer 的关闭',
-      setter: { concept: 'InputSetter' },
-    })
-    beforeClose: any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '关闭前的回调，会暂停 Drawer 的关闭',
+    //   description: '关闭前的回调，会暂停 Drawer 的关闭',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // beforeClose: any;
 
     @Prop({
       group: '主要属性',
@@ -123,13 +123,13 @@ namespace nasl.ui {
     })
     size: nasl.core.Decimal | nasl.core.String = '30%';
 
-    @Prop({
-      group: '主要属性',
-      title: 'Drawer 的标题',
-      description: 'Drawer 的标题，也可通过具名 slot （见下表）传入',
-      setter: { concept: 'InputSetter' },
-    })
-    title: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Drawer 的标题',
+    //   description: 'Drawer 的标题，也可通过具名 slot （见下表）传入',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // title: nasl.core.String;
 
     @Prop({
       group: '主要属性',

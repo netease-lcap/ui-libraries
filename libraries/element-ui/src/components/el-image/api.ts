@@ -72,18 +72,18 @@ namespace nasl.ui {
     })
     lazy: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '监听 scroll 事件的容器',
-      description: '开启懒加载后，监听 scroll 事件的容器',
-      setter: { concept: 'InputSetter' },
-    })
-    scrollContainer: nasl.core.String | any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '监听 scroll 事件的容器',
+    //   description: '开启懒加载后，监听 scroll 事件的容器',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // scrollContainer: nasl.core.String | any;
 
     @Prop({
       group: '主要属性',
       title: '开启图片预览功能',
-      description: '开启图片预览功能',
+      description: '开启图片预览功能,用逗号分隔',
       setter: { concept: 'InputSetter' },
     })
     previewSrcList: nasl.collection.List<nasl.core.String>;

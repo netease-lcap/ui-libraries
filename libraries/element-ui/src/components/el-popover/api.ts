@@ -4,17 +4,22 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'popover',
+      namedSlotOmitWrapper: ['reference'],
       selector: {
         expression: "this.getElement(el => el.slotTarget === 'reference')",
         cssSelector: "span[class='el-popover__reference-wrapper']",
+        placement: 'tail'
       },
-      actions: {
-        click: {
-          status:
-            "this.setCacheStatus('value', !(this.getCacheStatus('value') || false)) ",
-          default: "this.setCacheStatus('value', false)",
-        },
+      events: {
+        click: true,
       },
+      // actions: {
+      //   click: {
+      //     status:
+      //       "this.setCacheStatus('value', !(this.getCacheStatus('value') || false)) ",
+      //     default: "this.setCacheStatus('value', false)",
+      //   },
+      // },
     },
   })
   @Component({
