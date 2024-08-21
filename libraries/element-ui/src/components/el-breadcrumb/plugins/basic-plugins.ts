@@ -1,5 +1,5 @@
 import BreadcrumbItem from 'element-ui/lib/breadcrumb-item';
-import { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
+import { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 import { watch, shallowRef, unref } from '@vue/composition-api';
 import { getRouteComponentOptions } from '@/utils/router';
 

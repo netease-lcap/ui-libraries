@@ -1,5 +1,5 @@
 import { inject } from '@vue/composition-api';
-import { $render, NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
+import { $render, NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 import styles from '../index.module.css';
 
 /* 仅在 ide 环境生效的插件 */

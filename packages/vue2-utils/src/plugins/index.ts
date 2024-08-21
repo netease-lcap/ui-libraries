@@ -3,7 +3,7 @@ import Vue from 'vue';
 import VueCompositionAPI from '@vue/composition-api';
 import { uid } from 'uid';
 import type { ComponentOptions } from 'vue';
-import type { NaslComponentPluginOptions, PluginMap, PluginSetupFunction } from './plugin';
+import type { NaslComponentPluginOptions, PluginMap, PluginSetupFunction } from './types';
 import PluginManager from './plugin';
 import HocBaseComponent, { NaslComponentExtendInfo } from './hoc-base';
 

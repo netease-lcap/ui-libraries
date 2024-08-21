@@ -1,4 +1,4 @@
-import { $deletePropList, $render, $ref } from '@lcap/nasl-hoc-vue';
+import { $deletePropList, $render, $ref } from '@lcap/vue2-utils/plugins';
 import ElTooltip from 'element-ui/lib/tooltip';
 
 export const useTooltip = {

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
 import type { Ref, ComputedRef, SetupContext } from '@vue/composition-api';
-import _ from 'lodash';
 import type { CreateElement, VNode } from 'vue';
 import { $deletePropList, $render, $ref } from './constants';
 
@@ -74,50 +73,4 @@ export type PluginMap = { [name: string]: NaslComponentPluginOptions };
 export interface PluginInitOptions {
   name: string;
   plugin: { [name: string]: NaslComponentPluginOptions };
-}
-
-export default class PluginManager {
-  name: string = ''; // 组件名称
-
-  plugins: NaslComponentPluginOptions[] = [];
-
-  constructor({ name, plugin }: PluginInitOptions) {
-    this.name = name;
-    this.setPlugin(plugin);
-  }
-
-  setPlugin(plugin: PluginMap) {
-    const pluginArray = this.plugins.concat(Object.keys(plugin).map((name) => ({ order: 4, name, ...plugin[name] })));
-    const sortPlugin = _.orderBy(pluginArray, ['order'], ['asc']);
-    const unionPlugin = _.unionBy(sortPlugin, 'name');
-    this.plugins = unionPlugin;
-  }
-
-  getPluginSetup = (isDesigner) => {
-    const pluginSetups = this.plugins.filter((op) => {
-      if (!op || typeof op.setup !== 'function') {
-        return false;
-      }
-
-      if (!isDesigner && op.onlyUseIDE) {
-        return false;
-      }
-
-      return true;
-    }).map((op) => op.setup);
-    return pluginSetups;
-  };
-
-  getPluginPropKeys = (propKeys: string[]) => {
-    const keys = [...propKeys];
-    const ps = this.plugins.map((op) => (op.props || [])).flat();
-
-    ps.forEach((k) => {
-      if (keys.indexOf(k) === -1) {
-        keys.push(k);
-      }
-    });
-
-    return keys;
-  };
 }

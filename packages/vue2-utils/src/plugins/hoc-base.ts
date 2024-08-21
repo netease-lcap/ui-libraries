@@ -12,7 +12,8 @@ import {
   SetupContext,
 } from '@vue/composition-api';
 import { kebabCase } from 'lodash';
-import PluginManager, { MapGetKey, PluginSetupRef } from './plugin';
+import PluginManager from './plugin';
+import { MapGetKey, PluginSetupRef } from './types';
 import {
   getPropKeys,
   getRefValueMap,

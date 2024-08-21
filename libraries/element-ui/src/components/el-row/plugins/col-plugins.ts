@@ -1,5 +1,5 @@
 /* 组件功能扩展插件 */
-import type { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/plugin';
+import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
 
 export const useResponsiveProps: NaslComponentPluginOptions = {
   props: ['xsSpan', 'xsOffset', 'smSpan', 'xsOffset', 'mdSpan', 'mdOffset', 'lgSpan', 'lgOffset', 'xlSpan', 'xlOffset'],

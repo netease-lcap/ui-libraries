@@ -1,7 +1,7 @@
 /* 组件功能扩展插件 */
-import { NaslComponentPluginOptions } from '@/plugins/plugin';
+import { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
 
-export { useVModelSync } from '@lcap/nasl-hoc-vue/index';
+export { useVModelSync } from '@lcap/vue2-utils/plugins/index';
 
 export const usePickerOptions: NaslComponentPluginOptions = {
   props: ['pickerSelectableRange', 'pickerFormat'],

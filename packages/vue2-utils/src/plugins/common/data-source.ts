@@ -1,5 +1,5 @@
 import { onBeforeMount } from '@vue/composition-api';
-import { NaslComponentPluginOptions } from '../plugin';
+import { NaslComponentPluginOptions } from '../types';
 import { $deletePropList, $ref } from '../constants';
 
 export type LoadDataFunc = (params: { [key: string]: any }) => Promise<{ list: any[], total: number }>;

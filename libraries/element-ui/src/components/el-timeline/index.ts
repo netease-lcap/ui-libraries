@@ -1,6 +1,6 @@
 import Timeline from 'element-ui/lib/timeline';
 import TimelineItem from 'element-ui/lib/timeline-item';
-import { registerComponent } from '@lcap/nasl-hoc-vue/index';
+import { registerComponent } from '@lcap/vue2-utils/plugins/index';
 import * as plugins from './plugins';
 
 export const ElTimeline = registerComponent(Timeline, plugins, {

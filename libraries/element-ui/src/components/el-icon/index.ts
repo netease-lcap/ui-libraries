@@ -1,5 +1,5 @@
 import 'remixicon/fonts/remixicon.css';
-import { registerComponent } from '@lcap/nasl-hoc-vue/index';
+import { registerComponent } from '@lcap/vue2-utils/plugins/index';
 import Icon from './icon';
 import * as plugins from './plugins';
 

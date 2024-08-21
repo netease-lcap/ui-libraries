@@ -1,7 +1,7 @@
 /* 组件功能扩展插件 */
-import { $deletePropList, $ref } from '@lcap/nasl-hoc-vue/index';
-import { createProp2Default } from '@lcap/nasl-hoc-vue/common/text';
-import type { NaslComponentPluginOptions, Slot } from '@lcap/nasl-hoc-vue/plugin';
+import { $deletePropList, $ref } from '@lcap/vue2-utils/plugins/index';
+import { createProp2Default } from '@lcap/vue2-utils/plugins/common/text';
+import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins';
 import ElIcon from '../../el-icon';
 import { isEmptyVNodes } from '@/utils/vnode';
 import styles from '../index.module.css';

@@ -1,5 +1,5 @@
 /* 组件功能扩展插件 */
-import { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
+import { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 import { shallowRef, watch } from '@vue/composition-api';
 import { isObject } from 'lodash';
 

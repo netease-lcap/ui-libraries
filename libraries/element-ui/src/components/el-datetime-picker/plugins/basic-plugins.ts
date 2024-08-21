@@ -1,7 +1,7 @@
-import { NaslComponentPluginOptions } from '@/plugins/plugin';
+import { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/plugin';
 
 /* 组件功能扩展插件 */
-export { useVModelSync } from '@lcap/nasl-hoc-vue/index';
+export { useVModelSync } from '@lcap/vue2-utils/plugins/index';
 
 const PickerOptionsProps = ['useShortcuts', 'firstDayOfWeek', 'maxDate', 'minDate', 'onPick'];
 const DefaultShortcuts = [{

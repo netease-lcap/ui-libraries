@@ -65,7 +65,8 @@ export default defineConfig(({ command }) => {
       ],
       alias: {
         '@': path.resolve(__dirname, './src'),
-        '@lcap/nasl-hoc-vue': path.resolve(__dirname, './src/plugins'),
+        '@element-pro': path.resolve(__dirname, '../element-pro/design'),
+        '@element-ui-icons': path.resolve(__dirname, '../element-pro/design/icons/index.js'),
         'swiper/swiper-bundle.esm.js': path.resolve(
           __dirname,
           './node_modules/swiper/swiper-bundle.esm.js',

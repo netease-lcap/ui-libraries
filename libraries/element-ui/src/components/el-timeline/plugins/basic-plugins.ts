@@ -1,9 +1,9 @@
 /* 组件功能扩展插件 */
-import type { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/plugin';
+import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
 import TimelineItem from 'element-ui/lib/timeline-item';
 import { at } from 'lodash';
 
-export { useDataSource, useInitialLoaded } from '@lcap/nasl-hoc-vue/index';
+export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index';
 
 export const useDataSourceRender: NaslComponentPluginOptions = {
   props: ['data', 'valueField'],

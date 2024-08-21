@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-shadow */
 import TableColumn from 'element-ui/lib/table-column';
-import { registerComponent } from '@lcap/nasl-hoc-vue/index';
+import { registerComponent } from '@lcap/vue2-utils/plugins/index';
 
 const selectColumn = {
   renderCell(h, scope) {

@@ -2,7 +2,7 @@
 import { at } from 'lodash';
 import Option from 'element-ui/lib/option';
 
-export { useVModelSync, useDataSource, useInitialLoaded } from '@lcap/nasl-hoc-vue/index';
+export { useVModelSync, useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index';
 
 export const useRenderData = {
   props: ['valueField', 'textField', 'disabledField'],

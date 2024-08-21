@@ -1,4 +1,4 @@
-import { registerComponent } from '@lcap/nasl-hoc-vue/index';
+import { registerComponent } from '@lcap/vue2-utils/plugins/index';
 import AbsoluteLayout from './absolute-layout';
 import * as plugins from './plugins';
 

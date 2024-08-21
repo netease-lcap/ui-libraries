@@ -1,5 +1,5 @@
 import Table from 'element-ui/lib/table';
-import { registerComponent } from '@lcap/nasl-hoc-vue/index';
+import { registerComponent } from '@lcap/vue2-utils/plugins/index';
 import * as plugins from './plugins';
 
 export { default as ElTableColumn } from './column';

@@ -1,4 +1,4 @@
-import { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
+import { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 import BreadcrumbItem from 'element-ui/lib/breadcrumb-item';
 
 /* 仅在 ide 环境生效的插件 */

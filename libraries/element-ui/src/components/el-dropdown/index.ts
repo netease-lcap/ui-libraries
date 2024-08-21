@@ -1,7 +1,7 @@
 import Dropdown from 'element-ui/lib/dropdown';
 import DropdownMenu from 'element-ui/lib/dropdown-menu';
 import DropdownItem from 'element-ui/lib/dropdown-item';
-import { registerComponent } from '@lcap/nasl-hoc-vue/index';
+import { registerComponent } from '@lcap/vue2-utils/plugins/index';
 import * as itemPlugins from './plugins/item-plugins';
 import * as plugins from './plugins';
 

@@ -1,4 +1,4 @@
-import { NaslComponentPluginOptions } from '../plugin';
+import { NaslComponentPluginOptions } from '../types';
 import { $ref } from '../constants';
 import { isNullOrUndefined } from '../utils';
 

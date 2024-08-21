@@ -1,4 +1,4 @@
-import type { NaslComponentPluginOptions } from '../plugin';
+import type { NaslComponentPluginOptions } from '../types';
 import { isEmptyVNodes } from '../utils';
 
 export const createProp2Default = (propName: string) => {

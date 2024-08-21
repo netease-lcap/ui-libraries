@@ -1,9 +1,8 @@
 import Descriptions from 'element-ui/lib/descriptions';
 import DescriptionsItem from 'element-ui/lib/descriptions-item';
-import { registerComponent } from '@lcap/nasl-hoc-vue/index';
+import { registerComponent } from '@lcap/vue2-utils/plugins/index';
+import { normalizeArray } from '@lcap/vue2-utils/plugins/utils';
 import * as plugins from './plugins';
-
-import { normalizeArray } from '@/plugins/utils';
 
 const { getSlots } = Descriptions.methods;
 Descriptions.methods.getSlots = function (vnode) {

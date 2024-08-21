@@ -1,7 +1,7 @@
 /* 组件功能扩展插件 */
-import type { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
+import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 
-export { useVModelSync } from '@lcap/nasl-hoc-vue/index';
+export { useVModelSync } from '@lcap/vue2-utils/plugins/index';
 
 // basic-plugins.ts
 export const useFormatFunction: NaslComponentPluginOptions = {

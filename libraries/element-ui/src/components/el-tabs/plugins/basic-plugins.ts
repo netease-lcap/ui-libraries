@@ -1,9 +1,9 @@
 /* 组件功能扩展插件 */
 import TabPane from 'element-ui/lib/tab-pane';
 import { at } from 'lodash';
-import type { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
+import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 
-export { useDataSource, useInitialLoaded } from '@lcap/nasl-hoc-vue/index';
+export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index';
 
 export const useExtendsPlugin: NaslComponentPluginOptions = {
   props: ['data', 'titleField', 'valueField', 'tabPaneProps'],

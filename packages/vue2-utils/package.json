@@ -39,6 +39,21 @@
     },
     "./install": "./dist/install.js",
     "./mixins": "./dist/mixins/index.js",
+    "./plugins/*": {
+      "import": "./dist/plugins/*",
+      "require": "./dist/plugins/*",
+      "node": "./dist/plugins/*",
+      "types": [
+        "./dist/plugins/*.d.ts",
+        "./dist/plugins/*/index.d.ts"
+      ]
+    },
+    "./plugins": {
+      "import": "./dist/plugins/index.js",
+      "require": "./dist/plugins/index.js",
+      "node": "./dist/plugins/index.js",
+      "types": "./dist/plugins/index.d.ts"
+    },
     "./package.json": "./package.json"
   },
   "dependencies": {

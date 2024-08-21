@@ -1,6 +1,6 @@
 import Form from 'element-ui/lib/form';
 import FormItem from 'element-ui/lib/form-item';
-import { registerComponent } from '@lcap/nasl-hoc-vue/index';
+import { registerComponent } from '@lcap/vue2-utils/plugins/index';
 import * as plugins from './plugins';
 
 export const ElForm = registerComponent(Form, plugins, {

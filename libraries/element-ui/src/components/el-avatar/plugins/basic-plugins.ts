@@ -1,6 +1,6 @@
 import type { VNode } from 'vue';
-import type { NaslComponentPluginOptions, Slot } from '@lcap/nasl-hoc-vue/plugin';
-import { $deletePropList } from '@lcap/nasl-hoc-vue/index';
+import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins';
+import { $deletePropList } from '@lcap/vue2-utils/plugins/index';
 import ElIcon from '../../el-icon';
 
 export const useIcon: NaslComponentPluginOptions = {

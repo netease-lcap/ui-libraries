@@ -1,10 +1,10 @@
 /* 组件功能扩展插件 */
 import { at } from 'lodash';
-import { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
+import { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 import { ElDropdownMenu, ElDropdownItem } from '../index';
 import ElText from '../../el-text';
 
-export { useDataSource, useInitialLoaded } from '@lcap/nasl-hoc-vue/index';
+export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index';
 
 export const useExtendsPlugin: NaslComponentPluginOptions = {
   props: ['data', 'textField', 'valueField', 'iconField', 'itemProps'],

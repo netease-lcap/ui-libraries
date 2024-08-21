@@ -1,5 +1,6 @@
+/* eslint-disable consistent-return */
 /* 仅在 ide 环境生效的插件 */
-import { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
+import { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 import {
   onMounted,
   onUpdated,
@@ -60,12 +61,13 @@ export const useSetVusionAttrs: NaslComponentPluginOptions = {
       const element: Element = (ctx.refs.$base as any).$parent.$el;
       const scopedId = getScopeId(element);
       const el = document.getElementById(id);
-      const cell = getCellElement(el);
+      const cell: any = getCellElement(el);
 
       if (!cell) {
         return;
       }
 
+      // eslint-disable-next-line no-underscore-dangle
       cell.__Vue__ = ins;
 
       Object.keys(attrs || {}).forEach((k) => {

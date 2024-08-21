@@ -1,8 +1,8 @@
 /* 组件功能扩展插件 */
-import type { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/plugin';
-import { $ref } from '@lcap/nasl-hoc-vue/index';
+import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
+import { $ref } from '@lcap/vue2-utils/plugins/index';
 import _ from 'lodash';
-import { isNullOrUndefined } from '../../../plugins/utils';
+import { isNullOrUndefined } from '@lcap/vue2-utils/plugins/utils';
 
 export const useDialog: NaslComponentPluginOptions = {
   setup: (props) => {

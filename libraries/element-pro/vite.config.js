@@ -35,10 +35,10 @@ export default defineConfig(({ command }) => {
     resolve: {
       extensions: ['.js', '.ts', '.tsx', '.jsx', '.vue', '.mjs', '.cjs', '.json'],
       alias: {
+        // 开发环境使用
         '@': path.resolve(__dirname, './src'),
         '@element-pro': path.resolve(__dirname, './design'),
         '@element-ui-icons': path.resolve(__dirname, './design/icons/index.js'),
-        '@lcap/nasl-hoc-vue': path.resolve(__dirname, './src/plugins'),
       },
     },
     define: {

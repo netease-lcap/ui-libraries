@@ -1,8 +1,7 @@
-import { NaslComponentPluginOptions, SEmpty } from '@lcap/nasl-hoc-vue/index';
+import { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 import {
-  inject, onBeforeMount, onMounted, useAttrs,
+  inject, onMounted, useAttrs,
 } from '@vue/composition-api';
-import { at } from 'lodash';
 import { uid } from 'uid';
 
 export const useSlotHeaderEmpty: NaslComponentPluginOptions = {
@@ -70,7 +69,7 @@ export const useSlotHeaderEmpty: NaslComponentPluginOptions = {
       slotHeader: () => {
         const slot = props.get('slotHeader');
         const vnodes = typeof slot === 'function' ? slot({}) : null;
-        const sempty = !vnodes || vnodes.length === 0 ? [h(SEmpty)] : vnodes;
+        const sempty = !vnodes || vnodes.length === 0 ? [] : vnodes;
 
         return h('div', {
           attrs: {
@@ -117,11 +116,12 @@ export const useSlotDefaultEmpty: NaslComponentPluginOptions = {
       }
     });
 
+    // eslint-disable-next-line consistent-return
     return {
       slotDefault: (current) => {
         const slot = props.get('slotDefault');
         const vnodes = typeof slot === 'function' ? slot(current) : null;
-        const sempty = !vnodes || vnodes.length === 0 ? [h(SEmpty)] : vnodes;
+        const sempty = !vnodes || vnodes.length === 0 ? [] : vnodes;
 
         return h('div', {
           attrs: {
@@ -148,7 +148,7 @@ export const useField2Prop: NaslComponentPluginOptions = {
 };
 
 export const useAutoSetIndex: NaslComponentPluginOptions = {
-  setup: (props, {}) => {
+  setup: (props) => {
     const getPagination = inject('getPagination');
 
     const index = props.useComputed(['index', 'type'], (i, type) => {

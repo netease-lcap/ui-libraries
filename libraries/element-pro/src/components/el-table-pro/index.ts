@@ -1,5 +1,5 @@
 import { Table, BaseTable, PrimaryTable, EnhancedTable } from '@element-pro';
-import { registerComponent } from '@/plugins';
+import { registerComponent } from '@lcap/vue2-utils';
 import * as plugins from './plugins';
 
 export const ElTablePro = registerComponent(Table, plugins, {

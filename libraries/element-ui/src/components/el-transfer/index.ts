@@ -1,6 +1,6 @@
 import Transfer from 'element-ui/lib/transfer';
 
-import { registerComponent } from '@lcap/nasl-hoc-vue/index';
+import { registerComponent } from '@lcap/vue2-utils/plugins/index';
 import * as plugins from './plugins';
 
 export const ElTransfer = registerComponent(Transfer, plugins, {

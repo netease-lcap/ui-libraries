@@ -1,7 +1,7 @@
 import * as VueCompositionAPI from '@vue/composition-api';
 import Vue from 'vue';
 import * as LcapUI from '@lcap/pc-ui/src/index';
-import * as ElementPro from '@lcap/element-pro';
+import * as ElementPro from '@lcap/element-pro/src/main';
 import { install } from './main';
 
 export * from './main';

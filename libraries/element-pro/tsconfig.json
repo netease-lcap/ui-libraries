@@ -27,9 +27,7 @@
     "noImplicitAny": false,
     "noImplicitThis": true,
     "paths": {
-      "@/*": ["./src/*"],
       "@element-ui-icons": ["./design/icons/index.d.ts"],
-      "@components/*": ["./src/components/*"],
       "@element-pro": ["./design/index.ts"]
     }
   },
@@ -41,7 +39,6 @@
     "design/**/*.tsx"
   ],
   "exclude": [
-    "**/react/**/*.ts",
   ],
   "references": [
   ]

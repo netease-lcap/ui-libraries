@@ -1,4 +1,4 @@
-import { $deletePropList, NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
+import { $deletePropList, NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 import ElIcon from '../../el-icon';
 
 export const useExtendsPlugin: NaslComponentPluginOptions = {

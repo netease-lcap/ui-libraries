@@ -2,7 +2,7 @@ import Vue from 'vue';
 import type { ComponentOptions } from 'vue';
 import { isRef } from '@vue/composition-api';
 import { camelCase, kebabCase } from 'lodash';
-import { PluginSetupRef } from './plugin';
+import type { PluginSetupRef } from './types';
 
 export function getPropKeys(component: ComponentOptions<Vue>) {
   const keys = Array.isArray(component.props) ? [...component.props] : Object.keys(component.props || {});

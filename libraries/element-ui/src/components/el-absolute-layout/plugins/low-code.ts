@@ -1,6 +1,6 @@
 /* 仅在 ide 环境生效的插件 */
 import { computed, provide } from '@vue/composition-api';
-import { NaslComponentPluginOptions } from '@lcap/nasl-hoc-vue/index';
+import { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 import styles from '../index.module.css';
 
 export const useLowcodeEmtpyTip: NaslComponentPluginOptions = {

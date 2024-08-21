@@ -4,11 +4,11 @@ import {
 } from '@vue/composition-api';
 import { at } from 'lodash';
 import Pagination from 'element-ui/lib/pagination';
-import type { NaslComponentPluginOptions } from '@/plugins/plugin';
-import { $deletePropList, $ref, $render } from '@/plugins/constants';
+import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
+import { $deletePropList, $ref, $render } from '@lcap/vue2-utils/plugins/constants';
 import styles from '../index.module.css';
 
-export { useDataSource, useInitialLoaded } from '@lcap/nasl-hoc-vue/index';
+export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index';
 
 const getVusionProps = () => {
   const attrs = useAttrs();
@@ -29,7 +29,7 @@ export const useLoadData: NaslComponentPluginOptions = {
     const currentPage = shallowRef(1);
     const sort = props.useRef(['sortField', 'order'], (sortField, order) => {
       if (!sortField) {
-        return;
+        return undefined;
       }
 
       return {
@@ -126,7 +126,7 @@ export const useLoadData: NaslComponentPluginOptions = {
         reload(params: any = {}) {
           currentPage.value = 1;
           if (!loadDataFnRef.value) {
-            return;
+            return undefined;
           }
 
           if (params && params.page) {

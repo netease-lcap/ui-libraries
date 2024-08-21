@@ -1,4 +1,4 @@
-import { NaslComponentPluginOptions } from '../plugin';
+import { NaslComponentPluginOptions } from '../types';
 
 /**
  * v-model 兼容 update:sync

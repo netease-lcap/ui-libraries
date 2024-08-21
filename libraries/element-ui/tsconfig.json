@@ -27,7 +27,6 @@
     "noImplicitAny": false,
     "paths": {
       "@/*": ["./src/*"],
-      "@lcap/nasl-hoc-vue/*": ["./src/plugins/*"],
       "@components/*": ["./src/components/*"]
     }
   },

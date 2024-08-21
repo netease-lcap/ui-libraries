@@ -3,7 +3,7 @@
 /* eslint-disable no-script-url */
 /* eslint-disable no-unused-expressions */
 import { $deletePropList } from '../constants';
-import { NaslComponentPluginOptions } from '../plugin';
+import { NaslComponentPluginOptions } from '../types';
 import { getEventKey } from '../utils';
 
 /**

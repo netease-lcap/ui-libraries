@@ -1,6 +1,6 @@
 import Breadcrumb from 'element-ui/lib/breadcrumb';
 import BreadcrumbItem from 'element-ui/lib/breadcrumb-item';
-import { registerComponent } from '@lcap/nasl-hoc-vue/index';
+import { registerComponent } from '@lcap/vue2-utils/plugins/index';
 import * as plugins from './plugins';
 import * as itemPlugins from './plugins/item-plugins';
 

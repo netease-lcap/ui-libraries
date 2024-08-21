@@ -1,4 +1,4 @@
-import { NaslComponentPluginOptions } from '@/plugins';
+import { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
 
 export const useExtendsPlugins: NaslComponentPluginOptions = {
   props: ['link', 'destination', 'href'],
