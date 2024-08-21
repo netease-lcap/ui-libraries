@@ -28,7 +28,7 @@ export default {
           timestamp: '2018-04-12 20:46',
           size: 'large',
           type: 'primary',
-          icon: 'el-icon-more',
+          icon: 'more',
         },
         {
           content: '支持自定义颜色',

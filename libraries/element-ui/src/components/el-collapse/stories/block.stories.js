@@ -25,13 +25,13 @@ export const Default = {
   render: () => ({
     template: `<el-collapse>
       <el-collapse-item>
-        <template #title>面板1</template>
+        <template #title><el-text text="面板1"></el-text></template>
       </el-collapse-item>
       <el-collapse-item>
-        <template #title>面板2</template>
+        <template #title><el-text text="面板2"></el-text></template>
       </el-collapse-item>
       <el-collapse-item>
-        <template #title>面板3</template>
+        <template #title><el-text text="面板3"></el-text></template>
       </el-collapse-item>
     </el-collapse>`,
   }),
