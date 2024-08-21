@@ -2,33 +2,88 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    "ideusage": {
-      "idetype": "container",
-      "structured": true,
-      "childAccept": "target.tag === 'el-step'"
-    }
+    ideusage: {
+      idetype: 'container',
+      structured: true,
+      childAccept: "target.tag === 'el-step'",
+      dataSource: {
+        dismiss:
+          "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        display: 3,
+        loopRule: 'nth-child(n+2)',
+        loopElem: ".el-step",
+        emptySlot: {
+          display: 'large',
+          condition: "!this.getAttribute('dataSource')",
+          accept: false,
+        },
+      },
+    },
   })
   @Component({
     title: '步骤条',
     icon: 'steps',
-    description:
-      '引导用户按照流程完成任务的分步导航条，可根据实际应用场景设定步骤，步骤不得少于 2 步。',
+    description: '引导用户按照流程完成任务的分步导航条，可根据实际应用场景设定步骤，步骤不得少于 2 步。',
     group: 'Navigation',
   })
-  export class ElSteps extends ViewComponent {
-    constructor(options?: Partial<ElStepsOptions>) {
+  export class ElSteps<T> extends ViewComponent {
+    @Method({
+      title: '上一步',
+      description: '上一步',
+    })
+    prev(): void {}
+
+    @Method({
+      title: '下一步',
+      description: '下一步',
+    })
+    next(): void {}
+
+    @Method({
+      title: '重新加载',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void {}
+
+    constructor(options?: Partial<ElStepsOptions<T>>) {
       super();
     }
   }
 
-  export class ElStepsOptions extends ViewComponentOptions {
+  export class ElStepsOptions<T> extends ViewComponentOptions {
     @Prop({
-      group: '主要属性',
-      title: '每个 step 的间距',
-      description: '每个 step 的间距，不填写将自适应间距。支持百分比。',
-      setter: { concept: 'InputSetter' },
+      group: '数据属性',
+      title: '数据源',
+      description:
+        '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription:
+        '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      designerValue: [{}, {}, {}],
     })
-    space: nasl.core.Decimal | nasl.core.String;
+    dataSource:
+      | { list: nasl.collection.List<T>; total: nasl.core.Integer }
+      | nasl.collection.List<T>;
+
+    @Prop({
+      group: '数据属性',
+      title: '数据类型',
+      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
+      docDescription:
+        '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
+    })
+    dataSchema: T;
+
+    @Prop({
+      group: '数据属性',
+      title: '步骤别名字段',
+      description: '集合的元素类型中，用于显示文本的属性名称',
+      docDescription:
+        '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    nameField: (item: T) => nasl.core.String = ((item: any) => item.name) as any;
 
     @Prop({
       group: '主要属性',
@@ -39,19 +94,21 @@ namespace nasl.ui {
         options: [{ title: '垂直' }, { title: '水平' }],
       },
     })
-    direction: 'vertical' | 'horizontal';
+    direction: 'vertical' | 'horizontal' = 'horizontal';
 
     @Prop({
-      group: '主要属性',
-      title: '设置当前激活步骤',
-      description: '设置当前激活步骤',
+      group: '数据属性',
+      title: '当前步骤',
+      description:
+        '设置当前激活步骤, 可设置步骤排序下标，如：0 也可以设置步骤别名',
       setter: { concept: 'NumberInputSetter' },
+      sync: true,
     })
-    active: nasl.core.Decimal = 0;
+    active: nasl.core.Integer | nasl.core.String;
 
     @Prop({
       group: '主要属性',
-      title: '设置当前步骤的状态',
+      title: '当前步骤的状态',
       description: '设置当前步骤的状态',
       setter: {
         concept: 'EnumSelectSetter',
@@ -64,11 +121,11 @@ namespace nasl.ui {
         ],
       },
     })
-    processStatus: 'wait' | 'process' | 'finish' | 'error' | 'success'
+    processStatus: 'wait' | 'process' | 'finish' | 'error' | 'success';
 
     @Prop({
       group: '主要属性',
-      title: '设置结束步骤的状态',
+      title: '结束步骤的状态',
       description: '设置结束步骤的状态',
       setter: {
         concept: 'EnumSelectSetter',
@@ -85,16 +142,24 @@ namespace nasl.ui {
       'finish';
 
     @Prop({
-      group: '主要属性',
-      title: '进行居中对齐',
+      group: '样式属性',
+      title: '步骤项的间距',
+      description: '每个步骤项的间距，不填写将自适应间距。支持百分比。',
+      setter: { concept: 'InputSetter' },
+    })
+    space: nasl.core.Decimal | nasl.core.String;
+
+    @Prop({
+      group: '样式属性',
+      title: '居中对齐',
       description: '进行居中对齐',
       setter: { concept: 'SwitchSetter' },
     })
     alignCenter: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: '是否应用简洁风格',
+      group: '样式属性',
+      title: '简洁风格',
       description: '是否应用简洁风格',
       setter: { concept: 'SwitchSetter' },
     })
@@ -103,28 +168,39 @@ namespace nasl.ui {
     @Slot({
       title: '默认插槽',
       description: '默认插槽',
-      snippets: [{ title: 'Step', code: '<el-step></el-step>' }],
+      emptyBackground: 'add-sub',
+      snippets: [
+        {
+          title: '步骤条项',
+          code: '<el-step><template #title><el-text text="步骤 N"></el-text></template></el-step>',
+        },
+      ],
     })
     slotDefault: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '步骤标题',
+      description: '步骤标题',
+    })
+    slotTitle: (current: Current<T>) => Array<ViewComponent>;
+
+    @Slot({
+      title: '步骤描述',
+      description: '步骤描述',
+    })
+    slotDescription: (current: Current<T>) => Array<ViewComponent>;
   }
 
-
   @IDEExtraInfo({
-    "ideusage": {
-      "idetype": "container",
-      "parentAccept": "target.tag === 'el-steps'",
-      "selector": {
-        "expression": "this",
-        "cssSelector": "div[class='el-step']"
-      }
-    }
+    ideusage: {
+      idetype: 'container',
+      parentAccept: "target.tag.endsWith('el-steps')",
+      forceRefresh: 'parent',
+    },
   })
-
   @Component({
-    title: 'Step',
-    icon: 'step',
-    description: '',
-    group: 'Navigation',
+    title: '步骤条项',
+    description: '步骤条项',
   })
   export class ElStep extends ViewComponent {
     constructor(options?: Partial<ElStepOptions>) {
@@ -135,61 +211,52 @@ namespace nasl.ui {
   export class ElStepOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
-      title: '标题',
-      description: '标题',
-      setter: { concept: 'InputSetter' },
+      title: '步骤别名',
+      description: '步骤别名，用与步骤条根据别名来指定当前步骤',
+      setter: {
+        concept: 'InputSetter',
+      },
     })
-    title: nasl.core.String;
+    name: nasl.core.String;
 
     @Prop({
       group: '主要属性',
-      title: '描述文案',
-      description: '描述文案',
-      setter: { concept: 'InputSetter' },
-    })
-    description: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Step 组件的自定义图标',
-      description: 'Step 组件的自定义图标。 也支持 slot 方式写入',
-      setter: { concept: 'InputSetter' },
+      title: '图标',
+      description: '自定义图标',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+      },
     })
     icon: nasl.core.String;
 
     @Prop({
       group: '主要属性',
       title: '当前步骤的状态',
-      description: '设置当前步骤的状态，不设置则根据 steps 确定状态',
+      description: '设置当前步骤的状态，不设置则根据步骤条确定状态',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: '' },
-          { title: 'wait' },
-          { title: 'process' },
-          { title: 'finish' },
-          { title: 'error' },
-          { title: 'success' },
+          { title: '步骤条状态' },
+          { title: '等待' },
+          { title: '进行中' },
+          { title: '完成' },
+          { title: '错误' },
+          { title: '成功' },
         ],
       },
     })
-    status: '' | 'wait' | 'process' | 'finish' | 'error' | 'success';
+    status: '' | 'wait' | 'process' | 'finish' | 'error' | 'success' = '';
 
     @Slot({
-      title: '自定义图标',
-      description: '自定义图标',
-    })
-    slotIcon: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '自定义标题',
-      description: '自定义标题',
+      title: '步骤标题',
+      description: '步骤标题',
     })
     slotTitle: () => Array<ViewComponent>;
 
     @Slot({
-      title: '自定义描述性文字',
-      description: '自定义描述性文字',
+      title: '步骤描述',
+      description: '步骤描述',
     })
     slotDescription: () => Array<ViewComponent>;
   }

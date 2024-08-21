@@ -66,8 +66,10 @@ export const Example5 = {
   name: '带图标的步骤条',
   render: () => ({
     template: `<div><el-steps :active="1">
-  <el-step title="步骤 1" icon="el-icon-edit"></el-step>
-  <el-step title="步骤 2" icon="el-icon-upload"></el-step>
+  <el-step title="步骤 1" icon="edit"></el-step>
+  <el-step title="步骤 2" icon="el-icon-upload">
+    <el-icon slot="icon" name="upload" />
+  </el-step>
   <el-step title="步骤 3" icon="el-icon-picture"></el-step>
 </el-steps></div>`,
   }),
@@ -102,5 +104,26 @@ export const Example7 = {
   <el-step title="步骤 2" ></el-step>
   <el-step title="步骤 3" ></el-step>
 </el-steps></div>`,
+  }),
+};
+
+export const Example8 = {
+  name: '数据源',
+  render: () => ({
+    data() {
+      return {
+        dataSource: () => [{
+          label: '步骤一',
+          value: '1',
+        }, {
+          label: '步骤二',
+          value: '2',
+        }, {
+          label: '步骤三',
+          value: '3',
+        }],
+      };
+    },
+    template: '<el-steps active="2" simple :dataSource="dataSource" nameField="value"><template #title="{ item }"><el-text :text="item.label" /></template></el-steps>',
   }),
 };

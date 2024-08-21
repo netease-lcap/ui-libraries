@@ -12,6 +12,7 @@ namespace nasl.ui {
         {
           expression: 'this',
           cssSelector: "div[class='el-dropdown']",
+          placement: "tail",
         },
         {
           expression: "this.getElement(el => el.slotTarget === 'items')",
@@ -325,7 +326,10 @@ namespace nasl.ui {
       group: '主要属性',
       title: '图标',
       description: '图标',
-      setter: { concept: 'IconSetter' },
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS'
+      },
     })
     icon: nasl.core.String;
 
