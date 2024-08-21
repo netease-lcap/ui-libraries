@@ -1,6 +1,8 @@
 import Component from '../index';
 import ExampleDemo1 from '../demos/example-demo1.vue';
 import ExampleDemo2 from '../demos/example-demo2.vue';
+import ExampleDemo3 from '../demos/example-demo3.vue';
+import ExampleDemo4 from '../demos/example-demo4.vue';
 
 export default {
   id: 'el-timeline-examples',
@@ -40,27 +42,20 @@ export const Example2 = {
 export const Example3 = {
   name: '⾃定义时间戳',
   render: () => ({
-    template: `<div><div class="block">
-  <el-timeline>
-    <el-timeline-item timestamp="2018/4/12" placement="top">
-      <el-card>
-        <h4>更新 Github 模板</h4>
-        <p>王小虎 提交于 2018/4/12 20:46</p>
-      </el-card>
-    </el-timeline-item>
-    <el-timeline-item timestamp="2018/4/3" placement="top">
-      <el-card>
-        <h4>更新 Github 模板</h4>
-        <p>王小虎 提交于 2018/4/3 20:46</p>
-      </el-card>
-    </el-timeline-item>
-    <el-timeline-item timestamp="2018/4/2" placement="top">
-      <el-card>
-        <h4>更新 Github 模板</h4>
-        <p>王小虎 提交于 2018/4/2 20:46</p>
-      </el-card>
-    </el-timeline-item>
-  </el-timeline>
-</div></div>`,
+    components: {
+      exampleDemo: ExampleDemo3,
+    },
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+/*  数据源 */
+export const Example4 = {
+  name: '⾃定义时间戳',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo4,
+    },
+    template: '<example-demo></example-demo>',
   }),
 };

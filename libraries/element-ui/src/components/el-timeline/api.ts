@@ -2,6 +2,13 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    ideusage: {
+      idetype: "container",
+      structured: true,
+      childAccept: {
+        default: "target.tag === 'el-timeline-item'"
+      }
+    }
   })
   @Component({
     title: '时间线',
@@ -18,7 +25,7 @@ namespace nasl.ui {
   export class ElTimelineOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
-      title: 'Reverse',
+      title: '节点排序方向',
       description: '指定节点排序方向，默认为正序',
       setter: { concept: 'SwitchSetter' },
     })
@@ -29,7 +36,7 @@ namespace nasl.ui {
       description: '内容',
       snippets: [
         {
-          title: 'Timeline Item',
+          title: '时间线项',
           code: '<el-timeline-item></el-timeline-item>',
         },
       ],
@@ -37,8 +44,22 @@ namespace nasl.ui {
     slotDefault: () => Array<ViewComponent>;
   }
 
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: "container",
+      parentAccept: "target.tag === 'el-timeline'",
+      disableSlotAutoFill: [{
+        slot: "dot",
+        fill: "this.getAttribute('useSlotIcon')?.value",
+      }],
+      slotInlineStyle: {
+        dot: 'min-width: auto;',
+      }
+    }
+  })
+
   @Component({
-    title: 'Timeline Item',
+    title: '时间线项',
     icon: 'timeline-item',
     description: '',
     group: 'Display',
@@ -52,7 +73,7 @@ namespace nasl.ui {
   export class ElTimelineItemOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
-      title: 'Timestamp',
+      title: '时间戳',
       description: '时间戳',
       setter: { concept: 'InputSetter' },
     })
@@ -60,7 +81,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Hide Timestamp',
+      title: '隐藏时间戳',
       description: '是否隐藏时间戳',
       setter: { concept: 'SwitchSetter' },
     })
@@ -68,7 +89,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Placement',
+      title: '时间戳位置',
       description: '时间戳位置',
       setter: {
         concept: 'EnumSelectSetter',
@@ -79,7 +100,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Type',
+      title: '节点类型',
       description: '节点类型',
       setter: {
         concept: 'EnumSelectSetter',
@@ -97,7 +118,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Color',
+      title: '节点颜色',
       description: '节点颜色',
       setter: {
         concept: 'EnumSelectSetter',
@@ -114,7 +135,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Size',
+      title: '节点尺寸',
       description: '节点尺寸',
       setter: {
         concept: 'EnumSelectSetter',
@@ -125,11 +146,24 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Icon',
-      description: '节点图标',
-      setter: { concept: 'InputSetter' },
+      title: '使用插槽自定义图标',
+      description: '使用插槽方式自定义图标',
+      onChange: [{ clear: ['icon'] }],
+      setter: { concept: 'SwitchSetter' },
     })
-    icon: nasl.core.String = '';
+    useSlotIcon: nasl.core.Boolean = false;
+
+    @Prop<ElTimelineItemOptions, 'icon'>({
+      group: '主要属性',
+      title: '节点图标',
+      description: '节点图标',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS'
+      },
+      if: _ => !_.useSlotIcon,
+    })
+    icon: nasl.core.String;
 
     @Slot({
       title: 'Default',
@@ -138,7 +172,7 @@ namespace nasl.ui {
     slotDefault: () => Array<ViewComponent>;
 
     @Slot({
-      title: 'Dot',
+      title: '自定义Dot节点',
       description: '自定义节点',
     })
     slotDot: () => Array<ViewComponent>;
