@@ -3,6 +3,7 @@ import { useControllableValue } from 'ahooks';
 import _ from 'lodash';
 import locale from 'antd/lib/date-picker/locale/zh_CN';
 import { ProFormTimePicker } from '@ant-design/pro-components';
+import dayjs from 'dayjs';
 import style from '../index.module.less';
 import 'dayjs/locale/zh-cn';
 
@@ -12,9 +13,10 @@ export function useHandleLocale() {
   };
 }
 export function useHandleValue(props) {
+  const valueProps = props.get('value');
   const onChangeProps = props.get('onChange', () => { });
-  // const valueFormat = !_.isNil(valueProps) ? dayjs(valueProps, 'HH:mm:ss') : undefined;
-  const [value, onChange] = useControllableValue(_.controllableValue(props));
+  const valueFormat = props.has('value') ? dayjs(valueProps, 'HH:mm:ss') : undefined;
+  const [value, onChange] = useControllableValue({ ..._.controllableValue(props), value: valueFormat });
   return {
     value,
     onChange(time) {

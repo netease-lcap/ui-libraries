@@ -366,6 +366,15 @@ export default {
             const properlyWidth = Math.max(this.minWidth, w);
             return properlyWidth;
         },
+        toggleAll(expanded) {
+            this.groupVMs.forEach((groupVM) => {
+              groupVM.toggle(expanded);
+
+              if (Array.isArray(groupVM.groupVMs) && typeof groupVM.toggleAll === 'function') {
+                groupVM.toggleAll(expanded);
+              }
+            });
+        },
     },
 };
 </script>

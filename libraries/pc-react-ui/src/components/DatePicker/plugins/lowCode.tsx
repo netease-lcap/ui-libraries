@@ -21,7 +21,7 @@ export function useHandleNodePath(props) {
       dataPickerItem?.setAttribute('data-has-mutation', 'true');
       dataPickerItem?.setAttribute('data-nodepath', nodePath);
     } else {
-      datePicker?.closest(`${prefixCls}-picker`)?.setAttribute('data-nodepath', nodePath);
+      datePicker?.closest(`.${prefixCls}-picker`)?.setAttribute('data-nodepath', nodePath);
     }
   }, [id, isForm, nodePath, prefixCls]);
   return {

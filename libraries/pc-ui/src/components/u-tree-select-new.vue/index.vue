@@ -339,13 +339,16 @@ export default {
                     const componentName = name || tag;
                     if (componentName === this.$options.childName) {
                         const { propsData, children: childrenVNodes } = componentOptions || {};
-                        const {
+                        let {
                             text,
                             value,
                             node,
                             childrenField: propsChildrenField,
                             moreChildrenFields: propsMoreChildrenFields,
                         } = propsData || {};
+                        if (!text) {
+                          text = this.getNodeSlotText(vnode)
+                        }
                         const {
                             childrenField: nodeChildrenField,
                             moreChildrenFields: nodeMoreChildrenFields,
@@ -371,6 +374,27 @@ export default {
                     return null;
                 }).filter((item) => !!item);
             }
+        },
+        // 获取vnode的itemslot信息
+        getNodeSlotText(vnode) {
+          const { data } = vnode || {};
+          const itemSlotFunc = data.scopedSlots?.item;
+          let itemSlotTexts = ''
+          if (itemSlotFunc) {
+              const itemSlots = itemSlotFunc() || [];
+              for (let itemSlot of itemSlots) {
+                const { componentOptions } = itemSlot || {};
+                const { Ctor, tag, propsData } = componentOptions || {};
+                const { options: CtorOptions } = Ctor || {};
+                const { name } = CtorOptions || {};
+                const componentName = name || tag;
+                if (componentName === 'u-text') {
+                  itemSlotTexts = propsData.text;
+                  break;
+                }
+              }
+          }
+          return itemSlotTexts
         },
         trans2Obj(obj, list, parent, type) {
             if (Array.isArray(list)) {
