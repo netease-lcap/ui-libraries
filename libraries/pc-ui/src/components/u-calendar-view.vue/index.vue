@@ -40,6 +40,7 @@
             :get-common-attrs="getCommonAttrs"
             @update:selectedDates="updateSelectedDates($event.dates,$event.cell,true)"
             @select="$emit('select', $event, this)"
+            @clickcell="$emit('clickcell', $event, this)"
             :multiple="multiple"
         >
             <template #default="scope">

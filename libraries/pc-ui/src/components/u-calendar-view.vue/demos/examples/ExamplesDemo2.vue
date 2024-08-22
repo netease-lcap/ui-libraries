@@ -1,6 +1,6 @@
 <!-- 数据日历 -->
 <template>
-    <u-calendar-view :data="data" :value.sync="value" @change="onChange" @select="onSelect">
+    <u-calendar-view :data="data" :value.sync="value" @change="onChange" @select="onSelect" @clickcell="onClickcell">
         <template #default="scope">
             <p v-if="scope.item.apple">苹果: {{scope.item.apple}}</p>
             <p v-if="scope.item.orange">橘子: {{scope.item.orange}}</p>
@@ -37,6 +37,9 @@ export default{
         },
         onSelect(val) {
             console.log('onSelect', val);
+        },
+        onClickcell(val) {
+            console.log('onClickcell', val);
         },
     },
 };

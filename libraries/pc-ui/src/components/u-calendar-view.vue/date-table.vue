@@ -209,7 +209,9 @@ export default {
                 this.$emit('update:selectedDates', { dates: newSelectedDates, cell });
             }
 
-            this.$emit('select', { ...cell, value: __key__, oldValue: this.selectedDateKey, monthOfStart: cell.Date.startOf('month'), monthOfEnd: cell.Date.endOf('month') });
+            const emitData = { ...cell, value: __key__, oldValue: this.selectedDateKey, monthOfStart: cell.Date.startOf('month'), monthOfEnd: cell.Date.endOf('month') };
+            this.$emit('clickcell', emitData);
+            this.$emit('select', emitData);
             this.selectedDateKey = __key__;
         },
         isSelected(cell) {

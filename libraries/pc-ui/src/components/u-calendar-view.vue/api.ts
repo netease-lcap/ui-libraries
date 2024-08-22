@@ -202,6 +202,18 @@ namespace nasl.ui {
         })
         onChangeMonth: (event: nasl.core.String) => any;
 
+        @Event({
+            title: '点击日期',
+            description: '点击日历表中的日期触发',
+        })
+        onClickcell: (event: {
+            date: nasl.core.Integer;
+            timestamp: nasl.core.Integer;
+            value: nasl.core.String | nasl.core.Date;
+            oldValue: nasl.core.String | nasl.core.Date;
+            week: nasl.core.Integer;
+        }) => any;
+
         @Slot({
             title: 'undefined',
             description: '插入文本或 HTML 至日期组件底部',
