@@ -82,7 +82,8 @@
             "parentAccept": "target.tag.endsWith('van-sidebar')",
             "displaySlotInline": {
                 "title": true
-            }
+            },
+            "translateBindingProperty": ["badge", "badgemax"]
         }
     },
     {
@@ -114,7 +115,11 @@
                 "default": false,
                 "title": false,
                 "rightIcon": false
-            }
+            },
+            "disableSlotAutoFill": [{
+                "slot": "title",
+                "expression": true
+            }]
         }
     },
     {
@@ -132,7 +137,8 @@
             "parentAccept": "target.tag.endsWith('van-tabbar')",
             "events": {
                 "click": "!this.getParent().getAttribute('route')?.value"
-            }
+            },
+            "translateBindingProperty": ["badge", "badgemax"]
         }
     },
     {
@@ -157,7 +163,7 @@
         "name": "VanCardu",
         "ideusage": {
             "idetype": "container",
-            "disableSlotAutoFill": ["cover"]
+            "disableSlotAutoFill": ["cover", "head"]
         }
     },
     {
@@ -194,21 +200,28 @@
         }
     },
     {
+        "name": "VanImage",
+        "ideusage": {
+            "idetype": "element",
+            "translateBindingProperty": ["src"]
+        }
+    },
+    {
         "name": "VanSwipe",
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "target.tag === 'van-swipe-item'"
+            "childAccept": "target.tag === 'van-swipe-item'",
+            "events": {
+                "click": true
+            }
         }
     },
     {
         "name": "VanSwipeItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag.endsWith('van-swipe')",
-            "events": {
-                "click": true
-            }
+            "parentAccept": "target.tag.endsWith('van-swipe')"
         }
     },
     {
@@ -233,7 +246,8 @@
     {
         "name": "VanBadge",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "translateBindingProperty": ["content", "max"]
         }
     },
     {
@@ -247,7 +261,17 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept":"target.tag === 'van-step'"
+            "childAccept":"target.tag === 'van-step'",
+            "dataSource": {
+                "dismiss": "this.getDefaultElements().length > 0 && !this.getAttribute('dataSource')",
+                "display": 3,
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            },
+            "namedSlotOmitWrapper": ["item"]
         }
     },
     {
@@ -263,7 +287,8 @@
     {
         "name": "VanIconv",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "iconEditor": true
         }
     },
     {
@@ -275,13 +300,15 @@
     {
         "name": "VanCircle",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "translateBindingProperty": ["value", "size", "color", "layerColor", "fill", "strokeWidth"]
         }
     },
     {
         "name": "VanProgress",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "translateBindingProperty": ["value", "showPivot", "custom", "inactive", "color", "trackColor", "textColor", "pivotColor", "strokeWidth", "pivotText"]
         }
     },
     {
@@ -293,14 +320,16 @@
     {
         "name": "VanRate",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "translateBindingProperty": ["value", "size", "gutter", "count", "voidIcon", "icon", "allowHalf", "readonly", "disabled", "color", "voidColor", "disabledColor"]
         }
     },
     {
         "name": "VanSlider",
         "ideusage": {
             "idetype": "container",
-            "childAccept": false
+            "childAccept": false,
+            "translateBindingProperty": ["custom", "value", "max", "min", "range", "disabled", "vertical", "step", "barHeight", "buttonSize", "activeColor", "inactiveColor"]
         }
     },
     {
@@ -308,7 +337,13 @@
         "ideusage": {
             "idetype": "container",
             "dataSource": {
-                "display": 3
+                "display": 3,
+                "loopElem": "div[vusion-slot-name^='item']",
+                "loopRule": "nth-child(n+2)",
+                "emptySlot": {
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
             },
             "displaySlotConditions": {
                 "empty": false
@@ -320,14 +355,21 @@
         "ideusage": {
             "idetype": "container",
             "dataSource": {
-                "display": 8
+                "display": 8,
+                "emptySlot": {
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
             }
         }
     },
     {
         "name": "VanForComponents",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "dataSource": {
+                "display": 3
+            }
         }
     },
     {
@@ -337,9 +379,12 @@
             "structured": true,
             "childAccept":"target.tag === 'van-tab'",
             "dataSource": {
-                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
                 "display": 3,
-                "loopRule": "nth-child(n+2)"
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getDefaultElements().length",
+                    "accept": false
+                }
             }
         }
     },
@@ -350,7 +395,8 @@
             "parentAccept":"target.tag.endsWith('van-tabs')",
             "events": {
                 "click": true
-            }
+            },
+            "disableSlotAutoFill": ["title"]
         }
     },
     {
@@ -403,7 +449,17 @@
             "events": {
                 "click": true
             },
-            "translateBindingProperty": ["title"]
+            "translateBindingProperty": ["title"],
+            "selector": [
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'reference')",
+                    "cssSelector": "span[class^='index']"
+                },
+                {
+                    "expression": "this",
+                    "cssSelector": "div[class^='u-popup']"
+                }
+            ]
         }
     },
     {
@@ -412,8 +468,8 @@
             "idetype": "modal",
             "cacheOpenKey": "visible",
             "selector": {
-                "expression": "this.getElement(el => el.slotTarget === 'body')",
-                "cssSelector": "div[class^='van-dialog']"
+                "expression": "this",
+                "cssSelector": "div[class^='van-dialog__content']"
             }
         }
     },
@@ -422,7 +478,7 @@
         "ideusage": {
             "idetype": "drawer",
             "selector": {
-                "expression": "this.getElement(el => el.slotTarget === 'body')",
+                "expression": "this",
                 "cssSelector": "div[class^='van-popup']"
             }
         }
@@ -432,7 +488,7 @@
         "ideusage": {
             "idetype": "messager",
             "selector": {
-                "expression": "this.getElement(el => el.slotTarget === 'body')",
+                "expression": "this",
                 "cssSelector": "div[class^='van-toast-designer']"
             }
         }
@@ -455,7 +511,11 @@
         "name": "VanField",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag.endsWith('van-form')"
+            "parentAccept": "target.tag.endsWith('van-form')",
+            "selector": {
+                "expression": "this.getElement(el => el.slotTarget === 'title')",
+                "cssSelector": "div[class^='van-field']"
+            }
         }
     },
     {
@@ -491,7 +551,18 @@
         "ideusage": {
            "idetype": "container",
             "structured": true,
-            "childAccept": "target.tag === 'van-radio'"
+            "childAccept": "target.tag === 'van-radio'",
+            "dataSource": {
+                "dismiss": "this.getDefaultElements().length > 0 && !this.getAttribute('dataSource')",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "[class^='van-radio-group']:not([data-nodepath]",
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            }
         }
     },
     {
@@ -512,7 +583,18 @@
         "ideusage": {
            "idetype": "container",
             "structured": true,
-            "childAccept": "target.tag === 'van-checkbox'"
+            "childAccept": "target.tag === 'van-checkbox'",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "[class^='van-checkbox-group']:not([data-nodepath]",
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            }
         }
     },
     {

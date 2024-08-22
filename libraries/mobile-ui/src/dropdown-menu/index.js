@@ -110,6 +110,8 @@ export default createComponent({
   },
 
   render() {
+    const parent = this.$parent;
+    const ifDesigner = (parent.$env && parent.$env.VUE_APP_DESIGNER);
     const Titles = this.children.map((item, index) => {
       const aId = item.$vnode.context.$options._scopeId;
       return (
@@ -153,13 +155,16 @@ export default createComponent({
 
     return (
       <div class={bem()}>
-        <div
-          ref="bar"
-          style={this.barStyle}
-          class={bem('bar', { opened: this.opened })}
-        >
-          {Titles}
-        </div>
+        {
+          (!ifDesigner || !!Titles?.length) &&
+          <div
+            ref="bar"
+            style={this.barStyle}
+            class={bem('bar', { opened: this.opened })}
+          >
+            {Titles}
+          </div>
+        }
         {this.slots('default')}
       </div>
     );
