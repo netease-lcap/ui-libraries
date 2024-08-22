@@ -833,7 +833,7 @@ export default {
         if (this.filterText === '' && !this.selectedVM) {
           this.$emit('blur', e);
         }
-        this.close();
+
         if (this.hasFilter) {
           this.resetFilterList();
           this.hasFilter = false;
