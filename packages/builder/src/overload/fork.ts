@@ -1,6 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import glob from 'fast-glob';
+import { normalizePath } from 'vite';
 import * as parser from '@babel/parser';
 import traverse from '@babel/traverse';
 import generator from '@babel/generator';
@@ -18,7 +19,10 @@ function transformScriptAst(ast: babelTypes.File, filePath, modules: string[]) {
     ImportDeclaration(p) {
       let sourcePath = p.node.source.value;
       if (sourcePath.startsWith('./') && sourcePath.lastIndexOf('/') === 1) {
-        return;
+        const resolvePath = path.resolve(filePath.substring(0, filePath.lastIndexOf('/')), sourcePath);
+        if (fs.existsSync(resolvePath) && !fs.lstatSync(resolvePath).isDirectory()) {
+          return;
+        }
       }
 
       if (sourcePath.startsWith('@components')) {
@@ -28,9 +32,9 @@ function transformScriptAst(ast: babelTypes.File, filePath, modules: string[]) {
       } else if (sourcePath.startsWith('@/')) {
         const srcVusion = fs.existsSync('.lcap/lcap-ui/src-vusion');
         sourcePath = sourcePath.replace('@', srcVusion ? '@lcap-ui/src-vusion' : '@lcap-ui/src');
-      } else if (sourcePath.startsWith('../')) {
+      } else if (sourcePath.startsWith('../') || sourcePath.startsWith('./')) {
         const lastFolderPath = filePath.substring(0, filePath.lastIndexOf('/'));
-        sourcePath = path.resolve(lastFolderPath, sourcePath).replace(path.resolve(process.cwd(), LCAP_UI_PACKAGE_PATH), '@lcap-ui');
+        sourcePath = normalizePath(path.resolve(lastFolderPath, sourcePath).replace(path.resolve(process.cwd(), LCAP_UI_PACKAGE_PATH), '@lcap-ui'));
       } else if (modules.indexOf(sourcePath) === -1) {
         modules.push(sourcePath);
       }
@@ -41,6 +45,43 @@ function transformScriptAst(ast: babelTypes.File, filePath, modules: string[]) {
   return {
     isJSX,
   };
+}
+
+function transformCssCode(code: string, filePath: string) {
+  const codes = code.split('\n').map((str) => {
+    if (!str || !str.trim().startsWith('@import') || !str.trim().endsWith(';')) {
+      return str;
+    }
+    let startIndex = str.indexOf("'") + 1;
+    let endIndex = str.lastIndexOf("'");
+    if (startIndex === 0) {
+      startIndex = str.indexOf('"') + 1;
+      endIndex = str.lastIndexOf('"');
+    }
+
+    if (startIndex === 0 || startIndex === endIndex) {
+      return str;
+    }
+
+    const prefixStr = str.substring(0, startIndex);
+    const suffixStr = str.substring(endIndex);
+    let sourcePath = str.substring(startIndex, endIndex);
+
+    if (sourcePath.startsWith('./') && sourcePath.lastIndexOf('/') === 1) {
+      return str;
+    }
+
+    if (sourcePath.startsWith('../') || sourcePath.startsWith('./')) {
+      const lastFolderPath = filePath.substring(0, filePath.lastIndexOf('/'));
+      sourcePath = normalizePath(path.resolve(lastFolderPath, sourcePath).replace(path.resolve(process.cwd(), LCAP_UI_PACKAGE_PATH), '@lcap-ui'));
+
+      prefixStr.replace('url(', '');
+      suffixStr.replace(')', '');
+    }
+
+    return [prefixStr, sourcePath, suffixStr].join('');
+  });
+  return codes.join('\n');
 }
 
 function saveScriptFile(filePath: string, context: OverloadComponentContext, modules: string[]) {
@@ -142,7 +183,7 @@ function saveVueFile(filePath: string, context: OverloadComponentContext, module
   if (result.styleTag) {
     resultCodes.push(
       result.styleTag,
-      ...result.styleCodes,
+      transformCssCode(result.styleCodes.join('\n'), filePath),
       '</style>',
     );
   }
@@ -154,7 +195,8 @@ function saveVueFile(filePath: string, context: OverloadComponentContext, module
 function saveCssFile(filePath: string, context: OverloadComponentContext) {
   const basename = path.basename(filePath);
   const resultPath = path.resolve(context.componentFolderPath, basename);
-  fs.copyFileSync(filePath, resultPath);
+  const code = fs.readFileSync(filePath, 'utf-8').toString();
+  fs.writeFileSync(resultPath, transformCssCode(code, filePath), 'utf-8');
 }
 
 function addDependices() {

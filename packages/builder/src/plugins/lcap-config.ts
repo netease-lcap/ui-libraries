@@ -113,7 +113,17 @@ export default (options: LcapViteConfigPluginOptions) => {
       if (hasLcapUIPkg) {
         config.optimizeDeps.include?.push('virtual-lcap:lcap-ui');
         if (config.build.commonjsOptions.requireReturnsDefault === undefined) {
-          config.build.commonjsOptions.requireReturnsDefault = true;
+          config.build.commonjsOptions.requireReturnsDefault = (id) => {
+            return id.indexOf('vue/dist/vue.esm.js') !== -1;
+          };
+        } else if (typeof config.build.commonjsOptions.requireReturnsDefault === 'function') {
+          const temp = config.build.commonjsOptions.requireReturnsDefault;
+          config.build.commonjsOptions.requireReturnsDefault = (id) => {
+            if (id.indexOf('vue/dist/vue.esm.js') !== -1) {
+              return true;
+            }
+            return temp(id);
+          };
         }
         config.build.commonjsOptions.include = getCommonjsOptionsInclude(config).concat([
           '.lcap/lcap-ui/**/*.js',
@@ -152,7 +162,7 @@ export default (options: LcapViteConfigPluginOptions) => {
 
       if (lcapUIPkgName) {
         external.push(lcapUIPkgName);
-        globals[lcapUIPkgName] = 'LcapUI';
+        globals[lcapUIPkgName] = options.framework === 'react' ? 'antd' : 'LcapUI';
         const alias = (config.resolve && config.resolve.alias ? config.resolve.alias : []) as Alias[];
         const alia = alias.find((it) => it.find === LCAP_UI_PACKAGE_NAME);
         if (alia && isBuild) {
