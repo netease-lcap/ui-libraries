@@ -171,14 +171,18 @@ export default {
             if (!this.converter) {
                 if (this.useArrayLikeValue && Array.isArray(value)) {
                     this.updateFromArrayLikeValue(JSON.parse(JSON.stringify(value)));
-                    if (!this.showFinalValue)
-                        this.currentValue = this.lastValueString;
-                    else
-                        this.currentValue = this.lastValueString.split(this.join).slice(-1)[0];
-                    // filterable，需要强制更新下
-                    this.$refs.input.updateCurrentValue(this.currentValue);
                 } else {
-                    this.currentValue = value;
+                    this.lastValueString = value;
+                }
+
+                if (!this.showFinalValue) {
+                    this.currentValue = this.lastValueString;
+                } else {
+                    this.currentValue = this.lastValueString.split(this.join).slice(-1)[0];
+                }
+                // filterable，需要强制更新下
+                if (this.$refs.input) {
+                  this.$refs.input.updateCurrentValue(this.currentValue);
                 }
             }
         },
