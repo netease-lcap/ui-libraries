@@ -61,40 +61,40 @@ namespace nasl.ui {
     })
     activeRowKeys: any[] = [];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Default Active Row Keys',
-      description:
-        '高亮行，支持鼠标键盘操作(Shift)连续高亮行，可用于处理行选中等批量操作，模拟操作系统区域选择行为。非受控属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    defaultActiveRowKeys: any[] = [];
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Default Active Row Keys',
+    //   description:
+    //     '高亮行，支持鼠标键盘操作(Shift)连续高亮行，可用于处理行选中等批量操作，模拟操作系统区域选择行为。非受控属性。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // defaultActiveRowKeys: any[] = [];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Active Row Type',
-      description:
-        '默认不会高亮点击行，`activeRowType=single` 表示鼠标点击仅允许同时高亮一行，Shift 键盘操作加鼠标操作依然可以高亮多行，因为这属于明显的区域选择行为。`activeRowType= multiple ` 表示允许鼠标点击同时高亮多行。',
-      setter: { concept: 'InputSetter' },
-    })
-    activeRowType: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Active Row Type',
+    //   description:
+    //     '默认不会高亮点击行，`activeRowType=single` 表示鼠标点击仅允许同时高亮一行，Shift 键盘操作加鼠标操作依然可以高亮多行，因为这属于明显的区域选择行为。`activeRowType= multiple ` 表示允许鼠标点击同时高亮多行。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // activeRowType: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Allow Resize Column Width',
-      description: '已废弃。是否允许调整列宽。请更为使用 `resizable`',
-      setter: { concept: 'SwitchSetter' },
-    })
-    allowResizeColumnWidth: nasl.core.Boolean;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Allow Resize Column Width',
+    //   description: '已废弃。是否允许调整列宽。请更为使用 `resizable`',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // allowResizeColumnWidth: nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Attach',
-      description:
-        '超出省略等所有浮层元素统一绑定到 `attach`，可根据实际情况调整挂载元素。',
-      setter: { concept: 'InputSetter' },
-    })
-    attach: nasl.core.String | any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Attach',
+    //   description:
+    //     '超出省略等所有浮层元素统一绑定到 `attach`，可根据实际情况调整挂载元素。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // attach: nasl.core.String | any;
 
     @Prop({
       group: '主要属性',
@@ -104,13 +104,13 @@ namespace nasl.ui {
     })
     bordered: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Bottom Content',
-      description: '表格底部内容，可以用于自定义列设置等。',
-      setter: { concept: 'InputSetter' },
-    })
-    bottomContent: any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Bottom Content',
+    //   description: '表格底部内容，可以用于自定义列设置等。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // bottomContent: any;
 
     @Prop({
       group: '主要属性',
@@ -119,14 +119,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     cellEmptyContent: any;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Columns',
-      description: '列配置，泛型 T 指表格数据类型。',
-      setter: { concept: 'InputSetter' },
-    })
-    columns: any[] = [];
 
     @Prop({
       group: '主要属性',
@@ -153,82 +145,82 @@ namespace nasl.ui {
     })
     disableSpaceInactiveRow: nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Empty',
-      description: '空表格呈现样式，支持全局配置 `GlobalConfigProvider`。',
-      setter: { concept: 'InputSetter' },
-    })
-    empty: any = '';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Empty',
+    //   description: '空表格呈现样式，支持全局配置 `GlobalConfigProvider`。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // empty: any = '';
 
-    @Prop({
-      group: '主要属性',
-      title: 'First Full Row',
-      description: '首行内容，横跨所有列。',
-      setter: { concept: 'InputSetter' },
-    })
-    firstFullRow: any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'First Full Row',
+    //   description: '首行内容，横跨所有列。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // firstFullRow: any;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Fixed Rows',
-      description:
-        '固定行（冻结行），示例：[M, N]，表示冻结表头 M 行和表尾 N 行。M 和 N 值为 0 时，表示不冻结行。',
-      setter: { concept: 'InputSetter' },
-    })
-    fixedRows: any[];
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Fixed Rows',
+    //   description:
+    //     '固定行（冻结行），示例：[M, N]，表示冻结表头 M 行和表尾 N 行。M 和 N 值为 0 时，表示不冻结行。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // fixedRows: any[];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Foot Data',
-      description: '表尾数据源，泛型 T 指表格数据类型。',
-      setter: { concept: 'InputSetter' },
-    })
-    footData: any[] = [];
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Foot Data',
+    //   description: '表尾数据源，泛型 T 指表格数据类型。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // footData: any[] = [];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Footer Affix Props',
-      description:
-        '已废弃。请更为使用 `footerAffixedBottom`。表尾吸底基于 Affix 组件开发，透传全部 Affix 组件属性。。',
-      setter: { concept: 'InputSetter' },
-    })
-    footerAffixProps: object;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Footer Affix Props',
+    //   description:
+    //     '已废弃。请更为使用 `footerAffixedBottom`。表尾吸底基于 Affix 组件开发，透传全部 Affix 组件属性。。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // footerAffixProps: object;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Footer Affixed Bottom',
-      description:
-        '表尾吸底。使用此向功能，需要非常注意表格是相对于哪一个父元素进行滚动。值为 `true`，则表示相对于整个窗口吸底。如果表格滚动的父元素不是整个窗口，请通过 `footerAffixedBottom.container` 调整固钉的吸顶范围。基于 Affix 组件开发，透传全部 Affix 组件属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    footerAffixedBottom: nasl.core.Boolean | object = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Footer Affixed Bottom',
+    //   description:
+    //     '表尾吸底。使用此向功能，需要非常注意表格是相对于哪一个父元素进行滚动。值为 `true`，则表示相对于整个窗口吸底。如果表格滚动的父元素不是整个窗口，请通过 `footerAffixedBottom.container` 调整固钉的吸顶范围。基于 Affix 组件开发，透传全部 Affix 组件属性。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // footerAffixedBottom: nasl.core.Boolean | object = false;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Footer Summary',
-      description: '表尾总结行。',
-      setter: { concept: 'InputSetter' },
-    })
-    footerSummary: any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Footer Summary',
+    //   description: '表尾总结行。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // footerSummary: any;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Header Affix Props',
-      description:
-        '已废弃。请更为使用 `headerAffixedTop`。表头吸顶基于 Affix 组件开发，透传全部 Affix 组件属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    headerAffixProps: object;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Header Affix Props',
+    //   description:
+    //     '已废弃。请更为使用 `headerAffixedTop`。表头吸顶基于 Affix 组件开发，透传全部 Affix 组件属性。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // headerAffixProps: object;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Header Affixed Top',
-      description:
-        '表头吸顶。使用该功能，需要非常注意表格是相对于哪一个父元素进行滚动。值为 `true`，表示相对于整个窗口吸顶。如果表格滚动的父元素不是整个窗口，请通过 `headerAffixedTop.container` 调整吸顶的位置。基于 Affix 组件开发，透传全部 Affix 组件属性。。',
-      setter: { concept: 'InputSetter' },
-    })
-    headerAffixedTop: nasl.core.Boolean | object = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Header Affixed Top',
+    //   description:
+    //     '表头吸顶。使用该功能，需要非常注意表格是相对于哪一个父元素进行滚动。值为 `true`，表示相对于整个窗口吸顶。如果表格滚动的父元素不是整个窗口，请通过 `headerAffixedTop.container` 调整吸顶的位置。基于 Affix 组件开发，透传全部 Affix 组件属性。。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // headerAffixedTop: nasl.core.Boolean | object = false;
 
     @Prop({
       group: '主要属性',
@@ -239,13 +231,13 @@ namespace nasl.ui {
     })
     height: nasl.core.String | nasl.core.Decimal;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Horizontal Scroll Affixed Bottom',
-      description: '滚动条吸底。基于 Affix 组件开发，透传全部 Affix 组件属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    horizontalScrollAffixedBottom: nasl.core.Boolean | object;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Horizontal Scroll Affixed Bottom',
+    //   description: '滚动条吸底。基于 Affix 组件开发，透传全部 Affix 组件属性。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // horizontalScrollAffixedBottom: nasl.core.Boolean | object;
 
     @Prop({
       group: '主要属性',
@@ -264,13 +256,13 @@ namespace nasl.ui {
     })
     keyboardRowHover: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Last Full Row',
-      description: '尾行内容，横跨所有列。',
-      setter: { concept: 'InputSetter' },
-    })
-    lastFullRow: any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Last Full Row',
+    //   description: '尾行内容，横跨所有列。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // lastFullRow: any;
 
     @Prop({
       group: '主要属性',
@@ -286,25 +278,25 @@ namespace nasl.ui {
       title: 'Loading',
       description:
         '加载中状态。值为 `true` 会显示默认加载中样式，可以通过 Function 和 插槽 自定义加载状态呈现内容和样式。值为 `false` 则会取消加载状态。',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'SwitchSetter' },
     })
-    loading: any;
+    loading: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Loading Props',
-      description: '透传加载组件全部属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    loadingProps: object;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Loading Props',
+    //   description: '透传加载组件全部属性。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // loadingProps: object;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Locale',
-      description: '语言配置。',
-      setter: { concept: 'InputSetter' },
-    })
-    locale: object;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Locale',
+    //   description: '语言配置。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // locale: object;
 
     @Prop({
       group: '主要属性',
@@ -324,40 +316,40 @@ namespace nasl.ui {
     })
     pagination: object;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Pagination Affixed Bottom',
-      description: '分页吸底。基于 Affix 组件开发，透传全部 Affix 组件属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    paginationAffixedBottom: nasl.core.Boolean | object;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Pagination Affixed Bottom',
+    //   description: '分页吸底。基于 Affix 组件开发，透传全部 Affix 组件属性。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // paginationAffixedBottom: nasl.core.Boolean | object;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Resizable',
-      description:
-        '是否允许调整列宽，设置 `tableLayout=fixed` 效果更友好，此时不允许通过 CSS 设置 `table`元素宽度，也不允许设置 `tableContentWidth`。一般不建议在列宽调整场景使用 `tableLayout: auto`。如果想要配置宽度可调整的最小值和最大值，请使用 `column.resize`，示例：`columns: ',
-      setter: { concept: 'SwitchSetter' },
-    })
-    resizable: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Resizable',
+    //   description:
+    //     '是否允许调整列宽，设置 `tableLayout=fixed` 效果更友好，此时不允许通过 CSS 设置 `table`元素宽度，也不允许设置 `tableContentWidth`。一般不建议在列宽调整场景使用 `tableLayout: auto`。如果想要配置宽度可调整的最小值和最大值，请使用 `column.resize`，示例：`columns: ',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // resizable: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Row Attributes',
-      description:
-        'HTML 标签 `tr` 的属性。类型为 Function 时，参数说明：`params.row` 表示行数据；`params.rowIndex` 表示行下标；`params.type=body` 表示属性作用于 `tbody` 中的元素；`params.type=foot` 表示属性作用于 `tfoot` 中的元素。<br />示例一：{ draggable: true }，<br />示例二：[{ draggable: true }, { title: "超出省略显示" }]。<br /> 示例三：() => [{ draggable: true }]。',
-      setter: { concept: 'InputSetter' },
-    })
-    rowAttributes: object | any[] | any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Row Attributes',
+    //   description:
+    //     'HTML 标签 `tr` 的属性。类型为 Function 时，参数说明：`params.row` 表示行数据；`params.rowIndex` 表示行下标；`params.type=body` 表示属性作用于 `tbody` 中的元素；`params.type=foot` 表示属性作用于 `tfoot` 中的元素。<br />示例一：{ draggable: true }，<br />示例二：[{ draggable: true }, { title: "超出省略显示" }]。<br /> 示例三：() => [{ draggable: true }]。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // rowAttributes: object | any[] | any;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Row Class Name',
-      description:
-        '行类名，泛型 T 指表格数据类型。`params.row` 表示行数据；`params.rowIndex` 表示行下标；`params.type=body`  表示类名作用于 `tbody` 中的元素；`params.type= tfoot` 表示类名作用于 `tfoot` 中的元素。',
-      setter: { concept: 'InputSetter' },
-    })
-    rowClassName: nasl.core.String | object | any[] | any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Row Class Name',
+    //   description:
+    //     '行类名，泛型 T 指表格数据类型。`params.row` 表示行数据；`params.rowIndex` 表示行下标；`params.type=body`  表示类名作用于 `tbody` 中的元素；`params.type= tfoot` 表示类名作用于 `tfoot` 中的元素。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // rowClassName: nasl.core.String | object | any[] | any;
 
     @Prop({
       group: '主要属性',
@@ -368,32 +360,32 @@ namespace nasl.ui {
     })
     rowKey: nasl.core.String = 'id';
 
-    @Prop({
-      group: '主要属性',
-      title: 'Rowspan And Colspan',
-      description:
-        '用于自定义合并单元格，泛型 T 指表格数据类型。示例：`({ row, col, rowIndex, colIndex }) => { rowspan: 2, colspan: 3 }`。',
-      setter: { concept: 'InputSetter' },
-    })
-    rowspanAndColspan: any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Rowspan And Colspan',
+    //   description:
+    //     '用于自定义合并单元格，泛型 T 指表格数据类型。示例：`({ row, col, rowIndex, colIndex }) => { rowspan: 2, colspan: 3 }`。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // rowspanAndColspan: any;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Rowspan And Colspan In Footer',
-      description:
-        '用于自定义表尾的合并单元格，泛型 T 指表格数据类型。示例：`({ row, col, rowIndex, colIndex }) => { rowspan: 2, colspan: 3 }`。',
-      setter: { concept: 'InputSetter' },
-    })
-    rowspanAndColspanInFooter: any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Rowspan And Colspan In Footer',
+    //   description:
+    //     '用于自定义表尾的合并单元格，泛型 T 指表格数据类型。示例：`({ row, col, rowIndex, colIndex }) => { rowspan: 2, colspan: 3 }`。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // rowspanAndColspanInFooter: any;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Scroll',
-      description:
-        '懒加载和虚拟滚动。为保证组件收益最大化，当数据量小于阈值 `scroll.threshold` 时，无论虚拟滚动的配置是否存在，组件内部都不会开启虚拟滚动，`scroll.threshold` 默认为 `100`。',
-      setter: { concept: 'InputSetter' },
-    })
-    scroll: object;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Scroll',
+    //   description:
+    //     '懒加载和虚拟滚动。为保证组件收益最大化，当数据量小于阈值 `scroll.threshold` 时，无论虚拟滚动的配置是否存在，组件内部都不会开启虚拟滚动，`scroll.threshold` 默认为 `100`。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // scroll: object;
 
     @Prop({
       group: '主要属性',
@@ -410,33 +402,10 @@ namespace nasl.ui {
         '表格尺寸，支持全局配置 `GlobalConfigProvider`，默认全局配置值为 `medium`。可选项：small/medium/large。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: 'small' },
-          { title: 'medium' },
-          { title: 'large。TS 类型：`SizeEnum`。[通用类型定义](https:' },
-          { title: '' },
-          { title: 'github.com' },
-          { title: 'Tencent' },
-          { title: 'tdesign-vue' },
-          { title: 'blob' },
-          { title: 'develop' },
-          { title: 'src' },
-          { title: 'common.ts)' },
-        ],
+        options: [{ title: 'small' }, { title: 'medium' }, { title: 'large' }],
       },
     })
-    size:
-      | 'small'
-      | 'medium'
-      | 'large。TS 类型：`SizeEnum`。[通用类型定义](https:'
-      | ''
-      | 'github.com'
-      | 'Tencent'
-      | 'tdesign-vue'
-      | 'blob'
-      | 'develop'
-      | 'src'
-      | 'common.ts)' = '';
+    size: 'small' | 'medium' | 'large' = 'medium';
 
     @Prop({
       group: '主要属性',
