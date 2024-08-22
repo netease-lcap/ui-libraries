@@ -14,7 +14,11 @@
     @blur="onRootBlur">
     <span :class="$style.baseline">b</span><!-- 用于基线对齐 -->
     <span v-show="!isItemDisplay || (!filterText && (multiple ? !selectedVMs.length : !selectedVM) && !compositionInputing)" :class="$style.placeholder">{{ isPreview ? '--' : placeholder }}</span>
-    <span v-if="prefix" :class="$style.prefix" :name="prefix" @click="$emit('click-prefix', $event, this)"><slot name="prefix"></slot></span>
+    <span v-if="prefix" :class="$style.prefix" :name="prefix" @click="$emit('click-prefix', $event, this)">
+      <slot name="prefix">
+          <i-ico :name="prefix" v-if="prefix!=='search'" />
+      </slot>
+    </span>
     <div v-show="isItemDisplay" :class="[$style.text,!multiple && $style.textEllipsis]" v-ellipsis-title :tags-overflow="tagsOverflow" :style="{direction: ellipsisDirection}" ref="inputOuter">
         <!-- @override: 添加了flag功能 -->
         <slot name="flag">
@@ -62,70 +66,72 @@
         </u-input>
     </div>
     <span v-if="suffix" :name="suffix" :class="$style.suffix"
-            @click="$emit('click-suffix', $event, this)"><slot name="suffix"></slot></span>
+            @click="$emit('click-suffix', $event, this)"><slot name="suffix">
+            <i-ico :name="suffix" v-if="suffix!=='search'" />
+            </slot></span>
     <span v-if="!currentDisabled && !readonly && clearable && !!(filterable ? filterText ||currentText : currentText)" :class="$style.clearable" @click.stop="clear"></span>
     <m-popper :class="$style.popper" ref="popper" :color="color" :placement="placement" :append-to="appendTo" :disabled="readonly || currentDisabled"
         :style="{ width: currentPopperWidth }"
-        :footer="showRenderFooter"
-        @update:opened="$emit('update:opened', $event, this)"
-        @before-open="$emit('before-open', $event, this)"
-        @before-close="$emit('before-close', $event, this)"
-        @open="onOpen"
-        @close="onClose"
-        @before-toggle="$emit('before-toggle', $event, this)"
-        @toggle="$emit('toggle', $event, this)"
-        @click.stop @scroll.stop="showRenderFooter ? null : onScroll($event)" @mousedown.stop>
-        <div :class="$style.wrap" @scroll.stop="showRenderFooter ? onScroll($event) : null" ref="popperwrap">
-            <u-select-item-all-check v-if="hasAllCheckItem && multiple" :all-checked="allChecked" :parent-v-m="this" :check-all="checkAll">{{ allCheckItemText }}</u-select-item-all-check>
-            <slot></slot>
-            <template v-if="currentData">
-                <div :class="$style.status" key="empty" v-if="!currentData.length && !currentLoading && showEmptyText">
-                    <slot name="empty">{{ emptyText }}</slot>
-                </div>
+      :footer="showRenderFooter"
+      @update:opened="$emit('update:opened', $event, this)"
+      @before-open="$emit('before-open', $event, this)"
+      @before-close="$emit('before-close', $event, this)"
+      @open="onOpen"
+      @close="onClose"
+      @before-toggle="$emit('before-toggle', $event, this)"
+      @toggle="$emit('toggle', $event, this)"
+      @click.stop @scroll.stop="showRenderFooter ? null : onScroll($event)" @mousedown.stop>
+      <div :class="$style.wrap" @scroll.stop="showRenderFooter ? onScroll($event) : null" ref="popperwrap">
+          <u-select-item-all-check v-if="hasAllCheckItem && multiple" :all-checked="allChecked" :parent-v-m="this" :check-all="checkAll">{{ allCheckItemText }}</u-select-item-all-check>
+          <slot></slot>
+        <template v-if="currentData">
+          <div :class="$style.status" key="empty" v-if="!currentData.length && !currentLoading && showEmptyText">
+              <slot name="empty">{{ emptyText }}</slot>
+          </div>
+          <template v-else>
+                  <component :is="ChildComponent"
+                      v-for="(item, index) in currentData"
+                      v-if="item !== undefined || item !== null"
+                      :key="filterable ? $at2(item, valueField) + '_' + index : $at2(item, valueField)"
+                      :text="$at2(item, field || textField)"
+              :value="$at2(item, valueField)"
+              :disabled="item.disabled || disabled"
+              :item="item"
+              :description="description ? $at2(item, descriptionField) : null"
+              :icon="$at2(item, iconField)">
+              <slot
+                name="text"
+                :item="item"
+                :text="$at2(item, field || textField)"
+                :value="$at2(item, valueField)"
+                :disabled="item.disabled || disabled"
+                :description="description ? $at2(item, descriptionField) : null"
+                :icon="$at2(item, iconField)">
+                <span :class="$style.iconwrap" v-if="iconField">
+                  <img :class="$style.icon" v-if="$at2(item, iconField)" :src="$at2(item, iconField)">
+                  {{ $at2(item, field || textField) }}
+                </span>
                 <template v-else>
-                        <component :is="ChildComponent"
-                            v-for="(item, index) in currentData"
-                            v-if="item !== undefined || item !== null"
-                            :key="filterable ? $at2(item, valueField) + '_' + index : $at2(item, valueField)"
-                            :text="$at2(item, field || textField)"
-                            :value="$at2(item, valueField)"
-                            :disabled="item.disabled || disabled"
-                            :item="item"
-                            :description="description ? $at2(item, descriptionField) : null"
-                            :icon="$at2(item, iconField)">
-                            <slot
-                                name="text"
-                                :item="item"
-                                :text="$at2(item, field || textField)"
-                                :value="$at2(item, valueField)"
-                                :disabled="item.disabled || disabled"
-                                :description="description ? $at2(item, descriptionField) : null"
-                                :icon="$at2(item, iconField)">
-                                <span :class="$style.iconwrap" v-if="iconField">
-                                    <img :class="$style.icon" v-if="$at2(item, iconField)" :src="$at2(item, iconField)">
-                                    {{ $at2(item, field || textField) }}
-                                </span>
-                                <template v-else>
-                                    {{ $at2(item, field || textField) }}
-                                </template>
-                            </slot>
-                        </component>
-                    </template>
+                  {{ $at2(item, field || textField) }}
                 </template>
-                <div :class="$style.status" status="loading" v-if="currentLoading">
-                    <slot name="loading"><u-spinner></u-spinner> {{ loadingText }}</slot>
-                </div>
-            </div>
-            <div :class="$style.footer" v-if="showRenderFooter" vusion-slot-name="renderFooter" ref="footer">
-                <slot name="renderFooter">
-                    <s-empty v-if="(!$slots.renderFooter)
-                        && $env.VUE_APP_DESIGNER
-                        && !!$attrs['vusion-node-path']">
-                    </s-empty>
-                </slot>
-            </div>
-        </m-popper>
+              </slot>
+            </component>
+          </template>
+        </template>
+        <div :class="$style.status" status="loading" v-if="currentLoading">
+          <slot name="loading"><u-spinner></u-spinner> {{ loadingText }}</slot>
+        </div>
+      </div>
+      <div :class="$style.footer" v-if="showRenderFooter" vusion-slot-name="renderFooter" ref="footer">
+        <slot name="renderFooter">
+            <s-empty v-if="(!$slots.renderFooter)
+                && $env.VUE_APP_DESIGNER
+                && !!$attrs['vusion-node-path']">
+            </s-empty>
+        </slot>
     </div>
+    </m-popper>
+  </div>
 </template>
 
 <script>
