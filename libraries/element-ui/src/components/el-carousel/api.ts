@@ -244,7 +244,7 @@ namespace nasl.ui {
       emptyBackground: 'add-sub-large',
       snippets: [
         {
-          title: 'CarouselItem',
+          title: '幻灯片',
           code: '<el-carousel-item><el-image style="width: 100%; height: 100%" fit="cover" src="https://static-vusion.163yun.com/assets/cloud-ui/6.jpg"></el-carousel-item>',
         },
       ],
