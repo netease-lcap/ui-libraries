@@ -45,6 +45,9 @@ export function getProjectContext(rootPath) {
 function getComponentFloderPath(rootPath, component, framework) {
   const pkg = fs.readJSONSync(path.resolve(rootPath, '.lcap/lcap-ui/package/package.json'));
   if (pkg.name === 'cloud-ui.vusion' || pkg.name === '@lcap/pc-ui') {
+    if (component === 'UToastSingle') {
+      component = 'UToast';
+    }
     return path.resolve(rootPath, `.lcap/lcap-ui/package/src/components/${kebabCase(component)}.vue`);
   }
 
@@ -56,6 +59,10 @@ function getComponentFloderPath(rootPath, component, framework) {
       compPath = path.resolve(rootPath, `.lcap/lcap-ui/package/src/${folderName}`);
     }
     return compPath;
+  }
+
+  if (component === 'Radio' && pkg.name === '@lcap/pc-react-ui') {
+    component = 'RadioGroup';
   }
 
   return path.resolve(rootPath, `.lcap/lcap-ui/package/src/components/${framework.startsWith('vue') ? kebabCase(component) : component}`);

@@ -62,7 +62,7 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
       const addNaslUINamespace = [
         'ViewComponent', 'CurrentDynamic', 'DataSourceParams',
         'PoiInfo', 'File', 'SelectData', 'DragAndDropUpdateData',
-        'ValidateResult', 'BaseEvent',
+        'ValidateResult', 'BaseEvent', 'Current'
       ];
       const typeName = path.node.typeName.name;
       if (
@@ -112,78 +112,84 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
         }
 
         if (
-          decorator && context.naslUIConfig.ideusage
+          decorator
         ) {
-          const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${JSON.stringify(context.naslUIConfig.ideusage)};`;
-          const tempAST = babel.parseSync(code);
           const decorators = path.node.decorators || [];
-          if (tempAST) {
-            traverse(tempAST, {
-              VariableDeclarator(p) {
-                if (p.node.id.type === 'Identifier' && p.node.id.name === TEMP_IDEUSAGE_VAR_NAME && p.node.init && p.node.init.type === 'ObjectExpression') {
-                  decorators.unshift({
-                    type: 'Decorator',
-                    expression: {
-                      type: 'CallExpression',
-                      callee: {
+          const properties: babelTypes.ObjectProperty[] = [{
+            type: 'ObjectProperty',
+            key: {
+              type: 'Identifier',
+              name: 'replaceNaslUIComponent',
+            },
+            value: {
+              type: 'StringLiteral',
+              value: context.naslUIConfig.name,
+            },
+            computed: false,
+            shorthand: false,
+          }, {
+            type: 'ObjectProperty',
+            key: {
+              type: 'Identifier',
+              name: 'type',
+            },
+            value: {
+              type: 'StringLiteral',
+              value: context.type,
+            },
+            computed: false,
+            shorthand: false,
+          }, {
+            type: 'ObjectProperty',
+            key: {
+              type: 'Identifier',
+              name: 'show',
+            },
+            value: {
+              type: 'BooleanLiteral',
+              value: true,
+            },
+            computed: false,
+            shorthand: false,
+          }];
+
+          if (context.naslUIConfig.ideusage) {
+            const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${JSON.stringify(context.naslUIConfig.ideusage)};`;
+            const tempAST = babel.parseSync(code);
+            if (tempAST) {
+              traverse(tempAST, {
+                VariableDeclarator(p) {
+                  if (p.node.id.type === 'Identifier' && p.node.id.name === TEMP_IDEUSAGE_VAR_NAME && p.node.init && p.node.init.type === 'ObjectExpression') {
+                    properties.push({
+                      type: 'ObjectProperty',
+                      key: {
                         type: 'Identifier',
-                        name: 'ExtensionComponent',
+                        name: 'ideusage',
                       },
-                      arguments: [{
-                        type: 'ObjectExpression',
-                        properties: [{
-                          type: 'ObjectProperty',
-                          key: {
-                            type: 'Identifier',
-                            name: 'replaceNaslUIComponent',
-                          },
-                          value: {
-                            type: 'StringLiteral',
-                            value: context.naslUIConfig.name,
-                          },
-                          computed: false,
-                          shorthand: false,
-                        }, {
-                          type: 'ObjectProperty',
-                          key: {
-                            type: 'Identifier',
-                            name: 'type',
-                          },
-                          value: {
-                            type: 'StringLiteral',
-                            value: context.type,
-                          },
-                          computed: false,
-                          shorthand: false,
-                        }, {
-                          type: 'ObjectProperty',
-                          key: {
-                            type: 'Identifier',
-                            name: 'show',
-                          },
-                          value: {
-                            type: 'BooleanLiteral',
-                            value: true,
-                          },
-                          computed: false,
-                          shorthand: false,
-                        },{
-                          type: 'ObjectProperty',
-                          key: {
-                            type: 'Identifier',
-                            name: 'ideusage',
-                          },
-                          value: p.node.init,
-                          computed: false,
-                          shorthand: false,
-                        }]
-                      }],
-                    }
-                  });
+                      value: p.node.init,
+                      computed: false,
+                      shorthand: false,
+                    });
+                  }
                 }
-              }
-            });
+              });
+            }
           }
+
+          decorators.unshift({
+            type: 'Decorator',
+            expression: {
+              type: 'CallExpression',
+              callee: {
+                type: 'Identifier',
+                name: 'ExtensionComponent',
+              },
+              arguments: [{
+                type: 'ObjectExpression',
+                properties,
+              }],
+            }
+          });
         }
       } else if (path.node.id && path.node.id.type === 'Identifier' && path.node.superClass && path.node.superClass.type === 'Identifier' && path.node.superClass.name === 'ViewComponentOptions') {
         if (path.node.id.name !== `${context.naslUIConfig.name}Options`) {
