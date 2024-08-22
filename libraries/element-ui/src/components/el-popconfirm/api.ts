@@ -2,6 +2,10 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      namedSlotOmitWrapper: ['reference'],
+    },
   })
   @Component({
     title: '气泡确认框',

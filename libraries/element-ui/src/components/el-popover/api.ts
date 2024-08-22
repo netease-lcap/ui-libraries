@@ -3,7 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
-      idetype: 'popover',
+      idetype: 'container',
       namedSlotOmitWrapper: ['reference'],
       selector: {
         expression: "this.getElement(el => el.slotTarget === 'reference')",
