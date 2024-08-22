@@ -17,9 +17,10 @@ namespace nasl.ui {
           display: 'inline',
           condition: "!this.getAttribute('dataSource')",
           accept: false,
+          content: '请绑定数据源或插入子节点'
         },
         slotWrapperInlineStyle: {
-          item: 'display: inline-block;',
+          default: 'display: inline-block;',
         }
       },
     }
@@ -184,7 +185,6 @@ namespace nasl.ui {
           code: '<el-radio-pro><el-text text="单选项"></el-text></el-radio-pro>',
         },
       ],
-      emptyBackground: 'add-sub',
     })
     slotDefault: () => Array<ViewComponent>;
 
