@@ -12,6 +12,7 @@ namespace nasl.ui {
         {
           expression: 'this',
           cssSelector: "div[class='el-dropdown']",
+          placement: 'tail',
         },
         {
           expression: "this.getElement(el => el.slotTarget === 'items')",
@@ -22,6 +23,7 @@ namespace nasl.ui {
       events: {
         click: true,
       },
+      eventsEffect: 'default',
       additionalAttribute: {
         trigger: '"click"',
         ':hideOnClick': '"false"',
@@ -39,7 +41,7 @@ namespace nasl.ui {
       title: '重新加载',
       description: '清除缓存，重新加载',
     })
-    reload(): void { }
+    reload(): void {}
 
     constructor(options?: Partial<ElDropdownOptions<T, V>>) {
       super();
@@ -325,7 +327,10 @@ namespace nasl.ui {
       group: '主要属性',
       title: '图标',
       description: '图标',
-      setter: { concept: 'IconSetter' },
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+      },
     })
     icon: nasl.core.String;
 

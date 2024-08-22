@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-carousel></el-carousel>',
+    template: '<el-carousel height="300px"></el-carousel>',
   }),
 };

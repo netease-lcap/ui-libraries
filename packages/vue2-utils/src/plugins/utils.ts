@@ -1,8 +1,51 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 import Vue from 'vue';
-import type { ComponentOptions } from 'vue';
+import type { ComponentOptions, PropOptions } from 'vue';
 import { isRef } from '@vue/composition-api';
-import { camelCase, kebabCase } from 'lodash';
+import { camelCase, isPlainObject, kebabCase } from 'lodash';
 import type { PluginSetupRef } from './types';
+
+export interface PropDef extends PropOptions {
+  name: string;
+}
+
+export function getPropDefs(component: ComponentOptions<Vue>, props: PropDef[] = []) {
+  if (component.extends) {
+    getPropDefs(component.extends as ComponentOptions<Vue>, props);
+  }
+
+  if (component.mixins && component.mixins.length > 0) {
+    component.mixins.forEach((mixin: any) => {
+      getPropDefs(mixin, props);
+    });
+  }
+
+  if (Array.isArray(component.props)) {
+    component.props.map((str) => ({ name: camelCase(str) })).forEach((op) => {
+      const i = props.findIndex((p) => p.name === op.name);
+      if (i === -1) {
+        props.push(op);
+      } else {
+        props[i] = op;
+      }
+    });
+  } else if (isPlainObject(component.props)) {
+    for (const key in component.props) {
+      const val = component.props[key];
+      const name = camelCase(key);
+      const def = (isPlainObject(val) ? val : { name, type: val }) as any;
+      const i = props.findIndex((p) => p.name === name);
+      if (i === -1) {
+        props.push(def);
+      } else {
+        props[i] = def;
+      }
+    }
+  }
+
+  return props;
+}
 
 export function getPropKeys(component: ComponentOptions<Vue>) {
   const keys = Array.isArray(component.props) ? [...component.props] : Object.keys(component.props || {});
@@ -38,6 +81,10 @@ export function getSlotKey(name: string) {
 }
 
 export function getEventKey(name: string) {
+  if (name.indexOf(':') !== -1) {
+    return name;
+  }
+
   return camelCase(`${EVENT_PREFIX}${name}`);
 }
 

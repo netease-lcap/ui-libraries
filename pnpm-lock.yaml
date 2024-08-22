@@ -358,6 +358,9 @@ importers:
       '@types/fs-extra':
         specifier: ^11.0.4
         version: 11.0.4
+      '@types/lodash':
+        specifier: ^4.14.202
+        version: 4.14.202
       '@vant/area-data':
         specifier: 1.1.1
         version: 1.1.1

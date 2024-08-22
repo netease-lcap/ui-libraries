@@ -126,7 +126,7 @@ const usePropMap = (props: any, ctx: SetupContext) => {
       return ctx.listeners[eventName];
     }
 
-    if (k.startsWith('update:')) {
+    if (k.indexOf(':') !== -1) {
       return ctx.listeners[k];
     }
 
