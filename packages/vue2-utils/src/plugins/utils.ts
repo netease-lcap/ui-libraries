@@ -38,6 +38,10 @@ export function getSlotKey(name: string) {
 }
 
 export function getEventKey(name: string) {
+  if (name.indexOf(':') !== -1) {
+    return name;
+  }
+
   return camelCase(`${EVENT_PREFIX}${name}`);
 }
 
