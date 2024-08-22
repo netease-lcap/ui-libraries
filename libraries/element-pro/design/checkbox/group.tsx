@@ -196,7 +196,8 @@ export default defineComponent({
       if (!nodes) return;
       for (let i = 0, len = nodes.length; i < len; i++) {
         const vNode = nodes[i];
-        if (vNode.componentOptions && /TCheckbox/.test(vNode.tag)) {
+
+        if (vNode.componentOptions && /ElCheckbox/.test(vNode.tag)) {
           (vNode.componentOptions.propsData as any).storeKey = storeKey;
         }
         if (vNode.children?.length) {
