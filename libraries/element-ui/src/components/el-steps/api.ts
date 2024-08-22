@@ -76,9 +76,7 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '步骤别名字段',
-      description: '集合的元素类型中，用于显示文本的属性名称',
-      docDescription:
-        '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
+      description: '集合的元素类型中，用于步骤别名字段',
       setter: {
         concept: 'PropertySelectSetter',
       },

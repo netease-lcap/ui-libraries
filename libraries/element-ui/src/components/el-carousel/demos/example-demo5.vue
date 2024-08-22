@@ -3,7 +3,7 @@
 <template>
   <div>
     <el-carousel height="200px" direction="vertical" :autoplay="false">
-      <el-carousel-item v-for="item in 3" :key="item">
+      <el-carousel-item v-for="item in 3"  :key="item">
         <h3 class="medium">{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>

@@ -71,3 +71,35 @@ export const Example5 = {
     template: '<example-demo></example-demo>',
   }),
 };
+
+export const Example6 = {
+  name: '数据源',
+  render: () => ({
+    data() {
+      return {
+        colors: ['#ccc', '#000', '#666'],
+        dataSource: [
+          {
+            label: '1',
+            value: '1',
+          },
+          {
+            label: '2',
+            value: '2',
+          },
+          {
+            label: '3',
+            value: '3',
+          },
+        ],
+      };
+    },
+    template: `
+      <el-carousel :dataSource="dataSource" height="300px">
+        <template #item="{ item }">
+          <div :style="{ height: '100%', backgroundColor: colors[Number(item.value)], color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }">{{item.label}}</div>
+        </template>
+      </el-carsouel>
+    `,
+  }),
+};
