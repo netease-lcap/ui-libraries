@@ -86,7 +86,7 @@ namespace nasl.ui {
         '当前激活的面板(如果是手风琴模式，绑定值类型需要为`string`，否则为`array`)',
       setter: { concept: 'InputSetter' },
     })
-    value: nasl.core.String | nasl.collection.List<nasl.core.String>;
+    value: V | nasl.collection.List<V>;
 
     @Prop({
       group: '数据属性',
@@ -113,7 +113,7 @@ namespace nasl.ui {
       description:
         '当前激活面板改变时触发(如果是手风琴模式，参数 `activeNames` 类型为`string`，否则为`array`)',
     })
-    onChange: (event: any) => any;
+    onChange: (event: V | nasl.collection.List<V>) => any;
 
     @Slot({
       title: '内容',
