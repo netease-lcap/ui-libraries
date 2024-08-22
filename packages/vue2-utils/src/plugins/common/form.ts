@@ -1,5 +1,6 @@
 import { NaslComponentPluginOptions, PluginSetupFunctionReturn } from '../types';
 import { getEventKey } from '../utils';
+import { useSyncState } from '../../hooks';
 
 interface PropSyncOption {
   name: string;
@@ -12,6 +13,7 @@ export const createUseUpdateSync = (options: PropSyncOption[] = [{ name: 'value'
     name: 'useUpdateSync',
     setup(props) {
       const returnMap: PluginSetupFunctionReturn = {};
+      const syncMap: Record<string, () => any> = {};
 
       options.forEach(({ name, event, defaultValue }) => {
         const eventName = getEventKey(event);
@@ -29,8 +31,11 @@ export const createUseUpdateSync = (options: PropSyncOption[] = [{ name: 'value'
             eventHandler(...args);
           }
         };
+
+        syncMap[name] = () => propRef.value;
       });
 
+      useSyncState(syncMap);
       return returnMap;
     },
   } as NaslComponentPluginOptions;
