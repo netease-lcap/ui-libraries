@@ -605,13 +605,13 @@ export default {
                 onSuccess: (res) => {
                     if (res.Code === 200 && Array.isArray(res.Data)) {
                       res = {
-                        [this.urlField]: Array.isArray(file) ? res.Data.map((f) => f[this.urlField]) : res.Data[0][this.urlField],
+                        [this.urlField]: Array.isArray(file) ? res.Data.map((f) => this.$at2(f, this.urlField)) : this.$at2(res.Data[0], this.urlField),
                       };
                     }
                     const item = this.currentValue[index];
                     item.status = 'success';
-                    if (res[this.urlField]) {
-                        const url = res[this.urlField];
+                    if (this.$at2(res, this.urlField)) {
+                        const url = this.$at2(res, this.urlField);
                         item.url = url;
                         if (Array.isArray(url)) {
                             item.url = url.join(',');
@@ -623,8 +623,8 @@ export default {
                         item.name = this.handleFileName(item.url);
                     }
                     // 一次上传多个文件，返回数据是数组，需要处理
-                    if (res[this.urlField]) {
-                        const url = res[this.urlField];
+                    if (this.$at2(res, this.urlField)) {
+                        const url = this.$at2(res, this.urlField);
                         if (Array.isArray(url)) {
                             this.currentValue.splice(this.currentValue.length - 1, 1);
                             url.forEach((urlTemp, urlIndex) => {
