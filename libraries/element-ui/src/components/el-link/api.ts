@@ -1,8 +1,7 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
-  @IDEExtraInfo({
-  })
+  @IDEExtraInfo({})
   @Component({
     title: '文字链接',
     icon: 'link',
@@ -32,7 +31,16 @@ namespace nasl.ui {
         ],
       },
     })
-    type: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default' = 'default';
+    type: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default' =
+      'default';
+
+    @Prop({
+      group: '主要属性',
+      title: '文本',
+      description: '显示文本内容',
+      docDescription: '显示的文本内容',
+    })
+    text: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -52,16 +60,16 @@ namespace nasl.ui {
 
     @Prop({
       group: '交互属性',
-      title: '链接地址'
+      title: '链接地址',
     })
     hrefAndTo: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '图标类名',
-      description: '图标类名',
-      setter: { concept: 'InputSetter' },
-    })
-    icon: nasl.core.String = '';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '图标类名',
+    //   description: '图标类名',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // icon: nasl.core.String = '';
   }
 }

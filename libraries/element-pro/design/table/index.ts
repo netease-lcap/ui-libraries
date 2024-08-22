@@ -5,6 +5,7 @@ import _PrimaryTable from './primary-table';
 import _EnhancedTable from './enhanced-table';
 import withInstall from '../utils/withInstall';
 
+
 import './style';
 
 export * from './type';
