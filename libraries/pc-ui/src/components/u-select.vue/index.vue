@@ -14,7 +14,9 @@
     @blur="onRootBlur">
     <span :class="$style.baseline">b</span><!-- 用于基线对齐 -->
     <span v-show="!isItemDisplay || (!filterText && (multiple ? !selectedVMs.length : !selectedVM) && !compositionInputing)" :class="$style.placeholder">{{ isPreview ? '--' : placeholder }}</span>
-    <span v-if="prefix" :class="$style.prefix" :name="prefix" @click="$emit('click-prefix', $event, this)"><slot name="prefix"></slot></span>
+    <span v-if="prefix" :class="$style.prefix" :name="prefix" @click="$emit('click-prefix', $event, this)"><slot name="prefix">
+        <u-icon :name="prefix" v-if="prefix!=='search'"></u-icon>
+    </slot></span>
     <div v-show="isItemDisplay" :class="[$style.text,!multiple && $style.textEllipsis]" v-ellipsis-title :tags-overflow="tagsOverflow" :style="{direction: ellipsisDirection}" ref="inputOuter">
         <!-- @override: 添加了flag功能 -->
         <slot name="flag">
@@ -62,7 +64,9 @@
         </u-input>
     </div>
     <span v-if="suffix" :name="suffix" :class="$style.suffix"
-            @click="$emit('click-suffix', $event, this)"><slot name="suffix"></slot></span>
+            @click="$emit('click-suffix', $event, this)"><slot name="suffix">
+              <u-icon :name="suffix" v-if="suffix!=='search'"></u-icon>
+            </slot></span>
     <span v-if="!currentDisabled && !readonly && clearable && !!(filterable ? filterText ||currentText : currentText)" :class="$style.clearable" @click.stop="clear"></span>
     <m-popper :class="$style.popper" ref="popper" :color="color" :placement="placement" :append-to="appendTo" :disabled="readonly || currentDisabled"
         :style="{ width: currentPopperWidth }"
