@@ -95,6 +95,7 @@ namespace nasl.ui {
         })
         value: nasl.core.String;
 
+
         @Prop({
             group: '数据属性',
             title: '空值为null',
@@ -104,7 +105,7 @@ namespace nasl.ui {
                 concept: 'SwitchSetter',
             },
         })
-        emptyValueIsNull: nasl.core.Boolean = true;
+        emptyValueIsNull: nasl.core.Boolean ;
 
         @Prop({
             group: '主要属性',
@@ -366,16 +367,16 @@ namespace nasl.ui {
         })
         onKeyup: (event: KeyboardEvent) => any;
 
-        @Slot({
-            title: '前缀图标',
-            description: '前缀图标自定义',
-        })
-        slotPrefix: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: '前缀图标',
+        //     description: '前缀图标自定义',
+        // })
+        // slotPrefix: () => Array<ViewComponent>;
 
-        @Slot({
-            title: '后缀图标',
-            description: '后缀图标自定义',
-        })
-        slotSuffix: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: '后缀图标',
+        //     description: '后缀图标自定义',
+        // })
+        // slotSuffix: () => Array<ViewComponent>;
     }
 }

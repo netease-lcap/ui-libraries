@@ -122,7 +122,7 @@ namespace nasl.ui {
                 concept: 'SwitchSetter',
             },
         })
-        decimalPlacesOmitZero: nasl.core.Boolean = false;
+        decimalPlacesOmitZero: nasl.core.Boolean = true;
 
         @Prop<UNumberInputOptions, 'thousandths'>({
             group: '主要属性',
@@ -374,10 +374,10 @@ namespace nasl.ui {
         })
         onKeyup: (event: KeyboardEvent) => any;
 
-        @Slot({
-            title: '默认',
-            description: '插入 HTML 或 `Component`, 可展示额外内容。',
-        })
-        slotDefault: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: '默认',
+        //     description: '插入 HTML 或 `Component`, 可展示额外内容。',
+        // })
+        // slotDefault: () => Array<ViewComponent>;
     }
 }

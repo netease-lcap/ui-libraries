@@ -43,7 +43,10 @@
       :class="$style.prefix"
       :name="prefix"
       @click="$emit('click-prefix', $event, this)"
-      ><slot name="prefix"></slot
+      >
+        <slot name="prefix" >
+          <i-ico :name="prefix" v-if="prefix!=='search'" />
+        </slot
     ></span>
     <div
       v-show="isItemDisplay"
@@ -156,7 +159,11 @@
       :class="$style.suffix"
       @click="$emit('click-suffix', $event, this)"
       ><slot name="suffix"></slot
-    ></span>
+    >
+      <slot name="suffix" >
+        <i-ico :name="suffix" v-if="suffix!=='search'" />
+      </slot>
+    </span>
     <span
       v-if="
         !currentDisabled &&
@@ -311,7 +318,7 @@ export default {
         multipleAppearance: { type: String, default: 'tags' },
         tagsOverflow: { type: String, default: 'collapse' },
         autoSelect: { type: Boolean, default: false },
-        emptyValueIsNull:{ type: Boolean, default: true},
+        emptyValueIsNull:{ type: Boolean, default: false},
         placeholder: { type: String, default: '请选择' },
         clearable: { type: Boolean, default: false },
         filterable: { type: Boolean, default: false },
@@ -371,13 +378,14 @@ export default {
       // @inherit: currentLoading: false,
       currentText: '', // 显示文本
       filterText: '', // 过滤文本，只有 input 时会改变它
+      filterInputFocused: false,
       preventBlur: false,
       inputWidth: 20,
       popperOpened: false,
       currentPopperWidth: this.popperWidth || '100%',
       compositionInputing: false,
       collapseCounter: 0,
-      selectedDataQueue: [], // 选中不在第一页数据处理
+      selectedDataQueue: [null, null], // 选中不在第一页数据处理
     };
   },
   computed: {
@@ -447,7 +455,9 @@ export default {
       this.setPopperWidth();
     },
     value(value) {
-      this.setSelectedDataQueue(value);
+      if (this.autoCheckSelectedValue) {
+        this.setSelectedDataQueue(value);
+      }
 
       if (
         this.filterable &&
@@ -468,6 +478,7 @@ export default {
       }
     },
     async selectedDataQueue(value) {
+      if (!this.autoCheckSelectedValue) return;
 
       // 当value有值，并且已经加载过一次数据才能开启判断
       // value 和 data 可能都是异步的，所以需要watch
@@ -487,9 +498,9 @@ export default {
         return;
       }
       if (this.filterable) {
-        if (this.selectedVM) {
+        if (this.selectedVM && !this.filterInputFocused) {
           this.filterText = this.selectedVM.currentText;
-        } else if (!this.value) {
+        } else if (!this.value && !this.filterInputFocused) {
           // 响应this.value 的变化 = '' 时处理 清空
           this.filterText = '';
         }
@@ -588,7 +599,9 @@ export default {
         this.close();
       }
     });
-    this.setSelectedDataQueue(this.value);
+    if (this.autoCheckSelectedValue) {
+      this.setSelectedDataQueue(this.value);
+    }
   },
   mounted() {
     this.autofocus && this.$el.focus();
@@ -776,6 +789,9 @@ export default {
       // if (this.currentLoading)
       //     return Promise.resolve(); // @TODO: dataSource 的多次 promise 必须串行
       // return this.promiseSequence = this.promiseSequence.then(() => {
+      if (this.$emitPrevent('before-load', undefined, this)) {
+        return;
+      }
       this.currentLoading = true;
       const loadToken = (this.loadToken = +new Date());
       // console.log('filterText', this.filterText, loadToken);
@@ -787,10 +803,11 @@ export default {
           this.ensureSelectedInItemVMs();
           // 选中数据不在第一页处理
           // 只需要初始的时候处理，这里存储数据用于判断是否是第一次加载数据
-          if (!this.selectedDataQueue[1]) {
+          if (this.autoCheckSelectedValue && !this.selectedDataQueue[1]) {
             this.selectedDataQueue.splice(1, 1, data);
           }
           this.$refs.popper.currentOpened && this.$refs.popper.scheduleUpdate();
+          this.$emit('load', undefined, this);
           return data;
         })
         .catch(() => (this.currentLoading = false)); // });
@@ -799,7 +816,10 @@ export default {
       this.$emit('focus', e, this);
     },
     onInput(value) {
-      if (!this.filterable) return;
+      if (!this.filterable) {
+        return;
+      }
+      this.filterInputFocused = true;
       this.currentText = value; // value.split(',')
       if (this.$emitPrevent('before-filter', { filterText: value }, this))
         return;
@@ -809,7 +829,11 @@ export default {
       this.hasFilter = true; // 控制blur时是否重置列表，避免每次blur都重置
     },
     onBlur(e) {
-      if (!this.filterable) return; // 这边必须要用 setTimeout，$nextTick 也不行，需要保证在 @select 之后完成
+      this.filterInputFocused = false;
+      if (!this.filterable) {
+        return; // 这边必须要用 setTimeout，$nextTick 也不行，需要保证在 @select 之后完成
+      }
+      this.preventBlur = false;
       this.inputBlurTimer = setTimeout(() => {
         if (this.preventBlur) return (this.preventBlur = false);
         this.selectByText(this.filterText);

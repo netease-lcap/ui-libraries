@@ -1,5 +1,5 @@
 <template>
-<div :class="[$style.root, rootVM.currentCollapse && !isInSidebar ? $style.popRoot : $style.normalRoot]" :disabled="disabled" :mini="miniMode" ref="root" :noIcon="!icon">
+<div :class="[$style.root, rootVM.currentCollapse && !isInSidebar ? $style.popRoot : $style.normalRoot, hasIconPadding ? $style.hasIconPadding : '']" :disabled="disabled" :mini="miniMode" ref="root" :noIcon="!icon">
     <div :class="$style.head" :selected="selected" @click="rootVM.expandTrigger === 'click' && !rootVM.currentCollapse && toggle()" :title="title" :data-group-nested-level="currentGroupNestedLevel" :vusion-click-enabled="rootVM.currentCollapse">
         <i-ico
             v-if="icon"
@@ -43,7 +43,7 @@
             <u-sidebar-item
                 :text="title"
                 disabled
-                style="color: #999999;"
+                style="color: #999999;padding-left: 12px;"
                 >
                 <template #title>
                     <slot name="title">
@@ -93,6 +93,7 @@
                     :disabled="childNode.disabled"
                     :collapsible="$at2(childNode, rootVM.collapsibleField)"
                     :title="$at2(childNode, rootVM.textField)"
+                    :icon="$at2(childNode, rootVM.iconField)"
                 ></u-sidebar-group>
                 <u-sidebar-item v-else
                     :key="`${$at2(childNode, rootVM.valueField) || idx}`"
@@ -197,6 +198,19 @@ export default {
             return this.parentVM.$options.name === this.$options.parentName;
         },
 
+        hasIconPadding() {
+          if (this.parentVM.$options.name !== this.$options.name) {
+            return;
+          }
+
+          const { childrenNodes = [], itemVMs = [] } = this.parentVM;
+
+          return !this.icon && (
+            childrenNodes.find((childNode) => !!this.$at2(childNode, this.rootVM.iconField))
+            || itemVMs.find((it) => !!it.icon)
+          );
+        },
+
         miniMode() {
             return this.isInSidebar && this.rootVM.currentCollapse;
         },
@@ -261,6 +275,18 @@ export default {
                 final();
             }
         },
+        toggleAll(expanded) {
+          if (!Array.isArray(this.groupVMs) || this.groupVMs.length === 0) {
+            return;
+          }
+
+          this.groupVMs.forEach((groupVM) => {
+            groupVM.toggle(expanded)
+            if (Array.isArray(groupVM.groupVMs) && typeof groupVM.toggleAll === 'function') {
+                groupVM.toggleAll(expanded);
+              }
+          });
+        },
         load() {
             this.loading = true;
             return this.rootVM.currentDataSource.load({
@@ -296,6 +322,10 @@ export default {
     font-size: 14px;
 }
 
+.popRoot.hasIconPadding {
+  padding-left: calc(var(--sidebar-item-icon-font-size) + 20px);
+}
+
 .head {
     display: flex;
     cursor: var(--cursor-pointer);
@@ -312,22 +342,22 @@ export default {
     line-height: var(--sidebar-group-head-height);
 }
 
-.normalRoot[mini][noIcon] .head{
+/* .normalRoot[mini][noIcon] .head{
     padding-left: calc(var(--sidebar-item-padding-left) - 12px);
-}
+} */
 
-.normalRoot[mini] .head{
+/* .normalRoot[mini] .head{
     padding-right: 16px;
-}
+} */
 
 .popperRoot .head{
     display: flex;
     align-items: center;
 }
 
-.normalRoot[mini] .singleicon {
+/* .normalRoot[mini] .singleicon {
     margin-left: -12px;
-}
+} */
 
 .normalRoot .singleicon {
     margin-left: -24px;
@@ -353,9 +383,9 @@ export default {
     padding-right: 32px;
 }
 
-.normalRoot[mini] .title{
+/* .normalRoot[mini] .title{
     padding-right: 0;
-}
+} */
 
 .normalRoot .title{
     flex: 1;
@@ -447,13 +477,13 @@ export default {
     line-height: var(--sidebar-group-head-height);
 }
 
-.normalRoot[mini] .expander{
+/* .normalRoot[mini] .expander{
     width: 16px;
     height: 16px;
     line-height: 16px;
     top: 50%;
     transform: translateY(-50%);
-}
+} */
 
 .popRoot .expander{
     transform: translateX(-100%);
@@ -481,13 +511,39 @@ content: "\e661";
     transform: rotate(90deg);
 }
 
-.normalRoot[mini] .expander::after {
+.normalRoot[mini] .head {
+  padding: 0;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.normalRoot[mini] .singleicon {
+  margin: 0;
+}
+
+.normalRoot[mini] .title {
+  /* display: none; */
+  padding: 0;
+  text-align: center;
+  flex: none;
+}
+
+.normalRoot[mini] .title > *:not([class^="i-ico"]) {
+  display: none;
+}
+
+.normalRoot[mini] .expander {
+  display: none;
+}
+
+/* .normalRoot[mini] .expander::after {
     transform: rotate(90deg);
 }
 
 .normalRoot[mini] .expander[expanded]::after {
     transform: rotate(270deg);
-}
+} */
 
 .root[disabled] {
     cursor: var(--cursor-not-allowed);

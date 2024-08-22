@@ -44,11 +44,6 @@ namespace nasl.ui {
         filterText: nasl.core.String;
 
         @Prop({
-            title: '没有文本信息的值',
-        })
-        noTextValues: nasl.collection.List<nasl.core.String>;
-
-        @Prop({
           title: '禁用',
         })
         disabled: nasl.core.Boolean;
@@ -170,7 +165,7 @@ namespace nasl.ui {
                 concept: 'SwitchSetter',
             },
         })
-        emptyValueIsNull: nasl.core.Boolean = true;
+        emptyValueIsNull: nasl.core.Boolean ;
 
         @Prop({
             group: '数据属性',
@@ -389,22 +384,20 @@ namespace nasl.ui {
             title: '前缀图标',
             docDescription: '支持添加前缀图标，如搜索图标',
             setter: {
-                concept: 'EnumSelectSetter',
-                options: [{ title: '搜索' }, { title: '暂无' }],
+                concept: 'IconSetter',
             },
         })
-        prefix: 'search' | '' = '';
+        prefix: nasl.core.String = '';
 
         @Prop({
             group: '主要属性',
             title: '后缀图标',
             docDescription: '支持添加后缀图标，如搜索图标',
             setter: {
-                concept: 'EnumSelectSetter',
-                options: [{ title: '搜索' }, { title: '暂无' }],
+                concept: 'IconSetter',
             },
         })
-        suffix: 'search' | '' = '';
+        suffix: nasl.core.String = '';
 
         @Prop({
             group: '主要属性',
@@ -705,6 +698,12 @@ namespace nasl.ui {
         onLoad: (event: any) => any;
 
         @Event({
+            title: '清空后',
+            description: '清空后触发',
+        })
+        onBeforeClear: (event: any) => any;
+
+        @Event({
             title: '点击前缀图标',
             description: '点击前缀图标后触发',
         })
@@ -906,11 +905,11 @@ namespace nasl.ui {
         })
         slotTitle: () => Array<ViewComponent>;
 
-        @Slot({
-            title: '附加内容',
-            description: '在右侧可以附加内容。',
-        })
-        slotExtra: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: '附加内容',
+        //     description: '在右侧可以附加内容。',
+        // })
+        // slotExtra: () => Array<ViewComponent>;
     }
 
     @Component({

@@ -68,7 +68,7 @@ namespace nasl.ui {
         slotDefault: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '自定义选项',
             description: '自定义选项的结构和样式',
         })
         slotItem: (current: Current<T>) => Array<ViewComponent>;
@@ -118,14 +118,14 @@ namespace nasl.ui {
         })
         slotDefault: () => Array<ViewComponent>;
 
-        @Slot({
-            title: 'undefined',
-            description: '自定义图标',
-        })
-        slotDot: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: 'undefined',
+        //     description: '自定义图标',
+        // })
+        // slotDot: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '自定义标签',
             description: '自定义 `label` ，只在 `label` 模式下生效',
         })
         slotLabel: () => Array<ViewComponent>;

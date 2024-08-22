@@ -99,6 +99,9 @@ export default {
                 this.options = this.divide(formatDSResult(this.dataSource));
             }
         },
+        async reload() {
+            return await this.update();
+        },
         comIndex(index1, index2) {
             return index1 * (this.colnum || 5) + index2;
         },

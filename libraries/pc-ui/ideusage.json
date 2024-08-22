@@ -3,7 +3,6 @@
         "name": "ULinearLayout",
         "ideusage": {
             "idetype": "container",
-            "containerDirection": "column",
             "expandWhenHesitate": true,
            "automate": [
                 {
@@ -98,7 +97,10 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "target.tag === 'u-crumb-item'"
+            "childAccept": "target.tag === 'u-crumb-item'",
+            "additionalAttribute": {
+                ":showInDesiner": true
+            }
         }
     },
     {
@@ -113,7 +115,10 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "['u-sidebar-group', 'u-sidebar-item', 'u-sidebar-divider'].includes(target.tag)"
+            "childAccept": "['u-sidebar-group', 'u-sidebar-item', 'u-sidebar-divider'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -267,8 +272,10 @@
         "name": "UPanel",
         "ideusage": {
             "idetype": "container",
-            "structured": true,
-            "childAccept": "target.tag === 'u-panel-group'"
+            "structured": {
+                "slot": "default",
+                "empty": true
+            }
         }
     },
     {
@@ -293,13 +300,21 @@
             "parentAccept": "target.tag === 'u-collapse'",
             "events": {
                 "click": true
-            }
+            },
+            "slotWrapperInlineStyle": {
+                "title": "display:inline-block"
+            },
+            "disableSlotAutoFill": [{
+                "slot": "extra",
+                "expression": "!this.getParent().getAttribute('showExtraEmptySlot')?.value"
+            }]
         }
     },
     {
         "name": "UCard",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "disableSlotAutoFill": ["cover"]
         }
     },
     {
@@ -314,7 +329,8 @@
         "ideusage": {
             "idetype": "element",
             "editable": "text",
-            "textholder": "text"
+            "textholder": "text",
+            "useFxOrEg":{"property": "text"}
         }
     },
     {
@@ -322,7 +338,8 @@
         "ideusage": {
             "idetype": "element",
             "editable": "text",
-            "textholder": "text"
+            "textholder": "text",
+            "useFxOrEg":{"property": "text"}
         }
     },
     {
@@ -330,7 +347,8 @@
         "ideusage": {
             "idetype": "element",
             "editable": "text",
-            "textholder": "text"
+            "textholder": "text",
+            "useFxOrEg":{"property": "text"}
         }
     },
     {
@@ -348,6 +366,8 @@
     {
         "name": "ULabel",
         "ideusage": {
+            "textholder": "text",
+            "useFxOrEg":{"property": "text"},
             "idetype": "element"
         }
     },
@@ -401,7 +421,11 @@
         "name": "UInfoListItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['u-info-list-group', 'u-info-list'].includes(target.tag)"
+            "parentAccept": "['u-info-list-group', 'u-info-list'].includes(target.tag)",
+            "disableSlotAutoFill": [{
+                "slot": "label",
+                "expression": "this.getAttribute('label')?.value"
+            }]
         }
     },
     {
@@ -410,16 +434,25 @@
             "idetype": "container",
             "structured": true,
             "parentAccept": "target.tag === 'u-info-list'",
-            "childAccept": "target.tag === 'u-info-list-item'"
+            "childAccept": "target.tag === 'u-info-list-item'",
+            "textholder": "title",
+            "disableSlotAutoFill": [{
+                "slot": "title",
+                "expression": "this.getAttribute('title')"
+            }],
+            "useFxOrEg":{"property": "title"}
         }
     },
     {
         "name": "UImage",
         "ideusage": {
             "idetype": "element",
-            "additionalAttribute": {
-                ":convertSrcFn": "\"(src) => src.startsWith('/assets') ? '/lowcode-static' + src : src \""
-            }
+            "textholder": "src",
+            "elementSutando": {
+                "condition": "this.getAttribute('src').type === 'dynamic'",
+                "component": "UImageDesigner"
+            },
+            "useFxOrEg":{"property": "src"}
         }
     },
     {
@@ -458,7 +491,8 @@
                   "condition": "!this.getAttribute('dataSource')",
                   "accept": false
                 }
-            }
+            },
+            "namedSlotOmitWrapper": ["item"]
         }
     },
     {
@@ -486,7 +520,16 @@
                 "slot": "cell",
                 "useRef": "argus?.[0]?.index === 0"
             },
-            "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic', 'u-table-view-column-group'].includes(target.tag)"
+            "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic', 'u-table-view-column-group'].includes(target.tag)",
+            "disableSlotAutoFill": [
+                {
+                    "slot": "config-columns",
+                    "expression": "!this.getAttribute('configurable')?.value"
+                }
+            ],
+            "additionalAttribute": {
+                ":useMask": false
+            }
         }
     },
     {
@@ -511,9 +554,10 @@
                 }
             ],
             "displaySlotInline": {
-                "cell": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type').value)",
-                "title": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type').value)"
-            }
+                "cell": "['index', 'radio', 'checkbox', 'dragHandler'].includes(this.getAttribute('type')?.value)",
+                "title": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type')?.value)"
+            },
+            "forceUpdateWhenAttributeChange": "parent"
         }
     },
     {
@@ -522,7 +566,10 @@
             "idetype": "container",
             "forceRefresh": "parent",
             "childAccept": false,
-            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
+            "events": {
+                "click": true
+            }
         }
     },
     {
@@ -531,7 +578,24 @@
             "idetype": "container",
             "forceRefresh": "parent",
             "childAccept": false,
-            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+            "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
+            "additionalAttribute": {
+                ":dataSource": "\"[{}]\""
+            },
+            "selector": [
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'title')",
+                    "cssSelector": "th"
+                },
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'cell')",
+                    "cssSelector": "td"
+                },
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'expand-content')",
+                    "cssSelector": "tr[class^='u-table-view_expand-content']"
+                }
+            ]
         }
     },
     {
@@ -540,7 +604,21 @@
         "idetype": "container",
         "forceRefresh": "parent",
         "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic'].includes(target.tag)",
-        "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)"
+        "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
+        "selector": [
+            {
+                "expression": "this.getElement(el => el.slotTarget === 'title')",
+                "cssSelector": "th"
+            },
+            {
+                "expression": "this.getElement(el => el.slotTarget === 'cell')",
+                "cssSelector": "td"
+            },
+            {
+                "expression": "this.getElement(el => el.slotTarget === 'expand-content')",
+                "cssSelector": "tr[class^='u-table-view_expand-content']"
+            }
+        ]
        }
     },
     {
@@ -568,6 +646,9 @@
                    "condition": "!this.getAttribute('dataSource')",
                     "accept": "target.concept === 'Entity'"
                 }
+            },
+            "displaySlotConditions": {
+                "empty": false
             }
         }
     },
@@ -598,7 +679,9 @@
             "additionalAttribute": {
                 ":dataSource": "\"[{}]\"",
                 ":colnum": "\"1\""
-            }
+            },
+            "childAccept": false,
+            "useTemplateInDefaultSlot": true
         }
     },
     {
@@ -606,14 +689,28 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "['u-form-group', 'u-form-item'].includes(target.tag)"
+            "childAccept": "['u-form-group', 'u-form-item'].includes(target.tag)",
+            "baseInfo": {
+                "title": "(this.getAttribute('id')?.value === 'dynamicRenderContainer' && this.getAttribute('processPrefix')) ? '流程表单' : '表单' "
+            },
+            "operator": {
+                "copy": "!(this.getAttribute('id')?.value === 'dynamicRenderContainer' && this.getAttribute('processPrefix'))",
+                "duplicate": "!(this.getAttribute('id')?.value === 'dynamicRenderContainer' && this.getAttribute('processPrefix'))",
+                "cut": "!(this.getAttribute('id')?.value === 'dynamicRenderContainer' && this.getAttribute('processPrefix'))",
+                "d2c": "!(this.getAttribute('id')?.value === 'dynamicRenderContainer' && this.getAttribute('processPrefix'))"
+            }
         }
     },
     {
         "name": "UFormItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['u-form-group', 'u-form'].includes(target.tag)"
+            "parentAccept": "['u-form-group', 'u-form'].includes(target.tag)",
+            "disableSlotAutoFill": [{
+                "slot": "label",
+                "expression": "this.getAttribute('label')?.value"
+            }],
+            "ignoreProperty": ["rules"]
         }
     },
     {
@@ -621,6 +718,7 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
+            "parentAccept": "['u-form'].includes(target.tag)",
             "childAccept": "['u-form-item'].includes(target.tag)",
             "events": {
                 "click": true
@@ -630,20 +728,28 @@
     {
         "name": "UInput",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "element",
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
         "name": "UNumberInput",
         "ideusage": {
             "idetype": "element",
-            "textholder": "value"
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
+            "additionalAttribute": {
+                ":value": null
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
         "name": "UTextarea",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -652,7 +758,7 @@
            "idetype": "container",
             "structured": true,
             "dataSource": {
-                "dismiss": "!this.getAttribute('dataSource') && this.elementsLength() > 0",
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
                 "display": 3,
                 "loopRule": "nth-child(n+2)",
                 "loopElem": "> label[class^='u-radios_radio']:not([data-nodepath])",
@@ -672,6 +778,7 @@
         "name": "URadio",
         "ideusage": {
             "idetype": "container",
+            "parentAccept": "target.tag === 'u-radios'",
             "displaySlotInline": {
                 "item": true
             }
@@ -702,6 +809,10 @@
             "childAccept": "target.tag === 'u-checkbox'",
             "slotWrapperInlineStyle": {
                 "item": "display:inline-block;width:90px;"
+            },
+            "displaySlotConditions": {
+                "checkAll": false,
+                "item": false
             }
         }
     },
@@ -709,6 +820,7 @@
         "name": "UCheckbox",
         "ideusage": {
             "idetype": "container",
+            "parentAccept": "target.tag === 'u-checkboxes'",
             "displaySlotInline": {
                 "item": true
             }
@@ -734,7 +846,8 @@
     {
         "name": "UCapsule",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "parentAccept": "['u-capsules', 'u-capsules-group'].includes(target.tag)"
         }
     },
     {
@@ -746,13 +859,27 @@
     {
         "name": "UComboSlider",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "childAccept": false
         }
     },
     {
         "name": "UUploader",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "additionalAttribute": {
+                ":showInDesigner": true
+            },
+            "slotWrapperInlineStyle": {
+                "file-list": "display:flex"
+            },
+            "displaySlotConditions": {
+                "dragDescription": false
+            },
+            "disableSlotAutoFill": [{
+                "slot": "file-list",
+                "expression": "!this.getElement(el => el.slotTarget === 'file-list')"
+            }]
         }
     },
     {
@@ -797,7 +924,13 @@
             ],
             "events": {
                 "click": true
-            }
+            },
+            "disableSlotAutoFill": [{
+                "slot": "title",
+                "expression": "this.getAttribute('title')",
+                "fill": "this.getAttribute('title').value"
+            }],
+            "forceRefresh": "parent"
         }
     },
     {
@@ -805,7 +938,11 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept":"target.tag === 'u-selectable-step'"
+            "childAccept":"target.tag === 'u-selectable-step'",
+            "displaySlotConditions": {
+                "title": false,
+                "desc": false
+            }
         }
     },
     {
@@ -823,15 +960,20 @@
                     "cssSelector": "div"
                 }
             ],
+            "slotWrapperInlineStyle": {
+                "title": "display:inline-block;width:max-content;"
+            },
             "events": {
                 "click": true
-            }
+            },
+            "forceRefresh": "parent"
         }
     },
     {
         "name": "UPagination",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "childAccept": false
         }
     },
     {
@@ -842,14 +984,19 @@
             "childAccept": "['u-select-item', 'u-select-group', 'u-select-divider'].includes(target.tag)",
             "events": {
                 "click": true
-            }
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
         "name": "USelectItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['u-select-group', 'u-select'].includes(target.tag)"
+            "parentAccept": "['u-select-group', 'u-select'].includes(target.tag)",
+            "disableSlotAutoFill": [{
+                "slot": "default",
+                "expression": "this.getAttribute('text')?.value"
+            }]
         }
     },
     {
@@ -877,7 +1024,8 @@
     {
         "name": "URegionSelect",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -908,7 +1056,14 @@
             "parentAccept": "['u-tree-select-new', 'u-tree-view-new', 'u-tree-view-node-new'].includes(target.tag)",
             "events": {
                 "click": true
-            }
+            },
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block"
+            },
+            "additionalAttribute": {
+                ":showEmpty": false
+            },
+            "ignoreProperty": ["value"]
         }
     },
     {
@@ -920,19 +1075,31 @@
     {
         "name": "UDatePicker",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "additionalAttribute": {
+                ":value": null
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
         "name": "UTimePicker",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "additionalAttribute": {
+                ":value": null
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
         "name": "UDateTimePicker",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "additionalAttribute": {
+                ":value": null
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -943,7 +1110,8 @@
             "childAccept": "target.tag === 'u-tree-view-node-new'",
             "events": {
                 "click": true
-            }
+            },
+            "translateBindingProperty": ["value", "placeholder"]
         }
     },
     {
@@ -985,7 +1153,16 @@
               "expression": "this.getElement(el => el.slotTarget === 'body')",
               "cssSelector": "div[class^='u-modal_dialog']"
             },
-            "cacheOpenKey": "visible"
+            "cacheOpenKey": "visible",
+            "additionalAttribute": {
+                ":mode": "\"false\"",
+                ":disableRootElemShift": "\"true\""
+            },
+            "disableSlotAutoFill": ["head"],
+            "displaySlotConditions": {
+                "head": false,
+                "heading": false
+            }
         }
     },
     {
@@ -996,13 +1173,19 @@
                 "expression": "this.getElement(el => el.slotTarget === 'body')",
                 "cssSelector": "div[class^='u-drawer_drawer']"
             },
-            "cacheOpenKey": "visible"
+            "cacheOpenKey": "visible",
+            "additionalAttribute": {
+                ":mode": "\"false\"",
+                ":disableRootElemShift": "\"true\""
+            }
         }
     },
     {
         "name": "UToastSingle",
         "ideusage": {
             "idetype": "messager",
+            "textholder": "text",
+            "useFxOrEg":{"property": "text","displayAsAttr":true},
             "elementSutando": {
                 "condition": true,
                 "component": "UToastDesigner",
@@ -1015,8 +1198,36 @@
         }
     },
     {
+        "name": "UProcessButton",
+        "ideusage": {
+            "idetype": "element",
+            "elementSutando": {
+                "condition": true,
+                "component": "UProcessButton"
+            },
+            "additionalAttribute": {
+                ":showInDesigner": true
+            }
+        }
+    },
+    {
+        "name": "UProcessInfo",
+        "ideusage": {
+            "idetype": "element",
+            "elementSutando": {
+                "condition": true,
+                "component": "UProcessInfo"
+            },
+            "additionalAttribute": {
+                ":showInDesigner": true
+            }
+        }
+    },
+    {
         "name": "EWatermark",
         "ideusage": {
+            "textholder": "text",
+            "useFxOrEg":{"property": "text","displayAsAttr":true},
             "idetype": "element"
         }
     },

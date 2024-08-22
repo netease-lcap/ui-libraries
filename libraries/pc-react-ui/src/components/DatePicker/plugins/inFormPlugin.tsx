@@ -20,11 +20,9 @@ export function useHandleShowTime(props) {
   };
 }
 
-export function useHandleBasicsComponent(props) {
-  const deletePropsList = props.get($deletePropsList, []).concat(['FormItemComponent']);
+export function useHandleFormItemComponent(props) {
   return {
-    [$deletePropsList]: deletePropsList,
     FormItemComponent: ProFormDateTimePicker,
   };
 }
-useHandleBasicsComponent.order = 2;
+useHandleFormItemComponent.order = 2;

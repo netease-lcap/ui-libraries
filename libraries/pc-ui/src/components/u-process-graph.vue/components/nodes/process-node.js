@@ -28,6 +28,7 @@ function getComponent(type, node) {
         case 'AutoTask':
         case 'ApprovalTask':
         case 'ServiceTask':
+        case 'SubmitTask':
             return taskNodeWrapped;
         case 'ExclusiveGateway':
         case 'ParallelGateway':

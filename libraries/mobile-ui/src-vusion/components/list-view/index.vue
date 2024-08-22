@@ -112,10 +112,10 @@ export default {
           return this.currentDataSource && this.currentDataSource.total ? this.currentDataSource.total : 0;
         },
         size() {
-          return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.size : this.pageSize;
+          return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.size : undefined;
         },
         page() {
-          return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : this.pageNumber;
+          return this.currentDataSource && this.currentDataSource.paging ? this.currentDataSource.paging.number : 1;
         },
         sort() {
           return this.currentDataSource && this.currentDataSource.sorting ? this.currentDataSource.sorting.field : '';
@@ -247,6 +247,7 @@ export default {
             }
 
             this.currentLoading = false;
+            this.$emit('load', undefined, this);
         },
 
         onScroll(e) {

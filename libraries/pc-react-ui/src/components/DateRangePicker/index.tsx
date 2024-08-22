@@ -18,9 +18,9 @@ const mapProps = {
 
 export const DateRangePicker = registerComponet<
   RangePickerProps,
-  pluginType<RangePickerProps>
+  RangePickerProps
 >(
-  ProFormDateTimeRangePicker,
+  AntdRangePicker,
   { plugin, displayName: AntdRangePicker.displayName, mapProps },
 );
 

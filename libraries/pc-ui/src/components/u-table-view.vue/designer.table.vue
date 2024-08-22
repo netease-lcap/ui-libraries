@@ -33,6 +33,8 @@
                                 :colspan="columnVM.colSpan"
                                 :rowspan="columnVM.rowSpan"
                                 :ellipsis="columnVM.thEllipsis !== undefined? columnVM.thEllipsis : thEllipsis"
+                                :sub-form-drop-column="columnVM?.subFormDropColumn"
+                                :sub-form-initial-column="columnVM?.subFormInitialColumn"
                                 v-ellipsis-title>
                                 <!-- type === 'checkbox' -->
                                 <span v-if="columnVM.type === 'checkbox'">
@@ -47,7 +49,7 @@
                                                 v-if="!(columnVM.$slots && columnVM.$slots.title)
                                                     && !columnVM.title
                                                     && $env.VUE_APP_DESIGNER
-                                                    && !!$attrs['vusion-node-path']">
+                                                    && !!(columnVM.$attrs && columnVM.$attrs['vusion-node-path'])">
                                             </s-empty>
                                         </f-slot>
                                     </span>
@@ -93,7 +95,7 @@
                     <tbody ref="virtual">
                         <template v-if="(!currentLoading && !currentError && !currentEmpty || pageable === 'auto-more' || pageable === 'load-more') && currentData && currentData.length">
                             <template v-for="(item, rowIndex) in virtualList">
-                                <tr :key="getKey(item, rowIndex)" :class="[$style.row, ($env.VUE_APP_DESIGNER && rowIndex !== 0) ? $designer.trmask : '']" :color="item.rowColor" :selected="selectable && selectedItem === item"
+                                <tr :key="getKey(item, rowIndex)" :class="[$style.row]" :color="item.rowColor" :selected="selectable && selectedItem === item"
                                 v-if="item.display !== 'none'"
                                 :draggable="rowDraggable && item.draggable || undefined"
                                 :dragging="isDragging(item)"
@@ -119,7 +121,10 @@
                                         :last-left-fixed="isLastLeftFixed(columnVM, columnIndex, visibleColumnVMs)"
                                         :first-right-fixed="isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs)"
                                         :shadow="(isLastLeftFixed(columnVM, columnIndex, visibleColumnVMs)) || (isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs))"
+                                        :sub-form-drop-column="columnVM?.subFormDropColumn"
+                                        :sub-form-initial-column="columnVM?.subFormInitialColumn"
                                         :disabled="columnVM.currentHidden">
+                                        <div :class="$designer.tdmask" v-if="useMask && rowIndex !== 0"></div>
                                         <!--可视化占据的虚拟填充区域-->
                                         <div vusion-slot-name="cell" :plus-empty="typeCheck(columnVM.type) ? false : columnVM.$attrs['plus-empty']">
                                             <!-- type === 'index' -->
@@ -300,18 +305,14 @@ export default {
 </script>
 
 <style module="$designer">
-.trmask {
-    position: relative;
-}
-.trmask::after {
-    content: '';
-    display: block;
+.tdmask {
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
-    bottom: 0;
-    background: rgba(255,255,255,0.8);
+    bottom: -1px;
+    background: white;
+    opacity: 0.8;
     z-index: 999;
 }
 </style>

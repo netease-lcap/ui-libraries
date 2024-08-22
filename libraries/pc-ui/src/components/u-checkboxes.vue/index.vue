@@ -1,5 +1,9 @@
 <template>
-<div :class="$style.root">
+<div 
+  :class="$style.root" 
+  :style="getStyle()"
+  :direction="direction"
+  :isSetColumn="isSetColumn">
   <u-loading v-if="loading" size="small"></u-loading>
   <template v-else>
     <u-checkbox
@@ -91,13 +95,16 @@ export default {
     checkAllDisplay: { type: String, default: "inline" },
     checkAllText: { type: String, default: "全选" },
     preview: { type: Boolean, default: false },
+    direction: { type: String, default: "horizontal" },
+    column: { type: Number, default: 0 }
   },
   data() {
     return {
       currentValue: null,
       itemVMs: [],
       all: false,
-      currentText : null
+      currentText : null,
+      isSetColumn: false
     };
   },
   watch: {
@@ -275,7 +282,22 @@ export default {
         this.all = null;
       }
 
-    }
+    },
+    getStyle() {
+      let styles = {}
+      let isSetColumn = false
+      if (this.direction !== 'vertical' && this.column > 0) {
+          isSetColumn = true
+          styles = {
+              ...styles,
+              display: 'grid',
+              gridTemplateColumns: `repeat(${this.column}, calc(100% / ${this.column}))`
+          }
+      } 
+      
+      this.isSetColumn = isSetColumn
+      return styles
+    },
   },
 };
 </script>
@@ -293,5 +315,19 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 10px;
+}
+
+.root[direction="vertical"] {
+  display: grid;
+  grid-template-columns: 1;
+}
+
+.root[direction] {
+  row-gap: var(--checkbox-space-y);
+}
+
+.root[isSetColumn=true] > label, .root[direction="vertical"] > label {
+    display: flex;
+    align-items: center;
 }
 </style>

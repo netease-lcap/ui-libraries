@@ -2,7 +2,6 @@
 <div :class="$style.root">
     <u-loading size="large" v-if="!loaded" :class="$style.loading"></u-loading>
     <iframe v-if="src"
-        v-else
         @load="onLoad($event)"
         v-bind="$attrs"
         allowfullscreen

@@ -234,9 +234,14 @@ export function genFormItemsTemplate(entity: naslTypes.Entity, properties: Array
   ${properties.map((property) => {
     const label = (property.label || property.name).replace(/"/g, '&quot;');
     const required = !!property.required && options.needRules;
-    const rules = [];
+    const rules: Array<string> = [];
     if (options.needRules && property.rules && property.rules.length) {
-      property.rules.forEach((rule) => rules.push(`nasl.validation.${rule}`));
+      property.rules.forEach((rule) => {
+        if (!rule.endsWith(')')) {
+          rule += '()';
+        }
+        rules.push(`nasl.validation.${rule}`);
+      });
     }
     if (required) rules.push('nasl.validation.required()');
     let formItem = `<UFormItem

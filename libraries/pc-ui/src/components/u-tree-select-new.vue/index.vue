@@ -7,9 +7,6 @@
         :clearable="clearable && (!!checkableValue || !!selectedItem)"
         :tabindex="readonly || currentDisabled ? '' : 0"
         @click="focus"
-        @keydown.up.prevent="$refs.popper.currentOpened ? shift(-1) : open()"
-        @keydown.down.prevent="$refs.popper.currentOpened ? shift(+1) : open()"
-        @keydown.enter.stop.prevent="onEnter"
         @keydown.esc.stop="close(), (filterText = '')"
         @blur="onRootBlur">
         <!-- 用于基线对齐 -->
@@ -111,7 +108,9 @@
                 :expander-width="expanderWidth"
                 :filterable="filterable"
                 :filter-text="filterText"
-                :filter-fields="filterFields"
+                :filter-fields="finalFilterFields"
+                :matchMethod="matchMethod"
+                :caseSensitive="caseSensitive"
                 @change="$emit('change', $event, this)"
                 @before-select="$emit('before-select', $event, this)"
                 @select="$emit('select', $event, this)"
@@ -134,6 +133,7 @@
 
 <script>
 import { sync } from '@lcap/vue2-utils';
+import _ from 'lodash'
 import MField from '../m-field.vue';
 // import UTreeViewNodeNew from '../u-tree-view-new.vue/node.vue';
 import SEmpty from '../s-empty.vue';
@@ -182,7 +182,10 @@ export default {
         autoSelect: { type: Boolean, default: false },
         placeholder: { type: String, default: '请选择' },
         clearable: { type: Boolean, default: false },
+        emptyValueIsNull:{ type: Boolean, default: false },
         filterable: { type: Boolean, default: false },
+        matchMethod: { type: [String, Function], default: 'includes' },
+        caseSensitive: { type: Boolean, default: false },
         opened: { type: Boolean, default: false },
         preview: { type: Boolean, default: false },
         placement: {
@@ -260,6 +263,12 @@ export default {
                 return '';
             }
         },
+        finalFilterFields() {
+          if (this.textField) {
+            this.filterFields.push(this.textField)
+          }
+          return _.uniq(this.filterFields)
+        }
     },
     watch: {
         value() {
@@ -330,13 +339,16 @@ export default {
                     const componentName = name || tag;
                     if (componentName === this.$options.childName) {
                         const { propsData, children: childrenVNodes } = componentOptions || {};
-                        const {
+                        let {
                             text,
                             value,
                             node,
                             childrenField: propsChildrenField,
                             moreChildrenFields: propsMoreChildrenFields,
                         } = propsData || {};
+                        if (!text) {
+                          text = this.getNodeSlotText(vnode)
+                        }
                         const {
                             childrenField: nodeChildrenField,
                             moreChildrenFields: nodeMoreChildrenFields,
@@ -362,6 +374,27 @@ export default {
                     return null;
                 }).filter((item) => !!item);
             }
+        },
+        // 获取vnode的itemslot信息
+        getNodeSlotText(vnode) {
+          const { data } = vnode || {};
+          const itemSlotFunc = data.scopedSlots?.item;
+          let itemSlotTexts = ''
+          if (itemSlotFunc) {
+              const itemSlots = itemSlotFunc() || [];
+              for (let itemSlot of itemSlots) {
+                const { componentOptions } = itemSlot || {};
+                const { Ctor, tag, propsData } = componentOptions || {};
+                const { options: CtorOptions } = Ctor || {};
+                const { name } = CtorOptions || {};
+                const componentName = name || tag;
+                if (componentName === 'u-text') {
+                  itemSlotTexts = propsData.text;
+                  break;
+                }
+              }
+          }
+          return itemSlotTexts
         },
         trans2Obj(obj, list, parent, type) {
             if (Array.isArray(list)) {
@@ -581,7 +614,7 @@ export default {
             const oldValue = this.actualValue;
             const itemInfo = {
                 oldValue,
-                value: undefined,
+                value: this.handleEmptyValue( undefined ),
                 valid: true,
             };
             if (this.$refs.treeView && this.$refs.treeView.selectedVM && this.$refs.treeView.selectedVM.$options.propsData) {
@@ -618,6 +651,13 @@ export default {
                 return popperStyle;
             }
         },
+        handleEmptyValue(value) {
+            if (!this.emptyValueIsNull) {
+                return value;
+            } else {
+              return value ? value : null;
+           }
+        }
     },
 };
 </script>

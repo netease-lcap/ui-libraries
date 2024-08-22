@@ -212,7 +212,7 @@ namespace nasl.ui {
         opened: nasl.core.Boolean = false;
 
         @Slot({
-            title: 'undefined',
+            title: '组件插槽',
             description: '插入`<u-dropdown>`子组件。',
             snippets: [
                 {
@@ -228,7 +228,7 @@ namespace nasl.ui {
         slotDefault: () => Array<ViewComponent>;
 
         @Slot({
-            title: '标题',
+            title: '组件插槽',
             description: '内容自定义',
         })
         slotTitle: () => Array<ViewComponent>;

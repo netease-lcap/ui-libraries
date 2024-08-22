@@ -53,6 +53,8 @@
     "name": "InputNumber",
     "ideusage": {
       "idetype": "element",
+      "textholder": "value",
+      "useFxOrEg":{"property": "value","displayAsAttr":true},
       "mutations": ["FormInputNumber"]
     }
   },
@@ -124,6 +126,7 @@
     "ideusage": {
       "idetype": "element",
       "textholder": "value",
+      "useFxOrEg":{"property": "value","displayAsAttr":true},
       "mutations": ["FormInput"]
     }
   },
@@ -144,6 +147,8 @@
     "name": "TextArea",
     "ideusage": {
       "idetype": "element",
+      "textholder": "value",
+      "useFxOrEg":{"property": "value","displayAsAttr":true},
       "mutations": ["FormTextArea"]
     }
   },
@@ -290,7 +295,9 @@
     "name": "Button",
     "ideusage": {
       "idetype": "element",
-      "editable": "children"
+      "editable": "children",
+      "textholder": "children",
+      "useFxOrEg":{"property": "children"}
     }
   },
   {
@@ -304,6 +311,8 @@
     "name": "Descriptions",
     "ideusage": {
       "idetype": "container",
+      "useFxOrEg":{"property": "title","displayAsAttr":true},
+      "textholder":"title",
       "structured": true,
       "childAccept": "target.tag === 'DescriptionsItem'"
     }
@@ -598,7 +607,8 @@
     "ideusage": {
       "idetype": "container",
       "structured": true,
-      "childAccept": "target.tag === 'StepsItem'"
+      "childAccept": "target.tag === 'StepsItem'",
+      "useWrapperInBoard": true
     }
   },
   {
@@ -713,7 +723,8 @@
       "additionalAttribute": {
         "menu": "{{ triggerSubMenuAction: 'click' }}",
         "trigger": "{['click']}"
-      }
+      },
+      "useWrapperInBoard": true
     }
   },
   {
@@ -729,6 +740,9 @@
     "ideusage": {
       "idetype": "container",
       "structured": true,
+      "textholder": "label",
+      "translateBindingProperty":["label"],
+      "useFxOrEg":{"property": "label","displayAsAttr":true},
       "childAccept": "target.tag === 'MenuItem'",
       "parentAccept": "target.tag === 'Menu' || (target.tag === 'template' && ['menuSlot', 'menuItem'].includes(target.slotTarget) )",
       "displaySlotConditions": {
@@ -764,11 +778,21 @@
     }
   },
   {
+    "name": "Tag",
+    "ideusage": {
+      "textholder": "children",
+      "editable": "children",
+      "useFxOrEg":{"property": "children"},
+      "idetype": "element"
+    }
+  },
+  {
     "name": "Text",
     "ideusage": {
       "idetype": "element",
       "editable": "children",
       "textholder": "children",
+      "useFxOrEg":{"property": "children"},
       "forceUpdateWhenAttributeChange": true
     }
   },
@@ -777,7 +801,8 @@
     "ideusage": {
       "idetype": "element",
       "editable": "children",
-      "textholder": "children"
+      "textholder": "children",
+      "useFxOrEg":{"property": "children"}
     }
   },
   {

@@ -17,7 +17,8 @@ export function useHandleLink() {
         document.body.removeChild(a);
       }, 500);
     } else {
-      navigate(targetUrl);
+      // todo
+      navigate?.(targetUrl);
     }
   };
 }

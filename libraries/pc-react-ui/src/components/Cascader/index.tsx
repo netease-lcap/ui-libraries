@@ -19,6 +19,6 @@ export const Cascader = registerComponet<
   ProFormCaptchaProps,
   CascaderProps
 >(
-  ProFormCascader,
+  AntdCascader,
   { plugin, displayName: AntdCascader.displayName, mapProps },
 );

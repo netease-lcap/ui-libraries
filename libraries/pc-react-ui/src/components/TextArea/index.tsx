@@ -18,7 +18,7 @@ export const TextArea = registerComponet<
   TextAreaProps,
   pluginType<TextAreaProps>
 >(
-  ProFormTextArea,
+  AntdTextArea,
   { plugin, displayName: AntdTextArea.displayName, mapProps },
 );
 

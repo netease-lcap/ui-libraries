@@ -1,11 +1,7 @@
 import numbro from 'numbro';
 import _ from 'lodash';
 import classnames from 'classnames';
-import React from 'react';
-import FormContext from '@/components/Form/form-context';
-import { Col, FormItem } from '@/index';
-import { FORMITEMPROPSFIELDS } from '@/components/Form/constants';
-import { COLPROPSFIELDS } from '@/components/Row/constants';
+import { ProFormDigit } from '@ant-design/pro-components';
 import { $deletePropsList } from '@/plugins/constants';
 import style from '../index.module.less';
 
@@ -33,3 +29,10 @@ export function useHandleStyle(props) {
     className: classnames(style.inputNumber, className),
   };
 }
+
+export function useHandleFormItemComponent(props) {
+  return {
+    FormItemComponent: ProFormDigit,
+  };
+}
+useHandleFormItemComponent.order = 2;

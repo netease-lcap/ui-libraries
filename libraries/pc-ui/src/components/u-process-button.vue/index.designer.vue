@@ -1,5 +1,5 @@
 <template>
-    <u-linear-layout v-if="$env.VUE_APP_DESIGNER" mode="inline" :class="$style.root" vusion-disabled-duplicate="true" vusion-disabled-copy="true">
+    <u-linear-layout v-if="$env.VUE_APP_DESIGNER || showInDesigner" mode="inline" :class="$style.root" vusion-disabled-duplicate="true" vusion-disabled-copy="true">
         <u-button :color="colors.submit">提交</u-button>
         <u-button :color="colors.approve">同意</u-button>
         <u-button :color="colors.reject">拒绝</u-button>
@@ -30,6 +30,7 @@ export default {
         reassign_color: { type: String, default: 'default' },
         addSign_color: { type: String, default: 'default' },
         withdraw_color: { type: String, default: 'default' },
+        showInDesigner: { type: Boolean, default: false },
     },
     computed: {
         colors() {

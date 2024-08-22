@@ -16,7 +16,7 @@ export const DatePicker = registerComponet<
   DatePickerProps,
   pluginType<DatePickerProps>
 >(
-  ProFormDateTimePicker,
+  AntdDatePicker,
   { plugin, displayName: AntdDatePicker.displayName, mapProps },
 );
 DatePicker.defaultProps = {

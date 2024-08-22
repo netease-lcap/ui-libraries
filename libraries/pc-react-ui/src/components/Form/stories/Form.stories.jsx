@@ -13,6 +13,7 @@ import {
   Input,
   Button,
   Form,
+  RadioGroup,
   FormItem,
   Text,
   TextArea,
@@ -20,8 +21,9 @@ import {
   InputNumber,
   CheckboxGroup,
   TimePicker,
-  // Date
   SelectOption,
+  Switch,
+  TreeSelect,
   DateRangePicker,
   Checkbox,
   DatePicker,
@@ -65,19 +67,26 @@ export const 默认 = {
       return <div />;
     }
     return (
-      <Form labelWidth="140" submitter>
-        <DatePicker
-          labelText="表单日期选择"
-          rules={[
-            {
-              validate: 'required',
-              message: '表单项不得为空',
-              trigger: 'input+blur',
-              required: true,
-            },
-          ]}
-          name="mytime"
+      <Form labelWidth="140">
+        <Input labelText="表单输入框" name="name" />
+        <InputNumber labelText="表单数字输入" name="number" />
+        <Select labelText="表单选择器" name="age" />
+        <Cascader labelText="表单级联选择器" />
+        <RadioGroup
+          labelText="表单单选"
+          dataSource={['苹果', '香蕉', '橘子']}
         />
+        <CheckboxGroup
+          labelText="表单多选"
+          dataSource={['苹果', '香蕉', '橘子']}
+        />
+        <Switch labelText="表单开关" name="switch" />
+        <TreeSelect labelText="表单树选择器" name="tree" />
+        <TextArea labelText="表单多行输入" />
+        <DatePicker labelText="表单日期选择" />
+        <DateRangePicker labelText="表单日期范围选择" />
+        <TimePicker labelText="表单时间选择" />
+        <TimeRangePicker labelText="表单时间范围选择" />
       </Form>
     );
   },
@@ -111,10 +120,10 @@ export const 默认1 = {
           }}
         >
           <Input labelText="表单输入框" name="name" />
-          <Select labelText="表单选择器" name="age" />
-          <TextArea labelText="表单多行输入" />
-          <DatePicker labelText="表单日期选择" name="time2" showTime />
-          <DateRangePicker
+          {/* <Select labelText="表单选择器" name="age" /> */}
+          {/* <TextArea labelText="表单多行输入" /> */}
+          {/* <DatePicker labelText="表单日期选择" name="time2" showTime /> */}
+          {/* <DateRangePicker
             labelText="表单日期范围选择"
             startName="startTime"
             endName="endTime"
@@ -123,7 +132,7 @@ export const 默认1 = {
           />
           <ProFormDateRangePicker name="time3" />
           <TimeRangePicker startName="time3" endName="time4" />
-          <TimePicker name="meTime" />
+          <TimePicker name="meTime" /> */}
         </Form>
       </div>
     );

@@ -75,8 +75,8 @@ export function useHandleMapField(filedInfo) {
   return useMemo(() => {
     return _.map(dataSource, (item) => ({
       ...item,
-      [label]: !_.isObject(item) ? item : _.get(item, textField, ''),
-      [value]: !_.isObject(item) ? item : _.get(item, valueField, ''),
+      [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
+      [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
     }));
   }, [label, value, textField, valueField, dataSource]);
 }
@@ -110,10 +110,9 @@ export function useDataSourceToTree(dataSource, parentField, valueField = 'value
     dataSource.forEach((item) => {
       if (map.get(_.get(item, parentField))) {
         const parent = map.get(_.get(item, parentField));
-        if (parent) {
-          if (!Array.isArray(parent.children)) parent.children = [];
-          parent.children.push(map.get(_.get(item, valueField)));
-        }
+        if (!parent) return;
+        if (!Array.isArray(parent.children)) parent.children = [];
+        parent.children.push(map.get(_.get(item, valueField)));
       } else {
         tree.push(map.get(_.get(item, valueField)));
       }

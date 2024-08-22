@@ -100,15 +100,16 @@
                                             :index="rowIndex + virtualIndex"
                                             :columnIndex="columnIndex"
                                             :columnItem="columnVM.columnItem"
-                                            :style="getStyle('td', columnVM)"
+                                            :style="getStyle('td', columnVM, {item, columnIndex, rowIndex: rowIndex + virtualIndex, index: rowIndex + virtualIndex})"
                                             :last-left-fixed="isTdLastLeftFixed(columnVM, columnIndex, visibleColumnVMs, item, rowIndex)"
                                             :first-right-fixed="isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs)"
                                             :shadow="(isTdLastLeftFixed(columnVM, columnIndex, visibleColumnVMs, item, rowIndex) && !scrollXStart) || (isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs) && !scrollXEnd)"
                                             :colspan="getItemColSpan(item, rowIndex, columnIndex)"
                                             :rowspan="getItemRowSpan(item, rowIndex, columnIndex)"
-
+                                            :value-field="valueField"
                                             :disabled="item.disabled || disabled"
                                             :ellipsis="ellipsis"
+                                            :readonly="readonly"
 
                                             :treeDisplay="treeDisplay"
                                             :hasChildrenField="hasChildrenField"
@@ -117,6 +118,8 @@
                                             :selectedItem="selectedItem"
 
                                             :handlerDraggable="handlerDraggable"
+
+                                            :usePagination="usePagination"
 
                                             @check="check($event.item, $event.checked)"
                                             @tree-toggle-expanded="toggleTreeExpanded"
@@ -293,6 +296,7 @@ export default {
         handlerDraggable: Boolean,
 
         rootWidth: Number,
+        rowStyle: Function,
     },
     data() {
         return {
@@ -393,7 +397,7 @@ export default {
         number2Pixel(value) {
             return isNumber(value) ? value + 'px' : '';
         },
-        getStyle(type, columnVM) {
+        getStyle(type, columnVM, currentData) {
             const style = Object.assign({}, columnVM.$vnode.data && columnVM.$vnode.data.style);
             const staticStyle = Object.assign({}, columnVM.$vnode.data && columnVM.$vnode.data.staticStyle);
             if (this.useStickyFixed) {
@@ -439,6 +443,18 @@ export default {
                             }
                         }
                     }
+                }
+            }
+            if(type === 'td' && currentData && this.rowStyle && typeof this.rowStyle === 'function') {
+                // const backgroundColor = this.rowStyle(currentData);
+                // if(backgroundColor) {
+                //     return Object.assign(staticStyle, style, {
+                //         backgroundColor
+                //     });
+                // }
+                const rowStyle = this.rowStyle(currentData);
+                if(rowStyle) {
+                    return Object.assign(staticStyle, style, rowStyle);
                 }
             }
             return Object.assign(staticStyle, style);

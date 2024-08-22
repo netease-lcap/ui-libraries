@@ -1,6 +1,6 @@
 <template>
     <a
-        :class="[$style.root, parentVM.currentCollapse && !isInSidebar ? $style.popRoot : $style.normalRoot]"
+        :class="[$style.root, parentVM.currentCollapse && !isInSidebar ? $style.popRoot : $style.normalRoot, hasIconPadding ? $style.hasIconPadding : '']"
         :selected="parentVM.router ? active : isSelected" :readonly="parentVM.readonly" :disabled="disabled || parentVM.disabled"
         :href="currentHref" :target="target" @click="parentVM.router ? onClick($event) : select($event)" v-on="listeners"
         v-ellipsis-title
@@ -11,7 +11,7 @@
         ref="root"
         >
         <i-ico v-if="icon" :name="icon" :class="$style.singleicon" notext></i-ico>
-        <span v-show="!hiddenText">
+        <span :class="$style.content" v-show="!hiddenText">
             <slot>{{ text }}</slot>
         </span>
         <s-empty
@@ -53,6 +53,19 @@ export default {
     computed: {
         isInSidebar() {
             return !(this.groupVM && this.groupVM.$options.name === this.$options.groupName);
+        },
+        hasIconPadding() {
+          if (!this.groupVM || !this.groupVM.rootVM) {
+            return false;
+          }
+
+          const rootVM = this.groupVM.rootVM;
+          const { childrenNodes = [], itemVMs = [] } = this.groupVM;
+
+          return !this.icon && (
+            childrenNodes.find((childNode) => !!this.$at2(childNode, rootVM.iconField))
+            || itemVMs.find((it) => !!it.icon)
+          );
         },
         miniMode() {
             return this.isInSidebar && this.parentVM.currentCollapse;
@@ -125,9 +138,9 @@ export default {
     border-bottom: var(--sidebar-item-border-bottom-width) solid var(--sidebar-item-border-bottom-color);
 }
 
-.normalRoot[mini][noIcon] {
+/* .normalRoot[mini][noIcon] {
     padding-left: calc(var(--sidebar-item-padding-left) - 12px);
-}
+} */
 
 .popRoot{
     display: block;
@@ -136,6 +149,10 @@ export default {
     line-height: 32px;
     padding: 0 12px;
     font-size: 14px;
+}
+
+.popRoot.hasIconPadding {
+  padding-left: calc(var(--sidebar-item-icon-font-size) + 20px);
 }
 
 .root:hover {
@@ -170,8 +187,24 @@ export default {
     margin-left: -24px;
 }
 
-.normalRoot[mini] .singleicon {
+/* .normalRoot[mini] .singleicon {
     margin-left: -12px;
+} */
+
+.normalRoot[mini] {
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.normalRoot[mini] .singleicon {
+  margin: 0;
+}
+
+.normalRoot[mini] > .content > *:not([class^="i-ico"]) {
+  display: none;
 }
 
 .root .singleicon {

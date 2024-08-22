@@ -62,7 +62,7 @@ export function useHandleTransformOption(props) {
   const transformOption = React.useMemo(
     () => fp.cond([
       [fp.isArray, fp.constant(async () => ({ list: dataSource, total: dataSource.length }))],
-      [_.isPlainObject, (data) => data],
+      [_.isPlainObject, (data) => () => data],
       [fp.isFunction, fp.constant((...arg) => {
         const sorterMap = { ascend: 'asc', descend: 'desc' };
         const sorter = _.get(arg, '0.sorter', {});

@@ -531,17 +531,17 @@ namespace nasl.ui {
         })
         slotLabel: () => Array<ViewComponent>;
 
-        @Slot({
-            title: '描述自定义',
-            description: '插入自定义描述内容，代替`description`属性。',
-        })
-        slotDescription: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: '描述自定义',
+        //     description: '插入自定义描述内容，代替`description`属性。',
+        // })
+        // slotDescription: () => Array<ViewComponent>;
 
-        @Slot({
-            title: '附加内容',
-            description: '自定义标签右侧额外内容。',
-        })
-        slotExtra: () => Array<ViewComponent>;
+        // @Slot({
+        //     title: '附加内容',
+        //     description: '自定义标签右侧额外内容。',
+        // })
+        // slotExtra: () => Array<ViewComponent>;
     }
 
     @Component({
@@ -658,13 +658,13 @@ namespace nasl.ui {
         slotDefault: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '标题',
             description: '自定义标题文本。',
         })
         slotTitle: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '附加内容',
             description: '在右侧可以附加内容。',
         })
         slotExtra: () => Array<ViewComponent>;

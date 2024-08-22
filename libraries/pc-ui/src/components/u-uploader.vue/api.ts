@@ -401,8 +401,12 @@ namespace nasl.ui {
             title: '文件校验',
             description: '文件校验函数，可自定义校验规则，如文件名称包含特殊字符等，返回string类型的出错信息',
             docDescription: '文件校验函数，可自定义校验规则，如文件名称包含特殊字符等，返回string类型的出错信息',
+            setter: {
+                concept: 'AnonymousFunctionSetter',
+            },
+            bindOpen: true,
         })
-        checkFile: Function;
+        checkFile: (file: File) => nasl.core.String;
 
         @Prop({
             group: '主要属性',

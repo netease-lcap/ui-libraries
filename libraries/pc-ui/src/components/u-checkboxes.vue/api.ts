@@ -169,6 +169,30 @@ namespace nasl.ui {
         converter: '' | 'join' | 'join:|' | 'join:;' | 'json' = '';
 
         @Prop({
+            group: '主要属性',
+            title: '排列方向',
+            description: '设置多选组的排列方向',
+            setter: {
+              concept: "EnumSelectSetter",
+              options: [{ title: '水平' }, { title: '垂直' }]
+            }
+        })
+        direction: 'horizontal' | 'vertical' = 'horizontal';
+
+        @Prop<UCheckboxesOptions<T, V, C>, 'column'>({
+            group: '主要属性',
+            title: '每行排列数',
+            description: '水平排列时每行展示的选项数量',
+            setter: {
+                concept: "NumberInputSetter",
+                precision: 0,
+                min: 1
+            },
+            if: _ => _.direction === 'horizontal'
+        })
+        column: nasl.core.Integer;
+
+        @Prop({
             group: '状态属性',
             title: '只读',
             description: '正常显示，但禁止选择/输入',
@@ -255,19 +279,20 @@ namespace nasl.ui {
         slotDefault: () => Array<UCheckbox<T, V>>;
 
         @Slot({
-            title: 'undefined',
+            
+            title: '全选/反选文本',
             description: '全选/反选',
-            snippets: [
-                {
-                    title: '全选/反选文本',
-                    code: "<u-text text='全选'></u-text>",
-                },
-            ],
+            // snippets: [
+            //     {
+            //         title: '全选/反选文本',
+            //         code: "<u-text text='全选'></u-text>",
+            //     },
+            // ],
         })
         slotCheckAll: () => Array<ViewComponent>;
 
         @Slot({
-            title: 'undefined',
+            title: '自定义选项',
             description: '自定义选项的结构和样式',
         })
         slotItem: (current: Current<T>) => Array<ViewComponent>;

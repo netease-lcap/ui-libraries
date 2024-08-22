@@ -66,7 +66,9 @@
         :readonly="readonly"
 
         :showHead="showHead"
-        :rootWidth="rootWidth">
+        :rootWidth="rootWidth"
+        :value-field="valueField"
+        :useMask="useMask">
     </u-table-designer>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
@@ -168,6 +170,9 @@
         :filterMax="filterMax"
 
         :rootWidth="rootWidth"
+        :value-field="valueField"
+        :rowStyle="rowStyle"
+        :usePagination="usePagination"
 
         @resize="onResizerDragEnd">
     </u-table-render>
@@ -361,6 +366,11 @@ export default {
         defaultColumnWidth: [String, Number],
         thEllipsis: { type: Boolean, default: false }, // 表头是否缩略展示
         ellipsis: { type: Boolean, default: false }, // 单元格是否缩略展示
+
+        rowStyle: Function, // 设置行背景色
+
+        useMask: { type: Boolean, default: true },
+        subForm: Boolean, // 是否是子表单
     },
     data() {
         return {
@@ -478,6 +488,9 @@ export default {
         },
         hasGroupedColumn() {
             return !!Object.keys(this.columnGroupVMs).length;
+        },
+        isDesignerSubForm() {
+            return this.$env.VUE_APP_DESIGNER && this.subForm;
         },
     },
     watch: {
@@ -792,6 +805,7 @@ export default {
             return options;
         },
         normalizeDataSource(dataSource) {
+            if (this.isDesignerSubForm) dataSource = [{}]; // IDE中的子表单只渲染一行数据
             const options = this.getDataSourceOptions();
             const isNew = typeof this.pagination !== 'undefined';
             const Constructor = isNew ? DataSourceNew : DataSource;
@@ -1103,8 +1117,10 @@ export default {
                     }
 
                     if (this.usePagination) {
-                        if (this.currentDataSource.paging && this.currentDataSource.paging.number > this.currentDataSource.totalPage)
-                            this.page(1); // 数据发生变更时，回归到第 1 页
+                        if (this.currentDataSource.paging && this.currentDataSource.paging.number > this.currentDataSource.totalPage) {
+                            this.currentDataSource.paging.number = 1; // 会触发page onchange事件
+                            // this.page(1); // 数据发生变更时，回归到第 1 页
+                        }
                     } // auto-more 状态的 resize 会频闪。
                     this.pageable !== 'auto-more' && this.reHandleResize();
                     this.$emit('load', undefined, this);
@@ -1527,7 +1543,17 @@ export default {
                 return;
             if (values) {
                 this.currentValues = values;
-                this.currentData && this.currentData.forEach((item) => (item.checked = values.includes(this.$at(item, this.valueField))));
+                // fix: 2933349384995840，父级选中子级没有勾选
+                if (this.currentData) {
+                    this.currentData.forEach((item) => {
+                        if (!item.hasOwnProperty('checked')) {
+                            this.$set(item, 'checked', false);
+                        }
+                        if (values.includes(this.$at(item, this.valueField))) {
+                            this.$set(item, 'checked', true);
+                        }
+                    });
+                }
             } else {
                 const values = [];
                 this.currentData && this.currentData.forEach((item) => item.checked && values.push(this.$at(item, this.valueField)));
@@ -1596,8 +1622,7 @@ export default {
             // Assign and sync `checked`
             item.checked = checked;
             if (this.treeDisplay) {
-                this.checkRecursively(item, checked);
-                this.getTreeCheckedValues(item, checked);
+                this.checkRecursively(item, checked, this.treeCheckType);
             } else {
                 this.getCheckedValues(item, checked);
             }
@@ -1615,8 +1640,7 @@ export default {
                     return;
                 item.checked = checked;
                 if (this.treeDisplay) {
-                    this.checkRecursively(item, checked);
-                    this.getTreeCheckedValues(item, checked);
+                    this.checkRecursively(item, checked, this.treeCheckType);
                 } else {
                     this.getCheckedValues(item, checked);
                 }
@@ -1625,25 +1649,30 @@ export default {
             this.$emit('update:values', this.currentValues, this);
             this.$emit('check', { values: this.currentValues, oldValues, checked, items: checkedItems }, this);
         },
-        checkRecursively(item, checked) {
-            if (this.treeCheckType.includes('down')) {
+        checkRecursively(item, checked, direction = 'up+down') {
+            this.getCheckedValues(item, checked);
+            if (direction.includes('down')) {
                 const children = this.$at(item, this.childrenField);
                 if (children && children.length) {
                     children.forEach((citem) => {
+                        if(citem.disabled)
+                            return;
                         citem.checked = checked;
-                        this.checkRecursively(citem, checked);
+                        this.checkRecursively(citem, checked, 'down');
                     });
                 }
             }
-            if (this.treeCheckType.includes('up')) {
+            if (direction.includes('up')) {
                 if (item.parentPointer) {
                     const parentItem = this.currentData.find((citem) => citem === item.parentPointer);
-                    if (parentItem) {
+                    if (parentItem && !parentItem.disabled) {
                         const children = this.$at(parentItem, this.childrenField) || [];
                         let checkedLength = 0;
                         children.forEach((item) => {
                             if (item.checked)
                                 checkedLength++;
+                            if (item.checked === null)
+                                checkedLength += 0.5;
                         });
                         if (checkedLength === 0)
                             parentItem.checked = false;
@@ -1651,6 +1680,7 @@ export default {
                             parentItem.checked = true;
                         else
                             parentItem.checked = null;
+                        this.checkRecursively(parentItem, parentItem.checked, 'up');
                     }
                 }
             }
@@ -1666,28 +1696,6 @@ export default {
                     this.checkedItems[label] = item;
                 } else {
                     delete this.checkedItems[label];
-                }
-            }
-        },
-        /**
-         * 获取树形选中值
-         */
-        getTreeCheckedValues(item, checked) {
-            this.getCheckedValues(item, checked);
-            const children = this.$at(item, this.childrenField);
-            if (children && children.length) {
-                children.forEach((citem) => {
-                    if (this.treeCheckType.includes('down')) {
-                        this.getTreeCheckedValues(citem, checked);
-                    }
-                });
-            }
-            if (item.parentPointer) {
-                const parentItem = this.currentData.find((citem) => citem === item.parentPointer);
-                if (parentItem) {
-                    if (this.treeCheckType.includes('up')) {
-                        this.getCheckedValues(parentItem, checked);
-                    }
                 }
             }
         },
@@ -1737,12 +1745,10 @@ export default {
                     // fix: 2820102516186880，2830031229543936，子节点删除数据处理
                     if (this.$at(item, this.childrenField).length) {
                         this.$setAt(item, this.hasChildrenField, true);
-                        item.expanded = item.expanded || false;
-                        item.treeExpanded = item.treeExpanded || false;
+                        this.$set(item, 'treeExpanded', item.treeExpanded || false);
                     } else {
                         this.$setAt(item, this.hasChildrenField, false);
-                        item.expanded = false;
-                        item.treeExpanded = false;
+                        this.$set(item, 'treeExpanded', false);
                     }
                 }
                 if (parent) {
@@ -1956,12 +1962,12 @@ export default {
             let indentElRect = {};
             let placeholderWith = 0;
             if (this.treeDisplay) {
-                const indentEl = target.querySelector('[class^="u-table-view_render-td_indent__"]');
+                const indentEl = target.querySelector('[class^="u-table-view_indent__"]');
                 if (indentEl) {
                     indentElRect = indentEl.getBoundingClientRect();
                 }
-                const treePlaceholderEl = target.querySelector('[class^="u-table-view_render-td_tree_placeholder"]');
-                const treeExpanderEl = target.querySelector('[class^="u-table-view_render-td_tree_expander"]');
+                const treePlaceholderEl = target.querySelector('[class^="u-table-view_tree_placeholder"]');
+                const treeExpanderEl = target.querySelector('[class^="u-table-view_tree_expander"]');
                 placeholderWith = treePlaceholderEl && treePlaceholderEl.offsetWidth;
                 if (treePlaceholderEl) {
                     placeholderWith = treePlaceholderEl.offsetWidth;
@@ -1988,7 +1994,7 @@ export default {
                 // 在下部
                 position = 'insertAfter';
                 let level = (item.tableTreeItemLevel || 0);
-                if (item.expanded) {
+                if (item.treeExpanded) {
                     const childList = this.$at(item, this.childrenField);
                     if (childList && childList.length)
                         level = level + 1;
@@ -2137,7 +2143,7 @@ export default {
                                     this.check(parentNode, parentNode.checked, true);
                                 }
                                 this.$set(parentNode, 'loading', false);
-                                this.$set(parentNode, 'expanded', true);
+                                this.$set(parentNode, 'treeExpanded', true);
                                 this.subTreeLoading = false;
                                 this.currentDataSource.arrangedData = originalList;
                                 const level = (parentNode.tableTreeItemLevel || 0) + 1;
@@ -2711,7 +2717,18 @@ export default {
         onChangePageSize(event) {
             this.currentPageSize = event.pageSize;
             const currentDataSource = this.currentDataSource;
-            this.page(currentDataSource && currentDataSource.paging ? currentDataSource.paging.number : this.pageNumber, event.pageSize);
+            if (currentDataSource){
+                if(currentDataSource._load && typeof currentDataSource._load === 'function') {
+                    currentDataSource.clearLocalData();
+                }
+                currentDataSource.paging.size = event.pageSize;
+                const initialPage = this.pageNumber !== undefined ? this.pageNumber : 1;
+                if (currentDataSource.paging.number !== initialPage) {
+                    currentDataSource.paging.number = initialPage; // 会触发page的onchange事件，不用手动调用page
+                } else {
+                    this.page(initialPage, event.pageSize);
+                }
+            }
         },
         onXScrollParentScroll(event) {
             this.syncHeadScroll();
@@ -2736,6 +2753,10 @@ export default {
         onResizerDragEnd($event) {
             this.reHandleResize();
             this.$emit('resize', $event);
+        },
+        // for 外部调用
+        resetEdit(item) {
+            item.editing = '';
         },
     },
 };

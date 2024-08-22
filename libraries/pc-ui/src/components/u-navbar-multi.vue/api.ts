@@ -213,13 +213,13 @@ namespace nasl.ui {
         slotDefault: () => Array<ViewComponent>;
 
         @Slot({
-            title: '左侧导航',
+            title: '组件插槽',
             description: '内容自定义',
         })
         slotLeft: () => Array<ViewComponent>;
 
         @Slot({
-            title: '右侧导航',
+            title: '组件插槽',
             description: '内容自定义',
         })
         slotRight: () => Array<ViewComponent>;

@@ -46,7 +46,7 @@
                     dragging: currentDragging,
                     ...node,
                 }">{{ text }}</slot>
-                <s-empty v-if="!$slots.item && $env.VUE_APP_DESIGNER"></s-empty>
+                <s-empty v-if="!$slots.item && $env.VUE_APP_DESIGNER && showEmpty"></s-empty>
             </span>
         </div>
     </div>
@@ -62,6 +62,7 @@
                 :hidden="rootVM.filterText ? $at(subNode, 'hiddenByFilter') : $at(subNode, rootVM.hiddenField)"
                 :node="subNode"
                 :nodeKey="`${nodeKey}-${subNodeIndex}`"
+                :key="$at2(subNode, rootVM.valueField) || `tree_sub_node_${subNodeIndex}`"
                 :parent="node"
                 :level="level + 1"
                 :draggable="subNode.draggable"
@@ -85,6 +86,7 @@
                     :hidden="rootVM.filterText ? $at(subNode, 'hiddenByFilter') : $at(subNode, rootVM.hiddenField)"
                     :node="subNode"
                     :nodeKey="`${nodeKey}-${subNodeIndex}`"
+                    :key="$at2(subNode, rootVM.valueField) || `tree_sub_node_${subNodeIndex}`"
                     :parent="node"
                     :level="level + 1"
                     :draggable="subNode.draggable"
@@ -104,6 +106,7 @@
 </template>
 
 <script>
+import { solveCondition } from '../../utils/DataSource';
 import { MNode } from '../m-root.vue';
 import SEmpty from '../s-empty.vue';
 
@@ -133,6 +136,7 @@ export default {
         draggable: { type: Boolean, default: false },
         dragExpanderDelay: { type: Number, default: 1500 },
         renderOptimize: { type: Boolean, default: false },
+        showEmpty: { type: Boolean, default: true }
     },
     data() {
         return {
@@ -242,6 +246,16 @@ export default {
         },
         childrenNodeRenderedShow() {
             return this.renderOptimize ? true : this.currentExpanded
+        },
+        filterOptions() {
+            const { filterText, field, textField, matchMethod, caseSensitive } = this.rootVM;
+            return {
+                [field || textField]: {
+                    operator: matchMethod,
+                    value: filterText,
+                    caseInsensitive: !caseSensitive,
+                },
+            };
         }
     },
 
@@ -523,7 +537,7 @@ export default {
                 if (!node)
                     return;
 
-                const hiddenByFilter = filterFields.every((field) => !$at(node, field) || !$at(node, field).toLowerCase().includes(filterText));
+                const hiddenByFilter = filterFields.every((field) => !$at(node, field) || !solveCondition(that.filterOptions, node));
                 that.$set(node, 'hiddenByFilter', hiddenByFilter);
                 that.$set(node, 'expandedByFilter', false);
 
@@ -551,7 +565,7 @@ export default {
             }
             dfs(node, null, currentFields);
 
-            if (node.expandedByFilter)
+            if (node && node.expandedByFilter)
                 this.currentExpanded = node.expandedByFilter;
         },
         onDragStart(e) {
