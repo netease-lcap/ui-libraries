@@ -384,22 +384,20 @@ namespace nasl.ui {
             title: '前缀图标',
             docDescription: '支持添加前缀图标，如搜索图标',
             setter: {
-                concept: 'EnumSelectSetter',
-                options: [{ title: '搜索' }, { title: '暂无' }],
+                concept: 'IconSetter',
             },
         })
-        prefix: 'search' | '' = '';
+        prefix: nasl.core.String = '';
 
         @Prop({
             group: '主要属性',
             title: '后缀图标',
             docDescription: '支持添加后缀图标，如搜索图标',
             setter: {
-                concept: 'EnumSelectSetter',
-                options: [{ title: '搜索' }, { title: '暂无' }],
+                concept: 'IconSetter',
             },
         })
-        suffix: 'search' | '' = '';
+        suffix: nasl.core.String = '';
 
         @Prop({
             group: '主要属性',
