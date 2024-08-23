@@ -7,7 +7,7 @@ namespace nasl.ui {
   @Component({
     title: '表单',
     icon: 'form',
-    description: '',
+    description: '用以收集、校验和提交数据，一般由输入框、单选框、复选框、选择器等控件组成。',
     group: 'Form',
   })
   export class ElFormPro extends ViewComponent {
@@ -18,62 +18,67 @@ namespace nasl.ui {
 
   export class ElFormProOptions extends ViewComponentOptions {
     @Prop({
-      group: '主要属性',
-      title: 'Colon',
-      description: '是否在表单标签字段右侧显示冒号',
-      setter: { concept: 'SwitchSetter' },
-    })
-    colon: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Data',
-      description: '表单数据。',
-      setter: { concept: 'InputSetter' },
+      group: '数据属性',
+      title: '表单数据',
+      description: '绑定表单数据，表单项可通过字段名获取值',
+      setter: {
+        concept: 'InputSetter',
+      },
     })
     data: object = {};
 
     @Prop({
-      group: '主要属性',
-      title: 'Disabled',
+      group: '状态属性',
+      title: '禁用',
       description: '是否禁用整个表单',
       setter: { concept: 'SwitchSetter' },
     })
     disabled: nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Error Message',
-      description:
-        '表单错误信息配置，示例：`{ idcard: "请输入正确的身份证号码", max: "字符长度不能超过 ${max}" }`。',
-      setter: { concept: 'InputSetter' },
-    })
-    errorMessage: object;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Error Message',
+    //   description:
+    //     '表单错误信息配置，示例：`{ idcard: "请输入正确的身份证号码", max: "字符长度不能超过 ${max}" }`。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // errorMessage: object;
 
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Form Controlled Components',
+    //   description:
+    //     '允许表单统一控制禁用状态的自定义组件名称列表。默认会有组件库的全部输入类组件：ElInput、ElInputNumber、ElCascader、ElSelect、ElOption、ElSwitch、TCheckbox、ElCheckboxGroup、ElRadio、ElRadioGroup、ElTreeSelect、ElDatePicker、ElTimePicker、ElUpload、ElTransfer、ElSlider。对于自定义组件，组件内部需要包含可以控制表单禁用状态的变量 `formDisabled`。示例：`["CustomUpload", "CustomInput"]`。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // formControlledComponents: any[];
     @Prop({
       group: '主要属性',
-      title: 'Form Controlled Components',
+      title: '表单布局',
       description:
-        '允许表单统一控制禁用状态的自定义组件名称列表。默认会有组件库的全部输入类组件：TInput、TInputNumber、ElCascader、TSelect、TOption、ElSwitch、TCheckbox、ElCheckboxGroup、ElRadio、ElRadioGroup、ElTreeSelect、ElDatePicker、ElTimePicker、ElUpload、ElTransfer、TSlider。对于自定义组件，组件内部需要包含可以控制表单禁用状态的变量 `formDisabled`。示例：`["CustomUpload", "CustomInput"]`。',
-      setter: { concept: 'InputSetter' },
-    })
-    formControlledComponents: any[];
-
-    @Prop({
-      group: '主要属性',
-      title: 'Label Align',
-      description:
-        '表单字段标签对齐方式：左对齐、右对齐、顶部对齐。可选项：left/right/top',
+        '表单布局，有两种方式：纵向布局 和 行内布局。可选项：vertical/inline',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'left' }, { title: 'right' }, { title: 'top' }],
+        options: [{ title: '纵向布局' }, { title: '行内布局' }],
+      },
+    })
+    layout: 'vertical' | 'inline' = 'vertical';
+
+    @Prop({
+      group: '主要属性',
+      title: '标签布局',
+      description:
+        '表单字段标签对齐方式：左对齐、右对齐、顶部对齐',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '左对齐' }, { title: '右对齐' }, { title: '顶部对齐' }],
       },
     })
     labelAlign: 'left' | 'right' | 'top' = 'right';
 
     @Prop({
       group: '主要属性',
-      title: 'Label Width',
+      title: '标签宽度',
       description: '可以整体设置label标签宽度，默认为100px',
       setter: { concept: 'InputSetter' },
     })
@@ -81,19 +86,23 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Layout',
-      description:
-        '表单布局，有两种方式：纵向布局 和 行内布局。可选项：vertical/inline',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: 'vertical' }, { title: 'inline' }],
-      },
+      title: '必填标记',
+      description: '是否显示必填符号（*），默认显示',
+      setter: { concept: 'SwitchSetter' },
     })
-    layout: 'vertical' | 'inline' = 'vertical';
+    requiredMark: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
-      title: 'Prevent Submit Default',
+      title: '冒号',
+      description: '是否在表单标签字段右侧显示冒号',
+      setter: { concept: 'SwitchSetter' },
+    })
+    colon: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '阻止表单默认提交',
       description:
         '是否阻止表单提交默认事件（表单提交默认事件会刷新页面），设置为 `true` 可以避免刷新',
       setter: { concept: 'SwitchSetter' },
@@ -102,20 +111,12 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Required Mark',
-      description: '是否显示必填符号（*），默认显示',
-      setter: { concept: 'SwitchSetter' },
-    })
-    requiredMark: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Reset Type',
+      title: '重置表单的方式',
       description:
         '重置表单的方式，值为 empty 表示重置表单为空，值为 initial 表示重置表单数据为初始值。可选项：empty/initial',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'empty' }, { title: 'initial' }],
+        options: [{ title: '重置表单为空' }, { title: '重置表单数据为初始值' }],
       },
     })
     resetType: 'empty' | 'initial' = 'empty';
@@ -195,10 +196,10 @@ namespace nasl.ui {
     slotStatusIcon: () => Array<ViewComponent>;
 
     @Slot({
-      title: 'Default',
-      description: '内容',
+      title: '表单内容',
+      description: '插入表单项',
       snippets: [
-        { title: 'Form Item', code: '<el-form-item-pro></el-form-item-pro>' },
+        { title: '表单项', code: '<el-form-item-pro></el-form-item-pro>' },
       ],
     })
     slotDefault: () => Array<ViewComponent>;
