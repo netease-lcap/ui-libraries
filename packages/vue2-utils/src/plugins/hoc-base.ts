@@ -26,6 +26,7 @@ import {
   getEventKeys,
   isShallowEqualArray,
   isNullOrUndefined,
+  getEventName,
 } from './utils';
 import { $deletePropList, $ref, $render } from './constants';
 
@@ -285,16 +286,30 @@ function mergeRefMap(...refMaps: HocBaseRefMap[]) {
   return map;
 }
 
-const toRenderState = (map: Record<MapGetKey, any>, keys: string[], baseComponent: any, propKeys: string[]) => {
+interface RenderStateContext {
+  refMap: Record<MapGetKey, any>,
+  keys: string[],
+  eventNames: string[],
+  propKeys: string[],
+  baseComponent: any,
+}
+
+const toRenderState = ({
+  refMap: map, keys,
+  eventNames, propKeys,
+  baseComponent,
+}: RenderStateContext) => {
   const renderProps: any = {};
   const listeners: any = {};
   const renderSlots: any = {};
 
   Object.keys(map).forEach((k) => {
-    if (propKeys.indexOf(k) !== -1) {
+    const eventName = getEventName(k);
+    if (eventName && eventNames.includes(eventName)) {
+      listeners[eventName] = map[k];
+    } else if (propKeys.indexOf(k) !== -1) {
       renderProps[k] = map[k];
-    } else if (eventRegex.test(k)) {
-      const eventName = kebabCase(k.substring(2));
+    } else if (eventName) {
       listeners[eventName] = map[k];
     } else if (k.startsWith('update:')) {
       listeners[k] = map[k];
@@ -317,12 +332,6 @@ const toRenderState = (map: Record<MapGetKey, any>, keys: string[], baseComponen
   };
 };
 
-export interface NaslComponentExtendInfo {
-  slotNames?: string[];
-  nativeEvents?: string[];
-  methodNames?: string[];
-}
-
 export default defineComponent({
   name: 'HOCBase',
   inheritAttrs: false,
@@ -332,7 +341,6 @@ export default defineComponent({
       default: () => null,
     },
     $component: {
-      type: Object,
       default: () => {},
     },
     $slotNames: {
@@ -340,6 +348,10 @@ export default defineComponent({
       default: () => [] as string[],
     },
     $methodNames: {
+      type: Array,
+      default: () => [] as string[],
+    },
+    $eventNames: {
       type: Array,
       default: () => [] as string[],
     },
@@ -355,8 +367,9 @@ export default defineComponent({
   setup(props, ctx) {
     const { $plugin: manger, $component: baseComponent } = props;
     // const compName = baseComponent.name;
-    const propKeys = getPropKeys(baseComponent);
+    const propKeys = getPropKeys(baseComponent as any);
     const keys = manger.getPluginPropKeys(propKeys);
+    const eventNames: string[] = (props.$eventNames || []) as string[];
     const vueInstance: any = ctx.root;
     const isDesigner = inject('VUE_APP_DESIGNER', false) || (vueInstance.$env && vueInstance.$env.VUE_APP_DESIGNER);
     let refMap = useInitRefMap(keys);
@@ -388,7 +401,13 @@ export default defineComponent({
     const renderFns: any[] = refMap[$render];
 
     return {
-      $state: toRenderState(refMap, keys, baseComponent, propKeys),
+      $state: toRenderState({
+        refMap,
+        keys,
+        baseComponent,
+        propKeys,
+        eventNames,
+      }),
       $render(resultVNode: VNode, h: CreateElement, context: any) {
         if (renderFns.length === 0) {
           return resultVNode;

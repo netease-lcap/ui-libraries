@@ -74,3 +74,14 @@ export interface PluginInitOptions {
   name: string;
   plugin: { [name: string]: NaslComponentPluginOptions };
 }
+
+export interface NaslComponentExtendInfo {
+  /* 默认使用 ScopeSlots 向下透传， 原组件内容使用this.$slot.xxx 方式处理的需要配置名称，会转成$slots */
+  slotNames?: string[];
+  /* 配置对组件进行 on.native 监听的事件名称 */
+  nativeEvents?: string[];
+  /* 优先使用listeners， 例如属性中有onPageChange， 事件中有page-change,是，配置此项优先使用listeners, 否则使用props 向下传递 */
+  eventNames?: string[];
+  /* 代理组件提供的方法 */
+  methodNames?: string[];
+}

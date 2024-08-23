@@ -80,6 +80,20 @@ export function getSlotKey(name: string) {
   return camelCase(`slot-${name}`);
 }
 
+export function getEventName(key: string) {
+  if (key.indexOf(':') !== -1) {
+    return key;
+  }
+
+  const name = kebabCase(key);
+
+  if (!name.startsWith(EVENT_PREFIX)) {
+    return '';
+  }
+
+  return name.substring(EVENT_PREFIX.length);
+}
+
 export function getEventKey(name: string) {
   if (name.indexOf(':') !== -1) {
     return name;

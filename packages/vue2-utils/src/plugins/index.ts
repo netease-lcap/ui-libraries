@@ -3,9 +3,14 @@ import Vue from 'vue';
 import VueCompositionAPI from '@vue/composition-api';
 import { uid } from 'uid';
 import type { ComponentOptions } from 'vue';
-import type { NaslComponentPluginOptions, PluginMap, PluginSetupFunction } from './types';
+import type {
+  NaslComponentPluginOptions,
+  PluginMap,
+  PluginSetupFunction,
+  NaslComponentExtendInfo,
+} from './types';
 import PluginManager from './plugin';
-import HocBaseComponent, { NaslComponentExtendInfo } from './hoc-base';
+import HocBaseComponent from './hoc-base';
 
 export { $deletePropList, $ref, $render } from './constants';
 export * from './common';
@@ -15,7 +20,12 @@ Vue.use(VueCompositionAPI);
 export const registerComponent = (
   baseComponent: any,
   pluginOption: PluginMap,
-  { slotNames, nativeEvents, methodNames }: NaslComponentExtendInfo = { slotNames: ['default'], nativeEvents: [], methodNames: [] },
+  {
+    slotNames,
+    nativeEvents,
+    methodNames,
+    eventNames,
+  }: NaslComponentExtendInfo = {},
 ) => {
   if (!slotNames) {
     slotNames = ['default'];
@@ -27,6 +37,10 @@ export const registerComponent = (
 
   if (!methodNames) {
     methodNames = [];
+  }
+
+  if (!eventNames) {
+    eventNames = [];
   }
 
   return {
@@ -63,6 +77,7 @@ export const registerComponent = (
           $slotNames: slotNames,
           $nativeEvents: nativeEvents,
           $methodNames: methodNames,
+          $eventNames: eventNames,
           $_slots: self.$scopedSlots,
         },
         attrs: self.$attrs,
