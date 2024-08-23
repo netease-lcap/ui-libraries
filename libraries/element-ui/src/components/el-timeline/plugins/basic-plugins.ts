@@ -12,11 +12,12 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
       slotDefault: () => {
         const slotDefault = propGet('slotDefault');
         const slotItemContent = propGet('slotContent');
-        const data = propGet('data') || [];
-        const valueField = propGet('valueField') || 'value';
+        const data = propGet<any>('data') || [];
+        const dataSource = propGet('dataSource');
+        const valueField = propGet<string>('valueField') || 'value';
         const itemProps = propGet<(c: any) => any>('itemProps') || (() => ({}));
         const dotStyle = propGet<(c: any) => any>('dotStyle') || (() => ({}));
-        if (!Array.isArray(data) || data.length === 0) {
+        if (!dataSource) {
           return typeof slotDefault === 'function' ? slotDefault() : null;
         }
         return data.map((item, i) => {

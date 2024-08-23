@@ -2,6 +2,7 @@ import Collapse from 'element-ui/lib/collapse';
 import CollapseItem from 'element-ui/lib/collapse-item';
 import { registerComponent } from '@lcap/vue2-utils/plugins/index';
 import * as plugins from './plugins';
+import styles from '../index.module.css';
 
 export const ElCollapse = registerComponent(Collapse, plugins, {
   nativeEvents: [],

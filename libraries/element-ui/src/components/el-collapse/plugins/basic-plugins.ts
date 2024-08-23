@@ -2,21 +2,36 @@
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
 import CollapseItem from 'element-ui/lib/collapse-item';
 import { at } from 'lodash';
+import { createUseUpdateSync } from '@lcap/vue2-utils';
+import styles from '../index.module.css';
+
+export const useUpdateSync = createUseUpdateSync([{ name: 'value', event: 'change' }]);
 
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index';
 
 export const useDataSourceRender: NaslComponentPluginOptions = {
   props: ['data', 'valueField'],
-  setup({ get: propGet }, { h }) {
+  setup({ get: propGet, useComputed, useRef }, { h }) {
+    // el-collapse 有border样式，当数据为空时，需要添加empty样式
+    const displayClass = useComputed(['data'], (data) => {
+      const dataSource = propGet('dataSource');
+      if (dataSource && data && data.length === 0) {
+        return styles.empty;
+      }
+      return '';
+    });
+
     return {
+      class: displayClass,
       slotDefault: () => {
         const slotDefault = propGet('slotDefault');
         const slotItemTitle = propGet('slotTitle');
         const slotItemContent = propGet('slotContent');
-        const data = propGet('data') || [];
-        const valueField = propGet('valueField') || 'value';
+        const data = propGet<any>('data') || [];
+        const dataSource = propGet('dataSource');
+        const valueField = propGet<string>('valueField') || 'value';
         const itemProps = propGet<(c: any) => any>('itemProps') || (() => ({}));
-        if (!Array.isArray(data) || data.length === 0) {
+        if (!dataSource) {
           return typeof slotDefault === 'function' ? slotDefault() : null;
         }
         return data.map((item, i) => {
