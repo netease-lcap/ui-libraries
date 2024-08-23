@@ -29,5 +29,6 @@ export {
   ElBaseTablePro,
   ElPrimaryTablePro,
   ElEnhancedTablePro,
+  ElTableColumnPro,
 } from './el-table-pro';
 export { ElPaginationPro, ElPaginationMiniPro } from './el-pagination-pro';

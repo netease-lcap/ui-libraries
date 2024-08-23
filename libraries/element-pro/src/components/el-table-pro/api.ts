@@ -10,33 +10,33 @@ namespace nasl.ui {
     description: '',
     group: 'Table',
   })
-  export class ElTablePro extends ViewComponent {
-    constructor(options?: Partial<ElTableProOptions>) {
-      super();
-    }
-  }
+  // export class ElTablePro extends ViewComponent {
+  //   constructor(options?: Partial<ElTableProOptions>) {
+  //     super();
+  //   }
+  // }
 
-  export class ElTableProOptions extends ViewComponentOptions {
-    @Slot({
-      title: 'Default',
-      description: '内容',
-      snippets: [
-        {
-          title: 'Base Table',
-          code: '<el-base-table-pro></el-base-table-pro>',
-        },
-        {
-          title: 'Primary Table',
-          code: '<el-primary-table-pro></el-primary-table-pro>',
-        },
-        {
-          title: 'Enhanced Table',
-          code: '<el-enhanced-table-pro></el-enhanced-table-pro>',
-        },
-      ],
-    })
-    slotDefault: () => Array<ViewComponent>;
-  }
+  // export class ElTableProOptions extends ViewComponentOptions {
+  //   @Slot({
+  //     title: 'Default',
+  //     description: '内容',
+  //     snippets: [
+  //       {
+  //         title: 'Base Table',
+  //         code: '<el-base-table-pro></el-base-table-pro>',
+  //       },
+  //       {
+  //         title: 'Primary Table',
+  //         code: '<el-primary-table-pro></el-primary-table-pro>',
+  //       },
+  //       {
+  //         title: 'Enhanced Table',
+  //         code: '<el-enhanced-table-pro></el-enhanced-table-pro>',
+  //       },
+  //     ],
+  //   })
+  //   slotDefault: () => Array<ViewComponent>;
+  // }
 
   @Component({
     title: 'Base Table',
@@ -44,13 +44,13 @@ namespace nasl.ui {
     description: '',
     group: 'Table',
   })
-  export class ElBaseTablePro extends ViewComponent {
-    constructor(options?: Partial<ElBaseTableProOptions>) {
+  export class ElTablePro extends ViewComponent {
+    constructor(options?: Partial<ElTableProOptions>) {
       super();
     }
   }
 
-  export class ElBaseTableProOptions extends ViewComponentOptions {
+  export class ElTableProOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
       sync: true,
@@ -435,13 +435,13 @@ namespace nasl.ui {
     })
     tableLayout: 'auto' | 'fixed' = 'fixed';
 
-    @Prop({
-      group: '主要属性',
-      title: 'Top Content',
-      description: '表格顶部内容，可以用于自定义列设置、顶部查询条件等。',
-      setter: { concept: 'InputSetter' },
-    })
-    topContent: any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Top Content',
+    //   description: '表格顶部内容，可以用于自定义列设置、顶部查询条件等。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // topContent: any;
 
     @Prop({
       group: '主要属性',
@@ -455,676 +455,676 @@ namespace nasl.ui {
     verticalAlign: 'top' | 'middle' | 'bottom' = 'middle';
 
     @Event({
-      title: 'On Active Change',
+      title: '高亮行发生变化时触发',
       description:
         '高亮行发生变化时触发，泛型 T 指表格数据类型。参数 `activeRowList` 表示所有高亮行数据， `currentRowData` 表示当前操作行数据。',
     })
     onActiveChange: (event: any) => any;
 
-    @Event({
-      title: 'On Active Row Action',
-      description:
-        '键盘操作事件。开启行高亮功能后，会自动开启键盘操作功能，如：通过键盘(Shift)或鼠标操作连续选中高亮行时触发，一般用于处理行选中等批量操作，模拟操作系统区域选择行为。',
-    })
-    onActiveRowAction: (event: any) => any;
+    // @Event({
+    //   title: 'On Active Row Action',
+    //   description:
+    //     '键盘操作事件。开启行高亮功能后，会自动开启键盘操作功能，如：通过键盘(Shift)或鼠标操作连续选中高亮行时触发，一般用于处理行选中等批量操作，模拟操作系统区域选择行为。',
+    // })
+    // onActiveRowAction: (event: any) => any;
 
     @Event({
-      title: 'On Cell Click',
+      title: '单元格点击时触发。',
       description: '单元格点击时触发。',
     })
     onCellClick: (event: any) => any;
 
-    @Event({
-      title: 'On Column Resize Change',
-      description:
-        '列调整大小之后触发。`context.columnsWidth` 表示操作后各个列的宽度；',
-    })
-    onColumnResizeChange: (event: any) => any;
+    // @Event({
+    //   title: 'On Column Resize Change',
+    //   description:
+    //     '列调整大小之后触发。`context.columnsWidth` 表示操作后各个列的宽度；',
+    // })
+    // onColumnResizeChange: (event: any) => any;
 
     @Event({
-      title: 'On Page Change',
+      title: '分页发生变化时触发。',
       description:
         '分页发生变化时触发。参数 newDataSource 表示分页后的数据。本地数据进行分页时，newDataSource 和源数据 data 会不一样。泛型 T 指表格数据类型',
     })
     onPageChange: (event: any) => any;
 
     @Event({
-      title: 'On Row Click',
-      description: '行点击时触发，泛型 T 指表格数据类型。',
+      title: '行点击时触发',
+      description: '行点击时触发',
     })
     onRowClick: (event: any) => any;
 
     @Event({
-      title: 'On Row Dblclick',
-      description: '行双击时触发，泛型 T 指表格数据类型',
+      title: '行双击时触发',
+      description: '行双击时触发',
     })
     onRowDblclick: (event: any) => any;
 
-    @Event({
-      title: 'On Row Mousedown',
-      description: '鼠标在表格行按下时触发，泛型 T 指表格数据类型',
-    })
-    onRowMousedown: (event: any) => any;
+    // @Event({
+    //   title: 'On Row Mousedown',
+    //   description: '鼠标在表格行按下时触发，',
+    // })
+    // onRowMousedown: (event: any) => any;
+
+    // @Event({
+    //   title: 'On Row Mouseenter',
+    //   description: '鼠标在表格行进入时触发，泛型 T 指表格数据类型',
+    // })
+    // onRowMouseenter: (event: any) => any;
+
+    // @Event({
+    //   title: 'On Row Mouseleave',
+    //   description: '鼠标在表格行离开时触发，泛型 T 指表格数据类型',
+    // })
+    // onRowMouseleave: (event: any) => any;
+
+    // @Event({
+    //   title: 'On Row Mouseover',
+    //   description: '鼠标悬浮到行时触发，泛型 T 指表格数据类型',
+    // })
+    // onRowMouseover: (event: any) => any;
+
+    // @Event({
+    //   title: 'On Row Mouseup',
+    //   description: '鼠标在表格行按下又弹起时触发，泛型 T 指表格数据类型',
+    // })
+    // onRowMouseup: (event: any) => any;
 
     @Event({
-      title: 'On Row Mouseenter',
-      description: '鼠标在表格行进入时触发，泛型 T 指表格数据类型',
-    })
-    onRowMouseenter: (event: any) => any;
-
-    @Event({
-      title: 'On Row Mouseleave',
-      description: '鼠标在表格行离开时触发，泛型 T 指表格数据类型',
-    })
-    onRowMouseleave: (event: any) => any;
-
-    @Event({
-      title: 'On Row Mouseover',
-      description: '鼠标悬浮到行时触发，泛型 T 指表格数据类型',
-    })
-    onRowMouseover: (event: any) => any;
-
-    @Event({
-      title: 'On Row Mouseup',
-      description: '鼠标在表格行按下又弹起时触发，泛型 T 指表格数据类型',
-    })
-    onRowMouseup: (event: any) => any;
-
-    @Event({
-      title: 'On Scroll',
+      title: '表格内容滚动时触发',
       description: '表格内容滚动时触发',
     })
     onScroll: (event: any) => any;
 
-    @Event({
-      title: 'On Scroll X',
-      description: '已废弃。表格内容横向滚动时触发。请更为使用 `onScroll` 事件',
-    })
-    onScrollX: (event: any) => any;
+    // @Event({
+    //   title: 'On Scroll X',
+    //   description: '已废弃。表格内容横向滚动时触发。请更为使用 `onScroll` 事件',
+    // })
+    // onScrollX: (event: any) => any;
 
-    @Event({
-      title: 'On Scroll Y',
-      description:
-        '已废弃。表格内容纵向滚动时触发。当内容超出高度(height)或最大高度(max-height)时，会出现纵向滚动条。请更为使用 `onScroll` 事件',
-    })
-    onScrollY: (event: any) => any;
+    // @Event({
+    //   title: 'On Scroll Y',
+    //   description:
+    //     '已废弃。表格内容纵向滚动时触发。当内容超出高度(height)或最大高度(max-height)时，会出现纵向滚动条。请更为使用 `onScroll` 事件',
+    // })
+    // onScrollY: (event: any) => any;
 
-    @Slot({
-      title: 'Bottom Content',
-      description: '表格底部内容，可以用于自定义列设置等。',
-    })
-    slotBottomContent: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: 'Bottom Content',
+    //   description: '表格底部内容，可以用于自定义列设置等。',
+    // })
+    // slotBottomContent: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'Cell Empty Content',
-      description: '单元格数据为空时呈现的内容。',
-    })
-    slotCellEmptyContent: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: 'Cell Empty Content',
+    //   description: '单元格数据为空时呈现的内容。',
+    // })
+    // slotCellEmptyContent: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'Empty',
-      description: '空表格呈现样式，支持全局配置 `GlobalConfigProvider`。',
-    })
-    slotEmpty: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: 'Empty',
+    //   description: '空表格呈现样式，支持全局配置 `GlobalConfigProvider`。',
+    // })
+    // slotEmpty: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'First Full Row',
-      description: '首行内容，横跨所有列。',
-    })
-    slotFirstFullRow: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: 'First Full Row',
+    //   description: '首行内容，横跨所有列。',
+    // })
+    // slotFirstFullRow: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'Footer Summary',
-      description: '表尾总结行。',
-    })
-    slotFooterSummary: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: 'Footer Summary',
+    //   description: '表尾总结行。',
+    // })
+    // slotFooterSummary: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'Last Full Row',
-      description: '尾行内容，横跨所有列。',
-    })
-    slotLastFullRow: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: 'Last Full Row',
+    //   description: '尾行内容，横跨所有列。',
+    // })
+    // slotLastFullRow: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'Loading',
-      description:
-        '加载中状态。值为 `true` 会显示默认加载中样式，可以通过 Function 和 插槽 自定义加载状态呈现内容和样式。值为 `false` 则会取消加载状态。',
-    })
-    slotLoading: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: 'Loading',
+    //   description:
+    //     '加载中状态。值为 `true` 会显示默认加载中样式，可以通过 Function 和 插槽 自定义加载状态呈现内容和样式。值为 `false` 则会取消加载状态。',
+    // })
+    // slotLoading: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'Top Content',
-      description: '表格顶部内容，可以用于自定义列设置、顶部查询条件等。',
-    })
-    slotTopContent: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: 'Top Content',
+    //   description: '表格顶部内容，可以用于自定义列设置、顶部查询条件等。',
+    // })
+    // slotTopContent: () => Array<ViewComponent>;
   }
 
-  @Component({
-    title: 'Primary Table',
-    icon: 'primary-table',
-    description: '',
-    group: 'Table',
-  })
-  export class ElPrimaryTablePro extends ViewComponent {
-    constructor(options?: Partial<ElPrimaryTableProOptions>) {
-      super();
-    }
-  }
+//   @Component({
+//     title: 'Primary Table',
+//     icon: 'primary-table',
+//     description: '',
+//     group: 'Table',
+//   })
+//   export class ElPrimaryTablePro extends ViewComponent {
+//     constructor(options?: Partial<ElPrimaryTableProOptions>) {
+//       super();
+//     }
+//   }
 
-  export class ElPrimaryTableProOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: 'Async Loading',
-      description:
-        '异步加载状态。值为 `loading` 显示默认文字 “正在加载中，请稍后”，值为 `loading-more` 显示“点击加载更多”，值为其他，表示完全自定义异步加载区域内容。',
-      setter: { concept: 'InputSetter' },
-    })
-    asyncLoading: any;
+//   export class ElPrimaryTableProOptions extends ViewComponentOptions {
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Async Loading',
+//       description:
+//         '异步加载状态。值为 `loading` 显示默认文字 “正在加载中，请稍后”，值为 `loading-more` 显示“点击加载更多”，值为其他，表示完全自定义异步加载区域内容。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     asyncLoading: any;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Column Controller',
-      description:
-        '自定义显示列控制器，值为空不会显示。具体属性请看下方 `TableColumnController` 文档。',
-      setter: { concept: 'InputSetter' },
-    })
-    columnController: object;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Column Controller',
+//       description:
+//         '自定义显示列控制器，值为空不会显示。具体属性请看下方 `TableColumnController` 文档。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     columnController: object;
 
-    @Prop({
-      group: '主要属性',
-      sync: true,
-      title: 'Column Controller Visible',
-      description:
-        '是否显示列配置弹框控制器，只要该属性值不为 `undefined`，弹框的显示/隐藏完全由该属性控制。支持语法糖 `.sync`',
-      setter: { concept: 'SwitchSetter' },
-    })
-    columnControllerVisible: nasl.core.Boolean;
+//     @Prop({
+//       group: '主要属性',
+//       sync: true,
+//       title: 'Column Controller Visible',
+//       description:
+//         '是否显示列配置弹框控制器，只要该属性值不为 `undefined`，弹框的显示/隐藏完全由该属性控制。支持语法糖 `.sync`',
+//       setter: { concept: 'SwitchSetter' },
+//     })
+//     columnControllerVisible: nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Columns',
-      description: '列配置，泛型 T 指表格数据类型。',
-      setter: { concept: 'InputSetter' },
-    })
-    columns: any[] = [];
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Columns',
+//       description: '列配置，泛型 T 指表格数据类型。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     columns: any[] = [];
 
-    @Prop({
-      group: '主要属性',
-      sync: true,
-      title: 'Display Columns',
-      description: '列配置功能中，当前显示的列。支持语法糖 `.sync`。',
-      setter: { concept: 'InputSetter' },
-    })
-    displayColumns: any[];
+//     @Prop({
+//       group: '主要属性',
+//       sync: true,
+//       title: 'Display Columns',
+//       description: '列配置功能中，当前显示的列。支持语法糖 `.sync`。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     displayColumns: any[];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Default Display Columns',
-      description: '列配置功能中，当前显示的列。非受控属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    defaultDisplayColumns: any[];
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Default Display Columns',
+//       description: '列配置功能中，当前显示的列。非受控属性。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     defaultDisplayColumns: any[];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Drag Sort',
-      description:
-        '拖拽排序方式，值为 `row` 表示行拖拽排序，这种方式无法进行文本复制，慎用。值为`row-handler` 表示通过拖拽手柄进行行拖拽排序。值为 `col` 表示列顺序拖拽。值为 `row-handler-col` 表示同时支持行拖拽和列拖拽。⚠️`drag-col` 已废弃，请勿使用。。可选项：row/row-handler/col/row-handler-col/drag-col',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: 'row' },
-          { title: 'row-handler' },
-          { title: 'col' },
-          { title: 'row-handler-col' },
-          { title: 'drag-col' },
-        ],
-      },
-    })
-    dragSort: 'row' | 'row-handler' | 'col' | 'row-handler-col' | 'drag-col';
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Drag Sort',
+//       description:
+//         '拖拽排序方式，值为 `row` 表示行拖拽排序，这种方式无法进行文本复制，慎用。值为`row-handler` 表示通过拖拽手柄进行行拖拽排序。值为 `col` 表示列顺序拖拽。值为 `row-handler-col` 表示同时支持行拖拽和列拖拽。⚠️`drag-col` 已废弃，请勿使用。。可选项：row/row-handler/col/row-handler-col/drag-col',
+//       setter: {
+//         concept: 'EnumSelectSetter',
+//         options: [
+//           { title: 'row' },
+//           { title: 'row-handler' },
+//           { title: 'col' },
+//           { title: 'row-handler-col' },
+//           { title: 'drag-col' },
+//         ],
+//       },
+//     })
+//     dragSort: 'row' | 'row-handler' | 'col' | 'row-handler-col' | 'drag-col';
 
-    @Prop({
-      group: '主要属性',
-      title: 'Drag Sort Options',
-      description:
-        '拖拽排序扩展参数，具体参数见 [Sortable](https://github.com/SortableJS/Sortable)。',
-      setter: { concept: 'InputSetter' },
-    })
-    dragSortOptions: object;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Drag Sort Options',
+//       description:
+//         '拖拽排序扩展参数，具体参数见 [Sortable](https://github.com/SortableJS/Sortable)。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     dragSortOptions: object;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Editable Cell State',
-      description:
-        '单元格是否允许编辑。返回值为 `true` 则表示可编辑；返回值为 `false` 则表示不可编辑，只读状态。',
-      setter: { concept: 'InputSetter' },
-    })
-    editableCellState: any;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Editable Cell State',
+//       description:
+//         '单元格是否允许编辑。返回值为 `true` 则表示可编辑；返回值为 `false` 则表示不可编辑，只读状态。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     editableCellState: any;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Editable Row Keys',
-      description: '处于编辑状态的行。',
-      setter: { concept: 'InputSetter' },
-    })
-    editableRowKeys: any[];
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Editable Row Keys',
+//       description: '处于编辑状态的行。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     editableRowKeys: any[];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Expand Icon',
-      description:
-        '用于控制是否显示「展开图标列」，值为 `false` 则不会显示。可以精确到某一行是否显示，还可以自定义展开图标内容。`expandedRow` 存在时，该参数有效。支持全局配置 `GlobalConfigProvider`。',
-      setter: { concept: 'InputSetter' },
-    })
-    expandIcon: any = true;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Expand Icon',
+//       description:
+//         '用于控制是否显示「展开图标列」，值为 `false` 则不会显示。可以精确到某一行是否显示，还可以自定义展开图标内容。`expandedRow` 存在时，该参数有效。支持全局配置 `GlobalConfigProvider`。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     expandIcon: any = true;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Expand On Row Click',
-      description: '是否允许点击行展开',
-      setter: { concept: 'SwitchSetter' },
-    })
-    expandOnRowClick: nasl.core.Boolean;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Expand On Row Click',
+//       description: '是否允许点击行展开',
+//       setter: { concept: 'SwitchSetter' },
+//     })
+//     expandOnRowClick: nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Expanded Row',
-      description: '展开行内容，泛型 T 指表格数据类型。',
-      setter: { concept: 'InputSetter' },
-    })
-    expandedRow: any;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Expanded Row',
+//       description: '展开行内容，泛型 T 指表格数据类型。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     expandedRow: any;
 
-    @Prop({
-      group: '主要属性',
-      sync: true,
-      title: 'Expanded Row Keys',
-      description: '展开行。支持语法糖 `.sync`。',
-      setter: { concept: 'InputSetter' },
-    })
-    expandedRowKeys: any[] = [];
+//     @Prop({
+//       group: '主要属性',
+//       sync: true,
+//       title: 'Expanded Row Keys',
+//       description: '展开行。支持语法糖 `.sync`。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     expandedRowKeys: any[] = [];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Default Expanded Row Keys',
-      description: '展开行。非受控属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    defaultExpandedRowKeys: any[] = [];
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Default Expanded Row Keys',
+//       description: '展开行。非受控属性。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     defaultExpandedRowKeys: any[] = [];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Filter Row',
-      description: '自定义过滤状态行及清空筛选等。',
-      setter: { concept: 'InputSetter' },
-    })
-    filterRow: any;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Filter Row',
+//       description: '自定义过滤状态行及清空筛选等。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     filterRow: any;
 
-    @Prop({
-      group: '主要属性',
-      sync: true,
-      title: 'Filter Value',
-      description: '过滤数据的值。支持语法糖 `.sync`。',
-      setter: { concept: 'InputSetter' },
-    })
-    filterValue: object;
+//     @Prop({
+//       group: '主要属性',
+//       sync: true,
+//       title: 'Filter Value',
+//       description: '过滤数据的值。支持语法糖 `.sync`。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     filterValue: object;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Default Filter Value',
-      description: '过滤数据的值。非受控属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    defaultFilterValue: object;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Default Filter Value',
+//       description: '过滤数据的值。非受控属性。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     defaultFilterValue: object;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Hide Sort Tips',
-      description:
-        '隐藏排序文本提示，支持全局配置 `GlobalConfigProvider`，默认全局配置值为 `false`',
-      setter: { concept: 'SwitchSetter' },
-    })
-    hideSortTips: nasl.core.Boolean;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Hide Sort Tips',
+//       description:
+//         '隐藏排序文本提示，支持全局配置 `GlobalConfigProvider`，默认全局配置值为 `false`',
+//       setter: { concept: 'SwitchSetter' },
+//     })
+//     hideSortTips: nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Indeterminate Selected Row Keys',
-      description: '半选状态行。选中行请更为使用 `selectedRowKeys` 控制。',
-      setter: { concept: 'InputSetter' },
-    })
-    indeterminateSelectedRowKeys: any[];
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Indeterminate Selected Row Keys',
+//       description: '半选状态行。选中行请更为使用 `selectedRowKeys` 控制。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     indeterminateSelectedRowKeys: any[];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Multiple Sort',
-      description: '是否支持多列排序',
-      setter: { concept: 'SwitchSetter' },
-    })
-    multipleSort: nasl.core.Boolean = false;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Multiple Sort',
+//       description: '是否支持多列排序',
+//       setter: { concept: 'SwitchSetter' },
+//     })
+//     multipleSort: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Reserve Selected Row On Paginate',
-      description:
-        '行选中功能，是否在分页时保留上一页选中结果不清空，本地数据分页场景下，会全选所有页数据。值为 `false` 则表示全部选中操作停留在当前页，不跨分页；本地数据分页场景下，全选仅选中当前页',
-      setter: { concept: 'SwitchSetter' },
-    })
-    reserveSelectedRowOnPaginate: nasl.core.Boolean = true;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Reserve Selected Row On Paginate',
+//       description:
+//         '行选中功能，是否在分页时保留上一页选中结果不清空，本地数据分页场景下，会全选所有页数据。值为 `false` 则表示全部选中操作停留在当前页，不跨分页；本地数据分页场景下，全选仅选中当前页',
+//       setter: { concept: 'SwitchSetter' },
+//     })
+//     reserveSelectedRowOnPaginate: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Row Selection Allow Uncheck',
-      description: '行选中单选场景，是否允许取消选中',
-      setter: { concept: 'SwitchSetter' },
-    })
-    rowSelectionAllowUncheck: nasl.core.Boolean;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Row Selection Allow Uncheck',
+//       description: '行选中单选场景，是否允许取消选中',
+//       setter: { concept: 'SwitchSetter' },
+//     })
+//     rowSelectionAllowUncheck: nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Row Selection Type',
-      description:
-        '行选中类型，单选或多选。效果和 `columns` 中配置的 `{ colKey: "row-select", type: "single" }` 一样。可选项：single/multiple',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: 'single' }, { title: 'multiple' }],
-      },
-    })
-    rowSelectionType: 'single' | 'multiple';
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Row Selection Type',
+//       description:
+//         '行选中类型，单选或多选。效果和 `columns` 中配置的 `{ colKey: "row-select", type: "single" }` 一样。可选项：single/multiple',
+//       setter: {
+//         concept: 'EnumSelectSetter',
+//         options: [{ title: 'single' }, { title: 'multiple' }],
+//       },
+//     })
+//     rowSelectionType: 'single' | 'multiple';
 
-    @Prop({
-      group: '主要属性',
-      title: 'Select On Row Click',
-      description: '是否在点击整行时选中',
-      setter: { concept: 'SwitchSetter' },
-    })
-    selectOnRowClick: nasl.core.Boolean;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Select On Row Click',
+//       description: '是否在点击整行时选中',
+//       setter: { concept: 'SwitchSetter' },
+//     })
+//     selectOnRowClick: nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      sync: true,
-      title: 'Selected Row Keys',
-      description:
-        '选中行。半选状态行请更为使用 `indeterminateSelectedRowKeys` 控制。支持语法糖 `.sync`。',
-      setter: { concept: 'InputSetter' },
-    })
-    selectedRowKeys: any[] = [];
+//     @Prop({
+//       group: '主要属性',
+//       sync: true,
+//       title: 'Selected Row Keys',
+//       description:
+//         '选中行。半选状态行请更为使用 `indeterminateSelectedRowKeys` 控制。支持语法糖 `.sync`。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     selectedRowKeys: any[] = [];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Default Selected Row Keys',
-      description:
-        '选中行。半选状态行请更为使用 `indeterminateSelectedRowKeys` 控制。非受控属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    defaultSelectedRowKeys: any[] = [];
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Default Selected Row Keys',
+//       description:
+//         '选中行。半选状态行请更为使用 `indeterminateSelectedRowKeys` 控制。非受控属性。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     defaultSelectedRowKeys: any[] = [];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Show Sort Column Bg Color',
-      description: '当前排序列是否显示背景色',
-      setter: { concept: 'SwitchSetter' },
-    })
-    showSortColumnBgColor: nasl.core.Boolean = false;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Show Sort Column Bg Color',
+//       description: '当前排序列是否显示背景色',
+//       setter: { concept: 'SwitchSetter' },
+//     })
+//     showSortColumnBgColor: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      sync: true,
-      title: 'Sort',
-      description:
-        '排序控制。sortBy 排序字段；descending 是否进行降序排列。值为数组时，表示正进行多字段排序。支持语法糖 `.sync`。',
-      setter: { concept: 'InputSetter' },
-    })
-    sort: object | any[];
+//     @Prop({
+//       group: '主要属性',
+//       sync: true,
+//       title: 'Sort',
+//       description:
+//         '排序控制。sortBy 排序字段；descending 是否进行降序排列。值为数组时，表示正进行多字段排序。支持语法糖 `.sync`。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     sort: object | any[];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Default Sort',
-      description:
-        '排序控制。sortBy 排序字段；descending 是否进行降序排列。值为数组时，表示正进行多字段排序。非受控属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    defaultSort: object | any[];
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Default Sort',
+//       description:
+//         '排序控制。sortBy 排序字段；descending 是否进行降序排列。值为数组时，表示正进行多字段排序。非受控属性。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     defaultSort: object | any[];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Sort On Row Draggable',
-      description:
-        '已废弃。允许表格行拖拽时排序。请更为使用 `dragSort=\\"row\\"`',
-      setter: { concept: 'SwitchSetter' },
-    })
-    sortOnRowDraggable: nasl.core.Boolean = false;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Sort On Row Draggable',
+//       description:
+//         '已废弃。允许表格行拖拽时排序。请更为使用 `dragSort=\\"row\\"`',
+//       setter: { concept: 'SwitchSetter' },
+//     })
+//     sortOnRowDraggable: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Omit Base Table Props T Columns On Cell Click',
-      description:
-        '继承 `Omit<BaseTableProps<T>, "columns" | "onCellClick">` 中的全部属性',
-      setter: { concept: 'InputSetter' },
-    })
-    omitBaseTablePropsTColumnsOnCellClick: any;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Omit Base Table Props T Columns On Cell Click',
+//       description:
+//         '继承 `Omit<BaseTableProps<T>, "columns" | "onCellClick">` 中的全部属性',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     omitBaseTablePropsTColumnsOnCellClick: any;
 
-    @Event({
-      title: 'On Async Loading Click',
-      description: '异步加载区域被点击时触发',
-    })
-    onAsyncLoadingClick: (event: any) => any;
+//     @Event({
+//       title: 'On Async Loading Click',
+//       description: '异步加载区域被点击时触发',
+//     })
+//     onAsyncLoadingClick: (event: any) => any;
 
-    @Event({
-      title: 'On Cell Click',
-      description: '单元格点击时触发。',
-    })
-    onCellClick: (event: any) => any;
+//     @Event({
+//       title: 'On Cell Click',
+//       description: '单元格点击时触发。',
+//     })
+//     onCellClick: (event: any) => any;
 
-    @Event({
-      title: 'On Change',
-      description:
-        '分页、排序、过滤等内容变化时触发，泛型 T 指表格数据类型，`currentData` 表示变化后的数据。',
-    })
-    onChange: (event: any) => any;
+//     @Event({
+//       title: 'On Change',
+//       description:
+//         '分页、排序、过滤等内容变化时触发，泛型 T 指表格数据类型，`currentData` 表示变化后的数据。',
+//     })
+//     onChange: (event: any) => any;
 
-    @Event({
-      title: 'On Column Change',
-      description:
-        '确认操作之前列配置发生变化时触发。`context.columns` 表示已选中的列；`context.currentColumn` 表示本次变化操作的列，值不存在表示全选操作；`context.type` 表示当前操作属于选中列或是取消列。',
-    })
-    onColumnChange: (event: any) => any;
+//     @Event({
+//       title: 'On Column Change',
+//       description:
+//         '确认操作之前列配置发生变化时触发。`context.columns` 表示已选中的列；`context.currentColumn` 表示本次变化操作的列，值不存在表示全选操作；`context.type` 表示当前操作属于选中列或是取消列。',
+//     })
+//     onColumnChange: (event: any) => any;
 
-    @Event({
-      title: 'On Column Controller Visible Change',
-      description: '列配置弹窗显示或隐藏变化时触发',
-    })
-    onColumnControllerVisibleChange: (event: any) => any;
+//     @Event({
+//       title: 'On Column Controller Visible Change',
+//       description: '列配置弹窗显示或隐藏变化时触发',
+//     })
+//     onColumnControllerVisibleChange: (event: any) => any;
 
-    @Event({
-      title: 'On Data Change',
-      description:
-        '本地数据排序导致 `data` 变化时触发，第一个参数指变化后的数据，第二个参数 `context.trigger` 表示触发本次变化的来源。',
-    })
-    onDataChange: (event: any) => any;
+//     @Event({
+//       title: 'On Data Change',
+//       description:
+//         '本地数据排序导致 `data` 变化时触发，第一个参数指变化后的数据，第二个参数 `context.trigger` 表示触发本次变化的来源。',
+//     })
+//     onDataChange: (event: any) => any;
 
-    @Event({
-      title: 'On Display Columns Change',
-      description: '确认列配置时触发。',
-    })
-    onDisplayColumnsChange: (event: any) => any;
+//     @Event({
+//       title: 'On Display Columns Change',
+//       description: '确认列配置时触发。',
+//     })
+//     onDisplayColumnsChange: (event: any) => any;
 
-    @Event({
-      title: 'On Drag Sort',
-      description:
-        '拖拽排序时触发，`data` 表示排序前的数据，`newData` 表示拖拽排序结束后的新数据，`sort=row` 表示行拖拽事件触发，`sort=col` 表示列拖拽事件触发。',
-    })
-    onDragSort: (event: any) => any;
+//     @Event({
+//       title: 'On Drag Sort',
+//       description:
+//         '拖拽排序时触发，`data` 表示排序前的数据，`newData` 表示拖拽排序结束后的新数据，`sort=row` 表示行拖拽事件触发，`sort=col` 表示列拖拽事件触发。',
+//     })
+//     onDragSort: (event: any) => any;
 
-    @Event({
-      title: 'On Expand Change',
-      description: '展开行发生变化时触发，泛型 T 指表格数据类型。',
-    })
-    onExpandChange: (event: any) => any;
+//     @Event({
+//       title: 'On Expand Change',
+//       description: '展开行发生变化时触发，泛型 T 指表格数据类型。',
+//     })
+//     onExpandChange: (event: any) => any;
 
-    @Event({
-      title: 'On Filter Change',
-      description: '过滤参数发生变化时触发，泛型 T 指表格数据类型。',
-    })
-    onFilterChange: (event: any) => any;
+//     @Event({
+//       title: 'On Filter Change',
+//       description: '过滤参数发生变化时触发，泛型 T 指表格数据类型。',
+//     })
+//     onFilterChange: (event: any) => any;
 
-    @Event({
-      title: 'On Row Edit',
-      description: '行编辑时触发。',
-    })
-    onRowEdit: (event: any) => any;
+//     @Event({
+//       title: 'On Row Edit',
+//       description: '行编辑时触发。',
+//     })
+//     onRowEdit: (event: any) => any;
 
-    @Event({
-      title: 'On Row Validate',
-      description:
-        '行编辑校验完成后触发，即组件实例方法 `validateRowData` 执行结束后触发。`result` 表示校验结果，`trigger=self` 表示编辑组件内部触发的校验，`trigger="parent"` 表示表格父组件触发的校验。',
-    })
-    onRowValidate: (event: any) => any;
+//     @Event({
+//       title: 'On Row Validate',
+//       description:
+//         '行编辑校验完成后触发，即组件实例方法 `validateRowData` 执行结束后触发。`result` 表示校验结果，`trigger=self` 表示编辑组件内部触发的校验，`trigger="parent"` 表示表格父组件触发的校验。',
+//     })
+//     onRowValidate: (event: any) => any;
 
-    @Event({
-      title: 'On Select Change',
-      description:
-        '选中行发生变化时触发，泛型 T 指表格数据类型。两个参数，第一个参数为选中行 keys，第二个参数为更多参数，具体如下：`type = uncheck` 表示当前行操作为「取消行选中」；`type = check` 表示当前行操作为「行选中」； `currentRowKey` 表示当前操作行的 rowKey 值； `currentRowData` 表示当前操作行的行数据。',
-    })
-    onSelectChange: (event: any) => any;
+//     @Event({
+//       title: 'On Select Change',
+//       description:
+//         '选中行发生变化时触发，泛型 T 指表格数据类型。两个参数，第一个参数为选中行 keys，第二个参数为更多参数，具体如下：`type = uncheck` 表示当前行操作为「取消行选中」；`type = check` 表示当前行操作为「行选中」； `currentRowKey` 表示当前操作行的 rowKey 值； `currentRowData` 表示当前操作行的行数据。',
+//     })
+//     onSelectChange: (event: any) => any;
 
-    @Event({
-      title: 'On Sort Change',
-      description:
-        '排序发生变化时触发。其中 sortBy 表示当前排序的字段，sortType 表示排序的方式，currentDataSource 表示 sorter 排序后的结果，col 表示列配置。sort 值类型为数组时表示多字段排序。',
-    })
-    onSortChange: (event: any) => any;
+//     @Event({
+//       title: 'On Sort Change',
+//       description:
+//         '排序发生变化时触发。其中 sortBy 表示当前排序的字段，sortType 表示排序的方式，currentDataSource 表示 sorter 排序后的结果，col 表示列配置。sort 值类型为数组时表示多字段排序。',
+//     })
+//     onSortChange: (event: any) => any;
 
-    @Event({
-      title: 'On Validate',
-      description:
-        '可编辑行表格，全部数据校验完成后触发。即组件实例方法 `validateTableData` 执行结束后触发。',
-    })
-    onValidate: (event: any) => any;
+//     @Event({
+//       title: 'On Validate',
+//       description:
+//         '可编辑行表格，全部数据校验完成后触发。即组件实例方法 `validateTableData` 执行结束后触发。',
+//     })
+//     onValidate: (event: any) => any;
 
-    @Slot({
-      title: 'Async Loading',
-      description:
-        '异步加载状态。值为 `loading` 显示默认文字 “正在加载中，请稍后”，值为 `loading-more` 显示“点击加载更多”，值为其他，表示完全自定义异步加载区域内容。',
-    })
-    slotAsyncLoading: () => Array<ViewComponent>;
+//     @Slot({
+//       title: 'Async Loading',
+//       description:
+//         '异步加载状态。值为 `loading` 显示默认文字 “正在加载中，请稍后”，值为 `loading-more` 显示“点击加载更多”，值为其他，表示完全自定义异步加载区域内容。',
+//     })
+//     slotAsyncLoading: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'Expand Icon',
-      description:
-        '用于控制是否显示「展开图标列」，值为 `false` 则不会显示。可以精确到某一行是否显示，还可以自定义展开图标内容。`expandedRow` 存在时，该参数有效。支持全局配置 `GlobalConfigProvider`。',
-    })
-    slotExpandIcon: () => Array<ViewComponent>;
+//     @Slot({
+//       title: 'Expand Icon',
+//       description:
+//         '用于控制是否显示「展开图标列」，值为 `false` 则不会显示。可以精确到某一行是否显示，还可以自定义展开图标内容。`expandedRow` 存在时，该参数有效。支持全局配置 `GlobalConfigProvider`。',
+//     })
+//     slotExpandIcon: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'Expanded Row',
-      description: '展开行内容，泛型 T 指表格数据类型。',
-    })
-    slotExpandedRow: () => Array<ViewComponent>;
+//     @Slot({
+//       title: 'Expanded Row',
+//       description: '展开行内容，泛型 T 指表格数据类型。',
+//     })
+//     slotExpandedRow: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'Filter Icon',
-      description: '自定义过滤图标，支持全局配置 `GlobalConfigProvider`。',
-    })
-    slotFilterIcon: () => Array<ViewComponent>;
+//     @Slot({
+//       title: 'Filter Icon',
+//       description: '自定义过滤图标，支持全局配置 `GlobalConfigProvider`。',
+//     })
+//     slotFilterIcon: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'Filter Row',
-      description: '自定义过滤状态行及清空筛选等。',
-    })
-    slotFilterRow: () => Array<ViewComponent>;
+//     @Slot({
+//       title: 'Filter Row',
+//       description: '自定义过滤状态行及清空筛选等。',
+//     })
+//     slotFilterRow: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'Sort Icon',
-      description: '自定义排序图标，支持全局配置 `GlobalConfigProvider`。',
-    })
-    slotSortIcon: () => Array<ViewComponent>;
-  }
+//     @Slot({
+//       title: 'Sort Icon',
+//       description: '自定义排序图标，支持全局配置 `GlobalConfigProvider`。',
+//     })
+//     slotSortIcon: () => Array<ViewComponent>;
+//   }
 
-  @Component({
-    title: 'Enhanced Table',
-    icon: 'enhanced-table',
-    description: '',
-    group: 'Table',
-  })
-  export class ElEnhancedTablePro extends ViewComponent {
-    constructor(options?: Partial<ElEnhancedTableProOptions>) {
-      super();
-    }
-  }
+//   @Component({
+//     title: 'Enhanced Table',
+//     icon: 'enhanced-table',
+//     description: '',
+//     group: 'Table',
+//   })
+//   export class ElEnhancedTablePro extends ViewComponent {
+//     constructor(options?: Partial<ElEnhancedTableProOptions>) {
+//       super();
+//     }
+//   }
 
-  export class ElEnhancedTableProOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: 'Before Drag Sort',
-      description:
-        '树形结构中，拖拽排序前控制，返回值为 `true` 则继续排序；返回值为 `false` 则中止排序还原数据。',
-      setter: { concept: 'InputSetter' },
-    })
-    beforeDragSort: any;
+//   export class ElEnhancedTableProOptions extends ViewComponentOptions {
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Before Drag Sort',
+//       description:
+//         '树形结构中，拖拽排序前控制，返回值为 `true` 则继续排序；返回值为 `false` 则中止排序还原数据。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     beforeDragSort: any;
 
-    @Prop({
-      group: '主要属性',
-      sync: true,
-      title: 'Expanded Tree Nodes',
-      description:
-        '展开的树形节点。非必须。在需要自由控制展开的树形节点时使用。其他场景无需设置，表格组件有内置展开逻辑。支持语法糖 `.sync`。',
-      setter: { concept: 'InputSetter' },
-    })
-    expandedTreeNodes: any[] = [];
+//     @Prop({
+//       group: '主要属性',
+//       sync: true,
+//       title: 'Expanded Tree Nodes',
+//       description:
+//         '展开的树形节点。非必须。在需要自由控制展开的树形节点时使用。其他场景无需设置，表格组件有内置展开逻辑。支持语法糖 `.sync`。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     expandedTreeNodes: any[] = [];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Default Expanded Tree Nodes',
-      description:
-        '展开的树形节点。非必须。在需要自由控制展开的树形节点时使用。其他场景无需设置，表格组件有内置展开逻辑。非受控属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    defaultExpandedTreeNodes: any[] = [];
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Default Expanded Tree Nodes',
+//       description:
+//         '展开的树形节点。非必须。在需要自由控制展开的树形节点时使用。其他场景无需设置，表格组件有内置展开逻辑。非受控属性。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     defaultExpandedTreeNodes: any[] = [];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Tree',
-      description:
-        '树形结构相关配置。具体属性文档查看 `TableTreeConfig` 相关描述。',
-      setter: { concept: 'InputSetter' },
-    })
-    tree: object;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Tree',
+//       description:
+//         '树形结构相关配置。具体属性文档查看 `TableTreeConfig` 相关描述。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     tree: object;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Tree Expand And Fold Icon',
-      description:
-        '自定义树形结构展开图标，支持全局配置 `GlobalConfigProvider`。',
-      setter: { concept: 'InputSetter' },
-    })
-    treeExpandAndFoldIcon: any;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Tree Expand And Fold Icon',
+//       description:
+//         '自定义树形结构展开图标，支持全局配置 `GlobalConfigProvider`。',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     treeExpandAndFoldIcon: any;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Primary Table Props T',
-      description: '继承 `PrimaryTableProps<T>` 中的全部属性',
-      setter: { concept: 'InputSetter' },
-    })
-    primaryTablePropsT: any;
+//     @Prop({
+//       group: '主要属性',
+//       title: 'Primary Table Props T',
+//       description: '继承 `PrimaryTableProps<T>` 中的全部属性',
+//       setter: { concept: 'InputSetter' },
+//     })
+//     primaryTablePropsT: any;
 
-    @Event({
-      title: 'On Abnormal Drag Sort',
-      description:
-        '异常拖拽排序时触发，如：树形结构中，非同层级之间的交换。`context.code` 指交换异常错误码，固定值；`context.reason` 指交换异常的原因。',
-    })
-    onAbnormalDragSort: (event: any) => any;
+//     @Event({
+//       title: 'On Abnormal Drag Sort',
+//       description:
+//         '异常拖拽排序时触发，如：树形结构中，非同层级之间的交换。`context.code` 指交换异常错误码，固定值；`context.reason` 指交换异常的原因。',
+//     })
+//     onAbnormalDragSort: (event: any) => any;
 
-    @Event({
-      title: 'On Expanded Tree Nodes Change',
-      description:
-        '树形结构，展开的树节点发生变化时触发，泛型 T 指表格数据类型。',
-    })
-    onExpandedTreeNodesChange: (event: any) => any;
+//     @Event({
+//       title: 'On Expanded Tree Nodes Change',
+//       description:
+//         '树形结构，展开的树节点发生变化时触发，泛型 T 指表格数据类型。',
+//     })
+//     onExpandedTreeNodesChange: (event: any) => any;
 
-    @Event({
-      title: 'On Tree Expand Change',
-      description:
-        '已废弃。树形结构，用户操作引起节点展开或收起时触发。请更为使用 `onExpandedTreeNodesChange`。',
-    })
-    onTreeExpandChange: (event: any) => any;
-  }
+//     @Event({
+//       title: 'On Tree Expand Change',
+//       description:
+//         '已废弃。树形结构，用户操作引起节点展开或收起时触发。请更为使用 `onExpandedTreeNodesChange`。',
+//     })
+//     onTreeExpandChange: (event: any) => any;
+//   }
 }

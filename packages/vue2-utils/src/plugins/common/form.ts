@@ -20,6 +20,9 @@ export const useUpdateSync = (props: Readonly<MapGet>, options: PropSyncOption[]
 
     returnMap[name] = propRef;
     returnMap[eventName] = (...args: any[]) => {
+      // eslint-disable-next-line prefer-destructuring
+      propRef.value = args[0];
+
       if (typeof onUpdateValue === 'function') {
         onUpdateValue(args[0]);
       }

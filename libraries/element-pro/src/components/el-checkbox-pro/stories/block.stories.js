@@ -23,6 +23,15 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-checkbox-pro></el-checkbox-pro>',
+    template: '<el-checkbox-group-pro><el-checkbox-pro><el-text text="多选项"></el-text></el-checkbox-pro></el-checkbox-group-pro>',
+  }),
+};
+
+export const DataSource = {
+  name: '使用数据源',
+  render: () => ({
+    template: `
+      <el-checkbox-group-pro :dataSource="[{}]"></el-checkbox-group-pro>
+    `,
   }),
 };

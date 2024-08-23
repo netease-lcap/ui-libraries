@@ -1,4 +1,6 @@
 import ElCheckboxPro from '../index';
+import ExampleDemo1 from '../demos/example-demo1.vue';
+import ExampleDemo2 from '../demos/example-demo2.vue';
 
 export default {
   id: 'el-checkbox-pro-examples',
@@ -10,9 +12,24 @@ export default {
   },
 };
 
-export const Default = {
+/*  基础示例 */
+export const Example1 = {
   name: '基础示例',
   render: () => ({
-    template: '<el-checkbox-pro></el-checkbox-pro>',
+    components: {
+      exampleDemo: ExampleDemo1,
+    },
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+/*  数据源 */
+export const Example2 = {
+  name: '数据源',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo2,
+    },
+    template: '<example-demo></example-demo>',
   }),
 };
