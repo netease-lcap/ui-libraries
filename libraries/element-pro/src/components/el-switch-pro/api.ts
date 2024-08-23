@@ -28,7 +28,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Disabled',
+      title: '禁用',
       description: '是否禁用组件',
       setter: { concept: 'SwitchSetter' },
     })
@@ -63,9 +63,9 @@ namespace nasl.ui {
     size: 'small' | 'medium' | 'large' = 'medium';
 
     @Prop({
-      group: '主要属性',
-      title: 'Value',
-      description: '开关值。支持语法糖 `v-model`。',
+      group: '数据属性',
+      title: '值',
+      description: '开关值',
       setter: { concept: 'InputSetter' },
     })
     value: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;

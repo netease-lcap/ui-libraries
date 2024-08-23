@@ -33,6 +33,12 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElCheckboxGroupPro<T, V> extends ViewComponent {
+    @Method({
+      title: 'undefined',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void {}
+
     constructor(options?: Partial<ElCheckboxGroupProOptions<T, V>>) {
       super();
     }
@@ -74,8 +80,74 @@ namespace nasl.ui {
     valueField: (item: T) => V = ((item: any) => item.value) as any;
 
     @Prop({
-      group: '主要属性',
-      title: 'Disabled',
+      group: '数据属性',
+      title: '选中值',
+      description: '选中值',
+      setter: { concept: 'InputSetter' },
+      sync: true,
+    })
+    value: nasl.collection.List<V>;
+
+    @Prop({
+      group: '数据属性',
+      title: '多选项属性设置',
+      description: '多选项属性设置',
+      setter: {
+        concept: 'AnonymousFunctionSetter',
+      },
+    })
+    itemProps: (current: Current<T>) => {
+      /**
+       * @title 禁用
+       */
+      disabled?: nasl.core.Boolean;
+      /**
+       * @title 只读
+       */
+      readonly?: nasl.core.Boolean;
+      /**
+       * @title 是否为半选
+       */
+      indeterminate?: nasl.core.Boolean;
+      /**
+       * @title 全选选项
+       */
+      checkAll?: nasl.core.Boolean;
+    };
+
+    @Prop({
+      group: '数据属性',
+      title: '全选选项',
+      description:
+        '用于标识是否为「全选选项」。数据源中的数据项中，该属性为 true 时，会添加全选项',
+      setter: { concept: 'SwitchSetter' },
+      onChange: [
+        { clear: ['max'] }
+      ],
+    })
+    checkAll: nasl.core.Boolean = false;
+
+    @Prop<ElCheckboxGroupProOptions<T, V>, 'max'>({
+      group: '数据属性',
+      title: '最大选中数',
+      description: '支持最多选中的数量',
+      setter: { concept: 'NumberInputSetter' },
+      if: _ => !_.checkAll,
+    })
+    max: nasl.core.Decimal | nasl.core.Integer;
+
+    @Prop({
+      group: '数据属性',
+      title: '懒加载',
+      description:
+        '是否启用懒加载。数据量加大时建议开启；加载复杂内容或大量图片时建议开启',
+      setter: { concept: 'SwitchSetter' },
+    })
+    lazyLoad: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '状态属性',
+      title: '禁用',
       description:
         '是否禁用组件，默认为 false。优先级：Form.disabled < CheckboxGroup.disabled < Checkbox.disabled',
       setter: { concept: 'SwitchSetter' },
@@ -84,36 +156,11 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Lazy Load',
-      description:
-        '是否启用懒加载。数据量加大时建议开启；加载复杂内容或大量图片时建议开启',
-      setter: { concept: 'SwitchSetter' },
-    })
-    lazyLoad: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Max',
-      description: '支持最多选中的数量',
-      setter: { concept: 'NumberInputSetter' },
-    })
-    max: nasl.core.Decimal;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Name',
+      title: 'HTML 元素原生标签',
       description: '统一设置内部复选框 HTML 属性',
       setter: { concept: 'InputSetter' },
     })
     name: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Value',
-      description: '选中值。支持语法糖 `v-model`。',
-      setter: { concept: 'InputSetter' },
-    })
-    value: nasl.collection.List<V>;
 
     @Event({
       title: 'On Change',
@@ -121,6 +168,24 @@ namespace nasl.ui {
         '值变化时触发。`context.current` 表示当前变化的数据项，如果是全选则为空；`context.type` 表示引起选中数据变化的是选中或是取消选中，`context.option` 表示当前变化的数据项。',
     })
     onChange: (event: V) => any;
+
+    @Slot({
+      title: 'Default',
+      description: '多选框内容，同 label。',
+      snippets: [
+        {
+          title: '多选项',
+          code: '<el-checkbox-pro><el-text text="多选项"></el-text></el-checkbox-pro>',
+        },
+      ],
+    })
+    slotDefault: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '多选项内容',
+      description: '多选项内容',
+    })
+    slotItem: (current: Current<T>) => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({
@@ -148,66 +213,32 @@ namespace nasl.ui {
 
   export class ElCheckboxProOptions extends ViewComponentOptions {
     @Prop({
-      group: '主要属性',
-      title: 'Check All',
-      description:
-        '用于标识是否为「全选选项」。单独使用无效，需在 CheckboxGroup 中使用',
-      setter: { concept: 'SwitchSetter' },
+      group: '数据属性',
+      title: '选项值',
+      description: '多选框的值。',
+      setter: { concept: 'InputSetter' },
     })
-    checkAll: nasl.core.Boolean = false;
+    value: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
 
     @Prop({
-      group: '主要属性',
-      title: 'Checked',
+      group: '数据属性',
+      title: '是否选中',
       description: '是否选中。支持语法糖 `v-model`',
       setter: { concept: 'SwitchSetter' },
     })
     checked: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: 'Default Checked',
+      group: '数据属性',
+      title: '默认是否选中',
       description: '是否选中。非受控属性',
       setter: { concept: 'SwitchSetter' },
     })
     defaultChecked: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: 'Default',
-      description: '多选框内容，同 label。',
-      setter: { concept: 'InputSetter' },
-    })
-    default: any;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Disabled',
-      description:
-        '是否禁用组件。如果父组件存在 CheckboxGroup，默认值由 CheckboxGroup.disabled 控制。优先级：Checkbox.disabled > CheckboxGroup.disabled > Form.disabled',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disabled: nasl.core.Boolean;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Indeterminate',
-      description: '是否为半选',
-      setter: { concept: 'SwitchSetter' },
-    })
-    indeterminate: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Label',
-      description: '主文案。',
-      setter: { concept: 'InputSetter' },
-    })
-    label: any;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Lazy Load',
+      group: '数据属性',
+      title: '懒加载',
       description:
         '是否启用懒加载。数据量加大时建议开启；加载复杂内容或大量图片时建议开启',
       setter: { concept: 'SwitchSetter' },
@@ -216,43 +247,46 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Name',
+      title: 'HTML 元素原生标签',
       description: 'HTML 元素原生属性',
       setter: { concept: 'InputSetter' },
     })
     name: nasl.core.String;
 
     @Prop({
-      group: '主要属性',
-      title: 'Readonly',
+      group: '状态属性',
+      title: '禁用',
+      description:
+        '是否禁用组件。如果父组件存在 CheckboxGroup，默认值由 CheckboxGroup.disabled 控制。优先级：Checkbox.disabled > CheckboxGroup.disabled > Form.disabled',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      group: '状态属性',
+      title: '半选',
+      description: '是否为半选',
+      setter: { concept: 'SwitchSetter' },
+    })
+    indeterminate: nasl.core.Boolean = false;
+   
+    @Prop({
+      group: '状态属性',
+      title: '只读',
       description: '只读状态',
       setter: { concept: 'SwitchSetter' },
     })
     readonly: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Value',
-      description: '多选框的值。',
-      setter: { concept: 'InputSetter' },
-    })
-    value: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
-
     @Event({
       title: 'On Change',
       description: '值变化时触发',
     })
-    onChange: (event: any) => any;
+    onChange: (event: nasl.core.Boolean) => any;
 
     @Slot({
       title: 'Default',
       description: '多选框内容，同 label。',
-      snippets: [
-        {
-          title: 'Checkbox Group',
-          code: '<el-checkbox-group-pro></el-checkbox-group-pro>',
-        },
-      ],
     })
     slotDefault: () => Array<ViewComponent>;
   }

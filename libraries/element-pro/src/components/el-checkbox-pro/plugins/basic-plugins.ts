@@ -2,14 +2,15 @@
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
 import { at } from 'lodash';
 import { createUseUpdateSync } from '@lcap/vue2-utils';
+import { ElCheckboxPro } from '../index';
 
 export const useUpdateSync = createUseUpdateSync([{ name: 'value', event: 'change', defaultValue: [] }]);
 
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index';
 
 export const useDataSourceRender: NaslComponentPluginOptions = {
-  props: ['data', 'valueField'],
-  setup({ get: propGet, useComputed }) {
+  props: ['data', 'valueField', 'checkAll', 'itemProps'],
+  setup({ get: propGet, useComputed }, { h }) {
     const dataSource = propGet('dataSource');
     const options = useComputed(['data'], () => {
       if (dataSource) {
@@ -17,7 +18,9 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
         const valueField = propGet<string>('valueField') || 'value';
         const itemProps = propGet<(c: any) => any>('itemProps') || (() => ({}));
         const data = propGet<any>('data') || [];
-        return data.map((item, i) => {
+        const checkAll = propGet<boolean>('checkAll');
+
+        const optionList = data.map((item, i) => {
           const [value] = at(item, [valueField]);
           const current = {
             item,
@@ -33,6 +36,13 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
             label: contents,
           };
         });
+        if (checkAll) {
+          const hasCheckedAll = optionList.some((item: any) => item.checkAll);
+          if (!hasCheckedAll) {
+            optionList.unshift({ label: '全选', checkAll: true });
+          }
+        }
+        return optionList;
       }
       return [];
     });
@@ -42,7 +52,19 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
       slotDefault: () => {
         const slotDefault = propGet('slotDefault');
         if (!dataSource) {
-          return typeof slotDefault === 'function' ? slotDefault() : null;
+          const checkAll = propGet<boolean>('checkAll');
+
+          let vnodes = typeof slotDefault === 'function' ? slotDefault() : null;
+          if (checkAll) {
+            vnodes = vnodes || [];
+            vnodes.unshift(h(ElCheckboxPro, {
+              attrs: {
+                checkAll: true,
+                label: '全选',
+              },
+            }));
+          }
+          return vnodes;
         }
         return null;
       },
