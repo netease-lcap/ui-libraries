@@ -1,4 +1,5 @@
-import { onBeforeMount } from '@vue/composition-api';
+import { isPlainObject } from 'lodash';
+import { onBeforeMount, getCurrentInstance } from '@vue/composition-api';
 import { NaslComponentPluginOptions } from '../types';
 import { $deletePropList, $ref } from '../constants';
 
@@ -6,8 +7,9 @@ export type LoadDataFunc = (params: { [key: string]: any }) => Promise<{ list: a
 
 export const useDataSource: NaslComponentPluginOptions = {
   props: ['dataSource', 'dataSchema', 'data', 'total'],
-  setup: (props) => {
+  setup: (props, { setupContext: ctx }) => {
     const loading = props.useRef('loading');
+    const instance = getCurrentInstance();
 
     const data = props.useRef<any[]>('dataSource', (v) => {
       if (Array.isArray(v)) {
@@ -40,6 +42,13 @@ export const useDataSource: NaslComponentPluginOptions = {
 
       const loadData = async (params: Record<string, any>) => {
         loading.value = true;
+
+        if (params && isPlainObject(params)) {
+          ['size', 'page', 'sort', 'order', 'filterText'].forEach((key) => {
+            instance?.emit('sync:state', key, params[key]);
+          });
+        }
+
         const d = await Promise.resolve(v(params || {}));
         if (Array.isArray(d)) {
           data.value = d;

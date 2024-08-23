@@ -27,3 +27,6 @@ export {
   $ref,
   $render,
 } from './plugins';
+export {
+  useSyncState,
+} from './hooks';

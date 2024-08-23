@@ -1,7 +1,7 @@
 /* 组件功能扩展插件 */
 import { $deletePropList, $ref } from '@lcap/vue2-utils/plugins/index';
 import { createProp2Default } from '@lcap/vue2-utils/plugins/common/text';
-import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins';
+import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins/types';
 import ElIcon from '../../el-icon';
 import { isEmptyVNodes } from '@/utils/vnode';
 import styles from '../index.module.css';
@@ -22,7 +22,7 @@ export const useIcon: NaslComponentPluginOptions = {
           return slotDefault();
         }
 
-        const iconNode = h(ElIcon, { attrs: { name: icon }, class: 'el-icon-ri' });
+        const iconNode = h(ElIcon, { attrs: { name: icon } });
         const vnodes = slotDefault ? slotDefault() : [];
 
         if (isEmptyVNodes(vnodes)) {
@@ -30,7 +30,15 @@ export const useIcon: NaslComponentPluginOptions = {
         }
 
         if (iconPosition === 'right') {
-          return h('span', { class: styles.spanwrap }, [h('span', vnodes), iconNode]);
+          if (!iconNode.data) {
+            iconNode.data = {};
+          }
+
+          iconNode.data.class = 'el-icon--right';
+          return h('span', { class: styles.spanwrap }, [
+            h('span', vnodes),
+            iconNode,
+          ]);
         }
         return h('span', { class: styles.spanwrap }, [iconNode, h('span', vnodes)]);
       },
