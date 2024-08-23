@@ -90,14 +90,6 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
-      title: '默认值',
-      description: '选中的值。非受控属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    defaultValue: V;
-
-    @Prop({
-      group: '数据属性',
       title: '单选项属性设置',
       description: '单选项属性设置',
       setter: {
@@ -198,7 +190,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: "container",
-      parentAccept: "target.tag === 'el-radio-pro'",
+      parentAccept: "target.tag === 'el-radio-group-pro'",
       selector: {
         expression: "this",
         cssSelector: "label[class='el-p-radio']"

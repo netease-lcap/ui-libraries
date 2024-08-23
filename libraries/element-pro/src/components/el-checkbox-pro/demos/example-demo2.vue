@@ -5,7 +5,7 @@
       <div class="block">
         <el-checkbox-group-pro :dataSource="options" :itemProps="setItemProps" valueField="id" :value.sync="checkedValue">
           <template #item="current">
-            {{ current.item.label }}
+            {{ current.item.text }}
           </template>
         </el-checkbox-group-pro>
         {{ checkedValue }}
@@ -20,16 +20,15 @@
         options: [
             {
                 id: 1,
-                label: '选项一',
-                allowUncheck: true,
+                text: '选项一',
             },
             {
                 id: 2,
-                label: '选项二',
+                text: '选项二',
             },
             {
                 id: '3',
-                label: '选项三',
+                text: '选项三',
                 disabled: true
             },
         ],
