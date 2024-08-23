@@ -131,7 +131,7 @@ namespace nasl.ui {
     @Slot({
       title: '组件插槽',
       description: '插入`<van-radio>`子组件。',
-      emptyBackground: 'add-sub',
+      // emptyBackground: 'add-sub',
       snippets: [{
         title: '单选项',
         code: '<van-radio icon="sure"><van-text text="节点"></van-text></van-radio>'

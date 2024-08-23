@@ -168,7 +168,7 @@ namespace nasl.ui {
     @Slot({
       title: '组件插槽',
       description: '插入`<van-checkbox>`子组件。',
-      emptyBackground: 'add-sub',
+      // emptyBackground: 'add-sub',
       snippets: [{
         title: '多选项',
         code: '<van-checkbox shape="square"><van-text text="节点"></van-text></van-checkbox>'

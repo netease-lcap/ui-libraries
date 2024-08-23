@@ -55,7 +55,10 @@
         "name": "VanCol",
         "ideusage": {
             "idetype": "container",
-            "containerDirection": "column"
+            "containerDirection": "column",
+            "slotInlineStyle": {
+                "default": "min-width: unset"
+            }
         }
     },
     {
@@ -103,7 +106,11 @@
             "idetype": "container",
             "structured": true,
             "parentAccept": "target.tag.endsWith('van-dropdown-menu')",
-            "childAccept": "['van-dropdown-item-son'].includes(target.tag)"
+            "childAccept": "['van-dropdown-item-son'].includes(target.tag)",
+            "selector": {
+                "expression": "this",
+                "cssSelector": "div[class*='van-dropdown-item__content']"
+            }
         }
     },
     {
@@ -221,7 +228,10 @@
         "name": "VanSwipeItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "target.tag.endsWith('van-swipe')"
+            "parentAccept": "target.tag.endsWith('van-swipe')",
+            "slotInlineStyle": {
+                "default": "height: 100%"
+            }
         }
     },
     {
@@ -513,8 +523,11 @@
             "idetype": "container",
             "parentAccept": "target.tag.endsWith('van-form')",
             "selector": {
-                "expression": "this.getElement(el => el.slotTarget === 'title')",
-                "cssSelector": "div[class^='van-field']"
+                "expression": "this.getElement(el => el.slotTarget === 'input')",
+                "cssSelector": "div[is-sub]"
+            },
+            "slotWrapperInlineStyle": {
+                "input": "width: 100%"
             }
         }
     },
@@ -529,7 +542,7 @@
         "name": "VanStepperNew",
         "ideusage": {
             "idetype": "element",
-            "translateBindingProperty": ["value", "placeholder"]
+            "translateBindingProperty": ["placeholder"]
         }
     },
     {
@@ -560,7 +573,8 @@
                 "emptySlot": {
                     "display": "inline",
                     "condition": "!this.getAttribute('dataSource')",
-                    "accept": false
+                    "accept": false,
+                    "content": "请绑定数据源或插入子节点"
                 }
             }
         }
@@ -592,7 +606,8 @@
                 "emptySlot": {
                     "display": "inline",
                     "condition": "!this.getAttribute('dataSource')",
-                    "accept": false
+                    "accept": false,
+                    "content": "请绑定数据源或插入子节点"
                 }
             }
         }
