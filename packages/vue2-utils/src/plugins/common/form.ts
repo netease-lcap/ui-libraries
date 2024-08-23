@@ -15,12 +15,14 @@ export const createUseUpdateSync = (options: PropSyncOption[] = [{ name: 'value'
 
       options.forEach(({ name, event, defaultValue }) => {
         const eventName = getEventKey(event);
-        const propRef = props.useRef(name, (v) => (typeof v === 'undefined' ? defaultValue : v));
+        const propRef = props.useRef<any>(name, (v) => (typeof v === 'undefined' ? defaultValue : v));
         const onUpdateValue = props.get(`update:${name}`);
         const eventHandler = props.get(eventName);
 
         returnMap[name] = propRef;
         returnMap[eventName] = (...args: any[]) => {
+          // eslint-disable-next-line prefer-destructuring
+          propRef.value = args[0];
           if (typeof onUpdateValue === 'function') {
             onUpdateValue(args[0]);
           }
