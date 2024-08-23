@@ -669,7 +669,8 @@
     {
         "name": "UCalendarView",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "useTemplateInDefaultSlot": true
         }
     },
     {
