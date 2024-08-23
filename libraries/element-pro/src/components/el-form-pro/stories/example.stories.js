@@ -13,6 +13,19 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-form-pro></el-form-pro>',
+    data() {
+      return {
+        formData: {},
+      };
+    },
+    template: `<el-form-pro>
+      <el-form-item-pro name="name">
+        <template #label>姓名</template>
+        <el-input-pro v-model="formData.name" placeholder="请输入姓名"></el-input-pro>
+      </el-form-item-pro>
+      <el-form-item-pro label="初始密码" name="password">
+        <el-input-pro v-model="formData.password" type="password" placeholder="请输入初始密码"></el-input-pro>
+      </el-form-item-pro>
+    </el-form-pro>`,
   }),
 };

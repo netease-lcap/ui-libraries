@@ -3,14 +3,80 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     show: true,
+    ideusage: {
+      idetype: 'container',
+      structured: true,
+      childAccept: "['el-form-item-pro'].includes(target.tag)",
+    },
   })
   @Component({
     title: '表单',
     icon: 'form',
-    description: '用以收集、校验和提交数据，一般由输入框、单选框、复选框、选择器等控件组成。',
+    description:
+      '用以收集、校验和提交数据，一般由输入框、单选框、复选框、选择器等控件组成。',
     group: 'Form',
   })
   export class ElFormPro extends ViewComponent {
+    @Method({
+      title: '清空校验结果',
+      description:
+        "可使用 fields 指定清除部分字段的校验结果，fields 值为空则表示清除所有字段校验结果。清除邮箱校验结果示例：clearValidate(['email'])",
+    })
+    clearValidate(
+      @Param({
+        title: '字段列表',
+      })
+      fields: nasl.collection.List<nasl.core.String> = null,
+    ): void {}
+
+    @Method({
+      title: '重置表单',
+      description:
+        "表单里面没有重置按钮<button type=\"reset\" />时可以使用该方法，默认重置全部字段为空，该方法会触发 reset 事件。如果表单属性 resetType='empty' 或者 reset.type='empty' 会重置为空；如果表单属性 resetType='initial' 或者 reset.type='initial' 会重置为表单初始值。",
+    })
+    reset(
+      @Param({
+        title: '设置具体重置哪些字段',
+      })
+      params: {
+        type: 'initial' | 'empty';
+        fields: nasl.collection.List<nasl.core.String>;
+      } = null,
+    ): void {}
+
+    @Method({
+      title: '提交表单',
+      description:
+        '表单里面没有提交按钮<button type="submit" />时可以使用该方法。showErrorMessage 表示是否在提交校验不通过时显示校验不通过的原因，默认显示。该方法会触发 submit 事件',
+    })
+    submit(
+      @Param({
+        title: '提交表单选项',
+      })
+      params: {
+        showErrorMessage: nasl.core.Boolean;
+      } = null,
+    ): void {}
+
+    @Method({
+      title: '校验函数',
+      description: '校验函数，包含错误文本提示等功能',
+    })
+    validate(
+      @Param({
+        title: '校验选项',
+      })
+      params: {
+        fields: nasl.collection.List<nasl.core.String>;
+        showErrorMessage: nasl.core.Boolean;
+        trigger: 'blur' | 'change' | 'submit' | 'all';
+      },
+    ): {
+      valid: nasl.core.Boolean;
+    } {
+      return {} as any;
+    }
+
     constructor(options?: Partial<ElFormProOptions>) {
       super();
     }
@@ -67,11 +133,14 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '标签布局',
-      description:
-        '表单字段标签对齐方式：左对齐、右对齐、顶部对齐',
+      description: '表单字段标签对齐方式：左对齐、右对齐、顶部对齐',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '左对齐' }, { title: '右对齐' }, { title: '顶部对齐' }],
+        options: [
+          { title: '左对齐' },
+          { title: '右对齐' },
+          { title: '顶部对齐' },
+        ],
       },
     })
     labelAlign: 'left' | 'right' | 'top' = 'right';
@@ -123,93 +192,89 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Rules',
-      description: '表单字段校验规则。',
-      setter: { concept: 'InputSetter' },
-    })
-    rules: object;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Scroll To First Error',
+      title: '自动滚动到校验不通过的字段',
       description:
-        '表单校验不通过时，是否自动滚动到第一个校验不通过的字段，平滑滚动或是瞬间直达。值为空则表示不滚动。可选项：""/smooth/auto',
+        '表单校验不通过时，是否自动滚动到第一个校验不通过的字段，平滑滚动或是瞬间直达。值为空则表示不滚动',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '""' }, { title: 'smooth' }, { title: 'auto' }],
+        options: [
+          { title: '不滚动' },
+          { title: '平滑滚动' },
+          { title: '瞬间直达' },
+        ],
       },
     })
-    scrollToFirstError: '""' | 'smooth' | 'auto';
+    scrollToFirstError: '' | 'smooth' | 'auto' = '';
 
     @Prop({
       group: '主要属性',
-      title: 'Show Error Message',
+      title: '显示错误提示',
       description:
-        '校验不通过时，是否显示错误提示信息，统一控制全部表单项。如果希望控制单个表单项，请给 FormItem 设置该属性',
+        '校验不通过时，是否显示错误提示信息，统一控制全部表单项。如果希望控制单个表单项，请给表单项设置该属性',
       setter: { concept: 'SwitchSetter' },
     })
     showErrorMessage: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
-      title: 'Status Icon',
+      title: '显示状态图标',
       description:
-        '校验状态图标，值为 `true` 显示默认图标，默认图标有 成功、失败、警告 等，不同的状态图标不同。`statusIcon` 值为 `false`，不显示图标。`statusIcon` 值类型为渲染函数，则可以自定义右侧状态图标。',
-      setter: { concept: 'InputSetter' },
-    })
-    statusIcon: any;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Submit With Warning Message',
-      description:
-        '【讨论中】当校验结果只有告警信息时，是否触发 `submit` 提交事件',
+        '校验状态图标，值为 `true` 显示默认图标，默认图标有 成功、失败、警告 等，不同的状态图标不同。`statusIcon` 值为 `false`，不显示图标。',
       setter: { concept: 'SwitchSetter' },
     })
-    submitWithWarningMessage: nasl.core.Boolean = false;
+    statusIcon: nasl.core.Boolean = false;
 
     @Event({
-      title: 'On Reset',
+      title: '重置时',
       description: '表单重置时触发',
     })
-    onReset: (event: any) => any;
+    onReset: (event: {}) => any;
 
     @Event({
-      title: 'On Submit',
+      title: '提交时',
       description:
         '表单提交时触发。其中 `context.validateResult` 表示校验结果，`context.firstError` 表示校验不通过的第一个规则提醒。`context.validateResult` 值为 `true` 表示校验通过；如果校验不通过，`context.validateResult` 值为校验结果列表。<br />【注意】⚠️ 默认情况，输入框按下 Enter 键会自动触发提交事件，如果希望禁用这个默认行为，可以给输入框添加  enter 事件，并在事件中设置 `e.preventDefault()`。',
     })
-    onSubmit: (event: any) => any;
+    onSubmit: (event: {
+      valid: nasl.core.Boolean;
+      firstError: nasl.core.String;
+    }) => any;
 
     @Event({
-      title: 'On Validate',
-      description:
-        '校验结束后触发，result 值为 true 表示校验通过；如果校验不通过，result 值为校验结果列表。',
+      title: '校验结束后',
+      description: '校验结束后触发',
     })
-    onValidate: (event: any) => any;
-
-    @Slot({
-      title: 'Status Icon',
-      description:
-        '校验状态图标，值为 `true` 显示默认图标，默认图标有 成功、失败、警告 等，不同的状态图标不同。`statusIcon` 值为 `false`，不显示图标。`statusIcon` 值类型为渲染函数，则可以自定义右侧状态图标。',
-    })
-    slotStatusIcon: () => Array<ViewComponent>;
+    onValidate: (event: {
+      valid: nasl.core.Boolean;
+      firstError: nasl.core.String;
+    }) => any;
 
     @Slot({
       title: '表单内容',
       description: '插入表单项',
       snippets: [
-        { title: '表单项', code: '<el-form-item-pro></el-form-item-pro>' },
+        {
+          title: '表单项',
+          code: '<el-form-item-pro><template #label><el-text text="表单项"></el-text></template></el-form-item-pro>',
+        },
       ],
     })
     slotDefault: () => Array<ViewComponent>;
   }
 
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      parentAccept: "target.tag.endsWith('el-form-pro')",
+      ignoreProperty: ['rules'],
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+    },
+  })
   @Component({
-    title: 'Form Item',
-    icon: 'form-item',
-    description: '',
-    group: 'Form',
+    title: '表单项',
+    description: '表单项',
   })
   export class ElFormItemPro extends ViewComponent {
     constructor(options?: Partial<ElFormItemProOptions>) {
@@ -218,53 +283,73 @@ namespace nasl.ui {
   }
 
   export class ElFormItemProOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: 'For',
-      description: 'label 原生属性',
-      setter: { concept: 'InputSetter' },
-    })
-    for: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'For',
+    //   description: 'label 原生属性',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // for: nasl.core.String;
 
-    @Prop({
+    @Prop<ElFormItemProOptions, 'help'>({
       group: '主要属性',
-      title: 'Help',
+      title: '帮助文本',
       description: '表单项说明内容。',
       setter: { concept: 'InputSetter' },
+      if: (_) => !_.helpIsSlot,
     })
-    help: any;
+    help: nasl.core.String;
+
+    @Prop<ElFormItemProOptions, 'helpIsSlot'>({
+      group: '主要属性',
+      title: '帮助文本使用插槽',
+      description: '帮助文本使用插槽方式添加',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      onChange: [{
+        clear: ['help'],
+        if: (val) => val
+      }]
+    })
+    helpIsSlot: nasl.core.Boolean = false;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Label',
+    //   description: '字段标签名称。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // label: any = '';
 
     @Prop({
       group: '主要属性',
-      title: 'Label',
-      description: '字段标签名称。',
-      setter: { concept: 'InputSetter' },
-    })
-    label: any = '';
-
-    @Prop({
-      group: '主要属性',
-      title: 'Label Align',
+      title: '标签布局',
       description:
         '表单字段标签对齐方式：左对齐、右对齐、顶部对齐。默认使用 Form 的对齐方式，优先级高于 Form.labelAlign。可选项：left/right/top',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'left' }, { title: 'right' }, { title: 'top' }],
+        options: [
+          { title: '左对齐' },
+          { title: '右对齐' },
+          { title: '顶部对齐' },
+          { title: '使用表单设置' },
+        ],
       },
     })
-    labelAlign: 'left' | 'right' | 'top';
+    labelAlign: 'left' | 'right' | 'top' | '' = '';
 
     @Prop({
       group: '主要属性',
-      title: 'Label Width',
-      description: '可以整体设置标签宽度，优先级高于 Form.labelWidth',
+      title: '标签宽度',
+      description: '可以整体设置标签宽度，优先级高于表单项',
       setter: { concept: 'InputSetter' },
     })
     labelWidth: nasl.core.String | nasl.core.Decimal;
 
     @Prop({
-      group: '主要属性',
-      title: 'Name',
+      group: '数据属性',
+      title: '字段名称',
       description: '表单字段名称',
       setter: { concept: 'InputSetter' },
     })
@@ -272,87 +357,79 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Required Mark',
-      description: '是否显示必填符号（*），优先级高于 Form.requiredMark',
+      title: '必填标记',
+      description: '是否显示必填符号（*），优先级高于表单设置的必填标记',
       setter: { concept: 'SwitchSetter' },
     })
     requiredMark: nasl.core.Boolean;
 
     @Prop({
       group: '主要属性',
-      title: 'Rules',
+      title: '验证规则',
       description: '表单字段校验规则。',
       setter: { concept: 'InputSetter' },
+      bindHide: true,
     })
-    rules: any[];
+    rules: nasl.core.String;
 
     @Prop({
       group: '主要属性',
-      title: 'Show Error Message',
-      description:
-        '校验不通过时，是否显示错误提示信息，优先级高于 `Form.showErrorMessage`',
+      title: '显示错误信息',
+      description: '校验不通过时，是否显示错误提示信息，默认使用表单配置',
       setter: { concept: 'SwitchSetter' },
     })
     showErrorMessage: nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Status',
-      description: '校验状态，可在需要完全自主控制校验状态时使用。',
-      setter: { concept: 'InputSetter' },
-    })
-    status: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '校验状态',
+    //   description: '校验状态，可在需要完全自主控制校验状态时使用。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // status: nasl.core.String;
 
     @Prop({
       group: '主要属性',
-      title: 'Status Icon',
+      title: '显示状态图标',
       description:
-        '校验状态图标，值为 `true` 显示默认图标，默认图标有 成功、失败、警告 等，不同的状态图标不同。`statusIcon` 值为 `false`，不显示图标。`statusIcon` 值类型为渲染函数，则可以自定义右侧状态图标。优先级高级 Form 的 statusIcon。',
-      setter: { concept: 'InputSetter' },
+        '校验状态图标，值为 `true` 显示默认图标，默认图标有 成功、失败、警告 等，不同的状态图标不同。`statusIcon` 值为 `false`，不显示图标, 默认使用表单配置',
+      setter: { concept: 'SwitchSetter' },
     })
-    statusIcon: any;
+    statusIcon: nasl.core.Boolean;
 
     @Prop({
       group: '主要属性',
-      title: 'Success Border',
+      title: '显示校验成功的边框',
       description: '是否显示校验成功的边框，默认不显示',
       setter: { concept: 'SwitchSetter' },
     })
     successBorder: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Tips',
-      description:
-        '自定义提示内容，样式跟随 `status` 变动，可在需要完全自主控制校验规则时使用。',
-      setter: { concept: 'InputSetter' },
-    })
-    tips: any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Tips',
+    //   description:
+    //     '自定义提示内容，样式跟随 `status` 变动，可在需要完全自主控制校验规则时使用。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // tips: any;
 
     @Slot({
-      title: 'Help',
+      title: '说明内容',
       description: '表单项说明内容。',
     })
     slotHelp: () => Array<ViewComponent>;
 
     @Slot({
-      title: 'Label',
+      title: '标签',
       description: '字段标签名称。',
     })
     slotLabel: () => Array<ViewComponent>;
 
     @Slot({
-      title: 'Status Icon',
-      description:
-        '校验状态图标，值为 `true` 显示默认图标，默认图标有 成功、失败、警告 等，不同的状态图标不同。`statusIcon` 值为 `false`，不显示图标。`statusIcon` 值类型为渲染函数，则可以自定义右侧状态图标。优先级高级 Form 的 statusIcon。',
+      title: '表单组件',
+      description: '字段标签名称。',
     })
-    slotStatusIcon: () => Array<ViewComponent>;
-
-    @Slot({
-      title: 'Tips',
-      description:
-        '自定义提示内容，样式跟随 `status` 变动，可在需要完全自主控制校验规则时使用。',
-    })
-    slotTips: () => Array<ViewComponent>;
+    slotDefault: () => Array<ViewComponent>;
   }
 }
