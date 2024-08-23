@@ -215,7 +215,7 @@ namespace nasl.ui {
         }) => any;
 
         @Slot({
-            title: 'undefined',
+            title: '组件插槽',
             description: '插入文本或 HTML 至日期组件底部',
         })
         slotDefault: (current: Current<T>) => Array<ViewComponent>;
