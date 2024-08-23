@@ -12,6 +12,7 @@ export { ElInputPro, ElInputGroupPro } from './el-input-pro';
 export { ElInputAdornmentPro } from './el-input-adornment-pro';
 export { ElInputNumberPro } from './el-input-number-pro';
 export { ElRadioPro, ElRadioGroupPro } from './el-radio-pro';
+export { ElRatePro } from './el-rate-pro';
 export { ElRangeInputPro, ElRangeInputPopupPro } from './el-range-input-pro';
 export { ElSelectPro, ElOptionPro, ElOptionGroupPro } from './el-select-pro';
 export { ElSelectInputPro } from './el-select-input-pro';
