@@ -62,6 +62,9 @@ namespace nasl.ui {
 
   @IDEExtraInfo({
     show: true,
+    ideusage: {
+      idetype: 'container',
+    },
   })
   @Component({
     title: '上传',
@@ -75,6 +78,12 @@ namespace nasl.ui {
       description: '组件实例方法，打开文件选择器',
     })
     triggerUpload(): void {}
+
+    @Method({
+      title: '手动触发上传未成功上传过的所有文件',
+      description: '默认上传未成功上传过的所有文件',
+    })
+    uploadFiles(): void {}
 
     constructor(options?: Partial<ElUploadProOptions>) {
       super();
@@ -195,54 +204,56 @@ namespace nasl.ui {
       title: '文件访问策略',
       docDescription: '支持任何人可访问和用户登录后可访问两种方式',
       setter: {
-          concept: 'EnumSelectSetter',
-          options: [{ title: '任何人可访问' }, { title: '用户登录后可访问' }],
+        concept: 'EnumSelectSetter',
+        options: [{ title: '任何人可访问' }, { title: '用户登录后可访问' }],
       },
     })
     access: 'public' | 'private';
 
     @Prop({
-        group: '主要属性',
-        title: '文件有效期',
-        description: '是否开启文件有效期控制',
-        docDescription: '支持配置文件自动清理，开启后可自定义上传后有效天数',
-        setter: {
-            concept: 'SwitchSetter',
-        },
+      group: '主要属性',
+      title: '文件有效期',
+      description: '是否开启文件有效期控制',
+      docDescription: '支持配置文件自动清理，开启后可自定义上传后有效天数',
+      setter: {
+        concept: 'SwitchSetter',
+      },
     })
     ttl: nasl.core.Boolean;
 
     @Prop<ElUploadProOptions, 'ttlValue'>({
-        group: '主要属性',
-        title: '上传后有效天数',
-        description: '文件上传后的有效期天数',
-        docDescription: '开启文件有效期开关后显示，可配置文件自动清理的时间',
-        setter: {
-            concept: 'NumberInputSetter',
-        },
-        if: _ => _.ttl === true,
+      group: '主要属性',
+      title: '上传后有效天数',
+      description: '文件上传后的有效期天数',
+      docDescription: '开启文件有效期开关后显示，可配置文件自动清理的时间',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+      if: (_) => _.ttl === true,
     })
     ttlValue: nasl.core.Decimal;
 
     @Prop({
-        group: '主要属性',
-        title: '源地址访问',
-        description: '开启后支持通过文件存储源地址访问文件',
-        docDescription: '开启后支持通过文件存储源地址访问文件',
-        setter: {
-            concept: 'SwitchSetter',
-        },
+      group: '主要属性',
+      title: '源地址访问',
+      description: '开启后支持通过文件存储源地址访问文件',
+      docDescription: '开启后支持通过文件存储源地址访问文件',
+      setter: {
+        concept: 'SwitchSetter',
+      },
     })
     viaOriginURL: nasl.core.Boolean;
 
     @Prop({
-        group: '主要属性',
-        title: '启用压缩',
-        description: '启用压缩后上传的文件按压缩规则进行压缩后上传，压缩规则可在自定义配置参数管理',
-        docDescription: '启用压缩后上传的文件按压缩规则进行压缩后上传，压缩规则可在自定义配置参数管理',
-        setter: {
-            concept: 'SwitchSetter',
-        },
+      group: '主要属性',
+      title: '启用压缩',
+      description:
+        '启用压缩后上传的文件按压缩规则进行压缩后上传，压缩规则可在自定义配置参数管理',
+      docDescription:
+        '启用压缩后上传的文件按压缩规则进行压缩后上传，压缩规则可在自定义配置参数管理',
+      setter: {
+        concept: 'SwitchSetter',
+      },
     })
     lcapIsCompress: nasl.core.Boolean;
 
@@ -279,22 +290,19 @@ namespace nasl.ui {
     })
     autoUpload: nasl.core.Boolean = true;
 
-    @Prop({
+    @Prop<ElUploadProOptions, 'multiple'>({
       group: '主要属性',
       title: '多文件上传',
       description: '支持多文件上传',
       setter: { concept: 'SwitchSetter' },
+      onChange: [
+        {
+          clear: ['max'],
+          if: (_) => !_,
+        },
+      ],
     })
     multiple: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '批量上传',
-      description:
-        '多个文件是否作为一个独立文件包，整体替换，整体删除。不允许追加文件，只允许替换文件。类型为文件批量上传时有效',
-      setter: { concept: 'SwitchSetter' },
-    })
-    isBatchUpload: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -313,12 +321,12 @@ namespace nasl.ui {
     })
     allowUploadDuplicateFile: nasl.core.Boolean = false;
 
-    @Prop({
+    @Prop<ElUploadProOptions, 'max'>({
       group: '主要属性',
-      title: '文件上传数量现在',
-      description:
-        '用于控制文件上传数量，值为 0 则不限制。注意，单文件上传场景',
+      title: '最大上传文件数量',
+      description: '用于控制文件上传数量，值为 0 则不限制',
       setter: { concept: 'NumberInputSetter' },
+      if: (_) => _.multiple,
     })
     max: nasl.core.Decimal = 0;
 
@@ -416,12 +424,12 @@ namespace nasl.ui {
     })
     onCancelUpload: (event: {}) => any;
 
-    @Event({
-      title: '已上传文件列表改变时',
-      description:
-        '已上传文件列表发生变化时触发，`trigger` 表示触发本次的来源。',
-    })
-    onChange: (event: {}) => any;
+    // @Event({
+    //   title: '已上传文件列表改变时',
+    //   description:
+    //     '已上传文件列表发生变化时触发，`trigger` 表示触发本次的来源。',
+    // })
+    // onChange: (event: {}) => any;
 
     @Event({
       title: '上传失败后',

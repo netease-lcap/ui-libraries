@@ -5,7 +5,7 @@ import * as plugins from './plugins';
 export const ElUploadPro = registerComponent(Upload, plugins, {
   nativeEvents: [],
   slotNames: [],
-  methodNames: [],
+  methodNames: ['triggerUpload', 'uploadFiles'],
 });
 
 export default ElUploadPro;
