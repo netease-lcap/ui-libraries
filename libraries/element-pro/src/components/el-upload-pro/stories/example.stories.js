@@ -13,6 +13,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-upload-pro></el-upload-pro>',
+    template: '<el-upload-pro theme="image" :autoUpload="false"></el-upload-pro>',
   }),
 };

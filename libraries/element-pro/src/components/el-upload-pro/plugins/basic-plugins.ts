@@ -3,9 +3,16 @@ import {
   FormatResponseContext,
   ResponseType,
   SizeLimitObj,
+  UploadChangeContext,
+  UploadFile,
+  UploadProps,
 } from '@element-pro';
-import { NaslComponentPluginOptions } from '@lcap/vue2-utils';
+import { $deletePropList, NaslComponentPluginOptions } from '@lcap/vue2-utils';
+import { MapGet } from '@lcap/vue2-utils/plugins/types.js';
+import { SetupContext, shallowRef, watch } from '@vue/composition-api';
 import { at, isObject, isPlainObject } from 'lodash';
+
+type Converter = 'json' | 'simple';
 
 const SIZE_UNITS = ['KB', 'MB', 'GB', 'TB', 'B'];
 const getSizeLimit = (val: string) => {
@@ -36,9 +43,9 @@ const getSizeLimit = (val: string) => {
   } as SizeLimitObj;
 };
 
-function useUploadRequestInfo(props, ctx) {
-  const action = props.useComputed('action', (a) => {
-    const url = a || '/upload';
+function useUploadRequestInfo(props: MapGet, ctx: SetupContext) {
+  const action = props.useComputed(['url', 'action'], (v, a) => {
+    const url = v || a || '/upload';
     const vueIns = ctx.root as any;
     return vueIns.$formatMicroFrontUrl ? vueIns.$formatMicroFrontUrl(url) : url;
   });
@@ -88,7 +95,7 @@ function useUploadRequestInfo(props, ctx) {
   });
 
   function formatResponse(res, context: FormatResponseContext) {
-    const urlField = props.get('urlField');
+    const urlField = props.get<string>('urlField') || 'url';
 
     let url;
     // 新接口适配
@@ -119,16 +126,124 @@ function useUploadRequestInfo(props, ctx) {
   };
 }
 
+const getFileNameByURL = (url) => {
+  const match = url.match(/\/([^/]+)$/);
+  return match ? match[1] : null;
+};
+
+const getValueByList = (fileList: UploadFile[], converter: Converter) => {
+  if (!fileList) {
+    return null;
+  }
+
+  const list = fileList.filter((f) => f.status === 'success');
+  if (list.length === 0) {
+    return null;
+  }
+
+  if (converter === 'simple') {
+    return list.map((x) => (x.url || '')).join(',');
+  }
+
+  return JSON.stringify(list);
+};
+
+const getFileListByValue = (value, converter: Converter = 'json', fileList) => {
+  if (Array.isArray(fileList)) {
+    return fileList as UploadFile[];
+  }
+
+  if (!value) {
+    return [];
+  }
+
+  if (converter === 'simple') {
+    const values = value.split(',');
+    return values.map((v) => {
+      return {
+        url: v,
+        name: getFileNameByURL(v),
+        status: 'success',
+      } as UploadFile;
+    });
+  }
+
+  try {
+    const parsedValue = JSON.parse(value || '[]');
+    return Array.isArray(parsedValue) ? parsedValue : [];
+  } catch (e) {
+    return [];
+  }
+};
+
+function useValue2FileList(props: MapGet) {
+  const fileList = shallowRef<UploadFile[]>(getFileListByValue(
+    props.get('value'),
+    props.get('converter'),
+    props.get('fileList'),
+  ));
+
+  watch(() => props.get('value'), (v, oldV) => {
+    const converter = props.getEnd<Converter>('converter');
+    if (v === oldV || v === getValueByList(fileList.value, converter)) {
+      return;
+    }
+
+    const list = getFileListByValue(v, converter, props.get('fileList'));
+    const arr = [...fileList.value].filter((it) => {
+      if (it.status !== 'success') {
+        return true;
+      }
+
+      const index = list.findIndex((valueItem) => valueItem.url === it.url);
+
+      if (index === -1) {
+        return false;
+      }
+
+      list.splice(index, 1);
+      return true;
+    });
+
+    fileList.value = arr.concat(list);
+  });
+
+  const changeFileList = (list) => {
+    const converter = props.get<Converter>('converter');
+    const updateValue = props.get('update:value');
+
+    if (typeof updateValue === 'function') {
+      updateValue(getValueByList(list, converter));
+    }
+
+    fileList.value = list;
+  };
+
+  return {
+    fileList,
+    changeFileList,
+  };
+}
+
 /* 组件功能扩展插件 */
 export const useExtendsPlugin: NaslComponentPluginOptions = {
-  setup: (props, ctx) => {
+  props: ['converter', 'urlField'],
+  setup: (props, { setupContext: ctx }) => {
     const { useComputed } = props;
     const sizeLimit = useComputed<SizeLimitObj | undefined>('sizeLimitStr', getSizeLimit);
     const uploadRequestInfo = useUploadRequestInfo(props, ctx);
+    const { fileList, changeFileList } = useValue2FileList(props);
 
     return {
       sizeLimit,
       ...uploadRequestInfo,
+      files: fileList,
+      onChange: (list, context: UploadChangeContext) => {
+        const onChange = props.get<UploadProps['onChange']>('onChange') || (() => {});
+        changeFileList(list);
+        onChange(list, context);
+      },
+      [$deletePropList]: ['value'],
     };
   },
 };

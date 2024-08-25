@@ -113,7 +113,7 @@ namespace nasl.ui {
       description: '文件上传的URL地址，如/upload',
       setter: { concept: 'InputSetter' },
     })
-    action: nasl.core.String;
+    url: nasl.core.String;
 
     @Prop({
       group: '数据属性',
@@ -124,6 +124,25 @@ namespace nasl.ui {
       settable: true,
     })
     value: nasl.core.String;
+
+    @Prop({
+      group: '数据属性',
+      title: '转换器',
+      description:
+        '将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          {
+            title: 'JSON',
+          },
+          {
+            title: 'URL字符串',
+          },
+        ],
+      },
+    })
+    converter: 'json' | 'simple' = 'json';
 
     @Prop({
       group: '数据属性',
@@ -257,22 +276,29 @@ namespace nasl.ui {
     })
     lcapIsCompress: nasl.core.Boolean;
 
-    @Prop({
+    @Prop<ElUploadProOptions, 'theme'>({
       group: '主要属性',
       title: '类型',
       description:
-        '组件风格。custom 表示完全自定义风格；file 表示默认文件上传风格；file-input 表示输入框形式的文件上传；file-flow 表示文件批量上传；image 表示默认图片上传风格；image-flow 表示图片批量上传。可选项：custom/file/file-input/file-flow/image/image-flow',
+        '组件风格。custom 表示完全自定义风格；file 表示默认文件上传风格；file-input 表示输入框形式的文件上传；file-flow 表示文件批量上传；image 表示默认图片上传风格；image-flow 表示图片批量上传',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
           { title: '默认' },
           { title: '输入框形式的文件上传' },
           { title: '文件批量上传' },
-          { title: '图片上传风格' },
+          { title: '图片上传' },
           { title: '图片批量上传' },
-          { title: '自定义' },
         ],
       },
+      onChange: [{
+        update: {
+          autoUpload: false,
+          multiple: true,
+          draggable: true,
+        },
+        if: (val) => val === 'file-flow' || val === 'image-flow',
+      }]
     })
     theme:
       | 'file'
@@ -280,7 +306,7 @@ namespace nasl.ui {
       | 'file-flow'
       | 'image'
       | 'image-flow'
-      | 'custom' = 'file';
+      = 'file';
 
     @Prop({
       group: '主要属性',
