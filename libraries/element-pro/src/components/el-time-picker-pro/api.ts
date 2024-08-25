@@ -11,6 +11,11 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class ElTimePickerPro extends ViewComponent {
+    @Prop({
+      title: '值'
+    })
+    value: nasl.core.Time;
+
     constructor(options?: Partial<ElTimePickerProOptions>) {
       super();
     }
@@ -191,7 +196,6 @@ namespace nasl.ui {
       value: nasl.core.String | nasl.core.Time,
       startTime: nasl.core.String | nasl.core.Time,
       endTime: nasl.core.String | nasl.core.Time,
-      position: 'start' | 'end',
      }) => any;
 
     @Event({

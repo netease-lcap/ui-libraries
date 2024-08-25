@@ -7,7 +7,7 @@ import {
   UploadFile,
   UploadProps,
 } from '@element-pro';
-import { $deletePropList, NaslComponentPluginOptions } from '@lcap/vue2-utils';
+import { $deletePropList, NaslComponentPluginOptions, useSyncState } from '@lcap/vue2-utils';
 import { MapGet } from '@lcap/vue2-utils/plugins/types.js';
 import { SetupContext, shallowRef, watch } from '@vue/composition-api';
 import { at, isObject, isPlainObject } from 'lodash';
@@ -233,6 +233,10 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     const sizeLimit = useComputed<SizeLimitObj | undefined>('sizeLimitStr', getSizeLimit);
     const uploadRequestInfo = useUploadRequestInfo(props, ctx);
     const { fileList, changeFileList } = useValue2FileList(props);
+
+    useSyncState({
+      fileList: () => fileList.value,
+    });
 
     return {
       sizeLimit,

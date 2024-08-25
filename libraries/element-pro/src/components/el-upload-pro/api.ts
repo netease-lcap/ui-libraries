@@ -73,6 +73,11 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElUploadPro extends ViewComponent {
+    @Prop({
+      title: '文件列表',
+    })
+    fileList: nasl.collection.List<UploadFile>;
+
     @Method({
       title: '触发选择文件',
       description: '组件实例方法，打开文件选择器',

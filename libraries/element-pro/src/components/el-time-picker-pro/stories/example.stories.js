@@ -13,6 +13,11 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-time-picker-pro></el-time-picker-pro>',
+    methods: {
+      handleSyncState(name, value) {
+        console.log(name, value);
+      },
+    },
+    template: '<el-time-picker-pro format="HH:mm:ss" :range="true" @sync:state="handleSyncState"></el-time-picker-pro>',
   }),
 };
