@@ -465,18 +465,21 @@ export default defineComponent({
     const refProps: any = { ...this.$attrs, ...getRefValueMap(props) };
     const refListeners = { ...this.$listeners, ...getRefValueMap(listeners) };
 
-    const resultVNode = h(baseComponent, {
+    const propsData = {
       ...splitPropsAndAttrs(refProps, propKeys, allPropsKeys, deletePropsKeys),
       ...splitListeners(refListeners, this.$nativeEvents as string[], getEventKeys(deletePropsKeys)),
       scopedSlots,
       ref: '$base',
-    }, childrenNodes);
+    };
+
+    const resultVNode = h(baseComponent, propsData, childrenNodes);
 
     return this.$render(resultVNode, h, {
       props: refProps,
       listeners: refListeners,
       scopedSlots,
       childrenNodes,
+      propsData,
     });
   },
 });
