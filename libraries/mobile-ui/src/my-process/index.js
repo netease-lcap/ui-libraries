@@ -25,9 +25,9 @@ export default createComponent({
       myPendingTaskListRefresh: false,
       myPendingTaskListFilter: {
         procDefKey: null,
-        procInstStartBy: null,
-        createTimeAfter: null, // 开始时间
-        createTimeBefore: null, // 结束时间
+        procInstInitiator: null,
+        procInstStartTimeAfter: null, // 开始时间
+        procInstStartTimeBefore: null, // 结束时间
 
         page: 1,
         size: 5,
@@ -36,11 +36,12 @@ export default createComponent({
       myCompletedTaskList: [],
       myCompletedTaskListTotal: 0,
       myCompletedTaskListFinished: false,
+      myCompletedTaskListRefresh: false,
       myCompletedTaskListFilter: {
         procDefKey: null,
-        procInstStartBy: null,
-        createTimeAfter: null, // 开始时间
-        createTimeBefore: null, // 结束时间
+        procInstInitiator: null,
+        procInstStartTimeAfter: null, // 开始时间
+        procInstStartTimeBefore: null, // 结束时间
 
         page: 1,
         size: 5,
@@ -49,11 +50,12 @@ export default createComponent({
       myLaunchList: [],
       myLaunchListTotal: 0,
       myLaunchListFinished: false,
+      myLaunchListRefresh: false,
       myLaunchListFilter: {
         procDefKey: null,
 
-        createTimeAfter: null, // 开始时间
-        createTimeBefore: null, // 结束时间
+        procInstStartTimeAfter: null, // 开始时间
+        procInstStartTimeBefore: null, // 结束时间
 
         page: 1,
         size: 5,
