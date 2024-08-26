@@ -375,8 +375,9 @@ export default {
           return IMAGE_REGEXP.test(url) ? url : FileImg;
         },
         select() {
-            if (this.readonly || this.disabled || this.sending || this.$env.VUE_APP_DESIGNER)
-                return;
+            if (this.readonly || this.disabled || this.sending || this.$env.VUE_APP_DESIGNER || !this.$refs.file) {
+              return;
+            }
 
             this.$refs.file.value = '';
             this.$refs.file.click();
@@ -449,7 +450,7 @@ export default {
 
             const count = this.currentValue.length + files.length;
             if (count > this.limit) {
-                this.errorMessage[0] = `文件数量${count}超出限制 ${this.limit}！`;
+                this.errorMessage[0] = this.$tt('limitError', { limit: this.limit, count });
                 this.$emit('count-exceed', {
                     files,
                     value: this.currentValue,
@@ -634,7 +635,8 @@ export default {
                     item.status = 'error';
 
                     this.emitInputEvent();
-                    const errorMessage = e.msg ? (JSON.parse(e.msg).Message || `文件${item.name}上传接口调用失败`) : `文件${item.name}上传接口调用失败`;
+                    const defaultErrMsg = this.$tt('requestError', { fileName: item.name });
+                    const errorMessage = e.msg ? (JSON.parse(e.msg).Message || defaultErrMsg) : defaultErrMsg;
                     this.errorMessage.push(errorMessage);
 
                     this.$emit('error', {
@@ -678,7 +680,7 @@ export default {
             this.errorMessage = [];
             const count = this.currentValue.length
             if (count > this.limit) {
-                this.errorMessage[0] = `文件数量${count}超出限制 ${this.limit}！`;
+                this.errorMessage[0] = this.$tt('limitError', { count, limit: this.limit });
                 this.$emit('count-exceed', {
                     files:[],
                     value: this.currentValue,
@@ -723,7 +725,7 @@ export default {
             const validFiles = [];
             const tasks = files.map(async (file) => {
                 if (!this.checkSize(file)) {
-                    const errorMessage = `${file.name}文件大小超过${this.maxSize}限制`;
+                    const errorMessage = this.$tt('maxSizeError', { fileName: file.name, maxSize: this.maxSize });
                     this.$emit('size-exceed', {
                         maxSize: this.maxSize,
                         size: file.size,
@@ -755,7 +757,7 @@ export default {
                             return false;
                         });
                     if (!accept) {
-                        this.errorMessage.push('文件类型不匹配，请上传' + this.accept + '的文件类型');
+                        this.errorMessage.push(this.$tt('acceptError', { accept: this.accept }));
                         return null;
                     }
                 }
