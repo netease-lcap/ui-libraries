@@ -1,4 +1,5 @@
 import ElSliderPro from '../index';
+import ExampleDemo1 from '../demos/example-demo1.vue';
 
 export default {
   id: 'el-slider-pro-examples',
@@ -10,9 +11,13 @@ export default {
   },
 };
 
-export const Default = {
+/*  基础示例 */
+export const Example1 = {
   name: '基础示例',
   render: () => ({
-    template: '<el-slider-pro></el-slider-pro>',
+    components: {
+      exampleDemo: ExampleDemo1,
+    },
+    template: '<example-demo></example-demo>',
   }),
 };
