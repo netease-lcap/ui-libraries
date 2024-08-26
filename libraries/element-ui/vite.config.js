@@ -106,6 +106,7 @@ export default defineConfig(({ command }) => {
       lib: {
         entry: 'src/index',
         // name: 'ElementUI',
+        formats: ['umd'],
         name: 'CloudUI',
       },
       outDir: 'dist-theme',
