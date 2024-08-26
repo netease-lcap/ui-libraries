@@ -3,7 +3,6 @@
         "name": "ULinearLayout",
         "ideusage": {
             "idetype": "container",
-            "containerDirection": "column",
             "expandWhenHesitate": true,
            "automate": [
                 {
@@ -448,9 +447,6 @@
         "name": "UImage",
         "ideusage": {
             "idetype": "element",
-            "additionalAttribute": {
-                ":convertSrcFn": "\"(src) => src.startsWith('/assets') ? '/lowcode-static' + src : src \""
-            },
             "textholder": "src",
             "elementSutando": {
                 "condition": "this.getAttribute('src').type === 'dynamic'",
@@ -673,7 +669,8 @@
     {
         "name": "UCalendarView",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "useTemplateInDefaultSlot": true
         }
     },
     {
@@ -684,6 +681,7 @@
                 ":dataSource": "\"[{}]\"",
                 ":colnum": "\"1\""
             },
+            "childAccept": false,
             "useTemplateInDefaultSlot": true
         }
     },
@@ -1065,7 +1063,8 @@
             },
             "additionalAttribute": {
                 ":showEmpty": false
-            }
+            },
+            "ignoreProperty": ["value"]
         }
     },
     {

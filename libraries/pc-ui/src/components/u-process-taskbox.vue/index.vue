@@ -94,7 +94,7 @@ export default {
                     },
                 }) || {};
                 const { list, total = 0 } = data;
-                if (Array.isArray(list) && total) {
+                if (Array.isArray(list)) {
                     this.tasks = list;
                     this.total = total;
                     this.totalPages = Math.ceil(total / this.size);
