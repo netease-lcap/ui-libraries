@@ -75,7 +75,7 @@ export default createComponent({
 
     onInitiatorPickerChange(value) {
       this.$emit('change', {
-        procInstStartBy: value,
+        procInstInitiator: value,
       }, this.tab);
     },
 
