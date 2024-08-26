@@ -119,7 +119,7 @@ const usePropMap = (props: any, ctx: SetupContext) => {
   const getDefaultValue = (k: string) => {
     if (slotRegex.test(k)) {
       const slotName = kebabCase(k.substring(4));
-      return props.$_slots[slotName];
+      return ctx.slots[slotName];
     }
 
     if (eventRegex.test(k)) {
@@ -354,10 +354,6 @@ export default defineComponent({
     $eventNames: {
       type: Array,
       default: () => [] as string[],
-    },
-    $_slots: {
-      type: Object,
-      default: () => ({}),
     },
     $nativeEvents: {
       type: Array,

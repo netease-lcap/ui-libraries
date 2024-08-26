@@ -1,8 +1,7 @@
 /* eslint-disable no-param-reassign */
-import Vue from 'vue';
+import Vue, { type VNode, type ComponentOptions } from 'vue';
 import VueCompositionAPI from '@vue/composition-api';
 import { uid } from 'uid';
-import type { ComponentOptions } from 'vue';
 import type {
   NaslComponentPluginOptions,
   PluginMap,
@@ -11,6 +10,7 @@ import type {
 } from './types';
 import PluginManager from './plugin';
 import HocBaseComponent from './hoc-base';
+import { isEmptyVNodes, normalizeArray } from './utils';
 
 export { $deletePropList, $ref, $render } from './constants';
 export * from './common';
@@ -68,6 +68,34 @@ export const registerComponent = (
     },
     render(h) {
       const self = this as any;
+      const scopedSlots = {
+        ...self.$scopedSlots,
+      };
+
+      const childrenNodes: VNode[] = [];
+      (slotNames || []).forEach((slotName) => {
+        if (scopedSlots[slotName]) {
+          let nodes = scopedSlots[slotName]({});
+
+          if (Array.isArray(nodes)) {
+            nodes = nodes.filter((n) => {
+              if (typeof n === 'object') {
+                return n.tag || (n.text && n.text.trim());
+              }
+
+              return true;
+            });
+          }
+          delete scopedSlots[slotName];
+          if (isEmptyVNodes(nodes)) {
+            return;
+          }
+
+          childrenNodes.push(
+            h('template', { slot: slotName }, normalizeArray(nodes)),
+          );
+        }
+      });
 
       return h(HocBaseComponent, {
         key: self.renderKey,
@@ -78,12 +106,11 @@ export const registerComponent = (
           $nativeEvents: nativeEvents,
           $methodNames: methodNames,
           $eventNames: eventNames,
-          $_slots: self.$scopedSlots,
         },
         attrs: self.$attrs,
-        scopedSlots: self.$scopedSlots,
+        scopedSlots,
         on: self.$listeners,
-      });
+      }, childrenNodes);
     },
   } as ComponentOptions<Vue>;
 };
