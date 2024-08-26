@@ -123,8 +123,12 @@ namespace nasl.ui {
         '时间选择框无内容时的提示信息，支持自定义编辑, 在没有设置的时候使用placeholder作为右侧占位符内容',
       if: (_) => _.range === true,
       implicitToString: true,
+      setter: {
+        concept: 'InputSetter',
+        placeholder: '同占位符一致'
+      }
     })
-    placeholderRight: nasl.core.String = '选择时间';
+    placeholderRight: nasl.core.String = '';
 
     @Prop({
       group: '样式属性',

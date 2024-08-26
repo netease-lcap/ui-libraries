@@ -96,9 +96,18 @@ function useContextEvents(props: MapGet) {
 export const useExtensPlugin: NaslComponentPluginOptions = {
   props: ['range', 'disableTimeFn'],
   setup(props) {
+    const { useComputed } = props;
     const [disableTime, disableTimeFn] = props.get(['disableTime', 'disableTimeFn']);
     const { value, changeValue } = useTimePickerValue(props);
     const { onFocus, onBlur, onInput } = useContextEvents(props);
+
+    const placeholderRef = useComputed<[string, string]>(['placeholder', 'placeholderRight', 'range'], (placeholder = '选择时间', placeholderRight, range) => {
+      if (!range || !placeholderRight) {
+        return placeholder;
+      }
+
+      return [placeholder, placeholderRight];
+    });
 
     // 同步外部状态
     useSyncState({
@@ -124,6 +133,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
     return {
       value,
+      placeholder: placeholderRef,
       onFocus,
       onBlur,
       onInput,
