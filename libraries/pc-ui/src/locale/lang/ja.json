@@ -116,6 +116,10 @@
   "uTimePicker_now": "本日",
   "uTimePicker_submit": "確定",
   "uTimePicker_selectPopperDateText": "日付を選択",
-  "uTimePicker_cancel": "キャンセル",
-  "uUploader_extensionError": "ファイルタイプは{extensions}のみアップロードできます！"
+  "uUploader_extensionError": "ファイルタイプは{extensions}のみアップロードできます！",
+  "uUploader_requestError": "ファイル{fileName}のアップロードインターフェイス呼び出しに失敗しました",
+  "uUploader_limitError": "ファイル数{count}が制限を超えています{limit} !",
+  "uUploader_acceptError": "ファイルタイプが一致しません。{accept}のファイルタイプをアップロードしてください。",
+  "uUploader_maxSizeError": "{fileName}ファイルサイズが{maxSize}制限を超えます",
+  "uTimePicker_cancel": "キャンセル"
 }

@@ -64,7 +64,10 @@ namespace nasl.ui {
       group: '数据属性',
       title: '精度',
       description: '数值精度',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        min: 0,
+      },
     })
     precision: nasl.core.Decimal;
 
@@ -74,7 +77,7 @@ namespace nasl.ui {
       description: '设置数值的前缀',
       setter: { concept: 'InputSetter' },
     })
-    prefix: any;
+    private prefix: any;
 
     @Prop({
       group: '主要属性',
@@ -82,7 +85,7 @@ namespace nasl.ui {
       description: '设置数值的后缀',
       setter: { concept: 'InputSetter' },
     })
-    suffix: any;
+    private suffix: any;
 
     @Prop({
       group: '主要属性',
@@ -90,7 +93,7 @@ namespace nasl.ui {
       description: '数值的标题',
       setter: { concept: 'InputSetter' },
     })
-    title: any;
+    private title: any;
 
     @Prop({
       group: '样式属性',
@@ -98,13 +101,16 @@ namespace nasl.ui {
       description: '设置数值的样式',
       setter: { concept: 'InputSetter' },
     })
-    valueStyle: object;
+    valueStyle: nasl.core.String = '{}';
 
     @Prop({
       group: '数据属性',
       title: '倍率',
       description: '设置倍率',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        min: 0,
+      },
     })
     rate: nasl.core.Decimal = 1000;
 
@@ -116,11 +122,12 @@ namespace nasl.ui {
     })
     timeIndices: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
+    @Prop<ElStatisticOptions, 'format'>({
+      group: '状态属性',
       title: '格式化倒计时展示',
       description: '格式化倒计时展示',
       setter: { concept: 'InputSetter' },
+      if: _ => !!_.timeIndices,
     })
     format: nasl.core.String = 'HH:mm:ss';
 

@@ -130,7 +130,6 @@ import 'cloud-ui.vusion/src/styles/theme.css';
 import 'cloud-ui.vusion/src/styles/typography.css';
 /* 引入cloud-ui animation */
 import 'cloud-ui.vusion/src/styles/animation.css';
-
 import * as utils from 'cloud-ui.vusion/src/utils';
 
 export { utils };

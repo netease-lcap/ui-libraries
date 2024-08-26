@@ -43,7 +43,10 @@
       :class="$style.prefix"
       :name="prefix"
       @click="$emit('click-prefix', $event, this)"
-      ><slot name="prefix"></slot
+      >
+        <slot name="prefix" >
+          <i-ico :name="prefix" v-if="prefix!=='search'" />
+        </slot
     ></span>
     <div
       v-show="isItemDisplay"
@@ -156,7 +159,11 @@
       :class="$style.suffix"
       @click="$emit('click-suffix', $event, this)"
       ><slot name="suffix"></slot
-    ></span>
+    >
+      <slot name="suffix" >
+        <i-ico :name="suffix" v-if="suffix!=='search'" />
+      </slot>
+    </span>
     <span
       v-if="
         !currentDisabled &&
@@ -782,6 +789,9 @@ export default {
       // if (this.currentLoading)
       //     return Promise.resolve(); // @TODO: dataSource 的多次 promise 必须串行
       // return this.promiseSequence = this.promiseSequence.then(() => {
+      if (this.$emitPrevent('before-load', undefined, this)) {
+        return;
+      }
       this.currentLoading = true;
       const loadToken = (this.loadToken = +new Date());
       // console.log('filterText', this.filterText, loadToken);
@@ -797,6 +807,7 @@ export default {
             this.selectedDataQueue.splice(1, 1, data);
           }
           this.$refs.popper.currentOpened && this.$refs.popper.scheduleUpdate();
+          this.$emit('load', undefined, this);
           return data;
         })
         .catch(() => (this.currentLoading = false)); // });
@@ -822,14 +833,14 @@ export default {
       if (!this.filterable) {
         return; // 这边必须要用 setTimeout，$nextTick 也不行，需要保证在 @select 之后完成
       }
-
+      this.preventBlur = false;
       this.inputBlurTimer = setTimeout(() => {
         if (this.preventBlur) return (this.preventBlur = false);
         this.selectByText(this.filterText);
         if (this.filterText === '' && !this.selectedVM) {
           this.$emit('blur', e);
         }
-        this.close();
+
         if (this.hasFilter) {
           this.resetFilterList();
           this.hasFilter = false;

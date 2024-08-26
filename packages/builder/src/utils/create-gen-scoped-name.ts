@@ -10,7 +10,10 @@ export function createGenScopedName(prefix, rp = './') {
       .replace(/\.vue[\\/]/g, '_')
       .replace(/\.(vue|css)$/g, '')
       .replace(/_(module|index)$/, '');
-    const vueName = path.basename(tmpPath);
+    let vueName = path.basename(tmpPath);
+    if (vueName === 'index') {
+      vueName = path.basename(path.resolve(tmpPath, '../'));
+    }
     const content = [prefix, request].join('+');
     const hash = getHashDigest(content, 'md5', 'base64', 8);
     let scopedName = vueName;

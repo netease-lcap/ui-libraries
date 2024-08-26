@@ -33,7 +33,7 @@ export const 默认 = {
         <TimePicker
           {...args}
           data-nodepath="1234‰"
-          value={value}
+          value='13:14:15'
           onChange={(e) => {
             console.log(e);
             setValue(e);

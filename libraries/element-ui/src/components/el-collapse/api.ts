@@ -33,6 +33,11 @@ namespace nasl.ui {
     group: 'Container',
   })
   export class ElCollapse<T, V> extends ViewComponent {
+    @Prop({
+      title: '当前激活的面板',
+    })
+    value: V | nasl.collection.List<V>;
+
     @Method({
       title: 'undefined',
       description: '清除缓存，重新加载',

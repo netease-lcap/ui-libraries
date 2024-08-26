@@ -3,31 +3,57 @@
 import _ from 'lodash';
 import { ElTableColumnPro } from '../index';
 
+export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils';
+
 export const useTable = {
-  props: [],
+  props: ['onPageChange'],
   setup(props, ctx) {
     const slotDefault = props.get('slotDefault');
-
-    if (!slotDefault) {
-      return [];
-    }
-
-    const vnodes = slotDefault();
+    const vnodes = slotDefault?.() ?? [];
     const columns = vnodes.map((vnode) => {
-      console.log(vnode, 'vnode');
       const attrs = _.get(vnode, 'data.attrs', {});
-      const { cell } = vnode.data.scopedSlots;
-      // const cell = _.get(vnode, 'componentOptions.children', []);
+      const { cell } = _.get(vnode, 'data.scopedSlots', {});
+      const cellProps = _.isFunction(cell)
+        ? {
+          cell: (h, { row, rowIndex, col }) => cell({ row, index: rowIndex, col }),
+        }
+        : {};
       return {
         ...attrs,
-        cell: (h, { row }) => cell({ row }),
+        ...cellProps,
       };
     });
-    console.log(columns, 'columns');
-    // console.log(props, ctx, vnodes);
-    // console.log(ElTableColumnPro, '==');
+    const onLoadData = props.useComputed('onLoadData', (value) => value);
+    const onPageChange = props.useComputed('onPageChange', (value) => {
+      return (pageInfo) => {
+        _.attempt(onLoadData.value, {
+          page: pageInfo.current,
+          size: pageInfo.pageSize,
+        });
+        _.attempt(value, pageInfo);
+      };
+    });
+    const pageSizeOptions = props.useComputed('pageSizeOptions', (value) => {
+      try {
+        const list = JSON.parse(value);
+        return Array.isArray(list) ? list : [10, 20, 50];
+      } catch (e) {
+        return [10, 20, 50];
+      }
+    });
+    const pageSize = props.useComputed('pageSize', (value) => {
+      return _.toNumber(value) || 10;
+    });
+    const total = props.useComputed('total', (value) => value);
     return {
       columns,
+      onPageChange,
+      pagination: {
+        pageSizeOptions,
+        defaultCurrent: 1,
+        total,
+        pageSize,
+      },
     };
   },
 };

@@ -1,7 +1,7 @@
 import './theme/vars.css';
 import './styles/base.css';
 import './styles/theme.css';
-
+import Vue from 'vue';
 import * as directives from './directives';
 import * as filters from './filters';
 import * as utils from './utils';

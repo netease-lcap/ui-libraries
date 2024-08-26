@@ -23,6 +23,16 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-result></el-result>',
+    template: `<el-result icon="success">
+      <template slot="title">
+        <el-text text="成功提示"></el-text>
+      </template>
+      <template slot="subTitle">
+        <el-text text="请根据提示进行操作"></el-text>
+      </template>
+      <template slot="extra">
+        <el-button type="primary" size="medium" text="返回"></el-button>
+      </template>
+    </el-result>`,
   }),
 };

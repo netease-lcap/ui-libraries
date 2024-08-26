@@ -33,6 +33,12 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElCheckboxGroupPro<T, V> extends ViewComponent {
+
+    @Prop({
+      title: '选中值',
+    })
+    value: nasl.collection.List<V>;
+
     @Method({
       title: 'undefined',
       description: '清除缓存，重新加载',
