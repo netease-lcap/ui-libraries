@@ -36,6 +36,7 @@ export default createComponent({
       myCompletedTaskList: [],
       myCompletedTaskListTotal: 0,
       myCompletedTaskListFinished: false,
+      myCompletedTaskListRefresh: false,
       myCompletedTaskListFilter: {
         procDefKey: null,
         procInstInitiator: null,
@@ -49,6 +50,7 @@ export default createComponent({
       myLaunchList: [],
       myLaunchListTotal: 0,
       myLaunchListFinished: false,
+      myLaunchListRefresh: false,
       myLaunchListFilter: {
         procDefKey: null,
 
