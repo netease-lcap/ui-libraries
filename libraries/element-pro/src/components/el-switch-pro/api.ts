@@ -11,6 +11,12 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElSwitchPro extends ViewComponent {
+    
+    @Prop({
+      title: '值',
+    })
+    value: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
+
     constructor(options?: Partial<ElSwitchProOptions>) {
       super();
     }
@@ -18,8 +24,17 @@ namespace nasl.ui {
 
   export class ElSwitchProOptions extends ViewComponentOptions {
     @Prop({
+      group: '数据属性',
+      title: '值',
+      description: '开关值',
+      setter: { concept: 'InputSetter' },
+      sync: true,
+    })
+    value: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
+
+    @Prop({
       group: '主要属性',
-      title: 'Custom Value',
+      title: '自定义开关值',
       description:
         '用于自定义开关的值，[打开时的值，关闭时的值]。默认为 [true, false]。示例：[1, 0]、["open", "close"]。',
       setter: { concept: 'InputSetter' },
@@ -28,6 +43,15 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '自定义开关文字',
+      description:
+        '开关内容，[开启时内容，关闭时内容]。示例：["开", "关"]',
+      setter: { concept: 'InputSetter' },
+    })
+    label: any = [];
+
+    @Prop({
+      group: '状态属性',
       title: '禁用',
       description: '是否禁用组件',
       setter: { concept: 'SwitchSetter' },
@@ -35,60 +59,28 @@ namespace nasl.ui {
     disabled: nasl.core.Boolean;
 
     @Prop({
-      group: '主要属性',
-      title: 'Label',
-      description:
-        '开关内容，[开启时内容，关闭时内容]。示例：["开", "关"] 或 (value) => value ? "开" : "关"。',
-      setter: { concept: 'InputSetter' },
-    })
-    label: any = [];
-
-    @Prop({
-      group: '主要属性',
-      title: 'Loading',
+      group: '状态属性',
+      title: '加载中',
       description: '是否处于加载中状态',
       setter: { concept: 'SwitchSetter' },
     })
     loading: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: 'Size',
+      group: '样式属性',
+      title: '尺寸',
       description: '开关尺寸。可选项：small/medium/large',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'small' }, { title: 'medium' }, { title: 'large' }],
+        options: [{ title: '小' }, { title: '中' }, { title: '大' }],
       },
     })
     size: 'small' | 'medium' | 'large' = 'medium';
 
-    @Prop({
-      group: '数据属性',
-      title: '值',
-      description: '开关值',
-      setter: { concept: 'InputSetter' },
-    })
-    value: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Default Value',
-      description: '开关值。非受控属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    defaultValue: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
-
     @Event({
-      title: 'On Change',
+      title: '改变后',
       description: '数据发生变化时触发',
     })
-    onChange: (event: any) => any;
-
-    @Slot({
-      title: 'Label',
-      description:
-        '开关内容，[开启时内容，关闭时内容]。示例：["开", "关"] 或 (value) => value ? "开" : "关"。',
-    })
-    slotLabel: () => Array<ViewComponent>;
+    onChange: (event: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean) => any;
   }
 }
