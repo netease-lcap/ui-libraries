@@ -58,21 +58,20 @@ namespace nasl.ui {
     clearable: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: '禁用时间项配置',
-      description: '禁用时间项的配置函数。',
-      setter: { concept: 'AnonymousFunctionSetter' },
+      group: '数据属性',
+      title: '最小时间值',
+      description: '最小可选的时间值，填写null则不限制，日期填写格式为“00:00:00”',
+      docDescription: '支持输入的最小时间。',
     })
-    disableTimeFn: (current: {
-      hour: number;
-      minute: number;
-      second: number;
-      position?: 'start' | 'end';
-    }) => {
-      hour?: nasl.collection.List<nasl.core.Integer>;
-      minute?: nasl.collection.List<nasl.core.Integer>;
-      second?: nasl.collection.List<nasl.core.Integer>;
-    };
+    minTime: nasl.core.String | nasl.core.Time = '00:00:00';
+
+    @Prop({
+        group: '数据属性',
+        title: '最大时间值',
+        description: '最大可选的时间值，填写null则不限制，日期填写格式为“00:00:00”',
+        docDescription: '支持输入的最大时间',
+    })
+    maxTime: nasl.core.String | nasl.core.Time = '23:59:59';
 
     @Prop({
       group: '状态属性',

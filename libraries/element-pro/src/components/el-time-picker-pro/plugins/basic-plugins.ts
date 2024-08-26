@@ -1,6 +1,7 @@
 import { TimePickerValue, TimeRangePicker, TimeRangeValue } from '@element-pro';
 import { type NaslComponentPluginOptions, $render, useSyncState } from '@lcap/vue2-utils';
 import { MapGet } from '@lcap/vue2-utils/plugins/types';
+import { unref } from '@vue/composition-api';
 import dayjs from 'dayjs';
 import { isFunction } from 'lodash';
 
@@ -12,6 +13,21 @@ function getFormatTimeValue(v: string, format: string = DEFAULT_FORMAT) {
   }
 
   return dayjs(`${dayjs().format('YYYY-MM-DD')} ${v}`).format(format);
+}
+
+function minTime(time1: string, time2: string) {
+  const arr1 = time1.split(':').map((n) => Number(n));
+  const arr2 = time2.split(':').map((n) => Number(n));
+
+  const index = arr1.find((n, i) => n || 0) < (time2[i] || 0));
+}
+
+function maxTime(time1: string, time2: string) {
+
+}
+
+function getDisableTime(minTime: string[], maxTime: string[]) {
+
 }
 
 function getFormatStr(format: string = DEFAULT_FORMAT) {
@@ -97,7 +113,6 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
   props: ['range', 'disableTimeFn'],
   setup(props) {
     const { useComputed } = props;
-    const [disableTime, disableTimeFn] = props.get(['disableTime', 'disableTimeFn']);
     const { value, changeValue } = useTimePickerValue(props);
     const { onFocus, onBlur, onInput } = useContextEvents(props);
 
@@ -137,20 +152,24 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       onFocus,
       onBlur,
       onInput,
-      disabledTime: (h: number, m: number, s: number, context) => {
-        if (!disableTimeFn) {
-          return isFunction(disableTime) ? disableTime(h, m, s, context) : {};
-        }
-        const range = props.getEnd('range') || false;
-        const current = {
-          hour: h,
-          minute: m,
-          second: s,
-          position: range && typeof context === 'object' && context.partial ? context.partial : undefined,
-        };
+      disableTime: (h: number, m: number, s: number, context) => {
+        const [disableTime, minTime = '00:00:00', maxTime = '23:59:59'] = props.get<[any, string, string]>(['disableTime', 'minTime', 'maxTime']);
 
-        if (isFunction(disableTimeFn)) {
-          return disableTimeFn(current);
+        const range = props.getEnd('range') || false;
+
+        if (isFunction(disableTime)) {
+          return disableTime(h, m, s, context);
+        }
+
+        if (range) {
+          const [startTime, endTime] = unref(value);
+          if (context && context.partial === 'start') {
+            return getDisableTime();
+          } else {
+            return getDisableTime();
+          }
+        } else {
+          return getDisableTime(minTime.split(':'), maxTime.split(':'));
         }
 
         return {};
