@@ -93,11 +93,15 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
+    popupOpend: {
+      type: Boolean,
+      default: false,
+    }
   },
 
   data() {
     return {
-      popupVisible: false,
+      popupVisible: this.popupOpend,
       // 内部值
       currentValue: this.formatValue((this.value ?? this.pvalue) || ''),
       style: '',
@@ -110,8 +114,14 @@ export default createComponent({
     data() {
       return this.currentData || this.columnsprop || [];
     },
+    isDesignerNew(){
+      return this.$env.VUE_APP_DESIGNER_NEW;
+    }
   },
   watch: {
+    popupOpend(val) {
+      this.popupVisible = val;
+    },
     currentValue(val) {
       // 对外使用converter转换
       if (this.converter && this.multiple) {
@@ -132,6 +142,10 @@ export default createComponent({
 
   methods: {
     designerOpen(e) {
+      if(this.isDesignerNew) {
+        this.$refs.popup.togglePModal();
+        return;
+      }
       let currentElement = e.target;
       let nodePath = false;
       while (currentElement) {
@@ -147,6 +161,10 @@ export default createComponent({
       }
     },
     designerClose() {
+      if(this.$env.VUE_APP_DESIGNER_NEW) {
+        this.$refs.popup.togglePModal();
+        return;
+      }
       // readme:ide会记录通过designerDbControl打开的浮窗，需要通过该命令清除，在触发方式双击变单击后，暂无作用
       if (window.parent && this?.$attrs?.['vusion-node-path']) {
         window.parent?.postMessage(
@@ -291,7 +309,7 @@ export default createComponent({
       if (this.isNew) {
         let topSlot = this.slots('picker-top');
         let titleSlot = this.slots('pannel-title');
-        if (this.inDesigner()) {
+        if (this.inDesigner() && !this.isDesignerNew) {
           if (!topSlot) {
             topSlot = <EmptyCol></EmptyCol>;
           }
@@ -350,7 +368,7 @@ export default createComponent({
       if (!this.isNew) return null;
 
       let bottomSlot = this.slots('picker-bottom');
-      if (this.inDesigner()) {
+      if (this.inDesigner() && !this.isDesignerNew) {
         if (!bottomSlot) {
           bottomSlot = <EmptyCol></EmptyCol>;
         }
@@ -397,6 +415,13 @@ export default createComponent({
       );
     }
 
+    const attrsOmitDesignerNew = {};
+    for(let key in this.$attrs) {
+      if(!key.startsWith('data-')) {
+        attrsOmitDesignerNew[key] = this.$attrs[key];
+      }
+    }
+
     return (
       <div class={bem('wrap')} vusion-click-enabled="true">
         <Field
@@ -429,7 +454,7 @@ export default createComponent({
           }}
         >
           <div class={bem(this.isNew && 'content-wrapper')}>
-            {this.inDesigner() && (
+            {this.inDesigner() && !this.isDesignerNew && (
               <div
                 class={bem('designer-close-button')}
                 vusion-click-enabled="true"
@@ -453,7 +478,7 @@ export default createComponent({
                 ref="picker"
                 {...{
                   attrs: {
-                    ...this.$attrs,
+                    ...(this.isDesignerNew ? attrsOmitDesignerNew : this.$attrs),
                     columnsprop: this.data,
                     valueField: this.valueField,
                     textField: this.textField || this.$attrs.valueKey,
