@@ -55,7 +55,7 @@ namespace nasl.ui {
     file: UploadFile;
   }
 
-  export interface SuccessContext {
+  interface SuccessContext {
     file?: UploadFile;
     files?: nasl.collection.List<UploadFile>;
   }
