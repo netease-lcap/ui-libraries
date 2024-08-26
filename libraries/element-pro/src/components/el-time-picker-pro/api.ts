@@ -151,7 +151,7 @@ namespace nasl.ui {
       title: '值',
       description: '选中值。',
       setter: { concept: 'InputSetter' },
-      if: (_) => _.range === true,
+      if: (_) => !_.range,
       sync: true,
       settable: true,
     })
