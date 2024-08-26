@@ -23,6 +23,8 @@ export interface OverloadComponentContext {
   fork: boolean;
   type: 'pc' | 'h5';
   prefix: string;
+  replaceNames: string[];
+  replaceTags: string[];
   replaceNameMap: Record<string, string>;
   replaceTagMap: Record<string, string>;
   themeConfig: ThemeComponentConfig;
@@ -100,6 +102,8 @@ function getReleaceMap(comp, framework, prefix) {
   }
 
   return {
+    replaceNames: Object.keys(replaceNameMap),
+    replaceTags: Object.keys(replaceTagMap),
     replaceNameMap,
     replaceTagMap,
   };

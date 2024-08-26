@@ -8,6 +8,7 @@ import generator from '@babel/generator';
 import * as babelTypes from '@babel/types';
 import { OverloadComponentContext } from './context';
 import { LCAP_UI_PACKAGE_PATH } from './constants';
+import { transformAPITs } from './transform-api';
 
 function transformScriptAst(ast: babelTypes.File, filePath, modules: string[]) {
   let isJSX = false;
@@ -256,4 +257,13 @@ export async function forkComponent(context: OverloadComponentContext) {
       default: break;
     }
   });
+
+  const filePath = path.resolve(context.pkgComponentFolderPath, 'api.ts');
+  if (!fs.existsSync(filePath) || !context.naslUIConfig.children || context.naslUIConfig.children.length === 0) {
+    return;
+  }
+
+  let code = fs.readFileSync(filePath, 'utf-8').toString();
+  code = transformAPITs(code, context, true);
+  fs.writeFileSync(path.resolve(context.componentFolderPath, 'temp-all-api.bak'), code, 'utf-8');
 }
