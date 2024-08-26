@@ -46,6 +46,7 @@ export const createUseUpdateSync = (options: PropSyncOption[] = [{ name: 'value'
     setup(props) {
       return useUpdateSync(props, options);
     },
+    order: 10,
   } as NaslComponentPluginOptions;
 };
 

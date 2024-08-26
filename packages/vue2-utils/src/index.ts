@@ -18,6 +18,7 @@ export {
   useInitialLoaded,
   useLink,
   useVModelSync,
+  useUpdateSync,
   createUseUpdateSync,
   createBrowserNavigate,
   createProp2Default,

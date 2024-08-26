@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
-import type { Ref, ComputedRef, SetupContext } from '@vue/composition-api';
-import type { CreateElement, VNode } from 'vue';
+import type {
+  Ref,
+  ComputedRef,
+  SetupContext,
+} from '@vue/composition-api';
+import type { CreateElement, VNode, VNodeData } from 'vue';
 import { $deletePropList, $render, $ref } from './constants';
 
 export declare type Slot = (...args: any[]) => VNode[];
@@ -22,10 +26,18 @@ export interface PluginSetupRef {
   [key: string]: any;
 }
 
+export interface PluginSetupRenderContext {
+  propsData: VNodeData,
+  props: VNodeData['props'],
+  listeners: VNodeData['on'],
+  scopedSlots: VNodeData['scopedSlots'],
+  childrenNodes: VNode[],
+}
+
 export interface PluginSetupFunctionReturn {
   [key: string]: Ref<any> | ComputedRef<any> | any,
   [$deletePropList]?: string[];
-  [$render]?: (resultVNode: VNode, h: CreateElement, context: any) => VNode;
+  [$render]?: (resultVNode: VNode, h: CreateElement, context: PluginSetupRenderContext) => VNode;
   [$ref]?: PluginSetupRef;
 }
 

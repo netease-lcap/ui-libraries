@@ -7,10 +7,15 @@ namespace nasl.ui {
   @Component({
     title: '时间选择器',
     icon: 'time-picker',
-    description: '',
+    description: '时间选择器',
     group: 'Selector',
   })
   export class ElTimePickerPro extends ViewComponent {
+    @Prop({
+      title: '值'
+    })
+    value: nasl.core.Time;
+
     constructor(options?: Partial<ElTimePickerProOptions>) {
       super();
     }
@@ -18,8 +23,19 @@ namespace nasl.ui {
 
   export class ElTimePickerProOptions extends ViewComponentOptions {
     @Prop({
+      group: '数据属性',
+      title: '区间选择',
+      description: '是否支持进行时间区间选择，关闭则为时间点选择',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      onChange: [{ clear: ['placeholderRight'] }],
+    })
+    range: nasl.core.Boolean = false;
+
+    @Prop({
       group: '主要属性',
-      title: 'Allow Input',
+      title: '允许直接输入时间',
       description: '是否允许直接输入时间',
       setter: { concept: 'SwitchSetter' },
     })
@@ -27,7 +43,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Borderless',
+      title: '无边框模式',
       description: '无边框模式',
       setter: { concept: 'SwitchSetter' },
     })
@@ -35,7 +51,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Clearable',
+      title: '可清除',
       description: '是否允许清除选中值',
       setter: { concept: 'SwitchSetter' },
     })
@@ -43,31 +59,50 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Disable Time',
+      title: '禁用时间项配置',
       description: '禁用时间项的配置函数。',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'AnonymousFunctionSetter' },
     })
-    disableTime: any;
+    disableTimeFn: (current: {
+      hour: number;
+      minute: number;
+      second: number;
+      position?: 'start' | 'end';
+    }) => {
+      hour?: nasl.collection.List<nasl.core.Integer>;
+      minute?: nasl.collection.List<nasl.core.Integer>;
+      second?: nasl.collection.List<nasl.core.Integer>;
+    };
 
     @Prop({
-      group: '主要属性',
-      title: 'Disabled',
+      group: '状态属性',
+      title: '禁用',
       description: '是否禁用组件',
       setter: { concept: 'SwitchSetter' },
     })
     disabled: nasl.core.Boolean;
 
-    @Prop({
+    @Prop<ElTimePickerProOptions, 'format'>({
       group: '主要属性',
-      title: 'Format',
+      title: '格式化',
       description: '用于格式化时间，',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '12:09:09' },
+          { title: '12时09分09秒' },
+          { title: '12:09' },
+          { title: '12时09分' },
+          { title: '12' },
+          { title: '12时' },
+        ],
+      },
     })
-    format: nasl.core.String = 'HH:mm:ss';
+    format: 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' = 'HH:mm:ss';
 
     @Prop({
       group: '主要属性',
-      title: 'Hide Disabled Time',
+      title: '隐藏禁用状态的时间项',
       description: '是否隐藏禁用状态的时间项',
       setter: { concept: 'SwitchSetter' },
     })
@@ -75,369 +110,137 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Input Props',
-      description: '透传给输入框（Input）组件的参数。',
-      setter: { concept: 'InputSetter' },
-    })
-    inputProps: object;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Placeholder',
+      title: '占位符',
       description: '占位符',
       setter: { concept: 'InputSetter' },
     })
-    placeholder: nasl.core.String;
+    placeholder: nasl.core.String = '选择时间';
 
-    @Prop({
+    @Prop<ElTimePickerProOptions, 'placeholderRight'>({
       group: '主要属性',
-      title: 'Popup Props',
-      description: '透传给 popup 组件的参数。',
-      setter: { concept: 'InputSetter' },
+      title: '右侧占位符',
+      description:
+        '时间选择框无内容时的提示信息，支持自定义编辑, 在没有设置的时候使用placeholder作为右侧占位符内容',
+      if: (_) => _.range === true,
+      implicitToString: true,
     })
-    popupProps: object;
+    placeholderRight: nasl.core.String = '选择时间';
 
     @Prop({
-      group: '主要属性',
-      title: 'Presets',
-      description: '预设快捷时间选择，示例：`{ "前一小时": "11:00:00" }`。',
-      setter: { concept: 'InputSetter' },
-    })
-    presets: object;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Size',
+      group: '样式属性',
+      title: '尺寸',
       description: '尺寸。可选项：small/medium/large',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'small' }, { title: 'medium' }, { title: 'large' }],
+        options: [{ title: '小' }, { title: '中' }, { title: '大' }],
       },
     })
     size: 'small' | 'medium' | 'large' = 'medium';
 
     @Prop({
       group: '主要属性',
-      title: 'Status',
-      description: '输入框状态。可选项：default/success/warning/error',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: 'default' },
-          { title: 'success' },
-          { title: 'warning' },
-          { title: 'error' },
-        ],
-      },
-    })
-    status: 'default' | 'success' | 'warning' | 'error' = 'default';
-
-    @Prop({
-      group: '主要属性',
-      title: 'Steps',
+      title: '时间间隔步数',
       description:
         '时间间隔步数，数组排列 [小时, 分钟, 秒]，示例：[2, 1, 1] 或者 ["2", "1", "1"]。',
       setter: { concept: 'InputSetter' },
     })
-    steps: any[] = [1, 1, 1];
+    steps: nasl.collection.List<nasl.core.Integer> = [1, 1, 1];
 
-    @Prop({
-      group: '主要属性',
-      title: 'Tips',
-      description: '输入框下方提示文本，会根据不同的 `status` 呈现不同的样式。',
+    @Prop<ElTimePickerProOptions, 'value'>({
+      group: '数据属性',
+      title: '值',
+      description: '选中值。',
       setter: { concept: 'InputSetter' },
+      if: (_) => _.range === true,
+      sync: true,
+      settable: true,
     })
-    tips: any;
+    value: nasl.core.String | nasl.core.Time;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Value',
-      description: '选中值。支持语法糖 `v-model`。',
-      setter: { concept: 'InputSetter' },
+    @Prop<ElTimePickerProOptions, 'startTime'>({
+      group: '数据属性',
+      title: '起始值',
+      description: '默认显示的起始时间值，格式如08:08:08',
+      sync: true,
+      if: (_) => _.range === true,
+      settable: true,
     })
-    value: nasl.core.String;
+    startTime: nasl.core.String | nasl.core.Time;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Default Value',
-      description: '选中值。非受控属性。',
-      setter: { concept: 'InputSetter' },
+    @Prop<ElTimePickerProOptions, 'endTime'>({
+      group: '数据属性',
+      title: '结束值',
+      description: '默认显示的结束时间值，格式如08:08:08',
+      sync: true,
+      if: (_) => _.range === true,
+      settable: true,
     })
-    defaultValue: nasl.core.String;
+    endTime: nasl.core.String | nasl.core.Time;
 
     @Event({
-      title: 'On Blur',
+      title: '失焦时',
       description: '当输入框失去焦点时触发，value 表示组件当前有效值',
     })
-    onBlur: (event: any) => any;
+    onBlur: (event: {
+      value: nasl.core.String | nasl.core.Time,
+      startTime: nasl.core.String | nasl.core.Time,
+      endTime: nasl.core.String | nasl.core.Time,
+      position: 'start' | 'end',
+     }) => any;
 
     @Event({
-      title: 'On Change',
+      title: '选中值改变时',
       description: '选中值发生变化时触发',
     })
-    onChange: (event: any) => any;
+    onChange: (event: {
+      value: nasl.core.String | nasl.core.Time,
+      startTime: nasl.core.String | nasl.core.Time,
+      endTime: nasl.core.String | nasl.core.Time,
+     }) => any;
 
     @Event({
-      title: 'On Close',
+      title: '面板关闭时',
       description: '面板关闭时触发',
     })
-    onClose: (event: any) => any;
+    onClose: (event: {}) => any;
 
     @Event({
-      title: 'On Focus',
+      title: '聚焦时',
       description: '输入框获得焦点时触发，value 表示组件当前有效值',
     })
-    onFocus: (event: any) => any;
+    onFocus: (event: {
+      value: nasl.core.String | nasl.core.Time,
+      startTime: nasl.core.String | nasl.core.Time,
+      endTime: nasl.core.String | nasl.core.Time,
+      position: 'start' | 'end',
+     }) => any;
 
     @Event({
-      title: 'On Input',
+      title: '输入框内容变化是',
       description: '当输入框内容发生变化时触发，参数 value 表示组件当前有效值',
     })
-    onInput: (event: any) => any;
+    onInput: (event: {
+      value: nasl.core.String | nasl.core.Time,
+      startTime: nasl.core.String | nasl.core.Time,
+      endTime: nasl.core.String | nasl.core.Time,
+      position: 'start' | 'end',
+     }) => any;
 
     @Event({
-      title: 'On Open',
+      title: '面板打开时',
       description: '面板打开时触发',
     })
-    onOpen: (event: any) => any;
+    onOpen: (event: {}) => any;
 
     @Event({
-      title: 'On Pick',
+      title: '面板选中时',
       description: '面板选中值后触发',
     })
-    onPick: (event: any) => any;
-
-    @Slot({
-      title: 'Tips',
-      description: '输入框下方提示文本，会根据不同的 `status` 呈现不同的样式。',
-    })
-    slotTips: () => Array<ViewComponent>;
-
-    @Slot({
-      title: 'Default',
-      description: '内容',
-      snippets: [
-        {
-          title: 'Time Range Picker',
-          code: '<el-time-range-picker-pro></el-time-range-picker-pro>',
-        },
-      ],
-    })
-    slotDefault: () => Array<ViewComponent>;
-  }
-
-  @Component({
-    title: 'Time Range Picker',
-    icon: 'time-range-picker',
-    description: '',
-    group: 'Selector',
-  })
-  export class ElTimeRangePickerPro extends ViewComponent {
-    constructor(options?: Partial<ElTimeRangePickerProOptions>) {
-      super();
-    }
-  }
-
-  export class ElTimeRangePickerProOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: 'Allow Input',
-      description: '是否允许直接输入时间',
-      setter: { concept: 'SwitchSetter' },
-    })
-    allowInput: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Borderless',
-      description: '无边框模式',
-      setter: { concept: 'SwitchSetter' },
-    })
-    borderless: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Clearable',
-      description: '是否允许清除选中值',
-      setter: { concept: 'SwitchSetter' },
-    })
-    clearable: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Disable Time',
-      description: '禁用时间项。',
-      setter: { concept: 'InputSetter' },
-    })
-    disableTime: any;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Disabled',
-      description:
-        '是否禁用组件，值为数组表示可分别控制开始日期和结束日期是否禁用。',
-      setter: { concept: 'InputSetter' },
-    })
-    disabled: nasl.core.Boolean | any[];
-
-    @Prop({
-      group: '主要属性',
-      title: 'Format',
-      description: '用于格式化时间，',
-      setter: { concept: 'InputSetter' },
-    })
-    format: nasl.core.String = 'HH:mm:ss';
-
-    @Prop({
-      group: '主要属性',
-      title: 'Hide Disabled Time',
-      description: '是否隐藏禁用状态的时间项',
-      setter: { concept: 'SwitchSetter' },
-    })
-    hideDisabledTime: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Label',
-      description: '左侧文本。',
-      setter: { concept: 'InputSetter' },
-    })
-    label: any;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Placeholder',
-      description: '占位符，值为数组表示可分别为开始日期和结束日期设置占位符。',
-      setter: { concept: 'InputSetter' },
-    })
-    placeholder: nasl.core.String | any[];
-
-    @Prop({
-      group: '主要属性',
-      title: 'Popup Props',
-      description: '透传给 popup 组件的参数。',
-      setter: { concept: 'InputSetter' },
-    })
-    popupProps: object;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Presets',
-      description:
-        '预设快捷时间范围选择，示例：{ "下午": ["13:00:00", "18:00:00"] }。',
-      setter: { concept: 'InputSetter' },
-    })
-    presets: object;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Range Input Props',
-      description: '透传给范围输入框 RangeInput 组件的参数。',
-      setter: { concept: 'InputSetter' },
-    })
-    rangeInputProps: object;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Size',
-      description: '尺寸。可选项：small/medium/large',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: 'small' }, { title: 'medium' }, { title: 'large' }],
-      },
-    })
-    size: 'small' | 'medium' | 'large' = 'medium';
-
-    @Prop({
-      group: '主要属性',
-      title: 'Status',
-      description: '输入框状态。可选项：default/success/warning/error',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: 'default' },
-          { title: 'success' },
-          { title: 'warning' },
-          { title: 'error' },
-        ],
-      },
-    })
-    status: 'default' | 'success' | 'warning' | 'error' = 'default';
-
-    @Prop({
-      group: '主要属性',
-      title: 'Steps',
-      description:
-        '时间间隔步数，数组排列 [小时, 分钟, 秒]，示例：[2, 1, 1] 或者 ["2", "1", "1"]。',
-      setter: { concept: 'InputSetter' },
-    })
-    steps: any[] = [1, 1, 1];
-
-    @Prop({
-      group: '主要属性',
-      title: 'Tips',
-      description: '输入框下方提示文本，会根据不同的 `status` 呈现不同的样式。',
-      setter: { concept: 'InputSetter' },
-    })
-    tips: any;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Value',
-      description: '选中值。支持语法糖 `v-model`。',
-      setter: { concept: 'InputSetter' },
-    })
-    value: any[];
-
-    @Prop({
-      group: '主要属性',
-      title: 'Default Value',
-      description: '选中值。非受控属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    defaultValue: any[];
-
-    @Event({
-      title: 'On Blur',
-      description: '当输入框失去焦点时触发。',
-    })
-    onBlur: (event: any) => any;
-
-    @Event({
-      title: 'On Change',
-      description: '选中值发生变化时触发',
-    })
-    onChange: (event: any) => any;
-
-    @Event({
-      title: 'On Focus',
-      description: '范围输入框获得焦点时触发。',
-    })
-    onFocus: (event: any) => any;
-
-    @Event({
-      title: 'On Input',
-      description:
-        '当输入框内容发生变化时触发，参数 input 表示输入内容，value 表示组件当前有效值。',
-    })
-    onInput: (event: any) => any;
-
-    @Event({
-      title: 'On Pick',
-      description: '面板选中值后触发',
-    })
-    onPick: (event: any) => any;
-
-    @Slot({
-      title: 'Label',
-      description: '左侧文本。',
-    })
-    slotLabel: () => Array<ViewComponent>;
-
-    @Slot({
-      title: 'Tips',
-      description: '输入框下方提示文本，会根据不同的 `status` 呈现不同的样式。',
-    })
-    slotTips: () => Array<ViewComponent>;
+    onPick: (event: {
+      value: nasl.core.String | nasl.core.Time,
+      startTime: nasl.core.String | nasl.core.Time,
+      endTime: nasl.core.String | nasl.core.Time,
+      position: 'start' | 'end',
+     }) => any;
   }
 }
