@@ -133,7 +133,8 @@ export default function genNaslComponentConfig({
     const nasl = parseComponentAPI(fs.readFileSync(apiPath, 'utf8'), framework);
     Object.assign(component, nasl[0]);
   } catch (e: any) {
-    logger.error(`解析 ${apiPath} 失败，${e.message}`);
+    logger.error(`解析 ${apiPath} 失败`);
+    logger.error(e);
     process.exit(1);
   }
 
@@ -168,7 +169,8 @@ export default function genNaslComponentConfig({
     const blocks = genBlockConfig(componentDir, { screenshots, drawings }, framework);
     Object.assign(component, { blocks });
   } catch (e: any) {
-    logger.error(`${component.name} 处理 block 异常 ${e.message}`);
+    logger.error(`${component.name} 处理 block 异常`);
+    logger.error(e);
     process.exit(1);
   }
 
