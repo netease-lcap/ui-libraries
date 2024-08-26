@@ -332,7 +332,7 @@ content: "\e67f";
 }
 
 .root[start],.root[start][width] {
-    padding-left: 26px;
+    padding-left: 32px;
 }
 
 .root[size$="mini"] {
