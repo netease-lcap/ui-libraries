@@ -33,6 +33,12 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElRadioGroupPro<T, V>  extends ViewComponent {
+
+    @Prop({
+      title: '选中值',
+    })
+    value: V;
+
     @Method({
       title: 'undefined',
       description: '清除缓存，重新加载',
@@ -82,7 +88,7 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '选中值',
-      description: '选中的值。支持语法糖 `v-model`。',
+      description: '选中的值',
       setter: { concept: 'InputSetter' },
       sync: true,
     })
@@ -223,18 +229,10 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '是否选中',
-      description: '是否选中。支持语法糖 `v-model`',
+      description: '是否选中',
       setter: { concept: 'SwitchSetter' },
     })
     checked: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '数据属性',
-      title: '默认选中',
-      description: '是否选中。非受控属性',
-      setter: { concept: 'SwitchSetter' },
-    })
-    defaultChecked: nasl.core.Boolean = false;
 
     @Prop({
       group: '状态属性',
