@@ -42,15 +42,15 @@ export const Default = {
     <el-submenu><template #title><el-text text="子菜单"></el-text></template><template #default><el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item></template></el-submenu>
     <template #right>
       <el-dropdown :hide-on-click="false">
-        <el-flex mode="flex" alignment="center" :gutter="12" style="color: #fff;">
+        <el-flex mode="flex" alignment="center" :gutter="12" style="color: #fff;cursor: pointer;">
           <el-image fit="cover" src="/assets/avatar-default.svg" style="width: 36px; height: 36px;"></el-image>
           <el-text :text="$global.userInfo.UserName"></el-text>
         </el-flex>
-        <el-dropdown-menu slot="dropdown">
+        <template #items>
           <el-dropdown-item>
             <el-text text="安全退出"></el-text>
           </el-dropdown-item>
-        </el-dropdown-menu>
+        </template>
       </el-dropdown>
     </template>
     </el-menu>`,
