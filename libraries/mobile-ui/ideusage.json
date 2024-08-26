@@ -412,10 +412,16 @@
     {
         "name": "VanPickerson",
         "ideusage": {
-            "idetype": "container",
-            "events": {
-                "click": true
-            }
+            "idetype": "drawerdropdown",
+            "cacheOpenKey": "popupOpend",
+            "drawerCSSSelector": ".van-popup",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource')",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> label[class^='u-radios_radio']:not([data-nodepath])"
+            },
+            "scopedSlots": ["title", "picker-top", "pannel-title", "picker-bottom"]
         }
     },
     {
