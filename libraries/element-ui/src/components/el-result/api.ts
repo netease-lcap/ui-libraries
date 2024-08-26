@@ -2,6 +2,9 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container'
+    }
   })
   @Component({
     title: '结果',
@@ -22,7 +25,7 @@ namespace nasl.ui {
       description: '标题',
       setter: { concept: 'InputSetter' },
     })
-    title: nasl.core.String;
+    private title: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -30,7 +33,7 @@ namespace nasl.ui {
       description: '二级标题',
       setter: { concept: 'InputSetter' },
     })
-    subTitle: nasl.core.String;
+    private subTitle: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -48,11 +51,11 @@ namespace nasl.ui {
     })
     icon: 'success' | 'warning' | 'info' | 'error' = 'info';
 
-    @Slot({
-      title: '图标',
-      description: '自定义图标',
-    })
-    slotIcon: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: '图标',
+    //   description: '自定义图标',
+    // })
+    // slotIcon: () => Array<ViewComponent>;
 
     @Slot({
       title: '标题',
