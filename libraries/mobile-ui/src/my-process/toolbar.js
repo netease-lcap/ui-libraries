@@ -37,7 +37,10 @@ export default createComponent({
 
     showInitiatorPicker() {
       this.getAllInitiator().then((data) => {
-        this.allInitiator = data;
+        this.allInitiator = data.map((item) => ({
+          ...item,
+          userId: item.userId || item.userName,
+        }));
         this.$refs.initiatorPicker.togglePopup();
       });
     },
@@ -72,7 +75,7 @@ export default createComponent({
 
     onInitiatorPickerChange(value) {
       this.$emit('change', {
-        procInstStartBy: value,
+        procInstInitiator: value,
       }, this.tab);
     },
 
