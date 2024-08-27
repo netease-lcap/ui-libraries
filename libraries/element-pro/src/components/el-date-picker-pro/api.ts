@@ -47,7 +47,7 @@ namespace nasl.ui {
     range: nasl.core.Boolean = false;
 
     @Prop<ElDatePickerProOptions, 'value'>({
-      group: '主要属性',
+      group: '数据属性',
       title: '值',
       description: '选中值',
       setter: { concept: 'InputSetter' },
@@ -56,7 +56,7 @@ namespace nasl.ui {
     value: nasl.core.String | nasl.core.Integer | nasl.core.Date;
 
     @Prop<ElDatePickerProOptions, 'startDate'>({
-      group: '主要属性',
+      group: '数据属性',
       title: '起始值',
       description: '开始日期',
       setter: { concept: 'InputSetter' },
@@ -65,7 +65,7 @@ namespace nasl.ui {
     startDate: nasl.core.String | nasl.core.Integer | nasl.core.Date;
 
     @Prop<ElDatePickerProOptions, 'endDate'>({
-      group: '主要属性',
+      group: '数据属性',
       title: '结束值',
       description: '结束日期',
       setter: { concept: 'InputSetter' },
@@ -137,7 +137,7 @@ namespace nasl.ui {
     })
     readonly: nasl.core.Boolean;
 
-    @Prop({
+    @Prop<ElDatePickerProOptions, 'mode'>({
       group: '主要属性',
       title: '日期类型',
       description: '选择器模式。可选项：year/quarter/month/week/date',
@@ -151,6 +151,32 @@ namespace nasl.ui {
           { title: '日期' },
         ],
       },
+      onChange: [{
+        update: {
+          format: 'YYYY-MM-DD',
+        },
+        if: (val) => val === 'date',
+      }, {
+        update: {
+          format: 'YYYY',
+        },
+        if: (val) => val === 'year',
+      }, {
+        update: {
+          format: 'YYYY-MM',
+        },
+        if: (val) => val === 'month',
+      }, {
+        update: {
+          format: 'GGGG-WWWW',
+        },
+        if: (val) => val === 'week',
+      }, {
+        update: {
+          format: 'YYYY-QQ',
+        },
+        if: (val) => val === 'quarter',
+      }]
     })
     mode: 'year' | 'quarter' | 'month' | 'week' | 'date' = 'date';
 
@@ -212,7 +238,28 @@ namespace nasl.ui {
     })
     placeholderRight: nasl.core.String = '';
 
-    @Prop({
+    @Prop<ElDatePickerProOptions, 'separator'>({
+      group: '主要属性',
+      title: '分隔符',
+      description: '日期分隔符，支持全局配置，默认为 -',
+      if: (_) => _.range === true,
+      setter: {
+        concept: 'InputSetter',
+      },
+    })
+    separator: nasl.core.String = '-';
+
+    @Prop<ElDatePickerProOptions, 'enablePresets'>({
+      group: '主要属性',
+      title: '启用快捷设置',
+      description: '启用预设快捷日期选择',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    enablePresets: nasl.core.Boolean = false;
+
+    @Prop<ElDatePickerProOptions, 'presetsPlacement'>({
       group: '主要属性',
       title: '快捷设置位置',
       description:
@@ -226,6 +273,7 @@ namespace nasl.ui {
           { title: '底部' },
         ],
       },
+      if: (_) => _.enablePresets === true,
     })
     presetsPlacement: 'left' | 'top' | 'right' | 'bottom' = 'bottom';
 
@@ -279,6 +327,30 @@ namespace nasl.ui {
     //   setter: { concept: 'InputSetter' },
     // })
     // valueType: nasl.core.String;
+    @Prop({
+      group: '样式属性',
+      title: '宽度随内容自适应',
+      description: '宽度随内容自适应',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    inputAutoWidth: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '样式属性',
+      title: '文本内容位置',
+      description: '文本内容位置，居左/居中/居右',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '左对齐' },
+          { title: '居中对齐' },
+          { title: '右对齐' },
+        ],
+      },
+    })
+    inputAlign: 'left' | 'center' | 'right' = 'left';
 
     @Event({
       title: '失焦时',
@@ -299,6 +371,7 @@ namespace nasl.ui {
       value: nasl.core.String | nasl.core.Date,
       startTime: nasl.core.String | nasl.core.Date,
       endTime: nasl.core.String | nasl.core.Date,
+      trigger: 'confirm' | 'pick' | 'enter' | 'preset' | 'clear',
      }) => any;
 
     @Event({

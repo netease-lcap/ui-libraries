@@ -1,16 +1,30 @@
-import { NaslComponentPluginOptions } from '@lcap/vue2-utils';
-import { usePlaceholder } from '../hooks';
+import { NaslComponentPluginOptions, $render } from '@lcap/vue2-utils';
+import { DateRangeValue, DateRangePicker, DateValue } from '@element-pro';
+import {
+  usePlaceholder,
+  useDatePickerValue,
+  useContextEvents,
+  useDisableDate,
+  getChangeEventByValue,
+  usePresets,
+} from '../hooks';
+
+const DEFAULT_FORMAT = 'YYYY-MM-DD';
 
 /* 组件功能扩展插件 */
 export const useExtendsPlugin: NaslComponentPluginOptions = {
   props: [
     'range', 'inputAutoWidth', 'inputAlign',
     'placeholderRight', 'startTime', 'endTime',
-    'maxTime', 'minTime',
+    'maxTime', 'minTime', 'enablePresets',
   ],
   setup(props) {
     const { useComputed } = props;
     const placeholder = usePlaceholder(props, '请选择日期');
+    const { value, changeValue } = useDatePickerValue(props, DEFAULT_FORMAT);
+    const events = useContextEvents(props, DEFAULT_FORMAT);
+    const disableDate = useDisableDate(props, DEFAULT_FORMAT);
+    const presets = usePresets(props);
 
     const inputProps = useComputed<any>([
       'inputAutoWidth',
@@ -26,8 +40,37 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     });
 
     return {
+      value,
       placeholder,
       inputProps,
+      disableDate,
+      presets,
+      ...events,
+      onChange: (v: DateValue | DateRangeValue, context) => {
+        const [range] = props.get<[boolean]>(['range']);
+        const onChange = props.get<any>('onChange') || (() => {});
+        const changeEvent = getChangeEventByValue(v, range, DEFAULT_FORMAT);
+        changeValue(context.dayjsValue, v);
+        onChange({
+          ...changeEvent,
+          trigger: context.trigger,
+        });
+      },
+      [$render]: (resultVNode, h, context) => {
+        const range = props.getEnd('range') || false;
+
+        if (!range) {
+          return resultVNode;
+        }
+
+        delete context.propsData.props.inputProps;
+        if (!context.propsData.props.rangeInputProps) {
+          context.propsData.props.rangeInputProps = {};
+        }
+        context.propsData.props.rangeInputProps.inputProps = inputProps.value;
+
+        return h(DateRangePicker, context.propsData, context.childrenNodes);
+      },
     };
   },
 };

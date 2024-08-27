@@ -258,10 +258,10 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
           onChange(changeEvent);
         }
       },
-      onPick: (v: TimePickerValue | TimeRangeValue, context) => {
+      onPick: (v: TimePickerValue, context) => {
         const onPick = props.get('onPick');
         if (isFunction(onPick)) {
-          const changeEvent = getChangeEventByValue(v, ...props.get<[boolean, string]>(['range', 'format']));
+          const changeEvent = getChangeEventByValue(v, false, props.get('format'));
           onPick({
             ...changeEvent,
             position: context && context.position,
@@ -274,6 +274,12 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         if (!range) {
           return resultVNode;
         }
+
+        delete context.propsData.props.inputProps;
+        if (!context.propsData.props.rangeInputProps) {
+          context.propsData.props.rangeInputProps = {};
+        }
+        context.propsData.props.rangeInputProps.inputProps = inputProps.value;
 
         return h(TimeRangePicker, context.propsData, context.childrenNodes);
       },

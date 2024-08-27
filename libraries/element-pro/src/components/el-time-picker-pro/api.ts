@@ -46,6 +46,37 @@ namespace nasl.ui {
     })
     range: nasl.core.Boolean = false;
 
+    @Prop<ElTimePickerProOptions, 'value'>({
+      group: '数据属性',
+      title: '值',
+      description: '选中值。',
+      setter: { concept: 'InputSetter' },
+      if: (_) => !_.range,
+      sync: true,
+      settable: true,
+    })
+    value: nasl.core.String | nasl.core.Time;
+
+    @Prop<ElTimePickerProOptions, 'startTime'>({
+      group: '数据属性',
+      title: '起始值',
+      description: '默认显示的起始时间值，格式如08:08:08',
+      sync: true,
+      if: (_) => _.range === true,
+      settable: true,
+    })
+    startTime: nasl.core.String | nasl.core.Time;
+
+    @Prop<ElTimePickerProOptions, 'endTime'>({
+      group: '数据属性',
+      title: '结束值',
+      description: '默认显示的结束时间值，格式如08:08:08',
+      sync: true,
+      if: (_) => _.range === true,
+      settable: true,
+    })
+    endTime: nasl.core.String | nasl.core.Time;
+
     @Prop({
       group: '主要属性',
       title: '允许输入',
@@ -152,6 +183,17 @@ namespace nasl.ui {
     })
     placeholderRight: nasl.core.String = '';
 
+    @Prop<ElTimePickerProOptions, 'separator'>({
+      group: '主要属性',
+      title: '分隔符',
+      description: '日期分隔符，支持全局配置，默认为 -',
+      if: (_) => _.range === true,
+      setter: {
+        concept: 'InputSetter',
+      },
+    })
+    separator: nasl.core.String = '-';
+
     @Prop({
       group: '样式属性',
       title: '尺寸',
@@ -196,37 +238,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     steps: nasl.collection.List<nasl.core.Integer> = [1, 1, 1];
-
-    @Prop<ElTimePickerProOptions, 'value'>({
-      group: '数据属性',
-      title: '值',
-      description: '选中值。',
-      setter: { concept: 'InputSetter' },
-      if: (_) => !_.range,
-      sync: true,
-      settable: true,
-    })
-    value: nasl.core.String | nasl.core.Time;
-
-    @Prop<ElTimePickerProOptions, 'startTime'>({
-      group: '数据属性',
-      title: '起始值',
-      description: '默认显示的起始时间值，格式如08:08:08',
-      sync: true,
-      if: (_) => _.range === true,
-      settable: true,
-    })
-    startTime: nasl.core.String | nasl.core.Time;
-
-    @Prop<ElTimePickerProOptions, 'endTime'>({
-      group: '数据属性',
-      title: '结束值',
-      description: '默认显示的结束时间值，格式如08:08:08',
-      sync: true,
-      if: (_) => _.range === true,
-      settable: true,
-    })
-    endTime: nasl.core.String | nasl.core.Time;
 
     @Event({
       title: '失焦时',

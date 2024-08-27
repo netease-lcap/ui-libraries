@@ -13,6 +13,40 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-date-picker-pro></el-date-picker-pro>',
+    data() {
+      return {
+        value: '2024-08-02',
+      };
+    },
+    methods: {
+      handleChange(name, e) {
+        console.log(name, e);
+      },
+      handleSyncState(name, value) {
+        console.log('sync', name, value);
+      },
+    },
+    template: '<el-date-picker-pro :enablePresets="true" presetsPlacement="left" :allowInput="true" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
+  }),
+};
+
+export const Range = {
+  name: '区间选择示例',
+  render: () => ({
+    data() {
+      return {
+        startDate: '2024-08-02',
+        endDate: '2024-10-02',
+      };
+    },
+    methods: {
+      handleChange(name, e) {
+        console.log(name, e);
+      },
+      handleSyncState(name, value) {
+        console.log('sync', name, value);
+      },
+    },
+    template: '<el-date-picker-pro :enablePresets="true" presetsPlacement="left" :range="true" :startDate.sync="startDate" :endDate.sync="endDate" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
   }),
 };
