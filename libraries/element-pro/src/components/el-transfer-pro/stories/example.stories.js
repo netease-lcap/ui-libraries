@@ -1,4 +1,6 @@
 import ElTransferPro from '../index';
+import ExampleDemo1 from '../demos/example-demo1.vue';
+import ExampleDemo2 from '../demos/example-demo2.vue';
 
 export default {
   id: 'el-transfer-pro-examples',
@@ -10,9 +12,22 @@ export default {
   },
 };
 
-export const Default = {
+export const Example1 = {
   name: '基础示例',
   render: () => ({
-    template: '<el-transfer-pro></el-transfer-pro>',
+    components: {
+      exampleDemo: ExampleDemo1,
+    },
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+export const Example2 = {
+  name: '插槽',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo2,
+    },
+    template: '<example-demo></example-demo>',
   }),
 };
