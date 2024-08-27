@@ -363,7 +363,7 @@ export default defineComponent({
   setup(props, ctx) {
     const { $plugin: manger, $component: baseComponent } = props;
     // const compName = baseComponent.name;
-    const propKeys = getPropKeys(baseComponent as any);
+    const propKeys = getPropKeys(typeof baseComponent === 'object' ? baseComponent : (baseComponent as any).options);
     const keys = manger.getPluginPropKeys(propKeys);
     const eventNames: string[] = (props.$eventNames || []) as string[];
     const vueInstance: any = ctx.root;
