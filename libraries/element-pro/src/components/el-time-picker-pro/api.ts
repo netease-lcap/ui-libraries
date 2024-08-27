@@ -3,6 +3,9 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     show: true,
+    ideusage: {
+      idetype: 'element',
+    },
   })
   @Component({
     title: '时间选择器',
@@ -12,9 +15,19 @@ namespace nasl.ui {
   })
   export class ElTimePickerPro extends ViewComponent {
     @Prop({
-      title: '值'
+      title: '值',
     })
     value: nasl.core.Time;
+
+    @Prop({
+      title: '起始值',
+    })
+    startTime: nasl.core.Time;
+
+    @Prop({
+      title: '结束值',
+    })
+    endTime: nasl.core.Time;
 
     constructor(options?: Partial<ElTimePickerProOptions>) {
       super();
@@ -35,15 +48,15 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '允许直接输入时间',
+      title: '允许输入',
       description: '是否允许直接输入时间',
       setter: { concept: 'SwitchSetter' },
     })
     allowInput: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: '无边框模式',
+      group: '样式属性',
+      title: '无边框',
       description: '无边框模式',
       setter: { concept: 'SwitchSetter' },
     })
@@ -60,16 +73,18 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '最小时间值',
-      description: '最小可选的时间值，填写null则不限制，日期填写格式为“00:00:00”',
+      description:
+        '最小可选的时间值，填写null则不限制，日期填写格式为“00:00:00”',
       docDescription: '支持输入的最小时间。',
     })
     minTime: nasl.core.String | nasl.core.Time = '00:00:00';
 
     @Prop({
-        group: '数据属性',
-        title: '最大时间值',
-        description: '最大可选的时间值，填写null则不限制，日期填写格式为“00:00:00”',
-        docDescription: '支持输入的最大时间',
+      group: '数据属性',
+      title: '最大时间值',
+      description:
+        '最大可选的时间值，填写null则不限制，日期填写格式为“00:00:00”',
+      docDescription: '支持输入的最大时间',
     })
     maxTime: nasl.core.String | nasl.core.Time = '23:59:59';
 
@@ -121,7 +136,7 @@ namespace nasl.ui {
       description: '占位符',
       setter: { concept: 'InputSetter' },
     })
-    placeholder: nasl.core.String = '选择时间';
+    placeholder: nasl.core.String = '请选择时间';
 
     @Prop<ElTimePickerProOptions, 'placeholderRight'>({
       group: '主要属性',
@@ -132,8 +147,8 @@ namespace nasl.ui {
       implicitToString: true,
       setter: {
         concept: 'InputSetter',
-        placeholder: '同占位符一致'
-      }
+        placeholder: '同占位符一致',
+      },
     })
     placeholderRight: nasl.core.String = '';
 
@@ -164,7 +179,11 @@ namespace nasl.ui {
       description: '文本内容位置，居左/居中/居右',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '左对齐' }, { title: '居中对齐' }, { title: '右对齐' }]
+        options: [
+          { title: '左对齐' },
+          { title: '居中对齐' },
+          { title: '右对齐' },
+        ],
       },
     })
     inputAlign: 'left' | 'center' | 'right' = 'left';
@@ -214,21 +233,21 @@ namespace nasl.ui {
       description: '当输入框失去焦点时触发，value 表示组件当前有效值',
     })
     onBlur: (event: {
-      value: nasl.core.String | nasl.core.Time,
-      startTime: nasl.core.String | nasl.core.Time,
-      endTime: nasl.core.String | nasl.core.Time,
-      position: 'start' | 'end',
-     }) => any;
+      value: nasl.core.String | nasl.core.Time;
+      startTime: nasl.core.String | nasl.core.Time;
+      endTime: nasl.core.String | nasl.core.Time;
+      position: 'start' | 'end';
+    }) => any;
 
     @Event({
-      title: '选中值改变时',
+      title: '值改变时',
       description: '选中值发生变化时触发',
     })
     onChange: (event: {
-      value: nasl.core.String | nasl.core.Time,
-      startTime: nasl.core.String | nasl.core.Time,
-      endTime: nasl.core.String | nasl.core.Time,
-     }) => any;
+      value: nasl.core.String | nasl.core.Time;
+      startTime: nasl.core.String | nasl.core.Time;
+      endTime: nasl.core.String | nasl.core.Time;
+    }) => any;
 
     @Event({
       title: '面板关闭时',
@@ -241,22 +260,22 @@ namespace nasl.ui {
       description: '输入框获得焦点时触发，value 表示组件当前有效值',
     })
     onFocus: (event: {
-      value: nasl.core.String | nasl.core.Time,
-      startTime: nasl.core.String | nasl.core.Time,
-      endTime: nasl.core.String | nasl.core.Time,
-      position: 'start' | 'end',
-     }) => any;
+      value: nasl.core.String | nasl.core.Time;
+      startTime: nasl.core.String | nasl.core.Time;
+      endTime: nasl.core.String | nasl.core.Time;
+      position: 'start' | 'end';
+    }) => any;
 
     @Event({
       title: '输入框内容变化是',
       description: '当输入框内容发生变化时触发，参数 value 表示组件当前有效值',
     })
     onInput: (event: {
-      value: nasl.core.String | nasl.core.Time,
-      startTime: nasl.core.String | nasl.core.Time,
-      endTime: nasl.core.String | nasl.core.Time,
-      position: 'start' | 'end',
-     }) => any;
+      value: nasl.core.String | nasl.core.Time;
+      startTime: nasl.core.String | nasl.core.Time;
+      endTime: nasl.core.String | nasl.core.Time;
+      position: 'start' | 'end';
+    }) => any;
 
     @Event({
       title: '面板打开时',
@@ -269,10 +288,10 @@ namespace nasl.ui {
       description: '面板选中值后触发',
     })
     onPick: (event: {
-      value: nasl.core.String | nasl.core.Time,
-      startTime: nasl.core.String | nasl.core.Time,
-      endTime: nasl.core.String | nasl.core.Time,
-      position: 'start' | 'end',
-     }) => any;
+      value: nasl.core.String | nasl.core.Time;
+      startTime: nasl.core.String | nasl.core.Time;
+      endTime: nasl.core.String | nasl.core.Time;
+      position: 'start' | 'end';
+    }) => any;
   }
 }

@@ -4,6 +4,7 @@ import { MapGet } from '@lcap/vue2-utils/plugins/types';
 import { unref } from '@vue/composition-api';
 import dayjs from 'dayjs';
 import { isFunction, isNil } from 'lodash';
+import { usePlaceholder } from '../../el-date-picker-pro/hooks';
 
 const DEFAULT_FORMAT = 'HH:mm:ss';
 
@@ -141,19 +142,17 @@ function useContextEvents(props: MapGet) {
 
 /* 组件功能扩展插件 */
 export const useExtensPlugin: NaslComponentPluginOptions = {
-  props: ['range', 'disableTimeFn'],
+  props: [
+    'range', 'inputAutoWidth', 'inputAlign',
+    'placeholderRight', 'startTime', 'endTime',
+    'maxTime', 'minTime',
+  ],
   setup(props) {
     const { useComputed } = props;
     const { value, changeValue } = useTimePickerValue(props);
     const { onFocus, onBlur, onInput } = useContextEvents(props);
 
-    const placeholderRef = useComputed<[string, string]>(['placeholder', 'placeholderRight', 'range'], (placeholder = '选择时间', placeholderRight, range) => {
-      if (!range || !placeholderRight) {
-        return placeholder;
-      }
-
-      return [placeholder, placeholderRight];
-    });
+    const placeholderRef = usePlaceholder(props, '请选择时间');
 
     const hideDisabledTime = useComputed<boolean>('hideDisabledTime', (v) => {
       if (isNil(v)) {
@@ -163,7 +162,13 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       return !!v;
     });
 
-    const inputProps = useComputed<any>(['inputAutoWidth', 'inputAlign'], (inputAutoWidth = false, inputAlign = 'left') => {
+    const inputProps = useComputed<any>([
+      'inputAutoWidth',
+      'inputAlign',
+    ], (
+      inputAutoWidth = false,
+      inputAlign = 'left',
+    ) => {
       return {
         autoWidth: inputAutoWidth,
         align: inputAlign,
