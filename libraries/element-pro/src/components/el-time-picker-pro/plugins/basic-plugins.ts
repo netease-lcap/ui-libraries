@@ -109,7 +109,7 @@ function useTimePickerValue(props: MapGet) {
   function changeValue(v: TimePickerValue | TimeRangeValue) {
     const [range] = props.get<[boolean]>(['range']);
     if (!range) {
-      valueRef.value = v || typeof v !== 'string' ? null : v;
+      valueRef.value = !v || typeof v !== 'string' ? null : v;
     } else {
       valueRef.value = Array.isArray(v) ? v : [null, null];
     }
