@@ -2,6 +2,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-script-url */
 /* eslint-disable no-unused-expressions */
+// import _ from 'lodash';
 import { $deletePropList } from '../constants';
 import { NaslComponentPluginOptions } from '../types';
 import { getEventKey } from '../utils';
@@ -13,9 +14,12 @@ export const useLink: NaslComponentPluginOptions = {
   name: 'link2ref',
   props: ['link', 'destination'],
   setup: (props) => {
-    const hrefRef = props.useComputed(['link', 'destination', 'href'], (link, destination, href) => {
-      return href || link || destination;
-    });
+    const hrefRef = props.useComputed(
+      ['link', 'destination', 'href'],
+      (link, destination, href) => {
+        return href || link || destination;
+      },
+    );
 
     return {
       href: hrefRef,
@@ -32,15 +36,17 @@ export const createVueRouterNavigate = (bindEventName: string = 'click') => {
   const useVueRouterNavigate: NaslComponentPluginOptions = {
     setup: (props, { $router }) => {
       const eventName = getEventKey(bindEventName);
-      const routerLink = props.useComputed('href', (url: string) => {
+      const routerLink = props.useComputed('href', (url: string = '') => {
+        if (typeof url !== 'string') return null;
         if (
-          url.startsWith('http')
+          url?.startsWith('http')
           || !$router
-          || url.startsWith('://')
-          || url.startsWith('#')
+          || url?.startsWith('://')
+          || url?.startsWith('#')
           // eslint-disable-next-line no-script-url
-          || url.startsWith('javascript:')
-          || url.indexOf('://') !== -1) {
+          || url?.startsWith('javascript:')
+          || url?.indexOf('://') !== -1
+        ) {
           return null;
         }
 
@@ -75,7 +81,9 @@ export const createVueRouterNavigate = (bindEventName: string = 'click') => {
           }
           const replace = props.get('replace');
 
-          replace === true ? $router.replace(routerLink.value) : $router.push(routerLink.value);
+          replace === true
+            ? $router.replace(routerLink.value)
+            : $router.push(routerLink.value);
         },
       };
     },
@@ -101,9 +109,17 @@ export const createBrowserNavigate = (bindEventName: string = 'click') => {
             return;
           }
 
-          const [href, target, download] = props.get<string[]>(['href', 'target', 'download']);
+          const [href, target, download] = props.get<string[]>([
+            'href',
+            'target',
+            'download',
+          ]);
 
-          if (!href || href === 'javascript:;' || href === 'javascript:void(0);') {
+          if (
+            !href
+            || href === 'javascript:;'
+            || href === 'javascript:void(0);'
+          ) {
             const preClick = props.get<(e: any) => void>(eventName);
             preClick(e);
           }
