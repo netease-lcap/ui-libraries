@@ -1,5 +1,5 @@
 import {
-  computed, defineComponent, ref, toRefs, watch,
+  computed, defineComponent, readonly, ref, toRefs, watch,
 } from '@vue/composition-api';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -137,6 +137,7 @@ export default defineComponent({
               disabled: this.isDisabled,
               clearable: this.clearable,
               allowInput: this.allowInput,
+              readonly: this.readonly,
               class: this.inputClasses,
               suffixIcon: () => <TimeIcon />,
               popupVisible: this.isShowPanel,

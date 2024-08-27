@@ -81,6 +81,14 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean;
 
+    @Prop({
+      group: '状态属性',
+      title: '只读',
+      description: '只读状态',
+      setter: { concept: 'SwitchSetter' },
+    })
+    readonly: nasl.core.Boolean;
+
     @Prop<ElTimePickerProOptions, 'format'>({
       group: '主要属性',
       title: '格式化',
@@ -139,6 +147,27 @@ namespace nasl.ui {
       },
     })
     size: 'small' | 'medium' | 'large' = 'medium';
+
+    @Prop({
+      group: '样式属性',
+      title: '宽度随内容自适应',
+      description: '宽度随内容自适应',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    inputAutoWidth: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '样式属性',
+      title: '文本内容位置',
+      description: '文本内容位置，居左/居中/居右',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '左对齐' }, { title: '居中对齐' }, { title: '右对齐' }]
+      },
+    })
+    inputAlign: 'left' | 'center' | 'right' = 'left';
 
     @Prop({
       group: '主要属性',

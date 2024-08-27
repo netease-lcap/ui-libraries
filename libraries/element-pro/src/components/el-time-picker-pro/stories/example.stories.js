@@ -18,6 +18,18 @@ export const Default = {
         console.log(name, value);
       },
     },
-    template: '<el-time-picker-pro format="HH时mm分ss秒" :clearable="true" :range="true" @sync:state="handleSyncState"></el-time-picker-pro>',
+    template: '<el-time-picker-pro :readonly="true" format="HH时mm分ss秒" :clearable="true" @sync:state="handleSyncState"></el-time-picker-pro>',
+  }),
+};
+
+export const Range = {
+  name: '区间选择',
+  render: () => ({
+    methods: {
+      handleSyncState(name, value) {
+        console.log(name, value);
+      },
+    },
+    template: '<el-time-picker-pro :readonly="true" format="HH时mm分ss秒" :clearable="true" :range="true" @sync:state="handleSyncState"></el-time-picker-pro>',
   }),
 };

@@ -163,6 +163,13 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       return !!v;
     });
 
+    const inputProps = useComputed<any>(['inputAutoWidth', 'inputAlign'], (inputAutoWidth = false, inputAlign = 'left') => {
+      return {
+        autoWidth: inputAutoWidth,
+        align: inputAlign,
+      };
+    });
+
     // 同步外部状态
     useSyncState({
       value: () => {
@@ -189,6 +196,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       value,
       placeholder: placeholderRef,
       hideDisabledTime,
+      inputProps,
       onFocus,
       onBlur,
       onInput,
