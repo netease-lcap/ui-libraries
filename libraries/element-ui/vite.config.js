@@ -45,6 +45,12 @@ export default defineConfig(({ command }) => {
           {
             name: '@lcap/element-pro',
             rootPath: path.resolve(__dirname, '../element-pro'),
+            config: (c) => {
+              return {
+                ...c,
+                show: false,
+              };
+            },
           },
         ],
       }),
@@ -105,9 +111,8 @@ export default defineConfig(({ command }) => {
       target: ['es2020', 'edge88', 'firefox78', 'chrome56', 'safari14'],
       lib: {
         entry: 'src/index',
-        // name: 'ElementUI',
+        name: 'ElementUI',
         formats: ['umd'],
-        name: 'CloudUI',
       },
       outDir: 'dist-theme',
       modulePreload: false,
