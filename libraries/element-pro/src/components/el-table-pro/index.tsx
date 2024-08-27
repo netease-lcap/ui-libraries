@@ -40,6 +40,7 @@ export const ElTableColumnPro = defineComponent({
       <div>
         {this.slots.default?.()}
         {this.slots.cell?.()}
+        {this.slots.title?.()}
       </div>
     );
   },
