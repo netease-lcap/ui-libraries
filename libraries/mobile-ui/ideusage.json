@@ -176,7 +176,13 @@
     {
         "name": "VanSwipeCell",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "useSwipe": {
+                "prop": "swipeState",
+                "left": "`left`",
+                "right": "`right`",
+                "init": "``"
+            }
         }
     },
     {
