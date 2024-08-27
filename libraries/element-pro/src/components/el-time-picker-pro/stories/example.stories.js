@@ -18,6 +18,6 @@ export const Default = {
         console.log(name, value);
       },
     },
-    template: '<el-time-picker-pro format="mm分ss秒HH时" :clearable="true" :range="true" @sync:state="handleSyncState"></el-time-picker-pro>',
+    template: '<el-time-picker-pro format="HH时mm分ss秒" :clearable="true" :range="true" @sync:state="handleSyncState"></el-time-picker-pro>',
   }),
 };

@@ -3,7 +3,7 @@ import { type NaslComponentPluginOptions, $render, useSyncState } from '@lcap/vu
 import { MapGet } from '@lcap/vue2-utils/plugins/types';
 import { unref } from '@vue/composition-api';
 import dayjs from 'dayjs';
-import { isFunction } from 'lodash';
+import { isFunction, isNil } from 'lodash';
 
 const DEFAULT_FORMAT = 'HH:mm:ss';
 
@@ -15,19 +15,50 @@ function getFormatTimeValue(v: string, format: string = DEFAULT_FORMAT) {
   return dayjs(`${dayjs().format('YYYY-MM-DD')} ${v}`).format(format);
 }
 
-function minTime(time1: string, time2: string) {
-  const arr1 = time1.split(':').map((n) => Number(n));
-  const arr2 = time2.split(':').map((n) => Number(n));
-
-  const index = arr1.find((n, i) => n || 0) < (time2[i] || 0));
+function getNumberArr(str: string, position: 'start' | 'end') {
+  const arr = str.split(':').map((n) => Number(n)).map((n) => (Number.isNaN(n) ? 0 : n));
+  while (arr.length < 3) {
+    if (arr.length === 0) {
+      arr.push(position === 'start' ? 0 : 23);
+    } else {
+      arr.push(position === 'start' ? 0 : 59);
+    }
+  }
+  return arr;
 }
 
-function maxTime(time1: string, time2: string) {
+function excludeNumberArr(min: number, max: number, len: number) {
+  const arr: number[] = [];
+  for (let i = 0; i < len; i++) {
+    if (i < min || i > max) {
+      arr.push(i);
+    }
+  }
 
+  return arr;
 }
 
-function getDisableTime(minTime: string[], maxTime: string[]) {
+function getDisableTime(currentTimes: number[], minTime: number[], maxTime: number[]) {
+  const [minH, minM, minS] = minTime;
+  const [maxH, maxM, maxS] = maxTime;
+  const [h, m] = currentTimes;
+  const disabledTime: Partial<{ hour: Array<number>; minute: Array<number>; second: Array<number>; millisecond: Array<number> }> = {
+    hour: excludeNumberArr(minH, maxH, 24),
+  };
 
+  if (h === minH) {
+    disabledTime.minute = excludeNumberArr(minM, 59, 60);
+    if (m === minM) {
+      disabledTime.second = excludeNumberArr(minS, 59, 60);
+    }
+  } else if (h === maxH) {
+    disabledTime.minute = excludeNumberArr(0, maxM, 60);
+    if (m === maxM) {
+      disabledTime.second = excludeNumberArr(0, maxS, 60);
+    }
+  }
+
+  return disabledTime;
 }
 
 function getFormatStr(format: string = DEFAULT_FORMAT) {
@@ -124,6 +155,14 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       return [placeholder, placeholderRight];
     });
 
+    const hideDisabledTime = useComputed<boolean>('hideDisabledTime', (v) => {
+      if (isNil(v)) {
+        return false;
+      }
+
+      return !!v;
+    });
+
     // 同步外部状态
     useSyncState({
       value: () => {
@@ -149,30 +188,40 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     return {
       value,
       placeholder: placeholderRef,
+      hideDisabledTime,
       onFocus,
       onBlur,
       onInput,
-      disableTime: (h: number, m: number, s: number, context) => {
+      disableTime: (...args) => {
+        const [h, m, s, ms] = args;
+        let context = ms;
+        if (typeof context !== 'object') {
+          // eslint-disable-next-line prefer-destructuring
+          context = args[4];
+        }
         const [disableTime, minTime = '00:00:00', maxTime = '23:59:59'] = props.get<[any, string, string]>(['disableTime', 'minTime', 'maxTime']);
-
-        const range = props.getEnd('range') || false;
 
         if (isFunction(disableTime)) {
           return disableTime(h, m, s, context);
         }
 
+        const range = props.getEnd('range') || false;
+        const minTimes = getNumberArr(minTime, 'start');
+        const maxTimes = getNumberArr(maxTime, 'end');
+        const currentTimes = [h, m, s];
+
         if (range) {
           const [startTime, endTime] = unref(value);
+          const startTimes = endTime ? getNumberArr(getNaslTimeValue(startTime), 'start') : null;
+          const endTimes = endTime ? getNumberArr(getNaslTimeValue(endTime), 'end') : null;
           if (context && context.partial === 'start') {
-            return getDisableTime();
-          } else {
-            return getDisableTime();
+            return getDisableTime(currentTimes, minTimes, endTimes || maxTimes);
           }
-        } else {
-          return getDisableTime(minTime.split(':'), maxTime.split(':'));
+
+          return getDisableTime(currentTimes, startTimes || minTimes, maxTimes);
         }
 
-        return {};
+        return getDisableTime(currentTimes, minTimes, maxTimes);
       },
       onChange: (v: TimePickerValue | TimeRangeValue) => {
         changeValue(v);

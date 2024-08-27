@@ -34,6 +34,9 @@ export const panelProps = () => ({
   presets: {
     type: Object as PropType<ElTimePickerProps['presets']>,
   },
+  position: {
+    type: String,
+  },
   hideDisabledTime: {
     ...Props.default.hideDisabledTime,
   },

@@ -105,7 +105,7 @@ namespace nasl.ui {
       description: '是否隐藏禁用状态的时间项',
       setter: { concept: 'SwitchSetter' },
     })
-    hideDisabledTime: nasl.core.Boolean = true;
+    hideDisabledTime: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
