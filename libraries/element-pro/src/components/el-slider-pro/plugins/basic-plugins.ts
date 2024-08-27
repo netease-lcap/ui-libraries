@@ -1,5 +1,5 @@
 /* 组件功能扩展插件 */
-import { createUseUpdateSync, $deletePropList } from '@lcap/vue2-utils';
+import { createUseUpdateSync } from '@lcap/vue2-utils';
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
 
 export const useUpdateSync = createUseUpdateSync([{ name: 'value', event: 'change' }]);

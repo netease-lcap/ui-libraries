@@ -16,3 +16,10 @@ export const Default = {
     template: '<el-rate-pro></el-rate-pro>',
   }),
 };
+
+export const Demo1 = {
+  name: '自定义图标',
+  render: () => ({
+    template: '<el-rate-pro iconname="icon-sugar"></el-rate-pro>',
+  }),
+};
