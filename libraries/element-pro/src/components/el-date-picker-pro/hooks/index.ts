@@ -249,6 +249,7 @@ export function useInputProps(props: MapGet) {
     autoWidth = false,
     align = 'left',
   ) => {
+    console.log('autoWidth', 'align');
     return {
       autoWidth,
       align,
