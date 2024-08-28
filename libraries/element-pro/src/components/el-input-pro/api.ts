@@ -8,7 +8,7 @@ namespace nasl.ui {
     },
   })
   @Component({
-    title: '输入框',
+    title: '单行输入',
     icon: 'input',
     description: '',
     group: 'Form',
@@ -165,7 +165,7 @@ namespace nasl.ui {
         min: 0,
         precision: 0,
       },
-      if: _ => !!_.maxlength
+      if: _ => !_.maxlength
     })
     maxcharacter: nasl.core.Decimal;
 
@@ -175,7 +175,7 @@ namespace nasl.ui {
       description:
         '用户最多可以输入的文本长度，一个中文等于一个计数长度。默认为空，不限制输入长度。`maxcharacter` 和 `maxlength` 二选一使用',
       setter: { concept: 'InputSetter' },
-      if: _ => !!_.maxcharacter
+      if: _ => !_.maxcharacter
     })
     maxlength: nasl.core.String | nasl.core.Decimal;
 
@@ -306,7 +306,7 @@ namespace nasl.ui {
     private defaultValue: nasl.core.String | nasl.core.Decimal;
 
     @Event({
-      title: '值改变时',
+      title: '改变时',
       description:
         '输入框值发生变化时触发。参数 `trigger=initial` 表示传入的数据不符合预期，组件自动处理后触发 change 告知父组件。如：初始值长度超过 `maxlength` 限制',
     })
