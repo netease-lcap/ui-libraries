@@ -10,7 +10,7 @@ namespace nasl.ui {
   @Component({
     title: '时间选择器',
     icon: 'time-picker',
-    description: '时间选择器',
+    description: '用于选择某一具体时间点或某一时间段。',
     group: 'Selector',
   })
   export class ElTimePickerPro extends ViewComponent {

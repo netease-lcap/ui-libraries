@@ -70,7 +70,7 @@ function getNaslDateValue(d: DateValue | null, format = 'YYYY-MM-DD') {
     return null;
   }
 
-  return date.format(format);
+  return date.toDate().toJSON();
 }
 
 function dayjs2Date(d: Dayjs | null) {
@@ -208,11 +208,11 @@ export function useDisableDate(props: MapGet, format: string) {
 }
 
 function dayjsEndTime(d: Dayjs) {
-  return d.endOf('hour').endOf('minute').endOf('seconds').toDate();
+  return d.endOf('day').toDate();
 }
 
 function dayjsStartTime(d: Dayjs) {
-  return d.startOf('hour').startOf('minute').startOf('seconds').toDate();
+  return d.startOf('day').toDate();
 }
 
 export function usePresets(props: MapGet) {
@@ -237,4 +237,21 @@ export function usePresets(props: MapGet) {
   });
 
   return presets;
+}
+
+export function useInputProps(props: MapGet) {
+  const inputProps = props.useComputed<any>([
+    'autoWidth',
+    'align',
+  ], (
+    autoWidth = false,
+    align = 'left',
+  ) => {
+    return {
+      autoWidth,
+      align,
+    };
+  });
+
+  return inputProps;
 }
