@@ -12,7 +12,21 @@ export default {
 
 export const Default = {
   name: '基础示例',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    template: '<el-input-number-pro v-bind="$props"></el-input-number-pro>',
+  }),
+  argTypes: {
+    theme: {
+      control: 'select',
+      options: ['column', 'row', 'normal'],
+    },
+  },
+};
+
+export const InputProps = {
+  name: '输入框属性',
   render: () => ({
-    template: '<el-input-number-pro></el-input-number-pro>',
+    template: '<el-input-number-pro :inputProps="{ autofocus: true, borderless: true }"></el-input-number-pro>',
   }),
 };

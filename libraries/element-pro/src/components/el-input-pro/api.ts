@@ -66,7 +66,7 @@ namespace nasl.ui {
       description: '文本内容位置，居左/居中/居右。可选项：left/center/right',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '左' }, { title: '居中' }, { title: '右' }],
+        options: [{ title: '居左' }, { title: '居中' }, { title: '居右' }],
       },
     })
     align: 'left' | 'center' | 'right' = 'left';
