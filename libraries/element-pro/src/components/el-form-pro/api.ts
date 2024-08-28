@@ -18,6 +18,11 @@ namespace nasl.ui {
   })
   export class ElFormPro extends ViewComponent {
     @Method({
+      title: '获取表单数据',
+      description: '获取表单数据',
+    })
+    getFormData(): any {}
+    @Method({
       title: '清空校验结果',
       description:
         "可使用 fields 指定清除部分字段的校验结果，fields 值为空则表示清除所有字段校验结果。清除邮箱校验结果示例：clearValidate(['email'])",

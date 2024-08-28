@@ -6,6 +6,7 @@ import Step from 'element-ui/lib/step';
 import { $ref } from '@lcap/vue2-utils';
 import { isNil, at } from 'lodash';
 import ElIcon from '../../el-icon';
+import { isEmptyVNodes } from '@/utils/vnode';
 
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils';
 
@@ -92,13 +93,13 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         const titleVNodes = slotTitle(current);
         const descriptionVNodes = slotDescription(current);
 
-        if (titleVNodes.length > 0) {
+        if (!isEmptyVNodes(titleVNodes)) {
           childrenNodes.push(
             h('template', { slot: 'title' }, titleVNodes),
           );
         }
 
-        if (descriptionVNodes.length > 0) {
+        if (!isEmptyVNodes(descriptionVNodes)) {
           childrenNodes.push(
             h('template', { slot: 'escription' }, descriptionVNodes),
           );

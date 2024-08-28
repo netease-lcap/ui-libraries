@@ -112,6 +112,7 @@ export default defineComponent({
                 resetTriggerScroll: this.resetTriggerScroll,
                 isShowPanel: this.isShowPanel,
                 hideDisabledTime: this.hideDisabledTime,
+                position: this.position,
               },
             }}
           />

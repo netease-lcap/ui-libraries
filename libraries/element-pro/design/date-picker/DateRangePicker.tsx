@@ -458,6 +458,7 @@ export default defineComponent({
           status={this.status}
           tips={this.tips || this.$scopedSlots.tips}
           inputValue={inputValue as string[]}
+          readonly={this.readonly}
           popupProps={dateRangePickerPopupProps}
           rangeInputProps={{
             suffixIcon: renderSuffixIcon(),

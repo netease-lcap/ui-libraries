@@ -461,6 +461,18 @@ export default defineComponent({
     const refProps: any = { ...this.$attrs, ...getRefValueMap(props) };
     const refListeners = { ...this.$listeners, ...getRefValueMap(listeners) };
 
+    Object.keys(refProps).forEach((key) => {
+      if (!eventRegex.test(key)) {
+        return;
+      }
+
+      const eventName = getEventName(key);
+
+      if (eventName && refListeners[eventName]) {
+        delete refListeners[eventName];
+      }
+    });
+
     const propsData = {
       ...splitPropsAndAttrs(refProps, propKeys, allPropsKeys, deletePropsKeys),
       ...splitListeners(refListeners, this.$nativeEvents as string[], getEventKeys(deletePropsKeys)),

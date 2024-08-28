@@ -63,7 +63,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     show: true,
     ideusage: {
-      idetype: 'container',
+      idetype: 'element',
     },
   })
   @Component({
@@ -533,44 +533,44 @@ namespace nasl.ui {
       trigger: 'validate' | 'remove' | 'uploaded';
     }) => any;
 
-    @Slot({
-      title: '取消上传按钮',
-      description:
-        '批量文件/图片上传，`autoUpload=false` 场景下，透传“取消上传”按钮属性。',
-    })
-    slotCancelUploadButton: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: '取消上传按钮',
+    //   description:
+    //     '批量文件/图片上传，`autoUpload=false` 场景下，透传“取消上传”按钮属性。',
+    // })
+    // slotCancelUploadButton: () => Array<ViewComponent>;
 
-    @Slot({
-      title: '上传元素',
-      description:
-        '非拖拽场景，指触发上传的元素，如：“选择文件”。如果是拖拽场景，则是指拖拽区域。',
-    })
-    slotDefault: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: '上传元素',
+    //   description:
+    //     '非拖拽场景，指触发上传的元素，如：“选择文件”。如果是拖拽场景，则是指拖拽区域。',
+    // })
+    // slotDefault: () => Array<ViewComponent>;
 
-    @Slot({
-      title: '拖拽区域',
-      description:
-        '用于自定义拖拽区域，`theme=custom` 且 `draggable=true` 时有效。',
-    })
-    slotDragContent: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: '拖拽区域',
+    //   description:
+    //     '用于自定义拖拽区域，`theme=custom` 且 `draggable=true` 时有效。',
+    // })
+    // slotDragContent: () => Array<ViewComponent>;
 
-    @Slot({
-      title: '文件列表展示',
-      description: '用于完全自定义文件列表界面内容(UI)，单文件和多文件均有效。',
-    })
-    slotFileListDisplay: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: '文件列表展示',
+    //   description: '用于完全自定义文件列表界面内容(UI)，单文件和多文件均有效。',
+    // })
+    // slotFileListDisplay: () => Array<ViewComponent>;
 
-    @Slot({
-      title: '触发上传的元素',
-      description: '触发上传的元素，`files` 指本次显示的全部文件。',
-    })
-    slotTrigger: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: '触发上传的元素',
+    //   description: '触发上传的元素，`files` 指本次显示的全部文件。',
+    // })
+    // slotTrigger: () => Array<ViewComponent>;
 
-    @Slot({
-      title: '上传按钮',
-      description:
-        '批量文件/图片上传，`autoUpload=false` 场景下，透传“点击上传”按钮属性。',
-    })
-    slotUploadButton: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: '上传按钮',
+    //   description:
+    //     '批量文件/图片上传，`autoUpload=false` 场景下，透传“点击上传”按钮属性。',
+    // })
+    // slotUploadButton: () => Array<ViewComponent>;
   }
 }
