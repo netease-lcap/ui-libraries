@@ -2,7 +2,7 @@
 <!--  自定义关闭按钮为文字或其他符号。 -->
 <template>
   <div>
-    <el-alert title="不可关闭的 alert" type="success" :closable="false">
+    <el-alert title="不可关闭的 alert" :type="type" :closable="false">
     </el-alert>
     <el-alert title="自定义 close-text" type="info" close-text="知道了">
     </el-alert>
@@ -12,9 +12,14 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      type: 'success'
+    }
+  },
   methods: {
     hello() {
-      alert('Hello World!');
+      this.type = 'warning';
     },
   },
 };

@@ -15,7 +15,7 @@ export default {
           VUE_APP_DESIGNER: true,
         };
       },
-      template: '<div style="width: 500px;"><story/></div>',
+      template: '<div><story/></div>',
     }),
   ],
 };

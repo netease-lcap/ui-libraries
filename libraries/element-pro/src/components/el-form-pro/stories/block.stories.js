@@ -36,7 +36,7 @@ export const Default = {
         </el-radio-group-pro>
       </el-form-item-pro>
       <el-form-item-pro layout="center" label=" ">
-          <el-button type="primary">立即创建</el-button>
+          <el-button type="primary" text="立即创建"></el-button>
       </el-form-item-pro>
     </el-form-pro>`,
   }),

@@ -8,33 +8,33 @@ namespace nasl.ui {
     },
   })
   @Component({
-    title: '日期选择器',
-    icon: 'date-picker',
-    description: '用于选择某一具体日期或某一段日期区间。',
+    title: '日期时间选择器',
+    icon: 'date-time-picker',
+    description: '用于选择某一具体日期时间或某一段日期时间区间。',
     group: 'Selector',
   })
-  export class ElDatePickerPro extends ViewComponent {
+  export class ElDateTimePickerPro extends ViewComponent {
     @Prop({
       title: '值',
     })
-    value: ElDatePickerProOptions['value'];
+    value: ElDateTimePickerProOptions['value'];
 
     @Prop({
       title: '起始值',
     })
-    startDate: ElDatePickerProOptions['startDate'];
+    startDate: ElDateTimePickerProOptions['startDate'];
 
     @Prop({
       title: '结束值',
     })
-    endDate: ElDatePickerProOptions['endDate'];
+    endDate: ElDateTimePickerProOptions['endDate'];
 
-    constructor(options?: Partial<ElDatePickerProOptions>) {
+    constructor(options?: Partial<ElDateTimePickerProOptions>) {
       super();
     }
   }
 
-  export class ElDatePickerProOptions extends ViewComponentOptions {
+  export class ElDateTimePickerProOptions extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '区间选择',
@@ -46,32 +46,32 @@ namespace nasl.ui {
     })
     range: nasl.core.Boolean = false;
 
-    @Prop<ElDatePickerProOptions, 'value'>({
+    @Prop<ElDateTimePickerProOptions, 'value'>({
       group: '数据属性',
       title: '值',
       description: '选中值',
       setter: { concept: 'InputSetter' },
       if: (_) => _.range === false,
     })
-    value: nasl.core.String | nasl.core.Integer | nasl.core.Date;
+    value: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
-    @Prop<ElDatePickerProOptions, 'startDate'>({
+    @Prop<ElDateTimePickerProOptions, 'startDate'>({
       group: '数据属性',
       title: '起始值',
-      description: '开始日期',
+      description: '默认显示的起始日期时间值，格式如2018-08-08 08:08:08',
       setter: { concept: 'InputSetter' },
       if: (_) => !!_.range,
     })
-    startDate: nasl.core.String | nasl.core.Integer | nasl.core.Date;
+    startDate: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
-    @Prop<ElDatePickerProOptions, 'endDate'>({
+    @Prop<ElDateTimePickerProOptions, 'endDate'>({
       group: '数据属性',
       title: '结束值',
-      description: '结束日期',
+      description: '默认显示的结束日期时间值，格式如2018-08-08 08:08:08',
       setter: { concept: 'InputSetter' },
       if: (_) => !!_.range,
     })
-    endDate: nasl.core.String | nasl.core.Integer | nasl.core.Date;
+    endDate: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
     @Prop({
       group: '主要属性',
@@ -98,28 +98,20 @@ namespace nasl.ui {
     clearable: nasl.core.Boolean = false;
 
     @Prop({
-      group: '数据属性',
-      title: '最小日期值',
-      description: '最小可选的日期值，默认为10年前，日期填写格式为“yyyy-mm-dd”',
-      docDescription: '设置日期范围，支持输入的最小日期',
+        group: '数据属性',
+        title: '最小日期时间值',
+        description: '最小可选的日期时间值，填写null则不限制，日期填写格式为“yyyy-mm-dd  00:00:00”',
+        docDescription: '支持输入的最小日期时间',
     })
-    minDate:
-      | nasl.core.String
-      | nasl.core.Integer
-      | nasl.core.Date
-      | nasl.core.DateTime;
+    minDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
     @Prop({
-      group: '数据属性',
-      title: '最大日期值',
-      description: '最大可选的日期值，默认为9年后，日期填写格式为“yyyy-mm-dd”',
-      docDescription: '设置日期范围，支持输入的最大日期',
+        group: '数据属性',
+        title: '最大日期时间值',
+        description: '最大可选的日期时间值，填写null则不限制，日期填写格式为“yyyy-mm-dd  00:00:00”',
+        docDescription: '支持输入的最大日期时间',
     })
-    maxDate:
-      | nasl.core.String
-      | nasl.core.Integer
-      | nasl.core.Date
-      | nasl.core.DateTime;
+    maxDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
 
     @Prop({
       group: '状态属性',
@@ -137,49 +129,6 @@ namespace nasl.ui {
     })
     readonly: nasl.core.Boolean;
 
-    @Prop<ElDatePickerProOptions, 'mode'>({
-      group: '主要属性',
-      title: '日期类型',
-      description: '选择器模式。可选项：year/quarter/month/week/date',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: '年份' },
-          { title: '季度' },
-          { title: '月份' },
-          { title: '周' },
-          { title: '日期' },
-        ],
-      },
-      onChange: [{
-        update: {
-          format: 'YYYY-MM-DD',
-        },
-        if: (val) => val === 'date',
-      }, {
-        update: {
-          format: 'YYYY',
-        },
-        if: (val) => val === 'year',
-      }, {
-        update: {
-          format: 'YYYY-MM',
-        },
-        if: (val) => val === 'month',
-      }, {
-        update: {
-          format: 'GGGG-WWWW',
-        },
-        if: (val) => val === 'week',
-      }, {
-        update: {
-          format: 'YYYY-QQ',
-        },
-        if: (val) => val === 'quarter',
-      }]
-    })
-    mode: 'year' | 'quarter' | 'month' | 'week' | 'date' = 'date';
-
     @Prop({
       group: '主要属性',
       title: '第一天从星期几开始',
@@ -188,33 +137,30 @@ namespace nasl.ui {
     })
     firstDayOfWeek: nasl.core.Decimal = 7;
 
-    @Prop<ElDatePickerProOptions, 'format'>({
-      group: '主要属性',
-      title: '日期展示格式',
-      description:
-        '仅用于格式化日期显示的格式，不影响日期值。注意和 `valueType` 的区别，`valueType`会直接决定日期值 `value` 的格式。全局配置默认为："YYYY-MM-DD"，',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: '中国（2023年7月26日）', if: _ => _.mode === 'date' },
-          { title: 'ISO（2023-07-26）', if: _ => _.mode === 'date' },
-          { title: 'US（7/26/2023）', if: _ => _.mode === 'date' },
-          { title: 'EU（26/7/2023）', if: _ => _.mode === 'date' },
-          { title: '2023-28周', if: _ => _.mode === 'week' },
-          { title: '2023年第28周', if: _ => _.mode === 'week' },
-          { title: '2023-W28', if: _ => _.mode === 'week' },
-          { title: '中国（2023年7月）', if: _ => _.mode === 'month' },
-          { title: 'ISO（2023-07）', if: _ => _.mode === 'month' },
-          { title: 'US/EU（7/2023）', if: _ => _.mode === 'month' },
-          { title: '2023年第3季度', if: _ => _.mode === 'quarter' },
-          { title: '2023年Q3', if: _ => _.mode === 'quarter' },
-          { title: '2023-Q3', if: _ => _.mode === 'quarter' },
-          { title: '中国（2023年）', if: _ => _.mode === 'year' },
-          { title: 'ISO（2023）', if: _ => _.mode === 'year' }
-      ],
-      },
+    @Prop<ElDateTimePickerProOptions, 'dateFormat'>({
+        group: '主要属性',
+        title: '日期展示格式',
+        setter: {
+            concept: 'EnumSelectSetter',
+            options: [{ title: '中国（2023年7月26日）' }, { title: 'ISO（2023-07-26）' }, { title: 'US（7/26/2023）' }, { title: 'EU（26/7/2023）' }],
+        },
     })
-    format: 'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' | 'GGGG-W周' | 'GGGG年第W周' | 'GGGG-WWWW' | 'YYYY年M月' | 'YYYY-MM' | 'M/YYYY' | 'YYYY年第Q季度' | 'YYYY年QQ' | 'YYYY-QQ' | 'YYYY年' | 'YYYY' = 'YYYY-MM-DD';
+    dateFormat: 'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' = 'YYYY-MM-DD';
+
+    @Prop<ElDateTimePickerProOptions, 'timeFormat'>({
+        group: '主要属性',
+        title: '时间展示格式',
+        setter: {
+            concept: 'EnumSelectSetter',
+            options: [
+                { title: '12: 09: 09' },
+                { title: '12时09分09秒' },
+                { title: '12: 09' },
+                { title: '12时09分' },
+            ],
+        },
+    })
+    timeFormat: 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' = 'HH:mm:ss';
 
     @Prop({
       group: '主要属性',
@@ -222,9 +168,9 @@ namespace nasl.ui {
       description: '占位符。',
       setter: { concept: 'InputSetter' },
     })
-    placeholder: nasl.core.String = '请选择日期';
+    placeholder: nasl.core.String = '请选择时间';
 
-    @Prop<ElDatePickerProOptions, 'placeholderRight'>({
+    @Prop<ElDateTimePickerProOptions, 'placeholderRight'>({
       group: '主要属性',
       title: '右侧占位符',
       description:
@@ -238,7 +184,7 @@ namespace nasl.ui {
     })
     placeholderRight: nasl.core.String = '';
 
-    @Prop<ElDatePickerProOptions, 'separator'>({
+    @Prop<ElDateTimePickerProOptions, 'separator'>({
       group: '主要属性',
       title: '分隔符',
       description: '日期分隔符，支持全局配置，默认为 -',
@@ -249,7 +195,7 @@ namespace nasl.ui {
     })
     separator: nasl.core.String = '-';
 
-    @Prop<ElDatePickerProOptions, 'enablePresets'>({
+    @Prop<ElDateTimePickerProOptions, 'enablePresets'>({
       group: '主要属性',
       title: '启用快捷设置',
       description: '启用预设快捷日期选择',
@@ -259,7 +205,7 @@ namespace nasl.ui {
     })
     enablePresets: nasl.core.Boolean = false;
 
-    @Prop<ElDatePickerProOptions, 'presetsPlacement'>({
+    @Prop<ElDateTimePickerProOptions, 'presetsPlacement'>({
       group: '主要属性',
       title: '快捷设置位置',
       description:

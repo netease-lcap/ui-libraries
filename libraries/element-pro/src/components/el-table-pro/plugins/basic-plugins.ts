@@ -8,20 +8,31 @@ export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils';
 export const useTable = {
   props: ['onPageChange'],
   setup(props, ctx) {
-    const slotDefault = props.get('slotDefault');
-    const vnodes = slotDefault?.() ?? [];
-    const columns = vnodes.map((vnode) => {
-      const attrs = _.get(vnode, 'data.attrs', {});
-      const { cell } = _.get(vnode, 'data.scopedSlots', {});
-      const cellProps = _.isFunction(cell)
-        ? {
-          cell: (h, { row, rowIndex, col }) => cell({ row, index: rowIndex, col }),
-        }
-        : {};
-      return {
-        ...attrs,
-        ...cellProps,
-      };
+    const columns = props.useComputed('slotDefault', (slotDefault) => {
+      const vnodes = slotDefault?.() ?? [];
+      return vnodes.map((vnode) => {
+        const attrs = _.get(vnode, 'data.attrs', {});
+        const nodePath = _.get(attrs, 'data-nodepath');
+        const { cell, title } = _.get(vnode, 'data.scopedSlots', {});
+        const cellProps = _.isFunction(cell)
+          ? {
+            cell: (h, { row, rowIndex, col }) => cell({ row, index: rowIndex, col }),
+          }
+          : {};
+        const titleProps = _.isFunction(title)
+          ? {
+            title: (h, { row, rowIndex, col }) => title({ row, index: rowIndex, col }),
+          }
+          : {};
+        return {
+          ...attrs,
+          ...cellProps,
+          ...titleProps,
+          attrs: {
+            'data-nodepath': nodePath,
+          },
+        };
+      });
     });
     const onLoadData = props.useComputed('onLoadData', (value) => value);
     const onPageChange = props.useComputed('onPageChange', (value) => {

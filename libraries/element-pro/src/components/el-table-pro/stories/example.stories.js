@@ -53,6 +53,7 @@ export const Default = {
             total,
           };
         },
+        data:[],
         columns: [
           { colKey: 'applicant', title: '申请人', width: 100 },
           { colKey: 'status', title: '状态', width: 100 },
@@ -71,15 +72,36 @@ export const Default = {
     },
     template: `<el-table-pro
     row-key="index"
-    :dataSource="data" 
+   
     >
-      <el-table-column-pro title="申请人" >
+      <el-table-column-pro data-nodepath="123"  >
+        <template #title="title">
+           <div>
+           <div>1234</div>
+           </div>
+       </template>
         <template #cell="cell">
-          <div>{{ cell.row.applicant }}</div>
-        </template>
+            <div>
+                <div>{{ cell.row.applicant }}</div>
+           </div>
+         </template>
       </el-table-column-pro>
-      <el-table-column-pro title="渠道" colKey="channel" >
-      </el-table-column-pro>
+   
     </el-table-pro>`,
   }),
 };
+
+{
+  /* <el-table-pro data-nodepath="d079a192f0ba416e9f433d4be788a3e7" rowKey="index" key="component-d079a192f0ba416e9f433d4be788a3e7"  >
+  <el-table-column-pro data-nodepath="9c600b5879f6417d86e78fc6613e4543" key="component-9c600b5879f6417d86e78fc6613e4543"  >
+    <template #cell={...argus}>
+        <div data-nodepath="3fba2258c3a34805b4b4a6dd561ec98d"  ><EmptySlot data-emptyslot-nodepath="3fba2258c3a34805b4b4a6dd561ec98d"  ></EmptySlot></div>
+    </template>
+    <template slot="title">
+    <div data-nodepath="d5d527546e074a2584fcdd0ecd4a4487"  >
+      <EmptySlot data-emptyslot-nodepath="d5d527546e074a2584fcdd0ecd4a4487"  ></EmptySlot>
+      </div>
+    </template>
+    </el-table-column-pro>
+</el-table-pro> */
+}

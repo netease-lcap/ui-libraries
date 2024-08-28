@@ -1,15 +1,12 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
-  @IDEExtraInfo({
-    show: true,
-  })
-  @Component({
-    title: '表格',
-    icon: 'table',
-    description: '',
-    group: 'Table',
-  })
+  // @Component({
+  //   title: '表格',
+  //   icon: 'table',
+  //   description: '',
+  //   group: 'Table',
+  // })
   // export class ElTablePro extends ViewComponent {
   //   constructor(options?: Partial<ElTableProOptions>) {
   //     super();
@@ -38,6 +35,28 @@ namespace nasl.ui {
   //   slotDefault: () => Array<ViewComponent>;
   // }
 
+  @IDEExtraInfo({
+    show: true,
+    ideusage: {
+      idetype: 'container',
+      structured: true,
+      dataSource: {
+        display: 3,
+        loopElem: 'table > tbody > tr',
+        emptySlot: {
+          condition: 'this.elementsLength() === 0',
+          accept: "target.concept === 'Entity'",
+        },
+        refInLoop: {
+          child: 'ElTableColumnPro',
+          slot: 'cell',
+          useRef: 'argus?.[0]?.index === 0',
+        },
+      },
+
+      childAccept: "target.tag === 'ElTableColumnPro'",
+    },
+  })
   @Component({
     title: 'Base Table',
     icon: 'base-table',
@@ -551,7 +570,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '表格列',
-          code: '<el-table-column-pro></el-table-co-pro>',
+          code: '<el-table-column-pro></el-table-column-pro>',
         },
       ],
     })
@@ -620,6 +639,264 @@ namespace nasl.ui {
     // slotTopContent: () => Array<ViewComponent>;
   }
 
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+    },
+  })
+  @Component({
+    title: '表格列',
+    description: '表格列',
+  })
+  export class ElTableColumnPro<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+  > extends ViewComponent {
+    constructor(options?: Partial<ElTableColumnProOptions<T, V, P, M>>) {
+      super();
+    }
+  }
+
+  export class ElTableColumnProOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+  > extends ViewComponentOptions {
+    @Prop({
+      group: '数据属性',
+      title: '值字段',
+      description: 'data 项中的字段',
+      docDescription: '数据项中对应的字段名，如createdTime',
+    })
+    colKey: (item: T) => any;
+
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '排序',
+    //   description: '设置该列是否可以排序',
+    //   docDescription: '开启后该列可排序，可设置默认顺序，升序或倒序',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // sortable: nasl.core.Boolean = false;
+
+    // @Prop<UTableViewColumnOptions<T, V, P, M>, 'defaultOrder'>({
+    //   group: '数据属性',
+    //   title: '排序初始顺序',
+    //   description: '该列首次点击时的排序顺序',
+    //   docDescription:
+    //     '该列首次点击时的排序顺序。与表格属性中的"默认排序顺序"相同',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '升序' }, { title: '倒序' }],
+    //   },
+    //   if: (_) => _.sortable === true,
+    // })
+    // defaultOrder: 'asc' | 'desc' = 'asc';
+
+    // @Prop<UTableViewColumnOptions<T, V, P, M>, 'type'>({
+    //   group: '数据属性',
+    //   title: '列类型',
+    //   description:
+    //     '支持序号列、单/多选、树形列和编辑列切换，序号列支持按照数字排序。选择编辑列需要先设置列字段。',
+    //   docDescription: '可设置序号列、单选列、多选列、展开列或树型列',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [
+    //       { title: '普通列' },
+    //       { title: '序号列' },
+    //       { title: '单选列' },
+    //       { title: '多选列' },
+    //       { title: '展开列' },
+    //       { title: '树形列' },
+    //       {
+    //         title: '编辑列',
+    //         tooltip: '与列字段关联，列字段不能为空',
+    //         disabledIf: (_) => _.field === null,
+    //       },
+    //       { title: '拖拽标识列' },
+    //     ],
+    //   },
+    // })
+    // type:
+    //   | 'normal'
+    //   | 'index'
+    //   | 'radio'
+    //   | 'checkbox'
+    //   | 'expander'
+    //   | 'tree'
+    //   | 'editable'
+    //   | 'dragHandler' = 'normal';
+
+    // @Prop<UTableViewColumnOptions<T, V, P, M>, 'autoIndex'>({
+    //   group: '数据属性',
+    //   title: '换页继续编号',
+    //   description: '换页后，继续上一页的列序号进行编号',
+    //   docDescription: '支持换页后，继续上一页的列序号进行编号',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    //   if: (_) => _.type === 'index',
+    // })
+    // autoIndex: nasl.core.Boolean = false;
+
+    // @Prop<UTableViewColumnOptions<T, V, P, M>, 'startIndex'>({
+    //   group: '数据属性',
+    //   title: '起始序号',
+    //   description: '序号列的起始序号',
+    //   docDescription: '当列类型为"序号列"时有效。默认值为1',
+    //   setter: {
+    //     concept: 'NumberInputSetter',
+    //   },
+    //   if: (_) => _.type === 'index' && _.autoIndex !== true,
+    // })
+    // startIndex: nasl.core.Decimal | nasl.core.Integer = 1;
+
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '双击处理函数',
+    //   description: '用于可编辑表格，双击表格列时的处理函数',
+    //   docDescription:
+    //     '用于可编辑表格，双击表格列时的处理函数。在表格是"可编辑"的表格时有效',
+    // })
+    // private dblclickHandler: Function;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '表格标题',
+    //   tooltipLink:
+    //     'https://help.lcap.163yun.com/99.%E5%8F%82%E8%80%83/40.%E9%A1%B5%E9%9D%A2IDE/30.%E9%A1%B5%E9%9D%A2%E7%BB%84%E4%BB%B6/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/05.%E8%A1%A8%E6%A0%BC/100.%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BC.html',
+    //   docDescription: '表格上方的标题信息。默认为空',
+    // })
+    // private title: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '固定列',
+      description:
+        '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: ' 左侧固定' },
+          { title: '右侧固定' },
+          { title: '不固定' },
+        ],
+      },
+    })
+    fixed: 'left' | 'right' | '' = '';
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '表头文本过长省略',
+    //   description: '文字过长是否省略显示。默认文字超出时会换行。',
+    //   docDescription:
+    //     '开启后，该列表头文本过长会省略显示，否则换行显示，默认关闭',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // thEllipsis: nasl.core.Boolean = false;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '内容区文本过长省略',
+    //   description: '文字过长是否省略显示。默认文字超出时会换行。',
+    //   docDescription: '开启后，该列文本过长会省略显示，否则换行显示，默认关闭',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // ellipsis: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '隐藏列',
+      docDescription:
+        '开启后，当表格横向滚动条滚动时，该列会固定不会跟随滚动条滚动',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    hidden: nasl.core.Boolean = false;
+
+    // @Prop<UTableViewColumnOptions<T, V, P, M>, 'expanderPosition'>({
+    //   group: '样式属性',
+    //   title: '展开列图标位置',
+    //   description: '展开列图标的位置',
+    //   docDescription: '展开列图标的位置。默认"左侧"。',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '左侧' }, { title: '右侧' }],
+    //   },
+    //   if: (_) => _.type === 'expander',
+    // })
+    // expanderPosition: 'left' | 'right' = 'left';
+
+    @Prop({
+      group: '样式属性',
+      title: '列宽度',
+      description: '设置列宽度，可设置为数字或百分比',
+      docDescription:
+        '列宽，可以作为最小宽度使用。当列宽总和小于 table 元素时，浏览器根据宽度设置情况自动分配宽度；当列宽总和大于 table 元素，表现为定宽。可以同时调整 table 元素的宽度来达到自己想要的效果	',
+    })
+    width: nasl.core.String | nasl.core.Decimal | nasl.core.Integer;
+
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '合并列数',
+    //   setter: {
+    //     concept: 'NumberInputSetter',
+    //     min: 1,
+    //     precision: 0,
+    //   },
+    // })
+    // colSpan: nasl.core.Integer;
+
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '自动合并相同数据',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // autoRowSpan: nasl.core.Boolean = false;
+
+    @Slot({
+      title: '单元格',
+      description: '对单元格的数据展示进行自定义',
+    })
+    slotCell: (current: Current<T>) => Array<ViewComponent>;
+
+    // @Slot({
+    //   title: '编辑单元格',
+    //   description: '对单元格的编辑数据展示进行自定义',
+    // })
+    // slotEditcell: (current: Current<T>) => Array<ViewComponent>;
+
+    @Slot({
+      title: '标题',
+      description: '对标题进行自定义',
+    })
+    slotTitle: (current: Current<T>) => Array<ViewComponent>;
+
+    // @Slot({
+    //   title: '展开列内容',
+    //   description: '展开列的内容',
+    // })
+    // 'slot-expand-content': (current: Current<T>) => Array<ViewComponent>;
+    // slotExpandContent: (current: Current<T>) => Array<ViewComponent>; // 防止 ide 编译报错
+
+    // @Slot({
+    //   title: '展开列图标',
+    //   description: '展开列图标',
+    // })
+    // slotExpander: (current: Current<T>) => Array<ViewComponent>;
+  }
   //   @Component({
   //     title: 'Primary Table',
   //     icon: 'primary-table',

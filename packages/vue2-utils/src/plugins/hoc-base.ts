@@ -363,7 +363,7 @@ export default defineComponent({
   setup(props, ctx) {
     const { $plugin: manger, $component: baseComponent } = props;
     // const compName = baseComponent.name;
-    const propKeys = getPropKeys(baseComponent as any);
+    const propKeys = getPropKeys(typeof baseComponent === 'object' ? baseComponent : (baseComponent as any).options);
     const keys = manger.getPluginPropKeys(propKeys);
     const eventNames: string[] = (props.$eventNames || []) as string[];
     const vueInstance: any = ctx.root;
@@ -460,6 +460,18 @@ export default defineComponent({
 
     const refProps: any = { ...this.$attrs, ...getRefValueMap(props) };
     const refListeners = { ...this.$listeners, ...getRefValueMap(listeners) };
+
+    Object.keys(refProps).forEach((key) => {
+      if (!eventRegex.test(key)) {
+        return;
+      }
+
+      const eventName = getEventName(key);
+
+      if (eventName && refListeners[eventName]) {
+        delete refListeners[eventName];
+      }
+    });
 
     const propsData = {
       ...splitPropsAndAttrs(refProps, propKeys, allPropsKeys, deletePropsKeys),

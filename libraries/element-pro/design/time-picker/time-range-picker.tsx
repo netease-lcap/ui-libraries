@@ -179,6 +179,7 @@ export default defineComponent({
               },
               status: this.status,
               tips: this.tips,
+              readonly: this.readonly,
               rangeInputProps: {
                 size: this.size,
                 borderless: this.borderless,
@@ -191,7 +192,7 @@ export default defineComponent({
                 onClick: this.handleClick,
                 onFocus: this.handleFocus,
                 onBlur: this.handleInputBlur,
-                readonly: !this.allowInput,
+                readonly: this.readonly || !this.allowInput,
                 activeIndex: this.currentPanelIdx,
                 ...this.rangeInputProps,
               },

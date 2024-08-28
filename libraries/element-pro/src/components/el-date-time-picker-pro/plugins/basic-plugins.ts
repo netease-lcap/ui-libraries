@@ -8,9 +8,9 @@ import {
   getChangeEventByValue,
   usePresets,
   useInputProps,
-} from '../hooks';
+} from '../../el-date-picker-pro/hooks';
 
-const DEFAULT_FORMAT = 'YYYY-MM-DD';
+const DEFAULT_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
 /* 组件功能扩展插件 */
 export const useExtendsPlugin: NaslComponentPluginOptions = {
@@ -20,12 +20,24 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     'maxTime', 'minTime', 'enablePresets',
   ],
   setup(props) {
-    const placeholder = usePlaceholder(props, '请选择日期');
+    const { useComputed } = props;
+    const placeholder = usePlaceholder(props, '请选择时间');
     const { value, changeValue } = useDatePickerValue(props, DEFAULT_FORMAT);
     const events = useContextEvents(props, DEFAULT_FORMAT);
     const disableDate = useDisableDate(props, DEFAULT_FORMAT);
     const presets = usePresets(props);
     const inputProps = useInputProps(props);
+    const format = useComputed(['format', 'dateFormat', 'timeFormat'], (
+      formatStr,
+      dateFormat = 'YYYY-MM-DD',
+      timeFormat = 'HH:mm:ss',
+    ) => {
+      if (formatStr) {
+        return formatStr;
+      }
+
+      return [dateFormat, timeFormat].join(' ');
+    });
 
     return {
       value,
@@ -33,7 +45,10 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       inputProps,
       disableDate,
       presets,
+      format,
       ...events,
+      valueType: DEFAULT_FORMAT,
+      enableTimePicker: true,
       onChange: (v: DateValue | DateRangeValue, context) => {
         const [range] = props.get<[boolean]>(['range']);
         const onChange = props.get<any>('onChange') || (() => {});
