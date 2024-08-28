@@ -56,6 +56,12 @@ export default {
     this.closeNotification();
   },
   methods: {
+    open() {
+      this.openNotification();
+    },
+    close() {
+      this.closeNotification();
+    },
     openNotification() {
       this.closeNotification();
 

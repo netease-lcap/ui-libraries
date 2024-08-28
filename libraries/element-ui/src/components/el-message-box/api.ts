@@ -23,6 +23,18 @@ namespace nasl.ui {
     group: 'Feedback',
   })
   export class ElMessageBox extends ViewComponent {
+    @Method({
+      title: '显示弹框',
+      description: '显示弹框',
+    })
+    open(): void {}
+
+    @Method({
+      title: '关闭弹框',
+      description: '关闭弹框',
+    })
+    close(): void {}
+
     constructor(options?: Partial<ElMessageBoxOptions>) {
       super();
     }
