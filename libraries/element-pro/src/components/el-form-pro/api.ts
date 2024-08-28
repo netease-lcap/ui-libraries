@@ -106,23 +106,17 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Error Message',
-    //   description:
-    //     '表单错误信息配置，示例：`{ idcard: "请输入正确的身份证号码", max: "字符长度不能超过 ${max}" }`。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // errorMessage: object;
+    @Prop({
+      group: '主要属性',
+      title: '布局模式',
+      description: '布局模式，可选线性布局/栅格布局',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '线性布局' }, { title: '栅格布局' }]
+      }
+    })
+    layoutMode: 'linear' | 'grid' = 'linear';
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Form Controlled Components',
-    //   description:
-    //     '允许表单统一控制禁用状态的自定义组件名称列表。默认会有组件库的全部输入类组件：ElInput、ElInputNumber、ElCascader、ElSelect、ElOption、ElSwitch、TCheckbox、ElCheckboxGroup、ElRadio、ElRadioGroup、ElTreeSelect、ElDatePicker、ElTimePicker、ElUpload、ElTransfer、ElSlider。对于自定义组件，组件内部需要包含可以控制表单禁用状态的变量 `formDisabled`。示例：`["CustomUpload", "CustomInput"]`。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // formControlledComponents: any[];
     @Prop({
       group: '主要属性',
       title: '表单布局',
@@ -153,10 +147,66 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '标签宽度',
+      description: '可以整体设置label标签宽度',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '小' },
+          { title: '中' },
+          { title: '大' },
+          { title: '自定义' },
+        ]
+      }
+    })
+    labelWidthType: 'small' | 'medium' | 'large' | '' = '';
+
+    @Prop<ElFormProOptions, 'labelWidth'>({
+      group: '主要属性',
+      title: '自定义标签宽度',
       description: '可以整体设置label标签宽度，默认为100px',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'InputSetter',
+      },
+      if: (_) => !_.labelWidthType,
     })
     labelWidth: nasl.core.String | nasl.core.Decimal = '100px';
+
+    @Prop({
+      group: '主要属性',
+      title: '标签过长省略',
+      description: '文字过长是否省略显示。默认文字超出时会换行。',
+      docDescription: '文字过长是否省略显示，默认文字超出时会换行。',
+      setter: {
+          concept: 'SwitchSetter',
+      },
+    })
+    labelEllipsis: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '表单项间隔',
+      description: '可以整体设置表单项间隔',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '小' },
+          { title: '中' },
+          { title: '大' },
+          { title: '自定义' },
+        ]
+      }
+    })
+    gutterType: 'small' | 'medium' | 'large' | ''  = '';
+
+    @Prop({
+      group: '主要属性',
+      title: '自定义表单项间隔',
+      description: '可以整体设置表单项间隔',
+      setter: {
+        concept: 'InputSetter',
+      }
+    })
+    gutter: nasl.core.String = '100px';
 
     @Prop({
       group: '主要属性',
