@@ -136,7 +136,7 @@ export default defineComponent({
               borderless: this.borderless,
               disabled: this.isDisabled,
               clearable: this.clearable,
-              allowInput: this.allowInput,
+              allowInput: !this.readonly && this.allowInput,
               readonly: this.readonly,
               class: this.inputClasses,
               suffixIcon: () => <TimeIcon />,

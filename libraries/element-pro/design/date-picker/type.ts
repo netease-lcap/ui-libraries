@@ -180,6 +180,10 @@ export interface ElDateRangePickerProps {
    */
   disabled?: boolean;
   /**
+   * 只读属性
+   */
+  readonly?: boolean;
+  /**
    * 是否显示时间选择
    * @default false
    */

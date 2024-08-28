@@ -26,7 +26,7 @@ export const Default = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-picker-pro :enablePresets="true" presetsPlacement="left" :allowInput="true" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
+    template: '<el-date-picker-pro :autoWidth="true" align="center" :enablePresets="true" presetsPlacement="left" :allowInput="true" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
   }),
 };
 
@@ -47,6 +47,6 @@ export const Range = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-picker-pro :enablePresets="true" presetsPlacement="left" :range="true" :startDate.sync="startDate" :endDate.sync="endDate" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
+    template: '<el-date-picker-pro :enablePresets="true" :autoWidth="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startDate.sync="startDate" :endDate.sync="endDate" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
   }),
 };

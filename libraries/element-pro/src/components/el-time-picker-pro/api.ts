@@ -213,7 +213,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    inputAutoWidth: nasl.core.Boolean = false;
+    autoWidth: nasl.core.Boolean = false;
 
     @Prop({
       group: '样式属性',
@@ -228,7 +228,7 @@ namespace nasl.ui {
         ],
       },
     })
-    inputAlign: 'left' | 'center' | 'right' = 'left';
+    align: 'left' | 'center' | 'right' = 'left';
 
     @Prop({
       group: '主要属性',

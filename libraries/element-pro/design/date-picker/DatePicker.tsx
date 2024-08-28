@@ -294,11 +294,12 @@ export default defineComponent({
           label={this.label}
           status={this.status}
           tips={this.tips}
+          readonly={this.readonly}
           popupProps={datePickerPopupProps}
           inputProps={{ suffixIcon: renderSuffixIcon(), ...datePickerInputProps }}
           popupVisible={popupVisible}
           clearable={this.clearable}
-          allowInput={this.allowInput}
+          allowInput={!this.readonly && this.allowInput}
           panel={() => <ElSinglePanel {...{ props: panelProps }} />}
         />
       </div>

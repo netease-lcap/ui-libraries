@@ -143,7 +143,7 @@ function useContextEvents(props: MapGet) {
 /* 组件功能扩展插件 */
 export const useExtensPlugin: NaslComponentPluginOptions = {
   props: [
-    'range', 'inputAutoWidth', 'inputAlign',
+    'range', 'autoWidth', 'align',
     'placeholderRight', 'startTime', 'endTime',
     'maxTime', 'minTime',
   ],
@@ -163,15 +163,15 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     });
 
     const inputProps = useComputed<any>([
-      'inputAutoWidth',
-      'inputAlign',
+      'autoWidth',
+      'align',
     ], (
-      inputAutoWidth = false,
-      inputAlign = 'left',
+      autoWidth = false,
+      align = 'left',
     ) => {
       return {
-        autoWidth: inputAutoWidth,
-        align: inputAlign,
+        autoWidth,
+        align,
       };
     });
 

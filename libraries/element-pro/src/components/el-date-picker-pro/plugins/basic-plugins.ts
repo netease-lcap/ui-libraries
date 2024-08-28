@@ -14,7 +14,7 @@ const DEFAULT_FORMAT = 'YYYY-MM-DD';
 /* 组件功能扩展插件 */
 export const useExtendsPlugin: NaslComponentPluginOptions = {
   props: [
-    'range', 'inputAutoWidth', 'inputAlign',
+    'range', 'autoWidth', 'align',
     'placeholderRight', 'startTime', 'endTime',
     'maxTime', 'minTime', 'enablePresets',
   ],
@@ -27,15 +27,15 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     const presets = usePresets(props);
 
     const inputProps = useComputed<any>([
-      'inputAutoWidth',
-      'inputAlign',
+      'autoWidth',
+      'align',
     ], (
-      inputAutoWidth = false,
-      inputAlign = 'left',
+      autoWidth = false,
+      align = 'left',
     ) => {
       return {
-        autoWidth: inputAutoWidth,
-        align: inputAlign,
+        autoWidth,
+        align,
       };
     });
 
