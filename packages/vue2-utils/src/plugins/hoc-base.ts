@@ -363,8 +363,6 @@ export default defineComponent({
     const { $plugin: manger, $component: baseComponent } = props;
     const propKeys = manger.basePropKeys;
     const keys = manger.allPropKeys;
-
-    console.log(keys);
     const eventNames: string[] = (props.$eventNames || []) as string[];
     const vueInstance: any = ctx.root;
     const isDesigner = inject('VUE_APP_DESIGNER', false) || (vueInstance.$env && vueInstance.$env.VUE_APP_DESIGNER);

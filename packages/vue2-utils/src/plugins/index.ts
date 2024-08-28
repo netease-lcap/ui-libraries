@@ -110,7 +110,7 @@ export const registerComponent = (
       };
 
       // 初始值
-      self.manger.allKeys.forEach((key: string) => {
+      self.manger.allPropKeys.forEach((key: string) => {
         if (!Object.prototype.hasOwnProperty.call(attrs, key)) {
           attrs[key] = undefined;
         }
