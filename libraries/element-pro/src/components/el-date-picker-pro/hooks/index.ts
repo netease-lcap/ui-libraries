@@ -45,7 +45,9 @@ function transformDate(date) {
         'YYYY-WWWW HH:mm:ss',
       ]).toDate();
     }
-    date = date.replace(/-/g, '/');
+    if (!date.includes('T')) {
+      date = date.replace(/-/g, '/');
+    }
     return new Date(date);
   }
 
