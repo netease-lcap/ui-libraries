@@ -2,7 +2,13 @@
     {
         "name": "ElAbsoluteLayout",
         "ideusage": {
-            "idetype": "board"
+            "idetype": "board",
+            "automate": [
+                {
+                    "command": "WRAP_FREE",
+                    "useblock": 0
+                }
+            ]
         }
     },
     {
@@ -265,8 +271,7 @@
     {
         "name": "ElFlex",
         "ideusage": {
-            "idetype": "container",
-            "containerDirection": "this.getAttribute('direction')?.value === 'vertical' ? 'column' : 'row' "
+            "idetype": "container"
         }
     },
     {

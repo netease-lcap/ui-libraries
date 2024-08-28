@@ -28,10 +28,10 @@ export const Default = {
 export const MultiLine = {
   name: '多行排布',
   render: () => ({
-    template: `<el-flex mode="block" :gutter="12">
-    <el-flex :wrap="true">
+    template: `<el-flex direction="vertical">
+    <el-flex :wrap="true" style="width: 100%">
     </el-flex>
-    <el-flex :wrap="true">
+    <el-flex :wrap="true" style="width: 100%">
     </el-flex>
     </el-flex>`,
   }),
