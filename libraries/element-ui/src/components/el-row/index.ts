@@ -10,6 +10,7 @@ export const ElRow = registerComponent(Row, Plugins, {
   methodNames: [],
 });
 export const ElCol = registerComponent(Col, ColPlugins, {
+  nativeEvents: ['click'],
 });
 
 export default ElRow;
