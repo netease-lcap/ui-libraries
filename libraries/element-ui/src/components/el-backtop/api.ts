@@ -1,20 +1,29 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
-  @IDEExtraInfo({})
+  @IDEExtraInfo({
+    show: true,
+    ideusage: {
+      idetype: 'element',
+      elementSutando: {
+        condition: true,
+        component: 'ElBacktopDesigner',
+      }
+    }
+  })
   @Component({
     title: '回到顶部',
-    icon: 'button',
+    icon: 'backtop',
     description: '回到顶部',
     group: 'Display',
   })
-  export class ElBackTop extends ViewComponent {
-    constructor(options?: Partial<ElButtonOptions>) {
+  export class ElBacktop extends ViewComponent {
+    constructor(options?: Partial<ElBacktopOptions>) {
       super();
     }
   }
 
-  export class ElBackTopOptions extends ViewComponentOptions {
+  export class ElBacktopOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
       title: '触发滚动的对象',
@@ -51,6 +60,6 @@ namespace nasl.ui {
       title: '点击',
       description: '在元素上按下并释放任意鼠标按钮时触发。',
     })
-    onClick: () => any;
+    onClick: (event: any) => any;
   }
 }
