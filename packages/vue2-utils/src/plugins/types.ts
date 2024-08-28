@@ -4,7 +4,12 @@ import type {
   ComputedRef,
   SetupContext,
 } from '@vue/composition-api';
-import type { CreateElement, VNode, VNodeData } from 'vue';
+import type {
+  ComponentOptions,
+  CreateElement,
+  VNode,
+  VNodeData,
+} from 'vue';
 import { $deletePropList, $render, $ref } from './constants';
 
 export declare type Slot = (...args: any[]) => VNode[];
@@ -84,6 +89,7 @@ export type PluginMap = { [name: string]: NaslComponentPluginOptions };
 
 export interface PluginInitOptions {
   name: string;
+  componentOptions: ComponentOptions<any>;
   plugin: { [name: string]: NaslComponentPluginOptions };
 }
 

@@ -10,7 +10,7 @@ import type {
 } from './types';
 import PluginManager from './plugin';
 import HocBaseComponent from './hoc-base';
-import { getPropKeys, isEmptyVNodes, normalizeArray } from './utils';
+import { isEmptyVNodes, normalizeArray } from './utils';
 
 export { $deletePropList, $ref, $render } from './constants';
 export * from './common';
@@ -27,7 +27,6 @@ export const registerComponent = (
     eventNames,
   }: NaslComponentExtendInfo = {},
 ) => {
-  const propKeys = getPropKeys(typeof baseComponent === 'object' ? baseComponent : (baseComponent as any).options);
   if (!slotNames) {
     slotNames = ['default'];
   }
@@ -57,7 +56,11 @@ export const registerComponent = (
     },
     created() {
       const self = this as any;
-      self.manger = new PluginManager({ name: baseComponent.name, plugin: { ...pluginOption, ...self.plugin } });
+      self.manger = new PluginManager({
+        name: baseComponent.name,
+        componentOptions: typeof baseComponent === 'function' ? baseComponent.options : baseComponent,
+        plugin: { ...pluginOption, ...self.plugin },
+      });
     },
     watch: {
       plugin(v) {
@@ -69,6 +72,10 @@ export const registerComponent = (
     },
     render(h) {
       const self = this as any;
+      if (!self.manger.valid) {
+        return null;
+      }
+
       const scopedSlots = {
         ...self.$scopedSlots,
       };
@@ -103,7 +110,7 @@ export const registerComponent = (
       };
 
       // 初始值
-      self.manger.getPluginPropKeys(propKeys).forEach((key: string) => {
+      self.manger.allKeys.forEach((key: string) => {
         if (!Object.prototype.hasOwnProperty.call(attrs, key)) {
           attrs[key] = undefined;
         }
