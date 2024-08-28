@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: true,
+    show: false,
   })
   @Component({
     title: '输入装饰器',
