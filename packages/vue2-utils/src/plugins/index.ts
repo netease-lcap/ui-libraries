@@ -10,7 +10,7 @@ import type {
 } from './types';
 import PluginManager from './plugin';
 import HocBaseComponent from './hoc-base';
-import { isEmptyVNodes, normalizeArray } from './utils';
+import { getPropKeys, isEmptyVNodes, normalizeArray } from './utils';
 
 export { $deletePropList, $ref, $render } from './constants';
 export * from './common';
@@ -27,6 +27,7 @@ export const registerComponent = (
     eventNames,
   }: NaslComponentExtendInfo = {},
 ) => {
+  const propKeys = getPropKeys(typeof baseComponent === 'object' ? baseComponent : (baseComponent as any).options);
   if (!slotNames) {
     slotNames = ['default'];
   }
@@ -97,17 +98,28 @@ export const registerComponent = (
         }
       });
 
+      const attrs = {
+        ...this.$attrs,
+      };
+
+      // 初始值
+      self.manger.getPluginPropKeys(propKeys).forEach((key: string) => {
+        if (!Object.prototype.hasOwnProperty.call(attrs, key)) {
+          attrs[key] = undefined;
+        }
+      });
+
       return h(HocBaseComponent, {
         key: self.renderKey,
-        props: {
+        attrs: {
           $plugin: self.manger,
           $component: baseComponent,
           $slotNames: slotNames,
           $nativeEvents: nativeEvents,
           $methodNames: methodNames,
           $eventNames: eventNames,
+          ...attrs,
         },
-        attrs: self.$attrs,
         scopedSlots,
         on: self.$listeners,
       }, childrenNodes);
