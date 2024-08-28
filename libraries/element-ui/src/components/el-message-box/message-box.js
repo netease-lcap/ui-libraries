@@ -92,6 +92,12 @@ export default {
     this.closeMessageBox();
   },
   methods: {
+    open() {
+      this.openMessageBox();
+    },
+    close() {
+      this.closeMessageBox();
+    },
     async openMessageBox() {
       const h = this.$createElement;
       const vnodes = this.$scopedSlots.default() || [];

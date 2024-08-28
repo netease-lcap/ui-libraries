@@ -23,6 +23,17 @@ namespace nasl.ui {
     group: 'Feedback',
   })
   export class ElNotification extends ViewComponent {
+    @Method({
+      title: '显示通知',
+      description: '显示通知',
+    })
+    open(): void {}
+
+    @Method({
+      title: '关闭通知',
+      description: '关闭通知',
+    })
+    close(): void {}
     constructor(options?: Partial<ElNotificationOptions>) {
       super();
     }
