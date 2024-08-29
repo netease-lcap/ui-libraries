@@ -4,7 +4,7 @@ import * as plugins from './plugins';
 
 export const ElSelectPro = registerComponent(Select, plugins, {
   nativeEvents: [],
-  slotNames: [],
+  slotNames: ['default'],
   methodNames: [],
 });
 export const ElOptionPro = Option;
