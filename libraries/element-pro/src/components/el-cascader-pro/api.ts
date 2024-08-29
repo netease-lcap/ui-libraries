@@ -6,7 +6,7 @@ namespace nasl.ui {
   })
   @Component({
     title: '级联选择器',
-    icon: 'cascader',
+    icon: 'cascade-select',
     description: '',
     group: 'Selector',
   })
@@ -17,16 +17,16 @@ namespace nasl.ui {
     M extends nasl.core.Boolean,
     C,
   > extends ViewComponent {
-    constructor(options?: Partial<ElCascaderProOptionso<T, V, P, M, C>>) {
+    constructor(options?: Partial<ElCascaderProOptions<T, V, P, M, C>>) {
       super();
     }
   }
 
-  export class ElCascaderProOptionso<
+  export class ElCascaderProOptions<
     T,
     V,
-    P,
-    M,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
     C,
   > extends ViewComponentOptions {
     @Prop({
@@ -102,7 +102,7 @@ namespace nasl.ui {
     })
     filterable: nasl.core.Boolean = false;
 
-    @Prop<ElCascaderProOptionso<T, V, P, M, C>, 'textField'>({
+    @Prop<ElCascaderProOptions<T, V, P, M, C>, 'textField'>({
       group: '数据属性',
       title: '文本字段',
       description: '集合的元素类型中，用于显示文本的属性名称',
@@ -114,7 +114,7 @@ namespace nasl.ui {
     })
     textField: (item: T) => any = ((item: any) => item.label) as any;
 
-    @Prop<ElCascaderProOptionso<T, V, P, M, C>, 'valueField'>({
+    @Prop<ElCascaderProOptions<T, V, P, M, C>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
       description: '集合的元素类型中，用于标识选中值的属性',
@@ -125,7 +125,7 @@ namespace nasl.ui {
     })
     valueField: (item: T) => V = ((item: any) => item.value) as any;
 
-    @Prop<ElCascaderProOptionso<T, V, P, M, C>, 'childrenField'>({
+    @Prop<ElCascaderProOptions<T, V, P, M, C>, 'childrenField'>({
       group: '数据属性',
       title: '子级值字段',
       description: '树形数据子节点字段名，默认为children',
@@ -213,7 +213,7 @@ namespace nasl.ui {
       description: '用于控制多选数量，值为 0 则不限制',
       setter: { concept: 'NumberInputSetter' },
     })
-    max: nasl.core.Decimal = 0;
+    max: nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
@@ -222,7 +222,7 @@ namespace nasl.ui {
         '最小折叠数量，用于多选情况下折叠选中项，超出该数值的选中项折叠。值为 0 则表示不折叠',
       setter: { concept: 'NumberInputSetter' },
     })
-    minCollapsedNum: nasl.core.Decimal = 0;
+    minCollapsedNum: nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
@@ -263,7 +263,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Placeholder',
+      title: '占位符',
       description: '占位符',
       setter: { concept: 'InputSetter' },
     })
@@ -287,7 +287,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Readonly',
+      title: '读状态',
       description: '只读状态，值为真会隐藏输入框，且无法打开下拉框',
       setter: { concept: 'SwitchSetter' },
     })
@@ -323,7 +323,7 @@ namespace nasl.ui {
       description: '组件尺寸。可选项：large/medium/small。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'large' }, { title: 'medium' }, { title: 'small' }],
+        options: [{ title: '小' }, { title: '中' }, { title: '大' }],
       },
     })
     size: 'large' | 'medium' | 'small' = 'medium';
@@ -335,10 +335,10 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'default' },
-          { title: 'success' },
-          { title: 'warning' },
-          { title: 'error' },
+          { title: '默认' },
+          { title: '成功' },
+          { title: '警告' },
+          { title: '错误' },
         ],
       },
     })
@@ -389,19 +389,19 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Value',
-      description: '选中项的值。支持语法糖 `v-model`。',
-      setter: { concept: 'InputSetter' },
+      title: '值',
+      description: '选中项的值。',
+      sync: true,
     })
-    value: nasl.core.String | nasl.core.Decimal | any[] = [];
+    value: V | nasl.collection.List<V>;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Default Value',
-      description: '选中项的值。非受控属性。',
-      setter: { concept: 'InputSetter' },
-    })
-    defaultValue: nasl.core.String | nasl.core.Decimal | any[] = [];
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Default Value',
+    //   description: '选中项的值。非受控属性。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // defaultValue: nasl.core.String | nasl.core.Decimal | any[] = [];
 
     // @Prop({
     //   group: '主要属性',
@@ -434,7 +434,7 @@ namespace nasl.ui {
         '用于控制选中值的类型。single 表示输入输出值为 叶子结点值， full 表示输入输出值为全路径。可选项：single/full',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'single' }, { title: 'full' }],
+        options: [{ title: '叶子结点值' }, { title: '全路径' }],
       },
     })
     valueType: 'single' | 'full' = 'single';

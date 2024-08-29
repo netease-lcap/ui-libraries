@@ -6,8 +6,8 @@ namespace nasl.ui {
   })
   @Component({
     title: '树选择',
-    icon: 'tree-select',
-    description: '',
+    icon: 'tree-view',
+    description: '树选择',
     group: 'Selector',
   })
   export class ElTreeSelectPro<
@@ -25,6 +25,7 @@ namespace nasl.ui {
     V,
     M extends nasl.core.Boolean,
   > extends ViewComponentOptions {
+
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -55,7 +56,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    textField: any;
+    textField: (item: T) => any = ((item: any) => item.label) as any;
 
     @Prop({
       group: '数据属性',
@@ -66,7 +67,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    valueField: any;
+    valueField: (item: T) => any = ((item: any) => item.value) as any;
 
     @Prop({
       group: '数据属性',
@@ -77,7 +78,8 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    childrenField: (item: T) => any;
+    childrenField: (item: T) => nasl.collection.List<any> = ((item: any) =>
+      item.children) as any;
 
     @Prop({
       group: '数据属性',
@@ -93,7 +95,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Auto Width',
+      title: '宽度自适应',
       description: '宽度随内容自适应',
       setter: { concept: 'SwitchSetter' },
     })
@@ -101,7 +103,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Autofocus',
+      title: '自动聚焦',
       description: '自动聚焦',
       setter: { concept: 'SwitchSetter' },
     })
@@ -109,7 +111,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Borderless',
+      title: '无边框',
       description: '无边框模式',
       setter: { concept: 'SwitchSetter' },
     })
@@ -117,7 +119,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Clearable',
+      title: '是否允许清空',
       description: '是否允许清空',
       setter: { concept: 'SwitchSetter' },
     })
@@ -134,7 +136,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Disabled',
+      title: '禁用组件',
       description: '是否禁用组件',
       setter: { concept: 'SwitchSetter' },
     })
@@ -142,7 +144,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Empty',
+      title: '空时内容。',
       description: '当下拉列表为空时显示的内容。',
       setter: { concept: 'InputSetter' },
     })
@@ -159,7 +161,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Filterable',
+      title: '是否可搜索',
       description: '是否可搜索',
       setter: { concept: 'SwitchSetter' },
     })
@@ -215,34 +217,34 @@ namespace nasl.ui {
     // })
     // loading: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Loading Text',
-      description: '远程加载时显示的文字，支持自定义。如加上超链接。',
-      setter: { concept: 'InputSetter' },
-    })
-    loadingText: any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Loading Text',
+    //   description: '远程加载时显示的文字，支持自定义。如加上超链接。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // loadingText: any;
 
     @Prop({
       group: '主要属性',
-      title: 'Max',
+      title: '多选数量',
       description: '用于控制多选数量，值为 0 则不限制',
       setter: { concept: 'NumberInputSetter' },
     })
-    max: nasl.core.Decimal = 0;
+    max: nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
-      title: 'Min Collapsed Num',
+      title: '最小折叠数量',
       description:
         '最小折叠数量，用于多选情况下折叠选中项，超出该数值的选中项折叠。值为 0 则表示不折叠',
       setter: { concept: 'NumberInputSetter' },
     })
-    minCollapsedNum: nasl.core.Decimal = 0;
+    minCollapsedNum: nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
-      title: 'Multiple',
+      title: '多选',
       description: '是否允许多选',
       setter: { concept: 'SwitchSetter' },
     })
@@ -266,7 +268,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Placeholder',
+      title: '占位符',
       description: '占位符',
       setter: { concept: 'InputSetter' },
     })
@@ -299,7 +301,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Readonly',
+      title: '只读状态',
       description: '只读状态，值为真会隐藏输入框，且无法打开下拉框',
       setter: { concept: 'SwitchSetter' },
     })
@@ -323,26 +325,26 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Size',
+      title: '尺寸',
       description: '尺寸。可选项：small/medium/large',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'small' }, { title: 'medium' }, { title: 'large' }],
+        options: [{ title: '小' }, { title: '中' }, { title: '大' }],
       },
     })
     size: 'small' | 'medium' | 'large' = 'medium';
 
     @Prop({
       group: '主要属性',
-      title: 'Status',
+      title: '状态',
       description: '输入框状态。可选项：default/success/warning/error',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'default' },
-          { title: 'success' },
-          { title: 'warning' },
-          { title: 'error' },
+          { title: '默认' },
+          { title: '成功' },
+          { title: '警告' },
+          { title: '错误' },
         ],
       },
     })

@@ -41,7 +41,7 @@ namespace nasl.ui {
       idetype: 'container',
       structured: true,
       dataSource: {
-        display: 20,
+        display: 3,
         loopElem: 'table > tbody > tr',
         emptySlot: {
           condition: 'this.elementsLength() === 0',
@@ -58,9 +58,10 @@ namespace nasl.ui {
     },
   })
   @Component({
-    title: 'Base Table',
-    icon: 'base-table',
-    description: '',
+    title: '数据表格',
+    icon: 'table-view',
+    description:
+      '用于展示大量结构化数据。支持排序、过滤（筛选）、分页、自定义操作等复杂功能。',
     group: 'Table',
   })
   export class ElTablePro<
@@ -97,7 +98,7 @@ namespace nasl.ui {
       description: '选中行。',
       // setter: { concept: 'InputSetter' },
     })
-    selectedRowKeys: any[];
+    selectedRowKeys: any[] | any;
 
     @Prop({
       group: '数据属性',
