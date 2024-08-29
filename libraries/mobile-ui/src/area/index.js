@@ -81,6 +81,10 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
+    popupOpend: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -88,7 +92,7 @@ export default createComponent({
       code: this.value || '',
       columns: [{ values: [] }, { values: [] }, { values: [] }],
       // areaList: {},
-      valuepopup: false,
+      valuepopup: this.popupOpend,
       getTitle: '',
       oldcode: '',
     };
@@ -121,9 +125,17 @@ export default createComponent({
         county: this.columnsPlaceholder[2] || '',
       };
     },
+
+    isDesignerNew() {
+      return this.$env && this.$env.VUE_APP_DESIGNER_NEW;
+    },
   },
 
   watch: {
+    popupOpend(val) {
+      this.valuepopup = val;
+    },
+
     value: {
       handler(val) {
         this.code = this.convertName(val);
@@ -158,6 +170,10 @@ export default createComponent({
 
   methods: {
     designerOpen(e) {
+      if (this.isDesignerNew) {
+        this.$refs.popforcas.togglePModal();
+        return;
+      }
       let currentElement = e.target;
       let nodePath = false;
       while (currentElement) {
@@ -177,6 +193,10 @@ export default createComponent({
       }
     },
     designerClose() {
+      if (this.$env.VUE_APP_DESIGNER_NEW) {
+        this.$refs.popforcas.togglePModal();
+        return;
+      }
       // readme:ide会记录通过designerDbControl打开的浮窗，需要通过该命令清除，在触发方式双击变单击后，暂无作用
       if (window.parent && this?.$attrs?.['vusion-node-path']) {
         window.parent?.postMessage(
@@ -502,7 +522,7 @@ export default createComponent({
     genColumnsTopForNew() {
       let topSlot = this.slots('picker-top');
       let titleSlot = this.slots('pannel-title');
-      if (this.inDesigner()) {
+      if (this.inDesigner() && !this.isDesignerNew) {
         if (!topSlot) {
           topSlot = <EmptyCol></EmptyCol>;
         }
@@ -534,7 +554,7 @@ export default createComponent({
 
     genColumnsBottomForNew() {
       let bottomSlot = this.slots('picker-bottom');
-      if (this.inDesigner()) {
+      if (this.inDesigner() && !this.isDesignerNew) {
         if (!bottomSlot) {
           bottomSlot = <EmptyCol></EmptyCol>;
         }
@@ -661,6 +681,7 @@ export default createComponent({
           nofi={true}
         />
         <Popup
+          vModel={this.valuepopup}
           safe-area-inset-bottom
           round
           ref="popforcas"
@@ -675,7 +696,7 @@ export default createComponent({
           }}
         >
           <div class={bem(this.isNew && 'content-wrapper')}>
-            {this.inDesigner() && (
+            {this.inDesigner() && !this.isDesignerNew && (
               <div
                 class={bem('designer-close-button')}
                 vusion-click-enabled="true"

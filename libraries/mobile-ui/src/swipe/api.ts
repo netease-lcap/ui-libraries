@@ -116,7 +116,7 @@ namespace nasl.ui {
       which: nasl.core.Integer;
   }) => void;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '插入幻灯片内容，如图片'
     })
     slotDefault: () => Array<ViewComponent>;

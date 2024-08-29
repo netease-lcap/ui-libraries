@@ -158,6 +158,10 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
+    popupOpend: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -168,7 +172,7 @@ export default createComponent({
       tempValue: currentValue,
 
       subtitle: '',
-      popupShown: false,
+      popupShown: this.popupOpend,
       defaultMonthForSelect: null,
     };
   },
@@ -204,10 +208,18 @@ export default createComponent({
     defaultMonthForSelectCom() {
       return this.defaultMonthForSelect;
     },
+
+    isDesignerNew() {
+      return this.$env && this.$env.VUE_APP_DESIGNER_NEW;
+    },
   },
 
   watch: {
     popupShown: 'init',
+
+    popupOpend(val) {
+      this.popupShown = val;
+    },
 
     type() {
       this.reset();
@@ -243,6 +255,10 @@ export default createComponent({
 
   methods: {
     designerOpen(e) {
+      if (this.isDesignerNew) {
+        this.$refs.popforcas.togglePModal();
+        return;
+      }
       let currentElement = e.target;
       let nodePath = false;
       while (currentElement) {
@@ -259,6 +275,10 @@ export default createComponent({
       }
     },
     designerClose() {
+      if (this.$env.VUE_APP_DESIGNER_NEW) {
+        this.$refs.popforcas.togglePModal();
+        return;
+      }
       // readme:ide会记录通过designerDbControl打开的浮窗，需要通过该命令清除，在触发方式双击变单击后，暂无作用
       if (window.parent && this?.$attrs?.['vusion-node-path']) {
         window.parent?.postMessage(
@@ -529,7 +549,7 @@ export default createComponent({
 
     genFooter() {
       let bottomSlot = this.slots('picker-bottom');
-      if (this.inDesigner()) {
+      if (this.inDesigner() && !this.isDesignerNew) {
         if (!bottomSlot) {
           bottomSlot = <EmptyCol></EmptyCol>;
         }
@@ -551,7 +571,7 @@ export default createComponent({
     genTitleForNew() {
       let topSlot = this.slots('picker-top');
       let titleSlot = this.slots('pannel-title');
-      if (this.inDesigner()) {
+      if (this.inDesigner() && !this.isDesignerNew) {
         if (!topSlot) {
           topSlot = <EmptyCol></EmptyCol>;
         }
@@ -581,7 +601,7 @@ export default createComponent({
     genCalendar() {
       return (
         <div class={bem([this.isNew && 'new'])}>
-          {this.inDesigner() && (
+          {this.inDesigner() && !this.isDesignerNew && (
             <div class={bem('designer-close-button')} vusion-click-enabled="true" onClick={this.designerClose}>
               点击关闭
             </div>

@@ -72,6 +72,10 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
+    popupOpend: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -79,7 +83,7 @@ export default createComponent({
       tabs: [],
       activeTab: 0,
       options: [],
-      valuepopup: false,
+      valuepopup: this.popupOpend,
       currentValue: this.value || '',
 
       filterData: [],
@@ -109,9 +113,15 @@ export default createComponent({
     flattenData() {
       return this.flattenTree(this.currentData);
     },
+    isDesignerNew() {
+      return this.$env && this.$env.VUE_APP_DESIGNER_NEW;
+    },
   },
 
   watch: {
+    popupOpend(val) {
+      this.valuepopup = val;
+    },
     currentData: {
       deep: true,
       handler: 'updateTabs',
@@ -143,6 +153,10 @@ export default createComponent({
         'font-size:13px; background:pink; color:#bf2c9f;',
         e
       );
+      if (this.isDesignerNew) {
+        this.$refs.popforcas.togglePModal();
+        return;
+      }
       let currentElement = e.target;
       let nodePath = false;
       while (currentElement) {
@@ -158,6 +172,10 @@ export default createComponent({
       }
     },
     designerClose() {
+      if (this.$env.VUE_APP_DESIGNER_NEW) {
+        this.$refs.popforcas.togglePModal();
+        return;
+      }
       // readme:ide会记录通过designerDbControl打开的浮窗，需要通过该命令清除，在触发方式双击变单击后，暂无作用
       if (window.parent && this?.$attrs?.['vusion-node-path']) {
         window.parent?.postMessage(
@@ -399,7 +417,7 @@ export default createComponent({
     renderHeader() {
       if (this.isNew) {
         let topSlot = this.slots('picker-top');
-        if (this.inDesigner()) {
+        if (this.inDesigner() && !this.isDesignerNew) {
           if (!topSlot) {
             topSlot = <EmptyCol></EmptyCol>;
           }
@@ -414,7 +432,7 @@ export default createComponent({
         <div class={bem('header')}>
           <h2 class={bem('title')} vusion-slot-name="title">
             {this.slots('title') ||
-              (this.inDesigner() ? <EmptyCol></EmptyCol> : this.title)}
+              (this.inDesigner() && !this.isDesignerNew ? <EmptyCol></EmptyCol> : this.title)}
           </h2>
           {this.closeable ? (
             <Icon
@@ -431,7 +449,7 @@ export default createComponent({
       if (!this.isNew) return null;
 
       let bottomSlot = this.slots('picker-bottom');
-      if (this.inDesigner()) {
+      if (this.inDesigner() && !this.isDesignerNew) {
         if (!bottomSlot) {
           bottomSlot = <EmptyCol></EmptyCol>;
         }
@@ -567,6 +585,7 @@ export default createComponent({
           nofi={true}
         />
         <Popup
+          vModel={this.valuepopup}
           safe-area-inset-bottom
           round
           ref="popforcas"
@@ -581,7 +600,7 @@ export default createComponent({
           }}
         >
           <div class={bem(this.isNew && 'content-wrapper')}>
-            {this.inDesigner() && (
+            {this.inDesigner() && !this.isDesignerNew && (
               <div
                 class={bem('designer-close-button')}
                 vusion-click-enabled="true"

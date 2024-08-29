@@ -365,7 +365,8 @@ namespace nasl.ui {
     // })
     // slotDefault: () => Array<VanPickerActionSlot>;
     @Slot({
-      title: 'option'
+      title: '组件插槽',
+      description: 'option',
     })
     slotOption: (current: Current<T>) => Array<ViewComponent>;
 
