@@ -43,8 +43,14 @@ export const registerComponent = (
     eventNames = [];
   }
 
+  const componentOptions = typeof baseComponent === 'function' ? baseComponent.options : baseComponent;
+
+  if (!componentOptions) {
+    throw new Error('注册组件需要获取组件的 options , 传入数据错误');
+  }
+
   return {
-    name: baseComponent.name,
+    name: componentOptions.name,
     inheritAttrs: false,
     props: {
       plugin: {},
@@ -57,8 +63,8 @@ export const registerComponent = (
     created() {
       const self = this as any;
       self.manger = new PluginManager({
-        name: baseComponent.name,
-        componentOptions: typeof baseComponent === 'function' ? baseComponent.options : baseComponent,
+        name: componentOptions.name,
+        componentOptions,
         plugin: { ...pluginOption, ...self.plugin },
       });
     },
