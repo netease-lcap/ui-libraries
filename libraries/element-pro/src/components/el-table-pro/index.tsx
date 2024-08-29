@@ -15,6 +15,7 @@ import {
   toRefs,
 } from '@vue/composition-api';
 import * as plugins from './plugins';
+import './index.less';
 
 export const ElTablePro = registerComponent(Table, plugins, {
   nativeEvents: [],

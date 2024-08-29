@@ -114,7 +114,6 @@ export const useTable = {
       [$render](resultVNode, h) {
         const vnodes = ctx.setupContext.slots.default();
         resultVNode.componentOptions.propsData.columns = renderSlot(vnodes);
-        console.log(renderSlot(vnodes));
         return resultVNode;
       },
     };

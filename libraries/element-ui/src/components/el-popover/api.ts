@@ -5,11 +5,15 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       namedSlotOmitWrapper: ['reference'],
+      displaySlotInline: {
+        reference: true,
+      },
       selector: {
         expression: "this.getElement(el => el.slotTarget === 'reference')",
         cssSelector: "span[class='el-popover__reference-wrapper']",
-        placement: 'tail'
+        placement: 'tail',
       },
+      eventsEffect: 'reference',
       events: {
         click: true,
       },
