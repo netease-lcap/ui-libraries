@@ -35,8 +35,8 @@ export const Range = {
   render: () => ({
     data() {
       return {
-        startDate: '2024-08-02',
-        endDate: '2024-10-02',
+        startValue: '2024-08-02',
+        endValue: '2024-10-02',
       };
     },
     methods: {
@@ -47,6 +47,6 @@ export const Range = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-picker-pro :enablePresets="true" :autoWidth="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startDate.sync="startDate" :endDate.sync="endDate" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
+    template: '<el-date-picker-pro :enablePresets="true" :autoWidth="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startValue.sync="startValue" :endValue.sync="endValue" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
   }),
 };

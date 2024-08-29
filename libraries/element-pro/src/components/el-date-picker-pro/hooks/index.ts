@@ -85,13 +85,13 @@ function dayjs2Date(d: Dayjs | null) {
 
 export const useDatePickerValue = (props: MapGet, format: string) => {
   const valueRef = props.useRef<DateValue | DateRangeValue>(
-    ['value', 'startDate', 'endDate', 'range'],
-    (v, startDate, endDate, range) => {
+    ['value', 'startValue', 'endValue', 'range'],
+    (v, startValue, endValue, range) => {
       if (!range) {
         return transformDate(v);
       }
 
-      return [transformDate(startDate), transformDate(endDate)];
+      return [transformDate(startValue), transformDate(endValue)];
     },
   );
 
@@ -99,12 +99,12 @@ export const useDatePickerValue = (props: MapGet, format: string) => {
     const range = props.get<boolean>('range');
     const [
       onUpdateValue = () => {},
-      onUpdateStartTime = () => {},
-      onUpdateEndTime = () => {},
+      onUpdateStartValue = () => {},
+      onUpdateEndValue = () => {},
     ] = props.get<Array<(val: string) => void>>([
       'update:value',
-      'update:startTime',
-      'update:endTime',
+      'update:startValue',
+      'update:endValue',
     ]);
 
     if (!range) {
@@ -112,8 +112,8 @@ export const useDatePickerValue = (props: MapGet, format: string) => {
       onUpdateValue(getNaslDateValue(Array.isArray(v) ? v[0] : v, format));
     } else {
       valueRef.value = Array.isArray(d) ? [dayjs2Date(d[0]), dayjs2Date(d[1])] : [null, null];
-      onUpdateStartTime(getNaslDateValue(d || d[0], format));
-      onUpdateEndTime(getNaslDateValue(d || d[1], format));
+      onUpdateStartValue(getNaslDateValue(d || d[0], format));
+      onUpdateEndValue(getNaslDateValue(d || d[1], format));
     }
   }
 
@@ -124,13 +124,13 @@ export const useDatePickerValue = (props: MapGet, format: string) => {
       }
       return getNaslDateValue(valueRef.value, format);
     },
-    startTime: () => {
+    startValue: () => {
       if (!Array.isArray(valueRef.value)) {
         return null;
       }
       return getNaslDateValue(valueRef.value[0], format);
     },
-    endTime: () => {
+    endValue: () => {
       if (!Array.isArray(valueRef.value)) {
         return null;
       }
@@ -147,14 +147,14 @@ export const useDatePickerValue = (props: MapGet, format: string) => {
 export function getChangeEventByValue(d: DateValue | DateRangeValue, range: boolean, format: string) {
   const changeEvent = {
     value: null,
-    startDate: null,
-    endDate: null,
+    startValue: null,
+    endValue: null,
   };
   if (!range) {
     changeEvent.value = d ? getNaslDateValue(!Array.isArray(d) ? d : d[0], format) : null;
   } else if (Array.isArray(d)) {
-    changeEvent.startDate = getNaslDateValue(d[0], format);
-    changeEvent.endDate = getNaslDateValue(d[1], format);
+    changeEvent.startValue = getNaslDateValue(d[0], format);
+    changeEvent.endValue = getNaslDateValue(d[1], format);
   }
 
   return changeEvent;
@@ -249,7 +249,6 @@ export function useInputProps(props: MapGet) {
     autoWidth = false,
     align = 'left',
   ) => {
-    console.log('autoWidth', 'align');
     return {
       autoWidth,
       align,

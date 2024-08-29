@@ -85,26 +85,26 @@ function getNaslTimeValue(v: TimePickerValue | TimeRangeValue, format: string = 
 function getChangeEventByValue(v: TimePickerValue | TimeRangeValue, range: boolean, format: string) {
   const changeEvent = {
     value: null,
-    startTime: null,
-    endTime: null,
+    startValue: null,
+    endValue: null,
   };
   if (!range) {
     changeEvent.value = getNaslTimeValue(v, format);
   } else if (Array.isArray(v)) {
-    changeEvent.startTime = getNaslTimeValue(v[0], format);
-    changeEvent.endTime = getNaslTimeValue(v[1], format);
+    changeEvent.startValue = getNaslTimeValue(v[0], format);
+    changeEvent.endValue = getNaslTimeValue(v[1], format);
   }
 
   return changeEvent;
 }
 
 function useTimePickerValue(props: MapGet) {
-  const valueRef = props.useRef<TimePickerValue | TimeRangeValue>(['value', 'startTime', 'endTime', 'range', 'format'], (v, startTime, endTime, range, format) => {
+  const valueRef = props.useRef<TimePickerValue | TimeRangeValue>(['value', 'startValue', 'endValue', 'range', 'format'], (v, startValue, endValue, range, format) => {
     if (!range) {
       return getFormatTimeValue(v, format);
     }
 
-    return [getFormatTimeValue(startTime, format), getFormatTimeValue(endTime, format)];
+    return [getFormatTimeValue(startValue, format), getFormatTimeValue(endValue, format)];
   });
 
   function changeValue(v: TimePickerValue | TimeRangeValue) {
@@ -144,7 +144,7 @@ function useContextEvents(props: MapGet) {
 export const useExtensPlugin: NaslComponentPluginOptions = {
   props: [
     'range', 'autoWidth', 'align',
-    'placeholderRight', 'startTime', 'endTime',
+    'placeholderRight', 'startValue', 'endValue',
     'maxTime', 'minTime',
   ],
   setup(props) {
@@ -183,13 +183,13 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         }
         return getNaslTimeValue(value.value, props.get('format'));
       },
-      startTime: () => {
+      startValue: () => {
         if (!Array.isArray(value.value)) {
           return null;
         }
         return getNaslTimeValue(value.value[0], props.get('format'));
       },
-      endTime: () => {
+      endValue: () => {
         if (!Array.isArray(value.value)) {
           return null;
         }
@@ -224,14 +224,14 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         const currentTimes = [h, m, s];
 
         if (range) {
-          const [startTime, endTime] = unref(value);
-          const startTimes = endTime ? getNumberArr(getNaslTimeValue(startTime), 'start') : null;
-          const endTimes = endTime ? getNumberArr(getNaslTimeValue(endTime), 'end') : null;
+          const [startValue, endValue] = unref(value);
+          const startValues = endValue ? getNumberArr(getNaslTimeValue(startValue), 'start') : null;
+          const endValues = endValue ? getNumberArr(getNaslTimeValue(endValue), 'end') : null;
           if (context && context.partial === 'start') {
-            return getDisableTime(currentTimes, minTimes, endTimes || maxTimes);
+            return getDisableTime(currentTimes, minTimes, endValues || maxTimes);
           }
 
-          return getDisableTime(currentTimes, startTimes || minTimes, maxTimes);
+          return getDisableTime(currentTimes, startValues || minTimes, maxTimes);
         }
 
         return getDisableTime(currentTimes, minTimes, maxTimes);
@@ -244,12 +244,12 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
           onUpdateValue = () => {},
           onUpdateStartTime = () => {},
           onUpdateEndTime = () => {},
-        ] = props.get<Array<(val: string) => void>>(['update:value', 'update:startTime', 'update:endTime']);
+        ] = props.get<Array<(val: string) => void>>(['update:value', 'update:startValue', 'update:endValue']);
         const changeEvent = getChangeEventByValue(v, range, format);
 
         if (range) {
-          onUpdateStartTime(changeEvent.startTime);
-          onUpdateEndTime(changeEvent.endTime);
+          onUpdateStartTime(changeEvent.startValue);
+          onUpdateEndTime(changeEvent.endValue);
         } else {
           onUpdateValue(changeEvent.value);
         }

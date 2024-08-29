@@ -16,7 +16,7 @@ const DEFAULT_FORMAT = 'YYYY-MM-DD';
 export const useExtendsPlugin: NaslComponentPluginOptions = {
   props: [
     'range', 'autoWidth', 'align',
-    'placeholderRight', 'startTime', 'endTime',
+    'placeholderRight', 'startValue', 'endValue',
     'maxTime', 'minTime', 'enablePresets',
   ],
   setup(props) {
