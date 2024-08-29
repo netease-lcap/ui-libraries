@@ -26,6 +26,18 @@ namespace nasl.ui {
     group: 'Feedback',
   })
   export class ElMessage extends ViewComponent {
+    @Method({
+      title: '显示消息',
+      description: '显示消息',
+    })
+    open(): void {}
+
+    @Method({
+      title: '关闭消息',
+      description: '关闭消息',
+    })
+    close(): void {}
+
     constructor(options?: Partial<ElMessageOptions>) {
       super();
     }

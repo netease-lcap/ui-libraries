@@ -31,6 +31,12 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
           const result = await (instance.refs.$base as any).validate(params);
           return result === true;
         },
+        getFormData: async () => {
+          return {
+            name: '哈哈哈',
+            type: '1111',
+          };
+        },
       },
     };
   },

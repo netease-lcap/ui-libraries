@@ -53,6 +53,12 @@ export default {
     this.closeMessage();
   },
   methods: {
+    open() {
+      this.openMessage();
+    },
+    close() {
+      this.closeMessage();
+    },
     openMessage() {
       if (this.instance) {
         this.closeMessage();

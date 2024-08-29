@@ -23,6 +23,10 @@ export default {
     type: Boolean,
     default: undefined,
   },
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
   /** 用于格式化时间，[详细文档](https://day.js.org/docs/en/display/format) */
   format: {
     type: String,

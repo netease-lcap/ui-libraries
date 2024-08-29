@@ -13,6 +13,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-pagination-pro></el-pagination-pro>',
+    template: '<el-pagination-pro :total="22" show-jumper></el-pagination-pro>',
   }),
 };

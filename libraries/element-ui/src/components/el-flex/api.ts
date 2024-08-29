@@ -4,6 +4,12 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      automate: [
+        {
+          command: "WRAP_FREE",
+          useblock: 0
+        }
+      ]
     }
   })
   @Component({
@@ -38,7 +44,7 @@ namespace nasl.ui {
         }]
       },
       onChange: [{
-        clear: ['justify', 'alignment', 'wrap', 'layout']
+        clear: ['justify', 'alignment', 'wrap', 'layout'],
       }],
     })
     mode: 'block' | 'flex' = 'flex';
@@ -186,6 +192,9 @@ namespace nasl.ui {
       description: '加载中状态',
       docDescription: '加载中状态',
       settable: true,
+      setter: {
+        concept: 'SwitchSetter',
+      }
     })
     loading: nasl.core.Boolean = false;
 

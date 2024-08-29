@@ -25,6 +25,8 @@ export default {
   },
   /** 是否禁用组件 */
   disabled: Boolean,
+  /** 只读 */
+  readonly: Boolean,
   /** 是否显示时间选择 */
   enableTimePicker: Boolean,
   /** 第一天从星期几开始 */

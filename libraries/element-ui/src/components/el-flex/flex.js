@@ -25,7 +25,7 @@ export default {
     },
     gutter: {
       type: Number,
-      default: 0,
+      default: 12,
     },
     loading: {
       type: Boolean,
@@ -44,7 +44,7 @@ export default {
       flexWrap: this.wrap ? 'wrap' : 'nowrap',
       gap: `${this.gutter}px`,
     } : {
-      '--el-flex-space-base': `${this.gutter}px`,
+      // '--el-flex-space-base': `${this.gutter}px`,
     };
 
     return h('div', {

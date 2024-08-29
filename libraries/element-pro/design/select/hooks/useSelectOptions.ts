@@ -12,6 +12,8 @@ import {
   ElSelectProps, ElOptionProps, SelectOptionGroup, SelectValue,
 } from '../type';
 import { KeysType } from '../../common';
+import Option from '../option';
+import OptionGroup from '../optionGroup';
 
 type UniOption = (ElOptionProps | SelectOptionGroup) & {
   index?: number;
@@ -62,7 +64,8 @@ export default function useSelectOptions(
       // 处理 slots 中 el-option 与 el-option-group
       const currentSlots = instance.proxy.$slots.default || [];
       currentSlots.forEach((child) => {
-        if (child.componentOptions?.tag === 'el-option-pro') {
+        const compoentName = (child.componentOptions.Ctor as any).options?.name;
+        if (compoentName === Option.name) {
           // 独立选项
           innerOptions.push({
             // 单独处理 style 和 class 参数的透传
@@ -74,7 +77,7 @@ export default function useSelectOptions(
             index: dynamicIndex,
           } as ElOptionProps);
           dynamicIndex += 1;
-        } else if (child.componentOptions?.tag === 'el-option-group-pro') {
+        } else if (compoentName === OptionGroup.name) {
           // 分组选项
           const groupOption = {
             group: (child.componentOptions.propsData as ElOptionProps)?.label,

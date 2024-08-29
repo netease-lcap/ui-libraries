@@ -12,7 +12,51 @@ export default {
 
 export const Default = {
   name: '基础示例',
-  render: () => ({
-    template: '<el-textarea-pro></el-textarea-pro>',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    template: '<el-textarea-pro v-bind="$props"></el-textarea-pro>',
   }),
+  argTypes: {
+    allowInputOverMax: {
+      description: '是否允许输入超过最大长度',
+      control: { type: 'boolean' },
+    },
+    autosize: {
+      description: '自适应内容高度',
+      control: { type: 'boolean' },
+    },
+    minRows: {
+      description: '最小行数',
+      control: { type: 'number' },
+    },
+    maxRows: {
+      description: '最大行数',
+      control: { type: 'number' },
+    },
+    disabled: {
+      description: '禁用',
+      control: { type: 'boolean' },
+    },
+    maxlength: {
+      description: '最大长度',
+      control: { type: 'number' },
+    },
+    placeholder: {
+      description: '占位符',
+      control: { type: 'text' },
+    },
+    readonly: {
+      description: '只读',
+      control: { type: 'boolean' },
+    },
+    status: {
+      description: '状态',
+      control: 'select',
+      options: ['default', 'success', 'warning', 'error'],
+    },
+    tips: {
+      description: '提示',
+      control: { type: 'text' },
+    },
+  },
 };

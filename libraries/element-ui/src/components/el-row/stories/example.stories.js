@@ -5,6 +5,7 @@ import ExampleDemo3 from '../demos/example-demo3.vue';
 import ExampleDemo4 from '../demos/example-demo4.vue';
 import ExampleDemo5 from '../demos/example-demo5.vue';
 import ExampleDemo6 from '../demos/example-demo6.vue';
+import ExampleDemo7 from '../demos/example-demo7.vue';
 
 export default {
   id: 'el-row-examples',
@@ -79,6 +80,17 @@ export const Example6 = {
   render: () => ({
     components: {
       exampleDemo: ExampleDemo6,
+    },
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+/* 列click事件 */
+export const Example7 = {
+  name: '列click事件',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo7,
     },
     template: '<example-demo></example-demo>',
   }),
