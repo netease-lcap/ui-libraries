@@ -2,6 +2,13 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    ideusage: {
+      idetype: "container",
+      childAccept: "['el-header', 'el-aside', 'el-footer', 'el-main', 'el-container'].includes(target.tag)",
+      slotInlineStyle: {
+        default: "height:100%"
+      }
+    }
   })
   @Component({
     title: '布局容器',
@@ -30,20 +37,20 @@ namespace nasl.ui {
     @Slot({
       title: 'Default',
       description: '内容',
-      snippets: [
-        { title: '布局容器', code: '<el-container></el-container>' },
-        { title: 'Header', code: '<el-header></el-header>' },
-        { title: 'Aside', code: '<el-aside></el-aside>' },
-        { title: 'Footer', code: '<el-footer></el-footer>' },
-        { title: 'Main', code: '<el-main></el-main>' },
-      ],
-      emptyBackground: 'add-sub',
+      // snippets: [
+      //   { title: '布局容器', code: '<el-container></el-container>' },
+      //   { title: '顶栏', code: '<el-header style="padding-left: 0;padding-right: 0"></el-header>' },
+      //   { title: '侧边栏', code: '<el-aside></el-aside>' },
+      //   { title: '主区域', code: '<el-main></el-main>' },
+      //   { title: '底栏', code: '<el-footer style="padding-left: 0;padding-right: 0"></el-footer>' },
+      // ],
+      // emptyBackground: 'add-sub',
     })
     slotDefault: () => Array<ViewComponent>;
   }
 
   @Component({
-    title: '头部区域',
+    title: '顶栏',
     icon: 'header',
     description: '',
     group: 'Layout',
@@ -103,7 +110,7 @@ namespace nasl.ui {
   }
 
   @Component({
-    title: '底部区域',
+    title: '底栏',
     icon: 'footer',
     description: '底部区域',
     group: 'Layout',

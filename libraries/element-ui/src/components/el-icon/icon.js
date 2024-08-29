@@ -29,11 +29,13 @@ export default {
     }
 
     let name = this.name || 'picture-outline';
-    if (!name.startsWith('Ri')) {
+    if (!name.startsWith('Ri') && !name.startsWith('ri-') && !name.startsWith('el-icon-')) {
       name = `el-icon-${name}`;
+    } else {
+      name = name.startsWith('Ri') ? kebabCase(name) : name;
     }
     return h('i', {
-      class: kebabCase(name),
+      class: name,
       on: this.$listeners,
     });
   },

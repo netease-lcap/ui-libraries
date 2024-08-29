@@ -145,12 +145,7 @@
     {
         "name": "ElContainer",
         "ideusage": {
-            "idetype": "container",
-            "structured": true,
-            "childAccept": "['el-header', 'el-aside', 'el-footer', 'el-main', 'el-container'].includes(target.tag)",
-            "slotInlineStyle": {
-                "default": "height:100%"
-            }
+            "idetype": "container"
         }
     },
     {
