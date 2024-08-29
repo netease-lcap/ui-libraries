@@ -169,11 +169,11 @@ namespace nasl.ui {
     name: nasl.core.String;
 
     @Event({
-      title: 'On Change',
+      title: '改变后',
       description:
         '值变化时触发。`context.current` 表示当前变化的数据项，如果是全选则为空；`context.type` 表示引起选中数据变化的是选中或是取消选中，`context.option` 表示当前变化的数据项。',
     })
-    onChange: (event: V) => any;
+    onChange: (event: nasl.collection.List<V>) => any;
 
     @Slot({
       title: 'Default',
@@ -285,7 +285,7 @@ namespace nasl.ui {
     readonly: nasl.core.Boolean = false;
 
     @Event({
-      title: 'On Change',
+      title: '改变后',
       description: '值变化时触发',
     })
     onChange: (event: nasl.core.Boolean) => any;

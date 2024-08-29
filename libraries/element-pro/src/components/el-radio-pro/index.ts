@@ -6,6 +6,7 @@ export const ElRadioGroupPro = registerComponent(RadioGroup, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: [],
+  eventNames: ['change'],
 });
 
 export const ElRadioPro = Radio;

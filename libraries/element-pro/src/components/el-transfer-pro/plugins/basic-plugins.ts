@@ -11,9 +11,9 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
   props: ['data', 'valueField', 'textField', 'disabledField'],
   setup({ get: propGet, useComputed }) {
     const dataList = useComputed(['data'], () => {
-      const textField = propGet('textField') || 'label';
-      const valueField = propGet('valueField') || 'value';
-      const disabledField = propGet('disabledField') || 'disabled';
+      const textField = propGet<string>('textField') || 'label';
+      const valueField = propGet<string>('valueField') || 'value';
+      const disabledField = propGet<string>('disabledField') || 'disabled';
       const data = propGet<any>('data') || [];
 
       const optionList = data.map((item) => {

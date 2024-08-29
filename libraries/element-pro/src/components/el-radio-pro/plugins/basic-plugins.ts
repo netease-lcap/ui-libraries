@@ -1,6 +1,6 @@
 /* 组件功能扩展插件 */
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
-import { at } from 'lodash';
+import { at, isObject } from 'lodash';
 import { createUseUpdateSync } from '@lcap/vue2-utils';
 
 export const useUpdateSync = createUseUpdateSync([{ name: 'value', event: 'change' }]);
@@ -14,11 +14,11 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
     const options = useComputed(['data'], () => {
       if (dataSource) {
         const slotItemContent = propGet('slotItem');
-        const valueField = propGet<string>('valueField') || 'value';
+        const valueField = propGet<any>('valueField') || 'value';
         const itemProps = propGet<(c: any) => any>('itemProps') || (() => ({}));
         const data = propGet<any>('data') || [];
         return data.map((item, i) => {
-          const [value] = at(item, [valueField]);
+          const [value] = isObject(item) ? at(item, valueField) : [item];
           const current = {
             item,
             index: i,
