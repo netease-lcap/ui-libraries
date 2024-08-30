@@ -1,7 +1,17 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
-  @IDEExtraInfo({})
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'modal',
+      cacheOpenKey: 'visible',
+      structured: true,
+      selector: {
+        expression: 'this',
+        cssSelector: '.el-dialog',
+      },
+    },
+  })
   @Component({
     title: '对话框',
     icon: 'dialog',

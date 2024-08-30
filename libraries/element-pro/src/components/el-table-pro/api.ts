@@ -389,6 +389,16 @@ namespace nasl.ui {
     })
     pageSizeOptions: nasl.core.String = '[10, 20, 50]';
 
+    @Prop({
+      group: '数据属性',
+      title: '默认每页条数',
+      docDescription: '每页的数据条数。默认20条。在"分页"属性开启时有效',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    pageSize: nasl.core.Integer = 10;
+
     // @Prop({
     //   group: '主要属性',
     //   title: 'Pagination Affixed Bottom',

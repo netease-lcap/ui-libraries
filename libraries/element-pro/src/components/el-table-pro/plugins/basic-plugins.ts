@@ -25,7 +25,7 @@ export const useTable = {
         const { cell, title } = _.get(vnode, 'data.scopedSlots', {});
         const cellProps = _.isFunction(cell) && !attrs.type
           ? {
-            cell: (h, { row, rowIndex, col }) => cell({ row, index: rowIndex, col }),
+            cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col }),
           }
           : {};
         const titleProps = _.isFunction(title)

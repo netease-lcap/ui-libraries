@@ -2,15 +2,15 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    "ideusage": {
-      "idetype": "drawer",
-      "cacheOpenKey": "visible",
-      "structured": true,
-      "selector": {
-        "expression": "this",
-        "cssSelector": ".el-drawer"
+    ideusage: {
+      idetype: 'drawer',
+      cacheOpenKey: 'visible',
+      structured: true,
+      selector: {
+        expression: 'this',
+        cssSelector: '.el-drawer',
       },
-    }
+    },
   })
   @Component({
     title: '抽屉',
@@ -28,7 +28,7 @@ namespace nasl.ui {
       title: 'Close Drawer',
       description: '用于关闭 Drawer, 该方法会调用传入的 `before-close` 方法',
     })
-    closeDrawer(): any { }
+    closeDrawer(): any {}
   }
 
   export class ElDrawerOptions extends ViewComponentOptions {
