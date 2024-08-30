@@ -102,4 +102,6 @@ export interface NaslComponentExtendInfo {
   eventNames?: string[];
   /* 代理组件提供的方法 */
   methodNames?: string[];
+  /* 组件支持v-model 配置 */
+  model?: ComponentOptions<any>['model'],
 }

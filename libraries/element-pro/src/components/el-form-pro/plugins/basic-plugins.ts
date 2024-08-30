@@ -1,15 +1,31 @@
-import type { VNode } from 'vue';
-import { type SubmitContext, type ValidateResultContext, Space } from '@element-pro';
+import Vue, { type VNode } from 'vue';
+import {
+  type SubmitContext,
+  type ValidateResultContext,
+  Space,
+} from '@element-pro';
+import {
+  isObject,
+  set as lodashSet,
+  get as lodashGet,
+  cloneDeep,
+} from 'lodash';
 import { type NaslComponentPluginOptions, $ref } from '@lcap/vue2-utils';
 import { isEmptyVNodes } from '@lcap/vue2-utils/plugins/utils';
-import { getCurrentInstance, provide } from '@vue/composition-api';
+import {
+  getCurrentInstance,
+  provide,
+  reactive,
+  toRaw,
+} from '@vue/composition-api';
 import {
   LabelWidthType,
   FORM_DEFAULT_LAYOUT,
   GutterType,
   FORM_CONTEXT,
+  LCAP_FORM_UID,
 } from '../constants';
-import type { FormExtendsContext, LayoutMode } from '../types';
+import type { FormExtendsContext, InitFieldOptions, LayoutMode } from '../types';
 
 const getTemplateCount = (counts: number | string) => {
   if (!Number.isNaN(counts as number) || typeof counts === 'string') {
@@ -19,12 +35,48 @@ const getTemplateCount = (counts: number | string) => {
   return counts;
 };
 
+export interface FormFieldMata {
+  bindValue: any;
+  change?: ((v: any) => void) | null;
+}
+
+function splitNameToPath(name) {
+  return name.replace(/\[/g, '.').replace(/\]/g, '').split('.');
+}
+
+function deepVueSet(data: any, name: string, value: any) {
+  const keys = splitNameToPath(name);
+  let current = data;
+  while (true) {
+    const key = keys.shift();
+    const val = current[key];
+    if (keys.length === 0) {
+      if (val === undefined) {
+        Vue.set(current, key, value);
+      }
+      break;
+    }
+
+    const nextKey = key;
+    if (!Number.isNaN(Number(nextKey)) && !Array.isArray(val)) {
+      Vue.set(current, key, []);
+    } else if (!Array.isArray(val) && !isObject(val)) {
+      Vue.set(current, key, {});
+    }
+
+    current = current[key];
+  }
+}
+
 /* 组件功能扩展插件 */
 export const useExtensPlugin: NaslComponentPluginOptions = {
   props: ['layoutMode', 'labelWidthType', 'gutterType', 'gutter', 'labelEllipsis', 'repeat'],
   setup(props, { h }) {
     const { useComputed } = props;
     const instance = getCurrentInstance();
+    const formData = reactive({});
+    const formFieldMetas: Record<string, FormFieldMata> = {};
+
     const labelWidth = useComputed(['labelWidthType', 'labelWidth'], (
       labelWidthType = '',
       width = '100px',
@@ -69,9 +121,75 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       return undefined;
     });
 
+    function initField({ name, value = null, change }: InitFieldOptions) {
+      if (formFieldMetas[name]) {
+        return;
+      }
+
+      deepVueSet(formData, name, value);
+
+      formFieldMetas[name] = {
+        bindValue: value,
+        change,
+      };
+    }
+
+    function removeField(name) {
+      delete formFieldMetas[name];
+    }
+
+    function setFormData(d: Record<string, any>) {
+      if (!isObject(d)) {
+        return;
+      }
+
+      Object.assign(formData, d);
+      Object.keys(formFieldMetas).forEach((key) => {
+        if (typeof formFieldMetas[key].change !== 'function') {
+          return;
+        }
+
+        const val = lodashGet(d, key);
+        if (val === undefined) {
+          return;
+        }
+
+        formFieldMetas[key].change(val);
+      });
+    }
+
+    function setFieldValue(key: string, value: any) {
+      if (!key) {
+        return;
+      }
+
+      lodashSet(formData, key, value);
+      if (formFieldMetas[key] && typeof formFieldMetas[key].change === 'function') {
+        formFieldMetas[key].change(value);
+      }
+    }
+
+    function getFieldValue(key: string) {
+      return lodashGet(formData, key);
+    }
+
+    function getFormData() {
+      const d = cloneDeep(toRaw(formData));
+      Object.keys(d).forEach((key) => {
+        if (key.startsWith(LCAP_FORM_UID)) {
+          delete d[key];
+        }
+      });
+      return d;
+    }
+
     provide<FormExtendsContext>(FORM_CONTEXT, {
       labelWidth,
       labelEllipsis: useComputed('labelEllipsis', (v) => !!v),
+      setFieldValue,
+      getFieldValue,
+      initField,
+      removeField,
     });
 
     return {
@@ -79,6 +197,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       layout: 'vertical',
       style,
       class: className,
+      data: formData,
       onSubmit: (context: SubmitContext) => {
         const onSubmit = props.get<(e: any) => void>('onSubmit') || (() => {});
         onSubmit({
@@ -139,12 +258,10 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
           const result = await (instance.refs.$base as any).validate(params);
           return result === true;
         },
-        getFormData: async () => {
-          return {
-            name: '哈哈哈',
-            type: '1111',
-          };
-        },
+        setFormData,
+        getFormData,
+        setFieldValue,
+        getFieldValue,
       },
     };
   },

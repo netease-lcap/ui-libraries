@@ -25,6 +25,7 @@ export const registerComponent = (
     nativeEvents,
     methodNames,
     eventNames,
+    model,
   }: NaslComponentExtendInfo = {},
 ) => {
   if (!slotNames) {
@@ -54,7 +55,9 @@ export const registerComponent = (
     inheritAttrs: false,
     props: {
       plugin: {},
+      ...(model && model.prop ? { [model.prop]: {} } : {}),
     },
+    model,
     data() {
       return {
         renderKey: uid(),
@@ -132,6 +135,7 @@ export const registerComponent = (
           $methodNames: methodNames,
           $eventNames: eventNames,
           ...attrs,
+          ...(model && model.prop ? { [model.prop]: self[model.prop] } : {}),
         },
         scopedSlots,
         on: self.$listeners,

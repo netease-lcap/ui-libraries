@@ -22,6 +22,30 @@ namespace nasl.ui {
       description: '获取表单数据',
     })
     getFormData(): any {}
+
+    @Method({
+      title: '设置表单数据',
+      description: '设置表单数据'
+    })
+    setFormData(
+      @Param({
+        title: '表单数据'
+      })
+      data: any,
+    ): void {}
+
+    @Method({
+      title: '设置表单字段值',
+      description: '设置表单字段值',
+    })
+    setFieldValue(name: nasl.core.String, value: any): void {};
+
+    @Method({
+      title: '获取表单字段值',
+      description: '获取表单字段值',
+    })
+    getFieldValue(name: nasl.core.String): any {};
+
     @Method({
       title: '清空校验结果',
       description:
@@ -451,7 +475,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
-      title: '字段名称',
+      title: '表单字段名称',
       description: '表单字段名称',
       setter: { concept: 'InputSetter' },
     })

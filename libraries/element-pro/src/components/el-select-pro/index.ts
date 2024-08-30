@@ -6,6 +6,10 @@ export const ElSelectPro = registerComponent(Select, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: [],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
 });
 export const ElOptionPro = Option;
 export const ElOptionGroupPro = OptionGroup;

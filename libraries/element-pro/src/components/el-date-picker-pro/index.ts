@@ -11,6 +11,10 @@ export const ElDatePickerPro = registerComponent(DatePicker, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: [],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
 });
 export const ElDateRangePickerPro = DateRangePicker;
 export const ElDatePickerPanelPro = DatePickerPanel;

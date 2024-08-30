@@ -1,4 +1,5 @@
 export const FORM_CONTEXT = 'ELEMENT_PRO_FORM';
+export const FORM_ITEM_CONTEXT = 'ELEMENT_PRO_FORM_ITEM';
 export const FORM_DEFAULT_LAYOUT = 'linear';
 
 export const LabelWidthType = {
@@ -12,3 +13,5 @@ export const GutterType = {
   medium: '16px',
   large: '24px',
 };
+
+export const LCAP_FORM_UID = 'LCAP_FORM_UID';

@@ -6,6 +6,10 @@ export const ElCheckboxGroupPro = registerComponent(CheckboxGroup, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: [],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
 });
 export const ElCheckboxPro = Checkbox;
 

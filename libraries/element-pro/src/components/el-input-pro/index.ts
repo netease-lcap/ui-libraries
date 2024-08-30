@@ -12,7 +12,12 @@ export const ElInputPro = registerComponent(Input, plugins, {
     // 'tips',
   ],
   methodNames: [],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
 });
+
 export const ElInputGroupPro = InputGroup;
 
 export default ElInputPro;
