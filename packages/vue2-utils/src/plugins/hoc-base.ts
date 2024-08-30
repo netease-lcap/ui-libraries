@@ -15,7 +15,6 @@ import { kebabCase } from 'lodash';
 import PluginManager from './plugin';
 import { MapGetKey, PluginSetupRef } from './types';
 import {
-  getPropKeys,
   getRefValueMap,
   splitPropsAndAttrs,
   splitListeners,
@@ -362,9 +361,8 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const { $plugin: manger, $component: baseComponent } = props;
-    // const compName = baseComponent.name;
-    const propKeys = getPropKeys(typeof baseComponent === 'object' ? baseComponent : (baseComponent as any).options);
-    const keys = manger.getPluginPropKeys(propKeys);
+    const propKeys = manger.basePropKeys;
+    const keys = manger.allPropKeys;
     const eventNames: string[] = (props.$eventNames || []) as string[];
     const vueInstance: any = ctx.root;
     const isDesigner = inject('VUE_APP_DESIGNER', false) || (vueInstance.$env && vueInstance.$env.VUE_APP_DESIGNER);

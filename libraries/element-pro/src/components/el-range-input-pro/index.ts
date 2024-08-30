@@ -6,6 +6,10 @@ export const ElRangeInputPro = registerComponent(RangeInput, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: [],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
 });
 export const ElRangeInputPopupPro = RangeInputPopup;
 

@@ -22,6 +22,30 @@ namespace nasl.ui {
       description: '获取表单数据',
     })
     getFormData(): any {}
+
+    @Method({
+      title: '设置表单数据',
+      description: '设置表单数据'
+    })
+    setFormData(
+      @Param({
+        title: '表单数据'
+      })
+      data: any,
+    ): void {}
+
+    @Method({
+      title: '设置表单字段值',
+      description: '设置表单字段值',
+    })
+    setFieldValue(name: nasl.core.String, value: any): void {};
+
+    @Method({
+      title: '获取表单字段值',
+      description: '获取表单字段值',
+    })
+    getFieldValue(name: nasl.core.String): any {};
+
     @Method({
       title: '清空校验结果',
       description:
@@ -106,24 +130,18 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Error Message',
-    //   description:
-    //     '表单错误信息配置，示例：`{ idcard: "请输入正确的身份证号码", max: "字符长度不能超过 ${max}" }`。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // errorMessage: object;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Form Controlled Components',
-    //   description:
-    //     '允许表单统一控制禁用状态的自定义组件名称列表。默认会有组件库的全部输入类组件：ElInput、ElInputNumber、ElCascader、ElSelect、ElOption、ElSwitch、TCheckbox、ElCheckboxGroup、ElRadio、ElRadioGroup、ElTreeSelect、ElDatePicker、ElTimePicker、ElUpload、ElTransfer、ElSlider。对于自定义组件，组件内部需要包含可以控制表单禁用状态的变量 `formDisabled`。示例：`["CustomUpload", "CustomInput"]`。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // formControlledComponents: any[];
     @Prop({
+      group: '主要属性',
+      title: '布局模式',
+      description: '布局模式，可选线性布局/栅格布局',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '线性布局' }, { title: '栅格布局' }],
+      }
+    })
+    layoutMode: 'linear' | 'grid' = 'linear';
+
+    @Prop<ElFormProOptions, 'layout'>({
       group: '主要属性',
       title: '表单布局',
       description:
@@ -132,8 +150,22 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '纵向布局' }, { title: '行内布局' }],
       },
+      if: (_) => _.layoutMode === 'linear',
     })
     layout: 'vertical' | 'inline' = 'vertical';
+
+    @Prop<ElFormProOptions, 'repeat'>({
+      group: '主要属性',
+      title: '列数',
+      description: '整个表单的划分列数',
+      docDescription: '整个表单的划分列数。',
+      setter: {
+        concept: 'NumberInputSetter',
+        min: 1,
+      },
+      if: (_) => _.layoutMode === 'grid',
+    })
+    repeat: nasl.core.Integer = 4;
 
     @Prop({
       group: '主要属性',
@@ -153,10 +185,67 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '标签宽度',
+      description: '可以整体设置label标签宽度',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '小' },
+          { title: '中' },
+          { title: '大' },
+          { title: '自定义' },
+        ]
+      }
+    })
+    labelWidthType: 'small' | 'medium' | 'large' | '' = '';
+
+    @Prop<ElFormProOptions, 'labelWidth'>({
+      group: '主要属性',
+      title: '自定义标签宽度',
       description: '可以整体设置label标签宽度，默认为100px',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'InputSetter',
+      },
+      if: (_) => !_.labelWidthType,
     })
     labelWidth: nasl.core.String | nasl.core.Decimal = '100px';
+
+    @Prop({
+      group: '主要属性',
+      title: '标签过长省略',
+      description: '文字过长是否省略显示。默认文字超出时会换行。',
+      docDescription: '文字过长是否省略显示，默认文字超出时会换行。',
+      setter: {
+          concept: 'SwitchSetter',
+      },
+    })
+    labelEllipsis: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '表单项间隔',
+      description: '可以整体设置表单项间隔',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '小' },
+          { title: '中' },
+          { title: '大' },
+          { title: '自定义' },
+        ]
+      }
+    })
+    gutterType: 'small' | 'medium' | 'large' | ''  = 'medium';
+
+    @Prop<ElFormProOptions, 'gutter'>({
+      group: '主要属性',
+      title: '自定义表单项间隔(px)',
+      description: '可以整体设置表单项间隔, 例如 8px',
+      setter: {
+        concept: 'InputSetter',
+      },
+      if: (_) => !_.gutterType,
+    })
+    gutter: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -296,6 +385,18 @@ namespace nasl.ui {
     // })
     // for: nasl.core.String;
 
+    @Prop({
+      group: '主要属性',
+      title: '占据数',
+      description: '列跨越的格数, 总格式',
+      docDescription: '列跨越的格数。',
+      setter: {
+          concept: 'NumberInputSetter',
+          min: 1,
+      },
+    })
+    colSpan: nasl.core.Integer = 1;
+
     @Prop<ElFormItemProOptions, 'help'>({
       group: '主要属性',
       title: '帮助文本',
@@ -319,14 +420,6 @@ namespace nasl.ui {
     })
     helpIsSlot: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Label',
-    //   description: '字段标签名称。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // label: any = '';
-
     @Prop({
       group: '主要属性',
       title: '标签布局',
@@ -347,14 +440,42 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '标签宽度',
+      description: '可以整体设置label标签宽度',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '小' },
+          { title: '中' },
+          { title: '大' },
+          { title: '自定义' },
+        ]
+      }
+    })
+    labelWidthType: 'small' | 'medium' | 'large' | '' = '';
+
+    @Prop({
+      group: '主要属性',
+      title: '标签宽度',
       description: '可以整体设置标签宽度，优先级高于表单项',
       setter: { concept: 'InputSetter' },
     })
     labelWidth: nasl.core.String | nasl.core.Decimal;
 
+
+    @Prop({
+      group: '主要属性',
+      title: '标签过长省略',
+      description: '文字过长是否省略显示。默认文字超出时会换行。',
+      docDescription: '文字过长是否省略显示，默认文字超出时会换行。',
+      setter: {
+          concept: 'SwitchSetter',
+      },
+    })
+    labelEllipsis: nasl.core.Boolean;
+
     @Prop({
       group: '数据属性',
-      title: '字段名称',
+      title: '表单字段名称',
       description: '表单字段名称',
       setter: { concept: 'InputSetter' },
     })
@@ -385,14 +506,6 @@ namespace nasl.ui {
     })
     showErrorMessage: nasl.core.Boolean;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '校验状态',
-    //   description: '校验状态，可在需要完全自主控制校验状态时使用。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // status: nasl.core.String;
-
     @Prop({
       group: '主要属性',
       title: '显示状态图标',
@@ -409,15 +522,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     successBorder: nasl.core.Boolean = false;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Tips',
-    //   description:
-    //     '自定义提示内容，样式跟随 `status` 变动，可在需要完全自主控制校验规则时使用。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // tips: any;
 
     @Slot({
       title: '说明内容',

@@ -25,6 +25,7 @@ export const registerComponent = (
     nativeEvents,
     methodNames,
     eventNames,
+    model,
   }: NaslComponentExtendInfo = {},
 ) => {
   if (!slotNames) {
@@ -43,12 +44,20 @@ export const registerComponent = (
     eventNames = [];
   }
 
+  const componentOptions = typeof baseComponent === 'function' ? baseComponent.options : baseComponent;
+
+  if (!componentOptions) {
+    throw new Error('注册组件需要获取组件的 options , 传入数据错误');
+  }
+
   return {
-    name: baseComponent.name,
+    name: componentOptions.name,
     inheritAttrs: false,
     props: {
       plugin: {},
+      ...(model && model.prop ? { [model.prop]: {} } : {}),
     },
+    model,
     data() {
       return {
         renderKey: uid(),
@@ -56,7 +65,11 @@ export const registerComponent = (
     },
     created() {
       const self = this as any;
-      self.manger = new PluginManager({ name: baseComponent.name, plugin: { ...pluginOption, ...self.plugin } });
+      self.manger = new PluginManager({
+        name: componentOptions.name,
+        componentOptions,
+        plugin: { ...pluginOption, ...self.plugin },
+      });
     },
     watch: {
       plugin(v) {
@@ -68,6 +81,10 @@ export const registerComponent = (
     },
     render(h) {
       const self = this as any;
+      if (!self.manger.valid) {
+        return null;
+      }
+
       const scopedSlots = {
         ...self.$scopedSlots,
       };
@@ -97,17 +114,29 @@ export const registerComponent = (
         }
       });
 
+      const attrs = {
+        ...this.$attrs,
+      };
+
+      // 初始值
+      self.manger.allPropKeys.forEach((key: string) => {
+        if (!Object.prototype.hasOwnProperty.call(attrs, key)) {
+          attrs[key] = undefined;
+        }
+      });
+
       return h(HocBaseComponent, {
         key: self.renderKey,
-        props: {
+        attrs: {
           $plugin: self.manger,
           $component: baseComponent,
           $slotNames: slotNames,
           $nativeEvents: nativeEvents,
           $methodNames: methodNames,
           $eventNames: eventNames,
+          ...attrs,
+          ...(model && model.prop ? { [model.prop]: self[model.prop] } : {}),
         },
-        attrs: self.$attrs,
         scopedSlots,
         on: self.$listeners,
       }, childrenNodes);

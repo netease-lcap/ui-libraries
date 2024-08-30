@@ -6,6 +6,10 @@ export const ElUploadPro = registerComponent(Upload, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: ['triggerUpload', 'uploadFiles'],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
 });
 
 export default ElUploadPro;

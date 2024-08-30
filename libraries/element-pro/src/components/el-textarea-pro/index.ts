@@ -6,6 +6,10 @@ export const ElTextareaPro = registerComponent(Textarea, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: [],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
 });
 
 export default ElTextareaPro;

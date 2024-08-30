@@ -22,12 +22,12 @@ namespace nasl.ui {
     @Prop({
       title: '起始值',
     })
-    startTime: nasl.core.Time;
+    startValue: nasl.core.Time;
 
     @Prop({
       title: '结束值',
     })
-    endTime: nasl.core.Time;
+    endValue: nasl.core.Time;
 
     constructor(options?: Partial<ElTimePickerProOptions>) {
       super();
@@ -57,7 +57,7 @@ namespace nasl.ui {
     })
     value: nasl.core.String | nasl.core.Time;
 
-    @Prop<ElTimePickerProOptions, 'startTime'>({
+    @Prop<ElTimePickerProOptions, 'startValue'>({
       group: '数据属性',
       title: '起始值',
       description: '默认显示的起始时间值，格式如08:08:08',
@@ -65,9 +65,9 @@ namespace nasl.ui {
       if: (_) => _.range === true,
       settable: true,
     })
-    startTime: nasl.core.String | nasl.core.Time;
+    startValue: nasl.core.String | nasl.core.Time;
 
-    @Prop<ElTimePickerProOptions, 'endTime'>({
+    @Prop<ElTimePickerProOptions, 'endValue'>({
       group: '数据属性',
       title: '结束值',
       description: '默认显示的结束时间值，格式如08:08:08',
@@ -75,7 +75,7 @@ namespace nasl.ui {
       if: (_) => _.range === true,
       settable: true,
     })
-    endTime: nasl.core.String | nasl.core.Time;
+    endValue: nasl.core.String | nasl.core.Time;
 
     @Prop({
       group: '主要属性',
@@ -245,8 +245,8 @@ namespace nasl.ui {
     })
     onBlur: (event: {
       value: nasl.core.String | nasl.core.Time;
-      startTime: nasl.core.String | nasl.core.Time;
-      endTime: nasl.core.String | nasl.core.Time;
+      startValue: nasl.core.String | nasl.core.Time;
+      endValue: nasl.core.String | nasl.core.Time;
       position: 'start' | 'end';
     }) => any;
 
@@ -256,8 +256,8 @@ namespace nasl.ui {
     })
     onChange: (event: {
       value: nasl.core.String | nasl.core.Time;
-      startTime: nasl.core.String | nasl.core.Time;
-      endTime: nasl.core.String | nasl.core.Time;
+      startValue: nasl.core.String | nasl.core.Time;
+      endValue: nasl.core.String | nasl.core.Time;
     }) => any;
 
     @Event({
@@ -272,8 +272,8 @@ namespace nasl.ui {
     })
     onFocus: (event: {
       value: nasl.core.String | nasl.core.Time;
-      startTime: nasl.core.String | nasl.core.Time;
-      endTime: nasl.core.String | nasl.core.Time;
+      startValue: nasl.core.String | nasl.core.Time;
+      endValue: nasl.core.String | nasl.core.Time;
       position: 'start' | 'end';
     }) => any;
 
@@ -283,8 +283,8 @@ namespace nasl.ui {
     })
     onInput: (event: {
       value: nasl.core.String | nasl.core.Time;
-      startTime: nasl.core.String | nasl.core.Time;
-      endTime: nasl.core.String | nasl.core.Time;
+      startValue: nasl.core.String | nasl.core.Time;
+      endValue: nasl.core.String | nasl.core.Time;
       position: 'start' | 'end';
     }) => any;
 
@@ -300,8 +300,8 @@ namespace nasl.ui {
     })
     onPick: (event: {
       value: nasl.core.String | nasl.core.Time;
-      startTime: nasl.core.String | nasl.core.Time;
-      endTime: nasl.core.String | nasl.core.Time;
+      startValue: nasl.core.String | nasl.core.Time;
+      endValue: nasl.core.String | nasl.core.Time;
       position: 'start' | 'end';
     }) => any;
   }

@@ -13,6 +13,7 @@ export * from './range-input';
 export * from './input-number';
 export * from './radio';
 export * from './select';
+export * from './space';
 export * from './slider';
 export * from './switch';
 export * from './select-input';

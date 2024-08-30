@@ -6,6 +6,10 @@ export const ElCascaderPro = registerComponent(Cascader, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: [],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
 });
 
 export default ElCascaderPro;

@@ -230,7 +230,7 @@ namespace nasl.ui {
     loop: nasl.core.Boolean = true;
 
     @Event({
-      title: 'onChange',
+      title: '改变后',
       description: '幻灯片切换时触发',
     })
     onChange: (event: {

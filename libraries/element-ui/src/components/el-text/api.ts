@@ -3,7 +3,10 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
-      editable: 'children',
+      idetype: "element",
+      editable: "text",
+      textholder: "text",
+      useFxOrEg: { property: "text" } 
     },
   })
   @Component({

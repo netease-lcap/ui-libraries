@@ -6,6 +6,10 @@ export const ElTagInputPro = registerComponent(TagInput, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: [],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
 });
 
 export default ElTagInputPro;

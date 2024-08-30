@@ -1,6 +1,13 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: "container",
+      childAccept: "target.tag === 'el-col'",
+      structured: true
+    }
+  })
   @Component({
     title: '栅格布局',
     icon: 'row',
@@ -100,6 +107,15 @@ namespace nasl.ui {
     }
   }
 
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: "container",
+      parentAccept: "target.tag === 'el-row'",
+      slotInlineStyle: {
+        default: "min-width:auto"
+      }
+    }
+  })
   export class ElColOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',

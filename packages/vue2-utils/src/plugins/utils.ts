@@ -34,7 +34,7 @@ export function getPropDefs(component: ComponentOptions<Vue>, props: PropDef[] =
     for (const key in component.props) {
       const val = component.props[key];
       const name = camelCase(key);
-      const def = (isPlainObject(val) ? val : { name, type: val }) as any;
+      const def = (isPlainObject(val) ? { ...val, name } : { name, type: val }) as any;
       const i = props.findIndex((p) => p.name === name);
       if (i === -1) {
         props.push(def);
