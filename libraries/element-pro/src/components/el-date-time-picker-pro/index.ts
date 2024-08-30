@@ -10,6 +10,7 @@ export const ElDateTimePickerPro = registerComponent(DatePicker, plugins, {
     prop: 'value',
     event: 'update:value',
   },
+  rangeModel: ['startValue', 'endValue'],
 });
 
 export default ElDateTimePickerPro;

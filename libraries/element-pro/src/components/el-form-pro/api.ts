@@ -113,14 +113,14 @@ namespace nasl.ui {
 
   export class ElFormProOptions extends ViewComponentOptions {
     @Prop({
+      title: '自动清空字段值',
+      description: '表单项隐藏时自动清空字段值',
       group: '数据属性',
-      title: '表单数据',
-      description: '绑定表单数据，表单项可通过字段名获取值',
       setter: {
-        concept: 'InputSetter',
+        concept: 'SwitchSetter',
       },
     })
-    data: object = {};
+    clearFieldOnDestroy: nasl.core.Boolean = false;
 
     @Prop({
       group: '状态属性',
@@ -384,6 +384,48 @@ namespace nasl.ui {
     //   setter: { concept: 'InputSetter' },
     // })
     // for: nasl.core.String;
+    @Prop<ElFormItemProOptions, 'name'>({
+      group: '数据属性',
+      title: '表单字段名称',
+      description: '表单字段名称',
+      setter: { concept: 'InputSetter' },
+      if: (_) => !_.useRangeValue,
+    })
+    name: nasl.core.String;
+
+    @Prop<ElFormItemProOptions, 'useRangeValue'>({
+      group: '数据属性',
+      title: '使用区间字段',
+      description: '使用区间字段, 用于日期、时间、日期时间选择器开启区间选择时，托管起始值与结束值',
+      setter: { concept: 'SwitchSetter' },
+      onChange: [{
+        clear: ['startFieldName', 'endFieldName'],
+        if: (_) => !_,
+      }, {
+        clear: ['name'],
+        if: (_) => !_
+      }],
+      bindHide: true,
+    })
+    useRangeValue: nasl.core.Boolean = false;
+
+    @Prop<ElFormItemProOptions, 'startFieldName'>({
+      group: '数据属性',
+      title: '起始值字段名称',
+      description: '起始值字段名称，对应区间选择时起始值字段',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => _.useRangeValue === true,
+    })
+    startFieldName: nasl.core.String;
+
+    @Prop<ElFormItemProOptions, 'endFieldName'>({
+      group: '数据属性',
+      title: '结束值字段名称',
+      description: '结束值字段名称，对应选择时结束值字段',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => _.useRangeValue === true,
+    })
+    endFieldName: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -472,14 +514,6 @@ namespace nasl.ui {
       },
     })
     labelEllipsis: nasl.core.Boolean;
-
-    @Prop({
-      group: '数据属性',
-      title: '表单字段名称',
-      description: '表单字段名称',
-      setter: { concept: 'InputSetter' },
-    })
-    name: nasl.core.String;
 
     @Prop({
       group: '主要属性',

@@ -15,6 +15,7 @@ export const ElDatePickerPro = registerComponent(DatePicker, plugins, {
     prop: 'value',
     event: 'update:value',
   },
+  rangeModel: ['startValue', 'endValue'],
 });
 export const ElDateRangePickerPro = DateRangePicker;
 export const ElDatePickerPanelPro = DatePickerPanel;

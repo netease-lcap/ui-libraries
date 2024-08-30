@@ -70,7 +70,10 @@ function deepVueSet(data: any, name: string, value: any) {
 
 /* 组件功能扩展插件 */
 export const useExtensPlugin: NaslComponentPluginOptions = {
-  props: ['layoutMode', 'labelWidthType', 'gutterType', 'gutter', 'labelEllipsis', 'repeat'],
+  props: [
+    'layoutMode', 'labelWidthType', 'gutterType',
+    'gutter', 'labelEllipsis', 'repeat', 'clearFieldOnDestroy',
+  ],
   setup(props, { h }) {
     const { useComputed } = props;
     const instance = getCurrentInstance();
@@ -135,7 +138,14 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     }
 
     function removeField(name) {
+      if (!name) {
+        return;
+      }
       delete formFieldMetas[name];
+      const clearFieldOnDestroy = props.get<boolean>('clearFieldOnDestroy');
+      if (clearFieldOnDestroy || name.startsWith(LCAP_FORM_UID)) {
+        lodashSet(formData, name, null);
+      }
     }
 
     function setFormData(d: Record<string, any>) {

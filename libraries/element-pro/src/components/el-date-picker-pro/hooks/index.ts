@@ -112,8 +112,8 @@ export const useDatePickerValue = (props: MapGet, format: string) => {
       onUpdateValue(getNaslDateValue(Array.isArray(v) ? v[0] : v, format));
     } else {
       valueRef.value = Array.isArray(d) ? [dayjs2Date(d[0]), dayjs2Date(d[1])] : [null, null];
-      onUpdateStartValue(getNaslDateValue(d || d[0], format));
-      onUpdateEndValue(getNaslDateValue(d || d[1], format));
+      onUpdateStartValue(getNaslDateValue(d[0], format));
+      onUpdateEndValue(getNaslDateValue(d[1], format));
     }
   }
 
