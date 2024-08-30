@@ -255,9 +255,13 @@ Toast.allowmultiple = (value = true) => {
 Toast.install = () => {
   Vue.use(VueToast);
   Vue.use(VueToastGroup);
+  Vue.use(VueToastDesigner);
 };
 
 Toast.Component = VueToastDesigner;
 Vue.prototype.$toast = Toast;
 
 export default Toast;
+export {
+  VueToastDesigner,
+};

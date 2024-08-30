@@ -228,7 +228,17 @@
         "name": "VanButton",
         "ideusage": {
             "idetype": "element",
-            "translateBindingProperty": ["icon", "text"]
+            "translateBindingProperty": ["icon", "text"],
+            "style": [
+                {
+                    "selector": ".van-loading__spinner",
+                    "declaration": "animation-duration: 2s!important"
+                },
+                {
+                    "selector": ".van-loading__spinner *",
+                    "declaration": "animation-duration: 2s!important"
+                }
+            ]
         }
     },
     {
@@ -247,7 +257,16 @@
             "events": {
                 "click": true
             },
-            "translateBindingProperty": ["duration"]
+            "translateBindingProperty": ["duration"],
+            "additionalAttribute": {
+                ":dataSource": {
+                    "condition": "this.getAttribute('dataSource')",
+                    "value": "\"[{}, {}, {}]\""
+                }
+            },
+            "slotInlineStyle": {
+                "item": "height: 100%"
+            }
         }
     },
     {
@@ -289,7 +308,13 @@
     {
         "name": "VanNoticeBar",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "style": [
+                {
+                    "selector": ".van-notice-bar__content",
+                    "declaration": "transition-timing-function: linear !important"
+                }
+            ]
         }
     },
     {
@@ -352,7 +377,13 @@
     {
         "name": "VanGallery",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "additionalAttribute": {
+                ":dataSource": {
+                    "condition": "this.getAttribute('dataSource')",
+                    "value": "\"[{}, {}, {}]\""
+                }
+            }
         }
     },
     {
@@ -511,7 +542,7 @@
             },
             "scopedSlots": ["title", "picker-top", "pannel-title", "picker-bottom"],
             "namedSlotOmitWrapper": ["picker-top", "picker-bottom"],
-            "translateBindingProperty": ["startValue", "endValue", "value", "minDate", "maxDate", "title", "placeholder"]
+            "translateBindingProperty": ["startValue", "endValue", "minDate", "maxDate", "title", "placeholder"]
         }
     },
     {
@@ -570,6 +601,9 @@
             "selector": {
                 "expression": "this",
                 "cssSelector": "div[class^='van-popup']"
+            },
+            "slotInlineStyle": {
+                "default": "height: 100%"
             }
         }
     },
@@ -577,7 +611,7 @@
         "name": "VanToast",
         "ideusage": {
             "idetype": "messager",
-            "cacheOpenKey": "value",
+            "cacheOpenKey": "realValue",
             "elementSutando": {
                 "condition": true,
                 "component": "VueToastDesigner",
