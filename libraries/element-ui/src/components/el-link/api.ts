@@ -1,7 +1,11 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
-  @IDEExtraInfo({})
+  @IDEExtraInfo({
+    ideusage: {
+      editable: 'children',
+    },
+  })
   @Component({
     title: '文字链接',
     icon: 'link',
@@ -17,7 +21,7 @@ namespace nasl.ui {
   export class ElLinkOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
-      title: 'Type',
+      title: '类型',
       description: '类型',
       setter: {
         concept: 'EnumSelectSetter',
