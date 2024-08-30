@@ -70,6 +70,31 @@ namespace nasl.ui {
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
   > extends ViewComponent {
+    @Prop({
+      title: '数据',
+    })
+    data: ElTableProOptions<T, V, P, M>['dataSource'];
+
+    @Prop({
+      title: '分页大小',
+    })
+    pageSize: ElTableProOptions<T, V, P, M>['pageSize'];
+
+    @Prop({
+      title: '当前页数',
+    })
+    page: ElTableProOptions<T, V, P, M>['page'];
+
+    @Prop({
+      title: '排序属性',
+    })
+    order: nasl.core.String;
+
+    @Prop({
+      title: '排序字段',
+    })
+    sorter: nasl.core.String;
+
     constructor(options?: Partial<ElTableProOptions<T, V, P, M>>) {
       super();
     }
@@ -398,6 +423,17 @@ namespace nasl.ui {
       },
     })
     pageSize: nasl.core.Integer = 10;
+
+    @Prop({
+      group: '数据属性',
+      title: '当前页数',
+      description: '当前默认展示在第几页',
+      docDescription: '当前加载的表格页。默认1。在"分页"属性开启时有效',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    page: nasl.core.Integer = 1;
 
     // @Prop({
     //   group: '主要属性',
