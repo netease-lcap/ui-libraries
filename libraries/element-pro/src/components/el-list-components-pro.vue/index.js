@@ -1,5 +1,5 @@
-import ElListComponentsPro from './index.vue';
+import ElListComponents from './index.vue';
 
-export { ElListComponentsPro };
+export { ElListComponents };
 
-export default ElListComponentsPro;
+export default ElListComponents;

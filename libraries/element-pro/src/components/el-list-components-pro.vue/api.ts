@@ -7,7 +7,7 @@ namespace nasl.ui {
     description: '组件列表',
     group: 'Table',
   })
-  export class ElListComponentsPro<T> extends ViewComponent {
+  export class ElListComponents<T> extends ViewComponent {
     @Prop({
       title: '数据',
     })

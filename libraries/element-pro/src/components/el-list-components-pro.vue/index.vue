@@ -40,7 +40,7 @@ function formatDSResult(result) {
 }
 
 export default {
-    name: 'u-list-components',
+    name: 'el-list-components',
     mixins: [
         sync({
             data: 'options',
