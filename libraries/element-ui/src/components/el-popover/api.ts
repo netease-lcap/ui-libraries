@@ -8,22 +8,23 @@ namespace nasl.ui {
       displaySlotInline: {
         reference: true,
       },
-      selector: {
-        expression: "this.getElement(el => el.slotTarget === 'reference')",
-        cssSelector: "span[class='el-popover__reference-wrapper']",
-        placement: 'tail',
-      },
+      selector: [
+        {
+          expression: "this.getElement(el => el.slotTarget === 'reference')",
+          cssSelector: '.el-popover__reference-wrapper',
+          placement: 'tail',
+        },
+        {
+          expression: 'this',
+          cssSelector: '.el-popover',
+          placement: 'tail',
+        },
+      ],
       eventsEffect: 'reference',
+      forceRefresh: { slot: 'reference' },
       events: {
         click: true,
       },
-      // actions: {
-      //   click: {
-      //     status:
-      //       "this.setCacheStatus('value', !(this.getCacheStatus('value') || false)) ",
-      //     default: "this.setCacheStatus('value', false)",
-      //   },
-      // },
     },
   })
   @Component({
@@ -81,15 +82,43 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '出现位置',
+      title: '位置',
       description: '出现位置',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '上边' },
+          { title: '上左' },
+          { title: '上右' },
+          { title: '下边' },
+          { title: '下左' },
+          { title: '下右' },
+          { title: '左边' },
+          { title: '左上' },
+          { title: '左下' },
+          { title: '右边' },
+          { title: '右上' },
+          { title: '右下' },
+        ],
+      },
     })
-    placement: nasl.core.String = 'bottom';
+    placement:
+      | 'top'
+      | 'top-start'
+      | 'top-end'
+      | 'bottom'
+      | 'bottom-start'
+      | 'bottom-end'
+      | 'left'
+      | 'left-start'
+      | 'left-end'
+      | 'right'
+      | 'right-start'
+      | 'right-end' = 'bottom';
 
     @Prop({
       group: '主要属性',
-      title: 'Popover 是否可用',
+      title: '是否禁用',
       description: 'Popover 是否可用',
       setter: { concept: 'SwitchSetter' },
     })
@@ -140,13 +169,13 @@ namespace nasl.ui {
     //   gpuAcceleration: nasl.core.Boolean;
     // };
 
-    @Prop({
-      group: '主要属性',
-      title: '为 popper 添加类名',
-      description: '为 popper 添加类名',
-      setter: { concept: 'InputSetter' },
-    })
-    popperClass: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '为 popper 添加类名',
+    //   description: '为 popper 添加类名',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // popperClass: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -164,14 +193,14 @@ namespace nasl.ui {
     })
     closeDelay: nasl.core.Decimal = 200;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Popover 组件的 tabindex',
-      description:
-        'Popover 组件的 [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex)',
-      setter: { concept: 'NumberInputSetter' },
-    })
-    tabindex: nasl.core.Decimal = 0;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Popover 组件的 tabindex',
+    //   description:
+    //     'Popover 组件的 [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex)',
+    //   setter: { concept: 'NumberInputSetter' },
+    // })
+    // tabindex: nasl.core.Decimal = 0;
 
     @Event({
       title: '显示时触发',

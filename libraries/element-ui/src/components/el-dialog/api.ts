@@ -9,6 +9,17 @@ namespace nasl.ui {
     group: 'Feedback',
   })
   export class ElDialog extends ViewComponent {
+    @Method({
+      title: '显示弹框',
+      description: '显示弹框',
+    })
+    open(): void {}
+
+    @Method({
+      title: '关闭弹框',
+      description: '关闭弹框',
+    })
+    close(): void {}
     constructor(options?: Partial<ElDialogOptions>) {
       super();
     }
@@ -18,11 +29,12 @@ namespace nasl.ui {
     @Prop({
       group: '状态属性',
       sync: true,
+      settable: true,
       title: '显示',
       description: '是否显示对话框',
       setter: { concept: 'SwitchSetter' },
     })
-    visible: nasl.core.Boolean = true;
+    visible: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
@@ -90,13 +102,13 @@ namespace nasl.ui {
     })
     lockScroll: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: '自定义类名',
-      description: '对话框的自定义类名',
-      setter: { concept: 'InputSetter' },
-    })
-    customClass: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '自定义类名',
+    //   description: '对话框的自定义类名',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // customClass: nasl.core.String;
 
     @Prop({
       group: '主要属性',

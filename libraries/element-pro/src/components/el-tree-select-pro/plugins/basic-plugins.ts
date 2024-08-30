@@ -36,14 +36,12 @@ export const useSelect = {
       'childrenField',
       (v) => v || 'children',
     );
-    const data = props.useComputed('data', (data) => {
-      console.log(data, '===');
-      if (_.isEmpty(data)) return undefined;
-      if (_.isNil(parentField.value)) return data;
-      return listToTree(data, null, parentField.value, valueField.value);
+    const data = props.useComputed('data', (dataSource) => {
+      if (_.isEmpty(dataSource)) return undefined;
+      if (_.isNil(parentField.value)) return dataSource;
+      return listToTree(dataSource, null, parentField.value, valueField.value);
     });
     const keys = props.useComputed('keys', (v) => (_.isObject(v) ? v : {}));
-    console.log(data, '===');
     return {
       data,
       keys: {

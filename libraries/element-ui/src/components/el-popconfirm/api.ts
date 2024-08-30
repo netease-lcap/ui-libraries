@@ -5,6 +5,26 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       namedSlotOmitWrapper: ['reference'],
+      displaySlotInline: {
+        reference: true,
+      },
+      selector: [
+        {
+          expression: "this.getElement(el => el.slotTarget === 'reference')",
+          cssSelector: '.el-popover__reference-wrapper',
+          placement: 'tail',
+        },
+        {
+          expression: 'this',
+          cssSelector: '.el-popover',
+          placement: 'tail',
+        },
+      ],
+      eventsEffect: 'reference',
+      forceRefresh: { slot: 'reference' },
+      events: {
+        click: true,
+      },
     },
   })
   @Component({
@@ -26,7 +46,7 @@ namespace nasl.ui {
       description: '标题',
       setter: { concept: 'InputSetter' },
     })
-    title: nasl.core.String = '';
+    title: nasl.core.String = '这是一段内容确定删除吗？';
 
     @Prop({
       group: '主要属性',
@@ -34,7 +54,7 @@ namespace nasl.ui {
       description: '确认按钮文字',
       setter: { concept: 'InputSetter' },
     })
-    confirmButtonText: nasl.core.String = '';
+    confirmButtonText: nasl.core.String = '确定';
 
     @Prop({
       group: '主要属性',
@@ -42,39 +62,39 @@ namespace nasl.ui {
       description: '取消按钮文字',
       setter: { concept: 'InputSetter' },
     })
-    cancelButtonText: nasl.core.String = '';
+    cancelButtonText: nasl.core.String = '取消';
 
-    @Prop({
-      group: '主要属性',
-      title: '确认按钮类型',
-      description: '确认按钮类型',
-      setter: { concept: 'InputSetter' },
-    })
-    confirmButtonType: nasl.core.String = 'Primary';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '确认按钮类型',
+    //   description: '确认按钮类型',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // confirmButtonType: nasl.core.String = 'Primary';
 
-    @Prop({
-      group: '主要属性',
-      title: '取消按钮类型',
-      description: '取消按钮类型',
-      setter: { concept: 'InputSetter' },
-    })
-    cancelButtonType: nasl.core.String = 'Text';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '取消按钮类型',
+    //   description: '取消按钮类型',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // cancelButtonType: nasl.core.String = 'Text';
 
-    @Prop({
-      group: '主要属性',
-      title: 'Icon',
-      description: 'Icon',
-      setter: { concept: 'InputSetter' },
-    })
-    icon: nasl.core.String = 'el-icon-question';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Icon',
+    //   description: 'Icon',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // icon: nasl.core.String = 'el-icon-question';
 
-    @Prop({
-      group: '主要属性',
-      title: 'Icon 颜色',
-      description: 'Icon 颜色',
-      setter: { concept: 'InputSetter' },
-    })
-    iconColor: nasl.core.String = '#f90';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Icon 颜色',
+    //   description: 'Icon 颜色',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // iconColor: nasl.core.String = '#f90';
 
     @Prop({
       group: '主要属性',
