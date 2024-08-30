@@ -83,7 +83,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    disabledField: (item: T) => nasl.core.Boolean;
+    disabledField: (item: T) => any = ((item: any) => item.disabled) as any;
 
     @Prop({
       group: '数据属性',
