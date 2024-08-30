@@ -4,6 +4,9 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'element',
+      editable: "text",
+      textholder: "text",
+      useFxOrEg: { property: "text" } 
     }
   })
   @Component({
