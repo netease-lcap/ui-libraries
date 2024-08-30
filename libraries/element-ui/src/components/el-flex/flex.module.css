@@ -12,6 +12,9 @@
 .flex > [heightstretch="true"] {
   height: unset !important;
 }
+.flex > [class^="el-button"] + [class^="el-button"] {
+  margin-left: 0;
+}
 
 .flexBlock {
   display: block;
