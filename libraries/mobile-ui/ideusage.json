@@ -611,7 +611,7 @@
         "name": "VanToast",
         "ideusage": {
             "idetype": "messager",
-            "cacheOpenKey": "realValue",
+            "cacheOpenKey": "value",
             "elementSutando": {
                 "condition": true,
                 "component": "VueToastDesigner",
@@ -619,7 +619,18 @@
                     "slot": "inject",
                     "cssSelector": "div[class^='van-toast-designer']"
                 }
-            }
+            },
+            "translateBindingProperty": ["message", "duration"],
+            "style": [
+                {
+                    "selector": ".van-loading__spinner",
+                    "declaration": "animation-duration: 2s!important"
+                },
+                {
+                    "selector": ".van-loading__spinner *",
+                    "declaration": "animation-duration: 2s!important"
+                }
+            ]
         }
     },
     {
