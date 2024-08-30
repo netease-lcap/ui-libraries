@@ -6,6 +6,10 @@ export const ElSwitchPro = registerComponent(Switch, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: [],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
 });
 
 export default ElSwitchPro;

@@ -6,6 +6,10 @@ export const ElInputAdornmentPro = registerComponent(InputAdornment, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: [],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
 });
 
 export default ElInputAdornmentPro;

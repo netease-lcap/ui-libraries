@@ -22,12 +22,12 @@ namespace nasl.ui {
     @Prop({
       title: '起始值',
     })
-    startDate: ElDateTimePickerProOptions['startDate'];
+    startValue: ElDateTimePickerProOptions['startValue'];
 
     @Prop({
       title: '结束值',
     })
-    endDate: ElDateTimePickerProOptions['endDate'];
+    endValue: ElDateTimePickerProOptions['endValue'];
 
     constructor(options?: Partial<ElDateTimePickerProOptions>) {
       super();
@@ -55,23 +55,23 @@ namespace nasl.ui {
     })
     value: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
-    @Prop<ElDateTimePickerProOptions, 'startDate'>({
+    @Prop<ElDateTimePickerProOptions, 'startValue'>({
       group: '数据属性',
       title: '起始值',
       description: '默认显示的起始日期时间值，格式如2018-08-08 08:08:08',
       setter: { concept: 'InputSetter' },
       if: (_) => !!_.range,
     })
-    startDate: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
+    startValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
-    @Prop<ElDateTimePickerProOptions, 'endDate'>({
+    @Prop<ElDateTimePickerProOptions, 'endValue'>({
       group: '数据属性',
       title: '结束值',
       description: '默认显示的结束日期时间值，格式如2018-08-08 08:08:08',
       setter: { concept: 'InputSetter' },
       if: (_) => !!_.range,
     })
-    endDate: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
+    endValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
     @Prop({
       group: '主要属性',
@@ -303,9 +303,9 @@ namespace nasl.ui {
       description: '当输入框失去焦点时触发',
     })
     onBlur: (event: {
-      value: nasl.core.String | nasl.core.Date,
-      startTime: nasl.core.String | nasl.core.Date,
-      endTime: nasl.core.String | nasl.core.Date,
+      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
+      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
+      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
       position: 'start' | 'end',
      }) => any;
 
@@ -314,9 +314,9 @@ namespace nasl.ui {
       description: '选中值发生变化时触发。',
     })
     onChange: (event: {
-      value: nasl.core.String | nasl.core.Date,
-      startTime: nasl.core.String | nasl.core.Date,
-      endTime: nasl.core.String | nasl.core.Date,
+      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
+      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
+      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
       trigger: 'confirm' | 'pick' | 'enter' | 'preset' | 'clear',
      }) => any;
 
@@ -325,9 +325,9 @@ namespace nasl.ui {
       description: '如果存在“确定”按钮，则点击“确定”按钮时触发',
     })
     onConfirm: (event: {
-      value: nasl.core.String | nasl.core.Date,
-      startTime: nasl.core.String | nasl.core.Date,
-      endTime: nasl.core.String | nasl.core.Date,
+      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
+      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
+      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
       position: 'start' | 'end',
      }) => any;
 
@@ -336,9 +336,9 @@ namespace nasl.ui {
       description: '输入框获得焦点时触发',
     })
     onFocus: (event: {
-      value: nasl.core.String | nasl.core.Date,
-      startTime: nasl.core.String | nasl.core.Date,
-      endTime: nasl.core.String | nasl.core.Date,
+      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
+      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
+      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
       position: 'start' | 'end',
      }) => any;
 
@@ -347,9 +347,9 @@ namespace nasl.ui {
       description: '面板选中值后触发',
     })
     onPick: (event: {
-      value: nasl.core.String | nasl.core.Date,
-      startTime: nasl.core.String | nasl.core.Date,
-      endTime: nasl.core.String | nasl.core.Date,
+      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
+      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
+      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
       position: 'start' | 'end',
      }) => any;
 
@@ -358,9 +358,9 @@ namespace nasl.ui {
     //   description: '点击预设按钮后触发',
     // })
     // onPresetClick: (event: {
-    //   value: nasl.core.String | nasl.core.Date,
-    //   startTime: nasl.core.String | nasl.core.Date,
-    //   endTime: nasl.core.String | nasl.core.Date,
+    //   value: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
+    //   startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
+    //   endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
     //   position: 'start' | 'end',
     //  }) => any;
   }
