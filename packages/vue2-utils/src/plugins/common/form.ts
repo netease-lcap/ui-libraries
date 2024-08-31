@@ -1,3 +1,4 @@
+import { isNil } from 'lodash';
 import { MapGet, NaslComponentPluginOptions, PluginSetupFunctionReturn } from '../types';
 import { getEventKey } from '../utils';
 import { useSyncState } from '../../hooks';
@@ -14,7 +15,7 @@ export const useUpdateSync = (props: Readonly<MapGet>, options: PropSyncOption[]
 
   options.forEach(({ name, event, defaultValue }) => {
     const eventName = getEventKey(event);
-    const propRef = props.useRef(name, (v) => (typeof v === 'undefined' ? defaultValue : v));
+    const propRef = props.useRef(name, (v) => (isNil(v) ? defaultValue : v));
     const onUpdateValue = props.get(`update:${name}`);
     const eventHandler = props.get(eventName);
 

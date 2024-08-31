@@ -8,7 +8,7 @@ import './index.less';
 export const ElFormPro = registerComponent(Form, plugins, {
   nativeEvents: [],
   slotNames: ['default'],
-  methodNames: ['clearValidate', 'reset', 'submit'],
+  methodNames: ['clearValidate', 'submit'],
 });
 export const ElFormItemPro = registerComponent(FormItem, itemPlugins, {
   slotNames: ['default'],
