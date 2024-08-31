@@ -1,4 +1,6 @@
 import ElTreePro from '../index';
+import SingleDemo from '../demos/single.vue';
+import multipleDemo from '../demos/multiple.vue';
 
 export default {
   id: 'el-tree-pro-examples',
@@ -15,4 +17,14 @@ export const Default = {
   render: () => ({
     template: '<el-tree-pro></el-tree-pro>',
   }),
+};
+
+export const Single = {
+  name: '单选',
+  render: () => SingleDemo,
+};
+
+export const Multiple = {
+  name: '多选',
+  render: () => multipleDemo,
 };
