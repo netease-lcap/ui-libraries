@@ -68,6 +68,12 @@ namespace nasl.ui {
     })
     hrefAndTo: nasl.core.String;
 
+    @Event({
+      title: '点击',
+      description: '在元素上按下并释放任意鼠标按钮时触发。',
+    })
+    onClick: (event: any) => any;
+
     // @Prop({
     //   group: '主要属性',
     //   title: '图标类名',

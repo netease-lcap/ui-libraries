@@ -109,6 +109,7 @@ export const useTable = {
     });
     return {
       onPageChange,
+
       pagination,
       onSortChange,
       [$render](resultVNode, h) {

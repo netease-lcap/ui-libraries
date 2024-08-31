@@ -22,21 +22,21 @@ export const Default = {
     },
     methods: {
       change() {
-        this.$refs.form.setFormData({
-          name: '哈哈哈哈',
-          password: {
-            xx: '23333',
-          },
-        });
+        // this.$refs.form.setFormData({
+        //   name: '哈哈哈哈',
+        //   password: {
+        //     xx: '23333',
+        //   },
+        // });
 
-        // this.$refs.form.setFieldValue('name', '哈哈哈');
-        // this.syncValue = 'heheheheh';
+        this.$refs.form.setFieldValue('name', '哈哈哈1111');
+        this.syncValue = 'heheheheh1';
       },
     },
-    template: `<div><el-form-pro ref="form">
+    template: `<div><el-form-pro ref="form" style="width: 300px;">
       <el-form-item-pro name="name">
         <template #label>姓名姓名姓名姓名姓名</template>
-        <el-input-pro placeholder="请输入姓名" :value.sync="syncValue"></el-input-pro>
+        <el-input-pro style="width: 200px" placeholder="请输入姓名" :value.sync="syncValue"></el-input-pro>
       </el-form-item-pro>
       <el-form-item-pro colSpan="2" label="初始密码初始密码初始密码初始密码初始密码" :labelEllipsis="!ellipsis" name="password">
         <el-form-item-pro name="xx">
