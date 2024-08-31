@@ -8,9 +8,12 @@ import {
   computed,
   ComputedRef,
   inject,
+  onBeforeUnmount,
+  onMounted,
   onUnmounted,
   provide,
   Ref,
+  SetupContext,
   unref,
   watch,
 } from '@vue/composition-api';
@@ -36,6 +39,18 @@ function getFieldKey(name: ComputedRef<string> | Ref<string> | string, parentKey
   return k;
 }
 
+const useRegisterInstance = (ctx: SetupContext) => {
+  const { addFormItemInstance = () => {}, removeFormItemInstance = () => {} } = inject<FormExtendsContext>(FORM_CONTEXT, {} as any);
+
+  onMounted(() => {
+    addFormItemInstance(ctx.refs.$base);
+  });
+
+  onBeforeUnmount(() => {
+    removeFormItemInstance(ctx.refs.$base);
+  });
+}
+
 export const useExtensPlugin: NaslComponentPluginOptions = {
   props: [
     'colSpan',
@@ -45,7 +60,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     'startFieldName',
     'endFieldName',
   ],
-  setup(props, { h, isDesigner }) {
+  setup(props, { h, isDesigner, setupContext: ctx }) {
     const { useComputed } = props;
     const {
       labelEllipsis,
@@ -59,6 +74,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       initFormField: () => null,
       initFormRangeField: () => null,
     } as any);
+    useRegisterInstance(ctx);
     const { name: nameRef } = inject<FormItemExtendsContext>(FORM_ITEM_CONTEXT, { } as any);
     const uid = uniqueId(LCAP_FORM_UID);
 

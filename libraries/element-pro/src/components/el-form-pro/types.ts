@@ -2,11 +2,6 @@ import { ComputedRef } from '@vue/composition-api';
 
 export type LayoutMode = 'linear' | 'grid';
 
-export interface InitFieldOptions {
-  name: string;
-  value?: any,
-  change?: (v: any) => void;
-}
 export interface FormFieldOptions {
   name: string;
   value?: any;
@@ -37,8 +32,9 @@ export interface FormRangeFieldOptions {
 export interface FormExtendsContext {
   labelEllipsis: ComputedRef<boolean>;
   labelWidth: ComputedRef<string>;
+  addFormItemInstance: (ins: any) => void;
+  removeFormItemInstance: (ins: any) => void;
   setFieldValue: (name: string, value: any) => void,
-  initField: (options: InitFieldOptions) => void,
   initFormField: (options: FormFieldOptions) => FormField;
   initFormRangeField: (options: FormRangeFieldOptions) => FormRangeField;
   removeField: (name: string, deleteFieldValue?: boolean) => void,
