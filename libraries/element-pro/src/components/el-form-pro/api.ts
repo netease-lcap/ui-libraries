@@ -346,6 +346,7 @@ namespace nasl.ui {
     @Slot({
       title: '表单内容',
       description: '插入表单项',
+      emptyBackground: 'add-sub-large',
       snippets: [
         {
           title: '表单项',
@@ -361,7 +362,6 @@ namespace nasl.ui {
       idetype: 'container',
       parentAccept: "target.tag.endsWith('el-form-pro')",
       ignoreProperty: ['rules'],
-      structured: true,
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
       },
