@@ -32,25 +32,25 @@ export default defineConfig(({ command }) => {
         // },
         i18n: {},
         dependencies: [
-          {
-            name: '@lcap/pc-ui',
-            rootPath: path.resolve(__dirname, '../pc-ui'),
-            config: (c) => {
-              return {
-                ...c,
-                show: false,
-              };
-            },
-          },
+          // {
+          //   name: '@lcap/pc-ui',
+          //   rootPath: path.resolve(__dirname, '../pc-ui'),
+          //   config: (c) => {
+          //     return {
+          //       ...c,
+          //       show: false,
+          //     };
+          //   },
+          // },
           {
             name: '@lcap/element-pro',
             rootPath: path.resolve(__dirname, '../element-pro'),
-            config: (c) => {
-              return {
-                ...c,
-                show: false,
-              };
-            },
+            // config: (c) => {
+            //   return {
+            //     ...c,
+            //     show: false,
+            //   };
+            // },
           },
         ],
       }),

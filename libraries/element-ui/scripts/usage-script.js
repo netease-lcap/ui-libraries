@@ -5,7 +5,7 @@ const cwd = process.cwd();
 
 const naslUIConfigPath = path.resolve(cwd, './dist-theme/nasl.ui.json');
 const usage = fs.readJSONSync(path.resolve(cwd, 'ideusage.json'), 'utf-8');
-const pcUIUsage = fs.readJSONSync(path.resolve(cwd, '../pc-ui/ideusage.json'), 'utf-8');
+// const pcUIUsage = fs.readJSONSync(path.resolve(cwd, '../pc-ui/ideusage.json'), 'utf-8');
 const naslui = fs.readJSONSync(naslUIConfigPath, 'utf-8');
 
 function mergeIdeUsage(a, b) {
@@ -28,6 +28,6 @@ function merge(list, usageList) {
   });
 }
 
-merge(naslui, pcUIUsage);
+// merge(naslui, pcUIUsage);
 merge(naslui, usage);
-fs.writeJSONSync(naslUIConfigPath, naslui);
+fs.writeJSONSync(naslUIConfigPath, naslui, { spaces: 2 });
