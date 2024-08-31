@@ -6,7 +6,6 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
-      childAccept: "['el-form-item-pro'].includes(target.tag)",
     },
   })
   @Component({
@@ -350,7 +349,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
-      parentAccept: "target.tag.endsWith('el-form-pro')",
+      parentAccept: "target.tag.endsWith('el-form-pro') || target.tag.endsWith('el-form-item-pro')",
       ignoreProperty: ['rules'],
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
