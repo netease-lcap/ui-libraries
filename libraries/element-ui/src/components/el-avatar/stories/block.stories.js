@@ -15,7 +15,7 @@ export default {
           VUE_APP_DESIGNER: true,
         };
       },
-      template: '<div style="width: 500px;"><story/></div>',
+      template: '<div><story/></div>',
     }),
   ],
 };
@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-avatar></el-avatar>',
+    template: '<el-avatar icon="user-solid"></el-avatar>',
   }),
 };
