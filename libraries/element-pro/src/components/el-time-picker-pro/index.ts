@@ -10,6 +10,7 @@ export const ElTimePickerPro = registerComponent(TimePicker, plugins, {
     prop: 'value',
     event: 'update:value',
   },
+  rangeModel: ['startValue', 'endValue'],
 });
 export const ElTimeRangePickerPro = TimeRangePicker;
 

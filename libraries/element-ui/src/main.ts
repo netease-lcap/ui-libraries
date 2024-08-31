@@ -13,6 +13,8 @@ export const install = (Vue) => {
   }
 
   installed = true;
+  Vue.prototype.$env = Vue.prototype.$env || {};
+  Vue.prototype.$env.VUE_APP_DESIGNER = String(process.env.VUE_APP_DESIGNER) === 'true';
   Object.keys(components).forEach((key) => {
     Vue.component(components[key].name, components[key]);
   });

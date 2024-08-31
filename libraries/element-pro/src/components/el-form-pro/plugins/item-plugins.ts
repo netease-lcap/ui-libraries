@@ -6,9 +6,11 @@ import { CustomValidateResolveType, FormRule } from '@element-pro';
 import { isFunction, map, uniqueId } from 'lodash';
 import {
   computed,
+  ComputedRef,
   inject,
   onUnmounted,
   provide,
+  Ref,
   unref,
   watch,
 } from '@vue/composition-api';
@@ -20,9 +22,30 @@ import {
 } from '../constants';
 import { FormExtendsContext, FormItemExtendsContext } from '../types';
 
+function getFieldKey(name: ComputedRef<string> | Ref<string> | string, parentKey: ComputedRef<string> | Ref<string> | string): string {
+  const k = unref(name) as string;
+  const pk = unref(parentKey) as string;
+  if (!k || typeof k !== 'string') {
+    return '';
+  }
+
+  if (pk) {
+    return [pk, k].join('.');
+  }
+
+  return k;
+}
+
 export const useExtensPlugin: NaslComponentPluginOptions = {
-  props: ['colSpan', 'labelWidthType', 'labelEllipsis'],
-  setup(props, { h }) {
+  props: [
+    'colSpan',
+    'labelWidthType',
+    'labelEllipsis',
+    'useRangeValue',
+    'startFieldName',
+    'endFieldName',
+  ],
+  setup(props, { h, isDesigner }) {
     const { useComputed } = props;
     const {
       labelEllipsis,
@@ -91,21 +114,33 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       return LabelWidthType[labelWidthType];
     });
 
-    const propName = props.useComputed('name');
+    const getUseRangeValue = () => (props.get<boolean>('useRangeValue') || false);
 
-    const name = computed(() => {
-      const k = unref(propName);
-      const pk = unref(nameRef);
-      if (!k || typeof k !== 'string') {
-        return pk || '';
+    const propName = props.useComputed<string>(['name', 'useRangeValue'], (val, useRangeValue = false) => {
+      if (!useRangeValue) {
+        return val;
       }
 
-      if (pk) {
-        return [pk, k].join('.');
-      }
-
-      return k;
+      return '';
     });
+    const startPropName = props.useComputed<string>(['startFieldName', 'useRangeValue'], (val, useRangeValue = false) => {
+      if (useRangeValue) {
+        return val;
+      }
+
+      return '';
+    });
+    const endPropName = props.useComputed<string>(['endFieldName', 'useRangeValue'], (val, useRangeValue = false) => {
+      if (useRangeValue) {
+        return val;
+      }
+
+      return '';
+    });
+
+    const name = computed(() => getFieldKey(propName, nameRef));
+    const startFieldName = computed(() => getFieldKey(startPropName, nameRef));
+    const endFieldName = computed(() => getFieldKey(endPropName, nameRef));
 
     const fieldName = computed(() => {
       if (name.value) {
@@ -115,10 +150,91 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       return uid;
     });
 
-    const getFieldName = () => unref(fieldName);
+    const getFieldName = () => unref(fieldName) as string;
 
     const handleChangeValue = (v) => {
-      setFieldValue(unref(fieldName), v);
+      setFieldValue(unref(fieldName) as any, v) as any;
+    };
+
+    const handleStartChangeValue = (value) => {
+      const fieldValue = [...getFieldValue(fieldName.value) || []];
+      fieldValue[0] = value;
+      setFieldValue(startFieldName.value, value);
+      setFieldValue(fieldName.value, fieldValue);
+    };
+
+    const handleEndChangeValue = (value) => {
+      const fieldValue = [...getFieldValue(fieldName.value) || []];
+      fieldValue[1] = value;
+      setFieldValue(endFieldName.value, value);
+      setFieldValue(fieldName.value, fieldValue);
+    };
+
+    const oldBindValueMap = {};
+    const changeListenerMap = {};
+    const proxyRangeFieldVNode = (vnode: VNode) => {
+      const [startProp, endProp] = (vnode.componentOptions.Ctor as any).options.rangeModel;
+      const propData: Record<string, any> = vnode.componentOptions.propsData || {};
+      const listeners: Record<string, any> = vnode.componentOptions.listeners || {};
+      const startEvent = `update:${startProp}`;
+      const endEvent = `update:${endProp}`;
+      if (!changeListenerMap[startProp]) {
+        changeListenerMap[startProp] = listeners[startEvent];
+      }
+
+      if (!changeListenerMap[endProp]) {
+        changeListenerMap[endProp] = listeners[endEvent];
+      }
+
+      initField({
+        name: startFieldName.value,
+        change: changeListenerMap[startProp],
+        value: propData[startProp],
+      });
+      initField({
+        name: endFieldName.value,
+        change: changeListenerMap[endProp],
+        value: propData[endProp],
+      });
+      initField({
+        name: fieldName.value,
+        value: [propData[startProp], propData[endProp]],
+      });
+
+      let startFieldValue = getFieldValue(startFieldName.value);
+      let endFieldValue = getFieldValue(endFieldName.value);
+      const fieldValue = [...getFieldValue(fieldName.value) || []];
+
+      // 更新变量后同步更新表单值
+      if (propData[startProp] !== undefined && propData[startProp] !== oldBindValueMap[startProp] && propData[startProp] !== startFieldValue) {
+        setFieldValue(startFieldName.value, propData[startProp]);
+        startFieldValue = propData[startProp];
+        fieldValue[0] = propData[startProp];
+        setFieldValue(fieldName.value, fieldValue);
+      }
+
+      // 更新变量后同步更新表单值
+      if (propData[endProp] !== undefined && propData[endProp] !== oldBindValueMap[endProp] && propData[endProp] !== endFieldValue) {
+        setFieldValue(endFieldValue.value, propData[endProp]);
+        endFieldValue = propData[endProp];
+        fieldValue[1] = propData[endProp];
+        setFieldValue(fieldName.value, fieldValue);
+      }
+
+      oldBindValueMap[startProp] = propData[startProp] === undefined ? null : propData[startProp];
+      oldBindValueMap[endProp] = propData[endProp] === undefined ? null : propData[endProp];
+      propData[startProp] = startFieldValue;
+      propData[endProp] = endFieldValue;
+      listeners[startEvent] = handleStartChangeValue;
+      listeners[endEvent] = handleEndChangeValue;
+
+      return h(vnode.componentOptions.tag, {
+        attrs: vnode.data.attrs,
+        props: { ...propData },
+        on: listeners,
+        nativeOn: vnode.data.nativeOn,
+        scopedSlots: vnode.data.scopedSlots,
+      }, vnode.componentOptions.children || []);
     };
 
     let oldBindValue;
@@ -140,6 +256,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       });
 
       let formFieldValue = getFieldValue(formFieldName);
+      // 更新变量后同步更新表单值
       if (Object.prototype.hasOwnProperty.call(propData, prop) && propData[prop] !== oldBindValue && propData[prop] !== formFieldValue) {
         setFieldValue(formFieldName, propData[prop]);
         formFieldValue = propData[prop];
@@ -159,7 +276,9 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     };
 
     onUnmounted(() => {
-      removeField(getFieldName());
+      removeField(fieldName.value);
+      removeField(startFieldName.value);
+      removeField(endFieldName.value);
     });
 
     watch(fieldName, (val, oldVal) => {
@@ -168,8 +287,14 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       }
     });
 
+    watch(() => ([startFieldName.value || '', endFieldName.value || ''].join('|')), (val, oldVal) => {
+      if (oldVal && oldVal !== val) {
+        oldVal.split('|').forEach((n) => removeField(n));
+      }
+    });
+
     provide<FormItemExtendsContext>(FORM_ITEM_CONTEXT, {
-      name,
+      name: computed(() => (name.value || unref(nameRef))),
     });
 
     return {
@@ -191,25 +316,37 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         const slotDefault = props.get<any>('slotDefault') || (() => []);
         const vnodes: VNode[] = slotDefault();
 
-        if (isEmptyVNodes(vnodes)) {
+        if (isEmptyVNodes(vnodes) || isDesigner) {
           return vnodes;
         }
 
-        let proxyed = false;
-        return vnodes.map((v) => {
-          if (
+        const useRangeValue = getUseRangeValue();
+
+        if (useRangeValue) {
+          const index = vnodes.findIndex((v) => {
+            return v.componentOptions
+            && v.componentOptions.Ctor
+            && (v.componentOptions.Ctor as any).options
+            && Array.isArray((v.componentOptions.Ctor as any).options.rangeModel)
+            && (v.componentOptions.Ctor as any).options.rangeModel.length === 2;
+          });
+
+          if (index !== -1) {
+            vnodes[index] = proxyRangeFieldVNode(vnodes[index]);
+          }
+        } else {
+          const index = vnodes.findIndex((v) => (
             v.componentOptions
             && v.componentOptions.Ctor
             && (v.componentOptions.Ctor as any).options
             && typeof (v.componentOptions.Ctor as any).options.model === 'object'
-            && !proxyed
-          ) {
-            proxyed = true;
-            return proxyFormFieldVNode(v);
+          ));
+          if (index !== -1) {
+            vnodes[index] = proxyFormFieldVNode(vnodes[index]);
           }
+        }
 
-          return v;
-        });
+        return vnodes;
       },
     };
   },

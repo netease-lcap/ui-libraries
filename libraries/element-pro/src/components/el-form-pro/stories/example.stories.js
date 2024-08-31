@@ -48,6 +48,10 @@ export const Default = {
           <el-input-pro type="password" placeholder="请输入初始密码"></el-input-pro>
         </el-form-item-pro>
       </el-form-item-pro>
-    </el-form-pro> <button @click="change">哈哈</button></div>`,
+       <el-form-item-pro colSpan="2" :useRangeValue="true" startFieldName="startTime" endFieldName="endTime" label="时间区间">
+        <el-date-time-picker-pro :range="true" ></el-date-time-picker-pro>
+       </el-form-item-pro>
+    </el-form-pro>
+    <button @click="change">哈哈</button></div>`,
   }),
 };
