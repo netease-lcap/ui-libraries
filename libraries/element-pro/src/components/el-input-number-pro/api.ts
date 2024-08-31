@@ -27,6 +27,7 @@ namespace nasl.ui {
   export class ElInputNumberProOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
+      sync: true,
       title: '值',
       description:
         '数字输入框的值。当值为 "" 时，输入框显示为空。支持语法糖 `v-model`。',
