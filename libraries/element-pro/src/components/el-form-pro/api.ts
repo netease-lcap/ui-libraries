@@ -403,7 +403,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: '起始值字段名称',
       description: '起始值字段名称，对应区间选择时起始值字段',
-      setter: { concept: 'SwitchSetter' },
+      setter: { concept: 'InputSetter' },
       if: (_) => _.useRangeValue === true,
     })
     startFieldName: nasl.core.String;
@@ -412,7 +412,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: '结束值字段名称',
       description: '结束值字段名称，对应选择时结束值字段',
-      setter: { concept: 'SwitchSetter' },
+      setter: { concept: 'InputSetter' },
       if: (_) => _.useRangeValue === true,
     })
     endFieldName: nasl.core.String;
