@@ -45,7 +45,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     'startFieldName',
     'endFieldName',
   ],
-  setup(props, { h }) {
+  setup(props, { h, isDesigner }) {
     const { useComputed } = props;
     const {
       labelEllipsis,
@@ -316,7 +316,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         const slotDefault = props.get<any>('slotDefault') || (() => []);
         const vnodes: VNode[] = slotDefault();
 
-        if (isEmptyVNodes(vnodes)) {
+        if (isEmptyVNodes(vnodes) || isDesigner) {
           return vnodes;
         }
 
