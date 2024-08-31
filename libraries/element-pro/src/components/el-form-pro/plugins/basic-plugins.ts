@@ -9,6 +9,8 @@ import {
   set as lodashSet,
   get as lodashGet,
   cloneDeep,
+  isNil,
+  isFunction,
 } from 'lodash';
 import { type NaslComponentPluginOptions, $ref } from '@lcap/vue2-utils';
 import { isEmptyVNodes } from '@lcap/vue2-utils/plugins/utils';
@@ -25,7 +27,15 @@ import {
   FORM_CONTEXT,
   LCAP_FORM_UID,
 } from '../constants';
-import type { FormExtendsContext, InitFieldOptions, LayoutMode } from '../types';
+import type {
+  FormExtendsContext,
+  FormField,
+  FormFieldOptions,
+  FormRangeField,
+  FormRangeFieldOptions,
+  InitFieldOptions,
+  LayoutMode,
+} from '../types';
 
 const getTemplateCount = (counts: number | string) => {
   if (!Number.isNaN(counts as number) || typeof counts === 'string') {
@@ -38,6 +48,7 @@ const getTemplateCount = (counts: number | string) => {
 export interface FormFieldMata {
   bindValue: any;
   change?: ((v: any) => void) | null;
+  fieldControl?: FormField | FormRangeField;
 }
 
 function splitNameToPath(name) {
@@ -67,6 +78,14 @@ function deepVueSet(data: any, name: string, value: any) {
     current = current[key];
   }
 }
+
+const normalizeRangeFieldValue = (startValue, endValue) => {
+  if (isNil(startValue) && isNil(endValue)) {
+    return null;
+  }
+
+  return [startValue, endValue];
+};
 
 /* 组件功能扩展插件 */
 export const useExtensPlugin: NaslComponentPluginOptions = {
@@ -183,6 +202,115 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       return lodashGet(formData, key);
     }
 
+    function initFormField({ name, value }: FormFieldOptions) {
+      if (formFieldMetas[name]) {
+        return formFieldMetas[name].fieldControl as FormField;
+      }
+
+      deepVueSet(formData, name, value);
+
+      let initialSetted = false;
+      const formField: FormField = {
+        name,
+        setValue: (v) => {
+          setFieldValue(name, v);
+        },
+        setInitalValue: (v) => {
+          if (initialSetted) {
+            return;
+          }
+          setFieldValue(name, v);
+          initialSetted = true;
+        },
+        setChangeListener: (listener) => {
+          if (formFieldMetas[name]) {
+            formFieldMetas[name].change = listener;
+          }
+        },
+      };
+
+      if (!name.startsWith(LCAP_FORM_UID)) {
+        formField.getValue = () => getFieldValue(name);
+      }
+
+      formFieldMetas[name] = {
+        bindValue: value,
+        fieldControl: formField,
+      };
+
+      return formField;
+    }
+
+    function initFormRangeField({ name, uid, value }: FormRangeFieldOptions) {
+      if (formFieldMetas[uid]) {
+        return formFieldMetas[uid].fieldControl as FormRangeField;
+      }
+
+      deepVueSet(formData, uid, normalizeRangeFieldValue(value[0], value[1]));
+      const [startName, endName] = name;
+      [startName, endName].forEach((n, i) => {
+        if (n) {
+          deepVueSet(formData, n, value[i]);
+          formFieldMetas[n] = {
+            bindValue: value[i],
+          };
+        }
+      });
+
+      let initialSetted = false;
+      const formRangeField: FormRangeField = {
+        setValue: (index, v) => {
+          if (name[index]) {
+            setFieldValue(name[index], v);
+          }
+
+          const values = [...(getFieldValue(uid) || [])];
+          values[index] = v;
+          setFieldValue(uid, normalizeRangeFieldValue(values[0], values[1]));
+        },
+        setInitalValue: (values) => {
+          if (initialSetted) {
+            return;
+          }
+          initialSetted = true;
+          [startName, endName].forEach((n, i) => {
+            if (n) {
+              setFieldValue(n, values[i]);
+            }
+          });
+
+          setFieldValue(uid, normalizeRangeFieldValue(values[0], values[1]));
+        },
+        setChangeListener: (startListener, endListener) => {
+          if (startName && formFieldMetas[startName]) {
+            formFieldMetas[startName].change = startListener;
+          }
+
+          if (endName && formFieldMetas[endName]) {
+            formFieldMetas[endName].change = endListener;
+          }
+
+          if (formFieldMetas[uid]) {
+            formFieldMetas[uid].change = (v) => {
+              const [startValue, endValue] = v || [];
+              if (!startName || isFunction(startListener)) {
+                startListener(startValue);
+              }
+
+              if (!endName || isFunction(endListener)) {
+                endListener(endValue);
+              }
+            };
+          }
+        },
+      };
+      if (name[0] && name[1]) {
+        formRangeField.getValue = (index) => getFieldValue(name[index]);
+      }
+
+      return formRangeField;
+    }
+
     function getFormData() {
       const d = cloneDeep(toRaw(formData));
       Object.keys(d).forEach((key) => {
@@ -200,6 +328,8 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       getFieldValue,
       initField,
       removeField,
+      initFormField,
+      initFormRangeField,
     });
 
     return {
