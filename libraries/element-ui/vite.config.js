@@ -32,19 +32,25 @@ export default defineConfig(({ command }) => {
         // },
         i18n: {},
         dependencies: [
-          {
-            name: '@lcap/pc-ui',
-            rootPath: path.resolve(__dirname, '../pc-ui'),
-            config: (c) => {
-              return {
-                ...c,
-                show: false,
-              };
-            },
-          },
+          // {
+          //   name: '@lcap/pc-ui',
+          //   rootPath: path.resolve(__dirname, '../pc-ui'),
+          //   config: (c) => {
+          //     return {
+          //       ...c,
+          //       show: false,
+          //     };
+          //   },
+          // },
           {
             name: '@lcap/element-pro',
             rootPath: path.resolve(__dirname, '../element-pro'),
+            // config: (c) => {
+            //   return {
+            //     ...c,
+            //     show: false,
+            //   };
+            // },
           },
         ],
       }),
@@ -105,9 +111,8 @@ export default defineConfig(({ command }) => {
       target: ['es2020', 'edge88', 'firefox78', 'chrome56', 'safari14'],
       lib: {
         entry: 'src/index',
-        // name: 'ElementUI',
+        name: 'ElementUI',
         formats: ['umd'],
-        name: 'CloudUI',
       },
       outDir: 'dist-theme',
       modulePreload: false,

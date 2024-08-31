@@ -12,7 +12,7 @@ import {
   isNil,
   isFunction,
 } from 'lodash';
-import { type NaslComponentPluginOptions, $ref } from '@lcap/vue2-utils';
+import { type NaslComponentPluginOptions, $deletePropList, $ref } from '@lcap/vue2-utils';
 import { isEmptyVNodes } from '@lcap/vue2-utils/plugins/utils';
 import {
   getCurrentInstance,
@@ -33,7 +33,6 @@ import type {
   FormFieldOptions,
   FormRangeField,
   FormRangeFieldOptions,
-  InitFieldOptions,
   LayoutMode,
 } from '../types';
 
@@ -98,6 +97,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     const instance = getCurrentInstance();
     const formData = reactive({});
     const formFieldMetas: Record<string, FormFieldMata> = {};
+    const formItemInstances: any[] = [];
 
     const labelWidth = useComputed(['labelWidthType', 'labelWidth'], (
       labelWidthType = '',
@@ -143,17 +143,20 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       return undefined;
     });
 
-    function initField({ name, value = null, change }: InitFieldOptions) {
-      if (formFieldMetas[name]) {
+    function addFormItemInstance(ins: any) {
+      if (formItemInstances.includes(ins)) {
+        return;
+      }
+      formItemInstances.push(ins);
+    }
+
+    function removeFormItemInstance(ins: any) {
+      const index = formItemInstances.indexOf(ins);
+      if (index === -1) {
         return;
       }
 
-      deepVueSet(formData, name, value);
-
-      formFieldMetas[name] = {
-        bindValue: value,
-        change,
-      };
+      formItemInstances.splice(index, 1);
     }
 
     function removeField(name) {
@@ -322,10 +325,11 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       labelEllipsis: useComputed('labelEllipsis', (v) => !!v),
       setFieldValue,
       getFieldValue,
-      initField,
       removeField,
       initFormField,
       initFormRangeField,
+      addFormItemInstance,
+      removeFormItemInstance,
     });
 
     return {
@@ -385,6 +389,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
         return vnodes;
       },
+      [$deletePropList]: ['onReset'],
       [$ref]: {
         async validate() {
           if (!instance || !instance.refs || !instance.refs.$base) {
@@ -397,7 +402,13 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
           };
         },
         resetForm() {
+          const onReset = props.get('onReset');
           const resetType = props.get('resetType') || 'empty';
+
+          if (instance.refs.$base) {
+            (instance.refs.$base as any).clearValidate();
+          }
+
           Object.keys(formFieldMetas).forEach((key) => {
             if (resetType === 'initial') {
               setFieldValue(key, formFieldMetas[key].bindValue === undefined ? null : formFieldMetas[key].bindValue);
@@ -405,6 +416,17 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
             }
             setFieldValue(key, null);
           });
+
+          // 组件源码黑操作
+          formItemInstances.forEach((ins) => {
+            if (ins) {
+              ins.needResetField = true;
+            }
+          });
+
+          if (isFunction(onReset)) {
+            onReset();
+          }
         },
         setFormData,
         getFormData,
