@@ -361,6 +361,7 @@ namespace nasl.ui {
       idetype: 'container',
       parentAccept: "target.tag.endsWith('el-form-pro')",
       ignoreProperty: ['rules'],
+      structured: true,
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
       },
@@ -571,7 +572,13 @@ namespace nasl.ui {
 
     @Slot({
       title: '表单组件',
-      description: '字段标签名称。',
+      description: '表单组件',
+      snippets: [
+        {
+          title: '表单项',
+          code: '<el-form-item-pro></el-form-item-pro>',
+        },
+      ],
     })
     slotDefault: () => Array<ViewComponent>;
   }
