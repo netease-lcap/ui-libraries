@@ -1,6 +1,6 @@
 /* 组件功能扩展插件 */
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
-import { at } from 'lodash';
+import { at, isObject } from 'lodash';
 import { createUseUpdateSync } from '@lcap/vue2-utils';
 
 export const useUpdateSync = createUseUpdateSync([{ name: 'value', event: 'change' }]);
@@ -11,17 +11,24 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
   props: ['data', 'valueField', 'textField', 'disabledField'],
   setup({ get: propGet, useComputed }) {
     const dataList = useComputed(['data'], () => {
-      const textField = propGet('textField') || 'label';
-      const valueField = propGet('valueField') || 'value';
-      const disabledField = propGet('disabledField') || 'disabled';
+      const textField = propGet<string>('textField') || 'label';
+      const valueField = propGet<string>('valueField') || 'value';
+      const disabledField = propGet<string>('disabledField') || 'disabled';
       const data = propGet<any>('data') || [];
 
       const optionList = data.map((item) => {
-        const [text, value, disabled] = at(item, [textField, valueField, disabledField]);
+        if (isObject(item)) {
+          const [text, value, disabled] = at(item, [textField, valueField, disabledField]);
+          return {
+            value,
+            label: text,
+            disabled,
+          };
+        }
         return {
-          value,
-          label: text,
-          disabled,
+          value: item,
+          label: item,
+          disabled: false,
         };
       });
       return optionList;

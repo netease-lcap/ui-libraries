@@ -1,0 +1,18 @@
+@import "../../../design/_common/style/web/_variables.less";
+
+.@{prefix}-form {
+  &--grid {
+    display: grid;
+  }
+
+  &__label {
+    white-space: normal;
+  }
+
+  &__item--ellipsis &__label {
+    white-space: nowrap;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+  }
+}

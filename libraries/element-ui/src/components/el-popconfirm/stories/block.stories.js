@@ -23,6 +23,10 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-popconfirm></el-popconfirm>',
+    template: `<el-popconfirm title="这是一段内容确定删除吗？">
+        <template #reference>
+          <el-button text="文本"></el-button>
+        </template>
+    </el-popconfirm>`,
   }),
 };

@@ -24,7 +24,7 @@ export const Default = {
   name: '两栏-左侧固定',
   render: () => ({
     template: `<el-container style="height:100%">
-      <el-header></el-header>
+      <el-header style="padding-left: 0;padding-right: 0"></el-header>
       <el-container>
         <el-aside></el-aside>
         <el-main></el-main>
@@ -37,7 +37,7 @@ export const Demo1 = {
   name: '三栏-常规',
   render: () => ({
     template: `<el-container style="height:100%">
-      <el-header></el-header>
+      <el-header style="padding-left: 0;padding-right: 0"></el-header>
       <el-container>
         <el-aside></el-aside>
         <el-main></el-main>
@@ -51,13 +51,13 @@ export const Demo2 = {
   name: '三栏-全部',
   render: () => ({
     template: `<el-container style="height:100%">
-      <el-header></el-header>
+      <el-header style="padding-left: 0;padding-right: 0"></el-header>
       <el-container>
         <el-aside></el-aside>
         <el-main></el-main>
         <el-aside></el-aside>
       </el-container>
-      <el-footer></el-footer>
+      <el-footer style="padding-left: 0;padding-right: 0"></el-footer>
     </el-container>`,
   }),
 };

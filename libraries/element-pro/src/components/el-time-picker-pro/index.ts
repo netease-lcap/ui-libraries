@@ -6,6 +6,11 @@ export const ElTimePickerPro = registerComponent(TimePicker, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: [],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
+  rangeModel: ['startValue', 'endValue'],
 });
 export const ElTimeRangePickerPro = TimeRangePicker;
 

@@ -4,7 +4,11 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       "idetype": "container",
-      "structured": true
+      "structured": true,
+      "selector": {
+        "expression": "this.getElement(el => el.slotTarget === 'placeholder' )",
+        "cssSelector": ".el-image"
+      }
     }
   })
   @Component({

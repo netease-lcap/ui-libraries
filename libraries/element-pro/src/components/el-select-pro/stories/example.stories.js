@@ -13,6 +13,43 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-select-pro></el-select-pro>',
+    watch: {
+      value(value) {
+        console.log(value, 'value');
+      },
+    },
+    data() {
+      return {
+        value: 11,
+        data: async (params) => {
+          const initialData = [];
+          const total = 50;
+          for (let i = 0; i < total; i++) {
+            initialData.push({
+              key: {
+                valuefield: `${i}`,
+                labelfield: `${i % 3}`,
+              },
+            });
+          }
+          return {
+            list: initialData,
+            total,
+          };
+        },
+        // data:[],
+      };
+    },
+    template: `<el-select-pro
+      :dataSource="data"
+      valueField="key.valuefield"
+      textField="key.labelfield"
+      :value.sync="value"
+    >
+    
+      <el-option-pro label="12" value="11" data-nodepath="1234" >
+      <el-text text="12333" />
+      </el-option-pro>
+    </el-select-pro>`,
   }),
 };

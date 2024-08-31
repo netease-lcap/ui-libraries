@@ -1,6 +1,17 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: "board",
+      automate: [
+          {
+            command: "WRAP_FREE",
+            useblock: 0
+          }
+      ]
+    }
+  })
   @Component({
     title: '自由布局',
     icon: 'absolute-layout',

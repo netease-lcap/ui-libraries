@@ -1,7 +1,7 @@
 /* 组件功能扩展插件 */
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
 import CollapseItem from 'element-ui/lib/collapse-item';
-import { at } from 'lodash';
+import { at, isObject } from 'lodash';
 import { createUseUpdateSync } from '@lcap/vue2-utils';
 import styles from '../index.module.css';
 
@@ -11,7 +11,7 @@ export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index'
 
 export const useDataSourceRender: NaslComponentPluginOptions = {
   props: ['data', 'valueField'],
-  setup({ get: propGet, useComputed, useRef }, { h }) {
+  setup({ get: propGet, useComputed }, { h }) {
     // el-collapse 有border样式，当数据为空时，需要添加empty样式
     const displayClass = useComputed(['data'], (data) => {
       const dataSource = propGet('dataSource');
@@ -35,7 +35,7 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
           return typeof slotDefault === 'function' ? slotDefault() : null;
         }
         return data.map((item, i) => {
-          const [value] = at(item, [valueField]);
+          const [value] = isObject(item) ? at(item, [valueField]) : [item];
           const current = {
             item,
             index: i,

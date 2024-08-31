@@ -33,8 +33,9 @@ namespace nasl.ui {
       title: '文本',
       description: '按钮内容',
       setter: { concept: 'InputSetter' },
+      implicitToString: true,
     })
-    text: nasl.core.String = '';
+    text: nasl.core.String;
 
     @Prop({
       group: '主要属性',

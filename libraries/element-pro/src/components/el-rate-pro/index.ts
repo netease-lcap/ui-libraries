@@ -6,6 +6,10 @@ export const ElRatePro = registerComponent(Rate, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: [],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
 });
 
 export default ElRatePro;

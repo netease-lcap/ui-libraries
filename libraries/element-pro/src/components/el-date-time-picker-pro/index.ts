@@ -6,6 +6,11 @@ export const ElDateTimePickerPro = registerComponent(DatePicker, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: [],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
+  rangeModel: ['startValue', 'endValue'],
 });
 
 export default ElDateTimePickerPro;

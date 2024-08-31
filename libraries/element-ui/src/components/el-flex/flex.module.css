@@ -2,6 +2,19 @@
   display: flex;
   box-sizing: border-box;
 }
+.flex > [widthstretch="true"],
+.flex > [heightstretch="true"] {
+  flex: 1;
+}
+.flex > [widthstretch="true"] {
+  width: unset !important;
+}
+.flex > [heightstretch="true"] {
+  height: unset !important;
+}
+.flex > [class^="el-button"] + [class^="el-button"] {
+  margin-left: 0;
+}
 
 .flexBlock {
   display: block;

@@ -58,27 +58,85 @@ namespace nasl.ui {
     },
   })
   @Component({
-    title: 'Base Table',
-    icon: 'base-table',
-    description: '',
+    title: '数据表格',
+    icon: 'table-view',
+    description:
+      '用于展示大量结构化数据。支持排序、过滤（筛选）、分页、自定义操作等复杂功能。',
     group: 'Table',
   })
-  export class ElTablePro extends ViewComponent {
-    constructor(options?: Partial<ElTableProOptions>) {
+  export class ElTablePro<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+  > extends ViewComponent {
+    @Prop({
+      title: '数据',
+    })
+    data: ElTableProOptions<T, V, P, M>['dataSource'];
+
+    @Prop({
+      title: '分页大小',
+    })
+    pageSize: ElTableProOptions<T, V, P, M>['pageSize'];
+
+    @Prop({
+      title: '当前页数',
+    })
+    page: ElTableProOptions<T, V, P, M>['page'];
+
+    @Prop({
+      title: '排序属性',
+    })
+    order: nasl.core.String;
+
+    @Prop({
+      title: '排序字段',
+    })
+    sorter: nasl.core.String;
+
+    constructor(options?: Partial<ElTableProOptions<T, V, P, M>>) {
       super();
     }
   }
 
-  export class ElTableProOptions extends ViewComponentOptions {
+  export class ElTableProOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+  > extends ViewComponentOptions {
+    // @Prop({
+    //   group: '主要属性',
+    //   sync: true,
+    //   title: '高亮行值',
+    //   description:
+    //     '高亮行，支持鼠标键盘操作(Shift)连续高亮行，可用于处理行选中等批量操作，模拟操作系统区域选择行为。支持语法糖 `.sync`。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // activeRowKeys: any[] = [];
+
     @Prop({
       group: '主要属性',
       sync: true,
-      title: 'Active Row Keys',
-      description:
-        '高亮行，支持鼠标键盘操作(Shift)连续高亮行，可用于处理行选中等批量操作，模拟操作系统区域选择行为。支持语法糖 `.sync`。',
-      setter: { concept: 'InputSetter' },
+      title: '选中值',
+      description: '选中行。',
+      // setter: { concept: 'InputSetter' },
     })
-    activeRowKeys: any[] = [];
+    selectedRowKeys: any[] | any;
+
+    @Prop({
+      group: '数据属性',
+      title: '初始化排序规则',
+      description: '设置数据初始化时的排序字段和顺序规则',
+      docDescription:
+        '支持选择数据表格数据源中的某一条数据，配置默认排序规则，支持升序和降序',
+    })
+    sorting: {
+      field: nasl.core.String;
+      order: nasl.core.String;
+      compare?: Function;
+    } = { field: undefined, order: 'desc' };
 
     // @Prop({
     //   group: '主要属性',
@@ -117,7 +175,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Bordered',
+      title: '是否显示表格边框',
       description: '是否显示表格边框',
       setter: { concept: 'SwitchSetter' },
     })
@@ -133,36 +191,49 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Cell Empty Content',
+      title: '单元格数据为空时呈现的内容。',
       description: '单元格数据为空时呈现的内容。',
       setter: { concept: 'InputSetter' },
     })
     cellEmptyContent: any;
 
     @Prop({
-      group: '主要属性',
-      title: 'Data',
-      description: '数据源，泛型 T 指表格数据类型。',
-      setter: { concept: 'InputSetter' },
+      group: '数据属性',
+      title: '数据源',
+      description: '展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑',
+      docDescription:
+        '表格展示的数据。数据源可以绑定变量或者逻辑。变量或逻辑的返回值可以是数组，也可以是对象。对象格式为{list:[], total:10}',
+      designerValue: [{}, {}, {}],
     })
-    data: any[] = [];
+    dataSource:
+      | { list: nasl.collection.List<T>; total: nasl.core.Integer }
+      | nasl.collection.List<T>;
+
+    @Prop({
+      group: '数据属性',
+      title: '数据类型',
+      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
+      docDescription:
+        '表格每一行的数据类型。该属性为展示属性，由数据源推导得到，无需填写',
+    })
+    dataSchema: T;
 
     @Prop({
       group: '主要属性',
-      title: 'Disable Data Page',
+      title: '是否禁用本地数据分页',
       description:
         '是否禁用本地数据分页。当 `data` 数据长度超过分页大小时，会自动进行本地数据分页。如果 `disableDataPage` 设置为 true，则无论何时，都不会进行本地数据分页',
       setter: { concept: 'SwitchSetter' },
     })
     disableDataPage: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Disable Space Inactive Row',
-      description: '默认重复按下 Space 键可取消当前行高亮，是否禁用取消',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disableSpaceInactiveRow: nasl.core.Boolean;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '默认重复按下 Space 键可取消当前行高亮，是否禁用取消',
+    //   description: '默认重复按下 Space 键可取消当前行高亮，是否禁用取消',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // disableSpaceInactiveRow: nasl.core.Boolean;
 
     // @Prop({
     //   group: '主要属性',
@@ -243,7 +314,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Height',
+      title: '表格高度',
       description:
         '表格高度，超出后会出现滚动条。示例：100,  "30%",  "300"。值为数字类型，会自动加上单位 px。如果不是绝对固定表格高度，建议使用 `maxHeight`',
       setter: { concept: 'InputSetter' },
@@ -260,20 +331,20 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Hover',
+      title: '是否显示鼠标悬浮状态',
       description: '是否显示鼠标悬浮状态',
       setter: { concept: 'SwitchSetter' },
     })
     hover: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Keyboard Row Hover',
-      description:
-        '键盘操作行显示悬浮效果，一般用于键盘操作行选中、行展开、行高亮等功能',
-      setter: { concept: 'SwitchSetter' },
-    })
-    keyboardRowHover: nasl.core.Boolean = true;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Keyboard Row Hover',
+    //   description:
+    //     '键盘操作行显示悬浮效果，一般用于键盘操作行选中、行展开、行高亮等功能',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // keyboardRowHover: nasl.core.Boolean = true;
 
     // @Prop({
     //   group: '主要属性',
@@ -283,23 +354,23 @@ namespace nasl.ui {
     // })
     // lastFullRow: any;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Lazy Load',
-      description:
-        '是否启用整个表格元素的懒加载，当页面滚动到可视区域后再渲染表格。注意和表格内部行滚动懒加载的区别，内部行滚动无论表格是否在可视区域都会默认渲染第一屏的行元素',
-      setter: { concept: 'SwitchSetter' },
-    })
-    lazyLoad: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Lazy Load',
+    //   description:
+    //     '是否启用整个表格元素的懒加载，当页面滚动到可视区域后再渲染表格。注意和表格内部行滚动懒加载的区别，内部行滚动无论表格是否在可视区域都会默认渲染第一屏的行元素',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // lazyLoad: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Loading',
-      description:
-        '加载中状态。值为 `true` 会显示默认加载中样式，可以通过 Function 和 插槽 自定义加载状态呈现内容和样式。值为 `false` 则会取消加载状态。',
-      setter: { concept: 'SwitchSetter' },
-    })
-    loading: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Loading',
+    //   description:
+    //     '加载中状态。值为 `true` 会显示默认加载中样式，可以通过 Function 和 插槽 自定义加载状态呈现内容和样式。值为 `false` 则会取消加载状态。',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // loading: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
@@ -319,30 +390,50 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Max Height',
+      title: '表格最大高度',
       description:
         '表格最大高度，超出后会出现滚动条。示例：100, "30%", "300"。值为数字类型，会自动加上单位 px',
       setter: { concept: 'InputSetter' },
     })
     maxHeight: nasl.core.String | nasl.core.Decimal;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Pagination',
-      description:
-        '分页配置，值为空则不显示。具体 API 参考分页组件。当 `data` 数据长度超过分页大小时，会自动对本地数据 `data` 进行排序，如果不希望对于 `data` 进行排序，可以设置 `disableDataPage = true`。',
-      setter: { concept: 'InputSetter' },
-    })
-    pagination: object;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Pagination',
+    //   description:
+    //     '分页配置，值为空则不显示。具体 API 参考分页组件。当 `data` 数据长度超过分页大小时，会自动对本地数据 `data` 进行排序，如果不希望对于 `data` 进行排序，可以设置 `disableDataPage = true`。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // pagination: object;
 
     @Prop({
       group: '主要属性',
-      title: 'Pagination',
-      description:
-        '分页配置，值为空则不显示。具体 API 参考分页组件。当 `data` 数据长度超过分页大小时，会自动对本地数据 `data` 进行排序，如果不希望对于 `data` 进行排序，可以设置 `disableDataPage = true`。',
+      title: '每页条数选项 ',
+      description: '每页条数切换器的选项',
       setter: { concept: 'InputSetter' },
     })
     pageSizeOptions: nasl.core.String = '[10, 20, 50]';
+
+    @Prop({
+      group: '数据属性',
+      title: '默认每页条数',
+      docDescription: '每页的数据条数。默认20条。在"分页"属性开启时有效',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    pageSize: nasl.core.Integer = 10;
+
+    @Prop({
+      group: '数据属性',
+      title: '当前页数',
+      description: '当前默认展示在第几页',
+      docDescription: '当前加载的表格页。默认1。在"分页"属性开启时有效',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    page: nasl.core.Integer = 1;
 
     // @Prop({
     //   group: '主要属性',
@@ -381,12 +472,12 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Row Key',
+      title: '唯一标识',
       description:
         '必需。唯一标识一行数据的字段名，来源于 `data` 中的字段。如果是字段嵌套多层，可以设置形如 `item.a.id` 的方法',
       setter: { concept: 'InputSetter' },
     })
-    rowKey: nasl.core.String = 'id';
+    rowKey: nasl.core.String = 'index';
 
     // @Prop({
     //   group: '主要属性',
@@ -417,7 +508,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Show Header',
+      title: '是否显示表头',
       description: '是否显示表头',
       setter: { concept: 'SwitchSetter' },
     })
@@ -425,19 +516,19 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Size',
+      title: '表格尺寸',
       description:
         '表格尺寸，支持全局配置 `GlobalConfigProvider`，默认全局配置值为 `medium`。可选项：small/medium/large。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'small' }, { title: 'medium' }, { title: 'large' }],
+        options: [{ title: '小' }, { title: '中' }, { title: '大' }],
       },
     })
     size: 'small' | 'medium' | 'large' = 'medium';
 
     @Prop({
       group: '主要属性',
-      title: 'Stripe',
+      title: '是否显示斑马纹',
       description: '是否显示斑马纹',
       setter: { concept: 'SwitchSetter' },
     })
@@ -445,7 +536,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Table Content Width',
+      title: '表格内容的总宽度',
       description:
         '表格内容的总宽度，注意不是表格可见宽度。主要应用于 `table-layout: auto` 模式下的固定列显示。`tableContentWidth` 内容宽度的值必须大于表格可见宽度',
       setter: { concept: 'InputSetter' },
@@ -454,7 +545,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Table Layout',
+      title: '表格布局方式',
       description: '表格布局方式，`<table>` 元素原生属性。',
       setter: {
         concept: 'EnumSelectSetter',
@@ -473,21 +564,21 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Vertical Align',
+      title: '内容上下方向对齐',
       description: '行内容上下方向对齐。可选项：top/middle/bottom',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'top' }, { title: 'middle' }, { title: 'bottom' }],
+        options: [{ title: '上' }, { title: '中' }, { title: '下' }],
       },
     })
     verticalAlign: 'top' | 'middle' | 'bottom' = 'middle';
 
-    @Event({
-      title: '高亮行发生变化时触发',
-      description:
-        '高亮行发生变化时触发，泛型 T 指表格数据类型。参数 `activeRowList` 表示所有高亮行数据， `currentRowData` 表示当前操作行数据。',
-    })
-    onActiveChange: (event: any) => any;
+    // @Event({
+    //   title: '高亮行发生变化时触发',
+    //   description:
+    //     '高亮行发生变化时触发，泛型 T 指表格数据类型。参数 `activeRowList` 表示所有高亮行数据， `currentRowData` 表示当前操作行数据。',
+    // })
+    // onActiveChange: (event: any) => any;
 
     // @Event({
     //   title: 'On Active Row Action',
@@ -667,24 +758,25 @@ namespace nasl.ui {
   > extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
-      title: '值字段',
+      title: '列字段',
       description: 'data 项中的字段',
       docDescription: '数据项中对应的字段名，如createdTime',
     })
     colKey: (item: T) => any;
 
-    // @Prop({
-    //   group: '数据属性',
-    //   title: '排序',
-    //   description: '设置该列是否可以排序',
-    //   docDescription: '开启后该列可排序，可设置默认顺序，升序或倒序',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    // })
-    // sortable: nasl.core.Boolean = false;
+    @Prop({
+      group: '数据属性',
+      title: '列选中类型',
+      description: '列选中类型',
+      docDescription: '有两种模式：单选和多选',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '单选' }, { title: '多选' }, { title: '无' }],
+      },
+    })
+    type: 'single' | 'multiple' | null = null;
 
-    // @Prop<UTableViewColumnOptions<T, V, P, M>, 'defaultOrder'>({
+    // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
     //   group: '数据属性',
     //   title: '排序初始顺序',
     //   description: '该列首次点击时的排序顺序',
@@ -790,39 +882,39 @@ namespace nasl.ui {
     })
     fixed: 'left' | 'right' | '' = '';
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '表头文本过长省略',
-    //   description: '文字过长是否省略显示。默认文字超出时会换行。',
-    //   docDescription:
-    //     '开启后，该列表头文本过长会省略显示，否则换行显示，默认关闭',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    // })
-    // thEllipsis: nasl.core.Boolean = false;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '内容区文本过长省略',
-    //   description: '文字过长是否省略显示。默认文字超出时会换行。',
-    //   docDescription: '开启后，该列文本过长会省略显示，否则换行显示，默认关闭',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    // })
-    // ellipsis: nasl.core.Boolean = false;
-
     @Prop({
       group: '主要属性',
-      title: '隐藏列',
+      title: '表头文本过长省略',
+      description: '文字过长是否省略显示。默认文字超出时会换行。',
       docDescription:
-        '开启后，当表格横向滚动条滚动时，该列会固定不会跟随滚动条滚动',
+        '开启后，该列表头文本过长会省略显示，否则换行显示，默认关闭',
       setter: {
         concept: 'SwitchSetter',
       },
     })
-    hidden: nasl.core.Boolean = false;
+    ellipsisTitle: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '内容区文本过长省略',
+      description: '文字过长是否省略显示。默认文字超出时会换行。',
+      docDescription: '开启后，该列文本过长会省略显示，否则换行显示，默认关闭',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    ellipsis: nasl.core.Boolean = false;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '隐藏列',
+    //   docDescription:
+    //     '开启后，当表格横向滚动条滚动时，该列会固定不会跟随滚动条滚动',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // hidden: nasl.core.Boolean = false;
 
     // @Prop<UTableViewColumnOptions<T, V, P, M>, 'expanderPosition'>({
     //   group: '样式属性',

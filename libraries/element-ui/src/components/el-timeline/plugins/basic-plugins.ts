@@ -1,6 +1,6 @@
 /* 组件功能扩展插件 */
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
-import { at } from 'lodash';
+import { at, isObject } from 'lodash';
 import { ElTimelineItem } from '../index';
 
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index';
@@ -21,7 +21,7 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
           return typeof slotDefault === 'function' ? slotDefault() : null;
         }
         return data.map((item, i) => {
-          const [value] = at(item, [valueField]);
+          const [value] = isObject(item) ? at(item, [valueField]) : [item];
           const current = {
             item,
             index: i,

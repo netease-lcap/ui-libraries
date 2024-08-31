@@ -1,6 +1,13 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: "container",
+      childAccept: "target.tag === 'el-col'",
+      structured: true
+    }
+  })
   @Component({
     title: '栅格布局',
     icon: 'row',
@@ -79,14 +86,6 @@ namespace nasl.ui {
     })
     gutter: nasl.core.Decimal | nasl.core.Integer = 0;
 
-    @Prop({
-      group: '主要属性',
-      title: '自定义元素标签',
-      description: '自定义元素标签',
-      setter: { concept: 'InputSetter' },
-    })
-    tag: nasl.core.String = 'div';
-
     @Slot({
       title: '自定义默认内容',
       description: '自定义默认内容',
@@ -108,6 +107,15 @@ namespace nasl.ui {
     }
   }
 
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: "container",
+      parentAccept: "target.tag === 'el-row'",
+      slotInlineStyle: {
+        default: "min-width:auto"
+      }
+    }
+  })
   export class ElColOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
@@ -143,91 +151,121 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'XsSpan',
+      title: 'Xs栅格占据的列数',
       description: '`<768px` 响应式栅格占据的列数',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        max: 24,
+      },
     })
     xsSpan: nasl.core.Decimal | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
-      title: 'XsOffset',
+      title: 'Xs左侧的间隔格数',
       description: '`<768px` 响应式栅格左侧的间隔格数',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        max: 24,
+      },
     })
     xsOffset: nasl.core.Decimal | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
-      title: 'SmSpan',
+      title: 'Sm栅格占据的列数',
       description: '`≥768px` 响应式栅格占据的列数',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        max: 24,
+      },
     })
     smSpan: nasl.core.Decimal | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
-      title: 'SmOffset',
+      title: 'Sm左侧的间隔格数',
       description: '`≥768px` 响应式栅格左侧的间隔格数',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        max: 24,
+      },
     })
     smOffset: nasl.core.Decimal | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
-      title: 'MdSpan',
+      title: 'Md栅格占据的列数',
       description: '`≥992px` 响应式栅格占据的列数',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        max: 24,
+      },
     })
     mdSpan: nasl.core.Decimal | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
-      title: 'MdOffset',
+      title: 'Md左侧的间隔格数',
       description: '`≥992px` 响应式栅格左侧的间隔格数',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        max: 24,
+      },
     })
     mdOffset: nasl.core.Decimal | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
-      title: 'LgSpan',
+      title: 'Lg栅格占据的列数',
       description: '`≥1200px` 响应式栅格占据的列数',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        max: 24,
+      },
     })
     lgSpan: nasl.core.Decimal | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
-      title: 'LgOffset',
+      title: 'Lg左侧的间隔格数',
       description: '`≥1200px` 响应式栅格左侧的间隔格数',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        max: 24,
+      },
     })
     lgOffset: nasl.core.Decimal | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
-      title: 'XlSpan',
+      title: 'Xl栅格占据的列数',
       description: '`≥1920px` 响应式栅格占据的列数',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        max: 24,
+      },
     })
     xlSpan: nasl.core.Decimal | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
-      title: 'XlOffset',
+      title: 'Xl左侧的间隔格数',
       description: '`≥1920px` 响应式栅格左侧的间隔格数',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        max: 24,
+      },
     })
     xlOffset: nasl.core.Decimal | nasl.core.Integer;
 
-    @Prop({
-      group: '主要属性',
-      title: '自定义元素标签',
-      description: '自定义元素标签',
-      setter: { concept: 'InputSetter' },
+    @Event({
+      title: '点击栅格列',
+      description: '点击栅格列时触发',
     })
-    tag: nasl.core.String = 'div';
+    onClick: (event: {
+        column: nasl.core.Integer;
+    }) => any;
 
     @Slot({
       title: '自定义默认内容',

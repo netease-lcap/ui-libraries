@@ -22,12 +22,12 @@ namespace nasl.ui {
     @Prop({
       title: '起始值',
     })
-    startDate: ElDatePickerProOptions['startDate'];
+    startValue: ElDatePickerProOptions['startValue'];
 
     @Prop({
       title: '结束值',
     })
-    endDate: ElDatePickerProOptions['endDate'];
+    endValue: ElDatePickerProOptions['endValue'];
 
     constructor(options?: Partial<ElDatePickerProOptions>) {
       super();
@@ -53,25 +53,25 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       if: (_) => _.range === false,
     })
-    value: nasl.core.String | nasl.core.Integer | nasl.core.Date;
+    value: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
-    @Prop<ElDatePickerProOptions, 'startDate'>({
+    @Prop<ElDatePickerProOptions, 'startValue'>({
       group: '数据属性',
       title: '起始值',
       description: '开始日期',
       setter: { concept: 'InputSetter' },
       if: (_) => !!_.range,
     })
-    startDate: nasl.core.String | nasl.core.Integer | nasl.core.Date;
+    startValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
-    @Prop<ElDatePickerProOptions, 'endDate'>({
+    @Prop<ElDatePickerProOptions, 'endValue'>({
       group: '数据属性',
       title: '结束值',
       description: '结束日期',
       setter: { concept: 'InputSetter' },
       if: (_) => !!_.range,
     })
-    endDate: nasl.core.String | nasl.core.Integer | nasl.core.Date;
+    endValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
     @Prop({
       group: '主要属性',
@@ -358,8 +358,8 @@ namespace nasl.ui {
     })
     onBlur: (event: {
       value: nasl.core.String | nasl.core.Date,
-      startTime: nasl.core.String | nasl.core.Date,
-      endTime: nasl.core.String | nasl.core.Date,
+      startValue: nasl.core.String | nasl.core.Date,
+      endValue: nasl.core.String | nasl.core.Date,
       position: 'start' | 'end',
      }) => any;
 
@@ -369,8 +369,8 @@ namespace nasl.ui {
     })
     onChange: (event: {
       value: nasl.core.String | nasl.core.Date,
-      startTime: nasl.core.String | nasl.core.Date,
-      endTime: nasl.core.String | nasl.core.Date,
+      startValue: nasl.core.String | nasl.core.Date,
+      endValue: nasl.core.String | nasl.core.Date,
       trigger: 'confirm' | 'pick' | 'enter' | 'preset' | 'clear',
      }) => any;
 
@@ -380,8 +380,8 @@ namespace nasl.ui {
     })
     onConfirm: (event: {
       value: nasl.core.String | nasl.core.Date,
-      startTime: nasl.core.String | nasl.core.Date,
-      endTime: nasl.core.String | nasl.core.Date,
+      startValue: nasl.core.String | nasl.core.Date,
+      endValue: nasl.core.String | nasl.core.Date,
       position: 'start' | 'end',
      }) => any;
 
@@ -391,8 +391,8 @@ namespace nasl.ui {
     })
     onFocus: (event: {
       value: nasl.core.String | nasl.core.Date,
-      startTime: nasl.core.String | nasl.core.Date,
-      endTime: nasl.core.String | nasl.core.Date,
+      startValue: nasl.core.String | nasl.core.Date,
+      endValue: nasl.core.String | nasl.core.Date,
       position: 'start' | 'end',
      }) => any;
 
@@ -402,8 +402,8 @@ namespace nasl.ui {
     })
     onPick: (event: {
       value: nasl.core.String | nasl.core.Date,
-      startTime: nasl.core.String | nasl.core.Date,
-      endTime: nasl.core.String | nasl.core.Date,
+      startValue: nasl.core.String | nasl.core.Date,
+      endValue: nasl.core.String | nasl.core.Date,
       position: 'start' | 'end',
      }) => any;
 
@@ -413,8 +413,8 @@ namespace nasl.ui {
     // })
     // onPresetClick: (event: {
     //   value: nasl.core.String | nasl.core.Date,
-    //   startTime: nasl.core.String | nasl.core.Date,
-    //   endTime: nasl.core.String | nasl.core.Date,
+    //   startValue: nasl.core.String | nasl.core.Date,
+    //   endValue: nasl.core.String | nasl.core.Date,
     //   position: 'start' | 'end',
     //  }) => any;
   }

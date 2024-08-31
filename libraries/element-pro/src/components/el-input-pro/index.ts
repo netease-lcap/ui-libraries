@@ -4,9 +4,20 @@ import * as plugins from './plugins';
 
 export const ElInputPro = registerComponent(Input, plugins, {
   nativeEvents: [],
-  slotNames: [],
+  slotNames: [
+    // 'label',
+    // 'prefixIcon',
+    // 'suffix',
+    // 'suffixIcon',
+    // 'tips',
+  ],
   methodNames: [],
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
 });
+
 export const ElInputGroupPro = InputGroup;
 
 export default ElInputPro;
