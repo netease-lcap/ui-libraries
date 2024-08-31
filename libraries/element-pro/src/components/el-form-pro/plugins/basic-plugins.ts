@@ -388,11 +388,13 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       [$ref]: {
         async validate() {
           if (!instance || !instance.refs || !instance.refs.$base) {
-            return false;
+            return { valid: false };
           }
 
           const result = await (instance.refs.$base as any).validate();
-          return result === true;
+          return {
+            valid: result === true,
+          };
         },
         resetForm() {
           const resetType = props.get('resetType') || 'empty';
