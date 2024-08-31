@@ -260,7 +260,7 @@ namespace nasl.ui {
   }
 
   @Component({
-    title: 'Pagination Mini',
+    title: '翻页器mini',
     icon: 'pagination-mini',
     description: '',
     group: 'Navigation',
