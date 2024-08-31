@@ -11,7 +11,7 @@ import {
   onBeforeUnmount,
   SetupContext,
 } from '@vue/composition-api';
-import { kebabCase } from 'lodash';
+import { includes, kebabCase } from 'lodash';
 import PluginManager from './plugin';
 import { MapGetKey, PluginSetupRef } from './types';
 import {
@@ -465,6 +465,10 @@ export default defineComponent({
       }
 
       const eventName = getEventName(key);
+
+      if (this.$eventNames.includes(eventName)) {
+        return;
+      }
 
       if (eventName && refListeners[eventName]) {
         delete refListeners[eventName];

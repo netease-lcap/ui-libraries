@@ -215,6 +215,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         setValue: (v) => {
           setFieldValue(name, v);
         },
+        getValue: () => getFieldValue(name),
         setInitalValue: (v) => {
           if (initialSetted) {
             return;
@@ -228,11 +229,6 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
           }
         },
       };
-
-      if (!name.startsWith(LCAP_FORM_UID)) {
-        formField.getValue = () => getFieldValue(name);
-      }
-
       formFieldMetas[name] = {
         bindValue: value,
         fieldControl: formField,
@@ -259,6 +255,8 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
       let initialSetted = false;
       const formRangeField: FormRangeField = {
+        uid,
+        name,
         setValue: (index, v) => {
           if (name[index]) {
             setFieldValue(name[index], v);
@@ -268,6 +266,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
           values[index] = v;
           setFieldValue(uid, normalizeRangeFieldValue(values[0], values[1]));
         },
+        getValue: (index) => getFieldValue(name[index]),
         setInitalValue: (values) => {
           if (initialSetted) {
             return;
@@ -304,9 +303,6 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
           }
         },
       };
-      if (name[0] && name[1]) {
-        formRangeField.getValue = (index) => getFieldValue(name[index]);
-      }
 
       return formRangeField;
     }
@@ -390,13 +386,23 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         return vnodes;
       },
       [$ref]: {
-        async validate(params = null) {
+        async validate() {
           if (!instance || !instance.refs || !instance.refs.$base) {
             return false;
           }
 
-          const result = await (instance.refs.$base as any).validate(params);
+          const result = await (instance.refs.$base as any).validate();
           return result === true;
+        },
+        resetForm() {
+          const resetType = props.get('resetType') || 'empty';
+          Object.keys(formFieldMetas).forEach((key) => {
+            if (resetType === 'initial') {
+              setFieldValue(key, formFieldMetas[key].bindValue === undefined ? null : formFieldMetas[key].bindValue);
+              return;
+            }
+            setFieldValue(key, null);
+          });
         },
         setFormData,
         getFormData,
