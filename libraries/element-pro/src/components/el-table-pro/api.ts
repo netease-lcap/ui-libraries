@@ -95,6 +95,12 @@ namespace nasl.ui {
     })
     sorter: nasl.core.String;
 
+    @Method({
+      title: 'undefined',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void {}
+
     constructor(options?: Partial<ElTableProOptions<T, V, P, M>>) {
       super();
     }

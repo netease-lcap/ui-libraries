@@ -57,17 +57,17 @@ namespace nasl.ui {
     })
     closeOnPressEscape: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Drawer 的自定义类名',
-      description: 'Drawer 的自定义类名',
-      setter: { concept: 'InputSetter' },
-    })
-    customClass: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Drawer 的自定义类名',
+    //   description: 'Drawer 的自定义类名',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // customClass: nasl.core.String;
 
     @Prop({
       group: '主要属性',
-      title: '控制是否在关闭 Drawer 之后将子元素全部销毁',
+      title: '是否在关闭后销毁子元素',
       description: '控制是否在关闭 Drawer 之后将子元素全部销毁',
       setter: { concept: 'SwitchSetter' },
     })
