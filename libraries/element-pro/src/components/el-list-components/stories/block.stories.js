@@ -1,9 +1,5 @@
-import Vue from 'vue';
-import * as CloudUI from '@/index.js';
 import Component from '../index.js';
 import BlocksDemo1 from '../demos/blocks/BlocksDemo1.vue';
-
-Vue.use(CloudUI);
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -24,6 +20,9 @@ export const Demo0 = {
     components: {
       DeprecatedDemo: BlocksDemo1,
     },
-    template: '<deprecated-demo />',
+    template: `<el-list-components>
+    <template #default="current">
+    </template>
+  </el-list-components>`,
   }),
 };

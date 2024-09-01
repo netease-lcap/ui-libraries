@@ -34,3 +34,4 @@ export {
   ElTableColumnPro,
 } from './el-table-pro';
 export { ElPaginationPro, ElPaginationMiniPro } from './el-pagination-pro';
+export { ElListComponents } from './el-list-components';
