@@ -209,13 +209,13 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       });
     }
 
-    function setFieldValue(key: string, value: any) {
+    function setFieldValue(key: string, value: any, emitChange = true) {
       if (!key) {
         return;
       }
 
       lodashSet(formData, key, value);
-      if (formFieldMetas[key] && typeof formFieldMetas[key].change === 'function') {
+      if (emitChange && formFieldMetas[key] && typeof formFieldMetas[key].change === 'function') {
         formFieldMetas[key].change(value);
       }
     }
@@ -234,8 +234,8 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       let initialSetted = false;
       const formField: FormField = {
         name,
-        setValue: (v) => {
-          setFieldValue(name, v);
+        setValue: (v, emitChange = true) => {
+          setFieldValue(name, v, emitChange);
         },
         getValue: () => getFieldValue(name),
         setInitalValue: (v) => {
@@ -279,9 +279,9 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       const formRangeField: FormRangeField = {
         uid,
         name,
-        setValue: (index, v) => {
+        setValue: (index, v, emitChange = true) => {
           if (name[index]) {
-            setFieldValue(name[index], v);
+            setFieldValue(name[index], v, emitChange);
           }
 
           const values = [...(getFieldValue(uid) || [])];

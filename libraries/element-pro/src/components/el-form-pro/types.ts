@@ -8,7 +8,7 @@ export interface FormFieldOptions {
 }
 export interface FormField {
   name: string;
-  setValue: (v: any) => void;
+  setValue: (v: any, emitChange?: boolean) => void;
   getValue?: () => any;
   setInitalValue?: (v: any) => void;
   setChangeListener?: (listener: (v: any) => void) => void;
@@ -17,7 +17,7 @@ export interface FormField {
 export interface FormRangeField {
   uid,
   name: [string, string],
-  setValue: (index: number, v: any) => void;
+  setValue: (index: number, v: any, emitChange?: boolean) => void;
   getValue?: (index: number) => any;
   setInitalValue?: (v: [any, any]) => void;
   setChangeListener: (startListener: (v: any) => void, endListener: (v: any) => void) => void;
@@ -34,7 +34,7 @@ export interface FormExtendsContext {
   labelWidth: ComputedRef<string>;
   addFormItemInstance: (ins: any) => void;
   removeFormItemInstance: (ins: any) => void;
-  setFieldValue: (name: string, value: any) => void,
+  setFieldValue: (name: string, value: any, emitChange?: boolean) => void,
   initFormField: (options: FormFieldOptions) => FormField;
   initFormRangeField: (options: FormRangeFieldOptions) => FormRangeField;
   removeField: (name: string, deleteFieldValue?: boolean) => void,

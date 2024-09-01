@@ -33,7 +33,7 @@ function createModelMixin(model: NaslComponentExtendInfo['model']) {
     watch: {
       [prop](val, oldVal) {
         if (val !== oldVal && this.formField && this.formField.getValue() !== val) {
-          this.formField.setValue(val);
+          this.formField.setValue(val, false);
         }
       },
     },
@@ -87,13 +87,13 @@ function createRangeModelMixin(rangeModel: NaslComponentExtendInfo['rangeModel']
       [startProp](val, oldVal) {
         const startIndex = 0;
         if (val !== oldVal && this.formRangeField && this.formRangeField.getValue(startIndex) !== val) {
-          this.formRangeField.setValue(startIndex, val);
+          this.formRangeField.setValue(startIndex, val, false);
         }
       },
       [endProp](val, oldVal) {
         const endIndex = 1;
         if (val !== oldVal && this.formRangeField && this.formRangeField.getValue(endIndex) !== val) {
-          this.formRangeField.setValue(endIndex, val);
+          this.formRangeField.setValue(endIndex, val, false);
         }
       },
     },
