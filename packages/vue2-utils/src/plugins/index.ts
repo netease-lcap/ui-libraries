@@ -32,7 +32,7 @@ function createModelMixin(model: NaslComponentExtendInfo['model']) {
     },
     watch: {
       [prop](val, oldVal) {
-        if (val !== oldVal && this.formField) {
+        if (val !== oldVal && this.formField && this.formField.getValue() !== val) {
           this.formField.setValue(val);
         }
       },
@@ -83,6 +83,20 @@ function createRangeModelMixin(rangeModel: NaslComponentExtendInfo['rangeModel']
         type: Object,
       },
     },
+    watch: {
+      [startProp](val, oldVal) {
+        const startIndex = 0;
+        if (val !== oldVal && this.formRangeField && this.formRangeField.getValue(startIndex) !== val) {
+          this.formRangeField.setValue(startIndex, val);
+        }
+      },
+      [endProp](val, oldVal) {
+        const endIndex = 1;
+        if (val !== oldVal && this.formRangeField && this.formRangeField.getValue(endIndex) !== val) {
+          this.formRangeField.setValue(endIndex, val);
+        }
+      },
+    },
     methods: {
       getRangeModelValue(prop = startProp) {
         if (this.formRangeField && isFunction(this.formRangeField.getValue)) {
@@ -106,8 +120,8 @@ function createRangeModelMixin(rangeModel: NaslComponentExtendInfo['rangeModel']
 
         attrs[startProp] = this.getRangeModelValue(startProp);
         attrs[endProp] = this.getRangeModelValue(endProp);
-        if (this.formField && isFunction(this.formField.setChangeListener)) {
-          this.formField.setChangeListener(startChangeListner, endChangeListner);
+        if (this.formRangeField && isFunction(this.formRangeField.setChangeListener)) {
+          this.formRangeField.setChangeListener(startChangeListner, endChangeListner);
         }
       },
     },

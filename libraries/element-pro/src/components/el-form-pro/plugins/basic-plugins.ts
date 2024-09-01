@@ -86,6 +86,41 @@ const normalizeRangeFieldValue = (startValue, endValue) => {
   return [startValue, endValue];
 };
 
+const useFormItemControls = () => {
+  const formItemInstances: any[] = [];
+
+  function addFormItemInstance(ins: any) {
+    if (formItemInstances.includes(ins)) {
+      return;
+    }
+    formItemInstances.push(ins);
+  }
+
+  function removeFormItemInstance(ins: any) {
+    const index = formItemInstances.indexOf(ins);
+    if (index === -1) {
+      return;
+    }
+
+    formItemInstances.splice(index, 1);
+  }
+
+  function resetFormItemNeedReset() {
+    // 组件源码黑操作
+    formItemInstances.forEach((ins) => {
+      if (ins) {
+        ins.needResetField = true;
+      }
+    });
+  }
+
+  return {
+    addFormItemInstance,
+    removeFormItemInstance,
+    resetFormItemNeedReset,
+  };
+};
+
 /* 组件功能扩展插件 */
 export const useExtensPlugin: NaslComponentPluginOptions = {
   props: [
@@ -95,9 +130,9 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
   setup(props, { h }) {
     const { useComputed } = props;
     const instance = getCurrentInstance();
+    const { addFormItemInstance, removeFormItemInstance, resetFormItemNeedReset } = useFormItemControls();
     const formData = reactive({});
     const formFieldMetas: Record<string, FormFieldMata> = {};
-    const formItemInstances: any[] = [];
 
     const labelWidth = useComputed(['labelWidthType', 'labelWidth'], (
       labelWidthType = '',
@@ -142,22 +177,6 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
       return undefined;
     });
-
-    function addFormItemInstance(ins: any) {
-      if (formItemInstances.includes(ins)) {
-        return;
-      }
-      formItemInstances.push(ins);
-    }
-
-    function removeFormItemInstance(ins: any) {
-      const index = formItemInstances.indexOf(ins);
-      if (index === -1) {
-        return;
-      }
-
-      formItemInstances.splice(index, 1);
-    }
 
     function removeField(name) {
       if (!name) {
@@ -417,12 +436,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
             setFieldValue(key, null);
           });
 
-          // 组件源码黑操作
-          formItemInstances.forEach((ins) => {
-            if (ins) {
-              ins.needResetField = true;
-            }
-          });
+          resetFormItemNeedReset();
 
           if (isFunction(onReset)) {
             onReset();

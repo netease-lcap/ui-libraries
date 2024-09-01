@@ -18,6 +18,8 @@ export const Default = {
         ellipsis: false,
         formData: {},
         syncValue: '嘿嘿嘿',
+        startTime: null,
+        endTime: null,
       };
     },
     methods: {
@@ -29,7 +31,9 @@ export const Default = {
         //   },
         // });
 
-        this.$refs.form.resetForm();
+        this.startTime = new Date().toJSON();
+        this.endTime = new Date().toJSON();
+        // this.$refs.form.resetForm();
       },
     },
     template: `<div><el-form-pro ref="form" resetType="initial">
@@ -48,7 +52,7 @@ export const Default = {
         </el-form-item-pro>
       </el-form-item-pro>
        <el-form-item-pro colSpan="2" :useRangeValue="true" startFieldName="startTime" endFieldName="endTime" label="时间区间">
-        <el-date-time-picker-pro :range="true" ></el-date-time-picker-pro>
+        <el-date-time-picker-pro :startValue.sync="startTime" :endValue.sync="endTime" :range="true" ></el-date-time-picker-pro>
        </el-form-item-pro>
         <el-form-item-pro>
         <el-checkbox-group-pro :max="2">
