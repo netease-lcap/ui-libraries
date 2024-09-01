@@ -24,6 +24,8 @@ import {
   LCAP_FORM_UID,
 } from '../constants';
 import { FormExtendsContext, FormItemExtendsContext } from '../types';
+import { findVNode } from '../../../utils/vnode';
+import { isFormVNode, isModelVNode, isRangeModelVNode } from '../utils';
 
 function getFieldKey(name: ComputedRef<string> | Ref<string> | string, parentKey: ComputedRef<string> | Ref<string> | string): string {
   const k = unref(name) as string;
@@ -49,7 +51,7 @@ const useRegisterInstance = (ctx: SetupContext) => {
   onBeforeUnmount(() => {
     removeFormItemInstance(ctx.refs.$base);
   });
-}
+};
 
 export const useExtensPlugin: NaslComponentPluginOptions = {
   props: [
@@ -255,30 +257,16 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
           return vnodes;
         }
 
+        const result = findVNode(vnodes, (vnode) => {
+          return isFormVNode(vnode) || isModelVNode(vnode) || isRangeModelVNode(vnode);
+        });
+
         const useRangeValue = getUseRangeValue();
 
-        if (useRangeValue) {
-          const index = vnodes.findIndex((v) => {
-            return v.componentOptions
-            && v.componentOptions.Ctor
-            && (v.componentOptions.Ctor as any).options
-            && Array.isArray((v.componentOptions.Ctor as any).options.rangeModel)
-            && (v.componentOptions.Ctor as any).options.rangeModel.length === 2;
-          });
-
-          if (index !== -1) {
-            vnodes[index] = proxyRangeFieldVNode(vnodes[index]);
-          }
-        } else {
-          const index = vnodes.findIndex((v) => (
-            v.componentOptions
-            && v.componentOptions.Ctor
-            && (v.componentOptions.Ctor as any).options
-            && typeof (v.componentOptions.Ctor as any).options.model === 'object'
-          ));
-          if (index !== -1) {
-            vnodes[index] = proxyFormFieldVNode(vnodes[index]);
-          }
+        if (result.vnode && useRangeValue && isRangeModelVNode(result.vnode)) {
+          result.collection[result.index] = proxyRangeFieldVNode(result.vnode);
+        } else if (result.vnode && isModelVNode(result.vnode)) {
+          result.collection[result.index] = proxyFormFieldVNode(result.vnode);
         }
 
         return vnodes;

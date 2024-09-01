@@ -94,6 +94,8 @@ export interface PluginInitOptions {
 }
 
 export interface NaslComponentExtendInfo {
+  /* 自定义组件名称，默认继承组件名称 */
+  name?: string;
   /* 默认使用 ScopeSlots 向下透传， 原组件内容使用this.$slot.xxx 方式处理的需要配置名称，会转成$slots */
   slotNames?: string[];
   /* 配置对组件进行 on.native 监听的事件名称 */

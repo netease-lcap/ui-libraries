@@ -132,6 +132,7 @@ export const registerComponent = (
   baseComponent: any,
   pluginOption: PluginMap,
   {
+    name,
     slotNames = ['default'],
     nativeEvents = [],
     methodNames = [],
@@ -157,7 +158,7 @@ export const registerComponent = (
   }
 
   return {
-    name: componentOptions.name,
+    name: name || componentOptions.name,
     inheritAttrs: false,
     mixins,
     props: {

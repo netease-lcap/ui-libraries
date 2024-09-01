@@ -1,6 +1,6 @@
 import type { VNode } from 'vue';
 
-export const forEachVNodes = (vnodes: VNode[], callback?: (v: VNode) => (boolean | void), endCallback?: (v: VNode) => void) => {
+export const forEachVNodes = (vnodes: VNode[], callback?: (v: VNode, i: number, collection: VNode[]) => (boolean | void), endCallback?: (v: VNode) => void) => {
   for (let i = 0; i < vnodes.length; i++) {
     const vnode = vnodes[i];
 
@@ -9,7 +9,7 @@ export const forEachVNodes = (vnodes: VNode[], callback?: (v: VNode) => (boolean
       continue;
     }
 
-    if (callback && callback(vnode)) {
+    if (callback && callback(vnode, i, vnodes)) {
       return true;
     }
 
@@ -37,18 +37,30 @@ export const forEachVNodes = (vnodes: VNode[], callback?: (v: VNode) => (boolean
   return false;
 };
 
-export const findVNode = (vnodes: VNode[], callback: (v: VNode) => boolean) => {
+export const findVNode = (vnodes: VNode[], callback: (v: VNode, i: number) => boolean) => {
   let vnode = null;
+  let index = -1;
+  let collection;
 
-  forEachVNodes(vnodes, (v) => {
-    if (callback(v)) {
+  forEachVNodes(vnodes, (v, i, c) => {
+    if (callback(v, i)) {
       vnode = v;
+      index = i;
+      collection = c;
       return true;
     }
 
     return false;
   });
-  return vnode;
+  return {
+    vnode,
+    index,
+    collection,
+  } as {
+    vnode: VNode | null,
+    index: number,
+    collection: VNode[],
+  };
 };
 
 export const findVModelNodeIndex = (vnodes: VNode[]) => {
