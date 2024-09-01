@@ -466,11 +466,7 @@ export default defineComponent({
 
       const eventName = getEventName(key);
 
-      if (this.$eventNames.includes(eventName)) {
-        return;
-      }
-
-      if (eventName && refListeners[eventName]) {
+      if (eventName && refProps[key] && refListeners[eventName]) {
         delete refListeners[eventName];
       }
     });
