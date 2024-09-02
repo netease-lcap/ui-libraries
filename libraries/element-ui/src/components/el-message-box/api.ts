@@ -245,16 +245,6 @@ namespace nasl.ui {
     })
     inputErrorMessage: nasl.core.String = '输入的数据不合法';
 
-    @Prop<ElMessageBoxOptions, 'rules'>({
-      group: '主要属性',
-      title: '规则',
-      description: '简写格式为字符串类型，完整格式或混合格式为数组类型',
-      docDescription: '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型，详见[验证规则](#验证规则)',
-      bindHide: true,
-      if: (_) => _.type === 'prompt',
-    })
-    rules: nasl.core.String | Array<any>;
-
     @Event({
       title: '确认按钮点击后',
       description: '确认按钮点击后触发',
