@@ -130,6 +130,7 @@ export default {
       }).then(({ value }) => {
         this.$emit('update:visible', false);
         this.$emit('confirm', value);
+        this.$emit('close');
       }).catch((action) => {
         if (action === 'cancel') {
           this.$emit('cancel');
