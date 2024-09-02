@@ -711,7 +711,10 @@
                 "slot": "label",
                 "expression": "this.getAttribute('label')?.value"
             }],
-            "ignoreProperty": ["rules"]
+            "ignoreProperty": ["rules"],
+            "slotInlineStyle": {
+                "label": "min-width: 56px"
+            }
         }
     },
     {
