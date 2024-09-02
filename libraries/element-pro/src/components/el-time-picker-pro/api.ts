@@ -53,7 +53,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       if: (_) => !_.range,
       sync: true,
-      settable: true,
     })
     value: nasl.core.String | nasl.core.Time;
 
@@ -63,7 +62,6 @@ namespace nasl.ui {
       description: '默认显示的起始时间值，格式如08:08:08',
       sync: true,
       if: (_) => _.range === true,
-      settable: true,
     })
     startValue: nasl.core.String | nasl.core.Time;
 
@@ -73,7 +71,6 @@ namespace nasl.ui {
       description: '默认显示的结束时间值，格式如08:08:08',
       sync: true,
       if: (_) => _.range === true,
-      settable: true,
     })
     endValue: nasl.core.String | nasl.core.Time;
 

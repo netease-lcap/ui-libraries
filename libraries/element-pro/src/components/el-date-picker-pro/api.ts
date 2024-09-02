@@ -52,6 +52,7 @@ namespace nasl.ui {
       description: '选中值',
       setter: { concept: 'InputSetter' },
       if: (_) => _.range === false,
+      sync: true,
     })
     value: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
@@ -61,6 +62,7 @@ namespace nasl.ui {
       description: '开始日期',
       setter: { concept: 'InputSetter' },
       if: (_) => !!_.range,
+      sync: true,
     })
     startValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
@@ -70,6 +72,7 @@ namespace nasl.ui {
       description: '结束日期',
       setter: { concept: 'InputSetter' },
       if: (_) => !!_.range,
+      sync: true,
     })
     endValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
