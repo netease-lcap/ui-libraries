@@ -23,6 +23,7 @@ namespace nasl.ui {
       events: {
         click: true,
       },
+      forceUpdateWhenAttributeChange: true,
       eventsEffect: 'default',
       additionalAttribute: {
         trigger: '"click"',
