@@ -8,6 +8,7 @@ import {
   getChangeEventByValue,
   usePresets,
   useInputProps,
+  useIcons,
 } from '../../el-date-picker-pro/hooks';
 
 const DEFAULT_FORMAT = 'YYYY-MM-DD HH:mm:ss';
@@ -38,6 +39,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     const disableDate = useDisableDate(props, DEFAULT_FORMAT);
     const presets = usePresets(props);
     const inputProps = useInputProps(props);
+    const icons = useIcons(props);
     const format = useComputed(['format', 'dateFormat', 'timeFormat'], (
       formatStr,
       dateFormat = 'YYYY-MM-DD',
@@ -57,6 +59,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       disableDate,
       presets,
       format,
+      ...icons,
       ...events,
       valueType: DEFAULT_FORMAT,
       enableTimePicker: true,

@@ -16,7 +16,7 @@ export default {
   render(h) {
     if (isSvgUrl(this.name)) {
       return h(onlineSvgIcon, {
-        class: 'el-icon--online',
+        class: 'el-icon--online el-p-icon',
         props: {
           purecss: !ie11(),
           url: this.name,
@@ -30,7 +30,7 @@ export default {
 
     let name = this.name || 'picture-outline';
     if (!name.startsWith('Ri') && !name.startsWith('ri-') && !name.startsWith('el-icon-')) {
-      name = `el-icon-${name}`;
+      name = `el-icon-${name} el-p-icon`;
     } else {
       name = name.startsWith('Ri') ? kebabCase(name) : name;
     }
