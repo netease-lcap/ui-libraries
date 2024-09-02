@@ -1,6 +1,7 @@
 import { DateRangeValue, DateValue, PickContext } from '@element-pro';
 import { useSyncState } from '@lcap/vue2-utils';
 import { MapGet } from '@lcap/vue2-utils/plugins/types';
+import { ComputedRef, Ref, unref } from '@vue/composition-api';
 import dayjs, { Dayjs } from 'dayjs';
 import { isFunction } from 'lodash';
 
@@ -62,7 +63,7 @@ function transformDate(date) {
   return undefined;
 }
 
-function getNaslDateValue(d: DateValue | null, format = 'YYYY-MM-DD') {
+function getNaslDateValue(d: DateValue | null, format: any) {
   if (!d) {
     return null;
   }
@@ -72,7 +73,18 @@ function getNaslDateValue(d: DateValue | null, format = 'YYYY-MM-DD') {
     return null;
   }
 
-  return date.toDate().toJSON();
+  const valueFormat = unref(format) || 'json';
+
+  switch (valueFormat) {
+    case 'json':
+      return date.toDate().toJSON();
+    case 'timestamp':
+      return date.toDate().getTime();
+    case 'date':
+      return date.toDate();
+    default:
+      return date.format(valueFormat);
+  }
 }
 
 function dayjs2Date(d: Dayjs | null) {
@@ -83,7 +95,7 @@ function dayjs2Date(d: Dayjs | null) {
   return d.toDate();
 }
 
-export const useDatePickerValue = (props: MapGet, format: string) => {
+export const useDatePickerValue = (props: MapGet, format: ComputedRef<string> | Ref<string>) => {
   const valueRef = props.useRef<DateValue | DateRangeValue>(
     ['value', 'startValue', 'endValue', 'range'],
     (v, startValue, endValue, range) => {
@@ -101,7 +113,7 @@ export const useDatePickerValue = (props: MapGet, format: string) => {
       onUpdateValue = () => {},
       onUpdateStartValue = () => {},
       onUpdateEndValue = () => {},
-    ] = props.get<Array<(val: string) => void>>([
+    ] = props.get<Array<(val: any) => void>>([
       'update:value',
       'update:startValue',
       'update:endValue',
@@ -144,7 +156,7 @@ export const useDatePickerValue = (props: MapGet, format: string) => {
   };
 };
 
-export function getChangeEventByValue(d: DateValue | DateRangeValue, range: boolean, format: string) {
+export function getChangeEventByValue(d: DateValue | DateRangeValue, range: boolean, format: ComputedRef<string> | Ref<string>) {
   const changeEvent = {
     value: null,
     startValue: null,
@@ -160,7 +172,7 @@ export function getChangeEventByValue(d: DateValue | DateRangeValue, range: bool
   return changeEvent;
 }
 
-export function useContextEvents(props: MapGet, format: string) {
+export function useContextEvents(props: MapGet, format: ComputedRef<string> | Ref<string>) {
   const events: Record<string, any> = {};
 
   ['onFocus', 'onBlur', 'onInput'].forEach((eventName) => {

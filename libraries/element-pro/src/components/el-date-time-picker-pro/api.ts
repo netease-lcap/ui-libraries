@@ -54,7 +54,11 @@ namespace nasl.ui {
       if: (_) => _.range === false,
       sync: true,
     })
-    value: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
+    value:
+      | nasl.core.String
+      | nasl.core.Integer
+      | nasl.core.Date
+      | nasl.core.DateTime;
 
     @Prop<ElDateTimePickerProOptions, 'startValue'>({
       group: '数据属性',
@@ -64,7 +68,11 @@ namespace nasl.ui {
       if: (_) => !!_.range,
       sync: true,
     })
-    startValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
+    startValue:
+      | nasl.core.String
+      | nasl.core.Integer
+      | nasl.core.Date
+      | nasl.core.DateTime;
 
     @Prop<ElDateTimePickerProOptions, 'endValue'>({
       group: '数据属性',
@@ -74,7 +82,27 @@ namespace nasl.ui {
       if: (_) => !!_.range,
       sync: true,
     })
-    endValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
+    endValue:
+      | nasl.core.String
+      | nasl.core.Integer
+      | nasl.core.Date
+      | nasl.core.DateTime;
+
+    @Prop({
+      group: '主要属性',
+      title: '转换器',
+      docDescription: '- SON、Unix 时间戳、 Date 对象、 YYYY-MM-DD HH:mm:ss',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: 'JSON' },
+          { title: 'Unix 时间戳' },
+          { title: 'Date 对象' },
+          { title: 'YYYY-MM-DD HH:mm:ss' },
+        ],
+      },
+    })
+    converter: 'json' | 'timestamp' | 'date' | 'format' = 'json';
 
     @Prop({
       group: '主要属性',
@@ -101,20 +129,30 @@ namespace nasl.ui {
     clearable: nasl.core.Boolean = false;
 
     @Prop({
-        group: '数据属性',
-        title: '最小日期时间值',
-        description: '最小可选的日期时间值，填写null则不限制，日期填写格式为“yyyy-mm-dd  00:00:00”',
-        docDescription: '支持输入的最小日期时间',
+      group: '数据属性',
+      title: '最小日期时间值',
+      description:
+        '最小可选的日期时间值，填写null则不限制，日期填写格式为“yyyy-mm-dd  00:00:00”',
+      docDescription: '支持输入的最小日期时间',
     })
-    minDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
+    minDate:
+      | nasl.core.String
+      | nasl.core.Decimal
+      | nasl.core.Date
+      | nasl.core.DateTime;
 
     @Prop({
-        group: '数据属性',
-        title: '最大日期时间值',
-        description: '最大可选的日期时间值，填写null则不限制，日期填写格式为“yyyy-mm-dd  00:00:00”',
-        docDescription: '支持输入的最大日期时间',
+      group: '数据属性',
+      title: '最大日期时间值',
+      description:
+        '最大可选的日期时间值，填写null则不限制，日期填写格式为“yyyy-mm-dd  00:00:00”',
+      docDescription: '支持输入的最大日期时间',
     })
-    maxDate: nasl.core.String | nasl.core.Decimal | nasl.core.Date | nasl.core.DateTime;
+    maxDate:
+      | nasl.core.String
+      | nasl.core.Decimal
+      | nasl.core.Date
+      | nasl.core.DateTime;
 
     @Prop({
       group: '状态属性',
@@ -141,27 +179,33 @@ namespace nasl.ui {
     firstDayOfWeek: nasl.core.Decimal = 7;
 
     @Prop<ElDateTimePickerProOptions, 'dateFormat'>({
-        group: '主要属性',
-        title: '日期展示格式',
-        setter: {
-            concept: 'EnumSelectSetter',
-            options: [{ title: '中国（2023年7月26日）' }, { title: 'ISO（2023-07-26）' }, { title: 'US（7/26/2023）' }, { title: 'EU（26/7/2023）' }],
-        },
+      group: '主要属性',
+      title: '日期展示格式',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '中国（2023年7月26日）' },
+          { title: 'ISO（2023-07-26）' },
+          { title: 'US（7/26/2023）' },
+          { title: 'EU（26/7/2023）' },
+        ],
+      },
     })
-    dateFormat: 'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' = 'YYYY-MM-DD';
+    dateFormat: 'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' =
+      'YYYY-MM-DD';
 
     @Prop<ElDateTimePickerProOptions, 'timeFormat'>({
-        group: '主要属性',
-        title: '时间展示格式',
-        setter: {
-            concept: 'EnumSelectSetter',
-            options: [
-                { title: '12: 09: 09' },
-                { title: '12时09分09秒' },
-                { title: '12: 09' },
-                { title: '12时09分' },
-            ],
-        },
+      group: '主要属性',
+      title: '时间展示格式',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '12: 09: 09' },
+          { title: '12时09分09秒' },
+          { title: '12: 09' },
+          { title: '12时09分' },
+        ],
+      },
     })
     timeFormat: 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' = 'HH:mm:ss';
 
@@ -182,8 +226,8 @@ namespace nasl.ui {
       implicitToString: true,
       setter: {
         concept: 'InputSetter',
-        placeholder: '同占位符一致'
-      }
+        placeholder: '同占位符一致',
+      },
     })
     placeholderRight: nasl.core.String = '';
 
@@ -232,17 +276,10 @@ namespace nasl.ui {
       description: '输入框尺寸。可选项：small/medium/large。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '小' },
-          { title: '中' },
-          { title: '大' },
-        ],
+        options: [{ title: '小' }, { title: '中' }, { title: '大' }],
       },
     })
-    size:
-      | 'small'
-      | 'medium'
-      | 'large' = 'medium';
+    size: 'small' | 'medium' | 'large' = 'medium';
 
     // @Prop({
     //   group: '主要属性',
@@ -306,55 +343,55 @@ namespace nasl.ui {
       description: '当输入框失去焦点时触发',
     })
     onBlur: (event: {
-      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      position: 'start' | 'end',
-     }) => any;
+      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      position: 'start' | 'end';
+    }) => any;
 
     @Event({
       title: '值改变时',
       description: '选中值发生变化时触发。',
     })
     onChange: (event: {
-      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      trigger: 'confirm' | 'pick' | 'enter' | 'preset' | 'clear',
-     }) => any;
+      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      trigger: 'confirm' | 'pick' | 'enter' | 'preset' | 'clear';
+    }) => any;
 
     @Event({
       title: '点击确认按钮时',
       description: '如果存在“确定”按钮，则点击“确定”按钮时触发',
     })
     onConfirm: (event: {
-      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      position: 'start' | 'end',
-     }) => any;
+      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      position: 'start' | 'end';
+    }) => any;
 
     @Event({
       title: '聚焦时',
       description: '输入框获得焦点时触发',
     })
     onFocus: (event: {
-      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      position: 'start' | 'end',
-     }) => any;
+      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      position: 'start' | 'end';
+    }) => any;
 
     @Event({
       title: '面板选中后',
       description: '面板选中值后触发',
     })
     onPick: (event: {
-      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime,
-      position: 'start' | 'end',
-     }) => any;
+      value: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+      position: 'start' | 'end';
+    }) => any;
 
     // @Event({
     //   title: '点击预设按钮后',

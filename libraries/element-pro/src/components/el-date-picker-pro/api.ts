@@ -77,6 +77,18 @@ namespace nasl.ui {
     endValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
     @Prop({
+      group: '数据属性',
+      title: '转换器',
+      description: '转换器，用于转换时间结果',
+      docDescription: '用于转换选中的日期格式，支持JSON、Unix 时间戳、Date对象、YYYY-MM-DD共4种模式。默认YYYY-MM-DD',
+      setter: {
+          concept: 'EnumSelectSetter',
+          options: [{ title: 'JSON' }, { title: 'Unix 时间戳' }, { title: 'Date 对象' }, { title: 'YYYY-MM-DD' }],
+      },
+    })
+    converter: 'json' | 'timestamp' | 'date' | 'format' = 'format';
+
+    @Prop({
       group: '主要属性',
       title: '允许输入',
       description: '是否允许输入日期',

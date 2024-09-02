@@ -22,8 +22,19 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
   setup(props) {
     const { useComputed } = props;
     const placeholder = usePlaceholder(props, '请选择时间');
-    const { value, changeValue } = useDatePickerValue(props, DEFAULT_FORMAT);
-    const events = useContextEvents(props, DEFAULT_FORMAT);
+    const valueFormat = props.useComputed('converter', (v) => {
+      if (!v) {
+        return 'json';
+      }
+
+      if (v === 'format') {
+        return DEFAULT_FORMAT;
+      }
+
+      return v;
+    });
+    const { value, changeValue } = useDatePickerValue(props, valueFormat);
+    const events = useContextEvents(props, valueFormat);
     const disableDate = useDisableDate(props, DEFAULT_FORMAT);
     const presets = usePresets(props);
     const inputProps = useInputProps(props);
@@ -52,7 +63,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       onChange: (v: DateValue | DateRangeValue, context) => {
         const [range] = props.get<[boolean]>(['range']);
         const onChange = props.get<any>('onChange') || (() => {});
-        const changeEvent = getChangeEventByValue(v, range, DEFAULT_FORMAT);
+        const changeEvent = getChangeEventByValue(v, range, valueFormat);
         changeValue(context.dayjsValue, v);
         onChange({
           ...changeEvent,
