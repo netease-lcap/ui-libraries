@@ -149,7 +149,8 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
                 textField="${lowerEntityName}.${displayedProperty.name}"
                 valueField="${lowerEntityName}.${relationProperty.name}"
                 pagination={true}
-                value={$sync(${vModel})}>
+                value={$sync(${vModel})}
+                emptyValueIsNull={true}>
             </USelect>`;
       } return '';
     } return '';
@@ -158,7 +159,8 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
     return `<USelect
         clearable={true}
         value={$sync(${vModel})}
-        placeholder="请选择${label}">
+        placeholder="请选择${label}"
+        emptyValueIsNull={true}>
         <USelectItem value={true} text="是"></USelectItem>
         <USelectItem value={false} text="否"></USelectItem>
     </USelect>`;
@@ -184,24 +186,28 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
   } if (propertyTypeName === 'String' && propertyTypeMaxLength > 256) {
     return `<UTextarea
         value={$sync(${vModel})}
-        placeholder="请输入${label}">
+        placeholder="请输入${label}"
+        emptyValueIsNull={true}>
     </UTextarea>`;
   } if (propertyTypeName === 'Date') {
     return `<UDatePicker
         clearable={true}
         value={$sync(${vModel})}
-        placeholder="请选择${label}">
+        placeholder="请选择${label}"
+        emptyValueIsNull={true}>
     </UDatePicker>`;
   } if (propertyTypeName === 'Time') {
     return `<UTimePicker
         value={$sync(${vModel})}
-        placeholder="请选择${label}">
+        placeholder="请选择${label}"
+        emptyValueIsNull={true}>
     </UTimePicker>`;
   } if (propertyTypeName === 'DateTime') {
     return `<UDateTimePicker
         clearable={true}
         value={$sync(${vModel})}
-        placeholder="请选择${label}">
+        placeholder="请选择${label}"
+        emptyValueIsNull={true}>
     </UDateTimePicker>`;
   }
   const namespaceArr = propertyTypeNamespace.split('.');
@@ -212,10 +218,11 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
                 clearable={true}
                 value={$sync(${vModel})}
                 placeholder="请选择${label}"
-                dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}>
+                dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}
+                emptyValueIsNull={true}>
             </USelect>`;
   }
-  return `<UInput value={$sync(${vModel})} placeholder="请输入${label}"></UInput>`;
+  return `<UInput value={$sync(${vModel})} placeholder="请输入${label}" emptyValueIsNull={true}></UInput>`;
 }
 
 /**

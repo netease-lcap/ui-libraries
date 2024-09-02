@@ -18,7 +18,8 @@ function genSelectTemplate(entity: naslTypes.Entity, nameGroup: NameGroup) {
         dataSource={${dataSourceValue}}
         textField="${nameGroup.lowerEntity}.${property.name}"
         valueField="${nameGroup.lowerEntity}.${getEntityPromaryKeyProperty(entity)}"
-        pagination={true}>
+        pagination={true}
+        emptyValueIsNull={true}>
     </USelect>`;
 }
 
