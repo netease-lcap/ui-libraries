@@ -11,7 +11,7 @@ import {
   onBeforeUnmount,
   onMounted,
   onUnmounted,
-  provide,
+  // provide,
   Ref,
   SetupContext,
   unref,
@@ -230,9 +230,9 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       }
     });
 
-    provide<FormItemExtendsContext>(FORM_ITEM_CONTEXT, {
-      name: computed(() => (name.value || unref(nameRef))),
-    });
+    // provide<FormItemExtendsContext>(FORM_ITEM_CONTEXT, {
+    //   name: computed(() => (name.value || unref(nameRef))),
+    // });
 
     return {
       rules,
