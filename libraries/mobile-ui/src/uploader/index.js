@@ -700,6 +700,11 @@ export default createComponent({
     },
 
     handleFileName(url) {
+      const newFileNameMatch = url.match(/[?&]fileName=([^&]+)/);
+      if (newFileNameMatch) {
+        return newFileNameMatch[1];
+      }
+
       const match = url.match(/\/([^/]+)$/);
       return match ? match[1] : null;
     },
