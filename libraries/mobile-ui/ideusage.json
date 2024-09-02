@@ -622,7 +622,7 @@
                 "component": "VueToastDesigner",
                 "selector": {
                     "slot": "inject",
-                    "cssSelector": "div[class^='van-toast-designer']"
+                    "cssSelector": ".van-toast-designer"
                 }
             },
             "translateBindingProperty": ["message", "duration"],
@@ -657,9 +657,11 @@
         "ideusage": {
             "idetype": "container",
             "parentAccept": "target.tag.endsWith('van-form')",
+            "namedSlotOmitWrapper": ["input"],
             "selector": {
                 "expression": "this.getElement(el => el.slotTarget === 'input')",
-                "cssSelector": "div[is-sub]"
+                "cssSelector": "div[is-sub]",
+                "placement": "tail"
             },
             "slotWrapperInlineStyle": {
                 "input": "width: 100%"
