@@ -617,7 +617,7 @@
                 "component": "VueToastDesigner",
                 "selector": {
                     "slot": "inject",
-                    "cssSelector": "div[class^='van-toast-designer']"
+                    "cssSelector": ".van-toast-designer"
                 }
             },
             "translateBindingProperty": ["message", "duration"],
