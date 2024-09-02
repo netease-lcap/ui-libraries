@@ -2,7 +2,7 @@ import type { CreateElement, VNode } from 'vue';
 import {
   defineComponent,
   isRef,
-  shallowRef,
+  // shallowRef,
   watch,
   inject,
   computed,
@@ -10,6 +10,7 @@ import {
   ComputedRef,
   onBeforeUnmount,
   SetupContext,
+  ref,
 } from '@vue/composition-api';
 import { kebabCase } from 'lodash';
 import PluginManager from './plugin';
@@ -187,7 +188,7 @@ const usePropMap = (props: any, ctx: SetupContext) => {
   };
 
   const useMapGetRef = (map: Record<string, any>, dependPropKeys: string | string[], compute: (...args: any[]) => any = (v) => v) => {
-    const propRef = shallowRef(null);
+    const propRef = ref(null);
     const dependencies = computed(() => {
       return normalizeArray(dependPropKeys).map((k) => mapGet(map, k));
     });
@@ -466,7 +467,7 @@ export default defineComponent({
 
       const eventName = getEventName(key);
 
-      if (eventName && refListeners[eventName]) {
+      if (eventName && refProps[key] && refListeners[eventName]) {
         delete refListeners[eventName];
       }
     });

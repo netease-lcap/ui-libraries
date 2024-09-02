@@ -313,9 +313,6 @@ importers:
       '@lcap/element-pro':
         specifier: workspace:*
         version: link:../element-pro
-      '@lcap/pc-ui':
-        specifier: workspace:*
-        version: link:../pc-ui
       '@lcap/storybook-vue-vite':
         specifier: workspace:*
         version: link:../../packages/storybook-vue-vite

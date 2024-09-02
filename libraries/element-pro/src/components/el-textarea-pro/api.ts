@@ -26,6 +26,7 @@ namespace nasl.ui {
   export class ElTextareaProOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
+      sync: true,
       title: '值',
       description: '文本框值',
       setter: { concept: 'InputSetter' },

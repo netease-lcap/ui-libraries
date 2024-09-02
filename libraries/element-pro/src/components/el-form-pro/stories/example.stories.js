@@ -18,25 +18,28 @@ export const Default = {
         ellipsis: false,
         formData: {},
         syncValue: '嘿嘿嘿',
+        startTime: null,
+        endTime: null,
       };
     },
     methods: {
       change() {
-        this.$refs.form.setFormData({
-          name: '哈哈哈哈',
-          password: {
-            xx: '23333',
-          },
-        });
+        // this.$refs.form.setFormData({
+        //   name: '哈哈哈哈',
+        //   password: {
+        //     xx: '23333',
+        //   },
+        // });
 
-        // this.$refs.form.setFieldValue('name', '哈哈哈');
-        // this.syncValue = 'heheheheh';
+        this.startTime = new Date().toJSON();
+        this.endTime = new Date().toJSON();
+        // this.$refs.form.resetForm();
       },
     },
-    template: `<div><el-form-pro ref="form">
-      <el-form-item-pro name="name">
+    template: `<div><el-form-pro ref="form" resetType="initial">
+      <el-form-item-pro>
         <template #label>姓名姓名姓名姓名姓名</template>
-        <el-input-pro placeholder="请输入姓名" :value.sync="syncValue"></el-input-pro>
+        <el-input-pro style="width: 400px" placeholder="请输入姓名" :value.sync="syncValue"></el-input-pro>
       </el-form-item-pro>
       <el-form-item-pro colSpan="2" label="初始密码初始密码初始密码初始密码初始密码" :labelEllipsis="!ellipsis" name="password">
         <el-form-item-pro name="xx">
@@ -49,8 +52,17 @@ export const Default = {
         </el-form-item-pro>
       </el-form-item-pro>
        <el-form-item-pro colSpan="2" :useRangeValue="true" startFieldName="startTime" endFieldName="endTime" label="时间区间">
-        <el-date-time-picker-pro :range="true" ></el-date-time-picker-pro>
+        <el-date-time-picker-pro :startValue.sync="startTime" :endValue.sync="endTime" :range="true" ></el-date-time-picker-pro>
        </el-form-item-pro>
+        <el-form-item-pro>
+        <el-checkbox-group-pro :max="2">
+            <el-checkbox-pro key="2" value="1">选项一</el-checkbox-pro>
+            <el-checkbox-pro key="3" value="2">选项二</el-checkbox-pro>
+            <el-checkbox-pro key="4" value="3">选项三</el-checkbox-pro>
+            <el-checkbox-pro key="5" value="4" :disabled="true">选项四</el-checkbox-pro>
+        </el-checkbox-group-pro>
+        </el-form-item-pro>
+
     </el-form-pro>
     <button @click="change">哈哈</button></div>`,
   }),

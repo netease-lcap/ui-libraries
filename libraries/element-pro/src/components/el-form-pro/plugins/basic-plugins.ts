@@ -9,8 +9,10 @@ import {
   set as lodashSet,
   get as lodashGet,
   cloneDeep,
+  isNil,
+  isFunction,
 } from 'lodash';
-import { type NaslComponentPluginOptions, $ref } from '@lcap/vue2-utils';
+import { type NaslComponentPluginOptions, $deletePropList, $ref } from '@lcap/vue2-utils';
 import { isEmptyVNodes } from '@lcap/vue2-utils/plugins/utils';
 import {
   getCurrentInstance,
@@ -25,7 +27,14 @@ import {
   FORM_CONTEXT,
   LCAP_FORM_UID,
 } from '../constants';
-import type { FormExtendsContext, InitFieldOptions, LayoutMode } from '../types';
+import type {
+  FormExtendsContext,
+  FormField,
+  FormFieldOptions,
+  FormRangeField,
+  FormRangeFieldOptions,
+  LayoutMode,
+} from '../types';
 
 const getTemplateCount = (counts: number | string) => {
   if (!Number.isNaN(counts as number) || typeof counts === 'string') {
@@ -38,6 +47,7 @@ const getTemplateCount = (counts: number | string) => {
 export interface FormFieldMata {
   bindValue: any;
   change?: ((v: any) => void) | null;
+  fieldControl?: FormField | FormRangeField;
 }
 
 function splitNameToPath(name) {
@@ -68,6 +78,49 @@ function deepVueSet(data: any, name: string, value: any) {
   }
 }
 
+const normalizeRangeFieldValue = (startValue, endValue) => {
+  if (isNil(startValue) && isNil(endValue)) {
+    return null;
+  }
+
+  return [startValue, endValue];
+};
+
+const useFormItemControls = () => {
+  const formItemInstances: any[] = [];
+
+  function addFormItemInstance(ins: any) {
+    if (formItemInstances.includes(ins)) {
+      return;
+    }
+    formItemInstances.push(ins);
+  }
+
+  function removeFormItemInstance(ins: any) {
+    const index = formItemInstances.indexOf(ins);
+    if (index === -1) {
+      return;
+    }
+
+    formItemInstances.splice(index, 1);
+  }
+
+  function resetFormItemNeedReset() {
+    // 组件源码黑操作
+    formItemInstances.forEach((ins) => {
+      if (ins) {
+        ins.needResetField = true;
+      }
+    });
+  }
+
+  return {
+    addFormItemInstance,
+    removeFormItemInstance,
+    resetFormItemNeedReset,
+  };
+};
+
 /* 组件功能扩展插件 */
 export const useExtensPlugin: NaslComponentPluginOptions = {
   props: [
@@ -77,6 +130,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
   setup(props, { h }) {
     const { useComputed } = props;
     const instance = getCurrentInstance();
+    const { addFormItemInstance, removeFormItemInstance, resetFormItemNeedReset } = useFormItemControls();
     const formData = reactive({});
     const formFieldMetas: Record<string, FormFieldMata> = {};
 
@@ -124,19 +178,6 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       return undefined;
     });
 
-    function initField({ name, value = null, change }: InitFieldOptions) {
-      if (formFieldMetas[name]) {
-        return;
-      }
-
-      deepVueSet(formData, name, value);
-
-      formFieldMetas[name] = {
-        bindValue: value,
-        change,
-      };
-    }
-
     function removeField(name) {
       if (!name) {
         return;
@@ -168,19 +209,124 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       });
     }
 
-    function setFieldValue(key: string, value: any) {
+    function setFieldValue(key: string, value: any, emitChange = true) {
       if (!key) {
         return;
       }
 
       lodashSet(formData, key, value);
-      if (formFieldMetas[key] && typeof formFieldMetas[key].change === 'function') {
+      if (emitChange && formFieldMetas[key] && typeof formFieldMetas[key].change === 'function') {
         formFieldMetas[key].change(value);
       }
     }
 
     function getFieldValue(key: string) {
       return lodashGet(formData, key);
+    }
+
+    function initFormField({ name, value }: FormFieldOptions) {
+      if (formFieldMetas[name]) {
+        return formFieldMetas[name].fieldControl as FormField;
+      }
+
+      deepVueSet(formData, name, value);
+
+      let initialSetted = false;
+      const formField: FormField = {
+        name,
+        setValue: (v, emitChange = true) => {
+          setFieldValue(name, v, emitChange);
+        },
+        getValue: () => getFieldValue(name),
+        setInitalValue: (v) => {
+          if (initialSetted) {
+            return;
+          }
+          setFieldValue(name, v);
+          initialSetted = true;
+        },
+        setChangeListener: (listener) => {
+          if (formFieldMetas[name]) {
+            formFieldMetas[name].change = listener;
+          }
+        },
+      };
+      formFieldMetas[name] = {
+        bindValue: value,
+        fieldControl: formField,
+      };
+
+      return formField;
+    }
+
+    function initFormRangeField({ name, uid, value }: FormRangeFieldOptions) {
+      if (formFieldMetas[uid]) {
+        return formFieldMetas[uid].fieldControl as FormRangeField;
+      }
+
+      deepVueSet(formData, uid, normalizeRangeFieldValue(value[0], value[1]));
+      const [startName, endName] = name;
+      [startName, endName].forEach((n, i) => {
+        if (n) {
+          deepVueSet(formData, n, value[i]);
+          formFieldMetas[n] = {
+            bindValue: value[i],
+          };
+        }
+      });
+
+      let initialSetted = false;
+      const formRangeField: FormRangeField = {
+        uid,
+        name,
+        setValue: (index, v, emitChange = true) => {
+          if (name[index]) {
+            setFieldValue(name[index], v, emitChange);
+          }
+
+          const values = [...(getFieldValue(uid) || [])];
+          values[index] = v;
+          setFieldValue(uid, normalizeRangeFieldValue(values[0], values[1]));
+        },
+        getValue: (index) => getFieldValue(name[index]),
+        setInitalValue: (values) => {
+          if (initialSetted) {
+            return;
+          }
+          initialSetted = true;
+          [startName, endName].forEach((n, i) => {
+            if (n) {
+              setFieldValue(n, values[i]);
+            }
+          });
+
+          setFieldValue(uid, normalizeRangeFieldValue(values[0], values[1]));
+        },
+        setChangeListener: (startListener, endListener) => {
+          if (startName && formFieldMetas[startName]) {
+            formFieldMetas[startName].change = startListener;
+          }
+
+          if (endName && formFieldMetas[endName]) {
+            formFieldMetas[endName].change = endListener;
+          }
+
+          if (formFieldMetas[uid]) {
+            formFieldMetas[uid].change = (v) => {
+              const [startValue, endValue] = v || [];
+              if (!startName || isFunction(startListener)) {
+                startListener(startValue);
+              }
+
+              if (!endName || isFunction(endListener)) {
+                endListener(endValue);
+              }
+            };
+          }
+        },
+      };
+
+      return formRangeField;
     }
 
     function getFormData() {
@@ -198,8 +344,11 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       labelEllipsis: useComputed('labelEllipsis', (v) => !!v),
       setFieldValue,
       getFieldValue,
-      initField,
       removeField,
+      initFormField,
+      initFormRangeField,
+      addFormItemInstance,
+      removeFormItemInstance,
     });
 
     return {
@@ -259,14 +408,39 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
         return vnodes;
       },
+      [$deletePropList]: ['onReset'],
       [$ref]: {
-        async validate(params = null) {
+        async validate() {
           if (!instance || !instance.refs || !instance.refs.$base) {
-            return false;
+            return { valid: false };
           }
 
-          const result = await (instance.refs.$base as any).validate(params);
-          return result === true;
+          const result = await (instance.refs.$base as any).validate();
+          return {
+            valid: result === true,
+          };
+        },
+        resetForm() {
+          const onReset = props.get('onReset');
+          const resetType = props.get('resetType') || 'empty';
+
+          if (instance.refs.$base) {
+            (instance.refs.$base as any).clearValidate();
+          }
+
+          Object.keys(formFieldMetas).forEach((key) => {
+            if (resetType === 'initial') {
+              setFieldValue(key, formFieldMetas[key].bindValue === undefined ? null : formFieldMetas[key].bindValue);
+              return;
+            }
+            setFieldValue(key, null);
+          });
+
+          resetFormItemNeedReset();
+
+          if (isFunction(onReset)) {
+            onReset();
+          }
         },
         setFormData,
         getFormData,

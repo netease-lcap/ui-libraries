@@ -16,11 +16,17 @@ namespace nasl.ui {
     constructor(options?: Partial<ElProgressOptions>) {
       super();
     }
+
+    @Prop({
+      title: '百分比',
+    })
+    percentage: nasl.core.Decimal = 0;
   }
 
   export class ElProgressOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
+      sync: true,
       title: '百分比',
       description: '**百分比（必填）**',
       setter: {

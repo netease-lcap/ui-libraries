@@ -6,7 +6,6 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
-      childAccept: "['el-form-item-pro'].includes(target.tag)",
     },
   })
   @Component({
@@ -38,13 +37,27 @@ namespace nasl.ui {
       title: '设置表单字段值',
       description: '设置表单字段值',
     })
-    setFieldValue(name: nasl.core.String, value: any): void {};
+    setFieldValue(
+      @Param({
+        title: '字段名称'
+      })
+      name: nasl.core.String,
+      @Param({
+        title: '字段值'
+      })
+      value: any,
+    ): void {};
 
     @Method({
       title: '获取表单字段值',
       description: '获取表单字段值',
     })
-    getFieldValue(name: nasl.core.String): any {};
+    getFieldValue(
+      @Param({
+        title: '字段名称',
+      })
+      name: nasl.core.String,
+    ): any {};
 
     @Method({
       title: '清空校验结果',
@@ -55,7 +68,7 @@ namespace nasl.ui {
       @Param({
         title: '字段列表',
       })
-      fields: nasl.collection.List<nasl.core.String> = null,
+      fields: nasl.collection.List<nasl.core.String> = [],
     ): void {}
 
     @Method({
@@ -63,44 +76,20 @@ namespace nasl.ui {
       description:
         "表单里面没有重置按钮<button type=\"reset\" />时可以使用该方法，默认重置全部字段为空，该方法会触发 reset 事件。如果表单属性 resetType='empty' 或者 reset.type='empty' 会重置为空；如果表单属性 resetType='initial' 或者 reset.type='initial' 会重置为表单初始值。",
     })
-    reset(
-      @Param({
-        title: '设置具体重置哪些字段',
-      })
-      params: {
-        type: 'initial' | 'empty';
-        fields: nasl.collection.List<nasl.core.String>;
-      } = null,
-    ): void {}
+    resetForm(): void {}
 
     @Method({
       title: '提交表单',
       description:
         '表单里面没有提交按钮<button type="submit" />时可以使用该方法。showErrorMessage 表示是否在提交校验不通过时显示校验不通过的原因，默认显示。该方法会触发 submit 事件',
     })
-    submit(
-      @Param({
-        title: '提交表单选项',
-      })
-      params: {
-        showErrorMessage: nasl.core.Boolean;
-      } = null,
-    ): void {}
+    submit(): void {}
 
     @Method({
       title: '校验函数',
       description: '校验函数，包含错误文本提示等功能',
     })
-    validate(
-      @Param({
-        title: '校验选项',
-      })
-      params: {
-        fields: nasl.collection.List<nasl.core.String>;
-        showErrorMessage: nasl.core.Boolean;
-        trigger: 'blur' | 'change' | 'submit' | 'all';
-      },
-    ): {
+    validate(): {
       valid: nasl.core.Boolean;
     } {
       return {} as any;
@@ -360,7 +349,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
-      parentAccept: "target.tag.endsWith('el-form-pro')",
+      parentAccept: "target.tag.endsWith('el-form-pro') || target.tag.endsWith('el-form-item-pro')",
       ignoreProperty: ['rules'],
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
@@ -414,7 +403,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: '起始值字段名称',
       description: '起始值字段名称，对应区间选择时起始值字段',
-      setter: { concept: 'SwitchSetter' },
+      setter: { concept: 'InputSetter' },
       if: (_) => _.useRangeValue === true,
     })
     startFieldName: nasl.core.String;
@@ -423,7 +412,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: '结束值字段名称',
       description: '结束值字段名称，对应选择时结束值字段',
-      setter: { concept: 'SwitchSetter' },
+      setter: { concept: 'InputSetter' },
       if: (_) => _.useRangeValue === true,
     })
     endFieldName: nasl.core.String;

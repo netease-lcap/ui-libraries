@@ -54,6 +54,12 @@
       "node": "./dist/plugins/index.js",
       "types": "./dist/plugins/index.d.ts"
     },
+    "./utils": {
+      "import": "./dist/utils/index.js",
+      "require": "./dist/utils/index.js",
+      "node": "./dist/utils/index.js",
+      "types": "./dist/utils/index.d.ts"
+    },
     "./package.json": "./package.json"
   },
   "dependencies": {

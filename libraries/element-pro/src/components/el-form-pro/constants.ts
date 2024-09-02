@@ -15,3 +15,5 @@ export const GutterType = {
 };
 
 export const LCAP_FORM_UID = 'LCAP_FORM_UID';
+export const LCAP_FORM_NAME = 'ElForm';
+export const LCAP_FORM_ITEM_NAME = 'ElFormItem';

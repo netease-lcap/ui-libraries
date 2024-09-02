@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-badge text="标记"></el-badge>',
+    template: '<el-badge text="标记" value="33"></el-badge>',
   }),
 };
