@@ -101,6 +101,7 @@ namespace nasl.ui {
       setter: {
         concept: 'AnonymousFunctionSetter',
       },
+      bindOpen: true,
     })
     itemProps: (current: Current<T>) => {
       /**
