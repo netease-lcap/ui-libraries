@@ -389,6 +389,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      sync: true,
       title: '选中值',
       description: '选中值。支持语法糖 `v-model`。',
       setter: { concept: 'InputSetter' },

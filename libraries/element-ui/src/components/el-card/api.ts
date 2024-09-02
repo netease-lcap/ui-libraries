@@ -32,7 +32,7 @@ namespace nasl.ui {
       description: '设置阴影显示时机',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'always' }, { title: 'hover' }, { title: 'never' }],
+        options: [{ title: '总是' }, { title: '悬浮' }, { title: '不显示' }],
       },
     })
     shadow: 'always' | 'hover' | 'never' = 'always';
