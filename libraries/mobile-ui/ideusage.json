@@ -442,7 +442,10 @@
         "ideusage": {
             "idetype": "container",
             "dataSource": {
-                "display": 3
+                "dismiss":"!this.getAttribute('dataSource')",
+                "display": 3,
+                "loopElem": "> .van-for-components__frag > .van-for-components-item"
+            
             }
         }
     },
