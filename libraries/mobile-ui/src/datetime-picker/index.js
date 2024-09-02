@@ -146,10 +146,6 @@ export default createComponent({
       return this.displayFormat || formatters[0];
     },
     designerOpen(e) {
-      if (this.isDesignerNew) {
-        this.$refs.popup.togglePModal();
-        return;
-      }
       let currentElement = e.target;
       let nodePath = false;
       while (currentElement) {
@@ -165,10 +161,6 @@ export default createComponent({
       }
     },
     designerClose() {
-      if (this.$env.VUE_APP_DESIGNER_NEW) {
-        this.$refs.popup.togglePModal();
-        return;
-      }
       if (window.parent && this?.$attrs?.['vusion-node-path']) {
         window.parent?.postMessage(
           {

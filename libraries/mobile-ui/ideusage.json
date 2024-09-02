@@ -276,6 +276,11 @@
             "parentAccept": "target.tag.endsWith('van-swipe')",
             "slotInlineStyle": {
                 "default": "height: 100%"
+            },
+            "operator": {
+                "copy": "!this.getParent().getAttribute('dataSource')",
+                "duplicate": "!this.getParent().getAttribute('dataSource')",
+                "cut": "!this.getParent().getAttribute('dataSource')"
             }
         }
     },
