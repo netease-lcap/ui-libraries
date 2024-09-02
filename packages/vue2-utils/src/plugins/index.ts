@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import Vue, { type VNode, type ComponentOptions } from 'vue';
 import VueCompositionAPI from '@vue/composition-api';
-import { isFunction } from 'lodash';
+import { isFunction, kebabCase } from 'lodash';
 import { uid } from 'uid';
 import type {
   NaslComponentPluginOptions,
@@ -230,7 +230,7 @@ export const registerComponent = (
 
       // 初始值
       self.manger.allPropKeys.forEach((key: string) => {
-        if (!Object.prototype.hasOwnProperty.call(attrs, key)) {
+        if (!Object.prototype.hasOwnProperty.call(attrs, key) && !Object.prototype.hasOwnProperty.call(attrs, kebabCase(key))) {
           attrs[key] = undefined;
         }
       });

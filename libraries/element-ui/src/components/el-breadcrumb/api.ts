@@ -6,6 +6,7 @@ namespace nasl.ui {
       idetype: 'container',
       structured: true,
       childAccept: "target.tag === 'el-breadcrumb-item'",
+      forceUpdateWhenAttributeChange: true,
       additionalAttribute: {
         ':showInDesiner': true,
       },
