@@ -1,14 +1,19 @@
 /* 组件功能扩展插件 */
 import TabPane from 'element-ui/lib/tab-pane';
 import { at } from 'lodash';
-import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
+import { type NaslComponentPluginOptions, useUpdateSync } from '@lcap/vue2-utils/plugins/index';
 
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index';
 
 export const useExtendsPlugin: NaslComponentPluginOptions = {
   props: ['data', 'titleField', 'valueField', 'tabPaneProps'],
-  setup: ({ get: propGet }, { h }) => {
+  setup: (props, { h }) => {
+    const { get: propGet } = props;
+    const { value, onInput } = useUpdateSync(props, [{ name: 'value', event: 'input' }]);
+
     return {
+      value,
+      onInput,
       onTabClick(tab) {
         const onTabClick = propGet('onTabClick');
         if (typeof onTabClick === 'function') {
