@@ -50,7 +50,9 @@ export default {
         ? `el-icon-${typeMap[this.type]}`
         : '';
     },
-
+    iconClass() {
+      return this.icon ? `el-icon-${this.icon}` : '';
+    },
     horizontalClass() {
       return this.position.indexOf('right') > -1 ? 'right' : 'left';
     },
