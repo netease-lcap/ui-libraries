@@ -76,7 +76,7 @@ export default {
         showClose: this.showClose,
         offset: this.offset,
         position: this.position,
-        iconClass: this.icon,
+        iconClass: this.icon ? `el-icon-${this.icon}` : undefined,
         customClass: this.$vnode.data.staticClass,
         message,
         onClick: () => {
