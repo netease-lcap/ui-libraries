@@ -22,6 +22,18 @@ namespace nasl.ui {
     constructor(options?: Partial<ElFlexOptions>) {
       super();
     }
+
+    @Method({
+      title: '打开加载中',
+      description: '打开加载中',
+    })
+    startLoading(): void {}
+
+    @Method({
+      title: '关闭加载中',
+      description: '关闭加载中',
+    })
+    closeLoading(): void {}
   }
 
   export class ElFlexOptions extends ViewComponentOptions {
@@ -196,7 +208,30 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       }
     })
-    loading: nasl.core.Boolean = false;
+    private loading: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '状态属性',
+      title: '加载中图标',
+      description: '加载中状态显示的图标',
+      docDescription: '支持从图标库选择图标或上传自定义图标。',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+      },
+    })
+    loadingIcon: nasl.core.String = 'loading';
+
+    @Prop({
+      group: '状态属性',
+      title: '加载中图标旋转',
+      description: '设置加载中图标是否旋转，默认开启。',
+      docDescription: '支持控制加载中图标是否旋转，默认开启。',
+      setter: {
+          concept: 'SwitchSetter',
+      },
+    })
+    loadingIconRotate: nasl.core.Boolean = true;
 
     @Prop({
         group: '状态属性',
