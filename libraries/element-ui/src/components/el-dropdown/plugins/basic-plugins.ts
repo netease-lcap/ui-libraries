@@ -1,5 +1,5 @@
 /* 组件功能扩展插件 */
-import { at } from 'lodash';
+import { at, isNil } from 'lodash';
 import { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 import { ElDropdownMenu, ElDropdownItem } from '../index';
 import ElText from '../../el-text';
@@ -25,12 +25,13 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         const [slotDropdown, slotItems] = props.get(['slotDropdown', 'slotItems']);
         const itemProps = props.get<(c: any) => any>('itemProps') || (() => ({}));
 
-        const itemVNodes = typeof slotItems === 'function' ? slotItems() : [];
+        let itemVNodes = typeof slotItems === 'function' ? slotItems() : [];
         if ((!slotItems || !Array.isArray(itemVNodes) || itemVNodes.length === 0) && data.length === 0) {
           return typeof slotDropdown === 'function' ? slotDropdown() : [];
         }
 
-        if (data.length > 0) {
+        if (!isNil(props.get('dataSource'))) {
+          itemVNodes = [];
           itemVNodes.push(
             ...data.map((item, i) => {
               const [text, value, icon] = at(item, textField, valueField, iconField);
