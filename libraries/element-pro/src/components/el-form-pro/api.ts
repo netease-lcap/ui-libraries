@@ -209,7 +209,7 @@ namespace nasl.ui {
     })
     labelEllipsis: nasl.core.Boolean = false;
 
-    @Prop({
+    @Prop<ElFormProOptions, 'gutterType'>({
       group: '样式属性',
       title: '表单项间隔',
       description: '可以整体设置表单项间隔',
@@ -220,10 +220,19 @@ namespace nasl.ui {
           { title: '中' },
           { title: '大' },
           { title: '自定义' },
-        ]
-      }
+        ],
+      },
+      onChange: [{
+        clear: ['gutter'],
+        if: (val) => val !== 'custom',
+      }, {
+        update: {
+          gutter: '16px',
+        },
+        if: (val) => val === 'custom',
+      }]
     })
-    gutterType: 'small' | 'medium' | 'large' | ''  = 'medium';
+    gutterType: 'small' | 'medium' | 'large' | 'custom'  = 'medium';
 
     @Prop<ElFormProOptions, 'gutter'>({
       group: '样式属性',
@@ -232,7 +241,7 @@ namespace nasl.ui {
       setter: {
         concept: 'InputSetter',
       },
-      if: (_) => !_.gutterType,
+      if: (_) => _.gutterType === 'custom',
     })
     gutter: nasl.core.String;
 

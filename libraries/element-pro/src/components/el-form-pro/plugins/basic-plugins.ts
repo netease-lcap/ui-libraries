@@ -149,7 +149,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       gutterType = 'medium',
       gutter,
     ) => {
-      if (!gutterType) {
+      if (gutter) {
         return gutter;
       }
 
@@ -381,6 +381,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
         if (layoutMode === 'linear') {
           const direction = props.get('layout') === 'inline' ? 'horizontal' : 'vertical';
+          console.log(gutterSize.value);
           return h(Space, {
             attrs: {
               direction,
