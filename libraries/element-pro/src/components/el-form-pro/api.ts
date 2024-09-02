@@ -354,6 +354,7 @@ namespace nasl.ui {
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
       },
+      forceRefresh: 'parent',
     },
   })
   @Component({

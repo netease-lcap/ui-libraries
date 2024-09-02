@@ -16,6 +16,7 @@ declare module '*.vue' {
 declare namespace nasl.ui {
   export interface IDEExtraInfoOptions {
     show?: boolean;
+    order?: number; /* 组件排序，默认 6 */
     ideusage?: {
       idetype?: 'element' | 'modal' | 'popover' | 'container' | string;
       [key: string]: any;
