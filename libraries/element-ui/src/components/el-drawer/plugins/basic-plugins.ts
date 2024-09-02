@@ -3,19 +3,15 @@ import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
 import { $ref } from '@lcap/vue2-utils/plugins/index';
 import _ from 'lodash';
 import { isNullOrUndefined } from '@lcap/vue2-utils/plugins/utils';
-import { $render, createUseUpdateSync } from '@lcap/vue2-utils';
-
-export const useUpdateSync = createUseUpdateSync([
-  {
-    name: 'visible',
-    event: 'update:visible',
-  },
-]);
+import { $render, useUpdateSync } from '@lcap/vue2-utils';
 
 export const useDialog: NaslComponentPluginOptions = {
   setup: (props) => {
     // 同时响应外部  visible属性设置的变化
-    const opened = props.useRef('visible', (v) => !!v);
+    // const opened = props.useRef('visible', (v) => !!v);
+    const { visible: opened, ...reset } = useUpdateSync(props, [
+      { name: 'visible', event: 'update:visible' },
+    ]);
     // const map = useUpdateSync(props, [
     //   { name: 'visible', event: 'update:visible' },
     // ]);
