@@ -36,54 +36,40 @@ export const createVueRouterNavigate = (bindEventName: string = 'click') => {
   const useVueRouterNavigate: NaslComponentPluginOptions = {
     setup: (props, { $router }) => {
       const eventName = getEventKey(bindEventName);
-      const routerLink = props.useComputed('href', (url: string = '') => {
-        if (typeof url !== 'string') return null;
-        if (
-          url?.startsWith('http')
-          || !$router
-          || url?.startsWith('://')
-          || url?.startsWith('#')
-          // eslint-disable-next-line no-script-url
-          || url?.startsWith('javascript:')
-          || url?.indexOf('://') !== -1
-        ) {
-          return null;
-        }
-
-        const { location } = $router.resolve(url);
-        return location;
-      });
-
-      const href = props.useComputed('href', (url: string) => {
-        /**
-         * router link 存在点击默认不处理
-         */
-        if (routerLink.value) {
-          // eslint-disable-next-line no-script-url
-          return 'javascript:;';
-        }
-
-        return url;
-      });
+      const routerLink = props.useComputed('destination');
 
       return {
-        href,
+        // href: undefined,
         [eventName]: (e: any) => {
           const disabled = props.get<boolean>('disabled');
           if (disabled === true) {
+            e.preventDefault();
+            e.returnValue = false;
             return;
           }
 
-          const preClick = props.get<(ea: any) => void>(eventName);
-          if (!routerLink.value) {
-            preClick && preClick(e);
+          const handle = props.get<(event: any) => void>(eventName);
+          handle && handle(e);
+
+          const [target, download] = props.get<[string, boolean | string]>([
+            'target',
+            'download',
+          ]);
+
+          if (!routerLink.value || target === '_blank' || download === true || download === 'download') {
             return;
           }
+
+          e.preventDefault();
+          e.returnValue = false;
+
           const replace = props.get('replace');
 
-          replace === true
-            ? $router.replace(routerLink.value)
-            : $router.push(routerLink.value);
+          if ($router) {
+            replace === true
+              ? $router.replace(routerLink.value)
+              : $router.push(routerLink.value);
+          }
         },
       };
     },
@@ -100,7 +86,7 @@ export const createVueRouterNavigate = (bindEventName: string = 'click') => {
 export const createBrowserNavigate = (bindEventName: string = 'click') => {
   const useBrowserNavigate: NaslComponentPluginOptions = {
     props: ['href', 'target', 'download', 'disabled', 'replace'],
-    setup: (props, { $router }) => {
+    setup: (props) => {
       const eventName = getEventKey(bindEventName);
       return {
         [eventName]: (e: any) => {
@@ -115,14 +101,8 @@ export const createBrowserNavigate = (bindEventName: string = 'click') => {
             'download',
           ]);
 
-          if (
-            !href
-            || href === 'javascript:;'
-            || href === 'javascript:void(0);'
-          ) {
-            const preClick = props.get<(e: any) => void>(eventName);
-            preClick(e);
-          }
+          const handle = props.get<(event: any) => void>(eventName);
+          handle && handle(e);
 
           if (download) {
             const a = document.createElement('a');
