@@ -64,3 +64,14 @@ export const useSetLoading: NaslComponentPluginOptions = {
     };
   },
 };
+
+export const useSetSize: NaslComponentPluginOptions = {
+  setup: (props) => {
+    const currentSize = props.useComputed(['size'], (size) => {
+      return size || 'small';
+    });
+    return {
+      size: currentSize,
+    };
+  },
+};
