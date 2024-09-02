@@ -1,6 +1,12 @@
+:root {
+  --el-flex-loading-mask-background: hsla(0, 0%, 100%, .9);
+  --el-flex-loading-mask-zindex: 2000;
+  --el-flex-loading-color-primary: #409eff;
+}
 .flex {
   display: flex;
   box-sizing: border-box;
+  position: relative;
 }
 .flex > [widthstretch="true"],
 .flex > [heightstretch="true"] {
@@ -23,4 +29,40 @@
 
 .flexBlock > *:not(:last-child) {
   margin-bottom: var(--el-flex-space-base);
+}
+.loadmask {
+  position: absolute;
+  z-index: 2000;
+  background-color: var(--el-flex-loading-mask-background);
+  margin: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: opacity .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loadmask .spinner {
+  color: var(--el-flex-loading-color-primary);
+  text-align: center;
+}
+.loadmask .spinner p {
+  margin: 0;
+}
+.loadmask .spinner [class="el-icon-loading"] {
+  animation: none;
+}
+.loadmask .rotating i,
+.loadmask .rotating i[class="el-icon-loading"] {
+  animation: rotating 2s linear infinite;
+}
+@keyframes rotating {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
 }

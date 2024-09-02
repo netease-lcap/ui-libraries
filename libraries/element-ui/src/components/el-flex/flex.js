@@ -35,6 +35,32 @@ export default {
       type: String,
       default: '',
     },
+    loadingIcon: {
+      type: String,
+      default: 'loading',
+    },
+    loadingIconRotate: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  data() {
+    return {
+      showLoading: this.loading,
+    };
+  },
+  watch: {
+    loading(val) {
+      this.showLoading = val;
+    },
+  },
+  methods: {
+    startLoading() {
+      this.showLoading = true;
+    },
+    closeLoading() {
+      this.showLoading = false;
+    },
   },
   render(h) {
     const style = this.mode === 'flex' ? {
@@ -51,14 +77,25 @@ export default {
       style,
       class: this.mode === 'flex' ? styles.flex : styles.flexBlock,
       on: this.$listeners,
-      directives: [{
-        name: 'loading',
-        value: this.loading,
-      }],
       attrs: {
         'vusion-slot-name': 'default',
         'element-loading-text': this.loadingText,
+        'element-loading-spinner': 'el-icon-loading',
       },
-    }, this.$scopedSlots.default ? this.$scopedSlots.default() : null);
+    }, [
+      this.$scopedSlots.default ? this.$scopedSlots.default() : null,
+      this.showLoading ? h('div', {
+        class: styles.loadmask,
+      }, [
+        h('div', {
+          class: [styles.spinner, this.loadingIconRotate ? styles.rotating : ''],
+        }, [
+          this.loadingIcon ? h('el-icon', {
+            attrs: { name: this.loadingIcon },
+          }) : null,
+          h('p', {}, this.loadingText),
+        ]),
+      ]) : null,
+    ]);
   },
 };
