@@ -216,7 +216,6 @@ namespace nasl.ui {
     })
     multiple: nasl.core.Boolean = false;
 
-
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -587,7 +586,7 @@ namespace nasl.ui {
     },
   })
   @Component({
-    title: 'Option',
+    title: '选择器选项',
     icon: 'option',
     description: '',
     group: 'Selector',
@@ -654,7 +653,7 @@ namespace nasl.ui {
       description: '选项值',
       setter: { concept: 'InputSetter' },
     })
-    value: nasl.core.String | nasl.core.Decimal;
+    value: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
 
     // @Slot({
     //   title: 'Content',
