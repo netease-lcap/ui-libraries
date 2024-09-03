@@ -47,7 +47,7 @@ namespace nasl.ui {
     })
     icon: nasl.core.String;
 
-    @Prop({
+    @Prop<ElAvatarOptions, 'size'>({
       group: '主要属性',
       title: '尺寸',
       description: '设置头像的大小，可选值为 large/medium/small',
@@ -59,6 +59,8 @@ namespace nasl.ui {
           { title: '大' },
         ],
       },
+      // @ts-ignore
+      implicitToString: true
     })
     size: 'small' | 'medium' | 'large' = 'large';
 
