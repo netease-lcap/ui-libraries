@@ -24,7 +24,9 @@ export const Default = {
   name: '基础示例',
   render: () => ({
     template: `<el-statistic :value="1024" :precision="2" group-separator=",">
-      <template #title>增长人数</template>
+      <template #title>
+        <el-text text="增长人数"></el-text>
+      </template>
       <template #prefix>
         <el-icon name="s-flag" style="color: red"></el-icon>
       </template>

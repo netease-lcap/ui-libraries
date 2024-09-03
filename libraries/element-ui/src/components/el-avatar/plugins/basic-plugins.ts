@@ -1,13 +1,21 @@
 import type { VNode } from 'vue';
-import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins';
+import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins/types';
 import { $deletePropList } from '@lcap/vue2-utils/plugins/index';
+import { isFunction } from 'lodash';
 import ElIcon from '../../el-icon';
 
 export const useIcon: NaslComponentPluginOptions = {
   order: 1,
-  props: ['fallbackSrc'],
+  props: ['fallbackSrc', 'icon'],
   setup: (props, { h }) => {
     return {
+      error(event: any) {
+        const onError = props.get<(e: any) => any>('onError');
+
+        if (isFunction(onError)) {
+          onError(event);
+        }
+      },
       slotDefault: () => {
         const slotDefault = props.get<Slot>('slotDefault');
         const icon = props.get<string>('icon');
