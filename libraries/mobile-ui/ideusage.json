@@ -156,7 +156,7 @@
             "idetype": "container",
             "parentAccept": "target.tag.endsWith('van-tabbar')",
             "events": {
-                "click": "!this.getParent().getAttribute('route')?.value"
+                "click": true
             },
             "translateBindingProperty": ["badge", "badgemax", "icon", "name"]
         }
