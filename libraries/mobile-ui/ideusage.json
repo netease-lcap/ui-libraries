@@ -132,7 +132,11 @@
             "disableSlotAutoFill": [{
                 "slot": "title",
                 "expression": true
-            }]
+            }],
+            "editable": {
+                "property": "title",
+                "cssSelector": "> .van-cell__title"
+            }
         }
     },
     {
