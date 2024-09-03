@@ -45,14 +45,14 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
+          { title: '大' },
           { title: '中型' },
+          { title: '正常' },
           { title: '小' },
-          { title: '迷你' },
-          { title: '默认' },
         ],
       },
     })
-    size: 'medium' | 'small' | 'mini' | '' = '';
+    size: 'large' | 'medium' | 'small' | 'mini' = 'small';
 
     @Prop({
       group: '主要属性',
