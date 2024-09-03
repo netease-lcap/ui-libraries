@@ -55,8 +55,16 @@ export default createComponent({
   },
 
   computed: {
+    isDesignerNew() {
+      return this.$env && this.$env.VUE_APP_DESIGNER_NEW;
+    },
+
     active() {
       const routeMode = this.parent.route;
+
+      if (routeMode && this.isDesignerNew) {
+        return false;
+      }
 
       if (routeMode && '$route' in this) {
         const { to, destination, $route } = this;
