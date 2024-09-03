@@ -197,8 +197,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '单元格数据为空时呈现的内容。',
-      description: '单元格数据为空时呈现的内容。',
+      title: '单元格数据为空时呈现的内容',
+      description: '单元格数据为空时呈现的内容',
       setter: { concept: 'InputSetter' },
     })
     cellEmptyContent: any;
@@ -594,7 +594,7 @@ namespace nasl.ui {
     // onActiveRowAction: (event: any) => any;
 
     @Event({
-      title: '单元格点击时触发。',
+      title: '单元格点击时触发',
       description: '单元格点击时触发。',
     })
     onCellClick: (event: any) => any;
@@ -607,7 +607,7 @@ namespace nasl.ui {
     // onColumnResizeChange: (event: any) => any;
 
     @Event({
-      title: '分页发生变化时触发。',
+      title: '分页发生变化时触发',
       description:
         '分页发生变化时触发。参数 newDataSource 表示分页后的数据。本地数据进行分页时，newDataSource 和源数据 data 会不一样。泛型 T 指表格数据类型',
     })

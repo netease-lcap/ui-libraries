@@ -3,13 +3,13 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
-      "idetype": "container",
+      idetype: 'container',
       // "structured": true,
-      "selector": {
-        "expression": "this.getElement(el => el.slotTarget === 'placeholder' )",
-        "cssSelector": ".el-image"
-      }
-    }
+      selector: {
+        expression: "this.getElement(el => el.slotTarget === 'placeholder' )",
+        cssSelector: '.el-image',
+      },
+    },
   })
   @Component({
     title: '图片',
@@ -46,7 +46,7 @@ namespace nasl.ui {
           { title: 'cover' },
           { title: 'none' },
           { title: 'scale-down' },
-          { title: '默认' }
+          { title: '默认' },
         ],
       },
     })
@@ -90,7 +90,7 @@ namespace nasl.ui {
       description: '开启图片预览功能,用逗号分隔',
       setter: { concept: 'InputSetter' },
     })
-    previewSrcList: nasl.collection.List<nasl.core.String>;
+    previewSrcList: nasl.core.String;
 
     @Prop({
       group: '数据属性',

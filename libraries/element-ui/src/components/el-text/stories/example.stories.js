@@ -23,7 +23,7 @@ export const Default = {
       },
     },
     template: `
-      <el-text v-bind="$props" @click="handleClick"></el-text>
+      <el-text v-bind="$props" v-html="1234" @click="handleClick"></el-text>
     `,
   }),
   args: {

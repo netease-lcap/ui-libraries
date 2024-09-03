@@ -16,21 +16,21 @@ namespace nasl.ui {
   }
 
   export class ElPageHeaderOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '标题',
-      description: '标题',
-      setter: { concept: 'InputSetter' },
-    })
-    title: nasl.core.String = '返回';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '标题',
+    //   description: '标题',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // title: nasl.core.String = '返回';
 
-    @Prop({
-      group: '主要属性',
-      title: '内容',
-      description: '内容',
-      setter: { concept: 'InputSetter' },
-    })
-    content: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '内容',
+    //   description: '内容',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // content: nasl.core.String;
 
     @Event({
       title: '点击左侧区域触发',
