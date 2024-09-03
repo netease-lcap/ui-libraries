@@ -249,7 +249,7 @@ namespace nasl.ui {
       description: '名称',
       setter: { concept: 'InputSetter' },
     })
-    name: nasl.core.String;
+    private name: nasl.core.String;
     // 👆inputProps
 
     @Event({

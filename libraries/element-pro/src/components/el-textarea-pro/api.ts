@@ -128,7 +128,7 @@ namespace nasl.ui {
       description: '名称，HTML 元素原生属性',
       setter: { concept: 'InputSetter' },
     })
-    name: nasl.core.String;
+    private name: nasl.core.String;
 
     @Prop({
       group: '主要属性',
