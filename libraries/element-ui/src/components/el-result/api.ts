@@ -42,10 +42,10 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'success' },
-          { title: 'warning' },
-          { title: 'info' },
-          { title: 'error' },
+          { title: '成功' },
+          { title: '警告' },
+          { title: '信息' },
+          { title: '错误' },
         ],
       },
     })
