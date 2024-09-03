@@ -2,6 +2,12 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    ideusage: {
+      idetype: "element",
+      editable: "text",
+      textholder: "text",
+      forceUpdateWhenAttributeChange: true,
+    }
   })
   @Component({
     title: '按钮',
