@@ -72,5 +72,10 @@ export default function genNaslUIConfig({
     }
   });
 
-  return componentConfigs;
+  return componentConfigs.sort((c1, c2) => {
+    const order1 = c1.order || 6;
+    const order2 = c2.order || 6;
+
+    return order1 - order2;
+  });
 }

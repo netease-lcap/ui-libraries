@@ -4,7 +4,8 @@ import { MapGet } from '@lcap/vue2-utils/plugins/types';
 import { unref } from '@vue/composition-api';
 import dayjs from 'dayjs';
 import { isFunction, isNil } from 'lodash';
-import { usePlaceholder } from '../../el-date-picker-pro/hooks';
+import { useIcons, usePlaceholder } from '../../el-date-picker-pro/hooks';
+import { CreateElement } from 'vue';
 
 const DEFAULT_FORMAT = 'HH:mm:ss';
 
@@ -145,7 +146,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
   props: [
     'range', 'autoWidth', 'align',
     'placeholderRight', 'startValue', 'endValue',
-    'maxTime', 'minTime',
+    'maxTime', 'minTime', 'prefixIcon', 'suffixIcon',
   ],
   setup(props) {
     const { useComputed } = props;
@@ -165,14 +166,28 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     const inputProps = useComputed<any>([
       'autoWidth',
       'align',
+      'prefixIcon',
+      'suffixIcon',
     ], (
       autoWidth = false,
       align = 'left',
+      prefixIcon,
+      suffixIcon,
     ) => {
-      return {
+      const inputStyleProps: any = {
         autoWidth,
         align,
       };
+
+      if (prefixIcon) {
+        inputStyleProps.prefixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: prefixIcon } });
+      }
+
+      if (suffixIcon) {
+        inputStyleProps.suffixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: suffixIcon } });
+      }
+
+      return inputStyleProps;
     });
 
     // 同步外部状态
@@ -279,7 +294,10 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         if (!context.propsData.props.rangeInputProps) {
           context.propsData.props.rangeInputProps = {};
         }
-        context.propsData.props.rangeInputProps.inputProps = inputProps.value;
+        const { prefixIcon, suffixIcon, ...reset } = inputProps.value;
+        context.propsData.props.rangeInputProps.inputProps = reset;
+        context.propsData.props.rangeInputProps.prefixIcon = prefixIcon;
+        context.propsData.props.rangeInputProps.suffixIcon = suffixIcon;
 
         return h(TimeRangePicker, context.propsData, context.childrenNodes);
       },

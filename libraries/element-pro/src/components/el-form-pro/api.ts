@@ -172,7 +172,7 @@ namespace nasl.ui {
     labelAlign: 'left' | 'right' | 'top' = 'right';
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '标签宽度',
       description: '可以整体设置label标签宽度',
       setter: {
@@ -188,7 +188,7 @@ namespace nasl.ui {
     labelWidthType: 'small' | 'medium' | 'large' | '' = '';
 
     @Prop<ElFormProOptions, 'labelWidth'>({
-      group: '主要属性',
+      group: '样式属性',
       title: '自定义标签宽度',
       description: '可以整体设置label标签宽度，默认为100px',
       setter: {
@@ -209,8 +209,8 @@ namespace nasl.ui {
     })
     labelEllipsis: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
+    @Prop<ElFormProOptions, 'gutterType'>({
+      group: '样式属性',
       title: '表单项间隔',
       description: '可以整体设置表单项间隔',
       setter: {
@@ -220,19 +220,28 @@ namespace nasl.ui {
           { title: '中' },
           { title: '大' },
           { title: '自定义' },
-        ]
-      }
+        ],
+      },
+      onChange: [{
+        clear: ['gutter'],
+        if: (val) => val !== 'custom',
+      }, {
+        update: {
+          gutter: '16px',
+        },
+        if: (val) => val === 'custom',
+      }]
     })
-    gutterType: 'small' | 'medium' | 'large' | ''  = 'medium';
+    gutterType: 'small' | 'medium' | 'large' | 'custom'  = 'medium';
 
     @Prop<ElFormProOptions, 'gutter'>({
-      group: '主要属性',
+      group: '样式属性',
       title: '自定义表单项间隔(px)',
       description: '可以整体设置表单项间隔, 例如 8px',
       setter: {
         concept: 'InputSetter',
       },
-      if: (_) => !_.gutterType,
+      if: (_) => _.gutterType === 'custom',
     })
     gutter: nasl.core.String;
 

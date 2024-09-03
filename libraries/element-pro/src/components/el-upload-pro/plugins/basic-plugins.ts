@@ -234,6 +234,23 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     const uploadRequestInfo = useUploadRequestInfo(props, ctx);
     const { fileList, changeFileList } = useValue2FileList(props);
 
+    const locale = props.useComputed(['theme', 'cancelUploadText', 'triggerUploadText'], (theme, cancelUploadText: string, triggerUploadText: string) => {
+      const uploadText = triggerUploadText || '选择文件';
+      return {
+        cancelUploadText: cancelUploadText || '取消上传',
+        triggerUploadText: {
+          fileInput: uploadText,
+          image: theme && theme.includes('image') ? triggerUploadText || '点击上传图片' : uploadText,
+          normal: uploadText,
+          // 选择文件和上传文件是 2 个步骤，文本需明确步骤
+          reupload: uploadText,
+          continueUpload: uploadText,
+          delete: '删除',
+          uploading: '上传中',
+        },
+      };
+    });
+
     useSyncState({
       fileList: () => fileList.value,
     });
@@ -242,6 +259,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       sizeLimit,
       ...uploadRequestInfo,
       files: fileList,
+      locale,
       onChange: (list, context: UploadChangeContext) => {
         const onChange = props.get<UploadProps['onChange']>('onChange') || (() => {});
         changeFileList(list);

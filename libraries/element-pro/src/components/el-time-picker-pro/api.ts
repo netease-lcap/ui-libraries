@@ -192,6 +192,28 @@ namespace nasl.ui {
     separator: nasl.core.String = '-';
 
     @Prop({
+      title: '前缀图标',
+      description: '前缀图标',
+      group: '主要属性',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+      },
+    })
+    prefixIcon: nasl.core.String;
+
+    @Prop({
+      title: '后缀图标',
+      description: '后缀图标',
+      group: '主要属性',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+      },
+    })
+    suffixIcon: nasl.core.String;
+
+    @Prop({
       group: '样式属性',
       title: '尺寸',
       description: '尺寸。可选项：small/medium/large',

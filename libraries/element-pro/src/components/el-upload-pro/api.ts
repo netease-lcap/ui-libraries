@@ -283,7 +283,7 @@ namespace nasl.ui {
 
     @Prop<ElUploadProOptions, 'theme'>({
       group: '主要属性',
-      title: '类型',
+      title: '上传类型',
       description:
         '组件风格。custom 表示完全自定义风格；file 表示默认文件上传风格；file-input 表示输入框形式的文件上传；file-flow 表示文件批量上传；image 表示默认图片上传风格；image-flow 表示图片批量上传',
       setter: {
@@ -303,7 +303,12 @@ namespace nasl.ui {
           draggable: true,
         },
         if: (val) => val === 'file-flow' || val === 'image-flow',
-      }]
+      }, {
+        update: {
+          autoUpload: true,
+        },
+        if: (val) => !['file-flow', 'image-flow'].includes(val)
+      }],
     })
     theme:
       | 'file'
@@ -448,6 +453,14 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     uploadPastedFiles: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '主要属性',
+      title: '上传按钮文本',
+      description: '上传按钮文本',
+      setter: { concept: 'InputSetter' },
+    })
+    triggerUploadText: nasl.core.String = '选择文件';
 
     @Event({
       title: '点击取消上传时',

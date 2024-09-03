@@ -105,6 +105,7 @@ namespace nasl.ui {
       setter: {
         concept: 'AnonymousFunctionSetter',
       },
+      bindOpen: true,
     })
     tabPaneProps: (current: Current<T>) => {
       disabled: nasl.core.Boolean;

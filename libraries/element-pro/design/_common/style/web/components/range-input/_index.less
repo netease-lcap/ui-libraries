@@ -134,9 +134,10 @@
   }
 }
 
+.@{prefix}-range-input--prefix,
 .@{prefix}-range-input__prefix,
 .@{prefix}-range-input__suffix {
-  > .el-p-icon {
+  .el-p-icon {
     transition: color @anim-duration-base linear;
     font-size: @range-input-inner-icon-font-size;
     color: @text-color-placeholder;
@@ -153,8 +154,7 @@
       box-shadow: @range-input-box-shadow-focus;
 
       // 只有time-picker、date-picker特殊使用的suffix icon需要改变颜色 若后续有新增组件继续扩展这个枚举
-      .el-p-icon-time,
-      .el-p-icon-calendar {
+      .el-p-icon {
         color: @range-input-border-color-default-focus;
       }
 

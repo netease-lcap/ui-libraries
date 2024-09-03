@@ -8,6 +8,7 @@ import {
   getChangeEventByValue,
   usePresets,
   useInputProps,
+  useIcons,
 } from '../hooks';
 
 const DEFAULT_FORMAT = 'YYYY-MM-DD';
@@ -33,6 +34,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     const disableDate = useDisableDate(props, DEFAULT_FORMAT);
     const presets = usePresets(props);
     const inputProps = useInputProps(props);
+    const icons = useIcons(props);
 
     return {
       value,
@@ -40,6 +42,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       inputProps,
       disableDate,
       presets,
+      ...icons,
       ...events,
       onChange: (v: DateValue | DateRangeValue, context) => {
         const [range] = props.get<[boolean]>(['range']);

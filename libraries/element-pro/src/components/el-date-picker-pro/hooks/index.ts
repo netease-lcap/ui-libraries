@@ -4,6 +4,7 @@ import { MapGet } from '@lcap/vue2-utils/plugins/types';
 import { ComputedRef, Ref, unref } from '@vue/composition-api';
 import dayjs, { Dayjs } from 'dayjs';
 import { isFunction } from 'lodash';
+import { CreateElement } from 'vue';
 
 export const usePlaceholder = (props: MapGet, defaultPlaceholder: string) => {
   const { useComputed } = props;
@@ -268,4 +269,30 @@ export function useInputProps(props: MapGet) {
   });
 
   return inputProps;
+}
+
+export function useIcons(props: MapGet) {
+  const prefixIcon = props.useComputed('prefixIcon', (icon: string) => {
+    if (!icon) {
+      return undefined;
+    }
+
+    return (h: CreateElement) => {
+      return h('el-icon', { attrs: { name: icon } });
+    };
+  });
+  const suffixIcon = props.useComputed('suffixIcon', (icon: string) => {
+    if (!icon) {
+      return undefined;
+    }
+
+    return (h: CreateElement) => {
+      return h('el-icon', { attrs: { name: icon } });
+    };
+  });
+
+  return {
+    prefixIcon,
+    suffixIcon,
+  };
 }
