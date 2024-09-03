@@ -3,8 +3,16 @@ import ElIcon from '../../el-icon';
 
 export const useIcon: NaslComponentPluginOptions = {
   props: ['dotStyle'],
-  setup({ get: propGet }, { h }) {
+  setup({ get: propGet, useComputed }, { h }) {
+    const currentBackgroundColor = useComputed(['dotStyle'], (dotStyle) => {
+      const iconAttr = propGet('icon');
+      if (!iconAttr && dotStyle) {
+        return dotStyle.backgroundColor;
+      }
+      return null;
+    });
     return {
+      color: currentBackgroundColor,
       slotDot: () => {
         const iconAttr = propGet('icon');
         if (!iconAttr) {
