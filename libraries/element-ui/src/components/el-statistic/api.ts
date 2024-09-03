@@ -48,9 +48,9 @@ namespace nasl.ui {
       group: '主要属性',
       title: '自定义数值展示',
       description: '自定义数值展示',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'AnonymousFunctionSetter' },
     })
-    formatter: any;
+    formatter: (value: nasl.core.String | nasl.core.Decimal) => any;
 
     @Prop({
       group: '主要属性',
