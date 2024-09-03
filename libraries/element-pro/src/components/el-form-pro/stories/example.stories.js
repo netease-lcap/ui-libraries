@@ -36,7 +36,7 @@ export const Default = {
         // this.$refs.form.resetForm();
       },
     },
-    template: `<div><el-form-pro ref="form" resetType="initial">
+    template: `<div><el-form-pro ref="form" labelAlign="right" labelWidth="300px" :colon="true" :requiredMark="true" resetType="initial">
       <el-form-item-pro>
         <template #label>姓名姓名姓名姓名姓名</template>
         <el-input-pro style="width: 400px" placeholder="请输入姓名" :value.sync="syncValue"></el-input-pro>
