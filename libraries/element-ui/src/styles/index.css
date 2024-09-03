@@ -2110,11 +2110,11 @@
   height: 0;
   cursor: pointer;
   border-radius: inherit;
-  background-color: #9093994d;
+  background-color: var(--scrollbar-background-color);
   transition: 0.3s background-color;
 }
 .el-scrollbar__thumb:hover {
-  background-color: #90939980;
+  background-color: var(--scrollbar-hover-background-color);
 }
 .el-scrollbar__bar {
   position: absolute;
@@ -2993,11 +2993,11 @@
   height: 0;
   cursor: pointer;
   border-radius: inherit;
-  background-color: #9093994d;
+  background-color: var(--scrollbar-background-color);
   transition: 0.3s background-color;
 }
 .el-scrollbar__thumb:hover {
-  background-color: #90939980;
+  background-color: var(--scrollbar-hover-background-color);
 }
 .el-scrollbar__bar {
   position: absolute;
@@ -6690,11 +6690,11 @@
   height: 0;
   cursor: pointer;
   border-radius: inherit;
-  background-color: #9093994d;
+  background-color: var(--scrollbar-background-color);
   transition: 0.3s background-color;
 }
 .el-scrollbar__thumb:hover {
-  background-color: #90939980;
+  background-color: var(--scrollbar-hover-background-color);
 }
 .el-scrollbar__bar {
   position: absolute;
@@ -10522,11 +10522,11 @@
   height: 0;
   cursor: pointer;
   border-radius: inherit;
-  background-color: #9093994d;
+  background-color: var(--scrollbar-background-color);
   transition: 0.3s background-color;
 }
 .el-scrollbar__thumb:hover {
-  background-color: #90939980;
+  background-color: var(--scrollbar-hover-background-color);
 }
 .el-scrollbar__bar {
   position: absolute;
@@ -11128,11 +11128,11 @@
   height: 0;
   cursor: pointer;
   border-radius: inherit;
-  background-color: #9093994d;
+  background-color: var(--scrollbar-background-color);
   transition: 0.3s background-color;
 }
 .el-scrollbar__thumb:hover {
-  background-color: #90939980;
+  background-color: var(--scrollbar-hover-background-color);
 }
 .el-scrollbar__bar {
   position: absolute;
@@ -12201,11 +12201,11 @@
   height: 0;
   cursor: pointer;
   border-radius: inherit;
-  background-color: #9093994d;
+  background-color: var(--scrollbar-background-color);
   transition: 0.3s background-color;
 }
 .el-scrollbar__thumb:hover {
-  background-color: #90939980;
+  background-color: var(--scrollbar-hover-background-color);
 }
 .el-scrollbar__bar {
   position: absolute;
@@ -20188,11 +20188,11 @@
   height: 0;
   cursor: pointer;
   border-radius: inherit;
-  background-color: #9093994d;
+  background-color: var(--scrollbar-background-color);
   transition: 0.3s background-color;
 }
 .el-scrollbar__thumb:hover {
-  background-color: #90939980;
+  background-color: var(--scrollbar-hover-background-color);
 }
 .el-scrollbar__bar {
   position: absolute;
@@ -21624,11 +21624,11 @@
   height: 0;
   cursor: pointer;
   border-radius: inherit;
-  background-color: #9093994d;
+  background-color: var(--scrollbar-background-color);
   transition: 0.3s background-color;
 }
 .el-scrollbar__thumb:hover {
-  background-color: #90939980;
+  background-color: var(--scrollbar-hover-background-color);
 }
 .el-scrollbar__bar {
   position: absolute;
@@ -25244,11 +25244,11 @@
   height: 0;
   cursor: pointer;
   border-radius: inherit;
-  background-color: #9093994d;
+  background-color: var(--scrollbar-background-color);
   transition: 0.3s background-color;
 }
 .el-scrollbar__thumb:hover {
-  background-color: #90939980;
+  background-color: var(--scrollbar-hover-background-color);
 }
 .el-scrollbar__bar {
   position: absolute;
