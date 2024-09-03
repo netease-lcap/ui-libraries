@@ -112,6 +112,7 @@
             "parentAccept": "target.tag.endsWith('van-dropdown-menu')",
             "childAccept": "['van-dropdown-item-son'].includes(target.tag)",
             "translateBindingProperty": ["value", "title"],
+            "useFxOrEg":{"property": "title"},
             "selector": {
                 "expression": "this",
                 "cssSelector": "div[class*='van-dropdown-item__content']"
@@ -122,6 +123,7 @@
         "name": "VanDropdownItemSon",
         "ideusage": {
             "idetype": "container",
+            "useFxOrEg":{"property": "title"},
             "parentAccept": "target.tag.endsWith('van-dropdown-item')",
             "translateBindingProperty": ["value", "title", "arrowDirection", "isLink", "icon"],
             "displaySlotConditions": {
@@ -232,6 +234,9 @@
         "name": "VanButton",
         "ideusage": {
             "idetype": "element",
+            "useFxOrEg": {
+                "property": "text"
+            },
             "translateBindingProperty": ["icon", "text"],
             "style": [
                 {
@@ -249,6 +254,7 @@
         "name": "VanImage",
         "ideusage": {
             "idetype": "element",
+            "useFxOrEg":{"property": "src"},
             "translateBindingProperty": ["src", "sr"]
         }
     },
@@ -291,6 +297,7 @@
         "ideusage": {
             "idetype": "element",
             "editable": "text",
+            "useFxOrEg":{"property": "text"},
             "translateBindingProperty": ["text"]
         }
     },
@@ -378,6 +385,7 @@
         "name": "VanProgress",
         "ideusage": {
             "idetype": "container",
+            "useFxOrEg":{"property": "pivotText"},
             "translateBindingProperty": ["value", "showPivot", "custom", "inactive", "color", "trackColor", "textColor", "pivotColor", "strokeWidth", "pivotText"]
         }
     },
@@ -447,7 +455,7 @@
                 "dismiss":"!this.getAttribute('dataSource')",
                 "display": 3,
                 "loopElem": "> .van-for-components__frag > .van-for-components-item"
-            
+
             }
         }
     },
@@ -497,6 +505,7 @@
                 "option": false
             },
             "translateBindingProperty": ["title", "cancelButtonText", "confirmButtonText", "placeholder", "value"],
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
             "namedSlotOmitWrapper": ["picker-top", "picker-bottom", "option"]
         }
     },
@@ -520,6 +529,7 @@
             },
             "scopedSlots": ["title", "picker-top", "pannel-title", "picker-bottom"],
             "namedSlotOmitWrapper": ["picker-top", "picker-bottom"],
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
             "translateBindingProperty": ["value", "title", "confirmButtonText", "cancelButtonText", "placeholder"]
         }
     },
@@ -535,6 +545,7 @@
                 "loopRule": "nth-child(n+2)"
             },
             "scopedSlots": ["title", "picker-top", "picker-bottom"],
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
             "translateBindingProperty": ["title", "value", "placeholder", "tabPlaceholder"],
             "namedSlotOmitWrapper": ["option"]
         }
@@ -552,6 +563,7 @@
             },
             "scopedSlots": ["title", "picker-top", "pannel-title", "picker-bottom"],
             "namedSlotOmitWrapper": ["picker-top", "picker-bottom"],
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
             "translateBindingProperty": ["startValue", "endValue", "minDate", "maxDate", "title", "placeholder"]
         }
     },
@@ -568,6 +580,7 @@
             },
             "scopedSlots": ["title", "picker-top", "pannel-title", "picker-bottom"],
             "namedSlotOmitWrapper": ["picker-top", "picker-bottom"],
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
             "translateBindingProperty": ["value", "minDate", "maxDate", "title", "placeholder"]
         }
     },
@@ -630,6 +643,7 @@
                     "cssSelector": ".van-toast-designer"
                 }
             },
+            "useFxOrEg":{"property": "message"},
             "translateBindingProperty": ["message", "duration"],
             "style": [
                 {
@@ -678,6 +692,7 @@
         "ideusage": {
             "idetype": "element",
             "translateBindingProperty": ["value", "placeholder", "confirmText", "keyboardTitle", "type", "inputstyle", "keytheme", "keyboardTheme"],
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
             "events": {
                 "click": true
             }
@@ -687,6 +702,7 @@
         "name": "VanStepperNew",
         "ideusage": {
             "idetype": "element",
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
             "translateBindingProperty": ["placeholder", "unitValue"]
         }
     },
@@ -694,6 +710,7 @@
         "name": "VanFieldtextarea",
         "ideusage": {
             "idetype": "element",
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
             "translateBindingProperty": ["value", "placeholder"]
         }
     },
@@ -701,6 +718,7 @@
         "name": "VanSearch",
         "ideusage": {
             "idetype": "container",
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
             "translateBindingProperty": ["value", "placeholder"]
         }
     },
