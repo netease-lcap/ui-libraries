@@ -30,8 +30,8 @@ namespace nasl.ui {
   export class ElStatisticOptions extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
-      title: '数值',
-      description: '数值内容',
+      title: '值',
+      description: '数值内容，倒计时需要传入时间戳',
       setter: { concept: 'InputSetter' },
     })
     value: any;
