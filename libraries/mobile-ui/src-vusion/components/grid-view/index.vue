@@ -85,7 +85,7 @@
               vusion-slot-name="item"
               >
               <slot
-                v-if="iffall && slots('item')"
+                v-if="iffall && hasSlot('item')"
                 name="item"
                 :item="item"
                 :state="(styleArr[i] && styleArr[i].state) || 'loading'"
@@ -98,7 +98,7 @@
                 >{{ $at(item, field || textField) }}
               </slot>
               <slot
-                v-if="!iffall && slots('item')"
+                v-if="!iffall && hasSlot('item')"
                 name="item"
                 :item="item"
                 :data="item"
@@ -109,7 +109,7 @@
                 vusion-slot-name="item"
                 >{{ $at(item, field || textField) }}
               </slot>
-              <van-empty-col v-if="(!slots('item')) && $env.VUE_APP_DESIGNER"></van-empty-col>
+              <van-empty-col v-if="(!hasSlot('item')) && $env.VUE_APP_DESIGNER"></van-empty-col>
             </component>
           </div>
           <div v-if="refreshing">
@@ -679,6 +679,9 @@ export default {
     },
     getColDom(i) {
       return this.$refs['item' + i][0];
+    },
+    hasSlot(name = 'default') {
+      return this.$scopedSlots[name] || this.$slots[name];
     },
     slots(name = 'default', props) {
       try {
