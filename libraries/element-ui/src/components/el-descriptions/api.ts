@@ -138,8 +138,10 @@ namespace nasl.ui {
         {
           title: 'Descriptions Item',
           code: `<el-descriptions-item>
-            <template #label>标签</template>
-            内容
+            <template #label>
+              <el-text text="标签"></el-text>
+            </template>
+            <el-text text="内容"></el-text>
           </el-descriptions-item>`,
         },
       ],
@@ -163,7 +165,7 @@ namespace nasl.ui {
     }
   })
   @Component({
-    title: 'Descriptions Item',
+    title: '描述列表项',
     icon: 'descriptions-item',
     description: '',
     group: 'Display',
@@ -186,7 +188,7 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '列的数量',
-      description: '列的数量',
+      description: '往右侧占据列的数量',
       setter: {
         concept: 'NumberInputSetter',
         precision: 0,

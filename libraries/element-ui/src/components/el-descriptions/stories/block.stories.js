@@ -23,6 +23,32 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-descriptions></el-descriptions>',
+    template: `<el-descriptions>
+      <template #title>
+        <el-text text="标题"></el-text>
+      </template>
+      <template #extra>
+        <el-text text="操作区"></el-text>
+      </template>
+
+      <el-descriptions-item>
+        <template #label>
+          <el-text text="标签"></el-text>
+        </template>
+        <el-text text="内容"></el-text>
+      </el-descriptions-item>
+      <el-descriptions-item>
+        <template #label>
+          <el-text text="标签"></el-text>
+        </template>
+        <el-text text="内容"></el-text>
+      </el-descriptions-item>
+      <el-descriptions-item>
+        <template #label>
+          <el-text text="标签"></el-text>
+        </template>
+        <el-text text="内容"></el-text>
+      </el-descriptions-item>
+    </el-descriptions>`,
   }),
 };
