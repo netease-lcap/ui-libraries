@@ -113,10 +113,6 @@ namespace nasl.ui {
        */
       readonly?: nasl.core.Boolean;
       /**
-       * @title 是否为半选
-       */
-      indeterminate?: nasl.core.Boolean;
-      /**
        * @title 全选选项
        */
       checkAll?: nasl.core.Boolean;
@@ -275,7 +271,7 @@ namespace nasl.ui {
       description: '是否为半选',
       setter: { concept: 'SwitchSetter' },
     })
-    indeterminate: nasl.core.Boolean = false;
+    private indeterminate: nasl.core.Boolean = false;
    
     @Prop({
       group: '状态属性',
