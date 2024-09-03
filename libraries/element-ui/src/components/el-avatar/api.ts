@@ -21,6 +21,23 @@ namespace nasl.ui {
   export class ElAvatarOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
+      title: '链接',
+      description: '图片头像的资源地址',
+      setter: { concept: 'ImageSetter' },
+    })
+    src: nasl.core.String;
+
+    @Prop<ElAvatarOptions, 'fallbackSrc'>({
+      group: '主要属性',
+      title: '兜底链接',
+      description: '图片头像的资源地址',
+      setter: { concept: 'ImageSetter' },
+      if: _ => !!_.src,
+    })
+    fallbackSrc: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
       title: '图标',
       description: '设置头像的图标类型，参考 Icon 组件',
       setter: {
@@ -33,10 +50,17 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '尺寸',
-      description: '设置头像的大小',
-      setter: { concept: 'InputSetter' },
+      description: '设置头像的大小，可选值为 large/medium/small',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '小' },
+          { title: '中等' },
+          { title: '大' },
+        ],
+      },
     })
-    size: nasl.core.Decimal | nasl.core.String;
+    size: 'small' | 'medium' | 'large' = 'large';
 
     @Prop({
       group: '主要属性',
@@ -48,31 +72,6 @@ namespace nasl.ui {
       },
     })
     shape: 'circle' | 'square' = 'circle';
-
-    @Prop({
-      group: '主要属性',
-      title: '链接',
-      description: '图片头像的资源地址',
-      setter: { concept: 'ImageSetter' },
-    })
-    src: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: ' fallback链接',
-      description: '图片头像的资源地址',
-      setter: { concept: 'ImageSetter' },
-    })
-    fallbackSrc: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '系列',
-      description:
-        '以逗号分隔的一个或多个字符串列表表明一系列用户代理使用的可能的图像',
-      setter: { concept: 'InputSetter' },
-    })
-    srcSet: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -99,17 +98,25 @@ namespace nasl.ui {
     })
     fit: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down' = 'cover';
 
+    @Prop({
+      group: '主要属性',
+      title: '系列',
+      description:
+        '以逗号分隔的一个或多个字符串列表表明一系列用户代理使用的可能的图像',
+      setter: { concept: 'InputSetter' },
+    })
+    srcSet: nasl.core.String;
+
     @Event({
       title: '加载失败的回调',
-      description:
-        '图片类头像加载失败的回调， 返回 false 会关闭组件默认的 fallback 行为',
+      description: '图片类头像加载失败的回调',
     })
-    onError: (event: {}) => any;
+    onError: (event: any) => any;
 
-    @Slot({
-      title: 'Default',
-      description: '自定义头像展示内容',
-    })
-    slotDefault: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: 'Default',
+    //   description: '自定义头像展示内容',
+    // })
+    // slotDefault: () => Array<ViewComponent>;
   }
 }

@@ -15,7 +15,8 @@
 <script>
 export default {
   methods: {
-    errorHandler() {
+    errorHandler(e) {
+      console.log('load error', e);
       return true;
     },
   },
