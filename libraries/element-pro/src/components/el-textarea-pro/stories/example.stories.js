@@ -1,4 +1,5 @@
 import ElTextareaPro from '../index';
+import ValueDemo from '../demos/value.vue';
 
 export default {
   id: 'el-textarea-pro-examples',
@@ -59,4 +60,12 @@ export const Default = {
       control: { type: 'text' },
     },
   },
+};
+
+export const Value = {
+  name: '双向绑定',
+  render: () => ({
+    components: { ValueDemo },
+    template: '<ValueDemo />',
+  }),
 };

@@ -1,4 +1,5 @@
 import ElInputPro from '../index';
+import ValueDemo from '../demos/value.vue';
 
 export default {
   id: 'el-input-pro-examples',
@@ -160,5 +161,15 @@ export const Slots = {
 
       </el-input-pro>
     `,
+  }),
+};
+
+export const Value = {
+  name: '双向绑定',
+  render: () => ({
+    components: {
+      ValueDemo,
+    },
+    template: '<value-demo></value-demo>',
   }),
 };

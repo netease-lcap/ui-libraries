@@ -311,7 +311,7 @@ namespace nasl.ui {
       description:
         '输入框值发生变化时触发。参数 `trigger=initial` 表示传入的数据不符合预期，组件自动处理后触发 change 告知父组件。如：初始值长度超过 `maxlength` 限制',
     })
-    onChange: (event: any) => any;
+    onChange: (event: nasl.core.String) => any;
 
     @Event({
       title: '清空按钮点击时',
