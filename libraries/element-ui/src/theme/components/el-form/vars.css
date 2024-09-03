@@ -1,0 +1,6 @@
+/**
+ * @component form
+ */
+:root {
+  --form-label-font-size: var(--font-size-base);
+}

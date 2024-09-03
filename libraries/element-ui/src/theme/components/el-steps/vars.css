@@ -1,0 +1,8 @@
+/**
+ * @component steps
+ */
+:root {
+  --steps-border-color: var(--disabled-border-base);
+  --steps-border-radius: 4px;
+  --steps-padding: 20px;
+}

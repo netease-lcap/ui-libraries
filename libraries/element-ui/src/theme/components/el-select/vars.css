@@ -1,0 +1,30 @@
+/**
+ * @component select
+ */
+:root {
+  --select-border-color-hover: var(--border-color-hover);
+  --select-disabled-border: var(--disabled-border-base);
+  --select-font-size: var(--font-size-base);
+  --select-close-hover-color: var(--color-text-secondary);
+  --select-input-color: var(--color-text-placeholder);
+  --select-multiple-input-color: #666;
+  --select-input-focus-border-color: var(--color-primary);
+  --select-input-font-size: 14px;
+  --select-option-color: var(--color-text-regular);
+  --select-option-disabled-color: var(--color-text-placeholder);
+  --select-option-disabled-background: var(--color-white);
+  --select-option-height: 34px;
+  --select-option-hover-background: var(--background-color-base);
+  --select-option-selected-font-color: var(--color-primary);
+  --select-option-selected-hover: var(--background-color-base);
+  --select-group-color: var(--color-info);
+  --select-group-height: 30px;
+  --select-group-font-size: 12px;
+  --select-dropdown-background: var(--color-white);
+  --select-dropdown-shadow: var(--box-shadow-light);
+  --select-dropdown-empty-color: #999;
+  --select-dropdown-max-height: 274px;
+  --select-dropdown-padding: 6px 0;
+  --select-dropdown-empty-padding: 10px 0;
+  --select-dropdown-border: solid 1px var(--border-color-light);
+}

@@ -1,0 +1,32 @@
+/**
+ * @component input
+ */
+:root {
+  --input-font-size: var(--font-size-base);
+  --input-font-color: var(--color-text-regular);
+  --input-height: 40px;
+  --input-border: var(--border-base);
+  --input-border-color: var(--border-color-base);
+  --input-border-radius: var(--border-radius-base);
+  --input-border-color-hover: var(--border-color-hover);
+  --input-background-color: var(--color-white);
+  --input-fill-disabled: var(--disabled-fill-base);
+  --input-color-disabled: var(--font-color-disabled-base);
+  --input-icon-color: var(--color-text-placeholder);
+  --input-placeholder-color: var(--color-text-placeholder);
+  --input-max-width: 314px;
+  --input-hover-border: var(--border-color-hover);
+  --input-clear-hover-color: var(--color-text-secondary);
+  --input-focus-border: var(--color-primary);
+  --input-focus-fill: var(--color-white);
+  --input-disabled-fill: var(--disabled-fill-base);
+  --input-disabled-border: var(--disabled-border-base);
+  --input-disabled-color: var(--disabled-color-base);
+  --input-disabled-placeholder-color: var(--color-text-placeholder);
+  --input-medium-font-size: 14px;
+  --input-medium-height: 36px;
+  --input-small-font-size: 13px;
+  --input-small-height: 32px;
+  --input-mini-font-size: 12px;
+  --input-mini-height: 28px;
+}

@@ -1,0 +1,8 @@
+/**
+ * @component card
+ */
+:root {
+  --card-border-color: var(--border-color-lighter);
+  --card-border-radius: 4px;
+  --card-padding: 20px;
+}

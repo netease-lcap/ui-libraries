@@ -1,0 +1,9 @@
+/**
+ * @component menu
+ */
+:root {
+  --menu-item-font-size: var(--font-size-base);
+  --menu-item-font-color: var(--color-text-primary);
+  --menu-background-color: var(--color-white);
+  --menu-item-hover-fill: var(--color-primary-light-9);
+}

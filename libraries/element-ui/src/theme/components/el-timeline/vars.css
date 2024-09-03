@@ -1,0 +1,8 @@
+/**
+ * @component timeline
+ */
+:root {
+  --timeline-node-size-normal: 12px;
+  --timeline-node-size-large: 14px;
+  --timeline-node-color: var(--border-color-light);
+}

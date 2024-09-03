@@ -1,0 +1,14 @@
+/**
+ * @component transfer
+ */
+:root {
+  --transfer-border-color: var(--border-color-lighter);
+  --transfer-border-radius: var(--border-radius-base);
+  --transfer-panel-width: 200px;
+  --transfer-panel-header-height: 40px;
+  --transfer-panel-header-background-color: var(--background-color-base);
+  --transfer-panel-footer-height: 40px;
+  --transfer-panel-body-height: 246px;
+  --transfer-item-height: 30px;
+  --transfer-filter-height: 32px;
+}

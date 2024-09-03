@@ -1,0 +1,9 @@
+/**
+ * @component descriptions
+ */
+:root {
+  --descriptions-header-margin-bottom: 20px;
+  --descriptions-title-font-size: 16px;
+  --descriptions-table-border: 1px solid var(--border-color-lighter);
+  --descriptions-item-bordered-label-background: #fafafa;
+}

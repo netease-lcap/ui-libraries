@@ -1,0 +1,11 @@
+/**
+ * @component dialog
+ */
+:root {
+  --dialog-background-color: var(--color-white);
+  --dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --dialog-title-font-size: var(--font-size-large);
+  --dialog-content-font-size: 14px;
+  --dialog-font-line-height: var(--font-line-height-primary);
+  --dialog-padding-primary: 20px;
+}

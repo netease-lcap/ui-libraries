@@ -1,0 +1,8 @@
+/**
+ * @component dropdown
+ */
+:root {
+  --dropdown-menu-box-shadow: var(--box-shadow-light);
+  --dropdown-menuItem-hover-fill: var(--color-primary-light-9);
+  --dropdown-menuItem-hover-color: var(--link-color);
+}

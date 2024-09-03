@@ -1,0 +1,15 @@
+/**
+ * @component pagination
+ */
+:root {
+  --pagination-font-size: 13px;
+  --pagination-background-color: var(--color-white);
+  --pagination-font-color: var(--color-text-primary);
+  --pagination-border-radius: 3px;
+  --pagination-button-color: var(--color-text-primary);
+  --pagination-button-width: 35.5px;
+  --pagination-button-height: 28px;
+  --pagination-button-disabled-color: var(--color-text-placeholder);
+  --pagination-button-disabled-background-color: var(--color-white);
+  --pagination-hover-color: var(--color-primary);
+}

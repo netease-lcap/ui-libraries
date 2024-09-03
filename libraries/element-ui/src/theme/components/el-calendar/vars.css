@@ -1,0 +1,8 @@
+/**
+ * @component calendar
+ */
+:root {
+  --calendar-border: var(--table-border);
+  --calendar-selected-background-color: #F2F8FE;
+  --calendar-cell-width: 85px;
+}

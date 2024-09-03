@@ -1,0 +1,15 @@
+/**
+ * @component result
+ */
+:root {
+  --result-padding: 40px 30px;
+  --result-icon-font-size: 64px;
+  --result-title-font-size: 20px;
+  --result-title-margin-top: 20px;
+  --result-subtitle-margin-top: 10px;
+  --result-extra-margin-top: 30px;
+  --result-info-color: var(--color-info);
+  --result-success-color: var(--color-success);
+  --result-warning-color: var(--color-warning);
+  --result-danger-color: var(--color-danger);
+}

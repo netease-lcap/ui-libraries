@@ -1,0 +1,16 @@
+/**
+ * @component message
+ */
+:root {
+  --message-shadow: var(--box-shadow-base);
+  --message-min-width: 380px;
+  --message-background-color: #edf2fc;
+  --message-padding: 15px 15px 15px 20px;
+  --message-close-icon-color: var(--color-text-placeholder);
+  --message-close-size: 16px;
+  --message-close-hover-color: var(--color-text-secondary);
+  --message-success-font-color: var(--color-success);
+  --message-info-font-color: var(--color-info);
+  --message-warning-font-color: var(--color-warning);
+  --message-danger-font-color: var(--color-danger);
+}

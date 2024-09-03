@@ -1,0 +1,11 @@
+/**
+ * @component tooltip
+ */
+:root {
+  --tooltip-fill: var(--color-text-primary);
+  --tooltip-color: var(--color-white);
+  --tooltip-font-size: 12px;
+  --tooltip-border-color: var(--color-text-primary);
+  --tooltip-arrow-size: 6px;
+  --tooltip-padding: 10px;
+}
