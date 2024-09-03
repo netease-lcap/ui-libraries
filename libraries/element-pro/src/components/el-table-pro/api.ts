@@ -475,15 +475,28 @@ namespace nasl.ui {
     //   setter: { concept: 'InputSetter' },
     // })
     // rowClassName: nasl.core.String | object | any[] | any;
-
-    @Prop({
-      group: '主要属性',
-      title: '唯一标识',
-      description:
-        '必需。唯一标识一行数据的字段名，来源于 `data` 中的字段。如果是字段嵌套多层，可以设置形如 `item.a.id` 的方法',
-      setter: { concept: 'InputSetter' },
+    @Prop<ElTableProOptions<T, V, P, M>, 'rowKey'>({
+      group: '数据属性',
+      title: '值字段',
+      description: '在单选、多选操作、渲染树形数据中，指定数据唯一值的字段',
+      docDescription:
+        '在表格开启了单选、多选操作、渲染树形数据中，指定数据唯一值的字段',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
     })
-    rowKey: nasl.core.String = 'index';
+    rowKey: (item: T) => V;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '唯一标识',
+    //   description:
+    //     '必需。唯一标识一行数据的字段名，来源于 `data` 中的字段。如果是字段嵌套多层，可以设置形如 `item.a.id` 的方法',
+    //      setter: {
+    //           concept: 'PropertySelectSetter',
+    //       },
+    // })
+    // rowKey: nasl.core.String = 'index';
 
     // @Prop({
     //   group: '主要属性',
@@ -767,6 +780,9 @@ namespace nasl.ui {
       title: '列字段',
       description: 'data 项中的字段',
       docDescription: '数据项中对应的字段名，如createdTime',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
     })
     colKey: (item: T) => any;
 
