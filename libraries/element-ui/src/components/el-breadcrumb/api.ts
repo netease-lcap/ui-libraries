@@ -51,6 +51,7 @@ namespace nasl.ui {
     @Slot({
       title: '内容',
       description: '内容',
+      emptyBackground: 'add-sub',
       snippets: [
         {
           title: '面包屑项',
