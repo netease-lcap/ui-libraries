@@ -199,9 +199,13 @@ namespace nasl.ui {
       group: '主要属性',
       title: '第一天从星期几开始',
       description: '第一天从星期几开始',
-      setter: { concept: 'NumberInputSetter' },
+      setter: {
+        concept: 'NumberInputSetter',
+        min: 1,
+        max: 7,
+      },
     })
-    firstDayOfWeek: nasl.core.Decimal = 7;
+    firstDayOfWeek: nasl.core.Decimal = 1;
 
     @Prop<ElDatePickerProOptions, 'format'>({
       group: '主要属性',
