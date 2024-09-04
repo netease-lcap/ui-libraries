@@ -55,6 +55,9 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
 
         itemsRef.value = items;
       },
+      {
+        immediate: true,
+      },
     );
 
     return {
