@@ -6,7 +6,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { isFunction } from 'lodash';
+import { isFunction, isNil } from 'lodash';
 import { CreateElement } from 'vue';
 
 dayjs.extend(advancedFormat);
@@ -102,6 +102,14 @@ function dayjs2Date(d: Dayjs | null) {
   return d.toDate();
 }
 
+function normalizeDateRange(s: any, e: any) {
+  if (isNil(s) && isNil(e)) {
+    return [];
+  }
+
+  return [s, e];
+}
+
 export const useDatePickerValue = (props: MapGet, format: ComputedRef<string> | Ref<string>) => {
   const valueRef = props.useRef<DateValue | DateRangeValue>(
     ['value', 'startValue', 'endValue', 'range'],
@@ -110,7 +118,7 @@ export const useDatePickerValue = (props: MapGet, format: ComputedRef<string> | 
         return transformDate(v);
       }
 
-      return [transformDate(startValue), transformDate(endValue)];
+      return normalizeDateRange(transformDate(startValue), transformDate(endValue));
     },
   );
 
@@ -127,10 +135,10 @@ export const useDatePickerValue = (props: MapGet, format: ComputedRef<string> | 
     ]);
 
     if (!range) {
-      valueRef.value = d ? dayjs2Date(Array.isArray(d) ? d[0] : d) : null;
+      valueRef.value = v && d ? dayjs2Date(Array.isArray(d) ? d[0] : d) : null;
       onUpdateValue(getNaslDateValue(Array.isArray(v) ? v[0] : v, format));
     } else {
-      valueRef.value = Array.isArray(d) ? [dayjs2Date(d[0]), dayjs2Date(d[1])] : [null, null];
+      valueRef.value = Array.isArray(d) ? normalizeDateRange(dayjs2Date(d[0]), dayjs2Date(d[1])) : [];
       onUpdateStartValue(getNaslDateValue(d[0], format));
       onUpdateEndValue(getNaslDateValue(d[1], format));
     }
