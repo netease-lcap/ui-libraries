@@ -92,6 +92,7 @@ export const Default = {
     template: `<el-table-pro
     row-key="index"
    :dataSource="data"
+   cellEmptyContent="=="
    :selectedRowKeys.sync="selectedRowKeys"
    @sort-change="onSortChange"
     >
@@ -106,7 +107,7 @@ export const Default = {
     <el-table-column-pro title="渠道" colKey="channel" :sorter="true" fixed= 'left'>
     </el-table-column-pro>
    
-    <el-table-column-pro title="渠道" colKey="time" width="300">
+    <el-table-column-pro title="渠道" colKey="time1" width="300">
     </el-table-column-pro>
     </el-table-pro>`,
   }),

@@ -224,14 +224,14 @@ namespace nasl.ui {
     })
     dataSchema: T;
 
-    @Prop({
-      group: '主要属性',
-      title: '是否禁用本地数据分页',
-      description:
-        '是否禁用本地数据分页。当 `data` 数据长度超过分页大小时，会自动进行本地数据分页。如果 `disableDataPage` 设置为 true，则无论何时，都不会进行本地数据分页',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disableDataPage: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '是否禁用本地数据分页',
+    //   description:
+    //     '是否禁用本地数据分页。当 `data` 数据长度超过分页大小时，会自动进行本地数据分页。如果 `disableDataPage` 设置为 true，则无论何时，都不会进行本地数据分页',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // disableDataPage: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
@@ -581,16 +581,16 @@ namespace nasl.ui {
     // })
     // topContent: any;
 
-    @Prop({
-      group: '主要属性',
-      title: '内容上下方向对齐',
-      description: '行内容上下方向对齐。可选项：top/middle/bottom',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '上' }, { title: '中' }, { title: '下' }],
-      },
-    })
-    verticalAlign: 'top' | 'middle' | 'bottom' = 'middle';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '内容上下方向对齐',
+    //   description: '行内容上下方向对齐。可选项：top/middle/bottom',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '上' }, { title: '中' }, { title: '下' }],
+    //   },
+    // })
+    // verticalAlign: 'top' | 'middle' | 'bottom' = 'middle';
 
     // @Event({
     //   title: '高亮行发生变化时触发',
