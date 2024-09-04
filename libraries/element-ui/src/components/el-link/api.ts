@@ -4,10 +4,10 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       editable: 'children',
-      style: {
-        selector: '.el-link',
-        declaration: 'transition-timing-function: linear !important',
-      },
+      // style: {
+      //   selector: '.el-link',
+      //   declaration: 'transition-timing-function: linear !important',
+      // },
     },
   })
   @Component({
