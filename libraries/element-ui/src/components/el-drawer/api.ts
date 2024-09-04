@@ -25,10 +25,16 @@ namespace nasl.ui {
     }
 
     @Method({
-      title: 'Close Drawer',
-      description: '用于关闭 Drawer, 该方法会调用传入的 `before-close` 方法',
+      title: '显示弹框',
+      description: '显示弹框',
     })
-    closeDrawer(): any {}
+    open(): void {}
+
+    @Method({
+      title: '关闭弹框',
+      description: '关闭弹框',
+    })
+    close(): void {}
   }
 
   export class ElDrawerOptions extends ViewComponentOptions {
@@ -134,6 +140,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       sync: true,
+      settable: true,
       title: '是否显示 Drawer',
       description: '是否显示 Drawer，支持 .sync 修饰符',
       setter: { concept: 'SwitchSetter' },

@@ -6,10 +6,13 @@ import { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
 
 export const handleDateRange: NaslComponentPluginOptions = {
   setup: (props) => {
-    const previewSrcList = props.useComputed(['previewSrcList'], (previewSrcList: any) => {
-      const listRange = previewSrcList?.split(',');
-      return Array.isArray(listRange) ? listRange : undefined;
-    });
+    const previewSrcList = props.useComputed(
+      ['previewSrcList'],
+      (previewSrcList: any) => {
+        const listRange = previewSrcList?.split(',');
+        return Array.isArray(listRange) ? listRange : undefined;
+      },
+    );
     return {
       previewSrcList,
     };

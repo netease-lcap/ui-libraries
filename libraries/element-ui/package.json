@@ -93,6 +93,7 @@
     "pack": "pnpm pack",
     "storybook": "storybook dev -p 6006",
     "build": "lcap-scripts build && npm run lowcode",
+    "pub":"npm run build && npm run deploy",
     "deploy": "lcap-scripts deploy",
     "deploy:dev": "lcap-scripts deploy --platform http://devtest.lcap.codewave-dev.163yun.com/",
     "deploy:test": "lcap-scripts deploy --platform http://defaulttenant.lcap.codewave-test.163yun.com/",

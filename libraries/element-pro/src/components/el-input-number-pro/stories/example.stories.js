@@ -1,4 +1,5 @@
 import ElInputNumberPro from '../index';
+import DemoValue from '../demos/value.vue';
 
 export default {
   id: 'el-input-number-pro-examples',
@@ -28,5 +29,13 @@ export const InputProps = {
   name: '输入框属性',
   render: () => ({
     template: '<el-input-number-pro :inputProps="{ autofocus: true, borderless: true }"></el-input-number-pro>',
+  }),
+};
+
+export const Value = {
+  name: '值',
+  render: () => ({
+    components: { DemoValue },
+    template: '<demo-value></demo-value>',
   }),
 };

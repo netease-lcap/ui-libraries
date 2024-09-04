@@ -4,6 +4,9 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'element',
+      editable: "text",
+      textholder: "text",
+      useFxOrEg: { property: "text" }
     }
   })
   @Component({
@@ -77,9 +80,9 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'dark' },
-          { title: 'light' },
-          { title: 'plain' }
+          { title: '深色' },
+          { title: '浅色' },
+          { title: '普通' }
         ],
       },
     })

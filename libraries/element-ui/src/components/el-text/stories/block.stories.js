@@ -63,7 +63,7 @@ export const SuccessText = {
 export const WarningText = {
   name: '警告文本',
   render: () => ({
-    template: '<el-text size="warning" text="警告文本"></el-text>',
+    template: '<el-text color="warning" text="警告文本"></el-text>',
   }),
 };
 

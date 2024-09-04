@@ -30,8 +30,8 @@ namespace nasl.ui {
   export class ElStatisticOptions extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
-      title: '数值',
-      description: '数值内容',
+      title: '值',
+      description: '数值内容，倒计时需要传入时间戳',
       setter: { concept: 'InputSetter' },
     })
     value: any;
@@ -48,9 +48,9 @@ namespace nasl.ui {
       group: '主要属性',
       title: '自定义数值展示',
       description: '自定义数值展示',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'AnonymousFunctionSetter' },
     })
-    formatter: any;
+    formatter: (value: nasl.core.String | nasl.core.Decimal) => any;
 
     @Prop({
       group: '主要属性',
@@ -168,10 +168,10 @@ namespace nasl.ui {
     })
     slotTitle: () => Array<ViewComponent>;
 
-    @Slot({
-      title: '默认',
-      description: '默认',
-    })
-    slotDefault: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: '默认',
+    //   description: '默认',
+    // })
+    // slotDefault: () => Array<ViewComponent>;
   }
 }

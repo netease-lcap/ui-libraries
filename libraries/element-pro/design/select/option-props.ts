@@ -30,6 +30,10 @@ export default {
     type: String,
     default: '',
   },
+  dataNodepath: {
+    type: String,
+    default: '',
+  },
   /** 选项值 */
   value: {
     type: [String, Number, Boolean] as PropType<ElOptionProps['value']>,

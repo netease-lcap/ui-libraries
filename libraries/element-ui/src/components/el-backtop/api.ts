@@ -34,7 +34,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '滚动高度达到此参数值才出现',
+      title: '滚动高度阈值',
       description: '滚动高度达到此参数值才出现',
       setter: { concept: 'InputSetter' },
     })
@@ -42,16 +42,16 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '滚动高度达到此参数值才出现',
-      description: '滚动高度达到此参数值才出现',
+      title: '距离页面右边距',
+      description: '控制其显示位置, 距离页面右边距',
       setter: { concept: 'InputSetter' },
     })
     right: nasl.core.Integer = 40;
 
     @Prop({
       group: '主要属性',
-      title: '滚动高度达到此参数值才出现',
-      description: '滚动高度达到此参数值才出现',
+      title: '距离页面底部距离',
+      description: '控制其显示位置, 距离页面底部距离',
       setter: { concept: 'InputSetter' },
     })
     bottom: nasl.core.Integer = 40;

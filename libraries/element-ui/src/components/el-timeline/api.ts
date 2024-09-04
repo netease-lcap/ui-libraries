@@ -97,8 +97,8 @@ namespace nasl.ui {
     @Prop({
       group: '样式属性',
       title: '节点动态样式',
-      description: '动态设置时间线上节点背景色、字体颜色等样式',
-      docDescription: '动态设置时间线上节点背景色、字体颜色等样式',
+      description: '动态设置时间线上Dot节点背景色、字体颜色等样式',
+      docDescription: '动态设置时间线上Dot节点背景色、字体颜色等样式',
       bindOpen: true,
       setter: {
           concept: 'AnonymousFunctionSetter',

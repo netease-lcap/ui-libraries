@@ -26,11 +26,11 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'primary' },
-          { title: 'success' },
-          { title: 'warning' },
-          { title: 'danger' },
-          { title: 'info' },
+          { title: '主要' },
+          { title: '成功' },
+          { title: '警告' },
+          { title: '危险' },
+          { title: '信息' },
           { title: '默认' },
         ],
       },

@@ -40,7 +40,7 @@ namespace nasl.ui {
     value: nasl.collection.List<V>;
 
     @Method({
-      title: 'undefined',
+      title: '重新加载',
       description: '清除缓存，重新加载',
     })
     reload(): void {}
@@ -112,10 +112,6 @@ namespace nasl.ui {
        * @title 只读
        */
       readonly?: nasl.core.Boolean;
-      /**
-       * @title 是否为半选
-       */
-      indeterminate?: nasl.core.Boolean;
       /**
        * @title 全选选项
        */
@@ -275,7 +271,7 @@ namespace nasl.ui {
       description: '是否为半选',
       setter: { concept: 'SwitchSetter' },
     })
-    indeterminate: nasl.core.Boolean = false;
+    private indeterminate: nasl.core.Boolean = false;
    
     @Prop({
       group: '状态属性',

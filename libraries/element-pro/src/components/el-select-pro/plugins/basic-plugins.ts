@@ -15,6 +15,8 @@ export const useSelect = {
     const keys = props.useComputed('keys', (v) => (_.isObject(v) ? v : {}));
     return {
       options,
+      // slotDefault: () => null,
+      //  $render(ctx.slots.default),
       keys: {
         value: valueField.value,
         label: textField.value,
