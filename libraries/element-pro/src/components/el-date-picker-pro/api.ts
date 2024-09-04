@@ -416,17 +416,6 @@ namespace nasl.ui {
      }) => any;
 
     @Event({
-      title: '点击确认按钮时',
-      description: '如果存在“确定”按钮，则点击“确定”按钮时触发',
-    })
-    onConfirm: (event: {
-      value: nasl.core.String | nasl.core.Date,
-      startValue: nasl.core.String | nasl.core.Date,
-      endValue: nasl.core.String | nasl.core.Date,
-      position: 'start' | 'end',
-     }) => any;
-
-    @Event({
       title: '聚焦时',
       description: '输入框获得焦点时触发',
     })
