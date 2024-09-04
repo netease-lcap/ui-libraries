@@ -61,13 +61,19 @@ export function buildNaslUI(options: LcapBuildOptions) {
   }
 
   options.components = naslUIConfig.map(({
-    name, kebabName, group, title, children,
+    name,
+    kebabName,
+    group,
+    title,
+    children,
+    show,
   }) => {
     return {
       name: options.framework.startsWith('vue') ? kebabName : name,
       group,
       title,
       children: children.map((child) => (options.framework.startsWith('vue') ? child.kebabName : child.name)),
+      show,
     };
   });
 

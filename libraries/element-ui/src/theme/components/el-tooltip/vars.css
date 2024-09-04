@@ -1,5 +1,5 @@
 /**
- * @component tooltip
+ * @component el-tooltip
  */
 :root {
   --tooltip-fill: var(--color-text-primary);

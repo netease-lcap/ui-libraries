@@ -1,5 +1,5 @@
 /**
- * @component message-box
+ * @component el-message-box
  */
 :root {
   --messagebox-title-color: var(--color-text-primary);

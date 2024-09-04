@@ -1,5 +1,5 @@
 /**
- * @component collapse
+ * @component el-collapse
  */
 :root {
   --collapse-border-color: var(--border-color-lighter);

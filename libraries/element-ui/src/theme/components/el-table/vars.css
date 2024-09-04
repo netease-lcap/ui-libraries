@@ -1,5 +1,5 @@
 /**
- * @component table
+ * @component el-table
  */
 :root {
   --table-border-color: var(--border-color-lighter);

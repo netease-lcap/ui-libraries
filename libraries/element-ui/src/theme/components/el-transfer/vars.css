@@ -1,5 +1,5 @@
 /**
- * @component transfer
+ * @component el-transfer
  */
 :root {
   --transfer-border-color: var(--border-color-lighter);

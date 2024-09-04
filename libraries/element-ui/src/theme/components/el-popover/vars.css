@@ -1,5 +1,5 @@
 /**
- * @component popover
+ * @component el-popover
  */
 :root {
   --popover-background-color: var(--color-white);

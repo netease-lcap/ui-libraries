@@ -1,5 +1,5 @@
 /**
- * @component input
+ * @component el-input
  */
 :root {
   --input-font-size: var(--font-size-base);

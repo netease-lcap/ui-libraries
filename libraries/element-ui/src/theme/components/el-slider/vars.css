@@ -1,5 +1,5 @@
 /**
- * @component slider
+ * @component el-slider
  */
 :root {
   --slider-main-background-color: var(--color-primary);

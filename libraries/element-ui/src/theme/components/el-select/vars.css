@@ -1,5 +1,5 @@
 /**
- * @component select
+ * @component el-select
  */
 :root {
   --select-border-color-hover: var(--border-color-hover);

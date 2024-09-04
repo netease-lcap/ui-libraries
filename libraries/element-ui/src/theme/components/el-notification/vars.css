@@ -1,5 +1,5 @@
 /**
- * @component notification
+ * @component el-notification
  */
 :root {
   --notification-width: 330px;

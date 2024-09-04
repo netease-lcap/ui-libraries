@@ -1,5 +1,5 @@
 /**
- * @component switch
+ * @component el-switch
  */
 :root {
   --switch-on-color: var(--color-primary);

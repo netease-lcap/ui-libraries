@@ -1,5 +1,5 @@
 /**
- * @component badge
+ * @component el-badge
  */
 :root {
   --badge-background-color: var(--color-danger);

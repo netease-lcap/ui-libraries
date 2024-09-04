@@ -1,5 +1,5 @@
 /**
- * @component backtop
+ * @component el-backtop
  */
 :root {
   --backtop-background-color: var(--color-white);

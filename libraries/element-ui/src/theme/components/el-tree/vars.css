@@ -1,5 +1,5 @@
 /**
- * @component tree
+ * @component el-tree
  */
 :root {
   --tree-node-hover-background-color: var(--background-color-base);

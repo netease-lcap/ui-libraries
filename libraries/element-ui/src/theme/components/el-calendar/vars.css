@@ -1,5 +1,5 @@
 /**
- * @component calendar
+ * @component el-calendar
  */
 :root {
   --calendar-border: var(--table-border);

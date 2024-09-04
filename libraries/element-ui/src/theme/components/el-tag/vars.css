@@ -1,5 +1,5 @@
 /**
- * @component tag
+ * @component el-tag
  */
 :root {
   --tag-info-color: var(--color-info);

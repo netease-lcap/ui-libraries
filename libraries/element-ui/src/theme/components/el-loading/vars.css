@@ -1,5 +1,5 @@
 /**
- * @component loading
+ * @component el-loading
  */
 :root {
   --loading-spinner-size: 42px;

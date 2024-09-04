@@ -1,5 +1,5 @@
 /**
- * @component message
+ * @component el-message
  */
 :root {
   --message-shadow: var(--box-shadow-base);

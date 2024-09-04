@@ -1,5 +1,5 @@
 /**
- * @component menu
+ * @component el-menu
  */
 :root {
   --menu-item-font-size: var(--font-size-base);

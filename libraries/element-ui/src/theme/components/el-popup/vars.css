@@ -1,5 +1,5 @@
 /**
- * @component popup
+ * @component el-popup
  */
 :root {
   --popup-modal-background-color: var(--color-black);

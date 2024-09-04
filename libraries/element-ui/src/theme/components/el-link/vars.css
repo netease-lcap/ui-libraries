@@ -1,5 +1,5 @@
 /**
- * @component link
+ * @component el-link
  */
 :root {
   --link-font-size: var(--font-size-base);

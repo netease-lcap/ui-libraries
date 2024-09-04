@@ -1,5 +1,5 @@
 /**
- * @component radio
+ * @component el-radio
  */
 :root {
   --radio-font-size: var(--font-size-base);

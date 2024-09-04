@@ -1,5 +1,5 @@
 /**
- * @component cascader
+ * @component el-cascader
  */
 :root {
   --cascader-menu-font-color: var(--color-text-regular);

@@ -1,5 +1,5 @@
 /**
- * @component timeline
+ * @component el-timeline
  */
 :root {
   --timeline-node-size-normal: 12px;

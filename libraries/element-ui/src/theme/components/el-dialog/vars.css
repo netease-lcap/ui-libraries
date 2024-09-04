@@ -1,5 +1,5 @@
 /**
- * @component dialog
+ * @component el-dialog
  */
 :root {
   --dialog-background-color: var(--color-white);

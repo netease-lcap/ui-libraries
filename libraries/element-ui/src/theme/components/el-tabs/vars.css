@@ -1,5 +1,5 @@
 /**
- * @component tabs
+ * @component el-tabs
  */
 :root {
   --tab-font-size: var(--font-size-base);

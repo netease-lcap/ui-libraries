@@ -1,5 +1,5 @@
 /**
- * @component button
+ * @component el-button
  */
 :root {
   --button-font-size: var(--font-size-base);
@@ -20,13 +20,13 @@
   --button-mini-padding-vertical: 7px;
   --button-mini-padding-horizontal: 15px;
   --button-active-color: var(--color-primary-dark-1);
-  --button-default-font-color: var(--color-text-regular);  
+  --button-default-font-color: var(--color-text-regular);
   --button-default-background-color: var(--color-white);
   --button-default-border-color: var(--border-color-base);
   --button-disabled-font-color: var(--color-text-placeholder);
   --button-disabled-background-color: var(--color-white);
   --button-disabled-border-color: var(--border-color-lighter);
- 
+
   --button-primary-border-color: var(--color-primary);
   --button-primary-font-color: var(--color-white);
   --button-primary-background-color: var(--color-primary);

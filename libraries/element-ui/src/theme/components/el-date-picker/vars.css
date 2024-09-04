@@ -1,5 +1,5 @@
 /**
- * @component date-picker
+ * @component el-date-picker
  */
 :root {
   --datepicker-font-color: var(--color-text-regular);

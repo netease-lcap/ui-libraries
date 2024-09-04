@@ -1,5 +1,5 @@
 /**
- * @component steps
+ * @component el-steps
  */
 :root {
   --steps-border-color: var(--disabled-border-base);

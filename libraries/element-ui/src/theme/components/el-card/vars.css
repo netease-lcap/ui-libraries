@@ -1,5 +1,5 @@
 /**
- * @component card
+ * @component el-card
  */
 :root {
   --card-border-color: var(--border-color-lighter);
