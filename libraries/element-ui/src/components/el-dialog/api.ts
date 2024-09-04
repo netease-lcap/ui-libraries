@@ -60,7 +60,7 @@ namespace nasl.ui {
       description: '对话框宽度',
       setter: { concept: 'InputSetter' },
     })
-    width: nasl.core.String = '30%';
+    width: nasl.core.String = '50%';
 
     @Prop({
       group: '主要属性',

@@ -6,7 +6,7 @@ import * as plugins from './plugins';
 export const ElDrawer = registerComponent(Drawer, plugins, {
   nativeEvents: [],
   slotNames: ['default', 'title'],
-  methodNames: ['closeDrawer'],
+  methodNames: [],
 });
 
 export default ElDrawer;
