@@ -53,7 +53,7 @@ export const useTable = {
       return (pageInfo) => {
         pageSize.value = pageInfo.pageSize;
         current.value = pageInfo.current;
-        _.attempt(onLoadData?.value, {
+        _.attempt(onLoadData, {
           page: pageInfo.current,
           size: pageInfo.pageSize,
         });

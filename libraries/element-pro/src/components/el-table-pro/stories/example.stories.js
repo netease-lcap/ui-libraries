@@ -30,6 +30,7 @@ export const Default = {
     data() {
       return {
         data: async (params) => {
+          console.log(params, 'params');
           const initialData = [];
           const total = 50;
           for (let i = 0; i < total; i++) {
@@ -90,14 +91,13 @@ export const Default = {
     },
     template: `<el-table-pro
     row-key="index"
-   :dataSource="list"
+   :dataSource="data"
    :selectedRowKeys.sync="selectedRowKeys"
    @sort-change="onSortChange"
     >
 
     <el-table-column-pro title="申请人" :sorter="true"     :width="300">
     <template #cell="cell">
-      // <div>{{ cell.row.applicant }}</div>
       <div>{{selectedRowKeys}}</div>
     </template>
     </el-table-column-pro>
