@@ -41,14 +41,9 @@ export const Default = {
       };
     },
     template: `<el-select-pro
-      :dataSource="data"
-      valueField="key.valuefield"
-      textField="key.labelfield"
-      :value.sync="value"
     >
     
-      <el-option-pro label="12" value="11" data-nodepath="1234" >
-      <el-text text="12333" />
+      <el-option-pro label="12" las="33" value="11" data-nodepath="1234" >
       </el-option-pro>
     </el-select-pro>`,
   }),

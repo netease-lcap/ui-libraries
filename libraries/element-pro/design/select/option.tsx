@@ -40,6 +40,7 @@ export interface OptionProps extends ElOptionProps {
   multiple: Boolean;
   isCreatedOption: Boolean;
   index: Number;
+  dataNodepath: string;
 }
 
 export default defineComponent({
@@ -67,7 +68,7 @@ export default defineComponent({
     const { classPrefix } = useConfig('classPrefix');
 
     const {
-      value, label, multiple, disabled, panelElement, scrollType, bufferSize, index, isCreatedOption,
+      value, label, multiple, disabled, panelElement, scrollType, bufferSize, index, isCreatedOption, dataNodepath,
     } = toRefs(props);
 
     const { hasLazyLoadHolder = null, tRowHeight = null } = useLazyLoad(
@@ -176,12 +177,13 @@ export default defineComponent({
       tRowHeight,
       hasLazyLoadHolder,
       handleClick,
+      dataNodepath,
     };
   },
 
   render() {
     const {
-      classes, mouseEvent, labelText, title,
+      classes, mouseEvent, labelText, title,dataNodepath
     } = this;
     const selfDefinedContent = renderContent(this, 'default', 'content');
     const optionChild = selfDefinedContent || <span>{labelText}</span>;
@@ -191,6 +193,7 @@ export default defineComponent({
         <li
           ref="optionNode"
           class={classes}
+          data-nodepath={dataNodepath}
           onMouseenter={() => mouseEvent(true)}
           onMouseleave={() => mouseEvent(false)}
           onClick={this.handleClick}
@@ -206,6 +209,7 @@ export default defineComponent({
       <li
         ref="optionNode"
         class={classes}
+        data-nodepath={dataNodepath}
         onMouseenter={() => mouseEvent(true)}
         onMouseleave={() => mouseEvent(false)}
         onClick={this.handleClick}

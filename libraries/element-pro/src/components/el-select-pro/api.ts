@@ -568,7 +568,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '下拉选项',
-          code: '<el-option-pro value="12"><el-text text="选项" /></el-option-pro>',
+          code: '<el-option-pro value="12" label="选项"></el-option-pro>',
         },
       ],
     })
@@ -578,11 +578,12 @@ namespace nasl.ui {
   @IDEExtraInfo({
     show: true,
     ideusage: {
-      idetype: 'container',
-      selector: {
-        expression: 'this',
-        cssSelector: '.el-p-select-option',
-      },
+    //   idetype: 'container',
+    //   structured: true,
+    //   selector: {
+    //     expression: 'this',
+    //     cssSelector: '.el-p-select-option',
+    //   },
     },
   })
   @Component({
@@ -596,6 +597,7 @@ namespace nasl.ui {
       super();
     }
   }
+
 
   export class ElOptionProOptions<T, V> extends ViewComponentOptions {
     // @Prop({
@@ -655,17 +657,25 @@ namespace nasl.ui {
     })
     value: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
 
+    @Prop({
+      group: '主要属性',
+      title: '选项名称',
+      description: '选项名称',
+      setter: { concept: 'InputSetter' },
+    })
+    label: nasl.core.String | nasl.core.Decimal;
+
     // @Slot({
     //   title: 'Content',
     //   description: '用于定义复杂的选项内容。',
     // })
     // slotContent: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'Default',
-      description: '用于定义复杂的选项内容。同 content。',
-    })
-    slotDefault: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: 'Default',
+    //   description: '用于定义复杂的选项内容。同 content。',
+    // })
+    // slotDefault: () => Array<ViewComponent>;
   }
 
   @Component({
