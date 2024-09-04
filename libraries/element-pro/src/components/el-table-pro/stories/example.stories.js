@@ -14,12 +14,13 @@ export const Default = {
   name: '基础示例',
   render: () => ({
     // moud
-    mounted() {
+    async mounted() {
       setTimeout(() => {
         this.type = 'multiple';
         this.selectedRowKeys.push(1);
         console.log('=====watch');
       }, 3000);
+      this.list = await this.data();
     },
     watch: {
       selectedRowKeys(value) {
@@ -29,7 +30,6 @@ export const Default = {
     data() {
       return {
         data: async (params) => {
-          console.log(params, 'params===');
           const initialData = [];
           const total = 50;
           for (let i = 0; i < total; i++) {
@@ -66,6 +66,7 @@ export const Default = {
             total,
           };
         },
+        list: [],
         type: undefined,
         selectedRowKeys: [],
         columns: [
@@ -89,7 +90,7 @@ export const Default = {
     },
     template: `<el-table-pro
     row-key="index"
-   :dataSource="data"
+   :dataSource="list"
    :selectedRowKeys.sync="selectedRowKeys"
    @sort-change="onSortChange"
     >

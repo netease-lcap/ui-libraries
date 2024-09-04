@@ -50,12 +50,16 @@ export const useTable = {
 
     const onPageChange = props.useComputed('onPageChange', (value) => {
       return (pageInfo) => {
-        current.value = pageInfo.current;
-        _.attempt(onLoadData.value, {
-          page: pageInfo.current,
-          size: pageInfo.pageSize,
-        });
-        _.attempt(value, pageInfo);
+        try {
+          current.value = pageInfo.current;
+          _.attempt(onLoadData?.value, {
+            page: pageInfo.current,
+            size: pageInfo.pageSize,
+          });
+          _.attempt(value, pageInfo);
+        } catch (error) {
+          console.log(error);
+        }
       };
     });
 
@@ -88,14 +92,16 @@ export const useTable = {
         pageSize: pageSize.value,
       };
     });
-    if (_.isFunction(onLoadData)) {
-      onLoadData?.({
-        page: current.value,
-        size: pageSize.value,
-        sort: sorting.value?.field,
-        order: sorting.value?.order,
-      });
-    }
+    onMounted(() => {
+      if (_.isFunction(onLoadData)) {
+        onLoadData?.({
+          page: current.value,
+          size: pageSize.value,
+          sorter: sorting.value?.field,
+          order: sorting.value?.order,
+        });
+      }
+    });
     const onSortChange = props.useComputed('onSortChange', (value) => {
       return (...arg) => {
         _.attempt(onLoadData, {
