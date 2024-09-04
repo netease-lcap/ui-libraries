@@ -97,7 +97,7 @@ export const Default = {
 
     <el-table-column-pro title="申请人" :sorter="true"     :width="300">
     <template #cell="cell">
-      <div>{{ cell.row.applicant }}</div>
+      // <div>{{ cell.row.applicant }}</div>
       <div>{{selectedRowKeys}}</div>
     </template>
     </el-table-column-pro>

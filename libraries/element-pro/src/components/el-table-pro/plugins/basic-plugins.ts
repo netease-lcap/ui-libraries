@@ -47,19 +47,17 @@ export const useTable = {
     };
 
     const onLoadData = props.get('onLoadData');
+    const pageSize = props.useRef('pageSize');
 
     const onPageChange = props.useComputed('onPageChange', (value) => {
       return (pageInfo) => {
-        try {
-          current.value = pageInfo.current;
-          _.attempt(onLoadData?.value, {
-            page: pageInfo.current,
-            size: pageInfo.pageSize,
-          });
-          _.attempt(value, pageInfo);
-        } catch (error) {
-          console.log(error);
-        }
+        pageSize.value = pageInfo.pageSize;
+        current.value = pageInfo.current;
+        _.attempt(onLoadData?.value, {
+          page: pageInfo.current,
+          size: pageInfo.pageSize,
+        });
+        _.attempt(value, pageInfo);
       };
     });
 
@@ -72,9 +70,9 @@ export const useTable = {
       }
     });
 
-    const pageSize = props.useComputed('pageSize', (value) => {
-      return _.toNumber(value) || 10;
-    });
+    // const pageSize = props.useComputed('pageSize', (value) => {
+    //   return _.toNumber(value) || 10;
+    // });
 
     const total = props.useComputed('total', (value) => value ?? 10);
 
