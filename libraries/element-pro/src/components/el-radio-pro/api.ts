@@ -40,7 +40,7 @@ namespace nasl.ui {
     value: V;
 
     @Method({
-      title: 'undefined',
+      title: '重新加载',
       description: '清除缓存，重新加载',
     })
     reload(): void {}
@@ -136,38 +136,7 @@ namespace nasl.ui {
       description: 'HTML 元素原生属性',
       setter: { concept: 'InputSetter' },
     })
-    name: nasl.core.String;
-
-    @Prop({
-      group: '样式属性',
-      title: '尺寸',
-      description: '组件尺寸',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: '小' },
-          { title: '中' },
-          { title: '大' },
-        ],
-      },
-    })
-    size: 'small' | 'medium' | 'large' = 'medium';
-
-    @Prop({
-      group: '样式属性',
-      title: '按钮形式',
-      description:
-        '单选组件按钮形式。可选项：outline/primary-filled/default-filled',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: 'outline' },
-          { title: 'primary-filled' },
-          { title: 'default-filled' },
-        ],
-      },
-    })
-    variant: 'outline' | 'primary-filled' | 'default-filled' = 'outline';
+    private name: nasl.core.String;
 
     @Event({
       title: '改变后',

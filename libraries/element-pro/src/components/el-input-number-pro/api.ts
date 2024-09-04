@@ -216,7 +216,7 @@ namespace nasl.ui {
       description: '输入框下方提示文本，会根据不同的 `status` 呈现不同的样式。',
       setter: { concept: 'InputSetter' },
     })
-    tips: nasl.core.String;
+    private tips: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -249,7 +249,7 @@ namespace nasl.ui {
       description: '名称',
       setter: { concept: 'InputSetter' },
     })
-    name: nasl.core.String;
+    private name: nasl.core.String;
     // 👆inputProps
 
     @Event({

@@ -40,7 +40,7 @@ namespace nasl.ui {
     value: nasl.collection.List<V>;
 
     @Method({
-      title: 'undefined',
+      title: '重新加载',
       description: '清除缓存，重新加载',
     })
     reload(): void {}

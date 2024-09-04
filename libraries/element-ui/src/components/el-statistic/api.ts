@@ -168,10 +168,10 @@ namespace nasl.ui {
     })
     slotTitle: () => Array<ViewComponent>;
 
-    @Slot({
-      title: '默认',
-      description: '默认',
-    })
-    slotDefault: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: '默认',
+    //   description: '默认',
+    // })
+    // slotDefault: () => Array<ViewComponent>;
   }
 }
