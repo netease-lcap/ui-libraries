@@ -19,8 +19,7 @@
       </div>
       <i
         v-if="showClose"
-        class="el-message__closeBtn el-icon-close"
-        @click="close"></i>
+        class="el-message__closeBtn el-icon-close"></i>
     </div>
   </transition>
 </template>
@@ -67,14 +66,6 @@ export default {
         top: `${this.offset}px`,
         zIndex: 7000,
       };
-    },
-  },
-
-  watch: {
-    closed(newVal) {
-      if (newVal) {
-        this.visible = false;
-      }
     },
   },
 };
