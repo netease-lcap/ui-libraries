@@ -72,6 +72,12 @@ const parseCssVars = (nodes: NonNullable<postcss.Container['nodes']>) => {
     variable.name = n.prop;
     variable.value = n.value;
 
+    if ((
+      ['color', 'bg', 'background'].some((key) => variable.name.toLocaleLowerCase().includes(key)) || variable.name.toLocaleLowerCase().endsWith('outline')
+    ) && (!variable.type || variable.type === 'input')) {
+      variable.type = 'color';
+    }
+
     variables.push(variable);
     variable = {
       title: '',
