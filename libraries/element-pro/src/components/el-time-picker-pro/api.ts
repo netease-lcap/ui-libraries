@@ -143,8 +143,6 @@ namespace nasl.ui {
           { title: '12时09分09秒' },
           { title: '12:09' },
           { title: '12时09分' },
-          { title: '12' },
-          { title: '12时' },
         ],
       },
     })
