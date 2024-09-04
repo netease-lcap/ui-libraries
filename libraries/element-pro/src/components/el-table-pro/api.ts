@@ -96,7 +96,7 @@ namespace nasl.ui {
     sorter: nasl.core.String;
 
     @Method({
-      title: 'undefined',
+      title: '重新加载',
       description: '清除缓存，重新加载',
     })
     reload(): void {}
