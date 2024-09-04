@@ -6,7 +6,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { TimeIcon as ElTimeIcon } from '@element-ui-icons';
 
 import TimePickerPanel from './panel/time-picker-panel';
-import ElSelectInput from '../select-input';
+import ElSelectInput, { SelectInputFocusContext } from '../select-input';
 import { formatInputValue, validateInputValue } from '../_common/js/time-picker/utils';
 import type { InputProps } from '../input';
 // hooks
@@ -16,6 +16,7 @@ import { useGlobalIcon } from '../hooks/useGlobalIcon';
 import useFormDisabled from '../hooks/useFormDisabled';
 
 import props from './props';
+import { TimePickerValue } from './type';
 
 dayjs.extend(customParseFormat);
 
@@ -86,9 +87,9 @@ export default defineComponent({
       currentValue.value = v;
     };
 
-    const handleOnFocus = (context: { value: string; e: FocusEvent }) => {
-      props.onFocus?.(context);
-      ctx.emit('focus', context);
+    const handleOnFocus = (value: string, { e }: { e: FocusEvent }) => {
+      props.onFocus?.({ value, e });
+      ctx.emit('focus', { value, e });
     };
 
     const handleOnPick = (v: string, e: MouseEvent) => {
