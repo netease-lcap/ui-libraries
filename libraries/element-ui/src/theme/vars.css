@@ -393,118 +393,222 @@
     */
   --el-size-unit: 4px;
 
-  --el-size-1: 4px;
-  --el-size-2: 8px;
-  --el-size-3: 12px;
-  --el-size-4: 16px;
-  --el-size-5: 20px;
-  --el-size-6: 24px;
-  --el-size-7: 28px;
-  --el-size-8: 32px;
-  --el-size-9: 36px;
-  --el-size-10: 40px;
+  --el-size-1: 2px;
+  --el-size-2: 4px;
+  --el-size-3: 6px;
+  --el-size-4: 8px;
+  --el-size-5: 12px;
+  --el-size-6: 16px;
+  --el-size-7: 20px;
+  --el-size-8: 24px;
+  --el-size-9: 28px;
+  --el-size-10: 32px;
+  --el-size-11: 36px;
+  --el-size-12: 40px;
+  --el-size-13: 48px;
+  --el-size-14: 56px;
+  --el-size-15: 64px;
+  --el-size-16: 72px;
 
   /**
-    * @title 外边距 XXS
-    * @type size
-    */
-  --el-margin-1: var(--el-size-1);
+   * @title 组件尺寸 XXXS
+   * @type size
+   */
+  --el-comp-size-xxxs: var(--el-size-6);
   /**
-    * @title 外边距 XS
-    * @type size
-    */
-  --el-margin-2: var(--el-size-2);
+   * @title 组件尺寸 XXS
+   * @type size
+   */
+  --el-comp-size-xxs: var(--el-size-7);
   /**
-    * @title 外边距 SM
-    * @type size
-    */
-  --el-margin-3: var(--el-size-3);
+   * @title 组件尺寸 XS
+   * @type size
+   */
+  --el-comp-size-xs: var(--el-size-8);
   /**
-    * @title 外边距
-    * @type size
-    */
-  --el-margin-4: var(--el-size-4);
+   * @title 组件尺寸 S
+   * @type size
+   */
+  --el-comp-size-s: var(--el-size-9);
   /**
-    * @title 外边距 MD
-    * @type size
-    */
-  --el-margin-5: var(--el-size-5);
+   * @title 组件尺寸 M
+   * @type size
+   */
+  --el-comp-size-m: var(--el-size-10);
   /**
-    * @title 外边距 LG
-    * @type size
-    */
-  --el-margin-6: var(--el-size-6);
+   * @title 组件尺寸 L
+   * @type size
+   */
+  --el-comp-size-l: var(--el-size-11);
   /**
-    * @title 外边距 XL
-    * @type size
-    */
-  --el-margin-7: var(--el-size-7);
+   * @title 组件尺寸 XL
+   * @type size
+   */
+  --el-comp-size-xl: var(--el-size-12);
   /**
-    * @title 外边距 XXL
-    * @type size
-    */
-  --el-margin-8: var(--el-size-8);
+   * @title 组件尺寸 XXL
+   * @type size
+   */
+  --el-comp-size-xxl: var(--el-size-13);
   /**
-    * @title 外边距 XXXL
-    * @type size
-    */
-  --el-margin-9: var(--el-size-9);
+   * @title 组件尺寸 XXXL
+   * @type size
+   */
+  --el-comp-size-xxxl: var(--el-size-14);
   /**
-    * @title 外边距 XXXXL
-    * @type size
-    */
-  --el-margin-10: var(--el-size-10);
+   * @title 组件尺寸 XXXXL
+   * @type size
+   */
+  --el-comp-size-xxxxl: var(--el-size-15);
+  /**
+   * @title 组件尺寸 XXXXXL
+   * @type size
+   */
+  --el-comp-size-xxxxxl: var(--el-size-16);
 
   /**
-    * @title 内边距 XXS
-    * @type size
-    */
-  --el-padding-1: var(--el-size-1);
+   * @title 弹出层内边距 S
+   * @type size
+   */
+  --el-pop-padding-s: var(--el-size-2);
   /**
-    * @title 内边距 XS
-    * @type size
-    */
-  --el-padding-2: var(--el-size-2);
+   * @title 弹出层内边距 M
+   * @type size
+   */
+  --el-pop-padding-m: var(--el-size-3);
   /**
-    * @title 内边距 SM
-    * @type size
-    */
-  --el-padding-3: var(--el-size-3);
+   * @title 弹出层内边距 L
+   * @type size
+   */
+  --el-pop-padding-l: var(--el-size-4);
   /**
-    * @title 内边距
-    * @type size
-    */
-  --el-padding-4: var(--el-size-4);
+   * @title 弹出层内边距 XL
+   * @type size
+   */
+  --el-pop-padding-xl: var(--el-size-5);
   /**
-    * @title 内边距 MD
-    * @type size
-    */
-  --el-padding-5: var(--el-size-5);
+   * @title 弹出层内边距 XXL
+   * @type size
+   */
+  --el-pop-padding-xxl: var(--el-size-6);
+
   /**
-    * @title 内边距 LG
-    * @type size
-    */
-  --el-padding-6: var(--el-size-6);
+   * @title 水平内边距 XXS
+   * @type size
+   */
+  --el-comp-paddingLR-xxs: var(--el-size-1);
   /**
-    * @title 内边距 XL
-    * @type size
-    */
-  --el-padding-7: var(--el-size-7);
+   * @title 水平内边距 XS
+   * @type size
+   */
+  --el-comp-paddingLR-xs: var(--el-size-2);
   /**
-    * @title 内边距 XXL
-    * @type size
-    */
-  --el-padding-8: var(--el-size-8);
+   * @title 水平内边距 S
+   * @type size
+   */
+  --el-comp-paddingLR-s: var(--el-size-4);
   /**
-    * @title 内边距 XXXL
-    * @type size
-    */
-  --el-padding-9: var(--el-size-9);
+   * @title 水平内边距 M
+   * @type size
+   */
+  --el-comp-paddingLR-m: var(--el-size-5);
   /**
-    * @title 内边距 XXXXL
-    * @type size
-    */
-  --el-padding-10: var(--el-size-10);
+   * @title 水平内边距 L
+   * @type size
+   */
+  --el-comp-paddingLR-l: var(--el-size-6);
+  /**
+   * @title 水平内边距 XL
+   * @type size
+   */
+  --el-comp-paddingLR-xl: var(--el-size-8);
+  /**
+   * @title 水平内边距 XXL
+   * @type size
+   */
+  --el-comp-paddingLR-xxl: var(--el-size-10);
+
+  /**
+   * @title 垂直内边距 XXS
+   * @type size
+   */
+  --el-comp-paddingTB-xxs: var(--el-size-1);
+  /**
+   * @title 垂直内边距 XS
+   * @type size
+   */
+  --el-comp-paddingTB-xs: var(--el-size-2);
+  /**
+   * @title 垂直内边距 S
+   * @type size
+   */
+  --el-comp-paddingTB-s: var(--el-size-4);
+  /**
+   * @title 垂直内边距 M
+   * @type size
+   */
+  --el-comp-paddingTB-m: var(--el-size-5);
+  /**
+   * @title 垂直内边距 L
+   * @type size
+   */
+  --el-comp-paddingTB-l: var(--el-size-6);
+  /**
+   * @title 垂直内边距 XL
+   * @type size
+   */
+  --el-comp-paddingTB-xl: var(--el-size-8);
+  /**
+   * @title 垂直内边距 XXL
+   * @type size
+   */
+  --el-comp-paddingTB-xxl: var(--el-size-10);
+
+  /**
+   * @title 外边距 XXS
+   * @type size
+   */
+  --el-comp-margin-xxs: var(--el-size-1);
+  /**
+   * @title 外边距 XS
+   * @type size
+   */
+  --el-comp-margin-xs: var(--el-size-2);
+  /**
+   * @title 外边距 S
+   * @type size
+   */
+  --el-comp-margin-s: var(--el-size-4);
+  /**
+   * @title 外边距 M
+   * @type size
+   */
+  --el-comp-margin-m: var(--el-size-5);
+  /**
+   * @title 外边距 L
+   * @type size
+   */
+  --el-comp-margin-l: var(--el-size-6);
+  /**
+   * @title 外边距 XL
+   * @type size
+   */
+  --el-comp-margin-xl: var(--el-size-7);
+  /**
+   * @title 外边距 XXL
+   * @type size
+   */
+  --el-comp-margin-xxl: var(--el-size-8);
+  /**
+   * @title 外边距 XXXL
+   * @type size
+   */
+  --el-comp-margin-xxxl: var(--el-size-10);
+  /**
+   * @title 外边距 XXXXL
+   * @type size
+   */
+  --el-comp-margin-xxxxl: var(--el-size-12);
 
   /**
     * @title 直角

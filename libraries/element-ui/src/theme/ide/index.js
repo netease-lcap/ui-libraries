@@ -303,43 +303,65 @@ const SizeGroups = [
     desc: '',
     seedToken: ['--el-size-step', '--el-size-unit'],
     mapToken: [
-      '--el-margin-1',
-      '--el-margin-2',
-      '--el-margin-3',
-      '--el-margin-4',
-      '--el-margin-5',
-      '--el-margin-6',
-      '--el-margin-7',
-      '--el-margin-8',
-      '--el-margin-9',
-      '--el-margin-10',
-      '--el-padding-1',
-      '--el-padding-2',
-      '--el-padding-3',
-      '--el-padding-4',
-      '--el-padding-5',
-      '--el-padding-6',
-      '--el-padding-7',
-      '--el-padding-8',
-      '--el-padding-9',
-      '--el-padding-10',
+      '--el-comp-size-xxxs',
+      '--el-comp-size-xxs',
+      '--el-comp-size-xs',
+      '--el-comp-size-s',
+      '--el-comp-size-m',
+      '--el-comp-size-l',
+      '--el-comp-size-xl',
+      '--el-comp-size-xxl',
+      '--el-comp-size-xxxl',
+      '--el-comp-size-xxxxl',
+      '--el-comp-size-xxxxxl',
+      '--el-pop-padding-s',
+      '--el-pop-padding-m',
+      '--el-pop-padding-l',
+      '--el-pop-padding-xl',
+      '--el-pop-padding-xxl',
+      '--el-comp-paddingLR-xxs',
+      '--el-comp-paddingLR-xs',
+      '--el-comp-paddingLR-s',
+      '--el-comp-paddingLR-m',
+      '--el-comp-paddingLR-l',
+      '--el-comp-paddingLR-xl',
+      '--el-comp-paddingLR-xxl',
+      '--el-comp-paddingTB-xxs',
+      '--el-comp-paddingTB-xs',
+      '--el-comp-paddingTB-s',
+      '--el-comp-paddingTB-m',
+      '--el-comp-paddingTB-l',
+      '--el-comp-paddingTB-xl',
+      '--el-comp-paddingTB-xxl',
+      '--el-comp-margin-xxs',
+      '--el-comp-margin-xs',
+      '--el-comp-margin-s',
+      '--el-comp-margin-m',
+      '--el-comp-margin-l',
+      '--el-comp-margin-xl',
+      '--el-comp-margin-xxl',
+      '--el-comp-margin-xxxl',
+      '--el-comp-margin-xxxxl',
     ],
     getMapTokenValue: (seedTokenValues) => {
       const [step, unit] = seedTokenValues.map((n) => parseValue(n));
       const base = step * unit;
       const sizes = [];
 
-      for (let i = 0; i < 10; i++) {
-        const n = i - 3;
+      for (let i = 0; i < 12; i++) {
+        const n = i - 5;
         sizes.push(base + unit * n);
       }
+
+      sizes[2] = sizes[3] - Math.round(unit / 2);
+      sizes[1] = sizes[2] - Math.round(unit / 2);
+      sizes[0] = sizes[1] - Math.round(unit / 2);
+      sizes[12] = sizes[11] + unit * 2;
+      sizes[13] = sizes[12] + unit * 2;
+      sizes[14] = sizes[13] + unit * 2;
+      sizes[15] = sizes[14] + unit * 2;
+
       const mappedValue = {
-        '--space-base': addUnit(base),
-        '--space-mini': addUnit(sizes[0]),
-        '--space-small': addUnit(sizes[2]),
-        '--space-medium': addUnit(sizes[5]),
-        '--space-large': addUnit(sizes[7]),
-        '--space-huge': addUnit(sizes[9]),
       };
 
       sizes.forEach((s, i) => {

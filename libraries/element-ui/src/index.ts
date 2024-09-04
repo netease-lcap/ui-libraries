@@ -2,6 +2,7 @@ import * as VueCompositionAPI from '@vue/composition-api';
 // import * as LcapUI from '@lcap/pc-ui/src/index';
 import * as ElementPro from '@lcap/element-pro/src/main';
 import { install } from './main';
+import './styles/reset-pro.css';
 
 export * from './main';
 
