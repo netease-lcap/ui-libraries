@@ -223,16 +223,16 @@ namespace nasl.ui {
     })
     inputPattern: nasl.core.String;
 
-    @Prop<ElMessageBoxOptions, 'inputValidator'>({
-      title: '输入验证函数',
-      description: '可以返回布尔值或字符串，若返回一个字符串, 则返回结果会被赋值给校验未通过时的提示文本',
-      group: '主要属性',
-      setter: {
-        concept: 'AnonymousFunctionSetter',
-      },
-      if: (_) => _.type === 'prompt',
-    })
-    inputValidator: (value: nasl.core.String) => (nasl.core.Boolean | nasl.core.String);
+    // @Prop<ElMessageBoxOptions, 'inputValidator'>({
+    //   title: '输入验证函数',
+    //   description: '可以返回布尔值或字符串，若返回一个字符串, 则返回结果会被赋值给校验未通过时的提示文本',
+    //   group: '主要属性',
+    //   setter: {
+    //     concept: 'AnonymousFunctionSetter',
+    //   },
+    //   if: (_) => _.type === 'prompt',
+    // })
+    // inputValidator: (value: nasl.core.String) => (nasl.core.Boolean | nasl.core.String);
 
     @Prop<ElMessageBoxOptions, 'inputErrorMessage'>({
       title: '校验未通过时的提示文本',
