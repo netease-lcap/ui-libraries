@@ -1,0 +1,41 @@
+/**
+ * @component el-checkbox
+ */
+:root {
+  --checkbox-font-size: 14px;
+  --checkbox-font-weight: var(--font-weight-primary);
+  --checkbox-font-color: var(--color-text-regular);
+  --checkbox-input-height: 14px;
+  --checkbox-input-width: 14px;
+  --checkbox-border-radius: var(--border-radius-small);
+  --checkbox-background-color: var(--color-white);
+  --checkbox-input-border: var(--border-base);
+  --checkbox-disabled-border-color: var(--border-color-base);
+  --checkbox-disabled-input-fill: #edf2fc;
+  --checkbox-disabled-icon-color: var(--color-text-placeholder);
+  --checkbox-disabled-checked-input-fill: var(--border-color-extra-light);
+  --checkbox-disabled-checked-input-border-color: var(--border-color-base);
+  --checkbox-disabled-checked-icon-color: var(--color-text-placeholder);
+  --checkbox-checked-font-color: var(--color-primary);
+  --checkbox-checked-input-border-color: var(--color-primary);
+  --checkbox-checked-background-color: var(--color-primary);
+  --checkbox-checked-icon-color: var(--fill-base);
+  --checkbox-input-border-color-hover: var(--color-primary);
+  --checkbox-bordered-height: 40px;
+  --checkbox-bordered-padding: 9px 20px 9px 10px;
+  --checkbox-bordered-medium-padding: 7px 20px 7px 10px;
+  --checkbox-bordered-small-padding: 5px 15px 5px 10px;
+  --checkbox-bordered-mini-padding: 3px 15px 3px 10px;
+  --checkbox-bordered-medium-input-height: 14px;
+  --checkbox-bordered-medium-input-width: 14px;
+  --checkbox-bordered-medium-height: 36px;
+  --checkbox-bordered-small-input-height: 12px;
+  --checkbox-bordered-small-input-width: 12px;
+  --checkbox-bordered-small-height: 32px;
+  --checkbox-bordered-mini-input-height: 12px;
+  --checkbox-bordered-mini-input-width: 12px;
+  --checkbox-bordered-mini-height: 28px;
+  --checkbox-button-checked-background-color: var(--color-primary);
+  --checkbox-button-checked-font-color: var(--color-white);
+  --checkbox-button-checked-border-color: var(--color-primary);
+}

@@ -1,0 +1,12 @@
+/**
+ * @component el-switch
+ */
+:root {
+  --switch-on-color: var(--color-primary);
+  --switch-off-color: var(--border-color-base);
+  --switch-font-size: var(--font-size-base);
+  --switch-core-border-radius: 10px;
+  --switch-width: 40px;
+  --switch-height: 20px;
+  --switch-button-size: 16px;
+}

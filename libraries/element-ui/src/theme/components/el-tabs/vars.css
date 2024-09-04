@@ -1,0 +1,15 @@
+/**
+ * @component el-tabs
+ */
+:root {
+  --tab-font-size: var(--font-size-base);
+  --tab-border-line: 1px solid #e4e4e4;
+  --tab-header-color-active: var(--color-text-secondary);
+  --tab-header-color-hover: var(--color-text-regular);
+  --tab-header-color: var(--color-text-regular);
+  --tab-header-fill-active: rgba(0, 0, 0, 0.06);
+  --tab-header-fill-hover: rgba(0, 0, 0, 0.06);
+  --tab-vertical-header-width: 90px;
+  --tab-vertical-header-count-color: var(--color-white);
+  --tab-vertical-header-count-fill: var(--color-text-secondary);
+}

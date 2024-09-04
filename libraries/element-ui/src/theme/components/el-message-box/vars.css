@@ -1,0 +1,17 @@
+/**
+ * @component el-message-box
+ */
+:root {
+  --messagebox-title-color: var(--color-text-primary);
+  --msgbox-width: 420px;
+  --msgbox-border-radius: 4px;
+  --messagebox-font-size: var(--font-size-large);
+  --messagebox-content-font-size: var(--font-size-base);
+  --messagebox-content-color: var(--color-text-regular);
+  --messagebox-error-font-size: 12px;
+  --msgbox-padding-primary: 15px;
+  --messagebox-success-color: var(--color-success);
+  --messagebox-info-color: var(--color-info);
+  --messagebox-warning-color: var(--color-warning);
+  --messagebox-danger-color: var(--color-danger);
+}

@@ -1,0 +1,9 @@
+/**
+ * @component el-empty
+ */
+:root {
+  --empty-padding: 40px 0;
+  --empty-image-width: 160px;
+  --empty-description-margin-top: 20px;
+  --empty-bottom-margin-top: 20px;
+}

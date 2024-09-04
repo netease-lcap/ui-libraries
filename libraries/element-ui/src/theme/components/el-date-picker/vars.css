@@ -1,0 +1,16 @@
+/**
+ * @component el-date-picker
+ */
+:root {
+  --datepicker-font-color: var(--color-text-regular);
+  --datepicker-off-font-color: var(--color-text-placeholder);
+  --datepicker-header-font-color: var(--color-text-regular);
+  --datepicker-icon-color: var(--color-text-primary);
+  --datepicker-border-color: var(--disabled-border-base);
+  --datepicker-inner-border-color: #e4e4e4;
+  --datepicker-inrange-background-color: var(--border-color-extra-light);
+  --datepicker-inrange-hover-background-color: var(--border-color-extra-light);
+  --datepicker-active-color: var(--color-primary);
+  --datepicker-hover-font-color: var(--color-primary);
+  --datepicker-cell-hover-color: #fff;
+}

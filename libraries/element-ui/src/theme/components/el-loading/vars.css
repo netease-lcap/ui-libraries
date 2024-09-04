@@ -1,0 +1,7 @@
+/**
+ * @component el-loading
+ */
+:root {
+  --loading-spinner-size: 42px;
+  --loading-fullscreen-spinner-size: 50px;
+}

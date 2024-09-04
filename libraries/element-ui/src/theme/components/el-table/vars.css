@@ -1,0 +1,13 @@
+/**
+ * @component el-table
+ */
+:root {
+  --table-border-color: var(--border-color-lighter);
+  --table-border: 1px solid var(--table-border-color);
+  --table-font-color: var(--color-text-regular);
+  --table-header-font-color: var(--color-text-secondary);
+  --table-row-hover-background-color: var(--background-color-base);
+  --table-current-row-background-color: var(--color-primary-light-9);
+  --table-header-background-color: var(--color-white);
+  --table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12);
+}

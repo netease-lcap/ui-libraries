@@ -1,0 +1,17 @@
+/**
+ * @component el-alert
+ */
+:root {
+  --alert-padding: 8px 16px;
+  --alert-border-radius: var(--border-radius-base);
+  --alert-title-font-size: 13px;
+  --alert-description-font-size: 12px;
+  --alert-close-font-size: 12px;
+  --alert-close-customed-font-size: 13px;
+  --alert-success-color: var(--color-success-lighter);
+  --alert-info-color: var(--color-info-lighter);
+  --alert-warning-color: var(--color-warning-lighter);
+  --alert-danger-color: var(--color-danger-lighter);
+  --alert-icon-size: 16px;
+  --alert-icon-large-size: 28px;
+}

@@ -1,0 +1,13 @@
+/**
+ * @component el-collapse
+ */
+:root {
+  --collapse-border-color: var(--border-color-lighter);
+  --collapse-header-height: 48px;
+  --collapse-header-background-color: var(--color-white);
+  --collapse-header-font-color: var(--color-text-primary);
+  --collapse-header-font-size: 13px;
+  --collapse-content-background-color: var(--color-white);
+  --collapse-content-font-size: 13px;
+  --collapse-content-font-color: var(--color-text-primary);
+}

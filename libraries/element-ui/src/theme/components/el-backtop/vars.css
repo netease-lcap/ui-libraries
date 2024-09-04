@@ -1,0 +1,8 @@
+/**
+ * @component el-backtop
+ */
+:root {
+  --backtop-background-color: var(--color-white);
+  --backtop-font-color: var(--color-primary);
+  --backtop-hover-background-color: var(--border-color-extra-light);
+}

@@ -1,0 +1,7 @@
+/**
+ * @component el-popup
+ */
+:root {
+  --popup-modal-background-color: var(--color-black);
+  --popup-modal-opacity: 0.5;
+}

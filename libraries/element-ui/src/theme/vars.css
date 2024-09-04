@@ -1,0 +1,802 @@
+:root {
+  /**
+   * @title 品牌色
+   * @type color
+   */
+  --el-color-primary-6: #409eff;
+
+  /**
+    * @title 品牌色浅色/白色悬浮
+    * @type color
+    */
+  --el-color-primary-1: #e8f7ff;
+
+  /**
+    * @title 品牌色文字禁用
+    * @type color
+    */
+  --el-color-primary-2: #c6eaff;
+
+  /**
+    * @title 品牌色一般禁用
+    * @type color
+    */
+  --el-color-primary-3: #a5dbff;
+
+  /**
+   * @title 品牌色特殊场景
+   * @type color
+   */
+  --el-color-primary-4: #83c9ff;
+
+  /**
+    * @title 品牌色悬浮（hover）
+    * @type color
+    */
+  --el-color-primary-5: #62b6ff;
+
+  /**
+    * @title 品牌色点击（click）
+    * @type color
+    */
+  --el-color-primary-7: #2877d2;
+  --el-color-primary-8: #1554a6;
+  --el-color-primary-9: #083579;
+  --el-color-primary-10: #001c4d;
+
+  /**
+    * @title 成功色
+    * @type color
+    */
+  --el-color-success-6: #67c23a;
+  /**
+    * @title 成功色浅色/白底悬浮
+    * @type color
+    */
+  --el-color-success-1: #f4ffe8;
+  /**
+    * @title 成功色文字禁用
+    * @type color
+    */
+  --el-color-success-2: #d7f3bf;
+  /**
+    * @title 成功色一般禁用
+    * @type color
+    */
+  --el-color-success-3: #bbe799;
+  /**
+    * @title 成功色特殊场景
+    * @type color
+    */
+  --el-color-success-4: #9fda77;
+
+  /**
+    * @title 成功色悬浮（hover）
+    * @type color
+    */
+  --el-color-success-5: #83ce57;
+
+  /**
+    * @title 成功色点击（click）
+    * @type color
+    */
+  --el-color-success-7: #4ba525;
+  --el-color-success-8: #338714;
+  --el-color-success-9: #1f6a08;
+  --el-color-success-10: #0f4d00;
+
+  /**
+    * @title 警示色
+    * @type color
+    */
+  --el-color-warning-6: #e6a23c;
+  /**
+    * @title 警示色浅色/白底悬浮
+    * @type color
+    */
+  --el-color-warning-1: #fffae8;
+  /**
+    * @title 警示色文字禁用
+    * @type color
+    */
+  --el-color-warning-2: #faebc3;
+
+  /**
+    * @title 警示色一般禁用
+    * @type color
+    */
+  --el-color-warning-3: #f5db9f;
+  /**
+    * @title 警示色特殊场景
+    * @type color
+    */
+  --el-color-warning-4: #f0ca7d;
+  /**
+    * @title 警示色悬浮（hover）
+    * @type color
+    */
+  --el-color-warning-5: #ebb65c;
+  /**
+    * @title 警示色点击（click）
+    * @type color
+    */
+  --el-color-warning-7: #c07d25;
+  --el-color-warning-8: #995b14;
+  --el-color-warning-9: #733d07;
+  --el-color-warning-10: #4d2400;
+
+  /**
+    * @title 错误色
+    * @type color
+    */
+  --el-color-error-6: #f56c6c;
+  /**
+    * @title 错误色浅色/白底悬浮
+    * @type color
+    */
+  --el-color-error-1: #ffece8;
+  /**
+    * @title 错误色文字禁用
+    * @type color
+    */
+  --el-color-error-2: #fdd5ce;
+  /**
+    * @title 错误色一般禁用
+    * @type color
+    */
+  --el-color-error-3: #fbbcb5;
+  /**
+    * @title 错误色特殊场景
+    * @type color
+    */
+  --el-color-error-4: #f9a39c;
+  /**
+    * @title 错误色悬浮（hover）
+    * @type color
+    */
+  --el-color-error-5: #f78884;
+  /**
+    * @title 错误色点击（click）
+    * @type color
+    */
+  --el-color-error-7: #cb4348;
+  --el-color-error-8: #a1232c;
+  --el-color-error-9: #770d18;
+  --el-color-error-10: #4d000a;
+
+  /**
+   * @title 链接色
+   * @type color
+   */
+  --el-color-link-6: var(--el-color-primary-6);
+  /**
+     * @title 链接色浅色/白色悬浮
+     * @type color
+     */
+  --el-color-link-1: var(--el-color-primary-1);
+  /**
+     * @title 链接色文字禁用
+     * @type color
+     */
+  --el-color-link-2: var(--el-color-primary-2);
+  /**
+     * @title 链接色一般禁用
+     * @type color
+     */
+  --el-color-link-3: var(--el-color-primary-3);
+  /**
+      * @title 链接色特殊场景
+      * @type color
+      */
+  --el-color-link-4: var(--el-color-primary-4);
+  /**
+     * @title 链接色悬浮（hover）
+     * @type color
+     */
+  --el-color-link-5: var(--el-color-primary-5);
+  /**
+     * @title 链接色点击（click）
+     * @type color
+     */
+  --el-color-link-7: var(--el-color-primary-7);
+  --el-color-link-8: var(--el-color-primary-8);
+  --el-color-link-9: var(--el-color-primary-9);
+  --el-color-link-10: var(--el-color-primary-10);
+
+  /**
+    * @title 强调/正文标题
+    * @type color
+    */
+  --el-color-text-1: #303133;
+  /**
+    * @title 次强调/正文标题
+    * @type color
+    */
+  --el-color-text-2: #606266;
+  /**
+    * @title 次要信息
+    * @type color
+    */
+  --el-color-text-3: #909399;
+  /**
+    * @title 置灰信息
+    * @type color
+    */
+  --el-color-text-4: #c0c4cc;
+
+  /**
+    * @title 边框线-浅色
+    * @type color
+    */
+  --el-color-line-1: #ebeef5;
+  /**
+    * @title 边框线-一般
+    * @type color
+    */
+  --el-color-line-2: #e4e7ed;
+  /**
+    * @title 边框线-深色
+    * @type color
+    */
+  --el-color-line-3: #dcdfe6;
+  /**
+    * @title 边框线-重色
+    * @type color
+    */
+  --el-color-line-4: #f2f6fc;
+
+  /**
+    * @title 导航背景
+    * @type color
+    */
+  --el-color-background-1: #333;
+  /**
+    * @title 工具提示填充色
+    * @type color
+    */
+  --el-color-background-2: #242424;
+  /**
+    * @title 弹窗/抽屉遮挡填充色
+    * @type color
+    */
+  --el-color-background-3: rgba(0, 0, 0, 0.6);
+  /**
+    * @title 标签、薯条等组件填充色
+    * @type color
+    */
+  --el-color-background-4: #909399;
+  /**
+    * @title 通用背景色/禁用背景色/hover色
+    * @type color
+    */
+  --el-color-background-5: #f5f7fa;
+  /**
+    * @title 页面背景色/表头色
+    * @type color
+    */
+  --el-color-background-6: #f7f8fa;
+  /**
+    * @title 表格展开背景色
+    * @type color
+    */
+  --el-color-background-7: #f5f5f5;
+  /**
+    * @title 白色填充
+    * @type color
+    */
+  --el-color-background-white: #fff;
+  /**
+    * @title 透明背景
+    * @type color
+    */
+  --el-color-background-transparent: transparent;
+
+  /**
+    * @title 辅助文案
+    * @type size
+    */
+  --el-font-size-1: 12px;
+  /**
+    * @title 辅助文案行高
+    * @type input
+    */
+  --el-line-height-1: 1.67;
+  /**
+    * @title 正文-常规
+    * @type size
+    */
+  --el-font-size-2: 14px;
+  /**
+    * @title 正文行高
+    * @type input
+    */
+  --el-line-height-2: 1.57;
+  /**
+    * @title 标题-小
+    * @type size
+    */
+  --el-font-size-3: 16px;
+  /**
+    * @title 小标题行高
+    * @type input
+    */
+  --el-line-height-3: 1.5;
+  /**
+    * @title 标题-中
+    * @type size
+    */
+  --el-font-size-4: 18px;
+  /**
+    * @title 中标题行高
+    * @type input
+    */
+  --el-line-height-4: 1.44;
+  /**
+    * @title 标题-中
+    * @type size
+    */
+  --el-font-size-5: 20x;
+  /**
+    * @title 中标题行高
+    * @type input
+    */
+  --el-line-height-5: 1.4;
+  /**
+    * @title 标题-大
+    * @type size
+    */
+  --el-font-size-6: 24px;
+  /**
+    * @title 大标题行高
+    * @type input
+    */
+  --el-line-height-6: 1.33;
+  /**
+    * @title 运营标题-小
+    * @type size
+    */
+  --el-font-size-7: 36px;
+  /**
+    * @title 小运营标题行高
+    * @type input
+    */
+  --el-line-height-7: 1.22;
+  /**
+    * @title 运营标题-中
+    * @type size
+    */
+  --el-font-size-8: 48px;
+  /**
+    * @title 中运营标题行高
+    * @type input
+    */
+  --el-line-height-8: 1.17;
+  /**
+    * @title 运营标题-大
+    * @type size
+    */
+  --el-font-size-9: 56px;
+  /**
+    * @title 中运营标题行高
+    * @type input
+    */
+  --el-line-height-9: 1.14;
+
+  /**
+    * @title 尺寸部长
+    * @type size
+    */
+  --el-size-step: 4px;
+  /**
+    * @title 尺寸变化单位
+    * @type size
+    */
+  --el-size-unit: 4px;
+
+  --el-size-1: 2px;
+  --el-size-2: 4px;
+  --el-size-3: 6px;
+  --el-size-4: 8px;
+  --el-size-5: 12px;
+  --el-size-6: 16px;
+  --el-size-7: 20px;
+  --el-size-8: 24px;
+  --el-size-9: 28px;
+  --el-size-10: 32px;
+  --el-size-11: 36px;
+  --el-size-12: 40px;
+  --el-size-13: 48px;
+  --el-size-14: 56px;
+  --el-size-15: 64px;
+  --el-size-16: 72px;
+
+  /**
+   * @title 组件尺寸 XXXS
+   * @type size
+   */
+  --el-comp-size-xxxs: var(--el-size-6);
+  /**
+   * @title 组件尺寸 XXS
+   * @type size
+   */
+  --el-comp-size-xxs: var(--el-size-7);
+  /**
+   * @title 组件尺寸 XS
+   * @type size
+   */
+  --el-comp-size-xs: var(--el-size-8);
+  /**
+   * @title 组件尺寸 S
+   * @type size
+   */
+  --el-comp-size-s: var(--el-size-9);
+  /**
+   * @title 组件尺寸 M
+   * @type size
+   */
+  --el-comp-size-m: var(--el-size-10);
+  /**
+   * @title 组件尺寸 L
+   * @type size
+   */
+  --el-comp-size-l: var(--el-size-11);
+  /**
+   * @title 组件尺寸 XL
+   * @type size
+   */
+  --el-comp-size-xl: var(--el-size-12);
+  /**
+   * @title 组件尺寸 XXL
+   * @type size
+   */
+  --el-comp-size-xxl: var(--el-size-13);
+  /**
+   * @title 组件尺寸 XXXL
+   * @type size
+   */
+  --el-comp-size-xxxl: var(--el-size-14);
+  /**
+   * @title 组件尺寸 XXXXL
+   * @type size
+   */
+  --el-comp-size-xxxxl: var(--el-size-15);
+  /**
+   * @title 组件尺寸 XXXXXL
+   * @type size
+   */
+  --el-comp-size-xxxxxl: var(--el-size-16);
+
+  /**
+   * @title 弹出层内边距 S
+   * @type size
+   */
+  --el-pop-padding-s: var(--el-size-2);
+  /**
+   * @title 弹出层内边距 M
+   * @type size
+   */
+  --el-pop-padding-m: var(--el-size-3);
+  /**
+   * @title 弹出层内边距 L
+   * @type size
+   */
+  --el-pop-padding-l: var(--el-size-4);
+  /**
+   * @title 弹出层内边距 XL
+   * @type size
+   */
+  --el-pop-padding-xl: var(--el-size-5);
+  /**
+   * @title 弹出层内边距 XXL
+   * @type size
+   */
+  --el-pop-padding-xxl: var(--el-size-6);
+
+  /**
+   * @title 水平内边距 XXS
+   * @type size
+   */
+  --el-comp-paddingLR-xxs: var(--el-size-1);
+  /**
+   * @title 水平内边距 XS
+   * @type size
+   */
+  --el-comp-paddingLR-xs: var(--el-size-2);
+  /**
+   * @title 水平内边距 S
+   * @type size
+   */
+  --el-comp-paddingLR-s: var(--el-size-4);
+  /**
+   * @title 水平内边距 M
+   * @type size
+   */
+  --el-comp-paddingLR-m: var(--el-size-5);
+  /**
+   * @title 水平内边距 L
+   * @type size
+   */
+  --el-comp-paddingLR-l: var(--el-size-6);
+  /**
+   * @title 水平内边距 XL
+   * @type size
+   */
+  --el-comp-paddingLR-xl: var(--el-size-8);
+  /**
+   * @title 水平内边距 XXL
+   * @type size
+   */
+  --el-comp-paddingLR-xxl: var(--el-size-10);
+
+  /**
+   * @title 垂直内边距 XXS
+   * @type size
+   */
+  --el-comp-paddingTB-xxs: var(--el-size-1);
+  /**
+   * @title 垂直内边距 XS
+   * @type size
+   */
+  --el-comp-paddingTB-xs: var(--el-size-2);
+  /**
+   * @title 垂直内边距 S
+   * @type size
+   */
+  --el-comp-paddingTB-s: var(--el-size-4);
+  /**
+   * @title 垂直内边距 M
+   * @type size
+   */
+  --el-comp-paddingTB-m: var(--el-size-5);
+  /**
+   * @title 垂直内边距 L
+   * @type size
+   */
+  --el-comp-paddingTB-l: var(--el-size-6);
+  /**
+   * @title 垂直内边距 XL
+   * @type size
+   */
+  --el-comp-paddingTB-xl: var(--el-size-8);
+  /**
+   * @title 垂直内边距 XXL
+   * @type size
+   */
+  --el-comp-paddingTB-xxl: var(--el-size-10);
+
+  /**
+   * @title 外边距 XXS
+   * @type size
+   */
+  --el-comp-margin-xxs: var(--el-size-1);
+  /**
+   * @title 外边距 XS
+   * @type size
+   */
+  --el-comp-margin-xs: var(--el-size-2);
+  /**
+   * @title 外边距 S
+   * @type size
+   */
+  --el-comp-margin-s: var(--el-size-4);
+  /**
+   * @title 外边距 M
+   * @type size
+   */
+  --el-comp-margin-m: var(--el-size-5);
+  /**
+   * @title 外边距 L
+   * @type size
+   */
+  --el-comp-margin-l: var(--el-size-6);
+  /**
+   * @title 外边距 XL
+   * @type size
+   */
+  --el-comp-margin-xl: var(--el-size-7);
+  /**
+   * @title 外边距 XXL
+   * @type size
+   */
+  --el-comp-margin-xxl: var(--el-size-8);
+  /**
+   * @title 外边距 XXXL
+   * @type size
+   */
+  --el-comp-margin-xxxl: var(--el-size-10);
+  /**
+   * @title 外边距 XXXXL
+   * @type size
+   */
+  --el-comp-margin-xxxxl: var(--el-size-12);
+
+  /**
+    * @title 直角
+    * @type size
+    */
+  --el-border-radius-1: 0px;
+  /**
+    * @title 圆角
+    * @type size
+    */
+  --el-border-radius-2: 2px;
+  /**
+    * @title 圆角
+    * @type size
+    */
+  --el-border-radius-3: 4px;
+  /**
+    * @title 圆角
+    * @type size
+    */
+  --el-border-radius-4: 6px;
+  /**
+    * @title 圆角
+    * @type size
+    */
+  --el-border-radius-5: 8px;
+  /**
+    * @title 圆角
+    * @type size
+    */
+  --el-border-radius-6: 12px;
+  /**
+    * @title 圆角
+    * @type size
+    */
+  --el-border-radius-7: 16px;
+  /**
+    * @title 圆角
+    * @type size
+    */
+  --el-border-radius-8: 20px;
+  /**
+    * @title 圆角
+    * @type size
+    */
+  --el-border-radius-9: 24px;
+  /**
+    * @title 全圆角
+    * @type input
+    */
+  --el-border-radius-10: 100%;
+
+  /**
+    * @title 一级阴影
+    * @type input
+    */
+  --el-box-shadow-1: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  /**
+    * @title 二级阴影
+    * @type input
+    */
+  --el-box-shadow-2: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  /**
+    * @title 三级阴影
+    * @type input
+    */
+  --el-box-shadow-3: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.12);
+
+  --all-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  --fade-transition: opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  --fade-linear-transition: opacity 200ms linear;
+  --md-fade-transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  --border-transition-base: border-color 0.2s
+    cubic-bezier(0.645, 0.045, 0.355, 1);
+  --color-transition-base: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  --color-primary: #409eff;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-primary-dark-1: #3a8ee6;
+  --color-primary-dark-2: #337ecc;
+  --color-primary-light-1: #53a8ff;
+  --color-primary-light-2: #66b1ff;
+  --color-primary-light-3: #79bbff;
+  --color-primary-light-4: #8cc5ff;
+  --color-primary-light-5: #a0cfff;
+  --color-primary-light-6: #b3d8ff;
+  --color-primary-light-7: #c6e2ff;
+  --color-primary-light-8: #d9ecff;
+  --color-primary-light-9: #ecf5ff;
+  --color-success: #67c23a;
+  --color-success-dark-1: #5daf34;
+  --color-success-dark-2: #529b2e;
+  --color-success-light-1: #76c84e;
+  --color-success-light-2: #85ce61;
+  --color-success-light-3: #95d475;
+  --color-success-light-4: #a4da89;
+  --color-success-light-5: #b3e19d;
+  --color-success-light-6: #c2e7b0;
+  --color-success-light-7: #d1edc4;
+  --color-success-light-8: #e1f3d8;
+  --color-success-light-9: #f0f9eb;
+  --color-warning: #e6a23c;
+  --color-warning-dark-1: #cf9236;
+  --color-warning-dark-2: #b88230;
+  --color-warning-light-1: #e9ab50;
+  --color-warning-light-2: #ebb563;
+  --color-warning-light-3: #eebe77;
+  --color-warning-light-4: #f0c78a;
+  --color-warning-light-5: #f3d19e;
+  --color-warning-light-6: #f5dab1;
+  --color-warning-light-7: #f8e3c5;
+  --color-warning-light-8: #faecd8;
+  --color-warning-light-9: #fdf6ec;
+  --color-danger: #f56c6c;
+  --color-danger-dark-1: #dd6161;
+  --color-danger-dark-2: #c45656;
+  --color-danger-light-1: #f67b7b;
+  --color-danger-light-2: #f78989;
+  --color-danger-light-3: #f89898;
+  --color-danger-light-4: #f9a7a7;
+  --color-danger-light-5: #fab6b6;
+  --color-danger-light-6: #fbc4c4;
+  --color-danger-light-7: #fcd3d3;
+  --color-danger-light-8: #fde2e2;
+  --color-danger-light-9: #fef0f0;
+  --color-info: #909399;
+  --color-info-dark-1: #82848a;
+  --color-info-dark-2: #73767a;
+  --color-info-light-1: #9b9ea3;
+  --color-info-light-2: #a6a9ad;
+  --color-info-light-3: #b1b3b8;
+  --color-info-light-4: #bcbec2;
+  --color-info-light-5: #c8c9cc;
+  --color-info-light-6: #d3d4d6;
+  --color-info-light-7: #dedfe0;
+  --color-info-light-8: #e9e9eb;
+  --color-info-light-9: #f4f4f5;
+  --color-success-light: #e1f3d8;
+  --color-warning-light: #faecd8;
+  --color-danger-light: #fde2e2;
+  --color-info-light: #e9e9eb;
+  --color-success-lighter: #f0f9eb;
+  --color-warning-lighter: #fdf6ec;
+  --color-danger-lighter: #fef0f0;
+  --color-info-lighter: #f4f4f5;
+  --color-text-primary: #303133;
+  --color-text-regular: #606266;
+  --color-text-secondary: #909399;
+  --color-text-placeholder: #c0c4cc;
+  --border-color-base: #dcdfe6;
+  --border-color-light: #e4e7ed;
+  --border-color-lighter: #ebeef5;
+  --border-color-extra-light: #f2f6fc;
+  --background-color-base: #f5f7fa;
+  --link-color: var(--color-primary-light-2);
+  --link-hover-color: var(--color-primary);
+  --border-width-base: 1px;
+  --border-style-base: solid;
+  --border-color-hover: var(--color-text-placeholder);
+  --border-base: var(--border-width-base) var(--border-style-base)
+    var(--border-color-base);
+  --border-radius-base: 4px;
+  --border-radius-small: 2px;
+  --border-radius-circle: 100%;
+  --border-radius-zero: 0;
+  --box-shadow-base: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  --box-shadow-dark: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.12);
+  --box-shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  --fill-base: var(--color-white);
+  --font-size-extra-large: 20px;
+  --font-size-large: 18px;
+  --font-size-medium: 16px;
+  --font-size-base: 14px;
+  --font-size-small: 13px;
+  --font-size-extra-small: 12px;
+  --font-weight-primary: 500;
+  --font-weight-secondary: 100;
+  --font-line-height-primary: 24px;
+  --font-line-height-secondary: 16px;
+  --font-color-disabled-base: #bbb;
+  --size-base: 14px;
+  --index-normal: 1;
+  --index-top: 1000;
+  --index-popper: 2000;
+  --disabled-fill-base: var(--background-color-base);
+  --disabled-color-base: var(--color-text-placeholder);
+  --disabled-border-base: var(--border-color-light);
+  --scrollbar-background-color: #9093994d;
+  --scrollbar-hover-background-color: #90939980;
+}

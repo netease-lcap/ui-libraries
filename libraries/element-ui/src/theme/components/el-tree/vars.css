@@ -1,0 +1,9 @@
+/**
+ * @component el-tree
+ */
+:root {
+  --tree-node-hover-background-color: var(--background-color-base);
+  --tree-font-color: var(--color-text-regular);
+  --tree-expand-icon-color: var(--color-text-placeholder);
+  --tree-highlight-background-color: #f0f7ff;
+}

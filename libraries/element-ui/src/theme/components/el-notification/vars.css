@@ -1,0 +1,24 @@
+/**
+ * @component el-notification
+ */
+:root {
+  --notification-width: 330px;
+  --notification-padding: 14px 26px 14px 13px;
+  --notification-radius: 8px;
+  --notification-shadow: var(--box-shadow-light);
+  --notification-border-color: var(--border-color-lighter);
+  --notification-icon-size: 24px;
+  --notification-close-font-size: var(--message-close-size);
+  --notification-group-margin-left: 13px;
+  --notification-group-margin-right: 8px;
+  --notification-content-font-size: var(--font-size-base);
+  --notification-content-color: var(--color-text-regular);
+  --notification-title-font-size: 16px;
+  --notification-title-color: var(--color-text-primary);
+  --notification-close-color: var(--color-text-secondary);
+  --notification-close-hover-color: var(--color-text-regular);
+  --notification-success-icon-color: var(--color-success);
+  --notification-info-icon-color: var(--color-info);
+  --notification-warning-icon-color: var(--color-warning);
+  --notification-danger-icon-color: var(--color-danger);
+}

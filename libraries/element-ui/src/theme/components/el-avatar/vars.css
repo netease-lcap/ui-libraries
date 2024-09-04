@@ -1,0 +1,13 @@
+/**
+ * @component el-avatar
+ */
+:root {
+  --avatar-font-color: #fff;
+  --avatar-background-color: #C0C4CC;
+  --avatar-text-font-size: 14px;
+  --avatar-icon-font-size: 18px;
+  --avatar-border-radius: var(--border-radius-base);
+  --avatar-large-size: 40px;
+  --avatar-medium-size: 36px;
+  --avatar-small-size: 28px;
+}

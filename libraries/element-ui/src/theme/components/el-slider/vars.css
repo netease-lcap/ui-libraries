@@ -1,0 +1,16 @@
+/**
+ * @component el-slider
+ */
+:root {
+  --slider-main-background-color: var(--color-primary);
+  --slider-runway-background-color: var(--border-color-light);
+  --slider-button-hover-color: #00050a;
+  --slider-stop-background-color: var(--color-white);
+  --slider-disable-color: var(--color-text-placeholder);
+  --slider-margin: 16px 0;
+  --slider-border-radius: 3px;
+  --slider-height: 6px;
+  --slider-button-size: 16px;
+  --slider-button-wrapper-size: 36px;
+  --slider-button-wrapper-offset: -15px;
+}

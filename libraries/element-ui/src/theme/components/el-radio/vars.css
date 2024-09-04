@@ -1,0 +1,45 @@
+/**
+ * @component el-radio
+ */
+:root {
+  --radio-font-size: var(--font-size-base);
+  --radio-font-weight: var(--font-weight-primary);
+  --radio-font-color: var(--color-text-regular);
+  --radio-input-height: 14px;
+  --radio-input-width: 14px;
+  --radio-input-border-radius: var(--border-radius-circle);
+  --radio-input-background-color: var(--color-white);
+  --radio-input-border: var(--border-base);
+  --radio-input-border-color: var(--border-color-base);
+  --radio-icon-color: var(--color-white);
+  --radio-disabled-input-border-color: var(--disabled-border-base);
+  --radio-disabled-input-fill: var(--disabled-fill-base);
+  --radio-disabled-icon-color: var(--disabled-fill-base);
+  --radio-disabled-checked-input-border-color: var(--disabled-border-base);
+  --radio-disabled-checked-input-fill: var(--disabled-fill-base);
+  --radio-disabled-checked-icon-color: var(--color-text-placeholder);
+  --radio-checked-font-color: var(--color-primary);
+  --radio-checked-input-border-color: var(--color-primary);
+  --radio-checked-input-background-color: var(--color-white);
+  --radio-checked-icon-color: var(--color-primary);
+  --radio-input-border-color-hover: var(--color-primary);
+  --radio-bordered-height: 40px;
+  --radio-bordered-padding: 12px 20px 0 10px;
+  --radio-bordered-medium-padding: 10px 20px 0 10px;
+  --radio-bordered-small-padding: 8px 15px 0 10px;
+  --radio-bordered-mini-padding: 6px 15px 0 10px;
+  --radio-bordered-medium-input-height: 14px;
+  --radio-bordered-medium-input-width: 14px;
+  --radio-bordered-medium-height: 36px;
+  --radio-bordered-small-input-height: 12px;
+  --radio-bordered-small-input-width: 12px;
+  --radio-bordered-small-height: 32px;
+  --radio-bordered-mini-input-height: 12px;
+  --radio-bordered-mini-input-width: 12px;
+  --radio-bordered-mini-height: 28px;
+  --radio-button-font-size: var(--font-size-base);
+  --radio-button-checked-background-color: var(--color-primary);
+  --radio-button-checked-font-color: var(--color-white);
+  --radio-button-checked-border-color: var(--color-primary);
+  --radio-button-disabled-checked-fill: var(--border-color-extra-light);
+}

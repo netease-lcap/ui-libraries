@@ -1,0 +1,178 @@
+:root {
+  --el-brand-color-1: var(--el-color-primary-1);
+  --el-brand-color-2: var(--el-color-primary-2);
+  --el-brand-color-3: var(--el-color-primary-3);
+  --el-brand-color-4: var(--el-color-primary-4);
+  --el-brand-color-5: var(--el-color-primary-5);
+  --el-brand-color-6: var(--el-color-primary-6);
+  --el-brand-color-7: var(--el-color-primary-7);
+  --el-brand-color-8: var(--el-color-primary-8);
+  --el-brand-color-9: var(--el-color-primary-9);
+  --el-brand-color-10: var(--el-color-primary-10);
+  --el-warning-color-1: var(--el-color-warning-1);
+  --el-warning-color-2: var(--el-color-warning-2);
+  --el-warning-color-3: var(--el-color-warning-3);
+  --el-warning-color-4: var(--el-color-warning-4);
+  --el-warning-color-5: var(--el-color-warning-5);
+  --el-warning-color-6: var(--el-color-warning-6);
+  --el-warning-color-7: var(--el-color-warning-7);
+  --el-warning-color-8: var(--el-color-warning-8);
+  --el-warning-color-9: var(--el-color-warning-9);
+  --el-warning-color-10: var(--el-color-warning-10);
+  --el-error-color-1:  var(--el-color-error-1);
+  --el-error-color-2:  var(--el-color-error-2);
+  --el-error-color-3:  var(--el-color-error-3);
+  --el-error-color-4:  var(--el-color-error-4);
+  --el-error-color-5:  var(--el-color-error-5);
+  --el-error-color-6:  var(--el-color-error-6);
+  --el-error-color-7:  var(--el-color-error-7);
+  --el-error-color-8:  var(--el-color-error-8);
+  --el-error-color-9:  var(--el-color-error-9);
+  --el-error-color-10:  var(--el-color-error-10);
+  --el-success-color-1: var(--el-color-success-1);
+  --el-success-color-2: var(--el-color-success-2);
+  --el-success-color-3: var(--el-color-success-3);
+  --el-success-color-4: var(--el-color-success-4);
+  --el-success-color-5: var(--el-color-success-5);
+  --el-success-color-6: var(--el-color-success-6);
+  --el-success-color-7: var(--el-color-success-7);
+  --el-success-color-8: var(--el-color-success-8);
+  --el-success-color-9: var(--el-color-success-9);
+  --el-success-color-10: var(--el-color-success-10);
+  --el-mask-active: var(--el-color-background-3);
+
+  --el-gray-color-1: #f3f3f4;
+  --el-gray-color-2: #edeef0;
+  --el-gray-color-3: #e6e8eb;
+  --el-gray-color-4: #dadde1;
+  --el-gray-color-5: #c1c6cd;
+  --el-gray-color-6: #9da6b1;
+  --el-gray-color-7: #7f8b97;
+  --el-gray-color-8: #697782;
+  --el-gray-color-9: #535e67;
+  --el-gray-color-10: #424b53;
+  --el-gray-color-11: #32393f;
+  --el-gray-color-12: #272c31;
+  --el-gray-color-13: #202428;
+  --el-gray-color-14: #15181b;
+
+
+  /* 基础颜色 */
+  --el-brand-color: var(--el-brand-color-6);     /* 色彩-品牌-可操作 */
+  --el-warning-color: var(--el-warning-color-6); /* 色彩-功能-警告 */
+  --el-error-color: var(--el-error-color-6);     /* 色彩-功能-失败 */
+  --el-success-color: var(--el-success-color-6); /* 色彩-功能-成功 */
+
+  /* 基础颜色的扩展 用于 hover / 聚焦 / 禁用 / 点击 等状态 */
+  --el-brand-color-hover: var(--el-brand-color-7);     /* hover态 */
+  --el-brand-color-focus: var(--el-brand-color-2);     /* focus态，包括鼠标和键盘 */
+  --el-brand-color-active: var(--el-brand-color-8);    /* 点击态 */
+  --el-brand-color-disabled: var(--el-brand-color-3);  /* 禁用态 */
+  --el-brand-color-light: var(--el-brand-color-1);     /* 浅色的选中态 */
+  --el-brand-color-light-hover: var(--el-brand-color-2);
+
+  /* 警告色扩展 */
+  --el-warning-color-hover: var(--el-warning-color-4);
+  --el-warning-color-focus: var(--el-warning-color-2);
+  --el-warning-color-active: var(--el-warning-color-7);
+  --el-warning-color-disabled: var(--el-warning-color-3);
+  --el-warning-color-light: var(--el-warning-color-1);
+  --el-warning-color-light-hover: var(--el-warning-color-2);
+
+  /* 失败/错误色扩展 */
+  --el-error-color-hover: var(--el-error-color-5);
+  --el-error-color-focus: var(--el-error-color-2);
+  --el-error-color-active: var(--el-error-color-7);
+  --el-error-color-disabled: var(--el-error-color-3);
+  --el-error-color-light: var(--el-error-color-1);
+  --el-error-color-light-hover: var(--el-error-color-2);
+
+  /* 成功色扩展 */
+  --el-success-color-hover: var(--el-success-color-4);
+  --el-success-color-focus: var(--el-success-color-2);
+  --el-success-color-active: var(--el-success-color-7);
+  --el-success-color-disabled: var(--el-success-color-3);
+  --el-success-color-light: var(--el-success-color-1);
+  --el-success-color-light-hover: var(--el-success-color-2);
+
+  /* 背景色 */
+  --el-bg-color-page: var(--el-gray-color-2);                        /* 色彩 - page */
+  --el-bg-color-container: #fff;                                /* 色彩 - 容器 */
+  --el-bg-color-container-hover: var(--el-gray-color-1);             /* 色彩 - 容器 - hover */
+  --el-bg-color-container-active: var(--el-gray-color-3);            /* 色彩 - 容器 - active */
+  --el-bg-color-container-select: #fff;                         /* 色彩 - 容器 - select */
+  --el-bg-color-secondarycontainer: var(--el-gray-color-1);          /* 色彩 - 次级容器 */
+  --el-bg-color-secondarycontainer-hover: var(--el-gray-color-2);    /* 色彩 - 次级容器 - hover */
+  --el-bg-color-secondarycontainer-active: var(--el-gray-color-4);   /* 色彩 - 次级容器 - active */
+  --el-bg-color-component: var(--el-gray-color-3);                   /* 色彩 - 组件 */
+  --el-bg-color-component-hover: var(--el-gray-color-4);             /* 色彩 - 组件 - hover */
+  --el-bg-color-component-active: var(--el-gray-color-6);            /* 色彩 - 组件 - active */
+  --el-bg-color-secondarycomponent: var(--el-gray-color-4);          /* 色彩 - 次级组件 */
+  --el-bg-color-secondarycomponent-hover: var(--el-gray-color-5);    /* 色彩 - 次级组件 - hover */
+  --el-bg-color-secondarycomponent-active: var(--el-gray-color-6);   /* 色彩 - 次级组件 - active */
+  --el-bg-color-component-disabled: var(--el-gray-color-2);          /* 色彩 - 组件 - disabled */
+
+
+  /* 文本颜色 */
+  --el-text-color-primary: var(--el-color-text-1);      /* 色彩-文字-主要 */
+  --el-text-color-secondary: var(--el-color-text-2);    /* 色彩-文字-次要 */
+  --el-text-color-placeholder: var(--el-color-text-3);  /* 色彩-文字-占位符/说明 */
+  --el-text-color-disabled: var(--el-color-text-4);    /* 色彩-文字-禁用 */
+  --el-text-color-anti: #fff;                      /* 色彩-文字-反色 */
+  --el-text-color-brand: var(--el-brand-color-7);           /* 色彩-文字-品牌 */
+  --el-text-color-link: var(--el-brand-color-8);            /* 色彩-文字-链接 */
+
+  /* 分割线 */
+  --el-border-level-1-color: var(--el-color-line-3);
+  --el-component-stroke: var(--el-color-line-3);
+
+  /* 边框 */
+  --el-border-level-2-color: var(--el-color-line-4);
+  --el-component-border: var(--el-color-line-4);
+  --el-shadow-1: var(--el-box-shadow-1);
+  --el-shadow-2: var(--el-box-shadow-2);
+  --el-shadow-3: var(--el-box-shadow-3);
+
+  --el-scrollbar-color: var(--scrollbar-background-color);
+  --el-scrollbar-hover-color: var(--scrollbar-hover-background-color);
+
+  --el-radius-small: var(--el-border-radius-2);
+  --el-radius-default: var(--el-border-radius-3);
+  --el-radius-medium: var(--el-border-radius-4);
+  --el-radius-large: var(--el-border-radius-5);
+  --el-radius-extraLarge: var(--el-border-radius-6);
+
+  --el-font-size-link-small: var(--el-font-size-1);
+  --el-font-size-link-medium: var(--el-font-size-2);
+  --el-font-size-link-large: var(--el-font-size-3);
+  --el-font-size-mark-small: var(--el-font-size-1);
+  --el-font-size-mark-medium: var(--el-font-size-2);
+  --el-font-size-body-small: var(--el-font-size-1);
+  --el-font-size-body-medium: var(--el-font-size-2);
+  --el-font-size-body-large: var(--el-font-size-3);
+  --el-font-size-title-small: var(--el-font-size-2);
+  --el-font-size-title-medium: var(--el-font-size-3);
+  --el-font-size-title-large: var(--el-font-size-5);
+  --el-font-size-headline-small: var(--el-font-size-6);
+  --el-font-size-headline-medium: 28px;
+  --el-font-size-headline-large: var(--el-font-size-7);
+  --el-font-size-display-medium: var(--el-font-size-8);
+  --el-font-size-display-large: 64px;
+
+  --el-line-height-link-small: calc(var(--el-font-size-link-small) + 8px);
+  --el-line-height-link-medium: calc(var(--el-font-size-link-medium) + 8px);
+  --el-line-height-link-large: calc(var(--el-font-size-link-large) + 8px);
+  --el-line-height-mark-small: calc(var(--el-font-size-mark-small) + 8px);
+  --el-line-height-mark-medium: calc(var(--el-font-size-mark-medium) + 8px);
+  --el-line-height-body-small: calc(var(--el-font-size-body-small) + 8px);
+  --el-line-height-body-medium: calc(var(--el-font-size-body-medium) + 8px);
+  --el-line-height-body-large: calc(var(--el-font-size-body-large) + 8px);
+  --el-line-height-title-small: calc(var(--el-font-size-title-small) + 8px);
+  --el-line-height-title-medium: calc(var(--el-font-size-title-medium) + 8px);
+  --el-line-height-title-large: calc(var(--el-font-size-title-large) + 8px);
+  --el-line-height-headline-small: calc(var(--el-font-size-headline-small) + 8px);
+  --el-line-height-headline-medium: calc(var(--el-font-size-headline-medium) + 8px);
+  --el-line-height-headline-large: calc(var(--el-font-size-headline-large) + 8px);
+  --el-line-height-display-medium: calc(var(--el-font-size-display-medium) + 8px);
+  --el-line-height-display-large: calc(var(--el-font-size-display-large) + 8px);
+}

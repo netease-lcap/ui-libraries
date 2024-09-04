@@ -1,0 +1,10 @@
+/**
+ * @component el-rate
+ */
+:root {
+  --rate-height: 20px;
+  --rate-font-size: var(--font-size-base);
+  --rate-icon-size: 18px;
+  --rate-icon-margin: 6px;
+  --rate-icon-color: var(--color-text-placeholder);
+}

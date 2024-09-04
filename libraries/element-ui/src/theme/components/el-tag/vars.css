@@ -1,0 +1,77 @@
+/**
+ * @component el-tag
+ */
+:root {
+  --tag-info-color: var(--color-info);
+  --tag-primary-color: var(--color-primary);
+  --tag-success-color: var(--color-success);
+  --tag-warning-color: var(--color-warning);
+  --tag-danger-color: var(--color-danger);
+
+  --tag-normal-primary-background-color: var(--color-primary-light-9);
+  --tag-normal-success-background-color: var(--color-success-light-9);
+  --tag-normal-warning-background-color: var(--color-warning-light-9);
+  --tag-normal-danger-background-color: var(--color-danger-light-9);
+  --tag-normal-info-background-color: var(--color-info-light-9);
+  --tag-normal-primary-border-color: var(--color-primary-light-8);
+  --tag-normal-success-border-color: var(--color-success-light-8);
+  --tag-normal-warning-border-color: var(--color-warning-light-8);
+  --tag-normal-danger-border-color: var(--color-danger-light-8);
+  --tag-normal-info-border-color: var(--color-info-light-8);
+  --tag-normal-primary-font-color: var(--color-primary);
+  --tag-normal-success-font-color: var(--color-success);
+  --tag-normal-warning-font-color: var(--color-warning);
+  --tag-normal-danger-font-color: var(--color-danger);
+  --tag-normal-info-font-color: var(--color-info);
+  --tag-normal-primary-hover-color: var(--color-primary);
+  --tag-normal-success-hover-color: var(--color-success);
+  --tag-normal-warning-hover-color: var(--color-warning);
+  --tag-normal-danger-hover-color: var(--color-danger);
+  --tag-normal-info-hover-color: var(--color-info);
+
+  --tag-dark-primary-background-color: var(--color-primary);
+  --tag-dark-success-background-color: var(--color-success);
+  --tag-dark-warning-background-color: var(--color-warning);
+  --tag-dark-danger-background-color: var(--color-danger);
+  --tag-dark-info-background-color: var(--color-info);
+  --tag-dark-primary-border-color: var(--color-primary);
+  --tag-dark-success-border-color: var(--color-success);
+  --tag-dark-warning-border-color: var(--color-warning);
+  --tag-dark-danger-border-color: var(--color-danger);
+  --tag-dark-info-border-color: var(--color-info);
+  --tag-dark-primary-font-color: #fff;
+  --tag-dark-success-font-color: #fff;
+  --tag-dark-warning-font-color: #fff;
+  --tag-dark-danger-font-color: #fff;
+  --tag-dark-info-font-color: #fff;
+  --tag-dark-primary-hover-color: var(--color-primary-light-2);
+  --tag-dark-success-hover-color: var(--color-success-light-2);
+  --tag-dark-warning-hover-color: var(--color-warning-light-2);
+  --tag-dark-danger-hover-color: var(--color-danger-light-2);
+  --tag-dark-info-hover-color: var(--color-info-light-2);
+
+  --tag-plain-primary-background-color: #fff;
+  --tag-plain-success-background-color: #fff;
+  --tag-plain-warning-background-color: #fff;
+  --tag-plain-danger-background-color: #fff;
+  --tag-plain-info-background-color: #fff;
+  --tag-plain-primary-border-color: var(--color-primary-light-6);
+  --tag-plain-success-border-color: var(--color-success-light-6);
+  --tag-plain-warning-border-color: var(--color-warning-light-6);
+  --tag-plain-danger-border-color: var(--color-danger-light-6);
+  --tag-plain-info-border-color: var(--color-info-light-6);
+  --tag-plain-primary-font-color: var(--color-primary);
+  --tag-plain-success-font-color: var(--color-success);
+  --tag-plain-warning-font-color: var(--color-warning);
+  --tag-plain-danger-font-color: var(--color-danger);
+  --tag-plain-info-font-color: var(--color-info);
+  --tag-plain-primary-hover-color: var(--color-primary);
+  --tag-plain-success-hover-color: var(--color-success);
+  --tag-plain-warning-hover-color: var(--color-warning);
+  --tag-plain-danger-hover-color: var(--color-danger);
+  --tag-plain-info-hover-color: var(--color-info);
+
+  --tag-font-size: 12px;
+  --tag-border-radius: 4px;
+  --tag-padding: 0 10px;
+}

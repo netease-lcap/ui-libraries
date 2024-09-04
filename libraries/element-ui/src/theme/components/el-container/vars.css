@@ -1,0 +1,8 @@
+/**
+ * @component el-container
+ */
+:root {
+  --header-padding: 0 20px;
+  --footer-padding: 0 20px;
+  --main-padding: 20px;
+}
