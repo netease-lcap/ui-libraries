@@ -188,7 +188,7 @@ namespace nasl.ui {
         if: (val) => val === 'week',
       }, {
         update: {
-          format: 'YYYY-QQ',
+          format: 'YYYY-[Q]Q',
         },
         if: (val) => val === 'quarter',
       }]
@@ -233,7 +233,7 @@ namespace nasl.ui {
       ],
       },
     })
-    format: 'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' | 'GGGG-W周' | 'GGGG年第W周' | 'GGGG-WWWW' | 'YYYY年M月' | 'YYYY-MM' | 'M/YYYY' | 'YYYY年第Q季度' | 'YYYY年QQ' | 'YYYY-QQ' | 'YYYY年' | 'YYYY' = 'YYYY-MM-DD';
+    format: 'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' | 'GGGG-W周' | 'GGGG年第W周' | 'GGGG-WWWW' | 'YYYY年M月' | 'YYYY-MM' | 'M/YYYY' | 'YYYY年第Q季度' | 'YYYY年[Q]Q' | 'YYYY-[Q]Q' | 'YYYY年' | 'YYYY' = 'YYYY-MM-DD';
 
     @Prop({
       group: '主要属性',

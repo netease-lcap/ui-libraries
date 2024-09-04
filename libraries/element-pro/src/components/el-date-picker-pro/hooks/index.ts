@@ -3,9 +3,11 @@ import { useSyncState } from '@lcap/vue2-utils';
 import { MapGet } from '@lcap/vue2-utils/plugins/types';
 import { ComputedRef, Ref, unref } from '@vue/composition-api';
 import dayjs, { Dayjs } from 'dayjs';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
 import { isFunction } from 'lodash';
 import { CreateElement } from 'vue';
 
+dayjs.extend(advancedFormat);
 export const usePlaceholder = (props: MapGet, defaultPlaceholder: string) => {
   const { useComputed } = props;
   const placeholderRef = useComputed<string | [string, string]>(
