@@ -36,7 +36,7 @@ namespace nasl.ui {
   }
 
   export class ElMenuOptions extends ViewComponentOptions {
-    @Prop({
+    @Prop<ElMenuOptions, 'mode'>({
       group: '主要属性',
       title: '模式',
       description: '模式',
@@ -44,12 +44,16 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '水平' }, { title: '垂直' }],
       },
+      onChange: [{
+        clear: ['collapse'],
+        if: (_) => _ === 'horizontal',
+      }],
     })
     mode: 'horizontal' | 'vertical' = 'vertical';
 
     @Prop<ElMenuOptions, 'collapse'>({
       group: '主要属性',
-      title: '是否水平折叠收起菜单',
+      title: '折叠状态',
       description: '是否水平折叠收起菜单（仅在 mode 为 vertical 时可用）',
       setter: { concept: 'SwitchSetter' },
       settable: true,

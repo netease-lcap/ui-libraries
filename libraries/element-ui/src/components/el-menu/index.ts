@@ -1,4 +1,5 @@
 import './index.css';
+import { uid } from 'uid';
 import Menu from 'element-ui/lib/menu';
 import Submenu from 'element-ui/lib/submenu';
 import MenuItem from 'element-ui/lib/menu-item';
@@ -11,6 +12,17 @@ export const ElMenu = registerComponent(Menu, plugins, {
   slotNames: ['default'],
   methodNames: ['open', 'close'],
 });
+
+Submenu.props.index = {
+  type: String,
+  default: () => uid(),
+  require: false,
+};
+MenuItem.props.index = {
+  type: String,
+  default: () => uid(),
+  require: false,
+};
 export const ElSubmenu = Submenu;
 export const ElMenuItem = MenuItem;
 export const ElMenuItemGroup = MenuItemGroup;

@@ -6,6 +6,8 @@
       :default-active="activeIndex"
       class="el-menu-demo"
       mode="horizontal"
+      @close="handleClose"
+      @open="handleOpen"
       @select="handleSelect">
       <el-menu-item index="1">处理中心</el-menu-item>
       <el-submenu index="2">
@@ -65,6 +67,12 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    handleOpen(e) {
+      console.log('open', e);
+    },
+    handleClose(e) {
+      console.log('close', e);
     },
   },
 };
