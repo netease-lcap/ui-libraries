@@ -42,13 +42,13 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'text' },
-          { title: 'url' },
-          { title: 'tel' },
-          { title: 'password' },
-          { title: 'search' },
-          { title: 'submit' },
-          { title: 'hidden' },
+          { title: '文本' },
+          { title: '链接' },
+          { title: '电话' },
+          { title: '密码' },
+          { title: '搜索' },
+          { title: '提交' },
+          { title: '隐藏' },
         ],
       },
     })
@@ -137,7 +137,7 @@ namespace nasl.ui {
         concept: 'AnonymousFunctionSetter',
       },
     })
-    format: (value: nasl.core.String) => any;
+    private format: (value: nasl.core.String) => any;
 
     @Prop({
       group: '主要属性',
@@ -241,7 +241,7 @@ namespace nasl.ui {
       description: '是否开启拼写检查，HTML5 原生属性，',
       setter: { concept: 'SwitchSetter' },
     })
-    spellCheck: nasl.core.Boolean = false;
+    private spellCheck: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -251,10 +251,10 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'default' },
-          { title: 'success' },
-          { title: 'warning' },
-          { title: 'error' },
+          { title: '默认' },
+          { title: '成功' },
+          { title: '警告' },
+          { title: '错误' },
         ],
       },
     })

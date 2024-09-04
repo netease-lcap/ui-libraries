@@ -39,3 +39,10 @@ export const Value = {
     template: '<demo-value></demo-value>',
   }),
 };
+
+export const MaxMin = {
+  name: '最大最小值',
+  render: () => ({
+    template: '<el-input-number-pro :max="10" :min="5"></el-input-number-pro>',
+  }),
+};

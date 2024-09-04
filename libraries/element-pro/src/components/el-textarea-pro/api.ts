@@ -153,10 +153,10 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'default' },
-          { title: 'success' },
-          { title: 'warning' },
-          { title: 'error' },
+          { title: '默认' },
+          { title: '成功' },
+          { title: '警告' },
+          { title: '错误' },
         ],
       },
     })
