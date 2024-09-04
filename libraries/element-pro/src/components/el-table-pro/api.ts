@@ -195,13 +195,13 @@ namespace nasl.ui {
     // })
     // bottomContent: any;
 
-    @Prop({
-      group: '主要属性',
-      title: '单元格数据为空时呈现的内容',
-      description: '单元格数据为空时呈现的内容',
-      setter: { concept: 'InputSetter' },
-    })
-    cellEmptyContent: any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '单元格数据为空时呈现的内容',
+    //   description: '单元格数据为空时呈现的内容',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // cellEmptyContent: any;
 
     @Prop({
       group: '数据属性',
