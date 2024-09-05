@@ -96,7 +96,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Filterable',
+      title: '是否可搜索',
       description: '是否可搜索',
       setter: { concept: 'SwitchSetter' },
     })
@@ -382,7 +382,7 @@ namespace nasl.ui {
       description: '展开下一层级的方式。可选项：click/hover',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'click' }, { title: 'hover' }],
+        options: [{ title: '点击' }, { title: '悬浮' }],
       },
     })
     trigger: 'click' | 'hover' = 'click';
