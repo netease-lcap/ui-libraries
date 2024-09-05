@@ -66,13 +66,13 @@ namespace nasl.ui {
         })
         value: nasl.core.String;
 
-        // todo ld: 这个属性需要在 post 的 header 里设置吗？类型是什么？描述需要写什么
         @Prop({
             group: '数据属性',
             title: '存储方式',
             description: "",
         })
-        fileConnectionGroup: nasl.core.String;
+        file_connection_group: nasl.core.String;
+        // fileConnectionGroup: nasl.core.String;
 
         @Prop({
             group: '数据属性',

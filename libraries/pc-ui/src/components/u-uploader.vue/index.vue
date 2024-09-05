@@ -181,7 +181,8 @@ export default {
         downloadIconSwitcher: { type: Boolean, default: true },
         fileSize: { type: Boolean, default: true },
         preview: { type: Boolean, default: false },
-        showInDesigner: { type: Boolean, default: false }
+        showInDesigner: { type: Boolean, default: false },
+        file_connection_group: { type: String, default: '' },
     },
     data() {
         return {
@@ -574,6 +575,9 @@ export default {
                 } else {
                     headers['lcap-ttl'] = this.ttlValue;
                 }
+            }
+            if (this.file_connection_group) {
+                headers['file-connection-group'] = this.file_connection_group;
             }
             if (window.appInfo && window.appInfo.domainName)
                 headers.DomainName = window.appInfo.domainName;
