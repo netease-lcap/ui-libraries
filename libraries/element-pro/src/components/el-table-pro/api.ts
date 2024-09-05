@@ -798,6 +798,17 @@ namespace nasl.ui {
     })
     type: 'single' | 'multiple' | null = null;
 
+    @Prop({
+      group: '数据属性',
+      title: '排序',
+      description: '设置该列是否可以排序',
+      docDescription: '开启后该列可排序，可设置默认顺序，升序或倒序',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    sorter: nasl.core.Boolean = false;
+
     // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
     //   group: '数据属性',
     //   title: '排序初始顺序',

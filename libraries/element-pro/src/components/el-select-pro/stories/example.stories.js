@@ -18,6 +18,11 @@ export const Default = {
         console.log(value, 'value');
       },
     },
+    methods: {
+      log() {
+        console.log(123);
+      },
+    },
     data() {
       return {
         value: 11,
@@ -41,6 +46,8 @@ export const Default = {
       };
     },
     template: `<el-select-pro
+    :filterable="true"
+    @search="log"
     >
     
       <el-option-pro label="12" las="33" value="11" data-nodepath="1234" >

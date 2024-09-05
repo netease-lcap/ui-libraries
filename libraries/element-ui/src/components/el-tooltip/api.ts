@@ -31,13 +31,13 @@ namespace nasl.ui {
     })
     effect: 'dark' | 'light' = 'dark';
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '内容',
-    //   description: '显示的内容',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // content: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '内容',
+      description: '显示的内容',
+      setter: { concept: 'InputSetter' },
+    })
+    content: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -183,10 +183,10 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
 
-    @Slot({
-      title: '内容',
-      description: '内容插槽',
-    })
-    slotContent: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: '内容',
+    //   description: '内容插槽',
+    // })
+    // slotContent: () => Array<ViewComponent>;
   }
 }
