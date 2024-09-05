@@ -238,6 +238,14 @@ namespace nasl.ui {
     })
     icon: nasl.core.String;
 
+    @Prop({
+      group: '主要属性',
+      title: '节点背景色',
+      description: '节点Dot背景色，格式为#eeeeee, red, rgba(0, 0, 0, 0.5)',
+      setter: { concept: 'InputSetter' },
+    })
+    color: nasl.core.String;
+
     @Slot({
       title: 'Default',
       description: 'Timeline-Item 的内容',
