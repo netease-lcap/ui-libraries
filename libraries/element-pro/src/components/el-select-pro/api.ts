@@ -333,7 +333,7 @@ namespace nasl.ui {
       description: '组件尺寸。可选项：small/medium/large。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'small' }, { title: 'medium' }, { title: 'large' }],
+        options: [{ title: '小' }, { title: '正常' }, { title: '正常' }],
       },
     })
     size: 'small' | 'medium' | 'large' = 'medium';
@@ -345,10 +345,10 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'default' },
-          { title: 'success' },
-          { title: 'warning' },
-          { title: 'error' },
+          { title: '默认' },
+          { title: '成功' },
+          { title: '警告' },
+          { title: '错误' },
         ],
       },
     })
@@ -387,7 +387,7 @@ namespace nasl.ui {
     tips: any;
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       sync: true,
       title: '选中值',
       description: '选中值。支持语法糖 `v-model`。',
