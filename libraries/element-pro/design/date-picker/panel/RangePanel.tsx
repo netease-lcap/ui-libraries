@@ -6,6 +6,7 @@ import { ElDateRangePickerProps } from '../type';
 import { getDefaultFormat, parseToDayjs } from '../../_common/js/date-picker/format';
 import useTableData from '../hooks/useTableData';
 import useDisableDate from '../hooks/useDisableDate';
+import { ElTimeRangePickerProps } from '../../time-picker';
 
 export default defineComponent({
   name: 'ElRangePanel',
@@ -14,6 +15,7 @@ export default defineComponent({
     activeIndex: Number,
     isFirstValueSelected: Boolean,
     disableDate: [Object, Array, Function] as PropType<ElDateRangePickerProps['disableDate']>,
+    disableTime: Function as PropType<ElDateRangePickerProps['disableTime']>,
     mode: {
       type: String as PropType<ElDateRangePickerProps['mode']>,
       default: 'date',
@@ -75,6 +77,31 @@ export default defineComponent({
             : undefined,
     }));
 
+    const disableTime: ElTimeRangePickerProps['disableTime'] = (h: number, m: number, s: number, context) => {
+      if (typeof props.disableTime !== 'function') {
+        return;
+      }
+
+      const disableTimeObj = { hour: [h], minute: [m], second: [s] } as { hour: Array<number>; minute: Array<number>; second: Array<number> };
+      const [startTime, endTime] = props.value || [];
+
+      const startDayjs = startTime ? parseToDayjs(startTime, format) : null;
+      const endDayjs = endTime ? parseToDayjs(endTime, format) : null;
+      const times: Array<Date | null> = [];
+
+      if (context.partial === 'start') {
+        times.push(startDayjs ? startDayjs.hour(h).minute(m).second(s).toDate() : null);
+        times.push(endDayjs ? endDayjs.toDate() : null);
+      } else {
+        times.push(startDayjs ? startDayjs.toDate() : null);
+        times.push(endDayjs ? endDayjs.hour(h).minute(m).second(s).toDate() : null);
+      }
+
+      if (props.disableTime(times as any, context)) {
+        return disableTimeObj;
+      }
+    }
+
     const startTableData = computed(() => useTableData({
       isRange: true,
       start: props.value[0] ? parseToDayjs(props.value[0] as string, format).toDate() : undefined,
@@ -117,10 +144,12 @@ export default defineComponent({
       format,
       mode: props.mode,
       firstDayOfWeek: props.firstDayOfWeek || global.value.firstDayOfWeek,
-
       popupVisible: props.popupVisible,
       enableTimePicker: props.enableTimePicker,
-      timePickerProps: props.timePickerProps,
+      timePickerProps: {
+        ...(props.timePickerProps as any),
+        disableTime,
+      },
       onMonthChange: props.onMonthChange,
       onYearChange: props.onYearChange,
       onJumperClick: props.onJumperClick,

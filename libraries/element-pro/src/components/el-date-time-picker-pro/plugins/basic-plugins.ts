@@ -1,5 +1,12 @@
 import { NaslComponentPluginOptions, $render } from '@lcap/vue2-utils';
-import { DateRangeValue, DateRangePicker, DateValue } from '@element-pro';
+import {
+  DateRangeValue,
+  DateRangePicker,
+  DateValue,
+  ElDatePickerProps,
+  ElDateRangePickerProps,
+} from '@element-pro';
+import dayjs, { Dayjs } from 'dayjs';
 import {
   usePlaceholder,
   useDatePickerValue,
@@ -12,6 +19,20 @@ import {
 } from '../../el-date-picker-pro/hooks';
 
 const DEFAULT_FORMAT = 'YYYY-MM-DD HH:mm:ss';
+
+function isDisablesTime(d: Dayjs, maxDate: string, minDate: string) {
+  let disabled = false;
+
+  if (minDate && d.isBefore(minDate, 'seconds')) {
+    disabled = true;
+  }
+
+  if (!disabled && maxDate && d.isAfter(maxDate, 'second')) {
+    disabled = true;
+  }
+
+  return disabled;
+}
 
 /* 组件功能扩展插件 */
 export const useExtendsPlugin: NaslComponentPluginOptions = {
@@ -52,6 +73,27 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       return [dateFormat, timeFormat].join(' ');
     });
 
+    const disableTime: ElDatePickerProps['disableTime'] | ElDateRangePickerProps['disableTime'] = (time: any, context?: { partial: 'start' | 'end' }) => {
+      const range = props.get<boolean>('range') || false;
+      const [minDate, maxDate] = props.get<[string, string]>(['minDate', 'maxDate']);
+
+      if (!range) {
+        return time && isDisablesTime(dayjs(time), maxDate, minDate);
+      }
+
+      if (context && context.partial === 'start') {
+        return time[0] && (
+          isDisablesTime(dayjs(time[0]), maxDate, minDate)
+          || (time[1] && dayjs(time[0]).isAfter(time[1]))
+        );
+      }
+
+      return time[1] && (
+        isDisablesTime(dayjs(time[1]), maxDate, minDate)
+        || (time[0] && dayjs(time[1]).isBefore(time[0]))
+      );
+    };
+
     return {
       value,
       placeholder,
@@ -63,6 +105,10 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       ...events,
       valueType: DEFAULT_FORMAT,
       enableTimePicker: true,
+      disableTime,
+      timePickerProps: {
+        hideDisabledTime: false,
+      },
       onChange: (v: DateValue | DateRangeValue, context) => {
         const [range] = props.get<[boolean]>(['range']);
         const onChange = props.get<any>('onChange') || (() => {});

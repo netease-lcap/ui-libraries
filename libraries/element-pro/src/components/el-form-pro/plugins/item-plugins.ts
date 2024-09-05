@@ -1,6 +1,7 @@
 import { type VNode } from 'vue';
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils';
 import { isEmptyVNodes } from '@lcap/vue2-utils/plugins/utils';
+import type { MapGet } from '@lcap/vue2-utils/plugins/types';
 import VusionValidator, { localizeRules } from '@lcap/validator';
 import { CustomValidateResolveType, FormRule } from '@element-pro';
 import { isFunction, map, uniqueId } from 'lodash';
@@ -51,6 +52,30 @@ const useRegisterInstance = (ctx: SetupContext) => {
   onBeforeUnmount(() => {
     removeFormItemInstance(ctx.refs.$base);
   });
+};
+
+const useExtendsFormProps = (props: MapGet) => {
+  const computedMap: Record<string, ComputedRef<any>> = {};
+  [
+    'labelEllipsis',
+    'requiredMark',
+    'showErrorMessage',
+    'statusIcon',
+  ].forEach((key) => {
+    computedMap[key] = props.useComputed(key, (val) => {
+      if (typeof val === 'boolean') {
+        return val;
+      }
+
+      if (!val) {
+        return undefined;
+      }
+
+      return val === 'show';
+    });
+  });
+
+  return computedMap;
 };
 
 export const useExtensPlugin: NaslComponentPluginOptions = {
@@ -108,6 +133,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       });
     });
 
+    const extendsFormProps = useExtendsFormProps(props);
     const ellipsisRef = useComputed<boolean | undefined>('labelEllipsis');
 
     const className = computed<string>(() => {
@@ -239,6 +265,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       class: className,
       labelWidth,
       name: fieldName,
+      ...extendsFormProps,
       slotHelp: () => {
         const slotHelp = props.get('slotHelp');
         const helpIsSlot = props.get<boolean>('helpIsSlot');

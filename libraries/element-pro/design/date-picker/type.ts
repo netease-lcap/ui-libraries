@@ -36,6 +36,12 @@ export interface ElDatePickerProps {
    * 禁用日期，示例：['A', 'B'] 表示日期 A 和日期 B 会被禁用。`{ from: 'A', to: 'B' }` 表示在 A 到 B 之间的日期会被禁用。`{ before: 'A', after: 'B' }` 表示在 A 之前和在 B 之后的日期都会被禁用。其中 A = '2021-01-01'，B = '2021-02-01'。值类型为 Function 则表示返回值为 true 的日期会被禁用
    */
   disableDate?: DisableDate;
+
+  /**
+   * 禁用时间
+   */
+  disableTime?: (time: Date | null) => boolean;
+
   /**
    * 是否禁用组件
    */
@@ -175,6 +181,12 @@ export interface ElDateRangePickerProps {
    * 禁用日期，示例：['A', 'B'] 表示日期 A 和日期 B 会被禁用。{ from: 'A', to: 'B' } 表示在 A 到 B 之间的日期会被禁用。{ before: 'A', after: 'B' } 表示在 A 之前和在 B 之后的日期都会被禁用。其中 A = '2021-01-01'，B = '2021-02-01'。值类型为 Function 则表示返回值为 true 的日期会被禁用
    */
   disableDate?: DisableRangeDate;
+
+  /**
+   * 禁用时间
+   */
+  disableTime?: (times: [Date | null, Date | null], context: { partial: DateRangePickerPartial }) => boolean;
+
   /**
    * 是否禁用组件
    */
@@ -383,6 +395,7 @@ export interface ElDateRangePickerPanelProps
     | 'value'
     | 'defaultValue'
     | 'disableDate'
+    | 'disableTime'
     | 'enableTimePicker'
     | 'firstDayOfWeek'
     | 'format'

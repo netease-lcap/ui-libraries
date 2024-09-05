@@ -5,12 +5,14 @@ import ElExtraContent from './ExtraContent';
 import { ElDatePickerProps } from '../type';
 import { getDefaultFormat, parseToDayjs } from '../../_common/js/date-picker/format';
 import useTableData from '../hooks/useTableData';
-import useDisableDate from '../hooks/useDisableDate';
+import useDisableDate, { disableDateProps } from '../hooks/useDisableDate';
+import { ElTimePickerProps } from '../../time-picker';
 
 export default defineComponent({
   name: 'ElSinglePanel',
   props: {
     disableDate: [Object, Array, Function] as PropType<ElDatePickerProps['disableDate']>,
+    disableTime: Function as PropType<ElDatePickerProps['disableTime']>,
     mode: {
       type: String as PropType<ElDatePickerProps['mode']>,
       default: 'date',
@@ -56,6 +58,20 @@ export default defineComponent({
       disableDate: props.disableDate,
     }));
 
+    const disableTime: ElTimePickerProps['disableTime'] = (h: number, m: number, s: number) => {
+      if (typeof props.disableTime !== 'function' || !props.value) {
+        return {};
+      }
+
+      const disableTimeObj = { hour: [h], minute: [m], second: [s] };
+      const checkTime = parseToDayjs(props.value, format).hour(h).minute(m).second(s).toDate();
+      if (props.disableTime(checkTime)) {
+        return disableTimeObj;
+      }
+
+      return {};
+    };
+
     const tableData = computed(() => useTableData({
       year: props.year,
       month: props.month,
@@ -75,7 +91,10 @@ export default defineComponent({
       tableData: tableData.value,
       popupVisible: props.popupVisible,
       enableTimePicker: props.enableTimePicker,
-      timePickerProps: props.timePickerProps,
+      timePickerProps: {
+        ...(props.timePickerProps as any),
+        disableTime,
+      },
       time: props.time,
       onMonthChange: props.onMonthChange,
       onYearChange: props.onYearChange,

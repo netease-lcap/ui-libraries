@@ -26,7 +26,7 @@ export const Default = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-time-picker-pro :autoWidth="true" align="center" :enablePresets="true" presetsPlacement="left" :allowInput="true" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-time-picker-pro>',
+    template: '<el-date-time-picker-pro max-date="2024-08-15 12:12:12" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-time-picker-pro>',
   }),
 };
 
@@ -47,6 +47,6 @@ export const Range = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-time-picker-pro time-format="HH:mm" :enablePresets="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startValue.sync="startValue" :endValue.sync="endValue" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-time-picker-pro>',
+    template: '<el-date-time-picker-pro max-date="2024-08-15 12:12:12" time-format="HH:mm" :enablePresets="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startValue.sync="startValue" :endValue.sync="endValue" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-time-picker-pro>',
   }),
 };

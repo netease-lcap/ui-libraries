@@ -1,103 +1,17 @@
+import { CreateElement } from 'vue';
 import { TimePickerValue, TimeRangePicker, TimeRangeValue } from '@element-pro';
 import { type NaslComponentPluginOptions, $render, useSyncState } from '@lcap/vue2-utils';
 import { MapGet } from '@lcap/vue2-utils/plugins/types';
 import { unref } from '@vue/composition-api';
-import dayjs from 'dayjs';
 import { isFunction, isNil } from 'lodash';
-import { useIcons, usePlaceholder } from '../../el-date-picker-pro/hooks';
-import { CreateElement } from 'vue';
-
-const DEFAULT_FORMAT = 'HH:mm:ss';
-
-function getFormatTimeValue(v: string, format: string = DEFAULT_FORMAT) {
-  if (!v) {
-    return null;
-  }
-
-  return dayjs(`${dayjs().format('YYYY-MM-DD')} ${v}`).format(format);
-}
-
-function getNumberArr(str: string, position: 'start' | 'end') {
-  const arr = str.split(':').map((n) => Number(n)).map((n) => (Number.isNaN(n) ? 0 : n));
-  while (arr.length < 3) {
-    if (arr.length === 0) {
-      arr.push(position === 'start' ? 0 : 23);
-    } else {
-      arr.push(position === 'start' ? 0 : 59);
-    }
-  }
-  return arr;
-}
-
-function excludeNumberArr(min: number, max: number, len: number) {
-  const arr: number[] = [];
-  for (let i = 0; i < len; i++) {
-    if (i < min || i > max) {
-      arr.push(i);
-    }
-  }
-
-  return arr;
-}
-
-function getDisableTime(currentTimes: number[], minTime: number[], maxTime: number[]) {
-  const [minH, minM, minS] = minTime;
-  const [maxH, maxM, maxS] = maxTime;
-  const [h, m] = currentTimes;
-  const disabledTime: Partial<{ hour: Array<number>; minute: Array<number>; second: Array<number>; millisecond: Array<number> }> = {
-    hour: excludeNumberArr(minH, maxH, 24),
-  };
-
-  if (h === minH) {
-    disabledTime.minute = excludeNumberArr(minM, 59, 60);
-    if (m === minM) {
-      disabledTime.second = excludeNumberArr(minS, 59, 60);
-    }
-  } else if (h === maxH) {
-    disabledTime.minute = excludeNumberArr(0, maxM, 60);
-    if (m === maxM) {
-      disabledTime.second = excludeNumberArr(0, maxS, 60);
-    }
-  }
-
-  return disabledTime;
-}
-
-function getFormatStr(format: string = DEFAULT_FORMAT) {
-  if (format.indexOf('s') !== -1) {
-    return 'HH:mm:ss';
-  }
-
-  if (format.indexOf('m') !== -1) {
-    return 'HH:mm';
-  }
-
-  return 'HH';
-}
-
-function getNaslTimeValue(v: TimePickerValue | TimeRangeValue, format: string = DEFAULT_FORMAT) {
-  if (!v || typeof v !== 'string') {
-    return null;
-  }
-
-  return dayjs(v, format).format(getFormatStr(format));
-}
-
-function getChangeEventByValue(v: TimePickerValue | TimeRangeValue, range: boolean, format: string) {
-  const changeEvent = {
-    value: null,
-    startValue: null,
-    endValue: null,
-  };
-  if (!range) {
-    changeEvent.value = getNaslTimeValue(v, format);
-  } else if (Array.isArray(v)) {
-    changeEvent.startValue = getNaslTimeValue(v[0], format);
-    changeEvent.endValue = getNaslTimeValue(v[1], format);
-  }
-
-  return changeEvent;
-}
+import {
+  getFormatTimeValue,
+  getNumberArr,
+  getDisableTime,
+  getChangeEventByValue,
+  getNaslTimeValue,
+} from '../utils';
+import { usePlaceholder } from '../../el-date-picker-pro/hooks';
 
 function useTimePickerValue(props: MapGet) {
   const valueRef = props.useRef<TimePickerValue | TimeRangeValue>(['value', 'startValue', 'endValue', 'range', 'format'], (v, startValue, endValue, range, format) => {
