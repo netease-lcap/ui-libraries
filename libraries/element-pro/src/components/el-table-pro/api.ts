@@ -93,7 +93,7 @@ namespace nasl.ui {
     @Prop({
       title: '排序字段',
     })
-    sorter: nasl.core.String;
+    sort: nasl.core.String;
 
     @Method({
       title: '重新加载',

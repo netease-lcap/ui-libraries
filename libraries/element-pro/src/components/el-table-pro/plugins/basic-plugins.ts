@@ -15,7 +15,7 @@ export const useUpdateSync = createUseUpdateSync([
 export const useTable = {
   props: ['onPageChange'],
   setup(props, ctx) {
-    const current = ref(1);
+    const current = props.useRef('current', 1);
     const sorting = props.useComputed('sorting', (value) => value);
     const renderSlot = (vnodes) => {
       return vnodes.flatMap((vnode) => {
@@ -95,7 +95,7 @@ export const useTable = {
         onLoadData?.({
           page: current.value,
           size: pageSize.value,
-          sorter: sorting.value?.field,
+          sort: sorting.value?.field,
           order: sorting.value?.order,
         });
       }
@@ -105,7 +105,7 @@ export const useTable = {
         _.attempt(onLoadData, {
           page: current.value,
           size: pageSize.value,
-          sorter: _.get(arg, '0.sortBy'),
+          sort: _.get(arg, '0.sortBy'),
           order: _.get(arg, '0.descending') ? 'desc' : 'asc',
         });
         _.attempt(value, ...arg);
