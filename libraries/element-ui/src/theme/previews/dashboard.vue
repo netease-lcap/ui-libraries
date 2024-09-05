@@ -21,9 +21,9 @@
   </el-header>
   <el-container>
     <el-aside width="200px">
-      <el-menu style="height: 100%" defaultActive="2">
-        <el-menu-item index="1"><el-text text="导航一"></el-text></el-menu-item>
-        <el-menu-item index="2"><el-text text="导航二"></el-text></el-menu-item>
+      <el-menu style="height: 100%" defaultActive="1">
+        <el-menu-item index="1"><el-text text="Dashboard"></el-text></el-menu-item>
+        <el-menu-item index="2"><el-text text="表单页"></el-text></el-menu-item>
         <el-menu-item index="3"><el-text text="导航三"></el-text></el-menu-item>
       </el-menu>
     </el-aside>
@@ -151,6 +151,68 @@
         </el-card>
       </el-main>
     </el-container>
+    <el-aside>
+      <el-card shadow="never" style="margin-top: var(--el-comp-margin-xl)">
+        <el-text text="我的应用" slot="header"></el-text>
+        <el-flex :gutter="22">
+          <el-flex 
+            alignment="center" 
+            direction="vertical" 
+            justify="center"
+            v-for="{text, icon} in [
+              {icon: 'el-icon-office-building', text: '企业管理'},
+              {icon: 'el-icon-platform-eleme', text: '食堂管理'},
+              {icon: 'el-icon-user-solid', text: '租户管理'},
+              {icon: 'el-icon-cpu', text: '国际化'},
+              {icon: 'el-icon-s-goods', text: '采购计划'},
+              {icon: 'el-icon-menu', text: '产品库存'}
+            ]"
+            :key="text"
+            >
+              <div class="app-icon">
+                <el-icon :name="icon"></el-icon>
+              </div>
+              <el-text size="small">{{ text }}</el-text>
+          </el-flex>
+        </el-flex>
+      </el-card>
+      <el-card shadow="never" style="margin-top: var(--el-comp-margin-l)">
+        <el-text text="公告" slot="header"></el-text>
+        <el-flex>
+          <el-flex
+            v-for="{label, tagType, text} in [
+              {label: '置顶', tagType: 'danger', text: '新版本V3.6上线'},
+              {label: '最新', tagType: '', text: '网易内部通过低代码打造一...'},
+              {label: '最新', tagType: '', text: 'CodeWave助力国网苏州城'},
+              {label: '最新', tagType: '', text: '网易低代码服务平台上线'},
+            ]"
+            :key="text"
+            alignment="center"
+          >
+            <el-tag size="small" :type="tagType" effect="dark">{{ label }}</el-tag>
+            <el-text size="small" overflow="ellipsis">{{ text }}</el-text>
+          </el-flex>
+        </el-flex>
+      </el-card>
+      <el-card shadow="never" style="margin-top: var(--el-comp-margin-l);">
+        <el-text text="使用帮助" slot="header"></el-text>
+        <el-flex>
+          <el-text 
+            size="normal" 
+            :text="text"
+            v-for="{text} in [
+              {text: '什么是资源监控'},
+              {text: '租户资源与平台资源的区别'},
+              {text: '应用异常状态如何解决'},
+              {text: '租户过期后如何处理'},
+              {text: '资产名称重名怎么办'},
+              {text: '如何升级应用'},
+            ]"
+            :key="text"
+          ></el-text>
+        </el-flex>
+      </el-card>
+    </el-aside>
   </el-container>
 </el-container>
 </template>
@@ -228,7 +290,7 @@ export default {
 
 .text-button {
   cursor: pointer;
-  color: var(--brand-primary);
+  color: var(--el-color-primary-6);
 }
 
 .app-icon {
@@ -238,8 +300,8 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: var(--brand-primary-lightest);
-  color: var(--brand-primary);
+  background-color: var(--el-color-primary-1);
+  color: var(--el-color-primary-6);
 }
 
 .app-text {

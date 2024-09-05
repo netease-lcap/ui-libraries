@@ -22,127 +22,98 @@
   <el-container>
     <el-aside width="200px">
       <el-menu style="height: 100%" defaultActive="2">
-        <el-menu-item index="1"><el-text text="导航一"></el-text></el-menu-item>
-        <el-menu-item index="2"><el-text text="导航二"></el-text></el-menu-item>
+        <el-menu-item index="1"><el-text text="Dashboard"></el-text></el-menu-item>
+        <el-menu-item index="2"><el-text text="表单页"></el-text></el-menu-item>
         <el-menu-item index="3"><el-text text="导航三"></el-text></el-menu-item>
       </el-menu>
     </el-aside>
     <el-container>
       <el-main>
         <el-card shadow="never">
-          <el-alert title="Informational Notes 信息提示" type="info" show-icon></el-alert>
-          <el-flex style="margin-top: var(--el-comp-margin-l)" mode="flex" justify="space-around">
-            <el-statistic
-              :value="34"
-              title="处理中的申请"
-              style="width: auto"
-            ></el-statistic>
-            <el-statistic
-              :value="8"
-              title="待处理申请"
-              style="width: auto"
-            ></el-statistic>
-            <el-statistic
-              :value="64"
-              title="待查看消息"
-              style="width: auto"
-            ></el-statistic>
-            <el-statistic
-              :value="3"
-              title="异常应用"
-              style="width: auto"
-            ></el-statistic>
-            <el-statistic
-              :value="0"
-              title="过期租户"
-              style="width: auto"
-            ></el-statistic>
-          </el-flex>
+          <el-text text="项目信息" slot="header"></el-text>
+          <el-form-pro 
+            :inline="true" 
+            :requiredMark="true"
+            layout="inline"
+            label-position="right" 
+            label-width="100px">
+            <el-form-item-pro label="项目名称">
+              <el-input-pro placeholder="请输入" class="form-item-content"></el-input-pro>
+            </el-form-item-pro>
+            <el-form-item-pro label="项目描述">
+              <el-input-pro placeholder="请输入" class="form-item-content"></el-input-pro>
+            </el-form-item-pro>
+            <el-form-item-pro label="项目类型">
+              <el-select-pro placeholder="活动区域" class="form-item-content">
+                <el-option label="全部" value="all" class="form-item-content"></el-option>
+              </el-select-pro>
+            </el-form-item-pro>
+            <el-form-item-pro label="负责人">
+              <el-input-pro placeholder="请输入" class="form-item-content"></el-input-pro>
+            </el-form-item-pro>
+            <el-form-item-pro label="生效日期">
+              <el-date-picker-pro
+                type="date"
+                placeholder="请选择"
+                class="form-item-content"></el-date-picker-pro>
+            </el-form-item-pro>
+            <el-form-item-pro label="执行人">
+              <el-input-pro placeholder="请输入" class="form-item-content"></el-input-pro>
+            </el-form-item-pro>
+          </el-form-pro>
         </el-card>
 
-        <el-card shadow="never" style="margin-top: var(--el-comp-margin-l)">
-          <el-text text="资源管控" slot="header"></el-text>
-          <el-flex>
-            <el-flex style="flex: 1;" alignment="center" direction="horizontal" justify="center">
-              <el-progress type="circle" :percentage="63.5"></el-progress>
-            </el-flex>
-            <el-flex style="flex: 1;" alignment="center" direction="horizontal" justify="center">
-              <el-progress type="circle" :percentage="63.5" status="warning"></el-progress>
-            </el-flex>
-            <el-flex style="flex: 1;" alignment="center" direction="horizontal" justify="center">
-              <el-progress type="circle" :percentage="92.5" status="success"></el-progress>
-            </el-flex>
-          </el-flex>
-        </el-card>
         <el-card shadow="never" style="margin-top: var(--el-comp-margin-l)">
           <el-tabs value="first">
-            <el-tab-pane label="租户资源" name="first"></el-tab-pane>
-            <el-tab-pane label="平台资源" name="second"></el-tab-pane>
+            <el-tab-pane label="基本信息" name="first"></el-tab-pane>
+            <el-tab-pane label="关联信息" name="second"></el-tab-pane>
           </el-tabs>
-          <el-flex style="padding: 0 0 var(--el-comp-margin-l) 0">
-            <el-select-pro style="width: 200px;"></el-select-pro>
-            <el-button text="查询" type="primary"></el-button>
-          </el-flex>
 
+          <el-descriptions :colon="false" label-class-name="descriptions-label" content-class-name="descriptions-content">
+            <template slot="title">
+              <div class="sub-title">详情列表</div>
+            </template>
+            <el-descriptions-item label="项目名称">CodeWave智能开发平台</el-descriptions-item>
+            <el-descriptions-item label="项目描述">为企业提供更加智能化的软件生产方式</el-descriptions-item>
+            <el-descriptions-item label="项目类型">低代码</el-descriptions-item>
+            <el-descriptions-item label="负责人">小C</el-descriptions-item>
+            <el-descriptions-item label="生效日期">2024/01/27</el-descriptions-item>
+            <el-descriptions-item label="执行人">林哈哈</el-descriptions-item>
+          </el-descriptions>
+
+          <div class="sub-title">数据表格</div>
           <el-table-pro
             :data-source="[
-              {
-                name: '资源名称',
-                desc: '资源描述',
-                status: 'passed',
-              },
-              {
-                name: '资源名称',
-                desc: '资源描述',
-                status: 'wait',
-              },
-              {
-                name: '资源名称',
-                desc: '资源描述',
-                status: 'unpassed',
-              },
-              {
-                name: '资源名称',
-                desc: '资源描述',
-                status: 'passed',
-              },
-              {
-                name: '资源名称',
-                desc: '资源描述',
-                status: 'passed',
-              },
-            ]">
+              { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+              { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+              { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+              { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+              { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+            ]"
+          >
             <el-table-column-pro
-              title="资源名称"
+              title="项目名称"
               colKey="name"
               width="25%"></el-table-column-pro>
             <el-table-column-pro
-              title="资源描述"
+              title="项目描述"
               colKey="desc"
               width="25%"></el-table-column-pro>
             <el-table-column-pro
-              title="状态"
-              colKey="status"
-              width="25%">
-              <template #cell="scope">
-                <el-tag
-                  v-if="scope.item.status === 'passed'"
-                  type="success"
-                  text="通过"></el-tag>
-                <el-tag
-                  v-if="scope.item.status === 'unpassed'"
-                  type="info"
-                  text="未通过"></el-tag>
-                <el-tag
-                  v-if="scope.item.status === 'wait'"
-                  type="warning"
-                  text="待审批"></el-tag>
-              </template>
-            </el-table-column-pro>
+              title="项目类型"
+              colKey="type"></el-table-column-pro>
+            <el-table-column-pro
+              title="负责人"
+              colKey="owner"></el-table-column-pro>
+            <el-table-column-pro
+              title="生效日期"
+              colKey="date"></el-table-column-pro>
+            <el-table-column-pro
+              title="执行人"
+              colKey="execute"></el-table-column-pro>
             <el-table-column-pro
               title="操作"
-              colKey="id"
-              width="25%">
+              colKey="id">
               <template #cell>
                 <div class="text-button">查看详细</div>
               </template>
@@ -179,7 +150,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  font-weight: 500;
+  font-weight: var(--font-weight-primary);
   color: var(--font-fourth-color);
 }
 
@@ -188,7 +159,25 @@ export default {
   display: block;
   width: 4px;
   height: 14px;
-  background-color: var(--brand-primary);
-  margin-right: var(--space-small);
+  background-color: var(--el-color-primary-6);
+  margin-right: var(--el-comp-margin-s);
+}
+
+.descriptions-label {
+  color: var(--font-color-disabled-base);
+  margin: var(--el-comp-margin-l) 0 var(--el-comp-margin-l) var(--el-comp-margin-xl);
+}
+
+.descriptions-content {
+  margin: var(--el-comp-margin-l) 0;
+}
+
+.text-button {
+  cursor: pointer;
+  color: var(--el-color-primary-6);
+}
+
+.form-item-content {
+  width: 240px;
 }
 </style>
