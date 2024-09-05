@@ -211,7 +211,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '多选数量',
       description: '用于控制多选数量，值为 0 则不限制',
-      setter: { concept: 'NumberInputSetter' },
+      setter: { concept: 'NumberInputSetter', min: 0 },
     })
     max: nasl.core.Decimal;
 
@@ -220,7 +220,7 @@ namespace nasl.ui {
       title: '最小折叠数量',
       description:
         '最小折叠数量，用于多选情况下折叠选中项，超出该数值的选中项折叠。值为 0 则表示不折叠',
-      setter: { concept: 'NumberInputSetter' },
+      setter: { concept: 'NumberInputSetter', min: 0 },
     })
     minCollapsedNum: nasl.core.Decimal;
 
@@ -287,7 +287,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '读状态',
+      title: '只读状态',
       description: '只读状态，值为真会隐藏输入框，且无法打开下拉框',
       setter: { concept: 'SwitchSetter' },
     })
@@ -388,7 +388,7 @@ namespace nasl.ui {
     trigger: 'click' | 'hover' = 'click';
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '值',
       description: '选中项的值。',
       sync: true,
