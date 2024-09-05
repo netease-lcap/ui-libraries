@@ -261,14 +261,14 @@ namespace nasl.ui {
     })
     colon: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '阻止表单默认提交',
-      description:
-        '是否阻止表单提交默认事件（表单提交默认事件会刷新页面），设置为 `true` 可以避免刷新',
-      setter: { concept: 'SwitchSetter' },
-    })
-    preventSubmitDefault: nasl.core.Boolean = true;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '阻止表单默认提交',
+    //   description:
+    //     '是否阻止表单提交默认事件（表单提交默认事件会刷新页面），设置为 `true` 可以避免刷新',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // preventSubmitDefault: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
@@ -364,6 +364,7 @@ namespace nasl.ui {
         label: 'display: inline-block;',
       },
       forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
     },
   })
   @Component({
@@ -490,16 +491,17 @@ namespace nasl.ui {
           { title: '中' },
           { title: '大' },
           { title: '自定义' },
-        ]
+        ],
       }
     })
-    labelWidthType: 'small' | 'medium' | 'large' | '' = '';
+    labelWidthType: 'small' | 'medium' | 'large' | '';
 
-    @Prop({
+    @Prop<ElFormItemProOptions, 'labelWidth'>({
       group: '主要属性',
       title: '标签宽度',
       description: '可以整体设置标签宽度，优先级高于表单项',
       setter: { concept: 'InputSetter' },
+      if: (_) => _.labelWidthType === '',
     })
     labelWidth: nasl.core.String | nasl.core.Decimal;
 
@@ -510,18 +512,22 @@ namespace nasl.ui {
       description: '文字过长是否省略显示。默认文字超出时会换行。',
       docDescription: '文字过长是否省略显示，默认文字超出时会换行。',
       setter: {
-          concept: 'SwitchSetter',
+          concept: 'EnumSelectSetter',
+          options: [{ title: '省略' }, { title: '文字换行' }]
       },
     })
-    labelEllipsis: nasl.core.Boolean;
+    labelEllipsis: true | false;
 
     @Prop({
       group: '主要属性',
       title: '必填标记',
       description: '是否显示必填符号（*），优先级高于表单设置的必填标记',
-      setter: { concept: 'SwitchSetter' },
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '显示' }, { title: '隐藏' }]
+       },
     })
-    requiredMark: nasl.core.Boolean;
+    requiredMark: true | false;
 
     @Prop({
       group: '主要属性',
@@ -536,18 +542,24 @@ namespace nasl.ui {
       group: '主要属性',
       title: '显示错误信息',
       description: '校验不通过时，是否显示错误提示信息，默认使用表单配置',
-      setter: { concept: 'SwitchSetter' },
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '显示' }, { title: '隐藏' }]
+      },
     })
-    showErrorMessage: nasl.core.Boolean;
+    showErrorMessage: true | false;
 
     @Prop({
       group: '主要属性',
       title: '显示状态图标',
       description:
         '校验状态图标，值为 `true` 显示默认图标，默认图标有 成功、失败、警告 等，不同的状态图标不同。`statusIcon` 值为 `false`，不显示图标, 默认使用表单配置',
-      setter: { concept: 'SwitchSetter' },
+        setter: {
+          concept: 'EnumSelectSetter',
+          options: [{ title: '显示' }, { title: '隐藏' }]
+        },
     })
-    statusIcon: nasl.core.Boolean;
+    statusIcon: true | false;
 
     @Prop({
       group: '主要属性',

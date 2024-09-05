@@ -134,7 +134,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    lockScroll: nasl.core.Boolean = false;
+    lockScroll: nasl.core.Boolean = true;
 
     @Prop({
       title: '取消按钮',
