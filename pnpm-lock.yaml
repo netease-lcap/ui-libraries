@@ -188,7 +188,7 @@ importers:
         version: 7.6.17(vitest@1.1.0(@types/node@20.11.26)(jsdom@23.0.1)(less@4.2.0)(terser@5.26.0))
       '@storybook/vue':
         specifier: ^7.6.17
-        version: 7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0(esbuild@0.18.20)))(vue@2.6.12)
+        version: 7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)
       '@testing-library/vue':
         specifier: '5'
         version: 5.9.0(vue-template-compiler@2.6.12)(vue@2.6.12)
@@ -276,6 +276,9 @@ importers:
       '@lcap/vue2-utils':
         specifier: workspace:*
         version: link:../../packages/vue2-utils
+      '@nasl/ast-mini':
+        specifier: 3.9.0-beta
+        version: 3.9.0-beta
       '@vue/babel-helper-vue-jsx-merge-props':
         specifier: ^1.4.0
         version: 1.4.0
@@ -319,9 +322,6 @@ importers:
       '@lcap/vite-plugin-vue2':
         specifier: workspace:*
         version: link:../../packages/vite-plugin-vue2
-      '@nasl/ast-mini':
-        specifier: 3.9.0-beta
-        version: 3.9.0-beta
       '@nasl/types':
         specifier: 0.1.9-alpha
         version: 0.1.9-alpha
@@ -348,7 +348,7 @@ importers:
         version: 7.6.17(vitest@1.1.0(@types/node@20.11.26)(jsdom@23.0.1)(less@4.2.0)(terser@5.26.0))
       '@storybook/vue':
         specifier: ^7.6.17
-        version: 7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0(esbuild@0.18.20)))(vue@2.6.12)
+        version: 7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)
       '@testing-library/vue':
         specifier: '5'
         version: 5.9.0(vue-template-compiler@2.6.12)(vue@2.6.12)
@@ -532,7 +532,7 @@ importers:
         version: 7.6.17(vitest@1.1.0(@types/node@20.11.26)(jsdom@23.0.1)(less@4.2.0)(terser@5.26.0))
       '@storybook/vue':
         specifier: ^7.6.17
-        version: 7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0(esbuild@0.18.20)))(vue@2.6.12)
+        version: 7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)
       '@types/fs-extra':
         specifier: ^11.0.4
         version: 11.0.4
@@ -861,7 +861,7 @@ importers:
         version: 7.6.17(vitest@1.1.0(@types/node@20.11.26)(jsdom@23.0.1)(less@4.2.0)(terser@5.26.0))
       '@storybook/vue':
         specifier: ^7.6.17
-        version: 7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0(esbuild@0.18.20)))(vue@2.6.12)
+        version: 7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)
       '@testing-library/vue':
         specifier: '5'
         version: 5.9.0(vue-template-compiler@2.6.12)(vue@2.6.12)
@@ -13471,6 +13471,23 @@ snapshots:
       - encoding
       - supports-color
 
+  '@storybook/vue@7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)':
+    dependencies:
+      '@babel/core': 7.23.6
+      '@storybook/client-logger': 7.6.17
+      '@storybook/core-client': 7.6.17
+      '@storybook/docs-tools': 7.6.17
+      '@storybook/global': 5.0.0
+      '@storybook/preview-api': 7.6.17
+      '@storybook/types': 7.6.17
+      css-loader: 6.9.0(webpack@5.89.0)
+      ts-dedent: 2.2.0
+      type-fest: 2.19.0
+      vue: 2.6.12
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
   '@swc/core-darwin-arm64@1.6.1':
     optional: true
 
@@ -15594,6 +15611,18 @@ snapshots:
       postcss-value-parser: 4.2.0
       semver: 7.6.0
       webpack: 5.89.0(esbuild@0.18.20)
+
+  css-loader@6.9.0(webpack@5.89.0):
+    dependencies:
+      icss-utils: 5.1.0(postcss@8.4.35)
+      postcss: 8.4.35
+      postcss-modules-extract-imports: 3.0.0(postcss@8.4.35)
+      postcss-modules-local-by-default: 4.0.3(postcss@8.4.35)
+      postcss-modules-scope: 3.1.0(postcss@8.4.35)
+      postcss-modules-values: 4.0.0(postcss@8.4.35)
+      postcss-value-parser: 4.2.0
+      semver: 7.6.0
+      webpack: 5.89.0
 
   css-select@5.1.0:
     dependencies:
@@ -20192,6 +20221,15 @@ snapshots:
     optionalDependencies:
       esbuild: 0.18.20
 
+  terser-webpack-plugin@5.3.10(webpack@5.89.0):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.20
+      jest-worker: 27.5.1
+      schema-utils: 3.3.0
+      serialize-javascript: 6.0.2
+      terser: 5.26.0
+      webpack: 5.89.0
+
   terser@5.26.0:
     dependencies:
       '@jridgewell/source-map': 0.3.5
@@ -20828,6 +20866,37 @@ snapshots:
   webpack-sources@3.2.3: {}
 
   webpack-virtual-modules@0.6.1: {}
+
+  webpack@5.89.0:
+    dependencies:
+      '@types/eslint-scope': 3.7.7
+      '@types/estree': 1.0.5
+      '@webassemblyjs/ast': 1.11.6
+      '@webassemblyjs/wasm-edit': 1.11.6
+      '@webassemblyjs/wasm-parser': 1.11.6
+      acorn: 8.11.2
+      acorn-import-assertions: 1.9.0(acorn@8.11.2)
+      browserslist: 4.22.2
+      chrome-trace-event: 1.0.3
+      enhanced-resolve: 5.15.0
+      es-module-lexer: 1.4.1
+      eslint-scope: 5.1.1
+      events: 3.3.0
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+      json-parse-even-better-errors: 2.3.1
+      loader-runner: 4.3.0
+      mime-types: 2.1.35
+      neo-async: 2.6.2
+      schema-utils: 3.3.0
+      tapable: 2.2.1
+      terser-webpack-plugin: 5.3.10(webpack@5.89.0)
+      watchpack: 2.4.0
+      webpack-sources: 3.2.3
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
 
   webpack@5.89.0(esbuild@0.18.20):
     dependencies:
