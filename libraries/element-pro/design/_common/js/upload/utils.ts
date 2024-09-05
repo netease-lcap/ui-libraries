@@ -105,20 +105,20 @@ export function abridgeName(
   rightCount = 7
 ): string {
   const name = inputName;
-  let leftLength = 0;
-  let rightLength = 0;
+  let leftLength = leftCount;
+  let rightLength = rightCount;
   if (!name) return '';
-  for (let i = 0; i < name.length; i++) {
-    const w = name[i];
-    const isCn = escape(w).indexOf('%u') === 0;
-    if (i < leftCount * 2 && leftLength < leftCount) {
-      // eslint-disable-next-line no-unused-expressions
-      isCn ? (leftLength += 1) : (leftLength += 2);
-    } else if (i > i - rightCount && rightLength < rightCount) {
-      // eslint-disable-next-line no-unused-expressions
-      isCn ? (rightLength += 1) : (rightLength += 2);
-    }
-  }
+  // for (let i = 0; i < name.length; i++) {
+  //   const w = name[i];
+  //   const isCn = escape(w).indexOf('%u') === 0;
+  //   if (i < leftCount * 2 && leftLength < leftCount) {
+  //     // eslint-disable-next-line no-unused-expressions
+  //     isCn ? (leftLength += 1) : (leftLength += 2);
+  //   } else if (i > i - rightCount && rightLength < rightCount) {
+  //     // eslint-disable-next-line no-unused-expressions
+  //     isCn ? (rightLength += 1) : (rightLength += 2);
+  //   }
+  // }
   return name.replace(
     new RegExp(`^(.{${leftLength}})(.+)(.{${rightLength}})$`),
     '$1…$3'
