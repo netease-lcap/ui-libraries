@@ -23,6 +23,9 @@ export default {
   disableDate: {
     type: [Object, Array, Function] as PropType<ElDateRangePickerProps['disableDate']>,
   },
+  disableTime: {
+    type: Function as PropType<ElDateRangePickerProps['disableTime']>,
+  },
   /** 是否禁用组件 */
   disabled: Boolean,
   /** 只读 */

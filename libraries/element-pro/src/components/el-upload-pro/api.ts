@@ -268,18 +268,18 @@ namespace nasl.ui {
     })
     viaOriginURL: nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: '启用压缩',
-      description:
-        '启用压缩后上传的文件按压缩规则进行压缩后上传，压缩规则可在自定义配置参数管理',
-      docDescription:
-        '启用压缩后上传的文件按压缩规则进行压缩后上传，压缩规则可在自定义配置参数管理',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    lcapIsCompress: nasl.core.Boolean;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '启用压缩',
+    //   description:
+    //     '启用压缩后上传的文件按压缩规则进行压缩后上传，压缩规则可在自定义配置参数管理',
+    //   docDescription:
+    //     '启用压缩后上传的文件按压缩规则进行压缩后上传，压缩规则可在自定义配置参数管理',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // lcapIsCompress: nasl.core.Boolean;
 
     @Prop<ElUploadProOptions, 'theme'>({
       group: '主要属性',
