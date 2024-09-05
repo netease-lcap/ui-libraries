@@ -76,9 +76,9 @@ function useUploadRequestInfo(props: MapGet, ctx: SetupContext) {
 
     if (ttlValue !== null && ttlValue !== undefined) {
       if (ttl !== null && ttl !== undefined) {
-        headers['lcap-ttl'] = ttl ? ttlValue : -1;
+        lcapUploadHeaders['lcap-ttl'] = ttl ? ttlValue : -1;
       } else {
-        headers['lcap-ttl'] = ttlValue;
+        lcapUploadHeaders['lcap-ttl'] = ttlValue;
       }
     }
 
