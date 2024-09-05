@@ -35,6 +35,7 @@
     "@joskii/jflow-vue2-plugin": "^0.1.1",
     "@lcap/validator": "workspace:*",
     "@lcap/vue2-utils": "workspace:*",
+    "@nasl/ast-mini": "3.9.0-beta",
     "element-ui": "^2.15.14",
     "lodash": "^4.17.21",
     "online-svg-icon-vue2": "^1.2.3",

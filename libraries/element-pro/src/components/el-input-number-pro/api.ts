@@ -170,10 +170,10 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'default' },
-          { title: 'success' },
-          { title: 'warning' },
-          { title: 'error' },
+          { title: '默认' },
+          { title: '成功' },
+          { title: '警告' },
+          { title: '错误' },
         ],
       },
     })
@@ -201,11 +201,15 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '风格',
-      description: '按钮布局。可选项：column/row/normal',
+      title: '按钮风格',
+      description: '按钮布局风格。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'column' }, { title: 'row' }, { title: 'normal' }],
+        options: [
+          { title: '上下箭头' },
+          { title: '加减按钮' },
+          { title: '无' }
+        ],
       },
     })
     theme: 'column' | 'row' | 'normal' = 'row';
@@ -234,14 +238,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     autofocus: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '样式属性',
-      title: '无边框',
-      description: '是否开启无边框模式',
-      setter: { concept: 'SwitchSetter' },
-    })
-    borderless: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
