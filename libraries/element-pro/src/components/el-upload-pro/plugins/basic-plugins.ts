@@ -1,5 +1,6 @@
 /* eslint-disable prefer-destructuring */
 import {
+  ElUploadProps,
   FormatResponseContext,
   ResponseType,
   SizeLimitObj,
@@ -9,7 +10,7 @@ import {
 } from '@element-pro';
 import { $deletePropList, NaslComponentPluginOptions, useSyncState } from '@lcap/vue2-utils';
 import { MapGet } from '@lcap/vue2-utils/plugins/types.js';
-import { SetupContext, shallowRef, watch } from '@vue/composition-api';
+import { computed, ref, SetupContext, shallowRef, watch } from '@vue/composition-api';
 import { at, isObject, isPlainObject } from 'lodash';
 
 type Converter = 'json' | 'simple';
@@ -225,6 +226,34 @@ function useValue2FileList(props: MapGet) {
   };
 }
 
+function checkAccept(file: UploadFile, accept: string) {
+  if (!accept) {
+    return true;
+  }
+
+  const extension = (file.name.indexOf('.') > -1 ? `.${file.name.split('.').pop()}` : '').toLowerCase();
+  const type = file.type.toLowerCase();
+  const baseType = type.replace(/\/.*$/, '').toLowerCase();
+  const enable = accept.split(',')
+    .map((t) => t.trim())
+    .filter((t) => !!t)
+    .some((acceptedType) => {
+      acceptedType = acceptedType.toLowerCase();
+      if (/^\..+$/.test(acceptedType)) {
+        return extension.toLowerCase() === acceptedType;
+      }
+      if (/\/\*$/.test(acceptedType)) {
+        return baseType === acceptedType.replace(/\/\*$/, '');
+      }
+      if (/^[^/]+\/[^/]+$/.test(acceptedType)) {
+        return type === acceptedType;
+      }
+      return false;
+    });
+
+  return enable;
+}
+
 /* 组件功能扩展插件 */
 export const useExtendsPlugin: NaslComponentPluginOptions = {
   props: ['converter', 'urlField'],
@@ -233,6 +262,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     const sizeLimit = useComputed<SizeLimitObj | undefined>('sizeLimitStr', getSizeLimit);
     const uploadRequestInfo = useUploadRequestInfo(props, ctx);
     const { fileList, changeFileList } = useValue2FileList(props);
+    const errorMessage = ref('');
 
     const locale = props.useComputed(['theme', 'cancelUploadText', 'triggerUploadText'], (theme, cancelUploadText: string, triggerUploadText: string) => {
       const uploadText = triggerUploadText || '选择文件';
@@ -251,6 +281,15 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       };
     });
 
+    const beforeUpload: ElUploadProps['beforeUpload'] = (file: UploadFile) => {
+      const accept = props.get<string>('accept');
+      const enable = checkAccept(file, accept);
+      if (!enable) {
+        errorMessage.value = `文件类型不匹配，请上传${accept}的文件类型`;
+      }
+      return enable;
+    };
+
     useSyncState({
       fileList: () => fileList.value,
     });
@@ -260,7 +299,11 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       ...uploadRequestInfo,
       files: fileList,
       locale,
+      beforeUpload,
+      tips: errorMessage,
+      status: computed(() => (errorMessage.value ? 'error' : 'default')),
       onChange: (list, context: UploadChangeContext) => {
+        errorMessage.value = '';
         const onChange = props.get<UploadProps['onChange']>('onChange') || (() => {});
         changeFileList(list);
         onChange(list, context);
