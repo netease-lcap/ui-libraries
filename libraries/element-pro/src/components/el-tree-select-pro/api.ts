@@ -25,7 +25,6 @@ namespace nasl.ui {
     V,
     M extends nasl.core.Boolean,
   > extends ViewComponentOptions {
-
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -229,7 +228,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '多选数量',
       description: '用于控制多选数量，值为 0 则不限制',
-      setter: { concept: 'NumberInputSetter' },
+      setter: { concept: 'NumberInputSetter', min: 0 },
     })
     max: nasl.core.Decimal;
 
@@ -238,7 +237,7 @@ namespace nasl.ui {
       title: '最小折叠数量',
       description:
         '最小折叠数量，用于多选情况下折叠选中项，超出该数值的选中项折叠。值为 0 则表示不折叠',
-      setter: { concept: 'NumberInputSetter' },
+      setter: { concept: 'NumberInputSetter', min: 0 },
     })
     minCollapsedNum: nasl.core.Decimal;
 
@@ -418,14 +417,14 @@ namespace nasl.ui {
     // onBlur: (event: any) => any;
 
     @Event({
-      title: 'On Change',
+      title: '值改变',
       description:
         '节点选中状态变化时触发，`context.node` 表示当前变化的选项，`context. trigger` 表示触发变化的来源。泛型 `TreeValueType` 继承自 `TreeSelectValue` 。',
     })
     onChange: (event: any) => any;
 
     @Event({
-      title: 'On Clear',
+      title: '清除时',
       description: '点击清除按钮时触发',
     })
     onClear: (event: any) => any;

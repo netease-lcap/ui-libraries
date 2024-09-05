@@ -92,19 +92,39 @@ export const Default = {
     template: `<el-table-pro
     row-key="index"
    :dataSource="data"
-   cellEmptyContent="=="
    :selectedRowKeys.sync="selectedRowKeys"
    @sort-change="onSortChange"
+   maxHeight="" tableContentWidth=""
     >
 
-    <el-table-column-pro title="申请人" :sorter="true"     :width="300">
+    <el-table-column-pro title="申请人" :sorter="true"     :width="500">
     <template #cell="cell">
       <div>{{selectedRowKeys}}</div>
     </template>
     </el-table-column-pro>
 
     
-    <el-table-column-pro title="渠道" colKey="channel" :sorter="true" fixed= 'left'>
+    <el-table-column-pro title="渠道" colKey="channel"  :width="500" :sorter="true" fixed= 'left'>
+    <template #cell="cell">
+      <div>{{ cell.item.channel }}</div>
+    </template>
+    </el-table-column-pro>
+        <el-table-column-pro title="渠道" colKey="channel"  :width="500" :sorter="true" fixed= 'left' >
+    <template #cell="cell">
+      <div>{{ cell.item.channel }}</div>
+    </template>
+    </el-table-column-pro>
+
+        <el-table-column-pro title="渠道" colKey="channel"  :width="500" :sorter="true" fixed= 'left' >
+    <template #cell="cell">
+      <div>{{ cell.item.channel }}</div>
+    </template>
+    </el-table-column-pro>
+
+        <el-table-column-pro title="渠道" colKey="channel" :sorter="true" >
+    <template #cell="cell">
+      <div>{{ cell.item.channel }}</div>
+    </template>
     </el-table-column-pro>
    
     <el-table-column-pro title="渠道" colKey="time1" width="300">

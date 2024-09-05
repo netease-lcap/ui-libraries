@@ -105,7 +105,7 @@ export const useTable = {
         _.attempt(onLoadData, {
           page: current.value,
           size: pageSize.value,
-          sort: _.get(arg, '0.sortBy'),
+          sorter: _.get(arg, '0.sortBy'),
           order: _.get(arg, '0.descending') ? 'desc' : 'asc',
         });
         _.attempt(value, ...arg);
