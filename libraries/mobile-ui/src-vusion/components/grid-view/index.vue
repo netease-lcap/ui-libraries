@@ -68,7 +68,7 @@
               paddingTop: virtualTop + 'px',
               paddingBottom: virtualBottom + 'px',
             }"
-            :class="$style.bodychild"
+            :class="[iffall ? $style.waterfallbodychild : $style.bodychild]"
           >
             <component
               :is="ChildComponent"
@@ -574,7 +574,8 @@ export default {
             curCol * this.colW
           }px, ${curTop}px ,0)`;
         }
-        this.maxH = maxH;
+        // 需要展示出状态
+        this.maxH = maxH + 30;
         this.styleArr[i].bottomTop = curBT;
         this.styleArr[i].col = curCol;
         this.styleArr[i].showClass = 'show';
@@ -761,6 +762,7 @@ export default {
   color: #999999;
   text-align: center;
   padding: 5px 12px;
+  height: 30PX; /* px-to-viewport-ignore */
 }
 
 .root[disabled] {
@@ -788,6 +790,11 @@ export default {
 .bodychild {
   width: 100%;
   height: 100%;
+}
+
+.waterfallbodychild {
+  width: 100%;
+  height: calc(100% - 30PX);
 }
 
 .item {
