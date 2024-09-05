@@ -33,6 +33,6 @@ export default {
         'vusion-slot-name-edit': 'text',
       },
       on: this.$listeners,
-    }, this.$scopedSlots.default ? this.$scopedSlots.default() : null);
+    }, this.$slots.default);
   },
 };
