@@ -16,9 +16,15 @@ export default {
 export const Example1 = {
   name: '基础用法',
   render: () => ({
+    methods: {
+      handleClick() {
+        console.log('click');
+      },
+    },
     template: `<div>
 <el-popconfirm
   title="这是一段内容确定删除吗？"
+  @confirm="handleClick"
 >
   <el-button slot="reference">删除</el-button>
 </el-popconfirm>

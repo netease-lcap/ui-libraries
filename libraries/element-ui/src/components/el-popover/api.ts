@@ -56,6 +56,16 @@ namespace nasl.ui {
     })
     trigger: 'click' | 'focus' | 'hover' | 'manual' = 'click';
 
+    @Prop<ElPopoverOptions, 'value'>({
+      group: '主要属性',
+      sync: true,
+      title: '状态是否可见',
+      description: '状态是否可见',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => _.trigger === 'manual',
+    })
+    value: nasl.core.Boolean = false;
+
     @Prop({
       group: '主要属性',
       title: '标题',
@@ -123,15 +133,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     disabled: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      sync: true,
-      title: '状态是否可见',
-      description: '状态是否可见',
-      setter: { concept: 'SwitchSetter' },
-    })
-    value: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
