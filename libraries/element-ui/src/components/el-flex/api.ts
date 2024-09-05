@@ -12,7 +12,6 @@ namespace nasl.ui {
             direction: "vertical",
             justify: "start",
             alignment: "start",
-            wrap: "nowrap"
           }
         },
         {
@@ -22,7 +21,6 @@ namespace nasl.ui {
             direction: "horizontal",
             justify: "start",
             alignment: "start",
-            wrap: "nowrap"
           }
         }
       ]
