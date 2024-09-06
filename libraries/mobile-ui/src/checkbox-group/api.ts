@@ -166,9 +166,9 @@ namespace nasl.ui {
       value: nasl.collection.List<V>;
     }) => void;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '插入`<van-checkbox>`子组件。',
-      emptyBackground: 'add-sub',
+      // emptyBackground: 'add-sub',
       snippets: [{
         title: '多选项',
         code: '<van-checkbox shape="square"><van-text text="节点"></van-text></van-checkbox>'
@@ -176,7 +176,7 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<VanCheckbox<V>>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义选项的结构和样式'
     })
     slotItem: (current: Current<T>) => Array<ViewComponent>;

@@ -171,17 +171,17 @@ namespace nasl.ui {
       which: nasl.core.Integer;
   }) => void;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '插入文本或 HTML。'
     })
     slotDefault: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '插入文本或 HTML。'
     })
     slotTitle: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '右侧图标。'
     })
     private slotRightIcon: () => Array<ViewComponent>;

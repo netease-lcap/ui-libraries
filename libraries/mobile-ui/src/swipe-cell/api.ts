@@ -55,17 +55,17 @@ namespace nasl.ui {
     })
     onClick: (event: nasl.core.String) => void;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '插入文本或 HTML。'
     })
     slotDefault: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '右侧。'
     })
     slotRight: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '左侧。'
     })
     slotLeft: () => Array<ViewComponent>;

@@ -195,14 +195,26 @@ namespace nasl.ui {
       value: V;
     }) => void;
     @Slot({
-      title: 'option'
+      title: '组件插槽'
     })
     slotOption: (current: Current<T>) => Array<ViewComponent>;
 
     @Slot({
-      title: '',
+      title: '组件插槽',
       description: '',
     })
     slotTitle: () => Array<ViewComponent>;
+    @Slot({
+      title: '组件插槽',
+      description: '自定义选择器顶部内容',
+    })
+    'slot-picker-top': () => Array<ViewComponent>;
+    slotPickerTop: () => Array<ViewComponent>;
+    @Slot({
+      title: '组件插槽',
+      description: '自定义选择器底部内容',
+    })
+    'slot-picker-bottom': () => Array<ViewComponent>;
+    slotPickerBottom: () => Array<ViewComponent>;
   }
 }

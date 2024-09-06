@@ -149,7 +149,7 @@ namespace nasl.ui {
     })
     onClick: (event: nasl.core.Integer) => void;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '内容'
     })
     slotTitle: () => Array<ViewComponent>;

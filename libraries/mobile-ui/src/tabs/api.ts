@@ -193,8 +193,8 @@ namespace nasl.ui {
     slotDefault: () => Array<ViewComponent>;
 
     @Slot({
-      title: '',
-      description: ''
+      title: '组件插槽',
+      description: '组件插槽'
     })
     slotTitle: () => Array<ViewComponent>;
   }

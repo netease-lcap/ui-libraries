@@ -114,8 +114,8 @@ namespace nasl.ui {
     onClose: (event: nasl.ui.BaseEvent) => void;
 
     @Slot({
-      title: '',
-      description: ''
+      title: '组件插槽',
+      description: '标题'
     })
     slotTitle: () => Array<ViewComponent>;
 

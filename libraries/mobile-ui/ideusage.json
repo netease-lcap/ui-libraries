@@ -1,0 +1,821 @@
+[
+    {
+        "name": "VanLinearLayout",
+        "ideusage": {
+            "idetype": "container",
+            "containerDirection": "column",
+            "expandWhenHesitate": true,
+            "automate": [
+                {
+                    "command": "WRAP_LINEAR_VERTICAL",
+                    "useblock": 0,
+                    "attribute": {
+                        "mode": "flex",
+                        "direction": "vertical",
+                        "justify": "start",
+                        "alignment": "start",
+                        "wrap": "false"
+                    }
+                },
+                {
+                    "command": "WRAP_LINEAR_HORIZONTAL",
+                    "useblock": 0,
+                    "attribute": {
+                        "mode": "flex",
+                        "direction": "horizontal",
+                        "justify": "start",
+                        "alignment": "start",
+                        "wrap": "false"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "name": "VanAbsoluteLayout",
+        "ideusage": {
+            "idetype": "board",
+            "automate": [
+                {
+                    "command": "WRAP_FREE",
+                    "useblock": 0
+                }
+            ]
+        }
+    },
+    {
+        "name": "VanRow",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "containerDirection": "row",
+            "childAccept": "target.tag === 'van-col'"
+        }
+    },
+    {
+        "name": "VanCol",
+        "ideusage": {
+            "idetype": "container",
+            "containerDirection": "column",
+            "parentAccept": "target.tag.endsWith('van-row')",
+            "slotInlineStyle": {
+                "default": "min-width: unset"
+            }
+        }
+    },
+    {
+        "name": "VanRouterView",
+        "ideusage": {
+            "idetype": "router"
+        }
+    },
+    {
+        "name": "VanSidebar",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['van-sidebar-item'].includes(target.tag)",
+            "translateBindingProperty": ["value"],
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanSidebarItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag.endsWith('van-sidebar')",
+            "translateBindingProperty": ["badge", "badgemax", "value"],
+            "slotInlineStyle": {
+                "title": "width: 90px"
+            }
+        }
+    },
+    {
+        "name": "VanDropdownMenu",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['van-dropdown-item', 'van-dropdown-item-son'].includes(target.tag)",
+            "translateBindingProperty": ["direction"],
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanDropdownItem",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "parentAccept": "target.tag.endsWith('van-dropdown-menu')",
+            "childAccept": "['van-dropdown-item-son'].includes(target.tag)",
+            "translateBindingProperty": ["value", "title"],
+            "useFxOrEg":{"property": "title"},
+            "selector": {
+                "expression": "this",
+                "cssSelector": "div[class*='van-dropdown-item__content']"
+            }
+        }
+    },
+    {
+        "name": "VanDropdownItemSon",
+        "ideusage": {
+            "idetype": "container",
+            "useFxOrEg":{"property": "title"},
+            "parentAccept": "target.tag.endsWith('van-dropdown-item')",
+            "translateBindingProperty": ["value", "title", "arrowDirection", "isLink", "icon"],
+            "displaySlotConditions": {
+                "default": false,
+                "title": false,
+                "rightIcon": false
+            },
+            "disableSlotAutoFill": [{
+                "slot": "title",
+                "expression": true
+            }],
+            "editable": {
+                "property": "title",
+                "cssSelector": "> .van-cell__title"
+            }
+        }
+    },
+    {
+        "name": "VanTabbar",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['van-tabbar-item'].includes(target.tag)",
+            "translateBindingProperty": ["value", "route"]
+        }
+    },
+    {
+        "name": "VanTabbarItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag.endsWith('van-tabbar')",
+            "events": {
+                "click": true
+            },
+            "translateBindingProperty": ["badge", "badgemax", "icon", "name"]
+        }
+    },
+    {
+        "name": "VanCollapse",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'van-collapse-item'",
+            "translateBindingProperty": ["value"]
+        }
+    },
+    {
+        "name": "VanCollapseItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag.endsWith('van-collapse')",
+            "translateBindingProperty": ["name"],
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanCardu",
+        "ideusage": {
+            "idetype": "container",
+            "disableSlotAutoFill": ["cover", "head"]
+        }
+    },
+    {
+        "name": "VanSwipeCell",
+        "ideusage": {
+            "idetype": "container",
+            "translateBindingProperty": ["leftWidth", "rightWidth"],
+            "useSwipe": {
+                "prop": "swipeState",
+                "left": "`left`",
+                "right": "`right`",
+                "init": "``"
+            },
+            "namedSlotOmitWrapper": ["left", "right"]
+        }
+    },
+    {
+        "name": "VanDivider",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "VanCellGroup",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'van-cell'"
+        }
+    },
+    {
+        "name": "VanCell",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag.endsWith('van-cell-group')",
+            "translateBindingProperty": ["arrowDirection", "icon", "center", "isLink", "value"],
+            "events": {
+                "click": true
+            },
+            "displaySlotConditions": {
+                "rightIcon": false
+            }
+        }
+    },
+    {
+        "name": "VanButton",
+        "ideusage": {
+            "idetype": "element",
+            "useFxOrEg": {
+                "property": "text"
+            },
+            "translateBindingProperty": ["icon", "text"],
+            "style": [
+                {
+                    "selector": ".van-loading__spinner",
+                    "declaration": "animation-duration: 2s!important"
+                },
+                {
+                    "selector": ".van-loading__spinner *",
+                    "declaration": "animation-duration: 2s!important"
+                }
+            ]
+        }
+    },
+    {
+        "name": "VanImage",
+        "ideusage": {
+            "idetype": "element",
+            "useFxOrEg":{"property": "src"},
+            "translateBindingProperty": ["src", "sr"]
+        }
+    },
+    {
+        "name": "VanSwipe",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'van-swipe-item'",
+            "events": {
+                "click": true
+            },
+            "translateBindingProperty": ["duration"],
+            "additionalAttribute": {
+                ":dataSource": {
+                    "condition": "this.getAttribute('dataSource')",
+                    "value": "\"[{}, {}, {}]\""
+                }
+            },
+            "slotInlineStyle": {
+                "item": "height: 100%"
+            }
+        }
+    },
+    {
+        "name": "VanSwipeItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag.endsWith('van-swipe')",
+            "slotInlineStyle": {
+                "default": "height: 100%"
+            },
+            "operator": {
+                "delete": "this.getParent().getAttribute('dataSource')"
+            }
+        }
+    },
+    {
+        "name": "VanText",
+        "ideusage": {
+            "idetype": "element",
+            "editable": "text",
+            "useFxOrEg":{"property": "text"},
+            "translateBindingProperty": ["text"]
+        }
+    },
+    {
+        "name": "VanLink",
+        "ideusage": {
+            "idetype": "element",
+            "editable": "text",
+            "textholder": "text",
+            "useFxOrEg": {
+                "property": "text"
+            }
+        }
+    },
+    {
+        "name": "VanBadge",
+        "ideusage": {
+            "idetype": "container",
+            "translateBindingProperty": ["content", "max"]
+        }
+    },
+    {
+        "name": "VanNoticeBar",
+        "ideusage": {
+            "idetype": "container",
+            "style": [
+                {
+                    "selector": ".van-notice-bar__content",
+                    "declaration": "transition-timing-function: linear !important"
+                }
+            ]
+        }
+    },
+    {
+        "name": "VanSteps",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept":"target.tag === 'van-step'",
+            "dataSource": {
+                "dismiss": "this.getDefaultElements().length > 0 && !this.getAttribute('dataSource')",
+                "display": 3,
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            },
+            "namedSlotOmitWrapper": ["item"],
+            "translateBindingProperty": ["value"]
+        }
+    },
+    {
+        "name": "VanStep",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept":"target.tag.endsWith('van-steps')",
+            "events": {
+                "click": true
+            },
+            "translateBindingProperty": ["icon"]
+        }
+    },
+    {
+        "name": "VanIconv",
+        "ideusage": {
+            "idetype": "container",
+            "iconEditor": true
+        }
+    },
+    {
+        "name": "VanTag",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "VanCircle",
+        "ideusage": {
+            "idetype": "container",
+            "translateBindingProperty": ["value", "size", "color", "layerColor", "fill", "strokeWidth"]
+        }
+    },
+    {
+        "name": "VanProgress",
+        "ideusage": {
+            "idetype": "container",
+            "useFxOrEg":{"property": "pivotText"},
+            "translateBindingProperty": ["value", "showPivot", "custom", "inactive", "color", "trackColor", "textColor", "pivotColor", "strokeWidth", "pivotText"]
+        }
+    },
+    {
+        "name": "VanGallery",
+        "ideusage": {
+            "idetype": "element",
+            "additionalAttribute": {
+                ":dataSource": {
+                    "condition": "this.getAttribute('dataSource')",
+                    "value": "\"[{}, {}, {}]\""
+                }
+            }
+        }
+    },
+    {
+        "name": "VanRate",
+        "ideusage": {
+            "idetype": "element",
+            "translateBindingProperty": ["value", "size", "gutter", "count", "voidIcon", "icon", "allowHalf", "readonly", "disabled", "color", "voidColor", "disabledColor"]
+        }
+    },
+    {
+        "name": "VanSlider",
+        "ideusage": {
+            "idetype": "container",
+            "childAccept": false,
+            "translateBindingProperty": ["custom", "value", "max", "min", "range", "disabled", "vertical", "step", "barHeight", "buttonSize", "activeColor", "inactiveColor"]
+        }
+    },
+    {
+        "name": "VanListView",
+        "ideusage": {
+            "idetype": "container",
+            "dataSource": {
+                "display": 3,
+                "loopElem": "div[vusion-slot-name^='item']",
+                "loopRule": "nth-child(n+2)",
+                "emptySlot": {
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            },
+            "displaySlotConditions": {
+                "empty": false
+            }
+        }
+    },
+    {
+        "name": "VanGridView",
+        "ideusage": {
+            "idetype": "container",
+            "dataSource": {
+                "display": 8,
+                "emptySlot": {
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            }
+        }
+    },
+    {
+        "name": "VanForComponents",
+        "ideusage": {
+            "idetype": "container",
+            "dataSource": {
+                "dismiss":"!this.getAttribute('dataSource')",
+                "display": 3,
+                "loopElem": "> .van-for-components__frag > .van-for-components-item"
+
+            }
+        }
+    },
+    {
+        "name": "VanTabs",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept":"target.tag === 'van-tab'",
+            "translateBindingProperty": ["value", "type", "scrollspystr"],
+            "dataSource": {
+                "display": 3,
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getDefaultElements().length",
+                    "accept": false
+                }
+            }
+        }
+    },
+    {
+        "name": "VanTab",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept":"target.tag.endsWith('van-tabs')",
+            "translateBindingProperty": ["name"],
+            "events": {
+                "click": true
+            },
+            "disableSlotAutoFill": ["title"]
+        }
+    },
+    {
+        "name": "VanPickerson",
+        "ideusage": {
+            "idetype": "drawerdropdown",
+            "cacheOpenKey": "popupOpened",
+            "drawerCSSSelector": ".van-popup",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource')",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> label[class^='u-radios_radio']:not([data-nodepath])"
+            },
+            "scopedSlots": ["title", "picker-top", "pannel-title", "picker-bottom"],
+            "displaySlotConditions": {
+                "option": false
+            },
+            "translateBindingProperty": ["title", "cancelButtonText", "confirmButtonText", "placeholder", "value"],
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
+            "namedSlotOmitWrapper": ["picker-top", "picker-bottom", "option"]
+        }
+    },
+    {
+        "name": "VanPickerActionSlot",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "['van-pickerson', 'van-area', 'van-datetime-picker', 'van-calendar'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "VanArea",
+        "ideusage": {
+            "idetype": "drawerdropdown",
+            "cacheOpenKey": "popupOpened",
+            "drawerCSSSelector": ".van-popup",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource')",
+                "display": 3,
+                "loopRule": "nth-child(n+2)"
+            },
+            "scopedSlots": ["title", "picker-top", "pannel-title", "picker-bottom"],
+            "namedSlotOmitWrapper": ["picker-top", "picker-bottom"],
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
+            "translateBindingProperty": ["value", "title", "confirmButtonText", "cancelButtonText", "placeholder"]
+        }
+    },
+    {
+        "name": "VanCascader",
+        "ideusage": {
+            "idetype": "drawerdropdown",
+            "cacheOpenKey": "popupOpened",
+            "drawerCSSSelector": ".van-popup",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource')",
+                "display": 3,
+                "loopRule": "nth-child(n+2)"
+            },
+            "scopedSlots": ["title", "picker-top", "picker-bottom"],
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
+            "translateBindingProperty": ["title", "value", "placeholder", "tabPlaceholder"],
+            "namedSlotOmitWrapper": ["option"]
+        }
+    },
+    {
+        "name": "VanDatetimePicker",
+        "ideusage": {
+            "idetype": "drawerdropdown",
+            "cacheOpenKey": "popupOpened",
+            "drawerCSSSelector": ".van-popup",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource')",
+                "display": 3,
+                "loopRule": "nth-child(n+2)"
+            },
+            "scopedSlots": ["title", "picker-top", "pannel-title", "picker-bottom"],
+            "namedSlotOmitWrapper": ["picker-top", "picker-bottom"],
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
+            "translateBindingProperty": ["startValue", "endValue", "minDate", "maxDate", "title", "placeholder"]
+        }
+    },
+    {
+        "name": "VanCalendar",
+        "ideusage": {
+            "idetype": "drawerdropdown",
+            "cacheOpenKey": "popupOpened",
+            "drawerCSSSelector": ".van-popup",
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource')",
+                "display": 3,
+                "loopRule": "nth-child(n+2)"
+            },
+            "scopedSlots": ["title", "picker-top", "pannel-title", "picker-bottom"],
+            "namedSlotOmitWrapper": ["picker-top", "picker-bottom"],
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
+            "translateBindingProperty": ["value", "minDate", "maxDate", "title", "placeholder"]
+        }
+    },
+    {
+        "name": "VanPopupCombination",
+        "ideusage": {
+            "idetype": "container",
+            "events": {
+                "click": true
+            },
+            "translateBindingProperty": ["title"],
+            "selector": [
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'reference')",
+                    "cssSelector": "span[class^='index']"
+                },
+                {
+                    "expression": "this",
+                    "cssSelector": "div[class^='u-popup']"
+                }
+            ]
+        }
+    },
+    {
+        "name": "VanDialog",
+        "ideusage": {
+            "idetype": "modal",
+            "cacheOpenKey": "value",
+            "selector": {
+                "expression": "this",
+                "cssSelector": "div[class^='van-dialog__content']"
+            },
+            "namedSlotOmitWrapper": ["footer"]
+        }
+    },
+    {
+        "name": "VanPopup",
+        "ideusage": {
+            "idetype": "drawer",
+            "cacheOpenKey": "value",
+            "selector": {
+                "expression": "this",
+                "cssSelector": "div[class^='van-popup']"
+            },
+            "slotInlineStyle": {
+                "default": "height: 100%"
+            }
+        }
+    },
+    {
+        "name": "VanToast",
+        "ideusage": {
+            "idetype": "messager",
+            "cacheOpenKey": "value",
+            "elementSutando": {
+                "condition": true,
+                "component": "VueToastDesigner",
+                "selector": {
+                    "slot": "inject",
+                    "cssSelector": ".van-toast-designer"
+                }
+            },
+            "useFxOrEg":{"property": "message"},
+            "translateBindingProperty": ["message", "duration"],
+            "style": [
+                {
+                    "selector": ".van-loading__spinner",
+                    "declaration": "animation-duration: 2s!important"
+                },
+                {
+                    "selector": ".van-loading__spinner *",
+                    "declaration": "animation-duration: 2s!important"
+                }
+            ]
+        }
+    },
+    {
+        "name": "VanCopy",
+        "ideusage": {
+            "idetype": "container"
+        }
+    },
+    {
+        "name": "VanForm",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['van-field'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "VanField",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag.endsWith('van-form')",
+            "namedSlotOmitWrapper": ["input"],
+            "selector": {
+                "expression": "this.getElement(el => el.slotTarget === 'input')",
+                "cssSelector": "div[is-sub]",
+                "placement": "tail"
+            },
+            "slotWrapperInlineStyle": {
+                "input": "width: 100%"
+            }
+        }
+    },
+    {
+        "name": "VanFieldinput",
+        "ideusage": {
+            "idetype": "element",
+            "translateBindingProperty": ["value", "placeholder", "confirmText", "keyboardTitle", "type", "inputstyle", "keytheme", "keyboardTheme"],
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
+            "events": {
+                "click": true
+            }
+        }
+    },
+    {
+        "name": "VanStepperNew",
+        "ideusage": {
+            "idetype": "element",
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
+            "translateBindingProperty": ["placeholder", "unitValue"]
+        }
+    },
+    {
+        "name": "VanFieldtextarea",
+        "ideusage": {
+            "idetype": "element",
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
+            "translateBindingProperty": ["value", "placeholder"]
+        }
+    },
+    {
+        "name": "VanSearch",
+        "ideusage": {
+            "idetype": "container",
+            "useFxOrEg":{"property": "value","displayAsAttr":true},
+            "translateBindingProperty": ["value", "placeholder"]
+        }
+    },
+    {
+        "name": "VanRadioGroup",
+        "ideusage": {
+           "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'van-radio'",
+            "translateBindingProperty": ["value"],
+            "dataSource": {
+                "dismiss": "this.getDefaultElements().length > 0 && !this.getAttribute('dataSource')",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "[class^='van-radio-group']:not([data-nodepath]",
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false,
+                    "content": "请绑定数据源或插入子节点"
+                }
+            }
+        }
+    },
+    {
+        "name": "VanRadio",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag.endsWith('van-radio-group')",
+            "translateBindingProperty": ["name"]
+        }
+    },
+    {
+        "name": "VanSwitch",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "VanCheckboxGroup",
+        "ideusage": {
+           "idetype": "container",
+            "structured": true,
+            "childAccept": "target.tag === 'van-checkbox'",
+            "translateBindingProperty": ["value"],
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "[class^='van-checkbox-group']:not([data-nodepath]",
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false,
+                    "content": "请绑定数据源或插入子节点"
+                }
+            }
+        }
+    },
+    {
+        "name": "VanCheckbox",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "target.tag.endsWith('van-checkbox-group')",
+            "translateBindingProperty": ["label"]
+        }
+    },
+    {
+        "name": "VanUploader",
+        "ideusage": {
+            "idetype": "element"
+        }
+    },
+    {
+        "name": "VanCapsules",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "childAccept": "['van-capsules-item'].includes(target.tag)",
+            "translateBindingProperty": ["value"]
+        }
+    },
+    {
+        "name": "VanCapsulesGroup",
+        "ideusage": {
+            "idetype": "container",
+            "structured": true,
+            "parentAccept": "target.tag.endsWith('van-capsules')",
+            "childAccept": "['van-capsules-item'].includes(target.tag)"
+        }
+    },
+    {
+        "name": "VanCapsulesItem",
+        "ideusage": {
+            "idetype": "container",
+            "parentAccept": "/van-capsules(-group)?$/.test(target.tag)",
+            "translateBindingProperty": ["value", "label"]
+        }
+    }
+]

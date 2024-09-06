@@ -38,17 +38,34 @@ export default createComponent({
     },
     leftforhelper: Boolean,
     rightforhelper: Boolean,
+    swipeState: {
+      type: String,
+      default: ''
+    }
   },
 
   data() {
     return {
       offset: 0,
       dragging: false,
-      position: '',
+      position: this.swipeState,
     };
   },
   components: {
     EmptyCol,
+  },
+  watch: {
+    swipeState(val) {
+      if(val === 'left') {
+        this.open('left');
+      }
+      if(val === 'right') {
+        this.open('right');
+      }
+      if(val === '') {
+        this.close();
+      }
+    }
   },
 
   computed: {},

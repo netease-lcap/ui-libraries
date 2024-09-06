@@ -244,7 +244,7 @@ export default createComponent({
 
     const contentStyle = {
       transform: this.offset ? `translateX(${this.offset}px)` : '',
-      transitionDuration: this.duration + 's',
+      transitionDuration: this.duration + 's !important',
     };
 
     function LeftIcon() {

@@ -81,6 +81,10 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
+    popupOpened: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -88,7 +92,7 @@ export default createComponent({
       code: this.value || '',
       columns: [{ values: [] }, { values: [] }, { values: [] }],
       // areaList: {},
-      valuepopup: false,
+      valuepopup: this.popupOpened,
       getTitle: '',
       oldcode: '',
     };
@@ -121,9 +125,22 @@ export default createComponent({
         county: this.columnsPlaceholder[2] || '',
       };
     },
+
+    isDesignerNew() {
+      return this.$env && this.$env.VUE_APP_DESIGNER_NEW;
+    },
   },
 
   watch: {
+    popupOpened(val) {
+      this.valuepopup = val;
+      if (val) {
+        this.$nextTick(function() {
+          this.setValues(true);
+        });
+      }
+    },
+
     value: {
       handler(val) {
         this.code = this.convertName(val);
@@ -502,7 +519,7 @@ export default createComponent({
     genColumnsTopForNew() {
       let topSlot = this.slots('picker-top');
       let titleSlot = this.slots('pannel-title');
-      if (this.inDesigner()) {
+      if (this.inDesigner() && !this.isDesignerNew) {
         if (!topSlot) {
           topSlot = <EmptyCol></EmptyCol>;
         }
@@ -534,7 +551,7 @@ export default createComponent({
 
     genColumnsBottomForNew() {
       let bottomSlot = this.slots('picker-bottom');
-      if (this.inDesigner()) {
+      if (this.inDesigner() && !this.isDesignerNew) {
         if (!bottomSlot) {
           bottomSlot = <EmptyCol></EmptyCol>;
         }
@@ -661,6 +678,7 @@ export default createComponent({
           nofi={true}
         />
         <Popup
+          vModel={this.valuepopup}
           safe-area-inset-bottom
           round
           ref="popforcas"
@@ -675,7 +693,7 @@ export default createComponent({
           }}
         >
           <div class={bem(this.isNew && 'content-wrapper')}>
-            {this.inDesigner() && (
+            {this.inDesigner() && !this.isDesignerNew && (
               <div
                 class={bem('designer-close-button')}
                 vusion-click-enabled="true"
