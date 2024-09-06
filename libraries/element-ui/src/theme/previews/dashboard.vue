@@ -194,7 +194,7 @@
           </el-flex>
         </el-flex>
       </el-card>
-      <el-card shadow="never" style="margin-top: var(--el-comp-margin-l);">
+      <el-card shadow="never" style="margin-top: var(--el-comp-margin-l); height: 410px;">
         <el-text text="使用帮助" slot="header"></el-text>
         <el-flex>
           <el-text 
