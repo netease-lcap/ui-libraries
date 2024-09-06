@@ -68,7 +68,7 @@
               paddingTop: virtualTop + 'px',
               paddingBottom: virtualBottom + 'px',
             }"
-            :class="$style.bodychild"
+            :class="[iffall ? $style.waterfallbodychild : $style.bodychild]"
           >
             <component
               :is="ChildComponent"
@@ -85,7 +85,7 @@
               vusion-slot-name="item"
               >
               <slot
-                v-if="iffall && slots('item')"
+                v-if="iffall && hasSlot('item')"
                 name="item"
                 :item="item"
                 :state="(styleArr[i] && styleArr[i].state) || 'loading'"
@@ -98,7 +98,7 @@
                 >{{ $at(item, field || textField) }}
               </slot>
               <slot
-                v-if="!iffall && slots('item')"
+                v-if="!iffall && hasSlot('item')"
                 name="item"
                 :item="item"
                 :data="item"
@@ -109,7 +109,7 @@
                 vusion-slot-name="item"
                 >{{ $at(item, field || textField) }}
               </slot>
-              <van-empty-col v-if="(!slots('item')) && $env.VUE_APP_DESIGNER"></van-empty-col>
+              <van-empty-col v-if="(!hasSlot('item')) && $env.VUE_APP_DESIGNER"></van-empty-col>
             </component>
           </div>
           <div v-if="refreshing">
@@ -574,7 +574,8 @@ export default {
             curCol * this.colW
           }px, ${curTop}px ,0)`;
         }
-        this.maxH = maxH;
+        // 需要展示出状态
+        this.maxH = maxH + 30;
         this.styleArr[i].bottomTop = curBT;
         this.styleArr[i].col = curCol;
         this.styleArr[i].showClass = 'show';
@@ -680,6 +681,9 @@ export default {
     getColDom(i) {
       return this.$refs['item' + i][0];
     },
+    hasSlot(name = 'default') {
+      return this.$scopedSlots[name] || this.$slots[name];
+    },
     slots(name = 'default', props) {
       try {
         const { $slots, $scopedSlots } = this;
@@ -761,6 +765,7 @@ export default {
   color: #999999;
   text-align: center;
   padding: 5px 12px;
+  height: 30PX; /* px-to-viewport-ignore */
 }
 
 .root[disabled] {
@@ -788,6 +793,11 @@ export default {
 .bodychild {
   width: 100%;
   height: 100%;
+}
+
+.waterfallbodychild {
+  width: 100%;
+  height: calc(100% - 30PX);
 }
 
 .item {
