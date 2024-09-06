@@ -181,7 +181,8 @@ export default {
         downloadIconSwitcher: { type: Boolean, default: true },
         fileSize: { type: Boolean, default: true },
         preview: { type: Boolean, default: false },
-        showInDesigner: { type: Boolean, default: false }
+        showInDesigner: { type: Boolean, default: false },
+        file_connection_group: { type: String, default: '' },
     },
     data() {
         return {
@@ -575,6 +576,9 @@ export default {
                     headers['lcap-ttl'] = this.ttlValue;
                 }
             }
+            if (this.file_connection_group) {
+                headers['file-connection-group'] = this.file_connection_group;
+            }
             if (window.appInfo && window.appInfo.domainName)
                 headers.DomainName = window.appInfo.domainName;
             const url = this.$formatMicroFrontUrl ? this.$formatMicroFrontUrl(this.url) : this.url;
@@ -810,6 +814,11 @@ export default {
         },
         // 展示时使用接口返回路径对应的文件名
         handleFileName(url) {
+            const newFileNameMatch = url.match(/[?&]fileName=([^&]+)/)
+            if (newFileNameMatch) {
+                return newFileNameMatch[1];
+            }
+
             const match = url.match(/\/([^/]+)$/);
             console.log('match', match);
             return match ? match[1] : null;

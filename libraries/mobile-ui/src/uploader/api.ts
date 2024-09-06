@@ -71,6 +71,15 @@ namespace nasl.ui {
       url: nasl.core.String;
       size: nasl.core.Integer;
     }> | nasl.core.String;
+
+    @Prop({
+      group: '数据属性',
+      title: '存储方式',
+      description: "",
+    })
+    file_connection_group: nasl.core.String
+    // fileConnectionGroup: nasl.core.String;
+
     @Prop({
       group: '数据属性',
       title: '字段名',
