@@ -95,7 +95,7 @@
             :ref="`item_${index}`">
             <span
               :class="[$style['tag-text'], iconField ? $style.iconwrap : '']">
-              <img :class="$style.icon" v-if="itemVM.icon" :src="itemVM.icon" />
+              <img :class="$style.icon" v-if="iconField && itemVM.icon && typeof itemVM.icon === 'string'" :src="itemVM.icon" />
               {{ itemVM.currentText }}
             </span>
             <span
@@ -114,7 +114,7 @@
               :class="[$style['tag-text'], iconField ? $style.iconwrap : '']"
               ><img
                 :class="$style.icon"
-                v-if="itemVM.icon"
+                v-if="iconField && itemVM.icon && typeof itemVM.icon === 'string'"
                 :src="itemVM.icon" />{{ itemVM.currentText }}</span
             >
             <span
