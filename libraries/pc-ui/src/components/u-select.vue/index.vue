@@ -503,6 +503,7 @@ export default {
         } else if (!this.value && !this.filterInputFocused) {
           // 响应this.value 的变化 = '' 时处理 清空
           this.filterText = '';
+          this.currentText = '';
         }
         // blur 事件会处理这个未搜索到置空的问题
         // this.filterText = ? this.selectedVM.currentText : '';
