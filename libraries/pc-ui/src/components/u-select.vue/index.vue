@@ -36,7 +36,7 @@
             <template v-if="tagsOverflow === 'hidden' || tagsOverflow === 'visible'">
                 <span :class="$style.tag" v-for="(itemVM, index) in selectedVMs" :key="duplicated ? itemVM.value + '_' + index : itemVM.value" :ref="`item_${index}`">
                     <span :class="[$style['tag-text'], iconField?$style.iconwrap:'']">
-                        <img :class="$style.icon" v-if="itemVM.icon" :src="itemVM.icon">
+                        <img :class="$style.icon" v-if="iconField && itemVM.icon && typeof itemVM.icon === 'string'" :src="itemVM.icon">
                         {{ itemVM.currentText }}
                     </span>
                     <span v-show="!isPreview" :class="$style['tag-remove']" @click.stop="removeTag(itemVM, false)"></span>
@@ -44,7 +44,7 @@
             </template>
             <template v-else-if="tagsOverflow === 'collapse'">
                 <span :class="$style.tag" v-for="(itemVM, index) in selectedVMs" :key="duplicated ? itemVM.value + '__' + index : itemVM.value" :ref="`item_${index}`">
-                    <span :class="[$style['tag-text'], iconField?$style.iconwrap:'']"><img :class="$style.icon" v-if="itemVM.icon" :src="itemVM.icon">{{ itemVM.currentText }}</span>
+                    <span :class="[$style['tag-text'], iconField?$style.iconwrap:'']"><img :class="$style.icon" v-if="iconField && itemVM.icon && typeof itemVM.icon === 'string'" :src="itemVM.icon">{{ itemVM.currentText }}</span>
                     <span v-show="!isPreview" :class="$style['tag-remove']" @click.stop="removeTag(itemVM, false)"></span>
                 </span>
                 <span :class="$style.tag" v-if="selectedVMs.length - collapseCounter >= 1 && selectedVMs.length !== 1" :style="{ 'vertical-align': 'middle', 'padding-right': '6px' }">
