@@ -256,7 +256,9 @@ export default {
                 const allNotSelected = this.tabDataSource.every((item) => !item.active);
                 if (allNotSelected && this.tabDataSource && this.tabDataSource.length) {
                     this.tabDataSource[0].active = true;
-                    this.$router.replace(this.$at(this.tabDataSource[0], this.currentUrlField));
+                    if (this.router) {
+                      this.$router.replace(this.$at(this.tabDataSource[0], this.currentUrlField));
+                    }
                     this.$emit('input', this.$at(this.tabDataSource[0], this.valueField), this);
                     this.$emit('update:value', this.$at(this.tabDataSource[0], this.valueField), this);
                     this.$emit('close', {
@@ -368,7 +370,7 @@ export default {
             matchItem = matchItem || this.tabDataSource[0];
             matchItem.active = true;
             const url = this.$at(matchItem, this.currentUrlField);
-            if (url && this.$router) {
+            if (url && this.router && this.$router) {
                 this.$router.replace(this.$at(matchItem, this.currentUrlField));
             }
             this.$forceUpdate();
