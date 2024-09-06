@@ -136,7 +136,7 @@ namespace nasl.ui {
       description: '占位符',
       setter: { concept: 'InputSetter' },
     })
-    placeholder: nasl.core.String;
+    placeholder: nasl.core.String = "请输入内容";
 
     @Prop({
       group: '主要属性',
