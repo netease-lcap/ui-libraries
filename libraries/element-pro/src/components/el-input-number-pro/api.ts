@@ -50,7 +50,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '允许输入超出最大长度',
       description:
-        '是否允许输入超过 `max` `min` 范围外的数字。为保障用户体验，仅在失去焦点时进行数字范围矫正。默认允许超出，数字超出范围时，输入框变红提醒',
+        '是否允许输入超过范围外的数字。默认允许超出，数字超出范围时，输入框变红提醒；关闭时在失去焦点后进行数字范围矫正。',
       setter: { concept: 'SwitchSetter' },
     })
     allowInputOverLimit: nasl.core.Boolean = true;

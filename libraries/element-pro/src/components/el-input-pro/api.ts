@@ -156,27 +156,27 @@ namespace nasl.ui {
     })
     private label: any; // 用插槽代替
 
-    @Prop<ElInputProOptions, 'maxcharacter'>({
-      group: '主要属性',
-      title: '最多字符数',
-      description:
-        '用户最多可以输入的字符个数，一个中文汉字表示两个字符长度。`maxcharacter` 和 `maxlength` 二选一使用',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 0,
-        precision: 0,
-      },
-      if: _ => !_.maxlength
-    })
-    maxcharacter: nasl.core.Decimal;
+    // @Prop<ElInputProOptions, 'maxcharacter'>({
+    //   group: '主要属性',
+    //   title: '最多字符数',
+    //   description:
+    //     '用户最多可以输入的字符个数，一个中文汉字表示两个字符长度。`maxcharacter` 和 `maxlength` 二选一使用',
+    //   setter: {
+    //     concept: 'NumberInputSetter',
+    //     min: 0,
+    //     precision: 0,
+    //   },
+    //   if: _ => !_.maxlength
+    // })
+    // maxcharacter: nasl.core.Decimal;
 
     @Prop<ElInputProOptions, 'maxlength'>({
       group: '主要属性',
       title: '最大文本长度',
       description:
-        '用户最多可以输入的文本长度，一个中文等于一个计数长度。默认为空，不限制输入长度。`maxcharacter` 和 `maxlength` 二选一使用',
+        '用户最多可以输入的文本长度，一个中文等于一个计数长度。默认为空，不限制输入长度。',
       setter: { concept: 'InputSetter' },
-      if: _ => !_.maxcharacter
+      // if: _ => !_.maxcharacter
     })
     maxlength: nasl.core.String | nasl.core.Decimal;
 
