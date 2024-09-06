@@ -46,17 +46,17 @@ namespace nasl.ui {
     })
     count: nasl.core.Decimal = 1;
 
-    @Prop({
-      group: '主要属性',
-      title: '骨架屏段落数量',
-      description: '骨架屏段落数量',
-      setter: {
-        concept: 'NumberInputSetter',
-        precision: 0,
-        min: 1,
-      },
-    })
-    rows: nasl.core.Decimal = 4;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '骨架屏段落数量',
+    //   description: '骨架屏段落数量',
+    //   setter: {
+    //     concept: 'NumberInputSetter',
+    //     precision: 0,
+    //     min: 1,
+    //   },
+    // })
+    // rows: nasl.core.Decimal = 4;
 
     @Prop({
       group: '主要属性',
