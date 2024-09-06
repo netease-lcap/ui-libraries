@@ -5,7 +5,7 @@ namespace nasl.ui {
   })
   @Component({
     title: '页头',
-    icon: 'page-header',
+    icon: 'pageheader',
     description: '如果页面的路径比较简单，推荐使用页头组件而非面包屑组件。',
     group: 'Display',
   })
