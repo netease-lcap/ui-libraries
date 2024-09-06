@@ -47,7 +47,7 @@ export const useTable = {
     };
 
     const onLoadData = props.get('onLoadData');
-    const pageSize = props.useRef('pageSize');
+    const pageSize = props.useRef('pageSize', 10);
 
     const onPageChange = props.useComputed('onPageChange', (value) => {
       return (pageInfo) => {

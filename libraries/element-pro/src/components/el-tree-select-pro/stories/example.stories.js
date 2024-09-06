@@ -18,36 +18,64 @@ export const Default = {
       return {
         data: [
           {
-            label: '选项一',
-            value: '1',
-            children: [
-              {
-                label: '子选项一',
-                value: '1.1',
-              },
-              {
-                label: '子选项二',
-                value: '1.2',
-              },
-              {
-                label: '子选项三',
-                value: '1.3',
-              },
-            ],
+            entityForSel: {
+              id: 1,
+              createdTime: null,
+              updatedTime: null,
+              createdBy: null,
+              updatedBy: null,
+              name: '测试1',
+              fid: 0,
+              disabled: false,
+            },
           },
           {
-            label: '选项二',
-            value: '2',
-            children: [
-              {
-                label: '子选项一',
-                value: '2.1',
-              },
-              {
-                label: '子选项二',
-                value: '2.2',
-              },
-            ],
+            entityForSel: {
+              id: 2,
+              createdTime: null,
+              updatedTime: null,
+              createdBy: null,
+              updatedBy: null,
+              name: '测试2',
+              fid: 0,
+              disabled: false,
+            },
+          },
+          {
+            entityForSel: {
+              id: 3,
+              createdTime: null,
+              updatedTime: null,
+              createdBy: null,
+              updatedBy: null,
+              name: '测试1.1',
+              fid: 1,
+              disabled: false,
+            },
+          },
+          {
+            entityForSel: {
+              id: 4,
+              createdTime: null,
+              updatedTime: null,
+              createdBy: null,
+              updatedBy: null,
+              name: '测试1.2',
+              fid: 1,
+              disabled: true,
+            },
+          },
+          {
+            entityForSel: {
+              id: 5,
+              createdTime: null,
+              updatedTime: null,
+              createdBy: null,
+              updatedBy: null,
+              name: '测试2.1',
+              fid: 2,
+              disabled: false,
+            },
           },
         ],
         list: [
@@ -61,10 +89,10 @@ export const Default = {
       };
     },
     template: `<el-tree-select-pro
-    :dataSource="list"
-    parentField="parentId"
-    valueField="id"
-    textField="name"
+    :dataSource="data"
+    parentField="entityForSel.fid"
+    valueField="entityForSel.id"
+    textField="entityForSel.name"
     ></el-tree-select-pro>`,
   }),
 };
