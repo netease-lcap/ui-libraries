@@ -18,7 +18,7 @@ namespace nasl.ui {
   })
   @Component({
     title: '通知',
-    icon: 'toast',
+    icon: 'notification',
     description: '悬浮出现在页面角落，显示全局的通知提醒消息。',
     group: 'Feedback',
   })
