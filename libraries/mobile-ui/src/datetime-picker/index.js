@@ -52,7 +52,7 @@ export default createComponent({
     visible: {
       type: Boolean,
     },
-    popupOpend: {
+    popupOpened: {
       type: Boolean,
       default: false,
     },
@@ -63,7 +63,7 @@ export default createComponent({
     const end = this.endValue;
 
     return {
-      popupVisible: this.popupOpend,
+      popupVisible: this.popupOpened,
 
       currentValue: val,
       currentStartValue: start,
@@ -104,7 +104,7 @@ export default createComponent({
   },
   watch: {
     // 用于设计器模式
-    popupOpend(val) {
+    popupOpened(val) {
       this.popupVisible = val;
     },
 

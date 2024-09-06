@@ -158,7 +158,7 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
-    popupOpend: {
+    popupOpened: {
       type: Boolean,
       default: false,
     },
@@ -172,7 +172,7 @@ export default createComponent({
       tempValue: currentValue,
 
       subtitle: '',
-      popupShown: this.popupOpend,
+      popupShown: this.popupOpened,
       defaultMonthForSelect: null,
     };
   },
@@ -217,7 +217,7 @@ export default createComponent({
   watch: {
     popupShown: 'init',
 
-    popupOpend(val) {
+    popupOpened(val) {
       this.popupShown = val;
     },
 

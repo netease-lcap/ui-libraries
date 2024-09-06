@@ -81,7 +81,7 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
-    popupOpend: {
+    popupOpened: {
       type: Boolean,
       default: false,
     },
@@ -92,7 +92,7 @@ export default createComponent({
       code: this.value || '',
       columns: [{ values: [] }, { values: [] }, { values: [] }],
       // areaList: {},
-      valuepopup: this.popupOpend,
+      valuepopup: this.popupOpened,
       getTitle: '',
       oldcode: '',
     };
@@ -132,7 +132,7 @@ export default createComponent({
   },
 
   watch: {
-    popupOpend(val) {
+    popupOpened(val) {
       this.valuepopup = val;
       if (val) {
         this.$nextTick(function() {

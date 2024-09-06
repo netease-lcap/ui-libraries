@@ -93,15 +93,15 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
-    popupOpend: {
+    popupOpened: {
       type: Boolean,
       default: false,
-    }
+    },
   },
 
   data() {
     return {
-      popupVisible: this.popupOpend,
+      popupVisible: this.popupOpened,
       // 内部值
       currentValue: this.formatValue((this.value ?? this.pvalue) || ''),
       style: '',
@@ -119,7 +119,7 @@ export default createComponent({
     }
   },
   watch: {
-    popupOpend(val) {
+    popupOpened(val) {
       this.popupVisible = val;
     },
     currentValue(val) {

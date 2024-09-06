@@ -492,7 +492,7 @@
         "name": "VanPickerson",
         "ideusage": {
             "idetype": "drawerdropdown",
-            "cacheOpenKey": "popupOpend",
+            "cacheOpenKey": "popupOpened",
             "drawerCSSSelector": ".van-popup",
             "dataSource": {
                 "dismiss": "!this.getAttribute('dataSource')",
@@ -520,7 +520,7 @@
         "name": "VanArea",
         "ideusage": {
             "idetype": "drawerdropdown",
-            "cacheOpenKey": "popupOpend",
+            "cacheOpenKey": "popupOpened",
             "drawerCSSSelector": ".van-popup",
             "dataSource": {
                 "dismiss": "!this.getAttribute('dataSource')",
@@ -537,7 +537,7 @@
         "name": "VanCascader",
         "ideusage": {
             "idetype": "drawerdropdown",
-            "cacheOpenKey": "popupOpend",
+            "cacheOpenKey": "popupOpened",
             "drawerCSSSelector": ".van-popup",
             "dataSource": {
                 "dismiss": "!this.getAttribute('dataSource')",
@@ -554,7 +554,7 @@
         "name": "VanDatetimePicker",
         "ideusage": {
             "idetype": "drawerdropdown",
-            "cacheOpenKey": "popupOpend",
+            "cacheOpenKey": "popupOpened",
             "drawerCSSSelector": ".van-popup",
             "dataSource": {
                 "dismiss": "!this.getAttribute('dataSource')",
@@ -571,7 +571,7 @@
         "name": "VanCalendar",
         "ideusage": {
             "idetype": "drawerdropdown",
-            "cacheOpenKey": "popupOpend",
+            "cacheOpenKey": "popupOpened",
             "drawerCSSSelector": ".van-popup",
             "dataSource": {
                 "dismiss": "!this.getAttribute('dataSource')",

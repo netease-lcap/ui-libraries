@@ -72,7 +72,7 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
-    popupOpend: {
+    popupOpened: {
       type: Boolean,
       default: false,
     },
@@ -83,7 +83,7 @@ export default createComponent({
       tabs: [],
       activeTab: 0,
       options: [],
-      valuepopup: this.popupOpend,
+      valuepopup: this.popupOpened,
       currentValue: this.value || '',
 
       filterData: [],
@@ -119,7 +119,7 @@ export default createComponent({
   },
 
   watch: {
-    popupOpend(val) {
+    popupOpened(val) {
       this.valuepopup = val;
     },
     currentData: {
