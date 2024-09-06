@@ -205,7 +205,7 @@ export default {
             this.$refs.popper && this.$refs.popper.onBlurInputValue(value);
             this.onBlur();
             this.$nextTick(() => {
-                this.$refs.input.updateCurrentValue(this.genDisplayFormatText(this.inputTime));
+                this.$refs.input && this.$refs.input.updateCurrentValue(this.genDisplayFormatText(this.inputTime));
             });
         },
         onFocus(e) {
