@@ -1,6 +1,6 @@
 <template>
   <!-- $env.VUE_APP_DESIGNER -->
-  <div>
+  <div :class="$style.root">
     <u-text :text="text ? text : '--'"></u-text>
   </div>
 </template>
@@ -20,5 +20,7 @@ import UText from './index.vue'
 </script>
 
 <style module>
-
+.root {
+  word-wrap: break-word;
+}
 </style>
