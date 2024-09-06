@@ -1969,8 +1969,8 @@
 
     /* @component u-capsules */
     --capsules-capsule-font-size: var(--font-size-base); /* @desc 胶囊字体大小 */ /* @prefix capsules-capsule */
-    --capsules-capsule-padding-x: 4px; /* @desc 胶囊水平内边距 */ /* @prefix capsules-capsule */
-    --capsules-capsule-padding-y: 20px; /* @desc 胶囊垂直内边距 */ /* @prefix capsules-capsule */
+    --capsules-capsule-padding-x: 4px; /* @desc 胶囊垂直内边距 */ /* @prefix capsules-capsule */
+    --capsules-capsule-padding-y: 20px; /* @desc 胶囊水平内边距 */ /* @prefix capsules-capsule */
     --capsules-capsule-background: var(--color-white); /* @type color */ /* @desc 胶囊背景色 */ /* @prefix capsules-capsule */
     --capsules-capsule-background-selected: var(--brand-primary); /* @type color */ /* @desc 胶囊选中项背景色 */ /* @prefix capsules-capsule */
     --capsules-capsule-background-selected-hover: var(--brand-primary-light); /* @type color */ /* @desc 胶囊选中项hover背景色 */ /* @prefix capsules-capsule */
