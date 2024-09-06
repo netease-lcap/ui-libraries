@@ -312,7 +312,6 @@ namespace nasl.ui {
     })
     theme:
       | 'file'
-      | 'file-input'
       | 'file-flow'
       | 'image'
       | 'image-flow'
