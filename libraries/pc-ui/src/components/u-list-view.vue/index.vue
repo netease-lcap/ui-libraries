@@ -560,6 +560,7 @@ export default {
                 };
             }
             try {
+                this.currentDataSource.filter(this.filtering);
                 this.currentDataSource.page(paging);
                 this.load();
                 this.$emit('page', paging, this);
