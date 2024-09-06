@@ -30,6 +30,7 @@
                         :component-index="index"
                         :select-sub-idnex="selectSubIdnex"
                         :menu-index="selectMenuIndexs[index]"
+                        :childrenField="childrenField"
                         :trigger="trigger"
                         :is-input="isInput"
                         :lazy="lazy"
@@ -172,15 +173,16 @@ export default {
             if (!this.converter) {
                 if (this.useArrayLikeValue && Array.isArray(value)) {
                     this.updateFromArrayLikeValue(JSON.parse(JSON.stringify(value)));
+                    if (!this.showFinalValue) {
+                        this.currentValue = this.lastValueString;
+                    } else {
+                        this.currentValue = this.lastValueString.split(this.join).slice(-1)[0];
+                    }
                 } else {
                     this.lastValueString = value;
+                    this.currentValue = value;
                 }
 
-                if (!this.showFinalValue) {
-                    this.currentValue = this.lastValueString;
-                } else {
-                    this.currentValue = this.lastValueString.split(this.join).slice(-1)[0];
-                }
                 // filterable，需要强制更新下
                 if (this.$refs.input) {
                   this.$refs.input.updateCurrentValue(this.currentValue);
@@ -254,8 +256,9 @@ export default {
             this.selectSubIdnex = subIndex;
 
             this.subComponents.splice(subIndex + 1);
-            if (selectNode.children)
-                this.subComponents.push(selectNode.children);
+            const children = this.$at(selectNode, this.childrenField);
+            if (children)
+                this.subComponents.push(children);
             // 判断是否是动态加载
             else if ('leaf' in selectNode && !selectNode.leaf && !('loading' in selectNode)) {
                 this.triggerLazyLoad(selectNode);
@@ -270,7 +273,7 @@ export default {
                     }
                     this.lastValueArray.push(this.$at(node, this.field));
                     this.lastRealValueArray.push(this.$at(node, this.valueField));
-                    return node.children || [];
+                    return this.$at(node, this.childrenField) || [];
                 }, this.currentData || []);
             } else {
                 this.lastValueArray.splice(subIndex);
@@ -338,8 +341,9 @@ export default {
                 return [];
             data.forEach((item, index) => {
                 let markData = {};
-                if (item.children && item.children.length && !item.disabled) {
-                    this.getMergeText(item.children).forEach((childItem) => {
+                const children = this.$at(item, this.childrenField);
+                if (children && children.length && !item.disabled) {
+                    this.getMergeText(children).forEach((childItem) => {
                         markData = {};
                         // 设置为.text是配合props传入的data数据格式
                         markData[this.field] = this.$at(item, this.field) + this.join + this.$at(childItem, this.field);
@@ -425,7 +429,7 @@ export default {
                 } else {
                     this.subComponents.push(dataList);
                     // 等于lazyData[node, node[, ...[, nodeN]]].children = dataList
-                    node.children = dataList;
+                    node[this.childrenField] = dataList;
                 }
                 this.allMergeText = this.getMergeText(this.currentData);
             };
