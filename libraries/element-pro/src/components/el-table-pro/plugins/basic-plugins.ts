@@ -52,7 +52,7 @@ export const useTable = {
     const onPageChange = props.useComputed('onPageChange', (value) => {
       return (pageInfo) => {
         pageSize.value = pageInfo.pageSize;
-        current.value = pageInfo.page;
+        current.value = pageInfo.current;
         _.attempt(onLoadData, {
           page: pageInfo.current,
           size: pageInfo.pageSize,

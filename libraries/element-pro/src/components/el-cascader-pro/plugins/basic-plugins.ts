@@ -6,26 +6,24 @@ import { $render, createUseUpdateSync } from '@lcap/vue2-utils';
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils';
 export const useUpdateSync = createUseUpdateSync();
 
-function listToTree(list, parentId = null, parentField, valueField) {
-  const tree = [];
-  // eslint-disable-next-line no-restricted-syntax
-  for (const item of list) {
-    if (item[parentField] === parentId) {
-      const children = listToTree(
-        list,
-        item[valueField],
-        parentField,
-        valueField,
-      );
-      if (children.length > 0) {
-        item.children = children;
-      }
-      tree.push(item);
+function listToTree(dataSource, parentField, valueField = 'value') {
+  if (_.isNil(parentField)) return dataSource;
+  const map = new Map<string, Record<string, any>>(
+    dataSource.map((item) => [_.get(item, valueField), item]),
+  );
+  const tree = [] as any[];
+  dataSource.forEach((item) => {
+    if (map.get(_.get(item, parentField))) {
+      const parent = map.get(_.get(item, parentField));
+      if (!parent) return;
+      if (!Array.isArray(parent.children)) parent.children = [];
+      parent.children.push(map.get(_.get(item, valueField)));
+    } else {
+      tree.push(map.get(_.get(item, valueField)));
     }
-  }
+  });
   return tree;
 }
-
 export const useSelect = {
   props: ['valueField', 'labelField', 'data'],
   setup(props, ctx) {
@@ -40,7 +38,7 @@ export const useSelect = {
     const options = props.useComputed('data', (data) => {
       if (_.isEmpty(data)) return undefined;
       if (_.isNil(parentField.value)) return data;
-      return listToTree(data, null, parentField.value, valueField.value);
+      return listToTree(data, parentField.value, valueField.value);
     });
     const keys = props.useComputed('keys', (v) => (_.isObject(v) ? v : {}));
     return {
