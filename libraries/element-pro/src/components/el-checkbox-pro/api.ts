@@ -157,14 +157,6 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: 'HTML 元素原生标签',
-      description: '统一设置内部复选框 HTML 属性',
-      setter: { concept: 'InputSetter' },
-    })
-    name: nasl.core.String;
-
     @Event({
       title: '改变后',
       description:
@@ -247,14 +239,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     lazyLoad: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: 'HTML 元素原生标签',
-      description: 'HTML 元素原生属性',
-      setter: { concept: 'InputSetter' },
-    })
-    name: nasl.core.String;
 
     @Prop({
       group: '状态属性',

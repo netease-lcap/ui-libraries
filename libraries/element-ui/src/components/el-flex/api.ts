@@ -6,8 +6,22 @@ namespace nasl.ui {
       idetype: 'container',
       automate: [
         {
-          command: "WRAP_FREE",
-          useblock: 0
+          command: "WRAP_LINEAR_VERTICAL",
+          useblock: 0,
+          attribute: {
+            direction: "vertical",
+            justify: "start",
+            alignment: "start",
+          }
+        },
+        {
+          command: "WRAP_LINEAR_HORIZONTAL",
+          useblock: 0,
+          attribute: {
+            direction: "horizontal",
+            justify: "start",
+            alignment: "start",
+          }
         }
       ]
     }

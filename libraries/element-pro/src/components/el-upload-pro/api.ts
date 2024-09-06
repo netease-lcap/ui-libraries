@@ -290,7 +290,7 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [
           { title: '默认' },
-          { title: '输入框形式的文件上传' },
+          // { title: '输入框形式的文件上传' },
           { title: '文件批量上传' },
           { title: '图片上传' },
           { title: '图片批量上传' },
@@ -312,7 +312,6 @@ namespace nasl.ui {
     })
     theme:
       | 'file'
-      | 'file-input'
       | 'file-flow'
       | 'image'
       | 'image-flow'
