@@ -15,7 +15,7 @@ export const useUpdateSync = createUseUpdateSync([
 export const useTable = {
   props: ['onPageChange'],
   setup(props, ctx) {
-    const current = props.useRef('current', 1);
+    const current = props.useRef('page', (v) => v ?? 1);
     const sorting = props.useComputed('sorting', (value) => value);
     const renderSlot = (vnodes) => {
       return vnodes.flatMap((vnode) => {
@@ -47,12 +47,12 @@ export const useTable = {
     };
 
     const onLoadData = props.get('onLoadData');
-    const pageSize = props.useRef('pageSize', 10);
+    const pageSize = props.useRef('pageSize', (v) => v ?? 10);
 
     const onPageChange = props.useComputed('onPageChange', (value) => {
       return (pageInfo) => {
         pageSize.value = pageInfo.pageSize;
-        current.value = pageInfo.current;
+        current.value = pageInfo.page;
         _.attempt(onLoadData, {
           page: pageInfo.current,
           size: pageInfo.pageSize,
@@ -85,7 +85,7 @@ export const useTable = {
       return {
         pageSizeOptions: pageSizeOptions.value,
         showJumper: true,
-        current,
+        current: current.value,
         total: total.value,
         pageSize: pageSize.value,
       };
