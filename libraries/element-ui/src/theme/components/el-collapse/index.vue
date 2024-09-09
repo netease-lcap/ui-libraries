@@ -2,11 +2,7 @@
   <demo-preview></demo-preview>
 </template>
 <script>
-import createStoriesPreview from '@lcap/builder/input/vue2/stories-preview';
-import * as stories from '../../../components/el-collapse/stories/block.stories';
-
-const DemoPreview = createStoriesPreview(stories);
-
+import DemoPreview from '../../../components/el-collapse/demos/example-demo1.vue';
 export default {
   components: {
     DemoPreview,

@@ -30,7 +30,9 @@ export const Default = {
         },
       };
     },
-    template: `<el-menu background-color="#545c64" text-color="#fff" style="color: #fff; padding: 0 20px;" active-text-color="#ffd04b" mode="horizontal" defaultActive="menu1">
+    template: `<div>
+    <div style="margin-bottom: 10px">顶栏导航</div>
+    <el-menu background-color="#545c64" text-color="#fff" style="color: #fff; padding: 0 20px;" active-text-color="#ffd04b" mode="horizontal" defaultActive="menu1">
     <template #left>
       <el-flex mode="flex" :gutter="12" alignment="center" style="min-width: 160px; margin-right: 12px;">
         <el-image fit="cover" src="/assets/lcap-logo-light.svg" style="width: 28px; height: 28px;"></el-image>
@@ -53,20 +55,21 @@ export const Default = {
         </template>
       </el-dropdown>
     </template>
-    </el-menu>`,
+    </el-menu></div>`,
   }),
 };
 
 export const SideBar = {
   name: '侧边栏',
   render: () => ({
-    template: `
+    template: `<div>
+    <div style="margin: 20px 0 10px 0">侧边栏</div>
     <el-menu>
       <el-menu-item index="1"><el-text text="导航一"></el-text></el-menu-item>
       <el-menu-item index="2"><el-text text="导航二"></el-text></el-menu-item>
       <el-menu-item index="3"><el-text text="导航三"></el-text></el-menu-item>
     </el-menu>
-  `,
+  </div>`,
   }),
   decorators: [
     () => ({

@@ -1,15 +1,11 @@
 <template>
-  <demo-preview></demo-preview>
+   <example-demo></example-demo>
 </template>
 <script>
-import createStoriesPreview from '@lcap/builder/input/vue2/stories-preview';
-import * as stories from '../../../components/el-message/stories/block.stories';
-
-const DemoPreview = createStoriesPreview(stories);
-
+import ExampleDemo from '../../../components/el-message/demos/example-demo2.vue';
 export default {
   components: {
-    DemoPreview,
+    ExampleDemo,
   },
 };
 

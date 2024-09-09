@@ -1,4 +1,5 @@
 import Component from '../index';
+import ExampleDemo2 from '../demos/example-demo2.vue';
 
 export default {
   id: 'el-message-examples',
@@ -48,5 +49,16 @@ export const Example1 = {
       <el-message :visible.sync="visible3" type="warning">警告哦，这是一条警告消息</el-message>
       <el-message :visible.sync="visible4" type="error">这是一条消息提示</el-message>
     </div>`,
+  }),
+};
+
+/* 可关闭的消息提示 */
+export const Example2 = {
+  name: '可关闭的消息提示',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo2,
+    },
+    template: '<example-demo></example-demo>',
   }),
 };
