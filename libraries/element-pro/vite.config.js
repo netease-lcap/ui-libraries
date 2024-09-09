@@ -28,6 +28,9 @@ export default defineConfig(({ command }) => {
         type: 'nasl.ui',
         framework: 'vue2',
         pnpm: true,
+        theme: {
+          previewPages: [],
+        },
         i18n: {},
       }),
     ],
@@ -55,7 +58,7 @@ export default defineConfig(({ command }) => {
       },
       preprocessorOptions: {
         less: {
-          globalVars: componentVars,
+          // globalVars: componentVars,
           modifyVars: componentVars,
         },
       },

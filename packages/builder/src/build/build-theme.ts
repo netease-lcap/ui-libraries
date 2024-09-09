@@ -90,6 +90,7 @@ export async function buildTheme(options: LcapBuildOptions) {
     oldCssVarPath: options.theme.oldCssVarPath,
     findThemeType: options.theme.findThemeType,
     type: options.type,
+    dependencies: options.dependencies,
   }, options.framework);
 
   if (!themeConfig || !themeConfig.components || themeConfig.components.length === 0) {

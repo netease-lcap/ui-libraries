@@ -71,6 +71,7 @@ export default (options: ViteLcapPluginOptions = {}) => {
       ...pluginOption.theme,
       framework: pluginOption.framework,
       type: pluginOption.type,
+      dependencies: options.dependencies,
     }),
     LcapBuild(pluginOption),
   ];

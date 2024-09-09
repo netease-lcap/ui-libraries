@@ -1,6 +1,7 @@
 /* eslint-disable newline-per-chained-call */
 import glob from 'fast-glob';
 import fs from 'fs-extra';
+import path from 'path';
 import { kebabCase } from 'lodash';
 import parseCssVars, { ThemeComponentVars, ThemeGlobalVars, ThemeInfo } from '../../nasl/parse-css-vars';
 import parseCssVarsOld from '../../nasl/parse-css-vars-old';
@@ -35,6 +36,15 @@ function getCssContent(options: ThemeOptions) {
   const varFiles = glob.sync(varsPath, { cwd: options.themeComponentFolder, absolute: true });
   if (varFiles.length > 0) {
     cssVarFiles.push(...varFiles);
+  }
+
+  if (options.dependencies && options.dependencies.length > 0) {
+    options.dependencies.forEach(({ rootPath }) => {
+      const depVarFiles = glob.sync('*/vars.css', { cwd: path.resolve(rootPath, './src/theme/components'), absolute: true });
+      if (depVarFiles.length > 0) {
+        cssVarFiles.push(...depVarFiles);
+      }
+    });
   }
 
   const cssContents: string[] = [];
