@@ -1,16 +1,5 @@
 <template>
-  <demo-preview></demo-preview>
+  <el-empty>
+    <el-button type="primary">按钮</el-button>
+  </el-empty>
 </template>
-<script>
-import createStoriesPreview from '@lcap/builder/input/vue2/stories-preview';
-import * as stories from '../../../components/el-empty/stories/block.stories';
-
-const DemoPreview = createStoriesPreview(stories);
-
-export default {
-  components: {
-    DemoPreview,
-  },
-};
-
-</script>

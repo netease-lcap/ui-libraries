@@ -3,19 +3,19 @@
 }
 
 .root.size-small {
-  font-size: 12px;
+  font-size: var(--font-size-extra-small);
 }
 
 .root.size-normal {
-  font-size: 14px;
+  font-size: var(--font-size-base);
 }
 
 .root.size-large {
-  font-size: 16px;
+  font-size: var(--font-size-medium);
 }
 
 .root.size-huge {
-  font-size: 18px;
+  font-size: var(--font-size-large);
 }
 
 .root.weight-normal {
