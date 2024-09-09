@@ -714,7 +714,8 @@
             "ignoreProperty": ["rules"],
             "slotInlineStyle": {
                 "label": "min-width: 56px"
-            }
+            },
+            "namedSlotOmitWrapper": ["label"]
         }
     },
     {
