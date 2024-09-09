@@ -3,6 +3,7 @@ import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
 import { $ref } from '@lcap/vue2-utils/plugins/index';
 import _ from 'lodash';
 import { useUpdateSync } from '@lcap/vue2-utils';
+import '../index.less';
 
 export const useDialog: NaslComponentPluginOptions = {
   setup: (props) => {
