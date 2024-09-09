@@ -1017,6 +1017,19 @@ export default {
                     this.canDraggable(item);
                 });
             }
+            // fix: 2864106089210368 树型分页无效，多次点击才生效
+            if(this.treeDisplay) {
+                data.forEach((item) => {
+                    if (!item.hasOwnProperty('display'))
+                        this.$set(item, 'display', '');
+                    if (!item.hasOwnProperty('loading'))
+                        this.$set(item, 'loading', false);
+                    if (!item.hasOwnProperty('tableTreeItemLevel'))
+                        this.$set(item, 'tableTreeItemLevel', 0);
+                    if (!item.hasOwnProperty('treeExpanded'))
+                        this.$set(item, 'treeExpanded', false);
+                });
+            }
             return data;
         },
         handleData() {
@@ -2155,7 +2168,7 @@ export default {
                 // 数据异常处理
                 if (parent === item)
                     break;
-                item.tableTreeItemLevel = level;
+                this.$set(item, 'tableTreeItemLevel', level);
                 item.parentPointer = parent;
                 if (this.$at(item, this.childrenField)) {
                     // fix: 2820102516186880，2830031229543936，子节点删除数据处理
