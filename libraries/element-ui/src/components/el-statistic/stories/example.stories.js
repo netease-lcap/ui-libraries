@@ -1,6 +1,7 @@
 import Component from '../index';
 import ExampleDemo1 from '../demos/example-demo1.vue';
 import ExampleDemo2 from '../demos/example-demo2.vue';
+import PrecisionDemo from '../demos/example-demo3.vue';
 
 export default {
   id: 'el-statistic-examples',
@@ -31,6 +32,16 @@ export const Example2 = {
   render: () => ({
     components: {
       exampleDemo: ExampleDemo2,
+    },
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+export const Precision = {
+  name: '精度',
+  render: () => ({
+    components: {
+      exampleDemo: PrecisionDemo,
     },
     template: '<example-demo></example-demo>',
   }),
