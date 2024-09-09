@@ -1,0 +1,38 @@
+/**
+ * @component el-pagination-pro
+ */
+:root {
+  --el-pagination-text-color: var(--el-text-color-secondary);
+  --el-pagination-text-color-disabled: var(--el-text-color-disabled);
+  --el-pagination-text-color-active: var(--el-text-color-anti);
+  --el-pagination-text-color-btn: var(--el-text-color-primary);
+  --el-pagination-bg-color-current: var(--el-brand-color);
+  --el-pagination-bg-color-hover: var(--el-brand-color-hover);
+  --el-pagination-bg-color-active: var(--el-brand-color);
+  --el-pagination-bg-color-disabled: var(--el-bg-color-component-disabled);
+  --el-pagination-bg-color-current-disabled: var(--el-brand-color-focus);
+  --el-pagination-bg-color-btn-hover: var(--el-bg-color-secondarycontainer-hover);
+  --el-pagination-bg-color-btn-active: var(--el-bg-color-secondarycontainer-active);
+  --el-pagination-bg-color-default: var(--el-bg-color-container);
+  --el-pagination-icon-color-disabled: var(--el-text-color-disabled);
+  --el-pagination-border-color: var(--el-component-border);
+  --el-pagination-border-radius-base: var(--el-radius-default);
+  --el-pagination-height-s: var(--el-comp-size-xs);
+  --el-pagination-height-default: var(--el-comp-size-m);
+  --el-pagination-input-width: 56px;
+  --el-pagination-font-s: var(--el-font-body-small);
+  --el-pagination-font-default: var(--el-font-body-medium);
+  --el-pagination-btn-font-size: var(--el-font-body-large);
+  --el-pagination-padding-horizontal-s: var(--el-comp-paddingLR-xxs);
+  --el-pagination-padding-horizontal-default: var(--el-comp-paddingLR-xs);
+  --el-pagination-btn-margin: var(--el-comp-margin-s);
+  --el-pagination-jump-margin: var(--el-comp-margin-s);
+  --el-pagination-select-margin: var(--el-comp-margin-l);
+  --el-pagination-pager-margin: var(--el-comp-margin-s);
+  --el-pagination-jump-height: var(--el-comp-size-m);
+  --el-pagination-jump-padding-left: var(--el-comp-margin-s);
+  --el-pagination-jump-inner-height: calc(var(--el-comp-size-m) - 4px);
+  --el-pagination-jump-height-small: var(--el-comp-size-xs);
+  --el-pagination-jump-inner-height-small: calc(var(--el-comp-size-xs) - 4px);
+  --el-pagination-hover-transition: all 0.2s cubic-bezier(0.82, 0, 1, 0.9);
+}

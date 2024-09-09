@@ -1,0 +1,46 @@
+/**
+ * @component el-table-pro
+ */
+:root {
+  --el-table-bg: var(--el-bg-color-container);
+  --el-table--text-color: var(--el-text-color-primary);
+  --el-table-head-text-color: var(--el-text-color-placeholder);
+  --el-table-border-color: var(--el-component-border);
+  --el-table-link-text-color: var(--el-text-color-link);
+  --el-table-action-bg-color: var(--el-bg-color-container-hover);
+  --el-table-highlight-bg-color: var(--el-bg-color-secondarycontainer);
+  --el-table-highlight-bg-color--hover: var(--el-bg-color-secondarycontainer-hover);
+  --el-table-highlight-dark-bg-color: var(--el-bg-color-container-hover);
+  --el-table-row-disabled-color: var(--el-text-color-disabled);
+  --el-table-icon-default-color: var(--el-text-color-placeholder);
+  --el-table-icon-active-color: var(--el-brand-color);
+  --el-table-filter-icon-default-color: var(--el-text-color-primary);
+  --el-table-color-empty: var(--el-text-color-disabled);
+  --el-table-fixed-cell-border-color: var(--el-component-border);
+  --el-table-sort-bg-color: var(--el-bg-color-secondarycontainer);
+  --el-table-line-height: var(--el-line-height-body-medium);
+  --el-table-line-height-half: calc(var(--el-font-size-body-medium) + 2px);
+  --el-table-font: var(--el-font-body-medium);
+  --el-table-loading-size: var(--el-table-icon-size);
+  --el-table-padding-horizontal: var(--el-comp-paddingLR-l);
+  --el-table-padding-normal: var(--el-comp-paddingTB-m) var(--el-comp-paddingLR-l);
+  --el-table-padding-small: var(--el-comp-paddingTB-s) var(--el-comp-paddingLR-s);
+  --el-table-padding-large: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-xl);
+  --el-table-td-padding-vertical-top: 13px;
+  --el-table-td-padding-vertical-bottom: 11px;
+  --el-table-td-padding-vertical: var(--el-comp-paddingTB-m);
+  --el-table-td-padding-horizontal: var(--el-comp-paddingLR-l);
+  --el-table-td-editalbe-icon-margin: var(--el-comp-margin-s);
+  --el-table-pagination-padding-normal: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-l);
+  --el-table-fixed-cell-box-shadow-spread-radius: -10px;
+  --el-table-fixed-cell-border-width: 4px;
+  --el-table-fixed-cell-border-width-light: 2px;
+  --el-table-fixed-cell-border: var(--el-table-fixed-cell-border-width) solid var(--el-table-fixed-cell-border-color);
+  --el-table-fixed-cell-border-light: var(--el-table-fixed-cell-border-width-light) solid var(--el-table-fixed-cell-border-color);
+  --el-table-controller-trigger-padding: var(--el-comp-paddingTB-l) 0;
+  --el-table-default-pagination-padding: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-l);
+  --el-table-icon-size: var(--el-font-size-body-large);
+  --el-table-double-sort-icon-space: var(--el-comp-margin-xxs);
+  --el-table-filter-icon-margin-left: var(--el-comp-margin-s);
+  --el-table-controller-item-margin: var(--el-comp-margin-l);
+}
