@@ -3,7 +3,8 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     "ideusage": {
-      "idetype": "container"
+      "idetype": "container",
+      forceUpdateWhenAttributeChange: true,
     }
   })
   @Component({
@@ -50,7 +51,7 @@ namespace nasl.ui {
       description: '自定义数值展示',
       setter: { concept: 'AnonymousFunctionSetter' },
     })
-    formatter: (value: nasl.core.String | nasl.core.Decimal) => any;
+    private formatter: (value: nasl.core.String | nasl.core.Decimal) => any;
 
     @Prop({
       group: '主要属性',
