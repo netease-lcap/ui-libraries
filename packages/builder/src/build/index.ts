@@ -13,6 +13,29 @@ import genManifestConfig from './gens/gen-manifest-config';
 import buildDecalaration from './build-declaration';
 import { getConfigComponents } from '../utils';
 
+const Groups = [
+  'Container',
+  'Layout',
+  'Navigation',
+  'Display',
+  'Table',
+  'Form',
+  'Selector',
+  'chart',
+  'Chart',
+  'Basic',
+  'Advanced',
+  'Feedback',
+  'Effects',
+  'Process',
+];
+
+const getGroupIndex = (n) => {
+  const i = Groups.indexOf(n);
+
+  return i === -1 ? 20 : i;
+};
+
 export function buildThemeOld(rootPath, destDir) {
   const configPath = path.join(rootPath, './lcap-ui.config.js');
   const themeConfigPath = path.join(rootPath, './lcap-ui.theme.json');
@@ -75,7 +98,7 @@ export function buildNaslUI(options: LcapBuildOptions) {
       children: children.map((child) => (options.framework.startsWith('vue') ? child.kebabName : child.name)),
       show,
     };
-  });
+  }).sort((a, b) => (getGroupIndex(a.group) - getGroupIndex(b.group)));
 
   logger.success('生成 nasl.ui.json 成功！');
   fs.writeJSONSync(path.join(options.destDir, 'nasl.ui.json'), naslUIConfig, { spaces: 2 });
