@@ -16,10 +16,7 @@
   --el-tree-font-size: var(--el-font-size-body-medium);
   --el-tree-font-line-height: var(--el-line-height-body-medium);
   --el-tree-node-padding-basic: var(--el-comp-margin-xxl);
-  --el-tree-node-item-padding-left: calc(var(--el-tree-node-padding-basic) * var(--level));
-  --el-tree-node-item-padding: var(--el-comp-paddingTB-xs) 0 var(--el-comp-paddingTB-xs) var(--el-tree-node-item-padding-left);
   --el-tree-line-position-bottom: var(--el-comp-margin-l);
-  --el-tree-line-position-left: calc(var(--el-tree-node-padding-basic) * var(--level) - var(--el-comp-margin-l));
   --el-tree-label-margin-left: var(--el-comp-margin-xs);
   --el-tree-label-padding: var(--el-comp-paddingTB-xxs) var(--el-comp-paddingLR-xs);
   --el-tree-line-width: 1px;
@@ -27,7 +24,6 @@
   --el-tree-line-before-width: var(--el-comp-margin-m);
   --el-tree-line-leaf-width: var(--el-comp-margin-m);
   --el-tree-line-first-height: var(--el-tree-font-line-height);
-  --el-tree-node-item-origin-height: calc(var(--el-tree-node-item-height) * var(--hscale) + 0px);
   --el-tree-node-icon-size: calc(var(--el-tree-font-size) + 2px);
   --el-tree-node-animation-time: 300ms;
   --el-tree-node-transition-time: 150ms;
