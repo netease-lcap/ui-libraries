@@ -94,10 +94,9 @@ export const Default = {
    :dataSource="data"
    :selectedRowKeys.sync="selectedRowKeys"
    @sort-change="onSortChange"
-   maxHeight="" tableContentWidth=""
     >
 
-    <el-table-column-pro title="申请人" :sorter="true"     :width="500">
+    <el-table-column-pro title="申请人"  colKey="channel"   :sorter="true"  fixed= 'left'   :width="500">
     <template #cell="cell">
       <div>{{selectedRowKeys}}</div>
     </template>
@@ -105,9 +104,9 @@ export const Default = {
 
     
     <el-table-column-pro title="渠道" colKey="channel"  :width="500" :sorter="true" fixed= 'left'>
-    <template #cell="cell">
-      <div>{{ cell.item.channel }}</div>
-    </template>
+      <template #cell="cell">
+        <div>{{ cell.item.channel }}</div>
+      </template>
     </el-table-column-pro>
         <el-table-column-pro title="渠道" colKey="channel"  :width="500" :sorter="true" fixed= 'left' >
     <template #cell="cell">
@@ -115,7 +114,21 @@ export const Default = {
     </template>
     </el-table-column-pro>
 
-        <el-table-column-pro title="渠道" colKey="channel"  :width="500" :sorter="true" fixed= 'left' >
+     <el-table-column-pro title="渠道" colKey="channel"  :width="500" :sorter="true" fixed= 'left' >
+      <template #cell="cell">
+        <div>{{ cell.item.channel }}</div>
+      </template>
+    </el-table-column-pro>
+
+
+    <el-table-column-pro title="渠道" colKey="channel"  :width="500" :sorter="true" fixed= 'left' >
+    <template #cell="cell">
+      <div>{{ cell.item.channel }}</div>
+    </template>
+    </el-table-column-pro>
+
+
+    <el-table-column-pro title="渠道" colKey="channel"  :width="500" :sorter="true" fixed= 'left' >
     <template #cell="cell">
       <div>{{ cell.item.channel }}</div>
     </template>
