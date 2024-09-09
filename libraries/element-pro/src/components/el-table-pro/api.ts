@@ -752,6 +752,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      parentAccept: "['ElTablePro'].includes(target.tag)",
     },
   })
   @Component({

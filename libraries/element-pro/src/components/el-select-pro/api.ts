@@ -578,12 +578,13 @@ namespace nasl.ui {
   @IDEExtraInfo({
     show: true,
     ideusage: {
-    //   idetype: 'container',
-    //   structured: true,
-    //   selector: {
-    //     expression: 'this',
-    //     cssSelector: '.el-p-select-option',
-    //   },
+      parentAccept: "['ElSelectPro'].includes(target.tag)",
+      //   idetype: 'container',
+      //   structured: true,
+      //   selector: {
+      //     expression: 'this',
+      //     cssSelector: '.el-p-select-option',
+      //   },
     },
   })
   @Component({
@@ -597,7 +598,6 @@ namespace nasl.ui {
       super();
     }
   }
-
 
   export class ElOptionProOptions<T, V> extends ViewComponentOptions {
     // @Prop({
