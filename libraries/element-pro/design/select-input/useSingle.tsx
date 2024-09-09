@@ -3,6 +3,7 @@ import {
 } from '@vue/composition-api';
 
 import isObject from 'lodash/isObject';
+import lodashGet from 'lodash/get';
 import pick from 'lodash/pick';
 import { SelectInputCommonProperties } from './interface';
 import { ElSelectInputProps } from './type';
@@ -32,7 +33,7 @@ const DEFAULT_KEYS = {
 
 function getInputValue(value: ElSelectInputProps['value'], keys: ElSelectInputProps['keys']) {
   const iKeys = keys || DEFAULT_KEYS;
-  return isObject(value) ? value[iKeys.label] : value;
+  return isObject(value) ? lodashGet(value, iKeys.label) : value;
 }
 
 export default function useSingle(props: ElSelectInputProps, context: SetupContext) {
