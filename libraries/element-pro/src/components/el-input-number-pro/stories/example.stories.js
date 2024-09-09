@@ -43,6 +43,6 @@ export const Value = {
 export const MaxMin = {
   name: '最大最小值',
   render: () => ({
-    template: '<el-input-number-pro :max="10" :min="5"></el-input-number-pro>',
+    template: '<el-input-number-pro :max="10" :min="5" :allowInputOverLimit="false"></el-input-number-pro>',
   }),
 };

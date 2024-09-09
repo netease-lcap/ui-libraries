@@ -46,17 +46,17 @@ namespace nasl.ui {
     })
     count: nasl.core.Decimal = 1;
 
-    @Prop({
-      group: '主要属性',
-      title: '骨架屏段落数量',
-      description: '骨架屏段落数量',
-      setter: {
-        concept: 'NumberInputSetter',
-        precision: 0,
-        min: 1,
-      },
-    })
-    rows: nasl.core.Decimal = 4;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '骨架屏段落数量',
+    //   description: '骨架屏段落数量',
+    //   setter: {
+    //     concept: 'NumberInputSetter',
+    //     precision: 0,
+    //     min: 1,
+    //   },
+    // })
+    // rows: nasl.core.Decimal = 4;
 
     @Prop({
       group: '主要属性',
@@ -98,13 +98,14 @@ namespace nasl.ui {
 
 
   @IDEExtraInfo({
+    show: false,
     "ideusage": {
       "idetype": "element",
       "parentAccept": "target.tag === 'template' && target.slotTarget ==='template'",
     }
   })
   @Component({
-    title: 'Skeleton Item',
+    title: '骨架屏项',
     icon: 'skeleton-item',
     description: '',
     group: 'Display',
@@ -118,20 +119,20 @@ namespace nasl.ui {
   export class ElSkeletonItemOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
-      title: 'Variant',
+      title: '风格',
       description: '当前显示的占位元素的样式',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'p' },
-          { title: 'h1' },
-          { title: 'h3' },
-          { title: 'text' },
-          { title: 'caption' },
-          { title: 'button' },
-          { title: 'image' },
-          { title: 'circle' },
-          { title: 'rect' },
+          { title: '段落' },
+          { title: '一级标题' },
+          { title: '三级标题' },
+          { title: '文本' },
+          { title: '说明' },
+          { title: '按钮' },
+          { title: '图片' },
+          { title: '圆形' },
+          { title: '矩形' },
         ],
       },
     })

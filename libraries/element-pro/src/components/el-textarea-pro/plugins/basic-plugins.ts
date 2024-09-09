@@ -8,19 +8,20 @@ export const useAutoSize: NaslComponentPluginOptions = {
   order: 1,
   props: ['minRows', 'maxRows'],
   setup: (props, { h }) => {
-    let autosize = props.get<boolean | { minRows: number, maxRows: number }>('autosize');
-    const minRows = props.get<number>('minRows');
-    const maxRows = props.get<number>('maxRows');
+    const size = props.useRef(['autosize', 'minRows', 'maxRows'], (autosize, minRows, maxRows) => {
+      let v = autosize;
+      if (autosize && (minRows || maxRows)) {
+        v = {
+          minRows: minRows || 1,
+          maxRows: maxRows || minRows || 1,
+        };
+      }
 
-    if (autosize && (minRows || maxRows)) {
-      autosize = {
-        minRows: minRows || 1,
-        maxRows: maxRows || minRows || 1,
-      };
-    }
+      return v;
+    });
 
     return {
-      autosize,
+      autosize: size,
       [$deletePropList]: ['minRows', 'maxRows'],
     };
   },

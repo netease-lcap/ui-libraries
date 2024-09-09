@@ -33,13 +33,13 @@ namespace nasl.ui {
     })
     value: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '允许输入超出最大长度',
-      description: '超出maxlength或maxcharacter之后是否还允许输入',
-      setter: { concept: 'SwitchSetter' },
-    })
-    allowInputOverMax: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '允许输入超出最大长度',
+    //   description: '超出maxlength或maxcharacter之后是否还允许输入',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // allowInputOverMax: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -100,25 +100,25 @@ namespace nasl.ui {
     })
     private label: any;
 
-    @Prop<ElTextareaProOptions, 'maxcharacter'>({
-      group: '主要属性',
-      title: '最多字符数',
-      description: '用户最多可以输入的字符个数，一个中文汉字表示两个字符长度',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 0,
-        precision: 0,
-      },
-      if: _ => !_.maxlength,
-    })
-    maxcharacter: nasl.core.Decimal;
+    // @Prop<ElTextareaProOptions, 'maxcharacter'>({
+    //   group: '主要属性',
+    //   title: '最多字符数',
+    //   description: '用户最多可以输入的字符个数，一个中文汉字表示两个字符长度',
+    //   setter: {
+    //     concept: 'NumberInputSetter',
+    //     min: 0,
+    //     precision: 0,
+    //   },
+    //   if: _ => !_.maxlength,
+    // })
+    // maxcharacter: nasl.core.Decimal;
 
     @Prop<ElTextareaProOptions, 'maxlength'>({
       group: '主要属性',
       title: '最大文本长度',
       description: '用户最多可以输入的字符个数',
       setter: { concept: 'InputSetter' },
-      if: _ => !_.maxcharacter,
+      // if: _ => !_.maxcharacter,
     })
     maxlength: nasl.core.Decimal | nasl.core.String;
 
@@ -136,7 +136,7 @@ namespace nasl.ui {
       description: '占位符',
       setter: { concept: 'InputSetter' },
     })
-    placeholder: nasl.core.String;
+    placeholder: nasl.core.String = "请输入内容";
 
     @Prop({
       group: '主要属性',

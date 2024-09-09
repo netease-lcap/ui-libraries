@@ -163,12 +163,10 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
     </ElInputNumberPro>`;
   } if (propertyTypeName === 'Double') {
     return `<ElInputNumberPro
-        step={0}
         placeholder="请输入${label}">
     </ElInputNumberPro>`;
   } if (propertyTypeName === 'Decimal') {
     return `<ElInputNumberPro
-        step={0}
         placeholder="请输入${label}">
     </ElInputNumberPro>`;
   } if (propertyTypeName === 'String' && propertyTypeMaxLength > 256) {

@@ -69,3 +69,14 @@ export const Value = {
     template: '<ValueDemo />',
   }),
 };
+
+export const MaxMin = {
+  name: '最大字数限制',
+  render: () => ({
+    template: `
+      <div>
+        <el-textarea-pro :maxlength="12"  :allowInputOverMax="true"></el-textarea-pro>
+      </div>
+    `,
+  }),
+};
