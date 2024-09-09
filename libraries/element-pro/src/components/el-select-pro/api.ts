@@ -6,6 +6,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
+      "forceUpdateWhenAttributeChange": true,
       childAccept: "target.tag === 'ElOptionPro'",
       events: {
         click: true,
@@ -471,7 +472,7 @@ namespace nasl.ui {
     // onFocus: (event: any) => any;
 
     @Event({
-      title: 'On Input Change',
+      title: '输入框值变化时',
       description:
         '输入框值发生变化时触发，`context.trigger` 表示触发输入框值变化的来源：文本输入触发、清除按钮触发、失去焦点等。',
     })
