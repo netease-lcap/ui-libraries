@@ -11,7 +11,7 @@ namespace nasl.ui {
           "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
         loopRule: 'nth-child(n+2)',
-        loopElem: " > .el-collapse-item",
+        loopElem: " > [class^='el-collapse-item']",
         emptySlot: {
           display: 'large',
           condition: "!this.getAttribute('dataSource')",
@@ -135,14 +135,14 @@ namespace nasl.ui {
     slotDefault: () => Array<ViewComponent>;
 
     @Slot({
-      title: '标签页标题',
-      description: '标签页标题',
+      title: '折叠面板项标题',
+      description: '折叠面板项标题',
     })
     slotTitle: (current: Current<T>) => Array<ViewComponent>;
 
     @Slot({
-      title: '标签页内容',
-      description: '标签页内容',
+      title: '折叠面板项内容',
+      description: '折叠面板项内容',
     })
     slotContent: (current: Current<T>) => Array<ViewComponent>;
   }
@@ -151,10 +151,6 @@ namespace nasl.ui {
     "ideusage": {
       "idetype": "container",
       "parentAccept": "target.tag === 'el-collapse'",
-      "selector": {
-        "expression": "this",
-        "cssSelector": "div[class='el-collapse-item']"
-      },
       "events": {
         "click": true,
       }
