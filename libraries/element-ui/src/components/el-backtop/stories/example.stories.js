@@ -1,4 +1,5 @@
 import Component from '../index';
+import TargetDemo from '../demos/target.vue';
 
 export default {
   id: 'el-backtop-examples',
@@ -33,5 +34,13 @@ export const Primary = {
       <div style="height: 2000px;"></div>
       <el-backtop v-bind="$props"></el-backtop>
     </div>`,
+  }),
+};
+
+export const Target = {
+  name: '自定义target',
+  render: () => ({
+    components: { TargetDemo },
+    template: '<target-demo></target-demo>',
   }),
 };
