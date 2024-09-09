@@ -1,0 +1,23 @@
+/**
+ * @component el-avatar-pro
+ */
+:root {
+  --el-avatar-bg-color: var(--el-brand-color-focus);
+  --el-avatar-text-color: var(--el-text-color-brand);
+  --el-avatar-size-small: var(--el-comp-size-xs);
+  --el-avatar-size-medium: var(--el-comp-size-m);
+  --el-avatar-size-large: var(--el-comp-size-xl);
+  --el-avatar-font-small: var(--el-font-size-body-medium);
+  --el-avatar-font-medium: var(--el-font-size-body-large);
+  --el-avatar-font-large: var(--el-font-size-title-large);
+  --el-avatar-icon-small: var(--el-comp-size-xxxs);
+  --el-avatar-icon-medium: var(--el-comp-size-xxs);
+  --el-avatar-icon-large: var(--el-comp-size-xs);
+  --el-avatar-border-radius-circle: var(--el-radius-circle);
+  --el-avatar-border-radius-round: var(--el-radius-default);
+  --el-avatar-border-color: var(--el-bg-color-container);
+  --el-avatar-group-offset-small: calc(0px - var(--el-size-2));
+  --el-avatar-group-offset-medium: calc(0px - var(--el-size-3));
+  --el-avatar-group-offset-large: calc(0px - var(--el-size-4));
+  --el-avatar-group-init-zIndex: 50;
+}

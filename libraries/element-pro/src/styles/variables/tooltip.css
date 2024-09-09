@@ -1,0 +1,19 @@
+/**
+ * @component el-tooltip-pro
+ */
+:root {
+  --el-tooltip-max-width: 480px;
+  --el-tooltip-bg: var(--el-gray-color-13);
+  --el-tooltip-color-primary: var(--el-brand-color);
+  --el-tooltip-bg-primary: var(--el-brand-color-light);
+  --el-tooltip-color-success: var(--el-success-color);
+  --el-tooltip-bg-success: var(--el-success-color-light);
+  --el-tooltip-color-danger: var(--el-error-color);
+  --el-tooltip-bg-danger: var(--el-error-color-light);
+  --el-tooltip-color-warning: var(--el-warning-color);
+  --el-tooltip-bg-warning: var(--el-warning-color-light);
+  --el-tooltip-text-color: var(--el-text-color-anti);
+  --el-tooltip-light-text-color: var(--el-text-color-primary);
+  --el-tooltip-default-margin: var(--el-comp-margin-s);
+  --el-tooltip-arrow-position: var(--el-comp-margin-xs);
+}

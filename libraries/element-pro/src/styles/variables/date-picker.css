@@ -1,0 +1,49 @@
+/**
+ * @component el-date-picker-pro
+ */
+:root {
+  --el-datepicker-th-font-color: var(--el-text-color-secondary);
+  --el-datepicker-panel-width: 280px;
+  --el-datepicker-panel-container-min-width: 280px;
+  --el-datepicker-panel-select-max-width: 160px;
+  --el-datepicker-panel-divider-color: var(--el-component-stroke);
+  --el-datepicker-time-panel-width: 216px;
+  --el-datepicker-time-panel-padding: var(--el-pop-padding-xl) calc(var(--el-pop-padding-xl) - var(--el-comp-margin-xs));
+  --el-datepicker-panel-padding: var(--el-pop-padding-xl);
+  --el-datepicker-header-gap: var(--el-comp-margin-m);
+  --el-datepicker-header-controller-gap: var(--el-comp-margin-s);
+  --el-datepicker-time-header-viewer-size: var(--el-comp-size-m);
+  --el-datepicker-panel-gap: var(--el-comp-margin-m);
+  --el-datepicker-year-month-quarter-table-gap: var(--el-comp-margin-m);
+  --el-datepicker-week-firstcell-margin-left: var(--el-comp-margin-xxxl);
+  --el-datepicker-cell-start-end-horizontal: calc(var(--el-datepicker-cell-inner-margin) * 2);
+  --el-datepicker-cell-disabled-left: calc(0px - var(--el-comp-size-l));
+  --el-datepicker-cell-disabled-left-large: calc(0px - var(--el-comp-size-xxxl));
+  --el-datepicker-year-controller-width: 78px;
+  --el-datepicker-month-controller-width: 80px;
+  --el-datepicker-cell-min-width: var(--el-comp-size-xs);
+  --el-datepicker-cell-height: var(--el-comp-size-xs);
+  --el-datepicker-cell-min-width-l: var(--el-comp-size-xxl);
+  --el-datepicker-cell-month-year-left: calc(0px - calc(var(--el-datepicker-cell-height) + var(--el-comp-margin-xxl)));
+  --el-datepicker-cell-inner-margin: calc(var(--el-comp-margin-xs) - 1px);
+  --el-datepicker-th-font-weight: 400;
+  --el-datepicker-font-weight-medium: 500;
+  --el-datepicker-panel-border-radius: var(--el-radius-default);
+  --el-datepicker-presets-padding: var(--el-pop-padding-xl);
+  --el-datepicker-presets-gap: var(--el-comp-margin-s);
+  --el-datepicker-thead-pseudo-line-height: var(--el-comp-margin-xs);
+  --el-datepicker-time-panel-gap: calc(var(--el-datepicker-panel-gap) / 2);
+  --el-datepicker-cell-hover-background: var(--el-bg-color-container-hover);
+  --el-datepicker-cell-active-color: var(--el-text-color-anti);
+  --el-datepicker-cell-active-background: var(--el-brand-color);
+  --el-datepicker-cell-disabled-color: var(--el-text-color-disabled);
+  --el-datepicker-cell-disable-background-color: var(--el-bg-color-component-disabled);
+  --el-datepicker-now-text-color: var(--el-brand-color);
+  --el-datepicker-now-background-color: var(--el-brand-color-light);
+  --el-datepicker-highlight-color: var(--el-brand-color-light);
+  --el-datepicker-hover-highlight-color: rgba(0, 0, 0, 0.06);
+  --el-datepicker-presets-min-width: var(--el-comp-size-xl);
+  --el-datepicker-presets-text-color: var(--el-brand-color);
+  --el-datepicker-presets-text-color-hover: var(--el-brand-color-hover);
+  --el-datepicker-transition: box-shadow 0.2s cubic-bezier(0.38, 0, 0.24, 1), background-color 0.2s linear, border-color 0.2s linear, color 0.2s linear;
+}

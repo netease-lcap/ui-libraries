@@ -1,0 +1,13 @@
+/**
+ * @component el-skeleton-pro
+ */
+:root {
+  --el-skeleton-base-height-default: 32px;
+  --el-skeleton-rect-width-default: 120px;
+  --el-skeleton-rect-height-default: 88px;
+  --el-skeleton-border-radius-square: var(--el-radius-default);
+  --el-skeleton-border-radius-circle: var(--el-radius-circle);
+  --el-skeleton-type-text-height: var(--el-font-size-body-large);
+  --el-skeleton-animation-gradient: var(--skeleton-animation-gradient);
+  --el-skeleton-animation-flashed: rgba(230, 230, 230, 0.3);
+}

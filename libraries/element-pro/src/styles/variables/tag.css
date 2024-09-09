@@ -1,0 +1,60 @@
+/**
+ * @component el-tag-pro
+ */
+:root {
+  --el-tag-default-background-color: var(--el-bg-color-component);
+  --el-tag-default-border-color: transparent;
+  --el-tag-default-hover-color: var(--el-brand-color-hover);
+  --el-tag-default-click-color: var(--el-brand-color-active);
+  --el-tag-default-disabled-color: var(--el-brand-color-disabled);
+  --el-tag-checked-color: var(--el-text-color-anti);
+  --el-tag-checked-background-color: var(--el-brand-color);
+  --el-tag-check-hover-bg: var(--el-bg-color-component-hover);
+  --el-tag-checked-hover-bg: var(--el-brand-color-hover);
+  --el-tag-default-click-bg: var(--el-bg-color-component-active);
+  --el-tag-grey-hover-color: var(--el-bg-color-component-hover);
+  --el-tag-grey-outline-disabled-color: var(--el-bg-color-component-disabled);
+  --el-tag-grey-outline-hover-color: var(--el-brand-color-hover);
+  --el-tag-disabled-color: var(--el-text-color-disabled);
+  --el-tag-disabled-bg: var(--el-bg-color-component-disabled);
+  --el-tag-primary-color: var(--el-brand-color);
+  --el-tag-success-color: var(--el-success-color);
+  --el-tag-warning-color: var(--el-warning-color);
+  --el-tag-danger-color: var(--el-error-color);
+  --el-tag-default-color-light: var(--el-bg-color-secondarycontainer);
+  --el-tag-primary-color-light: var(--el-brand-color-light);
+  --el-tag-success-color-light: var(--el-success-color-light);
+  --el-tag-warning-color-light: var(--el-warning-color-light);
+  --el-tag-error-color-light: var(--el-error-color-light);
+  --el-tag-outline-default-border-color: var(--el-component-border);
+  --el-tag-outline-primary-border-color: var(--el-tag-primary-color);
+  --el-tag-outline-success-border-color: var(--el-tag-success-color);
+  --el-tag-outline-warning-border-color: var(--el-tag-warning-color);
+  --el-tag-outline-danger-border-color: var(--el-tag-danger-color);
+  --el-tag-small-font: var(--el-font-body-small);
+  --el-tag-medium-font: var(--el-font-body-small);
+  --el-tag-large-font: var(--el-font-body-medium);
+  --el-tag-small-padding: 0px var(--el-comp-paddingLR-xs);
+  --el-tag-medium-padding: 0px var(--el-comp-paddingLR-s);
+  --el-tag-large-padding: 0px var(--el-comp-paddingLR-m);
+  --el-tag-text-color: var(--el-text-color-anti);
+  --el-tag-default-text-color: var(--el-text-color-primary);
+  --el-tag-border-radius-square: var(--el-radius-default);
+  --el-tag-border-radius-round: var(--el-radius-extraLarge);
+  --el-tag-default-border-width: 1px;
+  --el-tag-height-small: var(--el-comp-size-xxs);
+  --el-tag-height-medium: var(--el-comp-size-xs);
+  --el-tag-height-large: var(--el-comp-size-m);
+  --el-tag-icon-size: calc(var(--el-font-size-body-medium) + 2px);
+  --el-tag-close-icon-color: var(--el-text-color-placeholder);
+  --el-tag-close-icon-hover-color: var(--el-text-color-primary);
+  --el-tag-close-icon-color--dark: var(--el-font-white-2);
+  --el-tag-close-icon-hover-color--dark: var(--el-font-white-1);
+  --el-link-tag-hover-bg: var(--el-bg-color-component-hover);
+  --el-link-tag-hover-color: var(--el-brand-color);
+  --el-link-tag-active-bg: var(--el-bg-color-component-active);
+  --el-link-tag-active-color: var(--el-brand-color-active);
+  --el-tag-icon-margin-right: var(--el-comp-margin-xs);
+  --el-tag-close-icon-margin-right: var(--el-comp-margin-s);
+  --el-check-tag-margin-left: var(--el-comp-margin-s);
+}

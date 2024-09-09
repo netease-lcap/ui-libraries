@@ -1,0 +1,32 @@
+/**
+ * @component el-drawer-pro
+ */
+:root {
+  --el-dialog-box-shadow: var(--el-shadow-2);
+  --el-drawer-bg-color: var(--el-bg-color-container);
+  --el-drawer-border-color: var(--el-border-level-1-color);
+  --el-drawer-header-text-color: var(--el-text-color-primary);
+  --el-drawer-body-text-color: var(--el-text-color-secondary);
+  --el-drawer-shadow: var(--el-shadow-2);
+  --el-drawer-mask: var(--el-mask-active);
+  --el-drawer-close-btn-color: var(--el-text-color-primary);
+  --el-drawer-close-btn-bg-color: var(--el-bg-color-container);
+  --el-dialog-close-btn-bg-hover: var(--el-bg-color-container-hover);
+  --el-dialog-close-btn-bg-active: var(--el-bg-color-container-active);
+  --el-drawer-icon-size: calc(var(--el-font-size-body-medium) + 2px);
+  --el-drawer-header-height: var(--el-comp-size-xxxl);
+  --el-drawer-close-btn-size: var(--el-comp-size-xs);
+  --el-drawer-content-wrapper-size: 300px;
+  --el-drawer-body-text-font-size: var(--el-font-body-medium);
+  --el-drawer-header-font-size: var(--el-font-title-medium);
+  --el-drawer-default-timing-function: cubic-bezier(0.38, 0, 0.24, 1);
+  --el-drawer-default-duration: 0.2s;
+  --el-drawer-slow-duration: 0.28s;
+  --el-drawer-footer-padding: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-l);
+  --el-drawer-header-padding: 0 var(--el-comp-paddingLR-l);
+  --el-drawer-body-padding: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-l);
+  --el-drawer-footer-btn-margin-left: var(--el-comp-margin-s);
+  --el-drawer-close-btn-position-right: var(--el-comp-margin-s);
+  --el-drawer-footer-text-align: left;
+  --el-drawer-header-border-radius: var(--el-radius-small) var(--el-radius-small) 0 0;
+}

@@ -1,0 +1,6 @@
+/**
+ * @component el-grid-pro
+ */
+:root {
+  --el-grid-columns: 12;
+}

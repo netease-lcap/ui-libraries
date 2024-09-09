@@ -136,12 +136,12 @@
 
       &::after {
         position: absolute;
-        top: -(@tree-node-drag-tip-height / 2);
+        top: calc(-1 * @tree-node-drag-tip-height / 2);
         right: 0;
         left: 0;
         display: block;
         height: @tree-node-drag-tip-height;
-        border-radius: (@tree-node-drag-tip-height / 2);
+        border-radius: calc(@tree-node-drag-tip-height / 2);
         content: "";
         padding: inherit;
         background-clip: content-box;
@@ -155,7 +155,7 @@
 
       &-bottom::after {
         top: unset;
-        bottom: -(@tree-node-drag-tip-height / 2);
+        bottom: calc(-1 * @tree-node-drag-tip-height / 2);
         background-color: @tree-node-drag-tip-bg;
       }
 

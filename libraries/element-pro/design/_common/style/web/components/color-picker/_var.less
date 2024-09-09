@@ -48,10 +48,9 @@
 // columnGap = (panelWidth - (panelPadding * 2) + (swatchColor * columnsItem)) / 9
 @color-picker-swatch-row-gap: calc(calc(@color-picker-panel-width - calc(calc(@color-picker-panel-padding * 2) + calc(@color-picker-swatch-height * @color-picker-swatch-columns))) / 9);
 @color-picker-swatch-column-gap: calc(calc(@color-picker-panel-width - calc(calc(@color-picker-panel-padding * 2) + calc(@color-picker-swatch-width * @color-picker-swatch-columns))) / 9);
-@color-picker-swatch-wrap-margin-left: (@color-picker-swatch-padding + @color-picker-swatch-border-size) * -1;
+@color-picker-swatch-wrap-margin-left: calc(calc(@color-picker-swatch-padding + @color-picker-swatch-border-size) * -1);
 // 右边往外伸出一点，让滚动条居外侧
-@color-picker-swatch-wrap-margin-right: @color-picker-swatch-wrap-margin-left -
-  10px;
+@color-picker-swatch-wrap-margin-right: calc(@color-picker-swatch-wrap-margin-left - 10px);
 @color-picker-swatch-wrap-margin: 0 @color-picker-swatch-wrap-margin-right 0
   @color-picker-swatch-wrap-margin-left;
 @color-picker-swatch-max-rows: 4; // 最大显示行数
