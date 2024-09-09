@@ -17,9 +17,9 @@
 @image-gallery-shadow-radius: @border-radius-medium;
 
 @image-gallery-cover-z-index: 5;
-@image-z-index: @image-gallery-cover-z-index - 4;
-@image-placeholder-z-index: @image-gallery-cover-z-index - 5;
-@image-loading-z-index: @image-gallery-cover-z-index + 1;
+@image-z-index: calc(@image-gallery-cover-z-index - 4);
+@image-placeholder-z-index: calc(@image-gallery-cover-z-index - 5);
+@image-loading-z-index: calc(@image-gallery-cover-z-index + 1);
 
 @image-loading-text-color: @text-color-secondary;
 @image-error-text-color: @text-color-disabled;

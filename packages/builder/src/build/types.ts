@@ -4,6 +4,12 @@ export interface BuildIdeOptions {
   outDir?: string;
 }
 
+export interface Dependency {
+  name: string;
+  rootPath: string;
+  config: (component: any) => any;
+}
+
 export interface ThemeOptions {
   themeVarCssPath: string;
   themeComponentFolder: string;
@@ -14,16 +20,11 @@ export interface ThemeOptions {
   components: Array<{ group: string, title: string, name: string, [key: string]: any }>;
     /* 找 theme文件的方式， theme, 在src/theme里， 在 component/theme */
   findThemeType?: 'theme' | 'component';
+  dependencies?: Dependency[];
 }
 
 export interface LcapThemeOptions extends Partial<ThemeOptions> {
   themePreviewEntry?: string;
-}
-
-export interface Dependency {
-  name: string;
-  rootPath: string;
-  config: (component: any) => any;
 }
 
 export interface LcapBuildOptions {

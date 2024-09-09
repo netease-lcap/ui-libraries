@@ -1,0 +1,28 @@
+/**
+ * @component el-dropdown-pro
+ */
+:root {
+  --el-dropdown-bg-color: var(--el-bg-color-container);
+  --el-dropdown-suffix-color: var(--el-text-color-placeholder);
+  --el-dropdown-active-color: var(--el-brand-color);
+  --el-dropdown-active-bg-color: var(--el-brand-color-light);
+  --el-dropdown-container-hover-bg-color: var(--el-bg-color-container-hover);
+  --el-dropdown-container-active-bg-color: var(--el-bg-color-container-active);
+  --el-dropdown-disable-color: var(--el-text-color-disabled);
+  --el-dropdown-text-color: var(--el-text-color-primary);
+  --el-dropdown-text-font-size: var(--el-font-size-body-medium);
+  --el-dropdown-text-icon-size: var(--el-font-size-body-large);
+  --el-dropdown-theme-error-color: var(--el-error-color);
+  --el-dropdown-theme-error-bg-color: var(--el-error-color-light);
+  --el-dropdown-theme-success-color: var(--el-success-color);
+  --el-dropdown-theme-success-bg-color: var(--el-success-color-light);
+  --el-dropdown-theme-warning-color: var(--el-warning-color);
+  --el-dropdown-theme-warning-bg-color: var(--el-warning-color-light);
+  --el-dropdown-border: 0.5px solid var(--el-component-border);
+  --el-dropdown-item-height: var(--el-comp-size-s);
+  --el-dropdown-item-padding: calc(var(--el-comp-paddingTB-xs) - 1px) var(--el-comp-paddingLR-s);
+  --el-dropdown-item-divider-horizon-margin: var(--el-comp-margin-s);
+  --el-dropdown-item-divider-margin: var(--el-comp-margin-xs) var(--el-dropdown-item-divider-horizon-margin) var(--el-comp-margin-xxs) var(--el-dropdown-item-divider-horizon-margin);
+  --el-dropdown-menu-padding: var(--el-pop-padding-m);
+  --el-dropdown-menu-gap: 2px;
+}

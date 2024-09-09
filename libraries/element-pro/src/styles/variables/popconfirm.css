@@ -1,0 +1,34 @@
+/**
+ * @component el-popconfirm-pro
+ */
+:root {
+  --el-popconfirm-spacer: var(--el-comp-margin-s);
+  --el-popconfirm-shadow1: 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --el-popconfirm-shadow2: 0 12px 26px 5px rgba(0, 0, 0, 0.1);
+  --el-popconfirm-padding: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-l);
+  --el-popconfirm-position: relative;
+  --el-popconfirm-max-width: 320px;
+  --el-popconfirm-buttons-margin-top: var(--el-comp-margin-l);
+  --el-popconfirm-button-margin: var(--el-popconfirm-spacer);
+  --el-popconfirm-arrow-margin: var(--el-comp-margin-xxl);
+  --el-popconfirm-arrow-absolute-offset: -4px;
+  --el-popconfirm-arrow-border-width: 4px;
+  --el-popconfirm-arrow-size: (var(--el-popconfirm-arrow-border-width) * 2);
+  --el-popconfirm-arrow-rotate: rotate(45deg);
+  --el-popconfirm-arrow-top-border-color: transparent #fff #fff transparent;
+  --el-popconfirm-arrow-bottom-border-color: #fff transparent transparent #fff;
+  --el-popconfirm-arrow-left-border-color: #fff #fff transparent transparent;
+  --el-popconfirm-arrow-right-border-color: transparent transparent #fff #fff;
+  --el-popconfirm-arrow-top-shadow: 2px 2px 5px rgba(0, 0, 0, 0.06);
+  --el-popconfirm-arrow-bottom-shadow: -2px -2px 5px rgba(0, 0, 0, 0.06);
+  --el-popconfirm-arrow-left-shadow: 2px -2px 5px rgba(0, 0, 0, 0.06);
+  --el-popconfirm-arrow-right-shadow: -2px 2px 5px rgba(0, 0, 0, 0.06);
+  --el-popconfirm-icon-margin-right: var(--el-comp-margin-s);
+  --el-popconfirm-icon-padding: calc(calc(var(--el-line-height-body-medium) - var(--el-popconfirm-icon-size)) / 2) 0;
+  --el-popconfirm-confirm-margin-right: var(--el-comp-margin-s);
+  --el-popconfirm-icon-size: calc(var(--el-font-size-body-medium) + 6px);
+  --el-popconfirm-border-radius: var(--el-radius-medium);
+  --el-popconfirm-icon-warning: var(--el-warning-color);
+  --el-popconfirm-icon-danger: var(--el-error-color);
+  --el-popconfirm-icon-default: var(--el-brand-color);
+}

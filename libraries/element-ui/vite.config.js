@@ -1,6 +1,7 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import path from 'path';
+import fs from 'fs-extra';
 import { createVuePlugin as vue2 } from '@lcap/vite-plugin-vue2';
 import { createGenScopedName, lcapPlugin } from '@lcap/builder';
 import autoprefixer from 'autoprefixer';
@@ -10,6 +11,8 @@ process.env.TZ = 'Asia/Shanghai';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
+  const componentVars = fs.readJSONSync('../element-pro/src/styles/variables/vars.json');
+
   return {
     plugins: [
       vue2({
@@ -96,6 +99,11 @@ export default defineConfig(({ command }) => {
     css: {
       modules: {
         generateScopedName: createGenScopedName('CloudUI', './src'),
+      },
+      preprocessorOptions: {
+        less: {
+          modifyVars: componentVars,
+        },
       },
       postcss: {
         plugins: [

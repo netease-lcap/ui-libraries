@@ -1,0 +1,25 @@
+/**
+ * @component el-empty-pro
+ */
+:root {
+  --el-empty-title-font: var(--el-font-body-medium);
+  --el-empty-description-font: var(--el-font-body-medium);
+  --el-empty-title-font-small: var(--el-font-body-small);
+  --el-empty-description-font-small: var(--el-font-body-small);
+  --el-empty-image-size-small: 20px;
+  --el-empty-image-size-medium: 48px;
+  --el-empty-image-size-large: 64px;
+  --el-empty-title-color: var(--el-text-color-secondary);
+  --el-empty-description-color: var(--el-text-color-placeholder);
+  --el-empty-padding: 0;
+  --el-empty-image-margin-top: 0;
+  --el-empty-image-margin-bottom: 0;
+  --el-empty-title-margin-top-small: var(--el-comp-margin-xxs);
+  --el-empty-title-margin-top: var(--el-comp-margin-s);
+  --el-empty-title-margin-bottom: 0;
+  --el-empty-description-margin-top-small: var(--el-comp-margin-xxs);
+  --el-empty-description-margin-top: var(--el-comp-margin-xs);
+  --el-empty-description-margin-bottom: 0;
+  --el-empty-action-margin-top: var(--el-comp-margin-xxl);
+  --el-empty-action-margin-bottom: 0;
+}

@@ -1,0 +1,35 @@
+/**
+ * @component el-list-pro
+ */
+:root {
+  --el-list-bg-color-default: var(--el-bg-color-container);
+  --el-list-bg-color-strip: var(--el-bg-color-secondarycontainer);
+  --el-list-item-split-color: var(--el-border-level-1-color);
+  --el-list-avatar-bg-color: var(--el-bg-color-page);
+  --el-list-text-color-loading: var(--el-text-color-placeholder);
+  --el-list-text-color-load-more: var(--el-text-color-placeholder);
+  --el-list-meta-title-color: var(--el-text-color-primary);
+  --el-list-meta-description-color: var(--el-text-color-primary);
+  --el-list-action-color: var(--el-brand-color);
+  --el-list-action-icon-color: var(--el-text-color-secondary);
+  --el-list-link-color: var(--el-text-color-link);
+  --el-list-font-color: var(--el-text-color-primary);
+  --el-list-padding: var(--el-comp-paddingTB-m) var(--el-comp-paddingLR-l);
+  --el-list-item-spacer-small: var(--el-comp-paddingTB-s) var(--el-comp-paddingLR-m);
+  --el-list-item-spacer-default: var(--el-comp-paddingTB-m) var(--el-comp-paddingLR-l);
+  --el-list-item-spacer-large: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-xl);
+  --el-list-avatar-margin-right: var(--el-comp-margin-l);
+  --el-list-meta-title-margin: 0 0 var(--el-comp-margin-s);
+  --el-list-meta-description-margin-right: var(--el-comp-margin-xxl);
+  --el-list-action-margin-right: var(--el-comp-margin-l);
+  --el-list-load-not-empty-padding: var(--el-comp-paddingTB-m) var(--el-comp-paddingLR-l);
+  --el-list-load-icon-margin: var(--el-comp-margin-s);
+  --el-list-item-line-height: var(--el-line-height-body-medium);
+  --el-list-avatar-size: var(--el-comp-size-xxxl);
+  --el-list-icon-size: var(--el-comp-size-xxxs);
+  --el-list-item-font: var(--el-font-body-medium);
+  --el-list-meta-title-font: var(--el-font-title-medium);
+  --el-list-load-font-size: var(--el-comp-size-xxxs);
+  --el-list-load-more-font-size: var(--el-comp-size-xxxs);
+  --el-list-load-line-height: var(--el-line-height-body-medium);
+}

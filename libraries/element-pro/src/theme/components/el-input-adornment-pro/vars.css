@@ -1,0 +1,7 @@
+/**
+ * @component el-input-adornment-pro
+ */
+:root {
+  --el-input-adornment-item-padding: 0 var(--el-comp-paddingLR-s);
+  --el-input-adornment-border-color-default: var(--el-border-level-2-color);
+}

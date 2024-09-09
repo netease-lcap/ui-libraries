@@ -1,0 +1,11 @@
+/**
+ * @component el-collapse-pro
+ */
+:root {
+  --el-collapse-border-size: solid 1px var(--el-component-border);
+  --el-collapse-panel-header-text: var(--el-font-title-small);
+  --el-collapse-panel-content-text-color: var(--el-text-color-secondary);
+  --el-collapse-panel-header-padding: var(--el-comp-paddingTB-m) var(--el-comp-paddingLR-l);
+  --el-collapse-panel-header-icon-margin: var(--el-comp-margin-s);
+  --el-collapse-panel-content-padding: var(--el-comp-paddingTB-m) var(--el-comp-paddingLR-l) var(--el-comp-paddingTB-m) calc(var(--el-comp-paddingLR-l) + var(--el-comp-margin-xxl));
+}

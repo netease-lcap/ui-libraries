@@ -1,0 +1,57 @@
+/**
+ * @component el-tabs-pro
+ */
+:root {
+  --el-tab-default-bg: var(--el-bg-color-container);
+  --el-tab-default-bg-hover: var(--el-bg-color-container-hover);
+  --el-tab-default-bg-active: var(--el-bg-color-container-active);
+  --el-tab-default-text: var(--el-text-color-secondary);
+  --el-tab-default-text-select: var(--el-brand-color);
+  --el-tab-default-text-disabled: var(--el-text-color-disabled);
+  --el-tab-default-icon: var(--el-text-color-secondary);
+  --el-tab-default-icon-select: var(--el-brand-color);
+  --el-tab-default-icon-disabled: var(--el-text-color-disabled);
+  --el-tab-default-stroke: var(--el-component-stroke);
+  --el-tab-default-bar-bg-color: var(--el-brand-color);
+  --el-tab-default-stroke-size: 3px;
+  --el-tab-card-bg: var(--el-bg-color-secondarycontainer);
+  --el-tab-card-bg-hover: var(--el-bg-color-secondarycontainer-hover);
+  --el-tab-card-bg-active: var(--el-bg-color-secondarycontainer-active);
+  --el-tab-card-bg-select: var(--el-bg-color-container);
+  --el-tab-card-text: var(--el-text-color-secondary);
+  --el-tab-card-text-select: var(--el-brand-color);
+  --el-tab-card-text-disabled: var(--el-text-color-disabled);
+  --el-tab-card-icon: var(--el-text-color-secondary);
+  --el-tab-card-icon-select: var(--el-text-color-primary);
+  --el-tab-card-icon-disabled: var(--el-text-color-disabled);
+  --el-tab-card-stroke: var(--el-component-stroke);
+  --el-tab-height-middle: var(--el-comp-size-xxl);
+  --el-tab-height-large: var(--el-comp-size-xxxxl);
+  --el-tab-nav-item-wrapper-height: var(--el-comp-size-m);
+  --el-tab-nav-item-wrapper-height-large: var(--el-comp-size-xxl);
+  --el-tab-btn-width: 40px;
+  --el-tab-nav-item-margin-left: var(--el-comp-margin-s);
+  --el-tab-nav-item-margin-right: var(--el-comp-margin-s);
+  --el-tab-nav-item-wrapper-padding: 0 var(--el-comp-paddingLR-s);
+  --el-tab-nav-item-wrapper-padding-large: 0 var(--el-comp-paddingLR-m);
+  --el-tab-btn-remove-btn-margin-left: var(--el-comp-margin-s);
+  --el-tab-nav-card-nav-item-padding-right: var(--el-comp-paddingLR-l);
+  --el-tab-nav-card-nav-item-padding-left: var(--el-comp-paddingLR-l);
+  --el-tab-nav-card-nav-item-padding-right-large: var(--el-comp-paddingLR-xl);
+  --el-tab-nav-card-nav-item-padding-left-large: var(--el-comp-paddingLR-xl);
+  --el-tab-icon-size: var(--el-font-size-body-large);
+  --el-tab-nav-item-font: var(--el-font-body-large);
+  --el-tab-btn-border: 1px solid var(--el-tab-card-stroke);
+  --el-tab-bar-operations-border: 1px solid var(--el-tab-card-stroke);
+  --el-tab-nav-scroll-transform: translate(0);
+  --el-tab-btn-fade-transform-left: translateX(-50px);
+  --el-tab-btn-fade-transform-right: translateX(50px);
+  --el-tab-nav-warp-is-smooth-transform: transform 0.24s cubic-bezier(0, 0, 0.15, 1);
+  --el-tab-nav-item-transition: background-color cubic-bezier(0.38, 0, 0.24, 1) 0.2s;
+  --el-tab-btn-remove-btn-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  --el-tab-btn-icon-close-transition: color cubic-bezier(0.38, 0, 0.24, 1) 0.2s;
+  --el-tab-bar-operations-btn-box-shadow: -10px 0 20px 5px rgba(0, 0, 0, 0.05);
+  --el-tab-bar-transition: all 0.24s cubic-bezier(0.38, 0, 0.24, 1);
+  --el-tab-btn-box-shadow: 10px 0px 20px 5px rgba(0, 0, 0, 0.05);
+  --el-tab-btn-text-shadow-active: 0 0 0.3px currentcolor;
+}

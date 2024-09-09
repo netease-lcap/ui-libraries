@@ -1,0 +1,38 @@
+/**
+ * @component el-range-input-pro
+ */
+:root {
+  --el-range-input-border-color-default: var(--el-border-level-2-color);
+  --el-range-input-border-color-default-hover: var(--el-brand-color);
+  --el-range-input-border-color-default-focus: var(--el-brand-color);
+  --el-range-input-border-color-success: var(--el-success-color);
+  --el-range-input-border-color-warning: var(--el-warning-color);
+  --el-range-input-border-color-error: var(--el-error-color);
+  --el-range-input-text-color-default: var(--el-text-color-primary);
+  --el-range-input-text-color-disabled: var(--el-text-color-disabled);
+  --el-range-input-bg-color-default: var(--el-bg-color-specialcomponent);
+  --el-range-input-bg-color-disabled: var(--el-bg-color-component-disabled);
+  --el-range-input-extra-color-default: var(--el-text-color-placeholder);
+  --el-range-input-extra-color-success: var(--el-success-color);
+  --el-range-input-extra-color-warning: var(--el-warning-color);
+  --el-range-input-extra-color-error: var(--el-error-color);
+  --el-range-input-padding-default: var(--el-comp-paddingTB-xs) var(--el-comp-paddingLR-s) var(--el-comp-paddingTB-xs) var(--el-comp-paddingLR-s);
+  --el-range-input-status-position-right: calc(0px - var(--el-comp-margin-xxxl));
+  --el-range-input-inner-gap: var(--el-comp-margin-s);
+  --el-range-input-inner-padding: 0 var(--el-comp-paddingLR-xs);
+  --el-range-input-height-s: var(--el-comp-size-xs);
+  --el-range-input-height-default: var(--el-comp-size-m);
+  --el-range-input-height-l: var(--el-comp-size-xl);
+  --el-range-input-inner-icon-font-size: 16px;
+  --el-range-input-font-l: var(--el-font-body-large);
+  --el-range-input-font: var(--el-font-body-medium);
+  --el-range-input-font-s: var(--el-font-body-small);
+  --el-range-input-extra-font: var(--el-font-body-small);
+  --el-range-input-border-radius: var(--el-radius-small);
+  --el-range-input-box-shadow-color-default-focus: var(--el-brand-color-focus);
+  --el-range-input-box-shadow-color-success-focus: var(--el-success-color-focus);
+  --el-range-input-box-shadow-color-warning-focus: var(--el-warning-color-focus);
+  --el-range-input-box-shadow-color-error-focus: var(--el-error-color-focus);
+  --el-range-input-box-shadow-focus: 0 0 0 2px var(--el-range-input-box-shadow-color-default-focus);
+  --el-range-input-inner-transition: all cubic-bezier(0.38, 0, 0.24, 1) 0.2s;
+}

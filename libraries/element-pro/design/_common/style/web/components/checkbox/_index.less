@@ -81,7 +81,7 @@
 
       &::after {
         opacity: 1;
-        top: ((@checkbox-size) / 2 - 2px);
+        top: calc(calc(@checkbox-size / 2) - 2px);
         left: @checkbox-check-left;
         width: @checkbox-check-width;
         height: @checkbox-check-height;
@@ -108,7 +108,7 @@
         height: @checkbox-indeterminate-height;
         left: -1px;
         right: 0;
-        top: ((@checkbox-size - 2 - @checkbox-indeterminate-height) * .5);
+        top: calc(calc(@checkbox-size - 2px - @checkbox-indeterminate-height) * 0.5);
         border: unset;
         transform: scale(.5);
         background-color: @checkbox-indeterminate-color;

@@ -40,16 +40,16 @@
 @switch-width-border-value: 1px; //公差值
 
 @switch-width-border-l: @switch-width-border-base;
-@switch-width-border-default: (@switch-width-border-base - @switch-width-border-value * 1);
-@switch-width-border-s: (@switch-width-border-base - @switch-width-border-value * 2);
+@switch-width-border-default: calc(@switch-width-border-base - calc(@switch-width-border-value * 1));
+@switch-width-border-s: calc(@switch-width-border-base - calc(@switch-width-border-value * 2));
 
 //change check handle size
 @switch-width-border-check-base: 3px;
 @switch-width-border-check-value: .5px; //公差值
 
 @switch-width-border-check-l: @switch-width-border-check-base;
-@switch-width-border-check-default: (@switch-width-border-check-base - @switch-width-border-check-value * 1);
-@switch-width-border-check-s: (@switch-width-border-check-base - @switch-width-border-check-value * 2);
+@switch-width-border-check-default: calc(@switch-width-border-check-base - calc(@switch-width-border-check-value * 1));
+@switch-width-border-check-s: calc(@switch-width-border-check-base - calc(@switch-width-border-check-value * 2));
 
 // 字体
 @switch-content-font-size-l: @font-size-l;
