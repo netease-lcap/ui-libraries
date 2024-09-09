@@ -60,6 +60,9 @@ export const useValue: NaslComponentPluginOptions = {
       onChange: (v) => {
         const onChange = props.get('onChange');
         const onUpdateValue = props.get('update:value');
+
+        value.value = v;
+
         // 多选时，更新value
         if (isFunction(onUpdateValue)) {
           onUpdateValue(v);
@@ -72,6 +75,9 @@ export const useValue: NaslComponentPluginOptions = {
       onActive: (v) => {
         const onChange = props.get('onChange');
         const onUpdateValue = props.get('update:value');
+
+        actived.value = v;
+
         // 单选时，更新value
         if (isFunction(onUpdateValue)) {
           onUpdateValue(v?.[0]);
