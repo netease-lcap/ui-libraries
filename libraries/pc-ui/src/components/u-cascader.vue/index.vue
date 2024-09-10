@@ -297,9 +297,12 @@ export default {
                 }, this);
             } else {
                 const value = this.lastValueString;
-                this.$emit('update:value', value);
-                this.$emit('change', { sender: this, value });
-                this.$emit('input', value, this);
+                // 没有转换器的时候触发事件更新，地区选择里用了转换器需要去watch 数据更新
+                if (!this.converter) {
+                  this.$emit('update:value', value);
+                  this.$emit('change', { sender: this, value });
+                  this.$emit('input', value, this);
+                }
                 this.$emit('select', {
                     value,
                     values: this.lastValueArray,
