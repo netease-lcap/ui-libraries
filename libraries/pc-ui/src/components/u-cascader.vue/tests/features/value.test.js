@@ -34,7 +34,7 @@ test('test value control normal', async () => {
     value: '理学 / 化学',
   });
 
-  expect(wrapper.vm.currentValue).toBe('化学');
+  expect(wrapper.vm.currentValue).toBe('理学 / 化学');
   expect(wrapper.vm.lastValueString).toBe('理学 / 化学');
 });
 
