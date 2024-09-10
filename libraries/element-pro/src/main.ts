@@ -2,6 +2,7 @@
 import VueCompositionAPI from '@vue/composition-api';
 import * as components from './components';
 import './styles/theme.css';
+import './styles/reset.less';
 import './styles/variables/index.css';
 
 export * from './components';
