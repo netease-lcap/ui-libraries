@@ -23,6 +23,10 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-card></el-card>',
+    template: `<el-card>
+      <template #header>
+          <el-text>卡片标题</el-text>
+      </template>
+    </el-card>`,
   }),
 };

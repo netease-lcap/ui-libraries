@@ -6,7 +6,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
-      "forceUpdateWhenAttributeChange": true,
+      forceUpdateWhenAttributeChange: true,
       childAccept: "target.tag === 'ElOptionPro'",
       events: {
         click: true,
