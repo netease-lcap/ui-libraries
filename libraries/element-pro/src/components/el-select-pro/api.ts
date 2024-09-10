@@ -46,13 +46,13 @@ namespace nasl.ui {
     })
     autoWidth: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '自动聚焦',
-      description: '自动聚焦',
-      setter: { concept: 'SwitchSetter' },
-    })
-    autofocus: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '自动聚焦',
+    //   description: '自动聚焦',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // autofocus: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -70,13 +70,13 @@ namespace nasl.ui {
     })
     clearable: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '允许用户创建新条目',
-      description: '是否允许用户创建新条目，需配合 filterable 使用',
-      setter: { concept: 'SwitchSetter' },
-    })
-    creatable: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '允许用户创建新条目',
+    //   description: '是否允许用户创建新条目，需配合 filterable 使用',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // creatable: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
