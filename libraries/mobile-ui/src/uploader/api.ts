@@ -79,7 +79,7 @@ namespace nasl.ui {
       bindHide: true,
     })
     file_connection_group: () => any;
-    // fileConnectionGroup: (item: T) => any;
+    // fileConnectionGroup: () => any;
 
     @Prop({
       group: '数据属性',
