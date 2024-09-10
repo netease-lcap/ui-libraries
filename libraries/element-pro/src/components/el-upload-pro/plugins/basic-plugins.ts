@@ -11,7 +11,7 @@ import {
 import { $deletePropList, NaslComponentPluginOptions, useSyncState } from '@lcap/vue2-utils';
 import { MapGet } from '@lcap/vue2-utils/plugins/types.js';
 import { computed, ref, SetupContext, shallowRef, watch } from '@vue/composition-api';
-import { at, isObject, isPlainObject } from 'lodash';
+import { at, isFunction, isObject, isPlainObject } from 'lodash';
 
 type Converter = 'json' | 'simple';
 
@@ -307,6 +307,19 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         const onChange = props.get<UploadProps['onChange']>('onChange') || (() => {});
         changeFileList(list);
         onChange(list, context);
+      },
+      onSelectChange: (files: any[]) => {
+        const onSelectChange = props.get('onSelectChange');
+        const [multiple, max] = props.get<[boolean, number]>(['multiple', 'max']);
+        if (multiple && max && fileList.value.length + files.length > max) {
+          errorMessage.value = `文件数量超出限制，最多上传${max}个`;
+        } else {
+          errorMessage.value = '';
+        }
+
+        if (isFunction(onSelectChange)) {
+          onSelectChange(files);
+        }
       },
       [$deletePropList]: ['value'],
     };
