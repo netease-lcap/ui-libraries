@@ -7,16 +7,16 @@ namespace nasl.ui {
         description: '通过点击或者拖拽上传文件。',
         group: 'Form'
     })
-    export class UUploader<T> extends ViewComponent {
+    export class UUploader extends ViewComponent {
         @Prop({
             title: '值',
         })
-        value: UUploaderOptions<T>['value'];
+        value: UUploaderOptions['value'];
 
         @Prop({
           title: '上传地址',
         })
-        url: UUploaderOptions<T>['url'];
+        url: UUploaderOptions['url'];
 
         @Prop({
           title: '禁用',
@@ -38,10 +38,10 @@ namespace nasl.ui {
             description: '选择文件上传',
         })
         select(): void {}
-        constructor(options?: Partial<UUploaderOptions<T>>) { super(); }
+        constructor(options?: Partial<UUploaderOptions>) { super(); }
     }
 
-    export class UUploaderOptions<T>  extends ViewComponentOptions {
+    export class UUploaderOptions  extends ViewComponentOptions {
         @Prop({
             title: '接收数据类型',
             description: '接收数据类型。可选值：`text`、`xml`、`json`',
@@ -72,7 +72,7 @@ namespace nasl.ui {
             description: "",
             bindHide: true,
         })
-        file_connection_group: (item: T) => any;
+        file_connection_group: () => any;
         // fileConnectionGroup: (item: T) => any;;
 
         @Prop({
@@ -162,7 +162,7 @@ namespace nasl.ui {
         })
         urlField: nasl.core.String = 'url';
 
-        @Prop<UUploaderOptions<T>, 'fileIconSwitcher'>({
+        @Prop<UUploaderOptions, 'fileIconSwitcher'>({
             group: '主要属性',
             title: '文件图标',
             description: '是否展示文件图标',
@@ -179,7 +179,7 @@ namespace nasl.ui {
         })
         private iconMap: Object = {'doc|docx':'file-doc','jpg|jpeg|png|bmp|gif|tiff|tif|webp|svg|psd|raw':'file-jpg',pdf:'file-pdf',xlsx:'file-xlxs',txt:'file-txt','ppt|pptx':'file-ppt',zip:'file-zip',csv:'file-csv'};
 
-        @Prop<UUploaderOptions<T>, 'fileType'>({
+        @Prop<UUploaderOptions, 'fileType'>({
             group: '主要属性',
             title: '文件类型',
             docDescription: '列表的展示类型，支持使用文本、图片和卡片',
@@ -191,7 +191,7 @@ namespace nasl.ui {
         })
         fileType: 'doc|docx' | 'jpg|jpeg|png|bmp|gif|tiff|tif|webp|svg|psd|raw' | 'pdf' | 'xlsx' | 'txt' | 'ppt|pptx' | 'zip' | 'csv' = 'doc|docx';
 
-        @Prop<UUploaderOptions<T>, 'fileIcon'>({
+        @Prop<UUploaderOptions, 'fileIcon'>({
             group: '主要属性',
             title: '文件图标',
             docDescription: '支持从图标库选择图标或上传自定义图标。',
@@ -203,7 +203,7 @@ namespace nasl.ui {
         })
         fileIcon: nasl.core.String;
 
-        @Prop<UUploaderOptions<T>, 'downloadIconSwitcher'>({
+        @Prop<UUploaderOptions, 'downloadIconSwitcher'>({
             group: '主要属性',
             title: '下载图标',
             description: '是否展示下载图标',
@@ -215,7 +215,7 @@ namespace nasl.ui {
         })
         downloadIconSwitcher: nasl.core.Boolean = true;
 
-        @Prop<UUploaderOptions<T>, 'downloadIcon'>({
+        @Prop<UUploaderOptions, 'downloadIcon'>({
             group: '主要属性',
             title: '下载图标',
             setter: {
@@ -225,7 +225,7 @@ namespace nasl.ui {
         })
         downloadIcon: nasl.core.String = 'download';
 
-        @Prop<UUploaderOptions<T>, 'fileSize'>({
+        @Prop<UUploaderOptions, 'fileSize'>({
             group: '主要属性',
             title: '文件大小',
             description: '是否展示文件大小，单位小于1MB则展示KB，大于1MB则展示MB。',
@@ -265,7 +265,7 @@ namespace nasl.ui {
         })
         multipleOnce: nasl.core.Boolean = false;
 
-        @Prop<UUploaderOptions<T>, 'openCropper'>({
+        @Prop<UUploaderOptions, 'openCropper'>({
           group: '主要属性',
           title: '启用图片裁剪',
           description: '设置是否启用图片裁剪功能，只对单文件上传有效',
@@ -278,7 +278,7 @@ namespace nasl.ui {
         })
         openCropper: nasl.core.Boolean = false;
 
-        @Prop<UUploaderOptions<T>, 'fixedCropper'>({
+        @Prop<UUploaderOptions, 'fixedCropper'>({
             group: '主要属性',
             title: '固定图片裁剪框大小',
             setter: {
@@ -288,7 +288,7 @@ namespace nasl.ui {
         })
         fixedCropper: nasl.core.Boolean = false;
 
-        @Prop<UUploaderOptions<T>, 'cropperBoxWidth'>({
+        @Prop<UUploaderOptions, 'cropperBoxWidth'>({
             group: '主要属性',
             title: '图片裁剪框宽度',
             setter: {
@@ -298,7 +298,7 @@ namespace nasl.ui {
         })
         cropperBoxWidth: nasl.core.Decimal | nasl.core.Integer = 200;
 
-        @Prop<UUploaderOptions<T>, 'cropperBoxHeight'>({
+        @Prop<UUploaderOptions, 'cropperBoxHeight'>({
             group: '主要属性',
             title: '图片裁剪框高度',
             setter: {
@@ -308,7 +308,7 @@ namespace nasl.ui {
         })
         cropperBoxHeight: nasl.core.Decimal | nasl.core.Integer = 0;
 
-        @Prop<UUploaderOptions<T>, 'cropperPreviewShape'>({
+        @Prop<UUploaderOptions, 'cropperPreviewShape'>({
             group: '主要属性',
             title: '图片裁剪框预览形状',
             setter: {
@@ -324,7 +324,7 @@ namespace nasl.ui {
         })
         cropperPreviewShape: 'rect' | 'square' | 'circle' = 'circle';
 
-        @Prop<UUploaderOptions<T>, 'cropperTitle'>({
+        @Prop<UUploaderOptions, 'cropperTitle'>({
             group: '主要属性',
             title: '图片裁剪框标题',
             if: _ => _.openCropper === true && _.multiple !== true,
@@ -342,7 +342,7 @@ namespace nasl.ui {
         })
         private autoUpload: nasl.core.Boolean = true;
 
-        @Prop<UUploaderOptions<T>, 'showFileList'>({
+        @Prop<UUploaderOptions, 'showFileList'>({
             group: '主要属性',
             title: '显示文件列表',
             docDescription: '开启后上传多个文件时，会显示文件列表，默认开启',
@@ -439,7 +439,7 @@ namespace nasl.ui {
         })
         ttl: nasl.core.Boolean;
 
-        @Prop<UUploaderOptions<T>, 'ttlValue'>({
+        @Prop<UUploaderOptions, 'ttlValue'>({
             group: '主要属性',
             title: '上传后有效天数',
             description: '文件上传后的有效期天数',

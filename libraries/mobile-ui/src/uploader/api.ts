@@ -7,20 +7,20 @@ namespace nasl.ui {
     description: '上传文件。',
     group: "Form"
   })
-  export class VanUploader<T> extends ViewComponent {
-    constructor(options?: Partial<VanUploaderOptions<T>>) {
+  export class VanUploader extends ViewComponent {
+    constructor(options?: Partial<VanUploaderOptions>) {
       super();
     }
 
     @Prop({
       title: '值',
     })
-    value: VanUploaderOptions<T>['value'];
+    value: VanUploaderOptions['value'];
 
     @Prop({
       title: '上传地址',
     })
-    url: VanUploaderOptions<T>['url'];
+    url: VanUploaderOptions['url'];
 
     @Prop({
       title: '禁用',
@@ -43,7 +43,7 @@ namespace nasl.ui {
     })
     chooseFile(): any {}
   }
-  export class VanUploaderOptions<T> extends ViewComponentOptions {
+  export class VanUploaderOptions extends ViewComponentOptions {
     @Prop({
       title: '文件读取结果的类型',
       description: '文件读取结果的类型，上传大文件时，建议使用 file 类型，避免卡顿',
@@ -78,7 +78,7 @@ namespace nasl.ui {
       description: "",
       bindHide: true,
     })
-    file_connection_group: (item: T) => any;
+    file_connection_group: () => any;
     // fileConnectionGroup: (item: T) => any;
 
     @Prop({
@@ -216,7 +216,7 @@ namespace nasl.ui {
       }
     })
     ttl: nasl.core.Boolean;
-    @Prop<VanUploaderOptions<T>, 'ttlValue'>({
+    @Prop<VanUploaderOptions, 'ttlValue'>({
       group: '主要属性',
       title: '文件有效期天数',
       setter: {
