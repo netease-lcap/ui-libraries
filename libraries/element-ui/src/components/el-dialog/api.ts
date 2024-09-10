@@ -6,6 +6,7 @@ namespace nasl.ui {
       idetype: 'modal',
       cacheOpenKey: 'visible',
       structured: true,
+      bindStyleAttr: 'dialogStyle',
       selector: {
         expression: 'this',
         cssSelector: '.el-dialog',
