@@ -58,6 +58,20 @@ export default createComponent({
         page: 1,
         size: 5,
       },
+
+      myCCTaskList: [],
+      myCCTaskListTotal: 0,
+      myCCTaskListFinished: false,
+      myCCTaskListFilter: {
+        procDefKey: null,
+
+        createTimeAfter: null, // 开始时间
+        createTimeBefore: null, // 结束时间
+        viewed: null, // 是否已查看
+
+        page: 1,
+        size: 5,
+      },
     };
   },
 
@@ -79,6 +93,7 @@ export default createComponent({
         myPendingTaskList: 'getMyPendingTasks',
         myCompletedTaskList: 'getMyCompletedTasks',
         myLaunchList: 'getMyInitiatedTasks',
+        myCCTaskList: 'getMyCCTasks',
       };
 
       const filter = this[`${type}Filter`];
@@ -99,6 +114,9 @@ export default createComponent({
           body[key] = rest[key];
         }
       });
+      if (type === 'myCCTaskList') {
+        body.viewed = filter.viewed;
+      }
 
       if (this.inDesigner() || this.isDev()) {
         return {
@@ -157,6 +175,13 @@ export default createComponent({
     },
 
     async onGotoDetail(taskId) {
+      if (this.currentTab === 'myCCTaskList') {
+        await this.$processV2?.viewCCTask({
+          body: {
+            taskId,
+          },
+        });
+      }
       const result = await this.$processV2?.getTaskDestinationUrl({
         body: {
           taskId,
@@ -282,6 +307,28 @@ export default createComponent({
                 })}
 
                 {!this.myLaunchList.length ? (
+                  <div class={bem('list-view-empty')}>{t('empty')}</div>
+                ) : null}
+              </List>
+            </PullRefresh>
+          </Tab>
+          <Tab title={t('carbonCopy')} name="myCCTaskList">
+            {this.toolbarRender()}
+            <PullRefresh
+              vModel={this.myCCTaskListRefresh}
+              onRefresh={() => this.reload('myCCTaskList')}
+            >
+              <List
+                class={bem('list-view')}
+                onLoad={() => this.onLoad('myCCTaskList')}
+                offset={50}
+                finished={this.myCCTaskListFinished}
+              >
+                {this.myCCTaskList.map((item) => {
+                  return this.cardRender(item);
+                })}
+
+                {!this.myCCTaskList.length ? (
                   <div class={bem('list-view-empty')}>{t('empty')}</div>
                 ) : null}
               </List>

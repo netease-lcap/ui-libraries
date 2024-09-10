@@ -1,11 +1,11 @@
 import cursorMixin from '../../mixins/cursor-mixin';
-const TASK_NODE = ['UserTask', 'AutoTask', 'ApprovalTask', 'InitiateTask', 'SubmitTask']
+const TASK_NODE = ['UserTask', 'AutoTask', 'ApprovalTask', 'InitiateTask', 'SubmitTask', 'CCTask']
 export function makeProcessNode(WrappedComponent) {
     return {
         template: `
             <wrapped
                 @instancePressStart="onInstancePressStart"
-                @instancemousemove="onMousemove" 
+                @instancemousemove="onMousemove"
                 @mouseenter="onEnter"
                 @mouseleave="onLeave"
                 :node="node"
@@ -52,7 +52,7 @@ export function makeProcessNode(WrappedComponent) {
             },
             onMousemove(event) {
                 this.setPointerCursor(event);
-                this.setHover(this.node); 
+                this.setHover(this.node);
             },
             openInfo(event) {
                 const { currentTarget } = event;
