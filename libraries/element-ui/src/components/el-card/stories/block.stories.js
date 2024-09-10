@@ -25,7 +25,7 @@ export const Default = {
   render: () => ({
     template: `<el-card>
       <template #header>
-          <el-text>卡片标题</el-text>
+          <el-text text="卡片标题"></el-text>
       </template>
     </el-card>`,
   }),
