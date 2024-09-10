@@ -45,7 +45,7 @@ export function genUpdateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
   // 加到页面上的params、variables、logics等都需要唯一name
   // 页面上有ref引用的element也需要唯一name
   const nameGroup = {
-    viewElementMainView: likeComponent.getViewElementUniqueName('form1'),
+    viewElementMainView: likeComponent.getViewElementUniqueName('el_form_pro'),
     viewVariableEntity: likeComponent.getVariableUniqueName(firstLowerCase(entity.name)),
     viewLogicSubmit: likeComponent.getLogicUniqueName('submit'),
     viewLogicLoad: likeComponent.getLogicUniqueName('load'),
@@ -70,7 +70,7 @@ export function genUpdateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
       if (relationEntity) {
         const displayedProperty = getFirstDisplayedProperty(relationEntity);
         if (displayedProperty) {
-          const viewElementSelect = likeComponent.getViewElementUniqueName('select');
+          const viewElementSelect = likeComponent.getViewElementUniqueName('el_select_pro');
           const selectNameGroup = genUniqueQueryNameGroup(module, likeComponent, viewElementSelect, false, relationEntity.name);
           selectNameGroup.viewElementSelect = viewElementSelect;
           // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识

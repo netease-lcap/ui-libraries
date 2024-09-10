@@ -26,7 +26,7 @@ export function genSelectBlock(entity: naslTypes.Entity, refElement: naslTypes.V
   const dataSource = entity.parentNode;
   const module = dataSource.app;
 
-  const viewElementMainView = likeComponent.getViewElementUniqueName('select');
+  const viewElementMainView = likeComponent.getViewElementUniqueName('el_select_pro');
   const nameGroup = genUniqueQueryNameGroup(module, likeComponent, viewElementMainView, false);
   nameGroup.viewElementMainView = viewElementMainView;
   nameGroup.lowerEntity = firstLowerCase(entity.name);

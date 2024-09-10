@@ -81,7 +81,7 @@ export function genTableBlock(entity: naslTypes.Entity, refElement: naslTypes.Vi
   // 生成唯一name
   // 加到页面上的params、variables、logics等都需要唯一name
   // 页面上有ref引用的element也需要唯一name
-  const viewElementMainView = likeComponent.getViewElementUniqueName('tableView');
+  const viewElementMainView = likeComponent.getViewElementUniqueName('el_table_pro');
   const nameGroup = genUniqueQueryNameGroup(module, likeComponent, viewElementMainView);
   nameGroup.viewElementMainView = viewElementMainView;
   nameGroup.viewVariableEntity = likeComponent.getVariableUniqueName(firstLowerCase(entity.name));

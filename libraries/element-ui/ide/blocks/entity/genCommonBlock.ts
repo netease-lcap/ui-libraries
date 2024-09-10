@@ -159,14 +159,17 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
     </ElSelectPro>`;
   } if (propertyTypeName === 'Integer' || propertyTypeName === 'Long') {
     return `<ElInputNumberPro
+        theme="column"
         placeholder="请输入${label}">
     </ElInputNumberPro>`;
   } if (propertyTypeName === 'Double') {
     return `<ElInputNumberPro
+        theme="column"
         placeholder="请输入${label}">
     </ElInputNumberPro>`;
   } if (propertyTypeName === 'Decimal') {
     return `<ElInputNumberPro
+        theme="column"
         placeholder="请输入${label}">
     </ElInputNumberPro>`;
   } if (propertyTypeName === 'String' && propertyTypeMaxLength > 256) {
@@ -230,7 +233,7 @@ export function genFormItemsTemplate(entity: naslTypes.Entity, properties: Array
     }
     if (required) rules.push('nasl.validation.required()');
     let formItem = `<ElFormItemPro
-          ${required ? 'required={true}' : ''}
+          ${required ? 'requiredMark="show"' : ''}
           ${rules.length ? ` rules={[${rules.join(',')}]}` : ''}
           layout="center"
           name="${property.name}"
