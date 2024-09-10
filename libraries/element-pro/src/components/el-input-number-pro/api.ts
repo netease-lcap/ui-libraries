@@ -212,7 +212,7 @@ namespace nasl.ui {
         ],
       },
     })
-    theme: 'column' | 'row' | 'normal' = 'row';
+    theme: 'column' | 'row' | 'normal' = 'column';
 
     @Prop({
       group: '主要属性',

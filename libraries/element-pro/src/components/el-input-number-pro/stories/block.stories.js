@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-input-number-pro></el-input-number-pro>',
+    template: '<el-input-number-pro theme="column"></el-input-number-pro>',
   }),
 };
