@@ -129,7 +129,7 @@ namespace nasl.ui {
       description: '选中行。',
       // setter: { concept: 'InputSetter' },
     })
-    selectedRowKeys: any[] | any;
+    selectedRowKeys: V[] | V;
 
     @Prop({
       group: '数据属性',
