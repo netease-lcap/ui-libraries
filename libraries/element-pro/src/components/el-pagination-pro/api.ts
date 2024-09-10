@@ -83,10 +83,13 @@ namespace nasl.ui {
       group: '主要属性',
       title: '前后省略模式',
       description:
-        '页码数量超出时，前后省略模式, `mid`表示中间省略, `both-ends` 表示两端省略。可选项：mid/both-ends',
+        '页码数量超出时，前后省略模式。可选项：mid/both-ends',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'mid' }, { title: 'both-ends' }],
+        options: [
+          { title: '中间省略' },
+          { title: '两端省略' }
+        ],
       },
     })
     pageEllipsisMode: 'mid' | 'both-ends' = 'mid';
@@ -188,7 +191,7 @@ namespace nasl.ui {
       description: '分页组件风格。可选项：default/simple',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: 'default' }, { title: 'simple' }],
+        options: [{ title: '默认' }, { title: '简单' }],
       },
     })
     theme: 'default' | 'simple' = 'default';
