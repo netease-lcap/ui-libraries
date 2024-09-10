@@ -81,7 +81,11 @@ export const useTable = {
       (value) => value,
     );
 
+    const paginationProps = props.useComputed('pagination');
     const pagination = computed(() => {
+      if (paginationProps.value === false) {
+        return false;
+      }
       return {
         pageSizeOptions: pageSizeOptions.value,
         showJumper: true,
@@ -115,6 +119,7 @@ export const useTable = {
       onPageChange,
 
       pagination,
+      // pagination: false,
       onSortChange,
       [$render](resultVNode, h) {
         const vnodes = ctx.setupContext.slots.default();

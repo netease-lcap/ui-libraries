@@ -30,9 +30,8 @@ export const Default = {
     data() {
       return {
         data: async (params) => {
-          console.log(params, 'params');
           const initialData = [];
-          const total = 50;
+          const total = 5;
           for (let i = 0; i < total; i++) {
             initialData.push({
               index: i,

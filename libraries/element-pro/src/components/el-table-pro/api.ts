@@ -403,14 +403,13 @@ namespace nasl.ui {
     })
     maxHeight: nasl.core.String | nasl.core.Decimal;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Pagination',
-    //   description:
-    //     '分页配置，值为空则不显示。具体 API 参考分页组件。当 `data` 数据长度超过分页大小时，会自动对本地数据 `data` 进行排序，如果不希望对于 `data` 进行排序，可以设置 `disableDataPage = true`。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // pagination: object;
+    @Prop({
+      group: '主要属性',
+      title: 'Pagination',
+      description: '是否显示分页',
+      setter: { concept: 'SwitchSetter' },
+    })
+    pagination: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
