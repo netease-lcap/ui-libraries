@@ -246,7 +246,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '状态',
       description:
-        '输入框状态。默认情况会由组件内部根据实际情况呈现，如果文本过长引起的状态变化。可选项：default/success/warning/error',
+        '输入框状态。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
