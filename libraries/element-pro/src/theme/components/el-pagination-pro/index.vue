@@ -1,16 +1,8 @@
 <template>
-  <demo-preview></demo-preview>
+  <el-flex direction="vertical">
+    <el-pagination-pro :total="22" show-jumper size="small"></el-pagination-pro>
+    <el-pagination-pro :total="22" show-jumper show-first-and-last-page-btn></el-pagination-pro>
+    <el-pagination-pro :total="22" show-jumper disabled></el-pagination-pro>
+    <el-pagination-pro :total="22" show-jumper size="large"></el-pagination-pro>
+  </el-flex>
 </template>
-<script>
-import createStoriesPreview from '@lcap/builder/input/vue2/stories-preview';
-import * as stories from '../../../components/el-pagination-pro/stories/block.stories';
-
-const DemoPreview = createStoriesPreview(stories);
-
-export default {
-  components: {
-    DemoPreview,
-  },
-};
-
-</script>
