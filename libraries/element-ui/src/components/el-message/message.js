@@ -1,6 +1,20 @@
 import Message from 'element-ui/lib/message';
 import ElIcon from '../el-icon/icon';
 
+function setElStyle(style, el) {
+  const exclude = [
+    'zIndex', 'postion', 'left', 'right', 'top', 'bottom',
+  ];
+
+  Object.keys(style).forEach((key) => {
+    if (exclude.includes(key)) {
+      return;
+    }
+
+    el.style[key] = style[key];
+  });
+}
+
 export default {
   name: 'ElMessage',
   props: {
@@ -64,7 +78,7 @@ export default {
         this.closeMessage();
       }
       const h = this.$createElement;
-      const vnodes = this.$scopedSlots.default() || [];
+      const vnodes = [...this.$slots.default] || [];
 
       if (this.icon) {
         vnodes.unshift(
@@ -98,17 +112,11 @@ export default {
       });
 
       if (this.$vnode.data.staticStyle && this.instance.$el) {
-        const exclude = [
-          'zIndex', 'postion', 'left', 'right', 'top', 'bottom',
-        ];
+        setElStyle(this.$vnode.data.staticStyle, this.instance.$el);
+      }
 
-        Object.keys(this.$vnode.data.staticStyle).forEach((key) => {
-          if (exclude.includes(key)) {
-            return;
-          }
-
-          this.instance.$el.style[key] = this.$vnode.data.staticStyle[key];
-        });
+      if (this.$vnode.data.style && this.instance.$el) {
+        setElStyle(this.$vnode.data.style, this.instance.$el);
       }
 
       this.instance.$nextTick(() => {
