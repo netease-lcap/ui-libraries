@@ -16,12 +16,12 @@ export function genTableCurdBlock(entity: naslTypes.Entity, refElement: naslType
   const entityName = entity.name;
   const entityFullName = `${namespace}.${entityName}`;
 
-  const viewElementMainView = likeComponent.getViewElementUniqueName('tableView');
+  const viewElementMainView = likeComponent.getViewElementUniqueName('el_table_pro');
   const nameGroup = genUniqueQueryNameGroup(module, likeComponent, viewElementMainView);
   nameGroup.viewElementMainView = viewElementMainView;
-  nameGroup.viewElementFilterForm = likeComponent.getViewElementUniqueName('filterform');
-  nameGroup.viewElementSaveModal = likeComponent.getViewElementUniqueName('saveModal');
-  nameGroup.viewElementSaveModalForm = likeComponent.getViewElementUniqueName('saveModalForm');
+  nameGroup.viewElementFilterForm = likeComponent.getViewElementUniqueName('el_form_pro_filter');
+  nameGroup.viewElementSaveModal = likeComponent.getViewElementUniqueName('el_dialog_save');
+  nameGroup.viewElementSaveModalForm = likeComponent.getViewElementUniqueName('el_dialog_save_form');
   nameGroup.viewLogicRemove = likeComponent.getLogicUniqueName('remove');
   nameGroup.viewLogicInit = likeComponent.getLogicUniqueName('init');
   nameGroup.viewLogicCreate = likeComponent.getLogicUniqueName('create');
@@ -49,7 +49,7 @@ export function genTableCurdBlock(entity: naslTypes.Entity, refElement: naslType
         const displayedProperty = getFirstDisplayedProperty(relationEntity);
         if (displayedProperty) {
           entitySet.add(relationEntity);
-          const viewElementSelect = likeComponent.getViewElementUniqueName('select');
+          const viewElementSelect = likeComponent.getViewElementUniqueName('el_select_pro');
           const selectNameGroup = genUniqueQueryNameGroup(module, likeComponent, viewElementSelect, false, relationEntity.name);
           selectNameGroup.viewElementSelect = viewElementSelect;
           // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
