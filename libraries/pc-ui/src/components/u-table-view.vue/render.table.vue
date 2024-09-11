@@ -82,7 +82,7 @@
                                       :class="[$style.row]"
                                       :color="item.rowColor"
                                       :selectable="selectable"
-                                      :selected="selectable && selectedItem === item"
+                                      :selected="selectable && item.radioChecked"
                                       :draggable="rowDraggable && item.draggable || undefined"
                                       :dragging="isDragging(item)"
                                       :subrow="!!item.tableTreeItemLevel"
@@ -114,8 +114,6 @@
                                             :treeDisplay="treeDisplay"
                                             :hasChildrenField="hasChildrenField"
                                             :treeColumnIndex="treeColumnIndex"
-
-                                            :selectedItem="selectedItem"
 
                                             :handlerDraggable="handlerDraggable"
 
@@ -290,7 +288,6 @@ export default {
         hasChildrenField: { type: String, default: 'hasChildren' },
 
         selectable: { type: Boolean, default: false },
-        selectedItem: Object,
 
         rowDraggable: Boolean,
         handlerDraggable: Boolean,
