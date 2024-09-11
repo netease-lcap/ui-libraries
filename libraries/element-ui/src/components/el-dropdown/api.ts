@@ -117,12 +117,21 @@ namespace nasl.ui {
     };
 
     @Prop({
-      group: '样式属性',
+      group: '主要属性',
       title: '是否下拉触发元素呈现为按钮组',
       description: '下拉触发元素呈现为按钮组',
       setter: { concept: 'SwitchSetter' },
     })
     splitButton: nasl.core.Boolean = false;
+
+    @Prop<ElDropdownOptions<T, V>, 'text'>({
+      group: '主要属性',
+      title: '文本',
+      description: '按钮内容',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.splitButton === true,
+    })
+    text: nasl.core.String = '下拉菜单';
 
     @Prop<ElDropdownOptions<T, V>, 'type'>({
       group: '样式属性',

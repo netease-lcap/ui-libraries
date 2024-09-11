@@ -1,5 +1,5 @@
 /* 组件功能扩展插件 */
-import { at, isNil } from 'lodash';
+import { at, isFunction, isNil } from 'lodash';
 import { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 import { ElDropdownMenu, ElDropdownItem } from '../index';
 import ElText from '../../el-text';
@@ -7,7 +7,7 @@ import ElText from '../../el-text';
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index';
 
 export const useExtendsPlugin: NaslComponentPluginOptions = {
-  props: ['data', 'textField', 'valueField', 'iconField', 'itemProps'],
+  props: ['data', 'textField', 'valueField', 'iconField', 'itemProps', 'text'],
   setup: (props, { h }) => {
     return {
       slotDropdown: () => {
@@ -59,6 +59,17 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         return [
           h(ElDropdownMenu, {}, itemVNodes),
         ];
+      },
+      slotDefault: () => {
+        const slotDefault = props.get('slotDefault');
+        const [splitButton, text = '下拉菜单'] = props.get<[boolean, string]>(['splitButton', 'text']);
+        if (splitButton) {
+          return [h('span', {}, text)];
+        }
+
+        const vnodes = isFunction(slotDefault) ? slotDefault() : [];
+
+        return vnodes;
       },
     };
   },
