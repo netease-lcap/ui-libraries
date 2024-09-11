@@ -1613,6 +1613,9 @@ export default {
                         }
                         if (values.includes(this.$at(item, this.valueField))) {
                             this.$set(item, 'checked', true);
+                        } else {
+                            // fix: 2954484513723136, values 为空时，没有清空选中状态
+                            this.$set(item, 'checked', false);
                         }
                     });
                 }
