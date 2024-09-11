@@ -1,16 +1,7 @@
 <template>
-  <demo-preview></demo-preview>
+  <el-timeline>
+    <el-timeline-item timestamp="2018-04-11"><el-text text="创建成功"></el-text></el-timeline-item>
+    <el-timeline-item timestamp="2018-04-13" size="large"><el-text text="通过审核"></el-text></el-timeline-item>
+    <el-timeline-item timestamp="2018-04-15"><el-text text="活动按期开始"></el-text></el-timeline-item>
+  </el-timeline>
 </template>
-<script>
-import createStoriesPreview from '@lcap/builder/input/vue2/stories-preview';
-import * as stories from '../../../components/el-timeline/stories/block.stories';
-
-const DemoPreview = createStoriesPreview(stories);
-
-export default {
-  components: {
-    DemoPreview,
-  },
-};
-
-</script>

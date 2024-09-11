@@ -1,6 +1,11 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
+  @IDEExtraInfo({
+    ideusage: {
+      type: 'container',
+    },
+  })
   @Component({
     title: '组件列表',
     icon: 'forcom',

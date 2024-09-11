@@ -1,16 +1,10 @@
 <template>
-  <demo-preview></demo-preview>
+  <el-popover
+    placement="bottom"
+    title="标题"
+    width="200"
+    trigger="hover"
+    content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
+    <el-button slot="reference">弹出框</el-button>
+  </el-popover>
 </template>
-<script>
-import createStoriesPreview from '@lcap/builder/input/vue2/stories-preview';
-import * as stories from '../../../components/el-popover/stories/block.stories';
-
-const DemoPreview = createStoriesPreview(stories);
-
-export default {
-  components: {
-    DemoPreview,
-  },
-};
-
-</script>
