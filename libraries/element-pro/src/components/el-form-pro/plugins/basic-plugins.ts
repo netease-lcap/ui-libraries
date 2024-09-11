@@ -198,7 +198,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       const resetObj = {};
 
       Object.keys(d).forEach((key) => {
-        resetObj[key] = resetObj[key] === undefined ? null : resetObj[key];
+        resetObj[key] = d[key] === undefined ? null : d[key];
       });
 
       Object.assign(formData, resetObj);
