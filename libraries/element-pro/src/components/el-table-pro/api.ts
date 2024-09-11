@@ -53,9 +53,6 @@ namespace nasl.ui {
           useRef: 'argus?.[0]?.index === 0',
         },
       },
-      slotInlineStyle: {
-        default: 'min-width: unset',
-      },
       childAccept: "target.tag === 'ElTableColumnPro'",
     },
   })
@@ -681,7 +678,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '表格列',
-          code: '<el-table-column-pro></el-table-column-pro>',
+          code: '<el-table-column-pro data-nodepath-multiple="ture"></el-table-column-pro>',
         },
       ],
     })
@@ -755,6 +752,12 @@ namespace nasl.ui {
       idetype: 'container',
       parentAccept: "['ElTablePro'].includes(target.tag)",
       childAccept: false,
+      selector: 'multiple',
+
+      slotInlineStyle: {
+        title: 'min-width: 30px',
+        cell: 'min-width: 30px',
+      },
     },
   })
   @Component({
