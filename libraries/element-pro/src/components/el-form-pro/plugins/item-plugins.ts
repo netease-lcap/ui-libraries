@@ -78,6 +78,8 @@ const useExtendsFormProps = (props: MapGet) => {
   return computedMap;
 };
 
+const getNotUndefinedValue = (v, initV) => (v === undefined ? initV : v);
+
 export const useExtensPlugin: NaslComponentPluginOptions = {
   props: [
     'colSpan',
@@ -86,6 +88,9 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     'useRangeValue',
     'startFieldName',
     'endFieldName',
+    'initialValue',
+    'startInitialValue',
+    'endInitialValue',
   ],
   setup(props, { h, isDesigner, setupContext: ctx }) {
     const { useComputed } = props;
@@ -195,17 +200,26 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     });
 
     const getFieldName = () => unref(fieldName) as string;
+    const [
+      initialValue = null,
+      startInitialValue = null,
+      endInitialValue = null,
+    ] = props.get<[any, any, any]>(['initialValue', 'startInitialValue', 'endInitialValue']);
 
     const proxyRangeFieldVNode = (vnode: VNode) => {
       const [startProp, endProp] = (vnode.componentOptions.Ctor as any).options.rangeModel;
       const propData: Record<string, any> = vnode.componentOptions.propsData || {};
       const listeners: Record<string, any> = vnode.componentOptions.listeners || {};
 
-      propData.formRangeField = initFormRangeField({
+      const formRangeField = initFormRangeField({
         uid,
         name: [startFieldName.value, endFieldName.value],
-        value: [propData[startProp], propData[endProp]],
+        value: [getNotUndefinedValue(propData[startProp], startInitialValue), getNotUndefinedValue(propData[endProp], endInitialValue)],
       });
+
+      formRangeField.setInitalValue([startInitialValue, endInitialValue]);
+
+      propData.formRangeField = formRangeField;
 
       return h(vnode.componentOptions.tag, {
         attrs: vnode.data.attrs,
@@ -224,7 +238,14 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       const propData: Record<string, any> = vnode.componentOptions.propsData || {};
       const listeners: Record<string, any> = vnode.componentOptions.listeners || {};
 
-      propData.formField = initFormField({ name: formFieldName, value: propData[prop] });
+      const formField = initFormField({
+        name: formFieldName,
+        value: propData[prop] === undefined ? initialValue : propData[prop],
+      });
+
+      formField.setInitalValue(initialValue);
+
+      propData.formField = formField;
 
       return h(vnode.componentOptions.tag, {
         attrs: vnode.data.attrs,

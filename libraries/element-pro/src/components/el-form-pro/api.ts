@@ -23,6 +23,17 @@ namespace nasl.ui {
     getFormData(): any {}
 
     @Method({
+      title: '设置表单初始数据',
+      description: '设置表单初始数据',
+    })
+    setInitalData(
+      @Param({
+        title: '表单初始数据'
+      })
+      initalData: any,
+    ): void {}
+
+    @Method({
       title: '设置表单数据',
       description: '设置表单数据'
     })
@@ -394,6 +405,15 @@ namespace nasl.ui {
     })
     name: nasl.core.String;
 
+    @Prop<ElFormItemProOptions, 'initialValue'>({
+      group: '数据属性',
+      title: '初始值',
+      description: '初始值',
+      setter: { concept: 'InputSetter' },
+      if: (_) => !_.useRangeValue,
+    })
+    initialValue: any;
+
     @Prop<ElFormItemProOptions, 'useRangeValue'>({
       group: '数据属性',
       title: '使用区间字段',
@@ -427,6 +447,24 @@ namespace nasl.ui {
       if: (_) => _.useRangeValue === true,
     })
     endFieldName: nasl.core.String;
+
+    @Prop<ElFormItemProOptions, 'startInitialValue'>({
+      group: '数据属性',
+      title: '起始初始值',
+      description: '起始初始值',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.useRangeValue === true,
+    })
+    startInitialValue: any;
+
+    @Prop<ElFormItemProOptions, 'endInitialValue'>({
+      group: '数据属性',
+      title: '结束初始值',
+      description: '结束初始值',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.useRangeValue === true,
+    })
+    endInitialValue: any;
 
     @Prop({
       group: '主要属性',
