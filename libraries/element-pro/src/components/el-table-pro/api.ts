@@ -483,7 +483,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    rowKey: (item: T) => V;
+    rowKey: (item: T) => any;
 
     // @Prop({
     //   group: '主要属性',
