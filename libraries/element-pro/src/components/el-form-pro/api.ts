@@ -270,17 +270,17 @@ namespace nasl.ui {
     // })
     // preventSubmitDefault: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: '重置表单的方式',
-      description:
-        '重置表单的方式，值为 empty 表示重置表单为空，值为 initial 表示重置表单数据为初始值。可选项：empty/initial',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '重置表单为空' }, { title: '重置表单数据为初始值' }],
-      },
-    })
-    resetType: 'empty' | 'initial' = 'empty';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '重置表单的方式',
+    //   description:
+    //     '重置表单的方式，值为 empty 表示重置表单为空，值为 initial 表示重置表单数据为初始值。可选项：empty/initial',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '重置表单为空' }, { title: '重置表单数据为初始值' }],
+    //   },
+    // })
+    // resetType: 'empty' | 'initial' = 'empty';
 
     @Prop({
       group: '主要属性',
