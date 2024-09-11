@@ -4,6 +4,12 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      additionalAttribute: {
+        ':dataSource': '"[{}]"',
+        ':colnum': '"1"',
+      },
+      childAccept: false,
+      useTemplateInDefaultSlot: true,
     },
   })
   @Component({
