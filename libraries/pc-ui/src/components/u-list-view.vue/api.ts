@@ -295,7 +295,7 @@ namespace nasl.ui {
                 concept: 'SwitchSetter',
             },
         })
-        clearable: nasl.core.Boolean = false;
+        clearable: nasl.core.Boolean = true;
 
         @Prop({
             group: '主要属性',

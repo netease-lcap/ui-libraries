@@ -78,6 +78,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
             autofocus={true}
             opened={true}
             appendTo="body"
+            emptyValueIsNull={true}
             onBlur={
               ${genBlurFunction(property, nameGroup)}
             }
@@ -95,6 +96,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
         autofocus={true}
         opened={true}
         appendTo="body"
+        emptyValueIsNull={true}
         onBlur={
           ${genBlurFunction(property, nameGroup)}
         }
@@ -148,7 +150,8 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
               value={$sync(${vModel})}
               placeholder="请输入${label}"
               autofocus={true}
-              size="full">
+              size="full"
+              emptyValueIsNull={true}>
           </UTextarea>
         </UValidator>`;
   } else if (propertyTypeName === 'Date') {
@@ -159,6 +162,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
         autofocus={true}
         opened={true}
         appendTo="body"
+        emptyValueIsNull={true}
         onBlur={
           ${genBlurFunction(property, nameGroup)}
         }>
@@ -170,6 +174,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
         autofocus={true}
         opened={true}
         appendTo="body"
+        emptyValueIsNull={true}
         onBlur={
           ${genBlurFunction(property, nameGroup)}
         }>
@@ -182,6 +187,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
         autofocus={true}
         opened={true}
         appendTo="body"
+        emptyValueIsNull={true}
         onBlur={
           ${genBlurFunction(property, nameGroup)}
         }>
@@ -199,6 +205,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
           autofocus={true}
           opened={true}
           appendTo="body"
+          emptyValueIsNull={true}
           onBlur={
             ${genBlurFunction(property, nameGroup)}
           }
@@ -215,7 +222,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
         }
         style="width:100%"
         appendTo="body">
-      <UInput value={$sync(${vModel})} placeholder="请输入${label}" autofocus={true} size="full"></UInput>
+      <UInput value={$sync(${vModel})} placeholder="请输入${label}" autofocus={true} size="full" emptyValueIsNull={true}></UInput>
       </UValidator>`;
     }
   }

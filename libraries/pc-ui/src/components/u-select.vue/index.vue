@@ -95,7 +95,7 @@
             :ref="`item_${index}`">
             <span
               :class="[$style['tag-text'], iconField ? $style.iconwrap : '']">
-              <img :class="$style.icon" v-if="itemVM.icon" :src="itemVM.icon" />
+              <img :class="$style.icon" v-if="iconField && itemVM.icon && typeof itemVM.icon === 'string'" :src="itemVM.icon" />
               {{ itemVM.currentText }}
             </span>
             <span
@@ -114,7 +114,7 @@
               :class="[$style['tag-text'], iconField ? $style.iconwrap : '']"
               ><img
                 :class="$style.icon"
-                v-if="itemVM.icon"
+                v-if="iconField && itemVM.icon && typeof itemVM.icon === 'string'"
                 :src="itemVM.icon" />{{ itemVM.currentText }}</span
             >
             <span
@@ -503,6 +503,7 @@ export default {
         } else if (!this.value && !this.filterInputFocused) {
           // 响应this.value 的变化 = '' 时处理 清空
           this.filterText = '';
+          this.currentText = '';
         }
         // blur 事件会处理这个未搜索到置空的问题
         // this.filterText = ? this.selectedVM.currentText : '';
@@ -571,6 +572,14 @@ export default {
         });
       }
     });
+
+    this.$on('click', ({ selectedVM }) => {
+      // 相等情况走这里重新设置，其他情况走下面 select;
+      if (selectedVM && selectedVM === this.selectedVM && this.filterable) {
+        this.filterText = this.selectedVM.currentText;
+      }
+    });
+
     this.$on('select', ($event) => {
       if (this.multiple) {
         this.preventBlur = true;

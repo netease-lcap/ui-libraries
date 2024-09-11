@@ -11,7 +11,7 @@
     <label :class="$style.label" :required="required" :position="requiredPosition" v-show="label || title || $slots.label || currentLabelSize !== 'auto'" vusion-slot-name="label" vusion-slot-name-edit="label">
         <span
           :class="$style.text"
-          :designer-empty="!$slots.label && !(label || title) && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']"
+          :designer-empty="isDesignerEmptyStructured('label') || (!$slots.label && !(label || title) && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path'])"
           vusion-slot-name-edit="label"
           v-ellipsis-title
         >
@@ -155,6 +155,16 @@ export default {
                     width: (span / this.repeat) * 100 + '%',
                 };
             }
+        },
+        isDesignerEmptyStructured(slotName) {
+            if (!this.$env.VUE_APP_DESIGNER) {
+                return false;
+            }
+            const slotsList = this.$slots[slotName];
+            return slotsList?.length === 1 ? !!slotsList.find((s, _) => {
+                const {componentOptions, children} = s || {}
+                return !componentOptions && children?.find(c => c.componentOptions?.tag === 'EmptySlot')
+            }): false
         },
     },
 };

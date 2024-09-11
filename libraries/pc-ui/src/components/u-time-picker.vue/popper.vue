@@ -126,7 +126,7 @@ export default {
             default: '',
         },
         clearable: { type: Boolean, default: true },
-        popperWidth: { type: String, default: '' },
+        popperWidth: { default: '' },
         showRightNowButton: { type: Boolean, default: true },
         showFooterButton: { type: Boolean, default: true },
         rightNowTitle: { type: String, default: '' },
@@ -416,6 +416,10 @@ export default {
             };
             timeData[type] = value;
             this.showTime = this.getTime(timeData.hours, timeData.minutes, timeData.seconds);
+            if (!this.showFooterButton) {
+              this.validShowTime = this.showTime;
+              this.emitValue();
+            }
         },
         isTimeDisabled(type, value) {
             const timeData = {

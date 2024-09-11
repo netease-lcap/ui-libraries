@@ -13,7 +13,7 @@ function addPrefix(name, prefix) {
 
 const TEMP_IDEUSAGE_VAR_NAME = '_tempIdeusage';
 
-export function transformAPITs(tsCode, context: OverloadComponentContext) {
+export function transformAPITs(tsCode, context: OverloadComponentContext, all: boolean = false) {
   const ast = babel.parse(tsCode, {
     filename: 'result.ts',
     presets: [require('@babel/preset-typescript')],
@@ -65,9 +65,8 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
         'ValidateResult', 'BaseEvent', 'Current'
       ];
       const typeName = path.node.typeName.name;
-      if (
-        typeName === `${context.naslUIConfig.name}Options`
-      ) {
+      const replaceName = context.replaceNames.find((name) => typeName === `${name}Options`);
+      if (replaceName) {
         path.node.typeName.name = addPrefix(path.node.typeName.name, context.prefix);
       } else if (
         addNaslUINamespace.indexOf(path.node.typeName.name) !== -1
@@ -96,11 +95,16 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
     },
     ClassDeclaration(path) {
       if (path.node.superClass && path.node.id && path.node.id.type === 'Identifier' && path.node.superClass.type === 'Identifier' && path.node.superClass.name === 'ViewComponent') {
-        if (path.node.id.name !== context.naslUIConfig.name) {
+        if (path.node.id.name !== context.naslUIConfig.name && !all) {
           path.remove();
           return;
         }
-        path.node.id.name = addPrefix(path.node.id.name, context.prefix);
+        const className = path.node.id.name;
+        const replaceName = context.replaceNames.find((name) => className === name || className === `${name}Options`);
+        if (replaceName) {
+          path.node.id.name = addPrefix(className, context.prefix);
+        }
+
         if (!path.node.decorators) {
           return;
         }
@@ -116,18 +120,6 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
         ) {
           const decorators = path.node.decorators || [];
           const properties: babelTypes.ObjectProperty[] = [{
-            type: 'ObjectProperty',
-            key: {
-              type: 'Identifier',
-              name: 'replaceNaslUIComponent',
-            },
-            value: {
-              type: 'StringLiteral',
-              value: context.naslUIConfig.name,
-            },
-            computed: false,
-            shorthand: false,
-          }, {
             type: 'ObjectProperty',
             key: {
               type: 'Identifier',
@@ -153,8 +145,25 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
             shorthand: false,
           }];
 
-          if (context.naslUIConfig.ideusage) {
-            const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${JSON.stringify(context.naslUIConfig.ideusage)};`;
+          if (context.naslUIConfig.name === className) {
+            properties.unshift({
+              type: 'ObjectProperty',
+              key: {
+                type: 'Identifier',
+                name: 'replaceNaslUIComponent',
+              },
+              value: {
+                type: 'StringLiteral',
+                value: context.naslUIConfig.name,
+              },
+              computed: false,
+              shorthand: false,
+            });
+          }
+
+          const config = context.findNaslUIConfig(className);
+          if (config && config.ideusage) {
+            const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${JSON.stringify(config.ideusage)};`;
             const tempAST = babel.parseSync(code);
             if (tempAST) {
               traverse(tempAST, {
@@ -192,7 +201,7 @@ export function transformAPITs(tsCode, context: OverloadComponentContext) {
           });
         }
       } else if (path.node.id && path.node.id.type === 'Identifier' && path.node.superClass && path.node.superClass.type === 'Identifier' && path.node.superClass.name === 'ViewComponentOptions') {
-        if (path.node.id.name !== `${context.naslUIConfig.name}Options`) {
+        if (path.node.id.name !== `${context.naslUIConfig.name}Options` && !all) {
           path.remove();
           return;
         }

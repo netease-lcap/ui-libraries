@@ -28,6 +28,7 @@ export default {
         field: { type: String, default: 'text' },
         trigger: { type: String, default: 'click' },
         lazy: { type: Boolean, default: false },
+        childrenField: { type: String, default: 'children' },
         componentIndex: Number, // 第几个cascaderitem组件
         selectSubIdnex: Number, // parent选择了第几个cascaderitem组件
         isInput: Boolean,
@@ -68,7 +69,7 @@ export default {
             if (this.lazy) {
                 if (selectItem.leaf || this.changeOnSelect)
                     this.$emit('select-lastvalue');
-            } else if (!selectItem.children || this.changeOnSelect) {
+            } else if (!this.$at(selectItem, this.childrenField) || this.changeOnSelect) {
                 this.$emit('select-lastvalue');
             }
         },
@@ -124,12 +125,12 @@ export default {
             this.selectMenuitem(newUmenuIndex);
 
             this.$emit('select-umenuitem', selectItem, this.componentIndex);
-            if (enter && (!selectItem.children || this.changeOnSelect))
+            if (enter && (!this.$at(selectItem, this.childrenField) || this.changeOnSelect))
                 this.$emit('select-lastvalue');
         },
         hasSub(item) {
             let show = false;
-            if (item.children || ('leaf' in item && !item.leaf))
+            if (this.$at(item, this.childrenField) || ('leaf' in item && !item.leaf))
                 if (!item.loading)
                     show = true;
             return show;
