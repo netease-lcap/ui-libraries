@@ -2,10 +2,39 @@
  * @component el-rate-pro
  */
 :root {
+  /**
+   * @desc 评分组件文字字体
+   * @type font
+   */
   --el-rate-text-font: var(--el-font-mark-medium);
+
+  /**
+   * @desc 评分组件文字前的间距
+   * @type spacing
+   */
   --el-rate-text-before: var(--el-comp-margin-l);
+
+  /**
+   * @desc 评分组件悬停时的缩放比例
+   * @type transform
+   */
   --el-rate-hover-transform: scale(1.33);
+
+  /**
+   * @desc 评分组件的过渡效果
+   * @type transition
+   */
   --el-rate-transition: all 0.2s cubic-bezier(0.38, 0, 0.24, 1);
+
+  /**
+   * @desc 评分组件主要文字颜色
+   * @type color
+   */
   --el-rate-text-primary: var(--el-text-color-primary);
+
+  /**
+   * @desc 评分组件次要文字颜色
+   * @type color
+   */
   --el-rate-text-secondary: var(--el-text-color-secondary);
 }

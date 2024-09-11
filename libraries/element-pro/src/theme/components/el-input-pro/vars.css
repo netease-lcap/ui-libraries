@@ -2,54 +2,303 @@
  * @component el-input-pro
  */
 :root {
+  /**
+   * @desc 默认边框颜色
+   * @type color
+   */
   --el-input-border-color-default: var(--el-border-level-2-color);
+
+  /**
+   * @desc 默认悬停边框颜色
+   * @type color
+   */
   --el-input-border-color-default-hover: var(--el-brand-color);
+
+  /**
+   * @desc 默认聚焦边框颜色
+   * @type color
+   */
   --el-input-border-color-default-focus: var(--el-brand-color);
+
+  /**
+   * @desc 成功状态边框颜色
+   * @type color
+   */
   --el-input-border-color-success: var(--el-success-color);
+
+  /**
+   * @desc 警告状态边框颜色
+   * @type color
+   */
   --el-input-border-color-warning: var(--el-warning-color);
+
+  /**
+   * @desc 错误状态边框颜色
+   * @type color
+   */
   --el-input-border-color-error: var(--el-error-color);
+
+  /**
+   * @desc 成功状态文字颜色
+   * @type color
+   */
   --el-input-text-color-success: var(--el-success-color);
+
+  /**
+   * @desc 警告状态文字颜色
+   * @type color
+   */
   --el-input-text-color-warning: var(--el-warning-color);
+
+  /**
+   * @desc 错误状态文字颜色
+   * @type color
+   */
   --el-input-text-color-error: var(--el-error-color);
+
+  /**
+   * @desc 默认文字颜色
+   * @type color
+   */
   --el-input-text-color-default: var(--el-text-color-primary);
+
+  /**
+   * @desc 只读状态文字颜色
+   * @type color
+   */
   --el-input-text-color-readonly: var(--el-text-color-primary);
+
+  /**
+   * @desc 禁用状态文字颜色
+   * @type color
+   */
   --el-input-text-color-disabled: var(--el-text-color-disabled);
+
+  /**
+   * @desc 提示文字颜色
+   * @type color
+   */
   --el-input-text-color-tips: var(--el-text-color-placeholder);
+
+  /**
+   * @desc 占位符颜色
+   * @type color
+   */
   --el-input-placeholder-color: var(--el-text-color-placeholder);
+
+  /**
+   * @desc 默认背景颜色
+   * @type color
+   */
   --el-input-bg-color-default: var(--el-bg-color-specialcomponent);
+
+  /**
+   * @desc 只读状态背景颜色
+   * @type color
+   */
   --el-input-bg-color-readonly: var(--el-bg-color-specialcomponent);
+
+  /**
+   * @desc 禁用状态背景颜色
+   * @type color
+   */
   --el-input-bg-color-disabled: var(--el-bg-color-component-disabled);
+
+  /**
+   * @desc 默认额外信息颜色
+   * @type color
+   */
   --el-input-extra-color-default: var(--el-text-color-placeholder);
+
+  /**
+   * @desc 成功状态额外信息颜色
+   * @type color
+   */
   --el-input-extra-color-success: var(--el-success-color);
+
+  /**
+   * @desc 警告状态额外信息颜色
+   * @type color
+   */
   --el-input-extra-color-warning: var(--el-warning-color);
+
+  /**
+   * @desc 错误状态额外信息颜色
+   * @type color
+   */
   --el-input-extra-color-error: var(--el-error-color);
+
+  /**
+   * @desc 附加区颜色
+   * @type color
+   */
   --el-input-append-color: var(--el-bg-color-secondarycontainer-hover);
+
+  /**
+   * @desc 限制文字颜色
+   * @type color
+   */
   --el-input-limit-color: var(--el-text-color-placeholder);
+
+  /**
+   * @desc 固定位置
+   * @type size
+   */
   --el-input-fix-position: 8px;
+
+  /**
+   * @desc 大号内边距
+   * @type size
+   */
   --el-input-padding-l: var(--el-comp-paddingTB-m) var(--el-comp-paddingLR-m);
+
+  /**
+   * @desc 默认内边距
+   * @type size
+   */
   --el-input-padding-default: 0 var(--el-comp-paddingLR-s);
+
+  /**
+   * @desc 默认外间距
+   * @type size
+   */
   --el-input-margin-distance-default: var(--el-comp-margin-xxxl);
+
+  /**
+   * @desc 状态图标右侧位置
+   * @type size
+   */
   --el-input-status-position-right: -24px;
+
+  /**
+   * @desc 输入框组第一个子元素左侧外间距
+   * @type size
+   */
   --el-input-group-first-child-margin-left: -1px;
+
+  /**
+   * @desc 小号高度
+   * @type size
+   */
   --el-input-height-s: var(--el-comp-size-xs);
+
+  /**
+   * @desc 默认高度
+   * @type size
+   */
   --el-input-height-default: var(--el-comp-size-m);
+
+  /**
+   * @desc 大号高度
+   * @type size
+   */
   --el-input-height-l: var(--el-comp-size-xl);
+
+  /**
+   * @desc 内部图标字体大小
+   * @type size
+   */
   --el-input-inner-icon-font-size: inherit;
+
+  /**
+   * @desc 提示最小高度
+   * @type size
+   */
   --el-input-tips-min-height: var(--el-line-height-body-small);
+
+  /**
+   * @desc 内部前缀图标颜色
+   * @type color
+   */
   --el-input-inner-prefix-icon-color: var(--el-text-color-placeholder);
+
+  /**
+   * @desc 内部后缀图标颜色
+   * @type color
+   */
   --el-input-inner-suffix-icon-color: var(--el-text-color-placeholder);
+
+  /**
+   * @desc 内部后缀图标悬停颜色
+   * @type color
+   */
   --el-input-inner-suffix-icon-color-hover: var(--el-text-color-secondary);
+
+  /**
+   * @desc 大号字体
+   * @type font
+   */
   --el-input-font-l: var(--el-font-body-large);
+
+  /**
+   * @desc 默认字体
+   * @type font
+   */
   --el-input-font: var(--el-font-body-medium);
+
+  /**
+   * @desc 小号字体
+   * @type font
+   */
   --el-input-font-s: var(--el-font-body-small);
+
+  /**
+   * @desc 额外信息字体
+   * @type font
+   */
   --el-input-extra-font: var(--el-font-body-small);
+
+  /**
+   * @desc 提示字体
+   * @type font
+   */
   --el-input-tips-font: var(--el-font-body-small);
+
+  /**
+   * @desc 边框圆角
+   * @type size
+   */
   --el-input-border-radius: var(--el-radius-default);
+
+  /**
+   * @desc 默认聚焦状态阴影颜色
+   * @type color
+   */
   --el-input-box-shadow-color-default-focus: var(--el-brand-color-focus);
+
+  /**
+   * @desc 成功状态聚焦阴影颜色
+   * @type color
+   */
   --el-input-box-shadow-color-success-focus: var(--el-success-color-focus);
+
+  /**
+   * @desc 警告状态聚焦阴影颜色
+   * @type color
+   */
   --el-input-box-shadow-color-warning-focus: var(--el-warning-color-focus);
+
+  /**
+   * @desc 错误状态聚焦阴影颜色
+   * @type color
+   */
   --el-input-box-shadow-color-error-focus: var(--el-error-color-focus);
+
+  /**
+   * @desc 聚焦状态阴影
+   * @type shadow
+   */
   --el-input-box-shadow-focus: 0 0 0 2px var(--el-input-box-shadow-color-default-focus);
+
+  /**
+   * @desc 内部过渡效果
+   * @type transition
+   */
   --el-input-inner-transition: border cubic-bezier(0.38, 0, 0.24, 1) 0.2s, box-shadow cubic-bezier(0.38, 0, 0.24, 1) 0.2s, background-color cubic-bezier(0.38, 0, 0.24, 1) 0.2s;
+
+  /**
+   * @desc 只读状态光标
+   * @type cursor
+   */
   --el-input-cursor-readonly: pointer;
 }

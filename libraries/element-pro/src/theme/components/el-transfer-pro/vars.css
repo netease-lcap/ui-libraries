@@ -2,54 +2,303 @@
  * @component el-transfer-pro
  */
 :root {
+  /**
+   * @desc 传输组件背景色
+   * @type color
+   */
   --el-transfer-bg-color: transparent;
+
+  /**
+   * @desc 传输组件悬停背景色
+   * @type color
+   */
   --el-transfer-bg-hover: var(--el-bg-color-container-hover);
+
+  /**
+   * @desc 传输组件选中背景色
+   * @type color
+   */
   --el-transfer-bg-checked: var(--el-brand-color-light);
+
+  /**
+   * @desc 传输组件边框颜色
+   * @type color
+   */
   --el-transfer-border-color: var(--el-border-level-1-color);
+
+  /**
+   * @desc 传输组件字体颜色
+   * @type color
+   */
   --el-transfer-font-color: var(--el-text-color-primary);
+
+  /**
+   * @desc 传输组件列表水平外间距
+   * @type size
+   */
   --el-transfer-list-margin-horizontal: var(--el-comp-margin-s);
+
+  /**
+   * @desc 传输组件列表头部内边距
+   * @type size
+   */
   --el-transfer-list-header-padding: 0 var(--el-comp-paddingLR-s);
+
+  /**
+   * @desc 传输组件列表头部外间距
+   * @type size
+   */
   --el-transfer-list-header-margin: 0 var(--el-transfer-list-margin-horizontal);
+
+  /**
+   * @desc 传输组件列表头部文字左外间距
+   * @type size
+   */
   --el-transfer-list-header-text-margin-left: var(--el-comp-margin-s);
+
+  /**
+   * @desc 传输组件列表复选框组间距
+   * @type size
+   */
   --el-transfer-list-checkbox-group-gap: var(--el-comp-margin-xs);
+
+  /**
+   * @desc 传输组件列表复选框组外间距
+   * @type size
+   */
   --el-transfer-list-checkbox-group-margin: var(--el-comp-margin-s) 0;
+
+  /**
+   * @desc 传输组件列表项内边距
+   * @type size
+   */
   --el-transfer-list-item-padding: var(--el-comp-paddingLR-xs) var(--el-comp-paddingLR-s);
+
+  /**
+   * @desc 传输组件列表项外间距
+   * @type size
+   */
   --el-transfer-list-item-margin: 0 var(--el-transfer-list-margin-horizontal);
+
+  /**
+   * @desc 传输组件列表项文字左外间距
+   * @type size
+   */
   --el-transfer-list-item-text-margin-left: var(--el-comp-margin-s);
+
+  /**
+   * @desc 传输组件列表搜索框外间距
+   * @type size
+   */
   --el-transfer-list-search-wrapper-margin: 0 var(--el-transfer-list-margin-horizontal);
+
+  /**
+   * @desc 传输组件带搜索框列表顶部内边距
+   * @type size
+   */
   --el-transfer-list-with-search-padding-top: var(--el-comp-size-m);
+
+  /**
+   * @desc 传输组件列表包装内边距
+   * @type size
+   */
   --el-transfer-list-wrapper-padding: var(--el-comp-paddingTB-m) var(--el-comp-paddingLR-m);
+
+  /**
+   * @desc 传输组件带树列表内边距
+   * @type size
+   */
   --el-transfer-list-with-tree-padding: 0 var(--el-comp-paddingLR-m);
+
+  /**
+   * @desc 传输组件带树列表外间距
+   * @type size
+   */
   --el-transfer-list-with-tree-margin: var(--el-comp-margin-s) 0;
+
+  /**
+   * @desc 传输组件列表分页内边距
+   * @type size
+   */
   --el-transfer-list-pagination-padding: var(--el-comp-paddingTB-m);
+
+  /**
+   * @desc 传输组件操作区外间距
+   * @type size
+   */
   --el-transfer-operations-margin: auto var(--el-comp-margin-s);
+
+  /**
+   * @desc 传输组件操作区间距
+   * @type size
+   */
   --el-transfer-operations-gap: var(--el-comp-margin-l);
+
+  /**
+   * @desc 传输组件带分页底部内边距
+   * @type size
+   */
   --el-transfer-with-pagination-padding-bottom: calc(var(--el-transfer-list-pagination-height) + var(--el-transfer-list-pagination-padding) * 2);
+
+  /**
+   * @desc 传输组件带页脚底部内边距
+   * @type size
+   */
   --el-transfer-with-footer-padding-bottom: 48px;
+
+  /**
+   * @desc 传输组件带分页和页脚底部内边距
+   * @type size
+   */
   --el-transfer-with-pagination-footer-padding-bottom: calc(var(--el-transfer-with-pagination-padding-bottom) + var(--el-transfer-with-footer-padding-bottom));
+
+  /**
+   * @desc 传输组件带搜索框底部内边距
+   * @type size
+   */
   --el-transfer-with-search-footer-padding-bottom: 48px;
+
+  /**
+   * @desc 传输组件带搜索框和分页底部内边距
+   * @type size
+   */
   --el-transfer-with-search-pagination-padding-bottom: 48px;
+
+  /**
+   * @desc 传输组件带所有功能底部内边距
+   * @type size
+   */
   --el-transfer-with-all-padding-bottom: 88px;
+
+  /**
+   * @desc 传输组件通用宽度
+   * @type size
+   */
   --el-transfer-common-width: 200px;
+
+  /**
+   * @desc 传输组件通用高度
+   * @type size
+   */
   --el-transfer-common-height: 200px;
+
+  /**
+   * @desc 传输组件带搜索框高度
+   * @type size
+   */
   --el-transfer-with-search-height: 240px;
+
+  /**
+   * @desc 传输组件带分页高度
+   * @type size
+   */
   --el-transfer-with-pagination-height: 240px;
+
+  /**
+   * @desc 传输组件带页脚高度
+   * @type size
+   */
   --el-transfer-with-footer-height: 248px;
+
+  /**
+   * @desc 传输组件带页脚和分页高度
+   * @type size
+   */
   --el-transfer-with-footer-both-height: 288px;
+
+  /**
+   * @desc 传输组件带分页和搜索框高度
+   * @type size
+   */
   --el-transfer-with-both-height: 280px;
+
+  /**
+   * @desc 传输组件带所有功能高度
+   * @type size
+   */
   --el-transfer-with-all-height: 328px;
+
+  /**
+   * @desc 传输组件包装高度
+   * @type size
+   */
   --el-transfer-wrap-height: 320px;
+
+  /**
+   * @desc 传输组件包装宽度
+   * @type size
+   */
   --el-transfer-wrap-width: 206px;
+
+  /**
+   * @desc 传输组件列表头部高度
+   * @type size
+   */
   --el-transfer-list-header-height: var(--el-comp-size-xxl);
+
+  /**
+   * @desc 传输组件列表头部宽度
+   * @type size
+   */
   --el-transfer-list-header-width: calc(var(--el-transfer-common-width) - var(--el-transfer-list-margin-horizontal) * 2);
+
+  /**
+   * @desc 传输组件列表搜索框宽度
+   * @type size
+   */
   --el-transfer-list-search-wrapper-width: calc(var(--el-transfer-common-width) - var(--el-transfer-list-margin-horizontal) * 2);
+
+  /**
+   * @desc 传输组件列表分页高度
+   * @type size
+   */
   --el-transfer-list-pagination-height: var(--el-comp-size-xs);
+
+  /**
+   * @desc 传输组件操作按钮高度
+   * @type size
+   */
   --el-transfer-operations-button-height: var(--el-comp-size-xs);
+
+  /**
+   * @desc 传输组件操作图标大小
+   * @type size
+   */
   --el-transfer-operations-icon-size: var(--el-comp-size-xxxs);
+
+  /**
+   * @desc 传输组件字体
+   * @type font
+   */
   --el-transfer-font: var(--el-font-body-medium);
+
+  /**
+   * @desc 传输组件边框
+   * @type border
+   */
   --el-transfer-border: 1px solid var(--el-transfer-border-color);
+
+  /**
+   * @desc 传输组件列表边框
+   * @type border
+   */
   --el-transfer-list-border: 0;
+
+  /**
+   * @desc 传输组件带搜索框列表边框
+   * @type border
+   */
   --el-transfer-list-with-search-border: 0;
+
+  /**
+   * @desc 传输组件边框圆角
+   * @type size
+   */
   --el-transfer-border-radius: var(--el-radius-medium);
+
+  /**
+   * @desc 传输组件阴影
+   * @type shadow
+   */
   --el-transfer-box-shadow: var(--el-shadow-1);
 }

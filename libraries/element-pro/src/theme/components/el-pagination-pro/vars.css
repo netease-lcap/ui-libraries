@@ -2,37 +2,201 @@
  * @component el-pagination-pro
  */
 :root {
+  /**
+   * @desc 分页文字颜色
+   * @type color
+   */
   --el-pagination-text-color: var(--el-text-color-secondary);
+
+  /**
+   * @desc 分页禁用状态文字颜色
+   * @type color
+   */
   --el-pagination-text-color-disabled: var(--el-text-color-disabled);
+
+  /**
+   * @desc 分页激活状态文字颜色
+   * @type color
+   */
   --el-pagination-text-color-active: var(--el-text-color-anti);
+
+  /**
+   * @desc 分页按钮文字颜色
+   * @type color
+   */
   --el-pagination-text-color-btn: var(--el-text-color-primary);
+
+  /**
+   * @desc 当前页背景颜色
+   * @type color
+   */
   --el-pagination-bg-color-current: var(--el-brand-color);
+
+  /**
+   * @desc 悬停状态背景颜色
+   * @type color
+   */
   --el-pagination-bg-color-hover: var(--el-brand-color-hover);
+
+  /**
+   * @desc 激活状态背景颜色
+   * @type color
+   */
   --el-pagination-bg-color-active: var(--el-brand-color);
+
+  /**
+   * @desc 禁用状态背景颜色
+   * @type color
+   */
   --el-pagination-bg-color-disabled: var(--el-bg-color-component-disabled);
+
+  /**
+   * @desc 当前页禁用状态背景颜色
+   * @type color
+   */
   --el-pagination-bg-color-current-disabled: var(--el-brand-color-focus);
+
+  /**
+   * @desc 按钮悬停状态背景颜色
+   * @type color
+   */
   --el-pagination-bg-color-btn-hover: var(--el-bg-color-secondarycontainer-hover);
+
+  /**
+   * @desc 按钮激活状态背景颜色
+   * @type color
+   */
   --el-pagination-bg-color-btn-active: var(--el-bg-color-secondarycontainer-active);
+
+  /**
+   * @desc 默认背景颜色
+   * @type color
+   */
   --el-pagination-bg-color-default: var(--el-bg-color-container);
+
+  /**
+   * @desc 图标禁用状态颜色
+   * @type color
+   */
   --el-pagination-icon-color-disabled: var(--el-text-color-disabled);
+
+  /**
+   * @desc 边框颜色
+   * @type color
+   */
   --el-pagination-border-color: var(--el-component-border);
+
+  /**
+   * @desc 基础边框半径
+   * @type dimension
+   */
   --el-pagination-border-radius-base: var(--el-radius-default);
+
+  /**
+   * @desc 小号分页高度
+   * @type dimension
+   */
   --el-pagination-height-s: var(--el-comp-size-xs);
+
+  /**
+   * @desc 默认分页高度
+   * @type dimension
+   */
   --el-pagination-height-default: var(--el-comp-size-m);
+
+  /**
+   * @desc 输入框宽度
+   * @type dimension
+   */
   --el-pagination-input-width: 56px;
+
+  /**
+   * @desc 小号字体
+   * @type font
+   */
   --el-pagination-font-s: var(--el-font-body-small);
+
+  /**
+   * @desc 默认字体
+   * @type font
+   */
   --el-pagination-font-default: var(--el-font-body-medium);
+
+  /**
+   * @desc 按钮字体大小
+   * @type font
+   */
   --el-pagination-btn-font-size: var(--el-font-body-large);
+
+  /**
+   * @desc 小号分页水平内边距
+   * @type dimension
+   */
   --el-pagination-padding-horizontal-s: var(--el-comp-paddingLR-xxs);
+
+  /**
+   * @desc 默认分页水平内边距
+   * @type dimension
+   */
   --el-pagination-padding-horizontal-default: var(--el-comp-paddingLR-xs);
+
+  /**
+   * @desc 按钮外间距
+   * @type dimension
+   */
   --el-pagination-btn-margin: var(--el-comp-margin-s);
+
+  /**
+   * @desc 跳转区域外间距
+   * @type dimension
+   */
   --el-pagination-jump-margin: var(--el-comp-margin-s);
+
+  /**
+   * @desc 选择区域外间距
+   * @type dimension
+   */
   --el-pagination-select-margin: var(--el-comp-margin-l);
+
+  /**
+   * @desc 分页器外间距
+   * @type dimension
+   */
   --el-pagination-pager-margin: var(--el-comp-margin-s);
+
+  /**
+   * @desc 跳转区域高度
+   * @type dimension
+   */
   --el-pagination-jump-height: var(--el-comp-size-m);
+
+  /**
+   * @desc 跳转区域左内边距
+   * @type dimension
+   */
   --el-pagination-jump-padding-left: var(--el-comp-margin-s);
+
+  /**
+   * @desc 跳转区域内部高度
+   * @type dimension
+   */
   --el-pagination-jump-inner-height: calc(var(--el-comp-size-m) - 4px);
+
+  /**
+   * @desc 小号跳转区域高度
+   * @type dimension
+   */
   --el-pagination-jump-height-small: var(--el-comp-size-xs);
+
+  /**
+   * @desc 小号跳转区域内部高度
+   * @type dimension
+   */
   --el-pagination-jump-inner-height-small: calc(var(--el-comp-size-xs) - 4px);
+
+  /**
+   * @desc 悬停状态过渡效果
+   * @type transition
+   */
   --el-pagination-hover-transition: all 0.2s cubic-bezier(0.82, 0, 1, 0.9);
 }

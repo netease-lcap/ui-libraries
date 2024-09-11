@@ -2,48 +2,267 @@
  * @component el-date-picker-pro
  */
 :root {
+  /**
+   * @desc 表头字体颜色
+   * @type color
+   */
   --el-datepicker-th-font-color: var(--el-text-color-secondary);
+
+  /**
+   * @desc 面板宽度
+   * @type size
+   */
   --el-datepicker-panel-width: 280px;
+
+  /**
+   * @desc 面板容器最小宽度
+   * @type size
+   */
   --el-datepicker-panel-container-min-width: 280px;
+
+  /**
+   * @desc 面板选择最大宽度
+   * @type size
+   */
   --el-datepicker-panel-select-max-width: 160px;
+
+  /**
+   * @desc 面板分隔线颜色
+   * @type color
+   */
   --el-datepicker-panel-divider-color: var(--el-component-stroke);
+
+  /**
+   * @desc 时间面板宽度
+   * @type size
+   */
   --el-datepicker-time-panel-width: 216px;
+
+  /**
+   * @desc 时间面板内边距
+   * @type size
+   */
   --el-datepicker-time-panel-padding: var(--el-pop-padding-xl) calc(var(--el-pop-padding-xl) - var(--el-comp-margin-xs));
+
+  /**
+   * @desc 面板内边距
+   * @type size
+   */
   --el-datepicker-panel-padding: var(--el-pop-padding-xl);
+
+  /**
+   * @desc 表头间隙
+   * @type size
+   */
   --el-datepicker-header-gap: var(--el-comp-margin-m);
+
+  /**
+   * @desc 表头控制器间隙
+   * @type size
+   */
   --el-datepicker-header-controller-gap: var(--el-comp-margin-s);
+
+  /**
+   * @desc 时间表头查看器大小
+   * @type size
+   */
   --el-datepicker-time-header-viewer-size: var(--el-comp-size-m);
+
+  /**
+   * @desc 面板间隙
+   * @type size
+   */
   --el-datepicker-panel-gap: var(--el-comp-margin-m);
+
+  /**
+   * @desc 年月季度表格间隙
+   * @type size
+   */
   --el-datepicker-year-month-quarter-table-gap: var(--el-comp-margin-m);
+
+  /**
+   * @desc 周首单元格左外边距
+   * @type size
+   */
   --el-datepicker-week-firstcell-margin-left: var(--el-comp-margin-xxxl);
+
+  /**
+   * @desc 单元格水平内边距
+   * @type size
+   */
   --el-datepicker-cell-start-end-horizontal: calc(var(--el-datepicker-cell-inner-margin) * 2);
+
+  /**
+   * @desc 禁用单元格左偏移
+   * @type size
+   */
   --el-datepicker-cell-disabled-left: calc(0px - var(--el-comp-size-l));
+
+  /**
+   * @desc 大禁用单元格左偏移
+   * @type size
+   */
   --el-datepicker-cell-disabled-left-large: calc(0px - var(--el-comp-size-xxxl));
+
+  /**
+   * @desc 年控制器宽度
+   * @type size
+   */
   --el-datepicker-year-controller-width: 78px;
+
+  /**
+   * @desc 月控制器宽度
+   * @type size
+   */
   --el-datepicker-month-controller-width: 80px;
+
+  /**
+   * @desc 单元格最小宽度
+   * @type size
+   */
   --el-datepicker-cell-min-width: var(--el-comp-size-xs);
+
+  /**
+   * @desc 单元格高度
+   * @type size
+   */
   --el-datepicker-cell-height: var(--el-comp-size-xs);
+
+  /**
+   * @desc 大单元格最小宽度
+   * @type size
+   */
   --el-datepicker-cell-min-width-l: var(--el-comp-size-xxl);
+
+  /**
+   * @desc 月年单元格左偏移
+   * @type size
+   */
   --el-datepicker-cell-month-year-left: calc(0px - calc(var(--el-datepicker-cell-height) + var(--el-comp-margin-xxl)));
+
+  /**
+   * @desc 单元格内边距
+   * @type size
+   */
   --el-datepicker-cell-inner-margin: calc(var(--el-comp-margin-xs) - 1px);
+
+  /**
+   * @desc 表头字体粗细
+   * @type font-weight
+   */
   --el-datepicker-th-font-weight: 400;
+
+  /**
+   * @desc 中等字体粗细
+   * @type font-weight
+   */
   --el-datepicker-font-weight-medium: 500;
+
+  /**
+   * @desc 面板边框圆角
+   * @type size
+   */
   --el-datepicker-panel-border-radius: var(--el-radius-default);
+
+  /**
+   * @desc 预设内边距
+   * @type size
+   */
   --el-datepicker-presets-padding: var(--el-pop-padding-xl);
+
+  /**
+   * @desc 预设间隙
+   * @type size
+   */
   --el-datepicker-presets-gap: var(--el-comp-margin-s);
+
+  /**
+   * @desc 表头伪元素行高
+   * @type size
+   */
   --el-datepicker-thead-pseudo-line-height: var(--el-comp-margin-xs);
+
+  /**
+   * @desc 时间面板间隙
+   * @type size
+   */
   --el-datepicker-time-panel-gap: calc(var(--el-datepicker-panel-gap) / 2);
+
+  /**
+   * @desc 单元格悬停背景色
+   * @type color
+   */
   --el-datepicker-cell-hover-background: var(--el-bg-color-container-hover);
+
+  /**
+   * @desc 单元格激活颜色
+   * @type color
+   */
   --el-datepicker-cell-active-color: var(--el-text-color-anti);
+
+  /**
+   * @desc 单元格激活背景色
+   * @type color
+   */
   --el-datepicker-cell-active-background: var(--el-brand-color);
+
+  /**
+   * @desc 禁用单元格颜色
+   * @type color
+   */
   --el-datepicker-cell-disabled-color: var(--el-text-color-disabled);
+
+  /**
+   * @desc 禁用单元格背景色
+   * @type color
+   */
   --el-datepicker-cell-disable-background-color: var(--el-bg-color-component-disabled);
+
+  /**
+   * @desc 当前时间文字颜色
+   * @type color
+   */
   --el-datepicker-now-text-color: var(--el-brand-color);
+
+  /**
+   * @desc 当前时间背景色
+   * @type color
+   */
   --el-datepicker-now-background-color: var(--el-brand-color-light);
+
+  /**
+   * @desc 高亮颜色
+   * @type color
+   */
   --el-datepicker-highlight-color: var(--el-brand-color-light);
+
+  /**
+   * @desc 悬停高亮颜色
+   * @type color
+   */
   --el-datepicker-hover-highlight-color: rgba(0, 0, 0, 0.06);
+
+  /**
+   * @desc 预设最小宽度
+   * @type size
+   */
   --el-datepicker-presets-min-width: var(--el-comp-size-xl);
+
+  /**
+   * @desc 预设文字颜色
+   * @type color
+   */
   --el-datepicker-presets-text-color: var(--el-brand-color);
+
+  /**
+   * @desc 预设文字悬停颜色
+   * @type color
+   */
   --el-datepicker-presets-text-color-hover: var(--el-brand-color-hover);
+
+  /**
+   * @desc 过渡效果
+   * @type transition
+   */
   --el-datepicker-transition: box-shadow 0.2s cubic-bezier(0.38, 0, 0.24, 1), background-color 0.2s linear, border-color 0.2s linear, color 0.2s linear;
 }

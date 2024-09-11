@@ -2,32 +2,161 @@
  * @component el-checkbox-pro
  */
 :root {
+  /**
+   * @desc 复选框边框颜色
+   * @type color
+   */
   --el-checkbox-border-color: var(--el-border-level-2-color);
+
+  /**
+   * @desc 选中状态复选框边框颜色
+   * @type color
+   */
   --el-checkbox-border-color-checked: var(--el-brand-color);
+
+  /**
+   * @desc 悬停状态复选框边框颜色
+   * @type color
+   */
   --el-checkbox-border-color-hover: var(--el-brand-color);
+
+  /**
+   * @desc 复选框输入框颜色
+   * @type color
+   */
   --el-checkbox-input-color: var(--el-bg-color-container);
+
+  /**
+   * @desc 选中状态复选框输入框颜色
+   * @type color
+   */
   --el-checkbox-input-color-checked: var(--el-brand-color);
+
+  /**
+   * @desc 禁用状态复选框输入框颜色
+   * @type color
+   */
   --el-checkbox-input-color-disabled: var(--el-bg-color-component-disabled);
+
+  /**
+   * @desc 复选框勾选标记颜色
+   * @type color
+   */
   --el-checkbox-check-color: var(--el-text-color-anti);
+
+  /**
+   * @desc 禁用状态复选框勾选标记颜色
+   * @type color
+   */
   --el-checkbox-check-color-disabled: var(--el-text-color-disabled);
+
+  /**
+   * @desc 禁用状态复选框勾选图标颜色
+   * @type color
+   */
   --el-checkbox-check-icon-disabled-color: var(--el-text-color-disabled);
+
+  /**
+   * @desc 不确定状态复选框输入框颜色
+   * @type color
+   */
   --el-checkbox-input-color-indeterminate: var(--el-brand-color);
+
+  /**
+   * @desc 禁用状态不确定复选框颜色
+   * @type color
+   */
   --el-checkbox-indeterminate-color-disabled: var(--el-text-color-disabled);
+
+  /**
+   * @desc 复选框标签颜色
+   * @type color
+   */
   --el-checkbox-label-color: var(--el-text-color-primary);
+
+  /**
+   * @desc 复选框尺寸
+   * @type size
+   */
   --el-checkbox-size: 16px;
+
+  /**
+   * @desc 复选框边框圆角
+   * @type size
+   */
   --el-checkbox-border-radius: var(--el-radius-default);
+
+  /**
+   * @desc 复选框右外边距
+   * @type size
+   */
   --el-checkbox-margin-right: var(--el-comp-margin-s);
+
+  /**
+   * @desc 复选框勾选标记宽度
+   * @type size
+   */
   --el-checkbox-check-width: 5px;
+
+  /**
+   * @desc 复选框勾选标记高度
+   * @type size
+   */
   --el-checkbox-check-height: 9px;
+
+  /**
+   * @desc 复选框勾选标记尺寸
+   * @type size
+   */
   --el-checkbox-check-size: (
-  (var(--el-checkbox-check-width) + var(--el-checkbox-check-height)) / sqrt(2)
-);
+    (var(--el-checkbox-check-width) + var(--el-checkbox-check-height)) / sqrt(2)
+  );
+
+  /**
+   * @desc 复选框勾选标记左边距
+   * @type size
+   */
   --el-checkbox-check-left: 3px;
+
+  /**
+   * @desc 不确定状态复选框宽度
+   * @type size
+   */
   --el-checkbox-indeterminate-width: 16px;
+
+  /**
+   * @desc 不确定状态复选框高度
+   * @type size
+   */
   --el-checkbox-indeterminate-height: 4px;
+
+  /**
+   * @desc 不确定状态复选框颜色
+   * @type color
+   */
   --el-checkbox-indeterminate-color: var(--el-font-white-1);
+
+  /**
+   * @desc 复选框字体
+   * @type font
+   */
   --el-checkbox-font: var(--el-font-body-medium);
+
+  /**
+   * @desc 复选框输入框与标签之间的间距
+   * @type size
+   */
   --el-checkbox-input-label-spacer: 8px;
+
+  /**
+   * @desc 复选框组间距
+   * @type size
+   */
   --el-checkbox-group-gap: 16px;
+
+  /**
+   * @desc 复选框外边距
+   * @type size
+   */
   --el-checkbox-margin: inherit;
 }

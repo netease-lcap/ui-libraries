@@ -2,51 +2,285 @@
  * @component el-color-picker-pro
  */
 :root {
+  /**
+   * @desc 颜色选择器面板宽度
+   * @type size
+   */
   --el-color-picker-panel-width: 256px;
+
+  /**
+   * @desc 颜色选择器面板内边距
+   * @type size
+   */
   --el-color-picker-panel-padding: var(--el-pop-padding-xl);
+
+  /**
+   * @desc 颜色选择器面板圆角
+   * @type size
+   */
   --el-color-picker-panel-radius: var(--el-radius-medium);
+
+  /**
+   * @desc 饱和度选择器高度
+   * @type size
+   */
   --el-color-picker-saturation-height: 160px;
+
+  /**
+   * @desc 饱和度选择器圆角
+   * @type size
+   */
   --el-color-picker-saturation-radius: var(--el-radius-default);
+
+  /**
+   * @desc 饱和度选择器滑块大小
+   * @type size
+   */
   --el-color-picker-saturation-thumb-size: calc(var(--el-comp-size-xxxs) + var(--el-size-1));
+
+  /**
+   * @desc 颜色选择器外边距
+   * @type size
+   */
   --el-color-picker-margin: var(--el-comp-margin-m);
+
+  /**
+   * @desc 滑块高度
+   * @type size
+   */
   --el-color-picker-slider-height: 8px;
+
+  /**
+   * @desc 滑块包裹圆角
+   * @type size
+   */
   --el-color-picker-slider-wrapper-radius: calc(var(--el-color-picker-slider-height) / 2);
+
+  /**
+   * @desc 滑块包裹内边距
+   * @type size
+   */
   --el-color-picker-slider-wrapper-padding: 0 calc(var(--el-color-picker-saturation-thumb-size) / 2);
+
+  /**
+   * @desc 滑块大小
+   * @type size
+   */
   --el-color-picker-slider-thumb-size: calc(var(--el-comp-size-xxxs) + var(--el-size-1));
+
+  /**
+   * @desc 滑块水平位移
+   * @type size
+   */
   --el-color-picker-slider-thumb-transform-x: calc(var(--el-color-picker-slider-thumb-size) * -0.5);
+
+  /**
+   * @desc 滑块内边距
+   * @type size
+   */
   --el-color-picker-slider-thumb-padding: 2px;
+
+  /**
+   * @desc 输入格式左边距
+   * @type size
+   */
   --el-color-picker-input-format-margin-left: var(--el-comp-margin-s);
+
+  /**
+   * @desc 选择格式右边距
+   * @type size
+   */
   --el-color-picker-select-format-margin-right: var(--el-comp-margin-xs);
+
+  /**
+   * @desc 选择格式宽度
+   * @type size
+   */
   --el-color-picker-select-format-width: 72px;
+
+  /**
+   * @desc 字体
+   * @type font
+   */
   --el-color-picker-font: var(--el-font-body-small);
+
+  /**
+   * @desc 图标圆角
+   * @type size
+   */
   --el-color-picker-icon-radius: var(--el-radius-default);
+
+  /**
+   * @desc 图标字体大小
+   * @type size
+   */
   --el-color-picker-icon-font-size: var(--el-color-picker-swatch-icon-size);
+
+  /**
+   * @desc 度数宽度
+   * @type size
+   */
   --el-color-picker-degree-width: var(--el-comp-size-xxl);
+
+  /**
+   * @desc 渐变预览宽度
+   * @type size
+   */
   --el-color-picker-gradient-preview-width: var(--el-comp-size-s);
+
+  /**
+   * @desc 渐变预览高度
+   * @type size
+   */
   --el-color-picker-gradient-preview-height: var(--el-comp-size-s);
+
+  /**
+   * @desc 渐变预览圆角
+   * @type size
+   */
   --el-color-picker-gradient-preview-radius: var(--el-radius-default);
+
+  /**
+   * @desc 色板图标大小
+   * @type size
+   */
   --el-color-picker-swatch-icon-size: var(--el-comp-size-xxxs);
+
+  /**
+   * @desc 色板操作左边距
+   * @type size
+   */
   --el-color-picker-swatch-action-margin-left: var(--el-comp-margin-s);
+
+  /**
+   * @desc 色板宽度
+   * @type size
+   */
   --el-color-picker-swatch-width: var(--el-comp-size-xxxs);
+
+  /**
+   * @desc 色板高度
+   * @type size
+   */
   --el-color-picker-swatch-height: var(--el-comp-size-xxxs);
+
+  /**
+   * @desc 色板圆角
+   * @type size
+   */
   --el-color-picker-swatch-radius: var(--el-radius-circle);
+
+  /**
+   * @desc 色板内边距
+   * @type size
+   */
   --el-color-picker-swatch-padding: 0;
+
+  /**
+   * @desc 色板边框大小
+   * @type size
+   */
   --el-color-picker-swatch-border-size: 1px;
+
+  /**
+   * @desc 色板列数
+   * @type number
+   */
   --el-color-picker-swatch-columns: 10;
+
+  /**
+   * @desc 色板项内边距
+   * @type size
+   */
   --el-color-picker-swatch-item-padding: calc(var(--el-color-picker-panel-padding) - 8px);
+
+  /**
+   * @desc 色板项左负内边距
+   * @type size
+   */
   --el-color-picker-swatch-item-left-negative-padding: calc(0px - var(--el-color-picker-swatch-item-padding));
+
+  /**
+   * @desc 色板行间距
+   * @type size
+   */
   --el-color-picker-swatch-row-gap: calc(calc(var(--el-color-picker-panel-width) - calc(calc(var(--el-color-picker-panel-padding) * 2) + calc(var(--el-color-picker-swatch-height) * var(--el-color-picker-swatch-columns)))) / 9);
+
+  /**
+   * @desc 色板列间距
+   * @type size
+   */
   --el-color-picker-swatch-column-gap: calc(calc(var(--el-color-picker-panel-width) - calc(calc(var(--el-color-picker-panel-padding) * 2) + calc(var(--el-color-picker-swatch-width) * var(--el-color-picker-swatch-columns)))) / 9);
+
+  /**
+   * @desc 色板包裹左边距
+   * @type size
+   */
   --el-color-picker-swatch-wrap-margin-left: (var(--el-color-picker-swatch-padding) + var(--el-color-picker-swatch-border-size)) * -1;
+
+  /**
+   * @desc 色板包裹右边距
+   * @type size
+   */
   --el-color-picker-swatch-wrap-margin-right: var(--el-color-picker-swatch-wrap-margin-left) - 10px;
+
+  /**
+   * @desc 色板包裹边距
+   * @type size
+   */
   --el-color-picker-swatch-wrap-margin: 0 var(--el-color-picker-swatch-wrap-margin-right) 0 var(--el-color-picker-swatch-wrap-margin-left);
+
+  /**
+   * @desc 色板最大行数
+   * @type number
+   */
   --el-color-picker-swatch-max-rows: 4;
+
+  /**
+   * @desc 面板阴影
+   * @type shadow
+   */
   --el-color-picker-panel-shadow: var(--el-shadow-2), var(--el-shadow-inset-top), var(--el-shadow-inset-right), var(--el-shadow-inset-bottom), var(--el-shadow-inset-left);
+
+  /**
+   * @desc 滑块阴影
+   * @type shadow
+   */
   --el-color-picker-thumbs-shadow: var(--el-shadow-1);
+
+  /**
+   * @desc 色板项颜色内阴影
+   * @type shadow
+   */
   --el-colot-picker-swatch-item-color-inset-shadow: var(--el-shadow-inset-top), var(--el-shadow-inset-right), var(--el-shadow-inset-bottom), var(--el-shadow-inset-left);
+
+  /**
+   * @desc 色板行最大高度
+   * @type size
+   */
   --el-color-picker-swatch-rows-max-height: calc(var(--el-color-picker-swatch-max-rows) * calc(var(--el-color-picker-swatch-height) + var(--el-color-picker-swatch-row-gap)));
+
+  /**
+   * @desc 触发输入内边距
+   * @type size
+   */
   --el-color-picker-trigger-input-padding: 0 var(--el-comp-paddingLR-s) 0 var(--el-comp-paddingLR-xs);
+
+  /**
+   * @desc 触发输入颜色内尺寸
+   * @type size
+   */
   --el-color-picker-trigger-input-color-inner-size: calc(var(--el-comp-size-xs) - 2px);
+
+  /**
+   * @desc 触发输入颜色内尺寸（小）
+   * @type size
+   */
   --el-color-picker-trigger-input-color-inner-size-s: calc(var(--el-comp-size-xxs) - 2px);
+
+  /**
+   * @desc 触发输入颜色内尺寸（大）
+   * @type size
+   */
   --el-color-picker-trigger-input-color-inner-size-l: calc(var(--el-comp-size-s) - 2px);
 }
