@@ -70,9 +70,9 @@ namespace nasl.ui {
             group: '数据属性',
             title: '存储方式',
             description: "",
+            bindHide: true,
         })
-        file_connection_group: nasl.core.String;
-        // fileConnectionGroup: nasl.core.String;
+        fileConnectionGroup: () => any;
 
         @Prop({
             group: '数据属性',
