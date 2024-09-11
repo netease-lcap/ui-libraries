@@ -195,13 +195,20 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         return;
       }
 
-      Object.assign(formData, d);
+      const resetObj = {};
+
+      Object.keys(d).forEach((key) => {
+        resetObj[key] = resetObj[key] === undefined ? null : resetObj[key];
+      });
+
+      Object.assign(formData, resetObj);
+
       Object.keys(formFieldMetas).forEach((key) => {
         if (typeof formFieldMetas[key].change !== 'function') {
           return;
         }
 
-        const val = lodashGet(d, key);
+        const val = lodashGet(resetObj, key);
         if (val === undefined) {
           return;
         }
