@@ -156,13 +156,13 @@
    * @desc 默认开关的检查边框宽度
    * @type size
    */
-  --el-switch-width-border-check-default: (var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 1);
+  --el-switch-width-border-check-default: calc(var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 1);
 
   /**
    * @desc 小号开关的检查边框宽度
    * @type size
    */
-  --el-switch-width-border-check-s: (var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 2);
+  --el-switch-width-border-check-s: calc(var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 2);
 
   /**
    * @desc 大号开关的字体大小
