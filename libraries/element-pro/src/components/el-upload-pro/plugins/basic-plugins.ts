@@ -4,6 +4,7 @@ import {
   FormatResponseContext,
   ResponseType,
   SizeLimitObj,
+  SuccessContext,
   UploadChangeContext,
   UploadFile,
   UploadProps,
@@ -264,17 +265,23 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     const { fileList, changeFileList } = useValue2FileList(props);
     const errorMessage = ref('');
 
-    const locale = props.useComputed(['theme', 'cancelUploadText', 'triggerUploadText'], (theme, cancelUploadText: string, triggerUploadText: string) => {
+    const locale = props.useComputed(['theme', 'cancelUploadText', 'triggerUploadText', 'draggable'], (theme, cancelUploadText: string, triggerUploadText: string, draggable: boolean) => {
       const uploadText = triggerUploadText || '选择文件';
+
       return {
         cancelUploadText: cancelUploadText || '取消上传',
+        dragger: {
+          clickAndDragText: draggable === true ? `点击上方“${uploadText}”或将文件拖到此区域` : `点击上方“${uploadText}”`,
+          dragDropText: '释放鼠标',
+          draggingText: '拖拽到此区域',
+        },
         triggerUploadText: {
           fileInput: uploadText,
           image: theme && theme.includes('image') ? triggerUploadText || '点击上传图片' : uploadText,
-          normal: uploadText,
+          normal: '点击上传',
           // 选择文件和上传文件是 2 个步骤，文本需明确步骤
-          reupload: uploadText,
-          continueUpload: uploadText,
+          reupload: '重新上传',
+          continueUpload: '继续上传',
           delete: '删除',
           uploading: '上传中',
         },
@@ -307,6 +314,17 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         const onChange = props.get<UploadProps['onChange']>('onChange') || (() => {});
         changeFileList(list);
         onChange(list, context);
+      },
+      onSuccess: (context: SuccessContext) => {
+        const [autoUpload, onSuccess] = props.get<[boolean, any]>(['autoUpload', 'onSuccess']);
+        // 未自动上传时，上传成功不会触发change
+        if (autoUpload === false) {
+          changeFileList(context.fileList);
+        }
+
+        if (isFunction(onSuccess)) {
+          onSuccess(context);
+        }
       },
       onSelectChange: (files: any[]) => {
         const onSelectChange = props.get('onSelectChange');

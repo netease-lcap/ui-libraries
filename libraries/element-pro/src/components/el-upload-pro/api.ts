@@ -306,6 +306,8 @@ namespace nasl.ui {
       }, {
         update: {
           autoUpload: true,
+          multiple: false,
+          draggable: false,
         },
         if: (val) => !['file-flow', 'image-flow'].includes(val)
       }],

@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import Vue, { type VNode } from 'vue';
 import {
   type SubmitContext,
@@ -45,7 +46,7 @@ const getTemplateCount = (counts: number | string) => {
 };
 
 export interface FormFieldMata {
-  bindValue: any;
+  initialValue: any;
   change?: ((v: any) => void) | null;
   fieldControl?: FormField | FormRangeField;
 }
@@ -54,7 +55,7 @@ function splitNameToPath(name) {
   return name.replace(/\[/g, '.').replace(/\]/g, '').split('.');
 }
 
-function deepVueSet(data: any, name: string, value: any) {
+function deepVueSet(data: any, name: string, value = null) {
   const keys = splitNameToPath(name);
   let current = data;
   while (true) {
@@ -131,6 +132,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     const { useComputed } = props;
     const instance = getCurrentInstance();
     const { addFormItemInstance, removeFormItemInstance, resetFormItemNeedReset } = useFormItemControls();
+    let initialData = {};
     const formData = reactive({});
     const formFieldMetas: Record<string, FormFieldMata> = {};
 
@@ -229,7 +231,9 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         return formFieldMetas[name].fieldControl as FormField;
       }
 
-      deepVueSet(formData, name, value);
+      const initialValue = value === undefined ? lodashGet(initialData, name) : value;
+
+      deepVueSet(formData, name, initialValue);
 
       let initialSetted = false;
       const formField: FormField = {
@@ -242,8 +246,10 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
           if (initialSetted) {
             return;
           }
-          setFieldValue(name, v);
-          initialSetted = true;
+          if (formFieldMetas[name]) {
+            formFieldMetas[name].initialValue = v;
+            initialSetted = true;
+          }
         },
         setChangeListener: (listener) => {
           if (formFieldMetas[name]) {
@@ -251,8 +257,9 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
           }
         },
       };
+
       formFieldMetas[name] = {
-        bindValue: value,
+        initialValue,
         fieldControl: formField,
       };
 
@@ -264,16 +271,21 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         return formFieldMetas[uid].fieldControl as FormRangeField;
       }
 
-      deepVueSet(formData, uid, normalizeRangeFieldValue(value[0], value[1]));
-      const [startName, endName] = name;
-      [startName, endName].forEach((n, i) => {
+      const initValue = value.map((v, i) => {
+        const n = name[i];
+        const initV = v === undefined && n ? lodashGet(initialData, n) : v;
         if (n) {
-          deepVueSet(formData, n, value[i]);
+          deepVueSet(formData, n, initV);
           formFieldMetas[n] = {
-            bindValue: value[i],
+            initialValue: initV,
           };
         }
+
+        return v === undefined && n ? lodashGet(initialData, n) : v;
       });
+
+      deepVueSet(formData, uid, normalizeRangeFieldValue(initValue[0], initValue[1]));
+      const [startName, endName] = name;
 
       let initialSetted = false;
       const formRangeField: FormRangeField = {
@@ -294,13 +306,18 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
             return;
           }
           initialSetted = true;
-          [startName, endName].forEach((n, i) => {
-            if (n) {
-              setFieldValue(n, values[i]);
-            }
-          });
 
-          setFieldValue(uid, normalizeRangeFieldValue(values[0], values[1]));
+          if (startName && formFieldMetas[startName]) {
+            formFieldMetas[startName].initialValue = values[0];
+          }
+
+          if (endName && formFieldMetas[endName]) {
+            formFieldMetas[endName].initialValue = values[1];
+          }
+
+          if (formFieldMetas[uid]) {
+            formFieldMetas[uid].initialValue = values;
+          }
         },
         setChangeListener: (startListener, endListener) => {
           if (startName && formFieldMetas[startName]) {
@@ -310,20 +327,12 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
           if (endName && formFieldMetas[endName]) {
             formFieldMetas[endName].change = endListener;
           }
-
-          if (formFieldMetas[uid]) {
-            formFieldMetas[uid].change = (v) => {
-              const [startValue, endValue] = v || [];
-              if (!startName || isFunction(startListener)) {
-                startListener(startValue);
-              }
-
-              if (!endName || isFunction(endListener)) {
-                endListener(endValue);
-              }
-            };
-          }
         },
+      };
+
+      formFieldMetas[uid] = {
+        initialValue: initValue,
+        fieldControl: formRangeField,
       };
 
       return formRangeField;
@@ -337,6 +346,13 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         }
       });
       return d;
+    }
+
+    function setInitalData(d: Record<string, any>) {
+      initialData = d || {};
+      Object.keys(formFieldMetas).forEach((key) => {
+        formFieldMetas[key].initialValue = lodashGet(initialData, key) ?? null;
+      });
     }
 
     provide<FormExtendsContext>(FORM_CONTEXT, {
@@ -431,7 +447,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
           Object.keys(formFieldMetas).forEach((key) => {
             if (resetType === 'initial') {
-              setFieldValue(key, formFieldMetas[key].bindValue === undefined ? null : formFieldMetas[key].bindValue);
+              setFieldValue(key, formFieldMetas[key].initialValue === undefined ? null : formFieldMetas[key].initialValue);
               return;
             }
             setFieldValue(key, null);
@@ -443,6 +459,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
             onReset();
           }
         },
+        setInitalData,
         setFormData,
         getFormData,
         setFieldValue,
