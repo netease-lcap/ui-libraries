@@ -2,6 +2,9 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    ideusage: {
+      forceUpdateWhenAttributeChange: true,
+    },
   })
   @Component({
     title: '日历',
