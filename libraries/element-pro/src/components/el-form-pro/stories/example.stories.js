@@ -31,19 +31,19 @@ export const Default = {
         //   },
         // });
 
-        this.startTime = new Date().toJSON();
-        this.endTime = new Date().toJSON();
-        // this.$refs.form.resetForm();
+        // this.startTime = new Date().toJSON();
+        // this.endTime = new Date().toJSON();
+        this.$refs.form.resetForm();
       },
     },
     template: `<div><el-form-pro ref="form" labelAlign="right" labelWidth="300px" :colon="true" :requiredMark="true" resetType="initial">
-      <el-form-item-pro>
+      <el-form-item-pro name="username" initialValue="1232322">
         <template #label>姓名姓名姓名姓名姓名</template>
         <el-input-pro style="width: 400px" placeholder="请输入姓名" :value.sync="syncValue"></el-input-pro>
       </el-form-item-pro>
       <el-form-item-pro colSpan="2" label="初始密码初始密码初始密码初始密码初始密码" :labelEllipsis="!ellipsis" name="password">
         <el-form-item-pro name="xx">
-          <el-input-pro type="password" value="123" placeholder="请输入初始密码"></el-input-pro>
+          <el-input-pro type="password" placeholder="请输入初始密码"></el-input-pro>
         </el-form-item-pro>
       </el-form-item-pro>
       <el-form-item-pro colSpan="2" label="初始密码初始密码初始密码初始密码初始密码" :labelEllipsis="!ellipsis">

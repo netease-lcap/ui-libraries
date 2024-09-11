@@ -78,7 +78,7 @@ const useExtendsFormProps = (props: MapGet) => {
   return computedMap;
 };
 
-const getNotUndefinedValue = (v, initV) => (v === undefined ? initV : v);
+const getNotUndefinedValue = (v, initV = null) => (v === undefined ? initV : v);
 
 export const useExtensPlugin: NaslComponentPluginOptions = {
   props: [
@@ -201,9 +201,9 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
     const getFieldName = () => unref(fieldName) as string;
     const [
-      initialValue = null,
-      startInitialValue = null,
-      endInitialValue = null,
+      initialValue,
+      startInitialValue,
+      endInitialValue,
     ] = props.get<[any, any, any]>(['initialValue', 'startInitialValue', 'endInitialValue']);
 
     const proxyRangeFieldVNode = (vnode: VNode) => {
@@ -240,7 +240,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
       const formField = initFormField({
         name: formFieldName,
-        value: propData[prop] === undefined ? initialValue : propData[prop],
+        value: getNotUndefinedValue(propData[prop], initialValue),
       });
 
       formField.setInitalValue(initialValue);

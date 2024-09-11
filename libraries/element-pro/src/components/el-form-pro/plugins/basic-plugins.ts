@@ -132,7 +132,6 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     const { useComputed } = props;
     const instance = getCurrentInstance();
     const { addFormItemInstance, removeFormItemInstance, resetFormItemNeedReset } = useFormItemControls();
-    let initialData = {};
     const formData = reactive({});
     const formFieldMetas: Record<string, FormFieldMata> = {};
 
@@ -231,7 +230,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         return formFieldMetas[name].fieldControl as FormField;
       }
 
-      const initialValue = value === undefined ? lodashGet(initialData, name) : value;
+      const initialValue = value;
 
       deepVueSet(formData, name, initialValue);
 
@@ -246,7 +245,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
           if (initialSetted) {
             return;
           }
-          if (formFieldMetas[name]) {
+          if (formFieldMetas[name] && v !== undefined) {
             formFieldMetas[name].initialValue = v;
             initialSetted = true;
           }
@@ -259,7 +258,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       };
 
       formFieldMetas[name] = {
-        initialValue,
+        initialValue: null,
         fieldControl: formField,
       };
 
@@ -273,15 +272,15 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
       const initValue = value.map((v, i) => {
         const n = name[i];
-        const initV = v === undefined && n ? lodashGet(initialData, n) : v;
+        const initV = v;
         if (n) {
           deepVueSet(formData, n, initV);
           formFieldMetas[n] = {
-            initialValue: initV,
+            initialValue: null,
           };
         }
 
-        return v === undefined && n ? lodashGet(initialData, n) : v;
+        return v;
       });
 
       deepVueSet(formData, uid, normalizeRangeFieldValue(initValue[0], initValue[1]));
@@ -307,16 +306,18 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
           }
           initialSetted = true;
 
-          if (startName && formFieldMetas[startName]) {
-            formFieldMetas[startName].initialValue = values[0];
+          const [startValue, endValue] = values;
+
+          if (startName && formFieldMetas[startName] && startValue !== undefined) {
+            formFieldMetas[startName].initialValue = startValue;
           }
 
-          if (endName && formFieldMetas[endName]) {
+          if (endName && formFieldMetas[endName] && endValue !== undefined) {
             formFieldMetas[endName].initialValue = values[1];
           }
 
           if (formFieldMetas[uid]) {
-            formFieldMetas[uid].initialValue = values;
+            formFieldMetas[uid].initialValue = normalizeRangeFieldValue(startValue, endValue);
           }
         },
         setChangeListener: (startListener, endListener) => {
@@ -331,7 +332,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       };
 
       formFieldMetas[uid] = {
-        initialValue: initValue,
+        initialValue: null,
         fieldControl: formRangeField,
       };
 
@@ -346,13 +347,6 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         }
       });
       return d;
-    }
-
-    function setInitalData(d: Record<string, any>) {
-      initialData = d || {};
-      Object.keys(formFieldMetas).forEach((key) => {
-        formFieldMetas[key].initialValue = lodashGet(initialData, key) ?? null;
-      });
     }
 
     provide<FormExtendsContext>(FORM_CONTEXT, {
@@ -459,7 +453,6 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
             onReset();
           }
         },
-        setInitalData,
         setFormData,
         getFormData,
         setFieldValue,
