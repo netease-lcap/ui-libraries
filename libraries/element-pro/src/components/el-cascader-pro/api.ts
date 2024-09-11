@@ -323,7 +323,7 @@ namespace nasl.ui {
       description: '组件尺寸。可选项：large/medium/small。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '小' }, { title: '中' }, { title: '大' }],
+        options: [{ title: '大' }, { title: '中' }, { title: '小' }],
       },
     })
     size: 'large' | 'medium' | 'small' = 'medium';
