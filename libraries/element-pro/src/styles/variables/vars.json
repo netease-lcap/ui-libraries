@@ -1024,7 +1024,6 @@
   "@popup-left-arrow-shadow": "var(--el-popup-left-arrow-shadow)",
   "@popup-bottom-arrow-shadow": "var(--el-popup-bottom-arrow-shadow)",
   "@popup-right-arrow-shadow": "var(--el-popup-right-arrow-shadow)",
-  "@popup-flow": "var(--el-popup-flow)",
   "@popup-flow-duration": "var(--el-popup-flow-duration)",
   "@popup-flow-fn": "var(--el-popup-flow-fn)",
   "@popup-flow-transition-enter": "var(--el-popup-flow-transition-enter)",

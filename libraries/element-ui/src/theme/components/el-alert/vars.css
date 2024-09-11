@@ -2,16 +2,75 @@
  * @component el-alert
  */
 :root {
+  /**
+   * @desc 警告框的内边距
+   * @type input
+   */
   --alert-padding: 8px 16px;
+
+  /**
+   * @desc 警告框的边框圆角
+   * @type input
+   */
   --alert-border-radius: var(--border-radius-base);
+
+  /**
+   * @desc 警告框标题的字体大小
+   * @type font-size
+   */
   --alert-title-font-size: 13px;
+
+  /**
+   * @desc 警告框描述的字体大小
+   * @type font-size
+   */
   --alert-description-font-size: 12px;
+
+  /**
+   * @desc 警告框关闭按钮的字体大小
+   * @type font-size
+   */
   --alert-close-font-size: 12px;
+
+  /**
+   * @desc 自定义警告框关闭按钮的字体大小
+   * @type font-size
+   */
   --alert-close-customed-font-size: 13px;
+
+  /**
+   * @desc 成功警告框的颜色
+   * @type color
+   */
   --alert-success-color: var(--color-success-lighter);
+
+  /**
+   * @desc 信息警告框的颜色
+   * @type color
+   */
   --alert-info-color: var(--color-info-lighter);
+
+  /**
+   * @desc 警告警告框的颜色
+   * @type color
+   */
   --alert-warning-color: var(--color-warning-lighter);
+
+  /**
+   * @desc 危险警告框的颜色
+   * @type color
+   */
   --alert-danger-color: var(--color-danger-lighter);
+
+  /**
+   * @desc 警告框图标的大小
+   * @type size
+   */
   --alert-icon-size: 16px;
+
+  /**
+   * @desc 大型警告框图标的大小
+   * @type size
+   */
   --alert-icon-large-size: 28px;
 }

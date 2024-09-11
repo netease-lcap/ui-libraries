@@ -2,11 +2,45 @@
  * @component el-switch
  */
 :root {
+  /**
+   * @desc 开关开启时的颜色
+   * @type color
+   */
   --switch-on-color: var(--color-primary);
+
+  /**
+   * @desc 开关关闭时的颜色
+   * @type color
+   */
   --switch-off-color: var(--border-color-base);
+
+  /**
+   * @desc 开关的字体大小
+   * @type size
+   */
   --switch-font-size: var(--font-size-base);
+
+  /**
+   * @desc 开关核心部分的边框半径
+   * @type size
+   */
   --switch-core-border-radius: 10px;
+
+  /**
+   * @desc 开关的宽度
+   * @type size
+   */
   --switch-width: 40px;
+
+  /**
+   * @desc 开关的高度
+   * @type size
+   */
   --switch-height: 20px;
+
+  /**
+   * @desc 开关按钮的大小
+   * @type size
+   */
   --switch-button-size: 16px;
 }

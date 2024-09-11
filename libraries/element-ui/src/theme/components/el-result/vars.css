@@ -2,14 +2,63 @@
  * @component el-result
  */
 :root {
+  /**
+   * @desc 结果组件的内边距
+   * @type input
+   */
   --result-padding: 40px 30px;
+
+  /**
+   * @desc 结果图标的字体大小
+   * @type font-size
+   */
   --result-icon-font-size: 64px;
+
+  /**
+   * @desc 结果标题的字体大小
+   * @type font-size
+   */
   --result-title-font-size: 20px;
+
+  /**
+   * @desc 结果标题的上外边距
+   * @type margin
+   */
   --result-title-margin-top: 20px;
+
+  /**
+   * @desc 结果副标题的上外边距
+   * @type margin
+   */
   --result-subtitle-margin-top: 10px;
+
+  /**
+   * @desc 结果额外内容的上外边距
+   * @type margin
+   */
   --result-extra-margin-top: 30px;
+
+  /**
+   * @desc 信息状态的颜色
+   * @type color
+   */
   --result-info-color: var(--color-info);
+
+  /**
+   * @desc 成功状态的颜色
+   * @type color
+   */
   --result-success-color: var(--color-success);
+
+  /**
+   * @desc 警告状态的颜色
+   * @type color
+   */
   --result-warning-color: var(--color-warning);
+
+  /**
+   * @desc 危险状态的颜色
+   * @type color
+   */
   --result-danger-color: var(--color-danger);
 }

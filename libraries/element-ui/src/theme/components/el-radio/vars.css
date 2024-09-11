@@ -2,44 +2,243 @@
  * @component el-radio
  */
 :root {
+  /**
+   * @desc 单选框字体大小
+   * @type font-size
+   */
   --radio-font-size: var(--font-size-base);
+
+  /**
+   * @desc 单选框字体粗细
+   * @type font-weight
+   */
   --radio-font-weight: var(--font-weight-primary);
+
+  /**
+   * @desc 单选框字体颜色
+   * @type color
+   */
   --radio-font-color: var(--color-text-regular);
+
+  /**
+   * @desc 单选框输入框高度
+   * @type size
+   */
   --radio-input-height: 14px;
+
+  /**
+   * @desc 单选框输入框宽度
+   * @type size
+   */
   --radio-input-width: 14px;
+
+  /**
+   * @desc 单选框输入框边框半径
+   * @type border-radius
+   */
   --radio-input-border-radius: var(--border-radius-circle);
+
+  /**
+   * @desc 单选框输入框背景颜色
+   * @type color
+   */
   --radio-input-background-color: var(--color-white);
+
+  /**
+   * @desc 单选框输入框边框
+   * @type border
+   */
   --radio-input-border: var(--border-base);
+
+  /**
+   * @desc 单选框输入框边框颜色
+   * @type color
+   */
   --radio-input-border-color: var(--border-color-base);
+
+  /**
+   * @desc 单选框图标颜色
+   * @type color
+   */
   --radio-icon-color: var(--color-white);
+
+  /**
+   * @desc 禁用状态下单选框输入框边框颜色
+   * @type color
+   */
   --radio-disabled-input-border-color: var(--disabled-border-base);
+
+  /**
+   * @desc 禁用状态下单选框输入框填充颜色
+   * @type color
+   */
   --radio-disabled-input-fill: var(--disabled-fill-base);
+
+  /**
+   * @desc 禁用状态下单选框图标颜色
+   * @type color
+   */
   --radio-disabled-icon-color: var(--disabled-fill-base);
+
+  /**
+   * @desc 禁用且选中状态下单选框输入框边框颜色
+   * @type color
+   */
   --radio-disabled-checked-input-border-color: var(--disabled-border-base);
+
+  /**
+   * @desc 禁用且选中状态下单选框输入框填充颜色
+   * @type color
+   */
   --radio-disabled-checked-input-fill: var(--disabled-fill-base);
+
+  /**
+   * @desc 禁用且选中状态下单选框图标颜色
+   * @type color
+   */
   --radio-disabled-checked-icon-color: var(--color-text-placeholder);
+
+  /**
+   * @desc 选中状态下单选框字体颜色
+   * @type color
+   */
   --radio-checked-font-color: var(--color-primary);
+
+  /**
+   * @desc 选中状态下单选框输入框边框颜色
+   * @type color
+   */
   --radio-checked-input-border-color: var(--color-primary);
+
+  /**
+   * @desc 选中状态下单选框输入框背景颜色
+   * @type color
+   */
   --radio-checked-input-background-color: var(--color-white);
+
+  /**
+   * @desc 选中状态下单选框图标颜色
+   * @type color
+   */
   --radio-checked-icon-color: var(--color-primary);
+
+  /**
+   * @desc 单选框输入框悬停状态下边框颜色
+   * @type color
+   */
   --radio-input-border-color-hover: var(--color-primary);
+
+  /**
+   * @desc 边框单选框高度
+   * @type size
+   */
   --radio-bordered-height: 40px;
+
+  /**
+   * @desc 边框单选框内边距
+   * @type padding
+   */
   --radio-bordered-padding: 12px 20px 0 10px;
+
+  /**
+   * @desc 中等大小边框单选框内边距
+   * @type padding
+   */
   --radio-bordered-medium-padding: 10px 20px 0 10px;
+
+  /**
+   * @desc 小号边框单选框内边距
+   * @type padding
+   */
   --radio-bordered-small-padding: 8px 15px 0 10px;
+
+  /**
+   * @desc 迷你边框单选框内边距
+   * @type padding
+   */
   --radio-bordered-mini-padding: 6px 15px 0 10px;
+
+  /**
+   * @desc 中等大小边框单选框输入框高度
+   * @type size
+   */
   --radio-bordered-medium-input-height: 14px;
+
+  /**
+   * @desc 中等大小边框单选框输入框宽度
+   * @type size
+   */
   --radio-bordered-medium-input-width: 14px;
+
+  /**
+   * @desc 中等大小边框单选框高度
+   * @type size
+   */
   --radio-bordered-medium-height: 36px;
+
+  /**
+   * @desc 小号边框单选框输入框高度
+   * @type size
+   */
   --radio-bordered-small-input-height: 12px;
+
+  /**
+   * @desc 小号边框单选框输入框宽度
+   * @type size
+   */
   --radio-bordered-small-input-width: 12px;
+
+  /**
+   * @desc 小号边框单选框高度
+   * @type size
+   */
   --radio-bordered-small-height: 32px;
+
+  /**
+   * @desc 迷你边框单选框输入框高度
+   * @type size
+   */
   --radio-bordered-mini-input-height: 12px;
+
+  /**
+   * @desc 迷你边框单选框输入框宽度
+   * @type size
+   */
   --radio-bordered-mini-input-width: 12px;
+
+  /**
+   * @desc 迷你边框单选框高度
+   * @type size
+   */
   --radio-bordered-mini-height: 28px;
+
+  /**
+   * @desc 单选按钮字体大小
+   * @type font-size
+   */
   --radio-button-font-size: var(--font-size-base);
+
+  /**
+   * @desc 选中状态下单选按钮背景颜色
+   * @type color
+   */
   --radio-button-checked-background-color: var(--color-primary);
+
+  /**
+   * @desc 选中状态下单选按钮字体颜色
+   * @type color
+   */
   --radio-button-checked-font-color: var(--color-white);
+
+  /**
+   * @desc 选中状态下单选按钮边框颜色
+   * @type color
+   */
   --radio-button-checked-border-color: var(--color-primary);
+
+  /**
+   * @desc 禁用且选中状态下单选按钮填充颜色
+   * @type color
+   */
   --radio-button-disabled-checked-fill: var(--border-color-extra-light);
 }

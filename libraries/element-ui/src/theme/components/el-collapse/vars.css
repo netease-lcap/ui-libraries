@@ -2,12 +2,51 @@
  * @component el-collapse
  */
 :root {
+  /**
+   * @desc 折叠面板边框颜色
+   * @type color
+   */
   --collapse-border-color: var(--border-color-lighter);
+
+  /**
+   * @desc 折叠面板头部高度
+   * @type size
+   */
   --collapse-header-height: 48px;
+
+  /**
+   * @desc 折叠面板头部背景色
+   * @type color
+   */
   --collapse-header-background-color: var(--color-white);
+
+  /**
+   * @desc 折叠面板头部字体颜色
+   * @type color
+   */
   --collapse-header-font-color: var(--color-text-primary);
+
+  /**
+   * @desc 折叠面板头部字体大小
+   * @type size
+   */
   --collapse-header-font-size: 13px;
+
+  /**
+   * @desc 折叠面板内容背景色
+   * @type color
+   */
   --collapse-content-background-color: var(--color-white);
+
+  /**
+   * @desc 折叠面板内容字体大小
+   * @type size
+   */
   --collapse-content-font-size: 13px;
+
+  /**
+   * @desc 折叠面板内容字体颜色
+   * @type color
+   */
   --collapse-content-font-color: var(--color-text-primary);
 }

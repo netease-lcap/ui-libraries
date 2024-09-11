@@ -2,107 +2,566 @@
  * @component el-button
  */
 :root {
+  /**
+   * @desc 按钮字体大小
+   * @type font-size
+   */
   --button-font-size: var(--font-size-base);
+
+  /**
+   * @desc 按钮字体粗细
+   * @type font-weight
+   */
   --button-font-weight: var(--font-weight-primary);
+
+  /**
+   * @desc 按钮圆角半径
+   * @type border-radius
+   */
   --button-border-radius: var(--border-radius-base);
+
+  /**
+   * @desc 按钮垂直内边距
+   * @type padding
+   */
   --button-padding-vertical: 12px;
+
+  /**
+   * @desc 按钮水平内边距
+   * @type padding
+   */
   --button-padding-horizontal: 20px;
+
+  /**
+   * @desc 中等按钮字体大小
+   * @type font-size
+   */
   --button-medium-font-size: var(--font-size-base);
+
+  /**
+   * @desc 中等按钮圆角半径
+   * @type border-radius
+   */
   --button-medium-border-radius: var(--border-radius-base);
+
+  /**
+   * @desc 中等按钮垂直内边距
+   * @type padding
+   */
   --button-medium-padding-vertical: 10px;
+
+  /**
+   * @desc 中等按钮水平内边距
+   * @type padding
+   */
   --button-medium-padding-horizontal: 20px;
+
+  /**
+   * @desc 小按钮字体大小
+   * @type font-size
+   */
   --button-small-font-size: 12px;
+
+  /**
+   * @desc 小按钮圆角半径
+   * @type border-radius
+   */
   --button-small-border-radius: calc(var(--border-radius-base) - 1px);
+
+  /**
+   * @desc 小按钮垂直内边距
+   * @type padding
+   */
   --button-small-padding-vertical: 9px;
+
+  /**
+   * @desc 小按钮水平内边距
+   * @type padding
+   */
   --button-small-padding-horizontal: 15px;
+
+  /**
+   * @desc 迷你按钮字体大小
+   * @type font-size
+   */
   --button-mini-font-size: 12px;
+
+  /**
+   * @desc 迷你按钮圆角半径
+   * @type border-radius
+   */
   --button-mini-border-radius: calc(var(--border-radius-base) - 1px);
+
+  /**
+   * @desc 迷你按钮垂直内边距
+   * @type padding
+   */
   --button-mini-padding-vertical: 7px;
+
+  /**
+   * @desc 迷你按钮水平内边距
+   * @type padding
+   */
   --button-mini-padding-horizontal: 15px;
+
+  /**
+   * @desc 按钮激活颜色
+   * @type color
+   */
   --button-active-color: var(--color-primary-dark-1);
+
+  /**
+   * @desc 默认按钮字体颜色
+   * @type color
+   */
   --button-default-font-color: var(--color-text-regular);
+
+  /**
+   * @desc 默认按钮背景颜色
+   * @type color
+   */
   --button-default-background-color: var(--color-white);
+
+  /**
+   * @desc 默认按钮边框颜色
+   * @type color
+   */
   --button-default-border-color: var(--border-color-base);
+
+  /**
+   * @desc 禁用按钮字体颜色
+   * @type color
+   */
   --button-disabled-font-color: var(--color-text-placeholder);
+
+  /**
+   * @desc 禁用按钮背景颜色
+   * @type color
+   */
   --button-disabled-background-color: var(--color-white);
+
+  /**
+   * @desc 禁用按钮边框颜色
+   * @type color
+   */
   --button-disabled-border-color: var(--border-color-lighter);
 
+  /**
+   * @desc 主要按钮边框颜色
+   * @type color
+   */
   --button-primary-border-color: var(--color-primary);
+
+  /**
+   * @desc 主要按钮字体颜色
+   * @type color
+   */
   --button-primary-font-color: var(--color-white);
+
+  /**
+   * @desc 主要按钮背景颜色
+   * @type color
+   */
   --button-primary-background-color: var(--color-primary);
+
+  /**
+   * @desc 主要按钮悬停边框颜色
+   * @type color
+   */
   --button-primary-hover-border-color: var(--color-primary-light-2);
+
+  /**
+   * @desc 主要按钮悬停背景颜色
+   * @type color
+   */
   --button-primary-hover-background-color: var(--color-primary-light-2);
+
+  /**
+   * @desc 主要按钮激活边框颜色
+   * @type color
+   */
   --button-primary-active-border-color: var(--color-primary-dark-1);
+
+  /**
+   * @desc 主要按钮激活背景颜色
+   * @type color
+   */
   --button-primary-active-background-color: var(--color-primary-dark-1);
+
+  /**
+   * @desc 主要按钮禁用背景颜色
+   * @type color
+   */
   --button-primary-disabled-background-color: var(--color-primary-light-5);
+
+  /**
+   * @desc 主要按钮禁用边框颜色
+   * @type color
+   */
   --button-primary-disabled-border-color: var(--color-primary-light-5);
+
+  /**
+   * @desc 主要按钮朴素颜色
+   * @type color
+   */
   --button-primary-plain-color: var(--color-primary);
+
+  /**
+   * @desc 主要按钮朴素背景颜色
+   * @type color
+   */
   --button-primary-plain-background-color: var(--color-primary-light-9);
+
+  /**
+   * @desc 主要按钮朴素边框颜色
+   * @type color
+   */
   --button-primary-plain-border-color: var(--color-primary-light-6);
+
+  /**
+   * @desc 主要按钮朴素禁用颜色
+   * @type color
+   */
   --button-primary-plain-disabled-color: var(--color-primary-light-4);
+
+  /**
+   * @desc 主要按钮朴素禁用边框颜色
+   * @type color
+   */
   --button-primary-plain-disabled-border-color: var(--color-primary-light-8);
 
+  /**
+   * @desc 成功按钮边框颜色
+   * @type color
+   */
   --button-success-border-color: var(--color-success);
+
+  /**
+   * @desc 成功按钮字体颜色
+   * @type color
+   */
   --button-success-font-color: var(--color-white);
+
+  /**
+   * @desc 成功按钮背景颜色
+   * @type color
+   */
   --button-success-background-color: var(--color-success);
 
+  /**
+   * @desc 成功按钮悬停背景颜色
+   * @type color
+   */
   --button-success-hover-background-color: var(--color-success-light-2);
+
+  /**
+   * @desc 成功按钮悬停边框颜色
+   * @type color
+   */
   --button-success-hover-border-color: var(--color-success-light-2);
+
+  /**
+   * @desc 成功按钮激活背景颜色
+   * @type color
+   */
   --button-success-active-background-color: var(--color-success-dark-1);
+
+  /**
+   * @desc 成功按钮激活边框颜色
+   * @type color
+   */
   --button-success-active-border-color: var(--color-success-dark-1);
+
+  /**
+   * @desc 成功按钮禁用背景颜色
+   * @type color
+   */
   --button-success-disabled-background-color: var(--color-success-light-5);
+
+  /**
+   * @desc 成功按钮禁用边框颜色
+   * @type color
+   */
   --button-success-disabled-border-color: var(--color-success-light-5);
+
+  /**
+   * @desc 成功按钮朴素颜色
+   * @type color
+   */
   --button-success-plain-color: var(--color-success);
+
+  /**
+   * @desc 成功按钮朴素背景颜色
+   * @type color
+   */
   --button-success-plain-background-color: var(--color-success-light-9);
+
+  /**
+   * @desc 成功按钮朴素边框颜色
+   * @type color
+   */
   --button-success-plain-border-color: var(--color-success-light-6);
+
+  /**
+   * @desc 成功按钮朴素禁用颜色
+   * @type color
+   */
   --button-success-plain-disabled-color: var(--color-success-light-4);
+
+  /**
+   * @desc 成功按钮朴素禁用边框颜色
+   * @type color
+   */
   --button-success-plain-disabled-border-color: var(--color-success-light-8);
 
+  /**
+   * @desc 警告按钮边框颜色
+   * @type color
+   */
   --button-warning-border-color: var(--color-warning);
+
+  /**
+   * @desc 警告按钮字体颜色
+   * @type color
+   */
   --button-warning-font-color: var(--color-white);
+
+  /**
+   * @desc 警告按钮背景颜色
+   * @type color
+   */
   --button-warning-background-color: var(--color-warning);
 
+  /**
+   * @desc 警告按钮悬停背景颜色
+   * @type color
+   */
   --button-warning-hover-background-color: var(--color-warning-light-2);
+
+  /**
+   * @desc 警告按钮悬停边框颜色
+   * @type color
+   */
   --button-warning-hover-border-color: var(--color-warning-light-2);
+
+  /**
+   * @desc 警告按钮激活背景颜色
+   * @type color
+   */
   --button-warning-active-background-color: var(--color-warning-dark-1);
+
+  /**
+   * @desc 警告按钮激活边框颜色
+   * @type color
+   */
   --button-warning-active-border-color: var(--color-warning-dark-1);
+
+  /**
+   * @desc 警告按钮禁用背景颜色
+   * @type color
+   */
   --button-warning-disabled-background-color: var(--color-warning-light-5);
+
+  /**
+   * @desc 警告按钮禁用边框颜色
+   * @type color
+   */
   --button-warning-disabled-border-color: var(--color-warning-light-5);
+
+  /**
+   * @desc 警告按钮朴素颜色
+   * @type color
+   */
   --button-warning-plain-color: var(--color-warning);
+
+  /**
+   * @desc 警告按钮朴素背景颜色
+   * @type color
+   */
   --button-warning-plain-background-color: var(--color-warning-light-9);
+
+  /**
+   * @desc 警告按钮朴素边框颜色
+   * @type color
+   */
   --button-warning-plain-border-color: var(--color-warning-light-6);
+
+  /**
+   * @desc 警告按钮朴素禁用颜色
+   * @type color
+   */
   --button-warning-plain-disabled-color: var(--color-warning-light-4);
+
+  /**
+   * @desc 警告按钮朴素禁用边框颜色
+   * @type color
+   */
   --button-warning-plain-disabled-border-color: var(--color-warning-light-8);
 
+  /**
+   * @desc 危险按钮边框颜色
+   * @type color
+   */
   --button-danger-border-color: var(--color-danger);
+
+  /**
+   * @desc 危险按钮字体颜色
+   * @type color
+   */
   --button-danger-font-color: var(--color-white);
+
+  /**
+   * @desc 危险按钮背景颜色
+   * @type color
+   */
   --button-danger-background-color: var(--color-danger);
 
+  /**
+   * @desc 危险按钮悬停背景颜色
+   * @type color
+   */
   --button-danger-hover-background-color: var(--color-danger-light-2);
+
+  /**
+   * @desc 危险按钮悬停边框颜色
+   * @type color
+   */
   --button-danger-hover-border-color: var(--color-danger-light-2);
+
+  /**
+   * @desc 危险按钮激活背景颜色
+   * @type color
+   */
   --button-danger-active-background-color: var(--color-danger-dark-1);
+
+  /**
+   * @desc 危险按钮激活边框颜色
+   * @type color
+   */
   --button-danger-active-border-color: var(--color-danger-dark-1);
+
+  /**
+   * @desc 危险按钮禁用背景颜色
+   * @type color
+   */
   --button-danger-disabled-background-color: var(--color-danger-light-5);
+
+  /**
+   * @desc 危险按钮禁用边框颜色
+   * @type color
+   */
   --button-danger-disabled-border-color: var(--color-danger-light-5);
+
+  /**
+   * @desc 危险按钮朴素颜色
+   * @type color
+   */
   --button-danger-plain-color: var(--color-danger);
+
+  /**
+   * @desc 危险按钮朴素背景颜色
+   * @type color
+   */
   --button-danger-plain-background-color: var(--color-danger-light-9);
+
+  /**
+   * @desc 危险按钮朴素边框颜色
+   * @type color
+   */
   --button-danger-plain-border-color: var(--color-danger-light-6);
+
+  /**
+   * @desc 危险按钮朴素禁用颜色
+   * @type color
+   */
   --button-danger-plain-disabled-color: var(--color-danger-light-4);
+
+  /**
+   * @desc 危险按钮朴素禁用边框颜色
+   * @type color
+   */
   --button-danger-plain-disabled-border-color: var(--color-danger-light-8);
 
+  /**
+   * @desc 信息按钮边框颜色
+   * @type color
+   */
   --button-info-border-color: var(--color-info);
+
+  /**
+   * @desc 信息按钮字体颜色
+   * @type color
+   */
   --button-info-font-color: var(--color-white);
+
+  /**
+   * @desc 信息按钮背景颜色
+   * @type color
+   */
   --button-info-background-color: var(--color-info);
 
+  /**
+   * @desc 信息按钮悬停背景颜色
+   * @type color
+   */
   --button-info-hover-background-color: var(--color-info-light-2);
+
+  /**
+   * @desc 信息按钮悬停边框颜色
+   * @type color
+   */
   --button-info-hover-border-color: var(--color-info-light-2);
+
+  /**
+   * @desc 信息按钮激活背景颜色
+   * @type color
+   */
   --button-info-active-background-color: var(--color-info-dark-1);
+
+  /**
+   * @desc 信息按钮激活边框颜色
+   * @type color
+   */
   --button-info-active-border-color: var(--color-info-dark-1);
+  /**
+   * @desc 信息按钮禁用状态的背景色
+   * @type color
+   */
   --button-info-disabled-background-color: var(--color-info-light-5);
+
+  /**
+   * @desc 信息按钮禁用状态的边框颜色
+   * @type color
+   */
   --button-info-disabled-border-color: var(--color-info-light-5);
+
+  /**
+   * @desc 信息按钮纯色状态的文字颜色
+   * @type color
+   */
   --button-info-plain-color: var(--color-info);
+
+  /**
+   * @desc 信息按钮纯色状态的背景色
+   * @type color
+   */
   --button-info-plain-background-color: var(--color-info-light-9);
+
+  /**
+   * @desc 信息按钮纯色状态的边框颜色
+   * @type color
+   */
   --button-info-plain-border-color: var(--color-info-light-6);
+
+  /**
+   * @desc 信息按钮纯色禁用状态的文字颜色
+   * @type color
+   */
   --button-info-plain-disabled-color: var(--color-info-light-4);
+
+  /**
+   * @desc 信息按钮纯色禁用状态的边框颜色
+   * @type color
+   */
   --button-info-plain-disabled-border-color: var(--color-info-light-8);
 }
