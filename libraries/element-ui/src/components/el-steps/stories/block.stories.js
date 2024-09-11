@@ -43,7 +43,7 @@ export const Vertical = {
   name: '垂直',
   render: () => ({
     template: `
-      <el-steps direction="vertical">
+      <el-steps direction="vertical" style="height: 300px;">
         <el-step>
           <template #title><el-text text="步骤一"></el-text></template>
         </el-step>
