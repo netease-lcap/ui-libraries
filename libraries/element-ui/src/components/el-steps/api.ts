@@ -83,7 +83,7 @@ namespace nasl.ui {
     })
     nameField: (item: T) => nasl.core.String = ((item: any) => item.name) as any;
 
-    @Prop({
+    @Prop<ElStepsOptions<T>, 'direction'>({
       group: '主要属性',
       title: '显示方向',
       description: '显示方向',
@@ -91,6 +91,7 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '垂直' }, { title: '水平' }],
       },
+      if: (_) => !_.simple,
     })
     direction: 'vertical' | 'horizontal' = 'horizontal';
 
