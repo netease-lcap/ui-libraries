@@ -47,7 +47,6 @@ namespace nasl.ui {
           { title: '电话' },
           { title: '密码' },
           { title: '搜索' },
-          { title: '提交' },
           { title: '隐藏' },
         ],
       },
@@ -58,7 +57,6 @@ namespace nasl.ui {
       | 'tel'
       | 'password'
       | 'search'
-      | 'submit'
       | 'hidden' = 'text';
 
     @Prop({
