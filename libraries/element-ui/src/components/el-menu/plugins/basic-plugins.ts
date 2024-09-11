@@ -39,6 +39,8 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         let vnodes = typeof slotDefault === 'function' ? slotDefault() : [];
         if (!Array.isArray(vnodes)) {
           vnodes = [];
+        } else {
+          vnodes = [...vnodes];
         }
 
         if (mode === 'horizontal') {
