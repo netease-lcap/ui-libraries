@@ -24,10 +24,10 @@ export const Default = {
   name: '基础示例',
   render: () => ({
     template: `
-      <el-tabs value="B">
-        <el-tab-pane name="A"><template #label><el-text text="标签一"></el-text></template><template #default><el-text text="内容"></el-text></template></el-tab-pane>
-        <el-tab-pane name="B"><template #label><el-text text="标签二"></el-text></template><template #default><el-text text="内容"></el-text></template></el-tab-pane>
-        <el-tab-pane name="C"><template #label><el-text text="标签三"></el-text></template><template #default><el-text text="内容"></el-text></template></el-tab-pane>
+      <el-tabs>
+        <el-tab-pane><template #label><el-text text="标签一"></el-text></template><template #default><el-text text="内容"></el-text></template></el-tab-pane>
+        <el-tab-pane><template #label><el-text text="标签二"></el-text></template><template #default><el-text text="内容"></el-text></template></el-tab-pane>
+        <el-tab-pane><template #label><el-text text="标签三"></el-text></template><template #default><el-text text="内容"></el-text></template></el-tab-pane>
       </el-tabs>
     `,
   }),
