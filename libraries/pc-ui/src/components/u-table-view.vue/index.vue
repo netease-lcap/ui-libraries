@@ -52,7 +52,6 @@
         :hasChildrenField="hasChildrenField"
 
         :selectable="selectable"
-        :selectedItem="selectedItem"
 
         :virtual="virtual"
         :itemHeight="itemHeight"
@@ -149,7 +148,6 @@
         :hasChildrenField="hasChildrenField"
 
         :selectable="selectable"
-        :selectedItem="selectedItem"
 
         :virtual="virtual"
         :itemHeight="itemHeight"
@@ -542,7 +540,19 @@ export default {
             const oldValue = oldItem ? this.$at(oldItem, this.valueField) : undefined;
             if (value === oldValue)
                 return;
+                
             this.$emit('change', { value, oldValue, item, oldItem }, this);
+            this.currentData.forEach((itemTemp) => {
+                const valueTemp = this.$at(itemTemp, this.valueField);
+                if (!itemTemp.hasOwnProperty('radioChecked')) {
+                    this.$set(itemTemp, 'radioChecked', false);
+                }
+                if (valueTemp === value) {
+                    this.$set(itemTemp, 'radioChecked', true);
+                } else {
+                    this.$set(itemTemp, 'radioChecked', false);
+                }
+            });
         },
         values(values) {
             this.$nextTick(() => {
@@ -711,6 +721,8 @@ export default {
                 data.forEach((item) => {
                     if (!item.hasOwnProperty('disabled'))
                         this.$set(item, 'disabled', false);
+                    if (!item.hasOwnProperty('radioChecked'))
+                        this.$set(item, 'radioChecked', false);
                 });
             }
             if (checkable) {
