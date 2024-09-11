@@ -217,6 +217,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
  */
 export function genFormItemsTemplate(entity: naslTypes.Entity, properties: Array<naslTypes.EntityProperty>, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>, options = {
   needRules: true,
+  needDefaultValue: true,
 }) {
   return `
   ${properties.map((property) => {
@@ -232,11 +233,26 @@ export function genFormItemsTemplate(entity: naslTypes.Entity, properties: Array
       });
     }
     if (required) rules.push('nasl.validation.required()');
+    const dataSource = entity.parentNode
+    const { typeAnnotation } = property || {};
+    const propertyTypeName = transEntityMetadataTypes(typeAnnotation, dataSource.app);
+    let defaultValueExpressionStatic = '';
+    let defaultValueExpression = '';
+    if (property.defaultValue && property.defaultValue.expression && options.needDefaultValue) {
+      const defaultValue = property.defaultValue.expression.toVue();
+      defaultValueExpressionStatic = `initialValue={${defaultValue}}`;
+      defaultValueExpression = `initialValue=${defaultValue}`;
+    }
+    let finalDefaultValueExpression = defaultValueExpression;
+    if (['Boolean', 'Integer', 'Long', 'Double', 'Decimal'].includes(propertyTypeName)) {
+      finalDefaultValueExpression = defaultValueExpressionStatic;
+    }
     let formItem = `<ElFormItemPro
           ${required ? 'requiredMark="show"' : ''}
           ${rules.length ? ` rules={[${rules.join(',')}]}` : ''}
           layout="center"
           name="${property.name}"
+          ${finalDefaultValueExpression}
           slotLabel={
             <ElText text="${label}"></ElText>
           }>`;
@@ -259,6 +275,7 @@ export function genFilterTemplate(entity: naslTypes.Entity, nameGroup: NameGroup
   <ElFormPro layoutMode="grid" ref="${nameGroup.viewElementFilterForm}">
         ${genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap, {
     needRules: false,
+    needDefaultValue: false,
   })}
         <ElFormItemPro layout="center" labelWidth="{0}">
             <ElButton
