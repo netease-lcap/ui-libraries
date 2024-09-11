@@ -3,7 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
-      type: 'container',
+      idetype: 'container',
     },
   })
   @Component({
