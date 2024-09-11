@@ -53,7 +53,9 @@ namespace nasl.ui {
           useRef: 'argus?.[0]?.index === 0',
         },
       },
-
+      slotInlineStyle: {
+        default: 'min-width: unset',
+      },
       childAccept: "target.tag === 'ElTableColumnPro'",
     },
   })
