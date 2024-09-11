@@ -117,7 +117,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
       return map(v, (item) => {
         return {
-          required: item.required,
+          // required: item.required,
           // message: item.message,
           // ...item,
           trigger: 'all',
