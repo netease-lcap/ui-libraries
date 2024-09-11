@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-input-pro></el-input-pro>',
+    template: '<el-input-pro style="width: 240px;"></el-input-pro>',
   }),
 };

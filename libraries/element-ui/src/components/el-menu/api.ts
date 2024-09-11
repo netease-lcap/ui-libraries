@@ -3,13 +3,18 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
-      "idetype": "container",
-      "structured": true,
-      "childAccept": "['el-submenu', 'el-menu-item', 'el-menu-item-group'].includes(target.tag)",
-      "events": {
-        "click": true
+      idetype: 'container',
+      structured: true,
+      childAccept:
+        "['el-submenu', 'el-menu-item', 'el-menu-item-group'].includes(target.tag)",
+      events: {
+        click: true,
       },
-    }
+      snippetsDisplayConditions: {
+        default:
+          "this.getAttribute('mode')?.value === 'vertical' ? [0, 1, 2] : [0, 1]",
+      },
+    },
   })
   @Component({
     title: '导航菜单',
@@ -26,13 +31,13 @@ namespace nasl.ui {
       title: '展开',
       description: '展开指定的 sub-menu',
     })
-    open(): any { }
+    open(): any {}
 
     @Method({
       title: '收起',
       description: '收起指定的 sub-menu',
     })
-    close(): any { }
+    close(): any {}
   }
 
   export class ElMenuOptions extends ViewComponentOptions {
@@ -44,10 +49,12 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '水平' }, { title: '垂直' }],
       },
-      onChange: [{
-        clear: ['collapse'],
-        if: (_) => _ === 'horizontal',
-      }],
+      onChange: [
+        {
+          clear: ['collapse'],
+          if: (_) => _ === 'horizontal',
+        },
+      ],
     })
     mode: 'horizontal' | 'vertical' = 'vertical';
 
@@ -168,8 +175,14 @@ namespace nasl.ui {
       title: '默认',
       description: '默认',
       snippets: [
-        { title: '子菜单', code: '<el-submenu><template #title><el-text text="子菜单"></el-text></template><template #default><el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item></template></el-submenu>' },
-        { title: '菜单项', code: '<el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item>' },
+        {
+          title: '子菜单',
+          code: '<el-submenu><template #title><el-text text="子菜单"></el-text></template><template #default><el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item></template></el-submenu>',
+        },
+        {
+          title: '菜单项',
+          code: '<el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item>',
+        },
         {
           title: '菜单组',
           code: '<el-menu-item-group><template #title><el-text text="菜单分组"></el-text></template><template #default><el-menu-item><template #default><el-text>菜单项</el-text></template></el-menu-item></template></el-menu-item-group>',
@@ -192,18 +205,24 @@ namespace nasl.ui {
   }
 
   @IDEExtraInfo({
-    "ideusage": {
-      "idetype": "container",
-      "structured": true, // 配合默认插槽 snippets选项 添加子组件
-      "parentAccept": "target.tag === 'el-menu' || target.tag === 'el-submenu' || target.tag === 'el-menu-item-group'",
-      "childAccept": "['el-submenu', 'el-menu-item', 'el-menu-item-group'].includes(target.tag)",
-      "events": {
-        "click": true
+    ideusage: {
+      idetype: 'container',
+      structured: true, // 配合默认插槽 snippets选项 添加子组件
+      parentAccept:
+        "target.tag === 'el-menu' || target.tag === 'el-submenu' || target.tag === 'el-menu-item-group'",
+      childAccept:
+        "['el-submenu', 'el-menu-item', 'el-menu-item-group'].includes(target.tag)",
+      events: {
+        click: true,
       },
-      "displaySlotInline": {
+      displaySlotInline: {
         title: true,
       },
-    }
+      snippetsDisplayConditions: {
+        default:
+          "this.getAncestor('el-menu')?.getAttribute('mode')?.value === 'vertical' ? [0, 1, 2] : [0, 1]",
+      },
+    },
   })
   @Component({
     title: '子菜单',
@@ -269,8 +288,14 @@ namespace nasl.ui {
       title: '默认',
       description: '默认',
       snippets: [
-        { title: '子菜单', code: '<el-submenu><template #title><el-text text="子菜单"></el-text></template><template #default><el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item></template></el-submenu>' },
-        { title: '菜单项', code: '<el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item>' },
+        {
+          title: '子菜单',
+          code: '<el-submenu><template #title><el-text text="子菜单"></el-text></template><template #default><el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item></template></el-submenu>',
+        },
+        {
+          title: '菜单项',
+          code: '<el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item>',
+        },
         {
           title: '菜单组',
           code: '<el-menu-item-group><template #title><el-text text="菜单分组"></el-text></template><template #default><el-menu-item><template #default><el-text>菜单项</el-text></template></el-menu-item></template></el-menu-item-group>',
@@ -287,10 +312,11 @@ namespace nasl.ui {
   }
 
   @IDEExtraInfo({
-    "ideusage": {
-      "idetype": "container",
-      "parentAccept": "target.tag === 'el-menu' || target.tag === 'el-submenu' || target.tag === 'el-menu-item-group'"
-    }
+    ideusage: {
+      idetype: 'container',
+      parentAccept:
+        "target.tag === 'el-menu' || target.tag === 'el-submenu' || target.tag === 'el-menu-item-group'",
+    },
   })
   @Component({
     title: '菜单项',
@@ -335,15 +361,17 @@ namespace nasl.ui {
   }
 
   @IDEExtraInfo({
-    "ideusage": {
-      "idetype": "container",
-      "structured": true,
-      "childAccept": "['el-submenu', 'el-menu-item', 'el-menu-item-group'].includes(target.tag)",
-      "parentAccept": "target.tag === 'el-menu' || target.tag === 'el-submenu' || target.tag === 'el-menu-item-group'",
-      "displaySlotInline": {
+    ideusage: {
+      idetype: 'container',
+      structured: true,
+      childAccept:
+        "['el-submenu', 'el-menu-item', 'el-menu-item-group'].includes(target.tag)",
+      parentAccept:
+        "target.tag === 'el-menu' || target.tag === 'el-submenu' || target.tag === 'el-menu-item-group'",
+      displaySlotInline: {
         title: true,
       },
-    }
+    },
   })
   @Component({
     title: '菜单组',
@@ -368,8 +396,14 @@ namespace nasl.ui {
       title: '默认',
       description: '默认',
       snippets: [
-        { title: '子菜单', code: '<el-submenu><template #title><el-text text="子菜单"></el-text></template><template #default><el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item></template></el-submenu>' },
-        { title: '菜单项', code: '<el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item>' },
+        {
+          title: '子菜单',
+          code: '<el-submenu><template #title><el-text text="子菜单"></el-text></template><template #default><el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item></template></el-submenu>',
+        },
+        {
+          title: '菜单项',
+          code: '<el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item>',
+        },
       ],
     })
     slotDefault: () => Array<ViewComponent>;

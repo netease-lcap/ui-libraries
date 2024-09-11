@@ -23,17 +23,6 @@ namespace nasl.ui {
     getFormData(): any {}
 
     @Method({
-      title: '设置表单初始数据',
-      description: '设置表单初始数据',
-    })
-    setInitalData(
-      @Param({
-        title: '表单初始数据'
-      })
-      initalData: any,
-    ): void {}
-
-    @Method({
       title: '设置表单数据',
       description: '设置表单数据'
     })
