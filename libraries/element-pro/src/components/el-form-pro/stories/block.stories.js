@@ -24,11 +24,11 @@ export const Default = {
   name: '基础示例',
   render: () => ({
     template: `<el-form-pro :requiredMark="false">
-      <el-form-item-pro :requiredMark="true" layout="center">
+      <el-form-item-pro requiredMark="show" layout="center">
         <template #label><el-text text="名称"></el-text></template>
         <el-input-pro placeholder="由字母、数字和中划线组成"></el-input-pro>
       </el-form-item-pro>
-      <el-form-item-pro :requiredMark="true" layout="center">
+      <el-form-item-pro requiredMark="show" layout="center">
         <template #label><el-text text="类型"></el-text></template>
         <el-radio-group-pro>
             <el-radio-pro value="A"><el-text text="类型 A"></el-text></el-radio-pro>
@@ -46,11 +46,11 @@ export const Inline = {
   name: '行内表单',
   render: () => ({
     template: `<el-form-pro :requiredMark="false" layout="inline">
-      <el-form-item-pro :requiredMark="true" layout="center">
+      <el-form-item-pro requiredMark="show" layout="center">
         <template #label><el-text text="名称"></el-text></template>
         <el-input-pro placeholder="由字母、数字和中划线组成"></el-input-pro>
       </el-form-item-pro>
-      <el-form-item-pro :requiredMark="true" layout="center">
+      <el-form-item-pro requiredMark="show" layout="center">
         <template #label><el-text text="类型"></el-text></template>
         <el-radio-group-pro>
             <el-radio-pro value="A"><el-text text="类型 A"></el-text></el-radio-pro>
