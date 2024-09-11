@@ -18,6 +18,9 @@ namespace nasl.ui {
           accept: false,
         },
       },
+      displaySlotConditions: {
+        content: "!!this.getAttribute('dataSource')"
+      }
     }
   })
   @Component({
