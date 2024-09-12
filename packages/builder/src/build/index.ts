@@ -61,7 +61,7 @@ export function buildNaslUI(options: LcapBuildOptions) {
   }
 
   logger.start('开始生成 nasl.ui.json...');
-  const naslUIConfig = genNaslUIConfig({
+  let naslUIConfig = genNaslUIConfig({
     rootPath: options.rootPath,
     framework: options.framework,
     components: options.components,
@@ -82,6 +82,13 @@ export function buildNaslUI(options: LcapBuildOptions) {
       naslUIConfig.unshift(...list.map((it) => configFn(it)));
     });
   }
+
+  naslUIConfig = naslUIConfig.sort((c1, c2) => {
+    const order1 = c1.order || 20;
+    const order2 = c2.order || 20;
+
+    return order1 - order2;
+  });
 
   options.components = naslUIConfig.map(({
     name,
