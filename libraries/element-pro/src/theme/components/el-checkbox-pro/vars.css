@@ -108,9 +108,7 @@
    * @desc 复选框勾选标记尺寸
    * @type size
    */
-  --el-checkbox-check-size: (
-    (var(--el-checkbox-check-width) + var(--el-checkbox-check-height)) / sqrt(2)
-  );
+  --el-checkbox-check-size: calc(calc(var(--el-checkbox-check-width) + var(--el-checkbox-check-height)) / 1.41);
 
   /**
    * @desc 复选框勾选标记左边距

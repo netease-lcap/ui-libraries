@@ -126,13 +126,13 @@
    * @desc 默认开关的边框宽度
    * @type size
    */
-  --el-switch-width-border-default: (var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 1);
+  --el-switch-width-border-default: calc(var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 1);
 
   /**
    * @desc 小号开关的边框宽度
    * @type size
    */
-  --el-switch-width-border-s: (var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 2);
+  --el-switch-width-border-s: calc(var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 2);
 
   /**
    * @desc 基础检查边框宽度

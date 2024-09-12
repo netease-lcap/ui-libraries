@@ -19,9 +19,7 @@
   --el-checkbox-margin-right: var(--el-comp-margin-s);
   --el-checkbox-check-width: 5px;
   --el-checkbox-check-height: 9px;
-  --el-checkbox-check-size: (
-  (var(--el-checkbox-check-width) + var(--el-checkbox-check-height)) / sqrt(2)
-);
+  --el-checkbox-check-size: calc(calc(var(--el-checkbox-check-width) + var(--el-checkbox-check-height)) / 1.41);
   --el-checkbox-check-left: 3px;
   --el-checkbox-indeterminate-width: 16px;
   --el-checkbox-indeterminate-height: 4px;

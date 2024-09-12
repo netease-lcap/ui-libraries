@@ -22,13 +22,13 @@
   --el-switch-width-border-base: 5px;
   --el-switch-width-border-value: 1px;
   --el-switch-width-border-l: var(--el-switch-width-border-base);
-  --el-switch-width-border-default: (var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 1);
-  --el-switch-width-border-s: (var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 2);
+  --el-switch-width-border-default: calc(var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 1);
+  --el-switch-width-border-s: calc(var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 2);
   --el-switch-width-border-check-base: 3px;
   --el-switch-width-border-check-value: 0.5px;
   --el-switch-width-border-check-l: var(--el-switch-width-border-check-base);
-  --el-switch-width-border-check-default: (var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 1);
-  --el-switch-width-border-check-s: (var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 2);
+  --el-switch-width-border-check-default: calc(var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 1);
+  --el-switch-width-border-check-s: calc(var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 2);
   --el-switch-content-font-size-l: var(--el-font-size-body-large);
   --el-switch-content-font-size-default: var(--el-font-size-body-small);
   --el-switch-content-font-size-s: 9px;

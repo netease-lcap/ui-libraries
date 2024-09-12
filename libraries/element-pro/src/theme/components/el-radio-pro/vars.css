@@ -168,7 +168,7 @@
    * @desc 单选框点尺寸
    * @type size
    */
-  --el-radio-dot-size: (var(--el-radio-size) / 2);
+  --el-radio-dot-size: calc(var(--el-radio-size) / 2);
 
   /**
    * @desc 单选框右外间距

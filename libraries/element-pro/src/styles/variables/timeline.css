@@ -15,7 +15,7 @@
   --el-timeline-content-padding-bottom: var(--el-comp-margin-l);
   --el-timeline-wrapper-width-size: 8px;
   --el-timeline-wrapper-top: 8px;
-  --el-timeline-wrapper-item-dot-size: (var(--el-timeline-wrapper-width-size) - 4px);
+  --el-timeline-wrapper-item-dot-size: calc(var(--el-timeline-wrapper-width-size) - 4px);
   --el-timeline-wrapper-tail-padding-bottom: var(--el-comp-size-s);
   --el-timeline-wrapper-tail-height: calc(100% - (var(--el-timeline-wrapper-width-size) * 2 + var(--el-timeline-wrapper-top)));
   --el-timeline-item-alternate-margin: calc(50% - (var(--el-timeline-wrapper-width-size) / 2));
@@ -23,6 +23,6 @@
   --el-timeline-horizontal-item-padding: var(--el-timeline-horizontal-wrapper-height-size);
   --el-timeline-horizontal-wrapper-left: calc(var(--el-timeline-horizontal-wrapper-height-size) + var(--el-comp-margin-s));
   --el-timeline-horizontal-wrapper-tail-width-size: calc(100% - var(--el-timeline-horizontal-wrapper-left));
-  --el-timeline-horizontal-wrapper-item-dot-size: (var(--el-timeline-horizontal-wrapper-height-size) - 4px);
+  --el-timeline-horizontal-wrapper-item-dot-size: calc(var(--el-timeline-horizontal-wrapper-height-size) - 4px);
   --el-timeline-horizontal-content-padding: var(--el-comp-margin-l);
 }

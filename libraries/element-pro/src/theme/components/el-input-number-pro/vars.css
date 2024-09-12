@@ -258,7 +258,7 @@
    * @desc 大号字体大小
    * @type size
    */
-  --el-input-number-font-size-l: (10px * 1.8);
+  --el-input-number-font-size-l: 18px;
 
   /**
    * @desc 默认右侧字体大小

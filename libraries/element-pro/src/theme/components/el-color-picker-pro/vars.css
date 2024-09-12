@@ -216,7 +216,7 @@
    * @desc 色板包裹左边距
    * @type size
    */
-  --el-color-picker-swatch-wrap-margin-left: (var(--el-color-picker-swatch-padding) + var(--el-color-picker-swatch-border-size)) * -1;
+  --el-color-picker-swatch-wrap-margin-left: calc(calc(var(--el-color-picker-swatch-padding) + var(--el-color-picker-swatch-border-size)) * -1);
 
   /**
    * @desc 色板包裹右边距

@@ -13,7 +13,7 @@
   --el-popconfirm-arrow-margin: var(--el-comp-margin-xxl);
   --el-popconfirm-arrow-absolute-offset: -4px;
   --el-popconfirm-arrow-border-width: 4px;
-  --el-popconfirm-arrow-size: (var(--el-popconfirm-arrow-border-width) * 2);
+  --el-popconfirm-arrow-size: calc(var(--el-popconfirm-arrow-border-width) * 2);
   --el-popconfirm-arrow-rotate: rotate(45deg);
   --el-popconfirm-arrow-top-border-color: transparent #fff #fff transparent;
   --el-popconfirm-arrow-bottom-border-color: #fff transparent transparent #fff;
