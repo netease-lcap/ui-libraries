@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: true,
+    order: 7,
     ideusage: {
       idetype: "container",
       structured: true,
@@ -256,7 +256,7 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     private indeterminate: nasl.core.Boolean = false;
-   
+
     @Prop({
       group: '状态属性',
       title: '只读',
