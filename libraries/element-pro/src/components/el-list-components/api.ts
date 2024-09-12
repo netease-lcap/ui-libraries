@@ -9,6 +9,9 @@ namespace nasl.ui {
         ':dataSource': '"[{}]"',
         ':colnum': '"1"',
       },
+
+      childAccept: false,
+      useTemplateInDefaultSlot: true,
     },
   })
   @Component({

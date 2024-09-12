@@ -215,7 +215,7 @@ namespace nasl.ui {
       description: '是否允许多选',
       setter: { concept: 'SwitchSetter' },
     })
-    multiple: nasl.core.Boolean = false;
+    multiple: M = false as any;
 
     @Prop({
       group: '数据属性',
@@ -394,12 +394,7 @@ namespace nasl.ui {
       description: '选中值。支持语法糖 `v-model`。',
       setter: { concept: 'InputSetter' },
     })
-    value:
-      | nasl.core.String
-      | nasl.core.Decimal
-      | nasl.core.Boolean
-      | object
-      | any[];
+    value: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
 
     // @Prop({
     //   group: '主要属性',
