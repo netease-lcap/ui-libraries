@@ -169,6 +169,7 @@
         :usePagination="usePagination"
         :value-field="valueField"
 
+        :nativeScroll="nativeScroll"
         @resize="onResizerDragEnd">
     </u-table-render>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
@@ -361,6 +362,7 @@ export default {
         defaultColumnWidth: [String, Number],
         thEllipsis: { type: Boolean, default: false }, // 表头是否缩略展示
         ellipsis: { type: Boolean, default: false }, // 单元格是否缩略展示
+        nativeScroll: { type: Boolean, default: false }, // 是否使用原生滚动条
     },
     data() {
         return {

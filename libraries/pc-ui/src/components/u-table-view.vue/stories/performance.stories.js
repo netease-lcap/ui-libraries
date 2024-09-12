@@ -31,6 +31,7 @@ for (let i = 0; i < 400; i++) {
   });
   dataSource.push(...newDataSource);
 }
+console.log('数据条数：', dataSource.length)
 
 const TempComponent = {
   props: {
@@ -154,6 +155,55 @@ export const Default1 = {
       <u-input :value.sync="value1" />
       {{ selectedValues }}
       <u-table-view :data-source="dataSource" :value.sync="selectedValues" valueField="index">
+      <u-table-view-column type="radio" title="选择" width="8%"></u-table-view-column>
+      <u-table-view-column title="用户名" width="20%">
+        <template #cell="current">
+          <u-text>{{ current.item.name }} {{ current.item.index }}</u-text>
+        </template>
+      </u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+      <u-table-view-column title="地址" field="address"></u-table-view-column>
+      <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%"></u-table-view-column>
+    </u-table-view>
+    </div>
+    `,
+    data() {
+      return {
+        value1: '',
+        dataSource: [...dataSource],
+        selectedValues: [],
+      };
+    },
+    watch: {
+      selectedValues(value) {
+        console.log(value);
+      },
+    },
+  }),
+};
+
+export const Default2 = {
+  name: '默认性能-Radio-虚拟滚动',
+  render: () => ({
+    template: `
+    <div>
+      <u-input :value.sync="value1" />
+      {{ selectedValues }}
+      <u-table-view :data-source="dataSource" :value.sync="selectedValues" valueField="index" :virtual="true" :nativeScroll="true" style="height:100vh">
       <u-table-view-column type="radio" title="选择" width="8%"></u-table-view-column>
       <u-table-view-column title="用户名" width="20%">
         <template #cell="current">
