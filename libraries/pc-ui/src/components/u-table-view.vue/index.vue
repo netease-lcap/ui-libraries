@@ -172,6 +172,7 @@
         :rowStyle="rowStyle"
         :usePagination="usePagination"
 
+        :nativeScroll="nativeScroll"
         @resize="onResizerDragEnd">
     </u-table-render>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
@@ -369,6 +370,8 @@ export default {
 
         useMask: { type: Boolean, default: true },
         subForm: Boolean, // 是否是子表单
+
+        nativeScroll: { type: Boolean, default: false }, // 是否使用原生滚动条
     },
     data() {
         return {
