@@ -1,19 +1,6 @@
 import Message from 'element-ui/lib/message';
 import ElIcon from '../el-icon/icon';
-
-function setElStyle(style, el) {
-  const exclude = [
-    'zIndex', 'postion', 'left', 'right', 'top', 'bottom',
-  ];
-
-  Object.keys(style).forEach((key) => {
-    if (exclude.includes(key)) {
-      return;
-    }
-
-    el.style[key] = style[key];
-  });
-}
+import { setElStyle } from '../../utils/dom';
 
 export default {
   name: 'ElMessage',

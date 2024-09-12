@@ -1,4 +1,5 @@
 import Notification from 'element-ui/lib/notification';
+import { setElStyle } from '../../utils/dom';
 
 export default {
   name: 'ElNotification',
@@ -90,17 +91,11 @@ export default {
       });
 
       if (this.$vnode.data.staticStyle && this.instance.$el) {
-        const exclude = [
-          'zIndex', 'postion', 'left', 'right', 'top', 'bottom',
-        ];
+        setElStyle(this.$vnode.data.staticStyle && this.instance.$el);
+      }
 
-        Object.keys(this.$vnode.data.staticStyle).forEach((key) => {
-          if (exclude.includes(key)) {
-            return;
-          }
-
-          this.instance.$el.style[key] = this.$vnode.data.staticStyle[key];
-        });
+      if (this.$vnode.data.style && this.instance.$el) {
+        setElStyle(this.$vnode.data.style, this.instance.$el);
       }
 
       this.instance.$nextTick(() => {
