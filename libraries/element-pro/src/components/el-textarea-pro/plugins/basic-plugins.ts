@@ -2,6 +2,8 @@ import { createUseUpdateSync, $deletePropList } from '@lcap/vue2-utils';
 import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins/types';
 import { isFunction } from 'lodash';
 
+export { useFormFieldClass } from '../../../plugins/use-form-field-class';
+
 export const useUpdateSync = createUseUpdateSync([{ name: 'value', event: 'change' }]);
 
 export const useAutoSize: NaslComponentPluginOptions = {

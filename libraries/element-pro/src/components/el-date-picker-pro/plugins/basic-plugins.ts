@@ -11,6 +11,8 @@ import {
   useIcons,
 } from '../hooks';
 
+export { useFormFieldClass } from '../../../plugins/use-form-field-class';
+
 const DEFAULT_FORMAT = 'YYYY-MM-DD';
 
 /* 组件功能扩展插件 */

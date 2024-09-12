@@ -1,2 +1,2 @@
 /* 组件功能扩展插件 */
-export {};
+export { useFormFieldClass } from '../../../plugins/use-form-field-class';

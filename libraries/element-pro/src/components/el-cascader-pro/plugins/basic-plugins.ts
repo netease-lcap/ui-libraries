@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import { $render, createUseUpdateSync } from '@lcap/vue2-utils';
 
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils';
+export { useFormFieldClass } from '../../../plugins/use-form-field-class';
 export const useUpdateSync = createUseUpdateSync();
 
 function listToTree(dataSource, parentField, valueField = 'value') {
@@ -43,6 +44,7 @@ export const useSelect = {
     const keys = props.useComputed('keys', (v) => (_.isObject(v) ? v : {}));
     return {
       options,
+      class: 'cw-form-field',
       keys: {
         value: valueField.value,
         label: textField.value,

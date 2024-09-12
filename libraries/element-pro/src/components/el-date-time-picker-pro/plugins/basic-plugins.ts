@@ -18,6 +18,8 @@ import {
   useIcons,
 } from '../../el-date-picker-pro/hooks';
 
+export { useFormFieldClass } from '../../../plugins/use-form-field-class';
+
 const DEFAULT_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
 function isDisablesTime(d: Dayjs, maxDate: string, minDate: string) {

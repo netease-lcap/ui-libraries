@@ -3,6 +3,9 @@ import _ from 'lodash';
 import { $render, createUseUpdateSync } from '@lcap/vue2-utils';
 
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils';
+
+export { useFormFieldClass } from '../../../plugins/use-form-field-class';
+
 export const useUpdateSync = createUseUpdateSync();
 
 export const useSelect = {
