@@ -14,6 +14,7 @@ import {
 import { usePlaceholder } from '../../el-date-picker-pro/hooks';
 
 export { useFormFieldClass } from '../../../plugins/use-form-field-class';
+export { usePopupTheme } from '../../../plugins/use-popup-theme';
 
 function useTimePickerValue(props: MapGet) {
   const valueRef = props.useRef<TimePickerValue | TimeRangeValue>(['value', 'startValue', 'endValue', 'range', 'format'], (v, startValue, endValue, range, format) => {

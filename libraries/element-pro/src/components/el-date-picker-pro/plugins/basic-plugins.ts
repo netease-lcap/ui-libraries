@@ -12,6 +12,7 @@ import {
 } from '../hooks';
 
 export { useFormFieldClass } from '../../../plugins/use-form-field-class';
+export { usePopupTheme } from '../../../plugins/use-popup-theme';
 
 const DEFAULT_FORMAT = 'YYYY-MM-DD';
 

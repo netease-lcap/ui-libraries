@@ -24,6 +24,7 @@ export interface PluginSetUpContext {
   isDesigner: boolean;
   $router: any;
   setupContext: SetupContext;
+  getVNode: () => VNode;
 }
 
 export interface PluginSetupRef {

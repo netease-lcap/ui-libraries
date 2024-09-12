@@ -16,6 +16,7 @@ export const Default = {
     data() {
       return {
         value: '2024-08-02',
+        height: '44px',
       };
     },
     methods: {
@@ -29,7 +30,7 @@ export const Default = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-time-picker-pro @confirm="confirm" max-date="2024-08-15 12:12:12" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-time-picker-pro>',
+    template: '<el-date-time-picker-pro style="width: 260px" :style="{ height: height }" :class="`el-text`" class="el-temp" @confirm="confirm" max-date="2024-08-15 12:12:12" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-time-picker-pro>',
   }),
 };
 

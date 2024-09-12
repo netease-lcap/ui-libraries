@@ -26,7 +26,7 @@ export const Default = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-picker-pro align="center" :enablePresets="true" presetsPlacement="left" :allowInput="true" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
+    template: '<el-date-picker-pro align="center" style="--el-datepicker-cell-active-background: red;" :enablePresets="true" presetsPlacement="left" :allowInput="true" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
   }),
 };
 

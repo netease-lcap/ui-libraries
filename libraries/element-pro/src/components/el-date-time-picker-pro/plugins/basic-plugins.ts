@@ -8,6 +8,8 @@ import {
   DateRangePickerPartial,
 } from '@element-pro';
 import dayjs, { Dayjs } from 'dayjs';
+import { isFunction } from 'lodash';
+
 import {
   usePlaceholder,
   useDatePickerValue,
@@ -18,9 +20,9 @@ import {
   useInputProps,
   useIcons,
 } from '../../el-date-picker-pro/hooks';
-import { isFunction } from 'lodash';
 
 export { useFormFieldClass } from '../../../plugins/use-form-field-class';
+export { usePopupTheme } from '../../../plugins/use-popup-theme';
 
 const DEFAULT_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 

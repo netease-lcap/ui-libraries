@@ -1,5 +1,6 @@
 export * from './pagination';
 export * from './button';
+export * from './popup';
 // 输入
 export * from './auto-complete';
 export * from './cascader';

@@ -14,7 +14,7 @@ import {
 } from '@vue/composition-api';
 import { kebabCase } from 'lodash';
 import PluginManager from './plugin';
-import { MapGetKey, PluginSetupRef } from './types';
+import { MapGetKey, PluginSetUpContext, PluginSetupRef } from './types';
 import {
   getRefValueMap,
   splitPropsAndAttrs,
@@ -371,17 +371,20 @@ export default defineComponent({
     const { callSetupEnd, createPropsControl } = usePropMap(props, ctx);
     const setups = manger.getPluginSetup(isDesigner);
 
+    const pluginSetUpContext: PluginSetUpContext = {
+      h: vueInstance.$createElement,
+      $router: vueInstance.$router,
+      isDesigner,
+      setupContext: ctx,
+      getVNode: () => ctx.parent.$vnode,
+    };
+
     setups.forEach((setupFn) => {
       const momentRefMap = mergeRefMap(refMap);
       const mergeMap = setupFn.call(
         this,
         createPropsControl(momentRefMap),
-        {
-          h: vueInstance.$createElement,
-          $router: vueInstance.$router,
-          isDesigner,
-          setupContext: ctx,
-        },
+        pluginSetUpContext,
       );
 
       if (!mergeMap) {

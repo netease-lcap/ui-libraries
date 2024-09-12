@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import dayjs from 'dayjs';
 
-import { $render, createUseUpdateSync } from '@lcap/vue2-utils';
+import { createUseUpdateSync } from '@lcap/vue2-utils';
 
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils';
 export { useFormFieldClass } from '../../../plugins/use-form-field-class';
+export { usePopupTheme } from '../../../plugins/use-popup-theme';
 export const useUpdateSync = createUseUpdateSync();
 
 function listToTree(dataSource, parentField, valueField = 'value') {

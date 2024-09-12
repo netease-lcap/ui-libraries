@@ -1,10 +1,11 @@
 import _ from 'lodash';
 
-import { $render, createUseUpdateSync } from '@lcap/vue2-utils';
+import { createUseUpdateSync } from '@lcap/vue2-utils';
 
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils';
 
 export { useFormFieldClass } from '../../../plugins/use-form-field-class';
+export { usePopupTheme } from '../../../plugins/use-popup-theme';
 
 export const useUpdateSync = createUseUpdateSync();
 
