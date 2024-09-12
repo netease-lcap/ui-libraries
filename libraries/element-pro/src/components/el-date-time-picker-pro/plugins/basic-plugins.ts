@@ -5,6 +5,7 @@ import {
   DateValue,
   ElDatePickerProps,
   ElDateRangePickerProps,
+  DateRangePickerPartial,
 } from '@element-pro';
 import dayjs, { Dayjs } from 'dayjs';
 import {
@@ -17,6 +18,7 @@ import {
   useInputProps,
   useIcons,
 } from '../../el-date-picker-pro/hooks';
+import { isFunction } from 'lodash';
 
 export { useFormFieldClass } from '../../../plugins/use-form-field-class';
 
@@ -120,6 +122,17 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
           ...changeEvent,
           trigger: context.trigger,
         });
+      },
+      onConfirm: (context: { date: Date | Date[], partial: DateRangePickerPartial }) => {
+        const [range, onConfirm] = props.get<[boolean, any]>(['range', 'onConfirm']);
+
+        if (isFunction(onConfirm)) {
+          const event = getChangeEventByValue(context.date, range, valueFormat);
+          onConfirm({
+            ...event,
+            position: context.partial,
+          });
+        }
       },
       [$render]: (resultVNode, h, context) => {
         const range = props.getEnd('range') || false;
