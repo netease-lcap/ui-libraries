@@ -491,8 +491,8 @@ namespace nasl.ui {
     // onRemove: (event: any) => any;
 
     @Event({
-      title: '输入值变化时',
-      description: '输入值变化时，触发搜索事件。',
+      title: '搜索事件',
+      description: '用于远程搜索,启用时间后会取消本地搜索',
     })
     onSearch: (event: any) => any;
 
