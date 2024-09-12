@@ -2,9 +2,33 @@
  * @component el-badge
  */
 :root {
+  /**
+   * @desc 徽章背景颜色
+   * @type color
+   */
   --badge-background-color: var(--color-danger);
+
+  /**
+   * @desc 徽章圆角半径
+   * @type length
+   */
   --badge-radius: 10px;
+
+  /**
+   * @desc 徽章字体大小
+   * @type length
+   */
   --badge-font-size: 12px;
+
+  /**
+   * @desc 徽章内边距
+   * @type length
+   */
   --badge-padding: 6px;
+
+  /**
+   * @desc 徽章尺寸
+   * @type length
+   */
   --badge-size: 18px;
 }

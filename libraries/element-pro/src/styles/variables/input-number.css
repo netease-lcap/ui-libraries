@@ -44,7 +44,7 @@
   --el-input-number-padding-horizontal-default: var(--el-comp-paddingLR-s);
   --el-input-number-font-size: var(--el-font-size-body-large);
   --el-input-number-font-size-s: var(--el-font-size-body-medium);
-  --el-input-number-font-size-l: (10px * 1.8);
+  --el-input-number-font-size-l: calc(10px * 1.8);
   --el-input-number-right-font-size: var(--el-font-size-body-small);
   --el-input-number-right-font-size-l: var(--el-font-size-body-large);
   --el-input-number-tips-font-size: var(--el-font-size-body-small);

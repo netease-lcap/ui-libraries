@@ -2,31 +2,165 @@
  * @component el-textarea-pro
  */
 :root {
+  /**
+   * @desc 占位符文字颜色
+   * @type color
+   */
   --el-textarea-placeholder-color: var(--el-text-color-placeholder);
+
+  /**
+   * @desc 主要文字颜色
+   * @type color
+   */
   --el-textarea-text-color: var(--el-text-color-primary);
+
+  /**
+   * @desc 限制文字颜色
+   * @type color
+   */
   --el-textarea-limit-color: var(--el-text-color-placeholder);
+
+  /**
+   * @desc 默认背景颜色
+   * @type color
+   */
   --el-textarea-bg-color-default: var(--el-bg-color-specialcomponent);
+
+  /**
+   * @desc 禁用状态背景颜色
+   * @type color
+   */
   --el-textarea-bg-color-disabled: var(--el-bg-color-component-disabled);
+
+  /**
+   * @desc 禁用状态文字颜色
+   * @type color
+   */
   --el-textarea-color-text-disabled: var(--el-text-color-disabled);
+
+  /**
+   * @desc 成功状态边框颜色
+   * @type color
+   */
   --el-textarea-border-color-success: var(--el-success-color);
+
+  /**
+   * @desc 警告状态边框颜色
+   * @type color
+   */
   --el-textarea-border-color-warning: var(--el-warning-color);
+
+  /**
+   * @desc 错误状态边框颜色
+   * @type color
+   */
   --el-textarea-border-color-error: var(--el-error-color);
+
+  /**
+   * @desc 成功状态文字颜色
+   * @type color
+   */
   --el-textarea-text-color-success: var(--el-success-color);
+
+  /**
+   * @desc 警告状态文字颜色
+   * @type color
+   */
   --el-textarea-text-color-warning: var(--el-warning-color);
+
+  /**
+   * @desc 错误状态文字颜色
+   * @type color
+   */
   --el-textarea-text-color-error: var(--el-error-color);
+
+  /**
+   * @desc 提示文字颜色
+   * @type color
+   */
   --el-textarea-text-color-tips: var(--el-text-color-placeholder);
+
+  /**
+   * @desc 文本域高度
+   * @type size
+   */
   --el-textarea-height: var(--el-comp-size-xxxl);
+
+  /**
+   * @desc 提示信息最小高度
+   * @type size
+   */
   --el-textarea-tips-min-height: var(--el-comp-size-xs);
+
+  /**
+   * @desc 文本域字体
+   * @type font
+   */
   --el-textarea-font: var(--el-font-body-medium);
+
+  /**
+   * @desc 提示信息字体
+   * @type font
+   */
   --el-textarea-tips-font: var(--el-font-body-small);
+
+  /**
+   * @desc 文本域内边距
+   * @type size
+   */
   --el-textarea-padding: calc(calc(var(--el-comp-size-m) - var(--el-line-height-body-medium)) / 2) var(--el-comp-paddingLR-s);
+
+  /**
+   * @desc 提示信息间距
+   * @type size
+   */
   --el-textarea-tips-gap: var(--el-comp-margin-s);
+
+  /**
+   * @desc 边框颜色
+   * @type color
+   */
   --el-textarea-border-color: var(--el-border-level-2-color);
+
+  /**
+   * @desc 悬停状态边框颜色
+   * @type color
+   */
   --el-textarea-border-color-hover: var(--el-brand-color);
+
+  /**
+   * @desc 聚焦状态边框颜色
+   * @type color
+   */
   --el-textarea-border-color-focus: var(--el-brand-color);
+
+  /**
+   * @desc 聚焦状态阴影颜色
+   * @type color
+   */
   --el-textarea-box-shadow-color-focus: var(--el-brand-color-focus);
+
+  /**
+   * @desc 成功状态聚焦阴影颜色
+   * @type color
+   */
   --el-textarea-box-shadow-color-success-focus: var(--el-success-color-focus);
+
+  /**
+   * @desc 警告状态聚焦阴影颜色
+   * @type color
+   */
   --el-textarea-box-shadow-color-warning-focus: var(--el-warning-color-focus);
+
+  /**
+   * @desc 错误状态聚焦阴影颜色
+   * @type color
+   */
   --el-textarea-box-shadow-color-error-focus: var(--el-error-color-focus);
+
+  /**
+   * @desc 边框圆角
+   * @type size
+   */
   --el-textarea-border-radius: var(--el-radius-default);
 }

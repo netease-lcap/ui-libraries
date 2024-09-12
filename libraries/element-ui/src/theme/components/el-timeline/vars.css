@@ -2,7 +2,21 @@
  * @component el-timeline
  */
 :root {
+  /**
+   * @desc 时间轴节点的常规尺寸
+   * @type size
+   */
   --timeline-node-size-normal: 12px;
+
+  /**
+   * @desc 时间轴节点的大尺寸
+   * @type size
+   */
   --timeline-node-size-large: 14px;
+
+  /**
+   * @desc 时间轴节点的颜色
+   * @type color
+   */
   --timeline-node-color: var(--border-color-light);
 }

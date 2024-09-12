@@ -2,8 +2,27 @@
  * @component el-tree
  */
 :root {
+  /**
+   * @desc 树节点悬停背景色
+   * @type color
+   */
   --tree-node-hover-background-color: var(--background-color-base);
+
+  /**
+   * @desc 树节点字体颜色
+   * @type color
+   */
   --tree-font-color: var(--color-text-regular);
+
+  /**
+   * @desc 树节点展开图标颜色
+   * @type color
+   */
   --tree-expand-icon-color: var(--color-text-placeholder);
+
+  /**
+   * @desc 树节点高亮背景色
+   * @type color
+   */
   --tree-highlight-background-color: #f0f7ff;
 }

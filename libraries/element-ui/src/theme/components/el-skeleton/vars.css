@@ -2,6 +2,15 @@
  * @component el-skeleton
  */
 :root {
+  /**
+   * @desc 骨架屏的主色
+   * @type color
+   */
   --skeleton-color: #f2f2f2;
+
+  /**
+   * @desc 骨架屏的渐变色
+   * @type color
+   */
   --skeleton-to-color: #e6e6e6;
 }

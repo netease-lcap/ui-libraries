@@ -2,50 +2,279 @@
  * @component el-input-number-pro
  */
 :root {
+  /**
+   * @desc 输入框内部文字颜色
+   * @type color
+   */
   --el-input-number-inner-color: var(--el-text-color-primary);
+
+  /**
+   * @desc 按钮背景色
+   * @type color
+   */
   --el-input-number-button-bg-color: transparent;
+
+  /**
+   * @desc 右侧按钮背景色
+   * @type color
+   */
   --el-input-number-right-button-bg-color: var(--el-bg-color-secondarycontainer);
+
+  /**
+   * @desc 右侧按钮悬停背景色
+   * @type color
+   */
   --el-input-number-right-button-hover-bg-color: var(--el-bg-color-component-hover);
+
+  /**
+   * @desc 按钮边框颜色
+   * @type color
+   */
   --el-input-number-button-border-color: var(--el-border-level-2-color);
+
+  /**
+   * @desc 按钮文字颜色
+   * @type color
+   */
   --el-input-number-button-color: var(--el-text-color-disabled);
+
+  /**
+   * @desc 右侧背景色
+   * @type color
+   */
   --el-input-number-right-bg-color: var(--el-bg-color-container);
+
+  /**
+   * @desc 右侧按钮边框颜色
+   * @type color
+   */
   --el-input-number-right-button-border-color: var(--el-border-level-2-color);
+
+  /**
+   * @desc 悬停时边框颜色
+   * @type color
+   */
   --el-input-number-border-color-hover: var(--el-brand-color-hover);
+
+  /**
+   * @desc 右侧悬停时边框颜色
+   * @type color
+   */
   --el-input-number-right-border-color-hover: var(--el-brand-color-hover);
+
+  /**
+   * @desc 悬停时按钮文字颜色
+   * @type color
+   */
   --el-input-number-button-color-hover: var(--el-brand-color);
+
+  /**
+   * @desc 禁用时背景色
+   * @type color
+   */
   --el-input-number-bg-color-disabled: var(--el-bg-color-component-disabled);
+
+  /**
+   * @desc 禁用时内部文字颜色
+   * @type color
+   */
   --el-input-number-inner-color-disabled: var(--el-text-color-disabled);
+
+  /**
+   * @desc 禁用时按钮文字颜色
+   * @type color
+   */
   --el-input-number-button-color-disabled: var(--el-text-color-disabled);
+
+  /**
+   * @desc 禁用时按钮背景色
+   * @type color
+   */
   --el-input-number-button-bg-color-disabled: var(--el-bg-color-component-disabled);
+
+  /**
+   * @desc 提示文字颜色
+   * @type color
+   */
   --el-input-number-text-color-tips: var(--el-text-color-placeholder);
+
+  /**
+   * @desc 成功状态文字颜色
+   * @type color
+   */
   --el-input-number-text-color-success: var(--el-success-color);
+
+  /**
+   * @desc 警告状态文字颜色
+   * @type color
+   */
   --el-input-number-text-color-warning: var(--el-warning-color);
+
+  /**
+   * @desc 错误状态文字颜色
+   * @type color
+   */
   --el-input-number-text-color-error: var(--el-error-color);
+
+  /**
+   * @desc 小号输入框宽度
+   * @type size
+   */
   --el-input-number-width-s: 120px;
+
+  /**
+   * @desc 默认输入框宽度
+   * @type size
+   */
   --el-input-number-width: 144px;
+
+  /**
+   * @desc 大号输入框宽度
+   * @type size
+   */
   --el-input-number-width-l: 168px;
+
+  /**
+   * @desc 小号按钮宽度
+   * @type size
+   */
   --el-input-number-button-width-s: var(--el-comp-size-xs);
+
+  /**
+   * @desc 默认按钮宽度
+   * @type size
+   */
   --el-input-number-button-width: var(--el-comp-size-m);
+
+  /**
+   * @desc 大号按钮宽度
+   * @type size
+   */
   --el-input-number-button-width-l: var(--el-comp-size-xl);
+
+  /**
+   * @desc 小号按钮高度
+   * @type size
+   */
   --el-input-number-button-height-s: var(--el-comp-size-xs);
+
+  /**
+   * @desc 默认按钮高度
+   * @type size
+   */
   --el-input-number-button-height: var(--el-comp-size-m);
+
+  /**
+   * @desc 大号按钮高度
+   * @type size
+   */
   --el-input-number-button-height-l: var(--el-comp-size-xl);
+
+  /**
+   * @desc 小号输入框内部高度
+   * @type size
+   */
   --el-input-number-inner-height-s: var(--el-comp-size-xs);
+
+  /**
+   * @desc 默认输入框内部高度
+   * @type size
+   */
   --el-input-number-inner-height: var(--el-comp-size-m);
+
+  /**
+   * @desc 大号输入框内部高度
+   * @type size
+   */
   --el-input-number-inner-height-l: var(--el-comp-size-xl);
+
+  /**
+   * @desc 小号右侧宽度
+   * @type size
+   */
   --el-input-number-right-width-s: 88px;
+
+  /**
+   * @desc 默认右侧宽度
+   * @type size
+   */
   --el-input-number-right-width: 96px;
+
+  /**
+   * @desc 大号右侧宽度
+   * @type size
+   */
   --el-input-number-right-width-l: 120px;
+
+  /**
+   * @desc 默认右侧按钮宽度
+   * @type size
+   */
   --el-input-number-right-button-width: var(--el-comp-size-m);
+
+  /**
+   * @desc 大号右侧按钮宽度
+   * @type size
+   */
   --el-input-number-right-button-width-l: var(--el-comp-size-xl);
+
+  /**
+   * @desc 小号按钮列高度
+   * @type size
+   */
   --el-input-number-button-column-height-s: calc(calc(var(--el-comp-size-xs) / 2) - 2px);
+
+  /**
+   * @desc 默认按钮列高度
+   * @type size
+   */
   --el-input-number-button-column-height: calc(calc(var(--el-comp-size-m) / 2) - 2px);
+
+  /**
+   * @desc 大号按钮列高度
+   * @type size
+   */
   --el-input-number-button-column-height-l: calc(calc(var(--el-comp-size-xl) / 2) - 2px);
+
+  /**
+   * @desc 默认水平内边距
+   * @type size
+   */
   --el-input-number-padding-horizontal-default: var(--el-comp-paddingLR-s);
+
+  /**
+   * @desc 默认字体大小
+   * @type size
+   */
   --el-input-number-font-size: var(--el-font-size-body-large);
+
+  /**
+   * @desc 小号字体大小
+   * @type size
+   */
   --el-input-number-font-size-s: var(--el-font-size-body-medium);
-  --el-input-number-font-size-l: (10px * 1.8);
+
+  /**
+   * @desc 大号字体大小
+   * @type size
+   */
+  --el-input-number-font-size-l: 18px;
+
+  /**
+   * @desc 默认右侧字体大小
+   * @type size
+   */
   --el-input-number-right-font-size: var(--el-font-size-body-small);
+
+  /**
+   * @desc 大号右侧字体大小
+   * @type size
+   */
   --el-input-number-right-font-size-l: var(--el-font-size-body-large);
+
+  /**
+   * @desc 提示文字字体大小
+   * @type size
+   */
   --el-input-number-tips-font-size: var(--el-font-size-body-small);
 }

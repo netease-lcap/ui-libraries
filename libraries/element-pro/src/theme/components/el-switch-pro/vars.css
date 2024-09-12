@@ -2,44 +2,237 @@
  * @component el-switch-pro
  */
 :root {
+  /**
+   * @desc 开启状态下的背景色
+   * @type color
+   */
   --el-switch-checked-bg-color: var(--el-brand-color);
+
+  /**
+   * @desc 开启状态下的背景色（悬停）
+   * @type color
+   */
   --el-switch-checked-bg-color-hover: var(--el-brand-color-hover);
+
+  /**
+   * @desc 开启状态下的背景色（加载中）
+   * @type color
+   */
   --el-switch-checked-bg-color-loading: var(--el-brand-color-focus);
+
+  /**
+   * @desc 开启状态下的背景色（禁用）
+   * @type color
+   */
   --el-switch-checked-bg-color-disabled: var(--el-brand-color-disabled);
+
+  /**
+   * @desc 关闭状态下的背景色
+   * @type color
+   */
   --el-switch-unchecked-bg-color: var(--el-bg-color-secondarycomponent);
+
+  /**
+   * @desc 关闭状态下的背景色（悬停）
+   * @type color
+   */
   --el-switch-unchecked-bg-color-hover: var(--el-bg-color-secondarycomponent-hover);
+
+  /**
+   * @desc 关闭状态下的背景色（加载中）
+   * @type color
+   */
   --el-switch-unchecked-bg-color-loading: var(--el-bg-color-component-disabled);
+
+  /**
+   * @desc 关闭状态下的背景色（禁用）
+   * @type color
+   */
   --el-switch-unchecked-bg-color-disabled: var(--el-bg-color-component-disabled);
+
+  /**
+   * @desc 开关手柄的背景色
+   * @type color
+   */
   --el-switch-handle-bg-color: #fff;
+
+  /**
+   * @desc 开启状态下的文字颜色
+   * @type color
+   */
   --el-switch-content-color-checked: var(--el-text-color-anti);
+
+  /**
+   * @desc 关闭状态下的文字颜色
+   * @type color
+   */
   --el-switch-content-color-unchecked: var(--el-text-color-anti);
+
+  /**
+   * @desc 大号开关的高度
+   * @type size
+   */
   --el-switch-height-l: var(--el-comp-size-xs);
+
+  /**
+   * @desc 默认开关的高度
+   * @type size
+   */
   --el-switch-height-default: var(--el-comp-size-xxs);
+
+  /**
+   * @desc 小号开关的高度
+   * @type size
+   */
   --el-switch-height-s: var(--el-comp-size-xxxs);
+
+  /**
+   * @desc 大号开关的最小宽度
+   * @type size
+   */
   --el-switch-min-width-l: calc(var(--el-switch-height-l) / 0.618);
+
+  /**
+   * @desc 默认开关的最小宽度
+   * @type size
+   */
   --el-switch-min-width-default: calc(var(--el-switch-height-default) / 0.618);
+
+  /**
+   * @desc 小号开关的最小宽度
+   * @type size
+   */
   --el-switch-min-width-s: calc(var(--el-switch-height-s) / 0.618);
+
+  /**
+   * @desc 基础边框宽度
+   * @type size
+   */
   --el-switch-width-border-base: 5px;
+
+  /**
+   * @desc 边框宽度值
+   * @type size
+   */
   --el-switch-width-border-value: 1px;
+
+  /**
+   * @desc 大号开关的边框宽度
+   * @type size
+   */
   --el-switch-width-border-l: var(--el-switch-width-border-base);
-  --el-switch-width-border-default: (var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 1);
-  --el-switch-width-border-s: (var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 2);
+
+  /**
+   * @desc 默认开关的边框宽度
+   * @type size
+   */
+  --el-switch-width-border-default: calc(var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 1);
+
+  /**
+   * @desc 小号开关的边框宽度
+   * @type size
+   */
+  --el-switch-width-border-s: calc(var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 2);
+
+  /**
+   * @desc 基础检查边框宽度
+   * @type size
+   */
   --el-switch-width-border-check-base: 3px;
+
+  /**
+   * @desc 检查边框宽度值
+   * @type size
+   */
   --el-switch-width-border-check-value: 0.5px;
+
+  /**
+   * @desc 大号开关的检查边框宽度
+   * @type size
+   */
   --el-switch-width-border-check-l: var(--el-switch-width-border-check-base);
-  --el-switch-width-border-check-default: (var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 1);
-  --el-switch-width-border-check-s: (var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 2);
+
+  /**
+   * @desc 默认开关的检查边框宽度
+   * @type size
+   */
+  --el-switch-width-border-check-default: calc(var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 1);
+
+  /**
+   * @desc 小号开关的检查边框宽度
+   * @type size
+   */
+  --el-switch-width-border-check-s: calc(var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 2);
+
+  /**
+   * @desc 大号开关的字体大小
+   * @type size
+   */
   --el-switch-content-font-size-l: var(--el-font-size-body-large);
+
+  /**
+   * @desc 默认开关的字体大小
+   * @type size
+   */
   --el-switch-content-font-size-default: var(--el-font-size-body-small);
+
+  /**
+   * @desc 小号开关的字体大小
+   * @type size
+   */
   --el-switch-content-font-size-s: 9px;
+
+  /**
+   * @desc 大号开关的左外边距
+   * @type size
+   */
   --el-switch-content-margin-left-l: calc(var(--el-switch-min-width-l) / 2 + 4px);
+
+  /**
+   * @desc 大号开关的右外边距
+   * @type size
+   */
   --el-switch-content-margin-right-l: var(--el-comp-margin-s);
+
+  /**
+   * @desc 默认开关的左外边距
+   * @type size
+   */
   --el-switch-content-margin-left-default: calc(var(--el-switch-min-width-default) / 2 + 2px);
+
+  /**
+   * @desc 默认开关的右外边距
+   * @type size
+   */
   --el-switch-content-margin-right-default: var(--el-comp-margin-xs);
+
+  /**
+   * @desc 小号开关的左外边距
+   * @type size
+   */
   --el-switch-content-margin-left-s: calc(var(--el-switch-min-width-s) / 2 + 2px);
+
+  /**
+   * @desc 小号开关的右外边距
+   * @type size
+   */
   --el-switch-content-margin-right-s: var(--el-comp-margin-xxs);
+
+  /**
+   * @desc 开关的过渡效果
+   * @type transition
+   */
   --el-switch-transition: all 0.2s cubic-bezier(0.38, 0, 0.24, 1);
+
+  /**
+   * @desc 开关手柄的过渡效果
+   * @type transition
+   */
   --el-switch-handle-transition: all 0.2s cubic-bezier(0.38, 0, 0.24, 1);
-  --el-switch-content-transition: padding 0.2s cubic-bezier(0.38, 0, 0.24, 1),
-  opacity 0.2s linear;
+
+  /**
+   * @desc 开关内容的过渡效果
+   * @type transition
+   */
+  --el-switch-content-transition: padding 0.2s cubic-bezier(0.38, 0, 0.24, 1), opacity 0.2s linear;
 }

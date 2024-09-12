@@ -2,32 +2,171 @@
  * @component el-tree-pro
  */
 :root {
+  /**
+   * @desc 树节点文字颜色
+   * @type color
+   */
   --el-tree-node-text-color: var(--el-text-color-primary);
+
+  /**
+   * @desc 树节点空文字颜色
+   * @type color
+   */
   --el-tree-node-empty-text-color: var(--el-text-color-disabled);
+
+  /**
+   * @desc 树节点悬停背景色
+   * @type color
+   */
   --el-tree-node-bg-hover-color: var(--el-bg-color-container-hover);
+
+  /**
+   * @desc 树节点激活文字颜色
+   * @type color
+   */
   --el-tree-node-text-active-color: var(--el-text-color-primary);
+
+  /**
+   * @desc 树节点激活图标颜色
+   * @type color
+   */
   --el-tree-node-icon-active-color: var(--el-text-color-brand);
+
+  /**
+   * @desc 树节点激活背景色
+   * @type color
+   */
   --el-tree-node-bg-active-color: var(--el-brand-color-light);
+
+  /**
+   * @desc 树节点图标颜色
+   * @type color
+   */
   --el-tree-node-icon-color: var(--el-text-color-secondary);
+
+  /**
+   * @desc 树节点图标线条颜色
+   * @type color
+   */
   --el-tree-node-icon-line-color: var(--el-border-level-1-color);
+
+  /**
+   * @desc 树节点禁用颜色
+   * @type color
+   */
   --el-tree-disabled-color: var(--el-text-color-disabled);
+
+  /**
+   * @desc 树节点图标禁用颜色
+   * @type color
+   */
   --el-tree-icon-disabled-color: var(--el-tree-node-icon-color);
+
+  /**
+   * @desc 树节点字体
+   * @type font
+   */
   --el-tree-font: var(--el-font-body-medium);
+
+  /**
+   * @desc 树节点字体大小
+   * @type size
+   */
   --el-tree-font-size: var(--el-font-size-body-medium);
+
+  /**
+   * @desc 树节点字体行高
+   * @type size
+   */
   --el-tree-font-line-height: var(--el-line-height-body-medium);
+
+  /**
+   * @desc 树节点基本内边距
+   * @type size
+   */
   --el-tree-node-padding-basic: var(--el-comp-margin-xxl);
+
+  /**
+   * @desc 树线条位置底部
+   * @type size
+   */
   --el-tree-line-position-bottom: var(--el-comp-margin-l);
+
+  /**
+   * @desc 树标签左边距
+   * @type size
+   */
   --el-tree-label-margin-left: var(--el-comp-margin-xs);
+
+  /**
+   * @desc 树标签内边距
+   * @type size
+   */
   --el-tree-label-padding: var(--el-comp-paddingTB-xxs) var(--el-comp-paddingLR-xs);
+
+  /**
+   * @desc 树线条宽度
+   * @type size
+   */
   --el-tree-line-width: 1px;
+
+  /**
+   * @desc 树节点项高度
+   * @type size
+   */
   --el-tree-node-item-height: calc(var(--el-comp-size-m) + 2px);
+
+  /**
+   * @desc 树线条前宽度
+   * @type size
+   */
   --el-tree-line-before-width: var(--el-comp-margin-m);
+
+  /**
+   * @desc 树叶子线条宽度
+   * @type size
+   */
   --el-tree-line-leaf-width: var(--el-comp-margin-m);
+
+  /**
+   * @desc 树线条首高度
+   * @type size
+   */
   --el-tree-line-first-height: var(--el-tree-font-line-height);
+
+  /**
+   * @desc 树节点图标大小
+   * @type size
+   */
   --el-tree-node-icon-size: calc(var(--el-tree-font-size) + 2px);
+
+  /**
+   * @desc 树节点动画时间
+   * @type time
+   */
   --el-tree-node-animation-time: 300ms;
+
+  /**
+   * @desc 树节点过渡时间
+   * @type time
+   */
   --el-tree-node-transition-time: 150ms;
+
+  /**
+   * @desc 树节点拖拽提示高度
+   * @type size
+   */
   --el-tree-node-drag-tip-height: 2px;
+
+  /**
+   * @desc 树节点拖拽提示背景色
+   * @type color
+   */
   --el-tree-node-drag-tip-bg: var(--el-brand-color);
+
+  /**
+   * @desc 树节点拖拽背景高亮色
+   * @type color
+   */
   --el-tree-node-drag-bg-highlight: var(--el-brand-color-light);
 }

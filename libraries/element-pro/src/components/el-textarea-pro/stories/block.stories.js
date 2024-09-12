@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-textarea-pro placeholder="请输入内容" style="width: 240px;"></el-textarea-pro>',
+    template: '<el-textarea-pro placeholder="请输入内容"></el-textarea-pro>',
   }),
 };

@@ -2,7 +2,21 @@
  * @component el-container
  */
 :root {
+  /**
+   * @desc 页眉的内间距
+   * @type input
+   */
   --header-padding: 0 20px;
+
+  /**
+   * @desc 页脚的内间距
+   * @type input
+   */
   --footer-padding: 0 20px;
+
+  /**
+   * @desc 主体内容的内间距
+   * @type input
+   */
   --main-padding: 20px;
 }

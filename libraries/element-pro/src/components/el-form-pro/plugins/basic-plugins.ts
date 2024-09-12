@@ -198,7 +198,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       const resetObj = {};
 
       Object.keys(d).forEach((key) => {
-        resetObj[key] = resetObj[key] === undefined ? null : resetObj[key];
+        resetObj[key] = d[key] === undefined ? null : d[key];
       });
 
       Object.assign(formData, resetObj);
@@ -440,18 +440,13 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         },
         resetForm() {
           const onReset = props.get('onReset');
-          const resetType = props.get('resetType') || 'empty';
 
           if (instance.refs.$base) {
             (instance.refs.$base as any).clearValidate();
           }
 
           Object.keys(formFieldMetas).forEach((key) => {
-            if (resetType === 'initial') {
-              setFieldValue(key, formFieldMetas[key].initialValue === undefined ? null : formFieldMetas[key].initialValue);
-              return;
-            }
-            setFieldValue(key, null);
+            setFieldValue(key, formFieldMetas[key].initialValue === undefined ? null : formFieldMetas[key].initialValue);
           });
 
           resetFormItemNeedReset();

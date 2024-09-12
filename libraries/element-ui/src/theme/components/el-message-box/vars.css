@@ -2,16 +2,75 @@
  * @component el-message-box
  */
 :root {
+  /**
+   * @desc 消息框标题颜色
+   * @type color
+   */
   --messagebox-title-color: var(--color-text-primary);
+
+  /**
+   * @desc 消息框宽度
+   * @type size
+   */
   --msgbox-width: 420px;
+
+  /**
+   * @desc 消息框边框圆角
+   * @type size
+   */
   --msgbox-border-radius: 4px;
+
+  /**
+   * @desc 消息框字体大小
+   * @type size
+   */
   --messagebox-font-size: var(--font-size-large);
+
+  /**
+   * @desc 消息框内容字体大小
+   * @type size
+   */
   --messagebox-content-font-size: var(--font-size-base);
+
+  /**
+   * @desc 消息框内容颜色
+   * @type color
+   */
   --messagebox-content-color: var(--color-text-regular);
+
+  /**
+   * @desc 消息框错误信息字体大小
+   * @type size
+   */
   --messagebox-error-font-size: 12px;
+
+  /**
+   * @desc 消息框主要内边距
+   * @type size
+   */
   --msgbox-padding-primary: 15px;
+
+  /**
+   * @desc 消息框成功状态颜色
+   * @type color
+   */
   --messagebox-success-color: var(--color-success);
+
+  /**
+   * @desc 消息框信息状态颜色
+   * @type color
+   */
   --messagebox-info-color: var(--color-info);
+
+  /**
+   * @desc 消息框警告状态颜色
+   * @type color
+   */
   --messagebox-warning-color: var(--color-warning);
+
+  /**
+   * @desc 消息框危险状态颜色
+   * @type color
+   */
   --messagebox-danger-color: var(--color-danger);
 }

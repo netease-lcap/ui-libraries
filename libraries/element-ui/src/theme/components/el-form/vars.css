@@ -2,5 +2,9 @@
  * @component el-form
  */
 :root {
+  /**
+   * @desc 表单标签的字体大小
+   * @type font-size
+   */
   --form-label-font-size: var(--font-size-base);
 }

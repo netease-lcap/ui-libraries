@@ -37,7 +37,7 @@
   --el-color-picker-swatch-item-left-negative-padding: calc(0px - var(--el-color-picker-swatch-item-padding));
   --el-color-picker-swatch-row-gap: calc(calc(var(--el-color-picker-panel-width) - calc(calc(var(--el-color-picker-panel-padding) * 2) + calc(var(--el-color-picker-swatch-height) * var(--el-color-picker-swatch-columns)))) / 9);
   --el-color-picker-swatch-column-gap: calc(calc(var(--el-color-picker-panel-width) - calc(calc(var(--el-color-picker-panel-padding) * 2) + calc(var(--el-color-picker-swatch-width) * var(--el-color-picker-swatch-columns)))) / 9);
-  --el-color-picker-swatch-wrap-margin-left: (var(--el-color-picker-swatch-padding) + var(--el-color-picker-swatch-border-size)) * -1;
+  --el-color-picker-swatch-wrap-margin-left: calc(var(--el-color-picker-swatch-padding) + var(--el-color-picker-swatch-border-size)) * -1;
   --el-color-picker-swatch-wrap-margin-right: var(--el-color-picker-swatch-wrap-margin-left) - 10px;
   --el-color-picker-swatch-wrap-margin: 0 var(--el-color-picker-swatch-wrap-margin-right) 0 var(--el-color-picker-swatch-wrap-margin-left);
   --el-color-picker-swatch-max-rows: 4;

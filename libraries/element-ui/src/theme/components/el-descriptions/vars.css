@@ -2,8 +2,27 @@
  * @component el-descriptions
  */
 :root {
+  /**
+   * @desc 描述列表头部的下外边距
+   * @type margin
+   */
   --descriptions-header-margin-bottom: 20px;
+
+  /**
+   * @desc 描述列表标题的字体大小
+   * @type font-size
+   */
   --descriptions-title-font-size: 16px;
+
+  /**
+   * @desc 描述列表表格的边框样式
+   * @type border
+   */
   --descriptions-table-border: 1px solid var(--border-color-lighter);
+
+  /**
+   * @desc 描述列表项有边框时标签的背景色
+   * @type background-color
+   */
   --descriptions-item-bordered-label-background: #fafafa;
 }

@@ -29,7 +29,7 @@
   --el-radio-button-background-color-default-filled-disabled-checked: var(--el-bg-color-component-disabled);
   --el-radio-button-background-color-primary-filled-disabled-checked: var(--el-brand-color-disabled);
   --el-radio-size: 16px;
-  --el-radio-dot-size: (var(--el-radio-size) / 2);
+  --el-radio-dot-size: calc(var(--el-radio-size) / 2);
   --el-radio-margin-right: var(--el-comp-margin-xxl);
   --el-radio-button-border-radius: var(--el-radius-small);
   --el-radio-outline-height-small: var(--el-comp-size-xs);

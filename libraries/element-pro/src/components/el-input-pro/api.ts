@@ -47,7 +47,6 @@ namespace nasl.ui {
           { title: '电话' },
           { title: '密码' },
           { title: '搜索' },
-          { title: '提交' },
           { title: '隐藏' },
         ],
       },
@@ -58,7 +57,6 @@ namespace nasl.ui {
       | 'tel'
       | 'password'
       | 'search'
-      | 'submit'
       | 'hidden' = 'text';
 
     @Prop({
@@ -212,11 +210,12 @@ namespace nasl.ui {
     })
     showClearIconOnEmpty: nasl.core.Boolean = false;
 
-    @Prop({
+    @Prop<ElInputProOptions, 'showLimitNumber'>({
       group: '主要属性',
       title: '显示字数统计',
       description: '是否在输入框右侧显示字数统计',
       setter: { concept: 'SwitchSetter' },
+      if: _ => !!_.maxlength
     })
     showLimitNumber: nasl.core.Boolean = false;
 
@@ -247,7 +246,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '状态',
       description:
-        '输入框状态。默认情况会由组件内部根据实际情况呈现，如果文本过长引起的状态变化。可选项：default/success/warning/error',
+        '输入框状态。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [

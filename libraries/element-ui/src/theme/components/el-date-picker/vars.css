@@ -2,15 +2,69 @@
  * @component el-date-picker
  */
 :root {
+  /**
+   * @desc 日期选择器字体颜色
+   * @type color
+   */
   --datepicker-font-color: var(--color-text-regular);
+
+  /**
+   * @desc 日期选择器禁用状态字体颜色
+   * @type color
+   */
   --datepicker-off-font-color: var(--color-text-placeholder);
+
+  /**
+   * @desc 日期选择器头部字体颜色
+   * @type color
+   */
   --datepicker-header-font-color: var(--color-text-regular);
+
+  /**
+   * @desc 日期选择器图标颜色
+   * @type color
+   */
   --datepicker-icon-color: var(--color-text-primary);
+
+  /**
+   * @desc 日期选择器边框颜色
+   * @type color
+   */
   --datepicker-border-color: var(--disabled-border-base);
+
+  /**
+   * @desc 日期选择器内部边框颜色
+   * @type color
+   */
   --datepicker-inner-border-color: #e4e4e4;
+
+  /**
+   * @desc 日期选择器范围内背景颜色
+   * @type color
+   */
   --datepicker-inrange-background-color: var(--border-color-extra-light);
+
+  /**
+   * @desc 日期选择器范围内悬停背景颜色
+   * @type color
+   */
   --datepicker-inrange-hover-background-color: var(--border-color-extra-light);
+
+  /**
+   * @desc 日期选择器激活颜色
+   * @type color
+   */
   --datepicker-active-color: var(--color-primary);
+
+  /**
+   * @desc 日期选择器悬停字体颜色
+   * @type color
+   */
   --datepicker-hover-font-color: var(--color-primary);
+
+  /**
+   * @desc 日期选择器单元格悬停颜色
+   * @type color
+   */
   --datepicker-cell-hover-color: #fff;
 }

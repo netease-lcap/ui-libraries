@@ -2,45 +2,249 @@
  * @component el-table-pro
  */
 :root {
+  /**
+   * @desc 表格背景色
+   * @type color
+   */
   --el-table-bg: var(--el-bg-color-container);
+
+  /**
+   * @desc 表格文字颜色
+   * @type color
+   */
   --el-table--text-color: var(--el-text-color-primary);
+
+  /**
+   * @desc 表头文字颜色
+   * @type color
+   */
   --el-table-head-text-color: var(--el-text-color-placeholder);
+
+  /**
+   * @desc 表格边框颜色
+   * @type color
+   */
   --el-table-border-color: var(--el-component-border);
+
+  /**
+   * @desc 链接文字颜色
+   * @type color
+   */
   --el-table-link-text-color: var(--el-text-color-link);
+
+  /**
+   * @desc 操作区背景色
+   * @type color
+   */
   --el-table-action-bg-color: var(--el-bg-color-container-hover);
+
+  /**
+   * @desc 高亮背景色
+   * @type color
+   */
   --el-table-highlight-bg-color: var(--el-bg-color-secondarycontainer);
+
+  /**
+   * @desc 高亮背景色（悬停）
+   * @type color
+   */
   --el-table-highlight-bg-color--hover: var(--el-bg-color-secondarycontainer-hover);
+
+  /**
+   * @desc 深色高亮背景色
+   * @type color
+   */
   --el-table-highlight-dark-bg-color: var(--el-bg-color-container-hover);
+
+  /**
+   * @desc 行禁用颜色
+   * @type color
+   */
   --el-table-row-disabled-color: var(--el-text-color-disabled);
+
+  /**
+   * @desc 默认图标颜色
+   * @type color
+   */
   --el-table-icon-default-color: var(--el-text-color-placeholder);
+
+  /**
+   * @desc 激活图标颜色
+   * @type color
+   */
   --el-table-icon-active-color: var(--el-brand-color);
+
+  /**
+   * @desc 过滤图标默认颜色
+   * @type color
+   */
   --el-table-filter-icon-default-color: var(--el-text-color-primary);
+
+  /**
+   * @desc 空状态颜色
+   * @type color
+   */
   --el-table-color-empty: var(--el-text-color-disabled);
+
+  /**
+   * @desc 固定单元格边框颜色
+   * @type color
+   */
   --el-table-fixed-cell-border-color: var(--el-component-border);
+
+  /**
+   * @desc 排序背景色
+   * @type color
+   */
   --el-table-sort-bg-color: var(--el-bg-color-secondarycontainer);
+
+  /**
+   * @desc 表格行高
+   * @type length
+   */
   --el-table-line-height: var(--el-line-height-body-medium);
+
+  /**
+   * @desc 表格半行高
+   * @type length
+   */
   --el-table-line-height-half: calc(var(--el-font-size-body-medium) + 2px);
+
+  /**
+   * @desc 表格字体
+   * @type font
+   */
   --el-table-font: var(--el-font-body-medium);
+
+  /**
+   * @desc 加载图标大小
+   * @type size
+   */
   --el-table-loading-size: var(--el-table-icon-size);
+
+  /**
+   * @desc 表格水平内边距
+   * @type length
+   */
   --el-table-padding-horizontal: var(--el-comp-paddingLR-l);
+
+  /**
+   * @desc 表格常规内边距
+   * @type length
+   */
   --el-table-padding-normal: var(--el-comp-paddingTB-m) var(--el-comp-paddingLR-l);
+
+  /**
+   * @desc 表格小内边距
+   * @type length
+   */
   --el-table-padding-small: var(--el-comp-paddingTB-s) var(--el-comp-paddingLR-s);
+
+  /**
+   * @desc 表格大内边距
+   * @type length
+   */
   --el-table-padding-large: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-xl);
+
+  /**
+   * @desc 表格单元格顶部内边距
+   * @type length
+   */
   --el-table-td-padding-vertical-top: 13px;
+
+  /**
+   * @desc 表格单元格底部内边距
+   * @type length
+   */
   --el-table-td-padding-vertical-bottom: 11px;
+
+  /**
+   * @desc 表格单元格垂直内边距
+   * @type length
+   */
   --el-table-td-padding-vertical: var(--el-comp-paddingTB-m);
+
+  /**
+   * @desc 表格单元格水平内边距
+   * @type length
+   */
   --el-table-td-padding-horizontal: var(--el-comp-paddingLR-l);
+
+  /**
+   * @desc 表格单元格可编辑图标外间距
+   * @type length
+   */
   --el-table-td-editalbe-icon-margin: var(--el-comp-margin-s);
+
+  /**
+   * @desc 分页常规内边距
+   * @type length
+   */
   --el-table-pagination-padding-normal: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-l);
+
+  /**
+   * @desc 固定单元格阴影扩散半径
+   * @type length
+   */
   --el-table-fixed-cell-box-shadow-spread-radius: -10px;
+
+  /**
+   * @desc 固定单元格边框宽度
+   * @type length
+   */
   --el-table-fixed-cell-border-width: 4px;
+
+  /**
+   * @desc 固定单元格边框宽度（浅色）
+   * @type length
+   */
   --el-table-fixed-cell-border-width-light: 2px;
+
+  /**
+   * @desc 固定单元格边框
+   * @type border
+   */
   --el-table-fixed-cell-border: var(--el-table-fixed-cell-border-width) solid var(--el-table-fixed-cell-border-color);
+
+  /**
+   * @desc 固定单元格边框（浅色）
+   * @type border
+   */
   --el-table-fixed-cell-border-light: var(--el-table-fixed-cell-border-width-light) solid var(--el-table-fixed-cell-border-color);
+
+  /**
+   * @desc 控制器触发器内边距
+   * @type length
+   */
   --el-table-controller-trigger-padding: var(--el-comp-paddingTB-l) 0;
+
+  /**
+   * @desc 默认分页内边距
+   * @type length
+   */
   --el-table-default-pagination-padding: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-l);
+
+  /**
+   * @desc 图标大小
+   * @type size
+   */
   --el-table-icon-size: var(--el-font-size-body-large);
+
+  /**
+   * @desc 双排序图标间距
+   * @type length
+   */
   --el-table-double-sort-icon-space: var(--el-comp-margin-xxs);
+
+  /**
+   * @desc 过滤图标左外间距
+   * @type length
+   */
   --el-table-filter-icon-margin-left: var(--el-comp-margin-s);
+
+  /**
+   * @desc 控制器项外间距
+   * @type length
+   */
   --el-table-controller-item-margin: var(--el-comp-margin-l);
 }

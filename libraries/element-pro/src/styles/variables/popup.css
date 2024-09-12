@@ -18,7 +18,6 @@
   --el-popup-left-arrow-shadow: var(--el-shadow-inset-left), var(--el-shadow-inset-top);
   --el-popup-bottom-arrow-shadow: var(--el-shadow-inset-top), var(--el-shadow-inset-right);
   --el-popup-right-arrow-shadow: var(--el-shadow-inset-right), var(--el-shadow-inset-bottom);
-  --el-popup-flow: t-popup--animation;
   --el-popup-flow-duration: 0.2s;
   --el-popup-flow-fn: cubic-bezier(0.82, 0, 1, 0.9);
   --el-popup-flow-transition-enter: opacity var(--el-popup-flow-duration) linear;
