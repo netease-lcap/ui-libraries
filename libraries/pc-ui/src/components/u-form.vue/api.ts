@@ -452,8 +452,8 @@ namespace nasl.ui {
         @Prop({
             group: '主要属性',
             title: '标签纵轴对齐',
-            description: '标签与表单元素的纵轴对齐方式，默认为顶对齐',
-            docDescription: '标签与表单元素的纵轴对齐方式，默认为顶对齐。',
+            description: '标签与表单元素的纵轴对齐方式，默认为居中对齐',
+            docDescription: '标签与表单元素的纵轴对齐方式，默认为居中对齐。',
             setter: {
                 concept: 'EnumSelectSetter',
                 options: [{ title: '顶对齐' }, { title: '居中对齐' }, { title: '尾对齐' }],
@@ -494,7 +494,7 @@ namespace nasl.ui {
 
         @Prop({
             group: '样式属性',
-            title: '表单项标题宽度',
+            title: '表单项标签宽度',
             docDescription: '单独设置表单项的标签宽度大小。支持迷你、小、正常、大四个级别。',
             setter: {
                 concept: 'EnumSelectSetter',
