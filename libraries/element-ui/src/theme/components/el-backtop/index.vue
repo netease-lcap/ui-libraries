@@ -1,16 +1,5 @@
 <template>
-  <demo-preview></demo-preview>
+  <div style="position: relative; height: 100px;" >
+    <el-backtop style="position: absolute; left: 20px"></el-backtop>
+  </div>
 </template>
-<script>
-import createStoriesPreview from '@lcap/builder/input/vue2/stories-preview';
-import * as stories from '../../../components/el-backtop/stories/block.stories';
-
-const DemoPreview = createStoriesPreview(stories);
-
-export default {
-  components: {
-    DemoPreview,
-  },
-};
-
-</script>

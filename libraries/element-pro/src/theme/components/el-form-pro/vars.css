@@ -51,12 +51,14 @@
   --el-form-color-extra: var(--el-text-color-placeholder);
 
   /**
+   * @hidden
    * @desc 表单项底部外间距
    * @type margin
    */
   --el-form-item-margin-bottom: var(--el-comp-margin-xxl);
 
   /**
+   * @hidden
    * @desc 带帮助文本的表单项底部外间距
    * @type margin
    */
@@ -69,18 +71,21 @@
   --el-form-item-control-height: var(--el-comp-margin-xxxl);
 
   /**
+   * @hidden
    * @desc 表单项行间距
    * @type gap
    */
   --el-form-item-row-gap: var(--el-comp-margin-l);
 
   /**
+   * @hidden
    * @desc 表单项底部内间距
    * @type padding
    */
   --el-form-item-padding-bottom: var(--el-comp-paddingTB-xs);
 
   /**
+   * @hidden
    * @desc 表单项右侧内联外间距
    * @type margin
    */
@@ -129,6 +134,7 @@
   --el-form-status-button-width: var(--el-comp-size-m);
 
   /**
+   * @hidden
    * @desc 表单帮助文本顶部外间距
    * @type margin
    */
