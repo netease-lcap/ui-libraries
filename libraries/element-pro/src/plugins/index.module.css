@@ -1,10 +1,10 @@
 .formFieldInput {
   display: inline-block;
-  vertical-align: unset;
+  vertical-align: top;
   width: 240px;
 }
 
 .formRangeFieldInput {
   display: inline-block;
-  vertical-align: unset;
+  vertical-align: top;
 }

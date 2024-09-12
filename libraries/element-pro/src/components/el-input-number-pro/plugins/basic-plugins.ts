@@ -2,6 +2,8 @@ import { createUseUpdateSync } from '@lcap/vue2-utils';
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/types';
 import { isFunction, isNil } from 'lodash';
 
+export { useFormFieldClass } from '../../../plugins/use-form-field-class';
+
 export const useUpdateSync = createUseUpdateSync([{ name: 'value', event: 'change' }]);
 
 export const useValue: NaslComponentPluginOptions = {
