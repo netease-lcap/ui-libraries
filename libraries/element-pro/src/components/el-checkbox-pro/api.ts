@@ -221,7 +221,7 @@ namespace nasl.ui {
       description: '是否选中。支持语法糖 `v-model`',
       setter: { concept: 'SwitchSetter' },
     })
-    checked: nasl.core.Boolean = false;
+    private checked: nasl.core.Boolean = false;
 
     @Prop({
       group: '数据属性',
@@ -229,7 +229,7 @@ namespace nasl.ui {
       description: '是否选中。非受控属性',
       setter: { concept: 'SwitchSetter' },
     })
-    defaultChecked: nasl.core.Boolean = false;
+    private defaultChecked: nasl.core.Boolean = false;
 
     @Prop({
       group: '数据属性',
