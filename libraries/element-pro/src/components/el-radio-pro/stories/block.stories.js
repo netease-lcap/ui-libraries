@@ -23,15 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-radio-group-pro><el-radio-pro><el-text text="单选项"></el-text></el-radio-pro></el-radio-group-pro>',
-  }),
-};
-
-export const DataSource = {
-  name: '使用数据源',
-  render: () => ({
-    template: `
-      <el-radio-group-pro :dataSource="[{}]"></el-radio-group-pro>
-    `,
+    template: '<el-radio-group-pro></el-radio-group-pro>',
   }),
 };
