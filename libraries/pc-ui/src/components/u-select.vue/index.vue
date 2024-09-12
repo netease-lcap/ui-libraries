@@ -408,6 +408,14 @@ export default {
                 });
             }
         });
+
+        this.$on('click', ({ selectedVM }) => {
+          // 相等情况走这里重新设置，其他情况走下面 select;
+          if (selectedVM && selectedVM === this.selectedVM && this.filterable) {
+            this.filterText = this.selectedVM.currentText;
+          }
+        });
+
         this.$on('select', ($event) => {
             if (this.multiple) {
                 this.preventBlur = true;
