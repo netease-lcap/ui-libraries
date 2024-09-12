@@ -80,3 +80,18 @@ export const MaxMin = {
     `,
   }),
 };
+
+export const Height = {
+  name: '高度',
+  render: () => ({
+    template: `
+      <div>
+        <el-textarea-pro
+          :autosize="false" :minRows="1" :maxRows="5"
+          class="cw-style-width cw-style-height cw-style-background-color cw-style-font-style cw-style-font-size cw-style-color cw-style-border-style cw-style-border-color cw-style-border-width cw-style-border-radius"
+          placeholder="请输入内容"
+          style="--cw-style-width:240px;--cw-style-height:400px;--cw-style-background-color:#22e81f;--cw-style-font-style:italic;--cw-style-font-size:20px;--cw-style-color:#ef120a;--cw-style-border-style:solid;--cw-style-border-color:#0b4bed;--cw-style-border-left-width:3px;--cw-style-border-right-width:3px;--cw-style-border-top-width:3px;--cw-style-border-bottom-width:3px;--cw-style-border-top-left-radius:5px;--cw-style-border-top-right-radius:5px;--cw-style-border-bottom-left-radius:5px;--cw-style-border-bottom-right-radius:5px;width:240px;background-color:#22e81f;font-style:italic;font-size:20px;color:#ef120a;border-top-width:3px;border-left-width:3px;border-right-width:3px;border-bottom-width:3px;border-style:solid;--update-key:fpx8;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-right-radius:5px;border-bottom-left-radius:5px;border-color:#0b4bed;height:400px;"></el-textarea-pro>
+      </div>
+    `,
+  }),
+};

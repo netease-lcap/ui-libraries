@@ -2,6 +2,13 @@
 
 .@{prefix}-textarea {
   border: none !important;
+  height: auto !important;
+
+  &.cw-style-height {
+    .@{prefix}-textarea__inner {
+      height: var(--cw-style-height, --el-textarea-height);
+    }
+  }
 
   &.cw-style-border-color {
     .@{prefix}-textarea__inner {
