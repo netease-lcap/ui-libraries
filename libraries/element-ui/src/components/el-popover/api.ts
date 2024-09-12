@@ -2,6 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    order: 7,
     ideusage: {
       idetype: 'container',
       namedSlotOmitWrapper: ['reference'],

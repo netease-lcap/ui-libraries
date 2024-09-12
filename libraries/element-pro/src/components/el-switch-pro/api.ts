@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: true,
+    order: 6,
   })
   @Component({
     title: '开关',
@@ -11,7 +11,7 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElSwitchPro extends ViewComponent {
-    
+
     @Prop({
       title: '值',
     })

@@ -1,6 +1,9 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
+  @IDEExtraInfo({
+    order: 1,
+  })
   @Component({
     title: '子页面容器',
     icon: 'router-view',

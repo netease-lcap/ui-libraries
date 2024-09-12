@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: true,
+    order: 7,
   })
   @Component({
     title: '级联选择器',

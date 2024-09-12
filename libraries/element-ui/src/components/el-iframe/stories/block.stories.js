@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-iframe src="https://sf.163.com" style="width: 100%; height: 400px;"></el-iframe>',
+    template: '<el-iframe src="https://codewave.163.com" style="width: 100%; height: 400px;"></el-iframe>',
   }),
 };

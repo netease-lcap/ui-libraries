@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: true,
+    order: 5,
   })
   @Component({
     title: '翻页器',

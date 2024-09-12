@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: true,
+    order: 9,
   })
   @Component({
     title: '滑块',

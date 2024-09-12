@@ -2,6 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    order: 4,
     ideusage: {
       idetype: "container",
       childAccept: "['el-header', 'el-aside', 'el-footer', 'el-main', 'el-container'].includes(target.tag)",

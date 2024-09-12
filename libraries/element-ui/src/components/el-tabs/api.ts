@@ -2,6 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    order: 1,
     ideusage: {
       idetype: 'container',
       structured: true,
@@ -27,7 +28,7 @@ namespace nasl.ui {
     title: '选项卡',
     icon: 'tabs',
     description: '分隔内容上有关联但属于不同类别的数据集合。',
-    group: 'Navigation',
+    group: 'Selector',
   })
   export class ElTabs<T, V> extends ViewComponent {
     @Method({

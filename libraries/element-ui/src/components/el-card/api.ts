@@ -2,6 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    order: 4,
   })
   @Component({
     title: '卡片',
