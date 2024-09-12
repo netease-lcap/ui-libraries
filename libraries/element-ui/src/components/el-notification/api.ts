@@ -2,6 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    order: 5,
     ideusage: {
       "idetype": "messager",
       "elementSutando": {

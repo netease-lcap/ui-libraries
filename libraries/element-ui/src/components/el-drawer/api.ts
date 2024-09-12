@@ -2,6 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    order: 3,
     ideusage: {
       idetype: 'drawer',
       cacheOpenKey: 'visible',

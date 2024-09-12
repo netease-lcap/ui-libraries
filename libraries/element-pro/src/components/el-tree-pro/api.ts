@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: true,
+    order: 8,
     ideusage: {
       idetype: 'element'
     }
@@ -10,8 +10,8 @@ namespace nasl.ui {
   @Component({
     title: '树形视图',
     icon: 'tree-view-new',
-    description: '',
-    group: 'Display',
+    description: '用于承载有父子关系的结构化内容，提供内容层级的展示。',
+    group: 'Selector',
   })
   export class ElTreePro<T, V, M extends nasl.core.Boolean> extends ViewComponent {
     constructor(options?: Partial<ElTreeProOptions<T, V, M>>) {

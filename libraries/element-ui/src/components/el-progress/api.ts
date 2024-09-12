@@ -2,6 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    order: 9,
     ideusage: {
       idetype: 'element'
     }
@@ -10,7 +11,7 @@ namespace nasl.ui {
     title: '进度条',
     icon: 'linear-progress',
     description: '用于展示操作进度，告知用户当前状态和预期。',
-    group: 'Display',
+    group: 'Feedback',
   })
   export class ElProgress extends ViewComponent {
     constructor(options?: Partial<ElProgressOptions>) {

@@ -2,6 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    order: 2,
     ideusage: {
       forceUpdateWhenAttributeChange: true,
     },

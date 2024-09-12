@@ -1,6 +1,9 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
+  @IDEExtraInfo({
+    order: 2,
+  })
   @Component({
     title: 'Iframe',
     icon: 'iframe',

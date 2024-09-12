@@ -2,6 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    order: 14,
     ideusage: {
       "idetype": "element",
     }

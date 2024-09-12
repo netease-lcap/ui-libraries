@@ -2,7 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    show: true,
+    order: 5,
     ideusage: {
       idetype: "container",
       structured: true,
@@ -202,7 +202,7 @@ namespace nasl.ui {
       description: '是否选中',
       setter: { concept: 'SwitchSetter' },
     })
-    checked: nasl.core.Boolean = false;
+    private checked: nasl.core.Boolean = false;
 
     @Prop({
       group: '状态属性',
@@ -226,7 +226,7 @@ namespace nasl.ui {
       description: 'HTML 元素原生属性',
       setter: { concept: 'InputSetter' },
     })
-    name: nasl.core.String;
+    private name: nasl.core.String;
 
     @Event({
       title: '改变后',

@@ -2,6 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    order: 11,
     ideusage: {
       idetype: "container",
       structured: true,
@@ -30,7 +31,7 @@ namespace nasl.ui {
     group: 'Display',
   })
   export class ElTimeline<T, V> extends ViewComponent {
-    
+
     @Method({
       title: 'undefined',
       description: '清除缓存，重新加载',
@@ -107,7 +108,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    dotStyle: (current: Current<T>) => { 
+    dotStyle: (current: Current<T>) => {
       /**
        * @title 节点背景颜色
        */
@@ -126,7 +127,7 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     reverse: nasl.core.Boolean = false;
-    
+
 
     @Slot({
       title: 'Default',

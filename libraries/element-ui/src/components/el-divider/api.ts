@@ -2,6 +2,7 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    order: 12,
     // 配置这个，是让分割线内可以拖入tex文本 需要有对应的slot插槽
     ideusage: {
       "idetype": "container",
