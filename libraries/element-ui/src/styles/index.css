@@ -5842,7 +5842,7 @@
 }
 .el-switch.is-checked .el-switch__core::after {
   left: 100%;
-  margin-left: calc(-1 * var(--switch-button-size) -1px);
+  margin-left: calc(calc(-1 * var(--switch-button-size)) - 1px);
 }
 .el-switch.is-disabled {
   opacity: 0.6;

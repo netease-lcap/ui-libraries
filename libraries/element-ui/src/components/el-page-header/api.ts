@@ -8,7 +8,7 @@ namespace nasl.ui {
     title: '页头',
     icon: 'pageheader',
     description: '如果页面的路径比较简单，推荐使用页头组件而非面包屑组件。',
-    group: 'Display',
+    group: 'Navigation',
   })
   export class ElPageHeader extends ViewComponent {
     constructor(options?: Partial<ElPageHeaderOptions>) {

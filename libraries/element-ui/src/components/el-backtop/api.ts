@@ -15,7 +15,7 @@ namespace nasl.ui {
     title: '回到顶部',
     icon: 'backtop',
     description: '回到顶部',
-    group: 'Display',
+    group: 'Navigation',
   })
   export class ElBacktop extends ViewComponent {
     constructor(options?: Partial<ElBacktopOptions>) {
