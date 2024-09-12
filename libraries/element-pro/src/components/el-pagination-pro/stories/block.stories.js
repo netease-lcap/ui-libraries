@@ -27,9 +27,9 @@ export const Default = {
   }),
 };
 
-export const Mini = {
-  name: '最小单元分页',
-  render: () => ({
-    template: '<el-pagination-mini-pro></el-pagination-mini-pro>',
-  }),
-};
+// export const Mini = {
+//   name: '最小单元分页',
+//   render: () => ({
+//     template: '<el-pagination-mini-pro></el-pagination-mini-pro>',
+//   }),
+// };
