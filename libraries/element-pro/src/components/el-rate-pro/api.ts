@@ -5,6 +5,9 @@ namespace nasl.ui {
     order: 8,
     ideusage: {
       idetype: 'element',
+      additionalAttribute: {
+        ':showText': '"false"',
+      }
     }
   })
   @Component({
@@ -77,7 +80,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       if: _ => _.showText,
     })
-    texts: nasl.collection.List<nasl.core.String>;
+    texts: nasl.collection.List<nasl.core.String> = ['极差','失望','一般','满意','惊喜'];
 
     @Prop({
       group: '主要属性',

@@ -12,7 +12,6 @@ export const useExtendprops: NaslComponentPluginOptions = {
         return null;
       }
       return () => h('el-icon', { attrs: { name: icon } });
-    //   return () => h('span', { attrs: { name: icon } }, ['ddd']);
     });
     return {
       slotIcon: iconProp,
