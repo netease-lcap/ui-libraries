@@ -49,6 +49,9 @@ const parseCssVars = (nodes: NonNullable<postcss.Container['nodes']>) => {
         .map((str) => str.trim())
         .filter((str) => str && str.startsWith('@'))
         .forEach((str) => {
+          if (str === '@hidden') {
+            variable.hidden = true;
+          }
           const spaceIndex = str.indexOf(' ');
           if (spaceIndex === -1) {
             return;
