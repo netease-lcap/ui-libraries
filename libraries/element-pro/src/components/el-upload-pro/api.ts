@@ -147,7 +147,7 @@ namespace nasl.ui {
         ],
       },
     })
-    converter: 'json' | 'simple' = 'json';
+    converter: 'json' | 'simple' = 'simple';
 
     @Prop({
       group: '数据属性',

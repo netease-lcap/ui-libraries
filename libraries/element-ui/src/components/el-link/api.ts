@@ -4,7 +4,10 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
     ideusage: {
-      editable: 'children',
+      idetype: 'element',
+      editable: 'text',
+      textholder: 'text',
+      useFxOrEg: { property: 'text' },
       // style: {
       //   selector: '.el-link',
       //   declaration: 'transition-timing-function: linear !important',
