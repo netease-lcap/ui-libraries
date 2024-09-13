@@ -78,7 +78,7 @@ namespace nasl.ui {
     @Prop({
       title: '分页大小',
     })
-    pageSize: ElTableProOptions<T, V, P, M>['pageSize'];
+    size: ElTableProOptions<T, V, P, M>['pageSize'];
 
     @Prop({
       title: '当前页数',
