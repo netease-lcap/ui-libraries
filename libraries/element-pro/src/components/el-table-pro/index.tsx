@@ -32,7 +32,6 @@ export default ElTablePro;
 export const ElTableColumnPro = defineComponent({
   name: 'ElTableColumnPro',
   setup(props, { slots }: SetupContext) {
-    console.log(props, 'props===');
     return {
       slots,
     };

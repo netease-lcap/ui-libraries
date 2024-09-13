@@ -1,6 +1,6 @@
 /* 组件功能扩展插件 */
 // export {};
-import _ from 'lodash';
+import _, { isNil } from 'lodash';
 import {
   computed, ref, watch, onMounted,
 } from '@vue/composition-api';
@@ -94,6 +94,9 @@ export const useTable = {
         pageSize: pageSize.value,
       };
     });
+
+    // 产品要求默认开边框
+    const bordered = props.useComputed('bordered', (v) => (isNil(v) ? true : v));
     onMounted(() => {
       if (_.isFunction(onLoadData)) {
         onLoadData?.({
@@ -121,6 +124,7 @@ export const useTable = {
       pagination,
       // pagination: false,
       onSortChange,
+      bordered,
       [$render](resultVNode, h) {
         const vnodes = ctx.setupContext.slots.default();
         resultVNode.componentOptions.propsData.columns = renderSlot(vnodes);

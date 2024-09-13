@@ -9,7 +9,12 @@ export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index'
 export const useExtendsPlugin: NaslComponentPluginOptions = {
   props: ['data', 'textField', 'valueField', 'iconField', 'itemProps', 'text'],
   setup: (props, { h }) => {
+    const currentSize = props.useComputed(['size'], (size) => {
+      return size || 'small';
+    });
+
     return {
+      size: currentSize,
       slotDropdown: () => {
         const data = props.get<any[]>('data') || [];
         const [

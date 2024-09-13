@@ -1,5 +1,15 @@
 @import "../../design/_common/style/web/_variables.less";
+:root {
+  --el-table-head-text-color: var(--el-text-color-primary);
+  --el-table-head-background-color: var(--el-color-background-6);
+  --el-table-head-font-weight: 700;
+}
 
-.@{prefix}-select-input {
-  vertical-align: unset;
+.@{prefix}-table__header {
+  tr {
+    background-color: var(--el-table-head-background-color);
+  }
+  th {
+    font-weight: var(--el-table-head-font-weight);
+  }
 }

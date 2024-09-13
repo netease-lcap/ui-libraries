@@ -274,7 +274,7 @@
     * @title 页面背景色/表头色
     * @type color
     */
-  --el-color-background-6: #f7f8fa;
+  --el-color-background-6: #f5f7fa;
   /**
     * @title 表格展开背景色
     * @type color
@@ -867,7 +867,7 @@
   --el-success-color: var(--el-success-color-6); /* 色彩-功能-成功 */
 
   /* 基础颜色的扩展 用于 hover / 聚焦 / 禁用 / 点击 等状态 */
-  --el-brand-color-hover: var(--el-brand-color-7);     /* hover态 */
+  --el-brand-color-hover: var(--el-brand-color-6);     /* hover态 */
   --el-brand-color-focus: var(--el-brand-color-2);     /* focus态，包括鼠标和键盘 */
   --el-brand-color-active: var(--el-brand-color-8);    /* 点击态 */
   --el-brand-color-disabled: var(--el-brand-color-3);  /* 禁用态 */

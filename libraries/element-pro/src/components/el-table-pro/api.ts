@@ -185,7 +185,7 @@ namespace nasl.ui {
       description: '是否显示表格边框',
       setter: { concept: 'SwitchSetter' },
     })
-    bordered: nasl.core.Boolean = false;
+    bordered: nasl.core.Boolean = true;
 
     // @Prop({
     //   group: '主要属性',

@@ -175,7 +175,7 @@ namespace nasl.ui {
       },
       if: (_) => _.splitButton,
     })
-    size: 'medium' | 'small' | 'mini' | '' = '';
+    size: 'medium' | 'small' | 'mini' | '' = 'small';
 
     @Prop({
       group: '主要属性',

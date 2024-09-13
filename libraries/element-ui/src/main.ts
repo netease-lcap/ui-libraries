@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
+import './styles/normalize.css';
 import './styles/index.css';
+import './styles/reset.css';
 import Loading from 'element-ui/lib/loading';
 import Message from 'element-ui/lib/message';
 import * as components from './components';
