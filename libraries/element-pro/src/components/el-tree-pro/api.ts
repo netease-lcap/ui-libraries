@@ -4,7 +4,20 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 8,
     ideusage: {
-      idetype: 'element'
+      idetype: 'container',
+      forceUpdateWhenAttributeChange: true,
+      dataSource: {
+        dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        display: 3,
+        loopRule: 'nth-child(n+2)',
+        loopElem: "> .el-p-tree__list .el-p-tree__item",
+        emptySlot: {
+          display: 'inline',
+          condition: "!this.getAttribute('dataSource')",
+          accept: false,
+          content: '请绑定数据源'
+        }
+      }
     }
   })
   @Component({
@@ -117,12 +130,11 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
-      sync: true,
       title: '数据源',
       description: '树数据',
-      setter: { concept: 'InputSetter' },
+      designerValue: [{}, {}, {}]
     })
-    dataSource: nasl.collection.List<T> = [];
+    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
     @Prop({
       group: '数据属性',
