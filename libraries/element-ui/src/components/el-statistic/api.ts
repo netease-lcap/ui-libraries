@@ -103,7 +103,7 @@ namespace nasl.ui {
       description: '设置数值的样式',
       setter: { concept: 'InputSetter' },
     })
-    valueStyle: nasl.core.String = '{}';
+    private valueStyle: nasl.core.String = '{}';
 
     @Prop({
       group: '数据属性',

@@ -91,6 +91,20 @@ export const useValue: NaslComponentPluginOptions = {
   },
 };
 
+export const useIcon: NaslComponentPluginOptions = {
+  props: ['icon'],
+  setup: (props, { h }) => {
+    return {
+      icon: () => {
+        const icon = props.get<string>('icon');
+        return icon ? h('el-icon', {
+          attrs: { name: icon },
+        }) : null;
+      },
+    };
+  },
+};
+
 export const useUpdateSync = createUseUpdateSync([
   { name: 'expanded', event: 'update:expanded' },
 ]);
