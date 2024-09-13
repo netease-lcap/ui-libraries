@@ -9,17 +9,17 @@ namespace nasl.ui {
         slot: 'items',
         empty: true,
       },
-      selector: [
-        {
-          expression: 'this',
-          cssSelector: "div[class='el-dropdown']",
-          placement: 'tail',
-        },
-        {
-          expression: "this.getElement(el => el.slotTarget === 'items')",
-          cssSelector: '.el-dropdown-menu',
-        },
-      ],
+      // selector: [
+      //   {
+      //     expression: 'this',
+      //     cssSelector: "div[class='el-dropdown']",
+      //     placement: 'tail',
+      //   },
+      //   {
+      //     expression: "this.getElement(el => el.slotTarget === 'items')",
+      //     cssSelector: '.el-dropdown-menu',
+      //   },
+      // ],
       namedSlotOmitWrapper: ['items'],
       events: {
         click: true,
