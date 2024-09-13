@@ -141,13 +141,13 @@ namespace nasl.ui {
     })
     suffix: any;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Tips',
-      description: '输入框下方提示文本，会根据不同的 `status` 呈现不同的样式。',
-      setter: { concept: 'InputSetter' },
-    })
-    tips: any;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Tips',
+    //   description: '输入框下方提示文本，会根据不同的 `status` 呈现不同的样式。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // tips: any;
 
     @Prop({
       group: '主要属性',

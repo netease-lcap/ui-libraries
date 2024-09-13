@@ -295,7 +295,7 @@ namespace nasl.ui {
     }) => any;
 
     @Event({
-      title: '输入框内容变化是',
+      title: '输入框内容变化时',
       description: '当输入框内容发生变化时触发，参数 value 表示组件当前有效值',
     })
     onInput: (event: {
