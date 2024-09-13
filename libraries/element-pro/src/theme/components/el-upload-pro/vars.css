@@ -3,13 +3,13 @@
  */
 :root {
   /**
-   * @desc 上传组件的层级
+   * @desc 上传组件的层级(图片上传遮罩)
    * @type number
    */
   --el-upload-z-index: 2;
 
   /**
-   * @desc 上传组件禁用状态的文字颜色
+   * @desc 上传组件禁用状态的文字颜色(图片上传)
    * @type color
    */
   --el-upload-text-disabled-color: var(--el-text-color-disabled);
@@ -27,24 +27,26 @@
   --el-upload-icon-error-circle-filled-color: var(--el-error-color);
 
   /**
+   * @hidden
    * @desc 上传加载图标的颜色
    * @type color
    */
   --el-upload-icon-loading-color: var(--el-brand-color);
 
   /**
-   * @desc 上传时间图标的颜色
+   * @desc 上传等待图标的颜色
    * @type color
    */
   --el-upload-icon-time-filled-color: var(--el-text-color-placeholder);
 
   /**
-   * @desc 上传高亮颜色
+   * @desc 上传高亮颜色(图片拖拽上传)
    * @type color
    */
   --el-upload-highlight-color: var(--el-text-color-brand);
 
   /**
+   * @hidden
    * @desc 上传添加图标的颜色
    * @type color
    */
@@ -57,6 +59,7 @@
   --el-upload-file-name-color: var(--el-text-color-secondary);
 
   /**
+   * @hidden
    * @desc 上传小图标的颜色
    * @type color
    */
@@ -69,54 +72,61 @@
   --el-upload-placeholder-color: var(--el-text-color-placeholder);
 
   /**
-   * @desc 上传图标的颜色
+   * @desc 上传图标的颜色(图片上传)
    * @type color
    */
   --el-upload-icon-color: var(--el-text-color-placeholder);
 
   /**
-   * @desc 上传禁用状态图标的颜色
+   * @desc 上传禁用状态图标的颜色(图片上传)
    * @type color
    */
   --el-upload-icon-disabled-color: var(--el-text-color-disabled);
 
   /**
+   * @hidden
    * @desc 上传图标悬停时的颜色
    * @type color
    */
   --el-upload-icon-color-hover: var(--el-text-color-secondary);
 
   /**
+   * @hidden
    * @desc 上传列表文件图标的颜色
    * @type color
    */
   --el-upload-list-file-icon-color: var(--el-brand-color);
 
   /**
+   * @hidden
    * @desc 上传列表项错误状态的颜色
    * @type color
    */
   --el-upload-list-item-error-color: var(--el-error-color);
 
   /**
+   * @hidden
    * @desc 上传列表控制项悬停时的颜色
    * @type color
    */
   --el-upload-list-control-color-hover: var(--el-error-color);
 
   /**
+   * @hidden
    * @desc 上传卡片项错误图标的警告颜色
    * @type color
    */
   --el-upload-card-item-error-icon-warning-color: var(--el-error-color);
 
   /**
+   * @hidden
    * @desc 上传卡片项状态的颜色
    * @type color
    */
   --el-upload-card-item-status-color: var(--el-error-color);
 
   /**
+   * @hidden
    * @desc 上传卡片项背景色
    * @type color
    */
@@ -129,12 +139,14 @@
   --el-upload-card-item-bg-border-color-hover: var(--el-brand-color);
 
   /**
+   * @hidden
    * @desc 上传卡片名称的颜色
    * @type color
    */
   --el-upload-card-name-color: var(--el-text-color-primary);
 
   /**
+   * @hidden
    * @desc 上传卡片盒子的背景色
    * @type color
    */
@@ -147,12 +159,14 @@
   --el-upload-card-container-bg-color: var(--el-bg-color-secondarycontainer);
 
   /**
+   * @hidden
    * @desc 上传卡片状态的颜色
    * @type color
    */
   --el-upload-card-status-color: var(--el-text-color-disabled);
 
   /**
+   * @hidden
    * @desc 上传卡片遮罩的颜色
    * @type color
    */
@@ -171,25 +185,27 @@
   --el-upload-card-mask-text-color: var(--el-text-color-anti);
 
   /**
-   * @desc 上传拖拽区域的颜色
+   * @desc 上传拖拽区域的颜色(图片上传)
    * @type color
    */
   --el-upload-dragger-color: var(--el-text-color-secondary);
 
   /**
+   * @hidden
    * @desc 上传拖拽区域激活时的背景色
    * @type color
    */
   --el-upload-dragger-bg-color-active: var(--el-bg-color-container-active);
 
   /**
+   * @hidden
    * @desc 上传拖拽区域激活时的边框颜色
    * @type color
    */
   --el-upload-dragger-border-color-active: var(--el-brand-color);
 
   /**
-   * @desc 上传拖拽区域悬停时的边框颜色
+   * @desc 上传拖拽区域悬停时的边框颜色(图片上传)
    * @type color
    */
   --el-upload-dragger-border-color-hover: var(--el-brand-color);
@@ -207,6 +223,7 @@
   --el-upload-dragger-error-border-color-hover: var(--el-error-color);
 
   /**
+   * @hidden
    * @desc 上传拖拽区域的文字颜色
    * @type color
    */
@@ -225,18 +242,20 @@
   --el-upload-dragger-progress-info-button-bg-color-hover: transparent;
 
   /**
+   * @hidden
    * @desc 上传单个显示文本的颜色
    * @type color
    */
   --el-upload-single-display-text-color: var(--el-text-color-secondary);
 
   /**
-   * @desc 上传单个进度条的颜色
+   * @desc 上传单个进度条的颜色(基础文件上传进度)
    * @type color
    */
   --el-upload-single-progress-color: var(--el-brand-color);
 
   /**
+   * @hidden
    * @desc 上传单个输入删除按钮的颜色
    * @type color
    */
@@ -267,24 +286,28 @@
   --el-upload-flow-table-td-color: var(--el-text-color-primary);
 
   /**
+   * @hidden
    * @desc 上传流程按钮的颜色
    * @type color
    */
   --el-upload-flow-button-color: var(--el-text-color-placeholder);
 
   /**
+   * @hidden
    * @desc 上传流程按钮悬停时的颜色
    * @type color
    */
   --el-upload-flow-button-color-hover: var(--el-text-color-secondary);
 
   /**
+   * @hidden
    * @desc 上传提示错误的颜色
    * @type color
    */
   --el-upload-tips-error-color: var(--el-error-color);
 
   /**
+   * @hidden
    * @desc 上传提示警告的颜色
    * @type color
    */
@@ -303,24 +326,28 @@
   --el-upload-list-file-thumbnail-icon: var(--el-comp-size-s);
 
   /**
+   * @hidden
    * @desc 上传列表文件图标的字体大小
    * @type size
    */
   --el-upload-list-file-icon-font-size: var(--el-comp-size-xl);
 
   /**
+   * @hidden
    * @desc 上传卡片项添加图标的字体大小
    * @type size
    */
   --el-upload-card-item-icon-add-font-size: var(--el-comp-size-m);
 
   /**
+   * @hidden
    * @desc 上传拖拽区域进度图标的字体大小
    * @type size
    */
   --el-upload-dragger-progress-icon-font-size: var(--el-comp-size-xxxs);
 
   /**
+   * @hidden
    * @desc 上传列表项的字体大小
    * @type size
    */
@@ -351,6 +378,7 @@
   --el-upload-dragger-text-font: var(--el-font-body-medium);
 
   /**
+   * @hidden
    * @desc 上传小字体
    * @type font
    */
@@ -363,6 +391,7 @@
   --el-upload-single-display-text-font: var(--el-font-body-small);
 
   /**
+   * @hidden
    * @desc 上传单个输入删除按钮的字体
    * @type font
    */
@@ -381,30 +410,35 @@
   --el-upload-img-size: 110px;
 
   /**
+   * @hidden
    * @desc 上传列表文件的宽度
    * @type size
    */
   --el-upload-list-file-width: 100px;
 
   /**
+   * @hidden
    * @desc 上传列表文件的高度
    * @type size
    */
   --el-upload-list-file-height: 100px;
 
   /**
+   * @hidden
    * @desc 上传列表项的宽度
    * @type size
    */
   --el-upload-list-item-width: 496px;
 
   /**
+   * @hidden
    * @desc 上传列表项的高度
    * @type size
    */
   --el-upload-list-item-height: 124px;
 
   /**
+   * @hidden
    * @desc 上传列表名称的最大宽度
    * @type size
    */
@@ -465,6 +499,7 @@
   --el-upload-flow-empty-height: 184px;
 
   /**
+   * @hidden
    * @desc 上传图标的迷你尺寸
    * @type size
    */
@@ -489,18 +524,21 @@
   --el-upload-list-file-thumbnail-size: var(--el-comp-size-xxl);
 
   /**
+   * @hidden
    * @desc 上传卡片项背景边框
    * @type border
    */
   --el-upload-card-item-bg-border: 1px dashed var(--el-component-border);
 
   /**
+   * @hidden
    * @desc 上传列表项的边框
    * @type border
    */
   --el-upload-list-item-border: 1px solid var(--el-component-border);
 
   /**
+   * @hidden
    * @desc 上传列表项的边框半径
    * @type border-radius
    */
@@ -578,24 +616,28 @@
    */
   --el-upload-flow-table-th-text-align: left;
   /**
+   * @hidden
    * @desc 上传列表文件右边距
    * @type margin
    */
   --el-upload-list-file-margin-right: var(--el-comp-margin-m);
 
   /**
+   * @hidden
    * @desc 上传列表项内边距
    * @type padding
    */
   --el-upload-list-item-padding: var(--el-comp-paddingTB-m) var(--el-comp-paddingLR-m);
 
   /**
+   * @hidden
    * @desc 上传列表项内部内边距
    * @type padding
    */
   --el-upload-list-item-inner-padding: var(--el-comp-paddingLR-s);
 
   /**
+   * @hidden
    * @desc 上传列表项上边距
    * @type margin
    */
@@ -620,12 +662,14 @@
   --el-upload-single-percent-margin-left: var(--el-comp-margin-xs);
 
   /**
+   * @hidden
    * @desc 单个文件输入删除按钮左边距
    * @type margin
    */
   --el-upload-single-input-delete-margin-left: var(--el-comp-margin-l);
 
   /**
+   * @hidden
    * @desc 单个文件输入触发器左边距
    * @type margin
    */
@@ -638,6 +682,7 @@
   --el-upload-card-item-space: var(--el-comp-margin-s);
 
   /**
+   * @hidden
    * @desc 上传卡片项错误图标警告下边距
    * @type margin
    */
@@ -746,18 +791,20 @@
   --el-upload-flow-card-area-margin-top: var(--el-comp-margin-xxl);
 
   /**
-   * @desc 上传显示文本上边距
+   * @desc 上传显示文本上边距(基础文件上传)
    * @type margin
    */
   --el-upload-display-text-margin-top: var(--el-comp-margin-s);
 
   /**
+   * @hidden
    * @desc 上传图标清除圆形填充上边距
    * @type margin
    */
   --el-upload-icon-clear-circle-filled-margin-top: var(--el-comp-margin-xxs);
 
   /**
+   * @hidden
    * @desc 上传提示上边距
    * @type margin
    */
