@@ -233,26 +233,17 @@ export function genFormItemsTemplate(entity: naslTypes.Entity, properties: Array
       });
     }
     if (required) rules.push('nasl.validation.required()');
-    const dataSource = entity.parentNode
-    const { typeAnnotation } = property || {};
-    const propertyTypeName = transEntityMetadataTypes(typeAnnotation, dataSource.app);
-    let defaultValueExpressionStatic = '';
     let defaultValueExpression = '';
     if (property.defaultValue && property.defaultValue.expression && options.needDefaultValue) {
       const defaultValue = property.defaultValue.expression.toVue();
-      defaultValueExpressionStatic = `initialValue={${defaultValue}}`;
-      defaultValueExpression = `initialValue=${defaultValue}`;
-    }
-    let finalDefaultValueExpression = defaultValueExpression;
-    if (['Boolean', 'Integer', 'Long', 'Double', 'Decimal'].includes(propertyTypeName)) {
-      finalDefaultValueExpression = defaultValueExpressionStatic;
+      defaultValueExpression = `initialValue={${defaultValue}}`;
     }
     let formItem = `<ElFormItemPro
           ${required ? 'requiredMark="show"' : ''}
           ${rules.length ? ` rules={[${rules.join(',')}]}` : ''}
           layout="center"
           name="${property.name}"
-          ${finalDefaultValueExpression}
+          ${defaultValueExpression}
           slotLabel={
             <ElText text="${label}"></ElText>
           }>`;
