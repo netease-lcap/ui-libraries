@@ -111,24 +111,28 @@
   --el-input-extra-color-default: var(--el-text-color-placeholder);
 
   /**
+   * @hidden
    * @desc 成功状态额外信息颜色
    * @type color
    */
   --el-input-extra-color-success: var(--el-success-color);
 
   /**
+   * @hidden
    * @desc 警告状态额外信息颜色
    * @type color
    */
   --el-input-extra-color-warning: var(--el-warning-color);
 
   /**
+   * @hidden
    * @desc 错误状态额外信息颜色
    * @type color
    */
   --el-input-extra-color-error: var(--el-error-color);
 
   /**
+   * @hidden
    * @desc 附加区颜色
    * @type color
    */
@@ -141,6 +145,7 @@
   --el-input-limit-color: var(--el-text-color-placeholder);
 
   /**
+   * @hidden
    * @desc 固定位置
    * @type size
    */

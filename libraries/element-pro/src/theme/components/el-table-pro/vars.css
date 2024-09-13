@@ -27,12 +27,14 @@
   --el-table-border-color: var(--el-component-border);
 
   /**
+   * @hidden
    * @desc 链接文字颜色
    * @type color
    */
   --el-table-link-text-color: var(--el-text-color-link);
 
   /**
+   * @hidden
    * @desc 操作区背景色
    * @type color
    */
@@ -63,6 +65,7 @@
   --el-table-row-disabled-color: var(--el-text-color-disabled);
 
   /**
+   * @hidden
    * @desc 默认图标颜色
    * @type color
    */
@@ -75,6 +78,7 @@
   --el-table-icon-active-color: var(--el-brand-color);
 
   /**
+   * @hidden
    * @desc 过滤图标默认颜色
    * @type color
    */
@@ -105,6 +109,7 @@
   --el-table-line-height: var(--el-line-height-body-medium);
 
   /**
+   * @hidden
    * @desc 表格半行高
    * @type length
    */
@@ -117,18 +122,21 @@
   --el-table-font: var(--el-font-body-medium);
 
   /**
+   * @hidden
    * @desc 加载图标大小
    * @type size
    */
   --el-table-loading-size: var(--el-table-icon-size);
 
   /**
+   * @hidden
    * @desc 表格水平内边距
    * @type length
    */
   --el-table-padding-horizontal: var(--el-comp-paddingLR-l);
 
   /**
+   * @hidden
    * @desc 表格常规内边距
    * @type length
    */
@@ -171,18 +179,21 @@
   --el-table-td-padding-horizontal: var(--el-comp-paddingLR-l);
 
   /**
+   * @hidden
    * @desc 表格单元格可编辑图标外间距
    * @type length
    */
   --el-table-td-editalbe-icon-margin: var(--el-comp-margin-s);
 
   /**
+   * @hidden
    * @desc 分页常规内边距
    * @type length
    */
   --el-table-pagination-padding-normal: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-l);
 
   /**
+   * @hidden
    * @desc 固定单元格阴影扩散半径
    * @type length
    */
@@ -195,7 +206,7 @@
   --el-table-fixed-cell-border-width: 4px;
 
   /**
-   * @desc 固定单元格边框宽度（浅色）
+   * @desc 固定单元格边框宽度（无边框时）
    * @type length
    */
   --el-table-fixed-cell-border-width-light: 2px;
@@ -213,6 +224,7 @@
   --el-table-fixed-cell-border-light: var(--el-table-fixed-cell-border-width-light) solid var(--el-table-fixed-cell-border-color);
 
   /**
+   * @hidden
    * @desc 控制器触发器内边距
    * @type length
    */
@@ -237,12 +249,14 @@
   --el-table-double-sort-icon-space: var(--el-comp-margin-xxs);
 
   /**
+   * @hidden
    * @desc 过滤图标左外间距
    * @type length
    */
   --el-table-filter-icon-margin-left: var(--el-comp-margin-s);
 
   /**
+   * @hidden
    * @desc 控制器项外间距
    * @type length
    */

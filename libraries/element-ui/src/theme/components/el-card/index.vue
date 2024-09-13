@@ -1,16 +1,32 @@
 <template>
-  <demo-preview></demo-preview>
+  <div>
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <span>卡片名称</span>
+        <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+      </div>
+      <div class="text">
+        列表内容
+      </div>
+    </el-card>
+  </div>
 </template>
-<script>
-import createStoriesPreview from '@lcap/builder/input/vue2/stories-preview';
-import * as stories from '../../../components/el-card/stories/block.stories';
 
-const DemoPreview = createStoriesPreview(stories);
+<style scoped>
+.text {
+  font-size: 14px;
+}
 
-export default {
-  components: {
-    DemoPreview,
-  },
-};
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: '';
+}
+.clearfix:after {
+  clear: both;
+}
 
-</script>
+.box-card {
+  width: 320px;
+}
+</style>

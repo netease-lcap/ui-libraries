@@ -3,6 +3,7 @@
  */
 :root {
   /**
+   * @hidden
    * @desc 按钮字体大小
    * @type font-size
    */
@@ -15,18 +16,21 @@
   --button-font-weight: var(--font-weight-primary);
 
   /**
+   * @hidden
    * @desc 按钮圆角半径
    * @type border-radius
    */
   --button-border-radius: var(--border-radius-base);
 
   /**
+   * @hidden
    * @desc 按钮垂直内边距
    * @type padding
    */
   --button-padding-vertical: 12px;
 
   /**
+   * @hidden
    * @desc 按钮水平内边距
    * @type padding
    */
