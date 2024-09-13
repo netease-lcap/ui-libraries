@@ -29,13 +29,13 @@ namespace nasl.ui {
     M extends nasl.core.Boolean,
     C,
   > extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '自动聚焦',
-      description: '自动聚焦',
-      setter: { concept: 'SwitchSetter' },
-    })
-    autofocus: nasl.core.Boolean;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '自动聚焦',
+    //   description: '自动聚焦',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // autofocus: nasl.core.Boolean;
 
     @Prop({
       group: '主要属性',

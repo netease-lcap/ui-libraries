@@ -100,13 +100,13 @@ namespace nasl.ui {
     })
     autoWidth: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '自动聚焦',
-      description: '自动聚焦',
-      setter: { concept: 'SwitchSetter' },
-    })
-    autofocus: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '自动聚焦',
+    //   description: '自动聚焦',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // autofocus: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
