@@ -39,7 +39,7 @@ export function genTableTemplate(entity: naslTypes.Entity, nameGroup: NameGroup,
         ref="${nameGroup.viewElementMainView}"
         dataSource={${dataSourceValue}}
         rowKey="${firstLowerCase(entity.name)}.${getEntityPromaryKeyProperty(entity)}"
-        size={20}
+        pageSize={20}
         page={1}>
             ${properties.map((property) => `${genTableColumnTemplate(property, nameGroup)}`).join('\n')}
             <ElTableColumnPro
