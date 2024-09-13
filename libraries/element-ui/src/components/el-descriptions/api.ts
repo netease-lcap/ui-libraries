@@ -94,7 +94,7 @@ namespace nasl.ui {
       description: '自定义标签类名',
       setter: { concept: 'InputSetter' },
     })
-    labelClassName: nasl.core.String;
+    private labelClassName: nasl.core.String;
 
     @Prop({
       group: '样式属性',
@@ -102,7 +102,7 @@ namespace nasl.ui {
       description: '自定义内容类名',
       setter: { concept: 'InputSetter' },
     })
-    contentClassName: nasl.core.String;
+    private contentClassName: nasl.core.String;
 
     @Prop({
       group: '样式属性',
@@ -110,7 +110,7 @@ namespace nasl.ui {
       description: '自定义标签样式',
       setter: { concept: 'InputSetter' },
     })
-    labelStyle: nasl.core.String = '{}';
+    private labelStyle: nasl.core.String = '{}';
 
     @Prop({
       group: '样式属性',
@@ -118,7 +118,7 @@ namespace nasl.ui {
       description: '自定义内容样式',
       setter: { concept: 'InputSetter' },
     })
-    contentStyle: nasl.core.String = '{}';;
+    private contentStyle: nasl.core.String = '{}';;
 
     @Slot({
       title: '标题',
