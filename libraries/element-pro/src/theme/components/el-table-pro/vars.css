@@ -59,6 +59,7 @@
   --el-table-highlight-dark-bg-color: var(--el-bg-color-container-hover);
 
   /**
+   * @hidden
    * @desc 行禁用颜色
    * @type color
    */
