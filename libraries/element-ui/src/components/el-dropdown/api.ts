@@ -30,6 +30,9 @@ namespace nasl.ui {
         trigger: '"click"',
         ':hideOnClick': '"false"',
       },
+      // displaySlotConditions: {
+      //   default: "!this.getAttribute('splitButton')"
+      // }
     },
   })
   @Component({

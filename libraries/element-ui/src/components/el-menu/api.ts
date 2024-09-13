@@ -11,6 +11,10 @@ namespace nasl.ui {
       events: {
         click: true,
       },
+      additionalAttribute: {
+        ':collapseTransition': '"false"',
+        'menuTrigger': 'click',
+      },
       snippetsDisplayConditions: {
         default:
           "this.getAttribute('mode')?.value === 'vertical' ? [0, 1, 2] : [0, 1]",
