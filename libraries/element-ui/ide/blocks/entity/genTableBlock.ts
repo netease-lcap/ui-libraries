@@ -33,13 +33,13 @@ export function genTableTemplate(entity: naslTypes.Entity, nameGroup: NameGroup,
   const entityName = entity.name;
   const currentName = nameGroup.currentName || 'current';
   const properties = entity.properties.filter(filterProperty('inTable'));
-  const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.page, elements.$ce.pageSize, elements.$ce.sort, elements.$ce.order${options.hasFileter ? `,${nameGroup.viewVariableFilter}` : ''})`;
+  const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.page, elements.$ce.size, elements.$ce.sort, elements.$ce.order${options.hasFileter ? `,${nameGroup.viewVariableFilter}` : ''})`;
   const idProperties = getAllEntityPromaryKeyProperty(entity);
   return `<ElTablePro
         ref="${nameGroup.viewElementMainView}"
         dataSource={${dataSourceValue}}
         rowKey="${firstLowerCase(entity.name)}.${getEntityPromaryKeyProperty(entity)}"
-        pageSize={20}
+        size={20}
         page={1}>
             ${properties.map((property) => `${genTableColumnTemplate(property, nameGroup)}`).join('\n')}
             <ElTableColumnPro
