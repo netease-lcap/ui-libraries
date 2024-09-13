@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-image src="//fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"></el-image>',
+    template: '<el-image src="https://static-vusion.163yun.com/assets/cloud-ui/1.jpg"></el-image>',
   }),
 };
