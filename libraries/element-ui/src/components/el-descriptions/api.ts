@@ -32,8 +32,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
-      title: '一行Descriptions Item的数量',
-      description: '一行 `Descriptions Item` 的数量',
+      title: '一行描述列表项的数量',
+      description: '一行描述列表项的数量',
       setter: {
         concept: 'NumberInputSetter',
         precision: 0,

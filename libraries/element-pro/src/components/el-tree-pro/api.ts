@@ -136,24 +136,27 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
-      title: '父字段',
-      description: '父字段',
+      title: '父级值字段',
+      description: '集合的元素类型中，用于标识父节点的属性',
+      docDescription:
+        '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
       setter: { concept: 'PropertySelectSetter' },
     })
     parentField: (item: T) => V;
 
     @Prop({
       group: '数据属性',
-      title: '子字段',
-      description: '子字段，默认为children',
+      title: '子级值字段',
+      description: '集合的元素类型中，用于标识子节点的属性，默认为children',
+      docDescription: '集合的元素类型中，用于标识子节点的属性',
       setter: { concept: 'PropertySelectSetter' },
     })
     childrenField: (item: T) => any;
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '文本字段',
-      description: '展示文本字段',
+      description: '集合的元素类型中，用于显示文本的属性名称',
       setter: { concept: 'PropertySelectSetter' },
     })
     textField: (item: T) => any;
