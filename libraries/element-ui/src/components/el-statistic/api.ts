@@ -121,6 +121,7 @@ namespace nasl.ui {
       title: '是否开启倒计时',
       description: '是否开启倒计时功能',
       setter: { concept: 'SwitchSetter' },
+      bindHide: true,
     })
     timeIndices: nasl.core.Boolean = false;
 
@@ -130,6 +131,7 @@ namespace nasl.ui {
       description: '格式化倒计时展示',
       setter: { concept: 'InputSetter' },
       if: _ => !!_.timeIndices,
+      bindHide: true,
     })
     format: nasl.core.String = 'HH:mm:ss';
 

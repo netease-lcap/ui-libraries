@@ -22,6 +22,12 @@ namespace nasl.ui {
       title: '选中值',
     })
     value: ElTreeProOptions<T, V, M>['value'];
+
+    @Method({
+      title: '重新加载',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void {}
   }
 
   export class ElTreeProOptions<T, V, M extends nasl.core.Boolean> extends ViewComponentOptions {
