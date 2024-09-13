@@ -5,6 +5,7 @@ import { VNode } from 'vue';
 export const useExtendsPlugin: NaslComponentPluginOptions = {
   setup: (props, { h }) => {
     return {
+      router: false,
       onSelect: (index, indexPath) => {
         const onSelect = props.get('onSelect');
         if (typeof onSelect === 'function') {
