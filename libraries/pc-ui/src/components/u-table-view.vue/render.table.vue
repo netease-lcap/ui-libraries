@@ -267,6 +267,7 @@ export default {
         rowStyle: Function,
 
         nativeScroll: { type: Boolean, default: false },
+        currentValues: Array,
     },
     data() {
         return {

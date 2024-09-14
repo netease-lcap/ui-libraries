@@ -173,6 +173,7 @@
         :usePagination="usePagination"
 
         :nativeScroll="nativeScroll"
+        :currentValues="currentValues"
         @resize="onResizerDragEnd">
     </u-table-render>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
