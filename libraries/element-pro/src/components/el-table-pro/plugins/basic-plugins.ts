@@ -5,7 +5,7 @@ import {
   computed, ref, watch, onMounted,
 } from '@vue/composition-api';
 
-import { $render, createUseUpdateSync } from '@lcap/vue2-utils';
+import { $ref, $render, createUseUpdateSync } from '@lcap/vue2-utils';
 
 export { useDataSource } from '@lcap/vue2-utils';
 export const useUpdateSync = createUseUpdateSync([
@@ -97,16 +97,6 @@ export const useTable = {
 
     // 产品要求默认开边框
     const bordered = props.useComputed('bordered', (v) => (isNil(v) ? true : v));
-    onMounted(() => {
-      if (_.isFunction(onLoadData)) {
-        onLoadData?.({
-          page: current.value,
-          size: pageSize.value,
-          sort: sorting.value?.field,
-          order: sorting.value?.order,
-        });
-      }
-    });
     const onSortChange = props.useComputed('onSortChange', (value) => {
       return (...arg) => {
         _.attempt(onLoadData, {
@@ -118,13 +108,35 @@ export const useTable = {
         _.attempt(value, ...arg);
       };
     });
+
+    onMounted(() => {
+      if (_.isFunction(onLoadData)) {
+        onLoadData?.({
+          page: current.value,
+          size: pageSize.value,
+          sort: sorting.value?.field,
+          order: sorting.value?.order,
+        });
+      }
+    });
+
     return {
       onPageChange,
-
       pagination,
-      // pagination: false,
       onSortChange,
       bordered,
+      [$ref]: {
+        reload() {
+          if (_.isFunction(onLoadData)) {
+            onLoadData?.({
+              page: 1,
+              size: pageSize.value,
+              sort: sorting.value?.field,
+              order: sorting.value?.order,
+            });
+          }
+        },
+      },
       [$render](resultVNode, h) {
         const vnodes = ctx.setupContext.slots.default();
         resultVNode.componentOptions.propsData.columns = renderSlot(vnodes);
