@@ -9,18 +9,19 @@
     <div class="actions-warp">
       <el-checkbox-pro v-model="disabled">是否禁用</el-checkbox-pro>
       <el-checkbox-pro v-model="draggable">是否启用拖拽上传</el-checkbox-pro>
+      <el-checkbox-pro v-model="autoUpload">是否自动上传</el-checkbox-pro>
     </div>
     <div>
-      <div class="desc_tip">初始-手动上传</div>
+      <div class="desc_tip">初始</div>
       <el-upload-pro :theme="theme" :multiple="true" :disabled="disabled" :draggable="draggable"
-        :format-response="formatResponse" :placeholder="placeholderList[theme]" :autoUpload="false"
+        :format-response="formatResponse" :placeholder="placeholderList[theme]" :autoUpload="autoUpload"
         :showThumbnail="true" action="//service-bv448zsw-1257786608.gz.apigw.tencentcs.com/api/upload-demo"
-        @fail="handleFail"></el-upload-pro>
+        @fail="handleFail" size-limit-str="1MB"></el-upload-pro>
 
-      <div class="desc_tip">上传中-自动上传</div>
+      <div class="desc_tip">上传中</div>
       <el-upload-pro :fileList="files" :theme="theme" :multiple="true" :showThumbnail="true" :disabled="disabled"
         :draggable="draggable" :format-response="formatResponse" :placeholder="placeholderList[theme]"
-        action="//service-bv448zsw-1257786608.gz.apigw.tencentcs.com/api/upload-demo"
+        :autoUpload="autoUpload" action="//service-bv448zsw-1257786608.gz.apigw.tencentcs.com/api/upload-demo"
         @fail="handleFail"></el-upload-pro>
     </div>
   </div>
@@ -67,6 +68,7 @@ export default {
       files: uploadingFile,
       disabled: false,
       draggable: false,
+      autoUpload: true,
       theme: 'file',
     };
   },

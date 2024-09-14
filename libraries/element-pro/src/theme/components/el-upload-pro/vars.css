@@ -300,7 +300,6 @@
   --el-upload-flow-button-color-hover: var(--el-text-color-secondary);
 
   /**
-   * @hidden
    * @desc 上传提示错误的颜色
    * @type color
    */
@@ -360,6 +359,7 @@
   --el-upload-card-font: var(--el-font-body-small);
 
   /**
+   * @hidden
    * @desc 上传卡片状态的字体
    * @type font
    */
@@ -804,7 +804,6 @@
   --el-upload-icon-clear-circle-filled-margin-top: var(--el-comp-margin-xxs);
 
   /**
-   * @hidden
    * @desc 上传提示上边距
    * @type margin
    */
