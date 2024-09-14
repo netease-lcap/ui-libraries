@@ -65,7 +65,6 @@ export default {
         resizable: Boolean,
         sortTrigger: String,
         currentSorting: Object,
-        allChecked: Boolean,
         disabled: Boolean,
         readonly: Boolean,
         boldHeader: Boolean,

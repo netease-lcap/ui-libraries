@@ -265,6 +265,7 @@ export default {
 
         rootWidth: Number,
         nativeScroll: { type: Boolean, default: false },
+        currentValues: Array,
     },
     data() {
         return {
