@@ -582,6 +582,7 @@ export default defineComponent({
     const tableContent = (
       <div
         ref="tableContentRef"
+        key="table-content"
         class={this.tableBaseClass.content}
         style={this.tableContentStyles}
         on={{ scroll: this.onInnerVirtualScroll }}

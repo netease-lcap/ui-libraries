@@ -13,7 +13,7 @@ export const useUpdateSync = createUseUpdateSync([
 ]);
 
 export const useTable = {
-  props: ['onPageChange'],
+  props: ['onPageChange', 'page', 'pageSize'],
   setup(props, ctx) {
     const current = props.useRef('page', (v) => v ?? 1);
     const sorting = props.useComputed('sorting', (value) => value);
@@ -138,7 +138,7 @@ export const useTable = {
           }
         },
       },
-      [$render](resultVNode, h) {
+      [$render](resultVNode) {
         const vnodes = ctx.setupContext.slots.default();
         resultVNode.componentOptions.propsData.columns = renderSlot(vnodes);
         return resultVNode;
