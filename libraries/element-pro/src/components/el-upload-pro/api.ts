@@ -1,65 +1,6 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
-  interface UploadFile {
-    /**
-     * 上一次变更的时间
-     */
-    lastModified?: number;
-    /**
-     * 文件名称
-     * @default ''
-     */
-    name?: string;
-    /**
-     * 下载进度
-     */
-    percent?: number;
-    /**
-     * 原始文件对象
-     */
-    raw?: File;
-    /**
-     * 上传接口返回的数据
-     */
-    response?: { [key: string]: any };
-    /**
-     * 文件大小
-     */
-    size?: number;
-    /**
-     * 文件上传状态：上传成功，上传失败，上传中，等待上传
-     * @default ''
-     */
-    status?: 'success' | 'fail' | 'progress' | 'waiting';
-    /**
-     * 文件类型
-     * @default ''
-     */
-    type?: string;
-    /**
-     * 上传时间
-     */
-    uploadTime?: string;
-    /**
-     * 文件上传成功后的下载/访问地址
-     * @default ''
-     */
-    url?: string;
-  }
-
-  interface UploadFailContext {
-    failedFiles: nasl.collection.List<UploadFile>;
-    currentFiles: nasl.collection.List<UploadFile>;
-    response?: any;
-    file: UploadFile;
-  }
-
-  interface SuccessContext {
-    file?: UploadFile;
-    files?: nasl.collection.List<UploadFile>;
-  }
-
   @IDEExtraInfo({
     order: 10,
     ideusage: {
@@ -76,7 +17,17 @@ namespace nasl.ui {
     @Prop({
       title: '文件列表',
     })
-    fileList: nasl.collection.List<UploadFile>;
+    fileList: nasl.collection.List<{
+      lastModified?: nasl.core.Integer;
+      name?: nasl.core.String;
+      percent?: nasl.core.Decimal;
+      raw?: File;
+      size?: nasl.core.Integer;
+      status?: 'success' | 'fail' | 'progress' | 'waiting';
+      type?: nasl.core.String;
+      uploadTime?: nasl.core.String;
+      url?: nasl.core.String;
+    }>;
 
     @Method({
       title: '触发选择文件',
@@ -296,28 +247,26 @@ namespace nasl.ui {
           { title: '图片批量上传' },
         ],
       },
-      onChange: [{
-        update: {
-          autoUpload: false,
-          multiple: true,
-          draggable: true,
+      onChange: [
+        {
+          update: {
+            autoUpload: false,
+            multiple: true,
+            draggable: true,
+          },
+          if: (val) => val === 'file-flow' || val === 'image-flow',
         },
-        if: (val) => val === 'file-flow' || val === 'image-flow',
-      }, {
-        update: {
-          autoUpload: true,
-          multiple: false,
-          draggable: false,
+        {
+          update: {
+            autoUpload: true,
+            multiple: false,
+            draggable: false,
+          },
+          if: (val) => !['file-flow', 'image-flow'].includes(val),
         },
-        if: (val) => !['file-flow', 'image-flow'].includes(val)
-      }],
+      ],
     })
-    theme:
-      | 'file'
-      | 'file-flow'
-      | 'image'
-      | 'image-flow'
-      = 'file';
+    theme: 'file' | 'file-flow' | 'image' | 'image-flow' = 'file';
 
     @Prop({
       group: '主要属性',
@@ -393,7 +342,17 @@ namespace nasl.ui {
       setter: { concept: 'AnonymousFunctionSetter' },
     })
     beforeAllFilesUpload: (
-      fileList: nasl.collection.List<UploadFile>,
+      fileList: nasl.collection.List<{
+        lastModified?: nasl.core.Integer;
+        name?: nasl.core.String;
+        percent?: nasl.core.Decimal;
+        raw?: File;
+        size?: nasl.core.Integer;
+        status?: 'success' | 'fail' | 'progress' | 'waiting';
+        type?: nasl.core.String;
+        uploadTime?: nasl.core.String;
+        url?: nasl.core.String;
+      }>,
     ) => nasl.core.Boolean;
 
     @Prop({
@@ -403,7 +362,17 @@ namespace nasl.ui {
         '如果是自动上传模式 `autoUpload=true`，表示单个文件上传之前的钩子函数，若函数返回值为 `false` 则表示不上传当前文件。如果是非自动上传模式 `autoUpload=false`，函数返回值为 `false` 时表示从上传文件中剔除当前文件。',
       setter: { concept: 'AnonymousFunctionSetter' },
     })
-    beforeUpload: (file: UploadFile) => nasl.core.Boolean;
+    beforeUpload: (file: {
+      lastModified?: nasl.core.Integer;
+      name?: nasl.core.String;
+      percent?: nasl.core.Decimal;
+      raw?: File;
+      size?: nasl.core.Integer;
+      status?: 'success' | 'fail' | 'progress' | 'waiting';
+      type?: nasl.core.String;
+      uploadTime?: nasl.core.String;
+      url?: nasl.core.String;
+    }) => nasl.core.Boolean;
 
     @Prop({
       group: '状态属性',
@@ -481,40 +450,171 @@ namespace nasl.ui {
       description:
         '上传失败后触发。`response` 指接口响应结果，`response.error` 会作为错误文本提醒。如果希望判定为上传失败，但接口响应数据不包含 `error` 字段，可以使用 `formatResponse` 格式化 `response` 数据结构。如果是多文件多请求上传场景，请到事件 `onOneFileFail` 中查看 `response`。',
     })
-    onFail: (event: UploadFailContext) => any;
+    onFail: (event: {
+      failedFiles: nasl.collection.List<{
+        lastModified?: nasl.core.Integer;
+        name?: nasl.core.String;
+        percent?: nasl.core.Decimal;
+        raw?: File;
+        size?: nasl.core.Integer;
+        status?: 'success' | 'fail' | 'progress' | 'waiting';
+        type?: nasl.core.String;
+        uploadTime?: nasl.core.String;
+        url?: nasl.core.String;
+      }>;
+      currentFiles: nasl.collection.List<{
+        lastModified?: nasl.core.Integer;
+        name?: nasl.core.String;
+        percent?: nasl.core.Decimal;
+        raw?: File;
+        size?: nasl.core.Integer;
+        status?: 'success' | 'fail' | 'progress' | 'waiting';
+        type?: nasl.core.String;
+        uploadTime?: nasl.core.String;
+        url?: nasl.core.String;
+      }>;
+      response?: any;
+      file: {
+        lastModified?: nasl.core.Integer;
+        name?: nasl.core.String;
+        percent?: nasl.core.Decimal;
+        raw?: File;
+        size?: nasl.core.Integer;
+        status?: 'success' | 'fail' | 'progress' | 'waiting';
+        type?: nasl.core.String;
+        uploadTime?: nasl.core.String;
+        url?: nasl.core.String;
+      };
+    }) => any;
 
     @Event({
       title: '单个文件上传失败后',
       description:
         '多文件/图片场景下，单个文件上传失败后触发，如果一个请求上传一个文件，则会触发多次。单文件/图片不会触发',
     })
-    onOneFileFail: (event: UploadFailContext) => any;
+    onOneFileFail: (event: {
+      failedFiles: nasl.collection.List<{
+        lastModified?: nasl.core.Integer;
+        name?: nasl.core.String;
+        percent?: nasl.core.Decimal;
+        raw?: File;
+        size?: nasl.core.Integer;
+        status?: 'success' | 'fail' | 'progress' | 'waiting';
+        type?: nasl.core.String;
+        uploadTime?: nasl.core.String;
+        url?: nasl.core.String;
+      }>;
+      currentFiles: nasl.collection.List<{
+        lastModified?: nasl.core.Integer;
+        name?: nasl.core.String;
+        percent?: nasl.core.Decimal;
+        raw?: File;
+        size?: nasl.core.Integer;
+        status?: 'success' | 'fail' | 'progress' | 'waiting';
+        type?: nasl.core.String;
+        uploadTime?: nasl.core.String;
+        url?: nasl.core.String;
+      }>;
+      response?: any;
+      file: {
+        lastModified?: nasl.core.Integer;
+        name?: nasl.core.String;
+        percent?: nasl.core.Decimal;
+        raw?: File;
+        size?: nasl.core.Integer;
+        status?: 'success' | 'fail' | 'progress' | 'waiting';
+        type?: nasl.core.String;
+        uploadTime?: nasl.core.String;
+        url?: nasl.core.String;
+      };
+    }) => any;
 
     @Event({
       title: '单个文件上传成功后',
       description:
         '单个文件上传成功后触发，在多文件场景下会触发多次。`context.file` 表示当前上传成功的单个文件，`context.response` 表示上传请求的返回数据',
     })
-    onOneFileSuccess: (event: Pick<SuccessContext, 'file'>) => any;
+    onOneFileSuccess: (event: {
+      file?: {
+        lastModified?: nasl.core.Integer;
+        name?: nasl.core.String;
+        percent?: nasl.core.Decimal;
+        raw?: File;
+        size?: nasl.core.Integer;
+        status?: 'success' | 'fail' | 'progress' | 'waiting';
+        type?: nasl.core.String;
+        uploadTime?: nasl.core.String;
+        url?: nasl.core.String;
+      };
+    }) => any;
 
     @Event({
       title: '上传成功后',
       description:
         '上传成功后触发。<br/>`context.currentFiles` 表示当次请求上传的文件（无论成功或失败），`context.fileList` 表示上传成功后的文件，`context.response` 表示上传请求的返回数据。<br/>`context.results` 表示单次选择全部文件上传成功后的响应结果，可以在这个字段存在时提醒用户上传成功或失败。<br />。',
     })
-    onSuccess: (event: SuccessContext) => any;
+    onSuccess: (event: {
+      file?: {
+        lastModified?: nasl.core.Integer;
+        name?: nasl.core.String;
+        percent?: nasl.core.Decimal;
+        raw?: File;
+        size?: nasl.core.Integer;
+        status?: 'success' | 'fail' | 'progress' | 'waiting';
+        type?: nasl.core.String;
+        uploadTime?: nasl.core.String;
+        url?: nasl.core.String;
+      };
+      files?: nasl.collection.List<{
+        lastModified?: nasl.core.Integer;
+        name?: nasl.core.String;
+        percent?: nasl.core.Decimal;
+        raw?: File;
+        size?: nasl.core.Integer;
+        status?: 'success' | 'fail' | 'progress' | 'waiting';
+        type?: nasl.core.String;
+        uploadTime?: nasl.core.String;
+        url?: nasl.core.String;
+      }>;
+    }) => any;
 
     @Event({
       title: '点击图片预览时',
       description: '点击图片预览时触发，文件没有预览',
     })
-    onPreview: (event: { file: UploadFile; index: nasl.core.Integer }) => any;
+    onPreview: (event: {
+      file: {
+        lastModified?: nasl.core.Integer;
+        name?: nasl.core.String;
+        percent?: nasl.core.Decimal;
+        raw?: File;
+        size?: nasl.core.Integer;
+        status?: 'success' | 'fail' | 'progress' | 'waiting';
+        type?: nasl.core.String;
+        uploadTime?: nasl.core.String;
+        url?: nasl.core.String;
+      };
+      index: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '移除文件时',
       description: '移除文件时触发。',
     })
-    onRemove: (event: { index: nasl.core.Integer; file: UploadFile }) => any;
+    onRemove: (event: {
+      index: nasl.core.Integer;
+      file: {
+        lastModified?: nasl.core.Integer;
+        name?: nasl.core.String;
+        percent?: nasl.core.Decimal;
+        raw?: File;
+        size?: nasl.core.Integer;
+        status?: 'success' | 'fail' | 'progress' | 'waiting';
+        type?: nasl.core.String;
+        uploadTime?: nasl.core.String;
+        url?: nasl.core.String;
+      };
+    }) => any;
 
     @Event({
       title: '选择文件后',
@@ -534,7 +634,17 @@ namespace nasl.ui {
         | 'FILTER_FILE_SAME_NAME'
         | 'BEFORE_ALL_FILES_UPLOAD'
         | 'CUSTOM_BEFORE_UPLOAD';
-      files: nasl.collection.List<UploadFile>;
+      files: nasl.collection.List<{
+        lastModified?: nasl.core.Integer;
+        name?: nasl.core.String;
+        percent?: nasl.core.Decimal;
+        raw?: File;
+        size?: nasl.core.Integer;
+        status?: 'success' | 'fail' | 'progress' | 'waiting';
+        type?: nasl.core.String;
+        uploadTime?: nasl.core.String;
+        url?: nasl.core.String;
+      }>;
     }) => any;
 
     @Event({
@@ -543,7 +653,17 @@ namespace nasl.ui {
         '待上传文件列表发生变化时触发。`context.files` 表示事件参数为待上传文件，`context.trigger` 引起此次变化的触发来源',
     })
     onWaitingUploadFilesChange: (event: {
-      files: nasl.collection.List<UploadFile>;
+      files: nasl.collection.List<{
+        lastModified?: nasl.core.Integer;
+        name?: nasl.core.String;
+        percent?: nasl.core.Decimal;
+        raw?: File;
+        size?: nasl.core.Integer;
+        status?: 'success' | 'fail' | 'progress' | 'waiting';
+        type?: nasl.core.String;
+        uploadTime?: nasl.core.String;
+        url?: nasl.core.String;
+      }>;
       trigger: 'validate' | 'remove' | 'uploaded';
     }) => any;
 
