@@ -38,3 +38,41 @@ export const Default = {
     loadingText: '拼命加载中',
   },
 };
+
+export const Demo1 = {
+  name: '块级-横向排列',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    methods: {
+      handleClick(c) {
+        console.log('click');
+      },
+    },
+    template: `
+      <el-flex mode="block">
+        <el-button>测试1</el-button>
+        <el-button>测试1</el-button>
+        <el-button>测试1</el-button>
+      </el-flex>
+    `,
+  }),
+};
+
+export const Demo2 = {
+  name: '块级-纵向排列',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    methods: {
+      handleClick(c) {
+        console.log('click');
+      },
+    },
+    template: `
+      <el-flex mode="block" direction="vertical">
+        <div style="min-width: 100px; height: 64px;background-color:#ddd"></div>
+        <div style="min-width: 100px; height: 64px;background-color:#ddd"></div>
+        <div style="min-width: 100px; height: 64px;background-color:#ddd"></div>
+      </el-flex>
+    `,
+  }),
+};

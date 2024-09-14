@@ -18,7 +18,8 @@
 .flex > [heightstretch="true"] {
   height: unset !important;
 }
-.flex > [class^="el-button"] + [class^="el-button"] {
+.flex > [class^="el-button"] + [class^="el-button"],
+.flexBlock > [class^="el-button"] + [class^="el-button"] {
   margin-left: 0;
 }
 
@@ -27,9 +28,6 @@
   box-sizing: border-box;
 }
 
-.flexBlock > *:not(:last-child) {
-  margin-bottom: var(--el-flex-space-base);
-}
 .loadmask {
   position: absolute;
   z-index: 2000;
