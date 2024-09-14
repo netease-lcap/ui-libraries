@@ -87,19 +87,21 @@
   --el-slider-center-line-background: rgba(0, 0, 0, 0.9);
 
   /**
+   * @hidden
    * @desc 滑块输入框宽度
    * @type size
    */
   --el-slider-input-width: 80px;
 
   /**
+   * @hidden
    * @desc 滑块行输入框宽度
    * @type size
    */
   --el-slider-row-input-width: 120px;
 
   /**
-   * @desc 滑块轨道步长
+   * @desc 滑块轨道高度
    * @type size
    */
   --el-slider-rail-track-step-size: var(--el-size-2);
@@ -123,19 +125,19 @@
   --el-slider-vertical-height: 100%;
 
   /**
-   * @desc 垂直滑块标记宽度
+   * @desc 垂直滑块标记文字区域宽度
    * @type size
    */
   --el-slider-vertical-mark-width: 18px;
 
   /**
-   * @desc 滑块停止宽度
+   * @desc 滑块刻度线宽度
    * @type size
    */
   --el-slider-stop-width: 1px;
 
   /**
-   * @desc 滑块停止高度
+   * @desc 滑块刻度线高度
    * @type size
    */
   --el-slider-stop-height: var(--el-size-2);
@@ -183,12 +185,14 @@
   --el-slider-vertical-padding: 0;
 
   /**
+   * @hidden
    * @desc 垂直滑块手柄上外边距
    * @type size
    */
   --el-slider-vertical-handle-margin-top: -6px;
 
   /**
+   * @hidden
    * @desc 垂直滑块手柄左外边距
    * @type size
    */

@@ -33,6 +33,7 @@
   --el-rate-text-primary: var(--el-text-color-primary);
 
   /**
+   * @hidden
    * @desc 评分组件次要文字颜色
    * @type color
    */

@@ -57,12 +57,14 @@
   --el-cascader-panel-height-normal: 200px;
 
   /**
+   * @hidden
    * @desc 级联选择器面板多选高度
    * @type size
    */
   --el-cascader-panel-height-multiple: 280px;
 
   /**
+   * @hidden
    * @desc 级联选择器图标内宽度
    * @type size
    */
@@ -81,12 +83,14 @@
   --el-cascader-menu-padding: var(--el-pop-padding-m);
 
   /**
+   * @hidden
    * @desc 级联选择器菜单小号内边距
    * @type padding
    */
   --el-cascader-menu-padding-s: var(--el-pop-padding-s);
 
   /**
+   * @hidden
    * @desc 级联选择器菜单大号内边距
    * @type padding
    */
@@ -183,6 +187,7 @@
   --el-cascader-icon-color: var(--el-text-color-placeholder);
 
   /**
+   * @hidden
    * @desc 级联选择器选中图标颜色
    * @type color
    */
