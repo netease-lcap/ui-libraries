@@ -1,7 +1,7 @@
 import { $deletePropList, createUseUpdateSync } from '@lcap/vue2-utils';
-import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/types';
+import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins/types';
 import { listToTree } from '@lcap/vue2-utils/utils';
-import { isFunction } from 'lodash';
+import { isFunction, get } from 'lodash';
 
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils';
 
@@ -94,13 +94,39 @@ export const useValue: NaslComponentPluginOptions = {
 export const useIcon: NaslComponentPluginOptions = {
   props: ['icon'],
   setup: (props, { h }) => {
+    const icon = props.get<string>('icon');
+    if (icon) {
+      return {
+        icon: () => {
+          return h('el-icon', {
+            attrs: { name: icon },
+          });
+        },
+      };
+    }
+
+    return {};
+  },
+};
+
+export const useSlotLabel: NaslComponentPluginOptions = {
+  props: ['textField', 'slotLeaf'],
+  setup: (props, { h }) => {
     return {
-      icon: () => {
-        const icon = props.get<string>('icon');
-        return icon ? h('el-icon', {
-          attrs: { name: icon },
-        }) : null;
+      slotLabel: (current: any) => {
+        const { data: item } = current?.node || {};
+        const slot = props.get<Slot>('slotLeaf');
+        const textField = props.get<string>('textField') || 'text';
+
+        if (slot) {
+          return slot({ item });
+        }
+
+        return h('el-text', {
+          attrs: { text: get(item, textField) },
+        });
       },
+      [$deletePropList]: ['slotLeaf'],
     };
   },
 };

@@ -23,6 +23,9 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-tree-pro></el-tree-pro>',
+    template: `<el-tree-pro>
+    <template #leaf="current">
+    </template>
+    </el-tree-pro>`,
   }),
 };

@@ -105,6 +105,7 @@
   --el-input-bg-color-disabled: var(--el-bg-color-component-disabled);
 
   /**
+   * @hidden
    * @desc 默认额外信息颜色
    * @type color
    */
@@ -170,6 +171,7 @@
   --el-input-margin-distance-default: var(--el-comp-margin-xxxl);
 
   /**
+   * @hidden
    * @desc 状态图标右侧位置
    * @type size
    */
@@ -248,6 +250,7 @@
   --el-input-font-s: var(--el-font-body-small);
 
   /**
+   * @hidden
    * @desc 额外信息字体
    * @type font
    */

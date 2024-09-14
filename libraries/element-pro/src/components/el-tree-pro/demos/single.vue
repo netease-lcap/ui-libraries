@@ -18,7 +18,11 @@
       children-field="children"
 
       @click="handleClick"
-    />
+    >
+      <template #leaf="current">
+        <span>custom {{ current.item?.label }}</span>
+      </template>
+    </el-tree-pro>
   </div>
 </template>
 
