@@ -1,11 +1,37 @@
 @import "../../../design/_common/style/web/_variables.less";
 
 .@{prefix}-input-number {
+  &.cw-style-background-color {
+    .@{prefix}-input {
+      background-color: var(--cw-style-background-color, var(--el-input-bg-color-default));
+    }
+  }
+
+  &.cw-style-color {
+    .@{prefix}-input, .@{prefix}-input__inner {
+      color: var(--cw-style-color, var(--el-input-text-color-default));
+    }
+  }
+
+  &.cw-style-font-size {
+    .@{prefix}-input {
+      font-size: var(--cw-style-font-size);
+    }
+  }
+
+  &.cw-style-font-style {
+    .@{prefix}-input {
+      font-style: var(--cw-style-font-style);
+    }
+  }
+}
+
+.@{prefix}-input-number.@{prefix}-is-controls-right {
   border: none !important;
 
   &.cw-style-border-color {
     .@{prefix}-input {
-      border-color: var(--cw-style-border-color, --el-input-border-color-default);
+      border-color: var(--cw-style-border-color, var(--el-input-border-color-default));
     }
   }
 
@@ -26,22 +52,22 @@
 
   &.cw-style-border-radius {
     .@{prefix}-input {
-      border-top-left-radius: var(--cw-style-border-top-left-radius, --el-input-border-radius);
-      border-top-right-radius: var(--cw-style-border-top-right-radius, --el-input-border-radius);
-      border-bottom-left-radius: var(--cw-style-border-bottom-left-radius, --el-input-border-radius);
-      border-bottom-right-radius: var(--cw-style-border-bottom-right-radius, --el-input-border-radius);
+      border-top-left-radius: var(--cw-style-border-top-left-radius, var(--el-input-border-radius));
+      border-top-right-radius: var(--cw-style-border-top-right-radius, var(--el-input-border-radius));
+      border-bottom-left-radius: var(--cw-style-border-bottom-left-radius, var(--el-input-border-radius));
+      border-bottom-right-radius: var(--cw-style-border-bottom-right-radius, var(--el-input-border-radius));
     }
   }
 
   &.cw-style-background-color {
     .@{prefix}-input {
-      background-color: var(--cw-style-background-color, --el-input-bg-color-default);
+      background-color: var(--cw-style-background-color, var(--el-input-bg-color-default));
     }
   }
 
   &.cw-style-color {
     .@{prefix}-input, .@{prefix}-input__inner {
-      color: var(--cw-style-color, --el-input-text-color-default);
+      color: var(--cw-style-color, var(--el-input-text-color-default));
     }
   }
 

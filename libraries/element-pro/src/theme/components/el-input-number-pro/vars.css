@@ -12,7 +12,7 @@
    * @desc 按钮背景色
    * @type color
    */
-  --el-input-number-button-bg-color: transparent;
+  --el-input-number-button-bg-color: var(--el-bg-color-secondarycontainer);
 
   /**
    * @desc 右侧按钮背景色
@@ -126,18 +126,21 @@
   --el-input-number-text-color-error: var(--el-error-color);
 
   /**
+   * @hidden
    * @desc 小号输入框宽度
    * @type size
    */
   --el-input-number-width-s: 120px;
 
   /**
+   * @hidden
    * @desc 默认输入框宽度
    * @type size
    */
   --el-input-number-width: 144px;
 
   /**
+   * @hidden
    * @desc 大号输入框宽度
    * @type size
    */

@@ -3,6 +3,7 @@
   --el-table-head-text-color: var(--el-text-color-primary);
   --el-table-head-background-color: var(--el-color-background-6);
   --el-table-head-font-weight: 700;
+  --el-input-number-button-bg-color: var(--el-bg-color-secondarycontainer);
 }
 
 .@{prefix}-table__header {
@@ -11,6 +12,38 @@
   }
   th {
     font-weight: var(--el-table-head-font-weight);
+  }
+}
+
+.@{prefix}-input-number:not(.@{prefix}-is-controls-right) {
+  border: 1px solid var(--el-input-number-button-border-color);
+  border-radius: var(--el-radius-default);
+  overflow: hidden;
+
+  &:hover:not(.@{prefix}-is-disabled),
+  &.cw-is-focus {
+    border-color: var(--el-input-number-border-color-hover);
+  }
+
+  .@{prefix}-input__wrap {
+    margin: 0 !important;
+  }
+  .@{prefix}-input,
+  .@{prefix}-button {
+    border: none;
+    box-shadow: none;
+    outline: none;
+    border-radius: 0;
+  }
+
+  .@{prefix}-input-number__decrease {
+    border-right: 1px solid var(--el-input-number-button-border-color);
+    background-color: var(--el-input-number-button-bg-color);
+  }
+
+  .@{prefix}-input-number__increase {
+    border-left: 1px solid var(--el-input-number-button-border-color);
+    background-color: var(--el-input-number-button-bg-color);
   }
 }
 

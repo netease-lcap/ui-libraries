@@ -3,7 +3,7 @@ export type AnimationType = 'ripple' | 'expand' | 'fade';
 export default {
   classPrefix: 'el-p',
   animation: {
-    include: ['ripple', 'expand', 'fade'],
+    include: ['expand', 'fade'],
     exclude: []
   } as Record<'include'|'exclude', Array<AnimationType>>,
   calendar: {
