@@ -22,6 +22,9 @@ export const Default = {
       log() {
         console.log(123);
       },
+      handleChange(...args) {
+        console.log(args);
+      },
     },
     data() {
       return {
@@ -32,8 +35,8 @@ export const Default = {
           for (let i = 0; i < total; i++) {
             initialData.push({
               key: {
-                valuefield: `${i}`,
-                labelfield: `${i % 3}`,
+                valueField: `${i}`,
+                labelField: `${i}_${i % 3}`,
               },
             });
           }
@@ -47,11 +50,13 @@ export const Default = {
     },
     template: `<el-select-pro
     :filterable="true"
+    :dataSource="data"
+    multiple
+    valueField="key.valueField"
+    textField="key.labelField"
     @search="log"
+    @change="handleChange"
     >
-    
-      <el-option-pro label="12" las="33" value="11" data-nodepath="1234" >
-      </el-option-pro>
     </el-select-pro>`,
   }),
 };

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { createUseUpdateSync } from '@lcap/vue2-utils';
+import { SelectValue, SelectValueChangeTrigger } from '@element-pro';
 
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils';
 
@@ -17,10 +18,23 @@ export const useSelect = {
 
     const options = props.useComputed('data', (v) => (_.isEmpty(v) ? undefined : v));
     const keys = props.useComputed('keys', (v) => (_.isObject(v) ? v : {}));
+
     return {
       options,
       // slotDefault: () => null,
       //  $render(ctx.slots.default),
+      onChange: (value: SelectValue, context: { option?: any; selectedOptions: any[]; trigger: SelectValueChangeTrigger; }) => {
+        const onChange = props.get('onChange');
+
+        if (_.isFunction(onChange)) {
+          onChange({
+            value,
+            option: context.option,
+            selectedOptions: context.selectedOptions,
+            trigger: context.trigger,
+          });
+        }
+      },
       keys: {
         value: valueField.value,
         label: textField.value,
