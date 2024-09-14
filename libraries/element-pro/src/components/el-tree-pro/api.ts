@@ -155,7 +155,7 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '父级值字段',
-      description: '集合的元素类型中，用于标识父节点的属性',
+      description: '如果数据源是平铺结构，需要指定父级字段',
       docDescription:
         '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
       setter: { concept: 'PropertySelectSetter' },
@@ -165,7 +165,7 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '子级值字段',
-      description: '集合的元素类型中，用于标识子节点的属性，默认为children',
+      description: '如果数据源是树形结构，需要指定子级字段，默认为children',
       docDescription: '集合的元素类型中，用于标识子节点的属性',
       setter: { concept: 'PropertySelectSetter' },
     })
@@ -475,12 +475,12 @@ namespace nasl.ui {
     // })
     // slotIcon: () => Array<ViewComponent>;
 
-    // @Slot({
-    //   title: 'Label',
-    //   description:
-    //     '自定义节点内容，值为 `false` 不显示，值为 `true` 显示默认 label，值为字符串直接输出该字符串。泛型 `T` 表示树节点 ',
-    // })
-    // slotLabel: () => Array<ViewComponent>;
+    @Slot({
+      title: '自定义节点内容',
+      description:
+        '自定义节点内容',
+    })
+    slotLeaf: (current: Current<T>) => Array<ViewComponent>;
 
     // @Slot({
     //   title: 'Line',

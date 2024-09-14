@@ -15,13 +15,17 @@
       :valueMode="valueMode"
 
       :data-source="items"
-      value-field="value"
-      text-field="label"
+      value-field="id"
+      text-field="name"
+      parent-field="pid"
       children-field="children"
-      parent-field="parent"
 
       @click="handleClick"
-    />
+    >
+      <template #leaf="current">
+        <span>custom {{ log(current) }}</span>
+      </template>
+    </el-tree-pro>
   </div>
 </template>
 
@@ -35,72 +39,72 @@ export default {
       expanded: undefined,
       items: [
         {
-          value: '1',
-          label: '1',
+          id: '1',
+          name: '1',
           children: [
             {
-              value: '1.1',
-              label: '1.1',
+              id: '1.1',
+              name: '1.1',
               children: [
                 {
-                  value: '1.1.1',
-                  label: '1.1.1',
+                  id: '1.1.1',
+                  name: '1.1.1',
                   children: [
                     {
-                      value: '1.1.1.1',
-                      label: '1.1.1.1',
+                      id: '1.1.1.1',
+                      name: '1.1.1.1',
                     },
                     {
-                      value: '1.1.1.2',
-                      label: '1.1.1.2',
+                      id: '1.1.1.2',
+                      name: '1.1.1.2',
                     },
                   ],
                 },
                 {
-                  value: '1.1.2',
-                  label: '1.1.2',
+                  id: '1.1.2',
+                  name: '1.1.2',
                   children: [
                     {
-                      value: '1.1.2.1',
-                      label: '1.1.2.1',
+                      id: '1.1.2.1',
+                      name: '1.1.2.1',
                     },
                     {
-                      value: '1.1.2.2',
-                      label: '1.1.2.2',
+                      id: '1.1.2.2',
+                      name: '1.1.2.2',
                     },
                   ],
                 },
               ],
             },
             {
-              value: '1.2',
-              label: '1.2',
+              id: '1.2',
+              name: '1.2',
               children: [
                 {
-                  value: '1.2.1',
-                  label: '1.2.1',
+                  id: '1.2.1',
+                  name: '1.2.1',
                   children: [
                     {
-                      value: '1.2.1.1',
-                      label: '1.2.1.1',
+                      id: '1.2.1.1',
+                      name: '1.2.1.1',
                     },
                     {
-                      value: '1.2.1.2',
-                      label: '1.2.1.2',
+                      id: '1.2.1.2',
+                      name: '1.2.1.2',
                     },
                   ],
                 },
                 {
-                  value: '1.2.2',
-                  label: '1.2.2',
+                  id: '1.2.2',
+                  name: '1.2.2',
                   children: [
                     {
-                      value: '1.2.2.1',
-                      label: '1.2.2.1',
+                      id: '1.2.2.1',
+                      name: '1.2.2.1',
                     },
                     {
-                      value: '1.2.2.2',
-                      label: '1.2.2.2',
+                      id: '1.2.2.2',
+                      name: '1.2.2.2',
                     },
                   ],
                 },
@@ -109,25 +113,25 @@ export default {
           ],
         },
         {
-          value: '2',
-          label: '2',
+          id: '2',
+          name: '2',
           children: [
             {
-              value: '2.1',
-              label: '2.1',
+              id: '2.1',
+              name: '2.1',
 
             },
             {
-              value: '2.2',
-              label: '2.2',
+              id: '2.2',
+              name: '2.2',
 
             },
           ],
         },
         {
-          value: '1.3',
-          label: '1.3',
-          parent: '1',
+          id: '1.3',
+          name: '1.3',
+          pid: '1',
         }
       ],
     };
@@ -135,6 +139,10 @@ export default {
   methods: {
     handleClick(data) {
       console.log('click', data);
+    },
+    log(data) {
+      console.log('data:', data);
+      return data?.item?.name;
     },
   },
 };
