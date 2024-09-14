@@ -4,6 +4,7 @@
             <u-tab :title="$tt('pendingTasks')" value="pendingTasks"></u-tab>
             <u-tab :title="$tt('processedTasks')" value="processedTasks"></u-tab>
             <u-tab :title="$tt('intiationProcess')" value="intiationProcess"></u-tab>
+            <u-tab :title="$tt('carbonCopyTasks')" value="carbonCopyTasks"></u-tab>
         </u-tabs>
         <u-linear-layout direction="vertical">
             <u-linear-layout mode="flex" justify="space-between">
@@ -43,6 +44,17 @@
                                 :initial-load="true">
                             </u-select>
                         </u-form-item>
+                        <u-form-item :label="$tt('viewedState')" v-if="tabValue === 'carbonCopyTasks'">
+                            <u-select
+                                filterable
+                                clearable
+                                :value.sync="filter.viewed"
+                                :initial-load="true"
+                            >
+                                <u-select-item :value="false">{{ $tt('notViewed') }}</u-select-item>
+                                <u-select-item :value="true">{{ $tt('viewed') }}</u-select-item>
+                            </u-select>
+                        </u-form-item>
                     </u-form>
                 </u-linear-layout>
                 <u-linear-layout>
@@ -80,6 +92,13 @@
 
 <script>
 import i18nMixin from '../../mixins/i18n';
+const initialFilter = {
+    procDefKey: '',
+    procInstStartTimeAfter: '',
+    procInstStartTimeBefore: '',
+    procInstInitiator: '',
+};
+
 export default {
     name: 'u-process-myprocess',
     mixins: [i18nMixin('u-process-myprocess')],
@@ -94,12 +113,7 @@ export default {
         return {
             list: [],
             tabValue: 'pendingTasks',
-            filter: {
-                procDefKey: '',
-                procInstStartTimeAfter: '',
-                procInstStartTimeBefore: '',
-                procInstStartBy: '',
-            },
+            filter: { ...initialFilter },
         };
     },
     methods: {
@@ -108,6 +122,7 @@ export default {
                 pendingTasks: 'getMyPendingTasks',
                 processedTasks: 'getMyCompletedTasks',
                 intiationProcess: 'getMyInitiatedTasks',
+                carbonCopyTasks: 'getMyCCTasks',
             };
             if (this.$processV2) {
                 const body = {
@@ -120,6 +135,9 @@ export default {
                         body[key] = this.filter[key];
                     }
                 });
+                if (this.tabValue === 'carbonCopyTasks') {
+                    body.viewed = this.filter.viewed;
+                }
                 const result = await this.$processV2.getMyTaskList({
                     path: {
                         taskType: typeMap[this.tabValue],
@@ -135,9 +153,10 @@ export default {
             }
         },
         onSelectTab() {
-            Object.keys(this.filter).forEach((key) => {
-                this.filter[key] = '';
-            });
+            this.filter = { ...initialFilter };
+            if (this.tabValue === 'carbonCopyTasks') {
+                this.filter.viewed = false;
+            }
             this.$refs.tableview.reload();
         },
         async getAllProcessDefList() {
@@ -154,6 +173,13 @@ export default {
         },
         async goToDetail(item) {
             if (this.$processV2) {
+                if (this.tabValue === 'carbonCopyTasks') {
+                    await this.$processV2.viewCCTask({
+                        body: {
+                            taskId: item.taskId,
+                        },
+                    });
+                }
                 const result = await this.$processV2.getTaskDestinationUrl({
                     body: {
                         taskId: item.taskId,

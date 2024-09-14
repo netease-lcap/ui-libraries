@@ -158,6 +158,10 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
+    popupOpened: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -168,7 +172,7 @@ export default createComponent({
       tempValue: currentValue,
 
       subtitle: '',
-      popupShown: false,
+      popupShown: this.popupOpened,
       defaultMonthForSelect: null,
     };
   },
@@ -204,10 +208,18 @@ export default createComponent({
     defaultMonthForSelectCom() {
       return this.defaultMonthForSelect;
     },
+
+    isDesignerNew() {
+      return this.$env && this.$env.VUE_APP_DESIGNER_NEW;
+    },
   },
 
   watch: {
     popupShown: 'init',
+
+    popupOpened(val) {
+      this.popupShown = val;
+    },
 
     type() {
       this.reset();
@@ -529,7 +541,7 @@ export default createComponent({
 
     genFooter() {
       let bottomSlot = this.slots('picker-bottom');
-      if (this.inDesigner()) {
+      if (this.inDesigner() && !this.isDesignerNew) {
         if (!bottomSlot) {
           bottomSlot = <EmptyCol></EmptyCol>;
         }
@@ -551,7 +563,7 @@ export default createComponent({
     genTitleForNew() {
       let topSlot = this.slots('picker-top');
       let titleSlot = this.slots('pannel-title');
-      if (this.inDesigner()) {
+      if (this.inDesigner() && !this.isDesignerNew) {
         if (!topSlot) {
           topSlot = <EmptyCol></EmptyCol>;
         }
@@ -581,7 +593,7 @@ export default createComponent({
     genCalendar() {
       return (
         <div class={bem([this.isNew && 'new'])}>
-          {this.inDesigner() && (
+          {this.inDesigner() && !this.isDesignerNew && (
             <div class={bem('designer-close-button')} vusion-click-enabled="true" onClick={this.designerClose}>
               点击关闭
             </div>

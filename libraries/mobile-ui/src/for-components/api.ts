@@ -62,12 +62,12 @@ namespace nasl.ui {
     })
     equalWidth: nasl.core.Boolean = true;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '内容自定义'
     })
     slotDefault: (current?: Current<T>) => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '内容自定义'
     })
     slotItem: (current: Current<T>) => Array<ViewComponent>;

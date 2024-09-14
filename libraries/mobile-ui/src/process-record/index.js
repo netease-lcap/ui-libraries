@@ -89,6 +89,14 @@ export default createComponent({
       return result?.data;
     },
 
+    getUserName(item) {
+      const { nodeOperation, userName } = item;
+      if (['cc', 'end'].includes(nodeOperation) && userName === 'SYSTEM_USER') {
+        return '系统';
+      }
+      return userName || '-';
+    },
+
     renderList() {
       return (
         <List
@@ -115,7 +123,7 @@ export default createComponent({
                 </div>
                 <div class={bem('card-line')}>
                   <div class={bem('card-label')}>{t('assignee')}</div>
-                  <div class={bem('card-content')}>{userName || '-'}</div>
+                  <div class={bem('card-content')}>{this.getUserName(item)}</div>
                 </div>
                 <div class={bem('card-line')}>
                   <div class={bem('card-label')}>{t('time')}</div>
@@ -178,7 +186,7 @@ export default createComponent({
                     <div class={bem('card-title')}>{nodeTitle}</div>
                     <div class={bem('card-line')}>
                       <div class={bem('card-label')}>{t('assignee')}</div>
-                      <div class={bem('card-content')}>{userName || '-'}</div>
+                      <div class={bem('card-content')}>{this.getUserName(item)}</div>
                     </div>
                     <div class={bem('card-line')}>
                       <div class={bem('card-label')}>{t('time')}</div>

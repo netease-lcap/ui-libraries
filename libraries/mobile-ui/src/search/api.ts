@@ -197,13 +197,13 @@ namespace nasl.ui {
     })
     onClear: (event: nasl.ui.BaseEvent) => void;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '内容'
     })
     slotDefault: () => Array<ViewComponent>;
 
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '内容'
     })
     slotAction: () => Array<ViewComponent>;

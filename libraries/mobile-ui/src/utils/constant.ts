@@ -9,3 +9,7 @@ export const BORDER_BOTTOM = `${BORDER}--bottom`;
 export const BORDER_SURROUND = `${BORDER}--surround`;
 export const BORDER_TOP_BOTTOM = `${BORDER}--top-bottom`;
 export const BORDER_UNSET_TOP_BOTTOM = `${BORDER}-unset--top-bottom`;
+
+// ide empty
+export const IDE_EMPTY_STRUCTURED = 'EmptyStructured';
+export const IDE_EMPTY_PROPS_TYPE = 'add-sub';

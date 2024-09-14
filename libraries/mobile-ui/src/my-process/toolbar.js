@@ -24,7 +24,14 @@ export default createComponent({
       processPopupValue: false,
       initiatorPopupValue: false,
       startTimePopupValue: false,
+      viewedStatePopupValue: false,
     };
+  },
+
+  computed: {
+    colCount() {
+      return this.tab === 'myCCTaskList' ? 6 : 8;
+    }
   },
 
   methods: {
@@ -40,6 +47,10 @@ export default createComponent({
         this.allInitiator = data;
         this.$refs.initiatorPicker.togglePopup();
       });
+    },
+
+    showViewedStatePicker() {
+      this.$refs.viewedStatePicker.togglePopup();
     },
 
     async getAllProcess() {
@@ -76,6 +87,12 @@ export default createComponent({
       }, this.tab);
     },
 
+    onViewedStatePickerChange(value) {
+      this.$emit('change', {
+        viewed: value,
+      }, this.tab);
+    },
+
     onStartTimePickerChange(value) {
       const { start, end } = value;
       this.$emit('change', {
@@ -89,7 +106,7 @@ export default createComponent({
     return (
       <div>
         <Row class={bem()} align="center">
-          <Col span={8}>
+          <Col span={this.colCount}>
             <div class={bem('button')} onClick={this.showProcessPicker}>
               {t('process')}
               <Iconv
@@ -102,7 +119,7 @@ export default createComponent({
           </Col>
 
           {this.tab !== 'myLaunchList' ? (
-            <Col span={8}>
+            <Col span={this.colCount}>
               <div class={bem('button')} onClick={this.showInitiatorPicker}>
                 {t('initiator')}
                 <Iconv
@@ -115,7 +132,7 @@ export default createComponent({
             </Col>
           ) : null}
 
-          <Col span={8}>
+          <Col span={this.colCount}>
             <div
               class={bem('button')}
               onClick={() => {
@@ -131,6 +148,23 @@ export default createComponent({
               ></Iconv>
             </div>
           </Col>
+
+          {this.tab === 'myCCTaskList' ? (
+            <Col span={this.colCount}>
+              <div
+                class={bem('button')}
+                onClick={this.showViewedStatePicker}
+              >
+                {t('viewedState')}
+                <Iconv
+                  class={bem('button-icon')}
+                  name="bottom-triangle"
+                  size={12}
+                  icotype="only"
+                ></Iconv>
+              </div>
+            </Col>
+          ) : null}
         </Row>
         {/* 选择器--流程 */}
         <Picker
@@ -171,6 +205,22 @@ export default createComponent({
           unit="date"
           onConfirm={this.onStartTimePickerChange}
           title={t('startTime')}
+          closeOnClickOverlay
+        />
+        {/* 选择器--查看状态 */}
+        <Picker
+          vShow={false}
+          ref="viewedStatePicker"
+          dataSource={[
+            { title: '全部', value: null },
+            { title: t('notViewed'), value: false },
+            { title: t('viewed'), value: true },
+          ]}
+          valueField="value"
+          textField="title"
+          onConfirm={this.onViewedStatePickerChange}
+          showToolbar
+          title={t('viewedState')}
           closeOnClickOverlay
         />
       </div>

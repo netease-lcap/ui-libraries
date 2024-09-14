@@ -367,29 +367,33 @@ namespace nasl.ui {
     // })
     // slotDefault: () => Array<VanPickerActionSlot>;
     @Slot({
-      title: 'option'
+      title: '组件插槽',
+      description: 'option',
     })
     slotOption: (current: Current<T>) => Array<ViewComponent>;
 
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义标题',
     })
     slotTitle: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义',
     })
+    'slot-pannel-title': () => Array<ViewComponent>;
     slotPannelTitle: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义选择器顶部内容',
     })
+    'slot-picker-top': () => Array<ViewComponent>;
     slotPickerTop: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义选择器底部内容',
     })
+    'slot-picker-bottom': () => Array<ViewComponent>;
     slotPickerBottom: () => Array<ViewComponent>;
   }
 }

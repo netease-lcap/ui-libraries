@@ -428,20 +428,20 @@ namespace nasl.ui {
     onCancel: (event: nasl.ui.BaseEvent) => void;
 
     @Slot({
-      title: '',
-      description: ''
+      title: '组件插槽',
+      description: '标题'
     })
     slotTitle: () => Array<ViewComponent>;
 
     @Slot({
-      title: '',
-      description: ''
+      title: '组件插槽',
+      description: '顶部'
     })
     slotTop: () => Array<ViewComponent>;
 
     @Slot({
-      title: '',
-      description: ''
+      title: '组件插槽',
+      description: '底部'
     })
     slotBottom: () => Array<ViewComponent>;
 
@@ -456,19 +456,22 @@ namespace nasl.ui {
     // slotDefault: () => Array<VanPickerActionSlot>;
 
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义',
     })
+    'slot-pannel-title': () => Array<ViewComponent>;
     slotPannelTitle: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义选择器顶部内容',
     })
+    'slot-picker-top': () => Array<ViewComponent>;
     slotPickerTop: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义选择器底部内容',
     })
+    'slot-picker-bottom': () => Array<ViewComponent>;
     slotPickerBottom: () => Array<ViewComponent>;
   }
   @Component({
@@ -495,7 +498,7 @@ namespace nasl.ui {
     targetMethod: 'confirm' | 'cancel';
 
     @Slot({
-      title: '',
+      title: '组件插槽',
       description: ''
     })
     slotDefault: () => Array<ViewComponent>;
@@ -526,7 +529,7 @@ namespace nasl.ui {
     targetMethod: 'confirm' | 'cancel' | 'none';
 
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '内容自定义',
     })
     slotDefault: () => Array<ViewComponent>;

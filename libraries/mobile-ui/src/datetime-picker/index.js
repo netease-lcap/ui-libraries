@@ -52,6 +52,10 @@ export default createComponent({
     visible: {
       type: Boolean,
     },
+    popupOpened: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     const val = this.value;
@@ -59,7 +63,7 @@ export default createComponent({
     const end = this.endValue;
 
     return {
-      popupVisible: false,
+      popupVisible: this.popupOpened,
 
       currentValue: val,
       currentStartValue: start,
@@ -93,8 +97,17 @@ export default createComponent({
 
       return this.value;
     },
+
+    isDesignerNew() {
+      return this.$env && this.$env.VUE_APP_DESIGNER_NEW;
+    },
   },
   watch: {
+    // 用于设计器模式
+    popupOpened(val) {
+      this.popupVisible = val;
+    },
+
     visible(val) {
       // 设计器模式下不触发
       if (this.inDesigner()) return;
@@ -271,7 +284,7 @@ export default createComponent({
       if (this.isNew) {
         let topSlot = this.slots('picker-top');
         let titleSlot = this.slots('pannel-title');
-        if (this.inDesigner()) {
+        if (this.inDesigner() && !this.isDesignerNew) {
           if (!topSlot) {
             topSlot = <EmptyCol></EmptyCol>;
           }
@@ -379,7 +392,7 @@ export default createComponent({
       if (!this.isNew) return null;
 
       let bottomSlot = this.slots('picker-bottom');
-      if (this.inDesigner()) {
+      if (this.inDesigner() && !this.isDesignerNew) {
         if (!bottomSlot) {
           bottomSlot = <EmptyCol></EmptyCol>;
         }
@@ -458,7 +471,7 @@ export default createComponent({
           // onClickOverlay={this.togglePopup}
         >
           <div class={bem(this.isNew && 'content-wrapper')}>
-            {this.inDesigner() && (
+            {this.inDesigner() && !this.isDesignerNew && (
               <div class={bem('designer-close-button')} vusion-click-enabled="true" onClick={this.designerClose}>
                 点击关闭
               </div>

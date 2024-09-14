@@ -1,17 +1,14 @@
 <!--  -->
 <template>
-  <demo-section>
-    <van-grid-view
-      style="height: 600px;"
-      :data-source="load"
-      pageable="load-more"
-      :iffall="true"
-    >
-      <template #item="scope">
-        <van-cell :title="scope.item.text" isLink></van-cell>
-      </template>
-    </van-grid-view>
-  </demo-section>
+  <van-grid-view
+    style="height: auto;"
+    :data-source="load"
+    pageable="auto-more"
+  >
+    <template #item="scope">
+      <van-cell :title="scope.item.text" isLink></van-cell>
+    </template>
+  </van-grid-view>
 </template>
 
 <script>

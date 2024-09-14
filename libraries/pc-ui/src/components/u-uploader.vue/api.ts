@@ -68,6 +68,14 @@ namespace nasl.ui {
 
         @Prop({
             group: '数据属性',
+            title: '存储方式',
+            description: "",
+            bindHide: true,
+        })
+        fileConnectionGroup: () => any;
+
+        @Prop({
+            group: '数据属性',
             title: '上传地址',
             description: '上传的 URL 地址',
             docDescription: '文件上传的URL地址，如/upload',

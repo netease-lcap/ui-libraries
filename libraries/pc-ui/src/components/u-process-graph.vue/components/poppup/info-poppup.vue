@@ -3,7 +3,7 @@
         <div :class="$style.root" mini>
             <div :class="$style.header">
                 <div>
-                    {{ title }}  
+                    {{ title }}
                 </div>
                 <div :class="$style.status" :status="status">
                     {{ status }}
@@ -13,14 +13,14 @@
                 <div v-for="info in completeInfo" :class="$style.info">
                     <div :class="$style.infoHeader">
                         <div>
-                            处理人：{{info.assignee || '-'}}
+                            {{ getPersonalTitle(node.type, info) }}
                         </div>
                         <div :class="$style.infoStatus" :completed="info.completed">
-                            {{ info.completed ? '已处理' : '未处理'}}
+                            {{ getStatusTitle(node.type, info) }}
                         </div>
                     </div>
                     <div :class="$style.infoBody">
-                        处理时间：{{info.completeTime || '-'}}
+                        {{ getTimeTitle(node.type, info) }}
                     </div>
                     <div :class="$style.infoBody" v-if="node.current && !info.assignee">
                         处理候选人：{{(info.candidates || []).slice(0, 10).join('、') || '-'}}
@@ -36,7 +36,7 @@ export default {
     props: {
         meta: Object,
     },
-    computed: {    
+    computed: {
         node() {
             return this.meta.target;
         },
@@ -44,12 +44,35 @@ export default {
             return this.node.title || this.node.name;
         },
         status() {
-            return this.node.current ? '处理中' : this.node.completed ? '已处理' : '未处理';
+            return this.node.current ? '处理中' : this.getStatusTitle(this.node.type, this.node);
         },
         completeInfo() {
             return this.node.completeInfos;
         }
     },
+    methods: {
+        getPersonalTitle(type, info) {
+            const person = type === 'CCTask' ? '被抄送人' : '处理人';
+            let assignee;
+            if (type === 'CCTask') {
+                assignee = (info.candidates || []).slice(0, 10).join('、') || '-';
+            } else {
+                assignee = info.assignee || '-';
+            }
+            return `${person}：${assignee}`;
+        },
+        getTimeTitle(type, info) {
+            const name = type === 'CCTask' ? '抄送时间' : '处理时间';
+            return `${name}：${info.completeTime || '-'}`
+        },
+        getStatusTitle(type, info) {
+            console.log('type, info',type, info)
+            if (type === 'CCTask') {
+                return '已抄送';
+            }
+            return info.completed ? '已处理' : '未处理';
+        }
+    }
 };
 </script>
 
@@ -69,26 +92,26 @@ export default {
     background: #fff;
     color: #666666;
     border-radius: 4px;
-    
+
     position: relative;
     box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.08);
 }
-.header{ 
+.header{
     font-size: 14px;
     line-height: 22px;
     color: #333333;
     font-weight: 500;
-    display: flex; 
+    display: flex;
     min-width: 244px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 8px 16px;
     column-gap: 12px;
-    
+
 }
 .status{
-   
+
     color: #fff;
     font-size: 12px;
     line-height: 20px;
@@ -98,7 +121,8 @@ export default {
 .status[status="处理中"] {
     background-color: #337EFF;
 }
-.status[status="已处理"] {
+.status[status="已处理"],
+.status[status="已抄送"] {
     background-color: #26BD71;
 }
 .status[status="未处理"] {

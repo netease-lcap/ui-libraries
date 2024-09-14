@@ -107,6 +107,7 @@ export { default as VanTabs } from '../../src/tabs';
 export { default as VanTag } from '../../src/tag';
 export { default as VanText } from '../../src/text';
 export { default as VanToast } from '../../src/toast';
+export { VueToastDesigner } from '../../src/toast';
 export { default as VanTreeSelect } from '../../src/tree-select';
 export { default as VanUploader } from '../../src/uploader';
 export { default as VanForComponents } from '../../src/for-components';

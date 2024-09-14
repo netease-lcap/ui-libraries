@@ -1,6 +1,6 @@
 import { sync } from '@lcap/vue2-utils';
 import { createNamespace } from '../utils';
-import { BORDER_TOP_BOTTOM } from '../utils/constant';
+import { BORDER_TOP_BOTTOM, IDE_EMPTY_PROPS_TYPE, IDE_EMPTY_STRUCTURED } from '../utils/constant';
 import { callInterceptor } from '../utils/interceptor';
 import { ParentMixin } from '../mixins/relation';
 
@@ -117,13 +117,30 @@ export default createComponent({
             bem({
               unfit: !this.fit,
               fixed: this.fixed,
+              designerEmpty: this.isDesignerEmptyStructured(),
             }),
           ]}
         >
           {this.slots()}
         </div>
       );
-    }
+    },
+
+    isDesignerEmptyStructured() {
+      if (!this.ifDesigner()) {
+        return false;
+      }
+      const slotsList = this.slots();
+      return slotsList?.length === 1 ? !!slotsList.find((s, _) => {
+        const { componentOptions } = s || {};
+        const { propsData, tag } = componentOptions || {};
+        return !!(propsData.type === IDE_EMPTY_PROPS_TYPE && tag === IDE_EMPTY_STRUCTURED);
+      }) : false;
+    },
+
+    ifDesigner() {
+      return this.$env && this.$env.VUE_APP_DESIGNER;
+    },
   },
 
   render() {

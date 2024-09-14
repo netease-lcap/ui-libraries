@@ -193,12 +193,12 @@ namespace nasl.ui {
     })
     onClose: (event: nasl.ui.BaseEvent) => void;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '自定义弹出的内容。'
     })
     slotDefault: () => Array<ViewComponent>;
     @Slot({
-      title: 'undefined',
+      title: '组件插槽',
       description: '弹出层触发节点。'
     })
     slotReference: () => Array<ViewComponent>;

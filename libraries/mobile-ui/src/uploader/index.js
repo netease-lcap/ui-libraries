@@ -129,6 +129,10 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
+    fileConnectionGroup: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -700,6 +704,11 @@ export default createComponent({
     },
 
     handleFileName(url) {
+      const newFileNameMatch = url.match(/[?&]fileName=([^&]+)/);
+      if (newFileNameMatch) {
+        return newFileNameMatch[1];
+      }
+
       const match = url.match(/\/([^/]+)$/);
       return match ? match[1] : null;
     },
@@ -719,7 +728,9 @@ export default createComponent({
           headers['lcap-ttl'] = this.ttlValue;
         }
       }
-
+      if (this.fileConnectionGroup) {
+        headers['file-connection-group'] = this.fileConnectionGroup;
+      }
       if (window.appInfo && window.appInfo.domainName)
         headers.DomainName = window.appInfo.domainName;
       const formData = {

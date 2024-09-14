@@ -121,6 +121,9 @@ function Search(
     if (/vusion/.test(key)) {
       fieldData.attrs && fieldData.attrs[key] && delete fieldData?.attrs[key];
     }
+    if (/data-/.test(key)) {
+      fieldData.attrs && fieldData.attrs[key] && delete fieldData?.attrs[key];
+    }
   });
   return (
     <div

@@ -29,6 +29,7 @@ function getComponent(type, node) {
         case 'ApprovalTask':
         case 'ServiceTask':
         case 'SubmitTask':
+        case 'CCTask':
             return taskNodeWrapped;
         case 'ExclusiveGateway':
         case 'ParallelGateway':
