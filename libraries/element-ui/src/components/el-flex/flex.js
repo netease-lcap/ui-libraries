@@ -69,9 +69,27 @@ export default {
       alignItems: this.alignment,
       flexWrap: this.wrap ? 'wrap' : 'nowrap',
       gap: `${this.gutter}px`,
-    } : {
-      // '--el-flex-space-base': `${this.gutter}px`,
-    };
+    } : {};
+
+    let childNodes = [];
+    if (this.$scopedSlots.default) {
+      childNodes = this.$scopedSlots.default();
+    }
+    if (this.mode === 'block') {
+      childNodes = childNodes.map((childNode, index) => {
+        if (!childNode.isComment && childNode.data) {
+          childNode.data.staticStyle = childNode.data.staticStyle || {};
+          if (index !== childNodes.length - 1) {
+            if (this.direction === 'horizontal') {
+              childNode.data.staticStyle.marginRight = `${this.gutter}px`;
+            } else {
+              childNode.data.staticStyle.marginBottom = `${this.gutter}px`;
+            }
+          }
+        }
+        return childNode;
+      });
+    }
 
     return h('div', {
       style,
@@ -83,7 +101,7 @@ export default {
         'element-loading-spinner': 'el-icon-loading',
       },
     }, [
-      this.$scopedSlots.default ? this.$scopedSlots.default() : null,
+      childNodes,
       this.showLoading ? h('div', {
         class: styles.loadmask,
       }, [

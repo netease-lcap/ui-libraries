@@ -21,17 +21,17 @@ export default {
 export const Default = {
   name: '单行排布',
   render: () => ({
-    template: '<el-flex direction="horizontal"></el-flex>',
+    template: '<el-flex direction="horizontal" mode="block"></el-flex>',
   }),
 };
 
 export const MultiLine = {
   name: '多行排布',
   render: () => ({
-    template: `<el-flex direction="vertical">
-    <el-flex :wrap="true" style="width: 100%">
+    template: `<el-flex direction="vertical" mode="block">
+    <el-flex direction="horizontal" mode="block">
     </el-flex>
-    <el-flex :wrap="true" style="width: 100%">
+    <el-flex direction="horizontal" mode="block">
     </el-flex>
     </el-flex>`,
   }),
