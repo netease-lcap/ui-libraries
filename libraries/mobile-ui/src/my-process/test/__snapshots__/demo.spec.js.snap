@@ -10,6 +10,7 @@ exports[`renders demo correctly 1`] = `
             <div role="tab" aria-selected="true" class="van-tab van-tab--active" undefined="" vusion-slot-name="title"><span vusion-slot-name-edit="title" class="van-tab__text van-tab__text--ellipsis">我的待办</span></div>
             <div role="tab" class="van-tab" undefined="" vusion-slot-name="title"><span vusion-slot-name-edit="title" class="van-tab__text van-tab__text--ellipsis">我的已办</span></div>
             <div role="tab" class="van-tab" undefined="" vusion-slot-name="title"><span vusion-slot-name-edit="title" class="van-tab__text van-tab__text--ellipsis">我的发起</span></div>
+            <div role="tab" class="van-tab" undefined="" vusion-slot-name="title"><span vusion-slot-name-edit="title" class="van-tab__text van-tab__text--ellipsis">抄送我的</span></div>
             <div class="van-tabs__line" style="transform: translateX(0px) translateX(-50%);"></div>
           </div>
         </div>
@@ -54,6 +55,13 @@ exports[`renders demo correctly 1`] = `
                 <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-cellson--insel van-field">
                   <div class="van-cellson__value van-field__value">
                     <div class="van-field__body"><input type="text" readonly="readonly" class="van-field__control van-field__control--right"></div>
+                  </div>
+                </div>
+              </div>
+              <div vusion-click-enabled="true" class="van-pickerson__wrap" style="display: none;">
+                <div label-layout="inline" noallow="" class="van-cellson van-cellson--center van-cellson--insel van-field">
+                  <div class="van-cellson__value van-field__value">
+                    <div class="van-field__body"><input type="text" readonly="readonly" placeholder="请选择" class="van-field__control van-field__control--right"></div>
                   </div>
                 </div>
               </div>
@@ -150,6 +158,9 @@ exports[`renders demo correctly 1`] = `
                 </div>
               </div>
             </div>
+          </div>
+          <div role="tabpanel" vusion-slot-name="default" class="van-tab__pane" style="display: none;">
+            <!---->
           </div>
           <div role="tabpanel" vusion-slot-name="default" class="van-tab__pane" style="display: none;">
             <!---->

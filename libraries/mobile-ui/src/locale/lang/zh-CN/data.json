@@ -50,10 +50,10 @@
   "vanCopy_fail": "无复制对象",
   "vanGridView_loading": "加载中",
 
-
   "vanMyProcess_todo": "我的待办",
   "vanMyProcess_done": "我的已办",
   "vanMyProcess_initiate": "我的发起",
+  "vanMyProcess_carbonCopy": "抄送我的",
   "vanMyProcess_type": "流程类型",
   "vanMyProcess_currentNode": "当前节点",
   "vanMyProcess_currentAssignee": "当前处理人",
@@ -63,6 +63,9 @@
   "vanMyProcessToolbar_process": "流程",
   "vanMyProcessToolbar_initiator": "发起人",
   "vanMyProcessToolbar_startTime": "发起时间",
+  "vanMyProcessToolbar_viewedState": "查看状态",
+  "vanMyProcessToolbar_notViewed": "未查看",
+  "vanMyProcessToolbar_viewed": "已查看",
 
   "vanProcessButton_submit": "提交",
   "vanProcessButton_reject": "回退",

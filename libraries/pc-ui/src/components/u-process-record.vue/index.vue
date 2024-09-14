@@ -16,7 +16,7 @@
                                 <div :class="$style.label">{{ $tt('comment') }}</div>
                             </div>
                             <div :class="$style.content">
-                                <div :class="$style.value">{{ current.item.userName || '-' }}</div>
+                                <div :class="$style.value">{{ getUserName(current.item) }}</div>
                                 <div :class="$style.value">{{ dateFormatter(current.item.recordCreatedTime) || '-' }}</div>
                                 <div :class="$style.value">
                                     <span :class="$style.statuslabel" :status="current.item.nodeOperation">{{ current.item.nodeOperationDisplayText || '-' }}</span>
@@ -49,7 +49,7 @@
                     <template #cell="current"> {{ current.item.nodeTitle || '-' }}</template>
                 </u-table-view-column>
                 <u-table-view-column :title="$tt('assignee')">
-                    <template #cell="current"> {{ current.item.userName || '-' }}</template>
+                    <template #cell="current"> {{ getUserName(current.item) }}</template>
                 </u-table-view-column>
                 <u-table-view-column :title="$tt('recordCreateTime')">
                     <template #cell="current"> {{ dateFormatter(current.item.recordCreatedTime) }}</template>
@@ -135,7 +135,7 @@ export default {
         async loadList() {
             this.currentLoading = true;
             if (this.$processV2) {
-                
+
                 try {
                     const result = await this.$processV2.getProcInstRecords({
                         body: {
@@ -182,7 +182,14 @@ export default {
                 return 'success';
             }
             return 'normal';
-        }
+        },
+        getUserName(item) {
+            const { nodeOperation, userName } = item;
+            if (['cc', 'end'].includes(nodeOperation) && userName === 'SYSTEM_USER') {
+                return '系统';
+            }
+            return userName || '-';
+        },
     },
 };
 </script>
