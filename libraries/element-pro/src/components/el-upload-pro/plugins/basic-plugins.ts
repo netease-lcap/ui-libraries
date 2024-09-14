@@ -290,9 +290,14 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
 
     const beforeUpload: ElUploadProps['beforeUpload'] = (file: UploadFile) => {
       const accept = props.get<string>('accept');
+      const beforeUploadFn = props.get('beforeUpload');
       const enable = checkAccept(file, accept);
       if (!enable) {
         errorMessage.value = `文件类型不匹配，请上传${accept}的文件类型`;
+      }
+
+      if (enable && isFunction(beforeUploadFn)) {
+        return !!beforeUploadFn(file);
       }
       return enable;
     };
