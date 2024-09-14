@@ -64,7 +64,7 @@
    * @desc 小按钮字体大小
    * @type font-size
    */
-  --button-small-font-size: 12px;
+  --button-small-font-size: 14px;
 
   /**
    * @desc 小按钮圆角半径
@@ -76,7 +76,7 @@
    * @desc 小按钮垂直内边距
    * @type padding
    */
-  --button-small-padding-vertical: 9px;
+  --button-small-padding-vertical: 8px;
 
   /**
    * @desc 小按钮水平内边距
