@@ -314,6 +314,28 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       beforeUpload,
       tips: errorMessage,
       status: computed(() => (errorMessage.value ? 'error' : 'default')),
+      uploadButton: (h, context: { disabled: boolean; uploading: boolean; uploadFiles: () => void; uploadText: string }) => {
+        return h('el-button', {
+          attrs: {
+            loading: context.uploading,
+            disabled: context.disabled || context.uploading,
+            type: 'primary',
+          },
+          on: {
+            click: () => context.uploadFiles?.(),
+          },
+        }, context.uploadText);
+      },
+      cancelUploadButton: (h, context: { disabled: boolean; cancelUploadText: string; cancelUpload: (event: any) => void }) => {
+        return h('el-button', {
+          attrs: {
+            disabled: context.disabled,
+          },
+          on: {
+            click: (e) => context.cancelUpload?.({ e }),
+          },
+        }, context.cancelUploadText);
+      },
       onChange: (list, context: UploadChangeContext) => {
         errorMessage.value = '';
         const onChange = props.get<UploadProps['onChange']>('onChange') || (() => {});

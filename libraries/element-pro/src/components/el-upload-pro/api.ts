@@ -4,7 +4,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 10,
     ideusage: {
-      idetype: 'element',
+      idetype: 'container',
     },
   })
   @Component({
@@ -668,13 +668,6 @@ namespace nasl.ui {
     }) => any;
 
     // @Slot({
-    //   title: '取消上传按钮',
-    //   description:
-    //     '批量文件/图片上传，`autoUpload=false` 场景下，透传“取消上传”按钮属性。',
-    // })
-    // slotCancelUploadButton: () => Array<ViewComponent>;
-
-    // @Slot({
     //   title: '上传元素',
     //   description:
     //     '非拖拽场景，指触发上传的元素，如：“选择文件”。如果是拖拽场景，则是指拖拽区域。',
@@ -694,17 +687,10 @@ namespace nasl.ui {
     // })
     // slotFileListDisplay: () => Array<ViewComponent>;
 
-    // @Slot({
-    //   title: '触发上传的元素',
-    //   description: '触发上传的元素，`files` 指本次显示的全部文件。',
-    // })
-    // slotTrigger: () => Array<ViewComponent>;
-
-    // @Slot({
-    //   title: '上传按钮',
-    //   description:
-    //     '批量文件/图片上传，`autoUpload=false` 场景下，透传“点击上传”按钮属性。',
-    // })
-    // slotUploadButton: () => Array<ViewComponent>;
+    @Slot({
+      title: '触发上传的元素',
+      description: '触发上传的元素，`files` 指本次显示的全部文件。',
+    })
+    slotTrigger: (current: { disabled: nasl.core.Boolean }) => Array<ViewComponent>;
   }
 }

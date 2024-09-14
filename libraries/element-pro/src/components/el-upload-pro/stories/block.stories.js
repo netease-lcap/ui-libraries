@@ -23,27 +23,45 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-upload-pro converter="simple" urlField="filePath" url="/upload" sizeLimitStr="50MB"></el-upload-pro>',
+    template: `<el-upload-pro converter="simple" urlField="filePath" url="/upload" sizeLimitStr="50MB">
+      <template #trigger>
+        <el-button icon="upload" type="primary" text="点击上传"></el-button>
+      </template>
+    </el-upload-pro>`,
   }),
 };
 
 export const Image = {
   name: '图片上传',
   render: () => ({
-    template: '<el-upload-pro theme="image" accept=".png,.jpg,.jpeg,.gif,.bmp" converter="simple" urlField="filePath" url="/upload" sizeLimitStr="50MB"></el-upload-pro>',
+    template: `
+      <el-upload-pro theme="image" accept=".png,.jpg,.jpeg,.gif,.bmp" converter="simple" urlField="filePath" url="/upload" sizeLimitStr="50MB">
+        <template #trigger="current">
+          <el-button icon="upload" :disabled="current.disabled" type="primary" text="点击上传"></el-button>
+        </template>
+      </el-upload-pro>
+    `,
   }),
 };
 
 export const DragUpload = {
   name: '拖拽上传',
   render: () => ({
-    template: '<el-upload-pro theme="file" :draggable="true" converter="simple" urlField="filePath" url="/upload" sizeLimitStr="50MB"></el-upload-pro>',
+    template: `<el-upload-pro theme="file" :draggable="true" converter="simple" urlField="filePath" url="/upload" sizeLimitStr="50MB">
+     <template #trigger="current">
+        <el-button icon="upload" :disabled="current.disabled" type="primary" text="点击上传"></el-button>
+      </template>
+    </el-upload-pro>`,
   }),
 };
 
 export const ImageDragUpload = {
   name: '批量上传文件',
   render: () => ({
-    template: '<el-upload-pro theme="file-flow" :autoUpload="false" :multiple="true" :draggable="true" converter="simple" urlField="filePath" url="/upload" sizeLimitStr="50MB"></el-upload-pro>',
+    template: `<el-upload-pro theme="file-flow" :autoUpload="false" :multiple="true" :draggable="true" converter="simple" urlField="filePath" url="/upload" sizeLimitStr="50MB">
+      <template #trigger="current">
+        <el-button icon="upload" :disabled="current.disabled" type="primary" text="点击上传"></el-button>
+      </template>
+    </el-upload-pro>`,
   }),
 };
