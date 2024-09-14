@@ -297,7 +297,7 @@
         "ideusage": {
             "idetype": "element",
             "editable": "text",
-            "useFxOrEg":{"property": "text"},
+            "useFxOrEg":{"property": "text","displayAsAttr":true},
             "translateBindingProperty": ["text"]
         }
     },
