@@ -127,9 +127,10 @@ export const useTable = {
       bordered,
       [$ref]: {
         reload() {
+          current.value = 1;
           if (_.isFunction(onLoadData)) {
             onLoadData?.({
-              page: 1,
+              page: current.value,
               size: pageSize.value,
               sort: sorting.value?.field,
               order: sorting.value?.order,
