@@ -129,7 +129,7 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
-    file_connection_group: {
+    fileConnectionGroup: {
       type: String,
       default: '',
     },
@@ -728,8 +728,8 @@ export default createComponent({
           headers['lcap-ttl'] = this.ttlValue;
         }
       }
-      if (this.file_connection_group) {
-        headers['file-connection-group'] = this.file_connection_group;
+      if (this.fileConnectionGroup) {
+        headers['file-connection-group'] = this.fileConnectionGroup;
       }
       if (window.appInfo && window.appInfo.domainName)
         headers.DomainName = window.appInfo.domainName;
