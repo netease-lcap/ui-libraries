@@ -3,6 +3,7 @@
  */
 :root {
   /**
+   * @hidden
    * @desc 时间选择器宽度
    * @type size
    */
@@ -15,12 +16,14 @@
   --el-time-picker-panel-width: 280px;
 
   /**
+   * @hidden
    * @desc 时间选择器输入框高度
    * @type size
    */
   --el-time-picker-input-height: var(--el-comp-size-xs);
 
   /**
+   * @hidden
    * @desc 时间选择器容器顶部位置
    * @type size
    */
@@ -45,12 +48,14 @@
   --el-time-picker-panel-item-height: var(--el-comp-size-xs);
 
   /**
+   * @hidden
    * @desc 时间选择器输入项宽度
    * @type size
    */
   --el-time-picker-input-item-input-width: 28px;
 
   /**
+   * @hidden
    * @desc 时间选择器输入项（上下午）宽度
    * @type size
    */
@@ -63,36 +68,42 @@
   --el-time-picker-background-color-common: transparent;
 
   /**
+   * @hidden
    * @desc 时间选择器输入框悬停边框颜色
    * @type color
    */
   --el-time-picker-input-border-color-hover: var(--el-brand-color);
 
   /**
+   * @hidden
    * @desc 时间选择器输入框文字颜色
    * @type color
    */
   --el-time-picker-input-text-color: var(--el-text-color-primary);
 
   /**
+   * @hidden
    * @desc 时间选择器输入框禁用颜色
    * @type color
    */
   --el-time-picker-input-color-disabled: var(--el-text-color-disabled);
 
   /**
+   * @hidden
    * @desc 时间选择器输入框聚焦颜色
    * @type color
    */
   --el-time-picker-input-color-focused: var(--el-brand-color);
 
   /**
+   * @hidden
    * @desc 时间选择器面板输入框颜色
    * @type color
    */
   --el-time-picker-panel-input-color: var(--el-text-color-primary);
 
   /**
+   * @hidden
    * @desc 时间选择器面板输入框占位符颜色
    * @type color
    */
@@ -129,24 +140,28 @@
   --el-time-picker-panel-item-background-color-active: var(--el-bg-color-container-hover);
 
   /**
+   * @hidden
    * @desc 时间选择器面板下拉阴影
    * @type shadow
    */
   --el-time-picker-panel-dropdown-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
 
   /**
+   * @hidden
    * @desc 时间选择器输入框边框
    * @type border
    */
   --el-time-picker-input-border: 1px solid var(--el-border-level-2-color);
 
   /**
+   * @hidden
    * @desc 时间选择器输入框激活边框
    * @type border
    */
   --el-time-picker-input-border-active: 1px solid var(--el-brand-color);
 
   /**
+   * @hidden
    * @desc 时间选择器输入框禁用边框
    * @type border
    */
@@ -189,6 +204,7 @@
   --el-time-picker-panel-item-margin: var(--el-time-picker-panel-item-margin-vertical) var(--el-time-picker-panel-item-margin-horizontal);
 
   /**
+   * @hidden
    * @desc 时间选择器输入框激活阴影
    * @type shadow
    */
