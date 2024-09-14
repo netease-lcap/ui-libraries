@@ -2,14 +2,15 @@
 <template>
     <div>
       <div class="block">
-        <el-slider-pro :value.sync="value" @change="handleChange" @changeEnd="handleChangeEnd" :showStep="true" :step="20" label="${value}%"/>
+        <el-slider-pro :value.sync="value" @change="handleChange" @change-end="handleChangeEnd" :showStep="true" :step="20" label="${value}%"/>
         {{ value }}
       </div>
       <div class="block" style="margin-top:50px">
-        <el-slider-pro :tooltipProps="{ placement: 'left', showArrow:false }" layout="vertical" style="height:200px" :label="false"/>
+        <el-slider-pro :tooltipProps="{ placement: 'left', showArrow:false }" layout="vertical" style="height:300px" :label="false"/>
       </div>
       <div class="block" style="margin-top:50px">
-        <el-slider-pro :label="renderLabel" :range="true"/>
+        {{ values }}
+        <el-slider-pro :label="renderLabel" :range="true" :value.sync="values"/>
       </div>
 
       <div class="block" style="margin-top:50px">
@@ -36,12 +37,13 @@
         //     80: '80°C',
         //     100: '100°C',
         // },
-        marks1: [0,20,40,60,80,100]
+        marks1: [0,20,40,60,80,100],
+        values: [],
       };
     },
     methods: {
         handleChange(value) {
-            console.log('the change end value is:', value);
+            console.log('the change value is:', value);
         },
         handleChangeEnd(endValue) {
             console.log('the change end value is:', endValue);
