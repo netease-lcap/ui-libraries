@@ -26,7 +26,6 @@ function getScreenShot(componentDir, assetsPublicPath) {
     }
   } catch (e) {
     logger.warn(`找不到 screenShot 文件 ${componentDir}/screenshots`);
-    // console.log(e);
   }
   return screenShot;
 }

@@ -35,7 +35,6 @@ export const useSelectableRange2Array: NaslComponentPluginOptions = {
       if (Array.isArray(selectableRange)) {
         return selectableRange;
       }
-      console.log(selectableRange, 'useSelectableRange2Array---');
       return selectableRange.split(',');
     });
 

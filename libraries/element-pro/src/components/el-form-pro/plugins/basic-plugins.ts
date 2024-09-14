@@ -398,7 +398,6 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
         if (layoutMode === 'linear') {
           const direction = props.get('layout') === 'inline' ? 'horizontal' : 'vertical';
-          console.log(gutterSize.value);
           return h(Space, {
             attrs: {
               direction,

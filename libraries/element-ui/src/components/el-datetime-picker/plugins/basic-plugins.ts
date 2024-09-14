@@ -52,7 +52,6 @@ const DefaultRangeShortcuts = [{
 export const usePickerOptions: NaslComponentPluginOptions = {
   props: PickerOptionsProps,
   setup(props) {
-    console.log(props, 'props-------', props.get('type'));
     const dateType = props.get('type');
     const isRange = ['datetimerange', 'daterange'].some((item) => item === dateType);
     const DefaultShortcutsValue = isRange ? DefaultRangeShortcuts : DefaultShortcuts;
@@ -88,7 +87,6 @@ export const useTransferChange: NaslComponentPluginOptions = {
   setup: (props) => {
     return {
       onChange: (value) => {
-        console.log(value, 'value999999');
         // 获取当前绑定 change 事件
         const onChange = props.get('onChange');
 
