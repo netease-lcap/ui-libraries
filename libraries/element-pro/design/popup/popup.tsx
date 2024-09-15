@@ -109,6 +109,7 @@ export default mixins(classPrefixMixins).extend({
         }
         this.$nextTick(() => {
           this.popupMounted();
+          this.updateOverlayInnerStyle();
         });
       } else {
         this.preventClosing(false);
@@ -442,6 +443,7 @@ export default mixins(classPrefixMixins).extend({
         onResize={() => {
           if (visible) {
             this.updatePopper();
+            this.updateOverlayInnerStyle();
           }
         }}
         parent={this}
