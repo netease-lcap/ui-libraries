@@ -143,6 +143,11 @@ export default defineComponent({
           dayjsValue.value.minute(),
           dayjsValue.value.second(),
         ];
+
+        if (col === EPickerCols.hour && TWELVE_HOUR_FORMAT.test(props.format) && dayjsValue.value.hour() >= 12) {
+          el = Number(el) + 12;
+        }
+
         params[colIdx] = Number(el);
         return !props.disableTime?.(...params, { partial: position.value || 'start' })?.[col]?.includes(Number(el));
       }
@@ -152,7 +157,6 @@ export default defineComponent({
     // 获取需要渲染的column
     const getColList = (col: EPickerCols) => {
       let count = 0;
-
       if (timeArr.includes(col)) {
         // hour、minute and second columns
         const colIdx = timeArr.indexOf(col);
@@ -163,15 +167,19 @@ export default defineComponent({
         else count = 59;
 
         const colList = range(0, count + 1, Number(colStep)).map((v) => padStart(String(v), 2, '0')) || [];
-
         return props.hideDisabledTime && !!props.disableTime
-          ? colList.filter((t) => {
+          ? colList.filter((t: any) => {
             const params: [number, number, number, number] = [
               dayjsValue.value.hour(),
               dayjsValue.value.minute(),
               dayjsValue.value.second(),
               dayjsValue.value.millisecond(),
             ];
+
+            if (col === EPickerCols.hour && TWELVE_HOUR_FORMAT.test(props.format) && dayjsValue.value.hour() >= 12) {
+              t = Number(t) + 12;
+            }
+
             params[colIdx] = Number(t);
             return !props
               .disableTime?.(...params, { partial: position.value || 'start' })
@@ -283,7 +291,7 @@ export default defineComponent({
       if (timeArr.includes(col)) {
         if (
           col === EPickerCols.hour
-          && dayjsValue.value.format('a') === PM
+          && dayjsValue.value.hour() >= 12
           && cols.value.includes(EPickerCols.meridiem)
         ) {
           // eslint-disable-next-line no-param-reassign
@@ -311,7 +319,7 @@ export default defineComponent({
             // 如果没有设置大于1的steps或设置了大于1的step 正常处理滚动
             scrollToTime(
               col,
-              timeArr.includes(col) ? dayjsValue.value[col]?.() : dayjsValue.value.format('a'),
+              timeArr.includes(col) ? dayjsValue.value[col]?.() : dayjsValue.value.locale('en').format('a'),
               idx,
               behavior,
             );
@@ -328,7 +336,7 @@ export default defineComponent({
     const isCurrent = (col: EPickerCols, colItem: string | number) => {
       let colVal: number;
       if (col === EPickerCols.meridiem) {
-        const currentMeridiem = dayjsValue.value.format('a');
+        const currentMeridiem = dayjsValue.value.locale('en').format('a');
         return currentMeridiem === colItem;
       }
       colVal = dayjsValue.value[col]?.();
