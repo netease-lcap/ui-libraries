@@ -150,6 +150,16 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '12小时制',
+      description: '使用 12 小时制',
+      setter: {
+        concept: 'SwitchSetter'
+      },
+    })
+    use12Hours: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '隐藏禁用状态的时间项',
       description: '是否隐藏禁用状态的时间项',
       setter: { concept: 'SwitchSetter' },

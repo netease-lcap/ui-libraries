@@ -1,7 +1,7 @@
 import { TimePickerValue, TimeRangeValue } from '@element-pro';
 import dayjs from 'dayjs';
 
-const DEFAULT_FORMAT = 'HH:mm:ss';
+export const DEFAULT_FORMAT = 'HH:mm:ss';
 
 export function getFormatTimeValue(v: string, format: string = DEFAULT_FORMAT) {
   if (!v) {

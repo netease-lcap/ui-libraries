@@ -16,6 +16,7 @@ export const Default = {
     data() {
       return {
         align: 'left',
+        value: null,
       };
     },
     methods: {
@@ -27,19 +28,29 @@ export const Default = {
       },
     },
     template:
-      '<el-time-picker-pro :inputAlign="align" :inputAutoWidth="true" format="HH时mm分ss秒" :clearable="true" @change="handleChange" @sync:state="handleSyncState"></el-time-picker-pro>',
+      '<div>{{value}}<el-time-picker-pro :value.sync="value" :use12Hours="true" :inputAlign="align" :inputAutoWidth="true" format="HH时mm分ss秒" :clearable="true" @change="handleChange" @sync:state="handleSyncState"></el-time-picker-pro></div>',
   }),
 };
 
 export const Range = {
   name: '区间选择',
   render: () => ({
+    data() {
+      return {
+        startValue: null,
+        endValue: null,
+      };
+    },
     methods: {
       handleSyncState(name, value) {
         console.log(name, value);
       },
     },
     template:
-      '<el-time-picker-pro inputAlign="center" :inputAutoWidth="true"  :readonly="true" format="HH时mm分ss秒" :clearable="true" :range="true" @sync:state="handleSyncState"></el-time-picker-pro>',
+      `<div>
+      {{startValue}} - {{endValue}}
+      <div><el-time-picker-pro :allowInput="true" :startValue.sync="startValue" :endValue.sync="endValue" format="HH时mm分ss秒" :clearable="true" :range="true" @sync:state="handleSyncState"></el-time-picker-pro></div>
+      </div>
+      `,
   }),
 };

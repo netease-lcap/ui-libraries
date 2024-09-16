@@ -2,7 +2,6 @@ import { CreateElement } from 'vue';
 import { TimePickerValue, TimeRangePicker, TimeRangeValue } from '@element-pro';
 import { type NaslComponentPluginOptions, $render, useSyncState } from '@lcap/vue2-utils';
 import { MapGet } from '@lcap/vue2-utils/plugins/types';
-import { unref } from '@vue/composition-api';
 import { isFunction, isNil } from 'lodash';
 import {
   getFormatTimeValue,
@@ -10,6 +9,7 @@ import {
   getDisableTime,
   getChangeEventByValue,
   getNaslTimeValue,
+  DEFAULT_FORMAT,
 } from '../utils';
 import { usePlaceholder } from '../../el-date-picker-pro/hooks';
 
@@ -57,6 +57,21 @@ function useContextEvents(props: MapGet) {
 
   return events;
 }
+
+export const use12Hours: NaslComponentPluginOptions = {
+  props: ['use12Hours', 'format'],
+  setup(props) {
+    return {
+      format: props.useComputed(['use12Hours', 'format'], (use12HoursMode = false, format = DEFAULT_FORMAT) => {
+        if (use12HoursMode) {
+          return `A ${format.replace(/H/g, 'h')}`;
+        }
+
+        return format;
+      }),
+    };
+  },
+};
 
 /* 组件功能扩展插件 */
 export const useExtensPlugin: NaslComponentPluginOptions = {
@@ -156,14 +171,11 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         const currentTimes = [h, m, s];
 
         if (range) {
-          const [startValue, endValue] = unref(value);
-          const startValues = endValue ? getNumberArr(getNaslTimeValue(startValue), 'start') : null;
-          const endValues = endValue ? getNumberArr(getNaslTimeValue(endValue), 'end') : null;
           if (context && context.partial === 'start') {
-            return getDisableTime(currentTimes, minTimes, endValues || maxTimes);
+            return getDisableTime(currentTimes, minTimes, maxTimes);
           }
 
-          return getDisableTime(currentTimes, startValues || minTimes, maxTimes);
+          return getDisableTime(currentTimes, minTimes, maxTimes);
         }
 
         return getDisableTime(currentTimes, minTimes, maxTimes);

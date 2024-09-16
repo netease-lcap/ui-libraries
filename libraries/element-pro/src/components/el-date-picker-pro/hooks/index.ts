@@ -3,12 +3,37 @@ import { useSyncState } from '@lcap/vue2-utils';
 import { MapGet } from '@lcap/vue2-utils/plugins/types';
 import { ComputedRef, Ref, unref } from '@vue/composition-api';
 import dayjs, { Dayjs } from 'dayjs';
+import ZH_CN from 'dayjs/locale/zh-cn';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import isoWeek from 'dayjs/plugin/isoWeek';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { isFunction, isNil } from 'lodash';
 import { CreateElement } from 'vue';
+import customParseFormat from '../../../utils/date-parse';
 
+(ZH_CN as any).meridiem = (hour: number) => {
+  if (hour < 6) {
+    return '凌晨';
+  }
+
+  if (hour < 9) {
+    return '早上';
+  }
+
+  if (hour < 12) {
+    return '上午';
+  }
+
+  if (hour < 13) {
+    return '中午';
+  }
+
+  if (hour < 18) {
+    return '下午';
+  }
+
+  return '晚上';
+};
+dayjs.locale('zh-cn', ZH_CN);
 dayjs.extend(advancedFormat);
 dayjs.extend(isoWeek);
 dayjs.extend(customParseFormat);
