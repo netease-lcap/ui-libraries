@@ -3,18 +3,20 @@
  */
 :root {
   /**
-   * @desc 选择框背景色
+   * @desc 选择框背景色(禁用选项)
    * @type color
    */
   --el-select-bg-color: var(--el-bg-color-specialcomponent);
 
   /**
+   * @hidden
    * @desc 选择框边框颜色
    * @type color
    */
   --el-select-border-color: var(--el-border-level-2-color);
 
   /**
+   * @hidden
    * @desc 选择框激活状态边框颜色
    * @type color
    */
@@ -45,12 +47,14 @@
   --el-select-option-bg-color-hover: var(--el-bg-color-container-hover);
 
   /**
+   * @hidden
    * @desc 选项激活背景色
    * @type color
    */
   --el-select-option-bg-color-active: var(--el-bg-color-container-active);
 
   /**
+   * @hidden
    * @desc 选项复选框颜色
    * @type color
    */
@@ -75,12 +79,14 @@
   --el-select-bg-color-disabled: var(--el-bg-color-component-disabled);
 
   /**
+   * @hidden
    * @desc 占位符颜色
    * @type color
    */
   --el-select-placeholder-color: var(--el-text-color-placeholder);
 
   /**
+   * @hidden
    * @desc 禁用状态占位符颜色
    * @type color
    */
@@ -99,12 +105,14 @@
   --el-select-color-empty: var(--el-text-color-disabled);
 
   /**
+   * @hidden
    * @desc 图标颜色
    * @type color
    */
   --el-select-icon-color: var(--el-text-color-placeholder);
 
   /**
+   * @hidden
    * @desc 禁用状态图标颜色
    * @type color
    */
@@ -117,6 +125,7 @@
   --el-select-optiongroup-border-color: var(--el-border-level-1-color);
 
   /**
+   * @hidden
    * @desc 输入框文字颜色
    * @type color
    */
@@ -135,24 +144,28 @@
   --el-select-option-checkbox-input-color-hover: var(--el-brand-color);
 
   /**
+   * @hidden
    * @desc 右侧图标悬停颜色
    * @type color
    */
   --el-select-right-icon-hover: var(--el-brand-color);
 
   /**
+   * @hidden
    * @desc 小号选择框高度
    * @type size
    */
   --el-select-height-s: var(--el-comp-size-xs);
 
   /**
+   * @hidden
    * @desc 默认选择框高度
    * @type size
    */
   --el-select-height-default: var(--el-comp-size-m);
 
   /**
+   * @hidden
    * @desc 大号选择框高度
    * @type size
    */
@@ -207,12 +220,13 @@
   --el-select-dropdown-shadow: var(--el-shadow-2);
 
   /**
-   * @desc 输入框阴影
+   * @desc 输入框阴影(无边框模式)
    * @type shadow
    */
   --el-select-input-shadow: 0 0 0 2px var(--el-brand-color-focus);
 
   /**
+   * @hidden
    * @desc 边框圆角
    * @type size
    */

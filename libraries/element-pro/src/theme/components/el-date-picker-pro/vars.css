@@ -21,7 +21,7 @@
   --el-datepicker-panel-container-min-width: 280px;
 
   /**
-   * @desc 面板选择最大宽度
+   * @desc 面板选择最大宽度(年月选择下拉面板)
    * @type size
    */
   --el-datepicker-panel-select-max-width: 160px;
@@ -99,7 +99,7 @@
   --el-datepicker-cell-disabled-left: calc(0px - var(--el-comp-size-l));
 
   /**
-   * @desc 大禁用单元格左偏移
+   * @desc 大禁用单元格左偏移(季度选择)
    * @type size
    */
   --el-datepicker-cell-disabled-left-large: calc(0px - var(--el-comp-size-xxxl));
@@ -249,12 +249,14 @@
   --el-datepicker-presets-min-width: var(--el-comp-size-xl);
 
   /**
+   * @hidden
    * @desc 预设文字颜色
    * @type color
    */
   --el-datepicker-presets-text-color: var(--el-brand-color);
 
   /**
+   * @hidden
    * @desc 预设文字悬停颜色
    * @type color
    */

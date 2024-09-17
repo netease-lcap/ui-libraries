@@ -99,24 +99,28 @@
   --el-transfer-list-with-search-padding-top: var(--el-comp-size-m);
 
   /**
+   * @hidden
    * @desc 传输组件列表包装内边距
    * @type size
    */
   --el-transfer-list-wrapper-padding: var(--el-comp-paddingTB-m) var(--el-comp-paddingLR-m);
 
   /**
+   * @hidden
    * @desc 传输组件带树列表内边距
    * @type size
    */
   --el-transfer-list-with-tree-padding: 0 var(--el-comp-paddingLR-m);
 
   /**
+   * @hidden
    * @desc 传输组件带树列表外间距
    * @type size
    */
   --el-transfer-list-with-tree-margin: var(--el-comp-margin-s) 0;
 
   /**
+   * @hidden
    * @desc 传输组件列表分页内边距
    * @type size
    */
@@ -135,18 +139,20 @@
   --el-transfer-operations-gap: var(--el-comp-margin-l);
 
   /**
+   * @hidden
    * @desc 传输组件带分页底部内边距
    * @type size
    */
   --el-transfer-with-pagination-padding-bottom: calc(var(--el-transfer-list-pagination-height) + var(--el-transfer-list-pagination-padding) * 2);
 
   /**
-   * @desc 传输组件带页脚底部内边距
+   * @desc 传输组件仅带页脚底部内边距
    * @type size
    */
   --el-transfer-with-footer-padding-bottom: 48px;
 
   /**
+   * @hidden
    * @desc 传输组件带分页和页脚底部内边距
    * @type size
    */
@@ -159,12 +165,14 @@
   --el-transfer-with-search-footer-padding-bottom: 48px;
 
   /**
+   * @hidden
    * @desc 传输组件带搜索框和分页底部内边距
    * @type size
    */
   --el-transfer-with-search-pagination-padding-bottom: 48px;
 
   /**
+   * @hidden
    * @desc 传输组件带所有功能底部内边距
    * @type size
    */
@@ -189,6 +197,7 @@
   --el-transfer-with-search-height: 240px;
 
   /**
+   * @hidden
    * @desc 传输组件带分页高度
    * @type size
    */
@@ -207,24 +216,28 @@
   --el-transfer-with-footer-both-height: 288px;
 
   /**
+   * @hidden
    * @desc 传输组件带分页和搜索框高度
    * @type size
    */
   --el-transfer-with-both-height: 280px;
 
   /**
+   * @hidden
    * @desc 传输组件带所有功能高度
    * @type size
    */
   --el-transfer-with-all-height: 328px;
 
   /**
+   * @hidden
    * @desc 传输组件包装高度
    * @type size
    */
   --el-transfer-wrap-height: 320px;
 
   /**
+   * @hidden
    * @desc 传输组件包装宽度
    * @type size
    */
@@ -243,24 +256,28 @@
   --el-transfer-list-header-width: calc(var(--el-transfer-common-width) - var(--el-transfer-list-margin-horizontal) * 2);
 
   /**
+   * @hidden
    * @desc 传输组件列表搜索框宽度
    * @type size
    */
   --el-transfer-list-search-wrapper-width: calc(var(--el-transfer-common-width) - var(--el-transfer-list-margin-horizontal) * 2);
 
   /**
+   * @hidden
    * @desc 传输组件列表分页高度
    * @type size
    */
   --el-transfer-list-pagination-height: var(--el-comp-size-xs);
 
   /**
+   * @hidden
    * @desc 传输组件操作按钮高度
    * @type size
    */
   --el-transfer-operations-button-height: var(--el-comp-size-xs);
 
   /**
+   * @hidden
    * @desc 传输组件操作图标大小
    * @type size
    */
@@ -279,12 +296,14 @@
   --el-transfer-border: 1px solid var(--el-transfer-border-color);
 
   /**
+   * @hidden
    * @desc 传输组件列表边框
    * @type border
    */
   --el-transfer-list-border: 0;
 
   /**
+   * @hidden
    * @desc 传输组件带搜索框列表边框
    * @type border
    */
@@ -297,6 +316,7 @@
   --el-transfer-border-radius: var(--el-radius-medium);
 
   /**
+   * @hidden
    * @desc 传输组件阴影
    * @type shadow
    */
