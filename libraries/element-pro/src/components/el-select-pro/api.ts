@@ -7,7 +7,7 @@ namespace nasl.ui {
       idetype: 'container',
       structured: true,
       forceUpdateWhenAttributeChange: true,
-      childAccept: "target.tag === 'ElOptionPro'",
+      childAccept: "target.tag === 'el-option-pro'",
       events: {
         click: true,
       },
@@ -579,7 +579,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     show: true,
     ideusage: {
-      parentAccept: "['ElSelectPro'].includes(target.tag)",
+      parentAccept: "['el-select-pro'].includes(target.tag)",
       //   idetype: 'container',
       //   structured: true,
       //   selector: {
