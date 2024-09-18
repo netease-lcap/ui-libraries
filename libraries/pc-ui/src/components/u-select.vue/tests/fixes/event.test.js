@@ -13,6 +13,7 @@ test('test onChange event', async () => {
     propsData: {
       value: [],
       multiple: true,
+      hasAllCheckItem: true,
       dataSource: [
         { text: 'Java', value: 'java', description: '这是java' },
         { text: 'Python', value: 'python', description: '这是python' },
@@ -50,6 +51,12 @@ test('test onChange event', async () => {
 
   expect(wrapper.emitted().change).toBeTruthy();
   expect(onChange).toBeCalledTimes(2);
+  await wrapper.vm.$nextTick();
+  await wrapper.vm.checkAll(true);
+  await wrapper.vm.$nextTick();
+  expect(wrapper.vm.selectedVMs.length).toBe(7);
+  // expect(wrapper.emitted().change).toBeTruthy();
+  expect(onChange).toBeCalledTimes(3);
 });
 
 test('test change value = null reactive ', async () => {
