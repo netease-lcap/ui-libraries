@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import * as ElementUI from '@/main';
 import { Button } from '@element-pro';
+import './reset.css';
 
 
 Vue.use(ElementUI);
@@ -15,7 +16,17 @@ Vue.component('el-text', {
   },
 });
 
-Vue.component('el-button', Button);
+Vue.component('el-button', {
+  props: {
+    text: String,
+  },
+  render(h) {
+    return h(Button, {
+      attrs: this.$attrs,
+      on: this.$listeners,
+    }, this.text || this.$slots.default);
+  }
+});
 
 const preview = {
   parameters: {
