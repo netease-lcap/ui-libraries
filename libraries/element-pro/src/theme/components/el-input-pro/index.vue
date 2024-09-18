@@ -8,7 +8,7 @@
     <div class="inputs-wrap">
       <el-input-pro placeholder="无边框输入框" borderless clearable />
       <el-input-pro disabled placeholder="禁用状态" :size="size" />
-      <el-input-pro readonly placeholder="只读状态" :size="size" />
+      <el-input-pro readonly value="只读状态" :size="size" />
       <el-input-pro placeholder="默认状态-可清空" clearable :size="size" tips="这是普通文本提示" />
       <el-input-pro status="success" type="password" placeholder="成功状态-密码输入框" :size="size" tips="校验通过文本提示">
         <lock-on-icon slot="prefix-icon"></lock-on-icon>
