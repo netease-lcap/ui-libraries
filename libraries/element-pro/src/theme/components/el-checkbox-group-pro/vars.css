@@ -45,7 +45,7 @@
   --el-checkbox-check-color: var(--el-text-color-anti);
 
   /**
-   * @desc 禁用状态复选框勾选标记颜色
+   * @desc 禁用状态复选框标签字体颜色
    * @type color
    */
   --el-checkbox-check-color-disabled: var(--el-text-color-disabled);
@@ -87,6 +87,7 @@
   --el-checkbox-border-radius: var(--el-radius-default);
 
   /**
+   * @hidden
    * @desc 复选框右外边距
    * @type size
    */
@@ -105,6 +106,7 @@
   --el-checkbox-check-height: 9px;
 
   /**
+   * @hidden
    * @desc 复选框勾选标记尺寸
    * @type size
    */
