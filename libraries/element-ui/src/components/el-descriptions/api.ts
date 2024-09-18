@@ -86,7 +86,7 @@ namespace nasl.ui {
       description: '是否显示冒号',
       setter: { concept: 'SwitchSetter' },
     })
-    colon: nasl.core.Boolean = true;
+    private colon: nasl.core.Boolean = true;
 
     @Prop({
       group: '样式属性',
@@ -137,10 +137,10 @@ namespace nasl.ui {
       description: '内容',
       snippets: [
         {
-          title: 'Descriptions Item',
+          title: '描述列表项',
           code: `<el-descriptions-item>
             <template #label>
-              <el-text text="标签"></el-text>
+              <el-text text="标签："></el-text>
             </template>
             <el-text text="内容"></el-text>
           </el-descriptions-item>`,
