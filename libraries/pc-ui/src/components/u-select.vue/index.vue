@@ -576,7 +576,7 @@ export default {
         },
         onOpen($event) {
             // 有时候加载时机问题(v-show 导致的disply:none)，popperWidth会没有获取到，重新获取
-            if (this.currentPopperWidth === '0px') {
+            if (this.currentPopperWidth === '0px' || this.appendTo === 'body') {
                 this.setPopperWidth();
             }
             this.popperOpened = true; // 刚打开时，除非是没有加载，否则保留上次的 filter 过的数据
