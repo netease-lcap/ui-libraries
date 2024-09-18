@@ -199,7 +199,6 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       return uid;
     });
 
-    const getFieldName = () => unref(fieldName) as string;
     const [
       initialValue,
       startInitialValue,
@@ -234,7 +233,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
     const proxyFormFieldVNode = (vnode: VNode) => {
       const { prop = 'value' } = (vnode.componentOptions.Ctor as any).options.model;
-      const formFieldName = getFieldName();
+      const formFieldName = unref(fieldName) as string;
       const propData: Record<string, any> = vnode.componentOptions.propsData || {};
       const listeners: Record<string, any> = vnode.componentOptions.listeners || {};
 
