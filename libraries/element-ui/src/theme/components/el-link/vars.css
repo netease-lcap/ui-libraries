@@ -27,7 +27,7 @@
   --link-default-active-color: var(--color-primary);
 
   /**
-   * @desc 默认链接禁用链接字体颜色
+   * @desc 默认链接禁用字体颜色
    * @type color
    */
   --link-disabled-font-color: var(--color-text-placeholder);
