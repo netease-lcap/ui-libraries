@@ -167,10 +167,6 @@ namespace nasl.ui {
     ideusage: {
       idetype: "container",
       parentAccept: "target.tag === 'el-radio-group-pro'",
-      selector: {
-        expression: "this",
-        cssSelector: "label[class='el-p-radio']"
-      },
     }
   })
 
