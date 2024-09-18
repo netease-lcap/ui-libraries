@@ -37,9 +37,10 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
 
   program.command('screenshot')
     .description('批量 block.stories 截图')
+    .argument('<folder>', '组件文件夹')
     .option('--port <port>', '设置端口', '6006')
-    .action(async ({ port }) => {
-      await screenshot(cwd, port);
+    .action(async (folder, { port }) => {
+      await screenshot(cwd, port, folder);
     });
 
   program.command('build')
