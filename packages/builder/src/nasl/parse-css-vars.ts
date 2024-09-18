@@ -16,6 +16,7 @@ export interface ThemeComponentVars {
   selector: string;
   variables: ThemeVariable[];
   hidden?: boolean;
+  alias?: string[];
 }
 
 export interface ThemeGlobalVars {
@@ -30,6 +31,8 @@ export interface ThemeInfo {
 
 const ComponentAnnotation = '@component';
 const UseGlobalTokensAnnotation = '@useGlobalTokens';
+const AliasAnnotation = '@alias';
+const HiddenAnnotation = '@hidden';
 
 const parseCssVars = (nodes: NonNullable<postcss.Container['nodes']>) => {
   const variables: ThemeVariable[] = [];
@@ -133,6 +136,10 @@ export default (cssContent: string) => {
               componentInfo.name = str.substring(ComponentAnnotation.length).trim();
             } else if (str.startsWith(UseGlobalTokensAnnotation)) {
               componentInfo.useGlobalTokens = JSON.parse(str.substring(UseGlobalTokensAnnotation.length).trim());
+            } else if (str.startsWith(AliasAnnotation)) {
+              componentInfo.alias = JSON.parse(str.substring(AliasAnnotation.length).trim());
+            } else if (str.startsWith(HiddenAnnotation)) {
+              componentInfo.hidden = true;
             }
           });
       }

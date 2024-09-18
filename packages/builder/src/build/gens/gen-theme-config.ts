@@ -95,8 +95,8 @@ export default function genThemeConfig(options: ThemeOptions, framework: string)
     return themeConfig;
   }
 
-  themeConfig.components = options.components.filter((comp) => comp.show !== false).map(({
-    group, title, name, children,
+  themeConfig.components = options.components.map(({
+    group, title, name, children, show,
   }) => {
     const compTheme = themeInfo.components.find((c) => (
       c.name === name || (
@@ -125,9 +125,10 @@ export default function genThemeConfig(options: ThemeOptions, framework: string)
       title,
       group,
       children: children || [],
+      hidden: show === false || compTheme.hidden,
     };
   }).filter((comp: ThemeComponentVars) => {
-    return (comp.useGlobalTokens.length > 0 || comp.variables.length > 0) && !comp.hidden;
+    return comp.useGlobalTokens.length > 0 || comp.variables.length > 0;
   }).map((comp) => {
     return {
       ...comp,
