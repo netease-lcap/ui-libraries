@@ -319,6 +319,7 @@
   --el-upload-card-mask-opacity-disabled: 0.3;
 
   /**
+   * @hidden
    * @desc 上传列表文件缩略图图标的大小
    * @type size
    */

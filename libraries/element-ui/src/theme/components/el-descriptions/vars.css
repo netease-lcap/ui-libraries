@@ -22,7 +22,7 @@
 
   /**
    * @desc 描述列表项有边框时标签的背景色
-   * @type background-color
+   * @type color
    */
   --descriptions-item-bordered-label-background: #fafafa;
 }

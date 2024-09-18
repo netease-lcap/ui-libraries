@@ -27,13 +27,13 @@
   --link-default-active-color: var(--color-primary);
 
   /**
-   * @desc 禁用链接字体颜色
+   * @desc 默认链接禁用链接字体颜色
    * @type color
    */
   --link-disabled-font-color: var(--color-text-placeholder);
 
   /**
-   * @desc 主链接字体颜色
+   * @desc 主要链接字体颜色
    * @type color
    */
   --link-primary-font-color: var(--color-primary);

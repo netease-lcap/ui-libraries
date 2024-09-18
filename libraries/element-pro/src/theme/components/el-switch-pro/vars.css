@@ -135,31 +135,33 @@
   --el-switch-width-border-s: calc(var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 2);
 
   /**
-   * @desc 基础检查边框宽度
+   * @hidden
+   * @desc 基础选中边框宽度
    * @type size
    */
   --el-switch-width-border-check-base: 3px;
 
   /**
+   * @hidden
    * @desc 检查边框宽度值
    * @type size
    */
   --el-switch-width-border-check-value: 0.5px;
 
   /**
-   * @desc 大号开关的检查边框宽度
+   * @desc 大号开关选中态的边框宽度
    * @type size
    */
   --el-switch-width-border-check-l: var(--el-switch-width-border-check-base);
 
   /**
-   * @desc 默认开关的检查边框宽度
+   * @desc 默认开关选中态的边框宽度
    * @type size
    */
   --el-switch-width-border-check-default: calc(var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 1);
 
   /**
-   * @desc 小号开关的检查边框宽度
+   * @desc 小号开关选中态的边框宽度
    * @type size
    */
   --el-switch-width-border-check-s: calc(var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 2);

@@ -160,7 +160,7 @@
   --el-datepicker-font-weight-medium: 500;
 
   /**
-   * @desc 面板边框圆角
+   * @desc 单元格边框圆角
    * @type size
    */
   --el-datepicker-panel-border-radius: var(--el-radius-default);

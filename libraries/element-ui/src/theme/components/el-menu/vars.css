@@ -9,7 +9,7 @@
   --menu-item-font-size: var(--font-size-base);
 
   /**
-   * @desc 菜单项字体颜色
+   * @desc 侧边栏菜单项字体颜色
    * @type color
    */
   --menu-item-font-color: var(--color-text-primary);
@@ -21,7 +21,7 @@
   --menu-background-color: var(--color-white);
 
   /**
-   * @desc 菜单项悬停时的填充颜色
+   * @desc 侧边栏菜单项悬停时的填充颜色
    * @type color
    */
   --menu-item-hover-fill: var(--color-primary-light-9);

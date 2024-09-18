@@ -3,151 +3,151 @@
  */
 :root {
   /**
-   * @desc 信息标签颜色
+   * @desc 信息标签边框颜色
    * @type color
    */
   --tag-info-color: var(--color-info);
 
   /**
-   * @desc 主要标签颜色
+   * @desc 主要标签边框颜色
    * @type color
    */
   --tag-primary-color: var(--color-primary);
 
   /**
-   * @desc 成功标签颜色
+   * @desc 成功标签边框颜色
    * @type color
    */
   --tag-success-color: var(--color-success);
 
   /**
-   * @desc 警告标签颜色
+   * @desc 警告标签边框颜色
    * @type color
    */
   --tag-warning-color: var(--color-warning);
 
   /**
-   * @desc 危险标签颜色
+   * @desc 危险标签边框颜色
    * @type color
    */
   --tag-danger-color: var(--color-danger);
 
   /**
-   * @desc 普通状态下主要标签背景色
+   * @desc 浅色模式下主要标签背景色
    * @type color
    */
   --tag-normal-primary-background-color: var(--color-primary-light-9);
 
   /**
-   * @desc 普通状态下成功标签背景色
+   * @desc 浅色模式下成功标签背景色
    * @type color
    */
   --tag-normal-success-background-color: var(--color-success-light-9);
 
   /**
-   * @desc 普通状态下警告标签背景色
+   * @desc 浅色模式下警告标签背景色
    * @type color
    */
   --tag-normal-warning-background-color: var(--color-warning-light-9);
 
   /**
-   * @desc 普通状态下危险标签背景色
+   * @desc 浅色模式下危险标签背景色
    * @type color
    */
   --tag-normal-danger-background-color: var(--color-danger-light-9);
 
   /**
-   * @desc 普通状态下信息标签背景色
+   * @desc 浅色模式下信息标签背景色
    * @type color
    */
   --tag-normal-info-background-color: var(--color-info-light-9);
 
   /**
-   * @desc 普通状态下主要标签边框色
+   * @desc 浅色模式下主要标签边框色
    * @type color
    */
   --tag-normal-primary-border-color: var(--color-primary-light-8);
 
   /**
-   * @desc 普通状态下成功标签边框色
+   * @desc 浅色模式下成功标签边框色
    * @type color
    */
   --tag-normal-success-border-color: var(--color-success-light-8);
 
   /**
-   * @desc 普通状态下警告标签边框色
+   * @desc 浅色模式下警告标签边框色
    * @type color
    */
   --tag-normal-warning-border-color: var(--color-warning-light-8);
 
   /**
-   * @desc 普通状态下危险标签边框色
+   * @desc 浅色模式下危险标签边框色
    * @type color
    */
   --tag-normal-danger-border-color: var(--color-danger-light-8);
 
   /**
-   * @desc 普通状态下信息标签边框色
+   * @desc 浅色模式下信息标签边框色
    * @type color
    */
   --tag-normal-info-border-color: var(--color-info-light-8);
 
   /**
-   * @desc 普通状态下主要标签字体颜色
+   * @desc 浅色模式下主要标签字体颜色
    * @type color
    */
   --tag-normal-primary-font-color: var(--color-primary);
 
   /**
-   * @desc 普通状态下成功标签字体颜色
+   * @desc 浅色模式下成功标签字体颜色
    * @type color
    */
   --tag-normal-success-font-color: var(--color-success);
 
   /**
-   * @desc 普通状态下警告标签字体颜色
+   * @desc 浅色模式下警告标签字体颜色
    * @type color
    */
   --tag-normal-warning-font-color: var(--color-warning);
 
   /**
-   * @desc 普通状态下危险标签字体颜色
+   * @desc 浅色模式下危险标签字体颜色
    * @type color
    */
   --tag-normal-danger-font-color: var(--color-danger);
 
   /**
-   * @desc 普通状态下信息标签字体颜色
+   * @desc 浅色模式下信息标签字体颜色
    * @type color
    */
   --tag-normal-info-font-color: var(--color-info);
 
   /**
-   * @desc 普通状态下主要标签悬停颜色
+   * @desc 浅色模式下主要标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-normal-primary-hover-color: var(--color-primary);
 
   /**
-   * @desc 普通状态下成功标签悬停颜色
+   * @desc 浅色模式下成功标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-normal-success-hover-color: var(--color-success);
 
   /**
-   * @desc 普通状态下警告标签悬停颜色
+   * @desc 浅色模式下警告标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-normal-warning-hover-color: var(--color-warning);
 
   /**
-   * @desc 普通状态下危险标签悬停颜色
+   * @desc 浅色模式下危险标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-normal-danger-hover-color: var(--color-danger);
 
   /**
-   * @desc 普通状态下信息标签悬停颜色
+   * @desc 浅色模式下信息标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-normal-info-hover-color: var(--color-info);
@@ -243,151 +243,151 @@
   --tag-dark-info-font-color: #fff;
 
   /**
-   * @desc 深色模式下主要标签悬停颜色
+   * @desc 深色模式下主要标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-dark-primary-hover-color: var(--color-primary-light-2);
 
   /**
-   * @desc 深色模式下成功标签悬停颜色
+   * @desc 深色模式下成功标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-dark-success-hover-color: var(--color-success-light-2);
 
   /**
-   * @desc 深色模式下警告标签悬停颜色
+   * @desc 深色模式下警告标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-dark-warning-hover-color: var(--color-warning-light-2);
 
   /**
-   * @desc 深色模式下危险标签悬停颜色
+   * @desc 深色模式下危险标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-dark-danger-hover-color: var(--color-danger-light-2);
 
   /**
-   * @desc 深色模式下信息标签悬停颜色
+   * @desc 深色模式下信息标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-dark-info-hover-color: var(--color-info-light-2);
 
   /**
-   * @desc 纯色模式下主要标签背景色
+   * @desc 普通模式下主要标签背景色
    * @type color
    */
   --tag-plain-primary-background-color: #fff;
 
   /**
-   * @desc 纯色模式下成功标签背景色
+   * @desc 普通模式下成功标签背景色
    * @type color
    */
   --tag-plain-success-background-color: #fff;
 
   /**
-   * @desc 纯色模式下警告标签背景色
+   * @desc 普通模式下警告标签背景色
    * @type color
    */
   --tag-plain-warning-background-color: #fff;
 
   /**
-   * @desc 纯色模式下危险标签背景色
+   * @desc 普通模式下危险标签背景色
    * @type color
    */
   --tag-plain-danger-background-color: #fff;
 
   /**
-   * @desc 纯色模式下信息标签背景色
+   * @desc 普通模式下信息标签背景色
    * @type color
    */
   --tag-plain-info-background-color: #fff;
 
   /**
-   * @desc 纯色模式下主要标签边框色
+   * @desc 普通模式下主要标签边框色
    * @type color
    */
   --tag-plain-primary-border-color: var(--color-primary-light-6);
 
   /**
-   * @desc 纯色模式下成功标签边框色
+   * @desc 普通模式下成功标签边框色
    * @type color
    */
   --tag-plain-success-border-color: var(--color-success-light-6);
 
   /**
-   * @desc 纯色模式下警告标签边框色
+   * @desc 普通模式下警告标签边框色
    * @type color
    */
   --tag-plain-warning-border-color: var(--color-warning-light-6);
 
   /**
-   * @desc 纯色模式下危险标签边框色
+   * @desc 普通模式下危险标签边框色
    * @type color
    */
   --tag-plain-danger-border-color: var(--color-danger-light-6);
 
   /**
-   * @desc 纯色模式下信息标签边框色
+   * @desc 普通模式下信息标签边框色
    * @type color
    */
   --tag-plain-info-border-color: var(--color-info-light-6);
 
   /**
-   * @desc 纯色模式下主要标签字体颜色
+   * @desc 普通模式下主要标签字体颜色
    * @type color
    */
   --tag-plain-primary-font-color: var(--color-primary);
 
   /**
-   * @desc 纯色模式下成功标签字体颜色
+   * @desc 普通模式下成功标签字体颜色
    * @type color
    */
   --tag-plain-success-font-color: var(--color-success);
 
   /**
-   * @desc 纯色模式下警告标签字体颜色
+   * @desc 普通模式下警告标签字体颜色
    * @type color
    */
   --tag-plain-warning-font-color: var(--color-warning);
 
   /**
-   * @desc 纯色模式下危险标签字体颜色
+   * @desc 普通模式下危险标签字体颜色
    * @type color
    */
   --tag-plain-danger-font-color: var(--color-danger);
 
   /**
-   * @desc 纯色模式下信息标签字体颜色
+   * @desc 普通模式下信息标签字体颜色
    * @type color
    */
   --tag-plain-info-font-color: var(--color-info);
 
   /**
-   * @desc 纯色模式下主要标签悬停颜色
+   * @desc 普通模式下主要标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-plain-primary-hover-color: var(--color-primary);
 
   /**
-   * @desc 纯色模式下成功标签悬停颜色
+   * @desc 普通模式下成功标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-plain-success-hover-color: var(--color-success);
 
   /**
-   * @desc 纯色模式下警告标签悬停颜色
+   * @desc 普通模式下警告标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-plain-warning-hover-color: var(--color-warning);
 
   /**
-   * @desc 纯色模式下危险标签悬停颜色
+   * @desc 普通模式下危险标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-plain-danger-hover-color: var(--color-danger);
 
   /**
-   * @desc 纯色模式下信息标签悬停颜色
+   * @desc 普通模式下信息标签的关闭按钮悬停颜色
    * @type color
    */
   --tag-plain-info-hover-color: var(--color-info);

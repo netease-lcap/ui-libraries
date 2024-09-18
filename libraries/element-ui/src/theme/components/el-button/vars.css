@@ -457,7 +457,7 @@
   --button-danger-disabled-border-color: var(--color-danger-light-5);
 
   /**
-   * @desc 危险按钮朴素颜色
+   * @desc 危险按钮朴素字体颜色
    * @type color
    */
   --button-danger-plain-color: var(--color-danger);
@@ -475,7 +475,7 @@
   --button-danger-plain-border-color: var(--color-danger-light-6);
 
   /**
-   * @desc 危险按钮朴素禁用颜色
+   * @desc 危险按钮朴素禁用字体颜色
    * @type color
    */
   --button-danger-plain-disabled-color: var(--color-danger-light-4);
@@ -540,31 +540,31 @@
   --button-info-disabled-border-color: var(--color-info-light-5);
 
   /**
-   * @desc 信息按钮纯色状态的文字颜色
+   * @desc 信息按钮朴素状态的文字颜色
    * @type color
    */
   --button-info-plain-color: var(--color-info);
 
   /**
-   * @desc 信息按钮纯色状态的背景色
+   * @desc 信息按钮朴素状态的背景色
    * @type color
    */
   --button-info-plain-background-color: var(--color-info-light-9);
 
   /**
-   * @desc 信息按钮纯色状态的边框颜色
+   * @desc 信息按钮朴素状态的边框颜色
    * @type color
    */
   --button-info-plain-border-color: var(--color-info-light-6);
 
   /**
-   * @desc 信息按钮纯色禁用状态的文字颜色
+   * @desc 信息按钮朴素禁用状态的文字颜色
    * @type color
    */
   --button-info-plain-disabled-color: var(--color-info-light-4);
 
   /**
-   * @desc 信息按钮纯色禁用状态的边框颜色
+   * @desc 信息按钮朴素禁用状态的边框颜色
    * @type color
    */
   --button-info-plain-disabled-border-color: var(--color-info-light-8);

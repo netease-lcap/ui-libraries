@@ -180,7 +180,7 @@
   --el-time-picker-panel-footer-padding: var(--el-pop-padding-xl);
 
   /**
-   * @desc 时间选择器面板项边框半径
+   * @desc 时间选择器单元格边框半径
    * @type border-radius
    */
   --el-time-picker-panel-item-border-radius: var(--el-radius-default);
