@@ -19,6 +19,10 @@ namespace nasl.ui {
         default:
           "this.getAttribute('mode')?.value === 'vertical' ? [0, 1, 2] : [0, 1]",
       },
+      displaySlotConditions: {
+        left: "this.getAttribute('mode')?.value === 'horizontal'",
+        right: "this.getAttribute('mode')?.value === 'horizontal'",
+      }
     },
   })
   @Component({
