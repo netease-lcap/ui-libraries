@@ -255,6 +255,8 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         scopedSlots: vnode.data.scopedSlots,
         staticClass: vnode.data.staticClass,
         staticStyle: vnode.data.staticStyle,
+        class: vnode.data.class,
+        style: vnode.data.style,
       }, vnode.componentOptions.children || []);
     };
 
