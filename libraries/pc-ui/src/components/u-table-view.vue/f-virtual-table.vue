@@ -28,6 +28,10 @@ export default {
         handleVirtualScroll(e) {
             if (!this.virtual)
                 return;
+            if (this.virtualRested) {
+                this.virtualRested = false;
+                return;
+            }
             const listEl = e.target;
             let virtualEl = this.$refs.virtual;
             if (Array.isArray(virtualEl)) {
@@ -122,6 +126,12 @@ export default {
                     this,
                 );
             });
+        },
+        resetVirtualData() {
+            this.virtualRested = true;
+            this.virtualIndex = 0;
+            this.virtualTop = 0;
+            this.virtualBottom = 0;
         },
     },
 };
