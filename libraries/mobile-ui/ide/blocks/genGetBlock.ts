@@ -13,11 +13,9 @@ function genGetTemplate(entity: naslTypes.Entity, nameGroup: NameGroup) {
       ${properties
     .map((property) => {
       const temptitle = property.label || property.name;
-      let formItem = `<VanCell isLink slotTitle={
+      return `<VanCell isLink slotTitle={
             <VanText text="${temptitle}"></VanText>
-          }>`;
-      formItem += `{ ${`${nameGroup.viewVariableEntity}.${property.name}`} }</VanCell>`;
-      return formItem;
+          }><VanText text="${nameGroup.viewVariableEntity}.${property.name}"></VanText></VanCell>`;
     })
     .join('\n')}
     </VanCellGroup>`;
