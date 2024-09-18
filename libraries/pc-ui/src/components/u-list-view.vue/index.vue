@@ -647,7 +647,7 @@ export default {
             // Check if enabled
             if (this.readonly || this.disabled)
                 return;
-            const selectedVMs = this.selectedVMs;
+            const selectedVMs = [...this.selectedVMs];
             const oldValue = selectedVMs.map((itemVM) => itemVM.value);
             this.itemVMs.forEach((itemVM) => {
                 if (itemVM.disabled)
@@ -666,6 +666,8 @@ export default {
             if (this.converter) {
                 value = this.currentConverter.get(value);
             }
+
+            this.selectedVMs = selectedVMs;
             this.$emit('input', value, this);
             this.$emit('update:value', value, this);
             this.$emit('checkAll', { value, oldValue, checked }, this);
