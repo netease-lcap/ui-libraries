@@ -9,6 +9,7 @@ namespace nasl.ui {
       displaySlotInline: {
         reference: true,
       },
+      bindStyleAttr: 'dialogStyle',
       selector: [
         {
           expression: "this.getElement(el => el.slotTarget === 'reference')",
