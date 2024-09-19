@@ -144,7 +144,7 @@ namespace nasl.ui {
         't-input 同级类名，示例："name1 name2 name3" 或 `["name1", "name2"]` 或 `[{ "name1": true }]`。',
       setter: { concept: 'InputSetter' },
     })
-    inputClass: any;
+    private inputClass: any;
 
     @Prop({
       group: '主要属性',
