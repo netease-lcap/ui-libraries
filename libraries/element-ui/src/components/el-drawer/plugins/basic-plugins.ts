@@ -1,8 +1,40 @@
 /* 组件功能扩展插件 */
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
 import { $ref } from '@lcap/vue2-utils/plugins/index';
-import _ from 'lodash';
+import _, { camelCase } from 'lodash';
 import { useUpdateSync } from '@lcap/vue2-utils';
+
+import type { MapGet } from '@lcap/vue2-utils/plugins/types';
+import { getCurrentInstance, onMounted, onUpdated } from '@vue/composition-api';
+
+const useSetDialogStyles = (props: MapGet) => {
+  const instance = getCurrentInstance();
+  const setStyles = () => {
+    const drawerStyle = props.get('drawerStyle');
+    if (
+      !drawerStyle
+      || !instance
+      || !instance.refs.$base
+      || !(instance.refs.$base as any).$el
+    ) {
+      return;
+    }
+
+    const dialogEl = (instance.refs.$base as any).$el.querySelector(
+      '.el-drawer',
+    ) as HTMLDivElement;
+    if (!dialogEl) {
+      return;
+    }
+
+    Object.keys(drawerStyle).forEach((key) => {
+      dialogEl.style[camelCase(key)] = drawerStyle[key];
+    });
+  };
+
+  onMounted(setStyles);
+  onUpdated(setStyles);
+};
 
 export const useDialog: NaslComponentPluginOptions = {
   setup: (props) => {
@@ -11,6 +43,7 @@ export const useDialog: NaslComponentPluginOptions = {
       { name: 'visible', event: 'update:visible' },
     ]);
 
+    useSetDialogStyles(props);
     return {
       visible: opened,
       ...reset,

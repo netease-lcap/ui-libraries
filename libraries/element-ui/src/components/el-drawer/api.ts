@@ -7,6 +7,8 @@ namespace nasl.ui {
       idetype: 'drawer',
       cacheOpenKey: 'visible',
       structured: true,
+
+      bindStyleAttr: 'drawerStyle',
       selector: {
         expression: 'this',
         cssSelector: '.el-drawer',
