@@ -21,6 +21,5 @@
   --el-popup-flow-duration: 0.2s;
   --el-popup-flow-fn: cubic-bezier(0.82, 0, 1, 0.9);
   --el-popup-flow-transition-enter: opacity var(--el-popup-flow-duration) linear;
-  --el-popup-flow-transition-leave: opacity var(--el-popup-flow-duration) cubic-bezier(0, 0, 0.15, 1),
-  visibility var(--el-popup-flow-duration) var(--el-popup-flow-fn);
+  --el-popup-flow-transition-leave: opacity var(--el-popup-flow-duration) cubic-bezier(0, 0, 0.15, 1), visibility var(--el-popup-flow-duration) var(--el-popup-flow-fn);
 }
