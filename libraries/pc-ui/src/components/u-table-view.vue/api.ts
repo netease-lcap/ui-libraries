@@ -897,6 +897,7 @@ namespace nasl.ui {
           values: nasl.collection.List<V>;
           oldValues: nasl.collection.List<V>;
           item: T;
+          items: nasl.collection.List<T>;
       }) => any;
 
       @Event({
