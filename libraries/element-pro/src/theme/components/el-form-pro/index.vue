@@ -18,15 +18,15 @@
 
       <el-form-item-pro v-for="(item, index) in addlist" :key="item.id" label="新增" :name="item.name">
         <el-input-pro v-model="formData[item.name]"></el-input-pro>
-        <button v-if="item.id === 0 || item.id === lastAddItem - 1" @click="addItem" slot="statusIcon" variant="dashed">
+        <el-button v-if="item.id === 0 || item.id === lastAddItem - 1" @click="addItem" slot="statusIcon" variant="dashed">
           +
-        </button>
-        <button v-if="item.id > 0" @click="removeItem(item, index)" slot="statusIcon" variant="dashed">
+        </el-button>
+        <el-button v-if="item.id > 0" @click="removeItem(item, index)" slot="statusIcon" variant="dashed">
           -
-        </button>
+        </el-button>
       </el-form-item-pro>
 
-      <el-form-item-pro layout="center" label=" ">
+      <el-form-item-pro layout="center" label=" " class="preview-hidden-colon">
         <el-button type="primary" text="立即创建"></el-button>
       </el-form-item-pro>
     </el-form-pro>
@@ -67,3 +67,8 @@ export default {
   },
 }
 </script>
+<style>
+.preview-hidden-colon .el-p-form__label--colon label::after{
+  content: ''
+}
+</style>

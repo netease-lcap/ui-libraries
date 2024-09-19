@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-flex alignment="center" style="margin-bottom: 20px">
-      <el-text size="small">Light带描边：</el-text>
+      <el-text size="small">浅色带描边：</el-text>
       <el-tag
         v-for="item in items"
         :key="item.label"
@@ -12,7 +12,7 @@
       </el-tag>
     </el-flex>
     <el-flex alignment="center" style="margin-bottom: 20px">
-      <el-text size="small">Light无描边：</el-text>
+      <el-text size="small">浅色无描边：</el-text>
       <el-tag
         v-for="item in items"
         :key="item.label"
@@ -22,7 +22,7 @@
       </el-tag>
     </el-flex>
     <el-flex alignment="center" style="margin-bottom: 20px">
-      <el-text size="small">Dark无描边：</el-text>
+      <el-text size="small">深色无描边：</el-text>
       <el-tag
         v-for="item in items"
         :key="item.label"
@@ -33,7 +33,7 @@
       </el-tag>
     </el-flex>
     <el-flex alignment="center">
-      <el-text size="small">Plain无描边：</el-text>
+      <el-text size="small">普通无描边：</el-text>
       <el-tag
         v-for="item in items"
         :key="item.label"
