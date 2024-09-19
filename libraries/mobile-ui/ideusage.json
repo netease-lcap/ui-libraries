@@ -503,7 +503,7 @@
             "drawerCSSSelector": ".van-popup",
             "dataSource": {
                 "dismiss": "!this.getAttribute('dataSource')",
-                "display": 3,
+                "display": 6,
                 "loopRule": "nth-child(n+2)",
                 "loopElem": "> label[class^='u-radios_radio']:not([data-nodepath])"
             },
@@ -513,7 +513,10 @@
             },
             "translateBindingProperty": ["title", "cancelButtonText", "confirmButtonText", "placeholder", "value"],
             "useFxOrEg":{"property": "value","displayAsAttr":true},
-            "namedSlotOmitWrapper": ["picker-top", "picker-bottom", "option"]
+            "namedSlotOmitWrapper": ["picker-top", "picker-bottom", "option"],
+            "slotWrapperInlineStyle": {
+                "option": "width: 100%"
+            }
         }
     },
     {
