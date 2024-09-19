@@ -2,6 +2,9 @@ import {
   SetupContext, ref, computed, toRefs, watch,
 } from '@vue/composition-api';
 import isFunction from 'lodash/isFunction';
+import lodashGet from 'lodash/get';
+import lodashSet from 'lodash/set';
+import isNil from 'lodash/isNil';
 import { RemoveOptions, ElTreeSelectProps, TreeSelectValue } from './type';
 import { TreeProps, TreeInstanceFunctions, TreeNodeValue } from '../tree';
 import { usePrefixClass, useConfig } from '../hooks/useConfig';
@@ -11,7 +14,6 @@ import useVModel from '../hooks/useVModel';
 import useDefaultValue from '../hooks/useDefaultValue';
 import { SelectInputProps } from '../select-input';
 import { getNodeDataByValue } from './utils';
-import { get as lodashGet, set as lodashSet } from 'lodash';
 
 const DEFAULT_KEYS = {
   label: 'label',
@@ -106,7 +108,7 @@ export default function useTreeSelect(props: ElTreeSelectProps, context: SetupCo
   // multiple tree select node info list
   function getMultipleNodeInfo(): TreeOptionData[] {
     const { value } = treeSelectValue;
-    const list = Array.isArray(value) ? value : [value];
+    const list =  Array.isArray(value) ? value : isNil(value) ? [] : [value];
     if (treeRef.value) {
       return list.map((item) => {
         const finalValue = typeof item === 'object' ? item.value : item;
