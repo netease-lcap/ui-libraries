@@ -91,7 +91,7 @@ export default {
       });
 
       if (this.$vnode.data.staticStyle && this.instance.$el) {
-        setElStyle(this.$vnode.data.staticStyle && this.instance.$el);
+        setElStyle(this.$vnode.data.staticStyle, this.instance.$el);
       }
 
       if (this.$vnode.data.style && this.instance.$el) {
