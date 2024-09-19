@@ -11,3 +11,7 @@
   display: inline-block;
   vertical-align: top;
 }
+
+.formFieldInput.autoWidth, .formRangeFieldInput.autoWidth {
+  width: auto;
+}
