@@ -451,9 +451,11 @@
         "name": "VanForComponents",
         "ideusage": {
             "idetype": "container",
-            "additionalAttribute": {
-                ":dataSource": "\"[{}]\"",
-                ":colnum": "\"1\""
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource')",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> .van-for-components__frag > .van-for-components-item"
             },
             "childAccept": false,
             "useTemplateInDefaultSlot": true
