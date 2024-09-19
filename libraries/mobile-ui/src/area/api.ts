@@ -71,22 +71,24 @@ namespace nasl.ui {
         [key: string]: string;
       };
     };
-    @Prop({
-      group: '主要属性',
-      title: '顶部栏标题',
-      implicitToString: true,
-    })
-    title: nasl.core.String = '标题';
-    @Prop({
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '顶部栏标题',
+    //   implicitToString: true,
+    // })
+    // title: nasl.core.String = '标题';
+    @Prop<VanAreaOptions, 'confirmButtonText'>({
       group: '主要属性',
       title: '确认按钮文字',
       implicitToString: true,
+      if: _ => !_.isNew
     })
     confirmButtonText: nasl.core.String = '确认';
-    @Prop({
+    @Prop<VanAreaOptions, 'cancelButtonText'>({
       group: '主要属性',
       title: '取消按钮文字',
       implicitToString: true,
+      if: _ => !_.isNew
     })
     cancelButtonText: nasl.core.String = '取消';
     @Prop({
