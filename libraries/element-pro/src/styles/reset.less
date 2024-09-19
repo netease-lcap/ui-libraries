@@ -36,14 +36,42 @@
     border-radius: 0;
   }
 
+  .@{prefix}-input {
+    height: calc(var(--el-input-number-inner-height) - 2px);
+  }
+
   .@{prefix}-input-number__decrease {
     border-right: 1px solid var(--el-input-number-button-border-color);
     background-color: var(--el-input-number-button-bg-color);
+    height: calc(var(--el-input-number-button-height) - 2px);
   }
 
   .@{prefix}-input-number__increase {
     border-left: 1px solid var(--el-input-number-button-border-color);
     background-color: var(--el-input-number-button-bg-color);
+    height: calc(var(--el-input-number-button-height) - 2px);
+  }
+
+  &.@{prefix}-size-l {
+    .@{prefix}-input {
+      height: calc(var(--el-input-number-inner-height-l) - 2px);
+    }
+
+    .@{prefix}-input-number__decrease,
+    .@{prefix}-input-number__increase {
+      height: calc(var(--el-input-number-button-height-l) - 2px);
+    }
+  }
+
+  &.@{prefix}-size-s {
+    .@{prefix}-input {
+      height: calc(var(--el-input-number-inner-height-s) - 2px);
+    }
+
+    .@{prefix}-input-number__decrease,
+    .@{prefix}-input-number__increase {
+      height: calc(var(--el-input-number-button-height-s) - 2px);
+    }
   }
 }
 
