@@ -74,14 +74,30 @@ function genTableColumnTemplate(
   selectNameGroupMap: Map<string, NameGroup>,
 ) {
   const { title } = genColumnMeta(property, nameGroup);
+  const required = property.required;
+  const rules: Array<string> = [];
+  if (property.rules && property.rules.length) {
+    property.rules.forEach((rule) => {
+      if (!rule.endsWith(')')) {
+        rule += '()';
+      }
+      rules.push(`nasl.validation.${rule}`);
+    });
+  }
+  if (required) rules.push('nasl.validation.required()');
   return `<UTableViewColumn
     width={180}
     field="${property.name}"
     slotTitle={
+      <>
+        ${required ? '<UText text="*" style="color: red;"></UText>' : ''} 
         <UText text="${title}"></UText>
+      </>
     }
     slotCell={
-        (current) => <UValidator label="${title}" appendTo="body" style="width: 100%;">
+        (current) => <UValidator label="${title}" appendTo="body" 
+        ${rules.length ? `rules={[${rules.join(',')}]}` : ''} 
+        style="width: 100%;">
             ${genSubFormColumnTemplate(
               entity,
               property,
@@ -166,7 +182,7 @@ export function genSubFormStencilTemplate(
         return (
           !filterProperties.includes(property.name) &&
           property?.relationEntity !== mainEntity.name &&
-          filterProperty('inTable')(property)
+          filterProperty('inForm')(property)
         );
       });
       const width = 60 + 160 + properties.length * 180; // “序号列 + 操作列 + 属性列” 的宽度
