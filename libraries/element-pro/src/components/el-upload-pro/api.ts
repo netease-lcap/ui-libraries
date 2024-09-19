@@ -691,6 +691,6 @@ namespace nasl.ui {
       title: '触发上传的元素',
       description: '触发上传的元素，`files` 指本次显示的全部文件。',
     })
-    slotTrigger: (current: { disabled: nasl.core.Boolean }) => Array<ViewComponent>;
+    slotTrigger: () => Array<ViewComponent>;
   }
 }
