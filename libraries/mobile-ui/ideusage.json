@@ -129,7 +129,7 @@
         "name": "VanDropdownItemSon",
         "ideusage": {
             "idetype": "container",
-            "useFxOrEg":{"property": "title"},
+            "useFxOrEg":{"property": "title","displayAsAttr":true},
             "parentAccept": "target.tag.endsWith('van-dropdown-item')",
             "translateBindingProperty": ["value", "title", "arrowDirection", "isLink", "icon"],
             "displaySlotConditions": {
