@@ -60,7 +60,7 @@ export const Default = {
 export const SideBar = {
   name: '侧边栏',
   render: () => ({
-    template: `<el-menu>
+    template: `<el-menu style="height: 100%;">
       <el-menu-item index="1"><el-text text="导航一"></el-text></el-menu-item>
       <el-menu-item index="2"><el-text text="导航二"></el-text></el-menu-item>
       <el-menu-item index="3"><el-text text="导航三"></el-text></el-menu-item>
