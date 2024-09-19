@@ -237,7 +237,7 @@ namespace nasl.ui {
       description: '自动聚焦',
       setter: { concept: 'SwitchSetter' },
     })
-    private autofocus: nasl.core.Boolean = false;
+    autofocus: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',

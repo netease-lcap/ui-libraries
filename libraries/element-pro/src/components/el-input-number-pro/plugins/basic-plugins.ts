@@ -47,3 +47,17 @@ export const useValue: NaslComponentPluginOptions = {
     };
   },
 };
+
+export const useAutoFocus: NaslComponentPluginOptions = {
+  setup: (props) => {
+    const inputProps = props.useComputed('autofocus', (v) => {
+      return {
+        autofocus: v,
+      };
+    });
+
+    return {
+      inputProps,
+    };
+  },
+};
