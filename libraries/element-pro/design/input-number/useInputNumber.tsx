@@ -46,7 +46,7 @@ export default function useInputNumber(props: ElInputNumberProps, context: Setup
     `${classPrefix.value}-input-number`,
     sizeClassNames[props.size],
     {
-      [`${classPrefix.value}-is-${isError ? 'error' : props.status}`]: isError.value || props.status,
+      [`${classPrefix.value}-is-${isError.value ? 'error' : props.status}`]: isError.value || props.status,
       [statusClassNames.disabled]: tDisabled.value,
       [`${classPrefix.value}-is-controls-right`]: props.theme === 'column',
       [`${classPrefix.value}-input-number--${props.theme}`]: props.theme,
