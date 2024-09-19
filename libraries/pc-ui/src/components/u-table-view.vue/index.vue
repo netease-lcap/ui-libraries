@@ -1549,6 +1549,10 @@ export default {
             if (this.$emitPrevent('before-page', paging, this))
                 return;
             delete paging.preventDefault;
+            // 有虚拟滚动，需要重置下状态
+            if (this.virtual && this.$refs.tableRender) {
+                this.$refs.tableRender.resetVirtualData();
+            }
             this.currentDataSource.page(paging);
             this.$emit('update:page-number', number, this);
             this.$emit('page', paging, this);

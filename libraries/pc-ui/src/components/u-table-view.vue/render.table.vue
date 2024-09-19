@@ -660,7 +660,7 @@ export default {
             );
         },
         getRealItem(item, rowIndex) {
-            const data = (this.isSimpleArray(this.currentDataSource.data) && this.currentDataSource.data.length > 0) ? (this.currentDataSource.arrangedData[rowIndex] && this.currentDataSource.arrangedData[rowIndex].simple) : item;
+            const data = this.currentDataSource.isSimpleItem ? (this.currentDataSource.arrangedData[rowIndex] && this.currentDataSource.arrangedData[rowIndex].simple) : item;
             return data;
         },
         getThEllipsis(columnVM) {
@@ -685,11 +685,6 @@ export default {
                 headPlaceholder: this.$refs.headPlaceholder[0],
                 tablewrap: this.$refs.tablewrap[0],
             }
-        },
-        resetVirtualData() {
-            this.virtualIndex = 0;
-            this.virtualTop = 0;
-            this.virtualBottom = 0;
         },
     },
 };
