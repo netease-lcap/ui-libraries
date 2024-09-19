@@ -451,12 +451,12 @@
         "name": "VanForComponents",
         "ideusage": {
             "idetype": "container",
-            "dataSource": {
-                "dismiss":"!this.getAttribute('dataSource')",
-                "display": 3,
-                "loopElem": "> .van-for-components__frag > .van-for-components-item"
-
-            }
+            "additionalAttribute": {
+                ":dataSource": "\"[{}]\"",
+                ":colnum": "\"1\""
+            },
+            "childAccept": false,
+            "useTemplateInDefaultSlot": true
         }
     },
     {
@@ -464,6 +464,7 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
+            "containerDirection": "row",
             "childAccept":"target.tag === 'van-tab'",
             "translateBindingProperty": ["value", "type", "scrollspystr"],
             "dataSource": {
@@ -588,18 +589,25 @@
         "name": "VanPopupCombination",
         "ideusage": {
             "idetype": "container",
+            "namedSlotOmitWrapper": ["reference"],
+            "displaySlotInline": {
+                "reference": true
+            },
             "events": {
                 "click": true
             },
-            "translateBindingProperty": ["title"],
+            "eventsEffect": "reference",
+            "forceRefresh": { "slot": "reference" },
             "selector": [
                 {
                     "expression": "this.getElement(el => el.slotTarget === 'reference')",
-                    "cssSelector": "span[class^='index']"
+                    "cssSelector": "span[class^='popup-combination']",
+                    "placement": "tail"
                 },
                 {
                     "expression": "this",
-                    "cssSelector": "div[class^='u-popup']"
+                    "cssSelector": "div[class^='u-popup']",
+                    "placement": "tail"
                 }
             ]
         }
