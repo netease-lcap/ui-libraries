@@ -24,7 +24,7 @@
    * @desc 表头背景颜色
    * @type color
    */
-  --el-table-head-background-color: var(--el-color-background-6);
+  --el-table-head-background-color: var(--el-bg-color-secondarycontainer);
 
   /**
    * @desc 表格边框颜色

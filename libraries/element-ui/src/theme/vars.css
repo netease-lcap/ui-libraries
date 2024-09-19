@@ -797,7 +797,15 @@
   --disabled-fill-base: var(--background-color-base);
   --disabled-color-base: var(--color-text-placeholder);
   --disabled-border-base: var(--border-color-light);
+  /**
+   * @title 滚动条颜色
+   * @type color
+   */
   --scrollbar-background-color: #9093994d;
+  /**
+   * @title 滚动条悬停颜色
+   * @type color
+   */
   --scrollbar-hover-background-color: #90939980;
 
   /* ====== reset element pro variable ===== */
