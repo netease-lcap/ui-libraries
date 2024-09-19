@@ -54,7 +54,7 @@ namespace nasl.ui {
           useRef: 'argus?.[0]?.index === 0',
         },
       },
-      childAccept: "target.tag === 'ElTableColumnPro'",
+      childAccept: "target.tag === 'el-table-column-pro'",
     },
   })
   @Component({
@@ -751,7 +751,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
-      parentAccept: "['ElTablePro'].includes(target.tag)",
+      parentAccept: "['el-table-pro'].includes(target.tag)",
       childAccept: false,
       selector: 'multiple',
 
