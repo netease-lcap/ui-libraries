@@ -28,6 +28,12 @@
                         "wrap": "false"
                     }
                 }
+            ],
+            "style": [
+                {
+                    "selector": "span[vusion-slot-name-edit='text']",
+                    "declaration": "word-break: break-all"
+                }
             ]
         }
     },
@@ -431,7 +437,8 @@
             },
             "displaySlotConditions": {
                 "empty": false
-            }
+            },
+            "namedSlotOmitWrapper": ["item"]
         }
     },
     {
@@ -497,7 +504,7 @@
             "drawerCSSSelector": ".van-popup",
             "dataSource": {
                 "dismiss": "!this.getAttribute('dataSource')",
-                "display": 3,
+                "display": 6,
                 "loopRule": "nth-child(n+2)",
                 "loopElem": "> label[class^='u-radios_radio']:not([data-nodepath])"
             },
@@ -507,7 +514,10 @@
             },
             "translateBindingProperty": ["title", "cancelButtonText", "confirmButtonText", "placeholder", "value"],
             "useFxOrEg":{"property": "value","displayAsAttr":true},
-            "namedSlotOmitWrapper": ["picker-top", "picker-bottom", "option"]
+            "namedSlotOmitWrapper": ["picker-top", "picker-bottom", "option"],
+            "slotWrapperInlineStyle": {
+                "option": "width: 100%"
+            }
         }
     },
     {
@@ -542,13 +552,21 @@
             "drawerCSSSelector": ".van-popup",
             "dataSource": {
                 "dismiss": "!this.getAttribute('dataSource')",
-                "display": 3,
+                "display": 1,
                 "loopRule": "nth-child(n+2)"
             },
             "scopedSlots": ["title", "picker-top", "picker-bottom"],
             "useFxOrEg":{"property": "value","displayAsAttr":true},
             "translateBindingProperty": ["title", "value", "placeholder", "tabPlaceholder"],
-            "namedSlotOmitWrapper": ["option"]
+            "namedSlotOmitWrapper": ["option"],
+            "displaySlotConditions": {
+                "picker-top": false,
+                "picker-bottom": false,
+                "option": false
+            },
+            "slotWrapperInlineStyle": {
+                "option": "width: 100%"
+            }
         }
     },
     {
@@ -565,7 +583,11 @@
             "scopedSlots": ["title", "picker-top", "pannel-title", "picker-bottom"],
             "namedSlotOmitWrapper": ["picker-top", "picker-bottom"],
             "useFxOrEg":{"property": "value","displayAsAttr":true},
-            "translateBindingProperty": ["startValue", "endValue", "minDate", "maxDate", "title", "placeholder"]
+            "translateBindingProperty": ["startValue", "endValue", "minDate", "maxDate", "title", "placeholder"],
+            "displaySlotConditions": {
+                "top": false,
+                "bottom": false
+            }
         }
     },
     {
@@ -756,7 +778,13 @@
         "ideusage": {
             "idetype": "container",
             "parentAccept": "target.tag.endsWith('van-radio-group')",
-            "translateBindingProperty": ["name"]
+            "translateBindingProperty": ["name"],
+            "operator": {
+                "copy": "this.getParent().getAttribute('dataSource')",
+                "duplicate": "this.getParent().getAttribute('dataSource')",
+                "cut": "this.getParent().getAttribute('dataSource')",
+                "delete": "this.getParent().getAttribute('dataSource')"
+            }
         }
     },
     {
