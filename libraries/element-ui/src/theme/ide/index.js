@@ -225,9 +225,9 @@ const ColorGroups = [
     mapToken: [],
     getMapTokenValue: (seedTokenValues) => {
       return {
-        '--border-color-lighter': seedTokenValues[0],
-        '--border-color-light': seedTokenValues[1],
-        '--border-color-base': seedTokenValues[2],
+        '--border-color-lighter': seedTokenValues[1],
+        '--border-color-light': seedTokenValues[2],
+        '--border-color-base': seedTokenValues[3],
         '--border-color-extra-light': seedTokenValues[0],
       };
     },

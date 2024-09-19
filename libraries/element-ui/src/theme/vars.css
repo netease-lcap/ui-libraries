@@ -228,22 +228,22 @@
     * @title 边框线-浅色
     * @type color
     */
-  --el-color-line-1: #ebeef5;
+  --el-color-line-1: #F2F6FC;
   /**
     * @title 边框线-一般
     * @type color
     */
-  --el-color-line-2: #e4e7ed;
+  --el-color-line-2: #EBEEF5;
   /**
     * @title 边框线-深色
     * @type color
     */
-  --el-color-line-3: #dcdfe6;
+  --el-color-line-3: #E4E7ED;
   /**
     * @title 边框线-重色
     * @type color
     */
-  --el-color-line-4: #ddd;
+  --el-color-line-4: #dcdfe6;
 
   /**
     * @title 导航背景
