@@ -270,8 +270,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '展开子菜单的延时',
-      description: '展开子菜单的延时',
+      title: '隐藏子菜单的延时',
+      description: '隐藏子菜单的延时',
       setter: { concept: 'NumberInputSetter' },
     })
     hideTimeout: nasl.core.Decimal = 300;
