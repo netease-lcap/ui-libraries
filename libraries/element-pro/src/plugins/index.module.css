@@ -5,6 +5,8 @@
   --el-input-number-right-width: 240px;
   --el-input-number-width-s: 240px;
   --el-input-number-width-l: 240px;
+  --el-input-number-right-width-l: 240px;
+  --el-input-number-right-width-s: 240px;
 }
 
 .formRangeFieldInput {
