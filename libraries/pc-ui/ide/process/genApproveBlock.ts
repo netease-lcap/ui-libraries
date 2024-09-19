@@ -18,6 +18,7 @@ function genCreateFormTemplate(
   selectNameGroupMap: Map<string, NameGroup>,
   variableConfigList: Array<any>,
   likeComponent: naslTypes.View,
+  newLogics: Array<string>,
 ) {
   // 审批页面中需要额外显示的属性
   const extraProperties = [
@@ -65,6 +66,7 @@ function genCreateFormTemplate(
                 likeComponent,
                 variableConfigList,
                 selectNameGroupMap,
+                newLogics,
                 true,
               )}
             </UGridLayoutRow>
@@ -153,6 +155,7 @@ export function genApproveBlock(
       selectNameGroupMap,
       variableConfigList,
       likeComponent,
+      newLogics,
     )}
   }
     export namespace app.logics {

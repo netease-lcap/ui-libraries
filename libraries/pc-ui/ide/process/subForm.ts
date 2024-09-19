@@ -5,12 +5,12 @@ import {
   filterProperty,
   firstUpperCase,
   firstLowerCase,
+  getFirstDisplayedProperty,
+  genUniqueQueryNameGroup,
+  transEntityMetadataTypes,
 } from '../blocks/utils';
 
-import {
-  genPropertyEditableTemplate,
-  genColumnMeta,
-} from '../blocks/genCommonBlock';
+import { genColumnMeta, genQueryLogic} from '../blocks/genCommonBlock';
 
 // ----------------------------------------------------------------------------- utils -----------------------------------------------------------------------------
 // 生成当前子表单的命名组
@@ -37,24 +37,6 @@ function genSubFormNameGroup(
     vModelName: 'current.item', // 子表单列v-model绑定值
     entityFullName: `${entity.getNamespace()}.${entityName}`, // 子表单实体全名
   };
-}
-
-// 复用genPropertyEditableTemplate，生成子表单列模版
-function genSubFormColumnTemplate(
-  entity: naslTypes.Entity,
-  property: naslTypes.EntityProperty,
-  nameGroup: NameGroup,
-  selectNameGroupMap: Map<string, NameGroup>,
-) {
-  let temp = genPropertyEditableTemplate(
-    entity,
-    property,
-    nameGroup,
-    selectNameGroupMap,
-  );
-  // case1: 选择器组件添加appendTo="body"属性
-  temp = temp.replace(/<USelect(?![^>]*appendTo="body")/s, '<USelect appendTo="body" ');
-  return temp;
 }
 
 // 子表单实体属性过滤
@@ -98,7 +80,7 @@ function genTableColumnTemplate(
         (current) => <UValidator label="${title}" appendTo="body" 
         ${rules.length ? `rules={[${rules.join(',')}]}` : ''} 
         style="width: 100%;">
-            ${genSubFormColumnTemplate(
+            ${genPropertyEditableTemplate(
               entity,
               property,
               nameGroup,
@@ -165,9 +147,11 @@ export function genSubFormStencilTemplate(
   likeComponent: any,
   variableConfigList: Array<any>,
   selectNameGroupMap: Map<string, NameGroup>,
+  newLogics: Array<string>,
   isApprovePage: boolean, // 是否是审批页面
 ) {
   let result = '';
+  const module = mainEntity.getAncestor('App');
   variableConfigList.forEach((variableConfig) => {
     const { isMainEntity, entity } = variableConfig;
     if (!isMainEntity) {
@@ -184,6 +168,39 @@ export function genSubFormStencilTemplate(
           property?.relationEntity !== mainEntity.name &&
           filterProperty('inForm')(property)
         );
+      });
+      properties.forEach((property) => {
+        // 有外键关联
+        if (property.relationEntity) {
+          const relationEntity = entity.parentNode?.findEntityByName(
+            property.relationEntity,
+          );
+          if (relationEntity) {
+            const displayedProperty = getFirstDisplayedProperty(relationEntity);
+            if (displayedProperty) {
+              const viewElementSelect =
+                likeComponent.getViewElementUniqueName('select');
+              const selectNameGroup = genUniqueQueryNameGroup(
+                module,
+                likeComponent,
+                viewElementSelect,
+                false,
+                relationEntity.name,
+              );
+              selectNameGroup.viewElementSelect = viewElementSelect;
+              // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
+              const key = [entityName, property.name, relationEntity.name].join('-');
+              selectNameGroupMap.set(key, selectNameGroup);
+              const newLogic = genQueryLogic(
+                [relationEntity],
+                selectNameGroup,
+                false,
+                false,
+              );
+              newLogics.push(newLogic);
+            }
+          }
+        }
       });
       const width = 60 + 160 + properties.length * 180; // “序号列 + 操作列 + 属性列” 的宽度
       result += `<UGridLayoutColumn span={12} style="margin-bottom: 24px;">
@@ -295,4 +312,149 @@ export function genSubFormStencilTemplate(
     }
   });
   return result;
+}
+
+/**
+ * property 列生成
+ * @param {*} entity
+ * @param {*} property
+ * @param {*} nameGroup
+ * @param {*} selectNameGroupMap
+ * @returns
+ */
+// 与genCommonBlock中的genPropertyEditableTemplate不同点：
+// 1.可能存在多个子表单，所以在检索属性的外健关联时，key由实体名+属性名+关联实体名组成
+// 2.USelect组件需要额外添加appendTo="body"属性
+function genPropertyEditableTemplate(
+  entity: naslTypes.Entity,
+  property: naslTypes.EntityProperty,
+  nameGroup: NameGroup,
+  selectNameGroupMap: Map<string, NameGroup>,
+) {
+  const dataSource = entity.parentNode;
+  const vModel = `${nameGroup.vModelName}.${property.name}`;
+  const label = (property.label || property.name).replace(/"/g, '&quot;');
+  const { typeAnnotation } = property || {};
+  const { typeNamespace: propertyTypeNamespace } = typeAnnotation || {};
+  const propertyTypeName = transEntityMetadataTypes(
+    typeAnnotation,
+    dataSource.app,
+  );
+  const propertyTypeMaxLength =
+    Number(
+      property.rules
+        .find((item) => item.indexOf('max') > -1)
+        ?.split('(')[1]
+        .slice(0, -1),
+    ) || 0;
+  if (property.relationEntity) {
+    // 有外键关联
+    const relationEntity = dataSource?.findEntityByName(
+      property.relationEntity,
+    );
+    if (relationEntity) {
+      const relationProperty = relationEntity.properties.find(
+        (prop) => prop.name === property.relationProperty,
+      );
+      const displayedProperty = getFirstDisplayedProperty(relationEntity);
+      if (displayedProperty) {
+        const lowerEntityName = firstLowerCase(relationEntity.name);
+        // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
+        const key = [entity.name, property.name, relationEntity.name].join('-'); // 此处的key多了entity.name
+        const selectNameGroup = selectNameGroupMap.get(key);
+        const dataSourceValue = `app.logics.${selectNameGroup.logic}(elements.$ce.page, elements.$ce.size)`;
+        return `<USelect
+                appendTo="body"
+                clearable={true}
+                placeholder="请选择${label}"
+                dataSource={${dataSourceValue}}
+                pageSize={50}
+                textField="${lowerEntityName}.${displayedProperty.name}"
+                valueField="${lowerEntityName}.${relationProperty.name}"
+                pagination={true}
+                value={$sync(${vModel})}
+                emptyValueIsNull={true}>
+            </USelect>`;
+      }
+      return '';
+    }
+    return '';
+  }
+  if (propertyTypeName === 'Boolean') {
+    return `<USelect
+        appendTo="body"
+        clearable={true}
+        value={$sync(${vModel})}
+        placeholder="请选择${label}"
+        emptyValueIsNull={true}>
+        <USelectItem value={true} text="是"></USelectItem>
+        <USelectItem value={false} text="否"></USelectItem>
+    </USelect>`;
+  }
+  if (propertyTypeName === 'Integer' || propertyTypeName === 'Long') {
+    return `<UNumberInput
+        value={$sync(${vModel})}
+        placeholder="请输入${label}">
+    </UNumberInput>`;
+  }
+  if (propertyTypeName === 'Double') {
+    return `<UNumberInput
+        value={$sync(${vModel})}
+        precision={0}
+        step={0}
+        placeholder="请输入${label}">
+    </UNumberInput>`;
+  }
+  if (propertyTypeName === 'Decimal') {
+    return `<UNumberInput
+        value={$sync(${vModel})}
+        precision={0}
+        step={0}
+        placeholder="请输入${label}">
+    </UNumberInput>`;
+  }
+  if (propertyTypeName === 'String' && propertyTypeMaxLength > 256) {
+    return `<UTextarea
+        value={$sync(${vModel})}
+        placeholder="请输入${label}"
+        emptyValueIsNull={true}>
+    </UTextarea>`;
+  }
+  if (propertyTypeName === 'Date') {
+    return `<UDatePicker
+        clearable={true}
+        value={$sync(${vModel})}
+        placeholder="请选择${label}"
+        emptyValueIsNull={true}>
+    </UDatePicker>`;
+  }
+  if (propertyTypeName === 'Time') {
+    return `<UTimePicker
+        value={$sync(${vModel})}
+        placeholder="请选择${label}"
+        emptyValueIsNull={true}>
+    </UTimePicker>`;
+  }
+  if (propertyTypeName === 'DateTime') {
+    return `<UDateTimePicker
+        clearable={true}
+        value={$sync(${vModel})}
+        placeholder="请选择${label}"
+        emptyValueIsNull={true}>
+    </UDateTimePicker>`;
+  }
+  const namespaceArr = propertyTypeNamespace.split('.');
+  const type = namespaceArr.pop();
+  if (type === 'enums') {
+    const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;
+    return `<USelect
+                appendTo="body"
+                clearable={true}
+                value={$sync(${vModel})}
+                placeholder="请选择${label}"
+                dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}
+                emptyValueIsNull={true}>
+            </USelect>`;
+  }
+  return `<UInput value={$sync(${vModel})} placeholder="请输入${label}" emptyValueIsNull={true}></UInput>`;
 }
