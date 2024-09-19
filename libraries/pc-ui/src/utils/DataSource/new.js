@@ -135,6 +135,7 @@ const VueDataSource = Vue.extend({
 
             treeDisplay: false,
             useCache: true,
+            isSimpleItem: false,
         };
     },
     computed: {
@@ -217,6 +218,9 @@ const VueDataSource = Vue.extend({
             }
             if(this.isSimpleArray(arrangedData) && this.tag === "u-table-view") {
                 arrangedData = arrangedData.map(item => ({'simple': item}))
+                this.isSimpleItem = true;
+            } else {
+                this.isSimpleItem = false;
             }
             const filtering = this.filtering;
             if (!this.remoteFiltering && filtering && Object.keys(filtering).length) {

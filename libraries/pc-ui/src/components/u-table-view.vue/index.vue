@@ -52,7 +52,6 @@
         :hasChildrenField="hasChildrenField"
 
         :selectable="selectable"
-        :selectedItem="selectedItem"
 
         :virtual="virtual"
         :itemHeight="itemHeight"
@@ -151,7 +150,6 @@
         :hasChildrenField="hasChildrenField"
 
         :selectable="selectable"
-        :selectedItem="selectedItem"
 
         :virtual="virtual"
         :itemHeight="itemHeight"
@@ -174,6 +172,8 @@
         :rowStyle="rowStyle"
         :usePagination="usePagination"
 
+        :nativeScroll="nativeScroll"
+        :currentValues="currentValues"
         @resize="onResizerDragEnd">
     </u-table-render>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
@@ -371,6 +371,8 @@ export default {
 
         useMask: { type: Boolean, default: true },
         subForm: Boolean, // 是否是子表单
+
+        nativeScroll: { type: Boolean, default: false }, // 是否使用原生滚动条
     },
     data() {
         return {
@@ -553,7 +555,19 @@ export default {
             const oldValue = oldItem ? this.$at(oldItem, this.valueField) : undefined;
             if (value === oldValue)
                 return;
+                
             this.$emit('change', { value, oldValue, item, oldItem }, this);
+            this.currentData.forEach((itemTemp) => {
+                const valueTemp = this.$at(itemTemp, this.valueField);
+                if (!itemTemp.hasOwnProperty('radioChecked')) {
+                    this.$set(itemTemp, 'radioChecked', false);
+                }
+                if (valueTemp === value) {
+                    this.$set(itemTemp, 'radioChecked', true);
+                } else {
+                    this.$set(itemTemp, 'radioChecked', false);
+                }
+            });
         },
         values(values) {
             this.$nextTick(() => {
@@ -722,6 +736,8 @@ export default {
                 data.forEach((item) => {
                     if (!item.hasOwnProperty('disabled'))
                         this.$set(item, 'disabled', false);
+                    if (!item.hasOwnProperty('radioChecked'))
+                        this.$set(item, 'radioChecked', false);
                 });
             }
             if (checkable) {
@@ -1546,6 +1562,10 @@ export default {
             if (this.$emitPrevent('before-page', paging, this))
                 return;
             delete paging.preventDefault;
+            // 有虚拟滚动，需要重置下状态
+            if (this.virtual && this.$refs.tableRender) {
+                this.$refs.tableRender.resetVirtualData();
+            }
             this.currentDataSource.page(paging);
             this.$emit('update:page-number', number, this);
             this.$emit('page', paging, this);
