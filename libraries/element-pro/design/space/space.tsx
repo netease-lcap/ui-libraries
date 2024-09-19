@@ -40,8 +40,8 @@ export default defineComponent({
       const style: { [key: string]: string | number } = {};
       if (needPolyfill.value) {
         const [columnGap, rowGap] = renderGap.split(' ');
-        style['--td-space-column-gap'] = columnGap;
-        style['--td-space-row-gap'] = rowGap || columnGap;
+        style['--el-space-column-gap'] = columnGap;
+        style['--el-space-row-gap'] = rowGap || columnGap;
       } else {
         style.gap = renderGap;
       }
