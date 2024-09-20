@@ -379,6 +379,12 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean = false;
 
+    @Event({
+      title: '点击时',
+      description: '点击时触发',
+    })
+    onClick: (event: {}) => void;
+
     @Slot({
       title: '菜单项内容',
       description: '菜单项内容',
