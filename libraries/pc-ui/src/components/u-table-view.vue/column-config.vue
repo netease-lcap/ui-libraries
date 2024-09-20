@@ -102,6 +102,28 @@ export default {
         });
     },
     methods: {
+        getTitleInfo(nodes, columnVM) {
+            let titleInfo;
+            for (let i = 0; i < nodes.length; i++) {
+                const node = nodes[i];
+                if (node && node.tag && node.tag.endsWith('u-text')) {
+                    const title = node.componentOptions && node.componentOptions.propsData && node.componentOptions.propsData.text;
+                    if (title) {
+                        titleInfo = { text: title, value: columnVM.field };
+                    }
+                } else if (node.children) {
+                    titleInfo = this.getTitleInfo(node.children, columnVM);
+                }
+            }
+            return titleInfo;
+        },
+        getTitleInNewIDE(columnVM) {
+            const titleSlots = columnVM.$slots.title;
+            if (!titleSlots) {
+                return;
+            }
+            return this.getTitleInfo(titleSlots, columnVM);
+        },
         /**
          * 获取配置列的下拉数据
          * 有数据源的情况下返回数据源
@@ -123,6 +145,11 @@ export default {
                             const title = titleSlot.componentOptions && titleSlot.componentOptions.propsData && titleSlot.componentOptions.propsData.text;
                             if (title) {
                                 data.push({ text: title, value: columnVM.field });
+                            }
+                        } else if (this.$env.VUE_APP_DESIGNER) {
+                            const titleInfo = this.getTitleInNewIDE(columnVM)
+                            if (titleInfo) {
+                                data.push(titleInfo)
                             }
                         }
                     }
