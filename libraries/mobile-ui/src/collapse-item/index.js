@@ -203,7 +203,25 @@ export default createComponent({
       if (!this.disabled) {
         this.toggle();
       }
-    }
+    },
+    updateClientHeight() {
+      if (!this.ifDesigner() || !this.expanded) {
+        return;
+      }
+      const { content, wrapper } = this.$refs;
+      if (!content || !wrapper) {
+        return;
+      }
+      const { offsetHeight } = content;
+      if (offsetHeight) {
+        const contentHeight = `${offsetHeight}px`;
+        wrapper.style.height = contentHeight;
+      }
+    },
+  },
+
+  updated() {
+    this.updateClientHeight();
   },
 
   render() {

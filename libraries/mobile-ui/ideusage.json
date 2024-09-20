@@ -709,14 +709,40 @@
             "idetype": "container",
             "parentAccept": "target.tag.endsWith('van-form')",
             "namedSlotOmitWrapper": ["input"],
-            "selector": {
-                "expression": "this.getElement(el => el.slotTarget === 'input')",
-                "cssSelector": "div[is-sub]",
-                "placement": "tail"
-            },
+            "selector": [
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'input')",
+                    "cssSelector": "div[is-sub]",
+                    "placement": "tail"
+                },
+                {
+                    "expression": "this.getElement(el => el.slotTarget === 'left-icon')",
+                    "cssSelector": "div[noallow]",
+                    "placement": "tail"
+                }
+            ],
             "slotWrapperInlineStyle": {
-                "input": "width: 100%"
-            }
+                "input": "width: 100%",
+                "left-icon": "display: flex"
+            },
+            "disableSlotAutoFill": [
+                {
+                    "slot": "input",
+                    "expression": "!!this.getElement(el => el.slotTarget === 'left-icon')"
+                },
+                {
+                    "slot": "title",
+                    "expression": "!!this.getElement(el => el.slotTarget === 'left-icon')"
+                },
+                {
+                    "slot": "left-icon",
+                    "expression": "!this.getElement(el => el.slotTarget === 'left-icon')"
+                }
+            ],
+            "displaySlotConditions": {
+                "left-icon": "!this.getElement(el => el.slotTarget === 'left-icon')"
+            },
+            "translateBindingProperty": ["value"]
         }
     },
     {
