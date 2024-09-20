@@ -509,6 +509,7 @@
             "structured": true,
             "dataSource": {
                 "display": 3,
+                "loopRule": "nth-last-child(-n+2):not(:only-child)",
                 "loopElem": "table > tbody > tr",
                 "emptySlot": {
                     "condition": "this.getDefaultElements().length === 0",
