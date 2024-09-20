@@ -1,5 +1,6 @@
 .root {
   white-space: pre-wrap;
+  max-width: 100%;
 }
 
 .root.size-small {
@@ -31,27 +32,27 @@
 }
 
 .root.color-primary {
-  color: #409EFF;
+  color: var(--color-primary);
 }
 
 .root.color-secondary {
-  color: #666666;
+  color: var(--el-color-text-2);
 }
 
 .root.color-success {
-  color: #67C23A;
+  color: var(--color-success);
 }
 
 .root.color-warning {
-  color: #E6A23C;
+  color: var(--color-warning);
 }
 
 .root.color-error {
-  color: #F56C6C;
+  color: var(--color-error);
 }
 
 .root.color-disabled {
-  color: #C0C4CC;
+  color: var(--font-color-disabled-base);
 }
 
 .root.overflow-ellipsis,
@@ -66,6 +67,7 @@
   word-wrap: break-word;
   hyphens: auto;
   white-space: normal;
+  max-width: 100%;
 }
 
 .root.overflow-nowrap, .root.wrap-nowrap {
