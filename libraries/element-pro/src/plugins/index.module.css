@@ -13,6 +13,7 @@
 .formRangeFieldInput {
   display: inline-block;
   vertical-align: top;
+  max-width: 100%;
 }
 
 .formFieldInput.autoWidth, .formRangeFieldInput.autoWidth {
