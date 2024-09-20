@@ -5,11 +5,15 @@ namespace nasl.ui {
     order: 9,
     ideusage: {
       idetype: 'container',
+      childAccept: false,
       // "structured": true,
       selector: {
         expression: "this.getElement(el => el.slotTarget === 'placeholder' )",
         cssSelector: '.el-image',
       },
+      defaultStyleInBoard: {
+        width: "300px"
+      }
     },
   })
   @Component({
@@ -67,7 +71,7 @@ namespace nasl.ui {
       description: '原生 referrerPolicy',
       setter: { concept: 'InputSetter' },
     })
-    referrerPolicy: nasl.core.String = '';
+    private referrerPolicy: nasl.core.String = '';
 
     @Prop({
       group: '状态属性',

@@ -108,7 +108,7 @@ namespace nasl.ui {
         '以逗号分隔的一个或多个字符串列表表明一系列用户代理使用的可能的图像',
       setter: { concept: 'InputSetter' },
     })
-    srcSet: nasl.core.String;
+    private srcSet: nasl.core.String;
 
     @Event({
       title: '加载失败的回调',

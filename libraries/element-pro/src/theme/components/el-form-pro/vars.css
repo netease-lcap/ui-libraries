@@ -116,18 +116,21 @@
   --el-form-label-margin-colon: 0 var(--el-comp-margin-xxs);
 
   /**
+   * @hidden
    * @desc 表单状态外间距
    * @type margin
    */
   --el-form-status-margin: 0 var(--el-comp-margin-s);
 
   /**
+   * @hidden
    * @desc 表单状态按钮外间距
    * @type margin
    */
   --el-form-status-button-margin: var(--el-comp-margin-s);
 
   /**
+   * @hidden
    * @desc 表单状态按钮宽度
    * @type width
    */
@@ -141,6 +144,7 @@
   --el-from-help-text-margin-top: var(--el-comp-margin-xs);
 
   /**
+   * @hidden
    * @desc 表单状态图标大小
    * @type size
    */

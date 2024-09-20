@@ -396,11 +396,11 @@ namespace nasl.ui {
     })
     onValidate: (event: any) => any;
 
-    @Event({
-      title: '滚动鼠标时',
-      description: '输入框中滚动鼠标时触发',
-    })
-    onWheel: (event: any) => any;
+    // @Event({
+    //   title: '滚动鼠标时',
+    //   description: '输入框中滚动鼠标时触发',
+    // })
+    // onWheel: (event: any) => any;
 
     // @Slot({
     //   title: '左侧文本',
