@@ -33,7 +33,7 @@ export default {
     props: {
         direction: { type: String, default: 'horizontal' },
         size: String,
-        move: Number,
+        move: String,
     },
     computed: {
         bar() {
@@ -95,7 +95,7 @@ export default {
         },
         renderThumbStyle({ move, size, bar }) {
             const style = {};
-            const translate = `translate${bar.axis}(${move}%)`;
+            const translate = `translate${bar.axis}(${move})`;
 
             style[bar.size] = size;
             style.transform = translate;

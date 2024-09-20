@@ -6,8 +6,8 @@
                 <slot></slot>
             </div>
         </div>
-        <f-scroll-view-bar :move="moveX" :size="sizeWidth" v-if="sizeWidth"></f-scroll-view-bar>
-        <f-scroll-view-bar direction="vertical" :move="moveY" :size="sizeHeight" v-if="sizeHeight"></f-scroll-view-bar>
+        <f-scroll-view-bar :move="moveX" :size="sizeWidth" v-if="sizeWidth" ref="widthbar"></f-scroll-view-bar>
+        <f-scroll-view-bar direction="vertical" :move="moveY" :size="sizeHeight" v-if="sizeHeight" ref="heightbar"></f-scroll-view-bar>
     </template>
     <div v-else ref="wrap" :class="$style.wrap" :style="wrapStyle" @scroll="handleNativeScroll">
         <div ref="resize" :class="$style.view">
@@ -31,13 +31,15 @@ export default {
         wrapStyle: Object,
         viewStyle: Object,
         noresize: { type: Boolean, default: false },
+        useThumbThreshold: { type: Boolean, default: false },
+        thumbThreshold: { type: Number, default: 50 },
     },
     data() {
         return {
             sizeWidth: '0',
             sizeHeight: '0',
-            moveX: 0,
-            moveY: 0,
+            moveX: '0',
+            moveY: '0',
         };
     },
     mounted() {
@@ -60,8 +62,26 @@ export default {
         handleScroll(e) {
             const wrapEl = this.$refs.wrap;
 
-            this.moveY = (wrapEl.scrollTop * 100) / wrapEl.clientHeight;
-            this.moveX = (wrapEl.scrollLeft * 100) / wrapEl.clientWidth;
+            if (this.useThumbThreshold) {
+                // 滚动条的宽度
+                const heightBarWidth = this.heightBarWidth || 0;
+                const widthBarHeight = this.widthBarHeight || 0;
+                let height = this.sizeHeight? parseInt(this.sizeHeight.replace('px', '')) : 0;
+                height = wrapEl.scrollHeight - wrapEl.clientHeight < height ? 0 : height;
+                let width = this.sizeWidth? parseInt(this.sizeWidth.replace('px', '')) : 0;
+                width = wrapEl.scrollWidth - wrapEl.clientWidth < width ? 0 : width;
+                let moveY = ((wrapEl.scrollTop) / (wrapEl.scrollHeight)) * wrapEl.clientHeight;
+                moveY = moveY > wrapEl.clientHeight - height ? wrapEl.clientHeight - height : moveY; // 避免translateY过大时，滚动条不显示
+                moveY = moveY - heightBarWidth < 0 ? 0 : moveY - heightBarWidth;
+                this.moveY = moveY + 'px';
+                let moveX = ((wrapEl.scrollLeft) / wrapEl.scrollWidth) * wrapEl.clientWidth;
+                moveX = moveX > wrapEl.clientWidth - width ? wrapEl.clientWidth - width : moveX;
+                moveX = moveX - widthBarHeight < 0 ? 0 : moveX - widthBarHeight; // 避免超出表格宽度，表格body出滚动条
+                this.moveX = moveX + 'px';
+            } else {
+                this.moveY = (wrapEl.scrollTop * 100) / wrapEl.clientHeight + '%';
+                this.moveX = (wrapEl.scrollLeft * 100) / wrapEl.clientWidth + '%';
+            }
 
             this.$emit('scroll', {
                 scrollTop: wrapEl.scrollTop,
@@ -78,11 +98,26 @@ export default {
             if (!wrapEl)
                 return;
 
-            const heightPercentage = (wrapEl.clientHeight * 100) / wrapEl.scrollHeight;
-            const widthPercentage = (wrapEl.clientWidth * 100) / wrapEl.scrollWidth;
+            if (this.useThumbThreshold) {
+                let heightPercentage = (wrapEl.clientHeight) / wrapEl.scrollHeight;
+                heightPercentage = heightPercentage < 1 ? heightPercentage * wrapEl.clientHeight  : '';
+                let widthPercentage = (wrapEl.clientWidth) / wrapEl.scrollWidth;
+                widthPercentage = widthPercentage < 1 ? widthPercentage * wrapEl.clientWidth  : '';
 
-            this.sizeHeight = heightPercentage < 100 ? heightPercentage + '%' : '';
-            this.sizeWidth = widthPercentage < 100 ? widthPercentage + '%' : '';
+                const thumbThreshold = this.thumbThreshold;
+                heightPercentage = heightPercentage < thumbThreshold && heightPercentage > 0 ? thumbThreshold : heightPercentage;
+                widthPercentage = widthPercentage < thumbThreshold && widthPercentage > 0 ? thumbThreshold : widthPercentage;
+                this.sizeHeight = heightPercentage === '' ? '' : heightPercentage + 'px';
+                this.sizeWidth = widthPercentage === '' ? '' : widthPercentage + 'px';
+                this.heightBarWidth = this.$refs.heightbar ? this.$refs.heightbar.$el.getBoundingClientRect().width : 0;
+                this.widthBarHeight = this.$refs.widthbar ? this.$refs.widthbar.$el.getBoundingClientRect().height : 0;
+            } else {
+                const heightPercentage = (wrapEl.clientHeight * 100) / wrapEl.scrollHeight;
+                const widthPercentage = (wrapEl.clientWidth * 100) / wrapEl.scrollWidth;
+
+                this.sizeHeight = heightPercentage < 100 ? heightPercentage + '%' : '';
+                this.sizeWidth = widthPercentage < 100 ? widthPercentage + '%' : '';
+            }
         },
         handleNativeScroll() {
             const wrapEl = this.$refs.wrap;

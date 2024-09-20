@@ -587,6 +587,10 @@ namespace nasl.ui {
           setter: {
               concept: 'SwitchSetter',
           },
+          onChange: [
+            { update: { useScrollThumbThreshold: true }, if: (_) => _ === true },
+            { update: { useScrollThumbThreshold: false }, if: (_) => _ === false },
+        ],
       })
       virtual: nasl.core.Boolean = false;
 
@@ -620,7 +624,17 @@ namespace nasl.ui {
               concept: 'SwitchSetter',
           },
       })
-      nativeScroll: nasl.core.Boolean = false;
+      private nativeScroll: nasl.core.Boolean = false;
+
+      @Prop({
+        group: '交互属性',
+        title: '开启滚动条阈值',
+        description: '与虚拟滚动配合使用，当表格数据量大时，开启滚动条阈值，避免滚动条高度或者宽度过小',
+        setter: {
+            concept: 'SwitchSetter',
+        },
+      })
+      private useScrollThumbThreshold: nasl.core.Boolean = false;
 
       @Prop({
           group: '状态属性',

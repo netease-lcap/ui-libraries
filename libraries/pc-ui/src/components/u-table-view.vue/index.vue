@@ -173,6 +173,8 @@
         :usePagination="usePagination"
 
         :nativeScroll="nativeScroll"
+        :useScrollThumbThreshold="useScrollThumbThreshold"
+
         :currentValues="currentValues"
         @resize="onResizerDragEnd">
     </u-table-render>
@@ -373,6 +375,7 @@ export default {
         subForm: Boolean, // 是否是子表单
 
         nativeScroll: { type: Boolean, default: false }, // 是否使用原生滚动条
+        useScrollThumbThreshold: { type: Boolean, default: false }, // 新的滚动条高度计算方式，有最小高度
     },
     data() {
         return {

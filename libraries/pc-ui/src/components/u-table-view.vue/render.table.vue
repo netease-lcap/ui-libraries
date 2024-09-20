@@ -37,7 +37,7 @@
             <div :class="$style.headPlaceholder" ref="headPlaceholder"></div>
             <div :class="$style.body" ref="body" :style="{ height: number2Pixel(bodyHeight) }" @scroll="onBodyScroll"
                 :sticky-fixed="useStickyFixed">
-                <f-scroll-view :class="$style.scrollcview" @scroll="onScrollView" ref="scrollView" :native="nativeScroll" :hide-scroll="!!tableMetaIndex">
+                <f-scroll-view :class="$style.scrollcview" @scroll="onScrollView" ref="scrollView" :native="nativeScroll" :useThumbThreshold="useScrollThumbThreshold" :hide-scroll="!!tableMetaIndex">
                     <u-table ref="bodyTable" :class="$style['body-table']" :line="line" :striped="striped" :sticky-fixed="useStickyFixed" :style="{ width: number2Pixel(tableWidth)}">
                         <colgroup>
                             <col v-for="(columnVM, columnIndex) in visibleColumnVMs" :key="columnIndex" :width="columnVM.computedWidth">
@@ -267,6 +267,8 @@ export default {
         rowStyle: Function,
 
         nativeScroll: { type: Boolean, default: false },
+        useScrollThumbThreshold: { type: Boolean, default: false },
+
         currentValues: Array,
     },
     data() {
