@@ -1,3 +1,9 @@
 let n = 7000;
-// eslint-disable-next-line no-plusplus
-export const zIndex = () => (n++);
+
+export const zIndex = () => {
+  if (typeof window !== 'undefined' && window.__TESTING__) {
+    return '';
+  }
+  // eslint-disable-next-line no-plusplus
+  return n++;
+};

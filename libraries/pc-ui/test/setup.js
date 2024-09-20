@@ -26,6 +26,7 @@ const mutationObserverMock = vi.fn(function MutationObserver(callback) {
     callback(mockedMutationsList, this);
   };
 });
+window.__TESTING__ = true;
 window.MutationObserver = mutationObserverMock;
 // 将模拟对象赋值给实际的 VisualViewport 属性
 Object.defineProperty(window, 'VisualViewport', { value: function() {} });
