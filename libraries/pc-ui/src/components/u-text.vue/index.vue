@@ -81,6 +81,7 @@ export default {
     word-wrap: break-word;
     hyphens: auto;
     white-space: normal;
+    max-width: 100%;
 }
 
 .root[overflow="nowrap"], .root[wrap="nowrap"] {
