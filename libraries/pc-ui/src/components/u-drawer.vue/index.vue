@@ -161,7 +161,7 @@ export default {
     left: 0!important;
     width: unset!important;
     height: unset!important;
-    z-index: var(--z-index-modal)!important;
+    z-index: var(--z-index-modal);
     -webkit-overflow-scrolling: touch;
     touch-action: cross-slide-y pinch-zoom double-tap-zoom;
     overflow: hidden;

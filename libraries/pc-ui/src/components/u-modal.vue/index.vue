@@ -2,8 +2,8 @@
 <transition v-if="(currentVisible || animationVisible)"
     enter-active-class="animate__animated animate__fadeIn"
     leave-active-class="animate__animated animate__fadeOut animate__fast"
-    >
-    <div :class="$style.root" :static="this.static" @click="handleClose" :functional-modal="functionalModal" :style="$env.VUE_APP_DESIGNER ? {zIndex: 7020} : {}">
+  >
+    <div :class="$style.root" :static="this.static" @click="handleClose" :functional-modal="functionalModal">
         <transition
             enter-active-class="animate__animated animate__fadeInDownSmall"
             leave-active-class="animate__animated animate__fadeOutUpSmall animate__fast">
@@ -53,6 +53,7 @@
 <script>
 import { sync } from '@lcap/vue2-utils';
 import { clickOutside } from '../../directives';
+import { zIndex } from '../../utils/z-index';
 import i18n from './i18n';
 import MEmitter from '../m-emitter.vue';
 import SEmpty from '../../components/s-empty.vue';
@@ -124,11 +125,12 @@ export const UModal = {
             immediate: true,
             handler(visible) {
                 this.$nextTick(() => this.animationVisible = visible);
-                if (visible)
-                    document.addEventListener('keydown', this.escPress);
-                // 按esc退出弹框
-                else
-                    document.removeEventListener('keydown', this.escPress);
+                if (visible) {
+                  this.$nextTick(() => this.setZIndex());
+                  document.addEventListener('keydown', this.escPress);
+                } else { // 按esc退出弹框
+                  document.removeEventListener('keydown', this.escPress);
+                }
             },
         },
     },
@@ -169,6 +171,12 @@ export const UModal = {
             this.currentVisible = false;
             this.$emit('update:visible', false);
             this.$emit('close', { ok }, this);
+        },
+        setZIndex() {
+          if (!this.$el) {
+            return;
+          }
+          this.$el.style.zIndex = zIndex();
         },
         ok() {
             if (this.disableOk)
@@ -250,7 +258,7 @@ export default UModal;
     left: 0!important;
     width: unset!important;
     height: unset!important;
-    z-index: var(--z-index-modal)!important;
+    z-index: var(--z-index-modal);
     -webkit-overflow-scrolling: touch;
     touch-action: cross-slide-y pinch-zoom double-tap-zoom;
     text-align: center;
