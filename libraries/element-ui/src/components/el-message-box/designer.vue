@@ -151,7 +151,7 @@ export default {
     customStyle() {
       if (this.static) {
         return {
-          zIndex: 5000,
+          zIndex: 2000,
           position: 'relative',
           left: 'auto',
           right: 'auto',
@@ -161,7 +161,7 @@ export default {
       }
 
       return {
-        zIndex: 5000,
+        zIndex: 2000,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
       };
     }
