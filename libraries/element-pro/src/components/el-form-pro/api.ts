@@ -397,7 +397,7 @@ namespace nasl.ui {
     @Prop<ElFormItemProOptions, 'initialValue'>({
       group: '数据属性',
       title: '初始值',
-      description: '初始值',
+      description: '初始值,重置表单时回到初始值',
       setter: { concept: 'InputSetter' },
       if: (_) => !_.useRangeValue,
     })
