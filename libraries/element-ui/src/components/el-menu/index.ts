@@ -63,8 +63,10 @@ Menu.methods.handleItemClick = function (item) {
 
   const url = item.link || item.href || item.destination;
   if (item.destination && this.$router && item.target === '_self') {
-    const handleError = () => {
-      this.activeIndex = oldActiveIndex;
+    const handleError = (error) => {
+      if (error) {
+        this.activeIndex = oldActiveIndex;
+      }
     };
 
     if (item.replace === true) {
