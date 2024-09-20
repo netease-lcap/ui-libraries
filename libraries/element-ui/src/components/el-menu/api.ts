@@ -40,13 +40,23 @@ namespace nasl.ui {
       title: '展开',
       description: '展开指定的 sub-menu',
     })
-    open(): any {}
+    open(
+      @Param({
+        title: '子菜单唯一标识'
+      })
+      index: nasl.core.String
+    ): void {}
 
     @Method({
       title: '收起',
       description: '收起指定的 sub-menu',
     })
-    close(): any {}
+    close(
+      @Param({
+        title: '子菜单唯一标识'
+      })
+      index: nasl.core.String,
+    ): void {}
   }
 
   export class ElMenuOptions extends ViewComponentOptions {
