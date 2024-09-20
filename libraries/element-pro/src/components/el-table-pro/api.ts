@@ -403,33 +403,43 @@ namespace nasl.ui {
     })
     maxHeight: nasl.core.String | nasl.core.Decimal;
 
-    @Prop({
+    @Prop<ElTableProOptions<T, V, P, M>, 'pagination'>({
       group: '主要属性',
-      title: 'Pagination',
+      title: '分页',
       description: '是否显示分页',
       setter: { concept: 'SwitchSetter' },
+      onChange: [{
+        clear: [
+          'pageSizeOptions',
+          'pageSize',
+          'page',
+        ],
+        if: (_) => !_,
+      }]
     })
     pagination: nasl.core.Boolean = true;
 
-    @Prop({
+    @Prop<ElTableProOptions<T, V, P, M>, 'pageSizeOptions'>({
       group: '主要属性',
       title: '每页条数选项 ',
       description: '每页条数切换器的选项',
       setter: { concept: 'InputSetter' },
+      if: (_) => _.pagination !== false,
     })
     pageSizeOptions: nasl.core.String = '[10, 20, 50]';
 
-    @Prop({
+    @Prop<ElTableProOptions<T, V, P, M>, 'pageSize'>({
       group: '数据属性',
       title: '默认每页条数',
       docDescription: '每页的数据条数。默认20条。在"分页"属性开启时有效',
       setter: {
         concept: 'NumberInputSetter',
       },
+      if: (_) => _.pagination !== false,
     })
     pageSize: nasl.core.Integer = 10;
 
-    @Prop({
+    @Prop<ElTableProOptions<T, V, P, M>, 'page'>({
       group: '数据属性',
       title: '当前页数',
       description: '当前默认展示在第几页',
@@ -437,6 +447,7 @@ namespace nasl.ui {
       setter: {
         concept: 'NumberInputSetter',
       },
+      if: (_) => _.pagination !== false,
     })
     page: nasl.core.Integer = 1;
 
@@ -606,10 +617,22 @@ namespace nasl.ui {
     // onActiveRowAction: (event: any) => any;
 
     @Event({
-      title: '单元格点击时触发',
+      title: '单元格点击时',
       description: '单元格点击时触发。',
     })
     onCellClick: (event: any) => any;
+
+    @Event({
+      title: '选中行变化时',
+      description: '选中行变化时触发',
+    })
+    onSelectChange: (event: {
+      selectedRowKeys: nasl.collection.List<V>;
+      selectedRowData: nasl.collection.List<T>;
+      type: nasl.core.String; // 'uncheck' | 'check'
+      currentRowKey?: string;
+      currentRowData?: T;
+    }) => any;
 
     // @Event({
     //   title: 'On Column Resize Change',

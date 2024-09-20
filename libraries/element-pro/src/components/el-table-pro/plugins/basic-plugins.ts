@@ -1,10 +1,10 @@
 /* 组件功能扩展插件 */
 // export {};
-import _, { isNil } from 'lodash';
+import _, { isFunction, isNil } from 'lodash';
 import {
   computed, ref, watch, onMounted,
 } from '@vue/composition-api';
-
+import { SelectOptions } from '@element-pro';
 import { $ref, $render, createUseUpdateSync } from '@lcap/vue2-utils';
 
 export { useDataSource } from '@lcap/vue2-utils';
@@ -125,6 +125,16 @@ export const useTable = {
       pagination,
       onSortChange,
       bordered,
+      onSelectChange: (selectedRowKeys: Array<string | number>, context: SelectOptions<any>) => {
+        const onSelectChange = props.get('onSelectChange');
+
+        if (isFunction(onSelectChange)) {
+          onSelectChange({
+            selectedRowKeys,
+            ...context,
+          });
+        }
+      },
       [$ref]: {
         reload() {
           current.value = 1;
