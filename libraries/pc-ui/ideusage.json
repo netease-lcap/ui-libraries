@@ -569,7 +569,16 @@
             "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
             "events": {
                 "click": true
-            }
+            },
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource')",
+                "display": 3,
+                "loopElem": "table > tbody > tr"
+            },
+            "disableSlotAutoFill": [{
+                "slot": "item",
+                "expression": "!this.getAttribute('dataSource')"
+            }]
         }
     },
     {
