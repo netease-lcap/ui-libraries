@@ -216,7 +216,7 @@ namespace nasl.ui {
       title: '组件插槽',
       description: '左侧图标'
     })
-    "slot-left-icon": () => Array<ViewComponent>;
-    slotLeftIcon: () => Array<ViewComponent>
+    'slot-left-icon': () => Array<ViewComponent>;
+    slotLeftIcon: () => Array<ViewComponent>;
   }
 }
