@@ -10,7 +10,11 @@ Link.methods.handleClick = function (event) {
 };
 
 export const ElLink = registerComponent(Link, plugins, {
-  nativeEvents: [],
+  nativeEvents: [
+    'mouseenter', 'dblclick', 'contextmenu',
+    'mousedown', 'mouseup', 'mouseenter',
+    'mouseleave', 'focus', 'blur',
+  ],
   slotNames: ['default'],
   methodNames: [],
 });
