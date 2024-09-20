@@ -3,13 +3,13 @@
  */
 :root {
   /**
-   * @desc 提示框填充颜色
+   * @desc 暗色模式提示框填充颜色/亮色模式提示框边框颜色
    * @type color
    */
   --tooltip-fill: var(--color-text-primary);
 
   /**
-   * @desc 提示框文字颜色
+   * @desc 暗色模式提示框文字颜色/亮色模式提示框填充颜色
    * @type color
    */
   --tooltip-color: var(--color-white);
@@ -21,7 +21,7 @@
   --tooltip-font-size: 12px;
 
   /**
-   * @desc 提示框边框颜色
+   * @desc 暗色模式提示框箭头边框颜色
    * @type color
    */
   --tooltip-border-color: var(--color-text-primary);
