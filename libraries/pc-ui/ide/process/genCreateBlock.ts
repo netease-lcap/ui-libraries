@@ -23,6 +23,7 @@ function genCreateFormTemplate(
   selectNameGroupMap: Map<string, NameGroup>,
   variableConfigList: Array<any>,
   likeComponent: naslTypes.View,
+  newLogics: Array<string>,
 ) {
   const properties = entity.properties.filter(filterProperty('inForm'));
   nameGroup.vModelName = nameGroup.viewVariableEntity; // 主表单绑定的局部变量名
@@ -52,6 +53,7 @@ function genCreateFormTemplate(
             likeComponent,
             variableConfigList,
             selectNameGroupMap,
+            newLogics,
             false,
           )}
           <UGridLayoutColumn span={12}>
@@ -170,6 +172,7 @@ export function genCreateBlock(
       selectNameGroupMap,
       variableConfigList,
       likeComponent,
+      newLogics,
     )}
   }
     export namespace app.logics {

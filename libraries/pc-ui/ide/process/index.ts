@@ -14,7 +14,7 @@ export default {
     ) => genCreateBlock(entity, parentElement, process),
   },
   approve: {
-    title: '一键生成申请页',
+    title: '一键生成审批页',
     genBlock: (
       entity: naslTypes.Entity,
       parentElement: naslTypes.ViewElement,
