@@ -106,14 +106,6 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '允许在过滤时折叠节点',
-      description: '是否允许在过滤时折叠节点',
-      setter: { concept: 'SwitchSetter' },
-    })
-    allowFoldNodeOnFilter: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
       title: 'Check Props',
       description: '透传属性到 checkbox 组件。参考 checkbox 组件 API。',
       setter: { concept: 'InputSetter' },
@@ -279,6 +271,14 @@ namespace nasl.ui {
       indeterminate: boolean;
       loading: boolean;
     }) => nasl.core.Boolean;
+
+    @Prop({
+      group: '主要属性',
+      title: '允许在过滤时折叠节点',
+      description: '是否允许在过滤时点击节点收齐折叠',
+      setter: { concept: 'SwitchSetter' },
+    })
+    allowFoldNodeOnFilter: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
