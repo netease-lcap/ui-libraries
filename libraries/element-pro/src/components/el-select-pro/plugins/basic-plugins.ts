@@ -14,7 +14,7 @@ export const useSelect = {
   props: ['valueField', 'labelField', 'data'],
   setup(props, ctx) {
     const valueField = props.useComputed('valueField', (v) => v || 'value');
-    const textField = props.useComputed('textField', (v) => v || 'label');
+    const textField = props.useComputed('textField', (v) => v || 'text');
 
     const options = props.useComputed('data', (v) => (_.isEmpty(v) ? undefined : v));
     const keys = props.useComputed('keys', (v) => (_.isObject(v) ? v : {}));

@@ -147,7 +147,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    textField: (item: T) => any = ((item: any) => item.label) as any;
+    textField: (item: T) => any = ((item: any) => item.text) as any;
 
     @Prop<ElSelectProOptions<T, V, P, M, C>, 'valueField'>({
       group: '数据属性',

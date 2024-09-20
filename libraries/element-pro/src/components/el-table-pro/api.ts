@@ -512,7 +512,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    rowKey: (item: T) => any = ((item) => item.id) as any;
+    rowKey: (item: T) => any = ((item: any) => item.id) as any;
 
     // @Prop({
     //   group: '主要属性',
@@ -719,7 +719,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '表格列',
-          code: '<el-table-column-pro data-nodepath-multiple="ture"></el-table-column-pro>',
+          code: '<el-table-column-pro data-nodepath-multiple="ture"><template #title><el-text text="表格列"></el-text></template></el-table-column-pro>',
         },
       ],
     })
