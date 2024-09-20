@@ -103,7 +103,7 @@ export default {
     },
     methods: {
         getTitleInfo(nodes, columnVM) {
-            let titleInfo = {};
+            let titleInfo;
             for (let i = 0; i < nodes.length; i++) {
                 const node = nodes[i];
                 if (node && node.tag && node.tag.endsWith('u-text')) {
@@ -120,7 +120,7 @@ export default {
         getTitleInNewIDE(columnVM) {
             const titleSlots = columnVM.$slots.title;
             if (!titleSlots) {
-                return [];
+                return;
             }
             return this.getTitleInfo(titleSlots, columnVM);
         },
@@ -148,7 +148,9 @@ export default {
                             }
                         } else if (this.$env.VUE_APP_DESIGNER) {
                             const titleInfo = this.getTitleInNewIDE(columnVM)
-                            data.push(titleInfo)
+                            if (titleInfo) {
+                                data.push(titleInfo)
+                            }
                         }
                     }
                 }
