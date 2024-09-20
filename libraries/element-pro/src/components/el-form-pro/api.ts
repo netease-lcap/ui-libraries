@@ -251,7 +251,7 @@ namespace nasl.ui {
       description: '是否显示必填符号（*），默认显示',
       setter: { concept: 'SwitchSetter' },
     })
-    requiredMark: nasl.core.Boolean = true;
+    requiredMark: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
