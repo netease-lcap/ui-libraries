@@ -567,6 +567,16 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '忽略验证',
+      description: '忽略验证',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    disableValidate: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '显示错误信息',
       description: '校验不通过时，是否显示错误提示信息，默认使用表单配置',
       setter: {

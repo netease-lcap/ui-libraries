@@ -80,6 +80,39 @@ const useExtendsFormProps = (props: MapGet) => {
 
 const getNotUndefinedValue = (v, initV = null) => (v === undefined ? initV : v);
 
+const useRules = ({ useComputed }: MapGet) => {
+  const rules = useComputed<any>('rules', (v) => {
+    if (!v) {
+      return [];
+    }
+
+    return map(v, (item) => {
+      return {
+        // required: item.required,
+        // message: item.message,
+        // ...item,
+        trigger: 'all',
+        validator: (val) => {
+          const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
+          return new Promise((resolve) => {
+            validator.validate(val).then(() => {
+              resolve(true as CustomValidateResolveType);
+            }).catch((errorMessage) => {
+              resolve({
+                result: false,
+                message: errorMessage,
+              } as CustomValidateResolveType);
+            });
+          });
+        },
+      } as FormRule;
+    });
+  });
+  const disableValidate = useComputed('disableValidate', (val) => val ?? false);
+
+  return computed(() => (disableValidate.value ? [] : rules.value));
+};
+
 export const useExtensPlugin: NaslComponentPluginOptions = {
   props: [
     'colSpan',
@@ -91,6 +124,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     'initialValue',
     'startInitialValue',
     'endInitialValue',
+    'disableValidate',
   ],
   setup(props, { h, isDesigner, setupContext: ctx }) {
     const { useComputed } = props;
@@ -110,36 +144,8 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     const { name: nameRef } = inject<FormItemExtendsContext>(FORM_ITEM_CONTEXT, { } as any);
     const uid = uniqueId(LCAP_FORM_UID);
 
-    const rules = useComputed<any>('rules', (v) => {
-      if (!v) {
-        return [];
-      }
-
-      return map(v, (item) => {
-        return {
-          // required: item.required,
-          // message: item.message,
-          // ...item,
-          trigger: 'all',
-          validator: (val) => {
-            const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
-            return new Promise((resolve) => {
-              validator.validate(val).then(() => {
-                resolve(true as CustomValidateResolveType);
-              }).catch((errorMessage) => {
-                resolve({
-                  result: false,
-                  message: errorMessage,
-                } as CustomValidateResolveType);
-              });
-            });
-          },
-        } as FormRule;
-      });
-    });
-
-    const extendsFormProps = useExtendsFormProps(props);
-    const ellipsisRef = useComputed<boolean | undefined>('labelEllipsis');
+    const rules = useRules(props);
+    const { labelEllipsis: ellipsisRef, ...extendsFormProps } = useExtendsFormProps(props);
 
     const className = computed<string>(() => {
       const e = unref(ellipsisRef);
@@ -322,4 +328,15 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       },
     };
   },
+};
+
+export const useLowcode: NaslComponentPluginOptions = {
+  setup(props) {
+    return {
+      style: {
+        overflow: 'hidden',
+      },
+    };
+  },
+  onlyUseIDE: true,
 };
