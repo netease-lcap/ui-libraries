@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-table-pro rowKey="index"></el-table-pro>',
+    template: '<el-table-pro></el-table-pro>',
   }),
 };

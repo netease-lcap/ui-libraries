@@ -512,7 +512,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    rowKey: (item: T) => any;
+    rowKey: (item: T) => any = ((item) => item.id) as any;
 
     // @Prop({
     //   group: '主要属性',
