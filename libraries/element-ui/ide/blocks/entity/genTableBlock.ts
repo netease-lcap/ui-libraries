@@ -18,7 +18,7 @@ function genTableColumnTemplate(property: naslTypes.EntityProperty, nameGroup: N
         <ElText text="${title}"></ElText>
     }
     slotCell={
-        (current) => ${genTextTemplate(property, nameGroup)}
+        (current) => <>${genTextTemplate(property, nameGroup)}</>
     }>
   </ElTableColumnPro>`;
 }
@@ -101,6 +101,13 @@ export function genTableBlock(entity: naslTypes.Entity, refElement: naslTypes.Vi
     }
   });
   const allEntities = [...entitySet];
+
+  console.log(`export function view() {
+      return ${genTableTemplate(entity, nameGroup)}
+    }
+    export namespace app.logics {
+        ${genQueryLogic(allEntities, nameGroup, true, true, false, refElement.parentNode)}
+    }`);
 
   return `export function view() {
       return ${genTableTemplate(entity, nameGroup)}
