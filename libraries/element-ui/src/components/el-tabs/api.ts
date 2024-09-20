@@ -93,20 +93,10 @@ namespace nasl.ui {
     })
     valueField: (item: T) => V = ((item: any) => item.value) as any;
 
-    @Prop({
-      group: '数据属性',
-      title: '选中值',
-      description: '绑定值，选中选项卡的 name',
-      setter: { concept: 'InputSetter' },
-      sync: true,
-      settable: true,
-    })
-    value: nasl.core.String;
-
-    @Prop({
+    @Prop<ElTabsOptions<T, V>, 'tabPaneProps'>({
       group: '数据属性',
       title: '标签页属性设置',
-      description: '标签页属性设置',
+      description: '开启数据源后，设置每个标签页属性',
       setter: {
         concept: 'AnonymousFunctionSetter',
       },
@@ -117,6 +107,17 @@ namespace nasl.ui {
       closable: nasl.core.Boolean;
       lazy: nasl.core.Boolean;
     };
+
+    @Prop({
+      group: '数据属性',
+      title: '选中值',
+      description: '绑定值，选中选项卡的 name',
+      setter: { concept: 'InputSetter' },
+      sync: true,
+      settable: true,
+    })
+    value: nasl.core.String;
+
 
     @Prop({
       group: '主要属性',
