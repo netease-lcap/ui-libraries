@@ -8,6 +8,7 @@
 
 <script>
 import { createPopper as initialPopper } from '@popperjs/core';
+import { zIndex } from '../../utils/z-index';
 import MEmitter from '../m-emitter.vue';
 import ev from '../../utils/event';
 import single from '../../utils/event/single';
@@ -345,6 +346,7 @@ export default {
                 }
             }
             if (this.appendTo === 'body') {
+                popperEl.style.zIndex = zIndex();
                 const container = window.LcapMicro && window.LcapMicro.appendTo ? window.LcapMicro.appendTo : document.body;
                 container.appendChild(popperEl);
             } else if (this.appendTo === 'reference')

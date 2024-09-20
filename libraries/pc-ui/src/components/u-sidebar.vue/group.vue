@@ -257,7 +257,7 @@ export default {
             const final = () => {
                 this.currentExpanded = expanded;
                 this.$emit('update:expanded', expanded);
-                if ((this.parentVM && this.parentVM.accordion) || mode) {
+                if ((this.parentVM && this.rootVM && this.rootVM.accordion) || mode) {
                     this.parentVM.groupVMs.forEach((groupVM) => {
                         if (groupVM !== this) {
                             groupVM.currentExpanded = false;
