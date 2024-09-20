@@ -1,6 +1,7 @@
 import { Radio, RadioGroup } from '@element-pro';
 import { registerComponent } from '@lcap/vue2-utils';
 import * as plugins from './plugins';
+import * as radioPlugins from './plugins/radio-plugins';
 import './index.less';
 
 export const ElRadioGroupPro = registerComponent(RadioGroup, plugins, {
@@ -14,6 +15,6 @@ export const ElRadioGroupPro = registerComponent(RadioGroup, plugins, {
   },
 });
 
-export const ElRadioPro = Radio;
+export const ElRadioPro = registerComponent(Radio, radioPlugins, {});
 
 export default ElRadioGroupPro;
