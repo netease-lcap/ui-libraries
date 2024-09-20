@@ -13,7 +13,7 @@ export const useUpdateSync = createUseUpdateSync([
 ]);
 
 export const useTable = {
-  props: ['onPageChange', 'page', 'pageSize'],
+  props: ['onPageChange', 'page', 'pageSize', 'pageSizeOptions', 'showTotal', 'showJumper'],
   setup(props, ctx) {
     const current = props.useRef('page', (v) => v ?? 1);
     const sorting = props.useComputed('sorting', (value) => value);
@@ -70,6 +70,9 @@ export const useTable = {
       }
     });
 
+    const totalContent = props.useComputed('showTotal', (value: boolean) => value ?? true);
+    const showJumper = props.useComputed('showJumper', (value: boolean) => value ?? true);
+
     // const pageSize = props.useComputed('pageSize', (value) => {
     //   return _.toNumber(value) || 10;
     // });
@@ -88,10 +91,11 @@ export const useTable = {
       }
       return {
         pageSizeOptions: pageSizeOptions.value,
-        showJumper: true,
+        showJumper: showJumper.value,
         current: current.value,
         total: total.value,
         pageSize: pageSize.value,
+        totalContent: totalContent.value,
       };
     });
 
