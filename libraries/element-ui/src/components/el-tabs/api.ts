@@ -22,6 +22,10 @@ namespace nasl.ui {
       displaySlotInline: {
         label: true,
       },
+      displaySlotConditions: {
+        label: "!!this.getAttribute('dataSource')",
+        content: "!!this.getAttribute('dataSource')",
+      }
     },
   })
   @Component({
