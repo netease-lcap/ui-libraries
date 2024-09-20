@@ -30,6 +30,13 @@ namespace nasl.ui {
         trigger: '"click"',
         ':hideOnClick': '"false"',
       },
+      style: [
+        {
+          selector: "[aria-disabled='true']> [disabled]",
+          declaration: 'pointer-events: none;',
+          append: true,
+        },
+      ],
       // displaySlotConditions: {
       //   default: "!this.getAttribute('splitButton')"
       // }
