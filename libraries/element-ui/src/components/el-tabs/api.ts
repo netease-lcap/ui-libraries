@@ -196,6 +196,12 @@ namespace nasl.ui {
     ) => nasl.core.Boolean;
 
     @Event({
+      title: '改变时',
+      description: '激活标签页改变时触发',
+    })
+    onInput: (event: nasl.core.String) => void;
+
+    @Event({
       title: '点击标签页',
       description: 'tab 被选中时触发',
     })
@@ -203,7 +209,7 @@ namespace nasl.ui {
       active: nasl.core.Boolean;
       loaded: nasl.core.Boolean;
       isClosable: nasl.core.Boolean;
-      value: nasl.core.String | nasl.core.Integer;
+      value: nasl.core.String;
     }) => void;
 
     @Event({
