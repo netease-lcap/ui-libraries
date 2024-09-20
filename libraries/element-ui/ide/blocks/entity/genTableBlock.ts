@@ -18,9 +18,7 @@ function genTableColumnTemplate(property: naslTypes.EntityProperty, nameGroup: N
         <ElText text="${title}"></ElText>
     }
     slotCell={
-        (current) => <ElFlex>
-            ${genTextTemplate(property, nameGroup)}
-        </ElFlex>
+        (current) => ${genTextTemplate(property, nameGroup)}
     }>
   </ElTableColumnPro>`;
 }
