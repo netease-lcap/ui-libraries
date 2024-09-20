@@ -169,7 +169,7 @@ export default {
     background: var(--drawer-wrap-background);
 }
 
-.root::before {
+.root::after {
     content: '';
     display: inline-block;
     vertical-align: middle;
