@@ -64,15 +64,14 @@ Menu.methods.handleItemClick = function (item) {
   const url = item.link || item.href || item.destination;
   if (item.destination && this.$router && item.target === '_self') {
     const handleError = (error) => {
-      if (error) {
-        this.activeIndex = oldActiveIndex;
-      }
+      this.activeIndex = oldActiveIndex;
     };
+    const noop = () => {};
 
     if (item.replace === true) {
-      this.$router.replace(item.destination, handleError);
+      this.$router.replace(item.destination, noop, handleError);
     } else {
-      this.$router.push(item.destination, handleError);
+      this.$router.push(item.destination, noop, handleError);
     }
   } else if (url) {
     if (item.target === '_blank') {
