@@ -77,7 +77,6 @@ namespace nasl.ui {
       description: '当前文件列表',
       sync: true,
       docDescription: '当前的文件列表',
-      settable: true,
     })
     value: nasl.core.String;
 

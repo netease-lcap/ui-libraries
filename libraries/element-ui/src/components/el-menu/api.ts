@@ -82,7 +82,6 @@ namespace nasl.ui {
       title: '折叠状态',
       description: '是否水平折叠收起菜单（仅在 mode 为 vertical 时可用）',
       setter: { concept: 'SwitchSetter' },
-      settable: true,
       if: (_) => _.mode === 'vertical',
     })
     collapse: nasl.core.Boolean = false;

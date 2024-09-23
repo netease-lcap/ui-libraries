@@ -115,7 +115,6 @@ namespace nasl.ui {
       description: '绑定值，选中选项卡的 name',
       setter: { concept: 'InputSetter' },
       sync: true,
-      settable: true,
     })
     value: nasl.core.String;
 

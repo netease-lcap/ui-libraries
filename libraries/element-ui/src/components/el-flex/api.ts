@@ -217,7 +217,6 @@ namespace nasl.ui {
       title: '加载中',
       description: '加载中状态',
       docDescription: '加载中状态',
-      settable: true,
       setter: {
         concept: 'SwitchSetter',
       }

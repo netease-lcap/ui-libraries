@@ -41,7 +41,6 @@ namespace nasl.ui {
     @Prop({
       group: '状态属性',
       sync: true,
-      settable: true,
       title: '显示',
       description: '是否显示对话框',
       setter: { concept: 'SwitchSetter' },

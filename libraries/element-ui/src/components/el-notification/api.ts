@@ -59,7 +59,6 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
-      settable: true,
       sync: true,
     })
     visible: nasl.core.Boolean = false;
