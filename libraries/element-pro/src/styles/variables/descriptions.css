@@ -1,0 +1,10 @@
+/**
+ * @component el-descriptions-pro
+ */
+:root {
+  --el-descriptions-header-margin: var(--el-comp-margin-m);
+  --el-descriptions-padding-l: var(--el-comp-paddingTB-l);
+  --el-descriptions-padding-m: var(--el-comp-paddingLR-m) var(--el-comp-paddingLR-l);
+  --el-descriptions-padding-s: var(--el-comp-paddingLR-s) var(--el-comp-paddingLR-l);
+  --el-descriptions-td-border: 1px solid var(--el-component-border);
+}

@@ -1,0 +1,40 @@
+/**
+ * @component el-dialog
+ */
+:root {
+  /**
+   * @desc 对话框背景色
+   * @type color
+   */
+  --dialog-background-color: var(--color-white);
+
+  /**
+   * @desc 对话框阴影
+   * @type shadow
+   */
+  --dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+  /**
+   * @desc 对话框标题字体大小
+   * @type font-size
+   */
+  --dialog-title-font-size: var(--font-size-large);
+
+  /**
+   * @desc 对话框内容字体大小
+   * @type font-size
+   */
+  --dialog-content-font-size: 14px;
+
+  /**
+   * @desc 对话框字体行高
+   * @type line-height
+   */
+  --dialog-font-line-height: var(--font-line-height-primary);
+
+  /**
+   * @desc 对话框主要内边距
+   * @type padding
+   */
+  --dialog-padding-primary: 20px;
+}

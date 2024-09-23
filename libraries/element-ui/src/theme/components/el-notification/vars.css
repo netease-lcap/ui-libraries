@@ -1,0 +1,118 @@
+/**
+ * @component el-notification
+ */
+:root {
+  /**
+   * @desc 通知宽度
+   * @type size
+   */
+  --notification-width: 330px;
+
+  /**
+   * @desc 通知内边距
+   * @type spacing
+   */
+  --notification-padding: 14px 26px 14px 13px;
+
+  /**
+   * @desc 通知圆角半径
+   * @type size
+   */
+  --notification-radius: 8px;
+
+  /**
+   * @desc 通知阴影
+   * @type shadow
+   */
+  --notification-shadow: var(--box-shadow-light);
+
+  /**
+   * @desc 通知边框颜色
+   * @type color
+   */
+  --notification-border-color: var(--border-color-lighter);
+
+  /**
+   * @desc 通知图标大小
+   * @type size
+   */
+  --notification-icon-size: 24px;
+
+  /**
+   * @desc 关闭按钮字体大小
+   * @type size
+   */
+  --notification-close-font-size: var(--message-close-size);
+
+  /**
+   * @desc 通知组左外边距
+   * @type spacing
+   */
+  --notification-group-margin-left: 13px;
+
+  /**
+   * @desc 通知组右外边距
+   * @type spacing
+   */
+  --notification-group-margin-right: 8px;
+
+  /**
+   * @desc 通知内容字体大小
+   * @type size
+   */
+  --notification-content-font-size: var(--font-size-base);
+
+  /**
+   * @desc 通知内容颜色
+   * @type color
+   */
+  --notification-content-color: var(--color-text-regular);
+
+  /**
+   * @desc 通知标题字体大小
+   * @type size
+   */
+  --notification-title-font-size: 16px;
+
+  /**
+   * @desc 通知标题颜色
+   * @type color
+   */
+  --notification-title-color: var(--color-text-primary);
+
+  /**
+   * @desc 关闭按钮颜色
+   * @type color
+   */
+  --notification-close-color: var(--color-text-secondary);
+
+  /**
+   * @desc 关闭按钮悬停颜色
+   * @type color
+   */
+  --notification-close-hover-color: var(--color-text-regular);
+
+  /**
+   * @desc 成功通知图标颜色
+   * @type color
+   */
+  --notification-success-icon-color: var(--color-success);
+
+  /**
+   * @desc 信息通知图标颜色
+   * @type color
+   */
+  --notification-info-icon-color: var(--color-info);
+
+  /**
+   * @desc 警告通知图标颜色
+   * @type color
+   */
+  --notification-warning-icon-color: var(--color-warning);
+
+  /**
+   * @desc 危险通知图标颜色
+   * @type color
+   */
+  --notification-danger-icon-color: var(--color-danger);
+}

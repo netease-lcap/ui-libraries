@@ -11,6 +11,7 @@ import {
   virtualThemePreviewWrapFileId,
 } from '../constants/virtual-file-names';
 import { themePath } from '../constants/input-paths';
+import { Dependency } from '../build/types';
 
 export interface LcapCodeGenOption {
   type?: 'extension' | 'nasl.ui';
@@ -21,6 +22,7 @@ export interface LcapCodeGenOption {
   previewPages?: Array<{ name: string; title: string }>;
   findThemeType?: 'theme' | 'component';
   framework?: 'react' | 'vue2' | 'taro' | 'vue3',
+  dependencies?: Dependency[],
   pkg?: any;
 }
 
@@ -33,6 +35,7 @@ function genVarCssCode({
   themeVarCssPath,
   themeComponentFolder: componentFolder,
   findThemeType,
+  ...reset
 }: LcapCodeGenOption) {
   const cssVars: string[] = [];
 
@@ -46,11 +49,25 @@ function genVarCssCode({
     cssVars.push(...varFiles);
   }
 
+  if (reset.dependencies && reset.dependencies.length > 0) {
+    reset.dependencies.forEach(({ rootPath }) => {
+      const depVarFiles = glob.sync('*/vars.css', { cwd: path.resolve(rootPath, './src/theme/components'), absolute: true });
+      if (depVarFiles.length > 0) {
+        cssVars.push(...depVarFiles);
+      }
+    });
+  }
+
   const code = cssVars.map((filePath) => `@import '${normalizePath(filePath)}';`).join('\n');
   return code;
 }
 
-function genComponentStoriesCode({ themeComponentFolder: componentFolder = '', framework, findThemeType }: LcapCodeGenOption) {
+function genComponentStoriesCode({
+  themeComponentFolder: componentFolder = '',
+  framework,
+  findThemeType,
+  dependencies,
+}: LcapCodeGenOption) {
   const imports: string[] = [
     `import createComponentPreview from '${normalizePath(path.resolve(__dirname, `../../input/${framework}/createComponentPreview`))}';`,
   ];
@@ -58,7 +75,7 @@ function genComponentStoriesCode({ themeComponentFolder: componentFolder = '', f
   const previewFilePath = findThemeType === 'component' ? '*/theme/index.{tsx,ts,jsx,js,vue}' : '*/index.{tsx,ts,jsx,js,vue}';
 
   const previewFiles = glob.sync(previewFilePath, { cwd: componentFolder });
-  // console.log(previewFiles);
+
   previewFiles.forEach((previewPath) => {
     const filePath = path.resolve(componentFolder, previewPath);
     const compName = previewPath.substring(0, previewPath.indexOf('/'));
@@ -71,6 +88,26 @@ function genComponentStoriesCode({ themeComponentFolder: componentFolder = '', f
       `{ demo: ${varName}, name: '${name}' },`,
     );
   });
+
+  if (dependencies && dependencies.length > 0) {
+    dependencies.forEach(({ rootPath }) => {
+      const themeCompRootPath = path.resolve(rootPath, './src/theme/components');
+      const files = glob.sync(previewFilePath, { cwd: themeCompRootPath });
+
+      files.forEach((previewPath) => {
+        const filePath = path.resolve(themeCompRootPath, previewPath);
+        const compName = previewPath.substring(0, previewPath.indexOf('/'));
+        const varName = upperFirst(camelCase(compName));
+        const name = framework && framework.startsWith('vue') ? kebabCase(varName) : varName;
+
+        imports.push(`import ${varName} from '${normalizePath(filePath)}';`);
+
+        stories.push(
+          `{ demo: ${varName}, name: '${name}' },`,
+        );
+      });
+    });
+  }
 
   stories.push('];');
 

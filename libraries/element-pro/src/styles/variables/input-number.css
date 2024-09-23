@@ -1,0 +1,51 @@
+/**
+ * @component el-input-number-pro
+ */
+:root {
+  --el-input-number-inner-color: var(--el-text-color-primary);
+  --el-input-number-button-bg-color: transparent;
+  --el-input-number-right-button-bg-color: var(--el-bg-color-secondarycontainer);
+  --el-input-number-right-button-hover-bg-color: var(--el-bg-color-component-hover);
+  --el-input-number-button-border-color: var(--el-border-level-2-color);
+  --el-input-number-button-color: var(--el-text-color-disabled);
+  --el-input-number-right-bg-color: var(--el-bg-color-container);
+  --el-input-number-right-button-border-color: var(--el-border-level-2-color);
+  --el-input-number-border-color-hover: var(--el-brand-color-hover);
+  --el-input-number-right-border-color-hover: var(--el-brand-color-hover);
+  --el-input-number-button-color-hover: var(--el-brand-color);
+  --el-input-number-bg-color-disabled: var(--el-bg-color-component-disabled);
+  --el-input-number-inner-color-disabled: var(--el-text-color-disabled);
+  --el-input-number-button-color-disabled: var(--el-text-color-disabled);
+  --el-input-number-button-bg-color-disabled: var(--el-bg-color-component-disabled);
+  --el-input-number-text-color-tips: var(--el-text-color-placeholder);
+  --el-input-number-text-color-success: var(--el-success-color);
+  --el-input-number-text-color-warning: var(--el-warning-color);
+  --el-input-number-text-color-error: var(--el-error-color);
+  --el-input-number-width-s: 120px;
+  --el-input-number-width: 144px;
+  --el-input-number-width-l: 168px;
+  --el-input-number-button-width-s: var(--el-comp-size-xs);
+  --el-input-number-button-width: var(--el-comp-size-m);
+  --el-input-number-button-width-l: var(--el-comp-size-xl);
+  --el-input-number-button-height-s: var(--el-comp-size-xs);
+  --el-input-number-button-height: var(--el-comp-size-m);
+  --el-input-number-button-height-l: var(--el-comp-size-xl);
+  --el-input-number-inner-height-s: var(--el-comp-size-xs);
+  --el-input-number-inner-height: var(--el-comp-size-m);
+  --el-input-number-inner-height-l: var(--el-comp-size-xl);
+  --el-input-number-right-width-s: 88px;
+  --el-input-number-right-width: 96px;
+  --el-input-number-right-width-l: 120px;
+  --el-input-number-right-button-width: var(--el-comp-size-m);
+  --el-input-number-right-button-width-l: var(--el-comp-size-xl);
+  --el-input-number-button-column-height-s: calc(calc(var(--el-comp-size-xs) / 2) - 2px);
+  --el-input-number-button-column-height: calc(calc(var(--el-comp-size-m) / 2) - 2px);
+  --el-input-number-button-column-height-l: calc(calc(var(--el-comp-size-xl) / 2) - 2px);
+  --el-input-number-padding-horizontal-default: var(--el-comp-paddingLR-s);
+  --el-input-number-font-size: var(--el-font-size-body-large);
+  --el-input-number-font-size-s: var(--el-font-size-body-medium);
+  --el-input-number-font-size-l: calc(10px * 1.8);
+  --el-input-number-right-font-size: var(--el-font-size-body-small);
+  --el-input-number-right-font-size-l: var(--el-font-size-body-large);
+  --el-input-number-tips-font-size: var(--el-font-size-body-small);
+}

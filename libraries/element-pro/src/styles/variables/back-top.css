@@ -1,0 +1,33 @@
+/**
+ * @component el-back-top-pro
+ */
+:root {
+  --el-back-top-border-radius-circle: var(--el-radius-circle);
+  --el-back-top-border-radius-square: var(--el-radius-medium);
+  --el-back-top-width-small: var(--el-comp-size-xxl);
+  --el-back-top-height-small: var(--el-comp-size-xxl);
+  --el-back-top-text-display-small: none;
+  --el-back-top-text-display-medium: block;
+  --el-back-top-width-medium: var(--el-comp-size-xxxxl);
+  --el-back-top-height-medium: var(--el-comp-size-xxxxl);
+  --el-back-top-text-color-light: var(--el-text-color-secondary);
+  --el-back-top-text-color-primary: var(--el-text-color-anti);
+  --el-back-top-text-color-dark: var(--el-text-color-anti);
+  --el-back-top-text-color: var(--el-text-color-primary);
+  --el-back-top-icon-color-light: var(--el-text-color-primary);
+  --el-back-top-icon-color-primary: var(--el-text-color-anti);
+  --el-back-top-icon-color-dark: var(--el-text-color-anti);
+  --el-back-top-bg-color-light: var(--el-bg-color-container);
+  --el-back-top-bg-color-primary: var(--el-brand-color);
+  --el-back-top-bg-color-dark: rgba(0, 0, 0, 0.9);
+  --el-back-top-bg-color-light-hover: var(--el-bg-color-container-hover);
+  --el-back-top-bg-color-primary-hover: var(--el-brand-color-hover);
+  --el-back-top-bg-color-dark-hover: rgba(0, 0, 0, 0.6);
+  --el-back-top-border-color-light: var(--el-component-border);
+  --el-back-top-border-color-primary: var(--el-back-top-bg-color-primary);
+  --el-back-top-border-color-dark: var(--el-back-top-bg-color-dark);
+  --el-back-top-border-color-light-hover: var(--el-back-top-bg-color-light-hover);
+  --el-back-top-border-color-primary-hover: var(--el-back-top-bg-color-primary-hover);
+  --el-back-top-border-color-dark-hover: var(--el-back-top-bg-color-dark-hover);
+  --el-back-top-box-shadow: var(--el-shadow-3);
+}

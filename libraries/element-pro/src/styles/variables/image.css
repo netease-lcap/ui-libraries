@@ -1,0 +1,15 @@
+/**
+ * @component el-image-pro
+ */
+:root {
+  --el-image-wrapper-bg-color: var(--el-bg-color-secondarycontainer);
+  --el-image-radius: var(--el-radius-medium);
+  --el-image-gallery-radius: var(--el-radius-medium);
+  --el-image-gallery-shadow-radius: var(--el-radius-medium);
+  --el-image-gallery-cover-z-index: 5;
+  --el-image-z-index: var(--el-image-gallery-cover-z-index) - 4;
+  --el-image-placeholder-z-index: var(--el-image-gallery-cover-z-index) - 5;
+  --el-image-loading-z-index: var(--el-image-gallery-cover-z-index) + 1;
+  --el-image-loading-text-color: var(--el-text-color-secondary);
+  --el-image-error-text-color: var(--el-text-color-disabled);
+}

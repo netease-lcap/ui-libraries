@@ -28,7 +28,6 @@ export default defineConfig(({ command }) => {
         framework: 'vue2',
         pnpm: true,
         theme: {
-          themeVarCssPath: './src-vusion/styles/theme.css',
           previewPages: [
             {
               name: 'dashboard',
@@ -48,7 +47,7 @@ export default defineConfig(({ command }) => {
             },
           ],
           themeComponentFolder: './src-vusion/theme/components',
-          useOldCssVarParser: true,
+          oldCssVarPath: './src-vusion/styles/theme.css',
         },
         i18n: {
           'zh-CN': './src/locale/lang/zh-CN/data.json',

@@ -1,0 +1,22 @@
+/**
+ * @component el-calendar
+ */
+:root {
+  /**
+   * @desc 日历边框样式
+   * @type border
+   */
+  --calendar-border: var(--table-border);
+
+  /**
+   * @desc 选中日期的背景颜色
+   * @type color
+   */
+  --calendar-selected-background-color: #F2F8FE;
+
+  /**
+   * @desc 日历单元格宽度
+   * @type size
+   */
+  --calendar-cell-width: 85px;
+}

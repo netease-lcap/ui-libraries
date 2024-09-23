@@ -1,0 +1,55 @@
+/**
+ * @component el-transfer-pro
+ */
+:root {
+  --el-transfer-bg-color: transparent;
+  --el-transfer-bg-hover: var(--el-bg-color-container-hover);
+  --el-transfer-bg-checked: var(--el-brand-color-light);
+  --el-transfer-border-color: var(--el-border-level-1-color);
+  --el-transfer-font-color: var(--el-text-color-primary);
+  --el-transfer-list-margin-horizontal: var(--el-comp-margin-s);
+  --el-transfer-list-header-padding: 0 var(--el-comp-paddingLR-s);
+  --el-transfer-list-header-margin: 0 var(--el-transfer-list-margin-horizontal);
+  --el-transfer-list-header-text-margin-left: var(--el-comp-margin-s);
+  --el-transfer-list-checkbox-group-gap: var(--el-comp-margin-xs);
+  --el-transfer-list-checkbox-group-margin: var(--el-comp-margin-s) 0;
+  --el-transfer-list-item-padding: var(--el-comp-paddingLR-xs) var(--el-comp-paddingLR-s);
+  --el-transfer-list-item-margin: 0 var(--el-transfer-list-margin-horizontal);
+  --el-transfer-list-item-text-margin-left: var(--el-comp-margin-s);
+  --el-transfer-list-search-wrapper-margin: 0 var(--el-transfer-list-margin-horizontal);
+  --el-transfer-list-with-search-padding-top: var(--el-comp-size-m);
+  --el-transfer-list-wrapper-padding: var(--el-comp-paddingTB-m) var(--el-comp-paddingLR-m);
+  --el-transfer-list-with-tree-padding: 0 var(--el-comp-paddingLR-m);
+  --el-transfer-list-with-tree-margin: var(--el-comp-margin-s) 0;
+  --el-transfer-list-pagination-padding: var(--el-comp-paddingTB-m);
+  --el-transfer-operations-margin: auto var(--el-comp-margin-s);
+  --el-transfer-operations-gap: var(--el-comp-margin-l);
+  --el-transfer-with-pagination-padding-bottom: calc(var(--el-transfer-list-pagination-height) + var(--el-transfer-list-pagination-padding) * 2);
+  --el-transfer-with-footer-padding-bottom: 48px;
+  --el-transfer-with-pagination-footer-padding-bottom: calc(var(--el-transfer-with-pagination-padding-bottom) + var(--el-transfer-with-footer-padding-bottom));
+  --el-transfer-with-search-footer-padding-bottom: 48px;
+  --el-transfer-with-search-pagination-padding-bottom: 48px;
+  --el-transfer-with-all-padding-bottom: 88px;
+  --el-transfer-common-width: 200px;
+  --el-transfer-common-height: 200px;
+  --el-transfer-with-search-height: 240px;
+  --el-transfer-with-pagination-height: 240px;
+  --el-transfer-with-footer-height: 248px;
+  --el-transfer-with-footer-both-height: 288px;
+  --el-transfer-with-both-height: 280px;
+  --el-transfer-with-all-height: 328px;
+  --el-transfer-wrap-height: 320px;
+  --el-transfer-wrap-width: 206px;
+  --el-transfer-list-header-height: var(--el-comp-size-xxl);
+  --el-transfer-list-header-width: calc(var(--el-transfer-common-width) - var(--el-transfer-list-margin-horizontal) * 2);
+  --el-transfer-list-search-wrapper-width: calc(var(--el-transfer-common-width) - var(--el-transfer-list-margin-horizontal) * 2);
+  --el-transfer-list-pagination-height: var(--el-comp-size-xs);
+  --el-transfer-operations-button-height: var(--el-comp-size-xs);
+  --el-transfer-operations-icon-size: var(--el-comp-size-xxxs);
+  --el-transfer-font: var(--el-font-body-medium);
+  --el-transfer-border: 1px solid var(--el-transfer-border-color);
+  --el-transfer-list-border: 0;
+  --el-transfer-list-with-search-border: 0;
+  --el-transfer-border-radius: var(--el-radius-medium);
+  --el-transfer-box-shadow: var(--el-shadow-1);
+}

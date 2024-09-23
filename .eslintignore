@@ -8,3 +8,4 @@ demo
 **/libs/*.ts
 scripts/*.mjs
 **/scripts/*.js
+**/design/*

@@ -1,0 +1,11 @@
+/**
+ * @component el-tag-input-pro
+ */
+:root {
+  --el-tag-input-height-s: var(--el-comp-size-xs);
+  --el-tag-input-height-default: var(--el-comp-size-m);
+  --el-tag-input-height-l: var(--el-comp-size-xl);
+  --el-tag-input-padding-default: calc(var(--el-comp-margin-xs) - 1px);
+  --el-tag-input-clear-icon-padding-m: calc(var(--el-comp-paddingLR-xxl) + var(--el-comp-paddingLR-xxs));
+  --el-tag-input-clear-icon-padding-l: calc(var(--el-comp-paddingLR-xxl) + var(--el-comp-paddingLR-xs));
+}

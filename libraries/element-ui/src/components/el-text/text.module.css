@@ -1,0 +1,79 @@
+.root {
+  white-space: pre-wrap;
+  max-width: 100%;
+}
+
+.root.size-small {
+  font-size: var(--font-size-extra-small);
+}
+
+.root.size-normal {
+  font-size: var(--font-size-base);
+}
+
+.root.size-large {
+  font-size: var(--font-size-medium);
+}
+
+.root.size-huge {
+  font-size: var(--font-size-large);
+}
+
+.root.weight-normal {
+  font-weight: normal;
+}
+
+.root.weight-bold {
+  font-weight: bold;
+}
+
+.root.color-default {
+  color: inherit;
+}
+
+.root.color-primary {
+  color: var(--color-primary);
+}
+
+.root.color-secondary {
+  color: var(--el-color-text-2);
+}
+
+.root.color-success {
+  color: var(--color-success);
+}
+
+.root.color-warning {
+  color: var(--color-warning);
+}
+
+.root.color-error {
+  color: var(--color-error);
+}
+
+.root.color-disabled {
+  color: var(--font-color-disabled-base);
+}
+
+.root.overflow-ellipsis,
+.root.wrap-ellipsis {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.root.overflow-break, .root.wrap-break {
+  word-wrap: break-word;
+  hyphens: auto;
+  white-space: normal;
+  max-width: 100%;
+}
+
+.root.overflow-nowrap, .root.wrap-nowrap {
+  white-space: nowrap;
+}
+
+.root.display-block {
+  display: block;
+}

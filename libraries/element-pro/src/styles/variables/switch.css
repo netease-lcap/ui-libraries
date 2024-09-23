@@ -1,0 +1,45 @@
+/**
+ * @component el-switch-pro
+ */
+:root {
+  --el-switch-checked-bg-color: var(--el-brand-color);
+  --el-switch-checked-bg-color-hover: var(--el-brand-color-hover);
+  --el-switch-checked-bg-color-loading: var(--el-brand-color-focus);
+  --el-switch-checked-bg-color-disabled: var(--el-brand-color-disabled);
+  --el-switch-unchecked-bg-color: var(--el-bg-color-secondarycomponent);
+  --el-switch-unchecked-bg-color-hover: var(--el-bg-color-secondarycomponent-hover);
+  --el-switch-unchecked-bg-color-loading: var(--el-bg-color-component-disabled);
+  --el-switch-unchecked-bg-color-disabled: var(--el-bg-color-component-disabled);
+  --el-switch-handle-bg-color: #fff;
+  --el-switch-content-color-checked: var(--el-text-color-anti);
+  --el-switch-content-color-unchecked: var(--el-text-color-anti);
+  --el-switch-height-l: var(--el-comp-size-xs);
+  --el-switch-height-default: var(--el-comp-size-xxs);
+  --el-switch-height-s: var(--el-comp-size-xxxs);
+  --el-switch-min-width-l: calc(var(--el-switch-height-l) / 0.618);
+  --el-switch-min-width-default: calc(var(--el-switch-height-default) / 0.618);
+  --el-switch-min-width-s: calc(var(--el-switch-height-s) / 0.618);
+  --el-switch-width-border-base: 5px;
+  --el-switch-width-border-value: 1px;
+  --el-switch-width-border-l: var(--el-switch-width-border-base);
+  --el-switch-width-border-default: calc(var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 1);
+  --el-switch-width-border-s: calc(var(--el-switch-width-border-base) - var(--el-switch-width-border-value) * 2);
+  --el-switch-width-border-check-base: 3px;
+  --el-switch-width-border-check-value: 0.5px;
+  --el-switch-width-border-check-l: var(--el-switch-width-border-check-base);
+  --el-switch-width-border-check-default: calc(var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 1);
+  --el-switch-width-border-check-s: calc(var(--el-switch-width-border-check-base) - var(--el-switch-width-border-check-value) * 2);
+  --el-switch-content-font-size-l: var(--el-font-size-body-large);
+  --el-switch-content-font-size-default: var(--el-font-size-body-small);
+  --el-switch-content-font-size-s: 9px;
+  --el-switch-content-margin-left-l: calc(var(--el-switch-min-width-l) / 2 + 4px);
+  --el-switch-content-margin-right-l: var(--el-comp-margin-s);
+  --el-switch-content-margin-left-default: calc(var(--el-switch-min-width-default) / 2 + 2px);
+  --el-switch-content-margin-right-default: var(--el-comp-margin-xs);
+  --el-switch-content-margin-left-s: calc(var(--el-switch-min-width-s) / 2 + 2px);
+  --el-switch-content-margin-right-s: var(--el-comp-margin-xxs);
+  --el-switch-transition: all 0.2s cubic-bezier(0.38, 0, 0.24, 1);
+  --el-switch-handle-transition: all 0.2s cubic-bezier(0.38, 0, 0.24, 1);
+  --el-switch-content-transition: padding 0.2s cubic-bezier(0.38, 0, 0.24, 1),
+  opacity 0.2s linear;
+}

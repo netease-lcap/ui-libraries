@@ -1,0 +1,53 @@
+/**
+ * @component el-avatar
+ */
+:root {
+  /**
+   * @desc 头像文字颜色
+   * @type color
+   */
+  --avatar-font-color: #fff;
+
+  /**
+   * @desc 头像背景颜色
+   * @type color
+   */
+  --avatar-background-color: #C0C4CC;
+
+  /**
+   * @desc 头像文字字体大小
+   * @type size
+   */
+  --avatar-text-font-size: 14px;
+
+  /**
+   * @hidden
+   * @desc 头像图标字体大小
+   * @type size
+   */
+  --avatar-icon-font-size: 18px;
+
+  /**
+   * @desc 头像边框圆角
+   * @type size
+   */
+  --avatar-border-radius: var(--border-radius-base);
+
+  /**
+   * @desc 大号头像尺寸
+   * @type size
+   */
+  --avatar-large-size: 40px;
+
+  /**
+   * @desc 中号头像尺寸
+   * @type size
+   */
+  --avatar-medium-size: 36px;
+
+  /**
+   * @desc 小号头像尺寸
+   * @type size
+   */
+  --avatar-small-size: 28px;
+}

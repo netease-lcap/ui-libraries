@@ -1,0 +1,20 @@
+/**
+ * @component el-card-pro
+ */
+:root {
+  --el-card-border-radius: var(--el-radius-medium);
+  --el-card-body-padding: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-xl);
+  --el-card-header-padding: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-xl);
+  --el-card-footer-padding: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-xl);
+  --el-card-avatar-size: var(--el-comp-size-xxxl);
+  --el-card-body-padding-s: var(--el-comp-paddingTB-s) var(--el-comp-paddingLR-l);
+  --el-card-header-padding-s: var(--el-comp-paddingTB-s) var(--el-comp-paddingLR-l);
+  --el-card-footer-padding-s: var(--el-comp-paddingTB-s) var(--el-comp-paddingLR-l);
+  --el-card-border-color: var(--el-component-border);
+  --el-card-background: var(--el-bg-color-container);
+  --el-card-color: var(--el-text-color-primary);
+  --el-card-subtitle-color: var(--el-text-color-secondary);
+  --el-card-avatar-margin: var(--el-comp-margin-l);
+  --el-card-description-margin: var(--el-comp-margin-xs);
+  --el-card-title-margin: var(--el-comp-margin-l);
+}

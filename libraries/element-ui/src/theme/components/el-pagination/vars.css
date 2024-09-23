@@ -1,0 +1,64 @@
+/**
+ * @component el-pagination
+ */
+:root {
+  /**
+   * @desc 分页字体大小
+   * @type font-size
+   */
+  --pagination-font-size: 13px;
+
+  /**
+   * @desc 分页背景颜色
+   * @type color
+   */
+  --pagination-background-color: var(--color-white);
+
+  /**
+   * @desc 分页字体颜色
+   * @type color
+   */
+  --pagination-font-color: var(--color-text-primary);
+
+  /**
+   * @desc 分页边框圆角
+   * @type border-radius
+   */
+  --pagination-border-radius: 3px;
+
+  /**
+   * @desc 分页按钮颜色
+   * @type color
+   */
+  --pagination-button-color: var(--color-text-primary);
+
+  /**
+   * @desc 分页按钮宽度
+   * @type size
+   */
+  --pagination-button-width: 35.5px;
+
+  /**
+   * @desc 分页按钮高度
+   * @type size
+   */
+  --pagination-button-height: 28px;
+
+  /**
+   * @desc 分页按钮禁用状态颜色
+   * @type color
+   */
+  --pagination-button-disabled-color: var(--color-text-placeholder);
+
+  /**
+   * @desc 分页按钮禁用状态背景颜色
+   * @type color
+   */
+  --pagination-button-disabled-background-color: var(--color-white);
+
+  /**
+   * @desc 分页按钮悬停颜色
+   * @type color
+   */
+  --pagination-hover-color: var(--color-primary);
+}

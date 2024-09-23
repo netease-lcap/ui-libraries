@@ -1,0 +1,71 @@
+/**
+ * @component el-message
+ */
+:root {
+  /**
+   * @hidden
+   * @desc 消息框阴影
+   * @type shadow
+   */
+  --message-shadow: var(--box-shadow-base);
+
+  /**
+   * @desc 消息框最小宽度
+   * @type size
+   */
+  --message-min-width: 380px;
+
+  /**
+   * @desc 消息框背景颜色
+   * @type color
+   */
+  --message-background-color: #edf2fc;
+
+  /**
+   * @desc 消息框内边距
+   * @type spacing
+   */
+  --message-padding: 15px 15px 15px 20px;
+
+  /**
+   * @desc 关闭图标颜色
+   * @type color
+   */
+  --message-close-icon-color: var(--color-text-placeholder);
+
+  /**
+   * @desc 关闭图标大小
+   * @type size
+   */
+  --message-close-size: 16px;
+
+  /**
+   * @desc 关闭图标悬停颜色
+   * @type color
+   */
+  --message-close-hover-color: var(--color-text-secondary);
+
+  /**
+   * @desc 成功消息字体颜色
+   * @type color
+   */
+  --message-success-font-color: var(--color-success);
+
+  /**
+   * @desc 信息消息字体颜色
+   * @type color
+   */
+  --message-info-font-color: var(--color-info);
+
+  /**
+   * @desc 警告消息字体颜色
+   * @type color
+   */
+  --message-warning-font-color: var(--color-warning);
+
+  /**
+   * @desc 危险消息字体颜色
+   * @type color
+   */
+  --message-danger-font-color: var(--color-danger);
+}

@@ -1,0 +1,26 @@
+/**
+ * @component el-image-viewer-pro
+ */
+:root {
+  --el-image-viewer__icon-color--disabled: var(--el-text-color-disabled);
+  --el-image-viewer__image--background-color__error: var(--el-bg-color-component-disabled);
+  --el-image-viewer__image-text--error: #000000;
+  --el-image-viewer-error-font: var(--el-font-body-medium);
+  --el-image-viewer-modal-padding: var(--el-comp-paddingTB-xs) var(--el-comp-paddingLR-s);
+  --el-image-viewer-modal-header-pre-bt-padding: var(--el-comp-paddingTB-xxs) var(--el-comp-paddingLR-xxs);
+  --el-image-viewer-modal-header-padding-bottom: var(--el-comp-margin-s);
+  --el-image-viewer-modal-header-size: var(--el-comp-size-xxxl);
+  --el-image-viewer-modal-header-image-box-size: var(--el-comp-size-xl);
+  --el-image-viewer-modal-header-image-box-margin: var(--el-comp-margin-l) var(--el-comp-margin-xs) var(--el-comp-margin-s);
+  --el-image-viewer-modal-button-size: var(--el-comp-size-xl);
+  --el-image-viewer-utils-content-padding: 0 var(--el-comp-paddingLR-xs);
+  --el-image-viewer-utils-modal-icon-margin: 0 var(--el-comp-margin-xs);
+  --el-image-viewer-utils-modal-icon-size: var(--el-comp-size-m);
+  --el-image-viewer-utils-modal-utils-scale-width: var(--el-comp-size-xl);
+  --el-image-viewer-header-hide-padding: 0 0 12px 0;
+  --el-image-viewer-header-padding: 12px 0;
+  --el-image-viewer-header-box-height: 40px;
+  --el-image-viewer-header-box-width: calc(40px / 9 * 16);
+  --el-image-viewer-header-box-width-margin-left: calc(40px / 9 * 16 * 3 + 4px * 3);
+  --el-image-viewer-header-all-box-width: calc(40px / 9 * 16 * 7 + 4px * 6);
+}

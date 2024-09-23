@@ -1,0 +1,34 @@
+/**
+ * @component el-form-pro
+ */
+:root {
+  --el-form-font: var(--el-font-body-medium);
+  --el-form-item-help-font: var(--el-font-body-small);
+  --el-form-item-help-line-height: var(--el-line-height-body-small);
+  --el-form-color-label: var(--el-text-color-primary);
+  --el-form-color-error: var(--el-error-color);
+  --el-form-color-warning: var(--el-warning-color);
+  --el-form-color-success: var(--el-success-color);
+  --el-form-color-extra: var(--el-text-color-placeholder);
+  --el-form-item-margin-bottom: var(--el-comp-margin-xxl);
+  --el-form-item-with-help-margin-bottom: var(--el-comp-margin-xs);
+  --el-form-item-control-height: var(--el-comp-margin-xxxl);
+  --el-form-item-row-gap: var(--el-comp-margin-l);
+  --el-form-item-padding-bottom: var(--el-comp-paddingTB-xs);
+  --el-form-item-margin-right-inline: var(--el-comp-margin-xxl);
+  --el-form-label-line-height: var(--el-line-height-body-medium);
+  --el-form-label-padding-right: var(--el-comp-paddingLR-xl);
+  --el-form-label-margin-right-required: var(--el-comp-margin-xs);
+  --el-form-label-margin-colon: 0 var(--el-comp-margin-xxs);
+  --el-form-status-margin: 0 var(--el-comp-margin-s);
+  --el-form-status-button-margin: var(--el-comp-margin-s);
+  --el-form-status-button-width: var(--el-comp-size-m);
+  --el-from-help-text-margin-top: var(--el-comp-margin-xs);
+  --el-form-status-icon-size: var(--el-comp-size-xxxs);
+  --el-input-border-color-success: var(--el-success-color);
+  --el-input-box-shadow-color-success-focus: var(--el-success-color-focus);
+  --el-input-border-color-warning: var(--el-warning-color);
+  --el-input-box-shadow-color-warning-focus: var(--el-warning-color-focus);
+  --el-input-border-color-error: var(--el-error-color);
+  --el-input-box-shadow-color-error-focus: var(--el-error-color-focus);
+}

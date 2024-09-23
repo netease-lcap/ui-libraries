@@ -1,0 +1,58 @@
+/**
+ * @component el-transfer
+ */
+:root {
+  /**
+   * @desc Transfer 组件边框颜色
+   * @type color
+   */
+  --transfer-border-color: var(--border-color-lighter);
+
+  /**
+   * @desc Transfer 组件边框圆角
+   * @type dimension
+   */
+  --transfer-border-radius: var(--border-radius-base);
+
+  /**
+   * @desc Transfer 面板宽度
+   * @type dimension
+   */
+  --transfer-panel-width: 200px;
+
+  /**
+   * @desc Transfer 面板头部高度
+   * @type dimension
+   */
+  --transfer-panel-header-height: 40px;
+
+  /**
+   * @desc Transfer 面板头部背景色
+   * @type color
+   */
+  --transfer-panel-header-background-color: var(--background-color-base);
+
+  /**
+   * @desc Transfer 面板底部高度
+   * @type dimension
+   */
+  --transfer-panel-footer-height: 40px;
+
+  /**
+   * @desc Transfer 面板主体高度
+   * @type dimension
+   */
+  --transfer-panel-body-height: 246px;
+
+  /**
+   * @desc Transfer 项目高度
+   * @type dimension
+   */
+  --transfer-item-height: 30px;
+
+  /**
+   * @desc Transfer 过滤器高度
+   * @type dimension
+   */
+  --transfer-filter-height: 32px;
+}

@@ -1,0 +1,52 @@
+/**
+ * @component el-table
+ */
+:root {
+  /**
+   * @desc 表格边框颜色
+   * @type color
+   */
+  --table-border-color: var(--border-color-lighter);
+
+  /**
+   * @desc 表格边框样式
+   * @type border
+   */
+  --table-border: 1px solid var(--table-border-color);
+
+  /**
+   * @desc 表格字体颜色
+   * @type color
+   */
+  --table-font-color: var(--color-text-regular);
+
+  /**
+   * @desc 表头字体颜色
+   * @type color
+   */
+  --table-header-font-color: var(--color-text-secondary);
+
+  /**
+   * @desc 表格行悬停背景色
+   * @type color
+   */
+  --table-row-hover-background-color: var(--background-color-base);
+
+  /**
+   * @desc 当前行背景色
+   * @type color
+   */
+  --table-current-row-background-color: var(--color-primary-light-9);
+
+  /**
+   * @desc 表头背景色
+   * @type color
+   */
+  --table-header-background-color: var(--color-white);
+
+  /**
+   * @desc 固定列阴影
+   * @type shadow
+   */
+  --table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12);
+}
