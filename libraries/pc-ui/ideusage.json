@@ -1163,7 +1163,8 @@
             },
             "cacheOpenKey": "visible",
             "additionalAttribute": {
-                ":mode": "\"false\""
+                ":mode": "\"false\"",
+                ":disableRootElemShift": "\"true\""
             },
             "disableSlotAutoFill": ["head"],
             "displaySlotConditions": {
@@ -1182,7 +1183,8 @@
             },
             "cacheOpenKey": "visible",
             "additionalAttribute": {
-                ":mode": "\"false\""
+                ":mode": "\"false\"",
+                ":disableRootElemShift": "\"true\""
             }
         }
     },
