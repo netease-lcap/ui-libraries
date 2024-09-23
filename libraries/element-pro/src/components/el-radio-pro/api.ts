@@ -94,7 +94,7 @@ namespace nasl.ui {
     })
     value: V;
 
-    @Prop({
+    @Prop<ElRadioGroupProOptions<T, V>, 'itemProps'>({
       group: '数据属性',
       title: '单选项属性设置',
       description: '单选项属性设置',
@@ -102,6 +102,7 @@ namespace nasl.ui {
         concept: 'AnonymousFunctionSetter',
       },
       bindOpen: true,
+      if: _ => !!_.dataSource,
     })
     itemProps: (current: Current<T>) => {
       /**

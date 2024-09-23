@@ -94,7 +94,7 @@ namespace nasl.ui {
     })
     value: nasl.collection.List<V>;
 
-    @Prop({
+    @Prop<ElCheckboxGroupProOptions<T, V>, 'itemProps'>({
       group: '数据属性',
       title: '多选项属性设置',
       description: '多选项属性设置',
@@ -102,6 +102,7 @@ namespace nasl.ui {
         concept: 'AnonymousFunctionSetter',
       },
       bindOpen: true,
+      if: _ => !!_.dataSource,
     })
     itemProps: (current: Current<T>) => {
       /**
