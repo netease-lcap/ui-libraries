@@ -848,7 +848,13 @@
         "ideusage": {
             "idetype": "container",
             "parentAccept": "target.tag.endsWith('van-checkbox-group')",
-            "translateBindingProperty": ["label"]
+            "translateBindingProperty": ["label"],
+            "operator": {
+                "copy": "this.getParent().getAttribute('dataSource')",
+                "duplicate": "this.getParent().getAttribute('dataSource')",
+                "cut": "this.getParent().getAttribute('dataSource')",
+                "delete": "this.getParent().getAttribute('dataSource')"
+            }
         }
     },
     {
