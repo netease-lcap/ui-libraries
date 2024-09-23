@@ -10,13 +10,12 @@ export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index'
 export const useDataSourceRender: NaslComponentPluginOptions = {
   props: ['data', 'valueField'],
   setup({ get: propGet, useComputed }) {
-    const dataSource = propGet('dataSource');
-    const options = useComputed(['data'], () => {
+    const options = useComputed(['data'], (data) => {
+      const dataSource = propGet('dataSource');
       if (dataSource) {
         const slotItemContent = propGet('slotItem');
         const valueField = propGet<any>('valueField') || 'value';
         const itemProps = propGet<(c: any) => any>('itemProps') || (() => ({}));
-        const data = propGet<any>('data') || [];
         return data.map((item, i) => {
           const [value] = isObject(item) ? at(item, valueField) : [item];
           const current = {
@@ -39,6 +38,7 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
     return {
       options,
       slotDefault: () => {
+        const dataSource = propGet('dataSource');
         const slotDefault = propGet('slotDefault');
         if (!dataSource) {
           return typeof slotDefault === 'function' ? slotDefault() : null;

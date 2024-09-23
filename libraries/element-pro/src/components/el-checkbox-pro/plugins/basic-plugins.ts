@@ -11,8 +11,8 @@ export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index'
 export const useDataSourceRender: NaslComponentPluginOptions = {
   props: ['data', 'valueField', 'checkAll', 'itemProps'],
   setup({ get: propGet, useComputed }, { h }) {
-    const dataSource = propGet('dataSource');
     const options = useComputed(['data'], () => {
+      const dataSource = propGet('dataSource');
       if (dataSource) {
         const slotItemContent = propGet('slotItem');
         const valueField = propGet<any>('valueField') || 'value';
@@ -51,6 +51,7 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
       options,
       slotDefault: () => {
         const slotDefault = propGet('slotDefault');
+        const dataSource = propGet('dataSource');
         if (!dataSource) {
           const checkAll = propGet<boolean>('checkAll');
 
