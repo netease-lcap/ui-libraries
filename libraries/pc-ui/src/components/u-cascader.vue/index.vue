@@ -76,6 +76,7 @@ export default {
         lazyLoad: { type: Function, default: () => {} },
         autofocus: { type: Boolean, default: false },
         opened: { type: Boolean, default: false },
+        popperWidth: { type: String, default: '' },
 
         // fixme：理论上使用converter属性会更好一点,但其他converter有其它的作用
         useArrayLikeValue: {
@@ -116,7 +117,13 @@ export default {
                     '--cascader-item-highlighter': this.filterHightlighterColor,
                 };
             }
-            return this.cssVariables;
+            const filterHightlighterColor = this.filterHightlighterColor ? {
+                '--cascader-item-highlighter': this.filterHightlighterColor,
+            } : {};
+            const popperWidth = this.popperWidth ? {
+                "--cascader-scroll-width": this.popperWidth
+            } : {};
+            return { ...this.cssVariables, ...filterHightlighterColor, ...popperWidth };
         },
     },
     watch: {
