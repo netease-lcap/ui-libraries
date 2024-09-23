@@ -12,15 +12,16 @@
       <el-checkbox-pro v-model="stripe" style="margin: 0 25px">是否显示斑马纹</el-checkbox-pro>
       <el-checkbox-pro v-model="isEmptyData">是否置空数据</el-checkbox-pro>
     </div>
-    <el-table-pro row-key="index" :dataSource="isEmptyData ? [] : data" :stripe="stripe"
-      :bordered="bordered" :hover="hover" :size="size" :showHeader="showHeader">
+    <el-table-pro row-key="index" :dataSource="isEmptyData ? [] : data" :stripe="stripe" :bordered="bordered"
+      :hover="hover" :size="size" :showHeader="showHeader" :sort="sort" @sort-change="sortChange"
+      :showSortColumnBgColor="true">
       <el-table-column-pro 
-        v-for="({colKey, title, width, fixedPosition}) in columns"
+        v-for="({ colKey, title, width, fixedPosition, sorter }) in columns" 
         :key="colKey"
         :title="title" 
         :colKey="colKey" 
         :width="width" 
-        :sorter="true"
+        :sorter="sorter" 
         :fixed='fixedPosition'>
         <template #cell="cell">
           <div>{{ cell.item[colKey] }}</div>
@@ -88,16 +89,32 @@ export default {
       isEmptyData: false,
       size: 'small',
       columns: [
-        { colKey: 'applicant', title: '申请人', width: '100', fixedPosition: 'left',},
-        { colKey: 'status', title: '申请状态', width: '150',},
+        { colKey: 'applicant', title: '申请人', width: '100', fixedPosition: 'left', },
+        { colKey: 'status', title: '申请状态', width: '150', sorter: true },
         { colKey: 'channel', title: '签署方式', width: '200' },
         { colKey: 'email', title: '邮箱地址', ellipsis: true, width: '250' },
-        { colKey: 'createTime', title: '创建时间',  width: '350' },
-        { colKey: 'applyTime', title: '申请时间',  width: '350' },
-        { colKey: 'modifyTime', title: '修改时间',  width: '350'  },
-        { colKey: 'confirmTime', title: '确认时间',  width: '350'  },
+        { colKey: 'createTime', title: '创建时间', width: '350' },
+        { colKey: 'applyTime', title: '申请时间', width: '350' },
+        { colKey: 'modifyTime', title: '修改时间', width: '350' },
+        { colKey: 'confirmTime', title: '确认时间', width: '350' },
       ],
+      sort: {},
     }
+  },
+  methods: {
+    sortChange(sortInfo) {
+      this.sort = sortInfo;
+      this.sortData(sortInfo);
+    },
+    sortData(sort) {
+      if (sort) {
+        this.data = this.data
+          .concat()
+          .sort((a, b) => (sort.descending ? b[sort.sortBy] - a[sort.sortBy] : a[sort.sortBy] - b[sort.sortBy]));
+      } else {
+        this.data = this.data.concat();
+      }
+    },
   },
 };
 </script>
