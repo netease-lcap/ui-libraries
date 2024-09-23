@@ -12,7 +12,7 @@ namespace nasl.ui {
           "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
         loopRule: 'nth-child(n+2)',
-        loopElem: " > .el-p-radio",
+        loopElem: " > .el-p-radio:not([data-nodepath])",
         emptySlot: {
           display: 'inline',
           condition: "!this.getAttribute('dataSource')",
