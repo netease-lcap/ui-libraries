@@ -1,11 +1,44 @@
 /* 组件功能扩展插件 */
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
+import { onMounted, watch } from '@vue/composition-api';
 import { VNode } from 'vue';
 
 export const useExtendsPlugin: NaslComponentPluginOptions = {
-  setup: (props, { h }) => {
+  setup: (props, { h, setupContext: ctx }) => {
+    const defaultActiveRef = props.useRef('defaultActive');
+
+    function setDefaultActiveByRouter(routerInfo) {
+      const routerPath = routerInfo?.path;
+      const baseComponentInstance: any = ctx.refs.$base;
+
+      if (!baseComponentInstance || !routerPath) {
+        return;
+      }
+
+      Object.keys(baseComponentInstance.items).forEach((key) => {
+        if (
+          baseComponentInstance.items[key]
+          && baseComponentInstance.items[key].destination
+          && baseComponentInstance.items[key].destination.startsWith(routerPath)
+        ) {
+          defaultActiveRef.value = key;
+        }
+      });
+    }
+    watch(
+      () => (ctx.parent as any).$route,
+      (routerInfo) => {
+        setDefaultActiveByRouter(routerInfo);
+      },
+    );
+
+    onMounted(() => {
+      setDefaultActiveByRouter((ctx.parent as any).$route);
+    });
+
     return {
       router: false,
+      defaultActive: defaultActiveRef,
       onSelect: (index, indexPath) => {
         const onSelect = props.get('onSelect');
         if (typeof onSelect === 'function') {
