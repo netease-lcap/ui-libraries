@@ -1,0 +1,58 @@
+/**
+ * @component el-carousel
+ */
+:root {
+  /**
+   * @desc 箭头字体大小
+   * @type size
+   */
+  --carousel-arrow-font-size: 12px;
+
+  /**
+   * @desc 箭头尺寸
+   * @type size
+   */
+  --carousel-arrow-size: 36px;
+
+  /**
+   * @desc 箭头背景色
+   * @type color
+   */
+  --carousel-arrow-background: rgba(31, 45, 61, 0.11);
+
+  /**
+   * @desc 箭头悬停背景色
+   * @type color
+   */
+  --carousel-arrow-hover-background: rgba(31, 45, 61, 0.23);
+
+  /**
+   * @desc 指示器宽度
+   * @type size
+   */
+  --carousel-indicator-width: 30px;
+
+  /**
+   * @desc 指示器高度
+   * @type size
+   */
+  --carousel-indicator-height: 2px;
+
+  /**
+   * @desc 指示器水平内间距
+   * @type size
+   */
+  --carousel-indicator-padding-horizontal: 4px;
+
+  /**
+   * @desc 指示器垂直内间距
+   * @type size
+   */
+  --carousel-indicator-padding-vertical: 12px;
+
+  /**
+   * @desc 指示器外部颜色
+   * @type color
+   */
+  --carousel-indicator-out-color: var(--border-color-hover);
+}

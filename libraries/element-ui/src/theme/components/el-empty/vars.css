@@ -1,0 +1,28 @@
+/**
+ * @component el-empty
+ */
+:root {
+  /**
+   * @desc 空状态组件的内边距
+   * @type input
+   */
+  --empty-padding: 40px 0;
+
+  /**
+   * @desc 空状态图片的宽度
+   * @type size
+   */
+  --empty-image-width: 160px;
+
+  /**
+   * @desc 描述文字的上外边距
+   * @type size
+   */
+  --empty-description-margin-top: 20px;
+
+  /**
+   * @desc 底部区域的上外边距
+   * @type size
+   */
+  --empty-bottom-margin-top: 20px;
+}

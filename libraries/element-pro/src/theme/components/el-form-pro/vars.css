@@ -1,0 +1,188 @@
+/**
+ * @component el-form-pro
+ */
+:root {
+  /**
+   * @desc 表单字体
+   * @type font
+   */
+  --el-form-font: var(--el-font-body-medium);
+
+  /**
+   * @desc 表单项帮助文本字体
+   * @type font
+   */
+  --el-form-item-help-font: var(--el-font-body-small);
+
+  /**
+   * @desc 表单项帮助文本行高
+   * @type line-height
+   */
+  --el-form-item-help-line-height: var(--el-line-height-body-small);
+
+  /**
+   * @desc 表单标签颜色
+   * @type color
+   */
+  --el-form-color-label: var(--el-text-color-primary);
+
+  /**
+   * @desc 表单错误状态颜色
+   * @type color
+   */
+  --el-form-color-error: var(--el-error-color);
+
+  /**
+   * @desc 表单警告状态颜色
+   * @type color
+   */
+  --el-form-color-warning: var(--el-warning-color);
+
+  /**
+   * @desc 表单成功状态颜色
+   * @type color
+   */
+  --el-form-color-success: var(--el-success-color);
+
+  /**
+   * @desc 表单额外信息颜色
+   * @type color
+   */
+  --el-form-color-extra: var(--el-text-color-placeholder);
+
+  /**
+   * @hidden
+   * @desc 表单项底部外间距
+   * @type margin
+   */
+  --el-form-item-margin-bottom: var(--el-comp-margin-xxl);
+
+  /**
+   * @hidden
+   * @desc 带帮助文本的表单项底部外间距
+   * @type margin
+   */
+  --el-form-item-with-help-margin-bottom: var(--el-comp-margin-xs);
+
+  /**
+   * @desc 表单项控件高度
+   * @type height
+   */
+  --el-form-item-control-height: var(--el-comp-margin-xxxl);
+
+  /**
+   * @hidden
+   * @desc 表单项行间距
+   * @type gap
+   */
+  --el-form-item-row-gap: var(--el-comp-margin-l);
+
+  /**
+   * @hidden
+   * @desc 表单项底部内间距
+   * @type padding
+   */
+  --el-form-item-padding-bottom: var(--el-comp-paddingTB-xs);
+
+  /**
+   * @hidden
+   * @desc 表单项右侧内联外间距
+   * @type margin
+   */
+  --el-form-item-margin-right-inline: var(--el-comp-margin-xxl);
+
+  /**
+   * @desc 表单标签行高
+   * @type line-height
+   */
+  --el-form-label-line-height: var(--el-line-height-body-medium);
+
+  /**
+   * @desc 表单标签右侧内间距
+   * @type padding
+   */
+  --el-form-label-padding-right: var(--el-comp-paddingLR-xl);
+
+  /**
+   * @desc 表单标签右侧必填项外间距
+   * @type margin
+   */
+  --el-form-label-margin-right-required: var(--el-comp-margin-xs);
+
+  /**
+   * @desc 表单标签冒号外间距
+   * @type margin
+   */
+  --el-form-label-margin-colon: 0 var(--el-comp-margin-xxs);
+
+  /**
+   * @hidden
+   * @desc 表单状态外间距
+   * @type margin
+   */
+  --el-form-status-margin: 0 var(--el-comp-margin-s);
+
+  /**
+   * @hidden
+   * @desc 表单状态按钮外间距
+   * @type margin
+   */
+  --el-form-status-button-margin: var(--el-comp-margin-s);
+
+  /**
+   * @hidden
+   * @desc 表单状态按钮宽度
+   * @type width
+   */
+  --el-form-status-button-width: var(--el-comp-size-m);
+
+  /**
+   * @hidden
+   * @desc 表单帮助文本顶部外间距
+   * @type margin
+   */
+  --el-from-help-text-margin-top: var(--el-comp-margin-xs);
+
+  /**
+   * @hidden
+   * @desc 表单状态图标大小
+   * @type size
+   */
+  --el-form-status-icon-size: var(--el-comp-size-xxxs);
+
+  /**
+   * @desc 输入框成功状态边框颜色
+   * @type color
+   */
+  --el-input-border-color-success: var(--el-success-color);
+
+  /**
+   * @desc 输入框成功状态聚焦阴影颜色
+   * @type color
+   */
+  --el-input-box-shadow-color-success-focus: var(--el-success-color-focus);
+
+  /**
+   * @desc 输入框警告状态边框颜色
+   * @type color
+   */
+  --el-input-border-color-warning: var(--el-warning-color);
+
+  /**
+   * @desc 输入框警告状态聚焦阴影颜色
+   * @type color
+   */
+  --el-input-box-shadow-color-warning-focus: var(--el-warning-color-focus);
+
+  /**
+   * @desc 输入框错误状态边框颜色
+   * @type color
+   */
+  --el-input-border-color-error: var(--el-error-color);
+
+  /**
+   * @desc 输入框错误状态聚焦阴影颜色
+   * @type color
+   */
+  --el-input-box-shadow-color-error-focus: var(--el-error-color-focus);
+}

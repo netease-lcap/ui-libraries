@@ -1,0 +1,70 @@
+/**
+ * @component el-slider
+ */
+:root {
+  /**
+   * @desc 滑块主背景色
+   * @type color
+   */
+  --slider-main-background-color: var(--color-primary);
+
+  /**
+   * @desc 滑轨背景色
+   * @type color
+   */
+  --slider-runway-background-color: var(--border-color-light);
+
+  /**
+   * @desc 滑块按钮悬停颜色
+   * @type color
+   */
+  --slider-button-hover-color: #00050a;
+
+  /**
+   * @desc 滑块停止背景色
+   * @type color
+   */
+  --slider-stop-background-color: var(--color-white);
+
+  /**
+   * @desc 滑块禁用颜色
+   * @type color
+   */
+  --slider-disable-color: var(--color-text-placeholder);
+
+  /**
+   * @desc 滑块外边距
+   * @type input
+   */
+  --slider-margin: 16px 0;
+
+  /**
+   * @desc 滑块边框半径
+   * @type input
+   */
+  --slider-border-radius: 3px;
+
+  /**
+   * @desc 滑块高度
+   * @type input
+   */
+  --slider-height: 6px;
+
+  /**
+   * @desc 滑块按钮大小
+   * @type input
+   */
+  --slider-button-size: 16px;
+
+  /**
+   * @desc 滑块按钮包装器大小
+   * @type input
+   */
+  --slider-button-wrapper-size: 36px;
+
+  /**
+   * @desc 滑块按钮包装器偏移量
+   * @type input
+   */
+  --slider-button-wrapper-offset: -15px;
+}

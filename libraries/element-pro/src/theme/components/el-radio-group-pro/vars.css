@@ -1,0 +1,388 @@
+/**
+ * @component el-radio-group-pro
+ */
+:root {
+  /**
+   * @desc 单选框边框颜色
+   * @type color
+   */
+  --el-radio-border-color: var(--el-border-level-2-color);
+
+  /**
+   * @desc 单选框输入框颜色
+   * @type color
+   */
+  --el-radio-input-color: var(--el-bg-color-container);
+
+  /**
+   * @desc 禁用状态下单选框输入框颜色
+   * @type color
+   */
+  --el-radio-input-color-disabled: var(--el-bg-color-component-disabled);
+
+  /**
+   * @desc 单选框点颜色
+   * @type color
+   */
+  --el-radio-dot-color: var(--el-brand-color);
+
+  /**
+   * @hidden
+   * @desc 禁用状态下单选框点颜色
+   * @type color
+   */
+  --el-radio-dot-color-disabled: var(--el-bg-color-component-disabled);
+
+  /**
+   * @desc 禁用且选中状态下单选框点颜色
+   * @type color
+   */
+  --el-radio-dot-color-disabled-checked: var(--el-text-color-disabled);
+
+  /**
+   * @desc 单选框标签颜色
+   * @type color
+   */
+  --el-radio-label-color: var(--el-text-color-primary);
+
+  /**
+   * @hidden
+   * @desc 默认状态下单选按钮边框颜色
+   * @type color
+   */
+  --el-radio-button-border-color-default: var(--el-border-level-2-color);
+
+  /**
+   * @hidden
+   * @desc 悬停状态下单选按钮边框颜色
+   * @type color
+   */
+  --el-radio-button-border-color-hover: var(--el-brand-color-hover);
+
+  /**
+   * @hidden
+   * @desc 悬停状态下单选按钮轮廓颜色
+   * @type color
+   */
+  --el-radio-button-color-outline-hover: var(--el-brand-color-hover);
+
+  /**
+   * @hidden
+   * @desc 选中状态下单选按钮边框颜色
+   * @type color
+   */
+  --el-radio-button-border-color-checked: var(--el-brand-color);
+
+  /**
+   * @hidden
+   * @desc 选中状态下单选按钮轮廓颜色
+   * @type color
+   */
+  --el-radio-button-color-outline-checked: var(--el-brand-color);
+
+  /**
+   * @hidden
+   * @desc 禁用状态下单选按钮背景颜色
+   * @type color
+   */
+  --el-radio-button-background-color-disabled: var(--el-bg-color-component-disabled);
+
+  /**
+   * @desc 禁用状态下文本描述字体颜色
+   * @type color
+   */
+  --el-radio-button-color-disabled: var(--el-text-color-disabled);
+
+  /**
+   * @hidden
+   * @desc 禁用且选中状态下单选按钮轮廓背景颜色
+   * @type color
+   */
+  --el-radio-button-background-color-outline-disabled-checked: var(--el-bg-color-specialcomponent);
+
+  /**
+   * @hidden
+   * @desc 禁用且选中状态下单选按钮颜色
+   * @type color
+   */
+  --el-radio-button-color-disabled-checked: var(--el-text-color-disabled);
+
+  /**
+   * @hidden
+   * @desc 填充状态下单选按钮组背景颜色
+   * @type color
+   */
+  --el-radio-button-group-background-color-filled: var(--el-bg-color-component);
+
+  /**
+   * @hidden
+   * @desc 填充状态下单选按钮颜色
+   * @type color
+   */
+  --el-radio-button-color-filled: var(--el-text-color-secondary);
+
+  /**
+   * @hidden
+   * @desc 填充且悬停状态下单选按钮颜色
+   * @type color
+   */
+  --el-radio-button-color-filled-hover: var(--el-text-color-primary);
+
+  /**
+   * @hidden
+   * @desc 填充且默认选中状态下单选按钮颜色
+   * @type color
+   */
+  --el-radio-button-color-default-filled-checked: var(--el-text-color-primary);
+
+  /**
+   * @hidden
+   * @desc 填充且主要选中状态下单选按钮颜色
+   * @type color
+   */
+  --el-radio-button-color-primary-filled-checked: var(--el-text-color-anti);
+
+  /**
+   * @hidden
+   * @desc 填充且禁用选中状态下单选按钮颜色
+   * @type color
+   */
+  --el-radio-button-color-default-filled-disabled-checked: var(--el-text-color-disabled);
+
+  /**
+   * @hidden
+   * @desc 填充且默认选中状态下单选按钮背景颜色
+   * @type color
+   */
+  --el-radio-button-background-color-default-filled-checked: var(--el-bg-color-container-select);
+
+  /**
+   * @hidden
+   * @desc 填充且主要选中状态下单选按钮背景颜色
+   * @type color
+   */
+  --el-radio-button-background-color-primary-filled-checked: var(--el-brand-color);
+
+  /**
+   * @hidden
+   * @desc 填充且禁用选中状态下单选按钮背景颜色
+   * @type color
+   */
+  --el-radio-button-background-color-default-filled-disabled-checked: var(--el-bg-color-component-disabled);
+
+  /**
+   * @hidden
+   * @desc 填充且主要禁用选中状态下单选按钮背景颜色
+   * @type color
+   */
+  --el-radio-button-background-color-primary-filled-disabled-checked: var(--el-brand-color-disabled);
+
+  /**
+   * @desc 单选框尺寸
+   * @type size
+   */
+  --el-radio-size: 16px;
+
+  /**
+   * @desc 单选框点左上位置
+   * @type size
+   */
+  --el-radio-dot-size: calc(var(--el-radio-size) / 2);
+
+  /**
+   * @desc 单选框右外间距
+   * @type size
+   */
+  --el-radio-margin-right: var(--el-comp-margin-xxl);
+
+  /**
+   * @hidden
+   * @desc 单选按钮边框半径
+   * @type size
+   */
+  --el-radio-button-border-radius: var(--el-radius-small);
+
+  /**
+   * @hidden
+   * @desc 小号单选框轮廓高度
+   * @type size
+   */
+  --el-radio-outline-height-small: var(--el-comp-size-xs);
+
+  /**
+   * @hidden
+   * @desc 中号单选框轮廓高度
+   * @type size
+   */
+  --el-radio-outline-height-medium: var(--el-comp-size-m);
+
+  /**
+   * @hidden
+   * @desc 大号单选框轮廓高度
+   * @type size
+   */
+  --el-radio-outline-height-large: var(--el-comp-size-xl);
+
+  /**
+   * @hidden
+   * @desc 小号单选框高度
+   * @type size
+   */
+  --el-radio-height-small: calc(var(--el-comp-size-xs) - (var(--el-comp-paddingTB-xxs) * 2));
+
+  /**
+   * @hidden
+   * @desc 中号单选框高度
+   * @type size
+   */
+  --el-radio-height-medium: calc(var(--el-comp-size-m) - (var(--el-comp-paddingTB-xxs) * 2));
+
+  /**
+   * @hidden
+   * @desc 大号单选框高度
+   * @type size
+   */
+  --el-radio-height-large: calc(var(--el-comp-size-xl) - (var(--el-comp-paddingTB-xxs) * 2));
+
+  /**
+   * @hidden
+   * @desc 单选按钮前置宽度
+   * @type size
+   */
+  --el-radio-button-before-width: 1px;
+
+  /**
+   * @desc 单选框字体
+   * @type font
+   */
+  --el-radio-font: var(--el-font-body-medium);
+
+  /**
+   * @hidden
+   * @desc 小号单选按钮字体
+   * @type font
+   */
+  --el-radio-button-font-small: var(--el-font-body-small);
+
+  /**
+   * @hidden
+   * @desc 中号单选按钮字体
+   * @type font
+   */
+  --el-radio-button-font-medium: var(--el-font-body-medium);
+
+  /**
+   * @hidden
+   * @desc 大号单选按钮字体
+   * @type font
+   */
+  --el-radio-button-font-large: var(--el-font-body-large);
+
+  /**
+   * @desc 单选框输入框与标签之间的间距
+   * @type size
+   */
+  --el-radio-input-label-spacer: var(--el-comp-margin-s);
+
+  /**
+   * @hidden
+   * @desc 小号单选按钮内边距
+   * @type size
+   */
+  --el-radio-button-padding-small: 0px var(--el-comp-paddingLR-s);
+
+  /**
+   * @hidden
+   * @desc 中号单选按钮内边距
+   * @type size
+   */
+  --el-radio-button-padding-medium: var(--el-comp-paddingTB-xs) var(--el-comp-paddingLR-l);
+
+  /**
+   * @hidden
+   * @desc 大号单选按钮内边距
+   * @type size
+   */
+  --el-radio-button-padding-large: var(--el-comp-paddingTB-s) var(--el-comp-paddingLR-xl);
+
+  /**
+   * @hidden
+   * @desc 单选按钮前置左边距
+   * @type size
+   */
+  --el-radio-button-before-left: 0px;
+
+  /**
+   * @hidden
+   * @desc 单选按钮前置上边距
+   * @type size
+   */
+  --el-radio-button-before-top: 50%;
+
+  /**
+   * @hidden
+   * @desc 单选按钮边框
+   * @type border
+   */
+  --el-radio-button-border: 1px solid;
+
+  /**
+   * @hidden
+   * @desc 单选框组内边距
+   * @type size
+   */
+  --el-radio-group-padding: var(--el-comp-paddingTB-xxs) var(--el-comp-paddingLR-xxs);
+
+  /**
+   * @hidden
+   * @desc 填充状态下单选框组背景块左边距
+   * @type size
+   */
+  --el-radio-group-filled-bg-block-left: 2px;
+
+  /**
+   * @hidden
+   * @desc 填充状态下单选框组背景块上边距
+   * @type size
+   */
+  --el-radio-group-filled-bg-block-top: 2px;
+
+  /**
+   * @hidden
+   * @desc 单选框组过渡效果
+   * @type transition
+   */
+  --el-radio-group-transition: all 0.2s cubic-bezier(0.38, 0, 0.24, 1);
+
+  /**
+   * @hidden
+   * @desc 单选按钮前置过渡效果
+   * @type transition
+   */
+  --el-radio-button-before-transition: translateY(-50%);
+
+  /**
+   * @hidden
+   * @desc 单选按钮过渡效果
+   * @type transition
+   */
+  --el-radio-button-transition: color 0.2s cubic-bezier(0, 0, 0.15, 1);
+
+  /**
+   * @desc 单选框输入框过渡效果
+   * @type transition
+   */
+  --el-radio-input-transition: border 0.2s cubic-bezier(0, 0, 0.15, 1);
+
+  /**
+   * @desc 单选框透明度
+   * @type opacity
+   */
+  --el-radio-opacity-transparent: 0;
+
+  /**
+   * @desc 单选框输入框边框
+   * @type border
+   */
+  --el-radio-input-border: 1px solid var(--el-radio-border-color);
+}

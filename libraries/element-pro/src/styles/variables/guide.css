@@ -1,0 +1,14 @@
+/**
+ * @component el-guide-pro
+ */
+:root {
+  --el-guide-overlay-z-index: 999999 - 2;
+  --el-guide-highlight-z-index: 999999 - 1;
+  --el-guide-reference-z-index: 999999;
+  --el-guide-footer-popup-margin-top: var(--el-comp-margin-l);
+  --el-guide-dialog-desc-margin-top: var(--el-comp-margin-l);
+  --el-guide-tooltip-desc-margin-top: var(--el-comp-margin-s);
+  --el-guide-action-margin-right: var(--el-comp-margin-s);
+  --el-guide-dialog-padding: var(--el-comp-paddingTB-xxl) var(--el-comp-paddingLR-xxl);
+  --el-guide-tooltip-padding: var(--el-comp-paddingTB-m) var(--el-comp-paddingLR-s);
+}

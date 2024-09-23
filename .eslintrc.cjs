@@ -4,7 +4,6 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended',
     'airbnb',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
@@ -28,6 +27,8 @@ module.exports = {
     'react/no-children-prop': 0,
     'react-refresh/only-export-components': 0,
     '@typescript-eslint/ban-ts-comment': 0,
+    'no-plusplus': 0,
+    'default-param-last': 0,
     'max-len': [1, { code: 200 }],
   },
 };

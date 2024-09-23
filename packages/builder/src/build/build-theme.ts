@@ -1,4 +1,5 @@
 import { loadConfigFromFile, build } from 'vite';
+import path from 'path';
 import fs from 'fs-extra';
 import genThemeConfig, { ThemeConfig } from './gens/gen-theme-config';
 import { themePath } from '../constants/input-paths';
@@ -31,7 +32,7 @@ export async function viteBuildTheme(themeConfig: ThemeConfig) {
     async transformIndexHtml(html, ctx) {
       return html.replace('\'[THEME INFO HERE]\'', JSON.stringify({
         previewPages: themeConfig.previewPages,
-        components: themeConfig.components.map((c) => ({ name: c.name, title: c.title, group: c.group })),
+        components: themeConfig.components.filter((c) => !c.hidden).map((c) => ({ name: c.name, title: c.title, group: c.group })),
       }));
     },
   });
@@ -87,9 +88,10 @@ export async function buildTheme(options: LcapBuildOptions) {
     themeVarCssPath: options.theme.themeVarCssPath || '',
     themeComponentFolder: options.theme.themeComponentFolder || '',
     previewPages: options.theme.previewPages || [],
-    useOldCssVarParser: options.theme.useOldCssVarParser,
+    oldCssVarPath: options.theme.oldCssVarPath,
     findThemeType: options.theme.findThemeType,
     type: options.type,
+    dependencies: options.dependencies,
   }, options.framework);
 
   if (!themeConfig || !themeConfig.components || themeConfig.components.length === 0) {
@@ -97,7 +99,7 @@ export async function buildTheme(options: LcapBuildOptions) {
   }
 
   logger.start('开始构建 theme');
-  await fs.writeJSON(`${options.destDir}/theme.config.json`, themeConfig, { spaces: 2 });
+  await fs.writeJSON(path.join(options.destDir, 'theme.config.json'), themeConfig, { spaces: 2 });
   logger.success('生成 theme.config.json 成功！');
 
   await viteBuildTheme(themeConfig);

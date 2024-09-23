@@ -1,0 +1,67 @@
+/**
+ * @component el-menu-pro
+ */
+:root {
+  --el-menu-theme-light: var(--el-bg-color-container);
+  --el-menu-theme-dark: var(--el-gray-color-13);
+  --el-menu-theme-primary: var(--el-brand-color);
+  --el-menu-color-light: var(--el-text-color-primary);
+  --el-menu-color-dark: var(--el-font-white-2);
+  --el-menu-item-color--light: var(--el-text-color-primary);
+  --el-menu-item-color--dark: var(--el-text-color-anti);
+  --el-menu-item-active-bg--light: var(--el-brand-color-light);
+  --el-menu-item-active-bg--dark: var(--el-brand-color);
+  --el-menu-item-active-color--light: var(--el-brand-color);
+  --el-menu-item-active-color--dark: var(--el-text-color-anti);
+  --el-menu-item-hover-color--light: var(--el-text-color-primary);
+  --el-menu-item-hover-bg--light: var(--el-bg-color-container-hover);
+  --el-menu-item-hover-bg--dark: var(--el-gray-color-10);
+  --el-menu-item-animation-bg--light: var(--el-bg-color-container-active);
+  --el-menu-item-animation-bg--dark: var(--el-gray-color-11);
+  --el-menu-item-disabled-color: var(--el-text-color-disabled);
+  --el-menu-item-disabled-color-dark: var(--el-font-white-4);
+  --el-menu-menu-group-title-color: var(--el-text-color-placeholder);
+  --el-menu-menu-group-title-color--dark: var(--el-font-white-3);
+  --el-menu-group-title-bg--collapse: var(--el-component-stroke);
+  --el-menu-group-title-bg--collapse--dark: var(--el-gray-color-10);
+  --el-menu-light-active-color: var(--el-brand-color);
+  --el-menu-dark-active-color: var(--el-text-color-anti);
+  --el-menu-light-active-bg: var(--el-bg-color-secondarycontainer-hover);
+  --el-menu-light-hover-bg: var(--el-bg-color-container-hover);
+  --el-menu-dark-active-bg: var(--el-gray-color-9);
+  --el-menu-dark-hover-bg: var(--el-gray-color-10);
+  --el-submenu-item-color: var(--el-text-color-primary);
+  --el-submenu-item-active-color: var(--el-brand-color);
+  --el-submenu-dark-item-active-color: #4582e6;
+  --el-menu-border-color: var(--el-component-stroke);
+  --el-menu-border-color--dark: var(--el-gray-color-10);
+  --el-menu-popup-item-color: var(--el-text-color-primary);
+  --el-menu-popup-item-hover-bg: var(--el-bg-color-container-hover);
+  --el-menu-popup-item-active-color: var(--el-brand-color);
+  --el-head-menu-popup-item-color: var(--el-text-color-primary);
+  --el-head-menu-popup-item-active-color: var(--el-text-color-primary);
+  --el-menu-head-item-color: var(--el-text-color-primary);
+  --el-menu-operations-color: var(--el-text-color-primary);
+  --el-head-menu-item-height: var(--el-comp-size-m);
+  --el-head-menu-submenu-border-color: var(--el-component-stroke);
+  --el-default-menu-width: 232px;
+  --el-default-menu-collapse-width: 64px;
+  --el-default-menu-active-color: var(--el-brand-color);
+  --el-default-menu-active-color--dark: var(--el-brand-color);
+  --el-default-menu-item-height: var(--el-comp-size-l);
+  --el-default-menu-item-color--light: var(--el-text-color-secondary);
+  --el-default-menu-item-color--dark: var(--el-font-white-2);
+  --el-popup-item-padding-left: var(--el-comp-paddingLR-l);
+  --el-menu-height-default: var(--el-comp-size-xxxl);
+  --el-menu-outer-zindex: 1000;
+  --el-menu-font-size: var(--el-font-body-medium);
+  --el-menu-extra-font-size: var(--el-font-body-small);
+  --el-menu-head-shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.08),
+  0 16px 24px 2px rgba(0, 0, 0, .04), 0 6px 30px 5px rgba(0, 0, 0, .05);
+  --el-menu-head-submenu-shadow: inset 0 -1px 0 0 #eee;
+  --el-menu-default-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.1),
+  0 8px 10px 1px rgba(0, 0, 0, .06), 0 3px 14px 6px rgba(0, 0, 0, .05);
+  --el-fade-linear-transition: opacity 200ms linear;
+  --el-md-fade-transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1),
+  opacity 300ms cubic-bezier(.23, 1, .32, 1);
+}

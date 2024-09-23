@@ -1,0 +1,23 @@
+/**
+ * @component el-loading-pro
+ */
+:root {
+  --el-loading-color: var(--el-brand-color);
+  --el-loading-mask-color: var(--el-mask-disabled);
+  --el-loading-gradient-color: var(--el-brand-color);
+  --el-loading-text-size: var(--el-font-body-medium);
+  --el-loading-icon-size: var(--el-comp-size-l);
+  --el-loading-icon-size-small: var(--el-comp-size-xxxs);
+  --el-loading-icon-size-large: var(--el-comp-size-xxxl);
+  --el-loading-fullscreen-icon-size: var(--el-loading-icon-size);
+  --el-loading-text-margin-left: var(--el-comp-margin-xs);
+  --el-loading-gradient-padding-s: 1px;
+  --el-loading-gradient-padding-m: 3px;
+  --el-loading-gradient-padding-l: 5px;
+  --el-loading-gradient-size-s: var(--el-comp-size-xxxs);
+  --el-loading-gradient-size-m: var(--el-comp-size-xl);
+  --el-loading-gradient-size-l: var(--el-comp-size-xxxl);
+  --el-loading-gradient-mask-size-s: 5.5px;
+  --el-loading-gradient-mask-size-m: 11.5px;
+  --el-loading-gradient-mask-size-l: 15.5px;
+}

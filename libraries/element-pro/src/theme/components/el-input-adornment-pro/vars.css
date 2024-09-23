@@ -1,0 +1,16 @@
+/**
+ * @component el-input-adornment-pro
+ */
+:root {
+  /**
+   * @desc 输入框装饰项的内间距
+   * @type input
+   */
+  --el-input-adornment-item-padding: 0 var(--el-comp-paddingLR-s);
+
+  /**
+   * @desc 输入框装饰项的默认边框颜色
+   * @type color
+   */
+  --el-input-adornment-border-color-default: var(--el-border-level-2-color);
+}

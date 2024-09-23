@@ -1,0 +1,106 @@
+@import "../../design/_common/style/web/_variables.less";
+:root {
+  --el-table-head-text-color: var(--el-text-color-primary);
+  --el-table-head-background-color: var(--el-bg-color-secondarycontainer);
+  --el-table-head-font-weight: 700;
+  --el-input-number-button-bg-color: var(--el-bg-color-secondarycontainer);
+}
+
+.@{prefix}-table__header {
+  tr {
+    background-color: var(--el-table-head-background-color);
+  }
+  th {
+    font-weight: var(--el-table-head-font-weight);
+  }
+}
+
+.@{prefix}-input-number:not(.@{prefix}-is-controls-right) {
+  border: 1px solid var(--el-input-number-button-border-color);
+  border-radius: var(--el-radius-default);
+  overflow: hidden;
+
+  &:hover:not(.@{prefix}-is-disabled),
+  &.cw-is-focus:not(.@{prefix}-is-disabled) {
+    border-color: var(--el-input-number-border-color-hover);
+  }
+
+  &.@{prefix}-is-error:not(.@{prefix}-is-disabled) {
+    border-color: var(--el-input-border-color-error);
+  }
+
+  &.@{prefix}-is-success:not(.@{prefix}-is-disabled) {
+    border-color: var(--el-input-border-color-success);
+  }
+
+  &.@{prefix}-is-warning:not(.@{prefix}-is-disabled) {
+    border-color: var(--el-input-border-color-warning);
+  }
+
+  &.cw-is-focus:not(.@{prefix}-is-disabled) {
+    box-shadow: 0 0 0 2px var(--el-input-box-shadow-color-default-focus);
+  }
+
+  &.cw-is-focus.@{prefix}-is-error:not(.@{prefix}-is-disabled) {
+    box-shadow: 0 0 0 2px var(--el-input-box-shadow-color-error-focus);
+  }
+
+  &.cw-is-focus.@{prefix}-is-success:not(.@{prefix}-is-disabled) {
+    box-shadow: 0 0 0 2px var(--el-input-box-shadow-color-success-focus);
+  }
+
+  &.cw-is-focus.@{prefix}-is-warning:not(.@{prefix}-is-disabled) {
+    box-shadow: 0 0 0 2px var(--el-input-box-shadow-color-warning-focus);
+  }
+
+  .@{prefix}-input__wrap {
+    margin: 0 !important;
+  }
+  .@{prefix}-input,
+  .@{prefix}-button {
+    border: none;
+    box-shadow: none;
+    outline: none;
+    border-radius: 0;
+  }
+
+  .@{prefix}-input {
+    height: calc(var(--el-input-number-inner-height) - 2px);
+  }
+
+  .@{prefix}-input-number__decrease {
+    border-right: 1px solid var(--el-input-number-button-border-color);
+    background-color: var(--el-input-number-button-bg-color);
+    height: calc(var(--el-input-number-button-height) - 2px);
+  }
+
+  .@{prefix}-input-number__increase {
+    border-left: 1px solid var(--el-input-number-button-border-color);
+    background-color: var(--el-input-number-button-bg-color);
+    height: calc(var(--el-input-number-button-height) - 2px);
+  }
+
+  &.@{prefix}-size-l {
+    .@{prefix}-input {
+      height: calc(var(--el-input-number-inner-height-l) - 2px);
+    }
+
+    .@{prefix}-input-number__decrease,
+    .@{prefix}-input-number__increase {
+      height: calc(var(--el-input-number-button-height-l) - 2px);
+    }
+  }
+
+  &.@{prefix}-size-s {
+    .@{prefix}-input {
+      height: calc(var(--el-input-number-inner-height-s) - 2px);
+    }
+
+    .@{prefix}-input-number__decrease,
+    .@{prefix}-input-number__increase {
+      height: calc(var(--el-input-number-button-height-s) - 2px);
+    }
+  }
+}
+
+@import "./style-panel.less";

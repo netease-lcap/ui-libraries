@@ -1,0 +1,154 @@
+/**
+ * @component el-select
+ */
+:root {
+  /**
+   * @desc 选择框悬停时的边框颜色
+   * @type color
+   */
+  --select-border-color-hover: var(--border-color-hover);
+
+  /**
+   * @desc 禁用状态下的边框颜色
+   * @type color
+   */
+  --select-disabled-border: var(--disabled-border-base);
+
+  /**
+   * @desc 选择框的字体大小
+   * @type size
+   */
+  --select-font-size: var(--font-size-base);
+
+  /**
+   * @desc 关闭按钮悬停时的颜色
+   * @type color
+   */
+  --select-close-hover-color: var(--color-text-secondary);
+
+  /**
+   * @desc 输入框的文字颜色
+   * @type color
+   */
+  --select-input-color: var(--color-text-placeholder);
+
+  /**
+   * @desc 多选输入框的文字颜色
+   * @type color
+   */
+  --select-multiple-input-color: #666;
+
+  /**
+   * @desc 输入框聚焦时的边框颜色
+   * @type color
+   */
+  --select-input-focus-border-color: var(--color-primary);
+
+  /**
+   * @desc 输入框的字体大小
+   * @type size
+   */
+  --select-input-font-size: 14px;
+
+  /**
+   * @desc 选项的文字颜色
+   * @type color
+   */
+  --select-option-color: var(--color-text-regular);
+
+  /**
+   * @desc 禁用状态下选项的文字颜色
+   * @type color
+   */
+  --select-option-disabled-color: var(--color-text-placeholder);
+
+  /**
+   * @desc 禁用状态下选项的背景颜色
+   * @type color
+   */
+  --select-option-disabled-background: var(--color-white);
+
+  /**
+   * @desc 选项的高度
+   * @type size
+   */
+  --select-option-height: 34px;
+
+  /**
+   * @desc 选项悬停时的背景颜色
+   * @type color
+   */
+  --select-option-hover-background: var(--background-color-base);
+
+  /**
+   * @desc 选中状态下选项的文字颜色
+   * @type color
+   */
+  --select-option-selected-font-color: var(--color-primary);
+
+  /**
+   * @desc 选中状态下选项悬停时的背景颜色
+   * @type color
+   */
+  --select-option-selected-hover: var(--background-color-base);
+
+  /**
+   * @desc 选项组的文字颜色
+   * @type color
+   */
+  --select-group-color: var(--color-info);
+
+  /**
+   * @desc 选项组的高度
+   * @type size
+   */
+  --select-group-height: 30px;
+
+  /**
+   * @desc 选项组的字体大小
+   * @type size
+   */
+  --select-group-font-size: 12px;
+
+  /**
+   * @desc 下拉框的背景颜色
+   * @type color
+   */
+  --select-dropdown-background: var(--color-white);
+
+  /**
+   * @desc 下拉框的阴影
+   * @type shadow
+   */
+  --select-dropdown-shadow: var(--box-shadow-light);
+
+  /**
+   * @desc 下拉框为空时的文字颜色
+   * @type color
+   */
+  --select-dropdown-empty-color: #999;
+
+  /**
+   * @desc 下拉框的最大高度
+   * @type size
+   */
+  --select-dropdown-max-height: 274px;
+
+  /**
+   * @desc 下拉框的内边距
+   * @type size
+   */
+  --select-dropdown-padding: 6px 0;
+
+  /**
+   * @desc 下拉框为空时的内边距
+   * @type size
+   */
+  --select-dropdown-empty-padding: 10px 0;
+
+  /**
+   * @desc 下拉框的边框样式
+   * @type border
+   */
+  --select-dropdown-border: solid 1px var(--border-color-light);
+}

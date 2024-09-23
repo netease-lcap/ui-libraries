@@ -1,0 +1,13 @@
+.el-transfer {
+    &.cw-style-height {
+        .el-transfer-panel__body {
+            height: calc(var(--cw-style-height) - var(--transfer-panel-header-height));
+            .el-transfer-panel__list {
+                height: 100%;
+            }
+            .el-transfer-panel__list.is-filterable {
+                height: calc(100% - var(--transfer-filter-height) - 20px);
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+/**
+ * @component el-alert-pro
+ */
+:root {
+  --el-alert-success-bg-color: var(--el-success-color-focus);
+  --el-alert-info-bg-color: var(--el-brand-color-focus);
+  --el-alert-warning-bg-color: var(--el-warning-color-focus);
+  --el-alert-error-bg-color: var(--el-error-color-focus);
+  --el-alert-title-color: var(--el-text-color-primary);
+  --el-alert-description-color: var(--el-text-color-secondary);
+  --el-alert-success-icon-color: var(--el-success-color);
+  --el-alert-info-icon-color: var(--el-brand-color);
+  --el-alert-warning-icon-color: var(--el-warning-color);
+  --el-alert-error-icon-color: var(--el-error-color);
+  --el-alert-close-color: var(--el-text-color-secondary);
+  --el-alert-close-color-hover: var(--el-text-color-primary);
+  --el-alert-success-trigger-color: var(--el-success-color-focus);
+  --el-alert-info-trigger-color: var(--el-brand-color);
+  --el-alert-warning-trigger-color: var(--el-warning-color-focus);
+  --el-alert-error-trigger-color: var(--el-error-color-focus);
+  --el-alert-success-trigger-active-color: var(--el-success-color);
+  --el-alert-info-trigger-active-color: var(--el-brand-color);
+  --el-alert-warning-trigger-active-color: var(--el-warning-color);
+  --el-alert-error-trigger-active-color: var(--el-error-color);
+  --el-alert-font-size: var(--el-font-size-body-medium);
+  --el-alert-line-height: var(--el-line-height-body-medium);
+  --el-alert-icon-size: var(--el-alert-line-height);
+  --el-alert-close-size: calc(var(--el-alert-line-height) - 2px);
+  --el-alert-padding: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-xl);
+  --el-alert-operation-padding: 0 var(--el-comp-paddingLR-s);
+  --el-alert-margin-left: var(--el-comp-margin-s);
+  --el-alert-close-margin-left: var(--el-comp-margin-l);
+  --el-alert-close-padding: calc((var(--el-alert-line-height) - var(--el-alert-close-size)) / 2) 0;
+  --el-alert-description-margin-top: var(--el-comp-margin-s);
+  --el-alert-collapse-margin-top: var(--el-comp-margin-s);
+}

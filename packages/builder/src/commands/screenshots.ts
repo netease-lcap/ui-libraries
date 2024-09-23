@@ -10,7 +10,7 @@ import logger from '../utils/logger';
 // eslint-disable-next-line no-promise-executor-return
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export default async (rootPath, port = 6006) => {
+export default async (rootPath, port = 6006, folder?: string) => {
   // eslint-disable-next-line global-require
   const puppeteer = require('puppeteer');
   const browser = await puppeteer.launch();
@@ -22,7 +22,11 @@ export default async (rootPath, port = 6006) => {
     deviceScaleFactor: 2,
   });
 
-  const storyPaths = await glob(['**/stories/block.stories.js', '**/stories/block.stories.jsx', '**/stories/block.stories.tsx'], { cwd: rootPath, absolute: true });
+  const searchPath = folder
+    ? `src/components/${folder}/stories/block.stories.{tsx,ts,jsx,js,vue}`
+    : '**/stories/block.stories.{js,ts,jsx,tsx}';
+
+  const storyPaths = await glob(searchPath, { cwd: rootPath, absolute: true });
 
   for (let i = 0; i < storyPaths.length; i++) {
     const content = fs.readFileSync(storyPaths[i], 'utf-8');

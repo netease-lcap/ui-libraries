@@ -1,0 +1,22 @@
+/**
+ * @component el-dropdown
+ */
+:root {
+  /**
+   * @desc 下拉菜单的阴影效果
+   * @type shadow
+   */
+  --dropdown-menu-box-shadow: var(--box-shadow-light);
+
+  /**
+   * @desc 下拉菜单项悬停时的背景色
+   * @type color
+   */
+  --dropdown-menuItem-hover-fill: var(--color-primary-light-9);
+
+  /**
+   * @desc 下拉菜单项悬停时的文字颜色
+   * @type color
+   */
+  --dropdown-menuItem-hover-color: var(--link-color);
+}

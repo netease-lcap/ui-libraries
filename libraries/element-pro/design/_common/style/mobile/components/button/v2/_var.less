@@ -1,0 +1,126 @@
+@button-border-width: var(--el-button-border-width, 2px);
+@button-border-radius: var(--el-button-border-radius, @radius-default);
+@button-font-weight: var(--el-button-font-weight, 600);
+
+@button-extra-small-font-size: var(--el-button-extra-small-font-size, @font-size-base);
+@button-small-font-size: var(--el-button-small-font-size, @font-size-base);
+@button-medium-font-size: var(--el-button-medium-font-size, @font-size-m);
+@button-large-font-size: var(--el-button-large-font-size, @font-size-m);
+
+@button-extra-small-height: var(--el-button-extra-small-height, 28px);
+@button-small-height: var(--el-button-small-height, 32px);
+@button-medium-height: var(--el-button-medium-height, 40px);
+@button-large-height: var(--el-button-large-height, 48px);
+
+// button icon
+@button-icon-spacer: var(--el-button-icon-spacer, @spacer);
+@button-icon-border-radius: var(--el-button-icon-border-radius, 4px);
+
+// padding
+@button-extra-small-padding-horizontal: var(--el-button-extra-small-padding-horizontal, 8px);
+@button-small-padding-horizontal: var(--el-button-small-padding-horizontal, 12px);
+@button-medium-padding-horizontal: var(--el-button-medium-padding-horizontal, 16px);
+@button-large-padding-horizontal: var(--el-button-large-padding-horizontal, 20px);
+
+// 图标大小
+@button-extra-small-icon-font-size: var(--el-button-extra-small-icon-font-size, 18px);
+@button-small-icon-font-size: var(--el-button-small-icon-font-size, 18px);
+@button-medium-icon-font-size: var(--el-button-medium-icon-font-size, 20px);
+@button-large-icon-font-size: var(--el-button-large-icon-font-size, 24px);
+
+// default
+@button-default-color: var(--el-button-default-color, @text-color-primary);
+@button-default-bg-color: var(--el-button-default-bg-color, @bg-color-component);
+@button-default-border-color: var(--el-button-default-border-color, @bg-color-component);
+@button-default-disabled-color: var(--el-button-default-disabled-color, @text-color-disabled);
+@button-default-disabled-bg: var(--el-button-default-disabled-bg, @bg-color-component-disabled);
+@button-default-disabled-border-color: var(--el-button-default-disabled-border-color, @bg-color-component-disabled);
+// primary
+@button-primary-color: var(--el-button-primary-color, @font-white-1);
+@button-primary-border-color: var(--el-button-primary-border-color, @brand-color);
+@button-primary-bg-color: var(--el-button-primary-bg-color, @brand-color);
+@button-primary-disabled-color: var(--el-button-primary-disabled-color, @font-white-1);
+@button-primary-disabled-bg: var(--el-button-primary-disabled-bg, @brand-color-disabled);
+@button-primary-disabled-border-color: var(--el-button-primary-disabled-border-color, @brand-color-disabled);
+// light
+@button-light-color: var(--el-button-light-color, @brand-color);
+@button-light-border-color: var(--el-button-light-border-color, @brand-color-light);
+@button-light-bg-color: var(--el-button-light-bg-color, @brand-color-light);
+@button-light-disabled-color: var(--el-button-light-disabled-color, @brand-color-disabled);
+@button-light-disabled-bg: var(--el-button-light-disabled-bg, @brand-color-light);
+@button-light-disabled-border-color: var(--el-button-light-disabled-border-color, @brand-color-light);
+// danger
+@button-danger-color: var(--el-button-danger-color, @font-white-1);
+@button-danger-border-color: var(--el-button-danger-border-color, @error-color);
+@button-danger-bg-color: var(--el-button-danger-bg-color, @error-color);
+@button-danger-disabled-color: var(--el-button-danger-disabled-color, @font-white-1);
+@button-danger-disabled-bg: var(--el-button-danger-disabled-bg, @error-color-3);
+@button-danger-disabled-border-color: var(--el-button-danger-disabled-border-color, @error-color-3);
+// default + outline
+@button-default-outline-color: var(--el-button-default-outline-color, @text-color-primary);
+@button-default-outline-border-color: var(--el-button-default-outline-border-color, @component-border);
+@button-default-outline-disabled-color: var(--el-button-default-outline-disabled-color, @component-border);
+// primary + outline
+@button-primary-outline-color: var(--el-button-primary-outline-color, @brand-color);
+@button-primary-outline-border-color: var(--el-button-primary-outline-border-color, @button-primary-outline-color);
+@button-primary-outline-disabled-color: var(--el-button-primary-outline-disabled-color, @brand-color-disabled);
+// danger + outline
+@button-danger-outline-color: var(--el-button-danger-outline-color, @error-color);
+@button-danger-outline-border-color: var(--el-button-danger-outline-border-color, @button-danger-outline-color);
+@button-danger-outline-disabled-color: var(--el-button-danger-outline-disabled-color, @error-color-3);
+// light + outline
+@button-light-outline-color: var(--el-button-light-outline-color, @brand-color);
+@button-light-outline-border-color: var(--el-button-light-outline-border-color, @button-light-outline-color);
+@button-light-outline-bg-color: var(--el-button-light-outline-bg-color, @brand-color-light);
+@button-light-outline-disabled-color: var(--el-button-light-outline-disabled-color, @brand-color-disabled);
+// primary + dashed
+@button-primary-dashed-color: var(--el-button-primary-dashed-color, @brand-color);
+@button-primary-dashed-border-color: var(--el-button-primary-dashed-border-color, @button-primary-dashed-color);
+@button-primary-dashed-disabled-color: var(--el-button-primary-dashed-disabled-color, @brand-color-disabled);
+// danger + dashed
+@button-danger-dashed-color: var(--el-button-danger-dashed-color, @error-color);
+@button-danger-dashed-border-color: var(--el-button-danger-dashed-border-color, @button-danger-dashed-color);
+@button-danger-dashed-disabled-color: var(--el-button-danger-dashed-disabled-color, @button-danger-disabled-color);
+// primary + text
+@button-primary-text-color: var(--el-button-primary-text-color, @brand-color);
+@button-primary-text-disabled-color: var(--el-button-primary-text-disabled-color, @brand-color-disabled);
+// danger + text
+@button-danger-text-color: var(--el-button-danger-text-color, @error-color);
+@button-danger-text-disabled-color: var(--el-button-danger-text-disabled-color, @button-danger-disabled-color);
+// light + text
+@button-light-text-color: var(--el-button-light-text-color, @brand-color);
+// ghost 优先级高于 theme，固定透明背景，白色边框，白色字体
+@button-ghost-color: var(--el-button-ghost-color, @bg-color-container);
+@button-ghost-border-color: var(--el-button-ghost-border-color, @button-ghost-color);
+@button-ghost-disabled-color: var(--el-button-ghost-disabled-color, rgba(255, 255, 255, .35));
+@button-ghost-hover-color: var(--el-button-ghost-hover-color, @font-white-2);
+@button-ghost-primary-color: var(--el-button-ghost-primary-color, @brand-color);
+@button-ghost-primary-border-color: var(--el-button-ghost-primary-border-color, @brand-color);
+@button-ghost-primary-hover-color: var(--el-button-ghost-primary-hover-color, @brand-color-active);
+@button-ghost-danger-color: var(--el-button-ghost-danger-color, @error-color);
+@button-ghost-danger-border-color: var(--el-button-ghost-danger-border-color, @error-color);
+@button-ghost-danger-hover-color: var(--el-button-ghost-danger-hover-color, @error-color-active);
+
+// 激活态背景和边框色
+@button-default-active-bg-color: var(--el-button-default-active-bg-color, @bg-color-component-active);
+@button-default-active-border-color: var(--el-button-default-active-border-color, @bg-color-component-active);
+@button-light-active-bg-color: var(--el-button-light-active-bg-color, @brand-color-light-active);
+@button-light-active-border-color: var(--el-button-light-active-border-color, @brand-color-light-active);
+@button-primary-active-bg-color: var(--el-button-primary-active-bg-color, @brand-color-active);
+@button-primary-active-border-color: var(--el-button-primary-active-border-color, @brand-color-active);
+@button-danger-active-bg-color: var(--el-button-danger-active-bg-color, @error-color-7);
+@button-danger-active-border-color: var(--el-button-danger-active-border-color, @error-color-7);
+@button-default-outline-active-bg-color: var(--el-button-default-outline-active-bg-color, @bg-color-container-active);
+@button-default-outline-active-border-color: var(--el-button-default-outline-active-border-color, @component-border);
+@button-primary-outline-active-bg-color: var(--el-button-primary-outline-active-bg-color, @bg-color-container-active);
+@button-primary-outline-active-border-color: var(--el-button-primary-outline-active-border-color, @brand-color-active);
+@button-danger-outline-active-bg-color: var(--el-button-danger-outline-active-bg-color, @bg-color-container-active);
+@button-danger-outline-active-border-color: var(--el-button-danger-outline-active-border-color, @error-color-7);
+@button-light-outline-active-bg-color: var(--el-button-light-outline-active-bg-color, @brand-color-light-active);
+@button-light-outline-active-border-color: var(--el-button-light-outline-active-border-color, @brand-color-active);
+@button-default-text-active-bg-color: var(--el-button-default-text-active-bg-color, @bg-color-container-active);
+@button-primary-text-active-bg-color: var(--el-button-primary-text-active-bg-color, @bg-color-container-active);
+@button-danger-text-active-bg-color: var(--el-button-danger-text-active-bg-color, @bg-color-container-active);
+@button-light-text-active-bg-color: var(--el-button-light-text-active-bg-color, @bg-color-container-active);
+
+@button: ~"@{prefix}-button";

@@ -1,0 +1,166 @@
+/**
+ * @component el-input
+ */
+:root {
+  /**
+   * @desc 输入框字体大小
+   * @type font-size
+   */
+  --input-font-size: var(--font-size-base);
+
+  /**
+   * @desc 输入框字体颜色
+   * @type color
+   */
+  --input-font-color: var(--color-text-regular);
+
+  /**
+   * @desc 输入框高度
+   * @type size
+   */
+  --input-height: 40px;
+
+  /**
+   * @desc 输入框边框
+   * @type border
+   */
+  --input-border: var(--border-base);
+
+  /**
+   * @desc 输入框边框颜色
+   * @type color
+   */
+  --input-border-color: var(--border-color-base);
+
+  /**
+   * @desc 输入框边框圆角
+   * @type border-radius
+   */
+  --input-border-radius: var(--border-radius-base);
+
+  /**
+   * @desc 输入框悬停时边框颜色
+   * @type color
+   */
+  --input-border-color-hover: var(--border-color-hover);
+
+  /**
+   * @desc 输入框背景颜色
+   * @type color
+   */
+  --input-background-color: var(--color-white);
+
+  /**
+   * @desc 输入框禁用时填充颜色
+   * @type color
+   */
+  --input-fill-disabled: var(--disabled-fill-base);
+
+  /**
+   * @desc 输入框禁用时字体颜色
+   * @type color
+   */
+  --input-color-disabled: var(--font-color-disabled-base);
+
+  /**
+   * @desc 输入框图标颜色
+   * @type color
+   */
+  --input-icon-color: var(--color-text-placeholder);
+
+  /**
+   * @desc 输入框占位符颜色
+   * @type color
+   */
+  --input-placeholder-color: var(--color-text-placeholder);
+
+  /**
+   * @desc 输入框最大宽度
+   * @type size
+   */
+  --input-max-width: 314px;
+
+  /**
+   * @desc 输入框悬停时边框
+   * @type border
+   */
+  --input-hover-border: var(--border-color-hover);
+
+  /**
+   * @desc 输入框清除按钮悬停时颜色
+   * @type color
+   */
+  --input-clear-hover-color: var(--color-text-secondary);
+
+  /**
+   * @desc 输入框聚焦时边框颜色
+   * @type color
+   */
+  --input-focus-border: var(--color-primary);
+
+  /**
+   * @desc 输入框聚焦时填充颜色
+   * @type color
+   */
+  --input-focus-fill: var(--color-white);
+
+  /**
+   * @desc 输入框禁用时填充颜色
+   * @type color
+   */
+  --input-disabled-fill: var(--disabled-fill-base);
+
+  /**
+   * @desc 输入框禁用时边框
+   * @type border
+   */
+  --input-disabled-border: var(--disabled-border-base);
+
+  /**
+   * @desc 输入框禁用时字体颜色
+   * @type color
+   */
+  --input-disabled-color: var(--disabled-color-base);
+
+  /**
+   * @desc 输入框禁用时占位符颜色
+   * @type color
+   */
+  --input-disabled-placeholder-color: var(--color-text-placeholder);
+
+  /**
+   * @desc 中等大小输入框字体大小
+   * @type font-size
+   */
+  --input-medium-font-size: 14px;
+
+  /**
+   * @desc 中等大小输入框高度
+   * @type size
+   */
+  --input-medium-height: 36px;
+
+  /**
+   * @desc 小型输入框字体大小
+   * @type font-size
+   */
+  --input-small-font-size: 13px;
+
+  /**
+   * @desc 小型输入框高度
+   * @type size
+   */
+  --input-small-height: 32px;
+
+  /**
+   * @desc 迷你输入框字体大小
+   * @type font-size
+   */
+  --input-mini-font-size: 12px;
+
+  /**
+   * @desc 迷你输入框高度
+   * @type size
+   */
+  --input-mini-height: 28px;
+}

@@ -103,7 +103,7 @@
     --background-color-dark: #e3e8f0;
     --background-color-dark-inverse: #2e3038;
     --background-color-darker: #d8dfea;
-    --background-color-disabled: #f5f5f5;
+    --background-color-disabled: var(--el-color-background-5);
     --background-color-hover: #f5f5f5;
     --background-color-disabled-light: #F7F8FA;
     --color-lighter: #ccc; /* Placeholder 字体颜色 */
@@ -306,7 +306,7 @@
     /* @component u-navbar-multi */
     --navbar-height: 60px;/* @desc 导航栏高度 */
     --navbar-space-x: 40px;/* @hidden */
-    --navbar-background: #333333;/* @type color */ /* @desc 导航栏背景颜色 */
+    --navbar-background: var(--el-color-background-1);/* @type color */ /* @desc 导航栏背景颜色 */
     --navbar-background-inverse: var(--brand-primary);/* @hidden */
     --navbar-color: white;/* @type color */ /* @desc 导航栏字体颜色 */
     --navbar-item-space: 30px;/* @hidden */
@@ -914,7 +914,7 @@
 
     /* @component u-table-view-expander */
     --table-view-expander-size: 16px; /* @hidden */
-    --table-view-expander-background: #f5f5f5; /* @hidden */
+    --table-view-expander-background: var(--el-color-background-7); /* @hidden */
     --table-view-expander-border-color: var(--table-view-expander-background); /* @hidden */
     --table-view-expander-border-radius: 4px; /* @hidden */
     --table-view-expander-background-hover: #e5e5e5; /* @hidden */
@@ -1439,7 +1439,7 @@
     --uploader-link-color-hover: var(--link-color); /* @type color */ /* @desc 文件上传列表项链接文本颜色(hover状态),如 #223325 */
     --uploader-card-border-radius: var(--border-radius-large); /* @desc 卡片式文件上传按钮的圆角,如 1px */
     --uploader-card-space: 8px; /* @desc 卡片式文件上传文件项之间的间距,如 1px */
-    --uploader-mask-background: rgba(0, 0, 0, 0.6); /* @type color */ /* @desc 卡片式文件上传遮罩层颜色,如 #223325 */
+    --uploader-mask-background: var(--el-color-background-3); /* @type color */ /* @desc 卡片式文件上传遮罩层颜色,如 #223325 */
     --uploader-draggable-background: #fcfcfc; /* @type color */ /* @desc 拖拽上传文件窗口背景色,如 #223325 */ /* @depAttrs { "draggable": [true] } */
     --uploader-draggable-border-width: 1px; /* @desc 拖拽上传文件窗口边框宽度,如 1px */ /* @depAttrs { "draggable": [true] } */
     --uploader-draggable-border-color: var(--border-color-base); /* @type color */ /* @desc 拖拽上传文件窗口边框颜色,如 #223325 */ /* @depAttrs { "draggable": [true] } */
@@ -1730,7 +1730,7 @@
     --tooltip-arrow-size: 6px;
     --tooltip-arrow-size-small: 3px;
     --tooltip-arrow-offset: 16px;
-    --tooltip-background: #242424;
+    --tooltip-background: var(--el-color-background-2);
     --tooltip-color: white;
     --tooltip-border-radius: var(--border-radius-base);
     --tooltip-box-shadow: 0px 2px 6px rgba(23, 23, 26, 0.1);
@@ -1805,7 +1805,7 @@
     --drawer-height-large: 600px; /* @desc large抽屉高度,如 1px */ /* @depAttrs {"size": ["large"], "placement": ["top", "bottom"]} */
     --drawer-max-height: auto; /* @hidden */
     --drawer-background: white; /* @type color */ /* @desc 抽屉背景色 */
-    --drawer-wrap-background: rgba(0, 0, 0, 0.6); /* @type color */ /* @desc 遮罩背景色 */
+    --drawer-wrap-background: var(--el-color-background-3); /* @type color */ /* @desc 遮罩背景色 */
     --drawer-close-size: 15px; /* @desc 关闭图标大小 */
     --drawer-close-color: var(--gray-dark); /* @type color */ /* @desc 关闭图标颜色 */
     --drawer-close-color-hover: var(--gray-darker); /* @type color */ /* @desc 关闭图标hover颜色 */
