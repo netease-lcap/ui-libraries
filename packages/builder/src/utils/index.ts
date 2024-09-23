@@ -11,7 +11,7 @@ export const getConfigComponents = (rootPath: string) => {
   // eslint-disable-next-line import/no-dynamic-require, global-require
   const config = require(lcapConfigPath);
 
-  if (!config || !Array.isArray(config.component)) {
+  if (!config || !Array.isArray(config.components)) {
     return [];
   }
 
