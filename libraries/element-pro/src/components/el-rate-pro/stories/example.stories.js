@@ -13,7 +13,7 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-rate-pro :allowClear="true"></el-rate-pro>',
+    template: '<el-rate-pro :clearable="true"></el-rate-pro>',
   }),
 };
 
