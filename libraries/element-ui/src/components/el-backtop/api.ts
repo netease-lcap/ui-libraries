@@ -8,7 +8,8 @@ namespace nasl.ui {
       elementSutando: {
         condition: true,
         component: 'ElBacktopDesigner',
-      }
+      },
+      isOverMask: true,
     }
   })
   @Component({
