@@ -100,6 +100,7 @@ namespace nasl.ui {
       setter: {
         concept: 'AnonymousFunctionSetter',
       },
+      if: (_) => !!_.dataSource,
       bindOpen: true,
     })
     tabPaneProps: (current: Current<T>) => {
