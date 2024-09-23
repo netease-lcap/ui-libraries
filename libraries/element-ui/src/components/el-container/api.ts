@@ -83,6 +83,15 @@ namespace nasl.ui {
   }
 
   export class ElAsideOptions extends ViewComponentOptions {
+    @Prop({
+      group: '主要属性',
+      title: '宽度',
+      description: '宽度，需要有px单位',
+      setter: { concept: 'InputSetter' },
+    })
+    width: nasl.core.String = '300px';
+
+
     @Slot({
       title: '默认',
       description: '内容',
