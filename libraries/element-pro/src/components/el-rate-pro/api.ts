@@ -49,6 +49,16 @@ namespace nasl.ui {
     allowHalf: nasl.core.Boolean = false;
 
     @Prop({
+      group: '交互属性',
+      title: '可清除',
+      description: '是否允许清除',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    allowClear: nasl.core.Boolean = false;
+
+    @Prop({
       group: '状态属性',
       title: '禁用',
       description: '是否禁用评分',

@@ -7,13 +7,14 @@ import props from './props';
 import { useConfig } from '../hooks/useConfig';
 import Tooltip from '../tooltip/index';
 import { renderElNodeJSXDefault } from '../utils/render-tnode';
+import type { ElRateProps } from './type';
 
 export default defineComponent({
   name: 'ElRate',
 
   props: { ...props },
 
-  setup(props) {
+  setup(props: ElRateProps) {
     const activeColor = Array.isArray(props.color) ? props.color[0] : props.color;
     const defaultColor = Array.isArray(props.color) ? props.color[1] : 'var(--el-bg-color-component)';
 
@@ -54,7 +55,13 @@ export default defineComponent({
 
     const clickHandler = (event: MouseEvent, index: number) => {
       if (props.disabled) return;
-      setStarValue(getStarValue(event, index));
+      const value = getStarValue(event, index);
+      if (props.allowClear && value === starValue.value) {
+        hoverValue.value = undefined;
+        setStarValue(null);
+      } else {
+        setStarValue(value);
+      }
     };
 
     const getStarCls = (index: number) => {
