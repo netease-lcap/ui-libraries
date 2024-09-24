@@ -1,6 +1,7 @@
 import { $deletePropList, createUseUpdateSync } from '@lcap/vue2-utils';
 import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins/types';
 import { listToTree } from '@lcap/vue2-utils/utils';
+import { isEmptyVNodes } from '@lcap/vue2-utils/plugins/utils';
 import { isFunction, get } from 'lodash';
 
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils';
@@ -121,7 +122,7 @@ export const useSlotLabel: NaslComponentPluginOptions = {
         if (slot) {
           const nodes = slot({ item });
 
-          if (nodes) {
+          if (!isEmptyVNodes(nodes)) {
             return nodes;
           }
         }
