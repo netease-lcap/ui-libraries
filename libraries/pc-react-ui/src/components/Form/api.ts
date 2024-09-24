@@ -655,7 +655,7 @@ namespace nasl.ui {
         '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型，详见[验证规则](#验证规则)。',
       bindHide: true,
     })
-    rules: nasl.core.String;
+    rules: nasl.collection.List<any>;
 
     // @Prop({
     //   group: '主要属性',

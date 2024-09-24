@@ -281,15 +281,6 @@ namespace nasl.ui {
     allowFoldNodeOnFilter: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: '树高度',
-      description:
-        '树的高度，超出后会出现滚动条。示例：100,  "30%",  "300"。值为数字类型，会自动加上单位 px。如果不是绝对固定树的高度，建议使用 `maxHeight`',
-      setter: { concept: 'InputSetter' },
-    })
-    height: nasl.core.String | nasl.core.Decimal;
-
-    @Prop({
       group: '交互属性',
       title: '悬浮状态',
       description: '节点是否有悬浮状态',
@@ -352,6 +343,16 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     private load: any;
+
+
+    @Prop({
+      group: '样式属性',
+      title: '树高度',
+      description:
+        '树的高度，超出后会出现滚动条。示例：100,  "30%",  "300"。值为数字类型，会自动加上单位 px。如果不是绝对固定树的高度，建议使用 `maxHeight`',
+      setter: { concept: 'InputSetter' },
+    })
+    height: nasl.core.String | nasl.core.Decimal;
 
     @Prop({
       group: '样式属性',
