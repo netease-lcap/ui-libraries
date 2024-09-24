@@ -125,7 +125,13 @@
         "name": "USidebarItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['u-sidebar-group', 'u-sidebar'].includes(target.tag)"
+            "parentAccept": "['u-sidebar-group', 'u-sidebar'].includes(target.tag)",
+            "disableSlotAutoFill": [
+                {
+                    "slot": "default",
+                    "expression": "this.getAttribute('text')?.value"
+                }
+            ]
         }
     },
     {
