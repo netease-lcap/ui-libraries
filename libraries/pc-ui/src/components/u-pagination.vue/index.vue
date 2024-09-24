@@ -4,7 +4,7 @@
         <a :class="$style.item" role="prev" :disabled="currentPage <= 1" @click="select(currentPage - 1)"></a>
         <div :class="$style['jumper-wrap']">
             <u-number-input :class="$style.jumper" :value="currentPage"
-                :min="1" :max="currentTotalPage" hide-buttons :readonly="readonly" :disabled="disabled"
+                :min="1" :max="maxPage" hide-buttons :readonly="readonly" :disabled="disabled"
                 @change="onChange($event.value, $event.oldValue)">
             </u-number-input> / {{ currentTotalPage }}
         </div>
@@ -35,7 +35,7 @@
         </a>
         <span v-if="showJumper" :class="$style['jumper-wrap']">{{ $tt('goto') }}
             <u-number-input :class="$style.jumper" :value="currentPage"
-                :min="1" :max="currentTotalPage" hide-buttons :readonly="readonly" :disabled="disabled"
+                :min="1" :max="maxPage" hide-buttons :readonly="readonly" :disabled="disabled"
                 @change="onChange($event.value, $event.oldValue)" :default-value="1">
             </u-number-input>
             {{ $tt('gotoPageUnit') }}</span>
@@ -152,6 +152,10 @@ export default {
                 return Math.ceil(this.totalItems / this.currentPageSize);
             else
                 return this.total;
+        },
+        maxPage() {
+            // fix: 2963782903956992 表格逻辑loadto，点击后刷新了两次表格
+            return Math.max(this.page, this.currentTotalPage);
         },
     },
     watch: {
