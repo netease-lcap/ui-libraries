@@ -46,7 +46,7 @@ export const 默认 = {
         <Input labelText="表单输入框" name="name" />
         <Select labelText="表单选择器" name="age" />
         <Switch labelText="表单开关" name="switch" />
-        <RadioGroup dataSource={['苹果', '香蕉', '橘子']} />
+        <RadioGroup labelText="表单单选组" dataSource={['苹果', '香蕉', '橘子']} />
         <TreeSelect labelText="表单树选择器" name="tree" />
         <TextArea labelText="表单多行输入" />
         <DatePicker labelText="表单日期选择" />
