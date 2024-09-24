@@ -478,6 +478,9 @@ importers:
       vue-cropper:
         specifier: ^0.5.8
         version: 0.5.11
+      whatwg-fetch:
+        specifier: 3.6.2
+        version: 3.6.2
       xlsx-js-style:
         specifier: ^1.2.0
         version: 1.2.0
