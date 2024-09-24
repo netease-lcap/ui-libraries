@@ -453,7 +453,7 @@ namespace nasl.ui {
     @Slot({
       title: 'undefined',
       description: '插入`<FormItem>`子组件。',
-      emptyBackground: 'add-sub-large',
+      // emptyBackground: 'add-sub-large',
       snippets: [
         // {
         //   title: '表单分组',
