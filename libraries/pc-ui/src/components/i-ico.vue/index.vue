@@ -26,7 +26,7 @@ import iconconfig from './iconconfig.js';
 import SEmpty from '../../components/s-empty.vue';
 import encodeUrl from '../../utils/encodeUrl';
 
-import { onlineSvgIcon, ie11 } from 'online-svg-icon-vue2';
+import { onlineSvgIcon, ie11 } from './online-svg-icon-vue2/src/main.js';
 
 export default {
     name: 'i-ico',
