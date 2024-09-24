@@ -1,0 +1,31 @@
+/**
+ * @component el-checkbox-pro
+ */
+:root {
+  --el-checkbox-border-color: var(--el-border-level-2-color);
+  --el-checkbox-border-color-checked: var(--el-brand-color);
+  --el-checkbox-border-color-hover: var(--el-brand-color);
+  --el-checkbox-input-color: var(--el-bg-color-container);
+  --el-checkbox-input-color-checked: var(--el-brand-color);
+  --el-checkbox-input-color-disabled: var(--el-bg-color-component-disabled);
+  --el-checkbox-check-color: var(--el-text-color-anti);
+  --el-checkbox-check-color-disabled: var(--el-text-color-disabled);
+  --el-checkbox-check-icon-disabled-color: var(--el-text-color-disabled);
+  --el-checkbox-input-color-indeterminate: var(--el-brand-color);
+  --el-checkbox-indeterminate-color-disabled: var(--el-text-color-disabled);
+  --el-checkbox-label-color: var(--el-text-color-primary);
+  --el-checkbox-size: 16px;
+  --el-checkbox-border-radius: var(--el-radius-default);
+  --el-checkbox-margin-right: var(--el-comp-margin-s);
+  --el-checkbox-check-width: 5px;
+  --el-checkbox-check-height: 9px;
+  --el-checkbox-check-size: calc(calc(var(--el-checkbox-check-width) + var(--el-checkbox-check-height)) / 1.41);
+  --el-checkbox-check-left: 3px;
+  --el-checkbox-indeterminate-width: 16px;
+  --el-checkbox-indeterminate-height: 4px;
+  --el-checkbox-indeterminate-color: var(--el-font-white-1);
+  --el-checkbox-font: var(--el-font-body-medium);
+  --el-checkbox-input-label-spacer: 8px;
+  --el-checkbox-group-gap: 16px;
+  --el-checkbox-margin: inherit;
+}

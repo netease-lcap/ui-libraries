@@ -1,8 +1,8 @@
+import Vue from 'vue';
 import {
   installDirectives,
   installComponents,
 } from '@lcap/vue2-utils';
-import Vue from 'vue';
 import * as CloudUI from './main';
 
 export * from './main';

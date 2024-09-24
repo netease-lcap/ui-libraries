@@ -1,0 +1,8 @@
+/**
+ * @component el-select-input-pro
+ */
+:root {
+  --el-select-input-focus-bg: var(--el-bg-color-container-hover);
+  --el-select-input-border-radius: var(--el-radius-default);
+  --el-select-input-shadow: 0 0 0 2px var(--el-brand-color-focus);
+}

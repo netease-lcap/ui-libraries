@@ -1,0 +1,24 @@
+/**
+ * @component el-progress-pro
+ */
+:root {
+  --el-progress-track-color: var(--el-bg-color-component);
+  --el-progress-inner-color: var(--el-brand-color);
+  --el-progress-success: var(--el-success-color);
+  --el-progress-error: var(--el-error-color);
+  --el-progress-warning: var(--el-warning-color);
+  --el-progress-inner-bg-color-active: var(--el-text-color-anti);
+  --el-progress-info-dark-color: var(--el-text-color-primary);
+  --el-progress-info-light-color: var(--el-text-color-anti);
+  --el-progress-circle-info-color: var(--el-text-color-primary);
+  --el-progress-line-stroke-width: var(--el-size-3);
+  --el-progress-stroke-plump-width: var(--el-comp-size-xxs);
+  --el-progress-icon-font-size: calc(var(--el-font-size-body-medium) + 2px);
+  --el-progress-icon-circle-font-size: 2.4em;
+  --el-progress-plump-font-size: var(--el-font-size-body-small);
+  --el-progress-circle-font-size: inherit;
+  --el-progress-circle-font-weight: 500;
+  --el-progress-info-spacer: var(--el-comp-margin-s);
+  --el-progress-inner-border-radius: 50px;
+  --el-progress-inner-transition: all 0.2s cubic-bezier(0.38, 0, 0.24, 1);
+}

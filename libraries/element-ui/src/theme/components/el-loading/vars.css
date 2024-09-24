@@ -1,0 +1,16 @@
+/**
+ * @component el-loading
+ */
+:root {
+  /**
+   * @desc 加载动画的默认尺寸
+   * @type size
+   */
+  --loading-spinner-size: 42px;
+
+  /**
+   * @desc 全屏加载动画的尺寸
+   * @type size
+   */
+  --loading-fullscreen-spinner-size: 50px;
+}

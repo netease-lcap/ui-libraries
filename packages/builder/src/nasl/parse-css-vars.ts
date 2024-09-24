@@ -16,6 +16,7 @@ export interface ThemeComponentVars {
   selector: string;
   variables: ThemeVariable[];
   hidden?: boolean;
+  alias?: string[];
 }
 
 export interface ThemeGlobalVars {
@@ -30,6 +31,8 @@ export interface ThemeInfo {
 
 const ComponentAnnotation = '@component';
 const UseGlobalTokensAnnotation = '@useGlobalTokens';
+const AliasAnnotation = '@alias';
+const HiddenAnnotation = '@hidden';
 
 const parseCssVars = (nodes: NonNullable<postcss.Container['nodes']>) => {
   const variables: ThemeVariable[] = [];
@@ -49,6 +52,9 @@ const parseCssVars = (nodes: NonNullable<postcss.Container['nodes']>) => {
         .map((str) => str.trim())
         .filter((str) => str && str.startsWith('@'))
         .forEach((str) => {
+          if (str === '@hidden') {
+            variable.hidden = true;
+          }
           const spaceIndex = str.indexOf(' ');
           if (spaceIndex === -1) {
             return;
@@ -71,6 +77,16 @@ const parseCssVars = (nodes: NonNullable<postcss.Container['nodes']>) => {
 
     variable.name = n.prop;
     variable.value = n.value;
+
+    if ((
+      ['color', 'bg', 'background'].some((key) => variable.name.toLocaleLowerCase().includes(key)) || variable.name.toLocaleLowerCase().endsWith('outline')
+    ) && (!variable.type || variable.type === 'input')) {
+      variable.type = 'color';
+    }
+
+    if (!variable.type || !['color', 'size', 'input'].includes(variable.type)) {
+      variable.type = 'input';
+    }
 
     variables.push(variable);
     variable = {
@@ -120,6 +136,10 @@ export default (cssContent: string) => {
               componentInfo.name = str.substring(ComponentAnnotation.length).trim();
             } else if (str.startsWith(UseGlobalTokensAnnotation)) {
               componentInfo.useGlobalTokens = JSON.parse(str.substring(UseGlobalTokensAnnotation.length).trim());
+            } else if (str.startsWith(AliasAnnotation)) {
+              componentInfo.alias = JSON.parse(str.substring(AliasAnnotation.length).trim());
+            } else if (str.startsWith(HiddenAnnotation)) {
+              componentInfo.hidden = true;
             }
           });
       }

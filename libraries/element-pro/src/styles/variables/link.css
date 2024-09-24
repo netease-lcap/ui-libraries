@@ -1,0 +1,33 @@
+/**
+ * @component el-link-pro
+ */
+:root {
+  --el-link-font-s: var(--el-font-link-small);
+  --el-link-font-default: var(--el-font-link-medium);
+  --el-link-font-l: var(--el-font-link-large);
+  --el-link-icon-margin-s: var(--el-comp-margin-xs);
+  --el-link-icon-margin-default: var(--el-comp-margin-s);
+  --el-link-icon-margin-l: var(--el-comp-margin-m);
+  --el-link-icon-text-margin-left: var(--el-comp-margin-xs);
+  --el-link-icon-text-margin-right: var(--el-comp-margin-xs);
+  --el-link-color-default: var(--el-text-color-primary);
+  --el-link-color-default-hover: var(--el-brand-color-hover);
+  --el-link-color-default-active: var(--el-brand-color-active);
+  --el-link-color-default-disabled: var(--el-text-color-disabled);
+  --el-link-color-primary: var(--el-brand-color);
+  --el-link-color-primary-hover: var(--el-brand-color-hover);
+  --el-link-color-primary-active: var(--el-brand-color-active);
+  --el-link-color-primary-disabled: var(--el-brand-color-disabled);
+  --el-link-color-success: var(--el-success-color);
+  --el-link-color-success-hover: var(--el-success-color-hover);
+  --el-link-color-success-active: var(--el-success-color-active);
+  --el-link-color-success-disabled: var(--el-success-color-disabled);
+  --el-link-color-warning: var(--el-warning-color);
+  --el-link-color-warning-hover: var(--el-warning-color-hover);
+  --el-link-color-warning-active: var(--el-warning-color-active);
+  --el-link-color-warning-disabled: var(--el-warning-color-disabled);
+  --el-link-color-danger: var(--el-error-color);
+  --el-link-color-danger-hover: var(--el-error-color-hover);
+  --el-link-color-danger-active: var(--el-error-color-active);
+  --el-link-color-danger-disabled: var(--el-error-color-disabled);
+}

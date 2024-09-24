@@ -1,0 +1,36 @@
+/**
+ * @component el-cascader-pro
+ */
+:root {
+  --el-cascader-popup-border: 0.5px solid var(--el-component-border);
+  --el-cascader-popup-border-radius: var(--el-radius-medium);
+  --el-cascader-highlight-color: var(--el-text-color-brand);
+  --el-cascader-dark-color: var(--el-text-color-primary);
+  --el-cascader-font: var(--el-font-body-medium);
+  --el-cascader-font-s: var(--el-font-body-small);
+  --el-cascader-font-l: var(--el-font-body-large);
+  --el-cascader-width-s: 150px;
+  --el-cascader-panel-height-normal: 200px;
+  --el-cascader-panel-height-multiple: 280px;
+  --el-cascader-icon-inner-width: 14px;
+  --el-cascader-menu-segment-color: var(--el-component-stroke);
+  --el-cascader-menu-padding: var(--el-pop-padding-m);
+  --el-cascader-menu-padding-s: var(--el-pop-padding-s);
+  --el-cascader-menu-padding-l: var(--el-pop-padding-l);
+  --el-cascader-color-empty: var(--el-text-color-disabled);
+  --el-cascader-item-color-selected: var(--el-brand-color);
+  --el-cascader-item-color-hover: var(--el-bg-color-container-hover);
+  --el-cascader-item-color-disabled: var(--el-text-color-disabled);
+  --el-cascader-item-background-color-expanded: var(--el-brand-color-light);
+  --el-cascader-item-height-s: var(--el-comp-size-xs);
+  --el-cascader-item-height-default: var(--el-comp-size-s);
+  --el-cascader-item-height-l: var(--el-comp-size-m);
+  --el-cascader-item-margin-top: var(--el-comp-margin-xxs);
+  --el-cascader-item-border-radius: var(--el-radius-default);
+  --el-cascader-item-padding-with-icon: 0 calc(var(--el-comp-paddingLR-s) + var(--el-cascader-icon-inner-width)) 0 var(--el-comp-paddingLR-s);
+  --el-cascader-item-padding: 0 var(--el-comp-paddingLR-s);
+  --el-cascader-item-padding-s: 0px var(--el-comp-paddingLR-s);
+  --el-cascader-item-padding-l: 0 var(--el-comp-paddingLR-m);
+  --el-cascader-icon-color: var(--el-text-color-placeholder);
+  --el-cascader-icon-color-select: var(--el-brand-color);
+}

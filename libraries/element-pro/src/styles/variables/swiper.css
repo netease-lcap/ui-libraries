@@ -1,0 +1,52 @@
+/**
+ * @component el-swiper-pro
+ */
+:root {
+  --el-swiper-navigation-item-bg: var(--el-font-white-4);
+  --el-swiper-navigation-item-bg-outside: var(--el-font-gray-4);
+  --el-swiper-navigation-item-bg-hover: var(--el-font-white-2);
+  --el-swiper-navigation-item-bg-active: var(--el-bg-color-container);
+  --el-swiper-navigation-item-outside-bg-hover: var(--el-brand-color);
+  --el-swiper-navigation-item-outside-bg-active: var(--el-brand-color-active);
+  --el-swiper-navigation-arrow-color-fraction: var(--el-font-gray-4);
+  --el-swiper-navigation-text-color-fraction: var(--el-text-color-secondary);
+  --el-swiper-arrow-active: var(--el-font-white-3);
+  --el-swiper-navigation-font-size-fraction-medium: var(--el-font-size-body-medium);
+  --el-swiper-navigation-font-size-fraction-small: var(--el-font-size-body-small);
+  --el-swiper-navigation-font-size-fraction-large: var(--el-font-size-body-large);
+  --el-swiper-navigation-line-height-fraction-medium: var(--el-line-height-body-medium);
+  --el-swiper-navigation-line-height-fraction-small: var(--el-line-height-body-small);
+  --el-swiper-navigation-line-height-fraction-large: var(--el-line-height-body-large);
+  --el-swiper-arrow-icon-font-size-large: 24px + 8;
+  --el-swiper-arrow-icon-font-size-medium: 24px;
+  --el-swiper-arrow-icon-font-size-small: 24px - 8;
+  --el-swiper-navigation-item-width-bars-medium: 14px;
+  --el-swiper-navigation-item-height-bars-medium: 3px;
+  --el-swiper-navigation-item-width-bars-large: 21px;
+  --el-swiper-navigation-item-height-bars-large: 4px;
+  --el-swiper-navigation-item-width-bars-small: 9px;
+  --el-swiper-navigation-item-height-bars-small: 2px;
+  --el-swiper-navigation-item-width-bars-medium-active: 24px;
+  --el-swiper-navigation-item-width-bars-large-active: 36px;
+  --el-swiper-navigation-item-width-bars-small-active: 15px;
+  --el-swiper-arrow-size-base: 8px;
+  --el-swiper-arrow-width-small: var(--el-swiper-arrow-size-base) * 2;
+  --el-swiper-arrow-height-small: var(--el-swiper-arrow-size-base) * 2;
+  --el-swiper-arrow-width-medium: var(--el-swiper-arrow-size-base) * 3;
+  --el-swiper-arrow-height-medium: var(--el-swiper-arrow-size-base) * 3;
+  --el-swiper-arrow-width-large: var(--el-swiper-arrow-size-base) * 4;
+  --el-swiper-arrow-height-large: var(--el-swiper-arrow-size-base) * 4;
+  --el-swiper-arrow-left-small: var(--el-swiper-arrow-size-base);
+  --el-swiper-arrow-left-medium: var(--el-swiper-arrow-size-base) * 2;
+  --el-swiper-arrow-left-large: var(--el-swiper-arrow-size-base) * 3;
+  --el-swiper-card-transform-scale-active: scale(1);
+  --el-swiper-card-transform-scale: scale(0.63);
+  --el-swiper-navigation-item-margin-large: 8px;
+  --el-swiper-navigation-item-margin-medium: 6px;
+  --el-swiper-navigation-item-margin-small: 4px;
+  --el-swiper-navigation-item-dot-size: var(--el-size-2);
+  --el-swiper-z-index-default: 1;
+  --el-swiper-navigation-z-index-default: var(--el-swiper-z-index-default) + 1;
+  --el-swiper-animation-duration: 0.5s;
+  --el-swiper-animation-time-fn: cubic-bezier(0.38, 0, 0.24, 1);
+}

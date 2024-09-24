@@ -1,0 +1,34 @@
+/**
+ * @component el-rate
+ */
+:root {
+  /**
+   * @desc 评分组件的高度
+   * @type size
+   */
+  --rate-height: 20px;
+
+  /**
+   * @desc 评分组件的字体大小
+   * @type size
+   */
+  --rate-font-size: var(--font-size-base);
+
+  /**
+   * @desc 评分图标的大小
+   * @type size
+   */
+  --rate-icon-size: 18px;
+
+  /**
+   * @desc 评分图标的间距
+   * @type size
+   */
+  --rate-icon-margin: 6px;
+
+  /**
+   * @desc 评分图标的颜色
+   * @type color
+   */
+  --rate-icon-color: var(--color-text-placeholder);
+}

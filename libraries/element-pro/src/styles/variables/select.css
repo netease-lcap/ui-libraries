@@ -1,0 +1,54 @@
+/**
+ * @component el-select-pro
+ */
+:root {
+  --el-select-bg-color: var(--el-bg-color-specialcomponent);
+  --el-select-border-color: var(--el-border-level-2-color);
+  --el-select-border-color-active: var(--el-brand-color);
+  --el-select-selected-color: var(--el-brand-color);
+  --el-select-selected-bg-color: var(--el-brand-color-light);
+  --el-select-selected-bg-color-hover: var(--el-select-selected-bg-color);
+  --el-select-option-bg-color-hover: var(--el-bg-color-container-hover);
+  --el-select-option-bg-color-active: var(--el-bg-color-container-active);
+  --el-select-option-checkbox-color: var(--el-bg-color-container-hover);
+  --el-select-option-group-header-color: var(--el-text-color-placeholder);
+  --el-select-option-color: var(--el-text-color-primary);
+  --el-select-bg-color-disabled: var(--el-bg-color-component-disabled);
+  --el-select-placeholder-color: var(--el-text-color-placeholder);
+  --el-select-placeholder-color-disabled: var(--el-text-color-disabled);
+  --el-select-color-disabled: var(--el-text-color-disabled);
+  --el-select-color-empty: var(--el-text-color-disabled);
+  --el-select-icon-color: var(--el-text-color-placeholder);
+  --el-select-icon-color-disabled: var(--el-text-color-disabled);
+  --el-select-optiongroup-border-color: var(--el-border-level-1-color);
+  --el-select-input-color: var(--el-text-color-primary);
+  --el-select-option-checkbox-label-color-hover: inherit;
+  --el-select-option-checkbox-input-color-hover: var(--el-brand-color);
+  --el-select-right-icon-hover: var(--el-brand-color);
+  --el-select-height-s: var(--el-comp-size-xs);
+  --el-select-height-default: var(--el-comp-size-m);
+  --el-select-height-l: var(--el-comp-size-xl);
+  --el-select-option-height-s: var(--el-comp-size-xxs);
+  --el-select-option-height-default: var(--el-comp-size-s);
+  --el-select-option-height-l: var(--el-comp-size-l);
+  --el-select-dropdown-max-height: 300px;
+  --el-select-font-s: var(--el-font-body-small);
+  --el-select-font-l: var(--el-font-body-large);
+  --el-select-font-m: var(--el-font-body-medium);
+  --el-select-dropdown-shadow: var(--el-shadow-2);
+  --el-select-input-shadow: 0 0 0 2px var(--el-brand-color-focus);
+  --el-select-border-radius: var(--el-radius-default);
+  --el-select-option-border-radius: var(--el-radius-default);
+  --el-select-option-padding-s: 0 var(--el-comp-paddingLR-s);
+  --el-select-option-padding-default: 0 var(--el-comp-paddingLR-s);
+  --el-select-option-padding-l: 0 var(--el-comp-paddingLR-m);
+  --el-select-optiongroup-border-padding: var(--el-comp-margin-xs);
+  --el-select-dropdown-padding: var(--el-pop-padding-m);
+  --el-select-dropdown-padding-l: var(--el-pop-padding-l);
+  --el-select-dropdown-padding-s: var(--el-pop-padding-s);
+  --el-select-dropdown-popup-padding: 0;
+  --el-select-optiongroup-border-margin: var(--el-comp-margin-xs);
+  --el-select-dropdown-margin: var(--el-comp-paddingTB-s) 0;
+  --el-select-options-margin-top: var(--el-comp-paddingTB-xxs);
+  --el-select-empty-padding: 0 var(--el-comp-paddingLR-s);
+}

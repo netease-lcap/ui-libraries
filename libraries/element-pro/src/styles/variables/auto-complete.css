@@ -1,0 +1,6 @@
+/**
+ * @component el-auto-complete-pro
+ */
+:root {
+  --el-auto-complete-option-highlight-color: var(--el-brand-color);
+}

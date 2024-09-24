@@ -1,0 +1,28 @@
+/**
+ * @component el-sticky-tool-pro
+ */
+:root {
+  --el-sticky-tool-background: var(--el-bg-color-container);
+  --el-sticky-tool-border: var(--el-component-border);
+  --el-sticky-tool-shadow: var(--el-shadow-3);
+  --el-sticky-tool-popup-shadow: var(--el-shadow-3);
+  --el-sticky-tool-popup-font-size: var(--el-font-size-body-small);
+  --el-sticky-tool-popup-color: var(--el-text-color-secondary);
+  --el-sticky-tool-border-radius-square: var(--el-radius-medium);
+  --el-sticky-item-border-radius-square: var(--el-radius-default);
+  --el-sticky-tool-border-radius-round: var(--el-radius-round);
+  --el-sticky-item-border-radius-round: var(--el-radius-circle);
+  --el-sticky-item-margin: var(--el-comp-margin-xs);
+  --el-sticky-item-bgcolor-hover: var(--el-bg-color-container-hover);
+  --el-sticky-item-label-height: var(--el-comp-size-xxs);
+  --el-sticky-item-label-margin-top: var(--el-comp-margin-xxs);
+  --el-sticky-item-font-size: var(--el-font-size-body-small);
+  --el-sticky-item-text-color: var(--el-text-color-secondary);
+  --el-sticky-item-icon-size: 24px;
+  --el-sticky-item-icon-color: var(--el-text-color-primary);
+  --el-sticky-item-bg-color-transition: background-color 0.2s linear;
+  --el-sticky-item-size-normal: var(--el-comp-size-xxxl);
+  --el-sticky-item-icon-margin-normal: var(--el-comp-margin-s) var(--el-comp-margin-l) 0 var(--el-comp-margin-l);
+  --el-sticky-item-size-compact: var(--el-comp-size-xl);
+  --el-sticky-item-icon-margin-compact: var(--el-comp-margin-s);
+}

@@ -1,0 +1,22 @@
+/**
+ * @component el-select-input-pro
+ */
+:root {
+  /**
+   * @desc 选择输入框聚焦背景色
+   * @type color
+   */
+  --el-select-input-focus-bg: var(--el-bg-color-container-hover);
+
+  /**
+   * @desc 选择输入框的边框半径
+   * @type dimension
+   */
+  --el-select-input-border-radius: var(--el-radius-default);
+
+  /**
+   * @desc 选择输入框的阴影效果
+   * @type shadow
+   */
+  --el-select-input-shadow: 0 0 0 2px var(--el-brand-color-focus);
+}

@@ -1,0 +1,220 @@
+/**
+ * @component el-checkbox
+ */
+:root {
+  /**
+   * @desc 复选框字体大小
+   * @type size
+   */
+  --checkbox-font-size: 14px;
+
+  /**
+   * @desc 复选框字体粗细
+   * @type font-weight
+   */
+  --checkbox-font-weight: var(--font-weight-primary);
+
+  /**
+   * @desc 复选框字体颜色
+   * @type color
+   */
+  --checkbox-font-color: var(--color-text-regular);
+
+  /**
+   * @desc 复选框输入框高度
+   * @type size
+   */
+  --checkbox-input-height: 14px;
+
+  /**
+   * @desc 复选框输入框宽度
+   * @type size
+   */
+  --checkbox-input-width: 14px;
+
+  /**
+   * @desc 复选框边框圆角
+   * @type size
+   */
+  --checkbox-border-radius: var(--border-radius-small);
+
+  /**
+   * @desc 复选框背景颜色
+   * @type color
+   */
+  --checkbox-background-color: var(--color-white);
+
+  /**
+   * @desc 复选框输入框边框
+   * @type border
+   */
+  --checkbox-input-border: var(--border-base);
+
+  /**
+   * @desc 禁用状态下复选框边框颜色
+   * @type color
+   */
+  --checkbox-disabled-border-color: var(--border-color-base);
+
+  /**
+   * @desc 禁用状态下复选框输入框填充颜色
+   * @type color
+   */
+  --checkbox-disabled-input-fill: #edf2fc;
+
+  /**
+   * @desc 禁用状态下复选框图标颜色
+   * @type color
+   */
+  --checkbox-disabled-icon-color: var(--color-text-placeholder);
+
+  /**
+   * @desc 禁用且选中状态下复选框输入框填充颜色
+   * @type color
+   */
+  --checkbox-disabled-checked-input-fill: var(--border-color-extra-light);
+
+  /**
+   * @desc 禁用且选中状态下复选框输入框边框颜色
+   * @type color
+   */
+  --checkbox-disabled-checked-input-border-color: var(--border-color-base);
+
+  /**
+   * @desc 禁用且选中状态下复选框图标颜色
+   * @type color
+   */
+  --checkbox-disabled-checked-icon-color: var(--color-text-placeholder);
+
+  /**
+   * @desc 选中状态下复选框字体颜色
+   * @type color
+   */
+  --checkbox-checked-font-color: var(--color-primary);
+
+  /**
+   * @desc 选中状态下复选框输入框边框颜色
+   * @type color
+   */
+  --checkbox-checked-input-border-color: var(--color-primary);
+
+  /**
+   * @desc 选中状态下复选框背景颜色
+   * @type color
+   */
+  --checkbox-checked-background-color: var(--color-primary);
+
+  /**
+   * @desc 选中状态下复选框图标颜色
+   * @type color
+   */
+  --checkbox-checked-icon-color: var(--fill-base);
+
+  /**
+   * @desc 悬停状态下复选框输入框边框颜色
+   * @type color
+   */
+  --checkbox-input-border-color-hover: var(--color-primary);
+
+  /**
+   * @desc 带边框复选框高度
+   * @type size
+   */
+  --checkbox-bordered-height: 40px;
+
+  /**
+   * @desc 带边框复选框内边距
+   * @type padding
+   */
+  --checkbox-bordered-padding: 9px 20px 9px 10px;
+
+  /**
+   * @desc 中等大小带边框复选框内边距
+   * @type padding
+   */
+  --checkbox-bordered-medium-padding: 7px 20px 7px 10px;
+
+  /**
+   * @desc 小号带边框复选框内边距
+   * @type padding
+   */
+  --checkbox-bordered-small-padding: 5px 15px 5px 10px;
+
+  /**
+   * @desc 迷你带边框复选框内边距
+   * @type padding
+   */
+  --checkbox-bordered-mini-padding: 3px 15px 3px 10px;
+
+  /**
+   * @desc 中等大小带边框复选框输入框高度
+   * @type size
+   */
+  --checkbox-bordered-medium-input-height: 14px;
+
+  /**
+   * @desc 中等大小带边框复选框输入框宽度
+   * @type size
+   */
+  --checkbox-bordered-medium-input-width: 14px;
+
+  /**
+   * @desc 中等大小带边框复选框高度
+   * @type size
+   */
+  --checkbox-bordered-medium-height: 36px;
+
+  /**
+   * @desc 小号带边框复选框输入框高度
+   * @type size
+   */
+  --checkbox-bordered-small-input-height: 12px;
+
+  /**
+   * @desc 小号带边框复选框输入框宽度
+   * @type size
+   */
+  --checkbox-bordered-small-input-width: 12px;
+
+  /**
+   * @desc 小号带边框复选框高度
+   * @type size
+   */
+  --checkbox-bordered-small-height: 32px;
+
+  /**
+   * @desc 迷你带边框复选框输入框高度
+   * @type size
+   */
+  --checkbox-bordered-mini-input-height: 12px;
+
+  /**
+   * @desc 迷你带边框复选框输入框宽度
+   * @type size
+   */
+  --checkbox-bordered-mini-input-width: 12px;
+
+  /**
+   * @desc 迷你带边框复选框高度
+   * @type size
+   */
+  --checkbox-bordered-mini-height: 28px;
+
+  /**
+   * @desc 按钮样式选中状态下复选框背景颜色
+   * @type color
+   */
+  --checkbox-button-checked-background-color: var(--color-primary);
+
+  /**
+   * @desc 按钮样式选中状态下复选框字体颜色
+   * @type color
+   */
+  --checkbox-button-checked-font-color: var(--color-white);
+
+  /**
+   * @desc 按钮样式选中状态下复选框边框颜色
+   * @type color
+   */
+  --checkbox-button-checked-border-color: var(--color-primary);
+}

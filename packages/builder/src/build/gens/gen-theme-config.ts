@@ -1,19 +1,11 @@
 /* eslint-disable newline-per-chained-call */
 import glob from 'fast-glob';
 import fs from 'fs-extra';
+import path from 'path';
 import { kebabCase } from 'lodash';
 import parseCssVars, { ThemeComponentVars, ThemeGlobalVars, ThemeInfo } from '../../nasl/parse-css-vars';
 import parseCssVarsOld from '../../nasl/parse-css-vars-old';
-
-export interface ThemeOptions {
-  themeVarCssPath: string;
-  themeComponentFolder: string;
-  type: string;
-  previewPages: Array<{ name: string, title: string }>;
-  useOldCssVarParser?: boolean;
-  components: Array<{ group: string, title: string, name: string, [key: string]: any }>;
-  findThemeType?: 'theme' | 'component';
-}
+import type { ThemeOptions } from '../types';
 
 export interface ThemeComponentConfig extends ThemeComponentVars {
   group: string;
@@ -36,16 +28,23 @@ export interface ThemeConfig {
 function getCssContent(options: ThemeOptions) {
   const cssVarFiles: string[] = [];
 
-  if (options.themeVarCssPath) {
+  if (options.themeVarCssPath && fs.existsSync(options.themeVarCssPath)) {
     cssVarFiles.push(options.themeVarCssPath);
   }
 
-  if (!options.useOldCssVarParser) {
-    const varsPath = options.findThemeType === 'component' ? '*/theme/vars.css' : '*/vars.css';
-    const varFiles = glob.sync(varsPath, { cwd: options.themeComponentFolder, absolute: true });
-    if (varFiles.length > 0) {
-      cssVarFiles.push(...varFiles);
-    }
+  const varsPath = options.findThemeType === 'component' ? '*/theme/vars.css' : '*/vars.css';
+  const varFiles = glob.sync(varsPath, { cwd: options.themeComponentFolder, absolute: true });
+  if (varFiles.length > 0) {
+    cssVarFiles.push(...varFiles);
+  }
+
+  if (options.dependencies && options.dependencies.length > 0) {
+    options.dependencies.forEach(({ rootPath }) => {
+      const depVarFiles = glob.sync('*/vars.css', { cwd: path.resolve(rootPath, './src/theme/components'), absolute: true });
+      if (depVarFiles.length > 0) {
+        cssVarFiles.push(...depVarFiles);
+      }
+    });
   }
 
   const cssContents: string[] = [];
@@ -68,22 +67,36 @@ export default function genThemeConfig(options: ThemeOptions, framework: string)
     },
   };
 
-  let themeInfo: ThemeInfo;
+  let themeInfo: ThemeInfo = null as any;
+
+  if (options.oldCssVarPath && fs.existsSync(options.oldCssVarPath)) {
+    themeInfo = parseCssVarsOld(fs.readFileSync(options.oldCssVarPath, 'utf-8').toString(), options.themeComponentFolder);
+  }
 
   const cssContent = getCssContent(options);
 
-  if (!cssContent) {
+  if (cssContent) {
+    const { global, components } = parseCssVars(cssContent);
+    if (!themeInfo) {
+      themeInfo = { global, components };
+    } else {
+      themeInfo.global.variables = ([] as any[]).concat(themeInfo.global.variables).concat(global.variables);
+
+      components.forEach((comp) => {
+        const it = themeInfo?.components.find((itComp) => itComp.name === comp.name);
+        if (!it) {
+          themeInfo?.components.push(comp);
+        }
+      });
+    }
+  }
+
+  if (!themeInfo) {
     return themeConfig;
   }
 
-  if (options.useOldCssVarParser) {
-    themeInfo = parseCssVarsOld(cssContent, options.themeComponentFolder);
-  } else {
-    themeInfo = parseCssVars(cssContent);
-  }
-
-  themeConfig.components = options.components.filter((comp) => comp.show !== false).map(({
-    group, title, name, children,
+  themeConfig.components = options.components.map(({
+    group, title, name, children, show,
   }) => {
     const compTheme = themeInfo.components.find((c) => (
       c.name === name || (
@@ -112,9 +125,10 @@ export default function genThemeConfig(options: ThemeOptions, framework: string)
       title,
       group,
       children: children || [],
+      hidden: show === false || compTheme.hidden,
     };
   }).filter((comp: ThemeComponentVars) => {
-    return (comp.useGlobalTokens.length > 0 || comp.variables.length > 0) && !comp.hidden;
+    return comp.useGlobalTokens.length > 0 || comp.variables.length > 0;
   }).map((comp) => {
     return {
       ...comp,

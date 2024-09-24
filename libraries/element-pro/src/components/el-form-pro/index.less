@@ -1,0 +1,42 @@
+@import "../../../design/_common/style/web/_variables.less";
+@import "../../../design/_common/style/web/components/form/_var.less";
+
+.@{prefix}-form {
+  &--grid {
+    display: grid;
+  }
+
+  &__label {
+    white-space: normal;
+    line-height: inherit;
+    font-size: @font-size-base;
+  }
+
+  &__label::before {
+    display: inline-block;
+    content: "";
+    height: @form-item-control-height;
+    vertical-align: middle;
+  }
+
+  &__label > label {
+    vertical-align: middle;
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  &__label--top {
+    padding-right: 0;
+  }
+
+  &__item--ellipsis &__label > label {
+    white-space: nowrap;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+
+    span {
+      white-space: nowrap;
+    }
+  }
+}

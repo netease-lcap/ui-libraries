@@ -39,14 +39,41 @@
     },
     "./install": "./dist/install.js",
     "./mixins": "./dist/mixins/index.js",
+    "./plugins/*": {
+      "import": "./dist/plugins/*",
+      "require": "./dist/plugins/*",
+      "node": "./dist/plugins/*",
+      "types": [
+        "./dist/plugins/*.d.ts",
+        "./dist/plugins/*/index.d.ts"
+      ]
+    },
+    "./plugins": {
+      "import": "./dist/plugins/index.js",
+      "require": "./dist/plugins/index.js",
+      "node": "./dist/plugins/index.js",
+      "types": "./dist/plugins/index.d.ts"
+    },
+    "./utils": {
+      "import": "./dist/utils/index.js",
+      "require": "./dist/utils/index.js",
+      "node": "./dist/utils/index.js",
+      "types": "./dist/utils/index.d.ts"
+    },
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "uid": "^2.0.2"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.12",
+    "@vue/composition-api": "^1.7.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.136",
     "vue": "2.6.12",
+    "@vue/composition-api": "^1.7.2",
     "typescript": "^5.3.3"
   }
 }

@@ -1,0 +1,22 @@
+/**
+ * @component el-card
+ */
+:root {
+  /**
+   * @desc 卡片边框颜色
+   * @type color
+   */
+  --card-border-color: var(--border-color-lighter);
+
+  /**
+   * @desc 卡片边框圆角
+   * @type length
+   */
+  --card-border-radius: 4px;
+
+  /**
+   * @desc 卡片内边距
+   * @type length
+   */
+  --card-padding: 20px;
+}

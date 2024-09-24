@@ -1,0 +1,38 @@
+/**
+ * @component el-notification-pro
+ */
+:root {
+  --el-notification-close-icon-color: var(--el-text-color-secondary);
+  --el-notification-color-block: var(--el-bg-color-container);
+  --el-notification-title-color: var(--el-text-color-primary);
+  --el-notification-content-color: var(--el-text-color-secondary);
+  --el-notification-detail-item-color-hover: inherit;
+  --el-notification-detail-item-bg-color-hover: var(--el-bg-color-container-hover);
+  --el-notification-detail-item-color-active: inherit;
+  --el-notification-detail-item-bg-color-active: var(--el-bg-color-container-active);
+  --el-notification-detail-item-is-active-color: var(--el-brand-color);
+  --el-notification-icon-info-color: var(--el-brand-color);
+  --el-notification-icon-success-color: var(--el-success-color);
+  --el-notification-icon-warning-color: var(--el-warning-color);
+  --el-notification-icon-error-color: var(--el-error-color-6);
+  --el-notification-detail-item-color: inherit;
+  --el-notification-close-bg-color-hover: var(--el-bg-color-container-hover);
+  --el-notification-close-bg-color-active: var(--el-bg-color-container-active);
+  --el-notification-width-default: 360px;
+  --el-notification-content-max-height: 66px;
+  --el-notification-icon-width: calc(var(--el-font-size-body-large) + 8px);
+  --el-notification-icon-font-size: calc(var(--el-font-size-body-large) + 8px);
+  --el-notification-icon-close-font-size: var(--el-font-size-body-large);
+  --el-notification-detail-item-border-radius: var(--el-radius-medium);
+  --el-notification-close-border-radius: var(--el-radius-medium);
+  --el-notification-shadow: var(--el-shadow-2), var(--el-shadow-inset-top), var(--el-shadow-inset-right), var(--el-shadow-inset-bottom), var(--el-shadow-inset-left);
+  --el-notification-font: var(--el-font-body-medium);
+  --el-notification-detail-font: var(--el-font-body-medium);
+  --el-notification-content-font: var(--el-font-body-medium);
+  --el-notification-title-font: var(--el-font-title-medium);
+  --el-notification-padding-default: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-l);
+  --el-notification-detail-margin-top: var(--el-comp-margin-l);
+  --el-notification-content-margin-top: var(--el-comp-margin-s);
+  --el-notification-icon-margin-right: var(--el-comp-margin-s);
+  --el-notification-detail-item-margin-left: var(--el-comp-margin-s);
+}
