@@ -367,14 +367,14 @@ const VueDataSource = Vue.extend({
                   !finalResult.hasOwnProperty('data') ||
                   !finalResult.hasOwnProperty('total')
                 ) {
-                  // this.remote = false;
+                  this.remote = false;
                 }
               } else if (getType(result) === 'Array') {
                 finalResult.data = result;
                 finalResult.total = result.length;
-                // this.remote = false;
+                this.remote = false;
               } else {
-                // this.remote = false;
+                this.remote = false;
               }
 
               if (!this.remote) {
