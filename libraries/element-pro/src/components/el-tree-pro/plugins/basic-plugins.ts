@@ -119,7 +119,11 @@ export const useSlotLabel: NaslComponentPluginOptions = {
         const textField = props.get<string>('textField') || 'text';
 
         if (slot) {
-          return slot({ item });
+          const nodes = slot({ item });
+
+          if (nodes) {
+            return nodes;
+          }
         }
 
         return h('el-text', {
