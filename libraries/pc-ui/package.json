@@ -119,7 +119,7 @@
     "preview": "vite preview",
     "build:storybook": "storybook build",
     "check:api": "tsc -p tsconfig.api.json",
-    "lowcode": " node usage-script.js > ./dist-theme/nasl.ui.merge.json && cd ./dist-theme rm ./nasl.ui.json && mv nasl.ui.merge.json nasl.ui.json "
+    "lowcode": "node scripts/usage-script.js"
   },
   "jestSerializer": {
     "attributesToClear": [

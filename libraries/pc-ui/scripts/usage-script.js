@@ -1,9 +1,16 @@
 /* eslint-disable */
-const fs = require('fs');
-const usage = require('./ideusage.json');
-const naslui = require('./dist-theme/nasl.ui.json');
+const fs = require('fs-extra');
+const path = require('path');
+const cwd = process.cwd();
+
+const naslUIConfigPath = path.resolve(cwd, './dist-theme/nasl.ui.json');
+const usage = fs.readJSONSync(path.resolve(cwd, 'ideusage.json'), 'utf-8');
+const naslui = fs.readJSONSync(naslUIConfigPath, 'utf-8');
 
 function mergeIdeUsage(a, b) {
+  if (a.ideusage) {
+    return;
+  }
   a.ideusage = b.ideusage;
 }
 
@@ -26,20 +33,21 @@ function mergeBlock(a, b) {
   }
 }
 
-function merge(list) {
+function merge(list, usageList) {
   list.forEach((obj) => {
     const n = obj.name;
-    const _usage = usage.find((u) => u.name === n);
+    const _usage = usageList.find((u) => u.name === n);
     if (_usage) {
       mergeIdeUsage(obj, _usage);
       mergeSlots(obj, _usage);
       mergeBlock(obj, _usage);
     }
     if (obj.children && obj.children.length > 0) {
-      merge(obj.children);
+      merge(obj.children, usageList);
     }
   });
 }
 
-merge(naslui);
-console.log(JSON.stringify(naslui, null, ' '));
+// merge(naslui, pcUIUsage);
+merge(naslui, usage);
+fs.writeJSONSync(naslUIConfigPath, naslui, { spaces: 2 });
