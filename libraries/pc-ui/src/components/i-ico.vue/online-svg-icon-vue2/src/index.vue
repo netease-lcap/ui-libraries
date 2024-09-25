@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { memoizeFetch } from '@/utils';
+import { memoizeFetch } from '../../../../utils/vue';
 
 export default {
   name: 'onlineSvgIcon',
