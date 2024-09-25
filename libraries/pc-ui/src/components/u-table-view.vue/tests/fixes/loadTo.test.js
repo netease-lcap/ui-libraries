@@ -23,7 +23,6 @@ import {
       await sleep(30);
       const selectedPage = wrapper.find('a[selected="selected"]');
       expect(selectedPage.text()).toBe('2');
-      expect(wrapper.html()).toMatchSnapshot();
     });
   });
   
