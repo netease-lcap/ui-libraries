@@ -3,6 +3,10 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 5,
+    ideusage: {
+      idetype: 'element',
+      forceUpdateWhenAttributeChange: true,
+    }
   })
   @Component({
     title: '翻页器',
