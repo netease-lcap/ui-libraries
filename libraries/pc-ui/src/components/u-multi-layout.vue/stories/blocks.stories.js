@@ -8,6 +8,7 @@ import BlocksDemo4 from '../demos/blocks/BlocksDemo4.vue';
 import BlocksDemo5 from '../demos/blocks/BlocksDemo5.vue';
 import BlocksDemo6 from '../demos/blocks/BlocksDemo6.vue';
 import BlocksDemo7 from '../demos/blocks/BlocksDemo7.vue';
+import BlocksDemo8 from '../demos/blocks/BlocksDemo8.vue';
 
 Vue.use(CloudUI);
 
@@ -83,6 +84,15 @@ export const Demo6 = {
   render: () => ({
     components: {
       DeprecatedDemo: BlocksDemo7,
+    },
+    template: '<deprecated-demo />',
+  }),
+};
+
+export const Demo7 = {
+  render: () => ({
+    components: {
+      DeprecatedDemo: BlocksDemo8,
     },
     template: '<deprecated-demo />',
   }),
