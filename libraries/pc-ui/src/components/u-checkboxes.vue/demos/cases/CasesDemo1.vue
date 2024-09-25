@@ -57,15 +57,12 @@
                 </template>
             </u-checkbox>
         </u-checkboxes>
-        <div style="width:200px">
-
         <u-checkboxes v-model="checkedList1" @input="onInput($event, 4)">
             <u-checkbox label="水杯">水杯</u-checkbox>
             <u-checkbox label="坚果">坚果</u-checkbox>
             <u-checkbox label="毛巾">毛巾</u-checkbox>
-            <u-checkbox label="沙发">沙发2222222222</u-checkbox>
+            <u-checkbox label="沙发">沙发</u-checkbox>
         </u-checkboxes>
-        </div>
         {{ checkedList1 }}
     </u-linear-layout>
 </div>
