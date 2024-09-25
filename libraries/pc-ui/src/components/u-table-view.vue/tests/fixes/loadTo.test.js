@@ -19,6 +19,7 @@ import {
       wrapper.vm.pageTo = 2;
       wrapper.vm.loadTo();
       await sleep(30);
+      await wrapper.vm.$nextTick();
       const selectedPage = wrapper.find('a[selected="selected"]');
       expect(selectedPage.text()).toBe('2');
       expect(wrapper.html()).toMatchSnapshot();
