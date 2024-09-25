@@ -98,6 +98,8 @@ export default {
     itemHeight: Number,
     bufferSize: Number,
     lazyLoad: Boolean,
+    scrollXStart: Boolean,
+    scrollXEnd: Boolean,
   },
   inject: [
     'toggleExpanded',
