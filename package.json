@@ -10,7 +10,7 @@
     "version-packages": "changeset version",
     "start": "pnpm dev:react-pc",
     "dev:react-pc": "pnpm --dir ./libraries/pc-react-ui storybook",
-    "build": "pnpm --filter \"./libraries/*\" build && cd libraries/pc-react-ui && node usage-script.js > ./dist-theme/nasl.ui.merge.json && cd ./dist-theme rm ./nasl.ui.json && mv nasl.ui.merge.json nasl.ui.json",
+    "build": "pnpm --filter \"./libraries/*\" build",
     "test": "pnpm --filter \"./libraries/*\" test",
     "lint": "eslint --fix",
     "changeset": "changeset",
