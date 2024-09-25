@@ -4,7 +4,7 @@
         <a :class="$style.item" role="prev" :disabled="currentPage <= 1" @click="select(currentPage - 1)"></a>
         <div :class="$style['jumper-wrap']">
             <u-number-input :class="$style.jumper" :value="currentPage"
-                :min="1" :max="currentTotalPage" hide-buttons :readonly="readonly" :disabled="disabled"
+                :min="1" :max="currentMaxPage" hide-buttons :readonly="readonly" :disabled="disabled"
                 @change="onChange($event.value, $event.oldValue)">
             </u-number-input> / {{ currentTotalPage }}
         </div>
@@ -35,7 +35,7 @@
         </a>
         <span v-if="showJumper" :class="$style['jumper-wrap']">{{ $tt('goto') }}
             <u-number-input :class="$style.jumper" :value="currentPage"
-                :min="1" :max="currentTotalPage" hide-buttons :readonly="readonly" :disabled="disabled"
+                :min="1" :max="currentMaxPage" hide-buttons :readonly="readonly" :disabled="disabled"
                 @change="onChange($event.value, $event.oldValue)" :default-value="1">
             </u-number-input>
             {{ $tt('gotoPageUnit') }}</span>
@@ -49,6 +49,7 @@
 import { sync } from '@lcap/vue2-utils';
 import i18n from './i18n';
 import i18nMixin from '../../mixins/i18n';
+import isNumber from 'lodash/isNumber';
 
 const DEFAULT_PAGE_SIZE = 20;
 
@@ -102,6 +103,7 @@ export default {
         showJumper: { type: Boolean, default: false },
         simple: { type: Boolean, default: false },
         size: { type: String, default: 'normal' },
+        maxPage: Number,
     },
     data() {
         return {
@@ -152,6 +154,10 @@ export default {
                 return Math.ceil(this.totalItems / this.currentPageSize);
             else
                 return this.total;
+        },
+        currentMaxPage() {
+            // fix: 2963782903956992 表格逻辑loadto，点击后刷新了两次表格
+            return isNumber(this.maxPage) ? Math.max(this.maxPage, this.currentTotalPage) : this.currentTotalPage;
         },
     },
     watch: {
