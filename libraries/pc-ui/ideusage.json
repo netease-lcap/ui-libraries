@@ -125,7 +125,13 @@
         "name": "USidebarItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['u-sidebar-group', 'u-sidebar'].includes(target.tag)"
+            "parentAccept": "['u-sidebar-group', 'u-sidebar'].includes(target.tag)",
+            "disableSlotAutoFill": [
+                {
+                    "slot": "default",
+                    "expression": "this.getAttribute('text')?.value"
+                }
+            ]
         }
     },
     {
@@ -1163,14 +1169,14 @@
             },
             "cacheOpenKey": "visible",
             "additionalAttribute": {
-                ":mode": "\"false\"",
-                ":disableRootElemShift": "\"true\""
+                ":mode": "\"false\""
             },
             "disableSlotAutoFill": ["head"],
             "displaySlotConditions": {
                 "head": false,
                 "heading": false
-            }
+            },
+            "useFeedbackWrapper": true
         }
     },
     {
@@ -1183,9 +1189,9 @@
             },
             "cacheOpenKey": "visible",
             "additionalAttribute": {
-                ":mode": "\"false\"",
-                ":disableRootElemShift": "\"true\""
-            }
+                ":mode": "\"false\""
+            },
+            "useFeedbackWrapper": true
         }
     },
     {

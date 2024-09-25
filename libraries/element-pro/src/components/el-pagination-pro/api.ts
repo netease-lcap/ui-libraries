@@ -3,6 +3,9 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 5,
+    ideusage: {
+      idetype: 'element',
+    }
   })
   @Component({
     title: '翻页器',
@@ -197,14 +200,6 @@ namespace nasl.ui {
     theme: 'default' | 'simple' = 'default';
 
     @Prop({
-      group: '交互属性',
-      title: '隐藏总条目数',
-      description: '是否显示总条目数',
-      setter: { concept: 'SwitchSetter' },
-    })
-    hideTotal: nasl.core.Boolean = false;
-
-    @Prop({
       group: '主要属性',
       title: '总条目数',
       description: '数据总条数',
@@ -217,12 +212,12 @@ namespace nasl.ui {
     total: nasl.core.Integer = 0;
 
     @Prop({
-      group: '主要属性',
-      title: '总条目数呈现内容',
-      description: '用于自定义总条数呈现内容。默认显示总条数',
-      setter: { concept: 'InputSetter' },
+      group: '交互属性',
+      title: '显示总条目数',
+      description: '默认显示总条数',
+      setter: { concept: 'SwitchSetter' },
     })
-    totalContent: nasl.core.String;
+    totalContent: nasl.core.Boolean = true;
 
     @Event({
       title: '改变时',
