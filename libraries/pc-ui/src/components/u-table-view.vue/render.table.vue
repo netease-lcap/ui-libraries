@@ -112,7 +112,9 @@
                                       :handlerDraggable="handlerDraggable"
                                       :usePagination="usePagination"
                                       :itemHeight="itemHeight"
-                                      :lazyLoad="lazyLoad"
+                                      :lazyLoad="lazyLoad && !virtual"
+                                      :scrollXStart="scrollXStart"
+                                      :scrollXEnd="scrollXEnd"
                                     />
                                     <u-table-render-tr-expander
                                       v-if="expanderColumnVM"
