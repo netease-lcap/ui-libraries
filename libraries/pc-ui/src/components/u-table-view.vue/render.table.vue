@@ -11,55 +11,24 @@
                     <thead :grouped="hasGroupedColumn">
                         <tr v-for="(headTr, trIndex) in visibleTableHeadTrArr">
                             <template v-for="(columnVM, columnIndex) in headTr">
-                            <th
-                                v-if="columnVM&&columnVM.colSpan !== 0"
-                                ref="th"
-                                :class="[$style['head-title'], boldHeader ? $style.boldHeader : null]"
-                                :key="columnIndex"
-                                :sortable="columnVM.sortable && sortTrigger === 'head'" :filterable="!!columnVM.filters" @click="columnVM.sortable && sortTrigger === 'head' && onClickSort(columnVM)"
-                                :style="getStyle('th', columnVM)"
-                                :last-left-fixed="isLastLeftFixed(columnVM, columnIndex, headTr)"
-                                :first-right-fixed="isFirstRightFixed(columnVM, columnIndex, headTr)"
-                                :shadow="(isLastLeftFixed(columnVM, columnIndex, headTr) && !scrollXStart) || (isFirstRightFixed(columnVM, columnIndex, headTr) && !scrollXEnd)"
-                                :disabled="columnVM.currentHidden"
-                                :colspan="columnVM.colSpan"
-                                :rowspan="columnVM.rowSpan"
-                                :ellipsis="columnVM.thEllipsis !== undefined? columnVM.thEllipsis : thEllipsis"
-                                v-ellipsis-title>
-                                <!-- type === 'checkbox' -->
-                                <span v-if="columnVM.type === 'checkbox'">
-                                    <u-checkbox :value="allChecked" @check="checkAll($event.value)" :disabled="disabled" :readonly="readonly"></u-checkbox>
-                                </span>
-                                <!-- Normal title -->
-                                <template>
-                                    <span vusion-slot-name="title" vusion-slot-name-edit="title" :class="$style['column-title']">
-                                        <f-slot name="title" :vm="columnVM" :props="{ columnVM, columnIndex, columnItem: columnVM.columnItem }">
-                                            {{ columnVM.title }}
-                                        </f-slot>
-                                    </span>
-                                </template>
-                                <!-- Sortable -->
-                                <span v-if="columnVM.sortable" :class="$style.sort"
-                                    :sorting="currentSorting && currentSorting.field === columnVM.field" :order="currentSorting && currentSorting.order"
-                                    @click="sortTrigger === 'icon' && ($event.stopPropagation(), onClickSort(columnVM))"></span>
-                                <!-- Filterable -->
-                                <span v-if="columnVM.filters" :class="$style['filter-wrap']" :active="isFilterActive(columnVM.field)">
-                                    <u-table-view-filters-popper
-                                        :value="getFiltersValue(columnVM.field)"
-                                        :data="columnVM.filters"
-                                        :multiple="columnVM.filterMultiple || filterMultiple"
-                                        :max="columnVM.filterMax || filterMax"
-                                        @select="onSelectFilters(columnVM.field, $event)">
-                                    </u-table-view-filters-popper>
-                                </span>
-                                <!-- Resizable -->
-                                <f-dragger v-if="resizable && columnIndex !== headTr.length - 1" axis="horizontal"
-                                    @dragstart="onResizerDragStart($event, columnVM)"
-                                    @drag="onResizerDrag($event, columnVM, columnIndex)"
-                                    @dragend="onResizerDragEnd($event, columnVM, columnIndex)">
-                                    <div :class="$style.resizer" @click.stop></div>
-                                </f-dragger>
-                            </th>
+                                <u-table-render-th
+                                    :columnVM="columnVM"
+                                    :columnIndex="columnIndex"
+                                    :boldHeader="boldHeader"
+                                    :sortTrigger="sortTrigger"
+                                    :headTrLength="headTr.length"
+                                    :currentSorting="currentSorting"
+                                    :resizable="resizable"
+                                    :disabled="disabled"
+                                    :readonly="readonly"
+                                    :currentData="currentData"
+                                    :currentValues="currentValues"
+                                    :thEllipsis="getThEllipsis(columnVM)"
+                                    :style="getStyle('th', columnVM)"
+                                    :last-left-fixed="isLastLeftFixed(columnVM, columnIndex, headTr)"
+                                    :first-right-fixed="isFirstRightFixed(columnVM, columnIndex, headTr)"
+                                    :shadow="(isLastLeftFixed(columnVM, columnIndex, headTr) && !scrollXStart) || (isFirstRightFixed(columnVM, columnIndex, headTr) && !scrollXEnd)">
+                                </u-table-render-th>
                             </template>
                         </tr>
                     </thead>
@@ -68,7 +37,7 @@
             <div :class="$style.headPlaceholder" ref="headPlaceholder"></div>
             <div :class="$style.body" ref="body" :style="{ height: number2Pixel(bodyHeight) }" @scroll="onBodyScroll"
                 :sticky-fixed="useStickyFixed">
-                <f-scroll-view :class="$style.scrollcview" @scroll="onScrollView" ref="scrollView" :native="!!tableMetaIndex || $env.VUE_APP_DESIGNER" :hide-scroll="!!tableMetaIndex">
+                <f-scroll-view :class="$style.scrollcview" @scroll="onScrollView" ref="scrollView" :native="nativeScroll" :hide-scroll="!!tableMetaIndex">
                     <u-table ref="bodyTable" :class="$style['body-table']" :line="line" :striped="striped" :sticky-fixed="useStickyFixed" :style="{ width: number2Pixel(tableWidth)}">
                         <colgroup>
                             <col v-for="(columnVM, columnIndex) in visibleColumnVMs" :key="columnIndex" :width="columnVM.computedWidth">
@@ -82,7 +51,7 @@
                                       :class="[$style.row]"
                                       :color="item.rowColor"
                                       :selectable="selectable"
-                                      :selected="selectable && selectedItem === item"
+                                      :selected="selectable && item.radioChecked"
                                       :draggable="rowDraggable && item.draggable || undefined"
                                       :dragging="isDragging(item)"
                                       :subrow="!!item.tableTreeItemLevel"
@@ -114,8 +83,6 @@
                                             :treeDisplay="treeDisplay"
                                             :hasChildrenField="hasChildrenField"
                                             :treeColumnIndex="treeColumnIndex"
-
-                                            :selectedItem="selectedItem"
 
                                             :handlerDraggable="handlerDraggable"
 
@@ -195,7 +162,8 @@ import i18nMixin from '../../mixins/i18n';
 import KeyMap from '../../utils/keyMap';
 import UTableRenderTd from './render.td.vue';
 import UTableRenderTrExpander from './render.tr.expander.vue';
-import { head } from 'lodash';
+import UTableRenderTh from './render.th.vue';
+
 
 export default {
     name: 'u-table-render',
@@ -203,6 +171,7 @@ export default {
     components: {
         UTableRenderTd,
         UTableRenderTrExpander,
+        UTableRenderTh,
     },
     props: {
         tableMetaList: Array,
@@ -290,12 +259,13 @@ export default {
         hasChildrenField: { type: String, default: 'hasChildren' },
 
         selectable: { type: Boolean, default: false },
-        selectedItem: Object,
 
         rowDraggable: Boolean,
         handlerDraggable: Boolean,
 
         rootWidth: Number,
+        nativeScroll: { type: Boolean, default: false },
+        currentValues: Array,
     },
     data() {
         return {
@@ -328,6 +298,14 @@ export default {
             currentDataSource: this.currentDataSource,
             toggleExpanded: this.toggleExpanded,
             number2Pixel: this.number2Pixel,
+            isFilterActive: this.isFilterActive,
+            getFiltersValue: this.getFiltersValue,
+            onSelectFilters: this.onSelectFilters,
+            onClickSort: this.onClickSort,
+            checkAll: this.checkAll,
+            onResizerDragStart: this.onResizerDragStart,
+            onResizerDrag: this.onResizerDrag,
+            onResizerDragEnd: this.onResizerDragEnd,
         };
     },
     watch: {
@@ -359,37 +337,6 @@ export default {
             } else {
                 return treeColumnIndex;
             }
-        },
-        allChecked() {
-            if (!this.currentData)
-                return;
-            let checkedLength = 0;
-
-            if (this.values === undefined) {
-                this.currentData.forEach((item) => {
-                    if (item.checked)
-                        checkedLength++;
-                });
-            } else {
-                if (this.valueField) {
-                    const hashSet = new Set();
-                    this.currentData.forEach((item) => {
-                        const id = this.$at(item, this.valueField);
-                        hashSet.add(id);
-                    });
-
-                    checkedLength = this.currentValues.filter((v) => hashSet.has(v)).length;
-                } else {
-                    checkedLength = this.currentValues.length;
-                }
-            }
-
-            if (checkedLength === 0)
-                return false;
-            else if (checkedLength === this.currentData.length)
-                return true;
-            else
-                return null;
         },
     },
     methods: {
@@ -713,7 +660,7 @@ export default {
             );
         },
         getRealItem(item, rowIndex) {
-            const data = (this.isSimpleArray(this.currentDataSource.data) && this.currentDataSource.data.length > 0) ? (this.currentDataSource.arrangedData[rowIndex] && this.currentDataSource.arrangedData[rowIndex].simple) : item;
+            const data = this.currentDataSource.isSimpleItem ? (this.currentDataSource.arrangedData[rowIndex] && this.currentDataSource.arrangedData[rowIndex].simple) : item;
             return data;
         },
         getThEllipsis(columnVM) {
@@ -738,11 +685,6 @@ export default {
                 headPlaceholder: this.$refs.headPlaceholder[0],
                 tablewrap: this.$refs.tablewrap[0],
             }
-        },
-        resetVirtualData() {
-            this.virtualIndex = 0;
-            this.virtualTop = 0;
-            this.virtualBottom = 0;
         },
     },
 };

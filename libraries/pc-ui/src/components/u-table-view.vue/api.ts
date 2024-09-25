@@ -607,6 +607,16 @@ namespace nasl.ui {
       virtualCount: nasl.core.Integer = 60;
 
       @Prop({
+          group: '交互属性',
+          title: '使用原生滚动条',
+          description: '表格滚动默认使用滚动组件的滚动条，开启后使用浏览器原生滚动条。有固定列的场景不适用',
+          setter: {
+              concept: 'SwitchSetter',
+          },
+      })
+      nativeScroll: nasl.core.Boolean = false;
+
+      @Prop({
           group: '状态属性',
           title: '初始即加载',
           description: '设置初始时是否立即加载',
@@ -897,6 +907,7 @@ namespace nasl.ui {
           values: nasl.collection.List<V>;
           oldValues: nasl.collection.List<V>;
           item: T;
+          items: nasl.collection.List<T>;
       }) => any;
 
       @Event({
