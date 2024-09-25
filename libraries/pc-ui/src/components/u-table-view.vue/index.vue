@@ -178,6 +178,7 @@
         :total-items="currentDataSource.total" :page="currentDataSource.paging.number"
         :page-size="currentDataSource.paging.size" :page-size-options="pageSizeOptions" :show-total="showTotal" :show-sizer="showSizer" :show-jumper="showJumper"
         :size="paginationSize"
+        :max-page="currentDataSource.paging.number"
         @change="page($event.page)" @change-page-size="onChangePageSize">
     </u-pagination>
     <div><slot></slot></div>
