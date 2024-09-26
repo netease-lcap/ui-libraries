@@ -119,7 +119,7 @@
     "preview": "vite preview",
     "build:storybook": "storybook build",
     "check:api": "tsc -p tsconfig.api.json",
-    "lowcode": "node scripts/usage-script.js"
+    "lowcode": "node ./scripts/usage-script.js"
   },
   "jestSerializer": {
     "attributesToClear": [

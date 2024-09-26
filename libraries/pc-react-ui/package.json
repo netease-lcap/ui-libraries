@@ -19,7 +19,7 @@
     "deploy": "lcap-scripts deploy",
     "bd": "vite build --mode development && tsc -p tsconfig.api.json && npm run lowcode ",
     "pub": "vite build && tsc -p tsconfig.api.json && npm run lowcode  && npm run deploy:codewave",
-    "lowcode": "node scripts/usage-script.js",
+    "lowcode": "node ./scripts/usage-script.js",
     "move": "cp -r /Users/songrui/Desktop/item/ui-libraries/libraries/pc-react-ui/dist-theme/* /Users/songrui/Desktop/item/lcap-assets/data/hoc/ && cd /Users/songrui/Desktop/item/lcap-assets && node upload.js && cd /Users/songrui/Desktop/item/ui-libraries/libraries/pc-react-ui",
     "move:test": "cp -r /Users/songrui/Desktop/item/ui-libraries/libraries/pc-react-ui/dist-theme/* /Users/songrui/Desktop/item/lcap-assets/data/hoc/ && cd /Users/songrui/Desktop/item/lcap-assets && node uploadTest.js && cd /Users/songrui/Desktop/item/ui-libraries/libraries/pc-react-ui",
     "deploy:test": "lcap-scripts deploy --platform http://defaulttenant.lcap.react01-lowcode.com",
