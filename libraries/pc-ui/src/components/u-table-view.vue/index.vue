@@ -2597,7 +2597,9 @@ export default {
         },
         reHandleResize() {
             if (this.virtual) {
+                console.log('reHandleResize======');
                 this.$refs.tableRender.resetVirtualData();
+                this.$refs.tableRender.getVirtualHeight();
             }
             this.preRootWidth = null;
             this.handleResize(true);
@@ -2844,6 +2846,10 @@ export default {
         resetEdit(item) {
             item.editing = '';
         },
+        // 滚动到某一行
+        scrollToElement(rowIndex) {
+            this.$refs.tableRender.scrollToElement(rowIndex);
+        }
     },
 };
 </script>

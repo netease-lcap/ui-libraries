@@ -24,6 +24,14 @@ export default {
             }
         },
     },
+    data() {
+        return {
+            virtualHeight: 0,
+        };
+    },
+    mounted() {
+       this.getVirtualHeight();
+    },
     methods: {
         handleVirtualScroll(e) {
             if (!this.virtual)
@@ -57,18 +65,6 @@ export default {
                         item._cacheHeight = item.height || childEl.offsetHeight;
                 });
             }
-            const getHeight = (item) => {
-                if (item.display === 'none')
-                    return 0;
-                else if (this.itemHeight !== undefined)
-                    return this.itemHeight;
-                else if (item.height !== undefined)
-                    return item.height;
-                else if (item._cacheHeight !== undefined)
-                    return item._cacheHeight;
-                else
-                    return 0;
-            };
             const scrollTop = listEl.scrollTop;
             let accHeight = 0;
             let virtualIndex = this.virtualIndex;
@@ -77,11 +73,11 @@ export default {
                 const item = list[currentIndex];
                 if (accHeight > scrollTop)
                     break;
-                accHeight += getHeight(item);
+                accHeight += this.getHeight(item);
             }
             let showCount = 0;
-            if (getHeight(list[0])) {
-                showCount = Math.ceil(tablebodyEl.clientHeight / getHeight(list[0]));
+            if (this.getHeight(list[0])) {
+                showCount = Math.ceil(tablebodyEl.clientHeight / this.getHeight(list[0]));
             }
             virtualIndex = Math.max(
                 0,
@@ -97,22 +93,25 @@ export default {
             let virtualTop = 0;
             let virtualBottom = 0;
             let noDisplayCount = 0;
+            let virtualHeight = 0;
             for (let i = 0; i < list.length; i++) {
                 const item = list[i];
                 if (i < virtualIndex) {
-                    virtualTop += getHeight(item);
+                    virtualTop += this.getHeight(item);
                 } else if (i >= virtualIndex + this.virtualCount) {
-                    virtualBottom += getHeight(item);
+                    virtualBottom += this.getHeight(item);
                 }
                 if (i > virtualIndex && i <= virtualIndex + this.virtualCount) {
                     if (item.display === 'none') {
                         noDisplayCount++;
                     }
                 }
+                virtualHeight += this.getHeight(item);
             }
             this.virtualIndex = virtualIndex;
             this.virtualTop = virtualTop;
             this.virtualBottom = virtualBottom; // Vue 应该是对渲染做了优化，为了减少在高频滚动时出现白屏的问题，需要强制更新
+            this.virtualHeight = virtualHeight;
             this.$nextTick(() => {
                 this.$forceUpdate();
                 this.$emit(
@@ -132,6 +131,26 @@ export default {
             this.virtualIndex = 0;
             this.virtualTop = 0;
             this.virtualBottom = 0;
+        },
+        getHeight(item) {
+            if (item.display === 'none')
+                return 0;
+            else if (this.itemHeight !== undefined)
+                return this.itemHeight;
+            else if (item.height !== undefined)
+                return item.height;
+            else if (item._cacheHeight !== undefined)
+                return item._cacheHeight;
+            else
+                return 0;
+        },
+        getVirtualHeight() {
+            const list = this[this.listKey];
+            let virtualHeight = 0;
+            list.forEach((item) => {
+                virtualHeight += this.getHeight(item);
+            });
+            this.virtualHeight = virtualHeight;
         },
     },
 };

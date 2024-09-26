@@ -163,7 +163,7 @@ import KeyMap from '../../utils/keyMap';
 import UTableRenderTd from './render.td.vue';
 import UTableRenderTrExpander from './render.tr.expander.vue';
 import UTableRenderTh from './render.th.vue';
-
+import { scrollTo } from './utils/dom';
 
 export default {
     name: 'u-table-render',
@@ -315,11 +315,11 @@ export default {
             this.currentSorting = sorting;
         },
         virtualTop() {
-            this.$refs.virtualPlaceholder[0].style.height = this.virtualTop + this.virtualBottom + 'px';
             this.$refs.bodyTable[0].$el.style.transform = `translateY(${this.virtualTop}px)`;
+            this.$refs.bodyTable[0].$el.style.position = `absolute`;
         },
-        virtualBottom() {
-            this.$refs.virtualPlaceholder[0].style.height = this.virtualTop + this.virtualBottom + 'px';
+        virtualHeight() {
+            this.$refs.virtualPlaceholder[0].style.height = `${this.virtualHeight}px`;
         },
     },
     computed: {
@@ -700,6 +700,43 @@ export default {
                 tablewrap: this.$refs.tablewrap[0],
             }
         },
+        // 滚动到某一行
+        scrollToElement(rowIndex) {
+            const tableEl = this.getRefs().bodyTable.$el;
+            if (!tableEl)
+                return;
+            const index = rowIndex > this.currentData.length - 1 ? this.currentData.length - 1 : rowIndex;
+            const trEls = tableEl.getElementsByTagName('TR');
+            const scrollView = this.getRefs().scrollView;
+            if (!scrollView)
+                return;
+            const scrollViewWrap = scrollView.$refs.wrap;
+            const clientHeight = scrollViewWrap.clientHeight;
+            let height = 0;
+
+            if (this.virtual) {
+                const currentItemHeight = this.itemHeight || trEls[0] && trEls[0].offsetHeight || 0;
+                for (let i = 0; i < index; i++) {
+                    height += currentItemHeight;
+                }
+                height = height - clientHeight / 2 + currentItemHeight / 2;
+                scrollTo(height, {
+                    container: scrollViewWrap,
+                });
+                this.handleVirtualScroll({ target: scrollViewWrap });
+            } else {
+                const currentItemHeight = trEls[index] && trEls[index].offsetHeight || 0;
+                for (let i = 0; i < index; i++) {
+                    if (trEls[i]) {
+                        height += trEls[i].offsetHeight;
+                    }
+                }
+                height = height - clientHeight / 2 + currentItemHeight / 2;
+                scrollTo(height, {
+                    container: scrollViewWrap,
+                });
+            }
+        }
     },
 };
 </script>
