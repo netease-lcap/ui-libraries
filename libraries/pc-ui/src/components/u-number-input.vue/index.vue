@@ -5,9 +5,9 @@
         @input="onInput" @focus="onFocus" @blur="onBlur" v-bind="$attrs" v-on="listeners" v-click-outside="handleClickOutside"
         :hide-buttons="hideButtons" :color="formItemVM && formItemVM.color" :prefix="!!showPrefix" :suffix="!!showSuffix">
         <span :class="$style.button" v-if="!hideButtons" :disabled="currentValue >= max" role="up" v-repeat-click="increase"
-            tabindex="0" @keydown.prevent></span>
+            tabindex="-1" @keydown.prevent></span>
         <span :class="$style.button" v-if="!hideButtons" :disabled="currentValue <= min" role="down" v-repeat-click="decrease"
-            tabindex="0" @keydown.prevent></span>
+            tabindex="-1" @keydown.prevent></span>
         <slot></slot>
 
         <template #prefix>
