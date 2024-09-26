@@ -242,7 +242,7 @@ namespace nasl.ui {
     @Prop({
       group: '交互属性',
       title: '自动展开父节点',
-      description: '展开子节点时是否自动展开父节点',
+      description: '展开子节点时是否自动展开父节点，当数据源为静态数据时首次打开生效',
       setter: { concept: 'SwitchSetter' },
     })
     expandParent: nasl.core.Boolean = false;
@@ -384,13 +384,13 @@ namespace nasl.ui {
       group: '主要属性',
       title: '选中值模式',
       description:
-        '选中值模式。all 表示父节点和子节点全部会出现在选中值里面；parentFirst 表示当子节点全部选中时，仅父节点在选中值里面；onlyLeaft 表示无论什么情况，选中值仅呈现叶子节点。可选项：onlyLeaf/parentFirst/all',
+        '选中值模式。子节点 表示无论什么情况，选中值仅呈现叶子节点；父节点 表示当子节点全部选中时，仅父节点在选中值里面；全部 表示父节点和子节点全部会出现在选中值里面。可选项：onlyLeaf/parentFirst/all',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'onlyLeaf' },
-          { title: 'parentFirst' },
-          { title: 'all' },
+          { title: '子节点' },
+          { title: '父节点' },
+          { title: '全部' },
         ],
       },
       if: _ => _.checkable,

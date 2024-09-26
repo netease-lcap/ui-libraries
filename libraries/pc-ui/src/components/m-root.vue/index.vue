@@ -23,6 +23,16 @@ export default {
                     return result;
             }
         },
+        /* 便利node 从children开始 */
+        walkNodes(nodes, func) {
+          nodes.forEach((nodeVM) => {
+            if (Array.isArray(nodeVM.nodeVMs) && nodeVM.nodeVMs.length > 0) {
+              this.walkNodes(nodeVM.nodeVMs, func);
+            }
+
+            func(nodeVM);
+          });
+        },
         find(func) {
             return this.walk((nodeVM) => {
                 if (func(nodeVM))
