@@ -18,9 +18,6 @@ export const getRouteComponentOptions = function (route) {
 export const memoizeFetch = _.memoize((url) => {
   return fetchPolyfill(url, {
     mode: 'cors',
-    headers: {
-      'Cache-Control': 'public, max-age=31536000', // 设置缓存控制头
-    },
   })
     .then((result) => {
       return result.text();
