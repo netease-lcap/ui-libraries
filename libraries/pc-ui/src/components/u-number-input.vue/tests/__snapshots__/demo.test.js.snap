@@ -7,8 +7,8 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <input button-display="tail" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
   </div>
   <div button-display="tail" class="root root" placeholder="abcdsdf" prefix="true">
     <span class="baseline">b</span>
@@ -17,8 +17,8 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
       <span>$</span>
     </span>
     <input button-display="tail" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
   </div>
   <div button-display="tail" class="root root" placeholder="abcdsdf" prefix="true">
     <span class="baseline">b</span>
@@ -27,8 +27,8 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
       <span>$</span>
     </span>
     <input button-display="tail" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
     <span class="suffix"></span>
   </div>
   <div button-display="tail" class="root root" hide-buttons="true" placeholder="abcdsdf" prefix="true">
@@ -53,15 +53,15 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <input button-display="tail" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
   </div>
   <div button-display="tail" class="root root" placeholder="abcdsdf" suffix="true">
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <input button-display="tail" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
     <span class="suffix">
       <span>
         <span>$</span>
@@ -72,8 +72,8 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <input button-display="tail" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
     <span class="suffix">
       <span>
         <span>$</span>
@@ -105,8 +105,8 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <input button-display="bothEnds" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
   </div>
   <div button-display="bothEnds" class="root root" placeholder="abcdsdf" prefix="true">
     <span class="baseline">b</span>
@@ -115,8 +115,8 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
       <span>$</span>
     </span>
     <input button-display="bothEnds" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
   </div>
   <div button-display="bothEnds" class="root root" placeholder="abcdsdf" prefix="true">
     <span class="baseline">b</span>
@@ -125,8 +125,8 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
       <span>$</span>
     </span>
     <input button-display="bothEnds" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
     <span class="suffix"></span>
   </div>
   <div button-display="bothEnds" class="root root" hide-buttons="true" placeholder="abcdsdf" prefix="true">
@@ -151,15 +151,15 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <input button-display="bothEnds" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
   </div>
   <div button-display="bothEnds" class="root root" placeholder="abcdsdf" suffix="true">
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <input button-display="bothEnds" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
     <span class="suffix">
       <span>
         <span>$</span>
@@ -170,8 +170,8 @@ exports[`u-number-input.vue > Demo-单位展示 1`] = `
     <span class="baseline">b</span>
     <span class="placeholder">abcdsdf</span>
     <input button-display="bothEnds" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
     <span class="suffix">
       <span>
         <span>$</span>
@@ -206,8 +206,8 @@ exports[`u-number-input.vue > Demo-双向绑定 1`] = `
   <span class="baseline">b</span>
   <span class="placeholder" style="display: none;"></span>
   <input button-display="tail" class="input" type="text">
-  <span class="button" role="up" tabindex="0"></span>
-  <span class="button" role="down" tabindex="0"></span>
+  <span class="button" role="up" tabindex="-1"></span>
+  <span class="button" role="down" tabindex="-1"></span>
 </div>
 `;
 
@@ -218,29 +218,29 @@ exports[`u-number-input.vue > Demo-只读和禁用 1`] = `
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" readonly="readonly" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
     <div button-display="tail" class="root root" disabled="disabled">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" disabled="disabled" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
     <div button-display="bothEnds" class="root root" readonly="readonly">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="bothEnds" class="input" readonly="readonly" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
     <div button-display="bothEnds" class="root root" disabled="disabled">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="bothEnds" class="input" disabled="disabled" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
   </div>
 </div>
@@ -251,8 +251,8 @@ exports[`u-number-input.vue > Demo-基本用法 1`] = `
   <span class="baseline">b</span>
   <span class="placeholder" style="display: none;"></span>
   <input button-display="tail" class="input" type="text">
-  <span class="button" role="up" tabindex="0"></span>
-  <span class="button" role="down" tabindex="0"></span>
+  <span class="button" role="up" tabindex="-1"></span>
+  <span class="button" role="down" tabindex="-1"></span>
 </div>
 `;
 
@@ -262,22 +262,22 @@ exports[`u-number-input.vue > Demo-基本用法 2`] = `
     <span class="baseline">b</span>
     <span class="placeholder" style="display: none;"></span>
     <input button-display="tail" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
   </div>
   <div button-display="tail" class="root root">
     <span class="baseline">b</span>
     <span class="placeholder" style="display: none;"></span>
     <input button-display="tail" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
   </div>
   <div button-display="tail" class="root root">
     <span class="baseline">b</span>
     <span class="placeholder" style="display: none;"></span>
     <input button-display="tail" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
   </div>
   <div button-display="tail" class="root root" prefix="true">
     <span class="baseline">b</span>
@@ -286,8 +286,8 @@ exports[`u-number-input.vue > Demo-基本用法 2`] = `
       <span>$</span>
     </span>
     <input button-display="tail" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
   </div>
 </div>
 `;
@@ -299,15 +299,15 @@ exports[`u-number-input.vue > Demo-基本用法 3`] = `
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
     <div button-display="tail" class="root root">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
   </div>
 </div>
@@ -320,8 +320,8 @@ exports[`u-number-input.vue > Demo-按钮为两端分布 1`] = `
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="bothEnds" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
   </div>
 </div>
@@ -332,8 +332,8 @@ exports[`u-number-input.vue > Demo-按钮样式 1`] = `
   <span class="baseline">b</span>
   <span class="placeholder" style="display: none;"></span>
   <input button-display="bothEnds" class="input" type="text">
-  <span class="button" role="up" tabindex="0"></span>
-  <span class="button" role="down" tabindex="0"></span>
+  <span class="button" role="up" tabindex="-1"></span>
+  <span class="button" role="down" tabindex="-1"></span>
 </div>
 `;
 
@@ -344,15 +344,15 @@ exports[`u-number-input.vue > Demo-最大值和最小值 1`] = `
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" disabled="disabled" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" disabled="disabled" role="down" tabindex="-1"></span>
     </div>
     <div button-display="tail" class="root root">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
   </div>
 </div>
@@ -365,22 +365,22 @@ exports[`u-number-input.vue > Demo-格式化 1`] = `
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
     <div button-display="tail" class="root root">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
     <div button-display="tail" class="root root">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
   </div>
 </div>
@@ -393,22 +393,22 @@ exports[`u-number-input.vue > Demo-精度与间隔 1`] = `
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
     <div button-display="tail" class="root root">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
     <div button-display="tail" class="root root">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
   </div>
 </div>
@@ -421,8 +421,8 @@ exports[`u-number-input.vue > Demo-精度与间隔 2`] = `
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
   </div>
 </div>
@@ -435,15 +435,15 @@ exports[`u-number-input.vue > Demo-精度与间隔 3`] = `
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
     <div button-display="tail" class="root root">
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" role="down" tabindex="-1"></span>
     </div>
   </div>
 </div>
@@ -454,8 +454,8 @@ exports[`u-number-input.vue > Demo-键盘事件 1`] = `
   <span class="baseline">b</span>
   <span class="placeholder" style="display: none;"></span>
   <input button-display="tail" class="input" type="text">
-  <span class="button" role="up" tabindex="0"></span>
-  <span class="button" role="down" tabindex="0"></span>
+  <span class="button" role="up" tabindex="-1"></span>
+  <span class="button" role="down" tabindex="-1"></span>
 </div>
 `;
 
@@ -466,8 +466,8 @@ exports[`u-number-input.vue > Demo-高级格式化 1`] = `
     <span class="baseline">b</span>
     <span class="placeholder"></span>
     <input button-display="tail" class="input" type="text">
-    <span class="button" role="up" tabindex="0"></span>
-    <span class="button" role="down" tabindex="0"></span>
+    <span class="button" role="up" tabindex="-1"></span>
+    <span class="button" role="down" tabindex="-1"></span>
   </div>
   <div>值： 1</div>
 </div>
