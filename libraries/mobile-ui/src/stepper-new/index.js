@@ -399,7 +399,7 @@ export default createComponent({
     if (this.isPreview) {
       return (
         <div class={bem([this.theme])}>
-          {this.showUnit && this.unit.type === 'prefix' && <div class={bem('unit', { prefix: true })}>{this.unit?.value}</div>}
+          {this.showUnit && this.unitType === 'prefix' && <div class={bem('unit', { prefix: true })}>{this.unit?.value}</div>}
           <input
             ref="input"
             class={bem('input')}
@@ -407,7 +407,7 @@ export default createComponent({
             readonly
             value={this.formattedValue || '--'}
           />
-          {this.showUnit && this.unit.type === 'suffix' && <div class={bem('unit', { suffix: true })}>{this.unit?.value}</div>}
+          {this.showUnit && this.unitType === 'suffix' && <div class={bem('unit', { suffix: true })}>{this.unit?.value}</div>}
         </div>
       );
     }

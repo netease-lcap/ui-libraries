@@ -8,7 +8,16 @@ class WebWorker {
   constructor(worker) {
     const code = worker.toString();
     const blob = new Blob([`(${code})()`]);
-    return new Worker(URL.createObjectURL(blob));
+    this.blob = blob;
+    this.worker = new Worker(URL.createObjectURL(blob));
+    return this.worker;
+  }
+
+  clean() {
+    // 关闭worker
+    this.worker.terminate();
+    // 清理blob
+    URL.revokeObjectURL(this.blob);
   }
 }
 
@@ -34,7 +43,7 @@ function work() {
     } else if (state === "pause") {
       if (!this.lastPauseTime) {
         clearInterval(timer);
-        this.postMessage(--second);
+        this.postMessage(second);
         this.lastPauseTime = second;
       }
     } else if (state === 'continue') {
@@ -127,6 +136,11 @@ export default {
     });
 
     this.worker = worker;
+  },
+  destroyed() {
+    if (this.worker) {
+      this.worker.clean();
+    }
   },
   methods: {
     start() {

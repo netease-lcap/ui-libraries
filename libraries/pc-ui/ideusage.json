@@ -956,6 +956,12 @@
             "displaySlotConditions": {
                 "title": false,
                 "desc": false
+            },
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource')",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> div[class^='u-selectable-steps_item']:not([data-nodepath])"
             }
         }
     },
