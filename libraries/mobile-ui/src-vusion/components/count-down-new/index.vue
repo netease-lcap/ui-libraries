@@ -34,7 +34,7 @@ function work() {
     } else if (state === "pause") {
       if (!this.lastPauseTime) {
         clearInterval(timer);
-        this.postMessage(--second);
+        this.postMessage(second);
         this.lastPauseTime = second;
       }
     } else if (state === 'continue') {
