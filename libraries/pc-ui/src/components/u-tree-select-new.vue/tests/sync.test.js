@@ -4,12 +4,14 @@ import { UTreeSelectNew } from '../index';
 
 test('test sync value', async () => {
   let syncValue = '';
+  let syncData = [];
   const DefaultValue = '节点 1';
   const wrapper = mount(UTreeSelectNew, {
     propsData: {
       value: DefaultValue,
       valueField: 'text1',
       textField: 'text1',
+      opened: true,
       dataSource: [
         {
           text1: '节点 1',
@@ -34,9 +36,13 @@ test('test sync value', async () => {
       'sync:value': (v) => {
         syncValue = v;
       },
+      'sync:data': (d) => {
+        syncData = d;
+      },
     },
   });
 
   await wrapper.vm.$nextTick();
   expect(syncValue).toBe('节点 1');
+  expect(syncData.length).toBe(3);
 });
