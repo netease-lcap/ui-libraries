@@ -96,7 +96,6 @@ export default {
     handlerDraggable: Boolean,
     usePagination: Boolean,
     itemHeight: Number,
-    bufferSize: Number,
     lazyLoad: Boolean,
     scrollXStart: Boolean,
     scrollXEnd: Boolean,
@@ -143,7 +142,7 @@ export default {
     }
     this.$nextTick(this.initObserve);
   },
-  beforeMount() {
+  beforeDestroy() {
     this.clearObserve();
   },
   methods: {
@@ -154,11 +153,11 @@ export default {
       }
 
       let container = tableContentElem;
-      if (document.body.offsetHeight < container.offsetHeight) {
-        container = document.body;
+      if (window.innerHeight < container.offsetHeight) { // 表格高度 > 视窗高度时，直接使用默认视窗
+        container = null;
       }
 
-      const bufferSize = Math.max(10, this.bufferSize || 10);
+      const bufferSize = 10;
       const height = this.rowHeight * bufferSize;
       this.obser = observe(this.$refs.row, container, this.handleLoaded, height);
     },

@@ -112,7 +112,7 @@
                                       :handlerDraggable="handlerDraggable"
                                       :usePagination="usePagination"
                                       :itemHeight="itemHeight"
-                                      :lazyLoad="lazyLoad && !virtual"
+                                      :lazyLoad="lazyLoad && rowIndex >= bufferSize && !virtual"
                                       :scrollXStart="scrollXStart"
                                       :scrollXEnd="scrollXEnd"
                                     />
@@ -293,6 +293,7 @@ export default {
 
         nativeScroll: { type: Boolean, default: false },
         lazyLoad: { type: Boolean, default: false },
+        bufferSize: { type: Number, default: 10 },
         currentValues: Array,
     },
     data() {
