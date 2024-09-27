@@ -611,13 +611,24 @@ namespace nasl.ui {
       @Prop<UTableViewOptions<T, V, P, M>, 'itemHeight'>({
           group: '交互属性',
           title: '每行高度',
-          description: '与虚拟滚动配合使用，表示每一行的高度。请确保行里的数据不要换行',
+          description: '与虚拟滚动/懒加载配合使用，表示每一行的高度。请确保行里的数据不要换行',
           setter: {
               concept: 'NumberInputSetter',
           },
           if: _ => _.virtual === true || _.lazyLoad === true,
       })
       itemHeight: nasl.core.Decimal | nasl.core.Integer;
+
+      @Prop<UTableViewOptions<T, V, P, M>, 'bufferSize'>({
+        group: '交互属性',
+        title: '缓存数据量',
+        description: '与懒加载配合使用，表示立即加载数据量, 例如: 设置为10, 前10条数据立即加载',
+        setter: {
+            concept: 'NumberInputSetter',
+        },
+        if: _ => _.lazyLoad === true,
+      })
+      bufferSize: nasl.core.Integer = 10;
 
       @Prop<UTableViewOptions<T, V, P, M>, 'virtualCount'>({
           group: '交互属性',

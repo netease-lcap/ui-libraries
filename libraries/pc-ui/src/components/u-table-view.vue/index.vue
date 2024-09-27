@@ -175,6 +175,7 @@
         :nativeScroll="nativeScroll"
         :currentValues="currentValues"
         :lazyLoad="lazyLoad"
+        :bufferSize="bufferSize"
         @resize="onResizerDragEnd">
     </u-table-render>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
@@ -376,6 +377,7 @@ export default {
 
         nativeScroll: { type: Boolean, default: false }, // 是否使用原生滚动条
         lazyLoad: { type: Boolean, default: false }, // 懒加载
+        bufferSize: { type: Number, default: 10 },
     },
     data() {
         return {
