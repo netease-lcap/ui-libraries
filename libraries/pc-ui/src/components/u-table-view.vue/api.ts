@@ -580,15 +580,33 @@ namespace nasl.ui {
       })
       configurable: nasl.core.Boolean = false;
 
-      @Prop({
+      @Prop<UTableViewOptions<T, V, P, M>, 'virtual'>({
           group: '交互属性',
           title: '虚拟滚动',
           description: '虚拟滚动表示不展示所有的数据，只展示默认条数的数据，当滚动时再展示剩余的数据。当表格数据量大时，可设置为虚拟滚动，提高性能。默认关闭。',
           setter: {
               concept: 'SwitchSetter',
           },
+          onChange: [{
+            clear: ['lazyLoad'],
+            if: (_) => _ === true,
+          }],
       })
       virtual: nasl.core.Boolean = false;
+
+      @Prop<UTableViewOptions<T, V, P, M>, 'lazyLoad'>({
+          group: '交互属性',
+          title: '懒加载',
+          description: '滚动时会进行懒加载，非可视区域内的内容将不会默认渲染，直到该内容可见时，才会进行渲染，并且已渲染的内容滚动到不可见时，不会被销毁；',
+          setter: {
+              concept: 'SwitchSetter',
+          },
+          onChange: [{
+            clear: ['virtual'],
+            if: (_) => _ === true,
+          }],
+      })
+      lazyLoad: nasl.core.Boolean = false;
 
       @Prop<UTableViewOptions<T, V, P, M>, 'itemHeight'>({
           group: '交互属性',
@@ -597,7 +615,7 @@ namespace nasl.ui {
           setter: {
               concept: 'NumberInputSetter',
           },
-          if: _ => _.virtual === true,
+          if: _ => _.virtual === true || _.lazyLoad === true,
       })
       itemHeight: nasl.core.Decimal | nasl.core.Integer;
 
@@ -797,15 +815,15 @@ namespace nasl.ui {
             concept: 'AnonymousFunctionSetter',
         }
       })
-      rowStyle: (current: Current<T>) => { 
+      rowStyle: (current: Current<T>) => {
         /**
          * @title 表格行背景颜色
          */
-        backgroundColor?: nasl.core.String, 
+        backgroundColor?: nasl.core.String,
         /**
          * @title 表格行字体颜色
          */
-        color?: nasl.core.String 
+        color?: nasl.core.String
       };
 
       @Event({
