@@ -95,7 +95,8 @@
             "translateBindingProperty": ["badge", "badgemax", "value"],
             "slotInlineStyle": {
                 "title": "width: 90px"
-            }
+            },
+            "ignoreProperty": ["destination"]
         }
     },
     {
