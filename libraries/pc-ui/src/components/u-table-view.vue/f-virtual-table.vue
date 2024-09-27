@@ -30,7 +30,9 @@ export default {
         };
     },
     mounted() {
-       this.getVirtualHeight();
+        if (this.virtual) {
+            this.getVirtualHeight();
+        }
     },
     methods: {
         handleVirtualScroll(e) {
@@ -131,6 +133,7 @@ export default {
             this.virtualIndex = 0;
             this.virtualTop = 0;
             this.virtualBottom = 0;
+            this.virtualHeight = 0;
         },
         getHeight(item) {
             if (item.display === 'none')
@@ -145,7 +148,7 @@ export default {
                 return 0;
         },
         getVirtualHeight() {
-            const list = this[this.listKey];
+            const list = this[this.listKey] || [];
             let virtualHeight = 0;
             list.forEach((item) => {
                 virtualHeight += this.getHeight(item);

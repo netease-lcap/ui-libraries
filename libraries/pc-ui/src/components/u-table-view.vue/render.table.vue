@@ -319,6 +319,7 @@ export default {
             this.$refs.bodyTable[0].$el.style.position = `absolute`;
         },
         virtualHeight() {
+            console.log('virtualHeight', this.virtualHeight);
             this.$refs.virtualPlaceholder[0].style.height = `${this.virtualHeight}px`;
         },
     },

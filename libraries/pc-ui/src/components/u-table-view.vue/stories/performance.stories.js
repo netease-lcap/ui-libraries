@@ -18,11 +18,21 @@ export default {
   },
 };
 const originDataSource = [
-  { name: '张三', phone: '18612917895', email: 'zhangsan@163.com', address: '浙江省杭州市滨江区网商路599号网易大厦', createdTime: 1464421931000, loginTime: 1527515531000, checked: true },
-  { name: '小明', phone: '13727160283', email: 'xiaoming@163.com', address: '浙江省杭州市滨江区江虹路459号英飞特科技园', createdTime: 1520864676000, loginTime: 1552400676000, checked: false },
-  { name: '李四', phone: '18897127809', email: 'lisi@163.com', address: '浙江省杭州市滨江区秋溢路606号西可科技园', createdTime: 1494488730000, loginTime: 1558165530000, checked: false },
-  { name: '李华', phone: '18749261214', email: 'lihua@163.com', address: '浙江省杭州市滨江区长河路590号东忠科技园', createdTime: 1476073921000, loginTime: 1544428081000, checked: false },
-  { name: '王五', phone: '13579340020', email: 'wangwu@163.com', address: '浙江省杭州市滨江区网商路599号网易大厦二期', createdTime: 1468614726000, loginTime: 1531675926000, checked: false },
+  {
+    name: '张三', phone: '18612917895', email: 'zhangsan@163.com', address: '浙江省杭州市滨江区网商路599号网易大厦', createdTime: 1464421931000, loginTime: 1527515531000, checked: true,
+  },
+  {
+    name: '小明', phone: '13727160283', email: 'xiaoming@163.com', address: '浙江省杭州市滨江区江虹路459号英飞特科技园', createdTime: 1520864676000, loginTime: 1552400676000, checked: false,
+  },
+  {
+    name: '李四', phone: '18897127809', email: 'lisi@163.com', address: '浙江省杭州市滨江区秋溢路606号西可科技园', createdTime: 1494488730000, loginTime: 1558165530000, checked: false,
+  },
+  {
+    name: '李华', phone: '18749261214', email: 'lihua@163.com', address: '浙江省杭州市滨江区长河路590号东忠科技园', createdTime: 1476073921000, loginTime: 1544428081000, checked: false,
+  },
+  {
+    name: '王五', phone: '13579340020', email: 'wangwu@163.com', address: '浙江省杭州市滨江区网商路599号网易大厦二期', createdTime: 1468614726000, loginTime: 1531675926000, checked: false,
+  },
 ];
 const dataSource = [];
 for (let i = 0; i < 400; i++) {
@@ -31,7 +41,7 @@ for (let i = 0; i < 400; i++) {
   });
   dataSource.push(...newDataSource);
 }
-console.log('数据条数：', dataSource.length)
+console.log('数据条数：', dataSource.length);
 
 const TempComponent = {
   props: {
@@ -203,7 +213,7 @@ export const Default2 = {
     <div>
       <u-input :value.sync="value1" />
       {{ selectedValues }}
-      <u-table-view :data-source="dataSource" :value.sync="selectedValues" valueField="index" :virtual="true" :nativeScroll="true" style="height:100vh">
+      <u-table-view :data-source="dataSource" :value.sync="selectedValues" valueField="index" :virtual="true" :nativeScroll="true" style="height:100vh" :item-height="101">
       <u-table-view-column type="radio" title="选择" width="8%"></u-table-view-column>
       <u-table-view-column title="用户名" width="20%">
         <template #cell="current">
