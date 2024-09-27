@@ -263,7 +263,7 @@ export default {
         },
         watchValues(values) {
             if (values) {
-                this.currentValues = [...values];
+                this.currentValues = Array.isArray(values) ? [...values] : [values];
                 const removeParentValues = [];
                 this.walkNodes(this.nodeVMs, (nodeVM) => {
                     if (values.includes(nodeVM.value)) {
@@ -392,6 +392,7 @@ export default {
                 (nodeVM) =>
                     !nodeVM.currentDisabled && nodeVM.checkRecursively(checked),
             );
+            this.$emit('update:value', this.currentValues, this);
             this.$emit('check', { checked }, this);
         },
         load(params) {
