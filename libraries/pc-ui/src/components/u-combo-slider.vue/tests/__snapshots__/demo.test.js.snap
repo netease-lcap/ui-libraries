@@ -347,8 +347,8 @@ exports[`u-combo-slider.vue > Demo-显示输入框button 1`] = `
       <span class="baseline">b</span>
       <span class="placeholder" style="display: none;"></span>
       <input button-display="tail" class="input" type="text">
-      <span class="button" role="up" tabindex="0"></span>
-      <span class="button" disabled="disabled" role="down" tabindex="0"></span>
+      <span class="button" role="up" tabindex="-1"></span>
+      <span class="button" disabled="disabled" role="down" tabindex="-1"></span>
     </div>
     <span></span>
   </div>

@@ -265,3 +265,49 @@ export const Progressive = {
     },
   }),
 };
+
+export const LazyLoad = {
+  name: '懒加载',
+  render: () => ({
+    components: {
+      TempComponent,
+    },
+    template: `
+      <u-table-view :data-source="dataSource" style="height: 660px;" lazy-load :itemHeight="101">
+        <u-table-view-column title="用户名" width="20%">
+          <template #cell="current">
+            <u-text>{{ current.item.name }} {{ current.item.index }}</u-text>
+          </template>
+        </u-table-view-column>
+        <u-table-view-column title="选中" width="20%">
+          <template #cell="current">
+            <u-text>{{ current.item.checked }}</u-text>
+            <u-checkbox :value.sync="current.item.checked"></u-checkbox>
+          </template>
+        </u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
+        <u-table-view-column title="地址" field="address"></u-table-view-column>
+        <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%"></u-table-view-column>
+      </u-table-view>
+    `,
+    data() {
+      return {
+        dataSource: [...dataSource],
+      };
+    },
+  }),
+};

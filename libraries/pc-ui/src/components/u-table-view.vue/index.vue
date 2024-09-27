@@ -174,6 +174,8 @@
 
         :nativeScroll="nativeScroll"
         :currentValues="currentValues"
+        :lazyLoad="lazyLoad"
+        :bufferSize="bufferSize"
         @resize="onResizerDragEnd">
     </u-table-render>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
@@ -374,6 +376,8 @@ export default {
         subForm: Boolean, // 是否是子表单
 
         nativeScroll: { type: Boolean, default: false }, // 是否使用原生滚动条
+        lazyLoad: { type: Boolean, default: false }, // 懒加载
+        bufferSize: { type: Number, default: 10 },
     },
     data() {
         return {
@@ -440,6 +444,7 @@ export default {
             isDragging: this.isDragging,
             getItemColSpan: this.getItemColSpan,
             getItemRowSpan: this.getItemRowSpan,
+            getTableContentElem: this.getTableContentElem,
         };
     },
     computed: {
@@ -556,7 +561,7 @@ export default {
             const oldValue = oldItem ? this.$at(oldItem, this.valueField) : undefined;
             if (value === oldValue)
                 return;
-                
+
             this.$emit('change', { value, oldValue, item, oldItem }, this);
             this.currentData.forEach((itemTemp) => {
                 const valueTemp = this.$at(itemTemp, this.valueField);
@@ -725,6 +730,9 @@ export default {
             if (this.timer) {
                 clearTimeout(this.timer);
             }
+        },
+        getTableContentElem() {
+          return this.$el;
         },
         processData(data) {
             const selectable = this.visibleColumnVMs.some((columnVM) => columnVM.type === 'radio');
@@ -1159,7 +1167,6 @@ export default {
             this.currentDataSource.clearLocalData();
             this.clearDragState();
             this.load();
-            console.log('table reload');
         },
         getFields() {
             return this.visibleColumnVMs
@@ -1485,7 +1492,6 @@ export default {
                 try {
                     mergesMap.length > 0 ? this.$once('hook:updated', res) : res();
                 } catch (error) {
-                    console.log('mergeMap格式不正确', error);
                     this.$once('hook:updated', res);
                 }
             });
