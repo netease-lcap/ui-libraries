@@ -19,6 +19,8 @@
             :level="0"
             :designer="$env.VUE_APP_DESIGNER"
             :draggable="node.draggable"
+            :showEmpty="showEmpty"
+            :hiddenMask="hiddenMask"
         >
             <template #item="{item}">
 <!--                <s-empty v-if="(!$slots.item) && $env.VUE_APP_DESIGNER "></s-empty>-->
@@ -103,6 +105,8 @@ export default {
         draggable: { type: Boolean, default: false },
         subBackground: { type: Boolean, default: false },
         renderOptimize: { type: Boolean, default: false },
+        showEmpty: { type: Boolean, default: true },
+        hiddenMask: { type: Boolean, default: false },
     },
     data() {
         return {
