@@ -1070,7 +1070,7 @@
                 ":hiddenMask": "\"true\""
             },
             "slotWrapperInlineStyle": {
-                "item": "display:inline-block; width:100%"
+                "item": "display:inline-block; width:calc(100% - 36px)"
             }
         }
     },
@@ -1085,7 +1085,7 @@
                 "click": true
             },
             "slotWrapperInlineStyle": {
-                "item": "display:inline-block; width:100%"
+                "item": "display:inline-block; width:calc(100% - 36px)"
             },
             "additionalAttribute": {
                 ":showEmpty":  "\"false\""
@@ -1155,7 +1155,7 @@
                 ":hiddenMask": "\"false\""
             },
             "slotWrapperInlineStyle": {
-                "item": "display:inline-block; width:100%"
+                "item": "display:inline-block; width:calc(100% - 36px)"
             }
         }
     },
