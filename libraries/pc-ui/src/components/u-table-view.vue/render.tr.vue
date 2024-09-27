@@ -124,7 +124,7 @@ export default {
   ],
   data() {
     return {
-      loaded: false,
+      loaded: !this.lazyLoad,
     }
   },
   computed: {
