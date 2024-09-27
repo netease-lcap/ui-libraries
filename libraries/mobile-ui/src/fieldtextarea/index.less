@@ -2,7 +2,8 @@
 
 .van-fieldtextarea {
   &__newwrap {
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     &--limit {
       position: relative;
@@ -13,11 +14,13 @@
     }
   }
   &__wrap-con {
-    display: flex;
-    align-items: center;
+    position: relative;
+    flex: 1;
+    overflow: hidden;
   }
+
   &__control {
-    overflow-y: hidden;
+    overflow-y: auto;
     display: block;
     box-sizing: border-box;
     width: 100%;
@@ -30,6 +33,9 @@
     background-color: transparent;
     border: 0;
     resize: none;
+
+    min-height: var(--van-fieldtextarea-line-height);
+    height: 100%;
 
     &::placeholder {
       color: var(--van-fieldtextarea-placeholder-color);
@@ -47,21 +53,18 @@
       cursor: default;
     }
 
-    &--center {
-      justify-content: center;
-      text-align: center;
+    &--shadow {
+      opacity: 0;
+      pointer-events: none;
     }
 
-    &--right {
-      justify-content: flex-end;
-      text-align: right;
-    }
-
-    &--custom {
-      display: flex;
-      align-items: center;
-      min-height: var(--van-fieldtextarea-line-height);
-      height: 100%;
+    &--absolute {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
     }
 
     &--min-height {

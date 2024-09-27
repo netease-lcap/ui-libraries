@@ -203,37 +203,33 @@ export default createComponent({
       }
     },
     afterValueChange() {
-      // console.log(666);
       this.currentValue = this.value;
     },
     adjustSize() {
-      const { input, wrap, limit } = this.$refs;
+      const { input, inputShadow, limit } = this.$refs;
 
-      const scrollTop = getRootScrollTop();
-      input.style.height = 'auto';
+      if (isObject(this.autosize || input?.autosize)) {
+        let { maxHeight, minHeight } = this.autosize || input.autosize;
+        const limitHeight = (!this.ifLimit || this.isPreview) ? 0 : parseInt(window.getComputedStyle(limit).height, 10);
 
-      let height = input.scrollHeight;
-
-      // eslint-disable-next-line radix
-      const wrapHeight = parseInt(window.getComputedStyle(wrap).height);
-      if (isObject(this.autosize || input.autosize)) {
-        const { maxHeight, minHeight } = this.autosize || input.autosize;
         if (maxHeight) {
-          height = Math.min(height, maxHeight);
+          maxHeight = String(maxHeight).replace(/px$/, '');
+          maxHeight -= limitHeight;
+
+          input.style.maxHeight = `${maxHeight}px`;
+          if (inputShadow) {
+            inputShadow.style.maxHeight = `${maxHeight}px`;
+          }
         }
         if (minHeight) {
-          height = Math.max(height, minHeight);
+          minHeight = String(minHeight).replace(/px$/, '');
+          minHeight -= limitHeight;
+
+          input.style.minHeight = `${minHeight}px`;
+          if (inputShadow) {
+            inputShadow.style.minHeight = `${minHeight}px`;
+          }
         }
-        input.style.overflowY = 'auto';
-      }
-
-      if (height) {
-        const h = wrapHeight > height ? wrapHeight : height;
-        const limitH = this.ifLimit ? parseInt(window.getComputedStyle(limit).height) : 0;
-        input.style.height = `${h - limitH}px`;
-
-        // https://github.com/youzan/vant/issues/9178
-        setRootScrollTop(scrollTop);
       }
     },
   },
@@ -265,12 +261,12 @@ export default createComponent({
       return (
         <div class={bem('newwrap', { clearwrap: this.clearable, limit: ifLimit })} ref="wrap">
           <div class={bem('wrap-con')}>
-            <span
+            <div
               ref="input"
-              class={bem('control', [inputAlign, 'custom', { 'min-height': !this.autosize }])}
+              class={bem('control', [inputAlign, { 'min-height': !this.autosize }, 'preview'])}
             >
               {this.currentValue || '--'}
-            </span>
+            </div>
           </div>
         </div>
       );
@@ -279,12 +275,16 @@ export default createComponent({
     return (
       <div class={bem('newwrap', { clearwrap: this.clearable, limit: ifLimit })} ref="wrap">
         <div class={bem('wrap-con')}>
+          {/* 影子文本，用来撑开高度 */}
+          <div ref="inputShadow" class={bem('control', [inputAlign, { 'min-height': !this.autosize }, 'shadow'])}>
+            {this.currentValue}
+          </div>
           <textarea
             // vShow={this.showInput}
             ref="input"
             // type={this.type}
             role="fieldtextarea"
-            class={bem('control', [inputAlign, 'custom', { 'min-height': !this.autosize }])}
+            class={bem('control', [inputAlign, { 'min-height': !this.autosize }, 'absolute'])}
             value={this.currentValue}
             // style={this.inputStyle}
             disabled={this.disabled}
