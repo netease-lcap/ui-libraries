@@ -46,7 +46,7 @@
                     dragging: currentDragging,
                     ...node,
                 }">{{ text }}</slot>
-                <s-empty v-if="!$slots.item && $env.VUE_APP_DESIGNER && showEmpty"></s-empty>
+                <s-empty v-if="$env.VUE_APP_DESIGNER && (!$scopedSlots.item || !$scopedSlots.item({})) && showEmpty"></s-empty>
             </span>
         </div>
     </div>
@@ -805,6 +805,11 @@ content: "\e679";
 .root[designer]{
     position: relative;
 }
+
+.root[designer] [class^="s-empty"] {
+  width: calc(100% - 36px);
+}
+
 .root[designer] + .root[designer]:after{
     content: '';
     position: absolute;

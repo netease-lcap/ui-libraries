@@ -123,7 +123,7 @@
                 @load="onLoad">
                 <template #item="item">
                     <slot name="item" v-bind="item">{{ item.text }}</slot>
-                    <s-empty v-if="(!$slots.item) && $env.VUE_APP_DESIGNER "></s-empty>
+                    <s-empty v-if="$env.VUE_APP_DESIGNER && (!$scopedSlots.item || !$scopedSlots.item({})) "></s-empty>
                 </template>
                 <slot></slot>
             </u-tree-view-new>
