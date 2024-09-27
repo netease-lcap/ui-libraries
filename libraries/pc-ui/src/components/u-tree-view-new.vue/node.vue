@@ -1,5 +1,5 @@
 <template>
-<div :class="$style.root" v-show="!hidden">
+<div :class="$style.root" :hiddenMask="hiddenMask" v-show="!hidden">
     <div :class="$style.item" :selected="selected" :style="{ paddingLeft: level * expanderWidth + paddingLeft + 'px' }"
         :readonly="currentReadOnly" :readonly-mode="rootVM.readonlyMode"
         :subBackground="rootVM.subBackground"
@@ -136,7 +136,8 @@ export default {
         draggable: { type: Boolean, default: false },
         dragExpanderDelay: { type: Number, default: 1500 },
         renderOptimize: { type: Boolean, default: false },
-        showEmpty: { type: Boolean, default: true }
+        showEmpty: { type: Boolean, default: true },
+        hiddenMask: { type: Boolean, default: false },
     },
     data() {
         return {
@@ -814,5 +815,8 @@ content: "\e679";
     left: 0;
     bottom: 0;
     right: 0;
+}
+.root[designer] + .root[designer][hiddenMask]:after{
+    background: unset;
 }
 </style>
