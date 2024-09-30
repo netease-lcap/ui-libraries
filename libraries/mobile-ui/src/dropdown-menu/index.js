@@ -125,7 +125,7 @@ export default createComponent({
           vusion-node-path={item.$attrs['vusion-node-path']}
           vusion-node-tag={item.$attrs['vusion-node-tag']}
           data-nodepath={item.$attrs['data-nodepath']}
-          data-nodepath-multiple={this.$attrs['data-nodepath-multiple']}
+          data-nodepath-multiple={item.$attrs['data-nodepath-multiple']}
         >
           <span
             class={[
