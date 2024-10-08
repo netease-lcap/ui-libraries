@@ -250,6 +250,14 @@ namespace nasl.ui {
 
         @Prop({
             group: '样式属性',
+            title: '下拉列表宽度',
+            description: '设置下拉列表宽度',
+            docDescription: '设置下拉列表宽度',
+        })
+        popperWidth: nasl.core.String;
+
+        @Prop({
+            group: '样式属性',
             title: '高度',
             description: '设置级联框高度大小',
             docDescription: '设置级联框高度大小',
