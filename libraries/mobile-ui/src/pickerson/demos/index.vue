@@ -1,9 +1,10 @@
 <template>
   <demo-section>
-    <demo-block card :title="t('basicUsage')">
+    <demo-block card title="列表多选">
       <div>pickerValue: {{ pickerValue }}</div>
       <van-pickerson
-        :multiple="true"
+        :clearable="false"
+        :multiple="false"
         :enable-select-all="true"
         :enable-selected-count="false"
         type="list"
@@ -105,6 +106,34 @@
           <template #title>
                 <van-text :ref="`text10`" text="标题"></van-text>
           </template>
+      </van-pickerson>
+    </demo-block>
+
+    <demo-block card title="测试">
+
+      <van-pickerson :ref="`pickerson_1`" :title="`标题`" :showToolbar="true" :pageSize="50" v-dependencies.reload="[]" :dataSource="list" :textField="`text`"
+          :valueField="`value`" :type="`list`" :inputAlign="`left`" :filterable="true" :value.sync="pickerValue">
+          <template #picker-bottom :ref="`template_1`">
+              <van-picker-action-slot :ref="`picker_action_slot_1`" :targetMethod="`cancel`">
+                  <van-button :ref="`button_1`" :type="`info_secondary`" :size="`normal`" :text="`取消`" :squareroud="`round`"></van-button>
+              </van-picker-action-slot>
+              <van-picker-action-slot :ref="`picker_action_slot_2`" :targetMethod="`confirm`">
+                  <van-button :ref="`button_2`" :type="`info`" :size="`normal`" :text="`确认`" :squareroud="`round`"></van-button>
+              </van-picker-action-slot>
+          </template>
+          <template #picker-top :ref="`template_2`">
+              <van-picker-action-slot :ref="`picker_action_slot_3`" :targetMethod="`cancel`">
+                  <van-iconv :ref="`iconv_1`" :name="`left-arrow`" :icotype="`only`"></van-iconv>
+              </van-picker-action-slot>
+              <van-picker-action-slot :ref="`picker_action_slot_4`" :targetMethod="`confirm`"></van-picker-action-slot>
+          </template>
+          <template #pannel-title :ref="`template_3`">
+              <van-text :ref="`text_1`" :text="`标题`"></van-text>
+          </template>
+          <template #title :ref="`template_4`">
+              <van-text :ref="`text_2`" :text="`标题`"></van-text>
+          </template>
+          <template #option="current" :ref="`template_5`"></template>
       </van-pickerson>
     </demo-block>
   </demo-section>
