@@ -1,5 +1,5 @@
 import { isPlainObject } from 'lodash';
-import { onBeforeMount, getCurrentInstance } from '@vue/composition-api';
+import { onBeforeMount, getCurrentInstance, watch } from '@vue/composition-api';
 import { NaslComponentPluginOptions } from '../types';
 import { $deletePropList, $ref } from '../constants';
 
@@ -92,13 +92,17 @@ export const useInitialLoaded: NaslComponentPluginOptions = {
   props: ['initialLoaded'],
   setup: (props) => {
     onBeforeMount(() => {
-      const [initialLoaded, loadData] = props.getEnd(['initialLoaded', 'onLoadData']);
+      watch(() => props.getEnd('onLoadData'), (loadData) => {
+        const [initialLoaded] = props.getEnd<[boolean]>(['initialLoaded']);
 
-      if (initialLoaded === false || typeof loadData !== 'function') {
-        return;
-      }
+        if (initialLoaded === false || typeof loadData !== 'function') {
+          return;
+        }
 
-      loadData({});
+        loadData({});
+      }, {
+        immediate: true,
+      });
     });
   },
   order: 8,
