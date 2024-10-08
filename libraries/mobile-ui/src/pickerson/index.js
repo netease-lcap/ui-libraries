@@ -65,6 +65,11 @@ export default createComponent({
       type: String,
       default: '请选择',
     },
+    clearable: Boolean,
+    clearFilter: {
+      type: String,
+      default: 'cancel',
+    },
 
     pageable: { type: [Boolean, String], default: false },
     filterable: { type: Boolean, default: false },
@@ -94,10 +99,6 @@ export default createComponent({
     },
   },
   watch: {
-    currentValue(val) {
-      this.$emit('update:value', val);
-      this.$emit('update:pvalue', val);
-    },
     // 监听props变化
     value(val) {
       this.currentValue = this.formatValue(val);
@@ -198,8 +199,23 @@ export default createComponent({
     togglePopup() {
       this.popupVisible = !this.popupVisible;
     },
-    closePopup() {
+    closePopup(type) {
       this.popupVisible = false;
+
+      // 重置filterText
+      switch (this.clearFilter) {
+        case 'always':
+          this.filterText = '';
+          break;
+        case 'confirm':
+        case 'cancel':
+          if (type === this.clearFilter) {
+            this.filterText = '';
+          }
+          break;
+        default:
+          break;
+      }
     },
     onChange(vm, val, index) {
       this.$emit('change', vm, val, index);
@@ -209,15 +225,25 @@ export default createComponent({
       const [value, index] = this.$refs?.picker?.getValue();
 
       this.currentValue = value;
-      this.closePopup();
+      this.$emit('update:value', value);
+      this.$emit('update:pvalue', value);
+      this.$emit('confirm', value, index);
 
-      this.$nextTick(() => {
-        this.$emit('confirm', value, index);
-      });
+      this.closePopup('confirm');
     },
     onCancel() {
+      this.$refs?.picker?.setValue(this.currentValue);
+
       this.$emit('cancel');
-      this.closePopup();
+      this.closePopup('cancel');
+    },
+    onClear() {
+      const value = this.formatValue('');
+      this.currentValue = value;
+      this.$refs?.picker?.setValue(value);
+
+      this.$emit('update:value', value);
+      this.$emit('update:pvalue', value);
     },
     onScrollToLower() {
       console.log('到底了');
@@ -289,6 +315,12 @@ export default createComponent({
       this.togglePopup();
     },
 
+    onClickOverlay() {
+      if (this.closeOnClickOverlay) {
+        this.onCancel();
+      }
+    },
+
     renderBottom() {
       if (!this.isNew) return null;
 
@@ -355,6 +387,11 @@ export default createComponent({
           // eslint-disable-next-line no-prototype-builtins
           notitle={!this.$slots.hasOwnProperty('title')}
           insel={true}
+          clearable={this.clearable}
+          clearTrigger="always"
+          {...{ on: {
+            clear: this.onClear,
+          }}}
         />
         <Popup
           vModel={this.popupVisible}
@@ -369,6 +406,9 @@ export default createComponent({
           vusion-scope-id={this?.$vnode?.context?.$options?._scopeId}
           {...{
             attrs: { ...this.$attrs, 'vusion-empty-background': undefined },
+            on: {
+              'click-overlay': this.onClickOverlay,
+            },
           }}
         >
           <div class={bem(this.isNew && 'content-wrapper')}>
