@@ -310,17 +310,12 @@ export default createComponent({
   },
   methods: {
     showClear() {
-      const readonly = this.getProp('readonly');
-      const frompara = this.getProp('frompara');
-      if (this.clearable && !readonly) {
+      if (this.clearable) {
         const hasValue = isDef(this.value) && this.value !== '';
         const trigger =
           this.clearTrigger === 'always' ||
           (this.clearTrigger === 'focus' && this.focused);
 
-        if (frompara === 'vansearch') {
-          return trigger;
-        }
         return hasValue && trigger;
       }
     },
