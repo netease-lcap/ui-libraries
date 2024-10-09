@@ -5,7 +5,7 @@
             <u-text>普通表格-同步数据源</u-text>
             <u-number-input v-model="rowIndex1"></u-number-input>
             <u-button @click="scrollToElement1">scrollToElement</u-button>
-            <u-button @click="scrollToElement1">改变数据</u-button>
+            <u-button @click="setData">改变数据</u-button>
         </u-linear-layout>
         <u-table-view striped :dataSource="data"  style="max-height: 400px" ref="tableView1">
             <u-table-view-column title="用户名" field="name" width="15%" ellipsis></u-table-view-column>
@@ -29,7 +29,7 @@
             <u-text>虚拟滚动表格-静态数据源</u-text>
             <u-number-input v-model="rowIndex3"></u-number-input>
             <u-button @click="scrollToElement3">scrollToElement</u-button>
-            <u-button @click="scrollToElement1">改变数据</u-button>
+            <u-button @click="setData">改变数据</u-button>
         </u-linear-layout>
         <u-table-view striped :dataSource="data" virtual  style="max-height: 500px" ref="tableView3" :itemHeight="41">
             <u-table-view-column title="用户名" field="name" width="15%" ellipsis></u-table-view-column>
@@ -44,6 +44,15 @@
             <u-button @click="$refs.tableView4.reload()">刷新</u-button>
         </u-linear-layout>
         <u-table-view striped :dataSource="load" virtual  style="max-height: 500px" ref="tableView4" :itemHeight="41">
+            <u-table-view-column title="用户名" field="name" width="15%" ellipsis></u-table-view-column>
+            <u-table-view-column title="手机号码" field="phone" width="20%" ellipsis></u-table-view-column>
+            <u-table-view-column title="地址" field="address" ellipsis></u-table-view-column>
+            <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%" ellipsis></u-table-view-column>
+        </u-table-view>
+        <u-linear-layout>
+            <u-text>虚拟滚动表格-没有设置itemHeight</u-text>
+        </u-linear-layout>
+        <u-table-view striped :dataSource="data" virtual style="max-height: 500px">
             <u-table-view-column title="用户名" field="name" width="15%" ellipsis></u-table-view-column>
             <u-table-view-column title="手机号码" field="phone" width="20%" ellipsis></u-table-view-column>
             <u-table-view-column title="地址" field="address" ellipsis></u-table-view-column>
@@ -124,6 +133,11 @@
             scrollToElement4() {
                 this.$refs.tableView4.scrollToElement(this.rowIndex4);
             },
+            setData() {
+                this.data[0].name = '张三-5';
+                this.data[5].name = '张三-51';
+                this.data = [...this.data];
+            }
         },
     };
     </script>

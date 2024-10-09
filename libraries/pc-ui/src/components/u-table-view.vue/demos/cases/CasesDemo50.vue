@@ -26,7 +26,7 @@
                 </template>
             </u-table-view-column-dynamic>
         </u-table-view> -->
-        <u-table-view striped :data-source="list" pagination resizable :page-size="1000" ref="tableview" virtual :item-height="42" style="max-height: 600px" ellipsis>
+        <u-table-view striped :data-source="list" pagination resizable :page-size="1000" ref="tableview" virtual :item-height="41" style="max-height: 600px" ellipsis>
             <u-table-view-column-dynamic :data-source="loadSubList" ellipsis>
                 <div slot="title" slot-scope="{ columnItem }">
                     <u-text>{{ columnItem.name }}</u-text>

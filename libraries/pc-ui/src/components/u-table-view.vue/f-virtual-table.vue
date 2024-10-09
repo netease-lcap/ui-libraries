@@ -134,6 +134,9 @@ export default {
             this.virtualTop = 0;
             this.virtualBottom = 0;
             this.virtualHeight = 0;
+            this.$nextTick(() => {
+                this.getVirtualHeight();
+            });
         },
         getHeight(item) {
             if (item.display === 'none')
@@ -148,7 +151,28 @@ export default {
                 return 0;
         },
         getVirtualHeight() {
+            // 避免没有设置itemHeight时，获取不到高度
+            let virtualEl = this.$refs.virtual;
+            if (Array.isArray(virtualEl)) {
+                virtualEl = virtualEl[0];
+            }
+            let tablebodyEl = this.$refs.body;
+            if (Array.isArray(tablebodyEl)) {
+                tablebodyEl = tablebodyEl[0];
+            }
             const list = this[this.listKey] || [];
+            if (this.itemHeight === undefined && virtualEl) {
+                const children = Array.from(virtualEl.children);
+                children.forEach((childEl, index) => {
+                    const item = list[this.virtualIndex + index];
+                    if (
+                        item
+                        && item.height === undefined
+                        && item._cacheHeight === undefined
+                    )
+                        item._cacheHeight = item.height || childEl.offsetHeight;
+                });
+            }
             let virtualHeight = 0;
             list.forEach((item) => {
                 virtualHeight += this.getHeight(item);

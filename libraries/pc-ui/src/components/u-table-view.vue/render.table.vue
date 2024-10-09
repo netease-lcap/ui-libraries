@@ -38,7 +38,7 @@
             <div :class="$style.body" ref="body" :style="{ height: number2Pixel(bodyHeight) }" @scroll="onBodyScroll"
                 :sticky-fixed="useStickyFixed">
                 <f-scroll-view :class="$style.scrollcview" @scroll="onScrollView" ref="scrollView" :native="nativeScroll" :hide-scroll="!!tableMetaIndex">
-                    <u-table ref="bodyTable" :class="$style['body-table']" :line="line" :striped="striped" :sticky-fixed="useStickyFixed" :style="{ width: number2Pixel(tableWidth)}">
+                    <u-table ref="bodyTable" :class="$style['body-table']" :line="line" :striped="striped" :sticky-fixed="useStickyFixed" :style="{ width: number2Pixel(tableWidth), position: virtual && currentData && currentData.length?'absolute': undefined}">
                         <colgroup>
                             <col v-for="(columnVM, columnIndex) in visibleColumnVMs" :key="columnIndex" :width="columnVM.computedWidth">
                         </colgroup>
@@ -316,10 +316,8 @@ export default {
         },
         virtualTop() {
             this.$refs.bodyTable[0].$el.style.transform = `translateY(${this.virtualTop}px)`;
-            this.$refs.bodyTable[0].$el.style.position = `absolute`;
         },
         virtualHeight() {
-            console.log('virtualHeight', this.virtualHeight);
             this.$refs.virtualPlaceholder[0].style.height = `${this.virtualHeight}px`;
         },
     },
@@ -702,11 +700,26 @@ export default {
             }
         },
         // 滚动到某一行
-        scrollToElement(rowIndex) {
+        // rowIndex 从 0 开始
+        scrollToElement(rowIndex, value) {
             const tableEl = this.getRefs().bodyTable.$el;
             if (!tableEl)
                 return;
-            const index = rowIndex > this.currentData.length - 1 ? this.currentData.length - 1 : rowIndex;
+            if ([undefined, null].includes(rowIndex) && [undefined, null].includes(value)) {
+                return;
+            }
+            let finalRowIndex;
+            if(![undefined, null].includes(rowIndex)) {
+                finalRowIndex = +rowIndex;
+            } else if(![undefined, null].includes(value)) {
+                const index = this.currentData.findIndex((item) => item[this.valueField] === value);
+                if(index === -1) {
+                    return;
+                }
+                finalRowIndex = index;
+            }
+            let index = finalRowIndex > this.currentData.length - 1 ? this.currentData.length - 1 : finalRowIndex;
+            index = index < 0 ? 0 : index;
             const trEls = tableEl.getElementsByTagName('TR');
             const scrollView = this.getRefs().scrollView;
             if (!scrollView)
@@ -717,22 +730,63 @@ export default {
 
             if (this.virtual) {
                 const currentItemHeight = this.itemHeight || trEls[0] && trEls[0].offsetHeight || 0;
-                for (let i = 0; i < index; i++) {
-                    height += currentItemHeight;
+                const showCount = Math.ceil(clientHeight / currentItemHeight); // 表格展示的条数
+                let currentIndex = index; // 第一个位置
+                // 树型数据可能跳到未展开的item
+                while (this.treeDisplay && this.currentData[currentIndex] && this.currentData[currentIndex].display === 'none') {
+                    currentIndex--;
                 }
-                height = height - clientHeight / 2 + currentItemHeight / 2;
-                scrollTo(height, {
-                    container: scrollViewWrap,
-                });
-                this.handleVirtualScroll({ target: scrollViewWrap });
+                currentIndex = currentIndex < 0 ? 0 : currentIndex;
+                const isMax = currentIndex + showCount >= this.currentData.length;
+                if(isMax) {
+                    let tempShowCount = 0;
+                    let realShowCount = 0;
+                    // 树型数据，需要包含不展示的行
+                    for (let i = this.currentData.length - 1; i > 0; i--) {
+                        realShowCount++;
+                        if (this.currentData[i] && this.currentData[i].display !== 'none') {
+                            tempShowCount++;
+                        }
+                        if (tempShowCount === showCount) {
+                            break;
+                        }
+                    }
+                    currentIndex = this.currentData.length - realShowCount + 1;
+                }
+                for (let i = 0; i < currentIndex; i++) {
+                    if (this.currentData[i]) {
+                        height += this.getHeight(this.currentData[i]);
+                    }
+                }
+                const maxScrollTop = scrollViewWrap.scrollHeight - clientHeight;
+                const virtualTop = height > maxScrollTop ? maxScrollTop : height;
+                const wrapScrollTop = isMax? maxScrollTop : virtualTop;
+                if(wrapScrollTop === scrollViewWrap.scrollTop) {
+                    return;
+                }
+                scrollViewWrap.scrollTop = wrapScrollTop;
+                this.virtualTop = virtualTop;
+                this.virtualIndex =  currentIndex;
+                // 初始会白一下，暂时不用该方式
+                // if(wrapScrollTop === scrollViewWrap.scrollTop) {
+                //     return;
+                // }
+                // const isMinus = virtualTop > this.virtualTop ? true : false;
+                // // 先滚到目标处附近
+                // if (isMinus) {
+                //     scrollViewWrap.scrollTop = wrapScrollTop - currentItemHeight * threshold;
+                // } else {
+                //     scrollViewWrap.scrollTop = wrapScrollTop + currentItemHeight * threshold;
+                // }
+                // scrollTo(wrapScrollTop, {
+                //     container: scrollViewWrap,
+                // });
             } else {
-                const currentItemHeight = trEls[index] && trEls[index].offsetHeight || 0;
                 for (let i = 0; i < index; i++) {
                     if (trEls[i]) {
                         height += trEls[i].offsetHeight;
                     }
                 }
-                height = height - clientHeight / 2 + currentItemHeight / 2;
                 scrollTo(height, {
                     container: scrollViewWrap,
                 });
