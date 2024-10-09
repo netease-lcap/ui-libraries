@@ -1,5 +1,5 @@
 import Component from '../index';
-import ExampleDemo1 from '../demos/example-demo1.vue';
+import ExampleDemo1 from '../demos/example-demo4.vue';
 import ExampleDemo2 from '../demos/example-demo2.vue';
 import ExampleDemo3 from '../demos/example-demo3.vue';
 
