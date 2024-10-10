@@ -216,7 +216,6 @@ export default createComponent({
       // 重置currentValue
       this.currentValue = this.formatValue((this.value ?? this.pvalue) || '');
       this.$refs?.picker?.setValue(this.currentValue);
-      this.filterText = '';
 
       this.$emit('cancel');
       this.closePopup();
