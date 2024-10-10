@@ -229,8 +229,6 @@ export default createComponent({
       this.closePopup('confirm');
     },
     onCancel() {
-      // 重置currentValue
-      this.currentValue = this.formatValue((this.value ?? this.pvalue) || '');
       this.$refs?.picker?.setValue(this.currentValue);
 
       this.$emit('cancel');
