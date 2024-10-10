@@ -19,6 +19,8 @@
             :level="0"
             :designer="$env.VUE_APP_DESIGNER"
             :draggable="node.draggable"
+            :showEmpty="showEmpty"
+            :hiddenMask="hiddenMask"
         >
             <template #item="{item}">
 <!--                <s-empty v-if="(!$slots.item) && $env.VUE_APP_DESIGNER "></s-empty>-->
@@ -36,6 +38,7 @@
 
 <script>
 import { sync } from '@lcap/vue2-utils';
+import { isEqual } from 'lodash';
 import { MRoot } from '../m-root.vue';
 import MField from '../m-field.vue';
 import UTreeViewNodeNew from '../u-tree-view-new.vue/node.vue';
@@ -102,6 +105,8 @@ export default {
         draggable: { type: Boolean, default: false },
         subBackground: { type: Boolean, default: false },
         renderOptimize: { type: Boolean, default: false },
+        showEmpty: { type: Boolean, default: true },
+        hiddenMask: { type: Boolean, default: false },
     },
     data() {
         return {
@@ -155,7 +160,7 @@ export default {
     mounted() {
         // Must trigger `value` watcher at mounted hook.
         // If not, nodeVMs have not been pushed.
-        this.watchValue(this.value, true);
+        this.watchValue(this.value);
     },
     methods: {
         handleData() {
@@ -240,9 +245,9 @@ export default {
 
             return final;
         },
-        watchValue(value, isMounted = false) {
+        watchValue(value) {
             if (this.checkable) {
-                return this.watchValues(value, isMounted);
+                return this.watchValues(value);
             }
 
             if (this.selectedVM && this.selectedVM.value === value)
@@ -260,16 +265,40 @@ export default {
                 }
             }
         },
-        watchValues(values, isMounted = false) {
+        watchValues(values) {
             if (values) {
-                this.currentValues = values;
-                this.walk((nodeVM) => {
+                this.currentValues = Array.isArray(values) ? [...values] : [values];
+                const removeParentValues = [];
+                this.walkNodes(this.nodeVMs, (nodeVM) => {
                     if (values.includes(nodeVM.value)) {
-                        nodeVM.check(true);
-                    } else if (isMounted) {
-                        nodeVM.check(false);
+                        nodeVM.check(true, true);
+                        if (nodeVM.nodeVMs.length > 0 && !this.checkControlled) {
+                          removeParentValues.push(nodeVM.value);
+                        }
+                        return;
+                    }
+
+                    if (this.checkControlled) {
+                      nodeVM.check(false, true);
+                      return;
+                    }
+
+                    if (!nodeVM.nodeVMs.length) {
+                      nodeVM.check(false, true);
                     }
                 });
+
+                // 移除父级有值
+                removeParentValues.forEach((v) => {
+                  const index = this.currentValues.indexOf(v);
+                  if (index !== -1) {
+                    this.currentValues.splice(index, 1);
+                  }
+                });
+
+                if (!isEqual(this.currentValues, values)) {
+                  this.$emit('update:value', this.currentValues, this);
+                }
             } else {
                 const values = [];
                 this.walk((nodeVM) => {
@@ -367,6 +396,7 @@ export default {
                 (nodeVM) =>
                     !nodeVM.currentDisabled && nodeVM.checkRecursively(checked),
             );
+            this.$emit('update:value', this.currentValues, this);
             this.$emit('check', { checked }, this);
         },
         load(params) {

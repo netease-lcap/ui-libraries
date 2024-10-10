@@ -111,19 +111,21 @@
                 :filter-fields="finalFilterFields"
                 :matchMethod="matchMethod"
                 :caseSensitive="caseSensitive"
+                :showEmpty="showEmpty"
+                :hiddenMask="hiddenMask"
                 @change="$emit('change', $event, this)"
                 @before-select="$emit('before-select', $event, this)"
                 @select="$emit('select', $event, this)"
                 @input="onUpdateValue"
                 @update:value="onUpdateValue"
-                @sync:data="$listeners['sync:data']"
+                @sync:state="handleSyncSate"
                 @toggle="$emit('toggle', $event, this)"
                 @check="$emit('check', $event, this)"
                 @before-load="onBeforeLoad"
                 @load="onLoad">
                 <template #item="item">
                     <slot name="item" v-bind="item">{{ item.text }}</slot>
-                    <s-empty v-if="(!$slots.item) && $env.VUE_APP_DESIGNER "></s-empty>
+                    <s-empty v-if="$env.VUE_APP_DESIGNER && (!$scopedSlots.item || !$scopedSlots.item({})) && showEmpty"></s-empty>
                 </template>
                 <slot></slot>
             </u-tree-view-new>
@@ -206,6 +208,8 @@ export default {
         filterFields: { type: Array, default: () => ['text'] },
         ifExpanded: { type: Boolean, default: false },
         renderOptimize: { type: Boolean, default: false },
+        showEmpty: { type: Boolean, default: true },
+        hiddenMask: { type: Boolean, default: false },
     },
     data() {
         return {
@@ -657,7 +661,12 @@ export default {
             } else {
               return value ? value : null;
            }
-        }
+        },
+        handleSyncSate(name, value) {
+          if (name === 'data') {
+            this.$emit('sync:state', name, value);
+          }
+        },
     },
 };
 </script>
