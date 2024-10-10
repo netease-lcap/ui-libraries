@@ -1164,6 +1164,10 @@ export default {
             }
             if (!this.currentDataSource._load || typeof this.currentDataSource._load !== 'function')
                 return;
+            // 有虚拟滚动，需要重置下状态
+            if (this.virtual && this.$refs.tableRender) {
+                this.$refs.tableRender.resetVirtualData();
+            }
             this.currentDataSource.clearLocalData();
             this.clearDragState();
             this.load();
@@ -2850,6 +2854,10 @@ export default {
         resetEdit(item) {
             item.editing = '';
         },
+        // 滚动到某一行
+        scrollToElement(rowIndex, value) {
+            this.$refs.tableRender.scrollToElement(rowIndex, value);
+        }
     },
 };
 </script>

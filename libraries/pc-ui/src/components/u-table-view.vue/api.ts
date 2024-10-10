@@ -135,6 +135,24 @@ namespace nasl.ui {
           })
           item?: object,
       ): void {}
+
+      @Method({
+        title: '滚动到指定元素',
+        description: '滚动到指定元素',
+      })
+      scrollToElement(
+        @Param({
+            title: '行索引',
+            description: '行索引，从0开始',
+        })
+        rowIindex?: nasl.core.Integer,
+        @Param({
+            title: '值',
+            description: '行数据唯一标识，与值字段配合使用',
+        })
+        value?: nasl.core.Integer,
+      ): void {}
+
       constructor(options?: Partial<UTableViewOptions<T, V, P, M>>) { super(); }
   }
 
