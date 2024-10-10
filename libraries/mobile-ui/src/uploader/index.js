@@ -744,7 +744,7 @@ export default createComponent({
         withCredentials: this.withCredentials,
         file,
         data: formData,
-        name: 'file',
+        name: this.name,
       };
       const xhr = ajax({
         ...requestData,
