@@ -764,20 +764,16 @@ export default {
                 if(wrapScrollTop === scrollViewWrap.scrollTop) {
                     return;
                 }
+                // 直接跳转
                 scrollViewWrap.scrollTop = wrapScrollTop;
                 this.virtualTop = virtualTop;
                 this.virtualIndex =  currentIndex;
-                // 初始会白一下，暂时不用该方式
-                // if(wrapScrollTop === scrollViewWrap.scrollTop) {
-                //     return;
-                // }
-                // const isMinus = virtualTop > this.virtualTop ? true : false;
+                // 跳转到附近，带滚动效果。不太自然，暂时不用
+                // const isMinus = virtualTop > scrollViewWrap.scrollTop ? true : false;
                 // // 先滚到目标处附近
-                // if (isMinus) {
-                //     scrollViewWrap.scrollTop = wrapScrollTop - currentItemHeight * threshold;
-                // } else {
-                //     scrollViewWrap.scrollTop = wrapScrollTop + currentItemHeight * threshold;
-                // }
+                // const distance = isMinus? wrapScrollTop - currentItemHeight : wrapScrollTop + currentItemHeight;
+                // this.virtualTop = distance; // 避免初始的时候白一下的情况
+                // scrollViewWrap.scrollTop = distance; // 滚动条滚到目标附近
                 // scrollTo(wrapScrollTop, {
                 //     container: scrollViewWrap,
                 // });

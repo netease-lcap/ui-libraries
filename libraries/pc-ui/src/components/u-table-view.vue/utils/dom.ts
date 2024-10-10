@@ -28,7 +28,7 @@ export function getScroll(target: any, isLeft?: boolean): number {
 }
 
 export function scrollTo(target: number, options: ScrollToOptions) {
-  const { container, duration = 450, easing = easeInOutCubic } = options;
+  const { container, duration = 200, easing = easeInOutCubic } = options;
   const scrollTop = getScroll(container);
   const startTime = Date.now();
   return new Promise((res) => {
