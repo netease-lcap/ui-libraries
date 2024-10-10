@@ -66,6 +66,7 @@ export default createComponent({
       default: '请选择',
     },
     clearable: Boolean,
+    clearFilter: String,
 
     pageable: { type: [Boolean, String], default: false },
     filterable: { type: Boolean, default: false },
@@ -195,8 +196,23 @@ export default createComponent({
     togglePopup() {
       this.popupVisible = !this.popupVisible;
     },
-    closePopup() {
+    closePopup(type) {
       this.popupVisible = false;
+
+      // 重置filterText
+      switch (this.clearFilter) {
+        case 'always':
+          this.filterText = '';
+          break;
+        case 'confirm':
+        case 'cancel':
+          if (type === this.clearFilter) {
+            this.filterText = '';
+          }
+          break;
+        default:
+          break;
+      }
     },
     onChange(vm, val, index) {
       this.$emit('change', vm, val, index);
@@ -210,7 +226,7 @@ export default createComponent({
       this.$emit('update:pvalue', value);
       this.$emit('confirm', value, index);
 
-      this.closePopup();
+      this.closePopup('confirm');
     },
     onCancel() {
       // 重置currentValue
@@ -218,7 +234,7 @@ export default createComponent({
       this.$refs?.picker?.setValue(this.currentValue);
 
       this.$emit('cancel');
-      this.closePopup();
+      this.closePopup('cancel');
     },
     onClear() {
       const value = this.formatValue('');

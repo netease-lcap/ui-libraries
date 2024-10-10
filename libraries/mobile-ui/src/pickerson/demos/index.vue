@@ -112,7 +112,7 @@
     <demo-block card title="测试">
 
       <van-pickerson :ref="`pickerson_1`" :title="`标题`" :showToolbar="true" :pageSize="50" v-dependencies.reload="[]" :dataSource="list" :textField="`text`"
-          :valueField="`value`" :type="`list`" :inputAlign="`left`" :filterable="true" :value.sync="pickerValue">
+          :valueField="`value`" :type="`list`" :inputAlign="`left`" :filterable="true" clearFilter="confirm" :value.sync="pickerValue">
           <template #picker-bottom :ref="`template_1`">
               <van-picker-action-slot :ref="`picker_action_slot_1`" :targetMethod="`cancel`">
                   <van-button :ref="`button_1`" :type="`info_secondary`" :size="`normal`" :text="`取消`" :squareroud="`round`"></van-button>

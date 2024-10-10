@@ -308,6 +308,25 @@ namespace nasl.ui {
     })
     clearable: nasl.core.Boolean = false;
     @Prop({
+      group: '交互属性',
+      title: '自动清除筛选',
+      description: '是否自动清除筛选文本',
+      docDescription: '是否自动清除筛选文本',
+      setter: {
+        concept: "EnumSelectSetter",
+        options: [{
+          title: '关闭'
+        }, {
+          title: '取消时'
+        }, {
+          title: '确认时'
+        }, {
+          title: '总是'
+        }]
+      },
+    })
+    clearFilter: 'none' | 'cancel' | 'confirm' | 'always' = 'none';
+    @Prop({
       group: '状态属性',
       title: '预览',
       description: '显示预览态',
