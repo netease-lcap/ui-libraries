@@ -331,7 +331,8 @@ export default {
 .root[layout="block"] .wrap,
 .root[layout="end"] .wrap,
 .root[layout="center"] .wrap {
-    width: 100%;
+  width: 100%;
+  vertical-align: top;
 }
 
 .root[layout="end"] {

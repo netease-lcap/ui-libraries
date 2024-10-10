@@ -39,8 +39,8 @@ export default {
       }),
     ],
     props: {
-        value: { type: [String, Boolean, null], default: false },
-        label: null,
+        value: { default: false },
+        label: {},
         text: String,
         readonly: { type: Boolean, default: false },
         disabled: { type: Boolean, default: false },

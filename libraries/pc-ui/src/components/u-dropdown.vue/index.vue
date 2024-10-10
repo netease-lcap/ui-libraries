@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.root" :disabled="disabled" :type="type">
+    <div :class="[$style.root, { [$style.opened]: currentOpened }]" :disabled="disabled" :type="type">
         <div
             :class="$style.title"
             vusion-slot-name="title"
@@ -477,7 +477,9 @@ export default {
 }
 
 .icon::before {
-content: "\e65d";
+    display: inline-block;
+    transition: transform var(--transition-duration-base);
+    content: "\e65d";
     font-family: "lcap-ui-icons";
     font-style: normal;
     font-weight: normal;
@@ -488,6 +490,10 @@ content: "\e65d";
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
+}
+
+.opened .icon::before{
+  transform: rotate(180deg);
 }
 
 .iconMore {
