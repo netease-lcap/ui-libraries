@@ -1,17 +1,23 @@
 <!-- 表格行拖拽 -->
 <template>
 <u-linear-layout direction="vertical">
-<u-table-view :data-source="list" value-field="name" draggable virtual style="max-height: 100vh" tree-display :item-height="41" ref="tableView">
-    <u-table-view-column type="dragHandler" width="30"></u-table-view-column>
-    <u-table-view-column type="checkbox" width="30"></u-table-view-column>
-    <u-table-view-column title="用户名" field="name" width="20%" ellipsis></u-table-view-column>
-    <u-table-view-column title="手机号码" field="phone" width="20%" ellipsis></u-table-view-column>
-    <u-table-view-column title="地址" field="address" ellipsis></u-table-view-column>
-    <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%" ellipsis></u-table-view-column>
-    <template #dragGhost="{item}">
-        <div style="padding:15px;background:white;border:1px solid #ddd; width:100px;">{{item && item.name}}</div>
-    </template>
-</u-table-view>
+    <u-linear-layout>
+        <u-number-input v-model="rowIndex1"></u-number-input>
+        <u-button @click="scrollToRowIndex">scrollToRowIndex</u-button>
+        <u-input v-model="value"></u-input>
+        <u-button @click="scrollToValue">scrollToValue</u-button>
+    </u-linear-layout>
+    <u-table-view :data-source="list" value-field="name" draggable virtual style="max-height: 100vh" tree-display :item-height="41" ref="tableView">
+        <u-table-view-column type="dragHandler" width="30"></u-table-view-column>
+        <u-table-view-column type="checkbox" width="30"></u-table-view-column>
+        <u-table-view-column title="用户名" field="name" width="20%" ellipsis></u-table-view-column>
+        <u-table-view-column title="手机号码" field="phone" width="20%" ellipsis></u-table-view-column>
+        <u-table-view-column title="地址" field="address" ellipsis></u-table-view-column>
+        <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%" ellipsis></u-table-view-column>
+        <template #dragGhost="{item}">
+            <div style="padding:15px;background:white;border:1px solid #ddd; width:100px;">{{item && item.name}}</div>
+        </template>
+    </u-table-view>
 </u-linear-layout>
 </template>
 <script>
@@ -19,6 +25,8 @@ export default {
     data(){
         return {
             list: this.getList(),
+            rowIndex1: null,
+            value: '',
         }
     },
     methods: {
@@ -59,6 +67,12 @@ export default {
             }
             console.log(result.length, result[result.length-1].name)
             return result;
+        },
+        scrollToRowIndex() {
+            this.$refs.tableView.scrollToElement(this.rowIndex1);
+        },
+        scrollToValue() {
+            this.$refs.tableView.scrollToElement(null, this.value);
         },
     },
 };

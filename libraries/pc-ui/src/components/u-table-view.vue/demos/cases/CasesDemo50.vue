@@ -15,6 +15,7 @@
         </u-tabs>
        <u-button @click="onClickReload">click reload</u-button>
        <u-input :value.sync="inputValue"></u-input>
+       <u-button @click="scrollToElement">scrollToElement</u-button>
        <!-- <u-table-view striped :data-source="load1" pagination resizable :page-size="1000" ref="tableview" virtual :item-height="42" style="max-height: 600px" ellipsis>
             <u-table-view-column-dynamic :data-source="loadSubList" ellipsis>
                 <div slot="title" slot-scope="{ columnItem }">
@@ -25,7 +26,7 @@
                 </template>
             </u-table-view-column-dynamic>
         </u-table-view> -->
-        <u-table-view striped :data-source="list" pagination resizable :page-size="1000" ref="tableview" virtual :item-height="42" style="max-height: 600px" ellipsis>
+        <u-table-view striped :data-source="list" pagination resizable :page-size="1000" ref="tableview" virtual :item-height="41" style="max-height: 600px" ellipsis>
             <u-table-view-column-dynamic :data-source="loadSubList" ellipsis>
                 <div slot="title" slot-scope="{ columnItem }">
                     <u-text>{{ columnItem.name }}</u-text>
@@ -138,6 +139,9 @@ export default {
                 this.list = res.list;
             })
         },
+        scrollToElement() {
+            this.$refs.tableview.scrollToElement(this.inputValue);
+        }
     },
 };
 </script>

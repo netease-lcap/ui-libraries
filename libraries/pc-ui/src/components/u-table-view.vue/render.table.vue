@@ -38,7 +38,7 @@
             <div :class="$style.body" ref="body" :style="{ height: number2Pixel(bodyHeight) }" @scroll="onBodyScroll"
                 :sticky-fixed="useStickyFixed">
                 <f-scroll-view :class="$style.scrollcview" @scroll="onScrollView" ref="scrollView" :native="nativeScroll" :hide-scroll="!!tableMetaIndex">
-                    <u-table ref="bodyTable" :class="$style['body-table']" :line="line" :striped="striped" :sticky-fixed="useStickyFixed" :style="{ width: number2Pixel(tableWidth)}">
+                    <u-table ref="bodyTable" :class="$style['body-table']" :line="line" :striped="striped" :sticky-fixed="useStickyFixed" :style="{ width: number2Pixel(tableWidth), position: virtual && currentData && currentData.length?'absolute': undefined}">
                         <colgroup>
                             <col v-for="(columnVM, columnIndex) in visibleColumnVMs" :key="columnIndex" :width="columnVM.computedWidth">
                         </colgroup>
@@ -187,7 +187,6 @@ import UTableRenderTd from './render.td.vue';
 import UTableRenderTr from './render.tr.vue';
 import UTableRenderTrExpander from './render.tr.expander.vue';
 import UTableRenderTh from './render.th.vue';
-
 
 export default {
     name: 'u-table-render',
@@ -346,11 +345,10 @@ export default {
             this.currentSorting = sorting;
         },
         virtualTop() {
-            this.$refs.virtualPlaceholder[0].style.height = this.virtualTop + this.virtualBottom + 'px';
             this.$refs.bodyTable[0].$el.style.transform = `translateY(${this.virtualTop}px)`;
         },
-        virtualBottom() {
-            this.$refs.virtualPlaceholder[0].style.height = this.virtualTop + this.virtualBottom + 'px';
+        virtualHeight() {
+            this.$refs.virtualPlaceholder[0].style.height = `${this.virtualHeight}px`;
         },
     },
     computed: {
@@ -734,6 +732,96 @@ export default {
                 tablewrap: this.$refs.tablewrap[0],
             }
         },
+        // 滚动到某一行
+        // rowIndex 从 0 开始
+        scrollToElement(rowIndex, value) {
+            const tableEl = this.getRefs().bodyTable.$el;
+            if (!tableEl)
+                return;
+            if ([undefined, null].includes(rowIndex) && [undefined, null].includes(value)) {
+                return;
+            }
+            let finalRowIndex;
+            if(![undefined, null].includes(rowIndex)) {
+                finalRowIndex = +rowIndex;
+            } else if(![undefined, null].includes(value)) {
+                const index = this.currentData.findIndex((item) => item[this.valueField] === value);
+                if(index === -1) {
+                    return;
+                }
+                finalRowIndex = index;
+            }
+            let index = finalRowIndex > this.currentData.length - 1 ? this.currentData.length - 1 : finalRowIndex;
+            index = index < 0 ? 0 : index;
+            const trEls = tableEl.getElementsByTagName('TR');
+            const scrollView = this.getRefs().scrollView;
+            if (!scrollView)
+                return;
+            const scrollViewWrap = scrollView.$refs.wrap;
+            const clientHeight = scrollViewWrap.clientHeight;
+            let height = 0;
+
+            if (this.virtual) {
+                const currentItemHeight = this.itemHeight || trEls[0] && trEls[0].offsetHeight || 0;
+                const showCount = Math.ceil(clientHeight / currentItemHeight); // 表格展示的条数
+                let currentIndex = index; // 第一个位置
+                // 树型数据可能跳到未展开的item
+                while (this.treeDisplay && this.currentData[currentIndex] && this.currentData[currentIndex].display === 'none') {
+                    currentIndex--;
+                }
+                currentIndex = currentIndex < 0 ? 0 : currentIndex;
+                const isMax = currentIndex + showCount >= this.currentData.length;
+                if(isMax) {
+                    let tempShowCount = 0;
+                    let realShowCount = 0;
+                    // 树型数据，需要包含不展示的行
+                    for (let i = this.currentData.length - 1; i > 0; i--) {
+                        realShowCount++;
+                        if (this.currentData[i] && this.currentData[i].display !== 'none') {
+                            tempShowCount++;
+                        }
+                        if (tempShowCount === showCount) {
+                            break;
+                        }
+                    }
+                    currentIndex = this.currentData.length - realShowCount + 1;
+                }
+                for (let i = 0; i < currentIndex; i++) {
+                    if (this.currentData[i]) {
+                        height += this.getHeight(this.currentData[i]);
+                    }
+                }
+                const maxScrollTop = scrollViewWrap.scrollHeight - clientHeight;
+                const virtualTop = height > maxScrollTop ? maxScrollTop : height;
+                const wrapScrollTop = isMax? maxScrollTop : virtualTop;
+                if(wrapScrollTop === scrollViewWrap.scrollTop) {
+                    return;
+                }
+                // 直接跳转
+                scrollViewWrap.scrollTop = wrapScrollTop;
+                this.virtualTop = virtualTop;
+                this.virtualIndex =  currentIndex;
+                // 跳转到附近，带滚动效果。不太自然，暂时不用
+                // const isMinus = virtualTop > scrollViewWrap.scrollTop ? true : false;
+                // // 先滚到目标处附近
+                // const distance = isMinus? wrapScrollTop - currentItemHeight : wrapScrollTop + currentItemHeight;
+                // this.virtualTop = distance; // 避免初始的时候白一下的情况
+                // scrollViewWrap.scrollTop = distance; // 滚动条滚到目标附近
+                // scrollTo(wrapScrollTop, {
+                //     container: scrollViewWrap,
+                // });
+            } else {
+                for (let i = 0; i < index; i++) {
+                    if (trEls[i]) {
+                        height += trEls[i].offsetHeight;
+                    }
+                }
+                scrollViewWrap.scrollTo({
+                    top: height,
+                    behavior: 'smooth',
+                });
+            }
+        }
     },
 };
 </script>
