@@ -66,7 +66,10 @@ export default createComponent({
       default: '请选择',
     },
     clearable: Boolean,
-    clearFilter: String,
+    clearFilter: {
+      type: String,
+      default: 'cancel',
+    },
 
     pageable: { type: [Boolean, String], default: false },
     filterable: { type: Boolean, default: false },

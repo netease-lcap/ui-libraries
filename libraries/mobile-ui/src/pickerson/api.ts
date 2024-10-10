@@ -325,7 +325,7 @@ namespace nasl.ui {
         }]
       },
     })
-    clearFilter: 'none' | 'cancel' | 'confirm' | 'always' = 'none';
+    private clearFilter: 'none' | 'cancel' | 'confirm' | 'always' = 'cancel';
     @Prop({
       group: '状态属性',
       title: '预览',
