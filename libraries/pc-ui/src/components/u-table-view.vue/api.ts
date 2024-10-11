@@ -137,8 +137,8 @@ namespace nasl.ui {
       ): void {}
 
       @Method({
-        title: '滚动到指定元素',
-        description: '滚动到指定元素',
+        title: '滚动到指定行列',
+        description: '滚动到指定行列',
       })
       scrollToElement(
         @Param({
@@ -151,6 +151,11 @@ namespace nasl.ui {
             description: '行数据唯一标识，与值字段配合使用',
         })
         value?: nasl.core.Integer,
+        @Param({
+            title: '列字段',
+            description: '列的唯一标识，对应表格列的值字段设置',
+        })
+        columnField?: nasl.core.Integer,
       ): void {}
 
       constructor(options?: Partial<UTableViewOptions<T, V, P, M>>) { super(); }

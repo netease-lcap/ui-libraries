@@ -2855,8 +2855,8 @@ export default {
             item.editing = '';
         },
         // 滚动到某一行
-        scrollToElement(rowIndex, value) {
-            this.$refs.tableRender.scrollToElement(rowIndex, value);
+        scrollToElement(rowIndex, value, columnField) {
+            this.$refs.tableRender.scrollToElement(rowIndex, value, columnField);
         }
     },
 };

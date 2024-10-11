@@ -58,6 +58,32 @@
             <u-table-view-column title="地址" field="address" ellipsis></u-table-view-column>
             <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%" ellipsis></u-table-view-column>
         </u-table-view>
+        <u-linear-layout>
+            <u-text>普通表格-同步数据源-跳转列</u-text>
+            <u-number-input v-model="rowIndex5"></u-number-input>
+            <u-button @click="scrollToElement5">scrollToElement</u-button>
+            <u-input v-model="columnField5"></u-input>
+            <u-button @click="scrollToElementColumn5">scrollToElementColumn</u-button>
+        </u-linear-layout>
+        <u-table-view striped :dataSource="data"  style="max-height: 400px" ref="tableView5" :defaultColumnWidth="400">
+            <u-table-view-column title="用户名" field="name" ellipsis fixed></u-table-view-column>
+            <u-table-view-column title="手机号码" field="phone" ellipsis></u-table-view-column>
+            <u-table-view-column title="地址" field="address" ellipsis></u-table-view-column>
+            <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" ellipsis></u-table-view-column>
+        </u-table-view>
+        <u-linear-layout>
+            <u-text>虚拟滚动表格-静态数据源-跳转列</u-text>
+            <u-number-input v-model="rowIndex6"></u-number-input>
+            <u-button @click="scrollToElement6">scrollToElement</u-button>
+            <u-input v-model="columnField6"></u-input>
+            <u-button @click="scrollToElementColumn6">scrollToElementColumn</u-button>
+        </u-linear-layout>
+        <u-table-view striped :dataSource="data" virtual  style="max-height: 500px" ref="tableView6" :itemHeight="41" :defaultColumnWidth="400">
+            <u-table-view-column title="用户名" field="name" ellipsis fixed></u-table-view-column>
+            <u-table-view-column title="手机号码" field="phone" ellipsis></u-table-view-column>
+            <u-table-view-column title="地址" field="address" ellipsis></u-table-view-column>
+            <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" ellipsis></u-table-view-column>
+        </u-table-view>
     </u-linear-layout>
     </template>
     <script>
@@ -107,6 +133,8 @@
                 rowIndex2: null,
                 rowIndex3: null,
                 rowIndex4: null,
+                rowIndex5: null,
+                columnField5: null,
             };
         },
         methods: {
@@ -137,7 +165,19 @@
                 this.data[0].name = '张三-5';
                 this.data[5].name = '张三-51';
                 this.data = [...this.data];
-            }
+            },
+            scrollToElement5() {
+                this.$refs.tableView5.scrollToElement(this.rowIndex5);
+            },
+            scrollToElementColumn5() {
+                this.$refs.tableView5.scrollToElement(this.rowIndex5, null, this.columnField5);
+            },
+            scrollToElement6() {
+                this.$refs.tableView6.scrollToElement(this.rowIndex6);
+            },
+            scrollToElementColumn6() {
+                this.$refs.tableView6.scrollToElement(this.rowIndex6, null, this.columnField6);
+            },
         },
     };
     </script>

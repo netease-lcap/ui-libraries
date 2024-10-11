@@ -734,11 +734,11 @@ export default {
         },
         // 滚动到某一行
         // rowIndex 从 0 开始
-        scrollToElement(rowIndex, value) {
+        scrollToElement(rowIndex, value, columnField) {
             const tableEl = this.getRefs().bodyTable.$el;
             if (!tableEl)
                 return;
-            if ([undefined, null].includes(rowIndex) && [undefined, null].includes(value)) {
+            if ([undefined, null].includes(rowIndex) && [undefined, null].includes(value) && [undefined, null].includes(columnField)) {
                 return;
             }
             let finalRowIndex;
@@ -759,48 +759,56 @@ export default {
                 return;
             const scrollViewWrap = scrollView.$refs.wrap;
             const clientHeight = scrollViewWrap.clientHeight;
-            let height = 0;
-
             if (this.virtual) {
-                const currentItemHeight = this.itemHeight || trEls[0] && trEls[0].offsetHeight || 0;
-                const showCount = Math.ceil(clientHeight / currentItemHeight); // 表格展示的条数
-                let currentIndex = index; // 第一个位置
-                // 树型数据可能跳到未展开的item
-                while (this.treeDisplay && this.currentData[currentIndex] && this.currentData[currentIndex].display === 'none') {
-                    currentIndex--;
-                }
-                currentIndex = currentIndex < 0 ? 0 : currentIndex;
-                const isMax = currentIndex + showCount >= this.currentData.length;
-                if(isMax) {
-                    let tempShowCount = 0;
-                    let realShowCount = 0;
-                    // 树型数据，需要包含不展示的行
-                    for (let i = this.currentData.length - 1; i > 0; i--) {
-                        realShowCount++;
-                        if (this.currentData[i] && this.currentData[i].display !== 'none') {
-                            tempShowCount++;
-                        }
-                        if (tempShowCount === showCount) {
-                            break;
-                        }
-                    }
-                    currentIndex = this.currentData.length - realShowCount + 1;
-                }
-                for (let i = 0; i < currentIndex; i++) {
-                    if (this.currentData[i]) {
-                        height += this.getHeight(this.currentData[i]);
+                if(columnField) {
+                    const scrollLeft = this.getColumnScrollLeft(columnField);
+                    if(scrollLeft !== null) {
+                        scrollViewWrap.scrollLeft = scrollLeft;
                     }
                 }
-                const maxScrollTop = scrollViewWrap.scrollHeight - clientHeight;
-                const virtualTop = height > maxScrollTop ? maxScrollTop : height;
-                const wrapScrollTop = isMax? maxScrollTop : virtualTop;
-                if(wrapScrollTop === scrollViewWrap.scrollTop) {
-                    return;
+                if (![undefined, null].includes(index)) {
+                    let height = 0;
+                    const currentItemHeight = this.itemHeight || trEls[0] && trEls[0].offsetHeight || 0;
+                    const showCount = Math.ceil(clientHeight / currentItemHeight); // 表格展示的条数
+                    let currentIndex = index; // 第一个位置
+                    // 树型数据可能跳到未展开的item
+                    while (this.treeDisplay && this.currentData[currentIndex] && this.currentData[currentIndex].display === 'none') {
+                        currentIndex--;
+                    }
+                    currentIndex = currentIndex < 0 ? 0 : currentIndex;
+                    const isMax = currentIndex + showCount >= this.currentData.length;
+                    if(isMax) {
+                        let tempShowCount = 0;
+                        let realShowCount = 0;
+                        // 树型数据，需要包含不展示的行
+                        for (let i = this.currentData.length - 1; i > 0; i--) {
+                            realShowCount++;
+                            if (this.currentData[i] && this.currentData[i].display !== 'none') {
+                                tempShowCount++;
+                            }
+                            if (tempShowCount === showCount) {
+                                break;
+                            }
+                        }
+                        currentIndex = this.currentData.length - realShowCount + 1;
+                    }
+                    for (let i = 0; i < currentIndex; i++) {
+                        if (this.currentData[i]) {
+                            height += this.getHeight(this.currentData[i]);
+                        }
+                    }
+                    const maxScrollTop = scrollViewWrap.scrollHeight - clientHeight;
+                    const virtualTop = height > maxScrollTop ? maxScrollTop : height;
+                    const wrapScrollTop = isMax? maxScrollTop : virtualTop;
+                    if(wrapScrollTop === scrollViewWrap.scrollTop) {
+                        return;
+                    }
+                    // 直接跳转
+                    scrollViewWrap.scrollTop = wrapScrollTop;
+                    this.virtualTop = virtualTop;
+                    this.virtualIndex =  currentIndex;
                 }
-                // 直接跳转
-                scrollViewWrap.scrollTop = wrapScrollTop;
-                this.virtualTop = virtualTop;
-                this.virtualIndex =  currentIndex;
+                
                 // 跳转到附近，带滚动效果。不太自然，暂时不用
                 // const isMinus = virtualTop > scrollViewWrap.scrollTop ? true : false;
                 // // 先滚到目标处附近
@@ -810,18 +818,46 @@ export default {
                 // scrollTo(wrapScrollTop, {
                 //     container: scrollViewWrap,
                 // });
+                
             } else {
-                for (let i = 0; i < index; i++) {
-                    if (trEls[i]) {
-                        height += trEls[i].offsetHeight;
+                let height;
+                if (![undefined, null].includes(index)) {
+                    height = 0;
+                    for (let i = 0; i < index; i++) {
+                        if (trEls[i]) {
+                            height += trEls[i].offsetHeight;
+                        }
                     }
+                }
+                let scrollLeft;
+                if(columnField) {
+                    scrollLeft = this.getColumnScrollLeft(columnField);
                 }
                 scrollViewWrap.scrollTo({
                     top: height,
+                    left: scrollLeft,
                     behavior: 'smooth',
                 });
             }
-        }
+        },
+        /**
+         * 计算列左侧滚动距离
+         * @param columnField 列字段
+         */
+        getColumnScrollLeft(columnField) {
+            const columnIndex = this.visibleColumnVMs.findIndex((columnVM) => columnVM.field === columnField);
+            if(columnIndex !== -1) {
+                let left = 0;
+                for (let i = 0; i < columnIndex; i++) {
+                    const columnVM = this.visibleColumnVMs[i];
+                    if (columnVM && !columnVM.fixed) {
+                        left += columnVM.computedWidth;
+                    }
+                }
+                return left; 
+            }
+            return null;
+        },
     },
 };
 </script>
