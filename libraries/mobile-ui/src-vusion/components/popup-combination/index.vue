@@ -7,10 +7,11 @@
     </span>
     <u-popup
       ref="popup"
-      :style="staticStyleVar"
+      :style="staticStyle"
       reference="prev"
       v-bind="$attrs"
       v-on="$listeners"
+      @before-open="beforeOpen"
       :vusion-scope-id="$vnode.context.$options._scopeId">
         <slot></slot>
     </u-popup>
@@ -19,45 +20,22 @@
 
 <script>
 import UPopupCombination from 'cloud-ui.vusion/src/components/u-popup-combination.vue/index.vue';
+import { context } from '../../../src/mixins/popup/context';
 
 export default {
   name: 'van-popup-combination',
   extends: UPopupCombination,
   data() {
     return {
-      tempP: null,
-      staticStyleVar: '',
+      staticStyle: '',
     }
   },
-  computed: {
-    // 获取静态样式中的变量
-    // staticStyleVar() {
-    //   const { staticStyle } = this.$vnode.data;
-    //   let style = '';
-    //   for (const key in staticStyle) {
-    //     if (Object.prototype.hasOwnProperty.call(staticStyle, key)) {
-    //       if (/^--/.test(key)) {
-    //         const value = staticStyle[key];
-    //         style += `${key}: ${value};`
-    //       }
 
-    //     }
-    //   }
-    //   return style;
-    // }
-  },
-  mounted() {
-    this.tempP = this.$slots.default;
-    this.staticStyleVar = this.getStaticStyleVar(this.$vnode.data.staticStyle)
-  },
-  updated() {
-    this.staticStyleVar = this.getStaticStyleVar(this.$vnode.data.staticStyle)
-  },
   methods: {
     ifDesigner() {
       return this.$env && this.$env.VUE_APP_DESIGNER;
     },
-    getStaticStyleVar(staticStyle) {
+    getStaticStyle(staticStyle) {
       let style = '';
       for (const key in staticStyle) {
         if (Object.prototype.hasOwnProperty.call(staticStyle, key)) {
@@ -68,8 +46,15 @@ export default {
 
         }
       }
+
+      // 为了避免被遮挡，z-index 需要比 popup 高
+      style += `z-index: ${context.zIndex + 2};`
+
       return style;
-    }
+    },
+    beforeOpen() {
+      this.staticStyle = this.getStaticStyle(this.$vnode.data.staticStyle)
+    },
   }
 };
 </script>
