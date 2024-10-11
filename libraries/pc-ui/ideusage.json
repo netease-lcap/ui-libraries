@@ -755,6 +755,7 @@
             "additionalAttribute": {
                 ":value": null
             },
+            "forceUpdateWhenAttributeChange": true,
             "translateBindingProperty": ["value", "placeholder"]
         }
     },
