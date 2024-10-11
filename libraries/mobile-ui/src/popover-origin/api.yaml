@@ -1,0 +1,42 @@
+- name: van-popover-origin
+  title: 气泡弹出框
+  icon: popup
+  labels:
+    - Feedback
+  description: 点击，弹出气泡式的卡片浮层。
+  attrs:
+  slots:
+    - concept: Slot
+      name: default
+      description: 自定义弹出的内容。
+    - concept: Slot
+      name: reference
+      description: 弹出层触发节点。
+  events:
+    - name: open
+      title: 弹出时
+      description: 弹出时触发。
+      params:
+        - name: $event
+          type: ""
+          description: 空
+        - name: senderVM
+          type: UPopup
+          description: 发送事件实例
+    - name: close
+      title: 隐藏后
+      description: 隐藏时触发。
+      params:
+        - name: $event
+          type: ""
+          description: 空
+        - name: senderVM
+          type: UPopup
+          description: 发送事件实例
+  methods:
+    - name: open
+      description: 弹出实例。
+      params: []
+    - name: close
+      description: 关闭实例。
+      params: []

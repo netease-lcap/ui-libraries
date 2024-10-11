@@ -637,6 +637,33 @@
         }
     },
     {
+      "name": "VanPopoverOrigin",
+      "ideusage": {
+          "idetype": "container",
+          "namedSlotOmitWrapper": ["reference"],
+          "displaySlotInline": {
+              "reference": true
+          },
+          "events": {
+              "click": true
+          },
+          "eventsEffect": "reference",
+          "forceRefresh": { "slot": "reference" },
+          "selector": [
+              {
+                  "expression": "this.getElement(el => el.slotTarget === 'reference')",
+                  "cssSelector": "span[class^='van-popover-origin']",
+                  "placement": "tail"
+              },
+              {
+                  "expression": "this",
+                  "cssSelector": "div[class^='van-popover-origin__content']",
+                  "placement": "tail"
+              }
+          ]
+      }
+    },
+    {
         "name": "VanDialog",
         "ideusage": {
             "idetype": "modal",

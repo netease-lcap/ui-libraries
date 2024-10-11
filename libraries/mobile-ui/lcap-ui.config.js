@@ -305,8 +305,12 @@ module.exports = {
       name: 'calendar',
       alias: '日期选择',
     },
-    // { group: 'Feedback', show: true, name: 'popover', alias: '气泡弹出框' },
-    // { group: 'Feedback', show: true, name: 'popover-combination', alias: '气泡弹出框' },
+    {
+      group: 'Feedback',
+      show: false, // 先加进来，后面再决定是否显示
+      name: 'popover-origin',
+      alias: '气泡弹出框',
+    },
     {
       group: 'Feedback',
       show: true,

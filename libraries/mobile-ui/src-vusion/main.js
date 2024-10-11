@@ -86,6 +86,7 @@ import '../src/picker/index.less';
 import '../src/pickerson/index.less';
 import '../src/popover-combination/index.less';
 import '../src/popover/index.less';
+import '../src/popover-origin/index.less';
 import '../src/progress/index.less';
 import '../src/pull-refresh/index.less';
 import '../src/radio-group/index.less';

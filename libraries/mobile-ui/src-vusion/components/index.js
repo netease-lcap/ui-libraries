@@ -70,6 +70,7 @@ export { default as VanPicker } from '../../src/picker';
 export { default as VanPickerson } from '../../src/pickerson';
 export { default as VanPopover } from '../../src/popover';
 export { default as VanPopoverItem } from '../../src/popover-item';
+export { default as VanPopoverOrigin } from '../../src/popover-origin';
 // export { default as VanPopoverCombination } from '../../src/popover-combination';
 // export { default as VanPopoverCombinationItem } from '../../src/popover-combination-item';
 
