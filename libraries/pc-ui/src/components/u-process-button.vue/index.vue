@@ -4,16 +4,35 @@
             {{ item.displayText }}
         </u-button>
         <u-modal v-if="currentItem"
+            :class="$style.modalSize"
             :title="currentItem.displayText"
             :visible="!!currentItem"
             ref="modal"
+            :name="currentItem.name"
             @close="currentItem = undefined">
             <u-form label-layout="block" ref="form">
                 <u-form-item :label="$tt('approvalComments')" :required="currentItem.commentRequired" :rules="currentItem.commentRequired?'required':''" v-if="!['reassign', 'addSign'].includes(currentItem.name)">
                     <u-textarea v-model="model.comment" size="normal full" :placeholder="$tt('placeholder')">
                     </u-textarea>
                 </u-form-item>
-                <u-form-item :label="$tt('selectTransfer')" required :rules="`required #${$tt('selectTransferEmpty')}`" v-if="['reassign', 'addSign'].includes(currentItem.name)">
+                <u-form-item v-if="currentItem.name === 'addSign'" :label="$tt('signMethod')" required>
+                    <div :class="$style.signOptionSection">
+                        <div 
+                            :class="$style.signOption" 
+                            v-for="item in signOptions" 
+                            :selected="model.method === item.value"
+                            @click="model.method = item.value">
+                            <u-radios v-model="model.method">
+                                <u-radio :label="item.value"></u-radio>
+                            </u-radios>
+                            <div>
+                                <div style="font-weight: 500;">{{ item.title }}</div>
+                                <div>{{ item.description }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </u-form-item>      
+                <u-form-item :label="$tt(currentItem.name === 'addSign' ? 'signPerson' : 'selectTransfer')" required :rules="`required #${$tt('selectTransferEmpty')}`" v-if="['reassign', 'addSign'].includes(currentItem.name)">
                     <u-select
                         size="full"
                         text-field="userName"
@@ -51,10 +70,12 @@ export default {
             model: {
                 comment: '',
                 userName: '',
+                method: 'CurrentNode',
             },
             currentItem: undefined,
             taskId: undefined,
             permissionDetails: [],
+            signOptions: [],
         };
     },
     created() {
@@ -77,6 +98,9 @@ export default {
                     },
                 });
                 this.permissionDetails = (res.data || []).filter((item) => item.operationEnabled);
+                if (this.permissionDetails.some((item) => item?.name === 'addSign')) { // 加签
+                    this.getSignOptions(); 
+                }
             }
         },
         getColor(item) {
@@ -162,6 +186,7 @@ export default {
             Object.assign(this.model, {
                 comment: '',
                 userName: '',
+                method: 'CurrentNode',
             });
         },
         /**
@@ -225,7 +250,8 @@ export default {
                 const res = await this.$processV2.addSignTask({
                     body: {
                         taskId: this.taskId,
-                        userForAddSign: this.model.userName
+                        userForAddSign: this.model.userName,
+                        policyForAddSign: this.model.method,
                     },
                 });
                 if(res?.code === "200") {
@@ -249,6 +275,26 @@ export default {
                     });
                     return result.data;
                 }
+            }
+        },
+        async getSignOptions() {
+            const res = await this.$processV2.getTaskInfo({
+                body: {
+                    taskId: this.taskId,
+                },
+            });
+            const approvalPolicy = res?.data?.approvalPolicy;
+            // 或签、会签、依次审批
+            if (['simple', 'parallel', 'sequence'].includes(approvalPolicy)) {
+                const options = approvalPolicy === 'simple'
+                    // ? ['CurrentNode', 'PreviousNode', 'NextNode'] // 后端暂时不支持NextNode，先屏蔽
+                    ? ['CurrentNode', 'PreviousNode']
+                    : ['CurrentNode'];
+                this.signOptions = options.map(item => ({
+                    title: this.$tt(`${item}SignTitle`),
+                    description: this.$tt(`${item}SignDesc`),
+                    value: item,
+                }));
             }
         },
     },
