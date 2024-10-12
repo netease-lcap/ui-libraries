@@ -158,7 +158,10 @@ export default createComponent({
           },
         });
 
-        return res.data;
+        return (res.data || []).map((it) => ({
+          ...(it || {}),
+          userId: it?.userId || it?.userName,
+        }));
       } catch (error) {
         console.log(error);
         return [];
@@ -434,7 +437,7 @@ export default createComponent({
                     input: () => (
                       <Picker
                         value={this.dialog.reassign}
-                        valueField="userName"
+                        valueField="userId"
                         textField="userName"
                         class={bem('dialog-picker')}
                         dataSource={() => this.getUserList(this.taskId, this.dialog.item)}
