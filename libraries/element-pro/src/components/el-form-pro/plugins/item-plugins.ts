@@ -1,4 +1,4 @@
-import { type VNode } from 'vue';
+import { type VNode, type CreateElement } from 'vue';
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils';
 import { isEmptyVNodes } from '@lcap/vue2-utils/plugins/utils';
 import type { MapGet } from '@lcap/vue2-utils/plugins/types';
@@ -24,7 +24,7 @@ import {
   LabelWidthType,
   LCAP_FORM_UID,
 } from '../constants';
-import { FormExtendsContext, FormItemExtendsContext } from '../types';
+import { FormExtendsContext, FormItemExtendsContext, FormRangeField } from '../types';
 import { findVNode } from '../../../utils/vnode';
 import { isFormVNode, isModelVNode, isRangeModelVNode } from '../utils';
 
@@ -111,6 +111,140 @@ const useRules = ({ useComputed }: MapGet) => {
   const disableValidate = useComputed('disableValidate', (val) => val ?? false);
 
   return computed(() => (disableValidate.value ? [] : rules.value));
+};
+
+const cloneComponentVNode = (h: CreateElement, vnode: VNode, { propData, listeners }) => {
+  return h(vnode.componentOptions.tag, {
+    attrs: {
+      ...vnode.data.attrs,
+    },
+    props: { ...propData },
+    on: listeners,
+    nativeOn: vnode.data.nativeOn,
+    scopedSlots: vnode.data.scopedSlots,
+    staticClass: vnode.data.staticClass,
+    staticStyle: vnode.data.staticStyle,
+    class: vnode.data.class,
+    style: vnode.data.style,
+  }, vnode.componentOptions.children || []);
+};
+
+const useProxyFormFieldVNode = (h: CreateElement, { fieldName, initialValue, initFormField }) => {
+  let isControlled = false;
+
+  return (vnode: VNode) => {
+    const { prop = 'value', event } = (vnode.componentOptions.Ctor as any).options.model;
+    if (!vnode.componentInstance && vnode.componentOptions && vnode.componentOptions.propsData) {
+      isControlled = Object.prototype.hasOwnProperty.call(vnode.componentOptions.propsData, prop);
+    }
+
+    const formFieldName = unref(fieldName) as string;
+    const propData: Record<string, any> = vnode.componentOptions.propsData || {};
+    const listeners: Record<string, any> = vnode.componentOptions.listeners || {};
+    const formField = initFormField({
+      name: formFieldName,
+      value: getNotUndefinedValue(propData[prop], initialValue),
+    });
+
+    formField.setInitalValue(initialValue);
+
+    console.log(vnode);
+
+    if (isControlled) {
+      if (formField.getValue() !== propData[prop]) {
+        formField.setValue(propData[prop], false);
+      }
+
+      const updateValue = listeners[event];
+
+      formField.setChangeListener((v) => {
+        updateValue(v);
+      });
+
+      listeners[event] = (v) => {
+        formField.setValue(v, false);
+        updateValue(v);
+      };
+
+      return vnode;
+    }
+
+    propData[prop] = formField.getValue();
+    listeners[event] = (v) => {
+      formField.setValue(v);
+    };
+
+    return cloneComponentVNode(h, vnode, { propData, listeners });
+  };
+};
+
+const useProxyRangeFieldVNode = (h: CreateElement, {
+  initFormRangeField, uid,
+  startFieldName, endFieldName,
+  startInitialValue, endInitialValue,
+}) => {
+  let isControlled = false;
+  return (vnode: VNode) => {
+    const [startProp, endProp] = (vnode.componentOptions.Ctor as any).options.rangeModel;
+    const startEvent = `update:${startProp}`;
+    const endEvent = `update:${endProp}`;
+    if (!vnode.componentInstance && vnode.componentOptions && vnode.componentOptions.propsData) {
+      isControlled = Object.prototype.hasOwnProperty.call(vnode.componentOptions.propsData, startProp)
+        && Object.prototype.hasOwnProperty.call(vnode.componentOptions.propsData, endProp);
+    }
+
+    const propData: Record<string, any> = vnode.componentOptions.propsData || {};
+    const listeners: Record<string, any> = vnode.componentOptions.listeners || {};
+
+    const formRangeField: FormRangeField = initFormRangeField({
+      uid,
+      name: [startFieldName.value, endFieldName.value],
+      value: [getNotUndefinedValue(propData[startProp], startInitialValue), getNotUndefinedValue(propData[endProp], endInitialValue)],
+    });
+
+    formRangeField.setInitalValue([startInitialValue, endInitialValue]);
+
+    const models = [[startProp, startEvent], [endProp, endEvent]];
+    if (isControlled) {
+      models.forEach(([prop, event], i) => {
+        if (formRangeField.getValue(i) !== propData[prop]) {
+          formRangeField.setValue(i, propData[prop], false);
+        }
+
+        const updateValue = listeners[event];
+        listeners[event] = (v) => {
+          formRangeField.setValue(i, v, false);
+          updateValue(v);
+        };
+      });
+
+      formRangeField.setChangeListener(
+        (val) => vnode.componentInstance?.$emit(startEvent, val),
+        (val) => vnode.componentInstance?.$emit(endEvent, val),
+      );
+
+      return vnode;
+    }
+
+    models.forEach(([prop, event], i) => {
+      propData[prop] = formRangeField.getValue(i);
+      listeners[event] = (v) => {
+        formRangeField.setValue(i, v);
+      };
+
+      formRangeField.setChangeListener(null, null);
+    });
+
+    return h(vnode.componentOptions.tag, {
+      attrs: vnode.data.attrs,
+      props: { ...propData },
+      on: listeners,
+      nativeOn: vnode.data.nativeOn,
+      scopedSlots: vnode.data.scopedSlots,
+      staticClass: vnode.data.staticClass,
+      staticStyle: vnode.data.staticStyle,
+    }, vnode.componentOptions.children || []);
+  };
 };
 
 export const useExtensPlugin: NaslComponentPluginOptions = {
@@ -211,59 +345,15 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       endInitialValue,
     ] = props.get<[any, any, any]>(['initialValue', 'startInitialValue', 'endInitialValue']);
 
-    const proxyRangeFieldVNode = (vnode: VNode) => {
-      const [startProp, endProp] = (vnode.componentOptions.Ctor as any).options.rangeModel;
-      const propData: Record<string, any> = vnode.componentOptions.propsData || {};
-      const listeners: Record<string, any> = vnode.componentOptions.listeners || {};
-
-      const formRangeField = initFormRangeField({
-        uid,
-        name: [startFieldName.value, endFieldName.value],
-        value: [getNotUndefinedValue(propData[startProp], startInitialValue), getNotUndefinedValue(propData[endProp], endInitialValue)],
-      });
-
-      formRangeField.setInitalValue([startInitialValue, endInitialValue]);
-
-      propData.formRangeField = formRangeField;
-
-      return h(vnode.componentOptions.tag, {
-        attrs: vnode.data.attrs,
-        props: { ...propData },
-        on: listeners,
-        nativeOn: vnode.data.nativeOn,
-        scopedSlots: vnode.data.scopedSlots,
-        staticClass: vnode.data.staticClass,
-        staticStyle: vnode.data.staticStyle,
-      }, vnode.componentOptions.children || []);
-    };
-
-    const proxyFormFieldVNode = (vnode: VNode) => {
-      const { prop = 'value' } = (vnode.componentOptions.Ctor as any).options.model;
-      const formFieldName = unref(fieldName) as string;
-      const propData: Record<string, any> = vnode.componentOptions.propsData || {};
-      const listeners: Record<string, any> = vnode.componentOptions.listeners || {};
-
-      const formField = initFormField({
-        name: formFieldName,
-        value: getNotUndefinedValue(propData[prop], initialValue),
-      });
-
-      formField.setInitalValue(initialValue);
-
-      propData.formField = formField;
-
-      return h(vnode.componentOptions.tag, {
-        attrs: vnode.data.attrs,
-        props: { ...propData },
-        on: listeners,
-        nativeOn: vnode.data.nativeOn,
-        scopedSlots: vnode.data.scopedSlots,
-        staticClass: vnode.data.staticClass,
-        staticStyle: vnode.data.staticStyle,
-        class: vnode.data.class,
-        style: vnode.data.style,
-      }, vnode.componentOptions.children || []);
-    };
+    const proxyFormFieldVNode = useProxyFormFieldVNode(h, { fieldName, initialValue, initFormField });
+    const proxyRangeFieldVNode = useProxyRangeFieldVNode(h, {
+      initFormRangeField,
+      uid: fieldName.value,
+      startFieldName,
+      endFieldName,
+      startInitialValue,
+      endInitialValue,
+    });
 
     onUnmounted(() => {
       removeField(fieldName.value);
@@ -280,13 +370,9 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     watch(() => ([startFieldName.value || '', endFieldName.value || ''].join('|')), (val, oldVal) => {
       if (oldVal && oldVal !== val) {
         oldVal.split('|').forEach((n) => removeField(n));
-        removeField(uid);
+        removeField(fieldName.value);
       }
     });
-
-    // provide<FormItemExtendsContext>(FORM_ITEM_CONTEXT, {
-    //   name: computed(() => (name.value || unref(nameRef))),
-    // });
 
     return {
       rules,
@@ -318,7 +404,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
         const useRangeValue = getUseRangeValue();
 
-        if (result.vnode && useRangeValue && isRangeModelVNode(result.vnode)) {
+        if (result.vnode && (useRangeValue || (result.vnode.componentOptions.propsData && (result.vnode.componentOptions.propsData as any).range)) && isRangeModelVNode(result.vnode)) {
           result.collection[result.index] = proxyRangeFieldVNode(result.vnode);
         } else if (result.vnode && isModelVNode(result.vnode)) {
           result.collection[result.index] = proxyFormFieldVNode(result.vnode);
