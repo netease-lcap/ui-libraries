@@ -18,7 +18,7 @@ function parseCSSRules(cssContent: string, componentNames: string[], cssRulesDes
 
   // eslint-disable-next-line no-shadow
   getSelectorComponentName = getSelectorComponentName || ((selector: string, componentNames: string[]) => {
-    return componentNames.find((name) => new RegExp(`^\\.${name}_|^\\[class\\^=${name}__\\]`).test(selector));
+    return componentNames.find((name) => new RegExp(`^\\.${name}_|^\\[class\\*=${name}__\\]`).test(selector));
   });
 
   function fixSelector(selector) {
@@ -28,37 +28,15 @@ function parseCSSRules(cssContent: string, componentNames: string[], cssRulesDes
     return selectors
       .split(/,/g)
       .filter((sel) => !/^-(moz|webkit|ms|o)-|^_/.test(sel)) // 过滤掉浏览器前缀和 _ 开头的选择器
-      .map((sel) => sel.replace(hashClassRE, '[class^=$1__]')) // hash 类名改为 [class^=] 属性选择器
-      .flatMap((sel) => (mockStateRE.test(sel) ? [sel, sel.replace(mockStateRE, '.$1')] : [sel])) // 增加模拟伪类
+      .map((sel) => sel.replace(hashClassRE, '[class*=$1__]')) // hash 类名改为 [class*=] 属性选择器
+      .flatMap((sel) => (mockStateRE.test(sel) ? [sel, sel.replace(mockStateRE, '._$1')] : [sel])) // 增加模拟伪类
       .join(',');
   }
 
-  // const RE = {
-  //   component: /^@component ([\w\d-]+)$/,
-  //   'rule-desc': /^@rule-desc (.+)$/,
-  // };
-
   const cssRulesMap: Record<string, CSSRule[]> = {};
 
-  // let currentComponentName = '';
-  // let currentCSSRules: CSSRule[] | undefined;
-  // let lastRuleDesc: string | undefined;
   root.nodes.forEach((node) => {
-    if (node.type === 'comment') {
-      // const text = node.text;
-      // let match;
-      // if ((match = text.match(RE.component))) {
-      //   currentComponentName = match[1];
-      //   currentCSSRules = cssRulesMap[currentComponentName] = [] as CSSRule[];
-      // } else if ((match = text.match(RE['rule-desc']))) {
-      //   lastRuleDesc = match[1];
-      // }
-    } else if (node.type === 'rule') {
-      // if (
-      //   !(currentCSSRules
-      //   && node.selector.startsWith(`.${currentComponentName}`))
-      // ) return;
-
+    if (node.type === 'rule') {
       const selector = fixSelector(node.selector);
       if (!selector) return;
 
@@ -72,11 +50,6 @@ function parseCSSRules(cssContent: string, componentNames: string[], cssRulesDes
         if (decl.type !== 'decl') return;
         if (decl.prop.startsWith('--')) return;
 
-        // if (decl.toString().includes('important')) {
-        //     delete decl.parent;
-        //     delete decl.source;
-        //     console.log(JSON.stringify(decl));
-        // }
         const value = decl.value.replace(/var\(.+?\)/g, (m) => m.replace(/\s+/g, ''));
         let match;
         const patchImportant = (obj: { defaultValue: string }) => ({ ...obj, important: decl.important });
@@ -188,7 +161,6 @@ function parseCSSRules(cssContent: string, componentNames: string[], cssRulesDes
         parsedStyle,
       });
     }
-    // lastRuleDesc = undefined;
   });
 
   Object.keys(cssRulesMap).forEach((componentName) => {
