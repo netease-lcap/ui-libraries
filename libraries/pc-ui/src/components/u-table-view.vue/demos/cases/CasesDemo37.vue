@@ -56,6 +56,34 @@
         <u-table-view-column title="地址" field="address"></u-table-view-column>
         <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%"></u-table-view-column>
     </u-table-view>
+    <u-text>动态列在分组下加载</u-text>
+    <u-button @click="$refs.tableview4.reload()">刷新</u-button>
+    <u-table-view striped :data-source="load" ref="tableview4" :defaultColumnWidth="200">
+        <u-table-view-column type="checkbox" title="选择" width="8%" key="a"></u-table-view-column>
+        <u-table-view-column title="用户名" field="name" width="12%" key="b"></u-table-view-column>
+        <u-table-view-column-dynamic :data-source="loadSubList">
+            <div slot="title" slot-scope="{ columnItem }">
+                <u-text>{{ columnItem.name }}</u-text>
+            </div>
+            <div slot="cell" slot-scope="{ item, columnItem }">
+                <u-text>{{ item.name }} {{ columnItem.name }}</u-text>
+            </div>
+        </u-table-view-column-dynamic>
+        <u-table-view-column title="地址" field="address" key="f"></u-table-view-column>
+        <u-table-view-column title="最近登录时间" field="loginTime" formatter="placeholder | date" width="20%" key="g"></u-table-view-column>
+        <u-table-view-column-group title="用户信息" key="h">
+            <u-table-view-column title="用户名" field="name" :auto-row-span="true" fixed key="i"></u-table-view-column>
+            <u-table-view-column-dynamic :data-source="loadSubList" fixed key="j">
+                <div slot="title" slot-scope="{ columnItem }">
+                    <u-text>{{ columnItem.name }}</u-text>
+                </div>
+                <div slot="cell" slot-scope="{ item, columnItem }">
+                    <u-text>{{ item.name }} {{ columnItem.name }}</u-text>
+                </div>
+            </u-table-view-column-dynamic>
+        </u-table-view-column-group>
+        <u-table-view-column title="地址" field="address" fixed key="k"></u-table-view-column>
+    </u-table-view>
 </u-linear-layout>
 </template>
 <script>
