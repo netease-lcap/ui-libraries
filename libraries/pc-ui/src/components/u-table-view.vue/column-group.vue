@@ -23,7 +23,6 @@ export default {
             parentVM: undefined,
             isGroup: true,
             colSpan: 1,
-            fixed: false,
         };
     },
     mounted() {
