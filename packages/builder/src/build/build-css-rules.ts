@@ -10,37 +10,39 @@ import type {
 } from '../build/types';
 import { kebabCaseToCamelCase, firstLetterToUpperCase } from '../utils/string';
 
-function parseCSSRules(cssContent: string, componentNames: string[], cssRulesDesc: Record<string, Record<string, string>>, getSelectorComponentName?: LcapBuildOptions['getSelectorComponentName']) {
+function parseCSSRules(cssContent: string, componentNames: string[], cssRulesDesc: Record<string, Record<string, string>>, options: LcapBuildOptions) {
   const root = postcss.parse(cssContent);
 
   const mockStateRE = /:(hover|active)/g;
   const hashClassRE = /\.([a-zA-Z0-9][a-zA-Z0-9_-]*?)__[a-zA-Z0-9-]{6,}/g; // @TODO: 目前是两个下划线
 
   // eslint-disable-next-line no-shadow
-  getSelectorComponentName = getSelectorComponentName || ((selector: string, componentNames: string[]) => {
+  const getSelectorComponentName = options.getSelectorComponentName || ((selector: string, componentNames: string[]) => {
+    const selectorComponentNameMap = options.selectorComponentNameMap || {};
+    if (selectorComponentNameMap[selector]) return selectorComponentNameMap[selector];
     return componentNames.find((name) => new RegExp(`^\\.${name}_|^\\[class\\*=${name}__\\]`).test(selector));
   });
-
-  function fixSelector(selector) {
-    const selectors = selector
-      .replace(/\s+/g, ' ') // 抹平换行符
-      .replace(/\s*([>+~,])\s*/g, '$1'); // 统一去除空格
-    return selectors
-      .split(/,/g)
-      .filter((sel) => !/^-(moz|webkit|ms|o)-|^_/.test(sel)) // 过滤掉浏览器前缀和 _ 开头的选择器
-      .map((sel) => sel.replace(hashClassRE, '[class*=$1__]')) // hash 类名改为 [class*=] 属性选择器
-      .flatMap((sel) => (mockStateRE.test(sel) ? [sel, sel.replace(mockStateRE, '._$1')] : [sel])) // 增加模拟伪类
-      .join(',');
-  }
 
   const cssRulesMap: Record<string, CSSRule[]> = {};
 
   root.nodes.forEach((node) => {
     if (node.type === 'rule') {
-      const selector = fixSelector(node.selector);
+      const selectors = node.selector
+        .replace(/\s+/g, ' ') // 抹平换行符
+        .replace(/\s*([>+~,])\s*/g, '$1') // 统一去除空格
+        .split(/,/g)
+        .flatMap((sel) => (mockStateRE.test(sel) ? [sel, sel.replace(mockStateRE, '._$1')] : [sel])); // 增加模拟伪类
+
+      node.selector = selectors.join(',');
+
+      const selector = selectors
+        .filter((sel) => !/^-(moz|webkit|ms|o)-|^_/.test(sel)) // 过滤掉浏览器前缀和 _ 开头的选择器
+        .map((sel) => sel.replace(hashClassRE, '[class*=$1__]')) // hash 类名改为 [class*=] 属性选择器
+        .join(',');
+
       if (!selector) return;
 
-      const componentName = getSelectorComponentName(selector, componentNames);
+      const componentName = getSelectorComponentName?.(selector, componentNames);
       if (!componentName) return;
       const currentCSSRules = cssRulesMap[componentName] = cssRulesMap[componentName] || [];
 
@@ -181,7 +183,7 @@ function parseCSSRules(cssContent: string, componentNames: string[], cssRulesDes
     if (!cssRulesMap[componentName]) delete cssRulesDesc[componentName];
   });
 
-  return { cssRulesMap, cssRulesDesc };
+  return { cssRulesMap, cssRulesDesc, cssContent: root.toResult().css };
 }
 
 function collectComponentNames(componentList: any) {
@@ -203,8 +205,9 @@ export default function buildCSSRules(options: LcapBuildOptions) {
 
   const cssRulesDescPath = path.resolve(options.rootPath, 'index.css-rules-desc.json');
   const cssRulesDesc = fs.existsSync(cssRulesDescPath) ? fs.readJSONSync(cssRulesDescPath) : {};
-  const result = parseCSSRules(cssContent, componentNames, cssRulesDesc);
+  const result = parseCSSRules(cssContent, componentNames, cssRulesDesc, options);
 
   fs.writeJSONSync(path.resolve(options.rootPath, options.destDir, 'index.css-rules-map.json'), result.cssRulesMap, { spaces: 2 });
   fs.writeJSONSync(path.resolve(options.rootPath, 'index.css-rules-desc.json'), result.cssRulesDesc, { spaces: 2 });
+  fs.writeFileSync(path.resolve(options.rootPath, options.destDir, 'index.css'), result.cssContent);
 }

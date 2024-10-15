@@ -39,6 +39,7 @@ export interface LcapBuildOptions {
   destDir: string;
   pnpm?: boolean;
   dependencies?: Dependency[];
+  selectorComponentNameMap?: Record<string, string>;
   getSelectorComponentName?: (selector: string, componentNames: string[]) => string | undefined;
 }
 
