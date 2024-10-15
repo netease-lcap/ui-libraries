@@ -9,8 +9,6 @@
 ## Examples
 
 ```json
-{
-  "el-menu": {
     ".el-menu": "菜单",
     ".el-menu--horizontal": "水平菜单",
     ".el-menu--horizontal.el-menu": "水平菜单",
@@ -22,8 +20,6 @@
     ".el-menu-item:focus,.el-menu-item:hover,.el-menu-item._hover": "菜单项:鼠标移入",
     ".el-menu-item:hover,.el-menu-item._hover": "菜单项:鼠标移入",
     ".el-menu-item.is-disabled": "菜单项:禁用态",
-  },
-  "el-tabs": {
     ".el-tabs": "标签页",
     ".el-tabs__header": "标签页头",
     ".el-tabs__active-bar": "标签页激活条",
@@ -33,9 +29,7 @@
     ".el-tabs__new-tab:hover": "标签页添加按钮:鼠标移入",
     ".el-tabs__nav-wrap": "标签页导航容器",
     ".el-tabs__nav-wrap:after": "标签页导航容器::after",
-    ".el-tabs__nav-scroll": "标签页导航滚动"
-  },
-  "u-list-view": {
+    ".el-tabs__nav-scroll": "标签页导航滚动",
     "[class*=u-list-view__]": "数据列表",
     "[class*=u-list-view__]:focus": "数据列表:获得焦点",
     "[class*=u-list-view__][disabled]": "数据列表:禁用态",
@@ -43,9 +37,7 @@
     "[class*=u-list-view__][border=false] [class*=u-list-view_head__]": "数据列表:无边框>头部",
     "[class*=u-list-view__][readonly-mode=initial] [class*=u-list-view_body__]": "数据列表:只读模式>主体",
     "[class*=u-list-view__][disabled] [class*=u-list-view_body__]": "数据列表:禁用态>主体",
-    "[class*=u-list-view__][border=false] [class*=u-list-view_foot__]": "数据列表:无边框>底部"
-  }
-}
+    "[class*=u-list-view__][border=false] [class*=u-list-view_foot__]": "数据列表:无边框>底部",
 ```
 
 ## Attention claims
@@ -70,4 +62,4 @@
 ## Your anwser
 
 ```json
-````
+```

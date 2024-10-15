@@ -231,7 +231,6 @@
   },
   "u-drawer": {
     "[class*=u-drawer__]": "",
-    "[class*=u-drawer__]:before": "",
     "[class*=u-drawer__]:focus": "",
     "[class*=u-drawer__][placement=right] [class*=u-drawer_drawer__]": "",
     "[class*=u-drawer__][placement=right]>[class*=u-drawer_drawer__][size=small],[class*=u-drawer__][placement=left]>[class*=u-drawer_drawer__][size=small]": "",
@@ -250,7 +249,8 @@
     "[class*=u-drawer__][placement=top]>[class*=u-drawer_drawer__][size=small],[class*=u-drawer__][placement=bottom]>[class*=u-drawer_drawer__][size=small]": "",
     "[class*=u-drawer__][placement=top]>[class*=u-drawer_drawer__][size=normal],[class*=u-drawer__][placement=bottom]>[class*=u-drawer_drawer__][size=normal]": "",
     "[class*=u-drawer__][placement=top]>[class*=u-drawer_drawer__][size=large],[class*=u-drawer__][placement=bottom]>[class*=u-drawer_drawer__][size=large]": "",
-    "[class*=u-drawer__][placement=top]>[class*=u-drawer_drawer__][size=auto],[class*=u-drawer__][placement=bottom]>[class*=u-drawer_drawer__][size=auto]": ""
+    "[class*=u-drawer__][placement=top]>[class*=u-drawer_drawer__][size=auto],[class*=u-drawer__][placement=bottom]>[class*=u-drawer_drawer__][size=auto]": "",
+    "[class*=u-drawer__]:after": ""
   },
   "u-validator": {
     "[class*=u-validator__]": "",
@@ -299,7 +299,7 @@
     "[class*=u-form__][class*=u-form_colon__] [class*=u-form_item__] [class*=u-form_item_label__] [class*=u-form_item_text__]:not(:empty):not([designer-empty]):after": ""
   },
   "u-grid-layout": {
-    "[class*=u-grid-layout__]": "",
+    "[class*=u-grid-layout__]": "Test",
     "[class*=u-grid-layout__]>[class*=u-grid-layout_row__]+[class*=u-grid-layout_row__]": "",
     "[class*=u-grid-layout__][gap=compact]>[class*=u-grid-layout_row__]+[class*=u-grid-layout_row__]": "",
     "[class*=u-grid-layout__][gap=none]>[class*=u-grid-layout_row__]+[class*=u-grid-layout_row__]": "",
