@@ -95,7 +95,8 @@
             "translateBindingProperty": ["badge", "badgemax", "value"],
             "slotInlineStyle": {
                 "title": "width: 90px"
-            }
+            },
+            "ignoreProperty": ["destination"]
         }
     },
     {
@@ -107,7 +108,8 @@
             "translateBindingProperty": ["direction"],
             "events": {
                 "click": true
-            }
+            },
+            "selector": "multiple"
         }
     },
     {
@@ -119,10 +121,7 @@
             "childAccept": "['van-dropdown-item-son'].includes(target.tag)",
             "translateBindingProperty": ["value", "title"],
             "useFxOrEg":{"property": "title"},
-            "selector": {
-                "expression": "this",
-                "cssSelector": "div[class*='van-dropdown-item__content']"
-            }
+            "selector": "multiple"
         }
     },
     {

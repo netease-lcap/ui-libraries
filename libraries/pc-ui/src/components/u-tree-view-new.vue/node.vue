@@ -1,5 +1,5 @@
 <template>
-<div :class="$style.root" v-show="!hidden">
+<div :class="$style.root" :hiddenMask="hiddenMask" v-show="!hidden">
     <div :class="$style.item" :selected="selected" :style="{ paddingLeft: level * expanderWidth + paddingLeft + 'px' }"
         :readonly="currentReadOnly" :readonly-mode="rootVM.readonlyMode"
         :subBackground="rootVM.subBackground"
@@ -46,7 +46,7 @@
                     dragging: currentDragging,
                     ...node,
                 }">{{ text }}</slot>
-                <s-empty v-if="!$slots.item && $env.VUE_APP_DESIGNER && showEmpty"></s-empty>
+                <s-empty v-if="$env.VUE_APP_DESIGNER && (!$scopedSlots.item || !$scopedSlots.item({})) && showEmpty"></s-empty>
             </span>
         </div>
     </div>
@@ -136,7 +136,8 @@ export default {
         draggable: { type: Boolean, default: false },
         dragExpanderDelay: { type: Number, default: 1500 },
         renderOptimize: { type: Boolean, default: false },
-        showEmpty: { type: Boolean, default: true }
+        showEmpty: { type: Boolean, default: true },
+        hiddenMask: { type: Boolean, default: false },
     },
     data() {
         return {
@@ -805,6 +806,11 @@ content: "\e679";
 .root[designer]{
     position: relative;
 }
+
+.root[designer] [class^="s-empty"] {
+  width: calc(100% - 36px);
+}
+
 .root[designer] + .root[designer]:after{
     content: '';
     position: absolute;
@@ -814,5 +820,8 @@ content: "\e679";
     left: 0;
     bottom: 0;
     right: 0;
+}
+.root[designer] + .root[designer][hiddenMask]:after{
+    background: unset;
 }
 </style>

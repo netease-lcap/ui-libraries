@@ -755,6 +755,7 @@
             "additionalAttribute": {
                 ":value": null
             },
+            "forceUpdateWhenAttributeChange": true,
             "translateBindingProperty": ["value", "placeholder"]
         }
     },
@@ -1064,6 +1065,13 @@
                     "condition": "!this.getAttribute('dataSource')",
                     "accept": false
                 }
+            },
+            "additionalAttribute": {
+                ":showEmpty":  "\"false\"",
+                ":hiddenMask": "\"true\""
+            },
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block; width:calc(100% - 36px)"
             }
         }
     },
@@ -1078,10 +1086,10 @@
                 "click": true
             },
             "slotWrapperInlineStyle": {
-                "item": "display:inline-block"
+                "item": "display:inline-block; width:calc(100% - 36px)"
             },
             "additionalAttribute": {
-                ":showEmpty": false
+                ":showEmpty":  "\"false\""
             },
             "ignoreProperty": ["value"]
         }
@@ -1131,7 +1139,25 @@
             "events": {
                 "click": true
             },
-            "translateBindingProperty": ["value", "placeholder"]
+            "translateBindingProperty": ["value", "placeholder"],
+            "dataSource": {
+                "display": 3,
+                "dismiss": "!this.getAttribute('dataSource')",
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> div[class^='u-tree-view-new_node']:not([data-nodepath])",
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            },
+            "additionalAttribute": {
+                ":showEmpty": "\"false\"",
+                ":hiddenMask": "\"false\""
+            },
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block; width:calc(100% - 36px)"
+            }
         }
     },
     {

@@ -182,6 +182,8 @@ export default createComponent({
           style={style}
           class={bem([direction])}
           onClick={this.onClickWrapper}
+          data-nodepath={this.$attrs['data-nodepath']}
+          data-nodepath-multiple={this.$attrs['data-nodepath-multiple']}
         >
           <Popup
             vModel={this.showPopup}

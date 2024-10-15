@@ -245,7 +245,7 @@ export default createComponent({
 
   render() {
     return (
-      <div class={bem()} value={this.currentTab} vusion-disabled-duplicate="true" vusion-disabled-copy="true">
+      <div class={bem([this.inDesigner() ? 'inDesigner' : ''])} value={this.currentTab} vusion-disabled-duplicate="true" vusion-disabled-copy="true">
         <Tabs vModel={this.currentTab}>
           <Tab title={t('todo')} name="myPendingTaskList">
             {this.toolbarRender()}
