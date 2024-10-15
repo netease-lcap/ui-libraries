@@ -457,12 +457,12 @@ export default {
                 if (columnData.columnsInGroup || columnData.cloumnsForColSpanHidden) {
                     const columnsInGroupWidth = (columnData.columnsInGroup || []).map((columnVM) => {
                         const columnData = this.columnVMsMap[columnVM._uid];
-                        return columnData[type];
-                    });
+                        return columnData && columnData[type];
+                    }).filter((width) => width !== undefined); // 过滤掉undefined, 避免tempWidth为NaN
                     const cloumnsForColSpanHiddenWidth = (columnData.cloumnsForColSpanHidden || []).map((columnVM) => {
                         const columnData = this.columnVMsMap[columnVM._uid];
-                        return columnData[type];
-                    });
+                        return columnData && columnData[type];
+                    }).filter((width) => width !== undefined);
                     const tempWidth = Math.min(...columnsInGroupWidth.concat(cloumnsForColSpanHiddenWidth));
                     if (type === 'left' && width !== undefined) {
                         width = Math.min(width, tempWidth);
@@ -483,7 +483,8 @@ export default {
                 if (groupList) {
                     const groupVMIndex = groupList.findIndex((groupVM) => groupVM === columnVM.$parent);
                     const isGroupInLast = this.isLastLeftFixed(columnVM.$parent, groupVMIndex, groupList);
-                    isLastInList = isLastInList && isGroupInLast;
+                    const isLastInGroup = list[columnIndex + 1] === undefined || list[columnIndex + 1].$parent !== columnVM.$parent; // 原来组里的最后一个没有阴影，增加判断
+                    isLastInList = isLastInGroup && isGroupInLast;
                 }
             }
             return inFixedLeftList && isLastInList ? true : undefined;
@@ -506,7 +507,8 @@ export default {
                 if (groupList) {
                     const groupVMIndex = groupList.findIndex((groupVM) => groupVM === columnVM.$parent);
                     const isGroupInLast = this.isFirstRightFixed(columnVM.$parent, groupVMIndex, groupList);
-                    isLastInList = isLastInList && isGroupInLast;
+                    const isLastInGroup = list[columnIndex - 1] === undefined || list[columnIndex - 1].$parent !== columnVM.$parent;
+                    isLastInList = isLastInGroup && isGroupInLast;
                 }
             }
             return inFixedRightList && isLastInList ? true : undefined;
