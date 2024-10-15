@@ -711,7 +711,6 @@
     "[class*=u-number-input__][suffix] input": "数字输入框:后缀>输入框",
     "[class*=u-number-input__][suffix][clearable]:hover input,[class*=u-number-input__][suffix][clearable]._hover input,[class*=u-number-input__][suffix][clearable][focus] input": "数字输入框:后缀:可清除:鼠标移入/获得焦点>输入框",
     "[class*=u-number-input__][button-display=tail]:not([hide-buttons=true]) input": "数字输入框:尾部按钮:显示>输入框",
-    "[class*=u-number-input__][button-display=tail]:not([hide-buttons=true])[prefix][clearable]:hover input,[class*=u-number-input__][button-display=tail]:not([hide-buttons=true])[prefix][clearable]._hover input,[class*=u-number-input__][button-display=tail]:not([hide-buttons=true])[prefix][clearable][focus] input": "数字输入框:尾部按钮:显示:前缀:可清除:鼠标移入/获得焦点>输入框",
     "[class*=u-number-input__][button-display=tail]:not([hide-buttons=true])[suffix] input": "数字输入框:尾部按钮:显示:后缀>输入框",
     "[class*=u-number-input__][button-display=tail]:not([hide-buttons=true])[suffix][clearable]:hover input,[class*=u-number-input__][button-display=tail]:not([hide-buttons=true])[suffix][clearable]._hover input,[class*=u-number-input__][button-display=tail]:not([hide-buttons=true])[suffix][clearable][focus] input": "数字输入框:尾部按钮:显示:后缀:可清除:鼠标移入/获得焦点>输入框",
     "[class*=u-number-input__][button-display=tail]:not([hide-buttons=true]) [class^=u-input_suffix__]": "数字输入框:尾部按钮:显示>后缀",
@@ -721,7 +720,8 @@
     "[class*=u-number-input__][button-display=bothEnds]:not([hide-buttons=true])[suffix] input": "数字输入框:两端按钮:显示:后缀>输入框",
     "[class*=u-number-input__][button-display=bothEnds]:not([hide-buttons=true])[suffix][clearable]:hover input,[class*=u-number-input__][button-display=bothEnds]:not([hide-buttons=true])[suffix][clearable]._hover input,[class*=u-number-input__][button-display=bothEnds]:not([hide-buttons=true])[suffix][clearable][focus] input": "数字输入框:两端按钮:显示:后缀:可清除:鼠标移入/获得焦点>输入框",
     "[class*=u-number-input__][button-display=bothEnds]:not([hide-buttons=true]) [class^=u-input_prefix__]": "数字输入框:两端按钮:显示>前缀",
-    "[class*=u-number-input__][button-display=bothEnds]:not([hide-buttons=true]) [class^=u-input_suffix__]": "数字输入框:两端按钮:显示>后缀"
+    "[class*=u-number-input__][button-display=bothEnds]:not([hide-buttons=true]) [class^=u-input_suffix__]": "数字输入框:两端按钮:显示>后缀",
+    "[class*=u-number-input__][button-display=tail]:not([hide-buttons=true])[prefix][clearable]:hover input,[class*=u-number-input__][button-display=tail]:not([hide-buttons=true])[prefix][clearable]._hover input,[class*=u-number-input__][button-display=tail]:not([hide-buttons=true])[prefix][clearable][focuse] input": "数字输入框:尾部按钮:显示:前缀:可清除:鼠标移入/获得焦点>输入框"
   },
   "u-pagination": {
     "[class*=u-pagination__]": "分页",
@@ -1272,4 +1272,3 @@
     "[class*=u-process-graph__]": "流程图"
   }
 }
-
