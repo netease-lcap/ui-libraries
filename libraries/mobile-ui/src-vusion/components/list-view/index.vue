@@ -1,7 +1,9 @@
 <template>
 <div :class="[$style.root, 'list-view']" :readonly="readonly" :readonly-mode="readonlyMode" :disabled="disabled"
     :tabindex="readonly || disabled ? '' : 0"
-    :vusion-designer="$env.VUE_APP_DESIGNER">
+    :vusion-designer="$env.VUE_APP_DESIGNER"
+    :scroller="scrollTarget"
+>
     <u-input
       v-if="filterable"
       :class="$style.filter"
@@ -14,7 +16,7 @@
       @input="onInput">
     </u-input>
 
-    <div :class="$style.scrollwrap" @scroll="onScroll">
+    <div :class="$style.scrollwrap" ref="scrollwrap">
       <van-pull-refresh :value="$env.VUE_APP_DESIGNER ? false : refreshing" :disabled="!pullRefresh || pageable === 'pagination'"
         :pulling-text="pullingText" :loosing-text="loosingText" :loading-text="loadingText" :success-text="successText" :success-duration="successDuration" :pull-distance="pullDistance"
         @refresh="refresh">
@@ -41,21 +43,25 @@
                     </slot>
                 </component>
             </div>
-            <div :class="$style.status" status="loading" v-if="currentLoading && !notext">
+
+            <div ref="placeholder">
+              <div :class="$style.status" status="loading" v-if="currentLoading && !notext">
                 <slot name="loading"><u-spinner></u-spinner> {{ loadingText }}</slot>
+              </div>
+              <div :class="$style.status" status="error" v-else-if="(currentData === null || currentError)  && !notext">
+                  <slot name="error">{{ errorText }}</slot>
+              </div>
+              <div :class="$style.status" v-else-if="pageable === 'load-more' && currentDataSource && currentDataSource.hasMore() && !notext">
+                  <u-link @click="load(true)">{{ $t('loadMore') }}</u-link>
+              </div>
+              <div :class="$style.status" v-else-if="(pageable === 'auto-more' || pageable === 'load-more') && currentDataSource && !currentDataSource.hasMore() && !$env.VUE_APP_DESIGNER && !notext && !hiddenempty">
+                  {{ $t('noMore') }}
+              </div>
+              <div :class="$style.status" v-else-if="(currentData && !currentData.length || currentEmpty) && !notext">
+                  <slot name="empty">{{ emptyText }}</slot>
+              </div>
             </div>
-            <div :class="$style.status" status="error" v-else-if="(currentData === null || currentError)  && !notext">
-                <slot name="error">{{ errorText }}</slot>
-            </div>
-            <div :class="$style.status" v-else-if="pageable === 'load-more' && currentDataSource && currentDataSource.hasMore() && !notext">
-                <u-link @click="load(true)">{{ $t('loadMore') }}</u-link>
-            </div>
-            <div :class="$style.status" v-else-if="(pageable === 'auto-more' || pageable === 'load-more') && currentDataSource && !currentDataSource.hasMore() && !$env.VUE_APP_DESIGNER && !notext && !hiddenempty">
-                {{ $t('noMore') }}
-            </div>
-            <div :class="$style.status" v-else-if="(currentData && !currentData.length || currentEmpty) && !notext">
-                <slot name="empty">{{ emptyText }}</slot>
-            </div>
+
         </div>
       </van-pull-refresh>
     </div>
@@ -96,8 +102,13 @@ import VanPullRefresh from '../../../src/pull-refresh';
 import VanEmptyCol from '../../../src/emptycol';
 import VanPagination from '../../../src/pagination';
 import Iconv from '../../../src/iconv';
+import { BindEventMixin } from '../../../src/mixins/bind-event';
+import { getScroller } from '../../../src/utils/dom/scroll';
+import { isHidden } from '../../../src/utils/dom/style';
 
 import './index.css';
+
+const OFFSET = 50;
 
 export default {
     name: 'van-list-view',
@@ -106,6 +117,16 @@ export default {
     components: { VanPullRefresh, VanEmptyCol, VanPagination, UCheckbox, UInput, USpinner, ULink, Iconv },
     extends: UListView,
     mixins: [
+      BindEventMixin(function (bind) {
+        if (this.scrollTarget === 'self') {
+          this.scroller = this.$refs.scrollwrap;
+        } else if (this.scrollTarget === 'parent') {
+          this.scroller = getScroller(this.$refs.scrollwrap);
+        }
+
+        console.log('scroller', this.scroller);
+        bind(this.scroller, 'scroll', this.onScroll);
+      }),
       sync({
         data: 'currentData',
         total() {
@@ -159,6 +180,10 @@ export default {
         },
         selectedIcon: String,
         unselectedIcon: String,
+        scrollTarget: {
+          type: String,
+          default: 'self', // 'self', 'parent'  父级就近向上查找滚动容器
+        },
     },
     data() {
       return {
@@ -205,6 +230,35 @@ export default {
           }
           return undefined;
         },
+        load(more) {
+            const dataSource = this.currentDataSource;
+            if (!dataSource) return;
+            if (this.currentLoading) return Promise.resolve();
+            if (this.$emitPrevent('before-load', undefined, this)) return;
+
+            this.currentLoading = true;
+
+            return dataSource[more ? 'loadMore' : 'load']()
+                .then((data) => {
+                    this.currentLoading = false
+                    if (this.pageable === true || this.pageable === 'pagination') {
+                        if (
+                            this.currentDataSource.paging
+                            && this.currentDataSource.paging.number
+                                > this.currentDataSource.totalPage
+                        ) {
+                          this.page(1); // 数据发生变更时，回归到第 1 页
+                        }
+                    }
+                    this.ensureSelectedInItemVMs();
+                    this.$emit('load', undefined, this);
+                    this.checkScroller();
+                    return data;
+                })
+                .catch(() => {
+                  this.currentLoading = false
+                })
+        },
         async refresh() {
             // 分页器分页时忽略下拉刷新
             if (this.pageable === 'pagination') {
@@ -242,6 +296,7 @@ export default {
               }
               this.$emit('page', paging, this);
               this.$emit('update:page-number', 1, this);
+              this.checkScroller();
             } catch (error) {
               console.log(error);
             }
@@ -249,17 +304,76 @@ export default {
             this.currentLoading = false;
             this.$emit('load', undefined, this);
         },
+        checkScroller() {
+          this.$nextTick(() => {
+            if (this?.$env.VUE_APP_DESIGNER) return;
 
-        onScroll(e) {
-          if (this?.$env.VUE_APP_DESIGNER) return;
-          this.throttledVirtualScroll(e);
-          if (this.currentLoading)
+            if (this.currentLoading)
               return;
+            if (!(this.pageable === 'auto-more' || (this.pageable === true && this.$options.isSelect)))
+              return;
+
+            const hasMore = this.currentDataSource && this.currentDataSource.hasMore();
+            if (!hasMore) {
+              return;
+            }
+
+            let scrollerRect;
+            if (this.scroller.getBoundingClientRect) {
+              scrollerRect = this.scroller.getBoundingClientRect();
+            } else {
+              scrollerRect = {
+                top: 0,
+                bottom: this.scroller.innerHeight,
+              };
+            }
+
+            const scrollerHeight = scrollerRect.bottom - scrollerRect.top;
+            if (!scrollerHeight || isHidden(this.$el)) {
+              return;
+            }
+
+            const placeholderRect = this.$refs.placeholder.getBoundingClientRect();
+
+            if (scrollerRect.top < placeholderRect.top &&  placeholderRect.bottom <= scrollerRect.bottom) {
+              this.debouncedLoad(true);
+            }
+          });
+        },
+        onScroll() {
+          if (this?.$env.VUE_APP_DESIGNER) return;
+
+          if (this.currentLoading)
+            return;
           if (!(this.pageable === 'auto-more' || (this.pageable === true && this.$options.isSelect)))
             return;
 
-          const el = e.target;
-          if (el.scrollHeight <= el.scrollTop + el.clientHeight+30 && this.currentDataSource && this.currentDataSource.hasMore()) {
+          const hasMore = this.currentDataSource && this.currentDataSource.hasMore();
+          if (!hasMore) {
+            return;
+          }
+
+          let scrollerRect;
+          if (this.scroller.getBoundingClientRect) {
+            scrollerRect = this.scroller.getBoundingClientRect();
+          } else {
+            scrollerRect = {
+              top: 0,
+              bottom: this.scroller.innerHeight,
+            };
+          }
+
+          const scrollerHeight = scrollerRect.bottom - scrollerRect.top;
+          if (!scrollerHeight || isHidden(this.$el)) {
+            return;
+          }
+
+          let isReachEdge = false;
+          const placeholderRect = this.$refs.placeholder.getBoundingClientRect();
+          isReachEdge = placeholderRect.top - scrollerRect.bottom <= OFFSET;
+
+
+          if (isReachEdge) {
             this.debouncedLoad(true);
           }
         },
@@ -288,14 +402,13 @@ export default {
 }
 </script>
 
-<style module>
+<style module lang="less">
 .root {
     display: flex;
     flex-direction: column;
     background: var(--van-list-view-bgcolor);
     /* border: 1px solid var(--list-view-border-color); */
     border-radius: 4px;
-    height: var(--van-list-view-height);
     min-width: 280px;
     max-width: 100%;
 }
@@ -398,15 +511,17 @@ export default {
 .root[size$="full"] { width: 100%; }
 .root[size$="auto"] { width: auto; } */
 
-
-/* .root {
-    height: 100vh;
-} */
-.scrollwrap {
-  height: 100%;
-  overflow-y: auto;
-}
 .root[vusion-designer] {
     height: auto;
 }
+
+.root[scroller="self"] {
+  height: var(--van-list-view-height);
+
+  .scrollwrap {
+    height: 100%;
+    overflow-y: auto;
+  }
+}
+
 </style>

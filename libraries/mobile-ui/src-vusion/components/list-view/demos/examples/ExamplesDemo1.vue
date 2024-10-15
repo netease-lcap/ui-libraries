@@ -1,15 +1,23 @@
 <!-- data-source 函数 -->
 <template>
-    <div style="height: 600px;">
-        <van-list-view 
-          :data-source="load" 
-          :multiple="false" 
-          selected-icon="sure" 
-          unselected-icon="countdown" 
+    <div>
+        <van-list-view
+          scrollTarget="self"
+          pageable="auto-more"
+          :page-size="5"
+          :data-source="load"
+          filterable
+          :multiple="false"
+          selected-icon="sure"
+          unselected-icon="countdown"
           :striped="true"
           style="--van-list-view-item-selected-backgroud: #f10;">
             <template #item="scope">
-                <van-cell style="backgroud: transparent;"  :title="scope.item.text" :isLink="false"></van-cell>
+                <van-cell
+                  style="backgroud: transparent;"
+                  :title="scope.item.text"
+                  :isLink="false">
+                </van-cell>
             </template>
         </van-list-view>
     </div>
@@ -19,8 +27,9 @@
 const mockRequest = (data, timeout = 300) => new Promise((res, rej) => setTimeout(() => res(data), timeout));
 // 模拟数据服务
 const mockService = {
-    load() {
-        return mockRequest([
+    load(params) {
+      const { page, size, filterText } = params;
+      const list = [
             { text: 'Batch', value: 'bat' },
             { text: 'C', value: 'c' },
             { text: 'C#', value: 'csharp' },
@@ -73,7 +82,20 @@ const mockService = {
             { text: 'XML', value: 'xml' },
             { text: 'XSL', value: 'xsl' },
             { text: 'YAML', value: 'yaml' },
-        ]);
+      ]
+
+      let result
+
+      if (filterText) {
+        result = list.filter(item => item.text.includes(filterText))
+      } else {
+        result = list
+      }
+
+      return mockRequest({
+        total: result.length,
+        list: result.slice((page - 1) * size, page * size)
+      });
     },
 };
 
@@ -84,8 +106,9 @@ export default {
         };
     },
     methods: {
-        load() {
-            return mockService.load();
+        load(params) {
+            console.log('params', params);
+            return mockService.load(params);
         },
     }
 };

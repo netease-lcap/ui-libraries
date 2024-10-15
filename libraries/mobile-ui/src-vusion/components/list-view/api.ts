@@ -446,6 +446,20 @@ namespace nasl.ui {
       }
     })
     striped: nasl.core.Boolean = false;
+    @Prop({
+      group: '交互属性',
+      title: '滚动容器',
+      description: '可触发滚动加载更多的容器。默认为自身；父级则会就近向上查找可滚动的容器。',
+      setter: {
+        concept: "EnumSelectSetter",
+        options: [{
+          title: '自身'
+        }, {
+          title: '父级'
+        }]
+      }
+    })
+    scrollTarget: 'self' | 'parent' = 'self';
     @Event({
       title: '选择时',
       description: '选择某一项时触发'
