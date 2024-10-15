@@ -1,6 +1,60 @@
+.root {
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+}
+
+.sidebar {
+  height: 100%;
+  position: fixed;
+  right: 0;
+  flex: 1;
+  background: white;
+  border: 1.5px solid #e7e8eb;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 24px;
+  overflow: auto;
+}
+
+.sidebar:hover {
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.form :global(.el-p-form__label) {
+  width: 160px !important;
+}
+
+.selectorList {
+  padding: 0;
+  margin: 0.5em;
+  font-size: 12px;
+  line-height: 1.5;
+  max-width: 336px;
+  max-height: 300px;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.code {
+  margin-top: 20px;
+  font-size: 12px;
+  font-family: Consolas, Droid Sans Mono, monospace;
+  background: #f4f5fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.quota {
+  display: block;
+  font-size: 14px;
+  color: #af7622;
+}
+
 .componentPreview {
   display: flex;
-  width: 100%;
+  width: calc(100vw - 580px);
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;

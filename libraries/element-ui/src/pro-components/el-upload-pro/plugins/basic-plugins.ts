@@ -273,12 +273,12 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         dragger: {
           clickAndDragText: draggable === true ? `点击上方“${uploadText}”或将文件拖到此区域` : `点击上方“${uploadText}”`,
           dragDropText: '释放鼠标',
-          draggingText: '拖拽到此区域',
+          draggingText: '粘贴到此区域',
         },
         triggerUploadText: {
           fileInput: uploadText,
           image: theme && theme.includes('image') ? triggerUploadText || '点击上传图片' : uploadText,
-          normal: '点击上传',
+          normal: '点击上传图片',
           // 选择文件和上传文件是 2 个步骤，文本需明确步骤
           reupload: '重新上传',
           continueUpload: '继续上传',
