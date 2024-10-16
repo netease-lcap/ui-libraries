@@ -5,10 +5,10 @@
 import fs from 'fs-extra';
 import path from 'path';
 import * as postcss from 'postcss';
+import { camelCase, capitalize } from 'lodash';
 import type {
   LcapBuildOptions, CSSValue, CSSRule, SupportedCSSProperty,
 } from '../build/types';
-import { kebabCaseToCamelCase, firstLetterToUpperCase } from '../utils/string';
 
 function parseCSSRules(cssContent: string, componentNames: string[], cssRulesDesc: Record<string, Record<string, string>>, options: LcapBuildOptions) {
   const root = postcss.parse(cssContent);
@@ -80,9 +80,9 @@ function parseCSSRules(cssContent: string, componentNames: string[], cssRulesDes
           const arr = value.split(/\s+/);
           if (arr.length < 3) return;
           const [borderWidth, borderStyle, borderColor] = arr;
-          parsedStyle[`border${firstLetterToUpperCase(borderProp)}Width`] = patchImportant({ defaultValue: borderWidth });
-          parsedStyle[`border${firstLetterToUpperCase(borderProp)}Style`] = patchImportant({ defaultValue: borderStyle });
-          parsedStyle[`border${firstLetterToUpperCase(borderProp)}Color`] = patchImportant({ defaultValue: borderColor });
+          parsedStyle[`border${capitalize(borderProp)}Width`] = patchImportant({ defaultValue: borderWidth });
+          parsedStyle[`border${capitalize(borderProp)}Style`] = patchImportant({ defaultValue: borderStyle });
+          parsedStyle[`border${capitalize(borderProp)}Color`] = patchImportant({ defaultValue: borderColor });
         } else if (decl.prop === 'margin') {
           const arr = value.split(/\s+/);
           if (arr.length === 1) {
@@ -153,7 +153,7 @@ function parseCSSRules(cssContent: string, componentNames: string[], cssRulesDes
             parsedStyle.borderBottomLeftRadius = patchImportant({ defaultValue: arr[3] });
           }
         } else {
-          parsedStyle[kebabCaseToCamelCase(decl.prop)] = patchImportant({ defaultValue: decl.value });
+          parsedStyle[camelCase(decl.prop)] = patchImportant({ defaultValue: decl.value });
         }
       });
       currentCSSRules.push({
