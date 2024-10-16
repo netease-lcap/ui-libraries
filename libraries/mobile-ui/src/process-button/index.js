@@ -96,6 +96,7 @@ export default createComponent({
         policy: 'CurrentNode',
       },
       signOptions: [],
+      hasMoreAddSignOption: false,
     };
   },
 
@@ -172,13 +173,17 @@ export default createComponent({
      */
     async addSignOperator(item) {
       if (this.$processV2) {
-        await this.$processV2.addSignTask({
-          body: {
-            taskId: this.taskId,
-            userForAddSign: this.popup.reassign,
-            policyForAddSign: this.popup.policy,
-          },
-        });
+        const body = this.hasMoreAddSignOption
+          ? {
+              taskId: this.taskId,
+              userForAddSign: this.popup.reassign,
+              policyForAddSign: this.popup.policy,
+            }
+          : {
+              taskId: this.taskId,
+              userForAddSign: this.dialog.reassign,
+            };
+        await this.$processV2.addSignTask({ body });
         this.refresh();
       }
     },
@@ -241,12 +246,12 @@ export default createComponent({
       }
 
       // 需要弹出框的情况
-      if (['approve', 'reject', 'revert', 'withdraw', 'reassign'].includes(name)) {
+      if (['approve', 'reject', 'revert', 'withdraw', 'reassign'].includes(name) || (!this.hasMoreAddSignOption && name === 'addSign')) {
         this.dialog = {
           item,
         };
         this.showDialog = true;
-      } else if (name === 'addSign') {
+      } else if (this.hasMoreAddSignOption && name === 'addSign') {
         this.popup = {
           item,
           reassign: '',
@@ -339,19 +344,26 @@ export default createComponent({
         body: {
             taskId: this.taskId,
         },
+        config: {
+          noErrorTip: true,
+        },
       });
-      const approvalPolicy = res?.data?.approvalPolicy;
-      // 或签、会签、依次审批
-      if (['simple', 'parallel', 'sequence'].includes(approvalPolicy)) {
-          const options = approvalPolicy === 'simple'
-              // ? ['CurrentNode', 'PreviousNode', 'NextNode'] // 后端暂时不支持NextNode，先屏蔽
-              ? ['CurrentNode', 'PreviousNode']
+      this.hasMoreAddSignOption = !!res?.data;
+      if (this.hasMoreAddSignOption) {
+        const approvalPolicy = res?.data?.approvalPolicy;
+        // 或签、会签、依次审批
+        if (['simple', 'parallel', 'sequence'].includes(approvalPolicy)) {
+          const options =
+            approvalPolicy === 'simple'
+              ? // ? ['CurrentNode', 'PreviousNode', 'NextNode'] // 后端暂时不支持NextNode，先屏蔽
+                ['CurrentNode', 'PreviousNode']
               : ['CurrentNode'];
-          this.signOptions = options.map(item => ({
-              title: t(`${item}SignTitle`),
-              description: t(`${item}SignDesc`),
-              value: item,
+          this.signOptions = options.map((item) => ({
+            title: t(`${item}SignTitle`),
+            description: t(`${item}SignDesc`),
+            value: item,
           }));
+        }
       }
     }
   },
@@ -422,7 +434,7 @@ export default createComponent({
         >
           <div class={bem('dialog')}>
             <Form ref="form">
-              {['reassign'].includes(this.dialog.item?.name) && (
+              {(['reassign', 'addSign'].includes(this.dialog.item?.name)) && (
                 <Field
                   border={false}
                   rules={[
@@ -487,97 +499,99 @@ export default createComponent({
             </Form>
           </div>
         </Dialog>
-        <Popup
-          vModel={this.showPopup}
-          round
-          position="bottom"       
-          getContainer="body"
-          closeOnClickOverlay
-        >
-          {this.showPopup && (
-            <div class={bem('popup')}>
-              <div class={bem('popup-title')}>
-                <div>加签</div>
-                <Icon name="close" onClick={() => this.showPopup = false}/>
-              </div>
-              <Form ref="popupForm">
-                <Field
-                  label={t('signMethod')}
-                  labelLayout="block"
-                  border={false}
-                  required
-                  scopedSlots={{
-                    input: () => (
-                      <div class={bem('popup-signOptionSection')}>
-                        {this.signOptions.map((item) => (
-                          <div 
-                            class={bem('popup-signOption')} 
-                            selected={this.popup.policy === item.value} 
-                            onClick={() => this.popup.policy = item.value}
-                          >
-                            <RadioGroup 
-                              iconSize={16}
-                              vModel={this.popup.policy}
+        {this.hasMoreAddSignOption && (
+          <Popup
+            vModel={this.showPopup}
+            round
+            position="bottom"       
+            getContainer="body"
+            closeOnClickOverlay
+          >
+            {this.showPopup && (
+              <div class={bem('popup')}>
+                <div class={bem('popup-title')}>
+                  <div>加签</div>
+                  <Icon name="close" onClick={() => this.showPopup = false}/>
+                </div>
+                <Form ref="popupForm">
+                  <Field
+                    label={t('signMethod')}
+                    labelLayout="block"
+                    border={false}
+                    required
+                    scopedSlots={{
+                      input: () => (
+                        <div class={bem('popup-signOptionSection')}>
+                          {this.signOptions.map((item) => (
+                            <div 
+                              class={bem('popup-signOption')} 
+                              selected={this.popup.policy === item.value} 
+                              onClick={() => this.popup.policy = item.value}
                             >
-                              <Radio 
-                                name={item.value}
-                                title=' '
-                                onChange={() => this.popup.policy = item.value }
-                              />
-                            </RadioGroup>
-                            <div>
-                              <div style="font-weight: 500;" class={bem('popup-signOptionTitle')}>{item.title}</div>
-                              <div style="color: #999999;">{item.description}</div>
+                              <RadioGroup 
+                                iconSize={16}
+                                vModel={this.popup.policy}
+                              >
+                                <Radio 
+                                  name={item.value}
+                                  title=' '
+                                  onChange={() => this.popup.policy = item.value }
+                                />
+                              </RadioGroup>
+                              <div>
+                                <div style="font-weight: 500;" class={bem('popup-signOptionTitle')}>{item.title}</div>
+                                <div style="color: #999999;">{item.description}</div>
+                              </div>
                             </div>
-                          </div>
-                        ))}
-                      </div>
-                    )
-                  }}
-                />
-                <Field
-                  label={t('signPerson')}        
-                  border={false}
-                  required
-                  rules={[
-                    {
-                      validate: 'filled',
-                      message: '人员不得为空',
-                      trigger: 'input+blur',
-                      required: true,
-                    },
-                  ]}
-                  scopedSlots={{
-                    input: () => (
-                      <Picker
-                        value={this.popup.reassign}
-                        valueField="userName"
-                        textField="userName"
-                        class={bem('popup-picker')}
-                        dataSource={() => this.getUserList(this.taskId, this.popup.item)}
-                        onConfirm={(value) => this.popup.reassign = value}
-                        placeholder="请选择"
-                        title=""
-                        showToolbar
-                        closeOnClickOverlay
-                        inputAlign="right"
-                      />
-                    ),
-                  }}
-                />
-              </Form>
-              <div class={bem('popup-divider')}></div>
-              <div class={bem('operation', { center: true })} style="padding: 8px 0;">
-                <Button type="default" squareroud="round" onClick={() => this.showPopup = false}>
-                  {t('cancel')}
-                </Button>
-                <Button type="info" squareroud="round" onClick={() => this.confirmPopup()}>
-                  {t('confirm')}
-                </Button>
+                          ))}
+                        </div>
+                      )
+                    }}
+                  />
+                  <Field
+                    label={t('signPerson')}        
+                    border={false}
+                    required
+                    rules={[
+                      {
+                        validate: 'filled',
+                        message: '人员不得为空',
+                        trigger: 'input+blur',
+                        required: true,
+                      },
+                    ]}
+                    scopedSlots={{
+                      input: () => (
+                        <Picker
+                          value={this.popup.reassign}
+                          valueField="userName"
+                          textField="userName"
+                          class={bem('popup-picker')}
+                          dataSource={() => this.getUserList(this.taskId, this.popup.item)}
+                          onConfirm={(value) => this.popup.reassign = value}
+                          placeholder="请选择"
+                          title=""
+                          showToolbar
+                          closeOnClickOverlay
+                          inputAlign="right"
+                        />
+                      ),
+                    }}
+                  />
+                </Form>
+                <div class={bem('popup-divider')}></div>
+                <div class={bem('operation', { center: true })} style="padding: 8px 0;">
+                  <Button type="default" squareroud="round" onClick={() => this.showPopup = false}>
+                    {t('cancel')}
+                  </Button>
+                  <Button type="info" squareroud="round" onClick={() => this.confirmPopup()}>
+                    {t('confirm')}
+                  </Button>
+                </div>
               </div>
-            </div>
-          )}
-        </Popup>
+            )}
+          </Popup>
+        )}
       </div>
     );
   },

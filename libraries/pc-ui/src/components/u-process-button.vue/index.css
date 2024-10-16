@@ -2,7 +2,7 @@
     vertical-align: middle;
 }
 
-.modalSize[name="addSign"] [class^='u-modal_dialog__'] {
+.modalSize[hasMoreAddSignOption] [class^='u-modal_dialog__'] {
     width: 610px;
 }
 
