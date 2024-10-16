@@ -38,7 +38,7 @@
 
 <script>
 import { sync } from '@lcap/vue2-utils';
-import { isEqual } from 'lodash';
+import { isEqual, isNil } from 'lodash';
 import { MRoot } from '../m-root.vue';
 import MField from '../m-field.vue';
 import UTreeViewNodeNew from '../u-tree-view-new.vue/node.vue';
@@ -127,11 +127,11 @@ export default {
         data(data) {
             this.handleData();
         },
-        dataSource(dataSource, oldDataSource) {
-            // if (typeof dataSource === 'function' && String(dataSource) === String(oldDataSource))
-            //     return;
-            this.handleData();
-        },
+        // dataSource(dataSource, oldDataSource) {
+        //     // if (typeof dataSource === 'function' && String(dataSource) === String(oldDataSource))
+        //     //     return;
+        //     this.handleData();
+        // },
         // It is dynamic to find selected item by value
         // so using watcher is better than computed property.
         value(value, oldValue) {
@@ -151,11 +151,22 @@ export default {
             this.selectedVM = undefined;
             this.watchValue(this.value);
         },
+        'currentDataSource.data'(data) {
+            this.$nextTick(() => {
+              if (this.checkable) {
+                this.watchValues(this.currentValues);
+              } else if(!isNil(this.value)) {
+                this.watchValue(this.value);
+              }
+            });
+        }
     },
     created() {
-        this.currentDataSource = this.normalizeDataSource(this.dataSource || this.data);
-        if (this.currentDataSource && this.currentDataSource.load && this.initialLoad)
-            this.load();
+        this.handleData();
+
+        this.$watch('dataSource', this.handleData, {
+          deep: Array.isArray(this.dataSource),
+        });
     },
     mounted() {
         // Must trigger `value` watcher at mounted hook.

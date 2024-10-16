@@ -436,7 +436,9 @@ export default {
             const parentVM = this.parentVM;
             if (direction.includes('up') && parentVM) {
                 let count = 0;
-                parentVM.nodeVMs.forEach((nodeVM) => {
+                // 不计算 disabled 属性
+                const nodeVMs = parentVM.nodeVMs.filter((n) => !n.currentDisabled);
+                nodeVMs.forEach((nodeVM) => {
                     if (nodeVM.currentChecked)
                         count++;
                     else if (nodeVM.currentChecked === null)
@@ -445,7 +447,7 @@ export default {
 
                 if (count === 0)
                     parentVM.checkRecursively(false, 'up');
-                else if (count === parentVM.nodeVMs.length)
+                else if (count === nodeVMs.length)
                     parentVM.checkRecursively(true, 'up');
                 else
                     parentVM.checkRecursively(null, 'up');

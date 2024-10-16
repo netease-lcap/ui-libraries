@@ -119,9 +119,9 @@ export default createComponent({
     data() {
       return this.currentData || this.columnsprop || [];
     },
-    isDesignerNew(){
+    isDesignerNew() {
       return this.$env.VUE_APP_DESIGNER_NEW;
-    }
+    },
   },
   watch: {
     popupOpened(val) {
