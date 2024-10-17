@@ -39,4 +39,53 @@ export interface LcapBuildOptions {
   destDir: string;
   pnpm?: boolean;
   dependencies?: Dependency[];
+  selectorComponentNameMap?: Record<string, string>;
+  getSelectorComponentName?: (selector: string, componentNames: string[]) => string | undefined;
+}
+
+export const SupportedCSSProperties = [
+  'backgroundColor' as const,
+  'color' as const,
+  'fontSize' as const,
+  'borderTopColor' as const,
+  'borderRightColor' as const,
+  'borderBottomColor' as const,
+  'borderLeftColor' as const,
+  'borderTopWidth' as const,
+  'borderRightWidth' as const,
+  'borderBottomWidth' as const,
+  'borderLeftWidth' as const,
+  'borderTopStyle' as const,
+  'borderRightStyle' as const,
+  'borderBottomStyle' as const,
+  'borderLeftStyle' as const,
+  'borderTopLeftRadius' as const,
+  'borderTopRightRadius' as const,
+  'borderBottomRightRadius' as const,
+  'borderBottomLeftRadius' as const,
+  'width' as const,
+  'height' as const,
+  'marginTop' as const,
+  'marginRight' as const,
+  'marginBottom' as const,
+  'marginLeft' as const,
+  'paddingTop' as const,
+  'paddingRight' as const,
+  'paddingBottom' as const,
+  'paddingLeft' as const,
+];
+
+export type SupportedCSSProperty = (typeof SupportedCSSProperties)[number];
+
+export interface CSSValue {
+  defaultValue: string;
+  important?: boolean;
+}
+
+export interface CSSRule<V = CSSValue> {
+  // key: string; // 目前发现用处不大
+  selector: string;
+  description: string;
+  // code?: string;
+  parsedStyle?: Partial<Record<SupportedCSSProperty, V>>;
 }
