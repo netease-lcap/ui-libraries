@@ -203,8 +203,8 @@ namespace nasl.ui {
             description: '每页条数改变时触发',
         })
         onChangePageSize: (event:  {
-            page: nasl.core.Integer;
-            oldPage: nasl.core.Integer;
+            pageSize: nasl.core.Integer;
+            oldPageSize: nasl.core.Integer;
             pageSizeOptions: nasl.collection.List<nasl.core.Integer>;
         }) => any;
 
