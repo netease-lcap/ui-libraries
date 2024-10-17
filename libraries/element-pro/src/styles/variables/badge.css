@@ -1,0 +1,16 @@
+/**
+ * @component el-badge-pro
+ */
+:root {
+  --el-badge-text-color: var(--el-text-color-anti);
+  --el-badge-color: var(--el-error-color);
+  --el-badge-height: var(--el-comp-size-xxs);
+  --el-badge-height-s: var(--el-comp-size-xxxs);
+  --el-badge-dot-size: 6px;
+  --el-badge-min-width: 8px;
+  --el-badge-font: var(--el-font-body-small);
+  --el-badge-padding: calc((var(--el-badge-height) - var(--el-badge-min-width)) / 2);
+  --el-badge-padding-s: calc((var(--el-badge-height-s) - var(--el-badge-min-width)) / 2);
+  --el-badge-shape-circle: calc(var(--el-badge-height) / 2);
+  --el-badge-shape-round: var(--el-radius-default);
+}

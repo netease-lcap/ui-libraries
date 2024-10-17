@@ -39,8 +39,8 @@ export default {
       }),
     ],
     props: {
-        value: { type: [String, Boolean, null], default: false },
-        label: null,
+        value: { default: false },
+        label: {},
         text: String,
         readonly: { type: Boolean, default: false },
         disabled: { type: Boolean, default: false },
@@ -141,6 +141,7 @@ export default {
     user-select: none;
     cursor: var(--cursor-pointer);
     color: var(--checkbox-font-color);
+    display: inline-block;
 }
 
 .root:focus {

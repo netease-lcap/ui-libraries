@@ -1,15 +1,14 @@
 import path from 'path';
-import fs from 'fs-extra';
 import LcapCodeGen from './lcap-code-gen';
 import LcapBuild from './lcap-build';
 import LcapConfig from './lcap-config';
 import type { LcapThemeOptions, ViteLcapPluginOptions } from './lcap-build';
+import { getConfigComponents } from '../utils';
 
 const DEFAULT_THEME_OPTIONS: LcapThemeOptions = {
   findThemeType: 'theme',
   themeVarCssPath: './src/theme/vars.css',
   themeComponentFolder: './src/theme/components',
-  useOldCssVarParser: false,
   themePreviewEntry: './src/theme/index',
   previewPages: [
     {
@@ -28,7 +27,6 @@ const EXTENSION_DEFAULT_THEME_OPTIONS: LcapThemeOptions = {
   themeVarCssPath: '',
   themeComponentFolder: './src/components',
   themePreviewEntry: '',
-  useOldCssVarParser: false,
   previewPages: [],
 };
 
@@ -59,17 +57,8 @@ export default (options: ViteLcapPluginOptions = {}) => {
     pluginOption.theme.themeComponentFolder = path.resolve(cwd, pluginOption.theme.themeComponentFolder || '');
   }
 
-  const lcapConfigPath = path.resolve(cwd, './lcap-ui.config.js');
-  if ((!pluginOption.components || pluginOption.components.length === 0) && fs.existsSync(lcapConfigPath)) {
-    // eslint-disable-next-line import/no-dynamic-require, global-require
-    const config = require(lcapConfigPath);
-    pluginOption.components = (config.components || []).map((c) => ({
-      ...c,
-      group: c.group,
-      title: c.alias,
-      name: c.name,
-      show: c.show,
-    }));
+  if (!pluginOption.components || pluginOption.components.length === 0) {
+    pluginOption.components = getConfigComponents(cwd);
   }
 
   return [
@@ -82,6 +71,7 @@ export default (options: ViteLcapPluginOptions = {}) => {
       ...pluginOption.theme,
       framework: pluginOption.framework,
       type: pluginOption.type,
+      dependencies: options.dependencies,
     }),
     LcapBuild(pluginOption),
   ];

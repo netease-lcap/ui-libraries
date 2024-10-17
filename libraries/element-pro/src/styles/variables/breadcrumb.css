@@ -1,0 +1,22 @@
+/**
+ * @component el-breadcrumb-pro
+ */
+:root {
+  --el-breadcrumb-text-color-default: var(--el-text-color-placeholder);
+  --el-breadcrumb-text-color-hover: var(--el-brand-color);
+  --el-breadcrumb-text-color-current: var(--el-text-color-primary);
+  --el-breadcrumb-text-color-disabled: var(--el-text-color-disabled);
+  --el-breadcrumb-icon-arrow-color-default: var(--el-text-color-placeholder);
+  --el-breadcrumb-icon-slash-color-default: var(--el-text-color-placeholder);
+  --el-breadcrumb-icon-color-hover: var(--el-brand-color);
+  --el-breadcrumb-icon-color-current: var(--el-text-color-placeholder);
+  --el-breadcrumb-font-base: var(--el-font-body-medium);
+  --el-breadcrumb-option-box-shadow: var(--el-shadow-2);
+  --el-breadcrumb-option-box-bg: var(--el-bg-color-container);
+  --el-breadcrumb-separator-margin: 0 var(--el-comp-margin-xs);
+  --el-breadcrumb-content-icon-margin-bottom: var(--el-comp-margin-xxs);
+  --el-breadcrumb-icon-size: var(--el-font-size-body-large);
+  --el-breadcrumb-inner-max-width-default: 120px;
+  --el-breadcrumb-option-max-width: 120px;
+  --el-breadcrumb-inner-msg-width: 300px;
+}

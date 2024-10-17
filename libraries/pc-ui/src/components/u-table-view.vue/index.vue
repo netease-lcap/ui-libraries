@@ -175,6 +175,8 @@
 
         :nativeScroll="nativeScroll"
         :currentValues="currentValues"
+        :lazyLoad="lazyLoad"
+        :bufferSize="bufferSize"
         @resize="onResizerDragEnd">
     </u-table-render>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
@@ -182,6 +184,7 @@
         :total-items="currentDataSource.total" :page="currentDataSource.paging.number"
         :page-size="currentDataSource.paging.size" :page-size-options="pageSizeOptions" :show-total="showTotal" :show-sizer="showSizer" :show-jumper="showJumper"
         :size="paginationSize"
+        :max-page="currentDataSource.paging.number"
         @change="page($event.page)" @change-page-size="onChangePageSize">
     </u-pagination>
     <div><slot></slot></div>
@@ -375,6 +378,8 @@ export default {
 
         nativeScroll: { type: Boolean, default: false }, // 是否使用原生滚动条
         columnDraggable: { type: Boolean, default: false }, // 列是否可拖拽
+        lazyLoad: { type: Boolean, default: false }, // 懒加载
+        bufferSize: { type: Number, default: 10 },
     },
     data() {
         return {
@@ -441,6 +446,7 @@ export default {
             isDragging: this.isDragging,
             getItemColSpan: this.getItemColSpan,
             getItemRowSpan: this.getItemRowSpan,
+            getTableContentElem: this.getTableContentElem,
         };
     },
     computed: {
@@ -557,7 +563,7 @@ export default {
             const oldValue = oldItem ? this.$at(oldItem, this.valueField) : undefined;
             if (value === oldValue)
                 return;
-                
+
             this.$emit('change', { value, oldValue, item, oldItem }, this);
             this.currentData.forEach((itemTemp) => {
                 const valueTemp = this.$at(itemTemp, this.valueField);
@@ -753,6 +759,9 @@ export default {
             if (this.timer) {
                 clearTimeout(this.timer);
             }
+        },
+        getTableContentElem() {
+          return this.$el;
         },
         processData(data) {
             const selectable = this.visibleColumnVMs.some((columnVM) => columnVM.type === 'radio');
@@ -1215,7 +1224,6 @@ export default {
             this.currentDataSource.clearLocalData();
             this.clearDragState();
             this.load();
-            console.log('table reload');
         },
         getFields() {
             return this.visibleColumnVMs
@@ -1541,7 +1549,6 @@ export default {
                 try {
                     mergesMap.length > 0 ? this.$once('hook:updated', res) : res();
                 } catch (error) {
-                    console.log('mergeMap格式不正确', error);
                     this.$once('hook:updated', res);
                 }
             });

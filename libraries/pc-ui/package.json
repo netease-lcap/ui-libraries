@@ -53,6 +53,7 @@
     "resize-observer-polyfill": "^1.5.1",
     "swiper": "^7.4.1",
     "vue-cropper": "^0.5.8",
+    "whatwg-fetch": "3.6.2",
     "xlsx-js-style": "^1.2.0",
     "yargs": "^16.2.0"
   },
@@ -119,7 +120,7 @@
     "preview": "vite preview",
     "build:storybook": "storybook build",
     "check:api": "tsc -p tsconfig.api.json",
-    "lowcode": " node usage-script.js > ./dist-theme/nasl.ui.merge.json && cd ./dist-theme rm ./nasl.ui.json && mv nasl.ui.merge.json nasl.ui.json "
+    "lowcode": "node ./scripts/usage-script.js"
   },
   "jestSerializer": {
     "attributesToClear": [

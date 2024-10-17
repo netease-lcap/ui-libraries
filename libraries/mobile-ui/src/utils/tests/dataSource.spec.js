@@ -273,6 +273,43 @@ test('组件开启分页 + 远端数据返回数组', async () => {
   expect(cb).toHaveBeenCalledTimes(2);
 });
 
+test('组件开启分页 + 远端数据返回数组 + 筛选', async () => {
+  const filter = 'A';
+  const expectedData = data.filter((item) => item.name.includes(filter));
+
+  const cb = vi.fn();
+  const load = () => {
+    cb();
+    return new Promise((resolve) => {
+      resolve(data);
+    });
+  };
+  const dataSource = new DataSource({
+    load,
+    viewMode: 'more',
+    paging: {
+      number: 1,
+      size: 20,
+    },
+    filtering: {
+      name: {
+        operator: 'includes',
+        value: filter,
+        caseInsensitive: true,
+      },
+    },
+  });
+
+  await dataSource.load();
+  expect(JSON.stringify(dataSource.viewData)).toEqual(JSON.stringify(expectedData.slice(0, 20)));
+  expect(cb).toHaveBeenCalledTimes(1);
+  expect(dataSource.hasMore()).toEqual(false);
+
+  await dataSource.reload();
+  expect(JSON.stringify(dataSource.viewData)).toEqual(JSON.stringify(expectedData.slice(0, 20)));
+  expect(cb).toHaveBeenCalledTimes(2);
+});
+
 test('组件关闭分页 + 远端数据返回数组', async () => {
   const cb = vi.fn();
   const load = () => {
@@ -294,6 +331,40 @@ test('组件关闭分页 + 远端数据返回数组', async () => {
 
   await dataSource.reload();
   expect(JSON.stringify(dataSource.viewData)).toEqual(JSON.stringify(data));
+  expect(cb).toHaveBeenCalledTimes(2);
+});
+
+test('组件关闭分页 + 远端数据返回数组 + 筛选', async () => {
+  const filter = 'A';
+  const expectedData = data.filter((item) => item.name.includes(filter));
+
+  const cb = vi.fn();
+  const load = () => {
+    cb();
+    return new Promise((resolve) => {
+      resolve(data);
+    });
+  };
+  const dataSource = new DataSource({
+    load,
+    viewMode: 'more',
+    paging: undefined,
+    filtering: {
+      name: {
+        operator: 'includes',
+        value: filter,
+        caseInsensitive: true,
+      },
+    },
+  });
+
+  await dataSource.load();
+  expect(JSON.stringify(dataSource.viewData)).toEqual(JSON.stringify(expectedData));
+  expect(cb).toHaveBeenCalledTimes(1);
+  expect(dataSource.hasMore()).toEqual(false);
+
+  await dataSource.reload();
+  expect(JSON.stringify(dataSource.viewData)).toEqual(JSON.stringify(expectedData));
   expect(cb).toHaveBeenCalledTimes(2);
 });
 

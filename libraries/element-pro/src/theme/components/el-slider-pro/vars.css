@@ -1,0 +1,236 @@
+/**
+ * @component el-slider-pro
+ */
+:root {
+  /**
+   * @desc 滑块背景色
+   * @type color
+   */
+  --el-slider-background: var(--el-bg-color-secondarycomponent);
+
+  /**
+   * @desc 当前滑块背景色
+   * @type color
+   */
+  --el-slider-background-current: var(--el-brand-color);
+
+  /**
+   * @desc 滑块文字颜色
+   * @type color
+   */
+  --el-slider-text: var(--el-text-color-primary);
+
+  /**
+   * @desc 滑块控制条背景色
+   * @type color
+   */
+  --el-slider-control-bar-background: #fff;
+
+  /**
+   * @desc 滑块控制条边框颜色
+   * @type color
+   */
+  --el-slider-control-bar-border: var(--el-brand-color);
+
+  /**
+   * @desc 滑块背景色（悬停）
+   * @type color
+   */
+  --el-slider-background-hover: var(--el-bg-color-secondarycomponent-hover);
+
+  /**
+   * @desc 滑块控制条背景色（悬停）
+   * @type color
+   */
+  --el-slider-control-bar-background-hover: var(--el-gray-color-1);
+
+  /**
+   * @desc 滑块背景色（禁用）
+   * @type color
+   */
+  --el-slider-background-disabled: var(--el-bg-color-component-disabled);
+
+  /**
+   * @desc 当前滑块背景色（禁用）
+   * @type color
+   */
+  --el-slider-background-current-disabled: var(--el-brand-color-disabled);
+
+  /**
+   * @desc 滑块控制条边框颜色（禁用）
+   * @type color
+   */
+  --el-slider-control-bar-border-disabled: var(--el-brand-color-disabled);
+
+  /**
+   * @desc 滑块文字颜色（禁用）
+   * @type color
+   */
+  --el-slider-text-disabled: var(--el-text-color-disabled);
+
+  /**
+   * @desc 滑块阴影
+   * @type shadow
+   */
+  --el-slider-shadow: var(--el-shadow-1);
+
+  /**
+   * @desc 滑块输入框阴影
+   * @type shadow
+   */
+  --el-slider-input-shadow: 0 0 0px 2px var(--el-brand-color-focus);
+
+  /**
+   * @desc 滑块中心线背景色
+   * @type color
+   */
+  --el-slider-center-line-background: rgba(0, 0, 0, 0.9);
+
+  /**
+   * @hidden
+   * @desc 滑块输入框宽度
+   * @type size
+   */
+  --el-slider-input-width: 80px;
+
+  /**
+   * @hidden
+   * @desc 滑块行输入框宽度
+   * @type size
+   */
+  --el-slider-row-input-width: 120px;
+
+  /**
+   * @desc 滑块轨道高度
+   * @type size
+   */
+  --el-slider-rail-track-step-size: var(--el-size-2);
+
+  /**
+   * @desc 滑块高度
+   * @type size
+   */
+  --el-slider-height: calc(var(--el-comp-paddingTB-xs) * 2 + var(--el-slider-rail-track-step-size));
+
+  /**
+   * @desc 滑块控制条大小
+   * @type size
+   */
+  --el-slider-control-bar-size: var(--el-comp-size-xxxs);
+
+  /**
+   * @desc 垂直滑块高度
+   * @type size
+   */
+  --el-slider-vertical-height: 100%;
+
+  /**
+   * @desc 垂直滑块标记文字区域宽度
+   * @type size
+   */
+  --el-slider-vertical-mark-width: 18px;
+
+  /**
+   * @desc 滑块刻度线宽度
+   * @type size
+   */
+  --el-slider-stop-width: 1px;
+
+  /**
+   * @desc 滑块刻度线高度
+   * @type size
+   */
+  --el-slider-stop-height: var(--el-size-2);
+
+  /**
+   * @desc 滑块中心线宽度
+   * @type size
+   */
+  --el-slider-center-line-width: var(--el-size-4);
+
+  /**
+   * @desc 滑块中心线高度
+   * @type size
+   */
+  --el-slider-center-line-height: 1px;
+
+  /**
+   * @desc 滑块输入框左外边距
+   * @type size
+   */
+  --el-slider-input-margin-left: var(--el-comp-margin-xxl);
+
+  /**
+   * @desc 垂直滑块输入框上内边距
+   * @type size
+   */
+  --el-slider-input-vertical-padding-top: var(--el-comp-paddingTB-l);
+
+  /**
+   * @desc 垂直滑块输入框左外边距
+   * @type size
+   */
+  --el-slider-input-vertical-margin-left: 0px;
+
+  /**
+   * @desc 滑块内边距
+   * @type size
+   */
+  --el-slider-padding: var(--el-comp-paddingTB-xs) 0;
+
+  /**
+   * @desc 垂直滑块内边距
+   * @type size
+   */
+  --el-slider-vertical-padding: 0;
+
+  /**
+   * @hidden
+   * @desc 垂直滑块手柄上外边距
+   * @type size
+   */
+  --el-slider-vertical-handle-margin-top: -6px;
+
+  /**
+   * @hidden
+   * @desc 垂直滑块手柄左外边距
+   * @type size
+   */
+  --el-slider-vertical-handle-margin-left: -5px;
+
+  /**
+   * @desc 垂直滑块文字上外边距
+   * @type size
+   */
+  --el-slider-vertical-text-margin-top: 0;
+
+  /**
+   * @desc 垂直滑块文字左外边距
+   * @type size
+   */
+  --el-slider-vertical-text-margin-left: var(--el-comp-margin-xxs);
+
+  /**
+   * @desc 滑块中心线外边距
+   * @type size
+   */
+  --el-slider-center-line-margin: 0 var(--el-comp-margin-s);
+
+  /**
+   * @desc 滑块文字字体
+   * @type font
+   */
+  --el-slider-text-font: var(--el-font-body-small);
+
+  /**
+   * @desc 滑块边框半径
+   * @type size
+   */
+  --el-slider-border-radius: var(--el-radius-round);
+
+  /**
+   * @desc 滑块文字顶部位置
+   * @type size
+   */
+  --el-slider-text-top: calc(var(--el-slider-rail-track-step-size) + var(--el-comp-paddingTB-xs) + 2px);
+}

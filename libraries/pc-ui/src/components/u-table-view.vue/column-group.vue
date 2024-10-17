@@ -22,6 +22,7 @@ export default {
         return {
             parentVM: undefined,
             isGroup: true,
+            colSpan: 1,
         };
     },
     mounted() {

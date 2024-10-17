@@ -1,0 +1,16 @@
+/**
+ * @component el-popup
+ */
+:root {
+  /**
+   * @desc 弹出层背景颜色
+   * @type color
+   */
+  --popup-modal-background-color: var(--color-black);
+
+  /**
+   * @desc 弹出层透明度
+   * @type number
+   */
+  --popup-modal-opacity: 0.5;
+}

@@ -1,0 +1,22 @@
+/**
+ * @component el-statistic-pro
+ */
+:root {
+  --el-statistic-text-color: var(--el-text-color-secondary);
+  --el-statistic-title-font-size: var(--el-font-body-medium);
+  --el-statistic-title-margin-bottom: var(--el-comp-margin-s);
+  --el-statistic-value-font-size: var(--el-font-size-headline-medium);
+  --el-statistic-value-line-height: var(--el-line-height-headline-medium);
+  --el-statistic-value-text-color: var(--el-text-color-primary);
+  --el-statistic-unit-font-size: var(--el-font-size-body-medium);
+  --el-statistic-unit-margin-left: var(--el-comp-margin-xs);
+  --el-statistic-prefix-font-size: var(--el-font-size-title-large);
+  --el-statistic-prefix-margin-right: var(--el-comp-margin-s);
+  --el-statistic-suffix-font-size: var(--el-font-size-title-large);
+  --el-statistic-suffix-margin-left: var(--el-comp-margin-s);
+  --el-statistic-extra-margin-top: 8px;
+  --el-statistic-font-family: TCloudNumber, -apple-system, BlinkMacSystemFont,
+  Segoe UI, Roboto, Hiragino Sans GB, Microsoft YaHei UI, Microsoft YaHei,
+  Source Han Sans CN, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+  Segoe UI Symbol;
+}

@@ -48,9 +48,9 @@
                         <tbody ref="virtual">
                             <template v-if="(!currentLoading && !currentError && !currentEmpty || pageable === 'auto-more' || pageable === 'load-more') && currentData && currentData.length">
                                 <template v-for="(item, rowIndex) in virtualList">
-                                    <tr
+                                    <!-- <tr
                                       v-if="item.display !== 'none'"
-                                      :key="valueField && $at(item, valueField) ? $at(item, valueField) : rowIndex"
+                                      :key="getRowKey(item, rowIndex)"
                                       :class="[$style.row]"
                                       :color="item.rowColor"
                                       :selectable="selectable"
@@ -95,7 +95,30 @@
                                             @tree-toggle-expanded="toggleTreeExpanded"
                                             @select="select($event.item, $event.rowIndex)">
                                         </u-table-render-td>
-                                    </tr>
+                                    </tr> -->
+                                    <u-table-render-tr
+                                      v-if="item.display !== 'none'"
+                                      :key="getRowKey(item, rowIndex)"
+                                      :item="item"
+                                      :rowIndex="rowIndex"
+                                      :selectable="selectable"
+                                      :rowDraggable="rowDraggable"
+                                      :visibleColumnVMs="visibleColumnVMs"
+                                      :virtualIndex="virtualIndex"
+                                      :valueField="valueField"
+                                      :disabled="disabled"
+                                      :ellipsis="ellipsis"
+                                      :readonly="readonly"
+                                      :treeDisplay="treeDisplay"
+                                      :hasChildrenField="hasChildrenField"
+                                      :treeColumnIndex="treeColumnIndex"
+                                      :handlerDraggable="handlerDraggable"
+                                      :usePagination="usePagination"
+                                      :itemHeight="itemHeight"
+                                      :lazyLoad="lazyLoad && rowIndex >= bufferSize && !virtual"
+                                      :scrollXStart="scrollXStart"
+                                      :scrollXEnd="scrollXEnd"
+                                    />
                                     <u-table-render-tr-expander
                                       v-if="expanderColumnVM"
                                       :key="`expander_${valueField && $at(item, valueField) ? $at(item, valueField) : rowIndex}`"
@@ -164,6 +187,7 @@ import FVirtualTable from './f-virtual-table.vue';
 import i18nMixin from '../../mixins/i18n';
 import KeyMap from '../../utils/keyMap';
 import UTableRenderTd from './render.td.vue';
+import UTableRenderTr from './render.tr.vue';
 import UTableRenderTrExpander from './render.tr.expander.vue';
 import UTableRenderTh from './render.th.vue';
 import VueDraggable from 'vuedraggable'
@@ -174,6 +198,7 @@ export default {
     mixins: [i18nMixin('u-table-view'), FVirtualTable],
     components: {
         UTableRenderTd,
+        UTableRenderTr,
         UTableRenderTrExpander,
         UTableRenderTh,
         VueDraggable
@@ -273,6 +298,8 @@ export default {
         rowStyle: Function,
 
         nativeScroll: { type: Boolean, default: false },
+        lazyLoad: { type: Boolean, default: false },
+        bufferSize: { type: Number, default: 10 },
         currentValues: Array,
     },
     data() {
@@ -314,6 +341,10 @@ export default {
             onResizerDragStart: this.onResizerDragStart,
             onResizerDrag: this.onResizerDrag,
             onResizerDragEnd: this.onResizerDragEnd,
+            getRealItem: this.getRealItem,
+            isTdLastLeftFixed: this.isTdLastLeftFixed,
+            isFirstRightFixed: this.isFirstRightFixed,
+            getStyle: this.getStyle,
         };
     },
     watch: {
@@ -348,6 +379,9 @@ export default {
         },
     },
     methods: {
+        getRowKey(item, rowIndex) {
+          return this.valueField && this.$at(item, this.valueField) ? this.$at(item, this.valueField) : rowIndex;
+        },
         number2Pixel(value) {
             return isNumber(value) ? value + 'px' : '';
         },
@@ -429,12 +463,12 @@ export default {
                 if (columnData.columnsInGroup || columnData.cloumnsForColSpanHidden) {
                     const columnsInGroupWidth = (columnData.columnsInGroup || []).map((columnVM) => {
                         const columnData = this.columnVMsMap[columnVM._uid];
-                        return columnData[type];
-                    });
+                        return columnData && columnData[type];
+                    }).filter((width) => width !== undefined); // 过滤掉undefined, 避免tempWidth为NaN
                     const cloumnsForColSpanHiddenWidth = (columnData.cloumnsForColSpanHidden || []).map((columnVM) => {
                         const columnData = this.columnVMsMap[columnVM._uid];
-                        return columnData[type];
-                    });
+                        return columnData && columnData[type];
+                    }).filter((width) => width !== undefined);
                     const tempWidth = Math.min(...columnsInGroupWidth.concat(cloumnsForColSpanHiddenWidth));
                     if (type === 'left' && width !== undefined) {
                         width = Math.min(width, tempWidth);
@@ -455,7 +489,8 @@ export default {
                 if (groupList) {
                     const groupVMIndex = groupList.findIndex((groupVM) => groupVM === columnVM.$parent);
                     const isGroupInLast = this.isLastLeftFixed(columnVM.$parent, groupVMIndex, groupList);
-                    isLastInList = isLastInList && isGroupInLast;
+                    const isLastInGroup = list[columnIndex + 1] === undefined || list[columnIndex + 1].$parent !== columnVM.$parent; // 原来组里的最后一个没有阴影，增加判断
+                    isLastInList = isLastInGroup && isGroupInLast;
                 }
             }
             return inFixedLeftList && isLastInList ? true : undefined;
@@ -478,7 +513,8 @@ export default {
                 if (groupList) {
                     const groupVMIndex = groupList.findIndex((groupVM) => groupVM === columnVM.$parent);
                     const isGroupInLast = this.isFirstRightFixed(columnVM.$parent, groupVMIndex, groupList);
-                    isLastInList = isLastInList && isGroupInLast;
+                    const isLastInGroup = list[columnIndex - 1] === undefined || list[columnIndex - 1].$parent !== columnVM.$parent;
+                    isLastInList = isLastInGroup && isGroupInLast;
                 }
             }
             return inFixedRightList && isLastInList ? true : undefined;

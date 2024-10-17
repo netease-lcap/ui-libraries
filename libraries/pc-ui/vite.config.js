@@ -26,8 +26,7 @@ export default defineConfig(({ command }) => {
         framework: 'vue2',
         pnpm: true,
         theme: {
-          themeVarCssPath: 'src/styles/theme.css',
-          useOldCssVarParser: true,
+          oldCssVarPath: './src/styles/theme.css',
         },
         i18n: {
           'zh-CN': './src/locale/lang/zh-CN.json',

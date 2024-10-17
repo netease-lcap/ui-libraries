@@ -1,0 +1,32 @@
+/**
+ * @component el-chat-pro
+ */
+:root {
+  --el-comment-bg-color-secondary: var(--el-bg-color-secondarycontainer);
+  --el-comment-text-color-default: var(--el-text-color-primary);
+  --el-comment-text-color-secondary: var(--el-text-color-placeholder);
+  --el-comment-text-color-hover: var(--el-text-color-link);
+  --el-comment-border-color-default: var(--el-component-stroke);
+  --el-comment-author-text-size: var(--el-font-title-medium);
+  --el-comment-content-text-size: var(--el-font-body-medium);
+  --el-comment-secondary-text-size: var(--el-font-body-small);
+  --el-comment-padding-s: var(--el-comp-paddingTB-s) var(--el-comp-paddingLR-s);
+  --el-comment-avatar-margin-right: var(--el-comp-margin-xxl);
+  --el-comment-author-margin-bottom: var(--el-comp-margin-s);
+  --el-comment-author-time-padding-right: var(--el-comp-paddingLR-s);
+  --el-comment-author-name-padding-right: var(--el-comp-paddingLR-s);
+  --el-comment-actions-margin-top: var(--el-comp-margin-s);
+  --el-comment-actions-gap: var(--el-comp-margin-s);
+  --el-comment-quote-margin-top: var(--el-comp-margin-l);
+  --el-comment-quote-padding-left: var(--el-comp-margin-l);
+  --el-comment-reply-margin-left: calc(var(--el-comp-size-xxxl) + var(--el-comp-margin-xxl));
+  --el-comment-reply-margin-top: var(--el-comp-margin-l);
+  --el-comment-reply-padding: var(--el-comp-paddingTB-l) var(--el-comp-paddingLR-xl);
+  --el-comment-avatar-size: var(--el-comp-size-xxxl);
+  --el-code-bg-color-page: var(--el-gray-color-14);
+  --el-code-font-color-base: var(--el-font-white-1);
+  --el-chat-refresh-line: #e7e7e7;
+  --el-chat-input-hover: inset 0px 2px 4px -1px rgba(0, 0, 0, 0.12), 0px 4px 5px 0px rgba(0, 0, 0, .08), 0px 1px 10px 0px rgba(0, 0, 0, .05);
+  --el-chat-actions-hover: #eeeeee;
+  --el-chat-action-icon-padding: 3px;
+}

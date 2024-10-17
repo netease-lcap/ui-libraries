@@ -1,0 +1,22 @@
+/**
+ * @component el-anchor-pro
+ */
+:root {
+  --el-anchor-text-color-default: var(--el-text-color-primary);
+  --el-anchor-text-color-hover: var(--el-brand-color);
+  --el-anchor-text-color-current: var(--el-brand-color);
+  --el-anchor-text-color-active: var(--el-brand-color-active);
+  --el-anchor-bg-color: var(--el-bg-color-container);
+  --el-anchor-border-color: var(--el-component-stroke);
+  --el-anchor-width-s: 120px;
+  --el-anchor-width-default: 200px;
+  --el-anchor-width-l: 320px;
+  --el-anchor-point-width: 1px;
+  --el-anchor-target-width: 6px;
+  --el-anchor-font: var(--el-font-body-medium);
+  --el-anchor-item-padding: var(--el-comp-paddingTB-xxs) var(--el-comp-paddingTB-l);
+  --el-anchor-sub-item-padding: var(--el-comp-paddingTB-xxs) var(--el-comp-paddingTB-l);
+  --el-anchor-target-copy-margin: 0 0 0 var(--el-comp-margin-xs);
+  --el-anchor-point-transition: all 0.2s cubic-bezier(0.24, 0.41, 0.51, 0.9);
+  --el-anchor-target-animation: fadeOut 2s 2s linear 1;
+}

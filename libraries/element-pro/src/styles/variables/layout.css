@@ -1,0 +1,13 @@
+/**
+ * @component el-layout-pro
+ */
+:root {
+  --el-layout-color: var(--el-text-color-secondary);
+  --el-layout-bg-color: var(--el-bg-color-page);
+  --el-layout-header-bg-color: var(--el-bg-color-container);
+  --el-layout-sider-bg-color: var(--el-bg-color-container);
+  --el-layout-footer-color: var(--el-text-color-placeholder);
+  --el-layout-header-height: var(--el-comp-size-xxxl);
+  --el-layout-sider-width: 232px;
+  --el-layout-sider-anim-duration: 0.2s;
+}

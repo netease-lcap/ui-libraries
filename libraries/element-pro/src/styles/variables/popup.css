@@ -1,0 +1,25 @@
+/**
+ * @component el-popup-pro
+ */
+:root {
+  --el-popup-bg: var(--el-bg-color-container);
+  --el-arrow-bg: var(--el-bg-color-container);
+  --el-popup-text-color: var(--el-text-color-primary);
+  --el-popup-padding: var(--el-comp-paddingTB-xs) var(--el-comp-paddingLR-s);
+  --el-popup-content-line-height: var(--el-line-height-body-medium);
+  --el-popup-arrow-width: 8px;
+  --el-popup-arrow-height: 8px;
+  --el-popup-content-arrow-spacer: var(--el-comp-margin-l);
+  --el-popup-content-margin: var(--el-comp-margin-s);
+  --el-popup-arrow-position: var(--el-popup-arrow-width);
+  --el-popup-content-font-size: var(--el-font-size-body-medium);
+  --el-popup-shadow: var(--el-shadow-2), var(--el-shadow-inset-top), var(--el-shadow-inset-right), var(--el-shadow-inset-bottom), var(--el-shadow-inset-left);
+  --el-popup-top-arrow-shadow: var(--el-shadow-inset-left), var(--el-shadow-inset-bottom);
+  --el-popup-left-arrow-shadow: var(--el-shadow-inset-left), var(--el-shadow-inset-top);
+  --el-popup-bottom-arrow-shadow: var(--el-shadow-inset-top), var(--el-shadow-inset-right);
+  --el-popup-right-arrow-shadow: var(--el-shadow-inset-right), var(--el-shadow-inset-bottom);
+  --el-popup-flow-duration: 0.2s;
+  --el-popup-flow-fn: cubic-bezier(0.82, 0, 1, 0.9);
+  --el-popup-flow-transition-enter: opacity var(--el-popup-flow-duration) linear;
+  --el-popup-flow-transition-leave: opacity var(--el-popup-flow-duration) cubic-bezier(0, 0, 0.15, 1), visibility var(--el-popup-flow-duration) var(--el-popup-flow-fn);
+}

@@ -4,6 +4,8 @@ import {
   CallExpression,
   Expression,
   ObjectExpression,
+  TemplateElement,
+  TSType,
 } from '@babel/types';
 import { getNodeCode } from './utils';
 import { transformParam2Nasl } from './transform-func2nasl';
@@ -145,8 +147,16 @@ export function transformExpression2Nasl(ast: Expression, namespace = '') {
           .sort((node1: any, node2: any) => {
             return node1.start - node2.start;
           })
-          .map((n: any) => {
-            return transformExpression2Nasl(n);
+          .map((n: Expression | TemplateElement | TSType) => {
+            if (n.type === 'TemplateElement') {
+              return {
+                concept: 'StringLiteral',
+                kind: 'Expression',
+                name: '',
+                value: n.value.raw,
+              };
+            }
+            return transformExpression2Nasl(n as Expression);
           }),
       };
     case 'StringLiteral':

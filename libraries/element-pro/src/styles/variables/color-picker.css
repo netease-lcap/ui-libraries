@@ -1,0 +1,52 @@
+/**
+ * @component el-color-picker-pro
+ */
+:root {
+  --el-color-picker-panel-width: 256px;
+  --el-color-picker-panel-padding: var(--el-pop-padding-xl);
+  --el-color-picker-panel-radius: var(--el-radius-medium);
+  --el-color-picker-saturation-height: 160px;
+  --el-color-picker-saturation-radius: var(--el-radius-default);
+  --el-color-picker-saturation-thumb-size: calc(var(--el-comp-size-xxxs) + var(--el-size-1));
+  --el-color-picker-margin: var(--el-comp-margin-m);
+  --el-color-picker-slider-height: 8px;
+  --el-color-picker-slider-wrapper-radius: calc(var(--el-color-picker-slider-height) / 2);
+  --el-color-picker-slider-wrapper-padding: 0 calc(var(--el-color-picker-saturation-thumb-size) / 2);
+  --el-color-picker-slider-thumb-size: calc(var(--el-comp-size-xxxs) + var(--el-size-1));
+  --el-color-picker-slider-thumb-transform-x: calc(var(--el-color-picker-slider-thumb-size) * -0.5);
+  --el-color-picker-slider-thumb-padding: 2px;
+  --el-color-picker-input-format-margin-left: var(--el-comp-margin-s);
+  --el-color-picker-select-format-margin-right: var(--el-comp-margin-xs);
+  --el-color-picker-select-format-width: 72px;
+  --el-color-picker-font: var(--el-font-body-small);
+  --el-color-picker-icon-radius: var(--el-radius-default);
+  --el-color-picker-icon-font-size: var(--el-color-picker-swatch-icon-size);
+  --el-color-picker-degree-width: var(--el-comp-size-xxl);
+  --el-color-picker-gradient-preview-width: var(--el-comp-size-s);
+  --el-color-picker-gradient-preview-height: var(--el-comp-size-s);
+  --el-color-picker-gradient-preview-radius: var(--el-radius-default);
+  --el-color-picker-swatch-icon-size: var(--el-comp-size-xxxs);
+  --el-color-picker-swatch-action-margin-left: var(--el-comp-margin-s);
+  --el-color-picker-swatch-width: var(--el-comp-size-xxxs);
+  --el-color-picker-swatch-height: var(--el-comp-size-xxxs);
+  --el-color-picker-swatch-radius: var(--el-radius-circle);
+  --el-color-picker-swatch-padding: 0;
+  --el-color-picker-swatch-border-size: 1px;
+  --el-color-picker-swatch-columns: 10;
+  --el-color-picker-swatch-item-padding: calc(var(--el-color-picker-panel-padding) - 8px);
+  --el-color-picker-swatch-item-left-negative-padding: calc(0px - var(--el-color-picker-swatch-item-padding));
+  --el-color-picker-swatch-row-gap: calc(calc(var(--el-color-picker-panel-width) - calc(calc(var(--el-color-picker-panel-padding) * 2) + calc(var(--el-color-picker-swatch-height) * var(--el-color-picker-swatch-columns)))) / 9);
+  --el-color-picker-swatch-column-gap: calc(calc(var(--el-color-picker-panel-width) - calc(calc(var(--el-color-picker-panel-padding) * 2) + calc(var(--el-color-picker-swatch-width) * var(--el-color-picker-swatch-columns)))) / 9);
+  --el-color-picker-swatch-wrap-margin-left: calc(var(--el-color-picker-swatch-padding) + var(--el-color-picker-swatch-border-size)) * -1;
+  --el-color-picker-swatch-wrap-margin-right: var(--el-color-picker-swatch-wrap-margin-left) - 10px;
+  --el-color-picker-swatch-wrap-margin: 0 var(--el-color-picker-swatch-wrap-margin-right) 0 var(--el-color-picker-swatch-wrap-margin-left);
+  --el-color-picker-swatch-max-rows: 4;
+  --el-color-picker-panel-shadow: var(--el-shadow-2), var(--el-shadow-inset-top), var(--el-shadow-inset-right), var(--el-shadow-inset-bottom), var(--el-shadow-inset-left);
+  --el-color-picker-thumbs-shadow: var(--el-shadow-1);
+  --el-colot-picker-swatch-item-color-inset-shadow: var(--el-shadow-inset-top), var(--el-shadow-inset-right), var(--el-shadow-inset-bottom), var(--el-shadow-inset-left);
+  --el-color-picker-swatch-rows-max-height: calc(var(--el-color-picker-swatch-max-rows) * calc(var(--el-color-picker-swatch-height) + var(--el-color-picker-swatch-row-gap)));
+  --el-color-picker-trigger-input-padding: 0 var(--el-comp-paddingLR-s) 0 var(--el-comp-paddingLR-xs);
+  --el-color-picker-trigger-input-color-inner-size: calc(var(--el-comp-size-xs) - 2px);
+  --el-color-picker-trigger-input-color-inner-size-s: calc(var(--el-comp-size-xxs) - 2px);
+  --el-color-picker-trigger-input-color-inner-size-l: calc(var(--el-comp-size-s) - 2px);
+}

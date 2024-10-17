@@ -1,0 +1,51 @@
+/**
+ * @component el-dialog-pro
+ */
+:root {
+  --el-dialog-border-color: transparent;
+  --el-dialog-bg-color: var(--el-bg-color-container);
+  --el-dialog-header-text-color: var(--el-text-color-primary);
+  --el-dialog-header-bg-color-fullscreen: var(--el-bg-color-secondarycontainer);
+  --el-dialog-close-icon-fullscreen-hover: var(--el-bg-color-secondarycontainer-hover);
+  --el-dialog-close-icon-fullscreen-active: var(--el-bg-color-secondarycontainer-active);
+  --el-dialog-body-text-color: var(--el-text-color-secondary);
+  --el-dialog-close-icon-hover: var(--el-bg-color-container-hover);
+  --el-dialog-close-icon-active: var(--el-bg-color-container-active);
+  --el-dialog-info-icon-color: var(--el-brand-color);
+  --el-dialog-success-icon-color: var(--el-success-color);
+  --el-dialog-warning-icon-color: var(--el-warning-color);
+  --el-dialog-error-icon-color: var(--el-error-color);
+  --el-dialog-close-color: var(--el-text-color-secondary);
+  --el-dialog-mask-bg-color: var(--el-mask-active);
+  --el-dialog-header-font: var(--el-font-title-medium);
+  --el-dialog-header-weight: 600;
+  --el-dialog-body-text-font: var(--el-font-body-medium);
+  --el-dialog-width: 480px;
+  --el-dialog-header-height-fullscreen: var(--el-comp-size-xxxl);
+  --el-dialog-icon-size: calc(var(--el-font-size-body-large) + 8px);
+  --el-dialog-close-icon-size: calc(var(--el-font-size-body-large) + 4px);
+  --el-dialog-footer-height-fullscreen: var(--el-comp-size-xxxxl);
+  --el-dialog-spacer: var(--el-comp-paddingTB-xxl) var(--el-comp-paddingLR-xxl);
+  --el-dialog-default-spacer: var(--el-comp-paddingTB-xxl) var(--el-comp-paddingLR-xxl);
+  --el-dialog-default-padding: var(--el-dialog-spacer);
+  --el-dialog-header-icon-margin-right: var(--el-comp-margin-s);
+  --el-dialog-header-icon-margin-top: var(--el-size-1);
+  --el-dialog-header-content-margin-right: var(--el-comp-margin-s);
+  --el-dialog-header-padding-fullscreen: 0 var(--el-comp-paddingLR-xxl);
+  --el-dialog-closebtn-padding: var(--el-comp-paddingTB-xxs) var(--el-comp-paddingLR-xxs);
+  --el-dialog-body-padding: var(--el-comp-paddingTB-l) 0;
+  --el-dialog-body-padding-fullscreen: var(--el-comp-paddingTB-xl) var(--el-comp-paddingLR-xxl);
+  --el-dialog-body-icon-padding: var(--el-comp-paddingTB-l) 0;
+  --el-dialog-footer-button-margin-left: var(--el-comp-margin-s);
+  --el-dialog-footer-padding: var(--el-comp-paddingTB-l) 0 0;
+  --el-dialog-footer-padding-fullscreen: 0 var(--el-comp-paddingLR-xxl) var(--el-comp-paddingTB-xxl);
+  --el-dialog-border: 1px solid var(--el-border-level-1-color);
+  --el-dialog-border-radius: var(--el-radius-medium);
+  --el-dialog-close-border-radius: var(--el-radius-medium);
+  --el-dialog-close-position-top: 24px;
+  --el-dialog-close-position-right: 24px;
+  --el-dialog-top-position-top: 20vh;
+  --el-dialog-anim-duration: 0.2s;
+  --el-dialog-anim-time-fn-enter: cubic-bezier(0.38, 0, 0.24, 1);
+  --el-dialog-anim-time-fn-exit: cubic-bezier(0.38, 0, 0.24, 1);
+}

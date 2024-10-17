@@ -1,0 +1,35 @@
+@keyframes t-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.el-p-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1em;
+}
+.el-p-icon::before {
+  font-family: unset;
+}
+.el-p-icon-loading {
+  animation: t-spin 1s linear infinite;
+}
+.el-p-icon {
+  fill: currentColor;
+}
+.el-p-icon.el-psize-s,
+i.el-psize-s {
+  font-size: 14px;
+}
+.el-p-icon.el-psize-m,
+i.el-psize-m {
+  font-size: 16px;
+}
+.el-p-icon.el-psize-l,
+i.el-psize-l {
+  font-size: 18px;
+}

@@ -1,0 +1,27 @@
+/**
+ * @component el-message-pro
+ */
+:root {
+  --el-msg-primary-color: var(--el-brand-color);
+  --el-msg-warning-color: var(--el-warning-color);
+  --el-msg-success-color: var(--el-success-color);
+  --el-msg-error-color: var(--el-error-color);
+  --el-msg-close-icon-color: var(--el-text-color-secondary);
+  --el-msg-color-block: var(--el-bg-color-container);
+  --el-msg-color-border: var(--el-border-level-2-color);
+  --el-msg-color-text: var(--el-text-color-primary);
+  --el-msg-close-bg-color-hover: var(--el-bg-color-container-hover);
+  --el-msg-close-bg-color-active: var(--el-bg-color-container-active);
+  --el-msg-icon-size: calc(var(--el-font-size-body-medium) + 6px);
+  --el-msg-close-size: calc(var(--el-font-size-body-medium) + 2px);
+  --el-msg-border-width: 1px;
+  --el-msg-border-radius: var(--el-radius-medium);
+  --el-msg-shadow: var(--el-shadow-3), var(--el-shadow-inset-top), var(--el-shadow-inset-right), var(--el-shadow-inset-bottom), var(--el-shadow-inset-left);
+  --el-msg-font-default: var(--el-font-body-medium);
+  --el-msg-padding-horizontal-default: var(--el-comp-paddingLR-l);
+  --el-msg-padding-vertical-default: var(--el-comp-paddingTB-m);
+  --el-msg-icon-margin-right: var(--el-comp-margin-s);
+  --el-msg-close-icon-margin-left: var(--el-comp-margin-xxl);
+  --el-msg-list-margin-bottom: var(--el-comp-margin-s);
+  --el-msg-icon-selector: > .t-icon, > [data-t-icon] > .t-icon, .t-loading;
+}

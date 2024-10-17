@@ -88,7 +88,7 @@
             "idetype": "container",
             "parentAccept": "target.tag === 'u-multi-layout'",
             "slotInlineStyle": {
-                "default": "height:100%;"
+                "default": "height:100%; background-color: rgba(255, 255, 255, 0.5);"
             }
         }
     },
@@ -125,7 +125,13 @@
         "name": "USidebarItem",
         "ideusage": {
             "idetype": "container",
-            "parentAccept": "['u-sidebar-group', 'u-sidebar'].includes(target.tag)"
+            "parentAccept": "['u-sidebar-group', 'u-sidebar'].includes(target.tag)",
+            "disableSlotAutoFill": [
+                {
+                    "slot": "default",
+                    "expression": "this.getAttribute('text')?.value"
+                }
+            ]
         }
     },
     {
@@ -509,6 +515,7 @@
             "structured": true,
             "dataSource": {
                 "display": 3,
+                "loopRule": "nth-last-child(-n+2):not(:only-child)",
                 "loopElem": "table > tbody > tr",
                 "emptySlot": {
                     "condition": "this.getDefaultElements().length === 0",
@@ -569,7 +576,16 @@
             "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
             "events": {
                 "click": true
-            }
+            },
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource')",
+                "display": 3,
+                "loopElem": "table > tbody > tr"
+            },
+            "disableSlotAutoFill": [{
+                "slot": "item",
+                "expression": "!this.getAttribute('dataSource')"
+            }]
         }
     },
     {
@@ -602,21 +618,14 @@
         "name": "UTableViewColumnGroup",
        "ideusage": {
         "idetype": "container",
-        "forceRefresh": "parent",
+        "structured": true,
+        "forceRefresh": "transparent",
         "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic'].includes(target.tag)",
         "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
         "selector": [
             {
                 "expression": "this.getElement(el => el.slotTarget === 'title')",
                 "cssSelector": "th"
-            },
-            {
-                "expression": "this.getElement(el => el.slotTarget === 'cell')",
-                "cssSelector": "td"
-            },
-            {
-                "expression": "this.getElement(el => el.slotTarget === 'expand-content')",
-                "cssSelector": "tr[class^='u-table-view_expand-content']"
             }
         ]
        }
@@ -746,6 +755,7 @@
             "additionalAttribute": {
                 ":value": null
             },
+            "forceUpdateWhenAttributeChange": true,
             "translateBindingProperty": ["value", "placeholder"]
         }
     },
@@ -947,6 +957,12 @@
             "displaySlotConditions": {
                 "title": false,
                 "desc": false
+            },
+            "dataSource": {
+                "dismiss": "!this.getAttribute('dataSource')",
+                "display": 3,
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> div[class^='u-selectable-steps_item']:not([data-nodepath])"
             }
         }
     },
@@ -1049,6 +1065,13 @@
                     "condition": "!this.getAttribute('dataSource')",
                     "accept": false
                 }
+            },
+            "additionalAttribute": {
+                ":showEmpty":  "\"false\"",
+                ":hiddenMask": "\"true\""
+            },
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block; width:calc(100% - 36px)"
             }
         }
     },
@@ -1063,10 +1086,10 @@
                 "click": true
             },
             "slotWrapperInlineStyle": {
-                "item": "display:inline-block"
+                "item": "display:inline-block; width:calc(100% - 36px)"
             },
             "additionalAttribute": {
-                ":showEmpty": false
+                ":showEmpty":  "\"false\""
             },
             "ignoreProperty": ["value"]
         }
@@ -1116,7 +1139,25 @@
             "events": {
                 "click": true
             },
-            "translateBindingProperty": ["value", "placeholder"]
+            "translateBindingProperty": ["value", "placeholder"],
+            "dataSource": {
+                "display": 3,
+                "dismiss": "!this.getAttribute('dataSource')",
+                "loopRule": "nth-child(n+2)",
+                "loopElem": "> div[class^='u-tree-view-new_node']:not([data-nodepath])",
+                "emptySlot": {
+                    "display": "inline",
+                    "condition": "!this.getAttribute('dataSource')",
+                    "accept": false
+                }
+            },
+            "additionalAttribute": {
+                ":showEmpty": "\"false\"",
+                ":hiddenMask": "\"false\""
+            },
+            "slotWrapperInlineStyle": {
+                "item": "display:inline-block; width:calc(100% - 36px)"
+            }
         }
     },
     {
@@ -1166,7 +1207,8 @@
             "displaySlotConditions": {
                 "head": false,
                 "heading": false
-            }
+            },
+            "useFeedbackWrapper": true
         }
     },
     {
@@ -1180,7 +1222,8 @@
             "cacheOpenKey": "visible",
             "additionalAttribute": {
                 ":mode": "\"false\""
-            }
+            },
+            "useFeedbackWrapper": true
         }
     },
     {

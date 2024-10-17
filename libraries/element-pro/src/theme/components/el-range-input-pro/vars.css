@@ -1,0 +1,202 @@
+/**
+ * @component el-range-input-pro
+ */
+:root {
+  /**
+   * @desc 默认边框颜色
+   * @type color
+   */
+  --el-range-input-border-color-default: var(--el-border-level-2-color);
+
+  /**
+   * @desc 默认悬停边框颜色
+   * @type color
+   */
+  --el-range-input-border-color-default-hover: var(--el-brand-color);
+
+  /**
+   * @desc 默认聚焦边框颜色
+   * @type color
+   */
+  --el-range-input-border-color-default-focus: var(--el-brand-color);
+
+  /**
+   * @desc 成功状态边框颜色
+   * @type color
+   */
+  --el-range-input-border-color-success: var(--el-success-color);
+
+  /**
+   * @desc 警告状态边框颜色
+   * @type color
+   */
+  --el-range-input-border-color-warning: var(--el-warning-color);
+
+  /**
+   * @desc 错误状态边框颜色
+   * @type color
+   */
+  --el-range-input-border-color-error: var(--el-error-color);
+
+  /**
+   * @desc 默认文字颜色
+   * @type color
+   */
+  --el-range-input-text-color-default: var(--el-text-color-primary);
+
+  /**
+   * @desc 禁用状态文字颜色
+   * @type color
+   */
+  --el-range-input-text-color-disabled: var(--el-text-color-disabled);
+
+  /**
+   * @desc 默认背景颜色
+   * @type color
+   */
+  --el-range-input-bg-color-default: var(--el-bg-color-specialcomponent);
+
+  /**
+   * @desc 禁用状态背景颜色
+   * @type color
+   */
+  --el-range-input-bg-color-disabled: var(--el-bg-color-component-disabled);
+
+  /**
+   * @desc 默认额外信息颜色
+   * @type color
+   */
+  --el-range-input-extra-color-default: var(--el-text-color-placeholder);
+
+  /**
+   * @desc 成功状态额外信息颜色
+   * @type color
+   */
+  --el-range-input-extra-color-success: var(--el-success-color);
+
+  /**
+   * @desc 警告状态额外信息颜色
+   * @type color
+   */
+  --el-range-input-extra-color-warning: var(--el-warning-color);
+
+  /**
+   * @desc 错误状态额外信息颜色
+   * @type color
+   */
+  --el-range-input-extra-color-error: var(--el-error-color);
+
+  /**
+   * @desc 默认内边距
+   * @type input
+   */
+  --el-range-input-padding-default: var(--el-comp-paddingTB-xs) var(--el-comp-paddingLR-s) var(--el-comp-paddingTB-xs) var(--el-comp-paddingLR-s);
+
+  /**
+   * @desc 状态图标右侧位置
+   * @type input
+   */
+  --el-range-input-status-position-right: calc(0px - var(--el-comp-margin-xxxl));
+
+  /**
+   * @desc 内部间距
+   * @type input
+   */
+  --el-range-input-inner-gap: var(--el-comp-margin-s);
+
+  /**
+   * @desc 内部内边距
+   * @type input
+   */
+  --el-range-input-inner-padding: 0 var(--el-comp-paddingLR-xs);
+
+  /**
+   * @desc 小号高度
+   * @type size
+   */
+  --el-range-input-height-s: var(--el-comp-size-xs);
+
+  /**
+   * @desc 默认高度
+   * @type size
+   */
+  --el-range-input-height-default: var(--el-comp-size-m);
+
+  /**
+   * @desc 大号高度
+   * @type size
+   */
+  --el-range-input-height-l: var(--el-comp-size-xl);
+
+  /**
+   * @desc 内部图标字体大小
+   * @type size
+   */
+  --el-range-input-inner-icon-font-size: 16px;
+
+  /**
+   * @desc 大号字体
+   * @type font
+   */
+  --el-range-input-font-l: var(--el-font-body-large);
+
+  /**
+   * @desc 默认字体
+   * @type font
+   */
+  --el-range-input-font: var(--el-font-body-medium);
+
+  /**
+   * @desc 小号字体
+   * @type font
+   */
+  --el-range-input-font-s: var(--el-font-body-small);
+
+  /**
+   * @desc 额外信息字体
+   * @type font
+   */
+  --el-range-input-extra-font: var(--el-font-body-small);
+
+  /**
+   * @desc 边框圆角
+   * @type size
+   */
+  --el-range-input-border-radius: var(--el-radius-small);
+
+  /**
+   * @desc 默认聚焦状态阴影颜色
+   * @type color
+   */
+  --el-range-input-box-shadow-color-default-focus: var(--el-brand-color-focus);
+
+  /**
+   * @desc 成功状态聚焦阴影颜色
+   * @type color
+   */
+  --el-range-input-box-shadow-color-success-focus: var(--el-success-color-focus);
+
+  /**
+   * @desc 警告状态聚焦阴影颜色
+   * @type color
+   */
+  --el-range-input-box-shadow-color-warning-focus: var(--el-warning-color-focus);
+
+  /**
+   * @desc 错误状态聚焦阴影颜色
+   * @type color
+   */
+  --el-range-input-box-shadow-color-error-focus: var(--el-error-color-focus);
+
+  /**
+   * @desc 聚焦状态阴影
+   * @type shadow
+   */
+  --el-range-input-box-shadow-focus: 0 0 0 2px var(--el-range-input-box-shadow-color-default-focus);
+
+  /**
+   * @desc 内部过渡效果
+   * @type transition
+   */
+  --el-range-input-inner-transition: all cubic-bezier(0.38, 0, 0.24, 1) 0.2s;
+}

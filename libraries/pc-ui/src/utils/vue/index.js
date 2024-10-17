@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import _ from 'lodash';
+import { fetch as fetchPolyfill } from 'whatwg-fetch';
 
 export const getRouteComponentOptions = function (route) {
     if (route.components.default) {
@@ -12,3 +14,12 @@ export const getRouteComponentOptions = function (route) {
         return componentOptions;
     }
 };
+
+export const memoizeFetch = _.memoize((url) => {
+  return fetchPolyfill(url, {
+    mode: 'cors',
+  })
+    .then((result) => {
+      return result.text();
+    });
+});

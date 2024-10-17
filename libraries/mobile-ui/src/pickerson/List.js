@@ -83,6 +83,10 @@ export default createComponent({
     getValue() {
       return [this.currentValue];
     },
+    // 暴露给上层调用
+    setValue(value) {
+      this.currentValue = _cloneDeep(value);
+    }
   },
   render(h) {
     const isInDesigner = this.$env && this.$env.VUE_APP_DESIGNER;

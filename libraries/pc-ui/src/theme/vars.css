@@ -1,0 +1,575 @@
+:root {
+  /**
+   * @title 品牌色
+   * @type color
+   */
+  --el-color-primary-6: #337eff;
+
+  /**
+    * @title 品牌色浅色/白色悬浮
+    * @type color
+    */
+  --el-color-primary-1: #e8f4ff;
+
+  /**
+    * @title 品牌色文字禁用
+    * @type color
+    */
+  --el-color-primary-2: #c4e1ff;
+
+  /**
+    * @title 品牌色一般禁用
+    * @type color
+    */
+  --el-color-primary-3: #a0ccff;
+
+  /**
+   * @title 品牌色特殊场景
+   * @type color
+   */
+  --el-color-primary-4: #7bb4ff;
+
+  /**
+    * @title 品牌色悬浮（hover）
+    * @type color
+    */
+  --el-color-primary-5: #579aff;
+
+  /**
+    * @title 品牌色点击（click）
+    * @type color
+    */
+  --el-color-primary-7: #205bd2;
+  --el-color-primary-8: #113da6;
+  --el-color-primary-9: #062579;
+  --el-color-primary-10: #00124d;
+
+  /**
+    * @title 成功色
+    * @type color
+    */
+  --el-color-success-6: #26bd71;
+  /**
+    * @title 成功色浅色/白底悬浮
+    * @type color
+    */
+  --el-color-success-1: #e8fff0;
+  /**
+    * @title 成功色文字禁用
+    * @type color
+    */
+  --el-color-success-2: #baf2ce;
+  /**
+    * @title 成功色一般禁用
+    * @type color
+    */
+  --el-color-success-3: #8fe5b1;
+  /**
+    * @title 成功色特殊场景
+    * @type color
+    */
+  --el-color-success-4: #68d798;
+
+  /**
+    * @title 成功色悬浮（hover）
+    * @type color
+    */
+  --el-color-success-5: #45ca83;
+
+  /**
+    * @title 成功色点击（click）
+    * @type color
+    */
+  --el-color-success-7: #18a161;
+  --el-color-success-8: #0d8551;
+  --el-color-success-9: #056941;
+  --el-color-success-10: #004d30;
+
+  /**
+    * @title 警示色
+    * @type color
+    */
+  --el-color-warning-6: #ffb21a;
+  /**
+    * @title 警示色浅色/白底悬浮
+    * @type color
+    */
+  --el-color-warning-1: #fffbe8;
+  /**
+    * @title 警示色文字禁用
+    * @type color
+    */
+  --el-color-warning-2: #fff2bf;
+
+  /**
+    * @title 警示色一般禁用
+    * @type color
+    */
+  --el-color-warning-3: #ffe696;
+  /**
+    * @title 警示色特殊场景
+    * @type color
+    */
+  --el-color-warning-4: #ffd86c;
+  /**
+    * @title 警示色悬浮（hover）
+    * @type color
+    */
+  --el-color-warning-5: #ffc743;
+  /**
+    * @title 警示色点击（click）
+    * @type color
+    */
+  --el-color-warning-7: #d28b10;
+  --el-color-warning-8: #15130f;
+  --el-color-warning-9: #794603;
+  --el-color-warning-10: #4d2900;
+
+  /**
+    * @title 错误色
+    * @type color
+    */
+  --el-color-error-6: #F24957;
+  /**
+    * @title 错误色浅色/白底悬浮
+    * @type color
+    */
+  --el-color-error-1: #FFEAE8;
+  /**
+    * @title 错误色文字禁用
+    * @type color
+    */
+  --el-color-error-2: #FCCAC7;
+  /**
+    * @title 错误色一般禁用
+    * @type color
+    */
+  --el-color-error-3: #FAA8A7;
+  /**
+    * @title 错误色特殊场景
+    * @type color
+    */
+  --el-color-error-4: #F78789;
+  /**
+    * @title 错误色悬浮（hover）
+    * @type color
+    */
+  --el-color-error-5: #F5686F;
+  /**
+    * @title 错误色点击（click）
+    * @type color
+    */
+  --el-color-error-7: #C92D40;
+  --el-color-error-8: #9F182C;
+  --el-color-error-9: #76091D;
+  --el-color-error-10: #4D0011;
+
+  /**
+   * @title 链接色
+   * @type color
+   */
+   --el-color-link-6: var(--el-color-primary-6);
+   /**
+     * @title 链接色浅色/白色悬浮
+     * @type color
+     */
+   --el-color-link-1: var(--el-color-primary-1);
+   /**
+     * @title 链接色文字禁用
+     * @type color
+     */
+   --el-color-link-2: var(--el-color-primary-2);
+   /**
+     * @title 链接色一般禁用
+     * @type color
+     */
+   --el-color-link-3: var(--el-color-primary-3);
+   /**
+      * @title 链接色特殊场景
+      * @type color
+      */
+   --el-color-link-4: var(--el-color-primary-4);
+   /**
+     * @title 链接色悬浮（hover）
+     * @type color
+     */
+   --el-color-link-5: var(--el-color-primary-5);
+   /**
+     * @title 链接色点击（click）
+     * @type color
+     */
+   --el-color-link-7: var(--el-color-primary-7);
+   --el-color-link-8: var(--el-color-primary-8);
+   --el-color-link-9: var(--el-color-primary-9);
+   --el-color-link-10: var(--el-color-primary-10);
+
+   /**
+    * @title 强调/正文标题
+    * @type color
+    */
+   --el-color-text-1: #333;
+   /**
+    * @title 次强调/正文标题
+    * @type color
+    */
+   --el-color-text-2: #666;
+   /**
+    * @title 次要信息
+    * @type color
+    */
+   --el-color-text-3: #999;
+   /**
+    * @title 置灰信息
+    * @type color
+    */
+   --el-color-text-4: #ccc;
+
+   /**
+    * @title 边框线-浅色
+    * @type color
+    */
+   --el-color-line-1: #dee4ed;
+   /**
+    * @title 边框线-一般
+    * @type color
+    */
+   --el-color-line-2: #e5e5e5;
+   /**
+    * @title 边框线-深色
+    * @type color
+    */
+   --el-color-line-3: #E3E4E5;
+   /**
+    * @title 边框线-重色
+    * @type color
+    */
+   --el-color-line-4: #e0e0e0;
+
+   /**
+    * @title 导航背景
+    * @type color
+    */
+   --el-color-background-1: #333333;
+   /**
+    * @title 工具提示填充色
+    * @type color
+    */
+   --el-color-background-2: #242424;
+   /**
+    * @title 弹窗/抽屉遮挡填充色
+    * @type color
+    */
+   --el-color-background-3: rgba(0, 0, 0, 0.6);
+   /**
+    * @title 标签、薯条等组件填充色
+    * @type color
+    */
+   --el-color-background-4: #ededed;
+   /**
+    * @title 禁用背景色/hover色
+    * @type color
+    */
+   --el-color-background-5: #f5f5f5;
+   /**
+    * @title 页面背景色/表头色
+    * @type color
+    */
+   --el-color-background-6: #f7f8fa;
+   /**
+    * @title 表格展开背景色
+    * @type color
+    */
+   --el-color-background-7: #f5f5f5;
+   /**
+    * @title 白色填充
+    * @type color
+    */
+    --el-color-background-white: #fff;
+   /**
+    * @title 透明背景
+    * @type color
+    */
+   --el-color-background-transparent: transparent;
+
+   /**
+    * @title 辅助文案
+    * @type size
+    */
+   --el-font-size-1: 12px;
+   /**
+    * @title 辅助文案行高
+    * @type input
+    */
+   --el-line-height-1: 1.67;
+   /**
+    * @title 正文-常规
+    * @type size
+    */
+   --el-font-size-2: 14px;
+   /**
+    * @title 正文行高
+    * @type input
+    */
+   --el-line-height-2: 1.57;
+   /**
+    * @title 标题-小
+    * @type size
+    */
+   --el-font-size-3: 16px;
+   /**
+    * @title 小标题行高
+    * @type input
+    */
+   --el-line-height-3: 1.5;
+   /**
+    * @title 标题-中
+    * @type size
+    */
+   --el-font-size-4: 18px;
+   /**
+    * @title 中标题行高
+    * @type input
+    */
+   --el-line-height-4: 1.44;
+   /**
+    * @title 标题-中
+    * @type size
+    */
+   --el-font-size-5: 20x;
+   /**
+    * @title 中标题行高
+    * @type input
+    */
+   --el-line-height-5: 1.4;
+   /**
+    * @title 标题-大
+    * @type size
+    */
+   --el-font-size-6: 24px;
+   /**
+    * @title 大标题行高
+    * @type input
+    */
+   --el-line-height-6: 1.33;
+   /**
+    * @title 运营标题-小
+    * @type size
+    */
+   --el-font-size-7: 36px;
+   /**
+    * @title 小运营标题行高
+    * @type input
+    */
+   --el-line-height-7: 1.22;
+   /**
+    * @title 运营标题-中
+    * @type size
+    */
+   --el-font-size-8: 48px;
+   /**
+    * @title 中运营标题行高
+    * @type input
+    */
+   --el-line-height-8: 1.17;
+   /**
+    * @title 运营标题-大
+    * @type size
+    */
+   --el-font-size-9: 56px;
+   /**
+    * @title 中运营标题行高
+    * @type input
+    */
+   --el-line-height-9: 1.14;
+
+   /**
+    * @title 尺寸部长
+    * @type size
+    */
+   --el-size-step: 4px;
+   /**
+    * @title 尺寸变化单位
+    * @type size
+    */
+   --el-size-unit: 4px;
+
+   --el-size-1: 4px;
+   --el-size-2: 8px;
+   --el-size-3: 12px;
+   --el-size-4: 16px;
+   --el-size-5: 20px;
+   --el-size-6: 24px;
+   --el-size-7: 28px;
+   --el-size-8: 32px;
+   --el-size-9: 36px;
+   --el-size-10: 40px;
+
+   /**
+    * @title 外边距 XXS
+    * @type size
+    */
+   --el-margin-1: var(--el-size-1);
+   /**
+    * @title 外边距 XS
+    * @type size
+    */
+   --el-margin-2: var(--el-size-2);
+   /**
+    * @title 外边距 SM
+    * @type size
+    */
+   --el-margin-3: var(--el-size-3);
+   /**
+    * @title 外边距
+    * @type size
+    */
+   --el-margin-4: var(--el-size-4);
+   /**
+    * @title 外边距 MD
+    * @type size
+    */
+   --el-margin-5: var(--el-size-5);
+   /**
+    * @title 外边距 LG
+    * @type size
+    */
+   --el-margin-6: var(--el-size-6);
+   /**
+    * @title 外边距 XL
+    * @type size
+    */
+   --el-margin-7: var(--el-size-7);
+   /**
+    * @title 外边距 XXL
+    * @type size
+    */
+   --el-margin-8: var(--el-size-8);
+   /**
+    * @title 外边距 XXXL
+    * @type size
+    */
+   --el-margin-9: var(--el-size-9);
+   /**
+    * @title 外边距 XXXXL
+    * @type size
+    */
+   --el-margin-10: var(--el-size-10);
+
+   /**
+    * @title 内边距 XXS
+    * @type size
+    */
+  --el-padding-1: var(--el-size-1);
+  /**
+    * @title 内边距 XS
+    * @type size
+    */
+  --el-padding-2: var(--el-size-2);
+  /**
+    * @title 内边距 SM
+    * @type size
+    */
+  --el-padding-3: var(--el-size-3);
+  /**
+    * @title 内边距
+    * @type size
+    */
+  --el-padding-4: var(--el-size-4);
+  /**
+    * @title 内边距 MD
+    * @type size
+    */
+  --el-padding-5: var(--el-size-5);
+  /**
+    * @title 内边距 LG
+    * @type size
+    */
+  --el-padding-6: var(--el-size-6);
+  /**
+    * @title 内边距 XL
+    * @type size
+    */
+  --el-padding-7: var(--el-size-7);
+  /**
+    * @title 内边距 XXL
+    * @type size
+    */
+  --el-padding-8: var(--el-size-8);
+  /**
+    * @title 内边距 XXXL
+    * @type size
+    */
+  --el-padding-9: var(--el-size-9);
+  /**
+    * @title 内边距 XXXXL
+    * @type size
+    */
+  --el-padding-10: var(--el-size-10);
+
+   /**
+    * @title 直角
+    * @type size
+    */
+   --el-border-radius-1: 0px;
+   /**
+    * @title 圆角
+    * @type size
+    */
+   --el-border-radius-2: 2px;
+   /**
+    * @title 圆角
+    * @type size
+    */
+   --el-border-radius-3: 4px;
+   /**
+    * @title 圆角
+    * @type size
+    */
+   --el-border-radius-4: 6px;
+   /**
+    * @title 圆角
+    * @type size
+    */
+   --el-border-radius-5: 8px;
+   /**
+    * @title 圆角
+    * @type size
+    */
+   --el-border-radius-6: 12px;
+   /**
+    * @title 圆角
+    * @type size
+    */
+   --el-border-radius-7: 16px;
+   /**
+    * @title 圆角
+    * @type size
+    */
+   --el-border-radius-8: 20px;
+   /**
+    * @title 圆角
+    * @type size
+    */
+   --el-border-radius-9: 24px;
+   /**
+    * @title 全圆角
+    * @type input
+    */
+   --el-border-radius-10: 100%;
+
+   /**
+    * @title 一级阴影
+    * @type input
+    */
+   --el-box-shadow-1: 0px 2px 12px rgba(0, 0, 0, 0.06);
+   /**
+    * @title 二级阴影
+    * @type input
+    */
+   --el-box-shadow-2: 0 0 4px rgba(3, 3, 3, .1);
+   /**
+    * @title 三级阴影
+    * @type input
+    */
+   --el-box-shadow-3: 0px 2px 15px rgba(64, 69, 78, 0.15);
+}

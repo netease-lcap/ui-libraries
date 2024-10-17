@@ -1,0 +1,13 @@
+/**
+ * @component el-divider-pro
+ */
+:root {
+  --el-divider-border-color: var(--el-border-level-1-color);
+  --el-divider-color: var(--el-text-color-primary);
+  --el-divider-font: var(--el-font-body-medium);
+  --el-divider-horizontal-margin: var(--el-comp-margin-xxl) 0;
+  --el-divider-vertical-margin: 0 var(--el-comp-margin-m);
+  --el-divider-inner-text-padding: 0 1em;
+  --el-divider-border-width: 1px;
+  --el-divider-vertical-height: 0.9em;
+}

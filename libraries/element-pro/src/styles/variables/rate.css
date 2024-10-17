@@ -1,0 +1,11 @@
+/**
+ * @component el-rate-pro
+ */
+:root {
+  --el-rate-text-font: var(--el-font-mark-medium);
+  --el-rate-text-before: var(--el-comp-margin-l);
+  --el-rate-hover-transform: scale(1.33);
+  --el-rate-transition: all 0.2s cubic-bezier(0.38, 0, 0.24, 1);
+  --el-rate-text-primary: var(--el-text-color-primary);
+  --el-rate-text-secondary: var(--el-text-color-secondary);
+}
