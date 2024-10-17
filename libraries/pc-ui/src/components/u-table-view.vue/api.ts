@@ -623,6 +623,18 @@ namespace nasl.ui {
       nativeScroll: nasl.core.Boolean = false;
 
       @Prop({
+        group: '交互属性',
+        title: '列可拖拽',
+        description: '设置是否可以拖拽列',
+        docDescription: '表格列之间是否可以拖拽',
+        setter: {
+          concept: 'SwitchSetter',
+        },
+      })
+      columnDraggable: nasl.core.Boolean = false;
+
+
+      @Prop({
           group: '状态属性',
           title: '初始即加载',
           description: '设置初始时是否立即加载',

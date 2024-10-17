@@ -9,9 +9,12 @@
                         <col v-for="(columnVM, columnIndex) in visibleColumnVMs" :key="columnIndex" :width="columnVM.computedWidth">
                     </colgroup>
                     <thead :grouped="hasGroupedColumn">
-                        <tr v-for="(headTr, trIndex) in visibleTableHeadTrArr">
+                        <vue-draggable v-for="(headTr, trIndex) in visibleTableHeadTrArr" tag="tr"
+                            :options="{ handle: '.drag-handle' }" @end="onColumnDragEnd" :list="visibleColumnVMs"
+                            :key="trIndex">
                             <template v-for="(columnVM, columnIndex) in headTr">
                                 <u-table-render-th
+                                    :columnDraggable="columnDraggable"
                                     :columnVM="columnVM"
                                     :columnIndex="columnIndex"
                                     :boldHeader="boldHeader"
@@ -30,7 +33,7 @@
                                     :shadow="(isLastLeftFixed(columnVM, columnIndex, headTr) && !scrollXStart) || (isFirstRightFixed(columnVM, columnIndex, headTr) && !scrollXEnd)">
                                 </u-table-render-th>
                             </template>
-                        </tr>
+                            </vue-draggable>
                     </thead>
                 </u-table>
             </div>
@@ -163,6 +166,7 @@ import KeyMap from '../../utils/keyMap';
 import UTableRenderTd from './render.td.vue';
 import UTableRenderTrExpander from './render.tr.expander.vue';
 import UTableRenderTh from './render.th.vue';
+import VueDraggable from 'vuedraggable'
 
 
 export default {
@@ -172,6 +176,7 @@ export default {
         UTableRenderTd,
         UTableRenderTrExpander,
         UTableRenderTh,
+        VueDraggable
     },
     props: {
         tableMetaList: Array,
@@ -218,6 +223,7 @@ export default {
                 return this.$tt('loading');
             },
         },
+        columnDraggable: { type: Boolean, default: false},
         error: Boolean,
         errorText: {
             type: String,

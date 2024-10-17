@@ -82,6 +82,7 @@
     "color": "^4.2.3",
     "fs-extra": "^9.0.1",
     "glob": "^10.3.10",
+    "vuedraggable": "^2.24.3",
     "jest-serializer-vue-tjw": "^3.20.0",
     "js-yaml": "^3.14.0",
     "jsdom": "^23.0.1",

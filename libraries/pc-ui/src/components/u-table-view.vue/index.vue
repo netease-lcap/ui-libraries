@@ -155,6 +155,7 @@
         :itemHeight="itemHeight"
         :virtualCount="virtualCount"
         :listKey="listKey"
+        :columnDraggable="columnDraggable"
 
         :rowDraggable="rowDraggable"
         :handlerDraggable="handlerDraggable"
@@ -373,6 +374,7 @@ export default {
         subForm: Boolean, // 是否是子表单
 
         nativeScroll: { type: Boolean, default: false }, // 是否使用原生滚动条
+        columnDraggable: { type: Boolean, default: false }, // 列是否可拖拽
     },
     data() {
         return {
@@ -588,6 +590,33 @@ export default {
             if (this.configColumnVM) {
                 this.configColumnVM.handleColumnsData();
             }
+            if (this.columnDraggable) {
+                this.handleTableHead()
+            }
+        },
+        onColumnDragEnd(event) {
+            const { oldIndex, newIndex } = event;
+
+            // 映射visibleColumnVMs的索引到columnVMs的索引
+            const actualOldIndex = this.findIndexInColumnVMs(oldIndex);
+            const actualNewIndex = this.findIndexInColumnVMs(newIndex);
+
+            // 在columnVMs中进行实际的元素移动
+            const movedItem = this.columnVMs.splice(actualOldIndex, 1)[0];
+            this.columnVMs.splice(actualNewIndex, 0, movedItem);
+        },
+        // 过滤后需要重新计算列的index
+        findIndexInColumnVMs(visibleIndex) {
+            let visibleCount = 0;
+            for (let i = 0; i < this.columnVMs.length; i++) {
+                if (!this.columnVMs[i].currentHidden) {
+                    if (visibleCount === visibleIndex) {
+                        return i;
+                    }
+                    visibleCount++;
+                }
+            }
+            return -1; // 如果没有找到，返回-1（理论上不应该发生）
         },
         visibleColumnVMs() {
             this.reHandleResize();
@@ -791,6 +820,34 @@ export default {
             this.$nextTick(() => {
                 this.$forceUpdate();
             });
+        },
+        handleTableHead() {
+            const result = [];
+            // 计算表头
+            let tableHeadTrArr = [[]];
+            // 需要处理下列设置了colSpan的情况
+            this.columnVMs.forEach((columnVM) => {
+                tableHeadTrArr[0].push(columnVM);
+            });
+            tableHeadTrArr[0].forEach((columnVM, index) => {
+                this.setColumnColSpanData(columnVM, index, tableHeadTrArr[0]);
+            });
+            if (result.length) {
+                result[0] = columnVMs;
+                for (let i = 0; i < result.length; i++) {
+                    result[i].forEach((columnVm, index) => {
+                        if (!columnVm)
+                            return;
+                        if (!columnVm.isGroup && i !== result.length - 1) {
+                            columnVm.rowSpan = result.length - i;
+                        }
+                        this.setColumnColSpanData(columnVm, index, result[i]);
+                    });
+                }
+                tableHeadTrArr = result;
+            }
+
+            this.tableHeadTrArr = tableHeadTrArr;
         },
         getExtraParams() {
             return this.extraParams;
