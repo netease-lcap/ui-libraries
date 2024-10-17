@@ -2,7 +2,7 @@
     <th
         v-if="columnVM&&columnVM.colSpan !== 0"
         ref="th"
-        :class="[$style['head-title'], boldHeader ? $style.boldHeader : null]"
+        :class="[$style['head-title'], boldHeader ? $style.boldHeader : null, columnDraggable ? 'drag-handle' : '']"
         :key="columnIndex"
         :sortable="columnVM.sortable && sortTrigger === 'head'" :filterable="!!columnVM.filters" @click="columnVM.sortable && sortTrigger === 'head' && onClickSort(columnVM)"
         :disabled="columnVM.currentHidden"
@@ -72,6 +72,7 @@ export default {
         currentValues: Array,
         currentData: Array,
         thEllipsis: Boolean,
+        columnDraggable: Boolean
     },
     computed: {
         allChecked() {

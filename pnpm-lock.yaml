@@ -943,6 +943,9 @@ importers:
       vue-template-compiler:
         specifier: 2.6.12
         version: 2.6.12
+      vuedraggable:
+        specifier: ^2.24.3
+        version: 2.24.3
       vusion-api:
         specifier: ^0.6.30
         version: 0.6.30
@@ -10076,6 +10079,9 @@ packages:
   vue@2.6.12:
     resolution: {integrity: sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==}
     deprecated: Vue 2 has reached EOL and is no longer actively maintained. See https://v2.vuejs.org/eol/ for more details.
+
+  vuedraggable@2.24.3:
+    resolution: {integrity: sha512-6/HDXi92GzB+Hcs9fC6PAAozK1RLt1ewPTLjK0anTYguXLAeySDmcnqE8IC0xa7shvSzRjQXq3/+dsZ7ETGF3g==}
 
   vusion-api@0.6.30:
     resolution: {integrity: sha512-o718qRdIOt6rDLOeiJbcoN6wtnINwZFH42BptDjOCMCqZMNNV0ZoZvHdGX5JkgK5qtsKtxBTPGqXWAijYq5Y6w==}
@@ -20758,6 +20764,10 @@ snapshots:
   vue-template-es2015-compiler@1.9.1: {}
 
   vue@2.6.12: {}
+
+  vuedraggable@2.24.3:
+    dependencies:
+      sortablejs: 1.10.2
 
   vusion-api@0.6.30:
     dependencies:
