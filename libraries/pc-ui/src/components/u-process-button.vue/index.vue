@@ -8,14 +8,14 @@
             :title="currentItem.displayText"
             :visible="!!currentItem"
             ref="modal"
-            :name="currentItem.name"
+            :hasMoreAddSignOption="hasMoreAddSignOption"
             @close="currentItem = undefined">
             <u-form label-layout="block" ref="form">
                 <u-form-item :label="$tt('approvalComments')" :required="currentItem.commentRequired" :rules="currentItem.commentRequired?'required':''" v-if="!['reassign', 'addSign'].includes(currentItem.name)">
                     <u-textarea v-model="model.comment" size="normal full" :placeholder="$tt('placeholder')">
                     </u-textarea>
                 </u-form-item>
-                <u-form-item v-if="currentItem.name === 'addSign'" :label="$tt('signMethod')" required>
+                <u-form-item v-if="hasMoreAddSignOption" :label="$tt('signMethod')" required>
                     <div :class="$style.signOptionSection">
                         <div 
                             :class="$style.signOption" 
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </u-form-item>      
-                <u-form-item :label="$tt(currentItem.name === 'addSign' ? 'signPerson' : 'selectTransfer')" required :rules="`required #${$tt('selectTransferEmpty')}`" v-if="['reassign', 'addSign'].includes(currentItem.name)">
+                <u-form-item :label="$tt(hasMoreAddSignOption ? 'signPerson' : 'selectTransfer')" required :rules="`required #${$tt('selectTransferEmpty')}`" v-if="['reassign', 'addSign'].includes(currentItem.name)">
                     <u-select
                         size="full"
                         text-field="userName"
@@ -77,6 +77,11 @@ export default {
             permissionDetails: [],
             signOptions: [],
         };
+    },
+    computed: {
+        hasMoreAddSignOption() { 
+            return this.currentItem?.name === 'addSign' && !!this.signOptions.length;
+        },
     },
     created() {
         location.search.replace('?', '').split('&').forEach((item) => {
@@ -247,13 +252,12 @@ export default {
          */
         async addSignOperator(item) {
             if (this.$processV2) {
-                const res = await this.$processV2.addSignTask({
-                    body: {
-                        taskId: this.taskId,
-                        userForAddSign: this.model.userName,
-                        policyForAddSign: this.model.method,
-                    },
-                });
+                const body = {
+                    taskId: this.taskId,
+                    userForAddSign: this.model.userName,
+                };
+                if (this.hasMoreAddSignOption) body.policyForAddSign = this.model.method;
+                const res = await this.$processV2.addSignTask({ body });
                 if(res?.code === "200") {
                     const eventName = `on${item.name.replace(/^./, (m) => m.toUpperCase())}`
                     this.$emit(item.name);
@@ -282,19 +286,24 @@ export default {
                 body: {
                     taskId: this.taskId,
                 },
+                config: {
+                    noErrorTip: true,
+                },
             });
-            const approvalPolicy = res?.data?.approvalPolicy;
-            // 或签、会签、依次审批
-            if (['simple', 'parallel', 'sequence'].includes(approvalPolicy)) {
-                const options = approvalPolicy === 'simple'
-                    // ? ['CurrentNode', 'PreviousNode', 'NextNode'] // 后端暂时不支持NextNode，先屏蔽
-                    ? ['CurrentNode', 'PreviousNode']
-                    : ['CurrentNode'];
-                this.signOptions = options.map(item => ({
-                    title: this.$tt(`${item}SignTitle`),
-                    description: this.$tt(`${item}SignDesc`),
-                    value: item,
-                }));
+            if (!!res?.data) {
+                const approvalPolicy = res?.data?.approvalPolicy;
+                // 或签、会签、依次审批
+                if (['simple', 'parallel', 'sequence'].includes(approvalPolicy)) {
+                    const options = approvalPolicy === 'simple'
+                        // ? ['CurrentNode', 'PreviousNode', 'NextNode'] // 后端暂时不支持NextNode，先屏蔽
+                        ? ['CurrentNode', 'PreviousNode']
+                        : ['CurrentNode'];
+                    this.signOptions = options.map(item => ({
+                        title: this.$tt(`${item}SignTitle`),
+                        description: this.$tt(`${item}SignDesc`),
+                        value: item,
+                    }));
+                }
             }
         },
     },
