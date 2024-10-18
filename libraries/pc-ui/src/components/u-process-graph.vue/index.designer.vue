@@ -1,17 +1,17 @@
 <template>
-    <div :class="$style.root" vusion-disabled-duplicate="true" vusion-disabled-copy="true">
-        <div :class="$style.designerImage" v-if="$env.VUE_APP_DESIGNER">
-          <img :class="[$style.img, $style.lb]" :src="leftBottomImg" />
-          <img :class="[$style.img, $style.rt]" :src="rightTopImg" />
-          <img :class="[$style.img, $style.md]" :src="middleImg" />
+    <div :class="$style.root" v-if="$env.VUE_APP_DESIGNER" vusion-disabled-duplicate="true" vusion-disabled-copy="true">
+        <div :class="$style.designerImage" >
+        <img :class="[$style.img, $style.lb]" :src="leftBottomImg" />
+        <img :class="[$style.img, $style.rt]" :src="rightTopImg" />
+        <img :class="[$style.img, $style.md]" :src="middleImg" />
         </div>
-        <component
-            v-else
-            is="u-process-graph-real"
-            v-bind="[$attrs, $props]"
-            v-on="$listeners">
-        </component>
-      </div>
+    </div>
+    <component
+        v-else
+        is="u-process-graph-real"
+        v-bind="[$attrs, $props]"
+        v-on="$listeners">
+    </component>
 </template>
 <script>
 import UProcessGraphReal from './index.vue';
