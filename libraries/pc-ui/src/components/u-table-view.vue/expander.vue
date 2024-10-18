@@ -1,9 +1,9 @@
 <template>
   <div
     :class="$style.expander"
-    v-if="!item.hideExpanderIcon"
-    :expanded="item.expanded"
-    :disabled="item.disabled"
+    v-if="!currentItem.hideExpanderIcon"
+    :expanded="currentItem.expanded"
+    :disabled="currentItem.disabled"
     @click.stop="toggle"
     :show-span="!showIcon"
 
@@ -13,7 +13,7 @@
   >
     <!-- 关闭时 -->
     <i-ico
-        v-if="!item.expanded && collapseIcon"
+        v-if="!currentItem.expanded && collapseIcon"
         :name="collapseIcon"
         :class="$style.icon"
         :expanded="false"
@@ -21,7 +21,7 @@
     ></i-ico>
     <!-- 展开时 -->
     <i-ico
-        v-if="item.expanded && expandIcon"
+        v-if="currentItem.expanded && expandIcon"
         :name="expandIcon"
         :class="$style.icon"
         :expanded="true"
@@ -49,7 +49,7 @@ export default {
     },
     computed: {
         expanded() {
-            return this.item.expanded;
+            return this.currentItem.expanded;
         },
         showIcon() {
             if (this.expanded && this.expandIcon) {
@@ -91,12 +91,27 @@ export default {
             return true;
         },
     },
+    data() {
+        return {
+            currentItem: this.item,
+        };
+    },
+    created() {
+        // IDE里的item属性绑定的是current， 表格嵌套表格的情况下容易出问题。改成该种方式
+        if(this.$parent && this.$parent.toggleExpanded && this.$parent.item){
+            this.currentItem = this.$parent.item;
+        }
+    },
     methods: {
         toggle() {
-            if (this.item.__toggle) {
-                this.item.__toggle();
+            if (this.currentItem && this.currentItem.__toggle) {
+                this.currentItem.__toggle();
             } else {
-                this.$emit('toggle');
+                if(this.$parent && this.$parent.toggleExpanded){
+                    this.$parent.toggleExpanded(this.$parent.item);
+                } else {
+                    this.$emit('toggle');
+                }
             }
         },
     },
