@@ -721,7 +721,7 @@ export default {
             const editable = this.visibleColumnVMs.some((columnVM) => columnVM.type === 'editable');
             // 拖拽设置
             this.processTableDraggable();
-            if (selectable) {
+            if (selectable || this.selectable) { // 2978760771550464，选中行后分页需要点两次才能切换
                 data.forEach((item) => {
                     if (!item.hasOwnProperty('disabled'))
                         this.$set(item, 'disabled', false);
