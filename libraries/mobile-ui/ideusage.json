@@ -457,14 +457,18 @@
         "name": "VanForComponents",
         "ideusage": {
             "idetype": "container",
-            "dataSource": {
-                "dismiss": "!this.getAttribute('dataSource')",
-                "display": 3,
-                "loopRule": "nth-child(n+2)",
-                "loopElem": "> .van-for-components__frag > .van-for-components-item"
+            "additionalAttribute": {
+                ":dataSource": "\"[{}, {}, {}]\""
             },
             "childAccept": false,
-            "useTemplateInDefaultSlot": true
+            "useTemplateInDefaultSlot": true,
+            "disableSlotAutoFill": ["item"],
+            "style": [
+                {
+                    "selector": ".van-for-components-item:not(:first-child)",
+                    "declaration": "opacity: 0.4; cursor: not-allowed !important; pointer-events: none"
+                }
+            ]
         }
     },
     {
