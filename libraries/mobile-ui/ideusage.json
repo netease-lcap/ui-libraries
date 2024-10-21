@@ -467,6 +467,10 @@
                 {
                     "selector": ".van-for-components-item:not(:first-child)",
                     "declaration": "opacity: 0.4; cursor: not-allowed !important; pointer-events: none"
+                },
+                {
+                    "selector": ".van-for-components__frag:not(:first-child)",
+                    "declaration": "opacity: 0.4; cursor: not-allowed !important; pointer-events: none"
                 }
             ]
         }
@@ -836,7 +840,7 @@
                 "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
                 "display": 3,
                 "loopRule": "nth-child(n+2)",
-                "loopElem": "[class^='van-checkbox-group']:not([data-nodepath]",
+                "loopElem": "[class^='van-checkbox-group']:not([data-nodepath])",
                 "emptySlot": {
                     "display": "inline",
                     "condition": "!this.getAttribute('dataSource')",
