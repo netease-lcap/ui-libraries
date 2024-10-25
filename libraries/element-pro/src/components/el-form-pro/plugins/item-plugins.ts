@@ -148,8 +148,6 @@ const useProxyFormFieldVNode = (h: CreateElement, { fieldName, initialValue, ini
 
     formField.setInitalValue(initialValue);
 
-    console.log(vnode);
-
     if (isControlled) {
       if (formField.getValue() !== propData[prop]) {
         formField.setValue(propData[prop], false);
@@ -169,6 +167,7 @@ const useProxyFormFieldVNode = (h: CreateElement, { fieldName, initialValue, ini
       return vnode;
     }
 
+    console.log(formFieldName, formField.getValue());
     propData[prop] = formField.getValue();
     listeners[event] = (v) => {
       formField.setValue(v);
@@ -356,9 +355,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     });
 
     onUnmounted(() => {
-      removeField(fieldName.value);
-      removeField(startFieldName.value);
-      removeField(endFieldName.value);
+      removeField(fieldName.value, startFieldName.value, endFieldName.value);
     });
 
     watch(fieldName, (val, oldVal) => {
@@ -369,8 +366,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
     watch(() => ([startFieldName.value || '', endFieldName.value || ''].join('|')), (val, oldVal) => {
       if (oldVal && oldVal !== val) {
-        oldVal.split('|').forEach((n) => removeField(n));
-        removeField(fieldName.value);
+        removeField(fieldName.value, ...oldVal.split('|'));
       }
     });
 

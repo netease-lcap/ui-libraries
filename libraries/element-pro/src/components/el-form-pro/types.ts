@@ -37,7 +37,7 @@ export interface FormExtendsContext {
   setFieldValue: (name: string, value: any, emitChange?: boolean) => void,
   initFormField: (options: FormFieldOptions) => FormField;
   initFormRangeField: (options: FormRangeFieldOptions) => FormRangeField;
-  removeField: (name: string, deleteFieldValue?: boolean) => void,
+  removeField: (...names: string[]) => void,
   getFieldValue: (name: string) => any,
 }
 

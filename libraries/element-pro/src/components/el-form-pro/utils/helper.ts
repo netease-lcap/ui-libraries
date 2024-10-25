@@ -1,5 +1,5 @@
 import { ComponentOptions, VNode } from 'vue';
-import { LCAP_FORM_NAME, LCAP_FORM_ITEM_NAME } from './constants';
+import { LCAP_FORM_NAME, LCAP_FORM_ITEM_NAME } from '../constants';
 
 export const isModelOption = (option: ComponentOptions<any>) => {
   return option && option.model && !!option.model.prop;

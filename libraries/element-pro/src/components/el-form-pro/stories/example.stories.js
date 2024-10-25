@@ -108,35 +108,35 @@ export const Default = {
       },
     },
     template: `<el-form-pro :clearFieldOnDestroy="true" ref="form" @reset="onReset" @submit="onSubmit">
-    <el-form-item-pro label="用户名" help="这里可以展示一段说明文字" key="account" name="account">
+    <el-form-item-pro label="用户名" help="这里可以展示一段说明文字" name="account">
       <el-input-pro :value.sync="inputValue" placeholder="请输入用户名"></el-input-pro>
     </el-form-item-pro>
-    <el-form-item-pro label="年龄" key="age" name="age" :initial-value="10">
+    <el-form-item-pro label="年龄" name="age" :initial-value="10">
       <el-input-number-pro placeholder="年龄" />
     </el-form-item-pro>
-    <el-form-item-pro label="籍贯" key="region" name="region">
+    <el-form-item-pro label="籍贯" name="region">
       <el-cascader-pro placeholder="请选择籍贯" :data-source="regionOptions" clearable filterable />
     </el-form-item-pro>
-    <el-form-item-pro v-if="toggle" label="密码" key="password" name="password">
+    <el-form-item-pro v-if="toggle" label="密码" name="password">
       <el-input-pro type="password"  placeholder="请输入密码"></el-input-pro>
     </el-form-item-pro>
-    <el-form-item-pro label="邮箱" key="email" name="email">
+    <el-form-item-pro label="邮箱" name="email">
       <el-input-pro placeholder="请输入邮箱"></el-input-pro>
     </el-form-item-pro>
-    <el-form-item-pro label="性别" key="gender" name="gender" initial-value="male">
+    <el-form-item-pro label="性别" name="gender" initial-value="male">
       <el-radio-group-pro>
         <el-radio-pro value="male">男</el-radio-pro>
         <el-radio-pro value="female">女</el-radio-pro>
       </el-radio-group-pro>
     </el-form-item-pro>
-    <el-form-item-pro label="课程" key="course" name="course">
+    <el-form-item-pro label="课程" name="course">
       <el-checkbox-group-pro :data-source="courseOptions">
         <template #item="current">
           {{ current.item.label }}
         </template>
       </el-checkbox-group-pro>
     </el-form-item-pro>
-    <el-form-item-pro label="学院" key="college" name="college">
+    <el-form-item-pro label="学院" name="college">
       <el-select-pro  class="demo-select-base" clearable filterable placeholder="请选择所在学院">
         <el-option-pro v-for="(item, index) in options" :value="item.value" :label="item.label" :key="index">
           {{ item.label }}
@@ -145,17 +145,17 @@ export const Default = {
     </el-form-item-pro>
     <el-form-item-pro
       label="入学时间"
-      key="date" name="date"
+      name="date"
     >
       <el-date-picker-pro></el-date-picker-pro>
     </el-form-item-pro>
-    <el-form-item-pro label="个人网站" key="content" name="content.url">
+    <el-form-item-pro label="个人网站" name="content.url">
       <el-input-pro placeholder="请输入个人网站地址"></el-input-pro>
     </el-form-item-pro>
-    <el-form-item-pro label="个人简介" help="请用一句话介绍自己" key="description" name="description">
+    <el-form-item-pro label="个人简介" help="请用一句话介绍自己" name="description">
       <el-textarea-pro placeholder="请用一句话介绍自己"></el-textarea-pro>
     </el-form-item-pro>
-    <el-form-item-pro label="兴趣爱好" key="hobby" name="hobby">
+    <el-form-item-pro label="兴趣爱好" name="hobby">
       <el-tree-select-pro
         filterable
         :data-source="hobbyOptions"

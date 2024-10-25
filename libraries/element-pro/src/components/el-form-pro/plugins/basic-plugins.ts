@@ -36,6 +36,7 @@ import type {
   FormRangeFieldOptions,
   LayoutMode,
 } from '../types';
+import { FormActionType, useFormActionCollect } from '../hooks';
 
 const getTemplateCount = (counts: number | string) => {
   if (!Number.isNaN(counts as number) || typeof counts === 'string') {
@@ -183,6 +184,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       if (!name) {
         return;
       }
+
       delete formFieldMetas[name];
       const clearFieldOnDestroy = props.get<boolean>('clearFieldOnDestroy');
       if (clearFieldOnDestroy || name.startsWith(LCAP_FORM_UID)) {
@@ -232,7 +234,20 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       return lodashGet(formData, key);
     }
 
+    const initCollect = useFormActionCollect((actionMap) => {
+      const initFields = actionMap[FormActionType.INIT_FIELD] || [];
+      const removeFields = actionMap[FormActionType.REMOVE_FIELD];
+
+      if (!removeFields || removeFields.length === 0) {
+        return;
+      }
+
+      removeFields.filter((n) => !initFields.includes(n)).forEach(removeField);
+    });
+
+    // let nextTicked = false;
     function initFormField({ name, value }: FormFieldOptions) {
+      initCollect()(FormActionType.INIT_FIELD, name);
       if (formFieldMetas[name]) {
         return formFieldMetas[name].fieldControl as FormField;
       }
@@ -361,7 +376,9 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       labelEllipsis: useComputed('labelEllipsis', (v) => !!v),
       setFieldValue,
       getFieldValue,
-      removeField,
+      removeField: (...args: string[]) => {
+        initCollect()(FormActionType.REMOVE_FIELD, ...args);
+      },
       initFormField,
       initFormRangeField,
       addFormItemInstance,
