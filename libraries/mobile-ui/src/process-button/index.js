@@ -144,7 +144,10 @@ export default createComponent({
           },
         });
 
-        return res.data;
+        return (res.data || []).map((it) => ({
+          ...(it || {}),
+          userId: it?.userId || it?.userName,
+        }));
       } catch (error) {
         console.log(error);
         return [];

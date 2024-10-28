@@ -7,6 +7,7 @@ import {
   getEntityPromaryKeyProperty,
   NameGroup,
   getAllEntityPromaryKeyProperty,
+  getCurrentName,
 } from './utils';
 import { genQueryLogic, genTextTemplate, genColumnMeta } from './genCommonBlock';
 
@@ -88,7 +89,7 @@ export function genGridViewBlock(entity: naslTypes.Entity, refElement: naslTypes
   nameGroup.lowerEntity = firstLowerCase(entity.name);
 
   // 当前节点的currentName
-  nameGroup.currentName = refElement.getCurrentName();
+  nameGroup.currentName = getCurrentName(refElement);
 
   // 收集所有和本实体关联的实体
   const entitySet: Set<naslTypes.Entity> = new Set();

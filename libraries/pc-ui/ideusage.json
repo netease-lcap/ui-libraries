@@ -402,6 +402,9 @@
             },
             "additionalAttribute": {
                 ":autoplay": "\"false\""
+            },
+            "events": {
+                "click": true
             }
         }
     },
@@ -464,7 +467,8 @@
     {
         "name": "UAlert",
         "ideusage": {
-            "idetype": "container"
+            "idetype": "container",
+            "disableSlotAutoFill": ["title"]
         }
     },
     {
@@ -562,9 +566,10 @@
             ],
             "displaySlotInline": {
                 "cell": "['index', 'radio', 'checkbox', 'dragHandler'].includes(this.getAttribute('type')?.value)",
-                "title": "['index', 'radio', 'checkbox'].includes(this.getAttribute('type')?.value)"
+                "title": true
             },
-            "forceUpdateWhenAttributeChange": "parent"
+            "forceUpdateWhenAttributeChange": "parent",
+            "disableSlotAutoFill": ["title"]
         }
     },
     {
@@ -1207,7 +1212,8 @@
                 "head": false,
                 "heading": false
             },
-            "useFeedbackWrapper": true
+            "useFeedbackWrapper": true,
+            "feedbackAliaName": "this.getElement(el => el.slotTarget === 'title').elements?.filter(el => el.tag==='u-text')?.reduce((pre, cur) => pre += cur?.source?.bindAttrs?.find(attr => attr.name === 'text')?.value, '') || '弹窗'"
         }
     },
     {

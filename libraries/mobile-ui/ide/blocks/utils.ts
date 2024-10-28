@@ -75,3 +75,13 @@ export function getEntityPromaryKeyProperty(entity: naslTypes.Entity) {
 export function getAllEntityPromaryKeyProperty(entity: naslTypes.Entity) {
   return entity.properties.filter((property) => property.primaryKey || property.name === 'id');
 }
+
+// 拖拽到有slotScope的template中，current需要加1
+export function getCurrentName(refElement: naslTypes.ViewElement) {
+  let currentName = refElement.getCurrentName();
+  const start = 1;
+  if (refElement.tag === 'template' && !!refElement.slotScope) {
+    currentName = currentName.replace(/\d*$/, (m) => String(m === '' ? start : +m + 1));
+  }
+  return currentName;
+}

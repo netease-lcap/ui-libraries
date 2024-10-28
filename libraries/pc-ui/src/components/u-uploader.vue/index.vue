@@ -1,6 +1,6 @@
 <template>
 <div :class="$style.root">
-    <div v-if="draggable && (!readonly || $env.VUE_APP_DESIGNER)" :class="$style.draggable" :dragover="dragover" @click="select()"
+    <div v-if="draggable && !isPreview && (!readonly || $env.VUE_APP_DESIGNER)" :class="$style.draggable" :dragover="dragover" @click="select()"
         :tabindex="readonly || disabled ? '' : 0"
         @drop.prevent="onDrop"
         @paste="onPaste"
@@ -12,13 +12,13 @@
             <slot></slot>
         </div>
     </div>
-    <div v-else-if="listType !== 'card' && (!readonly || $env.VUE_APP_DESIGNER)" :class="$style.select" @click="select()"
+    <div v-else-if="listType !== 'card' && !isPreview && (!readonly || $env.VUE_APP_DESIGNER)" :class="$style.select" @click="select()"
         vusion-slot-name="default"
-        :vusion-empty-background="$env.VUE_APP_DESIGNER && !$slots.default ? 'add-any' : false" :preview="isPreview">
+        :vusion-empty-background="$env.VUE_APP_DESIGNER && !$slots.default ? 'add-any' : false">
         <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="disabled" @click.stop @change="onChange">
         <slot></slot>
     </div>
-    <template v-if="listType !== 'card' || (uploadEnable && draggable && !readonly)">
+    <template v-if="listType !== 'card' || (uploadEnable && draggable && !readonly) ">
         <div v-if="description" :class="$style.description">{{ description }}</div>
         <f-scroll-view trigger="hover" v-if="showErrorMessage && errorMessage.length">
             <div :class="$style.errwrap">
@@ -210,7 +210,7 @@ export default {
     },
     computed: {
         uploadEnable() {
-            return this.multiple ? this.currentValue.length < this.limit : this.currentValue.length === 0;
+            return (this.multiple ? this.currentValue.length < this.limit : this.currentValue.length === 0) && !this.isPreview;
         },
         fileListComponentFlagMap() {
             return {
