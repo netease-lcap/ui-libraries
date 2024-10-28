@@ -1,8 +1,6 @@
 /* eslint-disable no-param-reassign */
 import Vue, { type VNode, type ComponentOptions } from 'vue';
 import VueCompositionAPI from '@vue/composition-api';
-import { kebabCase } from 'lodash';
-import { uid } from 'uid';
 import type {
   NaslComponentPluginOptions,
   PluginMap,
@@ -111,17 +109,8 @@ export const registerComponent = (
       const childrenNodes: VNode[] = [];
       (slotNames || []).forEach((slotName) => {
         if (scopedSlots[slotName]) {
-          let nodes = scopedSlots[slotName]({});
+          const nodes = scopedSlots[slotName]({});
 
-          if (Array.isArray(nodes)) {
-            nodes = nodes.filter((n) => {
-              if (typeof n === 'object') {
-                return n.tag || (n.text && n.text.trim());
-              }
-
-              return true;
-            });
-          }
           delete scopedSlots[slotName];
           if (isEmptyVNodes(nodes)) {
             return;
@@ -158,7 +147,7 @@ export const registerComponent = (
           scopedSlots,
           on: self.$listeners,
         },
-        childrenNodes,
+        manger.name === 'ElForm' ? this.$slots.default : childrenNodes,
       );
     },
   } as ComponentOptions<Vue>;

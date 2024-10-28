@@ -120,10 +120,10 @@ export const Default = {
     <el-form-item-pro v-if="toggle" label="密码" name="password">
       <el-input-pro type="password"  placeholder="请输入密码"></el-input-pro>
     </el-form-item-pro>
-    <el-form-item-pro label="日期区间" name="range" :useRangeValue="true">
+     <el-form-item-pro label="日期区间" name="range" :useRangeValue="true" start-field-name="startDate" end-field-name="endDate">
       <el-date-picker-pro :range="true" />
     </el-form-item-pro>
-    <el-form-item-pro label="邮箱">
+    <el-form-item-pro label="邮箱" name="email">
       <el-input-pro placeholder="请输入邮箱"></el-input-pro>
     </el-form-item-pro>
     <el-form-item-pro label="性别" name="gender" initial-value="male">

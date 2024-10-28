@@ -440,17 +440,7 @@ export default function createHocComponent(baseComponent: any, manger: PluginMan
       const childrenNodes: VNode[] = [];
       (this.$slotNames as string[]).forEach((slotName) => {
         if (scopedSlots[slotName]) {
-          let nodes = scopedSlots[slotName]({});
-
-          if (Array.isArray(nodes)) {
-            nodes = nodes.filter((n) => {
-              if (typeof n === 'object') {
-                return n.tag || (n.text && n.text.trim());
-              }
-
-              return true;
-            });
-          }
+          const nodes = scopedSlots[slotName]({});
           delete scopedSlots[slotName];
           if (isEmptyVNodes(nodes)) {
             return;
