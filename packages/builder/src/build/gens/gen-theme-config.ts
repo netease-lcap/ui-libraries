@@ -104,7 +104,7 @@ export default function genThemeConfig(options: ThemeOptions, framework: string)
         && framework && framework.startsWith('vue')
       )
     ));
-    if (!compTheme) {
+    if (!compTheme || compTheme.hidden) {
       return {
         name,
         title,
@@ -125,7 +125,7 @@ export default function genThemeConfig(options: ThemeOptions, framework: string)
       title,
       group,
       children: children || [],
-      hidden: show === false || compTheme.hidden,
+      hidden: show === false,
     };
   }).filter((comp: ThemeComponentVars) => {
     return comp.useGlobalTokens.length > 0 || comp.variables.length > 0;

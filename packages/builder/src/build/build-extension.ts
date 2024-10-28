@@ -39,7 +39,11 @@ async function zipExtension(root, destDir) {
   const dirList: string[] = ['nasl.extension.json'];
   const fileList = glob.sync(`${destDir}/**/*`)
     .filter((item) => item.indexOf('.') !== -1)
-    .concat(['nasl.extension.d.ts', 'manifest', 'source.zip']);
+    .concat(['manifest', 'source.zip']);
+
+  if (fs.existsSync(path.resolve(root, 'nasl.extension.d.ts'))) {
+    fileList.push('nasl.extension.d.ts');
+  }
 
   const zipList = dirList.concat(fileList);
   const pkg = fs.readJSONSync(path.resolve(root, 'package.json'));

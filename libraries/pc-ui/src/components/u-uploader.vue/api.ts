@@ -142,7 +142,7 @@ namespace nasl.ui {
         })
         maxSize: nasl.core.String;
 
-        @Prop({
+        @Prop<UUploaderOptions, 'listType'>({
             group: '数据属性',
             title: '列表类型',
             docDescription: '列表的展示类型，支持使用文本、图片和卡片',
@@ -150,6 +150,10 @@ namespace nasl.ui {
                 concept: 'EnumSelectSetter',
                 options: [{ title: '文本' }, { title: '图片' }, { title: '卡片' }],
             },
+            onChange: [{
+              clear: ['showFileList'],
+              if: (_) => _ === 'card',
+            }],
         })
         listType: 'text' | 'image' | 'card' = 'text';
 

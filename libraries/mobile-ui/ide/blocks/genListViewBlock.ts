@@ -5,6 +5,7 @@ import {
   genUniqueQueryNameGroup,
   getEntityPromaryKeyProperty,
   NameGroup,
+  getCurrentName,
 } from './utils';
 import { genQueryLogic } from './genCommonBlock';
 
@@ -55,7 +56,7 @@ export function genListViewBlock(entity: naslTypes.Entity, refElement: naslTypes
   nameGroup.viewElementMainView = viewElementMainView;
   nameGroup.viewVariableEntity = likeComponent.getVariableUniqueName(firstLowerCase(entity.name));
   // 当前节点的currentName
-  nameGroup.currentName = refElement.getCurrentName();
+  nameGroup.currentName = getCurrentName(refElement);
 
   // 收集所有和本实体关联的实体
   const entitySet: Set<naslTypes.Entity> = new Set();

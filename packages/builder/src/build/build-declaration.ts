@@ -34,7 +34,15 @@ function getDtsPath(options: LcapBuildOptions) {
 
 async function getMetaInfo(options: LcapBuildOptions) {
   const isExtension = options.type === 'extension';
-  const tsCode = await fs.readFile(getDtsPath(options), 'utf-8');
+  const dstPath = getDtsPath(options);
+  if (!fs.existsSync(dstPath)) {
+    return {
+      code: '',
+      componentMap: {},
+    };
+  }
+
+  const tsCode = await fs.readFile(dstPath, 'utf-8');
   const componentMap: Record<string, ViewComponentDeclaration> = {};
 
   if (isExtension) {

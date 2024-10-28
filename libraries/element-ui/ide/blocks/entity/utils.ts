@@ -84,3 +84,13 @@ export function getViewUniqueVariableNames(name: string, entityName: string) {
   }
   return name;
 }
+
+// 拖拽到有slotScope的template中，current需要加1
+export function getCurrentName(refElement: naslTypes.ViewElement) {
+  let currentName = refElement.getCurrentName();
+  const start = 1;
+  if (refElement.tag === 'template' && !!refElement.slotScope) {
+    currentName = currentName.replace(/\d*$/, (m) => String(m === '' ? start : +m + 1));
+  }
+  return currentName;
+}

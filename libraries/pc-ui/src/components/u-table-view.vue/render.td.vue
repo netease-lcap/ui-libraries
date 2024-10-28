@@ -44,6 +44,7 @@
                 toggle: () => toggleExpanded(item)
             }">
             <u-table-view-expander
+               v-if="!vm.$scopedSlots.expander"
                 :item="{ ...item, __toggle: () => toggleExpanded(item) }"
                 @toggle="() => toggleExpanded(item)">
             </u-table-view-expander>
@@ -97,6 +98,7 @@
                 toggle: () => toggleExpanded(item)
             }">
             <u-table-view-expander
+               v-if="!vm.$scopedSlots.expander"
                 :item="{ ...item, __toggle: () => toggleExpanded(item) }"
                 @toggle="() => toggleExpanded(item)">
             </u-table-view-expander>

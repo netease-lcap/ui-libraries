@@ -7,6 +7,7 @@ import {
   getEntityPromaryKeyProperty,
   NameGroup,
   getAllEntityPromaryKeyProperty,
+  getCurrentName,
 } from './utils';
 import { genQueryLogic, genTextTemplate, genColumnMeta } from './genCommonBlock';
 
@@ -111,7 +112,7 @@ export function genTableBlock(entity: naslTypes.Entity, refElement: naslTypes.Vi
   nameGroup.viewVariableEntity = likeComponent.getVariableUniqueName(firstLowerCase(entity.name));
   nameGroup.viewLogicRemove = likeComponent.getLogicUniqueName('remove');
   // 当前节点的currentName
-  nameGroup.currentName = refElement.getCurrentName();
+  nameGroup.currentName = getCurrentName(refElement);
 
   // 收集所有和本实体关联的实体
   const entitySet = new Set();
