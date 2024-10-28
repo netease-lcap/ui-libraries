@@ -316,6 +316,35 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean = false;
     @Prop({
+      group: '交互属性',
+      title: '可清除',
+      description: '可点击清除按钮一键清除所选内容',
+      docDescription: '控制是否显示清除按钮，支持一键清除所选内容',
+      setter: {
+          concept: 'SwitchSetter',
+      },
+    })
+    clearable: nasl.core.Boolean = false;
+    @Prop({
+      group: '交互属性',
+      title: '自动清除筛选',
+      description: '是否自动清除筛选文本',
+      docDescription: '是否自动清除筛选文本',
+      setter: {
+        concept: "EnumSelectSetter",
+        options: [{
+          title: '关闭'
+        }, {
+          title: '取消时'
+        }, {
+          title: '确认时'
+        }, {
+          title: '总是'
+        }]
+      },
+    })
+    private clearFilter: 'none' | 'cancel' | 'confirm' | 'always' = 'cancel';
+    @Prop({
       group: '状态属性',
       title: '预览',
       description: '显示预览态',

@@ -72,6 +72,7 @@
             :total-items="currentDataSource.total" :page="currentDataSource.paging ? currentDataSource.paging.number : pageNumber"
             :page-size="currentDataSource.paging ? currentDataSource.paging.size : pageSize" :page-size-options="pageSizeOptions" :show-total="showTotal" :show-sizer="showSizer" :show-jumper="showJumper"
             :side="1" :around="3"
+            :max-page="currentDataSource.paging && currentDataSource.paging.number"
             @change="page($event.page)" @change-page-size="onChangePageSize">
         </u-pagination>
     </div>

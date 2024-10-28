@@ -106,6 +106,10 @@ export default createComponent({
       ];
     },
 
+    setValue(value) {
+      this.currentValue = value;
+    },
+
     onChange(idx) {
       const value = this.getColumnValue(0);
       this.currentValue = value;
