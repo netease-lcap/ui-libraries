@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import Vue, { type VNode, type ComponentOptions } from 'vue';
 import VueCompositionAPI from '@vue/composition-api';
+import { kebabCase } from 'lodash';
 import type {
   NaslComponentPluginOptions,
   PluginMap,
@@ -125,6 +126,17 @@ export const registerComponent = (
       const attrs = {
         ...this.$attrs,
       };
+
+      if (this.$env && this.$env.VUE_APP_DESIGNER) {
+        manger.allPropKeys.forEach((key: string) => {
+          if (
+            !Object.prototype.hasOwnProperty.call(attrs, key)
+            && !Object.prototype.hasOwnProperty.call(attrs, kebabCase(key))
+          ) {
+            attrs[key] = undefined;
+          }
+        });
+      }
 
       if (hasModel) {
         this.resetModelRender(attrs);
