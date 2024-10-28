@@ -10,7 +10,7 @@ import type {
   NaslComponentExtendInfo,
 } from './types';
 import PluginManager from './plugin';
-import HocBaseComponent from './hoc-base';
+import createHocComponent from './hoc-base';
 import { isEmptyVNodes, normalizeArray } from './utils';
 
 export { $deletePropList, $ref, $render } from './constants';
@@ -37,7 +37,6 @@ function createRangeModelMixin(
   rangeModel: NaslComponentExtendInfo['rangeModel'],
 ) {
   const [startProp, endProp] = rangeModel;
-
   return {
     props: [startProp, endProp],
     methods: {
@@ -66,6 +65,15 @@ export const registerComponent = (
   if (!componentOptions) {
     return baseComponent;
   }
+  const componentName = name || componentOptions.name;
+  const manger = new PluginManager({
+    name: componentName,
+    componentOptions,
+    plugin: { ...pluginOption },
+  });
+
+  const HocBaseComponent = createHocComponent(baseComponent, manger);
+
   const mixins: any = [];
 
   const hasModel = model && model.prop;
@@ -79,11 +87,10 @@ export const registerComponent = (
   }
 
   return {
-    name: name || componentOptions.name,
+    name: componentName,
     inheritAttrs: false,
     mixins,
     props: {
-      plugin: {},
       ...(model && model.prop ? { [model.prop]: {} } : {}),
       ...(rangeModel && rangeModel.length === 2
         ? { [rangeModel[0]]: {}, [rangeModel[1]]: {} }
@@ -91,30 +98,9 @@ export const registerComponent = (
     },
     model,
     rangeModel,
-    data() {
-      return {
-        renderKey: uid(),
-      };
-    },
-    created() {
-      const self = this as any;
-      self.manger = new PluginManager({
-        name: componentOptions.name,
-        componentOptions,
-        plugin: { ...pluginOption, ...self.plugin },
-      });
-    },
-    watch: {
-      plugin(v) {
-        const self = this as any;
-        self.manger.setPlugin(v);
-        // 重新生成key rerender 组件
-        this.renderKey = uid();
-      },
-    },
     render(h) {
       const self = this as any;
-      if (!self.manger.valid) {
+      if (!manger.valid) {
         return null;
       }
 
@@ -151,17 +137,6 @@ export const registerComponent = (
         ...this.$attrs,
       };
 
-      if (this.$env && this.$env.VUE_APP_DESIGNER) {
-        self.manger.allPropKeys.forEach((key: string) => {
-          if (
-            !Object.prototype.hasOwnProperty.call(attrs, key)
-            && !Object.prototype.hasOwnProperty.call(attrs, kebabCase(key))
-          ) {
-            attrs[key] = undefined;
-          }
-        });
-      }
-
       if (hasModel) {
         this.resetModelRender(attrs);
       }
@@ -173,10 +148,7 @@ export const registerComponent = (
       return h(
         HocBaseComponent,
         {
-          key: self.renderKey,
           attrs: {
-            $plugin: self.manger,
-            $component: baseComponent,
             $slotNames: slotNames,
             $nativeEvents: nativeEvents,
             $methodNames: methodNames,
