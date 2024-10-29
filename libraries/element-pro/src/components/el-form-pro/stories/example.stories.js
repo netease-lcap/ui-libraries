@@ -89,6 +89,7 @@ export const Default = {
           { label: '物联网学院', value: '3' },
         ],
         inputValue: '',
+        password: '',
         toggle: true,
       };
     },
@@ -118,13 +119,13 @@ export const Default = {
       <el-cascader-pro placeholder="请选择籍贯" :data-source="regionOptions" clearable filterable />
     </el-form-item-pro>
     <el-form-item-pro v-if="toggle" label="密码" name="password">
-      <el-input-pro type="password"  placeholder="请输入密码"></el-input-pro>
-    </el-form-item-pro>
-     <el-form-item-pro label="日期区间" name="range" :useRangeValue="true" start-field-name="startDate" end-field-name="endDate">
-      <el-date-picker-pro :range="true" />
+      <el-input-pro type="password" :value.sync="password"  placeholder="请输入密码"></el-input-pro>
     </el-form-item-pro>
     <el-form-item-pro label="邮箱" name="email">
       <el-input-pro placeholder="请输入邮箱"></el-input-pro>
+    </el-form-item-pro>
+    <el-form-item-pro label="日期区间" name="range" :useRangeValue="true" start-field-name="startDate" end-field-name="endDate">
+     <el-date-picker-pro :range="true" />
     </el-form-item-pro>
     <el-form-item-pro label="性别" name="gender" initial-value="male">
       <el-radio-group-pro>

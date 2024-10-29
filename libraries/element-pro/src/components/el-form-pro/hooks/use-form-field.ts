@@ -65,7 +65,12 @@ export const useFieldName = (props: MapGet) => {
   };
 };
 
-export const useProxyFormFieldVNode = (h: CreateElement, { fieldName, initialValue, initFormField, removeField }) => {
+export const useProxyFormFieldVNode = (h: CreateElement, {
+  fieldName,
+  initialValue,
+  initFormField,
+  removeField,
+}) => {
   let isControlled = false;
   let lastField: FormField = null;
 

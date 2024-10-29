@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import Vue, { type VNode, type ComponentOptions } from 'vue';
 import VueCompositionAPI from '@vue/composition-api';
-import { kebabCase } from 'lodash';
+import { isNil, kebabCase } from 'lodash';
 import type {
   NaslComponentPluginOptions,
   PluginMap,
@@ -10,12 +10,32 @@ import type {
 } from './types';
 import PluginManager from './plugin';
 import createHocComponent from './hoc-base';
+import MField from '../mixins/field';
 import { isEmptyVNodes, normalizeArray } from './utils';
 
 export { $deletePropList, $ref, $render } from './constants';
 export * from './common';
 
 Vue.use(VueCompositionAPI);
+
+// 兼容 cloud ui form mixin
+function createUFormMixin() {
+  return {
+    mixins: [MField],
+    methods: {
+      handleFocus(e: any) {
+        this.$emit('focus', e);
+      },
+      handleBlur(e: any) {
+        this.$emit('blur', e);
+      },
+      resetFieldRender(attrs: any, listeners: any) {
+        listeners.focus = this.handleFocus;
+        listeners.blur = this.handleBlur;
+      },
+    },
+  };
+}
 
 function createModelMixin(model: NaslComponentExtendInfo['model']) {
   const { prop = 'value' } = model;
@@ -27,6 +47,13 @@ function createModelMixin(model: NaslComponentExtendInfo['model']) {
         attrs: Record<string, any>,
       ) {
         attrs[prop] = this[prop];
+      },
+    },
+    watch: {
+      [prop]: {
+        handler(val) {
+          this.$emit('update', val);
+        },
       },
     },
   } as ComponentOptions<any>;
@@ -43,6 +70,20 @@ function createRangeModelMixin(
         attrs[startProp] = this[startProp];
         attrs[endProp] = this[endProp];
       },
+      normalizeRangeValue(startValue, endValue) {
+        if (isNil(startValue) && isNil(endValue)) {
+          return null;
+        }
+
+        return [startValue, endValue];
+      },
+    },
+    created() {
+      this.$emit('update', this.normalizeRangeValue(this[startProp], this[endProp]));
+
+      this.$watch(() => JSON.stringify([this[startProp], this[endProp]]), () => {
+        this.$emit('update', this.normalizeRangeValue(this[startProp], this[endProp]));
+      });
     },
   } as ComponentOptions<any>;
 }
@@ -83,6 +124,12 @@ export const registerComponent = (
   const hasRangeModel = rangeModel && rangeModel.length >= 2;
   if (hasRangeModel) {
     mixins.push(createRangeModelMixin(rangeModel));
+  }
+
+  const isFormField = hasModel || hasRangeModel;
+
+  if (isFormField) {
+    mixins.unshift(createUFormMixin());
   }
 
   return {
@@ -127,6 +174,10 @@ export const registerComponent = (
         ...this.$attrs,
       };
 
+      const listeners = {
+        ...this.$listeners,
+      };
+
       if (this.$env && this.$env.VUE_APP_DESIGNER) {
         manger.allPropKeys.forEach((key: string) => {
           if (
@@ -146,6 +197,10 @@ export const registerComponent = (
         this.resetRangeModelRender(attrs);
       }
 
+      if (isFormField) {
+        this.resetFieldRender(attrs, listeners);
+      }
+
       return h(
         HocBaseComponent,
         {
@@ -157,7 +212,7 @@ export const registerComponent = (
             ...attrs,
           },
           scopedSlots,
-          on: self.$listeners,
+          on: listeners,
         },
         manger.name === 'ElForm' ? this.$slots.default : childrenNodes,
       );
