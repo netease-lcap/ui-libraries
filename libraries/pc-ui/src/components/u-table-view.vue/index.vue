@@ -2624,7 +2624,11 @@ export default {
                 if (!columnVM)
                     return;
                 const vnode = columnVM.$vnode;
-                const index = slotVMs.findIndex((slotVm) => slotVm === vnode);
+                // fix 2985790043443712
+                const index = slotVMs.findIndex((slotVm) => slotVm === vnode
+                    || (slotVm.key && vnode.key && slotVm.key === vnode.key)
+                    || (slotVm.data && vnode.data && slotVm.data.ref && vnode.data.ref && slotVm.data.ref === vnode.data.ref)
+                );
                 if (index !== -1) {
                     if (this.columnGroupVMs[columnVM._uid]) {
                         if (columnVM.$children.length) {
