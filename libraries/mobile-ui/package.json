@@ -22,8 +22,7 @@
   "scripts": {
     "dev": "npm run storybook",
     "storybook": "storybook dev -p 8008",
-    "build": "lcap-scripts build && npm run build:d2c && npm run lowcode",
-    "build:d2c": "vite build --config vite.d2c.config.js",
+    "build": "lcap-scripts build && npm run build:d2c",
     "deploy": "lcap-scripts deploy",
     "deploy:dev": "lcap-scripts deploy --platform http://devtest.lcap.codewave-dev.163yun.com/",
     "deploy:test": "lcap-scripts deploy --platform http://defaulttenant.lcap.codewave-test.163yun.com/",
