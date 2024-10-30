@@ -96,6 +96,7 @@
     "storybook": "storybook dev -p 6006",
     "build": "lcap-scripts build && npm run lowcode && npm run build:d2c",
     "build:d2c": "vite build --config vite.d2c.config.mjs",
+    "dev:d2c": "vite build --config vite.d2c.config.mjs --watch",
     "pub": "npm run build && npm run deploy",
     "deploy": "lcap-scripts deploy",
     "deploy:dev": "lcap-scripts deploy --platform http://devtest.lcap.codewave-dev.163yun.com/",

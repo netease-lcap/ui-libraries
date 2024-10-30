@@ -14,7 +14,7 @@ export class HTMLGen implements IHTMLGen {
 
   nodes: ICodeWaveNode[];
 
-  linearLayoutTag = 'el-linear-layout';
+  linearLayoutTag = 'el-flex';
 
   absoluteLayoutTag = 'el-absolute-layout';
 
@@ -40,7 +40,9 @@ export class HTMLGen implements IHTMLGen {
     if (styleObj.display === 'flex') {
       attrs.push('mode="flex"');
       // 默认不换行
-      attrs.push('nowrap="nowrap"');
+      attrs.push(':wrap="false"');
+      // 默认gap为0
+      styleObj.gap = styleObj.gap || '0px';
       delete styleObj.display;
     }
     // 如果 styleObj 有 flex-direction，就设置 direction 属性
@@ -69,11 +71,6 @@ export class HTMLGen implements IHTMLGen {
       // 如果有背景图片，就添加到 customStyle 里
       styleObj.customStyle += `background: ${styleObj.background};`;
       delete styleObj.background;
-    }
-    // 如果有 gap，也加到 customStyle 里
-    if (styleObj.gap) {
-      styleObj.customStyle += `gap: ${styleObj.gap};`;
-      delete styleObj.gap;
     }
     // 如果没有margin-left，就设置为0，其他margin同理
     (
