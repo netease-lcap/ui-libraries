@@ -1,6 +1,5 @@
 import {
   ComponentCodeGen,
-  NodeWithAbsoluteBound,
   styleObjToStr,
 } from '../common';
 
@@ -33,11 +32,11 @@ export const codeGen: ComponentCodeGen = {
     return {
       id: componentNode.id,
       code: `
-<el-linear-layout style="${styleStr}">
+<el-flex style="${styleStr}">
   <el-tabs style="width: ${tabsWidth}px" value="v0">
       ${tabCode}
   </el-tabs>
-</el-linear-layout>
+</el-flex>
             `,
     };
   },
