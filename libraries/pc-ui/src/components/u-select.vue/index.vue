@@ -79,7 +79,7 @@
                 selectedVM &&
                 (selectedVM.$slots && selectedVM.$slots.default
                   ? selectedVM.$slots.default
-                  : [$at2(selectedVM, field || textField) || currentText])
+                  : [$at2(selectedVM, field || textField) || selectedVM.currentText])
               "></f-render>
           </slot>
         </template>
