@@ -12,7 +12,7 @@ export const codeGen: ComponentCodeGen = {
     const styleStr = styleObjToStr({ width });
     return {
       id: componentNode.id,
-      code: `<el-input-number-pro style="${styleStr}" />`,
+      code: `<el-input-number-pro style="${styleStr}" theme="column" />`,
     };
   },
   name: '数字输入',
