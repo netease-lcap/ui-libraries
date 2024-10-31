@@ -13,20 +13,20 @@ export const codeGen: ComponentCodeGen = {
     const itemCode = textNodes
       .map((textNode) => {
         const { text } = textNode.attrs;
-        return `<el-crumb-item><el-text text="${text}" /></el-crumb-item>`;
+        return `<el-breadcrumb-item><el-text text="${text}" /></el-breadcrumb-item>`;
       })
       .join('\n');
 
     return {
       id: componentNode.id,
       code: `
-<el-crumb style="${styleStr}" >
+<el-breadcrumb style="${styleStr}" >
     ${itemCode}
-</el-crumb>
+</el-breadcrumb>
             `,
     };
   },
   name: '面包屑',
   reason: '进行路径导航',
-  tag: 'el-crumb',
+  tag: 'el-breadcrumb',
 };

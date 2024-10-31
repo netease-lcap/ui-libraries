@@ -11,10 +11,10 @@ export const codeGen: ComponentCodeGen = {
     const styleStr = styleObjToStr({ width });
     return {
       id: componentNode.id,
-      code: `<el-date-picker style='${styleStr}' />`,
+      code: `<el-date-picker-pro style='${styleStr}' />`,
     };
   },
   name: '日期选择',
   reason: '进行日期选择',
-  tag: 'el-date-picker',
+  tag: 'el-date-picker-pro',
 };

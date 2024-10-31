@@ -14,14 +14,14 @@ export const codeGen: ComponentCodeGen = {
     return {
       id: componentNode.id,
       code: `
-<el-input
+<el-input-pro
   style='${styleStr}' 
   placeholder='${text}'
-  prefix='search'
+  prefixIcon='search'
 />`,
     };
   },
   name: '搜索框',
   reason: '进行输入搜索',
-  tag: 'el-input',
+  tag: 'el-input-pro',
 };

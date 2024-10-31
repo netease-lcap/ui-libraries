@@ -12,15 +12,15 @@ export const codeGen: ComponentCodeGen = {
     const text = textNode?.attrs.text || '';
     const { width, height } = componentNode.style;
     const styleStr = styleObjToStr({
-      '--select-width': width,
-      '--select-height': height,
+      width,
+      height,
     });
     return {
       id: componentNode.id,
-      code: `<el-select placeholder="${text}" style="${styleStr}" />`,
+      code: `<el-select-pro placeholder="${text}" style="${styleStr}" />`,
     };
   },
   name: '选择器',
   reason: '进行下拉选择',
-  tag: 'el-select',
+  tag: 'el-select-pro',
 };

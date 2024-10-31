@@ -14,22 +14,17 @@ export const codeGen: ComponentCodeGen = {
     return {
       id: componentNode.id,
       code: `
-<el-uploader
+<el-upload-pro
     style="${styleStr}"
-    :display="'inline'" :url="'/upload'" :urlField="'filePath'" :limit="999" :fileIconSwitcher="true" :downloadIconSwitcher="true"
-    :fileSize="true" :maxSize="'50MB'" :converter="'json'">
-    <template #file-list >
-        <i-ico  :flag="'file-icon'" :name="'file-default'" :icotype="'only'" style="margin: 0px 8px 0px 0px;"></i-ico>
-        <el-text  :flag="'file-name'" :text="'文件名称'" style="margin: 0px 8px 0px 0px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inherit;"></el-text>
-        <el-text  :flag="'file-size'" :text="'文件大小'" style="margin: 0px 8px 0px 0px;"></el-text>
-        <i-ico  :flag="'download-icon'" :name="'download'" :icotype="'only'" style="margin: 0px 8px 0px 0px;"></i-ico>
+  converter="simple" urlField="filePath" url="/upload" sizeLimitStr="50MB">
+    <template #trigger >
+        <el-button  icon="upload" type="primary" text="点击上传"></el-button>
     </template>
-    <el-button  :color="'primary'" :icon="'upload'" :text="'${text}'"></el-button>
-</el-uploader>
+</el-upload-pro>
             `,
     };
   },
   name: '文件上传',
   reason: '上传文件',
-  tag: 'el-uploader',
+  tag: 'el-upload-pro',
 };

@@ -15,7 +15,7 @@ export const codeGen: ComponentCodeGen = {
     return {
       id: componentNode.id,
       code: `
-<el-input
+<el-input-pro
     style="${styleStr}" 
     placeholder='${text}'
 />`,
@@ -23,5 +23,5 @@ export const codeGen: ComponentCodeGen = {
   },
   name: '单行输入',
   reason: '进行输入和校验',
-  tag: 'el-input',
+  tag: 'el-input-pro',
 };

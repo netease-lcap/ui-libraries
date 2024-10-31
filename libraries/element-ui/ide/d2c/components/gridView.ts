@@ -1,6 +1,7 @@
 import {
   randomString,
   ComponentCodeGen,
+  styleObjToStr,
 } from '../common';
 
 const type = 'GridView';
@@ -18,17 +19,19 @@ export const codeGen: ComponentCodeGen = {
     const childrenIds = [firstRect.id];
     const repeat = rows[0].length;
     const templateName = `template_${randomString(componentNode.id)}`;
+    const { width } = componentNode.style;
+    const styleStr = styleObjToStr({ width, height: 'auto' });
     return {
       id: componentNode.id,
       code: `
-<el-grid-view 
+<el-list-components 
     :dataSource="[]"
-    :repeat="${repeat}"
-    style="height:auto;"
+    :colnum="${repeat}"
+    style="${styleStr}"
 >
-    <template #item="current" ref="${templateName}">
+    <template #default="current" ref="${templateName}">
     </template>
-</el-grid-view>
+</el-list-components>
             `,
       slots: [
         {
@@ -43,5 +46,5 @@ export const codeGen: ComponentCodeGen = {
   },
   name: '数据网格',
   reason: '将数据以网格形式展示',
-  tag: 'el-grid-view',
+  tag: 'el-list-components',
 };

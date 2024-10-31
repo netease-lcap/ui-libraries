@@ -14,10 +14,10 @@ export const codeGen: ComponentCodeGen = {
     const styleStr = styleObjToStr({ width });
     return {
       id: componentNode.id,
-      code: `<el-select placeholder="${text}" style="${styleStr}" />`,
+      code: `<el-select-pro :multiple="true" placeholder="${text}" style="${styleStr}" />`,
     };
   },
   name: '下拉多选',
   reason: '进行下拉多选',
-  tag: 'el-select',
+  tag: 'el-select-pro',
 };

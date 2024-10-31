@@ -10,7 +10,7 @@ export const codeGen: ComponentCodeGen = {
   type,
   generateCode: (componentNode, textNodes, allNodes, slotNodes) => {
     const { width } = componentNode.style;
-    const styleStr = styleObjToStr({ width, '--list-view-item-padding': '0' });
+    const styleStr = styleObjToStr({ width, height: 'auto' });
     const firstRect = slotNodes[0]?.[0];
     if (!firstRect) {
       return null;
@@ -21,13 +21,14 @@ export const codeGen: ComponentCodeGen = {
     return {
       id: componentNode.id,
       code: `
-<el-list-view
+<el-list-components
     style="${styleStr}"
+    :colnum="1"
     :dataSource="[]"
 >
-    <template #item="current" ref="${templateName}">
+    <template #default="current" ref="${templateName}">
     </template>
-</el-list-view>
+</el-list-components>
             `,
       slots: [
         {
@@ -42,5 +43,5 @@ export const codeGen: ComponentCodeGen = {
   },
   name: '数据列表',
   reason: '将数据以列表形式展示',
-  tag: 'el-list-view',
+  tag: 'el-list-components',
 };

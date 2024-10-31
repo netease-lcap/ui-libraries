@@ -12,10 +12,10 @@ export const codeGen: ComponentCodeGen = {
     const styleStr = styleObjToStr({ width });
     return {
       id: componentNode.id,
-      code: `<el-input style="${styleStr}" type="password" />`,
+      code: `<el-input-pro style="${styleStr}" type="password" />`,
     };
   },
   name: '密码输入框',
   reason: '进行密码输入',
-  tag: 'el-input',
+  tag: 'el-input-pro',
 };

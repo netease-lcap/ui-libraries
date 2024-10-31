@@ -14,10 +14,10 @@ export const codeGen: ComponentCodeGen = {
     const styleStr = styleObjToStr({ width, height });
     return {
       id: componentNode.id,
-      code: `<el-textarea placeholder="${text}" style="${styleStr}" />`,
+      code: `<el-textarea-pro placeholder="${text}" style="${styleStr}" />`,
     };
   },
   name: '多行输入框',
   reason: '进行多行输入',
-  tag: 'el-textarea',
+  tag: 'el-textarea-pro',
 };

@@ -8,10 +8,10 @@ export const codeGen: ComponentCodeGen = {
   generateCode: (componentNode) => {
     return {
       id: componentNode.id,
-      code: '<el-switch style="" />',
+      code: '<el-switch-pro style="" />',
     };
   },
   name: '开关',
   reason: '进行开关',
-  tag: 'el-switch',
+  tag: 'el-switch-pro',
 };

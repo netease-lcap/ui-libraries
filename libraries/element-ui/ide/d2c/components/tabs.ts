@@ -20,11 +20,12 @@ export const codeGen: ComponentCodeGen = {
       .map((textNode, i) => {
         const { text } = textNode.attrs;
         return `
-    <el-tab value="v${i}">
-        <template #title>
+    <el-tab-pane value="v${i}">
+        <template #label>
             <el-text text="${text}"></el-text>
         </template>
-    </el-tab>
+        <el-text #default text="内容"></el-text>
+    </el-tab-pane>
       `;
       })
       .join('\n');
@@ -35,9 +36,6 @@ export const codeGen: ComponentCodeGen = {
 <el-linear-layout style="${styleStr}">
   <el-tabs style="width: ${tabsWidth}px" value="v0">
       ${tabCode}
-      <template #extra></template>
-      <template #title="current"></template>
-      <template #content="current"></template>
   </el-tabs>
 </el-linear-layout>
             `,
@@ -45,5 +43,5 @@ export const codeGen: ComponentCodeGen = {
   },
   name: '选项卡',
   reason: '切换页面内容',
-  tag: 'el-linear-layout',
+  tag: 'el-tabs',
 };

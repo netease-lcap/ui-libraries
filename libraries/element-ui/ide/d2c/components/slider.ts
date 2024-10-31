@@ -17,10 +17,10 @@ export const codeGen: ComponentCodeGen = {
 
     return {
       id: componentNode.id,
-      code: `<el-combo-slider style="${styleStr}"/>`,
+      code: `<el-slider-pro style="${styleStr}"/>`,
     };
   },
   name: '滑块',
   reason: '通过拖动进行数字选择',
-  tag: 'el-combo-slider',
+  tag: 'el-slider-pro',
 };

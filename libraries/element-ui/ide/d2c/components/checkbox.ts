@@ -9,15 +9,15 @@ export const codeGen: ComponentCodeGen = {
   generateCode: (componentNode, textNodes) => {
     const checkboxListCode = textNodes
       .map((textNode) => {
-        return `<el-checkbox><template #item><el-text text="${textNode.attrs.text}"></el-text></template></el-checkbox>`;
+        return `<el-checkbox-pro><el-text text="${textNode.attrs.text}"></el-text></el-checkbox-pro>`;
       })
       .join('\n');
     return {
       id: componentNode.id,
-      code: `<el-checkboxes style="--checkbox-space-x: 36px;">${checkboxListCode}</el-checkboxes>`,
+      code: `<el-checkbox-group-pro style="">${checkboxListCode}</el-checkbox-group-pro>`,
     };
   },
   name: '多选组',
   reason: '进行多选',
-  tag: 'el-checkboxes',
+  tag: 'el-checkbox-group-pro',
 };

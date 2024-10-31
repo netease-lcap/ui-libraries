@@ -16,9 +16,13 @@ export const codeGen: ComponentCodeGen = {
       id: componentNode.id,
       code: `
 <el-carousel  style="${styleStr}">
-    <template #item="current" ></template>
+    <template #item="current"></template>
     <el-carousel-item >
-        <el-image  :fit="'cover'" :src="'https://static-vusion.163yun.com/assets/cloud-ui/1.jpg'" style="width: 100%; height: 100%"></el-image>
+        <el-image fit="cover" src="https//static-vusion.163yun.com/assets/cloud-ui/6.jpg"
+            style="width:100%;height100%;">
+            <template #placeholder ></template>
+            <template #error ></template>
+        </el-image>
     </el-carousel-item>
 </el-carousel>
             `,

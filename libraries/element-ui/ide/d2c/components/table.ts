@@ -22,10 +22,10 @@ export const codeGen: ComponentCodeGen = {
       const templateName = `template_${randomString(componentNode.id)}${i}`;
       // 列代码
       const colCode = `
-            <el-table-view-column>
+            <el-table-column-pro>
                 <template #title><el-text text="${text}" /></template>
                 <template #cell="current" ref="${templateName}"></template>
-            </el-table-view-column>`;
+            </el-table-column-pro>`;
       colsCode.push(colCode);
 
       // 第一行的 nodes
@@ -44,17 +44,18 @@ export const codeGen: ComponentCodeGen = {
     return {
       id: componentNode.id,
       code: `
-<el-table-view 
+<el-table-pro 
     style="${styleStr}"
     :dataSource="[]"
+    :pagination="false"
 >
 \t${colsCode.join('\n\t')}
-</el-table-view>
+</el-table-pro>
             `,
       slots,
     };
   },
   name: '数据表格',
   reason: '展示数据表格',
-  tag: 'el-table-view',
+  tag: 'el-table-pro',
 };

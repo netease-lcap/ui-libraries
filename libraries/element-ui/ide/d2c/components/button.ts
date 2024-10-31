@@ -24,8 +24,7 @@ export const codeGen: ComponentCodeGen = {
     const color = textNodes[0]?.style.color || '';
     const styleObj = {
       width: componentNode.style.width,
-      '--button-height': componentNode.style.height,
-      padding: '0',
+      height: componentNode.style.height,
       background,
       color,
     };

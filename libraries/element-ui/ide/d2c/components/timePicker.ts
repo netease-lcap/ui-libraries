@@ -13,12 +13,12 @@ export const codeGen: ComponentCodeGen = {
     return {
       id: componentNode.id,
       code: `
-      <el-time-picker 
+      <el-time-picker-pro 
         style='${styleStr}' 
       />`,
     };
   },
   name: '时间选择',
   reason: '进行时间选择',
-  tag: 'el-time-picker',
+  tag: 'el-time-picker-pro',
 };
