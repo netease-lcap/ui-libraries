@@ -18,7 +18,7 @@ export const codeGen: ComponentCodeGen = {
     style="${styleStr}"
   converter="simple" urlField="filePath" url="/upload" sizeLimitStr="50MB">
     <template #trigger >
-        <el-button  icon="upload" type="primary" text="点击上传"></el-button>
+        <el-button  icon="upload" type="primary" text="${text}"></el-button>
     </template>
 </el-upload-pro>
             `,
