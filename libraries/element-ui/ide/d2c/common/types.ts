@@ -63,13 +63,19 @@ export interface ComponentCodeGen {
   tag: string;
 }
 
-export interface IHTMLGen {
-  imageUrls: {
-    nodeId: string;
-    url: string;
-  }[];
+export interface IHTMLGenArgs {
+  node: ICodeWaveNode;
+  imageUrls: { nodeId: string; url: string }[];
   nodes: ICodeWaveNode[];
-  createDiv(n: ICodeWaveNode): string;
-  createSpan(n: ICodeWaveNode): string;
-  createImg(n: ICodeWaveNode): string;
+  childrenHtml?: string;
+}
+
+export interface IHTMLGen {
+  linearLayoutTag: string;
+  absoluteLayoutTag: string;
+  textTag: string;
+  imageTag: string;
+  createDiv(args: IHTMLGenArgs): string;
+  createSpan(args: IHTMLGenArgs): string;
+  createImg(args: IHTMLGenArgs): string;
 }
