@@ -44,7 +44,7 @@ export const codeGen: ComponentCodeGen = {
       ],
     };
   },
-  name: '数据网格',
+  name: '组件列表-多列',
   reason: '将数据以网格形式展示',
   tag: 'el-list-components',
 };
