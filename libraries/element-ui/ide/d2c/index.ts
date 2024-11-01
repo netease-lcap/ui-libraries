@@ -1,7 +1,7 @@
 import { compCodeGenList } from './components';
-import { HTMLGen } from './htmlGen';
+import { htmlGen } from './htmlGen';
 
 export default {
   compCodeGenList,
-  HTMLGen,
+  htmlGen,
 };

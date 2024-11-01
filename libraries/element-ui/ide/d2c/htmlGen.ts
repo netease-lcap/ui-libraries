@@ -26,7 +26,9 @@ function adaptIDEStyle(args: {
   if (styleObj.display === 'flex') {
     attrs.push('mode="flex"');
     // 默认不换行
-    attrs.push('nowrap="nowrap"');
+    attrs.push(':wrap="false"');
+    // 默认gap为0
+    styleObj.gap = styleObj.gap || '0px';
     delete styleObj.display;
   }
   // 如果 styleObj 有 flex-direction，就设置 direction 属性
@@ -66,11 +68,6 @@ function adaptIDEStyle(args: {
     styleObj.customStyle += `background: ${styleObj.background};`;
     delete styleObj.background;
   }
-  // 如果有 gap，也加到 customStyle 里
-  if (styleObj.gap) {
-    styleObj.customStyle += `gap: ${styleObj.gap};`;
-    delete styleObj.gap;
-  }
   // 如果没有margin-left，就设置为0，其他margin同理
   (
     ['margin-left', 'margin-top', 'margin-right', 'margin-bottom']
@@ -99,11 +96,14 @@ function adaptIDEStyle(args: {
   return { styleObj, attrs };
 }
 
-export const htmlGenCloudUI: IHTMLGen = {
-  linearLayoutTag: 'u-linear-layout',
-  absoluteLayoutTag: 'u-absolute-layout',
-  textTag: 'u-text',
-  imageTag: 'u-image',
+export const htmlGen: IHTMLGen = {
+  linearLayoutTag: 'el-flex',
+
+  absoluteLayoutTag: 'el-absolute-layout',
+
+  textTag: 'el-text',
+
+  imageTag: 'el-image',
 
   createDiv(args) {
     const { node, nodes, childrenHtml = '' } = args;
