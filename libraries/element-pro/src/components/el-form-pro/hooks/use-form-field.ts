@@ -47,7 +47,7 @@ export const useFieldName = (props: MapGet) => {
   const fieldName = computed(() => {
     const useRangeValue = props.get('useRangeValue');
     if (useRangeValue) {
-      return [startFieldName.value, endFieldName.value, 'RANGE'].join('_');
+      return [LCAP_FORM_UID, startFieldName.value, endFieldName.value, 'RANGE'].join('_');
     }
 
     if (propName.value) {
@@ -102,14 +102,9 @@ export const useProxyFormFieldVNode = (h: CreateElement, {
         formField.setValue(propData[prop], false);
       }
 
-      const updateValue = listeners[event];
-
-      formField.setChangeListener(updateValue);
-
-      listeners[event] = (v) => {
-        formField.setValue(v, false);
-        updateValue(v);
-      };
+      formField.setChangeListener((v) => {
+        vnode.componentInstance?.$emit(event, v);
+      });
 
       return vnode;
     }
@@ -169,21 +164,16 @@ export const useProxyRangeFieldVNode = (h: CreateElement, {
 
     const models = [[startProp, startEvent], [endProp, endEvent]];
     if (isControlled) {
-      const updates: any[] = [];
-      models.forEach(([prop, event], i) => {
+      models.forEach(([prop], i) => {
         if (formRangeField.getValue(i) !== propData[prop]) {
           formRangeField.setValue(i, propData[prop], false);
         }
-
-        const updateValue = listeners[event];
-        updates.push(updateValue);
-        listeners[event] = (v) => {
-          formRangeField.setValue(i, v, false);
-          updateValue(v);
-        };
       });
 
-      formRangeField.setChangeListener(updates[0], updates[1]);
+      formRangeField.setChangeListener(
+        (v) => vnode.componentInstance?.$emit(startEvent, v),
+        (v) => vnode.componentInstance?.$emit(endEvent, v),
+      );
 
       return vnode;
     }

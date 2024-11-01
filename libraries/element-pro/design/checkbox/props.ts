@@ -30,7 +30,7 @@ export default {
   indeterminate: Boolean,
   /** 主文案 */
   label: {
-    type: [String, Function] as PropType<ElCheckboxProps['label']>,
+    type: [String, Function, Array] as PropType<ElCheckboxProps['label']>,
   },
   /** 是否启用懒加载。数据量加大时建议开启；加载复杂内容或大量图片时建议开启 */
   lazyLoad: Boolean,

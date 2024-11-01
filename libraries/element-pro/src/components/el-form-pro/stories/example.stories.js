@@ -91,6 +91,8 @@ export const Default = {
         inputValue: '',
         password: '',
         toggle: true,
+        startDate: null,
+        endDate: null,
       };
     },
     methods: {
@@ -99,6 +101,7 @@ export const Default = {
       },
       onSubmit(...args) {
         console.log('onSubmit', ...args);
+        console.log(this.$refs.form.getFormData(), this.$data);
         this.toggle = !this.toggle;
       },
       reset() {
@@ -125,7 +128,7 @@ export const Default = {
       <el-input-pro placeholder="请输入邮箱"></el-input-pro>
     </el-form-item-pro>
     <el-form-item-pro label="日期区间" name="range" :useRangeValue="true" start-field-name="startDate" end-field-name="endDate">
-     <el-date-picker-pro :range="true" />
+     <el-date-picker-pro :range="true" :startValue.sync="startDate" :endValue.sync="endDate" />
     </el-form-item-pro>
     <el-form-item-pro label="性别" name="gender" initial-value="male">
       <el-radio-group-pro>
