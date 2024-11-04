@@ -17,9 +17,9 @@ export const codeGen: ComponentCodeGen = {
       .map((textNode, i) => {
         const { text } = textNode.attrs;
         return `
-    <el-capsule value="v${i}">
+    <el-radio-pro value="v${i}">
       <el-text text="${text}"></el-text>
-    </el-capsule>
+    </el-radio-pro>
       `;
       })
       .join('\n');
@@ -27,13 +27,13 @@ export const codeGen: ComponentCodeGen = {
     return {
       id: componentNode.id,
       code: `
-  <el-capsules style="${styleStr}" value="v0">
+  <el-radio-group-pro style="${styleStr}" value="v0" shape="button">
       ${tabCode}
-  </el-capsules>
+  </el-radio-group-pro>
             `,
     };
   },
   name: '胶囊',
   reason: '切换页面内容',
-  tag: 'el-capsules',
+  tag: 'el-radio-group-pro',
 };
