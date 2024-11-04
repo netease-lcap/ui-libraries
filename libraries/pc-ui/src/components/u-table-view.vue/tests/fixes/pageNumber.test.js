@@ -17,6 +17,7 @@ describe('u-table-view.vue', () => {
 
     // 点击到第二页
     wrapper.vm.$refs.tableview.$refs.pagination.select(2);
+    await wrapper.vm.$nextTick();
     await sleep(16);
     const selectedPage = wrapper.find('a[selected="selected"]');
     expect(selectedPage.text()).toBe('2');
@@ -25,6 +26,7 @@ describe('u-table-view.vue', () => {
     // 数据源变化时还原到第一页
     const button = wrapper.find('#changelistbutton');
     await button.trigger('click');
+    await wrapper.vm.$nextTick();
     await sleep(16);
     const selectedPage1 = wrapper.find('a[selected="selected"]');
     expect(selectedPage1.text()).toBe('1');
@@ -32,6 +34,7 @@ describe('u-table-view.vue', () => {
 
     // 改变pageNumber
     wrapper.vm.pageNumber = 3;
+    await wrapper.vm.$nextTick();
     await sleep(16);
     const selectedPage2 = wrapper.find('a[selected="selected"]');
     expect(selectedPage2.text()).toBe('3');

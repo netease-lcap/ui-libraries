@@ -33,7 +33,7 @@ export default {
         selectSubIdnex: Number, // parent选择了第几个cascaderitem组件
         isInput: Boolean,
         menuIndex: Number,
-
+        opened: Boolean,
         changeOnSelect: {
             type: Boolean,
             default: false,
@@ -57,6 +57,11 @@ export default {
         },
         menuIndex(value) {
             this.selectMenuitem(value);
+        },
+        opened(val) {
+          if (val) {
+            this.ensureFocusedInView();
+          }
         },
     },
     mounted() {

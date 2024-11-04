@@ -70,12 +70,14 @@ describe('u-table-view.vue events test', () => {
     wrapper.vm.$on('before-page', handleBeforePage);
     wrapper.vm.$on('page', handlePage);
 
+    await wrapper.vm.$nextTick();
     await sleep(16);
 
     const pagination = wrapper.findComponent({ name: 'UPagination' });
     expect(pagination.exists()).toBe(true);
     pagination.vm.select(3);
 
+    await wrapper.vm.$nextTick();
     await sleep(16);
 
     expect(handlePage).toBeCalled();

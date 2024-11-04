@@ -53,6 +53,7 @@ describe('u-table-view.vue lazy-load test', () => {
       },
     });
 
+    await wrapper.vm.$nextTick();
     await sleep(16);
     expect(wrapper.html()).toMatchSnapshot();
   });

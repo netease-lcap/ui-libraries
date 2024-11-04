@@ -46,14 +46,15 @@ describe('u-table-view.vue events test', () => {
       },
     });
     wrapper.vm.$on('dblclick-row', handleDblClickRow);
-
+    await wrapper.vm.$nextTick();
     await sleep(16);
 
     const index = 2;
     const row = wrapper.findAll('tr').at(index + 1);
     expect(row.exists()).toBe(true);
 
-    row.trigger('dblclick');
+    await row.trigger('dblclick');
+    await wrapper.vm.$nextTick();
 
     expect(handleDblClickRow).toBeCalled();
     expect(wrapper.emitted('dblclick-row')[0][0].index).toEqual(index);

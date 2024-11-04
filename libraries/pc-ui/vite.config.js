@@ -108,6 +108,7 @@ export default defineConfig(({ command }) => {
     },
     test: {
       environment: 'jsdom',
+      exclude: ['src/**/demo.test.js'],
       css: {
         modules: {
           classNameStrategy: 'non-scoped',

@@ -103,5 +103,6 @@ export type RadioOption = string | number | RadioOptionObj;
 export interface RadioOptionObj {
   label?: string | ElNode;
   value?: string | number;
+  button?: boolean;
   disabled?: boolean;
 }

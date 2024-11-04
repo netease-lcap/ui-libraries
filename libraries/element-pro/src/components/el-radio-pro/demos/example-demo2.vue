@@ -4,7 +4,7 @@
     <div>
       <div class="block">
         <div>同步数据源</div>
-        <el-radio-group-pro :dataSource="options" :itemProps="setItemProps" valueField="id" :value.sync="checkedValue">
+        <el-radio-group-pro :shape="button ? 'button' : 'normal'" :dataSource="options" :itemProps="setItemProps" valueField="id" :value.sync="checkedValue">
           <template #item="current">
             {{ current.item.label }}
           </template>
@@ -13,12 +13,13 @@
       </div>
       <div class="block">
         <div>异步数据源</div>
-        <el-radio-group-pro :dataSource="load" :itemProps="setItemProps" valueField="id" :value.sync="checkedValue">
+        <el-radio-group-pro  :shape="button ? 'button' : 'normal'" :dataSource="load" :itemProps="setItemProps" valueField="id" :value.sync="checkedValue">
           <template #item="current">
             {{ current.item.label }}
           </template>
         </el-radio-group-pro>
       </div>
+      <el-button @click="changeStyle">change style</el-button>
     </div>
   </template>
   <script>
@@ -65,6 +66,7 @@ const mockService = {
                 disabled: true
             },
         ],
+        button: false,
       };
     },
     methods: {
@@ -77,8 +79,10 @@ const mockService = {
       load() {
         const data = mockService.load();
         return mockRequest(data);
-      }
+      },
+      changeStyle() {
+        this.button = !this.button;
+      },
     }
   };
   </script>
-  

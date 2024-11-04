@@ -115,6 +115,45 @@ namespace nasl.ui {
       allowUncheck?: nasl.core.Boolean;
     };
 
+    @Prop<ElRadioGroupProOptions<T, V>, 'shape'>({
+      group: '样式属性',
+      title: '展示类型',
+      description: '单选框展示类型',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '默认' }, { title: '按钮' }],
+      },
+      onChange: [{
+        clear: ['size', 'variant'],
+        if: (_) => _ === 'normal',
+      }],
+    })
+    shape: 'normal' | 'button' = 'normal';
+
+    @Prop<ElRadioGroupProOptions<T, V>, 'size'>({
+      group: '样式属性',
+      title: '按钮尺寸',
+      description: '单选框按钮尺寸',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '小' }, { title: '中' }, { title: '大' }],
+      },
+      if: (_) => _.shape === 'button',
+    })
+    size: 'small' | 'medium' | 'large' = 'medium';
+
+    @Prop<ElRadioGroupProOptions<T, V>, 'variant'>({
+      group: '样式属性',
+      title: '按钮形式',
+      description: '单选组件按钮形式',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '外框线' }, { title: '主色填充' }, { title: '默认填充' }],
+      },
+      if: (_) => _.shape === 'button',
+    })
+    variant: 'outline' | 'primary-filled' | 'default-filled' = 'outline';
+
     @Prop({
       group: '状态属性',
       title: '可取消选中',

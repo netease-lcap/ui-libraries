@@ -15,13 +15,13 @@ exports[`renders demo correctly 1`] = `
     </div>
   </div>
   <div>
-    <div type="" direction="horizontal" vusion-slot-name="default" class="van-linear-layout" mode="flex" gap="small" justify="center" alignment="center" style="height: 100px; background-color: red;">
+    <div type="" direction="horizontal" vusion-slot-name="default" gap="small" class="van-linear-layout" mode="flex" justify="center" alignment="center" style="height: 100px; background-color: red;">
       <div style="width: 100px; height: 50px; background-color: blue;"></div>
       <div style="width: 100px; height: 50px; background-color: green;"></div>
     </div>
   </div>
   <div>
-    <div type="" direction="vertical" vusion-slot-name="default" class="van-linear-layout" mode="flex" gap="small" justify="center" alignment="center" style="background-color: red;">
+    <div type="" direction="vertical" vusion-slot-name="default" gap="small" class="van-linear-layout" mode="flex" justify="center" alignment="center" style="background-color: red;">
       <div style="width: 100px; height: 50px; background-color: blue;"></div>
       <div style="width: 100px; height: 50px; background-color: green;"></div>
     </div>

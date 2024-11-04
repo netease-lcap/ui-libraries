@@ -13,9 +13,9 @@ export function useHandle(props) {
     if (!location?.pathname) return;
     const path = location.pathname?.split('/')?.filter(Boolean);
     const localItem = path?.reduce((pre, next) => {
-      const currentRouter = pre?.router?.find((item) => item.path === next);
+      const currentRouter = pre?.router?.find((item) => item?.path === next);
       pre.router = currentRouter?.children ?? [];
-      const paths = _.isNil(pre.path.at(-1)) ? `/${currentRouter.path}` : `${pre.path.at(-1).paths}/${currentRouter?.path}`;
+      const paths = _.isNil(pre.path.at(-1)) ? `/${currentRouter?.path}` : `${pre.path.at(-1).paths}/${currentRouter?.path}`;
       pre.path.push({
         title: currentRouter?.meta?.crumb,
         paths,

@@ -127,6 +127,8 @@ content: "\e65d";
 }
 
 .root[disabled] {
+    outline: none;
+    box-shadow: none;
     cursor: var(--cursor-not-allowed);
     background: var(--select-background-disabled);
     color: var(--select-color-disabled);
@@ -562,7 +564,7 @@ content: "\e67f";
 
 .preview {
     border: none;
-    background: transparent;   
+    background: transparent;
 }
 
 .disEvent{

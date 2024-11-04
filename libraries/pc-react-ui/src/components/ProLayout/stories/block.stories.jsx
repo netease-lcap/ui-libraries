@@ -40,7 +40,7 @@ export const 基本用法 = {
       <ProLayout
         avatarSrc="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
         // avatarTitle={$global.userInfo.UserName}
-        avatarTitle="张梦燕"
+        // avatarTitle="张梦燕"
         // avatarTitle={$global.userInfo.UserName}
         // avatarTitle="张梦燕"
         avatarRender={(

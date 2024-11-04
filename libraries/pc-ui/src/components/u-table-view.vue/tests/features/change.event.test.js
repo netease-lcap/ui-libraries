@@ -50,6 +50,7 @@ describe('u-table-view.vue events test', () => {
     });
     wrapper.vm.$on('change', handleChange);
 
+    await wrapper.vm.$nextTick();
     await sleep(16);
 
     const index = 2;
@@ -57,7 +58,8 @@ describe('u-table-view.vue events test', () => {
     expect(uRadio.exists()).toBe(true);
 
     const label = uRadio.find('label');
-    label.trigger('click');
+    await label.trigger('click');
+    await wrapper.vm.$nextTick();
 
     // watch 后 emit事件，需要放到nextTick中
     wrapper.vm.$nextTick(() => {
@@ -122,16 +124,15 @@ describe('u-table-view.vue events test', () => {
       },
     });
     wrapper.vm.$on('change', handleChange);
-
+    await wrapper.vm.$nextTick();
     await sleep(16);
-
-    console.log(wrapper.vm.selectedItem);
 
     const index = 2;
     const row = wrapper.findAll('tr').at(index + 1);
     expect(row.exists()).toBe(true);
 
-    row.trigger('click');
+    await row.trigger('click');
+    await wrapper.vm.$nextTick();
 
     // watch 后 emit事件，需要放到nextTick中
     wrapper.vm.$nextTick(() => {
@@ -191,7 +192,7 @@ describe('u-table-view.vue events test', () => {
       },
     });
     wrapper.vm.$on('check', handleChange);
-
+    await wrapper.vm.$nextTick();
     await sleep(16);
 
     const index = 2;
@@ -200,6 +201,7 @@ describe('u-table-view.vue events test', () => {
     expect(uCheckbox.exists()).toBe(true);
 
     await uCheckbox.vm.check();
+    await wrapper.vm.$nextTick();
 
     // wrapper.vm.$nextTick(async () => {
     //   expect(handleChange).toBeCalled();

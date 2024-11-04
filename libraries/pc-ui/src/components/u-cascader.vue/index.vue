@@ -34,6 +34,7 @@
                         :trigger="trigger"
                         :is-input="isInput"
                         :lazy="lazy"
+                        :opened="currentOpened"
                         :field="field"
                         :data="item"
                         :change-on-select="changeOnSelect"

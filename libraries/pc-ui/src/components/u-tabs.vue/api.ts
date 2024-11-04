@@ -124,7 +124,7 @@ namespace nasl.ui {
         })
         closableField: nasl.core.String = 'closable';
 
-        @Prop({
+        @Prop<UTabsOptions<T, V>, 'loadOnActive'>({
           group: '主要属性',
           title: '仅在显示时加载内容',
           description: '仅在显示时加载内容（优化渲染性能）',
@@ -132,6 +132,7 @@ namespace nasl.ui {
           setter: {
             concept: 'SwitchSetter',
           },
+          if: (_) => !!_.value,
         })
         loadOnActive: nasl.core.Boolean = false;
 

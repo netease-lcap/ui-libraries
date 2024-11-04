@@ -65,6 +65,20 @@ namespace nasl.ui {
     use12Hours: nasl.core.Boolean = false;
 
     @Prop({
+      group: '基础信息',
+      title: '开始时间字段名称',
+      description: '表单项名称。',
+    })
+    startName: nasl.core.String;
+
+    @Prop({
+      group: '基础信息',
+      title: '结束时间字段名称',
+      description: '表单项名称。',
+    })
+    endName: nasl.core.String;
+    
+    @Prop({
       group: '交互属性',
       title: '可清除',
       description: '可点击清除按钮一键清除内容',

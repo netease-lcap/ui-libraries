@@ -1,8 +1,7 @@
 /* eslint-disable no-param-reassign */
 import Vue, { type VNode, type ComponentOptions } from 'vue';
 import VueCompositionAPI from '@vue/composition-api';
-import { isFunction, kebabCase } from 'lodash';
-import { uid } from 'uid';
+import { isNil, kebabCase } from 'lodash';
 import type {
   NaslComponentPluginOptions,
   PluginMap,
@@ -10,7 +9,8 @@ import type {
   NaslComponentExtendInfo,
 } from './types';
 import PluginManager from './plugin';
-import HocBaseComponent from './hoc-base';
+import createHocComponent from './hoc-base';
+import MField from '../mixins/field';
 import { isEmptyVNodes, normalizeArray } from './utils';
 
 export { $deletePropList, $ref, $render } from './constants';
@@ -18,54 +18,42 @@ export * from './common';
 
 Vue.use(VueCompositionAPI);
 
+// 兼容 cloud ui form mixin
+function createUFormMixin() {
+  return {
+    mixins: [MField],
+    methods: {
+      handleFocus(e: any) {
+        this.$emit('focus', e);
+      },
+      handleBlur(e: any) {
+        this.$emit('blur', e);
+      },
+      resetFieldRender(attrs: any, listeners: any) {
+        listeners.focus = this.handleFocus;
+        listeners.blur = this.handleBlur;
+      },
+    },
+  };
+}
+
 function createModelMixin(model: NaslComponentExtendInfo['model']) {
-  const { prop = 'value', event = 'update:value' } = model;
+  const { prop = 'value' } = model;
 
   return {
-    props: {
-      formField: {
-        type: Object,
-      },
-      [prop]: {
-        default: null,
+    props: [prop],
+    methods: {
+      resetModelRender(
+        attrs: Record<string, any>,
+      ) {
+        attrs[prop] = this[prop];
       },
     },
     watch: {
-      [prop](val, oldVal) {
-        if (
-          val !== oldVal
-          && this.formField
-          && this.formField.getValue() !== val
-        ) {
-          this.formField.setValue(val, false);
-        }
-      },
-    },
-    methods: {
-      getModelValue() {
-        if (this.formField && isFunction(this.formField.getValue)) {
-          return this.formField.getValue();
-        }
-
-        return this[prop];
-      },
-      changeModelValue(v) {
-        if (this.formField && isFunction(this.formField.setValue)) {
-          this.formField.setValue(v);
-        } else if (this.$listeners[event]) {
-          this.$listeners[event](v);
-        }
-      },
-      resetModelRender(
-        attrs: Record<string, any>,
-        listeners: Record<string, any>,
-      ) {
-        const changeListner = listeners[event];
-        listeners[event] = this.changeModelValue;
-        attrs[prop] = this.getModelValue();
-        if (this.formField && isFunction(this.formField.setChangeListener)) {
-          this.formField.setChangeListener(changeListner);
-        }
+      [prop]: {
+        handler(val) {
+          this.$emit('update', val);
+        },
       },
     },
   } as ComponentOptions<any>;
@@ -75,78 +63,27 @@ function createRangeModelMixin(
   rangeModel: NaslComponentExtendInfo['rangeModel'],
 ) {
   const [startProp, endProp] = rangeModel;
-  const getEvent = (prop: string) => `update:${prop}`;
-  const startEvent = getEvent(startProp);
-  const endEvent = getEvent(endProp);
-  const getNameIndex = (prop: any) => (prop === endProp ? 1 : 0);
-
   return {
-    props: {
-      [startProp]: {
-        default: null,
-      },
-      [endProp]: {
-        default: null,
-      },
-      formRangeField: {
-        type: Object,
-      },
-    },
-    watch: {
-      [startProp](val, oldVal) {
-        const startIndex = 0;
-        if (
-          val !== oldVal
-          && this.formRangeField
-          && this.formRangeField.getValue(startIndex) !== val
-        ) {
-          this.formRangeField.setValue(startIndex, val, false);
-        }
-      },
-      [endProp](val, oldVal) {
-        const endIndex = 1;
-        if (
-          val !== oldVal
-          && this.formRangeField
-          && this.formRangeField.getValue(endIndex) !== val
-        ) {
-          this.formRangeField.setValue(endIndex, val, false);
-        }
-      },
-    },
+    props: [startProp, endProp],
     methods: {
-      getRangeModelValue(prop = startProp) {
-        if (this.formRangeField && isFunction(this.formRangeField.getValue)) {
-          return this.formRangeField.getValue(getNameIndex(prop));
+      resetRangeModelRender(attrs) {
+        attrs[startProp] = this[startProp];
+        attrs[endProp] = this[endProp];
+      },
+      normalizeRangeValue(startValue, endValue) {
+        if (isNil(startValue) && isNil(endValue)) {
+          return null;
         }
 
-        return this[prop];
+        return [startValue, endValue];
       },
-      changeRangeModelValue(prop, v) {
-        if (this.formRangeField && isFunction(this.formRangeField.setValue)) {
-          this.formRangeField.setValue(getNameIndex(prop), v);
-        } else if (this.$listeners[getEvent(prop)]) {
-          this.$listeners[getEvent(prop)](v);
-        }
-      },
-      resetRangeModelRender(attrs, listeners) {
-        const startChangeListner = listeners[startEvent];
-        const endChangeListner = listeners[endEvent];
-        listeners[startEvent] = (v: any) => this.changeRangeModelValue(startProp, v);
-        listeners[endEvent] = (v: any) => this.changeRangeModelValue(endProp, v);
+    },
+    created() {
+      this.$emit('update', this.normalizeRangeValue(this[startProp], this[endProp]));
 
-        attrs[startProp] = this.getRangeModelValue(startProp);
-        attrs[endProp] = this.getRangeModelValue(endProp);
-        if (
-          this.formRangeField
-          && isFunction(this.formRangeField.setChangeListener)
-        ) {
-          this.formRangeField.setChangeListener(
-            startChangeListner,
-            endChangeListner,
-          );
-        }
-      },
+      this.$watch(() => JSON.stringify([this[startProp], this[endProp]]), () => {
+        this.$emit('update', this.normalizeRangeValue(this[startProp], this[endProp]));
+      });
     },
   } as ComponentOptions<any>;
 }
@@ -168,6 +105,15 @@ export const registerComponent = (
   if (!componentOptions) {
     return baseComponent;
   }
+  const componentName = name || componentOptions.name;
+  const manger = new PluginManager({
+    name: componentName,
+    componentOptions,
+    plugin: { ...pluginOption },
+  });
+
+  const HocBaseComponent = createHocComponent(baseComponent, manger);
+
   const mixins: any = [];
 
   const hasModel = model && model.prop;
@@ -180,12 +126,17 @@ export const registerComponent = (
     mixins.push(createRangeModelMixin(rangeModel));
   }
 
+  const isFormField = hasModel || hasRangeModel;
+
+  if (isFormField) {
+    mixins.unshift(createUFormMixin());
+  }
+
   return {
-    name: name || componentOptions.name,
+    name: componentName,
     inheritAttrs: false,
     mixins,
     props: {
-      plugin: {},
       ...(model && model.prop ? { [model.prop]: {} } : {}),
       ...(rangeModel && rangeModel.length === 2
         ? { [rangeModel[0]]: {}, [rangeModel[1]]: {} }
@@ -193,30 +144,9 @@ export const registerComponent = (
     },
     model,
     rangeModel,
-    data() {
-      return {
-        renderKey: uid(),
-      };
-    },
-    created() {
-      const self = this as any;
-      self.manger = new PluginManager({
-        name: componentOptions.name,
-        componentOptions,
-        plugin: { ...pluginOption, ...self.plugin },
-      });
-    },
-    watch: {
-      plugin(v) {
-        const self = this as any;
-        self.manger.setPlugin(v);
-        // 重新生成key rerender 组件
-        this.renderKey = uid();
-      },
-    },
     render(h) {
       const self = this as any;
-      if (!self.manger.valid) {
+      if (!manger.valid) {
         return null;
       }
 
@@ -227,17 +157,8 @@ export const registerComponent = (
       const childrenNodes: VNode[] = [];
       (slotNames || []).forEach((slotName) => {
         if (scopedSlots[slotName]) {
-          let nodes = scopedSlots[slotName]({});
+          const nodes = scopedSlots[slotName]({});
 
-          if (Array.isArray(nodes)) {
-            nodes = nodes.filter((n) => {
-              if (typeof n === 'object') {
-                return n.tag || (n.text && n.text.trim());
-              }
-
-              return true;
-            });
-          }
           delete scopedSlots[slotName];
           if (isEmptyVNodes(nodes)) {
             return;
@@ -253,8 +174,12 @@ export const registerComponent = (
         ...this.$attrs,
       };
 
+      const listeners = {
+        ...this.$listeners,
+      };
+
       if (this.$env && this.$env.VUE_APP_DESIGNER) {
-        self.manger.allPropKeys.forEach((key: string) => {
+        manger.allPropKeys.forEach((key: string) => {
           if (
             !Object.prototype.hasOwnProperty.call(attrs, key)
             && !Object.prototype.hasOwnProperty.call(attrs, kebabCase(key))
@@ -263,25 +188,23 @@ export const registerComponent = (
           }
         });
       }
-      // 初始值
-
-      const listeners = { ...self.$listeners };
 
       if (hasModel) {
-        this.resetModelRender(attrs, listeners);
+        this.resetModelRender(attrs);
       }
 
       if (hasRangeModel) {
-        this.resetRangeModelRender(attrs, listeners);
+        this.resetRangeModelRender(attrs);
+      }
+
+      if (isFormField) {
+        this.resetFieldRender(attrs, listeners);
       }
 
       return h(
         HocBaseComponent,
         {
-          key: self.renderKey,
           attrs: {
-            $plugin: self.manger,
-            $component: baseComponent,
             $slotNames: slotNames,
             $nativeEvents: nativeEvents,
             $methodNames: methodNames,

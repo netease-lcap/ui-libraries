@@ -38,7 +38,8 @@ namespace nasl.ui {
     max: nasl.core.Decimal;
     @Prop({
       group: '主要属性',
-      title: '显示徽章',
+      title: '展示为小红点',
+      description: '是否展示为小红点',
       setter: {
         concept: "SwitchSetter"
       }

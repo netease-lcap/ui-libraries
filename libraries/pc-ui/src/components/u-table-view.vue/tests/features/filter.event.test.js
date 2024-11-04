@@ -78,7 +78,7 @@ describe('u-table-view.vue events test', () => {
 
     wrapper.vm.$on('before-filter', handleBeforeFilter);
     wrapper.vm.$on('filter', handleFilter);
-
+    await wrapper.vm.$nextTick();
     await sleep(16);
 
     const filter = wrapper.findComponent({ name: 'UTableViewFiltersPopper' });

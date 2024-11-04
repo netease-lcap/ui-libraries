@@ -47,13 +47,15 @@ describe('u-table-view.vue events test', () => {
     });
     wrapper.vm.$on('click-row', handleClickRow);
 
+    await wrapper.vm.$nextTick();
     await sleep(16);
 
     const index = 2;
     const row = wrapper.findAll('tr').at(index + 1);
     expect(row.exists()).toBe(true);
 
-    row.trigger('click');
+    await row.trigger('click');
+    await wrapper.vm.$nextTick();
 
     expect(handleClickRow).toBeCalled();
     expect(wrapper.emitted('click-row')[0][0].index).toEqual(index);

@@ -1,25 +1,8 @@
-<template>
-<div :class="$style.root" :type="type" :direction="direction" v-on="$listeners" vusion-slot-name="default" :nowrap="!wrap" ref="root">
-    <slot></slot>
-    <template v-if="(!$slots.default) && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']">
-        <div :class="$style.emptyTip" v-if="type === 'root'">拖拽右侧组件放至此处</div>
-        <s-empty v-else></s-empty>
-    </template>
-    <div v-if="showLoading" :class="$style.mask">
-        <u-loading
-            :icon="loadingIcon"
-            :text="loadingText"
-            :icon-rotate="loadingIconRotate"
-            :class="$style.loading">
-        </u-loading>
-    </div>
-</div>
-</template>
-
 <script>
 import SEmpty from '../s-empty.vue';
 import ULoading from '../u-loading.vue';
 import { throttle } from '../../utils/throttle';
+import Gap from '../../mixins/gap';
 
 export default {
     name: 'u-linear-layout',
@@ -27,6 +10,7 @@ export default {
         SEmpty,
         ULoading,
     },
+    mixins: [Gap()],
     props: {
         type: {
             type: String,
@@ -51,7 +35,7 @@ export default {
         wrap: {
             type: Boolean,
             default: true,
-        },
+        }
     },
     data() {
         return {
@@ -86,8 +70,44 @@ export default {
                 clientWidth,
             });
         },
-
     },
+    render(h) {
+      const children = [];
+
+      children.push(
+        ...(this.$slots.default || [])
+      );
+
+      this.setGapStyle(children);
+
+      if (this.showLoading) {
+        children.push(h('div', {
+          staticClass: this.$style.mask,
+        }, [
+          h('u-loading', {
+            staticClass: this.$style.loading,
+            attrs: {
+              icon: this.loadingIcon,
+              text: this.loadingText,
+              iconRotate: this.loadingIconRotate,
+            },
+          })
+        ]));
+      }
+
+      return h('div', {
+         staticClass: this.$style.root,
+         attrs: {
+          type: this.type,
+          gap: this.getGapAttrValue(),
+          direction: this.direction,
+          'vusion-slot-name': 'default',
+           nowrap: !this.wrap,
+         },
+         ref: 'root',
+         on: this.$listeners,
+      }, children);
+    }
 };
 </script>
 

@@ -49,6 +49,7 @@ describe('u-table-view.vue events test', () => {
     });
     wrapper.vm.$on('check', handleChange);
 
+    await wrapper.vm.$nextTick();
     await sleep(16);
 
     const index = 2;
@@ -57,6 +58,8 @@ describe('u-table-view.vue events test', () => {
     expect(uCheckbox.exists()).toBe(true);
 
     await uCheckbox.vm.check();
+    await wrapper.vm.$nextTick();
+
     expect(handleChange).toBeCalled();
     expect(wrapper.emitted('check')[0][0].values).toEqual(['小明']);
     expect(wrapper.emitted('check')[0][0].item).toEqual(dataSource[index - 1]); // 有checboxAll，所以index-1
@@ -100,12 +103,15 @@ describe('u-table-view.vue events test', () => {
     });
     wrapper.vm.$on('check', handleChange);
 
+    await wrapper.vm.$nextTick();
     await sleep(16);
 
     const uCheckboxAll = wrapper.findAllComponents(UCheckBox).at(0);
     expect(uCheckboxAll.exists()).toBe(true);
 
     await uCheckboxAll.vm.check();
+    await wrapper.vm.$nextTick();
+
     expect(handleChange).toBeCalled();
     const values = dataSource.map((item) => item.name);
     expect(wrapper.emitted('check')[0][0].values).toEqual(values);

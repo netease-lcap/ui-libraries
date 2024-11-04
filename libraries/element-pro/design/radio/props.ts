@@ -25,7 +25,7 @@ export default {
   },
   /** 主文案 */
   label: {
-    type: [String, Function] as PropType<ElRadioProps['label']>,
+    type: [String, Function, Array] as PropType<ElRadioProps['label']>,
   },
   /** HTML 元素原生属性 */
   name: {

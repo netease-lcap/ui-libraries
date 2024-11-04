@@ -22,10 +22,23 @@ export default {
         disabled: { type: Boolean, default: false },
     },
     data() {
+        const selectedVMs = [];
+        if (Array.isArray(this.value) && this.selectedValuesData && Array.isArray(this.selectedValuesData)) { // 分页获取数据，下拉里可能还没有这个值，根据用户传入的数据进行展示
+          this.value.forEach((val) => {
+            const itemData = this.selectedValuesData.find(
+                (itemData) => '' + itemData.value === '' + val,
+            );
+
+            if (itemData) {
+              selectedVMs.push(Object.assign({ currentSelected: true, currentText: itemData.text }, itemData));
+            }
+          });
+        }
+
         return {
             // @inherit: groupVMs: [],
             // @inherit: itemVMs: [],
-            selectedVMs: [],
+            selectedVMs,
         };
     },
     watch: {

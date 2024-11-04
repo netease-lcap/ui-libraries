@@ -354,7 +354,7 @@ content: "\e665";
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.cell[ellipsis] > div {
+.cell[ellipsis] > div:last-child {
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -365,6 +365,19 @@ content: "\e665";
 }
 .cell[ellipsis] > div > * {
     white-space: nowrap;
+}
+.cell[ellipsis] > div[class^="u-table-view_expander_expander__"] + div {
+    width: calc(100% - var(--table-view-expander-size) - 3px);
+    display: inline-flex;
+    align-items: center;
+}
+.cell[ellipsis] > div[class^="u-table-view_expander_expander__"] + div > * {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cell[ellipsis] > div[class^="u-table-view_expander_expander__"] + * {
+    margin-left: 3px;
 }
 .cell[last-left-fixed]::after,
 .cell[first-right-fixed]::after{

@@ -73,7 +73,7 @@ export const 默认 = {
           getTargetContainer={(el) => {
             return document.getElementById('test-pro-layout') || document.body;
           }}
-          avatarTitle="张梦燕"
+          // avatarTitle="张梦燕"
           fixSiderbar
           layout="mix"
           logo="http://minio-api.codewave-dev.163yun.com/lowcode-static/packages/%40lcap/pc-react-ui%401.0.0-beta.0/dist-theme/LOGO.png"

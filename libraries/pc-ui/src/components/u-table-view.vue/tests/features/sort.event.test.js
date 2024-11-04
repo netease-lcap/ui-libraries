@@ -77,13 +77,14 @@ describe('u-table-view.vue events test', () => {
 
     wrapper.vm.$on('before-sort', handleBeforeSort);
     wrapper.vm.$on('sort', handleSort);
-
+    await wrapper.vm.$nextTick();
     await sleep(16);
 
     const orderSpan = wrapper.find('span[order]');
     expect(orderSpan.exists()).toBe(true);
 
     orderSpan.trigger('click');
+    await wrapper.vm.$nextTick();
 
     expect(handleSort).toBeCalled();
     expect(handleBeforeSort).toBeCalled();

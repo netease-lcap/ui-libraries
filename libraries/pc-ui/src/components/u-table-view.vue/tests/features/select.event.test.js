@@ -49,6 +49,7 @@ describe('u-table-view.vue events test', () => {
     });
     wrapper.vm.$on('select', handleSelect);
 
+    await wrapper.vm.$nextTick();
     await sleep(16);
 
     const index = 2;
@@ -101,6 +102,7 @@ describe('u-table-view.vue events test', () => {
     });
     wrapper.vm.$on('select', handleSelect);
 
+    await wrapper.vm.$nextTick();
     await sleep(16);
 
     const index = 2;

@@ -1,5 +1,5 @@
 <template>
-<div :class="$style.root" v-if="!tabLoadOnActive || selected" v-show="selected" vusion-slot-name="default" :vusion-disabled-selected="true">
+<div :class="$style.root" v-if="!tabLoadOnActive() || selected" v-show="selected" vusion-slot-name="default" :vusion-disabled-selected="true">
     <slot></slot>
     <s-empty v-if="!$slots.default && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']"></s-empty>
 </div>

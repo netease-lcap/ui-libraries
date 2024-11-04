@@ -13,6 +13,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 describe('u-table-view.vue', () => {
   it('pageSizer选择器变化后，刷新数据', async () => {
     const wrapper = mount(PageSizeDemo);
+    await wrapper.vm.$nextTick();
     await sleep(16);
 
     const rows = wrapper.findAll('tr');
@@ -22,6 +23,7 @@ describe('u-table-view.vue', () => {
     wrapper.vm.$refs.tableview.$refs.pagination.onSelectPageSize({ value: 50 });
     const button = wrapper.find('#changelistbutton');
     await button.trigger('click');
+    await wrapper.vm.$nextTick();
     await sleep(16);
     const rows1 = wrapper.findAll('tr');
     expect(rows1.length).toBe(51); // 1个表头，50个数据
@@ -30,6 +32,7 @@ describe('u-table-view.vue', () => {
 
     // 将pageSize还原回20
     wrapper.vm.pageSize = 20;
+    await wrapper.vm.$nextTick();
     await sleep(16);
     const rows2 = wrapper.findAll('tr');
     expect(rows2.length).toBe(21); // 1个表头，50个数据

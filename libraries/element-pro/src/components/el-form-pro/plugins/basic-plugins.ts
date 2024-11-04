@@ -1,175 +1,83 @@
 /* eslint-disable prefer-destructuring */
-import Vue, { type VNode } from 'vue';
+import { type VNode } from 'vue';
 import {
   type SubmitContext,
   type ValidateResultContext,
   Space,
 } from '@element-pro';
+import { isFunction } from 'lodash';
 import {
-  isObject,
-  set as lodashSet,
-  get as lodashGet,
-  cloneDeep,
-  isNil,
-  isFunction,
-} from 'lodash';
-import { type NaslComponentPluginOptions, $deletePropList, $ref } from '@lcap/vue2-utils';
+  type NaslComponentPluginOptions,
+  $deletePropList,
+  $ref,
+} from '@lcap/vue2-utils';
 import { isEmptyVNodes } from '@lcap/vue2-utils/plugins/utils';
-import {
-  getCurrentInstance,
-  provide,
-  reactive,
-  toRaw,
-} from '@vue/composition-api';
+import { getCurrentInstance, provide } from '@vue/composition-api';
 import {
   LabelWidthType,
   FORM_DEFAULT_LAYOUT,
   GutterType,
   FORM_CONTEXT,
-  LCAP_FORM_UID,
 } from '../constants';
-import type {
-  FormExtendsContext,
-  FormField,
-  FormFieldOptions,
-  FormRangeField,
-  FormRangeFieldOptions,
-  LayoutMode,
-} from '../types';
-
-const getTemplateCount = (counts: number | string) => {
-  if (!Number.isNaN(counts as number) || typeof counts === 'string') {
-    return `repeat(${counts}, minmax(0,1fr))`;
-  }
-
-  return counts;
-};
-
-export interface FormFieldMata {
-  initialValue: any;
-  change?: ((v: any) => void) | null;
-  fieldControl?: FormField | FormRangeField;
-}
-
-function splitNameToPath(name) {
-  return name.replace(/\[/g, '.').replace(/\]/g, '').split('.');
-}
-
-function deepVueSet(data: any, name: string, value = null) {
-  const keys = splitNameToPath(name);
-  let current = data;
-  while (true) {
-    const key = keys.shift();
-    const val = current[key];
-    if (keys.length === 0) {
-      if (val === undefined) {
-        Vue.set(current, key, value);
-      }
-      break;
-    }
-
-    const nextKey = key;
-    if (!Number.isNaN(Number(nextKey)) && !Array.isArray(val)) {
-      Vue.set(current, key, []);
-    } else if (!Array.isArray(val) && !isObject(val)) {
-      Vue.set(current, key, {});
-    }
-
-    current = current[key];
-  }
-}
-
-const normalizeRangeFieldValue = (startValue, endValue) => {
-  if (isNil(startValue) && isNil(endValue)) {
-    return null;
-  }
-
-  return [startValue, endValue];
-};
-
-const useFormItemControls = () => {
-  const formItemInstances: any[] = [];
-
-  function addFormItemInstance(ins: any) {
-    if (formItemInstances.includes(ins)) {
-      return;
-    }
-    formItemInstances.push(ins);
-  }
-
-  function removeFormItemInstance(ins: any) {
-    const index = formItemInstances.indexOf(ins);
-    if (index === -1) {
-      return;
-    }
-
-    formItemInstances.splice(index, 1);
-  }
-
-  function resetFormItemNeedReset() {
-    // 组件源码黑操作
-    formItemInstances.forEach((ins) => {
-      if (ins) {
-        ins.needResetField = true;
-      }
-    });
-  }
-
-  return {
-    addFormItemInstance,
-    removeFormItemInstance,
-    resetFormItemNeedReset,
-  };
-};
+import type { FormExtendsContext, LayoutMode } from '../types';
+import { useForm, useFormItemControls } from '../hooks';
+import { getTemplateCount } from '../utils';
 
 /* 组件功能扩展插件 */
 export const useExtensPlugin: NaslComponentPluginOptions = {
   props: [
-    'layoutMode', 'labelWidthType', 'gutterType',
-    'gutter', 'labelEllipsis', 'repeat', 'clearFieldOnDestroy',
+    'layoutMode',
+    'labelWidthType',
+    'gutterType',
+    'gutter',
+    'labelEllipsis',
+    'repeat',
+    'clearFieldOnDestroy',
   ],
   setup(props, { h }) {
     const { useComputed } = props;
     const instance = getCurrentInstance();
-    const { addFormItemInstance, removeFormItemInstance, resetFormItemNeedReset } = useFormItemControls();
-    const formData = reactive({});
-    const formFieldMetas: Record<string, FormFieldMata> = {};
+    const {
+      addFormItemInstance,
+      removeFormItemInstance,
+      resetFormItemNeedReset,
+    } = useFormItemControls();
 
-    const labelWidth = useComputed(['labelWidthType', 'labelWidth'], (
-      labelWidthType = '',
-      width = '100px',
-    ) => {
-      if (!labelWidthType) {
-        return width;
-      }
+    const labelWidth = useComputed(
+      ['labelWidthType', 'labelWidth'],
+      (labelWidthType = '', width = '100px') => {
+        if (!labelWidthType) {
+          return width;
+        }
 
-      return LabelWidthType[labelWidthType];
-    });
+        return LabelWidthType[labelWidthType];
+      },
+    );
 
-    const gutterSize = useComputed(['gutterType', 'gutter'], (
-      gutterType = 'medium',
-      gutter,
-    ) => {
-      if (gutter) {
-        return gutter;
-      }
+    const gutterSize = useComputed(
+      ['gutterType', 'gutter'],
+      (gutterType = 'medium', gutter) => {
+        if (gutter) {
+          return gutter;
+        }
 
-      return GutterType[gutterType];
-    });
+        return GutterType[gutterType];
+      },
+    );
 
-    const style = useComputed(['layoutMode', 'repeat'], (
-      layoutMode: LayoutMode,
-      repeat = 4,
-    ) => {
-      if (layoutMode !== 'grid') {
-        return {};
-      }
+    const style = useComputed(
+      ['layoutMode', 'repeat'],
+      (layoutMode: LayoutMode, repeat = 4) => {
+        if (layoutMode !== 'grid') {
+          return {};
+        }
 
-      return {
-        gridTemplateColumns: getTemplateCount(repeat),
-        gap: gutterSize.value,
-      };
-    });
+        return {
+          gridTemplateColumns: getTemplateCount(repeat),
+          gap: gutterSize.value,
+        };
+      },
+    );
 
     const className = useComputed('layoutMode', (layoutMode: LayoutMode) => {
       if (layoutMode === 'grid') {
@@ -179,189 +87,58 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       return undefined;
     });
 
-    function removeField(name) {
-      if (!name) {
-        return;
+    const {
+      formData,
+      formFieldMetas,
+      initFormField,
+      initFormRangeField,
+      setFieldValue,
+      getFieldValue,
+      setFormData,
+      getFormData,
+      removeFieldCollect,
+    } = useForm(props);
+
+    const resetForm = () => {
+      const onReset = props.get('onReset');
+
+      if (instance.refs.$base) {
+        (instance.refs.$base as any).clearValidate();
       }
-      delete formFieldMetas[name];
-      const clearFieldOnDestroy = props.get<boolean>('clearFieldOnDestroy');
-      if (clearFieldOnDestroy || name.startsWith(LCAP_FORM_UID)) {
-        lodashSet(formData, name, null);
-      }
-    }
-
-    function setFormData(d: Record<string, any>) {
-      if (!isObject(d)) {
-        return;
-      }
-
-      const resetObj = {};
-
-      Object.keys(d).forEach((key) => {
-        resetObj[key] = d[key] === undefined ? null : d[key];
-      });
-
-      Object.assign(formData, resetObj);
 
       Object.keys(formFieldMetas).forEach((key) => {
-        if (typeof formFieldMetas[key].change !== 'function') {
-          return;
-        }
-
-        const val = lodashGet(resetObj, key);
-        if (val === undefined) {
-          return;
-        }
-
-        formFieldMetas[key].change(val);
-      });
-    }
-
-    function setFieldValue(key: string, value: any, emitChange = true) {
-      if (!key) {
-        return;
-      }
-
-      lodashSet(formData, key, value);
-      if (emitChange && formFieldMetas[key] && typeof formFieldMetas[key].change === 'function') {
-        formFieldMetas[key].change(value);
-      }
-    }
-
-    function getFieldValue(key: string) {
-      return lodashGet(formData, key);
-    }
-
-    function initFormField({ name, value }: FormFieldOptions) {
-      if (formFieldMetas[name]) {
-        return formFieldMetas[name].fieldControl as FormField;
-      }
-
-      const initialValue = value;
-
-      deepVueSet(formData, name, initialValue);
-
-      let initialSetted = false;
-      const formField: FormField = {
-        name,
-        setValue: (v, emitChange = true) => {
-          setFieldValue(name, v, emitChange);
-        },
-        getValue: () => getFieldValue(name),
-        setInitalValue: (v) => {
-          if (initialSetted) {
-            return;
-          }
-          if (formFieldMetas[name] && v !== undefined) {
-            formFieldMetas[name].initialValue = v;
-            initialSetted = true;
-          }
-        },
-        setChangeListener: (listener) => {
-          if (formFieldMetas[name]) {
-            formFieldMetas[name].change = listener;
-          }
-        },
-      };
-
-      formFieldMetas[name] = {
-        initialValue: null,
-        fieldControl: formField,
-      };
-
-      return formField;
-    }
-
-    function initFormRangeField({ name, uid, value }: FormRangeFieldOptions) {
-      if (formFieldMetas[uid]) {
-        return formFieldMetas[uid].fieldControl as FormRangeField;
-      }
-
-      const initValue = value.map((v, i) => {
-        const n = name[i];
-        const initV = v;
-        if (n) {
-          deepVueSet(formData, n, initV);
-          formFieldMetas[n] = {
-            initialValue: null,
-          };
-        }
-
-        return v;
+        setFieldValue(
+          key,
+          formFieldMetas[key].initialValue === undefined
+            ? null
+            : formFieldMetas[key].initialValue,
+        );
       });
 
-      deepVueSet(formData, uid, normalizeRangeFieldValue(initValue[0], initValue[1]));
-      const [startName, endName] = name;
+      resetFormItemNeedReset();
 
-      let initialSetted = false;
-      const formRangeField: FormRangeField = {
-        uid,
-        name,
-        setValue: (index, v, emitChange = true) => {
-          if (name[index]) {
-            setFieldValue(name[index], v, emitChange);
-          }
+      if (isFunction(onReset)) {
+        onReset();
+      }
+    };
 
-          const values = [...(getFieldValue(uid) || [])];
-          values[index] = v;
-          setFieldValue(uid, normalizeRangeFieldValue(values[0], values[1]));
-        },
-        getValue: (index) => getFieldValue(name[index]),
-        setInitalValue: (values) => {
-          if (initialSetted) {
-            return;
-          }
-          initialSetted = true;
+    const validate = async () => {
+      if (!instance || !instance.refs || !instance.refs.$base) {
+        return { valid: false };
+      }
 
-          const [startValue, endValue] = values;
-
-          if (startName && formFieldMetas[startName] && startValue !== undefined) {
-            formFieldMetas[startName].initialValue = startValue;
-          }
-
-          if (endName && formFieldMetas[endName] && endValue !== undefined) {
-            formFieldMetas[endName].initialValue = values[1];
-          }
-
-          if (formFieldMetas[uid]) {
-            formFieldMetas[uid].initialValue = normalizeRangeFieldValue(startValue, endValue);
-          }
-        },
-        setChangeListener: (startListener, endListener) => {
-          if (startName && formFieldMetas[startName]) {
-            formFieldMetas[startName].change = startListener;
-          }
-
-          if (endName && formFieldMetas[endName]) {
-            formFieldMetas[endName].change = endListener;
-          }
-        },
+      const result = await (instance.refs.$base as any).validate();
+      return {
+        valid: result === true,
       };
-
-      formFieldMetas[uid] = {
-        initialValue: null,
-        fieldControl: formRangeField,
-      };
-
-      return formRangeField;
-    }
-
-    function getFormData() {
-      const d = cloneDeep(toRaw(formData));
-      Object.keys(d).forEach((key) => {
-        if (key.startsWith(LCAP_FORM_UID)) {
-          delete d[key];
-        }
-      });
-      return d;
-    }
+    };
 
     provide<FormExtendsContext>(FORM_CONTEXT, {
       labelWidth,
       labelEllipsis: useComputed('labelEllipsis', (v) => !!v),
       setFieldValue,
       getFieldValue,
-      removeField,
+      removeField: removeFieldCollect,
       initFormField,
       initFormRangeField,
       addFormItemInstance,
@@ -398,16 +175,20 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
         if (layoutMode === 'linear') {
           const direction = props.get('layout') === 'inline' ? 'horizontal' : 'vertical';
-          return h(Space, {
-            attrs: {
-              direction,
-              breakLine: true,
-              size: gutterSize.value,
+          return h(
+            Space,
+            {
+              attrs: {
+                direction,
+                breakLine: true,
+                size: gutterSize.value,
+              },
+              style: {
+                width: direction === 'vertical' ? '100%' : '',
+              },
             },
-            style: {
-              width: direction === 'vertical' ? '100%' : '',
-            },
-          }, vnodes);
+            vnodes,
+          );
         }
 
         if (layoutMode === 'grid') {
@@ -427,33 +208,8 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       },
       [$deletePropList]: ['onReset'],
       [$ref]: {
-        async validate() {
-          if (!instance || !instance.refs || !instance.refs.$base) {
-            return { valid: false };
-          }
-
-          const result = await (instance.refs.$base as any).validate();
-          return {
-            valid: result === true,
-          };
-        },
-        resetForm() {
-          const onReset = props.get('onReset');
-
-          if (instance.refs.$base) {
-            (instance.refs.$base as any).clearValidate();
-          }
-
-          Object.keys(formFieldMetas).forEach((key) => {
-            setFieldValue(key, formFieldMetas[key].initialValue === undefined ? null : formFieldMetas[key].initialValue);
-          });
-
-          resetFormItemNeedReset();
-
-          if (isFunction(onReset)) {
-            onReset();
-          }
-        },
+        validate,
+        resetForm,
         setFormData,
         getFormData,
         setFieldValue,

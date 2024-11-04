@@ -12,7 +12,7 @@ import {
   SetupContext,
   ref,
 } from '@vue/composition-api';
-import { kebabCase } from 'lodash';
+import { camelCase, kebabCase, upperFirst } from 'lodash';
 import PluginManager from './plugin';
 import { MapGetKey, PluginSetUpContext, PluginSetupRef } from './types';
 import {
@@ -129,6 +129,10 @@ const usePropMap = (props: any, ctx: SetupContext) => {
 
     if (k.indexOf(':') !== -1) {
       return ctx.listeners[k];
+    }
+
+    if (Object.prototype.hasOwnProperty.call(props, k)) {
+      return props[k];
     }
 
     if (!isNullOrUndefined(ctx.attrs[k])) {
@@ -332,164 +336,153 @@ const toRenderState = ({
   };
 };
 
-export default defineComponent({
-  name: 'HOCBase',
-  inheritAttrs: false,
-  props: {
-    $plugin: {
-      type: PluginManager,
-      default: () => null,
-    },
-    $component: {
-      default: () => {},
-    },
-    $slotNames: {
-      type: Array,
-      default: () => [] as string[],
-    },
-    $methodNames: {
-      type: Array,
-      default: () => [] as string[],
-    },
-    $eventNames: {
-      type: Array,
-      default: () => [] as string[],
-    },
-    $nativeEvents: {
-      type: Array,
-      default: () => ([] as string[]),
-    },
-  },
-  setup(props, ctx) {
-    const { $plugin: manger, $component: baseComponent } = props;
-    const propKeys = manger.basePropKeys;
-    const keys = manger.allPropKeys;
-    const eventNames: string[] = (props.$eventNames || []) as string[];
-    const vueInstance: any = ctx.root;
-    const isDesigner = inject('VUE_APP_DESIGNER', false) || (vueInstance.$env && vueInstance.$env.VUE_APP_DESIGNER);
-    let refMap = useInitRefMap(keys);
-    const { callSetupEnd, createPropsControl } = usePropMap(props, ctx);
-    const setups = manger.getPluginSetup(isDesigner);
+export default function createHocComponent(baseComponent: any, manger: PluginManager) {
+  const propOptions = manger.getPluginPropKeys([]).reduce((n: any, key) => {
+    n[key] = {};
+    return n;
+  }, {});
 
-    const pluginSetUpContext: PluginSetUpContext = {
-      h: vueInstance.$createElement,
-      $router: vueInstance.$router,
-      isDesigner,
-      setupContext: ctx,
-      getVNode: () => ctx.parent.$vnode,
-    };
-
-    setups.forEach((setupFn) => {
-      const momentRefMap = mergeRefMap(refMap);
-      const mergeMap = setupFn.call(
-        this,
-        createPropsControl(momentRefMap),
-        pluginSetUpContext,
-      );
-
-      if (!mergeMap) {
-        return;
-      }
-
-      setMergeMapSymbol(mergeMap, momentRefMap);
-      refMap = mergeRefMap(momentRefMap, mergeMap as any);
-    });
-
-    callSetupEnd(refMap);
-    const renderFns: any[] = refMap[$render];
-
-    return {
-      $state: toRenderState({
-        refMap,
-        keys,
-        baseComponent,
-        propKeys,
-        eventNames,
-      }),
-      $render(resultVNode: VNode, h: CreateElement, context: any) {
-        if (renderFns.length === 0) {
-          return resultVNode;
-        }
-
-        return renderFns.reduce(
-          (value, renderFn = (v: any) => v) => renderFn.call(this, value, h, context),
-          resultVNode,
-        );
+  return defineComponent({
+    name: `${upperFirst(camelCase(manger.name))}HOC`,
+    inheritAttrs: false,
+    props: {
+      $slotNames: {
+        type: Array,
+        default: () => [] as string[],
       },
-    };
-  },
-  render(h) {
-    if (!this.$state) {
-      return null;
-    }
+      $methodNames: {
+        type: Array,
+        default: () => [] as string[],
+      },
+      $eventNames: {
+        type: Array,
+        default: () => [] as string[],
+      },
+      $nativeEvents: {
+        type: Array,
+        default: () => ([] as string[]),
+      },
+      ...propOptions,
+    },
+    setup(props, ctx) {
+      const propKeys = manger.basePropKeys;
+      const keys = manger.allPropKeys;
+      const eventNames: string[] = (props.$eventNames || []) as string[];
+      const vueInstance: any = ctx.root;
+      const isDesigner = inject('VUE_APP_DESIGNER', false) || (vueInstance.$env && vueInstance.$env.VUE_APP_DESIGNER);
+      let refMap = useInitRefMap(keys);
+      const { callSetupEnd, createPropsControl } = usePropMap(props, ctx);
+      const setups = manger.getPluginSetup(isDesigner);
 
-    const {
-      props,
-      listeners,
-      slots,
-      deletePropsKeys,
-      allPropsKeys,
-      propKeys,
-      baseComponent,
-    } = this.$state;
+      const pluginSetUpContext: PluginSetUpContext = {
+        h: vueInstance.$createElement,
+        $router: vueInstance.$router,
+        isDesigner,
+        setupContext: ctx,
+        getVNode: () => ctx.parent.$vnode,
+      };
 
-    const scopedSlots: any = { ...this.$scopedSlots, ...getRefValueMap(slots) };
+      setups.forEach((setupFn) => {
+        const momentRefMap = mergeRefMap(refMap);
+        const mergeMap = setupFn.call(
+          this,
+          createPropsControl(momentRefMap),
+          pluginSetUpContext,
+        );
 
-    const childrenNodes: VNode[] = [];
-    (this.$slotNames as string[]).forEach((slotName) => {
-      if (scopedSlots[slotName]) {
-        let nodes = scopedSlots[slotName]({});
-
-        if (Array.isArray(nodes)) {
-          nodes = nodes.filter((n) => {
-            if (typeof n === 'object') {
-              return n.tag || (n.text && n.text.trim());
-            }
-
-            return true;
-          });
-        }
-        delete scopedSlots[slotName];
-        if (isEmptyVNodes(nodes)) {
+        if (!mergeMap) {
           return;
         }
 
-        childrenNodes.push(
-          h('template', { slot: slotName }, normalizeArray(nodes)),
-        );
+        setMergeMapSymbol(mergeMap, momentRefMap);
+        refMap = mergeRefMap(momentRefMap, mergeMap as any);
+      });
+
+      callSetupEnd(refMap);
+      const renderFns: any[] = refMap[$render];
+
+      return {
+        $state: toRenderState({
+          refMap,
+          keys,
+          baseComponent,
+          propKeys,
+          eventNames,
+        }),
+        $render(resultVNode: VNode, h: CreateElement, context: any) {
+          if (renderFns.length === 0) {
+            return resultVNode;
+          }
+
+          return renderFns.reduce(
+            (value, renderFn = (v: any) => v) => renderFn.call(this, value, h, context),
+            resultVNode,
+          );
+        },
+      };
+    },
+    render(h) {
+      if (!this.$state) {
+        return null;
       }
-    });
 
-    const refProps: any = { ...this.$attrs, ...getRefValueMap(props) };
-    const refListeners = { ...this.$listeners, ...getRefValueMap(listeners) };
+      const {
+        props,
+        listeners,
+        slots,
+        deletePropsKeys,
+        allPropsKeys,
+        propKeys,
+      } = this.$state;
 
-    Object.keys(refProps).forEach((key) => {
-      if (!eventRegex.test(key)) {
-        return;
-      }
+      const scopedSlots: any = { ...this.$scopedSlots, ...getRefValueMap(slots) };
 
-      const eventName = getEventName(key);
+      const childrenNodes: VNode[] = [];
+      (this.$slotNames as string[]).forEach((slotName) => {
+        if (scopedSlots[slotName]) {
+          const nodes = scopedSlots[slotName]({});
+          delete scopedSlots[slotName];
+          if (isEmptyVNodes(nodes)) {
+            return;
+          }
 
-      if (eventName && refProps[key] && refListeners[eventName]) {
-        delete refListeners[eventName];
-      }
-    });
+          childrenNodes.push(
+            h('template', { slot: slotName }, normalizeArray(nodes)),
+          );
+        }
+      });
 
-    const propsData = {
-      ...splitPropsAndAttrs(refProps, propKeys, allPropsKeys, deletePropsKeys),
-      ...splitListeners(refListeners, this.$nativeEvents as string[], getEventKeys(deletePropsKeys)),
-      scopedSlots,
-      ref: '$base',
-    };
+      const refProps: any = { ...this.$attrs, ...getRefValueMap(props) };
+      const refListeners = { ...this.$listeners, ...getRefValueMap(listeners) };
 
-    const resultVNode = h(baseComponent, propsData, childrenNodes);
+      Object.keys(refProps).forEach((key) => {
+        if (!eventRegex.test(key)) {
+          return;
+        }
 
-    return this.$render(resultVNode, h, {
-      props: refProps,
-      listeners: refListeners,
-      scopedSlots,
-      childrenNodes,
-      propsData,
-    });
-  },
-});
+        const eventName = getEventName(key);
+
+        if (eventName && refProps[key] && refListeners[eventName]) {
+          delete refListeners[eventName];
+        }
+      });
+
+      const propsData = {
+        ...splitPropsAndAttrs(refProps, propKeys, allPropsKeys, deletePropsKeys),
+        ...splitListeners(refListeners, this.$nativeEvents as string[], getEventKeys(deletePropsKeys)),
+        scopedSlots,
+        ref: '$base',
+      };
+
+      const resultVNode = h(baseComponent, propsData, childrenNodes);
+
+      return this.$render(resultVNode, h, {
+        props: refProps,
+        listeners: refListeners,
+        scopedSlots,
+        childrenNodes,
+        propsData,
+      });
+    },
+  });
+}

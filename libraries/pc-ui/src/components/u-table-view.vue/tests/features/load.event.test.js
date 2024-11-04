@@ -61,8 +61,8 @@ describe('u-table-view.vue events test', () => {
     wrapper.vm.$on('before-load', handleBeforeLoad);
     wrapper.vm.$on('load', handleLoad);
 
-    wrapper.vm.reload();
-
+    await wrapper.vm.reload();
+    await wrapper.vm.$nextTick();
     await sleep(16);
 
     expect(handleLoad).toBeCalled();

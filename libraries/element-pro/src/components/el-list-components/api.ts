@@ -6,12 +6,20 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       additionalAttribute: {
-        ':dataSource': '"[{}]"',
-        ':colnum': '"1"',
+          ":dataSource": "\"[{}, {}, {}]\""
       },
-
       childAccept: false,
       useTemplateInDefaultSlot: true,
+      style: [
+          {
+              "selector": ".u-for-com-item:not(:first-child)",
+              "declaration": "opacity: 0.4; cursor: not-allowed !important; pointer-events: none"
+          },
+          {
+              "selector": ".u-for-com-frag:not(:first-child)",
+              "declaration": "opacity: 0.4; cursor: not-allowed !important; pointer-events: none"
+          }
+      ]
     },
   })
   @Component({

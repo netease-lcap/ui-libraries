@@ -333,10 +333,14 @@ export default {
             const formattedValue = (this.formattedValue = this.currentFormatter.format(value));
             this.$refs.input.currentValue = formattedValue;
 
+            const emitChange = isNil(this.value) || this.value !== value;
+
             this.$emit('input', value, this);
             this.$emit('update', value, this);
             this.$emit('update:value', value, this);
-            this.$emit('change', { value, oldValue, formattedValue, valid: this.isValid(value) }, this);
+            if (emitChange) {
+              this.$emit('change', { value, oldValue, formattedValue, valid: this.isValid(value) }, this);
+            }
         },
         /**
          * 按上下按钮发送 adjust 事件

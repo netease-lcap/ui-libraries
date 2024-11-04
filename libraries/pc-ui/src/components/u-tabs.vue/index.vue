@@ -135,7 +135,7 @@ export default {
     ],
     provide() {
       return {
-        tabLoadOnActive: this.loadOnActive,
+        tabLoadOnActive: () => this.loadOnActive,
       };
     },
     props: {

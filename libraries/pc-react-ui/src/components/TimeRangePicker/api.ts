@@ -349,19 +349,7 @@ namespace nasl.ui {
     })
     name: nasl.core.String;
 
-    @Prop({
-      group: '基础信息',
-      title: '开始时间字段名称',
-      description: '表单项名称。',
-    })
-    startName: nasl.core.String;
 
-    @Prop({
-      group: '基础信息',
-      title: '结束时间字段名称',
-      description: '表单项名称。',
-    })
-    endName: nasl.core.String;
 
     //  @Prop({
     //     group: '状态属性',
