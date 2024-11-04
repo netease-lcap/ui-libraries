@@ -214,7 +214,7 @@ export const registerComponent = (
           scopedSlots,
           on: listeners,
         },
-        manger.name === 'ElForm' ? this.$slots.default : childrenNodes,
+        childrenNodes,
       );
     },
   } as ComponentOptions<Vue>;
