@@ -14,13 +14,13 @@ function parseCSSInfo(cssContent: string, componentNames: string[], cssRulesDesc
   const root = postcss.parse(cssContent);
 
   const mockStateRE = /:(hover|active|focus)/g;
-  const hashClassRE = /\.([a-zA-Z0-9][a-zA-Z0-9_-]*?)__[a-zA-Z0-9-]{6,}/g; // @TODO: 目前是两个下划线
+  const hashClassRE = /\.([a-zA-Z0-9][a-zA-Z0-9_-]*?)___[a-zA-Z0-9-]{6,}/g; // @TODO: 目前是两个下划线
 
   // eslint-disable-next-line no-shadow
   const inferSelectorComponentName = options.reportCSSInfo?.inferSelectorComponentName || ((selector: string, componentNames: string[]) => {
     return componentNames.find((name) => {
       name = kebabCase(name);
-      return new RegExp(`^\\.${name}_|^\\[class\\*=${name}_`).test(selector);
+      return new RegExp(`^\\.${name}(_|$)|^\\[class\\*=${name}___`).test(selector);
     });
   });
 
@@ -48,7 +48,7 @@ function parseCSSInfo(cssContent: string, componentNames: string[], cssRulesDesc
 
       selectors = selectors
         .filter((sel) => !/^-(moz|webkit|ms|o)-|^_/.test(sel)) // 过滤掉浏览器前缀和 _ 开头的选择器
-        .map((sel) => sel.replace(hashClassRE, '[class*=$1__]')); // hash 类名改为 [class*=] 属性选择器
+        .map((sel) => sel.replace(hashClassRE, '[class*=$1___]')); // hash 类名改为 [class*=] 属性选择器
 
       const mainSelectors: string[] = [];
 

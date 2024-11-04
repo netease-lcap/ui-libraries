@@ -56,6 +56,9 @@ export default defineConfig(({ command }) => {
             // },
           },
         ],
+        reportCSSInfo: {
+          enabled: true,
+        },
       }),
     ],
     optimizeDeps: {
