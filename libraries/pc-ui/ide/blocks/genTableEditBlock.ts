@@ -364,6 +364,8 @@ export function genTableEditBlock(entity: naslTypes.Entity, refElement: naslType
   nameGroup.viewVariableEntity = likeComponent.getVariableUniqueName(firstLowerCase(entity.name));
   nameGroup.viewVariableInput = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('input'), nameGroup.viewVariableEntity);
   nameGroup.viewVariableFilter = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('filter'), nameGroup.viewVariableEntity);
+  // 当前节点的currentName
+  nameGroup.currentName = refElement.getCurrentName();
 
   // 收集所有和本实体关联的实体
   const entitySet: Set<naslTypes.Entity> = new Set();
