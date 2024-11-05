@@ -150,7 +150,7 @@ export default {
                 },
                 body,
             });
-            if(res?.code === "200") {
+            if(res?.code == "200") {
                 const eventName = `on${name.replace(/^./, (m) => m.toUpperCase())}`
                 this.$emit(name);
             }
@@ -210,7 +210,7 @@ export default {
                             taskId: this.taskId,
                         },
                     });
-                    if(res?.code === "200") {
+                    if(res?.code == "200") {
                         const eventName = `on${item.name.replace(/^./, (m) => m.toUpperCase())}`
                         this.$emit(item.name);
                     }
@@ -237,7 +237,7 @@ export default {
                             taskId: this.taskId,
                         },
                     });
-                    if(res?.code === "200") {
+                    if(res?.code == "200") {
                         const eventName = `on${item.name.replace(/^./, (m) => m.toUpperCase())}`
                         this.$emit(item.name);
                     }
@@ -258,7 +258,7 @@ export default {
                 };
                 if (this.hasMoreAddSignOption) body.policyForAddSign = this.model.method;
                 const res = await this.$processV2.addSignTask({ body });
-                if(res?.code === "200") {
+                if(res?.code == "200") {
                     const eventName = `on${item.name.replace(/^./, (m) => m.toUpperCase())}`
                     this.$emit(item.name);
                 }
