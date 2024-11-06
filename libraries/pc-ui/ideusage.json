@@ -925,6 +925,9 @@
             "structured": true,
             "childAccept":"target.tag === 'u-tab'",
             "ignoreProperty": ["loadOnActive"],
+            "additionalAttribute": {
+              ":loadOnActive": "\"false\""
+            },
             "dataSource": {
                 "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
                 "display": 3,
