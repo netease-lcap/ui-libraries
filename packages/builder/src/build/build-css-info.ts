@@ -20,7 +20,7 @@ function parseCSSInfo(cssContent: string, componentNames: string[], cssRulesDesc
   const inferSelectorComponentName = options.reportCSSInfo?.inferSelectorComponentName || ((selector: string, componentNames: string[]) => {
     return componentNames.find((name) => {
       name = kebabCase(name);
-      return new RegExp(`^\\.${name}(_|$)|^\\[class\\*=${name}___`).test(selector);
+      return new RegExp(`^\\.${name}(__|--|$)|^\\[class\\*=${name}___`).test(selector);
     });
   });
 

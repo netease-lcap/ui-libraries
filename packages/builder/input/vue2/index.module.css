@@ -30,6 +30,10 @@
   margin: 0.5em;
   font-size: 12px;
   line-height: 1.5;
+  max-width: 336px;
+  max-height: 300px;
+  overflow: auto;
+  white-space: nowrap;
 }
 
 .code {
