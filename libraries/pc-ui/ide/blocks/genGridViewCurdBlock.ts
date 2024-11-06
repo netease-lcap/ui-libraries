@@ -4,6 +4,7 @@ import {
   getFirstDisplayedProperty,
   genUniqueQueryNameGroup,
   getViewUniqueVariableNames,
+  getCurrentName,
 } from './utils';
 import { genQueryLogic, genFilterTemplate, genSaveModalTemplate } from './genCommonBlock';
 import { genGridViewTemplate } from './genGridViewBlock';
@@ -34,6 +35,8 @@ export function genGridViewCurdBlock(entity: naslTypes.Entity, refElement: naslT
   nameGroup.viewVariableFilter = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('filter'), nameGroup.viewVariableEntity);
   nameGroup.viewVariableIsUpdate = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('isUpdate'), nameGroup.viewVariableEntity);
   nameGroup.lowerEntity = firstLowerCase(entity.name);
+  // 当前节点的currentName
+  nameGroup.currentName = getCurrentName(refElement);
 
   // 收集所有和本实体关联的实体
   const entitySet: Set<naslTypes.Entity> = new Set();

@@ -516,6 +516,7 @@
         "name": "UTableView",
         "ideusage": {
             "idetype": "container",
+            "containerDirection": "row",
             "structured": true,
             "dataSource": {
                 "display": 3,
@@ -565,9 +566,9 @@
                 }
             ],
             "displaySlotInline": {
-                "cell": "['index', 'radio', 'checkbox', 'dragHandler'].includes(this.getAttribute('type')?.value)",
-                "title": true
+                "cell": "['index', 'radio', 'checkbox', 'dragHandler'].includes(this.getAttribute('type')?.value)"
             },
+            "namedSlotOmitWrapper": ["title"],
             "forceUpdateWhenAttributeChange": "parent",
             "disableSlotAutoFill": ["title"]
         }
