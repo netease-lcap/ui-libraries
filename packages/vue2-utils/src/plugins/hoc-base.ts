@@ -337,7 +337,8 @@ const toRenderState = ({
 };
 
 export default function createHocComponent(baseComponent: any, manger: PluginManager) {
-  const propOptions = manger.getPluginPropKeys([]).reduce((n: any, key) => {
+  const extendPropKeys = manger.getPluginPropKeys([]);
+  const propOptions = extendPropKeys.reduce((n: any, key) => {
     n[key] = {};
     return n;
   }, {});
@@ -435,6 +436,12 @@ export default function createHocComponent(baseComponent: any, manger: PluginMan
         propKeys,
       } = this.$state;
 
+      const extendPropsMap = extendPropKeys.reduce((n: Record<string, any>, key: string) => {
+        n[key] = this[key];
+
+        return n;
+      }, {});
+
       const scopedSlots: any = { ...this.$scopedSlots, ...getRefValueMap(slots) };
 
       const childrenNodes: VNode[] = [];
@@ -452,7 +459,7 @@ export default function createHocComponent(baseComponent: any, manger: PluginMan
         }
       });
 
-      const refProps: any = { ...this.$attrs, ...getRefValueMap(props) };
+      const refProps: any = { ...this.$attrs, ...extendPropsMap, ...getRefValueMap(props) };
       const refListeners = { ...this.$listeners, ...getRefValueMap(listeners) };
 
       Object.keys(refProps).forEach((key) => {

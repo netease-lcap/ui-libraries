@@ -95,6 +95,15 @@ export default createComponent({
 
       return GapEnums.includes(this.gap) ? this.gap : 'normal';
     },
+    getSpaceBaseValue() {
+      const val = this.$vnode.data.staticStyle && this.$vnode.data.staticStyle['--van-space-base'];
+
+      if (val) {
+        return val;
+      }
+
+      return this.$vnode.data.style && this.$vnode.data.style['--van-space-base'];
+    },
     setGapStyle(children) {
       const elements = children.filter((child) => child.tag && child.data);
 
@@ -113,8 +122,9 @@ export default createComponent({
           && (this.gap === 'normal' || !GapEnums.includes(this.gap))
           && !child.data.staticStyle[gapProp]
         ) {
-          if (this.gap === 'normal' && this.$vnode.data.staticStyle && this.$vnode.data.staticStyle['--van-space-base']) {
-            child.data.staticStyle[gapProp] = this.$vnode.data.staticStyle['--van-space-base'];
+          const spaceBaseValue = this.getSpaceBaseValue();
+          if (this.gap === 'normal' && spaceBaseValue) {
+            child.data.staticStyle[gapProp] = spaceBaseValue;
           } else {
             child.data.staticStyle[gapProp] = typeof this.gap === 'number' ? `${this.gap}px` : this.gap;
           }

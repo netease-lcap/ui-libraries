@@ -4,6 +4,7 @@ import {
   getFirstDisplayedProperty,
   genUniqueQueryNameGroup,
   getViewUniqueVariableNames,
+  getCurrentName,
 } from './utils';
 import { genQueryLogic, genFilterTemplate, genSaveModalTemplate } from './genCommonBlock';
 import { genTableTemplate } from './genTableBlock';
@@ -35,6 +36,8 @@ export function genTableCurdBlock(entity: naslTypes.Entity, refElement: naslType
   nameGroup.viewVariableIsUpdate = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('isUpdate'), nameGroup.viewVariableEntity);
   nameGroup.viewLogicModalOpened = likeComponent.getLogicUniqueName('modalOpened');
   nameGroup.viewLogicModalClose = likeComponent.getLogicUniqueName('modalClose');
+  // 当前节点的currentName
+  nameGroup.currentName = getCurrentName(refElement);
 
   // 收集所有和本实体关联的实体
   const entitySet: Set<naslTypes.Entity> = new Set();
