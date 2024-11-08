@@ -22,7 +22,8 @@ export default {
         };
     },
     methods: {
-        open() {
+        async open() {
+            await new Promise((resolve) => this.$nextTick(resolve));
             const staticStyle = this.$vnode.data.staticStyle;
 
             this.$toast.openToast({
