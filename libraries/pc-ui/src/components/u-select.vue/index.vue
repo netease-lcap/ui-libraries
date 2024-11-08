@@ -136,7 +136,7 @@
         </template>
       </template>
       <u-input
-        v-if="filterable"
+        v-if="filterable && !isPreview"
         :class="$style.input"
         ref="input"
         :readonly="readonly"
@@ -862,12 +862,17 @@ export default {
     },
     onRootBlur(e) {
       this.rootBlurTimer = setTimeout(() => {
-        if ((this.$refs.input && this.$refs.input.focused) || this.preventBlur)
+        if ((this.$refs.input && this.$refs.input.focused) || this.preventBlur) {
+          // 修复校验滞后的问题， 这里手动触发失焦 #2990019542459904
+          const validatorVM = this.validatorVM || this.formItemVM;
+          validatorVM && validatorVM.$emit('blur');
           return;
+        }
         if (this.preventRootBlur) return (this.preventRootBlur = false);
         this.close();
         this.$emit('blur', e);
       }, 400);
+
     },
     selectByText(text) {
       if (!text) return;

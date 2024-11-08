@@ -104,7 +104,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
     })
-    showClose: nasl.core.Boolean = false;
+    showClose: nasl.core.Boolean = true;
 
     @Prop({
       title: '居中',

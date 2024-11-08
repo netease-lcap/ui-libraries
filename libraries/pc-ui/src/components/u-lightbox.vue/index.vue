@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { zIndex } from '../../utils/z-index';
 export default {
     name: 'u-lightbox',
     props: {
@@ -116,12 +117,16 @@ export default {
                 this.allAnimationEnd = true;
             }
         },
-        currentVisible(visible) {
-            if (visible)
-                document.addEventListener('keydown', this.escPress);
-            // 按esc退出弹框
-            else
-                document.removeEventListener('keydown', this.escPress);
+        currentVisible: {
+            immediate: true,
+            handler(visible) {
+                if (visible) {
+                  this.$nextTick(() => this.setZIndex());
+                  document.addEventListener('keydown', this.escPress);
+                } else { // 按esc退出弹框
+                  document.removeEventListener('keydown', this.escPress);
+                }
+            },
         },
         current(current) {
             this.animationEndNum = 0;
@@ -194,6 +199,12 @@ export default {
             this.selectedVM = undefined;
             this.$emit('update:visible', this.currentVisible);
             this.$emit('close');
+        },
+        setZIndex() {
+          if (!this.$el) {
+            return;
+          }
+          this.$el.style.zIndex = zIndex();
         },
         prev() {
             if (!this.canOp || !this.hasPrev)
@@ -290,7 +301,7 @@ export default {
     z-index: 20;
 }
 
-.close:hover { 
+.close:hover {
     background: var(--lightbox-icon-background-hover);
 }
 
