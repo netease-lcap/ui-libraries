@@ -13,8 +13,9 @@ export default (options: any) => {
   let disabled = false;
   return {
     name: 'vite:lcap-build',
+    _options: options,
     configResolved(config) {
-      if (config.mode === 'test' || config.mode === 'serve') {
+      if (config.build.watch || config.mode === 'test' || config.mode === 'serve') {
         disabled = true;
       }
     },

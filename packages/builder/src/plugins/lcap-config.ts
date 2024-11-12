@@ -1,6 +1,11 @@
 import path from 'path';
 import fs from 'fs-extra';
-import type { Alias, Plugin, UserConfig } from 'vite';
+import {
+  createLogger,
+  type Alias,
+  type Plugin,
+  type UserConfig,
+} from 'vite';
 import { LCAP_UI_PACKAGE_NAME, LCAP_UI_PACKAGE_PATH, LCAP_UI_PATH } from '../overload/constants';
 
 export interface LcapViteConfigPluginOptions {
@@ -69,6 +74,17 @@ function getCommonjsOptionsInclude(config: UserConfig): Array<string | RegExp> {
 
   return config.build.commonjsOptions.include;
 }
+const viteLogger = createLogger();
+const loggerWarn = viteLogger.warn;
+
+viteLogger.warn = (msg, options) => {
+  // 忽略空 CSS 文件的警告
+  if (msg.includes('vite:css')) {
+    return;
+  }
+
+  loggerWarn(msg, options);
+};
 
 export default (options: LcapViteConfigPluginOptions) => {
   return {
@@ -77,6 +93,11 @@ export default (options: LcapViteConfigPluginOptions) => {
       if (!config.define) {
         config.define = {};
       }
+
+      if (!config.customLogger) {
+        config.customLogger = viteLogger;
+      }
+
       const isBuild = command === 'build';
 
       config.define['process.env'] = {

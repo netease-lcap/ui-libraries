@@ -82,9 +82,84 @@ export async function viteBuildTheme(themeConfig: ThemeConfig) {
   });
 }
 
+const Groups = [
+  'Container',
+  'Layout',
+  'Navigation',
+  'Display',
+  'Table',
+  'Form',
+  'Selector',
+  'chart',
+  'Chart',
+  'Basic',
+  'Advanced',
+  'Feedback',
+  'Effects',
+  'Process',
+];
+
+const getGroupIndex = (n) => {
+  const i = Groups.indexOf(n);
+
+  return i === -1 ? 20 : i;
+};
+
+async function getComponentList(options: LcapBuildOptions) {
+  if (options.type === 'extension') {
+    const config = fs.readJSONSync(path.resolve(options.rootPath, 'nasl.extension.json'));
+    const list: any[] = [];
+
+    if (config && Array.isArray(config.frontends) && config.frontends.length > 0) {
+      config.frontends.forEach((fe) => {
+        (fe.viewComponents || []).forEach((comp) => {
+          const index = list.findIndex((it) => it.name === comp.name);
+          if (index === -1) {
+            list.push(comp);
+          }
+        });
+      });
+    }
+    return list.map(({
+      name, kebabName,
+      group, title, children,
+      show,
+    }) => {
+      return {
+        name: options.framework.startsWith('vue') ? kebabName : name,
+        group,
+        title,
+        show,
+        children: children.map((child) => (options.framework.startsWith('vue') ? child.kebabName : child.name)),
+      };
+    });
+  }
+
+  const components = fs.readJSONSync(path.resolve(options.rootPath, options.destDir, 'nasl.ui.json')) || [];
+
+  return components.map(({
+    name,
+    kebabName,
+    group,
+    title,
+    children,
+    show,
+  }) => {
+    return {
+      name: options.framework.startsWith('vue') ? kebabName : name,
+      group,
+      title,
+      children: children.map((child) => (options.framework.startsWith('vue') ? child.kebabName : child.name)),
+      show,
+    };
+  }).sort((a, b) => (getGroupIndex(a.group) - getGroupIndex(b.group)));
+}
+
 export async function buildTheme(options: LcapBuildOptions) {
+  const components = await getComponentList(options);
+
   const themeConfig = genThemeConfig({
-    components: options.components || [],
+    components: components || [],
     themeVarCssPath: options.theme.themeVarCssPath || '',
     themeComponentFolder: options.theme.themeComponentFolder || '',
     previewPages: options.theme.previewPages || [],

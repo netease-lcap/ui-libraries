@@ -9,7 +9,7 @@ import {
 } from 'vite';
 import type { BuildIdeOptions, LcapBuildOptions } from './types';
 
-export async function viteBuildIde(options: BuildIdeOptions, rootPath: string) {
+export async function viteBuildIde(options: BuildIdeOptions, rootPath: string, watch: boolean) {
   const pkg = await fs.readJSON(path.join(rootPath, 'package.json'));
   let buildConfig: UserConfig = {
     define: {
@@ -62,6 +62,13 @@ export async function viteBuildIde(options: BuildIdeOptions, rootPath: string) {
     delete buildConfig.build.rollupOptions.external;
   }
 
+  if (watch) {
+    if (!buildConfig.build) {
+      buildConfig.build = {};
+    }
+    buildConfig.build.watch = {};
+  }
+
   await build({
     configFile: false,
     envFile: false,
@@ -88,7 +95,7 @@ const isExistEntry = (entry, rootPath) => {
   }) !== -1;
 };
 
-export async function buildIDE(options: LcapBuildOptions) {
+export async function buildIDE(options: LcapBuildOptions, watch: boolean = false) {
   const DEFUALT_IDE_OPTIONS = {
     entry: 'ide/index',
     outDir: `${options.destDir}/ide`,
@@ -104,5 +111,5 @@ export async function buildIDE(options: LcapBuildOptions) {
     return;
   }
 
-  await viteBuildIde(ideOptions, options.rootPath);
+  await viteBuildIde(ideOptions, options.rootPath, watch);
 }
