@@ -95,8 +95,7 @@ async function getWatcherTasks(options: LcapBuildOptions, pkgInfo: any) {
     build: async () => {
       await buildNaslExtensionConfig(options);
       await buildDecalaration(options);
-      await buildNaslExtensionManifest(options);
-      // TODO build watch hash
+      await buildNaslExtensionManifest(options, true);
     },
   };
 

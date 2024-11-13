@@ -236,10 +236,6 @@ LiveServer.start = function (options) {
 };
 
 LiveServer.shutdown = () => {
-  const { watcher } = LiveServer;
-  if (watcher) {
-    watcher.close();
-  }
   const { server } = LiveServer;
   if (server) server.close();
 };
