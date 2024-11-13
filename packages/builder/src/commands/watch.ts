@@ -205,6 +205,9 @@ export default async (rootPath: string, { port, https }: any) => {
 
   const watcher = await startWatcher(buildOptions, pkgInfo, send);
 
+  if (fs.existsSync(buildOptions.destDir)) {
+    await fs.remove(buildOptions.destDir);
+  }
   // 构建 ide 和 运行时文件， watch;
   await Promise.all([
     buildIDE(buildOptions, true, send),

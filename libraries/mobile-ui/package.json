@@ -22,6 +22,7 @@
   "scripts": {
     "dev": "npm run storybook",
     "storybook": "storybook dev -p 8008",
+    "watch": "lcap-scripts watch --https",
     "build": "lcap-scripts build && npm run lowcode",
     "deploy": "lcap-scripts deploy",
     "deploy:one": "lcap-scripts deploy --images",

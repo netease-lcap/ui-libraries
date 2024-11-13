@@ -105,6 +105,7 @@
     "dev": "npm run storybook",
     "pack": "pnpm pack",
     "storybook": "storybook dev -p 6006",
+    "watch": "lcap-scripts watch --https",
     "build": "lcap-scripts build && npm run lowcode && npm run build:d2c",
     "build:d2c": "vite build --config vite.d2c.config.mjs",
     "dev:d2c": "vite build --config vite.d2c.config.mjs --watch",
