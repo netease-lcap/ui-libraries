@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { camelCase, upperFirst } from 'lodash';
+import { camelCase, isFunction, upperFirst } from 'lodash';
 import {
   UserConfig,
   build,
@@ -9,7 +9,7 @@ import {
 } from 'vite';
 import type { BuildIdeOptions, LcapBuildOptions } from './types';
 
-export async function viteBuildIde(options: BuildIdeOptions, rootPath: string, watch: boolean) {
+export async function viteBuildIde(options: BuildIdeOptions, rootPath: string, watch?: boolean, send?: (msg: string) => void) {
   const pkg = await fs.readJSON(path.join(rootPath, 'package.json'));
   let buildConfig: UserConfig = {
     define: {
@@ -69,6 +69,18 @@ export async function viteBuildIde(options: BuildIdeOptions, rootPath: string, w
     buildConfig.build.watch = {};
   }
 
+  if (watch && isFunction(send)) {
+    if (!buildConfig.plugins) {
+      buildConfig.plugins = [];
+    }
+    buildConfig.plugins.push({
+      name: 'vite:lcap:socket',
+      async closeBundle() {
+        send('update.ide');
+      },
+    });
+  }
+
   await build({
     configFile: false,
     envFile: false,
@@ -95,7 +107,7 @@ const isExistEntry = (entry, rootPath) => {
   }) !== -1;
 };
 
-export async function buildIDE(options: LcapBuildOptions, watch: boolean = false) {
+export async function buildIDE(options: LcapBuildOptions, watch: boolean = false, send?: (msg: string) => void) {
   const DEFUALT_IDE_OPTIONS = {
     entry: 'ide/index',
     outDir: `${options.destDir}/ide`,
@@ -111,5 +123,5 @@ export async function buildIDE(options: LcapBuildOptions, watch: boolean = false
     return;
   }
 
-  await viteBuildIde(ideOptions, options.rootPath, watch);
+  await viteBuildIde(ideOptions, options.rootPath, watch, send);
 }

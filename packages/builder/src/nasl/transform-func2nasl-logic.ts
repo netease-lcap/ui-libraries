@@ -100,8 +100,9 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
   ) {
     logic.typeParams = node.declaration.typeParameters.params.map((t) => {
       if (t.constraint || t.default) {
-        logger.error(`解析逻辑失败 ${logic.name} ${getNodeCode(t)}, 泛型不支持使用 extends 或 = 等表达式`);
-        process.exit(1);
+        const errorMsg = `解析逻辑失败 ${logic.name} ${getNodeCode(t)}, 泛型不支持使用 extends 或 = 等表达式`;
+        logger.error(errorMsg);
+        throw new Error(errorMsg);
       }
 
       return {
@@ -202,8 +203,9 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
           return;
         }
 
-        logger.error(`解析逻辑失败 ${name} ${getNodeCode(param)}, 参数不支持解析，请检查类型是否使用 @nasl/types`);
-        process.exit(1);
+        const errorMsg = `解析逻辑失败 ${name} ${getNodeCode(param)}, 参数不支持解析，请检查类型是否使用 @nasl/types`;
+        logger.error(errorMsg);
+        throw new Error(errorMsg);
       });
     }
 
@@ -212,8 +214,9 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
       const { typeAnnotation: tsType } = node.declaration.returnType as babelTypes.TSTypeAnnotation;
 
       if (hasSubLogic && (tsType.type !== 'TSTypeReference' || tsType.typeName.type !== 'Identifier' || tsType.typeName.name !== 'Promise')) {
-        logger.error(`解析逻辑失败 ${logic.name}, 该逻辑含有高阶函数（用函数作为参数），返回值类型强制需要为 Promise!`);
-        process.exit(1);
+        const errorMsg = `解析逻辑失败 ${logic.name}, 该逻辑含有高阶函数（用函数作为参数），返回值类型强制需要为 Promise!`;
+        logger.error(errorMsg);
+        throw new Error(errorMsg);
       }
 
       const returnType = transformTypeAnnotation(tsType, typeNames);
@@ -229,7 +232,7 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
     }
   } catch (e: any) {
     logger.error(`解析逻辑失败 ${logic.name}: ${e.message}`);
-    process.exit(1);
+    throw e;
   }
 
   return {

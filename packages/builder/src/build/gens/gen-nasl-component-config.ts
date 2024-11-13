@@ -133,8 +133,7 @@ export default function genNaslComponentConfig({
     Object.assign(component, nasl[0]);
   } catch (e: any) {
     logger.error(`解析 ${apiPath} 失败`);
-    logger.error(e);
-    process.exit(1);
+    throw e;
   }
 
   const extendsOptions = component?.extends?.map?.((item) => {
@@ -170,7 +169,7 @@ export default function genNaslComponentConfig({
   } catch (e: any) {
     logger.error(`${component.name} 处理 block 异常`);
     logger.error(e);
-    process.exit(1);
+    throw e;
   }
 
   return component;

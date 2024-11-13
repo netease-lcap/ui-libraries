@@ -15,7 +15,7 @@ export function execSync(...args: Array<string>) {
   if (result.status !== null && result.status > 0) {
     logger.error('execute command error: ', command);
     // 异常退出
-    process.exit(1);
+    throw new Error(`execute command error: ${command}`);
   }
 
   return result;

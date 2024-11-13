@@ -1,4 +1,4 @@
-import { loadConfigFromFile, build, createFilter } from 'vite';
+import { loadConfigFromFile, build } from 'vite';
 import chokidar from 'chokidar';
 import fs from 'fs-extra';
 import path from 'path';
@@ -16,6 +16,7 @@ import { buildTheme } from '../build/build-theme';
 import buildDecalaration from '../build/build-declaration';
 import { LcapBuildOptions } from '../build/types';
 import { exec } from '../utils/exec';
+import LiveServer from '../utils/server';
 
 async function getBuildConfig() {
   const loadResult = await loadConfigFromFile({ command: 'build', mode: 'production' });
@@ -113,7 +114,7 @@ async function getWatcherTasks(options: LcapBuildOptions, pkgInfo: any) {
   ];
 }
 
-async function startWatcher(options: LcapBuildOptions, pkgInfo: any) {
+async function startWatcher(options: LcapBuildOptions, pkgInfo: any, send: (msg: string) => void) {
   let enabledBuild = false;
   const watcher = chokidar.watch(['./src', './src-vusion', options.destDir], {
     ignoreInitial: true,
@@ -142,8 +143,8 @@ async function startWatcher(options: LcapBuildOptions, pkgInfo: any) {
         logger.start(`start ${task.name} task build`);
         // eslint-disable-next-line no-await-in-loop
         await task.build();
-        // TODO send websocket task.name
         logger.success(`${task.name} task build successed!`);
+        send(task.name);
       } catch (e) {
         logger.error(`${task.name} task build error!`);
         logger.error(e);
@@ -180,47 +181,69 @@ async function startWatcher(options: LcapBuildOptions, pkgInfo: any) {
   };
 }
 
-export default async (rootPath: string, { port }: any) => {
-  try {
-    const { viteConfig, buildOptions } = await getBuildConfig();
-    const pkgInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
-    let onceBuilded = false;
+function startServer({ port, https }) {
+  return LiveServer.start({
+    port,
+    https,
+    cors: true,
+  });
+}
 
-    const watcher = await startWatcher(buildOptions, pkgInfo);
-    // 构建 ide 和 运行时文件， watch;
-    await Promise.all([
-      buildIDE(buildOptions, true),
-      build({
-        configFile: false,
-        envFile: false,
-        ...viteConfig,
-        plugins: [
-          ...viteConfig.plugins as any[],
-          {
-            async closeBundle() {
-              if (onceBuilded) {
-                // TODO send websocket runtime
-                return;
-              }
+export default async (rootPath: string, { port, https }: any) => {
+  const { viteConfig, buildOptions } = await getBuildConfig();
+  const pkgInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
+  let onceBuilded = false;
+  let server;
+  // eslint-disable-next-line no-inner-declarations
+  function send(msg) {
+    if (!server) {
+      return;
+    }
 
-              onceBuilded = true;
+    server.send(msg);
+  }
+
+  const watcher = await startWatcher(buildOptions, pkgInfo, send);
+
+  // 构建 ide 和 运行时文件， watch;
+  await Promise.all([
+    buildIDE(buildOptions, true, send),
+    build({
+      configFile: false,
+      envFile: false,
+      ...viteConfig,
+      plugins: [
+        ...viteConfig.plugins as any[],
+        {
+          async closeBundle() {
+            if (onceBuilded) {
+              send('update.runtime');
+              return;
+            }
+
+            onceBuilded = true;
+
+            try {
               await lcapBuild(buildOptions, 'watch');
               if (pkgInfo && pkgInfo.scripts && pkgInfo.scripts.lowcode) {
                 await exec('npm run lowcode');
               }
               logger.success('build successed! starting file watching...');
               watcher.start();
-            },
+
+              server = await startServer({ port, https });
+            } catch (e) {
+              logger.error(e);
+              process.exit(1);
+            }
           },
-        ],
-        build: {
-          ...viteConfig.build,
-          watch: {},
-          emptyOutDir: false,
         },
-      }),
-    ]);
-  } catch (e) {
-    logger.error(e);
-  }
+      ],
+      build: {
+        ...viteConfig.build,
+        watch: {},
+        emptyOutDir: false,
+      },
+    }),
+  ]);
 };

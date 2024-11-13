@@ -77,7 +77,7 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
   program.command('watch')
     .description('监听文件变化重新构建')
     .option('--port <port>', '端口')
-    .option('--socket', '联调 socket 链接更新')
+    .option('--https', '启动https')
     .action(async ({ ...args }) => {
       await watch(cwd, args);
     });
