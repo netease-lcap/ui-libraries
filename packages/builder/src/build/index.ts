@@ -112,7 +112,7 @@ export function buildManifest(options: LcapBuildOptions) {
 export async function buildNaslUILibrary(options: LcapBuildOptions, mode: BuildMode = 'production') {
   await buildNaslUI(options);
   await buildCSSInfo(options);
-  await buildTheme(options);
+  await buildTheme(options, mode === 'watch');
   await buildI18N(options);
   await buildDecalaration(options);
   await buildManifest(options);

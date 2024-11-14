@@ -6,7 +6,24 @@ import { themePath } from '../constants/input-paths';
 import logger from '../utils/logger';
 import type { LcapBuildOptions } from './types';
 
-export async function viteBuildTheme(themeConfig: ThemeConfig) {
+const LIVE_RELOAD = {
+  html: `<script type="text/javascript">
+    if ('WebSocket' in window) {
+      (function() {
+        var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+        var address = protocol + window.location.host + window.location.pathname + '/ws';
+        var socket = new WebSocket(address);
+        socket.onmessage = function(msg) {
+          if (msg.data === 'nasl.theme') window.location.reload();
+        };
+        console.log('Live reload enabled.');
+      })();
+    }
+  </script>`,
+  tag: '<!-- Code injected by live-server -->',
+};
+
+export async function viteBuildTheme(themeConfig: ThemeConfig, watch?: boolean) {
   const loadResult = await loadConfigFromFile({ command: 'build', mode: 'production' });
   if (!loadResult || !loadResult.config) {
     logger.error('未找到 vite 配置文件');
@@ -30,10 +47,12 @@ export async function viteBuildTheme(themeConfig: ThemeConfig) {
   config.plugins?.push({
     name: 'vite:lcap-theme-html',
     async transformIndexHtml(html, ctx) {
-      return html.replace('\'[THEME INFO HERE]\'', JSON.stringify({
+      html = html.replace('\'[THEME INFO HERE]\'', JSON.stringify({
         previewPages: themeConfig.previewPages,
         components: themeConfig.components.filter((c) => !c.hidden).map((c) => ({ name: c.name, title: c.title, group: c.group })),
-      }));
+      })).replace(LIVE_RELOAD.tag, watch ? LIVE_RELOAD.html : '');
+
+      return html;
     },
   });
 
@@ -155,7 +174,7 @@ async function getComponentList(options: LcapBuildOptions) {
   }).sort((a, b) => (getGroupIndex(a.group) - getGroupIndex(b.group)));
 }
 
-export async function buildTheme(options: LcapBuildOptions) {
+export async function buildTheme(options: LcapBuildOptions, watch?: boolean) {
   const components = await getComponentList(options);
 
   const themeConfig = genThemeConfig({
@@ -177,6 +196,6 @@ export async function buildTheme(options: LcapBuildOptions) {
   await fs.writeJSON(path.join(options.destDir, 'theme.config.json'), themeConfig, { spaces: 2 });
   logger.success('生成 theme.config.json 成功！');
 
-  await viteBuildTheme(themeConfig);
+  await viteBuildTheme(themeConfig, watch);
   logger.success('构建theme 成功');
 }
