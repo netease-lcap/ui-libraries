@@ -828,7 +828,7 @@
             "dataSource": {
                 "dismiss": "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
                 "display": 3,
-                "loopRule": "nth-child(n+2)",
+                "loopRule": "nth-last-child(-n+2):not(:only-child)",
                 "loopElem": "> label[class^='u-checkbox']:not([data-nodepath])",
                 "emptySlot": {
                     "display": "inline",
@@ -841,9 +841,14 @@
                 "item": "display:inline-block;width:90px;"
             },
             "displaySlotConditions": {
-                "checkAll": false,
-                "item": false
-            }
+                "checkAll": false
+            },
+            "style": [
+                {
+                    "selector": "> label[class^='u-checkbox']:not([data-nodepath]):nth-last-child(-n+2):not(:only-child)",
+                    "declaration": "opacity: unset !important"
+                }
+            ]
         }
     },
     {
