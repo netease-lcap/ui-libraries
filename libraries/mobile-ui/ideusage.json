@@ -651,7 +651,7 @@
             "cacheOpenKey": "value",
             "selector": {
                 "expression": "this",
-                "cssSelector": "div[class^='van-dialog__content']"
+                "cssSelector": "div[class^='van-dialog__wrap']"
             },
             "namedSlotOmitWrapper": ["footer"]
         }
