@@ -6,7 +6,7 @@
           v-for="(item2, index2) in item"
           :key="idField ? $at(item2, idField) || item2 : index2"
           :item="item2"
-          :colnum="colnum || 5"
+          :colnum="currentColNum"
           :equal-width="equalWidth"
           :index="comIndex(index, index2)"
         >
@@ -66,7 +66,11 @@ export default {
             options: [],
         };
     },
-    computed: {},
+    computed: {
+        currentColNum() {
+            return this.getColNum();
+        },
+    },
     watch: {
         dataSource: {
             deep: true,
@@ -79,7 +83,7 @@ export default {
             const result = [];
             const arre = [...arr];
             while (arre.length > 0) {
-                const temp = arre.splice(0, this.colnum || 5);
+                const temp = arre.splice(0, this.currentColNum);
                 result.push(temp);
             }
             return result;
@@ -100,8 +104,13 @@ export default {
             }
         },
         comIndex(index1, index2) {
-            return index1 * (this.colnum || 5) + index2;
+            return index1 * this.currentColNum + index2;
         },
+        getColNum() {
+            const defaultColnum = 5;
+            const colnum = this.colnum < 0 ? defaultColnum : this.colnum || defaultColnum;
+            return colnum;
+        }
     },
 };
 </script>

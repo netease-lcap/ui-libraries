@@ -2,6 +2,7 @@ import Vue from 'vue';
 import * as CloudUI from '@/index.js';
 import Component from '../index.js';
 import ExamplesDemo1 from '../demos/examples/ExamplesDemo1.vue';
+import ExamplesDemo2 from '../demos/examples/ExamplesDemo2.vue';
 
 Vue.use(CloudUI);
 
@@ -23,6 +24,15 @@ export const Demo0 = {
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo1,
+    },
+    template: '<deprecated-demo />',
+  }),
+};
+
+export const Demo2 = {
+  render: () => ({
+    components: {
+      DeprecatedDemo: ExamplesDemo2,
     },
     template: '<deprecated-demo />',
   }),

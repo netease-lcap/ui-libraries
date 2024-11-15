@@ -47,6 +47,7 @@ namespace nasl.ui {
             docDescription: '支持定义每一行排列的项数，为空时会自适应宽度并自动换行。',
             setter: {
                 concept: 'NumberInputSetter',
+                min: 1,
             },
         })
         colnum: nasl.core.Decimal | nasl.core.Integer = 5;
