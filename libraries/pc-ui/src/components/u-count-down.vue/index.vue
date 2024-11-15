@@ -31,6 +31,7 @@ function work() {
             timer = setInterval(() => {
             this.postMessage(--second);
           }, 1000);
+          this.lastPauseTime = undefined;
         } else if (state === "pause") {
             if (!this.lastPauseTime) {
                 clearInterval(timer);
