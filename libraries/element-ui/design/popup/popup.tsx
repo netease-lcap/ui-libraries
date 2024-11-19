@@ -168,6 +168,10 @@ export default mixins(classPrefixMixins).extend({
   },
   updated() {
     (this.$refs.container as any)?.updateContent();
+    if (this.visible) {
+      this.updatePopper();
+      this.updateOverlayInnerStyle();
+    }
   },
   beforeDestroy() {
     if (this.visible) {
