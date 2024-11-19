@@ -12,6 +12,7 @@ const {
   build,
   deploy,
   overload,
+  watch,
 } = commands;
 
 // eslint-disable-next-line no-underscore-dangle
@@ -71,6 +72,14 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
         prefix: options.prefix,
         component,
       });
+    });
+
+  program.command('watch')
+    .description('监听文件变化重新构建')
+    .option('--port <port>', '端口')
+    .option('--https', '启动https')
+    .action(async ({ ...args }) => {
+      await watch(cwd, args);
     });
 
   program.parse(process.argv);

@@ -352,6 +352,10 @@ function collectComponentNames(componentList: any) {
 }
 
 export default function buildCSSInfo(options: LcapBuildOptions) {
+  if (!options.reportCSSInfo || !options.reportCSSInfo.enabled) {
+    return;
+  }
+
   const componentList = fs.readJSONSync(path.resolve(options.rootPath, options.destDir, 'nasl.ui.json'), 'utf-8');
   const componentNames = collectComponentNames(componentList);
 

@@ -1,3 +1,5 @@
+export type BuildMode = 'production' | 'watch';
+
 export interface BuildIdeOptions {
   configFile?: string;
   entry?: string;

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import fs from 'fs-extra';
 import path from 'path';
-import type { LcapBuildOptions } from './types';
+import type { BuildMode, LcapBuildOptions } from './types';
 import logger from '../utils/logger';
 import { buildIDE } from './build-ide';
 import { buildTheme } from './build-theme';
@@ -13,29 +13,6 @@ import genThemeJsonOld from './gens/gen-theme-json-old';
 import genManifestConfig from './gens/gen-manifest-config';
 import buildDecalaration from './build-declaration';
 import { getConfigComponents } from '../utils';
-
-const Groups = [
-  'Container',
-  'Layout',
-  'Navigation',
-  'Display',
-  'Table',
-  'Form',
-  'Selector',
-  'chart',
-  'Chart',
-  'Basic',
-  'Advanced',
-  'Feedback',
-  'Effects',
-  'Process',
-];
-
-const getGroupIndex = (n) => {
-  const i = Groups.indexOf(n);
-
-  return i === -1 ? 20 : i;
-};
 
 export function buildThemeOld(rootPath, destDir) {
   const configPath = path.join(rootPath, './lcap-ui.config.js');
@@ -91,23 +68,6 @@ export function buildNaslUI(options: LcapBuildOptions) {
     return order1 - order2;
   });
 
-  options.components = naslUIConfig.map(({
-    name,
-    kebabName,
-    group,
-    title,
-    children,
-    show,
-  }) => {
-    return {
-      name: options.framework.startsWith('vue') ? kebabName : name,
-      group,
-      title,
-      children: children.map((child) => (options.framework.startsWith('vue') ? child.kebabName : child.name)),
-      show,
-    };
-  }).sort((a, b) => (getGroupIndex(a.group) - getGroupIndex(b.group)));
-
   logger.success('生成 nasl.ui.json 成功！');
   fs.writeJSONSync(path.join(options.destDir, 'nasl.ui.json'), naslUIConfig, { spaces: 2 });
 }
@@ -149,13 +109,18 @@ export function buildManifest(options: LcapBuildOptions) {
   fs.writeJSONSync(`${options.rootPath}/manifest.json`, manifest, { spaces: 2 });
 }
 
-export async function buildNaslUILibrary(options: LcapBuildOptions) {
-  buildNaslUI(options);
-  options.reportCSSInfo && buildCSSInfo(options);
-  await buildTheme(options);
-  buildI18N(options);
+export async function buildNaslUILibrary(options: LcapBuildOptions, mode: BuildMode = 'production') {
+  await buildNaslUI(options);
+  await buildCSSInfo(options);
+  await buildTheme(options, mode === 'watch');
+  await buildI18N(options);
   await buildDecalaration(options);
   await buildManifest(options);
+
+  if (mode !== 'production') {
+    return;
+  }
+
   if (options.pnpm) {
     execSync('pnpm pack');
   } else {
@@ -163,17 +128,19 @@ export async function buildNaslUILibrary(options: LcapBuildOptions) {
   }
 }
 
-export async function lcapBuild(options: LcapBuildOptions) {
+export async function lcapBuild(options: LcapBuildOptions, mode: BuildMode = 'production') {
   if (!options.destDir) {
     options.destDir = 'dist-theme';
   }
 
-  await buildIDE(options);
+  if (mode === 'production') {
+    await buildIDE(options);
+  }
 
   if (options.type === 'extension') {
-    await buildNaslExtension(options);
+    await buildNaslExtension(options, mode);
     return;
   }
 
-  await buildNaslUILibrary(options);
+  await buildNaslUILibrary(options, mode);
 }

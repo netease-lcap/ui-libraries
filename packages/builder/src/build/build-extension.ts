@@ -2,11 +2,12 @@ import fs from 'fs-extra';
 import path from 'path';
 import glob from 'fast-glob';
 import archiver from 'archiver';
+import { getHashDigest } from 'loader-utils';
 import { getPackName } from '../utils';
 import logger from '../utils/logger';
 import genNaslExtensionConfig from './gens/gen-nasl-extension-config';
 import genManifestConfig from './gens/gen-manifest-config';
-import type { LcapBuildOptions } from './types';
+import type { BuildMode, LcapBuildOptions } from './types';
 import { execSync } from '../utils/exec';
 import { buildTheme } from './build-theme';
 import buildDecalaration from './build-declaration';
@@ -112,13 +113,7 @@ async function buildSourceZip(root) {
   await zipDir(root, 'source.zip', files);
 }
 
-export async function buildNaslExtension(options: LcapBuildOptions) {
-  if (options.type !== 'extension') {
-    return;
-  }
-
-  await buildSourceZip(options.rootPath);
-
+export async function buildNaslExtensionConfig(options: LcapBuildOptions) {
   logger.start('开始生成 nasl.extension.json...');
   const { config: naslExtensionConfig, viewComponents } = await genNaslExtensionConfig({
     assetsPublicPath: options.assetsPublicPath,
@@ -131,27 +126,41 @@ export async function buildNaslExtension(options: LcapBuildOptions) {
   fs.writeJSONSync(naslConfigPath, naslExtensionConfig, { spaces: 2 });
   logger.success('生成 nasl.extension.json 成功！');
 
-  await buildTheme({
-    ...options,
-    components: viewComponents.map(({
-      name, kebabName,
-      group, title, children,
-      show,
-    }) => {
-      return {
-        name: options.framework.startsWith('vue') ? kebabName : name,
-        group,
-        title,
-        show,
-        children: children.map((child) => (options.framework.startsWith('vue') ? child.kebabName : child.name)),
-      };
-    }),
-  });
+  return {
+    naslExtensionConfig,
+    viewComponents,
+  };
+}
 
-  await buildDecalaration(options);
+export async function buildNaslExtensionManifest(options: LcapBuildOptions, hash: boolean = false) {
+  const naslConfigPath = path.join(options.rootPath, 'nasl.extension.json');
+  const naslExtensionConfig = fs.readJSONSync(naslConfigPath) as any;
   const manifest = genManifestConfig(options);
-  (naslExtensionConfig.compilerInfoMap as any).manifest = JSON.stringify(manifest);
+  naslExtensionConfig.compilerInfoMap.manifest = JSON.stringify(manifest);
+  if (hash) {
+    const contentHash = getHashDigest(JSON.stringify(naslExtensionConfig), 'md5', 'base64', 16);
+    naslExtensionConfig.compilerInfoMap.debug = JSON.stringify({ hash: contentHash });
+  }
   fs.writeJSONSync(naslConfigPath, { ...naslExtensionConfig }, { spaces: 2 });
+}
+
+export async function buildNaslExtension(options: LcapBuildOptions, mode: BuildMode = 'production') {
+  if (options.type !== 'extension') {
+    return;
+  }
+
+  if (mode === 'production') {
+    await buildSourceZip(options.rootPath);
+  }
+
+  await buildNaslExtensionConfig(options);
+  await buildTheme(options, mode === 'watch');
+  await buildDecalaration(options);
+  await buildNaslExtensionManifest(options, mode === 'watch');
+
+  if (mode !== 'production') {
+    return;
+  }
 
   if (options.pnpm) {
     execSync('pnpm pack');
