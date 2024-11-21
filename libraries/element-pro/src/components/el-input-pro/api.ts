@@ -5,6 +5,9 @@ namespace nasl.ui {
     order: 2,
     ideusage: {
       idetype: 'element',
+      "additionalAttribute": {
+        "autofocus": "\"false\""
+      },
     },
   })
   @Component({

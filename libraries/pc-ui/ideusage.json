@@ -759,7 +759,10 @@
         "ideusage": {
             "idetype": "element",
             "useFxOrEg":{"property": "value","displayAsAttr":true},
-            "translateBindingProperty": ["value", "placeholder"]
+            "translateBindingProperty": ["value", "placeholder"],
+            "additionalAttribute": {
+                "autofocus": "\"false\""
+            }
         }
     },
     {
@@ -768,7 +771,8 @@
             "idetype": "element",
             "useFxOrEg":{"property": "value","displayAsAttr":true},
             "additionalAttribute": {
-                ":value": null
+                ":value": null,
+                "autofocus": "\"false\""
             },
             "forceUpdateWhenAttributeChange": true,
             "translateBindingProperty": ["value", "placeholder"]
@@ -779,7 +783,10 @@
         "ideusage": {
             "idetype": "element",
             "useFxOrEg":{"property": "value","displayAsAttr":true},
-            "translateBindingProperty": ["value", "placeholder"]
+            "translateBindingProperty": ["value", "placeholder"],
+            "additionalAttribute": {
+                "autofocus": "\"false\""
+            }
         }
     },
     {
@@ -811,6 +818,9 @@
             "parentAccept": "target.tag === 'u-radios'",
             "displaySlotInline": {
                 "item": true
+            },
+            "additionalAttribute": {
+                "autofocus": "\"false\""
             }
         }
     },
@@ -858,6 +868,9 @@
             "parentAccept": "target.tag === 'u-checkboxes'",
             "displaySlotInline": {
                 "item": true
+            },
+            "additionalAttribute": {
+                "autofocus": "\"false\""
             }
         }
     },
@@ -1030,7 +1043,10 @@
             "events": {
                 "click": true
             },
-            "translateBindingProperty": ["value", "placeholder"]
+            "translateBindingProperty": ["value", "placeholder"],
+            "additionalAttribute": {
+                "autofocus": "\"false\""
+            }
         }
     },
     {
@@ -1063,14 +1079,20 @@
     {
         "name": "UCascader",
         "ideusage": {
-            "idetype": "element"
+            "idetype": "element",
+            "additionalAttribute": {
+                "autofocus": "\"false\""
+            }
         }
     },
     {
         "name": "URegionSelect",
         "ideusage": {
             "idetype": "element",
-            "translateBindingProperty": ["value", "placeholder"]
+            "translateBindingProperty": ["value", "placeholder"],
+            "additionalAttribute": {
+                "autofocus": "\"false\""
+            }
         }
     },
     {
@@ -1129,7 +1151,8 @@
         "ideusage": {
             "idetype": "element",
             "additionalAttribute": {
-                ":value": null
+                ":value": null,
+                "autofocus": "\"false\""
             },
             "translateBindingProperty": ["value", "placeholder"]
         }
@@ -1139,7 +1162,8 @@
         "ideusage": {
             "idetype": "element",
             "additionalAttribute": {
-                ":value": null
+                ":value": null,
+                "autofocus": "\"false\""
             },
             "translateBindingProperty": ["value", "placeholder"]
         }
@@ -1149,7 +1173,8 @@
         "ideusage": {
             "idetype": "element",
             "additionalAttribute": {
-                ":value": null
+                ":value": null,
+                "autofocus": "\"false\""
             },
             "translateBindingProperty": ["value", "placeholder"]
         }
