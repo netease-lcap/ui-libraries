@@ -9,7 +9,7 @@ export {
 } from './el-date-picker-pro';
 export { ElDateTimePickerPro } from './el-date-time-picker-pro';
 export { ElFormPro, ElFormItemPro } from './el-form-pro';
-export { ElInputPro, ElInputGroupPro } from './el-input-pro';
+export { ElInputPro, ElInputGroupPro, ElFormInputPro } from './el-input-pro';
 export { ElInputAdornmentPro } from './el-input-adornment-pro';
 export { ElInputNumberPro } from './el-input-number-pro';
 export { ElRadioPro, ElRadioGroupPro } from './el-radio-pro';

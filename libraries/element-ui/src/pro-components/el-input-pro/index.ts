@@ -1,6 +1,7 @@
 import { Input, InputGroup } from '@element-pro';
 import { registerComponent } from '@lcap/vue2-utils';
 import * as plugins from './plugins';
+import { WithFormItem } from '../el-form-pro';
 import './index.less';
 
 export const ElInputPro = registerComponent(Input, plugins, {
@@ -20,5 +21,7 @@ export const ElInputPro = registerComponent(Input, plugins, {
 });
 
 export const ElInputGroupPro = InputGroup;
+
+export const ElFormInputPro = WithFormItem(ElInputPro, { name: 'el-form-input-pro' });
 
 export default ElInputPro;

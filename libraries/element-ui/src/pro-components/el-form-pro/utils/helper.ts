@@ -36,18 +36,22 @@ export const isFormVNode = (vnode: VNode) => {
 };
 
 export const cloneComponentVNode = (h: CreateElement, vnode: VNode, { propData, listeners }) => {
-  return h(vnode.componentOptions.tag, {
+  if (!vnode.componentOptions || !vnode.componentOptions.Ctor) {
+    return;
+  }
+
+  return h(vnode.componentOptions.Ctor, {
     attrs: {
-      ...vnode.data.attrs,
+      ...vnode.data?.attrs,
     },
     props: { ...propData },
     on: listeners,
-    nativeOn: vnode.data.nativeOn,
-    scopedSlots: vnode.data.scopedSlots,
-    staticClass: vnode.data.staticClass,
-    staticStyle: vnode.data.staticStyle,
-    class: vnode.data.class,
-    style: vnode.data.style,
+    nativeOn: vnode.data?.nativeOn,
+    scopedSlots: vnode.data?.scopedSlots,
+    staticClass: vnode.data?.staticClass,
+    staticStyle: vnode.data?.staticStyle,
+    class: vnode.data?.class,
+    style: vnode.data?.style,
   }, vnode.componentOptions.children || []);
 };
 

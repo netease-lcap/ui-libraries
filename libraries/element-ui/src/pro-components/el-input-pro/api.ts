@@ -473,4 +473,27 @@ namespace nasl.ui {
     })
     separate: nasl.core.Boolean;
   }
+
+  @IDEExtraInfo({
+    extends: [{
+      name: 'ElFormItemPro',
+      exclude: ['useRangeValue', 'startFieldName', 'endFieldName'],
+    }, {
+      name: 'ElInputPro',
+    }],
+  })
+  @Component({
+    title: '表单输入框',
+    description: '表单输入框',
+    group: 'Form',
+  })
+  export class ElFormInputPro extends ViewComponent {
+    constructor(options?: Partial<ElFormInputProOptions & ElFormItemPro & ElInputPro>) {
+      super();
+    }
+  }
+
+  export class ElFormInputProOptions extends ViewComponentOptions {
+
+  }
 }
