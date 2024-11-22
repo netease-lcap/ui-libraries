@@ -1,3 +1,5 @@
+import { type NaslUIComponentConfig } from '../overload';
+
 const fs = require('fs-extra');
 const path = require('path');
 
@@ -19,4 +21,14 @@ export const getConfigComponents = (rootPath: string) => {
     ...c,
     title: c.alias,
   }));
+};
+
+export const getComponentConfigByName = (name: string, list: NaslUIComponentConfig[]) => {
+  const flatList = list.map((c) => {
+    const arr = [c];
+    arr.push(...c.children);
+    return arr;
+  }).flat();
+
+  return flatList.find((c) => c.name === name);
 };

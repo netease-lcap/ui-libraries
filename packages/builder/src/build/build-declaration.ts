@@ -6,13 +6,14 @@ import generate from '@babel/generator';
 import traverse from '@babel/traverse';
 import fs from 'fs-extra';
 import path from 'path';
-import type { ViewComponentDeclaration } from '@nasl/types/nasl.ui.ast';
+import { cloneDeep } from 'lodash';
 import { execSync } from '../utils/exec';
 import logger from '../utils/logger';
 import { LcapBuildOptions } from './types';
 import { getNodeCode, getSlotName } from '../utils/babel-utils';
+import { type NaslUIComponentConfig } from '../overload';
 
-function putComponentMap(components: ViewComponentDeclaration[], componentMap: Record<string, ViewComponentDeclaration> = {}) {
+function putComponentMap(components: NaslUIComponentConfig[], componentMap: Record<string, NaslUIComponentConfig> = {}) {
   if (!Array.isArray(components)) {
     return;
   }
@@ -43,25 +44,33 @@ async function getMetaInfo(options: LcapBuildOptions) {
   }
 
   const tsCode = await fs.readFile(dstPath, 'utf-8');
-  const componentMap: Record<string, ViewComponentDeclaration> = {};
+  let componentList: NaslUIComponentConfig[] = [];
+  const componentMap: Record<string, NaslUIComponentConfig> = {};
 
   if (isExtension) {
     const moduleJSON = fs.readJSONSync(path.resolve(options.rootPath, 'nasl.extension.json'), 'utf-8');
     if (moduleJSON.frontends && moduleJSON.frontends.length > 0) {
       moduleJSON.frontends.forEach((fe) => {
         if (Array.isArray(fe.viewComponents)) {
-          putComponentMap(fe.viewComponents, componentMap);
+          fe.viewComponents.forEach((comp) => {
+            const i = componentList.findIndex((c) => c.name === comp.name);
+            if (i === -1) {
+              componentList.push(comp);
+            }
+          });
         }
       });
     }
   } else {
-    const componentList = fs.readJSONSync(path.resolve(options.rootPath, options.destDir, 'nasl.ui.json'), 'utf-8');
-    putComponentMap(componentList, componentMap);
+    componentList = fs.readJSONSync(path.resolve(options.rootPath, options.destDir, 'nasl.ui.json'), 'utf-8') as NaslUIComponentConfig[];
   }
+
+  putComponentMap(componentList, componentMap);
 
   return {
     code: tsCode,
     componentMap,
+    componentList: componentList.map((c) => [c].concat(c.children || [])).flat() as NaslUIComponentConfig[],
   };
 }
 
@@ -79,17 +88,7 @@ function getBlocks(title: string, description: string) {
   return blocks;
 }
 
-function transformTsCode(tsCode: string, componentMap: Record<string, ViewComponentDeclaration>) {
-  const ast = babel.parse(tsCode, {
-    filename: 'result.ts',
-    presets: [require('@babel/preset-typescript')],
-    plugins: [
-      [require('@babel/plugin-proposal-decorators'), { legacy: true }],
-      // 'babel-plugin-parameter-decorator'
-    ],
-    rootMode: 'root',
-    root: __dirname,
-  }) as babelTypes.File;
+function addExportAndComment(ast: babelTypes.File, componentMap: Record<string, NaslUIComponentConfig>) {
   traverse(ast, {
     ClassDeclaration(np) {
       if (!np.node.id || np.node.id.type !== 'Identifier') {
@@ -204,6 +203,91 @@ function transformTsCode(tsCode: string, componentMap: Record<string, ViewCompon
       }
     },
   });
+}
+
+function addExtendsClassProperties(ast: babelTypes.File, componentMap: Record<string, NaslUIComponentConfig>, componentList: NaslUIComponentConfig[]) {
+  const componentASTList: babelTypes.ClassDeclaration[] = [];
+  traverse(ast, {
+    ClassDeclaration(np) {
+      if (!np.node.id || np.node.id.type !== 'Identifier') {
+        return;
+      }
+
+      const classNode = np.node as babelTypes.ClassDeclaration;
+
+      const className = classNode.id?.name || '';
+      if (componentMap[className]) {
+        componentASTList.push(np.node);
+      }
+    },
+  });
+
+  componentList.forEach((comp) => {
+    const { name, extends: extendList = [] } = comp;
+    const componentAST = componentASTList.find((compAst) => compAst.id?.name === name);
+
+    if (!componentAST || !Array.isArray(extendList) || extendList.length === 0) {
+      return;
+    }
+
+    extendList.map((exd) => {
+      if (typeof exd === 'string') {
+        return {
+          name: exd,
+        };
+      }
+
+      return exd;
+    }).forEach((exd) => {
+      const { name: extendName } = exd;
+      const extendComponentAST = componentASTList.find((compAst) => compAst.id?.name === extendName);
+
+      if (!extendComponentAST || !extendComponentAST.body.body) {
+        return;
+      }
+
+      const properties: Array<babelTypes.ClassProperty | babelTypes.TSDeclareMethod> = extendComponentAST.body.body.filter(
+        (n) => (n.type === 'ClassProperty' || n.type === 'TSDeclareMethod') && ((n.key as any).name !== 'constructor'),
+      ) as any[];
+
+      if (properties.length === 0) {
+        return;
+      }
+
+      const bodyList = componentAST.body.body;
+      properties.forEach((property) => {
+        if (property.key.type !== 'Identifier') {
+          return;
+        }
+
+        const propName = property.key.name;
+
+        const i = bodyList.findIndex((n) => (n.type === 'ClassProperty' || n.type === 'TSDeclareMethod') && n.key.type === 'Identifier' && n.key.name === propName);
+
+        if (i !== -1) {
+          return;
+        }
+
+        bodyList.push(cloneDeep(property));
+      });
+    });
+  });
+}
+
+function transformTsCode(tsCode: string, componentMap: Record<string, NaslUIComponentConfig>, componentList: NaslUIComponentConfig[]) {
+  const ast = babel.parse(tsCode, {
+    filename: 'result.ts',
+    presets: [require('@babel/preset-typescript')],
+    plugins: [
+      [require('@babel/plugin-proposal-decorators'), { legacy: true }],
+      // 'babel-plugin-parameter-decorator'
+    ],
+    rootMode: 'root',
+    root: __dirname,
+  }) as babelTypes.File;
+
+  addExportAndComment(ast, componentMap);
+  addExtendsClassProperties(ast, componentMap, componentList);
 
   const { code } = generate(ast);
   return code;
@@ -212,9 +296,9 @@ function transformTsCode(tsCode: string, componentMap: Record<string, ViewCompon
 export default async function buildDeclaration(options: LcapBuildOptions) {
   logger.start('开始编译 api.ts');
   execSync('npx tsc -p tsconfig.api.json');
-  const { code, componentMap } = await getMetaInfo(options);
+  const { code, componentMap = {}, componentList = [] } = await getMetaInfo(options);
   if (code) {
-    const dtsCode = transformTsCode(code, componentMap);
+    const dtsCode = transformTsCode(code, componentMap, componentList);
     fs.writeFileSync(getDtsPath(options), dtsCode);
   }
 
