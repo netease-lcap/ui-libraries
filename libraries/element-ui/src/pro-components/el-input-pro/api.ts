@@ -475,9 +475,18 @@ namespace nasl.ui {
   }
 
   @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      ignoreProperty: ['rules'],
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
     extends: [{
       name: 'ElFormItemPro',
-      exclude: ['useRangeValue', 'startFieldName', 'endFieldName'],
+      excludes: ['useRangeValue', 'startFieldName', 'endFieldName', 'startInitialValue', 'endInitialValue', 'slotDefault'],
     }, {
       name: 'ElInputPro',
     }],
