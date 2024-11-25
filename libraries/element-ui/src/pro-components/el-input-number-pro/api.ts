@@ -315,4 +315,40 @@ namespace nasl.ui {
     // })
     // slotTips: () => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      ignoreProperty: ['rules'],
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault', 'useRangeValue',
+        'startFieldName', 'endFieldName',
+        'startInitialValue', 'endInitialValue',
+      ],
+    }, {
+      name: 'ElInputPro',
+    }],
+  })
+  @Component({
+    title: '表单数字输入框',
+    description: '表单数字输入框',
+    group: 'Form',
+  })
+  export class ElFormInputNumberPro extends ViewComponent {
+    constructor(options?: Partial<ElFormInputNumberProOptions & ElFormItemProOptions & Omit<ElInputNumberProOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormInputNumberProOptions extends ViewComponentOptions {
+
+  }
 }

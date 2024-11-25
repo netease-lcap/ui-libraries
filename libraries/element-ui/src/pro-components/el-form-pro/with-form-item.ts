@@ -1,7 +1,7 @@
 
 import Vue, { ComponentOptions } from 'vue';
 import { type ScopedSlot } from 'vue/types/vnode';
-import { IN_ELEMENT_FORM } from './constants';
+import { IN_ELEMENT_FORM, IN_ELEMENT_FORM_ITEM } from './constants';
 import { isModelOption, isRangeModelOption } from './utils';
 
 export const FormItemProps = [
@@ -36,20 +36,26 @@ export const FormItemMethods: string[] = [];
 export const FormItemEvents: string[] = [];
 
 function getAttrs(attrs: Record<string, any>) {
-  const inputAttrs = {
+  const inputAttrs: Record<string, any> = {
     ...attrs,
   };
 
-  const formItemAttrs = {};
+  const rootAttrs: Record<string, any> = {};
+
+  const formItemAttrs: Record<string, any> = {};
 
   Object.keys(inputAttrs).forEach((name) => {
-    if (FormItemProps.includes(name) || name.startsWith('data-')) {
+    if (name.startsWith('data-')) {
+      rootAttrs[name] = inputAttrs[name];
+      delete inputAttrs[name];
+    } else if (FormItemProps.includes(name)) {
       formItemAttrs[name] = inputAttrs[name];
       delete inputAttrs[name];
     }
   });
 
   return {
+    root: rootAttrs,
     input: inputAttrs,
     formItem: formItemAttrs,
   };
@@ -63,7 +69,7 @@ function getListeners(listeners: Record<string, Function>) {
   const formItemListeners = {};
 
   Object.keys(inputListeners).forEach((name) => {
-    if (FormItemEvents.includes(name) || name.startsWith('data-')) {
+    if (FormItemEvents.includes(name)) {
       formItemListeners[name] = inputListeners[name];
       delete inputListeners[name];
     }
@@ -83,7 +89,7 @@ function getSlots(slots: Record<string, ScopedSlot>) {
   const formItemSlots = {};
 
   Object.keys(inputSlots).forEach((name) => {
-    if (FormItemSlots.includes(name) || name.startsWith('data-')) {
+    if (FormItemSlots.includes(name)) {
       formItemSlots[name] = inputSlots[name];
       delete inputSlots[name];
     }
@@ -113,7 +119,11 @@ export const WithFormItem = (Component: any, { name, methodNames = [] }: WithFor
       inForm: {
         from: IN_ELEMENT_FORM,
         default: false,
-      }
+      },
+      inFormItem: {
+        from: IN_ELEMENT_FORM_ITEM,
+        default: false,
+      },
     },
     created() {
       const ctx = this as any;
@@ -144,24 +154,31 @@ export const WithFormItem = (Component: any, { name, methodNames = [] }: WithFor
       }
     },
     render(h) {
-      const { $attrs, $listeners, $scopedSlots, inForm } = this as any;
+      const { $attrs, $listeners, $scopedSlots, inForm, inFormItem } = this as any;
       const attrs = getAttrs($attrs);
       const listeners = getListeners($listeners);
       const slots = getSlots($scopedSlots);
+      const inputRoot = !inForm || inFormItem;
 
       const inputElement = h(Component, {
-        attrs: attrs.input,
+        attrs: {
+          ...attrs.input,
+          ...(inputRoot ? attrs.root : {}),
+        },
         on: listeners.input,
         ref: 'formInput',
         scopedSlots: slots.input,
       });
 
-      if (!inForm) {
+      if (inputRoot) {
         return inputElement;
       }
 
       return h('el-form-item-pro', {
-        attrs: attrs.formItem,
+        attrs: {
+          ...attrs.formItem,
+          ...attrs.root,
+        },
         on: listeners.formItem,
         scopedSlots: slots.formItem,
         ref: 'formItem',

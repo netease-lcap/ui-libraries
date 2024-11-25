@@ -2,6 +2,9 @@
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/types';
 import { getCurrentInstance, onMounted } from '@vue/composition-api';
 import { createUseFormLowcode } from '../../../plugins/use-form-lowcode';
+import { TAG_NAME, FORM_TAG_NAME } from '../constants';
+
+export const useFormLowcode = createUseFormLowcode(TAG_NAME, FORM_TAG_NAME);
 
 export const useNodePath: NaslComponentPluginOptions = {
   onlyUseIDE: true,
@@ -18,5 +21,3 @@ export const useNodePath: NaslComponentPluginOptions = {
     return {};
   },
 };
-
-export const useFormLowcode = createUseFormLowcode('el-input-pro', 'el-form-input-pro');

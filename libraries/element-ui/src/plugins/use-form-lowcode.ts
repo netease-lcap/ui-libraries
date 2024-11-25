@@ -18,8 +18,8 @@ export const createUseFormLowcode = (name, formTagName) => {
           return;
         }
         const nodePath = props.get<string>('data-nodepath');
-        if (nodePath && !inFormItem) {
-          elem.setAttribute('data-element-tag', inForm ? formTagName : name);
+        if (nodePath) {
+          elem.setAttribute('data-element-tag', inForm && !inFormItem ? formTagName : name);
           elem.setAttribute('data-nodepath', nodePath);
           elem.setAttribute('data-has-mutation', 'true');
         }

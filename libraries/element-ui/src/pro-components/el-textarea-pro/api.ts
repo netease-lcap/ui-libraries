@@ -226,4 +226,40 @@ namespace nasl.ui {
     // })
     // slotTips: () => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      ignoreProperty: ['rules'],
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault', 'useRangeValue',
+        'startFieldName', 'endFieldName',
+        'startInitialValue', 'endInitialValue',
+      ],
+    }, {
+      name: 'ElTextareaPro',
+    }],
+  })
+  @Component({
+    title: '表单多行输入',
+    description: '表单多行输入',
+    group: 'Form',
+  })
+  export class ElFormTextareaPro extends ViewComponent {
+    constructor(options?: Partial<ElFormTextareaProOptions & ElFormItemProOptions & Omit<ElTextareaProOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormTextareaProOptions extends ViewComponentOptions {
+
+  }
 }

@@ -34,7 +34,7 @@ export const useFieldName = (props: MapGet) => {
       return val;
     }
 
-    return '';
+    return uid;
   });
   const endFieldName = props.useComputed<string>(['endFieldName', 'useRangeValue'], (val, useRangeValue = false) => {
     if (useRangeValue) {

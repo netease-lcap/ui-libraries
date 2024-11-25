@@ -171,4 +171,40 @@ namespace nasl.ui {
     })
     onChangeEnd: (event: nasl.core.Decimal | nasl.collection.List<nasl.core.Decimal>) => any;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      ignoreProperty: ['rules'],
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault', 'useRangeValue',
+        'startFieldName', 'endFieldName',
+        'startInitialValue', 'endInitialValue',
+      ],
+    }, {
+      name: 'ElSliderPro',
+    }],
+  })
+  @Component({
+    title: '表单滑块',
+    description: '表单滑块',
+    group: 'Form',
+  })
+  export class ElFormSliderPro extends ViewComponent {
+    constructor(options?: Partial<ElFormSliderProOptions & ElFormItemProOptions & Omit<ElSliderProOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormSliderProOptions extends ViewComponentOptions {
+
+  }
 }

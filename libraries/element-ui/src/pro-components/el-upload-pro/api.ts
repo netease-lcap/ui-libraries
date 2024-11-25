@@ -692,4 +692,40 @@ namespace nasl.ui {
     })
     slotTrigger: () => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      ignoreProperty: ['rules'],
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault', 'useRangeValue',
+        'startFieldName', 'endFieldName',
+        'startInitialValue', 'endInitialValue',
+      ],
+    }, {
+      name: 'ElUploadPro',
+    }],
+  })
+  @Component({
+    title: '表单上传',
+    description: '表单上传',
+    group: 'Form',
+  })
+  export class ElFormUploadPro extends ViewComponent {
+    constructor(options?: Partial<ElFormUploadProOptions & ElFormItemProOptions & Omit<ElUploadProOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormUploadProOptions extends ViewComponentOptions {
+
+  }
 }

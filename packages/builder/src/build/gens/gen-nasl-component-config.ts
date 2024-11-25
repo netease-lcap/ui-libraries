@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
+import { upperFirst } from 'lodash';
 import logger from '../../utils/logger';
 import parseComponentAPI from '../../nasl/parse-component-api';
 import transformStory2Blocks from '../../nasl/story-nasl-block';
@@ -205,7 +206,13 @@ export function processComponentConfigExtends(components: NaslUIComponentConfig[
 
         (exdComp[key] || []).forEach((it) => {
           const i = component[key].findIndex((c) => c.name === it.name);
-          if (i !== -1 || excludes.includes(it.name)) {
+          let attrName = it.name;
+          if (key === 'slots') {
+            attrName = `slot${upperFirst(attrName)}`;
+          } else if (key === 'events') {
+            attrName = `on${upperFirst(attrName)}`;
+          }
+          if (i !== -1 || excludes.includes(attrName)) {
             return;
           }
 
