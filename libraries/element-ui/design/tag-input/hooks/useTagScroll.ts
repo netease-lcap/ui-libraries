@@ -20,7 +20,7 @@ export default function useTagScroll(props: ElTagInputProps) {
   const isScrollable = ref(false); // 设置可滚动
 
   const updateScrollElement = (element: HTMLElement) => {
-    const inputElement = element.children[0] as HTMLElement;
+    const inputElement = element?.children?.[0] as HTMLElement;
     scrollElement.value = inputElement;
   };
 
