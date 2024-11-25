@@ -13,6 +13,7 @@ import { EmptyCol } from '../emptycol';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
 import PreviewMixin from "../mixins/preview";
 import { Converter } from '../mixins/convertor';
+import CssRuleClassName from '../mixins/css-rule-classname';
 import DataSource from '../utils/DataSource';
 
 const [createComponent, bem, t] = createNamespace('pickerson');
@@ -43,6 +44,7 @@ export default createComponent({
       readonly: 'readonly',
       disabled: 'disabled',
     }),
+    CssRuleClassName,
   ],
   props: {
     readonly: { type: Boolean, default: false },
@@ -228,10 +230,10 @@ export default createComponent({
 
       return title || defaultTitle;
     },
-    open() { 
+    open() {
       this.popupVisible = true;
     },
-    close() { 
+    close() {
       this.closePopup('cancel');
     },
     togglePopup() {
@@ -488,7 +490,7 @@ export default createComponent({
           safe-area-inset-bottom
           round
           ref="popup"
-          class={bem('popup')}
+          class={[bem('popup'), this.cssRuleClassName]}
           position={'bottom'}
           closeOnClickOverlay={this.closeOnClickOverlay}
           get-container="body" // 放body下不易出现异常情况

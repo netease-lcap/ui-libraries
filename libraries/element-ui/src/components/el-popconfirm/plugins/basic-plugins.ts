@@ -1,7 +1,9 @@
 import type { MapGet } from '@lcap/vue2-utils/plugins/types';
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
-import _, { camelCase } from 'lodash';
+import _, { camelCase, isFunction } from 'lodash';
 import { getCurrentInstance, onMounted, onUpdated } from '@vue/composition-api';
+import { VNode } from 'vue';
+import cls from 'classnames';
 
 export const useSetDialogStyles = (props: MapGet) => {
   const instance = getCurrentInstance();
@@ -35,5 +37,24 @@ export const useSetDialogStyles = (props: MapGet) => {
 export const usePopconfirm: NaslComponentPluginOptions = {
   setup: (props) => {
     useSetDialogStyles(props);
+  },
+};
+
+function getCssRuleClassName(vnode: VNode, popperClass: string) {
+  const clx = cls(vnode.data?.class || [], vnode.data?.staticClass || '');
+  const cssRuleClassName = clx?.split(' ')?.find((name) => /^cw-css-rule-?/.test(name)) || '';
+
+  return `${popperClass} ${cssRuleClassName}`;
+}
+
+export const usePopperClass = {
+  setup(props, ctx) {
+    return {
+      popperClass: props.useComputed('popperClass', (popperClass = '') => {
+        const cssRuleClassName = getCssRuleClassName(isFunction(ctx.getVNode) ? ctx.getVNode() : ctx.setupContext.parent.$vnode, popperClass);
+
+        return cssRuleClassName;
+      }),
+    };
   },
 };

@@ -31,7 +31,7 @@ export const 默认 = {
       <List
         title="带卡片阴影"
         extra="extra"
-        dataSource={data}
+        dataSource={args.dataSource}
         pageSize={5}
         renderItem={({ item }) => {
           return <Text>{item.dataEntity.name}</Text>;

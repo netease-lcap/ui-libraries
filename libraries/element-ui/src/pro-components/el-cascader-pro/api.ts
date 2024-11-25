@@ -263,14 +263,6 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '最小折叠数量',
-      description: '最小折叠数量，用于多选情况下折叠选中项，超出该数值的选中项折叠。值为 0 则表示不折叠',
-      setter: { concept: 'NumberInputSetter', min: 0 },
-    })
-    minCollapsedNum: nasl.core.Decimal;
-
-    @Prop({
-      group: '主要属性',
       title: '是否多选',
       description: '是否允许多选',
       setter: { concept: 'SwitchSetter' },
@@ -285,6 +277,17 @@ namespace nasl.ui {
       if: (_) => _.multiple == true,
     })
     max: nasl.core.Decimal;
+
+    @Prop<ElCascaderProOptions<T, V, P, M, C>, 'minCollapsedNum'>({
+      group: '主要属性',
+      title: '最小折叠数量',
+      description: '最小折叠数量，用于多选情况下折叠选中项，超出该数值的选中项折叠。值为 0 则表示不折叠',
+      setter: { concept: 'NumberInputSetter', min: 0 },
+      if: (_) => _.multiple == true,
+    })
+    minCollapsedNum: nasl.core.Decimal;
+
+ 
 
     // @Prop({
     //   group: '主要属性',

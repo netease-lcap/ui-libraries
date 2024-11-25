@@ -111,7 +111,7 @@ export function buildManifest(options: LcapBuildOptions) {
 
 export async function buildNaslUILibrary(options: LcapBuildOptions, mode: BuildMode = 'production') {
   await buildNaslUI(options);
-  options.reportCSSInfo && buildCSSInfo(options);
+  await buildCSSInfo(options);
   await buildTheme(options, mode === 'watch');
   await buildI18N(options);
   await buildDeclaration(options);

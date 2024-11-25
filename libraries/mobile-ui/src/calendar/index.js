@@ -33,6 +33,7 @@ import { FieldMixin } from '../mixins/field';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
 import PreviewMixin from '../mixins/preview';
 import SyncValueMixin from '../mixins/sync-value';
+import CssRuleClassName from '../mixins/css-rule-classname';
 
 const EventSlotCommandMap = {
   cancel: 'onCancel',
@@ -50,6 +51,7 @@ export default createComponent({
       readonly: 'readonly',
       disabled: 'disabled',
     }),
+    CssRuleClassName,
   ],
 
   props: {
@@ -667,7 +669,7 @@ export default createComponent({
           />
           <Popup
             safe-area-inset-bottom
-            class={bem('popup')}
+            class={[bem('popup'), this.cssRuleClassName]}
             vModel={this.popupShown}
             round={this.round}
             position={this.position}

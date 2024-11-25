@@ -414,7 +414,19 @@ namespace nasl.ui {
       title: '节点点击时',
       description: '节点点击时触发，泛型 `T` 表示树节点 ',
     })
-    onClick: (event: any) => any;
+    onClick: (event: {
+      node: {
+        actived: nasl.core.Boolean;
+        checked: nasl.core.Boolean;
+        data: T;
+        disabled: nasl.core.Boolean;
+        expanded: nasl.core.Boolean;
+        indeterminate: nasl.core.Boolean;
+        loading: nasl.core.Boolean;
+        value: V;
+        label: nasl.core.String;
+      }
+    }) => any;
 
     // @Event({
     //   title: 'On Drag End',

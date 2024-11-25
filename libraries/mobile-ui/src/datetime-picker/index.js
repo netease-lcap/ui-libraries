@@ -11,6 +11,7 @@ import { EmptyCol } from '../emptycol';
 import { FieldMixin } from '../mixins/field';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
 import PreviewMixin from '../mixins/preview';
+import CssRuleClassName from '../mixins/css-rule-classname';
 
 import { validDisplayFormatters, validUnit, validType } from './shared';
 
@@ -29,6 +30,7 @@ export default createComponent({
       readonly: 'readonly',
       disabled: 'disabled',
     }),
+    CssRuleClassName,
   ],
   props: {
     ...TimePicker.props,
@@ -461,7 +463,7 @@ export default createComponent({
           }}
           round
           vModel={this.popupVisible}
-          class={bem('popup')}
+          class={[bem('popup'), this.cssRuleClassName]}
           position={'bottom'}
           closeOnClickOverlay={this.closeOnClickOverlay}
           vusion-scope-id={this?.$vnode?.context?.$options?._scopeId}

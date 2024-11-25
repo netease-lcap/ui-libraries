@@ -42,6 +42,9 @@ export default defineConfig(({ command }) => {
               selectorPrefixMap: {
                 'el-icon-loading': true,
               },
+              mainSelectorMap: {
+                '.el-p-icon': true,
+              },
             },
             ElAutocomplete: {
               selectorPrefixMap: {
@@ -124,6 +127,89 @@ export default defineConfig(({ command }) => {
               mainSelectorMap: {
                 '.el-col': true,
               },
+            },
+            ElDrawer: {
+              selectorPrefixMap: {
+                'el-drawer__wrapper': true,
+                'el-drawer': false,
+              },
+            },
+            ElDialog: {
+              selectorPrefixMap: {
+                'el-dialog__wrapper': true,
+                'el-dialog': false,
+              },
+            },
+            ElMessageBox: {
+              selectorPrefixMap: {
+                'el-message-box__wrapper': true,
+                'el-message-box': false,
+              },
+            },
+            ElPopover: {
+              mainSelectorMap: {
+                '.popper__arrow': false,
+              },
+            },
+            ElPopconfirm: {
+              mainSelectorMap: {
+                '.el-popover': true,
+                '.el-popconfirm': false,
+              },
+            },
+            ElTabs: {
+              mainSelectorMap: {
+                '.el-tabs': true,
+                '.el-tabs--top': true,
+              },
+            },
+            ElSelectPro: {
+              selectorPrefixMap: {
+                'el-p-select__wrap': true,
+                'el-p-select': false,
+                'el-p-select-option': false,
+              },
+              mainSelectorMap: {
+                '.el-p-select-option': false,
+              },
+            },
+            ElCascaderPro: {
+              mainSelectorMap: {
+                '.el-p-cascader': true,
+              },
+            },
+            ElTreeSelectPro: {
+              selectorPrefixMap: {
+                'narrow-scrollbar': true,
+              },
+              depCompList: ['ElTreePro', 'ElSelectPro'],
+            },
+            ElDatePickerPro: {
+              mainSelectorMap: {
+                '.el-p-date-picker': true,
+              },
+              depCompList: ['ElSelectInputPro', 'ElInputPro'],
+            },
+            ElDateTimePickerPro: {
+              mainSelectorMap: {
+                '.el-p-date-picker': true,
+              },
+              depCompList: ['ElSelectInputPro', 'ElInputPro'],
+            },
+            ElTimePickerPro: {
+              selectorPrefixMap: {
+                'el-p-time-range-picker': true,
+              },
+              depCompList: ['ElRangeInputPro', 'ElInputPro'],
+            },
+            ElInputPro: {
+              selectorPrefixMap: {
+                'el-p-input__wrap': true,
+                'el-p-input': false,
+              },
+            },
+            ElTablePro: {
+              depCompList: ['ElPaginationPro'],
             },
           },
         },

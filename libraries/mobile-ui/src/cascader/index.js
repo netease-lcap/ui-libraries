@@ -11,6 +11,7 @@ import Search from '../search';
 // Mixins
 import { FieldMixin } from '../mixins/field';
 import DataSourceMixin from '../mixins/DataSource';
+import CssRuleClassName from '../mixins/css-rule-classname';
 import { EmptyCol } from '../emptycol';
 
 const [createComponent, bem, t] = createNamespace('cascader');
@@ -26,6 +27,7 @@ export default createComponent({
       disabled: 'disabled',
       readonly: 'readonly',
     }),
+    CssRuleClassName,
   ],
 
   props: {
@@ -581,7 +583,7 @@ export default createComponent({
           safe-area-inset-bottom
           round
           ref="popforcas"
-          class={bem('popup')}
+          class={[bem('popup'), this.cssRuleClassName]}
           position={'bottom'}
           closeOnClickOverlay={this.closeOnClickOverlay}
           // onClickOverlay={this.togglePopup}

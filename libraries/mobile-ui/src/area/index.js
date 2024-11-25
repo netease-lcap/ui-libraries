@@ -10,6 +10,7 @@ import { EmptyCol } from '../emptycol';
 
 import { FieldMixin } from '../mixins/field';
 import PreviewMixin from '../mixins/preview';
+import CssRuleClassName from '../mixins/css-rule-classname';
 import { EventSlotCommandProvider } from '../mixins/EventSlotCommandProvider';
 import SyncValueMixin from '../mixins/sync-value';
 
@@ -47,6 +48,7 @@ export default createComponent({
       readonly: 'readonly',
       disabled: 'disabled',
     }),
+    CssRuleClassName,
   ],
   props: {
     ...pickerProps,
@@ -682,7 +684,7 @@ export default createComponent({
           safe-area-inset-bottom
           round
           ref="popforcas"
-          class={bem('popup')}
+          class={[bem('popup'), this.cssRuleClassName]}
           position={'bottom'}
           closeOnClickOverlay={this.closeOnClickOverlay}
           // onClickOverlay={this.togglePopup}

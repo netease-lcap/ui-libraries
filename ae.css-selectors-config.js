@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 module.exports = {
   mode: 'file-rpa',
   prompt: fs.readFileSync('./ae.css-selectors-prompt.md', 'utf-8'),
-  includes: ['libraries/element-ui/index.css-info-desc.json'],
+  includes: ['libraries/pc-ui/index.css-info-desc.json'],
   excludes: [],
   linePattern: /^(\s*")(.+?)(":\s*")(.*?)(",?\s*)$/,
   linePreFilter(line) {

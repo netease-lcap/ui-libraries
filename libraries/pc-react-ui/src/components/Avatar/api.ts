@@ -3,7 +3,7 @@
 namespace nasl.ui {
   @Component({
     title: '头像',
-    icon: 'image',
+    icon: 'avatar',
     description: '可以用来展示一张图片，支持设置图片地址。',
     group: 'Display',
   })

@@ -2,6 +2,7 @@
   <demo-section>
     <demo-block>
         <van-cascader
+          class="cw-css-rule-cascader1___abcas"
           v-model="base.value2"
           :title="t('selectArea')"
           :dataSource="[{ 'text': '浙江省', 'value': '330000' }, { 'text': '杭州市', 'value': '330100', 'parentId': '330000' }, { 'text': '宁波市', 'value': '330200', 'parentId': '330000' },  { 'text': '江苏省', 'value': '320000' }]"

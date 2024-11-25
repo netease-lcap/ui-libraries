@@ -260,7 +260,8 @@
         "ideusage": {
             "idetype": "element",
             "useFxOrEg":{"property": "src"},
-            "translateBindingProperty": ["src", "sr"]
+            "translateBindingProperty": ["src", "sr"],
+            "updateFrameHeightWhenTrigger": "load"
         }
     },
     {
@@ -530,9 +531,14 @@
             },
             "style": [
                 {
-                "selector": ".van-picker-pick-column__wrapper > li:nth-child(n+2)" ,
-                "declaration":"opacity: 0.4; cursor: not-allowed !important; pointer-events: none",
-                "fromNodePath": true
+                    "selector": ".van-picker-pick-column__wrapper > li:nth-child(n+2)" ,
+                    "declaration":"opacity: 0.4; cursor: not-allowed !important; pointer-events: none",
+                    "fromNodePath": true
+                },
+                {
+                    "selector": ".van-picker-list > .van-picker-list__item:nth-child(n+2)",
+                    "declaration":"opacity: 0.4; cursor: not-allowed !important; pointer-events: none",
+                    "fromNodePath": true
                 }
             ]
         }

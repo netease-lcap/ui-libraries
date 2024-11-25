@@ -6,6 +6,7 @@ export default function registerIElement(methods, options = {}) {
   // 当前组件的主要选择器
   let componentNodePath = '';
   let mainSelectorMap = {};
+  let rootElements = [];
   let mainSelectorStr = '';
   // 当前组件的所有选择器
   let selectors = [];
@@ -85,7 +86,7 @@ export default function registerIElement(methods, options = {}) {
 
     const rect = el.getBoundingClientRect();
     const hoveredElementSelector = el.tagName.toLowerCase() + Array.from(el.classList)
-      .filter((cls) => !/^ide-css-rule-|^_|vusion|s-empty|_fake|_empty|[dD]esigner|cw-style/.test(cls))
+      .filter((cls) => !/^cw-css-rule|^ide-custom-component|^_|vusion|s-empty|_fake|_empty|[dD]esigner|cw-style/.test(cls))
       .map((cls) => `.${cls}`)
       .join('');
     if (!options.addPopoverManually) {
@@ -100,7 +101,7 @@ export default function registerIElement(methods, options = {}) {
     }
 
     Object.assign(INSPECTOR.style, {
-      display: 'block',
+      display: !options.addPopoverManually ? 'block' : 'none',
       top: `${rect.top}px`,
       left: `${rect.left}px`,
       width: `${rect.width}px`,
@@ -176,13 +177,45 @@ export default function registerIElement(methods, options = {}) {
     computeInspector();
   }
 
+  function onRefresh() {
+    const selectedElement = selected.element;
+    if (selectedElement) {
+      clearIElementState(selectedElement);
+      const state = selectedElementState;
+      state && selectedElement.classList.add(`_${state}`);
+    }
+    rootElements.forEach((el) => {
+      el.setAttribute('data-root-nodepath', componentNodePath);
+    });
+  }
+
   /**
    * 计算 nodepath 下的主选择器的 query 字符串
    */
   function computeMainSelectorStr() {
     if (!componentNodePath) return Object.keys(mainSelectorMap).join(',');
 
-    const nodePathStr = `[data-nodepath="${componentNodePath}"]`;
+    let nodePathStr = `[data-nodepath="${componentNodePath}"]`;
+
+    Array.from(document.querySelectorAll('[data-root-nodepath]')).forEach((el) => {
+      el.removeAttribute('data-root-nodepath');
+    });
+
+    // findAndMarkRootElement
+    const dataNodePathElements = Array.from(document.querySelectorAll(nodePathStr));
+    const rootSelectors = Object.keys(mainSelectorMap).filter((key) => mainSelectorMap[key]);
+    rootElements = [];
+    dataNodePathElements.forEach((el) => {
+      rootSelectors.forEach((selector) => {
+        const rootEl = el.closest(selector);
+        if (rootEl && rootEl !== el) rootElements.push(rootEl);
+      });
+    });
+    rootElements.forEach((el) => {
+      el.setAttribute('data-root-nodepath', componentNodePath);
+    });
+    if (rootElements.length) nodePathStr = `[data-root-nodepath="${componentNodePath}"]`;
+
     const output = [];
     Object.keys(mainSelectorMap).forEach((key) => {
       const value = mainSelectorMap[key];
@@ -199,7 +232,7 @@ export default function registerIElement(methods, options = {}) {
     selectors = data.selectors;
     if (!options.addEventsManually) {
       window.addEventListener('mousemove', onMouseMove);
-      window.addEventListener('click', onClick);
+      window.addEventListener('click', onClick, true);
     }
   };
 
@@ -207,7 +240,7 @@ export default function registerIElement(methods, options = {}) {
     inspecting = false;
     if (!options.addEventsManually) {
       window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('click', onClick);
+      window.removeEventListener('click', onClick, true);
     }
   };
 
@@ -215,6 +248,7 @@ export default function registerIElement(methods, options = {}) {
     inspecting = false;
     componentNodePath = '';
     mainSelectorMap = {};
+    rootElements = [];
     mainSelectorStr = '';
     selectors = [];
     selected.element = null;
@@ -299,7 +333,7 @@ export default function registerIElement(methods, options = {}) {
   };
 
   methods.showInspector = () => {
-    INSPECTOR.style.display = 'block';
+    INSPECTOR.style.display = !options.addPopoverManually ? 'block' : 'none';
   };
 
   methods.hideInspector = () => {
@@ -312,6 +346,7 @@ export default function registerIElement(methods, options = {}) {
     },
     onMouseMove,
     onClick,
+    onRefresh,
   };
 }
 

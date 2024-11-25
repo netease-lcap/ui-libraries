@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { transPlacement2DropdownAlign } from 'antd/es/date-picker/util';
 import {
   AutoComplete,
   DatePicker,
@@ -14,28 +13,8 @@ import {
 } from 'antd';
 import genPurePanel from './PurePanel';
 
-DatePicker._InternalPanelDoNotUseOrYouWillBeFired = genPurePanel(DatePicker, 'picker', null, (props: any) => {
-  const dropdownAlign = transPlacement2DropdownAlign(props.direction, props.placement);
-
-  dropdownAlign.overflow!.adjustY = false;
-  dropdownAlign.overflow!.adjustX = false;
-
-  return {
-    ...props,
-    dropdownAlign,
-  };
-});
-DatePicker._InternalRangePanelDoNotUseOrYouWillBeFired = genPurePanel(DatePicker.RangePicker, 'picker', null, (props: any) => {
-  const dropdownAlign = transPlacement2DropdownAlign(props.direction, props.placement);
-
-  dropdownAlign.overflow!.adjustY = false;
-  dropdownAlign.overflow!.adjustX = false;
-
-  return {
-    ...props,
-    dropdownAlign,
-  };
-});
+DatePicker._InternalPanelDoNotUseOrYouWillBeFired = genPurePanel(DatePicker, 'picker', null);
+DatePicker._InternalRangePanelDoNotUseOrYouWillBeFired = genPurePanel(DatePicker.RangePicker, 'picker', null);
 
 const DropdownPurePanel = genPurePanel(Dropdown, 'dropdown', (prefixCls) => prefixCls, (props: any) => {
   return {

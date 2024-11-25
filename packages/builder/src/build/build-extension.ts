@@ -138,10 +138,10 @@ export async function buildNaslExtensionManifest(options: LcapBuildOptions, hash
   const naslExtensionConfig = fs.readJSONSync(naslConfigPath) as any;
   const manifest = genManifestConfig(options);
   naslExtensionConfig.compilerInfoMap.manifest = JSON.stringify(manifest);
-  if (hash) {
-    const contentHash = getHashDigest(JSON.stringify(naslExtensionConfig), 'md5', 'base64', 16);
-    naslExtensionConfig.compilerInfoMap.debug = JSON.stringify({ hash: contentHash });
-  }
+  // if (hash) {
+  //   const contentHash = getHashDigest(JSON.stringify(naslExtensionConfig), 'md5', 'base64', 16);
+  //   naslExtensionConfig.compilerInfoMap.debug = JSON.stringify({ hash: contentHash });
+  // }
   fs.writeJSONSync(naslConfigPath, { ...naslExtensionConfig }, { spaces: 2 });
 }
 
@@ -155,7 +155,7 @@ export async function buildNaslExtension(options: LcapBuildOptions, mode: BuildM
   }
 
   await buildNaslExtensionConfig(options);
-  options.reportCSSInfo && buildCSSInfo(options);
+  await buildCSSInfo(options);
   await buildTheme(options, mode === 'watch');
   await buildDeclaration(options);
   await buildNaslExtensionManifest(options, mode === 'watch');

@@ -12,6 +12,7 @@
           ref="popup"
           :style="staticStyleVar"
           :vusion-scope-id="$vnode.context.$options._scopeId"
+          :class="[cssRuleClassName]"
         >
             <slot></slot>
         </u-popup>
@@ -20,6 +21,7 @@
 
 <script>
 import CssVarsStyleMixin from '../../mixins/css-variables';
+import CssRuleClassNameMixin from '../../mixins/css-rule-classname';
 import UPopup from '../u-popup.vue/index.vue';
 import SEmpty from '../../components/s-empty.vue';
 export default {
@@ -27,6 +29,7 @@ export default {
     components: { SEmpty, UPopup },
     mixins: [
       CssVarsStyleMixin,
+      CssRuleClassNameMixin,
     ],
     props: {
         display: String,

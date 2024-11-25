@@ -2,6 +2,8 @@ import { loadConfigFromFile, build } from 'vite';
 import chokidar from 'chokidar';
 import fs from 'fs-extra';
 import path from 'path';
+import type { IncomingMessage, ServerResponse } from 'http';
+import dayjs from 'dayjs';
 import logger from '../utils/logger';
 import { buildIDE } from '../build/build-ide';
 import {
@@ -95,7 +97,7 @@ async function getWatcherTasks(options: LcapBuildOptions, pkgInfo: any) {
     build: async () => {
       await buildNaslExtensionConfig(options);
       await buildDecalaration(options);
-      await buildNaslExtensionManifest(options, true);
+      await buildNaslExtensionManifest(options);
     },
   };
 
@@ -181,11 +183,61 @@ async function startWatcher(options: LcapBuildOptions, pkgInfo: any, send: (msg:
   };
 }
 
-function startServer({ port, https }) {
+function createProxyLibrarySchema(options: LcapBuildOptions, { port, https }) {
+  return (req: IncomingMessage, res: ServerResponse, next) => {
+    if (req.url?.startsWith('/api/library/schema')) {
+      res.setHeader('content-type', 'application/json;charset=UTF-8');
+      const naslConfigPath = path.resolve(options.rootPath, 'nasl.extension.json');
+      let naslConfig;
+      if (fs.existsSync(naslConfigPath)) {
+        naslConfig = fs.readJSONSync(naslConfigPath);
+      }
+
+      if (!naslConfig) {
+        next();
+        return;
+      }
+
+      res.write(JSON.stringify({
+        code: 200,
+        msg: '调用成功',
+        result: {
+          category: 'LIBRARY',
+          symbol: naslConfig.name,
+          name: naslConfig.name,
+          ideVersion: naslConfig.ideVersion,
+          version: naslConfig.version,
+          id: 77777,
+          description: `${naslConfig.description} 调试使用`,
+          picture: '',
+          tenantId: '00000000000000000000000000000000',
+          jsonSchema: JSON.stringify(naslConfig),
+          origin: '手动上传',
+          dependencies: [],
+          tags: [],
+          hasAuth: null,
+          hasUserCenter: null,
+          publisher: 'Develop Debuging',
+          publishTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          url: `${https ? 'https' : 'http'}://127.0.0.1:${port}/${naslConfig.name}@${naslConfig.version}.zip`,
+        },
+        success: true,
+      }));
+      res.end();
+    }
+
+    next();
+  };
+}
+
+function startServer(options: LcapBuildOptions, { port = 8080, https }) {
   return LiveServer.start({
     port,
     https,
     cors: true,
+    middlewares: [
+      createProxyLibrarySchema(options, { port, https }),
+    ],
   });
 }
 
@@ -234,7 +286,7 @@ export default async (rootPath: string, { port, https }: any) => {
               logger.success('build successed! starting file watching...');
               watcher.start();
 
-              server = await startServer({ port, https });
+              server = await startServer(buildOptions, { port, https });
             } catch (e) {
               logger.error(e);
               process.exit(1);

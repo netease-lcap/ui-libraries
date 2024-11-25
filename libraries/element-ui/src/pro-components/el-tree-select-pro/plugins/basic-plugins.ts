@@ -51,15 +51,16 @@ export const useTreeSelect: NaslComponentPluginOptions = {
     const renderLabel = (h, node) => {
       const [optionIsSlot, slotOption] = props.get<[boolean, Slot]>(['optionIsSlot', 'slotOption']);
 
+      const defaultContent = [
+        h('span', {}, [lodashGet(node.data, textField.value)]),
+      ];
       if (!optionIsSlot || !isFunction(slotOption)) {
-        return [
-          h('span', {}, [lodashGet(node.data, textField.value)]),
-        ];
+        return defaultContent;
       }
 
       return slotOption({
         item: node.data,
-      });
+      }) || defaultContent;
     };
 
     const treeProps = computed(() => {

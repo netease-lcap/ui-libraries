@@ -136,7 +136,7 @@
         </template>
       </template>
       <u-input
-        v-if="filterable && !isPreview"
+        v-if="filterable && (!isPreview || !multiple)"
         :class="$style.input"
         ref="input"
         :readonly="readonly"

@@ -3,6 +3,7 @@
     <demo-block card title="列表多选">
       <div>pickerValue: {{ pickerValue }}</div>
       <van-pickerson
+        class="cw-css-rule-pickerson1___asada"
         :clearable="false"
         :multiple="false"
         :enable-select-all="true"

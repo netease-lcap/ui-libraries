@@ -36,27 +36,17 @@ export const Default = {
               applicant: ['贾明', '张三', '王芳'][i % 3],
               status: i % 3,
               channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+              children: [
+                {
+                  channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+                },
+              ],
               detail: {
-                email: [
-                  'w.cezkdudy@lhll.au',
-                  'r.nmgw@peurezgn.sl',
-                  'p.cumx@rampblpa.ru',
-                ][i % 3],
+                email: ['w.cezkdudy@lhll.au', 'r.nmgw@peurezgn.sl', 'p.cumx@rampblpa.ru'][i % 3],
               },
-              matters: [
-                '宣传物料制作费用',
-                'algolia 服务报销',
-                '相关周边制作费',
-                '激励奖品快递费',
-              ][i % 4],
+              matters: ['宣传物料制作费用', 'algolia 服务报销', '相关周边制作费', '激励奖品快递费'][i % 4],
               time: [2, 10, 1][i % 3],
-              createTime: [
-                '2022-01-01',
-                '2022-02-01',
-                '2022-02-01',
-                '2022-03-01',
-                '2022-04-01',
-              ][i % 4],
+              createTime: ['2022-01-01', '2022-02-01', '2022-02-01', '2022-03-01', '2022-04-01'][i % 4],
             });
           }
 
@@ -118,6 +108,7 @@ export const Default = {
    @sort-change="onSortChange"
    :onRowClick="log"
    dragSort="row"
+   :treeDisplay="true"
    :onDragSort="onDragSortChange"
     >
 
@@ -135,9 +126,9 @@ export const Default = {
 
     <el-table-column-pro title="渠道" colKey="createTime" width="300" > </el-table-column-pro>
 
-    <template #expanded-row="{ row }">
+    <template #expanded-row="{ item }">
       <div class="more-detail">
-        <p class="title"><b>集群名称:</b></p><p class="content">{{row.channel}}</p><br/>
+        <p class="title"><b>集群名称:</b></p><p class="content">{{item.channel}}</p><br/>
       </div>
     </template>
     </el-table-pro>`,

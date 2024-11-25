@@ -74,16 +74,27 @@ export default defineConfig(({ command }) => {
             VanPickerson: {
               selectorPrefixMap: {
                 'van-pickerson-column': false,
+                'van-picker-pick': false,
+                'van-pickerson__wrap': true,
+                'van-pickerson__popup': true,
+                'van-pickerson': false,
               },
+              mainSelectorMap: {
+                '.van-pickerson__popup': true,
+                '.van-pickerson__wrap': true,
+              },
+              depCompList: ['VanCell'],
             },
             VanProgress: {
               selectorPrefixMap: {
-                'van-progress-room': false,
+                'van-progress-room': true,
+                'van-progress': false,
               },
             },
             VanSlider: {
               selectorPrefixMap: {
-                'van-slider-room': false,
+                'van-slider-room': true,
+                'van-slider': false,
               },
             },
             VanSwitch: {
@@ -117,6 +128,92 @@ export default defineConfig(({ command }) => {
             VanCountDownNew: {
               mainSelectorMap: {
                 '.count-down-new': true,
+              },
+            },
+            VanDatetimePicker: {
+              selectorPrefixMap: {
+                'van-datetime-picker__wrapppdtpicker': true,
+                'van-datetime-picker__popup': true,
+                'van-datetime-picker': false,
+                'van-picker': false,
+                'van-picker-column': false,
+              },
+              mainSelectorMap: {
+                '.van-datetime-picker__popup': true,
+                '.van-datetime-picker': false,
+                '.van-ellipsis': false,
+              },
+              depCompList: ['VanCell'],
+            },
+            VanArea: {
+              selectorPrefixMap: {
+                'van-area__wrappparea': true,
+                'van-area__popup': true,
+                'van-area': false,
+              },
+              mainSelectorMap: {
+                '.van-area__popup': true,
+                '.van-area__wrappparea': true,
+              },
+              depCompList: ['VanCell', 'VanDatetimePicker'], // 用VanDatetimePicker里关于van-picker和van-picker-column的选择器
+            },
+            VanCascader: {
+              selectorPrefixMap: {
+                'van-cascader__popup': true,
+                'van-cascader__wrapppcascader': true,
+                'van-cascader': false,
+              },
+              mainSelectorMap: {
+                '.van-cascader__popup': true,
+                '.van-cascader__wrapppcascader': true,
+              },
+              depCompList: ['VanCell'],
+            },
+            VanCalendar: {
+              selectorPrefixMap: {
+                'van-calendar__popup': true,
+                'van-calendar__wrapppcalendar': true,
+                'van-calendar': false,
+              },
+              mainSelectorMap: {
+                '.van-calendar__popup': true,
+                '.van-calendar__wrapppcalendar': true,
+              },
+              depCompList: ['VanCell'],
+            },
+            VanDropdownItem: {
+              selectorPrefixMap: {
+                'van-dropdown-item': false,
+              },
+              // mainSelectorMap: {
+              //   '.van-dropdown-menu__item': true,
+              //   '.van-dropdown-menu__item--disabled': true,
+              //   '.van-dropdown-menu__title': false,
+              //   '.van-dropdown-menu__title--active': false,
+              //   '.van-dropdown-menu__item--disabled .van-dropdown-menu__title': false,
+              //   '.van-ellipsis': false,
+              // },
+              depCompList: ['VanCell'],
+            },
+            VanCardu: {
+              selectorPrefixMap: {
+                'van-cardu__wrap': true,
+              },
+            },
+            VanPopupCombination: {
+              selectorPrefixMap: {
+                'u-popup': true,
+              },
+            },
+            VanBadge: {
+              selectorPrefixMap: {
+                'van-badge__wrapper': true,
+                'van-badge': false,
+              },
+            },
+            VanDialog: {
+              mainSelectorMap: {
+                '.dialogchild': false,
               },
             },
           },

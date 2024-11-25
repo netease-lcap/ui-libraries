@@ -66,6 +66,7 @@ export default defineConfig(({ command }) => {
               selectorPrefixMap: {
                 'u-table': false,
               },
+              depCompList: ['UPagination'],
             },
             UTreeViewNew: {
               mainSelectorMap: {
@@ -74,9 +75,9 @@ export default defineConfig(({ command }) => {
             },
             UListComponents: {
               mainSelectorMap: {
-                "[class*=u-for-com]": true,
-                "[class*=u-for-com-frag]": false,
-                "[class*=u-for-com-item]": false,
+                ".u-for-com": true,
+                ".u-for-com-frag": false,
+                ".u-for-com-item": false,
               },
             },
             UToc: {
@@ -85,23 +86,59 @@ export default defineConfig(({ command }) => {
                 'u-toc_wrap': true,
               },
             },
-            UModal: {
-              selectorPrefixMap: {
-                'u-modal': false,
-                'u-modal_dialog': true,
-              },
-            },
-            UDrawer: {
-              selectorPrefixMap: {
-                'u-drawer': false,
-                'u-drawer_drawer': true,
-              },
-            },
             UCountDown: {
               mainSelectorMap: {
                 '[class*=u-count-down]': true,
               },
-            }
+            },
+            UGallery: {
+              selectorPrefixMap: {
+                'u-gallery_wrap': true,
+                'u-gallery_wrapbig': true,
+                'u-gallery_wrapsmall': true,
+                'swiper\\b[a-z-]+': false,
+              },
+            },
+            UPopupCombination: {
+              selectorPrefixMap: {
+                'u-popup': true,
+              },
+            },
+            UTreeSelectNew: {
+              depCompList: ['UTreeViewNew'],
+            },
+            URegionSelect: {
+              depCompList: [
+                {
+                  compName: 'UCascader',
+                  isResetRoot: false,
+                },
+              ],
+            },
+            UDatePicker: {
+              selectorPrefixMap: {
+                'u-calendar': false,
+                'u-date-picker_popper': true,
+              },
+            },
+            UTimePicker: {
+              selectorPrefixMap: {
+                'u-time-picker_popper_popper': true,
+                'u-time-picker_range': true,
+              },
+            },
+            UDateTimePicker: {
+              selectorPrefixMap: {
+                'u-date-time-picker_popper': true,
+              },
+              depCompList: ['UDatePicker'],
+            },
+            UProcessRecord: {
+              depCompList: ['UTableView'],
+            },
+            UProcessMyprocess: {
+              depCompList: ['UTabs', 'UTableView', 'UForm', 'UButton'],
+            },
           },
         },
       }),

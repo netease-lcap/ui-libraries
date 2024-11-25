@@ -20,7 +20,8 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
 
   const root = postcss.parse(cssContent);
 
-  const mockStateRE = /:(hover|active|focus)/;
+  const hasPesudoClassRE = /:(hover|active|focus)/;
+  const hasPesudoStateRE = /(:|\._)(hover|active|focus)/;
   const isNonStandardRE = /-(moz|webkit|ms|o)-/;
   const hasPesudoElementRE = /::|:(before|after|selection)/;
   const hashClassRE = /\.([a-zA-Z0-9][a-zA-Z0-9_-]*?)___[a-zA-Z0-9-]{6,}/;
@@ -67,7 +68,13 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
 
   function getMainSubSelector(subSelector: string) {
     const cap = subSelector.slice(1).match(/[[.:]/);
-    return cap ? subSelector.slice(0, (cap.index || subSelector.length - 1) + 1) : subSelector;
+    let result = cap ? subSelector.slice(0, (cap.index
+      || subSelector.length - 1 // 支持 *:last-child 等选择器
+    ) + 1) : subSelector;
+
+    if (hasPesudoStateRE.test(result)) result = result.replace(new RegExp(hasPesudoStateRE, 'g'), '');
+
+    return result;
   }
 
   const isSelectorStartRoot = options.reportCSSInfo?.isSelectorStartRoot || ((selector: string, componentName: string, parentName: string | undefined) => {
@@ -99,7 +106,7 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
         .replace(/\s+/g, ' ') // 抹平换行符
         .replace(/\s*([>+~,])\s*/g, '$1') // 统一去除空格
         .split(/,/g)
-        .flatMap((sel) => (mockStateRE.test(sel) && !hasPesudoElementRE.test(sel) ? [sel, sel.replace(new RegExp(mockStateRE, 'g'), '._$1')] : [sel])); // 增加模拟伪类
+        .flatMap((sel) => (hasPesudoClassRE.test(sel) && !hasPesudoElementRE.test(sel) ? [sel, sel.replace(new RegExp(hasPesudoClassRE, 'g'), '._$1')] : [sel])); // 增加模拟伪类
 
       let selector = selectors.join(',');
       if (/:(before|after)$|vusion|s-empty|_fake|_empty|[dD]esigner|cw-style/.test(selector) || isNonStandardRE.test(selector)) return;
@@ -144,7 +151,9 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
           lastIndex = cap.index + 1;
         }
         mainSelector += getMainSubSelector(sel.slice(lastIndex));
-        if (mainSelector.endsWith(' *') || mainSelector.endsWith('>*')) return;
+        if (mainSelector.endsWith(' *') || mainSelector.endsWith('>*')
+          || mainSelector.endsWith('(') // 临时过滤 :not( 错误的选择器
+        ) return;
 
         componentCSSInfo.mainSelectorMap.set(mainSelector, isSelectorStartRoot(mainSelector, componentName, componentNameMap[componentName]));
       });
@@ -363,6 +372,51 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
     componentNames.forEach((componentName) => {
       if (!componentCSSInfoMap[componentName]) console.log(`[WARN] 组件 ${componentName} 上未匹配到任何选择器`);
     });
+  }
+
+  // 整合
+  if (options.reportCSSInfo?.extraComponentMap) {
+    const compKeys = Object.keys(options.reportCSSInfo.extraComponentMap);
+    for (let i = 0; i < compKeys.length; i++) {
+      const curCompName = compKeys[i];
+      const { depCompList } = options.reportCSSInfo.extraComponentMap[compKeys[i]];
+      if (depCompList && depCompList.length) {
+        for (let j = 0; j < depCompList.length; j++) {
+          const depCompItem = depCompList[j];
+          let depCompName = '';
+          let isResetRoot = true;
+          if (typeof depCompItem !== 'string') {
+            depCompName = depCompItem.compName;
+            isResetRoot = depCompItem.isResetRoot;
+          } else {
+            depCompName = depCompItem;
+          }
+          const depCompCssDesc = cssRulesDesc[depCompName];
+          cssRulesDesc[curCompName] = { ...cssRulesDesc[curCompName], ...depCompCssDesc };
+          const depCompCssInfo = componentCSSInfoMap[depCompName];
+          const resetCssRules = depCompCssInfo.cssRules.map((rule) => {
+            return {
+              ...rule,
+              isStartRoot: isResetRoot ? false : rule.isStartRoot,
+            };
+          });
+          const resetMainSelectorMap = isResetRoot ? Object.keys(depCompCssInfo.mainSelectorMap).reduce((acc, selector) => {
+            acc[selector] = false;
+            return acc;
+          }, {}) : { ...depCompCssInfo.mainSelectorMap };
+
+          if (!componentCSSInfoMap[curCompName]) {
+            componentCSSInfoMap[curCompName] = {
+              cssRules: [],
+              cssRuleMap: new Map(),
+              mainSelectorMap: new Map(),
+            };
+          }
+          componentCSSInfoMap[curCompName].cssRules = [...componentCSSInfoMap[curCompName].cssRules, ...resetCssRules];
+          componentCSSInfoMap[curCompName].mainSelectorMap = { ...componentCSSInfoMap[curCompName].mainSelectorMap, ...resetMainSelectorMap };
+        }
+      }
+    }
   }
 
   return { componentCSSInfoMap, cssRulesDesc, cssContent: root.toResult().css };

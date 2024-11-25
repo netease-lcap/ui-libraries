@@ -12,6 +12,7 @@
     </el-popover>
 
     <el-popover
+      class="cw-css-rule-popover1___abc"
       placement="bottom"
       title="标题"
       width="200"

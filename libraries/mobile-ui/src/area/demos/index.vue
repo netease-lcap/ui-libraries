@@ -4,6 +4,7 @@
     <demo-block card title="选中省市区">
       <div>value: {{ sarea }}</div>
       <van-area
+        class="cw-css-rule-area1___abcas"
         label-field="地区选择"
         :value.sync="sarea"
         @confirm="onConfirm"

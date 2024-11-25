@@ -1,3 +1,4 @@
+import cls from 'classnames';
 import Overlay from '../../overlay';
 import { context } from './context';
 import { mount } from '../../utils/functional';
@@ -42,6 +43,16 @@ export function updateOverlay(vm: any): void {
 
     if (el && el.parentNode) {
       el.parentNode.insertBefore(overlay.$el, el);
+      /**
+       * 更新overlay上的css-rules className
+       */
+      const clx = cls(vm.$vnode?.data?.class || [], vm.$vnode?.data?.staticClass || '');
+      // 1、查找el上的class属性，以css-rule开头
+      const cssRuleClassName = clx.split(' ')?.find((className) => /^cw-css-rule-?/.test(className));
+      // 2、如果有，添加到overlay上
+      if (cssRuleClassName && !overlay.$el.classList.contains(cssRuleClassName)) {
+        overlay.$el.classList.add(cssRuleClassName);
+      }
     }
 
     Object.assign(overlay, defaultConfig, config, {

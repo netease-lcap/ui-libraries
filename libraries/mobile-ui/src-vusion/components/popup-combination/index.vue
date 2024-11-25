@@ -8,6 +8,7 @@
     <u-popup
       ref="popup"
       :style="staticStyle"
+      :class="[cssRuleClassName]"
       reference="prev"
       v-bind="$attrs"
       v-on="$listeners"
@@ -21,10 +22,14 @@
 <script>
 import UPopupCombination from 'cloud-ui.vusion/src/components/u-popup-combination.vue/index.vue';
 import { context } from '../../../src/mixins/popup/context';
+import CssRuleClassNameMixin from '../../../src/mixins/css-rule-classname';
 
 export default {
   name: 'van-popup-combination',
   extends: UPopupCombination,
+  mixins: [
+    CssRuleClassNameMixin
+  ],
   data() {
     return {
       staticStyle: '',

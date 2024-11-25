@@ -23,6 +23,7 @@ export const Example1 = {
     },
     template: `<div>
 <el-popconfirm
+  :class="['cw-css-rule-popconfirm1___abcd']"
   title="这是一段内容确定删除吗？"
   @confirm="handleClick"
 >

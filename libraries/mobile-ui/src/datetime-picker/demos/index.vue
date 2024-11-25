@@ -5,6 +5,7 @@
       <div>start: {{ startDate }}</div>
       <div>end: {{ endDate }}</div>
       <van-datetime-picker
+        class="cw-css-rule-datetime-picker1___abcas"
         :isNew="false"
         :ref="`datetime_picker1`"
         type="date"

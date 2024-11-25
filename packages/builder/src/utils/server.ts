@@ -1,6 +1,7 @@
 /* eslint-disable prefer-regex-literals */
 /* eslint-disable global-require */
 import pc from 'picocolors';
+import { isFunction } from 'lodash';
 import httpsConfig from './https';
 
 const fs = require('fs');
@@ -90,6 +91,7 @@ function entryPoint(staticHandler, file) {
  * @param root {string} Path to root directory (default: cwd
  * @param file {string} Path to the entry point file
  * @param wait {number} Server will wait for all changes, before reloading
+ * @param middlewares {array} Append middleware to stack, e.g. [function(req, res, next) { next(); }].
  */
 LiveServer.start = function (options) {
   options = options || {};
@@ -102,6 +104,7 @@ LiveServer.start = function (options) {
   const wait = options.wait === undefined ? 100 : options.wait;
   const cors = options.cors || false;
   const https = options.https || null;
+  const middlewares = options.middlewares || [];
 
   // Setup a web server
   const app = connect();
@@ -114,6 +117,14 @@ LiveServer.start = function (options) {
       }),
     );
   }
+
+  middlewares.forEach((mw) => {
+    if (!isFunction(mw)) {
+      return;
+    }
+
+    app.use(mw);
+  });
 
   app
     .use(staticServerHandler) // Custom static server
