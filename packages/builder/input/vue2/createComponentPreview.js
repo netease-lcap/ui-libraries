@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { ComponentWrap } from 'virtual:lcap-theme-preview-wrap.js';
 import { sendRenderOk } from '../events';
 import './global.css';
@@ -53,6 +54,7 @@ export default (stories) => {
         resultDataUrl: '',
         remark: '',
         loading2: false,
+        styleEl: null
       };
     },
     computed: {
@@ -83,6 +85,7 @@ export default (stories) => {
     methods: {
       handleClick(name) {
         this.activeName = name;
+        console.log("lemon ~ handleClick ~ name", name, cssInfo[upperFirst(camelCase(name))])
         // eslint-disable-next-line no-unused-expressions
         this.onActive && this.onActive(name);
       },
@@ -134,6 +137,28 @@ export default (stories) => {
             })),
           ),
           h('div', { class: styles.sidebar }, [
+            h('el-button', {
+              attrs: {
+                text: '撤销',
+                type: 'danger',
+              },
+              on: {
+                click: () => {
+                  if (this.styleEl) document.head.removeChild(this.styleEl);
+                },
+              },
+            }),
+            h('el-button', {
+              attrs: {
+                text: '回退',
+                type: 'danger',
+              },
+              on: {
+                click: () => {
+                  if (this.styleEl) document.head.appendChild(this.styleEl);
+                },
+              },
+            }),
             h('el-form-pro', {
               class: styles.form,
               attrs: {
@@ -147,7 +172,11 @@ export default (stories) => {
                 },
               }, [this.activeName ? h('ul', {
                 class: styles.selectorList,
-              }, Object.keys(cssInfo[upperFirst(camelCase(this.activeName))]).map((text) => h('li', [text]))) : '请先选择一个组件！']),
+              }, [
+                cssInfo[upperFirst(camelCase(this.activeName))]
+                  ? Object.keys(cssInfo[upperFirst(camelCase(this.activeName))]).map((text) => h('li', [text]))
+                  : h('li', ['未获取到组件 CSS 信息！']),
+              ]) : h('li', ['请先选择一个组件！'])]),
               h('el-form-item-pro', {
                 attrs: {
                   label: '原组件截图：',
@@ -251,6 +280,7 @@ export default (stories) => {
                             source: this.sourceDataUrl,
                             target: this.targetDataUrl,
                             prompt: this.prompt,
+                            optionType: 2,
                           }),
                         });
 
@@ -259,9 +289,11 @@ export default (stories) => {
 
                         this.answer = json.result;
                         this.quota = json.quota;
+                        console.log("lemon ~ 生成的内容", this.answer)
                         const styleEl = document.createElement('style');
                         styleEl.innerHTML = this.answer;
                         document.head.appendChild(styleEl);
+                        this.styleEl = styleEl;
 
                         this.$message.success('生成 CSS 成功！');
                       } catch (e) {

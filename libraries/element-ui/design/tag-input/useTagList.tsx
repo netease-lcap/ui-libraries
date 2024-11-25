@@ -136,8 +136,8 @@ export default function useTagList(props: ElTagInputProps, context: SetupContext
       );
     }
     // 超出省略
-    if (newList.length !== tagValue.value.length) {
-      const len = tagValue.value.length - newList.length;
+    if (newList?.length !== tagValue.value?.length) {
+      const len = tagValue.value?.length - newList?.length;
       const more = renderElNode('collapsedItems', {
         params: {
           value: tagValue.value,
