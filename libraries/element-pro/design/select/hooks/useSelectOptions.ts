@@ -64,6 +64,9 @@ export default function useSelectOptions(
       // 处理 slots 中 el-option 与 el-option-group
       const currentSlots = instance.proxy.$slots.default || [];
       currentSlots.forEach((child) => {
+        if (!child.componentOptions) {
+          return;
+        }
         const compoentName = (child.componentOptions.Ctor as any).options?.name;
         if (compoentName === Option.name) {
           // 独立选项

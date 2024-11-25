@@ -74,7 +74,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
 
         const vnodes = isFunction(slotDefault) ? slotDefault() : [];
 
-        return vnodes;
+        return (vnodes || []).filter((n) => !!n.tag);
       },
     };
   },

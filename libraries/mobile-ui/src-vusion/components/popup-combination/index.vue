@@ -48,7 +48,7 @@ export default {
       }
 
       // 为了避免被遮挡，z-index 需要比 popup 高
-      style += `z-index: ${context.zIndex + 2};`
+      style += `z-index: ${++context.zIndex};`
 
       return style;
     },

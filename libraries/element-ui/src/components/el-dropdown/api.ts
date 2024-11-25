@@ -195,8 +195,8 @@ namespace nasl.ui {
           { title: '上方左侧' },
           { title: '上方右侧' },
           { title: '下方' },
-          { title: '左侧上方' },
-          { title: '左侧下方' },
+          { title: '下方左侧' },
+          { title: '下方右侧' },
         ],
       },
     })

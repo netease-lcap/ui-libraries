@@ -307,7 +307,10 @@
         "ideusage": {
             "idetype": "container",
             "structured": true,
-            "childAccept": "target.tag === 'el-autocomplete'"
+            "childAccept": "target.tag === 'el-autocomplete'",
+            "additionalAttribute": {
+                "autofocus": "\"false\""
+            }
         }
     },
     {

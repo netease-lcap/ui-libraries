@@ -197,7 +197,9 @@ export default {
             const currentValue = (this.currentValue = this.fix(value, currentPrecision));
             this.formattedValue = this.currentFormatter.format(currentValue);
             // 修复blur 清空导致的问题，数据流混乱，只能这么改，哎😌
-            this.$refs.input.currentValue = this.formattedValue;
+            if (this.$refs.input) {
+              this.$refs.input.currentValue = this.formattedValue;
+            }
             this.$emit('update', this.currentValue, this);
             // 当点击了form的创建按钮等调用了validate方法，fieldTouched值会变为true，不会走update validate
             // 所以这里需要再增加input emit
@@ -230,7 +232,7 @@ export default {
         this.$emit('update', value, this);
     },
     mounted() {
-        this.autofocus && this.$refs.input.focus();
+        this.autofocus && this.$refs.input && this.$refs.input.focus();
     },
     methods: {
         strip(num, precision = 17) {
@@ -331,7 +333,9 @@ export default {
             const oldValue = this.currentValue;
             this.currentValue = value;
             const formattedValue = (this.formattedValue = this.currentFormatter.format(value));
-            this.$refs.input.currentValue = formattedValue;
+            if (this.$refs.input) {
+              this.$refs.input.currentValue = formattedValue;
+            }
 
             const emitChange = isNil(this.value) || this.value !== value;
 

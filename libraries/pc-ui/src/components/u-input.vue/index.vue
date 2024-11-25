@@ -234,10 +234,10 @@ export default {
             this.$emit('compositionend', e);
         },
         focus() {
-            this.$refs.input.focus();
+            this.$refs.input && this.$refs.input.focus();
         },
         blur() {
-            this.$refs.input.blur();
+            this.$refs.input && this.$refs.input.blur();
         },
         clear() {
             if (this.readonly || this.disabled)

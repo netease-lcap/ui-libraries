@@ -745,7 +745,7 @@ export default {
                 data.forEach((item) => {
                     if (!item.hasOwnProperty('disabled'))
                         this.$set(item, 'disabled', false);
-                    if (!item.hasOwnProperty('radioChecked'))
+                    if (!item.hasOwnProperty('radioChecked') || this.selectedItem === undefined) // 3003406551646208 数据表格单选值不会同步取消
                         this.$set(item, 'radioChecked', false);
                 });
             }

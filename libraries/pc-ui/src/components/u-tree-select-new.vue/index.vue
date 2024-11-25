@@ -53,7 +53,7 @@
                 </span>
             </template>
             <u-input
-              v-if="filterable"
+              v-if="filterable && !isPreview"
               v-show="filtering"
               ref="input"
               :class="$style.input"
