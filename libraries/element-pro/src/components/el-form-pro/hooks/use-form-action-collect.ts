@@ -6,11 +6,11 @@ export const FormActionType = {
 };
 
 export const useFormActionCollect = (callback) => {
-  let collect = null;
+  let collect: any = null;
   let actionMap: Record<string, any[]> = {};
   return () => {
     if (collect) {
-      return collect;
+      return collect as (action: string, ...keys: any[]) => void;
     }
 
     collect = (action: string, ...keys: any[]) => {
@@ -27,6 +27,6 @@ export const useFormActionCollect = (callback) => {
       actionMap = {};
     });
 
-    return collect;
+    return collect as (action: string, ...keys: any[]) => void;
   };
 };

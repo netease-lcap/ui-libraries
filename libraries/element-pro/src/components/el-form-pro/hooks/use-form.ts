@@ -173,7 +173,15 @@ export const useForm = (props: MapGet) => {
         values[index] = v;
         setFieldValue(uid, normalizeRangeFieldValue(values[0], values[1]));
       },
-      getValue: (index) => getFieldValue(name[index]),
+      getValue: (index) => {
+        let key = name[index];
+
+        if (!key) {
+          key = `${uid}[${index}]`;
+        }
+
+        return getFieldValue(key);
+      },
       setInitalValue: (values) => {
         if (initialSetted) {
           return;

@@ -5,7 +5,7 @@ import {
   type ValidateResultContext,
   Space,
 } from '@element-pro';
-import { isFunction } from 'lodash';
+import { isFunction, isNil } from 'lodash';
 import {
   type NaslComponentPluginOptions,
   $deletePropList,
@@ -102,16 +102,16 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     const resetForm = () => {
       const onReset = props.get('onReset');
 
-      if (instance.refs.$base) {
+      if (instance?.refs.$base) {
         (instance.refs.$base as any).clearValidate();
       }
 
       Object.keys(formFieldMetas).forEach((key) => {
+        const { initialValue } = formFieldMetas[key];
+
         setFieldValue(
           key,
-          formFieldMetas[key].initialValue === undefined
-            ? null
-            : formFieldMetas[key].initialValue,
+          isNil(initialValue) ? null : initialValue,
         );
       });
 
