@@ -484,7 +484,7 @@ namespace nasl.ui {
         },
       ],
     })
-    slotRenderItem: (current: { item: T }) => Array<ViewComponent>;
+    slotRenderItem: (current: Current<T>) => Array<ViewComponent>;
   }
   @Component({
     title: '列表项',

@@ -75,8 +75,8 @@ useHandlePagination.order = 5;
 export function useHandleRenderItem(props) {
   const renderItemProps = props.get('renderItem');
   return {
-    renderItem(item) {
-      return renderItemProps({ item });
+    renderItem(item, index) {
+      return renderItemProps({ item, index });
     },
   };
 }
