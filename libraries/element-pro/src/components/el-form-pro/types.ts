@@ -18,9 +18,9 @@ export interface FormRangeField {
   uid,
   name: [string, string],
   setValue: (index: number, v: any, emitChange?: boolean) => void;
-  getValue?: (index: number) => any;
-  setInitalValue?: (v: [any, any]) => void;
-  setChangeListener: (startListener: (v: any) => void, endListener: (v: any) => void) => void;
+  getValue: (index: number) => any;
+  setInitalValue: (v: [any, any]) => void;
+  setChangeListener: (startListener: ((v: any) => void) | null, endListener: ((v: any) => void) | null) => void;
 }
 
 export interface FormRangeFieldOptions {

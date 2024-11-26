@@ -31,14 +31,14 @@ export const useFieldName = (props: MapGet) => {
   });
   const startFieldName = props.useComputed<string>(['startFieldName', 'useRangeValue'], (val, useRangeValue = false) => {
     if (useRangeValue) {
-      return val;
+      return val || `${uid}_START`;
     }
 
     return '';
   });
   const endFieldName = props.useComputed<string>(['endFieldName', 'useRangeValue'], (val, useRangeValue = false) => {
     if (useRangeValue) {
-      return val;
+      return val || `${uid}_END`;
     }
 
     return '';
@@ -47,7 +47,11 @@ export const useFieldName = (props: MapGet) => {
   const fieldName = computed(() => {
     const useRangeValue = props.get('useRangeValue');
     if (useRangeValue) {
-      return [LCAP_FORM_UID, startFieldName.value, endFieldName.value, 'RANGE'].join('_');
+      if (startFieldName.value && endFieldName.value) {
+        return [LCAP_FORM_UID, startFieldName.value, endFieldName.value, 'RANGE'].join('_');
+      }
+
+      return [uid, 'RANGE'].join('_');
     }
 
     if (propName.value) {
@@ -72,10 +76,10 @@ export const useProxyFormFieldVNode = (h: CreateElement, {
   removeField,
 }) => {
   let isControlled = false;
-  let lastField: FormField = null;
+  let lastField: FormField | null = null;
 
   const proxyVNodes = (vnode: VNode) => {
-    const { prop = 'value', event } = (vnode.componentOptions.Ctor as any).options.model;
+    const { prop = 'value', event } = (vnode.componentOptions?.Ctor as any).options.model;
     if (!vnode.componentInstance && vnode.componentOptions && vnode.componentOptions.propsData) {
       isControlled = Object.prototype.hasOwnProperty.call(vnode.componentOptions.propsData, prop);
     }
@@ -86,8 +90,8 @@ export const useProxyFormFieldVNode = (h: CreateElement, {
       return vnode;
     }
 
-    const propData: Record<string, any> = vnode.componentOptions.propsData || {};
-    const listeners: Record<string, any> = vnode.componentOptions.listeners || {};
+    const propData: Record<string, any> = vnode.componentOptions?.propsData || {};
+    const listeners: Record<string, any> = vnode.componentOptions?.listeners || {};
     const formField = initFormField({
       name: formFieldName,
       value: getNotUndefinedValue(propData[prop], initialValue),
@@ -138,7 +142,7 @@ export const useProxyRangeFieldVNode = (h: CreateElement, {
   let isControlled = false;
   let lastRangeField: FormRangeField | null = null;
   const proxyVNodes = (vnode: VNode) => {
-    const [startProp, endProp] = (vnode.componentOptions.Ctor as any).options.rangeModel;
+    const [startProp, endProp] = (vnode.componentOptions?.Ctor as any).options.rangeModel;
     const startEvent = `update:${startProp}`;
     const endEvent = `update:${endProp}`;
     if (!vnode.componentInstance && vnode.componentOptions && vnode.componentOptions.propsData) {
@@ -150,8 +154,8 @@ export const useProxyRangeFieldVNode = (h: CreateElement, {
       return vnode;
     }
 
-    const propData: Record<string, any> = vnode.componentOptions.propsData || {};
-    const listeners: Record<string, any> = vnode.componentOptions.listeners || {};
+    const propData: Record<string, any> = vnode.componentOptions?.propsData || {};
+    const listeners: Record<string, any> = vnode.componentOptions?.listeners || {};
 
     const formRangeField: FormRangeField = initFormRangeField({
       uid: unref(fieldName),
@@ -188,15 +192,7 @@ export const useProxyRangeFieldVNode = (h: CreateElement, {
       formRangeField.setChangeListener(null, null);
     });
 
-    return h(vnode.componentOptions.tag, {
-      attrs: vnode.data.attrs,
-      props: { ...propData },
-      on: listeners,
-      nativeOn: vnode.data.nativeOn,
-      scopedSlots: vnode.data.scopedSlots,
-      staticClass: vnode.data.staticClass,
-      staticStyle: vnode.data.staticStyle,
-    }, vnode.componentOptions.children || []);
+    return cloneComponentVNode(h, vnode, { propData, listeners });
   };
 
   const clearOnRerender = () => {
