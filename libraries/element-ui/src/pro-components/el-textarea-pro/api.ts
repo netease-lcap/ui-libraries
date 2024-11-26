@@ -4,7 +4,10 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 4,
     ideusage: {
-      idetype: 'element'
+      idetype: 'element',
+      "additionalAttribute": {
+        "autofocus": "\"false\""
+      },
     }
   })
   @Component({

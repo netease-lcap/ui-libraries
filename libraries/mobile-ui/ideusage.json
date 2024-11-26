@@ -639,6 +639,7 @@
                 "reference": true
             },
             "events": {
+                "mousedown": true,
                 "click": true
             },
             "eventsEffect": "reference",
@@ -812,7 +813,7 @@
                 "dismiss": "this.getDefaultElements().length > 0 && !this.getAttribute('dataSource')",
                 "display": 3,
                 "loopRule": "nth-child(n+2)",
-                "loopElem": "[class^='van-radio-group']:not([data-nodepath]",
+                "loopElem": "[class^='van-radio-group']:not([data-nodepath])",
                 "emptySlot": {
                     "display": "inline",
                     "condition": "!this.getAttribute('dataSource')",

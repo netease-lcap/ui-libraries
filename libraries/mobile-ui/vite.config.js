@@ -127,7 +127,7 @@ export default defineConfig(({ command }) => {
             },
             VanCountDownNew: {
               mainSelectorMap: {
-                '.count-down-new': true,
+                '[class*=count-down-new]': true,
               },
             },
             VanDatetimePicker: {
@@ -214,6 +214,19 @@ export default defineConfig(({ command }) => {
             VanDialog: {
               mainSelectorMap: {
                 '.dialogchild': false,
+              },
+            },
+            VanSearch: {
+              depCompList: ['VanField'],
+            },
+            VanFieldtextarea: {
+              selectorPrefixMap: {
+                'van-fieldtextarea__newwrap': true,
+              },
+            },
+            VanFieldinput: {
+              selectorPrefixMap: {
+                'van-fieldinput__newwrap': true,
               },
             },
           },

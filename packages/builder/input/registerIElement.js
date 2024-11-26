@@ -292,7 +292,7 @@ export default function registerIElement(methods, options = {}) {
         const filterText = `._${selectedElementState}`;
         matchedSelectors = selectors.filter((selector) => selector.includes(filterText) && el.matches(selector));
       } else {
-        matchedSelectors = selectors.filter((selector) => !/._hover|._active|._focus/g.test(selector) && el.matches(selector));
+        matchedSelectors = selectors.filter((selector) => !/\._hover|\._active|\._focus/g.test(selector) && el.matches(selector));
       }
     }
 

@@ -37,7 +37,7 @@ export const isFormVNode = (vnode: VNode) => {
 
 export const cloneComponentVNode = (h: CreateElement, vnode: VNode, { propData, listeners }) => {
   if (!vnode.componentOptions || !vnode.componentOptions.Ctor) {
-    return;
+    return vnode;
   }
 
   return h(vnode.componentOptions.Ctor, {
@@ -61,7 +61,7 @@ export function splitNameToPath(name) {
 
 export const getNotUndefinedValue = (v, initV = null) => (v === undefined ? initV : v);
 
-export function deepVueSet(data: any, name: string, value = null) {
+export function deepVueSet(data: any, name: string, value: any = null) {
   const keys = splitNameToPath(name);
   let current = data;
   while (true) {
@@ -85,7 +85,7 @@ export function deepVueSet(data: any, name: string, value = null) {
   }
 }
 
-export const normalizeRangeFieldValue = (startValue, endValue) => {
+export const normalizeRangeFieldValue = (startValue: any, endValue: any) => {
   if (isNil(startValue) && isNil(endValue)) {
     return null;
   }

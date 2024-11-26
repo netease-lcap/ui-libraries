@@ -182,7 +182,7 @@ export default defineConfig(({ command }) => {
               selectorPrefixMap: {
                 'narrow-scrollbar': true,
               },
-              depCompList: ['ElTreePro', 'ElSelectPro'],
+              depCompList: ['ElTreePro', 'ElSelectPro', 'ElInputPro'],
             },
             ElDatePickerPro: {
               mainSelectorMap: {

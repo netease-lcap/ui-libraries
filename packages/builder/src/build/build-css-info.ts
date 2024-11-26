@@ -5,6 +5,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import * as postcss from 'postcss';
+import { parse } from 'postcss-values-parser';
 import { camelCase, kebabCase, capitalize } from 'lodash';
 import type {
   LcapBuildOptions, CSSValue, CSSRule, SupportedCSSProperty,
@@ -12,6 +13,10 @@ import type {
 
 function sortMap(map: Record<string, any>) {
   return Object.fromEntries(Object.entries(map).sort(([a], [b]) => a.localeCompare(b)));
+}
+
+function getChildrenValue(val: Record<string, any>) {
+  return val.nodes.map((node) => node.toString());
 }
 
 function parseCSSInfo(cssContent: string, componentNameMap: Record<string, string | undefined>, cssRulesDesc: Record<string, Record<string, string>>, options: LcapBuildOptions) {
@@ -170,7 +175,10 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
         if (decl.prop === 'background') {
           parsedStyle.backgroundColor = patchImportant({ defaultValue: decl.value });
         } else if (decl.prop === 'border') {
-          const arr = value.split(/\s+/);
+          if (value === undefined || value === null) return;
+          const parseVal = parse(value);
+          const arr = getChildrenValue(parseVal);
+          // const arr = value.split(/\s+/);
           if (arr.length < 3) return;
           const [borderWidth, borderStyle, borderColor] = arr;
           parsedStyle.borderLeftWidth = patchImportant({ defaultValue: borderWidth });
@@ -189,14 +197,20 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
           (match = decl.prop.match(/^border-(left|right|top|bottom)$/))
         ) {
           const borderProp = match[1];
-          const arr = value.split(/\s+/);
+          if (value === undefined || value === null) return;
+          const parseVal = parse(value);
+          const arr = getChildrenValue(parseVal);
+          // const arr = value.split(/\s+/);
           if (arr.length < 3) return;
           const [borderWidth, borderStyle, borderColor] = arr;
           parsedStyle[`border${capitalize(borderProp)}Width`] = patchImportant({ defaultValue: borderWidth });
           parsedStyle[`border${capitalize(borderProp)}Style`] = patchImportant({ defaultValue: borderStyle });
           parsedStyle[`border${capitalize(borderProp)}Color`] = patchImportant({ defaultValue: borderColor });
         } else if (decl.prop === 'margin') {
-          const arr = value.split(/\s+/);
+          if (value === undefined || value === null) return;
+          const parseVal = parse(value);
+          const arr = getChildrenValue(parseVal);
+          // const arr = value.split(/\s+/);
           if (arr.length === 1) {
             parsedStyle.marginTop = patchImportant({ defaultValue: arr[0] });
             parsedStyle.marginRight = patchImportant({ defaultValue: arr[0] });
@@ -219,7 +233,10 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
             parsedStyle.marginLeft = patchImportant({ defaultValue: arr[3] });
           }
         } else if (decl.prop === 'padding') {
-          const arr = value.split(/\s+/);
+          if (value === undefined || value === null) return;
+          const parseVal = parse(value);
+          const arr = getChildrenValue(parseVal);
+          // const arr = value.split(/\s+/);
           if (arr.length === 1) {
             parsedStyle.paddingTop = patchImportant({ defaultValue: arr[0] });
             parsedStyle.paddingRight = patchImportant({ defaultValue: arr[0] });
@@ -242,7 +259,10 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
             parsedStyle.paddingLeft = patchImportant({ defaultValue: arr[3] });
           }
         } else if (decl.prop === 'border-radius') {
-          const arr = value.split(/\s+/);
+          if (value === undefined || value === null) return;
+          const parseVal = parse(value);
+          const arr = getChildrenValue(parseVal);
+          // const arr = value.split(/\s+/);
           if (arr.length === 1) {
             parsedStyle.borderTopLeftRadius = patchImportant({ defaultValue: arr[0] });
             parsedStyle.borderTopRightRadius = patchImportant({ defaultValue: arr[0] });
