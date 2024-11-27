@@ -1,5 +1,5 @@
 import type { MapGet } from '@lcap/vue2-utils/plugins/types';
-import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
+import { $deletePropList, type NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
 import _, { camelCase, isFunction } from 'lodash';
 import { getCurrentInstance, onMounted, onUpdated } from '@vue/composition-api';
 import { VNode } from 'vue';
@@ -37,6 +37,9 @@ export const useSetDialogStyles = (props: MapGet) => {
 export const usePopconfirm: NaslComponentPluginOptions = {
   setup: (props) => {
     useSetDialogStyles(props);
+    return {
+      [$deletePropList]: ['dialogStyle']
+    };
   },
 };
 

@@ -1,6 +1,6 @@
 /* 组件功能扩展插件 */
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
-import { $ref } from '@lcap/vue2-utils/plugins/index';
+import { $deletePropList, $ref } from '@lcap/vue2-utils/plugins/index';
 import _, { camelCase } from 'lodash';
 import { useUpdateSync } from '@lcap/vue2-utils';
 import type { MapGet } from '@lcap/vue2-utils/plugins/types';
@@ -54,6 +54,7 @@ export const useDialog: NaslComponentPluginOptions = {
           opened.value = false;
         },
       },
+      [$deletePropList]: ['dialogStyle'],
     };
   },
 };
