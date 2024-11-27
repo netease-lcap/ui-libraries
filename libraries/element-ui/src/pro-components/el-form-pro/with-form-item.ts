@@ -172,7 +172,7 @@ export const WithFormItem = (Component: any, { name, methodNames = [] }: WithFor
           ...attrs.input,
           ...(inputRoot ? attrs.root : {}),
         },
-        style: {
+        staticStyle: {
           ...inputStyle,
           ...varMap,
         },
