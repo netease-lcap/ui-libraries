@@ -757,6 +757,8 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
       structured: true,
       childAccept: "target.tag === 'el-option-pro'",
       events: {

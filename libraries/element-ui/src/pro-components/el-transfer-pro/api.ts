@@ -268,6 +268,8 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
       displaySlotConditions: {
         option: "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
       },

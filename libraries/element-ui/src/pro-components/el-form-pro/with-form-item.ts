@@ -3,6 +3,7 @@ import Vue, { ComponentOptions } from 'vue';
 import { type ScopedSlot } from 'vue/types/vnode';
 import { IN_ELEMENT_FORM, IN_ELEMENT_FORM_ITEM } from './constants';
 import { isModelOption, isRangeModelOption } from './utils';
+import { getVarMapAndClass } from '@/utils/style';
 
 export const FormItemProps = [
   'name',
@@ -125,6 +126,11 @@ export const WithFormItem = (Component: any, { name, methodNames = [] }: WithFor
         default: false,
       },
     },
+    props: {
+      inputStyle: {
+        type: Object,
+      },
+    },
     created() {
       const ctx = this as any;
       methodNames.forEach((key) => {
@@ -154,17 +160,23 @@ export const WithFormItem = (Component: any, { name, methodNames = [] }: WithFor
       }
     },
     render(h) {
-      const { $attrs, $listeners, $scopedSlots, inForm, inFormItem } = this as any;
+      const { $attrs, $listeners, $scopedSlots, inForm, inFormItem, inputStyle } = this as any;
       const attrs = getAttrs($attrs);
       const listeners = getListeners($listeners);
       const slots = getSlots($scopedSlots);
       const inputRoot = !inForm || inFormItem;
+      const { varMap, classList } = getVarMapAndClass(inputStyle);
 
       const inputElement = h(Component, {
         attrs: {
           ...attrs.input,
           ...(inputRoot ? attrs.root : {}),
         },
+        style: {
+          ...inputStyle,
+          ...varMap,
+        },
+        class: [...classList, '__cw-form-compose-input'].join(' '),
         on: listeners.input,
         ref: 'formInput',
         scopedSlots: slots.input,

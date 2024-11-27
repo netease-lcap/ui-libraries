@@ -287,7 +287,7 @@ namespace nasl.ui {
     })
     minCollapsedNum: nasl.core.Decimal;
 
- 
+
 
     // @Prop({
     //   group: '主要属性',
@@ -556,6 +556,8 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
       ignoreProperty: ['rules'],
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
