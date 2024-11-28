@@ -167,7 +167,7 @@ export default defineConfig(({ command }) => {
                 '.van-cascader__popup': true,
                 '.van-cascader__wrapppcascader': true,
               },
-              depCompList: ['VanCell'],
+              depCompList: ['VanCell', 'VanSearch', 'VanTabs', 'VanTab'],
             },
             VanCalendar: {
               selectorPrefixMap: {

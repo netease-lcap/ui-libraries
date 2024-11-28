@@ -19,6 +19,10 @@ function getChildrenValue(val: Record<string, any>) {
   return val.nodes.map((node) => node.toString());
 }
 
+function isStartWithPrefix(hiddenSelectorPreFixList, selectorKey) {
+  return hiddenSelectorPreFixList.some((selectorPrefix) => selectorKey.startsWith(selectorPrefix) || selectorKey.startsWith(`[class*=${selectorPrefix}`));
+}
+
 function parseCSSInfo(cssContent: string, componentNameMap: Record<string, string | undefined>, cssRulesDesc: Record<string, Record<string, string>>, options: LcapBuildOptions) {
   const componentNames = Object.keys(componentNameMap);
   const allCSSDescMap = Object.values(cssRulesDesc).reduce((acc, item) => Object.assign(acc, item), {});
@@ -391,6 +395,31 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
   if (options.reportCSSInfo?.verbose) {
     componentNames.forEach((componentName) => {
       if (!componentCSSInfoMap[componentName]) console.log(`[WARN] 组件 ${componentName} 上未匹配到任何选择器`);
+    });
+  }
+
+  //  过滤掉需要隐藏的选择器
+  if (options.reportCSSInfo?.extraComponentMap) {
+    const compKeys = Object.keys(options.reportCSSInfo.extraComponentMap);
+    compKeys.forEach((curCompName) => {
+      const hiddenSelectorPreFixList = options.reportCSSInfo?.extraComponentMap?.[curCompName]?.hiddenSelectorPreFixList;
+      if (hiddenSelectorPreFixList) {
+        const compCssDesc = cssRulesDesc[curCompName];
+        const compCssInfo = componentCSSInfoMap[curCompName];
+        Object.keys(compCssDesc).forEach((selectorKey) => {
+          if (isStartWithPrefix(hiddenSelectorPreFixList, selectorKey)) {
+            delete compCssDesc[selectorKey];
+          }
+        });
+        Object.keys(compCssInfo.mainSelectorMap).forEach((selectorKey) => {
+          if (isStartWithPrefix(hiddenSelectorPreFixList, selectorKey)) {
+            delete compCssInfo.mainSelectorMap[selectorKey];
+          }
+        });
+        compCssInfo.cssRules = compCssInfo.cssRules.filter((rule) => {
+          return !isStartWithPrefix(hiddenSelectorPreFixList, rule.selector);
+        });
+      }
     });
   }
 

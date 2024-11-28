@@ -74,6 +74,10 @@ export interface LcapBuildOptions {
        * 比如 UTreeSelectNew依赖了UTreeViewNew，需要补充UTreeViewNew
        */
       depCompList?: Array<string | DepCompListInfo>;
+      /**
+       * 需要隐藏的选择器前缀列表
+       */
+      hiddenSelectorPreFixList?: Array<string>;
     }>;
     inferSelectorComponentName?: (selector: string, componentNameMap: Record<string, string | undefined>) => string | undefined; // 重写推断选择器是哪个组件的方法。很复杂！建议优先走上面的配置
     isSelectorStartRoot?: (selector: string, componentName: string, parentName: string | undefined) => boolean; // 重写判断选择器是否是根节点。很复杂！建议优先走上面的配置
