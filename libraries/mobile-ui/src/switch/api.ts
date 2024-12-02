@@ -60,6 +60,38 @@ namespace nasl.ui {
       settable: true,
     })
     readonly: nasl.core.Boolean = false;
+    @Prop({
+      group: '交互属性',
+      title: '显示开关文字',
+      description: '是否显示开关文字',
+      setter: {
+        concept: "SwitchSetter"
+      },
+    })
+    showText: nasl.core.Boolean = false;
+
+    @Prop<VanSwitchOptions, 'activeText'>({
+      group: '交互属性',
+      title: '开启文字',
+      description: '开启时显示的文字',
+      setter: {
+        concept: "SwitchSetter"
+      },
+      if: _ => _.showText === true
+    })
+    activeText: nasl.core.String = 'ON';
+
+    @Prop<VanSwitchOptions, 'inactiveText'>({
+      group: '交互属性',
+      title: '关闭文字',
+      description: '关闭时显示的文字',
+      setter: {
+        concept: "SwitchSetter"
+      },
+      if: _ => _.showText === true
+    })
+    inactiveText: nasl.core.String = 'OFF';
+
     @Event({
       title: '点击',
       description: '点击时触发'

@@ -600,6 +600,9 @@
   --van-switch-disabled-opacity: var(
     --van-component-disabled-opacity
   ); /* @desc 禁用态透明度 */
+  --van-switch-text-size: 12px; /* @desc 文字大小 */
+  --van-switch-text-active-color: #fff; /* @type color */ /* @desc 激活态文字颜色 */
+  --van-switch-text-inactive-color: #ccc; /* @type color */ /* @desc 关闭态文字颜色 */
 
   /* @component van-tabbar */
   --van-tabbar-height: 50px; /* @desc 高度 */ /* @excludeTags van-tabbar-item */  /* @depStaticStyles ["height"] */

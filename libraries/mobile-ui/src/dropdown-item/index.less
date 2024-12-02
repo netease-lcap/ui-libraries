@@ -36,5 +36,20 @@
   &__content {
     position: absolute !important;
     max-height: @dropdown-menu-content-max-height !important;
+
+    // inDesigner
+    &--hasData > :not(:first-child) {
+      position: relative;
+    }
+    &--hasData > :not(:first-child)::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.8);
+    }
   }
 }

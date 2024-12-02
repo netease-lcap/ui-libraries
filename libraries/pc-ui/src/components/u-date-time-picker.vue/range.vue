@@ -376,7 +376,7 @@ export default {
             let formatter;
 
             if (this.advancedFormatEnable && this.advancedFormatValue) { // 高级格式化开启
-                formatter = advancedFormatValue;
+                formatter = this.advancedFormatValue;
             } else if (this.showDateFormatter || this.showTimeFormatter) { // 配置的展示格式满足
                 formatter = `${this.showDateFormatter} `;
 

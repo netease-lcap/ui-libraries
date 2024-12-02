@@ -29,4 +29,16 @@ export const switchProps = {
     type: null as any,
     default: false,
   },
+  showText: {
+    type: Boolean,
+    default: false,
+  },
+  activeText: {
+    type: String,
+    default: 'ON',
+  },
+  inactiveText: {
+    type: String,
+    default: 'OFF',
+  },
 };

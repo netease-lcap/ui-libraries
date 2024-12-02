@@ -72,14 +72,14 @@ namespace nasl.ui {
         code: '<van-dropdown-item title="标题"><van-dropdown-item-son clickable :isLink="false"><template #title>标题</template></van-dropdown-item-son></van-dropdown-item>'
       }]
     })
-    slotDefault: () => Array<VanDropdownItem>;
+    slotDefault: () => Array<VanDropdownItem<any>>;
   }
   @Component({
     title: '菜单项',
     group: "Navigation"
   })
-  export class VanDropdownItem extends ViewComponent {
-    constructor(options?: Partial<VanDropdownItemOptions>) {
+  export class VanDropdownItem<T> extends ViewComponent {
+    constructor(options?: Partial<VanDropdownItemOptions<T>>) {
       super();
     }
     @Method({
@@ -94,7 +94,21 @@ namespace nasl.ui {
       show?: nasl.core.Boolean
     ): any {}
   }
-  export class VanDropdownItemOptions extends ViewComponentOptions {
+  export class VanDropdownItemOptions<T> extends ViewComponentOptions {
+    @Prop({
+      group: '数据属性',
+      title: '数据源',
+      description: '展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑。',
+      designerValue: [{}, {}, {}]
+    })
+    dataSource: nasl.collection.List<T> | { total: nasl.core.Integer; list: nasl.collection.List<T> };
+    @Prop({
+      group: '数据属性',
+      title: '数据类型',
+      description: '集合类型每一元素的数据类型'
+    })
+    dataSchema: T;
+
     @Prop({
       group: '数据属性',
       title: '值',
@@ -151,6 +165,12 @@ namespace nasl.ui {
       }]
     })
     slotDefault: () => Array<VanDropdownItemSon>;
+
+    @Slot({
+      title: '组件插槽',
+      description: '自定义结构和样式'
+    })
+    slotItem: (current: Current<T>) => Array<ViewComponent>;
   }
   @Component({
     title: '菜单子项',

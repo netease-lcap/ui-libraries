@@ -397,6 +397,10 @@ export default {
         checkControlled(checked) {
             this.currentChecked = checked;
             this.$emit('update:checked', checked, this);
+            if (this.rootVM.isDataCheckMode()) {
+              return;
+            }
+
             if (
                 checked
                 && !this.rootVM.currentValues.includes(this.value)
@@ -462,7 +466,9 @@ export default {
                 return;
             }
 
-            if (this.rootVM.checkControlled) {
+            if (this.rootVM.isDataCheckMode()) {
+               return this.rootVM.check(this, checked, oldChecked);
+            } else if (this.rootVM.checkControlled) {
                 this.checkControlled(checked);
             } else {
                 this.checkRecursively(checked);

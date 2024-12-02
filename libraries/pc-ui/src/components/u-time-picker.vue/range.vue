@@ -305,8 +305,14 @@ export default {
             this.$emit('toggle', e, this);
         },
         clearValue() {
-            this.$refs.startPopper && this.$refs.startPopper.clearValue();
-            this.$refs.endPopper && this.$refs.endPopper.clearValue();
+          if (this.$refs.startPopper) {
+            this.$refs.startPopper.clearValue();
+            this.$refs.startPopper.emitValue();
+          }
+          if (this.$refs.endPopper) {
+            this.$refs.endPopper.clearValue();
+            this.$refs.endPopper.emitValue();
+          }
         },
         setPopperWidth() {
           if (this.appendTo !== 'body') {

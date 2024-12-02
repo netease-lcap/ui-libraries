@@ -1,5 +1,29 @@
 <template>
   <demo-section>
+    <demo-block title="数据源">
+      <van-dropdown-menu>
+        <van-dropdown-item value="a">
+          <van-dropdown-item-son clickable title="a" value="a"></van-dropdown-item-son>
+          <van-dropdown-item-son clickable title="b" value="b"></van-dropdown-item-son>
+          <van-dropdown-item-son clickable title="c" value="c"></van-dropdown-item-son>
+        </van-dropdown-item>
+        <van-dropdown-item :data-source="[{ id: 'a', name: 'a' }, { id: 'b', name: 'b' }]">
+          <van-dropdown-item-son clickable title="a" value="a"></van-dropdown-item-son>
+          <van-dropdown-item-son clickable title="b" value="b"></van-dropdown-item-son>
+          <van-dropdown-item-son clickable title="c" value="c"></van-dropdown-item-son>
+          <template #item="current">
+            <van-dropdown-item-son
+              clickable
+              :isLink="false"
+              notitle
+              :value="current.item.id"
+              :title="current.item.name"
+            ></van-dropdown-item-son>
+          </template>
+        </van-dropdown-item>
+      </van-dropdown-menu>
+    </demo-block>
+
     <demo-block :title="t('basicUsage')">
       <van-dropdown-menu :value.sync="menuvalue">
         <van-dropdown-item :valueprop.sync="itemvalue">
@@ -23,6 +47,7 @@
         </van-dropdown-item>
       </van-dropdown-menu>
     </demo-block>
+
     <demo-block :title="t('basicUsage')">
       <van-dropdown-menu>
         <van-dropdown-item  :options="option1" />

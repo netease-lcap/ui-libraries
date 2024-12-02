@@ -41,6 +41,7 @@ import { sync } from '@lcap/vue2-utils';
 import { isEqual, isNil } from 'lodash';
 import { MRoot } from '../m-root.vue';
 import MField from '../m-field.vue';
+import { getCheckInfo, addChildrenValues, removeChildrenValues, filterParentValues } from './utils';
 import UTreeViewNodeNew from '../u-tree-view-new.vue/node.vue';
 
 export default {
@@ -277,35 +278,57 @@ export default {
             }
         },
         watchValues(values) {
+            if (this.isDataCheckMode()) {
+              const { checkedList, halfCheckList, checkedValues } = getCheckInfo(
+                this.currentDataSource.data,
+                values || this.currentValues,
+                { valueField: this.valueField, childrenField: this.childrenField, disabledField: this.disabledField },
+              );
+
+              this.walkNodes(this.nodeVMs, (nodeVM) => {
+                if (halfCheckList.includes(nodeVM.value)) {
+                  nodeVM.checkControlled(null);
+                } else {
+                  nodeVM.checkControlled(checkedList.includes(nodeVM.value));
+                }
+              });
+              this.currentValues = checkedValues;
+
+              if (!isEqual(this.currentValues, values)) {
+                this.$emit('update:value', this.currentValues, this);
+              }
+              return;
+            }
+
             if (values) {
-                this.currentValues = Array.isArray(values) ? [...values] : [values];
-                const removeParentValues = [];
-                this.walkNodes(this.nodeVMs, (nodeVM) => {
-                    if (values.includes(nodeVM.value)) {
-                        nodeVM.check(true, true);
-                        if (nodeVM.nodeVMs.length > 0 && !this.checkControlled) {
-                          removeParentValues.push(nodeVM.value);
-                        }
+              this.currentValues = Array.isArray(values) ? [...values] : [values];
+                  const removeParentValues = [];
+                  this.walkNodes(this.nodeVMs, (nodeVM) => {
+                      if (values.includes(nodeVM.value)) {
+                          nodeVM.check(true, true);
+                          if (nodeVM.nodeVMs.length > 0 && !this.checkControlled) {
+                            removeParentValues.push(nodeVM.value);
+                          }
+                          return;
+                      }
+
+                      if (this.checkControlled) {
+                        nodeVM.check(false, true);
                         return;
-                    }
+                      }
 
-                    if (this.checkControlled) {
-                      nodeVM.check(false, true);
-                      return;
-                    }
+                      if (!nodeVM.nodeVMs.length) {
+                        nodeVM.check(false, true);
+                      }
+                  });
 
-                    if (!nodeVM.nodeVMs.length) {
-                      nodeVM.check(false, true);
+                  // 移除父级有值
+                  removeParentValues.forEach((v) => {
+                    const index = this.currentValues.indexOf(v);
+                    if (index !== -1) {
+                      this.currentValues.splice(index, 1);
                     }
-                });
-
-                // 移除父级有值
-                removeParentValues.forEach((v) => {
-                  const index = this.currentValues.indexOf(v);
-                  if (index !== -1) {
-                    this.currentValues.splice(index, 1);
-                  }
-                });
+                  });
 
                 if (!isEqual(this.currentValues, values)) {
                   this.$emit('update:value', this.currentValues, this);
@@ -327,6 +350,22 @@ export default {
                     this.$emit('update:value', this.currentValues, this);
                 }
             }
+        },
+        isDataCheckMode() {
+          return this.renderOptimize && this.dataSource && this.currentDataSource && this.currentDataSource.data && !this.checkControlled;
+        },
+        check(nodeVM, checked, oldChecked) {
+          nodeVM.checkRecursively(checked);
+          const checkSet = new Set([...this.currentValues]);
+          const keys = { childrenField: this.childrenField, valueField: this.valueField, disabledField: this.disabledField };
+          if (checked) {
+            addChildrenValues(nodeVM.node, checkSet, keys);
+          } else {
+            removeChildrenValues(nodeVM.node, checkSet, keys);
+          }
+
+          this.currentValues = filterParentValues(this.currentDataSource.data, [...checkSet], keys);
+          this.onCheck(nodeVM, checked, oldChecked);
         },
         select(nodeVM) {
             if (this.readonly || this.disabled)
@@ -388,7 +427,6 @@ export default {
             this.walk((nodeVM) => nodeVM.toggle(expanded)); // @TODO: Only one event
         },
         onCheck(nodeVM, checked, oldChecked) {
-            // console.log('click', this.currentValues);
             this.$emit('update:value', this.currentValues, this);
             this.$emit(
                 'check',
