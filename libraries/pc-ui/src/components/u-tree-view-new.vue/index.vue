@@ -281,7 +281,7 @@ export default {
             if (this.isDataCheckMode()) {
               const { checkedList, halfCheckList, checkedValues } = getCheckInfo(
                 this.currentDataSource.data,
-                values || this.currentValues,
+                values || this.currentValues || [],
                 { valueField: this.valueField, childrenField: this.childrenField, disabledField: this.disabledField },
               );
 
