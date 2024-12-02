@@ -4,9 +4,7 @@
   &__newwrap {
     display: block;
     width: 100%;
-    &--limit {
-      position: relative;
-    }
+
     &--clearwrap {
       position: relative;
       // padding-right: 5px;
@@ -18,7 +16,6 @@
   }
   &__control {
     overflow-y: hidden;
-    display: block;
     box-sizing: border-box;
     width: 100%;
     min-width: 0; // for flex-shrink in field__button
@@ -30,6 +27,12 @@
     background-color: transparent;
     border: 0;
     resize: none;
+
+    // 原custom搬过来
+    display: flex;
+    align-items: center;
+    min-height: var(--van-fieldtextarea-line-height);
+    height: 100%;
 
     &::placeholder {
       color: var(--van-fieldtextarea-placeholder-color);
@@ -57,27 +60,8 @@
       text-align: right;
     }
 
-    &--custom {
-      display: flex;
-      align-items: center;
-      min-height: var(--van-fieldtextarea-line-height);
-      height: 100%;
-    }
-
     &--min-height {
       min-height: @field-text-area-min-height;
-    }
-
-    // for ios wechat
-    &[type='date'],
-    &[type='time'],
-    &[type='datetime-local'] {
-      min-height: var(--van-fieldtextarea-line-height);
-    }
-
-    // for safari
-    &[type='search'] {
-      -webkit-appearance: none;
     }
   }
   &__clear {

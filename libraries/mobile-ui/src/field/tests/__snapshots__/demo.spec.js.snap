@@ -34,7 +34,7 @@ exports[`renders demo correctly 1`] = `
       <div class="van-cellson__value van-field__value">
         <div class="van-field__body">
           <div class="van-fieldtextarea__newwrap van-fieldtextarea__newwrap--clearwrap van-fieldtextarea__newwrap--limit">
-            <div class="van-fieldtextarea__wrap-con"><textarea role="fieldtextarea" placeholder="" class="van-fieldtextarea__control van-fieldtextarea__control--custom" style="height: auto;"></textarea></div>
+            <div class="van-fieldtextarea__wrap-con"><textarea role="fieldtextarea" placeholder="" class="van-fieldtextarea__control" style="height: auto;"></textarea></div>
             <div class="van-fieldtextarea__word-limit"><span class="van-fieldtextarea__word-num">0</span>/100</div>
           </div>
         </div>
