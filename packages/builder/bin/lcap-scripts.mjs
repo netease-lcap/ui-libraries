@@ -13,6 +13,7 @@ const {
   deploy,
   overload,
   watch,
+  create,
 } = commands;
 
 // eslint-disable-next-line no-underscore-dangle
@@ -59,6 +60,16 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
     .option('--bucket <bucket>', '发布 bucket')
     .action(async ({ ...args }) => {
       await deploy(cwd, args);
+    });
+
+  program.command('create')
+    .description('创建依赖库组件、逻辑...')
+    .option('--component', '创建组件')
+    .option('--logic', '创建逻辑')
+    .action(async (options) => {
+      await create(cwd, {
+        ...options,
+      });
     });
 
   program.command('overload')
