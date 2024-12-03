@@ -147,6 +147,10 @@ export function getCheckInfo<T, V extends string | number>(data: T[], values: V[
   const checkList = new Set<V>();
   const halfCheckList = new Set<V>();
   values.forEach((v) => {
+    if (checkList.has(v)) {
+      return;
+    }
+
     checkList.add(v);
 
     if (!dataMap[v]) {
