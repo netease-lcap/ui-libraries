@@ -279,9 +279,13 @@ export default {
         },
         watchValues(values) {
             if (this.isDataCheckMode()) {
+              if (this.currentDataSource.data.length === 0) {
+                return;
+              }
+
               const { checkedList, halfCheckList, checkedValues } = getCheckInfo(
                 this.currentDataSource.data,
-                values || this.currentValues,
+                values || this.currentValues || [],
                 { valueField: this.valueField, childrenField: this.childrenField, disabledField: this.disabledField },
               );
 

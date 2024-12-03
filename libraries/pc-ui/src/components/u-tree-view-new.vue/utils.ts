@@ -136,7 +136,11 @@ export function isDisabled<T, V extends string | number>(data: T[], v: V, {  val
 
 export function getCheckInfo<T, V extends string | number>(data: T[], values: V[], { valueField, childrenField, disabledField }) {
   if (!data || data.length === 0) {
-    return values;
+    return {
+      checkList: [...values],
+      checkedValues: values,
+      halfCheckList: [],
+    };
   }
   const dataMap: Record<V, undefined | { item: T, parent: T}> = getDataMap(data, { valueField, childrenField });
 
