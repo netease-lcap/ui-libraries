@@ -120,6 +120,17 @@ namespace nasl.ui {
         value: M extends true ? nasl.collection.List<V> : V;
 
         @Prop({
+          group: '主要属性',
+          title: '只渲染激活节点',
+          description: '设置只渲染tree激活子节点，用于渲染性能提升。',
+          docDescription: '开启后只渲染激活节点，默认关闭。',
+          setter: {
+              concept: 'SwitchSetter',
+          },
+        })
+        renderOptimize: nasl.core.Boolean = false;
+
+        @Prop({
             group: '交互属性',
             title: '父子节点独立选择',
             description: '开启后父节点选择不会全选子节点，子节点选择不会联动父节点',
