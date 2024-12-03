@@ -14,7 +14,7 @@ export const Default = {
   name: '基本用法',
   render: () => ({
     components: {
-      HelloWordCard: Component,
+      '{{tagName}}': Component,
     },
     template: '<{{tagName}}></{{tagName}}>',
   }),
