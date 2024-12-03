@@ -733,10 +733,14 @@
         "ideusage": {
             "idetype": "container",
             "parentAccept": "['u-form-group', 'u-form'].includes(target.tag)",
-            "disableSlotAutoFill": [{
-                "slot": "label",
-                "expression": "this.getAttribute('label')?.value"
-            }],
+            "disableSlotAutoFill": [
+                {
+                    "slot": "label",
+                    "expression": "this.getAttribute('label')?.value"
+                }, 
+                "description", 
+                "extra"
+            ],
             "ignoreProperty": ["rules"],
             "slotInlineStyle": {
                 "label": "min-width: 56px"
