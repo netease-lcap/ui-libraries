@@ -7,6 +7,13 @@ export default {
     description: '',
     glyphs: [
       {
+        icon_id: "42641664",
+        name: "正确",
+        font_class: "correct",
+        unicode: "e622",
+        unicode_decimal: 58914
+      },
+      {
         icon_id: '37582331',
         name: '图片',
         font_class: 'file-jpg',

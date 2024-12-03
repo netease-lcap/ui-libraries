@@ -42,5 +42,15 @@ exports[`renders demo correctly 1`] = `
       </div>
     </div>
   </div>
+  <div>
+    <div role="switch" aria-checked="true" class="van-switch van-switch--on" style="font-size: 50px;">
+      <div class="van-switch__text-wrap van-switch__text-wrap--active"><span class="van-switch__text">开开开开开开</span></div>
+      <div class="van-switch__node"></div>
+    </div>
+    <div role="switch" aria-checked="true" class="van-switch van-switch--on van-switch--disabled">
+      <div class="van-switch__text-wrap van-switch__text-wrap--active"><span class="van-switch__text">ON</span></div>
+      <div class="van-switch__node"></div>
+    </div>
+  </div>
 </div>
 `;

@@ -167,7 +167,7 @@ export default defineConfig(({ command }) => {
                 '.van-cascader__popup': true,
                 '.van-cascader__wrapppcascader': true,
               },
-              depCompList: ['VanCell'],
+              depCompList: ['VanCell', 'VanSearch', 'VanTabs', 'VanTab'],
             },
             VanCalendar: {
               selectorPrefixMap: {
@@ -218,6 +218,16 @@ export default defineConfig(({ command }) => {
             },
             VanSearch: {
               depCompList: ['VanField'],
+            },
+            VanFieldtextarea: {
+              selectorPrefixMap: {
+                'van-fieldtextarea__newwrap': true,
+              },
+            },
+            VanFieldinput: {
+              selectorPrefixMap: {
+                'van-fieldinput__newwrap': true,
+              },
             },
           },
         },

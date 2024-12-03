@@ -83,6 +83,16 @@ export default createComponent({
         aria-checked={String(checked)}
         onClick={this.onClick}
       >
+        {this.showText && (
+          <div
+            class={bem('text-wrap', {
+              active: checked,
+              inactive: !checked,
+            })}
+          >
+            <span class={bem('text')}>{checked ? this.activeText : this.inactiveText}</span>
+          </div>
+        )}
         <div class={bem('node')}>{this.genLoading()}</div>
       </div>
     );

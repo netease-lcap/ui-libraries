@@ -79,7 +79,7 @@ namespace nasl.ui {
             docDescription: '弹出框的标题，显示在弹出框内容上方',
             implicitToString: true,
         })
-        title: nasl.core.String = '标题';
+        title: nasl.core.String;
 
         @Prop({
             group: '主要属性',

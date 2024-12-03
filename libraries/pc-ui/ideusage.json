@@ -1259,6 +1259,7 @@
                 }
             ],
             "events": {
+                "mousedown": true,
                 "click": true
             }
         }

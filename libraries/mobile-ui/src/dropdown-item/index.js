@@ -1,10 +1,11 @@
 // Utils
-import { createNamespace, isDef} from '../utils';
+import { createNamespace, isDef } from '../utils';
 import { on, off } from '../utils/dom/event';
 
 // Mixins
 import { PortalMixin } from '../mixins/portal';
 import { ChildrenMixin, ParentMixin } from '../mixins/relation';
+import DataSourceMixin from '../mixins/DataSource';
 
 // Components
 import DropdownItemSon from '../dropdown-menu/son';
@@ -18,6 +19,7 @@ export default createComponent({
     PortalMixin({ ref: 'wrapper' }),
     ChildrenMixin('vanDropdownMenu'),
     ParentMixin('vanDropdownMenuItem'),
+    DataSourceMixin,
   ],
 
   props: {
@@ -79,18 +81,18 @@ export default createComponent({
   methods: {
     displayTitle() {
       const match1 = this.children.filter(
-        (option) => (option.value ?? option.index) === this.currentValue
+        (option) => (option.value ?? option.index) === this.currentValue,
       );
       const match = this.options.filter(
-        (option) => isDef(option.value) && option.value === this.currentValue
+        (option) => isDef(option.value) && option.value === this.currentValue,
       );
       return match1.length
         ? match1[0].title
         : match.length
-        ? match[0].text
-        : this.title
-        ? this.title
-        : '';
+          ? match[0].text
+          : this.title
+            ? this.title
+            : '';
     },
     // @exposed-api
     toggle(show = !this.showPopup, options = {}) {
@@ -123,6 +125,13 @@ export default createComponent({
         event.stopPropagation();
       }
     },
+
+    // 有数据源
+    renderDataSource() {
+      return this.currentData?.map((item, index) => {
+        return this.slots('item', { item, index });
+      });
+    },
   },
 
   render() {
@@ -150,7 +159,7 @@ export default createComponent({
           title={option.text}
           class={bem('option', { active })}
           style={{ color: active ? activeColor : '' }}
-          novalue={true}
+          novalue
           onClick={() => {
             this.showPopup = false;
             if (option.value !== this.currentValue) {
@@ -174,6 +183,7 @@ export default createComponent({
     } else {
       style.bottom = `${offset}px`;
     }
+
     return (
       <div>
         <div
@@ -189,7 +199,9 @@ export default createComponent({
             vModel={this.showPopup}
             ref="popfordropdown"
             overlay={overlay}
-            class={bem('content')}
+            class={bem('content', {
+              hasData: this.inDesigner() && this.dataSource !== undefined,
+            })}
             position={direction === 'down' ? 'top' : 'bottom'}
             duration={this.transition ? duration : 0}
             lazyRender={this.lazyRender}
@@ -203,8 +215,9 @@ export default createComponent({
               this.$emit('closed');
             }}
           >
-            {Options}
-            {this.slots('default')}
+            {this.dataSource !== undefined
+              ? this.renderDataSource()
+              : [Options, this.slots('default')]}
           </Popup>
         </div>
       </div>

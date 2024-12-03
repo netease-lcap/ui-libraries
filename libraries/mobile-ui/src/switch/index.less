@@ -4,7 +4,7 @@
   position: relative;
   display: inline-block;
   box-sizing: content-box;
-  width: @switch-width;
+  min-width: @switch-width;
   height: @switch-height;
   font-size: @switch-size;
   background-color: @switch-background-color;
@@ -22,7 +22,7 @@
     background-color: @switch-node-background-color;
     border-radius: 100%;
     box-shadow: @switch-node-box-shadow;
-    transition: transform @switch-transition-duration
+    transition: all @switch-transition-duration
       cubic-bezier(0.3, 1.05, 0.4, 1.05);
   }
 
@@ -38,9 +38,8 @@
     background-color: @switch-on-background-color;
     border: calc(var(--border-width-base) * 2) solid @switch-on-background-color;
     .van-switch__node {
-      transform: translateX(
-        calc(var(--van-switch-width) - var(--van-switch-node-size))
-      );
+      left: 100%;
+      transform: translateX(-100%);
     }
 
     .van-switch__loading {
@@ -55,5 +54,28 @@
 
   &--loading {
     cursor: default;
+  }
+
+  &__text-wrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 2px;
+
+    &--active {
+      margin-right: @switch-node-size;
+      color: @switch-text-active-color;
+    }
+
+    &--inactive {
+      margin-left: @switch-node-size;
+      color: @switch-text-inactive-color;
+    }
+  }
+
+  &__text {
+    font-size: @switch-text-size;
   }
 }

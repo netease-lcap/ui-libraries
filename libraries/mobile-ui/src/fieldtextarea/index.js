@@ -31,10 +31,6 @@ export default createComponent({
     }),
   ],
   props: {
-    type: {
-      type: String,
-      default: 'textarea',
-    },
     value: {
       type: [Number, String],
     },
@@ -79,6 +75,7 @@ export default createComponent({
     },
   },
   mounted() {
+    this.updateValue(this.currentValue);
     this.$nextTick(this.adjustSize);
 
     if (this.inDesigner()) {
@@ -120,7 +117,7 @@ export default createComponent({
       this.currentValue = '';
       this.$emit('clear', this);
     },
-    updateValue(value, trigger = 'onChange') {
+    updateValue(value) {
       value = isDef(value) ? String(value) : '';
 
       const { maxlength } = this;
@@ -167,10 +164,8 @@ export default createComponent({
 
     onBlur(event) {
       this.focused = false;
-      this.updateValue(this.currentValue, 'onBlur');
+      this.updateValue(this.currentValue);
       this.$emit('blur', event);
-      // this.validateWithTrigger('onBlur');
-      // this.validateWithTriggerVusion('blur');
       this.$nextTick(this.adjustSize);
       resetScroll();
       this.vanField && this.vanField.onBlur();
@@ -203,34 +198,32 @@ export default createComponent({
       }
     },
     afterValueChange() {
-      // console.log(666);
       this.currentValue = this.value;
     },
+    // 还原vant2默认逻辑 https://github.com/youzan/vant/blob/2.x/src/field/index.js#L413
     adjustSize() {
-      const { input, wrap, limit } = this.$refs;
+      const { input } = this.$refs;
+
+      if (!input) return;
+      if (!this.autosize) return;
 
       const scrollTop = getRootScrollTop();
       input.style.height = 'auto';
 
       let height = input.scrollHeight;
 
-      // eslint-disable-next-line radix
-      const wrapHeight = parseInt(window.getComputedStyle(wrap).height);
-      if (isObject(this.autosize || input.autosize)) {
-        const { maxHeight, minHeight } = this.autosize || input.autosize;
+      if (isObject(this.autosize)) {
+        const { maxHeight, minHeight } = this.autosize;
         if (maxHeight) {
           height = Math.min(height, maxHeight);
         }
         if (minHeight) {
           height = Math.max(height, minHeight);
         }
-        input.style.overflowY = 'auto';
       }
 
       if (height) {
-        const h = wrapHeight > height ? wrapHeight : height;
-        const limitH = this.ifLimit ? parseInt(window.getComputedStyle(limit).height) : 0;
-        input.style.height = `${h - limitH}px`;
+        input.style.height = `${height}px`;
 
         // https://github.com/youzan/vant/issues/9178
         setRootScrollTop(scrollTop);
@@ -238,16 +231,9 @@ export default createComponent({
     },
   },
   watch: {
-    // value: {
-    //   handler: function (val, oldVal) {
-    //     if (isDef(val) && !equal(val, this.currentValue)) {
-    //       this.currentValue = val;
-    //     }
-    //   },
-    //   immediate: true
-    // },
     value(val) {
       this.updateValue(val);
+      this.$nextTick(this.adjustSize);
     },
     currentValue(val) {
       this.$emit('input', val);
@@ -267,7 +253,7 @@ export default createComponent({
           <div class={bem('wrap-con')}>
             <span
               ref="input"
-              class={bem('control', [inputAlign, 'custom', { 'min-height': !this.autosize }])}
+              class={bem('control', [inputAlign, { 'min-height': !this.autosize }])}
             >
               {this.currentValue || '--'}
             </span>
@@ -282,9 +268,8 @@ export default createComponent({
           <textarea
             // vShow={this.showInput}
             ref="input"
-            // type={this.type}
             role="fieldtextarea"
-            class={bem('control', [inputAlign, 'custom', { 'min-height': !this.autosize }])}
+            class={bem('control', [inputAlign, { 'min-height': !this.autosize }])}
             value={this.currentValue}
             // style={this.inputStyle}
             disabled={this.disabled}
