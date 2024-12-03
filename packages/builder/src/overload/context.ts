@@ -7,6 +7,10 @@ import type { ThemeComponentConfig, ThemeConfig } from '../build/gens/gen-theme-
 
 export interface NaslUIComponentConfig extends ViewComponentDeclaration {
   ideusage?: any;
+  show?: boolean;
+  ignore?: boolean;
+  order?: number;
+  extends?: Array<string | { name: string, excludes?: string[] }>;
   children: Array<NaslUIComponentConfig>;
 }
 

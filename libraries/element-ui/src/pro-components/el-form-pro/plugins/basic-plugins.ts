@@ -18,6 +18,7 @@ import {
   FORM_DEFAULT_LAYOUT,
   GutterType,
   FORM_CONTEXT,
+  IN_ELEMENT_FORM,
 } from '../constants';
 import type { FormExtendsContext, LayoutMode } from '../types';
 import { useForm, useFormItemControls } from '../hooks';
@@ -144,6 +145,8 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       addFormItemInstance,
       removeFormItemInstance,
     });
+
+    provide(IN_ELEMENT_FORM, true);
 
     return {
       labelWidth,

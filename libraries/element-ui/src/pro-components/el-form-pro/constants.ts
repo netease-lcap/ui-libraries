@@ -1,4 +1,6 @@
 export const FORM_CONTEXT = 'ELEMENT_PRO_FORM';
+export const IN_ELEMENT_FORM = 'IN_ELEMENT_FORM';
+export const IN_ELEMENT_FORM_ITEM = 'IN_ELEMENT_FORM_ITEM';
 export const FORM_ITEM_CONTEXT = 'ELEMENT_PRO_FORM_ITEM';
 export const FORM_DEFAULT_LAYOUT = 'linear';
 

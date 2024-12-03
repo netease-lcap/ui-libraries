@@ -476,4 +476,42 @@ namespace nasl.ui {
     })
     separate: nasl.core.Boolean;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
+      ignoreProperty: ['rules'],
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault', 'useRangeValue',
+        'startFieldName', 'endFieldName',
+        'startInitialValue', 'endInitialValue',
+      ],
+    }, {
+      name: 'ElInputPro',
+    }],
+  })
+  @Component({
+    title: '表单输入框',
+    description: '表单输入框',
+    group: 'Form',
+  })
+  export class ElFormInputPro extends ViewComponent {
+    constructor(options?: Partial<ElFormInputProOptions & ElFormItemProOptions & Omit<ElInputProOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormInputProOptions extends ViewComponentOptions {
+
+  }
 }

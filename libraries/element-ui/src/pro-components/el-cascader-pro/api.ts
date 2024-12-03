@@ -39,6 +39,12 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class ElCascaderPro<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    @Method({
+      title: '重新加载',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void { }
+
     constructor(options?: Partial<ElCascaderProOptions<T, V, P, M, C>>) {
       super();
     }
@@ -281,7 +287,7 @@ namespace nasl.ui {
     })
     minCollapsedNum: nasl.core.Decimal;
 
- 
+
 
     // @Prop({
     //   group: '主要属性',
@@ -545,5 +551,66 @@ namespace nasl.ui {
     //   description: '自定义选中项呈现的内容。',
     // })
     // slotValueDisplay: () => Array<ViewComponent>;
+  }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
+      ignoreProperty: ['rules'],
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+        option: 'width:100%;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+      events: {
+        click: true,
+      },
+      dataSource: {
+        dismiss: "!this.getAttribute('dataSource')",
+        display: 3,
+        loopRule: 'nth-last-child(-n+2)',
+        loopElem: 'li.el-p-cascader__item',
+        displayData: "\"[{value: '', label: ''}, {value:'1', label: ' '}, {value:'2', label: ' '}]\"",
+        propertyName: ':dataSource',
+      },
+      additionalAttribute: {
+        valueField: '"value"',
+        textField: '"label"',
+      },
+      displaySlotConditions: {
+        option:
+          "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
+      },
+      slotInlineStyle: {
+        option: 'min-height: 0;',
+      },
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault', 'useRangeValue',
+        'startFieldName', 'endFieldName',
+        'startInitialValue', 'endInitialValue',
+      ],
+    }, {
+      name: 'ElCascaderPro',
+    }],
+  })
+  @Component({
+    title: '表单级联选择器',
+    description: '表单级联选择器',
+    group: 'Form',
+  })
+  export class ElFormCascaderPro<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    constructor(options?: Partial<ElFormCascaderProOptions<T, V, P, M, C> & ElFormItemProOptions & Omit<ElCascaderProOptions<T, V, P, M, C>, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormCascaderProOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
+
   }
 }

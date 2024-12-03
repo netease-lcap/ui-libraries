@@ -753,4 +753,70 @@ namespace nasl.ui {
     })
     label: nasl.core.String;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
+      structured: true,
+      childAccept: "target.tag === 'el-option-pro'",
+      events: {
+        click: true,
+      },
+      displaySlotConditions: {
+        value:
+          "!!this.getAttribute('dataSource') && this.getAttribute('valueIsSlot') && this.getAttribute('valueIsSlot').value",
+        option:
+          "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
+      },
+      slotWrapperInlineStyle: {
+        option: 'width:100%;',
+        label: 'display: inline-block;',
+      },
+      slotInlineStyle: {
+        option: 'min-height: 0;',
+        value: 'min-height: 0;',
+      },
+      additionalAttribute: {
+        valueField: '"value"',
+        textField: '"text"',
+      },
+      dataSource: {
+        dismiss: "!this.getAttribute('dataSource')",
+        display: 3,
+        loopRule: 'nth-last-child(-n+2)',
+        loopElem: 'li.el-p-select-option',
+        displayData: "\"[{value: '', text: ' '},{value:'1', text: ' '}, {value:'2', text: ' '}]\"",
+        propertyName: ':dataSource',
+      },
+      ignoreProperty: ['rules'],
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault', 'useRangeValue',
+        'startFieldName', 'endFieldName',
+        'startInitialValue', 'endInitialValue',
+      ],
+    }, {
+      name: 'ElSelectPro',
+    }],
+  })
+  @Component({
+    title: '表单选择器',
+    description: '表单选择器',
+    group: 'Form',
+  })
+  export class ElFormSelectPro<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    constructor(options?: Partial<ElFormSelectProOptions<T, V, P, M, C> & ElFormItemProOptions & Omit<ElSelectProOptions<T, V, P, M, C>, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormSelectProOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
+
+  }
 }

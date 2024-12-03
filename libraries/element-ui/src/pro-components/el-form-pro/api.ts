@@ -358,7 +358,6 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
-      parentAccept: "target.tag.endsWith('el-form-pro') || target.tag.endsWith('el-form-item-pro')",
       ignoreProperty: ['rules'],
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
@@ -531,7 +530,6 @@ namespace nasl.ui {
       if: (_) => _.labelWidthType === '',
     })
     labelWidth: nasl.core.String | nasl.core.Decimal;
-
 
     @Prop({
       group: '主要属性',

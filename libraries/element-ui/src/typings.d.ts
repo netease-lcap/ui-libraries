@@ -17,8 +17,10 @@ declare namespace nasl.ui {
   export interface IDEExtraInfoOptions {
     show?: boolean;
     ignore?: boolean;
-    order?: number; /* 组件排序，默认 6 */
+    extends?: Array<string | { name: string, excludes?: string[] }>;
+    order?: number;
     ideusage?: {
+      order?: number; /* 组件排序，默认 6 */
       idetype?: 'element' | 'modal' | 'popover' | 'container' | string;
       [key: string]: any;
     }

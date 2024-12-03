@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 import glob from 'fast-glob';
-import genNaslComponentConfig from './gen-nasl-component-config';
+import genNaslComponentConfig, { processComponentConfigExtends } from './gen-nasl-component-config';
 import { getComponentPathInfo } from '../../utils/component-path';
 import logger from '../../utils/logger';
 
@@ -64,13 +64,14 @@ export default function genNaslUIConfig({
       extraConfig: extConfig,
       libInfo,
       framework,
-      components: componentConfigs,
     });
 
     if (componentConfig) {
       componentConfigs.push(componentConfig);
     }
   });
+
+  processComponentConfigExtends(componentConfigs);
 
   return componentConfigs;
 }

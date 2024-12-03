@@ -274,4 +274,59 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      structured: true,
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
+      childAccept: "target.tag === 'el-checkbox-pro'",
+      dataSource: {
+        dismiss:
+          "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        display: 3,
+        loopRule: 'nth-child(n+2)',
+        loopElem: " > .el-p-checkbox:not([data-nodepath])",
+        emptySlot: {
+          display: 'inline',
+          condition: "!this.getAttribute('dataSource')",
+          accept: false,
+          content: '请绑定数据源或插入子节点'
+        },
+        slotWrapperInlineStyle: {
+          default: 'display: inline-block;',
+        }
+      },
+      ignoreProperty: ['rules'],
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault', 'useRangeValue',
+        'startFieldName', 'endFieldName',
+        'startInitialValue', 'endInitialValue',
+      ],
+    }, {
+      name: 'ElCheckboxGroupPro',
+    }],
+  })
+  @Component({
+    title: '表单输入框',
+    description: '表单输入框',
+    group: 'Form',
+  })
+  export class ElFormCheckboxGroupPro<T, V> extends ViewComponent {
+    constructor(options?: Partial<ElFormCheckboxGroupProOptions<T, V> & ElFormItemProOptions & Omit<ElCheckboxGroupProOptions<T, V>, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormCheckboxGroupProOptions<T, V> extends ViewComponentOptions {
+  }
 }

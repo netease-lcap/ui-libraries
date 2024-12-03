@@ -1,8 +1,11 @@
 import path from 'path';
 import fs from 'fs-extra';
+import { upperFirst } from 'lodash';
 import logger from '../../utils/logger';
 import parseComponentAPI from '../../nasl/parse-component-api';
 import transformStory2Blocks from '../../nasl/story-nasl-block';
+import { NaslUIComponentConfig } from '../../overload';
+import { getComponentConfigByName } from '../../utils';
 
 function hasImg(dir) {
   return fs.existsSync(path.join(dir, '0.png'));
@@ -121,7 +124,6 @@ export default function genNaslComponentConfig({
   assetsPublicPath,
   libInfo,
   extraConfig = {},
-  components = [],
   framework = 'react',
 }: any) {
   const component: any = {
@@ -136,18 +138,6 @@ export default function genNaslComponentConfig({
     throw e;
   }
 
-  const extendsOptions = component?.extends?.map?.((item) => {
-    const targetComponents: any = components.find((el: any) => item === el.name);
-    if (!targetComponents) return {};
-    return {
-      props: targetComponents?.props ?? [],
-      events: targetComponents?.events ?? [],
-      methods: targetComponents?.methods ?? [],
-      slots: targetComponents?.slots ?? [],
-      blocks: targetComponents?.blocks ?? [],
-    };
-  });
-  extendsOptions?.forEach((options) => Object.entries(options).forEach(([key, value]: any[]) => component[key]?.push(...value)));
   if (component.apiPath && !component.show) {
     delete component.symbol;
     delete component.apiPath;
@@ -173,4 +163,62 @@ export default function genNaslComponentConfig({
   }
 
   return component;
+}
+
+export function processComponentConfigExtends(components: NaslUIComponentConfig[]) {
+  components.map((c) => {
+    const arr = [c];
+    arr.push(...c.children);
+    return arr;
+  }).flat().filter((c) => Array.isArray(c.extends) && c.extends.length > 0).forEach((component) => {
+    const extendList = (component.extends || []).map((exd) => {
+      if (typeof exd === 'string') {
+        return {
+          name: exd,
+        };
+      }
+
+      return exd;
+    });
+    extendList.forEach((exd) => {
+      const { name, excludes = [] } = exd;
+
+      if (!name) {
+        return;
+      }
+
+      const exdComp = getComponentConfigByName(name, components);
+      if (!exdComp || (exdComp.extends && exdComp.extends.length > 0)) {
+        logger.warn(`找不到 ${component.name} 继承的组件 ${name} 的配置`);
+        return;
+      }
+
+      [
+        'methods',
+        'slots',
+        'readableProps',
+        'props',
+        'events',
+      ].forEach((key) => {
+        if (!component[key]) {
+          component[key] = [];
+        }
+
+        (exdComp[key] || []).forEach((it) => {
+          const i = component[key].findIndex((c) => c.name === it.name);
+          let attrName = it.name;
+          if (key === 'slots') {
+            attrName = `slot${upperFirst(attrName)}`;
+          } else if (key === 'events') {
+            attrName = `on${upperFirst(attrName)}`;
+          }
+          if (i !== -1 || excludes.includes(attrName)) {
+            return;
+          }
+
+          component[key].push(it);
+        });
+      });
+    });
+  });
 }

@@ -582,4 +582,64 @@ namespace nasl.ui {
     // })
     // slotValueDisplay: () => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
+      events: {
+        click: true,
+      },
+      dataSource: {
+        dismiss: "!this.getAttribute('dataSource')",
+        display: 3,
+        loopRule: 'nth-last-child(-n+2)',
+        loopElem: "div.el-p-tree__item",
+        displayData: "\"[{value: '', label: ''}, {value:'1', label: ' '}, {value:'2', label: ' '}]\"",
+        propertyName: ":dataSource",
+      },
+      additionalAttribute: {
+        valueField: '"value"',
+        textField: '"label"',
+      },
+      displaySlotConditions: {
+        option: "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
+      },
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+        option: 'width:100%;',
+      },
+      slotInlineStyle: {
+        option: 'min-height: 0;',
+      },
+      ignoreProperty: ['rules'],
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault', 'useRangeValue',
+        'startFieldName', 'endFieldName',
+        'startInitialValue', 'endInitialValue',
+      ],
+    }, {
+      name: 'ElTreeSelectPro',
+    }],
+  })
+  @Component({
+    title: '表单树选择',
+    description: '表单树选择',
+    group: 'Form',
+  })
+  export class ElFormTreeSelectPro<T, V, M extends nasl.core.Boolean> extends ViewComponent {
+    constructor(options?: Partial<ElFormTreeSelectProOptions<T, V, M> & ElFormItemProOptions & Omit<ElTreeSelectProOptions<T, V, M>, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormTreeSelectProOptions<T, V, M extends nasl.core.Boolean> extends ViewComponentOptions {
+
+  }
 }

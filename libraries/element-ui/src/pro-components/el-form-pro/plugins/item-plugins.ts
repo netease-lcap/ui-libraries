@@ -8,10 +8,12 @@ import {
   computed,
   ComputedRef,
   inject,
+  provide,
   unref,
 } from '@vue/composition-api';
 import {
   FORM_CONTEXT,
+  IN_ELEMENT_FORM_ITEM,
   LabelWidthType,
 } from '../constants';
 import { FormExtendsContext } from '../types';
@@ -120,6 +122,8 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     });
 
     const { fieldName, proxyVNodes } = useFormField(props, h, isDesigner);
+
+    provide(IN_ELEMENT_FORM_ITEM, true);
 
     return {
       rules,
