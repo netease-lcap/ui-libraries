@@ -16,8 +16,8 @@ export function useHandleNodepath(props) {
     if (isForm) {
       const inputNumberItem = inputNumber?.closest(`.${prefix}-form-item-row`);
       inputNumberItem?.setAttribute('data-nodepath', nodepath);
-      inputNumber?.setAttribute('data-tag-name', 'FormInputNumber');
-      inputNumber?.setAttribute('data-has-mutation', 'true');
+      inputNumberItem?.setAttribute('data-tag-name', 'FormInputNumber');
+      inputNumberItem?.setAttribute('data-has-mutation', 'true');
     } else {
       inputNumber?.setAttribute('data-nodepath', nodepath);
     }
