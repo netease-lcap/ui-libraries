@@ -56,6 +56,22 @@ namespace nasl.ui {
         })
         withText: nasl.core.Boolean = false;
 
+        @Prop<USwitchOptions, 'checkedChildren'>({
+            group: '主要属性',
+            title: '选中时的内容',
+            docDescription: '选中时的内容',
+            if: _ => _.withText === true,
+        })
+        checkedChildren: nasl.core.String = "ON";
+
+        @Prop<USwitchOptions, 'unCheckedChildren'>({
+            group: '主要属性',
+            title: '选中时的内容',
+            docDescription: '选中时的内容',
+            if: _ => _.withText === true,
+        })
+        unCheckedChildren: nasl.core.String = "OFF";
+
         @Prop({
             group: '状态属性',
             title: '只读',

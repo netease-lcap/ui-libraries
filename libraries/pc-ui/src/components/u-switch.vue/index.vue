@@ -4,7 +4,11 @@
     @focus="onFocus" @blur="onBlur" v-on="listeners">
     <span :class="$style.button"></span>
     <span :class="$style.text" vusion-slot-name="default">
-        <slot></slot>
+        <slot>
+            <template v-if="withText">
+                {{(currentValue ? checkedChildren :unCheckedChildren) }}
+            </template>
+        </slot>
     </span>
 </label>
 <u-preview v-else :text="$tt(currentValue ? 'on' : 'off')"></u-preview>
@@ -35,6 +39,8 @@ export default {
     },
     props: {
         withText: { type: Boolean, default: false },
+        checkedChildren: { type: String, default: "ON" },
+        unCheckedChildren: { type: String, default: "OFF" },
         value: { type: Boolean, default: false },
         preview: { type: Boolean, default: false },
         readonly: { type: Boolean, default: false },
@@ -156,20 +162,17 @@ export default {
 }
 
 .root[with-text] {
-    width: var(--switch-width-wide);
+    width: auto;
+    min-width: var(--switch-width-wide);
+    padding-left: 8px;
+    padding-right: 8px;
+
 }
 
 .root[with-text][checked] .button {
-    left: calc(var(--switch-width-wide) - var(--switch-button-size) - 2px);
 }
 
-.root[with-text] .text::before {
-    content: 'OFF';
-}
 
-.root[with-text][checked] .text::before {
-    content: 'ON';
-}
 
 .root[size="small"] {
     line-height: var(--switch-height-small);
