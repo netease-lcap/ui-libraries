@@ -109,12 +109,14 @@ export const Default = {
    :onRowClick="log"
    dragSort="row"
    :treeDisplay="true"
+   :selection="true"
+   :multiple="false"
    :onDragSort="onDragSortChange"
     >
 
-    <el-table-column-pro title="申请人" type="multiple"       >
+    <el-table-column-pro title="申请人" >
     <template #cell="cell">
-      <div>{{selectedRowKeys}}</div>
+      <div>{{'12'}}</div>
     </template>
     </el-table-column-pro>
 

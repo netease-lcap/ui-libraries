@@ -139,7 +139,31 @@ namespace nasl.ui {
       description: '选中行。',
       // setter: { concept: 'InputSetter' },
     })
-    selectedRowKeys: nasl.collection.List<V> | V;
+    selectedRowKeys: M extends true ? nasl.collection.List<V> : V;
+
+    @Prop({
+      group: '数据属性',
+      title: '表格可选择',
+      description: '表格可选择',
+      docDescription: '表格可选择',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    selection: nasl.core.Boolean = false;
+
+    @Prop<ElTableProOptions<T, V, P, M>, 'multiple'>({
+      group: '数据属性',
+      title: '可多选',
+      description: '设置是否可以多选行',
+      docDescription: '是否可以多选',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+
+      if: (_) => _.selection,
+    })
+    multiple: M = false as any;
 
     @Prop({
       group: '主要属性',
@@ -521,7 +545,7 @@ namespace nasl.ui {
     //   setter: { concept: 'InputSetter' },
     // })
     // rowClassName: nasl.core.String | object | any[] | any;
-    @Prop<ElTableProOptions<T, V, P, M>, 'rowKey'>({
+    @Prop<ElTableProOptions<T, V, P, M>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
       description: '在单选、多选操作、渲染树形数据中，指定数据唯一值的字段',
@@ -530,7 +554,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    rowKey: (item: T) => any = ((item: any) => item.id) as any;
+    valueField: (item: T) => V;
 
     // @Prop({
     //   group: '主要属性',
@@ -920,18 +944,6 @@ namespace nasl.ui {
       },
     })
     colKey: (item: T) => any;
-
-    @Prop({
-      group: '数据属性',
-      title: '列选中类型',
-      description: '列选中类型',
-      docDescription: '有两种模式：单选和多选',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '单选' }, { title: '多选' }, { title: '无' }],
-      },
-    })
-    type: 'single' | 'multiple' | null = null;
 
     @Prop({
       group: '数据属性',
