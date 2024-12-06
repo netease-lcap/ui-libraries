@@ -38,17 +38,17 @@ namespace nasl.ui {
       super();
     }
 
-    @Method({
-      title: '打开加载中',
-      description: '打开加载中',
-    })
-    startLoading(): void {}
+    // @Method({
+    //   title: '打开加载中',
+    //   description: '打开加载中',
+    // })
+    // startLoading(): void {}
 
-    @Method({
-      title: '关闭加载中',
-      description: '关闭加载中',
-    })
-    closeLoading(): void {}
+    // @Method({
+    //   title: '关闭加载中',
+    //   description: '关闭加载中',
+    // })
+    // closeLoading(): void {}
   }
 
   export class ElFlexOptions extends ViewComponentOptions {
