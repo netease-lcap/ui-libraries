@@ -251,8 +251,8 @@ export const useTable: NaslComponentPluginOptions = {
             onLoadData?.({
               page: current.value,
               size: pageSize.value,
-              sort: sorting.value?.field,
-              order: sorting.value?.order,
+              sort: sort.value,
+              order: order.value,
             });
           }
         },
