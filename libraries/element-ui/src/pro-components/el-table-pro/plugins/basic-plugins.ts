@@ -48,8 +48,8 @@ export const useTable: NaslComponentPluginOptions = {
       ],
       [_.stubTrue, _.constant([])],
     ])({ selection: selection.value, multiple: multiple.value });
-    const sort = ref<string | null>(null);
-    const order = ref<string | null>(null);
+    const sort = ref<string | null>(sorting.value?.field);
+    const order = ref<string | null>(sorting.value?.order);
     const tree = props.useComputed('treeDisplay', (value) => (value
       ? {
         childrenKey: 'chiildren',
