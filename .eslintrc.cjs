@@ -13,6 +13,8 @@ module.exports = {
     'arrow-body-style': 0,
     'no-param-reassign': 1,
     'import/no-extraneous-dependencies': 0,
+    'react/react-in-jsx-scope': 0,
+    'react/no-unknown-property': 0,
     'import/extensions': 0,
     'import/no-unresolved': 0,
     'react/function-component-definition': 0,
