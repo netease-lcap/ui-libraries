@@ -173,11 +173,12 @@ namespace nasl.ui {
     })
     expandedRowKeys: V;
 
-    @Prop({
+    @Prop<ElTableProOptions<T, V, P, M>, 'hasExpandedRow'>({
       group: '主要属性',
       title: '是否打开展开行',
       description: '是否打开展开行',
       setter: { concept: 'SwitchSetter' },
+      if: (_) => _.treeDisplay === false,
     })
     hasExpandedRow: nasl.core.Boolean = false;
     // hasExpandedRow
@@ -650,7 +651,7 @@ namespace nasl.ui {
     })
     tableLayout: 'auto' | 'fixed' = 'fixed';
 
-    @Prop({
+    @Prop<ElTableProOptions<T, V, P, M>, 'treeDisplay'>({
       group: '数据属性',
       title: '树形模式',
       description: '以树形数据展示表格',
@@ -658,6 +659,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      if: (_) => _.hasExpandedRow === false,
     })
     treeDisplay: nasl.core.Boolean = false;
 
