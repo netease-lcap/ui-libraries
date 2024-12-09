@@ -676,9 +676,9 @@ namespace nasl.ui {
 
     @Prop<ElTableProOptions<T, V, P, M>, 'checkStrictly'>({
       group: '数据属性',
-      title: '关联选中类型',
-      description: '父子树节点是否关联选中',
-      docDescription: '当选中父节点时，子节点是否相应选中等。在"树形模式"属性开启并且表格存在"多选列"时有效',
+      title: '父子行选中是否独立',
+      description: '父子行选中是否独立',
+      docDescription: '父子行选中是否独立',
       setter: {
         concept: 'SwitchSetter',
       },
