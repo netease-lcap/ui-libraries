@@ -49,12 +49,14 @@ export default defineConfig(({ command }) => {
       },
       rollupOptions: {
         external: ['vue', 'vue-i18n', 'vuex', 'pinia', 'vue-router'],
-        globals: {
-          vue: 'Vue',
-          'vue-router': 'VueRouter',
-          'vue-i18n': 'VueI18n',
-          vuex: 'Vuex',
-          pinia: 'Pinia',
+        output: {
+          globals: {
+            vue: 'Vue',
+            'vue-router': 'VueRouter',
+            'vue-i18n': 'VueI18n',
+            vuex: 'Vuex',
+            pinia: 'Pinia',
+          },
         },
       },
       sourcemap: true,
