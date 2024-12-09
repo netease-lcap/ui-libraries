@@ -52,6 +52,7 @@ namespace nasl.ui {
       },
       additionalAttribute: {
         rowKey: '"index"',
+        valueField: '"index"',
       },
       forceUpdateWhenAttributeChange: true,
       dataSource: {
