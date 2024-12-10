@@ -1,4 +1,5 @@
 import { type Plugin } from 'vue';
+import 'element-plus/theme-chalk/base.css';
 import * as Components from './components';
 
 export * from './components';

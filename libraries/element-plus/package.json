@@ -71,6 +71,8 @@
     "vue-router": "^3.3.4"
   },
   "dependencies": {
+    "dayjs": "^1.11.13",
+    "element-plus": "^2.9.0",
     "lodash": "^4.17.21"
   }
 }
