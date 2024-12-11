@@ -510,6 +510,7 @@ export default {
                 size: file.size,
                 percent: 0,
                 showProgress: true,
+                type: file.type,
             };
 
             if (this.listType === 'image' || this.listType === 'card')
