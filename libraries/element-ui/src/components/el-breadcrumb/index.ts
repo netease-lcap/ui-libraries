@@ -11,7 +11,7 @@ export const ElBreadcrumb = registerComponent(Breadcrumb, plugins, {
 });
 export const ElBreadcrumbItem = registerComponent(BreadcrumbItem, itemPlugins, {
   nativeEvents: [
-    'mouseenter', 'dblclick', 'contextmenu',
+    'click', 'dblclick', 'contextmenu',
     'mousedown', 'mouseup', 'mouseenter',
     'mouseleave', 'focus', 'blur',
   ],

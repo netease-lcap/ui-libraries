@@ -18,7 +18,7 @@ export const ElContainer = registerComponent(Container, plugins, {
 export const ElHeader = Header;
 export const ElAside = registerComponent(Aside, {}, {
   nativeEvents: [
-    'mouseenter', 'dblclick', 'contextmenu',
+    'click', 'dblclick', 'contextmenu',
     'mousedown', 'mouseup', 'mouseenter',
     'mouseleave',
   ],
@@ -28,7 +28,7 @@ export const ElAside = registerComponent(Aside, {}, {
 export const ElFooter = Footer;
 export const ElMain = registerComponent(Main, {}, {
   nativeEvents: [
-    'mouseenter', 'dblclick', 'contextmenu',
+    'click', 'dblclick', 'contextmenu',
     'mousedown', 'mouseup', 'mouseenter',
     'mouseleave',
   ],
