@@ -103,8 +103,8 @@
             },
             "style": [
                 {
-                    "selector": ".empty-slot-wrapper",
-                    "declaration": "display: table-cell"
+                    "selector": ".empty-slot",
+                    "declaration": "display: table-cell !important"
                 }
             ]
         }
