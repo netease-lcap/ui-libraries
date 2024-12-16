@@ -7,13 +7,33 @@ import { registerComponent } from '@lcap/vue2-utils/plugins/index';
 import * as plugins from './plugins';
 
 export const ElContainer = registerComponent(Container, plugins, {
-  nativeEvents: [],
+  nativeEvents: [
+    'mouseenter', 'dblclick', 'contextmenu',
+    'mousedown', 'mouseup', 'mouseenter',
+    'mouseleave',
+  ],
   slotNames: ['default'],
   methodNames: [],
 });
 export const ElHeader = Header;
-export const ElAside = Aside;
+export const ElAside = registerComponent(Aside, {}, {
+  nativeEvents: [
+    'mouseenter', 'dblclick', 'contextmenu',
+    'mousedown', 'mouseup', 'mouseenter',
+    'mouseleave',
+  ],
+  slotNames: ['default'],
+  methodNames: [],
+});
 export const ElFooter = Footer;
-export const ElMain = Main;
+export const ElMain = registerComponent(Main, {}, {
+  nativeEvents: [
+    'mouseenter', 'dblclick', 'contextmenu',
+    'mousedown', 'mouseup', 'mouseenter',
+    'mouseleave',
+  ],
+  slotNames: ['default'],
+  methodNames: [],
+});
 
 export default ElContainer;
