@@ -145,8 +145,8 @@ export default function useTreeData(props: ElEnhancedTableProps, context: SetupC
     context.emit('tree-expand-change', params);
   }
 
-  function getTreeNodeColumnCol() {
-    const { columns } = props;
+  function getTreeNodeColumnIndex() {
+    const { columns = [] } = props;
     let treeNodeColumnIndex = props.tree?.treeNodeColumnIndex || 0;
     // type 存在，则表示表格内部渲染的特殊列，比如：展开行按钮、复选框、单选按钮等，不能作为树结点列。因此树结点展开列向后顺移
     while (
@@ -155,11 +155,19 @@ export default function useTreeData(props: ElEnhancedTableProps, context: SetupC
     ) {
       treeNodeColumnIndex += 1;
     }
+
+    return treeNodeColumnIndex;
+  }
+
+  function getTreeNodeColumnCol() {
+    const { columns = [] } = props;
+    const treeNodeColumnIndex = getTreeNodeColumnIndex();
+
     return columns[treeNodeColumnIndex];
   }
 
-  function formatTreeColumn(col: PrimaryTableCol): PrimaryTableCol {
-    if (!props.tree || col.colKey !== treeNodeCol.value.colKey) return col;
+  function formatTreeColumn(col: PrimaryTableCol, colIndex: number): PrimaryTableCol {
+    if (!props.tree || !treeNodeCol.value || (treeNodeCol.value.colKey ? col.colKey !== treeNodeCol.value.colKey : getTreeNodeColumnIndex() !== colIndex)) return col;
     const newCol = { ...treeNodeCol.value };
     newCol.cell = (h, p) => {
       const cellInfo = renderCell({ ...p, col: { ...treeNodeCol.value } }, context.slots, {

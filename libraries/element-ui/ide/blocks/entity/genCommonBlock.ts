@@ -116,7 +116,7 @@ export function genTextTemplate(property: naslTypes.EntityProperty, nameGroup: N
  * @param {*} selectNameGroupMap
  * @returns
  */
-export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: naslTypes.EntityProperty, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>) {
+export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: naslTypes.EntityProperty, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>, formItemAttrs: string[]) {
   const dataSource = entity.parentNode;
   const label = (property.label || property.name).replace(/"/g, '&quot;');
   const { typeAnnotation } = property || {};
@@ -140,70 +140,70 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
         const key = [property.name, relationEntity.name].join('-');
         const selectNameGroup = selectNameGroupMap.get(key);
         const dataSourceValue = `app.logics.${selectNameGroup.logic}()`;
-        return `<ElSelectPro
+        return `<ElFormSelectPro ${formItemAttrs.join(' ')}
                 clearable={true}
                 placeholder="请选择${label}"
                 dataSource={${dataSourceValue}}
                 textField="${lowerEntityName}.${displayedProperty.name}"
                 valueField="${lowerEntityName}.${relationProperty.name}">
-            </ElSelectPro>`;
+            </ElFormSelectPro>`;
       } return '';
     } return '';
   }
   if (propertyTypeName === 'Boolean') {
-    return `<ElSelectPro
+    return `<ElFormSelectPro ${formItemAttrs.join(' ')}
         clearable={true}
         placeholder="请选择${label}">
-        <ElOptionPro value={true} label="是"></ElOptionPro>
-        <ElOptionPro value={false} label="否"></ElOptionPro>
-    </ElSelectPro>`;
+        <ElOptionPro value={true} label="是"><ElText text="是" /></ElOptionPro>
+        <ElOptionPro value={false} label="否"><ElText text="否" /></ElOptionPro>
+    </ElFormSelectPro>`;
   } if (propertyTypeName === 'Integer' || propertyTypeName === 'Long') {
-    return `<ElInputNumberPro
+    return `<ElFormInputNumberPro ${formItemAttrs.join(' ')}
         theme="column"
         placeholder="请输入${label}">
-    </ElInputNumberPro>`;
+    </ElFormInputNumberPro>`;
   } if (propertyTypeName === 'Double') {
-    return `<ElInputNumberPro
+    return `<ElFormInputNumberPro ${formItemAttrs.join(' ')}
         theme="column"
         placeholder="请输入${label}">
-    </ElInputNumberPro>`;
+    </ElFormInputNumberPro>`;
   } if (propertyTypeName === 'Decimal') {
-    return `<ElInputNumberPro
+    return `<ElFormInputNumberPro ${formItemAttrs.join(' ')}
         theme="column"
         placeholder="请输入${label}">
-    </ElInputNumberPro>`;
+    </ElFormInputNumberPro>`;
   } if (propertyTypeName === 'String' && propertyTypeMaxLength > 256) {
-    return `<ElTextareaPro
+    return `<ElFormTextareaPro ${formItemAttrs.join(' ')}
         placeholder="请输入${label}">
-    </ElTextareaPro>`;
+    </ElFormTextareaPro>`;
   } if (propertyTypeName === 'Date') {
-    return `<ElDatePickerPro
+    return `<ElFormDatePickerPro ${formItemAttrs.join(' ')}
         clearable={true}
         placeholder="请选择${label}">
-    </ElDatePickerPro>`;
+    </ElFormDatePickerPro>`;
   } if (propertyTypeName === 'Time') {
-    return `<ElTimePickerPro
+    return `<ElFormTimePickerPro ${formItemAttrs.join(' ')}
         placeholder="请选择${label}">
-    </ElTimePickerPro>`;
+    </ElFormTimePickerPro>`;
   } if (propertyTypeName === 'DateTime') {
-    return `<ElDateTimePickerPro
+    return `<ElFormDateTimePickerPro ${formItemAttrs.join(' ')}
         clearable={true}
         placeholder="请选择${label}">
-    </ElDateTimePickerPro>`;
+    </ElFormDateTimePickerPro>`;
   }
   const namespaceArr = propertyTypeNamespace.split('.');
   const type = namespaceArr.pop();
   if (type === 'enums') {
     const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;
-    return `<ElSelectPro
+    return `<ElFormSelectPro ${formItemAttrs.join(' ')}
                 clearable={true}
                 placeholder="请选择${label}"
                 textField="text"
                 valueField="value"
                 dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}>
-            </ElSelectPro>`;
+            </ElFormSelectPro>`;
   }
-  return `<ElInputPro placeholder="请输入${label}"></ElInputPro>`;
+  return `<ElFormInputPro ${formItemAttrs.join(' ')} placeholder="请输入${label}"></ElFormInputPro>`;
 }
 
 /**
@@ -238,18 +238,32 @@ export function genFormItemsTemplate(entity: naslTypes.Entity, properties: Array
       const defaultValue = property.defaultValue.expression.toVue();
       defaultValueExpression = `initialValue={${defaultValue}}`;
     }
-    let formItem = `<ElFormItemPro
-          ${required ? 'requiredMark="show"' : ''}
-          ${rules.length ? ` rules={[${rules.join(',')}]}` : ''}
-          layout="center"
-          name="${property.name}"
-          ${defaultValueExpression}
-          slotLabel={
-            <ElText text="${label}"></ElText>
-          }>`;
-    formItem += `${genPropertyEditableTemplate(entity, property, nameGroup, selectNameGroupMap)}`;
-    formItem += '</ElFormItemPro>';
-    return formItem;
+    const formItemAttrs: string[] = [
+      'layout="center"',
+      `name="${property.name}"`,
+      defaultValueExpression,
+      `slotLabel={<ElText text="${label}"></ElText>}`,
+    ];
+    if (required) {
+      formItemAttrs.push('requiredMark="show"');
+    }
+
+    if (rules.length > 0) {
+      formItemAttrs.push(`rules={[${rules.join(',')}]}`);
+    }
+
+    // let formItem = `<ElFormItemPro
+    //       ${required ? 'requiredMark="show"' : ''}
+    //       ${rules.length ? ` rules={[${rules.join(',')}]}` : ''}
+    //       layout="center"
+    //       name="${property.name}"
+    //       ${defaultValueExpression}
+    //       slotLabel={
+    //         <ElText text="${label}"></ElText>
+    //       }>`;
+    // formItem += `${genPropertyEditableTemplate(entity, property, nameGroup, selectNameGroupMap)}`;
+    // formItem += '</ElFormItemPro>';
+    return genPropertyEditableTemplate(entity, property, nameGroup, selectNameGroupMap, formItemAttrs);
   }).join('\n')}`;
 }
 

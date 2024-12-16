@@ -19,7 +19,12 @@ export const Example1 = {
       '{{tagName}}': Component,
     },
     props: Object.keys(argTypes),
-    template: '<{{tagName}} v-bind="$props"></{{tagName}}>',
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: '<{{tagName}} v-bind="args"></{{tagName}}>',
   }),
   args: {
     text: 'Hello world',

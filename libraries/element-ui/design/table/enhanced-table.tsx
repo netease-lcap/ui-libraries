@@ -68,7 +68,7 @@ export default defineComponent({
       const arr: PrimaryTableCol<TableRowData>[] = [];
       for (let i = 0, len = columns.length; i < len; i++) {
         let item = { ...columns[i] };
-        item = formatTreeColumn(item);
+        item = formatTreeColumn(item, i);
         if (item.children?.length) {
           item.children = getColumns(item.children);
         }

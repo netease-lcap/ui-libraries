@@ -68,7 +68,7 @@ namespace nasl.ui {
               concept: 'SwitchSetter',
           },
           onChange: [
-              { clear: ['placeholderRight']}
+              { clear: ['placeholderRight', 'value', 'startDate', 'endDate']}
           ]
       })
       range: nasl.core.Boolean = false;

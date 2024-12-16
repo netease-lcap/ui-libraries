@@ -23,24 +23,10 @@
           disabled: { type: Boolean, default: false },
       },
       data() {
-          let selectedVM = undefined;
-          if (!isNil(this.value) && this.selectedValuesData && Array.isArray(this.selectedValuesData)) {
-            const selectedItem = this.selectedValuesData.find(
-                (itemData) => itemData.value === this.value,
-            );
-
-            if (selectedItem) {
-              selectedVM = {
-                ...selectedItem,
-                currentText: selectedItem.text,
-              };
-            }
-          }
-
           return {
               // @inherit: groupVMs: [],
               // @inherit: itemVMs: [],
-              selectedVM,
+              selectedVM: undefined,
           };
       },
       watch: {

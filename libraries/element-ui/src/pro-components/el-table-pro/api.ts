@@ -41,6 +41,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
+      containerDirection: "row",
       disableSlotAutoFill: [
         {
           slot: 'expandedRow',
@@ -52,6 +53,7 @@ namespace nasl.ui {
       },
       additionalAttribute: {
         rowKey: '"index"',
+        valueField: '"index"',
       },
       forceUpdateWhenAttributeChange: true,
       dataSource: {
@@ -139,7 +141,31 @@ namespace nasl.ui {
       description: '选中行。',
       // setter: { concept: 'InputSetter' },
     })
-    selectedRowKeys: nasl.collection.List<V> | V;
+    selectedRowKeys: M extends true ? nasl.collection.List<V> : V;
+
+    @Prop({
+      group: '数据属性',
+      title: '表格可选择',
+      description: '表格可选择',
+      docDescription: '表格可选择',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    selection: nasl.core.Boolean = false;
+
+    @Prop<ElTableProOptions<T, V, P, M>, 'multiple'>({
+      group: '数据属性',
+      title: '可多选',
+      description: '设置是否可以多选行',
+      docDescription: '是否可以多选',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+
+      if: (_) => _.selection,
+    })
+    multiple: M = false as any;
 
     @Prop({
       group: '主要属性',
@@ -149,11 +175,12 @@ namespace nasl.ui {
     })
     expandedRowKeys: V;
 
-    @Prop({
+    @Prop<ElTableProOptions<T, V, P, M>, 'hasExpandedRow'>({
       group: '主要属性',
       title: '是否打开展开行',
       description: '是否打开展开行',
       setter: { concept: 'SwitchSetter' },
+      if: (_) => _.treeDisplay === false,
     })
     hasExpandedRow: nasl.core.Boolean = false;
     // hasExpandedRow
@@ -521,7 +548,7 @@ namespace nasl.ui {
     //   setter: { concept: 'InputSetter' },
     // })
     // rowClassName: nasl.core.String | object | any[] | any;
-    @Prop<ElTableProOptions<T, V, P, M>, 'rowKey'>({
+    @Prop<ElTableProOptions<T, V, P, M>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
       description: '在单选、多选操作、渲染树形数据中，指定数据唯一值的字段',
@@ -530,7 +557,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    rowKey: (item: T) => any = ((item: any) => item.id) as any;
+    valueField: (item: T) => V;
 
     // @Prop({
     //   group: '主要属性',
@@ -626,7 +653,7 @@ namespace nasl.ui {
     })
     tableLayout: 'auto' | 'fixed' = 'fixed';
 
-    @Prop({
+    @Prop<ElTableProOptions<T, V, P, M>, 'treeDisplay'>({
       group: '数据属性',
       title: '树形模式',
       description: '以树形数据展示表格',
@@ -634,6 +661,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      if: (_) => _.hasExpandedRow === false,
     })
     treeDisplay: nasl.core.Boolean = false;
 
@@ -652,9 +680,9 @@ namespace nasl.ui {
 
     @Prop<ElTableProOptions<T, V, P, M>, 'checkStrictly'>({
       group: '数据属性',
-      title: '关联选中类型',
-      description: '父子树节点是否关联选中',
-      docDescription: '当选中父节点时，子节点是否相应选中等。在"树形模式"属性开启并且表格存在"多选列"时有效',
+      title: '父子行选中是否独立',
+      description: '父子行选中是否独立',
+      docDescription: '父子行选中是否独立',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -920,18 +948,6 @@ namespace nasl.ui {
       },
     })
     colKey: (item: T) => any;
-
-    @Prop({
-      group: '数据属性',
-      title: '列选中类型',
-      description: '列选中类型',
-      docDescription: '有两种模式：单选和多选',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '单选' }, { title: '多选' }, { title: '无' }],
-      },
-    })
-    type: 'single' | 'multiple' | null = null;
 
     @Prop({
       group: '数据属性',

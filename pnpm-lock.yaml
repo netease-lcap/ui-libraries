@@ -344,7 +344,7 @@ importers:
         specifier: ^7.21.0
         version: 7.21.0(@babel/core@7.23.6)
       '@lcap/builder':
-        specifier: workspace:^*
+        specifier: workspace:*
         version: link:../../packages/builder
       '@lcap/storybook-vue-vite':
         specifier: workspace:^*

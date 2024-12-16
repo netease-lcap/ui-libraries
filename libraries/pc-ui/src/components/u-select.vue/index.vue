@@ -490,13 +490,24 @@ export default {
         this.currentDataSource &&
         Array.isArray(this.currentDataSource.data)
       ) {
-        const selectedItem = this.currentDataSource.data.find(
+        let selectedItem = this.currentDataSource.data.find(
           (d) => this.$at2(d, this.valueField) === value,
         );
 
-        const filterText = selectedItem
+        let filterText = selectedItem
           ? this.$at2(selectedItem, this.field || this.textField)
           : '';
+
+        if (!selectedItem && this.selectedValuesData && Array.isArray(this.selectedValuesData)) {
+          selectedItem = this.selectedValuesData.find(
+            (itemData) => itemData.value === value,
+          );
+
+          if (selectedItem) {
+            filterText = selectedItem.text;
+          }
+        }
+
         if (filterText !== this.filterText) {
           this.filterText = filterText;
         }

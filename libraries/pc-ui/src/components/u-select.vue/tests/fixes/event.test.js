@@ -166,6 +166,7 @@ test('test change value ant datasource reactive ', async () => {
           { text: '.NET', value: '.net', description: '这是.net' },
           { text: 'PHP', value: 'php', description: '这是php' },
         ],
+        selectedValuesData: [{ text: '哈哈哈', value: '111' }, { text: '嘿嘿嘿', value: '222' }],
       };
     },
     methods: {
@@ -174,10 +175,13 @@ test('test change value ant datasource reactive ', async () => {
         this.list = remoteData.map((n) => ({ ...n }));
       },
       handleChangeEmpty() {
+        this.value = '333';
+      },
+      handleChangeExVal() {
         this.value = '222';
       },
     },
-    template: '<u-select :value.sync="value" filterable :data-source="list" />',
+    template: '<u-select :value.sync="value" :selectedValuesData="selectedValuesData" filterable :data-source="list" />',
   });
 
   await wrapper.vm.$nextTick();
@@ -194,6 +198,12 @@ test('test change value ant datasource reactive ', async () => {
   expect(input.element.value).toBe('1Alabama');
 
   wrapper.vm.handleChangeEmpty();
+  await wrapper.vm.$nextTick();
   await sleep(20);
   expect(input.element.value).toBe('');
+
+  wrapper.vm.handleChangeExVal();
+  await wrapper.vm.$nextTick();
+  await sleep(20);
+  expect(input.element.value).toBe('嘿嘿嘿');
 });

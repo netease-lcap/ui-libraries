@@ -21,25 +21,51 @@ export const useTable: NaslComponentPluginOptions = {
   setup(props, ctx) {
     const current = props.useRef('page', (v) => v ?? 1);
     const pageSize = props.useRef('pageSize', (v) => v ?? 10);
+    const rowKey = (props.get('rowKey') || 'id') as string;
+    const valueField = props.useComputed('valueField', (value) => value ?? rowKey);
     const sorting = props.useComputed('sorting', (value) => value);
-    const sort = ref<string | null>(null);
-    const order = ref<string | null>(null);
+    const selection = props.useRef('selection', (v) => v);
+    const multiple = props.useRef('multiple', (v) => v);
+    const typeColumns = _.cond([
+      [
+        _.matches({ multiple: true, selection: true }),
+        _.constant([
+          {
+            colKey: 'row-select',
+            title: '复选框',
+            type: 'multiple',
+          },
+        ]),
+      ],
+      [
+        _.matches({ selection: true }),
+        _.constant([
+          {
+            colKey: 'row-radio',
+            type: 'single',
+          },
+        ]),
+      ],
+      [_.stubTrue, _.constant([])],
+    ])({ selection: selection.value, multiple: multiple.value });
+    const sort = ref<string | null>(sorting.value?.field);
+    const order = ref<string | null>(sorting.value?.order);
+    const checkStrictly = props.useComputed('checkStrictly', (value) => !!value);
     const tree = props.useComputed('treeDisplay', (value) => (value
       ? {
-        childrenKey: 'chiildren',
+        childrenKey: 'children',
+        checkStrictly: checkStrictly.value,
       }
       : undefined));
 
     const data = props.useComputed('data', (v) => {
       const treeDisplay = props.get('treeDisplay');
-      const rowKey = (props.get('rowKey') || 'id') as string;
       const parentField = props.get<string>('parentField') || 'parent';
-      // const childrenField = props.get('childrenField') || 'children';
       if (!treeDisplay) return v;
       return listToTree(v, {
-        valueField: rowKey,
+        valueField: valueField.value,
         parentField,
-        childrenField: 'chiildren',
+        childrenField: 'children',
       });
     });
     const dragSort = props.useComputed('dragSort', (value) => (value === 'false' ? undefined : value));
@@ -75,7 +101,7 @@ export const useTable: NaslComponentPluginOptions = {
     );
 
     const renderSlot = (vnodes) => {
-      return vnodes?.flatMap((vnode) => {
+      const columns = vnodes?.flatMap((vnode) => {
         if (!vnode.tag?.includes('ElTableColumnPro')) return [];
         const attrs = _.get(vnode, 'data.attrs', {});
 
@@ -83,23 +109,17 @@ export const useTable: NaslComponentPluginOptions = {
         const { cell, title } = _.get(vnode, 'data.scopedSlots', {});
 
         const titleProps = _.isFunction(title)
-          ? {
-            title: (h, { row, rowIndex, col }) => title({ row, index: rowIndex, col }),
-          }
+          ? { title: (h, { row, rowIndex, col }) => title({ row, index: rowIndex, col }) }
           : {};
 
         const cellRender = _.cond([
           [
             _.conforms({ cell: _.isFunction, type: _.isNil }),
-            _.constant({
-              cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col }),
-            }),
+            _.constant({ cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col }) }),
           ],
           [
             _.matches({ type: 'number' }),
-            _.constant({
-              cell: (h, { row, rowIndex }) => pageSize.value * (current.value - 1) + rowIndex + 1,
-            }),
+            _.constant({ cell: (h, { rowIndex }) => pageSize.value * (current.value - 1) + rowIndex + 1 }),
           ],
           [_.conforms({ type: _.isString }), _.constant({})],
         ]);
@@ -115,6 +135,7 @@ export const useTable: NaslComponentPluginOptions = {
           },
         ];
       });
+      return typeColumns.concat(columns).filter((item) => !_.isEmpty(item));
     };
     const scroll = props.useComputed('virtual', (value) => (value ? { scroll: { type: 'virtual' } } : {}));
 
@@ -203,6 +224,7 @@ export const useTable: NaslComponentPluginOptions = {
       ...scroll.value,
       pagination,
       tree,
+      rowKey: valueField,
       // tree: {
       //   childrenKey: 'chiildren',
       // },
@@ -231,8 +253,8 @@ export const useTable: NaslComponentPluginOptions = {
             onLoadData?.({
               page: current.value,
               size: pageSize.value,
-              sort: sorting.value?.field,
-              order: sorting.value?.order,
+              sort: sort.value,
+              order: order.value,
             });
           }
         },

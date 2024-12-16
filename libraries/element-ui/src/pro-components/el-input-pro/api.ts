@@ -29,7 +29,7 @@ namespace nasl.ui {
 
   export class ElInputProOptions extends ViewComponentOptions {
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       sync: true,
       title: '值',
       description: '输入框的值',

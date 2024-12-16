@@ -317,8 +317,8 @@ namespace nasl.ui {
     }],
   })
   @Component({
-    title: '表单输入框',
-    description: '表单输入框',
+    title: '表单多选组',
+    description: '表单多选组',
     group: 'Form',
   })
   export class ElFormCheckboxGroupPro<T, V> extends ViewComponent {

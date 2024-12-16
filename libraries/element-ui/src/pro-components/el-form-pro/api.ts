@@ -491,6 +491,16 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '隐藏标签',
+      description: '不显示表单标签',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    hiddenLabel: nasl.core.Boolean = false;
+
+    @Prop<ElFormItemProOptions, 'labelAlign'>({
+      group: '主要属性',
       title: '标签布局',
       description:
         '表单字段标签对齐方式：左对齐、右对齐、顶部对齐。默认使用 Form 的对齐方式，优先级高于 Form.labelAlign。可选项：left/right/top',
@@ -503,10 +513,11 @@ namespace nasl.ui {
           { title: '使用表单设置' },
         ],
       },
+      if: (_) => !_.hiddenLabel,
     })
     labelAlign: 'left' | 'right' | 'top' | '' = '';
 
-    @Prop({
+    @Prop<ElFormItemProOptions, 'labelWidthType'>({
       group: '主要属性',
       title: '标签宽度',
       description: '可以整体设置label标签宽度',
@@ -518,7 +529,8 @@ namespace nasl.ui {
           { title: '大' },
           { title: '自定义' },
         ],
-      }
+      },
+      if: (_) => !_.hiddenLabel,
     })
     labelWidthType: 'small' | 'medium' | 'large' | '';
 
@@ -527,11 +539,11 @@ namespace nasl.ui {
       title: '标签宽度',
       description: '可以整体设置标签宽度，优先级高于表单项',
       setter: { concept: 'InputSetter' },
-      if: (_) => _.labelWidthType === '',
+      if: (_) => _.labelWidthType === '' && !_.hiddenLabel,
     })
     labelWidth: nasl.core.String | nasl.core.Decimal;
 
-    @Prop({
+    @Prop<ElFormItemProOptions, 'labelEllipsis'>({
       group: '主要属性',
       title: '标签过长省略',
       description: '文字过长是否省略显示。默认文字超出时会换行。',
@@ -540,10 +552,11 @@ namespace nasl.ui {
           concept: 'EnumSelectSetter',
           options: [{ title: '省略' }, { title: '文字换行' }, { title: '使用表单配置' }]
       },
+      if: (_) => !_.hiddenLabel,
     })
     labelEllipsis: 'show' | 'hide' | '' | nasl.core.Boolean = '';
 
-    @Prop({
+    @Prop<ElFormItemProOptions, 'requiredMark'>({
       group: '主要属性',
       title: '必填标记',
       description: '是否显示必填符号（*），优先级高于表单设置的必填标记',
@@ -551,6 +564,7 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '显示' }, { title: '隐藏' }, { title: '使用表单配置' }]
        },
+       if: (_) => !_.hiddenLabel,
     })
     requiredMark: 'show' | 'hide' | '' | nasl.core.Boolean = '';
 

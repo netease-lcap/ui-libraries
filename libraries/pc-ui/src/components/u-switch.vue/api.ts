@@ -66,8 +66,8 @@ namespace nasl.ui {
 
         @Prop<USwitchOptions, 'unCheckedChildren'>({
             group: '主要属性',
-            title: '选中时的内容',
-            docDescription: '选中时的内容',
+            title: '非选中时的内容	',
+            docDescription: '非选中时的内容	',
             if: _ => _.withText === true,
         })
         unCheckedChildren: nasl.core.String = "OFF";
