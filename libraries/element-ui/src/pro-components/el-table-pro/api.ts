@@ -41,6 +41,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
+      containerDirection: "row",
       disableSlotAutoFill: [
         {
           slot: 'expandedRow',

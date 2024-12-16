@@ -264,4 +264,61 @@ namespace nasl.ui {
     })
     slotOption: (current: Current<T>) => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
+      displaySlotConditions: {
+        option: "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
+      },
+      dataSource: {
+        dismiss: "!this.getAttribute('dataSource')",
+        display: 3,
+        loopRule: 'nth-last-child(-n+2)',
+        loopElem: '.el-p-transfer__list-item',
+        displayData: "\"[{value: '', label: ''},{value:'1', label: ' '}, {value:'2', label: ' '}]\"",
+        propertyName: ":dataSource",
+      },
+      additionalAttribute: {
+        valueField: '"value"',
+        textField: '"label"',
+      },
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+        option: 'width: 100%',
+      },
+      slotInlineStyle: {
+        option: 'min-height: 0;',
+      },
+      ignoreProperty: ['rules'],
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault', 'useRangeValue',
+        'startFieldName', 'endFieldName',
+        'startInitialValue', 'endInitialValue',
+      ],
+    }, {
+      name: 'ElTransferPro',
+    }],
+  })
+  @Component({
+    title: '表单穿梭框',
+    description: '表单穿梭框',
+    group: 'Form',
+  })
+  export class ElFormTransferPro<T, V> extends ViewComponent {
+    constructor(options?: Partial<ElFormTransferProOptions<T, V> & ElFormItemProOptions & Omit<ElTransferProOptions<T, V>, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormTransferProOptions<T, V> extends ViewComponentOptions {
+
+  }
 }

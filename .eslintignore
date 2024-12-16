@@ -9,3 +9,4 @@ demo
 scripts/*.mjs
 **/scripts/*.js
 **/design/*
+**/templates/*

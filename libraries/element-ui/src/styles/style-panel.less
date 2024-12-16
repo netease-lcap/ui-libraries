@@ -25,9 +25,16 @@
 
   &.cw-style-background-color,
   &.cw-style-background-image {
-    .@{prefix}-input {
-      background: transparent;
-    }
+    background: transparent !important;
+
+  }
+
+  &.cw-style-background-color .@{prefix}-input {
+    background-color: var(--cw-style-background-color);
+  }
+
+  &.cw-style-background-image .@{prefix}-input {
+    background-image: var(--cw-style-background-image);
   }
 
   &.cw-style-border-width {

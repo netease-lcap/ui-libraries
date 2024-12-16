@@ -175,7 +175,6 @@ export const useForm = (props: MapGet) => {
       },
       getValue: (index) => {
         let key = name[index];
-
         if (!key) {
           key = `${uid}[${index}]`;
         }

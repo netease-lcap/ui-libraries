@@ -448,7 +448,7 @@ export default {
                     this.close();
                 }
             });
-            if (this.filterable) {
+            if (this.filterable && !this.checkable) {
                 this.filterText = '';
                 this.filtering = false;
             }

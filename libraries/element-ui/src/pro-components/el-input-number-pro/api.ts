@@ -29,7 +29,7 @@ namespace nasl.ui {
 
   export class ElInputNumberProOptions extends ViewComponentOptions {
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       sync: true,
       title: '值',
       description:
@@ -317,5 +317,43 @@ namespace nasl.ui {
     //   description: '输入框下方提示文本，会根据不同的 `status` 呈现不同的样式。',
     // })
     // slotTips: () => Array<ViewComponent>;
+  }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
+      ignoreProperty: ['rules'],
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault', 'useRangeValue',
+        'startFieldName', 'endFieldName',
+        'startInitialValue', 'endInitialValue',
+      ],
+    }, {
+      name: 'ElInputNumberPro',
+    }],
+  })
+  @Component({
+    title: '表单数字输入框',
+    description: '表单数字输入框',
+    group: 'Form',
+  })
+  export class ElFormInputNumberPro extends ViewComponent {
+    constructor(options?: Partial<ElFormInputNumberProOptions & ElFormItemProOptions & Omit<ElInputNumberProOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormInputNumberProOptions extends ViewComponentOptions {
+
   }
 }

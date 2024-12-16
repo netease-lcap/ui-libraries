@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 import glob from 'fast-glob';
-import genNaslComponentConfig from './gen-nasl-component-config';
+import genNaslComponentConfig, { processComponentConfigExtends } from './gen-nasl-component-config';
 import genNaslLogicsConfig from './gen-nasl-logics-config';
 
 export interface GenNaslExtensionConfigProps {
@@ -139,6 +139,9 @@ export default async function getNaslExtensionConfig({
 
     return componentConfig;
   });
+
+  processComponentConfigExtends(viewComponents);
+
   const logics = await genNaslLogicsConfig(rootPath);
   const feLibraries = getFrontEndLibray(frameworkKind, viewComponents, logics);
 

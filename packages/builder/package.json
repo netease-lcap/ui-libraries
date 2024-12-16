@@ -1,12 +1,13 @@
 {
   "name": "@lcap/builder",
-  "version": "1.4.0-beta.6",
+  "version": "1.4.0",
   "description": "lcap builder utils",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "files": [
     "bin",
     "lib",
+    "templates",
     "input"
   ],
   "exports": {
@@ -56,7 +57,7 @@
     "@types/babel__traverse": "^7.20.6",
     "@types/fs-extra": "^11.0.4",
     "@types/lodash": "^4.14.202",
-    "postcss-values-parser": "^6.0.2",
+    "@types/prompts": "^2.4.9",
     "typescript": "^5.3.3",
     "vite": "^5.0.10"
   },
@@ -89,6 +90,8 @@
     "lodash": "^4.17.21",
     "picocolors": "^1.1.1",
     "postcss": "^8.4.35",
+    "postcss-values-parser": "^6.0.2",
+    "prompts": "^2.4.2",
     "react-style-object-to-css": "^1.1.2",
     "semver": "^7.5.4",
     "send": "^1.1.0",

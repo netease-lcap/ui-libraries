@@ -83,4 +83,42 @@ namespace nasl.ui {
     })
     onChange: (event: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean) => any;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
+      ignoreProperty: ['rules'],
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault', 'useRangeValue',
+        'startFieldName', 'endFieldName',
+        'startInitialValue', 'endInitialValue',
+      ],
+    }, {
+      name: 'ElSwitchPro',
+    }],
+  })
+  @Component({
+    title: '表单开关',
+    description: '表单开关',
+    group: 'Form',
+  })
+  export class ElFormSwitchPro extends ViewComponent {
+    constructor(options?: Partial<ElFormSwitchProOptions & ElFormItemProOptions & Omit<ElSwitchProOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormSwitchProOptions extends ViewComponentOptions {
+
+  }
 }

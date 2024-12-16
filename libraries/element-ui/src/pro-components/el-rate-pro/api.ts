@@ -125,4 +125,45 @@ namespace nasl.ui {
     })
     onChange: (event: nasl.core.Decimal) => any;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
+      ignoreProperty: ['rules'],
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+      additionalAttribute: {
+        ':showText': '"false"',
+      },
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault', 'useRangeValue',
+        'startFieldName', 'endFieldName',
+        'startInitialValue', 'endInitialValue',
+      ],
+    }, {
+      name: 'ElRatePro',
+    }],
+  })
+  @Component({
+    title: '表单评分',
+    description: '表单评分',
+    group: 'Form',
+  })
+  export class ElFormRatePro extends ViewComponent {
+    constructor(options?: Partial<ElFormRateProOptions & ElFormItemProOptions & Omit<ElRateProOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormRateProOptions extends ViewComponentOptions {
+
+  }
 }

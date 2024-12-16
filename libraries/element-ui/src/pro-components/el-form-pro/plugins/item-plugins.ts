@@ -1,6 +1,6 @@
 import { type VNode } from 'vue';
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils';
-import type { MapGet } from '@lcap/vue2-utils/plugins/types';
+import type { MapGet, Slot } from '@lcap/vue2-utils/plugins/types';
 import VusionValidator, { localizeRules } from '@lcap/validator';
 import { CustomValidateResolveType, FormRule } from '@element-pro';
 import { isFunction, map } from 'lodash';
@@ -8,10 +8,12 @@ import {
   computed,
   ComputedRef,
   inject,
+  provide,
   unref,
 } from '@vue/composition-api';
 import {
   FORM_CONTEXT,
+  IN_ELEMENT_FORM_ITEM,
   LabelWidthType,
 } from '../constants';
 import { FormExtendsContext } from '../types';
@@ -86,6 +88,8 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     'startInitialValue',
     'endInitialValue',
     'disableValidate',
+    'hiddenLabel',
+    'label',
   ],
   setup(props, { h, isDesigner, setupContext: ctx }) {
     const { useComputed } = props;
@@ -121,12 +125,27 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
     const { fieldName, proxyVNodes } = useFormField(props, h, isDesigner);
 
+    provide(IN_ELEMENT_FORM_ITEM, true);
+
     return {
       rules,
       class: className,
       labelWidth,
       name: fieldName,
       ...extendsFormProps,
+      slotLabel: () => {
+        const [slotLabel, label, hiddenLabel] = props.get<[Slot, string | Slot, boolean]>(['slotLabel', 'label', 'hiddenLabel']);
+
+        if (hiddenLabel) {
+          return null;
+        }
+
+        if (isFunction(label)) {
+          return label(h);
+        }
+
+        return isFunction(slotLabel) ? slotLabel() : label;
+      },
       slotHelp: () => {
         const slotHelp = props.get('slotHelp');
         const helpIsSlot = props.get<boolean>('helpIsSlot');
@@ -145,15 +164,4 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       },
     };
   },
-};
-
-export const useLowcode: NaslComponentPluginOptions = {
-  setup(props) {
-    return {
-      style: {
-        overflow: 'hidden',
-      },
-    };
-  },
-  onlyUseIDE: true,
 };

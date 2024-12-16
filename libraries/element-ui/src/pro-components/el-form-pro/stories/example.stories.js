@@ -112,56 +112,104 @@ export const Default = {
       },
     },
     template: `<el-form-pro :clearFieldOnDestroy="true" ref="form" @reset="onReset" @submit="onSubmit">
-    <el-form-item-pro label="用户名" help="这里可以展示一段说明文字" name="account">
-      <el-input-pro :value.sync="inputValue" placeholder="请输入用户名"></el-input-pro>
-    </el-form-item-pro>
-    <el-form-item-pro label="年龄" name="age" :initial-value="10">
-      <el-input-number-pro placeholder="年龄" />
-    </el-form-item-pro>
-    <el-form-item-pro label="籍贯" name="region">
-      <el-cascader-pro placeholder="请选择籍贯" :data-source="regionOptions" clearable filterable />
-    </el-form-item-pro>
-    <el-form-item-pro v-if="toggle" label="密码" name="password">
-      <el-input-pro type="password" :value.sync="password"  placeholder="请输入密码"></el-input-pro>
-    </el-form-item-pro>
-    <el-form-item-pro label="邮箱" name="email">
-      <el-input-pro placeholder="请输入邮箱"></el-input-pro>
-    </el-form-item-pro>
-    <el-form-item-pro label="日期区间" name="range" :useRangeValue="true" start-field-name="startDate" end-field-name="endDate">
-     <el-date-picker-pro :range="true" :startValue.sync="startDate" :endValue.sync="endDate" />
-    </el-form-item-pro>
-    <el-form-item-pro label="性别" name="gender" initial-value="male">
-      <el-radio-group-pro>
-        <el-radio-pro value="male">男</el-radio-pro>
-        <el-radio-pro value="female">女</el-radio-pro>
-      </el-radio-group-pro>
-    </el-form-item-pro>
-    <el-form-item-pro label="课程" name="course">
-      <el-checkbox-group-pro :data-source="courseOptions">
-        <template #item="current">
-          {{ current.item.label }}
-        </template>
-      </el-checkbox-group-pro>
-    </el-form-item-pro>
-    <el-form-item-pro label="学院" name="college">
-      <el-select-pro  class="demo-select-base" clearable filterable placeholder="请选择所在学院">
-        <el-option-pro v-for="(item, index) in options" :value="item.value" :label="item.label" :key="index">
-          {{ item.label }}
-        </el-option-pro>
-      </el-select-pro>
-    </el-form-item-pro>
-    <el-form-item-pro
-      label="入学时间"
-      name="date"
-    >
-      <el-date-picker-pro></el-date-picker-pro>
-    </el-form-item-pro>
-    <el-form-item-pro label="个人网站" name="content.url">
-      <el-input-pro placeholder="请输入个人网站地址"></el-input-pro>
-    </el-form-item-pro>
-    <el-form-item-pro label="个人简介" help="请用一句话介绍自己" name="description">
-      <el-textarea-pro placeholder="请用一句话介绍自己"></el-textarea-pro>
-    </el-form-item-pro>
+    <el-form-input-pro help="这里可以展示一段说明文字" name="account" :value.sync="inputValue" placeholder="请输入用户名">
+      <template #label>
+        <el-text text="用户名" />
+      </template>
+    </el-form-input-pro>
+
+    <el-form-input-number-pro name="age" :initialValue="10" placeholder="请输入年龄">
+      <template #label>
+        <el-text text="年龄" />
+      </template>
+    </el-form-input-number-pro>
+
+    <el-form-cascader-pro name="region" placeholder="请选择籍贯" :dataSource="regionOptions" clearable filterable>
+      <template #label>
+        <el-text text="籍贯" />
+      </template>
+    </el-form-cascader-pro>
+
+    <el-form-tree-select-pro name="tree" placeholder="请选择籍贯" :dataSource="regionOptions" clearable filterable>
+      <template #label>
+        <el-text text="树选择" />
+      </template>
+    </el-form-tree-select-pro>
+
+    <el-form-input-pro v-if="toggle" name="password" type="password" :value.sync="password"  placeholder="请输入密码">
+      <template #label>
+        <el-text text="密码" />
+      </template>
+    </el-form-input-pro>
+    <el-form-input-pro name="email" placeholder="请输入邮箱">
+      <template #label>
+        <el-text text="邮箱" />
+      </template>
+    </el-form-input-pro>
+    <el-form-date-picker-pro name="range" :useRangeValue="true" startFieldName="startDate" endFieldName="endDate" :range="true" :startValue.sync="startDate" :endValue.sync="endDate">
+      <template #label>
+        <el-text text="日期区间" />
+      </template>
+    </el-form-date-picker-pro>
+    <el-form-radio-group-pro name="gender" initialValue="male">
+      <template #label>
+        <el-text text="性别" />
+      </template>
+      <el-radio-pro value="male">男</el-radio-pro>
+      <el-radio-pro value="female">女</el-radio-pro>
+    </el-form-radio-group-pro>
+    <el-form-checkbox-group-pro name="course" :dataSource="courseOptions">
+      <template #label>
+        <el-text text="课程" />
+      </template>
+      <template #item="current">
+        {{ current.item.label }}
+      </template>
+    </el-form-checkbox-group-pro>
+    <el-form-rate-pro name="rate" :initialValue="2">
+      <template #label>
+        <el-text text="评分" />
+      </template>
+    </el-form-rate-pro>
+    <el-form-slider-pro name="slider">
+      <template #label>
+        <el-text text="滑块" />
+      </template>
+    </el-form-slider-pro>
+      <el-form-switch-pro name="switch">
+      <template #label>
+        <el-text text="开关" />
+      </template>
+    </el-form-switch-pro>
+    <el-form-select-pro name="college" class="demo-select-base" clearable filterable placeholder="请选择所在学院">
+     <template #label>
+        <el-text text="学院" />
+      </template>
+      <el-option-pro v-for="(item, index) in options" :value="item.value" :label="item.label" :key="index">
+        {{ item.label }}
+      </el-option-pro>
+    </el-form-select-pro>
+
+    <el-form-date-picker-pro name="date">
+     <template #label>
+        <el-text text="入学日期" />
+      </template>
+    </el-form-date-picker-pro>
+     <el-form-time-picker-pro name="time">
+     <template #label>
+        <el-text text="入学时间" />
+      </template>
+    </el-form-time-picker-pro>
+    <el-form-input-pro name="content.url" placeholder="请输入个人网站地址">
+      <template #label>
+        <el-text text="个人网站" />
+      </template>
+    </el-form-input-pro>
+    <el-form-textarea-pro help="请用一句话介绍自己" name="description" placeholder="请用一句话介绍自己">
+      <template #label>
+        <el-text text="个人简介" />
+      </template>
+    </el-form-textarea-pro>
     <el-form-item-pro label="兴趣爱好" name="hobby">
       <el-tree-select-pro
         filterable
@@ -170,9 +218,16 @@ export const Default = {
       ></el-tree-select-pro>
     </el-form-item-pro>
 
+    <el-form-transfer-pro name="transfer" :dataSource="options" textField="label" valueField="value">
+     <template #label>
+        <el-text text="学院" />
+      </template>
+    </el-form-transfer-pro>
+
+
     <el-form-item-pro style="margin-left: 100px">
       <el-space size="10px">
-        <el-button theme="primary" type="submit">提交</el-button>
+        <el-button theme="primary" @click="onSubmit">提交</el-button>
         <el-button theme="default" variant="base" @click="reset">重置</el-button>
         <el-button theme="default" variant="base" @click="handleClear">清空校验结果</el-button>
       </el-space>

@@ -448,4 +448,81 @@ namespace nasl.ui {
     //   position: 'start' | 'end',
     //  }) => any;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      ignoreProperty: ['rules'],
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault',
+      ],
+    }, {
+      name: 'ElDatePickerPro',
+    }],
+  })
+  @Component({
+    title: '表单日期选择器',
+    description: '表单日期选择器',
+    group: 'Form',
+  })
+  export class ElFormDatePickerPro extends ViewComponent {
+    constructor(options?: Partial<ElFormDatePickerProOptions & ElFormItemProOptions & Omit<ElDatePickerProOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormDatePickerProOptions extends ViewComponentOptions {
+    @Prop<ElFormDatePickerProOptions, 'useRangeValue'>({
+      group: '数据属性',
+      title: '使用区间字段',
+      description: '使用区间字段, 用于日期、时间、日期时间选择器开启区间选择时，托管起始值与结束值',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => false,
+      bindHide: true,
+    })
+    useRangeValue: nasl.core.Boolean = false;
+
+    @Prop<ElFormDatePickerProOptions, 'range'>({
+      group: '数据属性',
+      title: '区间选择',
+      description: '是否支持进行时间区间选择，关闭则为时间点选择',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      onChange: [
+        {
+          clear: ['placeholderRight'],
+        },
+        {
+          clear: [],
+          if: (_) => !_,
+        },
+        {
+          update: {
+            useRangeValue: true,
+          },
+          if: (_) => !!_,
+        },
+        {
+          update: {
+            useRangeValue: false,
+          },
+          clear: ['placeholderRight', 'name', 'startFieldName', 'endFieldName'],
+          if: (_) => !_,
+        },
+      ],
+      bindHide: true,
+    })
+    range: nasl.core.Boolean = false;
+  }
 }

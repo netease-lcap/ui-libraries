@@ -16,7 +16,7 @@
     "dev": "npm run storybook",
     "storybook": "storybook dev -p 6006",
     "build": "lcap-scripts build && npm run lowcode",
-    "watch": "lcap-scripts watch --https",
+    "watch": "lcap-scripts watch",
     "deploy": "lcap-scripts deploy",
     "deploy:one": "lcap-scripts deploy --images",
     "bd": "vite build --mode development && tsc -p tsconfig.api.json && npm run lowcode ",

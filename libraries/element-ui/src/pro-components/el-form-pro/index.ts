@@ -3,6 +3,7 @@ import { registerComponent } from '@lcap/vue2-utils';
 import { LCAP_FORM_ITEM_NAME, LCAP_FORM_NAME } from './constants';
 import * as plugins from './plugins';
 import * as itemPlugins from './plugins/item-plugins';
+import { WithFormItem } from './with-form-item';
 
 import './index.less';
 
@@ -16,5 +17,9 @@ export const ElFormItemPro = registerComponent(FormItem, itemPlugins, {
   name: LCAP_FORM_ITEM_NAME,
   slotNames: ['default'],
 });
+
+export {
+  WithFormItem,
+};
 
 export default ElFormPro;

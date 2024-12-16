@@ -29,7 +29,7 @@ namespace nasl.ui {
 
   export class ElInputProOptions extends ViewComponentOptions {
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       sync: true,
       title: '值',
       description: '输入框的值',
@@ -475,5 +475,43 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     separate: nasl.core.Boolean;
+  }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
+      ignoreProperty: ['rules'],
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [{
+      name: 'ElFormItemPro',
+      excludes: [
+        'slotDefault', 'useRangeValue',
+        'startFieldName', 'endFieldName',
+        'startInitialValue', 'endInitialValue',
+      ],
+    }, {
+      name: 'ElInputPro',
+    }],
+  })
+  @Component({
+    title: '表单输入框',
+    description: '表单输入框',
+    group: 'Form',
+  })
+  export class ElFormInputPro extends ViewComponent {
+    constructor(options?: Partial<ElFormInputProOptions & ElFormItemProOptions & Omit<ElInputProOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormInputProOptions extends ViewComponentOptions {
+
   }
 }

@@ -72,10 +72,10 @@ namespace nasl.ui {
 
     @Prop<VanSwitchOptions, 'activeText'>({
       group: '交互属性',
-      title: '开启文字',
+      title: '开启时文字',
       description: '开启时显示的文字',
       setter: {
-        concept: "SwitchSetter"
+        concept: "InputSetter"
       },
       if: _ => _.showText === true
     })
@@ -83,10 +83,10 @@ namespace nasl.ui {
 
     @Prop<VanSwitchOptions, 'inactiveText'>({
       group: '交互属性',
-      title: '关闭文字',
+      title: '关闭时文字',
       description: '关闭时显示的文字',
       setter: {
-        concept: "SwitchSetter"
+        concept: "InputSetter"
       },
       if: _ => _.showText === true
     })

@@ -4,36 +4,33 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 5,
     ideusage: {
-      idetype: "container",
+      idetype: 'container',
       structured: true,
       childAccept: "target.tag === 'el-radio-pro'",
       dataSource: {
-        dismiss:
-          "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
         loopRule: 'nth-child(n+2)',
-        loopElem: " > .el-p-radio:not([data-nodepath])",
+        loopElem: ' > .el-p-radio:not([data-nodepath])',
         emptySlot: {
           display: 'inline',
           condition: "!this.getAttribute('dataSource')",
           accept: false,
-          content: '请绑定数据源或插入子节点'
+          content: '请绑定数据源或插入子节点',
         },
         slotWrapperInlineStyle: {
           default: 'display: inline-block;',
-        }
+        },
       },
-    }
+    },
   })
-
   @Component({
     title: '单选组',
     icon: 'radios',
     description: '',
     group: 'Form',
   })
-  export class ElRadioGroupPro<T, V>  extends ViewComponent {
-
+  export class ElRadioGroupPro<T, V> extends ViewComponent {
     @Prop({
       title: '选中值',
     })
@@ -51,26 +48,20 @@ namespace nasl.ui {
   }
 
   export class ElRadioGroupProOptions<T, V> extends ViewComponentOptions {
-
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description:
-        '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
-      docDescription:
-        '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
       designerValue: [{}, {}, {}],
     })
-    dataSource:
-      | { list: nasl.collection.List<T>; total: nasl.core.Integer }
-      | nasl.collection.List<T>;
+    dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
     @Prop({
       group: '数据属性',
       title: '数据类型',
       description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription:
-        '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
+      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
     })
     dataSchema: T;
 
@@ -102,7 +93,7 @@ namespace nasl.ui {
         concept: 'AnonymousFunctionSetter',
       },
       bindOpen: true,
-      if: _ => !!_.dataSource,
+      if: (_) => !!_.dataSource,
     })
     itemProps: (current: Current<T>) => {
       /**
@@ -123,10 +114,12 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '默认' }, { title: '按钮' }],
       },
-      onChange: [{
-        clear: ['size', 'variant'],
-        if: (_) => _ === 'normal',
-      }],
+      onChange: [
+        {
+          clear: ['size', 'variant'],
+          if: (_) => _ === 'normal',
+        },
+      ],
     })
     shape: 'normal' | 'button' = 'normal';
 
@@ -205,15 +198,14 @@ namespace nasl.ui {
 
   @IDEExtraInfo({
     ideusage: {
-      idetype: "container",
+      idetype: 'container',
       parentAccept: "target.tag === 'el-radio-group-pro'",
       selector: {
-        expression: "this",
-        cssSelector: "label.el-p-radio"
+        expression: 'this',
+        cssSelector: 'label.el-p-radio',
       },
-    }
+    },
   })
-
   @Component({
     title: '单选项',
     icon: 'radio',
@@ -227,7 +219,6 @@ namespace nasl.ui {
   }
 
   export class ElRadioProOptions<T, V> extends ViewComponentOptions {
-
     @Prop({
       group: '数据属性',
       title: '选项值',
@@ -294,7 +285,7 @@ namespace nasl.ui {
       screenX: nasl.core.Integer;
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
-  }) => any;
+    }) => any;
 
     @Slot({
       title: 'Default',
@@ -302,4 +293,63 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
+      structured: true,
+      childAccept: "target.tag === 'el-radio-pro'",
+      dataSource: {
+        dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        display: 3,
+        loopRule: 'nth-child(n+2)',
+        loopElem: ' > .el-p-radio:not([data-nodepath])',
+        emptySlot: {
+          display: 'inline',
+          condition: "!this.getAttribute('dataSource')",
+          accept: false,
+          content: '请绑定数据源或插入子节点',
+        },
+        slotWrapperInlineStyle: {
+          default: 'display: inline-block;',
+        },
+      },
+      ignoreProperty: ['rules'],
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [
+      {
+        name: 'ElFormItemPro',
+        excludes: [
+          'slotDefault',
+          'useRangeValue',
+          'startFieldName',
+          'endFieldName',
+          'startInitialValue',
+          'endInitialValue',
+        ],
+      },
+      {
+        name: 'ElRadioGroupPro',
+      },
+    ],
+  })
+  @Component({
+    title: '表单单选组',
+    description: '表单单选组',
+    group: 'Form',
+  })
+  export class ElFormRadioGroupPro<T, V> extends ViewComponent {
+    constructor(options?: Partial<ElFormRadioGroupProOptions<T, V> & ElFormItemProOptions & Omit<ElRadioGroupProOptions<T, V>, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormRadioGroupProOptions<T, V> extends ViewComponentOptions {}
 }
