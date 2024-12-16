@@ -214,6 +214,18 @@ namespace nasl.ui {
       which: nasl.core.Integer;
     }) => any;
 
+    @Event({
+      title: '聚焦时',
+      description: '聚焦时触发',
+    })
+    onFocus: (event: {}) => void;
+
+    @Event({
+      title: '失焦时',
+      description: '失焦时触发',
+    })
+    onBlur: (event: {}) => void;
+
     // @Prop({
     //   group: '主要属性',
     //   title: '图标类名',
