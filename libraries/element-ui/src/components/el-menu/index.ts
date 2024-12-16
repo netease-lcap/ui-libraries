@@ -8,7 +8,11 @@ import { registerComponent } from '@lcap/vue2-utils/plugins/index';
 import * as plugins from './plugins';
 
 export const ElMenu = registerComponent(Menu, plugins, {
-  nativeEvents: [],
+  nativeEvents: [
+    'click', 'dblclick', 'contextmenu',
+    'mousedown', 'mouseup', 'mouseenter',
+    'mouseleave', 'focus', 'blur',
+  ],
   slotNames: ['default'],
   methodNames: ['open', 'close'],
 });
