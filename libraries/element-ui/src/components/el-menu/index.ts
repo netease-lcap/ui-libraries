@@ -93,7 +93,14 @@ Menu.methods.handleItemClick = function (item) {
 };
 
 export const ElSubmenu = Submenu;
-export const ElMenuItem = MenuItem;
+export const ElMenuItem = registerComponent(MenuItem, {}, {
+  nativeEvents: [
+    'dblclick', 'contextmenu',
+    'mousedown', 'mouseup', 'mouseenter',
+    'mouseleave', 'focus', 'blur',
+  ],
+  slotNames: ['default'],
+});
 export const ElMenuItemGroup = MenuItemGroup;
 
 export default ElMenu;
