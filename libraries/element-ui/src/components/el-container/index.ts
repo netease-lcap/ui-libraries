@@ -8,7 +8,7 @@ import * as plugins from './plugins';
 
 export const ElContainer = registerComponent(Container, plugins, {
   nativeEvents: [
-    'mouseenter', 'dblclick', 'contextmenu',
+    'click', 'dblclick', 'contextmenu',
     'mousedown', 'mouseup', 'mouseenter',
     'mouseleave',
   ],
