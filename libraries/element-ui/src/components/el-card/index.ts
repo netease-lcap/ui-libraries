@@ -5,7 +5,11 @@ import * as plugins from './plugins';
 import './index.less';
 
 export const ElCard = registerComponent(Card, plugins, {
-  nativeEvents: [],
+  nativeEvents: [
+    'click', 'dblclick', 'contextmenu',
+    'mousedown', 'mouseup', 'mouseenter',
+    'mouseleave',
+  ],
   slotNames: ['default', 'header'],
   methodNames: [],
 });
