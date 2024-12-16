@@ -100,7 +100,13 @@
             "childAccept": "target.tag === 'u-crumb-item'",
             "additionalAttribute": {
                 ":showInDesiner": true
-            }
+            },
+            "style": [
+                {
+                    "selector": ".empty-slot-wrapper",
+                    "declaration": "display: table-cell"
+                }
+            ]
         }
     },
     {
