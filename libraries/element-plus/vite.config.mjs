@@ -20,6 +20,12 @@ export default defineConfig(({ command }) => {
         type: 'nasl.ui',
         framework: 'vue3',
         pnpm: true,
+        modules: {
+          entries: {
+            install: 'src/install',
+          },
+          tsconfigPath: 'tsconfig.build.json',
+        },
       }),
     ],
     resolve: {

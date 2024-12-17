@@ -1,14 +1,9 @@
 import { type Plugin } from 'vue';
+import { install } from './install';
 import 'element-plus/theme-chalk/base.css';
-import * as Components from './components';
 
 export * from './components';
-
-export const install: Plugin = (app, options) => {
-  Object.keys(Components).forEach((name) => {
-    app.component(name, Components[name]);
-  });
-};
+export * from './install';
 
 export default {
   install,
