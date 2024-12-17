@@ -269,23 +269,7 @@ namespace nasl.ui {
       title: '点击',
       description: '点击时触发，一般用于外层阻止冒泡场景',
     })
-    onClick: (event: {
-      altKey: nasl.core.Boolean;
-      button: nasl.core.Integer;
-      clientX: nasl.core.Integer;
-      clientY: nasl.core.Integer;
-      ctrlKey: nasl.core.Boolean;
-      metaKey: nasl.core.Boolean;
-      movementX: nasl.core.Integer;
-      movementY: nasl.core.Integer;
-      offsetX: nasl.core.Integer;
-      offsetY: nasl.core.Integer;
-      pageX: nasl.core.Integer;
-      pageY: nasl.core.Integer;
-      screenX: nasl.core.Integer;
-      screenY: nasl.core.Integer;
-      which: nasl.core.Integer;
-    }) => any;
+    onClick: (event: MouseEvent) => any;
 
     @Slot({
       title: 'Default',

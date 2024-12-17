@@ -1,7 +1,8 @@
 import path from 'path';
-import LcapCodeGen from './lcap-code-gen';
+import LcapThemeCode from './lcap-theme-code';
 import LcapBuild from './lcap-build';
-import LcapConfig from './lcap-config';
+import LcapDefaultConfig from './lcap-default-config';
+import lcapUseNaslUI from './lcap-use-nasl-ui';
 import type { LcapThemeOptions, ViteLcapPluginOptions } from './lcap-build';
 import { getConfigComponents } from '../utils';
 
@@ -62,12 +63,19 @@ export default (options: ViteLcapPluginOptions = {}) => {
   }
 
   return [
-    LcapConfig({
-      framework: pluginOption.framework,
-      destDir: pluginOption.destDir,
-      rootPath: cwd,
+    LcapDefaultConfig({
+      framework: pluginOption.framework as string,
+      destDir: pluginOption.destDir as string,
+      type: pluginOption.type as any,
+      rootPath: pluginOption.rootPath as any,
     }),
-    LcapCodeGen({
+    lcapUseNaslUI({
+      framework: pluginOption.framework as string,
+      destDir: pluginOption.destDir as string,
+      type: pluginOption.type as any,
+      rootPath: pluginOption.rootPath as any,
+    }),
+    LcapThemeCode({
       ...pluginOption.theme,
       framework: pluginOption.framework,
       type: pluginOption.type,

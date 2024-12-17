@@ -1,5 +1,6 @@
 import Vue, { ComponentOptions } from 'vue';
 import { type ScopedSlot } from 'vue/types/vnode';
+import { camelCase } from 'lodash';
 import { IN_ELEMENT_FORM, IN_ELEMENT_FORM_ITEM } from './constants';
 import { isModelOption, isRangeModelOption } from './utils';
 import { getVarMapAndClass } from '@/utils/style';
@@ -60,8 +61,9 @@ function getAttrs(attrs: Record<string, any>) {
     input: inputAttrs,
     formItem: formItemAttrs,
   };
-};
+}
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 function getListeners(listeners: Record<string, Function>) {
   const inputListeners = {
     ...listeners,
@@ -80,7 +82,7 @@ function getListeners(listeners: Record<string, Function>) {
     input: inputListeners,
     formItem: formItemListeners,
   };
-};
+}
 
 function getSlots(slots: Record<string, ScopedSlot>) {
   const inputSlots = {
@@ -100,6 +102,27 @@ function getSlots(slots: Record<string, ScopedSlot>) {
     input: inputSlots,
     formItem: formItemSlots,
   };
+}
+
+function getStyles(style: Record<string, string> = {}) {
+  const rootStyle = {};
+  const inputStyle = {};
+  Object.keys(style).forEach((key) => {
+    const attrName = camelCase(key);
+    if (
+      [
+        'margin', 'marginLeft', 'marginRight', 'marginBottom', 'marginTop',
+        'position', 'left', 'right', 'bottom', 'top',
+        'display', 'flex', 'order', 'visibility', 'zIndex', 'boxSizing',
+        'flexGrow', 'flexShrink', 'flexBasis', 'alignSelf',
+      ].includes(attrName)
+    ) {
+      rootStyle[key] = style[key];
+    } else {
+      inputStyle[key] = style[key];
+    }
+  });
+  return { rootStyle, inputStyle };
 }
 
 export interface WithFormItemOptions {
@@ -160,12 +183,20 @@ export const WithFormItem = (Component: any, { name, methodNames = [] }: WithFor
       }
     },
     render(h) {
-      const { $attrs, $listeners, $scopedSlots, inForm, inFormItem, inputStyle } = this as any;
+      const {
+        $attrs,
+        $listeners,
+        $scopedSlots,
+        inForm,
+        inFormItem,
+        inputStyle,
+      } = this as any;
       const attrs = getAttrs($attrs);
       const listeners = getListeners($listeners);
       const slots = getSlots($scopedSlots);
       const inputRoot = !inForm || inFormItem;
       const { varMap, classList } = getVarMapAndClass(inputStyle);
+      const { rootStyle, inputStyle: eleStyle } = getStyles(inputStyle);
 
       const inputElement = h(Component, {
         attrs: {
@@ -173,7 +204,7 @@ export const WithFormItem = (Component: any, { name, methodNames = [] }: WithFor
           ...(inputRoot ? attrs.root : {}),
         },
         staticStyle: {
-          ...inputStyle,
+          ...(inputRoot ? inputStyle : eleStyle),
           ...varMap,
         },
         class: [...classList, '__cw-form-compose-input'].join(' '),
@@ -190,6 +221,9 @@ export const WithFormItem = (Component: any, { name, methodNames = [] }: WithFor
         attrs: {
           ...attrs.formItem,
           ...attrs.root,
+        },
+        style: {
+          ...rootStyle,
         },
         on: listeners.formItem,
         scopedSlots: slots.formItem,

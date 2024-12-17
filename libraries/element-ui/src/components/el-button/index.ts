@@ -6,7 +6,7 @@ import './index.less';
 
 export const ElButton = registerComponent(Button, plugins, {
   nativeEvents: [
-    'mouseenter', 'dblclick', 'contextmenu',
+    'dblclick', 'contextmenu',
     'mousedown', 'mouseup', 'mouseenter',
     'mouseleave', 'focus', 'blur',
   ],

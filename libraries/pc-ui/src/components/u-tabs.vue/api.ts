@@ -104,6 +104,16 @@ namespace nasl.ui {
 
         @Prop({
             group: '数据属性',
+            title: '根据值去重',
+            description: '在使用数据源时,会根据值去重数据',
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        uniqValue: nasl.core.Boolean = false;
+
+        @Prop({
+            group: '数据属性',
             title: '使用路由',
             description: '开启后，选项卡可设置跳转页面',
             docDescription: '开启后，选项卡可设置跳转页面',
@@ -190,6 +200,18 @@ namespace nasl.ui {
             },
         })
         size: 'normal' | 'small' | 'mini' = 'normal';
+
+        @Prop({
+            group: '样式属性',
+            title: '内容区充满',
+            docDescription: '内容区充满',
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        fullContainer: nasl.core.Boolean = false;
+
+        
 
         @Event({
             title: '点击后',

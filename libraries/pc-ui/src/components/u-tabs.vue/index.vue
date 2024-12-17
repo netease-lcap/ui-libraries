@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.root" :disabled="disabled" :appear="appear" :size="size" :item-width="itemWidth">
+    <div :class="$style.root" :fullContainer="fullContainer" :disabled="disabled" :appear="appear" :size="size" :item-width="itemWidth">
         <div :class="$style.head">
             <span :class="$style.extra" vusion-slot-name="extra">
                 <slot name="extra"></slot>
@@ -79,7 +79,7 @@
                 <span :class="$style.next" @click="scrollNext" :vusion-click-enabled="$env.VUE_APP_DESIGNER"></span>
             </nav>
         </div>
-        <div :class="$style.body">
+        <div :class="$style.body" :fullContainer="fullContainer">
             <template v-if="$env.VUE_APP_DESIGNER && !itemVMs && !itemVMs.length && !dataSource && !$slots.default">
                 <span :class="$style.loadContent">{{ treeSelectTip }}</span>
             </template>
@@ -108,6 +108,7 @@ import SEmpty from '../s-empty.vue';
 import SupportDataSource from '../../mixins/support.datasource.js';
 import UTab from './tab.vue';
 import URouterView from '../../components/u-router-view.vue';
+import _ from 'lodash';
 
 export default {
     name: 'u-tabs',
@@ -154,6 +155,8 @@ export default {
         urlField: { type: String, default: 'url' },
         contentField: { type: String, default: '' },
         closableField: { type: String, default: 'closable' },
+        fullContainer:{ type: Boolean, default: false },
+        uniqValue:{ type: Boolean, default: false },
     },
     data() {
         return {
@@ -173,7 +176,12 @@ export default {
                 return this.itemWidth;
         },
         tabDataSource() {
-            return this.currentDataSource && this.currentDataSource.data || [];
+            const list=this.currentDataSource && this.currentDataSource.data || [];
+            if(!this.uniqValue){
+                return list
+            }else{
+                return _.uniqWith(list, (a, b) => _.get(a, this.valueField) === _.get(b, this.valueField));
+            }
         },
     },
     watch: {

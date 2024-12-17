@@ -213,6 +213,7 @@ import { createTableHeaderExportHelper, getXslxStyle } from './helper';
 import * as xlsxUtils from '../../utils/xlsx';
 import UTableRender from './render.table.vue';
 import UTableDesigner from './designer.table.vue';
+import TreeTableMixin from './tree-table-mixins';
 
 export default {
     name: 'u-table-view',
@@ -248,7 +249,8 @@ export default {
           return this.selectedItem && this.$at(this.selectedItem, this.valueField);
         },
         values: 'currentValues',
-      })
+      }),
+      TreeTableMixin,
     ],
     // i18n,
     props: {

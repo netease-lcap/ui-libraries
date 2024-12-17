@@ -2,6 +2,11 @@
   font-size: var(--tabs-font-size);
 }
 
+.root[fullContainer]{
+  display: flex;
+  flex-direction: column;
+}
+
 .head {
   user-select: none;
   background: var(--tabs-head-background);
@@ -375,6 +380,10 @@ content: "\e663";
 
 .body {
   padding-top: var(--tabs-body-space);
+}
+
+.body[fullContainer]{
+  height: 100%;
 }
 
 .root[size="small"] > .body {

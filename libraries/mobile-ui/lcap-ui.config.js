@@ -81,6 +81,13 @@ module.exports = {
       alias: '标签栏',
     },
     {
+      group: 'Navigation',
+      show: true,
+      name: 'anchor',
+      alias: '锚点',
+      vusion: true,
+    },
+    {
       group: 'Display',
       show: true,
       name: 'button',

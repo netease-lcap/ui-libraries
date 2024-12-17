@@ -35,17 +35,64 @@ namespace nasl.ui {
     })
     direction: 'horizontal' | 'vertical';
 
+    @Event({
+      title: '滚动时',
+      description: '滚动时触发',
+    })
+    onScroll: (event: {
+      scrollTop: nasl.core.Integer;
+      scrollLeft: nasl.core.Integer;
+      scrollWidth: nasl.core.Integer;
+      scrollHeight: nasl.core.Integer;
+      clientWidth: nasl.core.Integer;
+      clientHeight: nasl.core.Integer;
+    }) => any;
+
+    @Event({
+      title: '点击',
+      description: '在元素上按下并释放任意鼠标按钮时触发。',
+    })
+    onClick: (event: MouseEvent) => any;
+
+    @Event({
+      title: '双击',
+      description: '在元素上双击鼠标按钮时触发。',
+    })
+    onDblclick: (event: MouseEvent) => any;
+
+    @Event({
+      title: '右键点击',
+      description: '在右键菜单显示前触发。',
+    })
+    onContextmenu: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标按下',
+      description: '在元素上按下任意鼠标按钮时触发。',
+    })
+    onMousedown: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标释放',
+      description: '在元素上释放任意鼠标按钮时触发。',
+    })
+    onMouseup: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标移入',
+      description: '鼠标移入元素时触发。',
+    })
+    onMouseenter: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标移出',
+      description: '鼠标移出元素时触发。',
+    })
+    onMouseleave: (event: MouseEvent) => any;
+
     @Slot({
       title: 'Default',
       description: '内容',
-      // snippets: [
-      //   { title: '布局容器', code: '<el-container></el-container>' },
-      //   { title: '顶栏', code: '<el-header style="padding-left: 0;padding-right: 0"></el-header>' },
-      //   { title: '侧边栏', code: '<el-aside></el-aside>' },
-      //   { title: '主区域', code: '<el-main></el-main>' },
-      //   { title: '底栏', code: '<el-footer style="padding-left: 0;padding-right: 0"></el-footer>' },
-      // ],
-      // emptyBackground: 'add-sub',
     })
     slotDefault: () => Array<ViewComponent>;
   }
@@ -91,6 +138,47 @@ namespace nasl.ui {
     })
     width: nasl.core.String = '300px';
 
+    @Event({
+      title: '点击',
+      description: '在元素上按下并释放任意鼠标按钮时触发。',
+    })
+    onClick: (event: MouseEvent) => any;
+
+    @Event({
+      title: '双击',
+      description: '在元素上双击鼠标按钮时触发。',
+    })
+    onDblclick: (event: MouseEvent) => any;
+
+    @Event({
+      title: '右键点击',
+      description: '在右键菜单显示前触发。',
+    })
+    onContextmenu: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标按下',
+      description: '在元素上按下任意鼠标按钮时触发。',
+    })
+    onMousedown: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标释放',
+      description: '在元素上释放任意鼠标按钮时触发。',
+    })
+    onMouseup: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标移入',
+      description: '鼠标移入元素时触发。',
+    })
+    onMouseenter: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标移出',
+      description: '鼠标移出元素时触发。',
+    })
+    onMouseleave: (event: MouseEvent) => any;
 
     @Slot({
       title: '默认',
@@ -112,6 +200,47 @@ namespace nasl.ui {
   }
 
   export class ElMainOptions extends ViewComponentOptions {
+    @Event({
+      title: '点击',
+      description: '在元素上按下并释放任意鼠标按钮时触发。',
+    })
+    onClick: (event: MouseEvent) => any;
+
+    @Event({
+      title: '双击',
+      description: '在元素上双击鼠标按钮时触发。',
+    })
+    onDblclick: (event: MouseEvent) => any;
+
+    @Event({
+      title: '右键点击',
+      description: '在右键菜单显示前触发。',
+    })
+    onContextmenu: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标按下',
+      description: '在元素上按下任意鼠标按钮时触发。',
+    })
+    onMousedown: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标释放',
+      description: '在元素上释放任意鼠标按钮时触发。',
+    })
+    onMouseup: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标移入',
+      description: '鼠标移入元素时触发。',
+    })
+    onMouseenter: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标移出',
+      description: '鼠标移出元素时触发。',
+    })
+    onMouseleave: (event: MouseEvent) => any;
     @Slot({
       title: '默认',
       description: '内容',

@@ -3,3 +3,4 @@ export const virtualThemeComponentStoriesFileId = 'virtual:lcap-theme-component-
 export const virtualThemePagePreviewFileId = 'virtual:lcap-theme-page-preview.js';
 export const virtualThemePreviewWrapFileId = 'virtual:lcap-theme-preview-wrap.js';
 export const virtualThemeEntryFileId = '/virtual:lcap-theme-entry.js';
+export const virtualInjectCSSFileId = 'virtual:inject-css.js';

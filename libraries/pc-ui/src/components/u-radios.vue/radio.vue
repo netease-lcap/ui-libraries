@@ -101,6 +101,7 @@ export default {
 .root {
     user-select: none;
     cursor: var(--cursor-pointer);
+    display: inline-block;
 }
 
 .root:focus {

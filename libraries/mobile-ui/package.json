@@ -1,6 +1,6 @@
 {
   "name": "@lcap/mobile-ui",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "lcapname": "@lcap/mobile-ui",
   "lcapversion": "0.6.3",
   "description": "Mobile UI Components built on Vue",
@@ -80,7 +80,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
-    "@lcap/builder": "workspace:^*",
+    "@lcap/builder": "workspace:*",
     "@lcap/storybook-vue-vite": "workspace:^*",
     "@lcap/vite-plugin-vue2": "workspace:^*",
     "@nasl/types": "0.1.8-beta.3",

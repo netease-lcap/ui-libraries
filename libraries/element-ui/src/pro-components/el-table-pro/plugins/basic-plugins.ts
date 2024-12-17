@@ -50,9 +50,11 @@ export const useTable: NaslComponentPluginOptions = {
     ])({ selection: selection.value, multiple: multiple.value });
     const sort = ref<string | null>(sorting.value?.field);
     const order = ref<string | null>(sorting.value?.order);
+    const checkStrictly = props.useComputed('checkStrictly', (value) => !!value);
     const tree = props.useComputed('treeDisplay', (value) => (value
       ? {
-        childrenKey: 'chiildren',
+        childrenKey: 'children',
+        checkStrictly: checkStrictly.value,
       }
       : undefined));
 
@@ -63,7 +65,7 @@ export const useTable: NaslComponentPluginOptions = {
       return listToTree(v, {
         valueField: valueField.value,
         parentField,
-        childrenField: 'chiildren',
+        childrenField: 'children',
       });
     });
     const dragSort = props.useComputed('dragSort', (value) => (value === 'false' ? undefined : value));
@@ -251,8 +253,8 @@ export const useTable: NaslComponentPluginOptions = {
             onLoadData?.({
               page: current.value,
               size: pageSize.value,
-              sort: sorting.value?.field,
-              order: sorting.value?.order,
+              sort: sort.value,
+              order: order.value,
             });
           }
         },

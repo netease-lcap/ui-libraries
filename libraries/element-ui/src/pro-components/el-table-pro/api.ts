@@ -41,6 +41,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
+      containerDirection: "row",
       disableSlotAutoFill: [
         {
           slot: 'expandedRow',
@@ -52,6 +53,7 @@ namespace nasl.ui {
       },
       additionalAttribute: {
         rowKey: '"index"',
+        valueField: '"index"',
       },
       forceUpdateWhenAttributeChange: true,
       dataSource: {
@@ -173,11 +175,12 @@ namespace nasl.ui {
     })
     expandedRowKeys: V;
 
-    @Prop({
+    @Prop<ElTableProOptions<T, V, P, M>, 'hasExpandedRow'>({
       group: '主要属性',
       title: '是否打开展开行',
       description: '是否打开展开行',
       setter: { concept: 'SwitchSetter' },
+      if: (_) => _.treeDisplay === false,
     })
     hasExpandedRow: nasl.core.Boolean = false;
     // hasExpandedRow
@@ -650,7 +653,7 @@ namespace nasl.ui {
     })
     tableLayout: 'auto' | 'fixed' = 'fixed';
 
-    @Prop({
+    @Prop<ElTableProOptions<T, V, P, M>, 'treeDisplay'>({
       group: '数据属性',
       title: '树形模式',
       description: '以树形数据展示表格',
@@ -658,6 +661,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      if: (_) => _.hasExpandedRow === false,
     })
     treeDisplay: nasl.core.Boolean = false;
 
@@ -676,9 +680,9 @@ namespace nasl.ui {
 
     @Prop<ElTableProOptions<T, V, P, M>, 'checkStrictly'>({
       group: '数据属性',
-      title: '关联选中类型',
-      description: '父子树节点是否关联选中',
-      docDescription: '当选中父节点时，子节点是否相应选中等。在"树形模式"属性开启并且表格存在"多选列"时有效',
+      title: '父子行选中是否独立',
+      description: '父子行选中是否独立',
+      docDescription: '父子行选中是否独立',
       setter: {
         concept: 'SwitchSetter',
       },

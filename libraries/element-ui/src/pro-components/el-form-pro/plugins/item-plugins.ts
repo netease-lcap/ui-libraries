@@ -165,14 +165,3 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     };
   },
 };
-
-export const useLowcode: NaslComponentPluginOptions = {
-  setup(props) {
-    return {
-      style: {
-        overflow: 'hidden',
-      },
-    };
-  },
-  onlyUseIDE: true,
-};

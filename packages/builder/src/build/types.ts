@@ -34,15 +34,26 @@ export interface DepCompListInfo {
   isResetRoot: boolean;
 }
 
-export interface LcapBuildOptions {
+export interface LcapMetaOptions {
   rootPath: string;
   type: 'extension' | 'nasl.ui';
   framework: 'react' | 'vue2' | 'taro' | 'vue3',
+}
+
+export interface BuildModulesOptions extends LcapMetaOptions {
+  outDir: string; // es
+  entries?: { [key: string]: string };
+  external?: (string | RegExp)[];
+  tsconfigPath?: string;
+}
+
+export interface LcapBuildOptions extends LcapMetaOptions {
   assetsPublicPath?: string;
   components?: Array<{ group: string, title: string, name: string, [key: string]: any }>;
   i18n?: boolean | {[lang: string]: string};
   theme: LcapThemeOptions;
   ide?: BuildIdeOptions;
+  modules?: boolean | Partial<Omit<BuildModulesOptions, keyof LcapMetaOptions>>;
   destDir: string;
   pnpm?: boolean;
   dependencies?: Dependency[];
@@ -81,7 +92,7 @@ export interface LcapBuildOptions {
     }>;
     inferSelectorComponentName?: (selector: string, componentNameMap: Record<string, string | undefined>) => string | undefined; // 重写推断选择器是哪个组件的方法。很复杂！建议优先走上面的配置
     isSelectorStartRoot?: (selector: string, componentName: string, parentName: string | undefined) => boolean; // 重写判断选择器是否是根节点。很复杂！建议优先走上面的配置
-};
+  };
 }
 
 export const SupportedCSSProperties = [

@@ -158,10 +158,10 @@ export default {
         },
         currentDisabled() {
             return (
-                this.disabled
-                || this.rootVM.disabled
-                || (!this.rootVM.checkControlled && this.parentVM && this.parentVM.currentDisabled)
-            );
+            this.disabled
+            || this.rootVM.disabled
+            || (!this.rootVM.checkControlled && this.parentVM && this.parentVM.currentDisabled)
+             );
         },
         currentReadOnly() {
             return (
@@ -343,7 +343,7 @@ export default {
         },
         toggle(expanded) {
             if (this.currentDisabled && !this.rootVM.checkControlled)
-                return;
+            return;
             if (!(this.hasChildren
                 || this.nodeVMs.length
                 || (this.node && !this.$at(this.node, this.rootVM.isLeafField) && this.rootVM.currentDataSource && this.rootVM.currentDataSource.load)))
@@ -787,6 +787,9 @@ content: "\e679";
 }
 .item[disabled] .expander {
     color: var(--tree-view-node-expander-color-disabled);
+}
+.item[disabled] .expander[check-controlled] {
+    color: var(--tree-view-node-expander-color);
 }
 .item[subBackground][selected] + .sub {
     background: var(--tree-view-subnode-background-selected);

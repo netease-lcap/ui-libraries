@@ -39,6 +39,7 @@ const genVarName = (key: string) => `--cw-style-${kebabCase(key)}`;
 const genClassName = (key: string) => `cw-style-${kebabCase(key)}`;
 const genConcatClassName = (key: string) => {
   let name = key;
+
   switch (name) {
     case 'padding':
     case 'paddingLeft':
@@ -68,11 +69,11 @@ const genConcatClassName = (key: string) => {
     case 'borderBottomRightRadius':
       name = 'borderRadius';
       break;
+    default: break;
   }
 
-
   return name ? genClassName(name) : '';
-}
+};
 
 export function getVarMapAndClass(styleMap: Record<string, any>) {
   const classList: string[] = [];
