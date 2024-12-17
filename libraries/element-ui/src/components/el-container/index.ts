@@ -10,7 +10,7 @@ export const ElContainer = registerComponent(Container, plugins, {
   nativeEvents: [
     'click', 'dblclick', 'contextmenu',
     'mousedown', 'mouseup', 'mouseenter',
-    'mouseleave',
+    'mouseleave', 'scroll',
   ],
   slotNames: ['default'],
   methodNames: [],
