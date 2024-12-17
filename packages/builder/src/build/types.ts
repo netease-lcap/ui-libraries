@@ -39,6 +39,7 @@ export interface LcapBuildOptions {
   type: 'extension' | 'nasl.ui';
   framework: 'react' | 'vue2' | 'taro' | 'vue3',
   assetsPublicPath?: string;
+  frameworkUI?: string; // CloudUI ElementUI antd vant ElementPlus
   components?: Array<{ group: string, title: string, name: string, [key: string]: any }>;
   i18n?: boolean | {[lang: string]: string};
   theme: LcapThemeOptions;
