@@ -121,6 +121,7 @@ export async function buildNaslExtensionConfig(options: LcapBuildOptions) {
     rootPath: options.rootPath,
     framework: options.framework,
     i18n: options.i18n,
+    frameworkUI: options.frameworkUI,
   });
 
   const naslConfigPath = path.join(options.rootPath, 'nasl.extension.json');

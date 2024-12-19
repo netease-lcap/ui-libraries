@@ -49,6 +49,7 @@ export interface BuildModulesOptions extends LcapMetaOptions {
 
 export interface LcapBuildOptions extends LcapMetaOptions {
   assetsPublicPath?: string;
+  frameworkUI?: string; // CloudUI ElementUI antd vant ElementPlus
   components?: Array<{ group: string, title: string, name: string, [key: string]: any }>;
   i18n?: boolean | {[lang: string]: string};
   theme: LcapThemeOptions;

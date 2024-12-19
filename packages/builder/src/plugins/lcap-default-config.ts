@@ -71,6 +71,14 @@ function setLibBuildConfig(options: LcapViteConfigPluginOptions, config: UserCon
     return;
   }
 
+  if (options.framework === 'vue2' && options.type === 'nasl.ui') {
+    delete globals['@vue/composition-api'];
+    const i = external.indexOf('@vue/composition-api');
+    if (i !== -1) {
+      external.splice(i, 1);
+    }
+  }
+
   config.build = {
     target: ['es2020', 'edge88', 'firefox78', 'chrome56', 'safari14'],
     outDir: options.destDir,

@@ -9,6 +9,7 @@ export interface GenNaslExtensionConfigProps {
   rootPath: string;
   i18n?: boolean | { [lang: string]: string };
   framework?: string;
+  frameworkUI?: string;
   assetsPublicPath?: string;
 }
 
@@ -53,12 +54,13 @@ function getPeerDependencies(pkgInfo) {
   });
 }
 
-function getFrontEndLibray(frameworkKind, viewComponents, logics) {
+function getFrontEndLibray(frameworkKind, frameworkUI, viewComponents, logics) {
   const pcFeLibrary: any = {
     concept: 'FrontendLibrary',
     name: 'pc',
     type: 'pc',
     frameworkKind,
+    frameworkUI,
     viewComponents: [],
     logics: [],
   };
@@ -106,6 +108,7 @@ export default async function getNaslExtensionConfig({
   assetsPublicPath,
   framework,
   i18n,
+  frameworkUI,
 }: GenNaslExtensionConfigProps) {
   const componentPath = 'src/components';
   const pkgInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
@@ -143,7 +146,7 @@ export default async function getNaslExtensionConfig({
   processComponentConfigExtends(viewComponents);
 
   const logics = await genNaslLogicsConfig(rootPath);
-  const feLibraries = getFrontEndLibray(frameworkKind, viewComponents, logics);
+  const feLibraries = getFrontEndLibray(frameworkKind, frameworkUI, viewComponents, logics);
 
   return {
     config: {

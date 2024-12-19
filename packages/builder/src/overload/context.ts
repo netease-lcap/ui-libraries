@@ -4,6 +4,8 @@ import path from 'path';
 import { kebabCase, upperFirst } from 'lodash';
 import type { ViewComponentDeclaration } from '@nasl/types/nasl.ui.ast';
 import type { ThemeComponentConfig, ThemeConfig } from '../build/gens/gen-theme-config';
+import { LCAP_UI_JSON_PATH, LCAP_UI_PACKAGE_PATH } from './constants';
+import { type ModulesInfo } from '../plugins/lcap-use-nasl-ui';
 
 export interface NaslUIComponentConfig extends ViewComponentDeclaration {
   ideusage?: any;
@@ -23,6 +25,7 @@ export interface OverloadComponentContext {
   framework: string;
   pkgComponentFolderPath: string;
   componentFolderPath: string;
+  uiPkgName: string;
   pkgName: string;
   fork: boolean;
   type: 'pc' | 'h5';
@@ -40,15 +43,19 @@ export function getProjectContext(rootPath) {
 
   if (pkg && pkg.lcap && pkg.lcap['lcap-ui']) {
     return {
-      pkgName: pkg.name,
       ...pkg.lcap['lcap-ui'],
+      name: pkg.name,
     };
   }
 
   return null;
 }
 
-function getComponentFloderPath(rootPath, component, framework) {
+function getComponentFloderPath(rootPath, component, framework, apiMap?: Record<string, string> | null) {
+  if (apiMap && apiMap[component]) {
+    return path.resolve(rootPath, LCAP_UI_PACKAGE_PATH, apiMap[component], '../');
+  }
+
   const pkg = fs.readJSONSync(path.resolve(rootPath, '.lcap/lcap-ui/package/package.json'));
   if (pkg.name === 'cloud-ui.vusion' || pkg.name === '@lcap/pc-ui') {
     if (component === 'UToastSingle') {
@@ -139,11 +146,13 @@ function getThemeConfig(rootPath, component) {
 export function getOverloadComponentContext(rootPath, { component, prefix, fork }) {
   const env = getProjectContext(rootPath);
   const configPath = path.resolve(rootPath, '.lcap/lcap-ui/runtime/nasl.ui.json');
-  if (!fs.existsSync(configPath) || !env) {
+  const lcapUIConfigPath = path.resolve(rootPath, LCAP_UI_JSON_PATH);
+  if (!fs.existsSync(configPath) || !fs.existsSync(lcapUIConfigPath) || !env) {
     throw new Error('unfound nasl config path .lcap/lcap-ui/runtime/nasl.ui.json, please execute command \'lcap install\' ');
   }
 
   const configList = fs.readJSONSync(configPath);
+  const lcapUIConfig = fs.readJSONSync(lcapUIConfigPath);
   const comp = configList.find((it) => it.name === component);
   if (!comp) {
     throw new Error(`unfound component ${component} in config file `);
@@ -152,6 +161,11 @@ export function getOverloadComponentContext(rootPath, { component, prefix, fork 
   prefix = prefix.toLowerCase();
   const name = upperFirst(prefix) + component;
   const tagName = env.framework.startsWith('vue') ? kebabCase(name) : name;
+  const modulesInfoPath = path.resolve(rootPath, LCAP_UI_PACKAGE_PATH, lcapUIConfig.modules || 'es/modules.json');
+  let modulesInfo: ModulesInfo | null = null;
+  if (fs.existsSync(modulesInfoPath)) {
+    modulesInfo = fs.readJSONSync(modulesInfoPath);
+  }
 
   return {
     rootPath,
@@ -159,10 +173,11 @@ export function getOverloadComponentContext(rootPath, { component, prefix, fork 
     naslUIConfig: comp,
     name,
     tagName,
-    pkgName: env.pkgName,
+    uiPkgName: env.pkgName,
+    pkgName: env.name,
     framework: env.framework,
     type: env.type,
-    pkgComponentFolderPath: getComponentFloderPath(rootPath, component, env.framework),
+    pkgComponentFolderPath: getComponentFloderPath(rootPath, component, env.framework, modulesInfo?.api),
     componentFolderPath: path.resolve(rootPath, `src/components/${tagName}`),
     fork,
     prefix,
