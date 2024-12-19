@@ -149,7 +149,7 @@ export async function buildNaslExtension(options: LcapBuildOptions) {
   });
 
   await buildDecalaration(options);
-  const manifest = genManifestConfig(options);
+  const manifest = await genManifestConfig(options);
   (naslExtensionConfig.compilerInfoMap as any).manifest = JSON.stringify(manifest);
   fs.writeJSONSync(naslConfigPath, { ...naslExtensionConfig }, { spaces: 2 });
 
