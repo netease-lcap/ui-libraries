@@ -201,6 +201,19 @@ namespace nasl.ui {
 
   export class ElMainOptions extends ViewComponentOptions {
     @Event({
+      title: '滚动时',
+      description: '滚动时触发',
+    })
+    onScroll: (event: {
+      scrollTop: nasl.core.Integer;
+      scrollLeft: nasl.core.Integer;
+      scrollWidth: nasl.core.Integer;
+      scrollHeight: nasl.core.Integer;
+      clientWidth: nasl.core.Integer;
+      clientHeight: nasl.core.Integer;
+    }) => any;
+
+    @Event({
       title: '点击',
       description: '在元素上按下并释放任意鼠标按钮时触发。',
     })
