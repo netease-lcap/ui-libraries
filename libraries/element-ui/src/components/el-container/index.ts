@@ -30,7 +30,7 @@ export const ElMain = registerComponent(Main, {}, {
   nativeEvents: [
     'click', 'dblclick', 'contextmenu',
     'mousedown', 'mouseup', 'mouseenter',
-    'mouseleave',
+    'mouseleave', 'scroll',
   ],
   slotNames: ['default'],
   methodNames: [],

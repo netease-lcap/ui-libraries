@@ -149,7 +149,7 @@ async function transformImportCode(code: string, exportsMap: ModulesInfo['export
   const imports = [...(await parseImports(code))].filter((sp) => sp.moduleSpecifier.value === LCAP_UI_PACKAGE_NAME);
 
   if (imports.length === 0) {
-    return code;
+    return undefined;
   }
 
   const s = new MagicString(code);
@@ -193,7 +193,12 @@ async function transformImportCode(code: string, exportsMap: ModulesInfo['export
     s.overwrite(sp.startIndex, sp.endIndex, codes.join('\n'));
   });
 
-  return s.toString();
+  return {
+    code: s.toString(),
+    get map() {
+      return s.generateMap({ hires: true, includeContent: true });
+    },
+  };
 }
 
 export default function lcapUseNaslUI(options: LcapUseNaslUIPluginOptions) {
@@ -220,6 +225,13 @@ export default function lcapUseNaslUI(options: LcapUseNaslUIPluginOptions) {
   return [{
     name: 'vite:lcap-use-nasl-ui',
     enforce: 'post',
+    resolveId(id) {
+      if (id === LCAP_UI_PACKAGE_NAME && useModules) {
+        return generateModulePath('index.mjs');
+      }
+
+      return undefined;
+    },
     transform(code) {
       if (!useModules || !modulesInfo || !modulesInfo.exports) {
         return undefined;

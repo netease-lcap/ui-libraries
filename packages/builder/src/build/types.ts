@@ -45,6 +45,7 @@ export interface BuildModulesOptions extends LcapMetaOptions {
   entries?: { [key: string]: string };
   external?: (string | RegExp)[];
   tsconfigPath?: string;
+  addDepExternal?: boolean;
 }
 
 export interface LcapBuildOptions extends LcapMetaOptions {

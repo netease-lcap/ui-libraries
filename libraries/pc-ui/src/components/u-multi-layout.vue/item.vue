@@ -26,6 +26,10 @@ export default {
             type: String,
             default: 'horizontal',
         },
+        liberty:{
+            type: Boolean,
+            default: false,
+        }
     },
     data() {
         return {
@@ -46,6 +50,9 @@ export default {
     },
     methods: {
         pwh(mutationsList, observer) {
+            if(this.liberty){
+                return;
+            }
             const dom = this.$refs.item;
             const ifw = dom && (dom.style.width);
             const ifh = dom && (dom.style.height);

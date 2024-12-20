@@ -104,8 +104,8 @@ export function buildI18N(options: LcapBuildOptions) {
   fs.writeJSONSync(destFile, data, { spaces: 2 });
 }
 
-export function buildManifest(options: LcapBuildOptions) {
-  const manifest = genManifestConfig(options);
+export async function buildManifest(options: LcapBuildOptions) {
+  const manifest = await genManifestConfig(options);
   fs.writeJSONSync(`${options.destDir}/manifest.json`, manifest, { spaces: 2 });
   fs.writeJSONSync(`${options.rootPath}/manifest.json`, manifest, { spaces: 2 });
 }

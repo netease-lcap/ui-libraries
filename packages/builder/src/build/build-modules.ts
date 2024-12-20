@@ -257,6 +257,17 @@ async function generateModulesJSON(options: BuildModulesOptions, exportsMap: Rec
   return moduleInfo;
 }
 
+async function generateIndex(options: BuildModulesOptions, exportNameMap: { [key: string]: { src: string; isDefault: boolean }}) {
+  const codes = Object.keys(exportNameMap).map((key) => {
+    const { src, isDefault } = exportNameMap[key];
+    return `export { ${isDefault ? `default as ${key}` : key} } from './${src}';`;
+  });
+
+  codes.push('');
+
+  fs.writeFileSync(path.resolve(options.rootPath, options.outDir, 'index.mjs'), codes.join('\n'));
+}
+
 async function generateIndexDts(options: BuildModulesOptions, exportNameMap: { [key: string]: { src: string; isDefault: boolean }}) {
   const codes = Object.keys(exportNameMap).map((key) => {
     return `export declare const ${key}: any;`;
@@ -336,6 +347,7 @@ export async function buildModules(options: LcapBuildOptions) {
   const exportsMap = await viteBuildModules(buildModulesOptions, components);
   const moduleInfo = await generateModulesJSON(buildModulesOptions, exportsMap, components);
 
+  await generateIndex(buildModulesOptions, moduleInfo.exports);
   if (buildModulesOptions.tsconfigPath && fs.existsSync(buildModulesOptions.tsconfigPath)) {
     await buildDts(buildModulesOptions);
   } else {
