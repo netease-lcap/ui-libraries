@@ -875,6 +875,7 @@
     --table-view-drag-cursor: move;/* @desc 拖拽鼠标样式 */ /* @excludeElTags td,th */
     --table-view-drag-cursor-disabled: not-allowed; /* @desc 拖拽鼠标样式（禁用状态） */ /* @excludeElTags td,th */
     --table-view-drag-color-disabled: #ccc; /* @desc 拖拽图标颜色（禁用状态） */ /* @excludeElTags td,th */
+    --table-view-column-sticky-zindex: 99; /* @desc 表格固定列zIndex,如 1 */ /* @excludeElTags td,th */
 
     --table-view-head-background: #f7f8fa; /* @hidden */
     --table-view-head-title-sortable-hover: #eef2f8; /* @hidden */
