@@ -86,9 +86,16 @@
                       (itemVM) => itemVM.value === value || (typeof value !== 'object' && String(itemVM.value) === String(value)),
                   );
                   if (!this.selectedVM && this.selectedValuesData && Array.isArray(this.selectedValuesData)) {
-                      this.selectedVM = this.selectedValuesData.find(
+                      const selectedItem = this.selectedValuesData.find(
                           (itemData) => itemData.value === value,
                       );
+
+                      if (selectedItem) {
+                        this.selectedVM = {
+                          ...selectedItem,
+                          currentText: selectedItem.text,
+                        };
+                      }
                   }
                   this.selectedVM
                       && this.selectedVM.groupVM
