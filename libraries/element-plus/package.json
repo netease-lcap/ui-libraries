@@ -73,6 +73,7 @@
   "dependencies": {
     "dayjs": "^1.11.13",
     "element-plus": "^2.9.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "zustand-vue": "1.0.0-beta.24"
   }
 }
