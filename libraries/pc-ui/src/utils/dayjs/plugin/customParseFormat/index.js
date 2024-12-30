@@ -56,6 +56,8 @@ const addInput = function (property) {
         } else if (property === 'week') {
             input = +input.replace('W', '');
             const date = dayjs()
+                .date(1)
+                .month(1)
                 .year(`${this.year}`)
                 .isoWeek(input)
                 .startOf('isoWeek');
