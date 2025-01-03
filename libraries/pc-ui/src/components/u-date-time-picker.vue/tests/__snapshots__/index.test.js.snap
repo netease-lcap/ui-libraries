@@ -274,8 +274,6 @@ exports[`u-date-time-picker.vue > date time picker 1`] = `
                               </div>
                               <div class="body">
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  2004</div>
-                                <div class="root yearitem" vusion-slot-name="item">
                                   2005</div>
                                 <div class="root yearitem" vusion-slot-name="item">
                                   2006</div>
@@ -355,6 +353,8 @@ exports[`u-date-time-picker.vue > date time picker 1`] = `
                                   2043</div>
                                 <div class="root yearitem" vusion-slot-name="item">
                                   2044</div>
+                                <div class="root yearitem" vusion-slot-name="item">
+                                  2045</div>
                               </div>
                               <div class="foot" style="display: none;">
                               </div>
@@ -883,8 +883,6 @@ exports[`u-date-time-picker.vue > date time range picker 1`] = `
                               </div>
                               <div class="body">
                                 <div class="root yearitem" vusion-slot-name="item">
-                                  2004</div>
-                                <div class="root yearitem" vusion-slot-name="item">
                                   2005</div>
                                 <div class="root yearitem" vusion-slot-name="item">
                                   2006</div>
@@ -964,6 +962,8 @@ exports[`u-date-time-picker.vue > date time range picker 1`] = `
                                   2043</div>
                                 <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
                                   2044</div>
+                                <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
+                                  2045</div>
                               </div>
                               <div class="foot" style="display: none;">
                               </div>
@@ -1492,8 +1492,6 @@ exports[`u-date-time-picker.vue > date time range picker 2`] = `
                               </div>
                               <div class="body">
                                 <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
-                                  2004</div>
-                                <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
                                   2005</div>
                                 <div class="root yearitem" disabled="disabled" vusion-slot-name="item">
                                   2006</div>
@@ -1573,6 +1571,8 @@ exports[`u-date-time-picker.vue > date time range picker 2`] = `
                                   2043</div>
                                 <div class="root yearitem" vusion-slot-name="item">
                                   2044</div>
+                                <div class="root yearitem" vusion-slot-name="item">
+                                  2045</div>
                               </div>
                               <div class="foot" style="display: none;">
                               </div>
