@@ -6,6 +6,9 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       forceUpdateWhenAttributeChange: true,
+      events: {
+        click: true,
+      },
     },
   })
   @Component({
