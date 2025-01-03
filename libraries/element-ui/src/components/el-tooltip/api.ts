@@ -4,8 +4,12 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 8,
     ideusage: {
-      idetype: 'container',
+      idetype: 'popover',
       forceUpdateWhenAttributeChange: true,
+      events: {
+        click: true,
+      },
+      forceRefresh : {slot : 'default'}
     },
   })
   @Component({
