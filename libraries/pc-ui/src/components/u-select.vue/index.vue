@@ -798,11 +798,11 @@ export default {
         this.load().then(() => {
           this.ensureFocusedInView(true);
           this.$refs.input.focus();
-          this.$nextTick(() => this.loadMoreNoopOnOpen());
+          this.$nextTick(() => this.loadMoreNoopOnOpen(10)); // 最多请求十次
         });
       } else {
         setTimeout(() => this.ensureFocusedInView(true));
-        this.$nextTick(() => this.loadMoreNoopOnOpen());
+        this.$nextTick(() => this.loadMoreNoopOnOpen(10)); // 最多请求十次
       }
 
       this.$emit('open', $event, this);
@@ -1170,8 +1170,8 @@ export default {
         this.selectedDataQueue.splice(0, 1, value);
       }
     },
-    async loadMoreNoopOnOpen() {
-      if (!this.usePagination || !this.$refs.popperwrap) {
+    async loadMoreNoopOnOpen(count) {
+      if (!this.usePagination || !this.$refs.popperwrap || !count) {
         return;
       }
 
@@ -1199,7 +1199,7 @@ export default {
       /**
        * 渲染结束后加载下一页
        */
-      this.loadMoreNoopTimer = setTimeout(() => this.loadMoreNoopOnOpen(), 50);
+      this.loadMoreNoopTimer = setTimeout(() => this.loadMoreNoopOnOpen(count - 1), 50);
     },
     handleEmptyValue(value) {
       if (!this.emptyValueIsNull) {
