@@ -483,6 +483,12 @@ export default {
             date = this.transformDate(date);
             const minDate = this.transformDate(this.minDate);
             const maxDate = this.transformDate(this.currentMaxDate); // minDate && date < minDate && minDate，先判断是否为空，再判断是否超出范围，如果超出则返回范围边界的日期时间。
+
+            if (maxDate && minDate && maxDate < minDate) {
+                console.warn('error: maxDate < minDate');
+                return false;
+            }
+
             return (
                 (minDate && date < minDate && minDate)
                 || (maxDate && date > maxDate && maxDate)
