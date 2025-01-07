@@ -216,6 +216,14 @@ export default defineConfig(({ command }) => {
             ElTablePro: {
               depCompList: ['ElPaginationPro'],
             },
+            ElTooltip: {
+              selectorPrefixMap: {
+                'el-tooltip__popper': true,
+              },
+              mainSelectorMap: {
+                '.el-tooltip__popper': true,
+              },
+            },
           },
         },
         dependencies: [
