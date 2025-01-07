@@ -1685,7 +1685,7 @@
     /* @component u-popup */
     --popup-padding: 5px 12px; /* @desc 弹出层的内边距,如 1px */
     --popup-arrow-size: 4px; /* @desc 弹出层的内层三角箭头大小,如 1px */
-    --popup-arrow-offset: 17px; /* @desc 弹出层的三角箭头平移位置,如 1px */
+    --popup-arrow-offset: 17px; /* @hidden */
     --popup-outer-arrow-size: calc(var(--popup-arrow-size) + 1px); /* @desc 弹出层的外层三角箭头大小,如 1px */
     --popup-background: white; /* @type color */ /* @desc 弹出层的背景色,如 #223325 */
     --popup-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* @desc 弹出层的阴影效果,如 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
