@@ -247,6 +247,11 @@ content: "\e663";
     align-items: center;
 }
 
+.root[disabled] .prefix,
+.root[disabled] .suffix {
+    cursor: var(--cursor-not-allowed);
+}
+
 .root[color="inverse"] .input {
     color: var(--select-color-inverse);
 }

@@ -42,7 +42,7 @@
       v-if="prefix"
       :class="$style.prefix"
       :name="prefix"
-      @click="$emit('click-prefix', $event, this)"
+      @click="!currentDisabled && $emit('click-prefix', $event, this)"
       >
         <slot name="prefix" >
           <i-ico :name="prefix" v-if="prefix!=='search'" />
@@ -157,7 +157,7 @@
       v-if="suffix"
       :name="suffix"
       :class="$style.suffix"
-      @click="$emit('click-suffix', $event, this)"
+      @click="!currentDisabled && $emit('click-suffix', $event, this)"
       ><slot name="suffix"></slot
     >
       <slot name="suffix" >
