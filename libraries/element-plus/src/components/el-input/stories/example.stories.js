@@ -2,8 +2,8 @@ import { ref } from 'vue';
 import Component from '../index';
 
 export default {
-  id: 'el-tabs-examples',
-  title: '组件列表/TABS 标签页/示例',
+  id: 'el-input-examples',
+  title: '组件列表/Input 输入框/示例',
   component: Component,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -19,28 +19,39 @@ export const Example1 = {
   render: () => ({
     setup() {
       const activeName = ref('first');
+
       const name = ref('myName');
+      const myref = ref();
+      const yref = ref();
 
       const handleClick = (tab) => {
         console.log(tab);
+        // activeName.value = tab;
+        name.value = tab;
       };
       setTimeout(() => {
         name.value = 'newName';
+        activeName.value = 'second';
+        console.log(myref, 'myref');
+        console.log(myref.value.input.focus(), 'myref.value.ref');
+        console.log('yref', yref);
       }, 3000);
 
       return {
         name,
         activeName,
         handleClick,
+        myref,
+        yref,
       };
     },
     template: `
-    <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick" type="card">
-      <el-tab-pane :label="name" name="first">User</el-tab-pane>
-      <el-tab-pane label="Config" name="second">Config</el-tab-pane>
-      <el-tab-pane label="Role" name="third">Role</el-tab-pane>
-      <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
-    </el-tabs>
+    <div>
+    <el-input ref="myref" v-model:value="activeName" @focus="handleClick"  :autofocus="true" class="demo-tabs"  type="card"> </el-input>
+      {{activeName}}
+      ==={{name}}
+      <el-input-plus ref="yref" :model-value="name" v-model:value="activeName" @input="handleClick"></el-input-plus>
+    </div>
     `,
   }),
 };

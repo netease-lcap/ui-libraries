@@ -2,8 +2,8 @@ import { ref } from 'vue';
 import Component from '../index';
 
 export default {
-  id: 'el-tabs-examples',
-  title: '组件列表/TABS 标签页/示例',
+  id: 'el-select-examples',
+  title: '组件列表/select 选择框/示例',
   component: Component,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -26,6 +26,7 @@ export const Example1 = {
       };
       setTimeout(() => {
         name.value = 'newName';
+        activeName.value = 'second';
       }, 3000);
 
       return {
@@ -35,12 +36,14 @@ export const Example1 = {
       };
     },
     template: `
-    <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick" type="card">
-      <el-tab-pane :label="name" name="first">User</el-tab-pane>
-      <el-tab-pane label="Config" name="second">Config</el-tab-pane>
-      <el-tab-pane label="Role" name="third">Role</el-tab-pane>
-      <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
-    </el-tabs>
+    <el-select v-model="activeName">
+      <el-option
+        key="item.value"
+        label="item.label"
+        value="item.value"
+      />
+    </el-select>
+
     `,
   }),
 };
