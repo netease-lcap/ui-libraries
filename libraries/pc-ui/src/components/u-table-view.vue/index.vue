@@ -1210,10 +1210,12 @@ export default {
 
                 let content = [];
                 let mergesMap = [];
+                let headerRowCount = 0;
                 if (!this.currentDataSource._load) {
                     const result = await this.getRenderResult(this.currentDataSource.data, excludeColumns, hasHeader, includeStyles);
                     content = result[0];
                     mergesMap = result[1];
+                    headerRowCount = result[2];
                 } else {
                     // console.time('加载数据');
                     let res = await this.currentDataSource._load({ page, size, filename, sort, order });
@@ -1235,13 +1237,14 @@ export default {
                     const result = await this.getRenderResult(res, excludeColumns, hasHeader, includeStyles);
                     content = result[0];
                     mergesMap = result[1];
+                    headerRowCount = result[2];
                 }
 
                 //处理分页衔接处数据合并
                 const pageSize = this.pageSize;
                 const count = parseInt(content.length / pageSize);
                 for (let i = 1; i <= count; i++) {
-                    const rowIndex = i * pageSize;
+                    const rowIndex = i * pageSize + headerRowCount - 1;
                     // 当前页最后一行
                     const itemData = content[rowIndex];
                     if (!itemData) {
@@ -1256,6 +1259,10 @@ export default {
                     for (let j = 0; j < itemData1.length; j++) {
                         // 如果列有自动合并
                         if (this.visibleColumnVMs[j].autoRowSpan) {
+                            // 3020499352090112，自动合并的值字段和列展示的数据不是同一个，数据相同，列字段的值不同，不需要合并
+                            if(itemData[j].assistData && itemData1[j].assistData && itemData[j].assistData.currentValue !== itemData1[j].assistData.currentValue) {
+                                continue;
+                            }
                             // 当前页最后
                             const mergsMapItem = mergesMap.find((item) => item.row + item.rowspan - 1 === rowIndex && item.col === j);
                             // 当前页有合并的数据
@@ -1428,6 +1435,13 @@ export default {
                             const data = {
                                 v: title,
                             };
+                            if (this.visibleColumnVMs[colIndex]?.autoRowSpan) {
+                               const field = this.visibleColumnVMs[colIndex].field;
+                               const currentData = this.exportData[rowIndex];
+                               data.assistData = {
+                                    currentValue: this.$at(currentData, field),
+                               }
+                            }
                             if (includeStyles) {
                                 const style = getXslxStyle(node);
                                 Object.assign(data, {
@@ -1497,7 +1511,7 @@ export default {
             });
             // console.timeEnd('复原表格');
 
-            return [res, mergesMap];
+            return [res, mergesMap, headerRowCount];
         },
         removeExcludeColumns(data, excludeColumns, merges, titleColIndexRelations) {
             const excludeIndexMap = {};
