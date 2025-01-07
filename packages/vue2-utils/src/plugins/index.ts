@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import Vue, { type VNode, type ComponentOptions } from 'vue';
-import VueCompositionAPI from '@vue/composition-api';
 import { isFunction, kebabCase } from 'lodash';
 import { uid } from 'uid';
 import type {
@@ -15,8 +14,6 @@ import { isEmptyVNodes, normalizeArray } from './utils';
 
 export { $deletePropList, $ref, $render } from './constants';
 export * from './common';
-
-Vue.use(VueCompositionAPI);
 
 function createModelMixin(model: NaslComponentExtendInfo['model']) {
   const { prop = 'value', event = 'update:value' } = model;

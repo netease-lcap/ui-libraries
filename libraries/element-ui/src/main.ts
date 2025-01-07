@@ -2,6 +2,7 @@
 import './styles/normalize.css';
 import './styles/index.css';
 import './styles/reset.css';
+import VueCompositionAPI from '@vue/composition-api';
 import Loading from 'element-ui/lib/loading';
 import Message from 'element-ui/lib/message';
 import * as components from './components';
@@ -20,6 +21,7 @@ export const install = (Vue) => {
   installed = true;
   Vue.prototype.$env = Vue.prototype.$env || {};
   Vue.prototype.$env.VUE_APP_DESIGNER = String(process.env.VUE_APP_DESIGNER) === 'true';
+  Vue.use(VueCompositionAPI);
   Object.keys(components).forEach((key) => {
     Vue.component(components[key].name, components[key]);
   });
