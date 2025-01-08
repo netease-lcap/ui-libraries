@@ -65,6 +65,8 @@ const mockData = {
   }],
 };
 
+const filterList = ['approve', 'reject', 'reassign', 'submit', 'withdraw', 'addSign']
+
 export default createComponent({
   props: {
     target: { type: String, default: '_self' },
@@ -134,7 +136,7 @@ export default createComponent({
           },
         });
 
-        this.permissionDetails = res.data;
+        this.permissionDetails = (res.data || []).filter((item) => item.operationEnabled).filter((item) => filterList.includes(item.name))
         if (this.permissionDetails.some((item) => item?.name === 'addSign')) { // 加签
           this.getSignOptions(); 
         }
