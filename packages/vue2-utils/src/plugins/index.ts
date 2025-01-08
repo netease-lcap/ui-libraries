@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import Vue, { type VNode, type ComponentOptions } from 'vue';
-import VueCompositionAPI from '@vue/composition-api';
 import { isNil, kebabCase } from 'lodash';
 import type {
   NaslComponentPluginOptions,
@@ -15,8 +14,6 @@ import { isEmptyVNodes, normalizeArray } from './utils';
 
 export { $deletePropList, $ref, $render } from './constants';
 export * from './common';
-
-Vue.use(VueCompositionAPI);
 
 // 兼容 cloud ui form mixin
 function createUFormMixin() {
