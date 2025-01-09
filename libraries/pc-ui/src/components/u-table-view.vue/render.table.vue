@@ -719,7 +719,8 @@ export default {
             );
         },
         getRealItem(item, rowIndex) {
-            const data = this.currentDataSource.isSimpleItem ? (this.currentDataSource.arrangedData[rowIndex] && this.currentDataSource.arrangedData[rowIndex].simple) : item;
+            // 3037306526469888: arrangedData 改为 viewData
+            const data = this.currentDataSource.isSimpleItem ? (this.currentDataSource.viewData[rowIndex] && this.currentDataSource.viewData[rowIndex].simple) : item;
             return data;
         },
         getThEllipsis(columnVM) {
