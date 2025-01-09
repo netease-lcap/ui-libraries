@@ -989,6 +989,7 @@
             "events": {
                 "click": true
             },
+            "eventsScope": "[class^='u-tabs_item']",
             "disableSlotAutoFill": [{
                 "slot": "title",
                 "expression": "this.getAttribute('title')",
