@@ -307,6 +307,12 @@ export default {
             let maxDate = ChangeDate(this.transformDate(this.maxDate), this.picker, 'max'); // 不要直接在$watch中改变`minDate`和`maxDate`的值，因为有时向外绑定时可能不希望改变它们。
             minDate = minDate && minDate.setHours(0, 0, 0, 0);
             maxDate = maxDate && maxDate.setHours(0, 0, 0, 0); // minDate && date < minDate && minDate，先判断是否为空，再判断是否超出范围，如果超出则返回范围边界的日期。
+
+            if (maxDate && minDate && maxDate < minDate) {
+                console.warn('error: maxDate < minDate');
+                return false;
+            }
+
             return (
                 (minDate && date < minDate && minDate)
                 || (maxDate && date > maxDate && maxDate)

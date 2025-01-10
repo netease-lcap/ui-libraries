@@ -96,6 +96,13 @@ export default {
             currentItem: this.item,
         };
     },
+    watch: {
+        '$parent.item': { // 3008481062262784
+            handler(val) {
+                this.currentItem = val;
+            },
+        },
+    },
     created() {
         // IDE里的item属性绑定的是current， 表格嵌套表格的情况下容易出问题。改成该种方式
         if(this.$parent && this.$parent.toggleExpanded && this.$parent.item){

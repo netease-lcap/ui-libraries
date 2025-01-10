@@ -228,6 +228,11 @@ content: "\e651";
     right: 8px;
 }
 
+.root[disabled] .prefix,
+.root[disabled] .suffix {
+    cursor: var(--cursor-not-allowed);
+}
+
 .root[prefix] .input {
     padding-left: var(--input-prefix-padding-left);
 }
