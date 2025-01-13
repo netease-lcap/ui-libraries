@@ -1,5 +1,7 @@
 <template>
-<div><van-button @click="onOpen">Dialog</van-button><van-dialog safe-area-inset-bottom ref="dialogh5">
+<div style="position: relative; height: 150px; background-color: rgba(0, 0, 0, .7)">
+  <!-- <van-button @click="onOpen">Dialog</van-button> -->
+  <van-dialog safe-area-inset-bottom ref="dialogh5" :overlay="false" style="position: absolute" :lockScroll="false">
   <div vusion-slot-name="default" vusion-disabled-copy style="min-height: 100px;" :vusion-disabled-cut="true" env="alone">内容</div>
   <template #footer>
     <van-button
@@ -26,12 +28,15 @@ export default {
             showpopup: false,
         };
     },
+    mounted() {
+      this.onOpen()
+    },
     methods: {
         onOpen() {
             this.$refs.dialogh5.openModal();
         },
     onclose() {
-            this.$refs.dialogh5.closeModal();
+            // this.$refs.dialogh5.closeModal();
         },},
 };
 </script>
