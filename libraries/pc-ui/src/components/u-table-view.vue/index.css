@@ -355,10 +355,7 @@ content: "\e665";
     white-space: nowrap;
 }
 .cell[ellipsis] > div:last-child {
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+   display: inline; /* 3042948982240000 */
 }
 .cell[ellipsis] > * {
     white-space: nowrap;

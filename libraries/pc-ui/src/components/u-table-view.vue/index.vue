@@ -1262,7 +1262,13 @@ export default {
                         // 如果列有自动合并
                         if (this.visibleColumnVMs[j].autoRowSpan) {
                             // 3020499352090112，自动合并的值字段和列展示的数据不是同一个，数据相同，列字段的值不同，不需要合并
-                            if(itemData[j].assistData && itemData1[j].assistData && itemData[j].assistData.currentValue !== itemData1[j].assistData.currentValue) {
+                            let tempRowIndex = rowIndex;
+                            let itemDataData = itemData;
+                            while(itemDataData && itemDataData[j] && !itemDataData[j].assistData) {
+                                itemDataData = content[tempRowIndex];
+                                tempRowIndex--;
+                            }
+                            if(itemDataData[j].assistData && itemData1[j].assistData && itemDataData[j].assistData.currentValue !== itemData1[j].assistData.currentValue) {
                                 continue;
                             }
                             // 当前页最后
