@@ -1904,9 +1904,17 @@
     ".el-popconfirm:focus,.el-popconfirm._focus": "气泡确认:获得焦点",
     ".el-popconfirm:hover,.el-popconfirm._hover": "气泡确认:鼠标移入",
     ".el-popover": "弹出框",
+    ".el-popover__reference": "弹出框引用",
+    ".el-popover__reference:active,.el-popover__reference._active": "弹出框引用:鼠标按下",
+    ".el-popover__reference:focus,.el-popover__reference._focus": "弹出框引用:获得焦点",
+    ".el-popover__reference:hover,.el-popover__reference._hover": "弹出框引用:鼠标移入",
     ".el-popover:active,.el-popover._active": "弹出框:鼠标按下",
     ".el-popover:focus,.el-popover._focus": "弹出框:获得焦点",
-    ".el-popover:hover,.el-popover._hover": "弹出框:鼠标移入"
+    ".el-popover:hover,.el-popover._hover": "弹出框:鼠标移入",
+    ".popper__arrow": "弹出箭头",
+    ".popper__arrow:active,.popper__arrow._active": "弹出箭头:鼠标按下",
+    ".popper__arrow:focus,.popper__arrow._focus": "弹出箭头:获得焦点",
+    ".popper__arrow:hover,.popper__arrow._hover": "弹出箭头:鼠标移入"
   },
   "ElSkeleton": {
     ".el-skeleton": "骨架屏",

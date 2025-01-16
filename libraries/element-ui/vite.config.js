@@ -158,8 +158,10 @@ export default defineConfig(({ command }) => {
             },
             ElPopconfirm: {
               mainSelectorMap: {
+                '.el-popover__reference': false,
                 '.el-popover': true,
                 '.el-popconfirm': false,
+                '.popper__arrow': false,
               },
             },
             ElTabs: {

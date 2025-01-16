@@ -4,7 +4,7 @@ import { registerComponent } from '@lcap/vue2-utils/plugins/index';
 import * as plugins from './plugins';
 
 export const ElPopconfirm = registerComponent(Popconfirm, plugins, {
-  nativeEvents: [],
+  nativeEvents: ['click'],
   slotNames: ['reference'],
   methodNames: [],
 });
