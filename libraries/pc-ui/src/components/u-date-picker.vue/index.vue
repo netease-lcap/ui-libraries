@@ -334,6 +334,13 @@ export default {
         returnTime(date) {
             if (!date)
                 return;
+
+            // 2024-02 => 2024-02-01 2025 => 2025-01-01
+            if (['month', 'year'].includes(this.picker) && date.split('-').length < 3) {
+              const arr = date.split('-');
+              date = arr.concat(new Array(3 - arr.length).fill('01')).join('-');
+            }
+
             let time;
             if (this.time === 'start') {
                 // 0:00:00
