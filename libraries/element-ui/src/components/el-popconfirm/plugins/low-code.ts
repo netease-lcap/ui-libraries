@@ -27,12 +27,8 @@ export const useManualClickPlugin: NaslComponentPluginOptions = {
       onClick() {
         visible.value = !visible.value;
         let nodepath;
-        let baseEl;
         const popperRef = ctx.refs.$base?.$children?.[0]?.$refs?.popper;
-        const baseChildren = instance?.refs?.$base?.$el?.children;
-        if (baseChildren) {
-          baseEl = Array.from(baseChildren)?.find(child => child._prevClass === 'el-popover__reference-wrapper');
-        }
+        const baseEl = ctx.refs.$base?.$children?.[0]?.$refs?.wrapper;
         if (baseEl) {
           nodepath = baseEl.getAttribute('data-anonymous-nodepath') || baseEl.getAttribute('data-nodepath');
         }

@@ -18,9 +18,9 @@ export const useSetDialogStyles = (props: MapGet) => {
       return;
     }
 
-    const dialogEl = (instance.refs.$base as any).$el.querySelector(
-      '.el-popconfirm',
-    ) as HTMLDivElement;
+    // 初始时，popover挂在气泡确认框的warpper下，点击打开后，挂在了body下，不能直接从base.$el下获取dialogEl
+    const popperRef = (instance.refs.$base as any)?.$children?.[0]?.$refs?.popper;
+    const dialogEl = popperRef ? popperRef.querySelector('.el-popconfirm') as HTMLDivElement : undefined;
     if (!dialogEl) {
       return;
     }
