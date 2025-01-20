@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 1`] = `
+exports[`u-list-view.vue > pageSizer选择器变化后，刷新数据 1`] = `
 <div class="root" direction="vertical" type vusion-slot-name="default">
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <a class="root" hovertype="underline" id="changelistbutton" tabindex="0" target="_self" vusion-slot-name-edit="text">
@@ -205,7 +205,7 @@ exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 1`] = `
 </div>
 `;
 
-exports[`u-table-view.vue > pageSizer选择器变化后，刷新数据 2`] = `
+exports[`u-list-view.vue > pageSizer选择器变化后，刷新数据 2`] = `
 <div class="root" direction="vertical" type vusion-slot-name="default">
   <div class="root" direction="horizontal" type vusion-slot-name="default">
     <a class="root" hovertype="underline" id="changelistbutton" tabindex="0" target="_self" vusion-slot-name-edit="text">
