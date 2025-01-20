@@ -377,7 +377,13 @@ export default {
                 this.preventBlur = true;
             }
         },
-        format,
+        format(value, formatStr) {
+          if (typeof value === 'string' && ['month', 'year'].includes(this.picker)) {
+            value = this.returnTime(value);
+          }
+
+          return format(value, formatStr);
+        },
         transformDate,
         returnTime(date) {
             if (!date)
