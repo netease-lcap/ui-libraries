@@ -2,7 +2,6 @@ import fs from 'fs-extra';
 import path from 'path';
 import glob from 'fast-glob';
 import archiver from 'archiver';
-import { getHashDigest } from 'loader-utils';
 import { getPackName } from '../utils';
 import logger from '../utils/logger';
 import genNaslExtensionConfig from './gens/gen-nasl-extension-config';
@@ -121,6 +120,7 @@ export async function buildNaslExtensionConfig(options: LcapBuildOptions) {
     rootPath: options.rootPath,
     framework: options.framework,
     i18n: options.i18n,
+    frameworkUI: options.frameworkUI,
   });
 
   const naslConfigPath = path.join(options.rootPath, 'nasl.extension.json');
@@ -136,7 +136,7 @@ export async function buildNaslExtensionConfig(options: LcapBuildOptions) {
 export async function buildNaslExtensionManifest(options: LcapBuildOptions, hash: boolean = false) {
   const naslConfigPath = path.join(options.rootPath, 'nasl.extension.json');
   const naslExtensionConfig = fs.readJSONSync(naslConfigPath) as any;
-  const manifest = genManifestConfig(options);
+  const manifest = await genManifestConfig(options);
   naslExtensionConfig.compilerInfoMap.manifest = JSON.stringify(manifest);
   // if (hash) {
   //   const contentHash = getHashDigest(JSON.stringify(naslExtensionConfig), 'md5', 'base64', 16);

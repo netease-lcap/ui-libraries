@@ -213,6 +213,7 @@ import { createTableHeaderExportHelper, getXslxStyle } from './helper';
 import * as xlsxUtils from '../../utils/xlsx';
 import UTableRender from './render.table.vue';
 import UTableDesigner from './designer.table.vue';
+import TreeTableMixin from './tree-table-mixins';
 
 export default {
     name: 'u-table-view',
@@ -248,7 +249,8 @@ export default {
           return this.selectedItem && this.$at(this.selectedItem, this.valueField);
         },
         values: 'currentValues',
-      })
+      }),
+      TreeTableMixin,
     ],
     // i18n,
     props: {
@@ -1210,10 +1212,12 @@ export default {
 
                 let content = [];
                 let mergesMap = [];
+                let headerRowCount = 0;
                 if (!this.currentDataSource._load) {
                     const result = await this.getRenderResult(this.currentDataSource.data, excludeColumns, hasHeader, includeStyles);
                     content = result[0];
                     mergesMap = result[1];
+                    headerRowCount = result[2];
                 } else {
                     // console.time('加载数据');
                     let res = await this.currentDataSource._load({ page, size, filename, sort, order });
@@ -1235,13 +1239,14 @@ export default {
                     const result = await this.getRenderResult(res, excludeColumns, hasHeader, includeStyles);
                     content = result[0];
                     mergesMap = result[1];
+                    headerRowCount = result[2];
                 }
 
                 //处理分页衔接处数据合并
                 const pageSize = this.pageSize;
                 const count = parseInt(content.length / pageSize);
                 for (let i = 1; i <= count; i++) {
-                    const rowIndex = i * pageSize;
+                    const rowIndex = i * pageSize + headerRowCount - 1;
                     // 当前页最后一行
                     const itemData = content[rowIndex];
                     if (!itemData) {
@@ -1256,6 +1261,16 @@ export default {
                     for (let j = 0; j < itemData1.length; j++) {
                         // 如果列有自动合并
                         if (this.visibleColumnVMs[j].autoRowSpan) {
+                            // 3020499352090112，自动合并的值字段和列展示的数据不是同一个，数据相同，列字段的值不同，不需要合并
+                            let tempRowIndex = rowIndex;
+                            let itemDataData = itemData;
+                            while(itemDataData && itemDataData[j] && !itemDataData[j].assistData) {
+                                itemDataData = content[tempRowIndex];
+                                tempRowIndex--;
+                            }
+                            if(itemDataData[j].assistData && itemData1[j].assistData && itemDataData[j].assistData.currentValue !== itemData1[j].assistData.currentValue) {
+                                continue;
+                            }
                             // 当前页最后
                             const mergsMapItem = mergesMap.find((item) => item.row + item.rowspan - 1 === rowIndex && item.col === j);
                             // 当前页有合并的数据
@@ -1333,7 +1348,11 @@ export default {
             }
 
             const titleColIndexRelations = [];
-            const headRows = Array.from(this.$el.querySelectorAll('[position=static] thead tr'));
+            let headRows = [];
+            const headEl = this.$el.querySelector('[position=static] thead');
+            if (headEl) {
+                headRows = Array.from(headEl.childNodes).filter((tr) => tr.nodeName === 'TR');
+            }
             const helper = createTableHeaderExportHelper(headRows.length);
             headRows.map((tr, rowIndex) => Array.from(tr.childNodes).map((node, colIndex, currentArr) => {
                 if (node.nodeName === 'TH') {
@@ -1398,50 +1417,61 @@ export default {
                 await new Promise((res) => {
                     this.$once('hook:updated', res);
                 });
-                const res1 = Array.from(this.$el.querySelectorAll('[position=static] tbody tr')).map((tr, rowIndex) => Array.from(tr.childNodes).map(
-                    (node, colIndex) => {
-                        if (node.nodeName === 'TD' || node.nodeName === 'TH') {
-                            let title = '';
-                            const inputElement = node.getElementsByTagName('input');
-                            const placeholderElement = Array.from(node.getElementsByTagName('span')).filter((item) => item.className.includes('u-select_placeholder'));
-                            if (inputElement.length !== 0) {
-                                title = inputElement[0].value;
-                            } else {
-                                // 下拉框未选则时，placeholder内容不显示
-                                if (placeholderElement.length !== 0 && placeholderElement[0].innerText === node.innerText) {
-                                    title = '';
+                const bodyEl = this.$el.querySelector('[position=static] tbody');
+                if (bodyEl) {
+                    const trs = Array.from(bodyEl.childNodes).filter((tr) => tr.nodeName === 'TR');
+                    const res1 = trs.map((tr, rowIndex) => Array.from(tr.childNodes).map(
+                        (node, colIndex) => {
+                            if (node.nodeName === 'TD' || node.nodeName === 'TH') {
+                                let title = '';
+                                const inputElement = node.getElementsByTagName('input');
+                                const placeholderElement = Array.from(node.getElementsByTagName('span')).filter((item) => item.className.includes('u-select_placeholder'));
+                                if (inputElement.length !== 0) {
+                                    title = inputElement[0].value;
                                 } else {
-                                    title = node.innerText;
+                                    // 下拉框未选则时，placeholder内容不显示
+                                    if (placeholderElement.length !== 0 && placeholderElement[0].innerText === node.innerText) {
+                                        title = '';
+                                    } else {
+                                        title = node.innerText;
+                                    }
                                 }
-                            }
-                            const rowspan = parseInt(node.getAttribute('rowspan')) || 1;
-                            const colspan = parseInt(node.getAttribute('colspan')) || 1;
+                                const rowspan = parseInt(node.getAttribute('rowspan')) || 1;
+                                const colspan = parseInt(node.getAttribute('colspan')) || 1;
 
-                            if (rowspan !== 1 || colspan !== 1) {
-                                mergesMap.push({
-                                    col: colIndex,
-                                    row: rowIndex + i + headerRowCount,
-                                    rowspan,
-                                    colspan,
-                                });
+                                if (rowspan !== 1 || colspan !== 1) {
+                                    mergesMap.push({
+                                        col: colIndex,
+                                        row: rowIndex + i + headerRowCount,
+                                        rowspan,
+                                        colspan,
+                                    });
+                                }
+                                const data = {
+                                    v: title,
+                                };
+                                if (this.visibleColumnVMs[colIndex]?.autoRowSpan) {
+                                const field = this.visibleColumnVMs[colIndex].field;
+                                const currentData = this.exportData[rowIndex];
+                                data.assistData = {
+                                        currentValue: this.$at(currentData, field),
+                                }
+                                }
+                                if (includeStyles) {
+                                    const style = getXslxStyle(node);
+                                    Object.assign(data, {
+                                        s: style.s,
+                                        rect: style.rect,
+                                    });
+                                }
+                                return data;
+                            } else {
+                                return null;
                             }
-                            const data = {
-                                v: title,
-                            };
-                            if (includeStyles) {
-                                const style = getXslxStyle(node);
-                                Object.assign(data, {
-                                    s: style.s,
-                                    rect: style.rect,
-                                });
-                            }
-                            return data;
-                        } else {
-                            return null;
-                        }
-                    },
-                ));
-                res = res.concat(res1);
+                        },
+                    ));
+                    res = res.concat(res1);
+                }
             }
 
             for (let rowIndex = hasHeader ? headerRowCount : 0; rowIndex < res.length; rowIndex++) {
@@ -1450,7 +1480,7 @@ export default {
                     if (startIndexes[j] !== undefined)
                         item[j] = {
                             v: startIndexes[j] + (hasHeader ? rowIndex - headerRowCount : rowIndex),
-                            s: item[j].s,
+                            s: item[j] && item[j].s,
                         };
                 }
             }
@@ -1497,7 +1527,7 @@ export default {
             });
             // console.timeEnd('复原表格');
 
-            return [res, mergesMap];
+            return [res, mergesMap, headerRowCount];
         },
         removeExcludeColumns(data, excludeColumns, merges, titleColIndexRelations) {
             const excludeIndexMap = {};

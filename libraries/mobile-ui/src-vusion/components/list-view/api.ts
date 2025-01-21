@@ -162,7 +162,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '数据源',
       description: '列表的数据源。数组方式表示直接的数据，函数需要返回一个 Promise。',
-      designerValue: [{}, {}, {}]
+      designerValue: [{}, {}, {}],
+      bindOpen: true,
     })
     dataSource: nasl.collection.List<T> | { total: nasl.core.Integer; list: nasl.collection.List<T> };
     @Prop({

@@ -48,6 +48,7 @@ namespace nasl.ui {
             description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
             docDescription: '集合类型变量或者输出参数为集合类型的逻辑',
             designerValue: [{}, {}, {}],
+            bindOpen: true,
         })
         dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
@@ -101,6 +102,16 @@ namespace nasl.ui {
             settable: true,
         })
         value: V;
+
+        @Prop({
+            group: '数据属性',
+            title: '根据值去重',
+            description: '在使用数据源时,会根据值去重数据',
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        uniqValue: nasl.core.Boolean = false;
 
         @Prop({
             group: '数据属性',
@@ -190,6 +201,18 @@ namespace nasl.ui {
             },
         })
         size: 'normal' | 'small' | 'mini' = 'normal';
+
+        @Prop({
+            group: '样式属性',
+            title: '内容区充满',
+            docDescription: '内容区充满',
+            setter: {
+                concept: 'SwitchSetter',
+            },
+        })
+        fullContainer: nasl.core.Boolean = false;
+
+        
 
         @Event({
             title: '点击后',

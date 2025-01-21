@@ -738,8 +738,10 @@ export default createComponent({
         lcapIsCompress: this.lcapIsCompress,
         viaOriginURL: this.viaOriginURL,
       };
+
+      const url = this.$formatMicroFrontUrl ? this.$formatMicroFrontUrl(this.url) : this.url;
       const requestData = {
-        url: this.url,
+        url,
         headers,
         withCredentials: this.withCredentials,
         file,

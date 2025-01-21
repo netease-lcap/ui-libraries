@@ -158,6 +158,19 @@ export default {
             }
             return newValue;
         },
+        selectEnd() {
+            this.lastValueString = this.lastValueArray.join(this.join);
+            this.close();
+            const value = this.lastValueString;
+            const newValue = this.convertValue(value);
+            // 没有转换器的时候触发事件更新，地区选择里用了转换器需要去watch 数据更新
+            this.$emit('update:value', newValue);
+            this.$emit('select', {
+                value,
+                values: this.lastValueArray,
+                items: this.subComponents,
+            }, this);
+        },
     },
 };
 </script>

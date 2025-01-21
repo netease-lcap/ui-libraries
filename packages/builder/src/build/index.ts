@@ -12,6 +12,7 @@ import genNaslUIConfig from './gens/gen-nasl-ui';
 import genThemeJsonOld from './gens/gen-theme-json-old';
 import genManifestConfig from './gens/gen-manifest-config';
 import buildDeclaration from './build-declaration';
+import { buildModules } from './build-modules';
 import { getConfigComponents } from '../utils';
 
 export function buildThemeOld(rootPath, destDir) {
@@ -103,8 +104,8 @@ export function buildI18N(options: LcapBuildOptions) {
   fs.writeJSONSync(destFile, data, { spaces: 2 });
 }
 
-export function buildManifest(options: LcapBuildOptions) {
-  const manifest = genManifestConfig(options);
+export async function buildManifest(options: LcapBuildOptions) {
+  const manifest = await genManifestConfig(options);
   fs.writeJSONSync(`${options.destDir}/manifest.json`, manifest, { spaces: 2 });
   fs.writeJSONSync(`${options.rootPath}/manifest.json`, manifest, { spaces: 2 });
 }
@@ -115,6 +116,11 @@ export async function buildNaslUILibrary(options: LcapBuildOptions, mode: BuildM
   await buildTheme(options, mode === 'watch');
   await buildI18N(options);
   await buildDeclaration(options);
+
+  if (mode === 'production') {
+    await buildModules(options);
+  }
+
   await buildManifest(options);
 
   if (mode !== 'production') {

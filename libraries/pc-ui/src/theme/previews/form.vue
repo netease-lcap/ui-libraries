@@ -95,7 +95,7 @@
                         详情列表
                       </div>
                       <u-info-list>
-                        <u-info-list-item label="项目名称">CodeWave智能开发平台</u-info-list-item>
+                        <u-info-list-item label="项目名称">智能开发平台</u-info-list-item>
                         <u-info-list-item label="项目描述">为企业提供更加智能化的软件生产方式</u-info-list-item>
                         <u-info-list-item label="项目类型">低代码</u-info-list-item>
                         <u-info-list-item label="负责人">小C</u-info-list-item>
@@ -109,11 +109,11 @@
 
                       <u-table-view
                         :data-source="[
-                          { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
-                          { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
-                          { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
-                          { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
-                          { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+                          { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+                          { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+                          { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+                          { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+                          { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
                         ]"
                       >
                         <u-table-view-column title="项目名称" field="name" width="25%"></u-table-view-column>
@@ -134,7 +134,7 @@
                         详情列表
                       </div>
                       <u-info-list>
-                        <u-info-list-item label="项目名称">CodeWave智能开发平台</u-info-list-item>
+                        <u-info-list-item label="项目名称">智能开发平台</u-info-list-item>
                         <u-info-list-item label="项目描述">为企业提供更加智能化的软件生产方式</u-info-list-item>
                         <u-info-list-item label="项目类型">低代码</u-info-list-item>
                         <u-info-list-item label="负责人">小C</u-info-list-item>
@@ -148,11 +148,11 @@
 
                       <u-table-view
                         :data-source="[
-                          { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
-                          { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
-                          { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
-                          { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
-                          { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+                          { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+                          { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+                          { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+                          { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+                          { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
                         ]"
                       >
                         <u-table-view-column title="项目名称" field="name" width="25%"></u-table-view-column>

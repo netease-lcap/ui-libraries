@@ -177,6 +177,12 @@
         }
     },
     {
+      "name": "VanAnchor",
+      "ideusage": {
+         "idetype": "container"
+      }
+    },
+    {
         "name": "VanCollapse",
         "ideusage": {
             "idetype": "container",

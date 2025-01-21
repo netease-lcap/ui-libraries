@@ -1,6 +1,6 @@
 <template>
     <div :class="isInNavbar ? $style.root : $style.dropdownRoot" ref="root" @click.stop>
-        <div :class="$style.head" :selected="selected" vusion-click-enabled>
+        <div :class="$style.head" :selected="selected" :isInNavbar="isInNavbar" vusion-click-enabled>
             <div :class="$style.title" vusion-slot-name="title" vusion-slot-name-edit="title">
                 <i-ico v-if="icon" :name="icon" :class="$style.singleicon" notext></i-ico>
                 <slot name="title">
@@ -97,7 +97,7 @@ export default {
 
     computed: {
         selected() {
-            return this.itemVMs.some((item) => item.active);
+            return this.itemVMs.some((item) => item.active)||this.groupVMs.some((group) => group.selected);
         },
         placement() {
             return this.isInNavbar ? 'bottom-start' : 'right-start';
@@ -268,6 +268,16 @@ export default {
     justify-content: space-between;
     align-items: center;
     cursor: var(--cursor-pointer);
+}
+.head[selected][isInNavbar]::after {
+    content: '';
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:var(--navbar-item-line-height);
+    background-color:currentColor;
+    left:50%;
+    transform:translate(-50%);
 }
 
 .title{

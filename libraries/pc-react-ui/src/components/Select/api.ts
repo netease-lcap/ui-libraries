@@ -46,6 +46,7 @@ namespace nasl.ui {
         '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       docDescription:
         '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      bindOpen: true,
     })
     dataSource:
       | { list: nasl.collection.List<T>; total: nasl.core.Integer }

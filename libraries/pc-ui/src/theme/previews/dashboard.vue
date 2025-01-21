@@ -512,7 +512,7 @@
                       color="primary"
                       text="最新"></u-label>
                     <div class="flex-fill-text">
-                      网易内部通过低代码打造一网易内部通过低代码打造一...
+                      新版本V3.6上线
                     </div>
                   </u-linear-layout>
                   <u-linear-layout
@@ -523,7 +523,7 @@
                       class="flex-shrink"
                       color="primary"
                       text="最新"></u-label>
-                    <div class="flex-fill-text">CodeWave助力国网苏州城</div>
+                    <div class="flex-fill-text">新版本V3.6上线</div>
                   </u-linear-layout>
                   <u-linear-layout
                     type="flex"
@@ -533,7 +533,7 @@
                       class="flex-shrink"
                       color="primary"
                       text="最新"></u-label>
-                    <div class="flex-fill-text">网易低代码服务平台上线</div>
+                    <div class="flex-fill-text">新版本V3.6上线</div>
                   </u-linear-layout>
                 </u-linear-layout>
               </u-panel>

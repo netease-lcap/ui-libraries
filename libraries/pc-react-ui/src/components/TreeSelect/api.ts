@@ -47,6 +47,7 @@ namespace nasl.ui {
       docDescription:
         '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的',
       designerValue: [{}, {}, {}],
+      bindOpen: true,
     })
     dataSource:
       | nasl.collection.List<T>

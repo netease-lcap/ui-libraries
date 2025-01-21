@@ -131,6 +131,7 @@ export * from './iframe';
 export * from './link';
 // export * from './linear-layout';
 export * from './absolute-layout';
+export * from './anchor';
 export * from './count-down-new';
 export * from './copy';
 export * from './popup-combination';

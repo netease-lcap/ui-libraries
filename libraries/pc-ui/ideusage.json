@@ -100,7 +100,13 @@
             "childAccept": "target.tag === 'u-crumb-item'",
             "additionalAttribute": {
                 ":showInDesiner": true
-            }
+            },
+            "style": [
+                {
+                    "selector": ".empty-slot-wrapper",
+                    "declaration": "display: table-cell"
+                }
+            ]
         }
     },
     {
@@ -307,6 +313,7 @@
             "events": {
                 "click": true
             },
+            "eventsScope": "[class^=u-collapse_item_head]",
             "slotWrapperInlineStyle": {
                 "title": "display:inline-block"
             },
@@ -737,8 +744,8 @@
                 {
                     "slot": "label",
                     "expression": "this.getAttribute('label')?.value"
-                }, 
-                "description", 
+                },
+                "description",
                 "extra"
             ],
             "ignoreProperty": ["rules"],
@@ -983,6 +990,7 @@
             "events": {
                 "click": true
             },
+            "eventsScope": "[class^='u-tabs_item']",
             "disableSlotAutoFill": [{
                 "slot": "title",
                 "expression": "this.getAttribute('title')",
@@ -1063,7 +1071,8 @@
             },
             "translateBindingProperty": ["value", "placeholder"],
             "additionalAttribute": {
-                "autofocus": "\"false\""
+                "autofocus": "\"false\"",
+                "appendTo": "\"body\""
             }
         }
     },
@@ -1315,7 +1324,7 @@
                 "component": "UToastDesigner",
                 "selector": {
                     "slot": "inject",
-                    "cssSelector": "div[class^='u-toast_index']"
+                    "cssSelector": "div[class^='u-toast_item']"
                 }
             },
             "cacheOpenKey": "visible"
@@ -1344,6 +1353,19 @@
             },
             "additionalAttribute": {
                 ":showInDesigner": true
+            }
+        }
+    },
+    {
+        "name": "UProcessMyprocess",
+        "ideusage": {
+            "idetype": "container",
+            "operator": {
+                "delete": true,
+                "d2c": false,
+                "cut": false,
+                "duplicate": false,
+                "copy": false
             }
         }
     },

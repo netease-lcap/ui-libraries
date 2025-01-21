@@ -3,6 +3,7 @@
 </template>
 <script>
 let uid = 0;
+import cls from 'classnames';
 export default {
     name: 'u-toast-single',
     props: {
@@ -26,6 +27,9 @@ export default {
             await new Promise((resolve) => this.$nextTick(resolve));
             const staticStyle = this.$vnode.data.staticStyle;
 
+            const clx = cls(this.$vnode?.data?.class || [], this.$vnode?.data?.staticClass || '');
+            const cssRuleClassName = clx.split(' ')?.find((className) => /^cw-css-rule-?/.test(className)) || '';
+
             this.$toast.openToast({
                 key: this.key,
                 text: this.text,
@@ -40,6 +44,7 @@ export default {
                 },
 
                 staticStyle: this.filterCSSVarInStyle(staticStyle),
+                cssRuleClassName,
             });
         },
         close() {

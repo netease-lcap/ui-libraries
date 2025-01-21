@@ -56,6 +56,7 @@
 
 <script>
 import i18nMixin from '../../mixins/i18n';
+const filterList = ['approve', 'reject', 'reassign', 'submit', 'withdraw', 'addSign']
 export default {
     name: 'u-process-button',
     mixins: [i18nMixin('u-process-button')],
@@ -102,7 +103,7 @@ export default {
                         taskId: this.taskId,
                     },
                 });
-                this.permissionDetails = (res.data || []).filter((item) => item.operationEnabled);
+                this.permissionDetails = (res.data || []).filter((item) => item.operationEnabled).filter((item) => filterList.includes(item.name))
                 if (this.permissionDetails.some((item) => item?.name === 'addSign')) { // 加签
                     this.getSignOptions(); 
                 }

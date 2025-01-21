@@ -736,6 +736,28 @@ export default {
             if (this.readonly || this.disabled)
                 return;
 
+            if (this.openCropper) {
+                this.$nextTick(() => {
+                  this.modalVisible = true;
+                });
+                const cropFile = e.dataTransfer.files[0];
+                this.cropFileName = cropFile.name;
+                const reader = new FileReader();
+                reader.readAsArrayBuffer(cropFile);
+                reader.onload = (e) => {
+                    let data;
+                    if (typeof e.target.result === 'object') {
+                        // 把Array Buffer转化为blob 如果是base64不需要
+                        data = window.URL.createObjectURL(new Blob([e.target.result]));
+                    } else {
+                        data = e.target.result;
+                    }
+                    this.cropImg = data;
+                    // this.currentValue = []
+                };
+                return;
+            }
+
             this.uploadFiles(e.dataTransfer.files);
         },
         onPaste(e) {

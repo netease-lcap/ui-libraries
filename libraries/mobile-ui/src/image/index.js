@@ -1,5 +1,5 @@
 import { sync } from '@lcap/vue2-utils';
-import { createNamespace, isDef, addUnit, inBrowser } from '../utils';
+import { createNamespace, isDef, addUnit, inBrowser, isFunction } from '../utils';
 import Icon from '../icon';
 // eslint-disable-next-line import/no-cycle
 import ImagePreview from '../image-preview';
@@ -138,24 +138,26 @@ export default createComponent({
       if (src?.indexOf?.('base64') !== -1) {
         return src;
       }
-
       // 同步 PC 端图片链接的处理逻辑
       // 正则表达式用于匹配以逗号分隔的字符串列表，其中每个字符串都不能包含[]
       const reg = /^([^[\]]+)(,([^[\]]+)){0,}$/g;
       if (typeof src === 'string' && reg.test(src)) {
         const [a1, a2] = src.split(',');
         if (/\/\//.test(a2)) {
-          return a1;
+          return this.formatMicroAppSrc(a1);
         }
       }
 
       try {
         const tempSrc = JSON.parse(src);
         const tempItem = tempSrc[0];
-        return tempItem.url;
+        return this.formatMicroAppSrc(tempItem.url);
       } catch (e) {
-        return src;
+        return this.formatMicroAppSrc(src);
       }
+    },
+    formatMicroAppSrc(src) {
+      return isFunction(this.$formatMicroFrontUrl) ? this.$formatMicroFrontUrl(src) : src;
     },
     ifDesigner() {
       return this.$env && this.$env.VUE_APP_DESIGNER;

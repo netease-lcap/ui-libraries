@@ -1,16 +1,19 @@
+<!-- 基本用法 -->
 <template>
-<u-button @click="onOpen">弹出消息</u-button>
-</template>
+    <div>
+        <u-toast ref="toast" @before-close="handleClose" position="static">这是一条消息</u-toast>
+    </div>
+  </template>
+  
 <script>
-export default {
-    data() {
-        return {
-     };
+  export default {
+    mounted() {
+      this.$refs.toast.show()
     },
     methods: {
-        onOpen() {
-            this.$toast.show("弹出消息");
-        },
-    },
-};
+      handleClose(ok) {
+        return ok.preventDefault()
+      }
+    }
+  }
 </script>

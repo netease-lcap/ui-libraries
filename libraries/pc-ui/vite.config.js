@@ -154,6 +154,11 @@ export default defineConfig(({ command }) => {
                 '[class*=u-dropdown_title___]': false,
               },
             },
+            UToastSingle: {
+              selectorPrefixMap: {
+                'u-toast': true,
+              },
+            },
           },
         },
       }),

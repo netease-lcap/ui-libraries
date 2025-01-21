@@ -113,6 +113,7 @@ namespace nasl.ui {
             title: '数据源',
             description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
             docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+            bindOpen: true,
         })
         dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
@@ -711,8 +712,8 @@ namespace nasl.ui {
         onLoad: (event: any) => any;
 
         @Event({
-            title: '清空后',
-            description: '清空后触发',
+            title: '清空前',
+            description: '清空前触发',
         })
         onBeforeClear: (event: any) => any;
 

@@ -40,6 +40,7 @@ namespace nasl.ui {
         '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       docDescription: '集合类型变量或者输出参数为集合类型的逻辑',
       designerValue: [{}, {}, {}],
+      bindOpen: true,
     })
     dataSource:
       | nasl.collection.List<T>

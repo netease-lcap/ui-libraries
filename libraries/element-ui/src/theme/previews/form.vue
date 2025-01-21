@@ -31,11 +31,11 @@
       <el-main>
         <el-card shadow="never">
           <el-text text="项目信息" slot="header"></el-text>
-          <el-form-pro 
-            :inline="true" 
+          <el-form-pro
+            :inline="true"
             :requiredMark="true"
             layout="inline"
-            label-position="right" 
+            label-position="right"
             label-width="100px">
             <el-form-item-pro label="项目名称">
               <el-input-pro placeholder="请输入" class="form-item-content"></el-input-pro>
@@ -73,7 +73,7 @@
             <template slot="title">
               <div class="sub-title">详情列表</div>
             </template>
-            <el-descriptions-item label="项目名称">CodeWave智能开发平台</el-descriptions-item>
+            <el-descriptions-item label="项目名称">智能开发平台</el-descriptions-item>
             <el-descriptions-item label="项目描述">为企业提供更加智能化的软件生产方式</el-descriptions-item>
             <el-descriptions-item label="项目类型">低代码</el-descriptions-item>
             <el-descriptions-item label="负责人">小C</el-descriptions-item>
@@ -84,11 +84,11 @@
           <div class="sub-title">数据表格</div>
           <el-table-pro
             :data-source="[
-              { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
-              { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
-              { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
-              { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
-              { name: 'CodeWave智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+              { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+              { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+              { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+              { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
+              { name: '智能开发平台', desc: '为企业提供更加智能化的软件生产方式', type: '低代码', owner: '小C', date: '2024-01-27', execute: '林哈哈' },
             ]"
           >
             <el-table-column-pro

@@ -274,7 +274,7 @@ export default (options: LcapCodeGenOption = {}) => {
     pkg: fs.readJSONSync(path.resolve(cwd, 'package.json')),
   };
   return {
-    name: 'vite-lcap:code-gen', // 必须的，将会在 warning 和 error 中显示
+    name: 'vite:lcap-code-gen', // 必须的，将会在 warning 和 error 中显示
     enforce: 'pre',
     configResolved(config) {
       themeId = `${config.root}/index.html`;

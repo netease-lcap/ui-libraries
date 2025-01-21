@@ -34,6 +34,11 @@ export default defineConfig(({ command }) => {
         //   useOldCssVarParser: true,
         // },
         i18n: {},
+        modules: {
+          entries: {
+            install: 'src/install',
+          },
+        },
         reportCSSInfo: {
           enabled: true,
           verbose: false,
@@ -153,8 +158,10 @@ export default defineConfig(({ command }) => {
             },
             ElPopconfirm: {
               mainSelectorMap: {
+                '.el-popover__reference': false,
                 '.el-popover': true,
                 '.el-popconfirm': false,
+                '.popper__arrow': false,
               },
             },
             ElTabs: {
@@ -210,6 +217,14 @@ export default defineConfig(({ command }) => {
             },
             ElTablePro: {
               depCompList: ['ElPaginationPro'],
+            },
+            ElTooltip: {
+              selectorPrefixMap: {
+                'el-tooltip__popper': true,
+              },
+              mainSelectorMap: {
+                '.el-tooltip__popper': true,
+              },
             },
           },
         },

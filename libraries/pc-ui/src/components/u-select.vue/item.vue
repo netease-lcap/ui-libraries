@@ -53,7 +53,8 @@ export default {
             return this.parentVM && this.parentVM.focusedVM === this;
         },
         currentText() {
-            return this.text || this.$slots.default[0]
+            return this.text || Array.isArray(this.$slots.default)
+                && this.$slots.default[0]
                 && (this.$slots.default[0].text // raw html text
                     || this.$slots.default[0].componentOptions
                     && this.$slots.default[0].componentOptions.propsData

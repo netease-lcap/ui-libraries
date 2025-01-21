@@ -383,9 +383,18 @@ export default {
             const style = Object.assign({}, columnVM.$vnode.data && columnVM.$vnode.data.style);
             const staticStyle = Object.assign({}, columnVM.$vnode.data && columnVM.$vnode.data.staticStyle);
             if (this.useStickyFixed) {
-                const elZIndex = +this.$el.style.zIndex;
                 // --z-index-layout: 100, 可能用于导航栏fixed，不能大于它
-                const zIndex = elZIndex > 99 ? elZIndex : 99;
+                // 3024744461883136: 不需要大于99的控制。elZindex判断是为了兼容已经设置了值的
+                let zIndex = 'var(--table-view-column-sticky-zindex)';
+                const hasStickyZindexCssVariable = this.$parent && this.$parent.$vnode.data && this.$parent.$vnode.data.style && this.$parent.$vnode.data.style['--table-view-column-sticky-zindex'];
+                const hasStaticStickyZindexCssVariable = this.$parent && this.$parent.$vnode.data && this.$parent.$vnode.data.staticStyle && this.$parent.$vnode.data.staticStyle['--table-view-column-sticky-zindex'];
+                if (!hasStickyZindexCssVariable && !hasStaticStickyZindexCssVariable) {
+                    const styleZindex = this.$parent && this.$parent.$vnode.data && this.$parent.$vnode.data.style && this.$parent.$vnode.data.style.zIndex;
+                    const staticStyleZindex = this.$parent && this.$parent.$vnode.data && this.$parent.$vnode.data.staticStyle && this.$parent.$vnode.data.staticStyle['z-index'];
+                    let elZindex = styleZindex ? +styleZindex : 0;
+                    elZindex = staticStyleZindex ? +staticStyleZindex : elZindex;
+                    zIndex = elZindex > 99 ? elZindex : 'var(--table-view-column-sticky-zindex)';
+                }
                 if (this.fixedLeftList && this.fixedLeftList.length) {
                     const columnData = this.columnVMsMap[columnVM._uid];
                     if (columnData) {
@@ -710,7 +719,8 @@ export default {
             );
         },
         getRealItem(item, rowIndex) {
-            const data = this.currentDataSource.isSimpleItem ? (this.currentDataSource.arrangedData[rowIndex] && this.currentDataSource.arrangedData[rowIndex].simple) : item;
+            // 3037306526469888: arrangedData 改为 viewData
+            const data = this.currentDataSource.isSimpleItem ? (this.currentDataSource.viewData[rowIndex] && this.currentDataSource.viewData[rowIndex].simple) : item;
             return data;
         },
         getThEllipsis(columnVM) {

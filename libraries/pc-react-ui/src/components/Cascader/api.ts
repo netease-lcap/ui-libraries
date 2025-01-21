@@ -57,6 +57,7 @@ namespace nasl.ui {
       description: '展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑',
       docDescription:
         '数据列表，支持直接放置多层的数据源也支持通过单层的数据和`父节点字段名`或`子节点字段名`构建树形',
+      bindOpen: true,
     })
     dataSource:
       | nasl.collection.List<T>

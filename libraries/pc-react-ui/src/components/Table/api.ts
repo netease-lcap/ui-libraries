@@ -62,6 +62,7 @@ namespace nasl.ui {
       docDescription:
         '表格展示的数据。数据源可以绑定变量或者逻辑。变量或逻辑的返回值可以是数组，也可以是对象。对象格式为{list:[], total:10}',
       designerValue: [{}, {}, {}],
+      bindOpen: true,
     })
     dataSource:
       | { list: nasl.collection.List<T>; total: nasl.core.Integer }

@@ -1,5 +1,5 @@
 <template>
-<transition-group tag="div" :class="$style.root" :position="position"
+<transition-group tag="div" :class="[$style.root, cssRuleClassName]" :position="position"
     move-class="animate__move"
     enter-active-class="animate__animated animate__fadeInUpSmall"
     leave-active-class="animate__animated animate__fadeOutUpSmall fast animate__list-leave-active">
@@ -40,6 +40,7 @@ export default {
             itemsQueue: new Map(),
 
             events: new Map(),
+            cssRuleClassName: '',
         };
     },
     watch: {
@@ -140,11 +141,12 @@ export default {
         },
 
         openToast(config) {
-            const { key, text, color, duration, customIcon, onShow, onHide, staticStyle } = config;
+            const { key, text, color, duration, customIcon, onShow, onHide, staticStyle, cssRuleClassName } = config;
 
             if (!this.$el)
                 this.$mount(document.createElement('div')); // Vue 加载完成后，触发某一事件后，先执行methods，再执行watch方法，会导致标签显示异常
             this.$nextTick(() => {
+                this.cssRuleClassName = cssRuleClassName;
                 this.events.set(key, {
                     onShow,
                     onHide,
@@ -185,196 +187,4 @@ export default {
 };
 </script>
 
-<style module>
-.root {
-    position: fixed;
-    z-index: var(--z-index-toast);
-    top: var(--toast-top);
-    left: var(--toast-margin);
-    pointer-events: none;
-    word-break: break-all;
-}
-
-.root[position='top-center'], .root[position='bottom-center'] {
-    margin: 0 auto;
-    width: 0;
-    left: 0;
-    right: 0;
-}
-
-.root[position='bottom-center'], .root[position='bottom-left'], .root[position='bottom-right'] {
-    top: auto;
-    bottom: var(--toast-margin);
-}
-
-.root[position='top-right'], .root[position='bottom-right'] {
-    text-align: right;
-    left: auto;
-    right: var(--toast-margin);
-}
-
-.root[position='top-left'], .root[position='bottom-left'] {
-    text-align: left;
-    left: var(--toast-margin);
-    right: auto;
-}
-
-.root[position='top-left'], .root[position='top-center'], .root[position='top-right'] {
-    top: var(--toast-top);
-    bottom: auto;
-}
-
-.root[position="static"] {
-    position: static;
-    width: auto;
-}
-
-.item-wrap {
-    display: block;
-    width: 2000px;
-}
-
-.leave {
-    position: absolute;
-}
-
-.item {
-    display: inline-block;
-    pointer-events: all;
-    max-width: var(--toast-max-width);
-    margin-bottom: var(--toast-item-space);
-    padding: var(--toast-item-padding);
-    background: var(--toast-background-color);
-    color: var(--toast-item-color);
-    border-radius: var(--toast-item-border-radius);
-    text-align: var(--toast-item-icon-text-align);
-}
-
-.item[position='top-center'], .item[position='bottom-center'] {
-    transform: translateX(-50%);
-}
-
-.close {
-    float: right;
-    margin-left: 8px;
-    color: var(--toast-close-color);
-}
-
-.close::before {
-    content: '\00d7';
-    font-size: var(--toast-close-font-size);
-    line-height: 0.8;
-}
-
-.item::before {
-    /* background: radial-gradient(circle, #fff 45%, transparent 45%); */
-    font-size: var(--toast-item-icon-font-size);
-    vertical-align: var(--toast-item-icon-vertical-align);
-    margin-right: var(--toast-item-icon-margin-right);
-}
-.item[color="info"]::before {
-content: "\e67e";
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-    color: var(--toast-item-icon-color-info);
-}
-.item[color="success"]::before {
-content: "\e667";
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-    color: var(--toast-item-icon-color-success);
-    /* background: #00a65a;
-    color: white; */
-}
-.item[color="warning"]::before {
-content: "\e655";
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-    color: var(--toast-item-icon-color-warning);
-    /* background: #f39c12;
-    color: white; */
-}
-.item[color="error"]::before {
-content: "\e659";
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-    color: var(--toast-item-icon-color-error);
-    /* background: #dd4b39;
-    color: white; */
-}
-
-.item[color="loading"]::before {
-content: "\e64d";
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-    color: var(--toast-item-icon-color-info);
-    /* background: #dd4b39;
-    color: white; */
-
-    animation: circle 1s linear 0s infinite both;
-}
-
-@keyframes circle {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.item[color][class][class] {
-    padding: 9px 16px 9px 40px;
-}
-.item[color][class][class]::before {
-    position: absolute;
-    top: var(--toast-item-icon-top);
-    left: 16px;
-}
-
-.customIcon {
-    display: inline-block;
-    margin-right: var(--toast-item-icon-margin-right);
-    color: var(--toast-item-custom-icon-color);;
-}
-</style>
+<style module src="./index.css"></style>

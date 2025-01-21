@@ -13,7 +13,7 @@ import {
   ref,
 } from '@vue/composition-api';
 import {
-  camelCase, kebabCase, lowerFirst, upperFirst,
+  camelCase, isFunction, kebabCase, lowerFirst, upperFirst,
 } from 'lodash';
 import PluginManager from './plugin';
 import { MapGetKey, PluginSetUpContext, PluginSetupRef } from './types';
@@ -495,6 +495,10 @@ export default function createHocComponent(baseComponent: any, manger: PluginMan
         scopedSlots,
         ref: '$base',
       };
+
+      if (isFunction(propsData.nativeOn.focus) || isFunction(propsData.nativeOn.blur)) {
+        propsData.attrs.tabindex = propsData.attrs.tabindex || '0';
+      }
 
       const contextPropsData = cloneShallowVNodeData(propsData);
       const resultVNode = h(baseComponent, propsData, childrenNodes);

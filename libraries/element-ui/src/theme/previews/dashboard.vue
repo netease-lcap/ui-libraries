@@ -155,9 +155,9 @@
       <el-card shadow="never" style="margin-top: var(--el-comp-margin-xl)">
         <el-text text="我的应用" slot="header"></el-text>
         <el-flex :gutter="22">
-          <el-flex 
-            alignment="center" 
-            direction="vertical" 
+          <el-flex
+            alignment="center"
+            direction="vertical"
             justify="center"
             v-for="{text, icon} in [
               {icon: 'el-icon-office-building', text: '企业管理'},
@@ -182,9 +182,9 @@
           <el-flex
             v-for="{label, tagType, text} in [
               {label: '置顶', tagType: 'danger', text: '新版本V3.6上线'},
-              {label: '最新', tagType: '', text: '网易内部通过低代码打造一...'},
-              {label: '最新', tagType: '', text: 'CodeWave助力国网苏州城'},
-              {label: '最新', tagType: '', text: '网易低代码服务平台上线'},
+              {label: '最新', tagType: '', text: '新版本V3.6上线'},
+              {label: '最新', tagType: '', text: '新版本V3.6上线'},
+              {label: '最新', tagType: '', text: '新版本V3.6上线'},
             ]"
             :key="text"
             alignment="center"
@@ -197,8 +197,8 @@
       <el-card shadow="never" style="margin-top: var(--el-comp-margin-l); height: 410px;">
         <el-text text="使用帮助" slot="header"></el-text>
         <el-flex>
-          <el-text 
-            size="normal" 
+          <el-text
+            size="normal"
             :text="text"
             v-for="{text} in [
               {text: '什么是资源监控'},
