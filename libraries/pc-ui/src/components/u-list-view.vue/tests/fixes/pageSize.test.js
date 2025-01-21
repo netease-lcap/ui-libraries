@@ -10,7 +10,7 @@ import PageSizeDemo from './__demos__/pageSize.vue';
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-describe('u-table-view.vue', () => {
+describe('u-list-view.vue', () => {
     it('pageSizer选择器变化后，刷新数据', async () => {
         const wrapper = mount(PageSizeDemo);
         await sleep(16);
