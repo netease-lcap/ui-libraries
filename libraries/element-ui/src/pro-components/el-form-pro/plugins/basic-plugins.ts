@@ -196,6 +196,9 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
 
         if (layoutMode === 'grid') {
           return vnodes.map((vnode) => {
+            if (!vnode.tag) {
+              return vnode;
+            }
             const colSpan = vnode.data && vnode.data.attrs && vnode.data.attrs.colSpan ? vnode.data.attrs.colSpan : 1;
             const colStyle = {
               gridRowStart: 'initial',
