@@ -114,7 +114,7 @@ export default createComponent({
     return {
       popupVisible: this.popupOpened,
       // 内部值
-      currentValue: this.formatValue((this.value ?? this.pvalue) || ''),
+      currentValue: this.formatValue((this.value ?? this.pvalue) ?? ''),
       style: '',
     };
   },
