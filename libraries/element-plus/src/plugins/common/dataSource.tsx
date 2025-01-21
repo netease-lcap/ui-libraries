@@ -1,9 +1,10 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react-refresh/only-export-components */
 import _ from 'lodash';
-import React, { useMemo } from 'react';
 import fp from 'lodash/fp';
-import { useRequest } from 'ahooks';
+// import { useRequest } from 'ahooks';
+import { watch } from 'vue';
+import { useRequest } from 'vue-hooks-plus';
 import {
   $deletePropsList, $dataSourceField, $labelKey, $valueKey,
 } from '@/plugins/constants';
@@ -24,14 +25,14 @@ function wrapDataToRequest(dataSource) {
   ]);
   return wrapDataSource(dataSource);
 }
-export function useHandleTransformOption(props) {
+export function useHandleTransformOption(props, { useMemo, useEffect }) {
   const dataSourceField = props.get($dataSourceField, 'options');
   const deletePropsList = props.get($deletePropsList, []).concat([$dataSourceField]);
   const dataSource = props.get('dataSource');
   const ref = props.get('ref');
   const requestDataSource = useMemo(() => wrapDataToRequest(dataSource), [dataSource]);
   const { data, run: reload, loading } = useRequest(requestDataSource);
-  React.useEffect(() => { reload(); }, [dataSource]);
+  useEffect(() => { reload(); }, [dataSource]);
   const resultData = useMemo(() => formatData(data), [data]);
   const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
   return _.isNil(dataSource) ? {
@@ -45,7 +46,7 @@ export function useHandleTransformOption(props) {
 }
 
 useHandleTransformOption.order = 5;
-export function useHandleTextAndValueField(props) {
+export function useHandleTextAndValueField(props, { useMemo }) {
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
   const labelKey = props.get($labelKey, 'label');
@@ -62,9 +63,8 @@ export function useHandleTextAndValueField(props) {
     : { [dataSourceField]: convertOption, [$deletePropsList]: deletePropsList };
 }
 useHandleTextAndValueField.order = 6;
-// const nodeId = React.useMemo(() => _.uniqueId('button_'), []);
 
-export function useHandleMapField(filedInfo) {
+export function useHandleMapField(filedInfo, { useMemo }) {
   const {
     label = 'label',
     value = 'value',
@@ -80,20 +80,22 @@ export function useHandleMapField(filedInfo) {
     }));
   }, [label, value, textField, valueField, dataSource]);
 }
-export function useRequestDataSource(dataSource, options = {}) {
+export function useRequestDataSource(dataSource, options = {}, { useMemo, useEffect, useState }) {
+  const [resultData, setResult] = useState({});
   const handleDataSouceToFn = _.cond([
     [_.isArray, _.constant(async () => dataSource)],
     [_.isFunction, _.constant(async (...arg) => dataSource(...arg))],
     [_.stubTrue, _.constant(async () => [])],
   ]);
   const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource), [dataSource]);
-  const requestResult = useRequest(dataSourceFn, options);
-  const { run } = requestResult;
-  React.useEffect(() => run(), [dataSource]);
-  return requestResult;
+  const result = useMemo(() => useRequest(dataSourceFn, options), [dataSource]) as any;
+  watch(() => result, setResult, { deep: true, immediate: true });
+  const { data, run, loading } = resultData;
+  useEffect(() => run?.(), [dataSource]);
+  return { data, run, loading };
 }
 
-export function useFormatDataSource(dataSource) {
+export function useFormatDataSource(dataSource, { useMemo }) {
   const conformsArray = _.cond([
     [Array.isArray, _.identity],
     [_.conforms({ list: _.isArray }), fp.get('list')],
@@ -103,20 +105,18 @@ export function useFormatDataSource(dataSource) {
 }
 
 export function useDataSourceToTree(dataSource, parentField, valueField = 'value') {
-  return useMemo(() => {
-    if (_.isNil(parentField)) return dataSource;
-    const map = new Map<string, Record<string, any>>(dataSource.map((item) => [_.get(item, valueField), item]));
-    const tree = [] as any[];
-    dataSource.forEach((item) => {
-      if (map.get(_.get(item, parentField))) {
-        const parent = map.get(_.get(item, parentField));
-        if (!parent) return;
-        if (!Array.isArray(parent.children)) parent.children = [];
-        parent.children.push(map.get(_.get(item, valueField)));
-      } else {
-        tree.push(map.get(_.get(item, valueField)));
-      }
-    });
-    return tree;
-  }, [dataSource, parentField, valueField]);
+  if (_.isNil(parentField)) return dataSource;
+  const map = new Map<string, Record<string, any>>(dataSource.map((item) => [_.get(item, valueField), item]));
+  const tree = [] as any[];
+  dataSource.forEach((item) => {
+    if (map.get(_.get(item, parentField))) {
+      const parent = map.get(_.get(item, parentField));
+      if (!parent) return;
+      if (!Array.isArray(parent.children)) parent.children = [];
+      parent.children.push(map.get(_.get(item, valueField)));
+    } else {
+      tree.push(map.get(_.get(item, valueField)));
+    }
+  });
+  return tree;
 }

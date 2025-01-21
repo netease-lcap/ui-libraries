@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import Component from '../index';
 
 export default {
@@ -25,17 +25,23 @@ export const Example1 = {
       const yref = ref();
 
       const handleClick = (tab) => {
-        console.log(tab);
+        console.log(tab, 'tabe====');
+
+        // activeName.value = 'second';
         // activeName.value = tab;
-        name.value = tab;
       };
       setTimeout(() => {
-        name.value = 'newName';
-        activeName.value = 'second';
-        console.log(myref, 'myref');
-        console.log(myref.value.input.focus(), 'myref.value.ref');
-        console.log('yref', yref);
+        // name.value = 'newName';
+        // activeName.value = 'second';
+        // console.log(myref, 'myref');
+        // console.log(myref.value.myChange(), 'myref.value.ref');
+        // console.log('yref', yref);
       }, 3000);
+
+      setTimeout(() => {
+        // console.log(myref.value.myChange(), 'myref.value.ref');
+        console.log('activeName', activeName);
+      }, 9000);
 
       return {
         name,
@@ -47,11 +53,12 @@ export const Example1 = {
     },
     template: `
     <div>
-    <el-input ref="myref" v-model:value="activeName" @focus="handleClick"  :autofocus="true" class="demo-tabs"  type="card"> </el-input>
+    <el-input-plus :modelValue="333" @update:value="handleClick"/>
       {{activeName}}
       ==={{name}}
-      <el-input-plus ref="yref" :model-value="name" v-model:value="activeName" @input="handleClick"></el-input-plus>
+      <el-input ref="yref" v-model:value="activeName"  ></el-input>
     </div>
     `,
   }),
 };
+

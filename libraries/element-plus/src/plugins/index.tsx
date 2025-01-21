@@ -1,9 +1,13 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
 import { ref, defineProps, watch } from 'vue';
+import { ElInput } from 'element-plus';
 import create from 'zustand-vue';
+import { Map as imMap } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
+import { $deletePropsList } from '@/plugins/constants';
+import '@/utils/index';
 
 export class PluginOptions {
   plugin: any[] = [];
@@ -39,6 +43,7 @@ export class PluginOptions {
     return pluginMethod;
   };
 }
+
 export function registerComponet(Component, options) {
   return {
     name: 'HocBaseComponents',
@@ -51,45 +56,157 @@ export function registerComponet(Component, options) {
       const componentRef = ref(null);
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
+      const mystate = ref({ state: { render: () => { } } });
+      const fiberMap = new Map();
+      const myRef = ref({});
+      let queen: any[] = [];
       const useStore = create((set) => ({
-        ...props,
-        state: {},
-        slots,
-        ...attrs,
-        emit,
-        set,
-        setvalue: (fn, tr) => set((state) => fn(state), tr),
+        state: {
+          ...props,
+          ...attrs,
+          emit,
+          slots,
+          ref: {},
+          [$deletePropsList]: [],
+          render: Component,
+        },
+
+        // ...attrs,
+        // emit,
+        setvalue: (commit, tr) => {
+          const getNewStateFn = _.cond([
+            [_.isFunction, _.identity],
+            [_.isPlainObject, (state) => (store) => ({ state: { ...store.state, ...state } })],
+            [_.stubTrue, _.constant],
+          ])(commit) as any;
+          return set((state) => getNewStateFn(state), tr);
+        },
+
         deleteList: ['deleteList'],
       }));
-      watch(() => [props, attrs, slots, emit], ([props, attrs, slots, emit]) => {
-        useStore.setState({
-          ...props, ...attrs, slots, emit,
-        });
-      }, { deep: true });
-      pluginHooks.forEach((handleFun) => _.attempt(handleFun, useStore, componentRef));
-      const expandProps = useStore() as any;
-      setTimeout(() => {
-        console.log(componentRef, 'componentRef');
-      }, 1000);
-      expose({
-        inputref: componentRef,
+      const setValue = useStore((state: any) => state.setvalue);
+      function useState(this: any, isMount, initialstate) {
+        let hook;
+        if (isMount) {
+          hook = {
+            next: null,
+            storeKey: Symbol('storeKey'),
+          };
+          hook.next = hook;
+          if (this.workInProgressState) {
+            hook.next = this.workInProgressState.next;
+            this.workInProgressState.next = hook;
+          }
+          this.workInProgressState = hook;
+        } else {
+          hook = this.workInProgressState.next;
+          this.workInProgressState = this.workInProgressState.next;
+        }
+        const state = this.useStore((store) => store.state[hook?.storeKey] ?? initialstate);
+        const localSetValue = (value) => {
+          if (_.isEqual(value, state.value)) {
+            return;
+          }
+          queen.push({ [hook.storeKey]: value });
+          _.defer(() => {
+            if (!_.isEmpty(queen)) {
+              const comit = queen.reduce((pre, cur) => ({ ...pre, ...cur }), {});
+              setValue(comit);
+              queen = [];
+            }
+          }, queen);
+        };
+        return [state?.value ?? state, localSetValue];
+      }
+      function useEffect(this: any, isMount, callBack, dep) {
+        let hook;
+        if (isMount) {
+          hook = {
+            next: null,
+            dep,
+            result: null,
+          };
+          hook.next = hook;
+          if (this.workInProgressEffect) {
+            hook.next = this.workInProgressEffect.next;
+            this.workInProgressEffect.next = hook;
+          }
+          this.workInProgressEffect = hook;
+          hook.result = callBack();
+        } else {
+          hook = this.workInProgressEffect.next;
+          this.workInProgressEffect = this.workInProgressEffect.next;
+        }
+        const isSameDep = _.every(dep, (item, index) => Object.is(item, _.get(hook, `dep.${index}`)));
+        // const isInvokeCallBack = !_.isEmpty(dep) && !isSameDep;
+        // const result = isInvokeCallBack ? [callBack(), dep] : [hook.result, hook.dep];
+        // [hook.result, hook.dep] = result;
+        if (!_.isEmpty(dep) && !isSameDep) {
+          hook.result = callBack();
+          hook.dep = dep;
+        }
+        return hook.result;
+      }
+      function scheduler(pluginHooks, ImmutableProps, componentRef) {
+        return pluginHooks?.reduce((ImmutableProps, handleFn) => {
+          const isMount = !fiberMap.has(handleFn);
+          const storeKey = _.uniqueId('storeKey');
+          const fiber = isMount ? {
+            workInProgressState: null,
+            workInProgressEffect: null,
+            useStore,
+            setValue,
+            storeKey,
+          } : fiberMap.get(handleFn);
+          const localUseState = _.bind(useState, fiber, isMount);
+          const localUseEffect = _.bind(useEffect, fiber, isMount);
+          const result = _.attempt(_.bind(handleFn, fiber), ImmutableProps, {
+            useState: localUseState, useEffect: localUseEffect, useMemo: localUseEffect, componentRef,
+          });
+          fiberMap.set(handleFn, fiber);
+          return ImmutableProps.merge(result);
+        }, ImmutableProps);
+      }
+      useStore.subscribe((props: any, pre) => {
+        const ImmutableProps = imMap(props.state);
+        const commitState = scheduler(pluginHooks, ImmutableProps, componentRef);
+        const commitJsState = commitState.toJS();
+        mystate.value.state = commitJsState;
+        _.assign(myRef.value, commitJsState.ref);
       });
+      watch(() => [props, attrs, slots, emit], ([props, attrs, slots, emit]) => {
+        setValue(
+          {
+            ..._.filterUnderfinedValue(props),
+            ..._.filterUnderfinedValue(attrs),
+            // ...props,
+            // ...attrs,
+            slots,
+            emit,
+          },
+        );
+
+        const expandProps = useStore() as any;
+        mystate.value.state = { ...expandProps.state, ...mystate.value.state };
+
+        _.assign(myRef.value, expandProps.state.ref);
+      }, { deep: true, immediate: true });
+      watch(componentRef, (value) => _.assign(myRef.value, value));
+
+      expose(myRef.value);
+      const RenderComponent = mystate.value.state.render ?? Component;
+
       return () => {
-        console.log(expandProps, '==expandProps,', slots);
-        console.log('default', slots.default());
+        const expandProps = useStore() as any;
+        console.log(expandProps, mystate.value.state, '========');
+
         return (
-          <Component
-            {...attrs}
-            {..._.omit(expandProps, expandProps.deleteList)}
-            {...expandProps.state}
-            // v-slots={slots}
+          <RenderComponent
+            {..._.omit(mystate.value.state, mystate.value.state[$deletePropsList])}
+            v-slots={{ ...slots, ..._.get(mystate, 'value.state.slots', {}) }}
             v-on={emit}
             ref={componentRef}
-          >
-            {{
-              ...slots,
-            }}
-          </Component>
+          />
         );
       };
     },

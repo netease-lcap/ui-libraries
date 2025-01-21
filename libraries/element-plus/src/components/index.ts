@@ -1,5 +1,9 @@
 export { ElFlex } from './el-flex';
 export { ElText } from './el-text';
 export { ElTabs, ElTabPane } from './el-tabs';
-export { ElInput, ElInputPlus } from './el-input';
+export { ElInputPlus, ElInput } from './el-input';
 export { ElSelect, ElOption } from './el-select';
+export { ElCascader } from './el-cascader';
+export { ElCheckbox, ElCheckboxGroup } from './el-checkbox';
+export { ElTable, ElTableColumn } from './el-table';
+export { ElPagination } from 'element-plus';
