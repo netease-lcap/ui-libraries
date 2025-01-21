@@ -61,7 +61,8 @@
                         :disabled="node.disabled"></u-dropdown-item>
                 </template>
             </template>
-            <slot></slot>
+            <!-- <slot></slot> -->
+            <CombineRender :vnodes="childrenVnodes"/>
         </m-popper>
         <!-- append-to body的情况下能够拿到width值 -->
         <div :class="$style.popperghost" ref="popperghost" v-if="appendTo === 'body'"></div>
@@ -79,6 +80,10 @@ export default {
     childName: 'u-dropdown-item',
     components: {
         SEmpty,
+        CombineRender: {
+            functional: true,
+            render: (h, ctx) => ctx.props.vnodes
+        }
     },
     mixins: [
       MSinglex,
@@ -147,6 +152,9 @@ export default {
             }
             return [];
         },
+        childrenVnodes() {
+            return [...(this.$slots.default || []), ...(this.$options._renderChildren || [])]
+        }
     },
     watch: {
         opened(value) {
