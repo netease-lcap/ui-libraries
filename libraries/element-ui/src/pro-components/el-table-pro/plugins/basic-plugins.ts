@@ -90,7 +90,7 @@ export const useTable: NaslComponentPluginOptions = {
               const isPreMerge = _.get(item, `rowspan.${field.colKey}`);
               const dataFieldValue = _.get(data[i], field.colKey);
               const itemFieldValue = _.get(item, field.colKey);
-              if (isPreMerge || dataFieldValue !== itemFieldValue) break;
+              if (dataFieldValue !== itemFieldValue) break;
               rowspan++;
               item.rowspan = _.merge(item.rowspan, { [field.colKey]: true });
             }
