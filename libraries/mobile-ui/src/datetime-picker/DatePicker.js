@@ -257,7 +257,7 @@ export default createComponent({
     value: {
       handler(val) {
         // 将外部值转内部值
-        this.innerValue = this.formatValue(val)
+        this.innerValue = this.formatValue(val);
       },
       immediate: true,
     },
@@ -279,6 +279,12 @@ export default createComponent({
           }
         } catch (e) {
           console.warn(e, 'error date');
+          const arr = value.split('-');
+          if (arr.length === 1 && this.unit === 'year' && value.length === 4) {
+            value = `${value}-01-01`;
+          } else if (arr.length === 2 && this.unit === 'month') {
+            value = `${value}-01`;
+          }
           // 可能是2020/08这种格式，低版本iOS不兼容
           value = new Date(value.replace('/', '-'));
         }
