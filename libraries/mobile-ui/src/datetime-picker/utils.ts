@@ -162,7 +162,31 @@ export function showFormat(value: string | number | Date, options: Record<string
     return dayjs(value, valueFormatter).format(formatter);
   }
 
-  const date = isDate(value) ? value : (value ? new Date(value) : new Date());
+  let date = value;
+
+  if (!isDate(date)) {
+    if (!value) {
+      date = new Date();
+    } else {
+      if (typeof value === 'string') {
+        const arr = value.split('-');
+        if (arr.length === 1 && options.unit === 'year' && options.length === 4) {
+          value = `${value}-01-01`;
+        } else if (arr.length === 2 && options.unit === 'month') {
+          value = `${value}-01`;
+        }
+
+        value = value.replace(/-/g, '/');
+
+        if (value.split('/').length === 2) {
+          value = value.replace('/', '-');
+        }
+      }
+      date = new Date(value);
+    }
+  }
+
+  // const date = isDate(value) ? value : (value ? new Date(value) : new Date());
   return dayjs(date).format(formatter);
 }
 
