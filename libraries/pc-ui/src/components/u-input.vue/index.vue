@@ -5,7 +5,7 @@
     @click.self="!focused && focus()">
     <span :class="$style.baseline">b</span><!-- 用于基线对齐 -->
     <span :class="$style.placeholder" v-show="placeholder">{{ valueEmpty ? placeholder : '' }}</span><!-- 兼容 IE9 -->
-    <span v-if="prefix || $slots.prefix" :class="$style.prefix" @click="$emit('click-prefix', $event, this)" :name="prefix">
+    <span v-if="prefix || $slots.prefix" :class="$style.prefix" @click="!disabled && $emit('click-prefix', $event, this)" :name="prefix">
         <slot name="prefix">
             <i-ico
                 v-if="prefix !== 'If'"
@@ -28,7 +28,7 @@
     <slot></slot>
     <span :class="$style.suffix" v-if="password || suffix || clearable">
         <span :class="$style.password" v-if="password" @click.stop="togglePassword"></span>
-        <span v-if="suffix" @click="$emit('click-suffix', $event, this)">
+        <span v-if="suffix" @click="!disabled && $emit('click-suffix', $event, this)">
             <slot name="suffix">
                 <i-ico
                     :name="suffix"

@@ -61,6 +61,9 @@ export default defineConfig(({ command }) => {
     optimizeDeps: {
       include: ['online-svg-icon-vue2'],
     },
+    esbuild: {
+      charset: 'ascii',
+    },
     resolve: {
       extensions: [
         '.js',

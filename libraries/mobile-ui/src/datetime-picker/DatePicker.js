@@ -257,7 +257,7 @@ export default createComponent({
     value: {
       handler(val) {
         // 将外部值转内部值
-        this.innerValue = this.formatValue(val)
+        this.innerValue = this.formatValue(val);
       },
       immediate: true,
     },
@@ -274,6 +274,21 @@ export default createComponent({
         try {
           if (!value || value === '') {
             value = new Date();
+          } else if (typeof value === 'string' && !value.includes('T')) {
+            let temp = value;
+            const arr = temp.split('-');
+            if (arr.length === 1 && this.unit === 'year' && temp.length === 4) {
+              temp = `${temp}-01-01`;
+            } else if (arr.length === 2 && this.unit === 'month') {
+              temp = `${temp}-01`;
+            }
+
+            temp = temp.replace(/-/g, '/');
+
+            if (temp.split('/').length === 2) {
+              temp = temp.replace('/', '-');
+            }
+            value = new Date(temp);
           } else {
             value = new Date(value);
           }
