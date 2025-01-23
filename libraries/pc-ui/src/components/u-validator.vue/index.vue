@@ -292,7 +292,11 @@ export default {
                     this.color = this.state;
                 if (trigger === 'submit')
                     trigger = '';
-                const value = this.validatingProcess(this.validatingValue === undefined ? this.value : this.validatingValue);
+
+                let value = this.validatingValue === undefined ? this.value : this.validatingValue;
+                if (typeof this.validatingProcess === 'function') {
+                  value = this.validatingProcess(value);
+                }
 
                 // @TODO: 临时解决一下，用 blur 当 change
                 const INPUT_NAMES = ['u-input', 'u-textarea', 'u-number-input', 'u-time-picker'];
