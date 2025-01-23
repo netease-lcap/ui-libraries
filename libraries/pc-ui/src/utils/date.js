@@ -64,7 +64,10 @@ export const transformDate = function transformDate(date) {
         if (date.includes('W')) {
             return dayjs(date, ['YYYY-WWWW', 'YYYY-WWWW H:mm:ss', 'YYYY-WWWW HH:mm:ss']).toDate();
         }
-        date = date.replace(/-/g, '/');
+        if (typeof date === 'string' && !date.includes('T')) {
+          date = date.replace(/-/g, '/');
+        }
+
         return new Date(date);
     } else if (typeof date === 'number')
         return new Date(date);
