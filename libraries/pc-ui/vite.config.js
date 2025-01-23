@@ -174,6 +174,9 @@ export default defineConfig(({ command }) => {
         NODE_ENV: command === 'build' ? 'production' : 'development',
       },
     },
+    esbuild: {
+      charset: 'ascii',
+    },
     css: {
       modules: {
         generateScopedName: createGenScopedName('CloudUI', './src'),

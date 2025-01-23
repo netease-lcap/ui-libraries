@@ -274,6 +274,20 @@ export default createComponent({
         try {
           if (!value || value === '') {
             value = new Date();
+          } else if (typeof value === 'string' && !value.includes('T') && !value.includes(':')) {
+            let temp = value;
+            const arr = temp.split('-');
+
+            if (['month', 'year'].includes(this.unit) && arr.length < 3) {
+              temp = arr.concat(new Array(3 - arr.length).fill('01')).join('-');
+            }
+
+            temp = temp.replace(/-/g, '/');
+
+            if (temp.split('/').length === 2) {
+              temp = temp.replace('/', '-');
+            }
+            value = new Date(temp);
           } else {
             value = new Date(value);
           }

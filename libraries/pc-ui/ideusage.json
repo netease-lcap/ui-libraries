@@ -743,8 +743,8 @@
                 {
                     "slot": "label",
                     "expression": "this.getAttribute('label')?.value"
-                }, 
-                "description", 
+                },
+                "description",
                 "extra"
             ],
             "ignoreProperty": ["rules"],
