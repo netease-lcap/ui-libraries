@@ -168,7 +168,7 @@ export function showFormat(value: string | number | Date, options: Record<string
     if (!value) {
       date = new Date();
     } else {
-      if (typeof value === 'string') {
+      if (typeof value === 'string' && !value.includes('T')) {
         const arr = value.split('-');
         if (arr.length === 1 && options.unit === 'year' && options.length === 4) {
           value = `${value}-01-01`;

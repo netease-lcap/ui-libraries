@@ -274,7 +274,7 @@ export default createComponent({
         try {
           if (!value || value === '') {
             value = new Date();
-          } else if (typeof value === 'string') {
+          } else if (typeof value === 'string' && !value.includes('T')) {
             let temp = value;
             const arr = temp.split('-');
             if (arr.length === 1 && this.unit === 'year' && temp.length === 4) {
