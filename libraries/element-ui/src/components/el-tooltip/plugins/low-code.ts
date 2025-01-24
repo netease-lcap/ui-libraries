@@ -1,11 +1,16 @@
 /* 仅在 ide 环境生效的插件 */
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils';
-import { ref, getCurrentInstance } from '@vue/composition-api';
+import {
+  ref,
+  getCurrentInstance,
+  onMounted,
+  onUnmounted,
+} from '@vue/composition-api';
 import _, { isFunction } from 'lodash';
 import { VNode } from 'vue';
 import cls from 'classnames';
 
-function getCssRuleClassName(vnode: VNode, popperClass: string) {
+function getCssRuleClassName(vnode: VNode | undefined, popperClass: string) {
   if (!vnode) {
     return popperClass;
   }
@@ -16,10 +21,41 @@ function getCssRuleClassName(vnode: VNode, popperClass: string) {
 }
 
 export const useManualClickPlugin: NaslComponentPluginOptions = {
-  setup(props, { setupContext: ctx }) {
+  setup(props, context) {
+    const ctx = context.setupContext;
     const visible = ref(false);
     const instance = getCurrentInstance();
     const popperClassValue = ref('');
+
+    const setPopperClass = () => {
+      const popperClass = props.get<string>('popperClass') || '';
+      const cssRuleClassName = getCssRuleClassName(isFunction(context.getVNode) ? context.getVNode() : ctx?.parent?.$vnode, popperClass);
+      popperClassValue.value = cssRuleClassName;
+    };
+
+    let observer;
+    onMounted(() => {
+      observer = new MutationObserver((mutationsList) => {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const mutation of mutationsList) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            setPopperClass();
+          }
+        }
+      });
+
+      const parentNode = ctx?.parent?.$vnode?.elm;
+      if (parentNode) {
+        observer.observe(parentNode, { attributes: true });
+      }
+    });
+
+    onUnmounted(() => {
+      if (observer) {
+        observer.disconnect();
+      }
+    });
+
     return {
       manual: true,
       value: visible,
@@ -39,9 +75,7 @@ export const useManualClickPlugin: NaslComponentPluginOptions = {
         if (popperRef && nodepath) {
           popperRef.setAttribute('data-nodepath', nodepath);
         }
-        const popperClass = props.get<string>('popperClass') || '';
-        const cssRuleClassName = getCssRuleClassName(isFunction(ctx.getVNode) ? ctx.getVNode() : ctx?.parent?.$vnode, popperClass);
-        popperClassValue.value = cssRuleClassName;
+        setPopperClass();
       },
     };
   },
