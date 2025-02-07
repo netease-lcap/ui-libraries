@@ -3,6 +3,7 @@ import DataSource from '../../utils/DataSource';
 import debounce from 'lodash/debounce';
 import i18n from './i18n';
 import i18nMixin from '../../mixins/i18n';
+import { isObject } from 'lodash';
 
 export default {
     name: 'm-data-source',
@@ -130,8 +131,8 @@ export default {
                         return Promise.resolve(result);
                 };
                 return new DataSource(options);
-            } else if (dataSource instanceof Object) {
-                if (dataSource.hasOwnProperty('list') && Array.isArray(dataSource.list))
+            } else if (isObject(dataSource)) {
+                if (Object.prototype.hasOwnProperty.call(dataSource, 'list') && Array.isArray(dataSource.list))
                     return new DataSource(Object.assign(options, dataSource, {
                         data: dataSource.list,
                     }));

@@ -282,6 +282,7 @@ import DataSourceNew from '../../utils/DataSource/new';
 import MPreview from '../u-text.vue/preview';
 import AllCheck from './allCheck.vue';
 import i18nMixin from '../../mixins/i18n';
+import isObject from 'lodash/isObject';
 
 export default {
     name: 'u-select',
@@ -697,8 +698,8 @@ export default {
         }
 
         return new Constructor(options);
-      } else if (dataSource instanceof Object) {
-        if (dataSource.hasOwnProperty('list') && Array.isArray(dataSource.list))
+      } else if (isObject(dataSource)) {
+        if (Object.prototype.hasOwnProperty.call(dataSource, 'list') && Array.isArray(dataSource.list))
           return new Constructor(
             Object.assign(options, dataSource, {
               data: dataSource.list,

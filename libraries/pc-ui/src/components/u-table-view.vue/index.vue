@@ -213,6 +213,7 @@ import { createTableHeaderExportHelper, getXslxStyle } from './helper';
 import * as xlsxUtils from '../../utils/xlsx';
 import UTableRender from './render.table.vue';
 import UTableDesigner from './designer.table.vue';
+import isObject from 'lodash/isObject';
 
 export default {
     name: 'u-table-view',
@@ -565,7 +566,7 @@ export default {
             this.$emit('change', { value, oldValue, item, oldItem }, this);
             this.currentData.forEach((itemTemp) => {
                 const valueTemp = this.$at(itemTemp, this.valueField);
-                if (!itemTemp.hasOwnProperty('radioChecked')) {
+                if (!Object.prototype.hasOwnProperty.call(itemTemp, 'radioChecked')) {
                     this.$set(itemTemp, 'radioChecked', false);
                 }
                 if (valueTemp === value) {
@@ -743,29 +744,29 @@ export default {
             this.processTableDraggable();
             if (selectable || this.selectable) { // 2978760771550464，选中行后分页需要点两次才能切换
                 data.forEach((item) => {
-                    if (!item.hasOwnProperty('disabled'))
+                    if (!Object.prototype.hasOwnProperty.call(item, 'disabled'))
                         this.$set(item, 'disabled', false);
-                    if (!item.hasOwnProperty('radioChecked') || this.selectedItem === undefined) // 3003406551646208 数据表格单选值不会同步取消
+                    if (!Object.prototype.hasOwnProperty.call(item, 'radioChecked') || this.selectedItem === undefined) // 3003406551646208 数据表格单选值不会同步取消
                         this.$set(item, 'radioChecked', false);
                 });
             }
             if (checkable) {
                 data.forEach((item) => {
-                    if (!item.hasOwnProperty('checked'))
+                    if (!Object.prototype.hasOwnProperty.call(item, 'checked'))
                         this.$set(item, 'checked', false);
-                    if (!item.hasOwnProperty('disabled'))
+                    if (!Object.prototype.hasOwnProperty.call(item, 'disabled'))
                         this.$set(item, 'disabled', false);
                 });
             }
             if (expandable) {
                 data.forEach((item) => {
-                    if (!item.hasOwnProperty('expanded'))
+                    if (!Object.prototype.hasOwnProperty.call(item, 'expanded'))
                         this.$set(item, 'expanded', false);
                 });
             }
             if (editable) {
                 data.forEach((item) => {
-                    if (!item.hasOwnProperty('editing'))
+                    if (!Object.prototype.hasOwnProperty.call(item, 'editing'))
                         this.$set(item, 'editing', '');
                 });
             }
@@ -777,13 +778,13 @@ export default {
             // fix: 2864106089210368 树型分页无效，多次点击才生效
             if(this.treeDisplay) {
                 data.forEach((item) => {
-                    if (!item.hasOwnProperty('display'))
+                    if (!Object.prototype.hasOwnProperty.call(item, 'display'))
                         this.$set(item, 'display', '');
-                    if (!item.hasOwnProperty('loading'))
+                    if (!Object.prototype.hasOwnProperty.call(item, 'loading'))
                         this.$set(item, 'loading', false);
-                    if (!item.hasOwnProperty('tableTreeItemLevel'))
+                    if (!Object.prototype.hasOwnProperty.call(item, 'tableTreeItemLevel'))
                         this.$set(item, 'tableTreeItemLevel', 0);
-                    if (!item.hasOwnProperty('treeExpanded'))
+                    if (!Object.prototype.hasOwnProperty.call(item, 'treeExpanded'))
                         this.$set(item, 'treeExpanded', false);
                 });
             }
@@ -864,8 +865,8 @@ export default {
                     options.remoteSorting = !!options.remotePaging;
                 }
                 return new Constructor({ ...options, tag: 'u-table-view' });
-            } else if (dataSource instanceof Object) {
-                if (dataSource.hasOwnProperty('list') && Array.isArray(dataSource.list))
+            } else if (isObject(dataSource)) {
+                if (Object.prototype.hasOwnProperty.call(dataSource, 'list') && Array.isArray(dataSource.list))
                     return new Constructor(Object.assign({ tag: 'u-table-view' }, options, dataSource, {
                         data: dataSource.list,
                     }));
@@ -1218,12 +1219,12 @@ export default {
                     // console.time('加载数据');
                     let res = await this.currentDataSource._load({ page, size, filename, sort, order });
                     // console.timeEnd('加载数据');
-                    if (res instanceof Object) {
-                        if (res.hasOwnProperty('list'))
+                    if (isObject(res)) {
+                        if (Object.prototype.hasOwnProperty.call(res, 'list'))
                             res = res.list;
-                        else if (res.hasOwnProperty('content'))
+                        else if (Object.prototype.hasOwnProperty.call(res, 'content'))
                             res = res.content;
-                        else if (res.hasOwnProperty('data'))
+                        else if (Object.prototype.hasOwnProperty.call(res, 'data'))
                             res = res.data;
                     }
 
@@ -1635,7 +1636,7 @@ export default {
                 // fix: 2933349384995840，父级选中子级没有勾选
                 if (this.currentData) {
                     this.currentData.forEach((item) => {
-                        if (!item.hasOwnProperty('checked')) {
+                        if (!Object.prototype.hasOwnProperty.call(item, 'checked')) {
                             this.$set(item, 'checked', false);
                         }
                         if (values.includes(this.$at(item, this.valueField))) {
@@ -1846,7 +1847,7 @@ export default {
                 if (parent) {
                     this.$set(item, 'display', needHidden(ancestors) ? 'none' : '');
                 }
-                if (!item.hasOwnProperty('loading')) {
+                if (!Object.prototype.hasOwnProperty.call(item, 'loading')) {
                     this.$set(item, 'loading', false);
                 }
                 newData.push(item);

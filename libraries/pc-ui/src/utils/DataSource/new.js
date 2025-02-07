@@ -391,10 +391,10 @@ const VueDataSource = Vue.extend({
 
                 // 判断是否后端数据
                 if (getType(result) === 'Object') {
-                    if (result.hasOwnProperty('list') && result.hasOwnProperty('total')) {
+                    if (Object.prototype.hasOwnProperty.call(result, 'list') && Object.prototype.hasOwnProperty.call(result, 'total')) {
                         finalResult.data = result.list;
                         finalResult.total = result.total;
-                    } else if (result.hasOwnProperty('totalElements') && result.hasOwnProperty('content')) {
+                    } else if (Object.prototype.hasOwnProperty.call(result, 'totalElements') && Object.prototype.hasOwnProperty.call(result, 'content')) {
                         finalResult.data = result.content;
                         finalResult.total = result.totalElements;
                     } else {
@@ -403,7 +403,7 @@ const VueDataSource = Vue.extend({
                     }
 
                     // 非后端数据
-                    if (!finalResult.hasOwnProperty('data') || !finalResult.hasOwnProperty('total')) {
+                    if (!Object.prototype.hasOwnProperty.call(finalResult, 'data') || !Object.prototype.hasOwnProperty.call(finalResult, 'total')) {
                         this.remote = false;
                     }
                 } else if (getType(result) === 'Array') {

@@ -92,7 +92,7 @@ import i18n from './i18n';
 import { findScrollParent } from '../../utils/dom';
 import SEmpty from '../s-empty.vue';
 import i18nMixin from '../../mixins/i18n';
-import { isFunction } from 'lodash';
+import { isFunction, isObject } from 'lodash';
 
 export default {
     name: 'u-list-view',
@@ -435,8 +435,8 @@ export default {
                         return Promise.resolve(result);
                 };
                 return new DataSource(options);
-            } else if (dataSource instanceof Object) {
-                if (dataSource.hasOwnProperty('list') && Array.isArray(dataSource.list))
+            } else if (isObject(dataSource)) {
+                if (Object.prototype.hasOwnProperty.call(dataSource, 'list') && Array.isArray(dataSource.list))
                     return new DataSource(Object.assign(options, dataSource, {
                         data: dataSource.list,
                     }));
