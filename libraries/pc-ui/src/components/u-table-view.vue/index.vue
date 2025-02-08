@@ -690,6 +690,11 @@ export default {
             leading: false,
             trailing: true,
         });
+        this.throttleHandleResizeListener = throttle(this.handleResizeListener, 50, {
+            leading: true,
+            trailing: true,
+        });
+
     },
     updated() {
         if (this.$env.VUE_APP_DESIGNER && this.slots !== this.$slots && !this.data && !this.dataSource) {
@@ -705,7 +710,7 @@ export default {
         this.watchValue(this.value);
         this.watchValues(this.values);
         this.reHandleResize();
-        addResizeListener(this.$el, this.handleResizeListener);
+        addResizeListener(this.$el, this.throttleHandleResizeListener);
 
         if (this.stickHead) {
             this.scrollParentEl = findScrollParent(this.$el);
@@ -717,7 +722,7 @@ export default {
         }
     },
     destroyed() {
-        removeResizeListener(this.$el, this.handleResizeListener);
+        removeResizeListener(this.$el, this.throttleHandleResizeListener);
         if (this.stickHead) {
             this.scrollParentEl && this.scrollParentEl.removeEventListener('scroll', this.throttleScrollParentScroll);
             this.xScrollParentEl && this.xScrollParentEl.removeEventListener('scroll', this.throttleXScrollParentScroll);
@@ -2595,11 +2600,9 @@ export default {
             if (this.virtual) {
                 this.$refs.tableRender.resetVirtualData();
             }
-            const rootWidth = this.$refs.root.offsetWidth;
-            // 放在线性布局flex下，或者某些设置了fit-content，table-width会缓慢增长，导致表格一直动
-            // 如果两次width变化不大，不要重新计算每列的computedWidth等
-            const reComputedWidth = !this.preRootWidth || Math.abs(this.preRootWidth - rootWidth) > 8;
-            this.handleResize(reComputedWidth);
+            // 表格重构后，不会出现width一直变化的情况（2732949921019136）
+            // 去掉8px判断，避免外部容器宽度变化的时候出现滚动条（3049422905215488）
+            this.handleResize();
         },
         reHandleResize() {
             if (this.virtual) {
