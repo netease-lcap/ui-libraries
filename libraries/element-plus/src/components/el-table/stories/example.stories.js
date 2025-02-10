@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { ElPagination } from 'element-plus';
 import Component from '../index';
 
@@ -20,66 +20,94 @@ export const Example1 = {
   render: () => ({
     setup() {
       const activeName = ref('first');
-      const tableData = [
-        {
-          date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-          date: '2016-05-04',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-          date: '2016-05-01',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-          date: '2016-05-08',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-          date: '2016-05-06',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        },
+      const tableData = async (page) => {
+        console.log(page, 'pagerequest====');
+        return [
+          {
+            date: '2016-05-03',
+            name: 'Tom',
+            six: {
+              name: '132',
+            },
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-02',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-04',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-01',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-08',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-06',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-07',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+        ];
+      };
+      const mytable = ref();
+      const currentPage = ref(1);
+      const pageSize2 = ref(10);
+      const selectedRowKeys = ref([
         {
           date: '2016-05-07',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles',
         },
-      ];
-      const currentPage = ref(2);
+      ]);
+
+      watch(selectedRowKeys, (el) => {
+        console.log(el, 'log');
+      });
+      // setTimeout(() => {
+      //   console.log(selectedRowKeys,'selectedRowKeys');
+      // }, 1000);
       return {
         tableData,
+        pageSize2,
         currentPage,
+        mytable,
+        selectedRowKeys,
       };
     },
     template: `
 <el-table
-row-key="index"
-:data="tableData"
-v-model:current-page="currentPage"
-:rowspanAndColspan="rowspanAndColspan"
-:selectedRowKeys.sync="selectedRowKeys"
+ref="mytable"
+row-key="name"
+:dataSource="tableData"
+:pagination="true"
+v-model:currentPage="currentPage"
+v-model:pageSize="pageSize2"
+:showTotal="true"
+:sorting="{ field: 'six.name', order: 'desc' }"
+:showJumper="true"
+:pageSizes="[10,100, 200, 300, 400]"
+v-model:selectedRowKeys="selectedRowKeys"
 @sort-change="onSortChange"
 dragSort="row"
 :selection="true"
-:multiple="false"
 >
 
 <el-table-column label="申请人" >
-<template #default="cell">
-  <div>{{'12'}}</div>
-</template>
+
 </el-table-column>
 
     <el-table-column title="渠道" colKey="channel" :sorter="true" :autoMerge="true" >
@@ -88,7 +116,7 @@ dragSort="row"
 </template>
 </el-table-column>
 
-    <el-table-column prop="date" label="Date" width="180" />
+    <el-table-column prop="six.name" label="Date" sortable="custom" width="180" />
     <el-table-column prop="name" label="Name" width="180" />
     <el-table-column prop="address" label="Address" />
 
@@ -105,8 +133,14 @@ dragSort="row"
 export const Default = {
   name: '基础翻页',
   render: () => ({
+    setup() {
+      const value = ref(2);
+      return {
+        value,
+      };
+    },
     template: `
-      <el-pagination :current-page="3" layout="prev, pager, next,total" :total='50'>
+      <el-pagination :currentPage="value"   @update:currentPage="value = $event" layout="prev, pager, next,total" :total='50'>
       </el-pagination>
     `,
   }),

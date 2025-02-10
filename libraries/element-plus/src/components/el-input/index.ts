@@ -3,6 +3,8 @@ import 'element-plus/theme-chalk/el-input.css';
 import { registerComponet } from '../../plugins';
 import * as basicsPlugin from './plugins/index';
 
+// console.log(JSONbig.parse(json).hasOwnProperty('value'));
+
 // const ElInput = ElInputPlus;
 const ElInput = registerComponet(ElInputPlus, { plugin: basicsPlugin });
 export { ElInputPlus, ElInput };

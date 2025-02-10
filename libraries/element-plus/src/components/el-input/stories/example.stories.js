@@ -34,13 +34,13 @@ export const Example1 = {
         // name.value = 'newName';
         // activeName.value = 'second';
         // console.log(myref, 'myref');
-        // console.log(myref.value.myChange(), 'myref.value.ref');
-        // console.log('yref', yref);
-      }, 3000);
+        console.log('yref', yref);
+        console.log(yref.value.focus(), 'myref.value.ref');
+      }, 2000);
 
       setTimeout(() => {
         // console.log(myref.value.myChange(), 'myref.value.ref');
-        console.log('activeName', activeName);
+        console.log('activeName', yref);
       }, 9000);
 
       return {
@@ -53,7 +53,7 @@ export const Example1 = {
     },
     template: `
     <div>
-    <el-input-plus :modelValue="333" @update:value="handleClick"/>
+    <el-input-plus ref="myref" :modelValue="333" @update:value="handleClick"/>
       {{activeName}}
       ==={{name}}
       <el-input ref="yref" v-model:value="activeName"  ></el-input>
@@ -61,4 +61,3 @@ export const Example1 = {
     `,
   }),
 };
-

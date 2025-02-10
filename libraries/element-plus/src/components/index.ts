@@ -6,4 +6,5 @@ export { ElSelect, ElOption } from './el-select';
 export { ElCascader } from './el-cascader';
 export { ElCheckbox, ElCheckboxGroup } from './el-checkbox';
 export { ElTable, ElTableColumn } from './el-table';
+export { ElFormItem, ElForm } from './el-form';
 export { ElPagination } from 'element-plus';

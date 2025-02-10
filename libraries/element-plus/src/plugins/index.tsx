@@ -1,7 +1,9 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import { ref, defineProps, watch } from 'vue';
-import { ElInput } from 'element-plus';
+import {
+  ref, defineProps, watch, provide, inject,
+} from 'vue';
+import { ElForm as ElFormPlus } from 'element-plus';
 import create from 'zustand-vue';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
@@ -50,15 +52,31 @@ export function registerComponet(Component, options) {
     components: { Component },
     inheritAttrs: false,
     props: Component.props,
+    // setup(props, { attrs, slots, emit, expose }) {
+    //   const componentRef = ref(null);
+    //   expose({
+    //     mystate: () => {
+    //       console.log('res');
+    //       componentRef.value.resetFields();
+    //     },
+    //   });
+    //   return () => {
+    //     return <Component {...props} v-slots={slots} v-on={emit} ref={componentRef} />;
+    //   };
+    // },
+
     setup(props, {
       attrs, slots, emit, expose,
     }) {
       const componentRef = ref(null);
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
-      const mystate = ref({ state: { render: () => { } } });
+      const mystate = ref({ state: { render: () => {}, model: ref({}) } });
       const fiberMap = new Map();
       const myRef = ref({});
+      const childrenRef = ref({});
+      const injectRef = inject('provide');
+      const provideRef = ref({ mystate });
       let queen: any[] = [];
       const useStore = create((set) => ({
         state: {
@@ -66,7 +84,10 @@ export function registerComponet(Component, options) {
           ...attrs,
           emit,
           slots,
+          inject: injectRef,
+          provide: {},
           ref: {},
+          childrenRef: {},
           [$deletePropsList]: [],
           render: Component,
         },
@@ -81,7 +102,6 @@ export function registerComponet(Component, options) {
           ])(commit) as any;
           return set((state) => getNewStateFn(state), tr);
         },
-
         deleteList: ['deleteList'],
       }));
       const setValue = useStore((state: any) => state.setvalue);
@@ -151,17 +171,24 @@ export function registerComponet(Component, options) {
         return pluginHooks?.reduce((ImmutableProps, handleFn) => {
           const isMount = !fiberMap.has(handleFn);
           const storeKey = _.uniqueId('storeKey');
-          const fiber = isMount ? {
-            workInProgressState: null,
-            workInProgressEffect: null,
-            useStore,
-            setValue,
-            storeKey,
-          } : fiberMap.get(handleFn);
+          const fiber = isMount
+            ? {
+              workInProgressState: null,
+              workInProgressEffect: null,
+              useStore,
+              setValue,
+              storeKey,
+            }
+            : fiberMap.get(handleFn);
           const localUseState = _.bind(useState, fiber, isMount);
           const localUseEffect = _.bind(useEffect, fiber, isMount);
           const result = _.attempt(_.bind(handleFn, fiber), ImmutableProps, {
-            useState: localUseState, useEffect: localUseEffect, useMemo: localUseEffect, componentRef,
+            useState: localUseState,
+            useEffect: localUseEffect,
+            useMemo: localUseEffect,
+            componentRef,
+            childrenRef,
+            ref: myRef.value,
           });
           fiberMap.set(handleFn, fiber);
           return ImmutableProps.merge(result);
@@ -171,39 +198,61 @@ export function registerComponet(Component, options) {
         const ImmutableProps = imMap(props.state);
         const commitState = scheduler(pluginHooks, ImmutableProps, componentRef);
         const commitJsState = commitState.toJS();
-        mystate.value.state = commitJsState;
-        _.assign(myRef.value, commitJsState.ref);
+        Object.assign(mystate.value.state, _.omit(commitJsState, ['model']));
+
+        // if (commitJsState.model) {
+        //   console.log(commitJsState.model.input, 'input model');
+        //   console.log(_.omit(commitJsState, ['model']),'input model');
+        //   mystate.value.state.model.input = commitJsState.model.input;
+        // }
+        Object.assign(myRef.value, commitJsState.ref);
+        Object.assign(provideRef.value, commitJsState.provide);
       });
-      watch(() => [props, attrs, slots, emit], ([props, attrs, slots, emit]) => {
-        setValue(
-          {
+      watch(
+        () => [props, attrs, slots, emit],
+        ([props, attrs, slots, emit]) => {
+          setValue({
             ..._.filterUnderfinedValue(props),
             ..._.filterUnderfinedValue(attrs),
             // ...props,
             // ...attrs,
             slots,
             emit,
-          },
-        );
-
-        const expandProps = useStore() as any;
-        mystate.value.state = { ...expandProps.state, ...mystate.value.state };
-
-        _.assign(myRef.value, expandProps.state.ref);
-      }, { deep: true, immediate: true });
-      watch(componentRef, (value) => _.assign(myRef.value, value));
-
+            // componentRef: myRef.value,
+          });
+          const expandProps = useStore() as any;
+          // Object.assign(mystate.value.state, expandProps.state);
+          _.defaults(mystate.value.state, expandProps.state);
+          Object.assign(myRef.value, expandProps.state.ref);
+        },
+        { deep: true, immediate: true },
+      );
+      watch(componentRef, (value) => Object.assign(myRef.value, value));
+      watch(childrenRef, (value) => Object.assign(myRef.value, value));
       expose(myRef.value);
+      provide('provide', provideRef);
+
       const RenderComponent = mystate.value.state.render ?? Component;
 
       return () => {
-        const expandProps = useStore() as any;
-        console.log(expandProps, mystate.value.state, '========');
+        console.log(injectRef, 'injectRef');
+        // const expandProps = useStore() as any;
+        console.log(mystate.value.state, 'mystate.value.state');
 
         return (
           <RenderComponent
             {..._.omit(mystate.value.state, mystate.value.state[$deletePropsList])}
             v-slots={{ ...slots, ..._.get(mystate, 'value.state.slots', {}) }}
+            onInput={(el) => {
+              if (injectRef) {
+                // console.log(injectRef.value.mystate.state.model.input, 'injectRef');
+                setTimeout(() => {
+                  
+                injectRef.value.mystate.state.model.input = el;
+                }, 10);
+                // injectRef.value['mystate'].value.stste.value.input = el;
+              }
+            }}
             v-on={emit}
             ref={componentRef}
           />
