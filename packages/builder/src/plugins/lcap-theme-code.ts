@@ -138,7 +138,7 @@ function genThemePagePreviewMapCode({ themeComponentFolder: componentFolder = ''
   ].join('\n\n');
 }
 
-function genThemeEntryCode({ framework }: LcapCodeGenOption) {
+function genThemeEntryCode({ framework, type, pkg }: LcapCodeGenOption) {
   if (framework === 'vue2') {
     return [
       'import Vue from \'vue\';',
@@ -146,6 +146,23 @@ function genThemeEntryCode({ framework }: LcapCodeGenOption) {
       'Vue.config.productionTip = false;',
       'const app = new Vue({ ...App });',
       'app.$mount("#app");',
+    ].join('\n');
+  }
+
+  if (framework === 'vue3') {
+    const hasLcapUI = type === 'extension' && pkg && pkg.lcap && pkg.lcap['lcap-ui'];
+    return [
+      'import { createApp } from \'vue\';',
+      'import * as Library from "@/index"',
+      `import App from '${normalizePath(path.resolve(__dirname, '../../input/vue3/App'))}';`,
+      'const app = createApp(App);',
+      ...(hasLcapUI ? [
+        'import "virtual-lcap:lcap-ui.css";',
+        'import * as LcapUI from "virtual-lcap:lcap-ui";',
+        'app.use(LcapUI);',
+      ] : []),
+      'app.use(Library);',
+      'app.mount("#app");',
     ].join('\n');
   }
 
@@ -210,7 +227,7 @@ function genDefaultPreviewCode({
     'export const renderAppPreview = (app) => app;',
   ];
 
-  if (framework && framework.startsWith('vue')) {
+  if (framework && framework === 'vue2') {
     const importCodes = [
       'import Vue from "vue";',
       'import * as Library from "@/index"',
