@@ -1,0 +1,75 @@
+/**
+ * @component el-table
+ */
+.el-table {
+  /**
+   * @desc 边框颜色
+   * @type color
+   */
+  --el-table-border-color: var(--el-border-color-lighter);
+  /**
+   * @desc 边框
+   * @type input
+   */
+  --el-table-border: 1px solid var(--el-table-border-color);
+  /**
+   * @desc 文本颜色
+   * @type color
+   */
+  --el-table-text-color: var(--el-text-color-regular);
+  /**
+   * @desc 表头文本颜色
+   * @type color
+   */
+  --el-table-header-text-color: var(--el-text-color-secondary);
+  /**
+   * @desc 行悬浮背景颜色
+   * @type color
+   */
+  --el-table-row-hover-bg-color: var(--el-fill-color-light);
+  /**
+   * @desc 当前行背景颜色
+   * @type color
+   */
+  --el-table-current-row-bg-color: var(--el-color-primary-light-9);
+  /**
+   * @desc 表头背景颜色
+   * @type color
+   */
+  --el-table-header-bg-color: var(--el-bg-color);
+  /**
+   * @desc 固定框阴影
+   * @type color
+   */
+  --el-table-fixed-box-shadow: var(--el-box-shadow-light);
+  /**
+   * @desc 表背景颜色
+   * @type color
+   */
+  --el-table-bg-color: var(--el-fill-color-blank);
+  /**
+   * @desc 行背景颜色
+   * @type color
+   */
+  --el-table-tr-bg-color: var(--el-bg-color);
+  /**
+   * @desc 展开单元格背景颜色
+   * @type color
+   */
+  --el-table-expanded-cell-bg-color: var(--el-fill-color-blank);
+  /**
+   * @desc 固定左侧列阴影
+   * @type color
+   */
+  --el-table-fixed-left-column: inset 10px 0 10px -10px rgba(0, 0, 0, 0.15);
+  /**
+   * @desc 固定右侧列阴影
+   * @type color
+   */
+  --el-table-fixed-right-column: inset -10px 0 10px -10px rgba(0, 0, 0, 0.15);
+  /**
+   * @desc 索引
+   * @type color
+   */
+  --el-table-index: var(--el-index-normal);
+}
