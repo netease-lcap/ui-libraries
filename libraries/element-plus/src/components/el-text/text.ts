@@ -1,4 +1,10 @@
-import { computed, defineComponent, getCurrentInstance, h, Slot } from 'vue';
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  h,
+  Slot,
+} from 'vue';
 import './index.css';
 
 export default defineComponent({
@@ -39,7 +45,7 @@ export default defineComponent({
 
     return () => {
       let content: any = props.text;
-      const childrenNodes =  instance?.slots.default ? (instance?.slots.default as Slot)() : null;
+      const childrenNodes = instance?.slots.default ? (instance?.slots.default as Slot)() : null;
       if (childrenNodes) {
         content = childrenNodes;
       }
