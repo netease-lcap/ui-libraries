@@ -1,0 +1,12 @@
+{
+  "extends": ["./tsconfig.json"],
+  "compilerOptions": {
+    "noEmit": false,
+    "allowImportingTsExtensions": false,
+  },
+  "exclude": [
+    "ide/**/*",
+    "**/*api.ts",
+    "src/theme/**/*",
+  ]
+}
