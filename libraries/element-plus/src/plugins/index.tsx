@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
 import {
-  ref, defineProps, watch, provide, inject,
+  ref, Ref, defineProps, watch, provide, inject,
 } from 'vue';
 import { ElForm as ElFormPlus } from 'element-plus';
 import create from 'zustand-vue';
@@ -71,12 +71,12 @@ export function registerComponet(Component, options) {
       const componentRef = ref(null);
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
-      const mystate = ref({ state: { render: () => {}, model: ref({}) } });
+      const mystate = ref({ state: { render: () => {} } });
       const fiberMap = new Map();
       const myRef = ref({});
       const childrenRef = ref({});
-      const injectRef = inject('provide');
-      const provideRef = ref({ mystate });
+      const injectRef = inject('provide') as Ref;
+      const provideRef = ref({});
       let queen: any[] = [];
       const useStore = create((set) => ({
         state: {
@@ -126,6 +126,10 @@ export function registerComponet(Component, options) {
         const localSetValue = (value) => {
           if (_.isEqual(value, state.value)) {
             return;
+          }
+          if (_.isFunction(value)) {
+            const state = this.useStore((store) => store.state[hook?.storeKey] ?? initialstate);
+            value = value(state);
           }
           queen.push({ [hook.storeKey]: value });
           _.defer(() => {
@@ -198,13 +202,7 @@ export function registerComponet(Component, options) {
         const ImmutableProps = imMap(props.state);
         const commitState = scheduler(pluginHooks, ImmutableProps, componentRef);
         const commitJsState = commitState.toJS();
-        Object.assign(mystate.value.state, _.omit(commitJsState, ['model']));
-
-        // if (commitJsState.model) {
-        //   console.log(commitJsState.model.input, 'input model');
-        //   console.log(_.omit(commitJsState, ['model']),'input model');
-        //   mystate.value.state.model.input = commitJsState.model.input;
-        // }
+        Object.assign(mystate.value.state, commitJsState);
         Object.assign(myRef.value, commitJsState.ref);
         Object.assign(provideRef.value, commitJsState.provide);
       });
@@ -218,10 +216,8 @@ export function registerComponet(Component, options) {
             // ...attrs,
             slots,
             emit,
-            // componentRef: myRef.value,
           });
           const expandProps = useStore() as any;
-          // Object.assign(mystate.value.state, expandProps.state);
           _.defaults(mystate.value.state, expandProps.state);
           Object.assign(myRef.value, expandProps.state.ref);
         },
@@ -229,30 +225,36 @@ export function registerComponet(Component, options) {
       );
       watch(componentRef, (value) => Object.assign(myRef.value, value));
       watch(childrenRef, (value) => Object.assign(myRef.value, value));
+      watch(injectRef, (value) => _.defaults(provideRef.value, value), { deep: true, immediate: true });
       expose(myRef.value);
-      provide('provide', provideRef);
 
+      provide('provide', provideRef);
+      // [1, 2, 3].forEach((el) => {
+      //   provide(`provide${el}`, `mypro${el}`);
+      // });
+      // [1, 2, 3].forEach((el) => {
+      //   const a = inject(`provide${el}`);
+      //   console.log(a, 'loginject');
+      // });
       const RenderComponent = mystate.value.state.render ?? Component;
 
       return () => {
-        console.log(injectRef, 'injectRef');
         // const expandProps = useStore() as any;
-        console.log(mystate.value.state, 'mystate.value.state');
+        if (mystate.value.state.name === 'formItem') {
+          console.log(mystate.value.state, 'mystate.value.state');
+        }
 
         return (
           <RenderComponent
             {..._.omit(mystate.value.state, mystate.value.state[$deletePropsList])}
             v-slots={{ ...slots, ..._.get(mystate, 'value.state.slots', {}) }}
-            onInput={(el) => {
-              if (injectRef) {
-                // console.log(injectRef.value.mystate.state.model.input, 'injectRef');
-                setTimeout(() => {
-                  
-                injectRef.value.mystate.state.model.input = el;
-                }, 10);
-                // injectRef.value['mystate'].value.stste.value.input = el;
-              }
-            }}
+            // onInput={(el) => {
+            //   if (injectRef) {
+            // setTimeout(() => {
+            // injectRef.value.mystate.state.model.input = el;
+            // }, 10);
+            // }
+            // }}
             v-on={emit}
             ref={componentRef}
           />

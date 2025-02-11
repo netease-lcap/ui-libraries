@@ -82,6 +82,9 @@ importers:
 
   libraries/element-plus:
     dependencies:
+      '@lcap/validator':
+        specifier: workspace:*
+        version: link:../../packages/validator
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13

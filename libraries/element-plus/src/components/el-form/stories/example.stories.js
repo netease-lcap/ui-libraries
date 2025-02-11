@@ -26,10 +26,10 @@ export const Example1 = {
       const handleClick = (tab) => {
         console.log(tab);
       };
-      setTimeout(() => {
-        name.value = 'newName';
-        activeName.value = 'second';
-      }, 3000);
+      // setTimeout(() => {
+      //   name.value = 'newName';
+      //   activeName.value = 'second';
+      // }, 3000);
 
       return {
         name,
@@ -88,10 +88,13 @@ export const Example2 = {
         console.log(formData.value, 'formData');
       };
       const handleClick = (tab) => {
-        console.log('====', formData, tab);
+        // console.log('====', formData, tab);
+        tab.validate().then((res) => {
+          console.log(res, 'res');
+        });
 
         // tab.fields()
-        console.log(tab.fields, 'fields');
+        // console.log(tab.fields, 'fields');
         // console.log(tab);
       };
       // setTimeout(() => {
@@ -100,7 +103,11 @@ export const Example2 = {
       // activeName.value = 'second';
       // list;
       // }, 3000);
-
+      const rules = [
+        {
+          validate: 'filled', message: '表单项不得为空', trigger: 'input+blur', required: true,
+        },
+      ];
       return {
         formData,
         select,
@@ -110,18 +117,20 @@ export const Example2 = {
         handleClick,
         log,
         formRef,
+        rules,
       };
     },
     template: `
     <el-form  ref="formRef">
-      <el-form-item prop="input" label="input" :rules="[
-        {
-          required: true,
-          message: 'Please input email address',
-          trigger: 'change',
-        },
-      ]" >
-        <el-input v-model:value="inputName" @input="log" />
+      <el-form-item  label="input" :rules="rules" >
+        <el-input  />
+      </el-form-item>
+      
+      <el-form-item  label="input2" :rules="rules" >
+            <el-select   v-model:value="activeName" :dataSource="list"  >
+      <el-option label="item.value" value="item.value" :name="name" / >
+
+      </el-select>
       </el-form-item>
 
     <a @click="handleClick(formRef)" >Submit</a>

@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
-import { ElInput } from 'element-plus';
 import { $deletePropsList } from '@/plugins/constants';
+import { $formProvide } from '@/components/el-form/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 
 export function handleDataSource(props, { useState, useEffect, useMemo }) {
@@ -33,6 +33,10 @@ export function handleValue(props, { useState, useEffect }) {
   const propsValue = props.get('value', value);
   const onInputProps = props.get('onInput', () => { });
   const deleteList = props.get('deleteList') ?? [];
+
+  const myInject = props.get('inject');
+  console.log(myInject.value, 'myInject');
+  const { value: formValue, setValue: setFormValue } = myInject.value[$formProvide];
   const emit = props.get('emit');
 
   return {
@@ -41,6 +45,7 @@ export function handleValue(props, { useState, useEffect }) {
       emit('update:value', ...arg);
       _.attempt(fn, ...arg);
       setValue(arg[0]);
+      setFormValue(arg[0]);
     }),
     modelValue: propsValue,
 
