@@ -4,12 +4,12 @@ import 'element-plus/theme-chalk/el-select.css';
 import { registerComponet } from '../../plugins';
 import * as basicsPlugin from './plugins/index';
 import * as formItemPlugin from './plugins/form-item';
+import { withFormItem } from './plugins/form-item';
 
 // const formProvide=Stor
 
 const ElForm = registerComponet(ElFormPlus, { plugin: basicsPlugin });
 const ElFormItem = registerComponet(ElFormItemPlus, { plugin: formItemPlugin });
-// const ElSelect = ElSelectVPlus;
-// const ElForm = ElFormPlus;
-export { ElForm, ElFormItem };
+
+export { ElForm, ElFormItem, withFormItem };
 export default ElForm;

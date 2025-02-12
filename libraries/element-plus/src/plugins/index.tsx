@@ -1,14 +1,13 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
 import {
-  ref, Ref, defineProps, watch, provide, inject,
+  ref, Ref, watch, provide, inject, markRaw,
 } from 'vue';
-import { ElForm as ElFormPlus } from 'element-plus';
 import create from 'zustand-vue';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { $deletePropsList } from '@/plugins/constants';
+import { $deletePropsList, $provide, $inject } from '@/plugins/constants';
 import '@/utils/index';
 
 export class PluginOptions {
@@ -71,11 +70,12 @@ export function registerComponet(Component, options) {
       const componentRef = ref(null);
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
-      const mystate = ref({ state: { render: () => {} } });
+      const mystate = ref({ state: {} });
+      const render = markRaw(Component);
       const fiberMap = new Map();
       const myRef = ref({});
       const childrenRef = ref({});
-      const injectRef = inject('provide') as Ref;
+      const injectRef = inject($provide) ?? (ref({}) as Ref);
       const provideRef = ref({});
       let queen: any[] = [];
       const useStore = create((set) => ({
@@ -88,8 +88,7 @@ export function registerComponet(Component, options) {
           provide: {},
           ref: {},
           childrenRef: {},
-          [$deletePropsList]: [],
-          render: Component,
+          [$deletePropsList]: ['provide', 'childrenRef', 'inject', 'render', 'ref','slots','emit'],
         },
 
         // ...attrs,
@@ -200,9 +199,10 @@ export function registerComponet(Component, options) {
       }
       useStore.subscribe((props: any, pre) => {
         const ImmutableProps = imMap(props.state);
-        const commitState = scheduler(pluginHooks, ImmutableProps, componentRef);
+        const commitState = scheduler(pluginHooks, ImmutableProps.merge({ render: Component }), componentRef);
         const commitJsState = commitState.toJS();
-        Object.assign(mystate.value.state, commitJsState);
+        render.value = commitJsState.render;
+        Object.assign(mystate.value.state, _.omit(commitJsState, ['render']));
         Object.assign(myRef.value, commitJsState.ref);
         Object.assign(provideRef.value, commitJsState.provide);
       });
@@ -228,7 +228,7 @@ export function registerComponet(Component, options) {
       watch(injectRef, (value) => _.defaults(provideRef.value, value), { deep: true, immediate: true });
       expose(myRef.value);
 
-      provide('provide', provideRef);
+      provide($provide, provideRef);
       // [1, 2, 3].forEach((el) => {
       //   provide(`provide${el}`, `mypro${el}`);
       // });
@@ -236,17 +236,20 @@ export function registerComponet(Component, options) {
       //   const a = inject(`provide${el}`);
       //   console.log(a, 'loginject');
       // });
-      const RenderComponent = mystate.value.state.render ?? Component;
+      // const RenderComponent = markRaw(mystate.value.state.render ?? Component);
+
+      const RenderComponent = render.value ?? Component;
 
       return () => {
         // const expandProps = useStore() as any;
-        if (mystate.value.state.name === 'formItem') {
-          console.log(mystate.value.state, 'mystate.value.state');
-        }
-
+        // if (mystate.value.state.name === 'formItem') {
+        //   console.log(mystate.value.state, 'mystate.value.state');
+        // }
+        console.log(_.omit(mystate.value.state, [...mystate.value.state[$deletePropsList]]), 'mystate.value.state',emit);
         return (
           <RenderComponent
-            {..._.omit(mystate.value.state, mystate.value.state[$deletePropsList])}
+            {..._.omit(mystate.value.state, [...mystate.value.state[$deletePropsList]])}
+            // {..._.pick(mystate.value.state, Object.keys(RenderComponent.props))}
             v-slots={{ ...slots, ..._.get(mystate, 'value.state.slots', {}) }}
             // onInput={(el) => {
             //   if (injectRef) {
@@ -255,7 +258,7 @@ export function registerComponet(Component, options) {
             // }, 10);
             // }
             // }}
-            v-on={emit}
+            // v-on={emit}
             ref={componentRef}
           />
         );

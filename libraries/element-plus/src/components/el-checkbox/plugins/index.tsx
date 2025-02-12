@@ -1,9 +1,7 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
 import { $deletePropsList } from '@/plugins/constants';
-import {
-  useRequestDataSource, useHandleMapField, useFormatDataSource,
-} from '@/plugins/common/dataSource';
+import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 
 export function handleDataSource(props, { useState, useEffect, useMemo }) {
   const dataConfig = props.get('dataSource');
@@ -21,9 +19,11 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
     { useMemo },
   );
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
-  const dataSourceSlots = _.isNil(dataConfig) ? {} : {
-    default: () => _.map(dataSource, (item) => (<el-checkbox {...item} />)),
-  };
+  const dataSourceSlots = _.isNil(dataConfig)
+    ? {}
+    : {
+      default: () => _.map(dataSource, (item) => <el-checkbox {...item} />),
+    };
 
   return {
     [$deletePropsList]: deletePropsList,
@@ -32,24 +32,18 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
     slots: _.assign(slots, dataSourceSlots),
   };
 }
-export function handleValue(props, { useState, useEffect }) {
+export function handleValue(props, { useState }) {
   const [value, setValue] = useState('');
-  const propsValue = props.get('value', value);
-  // const modelValue = props.get('modelValue');
-  const onInputProps = props.get('onChange', () => { });
-  const deleteList = props.get('deleteList') ?? [];
+  const propsValue = props.get('modelValue') || value;
+  const onChangeProps = props.get('onChange', () => {});
   const emit = props.get('emit');
+  const changeValue = props.get('modelValue') ? _.bind(emit, 'update:modelValue') : setValue;
 
-  // console.log(modelValue, 'modelValue=');
   return {
-    deleteList: [...deleteList, 'value'],
-    onChange: _.wrap(onInputProps, (fn, ...arg) => {
-      emit('update:value', ...arg);
-      _.attempt(fn, ...arg);
-      setValue(arg[0]);
+    onChange: _.wrap(onChangeProps, (fn, value) => {
+      _.attempt(fn, value);
+      changeValue(`${value}`);
     }),
-
-    // modelValue: _.isEmpty(modelValue) ? propsValue : modelValue ?? propsValue,
     modelValue: propsValue,
   };
 }

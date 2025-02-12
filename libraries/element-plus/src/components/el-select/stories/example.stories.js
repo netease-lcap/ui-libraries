@@ -93,7 +93,7 @@ export const Example2 = {
     },
     template: `
     <div>
-    <el-select ref="select" v-model:value="activeName" :dataSource="list"  >
+    <el-select ref="select"  :dataSource="list"  >
      <el-option label="item.value" value="item.value" :name="name" / >
 
     </el-select>

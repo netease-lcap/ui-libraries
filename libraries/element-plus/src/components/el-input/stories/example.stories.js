@@ -35,7 +35,7 @@ export const Example1 = {
         // activeName.value = 'second';
         // console.log(myref, 'myref');
         console.log('yref', yref);
-        console.log(yref.value.focus(), 'myref.value.ref');
+        // console.log(yref.value.focus(), 'myref.value.ref');
       }, 2000);
 
       setTimeout(() => {
@@ -56,7 +56,7 @@ export const Example1 = {
     <el-input-plus ref="myref" :modelValue="333" @update:value="handleClick"/>
       {{activeName}}
       ==={{name}}
-      <el-input ref="yref" v-model:value="activeName"  ></el-input>
+      <el-input ref="yref"   v-model="activeName"  @update:modelValue="handleClick" ></el-input>
     </div>
     `,
   }),

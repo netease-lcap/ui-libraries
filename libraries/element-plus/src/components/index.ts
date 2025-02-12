@@ -1,10 +1,10 @@
 export { ElFlex } from './el-flex';
 export { ElText } from './el-text';
 export { ElTabs, ElTabPane } from './el-tabs';
-export { ElInputPlus, ElInput } from './el-input';
-export { ElSelect, ElOption } from './el-select';
-export { ElCascader } from './el-cascader';
-export { ElCheckbox, ElCheckboxGroup } from './el-checkbox';
+export { ElInputPlus, ElInput, ElFormInput } from './el-input';
+export { ElSelect, ElOption, ElFormSelect } from './el-select';
+export { ElCascader, ElFormCascader } from './el-cascader';
+export { ElCheckbox, ElCheckboxGroup, ElFormCheckboxGroup } from './el-checkbox';
 export { ElTable, ElTableColumn } from './el-table';
 export { ElFormItem, ElForm } from './el-form';
 export { ElPagination } from 'element-plus';

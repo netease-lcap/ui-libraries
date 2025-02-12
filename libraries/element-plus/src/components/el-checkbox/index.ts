@@ -1,13 +1,10 @@
 import { ElCheckbox, ElCheckboxGroup as ElCheckboxGroupPlus } from 'element-plus';
-// import {ElCalendar as el} from 'element-plus';
-import 'element-plus/theme-chalk/el-cascader.css';
-import 'element-plus/theme-chalk/el-cascader-panel.css';
-// import 'element-plus/theme-chalk/dark/';
+import 'element-plus/theme-chalk/el-checkbox.css';
 import { registerComponet } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
+import { withFormItem } from '@/components/el-form';
 
 const ElCheckboxGroup = registerComponet(ElCheckboxGroupPlus, { plugin: basicsPlugin });
-// const ElCheckboxGroup = ElCheckboxGroupPlus;
-// const ElCascader = ElCascaderPlus;
-export { ElCheckbox, ElCheckboxGroup };
+const ElFormCheckboxGroup = withFormItem(ElCheckboxGroup, 'el-form-checkbox-group');
+export { ElCheckbox, ElCheckboxGroup, ElFormCheckboxGroup };
 export default ElCheckboxGroup;

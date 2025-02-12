@@ -43,13 +43,13 @@ namespace nasl.ui {
     description: '',
     group: 'Selector',
   })
-  export class ElSelectPro<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
-    constructor(options?: Partial<ElSelectProOptions<T, V, P, M, C>>) {
+  export class ElCascaderPro<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    constructor(options?: Partial<ElCascaderProOptions<T, V, P, M, C>>) {
       super();
     }
   }
 
-  export class ElSelectProOptions<
+  export class ElCascaderProOptions<
     T,
     V,
     P extends nasl.core.Boolean,
@@ -622,111 +622,6 @@ namespace nasl.ui {
   }
 
   @IDEExtraInfo({
-    show: true,
-    ideusage: {
-      parentAccept: "target.tag.endsWith('el-select-pro')",
-      idetype: 'container',
-      //   structured: true,
-      //   selector: {
-      //     expression: 'this',
-      //     cssSelector: '.el-p-select-option',
-      //   },
-    },
-  })
-  @Component({
-    title: '选择器选项',
-    icon: 'option',
-    description: '',
-    group: 'Selector',
-  })
-  export class ElOptionPro<T, V> extends ViewComponent {
-    constructor(options?: Partial<ElOptionProOptions<T, V>>) {
-      super();
-    }
-  }
-
-  export class ElOptionProOptions<T, V> extends ViewComponentOptions {
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Check All',
-    //   description:
-    //     '当前选项是否为全选，全选可以在顶部，也可以在底部。点击当前选项会选中禁用态除外的全部选项，即使是分组选择器也会选中全部选项',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // checkAll: nasl.core.Boolean = false;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Content',
-    //   description: '用于定义复杂的选项内容。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // content: any;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Default',
-    //   description: '用于定义复杂的选项内容。同 content。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // default: any;
-
-    @Prop({
-      group: '主要属性',
-      title: '是否禁用该选项',
-      description: '是否禁用该选项',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disabled: nasl.core.Boolean = false;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Label',
-    //   description: '选项名称',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // label: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '选项标题',
-      description: '选项标题，在选项过长时hover选项展示',
-      setter: { concept: 'InputSetter' },
-    })
-    title: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '选项值',
-      description: '选项值',
-      setter: { concept: 'InputSetter' },
-    })
-    value: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
-
-    @Prop({
-      group: '主要属性',
-      title: '选项名称',
-      description: '选项名称, 选中后显示内容',
-      setter: { concept: 'InputSetter' },
-    })
-    label: nasl.core.String | nasl.core.Decimal;
-
-    // @Slot({
-    //   title: 'Content',
-    //   description: '用于定义复杂的选项内容。',
-    // })
-    // slotContent: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '选项内容',
-      description: '用于定义复杂的选项内容',
-    })
-    slotDefault: () => Array<ViewComponent>;
-  }
-
-
-
-  @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
       bindStyleAttr: 'inputStyle',
@@ -766,29 +661,49 @@ namespace nasl.ui {
       forceRefresh: 'parent',
       namedSlotOmitWrapper: ['label'],
     },
-    extends: [{
-      name: 'ElFormItemPro',
-      excludes: [
-        'slotDefault', 'useRangeValue',
-        'startFieldName', 'endFieldName',
-        'startInitialValue', 'endInitialValue',
-      ],
-    }, {
-      name: 'ElSelectPro',
-    }],
+    extends: [
+      {
+        name: 'ElFormItemPro',
+        excludes: [
+          'slotDefault',
+          'useRangeValue',
+          'startFieldName',
+          'endFieldName',
+          'startInitialValue',
+          'endInitialValue',
+        ],
+      },
+      {
+        name: 'ElSelectPro',
+      },
+    ],
   })
   @Component({
     title: '表单选择器',
     description: '表单选择器',
     group: 'Form',
   })
-  export class ElFormSelectPro<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
-    constructor(options?: Partial<ElFormSelectProOptions<T, V, P, M, C> & ElFormItemProOptions & Omit<ElSelectProOptions<T, V, P, M, C>, keyof ElFormItemProOptions>>) {
+  export class ElFormCascaderPro<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponent {
+    constructor(
+      options?: Partial<
+        ElFormCascaderProOptions<T, V, P, M, C> & Omit<ElCascaderProOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
+      >,
+    ) {
       super();
     }
   }
 
-  export class ElFormSelectProOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
-
-  }
+  export class ElFormCascaderProOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponentOptions {}
 }

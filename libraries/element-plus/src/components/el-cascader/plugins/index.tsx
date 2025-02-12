@@ -2,7 +2,10 @@
 import _ from 'lodash';
 import { $deletePropsList } from '@/plugins/constants';
 import {
-  useRequestDataSource, useHandleMapField, useFormatDataSource, useDataSourceToTree,
+  useRequestDataSource,
+  useHandleMapField,
+  useFormatDataSource,
+  useDataSourceToTree,
 } from '@/plugins/common/dataSource';
 
 export function handleDataSource(props, { useState, useEffect, useMemo }) {
@@ -19,7 +22,10 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
     { textField, valueField, dataSource: useFormatDataSource(data, { useMemo }) },
     { useMemo },
   );
-  const TreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource, parentField, valueField]);
+  const TreeData = useMemo(
+    () => useDataSourceToTree(dataSource, parentField, valueField),
+    [dataSource, parentField, valueField],
+  );
   const selfRef = useMemo(() => _.assign(ref, { reload, data: TreeData }), [TreeData, reload, ref]);
   const dataSourceResult = _.isEmpty(TreeData) ? {} : { options: TreeData };
 
@@ -30,19 +36,17 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
     ...dataSourceResult,
   };
 }
-export function handleValue(props, { useState, useEffect }) {
+export function handleValue(props, { useState }) {
   const [value, setValue] = useState('');
-  const propsValue = props.get('value', value);
-  const onInputProps = props.get('onInput', () => { });
-  const deleteList = props.get('deleteList') ?? [];
+  const propsValue = props.get('modelValue') || value;
+  const onChangeProps = props.get('onChange', () => {});
   const emit = props.get('emit');
+  const changeValue = props.get('modelValue') ? _.bind(emit, 'update:modelValue') : setValue;
 
   return {
-    deleteList: [...deleteList, 'value'],
-    onChange: _.wrap(onInputProps, (fn, ...arg) => {
-      emit('update:value', ...arg);
-      _.attempt(fn, ...arg);
-      setValue(arg[0]);
+    onChange: _.wrap(onChangeProps, (fn, value) => {
+      _.attempt(fn, value);
+      changeValue(`${value}`);
     }),
     modelValue: propsValue,
   };

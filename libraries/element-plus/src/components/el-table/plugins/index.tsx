@@ -150,7 +150,7 @@ export function handlePage(props, { useState, childrenRef }) {
 }
 handlePage.order = 3;
 
- function handleSelection(props, {
+function handleSelection(props, {
   useState, childrenRef, ref, useEffect,
 }) {
   const ond = props.get('onUpdate:selectedRowKeys');

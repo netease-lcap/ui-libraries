@@ -105,7 +105,10 @@ export const Example2 = {
       // }, 3000);
       const rules = [
         {
-          validate: 'filled', message: '表单项不得为空', trigger: 'input+blur', required: true,
+          validate: 'filled',
+          message: '表单项不得为空',
+          trigger: 'input+blur',
+          required: true,
         },
       ];
       return {
@@ -122,16 +125,11 @@ export const Example2 = {
     },
     template: `
     <el-form  ref="formRef">
-      <el-form-item  label="input" :rules="rules" >
-        <el-input  />
-      </el-form-item>
+      <el-form-input label="input1" v-model="inputName" />
       
-      <el-form-item  label="input2" :rules="rules" >
-            <el-select   v-model:value="activeName" :dataSource="list"  >
-      <el-option label="item.value" value="item.value" :name="name" / >
-
-      </el-select>
-      </el-form-item>
+      <el-form-select label="select1"    v-model:value="activeName" :dataSource="list"  >
+         <el-option label="item.value" value="item.value" :name="name" />
+      </el-form-select>
 
     <a @click="handleClick(formRef)" >Submit</a>
     
@@ -139,4 +137,10 @@ export const Example2 = {
 
     `,
   }),
+
+
+
+
+  
 };
+
