@@ -16,8 +16,8 @@ namespace nasl.ui {
     description: '',
     group: 'Form',
   })
-  export class ElInputPro extends ViewComponent {
-    constructor(options?: Partial<ElInputProOptions>) {
+  export class ElInput extends ViewComponent {
+    constructor(options?: Partial<ElInputOptions>) {
       super();
     }
 
@@ -27,7 +27,7 @@ namespace nasl.ui {
     value: nasl.core.String;
   }
 
-  export class ElInputProOptions extends ViewComponentOptions {
+  export class ElInputOptions extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       sync: true,
@@ -128,7 +128,7 @@ namespace nasl.ui {
     // })
     // maxcharacter: nasl.core.Decimal;
 
-    @Prop<ElInputProOptions, 'maxlength'>({
+    @Prop<ElInputOptions, 'maxlength'>({
       group: '主要属性',
       title: '最大文本长度',
       description:
@@ -396,13 +396,13 @@ namespace nasl.ui {
     description: '',
     group: 'Form',
   })
-  export class ElInputGroupPro extends ViewComponent {
-    constructor(options?: Partial<ElInputGroupProOptions>) {
+  export class ElInputGroup extends ViewComponent {
+    constructor(options?: Partial<ElInputGroupOptions>) {
       super();
     }
   }
 
-  export class ElInputGroupProOptions extends ViewComponentOptions {
+  export class ElInputGroupOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
       title: '需要间隔',
@@ -432,7 +432,7 @@ namespace nasl.ui {
         'startInitialValue', 'endInitialValue',
       ],
     }, {
-      name: 'ElInputPro',
+      name: 'ElInput',
     }],
   })
   @Component({
@@ -440,13 +440,13 @@ namespace nasl.ui {
     description: '表单输入框',
     group: 'Form',
   })
-  export class ElFormInputPro extends ViewComponent {
-    constructor(options?: Partial<ElFormInputProOptions & ElFormItemProOptions & Omit<ElInputProOptions, keyof ElFormItemProOptions>>) {
+  export class ElFormInput extends ViewComponent {
+    constructor(options?: Partial<ElFormInputOptions & ElFormItemProOptions & Omit<ElInputOptions, keyof ElFormItemProOptions>>) {
       super();
     }
   }
 
-  export class ElFormInputProOptions extends ViewComponentOptions {
+  export class ElFormInputOptions extends ViewComponentOptions {
 
   }
 }

@@ -171,7 +171,7 @@ namespace nasl.ui {
     })
     dataSchema: T;
 
-    @Prop<ElSelectProOptions<T, V, P, M, C>, 'textField'>({
+    @Prop<ElSelectOptions<T, V, P, M, C>, 'textField'>({
       group: '数据属性',
       title: '文本字段',
       description: '集合的元素类型中，用于显示文本的属性名称',
@@ -195,7 +195,7 @@ namespace nasl.ui {
     // })
     // optionIsSlot: nasl.core.Boolean;
 
-    @Prop<ElSelectProOptions<T, V, P, M, C>, 'valueField'>({
+    @Prop<ElSelectOptions<T, V, P, M, C>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
       description: '集合的元素类型中，用于标识选中值的属性',

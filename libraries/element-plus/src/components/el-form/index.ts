@@ -10,6 +10,9 @@ import { withFormItem } from './plugins/form-item';
 
 const ElForm = registerComponet(ElFormPlus, { plugin: basicsPlugin });
 const ElFormItem = registerComponet(ElFormItemPlus, { plugin: formItemPlugin });
+const ElFormItemPro = ElFormItem;
 
-export { ElForm, ElFormItem, withFormItem };
+export {
+  ElForm, ElFormItem, withFormItem, ElFormItemPro,
+};
 export default ElForm;

@@ -6,7 +6,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
-      childAccept: "target.tag === 'el-option-pro'",
+      childAccept: "target.tag === 'el-option'",
       events: {
         click: true,
       },
@@ -43,13 +43,13 @@ namespace nasl.ui {
     description: '',
     group: 'Selector',
   })
-  export class ElSelectPro<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
-    constructor(options?: Partial<ElSelectProOptions<T, V, P, M, C>>) {
+  export class ElSelect<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    constructor(options?: Partial<ElSelectOptions<T, V, P, M, C>>) {
       super();
     }
   }
 
-  export class ElSelectProOptions<
+  export class ElSelectOptions<
     T,
     V,
     P extends nasl.core.Boolean,
@@ -171,7 +171,7 @@ namespace nasl.ui {
     })
     dataSchema: T;
 
-    @Prop<ElSelectProOptions<T, V, P, M, C>, 'textField'>({
+    @Prop<ElSelectOptions<T, V, P, M, C>, 'textField'>({
       group: '数据属性',
       title: '文本字段',
       description: '集合的元素类型中，用于显示文本的属性名称',
@@ -195,7 +195,7 @@ namespace nasl.ui {
     // })
     // optionIsSlot: nasl.core.Boolean;
 
-    @Prop<ElSelectProOptions<T, V, P, M, C>, 'valueField'>({
+    @Prop<ElSelectOptions<T, V, P, M, C>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
       description: '集合的元素类型中，用于标识选中值的属性',
@@ -624,7 +624,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     show: true,
     ideusage: {
-      parentAccept: "target.tag.endsWith('el-select-pro')",
+      parentAccept: "target.tag.endsWith('el-select')",
       idetype: 'container',
       //   structured: true,
       //   selector: {
@@ -639,13 +639,13 @@ namespace nasl.ui {
     description: '',
     group: 'Selector',
   })
-  export class ElOptionPro<T, V> extends ViewComponent {
-    constructor(options?: Partial<ElOptionProOptions<T, V>>) {
+  export class ElOption<T, V> extends ViewComponent {
+    constructor(options?: Partial<ElOptionOptions<T, V>>) {
       super();
     }
   }
 
-  export class ElOptionProOptions<T, V> extends ViewComponentOptions {
+  export class ElOptionOptions<T, V> extends ViewComponentOptions {
     // @Prop({
     //   group: '主要属性',
     //   title: 'Check All',
@@ -732,7 +732,7 @@ namespace nasl.ui {
       bindStyleAttr: 'inputStyle',
       bindStyleSelector: '.__cw-form-compose-input',
       structured: true,
-      childAccept: "target.tag === 'el-option-pro'",
+      childAccept: "target.tag === 'el-option'",
       events: {
         click: true,
       },
@@ -774,7 +774,7 @@ namespace nasl.ui {
         'startInitialValue', 'endInitialValue',
       ],
     }, {
-      name: 'ElSelectPro',
+      name: 'ElSelect',
     }],
   })
   @Component({
@@ -782,13 +782,13 @@ namespace nasl.ui {
     description: '表单选择器',
     group: 'Form',
   })
-  export class ElFormSelectPro<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
-    constructor(options?: Partial<ElFormSelectProOptions<T, V, P, M, C> & ElFormItemProOptions & Omit<ElSelectProOptions<T, V, P, M, C>, keyof ElFormItemProOptions>>) {
-      super();
-    }
+  export class ElFormSelect<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    constructor(options?: Partial<ElFormSelectOptions<T, V, P, M, C> & ElFormItemProOptions & Omit<ElSelectOptions<T, V, P, M, C>, keyof ElFormItemProOptions>>) {
+      super();    
+    } 
   }
 
-  export class ElFormSelectProOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
+  export class ElFormSelectOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
 
   }
 }
