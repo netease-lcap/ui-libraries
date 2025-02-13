@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 9,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/progress',
     ideusage: {
       idetype: 'element'
     }

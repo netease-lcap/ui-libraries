@@ -38,6 +38,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     show: true,
     order: 1,
+    sourceDocURL: 'https://tdesign.tencent.com/vue/components/table',
     ideusage: {
       idetype: 'container',
       structured: true,

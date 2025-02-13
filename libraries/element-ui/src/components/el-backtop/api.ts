@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 7,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/backtop',
     ideusage: {
       idetype: 'element',
       elementSutando: {

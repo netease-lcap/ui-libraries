@@ -5,6 +5,7 @@ namespace nasl.ui {
     order: 9,
     ideusage: {
       idetype: 'container',
+      sourceDocURL: 'https://tdesign.tencent.com/vue/components/transfer',
       displaySlotConditions: {
         option: "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
       },

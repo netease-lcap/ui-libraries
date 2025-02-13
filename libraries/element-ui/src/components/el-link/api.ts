@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/link',
     ideusage: {
       idetype: 'element',
       editable: 'text',

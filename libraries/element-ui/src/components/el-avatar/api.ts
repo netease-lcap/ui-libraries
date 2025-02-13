@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 14,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/avatar',
     ideusage: {
       "idetype": "element",
     }

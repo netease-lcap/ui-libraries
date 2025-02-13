@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/dropdown',
     ideusage: {
       idetype: 'container',
       structured: {
