@@ -37,6 +37,7 @@ export default defineConfig(({ command }) => {
         modules: {
           entries: {
             install: 'src/install',
+            extend: 'src/extend',
           },
         },
         reportCSSInfo: {

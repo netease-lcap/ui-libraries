@@ -1,6 +1,9 @@
 /* eslint-disable no-param-reassign */
 import Vue, { type VNode, type ComponentOptions } from 'vue';
-import { isNil, kebabCase } from 'lodash';
+import {
+  isNil,
+  kebabCase,
+} from 'lodash';
 import type {
   NaslComponentPluginOptions,
   PluginMap,
@@ -8,7 +11,7 @@ import type {
   NaslComponentExtendInfo,
 } from './types';
 import PluginManager from './plugin';
-import createHocComponent from './hoc-base';
+import createHocComponent, { RENDER_COMPONENT_KEY, RenderBaseComponent } from './hoc-base';
 import MField from '../mixins/field';
 import { isEmptyVNodes, normalizeArray } from './utils';
 
@@ -97,11 +100,13 @@ export const registerComponent = (
     model,
     rangeModel,
   }: NaslComponentExtendInfo = {},
+  extendComponent?: any,
 ) => {
   const componentOptions = typeof baseComponent === 'function' ? baseComponent.options : baseComponent;
   if (!componentOptions) {
     return baseComponent;
   }
+
   const componentName = name || componentOptions.name;
   const manger = new PluginManager({
     name: componentName,
@@ -109,7 +114,7 @@ export const registerComponent = (
     plugin: { ...pluginOption },
   });
 
-  const HocBaseComponent = createHocComponent(baseComponent, manger);
+  const HocBaseComponent = createHocComponent(baseComponent, manger, extendComponent);
 
   const mixins: any = [];
 
@@ -129,7 +134,7 @@ export const registerComponent = (
     mixins.unshift(createUFormMixin());
   }
 
-  return {
+  const VueComponent = {
     name: componentName,
     inheritAttrs: false,
     mixins,
@@ -215,6 +220,34 @@ export const registerComponent = (
       );
     },
   } as ComponentOptions<Vue>;
+
+  if (!extendComponent) {
+    return {
+      ...VueComponent,
+      __extend: (ec: any) => {
+        if (!ec) {
+          return VueComponent;
+        }
+
+        const ecOptions = typeof ec === 'function' ? ec.options : ec;
+
+        return registerComponent(baseComponent, pluginOption, {
+          name: ecOptions.name || `${componentName}-extend`,
+          slotNames,
+          nativeEvents,
+          methodNames,
+          eventNames,
+        }, ec);
+      },
+    };
+  }
+
+  return VueComponent;
 };
 
-export { NaslComponentPluginOptions, PluginSetupFunction };
+export {
+  NaslComponentPluginOptions,
+  PluginSetupFunction,
+  RenderBaseComponent,
+  RENDER_COMPONENT_KEY,
+};

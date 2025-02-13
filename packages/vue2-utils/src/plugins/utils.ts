@@ -1,7 +1,7 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
-import Vue, { VNodeData } from 'vue';
-import type { ComponentOptions, PropOptions } from 'vue';
+import Vue from 'vue';
+import type { ComponentOptions, PropOptions, VNodeData } from 'vue';
 import { isRef } from '@vue/composition-api';
 import { camelCase, isPlainObject, kebabCase } from 'lodash';
 import type { PluginSetupRef } from './types';
@@ -299,4 +299,51 @@ export const cloneShallowVNodeData = (propData: VNodeData) => {
     },
     ...rest,
   } as VNodeData;
+};
+
+export const mergeClass = (classes: string | { [key: string]: boolean } | Array<string | { [key: string]: boolean }>, data: VNodeData = {}) => {
+  const classList: Array<string | { [key: string]: boolean }> = [];
+
+  if (Array.isArray(classes)) {
+    classList.push(...classes);
+  } else {
+    classList.push(classes);
+  }
+
+  if (data.class) {
+    if (Array.isArray(data.class)) {
+      classList.push(...data.class);
+    } else {
+      classList.push(data.class);
+    }
+  }
+
+  if (data.staticClass) {
+    classList.push(data.staticClass);
+  }
+
+  return classList;
+};
+
+export const mergeStyle = (styles: VNodeData['style'], data: VNodeData = {}) => {
+  const styleList: any[] = [];
+  if (Array.isArray(styles)) {
+    styleList.push(...styles);
+  } else {
+    styleList.push(styles);
+  }
+
+  if (data.style) {
+    if (Array.isArray(data.style)) {
+      styleList.push(...data.style);
+    } else {
+      styleList.push(data.style);
+    }
+  }
+
+  return styleList;
+};
+
+export const getComponentOptions = (component: any) => {
+  return typeof component === 'function' ? component.options : component;
 };
