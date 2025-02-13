@@ -36,6 +36,7 @@ import {
   mergeStyle,
   getComponentOptions,
   getPropKeys,
+  getEventKey,
 } from './utils';
 import { $deletePropList, $ref, $render } from './constants';
 
@@ -573,6 +574,7 @@ export default function createHocComponent(baseComponent: any, manger: PluginMan
           ...getRefValueMap(props),
           ...context?.props,
         };
+
         const refListeners = {
           ...this.$listeners,
           ...getRefValueMap(listeners),
@@ -588,6 +590,9 @@ export default function createHocComponent(baseComponent: any, manger: PluginMan
 
           if (eventName && refProps[key] && refListeners[eventName]) {
             delete refListeners[eventName];
+            if (context && context.listeners[eventName]) {
+              refProps[getEventKey(eventName)] = context.listeners[eventName];
+            }
           }
         });
 
