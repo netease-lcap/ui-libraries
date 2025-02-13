@@ -112,6 +112,7 @@ export function handlePage(props, { useState, childrenRef }) {
   const showTotal = props.get('showTotal');
   const showJumper = props.get('showJumper');
   const ref = props.get('ref');
+  console.log(Component, 'Component==');
   const [currentPage, setpage, currentPageProps] = useControllableValue(
     props,
     {
@@ -136,10 +137,10 @@ export function handlePage(props, { useState, childrenRef }) {
     },
     ref,
     pagination,
-    render: (props, { attrs, expose }) => {
+    render: (props, { attrs, expose, slots }) => {
       return [
         <div>
-          <Component ref={childrenRef} {...{ ...props, ...ref.attrs }} v-slots={props.slots} />
+          <Component ref={childrenRef} {...{ ...props, ...ref.attrs }} v-slots={slots} />
           {props.pagination && (
             <ElPagination {...props.pageProps} style={{ float: 'right', marginTop: '8px' }} total={50} />
           )}
