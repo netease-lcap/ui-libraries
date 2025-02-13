@@ -9,6 +9,7 @@ export function handleModelValue(props, { useState }) {
     model: value,
     provide: Object.assign(provide, {
       [$formProvide]: {
+        isInForm: true,
         value,
         setValue: (value) => setFormValue((state) => ({
           ...state,

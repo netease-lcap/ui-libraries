@@ -200,6 +200,6 @@ export const Example2 = {
 export const Example3 = {
   name: '级联选择器',
   render: () => ({
-    template: '<el-cascader />',
+    template: '<el-cascader class="my-cascader andy" data-nodepath="123" />',
   }),
 };

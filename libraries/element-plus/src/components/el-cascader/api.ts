@@ -8,14 +8,6 @@ namespace nasl.ui {
       events: {
         click: true,
       },
-      dataSource: {
-        dismiss: "!this.getAttribute('dataSource')",
-        display: 3,
-        loopRule: 'nth-last-child(-n+2)',
-        loopElem: 'li.el-p-cascader__item',
-        displayData: "\"[{value: '1', label: '1'}, {value:'2', label: '2'}, {value:'3', label: '3'}]\"",
-        propertyName: ':dataSource',
-      },
       additionalAttribute: {
         valueField: '"value"',
         textField: '"label"',

@@ -2,7 +2,7 @@ import VusionValidator, { localizeRules } from '@lcap/validator';
 import _ from 'lodash';
 import { ElFormItem } from 'element-plus';
 import {
-  computed, inject, provide, Ref, ref, watch,
+  computed, inject, provide, Ref, ref, watch, onMounted,
 } from 'vue';
 import { $formProvide } from '@/components/el-form/constants';
 import { $provide } from '@/plugins/constants';
@@ -123,3 +123,19 @@ export function withFormItem(Component, name) {
     },
   };
 }
+
+export function handleComponentInForm(props, { useMemo }) {
+  const inject = props.get('inject');
+  const { isInForm } = inject?.value?.[$formProvide] ?? {};
+  const nodePath = props.get('data-nodepath');
+  const formTagName = props.get('formTagName');
+  onMounted(() => {
+    const isInIDE = isInForm && nodePath;
+    if (!isInIDE) return;
+    const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
+    elem?.setAttribute('data-element-tag', formTagName);
+    elem?.setAttribute('data-has-mutation', 'true');
+  });
+}
+
+handleComponentInForm.order = 6;

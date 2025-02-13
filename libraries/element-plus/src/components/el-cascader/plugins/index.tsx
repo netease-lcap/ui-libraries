@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
+import { onMounted } from 'vue';
 import { $deletePropsList } from '@/plugins/constants';
 import {
   useRequestDataSource,
@@ -8,6 +9,7 @@ import {
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
 
+export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export function handleDataSource(props, { useState, useEffect, useMemo }) {
   const dataConfig = props.get('dataSource');
   const textField = props.get('textField', 'label');
@@ -67,5 +69,19 @@ export function handleCascaderProps(props) {
       multiple,
       checkStrictly,
     },
+  };
+}
+
+export function handleNodePath(props, { useMemo, useEffect }) {
+  const nodePath = props.get('data-nodepath');
+  const myClass = props.get('class');
+  const nodeId = useMemo(() => _.uniqueId('Cascader_'), []);
+  onMounted(() => {
+    const node = document.querySelector(`.${nodeId}`);
+    node?.setAttribute('data-nodepath', nodePath);
+  });
+  return {
+    class: `${myClass} ${nodeId}`,
+    formTagName: 'el-form-cascader',
   };
 }

@@ -8,3 +8,6 @@ export { ElCheckbox, ElCheckboxGroup, ElFormCheckboxGroup } from './el-checkbox'
 export { ElTable, ElTableColumn } from './el-table';
 export { ElFormItem, ElForm } from './el-form';
 export { ElPagination } from 'element-plus';
+export { ElAbsoluteLayout } from './el-absolute-layout';
+export { ElRouterView } from './el-router-view';
+export { ElIframe } from './el-iframe';

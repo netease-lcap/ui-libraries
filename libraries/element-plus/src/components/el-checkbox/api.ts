@@ -34,10 +34,6 @@ namespace nasl.ui {
   })
   export class ElCheckboxGroup<T, V> extends ViewComponent {
 
-    @Prop({
-      title: '选中值',
-    })
-    value: nasl.collection.List<V>;
 
     @Method({
       title: '重新加载',

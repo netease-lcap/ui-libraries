@@ -25,10 +25,6 @@ namespace nasl.ui {
       super();
     }
 
-    @Prop({
-      title: '值',
-    })
-    value: nasl.core.String;
   }
 
   export class ElInputOptions extends ViewComponentOptions {

@@ -3,6 +3,8 @@ import _ from 'lodash';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 
+export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+
 export function handleDataSource(props, { useState, useEffect, useMemo }) {
   const dataConfig = props.get('dataSource');
   const textField = props.get('textField', 'label');
@@ -44,5 +46,6 @@ export function handleValue(props, { useState }) {
       changeValue(value);
     }),
     modelValue: propsValue,
+    formTagName: 'el-form-checkbox-group',
   };
 }
