@@ -320,6 +320,7 @@ const StyleGroups = [
       '--el-transition-box-shadow',
       '--el-transition-color',
     ],
+    mapToken: [],
   },
 ];
 
