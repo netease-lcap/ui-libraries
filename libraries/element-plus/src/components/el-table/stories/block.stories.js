@@ -24,8 +24,8 @@ export const Default = {
   name: '基础示例',
   render: () => ({
     template: `
-      <el-input>
-      </el-input>
+      <el-table>
+      </el-table>
     `,
   }),
 };

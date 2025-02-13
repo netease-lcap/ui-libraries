@@ -33,16 +33,15 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
   };
 }
 export function handleValue(props, { useState }) {
-  const [value, setValue] = useState('');
-  const propsValue = props.get('modelValue') || value;
+  const [value, setValue] = useState([]);
+  const propsValue = _.isEmpty(props.get('modelValue')) ? value : props.get('modelValue');
   const onChangeProps = props.get('onChange', () => {});
   const emit = props.get('emit');
-  const changeValue = props.get('modelValue') ? _.bind(emit, 'update:modelValue') : setValue;
-
+  const changeValue = _.isEmpty(props.get('modelValue')) ? _.bind(emit, 'update:modelValue') : setValue;
   return {
     onChange: _.wrap(onChangeProps, (fn, value) => {
       _.attempt(fn, value);
-      changeValue(`${value}`);
+      changeValue(value);
     }),
     modelValue: propsValue,
   };

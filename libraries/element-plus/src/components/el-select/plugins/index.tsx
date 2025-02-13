@@ -41,7 +41,7 @@ export function handleValue(props, { useState }) {
   return {
     onChange: _.wrap(onChangeProps, (fn, value) => {
       _.attempt(fn, value);
-      changeValue(`${value}`);
+      changeValue(value);
     }),
     modelValue: propsValue,
   };

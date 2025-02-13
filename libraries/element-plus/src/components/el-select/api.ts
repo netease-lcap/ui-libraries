@@ -26,6 +26,7 @@ namespace nasl.ui {
       additionalAttribute: {
         valueField: '"value"',
         textField: '"text"',
+        '@blur': '"($event)=>{throw \'stop blur!\'}"',
       },
       dataSource: {
         dismiss: "!this.getAttribute('dataSource')",
@@ -479,11 +480,6 @@ namespace nasl.ui {
       trigger: 'clear' | 'tag-remove' | 'backspace' | 'check' | 'uncheck' | 'default';
     }) => any;
 
-    @Event({
-      title: '清除时触发',
-      description: '点击清除按钮时触发',
-    })
-    onClear: (event: {}) => any;
 
     // @Event({
     //   title: 'On Create',
@@ -602,7 +598,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '选项',
-          code: '<el-option value="12" label="选项"></el-option>',
+          code: '<el-option value="1" label="选项"><el-text text="选项" /></el-option>',
         },
       ],
     })
@@ -724,8 +720,6 @@ namespace nasl.ui {
     slotDefault: () => Array<ViewComponent>;
   }
 
-
-
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
@@ -766,16 +760,22 @@ namespace nasl.ui {
       forceRefresh: 'parent',
       namedSlotOmitWrapper: ['label'],
     },
-    extends: [{
-      name: 'ElFormItemPro',
-      excludes: [
-        'slotDefault', 'useRangeValue',
-        'startFieldName', 'endFieldName',
-        'startInitialValue', 'endInitialValue',
-      ],
-    }, {
-      name: 'ElSelect',
-    }],
+    extends: [
+      {
+        name: 'ElFormItemPro',
+        excludes: [
+          'slotDefault',
+          'useRangeValue',
+          'startFieldName',
+          'endFieldName',
+          'startInitialValue',
+          'endInitialValue',
+        ],
+      },
+      {
+        name: 'ElSelect',
+      },
+    ],
   })
   @Component({
     title: '表单选择器',
@@ -783,12 +783,22 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormSelect<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
-    constructor(options?: Partial<ElFormSelectOptions<T, V, P, M, C> & ElFormItemProOptions & Omit<ElSelectOptions<T, V, P, M, C>, keyof ElFormItemProOptions>>) {
-      super();    
-    } 
+    constructor(
+      options?: Partial<
+        ElFormSelectOptions<T, V, P, M, C> &
+          ElFormItemProOptions &
+          Omit<ElSelectOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
+      >,
+    ) {
+      super();
+    }
   }
 
-  export class ElFormSelectOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
-
-  }
+  export class ElFormSelectOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponentOptions {}
 }

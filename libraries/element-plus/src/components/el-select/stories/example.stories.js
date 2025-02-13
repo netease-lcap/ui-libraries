@@ -39,7 +39,7 @@ export const Example1 = {
       };
     },
     template: `
-    <el-select v-model="activeName">
+    <el-select v-model="activeName" multiple>
       <el-option
         v-for="item in list"
         key="item.value"
@@ -72,12 +72,7 @@ export const Example2 = {
       const handleClick = (tab) => {
         console.log(tab);
       };
-      // setTimeout(() => {
-      // name.value = 'newName';
-      // list.value[0].value = 2;
-      // activeName.value = 'second';
-      // list;
-      // }, 3000);
+
       setTimeout(() => {
         name.value = 'myname';
         // list.value.push({ value: 4 });
@@ -93,7 +88,7 @@ export const Example2 = {
     },
     template: `
     <div>
-    <el-select ref="select"  :dataSource="list"  >
+    <el-select ref="select"  @onClear="handleClick" clearable :dataSource="list" multiple >
      <el-option label="item.value" value="item.value" :name="name" / >
 
     </el-select>
@@ -101,6 +96,41 @@ export const Example2 = {
     
     </div>
 
+    `,
+  }),
+};
+
+export const Example3 = {
+  name: '表单选择器',
+  render: () => ({
+    setup() {
+      return {};
+    },
+    template: `
+    <el-select 
+      data-nodepath="08aee5f1fb524428a44a7a0ccb7861bf" 
+      data-enable-events="click" 
+      noDataText="没有数据"
+      key="component-08aee5f1fb524428a44a7a0ccb7861bf" 
+      valueField="value" 
+      textField="text"  
+      multiple
+
+       >
+        <el-option 
+          data-nodepath="cbb75d5e07ee485bba33d8ed521a52d2" 
+          value="1" 
+          label="选项1" 
+          key="component-cbb75d5e07ee485bba33d8ed521a52d2">
+          <el-text text="选项1" />
+        </el-option>
+        <el-option data-nodepath="ba7693282f4f45338fc3dbe5536252aa" value="2" label="选项2" key="component-ba7693282f4f45338fc3dbe5536252aa"  >
+            <el-text text="选项2" />
+        </el-option>
+        <el-option data-nodepath="10e06bfd817c47d7a5b642c689a560eb" value="3" label="选项3" key="component-10e06bfd817c47d7a5b642c689a560eb"  >
+            <el-text text="选项3" />
+        </el-option>
+    </el-select>
     `,
   }),
 };

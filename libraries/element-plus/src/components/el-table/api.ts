@@ -81,21 +81,21 @@ namespace nasl.ui {
     description: '用于展示大量结构化数据。支持排序、过滤（筛选）、分页、自定义操作等复杂功能。',
     group: 'Table',
   })
-  export class ElTablePro<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
+  export class ElTable<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
     @Prop({
       title: '数据',
     })
-    data: ElTableProOptions<T, V, P, M>['dataSource'];
+    data: ElTableOptions<T, V, P, M>['dataSource'];
 
     @Prop({
       title: '分页大小',
     })
-    size: ElTableProOptions<T, V, P, M>['pageSize'];
+    size: ElTableOptions<T, V, P, M>['pageSize'];
 
     @Prop({
       title: '当前页数',
     })
-    page: ElTableProOptions<T, V, P, M>['page'];
+    page: ElTableOptions<T, V, P, M>['page'];
 
     @Prop({
       title: '排序属性',
@@ -113,12 +113,12 @@ namespace nasl.ui {
     })
     reload(): void {}
 
-    constructor(options?: Partial<ElTableProOptions<T, V, P, M>>) {
+    constructor(options?: Partial<ElTableOptions<T, V, P, M>>) {
       super();
     }
   }
 
-  export class ElTableProOptions<
+  export class ElTableOptions<
     T,
     V,
     P extends nasl.core.Boolean,
@@ -154,7 +154,7 @@ namespace nasl.ui {
     })
     selection: nasl.core.Boolean = false;
 
-    @Prop<ElTableProOptions<T, V, P, M>, 'multiple'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'multiple'>({
       group: '数据属性',
       title: '可多选',
       description: '设置是否可以多选行',
@@ -175,7 +175,7 @@ namespace nasl.ui {
     })
     expandedRowKeys: V;
 
-    @Prop<ElTableProOptions<T, V, P, M>, 'hasExpandedRow'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'hasExpandedRow'>({
       group: '主要属性',
       title: '是否打开展开行',
       description: '是否打开展开行',
@@ -439,7 +439,7 @@ namespace nasl.ui {
     })
     maxHeight: nasl.core.String | nasl.core.Decimal;
 
-    @Prop<ElTableProOptions<T, V, P, M>, 'pagination'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'pagination'>({
       group: '主要属性',
       title: '分页',
       description: '是否显示分页',
@@ -453,7 +453,7 @@ namespace nasl.ui {
     })
     pagination: nasl.core.Boolean = true;
 
-    @Prop<ElTableProOptions<T, V, P, M>, 'pageSizeOptions'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'pageSizeOptions'>({
       group: '数据属性',
       title: '每页条数选项 ',
       description: '每页条数切换器的选项',
@@ -462,7 +462,7 @@ namespace nasl.ui {
     })
     pageSizeOptions: nasl.core.String = '[10, 20, 50]';
 
-    @Prop<ElTableProOptions<T, V, P, M>, 'pageSize'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'pageSize'>({
       group: '数据属性',
       title: '默认每页条数',
       docDescription: '每页的数据条数。默认20条。在"分页"属性开启时有效',
@@ -473,7 +473,7 @@ namespace nasl.ui {
     })
     pageSize: nasl.core.Integer = 10;
 
-    @Prop<ElTableProOptions<T, V, P, M>, 'page'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'page'>({
       group: '数据属性',
       title: '当前页数',
       description: '当前默认展示在第几页',
@@ -485,7 +485,7 @@ namespace nasl.ui {
     })
     page: nasl.core.Integer = 1;
 
-    @Prop<ElTableProOptions<T, V, P, M>, 'showTotal'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'showTotal'>({
       group: '数据属性',
       title: '显示总条数',
       description: '是否显示总条数',
@@ -494,7 +494,7 @@ namespace nasl.ui {
     })
     showTotal: nasl.core.Boolean = true;
 
-    @Prop<ElTableProOptions<T, V, P, M>, 'showJumper'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'showJumper'>({
       group: '数据属性',
       title: '显示跳转输入',
       description: '是否显示跳转页码控制器',
@@ -548,7 +548,7 @@ namespace nasl.ui {
     //   setter: { concept: 'InputSetter' },
     // })
     // rowClassName: nasl.core.String | object | any[] | any;
-    @Prop<ElTableProOptions<T, V, P, M>, 'valueField'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
       description: '在单选、多选操作、渲染树形数据中，指定数据唯一值的字段',
@@ -653,7 +653,7 @@ namespace nasl.ui {
     })
     tableLayout: 'auto' | 'fixed' = 'fixed';
 
-    @Prop<ElTableProOptions<T, V, P, M>, 'treeDisplay'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'treeDisplay'>({
       group: '数据属性',
       title: '树形模式',
       description: '以树形数据展示表格',
@@ -665,7 +665,7 @@ namespace nasl.ui {
     })
     treeDisplay: nasl.core.Boolean = false;
 
-    @Prop<ElTableProOptions<T, V, P, M>, 'parentField'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'parentField'>({
       group: '数据属性',
       title: '父级值字段',
       description: '当数据源为平铺数据时自动生成树形数据的节点字段名，重要：值字段名需要一起配置',
@@ -678,7 +678,7 @@ namespace nasl.ui {
     })
     parentField: (item: T) => any;
 
-    @Prop<ElTableProOptions<T, V, P, M>, 'checkStrictly'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'checkStrictly'>({
       group: '数据属性',
       title: '父子行选中是否独立',
       description: '父子行选中是否独立',

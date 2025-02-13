@@ -88,7 +88,7 @@ export function registerComponet(Component, options) {
           provide: {},
           ref: {},
           childrenRef: {},
-          [$deletePropsList]: ['provide', 'childrenRef', 'inject', 'render', 'ref','slots','emit'],
+          [$deletePropsList]: ['provide', 'childrenRef', 'inject', 'render', 'ref', 'slots', 'emit'],
         },
 
         // ...attrs,
@@ -245,7 +245,11 @@ export function registerComponet(Component, options) {
         // if (mystate.value.state.name === 'formItem') {
         //   console.log(mystate.value.state, 'mystate.value.state');
         // }
-        console.log(_.omit(mystate.value.state, [...mystate.value.state[$deletePropsList]]), 'mystate.value.state',emit);
+        console.log(
+          _.omit(mystate.value.state, [...mystate.value.state[$deletePropsList]]),
+          'mystate.value.state',
+          emit,
+        );
         return (
           <RenderComponent
             {..._.omit(mystate.value.state, [...mystate.value.state[$deletePropsList]])}

@@ -5,14 +5,22 @@ namespace nasl.ui {
     order: 2,
     ideusage: {
       idetype: 'container',
-      structured: true,
-      childAccept: "target.tag === 'el-option-pro'",
       events: {
         click: true,
       },
+      dataSource: {
+        dismiss: "!this.getAttribute('dataSource')",
+        display: 3,
+        loopRule: 'nth-last-child(-n+2)',
+        loopElem: 'li.el-p-cascader__item',
+        displayData: "\"[{value: '1', label: '1'}, {value:'2', label: '2'}, {value:'3', label: '3'}]\"",
+        propertyName: ':dataSource',
+      },
+      additionalAttribute: {
+        valueField: '"value"',
+        textField: '"label"',
+      },
       displaySlotConditions: {
-        value:
-          "!!this.getAttribute('dataSource') && this.getAttribute('valueIsSlot') && this.getAttribute('valueIsSlot').value",
         option:
           "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
       },
@@ -21,35 +29,22 @@ namespace nasl.ui {
       },
       slotInlineStyle: {
         option: 'min-height: 0;',
-        value: 'min-height: 0;',
-      },
-      additionalAttribute: {
-        valueField: '"value"',
-        textField: '"text"',
-      },
-      dataSource: {
-        dismiss: "!this.getAttribute('dataSource')",
-        display: 3,
-        loopRule: 'nth-last-child(-n+2)',
-        loopElem: 'li.el-p-select-option',
-        displayData: "\"[{value: '', text: ' '},{value:'1', text: ' '}, {value:'2', text: ' '}]\"",
-        propertyName: ':dataSource',
       },
     },
   })
   @Component({
-    title: '选择器',
-    icon: 'select',
+    title: '级联选择器',
+    icon: 'cascade-select',
     description: '',
     group: 'Selector',
   })
-  export class ElCascaderPro<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
-    constructor(options?: Partial<ElCascaderProOptions<T, V, P, M, C>>) {
+  export class ElCascader<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    constructor(options?: Partial<ElCascaderOptions<T, V, P, M, C>>) {
       super();
     }
   }
 
-  export class ElCascaderProOptions<
+  export class ElCascaderOptions<
     T,
     V,
     P extends nasl.core.Boolean,
@@ -103,14 +98,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     disabled: nasl.core.Boolean;
-
-    @Prop({
-      group: '主要属性',
-      title: '为空的内容',
-      description: '当下拉列表为空时显示的内容。',
-      setter: { concept: 'InputSetter' },
-    })
-    noDataText: any;
 
     // @Prop({
     //   group: '主要属性',
@@ -171,7 +158,7 @@ namespace nasl.ui {
     })
     dataSchema: T;
 
-    @Prop<ElSelectOptions<T, V, P, M, C>, 'textField'>({
+    @Prop<ElCascaderOptions<T, V, P, M, C>, 'textField'>({
       group: '数据属性',
       title: '文本字段',
       description: '集合的元素类型中，用于显示文本的属性名称',
@@ -195,7 +182,7 @@ namespace nasl.ui {
     // })
     // optionIsSlot: nasl.core.Boolean;
 
-    @Prop<ElSelectOptions<T, V, P, M, C>, 'valueField'>({
+    @Prop<ElCascaderOptions<T, V, P, M, C>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
       description: '集合的元素类型中，用于标识选中值的属性',
@@ -596,17 +583,6 @@ namespace nasl.ui {
     // })
     // slotValueDisplay: () => Array<ViewComponent>;
 
-    @Slot({
-      title: 'Default',
-      description: '内容',
-      snippets: [
-        {
-          title: '选项',
-          code: '<el-option value="12" label="选项"></el-option>',
-        },
-      ],
-    })
-    slotDefault: () => Array<ViewComponent>;
 
     // @Slot({
     //   title: '选项内容',
@@ -683,23 +659,17 @@ namespace nasl.ui {
     description: '表单选择器',
     group: 'Form',
   })
-  export class ElFormCascaderPro<
-    T,
-    V,
-    P extends nasl.core.Boolean,
-    M extends nasl.core.Boolean,
-    C,
-  > extends ViewComponent {
+  export class ElFormCascader<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     constructor(
       options?: Partial<
-        ElFormCascaderProOptions<T, V, P, M, C> & Omit<ElCascaderProOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
+        ElFormCascaderOptions<T, V, P, M, C> & Omit<ElCascaderOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
       >,
     ) {
       super();
     }
   }
 
-  export class ElFormCascaderProOptions<
+  export class ElFormCascaderOptions<
     T,
     V,
     P extends nasl.core.Boolean,

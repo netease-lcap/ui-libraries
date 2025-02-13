@@ -25,6 +25,15 @@ export const Default = {
   render: () => ({
     template: `
       <el-select>
+        <el-option value="1" label="选项1">
+          <el-text text="选项1" />
+        </el-option>
+        <el-option value="2" label="选项2">
+          <el-text text="选项2" />
+        </el-option>
+        <el-option value="3" label="选项3">
+          <el-text text="选项3" />
+        </el-option>
       </el-select>
     `,
   }),

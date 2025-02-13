@@ -15,7 +15,7 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
   const parentField = props.get('parentField');
   const deletePropsList = props
     .get($deletePropsList, [])
-    .concat(['textField', 'valueField', 'parentField', 'childrenField', 'props']);
+    .concat(['textField', 'valueField', 'parentField', 'childrenField']);
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig, {}, { useState, useEffect, useMemo });
   const dataSource = useHandleMapField(
@@ -46,8 +46,26 @@ export function handleValue(props, { useState }) {
   return {
     onChange: _.wrap(onChangeProps, (fn, value) => {
       _.attempt(fn, value);
-      changeValue(`${value}`);
+      changeValue(value);
     }),
     modelValue: propsValue,
+  };
+}
+
+export function handleCascaderProps(props) {
+  const multiple = props.get('multiple', false);
+  const checkStrictly = props.get('checkStrictly', false);
+  // const emitPath = props.get('emitPath', true);
+  // const lazy = props.get('lazy', false);
+  // const lazyLoad = props.get('lazyLoad', () => {});
+  // const value = props.get('value', '');
+  // const label = props.get('label', '');
+  // const children = props.get('children', '');
+
+  return {
+    props: {
+      multiple,
+      checkStrictly,
+    },
   };
 }

@@ -3,6 +3,7 @@ import 'element-plus/theme-chalk/el-select.css';
 import { registerComponet } from '../../plugins';
 import * as basicsPlugin from './plugins/index';
 import { withFormItem } from '@/components/el-form/plugins/form-item';
+import './index.css';
 
 const ElSelect = registerComponet(ElSelectV2Plus, { plugin: basicsPlugin });
 const ElFormSelect = withFormItem(ElSelect, 'el-form-select');
