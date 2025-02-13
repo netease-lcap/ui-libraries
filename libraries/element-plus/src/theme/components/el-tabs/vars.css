@@ -1,0 +1,10 @@
+/**
+ * @component el-tabs
+ */
+.el-tabs {
+  /**
+   * @desc 头部高度
+   * @type size
+   */
+  --el-tabs-header-height: 40px;
+}

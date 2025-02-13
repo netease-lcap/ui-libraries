@@ -23,7 +23,7 @@ const LIVE_RELOAD = {
   tag: '<!-- Code injected by live-server -->',
 };
 
-export async function viteBuildTheme(themeConfig: ThemeConfig, watch?: boolean) {
+export async function viteBuildTheme(themeConfig: ThemeConfig, options: LcapBuildOptions, watch?: boolean) {
   const loadResult = await loadConfigFromFile({ command: 'build', mode: 'production' });
   if (!loadResult || !loadResult.config) {
     logger.error('未找到 vite 配置文件');
@@ -75,18 +75,20 @@ export async function viteBuildTheme(themeConfig: ThemeConfig, watch?: boolean) 
     config.resolve = {};
   }
 
-  if (!Array.isArray(config.resolve.alias)) {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      vue: 'vue/dist/vue.esm.js',
-    };
-  } else {
-    config.resolve.alias.push({
-      find: 'vue',
-      replacement: 'vue/dist/vue.esm.js',
-    });
+  if (options.framework && options.framework.startsWith('vue')) {
+    const vueAlias = options.framework === 'vue3' ? 'vue/dist/vue.esm-bundler.js' : 'vue/dist/vue.esm.js';
+    if (!Array.isArray(config.resolve.alias)) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        vue: vueAlias,
+      };
+    } else {
+      config.resolve.alias.push({
+        find: 'vue',
+        replacement: vueAlias,
+      });
+    }
   }
-
   config.build.sourcemap = false;
   config.build.minify = 'esbuild';
   config.build.emptyOutDir = false;
@@ -196,6 +198,6 @@ export async function buildTheme(options: LcapBuildOptions, watch?: boolean) {
   await fs.writeJSON(path.join(options.destDir, 'theme.config.json'), themeConfig, { spaces: 2 });
   logger.success('生成 theme.config.json 成功！');
 
-  await viteBuildTheme(themeConfig, watch);
+  await viteBuildTheme(themeConfig, options, watch);
   logger.success('构建theme 成功');
 }

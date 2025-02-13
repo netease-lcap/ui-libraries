@@ -70,6 +70,7 @@
     "rollup": "^4.12.1",
     "typescript": "^5.3.3",
     "vite": "^5.0.0",
+    "vue": "2.6.12",
     "vue-template-compiler": "2.6.12",
     "yorkie": "^2.0.0"
   },
