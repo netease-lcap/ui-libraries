@@ -3,7 +3,47 @@ import path from 'path';
 import type { OverloadComponentContext } from './context';
 import { LCAP_UI_PACKAGE_NAME } from './constants';
 
+function generateElementUIComponent(context: OverloadComponentContext) {
+  const vueCode = [
+    '<template>',
+    ' <base-component />',
+    '</template>',
+    '<script>',
+    ...context.naslUIConfig.sourceDocURL ? [
+      '/**',
+      ` * 组件文档地址： ${context.naslUIConfig.sourceDocURL}`,
+      ' */',
+    ] : [],
+    `import { BaseComponent } from '${LCAP_UI_PACKAGE_NAME}';`,
+    'export default {',
+    `  name: '${context.tagName}',`,
+    '  components: {',
+    '    BaseComponent,',
+    '  },',
+    '};',
+    '</script>',
+    '<style>',
+    '</style>',
+    '',
+  ].join('\n');
+  const indexCode = [
+    `import { extendComponent, ${context.naslUIConfig.name} } from '${LCAP_UI_PACKAGE_NAME}';`,
+    `import Extend${context.naslUIConfig.name} from './index.vue';`,
+    `export const ${context.name} = extendComponent(${context.naslUIConfig.name}, Extend${context.naslUIConfig.name});`,
+    `export default ${context.name};`,
+    '',
+  ].join('\n');
+
+  fs.writeFileSync(path.resolve(context.componentFolderPath, 'index.vue'), vueCode, 'utf-8');
+  fs.writeFileSync(path.resolve(context.componentFolderPath, 'index.ts'), indexCode, 'utf-8');
+}
+
 async function generateVueComponent(context: OverloadComponentContext) {
+  if (context.libInfo.name === 'element-ui') {
+    generateElementUIComponent(context);
+    return;
+  }
+
   const slotCodes = context.naslUIConfig.slots.map((slot) => {
     return `  <slot name="${slot.name}" slot="${slot.name}"></slot>`;
   });
@@ -74,9 +114,13 @@ async function generateReactComponent(context: OverloadComponentContext) {
 }
 
 export async function generateComponentFile(context: OverloadComponentContext) {
-  if (context.framework.startsWith('vue')) {
-    await generateVueComponent(context);
-  } else if (context.framework === 'react') {
-    await generateReactComponent(context);
+  switch (context.framework) {
+    case 'vue2':
+      await generateVueComponent(context);
+      break;
+    case 'react':
+      await generateReactComponent(context);
+      break;
+    default: break;
   }
 }

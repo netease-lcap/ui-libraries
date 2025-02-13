@@ -8,6 +8,7 @@ import { LCAP_UI_JSON_PATH, LCAP_UI_PACKAGE_PATH } from './constants';
 import { type ModulesInfo } from '../plugins/lcap-use-nasl-ui';
 
 export interface NaslUIComponentConfig extends ViewComponentDeclaration {
+  sourceDocURL?: string;
   ideusage?: any;
   show?: boolean;
   ignore?: boolean;
@@ -23,6 +24,10 @@ export interface OverloadComponentContext {
   name: string;
   tagName: string;
   framework: string;
+  libInfo: {
+    name: string;
+    version: string;
+  };
   pkgComponentFolderPath: string;
   componentFolderPath: string;
   uiPkgName: string;
@@ -56,7 +61,7 @@ function getComponentFloderPath(rootPath, component, framework, apiMap?: Record<
     return path.resolve(rootPath, LCAP_UI_PACKAGE_PATH, apiMap[component], '../');
   }
 
-  const pkg = fs.readJSONSync(path.resolve(rootPath, '.lcap/lcap-ui/package/package.json'));
+  const pkg = fs.readJSONSync(path.resolve(rootPath, LCAP_UI_PACKAGE_PATH, 'package.json'));
   if (pkg.name === 'cloud-ui.vusion' || pkg.name === '@lcap/pc-ui') {
     if (component === 'UToastSingle') {
       component = 'UToast';
@@ -151,6 +156,7 @@ export function getOverloadComponentContext(rootPath, { component, prefix, fork 
     throw new Error('unfound nasl config path .lcap/lcap-ui/runtime/nasl.ui.json, please execute command \'lcap install\' ');
   }
 
+  const pkg = fs.readJSONSync(path.resolve(rootPath, LCAP_UI_PACKAGE_PATH, 'package.json'));
   const configList = fs.readJSONSync(configPath);
   const lcapUIConfig = fs.readJSONSync(lcapUIConfigPath);
   const comp = configList.find((it) => it.name === component);
@@ -177,6 +183,10 @@ export function getOverloadComponentContext(rootPath, { component, prefix, fork 
     pkgName: env.name,
     framework: env.framework,
     type: env.type,
+    libInfo: {
+      name: pkg.name,
+      version: pkg.version,
+    },
     pkgComponentFolderPath: getComponentFloderPath(rootPath, component, env.framework, modulesInfo?.api),
     componentFolderPath: path.resolve(rootPath, `src/components/${tagName}`),
     fork,
