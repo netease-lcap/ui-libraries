@@ -26,6 +26,10 @@ export default defineConfig(({ command }) => {
           },
           tsconfigPath: 'tsconfig.build.json',
         },
+        reportCSSInfo: {
+          enabled: true,
+          verbose: true,
+        },
       }),
     ],
     resolve: {

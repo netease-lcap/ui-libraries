@@ -32,3 +32,29 @@ export const Default = {
     `,
   }),
 };
+
+export const CardStyle = {
+  name: '选项卡风格',
+  render: () => ({
+    template: `
+      <el-tabs type="card">
+        <el-tab-pane><template #label><el-text text="标签一"></el-text></template><template #default><el-text text="内容"></el-text></template></el-tab-pane>
+        <el-tab-pane><template #label><el-text text="标签二"></el-text></template><template #default><el-text text="内容"></el-text></template></el-tab-pane>
+        <el-tab-pane><template #label><el-text text="标签三"></el-text></template><template #default><el-text text="内容"></el-text></template></el-tab-pane>
+      </el-tabs>
+    `,
+  }),
+};
+
+export const BorderCardStyle = {
+  name: '卡片化风格',
+  render: () => ({
+    template: `
+      <el-tabs type="border-card">
+        <el-tab-pane><template #label><el-text text="标签一"></el-text></template><template #default><el-text text="内容"></el-text></template></el-tab-pane>
+        <el-tab-pane><template #label><el-text text="标签二"></el-text></template><template #default><el-text text="内容"></el-text></template></el-tab-pane>
+        <el-tab-pane><template #label><el-text text="标签三"></el-text></template><template #default><el-text text="内容"></el-text></template></el-tab-pane>
+      </el-tabs>
+    `,
+  }),
+};
