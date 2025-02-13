@@ -140,7 +140,7 @@ export function handlePage(props, { useState, childrenRef }) {
     render: (props, { attrs, expose, slots }) => {
       return [
         <div>
-          <Component ref={childrenRef} {...{ ...props, ...ref.attrs }} v-slots={slots} />
+          <Component ref={childrenRef} {...{ ...props, ...attrs }} v-slots={slots} />
           {props.pagination && (
             <ElPagination {...props.pageProps} style={{ float: 'right', marginTop: '8px' }} total={50} />
           )}
