@@ -1,0 +1,79 @@
+.el-text {
+  white-space: pre-wrap;
+  max-width: 100%;
+}
+
+.el-text.el-text--size-small {
+  font-size: var(--el-font-size-extra-small);
+}
+
+.el-text.el-text--size-normal {
+  font-size: var(--el-font-size-base);
+}
+
+.el-text.el-text--size-large {
+  font-size: var(--el-font-size-medium);
+}
+
+.el-text.el-text--size-huge {
+  font-size: var(--el-font-size-large);
+}
+
+.el-text.el-text--weight-normal {
+  font-weight: normal;
+}
+
+.el-text.el-text--weight-bold {
+  font-weight: bold;
+}
+
+.el-text.el-text--color-default {
+  color: inherit;
+}
+
+.el-text.el-text--color-primary {
+  color: var(--el-color-primary);
+}
+
+.el-text.el-text--color-secondary {
+  color: var(--el-text-color-secondary);
+}
+
+.el-text.el-text--color-success {
+  color: var(--el-color-success);
+}
+
+.el-text.el-text--color-warning {
+  color: var(--el-color-warning);
+}
+
+.el-text.el-text--color-error {
+  color: var(--el-color-error);
+}
+
+.el-text.el-text--color-disabled {
+  color: var(--el-text-color-disabled);
+}
+
+.el-text.el-text--overflow-ellipsis,
+.el-text.el-text--wrap-ellipsis {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.el-text.el-text--overflow-break, .el-text.el-text--wrap-break {
+  word-wrap: break-word;
+  hyphens: auto;
+  white-space: normal;
+  max-width: 100%;
+}
+
+.el-text.el-text--overflow-nowrap, .el-text.el-text--wrap-nowrap {
+  white-space: nowrap;
+}
+
+.el-text.el-text--display-block {
+  display: block;
+}

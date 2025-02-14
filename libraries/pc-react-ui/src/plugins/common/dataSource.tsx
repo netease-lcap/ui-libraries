@@ -81,13 +81,13 @@ export function useHandleMapField(filedInfo) {
   }, [label, value, textField, valueField, dataSource]);
 }
 export function useRequestDataSource(dataSource, options = {}) {
-  const wrapDataSource = _.cond([
+  const handleDataSouceToFn = _.cond([
     [_.isArray, _.constant(async () => dataSource)],
     [_.isFunction, _.constant(async (...arg) => dataSource(...arg))],
     [_.stubTrue, _.constant(async () => [])],
   ]);
-  const dataSourceRequest = useMemo(() => wrapDataSource(dataSource), [dataSource]);
-  const requestResult = useRequest(dataSourceRequest, options);
+  const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource), [dataSource]);
+  const requestResult = useRequest(dataSourceFn, options);
   const { run } = requestResult;
   React.useEffect(() => run(), [dataSource]);
   return requestResult;

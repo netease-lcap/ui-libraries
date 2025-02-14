@@ -134,12 +134,12 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
             name = kebabCase(name);
             return new RegExp(`^\\.${name}(_|-)|^\\[class\\*=${name}(_|-)`).test(selector) && !/:(before|after)$/.test(selector);
           });
-          if (tempComponentName) console.log(`[WARN] 未匹配到组件 ${tempComponentName} 上的选择器: ${selector}`);
+          if (tempComponentName) console.log(`[WARN] 未找到可能的组件选择器: ${selector}，根据_|-分割推测可能的组件：${tempComponentName}`);
           const tempComponentName2 = componentNames.find((name) => {
             name = kebabCase(name);
             return new RegExp(`^\\.${name}|^\\[class\\*=${name}`).test(selector) && !/:(before|after)$/.test(selector);
           });
-          if (!tempComponentName && tempComponentName2) console.log(`[WARN] ==== 未匹配到组件 ${tempComponentName2} 上的选择器: ${selector}`);
+          if (!tempComponentName && tempComponentName2) console.log(`[WARN] 未找到可能的组件选择器: ${selector}，根据前缀连续推测可能的组件：${tempComponentName2}`);
         }
         return;
       }
