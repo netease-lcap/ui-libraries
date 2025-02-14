@@ -95,7 +95,7 @@ namespace nasl.ui {
     @Prop({
       title: '当前页数',
     })
-    page: ElTableOptions<T, V, P, M>['page'];
+    page: ElTableOptions<T, V, P, M>['currentPage'];
 
     @Prop({
       title: '排序属性',
@@ -134,55 +134,55 @@ namespace nasl.ui {
     // })
     // activeRowKeys: any[] = [];
 
-    @Prop({
-      group: '主要属性',
-      sync: true,
-      title: '选中值',
-      description: '选中行。',
-      // setter: { concept: 'InputSetter' },
-    })
-    selectedRowKeys: M extends true ? nasl.collection.List<V> : V;
+    // @Prop({
+    //   group: '主要属性',
+    //   sync: true,
+    //   title: '选中值',
+    //   description: '选中行。',
+    //   // setter: { concept: 'InputSetter' },
+    // })
+    // selectedRowKeys: M extends true ? nasl.collection.List<V> : V;
 
-    @Prop({
-      group: '数据属性',
-      title: '表格可选择',
-      description: '表格可选择',
-      docDescription: '表格可选择',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    selection: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '表格可选择',
+    //   description: '表格可选择',
+    //   docDescription: '表格可选择',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // selection: nasl.core.Boolean = false;
 
-    @Prop<ElTableOptions<T, V, P, M>, 'multiple'>({
-      group: '数据属性',
-      title: '可多选',
-      description: '设置是否可以多选行',
-      docDescription: '是否可以多选',
-      setter: {
-        concept: 'SwitchSetter',
-      },
+    // @Prop<ElTableOptions<T, V, P, M>, 'multiple'>({
+    //   group: '数据属性',
+    //   title: '可多选',
+    //   description: '设置是否可以多选行',
+    //   docDescription: '是否可以多选',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
 
-      if: (_) => _.selection,
-    })
-    multiple: M = false as any;
+    //   if: (_) => _.selection,
+    // })
+    // multiple: M = false as any;
 
-    @Prop({
-      group: '主要属性',
-      sync: true,
-      title: '展开值',
-      description: '展开行的值。',
-    })
-    expandedRowKeys: V;
+    // @Prop({
+    //   group: '主要属性',
+    //   sync: true,
+    //   title: '展开值',
+    //   description: '展开行的值。',
+    // })
+    // expandedRowKeys: V;
 
-    @Prop<ElTableOptions<T, V, P, M>, 'hasExpandedRow'>({
-      group: '主要属性',
-      title: '是否打开展开行',
-      description: '是否打开展开行',
-      setter: { concept: 'SwitchSetter' },
-      if: (_) => _.treeDisplay === false,
-    })
-    hasExpandedRow: nasl.core.Boolean = false;
+    // @Prop<ElTableOptions<T, V, P, M>, 'hasExpandedRow'>({
+    //   group: '主要属性',
+    //   title: '是否打开展开行',
+    //   description: '是否打开展开行',
+    //   setter: { concept: 'SwitchSetter' },
+    //   if: (_) => _.treeDisplay === false,
+    // })
+    // hasExpandedRow: nasl.core.Boolean = false;
     // hasExpandedRow
     // @Prop({
     //   group: '主要属性',
@@ -372,13 +372,13 @@ namespace nasl.ui {
     // })
     // horizontalScrollAffixedBottom: nasl.core.Boolean | object;
 
-    @Prop({
-      group: '主要属性',
-      title: '是否显示鼠标悬浮状态',
-      description: '是否显示鼠标悬浮状态',
-      setter: { concept: 'SwitchSetter' },
-    })
-    hover: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '是否显示鼠标悬浮状态',
+    //   description: '是否显示鼠标悬浮状态',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // hover: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
@@ -453,14 +453,14 @@ namespace nasl.ui {
     })
     pagination: nasl.core.Boolean = true;
 
-    @Prop<ElTableOptions<T, V, P, M>, 'pageSizeOptions'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'pageSizes'>({
       group: '数据属性',
       title: '每页条数选项 ',
       description: '每页条数切换器的选项',
       setter: { concept: 'InputSetter' },
       if: (_) => _.pagination !== false,
     })
-    pageSizeOptions: nasl.core.String = '[10, 20, 50]';
+    pageSizes: nasl.core.String = '[10, 20, 50]';
 
     @Prop<ElTableOptions<T, V, P, M>, 'pageSize'>({
       group: '数据属性',
@@ -473,7 +473,7 @@ namespace nasl.ui {
     })
     pageSize: nasl.core.Integer = 10;
 
-    @Prop<ElTableOptions<T, V, P, M>, 'page'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'currentPage'>({
       group: '数据属性',
       title: '当前页数',
       description: '当前默认展示在第几页',
@@ -483,7 +483,7 @@ namespace nasl.ui {
       },
       if: (_) => _.pagination !== false,
     })
-    page: nasl.core.Integer = 1;
+    currentPage: nasl.core.Integer = 1;
 
     @Prop<ElTableOptions<T, V, P, M>, 'showTotal'>({
       group: '数据属性',
@@ -510,7 +510,7 @@ namespace nasl.ui {
       docDescription: '支持选择数据表格数据源中的某一条数据，配置默认排序规则，支持升序和降序',
     })
     sorting: {
-      field: nasl.core.String;
+      field: nasl.core.String | undefined;
       order: nasl.core.String;
       compare?: Function;
     } = { field: undefined, order: 'desc' };
@@ -597,13 +597,13 @@ namespace nasl.ui {
     // })
     // scroll: object;
 
-    @Prop({
-      group: '主要属性',
-      title: '开启虚拟滚动',
-      description: '是否开启表格虚拟滚动',
-      setter: { concept: 'SwitchSetter' },
-    })
-    virtual: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '开启虚拟滚动',
+    //   description: '是否开启表格虚拟滚动',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // virtual: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -617,13 +617,13 @@ namespace nasl.ui {
       group: '主要属性',
       title: '表格尺寸',
       description:
-        '表格尺寸，支持全局配置 `GlobalConfigProvider`，默认全局配置值为 `medium`。可选项：small/medium/large。',
+        '表格尺寸，支持全局配置 `GlobalConfigProvider`，默认全局配置值为 `default`。可选项：small/default/large。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '小' }, { title: '中' }, { title: '大' }],
       },
     })
-    size: 'small' | 'medium' | 'large' = 'medium';
+    size: 'small' | 'default' | 'large' = 'default';
 
     @Prop({
       group: '主要属性',
@@ -633,14 +633,14 @@ namespace nasl.ui {
     })
     stripe: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '表格内容的总宽度',
-      description:
-        '表格内容的总宽度，注意不是表格可见宽度。主要应用于 `table-layout: auto` 模式下的固定列显示。`tableContentWidth` 内容宽度的值必须大于表格可见宽度',
-      setter: { concept: 'InputSetter' },
-    })
-    tableContentWidth: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '表格内容的总宽度',
+    //   description:
+    //     '表格内容的总宽度，注意不是表格可见宽度。主要应用于 `table-layout: auto` 模式下的固定列显示。`tableContentWidth` 内容宽度的值必须大于表格可见宽度',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // tableContentWidth: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -653,53 +653,53 @@ namespace nasl.ui {
     })
     tableLayout: 'auto' | 'fixed' = 'fixed';
 
-    @Prop<ElTableOptions<T, V, P, M>, 'treeDisplay'>({
-      group: '数据属性',
-      title: '树形模式',
-      description: '以树形数据展示表格',
-      docDescription: '表格是否以树型方式展示。默认关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-      if: (_) => _.hasExpandedRow === false,
-    })
-    treeDisplay: nasl.core.Boolean = false;
+    // @Prop<ElTableOptions<T, V, P, M>, 'treeDisplay'>({
+    //   group: '数据属性',
+    //   title: '树形模式',
+    //   description: '以树形数据展示表格',
+    //   docDescription: '表格是否以树型方式展示。默认关闭',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    //   if: (_) => _.hasExpandedRow === false,
+    // })
+    // treeDisplay: nasl.core.Boolean = false;
 
-    @Prop<ElTableOptions<T, V, P, M>, 'parentField'>({
-      group: '数据属性',
-      title: '父级值字段',
-      description: '当数据源为平铺数据时自动生成树形数据的节点字段名，重要：值字段名需要一起配置',
-      docDescription:
-        '标识父节点字段名，用于标识表格行取哪个数据作为父级的判断，需同步配置“值字段名”。在"树行模式"属性开启时有效',
-      setter: {
-        concept: 'PropertySelectSetter',
-      },
-      if: (_) => _.treeDisplay === true,
-    })
-    parentField: (item: T) => any;
+    // @Prop<ElTableOptions<T, V, P, M>, 'parentField'>({
+    //   group: '数据属性',
+    //   title: '父级值字段',
+    //   description: '当数据源为平铺数据时自动生成树形数据的节点字段名，重要：值字段名需要一起配置',
+    //   docDescription:
+    //     '标识父节点字段名，用于标识表格行取哪个数据作为父级的判断，需同步配置“值字段名”。在"树行模式"属性开启时有效',
+    //   setter: {
+    //     concept: 'PropertySelectSetter',
+    //   },
+    //   if: (_) => _.treeDisplay === true,
+    // })
+    // parentField: (item: T) => any;
 
-    @Prop<ElTableOptions<T, V, P, M>, 'checkStrictly'>({
-      group: '数据属性',
-      title: '父子行选中是否独立',
-      description: '父子行选中是否独立',
-      docDescription: '父子行选中是否独立',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-      if: (_) => _.treeDisplay === true,
-    })
-    checkStrictly: nasl.core.Boolean = false;
+    // @Prop<ElTableOptions<T, V, P, M>, 'checkStrictly'>({
+    //   group: '数据属性',
+    //   title: '父子行选中是否独立',
+    //   description: '父子行选中是否独立',
+    //   docDescription: '父子行选中是否独立',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    //   if: (_) => _.treeDisplay === true,
+    // })
+    // checkStrictly: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '行拖拽',
-      description: '拖拽排序方式，行拖拽排序，这种方式无法进行文本复制，',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '行拖拽' }, { title: '关闭拖拽' }],
-      },
-    })
-    dragSort: 'row' | 'false' = 'false';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '行拖拽',
+    //   description: '拖拽排序方式，行拖拽排序，这种方式无法进行文本复制，',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '行拖拽' }, { title: '关闭拖拽' }],
+    //   },
+    // })
+    // dragSort: 'row' | 'false' = 'false';
 
     // @Prop({
     //   group: '主要属性',
@@ -744,12 +744,8 @@ namespace nasl.ui {
       title: '选中行变化时',
       description: '选中行变化时触发',
     })
-    onSelectChange: (event: {
-      selectedRowKeys: nasl.collection.List<V>;
-      selectedRowData: nasl.collection.List<T>;
-      type: nasl.core.String; // 'uncheck' | 'check'
-      currentRowKey?: string;
-      currentRowData?: T;
+    onSelectionChange: (event: {
+      newSelection: nasl.collection.List<V>;
     }) => any;
 
     // @Event({
@@ -778,18 +774,18 @@ namespace nasl.ui {
     })
     onRowDblclick: (event: any) => any;
 
-    @Event({
-      title: '拖拽时触发',
-      description: '拖拽时触发',
-    })
-    onDragSort: (event: {
-      currentIndex: nasl.core.Integer;
-      current: T;
-      targetIndex: nasl.core.Integer;
-      target: T;
-      data: nasl.collection.List<T>;
-      newData: nasl.collection.List<T>;
-    }) => any;
+    // @Event({
+    //   title: '拖拽时触发',
+    //   description: '拖拽时触发',
+    // })
+    // onDragSort: (event: {
+    //   currentIndex: nasl.core.Integer;
+    //   current: T;
+    //   targetIndex: nasl.core.Integer;
+    //   target: T;
+    //   data: nasl.collection.List<T>;
+    //   newData: nasl.collection.List<T>;
+    // }) => any;
     // @row-dbclick='xxx'
     // onRowClick="log"
     // @Event({
@@ -834,17 +830,17 @@ namespace nasl.ui {
       snippets: [
         {
           title: '表格列',
-          code: '<el-table-column-pro data-nodepath-multiple="ture"><template #title><el-text text="表格列"></el-text></template></el-table-column-pro>',
+          code: '<el-table-column data-nodepath-multiple="ture"><template #header><el-text text="表格列"></el-text></template></el-table-column>',
         },
       ],
     })
     slotDefault: () => Array<ViewComponent>;
 
-    @Slot({
-      title: '展开行',
-      description: '表格列',
-    })
-    slotExpandedRow: (current: Current<T>) => Array<ViewComponent>;
+    // @Slot({
+    //   title: '展开行',
+    //   description: '表格列',
+    // })
+    // slotExpandedRow: (current: Current<T>) => Array<ViewComponent>;
 
     // @Event({
     //   title: 'On Scroll X',
@@ -912,7 +908,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
-      parentAccept: "['el-table-pro'].includes(target.tag)",
+      parentAccept: "['el-table'].includes(target.tag)",
       childAccept: false,
       selector: 'multiple',
 
@@ -926,13 +922,13 @@ namespace nasl.ui {
     title: '表格列',
     description: '表格列',
   })
-  export class ElTableColumnPro<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
-    constructor(options?: Partial<ElTableColumnProOptions<T, V, P, M>>) {
+  export class ElTableColumn<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
+    constructor(options?: Partial<ElTableColumnOptions<T, V, P, M>>) {
       super();
     }
   }
 
-  export class ElTableColumnProOptions<
+  export class ElTableColumnOptions<
     T,
     V,
     P extends nasl.core.Boolean,
@@ -947,18 +943,18 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    colKey: (item: T) => any;
+    prop: (item: T) => any;
 
-    @Prop({
-      group: '数据属性',
-      title: '排序',
-      description: '设置该列是否可以排序',
-      docDescription: '开启后该列可排序，可设置默认顺序，升序或倒序',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    sorter: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '排序',
+    //   description: '设置该列是否可以排序',
+    //   docDescription: '开启后该列可排序，可设置默认顺序，升序或倒序',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // sorter: nasl.core.Boolean = false;
 
     // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
     //   group: '数据属性',
@@ -1060,38 +1056,38 @@ namespace nasl.ui {
         options: [{ title: ' 左侧固定' }, { title: '右侧固定' }, { title: '不固定' }],
       },
     })
-    fixed: 'left' | 'right' | '' = '';
+    fixed: 'left' | 'right' | false = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '表头文本过长省略',
-      description: '文字过长是否省略显示。默认文字超出时会换行。',
-      docDescription: '开启后，该列表头文本过长会省略显示，否则换行显示，默认关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    ellipsisTitle: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '表头文本过长省略',
+    //   description: '文字过长是否省略显示。默认文字超出时会换行。',
+    //   docDescription: '开启后，该列表头文本过长会省略显示，否则换行显示，默认关闭',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // ellipsisTitle: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '内容区文本过长省略',
-      description: '文字过长是否省略显示。默认文字超出时会换行。',
-      docDescription: '开启后，该列文本过长会省略显示，否则换行显示，默认关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    ellipsis: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '内容区文本过长省略',
+    //   description: '文字过长是否省略显示。默认文字超出时会换行。',
+    //   docDescription: '开启后，该列文本过长会省略显示，否则换行显示，默认关闭',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // showOverflowTooltip: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '样式属性',
-      title: '自动合并相同数据',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    autoMerge: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '自动合并相同数据',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // autoMerge: nasl.core.Boolean = false;
 
     // dragSort: 'row' | 'row-handler' | 'col' | 'row-handler-col' | 'drag-col';
 
@@ -1152,7 +1148,7 @@ namespace nasl.ui {
       title: '单元格',
       description: '对单元格的数据展示进行自定义',
     })
-    slotCell: (current: Current<T>) => Array<ViewComponent>;
+    slotDefault: (current: Current<T>) => Array<ViewComponent>;
 
     // @Slot({
     //   title: '编辑单元格',
@@ -1164,7 +1160,7 @@ namespace nasl.ui {
       title: '标题',
       description: '对标题进行自定义',
     })
-    slotTitle: (current: Current<T>) => Array<ViewComponent>;
+    slotHeader: () => Array<ViewComponent>;
 
     // @Slot({
     //   title: '展开列内容',

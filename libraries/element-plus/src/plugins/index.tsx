@@ -88,7 +88,7 @@ export function registerComponet(Component, options) {
           provide: {},
           ref: {},
           childrenRef: {},
-          [$deletePropsList]: ['provide', 'childrenRef', 'inject', 'render', 'ref', 'slots', 'emit'],
+          [$deletePropsList]: ['provide', 'childrenRef', 'inject', 'render',  'slots', 'emit'],
         },
 
         // ...attrs,
@@ -203,6 +203,8 @@ export function registerComponet(Component, options) {
         const commitJsState = commitState.toJS();
         render.value = commitJsState.render;
         Object.assign(mystate.value.state, _.omit(commitJsState, ['render']));
+        console.log(commitJsState, 'commitJsState');
+        console.log(commitJsState.ref, 'commitJsState.ref');
         Object.assign(myRef.value, commitJsState.ref);
         Object.assign(provideRef.value, commitJsState.provide);
       });
@@ -223,7 +225,7 @@ export function registerComponet(Component, options) {
         },
         { deep: true, immediate: true },
       );
-      watch(componentRef, (value) => Object.assign(myRef.value, value));
+      watch(componentRef, (value) => _.defaults(myRef.value, value));
       watch(childrenRef, (value) => Object.assign(myRef.value, value));
       watch(injectRef, (value) => _.defaults(provideRef.value, value), { deep: true, immediate: true });
       expose(myRef.value);

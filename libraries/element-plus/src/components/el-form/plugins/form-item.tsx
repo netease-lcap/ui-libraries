@@ -103,7 +103,14 @@ export function withFormItem(Component, name) {
       expose(myRef.value);
       return () => {
         return (
-          <ElFormItem {..._.pick(props, formItemProps)} rules={rules.value} prop={prop.value}>
+          <ElFormItem
+            {..._.pick(props, formItemProps)}
+            rules={rules.value}
+            prop={prop.value}
+            v-slots={{
+              label: slots.label,
+            }}
+          >
             <Component
               {..._.omit(props, formItemProps)}
               {...attrs}

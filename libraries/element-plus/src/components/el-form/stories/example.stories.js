@@ -87,12 +87,20 @@ export const Example2 = {
         inputName.value = el;
         console.log(formData.value, 'formData');
       };
-      const handleClick = (tab) => {
+      const handleClick = async (tab) => {
         // console.log('====', formData, tab);
-        tab.validate().then((res) => {
-          console.log(res, 'res');
-        });
 
+        tab.validate().then(
+          (res) => {
+            console.log(res, 'res');
+          },
+          (err) => {
+            console.log(err, 'err');
+          },
+        );
+
+        // tab.resetForm();
+        // const result= await tab.validate();
         // tab.fields()
         // console.log(tab.fields, 'fields');
         // console.log(tab);
@@ -126,25 +134,62 @@ export const Example2 = {
     template: `
     <div>
     <el-form  ref="formRef">
-      <el-form-input label="input1" data-nodepath="input1" v-model="inputName" />
+      <el-form-input :rules="rules" label="input1" data-nodepath="input1" v-model="inputName" />
       
       <el-form-select label="select1"    v-model:value="activeName" :dataSource="list"  >
          <el-option label="item.value" value="item.value" :name="name" />
       </el-form-select>
-    <el-input v-model="inputName" data-nodepath="input21" />
-    <el-select v-model="activeName" data-nodepath="select1" :dataSource="list" > </el-select>
-    <el-cascader v-model="activeName" data-nodepath="cascader1" :dataSource="list" />
-    <el-checkbox-group v-model="activeName" data-nodepath="checkbox1" :dataSource="list" />
+
+    <el-input  v-model="inputName" data-nodepath="input21" />
 
     <a @click="handleClick(formRef)" >Submit</a>
     </el-form>
 
-    <el-input v-model="inputName" data-nodepath="input21" />
     <el-select v-model="activeName" data-nodepath="select1" :dataSource="list" > </el-select>
     <el-cascader v-model="activeName" data-nodepath="cascader1" :dataSource="list" />
     <el-checkbox-group v-model="activeName" data-nodepath="checkbox1" :dataSource="list" />
     </div>
 
+    `,
+  }),
+};
+
+export const Example3 = {
+  name: '表单尺寸',
+  render: () => ({
+    setup() {
+      const inputName = ref('123');
+      const formRef = ref();
+      const rules = [
+        {
+          validate: 'filled',
+          message: '表单项不得为空',
+          trigger: 'input+blur',
+          required: true,
+        },
+      ];
+      const handleClick = async (formRef) => {
+        console.log(formRef, 'formRef');
+        // formRef.validate().then((res) => {
+        //   console.log(res, 'res');
+        // });
+        const result = await formRef.validate();
+        console.log(result, 'result');
+        // formRef.value.validate().then((res) => {
+        //   console.log(res, 'res');
+        // });
+      };
+      return {
+        inputName,
+        rules,
+        formRef,
+        handleClick,
+      };
+    },
+    template: `<el-form size="small" ref="formRef" >
+      <a @click="handleClick(formRef)">Submit</a> 
+      <el-form-input label="input1" data-nodepath="input1" v-model="inputName" :rules="rules" />
+    </el-form>
     `,
   }),
 };

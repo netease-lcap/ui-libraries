@@ -140,48 +140,23 @@ export const Example2 = {
       const tableData = async (pageObj) => {
         console.log(pageObj, 'pagerequest====');
         const initialData = [];
-        for (let i = (pageObj.currentPage - 1) * pageObj.pageSize; i < pageObj.currentPage * pageObj.pageSize && i < total; i++) {
+        for (
+          let i = (pageObj.currentPage - 1) * pageObj.pageSize;
+          i < pageObj.currentPage * pageObj.pageSize && i < total;
+          i++
+        ) {
           initialData.push({
             index: i + 1,
             applicant: ['贾明', '张三', '王芳'][i % 3],
             status: i % 3,
             channel: ['电子签署', '纸质签署', '纸质签署'][i % 3],
             email: ['w.cezkdudy@lhll.au', 'r.nmgw@peurezgn.sl', 'p.cumx@rampblpa.ru'][i % 3],
-            matters: [
-              '宣传物料制作费用',
-              'algolia 服务报销',
-              '相关周边制作费',
-              '激励奖品快递费',
-            ][i % 4],
+            matters: ['宣传物料制作费用', 'algolia 服务报销', '相关周边制作费', '激励奖品快递费'][i % 4],
             time: [2, 3, 1, 4][i % 4],
-            createTime: [
-              '2022-01-01',
-              '2022-02-01',
-              '2022-03-01',
-              '2022-04-01',
-              '2022-05-01',
-            ][i % 4],
-            applyTime: [
-              '2022-01-01',
-              '2022-02-01',
-              '2022-03-01',
-              '2022-04-01',
-              '2022-05-01',
-            ][i % 4],
-            modifyTime: [
-              '2022-01-01',
-              '2022-02-01',
-              '2022-03-01',
-              '2022-04-01',
-              '2022-05-01',
-            ][i % 4],
-            confirmTime: [
-              '2022-01-01',
-              '2022-02-01',
-              '2022-03-01',
-              '2022-04-01',
-              '2022-05-01',
-            ][i % 4],
+            createTime: ['2022-01-01', '2022-02-01', '2022-03-01', '2022-04-01', '2022-05-01'][i % 4],
+            applyTime: ['2022-01-01', '2022-02-01', '2022-03-01', '2022-04-01', '2022-05-01'][i % 4],
+            modifyTime: ['2022-01-01', '2022-02-01', '2022-03-01', '2022-04-01', '2022-05-01'][i % 4],
+            confirmTime: ['2022-01-01', '2022-02-01', '2022-03-01', '2022-04-01', '2022-05-01'][i % 4],
           });
         }
         return initialData;
@@ -231,7 +206,7 @@ dragSort="row"
   showHeader
   size=small"
 >
-  <el-table-column prop="applicant" title="申请人" width="100" fixedPosition="left"></el-table-column>
+  <el-table-column prop="applicant" label="申请人" width="100" fixedPosition="left"></el-table-column>
   <el-table-column prop="status" title="申请状态" width="150" sorter></el-table-column>
   <el-table-column prop="channel" title="签署方式" width="200"></el-table-column>
   <el-table-column prop="email" title="邮箱地址" width="200" ellipsis></el-table-column>
@@ -254,8 +229,18 @@ export const Default = {
       };
     },
     template: `
-      <el-pagination :currentPage="value"   @update:currentPage="value = $event" layout="prev, pager, next,total" :total='50'>
-      </el-pagination>
+  <el-table data-nodepath="a55ba3783cb146a881ae5d54e594612b" key="component-a55ba3783cb146a881ae5d54e594612b" :dataSource="[{index:0},{index:1},{index:2}]"  rowKey="index" valueField="index"  >
+      <el-table-column data-nodepath="da0514a35d184c4aa1289d08aa8269f9" data-nodepath-multiple="true" dataNodepathMultiple="ture" key="component-da0514a35d184c4aa1289d08aa8269f9"  >
+      <template #default={...argus}>
+      </template>
+      <template #header={...argus}>
+          <div data-nodepath="554d8ebb9b9940d7af8d8bd25f460bb8"  >
+            <el-text data-nodepath="9dc4874002ca4d9ab0a0b32d3411599a" text="表格列" key="component-9dc4874002ca4d9ab0a0b32d3411599a" data-editable="true"  >
+            </el-text>
+          </div>
+      </template>
+      </el-table-column>
+    </el-table>
     `,
   }),
 };

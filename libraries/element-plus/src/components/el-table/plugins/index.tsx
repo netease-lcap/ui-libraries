@@ -11,7 +11,6 @@ function useControllableValue(props, options, { useState }) {
   const [value, setValue] = useState('');
   const { valuePropsName, tigger = `onUpdate:${valuePropsName}`, onChange } = options;
   const isControlled = props.has(valuePropsName);
-  // fp.attempt(onChange)
   const myChange = (...arg) => {
     _.attempt(onChange, arg);
     _.attempt(setValue, arg);
@@ -112,7 +111,6 @@ export function handlePage(props, { useState, childrenRef }) {
   const showTotal = props.get('showTotal');
   const showJumper = props.get('showJumper');
   const ref = props.get('ref');
-  console.log(Component, 'Component==');
   const [currentPage, setpage, currentPageProps] = useControllableValue(
     props,
     {
