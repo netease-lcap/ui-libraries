@@ -656,6 +656,10 @@ export default {
     },
     normalizeDataSource(dataSource) {
       const options = this.getDataSourceOptions();
+      // 初始化数据原始去除筛选文本
+      if (options.filtering[this.field || this.textField]) {
+        options.filtering[this.field || this.textField].value = '';
+      }
       const isNew = typeof this.pagination !== 'undefined';
       const Constructor = isNew ? DataSourceNew : DataSource;
 
