@@ -15,6 +15,7 @@ function generateElementUIComponent(context: OverloadComponentContext) {
       ' */',
     ] : [],
     `import { BaseComponent } from '${LCAP_UI_PACKAGE_NAME}';`,
+    '',
     'export default {',
     `  name: '${context.tagName}',`,
     '  components: {',
@@ -29,6 +30,7 @@ function generateElementUIComponent(context: OverloadComponentContext) {
   const indexCode = [
     `import { extendComponent, ${context.naslUIConfig.name} } from '${LCAP_UI_PACKAGE_NAME}';`,
     `import Extend${context.naslUIConfig.name} from './index.vue';`,
+    '',
     `export const ${context.name} = extendComponent(${context.naslUIConfig.name}, Extend${context.naslUIConfig.name});`,
     `export default ${context.name};`,
     '',
@@ -39,7 +41,7 @@ function generateElementUIComponent(context: OverloadComponentContext) {
 }
 
 async function generateVueComponent(context: OverloadComponentContext) {
-  if (context.libInfo.name === 'element-ui') {
+  if (context.libInfo.name === '@lcap/element-ui') {
     generateElementUIComponent(context);
     return;
   }
