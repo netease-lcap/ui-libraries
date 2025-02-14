@@ -4,7 +4,7 @@ import Component from '../index';
 
 export default {
   id: 'el-table-examples',
-  title: '组件列表/table 输入框/示例',
+  title: '组件列表/Table 数据表格/示例',
   component: Component,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -125,6 +125,120 @@ dragSort="row"
     <p class="title"><b>集群名称:</b></p><p class="content">{{item.channel}}</p><br/>
   </div>
 </template>
+</el-table>
+    `,
+  }),
+};
+
+/*  基础的、简洁的标签页。 */
+export const Example2 = {
+  name: '示例2',
+  render: () => ({
+    setup() {
+      const activeName = ref('first');
+      const total = 28;
+      const tableData = async (pageObj) => {
+        console.log(pageObj, 'pagerequest====');
+        const initialData = [];
+        for (let i = (pageObj.currentPage - 1) * pageObj.pageSize; i < pageObj.currentPage * pageObj.pageSize && i < total; i++) {
+          initialData.push({
+            index: i + 1,
+            applicant: ['贾明', '张三', '王芳'][i % 3],
+            status: i % 3,
+            channel: ['电子签署', '纸质签署', '纸质签署'][i % 3],
+            email: ['w.cezkdudy@lhll.au', 'r.nmgw@peurezgn.sl', 'p.cumx@rampblpa.ru'][i % 3],
+            matters: [
+              '宣传物料制作费用',
+              'algolia 服务报销',
+              '相关周边制作费',
+              '激励奖品快递费',
+            ][i % 4],
+            time: [2, 3, 1, 4][i % 4],
+            createTime: [
+              '2022-01-01',
+              '2022-02-01',
+              '2022-03-01',
+              '2022-04-01',
+              '2022-05-01',
+            ][i % 4],
+            applyTime: [
+              '2022-01-01',
+              '2022-02-01',
+              '2022-03-01',
+              '2022-04-01',
+              '2022-05-01',
+            ][i % 4],
+            modifyTime: [
+              '2022-01-01',
+              '2022-02-01',
+              '2022-03-01',
+              '2022-04-01',
+              '2022-05-01',
+            ][i % 4],
+            confirmTime: [
+              '2022-01-01',
+              '2022-02-01',
+              '2022-03-01',
+              '2022-04-01',
+              '2022-05-01',
+            ][i % 4],
+          });
+        }
+        return initialData;
+      };
+      const mytable = ref();
+      const currentPage = ref(1);
+      const pageSize2 = ref(10);
+      const selectedRowKeys = ref([
+        {
+          index: 4,
+        },
+      ]);
+
+      watch(selectedRowKeys, (el) => {
+        console.log(el, 'log');
+      });
+      // setTimeout(() => {
+      //   console.log(selectedRowKeys,'selectedRowKeys');
+      // }, 1000);
+      return {
+        tableData,
+        pageSize2,
+        currentPage,
+        mytable,
+        selectedRowKeys,
+      };
+    },
+    template: `
+<el-table
+ref="mytable"
+row-key="index"
+:dataSource="tableData"
+:pagination="true"
+v-model:currentPage="currentPage"
+v-model:pageSize="pageSize2"
+:showTotal="true"
+:sorting="{ field: 'createTime', order: 'desc' }"
+:showJumper="true"
+:pageSizes="[10, 100, 200, 300, 400]"
+v-model:selectedRowKeys="selectedRowKeys"
+@sort-change="onSortChange"
+dragSort="row"
+:selection="true"
+  bordered
+  hover
+  stripe
+  showHeader
+  size=small"
+>
+  <el-table-column prop="applicant" title="申请人" width="100" fixedPosition="left"></el-table-column>
+  <el-table-column prop="status" title="申请状态" width="150" sorter></el-table-column>
+  <el-table-column prop="channel" title="签署方式" width="200"></el-table-column>
+  <el-table-column prop="email" title="邮箱地址" width="200" ellipsis></el-table-column>
+  <el-table-column prop="createTime" title="创建时间" width="160"></el-table-column>
+  <el-table-column prop="applyTime" title="申请时间" width="160"></el-table-column>
+  <el-table-column prop="modifyTime" title="修改时间" width="160"></el-table-column>
+  <el-table-column prop="confirmTime" title="确认时间" width="160"></el-table-column>
 </el-table>
     `,
   }),

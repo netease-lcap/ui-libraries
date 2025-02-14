@@ -3,7 +3,7 @@ import Component from '../index';
 
 export default {
   id: 'el-tabs-examples',
-  title: '组件列表/TABS 标签页/示例',
+  title: '组件列表/Tabs 标签页/示例',
   component: Component,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
