@@ -207,13 +207,13 @@ dragSort="row"
   size=small"
 >
   <el-table-column prop="applicant" label="申请人" width="100" fixedPosition="left"></el-table-column>
-  <el-table-column prop="status" title="申请状态" width="150" sorter></el-table-column>
-  <el-table-column prop="channel" title="签署方式" width="200"></el-table-column>
-  <el-table-column prop="email" title="邮箱地址" width="200" ellipsis></el-table-column>
-  <el-table-column prop="createTime" title="创建时间" width="160"></el-table-column>
-  <el-table-column prop="applyTime" title="申请时间" width="160"></el-table-column>
-  <el-table-column prop="modifyTime" title="修改时间" width="160"></el-table-column>
-  <el-table-column prop="confirmTime" title="确认时间" width="160"></el-table-column>
+  <el-table-column prop="status" label="申请状态" width="150" sorter></el-table-column>
+  <el-table-column prop="channel" label="签署方式" width="200"></el-table-column>
+  <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
+  <el-table-column prop="createTime" label="创建时间" width="160"></el-table-column>
+  <el-table-column prop="applyTime" label="申请时间" width="160"></el-table-column>
+  <el-table-column prop="modifyTime" label="修改时间" width="160"></el-table-column>
+  <el-table-column prop="confirmTime" label="确认时间" width="160"></el-table-column>
 </el-table>
     `,
   }),
