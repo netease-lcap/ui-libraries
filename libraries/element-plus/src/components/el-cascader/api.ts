@@ -194,6 +194,28 @@ namespace nasl.ui {
     })
     value: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
 
+    @Prop<ElCascaderOptions<T, V, P, M, C>, 'childrenField'>({
+      group: '数据属性',
+      title: '子级值字段',
+      description: '树形数据子节点字段名，默认为children',
+      docDescription: '树形数据子节点字段名，默认为children',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    childrenField: (item: T) => nasl.collection.List<any> = ((item: any) => item.children) as any;
+
+    @Prop({
+      group: '数据属性',
+      title: '父级值字段',
+      description: '集合的元素类型中，用于标识父节点的属性',
+      docDescription: '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    parentField: (item: T) => any;
+
     // @Prop<ElSelectProOptions<T, V, P, M, C>, 'valueIsSlot'>({
     //   group: '数据属性',
     //   title: '动态选中项插槽',
