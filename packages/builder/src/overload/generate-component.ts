@@ -45,6 +45,7 @@ function generateElementUIComponent(context: OverloadComponentContext) {
     '',
     'export default {',
     `  name: '${context.tagName}',`,
+    '  inheritAttrs: false,',
     ...context.isWithForm ? [
       `  mixins: [lowCodeFormFieldMixin('${context.tagName}', '${withFormTagName}')],`,
     ] : [],
