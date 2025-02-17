@@ -6,6 +6,7 @@ import type { ViewComponentDeclaration } from '@nasl/types/nasl.ui.ast';
 import type { ThemeComponentConfig, ThemeConfig } from '../build/gens/gen-theme-config';
 import { LCAP_UI_JSON_PATH, LCAP_UI_PACKAGE_PATH, LCAP_UI_CONFIG_PATH } from './constants';
 import { type ModulesInfo } from '../plugins/lcap-use-nasl-ui';
+import { getWithFormName, isWithForm } from './utils';
 
 export interface NaslUIComponentConfig extends ViewComponentDeclaration {
   sourceDocURL?: string;
@@ -40,6 +41,8 @@ export interface OverloadComponentContext {
   replaceNameMap: Record<string, string>;
   replaceTagMap: Record<string, string>;
   themeConfig: ThemeComponentConfig;
+  isWithForm: boolean;
+  withFormName: string;
   findNaslUIConfig: (name: string | ((c: NaslUIComponentConfig) => boolean)) => NaslUIComponentConfig | null;
 }
 
@@ -191,6 +194,8 @@ export function getOverloadComponentContext(rootPath, { component, prefix, fork 
     componentFolderPath: path.resolve(rootPath, `src/components/${tagName}`),
     fork,
     prefix,
+    isWithForm: isWithForm(comp),
+    withFormName: getWithFormName(comp.name),
     ...getReleaceMap(comp, env.framework, prefix),
     themeConfig: getThemeConfig(rootPath, env.framework.startsWith('vue') ? kebabCase(component) : component),
     findNaslUIConfig: (compName: string | ((c: NaslUIComponentConfig) => boolean)) => {

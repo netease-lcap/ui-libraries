@@ -4,12 +4,8 @@ import * as babelTypes from '@babel/types';
 import generate from '@babel/generator';
 import traverse from '@babel/traverse';
 import { OverloadComponentContext } from './context';
-import { upperFirst } from 'lodash';
 import { LCAP_UI_PATH } from './constants';
-
-function addPrefix(name, prefix) {
-  return upperFirst(prefix.toLowerCase()) + name;
-}
+import { addPrefix } from './utils';
 
 const TEMP_IDEUSAGE_VAR_NAME = '_TEMP_VAR';
 
@@ -112,7 +108,7 @@ export function transformAPITs(tsCode, context: OverloadComponentContext, all: b
     },
     ClassDeclaration(path) {
       if (path.node.superClass && path.node.id && path.node.id.type === 'Identifier' && path.node.superClass.type === 'Identifier' && path.node.superClass.name === 'ViewComponent') {
-        if (path.node.id.name !== context.naslUIConfig.name && !all) {
+        if (path.node.id.name !== context.naslUIConfig.name && !all && (!context.isWithForm || path.node.id.name !== context.withFormName)) {
           path.remove();
           return;
         }
@@ -185,7 +181,24 @@ export function transformAPITs(tsCode, context: OverloadComponentContext, all: b
             }
 
             try {
-              const ast = getAST(config[key]);
+              let obj = config[key];
+              if (key === 'extends' && Array.isArray(obj)) {
+                obj = obj.map((ext) => {
+                  if (typeof ext === 'string' || ext === context.naslUIConfig.name) {
+                    return context.name;
+                  }
+
+                  if (typeof ext === 'object' && ext.name === context.naslUIConfig.name) {
+                    return {
+                      ...ext,
+                      name: context.name,
+                    };
+                  }
+
+                  return ext;
+                });
+              }
+              const ast = getAST(obj);
               if (!ast) {
                 return;
               }
@@ -220,7 +233,7 @@ export function transformAPITs(tsCode, context: OverloadComponentContext, all: b
           });
         }
       } else if (path.node.id && path.node.id.type === 'Identifier' && path.node.superClass && path.node.superClass.type === 'Identifier' && path.node.superClass.name === 'ViewComponentOptions') {
-        if (path.node.id.name !== `${context.naslUIConfig.name}Options` && !all) {
+        if (path.node.id.name !== `${context.naslUIConfig.name}Options` && !all && (!context.isWithForm || path.node.id.name !== `${context.withFormName}Options`)) {
           path.remove();
           return;
         }

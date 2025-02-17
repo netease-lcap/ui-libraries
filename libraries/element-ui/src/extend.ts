@@ -13,9 +13,16 @@ export const extendComponent = (component: any, ec: any) => {
   return component;
 };
 
-export const lowCodeFormFieldMixin = (tagName, formTagName) => {
+export const lowCodeFormFieldMixin = (tagName: string, formTagName: string) => {
   return {
-    inject: [IN_ELEMENT_FORM, IN_ELEMENT_FORM_ITEM],
+    inject: {
+      [IN_ELEMENT_FORM]: {
+        default: false,
+      },
+      [IN_ELEMENT_FORM_ITEM]: {
+        default: false,
+      },
+    },
     mounted() {
       const self = this as any;
       const nodePath = self.$attrs['data-nodepath'];

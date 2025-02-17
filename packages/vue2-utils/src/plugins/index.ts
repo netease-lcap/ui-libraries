@@ -237,6 +237,8 @@ export const registerComponent = (
           nativeEvents,
           methodNames,
           eventNames,
+          model,
+          rangeModel,
         }, ec);
       },
     };
