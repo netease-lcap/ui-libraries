@@ -8,6 +8,10 @@ namespace nasl.ui {
       "additionalAttribute": {
         "autofocus": "\"false\""
       },
+      selector: {
+        expression: 'this',
+        cssSelector: '.el-input',
+      },
     },
   })
   @Component({
@@ -21,10 +25,6 @@ namespace nasl.ui {
       super();
     }
 
-    @Prop({
-      title: '值',
-    })
-    value: nasl.core.String;
   }
 
   export class ElInputOptions extends ViewComponentOptions {
@@ -54,6 +54,7 @@ namespace nasl.ui {
         ],
       },
     })
+
     type:
       | 'text'
       | 'url'
@@ -384,33 +385,6 @@ namespace nasl.ui {
   }
 
 
-  @IDEExtraInfo({
-    show: false,
-    ideusage: {
-      idetype: 'container',
-    },
-  })
-  @Component({
-    title: '输入框组',
-    icon: 'input-group',
-    description: '',
-    group: 'Form',
-  })
-  export class ElInputGroup extends ViewComponent {
-    constructor(options?: Partial<ElInputGroupOptions>) {
-      super();
-    }
-  }
-
-  export class ElInputGroupOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '需要间隔',
-      description: '多个输入框之间是否需要间隔',
-      setter: { concept: 'SwitchSetter' },
-    })
-    separate: nasl.core.Boolean;
-  }
 
   @IDEExtraInfo({
     ideusage: {

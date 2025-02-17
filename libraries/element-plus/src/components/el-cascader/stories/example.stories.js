@@ -141,7 +141,7 @@ export const Example2 = {
               },
             },
           ]);
-        }, 3000);
+        }, 1000);
       });
       const select = ref('');
       const options = ref([
@@ -185,7 +185,7 @@ export const Example2 = {
     },
     template: `
     <div>
-    <el-cascader ref="select"  valueField="entity1.id"
+    <el-cascader ref="select" size="small" filterable :multiple="true" :placeholder="12" valueField="entity1.id"
         textField="entity1.property1"
         parentField="entity1.fid" v-model:value="activeName" :dataSource="dataSource"  >
 
@@ -194,5 +194,12 @@ export const Example2 = {
     </div>
 
     `,
+  }),
+};
+
+export const Example3 = {
+  name: '级联选择器',
+  render: () => ({
+    template: '<el-cascader class="my-cascader andy" data-nodepath="123" />',
   }),
 };

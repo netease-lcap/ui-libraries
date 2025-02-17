@@ -11,7 +11,6 @@ function useControllableValue(props, options, { useState }) {
   const [value, setValue] = useState('');
   const { valuePropsName, tigger = `onUpdate:${valuePropsName}`, onChange } = options;
   const isControlled = props.has(valuePropsName);
-  // fp.attempt(onChange)
   const myChange = (...arg) => {
     _.attempt(onChange, arg);
     _.attempt(setValue, arg);
@@ -136,10 +135,10 @@ export function handlePage(props, { useState, childrenRef }) {
     },
     ref,
     pagination,
-    render: (props, { attrs, expose }) => {
+    render: (props, { attrs, expose, slots }) => {
       return [
         <div>
-          <Component ref={childrenRef} {...{ ...props, ...ref.attrs }} v-slots={props.slots} />
+          <Component ref={childrenRef} {...{ ...props, ...attrs }} v-slots={slots} />
           {props.pagination && (
             <ElPagination {...props.pageProps} style={{ float: 'right', marginTop: '8px' }} total={50} />
           )}

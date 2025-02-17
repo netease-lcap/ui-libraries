@@ -53,10 +53,8 @@ export const Example1 = {
     },
     template: `
     <div>
-    <el-input-plus ref="myref" :modelValue="333" @update:value="handleClick"/>
       {{activeName}}
-      ==={{name}}
-      <el-input ref="yref"   v-model="activeName"  @update:modelValue="handleClick" ></el-input>
+      <el-input ref="yref" type="text"    v-model="activeName" clearable  @click="handleClick" ></el-input>
     </div>
     `,
   }),

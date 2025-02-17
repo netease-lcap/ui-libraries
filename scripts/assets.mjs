@@ -41,6 +41,8 @@ const libraries = [
   'libraries/mobile-ui',
   'libraries/pc-ui',
   'libraries/element-ui',
+  'libraries/element-plus',
+  'libraries/vant',
 ];
 
 libraries.forEach((libPath) => {

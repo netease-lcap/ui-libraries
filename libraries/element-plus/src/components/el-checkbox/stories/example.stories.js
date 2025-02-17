@@ -76,68 +76,68 @@ export const Example2 = {
           res([
             {
               entity1: {
-                id: 0,
+                id: '0',
                 createdTime: null,
                 updatedTime: null,
                 createdBy: null,
                 updatedBy: null,
                 property1: '选项5',
-                fid: 1,
+                fid: '1',
               },
             },
             {
               entity1: {
-                id: 1,
+                id: '1',
                 createdTime: null,
                 updatedTime: null,
                 createdBy: null,
                 updatedBy: null,
                 property1: '选项6',
-                fid: 2,
+                fid: '2',
               },
             },
             {
               entity1: {
-                id: 3,
+                id: '3',
                 createdTime: null,
                 updatedTime: null,
                 createdBy: null,
                 updatedBy: null,
                 property1: '选项3',
-                fid: 0,
+                fid: '0',
               },
             },
             {
               entity1: {
-                id: 7,
+                id: '7',
                 createdTime: null,
                 updatedTime: null,
                 createdBy: null,
                 updatedBy: null,
                 property1: '选项2',
-                fid: 1,
+                fid: '1',
               },
             },
             {
               entity1: {
-                id: 8,
+                id: '8',
                 createdTime: null,
                 updatedTime: null,
                 createdBy: null,
                 updatedBy: null,
                 property1: '选项1.1',
-                fid: 2,
+                fid: '2',
               },
             },
             {
               entity1: {
-                id: 9,
+                id: '9',
                 createdTime: null,
                 updatedTime: null,
                 createdBy: null,
                 updatedBy: null,
                 property1: '选项4',
-                fid: 0,
+                fid: '0',
               },
             },
           ]);
@@ -187,7 +187,7 @@ export const Example2 = {
     },
     template: `
     <div>
-      <el-checkbox-group v-model:value="activeName" valueField="entity1.property1" textField="entity1.property1" :dataSource="dataSource" >
+      <el-checkbox-group  valueField="entity1.property1" textField="entity1.property1" :dataSource="dataSource" >
         <el-checkbox label="Option1" value="Value1" />
         <el-checkbox label="Option2" value="Value2" />
       </el-checkbox-group>

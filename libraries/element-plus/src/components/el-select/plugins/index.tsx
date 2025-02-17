@@ -3,6 +3,8 @@ import _ from 'lodash';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 
+export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+
 export function handleDataSource(props, { useState, useEffect, useMemo }) {
   const dataConfig = props.get('dataSource');
   const textField = props.get('textField', 'label');
@@ -10,7 +12,7 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
   const slots = props.get('slots');
   const deletePropsList = props
     .get($deletePropsList, [])
-    .concat(['dataSource', 'textField', 'valueField', 'parentField', 'childrenField']);
+    .concat(['dataSource', 'textField', 'valueField', 'parentField', 'childrenField','formtagname']);
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig, {}, { useState, useEffect, useMemo });
   const dataSource = useHandleMapField(
@@ -41,8 +43,9 @@ export function handleValue(props, { useState }) {
   return {
     onChange: _.wrap(onChangeProps, (fn, value) => {
       _.attempt(fn, value);
-      changeValue(`${value}`);
+      changeValue(value);
     }),
     modelValue: propsValue,
+    formTagName: 'el-form-select',
   };
 }

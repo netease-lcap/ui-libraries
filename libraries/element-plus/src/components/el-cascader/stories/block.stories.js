@@ -24,8 +24,7 @@ export const Default = {
   name: '基础示例',
   render: () => ({
     template: `
-    <div>123</div>
-   
+    <el-cascader />
     `,
   }),
 };

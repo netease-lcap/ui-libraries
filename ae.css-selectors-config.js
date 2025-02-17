@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 module.exports = {
   mode: 'file-rpa',
   prompt: fs.readFileSync('./ae.css-selectors-prompt.md', 'utf-8'),
-  includes: ['libraries/pc-ui/index.css-info-desc.json'],
+  includes: ['libraries/element-plus/index.css-info-desc.json'],
   excludes: [],
   linePattern: /^(\s*")(.+?)(":\s*")(.*?)(",?\s*)$/,
   linePreFilter(line) {
@@ -16,4 +16,4 @@ module.exports = {
     if (!oldLine) return console.log('[linePostProcess] oldLine is null:', line, oldLine);
     return oldLine.replace(this.linePattern, (_, $1, $2, $3, $4, $5) => $1 + cap[2] + $3 + cap[4] + $5);
   },
-}
+};

@@ -1,4 +1,4 @@
-import ComponentPreivew, { demos } from 'virtual:lcap-theme-component-previews.js';
+import ComponentPreview, { demos } from 'virtual:lcap-theme-component-previews.js';
 import Dashboard from './previews/dashboard.vue';
 import Form from './previews/form.vue';
 
@@ -51,14 +51,14 @@ export const Components = {
   render: (args) => {
     return {
       components: {
-        ComponentPreivew,
+        ComponentPreview,
       },
       setup() {
         return {
           args,
         };
       },
-      template: '<ComponentPreivew v-bind="args" />',
+      template: '<ComponentPreview v-bind="args" />',
     };
   },
   args: {

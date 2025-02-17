@@ -3,6 +3,7 @@ import { watch, h, inject } from 'vue';
 import _ from 'lodash';
 // import { useFormItem } from 'element-plus/es/components/form/src/hooks/index';
 // import { formItemContextKey } from 'element-plus/es/components/form/src/constants';
+export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
 export function handleValue(props, { useState, useEffect, useMemo }) {
   const [value, setValue] = useState('');
@@ -16,5 +17,6 @@ export function handleValue(props, { useState, useEffect, useMemo }) {
       changeValue(value);
     }),
     modelValue: propsValue,
+    formTagName: 'el-form-input',
   };
 }
