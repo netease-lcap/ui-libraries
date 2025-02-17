@@ -41,7 +41,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
-      containerDirection: "row",
+      containerDirection: 'row',
       disableSlotAutoFill: [
         {
           slot: 'expandedRow',
@@ -510,7 +510,7 @@ namespace nasl.ui {
       docDescription: '支持选择数据表格数据源中的某一条数据，配置默认排序规则，支持升序和降序',
     })
     sorting: {
-      field: nasl.core.String | undefined;
+      field: nasl.core.String;
       order: nasl.core.String;
       compare?: Function;
     } = { field: undefined, order: 'desc' };
@@ -744,9 +744,7 @@ namespace nasl.ui {
       title: '选中行变化时',
       description: '选中行变化时触发',
     })
-    onSelectionChange: (event: {
-      newSelection: nasl.collection.List<V>;
-    }) => any;
+    onSelectionChange: (event: { newSelection: nasl.collection.List<V> }) => any;
 
     // @Event({
     //   title: 'On Column Resize Change',

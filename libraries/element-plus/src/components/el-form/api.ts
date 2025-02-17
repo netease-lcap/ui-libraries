@@ -567,12 +567,12 @@ namespace nasl.ui {
     @Slot({
       title: '表单组件',
       description: '表单组件',
-      snippets: [
-        {
-          title: '表单项',
-          code: '<el-form-item-pro></el-form-item-pro>',
-        },
-      ],
+      // snippets: [
+      //   {
+      //     title: '表单项',
+      //     code: '<el-form-item-pro></el-form-item-pro>',
+      //   },
+      // ],
     })
     slotDefault: () => Array<ViewComponent>;
   }

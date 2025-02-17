@@ -25,6 +25,7 @@ export const Default = {
   render: () => ({
     template: `
       <el-form>
+        <el-input label="输入框" />
       </el-form>
     `,
   }),
