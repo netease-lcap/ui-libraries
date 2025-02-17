@@ -438,6 +438,7 @@ export default function createHocComponent(baseComponent: any, manger: PluginMan
       const pluginSetUpContext: PluginSetUpContext = {
         h: vueInstance.$createElement,
         $router: vueInstance.$router,
+        extendComponent: extendComponent ? getComponentOptions(extendComponent) : undefined,
         isDesigner,
         setupContext: ctx,
         getVNode: () => ctx.parent.$vnode,
