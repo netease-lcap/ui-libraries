@@ -257,7 +257,9 @@ export async function forkComponent(context: OverloadComponentContext) {
       default: break;
     }
   });
+}
 
+export async function setAllAPI(context: OverloadComponentContext) {
   const filePath = path.resolve(context.pkgComponentFolderPath, 'api.ts');
   if (!fs.existsSync(filePath) || !context.naslUIConfig.children || context.naslUIConfig.children.length === 0) {
     return;
