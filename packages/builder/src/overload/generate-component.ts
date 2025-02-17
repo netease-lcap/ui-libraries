@@ -59,7 +59,7 @@ function generateElementUIComponent(context: OverloadComponentContext) {
     '',
   ].join('\n');
   const indexCode = [
-    `import { extendComponent, ${context.isWithForm ? ' WithFormItem,' : ''} ${context.naslUIConfig.name} } from '${LCAP_UI_PACKAGE_NAME}';`,
+    `import { extendComponent,${context.isWithForm ? ' WithFormItem,' : ''} ${context.naslUIConfig.name} } from '${LCAP_UI_PACKAGE_NAME}';`,
     `import Extend${context.naslUIConfig.name} from './index.vue';`,
     '',
     `export const ${context.name} = extendComponent(${context.naslUIConfig.name}, Extend${context.naslUIConfig.name});`,
