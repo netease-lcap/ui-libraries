@@ -10,12 +10,14 @@ import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/
 function useControllableValue(props, options, { useState }) {
   const [value, setValue] = useState('');
   const { valuePropsName, tigger = `onUpdate:${valuePropsName}`, onChange } = options;
-  const isControlled = props.has(valuePropsName);
+  const isControlled = props.get(valuePropsName);
   const myChange = (...arg) => {
     _.attempt(onChange, arg);
     _.attempt(setValue, arg);
   };
-  const [myValue, mySetValue] = isControlled ? [props.get(valuePropsName), props.get(tigger)] : [value, myChange];
+  const [myValue, mySetValue] = isControlled
+    ? [props.get(valuePropsName), props.get(tigger, () => {})]
+    : [value, myChange];
   return [myValue, mySetValue, { [valuePropsName]: myValue, [tigger]: mySetValue }];
 }
 export function handleDataSource(props, { useState, useEffect, useMemo }) {
@@ -125,6 +127,7 @@ export function handlePage(props, { useState, childrenRef }) {
     },
     { useState },
   );
+  console.log(pageSizeProps, 'pageSize==');
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
   return {
     pageProps: {
