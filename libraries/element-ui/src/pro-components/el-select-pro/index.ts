@@ -17,5 +17,5 @@ export const ElSelectPro = registerComponent(Select, plugins, {
 export const ElOptionPro = Option;
 export const ElOptionGroupPro = OptionGroup;
 
-export const ElFormSelectPro = WithFormItem(ElSelectPro, { name: FORM_TAG_NAME, methodNames: [] });
+export const ElFormSelectPro = WithFormItem(ElSelectPro, { name: FORM_TAG_NAME, methodNames: ['reload'] });
 export default ElSelectPro;
