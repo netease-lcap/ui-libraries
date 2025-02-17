@@ -451,7 +451,7 @@ namespace nasl.ui {
         },
       ],
     })
-    pagination: nasl.core.Boolean = true;
+    pagination: nasl.core.Boolean = false;
 
     @Prop<ElTableOptions<T, V, P, M>, 'pageSizes'>({
       group: '数据属性',
