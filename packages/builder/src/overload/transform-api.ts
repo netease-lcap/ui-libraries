@@ -11,7 +11,24 @@ function addPrefix(name, prefix) {
   return upperFirst(prefix.toLowerCase()) + name;
 }
 
-const TEMP_IDEUSAGE_VAR_NAME = '_tempIdeusage';
+const TEMP_IDEUSAGE_VAR_NAME = '_TEMP_VAR';
+
+function getAST(obj: any) {
+  const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${JSON.stringify(obj)};`;
+  const tempAST = babel.parseSync(code);
+  let ast;
+  if (tempAST) {
+    traverse(tempAST, {
+      VariableDeclarator(p) {
+        if (p.node.id.type === 'Identifier' && p.node.id.name === TEMP_IDEUSAGE_VAR_NAME && p.node.init) {
+          ast = p.node.init;
+        }
+      }
+    });
+  }
+
+  return ast;
+}
 
 export function transformAPITs(tsCode, context: OverloadComponentContext, all: boolean = false) {
   const ast = babel.parse(tsCode, {
@@ -162,28 +179,30 @@ export function transformAPITs(tsCode, context: OverloadComponentContext, all: b
           }
 
           const config = context.findNaslUIConfig(className);
-          if (config && config.ideusage) {
-            const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${JSON.stringify(config.ideusage)};`;
-            const tempAST = babel.parseSync(code);
-            if (tempAST) {
-              traverse(tempAST, {
-                VariableDeclarator(p) {
-                  if (p.node.id.type === 'Identifier' && p.node.id.name === TEMP_IDEUSAGE_VAR_NAME && p.node.init && p.node.init.type === 'ObjectExpression') {
-                    properties.push({
-                      type: 'ObjectProperty',
-                      key: {
-                        type: 'Identifier',
-                        name: 'ideusage',
-                      },
-                      value: p.node.init,
-                      computed: false,
-                      shorthand: false,
-                    });
-                  }
-                }
-              });
+          ['ideusage', 'extends'].forEach((key) => {
+            if (!config || !config[key]) {
+              return;
             }
-          }
+
+            try {
+              const ast = getAST(config[key]);
+              if (!ast) {
+                return;
+              }
+              properties.push({
+                type: 'ObjectProperty',
+                key: {
+                  type: 'Identifier',
+                  name: key,
+                },
+                value: ast,
+                computed: false,
+                shorthand: false,
+              });
+            } catch (e) {
+            }
+
+          });
 
           decorators.unshift({
             type: 'Decorator',

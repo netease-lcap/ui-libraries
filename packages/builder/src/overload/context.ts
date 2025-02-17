@@ -4,7 +4,7 @@ import path from 'path';
 import { kebabCase, upperFirst } from 'lodash';
 import type { ViewComponentDeclaration } from '@nasl/types/nasl.ui.ast';
 import type { ThemeComponentConfig, ThemeConfig } from '../build/gens/gen-theme-config';
-import { LCAP_UI_JSON_PATH, LCAP_UI_PACKAGE_PATH } from './constants';
+import { LCAP_UI_JSON_PATH, LCAP_UI_PACKAGE_PATH, LCAP_UI_CONFIG_PATH } from './constants';
 import { type ModulesInfo } from '../plugins/lcap-use-nasl-ui';
 
 export interface NaslUIComponentConfig extends ViewComponentDeclaration {
@@ -150,7 +150,7 @@ function getThemeConfig(rootPath, component) {
 
 export function getOverloadComponentContext(rootPath, { component, prefix, fork }) {
   const env = getProjectContext(rootPath);
-  const configPath = path.resolve(rootPath, '.lcap/lcap-ui/runtime/nasl.ui.json');
+  const configPath = path.resolve(rootPath, LCAP_UI_CONFIG_PATH);
   const lcapUIConfigPath = path.resolve(rootPath, LCAP_UI_JSON_PATH);
   if (!fs.existsSync(configPath) || !fs.existsSync(lcapUIConfigPath) || !env) {
     throw new Error('unfound nasl config path .lcap/lcap-ui/runtime/nasl.ui.json, please execute command \'lcap install\' ');

@@ -3,6 +3,7 @@ import fs from 'fs-extra';
 import glob from 'fast-glob';
 import genNaslComponentConfig, { processComponentConfigExtends } from './gen-nasl-component-config';
 import genNaslLogicsConfig from './gen-nasl-logics-config';
+import { LCAP_UI_CONFIG_PATH } from '../../overload/constants';
 
 export interface GenNaslExtensionConfigProps {
   // cwd
@@ -143,7 +144,17 @@ export default async function getNaslExtensionConfig({
     return componentConfig;
   });
 
-  processComponentConfigExtends(viewComponents);
+  const lcapUIConfigPath = path.resolve(rootPath, LCAP_UI_CONFIG_PATH);
+  let lcapUIComponents: any[] = [];
+  if (fs.existsSync(lcapUIConfigPath)) {
+    try {
+      lcapUIComponents = fs.readJSONSync(lcapUIConfigPath);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  processComponentConfigExtends(viewComponents, lcapUIComponents);
 
   const logics = await genNaslLogicsConfig(rootPath);
   const feLibraries = getFrontEndLibray(frameworkKind, frameworkUI, viewComponents, logics);
