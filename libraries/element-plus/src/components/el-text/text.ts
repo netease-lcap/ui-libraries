@@ -36,6 +36,7 @@ export default defineComponent({
     const classList = computed(() => {
       return [
         'el-text',
+        'el-text--reset',
         `el-text--size-${props.size}`,
         `el-text--color-${props.color}`,
         `el-text--display-${props.display}`,

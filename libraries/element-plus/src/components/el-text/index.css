@@ -3,6 +3,10 @@
   max-width: 100%;
 }
 
+.el-text.el-text--reset {
+  align-self: unset;
+}
+
 .el-text.el-text--size-small {
   font-size: var(--el-font-size-extra-small);
 }
