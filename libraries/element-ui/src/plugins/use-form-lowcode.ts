@@ -4,12 +4,12 @@ import { IN_ELEMENT_FORM, IN_ELEMENT_FORM_ITEM } from '../pro-components/el-form
 
 export const createUseFormLowcode = (name, formTagName) => {
   return {
-    setup(props) {
+    setup(props, { extendComponent }) {
       const inForm = inject(IN_ELEMENT_FORM);
       const inFormItem = inject(IN_ELEMENT_FORM_ITEM);
       const instance = getCurrentInstance();
       onMounted(() => {
-        if (!instance) {
+        if (!instance || extendComponent) {
           return;
         }
 

@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 8,
+    sourceDocURL: 'https://tdesign.tencent.com/vue/components/tree',
     ideusage: {
       idetype: 'container',
       forceUpdateWhenAttributeChange: true,

@@ -16,5 +16,5 @@ export const ElTreeSelectPro = registerComponent(TreeSelect, plugins, {
   },
 });
 
-export const ElFormTreeSelectPro = WithFormItem(ElTreeSelectPro, { name: FORM_TAG_NAME });
+export const ElFormTreeSelectPro = WithFormItem(ElTreeSelectPro, { name: FORM_TAG_NAME, methodNames: ['reload'] });
 export default ElTreeSelectPro;

@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 1,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/tabs',
     ideusage: {
       idetype: 'container',
       structured: true,

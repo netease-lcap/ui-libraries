@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 6,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/page-header',
   })
   @Component({
     title: '页头',

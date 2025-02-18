@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite';
 import path from 'path';
 import fs from 'fs-extra';
+import * as glob from 'glob';
 import { createVuePlugin as vue2 } from '@lcap/vite-plugin-vue2';
 import { createGenScopedName, lcapPlugin } from '@lcap/builder';
 import autoprefixer from 'autoprefixer';
@@ -12,6 +13,11 @@ process.env.TZ = 'Asia/Shanghai';
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
   const componentVars = fs.readJSONSync('./src/styles/variables/vars.json');
+  const designs = glob.sync(['./design/*/index.ts']).reduce((map, n) => {
+    const name = n.split('/')[1];
+    map[`design/${name}`] = n;
+    return map;
+  }, {});
 
   return {
     plugins: [
@@ -36,7 +42,9 @@ export default defineConfig(({ command }) => {
         i18n: {},
         modules: {
           entries: {
+            ...designs,
             install: 'src/install',
+            extend: 'src/extend',
           },
         },
         reportCSSInfo: {

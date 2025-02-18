@@ -19,6 +19,7 @@ declare namespace nasl.ui {
     ignore?: boolean;
     extends?: Array<string | { name: string, excludes?: string[] }>;
     order?: number;
+    sourceDocURL?: string,
     ideusage?: {
       order?: number; /* 组件排序，默认 6 */
       idetype?: 'element' | 'modal' | 'popover' | 'container' | string;

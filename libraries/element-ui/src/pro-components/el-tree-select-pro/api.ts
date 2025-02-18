@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 6,
+    sourceDocURL: 'https://tdesign.tencent.com/vue/components/tree-select',
     ideusage: {
       idetype: 'container',
       events: {
@@ -42,6 +43,12 @@ namespace nasl.ui {
     V,
     M extends nasl.core.Boolean,
   > extends ViewComponent {
+    @Method({
+      title: '重新加载',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void {}
+
     constructor(options?: Partial<ElTreeSelectProOptions<T, V, M>>) {
       super();
     }

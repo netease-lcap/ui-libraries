@@ -15,5 +15,5 @@ export const ElUploadPro = registerComponent(Upload, plugins, {
   },
 });
 
-export const ElFormUploadPro = WithFormItem(ElUploadPro, { name: FORM_TAG_NAME });
+export const ElFormUploadPro = WithFormItem(ElUploadPro, { name: FORM_TAG_NAME, methodNames: ['triggerUpload', 'uploadFiles'] });
 export default ElUploadPro;

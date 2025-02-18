@@ -324,7 +324,14 @@ export default function transform(tsCode: string, framework: string): astTypes.V
               // 枚举类型生成选项
               if (['EnumSelectSetter', 'CapsulesSetter'].includes(prop?.setter?.concept)) {
                 // 因为converter里有'join:|'，所有这里的分割前后需要空格
-                const types = prop?.tsType.split(' | ').map((type) => type.replace(/(\'|\")/g, '').trim());
+                const types = prop?.tsType.split(' | ').map((type) => {
+                  try {
+                    return eval(type.trim());
+                  } catch (e) {
+                  }
+
+                  return undefined;
+                });
                 // @ts-ignore
                 prop?.setter?.options = prop?.setter?.options?.map((option: any, idx) => {
                   if (option.if) {
@@ -338,11 +345,6 @@ export default function transform(tsCode: string, framework: string): astTypes.V
 
                   let value: any = types[idx];
 
-                  if (value === 'true') {
-                    value = true;
-                  } else if (value === 'false') {
-                    value = false;
-                  }
                   return {
                     ...option,
                     value,

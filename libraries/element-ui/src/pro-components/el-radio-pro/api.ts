@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 5,
+    sourceDocURL: 'https://tdesign.tencent.com/vue/components/radio',
     ideusage: {
       idetype: 'container',
       structured: true,

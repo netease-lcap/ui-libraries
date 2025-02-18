@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 4,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/card',
   })
   @Component({
     title: '卡片',

@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 4,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/container',
     ideusage: {
       idetype: "container",
       childAccept: "['el-header', 'el-aside', 'el-footer', 'el-main', 'el-container'].includes(target.tag)",

@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
+    sourceDocURL: 'https://tdesign.tencent.com/vue/components/select',
     ideusage: {
       idetype: 'container',
       structured: true,
@@ -44,6 +45,12 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class ElSelectPro<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    @Method({
+      title: '重新加载',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void {}
+
     constructor(options?: Partial<ElSelectProOptions<T, V, P, M, C>>) {
       super();
     }

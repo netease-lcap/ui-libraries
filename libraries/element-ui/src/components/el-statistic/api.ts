@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 13,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/statistic',
     "ideusage": {
       "idetype": "container",
       forceUpdateWhenAttributeChange: true,

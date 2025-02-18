@@ -10,6 +10,7 @@ import {
   generateComponentFile,
   generateThemeFile,
   forkComponent,
+  setAllAPI,
 } from '../overload';
 
 const semver = require('semver');
@@ -40,6 +41,7 @@ export default async (rootPath, { fork, component, prefix }) => {
     await generateComponentFile(context);
     await generateThemeFile(context);
     await forkComponent(context);
+    await setAllAPI(context);
     resetIdeVersion(context);
     logger.success('重载组件成功');
   } catch (e) {

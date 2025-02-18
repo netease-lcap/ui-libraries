@@ -1,9 +1,11 @@
-import { orderBy, unionBy } from 'lodash';
+import { orderBy, unionBy, uniqueId } from 'lodash';
 import type { NaslComponentPluginOptions, PluginMap, PluginInitOptions } from './types';
 import { getPropDefs, PropDef } from './utils';
 
 export default class PluginManager {
   name: string = ''; // 组件名称
+
+  key: string = '';
 
   valid: boolean = true;
 
@@ -21,6 +23,7 @@ export default class PluginManager {
       return;
     }
     this.name = name || componentOptions.name;
+    this.key = `${this.name}__HOC_${uniqueId()}`;
     this.baseProps = getPropDefs(componentOptions);
     this.basePropKeys = this.baseProps.map((p) => p.name);
     this.setPlugin(plugin);

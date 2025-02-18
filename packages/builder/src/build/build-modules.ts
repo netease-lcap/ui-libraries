@@ -165,8 +165,12 @@ async function viteBuildModules(options: BuildModulesOptions, components: Compon
       },
       rollupOptions: {
         external,
+        treeshake: {
+          moduleSideEffects: options.moduleSideEffects || ((id) => id.includes('node_modules')),
+        },
         output: {
           format: 'es',
+          hoistTransitiveImports: false,
           chunkFileNames: '_chunks/dep-[hash].mjs',
         },
       },
@@ -191,7 +195,7 @@ async function viteBuildModules(options: BuildModulesOptions, components: Compon
   buildConfig.plugins.push({
     name: 'vite:lcap-collect-export',
     renderChunk(_, chunk) {
-      if (!exportsMap[chunk.name]) {
+      if (!Array.isArray(exportsMap[chunk.name])) {
         return;
       }
 

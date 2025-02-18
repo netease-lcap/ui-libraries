@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 6,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/badge',
     ideusage: {
       idetype: 'element',
       editable: "text",

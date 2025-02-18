@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 1,
+    sourceDocURL: 'https://tdesign.tencent.com/vue/components/form',
     ideusage: {
       idetype: 'container',
       structured: true,

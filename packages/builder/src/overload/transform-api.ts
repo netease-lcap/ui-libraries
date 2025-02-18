@@ -4,14 +4,27 @@ import * as babelTypes from '@babel/types';
 import generate from '@babel/generator';
 import traverse from '@babel/traverse';
 import { OverloadComponentContext } from './context';
-import { upperFirst } from 'lodash';
 import { LCAP_UI_PATH } from './constants';
+import { addPrefix } from './utils';
 
-function addPrefix(name, prefix) {
-  return upperFirst(prefix.toLowerCase()) + name;
+const TEMP_IDEUSAGE_VAR_NAME = '_TEMP_VAR';
+
+function getAST(obj: any) {
+  const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${JSON.stringify(obj)};`;
+  const tempAST = babel.parseSync(code);
+  let ast;
+  if (tempAST) {
+    traverse(tempAST, {
+      VariableDeclarator(p) {
+        if (p.node.id.type === 'Identifier' && p.node.id.name === TEMP_IDEUSAGE_VAR_NAME && p.node.init) {
+          ast = p.node.init;
+        }
+      }
+    });
+  }
+
+  return ast;
 }
-
-const TEMP_IDEUSAGE_VAR_NAME = '_tempIdeusage';
 
 export function transformAPITs(tsCode, context: OverloadComponentContext, all: boolean = false) {
   const ast = babel.parse(tsCode, {
@@ -95,7 +108,7 @@ export function transformAPITs(tsCode, context: OverloadComponentContext, all: b
     },
     ClassDeclaration(path) {
       if (path.node.superClass && path.node.id && path.node.id.type === 'Identifier' && path.node.superClass.type === 'Identifier' && path.node.superClass.name === 'ViewComponent') {
-        if (path.node.id.name !== context.naslUIConfig.name && !all) {
+        if (path.node.id.name !== context.naslUIConfig.name && !all && (!context.isWithForm || path.node.id.name !== context.withFormName)) {
           path.remove();
           return;
         }
@@ -162,28 +175,47 @@ export function transformAPITs(tsCode, context: OverloadComponentContext, all: b
           }
 
           const config = context.findNaslUIConfig(className);
-          if (config && config.ideusage) {
-            const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${JSON.stringify(config.ideusage)};`;
-            const tempAST = babel.parseSync(code);
-            if (tempAST) {
-              traverse(tempAST, {
-                VariableDeclarator(p) {
-                  if (p.node.id.type === 'Identifier' && p.node.id.name === TEMP_IDEUSAGE_VAR_NAME && p.node.init && p.node.init.type === 'ObjectExpression') {
-                    properties.push({
-                      type: 'ObjectProperty',
-                      key: {
-                        type: 'Identifier',
-                        name: 'ideusage',
-                      },
-                      value: p.node.init,
-                      computed: false,
-                      shorthand: false,
-                    });
-                  }
-                }
-              });
+          ['ideusage', 'extends'].forEach((key) => {
+            if (!config || !config[key]) {
+              return;
             }
-          }
+
+            try {
+              let obj = config[key];
+              if (key === 'extends' && Array.isArray(obj)) {
+                obj = obj.map((ext) => {
+                  if (typeof ext === 'string' || ext === context.naslUIConfig.name) {
+                    return context.name;
+                  }
+
+                  if (typeof ext === 'object' && ext.name === context.naslUIConfig.name) {
+                    return {
+                      ...ext,
+                      name: context.name,
+                    };
+                  }
+
+                  return ext;
+                });
+              }
+              const ast = getAST(obj);
+              if (!ast) {
+                return;
+              }
+              properties.push({
+                type: 'ObjectProperty',
+                key: {
+                  type: 'Identifier',
+                  name: key,
+                },
+                value: ast,
+                computed: false,
+                shorthand: false,
+              });
+            } catch (e) {
+            }
+
+          });
 
           decorators.unshift({
             type: 'Decorator',
@@ -201,7 +233,7 @@ export function transformAPITs(tsCode, context: OverloadComponentContext, all: b
           });
         }
       } else if (path.node.id && path.node.id.type === 'Identifier' && path.node.superClass && path.node.superClass.type === 'Identifier' && path.node.superClass.name === 'ViewComponentOptions') {
-        if (path.node.id.name !== `${context.naslUIConfig.name}Options` && !all) {
+        if (path.node.id.name !== `${context.naslUIConfig.name}Options` && !all && (!context.isWithForm || path.node.id.name !== `${context.withFormName}Options`)) {
           path.remove();
           return;
         }

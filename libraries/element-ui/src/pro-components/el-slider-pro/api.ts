@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 9,
+    sourceDocURL: 'https://tdesign.tencent.com/vue/components/slider',
   })
   @Component({
     title: '滑块',
