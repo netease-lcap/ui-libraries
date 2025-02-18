@@ -22,11 +22,20 @@ function transformAPITsFile(context: OverloadComponentContext) {
   fs.writeFileSync(filePath, code, 'utf-8');
 }
 
+function getBaseIdeVersion(context: OverloadComponentContext) {
+  if (context.libInfo.name === '@lcap/element-ui') {
+    return '3.13';
+  }
+
+  return '3.10';
+}
+
 function resetIdeVersion(context: OverloadComponentContext) {
   const pkgPath = path.resolve(context.rootPath, 'package.json');
   const pkg = fs.readJSONSync(pkgPath);
-  if (!pkg.lcapIdeVersion || !semver.valid(`${pkg.lcapIdeVersion}.0`) || semver.lt(`${pkg.lcapIdeVersion}.0`, '3.10.0')) {
-    pkg.lcapIdeVersion = '3.10';
+  const baseIdeVersion = getBaseIdeVersion(context);
+  if (!pkg.lcapIdeVersion || !semver.valid(`${pkg.lcapIdeVersion}.0`) || semver.lt(`${pkg.lcapIdeVersion}.0`, `${baseIdeVersion}.0`)) {
+    pkg.lcapIdeVersion = baseIdeVersion;
     fs.writeJSONSync(pkgPath, pkg, { spaces: 2 });
   }
 }
