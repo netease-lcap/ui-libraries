@@ -54,7 +54,7 @@ export const Example1 = {
     template: `
     <div>
       {{activeName}}
-      <el-input ref="yref" type="text"    v-model="activeName" clearable  @click="handleClick" ></el-input>
+      <el-input ref="yref" type="text"     clearable  @click="handleClick" ></el-input>
     </div>
     `,
   }),
