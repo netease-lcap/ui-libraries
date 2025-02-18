@@ -701,7 +701,7 @@ namespace nasl.ui {
         options: [{ title: '行拖拽' }, { title: '关闭拖拽' }],
       },
     })
-    dragSort: 'row' | 'false' = 'false';
+    dragSort: 'row' | 'disabled' = 'disabled';
 
     // @Prop({
     //   group: '主要属性',
