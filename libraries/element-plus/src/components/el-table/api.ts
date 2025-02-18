@@ -907,7 +907,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       parentAccept: "['el-table'].includes(target.tag)",
-      childAccept: false,
+      // childAccept: false,
       selector: 'multiple',
 
       slotInlineStyle: {
