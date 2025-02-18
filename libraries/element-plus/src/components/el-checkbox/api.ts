@@ -172,11 +172,11 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
 
-    // @Slot({
-    //   title: '多选项内容',
-    //   description: '多选项内容',
-    // })
-    // slotItem: (current: Current<T>) => Array<ViewComponent>;
+    @Slot({
+      title: '多选项内容',
+      description: '多选项内容',
+    })
+    slotItem: (current: Current<T>) => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({
