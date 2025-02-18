@@ -99,6 +99,12 @@ export default {
 .root tbody > tr:hover td {
     background-color: var(--table-view-row-hover-background);
 }
+.root[striped] tbody > tr:nth-of-type(even):hover{
+    background-color: var(--table-view-row-hover-background);
+}
+.root[striped] tbody > tr:nth-of-type(even):hover td {
+    background-color: var(--table-view-row-hover-background);
+}
 
 /* .root tbody > tr:first-child:hover > td::before {
     display: none;
