@@ -120,7 +120,8 @@ export function handlePage(props, { useState, childrenRef }) {
   const showTotal = props.get('showTotal');
   const showJumper = props.get('showJumper');
   const ref = props.get('ref');
-  const style = props.get('style');
+  const nodepath = props.get('data-nodepath');
+  const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
   const [currentPage, setpage, currentPageProps] = useControllableValue(
     props,
     {
@@ -144,18 +145,20 @@ export function handlePage(props, { useState, childrenRef }) {
       layout,
     },
     ref,
+    [$deletePropsList]: deletePropsList,
     pagination,
     render: (props, { attrs, expose, slots }) => {
       return [
-        <div style={style}>
+        <div data-nodepath={nodepath} style={props.style}>
           <Component ref={childrenRef} {...omit({ ...props, ...attrs }, ['style'])} v-slots={slots} />
           <ElConfigProvider locale={zhCn}>
             {props.pagination && (
-              <ElPagination
-                {...props.pageProps}
-                style={{ float: 'right', marginTop: '8px' }}
-                total={props.pageProps.total}
-              />
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
+                <ElPagination
+                  {...props.pageProps}
+                  total={props.pageProps.total}
+                />
+              </div>
             )}
           </ElConfigProvider>
         </div>,
