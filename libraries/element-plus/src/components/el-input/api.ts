@@ -5,8 +5,8 @@ namespace nasl.ui {
     order: 2,
     ideusage: {
       idetype: 'element',
-      "additionalAttribute": {
-        "autofocus": "\"false\""
+      additionalAttribute: {
+        autofocus: '"false"',
       },
       selector: {
         expression: 'this',
@@ -24,7 +24,6 @@ namespace nasl.ui {
     constructor(options?: Partial<ElInputOptions>) {
       super();
     }
-
   }
 
   export class ElInputOptions extends ViewComponentOptions {
@@ -40,28 +39,13 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '类型',
-      description:
-        '输入框类型。可选项：text/url/tel/password/search/submit/hidden',
+      description: '输入框类型。可选项：text/url/tel/password/search/submit/hidden',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '文本' },
-          { title: '链接' },
-          { title: '电话' },
-          { title: '密码' },
-          { title: '搜索' },
-          { title: '隐藏' },
-        ],
+        options: [{ title: '文本' }, { title: '链接' }, { title: '电话' }, { title: '密码' }, { title: '搜索' }],
       },
     })
-
-    type:
-      | 'text'
-      | 'url'
-      | 'tel'
-      | 'password'
-      | 'search'
-      | 'hidden' = 'text';
+    type: 'text' | 'url' | 'tel' | 'password' | 'search' = 'text';
 
     @Prop({
       group: '交互属性',
@@ -90,8 +74,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '格式化',
-      description:
-        '指定输入框展示值的格式。注意 `type=number` 时请勿使用，此功能建议更为使用 `InputNumber` 组件。',
+      description: '指定输入框展示值的格式。注意 `type=number` 时请勿使用，此功能建议更为使用 `InputNumber` 组件。',
       setter: {
         concept: 'AnonymousFunctionSetter',
       },
@@ -101,8 +84,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: 'css类名',
-      description:
-        't-input 同级类名，示例："name1 name2 name3" 或 `["name1", "name2"]` 或 `[{ "name1": true }]`。',
+      description: 't-input 同级类名，示例："name1 name2 name3" 或 `["name1", "name2"]` 或 `[{ "name1": true }]`。',
       setter: { concept: 'InputSetter' },
     })
     private inputClass: any;
@@ -132,8 +114,7 @@ namespace nasl.ui {
     @Prop<ElInputOptions, 'maxlength'>({
       group: '主要属性',
       title: '最大文本长度',
-      description:
-        '用户最多可以输入的文本长度，一个中文等于一个计数长度。默认为空，不限制输入长度。',
+      description: '用户最多可以输入的文本长度，一个中文等于一个计数长度。默认为空，不限制输入长度。',
       setter: { concept: 'NumberInputSetter', min: 0 },
       // if: _ => !_.maxcharacter
     })
@@ -163,7 +144,6 @@ namespace nasl.ui {
     })
     readonly: nasl.core.Boolean;
 
-
     // @Prop<ElInputProOptions, 'showLimitNumber'>({
     //   group: '主要属性',
     //   title: '显示字数统计',
@@ -179,11 +159,7 @@ namespace nasl.ui {
       description: '输入框尺寸。可选项：small/medium/large。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '小' },
-          { title: '中等' },
-          { title: '大' },
-        ],
+        options: [{ title: '小' }, { title: '中等' }, { title: '大' }],
       },
     })
     size: 'small' | 'default' | 'large' = 'default';
@@ -195,8 +171,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     private spellCheck: nasl.core.Boolean = false;
-
-
 
     // @Prop({
     //   group: '主要属性',
@@ -249,7 +223,7 @@ namespace nasl.ui {
       description:
         '输入框值发生变化时触发。参数 `trigger=initial` 表示传入的数据不符合预期，组件自动处理后触发 change 告知父组件。如：初始值长度超过 `maxlength` 限制',
     })
-    onChange: (event: nasl.core.String) => any;
+    onInput: (event: nasl.core.String) => any;
 
     @Event({
       title: '清空按钮点击时',
@@ -274,12 +248,6 @@ namespace nasl.ui {
       description: '中文输入开始时触发',
     })
     onCompositionstart: (event: any) => any;
-
-    @Event({
-      title: '回车键按下时',
-      description: '回车键按下时触发',
-    })
-    onEnter: (event: any) => any;
 
     @Event({
       title: '获得焦点时',
@@ -384,8 +352,6 @@ namespace nasl.ui {
     // slotDefault: () => Array<ViewComponent>;
   }
 
-
-
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
@@ -398,16 +364,22 @@ namespace nasl.ui {
       forceRefresh: 'parent',
       namedSlotOmitWrapper: ['label'],
     },
-    extends: [{
-      name: 'ElFormItemPro',
-      excludes: [
-        'slotDefault', 'useRangeValue',
-        'startFieldName', 'endFieldName',
-        'startInitialValue', 'endInitialValue',
-      ],
-    }, {
-      name: 'ElInput',
-    }],
+    extends: [
+      {
+        name: 'ElFormItemPro',
+        excludes: [
+          'slotDefault',
+          'useRangeValue',
+          'startFieldName',
+          'endFieldName',
+          'startInitialValue',
+          'endInitialValue',
+        ],
+      },
+      {
+        name: 'ElInput',
+      },
+    ],
   })
   @Component({
     title: '表单输入框',
@@ -415,12 +387,12 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormInput extends ViewComponent {
-    constructor(options?: Partial<ElFormInputOptions & ElFormItemProOptions & Omit<ElInputOptions, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<ElFormInputOptions & ElFormItemProOptions & Omit<ElInputOptions, keyof ElFormItemProOptions>>,
+    ) {
       super();
     }
   }
 
-  export class ElFormInputOptions extends ViewComponentOptions {
-
-  }
+  export class ElFormInputOptions extends ViewComponentOptions {}
 }

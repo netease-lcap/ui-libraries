@@ -56,6 +56,42 @@ export function handleRules(props, { useState, useEffect, useMemo }) {
   };
 }
 
+function getStyles(style: Record<string, string> = {}) {
+  const rootStyle = {};
+  const inputStyle = {};
+  Object.keys(style).forEach((key) => {
+    const attrName = _.camelCase(key);
+    if (
+      [
+        'margin',
+        'marginLeft',
+        'marginRight',
+        'marginBottom',
+        'marginTop',
+        'position',
+        'left',
+        'right',
+        'bottom',
+        'top',
+        'display',
+        'flex',
+        'order',
+        'visibility',
+        'zIndex',
+        'boxSizing',
+        'flexGrow',
+        'flexShrink',
+        'flexBasis',
+        'alignSelf',
+      ].includes(attrName)
+    ) {
+      rootStyle[key] = style[key];
+    } else {
+      inputStyle[key] = style[key];
+    }
+  });
+  return { rootStyle, inputStyle };
+}
 export function withFormItem(Component, name) {
   return {
     name,
@@ -69,6 +105,7 @@ export function withFormItem(Component, name) {
       const componentRef = ref({});
       const myRef = ref({});
       const prop = computed(() => props.prop ?? propName);
+      const styleProps = computed(() => getStyles(props.inputStyle));
       const rules = computed(() => {
         const rules = props.rules ?? [];
         return rules.map((item) => {
@@ -107,6 +144,7 @@ export function withFormItem(Component, name) {
             {..._.pick(props, formItemProps)}
             rules={rules.value}
             prop={prop.value}
+            style={styleProps.value.rootStyle}
             v-slots={{
               label: slots.label,
             }}
@@ -114,6 +152,7 @@ export function withFormItem(Component, name) {
             <Component
               {..._.omit(props, formItemProps)}
               {...attrs}
+              style={styleProps.value.inputStyle}
               onUpdate:modelValue={(value) => {
                 formProvide.value.setValue({
                   ...formProvide.value.value,

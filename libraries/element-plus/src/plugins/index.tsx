@@ -1,8 +1,6 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import {
-  ref, Ref, watch, provide, inject, markRaw,
-} from 'vue';
+import { ref, Ref, watch, provide, inject, markRaw } from 'vue';
 import create from 'zustand-vue';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
@@ -64,9 +62,7 @@ export function registerComponet(Component, options) {
     //   };
     // },
 
-    setup(props, {
-      attrs, slots, emit, expose,
-    }) {
+    setup(props, { attrs, slots, emit, expose }) {
       const componentRef = ref(null);
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
@@ -88,7 +84,7 @@ export function registerComponet(Component, options) {
           provide: {},
           ref: {},
           childrenRef: {},
-          [$deletePropsList]: ['provide', 'childrenRef', 'inject', 'render',  'slots', 'emit'],
+          [$deletePropsList]: ['provide', 'childrenRef', 'inject', 'render', 'slots', 'emit', $deletePropsList],
         },
 
         // ...attrs,
@@ -176,12 +172,12 @@ export function registerComponet(Component, options) {
           const storeKey = _.uniqueId('storeKey');
           const fiber = isMount
             ? {
-              workInProgressState: null,
-              workInProgressEffect: null,
-              useStore,
-              setValue,
-              storeKey,
-            }
+                workInProgressState: null,
+                workInProgressEffect: null,
+                useStore,
+                setValue,
+                storeKey,
+              }
             : fiberMap.get(handleFn);
           const localUseState = _.bind(useState, fiber, isMount);
           const localUseEffect = _.bind(useEffect, fiber, isMount);
@@ -211,6 +207,7 @@ export function registerComponet(Component, options) {
       watch(
         () => [props, attrs, slots, emit],
         ([props, attrs, slots, emit]) => {
+          console.log(props, 'props', attrs);
           setValue({
             ..._.filterUnderfinedValue(props),
             ..._.filterUnderfinedValue(attrs),
