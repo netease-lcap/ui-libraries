@@ -58,7 +58,7 @@ export const Example1 = {
     template: `
     <div>
       {{activeName}}
-      <el-input v-bind="attrs" ></el-input>
+      <el-input v-model="activeName"  ></el-input>
     </div>
     `,
   }),

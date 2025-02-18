@@ -1,6 +1,8 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import { ref, Ref, watch, provide, inject, markRaw } from 'vue';
+import {
+  ref, Ref, watch, provide, inject, markRaw,
+} from 'vue';
 import create from 'zustand-vue';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
@@ -62,7 +64,9 @@ export function registerComponet(Component, options) {
     //   };
     // },
 
-    setup(props, { attrs, slots, emit, expose }) {
+    setup(props, {
+      attrs, slots, emit, expose,
+    }) {
       const componentRef = ref(null);
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
@@ -76,17 +80,18 @@ export function registerComponet(Component, options) {
       let queen: any[] = [];
       const useStore = create((set) => ({
         state: {
-          ...props,
-          ...attrs,
-          emit,
-          slots,
           inject: injectRef,
           provide: {},
           ref: {},
           childrenRef: {},
           [$deletePropsList]: ['provide', 'childrenRef', 'inject', 'render', 'slots', 'emit', $deletePropsList],
         },
-
+        props: {
+          ...props,
+          ...attrs,
+          emit,
+          slots,
+        },
         // ...attrs,
         // emit,
         setvalue: (commit, tr) => {
@@ -172,12 +177,12 @@ export function registerComponet(Component, options) {
           const storeKey = _.uniqueId('storeKey');
           const fiber = isMount
             ? {
-                workInProgressState: null,
-                workInProgressEffect: null,
-                useStore,
-                setValue,
-                storeKey,
-              }
+              workInProgressState: null,
+              workInProgressEffect: null,
+              useStore,
+              setValue,
+              storeKey,
+            }
             : fiberMap.get(handleFn);
           const localUseState = _.bind(useState, fiber, isMount);
           const localUseEffect = _.bind(useEffect, fiber, isMount);
@@ -194,30 +199,37 @@ export function registerComponet(Component, options) {
         }, ImmutableProps);
       }
       useStore.subscribe((props: any, pre) => {
-        const ImmutableProps = imMap(props.state);
-        const commitState = scheduler(pluginHooks, ImmutableProps.merge({ render: Component }), componentRef);
+        const ImmutableProps = imMap({ ...props.props, ...props.state });
+        const ImmutableCommit = ImmutableProps.merge({ render: Component });
+        const commitState = scheduler(pluginHooks, ImmutableCommit, componentRef);
         const commitJsState = commitState.toJS();
         render.value = commitJsState.render;
-        Object.assign(mystate.value.state, _.omit(commitJsState, ['render']));
-        console.log(commitJsState, 'commitJsState');
-        console.log(commitJsState.ref, 'commitJsState.ref');
+        // Object.assign(mystate.value.state, _.omit(commitJsState, ['render']));
+        mystate.value.state = _.omit(commitJsState, ['render']);
         Object.assign(myRef.value, commitJsState.ref);
         Object.assign(provideRef.value, commitJsState.provide);
       });
       watch(
         () => [props, attrs, slots, emit],
         ([props, attrs, slots, emit]) => {
-          console.log(props, 'props', attrs);
-          setValue({
-            ..._.filterUnderfinedValue(props),
-            ..._.filterUnderfinedValue(attrs),
-            // ...props,
-            // ...attrs,
-            slots,
-            emit,
-          });
+          // setValue({
+          //   ..._.filterUnderfinedValue(props),
+          //   ..._.filterUnderfinedValue(attrs),
+          //   // ...props,
+          //   // ...attrs,
+          //   slots,
+          //   emit,
+          // });
+          setValue((state) => ({
+            props: {
+              ...props,
+              ...attrs,
+              emit,
+              slots,
+            },
+          }));
           const expandProps = useStore() as any;
-          _.defaults(mystate.value.state, expandProps.state);
+          // _.defaults(mystate.value.state, expandProps.state);
           Object.assign(myRef.value, expandProps.state.ref);
         },
         { deep: true, immediate: true },
@@ -228,40 +240,14 @@ export function registerComponet(Component, options) {
       expose(myRef.value);
 
       provide($provide, provideRef);
-      // [1, 2, 3].forEach((el) => {
-      //   provide(`provide${el}`, `mypro${el}`);
-      // });
-      // [1, 2, 3].forEach((el) => {
-      //   const a = inject(`provide${el}`);
-      //   console.log(a, 'loginject');
-      // });
-      // const RenderComponent = markRaw(mystate.value.state.render ?? Component);
 
       const RenderComponent = render.value ?? Component;
 
       return () => {
-        // const expandProps = useStore() as any;
-        // if (mystate.value.state.name === 'formItem') {
-        //   console.log(mystate.value.state, 'mystate.value.state');
-        // }
-        console.log(
-          _.omit(mystate.value.state, [...mystate.value.state[$deletePropsList]]),
-          'mystate.value.state',
-          emit,
-        );
         return (
           <RenderComponent
-            {..._.omit(mystate.value.state, [...mystate.value.state[$deletePropsList]])}
-            // {..._.pick(mystate.value.state, Object.keys(RenderComponent.props))}
+            {..._.omit(mystate.value.state, mystate.value.state[$deletePropsList])}
             v-slots={{ ...slots, ..._.get(mystate, 'value.state.slots', {}) }}
-            // onInput={(el) => {
-            //   if (injectRef) {
-            // setTimeout(() => {
-            // injectRef.value.mystate.state.model.input = el;
-            // }, 10);
-            // }
-            // }}
-            // v-on={emit}
             ref={componentRef}
           />
         );
