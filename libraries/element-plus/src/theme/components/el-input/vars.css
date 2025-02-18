@@ -1,0 +1,81 @@
+/**
+ * @component el-input
+ */
+.el-textarea,
+.el-input {
+  /**
+   * @desc 文字颜色
+   * @type color
+   */
+  --el-input-text-color: var(--el-text-color-regular);
+  /**
+   * @desc 输入框边框
+   * @type input
+   */
+  --el-input-border: var(--el-border);
+  /**
+   * @desc 悬浮边框颜色
+   * @type input
+   */
+  --el-input-hover-border: var(--el-border-color-hover);
+  /**
+   * @desc 聚焦边框颜色
+   * @type input
+   */
+  --el-input-focus-border: var(--el-color-primary);
+  /**
+   * @desc 透明边框
+   * @type input
+   */
+  --el-input-transparent-border: 0 0 0 1px transparent inset;
+  /**
+   * @desc 边框颜色
+   * @type input
+   */
+  --el-input-border-color: var(--el-border-color);
+  /**
+   * @desc 边框圆角
+   * @type input
+   */
+  --el-input-border-radius: var(--el-border-radius-base);
+  /**
+   * @desc 背景颜色
+   * @type input
+   */
+  --el-input-bg-color: var(--el-fill-color-blank);
+  /**
+   * @desc 图标颜色
+   * @type input
+   */
+  --el-input-icon-color: var(--el-text-color-placeholder);
+  /**
+   * @desc 占位符颜色
+   * @type input
+   */
+  --el-input-placeholder-color: var(--el-text-color-placeholder);
+  /**
+   * @desc 悬浮边框颜色
+   * @type input
+   */
+  --el-input-hover-border-color: var(--el-border-color-hover);
+  /**
+   * @desc 清除图标颜色
+   * @type input
+   */
+  --el-input-clear-hover-color: var(--el-text-color-secondary);
+  /**
+   * @desc 聚焦边框颜色
+   * @type input
+   */
+  --el-input-focus-border-color: var(--el-color-primary);
+  /**
+   * @desc 输入框宽度
+   * @type input
+   */
+  --el-input-width: 100%;
+  /**
+   * @desc 输入框高度
+   * @type input
+   */
+  --el-input-height: var(--el-component-size);
+}

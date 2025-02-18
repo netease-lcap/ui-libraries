@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 16,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/skeleton',
     "ideusage": {
       "idetype": "container",
       "structured": "template",

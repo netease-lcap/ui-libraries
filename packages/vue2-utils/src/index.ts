@@ -27,6 +27,8 @@ export {
   $deletePropList,
   $ref,
   $render,
+  RenderBaseComponent,
+  RENDER_COMPONENT_KEY,
 } from './plugins';
 export {
   useSyncState,

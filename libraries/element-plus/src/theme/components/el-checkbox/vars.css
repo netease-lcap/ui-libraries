@@ -1,0 +1,100 @@
+/**
+ * @component el-checkbox
+ */
+.el-checkbox {
+  /**
+   * @desc 字体大小
+   * @type size
+   */
+  --el-checkbox-font-size: 14px;
+  /**
+   * @desc 字体权重
+   * @type input
+   */
+  --el-checkbox-font-weight: var(--el-font-weight-primary);
+  /**
+   * @desc 文字颜色
+   * @type color
+   */
+  --el-checkbox-text-color: var(--el-text-color-regular);
+  /**
+   * @desc 多选框高度
+   * @type size
+   */
+  --el-checkbox-input-height: 14px;
+  /**
+   * @desc 多选框宽度
+   * @type size
+   */
+  --el-checkbox-input-width: 14px;
+  /**
+   * @desc 多选框圆角
+   * @type size
+   */
+  --el-checkbox-border-radius: var(--el-border-radius-small);
+  /**
+   * @desc 多选框背景颜色
+   * @type color
+   */
+  --el-checkbox-bg-color: var(--el-fill-color-blank);
+  /**
+   * @desc 多选框边框
+   * @type input
+   */
+  --el-checkbox-input-border: var(--el-border);
+  /**
+   * @desc 多选框禁用边框颜色
+   * @type color
+   */
+  --el-checkbox-disabled-border-color: var(--el-border-color);
+  /**
+   * @desc 多选框禁用背景颜色
+   * @type color
+   */
+  --el-checkbox-disabled-input-fill: var(--el-fill-color-light);
+  /**
+   * @desc 多选框禁用图标颜色
+   * @type color
+   */
+  --el-checkbox-disabled-icon-color: var(--el-text-color-placeholder);
+  /**
+   * @desc 多选框选中背景颜色
+   * @type color
+   */
+  --el-checkbox-disabled-checked-input-fill: var(--el-border-color-extra-light);
+  /**
+   * @desc 多选框禁用选中边框颜色
+   * @type color
+   */
+  --el-checkbox-disabled-checked-input-border-color: var(--el-border-color);
+  /**
+   * @desc 多选框禁用选中图标颜色
+   * @type color
+   */
+  --el-checkbox-disabled-checked-icon-color: var(--el-text-color-placeholder);
+  /**
+   * @desc 多选框选中文字颜色
+   * @type color
+   */
+  --el-checkbox-checked-text-color: var(--el-color-primary);
+  /**
+   * @desc 多选框选中边框颜色
+   * @type color
+   */
+  --el-checkbox-checked-input-border-color: var(--el-color-primary);
+  /**
+   * @desc 多选框选中背景颜色
+   * @type color
+   */
+  --el-checkbox-checked-bg-color: var(--el-color-primary);
+  /**
+   * @desc 多选框选中图标颜色
+   * @type color
+   */
+  --el-checkbox-checked-icon-color: var(--el-color-white);
+  /**
+   * @desc 多选框悬浮边框颜色
+   * @type color
+   */
+  --el-checkbox-input-border-color-hover: var(--el-color-primary);
+}

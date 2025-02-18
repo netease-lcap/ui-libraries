@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 7,
+    sourceDocURL: 'https://tdesign.tencent.com/vue/components/checkbox',
     ideusage: {
       idetype: "container",
       structured: true,

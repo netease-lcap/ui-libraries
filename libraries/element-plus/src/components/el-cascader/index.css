@@ -1,0 +1,6 @@
+.el-cascader .el-input__wrapper.el-input__wrapper {
+  padding: 1px 10px;
+}
+.el-cascader .el-input__inner.el-input__inner {
+  padding: 0;
+}

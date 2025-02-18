@@ -6,7 +6,7 @@
    * @desc 日历边框样式
    * @type border
    */
-  --calendar-border: var(--table-border);
+  --calendar-border: 1px solid var(--border-color-lighter);
 
   /**
    * @desc 选中日期的背景颜色

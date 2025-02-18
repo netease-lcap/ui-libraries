@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
+    sourceDocURL: 'https://tdesign.tencent.com/vue/components/input',
     ideusage: {
       idetype: 'element',
       "additionalAttribute": {

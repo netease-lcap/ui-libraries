@@ -15,6 +15,6 @@ export const ElTransferPro = registerComponent(Transfer, plugins, {
   },
 });
 
-export const ElFormTransferPro = WithFormItem(ElTransferPro, { name: FORM_TAG_NAME });
+export const ElFormTransferPro = WithFormItem(ElTransferPro, { name: FORM_TAG_NAME, methodNames: ['reload'] });
 
 export default ElTransferPro;

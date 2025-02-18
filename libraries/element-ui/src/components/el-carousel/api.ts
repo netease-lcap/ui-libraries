@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 7,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/carousel',
     ideusage: {
       idetype: 'container',
       structured: true,

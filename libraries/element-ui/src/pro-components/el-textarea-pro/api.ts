@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 4,
+    sourceDocURL: 'https://tdesign.tencent.com/vue/components/textarea',
     ideusage: {
       idetype: 'element',
       "additionalAttribute": {

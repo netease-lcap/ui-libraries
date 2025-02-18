@@ -1,0 +1,7 @@
+.el-iframe {
+  position: relative;
+}
+.el-iframe iframe {
+  width: 100%;
+  height: 100%;
+}

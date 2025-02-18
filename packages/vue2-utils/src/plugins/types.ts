@@ -22,6 +22,7 @@ export declare type Slots = Readonly<InternalSlots>;
 export interface PluginSetUpContext {
   h: CreateElement;
   isDesigner: boolean;
+  extendComponent?: ComponentOptions<any>;
   $router: any;
   setupContext: SetupContext;
   getVNode: () => VNode;

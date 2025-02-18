@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 3,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/button',
     ideusage: {
       idetype: "element",
       editable: "text",

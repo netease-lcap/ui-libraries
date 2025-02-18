@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 8,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/descriptions',
     ideusage: {
       "idetype": "container",
       "structured": true,

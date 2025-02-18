@@ -4,10 +4,12 @@ import path from 'path';
 import { kebabCase, upperFirst } from 'lodash';
 import type { ViewComponentDeclaration } from '@nasl/types/nasl.ui.ast';
 import type { ThemeComponentConfig, ThemeConfig } from '../build/gens/gen-theme-config';
-import { LCAP_UI_JSON_PATH, LCAP_UI_PACKAGE_PATH } from './constants';
+import { LCAP_UI_JSON_PATH, LCAP_UI_PACKAGE_PATH, LCAP_UI_CONFIG_PATH } from './constants';
 import { type ModulesInfo } from '../plugins/lcap-use-nasl-ui';
+import { getWithFormName, isWithForm } from './utils';
 
 export interface NaslUIComponentConfig extends ViewComponentDeclaration {
+  sourceDocURL?: string;
   ideusage?: any;
   show?: boolean;
   ignore?: boolean;
@@ -23,6 +25,10 @@ export interface OverloadComponentContext {
   name: string;
   tagName: string;
   framework: string;
+  libInfo: {
+    name: string;
+    version: string;
+  };
   pkgComponentFolderPath: string;
   componentFolderPath: string;
   uiPkgName: string;
@@ -35,6 +41,8 @@ export interface OverloadComponentContext {
   replaceNameMap: Record<string, string>;
   replaceTagMap: Record<string, string>;
   themeConfig: ThemeComponentConfig;
+  isWithForm: boolean;
+  withFormName: string;
   findNaslUIConfig: (name: string | ((c: NaslUIComponentConfig) => boolean)) => NaslUIComponentConfig | null;
 }
 
@@ -56,7 +64,7 @@ function getComponentFloderPath(rootPath, component, framework, apiMap?: Record<
     return path.resolve(rootPath, LCAP_UI_PACKAGE_PATH, apiMap[component], '../');
   }
 
-  const pkg = fs.readJSONSync(path.resolve(rootPath, '.lcap/lcap-ui/package/package.json'));
+  const pkg = fs.readJSONSync(path.resolve(rootPath, LCAP_UI_PACKAGE_PATH, 'package.json'));
   if (pkg.name === 'cloud-ui.vusion' || pkg.name === '@lcap/pc-ui') {
     if (component === 'UToastSingle') {
       component = 'UToast';
@@ -145,12 +153,13 @@ function getThemeConfig(rootPath, component) {
 
 export function getOverloadComponentContext(rootPath, { component, prefix, fork }) {
   const env = getProjectContext(rootPath);
-  const configPath = path.resolve(rootPath, '.lcap/lcap-ui/runtime/nasl.ui.json');
+  const configPath = path.resolve(rootPath, LCAP_UI_CONFIG_PATH);
   const lcapUIConfigPath = path.resolve(rootPath, LCAP_UI_JSON_PATH);
   if (!fs.existsSync(configPath) || !fs.existsSync(lcapUIConfigPath) || !env) {
     throw new Error('unfound nasl config path .lcap/lcap-ui/runtime/nasl.ui.json, please execute command \'lcap install\' ');
   }
 
+  const pkg = fs.readJSONSync(path.resolve(rootPath, LCAP_UI_PACKAGE_PATH, 'package.json'));
   const configList = fs.readJSONSync(configPath);
   const lcapUIConfig = fs.readJSONSync(lcapUIConfigPath);
   const comp = configList.find((it) => it.name === component);
@@ -177,10 +186,16 @@ export function getOverloadComponentContext(rootPath, { component, prefix, fork 
     pkgName: env.name,
     framework: env.framework,
     type: env.type,
+    libInfo: {
+      name: pkg.name,
+      version: pkg.version,
+    },
     pkgComponentFolderPath: getComponentFloderPath(rootPath, component, env.framework, modulesInfo?.api),
     componentFolderPath: path.resolve(rootPath, `src/components/${tagName}`),
     fork,
     prefix,
+    isWithForm: isWithForm(comp),
+    withFormName: getWithFormName(comp.name),
     ...getReleaceMap(comp, env.framework, prefix),
     themeConfig: getThemeConfig(rootPath, env.framework.startsWith('vue') ? kebabCase(component) : component),
     findNaslUIConfig: (compName: string | ((c: NaslUIComponentConfig) => boolean)) => {

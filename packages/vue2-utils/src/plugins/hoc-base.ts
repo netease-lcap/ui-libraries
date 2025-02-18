@@ -1,4 +1,4 @@
-import type { CreateElement, VNode } from 'vue';
+import type { CreateElement, VNode, RenderContext } from 'vue';
 import {
   defineComponent,
   isRef,
@@ -11,10 +11,12 @@ import {
   onBeforeUnmount,
   SetupContext,
   ref,
+  getCurrentInstance,
 } from '@vue/composition-api';
 import {
   camelCase, isFunction, kebabCase, lowerFirst, upperFirst,
 } from 'lodash';
+import { type FunctionalComponentOptions } from 'vue/types/umd';
 import PluginManager from './plugin';
 import { MapGetKey, PluginSetUpContext, PluginSetupRef } from './types';
 import {
@@ -30,6 +32,11 @@ import {
   isNullOrUndefined,
   getEventName,
   cloneShallowVNodeData,
+  mergeClass,
+  mergeStyle,
+  getComponentOptions,
+  getPropKeys,
+  getEventKey,
 } from './utils';
 import { $deletePropList, $ref, $render } from './constants';
 
@@ -55,9 +62,29 @@ const useInitRefMap = (keys: any) => {
   return map;
 };
 
-const useSetRefParent = (refMap: any, mapGet: any, $methodNames: string[], ctx: SetupContext) => {
+const useSetRefParent = (refMap: any, mapGet: any, $methodNames: string[], ctx: SetupContext, extendComponent?: any) => {
   const refKeys: string[] = [];
+
+  if (extendComponent) {
+    const extendComponentOptions = getComponentOptions(extendComponent);
+    if (extendComponentOptions.expose && Array.isArray(extendComponentOptions.expose) && extendComponentOptions.expose.length > 0) {
+      extendComponentOptions.expose.forEach((key: string) => {
+        refKeys.push(key);
+        Object.defineProperty(ctx.parent, key, {
+          configurable: true,
+          get() {
+            return (ctx.refs.$extend as any)[key];
+          },
+        });
+      });
+    }
+  }
+
   Object.keys(refMap[$ref]).forEach((key) => {
+    if (refKeys.indexOf(key) !== -1) {
+      return;
+    }
+
     if (key === 'props' && refMap[$ref].props) {
       refMap[$ref].props.forEach((prop: string) => {
         refKeys.push(prop);
@@ -110,7 +137,7 @@ const useSetRefParent = (refMap: any, mapGet: any, $methodNames: string[], ctx: 
   });
 };
 
-const usePropMap = (props: any, ctx: SetupContext) => {
+const usePropMap = (props: any, ctx: SetupContext, extendComponent?: any) => {
   let setupEnded = false;
   const endRefMap: HocBaseRefMap = {
     [$ref]: {
@@ -235,7 +262,7 @@ const usePropMap = (props: any, ctx: SetupContext) => {
   const callSetupEnd = (refMap: HocBaseRefMap) => {
     setupEnded = true;
     Object.assign(endRefMap, refMap);
-    useSetRefParent(refMap, mapGet, props.$methodNames || [], ctx);
+    useSetRefParent(refMap, mapGet, props.$methodNames || [], ctx, extendComponent);
   };
 
   return {
@@ -342,7 +369,23 @@ const toRenderState = ({
   };
 };
 
-export default function createHocComponent(baseComponent: any, manger: PluginManager) {
+export const RENDER_COMPONENT_KEY = '__RENDER_COMPONENT_KEY__';
+
+export const RenderBaseComponent: FunctionalComponentOptions = {
+  name: 'RenderBaseComponent',
+  functional: true,
+  inject: [RENDER_COMPONENT_KEY],
+  render(h, context) {
+    if (!context.injections[RENDER_COMPONENT_KEY]) {
+      return h('div', { style: { color: 'red' } }, '组件未在 HOC 中使用；');
+    }
+
+    const { renderComponent } = context.injections[RENDER_COMPONENT_KEY] as any;
+    return renderComponent(context);
+  },
+};
+
+export default function createHocComponent(baseComponent: any, manger: PluginManager, extendComponent?: any) {
   const extendPropKeys = manger.getPluginPropKeys([]);
   const propOptions = extendPropKeys.reduce((n: any, key) => {
     n[key] = {};
@@ -351,6 +394,17 @@ export default function createHocComponent(baseComponent: any, manger: PluginMan
 
   return defineComponent({
     name: `${upperFirst(camelCase(manger.name))}HOC`,
+    ...(extendComponent ? {
+      provide() {
+        return {
+          [RENDER_COMPONENT_KEY]: {
+            name: `${upperFirst(camelCase(manger.name))}`,
+            renderComponent: this.renderComponent,
+            getBaseComponentInstance: this.getBaseComponentInstance,
+          },
+        };
+      },
+    } : {}),
     inheritAttrs: false,
     props: {
       $slotNames: {
@@ -375,15 +429,16 @@ export default function createHocComponent(baseComponent: any, manger: PluginMan
       const propKeys = manger.basePropKeys;
       const keys = manger.allPropKeys;
       const eventNames: string[] = (props.$eventNames || []) as string[];
-      const vueInstance: any = ctx.root;
+      const vueInstance: any = getCurrentInstance()?.proxy;
       const isDesigner = inject('VUE_APP_DESIGNER', false) || (vueInstance.$env && vueInstance.$env.VUE_APP_DESIGNER);
       let refMap = useInitRefMap(keys);
-      const { callSetupEnd, createPropsControl } = usePropMap(props, ctx);
+      const { callSetupEnd, createPropsControl } = usePropMap(props, ctx, extendComponent);
       const setups = manger.getPluginSetup(isDesigner);
 
       const pluginSetUpContext: PluginSetUpContext = {
         h: vueInstance.$createElement,
         $router: vueInstance.$router,
+        extendComponent: extendComponent ? getComponentOptions(extendComponent) : undefined,
         isDesigner,
         setupContext: ctx,
         getVNode: () => ctx.parent.$vnode,
@@ -431,6 +486,144 @@ export default function createHocComponent(baseComponent: any, manger: PluginMan
         },
       };
     },
+    methods: {
+      getBaseComponentInstance() {
+        return this.$refs.$base;
+      },
+      renderComponent(context: RenderContext) {
+        const h = this.$createElement;
+        const {
+          props,
+          listeners,
+          scopedSlots,
+          childrenNodes,
+        } = this.getRenderContext(context);
+
+        const propsData = this.getRenderPropsData(props, listeners, scopedSlots);
+
+        propsData.class = mergeClass(propsData.class, context.data);
+        propsData.style = mergeStyle(propsData.style, context.data);
+
+        // 移除 extendComponent 的 props
+        if (extendComponent) {
+          const extendComponentPropKeys = getPropKeys(getComponentOptions(extendComponent));
+          const attrs = propsData.attrs || {};
+          extendComponentPropKeys.forEach((key) => {
+            delete attrs[key];
+            delete attrs[kebabCase(key)];
+          });
+        }
+
+        if (context.data.staticStyle) {
+          propsData.staticStyle = {
+            ...(propsData.staticStyle || {}),
+            ...context.data.staticStyle,
+          };
+        }
+
+        const resultVNode = h(baseComponent, propsData, childrenNodes);
+
+        return this.$render(resultVNode, h, {
+          props,
+          listeners,
+          scopedSlots,
+          childrenNodes,
+          propsData: cloneShallowVNodeData(propsData),
+        });
+      },
+      getRenderContext(context?: RenderContext) {
+        const h = this.$createElement;
+        const {
+          props,
+          listeners,
+          slots,
+        } = this.$state;
+
+        const extendPropsMap = extendPropKeys.reduce((n: Record<string, any>, key: string) => {
+          n[key] = this[key];
+
+          return n;
+        }, {});
+
+        const scopedSlots: any = {
+          ...this.$scopedSlots,
+          ...getRefValueMap(slots),
+          ...context?.scopedSlots,
+        };
+
+        const childrenNodes: VNode[] = [];
+        (this.$slotNames as string[]).forEach((slotName) => {
+          if (scopedSlots[slotName]) {
+            const nodes = scopedSlots[slotName]({});
+            [slotName, kebabCase(slotName), camelCase(slotName)].forEach((name) => {
+              delete scopedSlots[name];
+            });
+
+            if (isEmptyVNodes(nodes)) {
+              return;
+            }
+
+            childrenNodes.push(
+              h('template', { slot: slotName }, normalizeArray(nodes)),
+            );
+          }
+        });
+
+        const refProps: any = {
+          ...this.$attrs,
+          ...extendPropsMap,
+          ...getRefValueMap(props),
+          ...context?.props,
+        };
+
+        const refListeners = {
+          ...this.$listeners,
+          ...getRefValueMap(listeners),
+          ...context?.listeners,
+        };
+
+        Object.keys(refProps).forEach((key) => {
+          if (!eventRegex.test(key)) {
+            return;
+          }
+
+          const eventName = getEventName(key);
+
+          if (eventName && refProps[key] && refListeners[eventName]) {
+            delete refListeners[eventName];
+            if (context && context.listeners[eventName]) {
+              refProps[getEventKey(eventName)] = context.listeners[eventName];
+            }
+          }
+        });
+
+        return {
+          props: refProps,
+          listeners: refListeners,
+          scopedSlots,
+          childrenNodes,
+        };
+      },
+      getRenderPropsData(refProps: any, refListeners: any, scopedSlots: any) {
+        const {
+          deletePropsKeys,
+          allPropsKeys,
+          propKeys,
+        } = this.$state;
+        const propsData = {
+          ...splitPropsAndAttrs(refProps, propKeys, allPropsKeys, deletePropsKeys),
+          ...splitListeners(refListeners, this.$nativeEvents as string[], getEventKeys(deletePropsKeys)),
+          scopedSlots,
+          ref: '$base',
+        };
+
+        if (isFunction(propsData.nativeOn.focus) || isFunction(propsData.nativeOn.blur)) {
+          propsData.attrs.tabindex = propsData.attrs.tabindex || '0';
+        }
+
+        return propsData;
+      },
+    },
     render(h) {
       if (!this.$state) {
         return null;
@@ -439,73 +632,29 @@ export default function createHocComponent(baseComponent: any, manger: PluginMan
       const {
         props,
         listeners,
-        slots,
-        deletePropsKeys,
-        allPropsKeys,
-        propKeys,
-      } = this.$state;
-
-      const extendPropsMap = extendPropKeys.reduce((n: Record<string, any>, key: string) => {
-        n[key] = this[key];
-
-        return n;
-      }, {});
-
-      const scopedSlots: any = {
-        ...this.$scopedSlots,
-        ...getRefValueMap(slots),
-      };
-
-      const childrenNodes: VNode[] = [];
-      (this.$slotNames as string[]).forEach((slotName) => {
-        if (scopedSlots[slotName]) {
-          const nodes = scopedSlots[slotName]({});
-          [slotName, kebabCase(slotName), camelCase(slotName)].forEach((name) => {
-            delete scopedSlots[name];
-          });
-
-          if (isEmptyVNodes(nodes)) {
-            return;
-          }
-
-          childrenNodes.push(
-            h('template', { slot: slotName }, normalizeArray(nodes)),
-          );
-        }
-      });
-
-      const refProps: any = { ...this.$attrs, ...extendPropsMap, ...getRefValueMap(props) };
-      const refListeners = { ...this.$listeners, ...getRefValueMap(listeners) };
-
-      Object.keys(refProps).forEach((key) => {
-        if (!eventRegex.test(key)) {
-          return;
-        }
-
-        const eventName = getEventName(key);
-
-        if (eventName && refProps[key] && refListeners[eventName]) {
-          delete refListeners[eventName];
-        }
-      });
-
-      const propsData = {
-        ...splitPropsAndAttrs(refProps, propKeys, allPropsKeys, deletePropsKeys),
-        ...splitListeners(refListeners, this.$nativeEvents as string[], getEventKeys(deletePropsKeys)),
         scopedSlots,
-        ref: '$base',
-      };
+        childrenNodes,
+      } = this.getRenderContext();
 
-      if (isFunction(propsData.nativeOn.focus) || isFunction(propsData.nativeOn.blur)) {
-        propsData.attrs.tabindex = propsData.attrs.tabindex || '0';
+      if (extendComponent) {
+        return h(extendComponent, {
+          ref: '$extend',
+          attrs: {
+            ...props,
+          },
+          on: {
+            ...listeners,
+          },
+          scopedSlots,
+        }, childrenNodes);
       }
-
+      const propsData = this.getRenderPropsData(props, listeners, scopedSlots);
       const contextPropsData = cloneShallowVNodeData(propsData);
       const resultVNode = h(baseComponent, propsData, childrenNodes);
 
       return this.$render(resultVNode, h, {
-        props: refProps,
-        listeners: refListeners,
+        props,
+        listeners,
         scopedSlots,
         childrenNodes,
         propsData: contextPropsData,

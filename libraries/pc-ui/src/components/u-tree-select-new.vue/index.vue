@@ -600,6 +600,9 @@ export default {
             if (!this.currentDataSource.load)
                 return;
             this.currentDataSource.load(params).then(() => {
+                if(!Array.isArray(this.currentDataSource.data) || this.currentDataSource.data.length === 0) {
+                  return;
+                }
                 this.dataSourceNodeList = this.handleDataSourceObj(this.currentDataSource.data, 'dataSource');
                 this.dataSourceObj = { ...this.dataSourceNodeList, ...this.virtualNodeList };
             });

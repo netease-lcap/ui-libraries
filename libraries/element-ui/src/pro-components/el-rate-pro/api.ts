@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 8,
+    sourceDocURL: 'https://tdesign.tencent.com/vue/components/rate',
     ideusage: {
       idetype: 'element',
       additionalAttribute: {

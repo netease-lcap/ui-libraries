@@ -66,6 +66,11 @@ export default function genNaslUIConfig({
       framework,
     });
 
+    const projectAssetPath = 'assets';
+    if (componentConfig.icon && componentConfig.icon.indexOf('.') !== -1 && fs.existsSync(path.join(rootPath, projectAssetPath, componentConfig.icon))) {
+      componentConfig.icon = `${assetsPublicPath}/${libInfo}/${projectAssetPath}/${componentConfig.icon}`;
+    }
+
     if (componentConfig) {
       componentConfigs.push(componentConfig);
     }

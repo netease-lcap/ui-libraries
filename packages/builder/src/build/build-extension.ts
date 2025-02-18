@@ -113,6 +113,14 @@ async function buildSourceZip(root) {
   await zipDir(root, 'source.zip', files);
 }
 
+function getDefaultFrameworkUI(root) {
+  const pkg = fs.readJSONSync(path.resolve(root, 'package.json'));
+  if (pkg.lcap && pkg.lcap['lcap-ui'] && pkg.lcap['lcap-ui'].pkgName === '@lcap/element-ui') {
+    return 'ElementUI';
+  }
+  return undefined;
+}
+
 export async function buildNaslExtensionConfig(options: LcapBuildOptions) {
   logger.start('开始生成 nasl.extension.json...');
   const { config: naslExtensionConfig, viewComponents } = await genNaslExtensionConfig({
@@ -120,7 +128,7 @@ export async function buildNaslExtensionConfig(options: LcapBuildOptions) {
     rootPath: options.rootPath,
     framework: options.framework,
     i18n: options.i18n,
-    frameworkUI: options.frameworkUI,
+    frameworkUI: options.frameworkUI || getDefaultFrameworkUI(options.rootPath),
   });
 
   const naslConfigPath = path.join(options.rootPath, 'nasl.extension.json');

@@ -257,7 +257,7 @@ export default createComponent({
     value: {
       handler(val) {
         // 将外部值转内部值
-        this.innerValue = this.formatValue(val)
+        this.innerValue = this.formatValue(val);
       },
       immediate: true,
     },
@@ -274,11 +274,31 @@ export default createComponent({
         try {
           if (!value || value === '') {
             value = new Date();
+          } else if (typeof value === 'string' && !value.includes('T') && !value.includes(':')) {
+            let temp = value;
+            const arr = temp.split('-');
+
+            if (['month', 'year'].includes(this.unit) && arr.length < 3) {
+              temp = arr.concat(new Array(3 - arr.length).fill('01')).join('-');
+            }
+
+            temp = temp.replace(/-/g, '/');
+
+            if (temp.split('/').length === 2) {
+              temp = temp.replace('/', '-');
+            }
+            value = new Date(temp);
           } else {
             value = new Date(value);
           }
         } catch (e) {
           console.warn(e, 'error date');
+          const arr = value.split('-');
+          if (arr.length === 1 && this.unit === 'year' && value.length === 4) {
+            value = `${value}-01-01`;
+          } else if (arr.length === 2 && this.unit === 'month') {
+            value = `${value}-01`;
+          }
           // 可能是2020/08这种格式，低版本iOS不兼容
           value = new Date(value.replace('/', '-'));
         }

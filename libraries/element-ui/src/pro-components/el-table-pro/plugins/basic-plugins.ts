@@ -19,6 +19,7 @@ export const useUpdateSync = createUseUpdateSync([{ name: 'selectedRowKeys', eve
 export const useTable: NaslComponentPluginOptions = {
   props: ['onPageChange', 'page', 'pageSize', 'pageSizeOptions', 'showTotal', 'showJumper', 'treeDisplay', 'virtual'],
   setup(props, ctx) {
+    console.log('============table render===========');
     const current = props.useRef('page', (v) => v ?? 1);
     const pageSize = props.useRef('pageSize', (v) => v ?? 10);
     const rowKey = (props.get('rowKey') || 'id') as string;
@@ -83,6 +84,8 @@ export const useTable: NaslComponentPluginOptions = {
         if (_.isEqual(value, oldValue)) return;
         const [autoMergeFields, data] = value;
         if (_.isEmpty(autoMergeFields) || _.isEmpty(data)) return;
+        console.log(data, '===data');
+
         data.forEach((item, index) => {
           _.forEach(autoMergeFields, (field) => {
             let rowspan = 1;
@@ -90,10 +93,11 @@ export const useTable: NaslComponentPluginOptions = {
               const isPreMerge = _.get(item, `rowspan.${field.colKey}`);
               const dataFieldValue = _.get(data[i], field.colKey);
               const itemFieldValue = _.get(item, field.colKey);
-              if (isPreMerge || dataFieldValue !== itemFieldValue) break;
+              if (dataFieldValue !== itemFieldValue) break;
               rowspan++;
               item.rowspan = _.merge(item.rowspan, { [field.colKey]: true });
             }
+
             item.rowspan = _.merge(item.rowspan, { [field.colKey]: rowspan });
           });
         });
@@ -260,6 +264,7 @@ export const useTable: NaslComponentPluginOptions = {
         },
       },
       [$render](resultVNode, h, context) {
+        console.log('=========== table========');
         const vnodes = ctx.setupContext.slots?.default?.();
         const columns = renderSlot(vnodes);
         autoMergeFields.value = columns?.filter?.((item) => item.autoMerge) ?? [];

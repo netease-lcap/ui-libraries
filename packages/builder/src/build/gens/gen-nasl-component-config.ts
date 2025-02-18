@@ -165,10 +165,13 @@ export default function genNaslComponentConfig({
   return component;
 }
 
-export function processComponentConfigExtends(components: NaslUIComponentConfig[]) {
+export function processComponentConfigExtends(components: NaslUIComponentConfig[], lcapUIComponents: any[] = []) {
   components.map((c) => {
     const arr = [c];
-    arr.push(...c.children);
+    if (Array.isArray(c.children)) {
+      arr.push(...c.children);
+    }
+
     return arr;
   }).flat().filter((c) => Array.isArray(c.extends) && c.extends.length > 0).forEach((component) => {
     const extendList = (component.extends || []).map((exd) => {
@@ -187,7 +190,7 @@ export function processComponentConfigExtends(components: NaslUIComponentConfig[
         return;
       }
 
-      const exdComp = getComponentConfigByName(name, components);
+      const exdComp = getComponentConfigByName(name, [...components, ...lcapUIComponents]);
       if (!exdComp || (exdComp.extends && exdComp.extends.length > 0)) {
         logger.warn(`找不到 ${component.name} 继承的组件 ${name} 的配置`);
         return;

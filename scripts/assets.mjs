@@ -41,6 +41,8 @@ const libraries = [
   'libraries/mobile-ui',
   'libraries/pc-ui',
   'libraries/element-ui',
+  'libraries/element-plus',
+  'libraries/vant',
 ];
 
 libraries.forEach((libPath) => {
@@ -54,7 +56,7 @@ libraries.forEach((libPath) => {
   copyFolder(`${packageDir}/dist-theme`, `${destDir}/dist-theme`);
   console.log(chalk.green(`复制 ${libPath}/dist-theme`));
 
-  globSync([`${packageDir}/src/**/screenshots`, `${packageDir}/src/**/drawings`, `${packageDir}/src-vusion/**/screenshots`, `${packageDir}/src-vusion/**/drawings`]).forEach(p => {
+  globSync([`${packageDir}/assets`, `${packageDir}/src/**/screenshots`, `${packageDir}/src/**/drawings`, `${packageDir}/src-vusion/**/screenshots`, `${packageDir}/src-vusion/**/drawings`]).forEach(p => {
     const dir = p.substring(packageDir.length + 1);
     copyFolder(p, `${destDir}/${dir}`);
   });

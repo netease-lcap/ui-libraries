@@ -1,0 +1,15 @@
+/**
+ * @component el-form
+ */
+.el-form {
+  /**
+   * @desc 标签字体大小
+   * @type size
+   */
+  --el-form-label-font-size: var(--el-font-size-base);
+  /**
+   * @desc 行内内容宽度
+   * @type size
+   */
+  --el-form-inline-content-width: 220px;
+}

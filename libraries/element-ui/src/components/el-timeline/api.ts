@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 11,
+    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/timeline',
     ideusage: {
       idetype: "container",
       structured: true,
