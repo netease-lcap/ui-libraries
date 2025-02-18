@@ -63,6 +63,7 @@ export const Example1 = {
           },
         ];
       };
+      const width = ref('501px');
       const mytable = ref();
       const currentPage = ref(1);
       const pageSize2 = ref(5);
@@ -77,15 +78,17 @@ export const Example1 = {
       watch(selectedRowKeys, (el) => {
         console.log(el, 'log');
       });
-      // setTimeout(() => {
-      //   console.log(selectedRowKeys,'selectedRowKeys');
-      // }, 1000);
+      setTimeout(() => {
+        width.value = '1000px';
+        console.log('object');
+      }, 1000);
       return {
         tableData,
         pageSize2,
         currentPage,
         mytable,
         selectedRowKeys,
+        width,
       };
     },
     template: `
@@ -97,7 +100,7 @@ row-key="name"
 v-model:currentPage="currentPage"
 v-model:pageSize="pageSize2"
 :showTotal="true"
-style="width: 500px"
+:style="{'width':width}"
 :sorting="{ field: 'six.name', order: 'desc' }"
 :showJumper="true"
 :pageSizes="[10,100, 200, 300, 400]"

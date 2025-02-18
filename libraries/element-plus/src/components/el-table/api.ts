@@ -492,7 +492,7 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
       if: (_) => _.pagination !== false,
     })
-    showTotal: nasl.core.Boolean = true;
+    showTotal: nasl.core.Boolean = false;
 
     @Prop<ElTableOptions<T, V, P, M>, 'showJumper'>({
       group: '数据属性',
@@ -501,7 +501,7 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
       if: (_) => _.pagination !== false,
     })
-    showJumper: nasl.core.Boolean = true;
+    showJumper: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '数据属性',
