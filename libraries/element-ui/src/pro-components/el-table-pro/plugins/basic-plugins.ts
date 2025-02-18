@@ -69,7 +69,7 @@ export const useTable: NaslComponentPluginOptions = {
         childrenField: 'children',
       });
     });
-    const dragSort = props.useComputed('dragSort', (value) => (value === 'false' ? undefined : value));
+    const dragSort = props.useComputed('dragSort', (value) => (value === 'disabled' ? undefined : value));
     const autoMergeFields = ref([]);
     const rowspanAndColspan = ({ row, col }) => {
       return row?.rowspan?.[col.colKey] > 1
