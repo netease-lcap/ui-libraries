@@ -503,17 +503,40 @@ namespace nasl.ui {
     })
     showJumper: nasl.core.Boolean = true;
 
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '初始化排序规则',
+    //   description: '设置数据初始化时的排序字段和顺序规则',
+    //   docDescription: '支持选择数据表格数据源中的某一条数据，配置默认排序规则，支持升序和降序',
+    // })
+    // sorting: {
+    //   field: nasl.core.String;
+    //   order: nasl.core.String;
+    //   compare?: Function;
+    // } = { field: undefined, order: 'desc' };
+
     @Prop({
       group: '数据属性',
-      title: '初始化排序规则',
-      description: '设置数据初始化时的排序字段和顺序规则',
+      title: '初始化排序字段',
+      description: '设置数据初始化时的排序字段',
       docDescription: '支持选择数据表格数据源中的某一条数据，配置默认排序规则，支持升序和降序',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
     })
-    sorting: {
-      field: nasl.core.String;
-      order: nasl.core.String;
-      compare?: Function;
-    } = { field: undefined, order: 'desc' };
+    field: nasl.core.String;
+
+    @Prop({
+      group: '数据属性',
+      title: '初始化排序顺序',
+      description: '设置数据初始化时的排序顺序',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '升序' }, { title: '降序' }],
+      },
+    })
+    order: 'asc' | 'desc';
+
     // @Prop({
     //   group: '主要属性',
     //   title: 'Pagination Affixed Bottom',

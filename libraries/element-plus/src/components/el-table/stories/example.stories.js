@@ -65,7 +65,7 @@ export const Example1 = {
       };
       const mytable = ref();
       const currentPage = ref(1);
-      const pageSize2 = ref(10);
+      const pageSize2 = ref(5);
       const selectedRowKeys = ref([
         {
           date: '2016-05-07',
@@ -97,6 +97,7 @@ row-key="name"
 v-model:currentPage="currentPage"
 v-model:pageSize="pageSize2"
 :showTotal="true"
+style="width: 500px"
 :sorting="{ field: 'six.name', order: 'desc' }"
 :showJumper="true"
 :pageSizes="[10,100, 200, 300, 400]"
