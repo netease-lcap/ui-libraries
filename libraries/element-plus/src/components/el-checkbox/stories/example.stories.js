@@ -187,9 +187,12 @@ export const Example2 = {
     },
     template: `
     <div>
-      <el-checkbox-group  valueField="entity1.property1" textField="entity1.property1" :dataSource="dataSource" >
+      <el-checkbox-group  :dataSource="[{},{},{},{}]" >
         <el-checkbox label="Option1" value="Value1" />
         <el-checkbox label="Option2" value="Value2" />
+        <template #item=" item ">
+          <el-text text="item.entity1.property1"  @click="handleClick(item)"/>
+        </template>
       </el-checkbox-group>
     </div>
 
