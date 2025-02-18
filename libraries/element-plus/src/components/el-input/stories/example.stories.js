@@ -58,7 +58,7 @@ export const Example1 = {
     template: `
     <div>
       {{activeName}}
-      <el-input v-model="activeName"  ></el-input>
+      <el-input v-model="activeName" data-nodepath="1234"  ></el-input>
     </div>
     `,
   }),

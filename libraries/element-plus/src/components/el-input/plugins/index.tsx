@@ -1,6 +1,9 @@
 /* eslint-disable no-shadow */
-import { watch, h, inject } from 'vue';
+import {
+  watch, h, inject, onMounted,
+} from 'vue';
 import _ from 'lodash';
+
 import { $deletePropsList } from '@/plugins/constants';
 // import { useFormItem } from 'element-plus/es/components/form/src/hooks/index';
 // import { formItemContextKey } from 'element-plus/es/components/form/src/constants';
@@ -13,8 +16,6 @@ export function handleValue(props, { useState, useEffect, useMemo }) {
   const propsValue = props.get('modelValue') || props.get('value') || value;
   const changeValue = props.get('modelValue') ? _.bind(emit, 'update:modelValue') : setValue;
   const onInputProps = props.get('onInput', () => {});
-  console.log(props.get('modelValue'), 'props.get(modelValue)');
-  console.log(props.get('value'), 'props.get(value)');
   return {
     onInput: _.wrap(onInputProps, (fn, value) => {
       _.attempt(fn, value);
@@ -23,5 +24,22 @@ export function handleValue(props, { useState, useEffect, useMemo }) {
     [$deletePropsList]: deletePropsList,
     modelValue: propsValue,
     formTagName: 'el-form-input',
+  };
+}
+
+export function handleNodePath(props, { useMemo, useEffect }) {
+  const nodePath = props.get('data-nodepath');
+  const myClass = props.get('class');
+  const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
+  const nodeId = useMemo(() => _.uniqueId('Input_'), []);
+  onMounted(() => {
+    const node = document.querySelector(`.${nodeId}`);
+    const inputParent = node?.closest('.el-input');
+    inputParent?.setAttribute('data-nodepath', nodePath);
+  });
+  return {
+    class: `${myClass} ${nodeId}`,
+    [$deletePropsList]: deletePropsList,
+
   };
 }
