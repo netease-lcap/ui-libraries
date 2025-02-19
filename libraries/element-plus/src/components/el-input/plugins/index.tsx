@@ -29,10 +29,9 @@ export function handleValue(props, { useState, useEffect, useMemo }) {
 
 export function handleNodePath(props, { useMemo, useEffect }) {
   const nodePath = props.get('data-nodepath');
-  const myClass = props.get('class');
+  const myClass = props.get('class', '');
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
   const nodeId = useMemo(() => _.uniqueId('Input_'), []);
-  console.log(nodeId, 'nodeId');
   useEffect(() => {
     nextTick(() => {
       const node = document.querySelector(`.${nodeId}`);

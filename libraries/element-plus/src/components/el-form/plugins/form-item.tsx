@@ -183,7 +183,7 @@ export function handleComponentInForm(props, { useMemo, useEffect }) {
       elem?.setAttribute('data-element-tag', formTagName);
       elem?.setAttribute('data-has-mutation', 'true');
     });
-  }, []);
+  }, [isInForm, nodePath]);
 }
 
 handleComponentInForm.order = 6;

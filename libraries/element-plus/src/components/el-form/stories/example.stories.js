@@ -188,7 +188,7 @@ export const Example3 = {
     },
     template: `<el-form size="small" ref="formRef" >
       <a @click="handleClick(formRef)">Submit</a> 
-      <el-form-input label="input1" data-nodepath="input1" v-model="inputName" :rules="rules" />
+      <el-input label="input2" data-nodepath="input2" v-model="inputName" :rules="rules" />
     </el-form>
     `,
   }),

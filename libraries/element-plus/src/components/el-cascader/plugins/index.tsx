@@ -74,7 +74,7 @@ export function handleCascaderProps(props) {
 
 export function handleNodePath(props, { useMemo, useEffect }) {
   const nodePath = props.get('data-nodepath');
-  const myClass = props.get('class');
+  const myClass = props.get('class', '');
   const nodeId = useMemo(() => _.uniqueId('Cascader_'), []);
   useEffect(() => {
     nextTick(() => {
