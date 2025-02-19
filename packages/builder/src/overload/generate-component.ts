@@ -14,6 +14,10 @@ function resetExports(componentFolderPath: string, name: string, exportNames: st
 
   let codes = fs.readFileSync(indexPath, 'utf-8').split('\n');
   codes = codes.map((code) => {
+    if (code.startsWith('export') && (code.includes(` ${name} `) || code.includes(` ${name}}`))) {
+      return `export { ${exportNames.join(', ')} } from './${kebabCase(name)}';`;
+    }
+
     if (code.startsWith('import') && code.includes(` ${name} `)) {
       return `import { ${exportNames.join(', ')} } from './${kebabCase(name)}';`;
     }
