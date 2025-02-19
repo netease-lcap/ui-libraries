@@ -137,6 +137,7 @@ export function handlePage(props, { useState, childrenRef }) {
     { useState },
   );
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
+  console.log(nodepath, 'nodepath==========');
   return {
     pageProps: {
       ...currentPageProps,
@@ -148,6 +149,7 @@ export function handlePage(props, { useState, childrenRef }) {
     [$deletePropsList]: deletePropsList,
     pagination,
     render: (props, { attrs, expose, slots }) => {
+      console.log('render=============');
       return [
         <div data-nodepath={nodepath} style={props.style}>
           <Component ref={childrenRef} {...omit({ ...props, ...attrs }, ['style'])} v-slots={slots} />

@@ -931,6 +931,7 @@ namespace nasl.ui {
       idetype: 'container',
       parentAccept: "['el-table'].includes(target.tag)",
       // childAccept: false,
+      useTemplateInDefaultSlot: true,
       selector: {
         expression: 'this',
         cssSelector: 'td',
