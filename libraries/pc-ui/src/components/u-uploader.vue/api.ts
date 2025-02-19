@@ -75,7 +75,7 @@ namespace nasl.ui {
         fileConnectionGroup: () => any;
 
         @Prop({
-            group: '数据属性',
+            group: '高级属性',
             title: '上传地址',
             description: '上传的 URL 地址',
             docDescription: '文件上传的URL地址，如/upload',
@@ -84,7 +84,7 @@ namespace nasl.ui {
         url: nasl.core.String;
 
         @Prop({
-            group: '数据属性',
+            group: '高级属性',
             title: '上传的文件字段',
             description: '上传的文件字段名，后端需要这个字段获取',
             docDescription: '默认file，支持自定义，后端通过该字段获取文件',
@@ -105,7 +105,7 @@ namespace nasl.ui {
         accept: nasl.core.String;
 
         @Prop({
-            group: '数据属性',
+            group: '高级属性',
             title: 'cookie值',
             description: '通过设置 withCredentials 为 true 获得的第三方 cookies，将会依旧享受同源策略',
             docDescription: '通过设置 withCredentials 为 true 获得的第三方 cookies，将会依旧享受同源策略',
@@ -116,14 +116,14 @@ namespace nasl.ui {
         withCredentials: nasl.core.Boolean = false;
 
         @Prop({
-            group: '数据属性',
+            group: '高级属性',
             title: '附加数据',
             docDescription: '补充描述',
         })
         data: object;
 
         @Prop({
-            group: '数据属性',
+            group: '高级属性',
             title: '列表数量上限',
             docDescription: '列表数量上限，默认为999',
             setter: {
@@ -143,7 +143,7 @@ namespace nasl.ui {
         maxSize: nasl.core.String;
 
         @Prop<UUploaderOptions, 'listType'>({
-            group: '数据属性',
+            group: '高级属性',
             title: '列表类型',
             docDescription: '列表的展示类型，支持使用文本、图片和卡片',
             setter: {
@@ -158,7 +158,7 @@ namespace nasl.ui {
         listType: 'text' | 'image' | 'card' = 'text';
 
         @Prop({
-            group: '数据属性',
+            group: '高级属性',
             title: 'URL 字段',
             description: '请求返回的 URL 字段名',
             docDescription: '请求返回的URL字段名',
@@ -166,7 +166,7 @@ namespace nasl.ui {
         urlField: nasl.core.String = 'url';
 
         @Prop<UUploaderOptions, 'fileIconSwitcher'>({
-            group: '主要属性',
+            group: '高级属性',
             title: '文件图标',
             description: '是否展示文件图标',
             docDescription: '是否展示文件图标',
@@ -183,7 +183,7 @@ namespace nasl.ui {
         private iconMap: Object = {'doc|docx':'file-doc','jpg|jpeg|png|bmp|gif|tiff|tif|webp|svg|psd|raw':'file-jpg',pdf:'file-pdf',xlsx:'file-xlxs',txt:'file-txt','ppt|pptx':'file-ppt',zip:'file-zip',csv:'file-csv'};
 
         @Prop<UUploaderOptions, 'fileType'>({
-            group: '主要属性',
+            group: '高级属性',
             title: '文件类型',
             docDescription: '列表的展示类型，支持使用文本、图片和卡片',
             setter: {
@@ -195,7 +195,7 @@ namespace nasl.ui {
         fileType: 'doc|docx' | 'jpg|jpeg|png|bmp|gif|tiff|tif|webp|svg|psd|raw' | 'pdf' | 'xlsx' | 'txt' | 'ppt|pptx' | 'zip' | 'csv' = 'doc|docx';
 
         @Prop<UUploaderOptions, 'fileIcon'>({
-            group: '主要属性',
+            group: '高级属性',
             title: '文件图标',
             docDescription: '支持从图标库选择图标或上传自定义图标。',
             setter: {
@@ -207,7 +207,7 @@ namespace nasl.ui {
         fileIcon: nasl.core.String;
 
         @Prop<UUploaderOptions, 'downloadIconSwitcher'>({
-            group: '主要属性',
+            group: '高级属性',
             title: '下载图标',
             description: '是否展示下载图标',
             docDescription: '是否展示下载图标',
@@ -219,7 +219,7 @@ namespace nasl.ui {
         downloadIconSwitcher: nasl.core.Boolean = true;
 
         @Prop<UUploaderOptions, 'downloadIcon'>({
-            group: '主要属性',
+            group: '高级属性',
             title: '下载图标',
             setter: {
                 concept: 'IconSetter',
@@ -229,7 +229,7 @@ namespace nasl.ui {
         downloadIcon: nasl.core.String = 'download';
 
         @Prop<UUploaderOptions, 'fileSize'>({
-            group: '主要属性',
+            group: '高级属性',
             title: '文件大小',
             description: '是否展示文件大小，单位小于1MB则展示KB，大于1MB则展示MB。',
             docDescription: '是否展示文件大小',
@@ -241,7 +241,7 @@ namespace nasl.ui {
         fileSize: nasl.core.Boolean = true;
 
         @Prop({
-            group: '主要属性',
+            group: '高级属性',
             title: '请求 headers',
             docDescription: '请求头',
         })
@@ -257,19 +257,20 @@ namespace nasl.ui {
         })
         multiple: nasl.core.Boolean = false;
 
-        @Prop({
+        @Prop<UUploaderOptions, 'multipleOnce'>({
             group: '主要属性',
-            title: '一次性上传多文件',
+            title: '调用一次节点上传多个文件',
             description: '利用原生 multipart/form-data 传输多个文件的能力，一次性上传多个文件',
             docDescription: '开启后支持一次性上传多个文件',
             setter: {
                 concept: 'SwitchSetter',
             },
+            if: _ => _.multiple === true,
         })
         multipleOnce: nasl.core.Boolean = false;
 
         @Prop<UUploaderOptions, 'openCropper'>({
-          group: '主要属性',
+          group: '高级属性',
           title: '启用图片裁剪',
           description: '设置是否启用图片裁剪功能，只对单文件上传有效',
           docDescription: '开启后支持对选择的图片进行裁剪后上传',
@@ -282,7 +283,7 @@ namespace nasl.ui {
         openCropper: nasl.core.Boolean = false;
 
         @Prop<UUploaderOptions, 'fixedCropper'>({
-            group: '主要属性',
+            group: '高级属性',
             title: '固定图片裁剪框大小',
             setter: {
                 concept: 'SwitchSetter',
@@ -292,7 +293,7 @@ namespace nasl.ui {
         fixedCropper: nasl.core.Boolean = false;
 
         @Prop<UUploaderOptions, 'cropperBoxWidth'>({
-            group: '主要属性',
+            group: '高级属性',
             title: '图片裁剪框宽度',
             setter: {
                 concept: 'NumberInputSetter',
@@ -302,7 +303,7 @@ namespace nasl.ui {
         cropperBoxWidth: nasl.core.Decimal | nasl.core.Integer = 200;
 
         @Prop<UUploaderOptions, 'cropperBoxHeight'>({
-            group: '主要属性',
+            group: '高级属性',
             title: '图片裁剪框高度',
             setter: {
                 concept: 'NumberInputSetter',
@@ -312,7 +313,7 @@ namespace nasl.ui {
         cropperBoxHeight: nasl.core.Decimal | nasl.core.Integer = 0;
 
         @Prop<UUploaderOptions, 'cropperPreviewShape'>({
-            group: '主要属性',
+            group: '高级属性',
             title: '图片裁剪框预览形状',
             setter: {
                 concept: 'EnumSelectSetter',
@@ -328,7 +329,7 @@ namespace nasl.ui {
         cropperPreviewShape: 'rect' | 'square' | 'circle' = 'circle';
 
         @Prop<UUploaderOptions, 'cropperTitle'>({
-            group: '主要属性',
+            group: '高级属性',
             title: '图片裁剪框标题',
             if: _ => _.openCropper === true && _.multiple !== true,
             implicitToString: true,
@@ -346,7 +347,7 @@ namespace nasl.ui {
         private autoUpload: nasl.core.Boolean = true;
 
         @Prop<UUploaderOptions, 'showFileList'>({
-            group: '主要属性',
+            group: '高级属性',
             title: '显示文件列表',
             docDescription: '开启后上传多个文件时，会显示文件列表，默认开启',
             setter: {
@@ -357,7 +358,7 @@ namespace nasl.ui {
         showFileList: nasl.core.Boolean = true;
 
         @Prop({
-            group: '主要属性',
+            group: '高级属性',
             title: '转换器',
             docDescription: '支持使用JSON或URL字符串',
             setter: {
@@ -368,7 +369,7 @@ namespace nasl.ui {
         converter: 'json' | 'simple' = 'json';
 
         @Prop({
-            group: '主要属性',
+            group: '高级属性',
             title: '展示方式',
             description: '行内展示，或块级换行展示',
             docDescription: '支持行内展示或块级换行展示',
@@ -400,7 +401,7 @@ namespace nasl.ui {
         showErrorMessage: nasl.core.Boolean = true;
 
         @Prop({
-            group: '主要属性',
+            group: '高级属性',
             title: '辅助文本',
             description: '辅助说明的文本信息',
             docDescription: '拖拽位置的文字指引',
@@ -432,7 +433,7 @@ namespace nasl.ui {
         access: 'public' | 'private';
 
         @Prop({
-            group: '主要属性',
+            group: '高级属性',
             title: '文件有效期',
             description: '是否开启文件有效期控制',
             docDescription: '支持配置文件自动清理，开启后可自定义上传后有效天数',
@@ -443,7 +444,7 @@ namespace nasl.ui {
         ttl: nasl.core.Boolean;
 
         @Prop<UUploaderOptions, 'ttlValue'>({
-            group: '主要属性',
+            group: '高级属性',
             title: '上传后有效天数',
             description: '文件上传后的有效期天数',
             docDescription: '开启文件有效期开关后显示，可配置文件自动清理的时间',
@@ -455,7 +456,7 @@ namespace nasl.ui {
         ttlValue: nasl.core.Decimal | nasl.core.Integer;
 
         @Prop({
-            group: '主要属性',
+            group: '高级属性',
             title: '源地址访问',
             description: '开启后支持通过文件存储源地址访问文件',
             docDescription: '开启后支持通过文件存储源地址访问文件',
