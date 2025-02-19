@@ -9,7 +9,7 @@ import { $deletePropsList } from '@/plugins/constants';
 // import { formItemContextKey } from 'element-plus/es/components/form/src/constants';
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
-export function handleValue(props, { useState, useEffect, useMemo }) {
+ function handleValue(props, { useState, useEffect, useMemo }) {
   const [value, setValue] = useState('');
   const emit = props.get('emit');
   const deletePropsList = props.get($deletePropsList).concat('value');
@@ -23,7 +23,7 @@ export function handleValue(props, { useState, useEffect, useMemo }) {
     }),
     [$deletePropsList]: deletePropsList,
     modelValue: propsValue,
-    formTagName: 'el-form-input',
+ 
   };
 }
 
@@ -42,5 +42,6 @@ export function handleNodePath(props, { useMemo, useEffect }) {
   return {
     class: `${myClass} ${nodeId}`,
     [$deletePropsList]: deletePropsList,
+    formTagName: 'el-form-input',
   };
 }

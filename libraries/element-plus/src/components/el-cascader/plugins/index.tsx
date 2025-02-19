@@ -38,7 +38,7 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
     ...dataSourceResult,
   };
 }
-export function handleValue(props, { useState }) {
+ function handleValue(props, { useState }) {
   const [value, setValue] = useState('');
   const propsValue = props.get('modelValue') || value;
   const onChangeProps = props.get('onChange', () => {});

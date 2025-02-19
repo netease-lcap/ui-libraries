@@ -31,9 +31,11 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
     ref: selfRef,
     loading,
     slots: _.assign(slots, dataSourceSlots),
+
+    formTagName: 'el-form-select',
   };
 }
-export function handleValue(props, { useState }) {
+ function handleValue(props, { useState }) {
   const [value, setValue] = useState('');
   const propsValue = props.get('modelValue') || value;
   const onChangeProps = props.get('onChange', () => {});
@@ -46,6 +48,5 @@ export function handleValue(props, { useState }) {
       changeValue(value);
     }),
     modelValue: propsValue,
-    formTagName: 'el-form-select',
   };
 }
