@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
 import {
-  ref, Ref, watch, provide, inject, markRaw,
+  ref, Ref, watch, provide, inject, markRaw, onMounted,
 } from 'vue';
 import create from 'zustand-vue';
 import { Map as imMap } from 'immutable';
@@ -50,6 +50,7 @@ export function registerComponet(Component, options) {
     name: 'HocBaseComponents',
     components: { Component },
     inheritAttrs: false,
+    // props: { ...Component.props, dataSource: Object },
     props: Component.props,
     // setup(props, { attrs, slots, emit, expose }) {
     //   const componentRef = ref(null);
@@ -212,6 +213,8 @@ export function registerComponet(Component, options) {
       watch(
         () => [props, attrs, slots, emit],
         ([props, attrs, slots, emit]) => {
+          console.log(props, attrs, 'props, attrs');
+
           // setValue({
           //   ..._.filterUnderfinedValue(props),
           //   ..._.filterUnderfinedValue(attrs),
@@ -232,8 +235,19 @@ export function registerComponet(Component, options) {
           // _.defaults(mystate.value.state, expandProps.state);
           Object.assign(myRef.value, expandProps.state.ref);
         },
-        { deep: true, immediate: true },
+        { deep: true },
       );
+      // mou
+      onMounted(() => {
+        setValue((state) => ({
+          props: {
+            ...props,
+            ...attrs,
+            emit,
+            slots,
+          },
+        }));
+      });
       watch(componentRef, (value) => _.defaults(myRef.value, value));
       watch(childrenRef, (value) => Object.assign(myRef.value, value));
       watch(injectRef, (value) => _.defaults(provideRef.value, value), { deep: true, immediate: true });

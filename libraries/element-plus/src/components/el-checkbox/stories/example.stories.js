@@ -71,6 +71,7 @@ export const Example2 = {
           }, 3000);
         });
       };
+      const dataSourceProps = ref({ dataSource: [] });
       const dataSource = () => new Promise((res) => {
         setTimeout(() => {
           res([
@@ -171,6 +172,9 @@ export const Example2 = {
       // }, 3000);
       setTimeout(() => {
         name.value = 'myname';
+        // dataSourceProps.value = { dataSource: [{}, {}, {}, {}] };
+        dataSourceProps.value.dataSource = [{}, {}, {}, {}];
+        console.log('=====');
         // list.value.push({ value: 4 });
       }, 3000);
 
@@ -181,13 +185,14 @@ export const Example2 = {
         options,
         list,
         dataSource,
+        dataSourceProps,
         arr,
         handleClick,
       };
     },
     template: `
     <div>
-      <el-checkbox-group  :dataSource="[{},{},{},{}]" >
+      <el-checkbox-group v-bind="dataSourceProps">
         <el-checkbox label="Option1" value="Value1" />
         <el-checkbox label="Option2" value="Value2" />
         <template #item=" item ">

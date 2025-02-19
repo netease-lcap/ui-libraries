@@ -7,6 +7,7 @@ namespace nasl.ui {
       idetype: "container",
       structured: true,
       childAccept: "target.tag === 'el-checkbox-pro'",
+      forceUpdateWhenAttributeChange: true,
       dataSource: {
         dismiss:
           "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
