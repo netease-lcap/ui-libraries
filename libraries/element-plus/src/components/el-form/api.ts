@@ -138,8 +138,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '必填标记',
-      description: '是否显示必填符号（*），默认显示',
+      title: '隐藏必填标记',
+      description: '是否隐藏必填标记（*），默认显示',
       setter: { concept: 'SwitchSetter' },
     })
     hideRequiredAsterisk: nasl.core.Boolean = false;
@@ -510,6 +510,15 @@ namespace nasl.ui {
       bindHide: true,
     })
     rules: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '必填标记',
+      description: '是否为必填项,并显示必填标记',
+      setter: { concept: 'SwitchSetter' },
+    })
+    required: nasl.core.Boolean = false;
+
 
     // @Prop({
     //   group: '主要属性',
