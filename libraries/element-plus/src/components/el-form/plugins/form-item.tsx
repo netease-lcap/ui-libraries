@@ -1,9 +1,7 @@
 import VusionValidator, { localizeRules } from '@lcap/validator';
 import _ from 'lodash';
 import { ElFormItem } from 'element-plus';
-import {
-  computed, inject, provide, Ref, ref, watch, nextTick,
-} from 'vue';
+import { computed, inject, provide, Ref, ref, watch, nextTick } from 'vue';
 import { $formProvide } from '@/components/el-form/constants';
 import { $provide } from '@/plugins/constants';
 
@@ -98,9 +96,7 @@ export function withFormItem(Component, name) {
     Component,
     inheritAttrs: false,
     props: { ...Component.props, ...ElFormItem.props },
-    setup(props, {
-      attrs, slots, emit, expose,
-    }) {
+    setup(props, { attrs, slots, emit, expose }) {
       const propName = _.uniqueId('formItemPropName');
       const componentRef = ref({});
       const myRef = ref({});
@@ -147,8 +143,7 @@ export function withFormItem(Component, name) {
             style={styleProps.value.rootStyle}
             v-slots={{
               label: slots.label,
-            }}
-          >
+            }}>
             <Component
               {..._.omit(props, formItemProps)}
               {...attrs}
@@ -171,19 +166,19 @@ export function withFormItem(Component, name) {
 }
 
 export function handleComponentInForm(props, { useMemo, useEffect }) {
-  const inject = props.get('inject');
-  const { isInForm } = inject?.value?.[$formProvide] ?? {};
   const nodePath = props.get('data-nodepath');
   const formTagName = props.get('formTagName');
   useEffect(() => {
     nextTick(() => {
+      const inject = props.get('inject');
+      const { isInForm } = inject?.value?.[$formProvide] ?? {};
       const isInIDE = isInForm && nodePath;
       if (!isInIDE) return;
       const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
       elem?.setAttribute('data-element-tag', formTagName);
       elem?.setAttribute('data-has-mutation', 'true');
     });
-  }, [isInForm, nodePath]);
+  }, []);
 }
 
 handleComponentInForm.order = 6;
