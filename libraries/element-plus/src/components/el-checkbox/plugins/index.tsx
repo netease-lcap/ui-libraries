@@ -15,13 +15,16 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
     .get($deletePropsList, [])
     .concat(['textField', 'valueField', 'parentField', 'childrenField', 'props']);
   const ref = props.get('ref');
+  console.log(dataConfig, 'dataConfig');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig, {}, { useState, useEffect, useMemo });
+  console.log(data,'data');
   const dataSource = useHandleMapField(
     { textField, valueField, dataSource: useFormatDataSource(data, { useMemo }) },
     { useMemo },
   );
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
-  const dataSourceSlots = _.isNil(dataConfig)
+  console.log(dataSource,'===');
+  const dataSourceSlots = _.isEmpty(dataSource)
     ? {}
     : {
       default: () => _.map(dataSource, (item) => <el-checkbox {...item}>{slots.item ? slots.item(item) : null}</el-checkbox>),
