@@ -362,7 +362,7 @@ namespace nasl.ui {
         '表格高度，超出后会出现滚动条。示例：100,  "30%",  "300"。值为数字类型，会自动加上单位 px。如果不是绝对固定表格高度，建议使用 `maxHeight`',
       setter: { concept: 'InputSetter' },
     })
-    height: nasl.core.String | nasl.core.Decimal;
+    height: nasl.core.Decimal;
 
     // @Prop({
     //   group: '主要属性',
@@ -437,7 +437,7 @@ namespace nasl.ui {
       description: '表格最大高度，超出后会出现滚动条。示例：100, "30%", "300"。值为数字类型，会自动加上单位 px',
       setter: { concept: 'InputSetter' },
     })
-    maxHeight: nasl.core.String | nasl.core.Decimal;
+    maxHeight:  nasl.core.Decimal;
 
     @Prop<ElTableOptions<T, V, P, M>, 'pagination'>({
       group: '主要属性',
@@ -851,7 +851,10 @@ namespace nasl.ui {
       snippets: [
         {
           title: '表格列',
-          code: '<el-table-column data-nodepath-multiple="ture"><template #header><el-text text="表格列"></el-text></template></el-table-column>',
+          code: `<el-table-column data-nodepath-multiple="ture">
+                    <template #header><el-text text="表格列"></el-text></template>
+                    <template #default="current"></template>
+                </el-table-column>`,
         },
       ],
     })

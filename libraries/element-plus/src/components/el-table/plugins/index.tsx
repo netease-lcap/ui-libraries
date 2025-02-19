@@ -24,6 +24,16 @@ function useControllableValue(props, options, { useState }) {
     : [value, myChange];
   return [myValue, mySetValue, { [valuePropsName]: myValue, [tigger]: mySetValue }];
 }
+
+export function handleHeight(props) {
+  const height = props.get('height');
+  const maxHeight = props.get('maxHeight');
+  return {
+    height: height || 0,
+    maxHeight: maxHeight || 0,
+  };
+}
+
 export function handleDataSource(props, { useState, useEffect, useMemo }) {
   const dataSource = props.get('dataSource');
   const pageProps = props.get('pageProps');
@@ -156,10 +166,7 @@ export function handlePage(props, { useState, childrenRef }) {
           <ElConfigProvider locale={zhCn}>
             {props.pagination && (
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
-                <ElPagination
-                  {...props.pageProps}
-                  total={props.pageProps.total}
-                />
+                <ElPagination {...props.pageProps} total={props.pageProps.total} />
               </div>
             )}
           </ElConfigProvider>
