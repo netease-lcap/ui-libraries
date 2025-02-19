@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 import {
-  watch, h, inject, onMounted,
+  watch, h, inject, nextTick,
 } from 'vue';
 import _ from 'lodash';
 
@@ -32,14 +32,16 @@ export function handleNodePath(props, { useMemo, useEffect }) {
   const myClass = props.get('class');
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
   const nodeId = useMemo(() => _.uniqueId('Input_'), []);
-  onMounted(() => {
-    const node = document.querySelector(`.${nodeId}`);
-    const inputParent = node?.closest('.el-input');
-    inputParent?.setAttribute('data-nodepath', nodePath);
-  });
+  console.log(nodeId, 'nodeId');
+  useEffect(() => {
+    nextTick(() => {
+      const node = document.querySelector(`.${nodeId}`);
+      const inputParent = node?.closest('.el-input');
+      inputParent?.setAttribute('data-nodepath', nodePath);
+    });
+  }, []);
   return {
     class: `${myClass} ${nodeId}`,
     [$deletePropsList]: deletePropsList,
-
   };
 }

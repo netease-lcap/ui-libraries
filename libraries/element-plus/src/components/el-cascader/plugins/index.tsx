@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
-import { onMounted } from 'vue';
+import { nextTick } from 'vue';
 import { $deletePropsList } from '@/plugins/constants';
 import {
   useRequestDataSource,
@@ -76,10 +76,12 @@ export function handleNodePath(props, { useMemo, useEffect }) {
   const nodePath = props.get('data-nodepath');
   const myClass = props.get('class');
   const nodeId = useMemo(() => _.uniqueId('Cascader_'), []);
-  onMounted(() => {
-    const node = document.querySelector(`.${nodeId}`);
-    node?.setAttribute('data-nodepath', nodePath);
-  });
+  useEffect(() => {
+    nextTick(() => {
+      const node = document.querySelector(`.${nodeId}`);
+      node?.setAttribute('data-nodepath', nodePath);
+    });
+  }, []);
   return {
     class: `${myClass} ${nodeId}`,
     formTagName: 'el-form-cascader',
