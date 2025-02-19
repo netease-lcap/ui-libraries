@@ -313,6 +313,7 @@
             "events": {
                 "click": true
             },
+            "eventsScope": "[class^=u-collapse_item_head]",
             "slotWrapperInlineStyle": {
                 "title": "display:inline-block"
             },
@@ -989,6 +990,7 @@
             "events": {
                 "click": true
             },
+            "eventsScope": "[class^='u-tabs_item']",
             "disableSlotAutoFill": [{
                 "slot": "title",
                 "expression": "this.getAttribute('title')",
