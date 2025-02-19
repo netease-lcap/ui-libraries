@@ -25,7 +25,7 @@ function useControllableValue(props, options, { useState }) {
   return [myValue, mySetValue, { [valuePropsName]: myValue, [tigger]: mySetValue }];
 }
 
-export function handleHeight(props) {
+function handleHeight(props) {
   const height = props.get('height');
   const maxHeight = props.get('maxHeight');
   return {
@@ -65,12 +65,13 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
     [_.stubTrue, _.constant(undefined)],
   ]);
   const transformOption = useMemo(
-    () => fp.cond([
-      [fp.isArray, fp.constant(async () => ({ list: dataSource, total: dataSource.length }))],
-      [_.isPlainObject, (data) => () => data],
-      [fp.isFunction, fp.constant((...arg) => Promise.resolve(dataSource(...arg)).then(warpList))],
-      [fp.stubTrue, fp.constant(async () => ({ list: [], total: 0 }))],
-    ]),
+    () =>
+      fp.cond([
+        [fp.isArray, fp.constant(async () => ({ list: dataSource, total: dataSource.length }))],
+        [_.isPlainObject, (data) => () => data],
+        [fp.isFunction, fp.constant((...arg) => Promise.resolve(dataSource(...arg)).then(warpList))],
+        [fp.stubTrue, fp.constant(async () => ({ list: [], total: 0 }))],
+      ]),
     [dataSource],
   );
   const {
@@ -105,12 +106,13 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
       prop: sort,
       order: getOrder(order),
     },
-    onSortChange: ({ prop, order }) => reload({
-      currentPage,
-      pageSize,
-      sort: getOrder(order) ? prop : undefined,
-      order: getOrder(order),
-    }),
+    onSortChange: ({ prop, order }) =>
+      reload({
+        currentPage,
+        pageSize,
+        sort: getOrder(order) ? prop : undefined,
+        order: getOrder(order),
+      }),
     pageProps: {
       ...pageProps,
       total,
@@ -177,9 +179,7 @@ export function handlePage(props, { useState, childrenRef }) {
 }
 handlePage.order = 3;
 
-function handleSelection(props, {
-  useState, childrenRef, ref, useEffect,
-}) {
+function handleSelection(props, { useState, childrenRef, ref, useEffect }) {
   const ond = props.get('onUpdate:selectedRowKeys');
   const selectedRowKeys = props.get('selectedRowKeys');
   // const [currentPage, setpage, currentPageProps] = useControllableValue(props, {
