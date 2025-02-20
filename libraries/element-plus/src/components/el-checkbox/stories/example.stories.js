@@ -1,4 +1,5 @@
 import { ref } from 'vue';
+import _ from 'lodash';
 import Component from '../index';
 // import { ElSelect, ElOption } from '../index';
 
@@ -160,9 +161,12 @@ export const Example2 = {
         },
       ]);
       const arr = [3, 4, 5];
+      const num = ref(0);
 
+      const logNum = _.throttle((value) => console.log(value, 'throttle'), 2000, { leading: false });
       const handleClick = (tab) => {
-        console.log(tab);
+        num.value++;
+        logNum(num.value);
       };
       // setTimeout(() => {
       // name.value = 'newName';
@@ -188,18 +192,20 @@ export const Example2 = {
         dataSourceProps,
         arr,
         handleClick,
+        num,
       };
     },
-      // <el-checkbox-group  :dataSource="dataSource">
+        // <el-checkbox-group  v-bind="dataSourceProps">
     template: `
     <div>
-        <el-checkbox-group  v-bind="dataSourceProps">
+     <el-checkbox-group  :dataSource="dataSource">
         <el-checkbox label="Option1" value="Value1" />
         <el-checkbox label="Option2" value="Value2" />
         <template #item="{item}">
           <el-text text="item.entity1.property1"  @click="handleClick(item)"/>
         </template>
       </el-checkbox-group>
+      <button @click="handleClick">click</button>
     </div>
 
     `,
