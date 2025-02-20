@@ -88,7 +88,16 @@ export function useRequestDataSource(dataSource, options = {}, { useMemo, useEff
   ]);
   const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource), [dataSource]);
   const result = useMemo(() => useRequest(dataSourceFn, options), [dataSource]) as any;
-  watch(() => result, setResult, { immediate: true });
+  const add = _.throttle((value) => console.log(value, 'throttle'), 200);
+  watch(
+    () => result,
+    (value) => {
+      // console.log(value.data.value, 'value');
+      // add(value.data.value);
+      setResult(value);
+    },
+    { immediate: true, deep: true },
+  );
   const { data, run, loading } = resultData;
   useEffect(() => run?.(), [dataSource]);
   return { data, run, loading };

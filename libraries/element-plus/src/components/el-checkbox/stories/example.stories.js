@@ -190,12 +190,13 @@ export const Example2 = {
         handleClick,
       };
     },
+      // <el-checkbox-group  :dataSource="dataSource">
     template: `
     <div>
-      <el-checkbox-group v-bind="dataSourceProps">
+        <el-checkbox-group  v-bind="dataSourceProps">
         <el-checkbox label="Option1" value="Value1" />
         <el-checkbox label="Option2" value="Value2" />
-        <template #item=" item ">
+        <template #item="{item}">
           <el-text text="item.entity1.property1"  @click="handleClick(item)"/>
         </template>
       </el-checkbox-group>
