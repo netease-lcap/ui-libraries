@@ -99,6 +99,14 @@ function getIgnores(root) {
     ignores = fs.readFileSync(filePath).toString().split('\n').filter((v) => !!v.trim() && !v.startsWith('#'));
   }
 
+  if (!ignores.includes('node_modules')) {
+    ignores.push('node_modules');
+  }
+
+  if (!ignores.includes('.lcap')) {
+    ignores.push('.lcap');
+  }
+
   return ignores;
 }
 
