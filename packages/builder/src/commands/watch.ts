@@ -230,18 +230,25 @@ function createProxyLibrarySchema(options: LcapBuildOptions, { port, https }) {
   };
 }
 
-function startServer(options: LcapBuildOptions, { port = 8080, https }) {
+export interface WatchCommandOptions {
+  port?: number;
+  https?: boolean;
+  middlewares?: ((req: IncomingMessage, res: ServerResponse, next: () => void) => void)[];
+}
+
+function startServer(options: LcapBuildOptions, { port = 8080, https, middlewares = [] }: WatchCommandOptions) {
   return LiveServer.start({
     port,
     https,
     cors: true,
     middlewares: [
       createProxyLibrarySchema(options, { port, https }),
+      ...middlewares,
     ],
   });
 }
 
-export default async (rootPath: string, { port, https }: any) => {
+export default async (rootPath: string, { port, https, middlewares }: WatchCommandOptions) => {
   const { viteConfig, buildOptions } = await getBuildConfig();
   const pkgInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
   let onceBuilded = false;
@@ -286,7 +293,7 @@ export default async (rootPath: string, { port, https }: any) => {
               logger.success('build successed! starting file watching...');
               watcher.start();
 
-              server = await startServer(buildOptions, { port, https });
+              server = await startServer(buildOptions, { port, https, middlewares });
             } catch (e) {
               logger.error(e);
               process.exit(1);
