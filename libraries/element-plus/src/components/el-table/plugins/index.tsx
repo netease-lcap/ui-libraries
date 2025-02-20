@@ -25,21 +25,10 @@ function useControllableValue(props, options, { useState }) {
   return [myValue, mySetValue, { [valuePropsName]: myValue, [tigger]: mySetValue }];
 }
 
-function handleHeight(props) {
-  const height = props.get('height');
-  const maxHeight = props.get('maxHeight');
-  return {
-    height: height || 0,
-    maxHeight: maxHeight || 0,
-  };
-}
-
 export function handleDataSource(props, { useState, useEffect, useMemo }) {
   const dataSource = props.get('dataSource');
   const pageProps = props.get('pageProps');
-  // const sorting = props.get('sorting');
   const { currentPage, pageSize, onChange = () => {} } = pageProps;
-  // const { sort, order } = sorting ? { sort: sorting.field, order: sorting.order } : {};
   const sort = props.get('field');
   const order = props.get('order');
 
@@ -65,13 +54,12 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
     [_.stubTrue, _.constant(undefined)],
   ]);
   const transformOption = useMemo(
-    () =>
-      fp.cond([
-        [fp.isArray, fp.constant(async () => ({ list: dataSource, total: dataSource.length }))],
-        [_.isPlainObject, (data) => () => data],
-        [fp.isFunction, fp.constant((...arg) => Promise.resolve(dataSource(...arg)).then(warpList))],
-        [fp.stubTrue, fp.constant(async () => ({ list: [], total: 0 }))],
-      ]),
+    () => fp.cond([
+      [fp.isArray, fp.constant(async () => ({ list: dataSource, total: dataSource.length }))],
+      [_.isPlainObject, (data) => () => data],
+      [fp.isFunction, fp.constant((...arg) => Promise.resolve(dataSource(...arg)).then(warpList))],
+      [fp.stubTrue, fp.constant(async () => ({ list: [], total: 0 }))],
+    ]),
     [dataSource],
   );
   const {
@@ -106,13 +94,12 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
       prop: sort,
       order: getOrder(order),
     },
-    onSortChange: ({ prop, order }) =>
-      reload({
-        currentPage,
-        pageSize,
-        sort: getOrder(order) ? prop : undefined,
-        order: getOrder(order),
-      }),
+    onSortChange: ({ prop, order }) => reload({
+      currentPage,
+      pageSize,
+      sort: getOrder(order) ? prop : undefined,
+      order: getOrder(order),
+    }),
     pageProps: {
       ...pageProps,
       total,
@@ -149,7 +136,6 @@ export function handlePage(props, { useState, childrenRef }) {
     { useState },
   );
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
-  console.log(nodepath, 'nodepath==========');
   return {
     pageProps: {
       ...currentPageProps,
@@ -161,7 +147,6 @@ export function handlePage(props, { useState, childrenRef }) {
     [$deletePropsList]: deletePropsList,
     pagination,
     render: (props, { attrs, expose, slots }) => {
-      console.log('render=============');
       return [
         <div data-nodepath={nodepath} style={props.style}>
           <Component ref={childrenRef} {...omit({ ...props, ...attrs }, ['style'])} v-slots={slots} />
@@ -178,41 +163,3 @@ export function handlePage(props, { useState, childrenRef }) {
   };
 }
 handlePage.order = 3;
-
-function handleSelection(props, { useState, childrenRef, ref, useEffect }) {
-  const ond = props.get('onUpdate:selectedRowKeys');
-  const selectedRowKeys = props.get('selectedRowKeys');
-  // const [currentPage, setpage, currentPageProps] = useControllableValue(props, {
-  //   valuePropsName: 'selectedRowKeys',
-  //   onChange: (...arg) => {
-  //     ref?.toggleRowSelection?.(arg, true);
-  //   },
-  // }, { useState });
-  // _.attempt(ref?.toggleRowSelection, currentPage, true);
-  console.log(selectedRowKeys, 'selectedRowKeys==');
-  useEffect(() => {
-    setTimeout(() => {
-      console.log('=====log', ref?.toggleRowSelection);
-      ref?.toggleRowSelection?.(selectedRowKeys, true);
-    }, 3000);
-  }, [selectedRowKeys]);
-
-  return {
-    onSelectionChange(el) {
-      console.log(el, 'el===');
-      // setTimeout(() => {
-      //   ond(el);
-      // }, 2000);
-      // if (!_.isEmpty(el)) {
-      // ond(el);
-      // }
-      //   setpage(el);
-      // setTimeout(() => {
-
-      //     ref?.toggleRowSelection?.(el);
-      //     console.log(el);
-      // }, 3000);
-      //   // console.log(el, 'el==');
-    },
-  };
-}

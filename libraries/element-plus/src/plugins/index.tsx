@@ -1,12 +1,15 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import { ref, Ref, watch, provide, inject, markRaw, onMounted } from 'vue';
+import {
+  ref, Ref, watch, provide, inject, markRaw, onMounted,
+} from 'vue';
 import create from 'zustand-vue';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
 import { $deletePropsList, $provide, $inject } from '@/plugins/constants';
 import '@/utils/index';
+import ClearFormatting from '@lcap/element-ui/design/icons/components/clear-formatting';
 
 export class PluginOptions {
   plugin: any[] = [];
@@ -63,7 +66,9 @@ export function registerComponet(Component, options) {
     //   };
     // },
 
-    setup(props, { attrs, slots, emit, expose }) {
+    setup(props, {
+      attrs, slots, emit, expose,
+    }) {
       const componentRef = ref(null);
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
@@ -74,7 +79,7 @@ export function registerComponet(Component, options) {
       const childrenRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
       const provideRef = ref({});
-      let queen: any[] = [];
+      const queen: any[] = [];
       const useStore = create((set) => ({
         state: {
           inject: injectRef,
@@ -102,6 +107,7 @@ export function registerComponet(Component, options) {
         deleteList: ['deleteList'],
       }));
       const setValue = useStore((state: any) => state.setvalue);
+
       function useState(this: any, isMount, initialstate) {
         let hook;
         if (isMount) {
@@ -121,11 +127,11 @@ export function registerComponet(Component, options) {
         }
         const state = this.useStore((store) => store.state[hook?.storeKey] ?? initialstate);
         const localSetValue = (value) => {
+          const state = this.useStore((store) => store.state[hook?.storeKey] ?? initialstate);
           if (_.isEqual(value, state.value)) {
             return;
           }
           if (_.isFunction(value)) {
-            const state = this.useStore((store) => store.state[hook?.storeKey] ?? initialstate);
             value = value(state);
           }
           queen.push({ [hook.storeKey]: value });
@@ -133,7 +139,7 @@ export function registerComponet(Component, options) {
             if (!_.isEmpty(queen)) {
               const comit = queen.reduce((pre, cur) => ({ ...pre, ...cur }), {});
               setValue(comit);
-              queen = [];
+              queen.splice(0, queen.length);
             }
           }, queen);
         };
@@ -174,12 +180,12 @@ export function registerComponet(Component, options) {
           const storeKey = _.uniqueId('storeKey');
           const fiber = isMount
             ? {
-                workInProgressState: null,
-                workInProgressEffect: null,
-                useStore,
-                setValue,
-                storeKey,
-              }
+              workInProgressState: null,
+              workInProgressEffect: null,
+              useStore,
+              setValue,
+              storeKey,
+            }
             : fiberMap.get(handleFn);
           const localUseState = _.bind(useState, fiber, isMount);
           const localUseEffect = _.bind(useEffect, fiber, isMount);

@@ -3,10 +3,13 @@
 import _ from 'lodash';
 import fp from 'lodash/fp';
 // import { useRequest } from 'ahooks';
-import { watch } from 'vue';
+import { watch, onMounted } from 'vue';
 import { useRequest } from 'vue-hooks-plus';
-import { $deletePropsList, $dataSourceField, $labelKey, $valueKey } from '@/plugins/constants';
+import {
+  $deletePropsList, $dataSourceField, $labelKey, $valueKey,
+} from '@/plugins/constants';
 
+let stop = () => {};
 function formatData(data) {
   const conformsArray = _.cond([
     [Array.isArray, _.identity],
@@ -37,14 +40,14 @@ export function useHandleTransformOption(props, { useMemo, useEffect }) {
   const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
   return _.isNil(dataSource)
     ? {
-        [$deletePropsList]: deletePropsList,
-      }
+      [$deletePropsList]: deletePropsList,
+    }
     : {
-        [$deletePropsList]: deletePropsList,
-        [dataSourceField]: resultData,
-        ref: selfRef,
-        loading,
-      };
+      [$deletePropsList]: deletePropsList,
+      [dataSourceField]: resultData,
+      ref: selfRef,
+      loading,
+    };
 }
 
 useHandleTransformOption.order = 5;
@@ -70,7 +73,9 @@ export function useHandleTextAndValueField(props, { useMemo }) {
 useHandleTextAndValueField.order = 6;
 
 export function useHandleMapField(filedInfo, { useMemo }) {
-  const { label = 'label', value = 'value', textField = 'label', valueField = 'value', dataSource } = filedInfo;
+  const {
+    label = 'label', value = 'value', textField = 'label', valueField = 'value', dataSource,
+  } = filedInfo;
   return useMemo(() => {
     return _.map(dataSource, (item) => ({
       ...item,
@@ -87,10 +92,22 @@ export function useRequestDataSource(dataSource, options = {}, { useMemo, useEff
     [_.stubTrue, _.constant(async () => [])],
   ]);
   const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource), [dataSource]);
-  const result = useMemo(() => useRequest(dataSourceFn, options), [dataSource]) as any;
-  watch(() => result, setResult, { immediate: true });
+  const result = useMemo(
+    () => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSource] }),
+    [dataSourceFn],
+  ) as any;
+
+  stop();
+  stop = watch(
+    () => result,
+    (value) => {
+      setResult(value);
+    },
+    { immediate: true, deep: true },
+  );
+  // });
   const { data, run, loading } = resultData;
-  useEffect(() => run?.(), [dataSource]);
+  // useEffect(() => run?.(), [dataSource, run]);
   return { data, run, loading };
 }
 
