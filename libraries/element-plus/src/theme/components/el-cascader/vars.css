@@ -2,7 +2,8 @@
  * @component el-cascader
  */
 .el-cascader,
-.el-cascader__dropdown {
+.el-cascader__dropdown,
+.el-cascader-panel {
   /**
    * @desc 菜单文字颜色
    * @type color
