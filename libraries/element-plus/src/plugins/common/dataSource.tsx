@@ -84,8 +84,11 @@ export function useHandleMapField(filedInfo, { useMemo }) {
     }));
   }, [label, value, textField, valueField, dataSource]);
 }
-export function useRequestDataSource(dataSource, options = {}, { useMemo, useEffect, useState }) {
+export function useRequestDataSource(dataSource, options = {}, {
+  useMemo, useEffect, useState, useRef,
+}) {
   const [resultData, setResult] = useState({});
+  const stop = useRef(() => {});
   const handleDataSouceToFn = _.cond([
     [_.isArray, _.constant(async () => dataSource)],
     [_.isFunction, _.constant(async (...arg) => dataSource(...arg))],
@@ -96,8 +99,8 @@ export function useRequestDataSource(dataSource, options = {}, { useMemo, useEff
     () => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSource] }),
     [dataSourceFn],
   ) as any;
-
-  watch(
+  stop.current();
+  stop.current = watch(
     () => result,
     (value) => {
       setResult(value);

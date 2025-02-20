@@ -44,7 +44,9 @@ function useControllableValue(props, options, { useState }) {
   return [myValue, mySetValue, { [valuePropsName]: myValue, [tigger]: mySetValue }];
 }
 
-export function handleDataSource(props, { useState, useEffect, useMemo }) {
+export function handleDataSource(props, {
+  useState, useEffect, useMemo, useRef,
+}) {
   const dataSource = props.get('dataSource');
   const pageProps = props.get('pageProps');
   const { currentPage, pageSize, onChange = () => {} } = pageProps;
@@ -99,7 +101,9 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
         },
       ],
     },
-    { useState, useEffect, useMemo },
+    {
+      useState, useEffect, useMemo, useRef,
+    },
   );
   const { list: data, total } = resultData;
   const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
@@ -168,7 +172,12 @@ export function handlePage(props, { useState, childrenRef }) {
     render: (props, { attrs, expose, slots }) => {
       return [
         <div data-nodepath={nodepath} style={props.style}>
-          <Component ref={childrenRef} {...omit({ ...props, ...attrs }, ['style'])} style={_.pickBy(props.style, (value, key) => key?.startsWith('--'))} v-slots={slots} />
+          <Component
+            ref={childrenRef}
+            {...omit({ ...props, ...attrs }, ['style'])}
+            style={_.pickBy(props.style, (value, key) => key?.startsWith('--'))}
+            v-slots={slots}
+          />
           <ElConfigProvider locale={zhCn}>
             {props.pagination && (
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>

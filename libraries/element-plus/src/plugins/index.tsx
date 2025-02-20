@@ -145,6 +145,25 @@ export function registerComponet(Component, options) {
         };
         return [state?.value ?? state, localSetValue];
       }
+      function useRef(this: any, isMount, initialstate) {
+        let hook;
+        if (isMount) {
+          hook = {
+            next: null,
+            value: { current: initialstate },
+          };
+          hook.next = hook;
+          if (this.workInProgressState) {
+            hook.next = this.workInProgressState.next;
+            this.workInProgressState.next = hook;
+          }
+          this.workInProgressState = hook;
+        } else {
+          hook = this.workInProgressState.next;
+          this.workInProgressState = this.workInProgressState.next;
+        }
+        return hook.value;
+      }
       function useEffect(this: any, isMount, callBack, dep) {
         let hook;
         if (isMount) {
@@ -189,10 +208,12 @@ export function registerComponet(Component, options) {
             : fiberMap.get(handleFn);
           const localUseState = _.bind(useState, fiber, isMount);
           const localUseEffect = _.bind(useEffect, fiber, isMount);
+          const localUseRef = _.bind(useRef, fiber, isMount);
           const result = _.attempt(_.bind(handleFn, fiber), ImmutableProps, {
             useState: localUseState,
             useEffect: localUseEffect,
             useMemo: localUseEffect,
+            useRef: localUseRef,
             componentRef,
             childrenRef,
             ref: myRef.value,

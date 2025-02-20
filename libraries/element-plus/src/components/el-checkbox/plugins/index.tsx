@@ -5,7 +5,9 @@ import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
-export function handleDataSource(props, { useState, useEffect, useMemo }) {
+export function handleDataSource(props, {
+  useState, useEffect, useMemo, useRef,
+}) {
   const dataConfig = props.get('dataSource');
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
@@ -15,7 +17,9 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
     .get($deletePropsList, [])
     .concat(['textField', 'valueField', 'parentField', 'childrenField', 'props']);
   const ref = props.get('ref');
-  const { data, run: reload, loading } = useRequestDataSource(dataConfig, {}, { useState, useEffect, useMemo });
+  const { data, run: reload, loading } = useRequestDataSource(dataConfig, {}, {
+    useState, useEffect, useMemo, useRef,
+  });
 
   const dataSource = useHandleMapField(
     { textField, valueField, dataSource: useFormatDataSource(data, { useMemo }) },
