@@ -169,6 +169,7 @@ export default async function getNaslExtensionConfig({
         frontends: feLibraries.map((library) => ({
           type: library.type,
           frameworkKind,
+          frameworkUI,
           viewComponents: library.viewComponents.map((item: any) => ({
             name: item.name,
             title: item.title,
