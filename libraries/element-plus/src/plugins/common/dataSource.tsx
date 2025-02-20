@@ -9,7 +9,7 @@ import {
   $deletePropsList, $dataSourceField, $labelKey, $valueKey,
 } from '@/plugins/constants';
 
-let stop = () => {};
+const stop = () => {};
 function formatData(data) {
   const conformsArray = _.cond([
     [Array.isArray, _.identity],
@@ -97,8 +97,7 @@ export function useRequestDataSource(dataSource, options = {}, { useMemo, useEff
     [dataSourceFn],
   ) as any;
 
-  stop();
-  stop = watch(
+  watch(
     () => result,
     (value) => {
       setResult(value);

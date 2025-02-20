@@ -16,6 +16,7 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
     .concat(['textField', 'valueField', 'parentField', 'childrenField', 'props']);
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig, {}, { useState, useEffect, useMemo });
+
   const dataSource = useHandleMapField(
     { textField, valueField, dataSource: useFormatDataSource(data, { useMemo }) },
     { useMemo },
@@ -31,6 +32,7 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
     [$deletePropsList]: deletePropsList,
     ref: selfRef,
     loading,
+    data,
     slots: _.assign(slots, dataSourceSlots),
   };
 }

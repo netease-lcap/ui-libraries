@@ -143,7 +143,7 @@ export const Example2 = {
               },
             },
           ]);
-        }, 3000);
+        }, 1000);
       });
       const select = ref('');
       const options = ref([
@@ -195,16 +195,25 @@ export const Example2 = {
         num,
       };
     },
-        // <el-checkbox-group  v-bind="dataSourceProps">
     template: `
     <div>
-     <el-checkbox-group  :dataSource="dataSource">
+     <el-checkbox-group  :dataSource="dataSource" id="my1">
         <el-checkbox label="Option1" value="Value1" />
         <el-checkbox label="Option2" value="Value2" />
         <template #item="{item}">
-          <el-text text="item.entity1.property1"  @click="handleClick(item)"/>
+          <el-text text="item.entity1.property11"  @click="handleClick(item)"/>
         </template>
       </el-checkbox-group>
+
+     <el-checkbox-group  :dataSource="dataSource" id="my2">
+     <el-checkbox label="Option1" value="Value1" />
+     <el-checkbox label="Option2" value="Value2" />
+     <template #item="{item}">
+       <el-text text="item.entity1.id2"  @click="handleClick(item)"/>
+     </template>
+   </el-checkbox-group>
+
+
       <button @click="handleClick">click</button>
     </div>
 

@@ -258,6 +258,7 @@ export function registerComponet(Component, options) {
       const RenderComponent = render.value ?? Component;
 
       return () => {
+        // console.log('render', mystate.value.state);
         return (
           <RenderComponent
             {..._.omit(mystate.value.state, mystate.value.state[$deletePropsList])}
