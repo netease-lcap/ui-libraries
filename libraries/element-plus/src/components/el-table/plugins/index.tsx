@@ -1,8 +1,12 @@
 import { watch, ref, toRefs } from 'vue';
-import { ElPagination } from 'element-plus';
+import { ElPagination, ElConfigProvider } from 'element-plus';
+
 import _ from 'lodash';
+// import zhCn from "element-plus/lib/locale/lang/zh-cn"
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 
 import fp from 'lodash/fp';
+import omit from 'lodash/omit';
 import { $deletePropsList } from '@/plugins/constants';
 
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
@@ -20,12 +24,13 @@ function useControllableValue(props, options, { useState }) {
     : [value, myChange];
   return [myValue, mySetValue, { [valuePropsName]: myValue, [tigger]: mySetValue }];
 }
+
 export function handleDataSource(props, { useState, useEffect, useMemo }) {
   const dataSource = props.get('dataSource');
   const pageProps = props.get('pageProps');
-  const sorting = props.get('sorting');
-  const { currentPage, pageSize, onChange } = pageProps;
-  const { sort, order } = sorting ? { sort: sorting.field, order: sorting.order } : {};
+  const { currentPage, pageSize, onChange = () => {} } = pageProps;
+  const sort = props.get('field');
+  const order = props.get('order');
 
   const onBefore = props.get('onBefore', () => {});
   const onSuccess = props.get('onSuccess', () => {});
@@ -83,6 +88,7 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
 
   return {
     ref: selfRef,
+    total,
     loading,
     defaultSort: {
       prop: sort,
@@ -113,6 +119,8 @@ export function handlePage(props, { useState, childrenRef }) {
   const showTotal = props.get('showTotal');
   const showJumper = props.get('showJumper');
   const ref = props.get('ref');
+  const nodepath = props.get('data-nodepath');
+  const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
   const [currentPage, setpage, currentPageProps] = useControllableValue(
     props,
     {
@@ -127,7 +135,6 @@ export function handlePage(props, { useState, childrenRef }) {
     },
     { useState },
   );
-  console.log(pageSizeProps, 'pageSize==');
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
   return {
     pageProps: {
@@ -137,57 +144,22 @@ export function handlePage(props, { useState, childrenRef }) {
       layout,
     },
     ref,
+    [$deletePropsList]: deletePropsList,
     pagination,
     render: (props, { attrs, expose, slots }) => {
       return [
-        <div>
-          <Component ref={childrenRef} {...{ ...props, ...attrs }} v-slots={slots} />
-          {props.pagination && (
-            <ElPagination {...props.pageProps} style={{ float: 'right', marginTop: '8px' }} total={50} />
-          )}
+        <div data-nodepath={nodepath} style={props.style}>
+          <Component ref={childrenRef} {...omit({ ...props, ...attrs }, ['style'])} v-slots={slots} />
+          <ElConfigProvider locale={zhCn}>
+            {props.pagination && (
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
+                <ElPagination {...props.pageProps} total={props.pageProps.total} />
+              </div>
+            )}
+          </ElConfigProvider>
         </div>,
       ];
     },
   };
 }
 handlePage.order = 3;
-
-function handleSelection(props, {
-  useState, childrenRef, ref, useEffect,
-}) {
-  const ond = props.get('onUpdate:selectedRowKeys');
-  const selectedRowKeys = props.get('selectedRowKeys');
-  // const [currentPage, setpage, currentPageProps] = useControllableValue(props, {
-  //   valuePropsName: 'selectedRowKeys',
-  //   onChange: (...arg) => {
-  //     ref?.toggleRowSelection?.(arg, true);
-  //   },
-  // }, { useState });
-  // _.attempt(ref?.toggleRowSelection, currentPage, true);
-  console.log(selectedRowKeys, 'selectedRowKeys==');
-  useEffect(() => {
-    setTimeout(() => {
-      console.log('=====log', ref?.toggleRowSelection);
-      ref?.toggleRowSelection?.(selectedRowKeys, true);
-    }, 3000);
-  }, [selectedRowKeys]);
-
-  return {
-    onSelectionChange(el) {
-      console.log(el, 'el===');
-      // setTimeout(() => {
-      //   ond(el);
-      // }, 2000);
-      // if (!_.isEmpty(el)) {
-      // ond(el);
-      // }
-      //   setpage(el);
-      // setTimeout(() => {
-
-      //     ref?.toggleRowSelection?.(el);
-      //     console.log(el);
-      // }, 3000);
-      //   // console.log(el, 'el==');
-    },
-  };
-}

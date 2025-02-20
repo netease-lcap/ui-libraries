@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
 import {
-  ref, Ref, watch, provide, inject, markRaw,
+  ref, Ref, watch, provide, inject, markRaw, onMounted,
 } from 'vue';
 import create from 'zustand-vue';
 import { Map as imMap } from 'immutable';
@@ -9,6 +9,7 @@ import _ from 'lodash';
 import fp from 'lodash/fp';
 import { $deletePropsList, $provide, $inject } from '@/plugins/constants';
 import '@/utils/index';
+import ClearFormatting from '@lcap/element-ui/design/icons/components/clear-formatting';
 
 export class PluginOptions {
   plugin: any[] = [];
@@ -50,6 +51,7 @@ export function registerComponet(Component, options) {
     name: 'HocBaseComponents',
     components: { Component },
     inheritAttrs: false,
+    // props: { ...Component.props, dataSource: Object },
     props: Component.props,
     // setup(props, { attrs, slots, emit, expose }) {
     //   const componentRef = ref(null);
@@ -77,20 +79,21 @@ export function registerComponet(Component, options) {
       const childrenRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
       const provideRef = ref({});
-      let queen: any[] = [];
+      const queen: any[] = [];
       const useStore = create((set) => ({
         state: {
-          ...props,
-          ...attrs,
-          emit,
-          slots,
           inject: injectRef,
           provide: {},
           ref: {},
           childrenRef: {},
-          [$deletePropsList]: ['provide', 'childrenRef', 'inject', 'render',  'slots', 'emit'],
+          [$deletePropsList]: ['provide', 'childrenRef', 'inject', 'render', 'slots', 'emit', $deletePropsList],
         },
-
+        props: {
+          ...props,
+          ...attrs,
+          emit,
+          slots,
+        },
         // ...attrs,
         // emit,
         setvalue: (commit, tr) => {
@@ -104,6 +107,7 @@ export function registerComponet(Component, options) {
         deleteList: ['deleteList'],
       }));
       const setValue = useStore((state: any) => state.setvalue);
+
       function useState(this: any, isMount, initialstate) {
         let hook;
         if (isMount) {
@@ -123,11 +127,11 @@ export function registerComponet(Component, options) {
         }
         const state = this.useStore((store) => store.state[hook?.storeKey] ?? initialstate);
         const localSetValue = (value) => {
+          const state = this.useStore((store) => store.state[hook?.storeKey] ?? initialstate);
           if (_.isEqual(value, state.value)) {
             return;
           }
           if (_.isFunction(value)) {
-            const state = this.useStore((store) => store.state[hook?.storeKey] ?? initialstate);
             value = value(state);
           }
           queen.push({ [hook.storeKey]: value });
@@ -135,7 +139,7 @@ export function registerComponet(Component, options) {
             if (!_.isEmpty(queen)) {
               const comit = queen.reduce((pre, cur) => ({ ...pre, ...cur }), {});
               setValue(comit);
-              queen = [];
+              queen.splice(0, queen.length);
             }
           }, queen);
         };
@@ -198,73 +202,66 @@ export function registerComponet(Component, options) {
         }, ImmutableProps);
       }
       useStore.subscribe((props: any, pre) => {
-        const ImmutableProps = imMap(props.state);
-        const commitState = scheduler(pluginHooks, ImmutableProps.merge({ render: Component }), componentRef);
+        const ImmutableProps = imMap({ ...props.props, ...props.state });
+        const ImmutableCommit = ImmutableProps.merge({ render: Component });
+        const commitState = scheduler(pluginHooks, ImmutableCommit, componentRef);
         const commitJsState = commitState.toJS();
         render.value = commitJsState.render;
-        Object.assign(mystate.value.state, _.omit(commitJsState, ['render']));
-        console.log(commitJsState, 'commitJsState');
-        console.log(commitJsState.ref, 'commitJsState.ref');
+        // Object.assign(mystate.value.state, _.omit(commitJsState, ['render']));
+        mystate.value.state = _.omit(commitJsState, ['render']);
         Object.assign(myRef.value, commitJsState.ref);
         Object.assign(provideRef.value, commitJsState.provide);
       });
       watch(
         () => [props, attrs, slots, emit],
         ([props, attrs, slots, emit]) => {
-          setValue({
-            ..._.filterUnderfinedValue(props),
-            ..._.filterUnderfinedValue(attrs),
-            // ...props,
-            // ...attrs,
-            slots,
-            emit,
-          });
+          // setValue({
+          //   ..._.filterUnderfinedValue(props),
+          //   ..._.filterUnderfinedValue(attrs),
+          //   // ...props,
+          //   // ...attrs,
+          //   slots,
+          //   emit,
+          // });
+          setValue((state) => ({
+            props: {
+              ...props,
+              ...attrs,
+              emit,
+              slots,
+            },
+          }));
           const expandProps = useStore() as any;
-          _.defaults(mystate.value.state, expandProps.state);
+          // _.defaults(mystate.value.state, expandProps.state);
           Object.assign(myRef.value, expandProps.state.ref);
         },
         { deep: true, immediate: true },
       );
+      // mou
+      // onMounted(() => {
+      //   setValue((state) => ({
+      //     props: {
+      //       ...props,
+      //       ...attrs,
+      //       emit,
+      //       slots,
+      //     },
+      //   }));
+      // });
       watch(componentRef, (value) => _.defaults(myRef.value, value));
       watch(childrenRef, (value) => Object.assign(myRef.value, value));
       watch(injectRef, (value) => _.defaults(provideRef.value, value), { deep: true, immediate: true });
       expose(myRef.value);
 
       provide($provide, provideRef);
-      // [1, 2, 3].forEach((el) => {
-      //   provide(`provide${el}`, `mypro${el}`);
-      // });
-      // [1, 2, 3].forEach((el) => {
-      //   const a = inject(`provide${el}`);
-      //   console.log(a, 'loginject');
-      // });
-      // const RenderComponent = markRaw(mystate.value.state.render ?? Component);
 
       const RenderComponent = render.value ?? Component;
 
       return () => {
-        // const expandProps = useStore() as any;
-        // if (mystate.value.state.name === 'formItem') {
-        //   console.log(mystate.value.state, 'mystate.value.state');
-        // }
-        console.log(
-          _.omit(mystate.value.state, [...mystate.value.state[$deletePropsList]]),
-          'mystate.value.state',
-          emit,
-        );
         return (
           <RenderComponent
-            {..._.omit(mystate.value.state, [...mystate.value.state[$deletePropsList]])}
-            // {..._.pick(mystate.value.state, Object.keys(RenderComponent.props))}
+            {..._.omit(mystate.value.state, mystate.value.state[$deletePropsList])}
             v-slots={{ ...slots, ..._.get(mystate, 'value.state.slots', {}) }}
-            // onInput={(el) => {
-            //   if (injectRef) {
-            // setTimeout(() => {
-            // injectRef.value.mystate.state.model.input = el;
-            // }, 10);
-            // }
-            // }}
-            // v-on={emit}
             ref={componentRef}
           />
         );

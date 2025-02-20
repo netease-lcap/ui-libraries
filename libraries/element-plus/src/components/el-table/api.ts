@@ -362,7 +362,7 @@ namespace nasl.ui {
         '表格高度，超出后会出现滚动条。示例：100,  "30%",  "300"。值为数字类型，会自动加上单位 px。如果不是绝对固定表格高度，建议使用 `maxHeight`',
       setter: { concept: 'InputSetter' },
     })
-    height: nasl.core.String | nasl.core.Decimal;
+    height: nasl.core.Decimal;
 
     // @Prop({
     //   group: '主要属性',
@@ -437,7 +437,7 @@ namespace nasl.ui {
       description: '表格最大高度，超出后会出现滚动条。示例：100, "30%", "300"。值为数字类型，会自动加上单位 px',
       setter: { concept: 'InputSetter' },
     })
-    maxHeight: nasl.core.String | nasl.core.Decimal;
+    maxHeight:  nasl.core.Decimal;
 
     @Prop<ElTableOptions<T, V, P, M>, 'pagination'>({
       group: '主要属性',
@@ -492,7 +492,7 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
       if: (_) => _.pagination !== false,
     })
-    showTotal: nasl.core.Boolean = true;
+    showTotal: nasl.core.Boolean = false;
 
     @Prop<ElTableOptions<T, V, P, M>, 'showJumper'>({
       group: '数据属性',
@@ -501,19 +501,42 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
       if: (_) => _.pagination !== false,
     })
-    showJumper: nasl.core.Boolean = true;
+    showJumper: nasl.core.Boolean = false;
+
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '初始化排序规则',
+    //   description: '设置数据初始化时的排序字段和顺序规则',
+    //   docDescription: '支持选择数据表格数据源中的某一条数据，配置默认排序规则，支持升序和降序',
+    // })
+    // sorting: {
+    //   field: nasl.core.String;
+    //   order: nasl.core.String;
+    //   compare?: Function;
+    // } = { field: undefined, order: 'desc' };
 
     @Prop({
       group: '数据属性',
-      title: '初始化排序规则',
-      description: '设置数据初始化时的排序字段和顺序规则',
+      title: '初始化排序字段',
+      description: '设置数据初始化时的排序字段',
       docDescription: '支持选择数据表格数据源中的某一条数据，配置默认排序规则，支持升序和降序',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
     })
-    sorting: {
-      field: nasl.core.String;
-      order: nasl.core.String;
-      compare?: Function;
-    } = { field: undefined, order: 'desc' };
+    field: nasl.core.String;
+
+    @Prop({
+      group: '数据属性',
+      title: '初始化排序顺序',
+      description: '设置数据初始化时的排序顺序',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '升序' }, { title: '降序' }],
+      },
+    })
+    order: 'asc' | 'desc';
+
     // @Prop({
     //   group: '主要属性',
     //   title: 'Pagination Affixed Bottom',
@@ -828,7 +851,10 @@ namespace nasl.ui {
       snippets: [
         {
           title: '表格列',
-          code: '<el-table-column data-nodepath-multiple="ture"><template #header><el-text text="表格列"></el-text></template></el-table-column>',
+          code: `<el-table-column data-nodepath-multiple="ture">
+                    <template #header><el-text text="表格列"></el-text></template>
+                    <template #default="current"></template>
+                </el-table-column>`,
         },
       ],
     })
@@ -908,6 +934,7 @@ namespace nasl.ui {
       idetype: 'container',
       parentAccept: "['el-table'].includes(target.tag)",
       // childAccept: false,
+      useTemplateInDefaultSlot: true,
       selector: {
         expression: 'this',
         cssSelector: 'td',

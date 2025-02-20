@@ -7,6 +7,7 @@ namespace nasl.ui {
       idetype: "container",
       structured: true,
       childAccept: "target.tag === 'el-checkbox-pro'",
+      forceUpdateWhenAttributeChange: true,
       dataSource: {
         dismiss:
           "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
@@ -172,11 +173,11 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
 
-    // @Slot({
-    //   title: '多选项内容',
-    //   description: '多选项内容',
-    // })
-    // slotItem: (current: Current<T>) => Array<ViewComponent>;
+    @Slot({
+      title: '多选项内容',
+      description: '多选项内容',
+    })
+    slotItem: (current: Current<T>) => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({

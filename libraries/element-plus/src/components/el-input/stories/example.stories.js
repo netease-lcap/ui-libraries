@@ -19,6 +19,7 @@ export const Example1 = {
   render: () => ({
     setup() {
       const activeName = ref('first');
+      const attrs = ref({ value: '123' });
 
       const name = ref('myName');
       const myref = ref();
@@ -34,8 +35,10 @@ export const Example1 = {
         // name.value = 'newName';
         // activeName.value = 'second';
         // console.log(myref, 'myref');
-        console.log('yref', yref);
+        // console.log('yref', yref);
         // console.log(yref.value.focus(), 'myref.value.ref');
+        attrs.value = {};
+        console.log('object');
       }, 2000);
 
       setTimeout(() => {
@@ -49,12 +52,13 @@ export const Example1 = {
         handleClick,
         myref,
         yref,
+        attrs,
       };
     },
     template: `
     <div>
       {{activeName}}
-      <el-input ref="yref" type="text"     clearable  @click="handleClick" ></el-input>
+      <el-input v-model="activeName" data-nodepath="1234"  ></el-input>
     </div>
     `,
   }),
