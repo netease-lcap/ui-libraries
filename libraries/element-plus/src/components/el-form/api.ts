@@ -517,7 +517,7 @@ namespace nasl.ui {
       description: '是否为必填项,并显示必填标记',
       setter: { concept: 'SwitchSetter' },
     })
-    required: nasl.core.Boolean = false;
+    isRequired: nasl.core.Boolean = false;
 
 
     // @Prop({

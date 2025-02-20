@@ -29,15 +29,3 @@ export const Default = {
     `,
   }),
 };
-
-export const elTableBlock = {
-  name: 'el-table区块',
-  render: () => ({
-    template: `  <el-table-plus  >
-    <el-table-column prop="date" label="Date" width="180" />
-    <el-table-column prop="name" label="Name" width="180" />
-    <el-table-column prop="address" label="Address" />
-  </el-table-plus>
-    `,
-  }),
-};

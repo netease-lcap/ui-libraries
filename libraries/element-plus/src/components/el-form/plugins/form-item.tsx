@@ -105,9 +105,11 @@ export function withFormItem(Component, name) {
       const componentRef = ref({});
       const myRef = ref({});
       const prop = computed(() => props.prop ?? propName);
+      const isRequired = computed(() => props.isRequired ?? false);
       const styleProps = computed(() => getStyles(props.inputStyle));
       const rules = computed(() => {
         const rules = props.rules ?? [];
+        const required = isRequired.value ? { required: true, message: '表单项不得为空' } : {};
         return rules.map((item) => {
           return {
             message: item.message,
@@ -131,7 +133,7 @@ export function withFormItem(Component, name) {
               });
             },
           };
-        });
+        }).concat(required);
       });
       const myInject = inject($provide) as Ref<{ [$formProvide]: { value: any; setValue: (value: any) => void } }>;
       const formProvide = computed(() => myInject?.value?.[$formProvide] ?? { value: undefined, setValue: () => {} });

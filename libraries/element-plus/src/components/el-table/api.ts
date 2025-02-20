@@ -437,7 +437,7 @@ namespace nasl.ui {
       description: '表格最大高度，超出后会出现滚动条。示例：100, "30%", "300"。值为数字类型，会自动加上单位 px',
       setter: { concept: 'InputSetter' },
     })
-    maxHeight:  nasl.core.Decimal;
+    maxHeight: nasl.core.Decimal;
 
     @Prop<ElTableOptions<T, V, P, M>, 'pagination'>({
       group: '主要属性',
@@ -1074,18 +1074,43 @@ namespace nasl.ui {
     // })
     // private title: nasl.core.String;
 
-    
     @Prop({
       group: '主要属性',
       title: '固定列',
       description:
         '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
       setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: ' 左侧固定' }, { title: '右侧固定' }, { title: '不固定' }],
+        concept: 'SwitchSetter',
       },
+      onChange: [
+        {
+          update: {
+            fixed: 'left',
+          },
+          if: (_) => _ === true,
+        },
+        {
+          update: {
+            fixed: false,
+          },
+          if: (_) => _ === false,
+        },
+      ],
     })
-    fixed: 'left' | 'right' | 'false' | false | '' = '';
+    isFixed: nasl.core.Boolean = false;
+
+    @Prop<ElTableColumnOptions<T, V, P, M>, 'fixed'>({
+      group: '主要属性',
+      title: '固定列',
+      description:
+        '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: ' 左侧固定' }, { title: '右侧固定' }],
+      },
+      if: (_) => _.isFixed === true,
+    })
+    fixed: 'left' | 'right' | false | '' = '';
 
     // @Prop({
     //   group: '主要属性',
