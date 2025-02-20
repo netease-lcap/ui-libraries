@@ -1074,6 +1074,7 @@ namespace nasl.ui {
     // })
     // private title: nasl.core.String;
 
+    
     @Prop({
       group: '主要属性',
       title: '固定列',
@@ -1084,7 +1085,7 @@ namespace nasl.ui {
         options: [{ title: ' 左侧固定' }, { title: '右侧固定' }, { title: '不固定' }],
       },
     })
-    fixed: 'left' | 'right' | false = false;
+    fixed: 'left' | 'right' | 'false' | false | '' = '';
 
     // @Prop({
     //   group: '主要属性',

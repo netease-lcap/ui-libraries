@@ -14,9 +14,19 @@ import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/
 export function handleHeight(props, { useState, useEffect, useMemo }) {
   const height = props.get('height');
   const maxHeight = props.get('maxHeight');
+  const pageSizes = props.get('pageSizes');
+  let pageSizeOptions: number[] = [];
+  try {
+    const list = JSON.parse(pageSizes);
+    pageSizeOptions = Array.isArray(list) ? list : [10, 20, 50];
+  } catch (error) {
+    pageSizeOptions = [10, 20, 50];
+  }
+
   return {
     height: height === '' ? undefined : height,
     maxHeight: maxHeight === '' ? undefined : maxHeight,
+    pageSizes: pageSizeOptions,
   };
 }
 
@@ -158,7 +168,7 @@ export function handlePage(props, { useState, childrenRef }) {
     render: (props, { attrs, expose, slots }) => {
       return [
         <div data-nodepath={nodepath} style={props.style}>
-          <Component ref={childrenRef} {...omit({ ...props, ...attrs }, ['style'])} v-slots={slots} />
+          <Component ref={childrenRef} {...omit({ ...props, ...attrs }, ['style'])} style={_.pickBy(props.style, (value, key) => key?.startsWith('--'))} v-slots={slots} />
           <ElConfigProvider locale={zhCn}>
             {props.pagination && (
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
