@@ -11,7 +11,14 @@ import { $deletePropsList } from '@/plugins/constants';
 
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 
-
+export function handleHeight(props, { useState, useEffect, useMemo }) {
+  const height = props.get('height');
+  const maxHeight = props.get('maxHeight');
+  return {
+    height: height === '' ? undefined : height,
+    maxHeight: maxHeight === '' ? undefined : maxHeight,
+  };
+}
 
 function useControllableValue(props, options, { useState }) {
   const [value, setValue] = useState('');
