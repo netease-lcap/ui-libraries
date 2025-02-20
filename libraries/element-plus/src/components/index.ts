@@ -5,7 +5,7 @@ export { ElInputPlus, ElInput, ElFormInput } from './el-input';
 export { ElSelect, ElOption, ElFormSelect } from './el-select';
 export { ElCascader, ElFormCascader } from './el-cascader';
 export { ElCheckbox, ElCheckboxGroup, ElFormCheckboxGroup } from './el-checkbox';
-export { ElTable, ElTableColumn } from './el-table';
+export { ElTable, ElTableColumn, ElTablePlus } from './el-table';
 export { ElFormItem, ElForm } from './el-form';
 export { ElPagination } from 'element-plus';
 export { ElAbsoluteLayout } from './el-absolute-layout';
