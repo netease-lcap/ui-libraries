@@ -14,6 +14,7 @@ const {
   overload,
   watch,
   create,
+  play,
 } = commands;
 
 // eslint-disable-next-line no-underscore-dangle
@@ -91,6 +92,14 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
     .option('--https', '启动https')
     .action(async ({ ...args }) => {
       await watch(cwd, args);
+    });
+
+  program.command('play')
+    .description('api.ts可视化编辑')
+    .option('--port <port>', '端口')
+    .option('--https', '启动https')
+    .action(async ({ ...args }) => {
+      await play(cwd, args);
     });
 
   program.parse(process.argv);

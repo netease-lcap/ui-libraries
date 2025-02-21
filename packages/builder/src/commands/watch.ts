@@ -20,7 +20,7 @@ import { LcapBuildOptions } from '../build/types';
 import { exec } from '../utils/exec';
 import LiveServer from '../utils/server';
 
-async function getBuildConfig() {
+export async function getBuildConfig() {
   const loadResult = await loadConfigFromFile({ command: 'build', mode: 'production' });
   if (!loadResult || !loadResult.config) {
     throw new Error('未找到 vite 配置文件');
@@ -248,8 +248,12 @@ function startServer(options: LcapBuildOptions, { port = 8080, https, middleware
   });
 }
 
-export default async (rootPath: string, { port, https, middlewares }: WatchCommandOptions) => {
-  const { viteConfig, buildOptions } = await getBuildConfig();
+export default async (rootPath: string, { port, https, middlewares }: WatchCommandOptions, buildConfigs?: { viteConfig: any, buildOptions: LcapBuildOptions }) => {
+  if (!buildConfigs) {
+    buildConfigs = await getBuildConfig();
+  }
+
+  const { viteConfig, buildOptions } = buildConfigs;
   const pkgInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
   let onceBuilded = false;
   let server;

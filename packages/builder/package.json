@@ -101,7 +101,8 @@
     "rollup-plugin-dts": "^6.1.1",
     "semver": "^7.5.4",
     "send": "^1.1.0",
-    "serve-index": "^1.9.1"
+    "serve-index": "^1.9.1",
+    "yaml": "^2.7.0"
   },
   "engines": {
     "node": ">=18.17.0",

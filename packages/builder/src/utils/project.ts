@@ -1,5 +1,8 @@
 import fs from 'fs-extra';
 import path from 'path';
+import os from 'os';
+import * as YAML from 'yaml';
+
 import { LCAP_UI_CONFIG_PATH, LCAP_UI_JSON_PATH } from '../overload/constants';
 
 const LCAP_UI = 'lcap-ui';
@@ -101,4 +104,41 @@ export function getComponentList(rootPath: string, pkgInfo?: any) {
   } catch (e) {
     return [];
   }
+}
+
+export function getSourceSchema(rootPath: string) {
+  const pkgInfo = fs.readJSONSync(path.resolve(rootPath, 'package.json'));
+  const schemaFilePath = pkgInfo.lcap && pkgInfo.lcap.schema ? path.resolve(rootPath, pkgInfo.lcap.schema) : '';
+
+  if (!schemaFilePath || !fs.existsSync(schemaFilePath)) {
+    return null;
+  }
+
+  const schema = fs.readJSONSync(schemaFilePath);
+  return schema;
+}
+
+export function getLcapConfig() {
+  const lcapConfigPath = path.resolve(os.homedir(), '.lcaprc');
+
+  if (!fs.existsSync(lcapConfigPath)) {
+    return null;
+  }
+
+  const yaml = fs.readFileSync(lcapConfigPath, 'utf-8');
+  const config = YAML.parse(yaml);
+
+  return config;
+}
+
+export function updateLcapConfg(config) {
+  const lcapConfig = getLcapConfig();
+  Object.keys(config).forEach((key) => {
+    if (lcapConfig[key]) {
+      lcapConfig[key] = config[key];
+    }
+  });
+
+  const yaml = YAML.stringify(lcapConfig);
+  fs.writeFileSync(path.resolve(os.homedir(), '.lcaprc'), yaml);
 }
