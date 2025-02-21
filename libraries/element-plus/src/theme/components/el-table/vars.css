@@ -30,6 +30,7 @@
   /**
    * @desc 当前行背景颜色
    * @type color
+   * @hidden
    */
   --el-table-current-row-bg-color: var(--el-color-primary-light-9);
   /**
