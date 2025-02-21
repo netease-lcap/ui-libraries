@@ -1,8 +1,6 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import {
-  ref, Ref, watch, provide, inject, markRaw, onMounted,
-} from 'vue';
+import { ref, Ref, watch, provide, inject, markRaw, onMounted } from 'vue';
 import create from 'zustand-vue';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
@@ -51,24 +49,9 @@ export function registerComponet(Component, options) {
     name: 'HocBaseComponents',
     components: { Component },
     inheritAttrs: false,
-    // props: { ...Component.props, dataSource: Object },
     props: Component.props,
-    // setup(props, { attrs, slots, emit, expose }) {
-    //   const componentRef = ref(null);
-    //   expose({
-    //     mystate: () => {
-    //       console.log('res');
-    //       componentRef.value.resetFields();
-    //     },
-    //   });
-    //   return () => {
-    //     return <Component {...props} v-slots={slots} v-on={emit} ref={componentRef} />;
-    //   };
-    // },
 
-    setup(props, {
-      attrs, slots, emit, expose,
-    }) {
+    setup(props, { attrs, slots, emit, expose }) {
       const componentRef = ref(null);
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
@@ -79,7 +62,6 @@ export function registerComponet(Component, options) {
       const childrenRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
       const provideRef = ref({});
-      // const queen: any[] = [];
       const useStore = create((set) => ({
         state: {
           inject: injectRef,
@@ -95,8 +77,6 @@ export function registerComponet(Component, options) {
           slots,
         },
 
-        // ...attrs,
-        // emit,
         setvalue: (commit, tr) => {
           const getNewStateFn = _.cond([
             [_.isFunction, _.identity],
@@ -105,7 +85,6 @@ export function registerComponet(Component, options) {
           ])(commit) as any;
           return set((state) => getNewStateFn(state), tr);
         },
-        deleteList: ['deleteList'],
       }));
       const setValue = useStore((state: any) => state.setvalue);
 
@@ -200,13 +179,13 @@ export function registerComponet(Component, options) {
           const storeKey = _.uniqueId('storeKey');
           const fiber = isMount
             ? {
-              workInProgressState: null,
-              workInProgressEffect: null,
-              updateQueen: [],
-              useStore,
-              setValue,
-              storeKey,
-            }
+                workInProgressState: null,
+                workInProgressEffect: null,
+                updateQueen: [],
+                useStore,
+                setValue,
+                storeKey,
+              }
             : fiberMap.get(handleFn);
           fiberNode.setCurrentFiber(fiber, isMount);
           // const localUseState = _.bind(useState, fiber, isMount);
@@ -237,20 +216,11 @@ export function registerComponet(Component, options) {
       });
       watch(
         () => [props, attrs, slots, emit],
-        ([props, attrs, slots, emit]) => {
-          // setValue({
-          //   ..._.filterUnderfinedValue(props),
-          //   ..._.filterUnderfinedValue(attrs),
-          //   // ...props,
-          //   // ...attrs,
-          //   slots,
-          //   emit,
-          // });
+        ([props, attrs, slots]) => {
           setValue((state) => ({
             props: {
               ...props,
               ...attrs,
-              emit,
               slots,
             },
           }));
