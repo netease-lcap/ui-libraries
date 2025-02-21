@@ -2,12 +2,13 @@
 import _ from 'lodash';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
+import {
+  useState, useEffect, useMemo, useRef,
+} from '@/plugins/hooks';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
-export function handleDataSource(props, {
-  useState, useEffect, useMemo, useRef,
-}) {
+export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
@@ -17,9 +18,20 @@ export function handleDataSource(props, {
     .get($deletePropsList, [])
     .concat(['textField', 'valueField', 'parentField', 'childrenField', 'props']);
   const ref = props.get('ref');
-  const { data, run: reload, loading } = useRequestDataSource(dataConfig, {}, {
-    useState, useEffect, useMemo, useRef,
-  });
+  const {
+    data,
+    run: reload,
+    loading,
+  } = useRequestDataSource(
+    dataConfig,
+    {},
+    {
+      useState,
+      useEffect,
+      useMemo,
+      useRef,
+    },
+  );
 
   const dataSource = useHandleMapField(
     { textField, valueField, dataSource: useFormatDataSource(data, { useMemo }) },
@@ -29,7 +41,7 @@ export function handleDataSource(props, {
   const dataSourceSlots = _.isNil(dataConfig)
     ? {}
     : {
-      default: () => _.map(dataSource, (item) => <el-checkbox {...item}>{slots.item ? slots.item({ item }) : null}</el-checkbox>),
+      default: () => _.map(dataSource, (item) => <el-checkbox {...item}>{slots.item ? slots.item({ item }) : item.label}</el-checkbox>),
     };
 
   return {
@@ -40,7 +52,7 @@ export function handleDataSource(props, {
     slots: _.assign(slots, dataSourceSlots),
   };
 }
-export function handleValue(props, { useState }) {
+export function handleValue(props) {
   const [value, setValue] = useState([]);
   const propsValue = _.isEmpty(props.get('modelValue')) ? value : props.get('modelValue');
   const onChangeProps = props.get('onChange', () => {});

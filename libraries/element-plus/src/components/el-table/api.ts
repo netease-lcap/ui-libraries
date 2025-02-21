@@ -998,39 +998,17 @@ namespace nasl.ui {
     // })
     // defaultOrder: 'asc' | 'desc' = 'asc';
 
-    // @Prop<UTableViewColumnOptions<T, V, P, M>, 'type'>({
-    //   group: '数据属性',
-    //   title: '列类型',
-    //   description:
-    //     '支持序号列、单/多选、树形列和编辑列切换，序号列支持按照数字排序。选择编辑列需要先设置列字段。',
-    //   docDescription: '可设置序号列、单选列、多选列、展开列或树型列',
-    //   setter: {
-    //     concept: 'EnumSelectSetter',
-    //     options: [
-    //       { title: '普通列' },
-    //       { title: '序号列' },
-    //       { title: '单选列' },
-    //       { title: '多选列' },
-    //       { title: '展开列' },
-    //       { title: '树形列' },
-    //       {
-    //         title: '编辑列',
-    //         tooltip: '与列字段关联，列字段不能为空',
-    //         disabledIf: (_) => _.field === null,
-    //       },
-    //       { title: '拖拽标识列' },
-    //     ],
-    //   },
-    // })
-    // type:
-    //   | 'normal'
-    //   | 'index'
-    //   | 'radio'
-    //   | 'checkbox'
-    //   | 'expander'
-    //   | 'tree'
-    //   | 'editable'
-    //   | 'dragHandler' = 'normal';
+    @Prop<ElTableColumnOptions<T, V, P, M>, 'type'>({
+      group: '数据属性',
+      title: '列类型',
+      description: '支持序号列、单/多选、树形列和编辑列切换，序号列支持按照数字排序。选择编辑列需要先设置列字段。',
+      docDescription: '可设置序号列、单选列、多选列、展开列或树型列',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '普通列' }, { title: '多选列' }],
+      },
+    })
+    type: 'normal' | 'selection' = 'normal';
 
     // @Prop<UTableViewColumnOptions<T, V, P, M>, 'autoIndex'>({
     //   group: '数据属性',

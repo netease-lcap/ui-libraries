@@ -8,8 +8,8 @@ import { Map as imMap } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
 import { $deletePropsList, $provide, $inject } from '@/plugins/constants';
+import { fiberNode } from '@/plugins/hooks';
 import '@/utils/index';
-import ClearFormatting from '@lcap/element-ui/design/icons/components/clear-formatting';
 
 export class PluginOptions {
   plugin: any[] = [];
@@ -94,6 +94,7 @@ export function registerComponet(Component, options) {
           emit,
           slots,
         },
+
         // ...attrs,
         // emit,
         setvalue: (commit, tr) => {
@@ -201,11 +202,13 @@ export function registerComponet(Component, options) {
             ? {
               workInProgressState: null,
               workInProgressEffect: null,
+              updateQueen: [],
               useStore,
               setValue,
               storeKey,
             }
             : fiberMap.get(handleFn);
+          fiberNode.setCurrentFiber(fiber, isMount);
           const localUseState = _.bind(useState, fiber, isMount);
           const localUseEffect = _.bind(useEffect, fiber, isMount);
           const localUseRef = _.bind(useRef, fiber, isMount);
@@ -228,7 +231,6 @@ export function registerComponet(Component, options) {
         const commitState = scheduler(pluginHooks, ImmutableCommit, componentRef);
         const commitJsState = commitState.toJS();
         render.value = commitJsState.render;
-        // Object.assign(mystate.value.state, _.omit(commitJsState, ['render']));
         mystate.value.state = _.omit(commitJsState, ['render']);
         Object.assign(myRef.value, commitJsState.ref);
         Object.assign(provideRef.value, commitJsState.provide);
@@ -258,17 +260,7 @@ export function registerComponet(Component, options) {
         },
         { deep: true, immediate: true },
       );
-      // mou
-      // onMounted(() => {
-      //   setValue((state) => ({
-      //     props: {
-      //       ...props,
-      //       ...attrs,
-      //       emit,
-      //       slots,
-      //     },
-      //   }));
-      // });
+
       watch(componentRef, (value) => _.defaults(myRef.value, value));
       watch(childrenRef, (value) => Object.assign(myRef.value, value));
       watch(injectRef, (value) => _.defaults(provideRef.value, value), { deep: true, immediate: true });
@@ -279,7 +271,6 @@ export function registerComponet(Component, options) {
       const RenderComponent = render.value ?? Component;
 
       return () => {
-        // console.log('render', mystate.value.state);
         return (
           <RenderComponent
             {..._.omit(mystate.value.state, mystate.value.state[$deletePropsList])}

@@ -130,7 +130,7 @@ dragSort="row"
 
     <el-table-column prop="six.name" label="Date" sortable="custom" width="180" />
     <el-table-column prop="name" label="Name" width="180" />
-    <el-table-column prop="address" label="Address" />
+    <el-table-column type="normal" prop="address" label="Address" />
 
 <template #expanded-row="{ item }">
   <div class="more-detail">

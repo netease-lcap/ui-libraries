@@ -5,3 +5,5 @@ export const $valueKey = Symbol('valueKey');
 
 export const $provide = Symbol('provide');
 export const $inject = Symbol('inject');
+
+export const $dataSourceDeleteField = ['dataSource', 'textField', 'valueField', 'parentField', 'childrenField'];

@@ -8,11 +8,12 @@ import {
   useFormatDataSource,
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
+import {
+  useState, useEffect, useMemo, useRef,
+} from '@/plugins/hooks';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
-export function handleDataSource(props, {
-  useState, useEffect, useMemo, useRef,
-}) {
+export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
@@ -21,9 +22,20 @@ export function handleDataSource(props, {
     .get($deletePropsList, [])
     .concat(['textField', 'valueField', 'parentField', 'childrenField']);
   const ref = props.get('ref');
-  const { data, run: reload, loading } = useRequestDataSource(dataConfig, {}, {
-    useState, useEffect, useMemo, useRef,
-  });
+  const {
+    data,
+    run: reload,
+    loading,
+  } = useRequestDataSource(
+    dataConfig,
+    {},
+    {
+      useState,
+      useEffect,
+      useMemo,
+      useRef,
+    },
+  );
   const dataSource = useHandleMapField(
     { textField, valueField, dataSource: useFormatDataSource(data, { useMemo }) },
     { useMemo },
@@ -61,12 +73,6 @@ function handleValue(props, { useState }) {
 export function handleCascaderProps(props) {
   const multiple = props.get('multiple', false);
   const checkStrictly = props.get('checkStrictly', false);
-  // const emitPath = props.get('emitPath', true);
-  // const lazy = props.get('lazy', false);
-  // const lazyLoad = props.get('lazyLoad', () => {});
-  // const value = props.get('value', '');
-  // const label = props.get('label', '');
-  // const children = props.get('children', '');
 
   return {
     props: {
