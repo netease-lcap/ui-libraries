@@ -35,7 +35,7 @@ function useControllableValue(props, options) {
   const [myValue, mySetValue] = isControlled
     ? [props.get(valuePropsName), props.get(tigger, () => {})]
     : [value, myChange];
-  return [myValue, mySetValue, { [valuePropsName]: myValue, [tigger]: mySetValue }];
+  return [{ [valuePropsName]: myValue, [tigger]: mySetValue }, myValue, mySetValue];
 }
 
 export function handleDataSource(props) {
@@ -79,27 +79,18 @@ export function handleDataSource(props) {
     data: resultData = { list: [], total: 0 },
     run: reload,
     loading,
-  } = useRequestDataSource(
-    transformOption(dataSource),
-    {
-      onBefore: (params) => _.attempt(onBefore, params),
-      onSuccess: (data, params) => _.attempt(onSuccess, data, params),
-      defaultParams: [
-        {
-          currentPage,
-          pageSize,
-          sort,
-          order,
-        },
-      ],
-    },
-    {
-      useState,
-      useEffect,
-      useMemo,
-      useRef,
-    },
-  );
+  } = useRequestDataSource(transformOption(dataSource), {
+    onBefore: (params) => _.attempt(onBefore, params),
+    onSuccess: (data, params) => _.attempt(onSuccess, data, params),
+    defaultParams: [
+      {
+        currentPage,
+        pageSize,
+        sort,
+        order,
+      },
+    ],
+  });
   const { list: data, total } = resultData;
   const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
   const dataSourceResult = _.isEmpty(data) ? {} : { data };
@@ -140,20 +131,12 @@ export function handlePage(props, { childrenRef }) {
   const ref = props.get('ref');
   const nodepath = props.get('data-nodepath');
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
-  const [currentPage, setpage, currentPageProps] = useControllableValue(
-    props,
-    {
-      valuePropsName: 'currentPage',
-    },
-    { useState },
-  );
-  const [pageSize, setPageSize, pageSizeProps] = useControllableValue(
-    props,
-    {
-      valuePropsName: 'pageSize',
-    },
-    { useState },
-  );
+  const [currentPageProps] = useControllableValue(props, {
+    valuePropsName: 'currentPage',
+  });
+  const [pageSizeProps] = useControllableValue(props, {
+    valuePropsName: 'pageSize',
+  });
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
   let pageSizeOptions: number[] = [];
   try {

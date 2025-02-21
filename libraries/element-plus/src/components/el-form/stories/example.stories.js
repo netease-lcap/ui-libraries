@@ -134,20 +134,14 @@ export const Example2 = {
     template: `
     <div>
     <el-form  ref="formRef">
-      <el-form-input :rules="rules" label="input1" data-nodepath="input1" v-model="inputName" />
-      
-      <el-form-select label="select1"    v-model:value="activeName" :dataSource="list"  >
-         <el-option label="item.value" value="item.value" :name="name" />
-      </el-form-select>
+
 
     <el-input  v-model="inputName" data-nodepath="input21" />
 
     <a @click="handleClick(formRef)" >Submit</a>
     </el-form>
 
-    <el-select v-model="activeName" data-nodepath="select1" :dataSource="list" > </el-select>
-    <el-cascader v-model="activeName" data-nodepath="cascader1" :dataSource="list" />
-    <el-checkbox-group v-model="activeName" data-nodepath="checkbox1" :dataSource="list" />
+
     </div>
 
     `,

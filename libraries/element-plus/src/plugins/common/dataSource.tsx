@@ -8,8 +8,10 @@ import { useRequest } from 'vue-hooks-plus';
 import {
   $deletePropsList, $dataSourceField, $labelKey, $valueKey,
 } from '@/plugins/constants';
+import {
+  useEffect, useMemo, useState, useRef,
+} from '@/plugins/hooks';
 
-const stop = () => {};
 function formatData(data) {
   const conformsArray = _.cond([
     [Array.isArray, _.identity],
@@ -26,7 +28,7 @@ function wrapDataToRequest(dataSource) {
   ]);
   return wrapDataSource(dataSource);
 }
-export function useHandleTransformOption(props, { useMemo, useEffect }) {
+export function useHandleTransformOption(props) {
   const dataSourceField = props.get($dataSourceField, 'options');
   const deletePropsList = props.get($deletePropsList, []).concat([$dataSourceField]);
   const dataSource = props.get('dataSource');
@@ -51,7 +53,8 @@ export function useHandleTransformOption(props, { useMemo, useEffect }) {
 }
 
 useHandleTransformOption.order = 5;
-export function useHandleTextAndValueField(props, { useMemo }) {
+
+export function useHandleTextAndValueField(props) {
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
   const labelKey = props.get($labelKey, 'label');
@@ -72,7 +75,7 @@ export function useHandleTextAndValueField(props, { useMemo }) {
 }
 useHandleTextAndValueField.order = 6;
 
-export function useHandleMapField(filedInfo, { useMemo }) {
+export function useHandleMapField(filedInfo) {
   const {
     label = 'label', value = 'value', textField = 'label', valueField = 'value', dataSource,
   } = filedInfo;
@@ -84,9 +87,7 @@ export function useHandleMapField(filedInfo, { useMemo }) {
     }));
   }, [label, value, textField, valueField, dataSource]);
 }
-export function useRequestDataSource(dataSource, options = {}, {
-  useMemo, useEffect, useState, useRef,
-}) {
+export function useRequestDataSource(dataSource, options = {}) {
   const [resultData, setResult] = useState({});
   const stop = useRef(() => {});
   const handleDataSouceToFn = _.cond([
@@ -107,13 +108,11 @@ export function useRequestDataSource(dataSource, options = {}, {
     },
     { immediate: true, deep: true },
   );
-  // });
   const { data, run, loading } = resultData;
-  // useEffect(() => run?.(), [dataSource, run]);
   return { data, run, loading };
 }
 
-export function useFormatDataSource(dataSource, { useMemo }) {
+export function useFormatDataSource(dataSource) {
   const conformsArray = _.cond([
     [Array.isArray, _.identity],
     [_.conforms({ list: _.isArray }), fp.get('list')],

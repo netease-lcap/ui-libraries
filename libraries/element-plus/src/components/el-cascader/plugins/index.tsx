@@ -26,24 +26,9 @@ export function handleDataSource(props) {
     data,
     run: reload,
     loading,
-  } = useRequestDataSource(
-    dataConfig,
-    {},
-    {
-      useState,
-      useEffect,
-      useMemo,
-      useRef,
-    },
-  );
-  const dataSource = useHandleMapField(
-    { textField, valueField, dataSource: useFormatDataSource(data, { useMemo }) },
-    { useMemo },
-  );
-  const TreeData = useMemo(
-    () => useDataSourceToTree(dataSource, parentField, valueField),
-    [dataSource, parentField, valueField],
-  );
+  } = useRequestDataSource(dataConfig, {});
+  const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
+  const TreeData = useDataSourceToTree(dataSource, parentField, valueField);
   const selfRef = useMemo(() => _.assign(ref, { reload, data: TreeData }), [TreeData, reload, ref]);
   const dataSourceResult = _.isEmpty(TreeData) ? {} : { options: TreeData };
 
@@ -82,15 +67,13 @@ export function handleCascaderProps(props) {
   };
 }
 
-export function handleNodePath(props, { useMemo, useEffect }) {
+export function handleNodePath(props) {
   const nodePath = props.get('data-nodepath');
   const myClass = props.get('class', '');
   const nodeId = useMemo(() => _.uniqueId('Cascader_'), []);
   useEffect(() => {
-    nextTick(() => {
-      const node = document.querySelector(`.${nodeId}`);
-      node?.setAttribute('data-nodepath', nodePath);
-    });
+    const node = document.querySelector(`.${nodeId}`);
+    node?.setAttribute('data-nodepath', nodePath);
   }, []);
   return {
     class: `${myClass} ${nodeId}`,
