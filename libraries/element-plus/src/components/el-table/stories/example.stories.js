@@ -120,15 +120,15 @@ dragSort="row"
 @cellClick="logCellClick"
 >
 
-<el-table-column label="申请人"  type="selection">
+<el-table-column label="申请人" >
   <div>123</div>
 </el-table-column>
 
-    <el-table-column title="渠道" colKey="channel" :sorter="true" :autoMerge="true" >
-<template #cell="cell">
-  <div>{{ cell.item.channel }}</div>
-</template>
-</el-table-column>
+    <el-table-column label="渠道" prop="address" type="normal" >
+        <template #default="current">
+          <div>{{current.item.address}}</div>
+        </template>
+    </el-table-column>
 
     <el-table-column prop="six.name" label="Date" sortable="custom" width="180" />
     <el-table-column prop="name" label="Name" width="180" />
@@ -241,7 +241,7 @@ export const Default = {
       const object = { a: 1, b: '2', c: 3 };
 
       _.pickBy(object, (value, key) => {
-        console.log(value, key,'`==============');
+        console.log(value, key, '`==============');
         return _.isNumber(value);
       });
       return {
