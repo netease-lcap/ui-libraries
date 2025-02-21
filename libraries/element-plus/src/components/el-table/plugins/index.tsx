@@ -17,19 +17,10 @@ import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/
 export function handleHeight(props) {
   const height = props.get('height');
   const maxHeight = props.get('maxHeight');
-  const pageSizes = props.get('pageSizes');
-  let pageSizeOptions: number[] = [];
-  try {
-    const list = JSON.parse(pageSizes);
-    pageSizeOptions = Array.isArray(list) ? list : [10, 20, 50];
-  } catch (error) {
-    pageSizeOptions = [10, 20, 50];
-  }
 
   return {
     height: height === '' ? undefined : height,
     maxHeight: maxHeight === '' ? undefined : maxHeight,
-    pageSizes: pageSizeOptions,
   };
 }
 
@@ -163,11 +154,22 @@ export function handlePage(props, { childrenRef }) {
     { useState },
   );
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
+  let pageSizeOptions: number[] = [];
+  try {
+    if (_.isString(pageSizes)) {
+      const list = JSON.parse(pageSizes);
+      pageSizeOptions = Array.isArray(list) ? list : [10, 20, 50];
+    } else if (_.isArray(pageSizes)) {
+      pageSizeOptions = pageSizes;
+    }
+  } catch (error) {
+    pageSizeOptions = [10, 20, 50];
+  }
   return {
     pageProps: {
       ...currentPageProps,
       ...pageSizeProps,
-      pageSizes,
+      pageSizes: pageSizeOptions,
       layout,
     },
     ref,
