@@ -17,6 +17,7 @@
   /**
    * @desc 菜单背景颜色
    * @type color
+   * @hidden
    */
   --el-cascader-menu-fill: var(--el-bg-color-overlay);
   /**
