@@ -107,6 +107,7 @@ v-model:pageSize="pageSize2"
 :showTotal="true"
 height=""
 :style="{'width':width}"
+@selection-change="logCellClick"
 :sorting="{ field: 'six.name', order: 'desc' }"
 :showJumper="true"
 :pageSizes="[10,100, 200, 300, 400]"
@@ -118,7 +119,7 @@ dragSort="row"
 @cellClick="logCellClick"
 >
 
-<el-table-column label="申请人" >
+<el-table-column label="申请人"  type="selection">
 
 </el-table-column>
 

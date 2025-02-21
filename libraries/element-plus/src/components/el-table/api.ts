@@ -939,7 +939,13 @@ namespace nasl.ui {
         expression: 'this',
         cssSelector: 'td',
       },
-
+      forceRefresh: 'parent',
+      disableSlotAutoFill: [
+        {
+          slot: 'default',
+          expression: "this.getAttribute('type')?.value !== 'selection'",
+        },
+      ],
       slotInlineStyle: {
         title: 'min-width: 30px',
         cell: 'min-width: 30px',
