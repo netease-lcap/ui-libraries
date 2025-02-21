@@ -1,0 +1,3 @@
+.el-table-column--selection .empty-slot{
+  min-width: 25px;
+}

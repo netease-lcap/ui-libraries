@@ -116,11 +116,12 @@ v-model:selectedRowKeys="selectedRowKeys"
 @sort-change="onSortChange"
 dragSort="row"
 :selection="true"
+:stripe="true"
 @cellClick="logCellClick"
 >
 
 <el-table-column label="申请人"  type="selection">
-
+  <div>123</div>
 </el-table-column>
 
     <el-table-column title="渠道" colKey="channel" :sorter="true" :autoMerge="true" >
