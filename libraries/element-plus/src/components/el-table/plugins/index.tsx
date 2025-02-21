@@ -136,6 +136,7 @@ export function handlePage(props, { childrenRef }) {
   const pageSizes = props.get('pageSizes');
   const showTotal = props.get('showTotal');
   const showJumper = props.get('showJumper');
+  const onSelectionChange = props.get('onSelectionChange', () => {});
   const ref = props.get('ref');
   const nodepath = props.get('data-nodepath');
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
@@ -175,6 +176,9 @@ export function handlePage(props, { childrenRef }) {
     ref,
     [$deletePropsList]: deletePropsList,
     pagination,
+    onSelectionChange: _.wrap(onSelectionChange, (fn, value) => {
+      _.attempt(fn, { newSelection: value });
+    }),
     render: (props, { attrs, expose, slots }) => {
       return [
         <div data-nodepath={nodepath} style={props.style}>
