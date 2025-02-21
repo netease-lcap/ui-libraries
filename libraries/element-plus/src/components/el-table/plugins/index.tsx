@@ -7,11 +7,14 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 
 import fp from 'lodash/fp';
 import omit from 'lodash/omit';
+import {
+  useState, useEffect, useMemo, useRef,
+} from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 
-export function handleHeight(props, { useState, useEffect, useMemo }) {
+export function handleHeight(props) {
   const height = props.get('height');
   const maxHeight = props.get('maxHeight');
   const pageSizes = props.get('pageSizes');
@@ -30,7 +33,7 @@ export function handleHeight(props, { useState, useEffect, useMemo }) {
   };
 }
 
-function useControllableValue(props, options, { useState }) {
+function useControllableValue(props, options) {
   const [value, setValue] = useState('');
   const { valuePropsName, tigger = `onUpdate:${valuePropsName}`, onChange } = options;
   const isControlled = props.get(valuePropsName);
@@ -44,9 +47,7 @@ function useControllableValue(props, options, { useState }) {
   return [myValue, mySetValue, { [valuePropsName]: myValue, [tigger]: mySetValue }];
 }
 
-export function handleDataSource(props, {
-  useState, useEffect, useMemo, useRef,
-}) {
+export function handleDataSource(props) {
   const dataSource = props.get('dataSource');
   const pageProps = props.get('pageProps');
   const { currentPage, pageSize, onChange = () => {} } = pageProps;
@@ -102,7 +103,10 @@ export function handleDataSource(props, {
       ],
     },
     {
-      useState, useEffect, useMemo, useRef,
+      useState,
+      useEffect,
+      useMemo,
+      useRef,
     },
   );
   const { list: data, total } = resultData;
@@ -135,7 +139,7 @@ export function handleDataSource(props, {
   };
 }
 
-export function handlePage(props, { useState, childrenRef }) {
+export function handlePage(props, { childrenRef }) {
   const Component = props.get('render');
   const pagination = props.get('pagination');
   const pageSizes = props.get('pageSizes');
