@@ -216,12 +216,13 @@ export function registerComponet(Component, options) {
       });
       watch(
         () => [props, attrs, slots, emit],
-        ([props, attrs, slots]) => {
+        ([props, attrs, slots, emit]) => {
           setValue((state) => ({
             props: {
               ...props,
               ...attrs,
               slots,
+              emit,
             },
           }));
           const expandProps = useStore() as any;
