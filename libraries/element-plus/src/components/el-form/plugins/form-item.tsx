@@ -1,61 +1,59 @@
 import VusionValidator, { localizeRules } from '@lcap/validator';
 import _ from 'lodash';
 import { ElFormItem } from 'element-plus';
-import {
-  computed, inject, provide, Ref, ref, watch, nextTick,
-} from 'vue';
+import { computed, inject, provide, Ref, ref, watch, nextTick } from 'vue';
 import { $formProvide } from '@/components/el-form/constants';
 import { $provide } from '@/plugins/constants';
 import { useEffect, useMemo, useRef } from '@/plugins/hooks';
 
-export function handleRules(props) {
-  const propName = useMemo(() => _.uniqueId('formItemPropName'), []);
-  const rules = props.get('rules');
-  const prop = props.get('prop') ?? propName;
-  const inject = props.get('inject');
-  const provide = props.get('provide');
-  const { value, setValue: setFormValue } = inject?.value?.[$formProvide] ?? {};
-  return {
-    prop,
-    rules: _.map(rules, (item) => {
-      return {
-        message: item.message,
-        required: item.required,
-        trigger: 'blur',
-        validator: (rule, value, callback) => {
-          const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
-          return new Promise((resolve) => {
-            validator
-              .validate(value)
-              .then(() => {
-                resolve(true);
-              })
-              .catch((errorMessage) => {
-                callback(new Error(errorMessage));
-                resolve({
-                  result: false,
-                  message: errorMessage,
-                });
-              });
-          });
-        },
-      };
-    }),
-    name: 'formItem',
-    provide: Object.assign(provide, {
-      [$formProvide]: {
-        value,
-        name: 'formitemname',
-        setValue(arg) {
-          setFormValue({
-            ...value.value,
-            [prop]: arg,
-          });
-        },
-      },
-    }),
-  };
-}
+// function handleRules(props) {
+//   const propName = useMemo(() => _.uniqueId('formItemPropName'), []);
+//   const rules = props.get('rules');
+//   const prop = props.get('prop') ?? propName;
+//   const inject = props.get('inject');
+//   const provide = props.get('provide');
+//   const { value, setValue: setFormValue } = inject?.value?.[$formProvide] ?? {};
+//   return {
+//     prop,
+//     rules: _.map(rules, (item) => {
+//       return {
+//         message: item.message,
+//         required: item.required,
+//         trigger: 'blur',
+//         validator: (rule, value, callback) => {
+//           const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
+//           return new Promise((resolve) => {
+//             validator
+//               .validate(value)
+//               .then(() => {
+//                 resolve(true);
+//               })
+//               .catch((errorMessage) => {
+//                 callback(new Error(errorMessage));
+//                 resolve({
+//                   result: false,
+//                   message: errorMessage,
+//                 });
+//               });
+//           });
+//         },
+//       };
+//     }),
+//     name: 'formItem',
+//     provide: Object.assign(provide, {
+//       [$formProvide]: {
+//         value,
+//         name: 'formitemname',
+//         setValue(arg) {
+//           setFormValue({
+//             ...value.value,
+//             [prop]: arg,
+//           });
+//         },
+//       },
+//     }),
+//   };
+// }
 
 function getStyles(style: Record<string, string> = {}) {
   const rootStyle = {};
@@ -99,18 +97,16 @@ export function withFormItem(Component, name) {
     Component,
     inheritAttrs: false,
     props: { ...Component.props, ...ElFormItem.props },
-    setup(props, {
-      attrs, slots, emit, expose,
-    }) {
+    setup(props, { attrs, slots, emit, expose }) {
       const propName = _.uniqueId('formItemPropName');
       const componentRef = ref({});
       const myRef = ref({});
       const prop = computed(() => props.prop ?? propName);
-      const isRequired = computed(() => props.isRequired ?? false);
+      const isRequired = computed(() => attrs.isRequired ?? false);
       const styleProps = computed(() => getStyles(props.inputStyle));
       const rules = computed(() => {
         const rules = props.rules ?? [];
-        const required = isRequired.value ? { required: true, message: '表单项不得为空' } : {};
+        const required = isRequired.value ? { required: true, message: '表单项不得为空', trigger: 'blur' } : {};
         return rules
           .map((item) => {
             return {
@@ -143,16 +139,30 @@ export function withFormItem(Component, name) {
       const formItemProps = Object.keys(ElFormItem.props);
       watch(componentRef, (value) => Object.assign(myRef.value, value));
       expose(myRef.value);
+
       return () => {
         return (
           <ElFormItem
-            {..._.pick(props, formItemProps)}
-            rules={rules.value}
+            {..._.pick(props, [
+              'error',
+              'for',
+              'inlineMessage',
+              'label',
+              'labelPosition',
+              'labelWidth',
+              'prop',
+              // 'required',
+              // 'rules',
+              'showMessage',
+              'size',
+              'validateStatus',
+            ])}
             prop={prop.value}
             style={styleProps.value.rootStyle}
             v-slots={{
               label: slots.label,
             }}
+            rules={rules.value}
           >
             <Component
               {..._.omit(props, formItemProps)}
@@ -174,7 +184,6 @@ export function withFormItem(Component, name) {
     },
   };
 }
-
 export function handleComponentInForm(props) {
   const nodePath = props.get('data-nodepath');
   const formTagName = props.get('formTagName');
