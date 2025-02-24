@@ -4,4 +4,5 @@ export { default as screenshot } from './screenshots';
 export { default as overload } from './overload';
 export { default as watch } from './watch';
 export { default as create } from './create';
+export { default as parse } from './parse';
 export { default as play } from './play';

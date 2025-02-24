@@ -18,7 +18,7 @@ export interface CreateComponentOptions {
   prefix?: string;
 }
 
-const COMPONENTS_FOLDER = 'src/components';
+export const COMPONENTS_FOLDER = 'src/components';
 
 function isSupportFork(metaInfo: ProjectMetaInfo) {
   if (metaInfo.framework !== 'vue2') {
@@ -168,6 +168,10 @@ export async function getCreateComponentOptions(rootPath: string, metaInfo: Proj
   return result;
 }
 
+export function getTagName(framework: string, name: string) {
+  return framework.startsWith('vue') ? kebabCase(name) : name;
+}
+
 export function createComponent(rootPath: string, metaInfo: ProjectMetaInfo, options: CreateComponentOptions) {
   const templateFolder = path.resolve(__dirname, '../../templates', `${metaInfo.framework}-component`);
   if (!fs.existsSync(templateFolder)) {
@@ -175,7 +179,7 @@ export function createComponent(rootPath: string, metaInfo: ProjectMetaInfo, opt
   }
 
   const compName = upperFirst(camelCase(options.name));
-  const tagName = metaInfo.framework.startsWith('vue') ? kebabCase(options.name) : compName;
+  const tagName = getTagName(metaInfo.framework, compName);
 
   const componentFolder = path.resolve(rootPath, COMPONENTS_FOLDER, tagName);
 

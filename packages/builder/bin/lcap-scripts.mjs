@@ -15,6 +15,7 @@ const {
   watch,
   create,
   play,
+  parse,
 } = commands;
 
 // eslint-disable-next-line no-underscore-dangle
@@ -92,6 +93,20 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
     .option('--https', '启动https')
     .action(async ({ ...args }) => {
       await watch(cwd, args);
+    });
+
+  program.command('parse')
+    .description('解析 npm 包')
+    .argument('<pkg>', 'npm 包名，例如: antd、 element-ui@beta')
+    .option('-o, --output <file>', '输出的文件名， 默认 schema.json')
+    .option('-t, --tempDir <dir>', '临时目录')
+    .option('-n, --npmClient <client>', 'npm 客户端，npm、yarn、pnpm, 默认npm')
+    .option('--generate', '解析完成后是否生成代码')
+    .action(async (pkg, options) => {
+      await parse(cwd, {
+        ...options,
+        pkg,
+      });
     });
 
   program.command('play')

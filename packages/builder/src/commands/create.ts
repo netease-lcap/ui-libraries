@@ -1,10 +1,16 @@
 import pc from 'picocolors';
 import prompts from 'prompts';
-import { executeCreateComponent, executeCreateLogic } from '../creates';
+import { executeCreateComponent, executeCreateLogic, executeCreateForSchema } from '../creates';
 import { getExtensionProjectMeta } from '../utils/project';
 
-function resolveOptions(options: { logic: boolean, component: boolean }) {
+function resolveOptions(options: { logic: boolean, component: boolean, schema: boolean, name: string }) {
   const type = ['component', 'logic'].find((s) => options[s]);
+
+  if (options.schema) {
+    return {
+      type: 'schema',
+    };
+  }
 
   return {
     type,
@@ -43,6 +49,9 @@ export default async (rootPath: string, options: any) => {
   const projectMetaInfo = getExtensionProjectMeta(rootPath);
 
   switch (type) {
+    case 'schema':
+      await executeCreateForSchema(rootPath, projectMetaInfo, options.schema, options.name);
+      break;
     case 'component':
       await executeCreateComponent(rootPath, projectMetaInfo);
       break;
