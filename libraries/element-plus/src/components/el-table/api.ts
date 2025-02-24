@@ -946,6 +946,7 @@ namespace nasl.ui {
         },
       ],
       forceUpdateWhenAttributeChange: 'parent',
+      forceRefresh:'parent',
       disableSlotAutoFill: [
         {
           slot: 'default',
