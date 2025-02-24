@@ -469,7 +469,7 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
     }
   }
 
-  return { componentCSSInfoMap, cssRulesDesc, cssContent: root.toResult().css };
+  return { componentCSSInfoMap, cssRulesDesc: sortMap(cssRulesDesc), cssContent: root.toResult().css };
 }
 
 export default function buildCSSInfo(options: LcapBuildOptions) {
